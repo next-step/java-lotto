@@ -8,16 +8,19 @@ import java.util.List;
 
 public class StringCalculator {
 
-    public static void calculate() {
-        List<String> expression = new Input().inputExpression();
-        List<Integer> operands = Parser.parseOperand(expression);
-        List<String> operators = Parser.parseOperator(expression);
-        int result = operands.get(0);
+    public void calculate() {
+        Input input = new Input();
+        input.expression();
 
-        for (int i = 0; i < operators.size(); i++) {
-            result = Operator.from(operators.get(i)).execute(result, operands.get(i + 1));
+        new Output().print(execute(input.getOperandList(), input.getOperatorList()));
+    }
+
+    private int execute(List<Integer> operandList, List<String> operatorList) {
+        int result = operandList.get(0);
+
+        for (int i = 0; i < operatorList.size(); i++) {
+            result = Operator.from(operatorList.get(i)).execute(result, operandList.get(i + 1));
         }
-
-        new Output().print(result);
+        return result;
     }
 }
