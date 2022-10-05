@@ -31,25 +31,6 @@ public class Operand {
                 .allMatch(Character::isDigit);
     }
 
-    public Operand plus(Operand right) {
-        return Operand.from(this.operand + right.operand);
-    }
-
-    public Operand minus(Operand right) {
-        return Operand.from(this.operand - right.operand);
-    }
-
-    public Operand multiply(Operand right) {
-        return Operand.from(this.operand * right.operand);
-    }
-
-    public Operand divide(Operand right) {
-        if (right.operand == 0) {
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
-        }
-        return Operand.from(this.operand / right.operand);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -4,21 +4,26 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", Operand::plus),
-    MINUS("-", Operand::minus),
-    MULTIPLY("*", Operand::multiply),
-    DIVIDE("/", Operand::divide);
+    PLUS("+", (left, right) -> Operand.from(left + right)),
+    MINUS("-", (left, right) -> Operand.from(left - right)),
+    MULTIPLY("*", (left, right) -> Operand.from(left * right)),
+    DIVIDE("/", (left, right) -> {
+        if (right == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+        return Operand.from(left / right);
+    });
 
     private String symbol;
 
-    private BiFunction<Operand, Operand, Operand> operate;
+    private BiFunction<Integer, Integer, Operand> operate;
 
-    Operator(String operator, BiFunction<Operand, Operand, Operand> operate) {
+    Operator(String operator, BiFunction<Integer, Integer, Operand> operate) {
         this.symbol = operator;
         this.operate = operate;
     }
 
-    public Operand operate(Operand left, Operand right) {
+    public Operand operate(int left, int right) {
         return this.operate.apply(left, right);
     }
 

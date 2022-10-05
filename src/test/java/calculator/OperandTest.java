@@ -2,14 +2,12 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class OperandTest {
 
     @Test
-    void 영으로_나누면_에러() {
-        assertThatThrownBy(() -> Operand.from(2)
-                .divide(Operand.from(0)))
-                .isInstanceOf(IllegalArgumentException.class);
+    void 문자열로_숫자_생성() {
+        assertThat(Operand.from("1")).isEqualTo(Operand.from(1));
     }
 }
