@@ -1,6 +1,7 @@
 package step02.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoList {
@@ -13,7 +14,7 @@ public class LottoList {
     }
 
     public List<Lotto> getValue() {
-        return value;
+        return Collections.unmodifiableList(value);
     }
 
     public int size() {

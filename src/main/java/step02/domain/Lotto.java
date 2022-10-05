@@ -38,7 +38,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getValue() {
-        return value;
+        return Collections.unmodifiableList(value);
     }
 
     public LottoGrade getGradeByComparison(WinningLottoNumbers winningLottoNumbers) {

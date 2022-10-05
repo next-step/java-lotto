@@ -1,5 +1,6 @@
 package step02.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -13,7 +14,7 @@ public class LottoResult {
     }
 
     public Map<LottoGrade, Integer> getLottoGradeResultMap() {
-        return lottoGradeResultMap;
+        return Collections.unmodifiableMap(lottoGradeResultMap);
     }
 
     public long getTotalAmount() {
