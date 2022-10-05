@@ -1,20 +1,18 @@
 import java.util.Queue;
 
 public class Calculator {
-    private static int result;
-
     private Calculator() { }
 
     public static int calc(String s) {
         Queue<String> formula = FormulaConverter.convert(s);
 
-        result = Integer.parseInt(formula.poll());
+        int result = Integer.parseInt(formula.poll());
         String operator = null;
 
         while (!formula.isEmpty()) {
             String op = formula.poll();
             operator = checkOperator(operator, op);
-            calc(op, operator);
+            result = calc(op, operator, result);
         }
 
         return result;
@@ -28,13 +26,13 @@ public class Calculator {
         return operator;
     }
 
-    private static void calc(String operand, String operator) {
+    private static int calc(String operand, String operator, int result) {
         if (!isNumber(operand)) {
-            return;
+            return result;
         }
 
         int op2 = Integer.parseInt(operand);
-        result = Operator.findOperator(operator).calculate(result, op2);
+        return Operator.findOperator(operator).calculate(result, op2);
     }
 
     private static boolean isNumber(String op) {
