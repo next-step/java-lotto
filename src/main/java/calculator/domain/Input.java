@@ -25,6 +25,10 @@ public class Input {
         return Operator.from(value);
     }
 
+    public InputType type() {
+        return InputType.from(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

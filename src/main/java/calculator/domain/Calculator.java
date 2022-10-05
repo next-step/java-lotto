@@ -27,9 +27,4 @@ public class Calculator {
     public int getResult() {
         return result;
     }
-
-    public void process(Input input) {
-        InputType indexType = InputType.from(input);
-        indexType.operate(this, input);
-    }
 }

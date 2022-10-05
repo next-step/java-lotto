@@ -18,7 +18,7 @@ public class Application {
         Calculator calculator = new Calculator();
 
         for (Input input : convert) {
-            calculator.process(input);
+            input.type().CalculatorOperate(calculator, input);
         }
 
         int result = calculator.getResult();
