@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class LottoStore {
-    private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000L);
+    static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000L);
 
     private final LottoFactory lottoFactory;
 

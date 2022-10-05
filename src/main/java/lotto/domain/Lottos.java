@@ -15,7 +15,6 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 
 public class Lottos {
-    private static final BigDecimal UNIT_PRICE = BigDecimal.valueOf(1000L);
     private final List<Lotto> lottos;
 
     public Lottos(LottoFactory lottoFactory, Integer count) {
@@ -74,6 +73,6 @@ public class Lottos {
     }
 
     private BigDecimal purchaseAmount() {
-        return BigDecimal.valueOf(count()).multiply(UNIT_PRICE);
+        return BigDecimal.valueOf(count()).multiply(LottoStore.LOTTO_PRICE);
     }
 }
