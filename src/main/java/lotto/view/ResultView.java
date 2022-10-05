@@ -3,6 +3,8 @@ package lotto.view;
 import lotto.domain.*;
 import lotto.domain.Number;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ResultView {
@@ -10,6 +12,7 @@ public class ResultView {
     public static final String LEFT_BRACKET = "[";
     public static final String RIGHT_BRACKET = "]";
     public static final String COMMA_EMPTY_STRING = ", ";
+    public static final String EMPTY = "";
 
     private ResultView() {}
 
@@ -50,12 +53,25 @@ public class ResultView {
     public static void winningResultPrint(final WinningResult winningResult) {
 
         winningStatisticsTitlePrint();
-        for (Integer rank : WinningPrize.init().keySet()) {
-            final WinningPrize winningPrice = WinningPrize.from(rank);
-            int resultCount = winningResult.getResultCount(winningPrice);
-            resultStepPrint(winningPrice, resultCount);
+        final List<WinningPrize> keySet = sort();
+        for (WinningPrize winningPrize : keySet) {
+            if (skip(winningPrize)) continue;
+            resultStepPrint(winningPrize, winningResult.getResultCount(winningPrize));
             blank();
         }
+    }
+
+    private static List<WinningPrize> sort() {
+
+        final List<WinningPrize> winningPrizes = new ArrayList<>(WinningPrize.init().keySet());
+        Collections.sort(winningPrizes);
+        Collections.reverse(winningPrizes);
+        return winningPrizes;
+    }
+
+    private static boolean skip(final WinningPrize winningPrize) {
+
+        return winningPrize == WinningPrize.MISS;
     }
 
     private static void winningStatisticsTitlePrint() {
@@ -66,7 +82,15 @@ public class ResultView {
 
     private static void resultStepPrint(final WinningPrize winningPrice, final int rankCount) {
 
-        System.out.printf("%d개 일치 (%s원)- %d개", winningPrice.getCountOfMatch(), winningPrice.getPrice(), rankCount);
+        System.out.printf("%d개 일치" +bonusCheck(winningPrice)+ " (%s원)- %d개", winningPrice.getCountOfMatch(), winningPrice.getPrice(), rankCount);
+    }
+
+    private static String bonusCheck(final WinningPrize winningPrize) {
+
+        if (winningPrize.canMatch()) {
+            return ", 보너스 볼 일치";
+        }
+        return EMPTY;
     }
 
     public static void winningPrizeRatePrint(final ProfitRate profitRate) {
@@ -77,7 +101,7 @@ public class ResultView {
     private static String check(final ProfitRate profitRate) {
 
         if (profitRate.canProfit()) {
-            return "";
+            return EMPTY;
         }
         return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     }
