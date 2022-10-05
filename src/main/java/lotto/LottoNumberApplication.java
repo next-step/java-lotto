@@ -9,11 +9,14 @@ public class LottoNumberApplication {
     public static void main(String[] args) {
 
         final Purchase purchase = Purchase.from(InputView.purchasePrint());
-        ResultView.availablePurchasePrint(purchase.available());
-        LottoNumbers lottoNumbers = new LottoNumbers(AutoLottoNumbers.autoCreate(purchase.available()));
+        final long availableTickets = purchase.available();
+        ResultView.availablePurchasePrint(availableTickets);
+
+        LottoNumbers lottoNumbers = new LottoNumbers(AutoLottoNumbers.autoCreate(availableTickets));
         ResultView.autoLottoNumberPrint(lottoNumbers);
+        final WinningLottoNumber winningLottoNumber = WinningLottoNumber.from(InputView.winnerNumberPrint(), InputView.bonusNumberPrint());
+
         final WinningResult winningResult = WinningResult.init();
-        final WinningLottoNumber winningLottoNumber = WinningLottoNumber.from(InputView.winnerNumberPrint());
         winningResult.collect(lottoNumbers.match(winningLottoNumber));
         ResultView.winningResultPrint(winningResult);
         ResultView.winningPrizeRatePrint(ProfitRate.of(winningResult.sum(), purchase));
