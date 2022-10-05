@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.controller.LottoFactory;
 import lotto.domain.enums.Rank;
 
 import java.math.BigDecimal;
