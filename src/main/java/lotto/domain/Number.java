@@ -15,6 +15,15 @@ public class Number {
         this.number = number;
     }
 
+    public static Number from(final String input) {
+
+        try {
+            return new Number(Integer.parseInt(input));
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("숫자만 입력해야 합니다.");
+        }
+    }
+
     private void validate(final int number) {
 
         if (number < MIN || number > MAX) {
