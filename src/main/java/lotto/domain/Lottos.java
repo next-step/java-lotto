@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.enums.LottoPrize;
+import lotto.domain.enums.Rank;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -51,20 +51,20 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Integer winningCount(Lotto winningLotto, LottoPrize lottoPrize) {
+    public Integer winningCount(Lotto winningLotto, Integer bonusNumber, Rank rank) {
         return Math.toIntExact(lottos.stream()
-                .filter(lotto -> Objects.equals(lotto.matchedCount(winningLotto), lottoPrize.matchedCount()))
+                .filter(lotto -> lotto.rank(winningLotto, bonusNumber) == rank)
                 .count());
     }
 
-    public BigDecimal totalProfitRate(Lotto winningLotto) {
-        return winningAmount(winningLotto).divide(purchaseAmount(), 2, RoundingMode.FLOOR);
+    public BigDecimal totalProfitRate(Lotto winningLotto, Integer bonusNumber) {
+        return winningAmount(winningLotto, bonusNumber).divide(purchaseAmount(), 2, RoundingMode.FLOOR);
     }
 
-    private BigDecimal winningAmount(Lotto winningLotto) {
-        return Arrays.stream(LottoPrize.values())
+    private BigDecimal winningAmount(Lotto winningLotto, Integer bonusNumber) {
+        return Arrays.stream(Rank.values())
                 .reduce(BigDecimal.ZERO,
-                        (amount, lottoPrize) -> amount.add(lottoPrize.amountByCount(winningCount(winningLotto, lottoPrize))),
+                        (amount, rank) -> amount.add(rank.winningAmountByCount(winningCount(winningLotto, bonusNumber, rank))),
                         BigDecimal::add);
     }
 

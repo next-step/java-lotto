@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.enums.Rank;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -28,16 +30,24 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    public Integer matchedCount(Lotto another) {
-        return another.numbers()
-                .stream()
-                .reduce(0, (total, number) -> total + matchedCount(number));
+    public Rank rank(Lotto winningLotto, Integer bonusNumber) {
+        return Rank.of(matchedCount(winningLotto), matched(bonusNumber));
     }
 
-    private Integer matchedCount(Integer number) {
-        if (numbers.contains(number)) {
-            return 1;
+    private Integer matchedCount(Lotto another) {
+        return another.numbers
+                .stream()
+                .reduce(0, this::accumulateMatchedCount);
+    }
+
+    private Integer accumulateMatchedCount(Integer total, Integer number) {
+        if (matched(number)) {
+            return total + 1;
         }
-        return 0;
+        return total;
+    }
+
+    private boolean matched(Integer number) {
+        return numbers.contains(number);
     }
 }

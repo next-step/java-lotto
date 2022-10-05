@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.enums.LottoPrize;
+import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,13 +34,14 @@ class LottosTest {
     @ParameterizedTest
     @CsvSource(value = {
             "FIRST,0",
-            // TODO "SECOND,0",
+            "SECOND,1",
             "THIRD,0",
             "FOURTH,1",
             "FIFTH,2",
+            "MISS,2"
     })
-    void winningCount(LottoPrize lottoPrize, Integer expected) {
-        Integer result = lottos().winningCount(lotto(), lottoPrize);
+    void winningCount(Rank rank, Integer expected) {
+        Integer result = lottos().winningCount(lotto(), bonusNumber(), rank);
 
         assertThat(result).isEqualTo(expected);
     }
@@ -48,11 +49,13 @@ class LottosTest {
     @DisplayName("총 수익률을 구한다")
     @Test
     void totalProfitRate() {
-        BigDecimal result = lottos().totalProfitRate(lotto());
+        BigDecimal result = lottos().totalProfitRate(lotto(), bonusNumber());
 
-        BigDecimal expected = BigDecimal.valueOf(60_000L).divide(BigDecimal.valueOf(5000L), 2, RoundingMode.FLOOR);
+        BigDecimal expected = BigDecimal.valueOf(30_060_000L).divide(BigDecimal.valueOf(6000L), 2, RoundingMode.FLOOR);
         assertThat(result).isEqualTo(expected);
     }
+
+    private Integer bonusNumber() { return 6; }
 
     private Lotto lotto() {
         return new Lotto(List.of(1, 2, 3, 20, 43, 31));
@@ -63,6 +66,7 @@ class LottosTest {
                 new Lotto(List.of(1, 2, 3, 4, 5, 6)),
                 new Lotto(List.of(11, 12, 13, 20, 43, 31)),
                 new Lotto(List.of(1, 2, 3, 20, 5, 6)),
+                new Lotto(List.of(1, 2, 3, 20, 43, 6)),
                 new Lotto(List.of(11, 12, 13, 14, 15, 16)),
                 new Lotto(List.of(21, 22, 23, 24, 25, 26))));
     }
