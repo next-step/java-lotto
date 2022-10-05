@@ -7,6 +7,9 @@ public class LottoSeller {
 
     private static final int LOTTO_PRICE = 1000;
 
+    private LottoSeller() {
+    }
+
     public static LottoList sell(int price) {
         return new LottoList(
             IntStream.range(0, getLottoCount(price))

@@ -5,6 +5,9 @@ import java.util.Objects;
 
 public class LottoResultGenerator {
 
+    private LottoResultGenerator() {
+    }
+
     public static LottoResult generate(LottoList lottoList, WinningLottoNumbers winningLottoNumbers) {
         HashMap<LottoGrade, Integer> lottoGradeResultMap = new HashMap<>();
         lottoList.getValue().stream()
