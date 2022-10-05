@@ -5,7 +5,9 @@ import lotto.domain.type.Rank;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static lotto.domain.LottoNumber.MAX;
+import static lotto.domain.LottoNumber.MIN;
 
 
 public class Lotto {
@@ -17,11 +19,12 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public static Lotto create() {
-        List<LottoNumber> numberList = IntStream.range(0, LOTTO_SIZE)
-                .mapToObj(i -> LottoNumber.of(RandomGenerator.randomNumberBetween(LottoNumber.MIN, LottoNumber.MAX)))
+        List<LottoNumber> numbers = RandomGenerator.randomNumbers(LOTTO_SIZE, MIN, MAX)
+                .stream()
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
-        return new Lotto(numberList);
+        return new Lotto(numbers);
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
