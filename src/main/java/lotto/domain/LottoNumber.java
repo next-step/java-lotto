@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,7 +10,7 @@ public class LottoNumber {
     private static final int NOT_MATCH_ZERO = 0;
     private static final int MIN = 1;
     private static final int MAX = 45;
-
+    public static final int MAX_LOTTO_NUMBER_COUNT = 6;
     private static final String COMMA_EMPTY_STRING = ", ";
 
     private final List<Number> lottoNumber;
@@ -25,7 +23,15 @@ public class LottoNumber {
     public static LottoNumber from(final String input) {
 
         validate(input);
-        return new LottoNumber(split(input));
+        final List<Number> lottoNumbers = split(input);
+        validateSize(lottoNumbers);
+
+        return new LottoNumber(lottoNumbers);
+    }
+
+    public static LottoNumber from(final List<Integer> lottoNumber) {
+
+        return new LottoNumber(convert(lottoNumber));
     }
 
     private static void validate(final String input) {
@@ -35,17 +41,20 @@ public class LottoNumber {
         }
     }
 
+    private static void validateSize(final List<Number> lottoNumbers) {
+
+        final Set<Number> numbers = new HashSet<>(lottoNumbers);
+        if (numbers.size() != MAX_LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("6개의 숫자를 입력해야 하며 중복 숫자는 입력할 수 없습니다.");
+        }
+    }
+
     private static List<Number> split(final String input) {
 
         return Arrays.stream(input.split(COMMA_EMPTY_STRING))
                 .sorted()
                 .map(number -> new Number(Integer.parseInt(number)))
                 .collect(Collectors.toList());
-    }
-
-    public static LottoNumber from(final List<Integer> lottoNumber) {
-
-        return new LottoNumber(convert(lottoNumber));
     }
 
     private static List<Number> convert(final List<Integer> numbers) {
@@ -82,5 +91,10 @@ public class LottoNumber {
     public List<Number> getLottoNumber() {
 
         return Collections.unmodifiableList(this.lottoNumber);
+    }
+
+    public boolean matchBonus(final WinningLottoNumber winningLottoNumber) {
+
+        return this.lottoNumber.contains(winningLottoNumber.getBonusNumber());
     }
 }
