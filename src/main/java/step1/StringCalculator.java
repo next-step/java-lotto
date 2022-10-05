@@ -5,18 +5,30 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StringCalculator {
+    private final String SPLIT_DELIMITER = " ";
+
     public int runOperation(String input) {
-        this.emptyValidate(input);
-        String trimedInput = input.trim();
-        String[] splitedByEmpty = this.splitByEmptyString(trimedInput);
-        List<String> operationsString = this.filterOperation(splitedByEmpty);
-        List<Operation> operations = this.castOperationEnums(operationsString);
-
-        List<String> operandsString = this.filterOperand(splitedByEmpty);
-        List<Integer> operands = this.castOperandInteger(operandsString);
-
+        String[] splitedByEmpty = validateAndSplit(input);
+        List<Operation> operations = parseOperations(splitedByEmpty);
+        List<Integer> operands = parseOperands(splitedByEmpty);
         Calculator calculator = new Calculator(operations, operands);
         return calculator.getResult();
+    }
+
+    private List<Integer> parseOperands(String[] splitedByEmpty) {
+        List<String> operandsString = this.filterOperand(splitedByEmpty);
+        return this.castOperandInteger(operandsString);
+    }
+
+    private List<Operation> parseOperations(String[] splitedByEmpty) {
+        List<String> operationsString = this.filterOperation(splitedByEmpty);
+        return this.castOperationEnums(operationsString);
+    }
+
+    private String[] validateAndSplit(String input) {
+        this.emptyValidate(input);
+        String trimedInput = input.trim();
+        return this.splitByEmptyString(trimedInput);
     }
 
     private List<Integer> castOperandInteger(List<String> splitedByEmpty) {
@@ -34,7 +46,7 @@ public class StringCalculator {
 
     private List<Operation> castOperationEnums(List<String> operationsString) {
         return operationsString.stream()
-                .map(Operation::castOperationEnum)
+                .map(Operation::castOperation)
                 .collect(Collectors.toList());
     }
 
@@ -62,7 +74,7 @@ public class StringCalculator {
     }
 
     private String[] splitByEmptyString(String trimedInput) {
-        return trimedInput.split(" ");
+        return trimedInput.split(SPLIT_DELIMITER);
     }
 
 }
