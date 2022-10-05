@@ -50,7 +50,9 @@ public class InputView {
     }
 
     public static Lottos scanManualLottos(Integer lottoCount) {
-        System.out.println(MANUALLY_BUYING_LOTTO_NUMBERS_QUESTION);
+        if (lottoCount > 0) {
+            System.out.println(MANUALLY_BUYING_LOTTO_NUMBERS_QUESTION);
+        }
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
