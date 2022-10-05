@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.domain.LottoFactory;
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoStatistics;
 import lotto.domain.WinningLotto;
 import lotto.dto.WinningLottoDto;
@@ -9,7 +9,7 @@ import lotto.view.LottoStatisticsResult;
 
 public class LottoStore {
     public LottoResult buyLotto(int money) {
-        return LottoResult.of(LottoFactory.createPerPrice(money));
+        return LottoResult.of(LottoMachine.createPerPrice(money));
     }
 
     public LottoStatisticsResult createStatistics(LottoResult result, WinningLottoDto winningLottoDto) {

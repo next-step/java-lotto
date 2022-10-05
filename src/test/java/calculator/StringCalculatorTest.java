@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
- public class StringCalculatorTest {
+ class StringCalculatorTest {
 
      StringCalculator calculator;
 

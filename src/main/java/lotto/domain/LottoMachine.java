@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class LottoFactory {
+public class LottoMachine {
     private static final String DEFAULT_DELIMITER = ",";
 
-    private LottoFactory() {
+    private LottoMachine() {
     }
 
     public static Lotto create(String lottoNumbers) {

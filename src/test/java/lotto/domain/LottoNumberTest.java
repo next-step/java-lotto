@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class LottoNumberTest {
+class LottoNumberTest {
 
     @DisplayName("1 이상 45 이하의 번호는 생성이 가능하다.")
     @ParameterizedTest
