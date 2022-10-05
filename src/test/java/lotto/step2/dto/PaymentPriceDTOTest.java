@@ -1,15 +1,17 @@
 package lotto.step2.dto;
 
-import lotto.step2fixture.dto.PaymentPriceDTOFixture;
+import lotto.step2.domain.PaymentPriceTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaymentPriceDTOTest {
+    public static final PaymentPriceDTO PAYMENT_PRICE_DTO = new PaymentPriceDTO(PaymentPriceTest.PAYMENT_PRICE);
+    
     @Test
     @DisplayName("지불 금액 확인")
     void getPaymentPrice() {
-        assertThat(PaymentPriceDTOFixture.PAYMENT_PRICE_DTO.getPaymentPrice()).isEqualTo(14000);
+        assertThat(PaymentPriceDTOTest.PAYMENT_PRICE_DTO.getPaymentPrice()).isEqualTo(14000);
     }
 }
