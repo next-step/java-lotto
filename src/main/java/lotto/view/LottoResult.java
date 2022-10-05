@@ -5,6 +5,7 @@ import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     private final Lottos lottos;
@@ -33,7 +34,10 @@ public class LottoResult {
     }
 
     private static List<String> getStringNumbers(Lotto lotto) {
-        return lotto.lottoStringNumbers();
+        return lotto.lottoNumbers()
+                .stream()
+                .map(lottoNumber -> String.valueOf(lottoNumber.number()))
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public Lottos lottos() {

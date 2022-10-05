@@ -15,7 +15,15 @@ public class LottoStatisticsResult {
         return String.format("%.2f", statistics.profit());
     }
 
-    public int getMatchCount(Rank rank) {
+    public String rank(Rank rank) {
+        if (rank == Rank.BONUS) {
+            return String.format("%d개 일치, 보너스 볼 일치(%d)- %d개", rank.count(), rank.winningMoney(), getMatchCount(rank));
+        }
+
+        return String.format("%d개 일치 (%d)- %d개", rank.count(), rank.winningMoney(), getMatchCount(rank));
+    }
+
+    private int getMatchCount(Rank rank) {
         return statistics.getMatchCount(rank);
     }
 }
