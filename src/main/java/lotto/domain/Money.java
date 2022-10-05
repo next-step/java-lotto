@@ -30,15 +30,26 @@ public class Money {
     }
 
     public Integer divide(Money money) {
-        if (money == ZERO) {
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
-        }
-
+        checkDivisorNotZero(money);
         return amount.divide(money.amount, 0, RoundingMode.FLOOR).intValue();
     }
 
     public BigDecimal divide(Money money, int scale, RoundingMode roundingMode) {
+        checkDivisorNotZero(money);
         return amount.divide(money.amount, scale, roundingMode);
+    }
+
+    public Money remainder(Money money) {
+        checkDivisorNotZero(money);
+        return new Money(amount.remainder(money.amount));
+    }
+
+    public boolean isDivisibleBy(Money money) {
+        return remainder(money).equals(ZERO);
+    }
+
+    public boolean isLesserThan(Money money) {
+        return amount.compareTo(money.amount) < 0;
     }
 
     @Override
@@ -57,5 +68,11 @@ public class Money {
     @Override
     public String toString() {
         return amount.toString();
+    }
+
+    private void checkDivisorNotZero(Money money) {
+        if (money == ZERO) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
     }
 }

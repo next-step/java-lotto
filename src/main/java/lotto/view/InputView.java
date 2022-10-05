@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 
@@ -22,7 +23,10 @@ public class InputView {
         System.out.println(PURCHASE_AMOUNT_QUESTION);
         Scanner scanner = new Scanner(System.in);
 
-        return Money.of(Integer.parseInt(scanner.nextLine()));
+        Money purchaseAmount = Money.of(Integer.parseInt(scanner.nextLine()));
+        validatePurchaseAmount(purchaseAmount);
+
+        return purchaseAmount;
     }
 
     public static List<Integer> scanWinningNumbers() {
@@ -64,5 +68,13 @@ public class InputView {
         }
 
         return new Lottos(lottos);
+    }
+
+    private static void validatePurchaseAmount(Money purchaseAmount) {
+        Money lottoPrice = LottoStore.LOTTO_PRICE;
+        if (purchaseAmount.isLesserThan(lottoPrice) || !purchaseAmount.isDivisibleBy(lottoPrice)) {
+            String message = "구입금액은 %s원 이상이고 %s원 단위이이어야 합니다.";
+            throw new IllegalArgumentException(String.format(message, lottoPrice, lottoPrice));
+        }
     }
 }

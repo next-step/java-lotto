@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.controller.LottoFactory;
 
 public class LottoStore {
-    static final Money LOTTO_PRICE = Money.of(1000);
+    public static final Money LOTTO_PRICE = Money.of(1000);
 
     private final LottoFactory lottoFactory;
 
