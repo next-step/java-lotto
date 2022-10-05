@@ -1,11 +1,11 @@
 package step02.view;
 
-import java.util.List;
 import java.util.Map;
 
 import step02.domain.LottoGrade;
-import step02.domain.LottoNumber;
 import step02.domain.LottoResult;
+import step02.dto.LottoDto;
+import step02.dto.LottoListDto;
 
 public class PrintView {
 
@@ -39,8 +39,10 @@ public class PrintView {
         System.out.println(INIT_LAST_WEEK_WINNING_NUMBERS_PHRASE);
     }
 
-    public static void printLottoNumbers(List<LottoNumber> lottoNumbers) {
-        System.out.println(lottoNumbers);
+    public static void printLottoNumbers(LottoListDto lottoDtos) {
+        lottoDtos.getLotto().stream()
+            .map(LottoDto::getLotto)
+            .forEach(System.out::println);
     }
 
     public static void printInitBonusBallNumberPhrase() {

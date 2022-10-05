@@ -9,6 +9,7 @@ import step02.domain.LottoResult;
 import step02.domain.LottoResultGenerator;
 import step02.domain.LottoSeller;
 import step02.domain.WinningLottoNumbers;
+import step02.dto.LottoListDto;
 import step02.view.InputView;
 import step02.view.PrintView;
 
@@ -21,10 +22,7 @@ public class LottoMain {
         int purchasePrice = InputView.initPurchasePrice();
         LottoList lottoList = LottoSeller.sell(purchasePrice);
         PrintView.printLottoPurchaseCountMessage(lottoList.size());
-
-        lottoList.getValue().stream()
-            .map(Lotto::getValue)
-            .forEach(PrintView::printLottoNumbers);
+        PrintView.printLottoNumbers(LottoListDto.from(lottoList));
         PrintView.printBlank();
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
