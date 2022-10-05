@@ -24,7 +24,7 @@ public enum InputType {
         return NUMBER;
     }
 
-    public void CalculatorOperate(Calculator calculator, Input input) {
+    public void calculatorOperate(Calculator calculator, Input input) {
         operator.accept(calculator, input);
     }
 }

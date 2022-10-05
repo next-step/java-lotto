@@ -12,7 +12,7 @@ class InputTypeTest {
     @Test
     void 숫자연산() {
         Calculator calculator = new Calculator();
-        InputType.NUMBER.CalculatorOperate(calculator, new Input("3"));
+        InputType.NUMBER.calculatorOperate(calculator, new Input("3"));
 
         assertThat(calculator.getResult()).isEqualTo(3);
     }
@@ -20,8 +20,8 @@ class InputTypeTest {
     @Test
     void 연산자() {
         Calculator calculator = new Calculator();
-        InputType.OPERATOR.CalculatorOperate(calculator, new Input("+"));
-        InputType.NUMBER.CalculatorOperate(calculator, new Input("4"));
+        InputType.OPERATOR.calculatorOperate(calculator, new Input("+"));
+        InputType.NUMBER.calculatorOperate(calculator, new Input("4"));
 
         assertThat(calculator.getResult()).isEqualTo(4);
     }
