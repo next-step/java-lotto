@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class CalculatorTest {
 
@@ -37,6 +38,27 @@ class CalculatorTest {
                 List.of(ArithmeticOperator.MULTIPLY)
         );
         assertThat(Calculator.calculate(request)).isEqualTo(2);
+    }
+
+    @DisplayName("나눗셈 연산을 요청할 때, 정수로 나누어 떨어지면 나눗셈 결과를 반환해야 한다.")
+    @Test
+    void calculate_givenDivideWhenDivisible() {
+        CalculatorRequest request = new CalculatorRequest(
+                List.of(4, 2),
+                List.of(ArithmeticOperator.DIVIDE)
+        );
+        assertThat(Calculator.calculate(request)).isEqualTo(2);
+    }
+
+    @DisplayName("나눗셈 연산을 요청할 때, 정수로 나누어 떨어지지 않으면 예외가 발생해야 한다.")
+    @Test
+    void calculate_givenDivideWhenIndivisible() {
+        CalculatorRequest request = new CalculatorRequest(
+                List.of(4, 3),
+                List.of(ArithmeticOperator.DIVIDE)
+        );
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Calculator.calculate(request));
     }
 
 }
