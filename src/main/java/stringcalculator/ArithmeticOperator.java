@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 public enum ArithmeticOperator {
     PLUS("+", (a, b) -> a + b),
-    MINUS("-", (a, b) -> 0),
+    MINUS("-", (a, b) -> a - b),
     MULTIPLY("*", (a, b) -> 0),
     DIVIDE("/", (a, b) -> 0);
 
