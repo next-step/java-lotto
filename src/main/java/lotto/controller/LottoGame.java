@@ -4,8 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 public class LottoGame {
     public static void run() {
         Money purchaseAmount = InputView.scanPurchaseAmount();
@@ -17,9 +15,9 @@ public class LottoGame {
 
         ResultView.printPurchase(manualLottoCount, lottos);
 
-        List<LottoNumber> winningNumbers = InputView.scanWinningNumbers();
+        Lotto winningLotto = InputView.scanWinningNumbers();
         LottoNumber bonusNumber = InputView.scanBonusNumber();
 
-        ResultView.printWinningStatistics(lottos, new Lotto(winningNumbers), bonusNumber);
+        ResultView.printWinningStatistics(lottos, winningLotto, bonusNumber);
     }
 }

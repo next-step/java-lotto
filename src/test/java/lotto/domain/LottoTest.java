@@ -7,10 +7,16 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
+
+    @DisplayName("로또 사이즈가 6이 아니면 예외 발생")
+    @Test
+    void create_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lotto(toLottoNumbers(List.of(1, 2, 3, 4, 5))));
+    }
 
     @DisplayName("당첨 로또와 보너스 숫자가 주어졌을 때 로또 등수를 구한다")
     @Test

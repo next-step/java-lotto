@@ -71,7 +71,9 @@ class LottosTest {
         assertThat(result).isEqualTo(new Lottos(lotto3));
     }
 
-    private LottoNumber bonusNumber() { return LottoNumber.of(6); }
+    private LottoNumber bonusNumber() {
+        return LottoNumber.of(6);
+    }
 
     private Lotto lotto() {
         return new Lotto(toLottoNumbers(List.of(1, 2, 3, 20, 43, 31)));
