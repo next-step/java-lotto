@@ -9,11 +9,10 @@ public enum Operator {
     MINUS("-", (firstOperand, secondOperand) -> (firstOperand - secondOperand)),
     MULTIPLY("*", (firstOperand, secondOperand) -> (firstOperand * secondOperand)),
     DIVIDE("/", (firstOperand, secondOperand) -> {
-        int result = firstOperand / secondOperand;
-        if (result == 0) {
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        if (firstOperand == 0 || secondOperand == 0) {
+            throw new IllegalArgumentException("0값은 나눌 수 없습니다.");
         }
-        return result;
+        return firstOperand / secondOperand;
     });
 
     private final String operator;
