@@ -25,7 +25,7 @@ public class Expression {
     }
 
     private void addValue(String[] value, int index) {
-        if (isOdd(index)) {
+        if (isEven(index)) {
             validateNumber(value[index]);
             numbers.add(Integer.parseInt(value[index]));
             return;
@@ -33,7 +33,7 @@ public class Expression {
         operators.add(Operator.of(value[index]));
     }
 
-    private boolean isOdd(int index) {
+    private boolean isEven(int index) {
         return index % 2 == 0;
     }
 
