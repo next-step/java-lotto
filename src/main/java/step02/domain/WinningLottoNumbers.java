@@ -9,6 +9,7 @@ public class WinningLottoNumbers {
     private final LottoNumber bonusNumber;
 
     public WinningLottoNumbers(Lotto lotto, LottoNumber bonusNumber) {
+        validateIsEmpty(lotto, bonusNumber);
         validateIsDuplicated(lotto, bonusNumber);
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
@@ -20,6 +21,12 @@ public class WinningLottoNumbers {
 
     public LottoNumber getBonusNumber() {
         return bonusNumber;
+    }
+
+    private void validateIsEmpty(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto == null || bonusNumber == null) {
+            throw new IllegalArgumentException("로또와 보너스 볼은 비어있을 수 없습니다.");
+        }
     }
 
     private void validateIsDuplicated(Lotto lotto, LottoNumber bonusNumber) {

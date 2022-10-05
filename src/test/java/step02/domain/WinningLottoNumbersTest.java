@@ -14,4 +14,11 @@ class WinningLottoNumbersTest {
     void validateIsDuplicated() {
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningLottoNumbers(Lotto.of(List.of(1, 2, 3, 4, 5, 7)), new LottoNumber(1)));
     }
+
+    @Test
+    @DisplayName("LottoList를 빈 값으로 생성시 에러 발생 테스트.")
+    void validateIsEmpty() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningLottoNumbers(Lotto.of(List.of(1, 2, 3, 4, 5, 7)), null));
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningLottoNumbers(null, null));
+    }
 }
