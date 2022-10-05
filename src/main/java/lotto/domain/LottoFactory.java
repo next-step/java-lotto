@@ -7,6 +7,9 @@ import java.util.StringTokenizer;
 public class LottoFactory {
     private static final String DEFAULT_DELIMITER = ",";
 
+    private LottoFactory() {
+    }
+
     public static Lotto create(String lottoNumbers) {
         StringTokenizer tokenizer = new StringTokenizer(lottoNumbers, DEFAULT_DELIMITER);
 

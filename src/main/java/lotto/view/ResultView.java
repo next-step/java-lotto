@@ -1,6 +1,8 @@
 package lotto.view;
 
 public class ResultView {
+    private ResultView() {
+    }
 
     public static void printLottoResult(LottoResult result) {
         System.out.println(result.quantity() + "개를 구매했습니다.");
