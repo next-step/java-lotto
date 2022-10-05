@@ -25,12 +25,14 @@ public class ExpressionParserTest {
     @Test
     void 연산자만_분리() {
         ExpressionParser parser = new ExpressionParser("2 + 3 * 4 / 2");
-        Assertions.assertThat(parser.getOperators()).isEqualTo(new ArrayList<>(Arrays.asList(Operator.PLUS,Operator.MULTIPLY,Operator.DIVIDE)));
+        Assertions.assertThat(parser.getOperators())
+                .isEqualTo(new ArrayList<>(Arrays.asList(Operator.PLUS,Operator.MULTIPLY,Operator.DIVIDE)));
     }
 
     @Test
     void 피연산자만_분리() {
         ExpressionParser parser = new ExpressionParser("2 + 3 * 4 / 2");
-        Assertions.assertThat(parser.getOperands()).isEqualTo(new ArrayList<Integer>(Arrays.asList(2,3,4,2)));
+        Assertions.assertThat(parser.getOperands()).
+                isEqualTo(new ArrayList<>(Arrays.asList(Operand.from(2),Operand.from(3),Operand.from(4),Operand.from(2))));
     }
 }

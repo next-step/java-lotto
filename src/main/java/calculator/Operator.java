@@ -29,12 +29,10 @@ public enum Operator {
     }
 
     public static Operator from(String symbol) {
-        for (Operator value : values()) {
-            if (value.symbol.equals(symbol)) {
-                return value;
-            }
-        }
-        throw new IllegalArgumentException("잘못된 연산자입니다.");
+        return Arrays.stream(values())
+                .filter(value -> value.symbol.equals(symbol))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 연산자입니다."));
     }
 
 }

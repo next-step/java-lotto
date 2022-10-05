@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Operand {
     private int operand;
 
@@ -24,12 +27,8 @@ public class Operand {
     }
 
     public static boolean isOperand(String token) {
-        for (char word : token.toCharArray()) {
-            if (!Character.isDigit(word)) {
-                return false;
-            }
-        }
-        return true;
+        return token.chars()
+                .allMatch(Character::isDigit);
     }
 
     public Operand plus(Operand right) {
@@ -49,5 +48,18 @@ public class Operand {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
         return Operand.from(this.operand / right.operand);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Operand operand1 = (Operand) o;
+        return operand == operand1.operand;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operand);
     }
 }
