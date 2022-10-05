@@ -4,11 +4,9 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.enums.Rank;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 public class ResultView {
     private static final String PURCHASE_RESULT_FORMAT = "%s개를 구매했습니다.";
@@ -26,7 +24,7 @@ public class ResultView {
     public static void printWinningStatistics(Lottos lottos, Lotto winningLotto, Integer bonusNumber) {
         System.out.println(WINNING_STATISTICS_INTRO);
 
-        List<Rank> ranks = Arrays.stream(Rank.values()).collect(toList());
+        List<Rank> ranks = new ArrayList<>(Rank.WINNING_RANKS);
         Collections.reverse(ranks);
         ranks.forEach(rank -> System.out.println(String.format(WINNING_STATISTICS_FORMAT,
                 rank.matchedCount(),

@@ -3,6 +3,7 @@ package lotto.domain.enums;
 import lotto.domain.Money;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
     FIRST(2_000_000_000L, 6, false),
@@ -11,6 +12,8 @@ public enum Rank {
     FOURTH(50_000L, 4, false),
     FIFTH(5_000L, 3, false),
     MISS(0L, 0, false);
+
+    public static final List<Rank> WINNING_RANKS = List.of(FIRST, SECOND, THIRD, FOURTH, FIFTH);
 
     private final Money winningAmount;
     private final Integer matchedCount;
