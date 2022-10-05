@@ -1,5 +1,6 @@
 package step02.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -17,11 +18,11 @@ public class Lotto {
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
-    private final List<LottoNumber> value;
+    private final List<LottoNumber> value = new ArrayList<>();
 
     public Lotto(List<LottoNumber> value) {
         validateLotto(value);
-        this.value = value;
+        this.value.addAll(value);
     }
 
     public static Lotto of(List<Integer> numbers) {

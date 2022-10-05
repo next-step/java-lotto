@@ -1,14 +1,15 @@
 package step02.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoList {
 
-    private final List<Lotto> value;
+    private final List<Lotto> value = new ArrayList<>();
 
     public LottoList(List<Lotto> value) {
         validateIsEmpty(value);
-        this.value = value;
+        this.value.addAll(value);
     }
 
     public List<Lotto> getValue() {
