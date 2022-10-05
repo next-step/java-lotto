@@ -36,7 +36,7 @@ public class Calculator {
     }
 
     private static int caculateInput(int firstNum, int secondNum, String operator) {
-        return OperatorType.getType(operator).exe(firstNum,secondNum);
+        return OperatorType.getType(operator).execute(firstNum,secondNum);
     }
 
     private static int checkInt(String input){

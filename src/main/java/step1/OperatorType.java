@@ -2,17 +2,12 @@ package step1;
 
 public enum OperatorType {
 
-    PLUS("+"){int exe(int firstNum,int secondNum){return firstNum + secondNum;}},
-    MINUS("-"){int exe(int firstNum,int secondNum){return firstNum - secondNum;}},
-    TIMES("*"){int exe(int firstNum,int secondNum){return firstNum * secondNum;}},
-    DIVISION("/"){int exe(int firstNum,int secondNum){return firstNum / secondNum;}};
+    PLUS{int execute(int firstNum,int secondNum){return firstNum + secondNum;}},
+    MINUS{int execute(int firstNum,int secondNum){return firstNum - secondNum;}},
+    TIMES{int execute(int firstNum,int secondNum){return firstNum * secondNum;}},
+    DIVISION{int execute(int firstNum,int secondNum){return firstNum / secondNum;}};
 
     public static final String OPEATOR_EXCEPTION = "잘못된 사칙연산 기호 입니다.";
-    private final String value;
-
-    OperatorType(String value) {
-        this.value = value;
-    }
 
     public static OperatorType getType(String value){
         switch (value){
@@ -23,5 +18,5 @@ public enum OperatorType {
             default: throw new IllegalArgumentException(OPEATOR_EXCEPTION);
         }
     }
-    abstract int exe(int firstNum, int SecondNum);
+    abstract int execute(int firstNum, int SecondNum);
 }
