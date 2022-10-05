@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LottoNumbers {
 
+    public static final int MATCH_COUNT_FIVE = 5;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
@@ -18,12 +19,23 @@ public class LottoNumbers {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
-    public List<Integer> match(final WinningLottoNumber winningLottoNumber) {
+    public List<WinningPrize> match(final WinningLottoNumber winningLottoNumber) {
 
-        List<Integer> result = new ArrayList<>();
+        List<WinningPrize> result = new ArrayList<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
-            result.add(lottoNumber.match(winningLottoNumber));
+            final int countOfMatch = lottoNumber.match(winningLottoNumber);
+            final boolean bonusResult = canMatch(winningLottoNumber, lottoNumber, countOfMatch);
+            final WinningPrize winningPrize = WinningPrize.from(countOfMatch, bonusResult);
+            result.add(winningPrize);
         }
         return result;
+    }
+
+    private boolean canMatch(final WinningLottoNumber winningLottoNumber, final LottoNumber lottoNumber, final int countOfMatch) {
+
+        if (countOfMatch == MATCH_COUNT_FIVE) {
+            return lottoNumber.matchBonus(winningLottoNumber);
+        }
+        return false;
     }
 }
