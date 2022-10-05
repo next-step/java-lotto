@@ -61,4 +61,10 @@ class CalculatorTest {
                 .isThrownBy(() -> Calculator.calculate(request));
     }
 
+    @DisplayName("올바른 형식의 문자열을 통해서 사칙연산을 요청할 때, 해당 사칙연산 결과를 반환해야 한다.")
+    @Test
+    void calculate_givenStringRequest() {
+        assertThat(Calculator.calculate("2 + 3 * 4 / 2 - 1")).isEqualTo(9);
+    }
+
 }

@@ -8,6 +8,10 @@ public class Calculator {
 
     private Calculator() {}
 
+    public static int calculate(String request) {
+        return calculate(CalculatorStringRequestConverter.convert(request));
+    }
+
     public static int calculate(CalculatorRequest request) {
         List<Integer> numbers = request.getNumbers();
         List<ArithmeticOperator> operators = request.getOperators();

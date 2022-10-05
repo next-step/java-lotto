@@ -3,14 +3,14 @@ package stringcalculator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringInputConverter {
+public class CalculatorStringRequestConverter {
 
     private static final String SPACE = " ";
     private static final int FIRST_INDEX_OF_NUMBER = 0;
     private static final int FIRST_INDEX_OF_OPERATOR = 1;
     private static final int STEP = 2;
 
-    private StringInputConverter() {}
+    private CalculatorStringRequestConverter() {}
 
     public static CalculatorRequest convert(String input) {
         String[] numbersAndOperators = input.split(SPACE);
