@@ -6,27 +6,16 @@ public class StringCalculator {
 
     private StringCalculator() {}
 
-    public static int calculate(String polynomial) {
-        List<String> tokens = split(polynomial);
-        validation(tokens);
-        return calculate(tokens);
+    public static int calculate(String polynomialString) {
+        Polynomial polynomial = new Polynomial(polynomialString);
+        return calculate(polynomial);
     }
 
-    private static List<String> split(String polynomial) {
-        return List.of(polynomial.split(" "));
-    }
-
-    private static void validation(List<String> tokens) {
-        if(tokens.size()<3) {
-            throw new IllegalArgumentException("polynomial must have at least 3 tokens (leftOperand, operator, rightOperand)");
-        }
-    }
-
-    private static int calculate(List<String> tokens) {
-        int result = parseToInt(tokens.get(0));
-        for (int i = 1; i < tokens.size(); i+=2) {
-            Operator operator = Operator.of(tokens.get(i));
-            int rightOperand = parseToInt(tokens.get(i+1));
+    private static int calculate(Polynomial polynomial) {
+        int result = parseToInt(polynomial.getTokenAt(0));
+        for (int i = 1; i < polynomial.size(); i+=2) {
+            Operator operator = Operator.of(polynomial.getTokenAt(i));
+            int rightOperand = parseToInt(polynomial.getTokenAt(i+1));
             result = operator.apply(result, rightOperand);
         }
         return result;
@@ -36,7 +25,7 @@ public class StringCalculator {
         try {
             return Integer.parseInt(numericString);
         } catch (NumberFormatException nfe) {
-            throw new IllegalArgumentException("expect integer but found " + numericString);
+            throw new IllegalArgumentException("expect integer but found \'" + numericString + "\'");
         }
     }
 }
