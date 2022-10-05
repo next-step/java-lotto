@@ -27,4 +27,14 @@ class NumberTest {
 
         assertThat(number.getNumber()).isEqualTo(input);
     }
+
+    @DisplayName("로또 번호는 숫자만 생성가능하다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "?", "%"})
+    void error_bonus_number(final String number) {
+
+        assertThatThrownBy(() -> Number.from(number))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자만 입력해야 합니다.");
+    }
 }
