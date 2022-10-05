@@ -12,7 +12,7 @@ import java.util.List;
 public class LottoGame {
     public static void run() {
         Money purchaseAmount = InputView.scanPurchaseAmount();
-        Integer manualLottoCount = InputView.scanManualLottoCount();
+        Integer manualLottoCount = InputView.scanManualLottoCount(purchaseAmount);
         Lottos manualLottos = InputView.scanManualLottos(manualLottoCount);
 
         LottoStore lottoStore = new LottoStore(new RandomLottoFactory());

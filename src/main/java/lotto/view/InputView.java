@@ -46,11 +46,14 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static Integer scanManualLottoCount() {
+    public static Integer scanManualLottoCount(Money purchaseAmount) {
         System.out.println(MANUALLY_BUYING_LOTTO_COUNT_QUESTION);
         Scanner scanner = new Scanner(System.in);
 
-        return Integer.parseInt(scanner.nextLine());
+        int manualLottoCount = Integer.parseInt(scanner.nextLine());
+        validateManualLottoCount(purchaseAmount, manualLottoCount);
+
+        return manualLottoCount;
     }
 
     public static Lottos scanManualLottos(Integer lottoCount) {
@@ -75,6 +78,13 @@ public class InputView {
         if (purchaseAmount.isLesserThan(lottoPrice) || !purchaseAmount.isDivisibleBy(lottoPrice)) {
             String message = "구입금액은 %s원 이상이고 %s원 단위이이어야 합니다.";
             throw new IllegalArgumentException(String.format(message, lottoPrice, lottoPrice));
+        }
+    }
+
+    private static void validateManualLottoCount(Money purchaseAmount, int manualLottoCount) {
+        int purchaseCount = purchaseAmount.divide(LottoStore.LOTTO_PRICE);
+        if (manualLottoCount < 0 || manualLottoCount > purchaseCount) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 0개 이상, 구입개수 이하여야 합니다");
         }
     }
 }
