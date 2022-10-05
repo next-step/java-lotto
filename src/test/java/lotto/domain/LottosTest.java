@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -59,8 +60,8 @@ class LottosTest {
     @DisplayName("두 로또들을 더한다")
     @Test
     void add() {
-        List<Lotto> lottos1 = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-        List<Lotto> lottos2 = List.of(new Lotto(List.of(11, 12, 13, 14, 15, 16)));
+        List<Lotto> lottos1 = List.of(new Lotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6))));
+        List<Lotto> lottos2 = List.of(new Lotto(toLottoNumbers(List.of(11, 12, 13, 14, 15, 16))));
 
         Lottos result = new Lottos(lottos1).add(new Lottos(lottos2));
 
@@ -70,19 +71,25 @@ class LottosTest {
         assertThat(result).isEqualTo(new Lottos(lotto3));
     }
 
-    private Integer bonusNumber() { return 6; }
+    private LottoNumber bonusNumber() { return LottoNumber.of(6); }
 
     private Lotto lotto() {
-        return new Lotto(List.of(1, 2, 3, 20, 43, 31));
+        return new Lotto(toLottoNumbers(List.of(1, 2, 3, 20, 43, 31)));
     }
 
     private Lottos lottos() {
         return new Lottos(List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(List.of(11, 12, 13, 20, 43, 31)),
-                new Lotto(List.of(1, 2, 3, 20, 5, 6)),
-                new Lotto(List.of(1, 2, 3, 20, 43, 6)),
-                new Lotto(List.of(11, 12, 13, 14, 15, 16)),
-                new Lotto(List.of(21, 22, 23, 24, 25, 26))));
+                new Lotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6))),
+                new Lotto(toLottoNumbers(List.of(11, 12, 13, 20, 43, 31))),
+                new Lotto(toLottoNumbers(List.of(1, 2, 3, 20, 5, 6))),
+                new Lotto(toLottoNumbers(List.of(1, 2, 3, 20, 43, 6))),
+                new Lotto(toLottoNumbers(List.of(11, 12, 13, 14, 15, 16))),
+                new Lotto(toLottoNumbers(List.of(21, 22, 23, 24, 25, 26)))));
+    }
+
+    private List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }

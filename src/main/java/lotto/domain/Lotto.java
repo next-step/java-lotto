@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    public static final int SIZE = 6;
 
-    public Lotto(List<Integer> numbers) {
+    private final List<LottoNumber> numbers;
+
+    public Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> numbers() {
+    public List<LottoNumber> numbers() {
         return Collections.unmodifiableList(numbers);
     }
 
@@ -30,24 +32,25 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    public Rank rank(Lotto winningLotto, Integer bonusNumber) {
+    public Rank rank(Lotto winningLotto, LottoNumber bonusNumber) {
         return Rank.of(matchedCount(winningLotto), matched(bonusNumber));
     }
 
     private Integer matchedCount(Lotto another) {
         return another.numbers
                 .stream()
+                .map(LottoNumber::number)
                 .reduce(0, this::accumulateMatchedCount);
     }
 
     private Integer accumulateMatchedCount(Integer total, Integer number) {
-        if (matched(number)) {
+        if (matched(new LottoNumber(number))) {
             return total + 1;
         }
         return total;
     }
 
-    private boolean matched(Integer number) {
+    private boolean matched(LottoNumber number) {
         return numbers.contains(number);
     }
 }

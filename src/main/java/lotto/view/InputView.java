@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStore;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,21 +26,22 @@ public class InputView {
         return purchaseAmount;
     }
 
-    public static List<Integer> scanWinningNumbers() {
+    public static List<LottoNumber> scanWinningNumbers() {
         System.out.println();
         System.out.println(WINNING_NUMBERS_QUESTION);
         Scanner scanner = new Scanner(System.in);
 
         return Arrays.stream(scanner.nextLine().split(LIST_INPUT_DELIMITER))
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public static Integer scanBonusNumber() {
+    public static LottoNumber scanBonusNumber() {
         System.out.println(BONUS_NUMBER_QUESTION);
         Scanner scanner = new Scanner(System.in);
 
-        return Integer.parseInt(scanner.nextLine());
+        return LottoNumber.of(Integer.parseInt(scanner.nextLine()));
     }
 
     public static Integer scanManualLottoCount(Money purchaseAmount) {
@@ -64,8 +62,9 @@ public class InputView {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             Scanner scanner = new Scanner(System.in);
-            List<Integer> numbers = Arrays.stream(scanner.nextLine().split(LIST_INPUT_DELIMITER))
+            List<LottoNumber> numbers = Arrays.stream(scanner.nextLine().split(LIST_INPUT_DELIMITER))
                     .map(Integer::parseInt)
+                    .map(LottoNumber::new)
                     .collect(Collectors.toList());
             lottos.add(new Lotto(numbers));
         }

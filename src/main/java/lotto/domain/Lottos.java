@@ -48,13 +48,13 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Integer winningCount(Lotto winningLotto, Integer bonusNumber, Rank rank) {
+    public Integer winningCount(Lotto winningLotto, LottoNumber bonusNumber, Rank rank) {
         return Math.toIntExact(lottos.stream()
                 .filter(lotto -> lotto.rank(winningLotto, bonusNumber) == rank)
                 .count());
     }
 
-    public BigDecimal totalProfitRate(Lotto winningLotto, Integer bonusNumber) {
+    public BigDecimal totalProfitRate(Lotto winningLotto, LottoNumber bonusNumber) {
         return winningAmount(winningLotto, bonusNumber).divide(purchaseAmount(), 2, RoundingMode.FLOOR);
     }
 
@@ -65,7 +65,7 @@ public class Lottos {
         return new Lottos(result);
     }
 
-    private Money winningAmount(Lotto winningLotto, Integer bonusNumber) {
+    private Money winningAmount(Lotto winningLotto, LottoNumber bonusNumber) {
         return Arrays.stream(Rank.values())
                 .reduce(Money.ZERO,
                         (amount, rank) -> amount.add(rank.winningAmountByCount(winningCount(winningLotto, bonusNumber, rank))),

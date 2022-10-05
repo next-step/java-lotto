@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.enums.Rank;
 
@@ -21,7 +22,7 @@ public class ResultView {
         lottos.forEach(lotto -> System.out.println(lotto.numbers()));
     }
 
-    public static void printWinningStatistics(Lottos lottos, Lotto winningLotto, Integer bonusNumber) {
+    public static void printWinningStatistics(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
         System.out.println(WINNING_STATISTICS_INTRO);
 
         List<Rank> ranks = new ArrayList<>(Rank.WINNING_RANKS);

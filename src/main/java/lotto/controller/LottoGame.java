@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStore;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -20,8 +17,8 @@ public class LottoGame {
 
         ResultView.printPurchase(manualLottoCount, lottos);
 
-        List<Integer> winningNumbers = InputView.scanWinningNumbers();
-        Integer bonusNumber = InputView.scanBonusNumber();
+        List<LottoNumber> winningNumbers = InputView.scanWinningNumbers();
+        LottoNumber bonusNumber = InputView.scanBonusNumber();
 
         ResultView.printWinningStatistics(lottos, new Lotto(winningNumbers), bonusNumber);
     }
