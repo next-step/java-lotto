@@ -32,4 +32,5 @@ class TicketTest {
         assertThatExceptionOfType(InvalidLottoNumberException.class)
                 .isThrownBy(() -> new Ticket(List.of(111, 2, 3, 4, 5, 7)));
     }
+
 }
