@@ -6,7 +6,6 @@ import step02.domain.Lotto;
 import step02.domain.LottoList;
 import step02.domain.LottoNumber;
 import step02.domain.LottoResult;
-import step02.domain.LottoResultGenerator;
 import step02.domain.LottoSeller;
 import step02.domain.WinningLottoNumbers;
 import step02.dto.LottoListDto;
@@ -31,7 +30,7 @@ public class LottoMain {
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Lotto.of(lastWeekWinningNumbers), new LottoNumber(bonusBallNumber));
         PrintView.printBlank();
 
-        LottoResult lottoResult = LottoResultGenerator.generate(lottoList, winningLottoNumbers);
+        LottoResult lottoResult = lottoList.generateLottoResult(winningLottoNumbers);
         float earningRate = lottoResult.getTotalAmount() / (float) purchasePrice;
         PrintView.printLottoResult(LottoResultDto.of(lottoResult, earningRate));
     }
