@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 public class InputValidator {
 
-    private final static Pattern PATTERN_NUMBER = Pattern.compile("^[0-9]*?");
+    private final static Pattern PATTERN_NUMBER = Pattern.compile("^-?\\d+$");
     private final static Pattern PATTERN_OPER = Pattern.compile("[+\\-*/]");
     private final static String SEPARATOR = " ";
 
