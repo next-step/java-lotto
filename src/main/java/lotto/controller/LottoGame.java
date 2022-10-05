@@ -18,7 +18,7 @@ public class LottoGame {
         LottoStore lottoStore = new LottoStore(new RandomLottoFactory());
         Lottos lottos = lottoStore.sell(purchaseAmount, manualLottos);
 
-        ResultView.printPurchase(lottos);
+        ResultView.printPurchase(manualLottoCount, lottos);
 
         List<Integer> winningNumbers = InputView.scanWinningNumbers();
         Integer bonusNumber = InputView.scanBonusNumber();
