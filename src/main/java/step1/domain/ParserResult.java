@@ -2,9 +2,6 @@ package step1.domain;
 
 import java.util.List;
 
-import step1.domain.Number;
-import step1.domain.Operator;
-
 public class ParserResult {
     private static final String INVALID_INPUT_EXCEPTION_MESSAGE = "연산자의 갯수는 숫자의 갯수보다 적어야 합니다.";
 

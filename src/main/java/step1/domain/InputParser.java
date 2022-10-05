@@ -5,10 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-import step1.domain.Number;
-import step1.domain.Operator;
-import step1.domain.ParserResult;
-
 public class InputParser {
     private static final String EMPTY_STRING_EXCEPTION_MESSAGE = "입력 값이 비어있습니다.";
     private static final String PARSE_REGEX = " ";
