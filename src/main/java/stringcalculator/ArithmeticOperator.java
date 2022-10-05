@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 public enum ArithmeticOperator {
     PLUS("+", (a, b) -> a + b),
     MINUS("-", (a, b) -> a - b),
-    MULTIPLY("*", (a, b) -> 0),
+    MULTIPLY("*", (a, b) -> a * b),
     DIVIDE("/", (a, b) -> 0);
 
     private final String symbol;

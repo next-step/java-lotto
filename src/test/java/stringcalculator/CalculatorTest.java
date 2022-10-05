@@ -29,4 +29,14 @@ class CalculatorTest {
         assertThat(Calculator.calculate(request)).isEqualTo(-1);
     }
 
+    @DisplayName("곱셈 연산을 요청할 때, 곱셈 결과를 반환해야 한다.")
+    @Test
+    void calculate_givenMultiply() {
+        CalculatorRequest request = new CalculatorRequest(
+                List.of(1, 2),
+                List.of(ArithmeticOperator.MULTIPLY)
+        );
+        assertThat(Calculator.calculate(request)).isEqualTo(2);
+    }
+
 }
