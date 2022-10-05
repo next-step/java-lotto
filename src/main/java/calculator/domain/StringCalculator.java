@@ -1,18 +1,18 @@
 package calculator.domain;
 
 
-import calculator.view.Input;
-import calculator.view.Output;
-
+import java.util.Arrays;
 import java.util.List;
 
 public class StringCalculator {
 
-    public void calculate() {
-        Input input = new Input();
-        input.expression();
+    private final static String SEPARATOR = " ";
+    
+    public int calculate(String expression) {
+        InputParser inputParser = new InputParser();
+        List<String> elementsOfExpression = Arrays.asList(expression.split(SEPARATOR));
 
-        new Output().print(execute(input.getOperandList(), input.getOperatorList()));
+        return execute(inputParser.parseOperand(elementsOfExpression), inputParser.parseOperator(elementsOfExpression));
     }
 
     private int execute(List<Integer> operandList, List<String> operatorList) {

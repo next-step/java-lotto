@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.domain.StringCalculator;
+import calculator.controller.StringCalculatorController;
 
 public class StringCalculatorApplication {
 
     public static void main(String[] args) {
-        new StringCalculator().calculate();
+        new StringCalculatorController().calculator();
     }
 }
