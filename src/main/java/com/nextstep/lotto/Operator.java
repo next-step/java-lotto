@@ -2,7 +2,6 @@ package com.nextstep.lotto;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.function.Supplier;
 
 public enum Operator {
     PLUS("+", (num1, num2) -> num1 + num2),
@@ -19,11 +18,10 @@ public enum Operator {
     }
 
     public static Operator of(String symbol) {
-        Operator found = Arrays.stream(values())
+        return Arrays.stream(values())
                 .filter(operator -> operator.symbol.equals(symbol))
                 .findFirst()
-                .orElseThrow((Supplier<RuntimeException>) () -> new IllegalArgumentException(""));
-        return found;
+                .orElseThrow(() -> new IllegalArgumentException(symbol + " is not a valid operator symbol"));
     }
 
     public int apply(int leftOperand, int rightOperand) {

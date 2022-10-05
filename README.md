@@ -24,4 +24,4 @@
 [x] 나눗셈
 [x] null 또는 공백문자열시 IllegalArgumentException
 [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException
-[ ] 사칙연산을 모두 포함하는 기능 구현
+[x] 사칙연산을 모두 포함하는 기능 구현
