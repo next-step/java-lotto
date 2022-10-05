@@ -22,7 +22,9 @@ public class LottoMain {
         LottoList lottoList = LottoSeller.sell(purchasePrice);
         PrintView.printLottoPurchaseCountMessage(lottoList.size());
 
-        lottoList.getValue().stream().map(Lotto::getValue).forEach(PrintView::printLottoNumbers);
+        lottoList.getValue().stream()
+            .map(Lotto::getValue)
+            .forEach(PrintView::printLottoNumbers);
         PrintView.printBlank();
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
