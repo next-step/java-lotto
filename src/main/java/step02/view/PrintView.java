@@ -1,11 +1,11 @@
 package step02.view;
 
-import java.util.Map;
+import java.util.Comparator;
 
-import step02.domain.LottoGrade;
-import step02.domain.LottoResult;
 import step02.dto.LottoDto;
+import step02.dto.LottoGradeDto;
 import step02.dto.LottoListDto;
+import step02.dto.LottoResultDto;
 
 public class PrintView {
 
@@ -49,27 +49,21 @@ public class PrintView {
         System.out.println(INIT_BONUS_BALL_NUMBER_PHRASE);
     }
 
-    public static void printLottoResult(LottoResult lottoResult, int purchasePrice) {
-        Map<LottoGrade, Integer> lottoGradeResultMap = lottoResult.getLottoGradeResultMap();
-
+    public static void printLottoResult(LottoResultDto lottoResultDto) {
         System.out.println(RESULT_WINNING_MESSAGE);
         System.out.println("---------");
-        printLottoResultByGrade(LottoGrade.FIFTH, lottoGradeResultMap.getOrDefault(LottoGrade.FIFTH, 0));
-        printLottoResultByGrade(LottoGrade.FOURTH, lottoGradeResultMap.getOrDefault(LottoGrade.FOURTH, 0));
-        printLottoResultByGrade(LottoGrade.THIRD, lottoGradeResultMap.getOrDefault(LottoGrade.THIRD, 0));
-        printLottoBonusResultByGrade(LottoGrade.SECOND, lottoGradeResultMap.getOrDefault(LottoGrade.SECOND, 0));
-        printLottoResultByGrade(LottoGrade.FIRST, lottoGradeResultMap.getOrDefault(LottoGrade.FIRST, 0));
 
-        float earningRate = lottoResult.getTotalAmount() / (float) purchasePrice;
-        printLottoEarningRateResult(earningRate);
+        lottoResultDto.getLottoGradeDtos().stream()
+            .filter(i -> i.getWinnings() > 0)
+            .sorted(Comparator.comparingInt(LottoGradeDto::getWinnings))
+            .forEach(PrintView::printLottoResultByGrade);
+
+        printLottoEarningRateResult(lottoResultDto.getEarningRate());
     }
 
-    private static void printLottoResultByGrade(LottoGrade lottoGrade, int count) {
-        System.out.printf(LOTTO_WINNING_RESULT_MESSAGE, lottoGrade.getRightCount(), lottoGrade.getWinnings(), count);
-    }
-
-    private static void printLottoBonusResultByGrade(LottoGrade lottoGrade, int count) {
-        System.out.printf(LOTTO_BONUS_WINNING_RESULT_MESSAGE, lottoGrade.getRightCount(), lottoGrade.getWinnings(), count);
+    private static void printLottoResultByGrade(LottoGradeDto lottoGradeDto) {
+        String message = lottoGradeDto.isMustBonus() ? LOTTO_BONUS_WINNING_RESULT_MESSAGE : LOTTO_WINNING_RESULT_MESSAGE;
+        System.out.printf(message, lottoGradeDto.getRightCount(), lottoGradeDto.getWinnings(), lottoGradeDto.getCount());
     }
 
     private static void printLottoEarningRateResult(float earningRate) {

@@ -10,6 +10,7 @@ import step02.domain.LottoResultGenerator;
 import step02.domain.LottoSeller;
 import step02.domain.WinningLottoNumbers;
 import step02.dto.LottoListDto;
+import step02.dto.LottoResultDto;
 import step02.view.InputView;
 import step02.view.PrintView;
 
@@ -31,6 +32,7 @@ public class LottoMain {
         PrintView.printBlank();
 
         LottoResult lottoResult = LottoResultGenerator.generate(lottoList, winningLottoNumbers);
-        PrintView.printLottoResult(lottoResult, purchasePrice);
+        float earningRate = lottoResult.getTotalAmount() / (float) purchasePrice;
+        PrintView.printLottoResult(LottoResultDto.of(lottoResult, earningRate));
     }
 }
