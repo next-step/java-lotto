@@ -1,54 +1,40 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLottoNumber {
 
-    private static final String COMMA_EMPTY_STRING = ", ";
-    public static final int MAX_LOTTO_NUMBER_COUNT = 6;
+    private final LottoNumber winnerLottoNumber;
+    private final Number bonusNumber;
 
-    private final List<Number> winnerLottoNumber;
-
-    private WinningLottoNumber(final List<Number> winnerLottoNumber) {
+    private WinningLottoNumber(final LottoNumber winnerLottoNumber, final Number bonusNumber) {
 
         this.winnerLottoNumber = winnerLottoNumber;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLottoNumber from(final String input) {
+    public static WinningLottoNumber from(final String winningLotto, final String bonusNumber) {
 
-        validate(input);
-        final List<Number> lottoNumbers = split(input);
-        validateSize(lottoNumbers);
+        validate(winningLotto, bonusNumber);
 
-        return new WinningLottoNumber(lottoNumbers);
+        return new WinningLottoNumber(LottoNumber.from(winningLotto), Number.from(bonusNumber));
     }
 
-    private static void validate(final String input) {
+    private static void validate(final String winningLotto, final String bonusNumber) {
 
-        if (input == null || input.isBlank()) {
+        if (winningLotto == null || winningLotto.isBlank() || bonusNumber == null || bonusNumber.isBlank()) {
             throw new IllegalArgumentException("입력 값이 null 또는 빈 공백 입니다.");
-        }
-    }
-
-    private static List<Number> split(final String input) {
-
-        return Arrays.stream(input.split(COMMA_EMPTY_STRING))
-                .map(number -> new Number(Integer.parseInt(number)))
-                .distinct()
-                .collect(Collectors.toList());
-    }
-
-    private static void validateSize(final List<Number> lottoNumbers) {
-
-        if (lottoNumbers.size() != MAX_LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("6개의 숫자를 입력해야 하며 중복 숫자는 입력할 수 없습니다.");
         }
     }
 
     public List<Number> getWinnerLottoNumber() {
 
-        return winnerLottoNumber;
+        return Collections.unmodifiableList(this.winnerLottoNumber.getLottoNumber());
+    }
+
+    public Number getBonusNumber() {
+
+        return bonusNumber;
     }
 }
