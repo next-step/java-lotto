@@ -12,7 +12,7 @@ class LottoStoreTest {
     @DisplayName("로또를 판매한다")
     @Test
     void sell() {
-        Integer purchaseAmount = 3000;
+        Money purchaseAmount = Money.of(3000);
         Lotto manualLotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto manualLotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 7));
         Lottos manualLottos = new Lottos(List.of(manualLotto1, manualLotto2));

@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class LottoGame {
     public static void run() {
-        Integer purchaseAmount = InputView.scanPurchaseAmount();
+        Money purchaseAmount = InputView.scanPurchaseAmount();
         Integer manualLottoCount = InputView.scanManualLottoCount();
         Lottos manualLottos = InputView.scanManualLottos(manualLottoCount);
 

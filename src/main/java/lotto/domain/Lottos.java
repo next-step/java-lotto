@@ -65,14 +65,14 @@ public class Lottos {
         return new Lottos(result);
     }
 
-    private BigDecimal winningAmount(Lotto winningLotto, Integer bonusNumber) {
+    private Money winningAmount(Lotto winningLotto, Integer bonusNumber) {
         return Arrays.stream(Rank.values())
-                .reduce(BigDecimal.ZERO,
+                .reduce(Money.ZERO,
                         (amount, rank) -> amount.add(rank.winningAmountByCount(winningCount(winningLotto, bonusNumber, rank))),
-                        BigDecimal::add);
+                        Money::add);
     }
 
-    private BigDecimal purchaseAmount() {
-        return BigDecimal.valueOf(count()).multiply(LottoStore.LOTTO_PRICE);
+    private Money purchaseAmount() {
+        return LottoStore.LOTTO_PRICE.multiply(count());
     }
 }

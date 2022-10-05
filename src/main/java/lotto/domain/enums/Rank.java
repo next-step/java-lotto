@@ -1,6 +1,7 @@
 package lotto.domain.enums;
 
-import java.math.BigDecimal;
+import lotto.domain.Money;
+
 import java.util.Arrays;
 
 public enum Rank {
@@ -11,17 +12,17 @@ public enum Rank {
     FIFTH(5_000L, 3, false),
     MISS(0L, 0, false);
 
-    private final BigDecimal winningAmount;
+    private final Money winningAmount;
     private final Integer matchedCount;
     private final boolean bonusMatchRequired;
 
     Rank(Long winningAmount, Integer matchedCount, boolean bonusMatchRequired) {
-        this.winningAmount = BigDecimal.valueOf(winningAmount);
+        this.winningAmount = Money.of(winningAmount);
         this.matchedCount = matchedCount;
         this.bonusMatchRequired = bonusMatchRequired;
     }
 
-    public BigDecimal winningAmount() {
+    public Money winningAmount() {
         return winningAmount;
     }
 
@@ -29,8 +30,8 @@ public enum Rank {
         return matchedCount;
     }
 
-    public BigDecimal winningAmountByCount(Integer count) {
-        return winningAmount.multiply(BigDecimal.valueOf(count));
+    public Money winningAmountByCount(Integer count) {
+        return winningAmount.multiply(count);
     }
 
     public static Rank of(int matchedCount, boolean bonusMatched) {
