@@ -9,36 +9,36 @@ import java.util.stream.Stream;
 
 public enum WinningPrize {
 
-    THREE(3, BigDecimal.valueOf(5000), true),
-    FOR(4, BigDecimal.valueOf(50000), true),
-    FIVE(5, BigDecimal.valueOf(1500000), true),
-    SIX(6, BigDecimal.valueOf(2000000000), true),
-    MISS(0, BigDecimal.valueOf(0), false);
+    FIRST(6, false, BigDecimal.valueOf(2_000_000_000)),
+    SECOND(5, true, BigDecimal.valueOf(30_000_000)),
+    THIRD(5, false, BigDecimal.valueOf(1_500_000)),
+    FOURTH(4, false, BigDecimal.valueOf(50_000)),
+    FIFTH(3, false, BigDecimal.valueOf(5_000)),
+    MISS(0, false, BigDecimal.valueOf(0));
 
     private final int countOfMatch;
+    private final boolean matchOfBonus;
     private final BigDecimal price;
-    private boolean print;
 
-    WinningPrize(final int countOfMatch, final BigDecimal price, final boolean print) {
+    WinningPrize(final int countOfMatch, final boolean matchOfBonus, final BigDecimal price) {
 
         this.countOfMatch = countOfMatch;
+        this.matchOfBonus = matchOfBonus;
         this.price = price;
-        this.print = print;
     }
 
-    public static WinningPrize from(final int matchNumber) {
+    public static WinningPrize from(final int matchCount, final boolean matchBonus) {
 
         return Arrays.stream(WinningPrize.values())
-                .filter(oper -> oper.getCountOfMatch() == matchNumber)
+                .filter(oper -> oper.countOfMatch == matchCount && oper.matchOfBonus == matchBonus)
                 .findFirst()
                 .orElse(WinningPrize.MISS);
     }
 
-    public static Map<Integer, BigDecimal> init() {
+    public static Map<WinningPrize, BigDecimal> init() {
 
         return Collections.unmodifiableMap(Stream.of(values())
-                .filter(value -> value.print)
-                .collect(Collectors.toMap(WinningPrize::getCountOfMatch, WinningPrize::getPrice)));
+                .collect(Collectors.toMap(value -> value, WinningPrize::getPrice)));
     }
 
     public int getCountOfMatch() {
@@ -49,5 +49,10 @@ public enum WinningPrize {
     public BigDecimal getPrice() {
 
         return price;
+    }
+
+    public boolean canMatch() {
+
+        return this.matchOfBonus;
     }
 }
