@@ -1,53 +1,58 @@
 package calculator.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * Created by seungwoo.song on 2022-09-27
+ * Created by seungwoo.song on 2022-10-05
  */
 class OperatorTest {
 
     @Test
     void 더하기() {
-        assertThat(Operator.PLUS.operate(new CalculateResult(0), new InputValue("1"))).isEqualTo(new CalculateResult(1));
+        Assertions.assertThat(Operator.PLUS.operate(0, 1)).isEqualTo(1);
     }
 
     @Test
     void 빼기() {
-        assertThat(Operator.MINUS.operate(new CalculateResult(2), new InputValue("1"))).isEqualTo(new CalculateResult(1));
+        assertThat(Operator.MINUS.operate(10, 1)).isEqualTo(9);
     }
 
     @Test
     void 곱하기() {
-        assertThat(Operator.MULTIPLE.operate(new CalculateResult(2), new InputValue("2"))).isEqualTo(new CalculateResult(4));
+        assertThat(Operator.MULTIPLE.operate(10, 5)).isEqualTo(50);
     }
 
     @Test
     void 나누기() {
-        assertThat(Operator.DIVIDE.operate(new CalculateResult(4), new InputValue("2"))).isEqualTo(new CalculateResult(2));
-    }
-
-    @Test
-    void 나누기_떨어지지않는수() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Operator.DIVIDE.operate(new CalculateResult(5), new InputValue("2")));
+        assertThat(Operator.DIVIDE.operate(10, 5)).isEqualTo(2);
     }
 
     @Test
     void 나누기_0() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Operator.DIVIDE.operate(new CalculateResult(5), new InputValue("0")));
+        assertThatThrownBy(() -> Operator.DIVIDE.operate(10, 0))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 연산자_판단() {
+    void 나누기_안떨어지는수() {
+        assertThatThrownBy(() -> Operator.DIVIDE.operate(10, 3))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 연산자판단() {
         assertThat(Operator.isOperator("+")).isTrue();
-        assertThat(Operator.isOperator("a")).isFalse();
+        assertThat(Operator.isOperator("1")).isFalse();
     }
 
     @Test
     void 연산자_변환() {
-        assertThat(Operator.from("+")).isEqualTo(Operator.PLUS);
+        assertThat(Operator.from("-")).isEqualTo(Operator.MINUS);
+        assertThatThrownBy(() -> Operator.from("d"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

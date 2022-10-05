@@ -4,17 +4,20 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Created by seungwoo.song on 2022-10-05
+ */
 class CalculatorTest {
 
     @Test
-    void 계산() {
+    void 연산() {
         Calculator calculator = new Calculator();
-        String[] inputValues = "1 + 2".split(" ");
+        calculator.calculate(5);
+        calculator.set(Operator.PLUS);
+        calculator.calculate(5);
+        calculator.set(Operator.MINUS);
+        calculator.calculate(3);
 
-        for (String value : inputValues) {
-            calculator.calculate(new InputValue(value));
-        }
-
-        assertThat(calculator.getResult()).isEqualTo(3);
+        assertThat(calculator.getResult()).isEqualTo(7);
     }
 }

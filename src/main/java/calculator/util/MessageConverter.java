@@ -1,23 +1,28 @@
 package calculator.util;
 
-import calculator.domain.InputValue;
+import calculator.domain.Input;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by seungwoo.song on 2022-10-04
+ * Created by seungwoo.song on 2022-10-05
  */
 public class MessageConverter {
+    private MessageConverter() {
+    }
 
-    public static final String SEPARATOR = " ";
+    private static final String SEPARATOR = " ";
 
-    public List<InputValue> convert(String input) {
-        return Arrays.stream(input.split(SEPARATOR))
-                .map(String::trim)
-                .filter(StringUtils::isNotBlank)
-                .map(InputValue::new)
+    public static List<Input> convert(String inputs) {
+        return Arrays.stream(inputs.split(SEPARATOR))
+                .filter(MessageConverter::isNotEmpty)
+                .map(Input::new)
                 .collect(Collectors.toList());
+    }
+
+    private static boolean isNotEmpty(String input) {
+        return input != null && !input.isEmpty();
     }
 }

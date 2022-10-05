@@ -1,36 +1,35 @@
 package calculator.domain;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
- * Created by seungwoo.song on 2022-09-27
+ * Created by seungwoo.song on 2022-10-05
  */
 public class Calculator {
 
-    private final OperatorBox operatorBox;
-    private CalculateResult result;
+    private Deque<Operator> operatorBox = new ArrayDeque<>(1);
+    private int result = 0;
 
-    public Calculator() {
-        this(new OperatorBox());
+    public void set(Operator operator) {
+        operatorBox.push(operator);
     }
 
-    public Calculator(OperatorBox operatorBox) {
-        this.operatorBox = operatorBox;
-    }
-
-    public void calculate(InputValue inputValue) {
-        if (inputValue.isOperator()) {
-            operatorBox.add(inputValue);
-            return;
-        }
-
+    public void calculate(int input) {
         if (operatorBox.isEmpty()) {
-            result = new CalculateResult(inputValue.toNumber());
+            result = input;
             return;
         }
 
-        result = operatorBox.operate(result, inputValue);
+        result = operatorBox.pop().operate(result, input);
     }
 
     public int getResult() {
-        return result.getResult();
+        return result;
+    }
+
+    public void process(Input input) {
+        InputType indexType = InputType.from(input);
+        indexType.operate(this, input);
     }
 }
