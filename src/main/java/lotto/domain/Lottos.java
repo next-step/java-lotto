@@ -4,6 +4,7 @@ import lotto.domain.enums.Rank;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -14,19 +15,15 @@ import static java.util.stream.Collectors.toList;
 
 public class Lottos {
     private static final BigDecimal UNIT_PRICE = BigDecimal.valueOf(1000L);
-
     private final List<Lotto> lottos;
 
-    public Lottos(LottoFactory lottoFactory, Integer amount) {
-        int count = BigDecimal.valueOf(amount)
-                .divide(UNIT_PRICE, 0, RoundingMode.FLOOR)
-                .intValue();
+    public Lottos(LottoFactory lottoFactory, Integer count) {
         this.lottos = IntStream.range(0, count)
                 .mapToObj(i -> lottoFactory.lotto())
                 .collect(toList());
     }
 
-    Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
@@ -59,6 +56,13 @@ public class Lottos {
 
     public BigDecimal totalProfitRate(Lotto winningLotto, Integer bonusNumber) {
         return winningAmount(winningLotto, bonusNumber).divide(purchaseAmount(), 2, RoundingMode.FLOOR);
+    }
+
+    public Lottos add(Lottos another) {
+        List<Lotto> result = new ArrayList<>();
+        result.addAll(lottos);
+        result.addAll(another.lottos);
+        return new Lottos(result);
     }
 
     private BigDecimal winningAmount(Lotto winningLotto, Integer bonusNumber) {

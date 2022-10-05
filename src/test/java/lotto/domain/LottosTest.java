@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,8 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottosTest {
     @Test
     void create() {
-        Integer purchaseAmount = 1000;
-        Lottos lottos = new Lottos(this::lotto, purchaseAmount);
+        Integer count = 1;
+        Lottos lottos = new Lottos(this::lotto, count);
 
         assertThat(lottos).isEqualTo(new Lottos(List.of(lotto())));
     }
@@ -24,8 +25,8 @@ class LottosTest {
     @DisplayName("구매한 로또 개수를 구한다")
     @Test
     void count() {
-        Integer purchaseAmount = 14000;
-        Lottos lottos = new Lottos(this::lotto, purchaseAmount);
+        Integer count = 14;
+        Lottos lottos = new Lottos(this::lotto, count);
 
         assertThat(lottos.count()).isEqualTo(14);
     }
@@ -53,6 +54,20 @@ class LottosTest {
 
         BigDecimal expected = BigDecimal.valueOf(30_060_000L).divide(BigDecimal.valueOf(6000L), 2, RoundingMode.FLOOR);
         assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("두 로또들을 더한다")
+    @Test
+    void add() {
+        List<Lotto> lottos1 = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        List<Lotto> lottos2 = List.of(new Lotto(List.of(11, 12, 13, 14, 15, 16)));
+
+        Lottos result = new Lottos(lottos1).add(new Lottos(lottos2));
+
+        List<Lotto> lotto3 = new ArrayList<>();
+        lotto3.addAll(lottos1);
+        lotto3.addAll(lottos2);
+        assertThat(result).isEqualTo(new Lottos(lotto3));
     }
 
     private Integer bonusNumber() { return 6; }
