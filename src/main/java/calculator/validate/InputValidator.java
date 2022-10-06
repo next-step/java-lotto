@@ -55,6 +55,6 @@ public class InputValidator {
     }
 
     private static boolean isNullOrSpace(String text) {
-        return text.equals("") || text == null;
+        return text == null || text.equals("");
     }
 }
