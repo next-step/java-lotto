@@ -5,8 +5,8 @@ public class Calculator {
     private int frontNumber;
     private int backNumber;
 
-    public String[] splitInput(String inputValue) throws IllegalAccessException {
-        inputValueException(inputValue);
+    public String[] splitInput(String inputValue) {
+        validateNullValue(inputValue);
         return inputValue.split(" ");
     }
 
@@ -30,31 +30,31 @@ public class Calculator {
         return divisionResult;
     }
 
-    public void inputValueException(String splitValue) throws IllegalAccessException {
+    public void validateNullValue(String splitValue) {
         if (splitValue == null || splitValue.isBlank()) {
-            throw new IllegalAccessException();
+            throw new IllegalArgumentException();
         }
     }
 
-    public void operatorException(String operator) throws IllegalAccessException {
+    public void validateOperate(String operator) {
         if (!(operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/"))) {
-            throw new IllegalAccessException();
+            throw new IllegalArgumentException();
         }
     }
 
-    public void equationException() throws IllegalAccessException {
+    public void validateEquation() {
         if (splitInputValues.length % 2 == 0) {
-            throw new IllegalAccessException();
+            throw new IllegalArgumentException();
         }
     }
 
-    public int calculateValue(int inputValuePosition) throws IllegalAccessException {
+    public int calculateValue(int inputValuePosition) {
         String operator = splitInputValues[inputValuePosition];
-        operatorException(operator);
-        return operateSelect(operator);
+        validateOperate(operator);
+        return selectOperate(operator);
     }
 
-    public int operateSelect(String operator) {
+    public int selectOperate(String operator) {
         if (operator.equals("+")) {
             return sum(frontNumber, backNumber);
         }
@@ -67,7 +67,7 @@ public class Calculator {
         return division(frontNumber, backNumber);
     }
 
-    public int calculatorSystem() throws IllegalAccessException {
+    public int calculatorSystem() {
         int calculateInput = 0;
         frontNumber = Integer.parseInt(splitInputValues[0]);
         for (int i = 1; i < splitInputValues.length - 1; i = i + 2) {
@@ -78,12 +78,12 @@ public class Calculator {
         return calculateInput;
     }
 
-    public int finalCalculate(String inputValue) throws IllegalAccessException {
+    public int finalCalculate(String inputValue) {
         splitInputValues = splitInput(inputValue);
         if (splitInputValues.length == 1) {
             return Integer.parseInt(splitInputValues[0]);
         }
-        equationException();
+        validateEquation();
         return calculatorSystem();
     }
 }
