@@ -8,11 +8,7 @@ import lotto.domain.number.WinningNumbers;
 
 public class LottoInputView {
 
-    private static final Scanner scanner;
-
-    static {
-        scanner = new Scanner(System.in);
-    }
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static int insertPurchasePrice() {
         System.out.println("구입금액을 입력해 주세요.");
