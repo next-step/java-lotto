@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import lottogame.domain.lotto.LottoNumber;
 
-public class RandomNumberGenerationStrategy implements NumberGenerationStrategy {
+public class RangeLottoNumberPickerStrategy implements LottoNumberGenerationStrategy {
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;

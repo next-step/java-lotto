@@ -15,7 +15,7 @@ public class TicketSeller {
 
     public static void sellTicketTo(User user) {
         while (user.hasEnoughMoney(TICKET_PRICE)) {
-            user.buyTicket(TICKET_MACHINE.createLottoTicket(new RandomNumberGenerationStrategy()), TICKET_PRICE);
+            user.buyTicket(TICKET_MACHINE.createLottoTicket(new RangeLottoNumberPickerStrategy()), TICKET_PRICE);
         }
     }
 

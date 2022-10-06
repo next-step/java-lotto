@@ -5,7 +5,7 @@ import lottogame.domain.lotto.LottoResult;
 import lottogame.domain.lotto.LottoTicket;
 
 public class TicketMachine {
-    public LottoTicket createLottoTicket(NumberGenerationStrategy strategy) {
+    public LottoTicket createLottoTicket(LottoNumberGenerationStrategy strategy) {
         return new LottoTicket(strategy.getNumbers());
     }
 
