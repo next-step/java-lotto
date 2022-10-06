@@ -25,4 +25,8 @@ public class Buy {
     public int getCount() {
         return count;
     }
+
+    public int getPay() {
+        return pay;
+    }
 }
