@@ -1,23 +1,32 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoWrapper;
 import lotto.domain.Result;
-import lotto.domain.Reward;
+import lotto.enumerate.Rank;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
 
     public void printResult(Result result) {
-        for (int matchingCount : Reward.getRewardMap().keySet()) {
-            System.out.println(matchingCount + "개 일치 (" + Reward.getReward(matchingCount) + "원)- " + result.getWinCount(matchingCount) + "개");
+        System.out.println("\n당첨 통계");
+        System.out.println("---------");
+        for (Rank rank : Rank.getOrderedRanks()) {
+            System.out.println(rank.getCountOfMatch() + "개 일치" + getBonusString(rank) + "(" + rank.getWinningMoney() + "원)- " + result.getWinCount(rank) + "개");
         }
         System.out.println("총 수익률은 " + result.getRateOfIncome() + "입니다");
     }
 
-    public void printLottoNumber(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    private String getBonusString(Rank rank) {
+        if (Rank.SECOND == rank) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
+    }
+
+    public void printLottoNumber(LottoWrapper lottoWrapper) {
+        for (Lotto lotto : lottoWrapper.getLottos()) {
             printLottoNumber(lotto);
         }
     }

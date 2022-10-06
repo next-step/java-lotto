@@ -1,15 +1,20 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.enumerate.Rank;
+
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class Result {
-    private final Map<Integer, WinResult> winResultMap = new HashMap<>();
+    private final Map<Rank, WinResult> winResultMap = new EnumMap<>(Rank.class);
     private int initMoney;
 
-    public Result(List<Lotto> lottos, List<Integer> lastWeeksCollectNumberList) {
-        this.saveInitMoney(lottos.size());
-        for (Lotto lotto : lottos) {
-            this.saveResult(lotto.getMatchCount(lastWeeksCollectNumberList));
+    public Result(LottoWrapper lottoWrapper, List<Integer> lastWeeksCollectNumberList, int bonusNumber) {
+        this.saveInitMoney(lottoWrapper.getLottoCount());
+        for (Rank rank : lottoWrapper.getResultRanks(lastWeeksCollectNumberList, bonusNumber)) {
+            this.saveResult(rank);
         }
     }
 
@@ -17,46 +22,44 @@ public class Result {
         return ((double) (int) (((double) getTotalIncome() / (double) this.initMoney) * 100) / 100);
     }
 
-    public int getWinCount(int matchingCount) {
+    public int getWinCount(Rank rank) {
         return Optional.of(this.winResultMap)
-                .map(vo -> vo.get(matchingCount))
+                .map(vo -> vo.get(rank))
                 .map(WinResult::getWinCount)
                 .orElse(0);
-    }
-
-    private boolean isWin(int matchingCount) {
-        return Reward.getReward(matchingCount) != 0;
     }
 
     private int getTotalIncome() {
         int sum = 0;
         for (WinResult winResult : this.winResultMap.values()) {
-            sum += Reward.getReward(winResult.getMatchingCount()) * winResult.getWinCount();
+            sum += winResult.getRank().getWinningMoney() * winResult.getWinCount();
         }
         return sum;
     }
 
     private void saveInitMoney(int lottoCount) {
-        this.initMoney = lottoCount * Config.LOTTE_PRICE;
+        this.initMoney = lottoCount * Config.LOTTO_PRICE;
     }
 
-    private void saveResult(int matchingCount) {
-        if (isWin(matchingCount)) {
-            winResultMap.putIfAbsent(matchingCount, new WinResult(matchingCount));
-            winResultMap.get(matchingCount).addWinCount();
+    private void saveResult(Rank rank) {
+        if (rank == null) {
+            return;
         }
+
+        winResultMap.putIfAbsent(rank, new WinResult(rank));
+        winResultMap.get(rank).addWinCount();
     }
 
     private class WinResult {
-        private final int matchingCount;
+        private final Rank rank;
         private int winCount = 0;
 
-        private WinResult(int matchingCount) {
-            this.matchingCount = matchingCount;
+        private WinResult(Rank rank) {
+            this.rank = rank;
         }
 
-        private int getMatchingCount() {
-            return matchingCount;
+        private Rank getRank() {
+            return rank;
         }
 
         private int getWinCount() {

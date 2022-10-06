@@ -11,9 +11,9 @@ public class NumberGenerator {
     private final static List<Integer> lottoNumberPool = initLottoNumberPool();
 
     public static List<Integer> pickLottoNumber() {
-        int[] numbers = new int[Config.LOTTE_NUMBER_COUNT];
+        int[] numbers = new int[Config.LOTTO_NUMBER_COUNT];
         Collections.shuffle(lottoNumberPool);
-        for (int index = 0; index < Config.LOTTE_NUMBER_COUNT; index++) {
+        for (int index = 0; index < Config.LOTTO_NUMBER_COUNT; index++) {
             numbers[index] = lottoNumberPool.get(index);
         }
         return Arrays
@@ -25,7 +25,7 @@ public class NumberGenerator {
     private static List<Integer> initLottoNumberPool() {
         List<Integer> lottoNumberList = new ArrayList<>();
         IntStream
-                .range(Config.LOTTE_NUMBER_RANGE_TO_MIN, Config.LOTTE_NUMBER_RANGE_TO_MAX)
+                .range(Config.LOTTO_NUMBER_RANGE_TO_MIN, Config.LOTTO_NUMBER_RANGE_TO_MAX)
                 .forEach(lottoNumberList::add);
         return lottoNumberList;
     }

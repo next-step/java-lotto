@@ -5,8 +5,8 @@ import java.util.List;
 public class Lotto {
     private final List<Integer> numbers;
 
-    Lotto() {
-        this.numbers = NumberGenerator.pickLottoNumber();
+    Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public List<Integer> getNumbers() {
@@ -21,7 +21,11 @@ public class Lotto {
         return matchCount;
     }
 
-    private int getMatchCount(List<Integer> collectNumberList, int number){
+    public boolean isMatchToBonusNumber(int bonusNumber) {
+        return this.numbers.contains(bonusNumber);
+    }
+
+    private int getMatchCount(List<Integer> collectNumberList, int number) {
         if (collectNumberList.contains(number)) {
             return 1;
         }
