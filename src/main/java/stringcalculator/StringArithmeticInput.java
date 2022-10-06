@@ -15,7 +15,38 @@ public class StringArithmeticInput {
     public Number evaluate() {
         String[] expression = input.split(DELIMITER);
 
-        return Number.of(1);
+        Number leftNumber = null;
+        Command command = null;
+        Number rightNumber = null;
+
+        for (String value : expression) {
+            if (isNumber(value)) {
+                if (leftNumber == null) {
+                    leftNumber = Number.parse(value);
+                } else if (rightNumber == null) {
+                    rightNumber = Number.parse(value);
+                }
+            } else {
+                command = new CommandFactory().getCommand(value);
+            }
+
+            if (leftNumber != null && command != null && rightNumber != null) {
+                leftNumber = command.execute(leftNumber, rightNumber);
+
+                command = null;
+                rightNumber = null;
+            }
+        }
+
+        return leftNumber;
     }
 
+    private boolean isNumber(String value) {
+        try {
+            Number.parse(value);
+            return true;
+        } catch(Exception e){
+            return false;
+        }
+    }
 }

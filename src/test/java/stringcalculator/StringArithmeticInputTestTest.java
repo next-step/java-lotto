@@ -31,7 +31,7 @@ public class StringArithmeticInputTestTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = { "1+2+3,6", "2*3*4,24", "1+11/4,3" })
+    @CsvSource(value = { "1 + 2 + 3,6", "2 * 3 * 4,24", "1 + 11 / 4,3", "1 - 2 * 6 / 3,-2" })
     void 계산한다(String input, int expected) {
         Assertions.assertThat(new StringArithmeticInput(input).evaluate())
                   .isEqualTo(Number.of(expected));
