@@ -22,6 +22,10 @@ public class InputView {
         return wrapMethodCall(this::doGetLastWeekLottoResult);
     }
 
+    public int getBonusNumberInput() {
+        return wrapMethodCall(this::doGetBonusNumberInput);
+    }
+
     private User doGetUserInput() {
         System.out.println("구입 금액을 입력해 주세요.");
         User user = new User(new Money(scanner.nextInt()));
@@ -39,6 +43,11 @@ public class InputView {
         System.out.println();
 
         return lottoNumbers;
+    }
+
+    private int doGetBonusNumberInput() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 
     private <T> T wrapMethodCall(Supplier<T> method) {

@@ -36,7 +36,7 @@ public class LottoGameController {
         }
 
         outputView.printTickets(user);
-        LottoResult lastWeekLottoResult = new LottoResult(inputView.getLastWeekLottoResult());
+        LottoResult lastWeekLottoResult = new LottoResult(inputView.getLastWeekLottoResult(), inputView.getBonusNumberInput());
 
         UserLottoResult userLottoResult = TicketSeller.verifyRankFor(user, lastWeekLottoResult);
         outputView.printResult(userLottoResult);
