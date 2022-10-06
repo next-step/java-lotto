@@ -1,5 +1,7 @@
 package stringcalculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,7 @@ public class NumberTest {
     @CsvSource(value = { "1,1", "-1,-1"})
     @ParameterizedTest
     void 숫자를변환한다(String input, int expected) {
-        Assertions.assertThat(Number.parse(input)).isEqualTo(Number.of(expected));
+        assertThat(Number.parse(input)).isEqualTo(Number.of(expected));
     }
 
     @DisplayName("숫자가 아닌 문자열은 생성할 수 없다")
@@ -26,13 +28,28 @@ public class NumberTest {
     @DisplayName("숫자는 더할수있다")
     @Test
     void number_add() {
-        Assertions.assertThat(Number.parse("1").add(Number.parse("2")))
+        assertThat(Number.parse("1").add(Number.parse("2")))
                   .isEqualTo(Number.parse("3"));
     }
 
     @DisplayName("숫자는 뺄수있다")
     @Test
     void number_minus() {
-        Assertions.assertThat(Number.parse("1").minus(Number.parse("2"))).isEqualTo(Number.of(-1));
+        assertThat(Number.parse("1").minus(Number.parse("2")))
+                  .isEqualTo(Number.of(-1));
+    }
+
+    @DisplayName("숫자는 곱할수있다")
+    @Test
+    void number_multiply() {
+        assertThat(Number.parse("1").multiply(Number.parse("0")))
+                  .isEqualTo(Number.of(0));
+    }
+
+    @DisplayName("숫자는 나눌수있다")
+    @Test
+    void number_divide() {
+        assertThat(Number.parse("4").divide(Number.parse("2")))
+                .isEqualTo(Number.of(2));
     }
 }

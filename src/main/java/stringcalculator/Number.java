@@ -49,4 +49,12 @@ public class Number {
     public Number minus(Number number) {
         return new Number(this.value - number.value);
     }
+
+    public Number multiply(Number number) {
+        return new Number(this.value * number.value);
+    }
+
+    public Number divide(Number number) {
+        return new Number(this.value / number.value);
+    }
 }
