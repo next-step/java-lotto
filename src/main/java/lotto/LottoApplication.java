@@ -17,11 +17,22 @@ public class LottoApplication {
         // 금액 입력
         int purchaseAmount = inputView.inputPurchaseAmount();
 
+        // 수동 로또 개수 입력
+        int passiveLottoCount = inputView.inputPassiveLottoCount();
+//        int passiveLottoCount = 3;
+
+        // 수동 로또 번호 입력
+        List<List<Integer>> numbersCollection = inputView.inputPassiveLottoNumbers(passiveLottoCount);
+//        List<List<Integer>> numbersCollection = new ArrayList<>();
+//        numbersCollection.add(Arrays.asList(8, 21, 23, 41, 42, 43));
+//        numbersCollection.add(Arrays.asList(3, 5, 11, 16, 32, 38));
+//        numbersCollection.add(Arrays.asList(7, 11, 16, 35, 36, 44));
+
         // 로또 구매
-        LottoWrapper lottoWrapper = lottoMachine.buyLotto(purchaseAmount);
+        LottoWrapper lottoWrapper = lottoMachine.buyLotto(purchaseAmount, passiveLottoCount, numbersCollection);
 
         // 구매한 로또 현황 출력
-        resultView.printLottoNumber(lottoWrapper);
+        resultView.printLottoState(lottoWrapper, passiveLottoCount);
 
         // 지난 주 당첨 번호 입력
         List<Integer> lastWeeksCollectNumbers = inputView.inputLastWeeksCollectNumbers();

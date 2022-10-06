@@ -14,7 +14,7 @@ public class InputView {
     }
 
     public List<Integer> inputLastWeeksCollectNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String lastWeeksCollectNumbers = scanner.nextLine();
         return getLottoNumbers(lastWeeksCollectNumbers);
@@ -27,13 +27,13 @@ public class InputView {
     }
 
     public int inputPassiveLottoCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+        System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
     public List<List<Integer>> inputPassiveLottoNumbers(int passiveLottoCount) {
-        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        System.out.println("\n수동으로 구매할 번호를 입력해주세요.");
         List<List<Integer>> numbersCollection = new ArrayList<>();
         for (int index = 0; index < passiveLottoCount; index++) {
             Scanner scanner = new Scanner(System.in);
