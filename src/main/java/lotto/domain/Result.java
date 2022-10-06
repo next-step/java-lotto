@@ -2,10 +2,13 @@ package lotto.domain;
 
 import lotto.enumerate.Rank;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class Result {
-    private final Map<Rank, WinResult> winResultMap = new HashMap<>();
+    private final Map<Rank, WinResult> winResultMap = new EnumMap<>(Rank.class);
     private int initMoney;
 
     public Result(List<Lotto> lottos, List<Integer> lastWeeksCollectNumberList, int bonusNumber) {
