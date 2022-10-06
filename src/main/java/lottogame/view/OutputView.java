@@ -19,11 +19,8 @@ public class OutputView {
     public void printResult(UserLottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Stream.of(LottoGameRank.FIFTH, LottoGameRank.FOURTH, LottoGameRank.THIRD, LottoGameRank.FIRST)
-            .forEach((rank) -> {
-
-                System.out.printf("%d개 일치 (%d)원- %d개\r\n", rank.getMinimumMatchNumberCount(), rank.getReward().getValue(), result.countRank(rank));
-            });
+        Stream.of(LottoGameRank.FIFTH, LottoGameRank.FOURTH, LottoGameRank.THIRD, LottoGameRank.SECOND, LottoGameRank.FIRST)
+            .forEach((rank) -> printReward(rank, result));
 
         System.out.printf("총 수익률은 %s입니다.\r\n", result.calculateReturnRate());
     }
@@ -43,5 +40,15 @@ public class OutputView {
             .collect(Collectors.joining(", "));
 
         System.out.printf("[%s]\r\n", numberString);
+    }
+
+    private void printReward(LottoGameRank rank, UserLottoResult result) {
+        String printPattern = "%d개 일치 (%d)원- %d개\r\n";
+
+        if (rank == LottoGameRank.SECOND) {
+            printPattern = "%d개 일치, 보너스 볼 일치(%d)원- %d개\r\n";
+        }
+
+        System.out.printf(printPattern, rank.getMinimumMatchNumberCount(), rank.getReward().getValue(), result.countRank(rank));
     }
 }
