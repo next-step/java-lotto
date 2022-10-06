@@ -10,13 +10,21 @@ public class LottoStore {
         List<String> manualLottoNumbers = request.lottoNumbers();
         Lottos manual = LottoMachine.createManualLottos(manualLottoNumbers);
 
-        int money = request.money() - (manualLottoNumbers.size() * Lotto.PRICE);
-        if (money < Lotto.PRICE) {
+        int money = request.money() - getManualLottoPrice(manualLottoNumbers);
+        if (isNoMorePurchasable(money)) {
             return manual;
         }
 
         return LottoMachine.createAutoLottos(money)
                 .add(manual);
+    }
+
+    private boolean isNoMorePurchasable(int money) {
+        return money < Lotto.PRICE;
+    }
+
+    private int getManualLottoPrice(List<String> manualLottoNumbers) {
+        return manualLottoNumbers.size() * Lotto.PRICE;
     }
 
     public LottoStatistics createStatistics(Lottos lottos, WinningLottoDto winningLottoDto) {
