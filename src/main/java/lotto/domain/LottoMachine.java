@@ -6,12 +6,12 @@ import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
 import static lotto.domain.LottoNumber.MAX;
 import static lotto.domain.LottoNumber.MIN;
 
 public class LottoMachine {
     private static final String DEFAULT_DELIMITER = ",";
-    private static final int LOTTO_SIZE = 6;
 
     private LottoMachine() {
     }

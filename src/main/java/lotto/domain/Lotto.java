@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public abstract class Lotto {
     public static final int PRICE = 1000;
 
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 6개 이어야 합니다.";
 
     private final List<LottoNumber> lottoNumbers;
