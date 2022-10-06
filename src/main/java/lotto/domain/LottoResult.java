@@ -10,8 +10,7 @@ public enum LottoResult {
     FIRST(2000000000, 6),
     SECOND(1500000, 5),
     THIRD(50000, 4),
-    FORTH(5000, 3),
-    NONE(0, 0);
+    FORTH(5000, 3);
 
     public static final String 단위 = "원";
 
@@ -27,7 +26,7 @@ public enum LottoResult {
         return Arrays.stream(values())
                 .filter(value -> value.matchCount == inputMatchCount)
                 .findAny()
-                .orElse(NONE);
+                .orElse(null);
     }
 
     public int getMoney() {

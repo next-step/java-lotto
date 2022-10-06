@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.reducing;
 
@@ -35,12 +36,14 @@ public class LottoStatistic {
     private void plusLottoResultCount(List<Lotto> lotts) {
         lotts.stream()
                 .map(this::toLottoResult)
+                .filter(Objects::nonNull)
                 .forEach(lottoResult -> lottoResultCounter.merge(lottoResult, 1, (result, count) -> result + count));
     }
 
     private void sumWinMoney(List<Lotto> lottoResult) {
         winMoneyTotal = lottoResult.stream()
                 .map(this::toLottoResult)
+                .filter(Objects::nonNull)
                 .map(LottoResult::getMoney)
                 .collect(reducing(0, e -> e, Integer::sum));
     }

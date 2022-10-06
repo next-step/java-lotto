@@ -14,7 +14,8 @@ class LottoStatisticTest {
     @Test
     void 통계정보() {
 
-        List<Lotto> lottos = List.of(Lotto.of(List.of(1, 0, 0, 0, 0, 0)),
+        List<Lotto> lottos = List.of(
+                Lotto.of(List.of(1, 0, 0, 0, 0, 0)),
                 Lotto.of(List.of(1, 2, 0, 0, 0, 0)),
                 Lotto.of(List.of(1, 2, 3, 0, 0, 0)),
                 Lotto.of(List.of(1, 2, 3, 4, 0, 0)),
@@ -27,7 +28,6 @@ class LottoStatisticTest {
 
         assertThat(lottoStatistic.getWinMoneyTotal()).isEqualTo(sum);
         assertThat(lottoStatistic.getLottoResultCounter().get(LottoResult.FIRST)).isEqualTo(1);
-        assertThat(lottoStatistic.getLottoResultCounter().get(LottoResult.NONE)).isEqualTo(2);
         assertThat(lottoStatistic.getRevenue()).isEqualTo(Double.valueOf(sum) / Double.valueOf(6000));
         assertThat(lottoStatistic.isLost()).isFalse();
     }
