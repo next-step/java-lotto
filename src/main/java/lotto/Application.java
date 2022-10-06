@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.RandomStrategy;
 import lotto.util.RandomUtils;
+import lotto.view.LottoInputView;
 
 /**
  * Created by seungwoo.song on 2022-10-06
