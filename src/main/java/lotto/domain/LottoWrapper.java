@@ -14,7 +14,7 @@ public class LottoWrapper {
     }
 
     public int getLottoCount() {
-        if (lottos == null || lottos.isEmpty()) {
+        if (lottos == null) {
             return 0;
         }
         return lottos.size();
