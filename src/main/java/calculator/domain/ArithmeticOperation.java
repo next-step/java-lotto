@@ -9,7 +9,7 @@ public class ArithmeticOperation {
     private ArithmeticOperation() {
     }
 
-    private static Map<String, Operation> initOperation(){
+    private static Map<String, Operation> initOperation() {
         Map<String, Operation> operationMap = new HashMap<>();
 
         operationMap.put("+", new PlusOperationImpl());
@@ -20,11 +20,11 @@ public class ArithmeticOperation {
         return operationMap;
     }
 
-    public static Operation getOperation(String sign){
+    public static Operation getOperation(String sign) {
         return operationMap.get(sign);
     }
 
-    public static boolean hasOperation(String sign){
+    public static boolean hasOperation(String sign) {
         return operationMap.containsKey(sign);
     }
 }

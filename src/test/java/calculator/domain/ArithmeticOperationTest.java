@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ArithmeticOperationTest {
     @ParameterizedTest
-    @CsvSource(value = {"+,true", "-,true", "*,true","/,true","a,false"})
+    @CsvSource(value = {"+,true", "-,true", "*,true", "/,true", "a,false"})
     void 사칙연산_기호_체크(String sign, boolean expected) {
         assertThat(ArithmeticOperation.hasOperation(sign)).isEqualTo(expected);
     }

@@ -59,7 +59,7 @@ public class CalculatorTest {
     @CsvSource(value = {"2 + 3 * 4 / 2:2,3,4,2", "1 + 1:1,1"}, delimiter = ':')
     void 수식에서_숫자만_뽑아낸다(String input, String expected) {
         List<Integer> expectedList = new ArrayList<>();
-        for(String expectValue: Arrays.asList(expected.split(","))){
+        for (String expectValue : Arrays.asList(expected.split(","))) {
             expectedList.add(Integer.parseInt(expectValue));
         }
         assertThat(Calculator.getNumbers(input.split(" "))).containsSequence(expectedList);
