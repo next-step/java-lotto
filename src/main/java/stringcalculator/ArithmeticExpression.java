@@ -35,6 +35,28 @@ public class ArithmeticExpression {
         return this;
     }
 
+    public ArithmeticExpression appendNumber(String value) {
+        if (!Number.isNumber(value)) {
+            return this;
+        }
+
+        if (leftNumber == null) {
+            return new ArithmeticExpression(Number.parse(value), this.command, this.rightNumber);
+        } else if (rightNumber == null) {
+            return new ArithmeticExpression(this.leftNumber, this.command, Number.parse(value));
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
+    public ArithmeticExpression appendCommand(String value) {
+        if (Number.isNumber(value)) {
+            return this;
+        }
+
+        return new ArithmeticExpression(this.leftNumber, new CommandFactory().getCommand(value), this.rightNumber);
+    }
+
     public boolean complete() {
         return this.leftNumber != null && this.command != null && this.rightNumber != null;
     }

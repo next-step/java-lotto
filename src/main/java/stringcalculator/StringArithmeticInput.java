@@ -18,7 +18,8 @@ public class StringArithmeticInput {
         ArithmeticExpression arithmeticExpression = new ArithmeticExpression();
 
         for (String value : expression) {
-            arithmeticExpression = arithmeticExpression.append(value);
+            arithmeticExpression = arithmeticExpression.appendNumber(value);
+            arithmeticExpression = arithmeticExpression.appendCommand(value);
 
             if (arithmeticExpression.complete()) {
                 arithmeticExpression = arithmeticExpression.evaluate();
