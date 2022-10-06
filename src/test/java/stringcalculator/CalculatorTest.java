@@ -1,5 +1,6 @@
 package stringcalculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,12 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class CalculatorTest {
 
-    private Calculator calculator = new Calculator();
+    private Calculator calculator;
+
+    @BeforeEach
+    void Setup(){
+        calculator = new Calculator();
+    }
 
     @DisplayName("문자열 분리 테스트")
     @Test
@@ -43,25 +49,25 @@ public class CalculatorTest {
     @DisplayName("null값 테스트")
     @Test
     void nullTest() {
-        assertThatExceptionOfType(IllegalAccessException.class).isThrownBy(() -> calculator.inputValueException(null));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.validateNullValue(null));
     }
 
     @DisplayName("빈값 테스트")
     @Test
     void emptyTest() {
-        assertThatExceptionOfType(IllegalAccessException.class).isThrownBy(() -> calculator.inputValueException(""));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.validateNullValue(""));
     }
 
     @DisplayName("사칙연산자 이외 문자 테스트")
     @Test
     void stringTest() {
-        assertThatExceptionOfType(IllegalAccessException.class).isThrownBy(() -> calculator.operatorException("1 ."));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.validateOperate("1 ."));
     }
 
     @DisplayName("수식 비정상종료 테스트")
     @Test
     void equationExceptionTest() {
-        assertThatExceptionOfType(IllegalAccessException.class).isThrownBy(() -> calculator.finalCalculate("1 +"));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.finalCalculate("1 +"));
     }
 
     @DisplayName("계산기 테스트")
