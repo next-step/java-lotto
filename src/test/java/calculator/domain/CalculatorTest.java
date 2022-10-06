@@ -13,9 +13,9 @@ class CalculatorTest {
     void 연산() {
         Calculator calculator = new Calculator();
         calculator.calculate(5);
-        calculator.set(Operator.PLUS);
+        calculator.push(Operator.PLUS);
         calculator.calculate(5);
-        calculator.set(Operator.MINUS);
+        calculator.push(Operator.MINUS);
         calculator.calculate(3);
 
         assertThat(calculator.getResult()).isEqualTo(7);

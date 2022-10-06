@@ -11,7 +11,7 @@ public class Calculator {
     private Deque<Operator> operatorBox = new ArrayDeque<>(1);
     private int result = 0;
 
-    public void set(Operator operator) {
+    public void push(Operator operator) {
         operatorBox.push(operator);
     }
 
