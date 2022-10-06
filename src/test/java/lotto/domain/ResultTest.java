@@ -4,7 +4,8 @@ import lotto.enumerate.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +25,7 @@ class ResultTest {
         Lotto lotto5 = new Lotto(Arrays.asList(1, 2, 3, loseNumber, loseNumber, loseNumber));
         List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5);
 
-        Result result = new Result(lottos, collectNumberList, loseNumber);
+        Result result = new Result(new LottoWrapper(lottos), collectNumberList, loseNumber);
 
         for (Rank rank : Rank.values()) {
             assertThat(result.getWinCount(rank)).isEqualTo(1);
