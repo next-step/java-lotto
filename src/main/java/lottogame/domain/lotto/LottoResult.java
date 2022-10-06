@@ -8,7 +8,7 @@ public class LottoResult {
 
     public LottoResult(List<Integer> numbers, int bonusNumber) {
         this.lottoNumbers = LottoNumbers.valueOf(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = new BonusLottoNumber(bonusNumber, lottoNumbers);
     }
 
     public LottoNumbers getLottoNumbers() {
