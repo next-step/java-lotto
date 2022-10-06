@@ -11,12 +11,9 @@ public class Result {
     private final Map<Rank, WinResult> winResultMap = new EnumMap<>(Rank.class);
     private int initMoney;
 
-    public Result(List<Lotto> lottos, List<Integer> lastWeeksCollectNumberList, int bonusNumber) {
-        this.saveInitMoney(lottos.size());
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.getMatchCount(lastWeeksCollectNumberList);
-            boolean matchToBonusNumber = lotto.isMatchToBonusNumber(bonusNumber);
-            Rank rank = Rank.valueOf(matchCount, matchToBonusNumber);
+    public Result(LottoWrapper lottoWrapper, List<Integer> lastWeeksCollectNumberList, int bonusNumber) {
+        this.saveInitMoney(lottoWrapper.getLottoCount());
+        for (Rank rank : lottoWrapper.getResultRanks(lastWeeksCollectNumberList, bonusNumber)) {
             this.saveResult(rank);
         }
     }

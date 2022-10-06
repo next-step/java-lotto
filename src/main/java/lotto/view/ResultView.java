@@ -1,10 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoWrapper;
 import lotto.domain.Result;
 import lotto.enumerate.Rank;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -25,8 +25,8 @@ public class ResultView {
         return " ";
     }
 
-    public void printLottoNumber(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public void printLottoNumber(LottoWrapper lottoWrapper) {
+        for (Lotto lotto : lottoWrapper.getLottos()) {
             printLottoNumber(lotto);
         }
     }
