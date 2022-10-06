@@ -5,14 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StringCalculator {
-
-    private final static String SEPARATOR = " ";
     
     public int calculate(String expression) {
-        InputParser inputParser = new InputParser();
-        List<String> elementsOfExpression = Arrays.asList(expression.split(SEPARATOR));
+        InputParser inputParser = new InputParser(expression);
 
-        return execute(inputParser.parseOperand(elementsOfExpression), inputParser.parseOperator(elementsOfExpression));
+        return execute(inputParser.parseOperand(), inputParser.parseOperator());
     }
 
     private int execute(List<Integer> operandList, List<String> operatorList) {

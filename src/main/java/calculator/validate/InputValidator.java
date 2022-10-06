@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class InputValidator {
 
     private final static Pattern PATTERN_NUMBER = Pattern.compile("^-?\\d+$");
-    private final static Pattern PATTERN_OPER = Pattern.compile("[+\\-*/]");
+    private final static Pattern PATTERN_OPERATOR = Pattern.compile("[+\\-*/]");
     private final static String SEPARATOR = " ";
 
     private InputValidator() {
@@ -51,7 +51,7 @@ public class InputValidator {
         if (isNullOrSpace(text)) {
             return false;
         }
-        return PATTERN_OPER.matcher(text).matches();
+        return PATTERN_OPERATOR.matcher(text).matches();
     }
 
     private static boolean isNullOrSpace(String text) {
