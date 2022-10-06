@@ -22,8 +22,8 @@ public class LottoStatistics {
     }
 
     public int getMatchCount(Rank type) {
-        return (int) ranks.stream().
-                filter(t -> t.equals(type))
+        return (int) ranks.stream()
+                .filter(t -> t.equals(type))
                 .count();
     }
 }
