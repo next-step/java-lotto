@@ -5,6 +5,7 @@ import lotto.domain.LottoWrapper;
 import lotto.domain.Result;
 import lotto.enumerate.Rank;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -25,8 +26,10 @@ public class ResultView {
         return " ";
     }
 
-    public void printLottoNumber(LottoWrapper lottoWrapper) {
-        for (Lotto lotto : lottoWrapper.getLottos()) {
+    public void printLottoState(LottoWrapper lottoWrapper, int passiveLottoCount) {
+        List<Lotto> lottos = lottoWrapper.getLottos();
+        System.out.println("수동으로 " + passiveLottoCount + "장, 자동으로" + (lottos.size() - passiveLottoCount) + "개를 구매했습니다.");
+        for (Lotto lotto : lottos) {
             printLottoNumber(lotto);
         }
     }
