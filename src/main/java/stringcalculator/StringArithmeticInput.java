@@ -4,6 +4,7 @@ public class StringArithmeticInput {
     private static final String DELIMITER = " ";
 
     private final String input;
+
     public StringArithmeticInput(String input) {
         if (input == null || input.equalsIgnoreCase("")) {
             throw new IllegalArgumentException("공백은 불가능합니다");
@@ -14,39 +15,16 @@ public class StringArithmeticInput {
 
     public Number evaluate() {
         String[] expression = input.split(DELIMITER);
-
-        Number leftNumber = null;
-        Command command = null;
-        Number rightNumber = null;
+        ArithmeticExpression arithmeticExpression = new ArithmeticExpression();
 
         for (String value : expression) {
-            if (isNumber(value)) {
-                if (leftNumber == null) {
-                    leftNumber = Number.parse(value);
-                } else if (rightNumber == null) {
-                    rightNumber = Number.parse(value);
-                }
-            } else {
-                command = new CommandFactory().getCommand(value);
-            }
+            arithmeticExpression = arithmeticExpression.append(value);
 
-            if (leftNumber != null && command != null && rightNumber != null) {
-                leftNumber = command.execute(leftNumber, rightNumber);
-
-                command = null;
-                rightNumber = null;
+            if (arithmeticExpression.complete()) {
+                arithmeticExpression = arithmeticExpression.evaluate();
             }
         }
 
-        return leftNumber;
-    }
-
-    private boolean isNumber(String value) {
-        try {
-            Number.parse(value);
-            return true;
-        } catch(Exception e){
-            return false;
-        }
+        return arithmeticExpression.getResult();
     }
 }

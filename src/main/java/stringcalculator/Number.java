@@ -25,6 +25,15 @@ public class Number {
         return new Number(number);
     }
 
+    public static boolean isNumber(String stringNumber) {
+        try {
+            parse(stringNumber);
+            return true;
+        } catch(Exception e){
+            return false;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

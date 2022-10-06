@@ -1,4 +1,6 @@
-package stringcalculator;
+package stringcalculator.command;
+
+import stringcalculator.Number;
 
 @FunctionalInterface
 public interface Command {

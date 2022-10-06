@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import stringcalculator.command.AddCommand;
+
 public class CommandFactoryTest {
 
     @DisplayName("더하기에 해당하는 연산자를 가져온다")
