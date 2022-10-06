@@ -1,5 +1,7 @@
 package lotto.domain.vo;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -13,11 +15,19 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public static LottoNumbers valueOf(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+            .map(LottoNumber::new)
+            .collect(toList());
+
+        return new LottoNumbers(lottoNumbers);
+    }
+
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
             .sorted()
-            .collect(Collectors.toList());
+            .collect(toList());
     }
 
     public int countSameNumbers(LottoNumbers other) {

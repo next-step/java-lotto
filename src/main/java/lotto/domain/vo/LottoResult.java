@@ -8,11 +8,7 @@ public class LottoResult {
     private final LottoNumbers lottoNumbers;
 
     public LottoResult(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-            .map(LottoNumber::new)
-            .collect(toList());
-
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+        this.lottoNumbers = LottoNumbers.valueOf(numbers);
     }
 
     public LottoNumbers getLottoNumbers() {
