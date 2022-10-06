@@ -14,7 +14,10 @@ public class Result {
     public Result(List<Lotto> lottos, List<Integer> lastWeeksCollectNumberList, int bonusNumber) {
         this.saveInitMoney(lottos.size());
         for (Lotto lotto : lottos) {
-            this.saveResult(Rank.valueOf(lotto.getMatchCount(lastWeeksCollectNumberList), lotto.isMatchToBonusNumber(bonusNumber)));
+            int matchCount = lotto.getMatchCount(lastWeeksCollectNumberList);
+            boolean matchToBonusNumber = lotto.isMatchToBonusNumber(bonusNumber);
+            Rank rank = Rank.valueOf(matchCount, matchToBonusNumber);
+            this.saveResult(rank);
         }
     }
 
