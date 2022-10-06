@@ -6,6 +6,7 @@ import java.util.List;
 
 import lottogame.domain.enums.LottoGameRank;
 import lottogame.domain.lotto.LottoResult;
+import lottogame.domain.strategy.RangeLottoNumberPickerStrategy;
 import lottogame.domain.user.User;
 import lottogame.domain.user.UserLottoResult;
 
