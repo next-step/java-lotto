@@ -2,6 +2,8 @@ package lotto.enumerate;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000, false),
@@ -20,11 +22,11 @@ public enum Rank {
         this.isNeedBonus = isNeedBonus;
     }
 
-    public static Rank[] getOrderedRanks() {
+    public static List<Rank> getOrderedRanks() {
         return Arrays
                 .stream(Rank.values())
                 .sorted(Comparator.comparing(Rank::getWinningMoney))
-                .toArray(Rank[]::new);
+                .collect(Collectors.toList());
     }
 
     public int getCountOfMatch() {
