@@ -3,24 +3,16 @@ package stringcalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ATest {
+public class CalculatorTest {
 
     @Test
     void calculator_두숫자를더한다() {
-        String firstNumber = "1";
-        String secondNumber = "2";
-        int expected = 3;
-
-        Assertions.assertThat(Calculator.add(firstNumber, secondNumber)).isEqualTo(expected);
+        Assertions.assertThat(Calculator.add("1", "2")).isEqualTo("3");
     }
 
     @Test
     void calculator_두숫자를뺀다() {
-        String firstNumber = "1";
-        String secondNumber = "2";
-        int expected = -1;
-
-        Assertions.assertThat(Calculator.minus(firstNumber, secondNumber)).isEqualTo(expected);
+        Assertions.assertThat(Calculator.minus("1", "2")).isEqualTo("-1");
     }
 
     @Test
