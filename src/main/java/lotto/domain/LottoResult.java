@@ -11,7 +11,7 @@ public enum LottoResult {
     SECOND(1500000, 5),
     THIRD(50000, 4),
     FORTH(5000, 3),
-    NONE(0,0);
+    NONE(0, 0);
 
     public static final String 단위 = "원";
 

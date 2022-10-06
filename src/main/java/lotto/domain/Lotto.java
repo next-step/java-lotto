@@ -31,10 +31,17 @@ public class Lotto {
         return LottoResult.from(matchCount(winLottoNumber));
     }
 
-    private int matchCount (Lotto winLottoNumber) {
+    private int matchCount(Lotto winLottoNumber) {
         return winLottoNumber.getLottoNumbers()
                 .stream()
                 .filter(lottoNumbers::contains)
                 .collect(reducing(0, e -> 1, Integer::sum));
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }

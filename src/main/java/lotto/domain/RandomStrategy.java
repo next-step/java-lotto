@@ -1,14 +1,16 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
-import java.util.stream.IntStream;
 
 /**
  * Created by seungwoo.song on 2022-10-06
  */
 public class RandomStrategy implements LottoNumberProduceStrategy {
-    
+
     private final Supplier<Integer> numberSupplier;
     private final int count;
 

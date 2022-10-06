@@ -6,7 +6,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by seungwoo.song on 2022-10-06
@@ -15,7 +14,7 @@ class LottoTest {
 
     @Test
     void 생성() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(List.of(1,2,3,4,5,6,7)));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(List.of(1, 2, 3, 4, 5, 6, 7)));
     }
 
     @Test

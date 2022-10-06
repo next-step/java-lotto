@@ -16,7 +16,7 @@ public class Buy {
     }
 
     private int calculateCount(int price, int pay) {
-        if (pay % price != 0 ) {
+        if (pay % price != 0) {
             throw new IllegalArgumentException("잘못된 구매 금액 입니다");
         }
         return pay / price;

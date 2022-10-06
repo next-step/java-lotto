@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 /**
  * Created by seungwoo.song on 2022-10-06
  */
