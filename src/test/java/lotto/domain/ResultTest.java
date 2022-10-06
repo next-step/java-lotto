@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ResultTest {
 
     @Test
-    @DisplayName("로또 당첨 결과가 제대로 저장 테스트")
-    void saveResultTest2() {
+    @DisplayName("로또 당첨 결과가 제대로 저장되는지 테스트")
+    void saveResultTest() {
         int loseNumber = -1;
         int bonusNumber = 0;
         List<Integer> collectNumberList = Arrays.asList(1, 2, 3, 4, 5, 6);
