@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class LottoTest {
@@ -118,5 +117,18 @@ class LottoTest {
         LottoNumber bonusNumber = LottoNumber.of(6);
         Rank type = lottoA.rank(winLotto, bonusNumber);
         assertThat(type).isEqualTo(Rank.BONUS);
+    }
+
+    @DisplayName("로또 번호는 중복될 수 없다.")
+    @Test
+    void duplicate() {
+        assertThatThrownBy(() -> {
+            new ManualLotto(List.of(LottoNumber.of(1),
+                    LottoNumber.of(1),
+                    LottoNumber.of(3),
+                    LottoNumber.of(4),
+                    LottoNumber.of(5),
+                    LottoNumber.of(6)));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
