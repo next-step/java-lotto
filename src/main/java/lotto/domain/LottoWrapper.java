@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.enumerate.Rank;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoWrapper {
@@ -20,7 +21,7 @@ public class LottoWrapper {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
 
