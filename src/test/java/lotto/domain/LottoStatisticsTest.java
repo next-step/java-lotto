@@ -32,7 +32,7 @@ class LottoStatisticsTest {
                 new LottoNumber(9),
                 new LottoNumber(10),
                 new LottoNumber(11));
-        Lotto winLotto = new Lotto(lottoNumbersB);
+        Lotto winLotto = new ManualLotto(lottoNumbersB);
 
         LottoNumber bonusNumber = LottoNumber.of(45);
         LottoStatistics lottoStatistics = new LottoStatistics(lottos, new WinningLotto(winLotto, bonusNumber));
@@ -50,7 +50,7 @@ class LottoStatisticsTest {
                 new LottoNumber(5),
                 new LottoNumber(6));
 
-        Lotto winLotto = new Lotto(lottoNumbers);
+        Lotto winLotto = new ManualLotto(lottoNumbers);
         Lottos lottos = getLottosFixture();
 
         LottoNumber bonusNumber = LottoNumber.of(45);
@@ -66,7 +66,7 @@ class LottoStatisticsTest {
                 new LottoNumber(4),
                 new LottoNumber(5),
                 new LottoNumber(6));
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new ManualLotto(lottoNumbers);
 
         return new Lottos(List.of(lotto));
     }

@@ -4,13 +4,11 @@ import lotto.domain.type.Rank;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumber.MAX;
-import static lotto.domain.LottoNumber.MIN;
 
-
-public class Lotto {
+public abstract class Lotto {
     public static final int PRICE = 1000;
 
     private static final int LOTTO_SIZE = 6;
@@ -18,16 +16,7 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public static Lotto create() {
-        List<LottoNumber> numbers = RandomGenerator.randomNumbers(LOTTO_SIZE, MIN, MAX)
-                .stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-
-        return new Lotto(numbers);
-    }
-
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    protected Lotto(List<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .sorted()
@@ -54,5 +43,24 @@ public class Lotto {
 
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public abstract boolean isAuto();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Lotto)) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return lottoNumbers.equals(lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

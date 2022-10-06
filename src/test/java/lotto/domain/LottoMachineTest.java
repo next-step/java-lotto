@@ -7,10 +7,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
-    @DisplayName("금액에 맞는 로또 수량을 구매한다.")
+    @DisplayName("금액에 맞는 로또 수량을 생성한다.")
     @Test
     void buy() {
-        Lottos lottos = LottoMachine.createPerPrice(14000);
+        Lottos lottos = LottoMachine.createAutoLottos(14000);
 
         assertThat(lottos.quantity()).isEqualTo(14);
     }
