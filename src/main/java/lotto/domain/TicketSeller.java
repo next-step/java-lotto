@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.enums.LottoGameRank;
-import lotto.domain.vo.LottoResult;
-import lotto.domain.vo.Money;
+import static java.util.stream.Collectors.*;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
+import lotto.domain.enums.LottoGameRank;
+import lotto.domain.vo.LottoResult;
+import lotto.domain.vo.Money;
 
 public class TicketSeller {
     private static final Money TICKET_PRICE = new Money(1_000);

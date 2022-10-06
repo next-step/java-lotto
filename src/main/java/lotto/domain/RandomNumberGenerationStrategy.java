@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.vo.LottoNumber;
+import static java.util.stream.Collectors.*;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
+import lotto.domain.vo.LottoNumber;
 
 public class RandomNumberGenerationStrategy implements NumberGenerationStrategy {
     private static final int START_NUMBER = 1;

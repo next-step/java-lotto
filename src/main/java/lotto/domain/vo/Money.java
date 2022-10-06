@@ -45,7 +45,7 @@ public class Money {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        Money money1 = (Money) o;
+        Money money1 = (Money)o;
         return money == money1.money;
     }
 

@@ -1,18 +1,19 @@
 package lotto.domain;
 
-import lotto.domain.enums.LottoGameRank;
-import lotto.domain.vo.Money;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static java.util.stream.Collectors.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import lotto.domain.enums.LottoGameRank;
+import lotto.domain.vo.Money;
 
 class UserLottoResultTest {
 

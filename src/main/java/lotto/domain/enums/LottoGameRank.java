@@ -1,8 +1,8 @@
 package lotto.domain.enums;
 
-import lotto.domain.vo.Money;
-
 import java.util.Arrays;
+
+import lotto.domain.vo.Money;
 
 public enum LottoGameRank {
     FIRST(new Money(2_000_000_000), 6),
@@ -13,7 +13,6 @@ public enum LottoGameRank {
 
     private final Money reward;
     private final int rankConditionCount;
-
 
     LottoGameRank(Money reward, int rankConditionCount) {
         this.reward = reward;

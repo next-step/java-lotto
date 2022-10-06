@@ -1,14 +1,15 @@
 package lotto.domain.entity;
 
-import lotto.domain.vo.LottoNumber;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static java.util.stream.Collectors.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import lotto.domain.vo.LottoNumber;
 
 class LottoTicketTest {
     @Test

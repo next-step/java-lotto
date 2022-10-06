@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.enums.LottoGameRank;
-import lotto.domain.vo.Money;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+
+import lotto.domain.enums.LottoGameRank;
+import lotto.domain.vo.Money;
 
 public class UserLottoResult {
     private final Money ticketsPrice;
@@ -17,7 +17,7 @@ public class UserLottoResult {
     }
 
     public int countRank(LottoGameRank target) {
-        return (int) ranks.stream()
+        return (int)ranks.stream()
             .filter(rank -> rank == target)
             .count();
     }

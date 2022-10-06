@@ -21,7 +21,7 @@ public class LottoNumbers {
     }
 
     public int countSameNumbers(LottoNumbers other) {
-        return (int) other.lottoNumbers.stream()
+        return (int)other.lottoNumbers.stream()
             .filter(this.lottoNumbers::contains)
             .count();
     }
@@ -50,7 +50,7 @@ public class LottoNumbers {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        LottoNumbers that = (LottoNumbers) o;
+        LottoNumbers that = (LottoNumbers)o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 

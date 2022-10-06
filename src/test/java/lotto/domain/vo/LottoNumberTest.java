@@ -1,9 +1,9 @@
 package lotto.domain.vo;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.assertj.core.api.Assertions.*;
 
 class LottoNumberTest {
     @ParameterizedTest(name = "범위 내의 숫자로 로또 숫자 생성: {0}")

@@ -1,14 +1,15 @@
 package lotto.domain;
 
-import lotto.domain.vo.LottoNumber;
-import lotto.domain.vo.Money;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import static java.util.stream.Collectors.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.Money;
 
 class UserTest {
 

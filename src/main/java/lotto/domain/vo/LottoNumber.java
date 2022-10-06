@@ -29,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        LottoNumber that = (LottoNumber) o;
+        LottoNumber that = (LottoNumber)o;
         return number == that.number;
     }
 

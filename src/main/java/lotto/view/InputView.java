@@ -1,13 +1,13 @@
 package lotto.view;
 
-import lotto.domain.User;
-import lotto.domain.vo.Money;
+import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.util.stream.Collectors.toList;
+import lotto.domain.User;
+import lotto.domain.vo.Money;
 
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);

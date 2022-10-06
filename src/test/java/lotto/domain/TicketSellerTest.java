@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.vo.Money;
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import lotto.domain.vo.Money;
 
 class TicketSellerTest {
     @ParameterizedTest(name = "사용자가 최대한 티켓을 사고 남은 잔돈과 티켓 수를 검증한다, 소유액: {0}, 티켓 수: {1}, 잔액: {2}")

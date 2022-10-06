@@ -1,13 +1,13 @@
 package lotto.view;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import lotto.domain.User;
 import lotto.domain.UserLottoResult;
 import lotto.domain.entity.LottoTicket;
 import lotto.domain.enums.LottoGameRank;
 import lotto.domain.vo.LottoNumber;
-
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class OutputView {
     public void printTickets(User user) {

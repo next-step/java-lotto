@@ -1,11 +1,11 @@
 package lotto.domain.entity;
 
-import lotto.domain.vo.LottoNumber;
-import lotto.domain.vo.LottoNumbers;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.LottoNumbers;
 
 public class LottoTicket {
     private final String ticketId;
@@ -30,7 +30,7 @@ public class LottoTicket {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        LottoTicket that = (LottoTicket) o;
+        LottoTicket that = (LottoTicket)o;
         return Objects.equals(ticketId, that.ticketId) && Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
