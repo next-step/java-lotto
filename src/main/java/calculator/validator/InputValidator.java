@@ -1,4 +1,4 @@
-package calculator.validate;
+package calculator.validator;
 
 import java.util.InputMismatchException;
 import java.util.regex.Pattern;
