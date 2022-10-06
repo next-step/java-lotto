@@ -17,6 +17,10 @@ public class LottoTicket {
         return this.lottoNumbers.countSameNumbers(lottoNumbers);
     }
 
+    public boolean hasSameBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.hasNumber(bonusNumber);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers.getValue();
     }

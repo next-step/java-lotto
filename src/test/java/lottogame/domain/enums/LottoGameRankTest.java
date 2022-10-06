@@ -11,17 +11,18 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoGameRankTest {
     @ParameterizedTest(name = "티켓과 결과가 주어졌을 때 등수 탐색: {0} -> {1}")
     @MethodSource(value = "provideTicketAndResult")
-    void findRank(int sameNumberCount, LottoGameRank expectedRank) {
-        assertThat(LottoGameRank.findRank(sameNumberCount)).isEqualTo(expectedRank);
+    void findRank(int sameNumberCount, boolean hasSameBonusNumber, LottoGameRank expectedRank) {
+        assertThat(LottoGameRank.findRank(sameNumberCount, hasSameBonusNumber)).isEqualTo(expectedRank);
     }
 
     private static Stream<Arguments> provideTicketAndResult() {
         return Stream.of(
-            Arguments.of(6, LottoGameRank.FIRST),
-            Arguments.of(5, LottoGameRank.THIRD),
-            Arguments.of(4, LottoGameRank.FOURTH),
-            Arguments.of(3, LottoGameRank.FIFTH),
-            Arguments.of(0, LottoGameRank.NONE)
+            Arguments.of(6, false, LottoGameRank.FIRST),
+            Arguments.of(5, true, LottoGameRank.SECOND),
+            Arguments.of(5, false, LottoGameRank.THIRD),
+            Arguments.of(4, false, LottoGameRank.FOURTH),
+            Arguments.of(3, false, LottoGameRank.FIFTH),
+            Arguments.of(0, false, LottoGameRank.NONE)
         );
     }
 }

@@ -42,11 +42,12 @@ class TicketMachineTest {
 
     private static Stream<Arguments> provideLottoResult() {
         return Stream.of(
-            Arguments.of(new LottoResult(List.of(1, 2, 3, 4, 5, 6), 1), LottoGameRank.FIRST),
-            Arguments.of(new LottoResult(List.of(1, 2, 3, 4, 5, 7), 1), LottoGameRank.THIRD),
-            Arguments.of(new LottoResult(List.of(1, 2, 3, 4, 7, 8), 1), LottoGameRank.FOURTH),
-            Arguments.of(new LottoResult(List.of(1, 2, 3, 7, 8, 9), 1), LottoGameRank.FIFTH),
-            Arguments.of(new LottoResult(List.of(1, 2, 7, 8, 9, 10), 1), LottoGameRank.NONE)
+            Arguments.of(new LottoResult(List.of(1, 2, 3, 4, 5, 6), 11), LottoGameRank.FIRST),
+            Arguments.of(new LottoResult(List.of(1, 2, 3, 4, 5, 7), 6), LottoGameRank.SECOND),
+            Arguments.of(new LottoResult(List.of(1, 2, 3, 4, 5, 7), 11), LottoGameRank.THIRD),
+            Arguments.of(new LottoResult(List.of(1, 2, 3, 4, 7, 8), 11), LottoGameRank.FOURTH),
+            Arguments.of(new LottoResult(List.of(1, 2, 3, 7, 8, 9), 11), LottoGameRank.FIFTH),
+            Arguments.of(new LottoResult(List.of(1, 2, 7, 8, 9, 10), 11), LottoGameRank.NONE)
         );
     }
 }

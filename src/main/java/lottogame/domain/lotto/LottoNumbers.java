@@ -31,8 +31,12 @@ public class LottoNumbers {
 
     public int countSameNumbers(LottoNumbers other) {
         return (int)other.lottoNumbers.stream()
-            .filter(this.lottoNumbers::contains)
+            .filter(this::hasNumber)
             .count();
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {

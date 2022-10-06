@@ -14,4 +14,8 @@ public class LottoResult {
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }

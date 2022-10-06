@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoNumbersTest {
@@ -44,6 +45,17 @@ class LottoNumbersTest {
     void countSameNumbers(List<LottoNumber> numbers, int expected) {
         LottoNumbers lottoNumbers = new LottoNumbers(createLottoNumberList(1, 2, 3, 4, 5, 6));
         assertThat(lottoNumbers.countSameNumbers(new LottoNumbers(numbers))).isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "로또 숫자들이 주어졌을 때 해당 숫자가 포함되어 있는지 체크한다: {1}개")
+    @CsvSource({
+        "1,true",
+        "6,true",
+        "7,false"
+    })
+    void hasNumber(int number, boolean expected) {
+        LottoNumbers lottoNumbers = new LottoNumbers(createLottoNumberList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoNumbers.hasNumber(new LottoNumber(number))).isEqualTo(expected);
     }
 
     private static List<LottoNumber> createLottoNumberList(int... numbers) {

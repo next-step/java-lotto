@@ -10,6 +10,6 @@ public class TicketMachine {
     }
 
     public LottoGameRank verifyRank(LottoTicket ticket, LottoResult result) {
-        return LottoGameRank.findRank(ticket.countSameNumbers(result.getLottoNumbers()));
+        return LottoGameRank.findRank(ticket.countSameNumbers(result.getLottoNumbers()), ticket.hasSameBonusNumber(result.getBonusNumber()));
     }
 }
