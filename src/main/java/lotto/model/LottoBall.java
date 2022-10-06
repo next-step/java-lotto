@@ -1,7 +1,7 @@
 package lotto.model;
 
 
-import lotto.service.LottoNumberPicker;
+import lotto.service.RandomNumberGenerator;
 
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public class LottoBall {
 
 
     private boolean validateLottoNumber(int num) {
-        return num < 0 || num >= LottoNumberPicker.MAX_BOUND_NUM;
+        return num < 0 || num >= RandomNumberGenerator.MAX_BOUND_NUM;
     }
 
     @Override

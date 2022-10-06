@@ -15,6 +15,8 @@ public enum MatchNumber {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
+    private static final int BONUS_OR_SINGLE_MATCH_NUMBER_INDEX = 0;
+    private static final int NO_BONUS_MATCH_NUMBER_INDEX = 1;
     private final Integer count;
 
     private final Integer money;
@@ -37,13 +39,13 @@ public enum MatchNumber {
 
     private static MatchNumber getMatchNumberByBonusBall(boolean hasBonusBall, List<MatchNumber> matchNumbers) {
         int foundMatchNumbers = matchNumbers.size();
-        if (foundMatchNumbers == 0) {
+        if (foundMatchNumbers == MatchNumber.NONE.count) {
             return MatchNumber.NONE;
         }
         if (foundMatchNumbers == 1 || hasBonusBall) {
-            return matchNumbers.get(0);
+            return matchNumbers.get(BONUS_OR_SINGLE_MATCH_NUMBER_INDEX);
         }
-        return matchNumbers.get(1);
+        return matchNumbers.get(NO_BONUS_MATCH_NUMBER_INDEX);
     }
 
     public Integer getCount() {
