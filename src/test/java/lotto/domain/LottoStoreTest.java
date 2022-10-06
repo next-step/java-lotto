@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static lotto.domain.fixture.Fixture.getLottoNumbersFixture;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStoreTest {
@@ -18,12 +19,7 @@ class LottoStoreTest {
 
         Lottos lottos = lottoStore.buy(request);
 
-        List<LottoNumber> lottoNumbers = List.of(LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6));
+        List<LottoNumber> lottoNumbers = getLottoNumbersFixture(1, 2, 3, 4, 5, 6);
         assertThat(lottos.values()).contains(new ManualLotto(lottoNumbers));
         assertThat(lottos.quantity()).isEqualTo(5);
     }
