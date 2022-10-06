@@ -18,15 +18,15 @@ public class NumberCalculation {
         this.number += number;
     }
 
-    public void subtract(int number) {
+    public void subtract(final int number) {
         this.number -= number;
     }
 
-    public void multiply(int number) {
+    public void multiply(final int number) {
         this.number *= number;
     }
 
-    public void divided(int number) {
+    public void divided(final int number) {
         this.number /= number;
     }
 
