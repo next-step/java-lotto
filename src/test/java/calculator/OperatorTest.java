@@ -1,15 +1,15 @@
 package calculator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OperatorTest {
 
     @Test
     void 잘못된_연산자는_에러() {
-        Assertions.assertThatThrownBy(() -> Operator.from("%"))
+        assertThatThrownBy(() -> Operator.from("%"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -17,5 +17,10 @@ class OperatorTest {
     void 영으로_나누면_에러() {
         assertThatThrownBy(() -> Operator.DIVIDE.operate(3, 0))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 피연산자는_들어올_수_없다() {
+        assertThat(Operator.isOperator("3")).isFalse();
     }
 }
