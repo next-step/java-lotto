@@ -9,11 +9,12 @@ import java.util.stream.Collectors;
 public class ExpressionParser {
 
     private static final Pattern EXPRESSION_PATTERN = Pattern.compile("[\\d */+-]+");
+    private static final String DEFAULT_DELIMITER = "";
     private String[] tokens;
 
     public ExpressionParser(String expression) {
         valid(expression);
-        tokens = expression.split(" ");
+        tokens = expression.split(DEFAULT_DELIMITER);
     }
 
     private void valid(String expression) {
