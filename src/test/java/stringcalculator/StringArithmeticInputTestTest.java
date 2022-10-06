@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class StringArithmeticInputTestTest {
@@ -27,5 +28,12 @@ public class StringArithmeticInputTestTest {
                       new StringArithmeticInput(input);
                   })
                   .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = { "1+2+3,6", "2*3*4,24", "1+11/4,3" })
+    void 계산한다(String input, int expected) {
+        Assertions.assertThat(new StringArithmeticInput(input).evaluate())
+                  .isEqualTo(Number.of(expected));
     }
 }
