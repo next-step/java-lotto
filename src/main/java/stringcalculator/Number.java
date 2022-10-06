@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Number {
     private final int value;
 
-    public Number(String stringNumber) {
+    private Number(String stringNumber) {
         try {
             this.value = Integer.parseInt(stringNumber);
         } catch(Exception e){
@@ -13,8 +13,16 @@ public class Number {
         }
     }
 
-    public Number(int value) {
+    private Number(int value) {
         this.value = value;
+    }
+
+    public static Number parse(String stringNumber) {
+        return new Number(stringNumber);
+    }
+
+    public static Number of(int number) {
+        return new Number(number);
     }
 
     @Override
@@ -36,5 +44,9 @@ public class Number {
 
     public Number add(Number number) {
         return new Number(this.value + number.value);
+    }
+
+    public Number minus(Number number) {
+        return new Number(this.value - number.value);
     }
 }
