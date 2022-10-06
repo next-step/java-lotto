@@ -15,7 +15,7 @@ class OperatorTest {
 
     @Test
     void 영으로_나누면_에러() {
-        assertThatThrownBy(() -> Operator.DIVIDE.operate(3, 0))
+        assertThatThrownBy(() -> Operator.DIVIDE.operate(Operand.from( 3), Operand.from(0)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
