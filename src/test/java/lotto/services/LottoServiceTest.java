@@ -17,5 +17,4 @@ class LottoServiceTest {
         assertThat(lottoService.issueLotto(count).size()).isEqualTo(count);
     }
 
-
 }
