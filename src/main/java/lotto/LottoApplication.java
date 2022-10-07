@@ -23,5 +23,8 @@ public class LottoApplication {
         LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
         List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, winningNumber);
         Printer.printStatistics(lottoStatistics);
+
+        float RevenueRatio = lottoStatisticsService.getRevenueRatio(lottoStatistics, Integer.parseInt(payment));
+        Printer.printRevenueRatio(RevenueRatio);
     }
 }
