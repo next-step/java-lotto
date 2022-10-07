@@ -32,7 +32,13 @@ public class LottoStatisticsService {
     }
 
     public float getRevenueRatio(List<LottoStatistics> lottoStatistics, int payment) {
-        return 0f;
+        long totalAmount = lottoStatistics.stream()
+                .filter(statistics -> statistics.getCount() > 0)
+                .map(statistics -> statistics.getRank().getAmount())
+                .mapToLong(Long::longValue)
+                .sum();
+
+        return totalAmount / (payment / 1000f * 1000);
     }
 
 }
