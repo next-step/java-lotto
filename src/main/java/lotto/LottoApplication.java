@@ -16,5 +16,7 @@ public class LottoApplication {
         String payment = Printer.requestPayment();
         List<Lotto> lottos = lottoService.issueLotto(Integer.parseInt(payment) / 1000);
         Printer.printLottoNumbers(lottos);
+
+        String winningNumber = Printer.requestWinningNumber();
     }
 }
