@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,15 +9,14 @@ public class LottoNumbersWrapper {
     public LottoNumbersWrapper(List<Integer> numbers) {
         this.numbers = numbers
                 .stream()
-                .map(integer -> new LottoNo(integer))
+                .map(LottoNo::new)
                 .collect(Collectors.toList());
     }
 
     public List<Integer> getNumbers() {
-        List<Integer> collect = numbers.stream()
+        return numbers.stream()
                 .map(LottoNo::getLottoNumber)
-                .collect(Collectors.toList());
-        return Collections.unmodifiableList(collect);
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public boolean contains(Integer number) {
