@@ -1,26 +1,17 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.Set;
+import org.junit.jupiter.api.RepeatedTest;
 
 import static org.assertj.core.api.Assertions.*;
 
 class RandomGeneratorTest {
 
-    @DisplayName("중복된 번호는 생성되지 않는다.")
-    @Test
+    @DisplayName("범위 내 번호가 생성된다.")
+    @RepeatedTest(100)
     void set() {
-        int size = 5;
-        Set<Integer> numbers = RandomGenerator.randomNumbers(size, 1, 5);
+        int number = RandomGenerator.randomNumber(1, 10);
 
-        assertThat(numbers).hasSize(size);
-    }
-
-    @DisplayName("범위보다 큰 사이즈를 입력하면 예외가 발생한다.")
-    @Test
-    void setException() {
-        assertThatThrownBy(() -> RandomGenerator.randomNumbers(6, 1, 5)).isInstanceOf(IllegalArgumentException.class);
+        assertThat(number).isBetween(1, 10);
     }
 }
