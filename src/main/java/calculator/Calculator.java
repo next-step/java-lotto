@@ -25,10 +25,6 @@ public class Calculator {
     }
 
     private static int getOperand(String value) {
-        value = value.trim();
-        if (value.length() == 0) {
-            throw new IllegalArgumentException("연산에 필요한 피연산자가 입력되지 않았습니다.");
-        }
         if (!value.matches(INTEGER_REGEX)) {
             throw new IllegalArgumentException("피연산자는 정수만 가능합니다.");
         }

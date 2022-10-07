@@ -21,7 +21,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"1 ) 2", "1 + 2 $ 3"})
+    @ValueSource(strings = {"1 ) 2", "1 + 2 $ 3", "s + 1", "s"})
     void 비정상_계산(String text) {
         assertThatThrownBy(() -> Calculator.calculate(text))
                 .isInstanceOf(IllegalArgumentException.class);
