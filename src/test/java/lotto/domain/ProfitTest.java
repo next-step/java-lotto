@@ -14,9 +14,7 @@ class ProfitTest {
     @DisplayName("당첨 금액이 55000원이고 로또 구입 금액이 5000원이면 수익률은 11퍼센트이다.")
     @Test
     void profit() {
-        Reward reward = new Reward(List.of(Rank.FIFTH, Rank.FOURTH, Rank.MISS, Rank.MISS, Rank.MISS));
-
-        Profit profit = new Profit(reward);
+        Profit profit = new Profit(List.of(Rank.FIFTH, Rank.FOURTH, Rank.MISS, Rank.MISS, Rank.MISS));
 
         assertThat(profit.value()).isEqualTo(11.00);
     }
@@ -24,9 +22,7 @@ class ProfitTest {
     @DisplayName("당첨 금액이 없으면 수익률은 0이다.")
     @Test
     void zeroProfit() {
-        Reward reward = new Reward(List.of(Rank.MISS, Rank.MISS, Rank.MISS));
-
-        Profit profit = new Profit(reward);
+        Profit profit = new Profit(List.of(Rank.MISS, Rank.MISS, Rank.MISS));
 
         assertThat(profit.value()).isEqualTo(0);
     }

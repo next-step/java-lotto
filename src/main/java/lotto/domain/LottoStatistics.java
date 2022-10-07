@@ -14,7 +14,7 @@ public class LottoStatistics {
 
     public LottoStatistics(List<Rank> ranks) {
         this.ranks = ranks;
-        this.profit = new Profit(new Reward(ranks));
+        this.profit = new Profit(ranks);
     }
 
     public double profit() {

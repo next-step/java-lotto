@@ -1,18 +1,19 @@
 package lotto.domain;
 
+import lotto.domain.type.Rank;
+
+import java.util.List;
+
 public class Profit {
     private final double value;
 
-    public Profit(Reward reward) {
-        this.value = calculate(reward);
-    }
+    public Profit(List<Rank> ranks) {
+        int numberOfReward = ranks.size();
+        long totalReward = ranks.stream()
+                .mapToLong(Rank::winningMoney)
+                .sum();
 
-    private double calculate(Reward reward) {
-        if (reward.isNone()) {
-            return reward.value();
-        }
-
-        return reward.value() / (Lotto.PRICE * (double) reward.numberOfReward());
+        this.value = totalReward / (Lotto.PRICE * (double) numberOfReward);
     }
 
     public double value() {
