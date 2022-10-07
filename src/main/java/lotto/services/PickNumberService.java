@@ -2,10 +2,10 @@ package lotto.services;
 
 import lotto.strategy.PickNumberStrategy;
 
-import java.util.List;
+import java.util.Set;
 
 public class PickNumberService {
-    public List<Integer> pickNumbers(PickNumberStrategy strategy) {
+    public Set<Integer> pickNumbers(PickNumberStrategy strategy) {
         return strategy.getNumbers();
     }
 }

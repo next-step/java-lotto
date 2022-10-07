@@ -1,7 +1,7 @@
 package lotto.strategy;
 
-import java.util.List;
+import java.util.Set;
 
 public interface PickNumberStrategy {
-    List<Integer> getNumbers();
+    Set<Integer> getNumbers();
 }

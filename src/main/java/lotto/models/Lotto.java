@@ -1,13 +1,20 @@
 package lotto.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
-    private List<Integer> numbers = new ArrayList<>();
+    private final Set<Integer> numbers;
 
-    public List<Integer> getNumbers() {
+    private Lotto(Set<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
+    public Set<Integer> getNumbers() {
         return numbers;
+    }
+
+    public static Lotto of(Set<Integer> numbers) {
+        return new Lotto(numbers);
     }
 }
