@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -24,6 +26,13 @@ public class Lotto {
         if (numbers.size() != SIZE_OF_NUMBERS) {
             throw new IllegalArgumentException(String.format("로또는 %d개의 번호로 구성되어야 합니다.", SIZE_OF_NUMBERS));
         }
+    }
+
+    public int countMatchNumbers(Lotto lotto) {
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(this.sortedNumbers);
+        return (int) lotto.sortedNumbers.stream()
+                .filter(lottoNumberSet::contains)
+                .count();
     }
 
     public List<LottoNumber> getNumbers() {
