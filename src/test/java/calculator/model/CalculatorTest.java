@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
 
+    Calculator calculator = new Calculator();
+
     @ParameterizedTest
     @CsvSource(value = {"1 + 2, 3", "1 + 2 * 3, 9", "1 + 2 * 4 / 2, 6"})
     void calculate(String input, int expected) {
         Expression expression = new Expression(input);
-        Calculator calculator = new Calculator();
-
         assertThat(calculator.calculate(expression.getNumbers(), expression.getOperator())).isEqualTo(expected);
     }
 }
