@@ -10,6 +10,10 @@ public class NumberCalculation {
         this.number = number;
     }
 
+    public NumberCalculation(String number) {
+        this.number = Integer.parseInt(number);
+    }
+
     public int getNumber() {
         return number;
     }

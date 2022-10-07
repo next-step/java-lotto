@@ -10,11 +10,11 @@ public class Calculator {
     public static void main(String[] args) {
         final String[] calculationFormula = scanCalculationFormula();
 
-        final NumberCalculation result = new NumberCalculation(0);
+        final NumberCalculation result = new NumberCalculation(calculationFormula[0]);
 
-        for (int i = 0; i < calculationFormula.length - 1; i += 2) {
-            Operator operator = Operator.findByOperator(calculationFormula[i + 1]);
-            int number = Integer.parseInt(calculationFormula[i]);
+        for (int i = 1; i < calculationFormula.length - 1; i += 2) {
+            Operator operator = Operator.findByOperator(calculationFormula[i]);
+            int number = Integer.parseInt(calculationFormula[i + 1]);
 
             operator.calculate(result, number);
         }
