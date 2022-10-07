@@ -43,9 +43,9 @@ public class Printer {
                 });
     }
 
-    public static void printRevenueRatio(float RevenueRatio) {
-        String description = String.format("총 수익률은 %.2f입니다.", RevenueRatio);
-        if (RevenueRatio < 1) {
+    public static void printRevenueRatio(float revenueRatio) {
+        String description = String.format("총 수익률은 %.2f입니다.", revenueRatio);
+        if (revenueRatio < 1) {
             description = description.concat("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
         System.out.println(description);
