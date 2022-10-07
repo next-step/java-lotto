@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumbersWrapper;
 import lotto.domain.LottoWrapper;
 import lotto.domain.Result;
 import lotto.view.InputView;
@@ -22,8 +23,8 @@ public class LottoApplication {
 //        int passiveLottoCount = 3;
 
         // 수동 로또 번호 입력
-        List<List<Integer>> numbersCollection = inputView.inputPassiveLottoNumbers(passiveLottoCount);
-//        List<List<Integer>> numbersCollection = new ArrayList<>();
+        List<LottoNumbersWrapper> numbersCollection = inputView.inputPassiveLottoNumbers(passiveLottoCount);
+//        List<LottoNumbersWrapper> numbersCollection = new ArrayList<>();
 //        numbersCollection.add(Arrays.asList(8, 21, 23, 41, 42, 43));
 //        numbersCollection.add(Arrays.asList(3, 5, 11, 16, 32, 38));
 //        numbersCollection.add(Arrays.asList(7, 11, 16, 35, 36, 44));
@@ -35,7 +36,7 @@ public class LottoApplication {
         resultView.printLottoState(lottoWrapper, passiveLottoCount);
 
         // 지난 주 당첨 번호 입력
-        List<Integer> lastWeeksCollectNumbers = inputView.inputLastWeeksCollectNumbers();
+        LottoNumbersWrapper lastWeeksCollectNumbers = inputView.inputLastWeeksCollectNumbers();
 
         // 보너스 볼 번호 입력
         int bonusNumber = inputView.inputBonusNumber();

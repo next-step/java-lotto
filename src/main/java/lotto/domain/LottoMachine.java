@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    public LottoWrapper buyLotto(int purchaseAmount, int passiveLottoCount, List<List<Integer>> passiveLottoNumbersCollection) {
+    public LottoWrapper buyLotto(int purchaseAmount, int passiveLottoCount, List<LottoNumbersWrapper> passiveLottoNumbersCollection) {
         List<Lotto> lottos = new ArrayList<>();
 
         lottos.addAll(buyPassiveLotto(passiveLottoNumbersCollection));
@@ -14,9 +14,9 @@ public class LottoMachine {
         return new LottoWrapper(lottos);
     }
 
-    private List<Lotto> buyPassiveLotto(List<List<Integer>> passiveLottoNumbersCollection) {
+    private List<Lotto> buyPassiveLotto(List<LottoNumbersWrapper> passiveLottoNumbersCollection) {
         List<Lotto> lottos = new ArrayList<>();
-        for (List<Integer> numbers : passiveLottoNumbersCollection) {
+        for (LottoNumbersWrapper numbers : passiveLottoNumbersCollection) {
             lottos.add(new Lotto(numbers));
         }
         return lottos;

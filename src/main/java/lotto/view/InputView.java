@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbersWrapper;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +15,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public List<Integer> inputLastWeeksCollectNumbers() {
+    public LottoNumbersWrapper inputLastWeeksCollectNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String lastWeeksCollectNumbers = scanner.nextLine();
@@ -32,9 +34,9 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public List<List<Integer>> inputPassiveLottoNumbers(int passiveLottoCount) {
+    public List<LottoNumbersWrapper> inputPassiveLottoNumbers(int passiveLottoCount) {
         System.out.println("\n수동으로 구매할 번호를 입력해주세요.");
-        List<List<Integer>> numbersCollection = new ArrayList<>();
+        List<LottoNumbersWrapper> numbersCollection = new ArrayList<>();
         for (int index = 0; index < passiveLottoCount; index++) {
             Scanner scanner = new Scanner(System.in);
             String numbersString = scanner.nextLine();
@@ -43,12 +45,13 @@ public class InputView {
         return numbersCollection;
     }
 
-    private List<Integer> getLottoNumbers(String numbersString) {
+    private LottoNumbersWrapper getLottoNumbers(String numbersString) {
         String[] split = numbersString.split(", ");
-        return Arrays
+        List<Integer> collect = Arrays
                 .stream(split)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
+        return new LottoNumbersWrapper(collect);
     }
 }
