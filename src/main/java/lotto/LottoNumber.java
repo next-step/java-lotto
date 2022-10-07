@@ -1,10 +1,18 @@
 package lotto;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
+
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    public static final List<LottoNumber> LOTTO_NUMBERS = IntStream
+        .range(MIN_NUMBER, MAX_NUMBER)
+        .mapToObj(LottoNumber::from)
+        .collect(Collectors.toList());
 
     private int number;
 

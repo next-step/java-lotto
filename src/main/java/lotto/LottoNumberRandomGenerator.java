@@ -6,14 +6,13 @@ import java.util.List;
 
 public class LottoNumberRandomGenerator {
 
-    public List<Integer> generate() {
-        List<Integer> numList = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numList.add(i);
-        }
-        Collections.shuffle(numList);
+    private LottoNumberRandomGenerator() {
+    }
 
-        List<Integer> subList = numList.subList(0, 6);
+    public static List<LottoNumber> generate() {
+        List<LottoNumber> numbers = LottoNumber.LOTTO_NUMBERS;
+        Collections.shuffle(numbers);
+        List<LottoNumber> subList = numbers.subList(0, 6);
 
         return subList;
     }
