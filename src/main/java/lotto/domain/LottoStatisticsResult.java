@@ -9,16 +9,17 @@ public class LottoStatisticsResult {
 
     private final Map<LottoRank, Long> countByRank;
 
-    public LottoStatisticsResult(List<LottoRank> ranks) {
-        this(ranks.stream()
+    public LottoStatisticsResult(Map<LottoRank, Long> countByRank) {
+        this.countByRank = countByRank;
+    }
+
+    public static LottoStatisticsResult from(List<LottoRank> ranks) {
+        Map<LottoRank, Long> countByRank = ranks.stream()
                 .collect(Collectors.groupingBy(
                         rank -> rank,
                         Collectors.counting()
-                )));
-    }
-
-    public LottoStatisticsResult(Map<LottoRank, Long> countByRank) {
-        this.countByRank = countByRank;
+                ));
+        return new LottoStatisticsResult(countByRank);
     }
 
     public long getCountByRank(LottoRank rank) {

@@ -14,7 +14,7 @@ class LottoStatisticsResultTest {
     @Test
     void create_givenRankList() {
         List<LottoRank> ranks = List.of(LottoRank.FIRST, LottoRank.SECOND, LottoRank.FOURTH, LottoRank.NONE, LottoRank.FIRST);
-        assertThat(new LottoStatisticsResult(ranks)).isEqualTo(new LottoStatisticsResult(
+        assertThat(LottoStatisticsResult.from(ranks)).isEqualTo(new LottoStatisticsResult(
                 Map.ofEntries(
                         Map.entry(LottoRank.FIRST, 2L),
                         Map.entry(LottoRank.SECOND, 1L),
