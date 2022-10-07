@@ -19,6 +19,14 @@ public enum Rank {
         this.amount = amount;
     }
 
+    public int getEqualCount() {
+        return equalCount;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
     public static Rank of(int equalCount) {
         Optional<Rank> optionalRank = Arrays.stream(Rank.values())
                 .filter(rank -> rank.equalCount == equalCount)

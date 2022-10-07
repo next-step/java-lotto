@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +28,11 @@ class LottoStatisticsServiceTest {
         lottos.add(Lotto.of(List.of(11,12,13,14,15,16)));
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("당첨번호와 로또값을 주면 동일한 숫자 개수를 리턴한다.")
-    void getEqualCount() {
-        Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
-        int equalCount = 2;
-
-        assertThat(lottoStatisticsService.getEqualCount(lotto, WINNING_NUMBER)).isEqualTo(equalCount);
+    @CsvSource({"0, 6", "1, 3", "2, 0"})
+    void getEqualCount(int index, int equalCount) {
+        assertThat(lottoStatisticsService.getEqualCount(lottos.get(index), WINNING_NUMBER)).isEqualTo(equalCount);
     }
 
     @Test

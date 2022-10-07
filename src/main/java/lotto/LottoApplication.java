@@ -1,7 +1,9 @@
 package lotto;
 
 import lotto.models.Lotto;
+import lotto.models.LottoStatistics;
 import lotto.services.LottoService;
+import lotto.services.LottoStatisticsService;
 import lotto.services.PickNumberService;
 import lotto.ui.Printer;
 
@@ -18,5 +20,8 @@ public class LottoApplication {
         Printer.printLottoNumbers(lottos);
 
         String winningNumber = Printer.requestWinningNumber();
+        LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
+        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, winningNumber);
+        Printer.printStatistics(lottoStatistics);
     }
 }
