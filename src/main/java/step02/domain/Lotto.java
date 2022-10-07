@@ -1,74 +1,74 @@
 package step02.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import static java.util.stream.IntStream.range;
+import static java.util.stream.IntStream.rangeClosed;
 
 public class Lotto {
 
-    private static final int MIN_LOTTO_NUMBERS = 1;
-
-    private static final int MAX_LOTTO_NUMBERS = 45;
-
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    public static final List<Integer> lottoAllNumbers = range(MIN_LOTTO_NUMBERS, MAX_LOTTO_NUMBERS + 1)
-        .boxed().collect(Collectors.toList());
+    public static final List<LottoNumber> lottoAllNumbers =
+        rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
 
-    private final List<Integer> value;
+    private final List<LottoNumber> value = new ArrayList<>();
 
-    public Lotto(List<Integer> value) {
+    public Lotto(List<LottoNumber> value) {
         validateLotto(value);
-        this.value = value;
+        this.value.addAll(value);
+    }
+
+    public static Lotto of(List<Integer> numbers) {
+        return new Lotto(numbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
     public static Lotto create() {
         Collections.shuffle(lottoAllNumbers);
-        List<Integer> lottoNumbers = lottoAllNumbers.subList(0, LOTTO_NUMBERS_SIZE).stream()
+        List<LottoNumber> lottoNumbers = lottoAllNumbers.subList(0, LOTTO_NUMBERS_SIZE).stream()
             .sorted()
             .collect(Collectors.toList());
         return new Lotto(lottoNumbers);
     }
 
-    public List<Integer> getValue() {
-        return value;
+    public List<LottoNumber> getValue() {
+        return Collections.unmodifiableList(value);
     }
 
-    public LottoGrade getGradeByComparison(Lotto winningNumbers) {
-        HashSet<Integer> winningNumbersSet = new HashSet<>(winningNumbers.value);
-        int count = (int) value.stream().filter(winningNumbersSet::contains).count();
-        return LottoGrade.from(count);
+    public LottoGrade getGradeByComparison(WinningLottoNumbers winningLottoNumbers) {
+        Set<LottoNumber> lottoNumbersSet = new HashSet<>(value);
+
+        List<LottoNumber> lottoNumbers = winningLottoNumbers.getLottoNumbers();
+        int count = (int) lottoNumbers.stream()
+            .filter(lottoNumbersSet::contains)
+            .count();
+
+        LottoNumber bonusNumber = winningLottoNumbers.getBonusNumber();
+        boolean bonusMatch = lottoNumbersSet.contains(bonusNumber);
+        return LottoGrade.from(count, bonusMatch);
     }
 
-    private void validateLotto(List<Integer> numbers) {
+    private void validateLotto(List<LottoNumber> numbers) {
         validateSizeIsSix(numbers);
         validateIsSorted(numbers);
-        validateIsBetween(numbers);
     }
 
-    private void validateSizeIsSix(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("");
+    private void validateSizeIsSix(List<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개의 번호여야 합니다. | numbers: " + numbers);
         }
     }
 
-    private void validateIsSorted(List<Integer> numbers) {
-        List<Integer> sorted = numbers.stream().sorted().collect(Collectors.toList());
+    private void validateIsSorted(List<LottoNumber> numbers) {
+        List<LottoNumber> sorted = numbers.stream().sorted().collect(Collectors.toList());
         if (!sorted.equals(numbers)) {
             throw new IllegalArgumentException("로또 번호는 정렬된 번호여야 합니다. | numbers: " + numbers);
-        }
-    }
-
-    private void validateIsBetween(List<Integer> numbers) {
-        numbers.forEach(this::lottoNumbersIsBetween);
-    }
-
-    private void lottoNumbersIsBetween(int target) {
-        if (target < MIN_LOTTO_NUMBERS || target > MAX_LOTTO_NUMBERS) {
-            throw new IllegalArgumentException("로또 번호는 " + MIN_LOTTO_NUMBERS + " ~ " + MAX_LOTTO_NUMBERS + "사이의 번호여야 합니다. | number " + target);
         }
     }
 }

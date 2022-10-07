@@ -1,13 +1,15 @@
 package step02.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import step02.domain.Lotto;
-import step02.domain.LottoGrade;
+import step02.domain.LottoList;
+import step02.domain.LottoNumber;
 import step02.domain.LottoResult;
-import step02.domain.LottoResultGenerator;
 import step02.domain.LottoSeller;
+import step02.domain.WinningLottoNumbers;
+import step02.dto.LottoListDto;
+import step02.dto.LottoResultDto;
 import step02.view.InputView;
 import step02.view.PrintView;
 
@@ -18,25 +20,18 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int purchasePrice = InputView.initPurchasePrice();
-        List<Lotto> lottoNumbers = LottoSeller.sell(purchasePrice);
-        PrintView.printLottoPurchaseCountMessage(lottoNumbers.size());
-
-        lottoNumbers.stream().map(Lotto::getValue).forEach(PrintView::printLottoNumbers);
+        LottoList lottoList = LottoSeller.sell(purchasePrice);
+        PrintView.printLottoPurchaseCountMessage(lottoList.size());
+        PrintView.printLottoNumbers(LottoListDto.from(lottoList));
         PrintView.printBlank();
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
-        Lotto winners = new Lotto(lastWeekWinningNumbers);
+        int bonusBallNumber = InputView.initBonusBallNumber();
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Lotto.of(lastWeekWinningNumbers), new LottoNumber(bonusBallNumber));
+        PrintView.printBlank();
 
-        LottoResult lottoResult = LottoResultGenerator.generate(lottoNumbers, winners);
-        Map<LottoGrade, Integer> lottoGradeResultMap = lottoResult.getLottoGradeResultMap();
-
-        PrintView.printResultWinningMessage();
-        PrintView.printLottoResultByGrade(LottoGrade.FOURTH, lottoGradeResultMap.getOrDefault(LottoGrade.FOURTH, 0));
-        PrintView.printLottoResultByGrade(LottoGrade.THIRD, lottoGradeResultMap.getOrDefault(LottoGrade.THIRD, 0));
-        PrintView.printLottoResultByGrade(LottoGrade.SECOND, lottoGradeResultMap.getOrDefault(LottoGrade.SECOND, 0));
-        PrintView.printLottoResultByGrade(LottoGrade.FIRST, lottoGradeResultMap.getOrDefault(LottoGrade.FIRST, 0));
-
+        LottoResult lottoResult = lottoList.generateLottoResult(winningLottoNumbers);
         float earningRate = lottoResult.getTotalAmount() / (float) purchasePrice;
-        PrintView.printLottoEarningRateResult(earningRate);
+        PrintView.printLottoResult(LottoResultDto.of(lottoResult, earningRate));
     }
 }

@@ -23,4 +23,9 @@ public class InputView {
         String[] split = init.split(",");
         return Arrays.stream(split).map(Integer::parseInt).collect(Collectors.toList());
     }
+
+    public static int initBonusBallNumber() {
+        PrintView.printInitBonusBallNumberPhrase();
+        return SCANNER.nextInt();
+    }
 }
