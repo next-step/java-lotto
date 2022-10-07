@@ -15,14 +15,16 @@ public class NormalPickNumberStrategy implements PickNumberStrategy{
     }
 
     @Override
-    public Set<Integer> getNumbers() {
-        Set<Integer> numbers = new HashSet<>();
+    public List<Integer> getNumbers() {
+        Set<Integer> numberSet = new HashSet<>();
 
-        while (numbers.size() < 6) {
+        while (numberSet.size() < 6) {
             Collections.shuffle(numberRange);
-            numbers.add(numberRange.get(0));
+            numberSet.add(numberRange.get(0));
         }
 
+        List<Integer> numbers = new ArrayList<>(numberSet);
+        Collections.sort(numbers);
         return numbers;
     }
 }

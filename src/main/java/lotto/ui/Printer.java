@@ -1,5 +1,9 @@
 package lotto.ui;
 
+import lotto.models.Lotto;
+
+import java.util.List;
+
 public class Printer {
 
     public static String requestPayment() {
@@ -7,8 +11,11 @@ public class Printer {
         return InputScanner.stringScan();
     }
 
-    public static void printLottoNumbers(int result) {
-        System.out.println(String.format("%d개를 구매했습니다.", result));
+    public static void printLottoNumbers(List<Lotto> lottos) {
+        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
+        lottos.forEach(lotto -> {
+            System.out.println(lotto.getNumbers().toString());
+        });
     }
 
 }
