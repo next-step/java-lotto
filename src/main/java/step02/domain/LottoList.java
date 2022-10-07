@@ -2,6 +2,7 @@ package step02.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +27,13 @@ public class LottoList {
     }
 
     public LottoResult generateLottoResult(WinningLottoNumbers winningLottoNumbers) {
-        Map<LottoGrade, Integer> lottoGradeResultMap = value.stream()
+        var lottoGradeResultMap = value.stream()
             .map(lottoNumber -> lottoNumber.getGradeByComparison(winningLottoNumbers))
             .filter(Objects::nonNull)
             .collect(Collectors.groupingBy(
-                lottoGrade -> lottoGrade, Collectors.summingInt(lottoGrade -> 1)
+                lottoGrade -> lottoGrade,
+                () -> new EnumMap<>(LottoGrade.class),
+                Collectors.summingInt(lottoGrade -> 1)
             ));
 
         return new LottoResult(lottoGradeResultMap);
