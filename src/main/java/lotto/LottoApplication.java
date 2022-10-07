@@ -20,14 +20,9 @@ public class LottoApplication {
 
         // 수동 로또 개수 입력
         int passiveLottoCount = inputView.inputPassiveLottoCount();
-//        int passiveLottoCount = 3;
 
         // 수동 로또 번호 입력
         List<LottoNumbersWrapper> numbersCollection = inputView.inputPassiveLottoNumbers(passiveLottoCount);
-//        List<LottoNumbersWrapper> numbersCollection = new ArrayList<>();
-//        numbersCollection.add(Arrays.asList(8, 21, 23, 41, 42, 43));
-//        numbersCollection.add(Arrays.asList(3, 5, 11, 16, 32, 38));
-//        numbersCollection.add(Arrays.asList(7, 11, 16, 35, 36, 44));
 
         // 로또 구매
         LottoWrapper lottoWrapper = lottoMachine.buyLotto(purchaseAmount, passiveLottoCount, numbersCollection);
