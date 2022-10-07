@@ -24,8 +24,8 @@
 ### 기능 분리 힌트
 - [ ] 테스트 할 수 있는 단위로 나누어 구현목록 만듦.
   - [x] 덧셈, 뺄셈, 곱셈, 나눗셈
-  - [ ] Number 객체 생성
-  - [ ] 입력값이 Null 이거나 빈 공백 문자일 경우 -> IllegalArgumentException throw
+  - [x] Number 객체 생성
+  - [x] 입력값이 Null 이거나 빈 공백 문자일 경우 -> IllegalArgumentException throw
   - [ ] Operator 객체 생성
   - [ ] 사칙연산 기호가 아닌 경우 -> IllegalArgumentException throw
 - [ ] 공백 문자열을 빈 공백 문자로 분리하려면 String 클래스의 split("") 메소드를 활용.
