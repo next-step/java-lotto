@@ -33,7 +33,7 @@ public enum Rank {
         return LOSER;
     }
 
-    public int getMatchCount() {
+    public int matchCount() {
         return matchCount;
     }
 
@@ -44,7 +44,7 @@ public enum Rank {
         return sum / purchaseMoney;
     }
 
-    public int getReward() {
+    public int reward() {
         return reward;
     }
 

@@ -20,7 +20,8 @@ public class Lottos {
     }
 
     public Bank checkWinningNumber(Lotto winningNumber) {
-        List<Rank> rankList = lottos.stream().map(lotto -> lotto.winningNumberCount(winningNumber))
+        List<Rank> rankList = lottos.stream()
+            .map(lotto -> lotto.winningNumberCount(winningNumber))
             .map(Rank::valueOf)
             .collect(Collectors.toList());
         return new Bank(new EnumMap<>(getRankMap(rankList)));

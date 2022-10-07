@@ -37,7 +37,7 @@ public class OutputView {
         if (rank == Rank.LOSER) {
             return String.format("낙첨 %d개%n", integer);
         }
-        return String.format("%d개 일치 (%d원)- %d개%n", rank.getMatchCount(), rank.getReward(), integer);
+        return String.format("%d개 일치 (%d원)- %d개%n", rank.matchCount(), rank.reward(), integer);
     }
 
     @SuppressWarnings("all")
