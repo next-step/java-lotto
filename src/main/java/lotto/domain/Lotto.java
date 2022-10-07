@@ -22,6 +22,13 @@ public class Lotto {
         this.sortedNumbers = sortedNumbers;
     }
 
+    public static Lotto from(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
+    }
+
     private void validate(List<LottoNumber> numbers) {
         if (numbers.size() != SIZE_OF_NUMBERS) {
             throw new IllegalArgumentException(String.format("로또는 %d개의 번호로 구성되어야 합니다.", SIZE_OF_NUMBERS));
