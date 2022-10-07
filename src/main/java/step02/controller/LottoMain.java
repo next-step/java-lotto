@@ -2,6 +2,7 @@ package step02.controller;
 
 import java.util.List;
 
+import step02.domain.EarningRate;
 import step02.domain.Lotto;
 import step02.domain.LottoList;
 import step02.domain.LottoNumber;
@@ -29,7 +30,7 @@ public class LottoMain {
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Lotto.of(lastWeekWinningNumbers), new LottoNumber(bonusBallNumber));
 
         LottoResult lottoResult = lottoList.generateLottoResult(winningLottoNumbers);
-        float earningRate = lottoResult.getTotalAmount() / (float) purchasePrice;
+        EarningRate earningRate = new EarningRate(lottoResult.getTotalAmount(), purchasePrice);
         PrintView.printLottoResult(LottoResultDto.of(lottoResult, earningRate));
     }
 }
