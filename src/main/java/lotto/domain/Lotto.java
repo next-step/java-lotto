@@ -69,7 +69,7 @@ public class Lotto {
         return Objects.hash(lottoNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> lotto() {
         return new ArrayList<>(lottoNumbers);
     }
 }

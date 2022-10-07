@@ -25,7 +25,7 @@ public class AutoLotto implements LottoPolicy {
         }
         List<LottoNumber> lottoNumbers = list.stream()
             .map(LottoNumber::new)
-            .sorted(Comparator.comparingInt(LottoNumber::getLottoNumber))
+            .sorted(Comparator.comparingInt(LottoNumber::lottoNumber))
             .collect(Collectors.toList());
 
         return new Lotto(lottoNumbers);

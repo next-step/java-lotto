@@ -32,7 +32,7 @@ public class Lottos {
             ));
     }
 
-    public List<Lotto> getLottos() {
+    public List<Lotto> lottos() {
         return new ArrayList<>(lottos);
     }
 

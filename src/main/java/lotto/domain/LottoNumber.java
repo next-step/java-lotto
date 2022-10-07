@@ -52,7 +52,7 @@ public class LottoNumber {
             '}';
     }
 
-    public int getLottoNumber() {
+    public int lottoNumber() {
         return lottoNumber;
     }
 }

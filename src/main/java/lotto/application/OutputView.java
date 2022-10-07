@@ -16,9 +16,9 @@ public class OutputView {
 
     public void lottos(Lottos lottos) {
         StringBuilder stringBuilder = new StringBuilder();
-        lottos.getLottos().forEach(lotto -> {
+        lottos.lottos().forEach(lotto -> {
             stringBuilder.append("[");
-            ArrayDeque<LottoNumber> lottosList = new ArrayDeque<>(lotto.getLottoNumbers());
+            ArrayDeque<LottoNumber> lottosList = new ArrayDeque<>(lotto.lotto());
             printLottoNumbers(stringBuilder, lottosList);
         });
         System.out.println(stringBuilder);
@@ -28,7 +28,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("----------");
         StringBuilder stringBuilder = new StringBuilder();
-        bank.getRankIntegerEnumMap()
+        bank.winningConfirmation()
             .forEach((rank, integer) -> stringBuilder.append(getRank(rank, integer)));
         System.out.println(stringBuilder);
     }
@@ -44,10 +44,10 @@ public class OutputView {
     private void printLottoNumbers(StringBuilder stringBuilder, ArrayDeque<LottoNumber> lottosList) {
         while (lottosList.size() != 1) {
             LottoNumber lottoNumber = lottosList.poll();
-            stringBuilder.append(lottoNumber.getLottoNumber()).append(", ");
+            stringBuilder.append(lottoNumber.lottoNumber()).append(", ");
         }
         LottoNumber lottoNumber = lottosList.poll();
-        stringBuilder.append(lottoNumber.getLottoNumber()).append("]").append("\n");
+        stringBuilder.append(lottoNumber.lottoNumber()).append("]").append("\n");
     }
 
     public void winningStatistics(Bank bank, int purchacse) {

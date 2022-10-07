@@ -5,18 +5,18 @@ import java.util.Objects;
 
 public class Bank {
 
-    private final EnumMap<Rank, Integer> rankIntegerEnumMap;
+    private final EnumMap<Rank, Integer> whetherOrNot;
 
-    public Bank(EnumMap<Rank, Integer> rankIntegerEnumMap) {
-        this.rankIntegerEnumMap = rankIntegerEnumMap;
+    public Bank(EnumMap<Rank, Integer> whetherOrNot) {
+        this.whetherOrNot = whetherOrNot;
     }
 
     public double yield(int purchaseMoney) {
-        return Rank.yield(rankIntegerEnumMap, purchaseMoney);
+        return Rank.yield(whetherOrNot, purchaseMoney);
     }
 
-    public EnumMap<Rank, Integer> getRankIntegerEnumMap() {
-        return new EnumMap<>(rankIntegerEnumMap);
+    public EnumMap<Rank, Integer> winningConfirmation() {
+        return new EnumMap<>(whetherOrNot);
     }
 
     @Override
@@ -28,11 +28,11 @@ public class Bank {
             return false;
         }
         Bank bank = (Bank) o;
-        return Objects.equals(rankIntegerEnumMap, bank.rankIntegerEnumMap);
+        return Objects.equals(whetherOrNot, bank.whetherOrNot);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rankIntegerEnumMap);
+        return Objects.hash(whetherOrNot);
     }
 }
