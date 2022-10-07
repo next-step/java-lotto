@@ -23,7 +23,7 @@ public class LottoStatisticsResult {
         for (LottoRank rank : countByRank.keySet()) {
             int count = countByRank.get(rank);
             totalCount += count;
-            totalAmount = totalAmount.plus(rank.getReward()).multiply(count);
+            totalAmount = totalAmount.plus(rank.getReward().multiply(count));
         }
         return totalCount > 0 ? totalAmount.divideBy(Lotto.PRICE.multiply(totalCount)) * 100.0 : 0;
     }
