@@ -14,14 +14,18 @@ class LottoStatisticsResultTest {
     @Test
     void create_givenRankList() {
         List<LottoRank> ranks = List.of(LottoRank.FIRST, LottoRank.SECOND, LottoRank.FOURTH, LottoRank.NONE, LottoRank.FIRST);
-        assertThat(LottoStatisticsResult.from(ranks)).isEqualTo(new LottoStatisticsResult(
+        LottoStatisticsResult actual = LottoStatisticsResult.from(ranks);
+        assertThat(actual).isEqualTo(new LottoStatisticsResult(
                 Map.ofEntries(
-                        Map.entry(LottoRank.FIRST, 2L),
-                        Map.entry(LottoRank.SECOND, 1L),
-                        Map.entry(LottoRank.FOURTH, 1L),
-                        Map.entry(LottoRank.NONE, 1L)
+                        Map.entry(LottoRank.FIRST, 2),
+                        Map.entry(LottoRank.SECOND, 1),
+                        Map.entry(LottoRank.FOURTH, 1),
+                        Map.entry(LottoRank.NONE, 1)
                 )
         ));
+
+        double expectedProfit = (2_000_000_000L * 2 + 1_500_000 + 5_000) / (5 * 1_000) * 100.0;
+        assertThat(actual.getProfit()).isEqualTo(expectedProfit);
     }
 
 }
