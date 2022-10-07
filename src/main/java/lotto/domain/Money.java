@@ -19,6 +19,13 @@ public class Money {
         }
     }
 
+    public int divideBy(Money money) {
+        if (money.value == 0) {
+            throw new IllegalArgumentException("0원으로 나눌 없습니다.");
+        }
+        return this.value / money.value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
