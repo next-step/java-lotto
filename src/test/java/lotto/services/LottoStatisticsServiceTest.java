@@ -4,7 +4,6 @@ import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.enums.Rank;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,6 +20,7 @@ class LottoStatisticsServiceTest {
     private final static List<Lotto> lottos = new ArrayList<>();
     private final static String WINNING_NUMBER = "1,2,3,4,5,6";
     private final static List<Lotto> duplicatedLottos = new ArrayList<>();
+    private final static int PAYMENT = 3500;
 
     @BeforeAll
     static void setLotto() {
@@ -69,6 +69,19 @@ class LottoStatisticsServiceTest {
                 assertThat(statistics.getCount()).isEqualTo(3);
             }
         });
+    }
+
+    @Test
+    @DisplayName("통계치와 지불한 금액을 전달하면 이율을 리턴한다.")
+    void getRevenueRatio() {
+        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, WINNING_NUMBER);
+        long totalAmount = lottoStatistics.stream()
+                .filter(statistics -> statistics.getCount() > 0)
+                .map(statistics -> statistics.getRank().getAmount())
+                .mapToLong(Long::longValue)
+                .sum();
+
+        assertThat(lottoStatisticsService.getRevenueRatio(lottoStatistics, PAYMENT)).isEqualTo(totalAmount / (PAYMENT / 1000f * 1000));
     }
 
 }

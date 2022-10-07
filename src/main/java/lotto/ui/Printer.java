@@ -4,9 +4,7 @@ import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.enums.Rank;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Printer {
 

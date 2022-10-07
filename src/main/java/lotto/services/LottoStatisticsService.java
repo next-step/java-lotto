@@ -31,4 +31,8 @@ public class LottoStatisticsService {
         return splitNumbers.size();
     }
 
+    public float getRevenueRatio(List<LottoStatistics> lottoStatistics, int payment) {
+        return 0f;
+    }
+
 }
