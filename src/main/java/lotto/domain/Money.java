@@ -27,11 +27,11 @@ public class Money {
         return new Money(this.value * value);
     }
 
-    public int divideBy(Money money) {
+    public double divideBy(Money money) {
         if (money.value == 0) {
             throw new IllegalArgumentException("0원으로 나눌 없습니다.");
         }
-        return (int) (this.value / money.value);
+        return (double) this.value / money.value;
     }
 
     @Override

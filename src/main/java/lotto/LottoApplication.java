@@ -12,7 +12,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         Money purchaseAmount = InputView.inputPurchaseAmount();
-        int numberOfLottos = purchaseAmount.divideBy(Lotto.PRICE);
+        int numberOfLottos = (int) purchaseAmount.divideBy(Lotto.PRICE);
         List<Lotto> purchasedLottos = LottoFactory.createLottos(numberOfLottos);
         OutputView.printPurchasedLottos(purchasedLottos);
     }
