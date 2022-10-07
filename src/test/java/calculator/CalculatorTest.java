@@ -33,7 +33,9 @@ public class CalculatorTest {
                 Arguments.of("1 / 1", 1),
                 Arguments.of("3 * 2 / 3", 2),
                 Arguments.of("1 * 2 + 4 / 2", 3),
-                Arguments.of("1 * 2 + 3 - 3", 2)
+                Arguments.of("1 * 2 + 3 - 3", 2),
+                Arguments.of("1   *  2", 2),
+                Arguments.of("1   *  2   / 2   +   1", 2)
         );
     }
 

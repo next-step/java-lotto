@@ -21,7 +21,7 @@ public enum OperatorType {
         return operator.equals(type);
     }
 
-    public static int calculate(int result, int operand, String operator) {
+    public static int calculate(int result, String operator, int operand) {
         return Stream.of(values())
                 .filter(operatorType -> operatorType.isOperatorTypeEquals(operator))
                 .mapToInt(operatorType -> operatorType.calculateLogic.apply(result, operand))
