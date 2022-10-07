@@ -24,13 +24,13 @@ class PickNumberServiceTest {
 
     @Test
     @DisplayName("pickNumbers 메소드는 6개의 수를 획득한다.")
-    void issueLotto2() {
+    void getNumber1() {
         assertThat(pickNumberService.pickNumbers(pickNumberStrategy).size()).isEqualTo(NUMBER_COUNT);
     }
 
     @Test
     @DisplayName("발급된 6개의 수는 1~45 사이의 값을 가진다.")
-    void issueLotto4() {
+    void getNumber2() {
         pickNumberService.pickNumbers(pickNumberStrategy).forEach(num -> {
             assertThat(LOTTO_NUMBERS).contains(num);
         });
