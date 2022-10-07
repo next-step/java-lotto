@@ -21,4 +21,12 @@ class FormulaTest {
         assertThat(calculate).isEqualTo(result);
     }
 
+    @Test
+    void divideByZero() {
+        Formula formula = new Formula(List.of(4, 0), List.of("/"));
+        Assertions.assertThatThrownBy(formula::calculate)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("0으로 나눌 수 없습니다.");
+    }
+
 }
