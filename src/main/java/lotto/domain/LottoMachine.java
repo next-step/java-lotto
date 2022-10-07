@@ -7,6 +7,8 @@ import lotto.domain.exception.MoneyException;
 
 public class LottoMachine {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final LottoPolicy lottoPolicy;
 
     public LottoMachine(LottoPolicy lottoPolicy) {
@@ -15,7 +17,7 @@ public class LottoMachine {
 
     public Lottos buyLotto(int buyMoney) {
         validation(buyMoney);
-        int lottoCount = buyMoney / 1000;
+        int lottoCount = buyMoney / LOTTO_PRICE;
 
         List<Lotto> lottoList = IntStream.range(0, lottoCount)
             .mapToObj(__ -> lottoPolicy.ball())
@@ -24,7 +26,7 @@ public class LottoMachine {
     }
 
     private void validation(int buyMoney) {
-        if (buyMoney < 1000) {
+        if (buyMoney < LOTTO_PRICE) {
             throw new MoneyException("1000원 이하로는 구매할 수 없습니다.");
         }
     }
