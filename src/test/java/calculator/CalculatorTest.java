@@ -29,7 +29,8 @@ public class CalculatorTest {
 
     static Stream<Arguments> normalCaseProvider() {
         return Stream.of(
-                Arguments.of("1 + 2", 3),
+                Arguments.of("10", 10),
+                Arguments.of("11 + 2", 13),
                 Arguments.of("1 / 1", 1),
                 Arguments.of("3 * 2 / 3", 2),
                 Arguments.of("1 * 2 + 4 / 2", 3),
