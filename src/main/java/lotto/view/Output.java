@@ -9,5 +9,6 @@ public class Output {
         for (Set lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.toString());
         }
+        System.out.println();
     }
 }

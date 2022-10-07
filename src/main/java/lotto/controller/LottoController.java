@@ -1,7 +1,8 @@
 package lotto.controller;
 
-import calculator.domain.Operator;
 import lotto.domain.Lotto;
+import lotto.domain.LottoRaffle;
+import lotto.domain.UserInput;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -10,15 +11,14 @@ import java.util.Set;
 
 public class LottoController {
 
-    private final static int LOTTO_PRICE = 1000;
-
     public void lottoMachine() {
-        Input input = new Input();
-        UserInput userInput = new UserInput(input.inputPrice());
-        int countOfLotto = Operator.DIVIDE.execute(userInput.getInputPrice(), LOTTO_PRICE);
-        System.out.println(countOfLotto + "개를 구매했습니다");
+        UserInput userInput = new UserInput(new Input().price());
+        System.out.println(userInput.count() + "개 구매되었습니다.");
 
-        List<Set> lottoTickets = new Lotto().lotto(countOfLotto);
+        List<Set> lottoTickets = new Lotto().lotto(userInput);
         new Output().printLottoTickets(lottoTickets);
+
+        Set<Integer> raffleNumber = new LottoRaffle().getRaffleNumber();
+        System.out.printf("당첨번호는 %s 입니다!!!", raffleNumber);
     }
 }

@@ -9,7 +9,7 @@ import static calculator.validator.InputValidator.isNumeric;
 public class Input {
     private final static Scanner SCANNER = new Scanner(System.in);
 
-    public int inputPrice() {
+    public int price() {
         System.out.println("구매하실 금액을 입력해주세요.(1장당 1000원)");
         String input = SCANNER.nextLine();
         if (isNumeric(input)) {
