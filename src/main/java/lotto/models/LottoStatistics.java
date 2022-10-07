@@ -9,7 +9,7 @@ public class LottoStatistics {
 
     private LottoStatistics(Rank rank) {
         this.rank = rank;
-        this.count = 1;
+        this.count = 0;
     }
 
     public Rank getRank() {

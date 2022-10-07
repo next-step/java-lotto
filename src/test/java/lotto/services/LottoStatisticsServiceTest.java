@@ -20,12 +20,20 @@ class LottoStatisticsServiceTest {
     private final static LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
     private final static List<Lotto> lottos = new ArrayList<>();
     private final static String WINNING_NUMBER = "1,2,3,4,5,6";
+    private final static List<Lotto> duplicatedLottos = new ArrayList<>();
 
     @BeforeAll
     static void setLotto() {
         lottos.add(Lotto.of(List.of(1,2,3,4,5,6)));
         lottos.add(Lotto.of(List.of(1,2,3,7,8,9)));
         lottos.add(Lotto.of(List.of(11,12,13,14,15,16)));
+    }
+
+    @BeforeAll
+    static void setDuplicatedLottos() {
+        duplicatedLottos.add(Lotto.of(List.of(1,2,3,4,5,6)));
+        duplicatedLottos.add(Lotto.of(List.of(1,2,3,4,5,6)));
+        duplicatedLottos.add(Lotto.of(List.of(1,2,3,4,5,6)));
     }
 
     @ParameterizedTest
@@ -47,6 +55,18 @@ class LottoStatisticsServiceTest {
                 assertThat(statistics.getCount()).isEqualTo(1);
             } else if (statistics.getRank().equals(Rank.OTHER)) {
                 assertThat(statistics.getCount()).isEqualTo(1);
+            }
+        });
+    }
+
+    @Test
+    @DisplayName("6개 모두 당첨된 복권 3개가 발행된 경우 Rank.FIRST의 count가 3이다.")
+    void createStatistics2() {
+        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(duplicatedLottos, WINNING_NUMBER);
+
+        lottoStatistics.forEach(statistics -> {
+            if (statistics.getRank().equals(Rank.FIRST)) {
+                assertThat(statistics.getCount()).isEqualTo(3);
             }
         });
     }
