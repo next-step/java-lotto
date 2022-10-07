@@ -10,7 +10,7 @@ public class MoneyTest {
     @Test
     @DisplayName("돈은 음수가 될 수 없다.")
     void create() {
-        assertThatThrownBy(() -> new Money(-100))
+        assertThatThrownBy(() -> Money.from(-100))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }
