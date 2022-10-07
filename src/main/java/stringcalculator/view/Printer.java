@@ -1,6 +1,4 @@
-package stringCalculator.view;
-
-import stringCalculator.view.InputScanner;
+package stringcalculator.view;
 
 public class Printer {
 

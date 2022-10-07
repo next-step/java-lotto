@@ -1,4 +1,4 @@
-package stringCalculator.view;
+package stringcalculator.view;
 
 import java.util.Scanner;
 

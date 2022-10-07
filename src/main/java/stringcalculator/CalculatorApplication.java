@@ -1,8 +1,8 @@
-package stringCalculator;
+package stringcalculator;
 
 
-import stringCalculator.service.CalculateService;
-import stringCalculator.view.Printer;
+import stringcalculator.service.CalculateService;
+import stringcalculator.view.Printer;
 
 public class CalculatorApplication {
 

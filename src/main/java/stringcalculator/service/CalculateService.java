@@ -1,8 +1,8 @@
-package stringCalculator.service;
+package stringcalculator.service;
 
 
-import stringCalculator.validator.MathEquationValidator;
-import stringCalculator.utils.StringConverter;
+import stringcalculator.validator.MathEquationValidator;
+import stringcalculator.utils.StringConverter;
 
 import java.util.*;
 
