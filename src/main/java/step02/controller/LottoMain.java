@@ -23,12 +23,10 @@ public class LottoMain {
         LottoList lottoList = LottoSeller.sell(purchasePrice);
         PrintView.printLottoPurchaseCountMessage(lottoList.size());
         PrintView.printLottoNumbers(LottoListDto.from(lottoList));
-        PrintView.printBlank();
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
         int bonusBallNumber = InputView.initBonusBallNumber();
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Lotto.of(lastWeekWinningNumbers), new LottoNumber(bonusBallNumber));
-        PrintView.printBlank();
 
         LottoResult lottoResult = lottoList.generateLottoResult(winningLottoNumbers);
         float earningRate = lottoResult.getTotalAmount() / (float) purchasePrice;

@@ -23,10 +23,6 @@ public class PrintView {
     private PrintView() {
     }
 
-    public static void printBlank() {
-        System.out.println();
-    }
-
     public static void printInitPurchasePricePhrase() {
         System.out.println(INIT_PURCHASE_PRICE_PHRASE);
     }
@@ -43,6 +39,8 @@ public class PrintView {
         lottoDtos.getLotto().stream()
             .map(LottoDto::getLotto)
             .forEach(System.out::println);
+
+        System.out.println();
     }
 
     public static void printInitBonusBallNumberPhrase() {
@@ -50,6 +48,7 @@ public class PrintView {
     }
 
     public static void printLottoResult(LottoResultDto lottoResultDto) {
+        System.out.println();
         System.out.println(RESULT_WINNING_MESSAGE);
         System.out.println("---------");
 
