@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public static final Money PRICE = new Money(1000);
     public static final int SIZE_OF_NUMBERS = 6;
 
     private final List<LottoNumber> sortedNumbers;
@@ -23,6 +24,10 @@ public class Lotto {
         if (numbers.size() != SIZE_OF_NUMBERS) {
             throw new IllegalArgumentException(String.format("로또는 %d개의 번호로 구성되어야 합니다.", SIZE_OF_NUMBERS));
         }
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return sortedNumbers;
     }
 
     @Override

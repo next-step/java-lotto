@@ -14,6 +14,14 @@ public class LottoFactory {
 
     private LottoFactory() {}
 
+    public static List<Lotto> createLottos(int numberOfLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < numberOfLottos; i++) {
+            lottos.add(createLotto());
+        }
+        return lottos;
+    }
+
     public static Lotto createLotto() {
         Collections.shuffle(ALL_LOTTO_NUMBERS);
         return new Lotto(new ArrayList<>(ALL_LOTTO_NUMBERS.subList(0, Lotto.SIZE_OF_NUMBERS)));
