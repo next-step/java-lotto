@@ -13,13 +13,6 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 class LottoListTest {
 
-    @ParameterizedTest
-    @NullAndEmptySource
-    @DisplayName("LottoList를 빈 값으로 생성시 에러 발생 테스트.")
-    void validateIsEmpty(List<Lotto> lotto) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoList(lotto));
-    }
-
     static LottoList lottoListFixture = new LottoList(
         List.of(
             Lotto.of(List.of(1, 2, 3, 4, 5, 6)), // 1등
@@ -35,6 +28,13 @@ class LottoListTest {
             Lotto.of(List.of(6, 7, 8, 14, 26, 37)) // 순위 외
         )
     );
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("LottoList를 빈 값으로 생성시 에러 발생 테스트.")
+    void validateIsEmpty(List<Lotto> lotto) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoList(lotto));
+    }
 
     @Test
     void generateLottoResult() {
