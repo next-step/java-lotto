@@ -17,7 +17,7 @@ class MoneyTest {
                 .isThrownBy(() -> new Money(-1));
     }
 
-    @DisplayName("나누려는 돈이 주어질 때, 정수 나눗셈 결과가 반환되어야 한다.")
+    @DisplayName("돈과 돈을 나누면, 정수 나눗셈 결과가 반환되어야 한다.")
     @ParameterizedTest
     @CsvSource({
             "10000,1000,10",
@@ -36,6 +36,20 @@ class MoneyTest {
         Money zeroMoney = new Money(0);
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> money.divideBy(zeroMoney));
+    }
+
+    @DisplayName("돈과 돈을 더하면, 덧셈 결과가 반환되어야 한다.")
+    @Test
+    void plus() {
+        Money actual = new Money(10000).plus(new Money(1000));
+        assertThat(actual).isEqualTo(new Money(11000));
+    }
+
+    @DisplayName("돈과 정수를 곱하면, 곱셈 결과가 반환되어야 한다.")
+    @Test
+    void multiply() {
+        Money actual = new Money(1000).multiply(2);
+        assertThat(actual).isEqualTo(new Money(2000));
     }
 
 }
