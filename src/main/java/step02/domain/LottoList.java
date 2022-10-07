@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoList {
 
@@ -25,14 +26,12 @@ public class LottoList {
     }
 
     public LottoResult generateLottoResult(WinningLottoNumbers winningLottoNumbers) {
-        Map<LottoGrade, Integer> lottoGradeResultMap = new HashMap<>();
-
-        value.stream()
+        Map<LottoGrade, Integer> lottoGradeResultMap = value.stream()
             .map(lottoNumber -> lottoNumber.getGradeByComparison(winningLottoNumbers))
             .filter(Objects::nonNull)
-            .forEach(lottoGrade -> lottoGradeResultMap.put(
-                lottoGrade, lottoGradeResultMap.getOrDefault(lottoGrade, 0) + 1)
-            );
+            .collect(Collectors.groupingBy(
+                lottoGrade -> lottoGrade, Collectors.summingInt(lottoGrade -> 1)
+            ));
 
         return new LottoResult(lottoGradeResultMap);
     }
