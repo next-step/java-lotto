@@ -10,6 +10,7 @@ public enum Operator {
     MULTIPLY("*", Operator::multiply),
     DIVIDE("/", Operator::divide);
 
+    private static final Operator[] values = values();
     private final String operation;
     private final BiFunction<Integer, Integer, Integer> function;
 
@@ -19,7 +20,7 @@ public enum Operator {
     }
 
     public static Operator of(String operation) {
-        return Arrays.stream(values())
+        return Arrays.stream(values)
                 .filter(operator -> operator.operation.equals(operation))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다."));
