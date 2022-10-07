@@ -2,32 +2,39 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbersWrapper {
-    private final List<Integer> numbers;
+    private final List<LottoNo> numbers;
 
     public LottoNumbersWrapper(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = numbers
+                .stream()
+                .map(integer -> new LottoNo(integer))
+                .collect(Collectors.toList());
     }
 
     public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+        List<Integer> collect = numbers.stream()
+                .map(LottoNo::getLottoNumber)
+                .collect(Collectors.toList());
+        return Collections.unmodifiableList(collect);
     }
 
     public boolean contains(Integer number) {
-        return this.numbers.contains(number);
+        return this.getNumbers().contains(number);
     }
 
     public int getMatchCount(LottoNumbersWrapper collectNumberList) {
         int matchCount = 0;
-        for (int number : this.numbers) {
-            matchCount += getMatchCount(collectNumberList, number);
+        for (LottoNo lottoNo : this.numbers) {
+            matchCount += getMatchCount(collectNumberList, lottoNo.getLottoNumber());
         }
         return matchCount;
     }
 
     public boolean isMatchToBonusNumber(int bonusNumber) {
-        return this.numbers.contains(bonusNumber);
+        return this.getNumbers().contains(bonusNumber);
     }
 
     private int getMatchCount(LottoNumbersWrapper lottoNumbersWrapper, int number) {
