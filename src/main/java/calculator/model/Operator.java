@@ -29,15 +29,15 @@ public enum Operator {
         return function.apply(a, b);
     }
 
-    public static int subtract(int a, int b){
+    private static int subtract(int a, int b){
         return a - b;
     }
 
-    public static int multiply(int a, int b){
+    private static int multiply(int a, int b){
         return a * b;
     }
 
-    public static int divide(int a, int b){
+    private static int divide(int a, int b){
         if (b == 0) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
