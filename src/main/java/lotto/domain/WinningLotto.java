@@ -7,7 +7,7 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public static WinningLotto from(WinningLottoDto winningLottoDto) {
-        Lotto winningLotto = LottoMachine.createManualLotto(winningLottoDto.winningNumbers());
+        Lotto winningLotto = LottoFactory.createManualLotto(winningLottoDto.winningNumbers());
         LottoNumber bonusNumber = LottoNumber.of(winningLottoDto.bonusNumber());
 
         return new WinningLotto(winningLotto, bonusNumber);

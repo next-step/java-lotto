@@ -54,15 +54,6 @@ class LottoTest {
         assertThat(type).isEqualTo(Rank.FOURTH);
     }
 
-    @DisplayName("번호가 같은 경우 동일한 로또로 판별한다.")
-    @Test
-    void equals() {
-        Lotto lottoA = new ManualLotto(getLottoNumbersFixture(1, 2, 3, 4, 5, 6));
-        Lotto lottoB = new AutoLotto(getLottoNumbersFixture(1, 2, 3, 4, 5, 6));
-
-        assertThat(lottoA).isEqualTo(lottoB);
-    }
-
     @DisplayName("보너스 번호인지 확인이 가능하다.")
     @Test
     void checkBonus() {

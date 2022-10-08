@@ -19,10 +19,4 @@ class LottosTest {
         Lottos lottos = new Lottos(List.of(lottoA, lottoB));
         assertThat(lottos.values()).hasSize(2);
     }
-
-    @DisplayName("로또를 0개 생성하는 경우 예외 발생")
-    @Test
-    void createZeroLottos() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Lottos.create(List.of()));
-    }
 }

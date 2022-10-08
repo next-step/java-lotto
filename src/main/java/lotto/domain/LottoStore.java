@@ -8,19 +8,14 @@ import java.util.List;
 public class LottoStore {
     public Lottos buy(LottoRequestDto request) {
         List<String> manualLottoNumbers = request.lottoNumbers();
-        Lottos manual = LottoMachine.createManualLottos(manualLottoNumbers);
 
-        int money = request.money() - getManualLottoPrice(manualLottoNumbers);
-        if (isNoMorePurchasable(money)) {
-            return manual;
-        }
+        int autoCount = getAutoCount(request, manualLottoNumbers);
 
-        return LottoMachine.createAutoLottos(money)
-                .add(manual);
+        return LottoFactory.create(autoCount, manualLottoNumbers);
     }
 
-    private boolean isNoMorePurchasable(int money) {
-        return money < Lotto.PRICE;
+    private int getAutoCount(LottoRequestDto request, List<String> manualLottoNumbers) {
+        return (request.money() - getManualLottoPrice(manualLottoNumbers)) / Lotto.PRICE;
     }
 
     private int getManualLottoPrice(List<String> manualLottoNumbers) {

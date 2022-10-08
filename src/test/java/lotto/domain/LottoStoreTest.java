@@ -19,8 +19,6 @@ class LottoStoreTest {
 
         Lottos lottos = lottoStore.buy(request);
 
-        List<LottoNumber> lottoNumbers = getLottoNumbersFixture(1, 2, 3, 4, 5, 6);
-        assertThat(lottos.values()).contains(new ManualLotto(lottoNumbers));
         assertThat(lottos.quantity()).isEqualTo(5);
     }
 }

@@ -13,10 +13,10 @@ import lotto.view.ResultView;
 import java.util.List;
 
 public class LottoController {
-    private final LottoStore lottoStore = new LottoStore();
 
     public void start() {
         LottoRequestDto request = getLottoRequest();
+        LottoStore lottoStore = new LottoStore();
         Lottos lottos = lottoStore.buy(request);
         ResultView.printLottoResult(new LottoResult(lottos));
 

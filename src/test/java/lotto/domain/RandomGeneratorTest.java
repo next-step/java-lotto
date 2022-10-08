@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.RandomGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 

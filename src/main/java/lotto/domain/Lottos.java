@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
-    private static final String ZERO_QUANTITY_EXCEPTION_MESSAGE = "0이하 생성은 불가능합니다.";
     private final List<Lotto> values;
 
     public static Lottos create(List<Lotto> values) {
@@ -15,10 +14,6 @@ public class Lottos {
     }
 
     public Lottos(List<Lotto> values) {
-        if (values.isEmpty()) {
-            throw new IllegalArgumentException(ZERO_QUANTITY_EXCEPTION_MESSAGE);
-        }
-
         this.values = values;
     }
 
