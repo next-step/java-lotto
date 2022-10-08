@@ -8,10 +8,11 @@ public class Number {
     private static String NUMBER_CREATOR_INPUT_EXCEPTION = "Number 생성자에는 숫자만 입력 가능합니다.";
 
     public Number(String number) {
-        if (!number.chars().allMatch(Character::isDigit)) {
+        try {
+            this.number = Integer.parseInt(number);
+        } catch (Exception e) {
             throw new IllegalArgumentException(NUMBER_CREATOR_INPUT_EXCEPTION);
         }
-        this.number = Integer.parseInt(number);
     }
 
     public void add(int number) {

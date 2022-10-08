@@ -1,5 +1,6 @@
 package stringcalculator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -15,7 +16,10 @@ public class NumberTest {
 
     @Test
     void valid() {
-        assertThatThrownBy(() -> new Number("a")).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertAll(
+                () -> assertThatThrownBy(() -> new Number("a")).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> new Number(null)).isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
@@ -27,10 +31,11 @@ public class NumberTest {
     }
 
     @Test
-    void minus(){
+    void minus() {
         Number number = new Number("3");
         number.minus(1);
 
         assertThat(number).isEqualTo(new Number("2"));
     }
+
 }
