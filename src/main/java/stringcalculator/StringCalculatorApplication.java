@@ -8,8 +8,7 @@ public class StringCalculatorApplication {
 
     public static void main(String[] args) {
         List<String> input = InputView.getInput();
-        StringCalculator stringCalculator = new StringCalculator(input);
-        int result = stringCalculator.calculate();
+        int result = StringCalculator.calculate(input);
         ResultView.printResult(result);
     }
 }
