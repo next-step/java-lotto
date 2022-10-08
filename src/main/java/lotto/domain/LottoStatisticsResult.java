@@ -17,6 +17,14 @@ public class LottoStatisticsResult {
         this.profit = calculateProfit(countByRank);
     }
 
+    public static LottoStatisticsResult from(List<LottoRank> ranks) {
+        Map<LottoRank, Integer> countByRank = new HashMap<>();
+        for (LottoRank rank : ranks) {
+            countByRank.put(rank, countByRank.getOrDefault(rank, DEFAULT_COUNT_VALUE) + 1);
+        }
+        return new LottoStatisticsResult(countByRank);
+    }
+
     private double calculateProfit(Map<LottoRank, Integer> countByRank) {
         int totalCount = 0;
         Money totalAmount = new Money(0);
@@ -26,14 +34,6 @@ public class LottoStatisticsResult {
             totalAmount = totalAmount.plus(rank.getReward().multiply(count));
         }
         return totalCount > 0 ? totalAmount.divideBy(Lotto.PRICE.multiply(totalCount)) : 0;
-    }
-
-    public static LottoStatisticsResult from(List<LottoRank> ranks) {
-        Map<LottoRank, Integer> countByRank = new HashMap<>();
-        for (LottoRank rank : ranks) {
-            countByRank.put(rank, countByRank.getOrDefault(rank, DEFAULT_COUNT_VALUE) + 1);
-        }
-        return new LottoStatisticsResult(countByRank);
     }
 
     public int getCountByRank(LottoRank rank) {
