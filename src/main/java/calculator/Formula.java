@@ -4,13 +4,41 @@ import java.util.Arrays;
 
 public class Formula {
     private final String[] elements;
+    private Calculator calculator;
 
     public Formula(String formula) {
         this.elements = formula.split(" ");
+        this.calculator = new AddCalculator();
     }
 
     public Formula(String[] elements) {
         this.elements = elements;
+        this.calculator = new AddCalculator();
+    }
+
+    public int calculate() {
+        int result = 0;
+        for (String element : elements) {
+            if (isNumber(element)) {
+                result = calculate(result, element);
+            } else {
+                calculator = CalculatorFactory.getCalculator(element);
+            }
+        }
+        return result;
+    }
+
+    private int calculate(int result, String element) {
+        return calculator.calculate(result, Integer.parseInt(element));
+    }
+
+    private boolean isNumber(final String element) {
+        try {
+            Integer.parseInt(element);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
