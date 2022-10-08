@@ -8,11 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoGeneratorTest {
 
-    @DisplayName("로또 자동 생성")
+    LottoGenerator lottoGenerator = new LottoGenerator();
+
+    @DisplayName("로또 구입 금액에 따라 로또가 여러장 생성된다.")
     @Test
-    void generateLotto() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        Lotto lotto = lottoGenerator.generateLotto();
-        Assertions.assertThat(lotto.getLotto()).hasSize(6);
+    void generateLottos() {
+        Lottos lottos = lottoGenerator.generateLottos(new Money(3000));
+        Assertions.assertThat(lottos.getLottos()).hasSize(3);
     }
 }

@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -9,8 +10,22 @@ import static java.util.stream.Collectors.toList;
 public class LottoGenerator {
 
     private static final List<Integer> fullLottoNumbers = getFullLottoNumbers();
+    private static final int LOTTO_PRICE = 1000;
 
-    public Lotto generateLotto() {
+    public Lottos generateLottos(Money money) {
+        List<Lotto> lottos = new ArrayList<>();
+        int lottoCount = getLottoCount(money);
+        for (int i = 0; i < lottoCount; i++) {
+            lottos.add(generateLotto());
+        }
+        return new Lottos(lottos);
+    }
+
+    private int getLottoCount(Money money) {
+        return money.getMoney() / LOTTO_PRICE;
+    }
+
+    private Lotto generateLotto() {
         Collections.shuffle(fullLottoNumbers);
         List<Integer> lottoNumbers = fullLottoNumbers.stream()
                 .limit(Lotto.LOTTO_SIZE)
