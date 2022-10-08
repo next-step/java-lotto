@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
+import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
 import lotto.domain.number.Ticket;
 import lotto.domain.number.WinningNumbers;
@@ -38,7 +39,7 @@ class WinningReportTest {
                 () -> assertThat(winningReport.getWinningCount(MATCH_FOR)).isEqualTo(1),
                 () -> assertThat(winningReport.getWinningCount(MATCH_FIVE)).isEqualTo(0),
                 () -> assertThat(winningReport.getWinningCount(MATCH_SIX)).isEqualTo(0),
-                () -> assertThat(winningReport.getRateOfReturn(5000)).isEqualTo(11.00)
+                () -> assertThat(winningReport.getRateOfReturn(new PurchasePrice(5000))).isEqualTo(11.00)
         );
     }
 

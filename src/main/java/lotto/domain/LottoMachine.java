@@ -16,7 +16,7 @@ public class LottoMachine {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public static TicketBox getAutomaticTickets(int purchasePrice) {
+    public static TicketBox getAutomaticTickets(PurchasePrice purchasePrice) {
         return new TicketBox(IntStream.range(0, getTicketCount(purchasePrice))
                 .mapToObj(i -> extractNumbers(intNumbers()))
                 .collect(Collectors.toUnmodifiableList()));
@@ -30,13 +30,13 @@ public class LottoMachine {
         return count;
     }
 
-    private static int getTicketCount(int purchasePrice) {
+    private static int getTicketCount(PurchasePrice purchasePrice) {
         validatePurchasePrice(purchasePrice);
-        return purchasePrice / LOTTO_PRICE;
+        return purchasePrice.getPrice() / LOTTO_PRICE;
     }
 
-    private static void validatePurchasePrice(int purchasePrice) {
-        if (purchasePrice < LOTTO_PRICE) {
+    private static void validatePurchasePrice(PurchasePrice purchasePrice) {
+        if (purchasePrice.getPrice() < LOTTO_PRICE) {
             throw new InvalidPurchasePriceException();
         }
     }

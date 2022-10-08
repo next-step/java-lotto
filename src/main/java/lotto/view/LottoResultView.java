@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.stream.Collectors;
+import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
 import lotto.domain.winner.WinningCondition;
 import lotto.domain.winner.WinningReport;
@@ -23,7 +24,7 @@ public class LottoResultView {
         }
     }
 
-    public static void printResultStatics(WinningReport winningReport, int purchase) {
+    public static void printResultStatics(WinningReport winningReport, PurchasePrice purchase) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         printWinningResult(winningReport);
@@ -39,7 +40,7 @@ public class LottoResultView {
         }
     }
 
-    private static void printRateOfReturn(WinningReport winningReport, int purchase) {
+    private static void printRateOfReturn(WinningReport winningReport, PurchasePrice purchase) {
         double rateOfReturn = winningReport.getRateOfReturn(purchase);
         System.out.printf("총 수익률은 %.2f입니다.", rateOfReturn);
         if (rateOfReturn < 1) {
