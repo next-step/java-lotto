@@ -3,22 +3,22 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 
-public class WinningLottoNumber {
+public class WinningLotto {
 
-    private final LottoNumber winnerLottoNumber;
+    private final Lotto winnerLotto;
     private final Number bonusNumber;
 
-    private WinningLottoNumber(final LottoNumber winnerLottoNumber, final Number bonusNumber) {
+    private WinningLotto(final Lotto winnerLotto, final Number bonusNumber) {
 
-        this.winnerLottoNumber = winnerLottoNumber;
+        this.winnerLotto = winnerLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLottoNumber from(final String winningLotto, final String bonusNumber) {
+    public static WinningLotto from(final String winningLotto, final String bonusNumber) {
 
         validate(winningLotto, bonusNumber);
 
-        return new WinningLottoNumber(LottoNumber.from(winningLotto), Number.from(bonusNumber));
+        return new WinningLotto(Lotto.from(winningLotto), Number.from(bonusNumber));
     }
 
     private static void validate(final String winningLotto, final String bonusNumber) {
@@ -28,9 +28,9 @@ public class WinningLottoNumber {
         }
     }
 
-    public List<Number> getWinnerLottoNumber() {
+    public List<Number> getWinnerLotto() {
 
-        return Collections.unmodifiableList(this.winnerLottoNumber.getLottoNumber());
+        return Collections.unmodifiableList(this.winnerLotto.getLotto());
     }
 
     public Number getBonusNumber() {

@@ -2,36 +2,33 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class Lotto {
 
     private static final int MATCH_ONE = 1;
     private static final int NOT_MATCH_ZERO = 0;
-    private static final int MIN = 1;
-    private static final int MAX = 45;
     public static final int MAX_LOTTO_NUMBER_COUNT = 6;
     private static final String COMMA_EMPTY_STRING = ", ";
 
-    private final List<Number> lottoNumber;
+    private final List<Number> lotto;
 
-    private LottoNumber(final List<Number> lottoNumber) {
+    private Lotto(final List<Number> lotto) {
 
-        this.lottoNumber = lottoNumber;
+        this.lotto = lotto;
     }
 
-    public static LottoNumber from(final String input) {
+    public static Lotto from(final String input) {
 
         validate(input);
         final List<Number> lottoNumbers = split(input);
         validateSize(lottoNumbers);
 
-        return new LottoNumber(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
-    public static LottoNumber from(final List<Integer> lottoNumber) {
+    public static Lotto from(final List<Integer> lottoNumber) {
 
-        return new LottoNumber(convert(lottoNumber));
+        return new Lotto(convert(lottoNumber));
     }
 
     private static void validate(final String input) {
@@ -64,17 +61,10 @@ public class LottoNumber {
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> create() {
-
-        return IntStream.range(MIN, MAX)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    public int match(final WinningLottoNumber winningLottoNumber) {
+    public int match(final WinningLotto winningLotto) {
 
         int result = 0;
-        for (Number winningNumber : winningLottoNumber.getWinnerLottoNumber()) {
+        for (Number winningNumber : winningLotto.getWinnerLotto()) {
             result += compare(winningNumber);
         }
         return result;
@@ -82,19 +72,19 @@ public class LottoNumber {
 
     private int compare(final Number winningNumber) {
 
-        if (this.lottoNumber.contains(winningNumber)) {
+        if (this.lotto.contains(winningNumber)) {
             return MATCH_ONE;
         }
         return NOT_MATCH_ZERO;
     }
 
-    public List<Number> getLottoNumber() {
+    public List<Number> getLotto() {
 
-        return Collections.unmodifiableList(this.lottoNumber);
+        return Collections.unmodifiableList(this.lotto);
     }
 
-    public boolean matchBonus(final WinningLottoNumber winningLottoNumber) {
+    public boolean matchBonus(final WinningLotto winningLotto) {
 
-        return this.lottoNumber.contains(winningLottoNumber.getBonusNumber());
+        return this.lotto.contains(winningLotto.getBonusNumber());
     }
 }

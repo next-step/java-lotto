@@ -4,7 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-public class LottoNumberApplication {
+public class LottoApplication {
 
     public static void main(String[] args) {
 
@@ -12,12 +12,12 @@ public class LottoNumberApplication {
         final long availableTickets = purchase.available();
         ResultView.availablePurchasePrint(availableTickets);
 
-        LottoNumbers lottoNumbers = new LottoNumbers(AutoLottoNumbers.autoCreate(availableTickets));
-        ResultView.autoLottoNumberPrint(lottoNumbers);
-        final WinningLottoNumber winningLottoNumber = WinningLottoNumber.from(InputView.winnerNumberPrint(), InputView.bonusNumberPrint());
+        Lottos lottos = new Lottos(AutoLottos.autoCreate(availableTickets));
+        ResultView.autoLottoNumberPrint(lottos);
+        final WinningLotto winningLotto = WinningLotto.from(InputView.winnerNumberPrint(), InputView.bonusNumberPrint());
 
         final WinningResult winningResult = WinningResult.init();
-        winningResult.collect(lottoNumbers.match(winningLottoNumber));
+        winningResult.collect(lottos.match(winningLotto));
         ResultView.winningResultPrint(winningResult);
         ResultView.winningPrizeRatePrint(ProfitRate.of(winningResult.sum(), purchase));
     }
