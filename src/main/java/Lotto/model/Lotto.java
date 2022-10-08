@@ -1,6 +1,7 @@
 package Lotto.model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -32,5 +33,18 @@ public class Lotto {
 
     public List<LottoNumber> getLotto() {
         return lotto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lotto)) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(getLotto(), lotto1.getLotto());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getLotto());
     }
 }
