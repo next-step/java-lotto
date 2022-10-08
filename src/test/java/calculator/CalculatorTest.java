@@ -29,4 +29,12 @@ public class CalculatorTest {
 
         Assertions.assertThat(calculator.multiply(a, b)).isEqualTo(answer);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"18:2:9", "10:5:2", "6:3:2"}, delimiter = ':')
+    void 나눗셈을_한다(int a, int b, int answer){
+        Calculator calculator = new Calculator();
+
+        Assertions.assertThat(calculator.divide(a, b)).isEqualTo(answer);
+    }
 }
