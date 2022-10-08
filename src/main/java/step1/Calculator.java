@@ -13,10 +13,8 @@ public class Calculator {
         final NumberCalculation result = new NumberCalculation(calculationFormula[0]);
 
         for (int i = 1; i < calculationFormula.length - 1; i += 2) {
-            Operator operator = Operator.findByOperator(calculationFormula[i]);
-            int number = Integer.parseInt(calculationFormula[i + 1]);
-
-            operator.calculate(result, number);
+            Operator.getOperator(calculationFormula[i])
+                    .calculate(result, calculationFormula[i + 1]);
         }
 
         showResult(result);
