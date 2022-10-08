@@ -1,23 +1,23 @@
 package stringcalculator;
 
 public class StringCalculator {
-    public static Number add(Number result, int back) {
-        result.add(back);
-        return result;
-    }
-
-    public static Number minus(Number result, int back) {
-        result.minus(back);
-        return result;
-    }
-
-    public static Number multiply(Number result, int back) {
-        result.multiply(back);
-        return result;
-    }
-
-    public static Number division(Number result, int back) {
-        result.division(back);
-        return result;
+    public static Number calculate(Number result, Operator operator, Number number) {
+        if (CalculatorOperator.PLUS.equals(operator)) {
+            result.add(number);
+            return result;
+        }
+        if (CalculatorOperator.MINUS.equals(operator)) {
+            result.minus(number);
+            return result;
+        }
+        if (CalculatorOperator.MULTIPLY.equals(operator)) {
+            result.multiply(number);
+            return result;
+        }
+        if (CalculatorOperator.DIVISION.equals(operator)) {
+            result.division(number);
+            return result;
+        }
+        throw new IllegalArgumentException(operator.OPERATOR_CREATOR_EXCEPTION);
     }
 }

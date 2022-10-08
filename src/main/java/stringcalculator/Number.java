@@ -16,23 +16,27 @@ public class Number {
         }
     }
 
-    public void add(int number) {
-        this.number += number;
+    public void add(Number number) {
+        this.number += number.toInt();
     }
 
-    public void minus(int number) {
-        this.number -= number;
+    public void minus(Number number) {
+        this.number -= number.toInt();
     }
 
-    public void multiply(int number) {
-        this.number *= number;
+    public void multiply(Number number) {
+        this.number *= number.toInt();
     }
 
-    public void division(int number) {
-        if (number == 0) {
+    public void division(Number number) {
+        if (number.toInt() == 0) {
             throw new IllegalArgumentException(DIVISION_ZERO_EXCEPTION);
         }
-        this.number /= number;
+        this.number /= number.toInt();
+    }
+
+    private int toInt(){
+        return number;
     }
 
     @Override
@@ -46,5 +50,10 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(number);
     }
 }

@@ -25,7 +25,7 @@ public class NumberTest {
     @Test
     void add() {
         Number number = new Number("1");
-        number.add(2);
+        number.add(new Number("2"));
 
         assertThat(number).isEqualTo(new Number("3"));
     }
@@ -33,7 +33,7 @@ public class NumberTest {
     @Test
     void minus() {
         Number number = new Number("3");
-        number.minus(1);
+        number.minus(new Number("1"));
 
         assertThat(number).isEqualTo(new Number("2"));
     }
@@ -43,12 +43,12 @@ public class NumberTest {
         Assertions.assertAll(
                 () -> {
                     Number number = new Number("3");
-                    number.multiply(3);
+                    number.multiply(new Number("3"));
                     assertThat(number).isEqualTo(new Number("9"));
                 },
                 () -> {
                     Number number = new Number("3");
-                    number.multiply(0);
+                    number.multiply(new Number("0"));
                     assertThat(number).isEqualTo(new Number("0"));
                 }
         );
@@ -57,7 +57,7 @@ public class NumberTest {
     @Test
     void division() {
         Number number = new Number("3");
-        number.division(3);
+        number.division(new Number("3"));
 
         assertThat(number).isEqualTo(new Number("1"));
     }
@@ -66,7 +66,7 @@ public class NumberTest {
     void division_zero() {
         Number number = new Number("3");
 
-        assertThatThrownBy(() -> number.division(0)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> number.division(new Number("0"))).isInstanceOf(IllegalArgumentException.class);
     }
 
 }

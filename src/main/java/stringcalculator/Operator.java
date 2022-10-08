@@ -8,7 +8,7 @@ public class Operator {
 
     private String operator;
     private final List<String> operatorList = Arrays.asList("+", "-", "*", "/");
-    private final String OPERATOR_CREATOR_EXCEPTION = "Operator에는 사칙연산 기호만 입력 가능합니다.";
+    public final String OPERATOR_CREATOR_EXCEPTION = "Operator에는 사칙연산 기호만 입력 가능합니다.";
 
     public Operator(String operator) {
         if (!operatorList.contains(operator)) {
