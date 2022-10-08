@@ -15,4 +15,9 @@ public class StringCalculator {
         result.multiply(back);
         return result;
     }
+
+    public static Number division(Number result, int back) {
+        result.division(back);
+        return result;
+    }
 }

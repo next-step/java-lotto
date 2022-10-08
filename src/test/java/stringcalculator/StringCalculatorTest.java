@@ -20,4 +20,9 @@ public class StringCalculatorTest {
     void multiply() {
         assertThat(StringCalculator.multiply(new Number("5"), 2)).isEqualTo(new Number("10"));
     }
+
+    @Test
+    void division() {
+        assertThat(StringCalculator.division(new Number("6"), 2)).isEqualTo(new Number("3"));
+    }
 }
