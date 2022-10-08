@@ -18,7 +18,7 @@ public class OperatorTest {
     }
 
     @ParameterizedTest(name = "Operator는 +,-,*,/ 이외의 문자로 생성할 경우 IllegalArgumentException 에러를 반환한다.")
-    @ValueSource(strings = {"0","&","%","#","(","="})
+    @ValueSource(strings = {"0", "&", "%", "#", "(", "="})
     void valid(String text) {
         assertThatThrownBy(() -> new Operator(text)).isInstanceOf(IllegalArgumentException.class);
     }

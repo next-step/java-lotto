@@ -55,7 +55,7 @@ public class NumberTest {
     }
 
     @Test
-    void division(){
+    void division() {
         Number number = new Number("3");
         number.division(3);
 
@@ -63,7 +63,7 @@ public class NumberTest {
     }
 
     @Test
-    void division_zero(){
+    void division_zero() {
         Number number = new Number("3");
 
         assertThatThrownBy(() -> number.division(0)).isInstanceOf(IllegalArgumentException.class);
