@@ -17,4 +17,12 @@ public class NumberTest {
     void valid() {
         assertThatThrownBy(() -> new Number("a")).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void add(){
+        Number number = new Number("1");
+        number.add(2);
+
+        assertThat(number).isEqualTo(new Number("3"));
+    }
 }

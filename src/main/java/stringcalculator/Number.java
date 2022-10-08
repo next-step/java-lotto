@@ -26,4 +26,8 @@ public class Number {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    public void add(int number) {
+        this.number += number;
+    }
 }
