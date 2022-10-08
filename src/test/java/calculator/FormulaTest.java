@@ -12,4 +12,11 @@ public class FormulaTest {
         Assertions.assertThat(formula)
             .isEqualTo(new Formula(new String[]{"3", "+", "4", "*", "2", "/", "7"}));
     }
+
+    @Test
+    void 계산을_한다(){
+        Formula formula = new Formula("3 + 4 * 2 / 7");
+
+        Assertions.assertThat(formula.calculate()).isEqualTo(2);
+    }
 }
