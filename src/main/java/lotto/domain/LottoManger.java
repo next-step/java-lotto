@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.strategy.ExtractStrategy;
 
 public class LottoManger {
 
@@ -20,8 +21,8 @@ public class LottoManger {
         return lottos;
     }
 
-    public List<Long> retrieveWinNums(List<Integer> correctNumbers) {
-        List<Long> winNums = new ArrayList<>();
+    public List<Integer> retrieveWinNums(List<Integer> correctNumbers) {
+        List<Integer> winNums = new ArrayList<>();
         for (Lotto lotto : lottos) {
             winNums.add(lotto.retrieveCorrectNum(correctNumbers));
         }

@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import org.assertj.core.api.Assertions;
+import lotto.strategy.FrontExtractStrategy;
 import org.junit.jupiter.api.Test;
 
 class LottoMangerTest {
@@ -15,7 +14,7 @@ class LottoMangerTest {
 
         List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
         assertThat(lottoManger.retrieveWinNums(winNumbers))
-                .containsExactly(6L, 6L, 6L);
+                .containsExactly(6, 6, 6);
     }
 
     @Test
@@ -24,6 +23,6 @@ class LottoMangerTest {
 
         List<Integer> winNumbers = List.of(1, 11, 12, 7, 2, 5);
         assertThat(lottoManger.retrieveWinNums(winNumbers))
-                .containsExactly(3L, 3L, 3L);
+                .containsExactly(3, 3, 3);
     }
 }

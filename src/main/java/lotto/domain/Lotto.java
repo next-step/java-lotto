@@ -35,9 +35,11 @@ public class Lotto {
         return numbers;
     }
 
-    public long retrieveCorrectNum(List<Integer> correctNums) {
-        return numbers.stream()
+    public int retrieveCorrectNum(List<Integer> correctNums) {
+        Long count = numbers.stream()
                 .filter(correctNums::contains)
                 .count();
+        return count.intValue();
+
     }
 }
