@@ -1,9 +1,8 @@
 package lotto;
 
-import lotto.view.InputView;
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,5 +42,11 @@ public class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto winning = new Lotto(Arrays.asList(1, 2, 3, 44, 45, 10));
         assertThat(lotto.getSameNumbers(winning)).isEqualTo(3);
+    }
+
+    @Test
+    public void 문자열_로또클래스_변환() {
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        assertThat(lotto.isEqual(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isTrue();
     }
 }

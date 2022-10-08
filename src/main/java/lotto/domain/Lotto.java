@@ -1,6 +1,9 @@
-package lotto;
+package lotto.domain;
+
+import lotto.view.InputView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +19,14 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.lotto = numbers;
+    }
+
+    public Lotto(String numbers) {
+        this.lotto = new ArrayList<>();
+        String[] numberArray = numbers.split(", ");
+        for (String number : numberArray) {
+            this.lotto.add(Integer.parseInt(number));
+        }
     }
 
     private List<Integer> makeNumberArray() {
@@ -42,9 +53,9 @@ public class Lotto {
     }
 
     public int getSameNumbers(Lotto winning) {
-        List<Integer> winningNumbers = winning.getLottoNumbers();
-        if (this.lotto.containsAll(winningNumbers)) return MAX_MATCH_NUMBER;
+        if (this.isEqual(winning)) return MAX_MATCH_NUMBER;
 
+        List<Integer> winningNumbers = winning.getLottoNumbers();
         Collections.sort(winningNumbers);
         Collections.sort(this.lotto);
 
@@ -52,5 +63,14 @@ public class Lotto {
                 .filter(winningNum -> lotto.contains(winningNum))
                 .collect(Collectors.toList())
                 .size();
+    }
+
+    public String toString() {
+        return this.lotto.toString();
+    }
+
+
+    public boolean isEqual(Lotto numbers) {
+        return this.lotto.containsAll(numbers.lotto);
     }
 }
