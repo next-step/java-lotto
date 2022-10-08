@@ -15,6 +15,12 @@ public class Money {
         if (money < 0) {
             throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
         }
+        if (money < 1000) {
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
+        if (money % 1000 != 0) {
+            throw new IllegalArgumentException("1000원 단위만 입력 가능합니다.");
+        }
     }
 
     public int getMoney() {
