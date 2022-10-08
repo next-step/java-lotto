@@ -27,10 +27,8 @@ public enum Operator {
         this.calculator = calculator;
     }
 
-    public static Operator findByOperator(String operator) {
-        return Arrays.stream(values())
-                .filter(op -> Objects.equals(op.operator, operator))
-                .findFirst()
+    public static Operator getOperator(String operator) {
+        return Optional.ofNullable(operatorMap.get(operator))
                 .orElseThrow(() -> new InvalidInputException("[입력 오류] 유효하지 않는 사칙연산 기호가 입력 되었습니다."));
     }
 
