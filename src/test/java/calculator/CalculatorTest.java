@@ -21,4 +21,12 @@ public class CalculatorTest {
 
         Assertions.assertThat(calculator.subtract(a, b)).isEqualTo(answer);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"9:2:18", "2:5:10", "6:3:18"}, delimiter = ':')
+    void 곱셈을_한다(int a, int b, int answer){
+        Calculator calculator = new Calculator();
+
+        Assertions.assertThat(calculator.multiply(a, b)).isEqualTo(answer);
+    }
 }
