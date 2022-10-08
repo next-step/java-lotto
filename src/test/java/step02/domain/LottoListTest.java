@@ -57,4 +57,18 @@ class LottoListTest {
         then(lottoListFixture.generateLottoResult(winningLottoNumbers)).isEqualTo(lottoResult);
     }
 
+    @Test
+    @DisplayName("로또 리스트 병합 테스트")
+    void merge() {
+        LottoList lottoList1 = new LottoList(List.of(Lotto.of(List.of(1, 2, 3, 4, 5, 6))));
+        LottoList lottoList2 = new LottoList(List.of(Lotto.of(List.of(11, 22, 33, 43, 44, 45))));
+        LottoList mergeLottoList = new LottoList(
+            List.of(
+                Lotto.of(List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.of(List.of(11, 22, 33, 43, 44, 45))
+            )
+        );
+
+        then(lottoList1.merge(lottoList2)).isEqualTo(mergeLottoList);
+    }
 }

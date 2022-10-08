@@ -3,9 +3,7 @@ package step02.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -39,9 +37,35 @@ public class LottoList {
         return new LottoResult(lottoGradeResultMap);
     }
 
+    public LottoList merge(LottoList lottoList) {
+        List<Lotto> mergeLottoList = new ArrayList<>();
+        mergeLottoList.addAll(value);
+        mergeLottoList.addAll(lottoList.getValue());
+        return new LottoList(mergeLottoList);
+    }
+
     private void validateIsEmpty(List<Lotto> value) {
         if (value == null || value.isEmpty()) {
             throw new IllegalArgumentException("LottoList에는 최소 하나 이상의 로또가 필요합니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoList)) {
+            return false;
+        }
+
+        LottoList lottoList = (LottoList) o;
+
+        return value != null ? value.equals(lottoList.value) : lottoList.value == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return value != null ? value.hashCode() : 0;
     }
 }
