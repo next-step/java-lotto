@@ -34,16 +34,6 @@ public enum LottoRank {
                 .orElse(MISS);
     }
     
-    public static double parseYield(List<LottoRank> lottoRanks, PaymentPrice paymentPrice) {
-        return (int) (((double) getTotalReward(lottoRanks) / paymentPrice.getPaymentPrice()) * 100) / 100.0;
-    }
-    
-    private static int getTotalReward(List<LottoRank> lottoRanks) {
-        return lottoRanks.stream()
-                .mapToInt(LottoRank::getReward)
-                .sum();
-    }
-    
     public int getCountOfLottoRanks(List<LottoRank> lottoRanks) {
         return (int) lottoRanks.stream()
                 .filter(lottoRank -> this == lottoRank)
