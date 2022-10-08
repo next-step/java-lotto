@@ -21,8 +21,10 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int purchasePrice = InputView.initPurchasePrice();
-        LottoList lottoList = LottoSeller.sell(purchasePrice);
-        PrintView.printLottoPurchaseCountMessage(lottoList.size());
+        int manualLottoCount = InputView.initManualLottoCount();
+        List<String> manualLottoNumbers = InputView.initManualLotto(manualLottoCount);
+        LottoList lottoList = LottoSeller.sell(purchasePrice, manualLottoNumbers);
+        PrintView.printLottoPurchaseCountMessage(manualLottoCount, lottoList.size()-manualLottoCount);
         PrintView.printLottoNumbers(LottoListDto.from(lottoList));
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
