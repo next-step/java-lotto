@@ -13,6 +13,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
+    public LottoNumber(String s) {
+        this(Integer.parseInt(s));
+    }
+
     private void validateIsBetween(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new IllegalArgumentException("로또 번호는 " + MIN_VALUE + " ~ " + MAX_VALUE + "사이의 번호여야 합니다. | number " + value);

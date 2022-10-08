@@ -16,6 +16,11 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 class LottoTest {
 
+    @Test
+    void 문자열을_받아_로또_생성_테스트() {
+        then(Lotto.of("1,2,3,4,5,6")).isEqualTo(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
+    }
+
     @RepeatedTest(10)
     @DisplayName("로또의 생성한 번호가 정상적인지 검증. (랜덤한 성격을 지니고 있어 10번 반복 테스트)")
     void validateLottoSuccess() {
@@ -55,13 +60,13 @@ class LottoTest {
 
     static Stream<Arguments> NumbersByLottoGrade() {
         return Stream.of(
-            Arguments.of(LottoGrade.FIRST, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,4,5,6)), new LottoNumber(7))),
-            Arguments.of(LottoGrade.SECOND, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,4,5,7)), new LottoNumber(6))),
-            Arguments.of(LottoGrade.THIRD, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,4,5,7)), new LottoNumber(8))),
-            Arguments.of(LottoGrade.FOURTH, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,4,7,8)), new LottoNumber(6))),
-            Arguments.of(LottoGrade.FIFTH, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,10,11,12)), new LottoNumber(6))),
-            Arguments.of(LottoGrade.OTHER_GRADE, new WinningLottoNumbers(Lotto.of(List.of(3,10,11,12,13,14)), new LottoNumber(7))),
-            Arguments.of(LottoGrade.OTHER_GRADE, new WinningLottoNumbers(Lotto.of(List.of(2,3,7,8,9,10)), new LottoNumber(6)))
+            Arguments.of(LottoGrade.FIRST, new WinningLottoNumbers(Lotto.of(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7))),
+            Arguments.of(LottoGrade.SECOND, new WinningLottoNumbers(Lotto.of(List.of(1, 2, 3, 4, 5, 7)), new LottoNumber(6))),
+            Arguments.of(LottoGrade.THIRD, new WinningLottoNumbers(Lotto.of(List.of(1, 2, 3, 4, 5, 7)), new LottoNumber(8))),
+            Arguments.of(LottoGrade.FOURTH, new WinningLottoNumbers(Lotto.of(List.of(1, 2, 3, 4, 7, 8)), new LottoNumber(6))),
+            Arguments.of(LottoGrade.FIFTH, new WinningLottoNumbers(Lotto.of(List.of(1, 2, 3, 10, 11, 12)), new LottoNumber(6))),
+            Arguments.of(LottoGrade.OTHER_GRADE, new WinningLottoNumbers(Lotto.of(List.of(3, 10, 11, 12, 13, 14)), new LottoNumber(7))),
+            Arguments.of(LottoGrade.OTHER_GRADE, new WinningLottoNumbers(Lotto.of(List.of(2, 3, 7, 8, 9, 10)), new LottoNumber(6)))
         );
     }
 }

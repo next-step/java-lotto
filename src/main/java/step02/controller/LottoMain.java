@@ -2,6 +2,7 @@ package step02.controller;
 
 import java.util.List;
 
+import step02.domain.EarningRate;
 import step02.domain.Lotto;
 import step02.domain.LottoList;
 import step02.domain.LottoNumber;
@@ -20,18 +21,18 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int purchasePrice = InputView.initPurchasePrice();
-        LottoList lottoList = LottoSeller.sell(purchasePrice);
-        PrintView.printLottoPurchaseCountMessage(lottoList.size());
+        int manualLottoCount = InputView.initManualLottoCount();
+        List<String> manualLottoNumbers = InputView.initManualLotto(manualLottoCount);
+        LottoList lottoList = LottoSeller.sell(purchasePrice, manualLottoNumbers);
+        PrintView.printLottoPurchaseCountMessage(manualLottoCount, lottoList.size()-manualLottoCount);
         PrintView.printLottoNumbers(LottoListDto.from(lottoList));
-        PrintView.printBlank();
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
         int bonusBallNumber = InputView.initBonusBallNumber();
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Lotto.of(lastWeekWinningNumbers), new LottoNumber(bonusBallNumber));
-        PrintView.printBlank();
 
         LottoResult lottoResult = lottoList.generateLottoResult(winningLottoNumbers);
-        float earningRate = lottoResult.getTotalAmount() / (float) purchasePrice;
+        EarningRate earningRate = new EarningRate(lottoResult.getTotalAmount(), purchasePrice);
         PrintView.printLottoResult(LottoResultDto.of(lottoResult, earningRate));
     }
 }
