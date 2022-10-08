@@ -5,4 +5,8 @@ public class StringCalculator {
         result.add(back);
         return result;
     }
+
+    public static Number minus(Number result, int back) {
+        return null;
+    }
 }

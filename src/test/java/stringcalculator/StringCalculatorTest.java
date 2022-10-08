@@ -10,4 +10,9 @@ public class StringCalculatorTest {
     void add() {
         assertThat(StringCalculator.add(new Number("3"), 5)).isEqualTo(new Number("8"));
     }
+
+    @Test
+    void minus() {
+        assertThat(StringCalculator.minus(new Number("5"), 2)).isEqualTo(new Number("3"));
+    }
 }
