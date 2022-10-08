@@ -8,12 +8,7 @@ public class Formula {
     private int result;
 
     public Formula(String formula) {
-        if(formula == null){
-            throw new IllegalArgumentException("null 사용 금지");
-        }
-        if(formula.isBlank()){
-            throw new IllegalArgumentException("빈 문자열 사용 금지");
-        }
+        validate(formula);
         this.elements = formula.split(" ");
         this.calculator = new AddCalculator();
     }
@@ -21,6 +16,15 @@ public class Formula {
     public Formula(String[] elements) {
         this.elements = elements;
         this.calculator = new AddCalculator();
+    }
+
+    private void validate(String formula) {
+        if(formula == null){
+            throw new IllegalArgumentException("null 사용 금지");
+        }
+        if(formula.isBlank()){
+            throw new IllegalArgumentException("빈 문자열 사용 금지");
+        }
     }
 
     public int calculate() {
