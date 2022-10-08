@@ -6,6 +6,7 @@ public class Number {
 
     private int number;
     private static String NUMBER_CREATOR_INPUT_EXCEPTION = "Number 생성자에는 숫자만 입력 가능합니다.";
+    private static String DIVISION_ZERO_EXCEPTION = "0으로 나눌 수 없습니다.";
 
     public Number(String number) {
         try {
@@ -27,6 +28,13 @@ public class Number {
         this.number *= number;
     }
 
+    public void division(int number) {
+        if (number == 0) {
+            throw new IllegalArgumentException(DIVISION_ZERO_EXCEPTION);
+        }
+        this.number /= number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,5 +47,4 @@ public class Number {
     public int hashCode() {
         return Objects.hash(number);
     }
-
 }

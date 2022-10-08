@@ -40,7 +40,6 @@ public class NumberTest {
 
     @Test
     void multiply() {
-
         Assertions.assertAll(
                 () -> {
                     Number number = new Number("3");
@@ -53,6 +52,21 @@ public class NumberTest {
                     assertThat(number).isEqualTo(new Number("0"));
                 }
         );
+    }
+
+    @Test
+    void division(){
+        Number number = new Number("3");
+        number.division(3);
+
+        assertThat(number).isEqualTo(new Number("1"));
+    }
+
+    @Test
+    void division_zero(){
+        Number number = new Number("3");
+
+        assertThatThrownBy(() -> number.division(0)).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
