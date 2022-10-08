@@ -13,4 +13,12 @@ public class CalculatorTest {
 
         Assertions.assertThat(calculator.add(a, b)).isEqualTo(answer);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3:2:1", "5:3:2", "91:9:82"}, delimiter = ':')
+    void 뺄샘을_한다(int a, int b, int answer){
+        Calculator calculator = new Calculator();
+
+        Assertions.assertThat(calculator.subtract(a, b)).isEqualTo(answer);
+    }
 }
