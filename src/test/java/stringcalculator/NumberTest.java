@@ -38,4 +38,21 @@ public class NumberTest {
         assertThat(number).isEqualTo(new Number("2"));
     }
 
+    @Test
+    void multiply() {
+
+        Assertions.assertAll(
+                () -> {
+                    Number number = new Number("3");
+                    number.multiply(3);
+                    assertThat(number).isEqualTo(new Number("9"));
+                },
+                () -> {
+                    Number number = new Number("3");
+                    number.multiply(0);
+                    assertThat(number).isEqualTo(new Number("0"));
+                }
+        );
+    }
+
 }

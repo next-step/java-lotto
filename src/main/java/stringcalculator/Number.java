@@ -23,6 +23,10 @@ public class Number {
         this.number -= number;
     }
 
+    public void multiply(int number) {
+        this.number *= number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
