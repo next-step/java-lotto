@@ -51,8 +51,8 @@ public enum WinningPrize {
         return price;
     }
 
-    public boolean canMatch() {
+    public boolean isMatchOfBonus() {
 
-        return this.matchOfBonus;
+        return matchOfBonus;
     }
 }
