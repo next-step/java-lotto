@@ -14,6 +14,10 @@ public class Number {
         this.number = Integer.parseInt(number);
     }
 
+    public void add(int number) {
+        this.number += number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,7 +31,4 @@ public class Number {
         return Objects.hash(number);
     }
 
-    public void add(int number) {
-        this.number += number;
-    }
 }

@@ -19,7 +19,7 @@ public class NumberTest {
     }
 
     @Test
-    void add(){
+    void add() {
         Number number = new Number("1");
         number.add(2);
 
