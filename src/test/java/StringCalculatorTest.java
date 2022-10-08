@@ -11,23 +11,26 @@ public class StringCalculatorTest {
 
     @Test
     void 덧셈() {
-        assertThat(StringCalculator.calculator("2 + 3")).isEqualTo(5);
+        assertThat(StringCalculator.calculator(2, 3, "+")).isEqualTo(5);
     }
 
     @Test
     void 뺄셈() {
-        assertThat(StringCalculator.calculator("5 - 3")).isEqualTo(2);
+        assertThat(StringCalculator.calculator(5, 2, "-")).isEqualTo(3);
     }
 
     @Test
     void 곱셈() {
-        assertThat(StringCalculator.calculator("2 * 3")).isEqualTo(6);
+        assertThat(StringCalculator.calculator(2, 3, "*")).isEqualTo(6);
     }
 
     @Test
     void 나눗셈() {
-        assertThat(StringCalculator.calculator("6 / 2")).isEqualTo(3);
+        assertThat(StringCalculator.calculator(6, 2, "/")).isEqualTo(3);
     }
 
-
+    @Test
+    void 복합_연산() {
+        assertThat(StringCalculator.splitAndCalculate("2 + 3 * 4 / 2")).isEqualTo(10);
+    }
 }
