@@ -2,6 +2,8 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoRankRecord;
 
 public class LottoResultView {
 
@@ -22,5 +24,21 @@ public class LottoResultView {
             }
             System.out.println(numbers.get(numbers.size() - 1) + "]");
         }
+        System.out.println();
+    }
+
+    public static void printWinStatistics(List<LottoRankRecord> rankRecords) {
+        System.out.println("\n당첨 통계\n--------");
+        for (LottoRankRecord lottoRankRecord : rankRecords) {
+            LottoRank rank = lottoRankRecord.getRank();
+            int number = lottoRankRecord.getNumber();
+            System.out.println(
+                    rank.getCorrectNum() + "개 일치 " + "(" + rank.getWinPrize() + ")" + "- " + number
+                            + "개");
+        }
+    }
+
+    public static void printProfitRatio(float ratio) {
+        System.out.println("총 수익률은 " + String.format("%.2f", ratio) + "입니다.");
     }
 }
