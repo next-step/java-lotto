@@ -5,8 +5,12 @@ import java.util.Objects;
 public class Number {
 
     private int number;
+    private static String NUMBER_CREATOR_INPUT_EXCEPTION = "Number 생성자에는 숫자만 입력 가능합니다.";
 
     public Number(String number) {
+        if (!number.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException(NUMBER_CREATOR_INPUT_EXCEPTION);
+        }
         this.number = Integer.parseInt(number);
     }
 
