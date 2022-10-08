@@ -7,6 +7,7 @@ public class StringCalculator {
     }
 
     public static Number minus(Number result, int back) {
-        return null;
+        result.minus(back);
+        return result;
     }
 }
