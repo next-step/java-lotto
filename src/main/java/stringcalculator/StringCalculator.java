@@ -1,7 +1,7 @@
 package stringcalculator;
 
 import java.util.List;
-import stringcalculator.util.ConvertUtil;
+import stringcalculator.util.StringToIntUtil;
 
 public class StringCalculator {
 
@@ -22,7 +22,7 @@ public class StringCalculator {
 
     private void addFormula(String text, Formula formula, int i) {
         if (!isOddNumber(i)) {
-            formula.addNumber(ConvertUtil.toInt(text));
+            formula.addNumber(StringToIntUtil.apply(text));
         }
         if (isOddNumber(i)) {
             formula.addOperator(text);
