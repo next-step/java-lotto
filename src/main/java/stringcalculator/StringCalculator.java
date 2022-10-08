@@ -10,4 +10,9 @@ public class StringCalculator {
         result.minus(back);
         return result;
     }
+
+    public static Number multiply(Number result, int back) {
+        result.multiply(back);
+        return result;
+    }
 }

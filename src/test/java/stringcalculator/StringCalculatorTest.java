@@ -15,4 +15,9 @@ public class StringCalculatorTest {
     void minus() {
         assertThat(StringCalculator.minus(new Number("5"), 2)).isEqualTo(new Number("3"));
     }
+
+    @Test
+    void multiply() {
+        assertThat(StringCalculator.multiply(new Number("5"), 2)).isEqualTo(new Number("10"));
+    }
 }
