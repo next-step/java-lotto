@@ -1,7 +1,5 @@
 package lotto.step2.domain;
 
-import lotto.step2.dto.LottoNumberDTO;
-
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -19,8 +17,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
     
-    public LottoNumberDTO lottoNumberInformation() {
-        return new LottoNumberDTO(lottoNumber);
+    public int getLottoNumber() {
+        return lottoNumber;
     }
     
     @Override

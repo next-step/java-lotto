@@ -1,7 +1,5 @@
 package lotto.step2.domain;
 
-import lotto.step2.dto.LottoTicketsDTO;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,8 +26,8 @@ public class LottoTickets {
         return LottoRank.valueOf(countMatchingNumber, isExistBonusLottoNumber);
     }
     
-    public LottoTicketsDTO lottoTicketsInformation() {
-        return new LottoTicketsDTO(lottoTickets);
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
     
     @Override

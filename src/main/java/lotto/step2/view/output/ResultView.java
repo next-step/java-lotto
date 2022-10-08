@@ -1,8 +1,6 @@
 package lotto.step2.view.output;
 
 import lotto.step2.domain.*;
-import lotto.step2.dto.LottoNumberDTO;
-import lotto.step2.dto.LottoTicketDTO;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -21,17 +19,15 @@ public class ResultView {
     
     public static void purchasedLottoNumbersPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
         System.out.printf(PURCHASED_LOTTO_NUMBER_PRINT_FORM, paymentPrice.numberOfTickets());
-        lottoTickets.lottoTicketsInformation().getLottoTickets().stream()
-                .map(LottoTicket::lottoTicketInformation)
+        lottoTickets.getLottoTickets().stream()
                 .map(ResultView::lottoTicketPrintFormat)
                 .forEach(System.out::println);
         System.out.println();
     }
     
-    private static String lottoTicketPrintFormat(LottoTicketDTO lottoTicketDTO) {
-        return lottoTicketDTO.getLottoTicket().stream()
-                .map(LottoNumber::lottoNumberInformation)
-                .map(LottoNumberDTO::getLottoNumber)
+    private static String lottoTicketPrintFormat(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoTicket().stream()
+                .map(LottoNumber::getLottoNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", ", "[", "]"));
     }

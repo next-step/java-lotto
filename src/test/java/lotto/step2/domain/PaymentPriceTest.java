@@ -1,6 +1,5 @@
 package lotto.step2.domain;
 
-import lotto.step2.dto.PaymentPriceDTOTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ public class PaymentPriceTest {
     @Test
     @DisplayName("지불 금액 확인")
     void checkPaymentPrice() {
-        int paymentPrice = PaymentPriceDTOTest.PAYMENT_PRICE_DTO.getPaymentPrice();
+        int paymentPrice = PAYMENT_PRICE.getPaymentPrice();
         assertThat(paymentPrice).isEqualTo(14000);
     }
 }

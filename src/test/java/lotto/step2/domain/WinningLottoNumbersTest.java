@@ -1,6 +1,5 @@
 package lotto.step2.domain;
 
-import lotto.step2.dto.LottoTicketDTOTest;
 import lotto.step2fixture.domain.LottoNumberFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,7 @@ class WinningLottoNumbersTest {
     @Test
     @DisplayName("일치 번호 개수")
     void count_matching_number() {
-        List<LottoNumber> lottoNumbers = LottoTicketDTOTest.LOTTO_TICKET_DTO.getLottoTicket();
+        List<LottoNumber> lottoNumbers = LottoTicketTest.LOTTO_TICKET.getLottoTicket();
         int countMatchingNumber = WinningLottoNumbersTest.WINNING_LOTTO_NUMBERS.countMatchingNumber(lottoNumbers);
     
         assertThat(countMatchingNumber).isEqualTo(6);
@@ -41,7 +40,7 @@ class WinningLottoNumbersTest {
     @Test
     @DisplayName("로또 당첨번호를 보너스 번호로 입력 시 예외")
     void bonus_number_exception() {
-        List<LottoNumber> lottoTicket = LottoTicketTest.LOTTO_TICKET.lottoTicketInformation().getLottoTicket();
+        List<LottoNumber> lottoTicket = LottoTicketTest.LOTTO_TICKET.getLottoTicket();
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningLottoNumbers(lottoTicket, LottoNumberFixture.SIX))
                 .withMessage("입력하신 보너스 번호는 이미 존재하는 당첨 번호 입니다. 다시 입력해주세요.");
     }
