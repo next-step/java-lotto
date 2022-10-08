@@ -1,4 +1,4 @@
-package step1.enumeration;
+package step1.model.enumeration;
 
 import step1.exception.InvalidInputException;
 import step1.model.NumberCalculation;
