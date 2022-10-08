@@ -1,6 +1,7 @@
 package Lotto.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -14,8 +15,8 @@ public class Lotto {
     }
 
     private void validate(List<LottoNumber> lotto) {
-        if (lotto.size() != PROPER_LOTTONUMBER_COUNT) {
-            new IllegalArgumentException(LOTTO_COUNT_ERROR_MESSAGE);
+        if (lotto.stream().distinct().collect(Collectors.toList()).size() != PROPER_LOTTONUMBER_COUNT) {
+            throw new IllegalArgumentException(LOTTO_COUNT_ERROR_MESSAGE);
         }
     }
 
@@ -24,6 +25,7 @@ public class Lotto {
                 .filter(it -> luckyNumber.isContain(it))
                 .count();
     }
+
     public boolean isContain(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
     }

@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validate(int number) {
         if (number > LOTTO_MAX_NUMBER || number < LOTTO_MIN_NUMBER) {
-            new IllegalArgumentException(LOTTO_CONSTRUCOR_ERROR_MESSAGE);
+            throw new IllegalArgumentException(LOTTO_CONSTRUCOR_ERROR_MESSAGE);
         }
     }
 
