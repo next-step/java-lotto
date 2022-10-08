@@ -32,7 +32,7 @@ public class Number {
         return new Number(this.number - other.number);
     }
 
-    public Number multi(Number other) {
+    public Number multiplication(Number other) {
         return new Number(this.number * other.number);
     }
 

@@ -9,7 +9,7 @@ public interface ArithmeticOperation {
             return new Minus();
         }
         if ("*".equals(sign)) {
-            return new Multi();
+            return new Multiplication();
         }
         if ("/".equals(sign)) {
             return new Divide();
