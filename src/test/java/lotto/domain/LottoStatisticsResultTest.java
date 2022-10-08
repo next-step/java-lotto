@@ -24,7 +24,7 @@ class LottoStatisticsResultTest {
                 )
         ));
 
-        double expectedProfit = (2_000_000_000L * 2 + 1_500_000 + 5_000) / (5 * 1_000) * 100.0;
+        double expectedProfit = (2_000_000_000L * 2 + 1_500_000 + 5_000) / (5 * 1_000);
         assertThat(actual.getProfit()).isEqualTo(expectedProfit);
     }
 

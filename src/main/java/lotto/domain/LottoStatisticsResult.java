@@ -25,7 +25,7 @@ public class LottoStatisticsResult {
             totalCount += count;
             totalAmount = totalAmount.plus(rank.getReward().multiply(count));
         }
-        return totalCount > 0 ? totalAmount.divideBy(Lotto.PRICE.multiply(totalCount)) * 100.0 : 0;
+        return totalCount > 0 ? totalAmount.divideBy(Lotto.PRICE.multiply(totalCount)) : 0;
     }
 
     public static LottoStatisticsResult from(List<LottoRank> ranks) {
@@ -36,7 +36,7 @@ public class LottoStatisticsResult {
         return new LottoStatisticsResult(countByRank);
     }
 
-    public long getCountByRank(LottoRank rank) {
+    public int getCountByRank(LottoRank rank) {
         return countByRank.getOrDefault(rank, DEFAULT_COUNT_VALUE);
     }
 
