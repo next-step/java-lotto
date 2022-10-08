@@ -8,6 +8,6 @@ public class StringCalculatorTest {
 
     @Test
     void add() {
-        assertThat(StringCalculator.add(3, 5)).isEqualTo(8);
+        assertThat(StringCalculator.add(new Number("3"), 5)).isEqualTo(new Number("8"));
     }
 }

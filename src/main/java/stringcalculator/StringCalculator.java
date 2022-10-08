@@ -1,7 +1,8 @@
 package stringcalculator;
 
 public class StringCalculator {
-    public static int add(int front, int back) {
-        return front + back;
+    public static Number add(Number result, int back) {
+        result.add(back);
+        return result;
     }
 }
