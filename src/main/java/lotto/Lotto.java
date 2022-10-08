@@ -9,7 +9,7 @@ public class Lotto {
     private final List<Integer> lotto;
 
     public Lotto() {
-        this.lotto = getLottoNumbers();
+        this.lotto = getRandomNumbers();
     }
 
     private List<Integer> makeNumberArray() {
@@ -20,7 +20,7 @@ public class Lotto {
         return numbers;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<Integer> getRandomNumbers() {
         List<Integer> numbers = makeNumberArray();
         Collections.shuffle(numbers);
         List<Integer> sixNumbers = new ArrayList<>();
@@ -31,4 +31,7 @@ public class Lotto {
         return sixNumbers;
     }
 
+    public List<Integer> getLottoNumbers() {
+        return this.lotto;
+    }
 }
