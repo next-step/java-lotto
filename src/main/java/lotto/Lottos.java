@@ -1,7 +1,11 @@
 package lotto;
 
+import lotto.view.InputView;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
 
@@ -17,7 +21,22 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
+
     public int lottosSize() {
         return this.lottoList.size();
+    }
+
+
+    public Map<Integer, Integer> getResult(Lotto winning) {
+        Map<Integer, Integer> result = new HashMap<>();
+        for (Lotto lotto : lottoList) {
+            int sameNumbers = lotto.getSameNumbers(winning);
+            int count = result.getOrDefault(sameNumbers, 0);
+            result.put(sameNumbers, count+1);
+        }
+        return result;
     }
 }
