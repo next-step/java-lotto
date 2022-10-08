@@ -5,7 +5,15 @@ import java.util.List;
 
 public class Lotto {
 
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
+    }
+
     private static final int LOTTO_SIZE = 6;
+
 
     private final List<Integer> numbers;
 
@@ -24,7 +32,7 @@ public class Lotto {
     }
 
     public List<Integer> retrieveNumbers() {
-        return new ArrayList<>(numbers);
+        return numbers;
     }
 
     public long retrieveCorrectNum(List<Integer> correctNums) {

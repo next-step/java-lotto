@@ -16,6 +16,10 @@ public class LottoManger {
         }
     }
 
+    public List<Lotto> retrieveLottos() {
+        return lottos;
+    }
+
     public List<Long> retrieveWinNums(List<Integer> correctNumbers) {
         List<Long> winNums = new ArrayList<>();
         for (Lotto lotto : lottos) {

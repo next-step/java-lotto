@@ -1,13 +1,20 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ShuffleExtractStrategy extends ExtractStrategy {
+public class ShuffleExtractStrategy implements ExtractStrategy {
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     @Override
     public List<Integer> extractNumber(int number) {
-        Collections.shuffle(baseNumbers);
-        return baseNumbers.subList(0, number);
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
+            numbers.add(i);
+        }
+
+        Collections.shuffle(numbers);
+        return numbers.subList(0, number);
     }
 }
