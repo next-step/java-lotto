@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -7,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class InputValue {
     private static final Pattern FILTER = Pattern.compile("^([0-9-+*/\\s]+)$");
-    private static final String BLINK = "\\s";
+    private static final String BLANK = "\\s";
     private final List<String> expression;
 
     public InputValue(String input) {
@@ -16,11 +15,17 @@ public class InputValue {
     }
 
     private List<String> changeList(String input) {
-        return Arrays.stream(splitInput1(input)).collect(Collectors.toList());
+        return Arrays
+                .stream(splitInput(input))
+                .collect(Collectors.toList());
     }
 
-    private String[] splitInput1(String input) {
-        return input.split(BLINK);
+    private String[] splitInput(String input) {
+        return input.split(BLANK);
+    }
+
+    public int getSize() {
+        return expression.size();
     }
 
     public List<String> getExpression() {
@@ -28,7 +33,25 @@ public class InputValue {
     }
 
     private void validateInput(String input) {
+        validateSplit(input);
+        validateBlank(input);
+        validateEmpty(input);
+    }
+
+    private void validateSplit(String input) {
         if (!FILTER.matcher(input).matches()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateBlank(String input) {
+        if (input.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateEmpty(String input) {
+        if (input.isEmpty()) {
             throw new IllegalArgumentException();
         }
     }
