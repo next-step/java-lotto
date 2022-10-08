@@ -6,22 +6,18 @@ public class Number {
 
     private final int number;
 
-    private Number(int number) {
-        this.number = number;
-    }
-
-    public static Number stringToNumberFactory(String number) {
+    public Number(String number) {
         if (number == null) {
             throw new IllegalArgumentException("숫자가 NULL 입니다!");
         }
         if (number.length() == 0) {
             throw new IllegalArgumentException("빈 공백 문자입니다!");
         }
-        return new Number(Integer.parseInt(number));
+        this.number = Integer.parseInt(number);
     }
 
-    public static Number IntToNumberFactory(int number) {
-        return new Number(number);
+    public Number(int number) {
+        this.number = number;
     }
 
     public Number plus(Number other) {

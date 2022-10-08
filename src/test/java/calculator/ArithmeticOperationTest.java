@@ -18,7 +18,7 @@ public class ArithmeticOperationTest {
 
     @Test
     void MULTI_부호_변환() {
-        assertThat(ArithmeticOperation.sign("*")).isInstanceOf(Multi.class);
+        assertThat(ArithmeticOperation.sign("*")).isInstanceOf(Multiplication.class);
     }
 
     @Test

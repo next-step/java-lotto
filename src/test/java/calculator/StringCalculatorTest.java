@@ -17,6 +17,6 @@ public class StringCalculatorTest {
         Number result = stringCalculator.calculate(Arrays.asList("1", "+", "2"));
 
         //then
-        assertThat(result).isEqualTo(Number.IntToNumberFactory(3));
+        assertThat(result).isEqualTo(new Number(3));
     }
 }

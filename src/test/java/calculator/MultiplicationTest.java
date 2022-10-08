@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DivideTest {
+public class MultiplicationTest {
     @Test
-    void 나누기() {
+    void 곱하기() {
         //given
         Number one = new Number("1");
         Number two = new Number("2");
 
         //when
-        ArithmeticOperation divide = new Divide();
-        Number result = divide.calculate(two, one);
+        ArithmeticOperation multi = new Multiplication();
+        Number result = multi.calculate(one, two);
 
         //then
         assertThat(result).isEqualTo(new Number("2"));

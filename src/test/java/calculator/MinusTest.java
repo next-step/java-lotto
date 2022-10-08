@@ -8,14 +8,14 @@ public class MinusTest {
     @Test
     void 빼기() {
         //given
-        Number one = Number.stringToNumberFactory("1");
-        Number two = Number.stringToNumberFactory("2");
+        Number one = new Number("1");
+        Number two = new Number("2");
 
         //when
         ArithmeticOperation minus = new Minus();
         Number result = minus.calculate(one, two);
 
         //then
-        assertThat(result).isEqualTo(Number.stringToNumberFactory("-1"));
+        assertThat(result).isEqualTo(new Number("-1"));
     }
 }

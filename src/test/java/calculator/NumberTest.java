@@ -7,14 +7,14 @@ public class NumberTest {
     @Test
     void 숫자_Null() {
         Assertions.assertThatThrownBy(() -> {
-            Number.stringToNumberFactory(null);
+            new Number(null);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 숫자_빈공백() {
         Assertions.assertThatThrownBy(() -> {
-            Number.stringToNumberFactory("");
+            new Number("");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

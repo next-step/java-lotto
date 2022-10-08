@@ -8,14 +8,14 @@ public class PlusTest {
     @Test
     void 더하기() {
         //given
-        Number one = Number.stringToNumberFactory("1");
-        Number two = Number.stringToNumberFactory("2");
+        Number one = new Number("1");
+        Number two = new Number("2");
 
         //when
         ArithmeticOperation plus = new Plus();
         Number result = plus.calculate(one, two);
 
         //then
-        assertThat(result).isEqualTo(Number.stringToNumberFactory("3"));
+        assertThat(result).isEqualTo(new Number("3"));
     }
 }
