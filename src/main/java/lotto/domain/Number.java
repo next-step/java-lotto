@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Number {
 
@@ -22,6 +25,13 @@ public class Number {
         } catch (NumberFormatException nfe) {
             throw new IllegalArgumentException("숫자만 입력해야 합니다.");
         }
+    }
+
+    public static List<Integer> range() {
+
+        return IntStream.range(MIN, MAX)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     private void validate(final int number) {
