@@ -25,4 +25,12 @@ public class NumberTest {
 
         assertThat(number).isEqualTo(new Number("3"));
     }
+
+    @Test
+    void minus(){
+        Number number = new Number("3");
+        number.minus(1);
+
+        assertThat(number).isEqualTo(new Number("2"));
+    }
 }
