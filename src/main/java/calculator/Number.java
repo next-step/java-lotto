@@ -33,6 +33,9 @@ public class Number {
     }
 
     public Number divide(Number other) {
+        if (this.number % other.number != 0) {
+            throw new IllegalArgumentException("나눗셈이 정수로 떨어지지 않습니다!");
+        }
         return new Number(this.number / other.number);
     }
 
