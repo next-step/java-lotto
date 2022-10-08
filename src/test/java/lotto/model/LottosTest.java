@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottosTest {
 
+    @DisplayName("로또가 여러개 생성된다.")
     @Test
     void createLottos() {
         Lottos lottos = new Lottos(

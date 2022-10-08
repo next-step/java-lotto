@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class MoneyTest {
 
+    @DisplayName("금액이 생성된다.")
     @Test
     void createMoney() {
         Money money = new Money(1000);

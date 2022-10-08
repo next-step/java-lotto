@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberTest {
 
+    @DisplayName("로또 번호가 생성된다.")
     @Test
     void createLottoNumber() {
         LottoNumber lottoNumber = new LottoNumber(1);

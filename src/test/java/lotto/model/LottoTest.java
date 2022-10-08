@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTest {
 
+    @DisplayName("로또가 생성된다.")
     @Test
     void createLotto() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
