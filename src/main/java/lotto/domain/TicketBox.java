@@ -1,26 +1,28 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
-import lotto.domain.exception.NullTicketsException;
-import lotto.domain.exception.OutOfTicketIndexException;
+import java.util.Set;
+import java.util.stream.Collectors;
+import lotto.domain.exception.InvalidTicketsException;
 import lotto.domain.number.Ticket;
 
 public class TicketBox {
 
-    private final List<Ticket> tickets;
+    private final Set<Ticket> tickets;
 
     public TicketBox(List<Ticket> tickets) {
-        if (tickets == null) {
-            throw new NullTicketsException();
+        if (tickets == null
+                || new HashSet<>(tickets).size() < tickets.size()) {
+            throw new InvalidTicketsException();
         }
-        this.tickets = tickets;
+
+        this.tickets = new HashSet<>(tickets);
     }
 
-    public Ticket getTicket(int index) {
-        if (tickets.size() <= index) {
-            throw new OutOfTicketIndexException();
-        }
-        return tickets.get(index);
+    public List<Ticket> getTickets() {
+        return tickets.stream()
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public int getSize() {

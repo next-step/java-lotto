@@ -1,17 +1,20 @@
 package lotto.domain.number;
 
-import java.util.List;
+import lotto.domain.exception.NullLottoBallsListException;
 
-public class Ticket implements LottoNumbers {
+public class Ticket {
 
-    private final List<Integer> numbers;
+    private final LottoBalls lottoBalls;
 
-    public Ticket(List<Integer> numbers) {
-        this.numbers = getValidatedNumbers(numbers);
+    public Ticket(LottoBalls lottoBalls) {
+        if (lottoBalls == null) {
+            throw new NullLottoBallsListException();
+        }
+
+        this.lottoBalls = lottoBalls;
     }
 
-    @Override
-    public List<Integer> getNumbers() {
-        return numbers;
+    public LottoBalls getLottoBalls() {
+        return lottoBalls;
     }
 }

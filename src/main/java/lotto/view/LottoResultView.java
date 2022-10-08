@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.stream.Collectors;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
+import lotto.domain.number.Ticket;
 import lotto.domain.winner.WinningCondition;
 import lotto.domain.winner.WinningReport;
 
@@ -13,12 +14,12 @@ public class LottoResultView {
     }
 
     public static void printTickets(TicketBox ticketBox) {
-        for (int i = 0; i < ticketBox.getSize(); i++) {
+        for (Ticket ticket : ticketBox.getTickets()) {
             System.out.println("[" +
-                    ticketBox.getTicket(i)
-                            .getNumbers()
+                    ticket.getLottoBalls()
+                            .getBalls()
                             .stream()
-                            .map(String::valueOf)
+                            .map(ball -> String.valueOf(ball.getNumber()))
                             .collect(Collectors.joining(", ")) +
                     "]");
         }

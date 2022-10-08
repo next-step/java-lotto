@@ -2,10 +2,11 @@ package lotto.domain.winner;
 
 import java.util.EnumMap;
 import java.util.Map;
-import lotto.domain.LottoMachine;
+import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
 import lotto.domain.exception.InvalidPurchasePriceException;
-import lotto.domain.number.WinningNumbers;
+import lotto.domain.number.Ticket;
+import lotto.domain.number.WinningTicket;
 
 public class WinningReport {
 
@@ -18,10 +19,9 @@ public class WinningReport {
         }
     }
 
-    public void updateReport(TicketBox ticketBox, WinningNumbers winningNumbers) {
-        for (int i = 0; i < ticketBox.getSize(); i++) {
-            updateReport(
-                    LottoMachine.getMatchingNumberCount(winningNumbers, ticketBox.getTicket(i)));
+    public void updateReport(TicketBox ticketBox, WinningTicket winningNumbers) {
+        for (Ticket ticket : ticketBox.getTickets()) {
+            updateReport(winningNumbers.countMatchBalls(ticket));
         }
     }
 
@@ -29,12 +29,12 @@ public class WinningReport {
         return report.get(condition);
     }
 
-    public double getRateOfReturn(int purchasePrice) {
-        if (purchasePrice <= 0) {
+    public double getRateOfReturn(PurchasePrice purchasePrice) {
+        if (purchasePrice.getPrice() <= 0) {
             throw new InvalidPurchasePriceException();
         }
 
-        return Math.floor((getSumOfPrize() / purchasePrice) * 100) / 100;
+        return Math.floor((getSumOfPrize() / purchasePrice.getPrice()) * 100) / 100;
     }
 
     private void updateReport(int matchCount) {

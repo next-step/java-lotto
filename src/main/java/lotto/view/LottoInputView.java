@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.exception.IntegerMismatchException;
-import lotto.domain.number.WinningNumbers;
+import lotto.domain.number.LottoBall;
+import lotto.domain.number.LottoBalls;
+import lotto.domain.number.WinningTicket;
 
 public class LottoInputView {
 
@@ -15,12 +17,17 @@ public class LottoInputView {
         return getIntData(insertData());
     }
 
-    public static WinningNumbers insertWinnerNumbers() {
+    public static WinningTicket insertWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new WinningNumbers(
-                Arrays.stream(insertData().split(", "))
-                        .map(LottoInputView::getIntData)
-                        .collect(Collectors.toUnmodifiableList()));
+
+        return new WinningTicket(
+                new LottoBalls(
+                        Arrays.stream(insertData().split(", "))
+                                .map(LottoInputView::getIntData)
+                                .map(LottoBall::new)
+                                .collect(Collectors.toUnmodifiableList())
+                )
+        );
     }
 
     private static int getIntData(String str) {

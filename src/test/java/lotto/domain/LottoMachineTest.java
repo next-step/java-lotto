@@ -1,52 +1,27 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import java.util.List;
-import java.util.stream.Stream;
-import lotto.domain.number.Ticket;
-import lotto.domain.number.WinningNumbers;
+import lotto.domain.exception.InvalidPurchasePriceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoMachineTest {
 
     @Test
     @DisplayName("주어진 금액에 맞는 수만큼 자동 로또 생성")
     void get_automatic_tickets() {
-        assertThat(LottoMachine.getAutomaticTickets(14000)
+        assertThat(LottoMachine.getAutomaticTickets(new PurchasePrice(14000))
                 .getSize())
                 .isEqualTo(14);
     }
 
-    @ParameterizedTest
-    @MethodSource("getMatchCountTestArguments")
-    @DisplayName("주어진 당첨 번호로 해당 로또 숫자 일치 수 판별")
-    void determine_matching_count(WinningNumbers winningNumbers, Ticket ticket, int expected) {
-        assertThat(LottoMachine.getMatchingNumberCount(winningNumbers, ticket))
-                .isEqualTo(expected);
+    @Test
+    @DisplayName("최소 금액 보다 적은 돈으로 자동 로또 생성 시 예외 발생")
+    void fail_to_get_automatic_tickets_by_invalid_purchasePrice() {
+        assertThatExceptionOfType(InvalidPurchasePriceException.class)
+                .isThrownBy(() -> LottoMachine.getAutomaticTickets(new PurchasePrice(500)));
     }
 
-    private static Stream<Arguments> getMatchCountTestArguments() {
-        return Stream.of(
-                Arguments.arguments(
-                        new WinningNumbers(List.of(3, 8, 12, 14, 15, 17)),
-                        new Ticket(List.of(3, 8, 12, 14, 15, 17)),
-                        6
-                ),
-                Arguments.arguments(
-                        new WinningNumbers(List.of(3, 8, 12, 14, 15, 17)),
-                        new Ticket(List.of(1, 2, 9, 11, 19, 21)),
-                        0
-                ),
-                Arguments.arguments(
-                        new WinningNumbers(List.of(3, 8, 12, 14, 15, 17)),
-                        new Ticket(List.of(3, 5, 12, 13, 14, 19)),
-                        3
-                )
-        );
-    }
 }

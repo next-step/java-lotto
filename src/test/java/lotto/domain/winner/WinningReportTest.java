@@ -1,5 +1,6 @@
 package lotto.domain.winner;
 
+import static lotto.domain.LottoBallsHelper.numbersToBalls;
 import static lotto.domain.winner.WinningCondition.MATCH_FIVE;
 import static lotto.domain.winner.WinningCondition.MATCH_FOR;
 import static lotto.domain.winner.WinningCondition.MATCH_SIX;
@@ -11,7 +12,7 @@ import java.util.List;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
 import lotto.domain.number.Ticket;
-import lotto.domain.number.WinningNumbers;
+import lotto.domain.number.WinningTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,14 +24,15 @@ class WinningReportTest {
         WinningReport winningReport = new WinningReport();
         TicketBox ticketBox = new TicketBox(
                 List.of(
-                        new Ticket(List.of(5, 8, 24, 40, 42, 44)),
-                        new Ticket(List.of(1, 6, 9, 24, 33, 40)),
-                        new Ticket(List.of(5, 6, 7, 17, 25, 43)),
-                        new Ticket(List.of(2, 10, 13, 23, 36, 42)),
-                        new Ticket(List.of(5, 13, 28, 29, 31, 39))
+                        new Ticket(numbersToBalls(List.of(5, 8, 24, 40, 42, 44))),
+                        new Ticket(numbersToBalls(List.of(1, 6, 9, 24, 33, 40))),
+                        new Ticket(numbersToBalls(List.of(5, 6, 7, 17, 25, 43))),
+                        new Ticket(numbersToBalls(List.of(2, 10, 13, 23, 36, 42))),
+                        new Ticket(numbersToBalls(List.of(5, 13, 28, 29, 31, 39)))
                 )
         );
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(5, 6, 24, 25, 42, 43));
+        WinningTicket winningNumbers = new WinningTicket(
+                numbersToBalls(List.of(5, 6, 24, 25, 42, 43)));
 
         winningReport.updateReport(ticketBox, winningNumbers);
 
