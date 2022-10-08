@@ -7,15 +7,13 @@ import java.util.List;
 
 public class LottoStore {
     public Lottos buy(LottoRequestDto request) {
-        List<String> manualLottoNumbers = request.lottoNumbers();
+        int autoQuantity = getAutoQuantity(request);
 
-        int autoCount = getAutoCount(request, manualLottoNumbers);
-
-        return LottoFactory.create(autoCount, manualLottoNumbers);
+        return LottoFactory.create(autoQuantity, request.lottoNumbers());
     }
 
-    private int getAutoCount(LottoRequestDto request, List<String> manualLottoNumbers) {
-        return (request.money() - getManualLottoPrice(manualLottoNumbers)) / Lotto.PRICE;
+    private int getAutoQuantity(LottoRequestDto request) {
+        return (request.money() - getManualLottoPrice(request.lottoNumbers())) / Lotto.PRICE;
     }
 
     private int getManualLottoPrice(List<String> manualLottoNumbers) {
