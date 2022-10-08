@@ -19,10 +19,10 @@
 * [x] 계산 결과 출력
 
 ### 문자열 계산기 리팩터링 요구사항
-* [ ] try-catch 대신 예외 발생 전에 오류 잡기
-* [ ] BinaryOperator<> 사용해보기
+* [x] try-catch 대신 예외 발생 전에 오류 잡기
+* [x] BinaryOperator<> 사용해보기
 * [ ] 문자열계산기를 무상태 객체로 리팩터링 해보기
-* [ ] ConverUtil 대신 SRP를 지킬 수 있는 객체로 만들어보기
+* [x] ConverUtil 대신 SRP를 지킬 수 있는 객체로 만들어보기
 
 
   
