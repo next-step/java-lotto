@@ -21,11 +21,11 @@ public class ResultView {
         System.out.printf("%d개를 구매했습니다.", count);
     }
 
-    public static void autoLottoNumberPrint(final LottoNumbers lottoNumbers) {
+    public static void autoLottoNumberPrint(final Lottos lottos) {
 
         blank();
-        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
-            appendResult(lottoNumber.getLottoNumber());
+        for (Lotto lotto : lottos.getLottos()) {
+            appendResult(lotto.getLotto());
         }
     }
 
@@ -87,7 +87,7 @@ public class ResultView {
 
     private static String bonusCheck(final WinningPrize winningPrize) {
 
-        if (winningPrize.canMatch()) {
+        if (winningPrize.isMatchOfBonus()) {
             return ", 보너스 볼 일치";
         }
         return EMPTY;
