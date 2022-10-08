@@ -4,12 +4,8 @@ import java.util.Arrays;
 
 public class StringCalculatorMain {
     public static void main(String[] args) {
-
-        StringCalculator stringCalculator = new StringCalculator();
-        String strings = "3 + 5 - 3";
-
-        Number result = stringCalculator.calculate(Arrays.asList(strings.split(" ")));
-        System.out.println(result.getNumber());
-
+        String strings = "2 + 3 * 4 / 2";
+        StringCalculator stringCalculator = new StringCalculator(Arrays.asList(strings.split(" ")));
+        System.out.println(stringCalculator.calculate().getNumber());
     }
 }
