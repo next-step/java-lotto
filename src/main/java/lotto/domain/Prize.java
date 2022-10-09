@@ -1,10 +1,10 @@
 package lotto.domain;
 
 public enum Prize {
-    FIRST(6, new Money(2000000000)), 
-    SECOND(5, new Money(1500000)), 
-    THIRD(4, new Money(50000)), 
-    FOURTH(3, new Money(5000)), 
+    FIRST(6, new Money(2_000_000_000)), 
+    SECOND(5, new Money(1_500_000)), 
+    THIRD(4, new Money(50_000)), 
+    FOURTH(3, new Money(5_000)), 
     NO_PRIZE(0, new Money(0));
 
     private final int matchCount;
