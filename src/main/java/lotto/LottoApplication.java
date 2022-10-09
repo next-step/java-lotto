@@ -11,17 +11,18 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int purchaseAmount = InputView.inputPurchaseAmount();
-        int passiveLottoCount = InputView.inputPassiveLottoCount();
-        List<LottoNumbersWrapper> numbersCollection = InputView.inputPassiveLottoNumbers(passiveLottoCount);
+        int purchaseAmount = InputView.getPurchaseAmount();
+        int passiveLottoCount = InputView.getPassiveLottoCount();
+        List<LottoNumbersWrapper> numbersCollection = InputView.getPassiveLottoNumbers(passiveLottoCount);
 
         LottoMachine lottoMachine = new LottoMachine();
         LottoWrapper lottoWrapper = lottoMachine.buyLotto(purchaseAmount, passiveLottoCount, numbersCollection);
 
         ResultView.printLottoState(lottoWrapper, passiveLottoCount);
 
-        LottoNumbersWrapper lastWeeksCollectNumbers = InputView.inputLastWeeksCollectNumbers();
+        LottoNumbersWrapper lastWeeksCollectNumbers = InputView.getLastWeeksCollectNumbers();
 
-        ResultView.printResult(new Result(lottoWrapper, lastWeeksCollectNumbers, InputView.inputBonusNumber()));
+        ResultView.printResult(new Result(lottoWrapper, lastWeeksCollectNumbers, InputView.getBonusNumber()));
     }
+
 }
