@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LottoResult {
     private final LottoNumbers lottoNumbers;
-    private final LottoNumber bonusNumber;
+    private final BonusLottoNumber bonusNumber;
 
     public LottoResult(List<Integer> numbers, int bonusNumber) {
         this.lottoNumbers = LottoNumbers.valueOf(numbers);
@@ -15,7 +15,7 @@ public class LottoResult {
         return lottoNumbers;
     }
 
-    public LottoNumber getBonusNumber() {
+    public BonusLottoNumber getBonusNumber() {
         return bonusNumber;
     }
 }
