@@ -18,8 +18,15 @@ public class InputView {
         return wrapMethodCall(this::doGetUserInput);
     }
 
+    public List<Integer> getManualLottoNumbers() {
+        return wrapMethodCall(this::doGetLottoNumbers);
+    }
+
     public List<Integer> getLastWeekLottoResult() {
-        return wrapMethodCall(this::doGetLastWeekLottoResult);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> result =  wrapMethodCall(this::doGetLottoNumbers);
+        System.out.println();
+        return result;
     }
 
     public int getBonusNumberInput() {
@@ -36,18 +43,14 @@ public class InputView {
         System.out.println("");
         clearBuffer();
 
-        return new User(money);
+        return new User(money, manualTicketCount);
     }
 
-    private List<Integer> doGetLastWeekLottoResult() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> lottoNumbers = Arrays.stream(scanner.nextLine().split(","))
+    private List<Integer> doGetLottoNumbers() {
+        return Arrays.stream(scanner.nextLine().split(","))
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(toList());
-        System.out.println();
-
-        return lottoNumbers;
     }
 
     private int doGetBonusNumberInput() {

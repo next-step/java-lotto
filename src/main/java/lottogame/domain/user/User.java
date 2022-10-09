@@ -16,10 +16,19 @@ public class User {
     }
 
     public User(Money money, int manualTicketCount) {
-        validate(manualTicketCount);
         this.money = money;
         this.lottoTickets = new ArrayList<>();
         this.manualTicketCount = manualTicketCount;
+    }
+
+    public void validateManualTicketCondition(Money ticketPrice) {
+        if (manualTicketCount < 0) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 음수가 될 수 없습니다.");
+        }
+
+        if (!hasEnoughMoney(ticketPrice.times(manualTicketCount))) {
+            throw new IllegalArgumentException("입력한 갯수의 수동 로또 구입에 필요한 돈이 충분하지 않습니다.");
+        }
     }
 
     public boolean hasEnoughMoney(Money money) {
@@ -35,17 +44,15 @@ public class User {
         lottoTickets.add(lottoTicket);
     }
 
-    private void validate(int manualTicketCount) {
-        if (manualTicketCount < 0) {
-            throw new IllegalArgumentException("수동으로 구매할 로또 수는 음수가 될 수 없습니다.");
-        }
-    }
-
     public Money getMoney() {
         return money;
     }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public int getManualTicketCount() {
+        return manualTicketCount;
     }
 }
