@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatisticsResult;
 import org.junit.jupiter.api.DisplayName;
@@ -16,17 +17,37 @@ class LottoStatisticsCalculatorTest {
     @Test
     void calculateStatistics() {
         Lotto winningLotto = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusLottoNumber = new LottoNumber(7);
         List<Lotto> lottos = List.of(
+                Lotto.from(List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.from(List.of(1, 2, 3, 4, 5, 7)),
+                Lotto.from(List.of(1, 2, 3, 4, 5, 8)),
+                Lotto.from(List.of(1, 2, 3, 4, 7, 8)),
                 Lotto.from(List.of(1, 2, 3, 7, 8, 9)),
-                Lotto.from(List.of(7, 8, 9, 10, 11, 12))
+                Lotto.from(List.of(7, 8, 9, 10, 11, 12)),
+                Lotto.from(List.of(17, 18, 19, 20, 21, 22)),
+                Lotto.from(List.of(27, 28, 29, 30, 31, 32)),
+                Lotto.from(List.of(37, 38, 39, 40, 41, 42)),
+                Lotto.from(List.of(7, 8, 9, 40, 41, 42))
         );
-        LottoStatisticsResult actual = LottoStatisticsCalculator.calculateStatistics(winningLotto, lottos);
+        LottoStatisticsResult actual = LottoStatisticsCalculator.calculateStatistics(winningLotto, bonusLottoNumber, lottos);
         assertThat(actual).isEqualTo(
                 LottoStatisticsResult.from(
-                        List.of(LottoRank.FOURTH, LottoRank.NONE)
+                        List.of(
+                                LottoRank.FIRST,
+                                LottoRank.SECOND,
+                                LottoRank.THIRD,
+                                LottoRank.FOURTH,
+                                LottoRank.FIFTH,
+                                LottoRank.NONE,
+                                LottoRank.NONE,
+                                LottoRank.NONE,
+                                LottoRank.NONE,
+                                LottoRank.NONE
+                        )
                 )
         );
-        assertThat(actual.getProfit()).isEqualTo(2.5);
+        assertThat(actual.getProfit()).isEqualTo(203_155.5);
     }
 
 }

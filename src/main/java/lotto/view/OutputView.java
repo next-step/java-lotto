@@ -35,6 +35,9 @@ public class OutputView {
     }
 
     private static String getStringFormat(LottoRank rank, int numberOfRank) {
+        if (rank.hasBonusNumber()) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%s원)- %d개", rank.getMatchCount(), rank.getReward(), numberOfRank);
+        }
         return String.format("%d개 일치 (%s원)- %d개", rank.getMatchCount(), rank.getReward(), numberOfRank);
     }
 
