@@ -11,11 +11,7 @@ import static lotto.domain.LottoNumber.shuffleNumbers;
 public class Lotto {
     private final static int LOTTO_SIZE = 6;
 
-    public List<NavigableSet<Integer>> lottoMachine(final UserInput userInput) {
-        return lotto(userInput);
-    }
-
-    private List<NavigableSet<Integer>> lotto(final UserInput userInput) {
+    public List<NavigableSet<Integer>> lotto(final UserInput userInput) {
         return tickets(userInput.count());
     }
 

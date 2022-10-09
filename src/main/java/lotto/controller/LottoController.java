@@ -10,7 +10,7 @@ public class LottoController {
 
     public void lottoGame() {
         User user = new User(new UserInput(new Input().price()));
-        user.receiveTickets(new Lotto().lottoMachine(user.userInput()));
+        user.receiveTickets(new Lotto().lotto(user.userInput()));
         Output.printBuyCount(user.userInput().count());
         Output.printBuyTickets(user.lottoTickets());
 
