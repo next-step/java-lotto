@@ -1,6 +1,6 @@
 package stringcalculator.command;
 
-import stringcalculator.Number;
+import stringcalculator.domain.Number;
 
 @FunctionalInterface
 public interface Command {

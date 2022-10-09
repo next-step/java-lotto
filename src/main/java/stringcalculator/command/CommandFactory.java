@@ -1,4 +1,4 @@
-package stringcalculator;
+package stringcalculator.command;
 
 import java.util.Set;
 

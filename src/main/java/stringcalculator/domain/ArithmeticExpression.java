@@ -1,6 +1,7 @@
-package stringcalculator;
+package stringcalculator.domain;
 
 import stringcalculator.command.Command;
+import stringcalculator.command.CommandFactory;
 
 public class ArithmeticExpression {
     private final Number leftNumber;

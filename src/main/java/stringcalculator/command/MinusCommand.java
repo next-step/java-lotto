@@ -1,6 +1,6 @@
 package stringcalculator.command;
 
-import stringcalculator.Number;
+import stringcalculator.domain.Number;
 
 public class MinusCommand implements Command {
 
