@@ -23,19 +23,13 @@ public class ArithmeticExpression {
 
     public ArithmeticExpression append(String value) {
         if (Number.isNumber(value)) {
-            if (leftNumber == null) {
-                return new ArithmeticExpression(Number.parse(value), this.command, this.rightNumber);
-            } else if (rightNumber == null) {
-                return new ArithmeticExpression(this.leftNumber, this.command, Number.parse(value));
-            }
+            return appendNumber(value);
         } else {
-            return new ArithmeticExpression(this.leftNumber, new CommandFactory().getCommand(value), this.rightNumber);
+            return appendCommand(value);
         }
-
-        return this;
     }
 
-    public ArithmeticExpression appendNumber(String value) {
+    private ArithmeticExpression appendNumber(String value) {
         if (!Number.isNumber(value)) {
             return this;
         }
@@ -45,11 +39,11 @@ public class ArithmeticExpression {
         } else if (rightNumber == null) {
             return new ArithmeticExpression(this.leftNumber, this.command, Number.parse(value));
         } else {
-            throw new RuntimeException();
+            throw new RuntimeException("계산 중 오류가 발생했습니다. 계산식=" + this.toString());
         }
     }
 
-    public ArithmeticExpression appendCommand(String value) {
+    private ArithmeticExpression appendCommand(String value) {
         if (Number.isNumber(value)) {
             return this;
         }
@@ -69,4 +63,13 @@ public class ArithmeticExpression {
         return this.leftNumber;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ArithmeticExpression{");
+        sb.append("leftNumber=").append(leftNumber);
+        sb.append(", command=").append(command);
+        sb.append(", rightNumber=").append(rightNumber);
+        sb.append('}');
+        return sb.toString();
+    }
 }

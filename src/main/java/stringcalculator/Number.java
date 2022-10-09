@@ -66,4 +66,12 @@ public class Number {
     public Number divide(Number number) {
         return new Number(this.value / number.value);
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Number{");
+        sb.append("value=").append(value);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -8,4 +8,9 @@ public class AddCommand implements Command {
     public Number execute(Number leftNumber, Number rightNumber) {
         return leftNumber.add(rightNumber);
     }
+
+    @Override
+    public String toString() {
+        return "연산: +";
+    }
 }

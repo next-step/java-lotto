@@ -8,4 +8,9 @@ public class DivideCommand implements Command {
     public Number execute(Number leftNumber, Number rightNumber) {
         return leftNumber.divide(rightNumber);
     }
+
+    @Override
+    public String toString() {
+        return "연산: /";
+    }
 }
