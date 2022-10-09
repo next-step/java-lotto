@@ -9,8 +9,6 @@ import lottogame.view.LottoNumberConsoleInputStrategy;
 import lottogame.view.OutputView;
 
 public class LottoGameController {
-    private static final String NOT_ENOUGH_MONEY_MESSAGE = "소지 금액이 부족합니다.";
-
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -33,10 +31,7 @@ public class LottoGameController {
         buyManualLottoTicket(user);
         buyAutomaticLottoTicket(user);
 
-        if (!user.hasTickets()) {
-            outputView.printError(NOT_ENOUGH_MONEY_MESSAGE);
-            return;
-        }
+        user.checkValidTicketBuying();
 
         printResult(user);
     }

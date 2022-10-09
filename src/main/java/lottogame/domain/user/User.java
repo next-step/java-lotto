@@ -31,13 +31,16 @@ public class User {
         }
     }
 
+    public void checkValidTicketBuying() {
+        if (lottoTickets.isEmpty()) {
+            throw new IllegalStateException("소지 금액이 부족합니다.");
+        }
+    }
+
     public boolean hasEnoughMoney(Money money) {
         return this.money.isGreaterThanOrEqual(money);
     }
 
-    public boolean hasTickets() {
-        return !lottoTickets.isEmpty();
-    }
 
     public void buyTicket(LottoTicket lottoTicket, Money ticketPrice) {
         money = money.minus(ticketPrice);
