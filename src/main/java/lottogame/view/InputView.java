@@ -28,10 +28,15 @@ public class InputView {
 
     private User doGetUserInput() {
         System.out.println("구입 금액을 입력해 주세요.");
-        User user = new User(new Money(scanner.nextInt()));
+        Money money = new Money(scanner.nextInt());
+        System.out.println("");
+
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualTicketCount = scanner.nextInt();
+        System.out.println("");
         clearBuffer();
 
-        return user;
+        return new User(money);
     }
 
     private List<Integer> doGetLastWeekLottoResult() {
