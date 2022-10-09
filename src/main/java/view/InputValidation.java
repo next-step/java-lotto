@@ -14,13 +14,15 @@ public class InputValidation {
     private static final int EMPTY_SIZE_VALUE = 0;
     private static final int SINGLE_SIZE_VALUE = 1;
 
-    public void validationInputValues(String[] input) {
+    public String[] validationInputValues(String[] input) {
 
         validateNullAndEmpty(input);
 
         validateSymbolAndNumber(input);
 
         validateFirstLastInputValue(input);
+
+        return input;
     }
 
     private void validateNullAndEmpty(String[] input) {
