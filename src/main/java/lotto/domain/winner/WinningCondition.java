@@ -10,10 +10,10 @@ public enum WinningCondition {
     MATCH_ZERO(0, 0),
     MATCH_ONE(1, 0),
     MATCH_TWO(2, 0),
-    MATCH_THREE(3, 5000),
-    MATCH_FOR(4, 50000),
-    MATCH_FIVE(5, 1500000),
-    MATCH_SIX(6, 2000000000),
+    MATCH_THREE(3, 5_000),
+    MATCH_FOR(4, 50_000),
+    MATCH_FIVE(5, 1_500_000),
+    MATCH_SIX(6, 2_000_000_000),
     ;
 
     private final int matchCount;
