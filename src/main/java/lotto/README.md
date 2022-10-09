@@ -1,11 +1,13 @@
 ## 로또 Step2 기능 요구사항
 ### Lotto
-- [ ] 로또 번호를 저장하는 `List<Integer>`를 갖는 일급 콜렉션
-- [ ] `generate(num)` 메소드를 통해 로또 자동 생성 가능
-- [ ] 생성할 로또의 최대 번호인 `LOTTO_MAX_NUM` 상수를 갖는다
+- [x] 로또 번호를 저장하는 `List<Integer>`를 갖는 일급 콜렉션
+- [x] `generate()` 메소드를 통해 로또 자동 생성 가능
+  - 생성된 로또 번호는 오름차순 정렬해 보관
+- [x] 로또의 최대 번호인 `LOTTO_NUM_MAX` 상수를 갖는다
+- [x] 하나의 로또가 갖는 번호의 개수인 `LOTTO_NUM_COUNT` 를 갖는다
 ### LottoWallet
 - [ ] `List<Lotto>`를 갖는 일급 콜렉션
-- [ ] `generate(num)` 메소드를 통해 새로운 `Lotto`를 생성해 `List`에 추가 가능
+- [ ] `generate()` 메소드를 통해 새로운 `Lotto`를 생성해 `List`에 추가 가능
 ### Customer
 - [ ] `LottoWallet`를 인스턴스 변수로 보유
 - [ ] `buy(cashAmount)` 메소드를 통해 로또 구매 가능
