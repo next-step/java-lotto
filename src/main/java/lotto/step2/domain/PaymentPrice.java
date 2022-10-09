@@ -1,7 +1,5 @@
 package lotto.step2.domain;
 
-import lotto.step2.domain.dto.PaymentPriceDTO;
-
 import java.util.Objects;
 
 public class PaymentPrice {
@@ -15,10 +13,6 @@ public class PaymentPrice {
     
     public int numberOfTickets() {
         return paymentPrice / TICKET_PRICE;
-    }
-    
-    public PaymentPriceDTO paymentPriceInformation() {
-        return new PaymentPriceDTO(this);
     }
     
     public int getPaymentPrice() {

@@ -1,21 +1,33 @@
 package lotto.step2.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private final List<LottoTicket> issueLottoTickets;
+    private final List<LottoTicket> lottoTickets;
     
-    public LottoTickets(List<LottoTicket> issueLottoTickets) {
-        this.issueLottoTickets = issueLottoTickets;
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
     
-    public List<LottoRank> lottoRanks(List<LottoNumber> winningLottoNumbers) {
-        return issueLottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.confirmNumberMatch(winningLottoNumbers))
-                .map(LottoRank::valueOf)
-                .collect(Collectors.toList());
+    public List<LottoRank> parseLottoRanks(WinningLottoNumbers winningLottoNumbers) {
+        List<LottoRank> lottoRanks = new ArrayList<>();
+        
+        for (LottoTicket lottoTicket : lottoTickets) {
+            lottoRanks.add(parseLottoRank(winningLottoNumbers, lottoTicket));
+        }
+        return lottoRanks;
+    }
+    
+    private LottoRank parseLottoRank(WinningLottoNumbers winningLottoNumbers, LottoTicket lottoTicket) {
+        int countMatchingNumber = lottoTicket.countMatchingNumber(winningLottoNumbers);
+        boolean isExistBonusLottoNumber = lottoTicket.isExistBonusLottoNumber(winningLottoNumbers);
+        return LottoRank.valueOf(countMatchingNumber, isExistBonusLottoNumber);
+    }
+    
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
     
     @Override
@@ -23,18 +35,11 @@ public class LottoTickets {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTickets that = (LottoTickets) o;
-        return Objects.equals(issueLottoTickets, that.issueLottoTickets);
+        return Objects.equals(lottoTickets, that.lottoTickets);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(issueLottoTickets);
-    }
-    
-    @Override
-    public String toString() {
-        return issueLottoTickets.stream()
-                .map(LottoTicket::toString)
-                .collect(Collectors.joining("\n"));
+        return Objects.hash(lottoTickets);
     }
 }

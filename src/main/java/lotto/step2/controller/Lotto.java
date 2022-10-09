@@ -21,7 +21,7 @@ public class Lotto {
     }
     
     private LottoTickets issueAutoLottoTickets(PaymentPrice paymentPrice) {
-        return LottoTicketsFactory.from(new AutoLottoIssueStrategy(paymentPrice));
+        return LottoTicketsFactory.from(new AutoLottoIssueStrategy(), paymentPrice);
     }
     
     private void print(PaymentPrice paymentPrice, LottoTickets lottoTickets) {
@@ -34,13 +34,13 @@ public class Lotto {
     }
     
     private void resultPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
-        List<LottoRank> lottoRanks = lottoTickets.lottoRanks(inputWinningLottoNumbers());
+        List<LottoRank> lottoRanks = lottoTickets.parseLottoRanks(inputWinningLottoNumbers());
         
         ResultView.winsNumbersPrint(lottoRanks);
-        ResultView.yieldPrint(LottoRank.getYield(lottoRanks, paymentPrice.paymentPriceInformation()));
+        ResultView.yieldPrint(LottoResultCalculator.parseYield(lottoRanks, paymentPrice));
     }
     
-    private List<LottoNumber> inputWinningLottoNumbers() {
-        return InputView.winningLottoNumbersInput();
+    private WinningLottoNumbers inputWinningLottoNumbers() {
+        return InputView.winningLottoNumber();
     }
 }

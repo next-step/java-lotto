@@ -1,13 +1,13 @@
 package lotto.step2.domain;
 
-import lotto.step2.domain.dto.PaymentPriceDTO;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 public enum LottoRank {
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000),
     MISS(0, 0);
     
@@ -19,21 +19,25 @@ public enum LottoRank {
         this.reward = reward;
     }
     
-    public static LottoRank valueOf(Integer countOfMatchNumber) {
+    public static LottoRank valueOf(Integer countOfMatchNumber, Boolean isExistBonusLottoNumber) {
+        if (SECOND.countOfMatchNumber == countOfMatchNumber && isExistBonusLottoNumber) {
+            return SECOND;
+        }
+        
+        return parseLottoRank(countOfMatchNumber);
+    }
+    
+    private static LottoRank parseLottoRank(Integer countOfMatchNumber) {
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.countOfMatchNumber == countOfMatchNumber)
                 .findAny()
                 .orElse(MISS);
     }
     
-    public static double getYield(List<LottoRank> lottoRanks, PaymentPriceDTO paymentPriceDTO) {
-        return (int)(((double) getTotalReward(lottoRanks) / paymentPriceDTO.getPaymentPrice()) * 100) / 100.0;
-    }
-    
-    public static int getTotalReward(List<LottoRank> lottoRankList) {
-        return lottoRankList.stream()
-                .mapToInt(LottoRank::getReward)
-                .sum();
+    public int getCountOfLottoRanks(List<LottoRank> lottoRanks) {
+        return (int) lottoRanks.stream()
+                .filter(lottoRank -> this == lottoRank)
+                .count();
     }
     
     public int getReward() {
@@ -42,11 +46,5 @@ public enum LottoRank {
     
     public int getCountOfMatchNumber() {
         return countOfMatchNumber;
-    }
-    
-    public int getCountOfLottoRanks(List<LottoRank> lottoRanks) {
-        return (int) lottoRanks.stream()
-                .filter(lottoRank -> this == lottoRank)
-                .count();
     }
 }
