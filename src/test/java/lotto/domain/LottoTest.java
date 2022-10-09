@@ -54,4 +54,15 @@ class LottoTest {
         assertThat(lotto.countMatchNumbers(anotherLotto)).isEqualTo(expected);
     }
 
+    @DisplayName("로또 번호를 포함하고 있으면 true를 반환해야하고, 포함하고 있지 않으면 false를 반환해야 한다.")
+    @ParameterizedTest
+    @CsvSource({
+            "1,true",
+            "45,false"
+    })
+    void contains(int number, boolean expected) {
+        Lotto lotto = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.contains(new LottoNumber(number))).isEqualTo(expected);
+    }
+
 }

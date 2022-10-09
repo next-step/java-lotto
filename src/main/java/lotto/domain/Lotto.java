@@ -70,4 +70,9 @@ public class Lotto {
                 '}';
     }
 
+    public boolean contains(LottoNumber number) {
+        return sortedNumbers.stream()
+                .anyMatch(sortedNumber -> sortedNumber.equals(number));
+    }
+
 }
