@@ -26,7 +26,7 @@ class LottoStatisticsCalculatorTest {
                         List.of(LottoRank.FOURTH, LottoRank.NONE)
                 )
         );
-        assertThat(actual.getProfit()).isEqualTo(250);
+        assertThat(actual.getProfit()).isEqualTo(2.5);
     }
 
 }

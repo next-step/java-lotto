@@ -14,12 +14,16 @@ public class Lotto {
     private final List<LottoNumber> sortedNumbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        List<LottoNumber> sortedNumbers = numbers.stream()
+        List<LottoNumber> sortedNumbers = getDistinctSortedLottoNumbers(numbers);
+        validate(sortedNumbers);
+        this.sortedNumbers = sortedNumbers;
+    }
+
+    private List<LottoNumber> getDistinctSortedLottoNumbers(List<LottoNumber> numbers) {
+        return numbers.stream()
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());
-        validate(sortedNumbers);
-        this.sortedNumbers = sortedNumbers;
     }
 
     public static Lotto from(List<Integer> numbers) {

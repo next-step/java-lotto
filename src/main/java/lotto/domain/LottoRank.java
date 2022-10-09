@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
     FIRST(6, new Money(2_000_000_000)),
@@ -25,6 +27,18 @@ public enum LottoRank {
                 .filter(value -> value.matchCount == matchCount)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public static List<LottoRank> getRewardRanksReversed() {
+        return getRewardRanks().stream()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+    }
+
+    public static List<LottoRank> getRewardRanks() {
+        return ALL_VALUES.stream()
+                .filter(it -> it != NONE)
+                .collect(Collectors.toList());
     }
 
     public int getMatchCount() {
