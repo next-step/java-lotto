@@ -115,7 +115,7 @@ public class InputView {
         String[] split = numbersString.split(", ");
         List<Integer> collect = Arrays
                 .stream(split)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(InputView::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
         if (!isValidNumbers(collect)) {
@@ -130,6 +130,13 @@ public class InputView {
 
     private static boolean isNumber(String numberString) {
         return NUMBER_PATTERN.matcher(numberString).find();
+    }
+
+    private static int parseInt(String numberString) {
+        if (isNumber(numberString)) {
+            return Integer.parseInt(numberString);
+        }
+        throw new IllegalArgumentException("Wrong Input : Lotto number is not Number");
     }
 
 }
