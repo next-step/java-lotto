@@ -23,7 +23,6 @@ public class LottoGameController {
         try {
             doRun();
         } catch (Exception e) {
-            e.printStackTrace();
             outputView.printError(e);
         }
     }

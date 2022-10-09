@@ -11,7 +11,7 @@ import lottogame.domain.user.UserLottoResult;
 
 public class OutputView {
     public void printTickets(User user) {
-        System.out.printf("%d개를 구매했습니다.\r\n", user.getLottoTickets().size());
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\r\n", user.getManualTicketCount(), user.getAutomaticTicketCount());
         user.getLottoTickets().forEach(this::printLottoTicket);
         System.out.println();
     }

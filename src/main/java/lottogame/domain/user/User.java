@@ -55,4 +55,8 @@ public class User {
     public int getManualTicketCount() {
         return manualTicketCount;
     }
+
+    public int getAutomaticTicketCount() {
+        return lottoTickets.size() - getManualTicketCount();
+    }
 }
