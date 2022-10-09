@@ -3,6 +3,7 @@ package lotto;
 import java.util.List;
 
 public class LottoNumbers {
+    private static final int SIZE = 6;
 
     private List<LottoNumber> lottoNumberList;
 
@@ -15,7 +16,7 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumberList);
     }
 
-    private int matches(LottoNumbers numbers) {
+    public int matches(LottoNumbers numbers) {
         return (int) numbers.lottoNumberList.stream()
             .filter(lottoNumberList::contains)
             .count();
@@ -26,7 +27,7 @@ public class LottoNumbers {
             .distinct()
             .count();
 
-        if (count != 6) {
+        if (count != SIZE) {
             return true;
         }
         return false;

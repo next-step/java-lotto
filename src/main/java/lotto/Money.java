@@ -18,4 +18,13 @@ public class Money {
             throw new IllegalArgumentException("돈은 0 미만으로 입력할 수 없습니다.");
         }
     }
+
+    public int getMoney() {
+        return money;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(money);
+    }
 }
