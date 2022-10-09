@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> lottoNumbers;
-    private MatchingResult matchingResult;
-
     public Lotto(List<Integer> lottoNumbers) {
         validationNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
@@ -18,20 +16,19 @@ public class Lotto {
         }
     }
 
-    public void match(List<Integer> answer) {
-        List<Integer> matchingNumbers = this.lottoNumbers.stream()
+    public MatchingResult getMatchingResult(List<Integer> answer) {
+
+        List<Integer> matchedNumbers = this.lottoNumbers.stream()
                 .filter(number -> answer.contains(number))
                 .collect(Collectors.toList());
 
-        this.matchingResult = new MatchingResult(matchingNumbers);
+        return new MatchingResult(matchedNumbers);
     }
 
-    public MatchingResult getMatchingResult() {
-        return this.matchingResult;
-    }
-
-    public int matchingCount() {
-        return this.matchingResult.matchingNumberCount();
+    public int matchingCount(List<Integer> answer) {
+        return (int) this.lottoNumbers.stream()
+                .filter(number -> answer.contains(number))
+                .count();
     }
 
     public List<Integer> getLottoNumbers() {

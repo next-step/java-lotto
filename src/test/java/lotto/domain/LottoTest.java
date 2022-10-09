@@ -39,9 +39,7 @@ public class LottoTest {
         List<Integer> answer = Arrays.asList(30, 31, 32, 33, 34, 35);
         Lotto lotto = new Lotto(myLottoNumbers);
 
-        lotto.match(answer);
-
-        assertThat(lotto.matchingCount()).isEqualTo(matchingCount);
+        assertThat(lotto.matchingCount(answer)).isEqualTo(matchingCount);
     }
 
 }
