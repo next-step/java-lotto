@@ -1,12 +1,15 @@
 package step1;
 
-public class Calculator {
-	private String[] formula;
-	public Calculator(String input) {
-		formula = input.split(" ");
+import java.util.Arrays;
+import java.util.List;
+
+public class Separator {
+	private final List<String> formula;
+	public Separator(String input) {
+		formula = Arrays.asList(input.split(" "));
 	}
 
-	public String[] getFormula() {
+	public List<String> getFormula() {
 		return formula;
 	}
 }
