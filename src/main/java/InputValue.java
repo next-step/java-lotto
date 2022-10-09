@@ -40,19 +40,19 @@ public class InputValue {
 
     private void validateSplit(String input) {
         if (!FILTER.matcher(input).matches()) {
-            throw new IllegalArgumentException();
+            throw new WrongInputException("사칙연산 기호, 숫자, 앞의 둘을 포함한 공백외에는 입력 받을 수 없습니다.");
         }
     }
 
     private void validateBlank(String input) {
         if (input.isBlank()) {
-            throw new IllegalArgumentException();
+            throw new WrongInputException("값이 없는 빈 공백은 입력 받을 수 없습니다.");
         }
     }
 
     private void validateEmpty(String input) {
         if (input.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new WrongInputException("빈 값은 입력 받을  수 없습니다.");
         }
     }
 

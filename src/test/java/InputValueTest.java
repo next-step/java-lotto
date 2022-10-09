@@ -31,7 +31,7 @@ public class InputValueTest {
     @ValueSource(strings = {"@", "$", "#", "^"})
     @DisplayName("사칙연산과 숫자 외에 문자가 들어오면 예외를 던진다.")
     void if_input_not_allow(String input) {
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(WrongInputException.class, () ->
                 new InputValue(input));
     }
 
@@ -39,7 +39,7 @@ public class InputValueTest {
     @ValueSource(strings = {"  ", "\t", "\n"})
     @DisplayName("공백이 빈 값이 들어오면 예외를 던진다.")
     void if_input_blank(String input) {
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(WrongInputException.class, () ->
                 new InputValue(input));
     }
 }

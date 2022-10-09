@@ -26,7 +26,7 @@ public class StringCalculator {
 
     private int divide(int result, int i) {
         if (isContains(i, DIVIDE)) {
-            result = parseInt(i - 1) / parseInt(i + 1);
+            result = parseInt(getPre(i, 1)) / parseInt(getAfter(i, 1));
             replaceResult(result, i);
         }
         return result;
@@ -35,16 +35,24 @@ public class StringCalculator {
 
     private int multiply(int result, int i) {
         if (isContains(i, MULTIPLY)) {
-            result = parseInt(i - 1) * parseInt(i + 1);
+            result = parseInt(getPre(i, 1)) * parseInt(getAfter(i, 1));
             replaceResult(result, i);
         }
         return result;
     }
 
+    private static int getAfter(int i, int x) {
+        return i + x;
+    }
+
+    private static int getPre(int i, int x) {
+        return i - x;
+    }
+
 
     private int subtract(int result, int i) {
         if (isContains(i, SUBTRACT)) {
-            result = parseInt(i - 1) - parseInt(i + 1);
+            result = getPre(parseInt(i - 1), parseInt(getAfter(i, 1)));
             replaceResult(result, i);
         }
         return result;
@@ -52,14 +60,14 @@ public class StringCalculator {
 
     private int add(int result, int i) {
         if (isContains(i, ADD)) {
-            result = parseInt(i - 1) + parseInt(i + 1);
+            result = getAfter(parseInt(getPre(i, 1)), parseInt(i + 1));
             replaceResult(result, i);
         }
         return result;
     }
 
     private String replaceResult(int result, int i) {
-        return expression.set(i + 1, convertString(result));
+        return expression.set(getAfter(i, 1), convertString(result));
     }
     private boolean isContains(int i, String operator) {
         return expression.get(i).contains(operator);
