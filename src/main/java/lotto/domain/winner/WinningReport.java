@@ -4,7 +4,6 @@ import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
-import lotto.domain.exception.InvalidPurchasePriceException;
 import lotto.domain.number.Ticket;
 import lotto.domain.number.WinningTicket;
 
@@ -30,10 +29,6 @@ public class WinningReport {
     }
 
     public double getRateOfReturn(PurchasePrice purchasePrice) {
-        if (purchasePrice.getPrice() <= 0) {
-            throw new InvalidPurchasePriceException();
-        }
-
         return Math.floor((getSumOfPrize() / purchasePrice.getPrice()) * 100) / 100;
     }
 
