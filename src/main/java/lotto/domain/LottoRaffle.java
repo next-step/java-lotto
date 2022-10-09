@@ -6,25 +6,23 @@ import static lotto.domain.LottoNumber.shuffleNumbers;
 
 public class LottoRaffle {
 
-    private Set<Integer> raffleNumbers;
+    private final static int LOTTO_MAX_BALL = 6;
+    private final TreeSet<Integer> raffleNumbers;
 
     public LottoRaffle() {
         this.raffleNumbers = new TreeSet<>();
     }
 
-    public Set<Integer> getRaffleNumber() {
-        System.out.println("지금부터 로또 추첨을 시작하겠습니다!");
+    public NavigableSet<Integer> raffleNumbers() {
         pop(new ArrayList<>(shuffleNumbers()));
-
-        return Collections.unmodifiableSet(raffleNumbers);
+        return Collections.unmodifiableNavigableSet(raffleNumbers);
     }
 
     private void pop(List<Integer> lottoNumbers) {
-        if (raffleNumbers.size() == 6) {
+        if (raffleNumbers.size() == LOTTO_MAX_BALL) {
             return;
         }
         raffleNumbers.add(lottoNumbers.remove(lottoNumbers.size() - 1));
-        System.out.println(raffleNumbers.toString() + "..");
         pop(lottoNumbers);
     }
 }

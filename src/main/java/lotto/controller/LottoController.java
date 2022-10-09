@@ -1,24 +1,24 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoRaffle;
-import lotto.domain.UserInput;
+import lotto.domain.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
-import java.util.List;
-import java.util.Set;
+import java.util.NavigableSet;
 
 public class LottoController {
 
-    public void lottoMachine() {
-        UserInput userInput = new UserInput(new Input().price());
-        System.out.println(userInput.count() + "개 구매되었습니다.");
+    public void lottoGame() {
+        User user = new User(new UserInput(new Input().price()));
+        user.receiveTickets(new Lotto().lottoMachine(user.userInput()));
+        Output.printBuyCount(user.userInput().count());
+        Output.printBuyTickets(user.lottoTickets());
 
-        List<Set> lottoTickets = new Lotto().lotto(userInput);
-        new Output().printLottoTickets(lottoTickets);
+        final NavigableSet<Integer> raffleNumbers = new LottoRaffle().raffleNumbers();
+        Output.printRaffleResult(raffleNumbers);
 
-        Set<Integer> raffleNumber = new LottoRaffle().getRaffleNumber();
-        System.out.printf("당첨번호는 %s 입니다!!!", raffleNumber);
+        ResultStats resultStats = new ResultStats(user.matchingCountsByTickets(raffleNumbers));
+        Output.printLottoResult(resultStats.countsOfPrizes());
+        Output.printReturnOnInvestment(resultStats.returnOnInvestment(user.userInput().price()));
     }
 }

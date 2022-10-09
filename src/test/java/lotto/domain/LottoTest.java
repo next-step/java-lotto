@@ -11,6 +11,6 @@ public class LottoTest {
     @DisplayName("로또 발급 수 검증")
     void issueLotto() {
         UserInput input = new UserInput(10000);
-        assertThat(new Lotto().lotto(input).size()).isEqualTo(10);
+        assertThat(new Lotto().lottoMachine(input).size()).isEqualTo(10);
     }
 }
