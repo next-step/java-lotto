@@ -16,12 +16,6 @@ public class CalculatorTest {
         calculator = new Calculator();
     }
 
-    @DisplayName("문자열 분리 테스트")
-    @Test
-    void splitInputTest() throws IllegalAccessException {
-        assertThat(calculator.splitInput("1 + 2 + 4 / 5 * 8 - 10")).containsExactly("1", "+", "2", "+", "4", "/", "5", "*", "8", "-", "10");
-    }
-
     @DisplayName("덧셈테스트")
     @Test
     void sumTest() {
@@ -49,19 +43,19 @@ public class CalculatorTest {
     @DisplayName("null값 테스트")
     @Test
     void nullTest() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.validateNullValue(null));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.finalCalculate(null));
     }
 
     @DisplayName("빈값 테스트")
     @Test
     void emptyTest() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.validateNullValue(""));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.finalCalculate(""));
     }
 
     @DisplayName("사칙연산자 이외 문자 테스트")
     @Test
     void stringTest() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.validateOperate("1 ."));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> calculator.finalCalculate("1 ."));
     }
 
     @DisplayName("수식 비정상종료 테스트")
