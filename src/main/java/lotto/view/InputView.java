@@ -20,7 +20,7 @@ public class InputView {
         String input = scanner.nextLine();
         String[] numbers = input.split(",");
 
-        return Arrays.asList(numbers).stream()
+        return Arrays.stream(numbers)
                 .map(number -> Integer.parseInt(number.trim()))
                 .collect(Collectors.toList());
     }
