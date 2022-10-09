@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Lotto {
 
+    public static final Money LOTTO_PRICE = new Money(1000);
     public static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lotto = new ArrayList<>();
 

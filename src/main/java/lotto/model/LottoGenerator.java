@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toList;
 public class LottoGenerator {
 
     private static final List<Integer> fullLottoNumbers = getFullLottoNumbers();
-    private static final int LOTTO_PRICE = 1000;
 
     public Lottos generateLottos(Money money) {
         List<Lotto> lottos = new ArrayList<>();
@@ -22,7 +21,7 @@ public class LottoGenerator {
     }
 
     private int getLottoCount(Money money) {
-        return money.getMoney() / LOTTO_PRICE;
+        return money.getMoney() / Lotto.LOTTO_PRICE.getMoney();
     }
 
     private Lotto generateLotto() {
