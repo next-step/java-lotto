@@ -42,30 +42,6 @@ class LottoTest {
         assertThat(lotto.lottoNumbers()).isEqualTo(expected);
     }
 
-    @DisplayName("로또 끼리 비교해 몇개가 일치하는지 알 수 있다.")
-    @Test
-    void matchCount() {
-        Lotto lottoA = new ManualLotto(getLottoNumbersFixture(1, 2, 3, 4, 5, 6));
-        Lotto winLotto = new ManualLotto(getLottoNumbersFixture(1, 20, 3, 40, 5, 6));
-        LottoNumber bonusNumber = LottoNumber.of(45);
-
-        Rank type = lottoA.rank(winLotto, bonusNumber);
-
-        assertThat(type).isEqualTo(Rank.FOURTH);
-    }
-
-    @DisplayName("보너스 번호인지 확인이 가능하다.")
-    @Test
-    void checkBonus() {
-        Lotto lottoA = new ManualLotto(getLottoNumbersFixture(1, 2, 3, 4, 5, 6));
-        Lotto winLotto = new ManualLotto(getLottoNumbersFixture(1, 2, 3, 4, 5, 45));
-        LottoNumber bonusNumber = LottoNumber.of(6);
-
-        Rank type = lottoA.rank(winLotto, bonusNumber);
-
-        assertThat(type).isEqualTo(Rank.BONUS);
-    }
-
     @DisplayName("로또 번호는 중복될 수 없다.")
     @Test
     void duplicate() {

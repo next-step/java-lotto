@@ -1,6 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.type.Rank;
 import lotto.dto.WinningLottoDto;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final Lotto lotto;
@@ -24,5 +28,25 @@ public class WinningLotto {
 
     public LottoNumber bonusNumber() {
         return bonusNumber;
+    }
+
+    public List<Rank> match(Lottos lottos) {
+        return lottos.values()
+                .stream()
+                .map(this::match)
+                .collect(Collectors.toList());
+    }
+
+    private Rank match(Lotto lotto) {
+        boolean matchBonus = lotto.contains(bonusNumber);
+
+        return Rank.findRank(matchCount(lotto), matchBonus);
+    }
+
+    private int matchCount(Lotto other) {
+        return (int) lotto.lottoNumbers()
+                .stream()
+                .filter(other::contains)
+                .count();
     }
 }

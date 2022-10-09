@@ -9,7 +9,7 @@ public class LottoStatistics {
     private final List<Rank> ranks;
 
     public LottoStatistics(Lottos lottos, WinningLotto winningLotto) {
-        this(lottos.match(winningLotto.lotto(), winningLotto.bonusNumber()));
+        this(winningLotto.match(lottos));
     }
 
     public LottoStatistics(List<Rank> ranks) {

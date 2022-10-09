@@ -38,17 +38,11 @@ public abstract class Lotto {
         return new HashSet<>(lottoNumbers).size() != LOTTO_SIZE;
     }
 
-    public Rank rank(Lotto other, LottoNumber bonusNumber) {
-        boolean matchBonus = lottoNumbers.contains(bonusNumber);
-
-        return Rank.findRank(matchCount(other), matchBonus);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
-    private int matchCount(Lotto other) {
-        return (int) lottoNumbers.stream()
-                .filter(other.lottoNumbers::contains)
-                .count();
-    }
+
 
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
