@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static final Scanner SCANNER = new Scanner(System.in);
+    private InputView() {
+    }
 
     public static String receiveMoney() {
-        return SCANNER.nextLine();
+        System.out.println("로또 금액을 입력해주세요. 천원 단위로 입력 해야합니다.");
+        return new Scanner(System.in).nextLine();
     }
 }
