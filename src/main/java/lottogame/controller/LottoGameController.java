@@ -39,7 +39,7 @@ public class LottoGameController {
     private void buyManualLottoTicket(User user) {
         user.validateManualTicketCondition(TicketSeller.getTicketPrice());
 
-        if(user.getManualTicketCount() > 0) {
+        if (user.getManualTicketCount() > 0) {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         }
 

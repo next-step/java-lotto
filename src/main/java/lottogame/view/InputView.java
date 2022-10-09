@@ -24,7 +24,7 @@ public class InputView {
 
     public List<Integer> getLastWeekLottoResult() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> result =  wrapMethodCall(this::doGetLottoNumbers);
+        List<Integer> result = wrapMethodCall(this::doGetLottoNumbers);
         System.out.println();
         return result;
     }
@@ -36,11 +36,11 @@ public class InputView {
     private User doGetUserInput() {
         System.out.println("구입 금액을 입력해 주세요.");
         Money money = new Money(scanner.nextInt());
-        System.out.println("");
+        System.out.println();
 
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualTicketCount = scanner.nextInt();
-        System.out.println("");
+        System.out.println();
         clearBuffer();
 
         return new User(money, manualTicketCount);

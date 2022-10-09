@@ -41,7 +41,6 @@ public class User {
         return this.money.isGreaterThanOrEqual(money);
     }
 
-
     public void buyTicket(LottoTicket lottoTicket, Money ticketPrice) {
         money = money.minus(ticketPrice);
         lottoTickets.add(lottoTicket);
