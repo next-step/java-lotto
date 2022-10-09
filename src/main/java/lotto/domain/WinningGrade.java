@@ -2,26 +2,24 @@ package lotto.domain;
 
 public class WinningGrade {
 
-    private final int matchingCount;
     private int count;
-    private int winningPrice;
+    private WinningPrice winningPrice;
 
-    public WinningGrade(int matchingCount, int winningPrice) {
-        this(matchingCount, 0, winningPrice);
+    public WinningGrade(WinningPrice winningPrice) {
+        this(winningPrice, 0);
     }
 
-    public WinningGrade(int matchingCount, int count, int winningPrice) {
-        this.matchingCount = matchingCount;
-        this.count = count;
+    public WinningGrade(WinningPrice winningPrice, int count) {
         this.winningPrice = winningPrice;
+        this.count = count;
     }
 
     public int getMatchingCount() {
-        return matchingCount;
+        return this.winningPrice.getMatchingCount();
     }
 
     public int getWinningPrice() {
-        return winningPrice;
+        return this.winningPrice.getWinningPrice();
     }
 
     public int getCount() {
@@ -29,7 +27,7 @@ public class WinningGrade {
     }
 
     public int totalWinningPrice() {
-        return this.count * this.winningPrice;
+        return this.count * this.winningPrice.getWinningPrice();
     }
 
     public void increaseCount() {

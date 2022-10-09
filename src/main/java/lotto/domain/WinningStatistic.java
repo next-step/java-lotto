@@ -16,10 +16,10 @@ public class WinningStatistic {
 
     private Map<Integer, WinningGrade> initWinningGrades() {
         return Map.of(
-                3, new WinningGrade(3, 5000),
-                4, new WinningGrade(4, 50000),
-                5, new WinningGrade(5, 1500000),
-                6, new WinningGrade(6, 2000000000)
+                3, new WinningGrade(WinningPrice.THREE),
+                4, new WinningGrade(WinningPrice.FOUR),
+                5, new WinningGrade(WinningPrice.FIVE),
+                6, new WinningGrade(WinningPrice.SIX)
         );
     }
 
