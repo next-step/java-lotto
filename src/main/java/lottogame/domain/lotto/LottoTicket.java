@@ -13,12 +13,12 @@ public class LottoTicket {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public int countSameNumbers(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.countSameNumbers(lottoNumbers);
+    public int countSameNumbers(LottoResult lottoResult) {
+        return lottoNumbers.countSameNumbers(lottoResult.getLottoNumbers());
     }
 
-    public boolean hasBonusNumber(BonusLottoNumber bonusNumber) {
-        return lottoNumbers.hasNumber(bonusNumber);
+    public boolean hasBonusNumber(LottoResult lottoResult) {
+        return lottoNumbers.hasNumber(lottoResult.getBonusNumber());
     }
 
     public List<LottoNumber> getLottoNumbers() {
