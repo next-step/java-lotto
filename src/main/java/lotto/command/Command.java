@@ -1,6 +1,6 @@
-package stringcalculator.command;
+package lotto.command;
 
-import stringcalculator.domain.Number;
+import lotto.domain.Number;
 
 @FunctionalInterface
 public interface Command {

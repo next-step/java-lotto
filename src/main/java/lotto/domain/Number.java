@@ -1,4 +1,4 @@
-package stringcalculator.domain;
+package lotto.domain;
 
 import java.util.Objects;
 

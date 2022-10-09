@@ -1,7 +1,7 @@
-package stringcalculator.domain;
+package lotto.domain;
 
-import stringcalculator.command.Command;
-import stringcalculator.command.CommandFactory;
+import lotto.command.Command;
+import lotto.command.CommandFactory;
 
 public class ArithmeticExpression {
     private final Number leftNumber;

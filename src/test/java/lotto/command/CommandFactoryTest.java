@@ -1,11 +1,8 @@
-package stringcalculator.command;
+package lotto.command;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import stringcalculator.command.AddCommand;
-import stringcalculator.command.CommandFactory;
 
 public class CommandFactoryTest {
 
