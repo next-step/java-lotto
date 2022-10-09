@@ -25,25 +25,25 @@ public class CalculatorTest {
     @DisplayName("덧셈테스트")
     @Test
     void sumTest() {
-        assertThat(calculator.sum(1, 2)).isEqualTo(3);
+        assertThat(Operate.findOperator("+").calculateNumbers(1, 2)).isEqualTo(3);
     }
 
     @DisplayName("뺄셈테스트")
     @Test
     void subtractionTest() {
-        assertThat(calculator.subtraction(1, 8)).isEqualTo(-7);
+        assertThat(Operate.findOperator("-").calculateNumbers(1, 2)).isEqualTo(-1);
     }
 
     @DisplayName("곱셈테스트")
     @Test
     void multiplicationTest() {
-        assertThat(calculator.multiplication(4, 2)).isEqualTo(8);
+        assertThat(Operate.findOperator("*").calculateNumbers(1, 2)).isEqualTo(2);
     }
 
     @DisplayName("나눗셈테스트")
     @Test
     void divisionTest() {
-        assertThat(calculator.division(3, 2)).isEqualTo(1);
+        assertThat(Operate.findOperator("/").calculateNumbers(1, 2)).isEqualTo(0);
     }
 
     @DisplayName("null값 테스트")
@@ -72,7 +72,7 @@ public class CalculatorTest {
 
     @DisplayName("계산기 테스트")
     @Test
-    void calculatorTest() throws IllegalAccessException {
+    void calculatorTest() throws IllegalArgumentException {
         assertThat(calculator.finalCalculate("1 + 2 / 4 + 9 * 4 - 1")).isEqualTo(35);
     }
 }
