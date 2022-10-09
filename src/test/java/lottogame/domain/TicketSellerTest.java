@@ -16,7 +16,7 @@ class TicketSellerTest {
         "12, 0, 12"
     })
     void sellAutomaticTicketTo(int money, int ticketCount, int change) {
-        User user = new User(new Money(money));
+        User user = new User(new Money(money), TicketSeller.getTicketPrice());
         TicketSeller.sellAutomaticTicketTo(user);
 
         assertThat(user.getMoney()).isEqualTo(new Money(change));
@@ -30,7 +30,7 @@ class TicketSellerTest {
         "12, 0, 12"
     })
     void sellManualTicketTo(int money, int ticketCount, int change) {
-        User user = new User(new Money(money));
+        User user = new User(new Money(money), TicketSeller.getTicketPrice());
         TicketSeller.sellManualTicketTo(user, new RangeLottoNumberPickerStrategy());
 
         assertThat(user.getMoney()).isEqualTo(new Money(change));

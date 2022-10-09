@@ -11,14 +11,15 @@ public class User {
     private final List<LottoTicket> lottoTickets;
     private final int manualTicketCount;
 
-    public User(Money money) {
-        this(money, 0);
+    public User(Money money, Money ticketPrice) {
+        this(money, 0, ticketPrice);
     }
 
-    public User(Money money, int manualTicketCount) {
+    public User(Money money, int manualTicketCount, Money ticketPrice) {
         this.money = money;
         this.lottoTickets = new ArrayList<>();
         this.manualTicketCount = manualTicketCount;
+        validateManualTicketCondition(ticketPrice);
     }
 
     public void validateManualTicketCondition(Money ticketPrice) {

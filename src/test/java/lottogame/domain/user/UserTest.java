@@ -21,7 +21,7 @@ class UserTest {
         "1000,2000,false"
     })
     void hasEnoughMoney(int money1, int money2, boolean expected) {
-        assertThat(new User(new Money(money1)).hasEnoughMoney(new Money(money2))).isEqualTo(expected);
+        assertThat(new User(new Money(money1), Money.ZERO).hasEnoughMoney(new Money(money2))).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "티켓 구입 후 남은 돈과 티켓 수 검증, 소유액: {0}, 티켓 가격: {1}, 잔액: {2}")
@@ -30,7 +30,7 @@ class UserTest {
         "5000,1000,4000"
     })
     void buyTicket(int amount, int ticketPrice, int change) {
-        User user = new User(new Money(amount));
+        User user = new User(new Money(amount), Money.ZERO);
         TicketMachine ticketMachine = new TicketMachine();
 
         user.buyTicket(ticketMachine.createLottoTicket(() -> createLottoNumbers(List.of(1, 2, 3, 4, 5, 6))), new Money(ticketPrice));

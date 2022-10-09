@@ -1,5 +1,6 @@
 package lottogame.controller;
 
+import lottogame.domain.Money;
 import lottogame.domain.TicketSeller;
 import lottogame.domain.lotto.LottoResult;
 import lottogame.domain.user.User;
@@ -26,7 +27,10 @@ public class LottoGameController {
     }
 
     private void doRun() {
-        User user = inputView.getUserInput();
+        Money money = inputView.getMoneyInput();
+        int manualLottoCount = inputView.getManualLottoCount();
+
+        User user = new User(money, manualLottoCount, TicketSeller.getTicketPrice());
 
         buyManualLottoTicket(user);
         buyAutomaticLottoTicket(user);
@@ -37,8 +41,6 @@ public class LottoGameController {
     }
 
     private void buyManualLottoTicket(User user) {
-        user.validateManualTicketCondition(TicketSeller.getTicketPrice());
-
         if (user.getManualTicketCount() > 0) {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         }

@@ -8,14 +8,17 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 
 import lottogame.domain.Money;
-import lottogame.domain.user.User;
 import lottogame.view.exception.InvalidInputException;
 
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
-    public User getUserInput() {
-        return wrapMethodCall(this::doGetUserInput);
+    public Money getMoneyInput() {
+        return wrapMethodCall(this::doGetMoneyInput);
+    }
+
+    public int getManualLottoCount() {
+        return wrapMethodCall(this::doGetManualLottoCount);
     }
 
     public List<Integer> getManualLottoNumbers() {
@@ -33,17 +36,21 @@ public class InputView {
         return wrapMethodCall(this::doGetBonusNumberInput);
     }
 
-    private User doGetUserInput() {
+    private Money doGetMoneyInput() {
         System.out.println("구입 금액을 입력해 주세요.");
         Money money = new Money(scanner.nextInt());
         System.out.println();
 
+        return money;
+    }
+
+    private int doGetManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualTicketCount = scanner.nextInt();
         System.out.println();
         clearBuffer();
 
-        return new User(money, manualTicketCount);
+        return manualTicketCount;
     }
 
     private List<Integer> doGetLottoNumbers() {
