@@ -3,7 +3,6 @@ package lotto;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ResultView {
 
@@ -13,8 +12,8 @@ public class ResultView {
         System.out.println(value + TOTAL_COUNT);
     }
 
-    public static void printResultTickets(List<List<LottoNumber>> lottoTickets) {
-        for (List<LottoNumber> lottoTicket : lottoTickets) {
+    public static void printResultTickets(List<LottoNumbers> lottoTickets) {
+        for (LottoNumbers lottoTicket : lottoTickets) {
             System.out.println(lottoTicket);
         }
     }

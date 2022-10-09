@@ -1,10 +1,10 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,9 +31,9 @@ public class LottoTicketsTest {
             List.of(LottoNumber.from(1), LottoNumber.from(2),
                 LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
                 LottoNumber.from(6)));
-        LottoTickets lottoTickets = LottoTickets.from(2000, list);
+        LottoTickets lottoTickets = LottoTickets.from(2000, LottoNumbers.of(list));
 
-        LottoResult result = lottoTickets.result(list);
+        LottoResult result = lottoTickets.result(LottoNumbers.of(list));
         assertThat(result.count(Rank.FIRST)).isEqualTo(1);
     }
 }

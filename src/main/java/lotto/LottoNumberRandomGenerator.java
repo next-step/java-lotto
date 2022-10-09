@@ -9,10 +9,10 @@ public class LottoNumberRandomGenerator {
     private LottoNumberRandomGenerator() {
     }
 
-    public static List<LottoNumber> generate() {
-        ArrayList<LottoNumber> shuffleNumbers = new ArrayList<>(LottoNumber.LOTTO_NUMBERS);
+    public static LottoNumbers generate() {
+        List<LottoNumber> shuffleNumbers = new ArrayList<>(LottoNumber.LOTTO_NUMBERS);
         Collections.shuffle(shuffleNumbers);
-        List<LottoNumber> subList = shuffleNumbers.subList(0, 6);
+        LottoNumbers subList = LottoNumbers.of(shuffleNumbers.subList(0, 6));
 
         return subList;
     }
