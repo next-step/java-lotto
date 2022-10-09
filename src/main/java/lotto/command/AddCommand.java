@@ -13,4 +13,9 @@ public class AddCommand implements Command {
     public String toString() {
         return "연산: +";
     }
+
+    @Override
+    public String operator() {
+        return "+";
+    }
 }

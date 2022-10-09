@@ -31,13 +31,19 @@ public class ArithmeticExpression {
     }
 
     private ArithmeticExpression appendNumber(String value) {
-        if (leftNumber == null) {
-            return new ArithmeticExpression(Number.parse(value), this.command, this.rightNumber);
-        } else if (rightNumber == null) {
-            return new ArithmeticExpression(this.leftNumber, this.command, Number.parse(value));
-        } else {
+        if (leftNumber != null && rightNumber != null) {
             throw new RuntimeException("계산 중 오류가 발생했습니다. 계산식=" + this.toString());
         }
+
+        if (leftNumber == null) {
+            return new ArithmeticExpression(Number.parse(value), this.command, this.rightNumber);
+        } else {
+            return new ArithmeticExpression(this.leftNumber, this.command, Number.parse(value));
+        }
+    }
+
+    private ArithmeticExpression appendLeftNumber(String value) {
+        return new ArithmeticExpression(Number.parse(value), this.command, this.rightNumber);
     }
 
     private ArithmeticExpression appendCommand(String value) {
