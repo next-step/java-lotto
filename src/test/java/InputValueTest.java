@@ -11,8 +11,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.in;
 import static org.assertj.core.api.InstanceOfAssertFactories.OPTIONAL;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class InputValueTest {
 
@@ -23,8 +22,10 @@ public class InputValueTest {
         List<String> test = Arrays.stream(input.split(" ")).collect(Collectors.toList());
         InputValue inputValue = new InputValue(input);
 
-        assertThat(inputValue.hasSize(test.size())).isTrue();
-        assertThat(inputValue.getExpression()).isEqualTo(test);
+        assertAll(
+                () -> assertEquals(test.size(), inputValue.getSize()),
+                () -> assertEquals(test, inputValue.getExpression())
+        );
     }
 
     @ParameterizedTest
