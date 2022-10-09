@@ -27,7 +27,6 @@ public class WinningStatisticTest {
         );
 
         WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
-        winningStatistic.calculateIncome();
 
         assertThat(winningStatistic.getWinningGrades().get(3).getCount()).isEqualTo(4);
         assertThat(winningStatistic.getWinningGrades().get(4).getCount()).isEqualTo(3);
@@ -50,7 +49,6 @@ public class WinningStatisticTest {
         );
 
         WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
-        winningStatistic.calculateIncome();
 
         assertThat(winningStatistic.totalIncomeRate(500000)).isEqualTo(0.34);
     }

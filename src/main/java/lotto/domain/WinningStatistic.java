@@ -10,6 +10,8 @@ public class WinningStatistic {
     public WinningStatistic(List<MatchingResult> matchingResults) {
         this.matchingResults = matchingResults;
         this.winningGrades = initWinningGrades();
+
+        calculateIncome();
     }
 
     private Map<Integer, WinningGrade> initWinningGrades() {
@@ -21,7 +23,7 @@ public class WinningStatistic {
         );
     }
 
-    public void calculateIncome() {
+    private void calculateIncome() {
         this.matchingResults.forEach(matchingResult -> this.winningGrades.get(matchingResult.matchingNumberCount()).increaseCount());
     }
 
