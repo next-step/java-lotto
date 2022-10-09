@@ -14,19 +14,19 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers.stream()
+            .sorted()
+            .collect(toList());
+    }
+
     public static LottoNumbers valueOf(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
             .map(LottoNumber::new)
             .collect(toList());
 
         return new LottoNumbers(lottoNumbers);
-    }
-
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers.stream()
-            .sorted()
-            .collect(toList());
     }
 
     public int countSameNumbers(LottoNumbers other) {
