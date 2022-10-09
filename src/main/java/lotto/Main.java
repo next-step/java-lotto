@@ -1,7 +1,9 @@
 package lotto;
 
-import lotto.controller.LottoBuyerController;
-import lotto.domain.*;
+import lotto.controller.LottoController;
+import lotto.domain.Lotto;
+import lotto.domain.MatchingResult;
+import lotto.domain.WinningStatistic;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,18 +15,15 @@ public class Main {
 
         int purchasePrice = InputView.inputPurchasePrice();
 
-        LottoBuyer lottoBuyer = new LottoBuyer(new LottoShop());
-        LottoBuyerController lottoBuyerController = new LottoBuyerController(lottoBuyer);
-        lottoBuyerController.buyLotto(purchasePrice);
-
-        List<Lotto> lotties = lottoBuyerController.getLotties();
+        List<Lotto> lotties = LottoController.buy(purchasePrice);
         ResultView.printLottoNumber(lotties);
 
         List<Integer> lastWeekAnswer = InputView.lastWeekAnswer();
-        List<MatchingResult> matchingResults = lottoBuyerController.matchingResults(lastWeekAnswer);
+        List<MatchingResult> matchingResults = LottoController.getMatchingResults(lotties, lastWeekAnswer);
 
         WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
-        winningStatistic.calculateIncome();
+
         ResultView.showResult(winningStatistic, purchasePrice);
     }
 }
+
