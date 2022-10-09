@@ -9,23 +9,23 @@ import static java.lang.Math.toIntExact;
 
 public class Lotto {
 
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lotto;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<LottoNumber> lotto) {
+        this.lotto = lotto;
 
-        if (lottoNumbers.size() != 6) {
-            throw new InvalidLottoSizeException(String.format("[사이즈 오류] 로또는 6개의 숫자가 생성되어야 합니다. %s", lottoNumbers.size()));
+        if (lotto.size() != 6) {
+            throw new InvalidLottoSizeException(String.format("[사이즈 오류] 로또는 6개의 숫자가 생성되어야 합니다. %s", lotto.size()));
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> getLotto() {
+        return lotto;
     }
 
     public int getMatchCount(List<LottoNumber> lastWinLotto) {
         return toIntExact(lastWinLotto.stream()
-                .filter(lottoNumbers::contains)
+                .filter(lotto::contains)
                 .count());
     }
 
@@ -34,11 +34,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+        return Objects.equals(this.lotto, lotto.lotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lotto);
     }
 }

@@ -24,7 +24,7 @@ public class OutputView {
 
     public static void showCreatedLotteries(Lotteries lotteries) {
         lotteries.getLotteries().forEach(lotto -> {
-                    String result = lotto.getLottoNumbers().stream()
+                    String result = lotto.getLotto().stream()
                             .map(number -> String.valueOf(number.getValue()))
                             .collect(Collectors.joining(", "));
 
