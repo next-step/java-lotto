@@ -10,9 +10,9 @@ public class Result {
     private final Map<Rank, WinResult> winResultMap = new EnumMap<>(Rank.class);
     private int initMoney;
 
-    public Result(LottoWrapper lottoWrapper, LottoNumbersWrapper lastWeeksCollectNumberList, int bonusNumber) {
+    public Result(LottoWrapper lottoWrapper, LottoNumbersWrapper lastWeeksCollectNumbers, int bonusNumber) {
         this.saveInitMoney(lottoWrapper.getLottoCount());
-        for (Rank rank : lottoWrapper.getResultRanks(lastWeeksCollectNumberList, bonusNumber)) {
+        for (Rank rank : lottoWrapper.getResultRanks(lastWeeksCollectNumbers, bonusNumber)) {
             this.saveResult(rank);
         }
     }
