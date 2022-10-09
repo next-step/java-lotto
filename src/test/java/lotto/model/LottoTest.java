@@ -2,11 +2,10 @@ package lotto.model;
 
 import lotto.exception.InvalidLottoSizeException;
 import org.junit.jupiter.api.Test;
-import step1.enumeration.Operator;
-import step1.exception.DivideByZeroException;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -30,14 +29,8 @@ class LottoTest {
     }
 
     private List<LottoNumber> createLottoNumber(int... number) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for (int value : number) {
-            lottoNumbers.add(new LottoNumber(value));
-        }
-
-        return lottoNumbers;
+        return Arrays.stream(number)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
-
-
 }
