@@ -36,19 +36,18 @@ public class LottoGameController {
 
         User user = new User(money, manualLottoCount, TicketSeller.getTicketPrice());
 
-        List<LottoNumbers> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount).stream()
-            .map(LottoNumbers::valueOf)
-            .collect(toList());
-
-        buyAutomaticLottoTicket(user);
-
+        buyTicket(user, manualLottoCount);
         user.checkValidTicketBuying();
-
         printResult(user);
     }
 
-    private void buyAutomaticLottoTicket(User user) {
-        TicketSeller.sellAutomaticTicketTo(user);
+    private void buyTicket(User user, int manualLottoCount) {
+        List<LottoNumbers> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount)
+            .stream()
+            .map(LottoNumbers::valueOf)
+            .collect(toList());
+
+        TicketSeller.sellTicketTo(user, manualLottoNumbers);
     }
 
     private void printResult(User user) {

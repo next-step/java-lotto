@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import lottogame.domain.lotto.LottoNumber;
+import lottogame.domain.lotto.LottoNumbers;
 
 public class RangeLottoNumberPickerStrategy implements LottoNumberGenerationStrategy {
     private static final int START_NUMBER = 1;
@@ -14,14 +15,16 @@ public class RangeLottoNumberPickerStrategy implements LottoNumberGenerationStra
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     @Override
-    public List<LottoNumber> getNumbers() {
+    public LottoNumbers getNumbers() {
         List<Integer> fullNumberList = getFullNumberList();
         Collections.shuffle(fullNumberList);
 
-        return fullNumberList.stream()
+        List<LottoNumber> lottoNumbers = fullNumberList.stream()
             .limit(LOTTO_NUMBER_COUNT)
             .map(LottoNumber::new)
             .collect(toList());
+
+        return new LottoNumbers(lottoNumbers);
     }
 
     private List<Integer> getFullNumberList() {

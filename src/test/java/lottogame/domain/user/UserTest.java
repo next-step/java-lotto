@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import lottogame.domain.Money;
 import lottogame.domain.TicketMachine;
 import lottogame.domain.lotto.LottoNumber;
+import lottogame.domain.lotto.LottoNumbers;
 
 class UserTest {
 
@@ -39,9 +40,9 @@ class UserTest {
         assertThat(user.getLottoTickets().size()).isEqualTo(1);
     }
 
-    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
+    private LottoNumbers createLottoNumbers(List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream()
             .map(LottoNumber::new)
-            .collect(toList());
+            .collect(toList()));
     }
 }

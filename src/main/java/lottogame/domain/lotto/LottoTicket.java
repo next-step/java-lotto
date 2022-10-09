@@ -8,9 +8,9 @@ public class LottoTicket {
     private final String ticketId;
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(LottoNumbers lottoNumbers) {
         this.ticketId = UUID.randomUUID().toString();
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public int countSameNumbers(LottoResult lottoResult) {
