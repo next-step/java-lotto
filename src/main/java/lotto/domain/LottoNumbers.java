@@ -7,46 +7,46 @@ import java.util.Objects;
 
 import lotto.domain.strategy.NumberGenerateStrategy;
 
-public class LottoNumbers implements Iterable<Number> {
-    private final List<Number> numbers;
+public class LottoNumbers implements Iterable<LottoNumber> {
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Number> numbers) {
-        this.numbers = numbers;
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
     
-    public LottoNumbers match(Number luckyNumber, int matchCount) {
-        List<Number> matchNumbers = new ArrayList<>();
-        for (Number number : numbers) {
-            addMatchNumber(luckyNumber, matchCount, matchNumbers, number);
+    public LottoNumbers match(LottoNumber luckyLottoNumber, int matchCount) {
+        List<LottoNumber> matchLottoNumbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            addMatchNumber(luckyLottoNumber, matchCount, matchLottoNumbers, lottoNumber);
         }
-        return new LottoNumbers(matchNumbers);
+        return new LottoNumbers(matchLottoNumbers);
     }
 
-    private void addMatchNumber(Number luckyNumber, int matchCount, List<Number> matchNumbers, Number number) {
-        if (number.matchCount(luckyNumber) == matchCount) {
-            matchNumbers.add(number);
+    private void addMatchNumber(LottoNumber luckyLottoNumber, int matchCount, List<LottoNumber> matchLottoNumbers, LottoNumber lottoNumber) {
+        if (lottoNumber.matchCount(luckyLottoNumber) == matchCount) {
+            matchLottoNumbers.add(lottoNumber);
         }
     }
 
     public int count() {
-        return numbers == null ? 0 : numbers.size();
+        return lottoNumbers == null ? 0 : lottoNumbers.size();
     }
     
     public static LottoNumbers of(NumberGenerateStrategy method, int lottoCount) {
-        List<Number> numbers = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int count = 0; count < lottoCount; count++) {
-            numbers.add(number(method));
+            lottoNumbers.add(number(method));
         }
-        return new LottoNumbers(numbers);
+        return new LottoNumbers(lottoNumbers);
     }
     
-    private static Number number(NumberGenerateStrategy method) {
-        return new Number(method.createNumbers());
+    private static LottoNumber number(NumberGenerateStrategy method) {
+        return new LottoNumber(method.createNumbers());
     }
 
     @Override
-    public Iterator<Number> iterator() {
-        return numbers.iterator();
+    public Iterator<LottoNumber> iterator() {
+        return lottoNumbers.iterator();
     }
 
     @Override
@@ -54,11 +54,11 @@ public class LottoNumbers implements Iterable<Number> {
         if (this == o) {return true;}
         if (o == null || getClass() != o.getClass()) {return false;}
         LottoNumbers numbers1 = (LottoNumbers) o;
-        return numbers.containsAll(numbers1.numbers) && numbers1.numbers.containsAll(numbers);
+        return lottoNumbers.containsAll(numbers1.lottoNumbers) && numbers1.lottoNumbers.containsAll(lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 }

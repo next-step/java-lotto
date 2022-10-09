@@ -13,14 +13,14 @@ public class Result implements Iterable<Winning> {
         this.winning = winning;
     }
     
-    public static Result of(LottoNumbers numbers, Number luckyNumber) {
-        return new Result(winnings(numbers, luckyNumber));
+    public static Result of(LottoNumbers numbers, LottoNumber luckyLottoNumber) {
+        return new Result(winnings(numbers, luckyLottoNumber));
     }
 
-    private static List<Winning> winnings(LottoNumbers numbers, Number luckyNumber) {
+    private static List<Winning> winnings(LottoNumbers numbers, LottoNumber luckyLottoNumber) {
         List<Winning> winnings = new ArrayList<>();
-        for (int matchCount = MIN_MATCH_COUNT; matchCount <= luckyNumber.count(); matchCount++) {
-            winnings.add(winning(matchCount, numbers.match(luckyNumber, matchCount)));
+        for (int matchCount = MIN_MATCH_COUNT; matchCount <= luckyLottoNumber.count(); matchCount++) {
+            winnings.add(winning(matchCount, numbers.match(luckyLottoNumber, matchCount)));
         }
         return winnings;
     }

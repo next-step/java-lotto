@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 import lotto.domain.Result;
 import lotto.domain.strategy.NumberGenerateStrategy;
 import lotto.view.ConsoleInputView;
@@ -29,10 +29,10 @@ public class LottoGame {
         return numbers;
     }
     
-    private Number lastLuckyNumber() {
-        Number luckyNumber = input.lastLuckyNumber();
-        output.showNumber(luckyNumber);
-        return luckyNumber;
+    private LottoNumber lastLuckyNumber() {
+        LottoNumber luckyLottoNumber = input.lastLuckyNumber();
+        output.showNumber(luckyLottoNumber);
+        return luckyLottoNumber;
     }
 }
 

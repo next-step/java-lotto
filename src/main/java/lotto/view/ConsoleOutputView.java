@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 import lotto.domain.Result;
 import lotto.domain.Winning;
 
@@ -12,14 +12,14 @@ public class ConsoleOutputView {
     }
 
     private void showNumbers(LottoNumbers numbers) {
-        for (Number number : numbers) {
-            showNumber(number);
+        for (LottoNumber lottoNumber : numbers) {
+            showNumber(lottoNumber);
         }
         System.out.println();
     }
 
-    public void showNumber(Number number) {
-        System.out.println(number.numbers());
+    public void showNumber(LottoNumber lottoNumber) {
+        System.out.println(lottoNumber.numbers());
     }
 
     public void showResult(Result result) {

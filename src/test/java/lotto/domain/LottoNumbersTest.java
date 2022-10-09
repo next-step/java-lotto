@@ -38,8 +38,8 @@ class LottoNumbersTest {
     @DisplayName("특정한 갯수만큼 당첨번호와 일치하는 로또번호들을 리턴한다.")
     @ParameterizedTest
     @MethodSource("matchSet")
-    void match(LottoNumbers actual, Number luckyNumber, int matchCount, LottoNumbers expected) {
-        assertThat(actual.match(luckyNumber, matchCount)).isEqualTo(expected);
+    void match(LottoNumbers actual, LottoNumber luckyLottoNumber, int matchCount, LottoNumbers expected) {
+        assertThat(actual.match(luckyLottoNumber, matchCount)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> countSet() {
@@ -98,12 +98,12 @@ class LottoNumbersTest {
         );
     }
 
-    private static LottoNumbers lottoNumbers(Number... numbers) {
-        return new LottoNumbers(Arrays.stream(numbers).collect(Collectors.toList()));
+    private static LottoNumbers lottoNumbers(LottoNumber... lottoNumbers) {
+        return new LottoNumbers(Arrays.stream(lottoNumbers).collect(Collectors.toList()));
     }
     
-    private static Number number(int... numbers) {
-        return new Number(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
+    private static LottoNumber number(int... numbers) {
+        return new LottoNumber(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
     }
 
 }
