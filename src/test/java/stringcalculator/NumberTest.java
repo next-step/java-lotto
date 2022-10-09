@@ -2,6 +2,7 @@ package stringcalculator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import stringcalculator.domain.Number;
 
 import static org.assertj.core.api.Assertions.*;
 

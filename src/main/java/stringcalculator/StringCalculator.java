@@ -1,5 +1,9 @@
 package stringcalculator;
 
+import stringcalculator.domain.CalculatorOperator;
+import stringcalculator.domain.Number;
+import stringcalculator.domain.Operator;
+
 public class StringCalculator {
     public static Number calculate(Number result, Operator operator, Number number) {
         if (CalculatorOperator.PLUS.equals(operator)) {

@@ -1,4 +1,4 @@
-package stringcalculator;
+package stringcalculator.domain;
 
 import java.util.Objects;
 
@@ -35,7 +35,7 @@ public class Number {
         this.number /= number.toInt();
     }
 
-    private int toInt(){
+    private int toInt() {
         return number;
     }
 

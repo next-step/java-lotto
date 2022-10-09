@@ -1,10 +1,11 @@
 package stringcalculator;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import stringcalculator.domain.Number;
+import stringcalculator.domain.Operator;
 
 import java.util.stream.Stream;
 
