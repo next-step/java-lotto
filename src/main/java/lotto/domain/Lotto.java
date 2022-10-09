@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.type.Rank;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -41,8 +38,6 @@ public abstract class Lotto {
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
-
-
 
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
