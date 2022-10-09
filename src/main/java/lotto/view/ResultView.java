@@ -1,15 +1,18 @@
-package lotto;
+package lotto.view;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.Rank;
 
 public class ResultView {
 
     private static final String TOTAL_COUNT= "개를 구매했습니다.";
 
     public static void printTotalCount(int value) {
-        System.out.println(value + TOTAL_COUNT);
+        System.out.println(value/1000 + TOTAL_COUNT);
     }
 
     public static void printResultTickets(List<LottoNumbers> lottoTickets) {

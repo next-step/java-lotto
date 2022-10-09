@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class LottoResult {

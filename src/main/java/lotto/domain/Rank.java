@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -11,8 +11,8 @@ public enum Rank {
     FOURTH(3,Money.from(5000), match -> match == 3),
     NONE(0, Money.from(0), match -> match < 3);
 
-    int match;
-    Money money;
+    public int match;
+    public Money money;
     Predicate<Integer> isPredicted;
     Rank(int match, Money money, Predicate<Integer> isPredicted) {
         this.match = match;

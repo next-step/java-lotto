@@ -1,8 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 public class LottoNumberRandomGenerator {
 
