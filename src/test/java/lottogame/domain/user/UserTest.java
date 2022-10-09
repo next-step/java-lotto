@@ -15,6 +15,26 @@ import lottogame.domain.lotto.LottoNumbers;
 
 class UserTest {
 
+    @ParameterizedTest(name = "정상적인 입력 시 User 객체 생성, 소지액: {0}, 수동 티켓 수: {1}, 티켓 가격: {2}")
+    @CsvSource({
+        "10000,0,1000",
+        "5000,3,1500"
+    })
+    void create(int money, int manualCount, int ticketPrice) {
+        new User(new Money(money), manualCount, new Money(ticketPrice));
+    }
+
+    @ParameterizedTest(name = "비정상적인 입력 시 예외 던져짐, 소지액: {0}, 수동 티켓 수: {1}, 티켓 가격: {2}\"")
+    @CsvSource({
+        "1000,0,2000",
+        "1000,-1,1000",
+        "3000,1,4000"
+    })
+    void invalidCreate(int money, int manualCount, int ticketPrice) {
+        assertThatThrownBy(() -> new User(new Money(money), manualCount, new Money(ticketPrice)))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest(name = "충분한 돈을 가지고 있는지 검증, 소유액: {0}, 비교액: {1}")
     @CsvSource(value = {
         "1000,500,true",

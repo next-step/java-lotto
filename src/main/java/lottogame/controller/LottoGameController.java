@@ -33,11 +33,9 @@ public class LottoGameController {
     private void doRun() {
         Money money = inputView.getMoneyInput();
         int manualLottoCount = inputView.getManualLottoCount();
-
         User user = new User(money, manualLottoCount, TicketSeller.getTicketPrice());
 
         buyTicket(user, manualLottoCount);
-        user.checkValidTicketBuying();
         printResult(user);
     }
 
