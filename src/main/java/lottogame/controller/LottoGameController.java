@@ -1,12 +1,16 @@
 package lottogame.controller;
 
+import static java.util.stream.Collectors.*;
+
+import java.util.List;
+
 import lottogame.domain.Money;
 import lottogame.domain.TicketSeller;
+import lottogame.domain.lotto.LottoNumbers;
 import lottogame.domain.lotto.LottoResult;
 import lottogame.domain.user.User;
 import lottogame.domain.user.UserLottoResult;
 import lottogame.view.InputView;
-import lottogame.view.LottoNumberConsoleInputStrategy;
 import lottogame.view.OutputView;
 
 public class LottoGameController {
@@ -32,24 +36,15 @@ public class LottoGameController {
 
         User user = new User(money, manualLottoCount, TicketSeller.getTicketPrice());
 
-        buyManualLottoTicket(user);
+        List<LottoNumbers> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount).stream()
+            .map(LottoNumbers::valueOf)
+            .collect(toList());
+
         buyAutomaticLottoTicket(user);
 
         user.checkValidTicketBuying();
 
         printResult(user);
-    }
-
-    private void buyManualLottoTicket(User user) {
-        if (user.getManualTicketCount() > 0) {
-            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        }
-
-        for (int i = 0; i < user.getManualTicketCount(); ++i) {
-            TicketSeller.sellManualTicketTo(user, new LottoNumberConsoleInputStrategy(inputView));
-        }
-
-        System.out.println();
     }
 
     private void buyAutomaticLottoTicket(User user) {

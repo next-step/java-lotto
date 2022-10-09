@@ -2,6 +2,7 @@ package lottogame.view;
 
 import static java.util.stream.Collectors.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -21,8 +22,20 @@ public class InputView {
         return wrapMethodCall(this::doGetManualLottoCount);
     }
 
-    public List<Integer> getManualLottoNumbers() {
-        return wrapMethodCall(this::doGetLottoNumbers);
+    public List<List<Integer>> getManualLottoNumbers(int lottoCount) {
+        if (lottoCount <= 0) {
+            return List.of();
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < lottoCount; ++i) {
+            manualLottoNumbers.add(wrapMethodCall(this::doGetLottoNumbers));
+        }
+        System.out.println();
+
+        return manualLottoNumbers;
     }
 
     public List<Integer> getLastWeekLottoResult() {
