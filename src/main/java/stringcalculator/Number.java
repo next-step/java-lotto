@@ -67,6 +67,10 @@ public class Number {
         return new Number(this.value / number.value);
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Number{");

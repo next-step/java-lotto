@@ -30,10 +30,6 @@ public class ArithmeticExpression {
     }
 
     private ArithmeticExpression appendNumber(String value) {
-        if (!Number.isNumber(value)) {
-            return this;
-        }
-
         if (leftNumber == null) {
             return new ArithmeticExpression(Number.parse(value), this.command, this.rightNumber);
         } else if (rightNumber == null) {
@@ -44,10 +40,6 @@ public class ArithmeticExpression {
     }
 
     private ArithmeticExpression appendCommand(String value) {
-        if (Number.isNumber(value)) {
-            return this;
-        }
-
         return new ArithmeticExpression(this.leftNumber, new CommandFactory().getCommand(value), this.rightNumber);
     }
 
