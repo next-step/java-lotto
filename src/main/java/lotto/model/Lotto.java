@@ -26,6 +26,10 @@ public class Lotto {
         }
     }
 
+    public int countCorrectNumber(Lotto lotto) {
+        return (int) lotto.getLotto().stream().filter(this.lotto::contains).count();
+    }
+
     public List<LottoNumber> getLotto() {
         return lotto;
     }
