@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.AutomaticLottoMachine;
 import lotto.domain.LottoMachine;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
@@ -13,7 +14,8 @@ public class Lotto {
     public static void main(String[] args) {
         PurchasePrice purchasePrice = new PurchasePrice(LottoInputView.insertPurchasePrice());
 
-        TicketBox ticketBox = LottoMachine.getAutomaticTickets(purchasePrice);
+        LottoMachine lottoMachine = new AutomaticLottoMachine();
+        TicketBox ticketBox = lottoMachine.issueTickets(purchasePrice);
         LottoResultView.printTicketCount(ticketBox.getSize());
         LottoResultView.printTickets(ticketBox);
 
