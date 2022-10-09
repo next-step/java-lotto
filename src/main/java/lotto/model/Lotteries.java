@@ -13,6 +13,11 @@ public class Lotteries {
     private final List<Lotto> lotteries;
     private final int purchaseAmount;
 
+    public Lotteries(List<Lotto> lotteries) {
+        this.lotteries = lotteries;
+        this.purchaseAmount = lotteries.size();
+    }
+
     public Lotteries(LottoFactory lottoFactory, int purchaseAmount) {
         this.lotteries = lottoFactory.create(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
