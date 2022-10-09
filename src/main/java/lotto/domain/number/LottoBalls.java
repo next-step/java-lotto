@@ -12,15 +12,13 @@ public class LottoBalls {
     private final Set<LottoBall> balls;
 
     public LottoBalls(List<LottoBall> lottoBallList) {
-        if (lottoBallList == null ||
-                new HashSet<>(lottoBallList).size() < lottoBallList.size()) {
+        if (lottoBallList == null) {
             throw new InvalidLottoBallsException(LOTTO_BALLS_SIZE);
         }
 
         Set<LottoBall> lottoBallSet = new HashSet<>(lottoBallList);
 
-        if (lottoBallSet.size() != LOTTO_BALLS_SIZE
-                || lottoBallSet.size() < lottoBallList.size()) {
+        if (lottoBallSet.size() != LOTTO_BALLS_SIZE || lottoBallSet.size() < lottoBallList.size()) {
             throw new InvalidLottoBallsException(LOTTO_BALLS_SIZE);
         }
 
