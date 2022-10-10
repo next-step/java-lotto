@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static lotto.domain.fixture.Fixture.getLottoNumbersFixture;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -14,14 +15,9 @@ class LottoTest {
     @DisplayName("로또는 6개의 번호를 가진다.")
     @Test
     void createLotto() {
-        List<LottoNumber> numberLottoNumbers = List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
+        List<LottoNumber> numberLottoNumbers = getLottoNumbersFixture(1, 2, 3, 4, 5, 6);
 
-        assertDoesNotThrow(() -> new Lotto(numberLottoNumbers));
+        assertDoesNotThrow(() -> new ManualLotto(numberLottoNumbers));
     }
 
     @DisplayName("로또는 번호가 6개가 아니면 예외가 발생한다.")
@@ -33,77 +29,24 @@ class LottoTest {
                 new LottoNumber(4),
                 new LottoNumber(5));
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numberLottoNumbers));
-    }
-
-    @DisplayName("6개 번호를 가진 로또를 자동으로 생성한다.")
-    @Test
-    void createAuto() {
-        List<LottoNumber> lottoNumbers = Lotto.create().lottoNumbers();
-
-        assertThat(lottoNumbers).hasSize(6);
+        assertThatIllegalArgumentException().isThrownBy(() -> ManualLotto.create(numberLottoNumbers));
     }
 
     @DisplayName("로또를 생성하면 번호는 정렬되어있다.")
     @Test
     void sort() {
-        Lotto lotto = new Lotto(List.of(new LottoNumber(20),
-                new LottoNumber(10),
-                new LottoNumber(1),
-                new LottoNumber(30),
-                new LottoNumber(5),
-                new LottoNumber(40)));
+        Lotto lotto = new ManualLotto(getLottoNumbersFixture(20, 1, 30, 5, 40, 10));
 
-        List<LottoNumber> expected = List.of(new LottoNumber(1),
-                new LottoNumber(5),
-                new LottoNumber(10),
-                new LottoNumber(20),
-                new LottoNumber(30),
-                new LottoNumber(40));
+        List<LottoNumber> expected = getLottoNumbersFixture(1, 5, 10, 20, 30, 40);
+
         assertThat(lotto.lottoNumbers()).isEqualTo(expected);
     }
 
-    @DisplayName("로또 끼리 비교해 몇개가 일치하는지 알 수 있다.")
+    @DisplayName("로또 번호는 중복될 수 없다.")
     @Test
-    void equals() {
-        Lotto lottoA = new Lotto(List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
-
-        Lotto winLotto = new Lotto(List.of(new LottoNumber(1),
-                new LottoNumber(20),
-                new LottoNumber(3),
-                new LottoNumber(40),
-                new LottoNumber(5),
-                new LottoNumber(6)));
-
-        LottoNumber bonusNumber = LottoNumber.of(45);
-        Rank type = lottoA.rank(winLotto, bonusNumber);
-        assertThat(type).isEqualTo(Rank.FOURTH);
-    }
-
-    @DisplayName("보너스 번호인지 확인이 가능하다.")
-    @Test
-    void checkBonus() {
-        Lotto lottoA = new Lotto(List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
-
-        Lotto winLotto = new Lotto(List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)));
-
-        LottoNumber bonusNumber = LottoNumber.of(6);
-        Rank type = lottoA.rank(winLotto, bonusNumber);
-        assertThat(type).isEqualTo(Rank.BONUS);
+    void duplicate() {
+        assertThatThrownBy(() -> {
+            new ManualLotto(getLottoNumbersFixture(1, 1, 2, 3, 4, 5));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

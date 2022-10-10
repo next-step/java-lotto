@@ -1,13 +1,64 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import lotto.util.RandomGenerator;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.domain.LottoNumber.MAX;
+import static lotto.domain.LottoNumber.MIN;
 
 public class LottoFactory {
     private static final String DEFAULT_DELIMITER = ",";
 
-    public static Lotto create(String lottoNumbers) {
+    private LottoFactory() {
+    }
+
+    public static Lottos create(int autoCount, List<String> manualNumbers) {
+        return createAutoLottos(autoCount).add(createManualLottos(manualNumbers));
+    }
+
+    private static Lottos createAutoLottos(int quantity) {
+        List<Lotto> lottos = IntStream.range(0, quantity)
+                .mapToObj(i -> createAutoLotto())
+                .collect(Collectors.toList());
+
+        return Lottos.create(lottos);
+    }
+
+    private static Lotto createAutoLotto() {
+        List<LottoNumber> numbers = getRandomLottoNumbers().stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+
+        return AutoLotto.create(numbers);
+    }
+
+    private static List<Integer> getRandomLottoNumbers() {
+        Set<Integer> result = new HashSet<>();
+
+        while (result.size() != LOTTO_SIZE) {
+            result.add(getRandomNumber());
+        }
+
+        return new ArrayList<>(result);
+    }
+
+    private static int getRandomNumber() {
+        return RandomGenerator.randomNumber(MIN, MAX);
+    }
+
+    private static Lottos createManualLottos(List<String> lottoNumbers) {
+        List<Lotto> lottos = lottoNumbers.stream()
+                .map(LottoFactory::createManualLotto)
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
+    public static Lotto createManualLotto(String lottoNumbers) {
         StringTokenizer tokenizer = new StringTokenizer(lottoNumbers, DEFAULT_DELIMITER);
 
         List<LottoNumber> numbers = new ArrayList<>();
@@ -16,11 +67,6 @@ public class LottoFactory {
             numbers.add(LottoNumber.of(number));
         }
 
-        return new Lotto(numbers);
-    }
-
-    public static Lottos createPerPrice(int money) {
-        int quantity = money / Lotto.PRICE;
-        return Lottos.create(quantity);
+        return ManualLotto.create(numbers);
     }
 }

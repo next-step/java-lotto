@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -46,14 +44,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static LottoNumber getLottoNumber(int number) {
         LottoNumber lottoNumber = LOTTO_NUMBERS.get(number);
         if (Objects.isNull(lottoNumber)) {
-            throw new NoSuchElementException(NOT_FOUND_EXCEPTION_MESSAGE);
+            throw new NoSuchElementException(number + "의 " + NOT_FOUND_EXCEPTION_MESSAGE);
         }
 
         return lottoNumber;
-    }
-
-    public static List<LottoNumber> lottoNumbers() {
-        return new ArrayList<>(LOTTO_NUMBERS.values());
     }
 
     public LottoNumber(int number) {

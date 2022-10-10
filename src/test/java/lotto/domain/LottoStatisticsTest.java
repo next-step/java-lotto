@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static lotto.domain.fixture.Fixture.getLottoNumbersFixture;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
@@ -17,7 +18,7 @@ class LottoStatisticsTest {
         Lotto winLotto = lottos.values().get(0);
 
         LottoNumber bonusNumber = LottoNumber.of(45);
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto, bonusNumber);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, new WinningLotto(winLotto, bonusNumber));
 
         assertThat(lottoStatistics.profit()).isGreaterThanOrEqualTo(1.0);
     }
@@ -26,16 +27,11 @@ class LottoStatisticsTest {
     @Test
     void profitLess() {
         Lottos lottos = getLottosFixture();
-        List<LottoNumber> lottoNumbersB = List.of(new LottoNumber(12),
-                new LottoNumber(7),
-                new LottoNumber(8),
-                new LottoNumber(9),
-                new LottoNumber(10),
-                new LottoNumber(11));
-        Lotto winLotto = new Lotto(lottoNumbersB);
-
+        List<LottoNumber> lottoNumbersB = getLottoNumbersFixture(12, 7, 8, 9, 10, 11);
+        Lotto winLotto = new ManualLotto(lottoNumbersB);
         LottoNumber bonusNumber = LottoNumber.of(45);
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto, bonusNumber);
+
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, new WinningLotto(winLotto, bonusNumber));
 
         assertThat(lottoStatistics.profit()).isLessThan(1.0);
     }
@@ -43,30 +39,21 @@ class LottoStatisticsTest {
     @DisplayName("랭크 결과 집계")
     @Test
     void _1st() {
-        List<LottoNumber> lottoNumbers = List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
+        List<LottoNumber> lottoNumbers = getLottoNumbersFixture(1, 2, 3, 4, 5, 6);
 
-        Lotto winLotto = new Lotto(lottoNumbers);
+        Lotto winLotto = new ManualLotto(lottoNumbers);
         Lottos lottos = getLottosFixture();
 
         LottoNumber bonusNumber = LottoNumber.of(45);
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto, bonusNumber);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, new WinningLotto(winLotto, bonusNumber));
 
         assertThat(lottoStatistics.getMatchCount(Rank.FIRST)).isEqualTo(1);
     }
 
     private Lottos getLottosFixture() {
-        List<LottoNumber> lottoNumbers = List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
-        Lotto lotto = new Lotto(lottoNumbers);
+        List<LottoNumber> lottoNumbers = getLottoNumbersFixture(1, 2, 3, 4, 5, 6);
+
+        Lotto lotto = new ManualLotto(lottoNumbers);
 
         return new Lottos(List.of(lotto));
     }

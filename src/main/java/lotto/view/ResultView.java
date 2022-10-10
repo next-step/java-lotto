@@ -1,11 +1,11 @@
 package lotto.view;
 
-import lotto.domain.type.Rank;
-
 public class ResultView {
+    private ResultView() {
+    }
 
     public static void printLottoResult(LottoResult result) {
-        System.out.println(result.quantity() + "개를 구매했습니다.");
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", result.manualQuantity(), result.autoQuantity());
         result.lottoInfos().forEach(System.out::println);
         System.out.println();
     }
@@ -14,9 +14,8 @@ public class ResultView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : Rank.winningMoneyValues()) {
-            System.out.println(result.rank(rank));
-        }
+        result.rankStatistics()
+                .forEach(System.out::println);
 
         System.out.printf("총 수익률은 %s 입니다.%n", result.profit());
     }

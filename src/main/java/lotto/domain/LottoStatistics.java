@@ -3,45 +3,27 @@ package lotto.domain;
 import lotto.domain.type.Rank;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoStatistics {
+    private final Profit profit;
+    private final List<Rank> ranks;
 
-    private final int quantity;
-    private final List<Rank> result;
-
-    public LottoStatistics(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
-        this(lottos.match(winLotto, bonusNumber));
+    public LottoStatistics(Lottos lottos, WinningLotto winningLotto) {
+        this(winningLotto.match(lottos));
     }
 
-    public LottoStatistics(List<Rank> types) {
-        this.quantity = types.size();
-        result = types.stream()
-                .filter(Rank::hasWinningMoney)
-                .collect(Collectors.toList());
+    public LottoStatistics(List<Rank> ranks) {
+        this.ranks = ranks;
+        this.profit = new Profit(ranks);
     }
 
     public double profit() {
-        long prize = getAllRewards();
-        if (prize == 0) {
-            return 0;
-        }
-
-        return prize / (Lotto.PRICE * (double) quantity);
-    }
-
-    private long getAllRewards() {
-        long sum = 0;
-        for (Rank rank : result) {
-            sum += rank.winningMoney();
-        }
-
-        return sum;
+        return profit.value();
     }
 
     public int getMatchCount(Rank type) {
-        return (int) result.stream().
-                filter(t -> t.name().equals(type.name()))
+        return (int) ranks.stream()
+                .filter(t -> t.equals(type))
                 .count();
     }
 }

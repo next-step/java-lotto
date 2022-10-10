@@ -19,13 +19,10 @@ public class LottoResult {
     }
 
     public List<String> lottoInfos() {
-        List<String> result = new ArrayList<>();
-
-        lottos.values().forEach(lotto -> {
-            result.add(createLottoInfo(lotto));
-        });
-
-        return result;
+        return lottos.values()
+                .stream()
+                .map(this::createLottoInfo)
+                .collect(Collectors.toList());
     }
 
     private String createLottoInfo(Lotto lotto) {
@@ -44,7 +41,22 @@ public class LottoResult {
         return lottos;
     }
 
+    public int autoQuantity() {
+        return (int) lottos.values()
+                .stream()
+                .filter(Lotto::isAuto)
+                .count();
+    }
+
+    public int manualQuantity() {
+        return (int) lottos.values()
+                .stream()
+                .filter(lotto -> !lotto.isAuto())
+                .count();
+    }
+
     public int quantity() {
-        return lottos.quantity();
+        return lottos.values()
+                .size();
     }
 }
