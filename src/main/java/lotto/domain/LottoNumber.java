@@ -45,14 +45,8 @@ public class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
-    @Override
-    public String toString() {
-        return "LottoNumber{" +
-            "ballNumber=" + lottoNumber +
-            '}';
-    }
 
-    public int lottoNumber() {
+    public int value() {
         return lottoNumber;
     }
 }
