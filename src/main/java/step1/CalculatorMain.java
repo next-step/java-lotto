@@ -9,6 +9,10 @@ public class CalculatorMain {
 
         CalculateOperator calculateOperator = new CalculateOperator(scanner.nextLine());
 
-        System.out.println(calculateOperator.calculate());
+        try {
+            System.out.println(calculateOperator.calculate());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
