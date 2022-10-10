@@ -2,15 +2,21 @@ package lotto.strategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.Lotto;
 
 public class FrontExtractStrategy implements ExtractStrategy {
-    private static final int MAX_LOTTO_NUMBER = 45;
-    @Override
-    public List<Integer> extractNumber(int number) {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
-            numbers.add(i);
+
+    private static final List<Integer> baseNumber = new ArrayList<>();
+
+    static {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            baseNumber.add(i);
         }
-        return numbers.subList(0, number);
+    }
+
+    @Override
+    public Lotto extractNumber() {
+        List<Integer> numbers = baseNumber.subList(0, WIN_COUNT);
+        return new Lotto(numbers);
     }
 }

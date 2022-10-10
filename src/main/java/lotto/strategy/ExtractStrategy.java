@@ -1,8 +1,10 @@
 package lotto.strategy;
 
-import java.util.ArrayList;
-import java.util.List;
+import lotto.domain.Lotto;
 
 public interface ExtractStrategy {
-    List<Integer> extractNumber(int number);
+    int MIN_LOTTO_NUMBER = 1;
+    int MAX_LOTTO_NUMBER = 45;
+    int WIN_COUNT = 6;
+    Lotto extractNumber();
 }
