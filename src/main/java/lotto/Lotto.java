@@ -36,4 +36,8 @@ public class Lotto {
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
+
+    public boolean isLottoNumbersEqual(List<Integer> lottoNumbers) {
+        return this.lottoNumbers.equals(lottoNumbers);
+    }
 }

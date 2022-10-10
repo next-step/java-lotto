@@ -5,7 +5,7 @@
   - 생성된 로또 번호는 오름차순 정렬해 보관
 - [x] 로또의 최대 번호인 `LOTTO_NUM_MAX` 상수를 갖는다
 - [x] 하나의 로또가 갖는 번호의 개수인 `LOTTO_NUM_COUNT` 를 갖는다
-- [ ] 주어진 `List<Integer>` 과 가지고 있는 `List<Integer>`이 일치하는지 확인하는 메서드 `islottoNumbersEqual()` 메소드를 갖는다
+- [x] 주어진 `List<Integer>` 과 가지고 있는 `List<Integer>`이 일치하는지 확인하는 메서드 `isLottoNumbersEqual()` 메소드를 갖는다
 - [x] 직접 리스트를 주입할 수 있는 생성자 지원
 ### LottoWallet
 - [x] `List<Lotto>`를 갖는 일급 콜렉션
