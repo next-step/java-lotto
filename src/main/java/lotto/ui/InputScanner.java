@@ -1,4 +1,4 @@
-package stringCalculator.view;
+package lotto.ui;
 
 import java.util.Scanner;
 

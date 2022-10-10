@@ -1,8 +1,8 @@
-package stringCalculator;
+package stringcalculator;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import stringCalculator.service.CalculateService;
+import stringcalculator.service.CalculateService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
