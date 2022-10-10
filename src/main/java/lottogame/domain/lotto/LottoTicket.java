@@ -8,17 +8,17 @@ public class LottoTicket {
     private final String ticketId;
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(LottoNumbers lottoNumbers) {
         this.ticketId = UUID.randomUUID().toString();
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public int countSameNumbers(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.countSameNumbers(lottoNumbers);
+    public int countSameNumbers(LottoResult lottoResult) {
+        return lottoNumbers.countSameNumbers(lottoResult.getLottoNumbers());
     }
 
-    public boolean hasSameBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.hasNumber(bonusNumber);
+    public boolean hasBonusNumber(LottoResult lottoResult) {
+        return lottoNumbers.hasNumber(lottoResult.getBonusNumber());
     }
 
     public List<LottoNumber> getLottoNumbers() {

@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import lottogame.domain.enums.LottoGameRank;
 import lottogame.domain.lotto.LottoNumber;
+import lottogame.domain.lotto.LottoNumbers;
 import lottogame.domain.lotto.LottoResult;
 import lottogame.domain.lotto.LottoTicket;
 
@@ -23,7 +24,7 @@ class TicketMachineTest {
     @DisplayName("로또 숫자들을 받았을 때 정상적으로 티켓을 생성한다.")
     void createTicket() {
         LottoTicket lottoTicket = new TicketMachine().createLottoTicket(() -> createLottoNumbers(1, 2, 3, 4, 5, 6));
-        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(createLottoNumbers(1, 2, 3, 4, 5, 6));
+        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(createLottoNumbers(1, 2, 3, 4, 5, 6).getValue());
     }
 
     @ParameterizedTest(name = "로또 추첨 결과가 주어졌을 때, 티켓에 해당하는 순위를 찾는다: {1}")
@@ -34,10 +35,10 @@ class TicketMachineTest {
         assertThat(ticketMachine.verifyRank(lottoTicket, lottoResult)).isEqualTo(expectedRank);
     }
 
-    private static List<LottoNumber> createLottoNumbers(int... numbers) {
-        return Arrays.stream(numbers)
+    private static LottoNumbers createLottoNumbers(int... numbers) {
+        return new LottoNumbers(Arrays.stream(numbers)
             .mapToObj(LottoNumber::new)
-            .collect(toList());
+            .collect(toList()));
     }
 
     private static Stream<Arguments> provideLottoResult() {

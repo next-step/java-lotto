@@ -1,6 +1,12 @@
 package lottogame.controller;
 
+import static java.util.stream.Collectors.*;
+
+import java.util.List;
+
+import lottogame.domain.Money;
 import lottogame.domain.TicketSeller;
+import lottogame.domain.lotto.LottoNumbers;
 import lottogame.domain.lotto.LottoResult;
 import lottogame.domain.user.User;
 import lottogame.domain.user.UserLottoResult;
@@ -8,8 +14,6 @@ import lottogame.view.InputView;
 import lottogame.view.OutputView;
 
 public class LottoGameController {
-    private static final String NOT_ENOUGH_MONEY_MESSAGE = "소지 금액이 부족합니다.";
-
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -27,14 +31,24 @@ public class LottoGameController {
     }
 
     private void doRun() {
-        User user = inputView.getUserInput();
-        TicketSeller.sellTicketTo(user);
+        Money money = inputView.getMoneyInput();
+        int manualLottoCount = inputView.getManualLottoCount();
+        User user = new User(money, manualLottoCount, TicketSeller.getTicketPrice());
 
-        if (!user.hasTickets()) {
-            outputView.printError(NOT_ENOUGH_MONEY_MESSAGE);
-            return;
-        }
+        buyTicket(user, manualLottoCount);
+        printResult(user);
+    }
 
+    private void buyTicket(User user, int manualLottoCount) {
+        List<LottoNumbers> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount)
+            .stream()
+            .map(LottoNumbers::valueOf)
+            .collect(toList());
+
+        TicketSeller.sellTicketTo(user, manualLottoNumbers);
+    }
+
+    private void printResult(User user) {
         outputView.printTickets(user);
         LottoResult lastWeekLottoResult = new LottoResult(inputView.getLastWeekLottoResult(), inputView.getBonusNumberInput());
 

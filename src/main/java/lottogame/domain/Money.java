@@ -6,9 +6,9 @@ public class Money {
     private static final String NEGATIVE_AMOUNT_EXCEPTION_MESSAGE = "돈의 액수는 음수가 될 수 없습니다.";
     public static final Money ZERO = new Money(0);
 
-    private final int money;
+    private final long money;
 
-    public Money(int money) {
+    public Money(long money) {
         validate(money);
         this.money = money;
     }
@@ -29,13 +29,13 @@ public class Money {
         return money >= other.money;
     }
 
-    private void validate(int money) {
+    private void validate(long money) {
         if (money < 0) {
             throw new IllegalArgumentException(NEGATIVE_AMOUNT_EXCEPTION_MESSAGE);
         }
     }
 
-    public int getValue() {
+    public long getValue() {
         return money;
     }
 
