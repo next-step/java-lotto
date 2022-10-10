@@ -1,7 +1,7 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -13,9 +13,16 @@ public class Lottos {
     }
 
     private void validate(List<Lotto> lottos) {
-        if(lottos ==null){
+        if (lottos == null) {
             throw new IllegalArgumentException("로또가 생성되지 않았습니다.");
         }
+    }
+
+    public LottoResult getResult(Lotto winningNumbers) {
+        List<Rank> rewards = lottos.stream()
+                .map(lotto -> Rank.findRank(lotto.countCorrectNumber(winningNumbers)))
+                .collect(Collectors.toList());
+        return new LottoResult(rewards);
     }
 
     public List<Lotto> getLottos() {
