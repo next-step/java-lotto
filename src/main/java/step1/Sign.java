@@ -12,11 +12,11 @@ public enum Sign {
 	MINUS("-", (a, b) -> a - b),
 	MULTIPLY("*", (a, b) -> a * b),
 	DIVIDE("/", (a, b) -> {
-		if (a % b != 0) {
-			throw new ArithmeticException("나누기 결과는 정수만 가능합니다");
-		}
 		if (b == 0) {
 			throw new ArithmeticException("0으로 나눌수가 없습니다");
+		}
+		if (a % b != 0) {
+			throw new ArithmeticException("나누기 결과는 정수만 가능합니다");
 		}
 		return a / b;
 	});
