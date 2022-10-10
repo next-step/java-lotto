@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RewardTest {
+class RankTest {
 
     @DisplayName("로또 맞은 개수에 따라 등수를 반환한다.")
     @ParameterizedTest
