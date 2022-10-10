@@ -25,6 +25,11 @@ public class Money {
     }
 
     @Override
+    public String toString() {
+        return String.valueOf(money);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -13,5 +13,6 @@ public class LottoController {
         OutputView.printLotto(lottos.getLottos());
 
         LottoResult result = lottos.getResult(InputView.inputWinningNumbers());
+        OutputView.printLottoResult(result);
     }
 }
