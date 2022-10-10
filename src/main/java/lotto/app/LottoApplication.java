@@ -2,6 +2,7 @@ package lotto.app;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoBox;
 import lotto.domain.LottoManger;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoSeller;
@@ -16,11 +17,10 @@ public class LottoApplication {
         int num = LottoSeller.sellLotto(amount);
         LottoResultView.printBuyLottoNumber(num);
 
-        LottoManger lottoManger = new LottoManger(num, new ShuffleExtractStrategy());
-        List<Lotto> lottos = lottoManger.retrieveLottos();
-        LottoResultView.printLottoNumber(lottos);
+        LottoBox lottoBox = LottoManger.createLottoBox(num, new ShuffleExtractStrategy());
+        LottoResultView.printLottoNumber(lottoBox.getLottos());
 
-        List<Integer> correctNumbers = lottoManger.retrieveWinNums(LottoInputView.getWinNumbers());
+        List<Integer> correctNumbers = lottoBox.retrieveCorrectNum(new Lotto(LottoInputView.getWinNumbers()));
         LottoResult lottoResult = new LottoResult(correctNumbers);
         LottoResultView.printWinStatistics(lottoResult.getLottoRankRecords());
 
