@@ -37,7 +37,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public boolean isLottoNumbersEqual(List<Integer> lottoNumbers) {
-        return this.lottoNumbers.equals(lottoNumbers);
+    public int countEqualNumbers(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
+                .mapToInt(lottoNumber -> 1)
+                .sum();
     }
 }

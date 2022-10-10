@@ -1,9 +1,13 @@
 package lotto;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,12 +24,20 @@ public class LottoTest {
         assertThat(lottoNumbers).doesNotHaveDuplicates();
     }
 
-    @Test
-    void islottoNumbersEqual() {
-        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(lottoNumbers);
+    @ParameterizedTest(name = "countEqualNumbers() - {2}")
+    @MethodSource("lottoNumbersProvider")
+    void countEqualNumbers(List<Integer> lottoNumbers, int expected, String testMessage) {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.isLottoNumbersEqual(lottoNumbers)).isTrue();
+        assertThat(lotto.countEqualNumbers(lottoNumbers)).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> lottoNumbersProvider() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(10, 11, 12, 13, 14, 15), 0, "0개 일치"),
+                Arguments.of(Arrays.asList(1, 11, 12, 13, 14, 15), 1, "1개 일치"),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6, "6개 일치")
+        );
     }
 
 }
