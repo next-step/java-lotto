@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -35,6 +36,7 @@ public class LottoNumberListTest {
         ));
     }
 
+    @DisplayName("로또 번호가 6개가 아니면 IllegalArgumentException를 반환한다.")
     @Test
     void valid_size() {
         List<LottoNumber> lottoSizeUnder = Arrays.asList(
