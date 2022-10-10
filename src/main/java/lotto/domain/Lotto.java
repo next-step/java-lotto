@@ -22,7 +22,7 @@ public class Lotto {
 
     private static List<LottoNumber> makeLottoNumbers(String numbers) {
         return Arrays.stream(numbers.split(", "))
-            .map(LottoNumber::new)
+            .map(LottoNumberFactory::getLottoNumber)
             .collect(Collectors.toList());
     }
 

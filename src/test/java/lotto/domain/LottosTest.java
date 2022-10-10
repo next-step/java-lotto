@@ -14,7 +14,14 @@ public class LottosTest {
     @Test
     @DisplayName("생성 테스트")
     void lottos_ctor_test() {
-        List<Lotto> lottos = List.of(new Lotto(List.of(new LottoNumber(1))));
+        List<Lotto> lottos = List.of(new Lotto(List.of(
+            LottoNumberFactory.getLottoNumber("1"),
+            LottoNumberFactory.getLottoNumber("2"),
+            LottoNumberFactory.getLottoNumber("3"),
+            LottoNumberFactory.getLottoNumber("4"),
+            LottoNumberFactory.getLottoNumber("5"),
+            LottoNumberFactory.getLottoNumber("6"))));
+
         assertThatNoException().isThrownBy(() -> new Lottos(lottos));
     }
 
@@ -23,22 +30,21 @@ public class LottosTest {
     void winningNumber_check_test() {
         //given
         List<Lotto> lottoList = List.of(new Lotto(List.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumberFactory.getLottoNumber("1"),
+            LottoNumberFactory.getLottoNumber("2"),
+            LottoNumberFactory.getLottoNumber("3"),
+            LottoNumberFactory.getLottoNumber("4"),
+            LottoNumberFactory.getLottoNumber("5"),
+            LottoNumberFactory.getLottoNumber("6")
         )));
         Lottos lottos = new Lottos(lottoList);
         Lotto lotto = new Lotto(List.of(
-            new LottoNumber(1),
-            new LottoNumber(5),
-            new LottoNumber(6),
-            new LottoNumber(9),
-            new LottoNumber(10),
-            new LottoNumber(11)
-        ));
+            LottoNumberFactory.getLottoNumber("1"),
+            LottoNumberFactory.getLottoNumber("5"),
+            LottoNumberFactory.getLottoNumber("6"),
+            LottoNumberFactory.getLottoNumber("9"),
+            LottoNumberFactory.getLottoNumber("10"),
+            LottoNumberFactory.getLottoNumber("11")));
 
         //when
         Bank bank = lottos.checkWinningNumber(lotto);
