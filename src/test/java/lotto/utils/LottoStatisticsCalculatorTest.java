@@ -1,9 +1,6 @@
 package lotto.utils;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoStatisticsResult;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +27,9 @@ class LottoStatisticsCalculatorTest {
                 Lotto.from(List.of(37, 38, 39, 40, 41, 42)),
                 Lotto.from(List.of(7, 8, 9, 40, 41, 42))
         );
-        LottoStatisticsResult actual = LottoStatisticsCalculator.calculateStatistics(winningLotto, bonusLottoNumber, lottos);
+        WinningCondition winningCondition = new WinningCondition(winningLotto, bonusLottoNumber);
+
+        LottoStatisticsResult actual = LottoStatisticsCalculator.calculateStatistics(winningCondition, lottos);
         assertThat(actual).isEqualTo(
                 LottoStatisticsResult.from(
                         List.of(
