@@ -3,33 +3,23 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    private final LottoNumbersWrapper numbers;
 
-    Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+    Lotto(LottoNumbersWrapper lottoNumbersWrapper) {
+        this.numbers = lottoNumbersWrapper;
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return numbers.getNumbers();
     }
 
-    public int getMatchCount(List<Integer> collectNumberList) {
-        int matchCount = 0;
-        for (int number : this.numbers) {
-            matchCount += getMatchCount(collectNumberList, number);
-        }
-        return matchCount;
+    public int getMatchCount(LottoNumbersWrapper lottoNumbersWrapper) {
+        return numbers.getMatchCount(lottoNumbersWrapper);
     }
 
     public boolean isMatchToBonusNumber(int bonusNumber) {
-        return this.numbers.contains(bonusNumber);
+        return numbers.isMatchToBonusNumber(bonusNumber);
     }
 
-    private int getMatchCount(List<Integer> collectNumberList, int number) {
-        if (collectNumberList.contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
 
 }

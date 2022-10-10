@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumbersWrapper;
 import lotto.domain.LottoWrapper;
 import lotto.domain.Result;
 import lotto.view.InputView;
@@ -10,30 +11,18 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
+        int purchaseAmount = InputView.getPurchaseAmount();
+        int passiveLottoCount = InputView.getPassiveLottoCount();
+        List<LottoNumbersWrapper> numbersCollection = InputView.getPassiveLottoNumbers(passiveLottoCount);
+
         LottoMachine lottoMachine = new LottoMachine();
+        LottoWrapper lottoWrapper = lottoMachine.buyLotto(purchaseAmount, passiveLottoCount, numbersCollection);
 
-        // 금액 입력
-        int purchaseAmount = inputView.inputPurchaseAmount();
+        ResultView.printLottoState(lottoWrapper, passiveLottoCount);
 
-        // 로또 구매
-        LottoWrapper lottoWrapper = lottoMachine.buyLotto(purchaseAmount);
+        LottoNumbersWrapper lastWeeksCollectNumbers = InputView.getLastWeeksCollectNumbers();
 
-        // 구매한 로또 현황 출력
-        resultView.printLottoNumber(lottoWrapper);
-
-        // 지난 주 당첨 번호 입력
-        List<Integer> lastWeeksCollectNumbers = inputView.inputLastWeeksCollectNumbers();
-
-        // 보너스 볼 번호 입력
-        int bonusNumber = inputView.inputBonusNumber();
-
-        // 결과 저장
-        Result result = new Result(lottoWrapper, lastWeeksCollectNumbers, bonusNumber);
-
-        // 당첨 통계 출력
-        resultView.printResult(result);
+        ResultView.printResult(new Result(lottoWrapper, lastWeeksCollectNumbers, InputView.getBonusNumber()));
     }
 
 }
