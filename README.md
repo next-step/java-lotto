@@ -1,4 +1,6 @@
 # 문자열 사칙 연산 계산기
+<details>
+<summary>접기/펼치기</summary>
 
 ## 기능 요구사항
 
@@ -23,8 +25,11 @@
 * [x] BinaryOperator<> 사용해보기
 * [x] 문자열계산기를 무상태 객체로 리팩터링 해보기
 * [x] ConverUtil 대신 SRP를 지킬 수 있는 객체로 만들어보기
+</details>
 
 # STEP 2 : 로또(자동)
+<details>
+<summary>접기/펼치기</summary>
 
 ## 기능 요구사항 정리
 
@@ -62,5 +67,14 @@
 * indent depth 2 넘지 않기
 * 모든 로직에 단위 테스트 (UI 제외)
 * else 사용 X
+
+## 피드백 리팩터링
+* [x] 가능한 부분에 일급 컬렉션 사용
+* [x] 상수/변수/생성자/메서드(public) 메서드(private) 정렬 유지
+* [x] NPE 생기지 않도록 변경
+* [x] 최대한 오류가 생기기전에 예외 던지기
+* [x] depth 2 변경
+* [x] 반복되는 System.out.println() 보다 StringBuilder 사용
+</details>
 
   
