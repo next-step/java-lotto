@@ -3,28 +3,30 @@ package step1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step1.domains.CalculateOperator;
+import step1.exceptions.EmptyStringException;
 
 public class CalculateOperatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
     void Given_Null_Or_Empty_When_Create_Then_Fail(String input) {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new CalculateOperator(input)
-        );
+        assertThatThrownBy(() -> new CalculateOperator(input))
+                .isInstanceOf(EmptyStringException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {
             "1 : 2",
             "1 | 2",
-            "1 ? 1"
+            "1 ? 1",
+            "1 + 2 * 3 | 4"
     })
     void Given_Not_Operator_When_Create_Then_Fail(String input) {
         assertThatIllegalArgumentException().isThrownBy(
