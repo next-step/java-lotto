@@ -29,12 +29,15 @@ public class OutputView {
     public static void printResult(LottoStatisticsResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        List<LottoRank> ranks = List.of(LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
-        ranks.forEach(rank -> System.out.println(getStringFormat(rank, result.getCountByRank(rank))));
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result.getProfit());
+        LottoRank.getRewardRanksReversed()
+                .forEach(rank -> System.out.println(getStringFormat(rank, result.getCountByRank(rank))));
+        System.out.printf("총 수익률은 %.2f입니다.", result.getProfit());
     }
 
     private static String getStringFormat(LottoRank rank, int numberOfRank) {
+        if (rank.hasBonusNumber()) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%s원)- %d개", rank.getMatchCount(), rank.getReward(), numberOfRank);
+        }
         return String.format("%d개 일치 (%s원)- %d개", rank.getMatchCount(), rank.getReward(), numberOfRank);
     }
 

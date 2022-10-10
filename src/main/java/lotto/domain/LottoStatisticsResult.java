@@ -33,7 +33,14 @@ public class LottoStatisticsResult {
             totalCount += count;
             totalAmount = totalAmount.plus(rank.getReward().multiply(count));
         }
-        return totalCount > 0 ? totalAmount.divideBy(Lotto.PRICE.multiply(totalCount)) : 0;
+        return calculateTotalProfit(totalAmount, totalCount);
+    }
+
+    private double calculateTotalProfit(Money totalAmount, int totalCount) {
+        if (totalCount == 0) {
+            return 0;
+        }
+        return totalAmount.divideBy(Lotto.PRICE.multiply(totalCount));
     }
 
     public int getCountByRank(LottoRank rank) {

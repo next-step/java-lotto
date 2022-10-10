@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatisticsResult;
 import lotto.domain.Money;
+import lotto.domain.WinningCondition;
 import lotto.utils.LottoFactory;
 import lotto.utils.LottoStatisticsCalculator;
 import lotto.view.InputView;
@@ -18,8 +19,8 @@ public class LottoApplication {
         List<Lotto> purchasedLottos = LottoFactory.createLottos(numberOfLottos);
         OutputView.printPurchasedLottos(purchasedLottos);
 
-        Lotto winningLotto = InputView.inputWinningLotto();
-        LottoStatisticsResult result = LottoStatisticsCalculator.calculateStatistics(winningLotto, purchasedLottos);
+        WinningCondition winningCondition = InputView.inputWinningCondition();
+        LottoStatisticsResult result = LottoStatisticsCalculator.calculateStatistics(winningCondition, purchasedLottos);
         OutputView.printResult(result);
     }
 
