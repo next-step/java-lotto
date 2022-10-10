@@ -11,14 +11,14 @@ public class PositiveInt {
 
     private int value;
 
-    public PositiveInt(int value) {
+    public PositiveInt(final int value) {
         if (value < 0) {
             throw new RuntimeException("허용되지 않는 값이 존재합니다.");
         }
         this.value = value;
     }
 
-    public static PositiveInt from(String value) {
+    public static PositiveInt from(final String value) {
         if (isImpossibleToParse(value)) {
             throw new RuntimeException("허용하지 않는 값이 존재합니다.");
         }
@@ -26,7 +26,7 @@ public class PositiveInt {
         return new PositiveInt(parseInt(value));
     }
 
-    private static boolean isImpossibleToParse(String input) {
+    private static boolean isImpossibleToParse(final String input) {
         return !Pattern.matches(POSITIVE_INT_PATTERN, input);
     }
 
