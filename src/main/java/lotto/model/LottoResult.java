@@ -19,6 +19,17 @@ public class LottoResult {
                 .count();
     }
 
+    public Double calculateYield() {
+        return getTotalReward() / (double) money;
+    }
+
+    private int getTotalReward() {
+        return ranks.stream()
+                .map(Rank::getReward)
+                .map(Money::getMoney)
+                .reduce(0, Integer::sum);
+    }
+
     public List<Rank> getRanks() {
         return ranks;
     }

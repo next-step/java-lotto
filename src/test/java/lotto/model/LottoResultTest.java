@@ -19,4 +19,12 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(List.of(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.NONE, Rank.NONE));
         assertThat(lottoResult.countRank(input)).isEqualTo(expected);
     }
+
+    @DisplayName("수익률을 계산한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"FIRST,2_000_000", "SECOND,1_500", "THIRD,50","FOURTH,5", "NONE,0"})
+    void calculateYield(Rank input, double expected) {
+        LottoResult lottoResult = new LottoResult(List.of(input));
+        assertThat(lottoResult.calculateYield()).isEqualTo(expected);
+    }
 }
