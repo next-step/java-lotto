@@ -5,8 +5,12 @@ import java.util.Objects;
 public class Money {
 
     private int money;
+    private static String MONEY_NEGATIVE_EXCEPTION = "Money는 음수가 될 수 없습니다.";
 
     public Money(int money) {
+        if (money < 0) {
+            throw new IllegalArgumentException(MONEY_NEGATIVE_EXCEPTION);
+        }
         this.money = money;
     }
 
