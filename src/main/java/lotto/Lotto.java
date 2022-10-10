@@ -18,14 +18,18 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto() {
-        this.lottoNumbers = generateLottoNumbers();
+        this(generateLottoNumbers());
+    }
+
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
-    private List<Integer> generateLottoNumbers() {
+    private static List<Integer> generateLottoNumbers() {
         Collections.shuffle(lottoNumberCandidates);
 
         List<Integer> lottoNumbers = lottoNumberCandidates.subList(0, LOTTO_NUM_COUNT);
