@@ -2,13 +2,22 @@ package Lotto;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import java.util.ArrayList;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
     @Test
-    void 계산하기() {
+    void 덧셈_계산하기() {
         Calculator calculator = new Calculator();
-        int result = calculator.calculate();
-        assertThat(result).isEqualTo(0);
+        int result = calculator.calculate("1 + 1");
+        assertThat(result).isEqualTo(2);
+    }
+
+    @Test
+    void 텍스트_숫자로_변환() {
+        Calculator calculator = new Calculator();
+        int result = calculator.calculate("1");
+        assertThat(result).isEqualTo(1);
     }
 }
