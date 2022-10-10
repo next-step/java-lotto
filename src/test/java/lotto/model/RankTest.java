@@ -10,7 +10,7 @@ class RankTest {
 
     @DisplayName("로또 맞은 개수에 따라 등수를 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1,NONE", "2,NONE", "3,FOURTH","4,THIRD", "5,SECOND", "6,FIRST"})
+    @CsvSource(value = {"1,NONE", "2,NONE", "3,FOURTH", "4,THIRD", "5,SECOND", "6,FIRST"})
     void findRank(int input, Rank expected) {
         assertThat(Rank.findRank(input)).isEqualTo(expected);
     }

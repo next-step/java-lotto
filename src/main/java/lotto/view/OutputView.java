@@ -33,6 +33,6 @@ public class OutputView {
     }
 
     private static void printYield(Double yield) {
-        System.out.printf("총 수익률은 %.2f입니다.",yield);
+        System.out.printf("총 수익률은 %.2f입니다.", yield);
     }
 }

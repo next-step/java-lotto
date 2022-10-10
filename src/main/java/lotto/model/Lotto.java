@@ -19,10 +19,10 @@ public class Lotto {
     }
 
     private void validate(List<Integer> lottoNumbers) {
-        if(lottoNumbers.size() != LOTTO_SIZE){
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또의 개수가 맞지 않습니다.");
         }
-        if(new HashSet<Integer>(lottoNumbers).size() != LOTTO_SIZE){
+        if (new HashSet<Integer>(lottoNumbers).size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또의 번호가 중복되었습니다.");
         }
     }
