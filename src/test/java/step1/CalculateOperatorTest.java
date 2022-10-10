@@ -56,4 +56,10 @@ public class CalculateOperatorTest {
 
         assertThat(operator.calculate()).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1cc + 2cc", "1o1 / 2o2"})
+    void Given_NotNumberFormat_When_Create_Then_Fail(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new CalculateOperator(input));
+    }
 }
