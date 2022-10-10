@@ -31,8 +31,8 @@ class LottoTest {
     void getCorrectNumber() {
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
-        List<Integer> correctNums = List.of(1, 2, 3, 4, 5, 7);
+        Lotto correctLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
-        assertThat(lotto.retrieveCorrectNum(correctNums)).isEqualTo(5);
+        assertThat(lotto.retrieveCorrectLottoBallCount(correctLotto)).isEqualTo(5);
     }
 }

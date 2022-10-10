@@ -2,27 +2,29 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
-    }
-
     private static final int LOTTO_SIZE = 6;
-
 
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         validateLottoSize(numbers);
-        this.numbers = numbers;
+        this.numbers = copyNumbers(numbers);
     }
 
+    public List<Integer> retrieveNumbers() {
+        return numbers;
+    }
 
+    public int retrieveCorrectLottoBallCount(Lotto winningLotto) {
+        Long count = numbers.stream()
+                .filter(winningLotto.numbers::contains)
+                .count();
+        return count.intValue();
+    }
 
     private static void validateLottoSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
@@ -31,15 +33,16 @@ public class Lotto {
 
     }
 
-    public List<Integer> retrieveNumbers() {
-        return numbers;
+    private static List<Integer> copyNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(Integer::new)
+                .collect(Collectors.toList());
     }
 
-    public int retrieveCorrectNum(List<Integer> correctNums) {
-        Long count = numbers.stream()
-                .filter(correctNums::contains)
-                .count();
-        return count.intValue();
-
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
