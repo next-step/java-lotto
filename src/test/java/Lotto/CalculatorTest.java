@@ -10,8 +10,8 @@ public class CalculatorTest {
     @Test
     void 덧셈_계산하기() {
         Calculator calculator = new Calculator();
-        int result = calculator.calculate("1 + 1");
-        assertThat(result).isEqualTo(2);
+        int result = calculator.calculate("1 + 2 + 3");
+        assertThat(result).isEqualTo(6);
     }
 
     @Test

@@ -11,10 +11,10 @@ public class Calculator {
         int index = 0;
         int result = numbers.get(0);
         for (Operator operator : operators) {
-            int num1 = numbers.get(index);
-            int num2 = numbers.get(index+1);
-            result = operator.operate(num1, num2);
             index++;
+            int num1 = result;
+            int num2 = numbers.get(index);
+            result = operator.operate(num1, num2);
         }
 
         return result;
@@ -35,7 +35,7 @@ public class Calculator {
         List<Operator> operators = new ArrayList<>();
         for (int i = 0; i < values.length; i++) {
             if (i % 2 != 0) {
-                operators.add(new Operator(values[i]));
+                operators.add(Operator.operatorOf(values[i]));
             }
         }
 
