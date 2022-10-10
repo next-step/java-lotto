@@ -7,12 +7,23 @@ public class LottoNumberList {
 
     private final List<LottoNumber> lottoNumberList;
     private static final String LOTTO_SIZE_EXCEPTION = "로또 번호는 6개여야 합니다.";
+    private static final String LOTTO_NUMBER_OVERLAP_EXCEPTION = "로또 번호는 중복 될 수 없습니다.";
 
     public LottoNumberList(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException(LOTTO_SIZE_EXCEPTION);
         }
+        if (isOverlap(lottoNumbers)) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_OVERLAP_EXCEPTION);
+        }
         this.lottoNumberList = lottoNumbers;
+    }
+
+    private boolean isOverlap(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
+            return true;
+        }
+        return false;
     }
 
     @Override

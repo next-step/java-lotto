@@ -61,4 +61,20 @@ public class LottoNumberListTest {
                 () -> assertThatThrownBy(() -> new LottoNumberList(lottoSizeOver)).isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @DisplayName("로또 번호가 6개 중 중복되는 숫자가 있으면 IllegalArgumentException를 반환한다.")
+    @Test
+    void valid_overlap() {
+        List<LottoNumber> lottoSizeUnder = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(5)
+        );
+        Assertions.assertAll(
+                () -> assertThatThrownBy(() -> new LottoNumberList(lottoSizeUnder)).isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 }
