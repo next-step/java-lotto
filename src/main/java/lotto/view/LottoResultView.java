@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoRankRecord;
@@ -16,15 +17,22 @@ public class LottoResultView {
     }
 
     public static void printLottoNumber(List<Lotto> lottos) {
+        StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
-            System.out.print("[");
-            List<Integer> numbers = lotto.retrieveNumbers();
-            for (int i = 0; i < numbers.size() - 1; i++) {
-                System.out.print(numbers.get(i) + ", ");
-            }
-            System.out.println(numbers.get(numbers.size() - 1) + "]");
+            sb
+                    .append("[")
+                    .append(makeLottoNumberLine(lotto))
+                    .append("]\n");
         }
-        System.out.println();
+        System.out.println(sb);
+    }
+
+    private static String makeLottoNumberLine(Lotto lotto) {
+        List<Integer> numbers = lotto.retrieveNumbers();
+        String lottoLine = numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
+        return lottoLine;
     }
 
     public static void printWinStatistics(List<LottoRankRecord> rankRecords) {
@@ -38,7 +46,7 @@ public class LottoResultView {
         }
     }
 
-    public static void printProfitRatio(float ratio) {
+    public static void printProfitRatio(double ratio) {
         System.out.println("총 수익률은 " + String.format("%.2f", ratio) + "입니다.");
     }
 }
