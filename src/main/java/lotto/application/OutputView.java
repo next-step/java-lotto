@@ -3,15 +3,20 @@ package lotto.application;
 import java.util.ArrayDeque;
 import lotto.domain.Bank;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPrice;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class OutputView {
 
-    private static final int LOTTO_PRICE = 1000;
+    private final LottoPrice lottoPrice;
 
-    public void lottoCount(int purchase) {
-        System.out.println(purchase / LOTTO_PRICE + "개를 구매했습니다.");
+    public OutputView(LottoPrice lottoPrice) {
+        this.lottoPrice = lottoPrice;
+    }
+
+    public void lottoCount(int purchaseMoney) {
+        System.out.println(lottoPrice.lottoCount(purchaseMoney) + "개를 구매했습니다.");
     }
 
     public void lottos(Lottos lottos) {
@@ -29,29 +34,29 @@ public class OutputView {
         System.out.println("----------");
         StringBuilder stringBuilder = new StringBuilder();
         bank.winningConfirmation()
-            .forEach((rank, integer) -> stringBuilder.append(getRank(rank, integer)));
+            .forEach((rank, count) -> stringBuilder.append(getRank(rank, count)));
         System.out.println(stringBuilder);
     }
 
-    private String getRank(Rank rank, Integer integer) {
+    private String getRank(Rank rank, Integer count) {
         if (rank == Rank.LOSER) {
-            return String.format("낙첨 %d개%n", integer);
+            return String.format("낙첨 %d개%n", count);
         }
-        return String.format("%d개 일치 (%d원)- %d개%n", rank.matchCount(), rank.reward(), integer);
+        return String.format("%d개 일치 (%d원)- %d개%n", rank.matchCount(), rank.reward(), count);
     }
 
     @SuppressWarnings("all")
     private void printLottoNumbers(StringBuilder stringBuilder, ArrayDeque<LottoNumber> lottosList) {
         while (lottosList.size() != 1) {
             LottoNumber lottoNumber = lottosList.poll();
-            stringBuilder.append(lottoNumber.lottoNumber()).append(", ");
+            stringBuilder.append(lottoNumber.value()).append(", ");
         }
         LottoNumber lottoNumber = lottosList.poll();
-        stringBuilder.append(lottoNumber.lottoNumber()).append("]").append("\n");
+        stringBuilder.append(lottoNumber.value()).append("]").append("\n");
     }
 
-    public void winningStatistics(Bank bank, int purchacse) {
-        System.out.println("총 수익률은 " + bank.yield(purchacse) + "입니다.");
+    public void winningStatistics(Bank bank, int purchase) {
+        System.out.println("총 수익률은 " + bank.yield(purchase) + "입니다.");
     }
 
 }

@@ -16,14 +16,14 @@ public class LottoMachineTest {
     @Test
     @DisplayName("생성 테스트")
     void lottoMachine_ctor_test() {
-        assertThatNoException().isThrownBy(() -> new LottoMachine(new AutoLotto()));
+        assertThatNoException().isThrownBy(() -> new LottoMachine(new AutoLotto(), new LottoPrice()));
     }
 
     @Test
     @DisplayName("1000원 미만으로 구매할 시 예외가 발생한다.")
     void under_1000_throw_exception() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new AutoLotto());
+        LottoMachine lottoMachine = new LottoMachine(new AutoLotto(), new LottoPrice());
 
         assertThatThrownBy(() -> lottoMachine.buyLotto(999))
             .isInstanceOf(MoneyException.class)
@@ -33,7 +33,7 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또 뽑기")
     void lottoMachine_get_lotto_test() {
-        LottoMachine lottoMachine = new LottoMachine(new FakeLottoPolicy());
+        LottoMachine lottoMachine = new LottoMachine(new FakeLottoPolicy(), new LottoPrice());
 
         Lottos lottos = lottoMachine.buyLotto(2000);
 
