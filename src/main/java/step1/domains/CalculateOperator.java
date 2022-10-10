@@ -60,7 +60,7 @@ public class CalculateOperator {
         try {
             Integer.parseInt(string);
         } catch (NumberFormatException e) {
-            return false;
+            throw new IllegalArgumentException("숫자로 변환할 수 없습니다. 입력값: " + string);
         }
         return true;
     }
