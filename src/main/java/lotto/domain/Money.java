@@ -26,4 +26,8 @@ public class Money {
     public int hashCode() {
         return Objects.hash(money);
     }
+
+    public int divide(int number) {
+        return this.money / number;
+    }
 }
