@@ -1,23 +1,21 @@
 package com.game.lotto.number;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ManualLottoNumberGenerator extends LottoNumberGenerator {
 
-    private final String[] numbers;
+    private final List<Integer> numbers;
 
-    public ManualLottoNumberGenerator(String[] numbers) {
+    public ManualLottoNumberGenerator(List<Integer> numbers) {
         isValidNumbers(numbers);
-        for (String number : numbers) {
-            isValidNumber(Integer.parseInt(number));
+        for (int number : numbers) {
+            isValidNumber(number);
         }
         this.numbers = numbers;
     }
 
-    private void isValidNumbers(String[] numbers) {
-        if (numbers == null || numbers.length != LOTTO_NUMBER_SELECT_COUNT) {
+    private void isValidNumbers(List<Integer> numbers) {
+        if (numbers == null || numbers.size() != LOTTO_NUMBER_SELECT_COUNT) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_SELECT_COUNT + "개가 입력되어야 합니다!");
         }
     }
@@ -30,9 +28,6 @@ public class ManualLottoNumberGenerator extends LottoNumberGenerator {
 
     @Override
     public List<Integer> generateNumbers() {
-        return Arrays.stream(numbers)
-                .mapToInt(value -> Integer.parseInt(value.trim()))
-                .boxed()
-                .collect(Collectors.toList());
+        return this.numbers;
     }
 }

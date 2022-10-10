@@ -1,8 +1,8 @@
 package com.game.lotto.rate;
 
-import com.game.lotto.prize.PrizeByStrikesEnum;
+import com.game.lotto.prize.Rank;
 import com.game.lotto.ticket.Ticket;
-import com.game.lotto.ticket.MyTickets;
+import com.game.lotto.ticket.TicketsByStrikes;
 import com.game.lotto.ui.ResultView;
 
 import java.util.List;
@@ -12,12 +12,12 @@ import static com.game.lotto.ui.ResultView.*;
 public class EarningRates {
     private final long totalAmountOfTicketMoney;
     private long totalAmountOfPrizeMoney;
-    private final MyTickets myTickets;
+    private final TicketsByStrikes ticketsByStrikes;
 
-    public EarningRates(long totalAmountOfTicketMoney, MyTickets myTickets) {
+    public EarningRates(long totalAmountOfTicketMoney, TicketsByStrikes ticketsByStrikes) {
         this.totalAmountOfTicketMoney = totalAmountOfTicketMoney;
         this.totalAmountOfPrizeMoney = 0;
-        this.myTickets = myTickets;
+        this.ticketsByStrikes = ticketsByStrikes;
     }
 
     public double calculateEarningRatesAndPrintResults() {
@@ -32,17 +32,17 @@ public class EarningRates {
     }
 
     private void calculateTotalPrize() {
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(PrizeByStrikesEnum.FOURTH_PRIZE_MONEY_AMOUNT_WITH_3_STRIKES);
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(PrizeByStrikesEnum.THIRD_PRIZE_MONEY_AMOUNT_WITH_4_STRIKES);
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(PrizeByStrikesEnum.SECOND_PRIZE_MONEY_AMOUNT_WITH_5_STRIKES);
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(PrizeByStrikesEnum.FIRST_PRIZE_MONEY_AMOUNT_WITH_6_STRIKES);
+        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.FOURTH_PRIZE_MONEY_AMOUNT_WITH_3_STRIKES);
+        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.THIRD_PRIZE_MONEY_AMOUNT_WITH_4_STRIKES);
+        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.SECOND_PRIZE_MONEY_AMOUNT_WITH_5_STRIKES);
+        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.FIRST_PRIZE_MONEY_AMOUNT_WITH_6_STRIKES);
     }
 
-    private long getTotalAmountOfPrizeMoney(PrizeByStrikesEnum prizeByStrikesEnum) {
-        List<Ticket> ticketsByStrikes = myTickets.getTicketsByStrikes(prizeByStrikesEnum.getStrikes());
+    private long getTotalAmountOfPrizeMoney(Rank rank) {
+        List<Ticket> ticketsByStrikes = this.ticketsByStrikes.getTicketsByStrikes(rank.getStrikes());
         int ticketsByStrikesSize = ticketsByStrikes.size();
-        ResultView.printStrikesAndSize(prizeByStrikesEnum, ticketsByStrikesSize);
-        return ticketsByStrikesSize * prizeByStrikesEnum.getMoneyAmount();
+        ResultView.printStrikesAndSize(rank, ticketsByStrikesSize);
+        return ticketsByStrikesSize * rank.getMoneyAmount();
     }
 
     private void printGameResult(double earningRates) {

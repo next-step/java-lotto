@@ -1,6 +1,6 @@
 package com.game.lotto.ui;
 
-import com.game.lotto.prize.PrizeByStrikesEnum;
+import com.game.lotto.prize.Rank;
 import com.game.lotto.ticket.Ticket;
 
 public class ResultView {
@@ -28,8 +28,8 @@ public class ResultView {
         System.out.println(ticket.getNumbers());
     }
 
-    public static void printStrikesAndSize(PrizeByStrikesEnum prizeByStrikesEnum, int ticketsByStrikesSize) {
-        System.out.printf((OUTPUT_RESULT_STRIKES_MESSAGE_FORMAT) + "%n", prizeByStrikesEnum.getStrikes(), prizeByStrikesEnum.getMoneyAmount(), ticketsByStrikesSize);
+    public static void printStrikesAndSize(Rank rank, int ticketsByStrikesSize) {
+        System.out.printf((OUTPUT_RESULT_STRIKES_MESSAGE_FORMAT) + "%n", rank.getStrikes(), rank.getMoneyAmount(), ticketsByStrikesSize);
     }
 
     public static void printEarningRatesAndMessage(double earningRates, String message) {

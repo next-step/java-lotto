@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TicketTest {
 
-    private final String[] lottoNumbers = new String[]{"1", "2", "3", "4", "5", "6"};
-    private final String[] winnerLottoNumbers = new String[]{"1", "2", "3", "4", "5", "6"};
+    private final List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
+    private final List<Integer> winnerLottoNumbers = List.of(1, 2, 3, 4, 5, 6);
     private Ticket randomTicket;
     private Ticket manualTicket;
 

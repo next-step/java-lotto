@@ -2,10 +2,10 @@ package com.game.lotto.prize;
 
 import org.junit.jupiter.api.Test;
 
-import static com.game.lotto.prize.PrizeByStrikesEnum.*;
+import static com.game.lotto.prize.Rank.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class PrizeByStrikesEnumTest {
+class RankTest {
 
     @Test
     void compare_strikes() {

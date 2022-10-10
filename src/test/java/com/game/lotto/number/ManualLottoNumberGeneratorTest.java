@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ManualLottoNumberGeneratorTest {
 
-    private final String[] lottoNumbers = new String[]{"1", "2", "3", "4", "5", "6"};
+    private final List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
     private ManualLottoNumberGenerator manualLottoNumberGenerator;
 
     @BeforeEach
@@ -21,7 +21,7 @@ class ManualLottoNumberGeneratorTest {
     void manual_number_generation() {
         List<Integer> generatedNumbers = manualLottoNumberGenerator.generateNumbers();
         for (int index = 0; index < generatedNumbers.size(); index++) {
-            assertEquals(Integer.parseInt(lottoNumbers[index]), generatedNumbers.get(index));
+            assertEquals(lottoNumbers.get(index), generatedNumbers.get(index));
         }
     }
 }

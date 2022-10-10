@@ -6,7 +6,8 @@ import java.util.List;
 
 public class Ticket {
     public static final int PRICE_OF_TICKET_UNIT = 1_000;
-    protected List<Integer> numbers;
+
+    private final List<Integer> numbers;
 
     public Ticket(LottoNumberGenerator lottoNumberGenerator) {
         numbers = lottoNumberGenerator.generateNumbers();

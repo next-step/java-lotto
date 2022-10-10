@@ -1,6 +1,9 @@
 package com.game.lotto.ui;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
@@ -11,9 +14,12 @@ public class InputView {
         return inputNumber(INPUT_PRICE_MESSAGE);
     }
 
-    public static String[] inputLastWinnerNumber() {
+    public static List<Integer> inputLastWinnerNumber() {
         String inputString = inputString(INPUT_LAST_WINNER_NUMBER_MESSAGE);
-        return inputString.split(TICKET_NUMBER_STRING_INPUT_SEPARATOR);
+        return Arrays.stream(inputString.split(TICKET_NUMBER_STRING_INPUT_SEPARATOR))
+                .mapToInt(x -> Integer.parseInt(x.trim()))
+                .boxed()
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public static int inputNumber(String inputMessage) {

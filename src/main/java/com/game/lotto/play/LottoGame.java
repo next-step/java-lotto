@@ -1,47 +1,34 @@
 package com.game.lotto.play;
 
 import com.game.lotto.number.LottoNumberGenerator;
-import com.game.lotto.number.ManualLottoNumberGenerator;
 import com.game.lotto.rate.EarningRates;
 import com.game.lotto.ticket.Ticket;
 import com.game.lotto.ticket.MyTickets;
-import com.game.lotto.ui.InputView;
-import com.game.lotto.ui.ResultView;
+import com.game.lotto.ticket.TicketsByStrikes;
 
 public class LottoGame {
-    private MyTickets myTickets;
+    private final long inputPrice;
+    private final long ticketCount;
+    private final MyTickets myTickets;
+    private TicketsByStrikes ticketsByStrikes;
 
-    public void playGameByUserInput() {
-        long inputPrice = InputView.inputPrice();
-        buyTickets(inputPrice);
-        Ticket winnerTicket = generateWinnerTicket(new ManualLottoNumberGenerator(InputView.inputLastWinnerNumber()));
-        compareWithWinnerTicketAndGetEarningRates(winnerTicket, inputPrice);
+    public LottoGame(long inputPrice, LottoNumberGenerator numberGenerator) {
+        this.inputPrice = inputPrice;
+        this.ticketCount = inputPrice / Ticket.PRICE_OF_TICKET_UNIT;
+        this.myTickets = new MyTickets(ticketCount, numberGenerator);
     }
 
-    private Ticket generateWinnerTicket(LottoNumberGenerator generator) {
-        return new Ticket(generator);
-    }
-
-    public long buyTickets(long inputPrice) {
-        long ticketCount = inputMoneyAndGetTicketCount(inputPrice);
-        myTickets = new MyTickets(ticketCount);
+    public long getTicketCount() {
         return ticketCount;
     }
 
-    private long inputMoneyAndGetTicketCount(long inputPrice) {
-        long ticketCount = inputPrice / Ticket.PRICE_OF_TICKET_UNIT;
-        ResultView.printOutputCountMessage(ticketCount);
-        return ticketCount;
+    public double compareWithWinnerTicketAndGetEarningRates(Ticket winnerTicket) {
+        ticketsByStrikes = new TicketsByStrikes(winnerTicket, myTickets.getTickets());
+        return getEarningRates();
     }
 
-    public double compareWithWinnerTicketAndGetEarningRates(Ticket winnerTicket, long inputPrice) {
-        myTickets.updateStrikesWithWinnerTicket(winnerTicket);
-        return getEarningRates(inputPrice);
-    }
-
-    private double getEarningRates(long inputPrice) {
-        ResultView.printResultMessage();
-        EarningRates earningRates = new EarningRates(inputPrice, myTickets);
+    private double getEarningRates() {
+        EarningRates earningRates = new EarningRates(inputPrice, ticketsByStrikes);
         return earningRates.calculateEarningRatesAndPrintResults();
     }
 }
