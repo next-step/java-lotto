@@ -2,18 +2,18 @@ package view;
 
 import java.util.Scanner;
 
-import domain.InputValues;
+import service.InputValueParser;
 
 public class InputView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static InputValues inputInfo() {
+    public static InputValueParser inputInfo() {
 
         System.out.println("계산할 값을 입력하세요");
 
-        String[] input = sc.nextLine().split(" ");
+        String input = sc.nextLine();
 
-        return new InputValues(input);
+        return new InputValueParser(input);
     }
 }

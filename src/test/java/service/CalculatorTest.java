@@ -7,16 +7,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import domain.InputValues;
+class CalculatorTest {
 
-class CalculationTest {
-
-    private InputValues inputValues;
-    private Calculation calculation;
+    private InputValueParser inputValueParser;
+    private Calculator calculator;
 
     @BeforeEach
     void setup() {
-        calculation = new Calculation();
+        calculator = new Calculator();
     }
 
     @ParameterizedTest
@@ -24,9 +22,9 @@ class CalculationTest {
     @DisplayName("덧셈 실행시 기대값 출력되는지 확인")
     void plusCalculateTest(String inputValue, int expect) {
 
-        inputValues = new InputValues(inputValue.split(" "));
+        inputValueParser = new InputValueParser(inputValue);
 
-        int result = calculation.calculateInputValue(inputValues);
+        int result = calculator.calculateInputValue(inputValueParser);
 
         assertThat(result).isEqualTo(expect);
 
@@ -37,9 +35,9 @@ class CalculationTest {
     @DisplayName("뺄셈 실행시 기대값 출력되는지 확인")
     void minusCalculateTest(String inputValue, int expect) {
 
-        inputValues = new InputValues(inputValue.split(" "));
+        inputValueParser = new InputValueParser(inputValue);
 
-        int result = calculation.calculateInputValue(inputValues);
+        int result = calculator.calculateInputValue(inputValueParser);
 
         assertThat(result).isEqualTo(expect);
 
@@ -50,9 +48,9 @@ class CalculationTest {
     @DisplayName("곱셈 실행시 기대값 출력되는지 확인")
     void multiplyCalculateTest(String inputValue, int expect) {
 
-        inputValues = new InputValues(inputValue.split(" "));
+        inputValueParser = new InputValueParser(inputValue);
 
-        int result = calculation.calculateInputValue(inputValues);
+        int result = calculator.calculateInputValue(inputValueParser);
 
         assertThat(result).isEqualTo(expect);
 
@@ -63,9 +61,9 @@ class CalculationTest {
     @DisplayName("나눗셈 실행시 기대값 출력되는지 확인")
     void divideCalculateTest(String inputValue, int expect) {
 
-        inputValues = new InputValues(inputValue.split(" "));
+        inputValueParser = new InputValueParser(inputValue);
 
-        int result = calculation.calculateInputValue(inputValues);
+        int result = calculator.calculateInputValue(inputValueParser);
 
         assertThat(result).isEqualTo(expect);
 

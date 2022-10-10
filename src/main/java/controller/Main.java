@@ -1,7 +1,7 @@
 package controller;
 
-import domain.InputValues;
-import service.Calculation;
+import service.InputValueParser;
+import service.Calculator;
 import view.InputView;
 import view.ResultView;
 
@@ -9,13 +9,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        InputValues inputValues = InputView.inputInfo();
-        Calculation calculation = new Calculation();
+        InputValueParser inputValueParser = InputView.inputInfo();
+        Calculator calculator = new Calculator();
 
-        int result = calculation.calculateInputValue(inputValues);
+        int result = calculator.calculateInputValue(inputValueParser);
 
         ResultView resultView = new ResultView();
         resultView.printResult(result);
-
     }
 }
