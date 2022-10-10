@@ -1,55 +1,33 @@
 package stringcalculator;
 
 public class StringCalculator {
+    private static final String DELIMITER = " ";
 
-    public static String isBlank(String data) {
-        if (data == null || data.trim().isEmpty()) {
+    private StringCalculator() {
+    }
+
+    private static String[] split(String data) {
+        return data.split(DELIMITER);
+    }
+
+    public static String[] stringValidCheck(String data) {
+        if (data == null || data.isBlank()) {
             throw new IllegalArgumentException();
         }
-        return data;
+        return split(data);
     }
 
-    public static String[] split(String data) {
-        return isBlank(data).split(" ");
-    }
 
     public static int calculate(String[] data) {
         int result = Integer.parseInt(data[0]);
         for (int i = 1; i < data.length - 1; i += 2) {
-            result = operatorCheck(data[i], Integer.parseInt(data[i + 1]), result);
+            result = getOperatorExpression(data[i], result, Integer.parseInt(data[i + 1]));
         }
         return result;
     }
 
-    public static int operatorCheck(String operator, int num, int result) {
-        if (operator == "+") {
-            return add(num, result);
-        }
-        if (operator == "-") {
-            return subtract(num, result);
-        }
-        if (operator == "*") {
-            return multiply(num, result);
-        }
-        if (operator == "/") {
-            return divide(num, result);
-        }
-        throw new IllegalArgumentException();
-    }
-
-    public static int add(int num, int result) {
-        return result + num;
-    }
-
-    public static int subtract(int num, int result) {
-        return result - num;
-    }
-
-    public static int multiply(int num, int result) {
-        return result * num;
-    }
-
-    public static int divide(int num, int result) {
-        return result / num;
+    public static int getOperatorExpression(String operator, Integer num1, Integer num2) {
+        return Operator.getExpression(operator)
+                .mapCalculate(num1, num2);
     }
 }
