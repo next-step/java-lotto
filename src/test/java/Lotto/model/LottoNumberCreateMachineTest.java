@@ -16,12 +16,14 @@ class LottoNumberCreateMachineTest {
     private static final int LOTTO_NUMBER_FOUR = 4;
     private static final int LOTTO_NUMBER_FIVE = 5;
     private static final int LOTTO_NUMBER_SIX = 6;
+    private static final int LOTTO_PRICE = 1000;
 
     @Test
     @DisplayName("로또가 천원일 때 가격만큼 사는지 확인")
     public void buyLottoTest() {
         LottoNumberCreateMachine lottoNumberCreateMachine = new LottoNumberCreateMachine();
-        Lottos lottos = lottoNumberCreateMachine.createLottos(WANTED_LOTTO_COUNT);
+        LottoBuyResource lottoBuyResource = new LottoBuyResource(WANTED_LOTTO_COUNT * LOTTO_PRICE);
+        Lottos lottos = lottoNumberCreateMachine.createLottos(lottoBuyResource);
         int lottoCount = lottos.getLottos().size();
         assertThat(lottoCount).isEqualTo(WANTED_LOTTO_COUNT);
     }
@@ -30,19 +32,8 @@ class LottoNumberCreateMachineTest {
     @DisplayName("당첨번호를 생성할 때 잘 생성되어지는지 확인")
     public void constructorSuccessTest() {
         LottoNumberCreateMachine lottoNumberCreateMachine = new LottoNumberCreateMachine();
-        List<String> numbers = List.of(
-                "1", "2", "3", "4", "5", "6"
-        );
-        Lotto wantedLuckyNumbers = new Lotto(
-                List.of(
-                        new LottoNumber(LOTTO_NUMBER_ONE),
-                        new LottoNumber(LOTTO_NUMBER_TWO),
-                        new LottoNumber(LOTTO_NUMBER_THREE),
-                        new LottoNumber(LOTTO_NUMBER_FOUR),
-                        new LottoNumber(LOTTO_NUMBER_FIVE),
-                        new LottoNumber(LOTTO_NUMBER_SIX)
-                )
-        );
+        List<String> numbers = List.of("1", "2", "3", "4", "5", "6");
+        Lotto wantedLuckyNumbers = new Lotto(List.of(new LottoNumber(LOTTO_NUMBER_ONE), new LottoNumber(LOTTO_NUMBER_TWO), new LottoNumber(LOTTO_NUMBER_THREE), new LottoNumber(LOTTO_NUMBER_FOUR), new LottoNumber(LOTTO_NUMBER_FIVE), new LottoNumber(LOTTO_NUMBER_SIX)));
         assertThat(wantedLuckyNumbers).isEqualTo(lottoNumberCreateMachine.getLuckyNumbers(numbers));
     }
 

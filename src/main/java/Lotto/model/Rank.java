@@ -3,10 +3,10 @@ package Lotto.model;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     ;
 
     private static final String RANK_ERROR_MESSAGE = "해당하는 순위가 존재하지 않습니다.";
