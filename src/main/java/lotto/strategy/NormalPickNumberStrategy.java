@@ -4,8 +4,8 @@ import java.util.*;
 
 public class NormalPickNumberStrategy implements PickNumberStrategy{
 
-    private final static int RANGE_START = 1;
-    private final static int RANGE_END = 45;
+    private static final int RANGE_START = 1;
+    private static final int RANGE_END = 45;
     private final List<Integer> numberRange = new ArrayList<>();
 
     public NormalPickNumberStrategy() {

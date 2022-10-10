@@ -16,8 +16,8 @@ class PickNumberServiceTest {
     private static final PickNumberService pickNumberService = new PickNumberService();
     private static final PickNumberStrategy pickNumberStrategy = new NormalPickNumberStrategy();
     private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
-    private final static int RANGE_START = 1;
-    private final static int RANGE_END = 45;
+    private static final int RANGE_START = 1;
+    private static final int RANGE_END = 45;
     private static final int NUMBER_COUNT = 6;
 
     @BeforeAll

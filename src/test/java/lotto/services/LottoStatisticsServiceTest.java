@@ -16,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsServiceTest {
 
-    private final static LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
-    private final static List<Lotto> lottos = new ArrayList<>();
-    private final static String WINNING_NUMBER = "1,2,3,4,5,6";
-    private final static List<Lotto> duplicatedLottos = new ArrayList<>();
-    private final static int PAYMENT = 3500;
+    private static final LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
+    private static final List<Lotto> lottos = new ArrayList<>();
+    private static final String WINNING_NUMBER = "1,2,3,4,5,6";
+    private static final List<Lotto> duplicatedLottos = new ArrayList<>();
+    private static final int PAYMENT = 3500;
 
     @BeforeAll
     static void setLotto() {
