@@ -12,7 +12,6 @@ public class LottoOutput {
     private static final String ENTER = "\n";
     private static final String DELIMITER = ", ";
     private static final String LOTTO_RESULT_MESSAGE = "당첨 통계";
-    private static final int DEFAULT_VALUE = 0;
 
     public static void noticeBuyLotto(Lottos lottos) {
         List<Lotto> Lottos = lottos.getLottos();

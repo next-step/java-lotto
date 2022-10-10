@@ -2,9 +2,10 @@ package Lotto.model;
 
 import java.util.Map;
 
+import static Lotto.LottoConstant.DEFAULT_VALUE;
+
 public class ResultSummary {
 
-    private static final int DEFAULT_VALUE = 0;
     private Map<Rank, Integer> countingRank;
 
 

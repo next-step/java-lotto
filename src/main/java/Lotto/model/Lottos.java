@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static Lotto.LottoConstant.DEFAULT_VALUE;
+
 public class Lottos {
 
     private static final int WINNING_LOTTO_STANDARD = 3;
-    private static final int DEFAULT_VALUE = 0;
+
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
