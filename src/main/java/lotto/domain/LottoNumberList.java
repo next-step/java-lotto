@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,14 @@ public class LottoNumberList {
     private final List<LottoNumber> lottoNumberList;
     private static final String LOTTO_SIZE_EXCEPTION = "로또 번호는 6개여야 합니다.";
     private static final String LOTTO_NUMBER_OVERLAP_EXCEPTION = "로또 번호는 중복 될 수 없습니다.";
+
+    public static LottoNumberList getLottoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : Numbers.getSixNumbers()) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        return new LottoNumberList(lottoNumbers);
+    }
 
     public LottoNumberList(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
