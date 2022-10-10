@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.stream.Stream;
 
 public enum Rank {
+
     FIRST(2_000_000_000, 6),
     SECOND(1_500_000, 5),
     THIRD(50_000, 4),
@@ -12,25 +13,17 @@ public enum Rank {
 
     private final int reward;
     private final int matchCount;
+
     Rank(int reward, int matchCount) {
         this.reward = reward;
         this.matchCount = matchCount;
     }
 
     static Rank valueOf(int matchCount) {
-        if (matchCount == 6) {
-            return FIRST;
-        }
-        if (matchCount == 5) {
-            return SECOND;
-        }
-        if (matchCount == 4) {
-            return THIRD;
-        }
-        if (matchCount == 3) {
-            return FOURTH;
-        }
-        return LOSER;
+        return Rank.stream()
+            .filter(rank -> rank.matchCount == matchCount)
+            .findFirst()
+            .orElseThrow();
     }
 
     public int matchCount() {
