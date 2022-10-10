@@ -10,7 +10,7 @@ public class CalculatorTest {
 	@DisplayName("첫번째 수 결과에 삽입")
 	void calculate() {
 		Calculator calculator = new Calculator("1 + 2 + 3");
-		assertThat(calculator.result).isEqualTo(1);
+		assertThat(calculator.getResult()).isEqualTo(1);
 	}
 
 	@Test
