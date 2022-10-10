@@ -1,40 +1,29 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum Arithmetic {
-    PLUS("+") {
-        @Override
-        Number calculate(Number number1, Number number2) {
-            return new Number(number1.getNumber() + number2.getNumber());
+    PLUS("+", (number1, number2) -> new Number(number1.getNumber() + number2.getNumber())),
+    MINUS("-", (number1, number2) -> new Number(number1.getNumber() - number2.getNumber())),
+    MULTIPLICATION("*", (number1, number2) -> new Number(number1.getNumber() * number2.getNumber())),
+    DIVIDE("/", (number1, number2) -> {
+        if (number1.getNumber() % number2.getNumber() != 0) {
+            throw new IllegalArgumentException("나눗셈은 결과값이 정수로 떨어져야만 합니다.");
         }
-    },
-    MINUS("-") {
-        @Override
-        Number calculate(Number number1, Number number2) {
-            return new Number(number1.getNumber() - number2.getNumber());
-        }
-    },
-    MULTIPLICATION("*") {
-        @Override
-        Number calculate(Number number1, Number number2) {
-            return new Number(number1.getNumber() * number2.getNumber());
-        }
-    },
-    DIVIDE("/") {
-        @Override
-        Number calculate(Number number1, Number number2) {
-            if (number1.getNumber() % number2.getNumber() != 0) {
-                throw new IllegalArgumentException("나눗셈은 결과값이 정수로 떨어져야만 합니다.");
-            }
-            return new Number(number1.getNumber() / number2.getNumber());
-        }
-    };
+        return new Number(number1.getNumber() / number2.getNumber());
+    });
 
     private final String sign;
+    private final BiFunction<Number, Number, Number> calculate;
 
-    Arithmetic(String sign) {
+    Arithmetic(String sign, BiFunction<Number, Number, Number> calculate) {
         this.sign = sign;
+        this.calculate = calculate;
+    }
+
+    public BiFunction<Number, Number, Number> calculate() {
+        return calculate;
     }
 
     public static Arithmetic findSign(String sign) {
@@ -43,7 +32,5 @@ public enum Arithmetic {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다!"));
     }
-
-    abstract Number calculate(Number number1, Number number2);
 
 }

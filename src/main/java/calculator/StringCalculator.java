@@ -24,7 +24,7 @@ public class StringCalculator {
     public Number calculate() {
         Number result = numbers.get(0);
         for (int i = 1; i < numbers.size(); i++) {
-            result = arithmetics.get(i - 1).calculate(result, numbers.get(i));
+            result = arithmetics.get(i - 1).calculate().apply(result, numbers.get(i));
         }
         return result;
     }

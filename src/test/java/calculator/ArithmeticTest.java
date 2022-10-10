@@ -1,6 +1,5 @@
 package calculator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,7 +53,7 @@ public class ArithmeticTest {
         Number number1 = new Number(1);
         Number number2 = new Number(2);
         // when
-        Number result = arithmetic.calculate(number1, number2);
+        Number result = arithmetic.calculate().apply(number1, number2);
         // then
         assertThat(result).isEqualTo(new Number(3));
     }
@@ -66,7 +65,7 @@ public class ArithmeticTest {
         Number number1 = new Number(1);
         Number number2 = new Number(2);
         // when
-        Number result = arithmetic.calculate(number1, number2);
+        Number result = arithmetic.calculate().apply(number1, number2);
         // then
         assertThat(result).isEqualTo(new Number(-1));
     }
@@ -78,7 +77,7 @@ public class ArithmeticTest {
         Number number1 = new Number(1);
         Number number2 = new Number(2);
         // when
-        Number result = arithmetic.calculate(number1, number2);
+        Number result = arithmetic.calculate().apply(number1, number2);
         // then
         assertThat(result).isEqualTo(new Number(2));
     }
@@ -90,7 +89,7 @@ public class ArithmeticTest {
         Number number1 = new Number(2);
         Number number2 = new Number(1);
         // when
-        Number result = arithmetic.calculate(number1, number2);
+        Number result = arithmetic.calculate().apply(number1, number2);
         // then
         assertThat(result).isEqualTo(new Number(2));
     }
@@ -104,7 +103,7 @@ public class ArithmeticTest {
         // when
 
         // then
-        assertThatThrownBy(() -> arithmetic.calculate(number1, number2))
+        assertThatThrownBy(() -> arithmetic.calculate().apply(number1, number2))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
