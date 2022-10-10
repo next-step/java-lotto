@@ -12,10 +12,14 @@ public class Expression {
     private final List<Operator> operators = new ArrayList<>();
 
     public Expression(String expression) {
+        validate(expression);
+        separateValue(expression.split(DELIMITER));
+    }
+
+    private void validate(String expression) {
         if (expression == null || expression.isBlank()) {
             throw new IllegalArgumentException("입력값은 공백일 수 없습니다.");
         }
-        separateValue(expression.split(DELIMITER));
     }
 
     private void separateValue(String[] value) {
