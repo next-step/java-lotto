@@ -9,16 +9,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class AutoLottoNumbersTest {
+class AutoLottosTest {
 
     @DisplayName("지동으로 생성한 로또 번호는 6자리이며 1보다 크거나 같고 45보다 작거나 같다.")
     @ParameterizedTest
     @ValueSource(ints = {0, 2, 1, 3, 4, 5})
     void create_auto_lotto(final int index) {
 
-        final List<LottoNumber> autoLottoNumbers = AutoLottoNumbers.autoCreate(1);
+        final List<Lotto> autoLottoNumbers = AutoLottos.autoCreate(1);
 
-        final List<Number> lottoNumber = autoLottoNumbers.get(0).getLottoNumber();
+        final List<Number> lottoNumber = autoLottoNumbers.get(0).getLotto();
         assertAll(
                 () -> assertThat(lottoNumber.get(index).getNumber()).isGreaterThanOrEqualTo(1),
                 () -> assertThat(lottoNumber.get(index).getNumber()).isLessThanOrEqualTo(45)
@@ -30,9 +30,9 @@ class AutoLottoNumbersTest {
     @ValueSource(ints = {1, 5, 10})
     void create_auto_lotto2(final int count) {
 
-        final List<LottoNumber> autoLottoNumbers = AutoLottoNumbers.autoCreate(count);
+        final List<Lotto> autoLottoNumbers = AutoLottos.autoCreate(count);
 
-        final List<Number> lottoNumber = autoLottoNumbers.get(0).getLottoNumber();
+        final List<Number> lottoNumber = autoLottoNumbers.get(0).getLotto();
         assertAll(
                 () -> assertThat(autoLottoNumbers).hasSize(count),
                 () -> assertThat(lottoNumber).hasSize(6)

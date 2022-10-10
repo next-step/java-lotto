@@ -9,14 +9,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class LottoNumberTest {
+class LottoTest {
 
     @DisplayName("null 또는 빈 값일 경우 익셉션 처리한다.")
     @ParameterizedTest
     @NullAndEmptySource
     void error_create_lotto(final String input) {
 
-        assertThatThrownBy(() -> LottoNumber.from(input))
+        assertThatThrownBy(() -> Lotto.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력 값이 null 또는 빈 공백 입니다.");
 
@@ -27,8 +27,8 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void create_lotto(final int index) {
 
-        final LottoNumber lottoNumber = LottoNumber.from("1, 2, 3, 4, 5, 6");
-        final List<Number> result = lottoNumber.getLottoNumber();
+        final Lotto lotto = Lotto.from("1, 2, 3, 4, 5, 6");
+        final List<Number> result = lotto.getLotto();
 
         assertThat(result).contains(new Number(index));
     }

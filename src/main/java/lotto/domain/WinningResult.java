@@ -16,12 +16,11 @@ public class WinningResult {
         return new WinningResult();
     }
 
-    public void collect(final List<Integer> resultList) {
+    public void collect(final List<WinningPrize> resultList) {
 
-        for (Integer result : resultList) {
-            final WinningPrize winningPrice = WinningPrize.from(result);
-            alreadyExist(winningPrice);
-            notExist(winningPrice);
+        for (WinningPrize winningPrize : resultList) {
+            alreadyExist(winningPrize);
+            notExist(winningPrize);
         }
     }
 

@@ -2,8 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,21 +14,28 @@ class WinningResultTest {
     @Test
     void total_price() {
 
-        final List<Integer> resultList = List.of(6, 5, 4, 3, 2, 1);
+        final List<WinningPrize> resultList = List.of(WinningPrize.from(6, false)
+                , WinningPrize.from(5, false)
+                , WinningPrize.from(5, true)
+                , WinningPrize.from(4, false)
+                , WinningPrize.from(3, false)
+                , WinningPrize.from(2, false)
+                , WinningPrize.from(1, false));
         final WinningResult winningResult = WinningResult.init();
         winningResult.collect(resultList);
 
-        assertThat(winningResult.sum()).isEqualTo(new BigDecimal(2001555000));
+        assertThat(winningResult.sum()).isEqualTo(new BigDecimal(2_031_555_000));
     }
 
     @DisplayName("5개 매칭된 등수가 2개인 우승 상금을 구한다.")
     @Test
     void tie_price() {
 
-        final List<Integer> resultList = List.of(5, 5);
+        final List<WinningPrize> resultList = List.of(WinningPrize.from(5, false)
+                , WinningPrize.from(5, true));
         final WinningResult winningResult = WinningResult.init();
         winningResult.collect(resultList);
 
-        assertThat(winningResult.sum()).isEqualTo(new BigDecimal(3000000));
+        assertThat(winningResult.sum()).isEqualTo(new BigDecimal(31_500_000));
     }
 }
