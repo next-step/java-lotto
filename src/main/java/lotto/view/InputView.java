@@ -30,11 +30,7 @@ public class InputView {
 
     private static LottoNumber inputBonusLottoNumber(Lotto winningLotto) {
         System.out.println("보너스 볼을 입력해 주세요.");
-        LottoNumber bonusLottoNumber = new LottoNumber(inputNumber());
-        if (winningLotto.contains(bonusLottoNumber)) {
-            throw new IllegalArgumentException("당첨 번호에 포함된 번호를 입력할 수 없습니다.");
-        }
-        return bonusLottoNumber;
+        return new LottoNumber(inputNumber());
     }
 
     private static int inputNumber() {

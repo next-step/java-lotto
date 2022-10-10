@@ -9,8 +9,15 @@ public class WinningCondition {
     private final LottoNumber bonusLottoNumber;
 
     public WinningCondition(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        validate(winningLotto, bonusLottoNumber);
         this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
+    }
+
+    private void validate(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        if (winningLotto.contains(bonusLottoNumber)) {
+            throw new IllegalArgumentException("당첨 번호에 포함된 번호를 입력할 수 없습니다.");
+        }
     }
 
     public List<LottoRank> getRanks(List<Lotto> lottos) {
