@@ -12,11 +12,12 @@
 - [x] `generateLotto(count)` 메소드를 통해 새로운 `Lotto`를 생성해 `List`에 추가 가능
 - [x] 직접 리스트를 주입할 수 있는 생성자 지원
 ### Customer
-- [ ] `LottoWallet`를 인스턴스 변수로 보유
-- [ ] `buy(cashAmount)` 메소드를 통해 로또 구매 가능
+- [x] `LottoWallet`를 인스턴스 변수로 보유
+- [x] `buy(cashAmount)` 메소드를 통해 로또 구매 가능
 ### LottoCompany
 - [ ] 로또의 당첨 여부 확인 기능 제공
   - [ ] 지난주 당첨 번호를 입력받아 `Customer의 LottoWallet`과 비교하여 당첨 통계 제공
+- [x] 로또 한 장의 가격을 상수로 가지고 있음
 ### InputView
 - [ ] 로또 구매 금액 입력 받기
 - [ ] 지난 주 당첨 번호 입력 받기
