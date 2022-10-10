@@ -42,8 +42,7 @@ public class CalculateOperator {
         return Stream.iterate(0, i -> i + 1)
                 .limit(split.length)
                 .filter(i -> i % 2 == 0)
-                .filter(i -> isNumeric(split[i]))
-                .map(i -> Integer.parseInt(split[i]))
+                .map(i -> parseInt(split[i]))
                 .collect(Collectors.toList());
     }
 
@@ -51,17 +50,15 @@ public class CalculateOperator {
         return Stream.iterate(0, i -> i + 1)
                 .limit(split.length)
                 .filter(i -> i % 2 == 1)
-                .filter(i -> !isNumeric(split[i]))
                 .map(i -> Operation.parse(split[i]))
                 .collect(Collectors.toList());
     }
 
-    private boolean isNumeric(String string) {
+    private Integer parseInt(String string) {
         try {
-            Integer.parseInt(string);
+            return Integer.parseInt(string);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자로 변환할 수 없습니다. 입력값: " + string);
         }
-        return true;
     }
 }
