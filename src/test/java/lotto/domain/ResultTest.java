@@ -6,12 +6,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultTest {
     private static final int NO_MATCH_NUMBER = -1;
     private static final int BONUS_NUMBER = 0;
+    private static final int RATE_OF_INCOME_TO_ALL_WIN = 406311;
     private static LottoNumbersWrapper collectNumbers = new LottoNumbersWrapper(Arrays.asList(1, 2, 3, 4, 5, 6));
     private static LottoWrapper lottoWrapper;
 
@@ -34,5 +36,16 @@ class ResultTest {
             assertThat(result.getWinCount(rank)).isEqualTo(1);
         }
     }
+
+    @Test
+    @DisplayName("수익률 테스트")
+    void getTotalIncomeTest() {
+        Result allWinResult = new Result(lottoWrapper, collectNumbers, BONUS_NUMBER);
+        Result anyWinResult = new Result(lottoWrapper, new LottoNumbersWrapper(Collections.EMPTY_LIST), BONUS_NUMBER);
+
+        assertThat(allWinResult.getRateOfIncome()).isEqualTo(RATE_OF_INCOME_TO_ALL_WIN);
+        assertThat(anyWinResult.getRateOfIncome()).isEqualTo(0);
+    }
+
 
 }
