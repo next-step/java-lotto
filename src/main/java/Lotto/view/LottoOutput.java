@@ -26,7 +26,7 @@ public class LottoOutput {
     public static void noticeResult(ResultSummary resultSummary, double profit) {
         System.out.println(LOTTO_RESULT_MESSAGE);
         System.out.println("------------");
-        List<Rank> ranks = List.of(Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+        List<Rank> ranks = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
         for (Rank rank : ranks) {
             System.out.println(convertToString(rank, resultSummary.getCountNumber(rank)));
         }

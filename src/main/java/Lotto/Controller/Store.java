@@ -14,14 +14,27 @@ public class Store {
         LottoBuyResource lottoBuyResource = new LottoBuyResource(LottoInput.getPrice());
         Lottos lottos = lottoNumberCreateMachine.createLottos(lottoBuyResource);
         LottoOutput.noticeBuyLotto(lottos);
-        Lotto luckyNumbers = lottoNumberCreateMachine.getLuckyNumbers(getLuckyNumber());
-        ResultSummary resultSummary = new ResultSummary(lottos, luckyNumbers);
+
+        LuckyNumber luckyNumber = getLuckyNumber();
+        ResultSummary resultSummary = new ResultSummary(lottos, luckyNumber);
         double profit = resultSummary.getProfit(lottoBuyResource);
         LottoOutput.noticeResult(resultSummary, profit);
     }
 
-    private List<String> getLuckyNumber() {
+
+    private LuckyNumber getLuckyNumber() {
+        LottoNumberCreateMachine lottoNumberCreateMachine = new LottoNumberCreateMachine();
+        Lotto luckyNumbers = lottoNumberCreateMachine.getLuckyNumbers(getLuckyNumberSixCount());
+        LottoNumber bonusNumber = new LottoNumber(getBonusNumber());
+        return new LuckyNumber(luckyNumbers, bonusNumber);
+    }
+
+    private List<String> getLuckyNumberSixCount() {
         return LottoInput.getLuckyNumbers();
+    }
+
+    private int getBonusNumber() {
+        return LottoInput.getBonusNumber();
     }
 
 }

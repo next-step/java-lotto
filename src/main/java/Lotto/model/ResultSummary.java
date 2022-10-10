@@ -8,7 +8,7 @@ public class ResultSummary {
     private Map<Rank, Integer> countingRank;
 
 
-    public ResultSummary(Lottos lottos, Lotto luckyNumber) {
+    public ResultSummary(Lottos lottos, LuckyNumber luckyNumber) {
         this.countingRank = lottos.summaryLottoResult(luckyNumber);
     }
 
