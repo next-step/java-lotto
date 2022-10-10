@@ -3,22 +3,19 @@ package step1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step1.domains.CalculateOperator;
-import step1.exceptions.EmptyStringException;
 
 public class CalculateOperatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
     void Given_Null_Or_Empty_When_Create_Then_Fail(String input) {
-        assertThatThrownBy(() -> new CalculateOperator(input))
-                .isInstanceOf(EmptyStringException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new CalculateOperator(input));
     }
 
     @ParameterizedTest

@@ -1,11 +1,11 @@
 package step1;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 import step1.domains.Calculator;
-import step1.exceptions.DivideByZeroException;
 
 public class CalculatorTest {
     Calculator calculator = new Calculator();
@@ -32,6 +32,6 @@ public class CalculatorTest {
     
     @Test
     void Given_Zero_When_Divide_Then_Fail() {
-        assertThatThrownBy(() -> calculator.divide(1, 0)).isInstanceOf(DivideByZeroException.class);
+        assertThatThrownBy(() -> calculator.divide(1, 0)).isInstanceOf(ArithmeticException.class);
     }
 }

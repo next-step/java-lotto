@@ -1,9 +1,9 @@
 package step1.domains;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CalculateOperator {
     private static final String NULL_OR_EMPTY_STRING_MSG = "null이나 빈 문자열이 올 수 없습니다.";
@@ -39,16 +39,20 @@ public class CalculateOperator {
     }
 
     private List<Integer> extractNumbers(String[] split) {
-        return Arrays.stream(split)
-                .filter(this::isNumeric)
-                .map(Integer::parseInt)
+        return Stream.iterate(0, i -> i + 1)
+                .limit(split.length)
+                .filter(i -> i % 2 == 0)
+                .filter(i -> isNumeric(split[i]))
+                .map(i -> Integer.parseInt(split[i]))
                 .collect(Collectors.toList());
     }
 
     private List<Operation> extractOperations(String[] split) {
-        return Arrays.stream(split)
-                .filter(s -> !isNumeric(s))
-                .map(Operation::parse)
+        return Stream.iterate(0, i -> i + 1)
+                .limit(split.length)
+                .filter(i -> i % 2 == 1)
+                .filter(i -> !isNumeric(split[i]))
+                .map(i -> Operation.parse(split[i]))
                 .collect(Collectors.toList());
     }
 
