@@ -28,6 +28,7 @@ public class LottoGenerator {
         Collections.shuffle(fullLottoNumbers);
         List<Integer> lottoNumbers = fullLottoNumbers.stream()
                 .limit(Lotto.LOTTO_SIZE)
+                .sorted()
                 .collect(toList());
         return new Lotto(lottoNumbers);
     }
