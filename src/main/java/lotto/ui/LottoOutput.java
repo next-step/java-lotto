@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
+
 public class LottoOutput {
 
     public static void purchaseAmount() {
@@ -8,6 +10,10 @@ public class LottoOutput {
 
     public static void purchaseCount(int number) {
         System.out.println(String.format("%d개를 구매했습니다.", number));
+    }
+
+    public static void lotto(Lotto lotto) {
+        System.out.println(lotto.toString());
     }
 
     public static void winningNumber() {

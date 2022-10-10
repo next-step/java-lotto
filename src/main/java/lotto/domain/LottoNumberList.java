@@ -47,4 +47,15 @@ public class LottoNumberList {
     public int hashCode() {
         return Objects.hash(lottoNumberList);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(lottoNumberList.get(0));
+        for (int i = 1; i < lottoNumberList.size(); i++) {
+            result.append(", ");
+            result.append(lottoNumberList.get(i));
+        }
+        return result.toString();
+    }
 }
