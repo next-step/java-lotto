@@ -14,7 +14,7 @@ class LottoResultTest {
         List<Integer> correctNumbers = List.of(0, 0, 0, 4, 2, 1);
         LottoResult lottoResult = new LottoResult(correctNumbers);
 
-        float ratio = lottoResult.retrieveProfitRatio(1000);
-        Assertions.assertThat(ratio).isEqualTo(50.0f);
+        double ratio = lottoResult.retrieveProfitRatio(1000);
+        Assertions.assertThat(ratio).isEqualTo(50.0d);
     }
 }
