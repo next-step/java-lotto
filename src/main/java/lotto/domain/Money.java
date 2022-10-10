@@ -14,6 +14,10 @@ public class Money {
         this.money = money;
     }
 
+    public int divide(int number) {
+        return this.money / number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,7 +31,8 @@ public class Money {
         return Objects.hash(money);
     }
 
-    public int divide(int number) {
-        return this.money / number;
+    @Override
+    public String toString() {
+        return String.valueOf(money);
     }
 }
