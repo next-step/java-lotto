@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -23,5 +24,12 @@ class MoneyTest {
             new Money(value);
         }).isInstanceOf(IllegalArgumentException.class)
           .hasMessage("Value cannot be less than 0.");
+    }
+
+    @DisplayName("가격의 금액을 리턴한다.")
+    @ParameterizedTest
+    @ValueSource(longs = { 1_000L, 10_000L, 1_500L, 0L })
+    void value(long value) {
+        assertThat(new Money(value).value()).isEqualTo(value);
     }
 }

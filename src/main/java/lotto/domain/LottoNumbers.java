@@ -13,6 +13,14 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
+
+    public static LottoNumbers of(NumberGenerateStrategy method, int lottoCount) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int count = 0; count < lottoCount; count++) {
+            lottoNumbers.add(number(method));
+        }
+        return new LottoNumbers(lottoNumbers);
+    }
     
     public LottoNumbers match(LottoNumber luckyLottoNumber, int matchCount) {
         List<LottoNumber> matchLottoNumbers = new ArrayList<>();
@@ -22,6 +30,10 @@ public class LottoNumbers implements Iterable<LottoNumber> {
         return new LottoNumbers(matchLottoNumbers);
     }
 
+    public boolean exist() {
+        return !lottoNumbers.isEmpty();
+    }
+    
     private void addMatchNumber(LottoNumber luckyLottoNumber, int matchCount, List<LottoNumber> matchLottoNumbers, LottoNumber lottoNumber) {
         if (lottoNumber.matchCount(luckyLottoNumber) == matchCount) {
             matchLottoNumbers.add(lottoNumber);
@@ -30,14 +42,6 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 
     public int count() {
         return lottoNumbers == null ? 0 : lottoNumbers.size();
-    }
-    
-    public static LottoNumbers of(NumberGenerateStrategy method, int lottoCount) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int count = 0; count < lottoCount; count++) {
-            lottoNumbers.add(number(method));
-        }
-        return new LottoNumbers(lottoNumbers);
     }
     
     private static LottoNumber number(NumberGenerateStrategy method) {

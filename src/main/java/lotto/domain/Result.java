@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Result implements Iterable<Winning> {
-    private static final int MIN_MATCH_COUNT = 3;
-    
     private final List<Winning> winning;
 
     public Result(List<Winning> winning) {
@@ -18,15 +16,14 @@ public class Result implements Iterable<Winning> {
     }
 
     private static List<Winning> winnings(LottoNumbers numbers, LottoNumber luckyLottoNumber) {
-        List<Winning> winnings = new ArrayList<>();
-        for (int matchCount = MIN_MATCH_COUNT; matchCount <= luckyLottoNumber.count(); matchCount++) {
-            winnings.add(winning(matchCount, numbers.match(luckyLottoNumber, matchCount)));
-        }
-        return winnings;
+        return Prize.getAll()
+                    .stream()
+                    .map(prize -> winning(prize, numbers.match(luckyLottoNumber, prize.getMatchCount())))
+                    .filter(winning -> winning.numberCount() > 0).collect(Collectors.toList());
     }
 
-    private static Winning winning(int matchCount, LottoNumbers numberCount) {
-        return new Winning(matchCount, Prize.get(matchCount), numberCount);
+    private static Winning winning(Prize prize, LottoNumbers lottoNumbers) {
+        return new Winning(prize, lottoNumbers);
     }
 
     @Override

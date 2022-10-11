@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Prize {
     FIRST(6, new Money(2_000_000_000)), 
     SECOND(5, new Money(1_500_000)), 
@@ -15,23 +19,21 @@ public enum Prize {
         this.money = money;
     }
 
-    public static Prize get(int matchCount) {
-        if (matchCount == FIRST.matchCount) {
-            return FIRST;
-        }
-        if (matchCount == SECOND.matchCount) {
-            return SECOND;
-        }
-        if (matchCount == THIRD.matchCount) {
-            return THIRD;
-        }
-        if (matchCount == FOURTH.matchCount) {
-            return FOURTH;
-        }
-        return NO_PRIZE;
+    public int getMatchCount() {
+        return matchCount;
     }
-
+    
     public long value() {
         return money.value();
+    }
+    
+    public static Prize get(int matchCount) {
+        return Arrays.stream(values()).filter(prize -> prize.matchCount == matchCount)
+                                      .findFirst()
+                                      .orElse(NO_PRIZE);
+    }
+    
+    public static List<Prize> getAll() {
+        return Arrays.stream(values()).filter(prize -> prize != NO_PRIZE).collect(Collectors.toList());
     }
 }
