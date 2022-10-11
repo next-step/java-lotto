@@ -6,8 +6,8 @@ public class LottoBuyResource {
 
     private static final String PRICE_ERROR_MESSAGE = "로또는 한개당 천원입니다.";
 
-    private int lottoPrice;
-    private int lottoCount;
+    private final int lottoPrice;
+    private final int lottoCount;
 
     public LottoBuyResource(int lottoPrice) {
         validate(lottoPrice);

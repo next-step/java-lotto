@@ -24,12 +24,12 @@ public class Store {
 
     private LuckyNumber getLuckyNumber() {
         LottoNumberCreateMachine lottoNumberCreateMachine = new LottoNumberCreateMachine();
-        Lotto luckyNumbers = lottoNumberCreateMachine.getLuckyNumbers(getLuckyNumberSixCount());
+        Lotto luckyNumbers = lottoNumberCreateMachine.getLuckyNumbers(getLuckyNumbers());
         LottoNumber bonusNumber = new LottoNumber(getBonusNumber());
         return new LuckyNumber(luckyNumbers, bonusNumber);
     }
 
-    private List<String> getLuckyNumberSixCount() {
+    private List<String> getLuckyNumbers() {
         return LottoInput.getLuckyNumbers();
     }
 
