@@ -1,32 +1,27 @@
 package lotto;
 
 import lotto.model.Lotteries;
-import lotto.model.Profit;
-import lotto.model.WinningLotto;
+import lotto.model.LottoMachine;
 import lotto.model.enumeration.Rank;
 
 import java.util.Map;
 
-import static lotto.client.InputView.*;
+import static lotto.client.InputView.scanLastWinLotte;
+import static lotto.client.InputView.scanPurchaseAmount;
 import static lotto.client.OutputView.*;
-import static lotto.model.LottoCreator.createAutoLotto;
-import static lotto.model.Profit.getReturnRate;
 
 public class Main {
     public static void main(String[] args) {
         int purchaseAmount = scanPurchaseAmount();
-        int manualLottoCount = scanManualLottoCount();
 
-        Lotteries lotteries = new Lotteries(createAutoLotto(purchaseAmount), scanManualLottoNumber(manualLottoCount));
+        Lotteries lotteries = new Lotteries(new LottoMachine(), purchaseAmount);
 
         showCountOfLotto(lotteries);
         showCreatedLotteries(lotteries);
 
-        Profit profit = new Profit(new WinningLotto(scanLastWinLotte(), scanBonusBall()));
-
-        Map<Rank, Long> lotteriesRank = profit.getLotteriesRank(lotteries.getAllLotteries());
+        Map<Rank, Long> lotteriesRank = lotteries.getLotteriesRank(scanLastWinLotte());
 
         showResultRank(lotteriesRank);
-        showReturnRate(getReturnRate(lotteriesRank, purchaseAmount));
+        showReturnRate(lotteries, lotteriesRank);
     }
 }
