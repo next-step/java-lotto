@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.reducing;
 
@@ -11,47 +12,43 @@ import static java.util.stream.Collectors.reducing;
  * Created by seungwoo.song on 2022-10-06
  */
 public class LottoStatistic {
-
-    private final Lotto beforeWinLotto;
-    private final PurchaseInfo purchaseInfo;
-
+    private final List<Lotto> lottos;
     private int winMoneyTotal = 0;
     private double revenue;
-
     private Map<LottoResult, Integer> lottoResultCounter = new EnumMap<>(LottoResult.class);
 
-    public LottoStatistic(Lotto beforeWinLotto, PurchaseInfo purchaseInfo, List<Lotto> lottos) {
-        this.beforeWinLotto = beforeWinLotto;
-        this.purchaseInfo = purchaseInfo;
-
-        analyze(lottos);
+    public LottoStatistic(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public void analyze(List<Lotto> lottos) {
-        plusLottoResultCount(lottos);
-        sumWinMoney(lottos);
-        calculateRevenue();
+    public void analyze(Lotto beforeWinLotto, PurchaseInfo purchaseInfo) {
+        List<LottoResult> lottoResults = toLottoResult(beforeWinLotto);
+
+        plusLottoResultCount(lottoResults);
+        sumWinMoney(lottoResults);
+        calculateRevenue(purchaseInfo);
     }
 
-    private void plusLottoResultCount(List<Lotto> lotts) {
-        lotts.stream()
-                .map(this::toLottoResult)
+    private List<LottoResult> toLottoResult(Lotto beforeWinLotto) {
+        return lottos.stream()
+                .map((lotto) -> lotto.getResult(beforeWinLotto))
+                .collect(Collectors.toList());
+    }
+
+    private void plusLottoResultCount(List<LottoResult> lottoResults) {
+        lottoResults.stream()
                 .filter(Objects::nonNull)
                 .forEach(lottoResult -> lottoResultCounter.merge(lottoResult, 1, (result, count) -> result + count));
     }
 
-    private void sumWinMoney(List<Lotto> lottoResult) {
+    private void sumWinMoney(List<LottoResult> lottoResult) {
         winMoneyTotal = lottoResult.stream()
-                .map(this::toLottoResult)
                 .filter(Objects::nonNull)
                 .map(LottoResult::getMoney)
                 .collect(reducing(0, e -> e, Integer::sum));
     }
-    private LottoResult toLottoResult (Lotto lotto) {
-        return lotto.getResult(beforeWinLotto);
-    }
 
-    private void calculateRevenue() {
+    private void calculateRevenue(PurchaseInfo purchaseInfo) {
         revenue = Double.valueOf(winMoneyTotal) / Double.valueOf(purchaseInfo.getPurchaseAmount());
     }
 
