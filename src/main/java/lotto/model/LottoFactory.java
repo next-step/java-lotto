@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface LottoFactory {
 
-    List<Lotto> create(int purchaseCount);
+    List<Lotto> create(int purchasedCount);
 }
