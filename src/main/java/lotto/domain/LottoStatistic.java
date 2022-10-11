@@ -52,7 +52,7 @@ public class LottoStatistic {
     }
 
     private void calculateRevenue() {
-        revenue = Double.valueOf(winMoneyTotal) / Double.valueOf(buy.getPay());
+        revenue = Double.valueOf(winMoneyTotal) / Double.valueOf(buy.getPurchaseAmount());
     }
 
     public int getWinMoneyTotal() {

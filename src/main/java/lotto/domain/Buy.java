@@ -6,13 +6,13 @@ package lotto.domain;
 public class Buy {
 
     private final int price;
-    private final int pay;
+    private final int purchaseAmount;
     private final int count;
 
-    public Buy(int price, int pay) {
+    public Buy(int price, int purchaseAmount) {
         this.price = price;
-        this.pay = pay;
-        this.count = calculateCount(price, pay);
+        this.purchaseAmount = purchaseAmount;
+        this.count = calculateCount(price, purchaseAmount);
     }
 
     private int calculateCount(int price, int pay) {
@@ -26,7 +26,7 @@ public class Buy {
         return count;
     }
 
-    public int getPay() {
-        return pay;
+    public int getPurchaseAmount() {
+        return purchaseAmount;
     }
 }
