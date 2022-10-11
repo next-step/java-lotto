@@ -31,7 +31,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(Integer countOfMatch) {
-        return Optional.ofNullable(RANK_MAP.get(countOfMatch)).orElse(null);
+    public static Optional<Rank> valueOf(Integer countOfMatch) {
+        return Optional.ofNullable(RANK_MAP.get(countOfMatch));
     }
 }
