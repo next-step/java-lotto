@@ -13,9 +13,7 @@ public class LottoApplication {
         int price = InputView.inputPrice();
         OutputView.printPurchaseResult(price);
         LottoGame lottoGame = LottoGame.newInstance();
-        List<LottoNumber> lottoNumbers = lottoGame.playLotto(price / 1000);
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.getLottoNumbers());
-        }
+        int purchaseCount = lottoGame.makeLottoTicket(price);
+        List<LottoNumber> lottoNumbers = lottoGame.playLotto(purchaseCount);
     }
 }

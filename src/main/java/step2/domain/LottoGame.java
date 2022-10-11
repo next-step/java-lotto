@@ -4,16 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
+
+    private static final int LOTTO_TICKET_PRICE = 1000;
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    private LottoGame(){
+    private LottoGame() {
     }
 
     public static LottoGame newInstance() {
         return new LottoGame();
     }
 
-    public List<LottoNumber> playLotto(int purchaseCount){
+    public int makeLottoTicket(int price) {
+        return price / LOTTO_TICKET_PRICE;
+    }
+
+    public List<LottoNumber> playLotto(int purchaseCount) {
         for (int i = 0; i < purchaseCount; i++) {
             lottoNumbers.add(LottoNumber.newInstance());
         }
