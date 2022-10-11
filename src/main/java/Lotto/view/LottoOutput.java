@@ -1,9 +1,6 @@
 package Lotto.view;
 
-import Lotto.model.Lotto;
-import Lotto.model.LottoNumber;
-import Lotto.model.Lottos;
-import Lotto.model.Rank;
+import Lotto.model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +12,6 @@ public class LottoOutput {
     private static final String ENTER = "\n";
     private static final String DELIMITER = ", ";
     private static final String LOTTO_RESULT_MESSAGE = "당첨 통계";
-    private static final int DEFAULT_VALUE = 0;
 
     public static void noticeBuyLotto(Lottos lottos) {
         List<Lotto> Lottos = lottos.getLottos();
@@ -26,12 +22,12 @@ public class LottoOutput {
         }
     }
 
-    public static void noticeResult(Map<Rank, Integer> countingRank, double profit) {
+    public static void noticeResult(ResultSummary resultSummary, double profit) {
         System.out.println(LOTTO_RESULT_MESSAGE);
         System.out.println("------------");
-        List<Rank> ranks = List.of(Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+        List<Rank> ranks = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
         for (Rank rank : ranks) {
-            System.out.println(convertToString(rank, countingRank.getOrDefault(rank, DEFAULT_VALUE)));
+            System.out.println(convertToString(rank, resultSummary.getCountNumber(rank)));
         }
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profit);
     }

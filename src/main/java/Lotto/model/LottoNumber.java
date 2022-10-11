@@ -2,10 +2,11 @@ package Lotto.model;
 
 import java.util.Objects;
 
+import static Lotto.LottoConstant.LOTTO_MAX_NUMBER;
+import static Lotto.LottoConstant.LOTTO_MIN_NUMBER;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
     private static final String LOTTO_CONSTRUCOR_ERROR_MESSAGE = "로또의 숫자는 1~45의 값만 가질 수 있씁니다.";
     private int number;
 

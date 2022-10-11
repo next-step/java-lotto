@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static Lotto.LottoConstant.DEFAULT_VALUE;
+
 public class Lottos {
 
     private static final int WINNING_LOTTO_STANDARD = 3;
-    private static final int DEFAULT_VALUE = 0;
+
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -18,18 +20,19 @@ public class Lottos {
         return lottos;
     }
 
-    public Map<Rank, Integer> summaryLottoResult(Lotto luckyNumber) {
+    public Map<Rank, Integer> summaryLottoResult(LuckyNumber luckyNumber) {
         Map<Rank, Integer> countingRank = new HashMap<>();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.countMatchNumbers(luckyNumber);
-            countingRank = this.putCountingRank(countingRank, matchCount);
+            int matchCount = luckyNumber.countMatchNumbers(lotto);
+            boolean secondAble = luckyNumber.isSecondAble(lotto, matchCount);
+            countingRank = this.putCountingRank(countingRank, matchCount, secondAble);
         }
         return countingRank;
     }
 
-    private Map<Rank, Integer> putCountingRank(Map<Rank, Integer> countingRank, int matchCount) {
+    private Map<Rank, Integer> putCountingRank(Map<Rank, Integer> countingRank, int matchCount, boolean secondAble) {
         if (matchCount >= WINNING_LOTTO_STANDARD) {
-            Rank rank = Rank.getRank(matchCount);
+            Rank rank = Rank.getRank(matchCount, secondAble);
             countingRank.put(rank, countingRank.getOrDefault(rank, DEFAULT_VALUE) + 1);
         }
         return countingRank;

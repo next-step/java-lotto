@@ -1,8 +1,8 @@
 package Lotto.model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -16,7 +16,7 @@ public class Lotto {
     }
 
     private void validate(List<LottoNumber> lotto) {
-        if (lotto.stream().distinct().collect(Collectors.toList()).size() != PROPER_LOTTONUMBER_COUNT) {
+        if (new HashSet<>(lotto).size() != PROPER_LOTTONUMBER_COUNT) {
             throw new IllegalArgumentException(LOTTO_COUNT_ERROR_MESSAGE);
         }
     }

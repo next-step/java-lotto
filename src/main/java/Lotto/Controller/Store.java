@@ -5,47 +5,36 @@ import Lotto.view.LottoInput;
 import Lotto.view.LottoOutput;
 
 import java.util.List;
-import java.util.Map;
 
 public class Store {
 
-    private static final String PRICE_ERROR_MESSAGE = "로또는 한개당 천원입니다.";
-    private static final int LOTTO_PRICE = 1000;
 
     public void buyLotto() {
         LottoNumberCreateMachine lottoNumberCreateMachine = new LottoNumberCreateMachine();
-        int lottoCount = getLottoCount();
-        Lottos lottos = lottoNumberCreateMachine.createLottos(lottoCount);
+        LottoBuyResource lottoBuyResource = new LottoBuyResource(LottoInput.getPrice());
+        Lottos lottos = lottoNumberCreateMachine.createLottos(lottoBuyResource);
         LottoOutput.noticeBuyLotto(lottos);
-        Lotto luckyNumbers = lottoNumberCreateMachine.getLuckyNumbers(getLuckyNumber());
-        Map<Rank, Integer> countingRank = lottos.summaryLottoResult(luckyNumbers);
-        double profit = getProfit(countingRank, lottoCount);
-        LottoOutput.noticeResult(countingRank, profit);
+
+        LuckyNumber luckyNumber = getLuckyNumber();
+        ResultSummary resultSummary = new ResultSummary(lottos, luckyNumber);
+        double profit = resultSummary.getProfit(lottoBuyResource);
+        LottoOutput.noticeResult(resultSummary, profit);
     }
 
-    private int getLottoCount() {
-        int price = LottoInput.getPrice();
-        if (price % LOTTO_PRICE != 0) {
-            new IllegalArgumentException(PRICE_ERROR_MESSAGE);
-        }
-        return price / LOTTO_PRICE;
+
+    private LuckyNumber getLuckyNumber() {
+        LottoNumberCreateMachine lottoNumberCreateMachine = new LottoNumberCreateMachine();
+        Lotto luckyNumbers = lottoNumberCreateMachine.getLuckyNumbers(getLuckyNumberSixCount());
+        LottoNumber bonusNumber = new LottoNumber(getBonusNumber());
+        return new LuckyNumber(luckyNumbers, bonusNumber);
     }
 
-    private List<String> getLuckyNumber() {
+    private List<String> getLuckyNumberSixCount() {
         return LottoInput.getLuckyNumbers();
     }
 
-    private double getProfit(Map<Rank, Integer> countingRank, int lottoCount) {
-        double reward = 0;
-        int count = 0;
-        double price = lottoCount * LOTTO_PRICE;
-        for (Rank rank : countingRank.keySet()) {
-            count += countingRank.get(rank);
-            reward += rank.getReward() * countingRank.get(rank);
-        }
-        if (count == 0) {
-            return 0;
-        }
-        return reward / price;
+    private int getBonusNumber() {
+        return LottoInput.getBonusNumber();
     }
+
 }
