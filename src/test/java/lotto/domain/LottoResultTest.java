@@ -12,7 +12,6 @@ class LottoResultTest {
     void 당첨정보() {
         assertThat(LottoResult.FIRST.getMoney()).isEqualTo(2000000000);
         assertThat(LottoResult.FIRST.getMatchCount()).isEqualTo(6);
-        assertThat(LottoResult.FIRST.getUnitDescription()).isEqualTo("원");
     }
 
     @Test
