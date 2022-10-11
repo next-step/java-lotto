@@ -14,8 +14,12 @@ public class Money {
         this.money = money;
     }
 
-    public int divide(int number) {
-        return this.money / number;
+    public double divide(Money money) {
+        return (double) this.money / money.money();
+    }
+
+    public int money() {
+        return money;
     }
 
     @Override
@@ -35,4 +39,5 @@ public class Money {
     public String toString() {
         return String.valueOf(money);
     }
+
 }

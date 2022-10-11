@@ -19,6 +19,6 @@ public class LottoServiceTest {
     @DisplayName("Money를 넘기면 1000원짜리 로또를 몇개 구입했는지 반환한다.")
     @Test
     void lotto_purchase_count() {
-        assertThat(lottoService.purchase(new Money(3000))).isEqualTo(3);
+        assertThat(lottoService.purchaseNumber(new Money(3000))).isEqualTo(3);
     }
 }

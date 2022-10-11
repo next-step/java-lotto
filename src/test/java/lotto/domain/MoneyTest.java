@@ -19,9 +19,10 @@ public class MoneyTest {
     }
 
     @Test
-    void divide() {
+    void divide_money() {
         Money money = new Money(10000);
 
-        assertThat(money.divide(1000)).isEqualTo(10);
+        assertThat(money.divide(new Money(1000))).isEqualTo(10);
     }
+
 }
