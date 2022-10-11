@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
  * Created by seungwoo.song on 2022-10-05
  */
 public class MessageConverter {
+    private static final String SEPARATOR = " ";
+
     private MessageConverter() {
     }
-
-    private static final String SEPARATOR = " ";
 
     public static List<Input> convert(String inputs) {
         return Arrays.stream(inputs.split(SEPARATOR))

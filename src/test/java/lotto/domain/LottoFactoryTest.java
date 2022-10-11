@@ -16,7 +16,7 @@ class LottoFactoryTest {
     @Test
     void 생성() {
         LottoFactory lottoFactory = new LottoFactory();
-        Deque<Integer> lottoNumbers = new ArrayDeque<>(List.of(1,2,3,4,5,6));
+        Deque<Integer> lottoNumbers = new ArrayDeque<>(List.of(1, 2, 3, 4, 5, 6));
 
         List<Lotto> lotto = lottoFactory.produces(() -> lottoNumbers.pop(), 1);
 

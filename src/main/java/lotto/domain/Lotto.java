@@ -55,6 +55,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString() ;
+        return lottoNumbers.toString();
     }
 }

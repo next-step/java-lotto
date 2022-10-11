@@ -14,6 +14,12 @@ public class LottoInputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
+    private static List<Integer> toList(String[] lottoNumbers) {
+        return Arrays.stream(lottoNumbers)
+                .map(token -> Integer.parseInt(token))
+                .collect(Collectors.toList());
+    }
+
     public int readPayAmount() {
         System.out.println("구입 금액을 입력해 주세요");
         int pay = scanner.nextInt();
@@ -27,11 +33,5 @@ public class LottoInputView {
         String[] lottoNumbers = text.replace(" ", "").split(",");
 
         return Lotto.of(toList(lottoNumbers));
-    }
-
-    private static List<Integer> toList(String[] lottoNumbers) {
-        return Arrays.stream(lottoNumbers)
-                .map(token -> Integer.parseInt(token))
-                .collect(Collectors.toList());
     }
 }

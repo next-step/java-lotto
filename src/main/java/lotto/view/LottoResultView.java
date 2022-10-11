@@ -17,6 +17,7 @@ public class LottoResultView {
             System.out.println(lotto);
         }
     }
+
     public void print(LottoStatistic lottoStatistic) {
         System.out.println("당첨 통계");
         System.out.println("---------");
