@@ -1,10 +1,10 @@
-package lotto;
+package lottery;
 
 import java.util.List;
 
-import static lotto.view.InputView.getLotteryPurchasePrices;
-import static lotto.view.InputView.getWinningLotteryNumbers;
-import static lotto.view.ResultView.*;
+import static lottery.view.InputView.getLotteryPurchasePrices;
+import static lottery.view.InputView.getWinningLotteryNumbers;
+import static lottery.view.ResultView.*;
 
 public class Controller {
 
@@ -15,12 +15,12 @@ public class Controller {
         int purchasedLotteryAmount = customer.purchase(lotteryPurchasePrices);
 
         printPurchasedLotteryAmount(purchasedLotteryAmount);
-        printPurchasedLotteryNumbers(customer.getLottoWallet());
+        printPurchasedLotteryNumbers(customer.getLotteryWallet());
 
         List<Integer> winningLotteryNumbers = getWinningLotteryNumbers();
-        LottoResult lottoResult = LottoCompany.createLottoResult(winningLotteryNumbers, customer.getLottoWallet());
+        LotteryResult lotteryResult = LotteryCompany.createLotteryResult(winningLotteryNumbers, customer.getLotteryWallet());
 
-        printLotteryResult(lottoResult);
+        printLotteryResult(lotteryResult);
     }
 
 }

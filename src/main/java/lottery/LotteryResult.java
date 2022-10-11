@@ -1,15 +1,15 @@
-package lotto;
+package lottery;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoResult {
+public class LotteryResult {
 
     private final Map<Integer, Integer> prizes = new HashMap<>();
     private final Map<Integer, Integer> wonAmounts = new HashMap<>();
 
     private int totalAmounts;
-    private int lottoPrice;
+    private int lotteryPrice;
 
     public int getPrizeOf(int rank) {
         return prizes.get(rank);
@@ -24,7 +24,7 @@ public class LottoResult {
         for (int rank : prizes.keySet()) {
             totalWonPrizes += getPrizeOf(rank) * getWonAmountOf(rank);
         }
-        return totalWonPrizes / (totalAmounts * lottoPrice);
+        return totalWonPrizes / (totalAmounts * lotteryPrice);
     }
 
     public void setPrizeOf(int rank, int prize) {
@@ -43,7 +43,7 @@ public class LottoResult {
         this.totalAmounts = totalAmounts;
     }
 
-    public void setLottoPrice(int lottoPrice) {
-        this.lottoPrice = lottoPrice;
+    public void setLotteryPrice(int lotteryPrice) {
+        this.lotteryPrice = lotteryPrice;
     }
 }
