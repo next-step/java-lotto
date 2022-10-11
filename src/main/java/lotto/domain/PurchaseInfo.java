@@ -5,6 +5,8 @@ package lotto.domain;
  */
 public class PurchaseInfo {
 
+    public static final int LOTTO_PRICE = 1000;
+
     private final int price;
     private final int purchaseAmount;
     private final int count;

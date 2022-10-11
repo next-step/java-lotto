@@ -7,23 +7,21 @@ import lotto.view.LottoResultView;
 
 import java.util.List;
 
+import static lotto.domain.LottoNumberProduceStrategy.*;
+import static lotto.domain.PurchaseInfo.*;
+
 /**
  * Created by seungwoo.song on 2022-10-06
  */
 public class Application {
 
-    private static final int LOTTO_PRICE = 1000;
-    public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final int LOTTO_NUMBER_COUNT_LIMIT = 45;
-
     public static void main(String[] args) {
+        LottoInputView inputView = new LottoInputView();
+        PurchaseInfo purchaseInfo = new PurchaseInfo(LOTTO_PRICE, inputView.readPayAmount());
+        LottoFactory lottoFactory = new LottoFactory();
         LottoResultView view = new LottoResultView();
 
-        LottoInputView inputView = new LottoInputView();
-
-        PurchaseInfo purchaseInfo = new PurchaseInfo(LOTTO_PRICE, inputView.readPayAmount());
-        LottoFactory lottoFactory = new LottoFactory(new DefaultLottoNumberProduceStrategy(() -> RandomUtils.getNumber(LOTTO_NUMBER_COUNT_LIMIT), LOTTO_NUMBER_COUNT));
-        List<Lotto> lotto = lottoFactory.getLotto(purchaseInfo.getCount());
+        List<Lotto> lotto = lottoFactory.produces(() -> RandomUtils.getNumber(MAX_LOTTO_NUMBER), purchaseInfo.getCount());
 
         view.print(lotto);
 
