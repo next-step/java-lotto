@@ -17,5 +17,6 @@ public class LottoApplication {
         LottoGame lottoGame = LottoGame.newInstance();
         List<LottoNumber> lottoNumbers = lottoGame.playLotto(ticketCount);
         OutputView.printLottoNumbers(lottoNumbers);
+        int[] winningNumbers = InputView.inputWinningNumbers();
     }
 }

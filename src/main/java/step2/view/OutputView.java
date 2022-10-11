@@ -17,5 +17,6 @@ public class OutputView {
         for (LottoNumber lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber.getLottoNumbers());
         }
+        System.out.println();
     }
 }
