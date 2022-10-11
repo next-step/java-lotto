@@ -3,8 +3,7 @@ package stringcalculate;
 import java.util.regex.Pattern;
 
 public class InputVerifier {
-    private static final String BLANK = "\\s";
-    private static final Pattern FILTER = Pattern.compile("^([0-9-+*/\\s]+)$");
+    private static final Pattern FILTER = Pattern.compile("^([0-9\\-+*/\\s]+)$");
 
     public static void validateInput(String input) {
         validateSplit(input);
