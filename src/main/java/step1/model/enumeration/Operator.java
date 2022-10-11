@@ -1,4 +1,4 @@
-package step1.enumeration;
+package step1.model.enumeration;
 
 import step1.exception.InvalidInputException;
 import step1.model.NumberCalculation;
@@ -19,7 +19,7 @@ public enum Operator {
     private String operator;
     private BiConsumer<NumberCalculation, Integer> calculator;
 
-    private static Map<String, Operator> operatorMap = Arrays.stream(Operator.values())
+    private static Map<String, Operator> OPERATOR_MAP = Arrays.stream(Operator.values())
             .collect(Collectors.toMap(op -> op.operator, Function.identity()));
 
     Operator(String operator, BiConsumer<NumberCalculation, Integer> calculator) {
@@ -28,7 +28,7 @@ public enum Operator {
     }
 
     public static Operator getOperator(String operator) {
-        return Optional.ofNullable(operatorMap.get(operator))
+        return Optional.ofNullable(OPERATOR_MAP.get(operator))
                 .orElseThrow(() -> new InvalidInputException("[입력 오류] 유효하지 않는 사칙연산 기호가 입력 되었습니다."));
     }
 

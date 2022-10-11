@@ -1,6 +1,6 @@
 package step1;
 
-import step1.enumeration.Operator;
+import step1.model.enumeration.Operator;
 import step1.model.NumberCalculation;
 
 import static step1.view.ClientView.scanCalculationFormula;

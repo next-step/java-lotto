@@ -1,4 +1,4 @@
-package step1.enumeration;
+package step1.model.enumeration;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,7 +8,7 @@ import step1.model.NumberCalculation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step1.enumeration.Operator.getOperator;
+import static step1.model.enumeration.Operator.getOperator;
 
 class OperatorTest {
     @ParameterizedTest
