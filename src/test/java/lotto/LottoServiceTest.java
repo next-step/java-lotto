@@ -46,4 +46,18 @@ public class LottoServiceTest {
 
         assertThat(lottoService.checkLotto(lottoList, winner)).isEqualTo(new int[]{1, 1, 1, 1, 1, 1, 1});
     }
+
+    @DisplayName("로또 수익률을 반환한다.")
+    @Test
+    void yield() {
+        List<Lotto> lottoList = Arrays.asList(
+                new Lotto(LottoNumberList.createLottoNumbers(new int[]{4, 5, 6, 7, 8, 9})),
+                new Lotto(LottoNumberList.createLottoNumbers(new int[]{5, 6, 7, 8, 9, 10})),
+                new Lotto(LottoNumberList.createLottoNumbers(new int[]{6, 7, 8, 9, 10, 11})),
+                new Lotto(LottoNumberList.createLottoNumbers(new int[]{7, 8, 9, 10, 11, 12}))
+        );
+        Lotto winner = new Lotto(LottoNumberList.createLottoNumbers(new int[]{1, 2, 3, 4, 5, 6}));
+
+        assertThat(lottoService.yield(lottoList, winner, new Money(10000))).isEqualTo(0.5);
+    }
 }
