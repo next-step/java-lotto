@@ -10,7 +10,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,29 +20,33 @@ class LottoStatisticsServiceTest {
 
     private static final LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
     private static final List<Lotto> lottos = new ArrayList<>();
-    private static final String WINNING_NUMBER = "1,2,3,4,5,6";
+
+    private static final String WINNING_NUMBER = "1, 2, 3, 4, 5, 6";
     private static final List<Lotto> duplicatedLottos = new ArrayList<>();
     private static final int PAYMENT = 3500;
+    private static Lotto winningLotto;
 
     @BeforeAll
     static void setLotto() {
-        lottos.add(Lotto.of(List.of(1,2,3,4,5,6)));
-        lottos.add(Lotto.of(List.of(1,2,3,7,8,9)));
-        lottos.add(Lotto.of(List.of(11,12,13,14,15,16)));
+        lottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        lottos.add(Lotto.of(List.of(1, 2, 3, 7, 8, 9)));
+        lottos.add(Lotto.of(List.of(11, 12, 13, 14, 15, 16)));
     }
 
     @BeforeAll
     static void setDuplicatedLottos() {
-        duplicatedLottos.add(Lotto.of(List.of(1,2,3,4,5,6)));
-        duplicatedLottos.add(Lotto.of(List.of(1,2,3,4,5,6)));
-        duplicatedLottos.add(Lotto.of(List.of(1,2,3,4,5,6)));
+        duplicatedLottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        duplicatedLottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        duplicatedLottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
     }
 
-    @ParameterizedTest
-    @DisplayName("당첨번호와 로또값을 주면 동일한 숫자 개수를 리턴한다.")
-    @CsvSource({"0, 6", "1, 3", "2, 0"})
-    void getEqualCount(int index, int equalCount) {
-        assertThat(lottoStatisticsService.getEqualCount(lottos.get(index), WINNING_NUMBER)).isEqualTo(equalCount);
+    @BeforeAll
+    static void setWinningLotto() {
+        List<Integer> splitNumbers = Arrays.stream(WINNING_NUMBER.split(","))
+                .map(number -> Integer.parseInt(number.trim()))
+                .collect(Collectors.toList());
+
+        winningLotto = Lotto.of(splitNumbers);
     }
 
     @Test

@@ -5,30 +5,22 @@ import lotto.models.LottoStatistics;
 import lotto.models.enums.Rank;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoStatisticsService {
 
     public List<LottoStatistics> getLottoStatistics(List<Lotto> lottos, String winningNumber) {
-        Map<Rank, LottoStatistics> lottoStatisticsByRank = new HashMap<>();
-        Arrays.stream(Rank.values()).forEach(rank -> lottoStatisticsByRank.put(rank, LottoStatistics.of(rank)));
+        Map<Rank, LottoStatistics> lottoStatisticsByRank = Arrays.stream(Rank.values())
+                .collect(Collectors.toMap(Function.identity(), LottoStatistics::of));
 
+        Lotto winningLotto = Lotto.of(winningNumber);
         lottos.forEach(lotto -> {
-            int equalCount = getEqualCount(lotto, winningNumber);
-            Rank rank = Rank.of(equalCount);
+            Rank rank = Rank.findRank(new ArrayList<>(winningLotto.getNumbers()), lotto.getNumbers());
             lottoStatisticsByRank.get(rank).addCount();
         });
 
         return new ArrayList<>(lottoStatisticsByRank.values());
-    }
-
-    public int getEqualCount(Lotto lotto, String winningNumber) {
-        List<Integer> splitNumbers = Arrays.stream(winningNumber.split(","))
-                .map(number -> Integer.parseInt(number.trim()))
-                .collect(Collectors.toList());
-        splitNumbers.retainAll(lotto.getNumbers());
-
-        return splitNumbers.size();
     }
 
     public float getRevenueRatio(List<LottoStatistics> lottoStatistics, int payment) {
@@ -38,6 +30,10 @@ public class LottoStatisticsService {
                 .mapToLong(Long::longValue)
                 .sum();
 
+        return calculateRevenueRatio(payment, totalAmount);
+    }
+
+    private float calculateRevenueRatio(int payment, long totalAmount) {
         return totalAmount / (payment / 1000f * 1000);
     }
 
