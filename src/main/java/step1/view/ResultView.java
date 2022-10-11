@@ -1,8 +1,8 @@
-package view;
+package step1.view;
 
 public class ResultView {
 
     public void printResult(int result) {
-        System.out.println("결과값 = " + result);
+        System.out.println("계산 결과 : " + result);
     }
 }

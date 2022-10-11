@@ -1,13 +1,12 @@
-package view;
+package step1.view;
 
 import java.util.Scanner;
 
 public class InputView {
 
-    private final Scanner scanner = new Scanner(System.in);
-
-    public String scanInput() {
+    public String getInputLine() {
         System.out.println("식을 입력하세요 : ");
+        Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 }
