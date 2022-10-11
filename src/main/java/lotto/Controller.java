@@ -13,6 +13,7 @@ public class Controller {
 
         Customer customer = new Customer();
         int purchasedLotteryAmount = customer.purchase(lotteryPurchasePrices);
+
         printPurchasedLotteryAmount(purchasedLotteryAmount);
         printPurchasedLotteryNumbers(customer.getLottoWallet());
 

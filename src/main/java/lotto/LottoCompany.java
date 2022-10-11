@@ -13,21 +13,21 @@ public class LottoCompany {
 
     public static LottoResult createLottoResult(List<Integer> lottoNumbers, LottoWallet lottoWallet) {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.setLottoPrice(LOTTO_PRICE);
-
         List<Lotto> lottos = lottoWallet.getLottos();
-        lottoResult.setTotalAmounts(lottos.size());
 
+        lottoResult.setLottoPrice(LOTTO_PRICE);
+        lottoResult.setTotalAmounts(lottos.size());
+        setPrizesOf(lottoResult);
+        lottos.forEach(lotto -> lottoResult.addWonAmountOf(lotto.countEqualNumbers(lottoNumbers)));
+
+        return lottoResult;
+    }
+
+    private static void setPrizesOf(LottoResult lottoResult) {
         lottoResult.setPrizeOf(3, THREE_EQUAL_PRIZE);
         lottoResult.setPrizeOf(4, FOUR_EQUAL_PRIZE);
         lottoResult.setPrizeOf(5, FIVE_EQUAL_PRIZE);
         lottoResult.setPrizeOf(6, SIX_EQUAL_PRIZE);
-
-        for (Lotto lotto : lottos) {
-            lottoResult.addWonAmountOf(lotto.countEqualNumbers(lottoNumbers));
-        }
-
-        return lottoResult;
     }
 
     public static int getAvailablePurchaseLottoCount(int cashAmount) {
