@@ -23,13 +23,16 @@ public class LottoResultView {
         System.out.println("---------");
 
         Arrays.stream(LottoResult.values())
-                .forEach((lottoResult -> System.out.println(String.format("%d개 일치 (%d)%s)- %d개",
+                .forEach((lottoResult -> System.out.println(String.format("%d개 일치 (%s)- %d개",
                         lottoResult.getMatchCount(),
-                        lottoResult.getMoney(),
-                        lottoResult.getUnitDescription(),
+                        getFormattedMoney(lottoResult),
                         getCount(lottoStatistic, lottoResult)))));
 
         System.out.println(getReveneMessage(lottoStatistic));
+    }
+
+    private static String getFormattedMoney(LottoResult lottoResult) {
+        return String.format("%d원", lottoResult.getMoney());
     }
 
     private String getReveneMessage(LottoStatistic lottoStatistic) {
