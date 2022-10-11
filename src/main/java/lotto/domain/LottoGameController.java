@@ -6,7 +6,7 @@ import lotto.view.ResultView;
 import java.util.List;
 
 public class LottoGameController {
-    public static void start(){
+    public static void start() {
         int inputMoney = InputView.getMoney();
 
         Lottos lottos = LottoGameService.getLottos(inputMoney);

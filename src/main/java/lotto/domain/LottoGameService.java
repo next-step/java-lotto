@@ -5,11 +5,12 @@ import java.util.List;
 
 public class LottoGameService {
     private static final int PRICE = 1000;
+
     public static int calculateTerms(int money) {
-        if(money < PRICE){
+        if (money < PRICE) {
             throw new InvalidParameterException("1000 원 이하면 게임이 불가능합니다.");
         }
-        return money/ PRICE;
+        return money / PRICE;
     }
 
     public static double calculateYield(int investment, int winnings) {

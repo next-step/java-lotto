@@ -29,6 +29,6 @@ public class LottoGameServiceTest {
     @Test
     void 투입된_금액대비_수익률_계산() {
         assertThat(LottoGameService.calculateYield(1000, 5000)).isEqualTo(5);
-        assertThat(LottoGameService.calculateYield(14000, 5000)).isEqualTo((double) 5000/14000);
+        assertThat(LottoGameService.calculateYield(14000, 5000)).isEqualTo((double) 5000 / 14000);
     }
 }

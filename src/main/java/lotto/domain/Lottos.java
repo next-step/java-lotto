@@ -5,18 +5,20 @@ import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
-    public Lottos(int number){
-        for(int i = 0; i < number; i++){
+
+    public Lottos(int number) {
+        for (int i = 0; i < number; i++) {
             lottos.add(new Lotto());
         }
     }
 
     public List<LottoResult> getResults(Lotto winning) {
         List<LottoResult> results = new ArrayList<>();
-        for(Lotto lotto: lottos){
+        for (Lotto lotto : lottos) {
             LottoResult result = lotto.getResult(winning);
             addResult(results, result);
         }
@@ -24,7 +26,7 @@ public class Lottos {
     }
 
     private void addResult(List<LottoResult> results, LottoResult result) {
-        if(result != null){
+        if (result != null) {
             results.add(result);
         }
     }
@@ -36,7 +38,7 @@ public class Lottos {
     @Override
     public String toString() {
         String result = "";
-        for(Lotto lotto : lottos){
+        for (Lotto lotto : lottos) {
             result += "[" + lotto.toString() + "]\n";
         }
         return result;

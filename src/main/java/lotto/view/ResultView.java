@@ -9,8 +9,7 @@ import java.util.List;
 public class ResultView {
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.getSize() + "개를 구매했습니다.");
-
-        System.out.println(lottos.toString());
+        System.out.println(lottos);
     }
 
     public static void printResults(List<LottoResult> results) {

@@ -6,9 +6,10 @@ import java.util.*;
 public class Lotto {
     private final SortedSet<Integer> lottoNumbers;
 
-    public Lotto(){
+    public Lotto() {
         this(LottoNumberGenerator.generateNumbers());
     }
+
     public Lotto(String numbers) {
         lottoNumbers = generateLotto(numbers);
     }
@@ -17,15 +18,15 @@ public class Lotto {
         lottoNumbers = new TreeSet<>(numbers);
     }
 
-    private SortedSet<Integer> generateLotto(String numbers){
+    private SortedSet<Integer> generateLotto(String numbers) {
         numbers = numbers.replaceAll(" ", "");
         SortedSet<Integer> lottos = new TreeSet<>();
 
-        for(String number:numbers.split(",")){
+        for (String number : numbers.split(",")) {
             lottos.add(Integer.parseInt(number));
         }
 
-        if(lottos.size() < 6) {
+        if (lottos.size() < 6) {
             throw new InvalidParameterException("중복된 번호로 로또가 생성되려 하고 있습니다.");
         }
 
@@ -34,15 +35,15 @@ public class Lotto {
 
     public LottoResult getResult(Lotto winningLotto) {
         int matchCount = 0;
-        for(int number:lottoNumbers){
-            if(winningLotto.contains(number)){
-                matchCount+=1;
+        for (int number : lottoNumbers) {
+            if (winningLotto.contains(number)) {
+                matchCount += 1;
             }
         }
         return LottoResult.values()[matchCount];
     }
 
-    private boolean contains(int number){
+    private boolean contains(int number) {
         return lottoNumbers.contains(number);
     }
 
@@ -66,8 +67,8 @@ public class Lotto {
     @Override
     public String toString() {
         List<String> result = new ArrayList<>();
-        for(int number : lottoNumbers){
-            result.add(""+number);
+        for (int number : lottoNumbers) {
+            result.add("" + number);
         }
         return String.join(",", result);
     }
