@@ -7,8 +7,9 @@ import java.util.List;
 public class LottoTickets {
 
     private static final int LOTTO_PRICE = 1000;
+
     private final int ticket;
-    private List<LottoNumbers> lottoList = new ArrayList<>();
+    private List<LottoNumbers> lottoNumbers = new ArrayList<>();
     private final Money money;
 
     private LottoResult result = LottoResult.of(new HashMap<>());
@@ -21,7 +22,7 @@ public class LottoTickets {
     private LottoTickets(int money, LottoNumbers testResultNumberList) {
         this.money = Money.from(money);
         this.ticket = money / LOTTO_PRICE;
-        this.lottoList.add(testResultNumberList);
+        this.lottoNumbers.add(testResultNumberList);
     }
 
     public static LottoTickets from(int money) {
@@ -45,14 +46,14 @@ public class LottoTickets {
 
     public List<LottoNumbers> createTickets() {
         for (int i = 0; i < ticket; i++) {
-            LottoNumbers generateNumberList = LottoNumberRandomGenerator.generate();
-            lottoList.add(generateNumberList);
+            LottoNumbers generateNumbers = LottoNumberRandomGenerator.generate();
+            lottoNumbers.add(generateNumbers);
         }
-        return lottoList;
+        return lottoNumbers;
     }
 
     public LottoResult result(LottoNumbers winningNumbers) {
-        for (LottoNumbers lotto : lottoList) {
+        for (LottoNumbers lotto : lottoNumbers) {
             int count = lotto.matches(winningNumbers);
             Rank calculate = Rank.calculate(count);
 
