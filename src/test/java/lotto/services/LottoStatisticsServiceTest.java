@@ -20,7 +20,6 @@ class LottoStatisticsServiceTest {
 
     private static final LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
     private static final List<Lotto> lottos = new ArrayList<>();
-
     private static final String WINNING_NUMBER = "1, 2, 3, 4, 5, 6";
     private static final List<Lotto> duplicatedLottos = new ArrayList<>();
     private static final int PAYMENT = 3500;
@@ -52,7 +51,7 @@ class LottoStatisticsServiceTest {
     @Test
     @DisplayName("당첨번호와 로또번호 리스트를 받으면 각 Rank가 몇 개씩 당첨됐는지 가져온다.")
     void createStatistics() {
-        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, WINNING_NUMBER);
+        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, winningLotto);
 
         lottoStatistics.forEach(statistics -> {
             if (statistics.getRank().equals(Rank.FIRST)) {
@@ -68,7 +67,7 @@ class LottoStatisticsServiceTest {
     @Test
     @DisplayName("6개 모두 당첨된 복권 3개가 발행된 경우 Rank.FIRST의 count가 3이다.")
     void createStatistics2() {
-        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(duplicatedLottos, WINNING_NUMBER);
+        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(duplicatedLottos, winningLotto);
 
         lottoStatistics.forEach(statistics -> {
             if (statistics.getRank().equals(Rank.FIRST)) {
@@ -80,7 +79,7 @@ class LottoStatisticsServiceTest {
     @Test
     @DisplayName("통계치와 지불한 금액을 전달하면 이율을 리턴한다.")
     void getRevenueRatio() {
-        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, WINNING_NUMBER);
+        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, winningLotto);
         long totalAmount = lottoStatistics.stream()
                 .filter(statistics -> statistics.getCount() > 0)
                 .map(statistics -> statistics.getRank().getAmount())

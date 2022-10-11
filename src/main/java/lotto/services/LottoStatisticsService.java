@@ -10,11 +10,10 @@ import java.util.stream.Collectors;
 
 public class LottoStatisticsService {
 
-    public List<LottoStatistics> getLottoStatistics(List<Lotto> lottos, String winningNumber) {
+    public List<LottoStatistics> getLottoStatistics(List<Lotto> lottos, Lotto winningLotto) {
         Map<Rank, LottoStatistics> lottoStatisticsByRank = Arrays.stream(Rank.values())
                 .collect(Collectors.toMap(Function.identity(), LottoStatistics::of));
 
-        Lotto winningLotto = Lotto.of(winningNumber);
         lottos.forEach(lotto -> {
             Rank rank = Rank.findRank(new ArrayList<>(winningLotto.getNumbers()), lotto.getNumbers());
             lottoStatisticsByRank.get(rank).addCount();
