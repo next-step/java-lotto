@@ -1,9 +1,12 @@
 package step2;
 
 import step2.domian.Lotto;
+import step2.domian.QrMachine;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static step2.domian.Calculator.calculatePercentage;
@@ -21,7 +24,7 @@ public class LottoMain {
         ResultView.printLottoNum(autoLottoLists);
 
         Lotto lastWinner = new Lotto(InputView.getLastWinner());
-        List<Integer> results = Lotto.compareWithLastLotto(autoLottoLists, lastWinner);
+        List<Integer> results = QrMachine.compareWithLastLotto(autoLottoLists, lastWinner);
         ResultView.printDrawResult(results);
 
         int revenue = calculateRevenue(results);

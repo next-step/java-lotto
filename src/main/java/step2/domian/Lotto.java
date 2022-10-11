@@ -1,10 +1,6 @@
 package step2.domian;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import static step2.domian.Counter.countSameNumber;
 
 public class Lotto {
     public List<Integer> numbers;
@@ -18,12 +14,18 @@ public class Lotto {
         return numbers.toString();
     }
 
-    public static List<Integer> compareWithLastLotto(List<Lotto> lottoLists, Lotto lastWinner) {
-        List<Integer> results = new ArrayList<>(Collections.nCopies(7, 0));
-        for (int i = 0; i < lottoLists.size(); i++) {
-            int count = (countSameNumber(lastWinner, lottoLists.get(i)));
-            results.set(count, results.get(count) + 1);
+    public int countSameNumber(Lotto lastWinner) {
+        int sameCount = 0;
+        for (int num : lastWinner.numbers) {
+            sameCount += isContain(num);
         }
-        return results;
+            return sameCount;
+        }
+
+    private int isContain(int num) {
+        if (this.numbers.contains(num)) {
+            return 1;
+        }
+        return 0;
     }
 }
