@@ -15,7 +15,7 @@ public class LottoStatisticsService {
                 .collect(Collectors.toMap(Function.identity(), LottoStatistics::of));
 
         lottos.forEach(lotto -> {
-            Rank rank = Rank.findRank(new ArrayList<>(winningLotto.getNumbers()), lotto.getNumbers());
+            Rank rank = Rank.findRank(new ArrayList<>(winningLotto.getLottoNumbers().getNumbers()), lotto.getLottoNumbers().getNumbers());
             lottoStatisticsByRank.get(rank).addCount();
         });
 

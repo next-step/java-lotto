@@ -1,34 +1,25 @@
 package lotto.models;
 
-import lotto.validator.LottoValidator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final LottoNumbers lottoNumbers;
 
-    private Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+    private Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public static Lotto of(List<Integer> numbers) {
-        LottoValidator.validate(numbers);
-        Collections.sort(new ArrayList<>(numbers));
-        return new Lotto(numbers);
+        return new Lotto(LottoNumbers.of(numbers));
     }
 
     public static Lotto of(String numbers) {
-        LottoValidator.validate(numbers);
-        List<Integer> splitNumbers = Arrays.stream(numbers.split(","))
-                .map(number -> Integer.parseInt(number.trim()))
-                .collect(Collectors.toList());
-
-        return Lotto.of(splitNumbers);
+        return new Lotto(LottoNumbers.of(numbers));
     }
 }
