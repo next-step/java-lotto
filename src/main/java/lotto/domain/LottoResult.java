@@ -7,19 +7,19 @@ import java.util.Arrays;
  */
 public enum LottoResult {
 
-    FIRST(2000000000, 6),
-    SECOND(1500000, 5),
-    THIRD(50000, 4),
-    FORTH(5000, 3);
-
-    public static final String 단위 = "원";
+    FIRST(2000000000, 6, "원"),
+    SECOND(1500000, 5, "원"),
+    THIRD(50000, 4, "원"),
+    FORTH(5000, 3, "원");
 
     private final int money;
     private final int matchCount; // TODO 적절한 단어고민
+    private final String unitDescription;
 
-    LottoResult(int money, int matchCount) {
+    LottoResult(int money, int matchCount, String unitDescription) {
         this.money = money;
         this.matchCount = matchCount;
+        this.unitDescription = unitDescription;
     }
 
     public static LottoResult from(int inputMatchCount) {
@@ -35,5 +35,9 @@ public enum LottoResult {
 
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public String getUnitDescription() {
+        return unitDescription;
     }
 }
