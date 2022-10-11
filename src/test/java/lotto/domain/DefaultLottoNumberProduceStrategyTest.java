@@ -9,12 +9,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 /**
  * Created by seungwoo.song on 2022-10-06
  */
-class RandomStrategyTest {
+class DefaultLottoNumberProduceStrategyTest {
 
     @Test
     void 생성() {
-        RandomStrategy randomStrategy = new RandomStrategy(() -> 5, 1);
-        List<Integer> lottoNumber = randomStrategy.getLottoNumber();
+        DefaultLottoNumberProduceStrategy defaultLottoNumberProduceStrategy = new DefaultLottoNumberProduceStrategy(() -> 5, 1);
+        List<Integer> lottoNumber = defaultLottoNumberProduceStrategy.getLottoNumber();
 
         assertThat(lottoNumber).isEqualTo(List.of(5));
     }

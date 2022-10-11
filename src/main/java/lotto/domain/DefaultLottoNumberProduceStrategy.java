@@ -9,12 +9,12 @@ import java.util.function.Supplier;
 /**
  * Created by seungwoo.song on 2022-10-06
  */
-public class RandomStrategy implements LottoNumberProduceStrategy {
+public class DefaultLottoNumberProduceStrategy implements LottoNumberProduceStrategy {
 
     private final Supplier<Integer> numberSupplier;
     private final int count;
 
-    public RandomStrategy(Supplier<Integer> numberSupplier, int count) {
+    public DefaultLottoNumberProduceStrategy(Supplier<Integer> numberSupplier, int count) {
         this.numberSupplier = numberSupplier;
         this.count = count;
     }

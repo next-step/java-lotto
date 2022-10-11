@@ -22,7 +22,7 @@ public class Application {
         LottoInputView inputView = new LottoInputView();
 
         PurchaseInfo purchaseInfo = new PurchaseInfo(LOTTO_PRICE, inputView.readPayAmount());
-        LottoFactory lottoFactory = new LottoFactory(new RandomStrategy(() -> RandomUtils.getNumber(LOTTO_NUMBER_COUNT_LIMIT), LOTTO_NUMBER_COUNT));
+        LottoFactory lottoFactory = new LottoFactory(new DefaultLottoNumberProduceStrategy(() -> RandomUtils.getNumber(LOTTO_NUMBER_COUNT_LIMIT), LOTTO_NUMBER_COUNT));
         List<Lotto> lotto = lottoFactory.getLotto(purchaseInfo.getCount());
 
         view.print(lotto);
