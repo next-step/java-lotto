@@ -9,4 +9,8 @@ public class StringCalculator {
         return Arrays.stream(input.split(" "))
                 .collect(Collectors.toList());
     }
+
+    public Integer add(Integer firstNumber, Integer secondNumber) {
+        return firstNumber + secondNumber;
+    }
 }

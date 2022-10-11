@@ -11,12 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StringCalculatorTest {
 
+    private final StringCalculator stringCalculator = new StringCalculator();
+
     @Test
     @DisplayName("인풋 값 테스트")
     void input_test() {
 
         // given
-        StringCalculator stringCalculator = new StringCalculator();
         String input = "1 + 2 - 1 * 2 / 1";
 
         // when
@@ -24,6 +25,20 @@ class StringCalculatorTest {
 
         // then
         assertThat(inputList).isEqualTo(List.of("1", "+", "2", "-", "1", "*", "2", "/", "1"));
+    }
+
+    @Test
+    @DisplayName("덧셈 구현")
+    void add_test() {
+        // given
+        Integer firstNumber = 1;
+        Integer secondNumber = 2;
+
+        // when
+        Integer addResult = stringCalculator.add(firstNumber, secondNumber);
+
+        // then
+        assertThat(addResult).isEqualTo(3);
     }
 
 }
