@@ -1,6 +1,6 @@
-package main.string_calculator.util;
+package calculator.util;
 
-import main.string_calculator.exception.ValidateOperator;
+import calculator.exception.ValidateOperator;
 
 import java.util.regex.Pattern;
 

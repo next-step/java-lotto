@@ -1,4 +1,4 @@
-package main.string_calculator.exception;
+package calculator.exception;
 
 public class ValidateOperator extends IllegalArgumentException {
 

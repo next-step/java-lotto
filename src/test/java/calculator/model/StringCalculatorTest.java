@@ -1,16 +1,14 @@
-package main.string_calculator.model;
+package calculator.model;
 
-import main.string_calculator.exception.NotEssence;
-import main.string_calculator.exception.ValidateNumber;
-import main.string_calculator.exception.ValidateOperator;
-import org.assertj.core.api.Assertions;
+import calculator.exception.NotEssence;
+import calculator.exception.ValidateNumber;
+import calculator.exception.ValidateOperator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class StringCalculatorTest {
 
@@ -113,7 +111,7 @@ class StringCalculatorTest {
     @DisplayName("계산 짝수번째 입력 값 연산자 아님")
     void calculate_input_operator_fail() {
         // given
-        String input = "1 + 2 - 1 * 2 / 1";
+        String input = "1 1 2 - 1 * 2 / 1";
 
         // expected
         assertThatExceptionOfType(ValidateOperator.class)

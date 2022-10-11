@@ -1,7 +1,7 @@
-package main.string_calculator.util;
+package calculator.util;
 
-import main.string_calculator.exception.NotEssence;
-import main.string_calculator.exception.ValidateNumber;
+import calculator.exception.NotEssence;
+import calculator.exception.ValidateNumber;
 
 public class NumberUtil {
 

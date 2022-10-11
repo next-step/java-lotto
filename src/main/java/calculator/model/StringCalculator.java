@@ -1,12 +1,12 @@
-package main.string_calculator.model;
+package calculator.model;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static main.string_calculator.util.NumberUtil.*;
-import static main.string_calculator.util.OperatorUtil.*;
+import static calculator.util.NumberUtil.*;
+import static calculator.util.OperatorUtil.*;
 
 public class StringCalculator {
 
