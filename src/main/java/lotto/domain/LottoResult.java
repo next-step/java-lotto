@@ -23,8 +23,8 @@ public class LottoResult {
         return result.get(rank);
     }
 
-    public void result(LottoNumbers winningNumbers, List<LottoNumbers> lottoNumbers) {
-        for (LottoNumbers lotto : lottoNumbers) {
+    public void result(Lotto winningNumbers, List<Lotto> lottoNumbers) {
+        for (Lotto lotto : lottoNumbers) {
             int count = lotto.matches(winningNumbers);
             Rank calculate = Rank.calculate(count);
             put(calculate);

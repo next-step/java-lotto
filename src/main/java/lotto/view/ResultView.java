@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.Rank;
 
 public class ResultView {
@@ -15,8 +15,8 @@ public class ResultView {
         System.out.println(value/1000 + TOTAL_COUNT);
     }
 
-    public static void printResultTickets(List<LottoNumbers> lottoTickets) {
-        for (LottoNumbers lottoTicket : lottoTickets) {
+    public static void printResultTickets(List<Lotto> lottoTickets) {
+        for (Lotto lottoTicket : lottoTickets) {
             System.out.println(lottoTicket);
         }
     }

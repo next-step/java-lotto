@@ -31,9 +31,9 @@ public class LottoTicketsTest {
             List.of(LottoNumber.from(1), LottoNumber.from(2),
                 LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
                 LottoNumber.from(6)));
-        LottoTickets lottoTickets = LottoTickets.from(2000, LottoNumbers.of(list));
+        LottoTickets lottoTickets = LottoTickets.from(2000, Lotto.of(list));
 
-        LottoResult result = lottoTickets.calculate(LottoNumbers.of(list));
+        LottoResult result = lottoTickets.calculate(Lotto.of(list));
         assertThat(result.count(Rank.FIRST)).isEqualTo(1);
     }
 }

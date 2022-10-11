@@ -8,15 +8,15 @@ public class LottoTickets {
     private static final int LOTTO_PRICE = 1000;
 
     private final int ticket;
-    private List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    private List<Lotto> lottoNumbers = new ArrayList<>();
 
     private LottoTickets(int money) {
         this.ticket = money / LOTTO_PRICE;
     }
 
-    private LottoTickets(int money, LottoNumbers testResultNumberList) {
+    private LottoTickets(int money, Lotto testResultNumbers) {
         this.ticket = money / LOTTO_PRICE;
-        this.lottoNumbers.add(testResultNumberList);
+        this.lottoNumbers.add(testResultNumbers);
     }
 
     public static LottoTickets from(int money) {
@@ -24,8 +24,8 @@ public class LottoTickets {
         return new LottoTickets(money);
     }
 
-    public static LottoTickets from(int money, LottoNumbers testResultNumberList) {
-        return new LottoTickets(money, testResultNumberList);
+    public static LottoTickets from(int money, Lotto testResultNumbers) {
+        return new LottoTickets(money, testResultNumbers);
     }
 
     private static void valid(int money) {
@@ -38,15 +38,15 @@ public class LottoTickets {
         return this.ticket;
     }
 
-    public List<LottoNumbers> createTickets() {
+    public List<Lotto> createTickets() {
         for (int i = 0; i < ticket; i++) {
-            LottoNumbers generateNumbers = LottoNumberRandomGenerator.generate();
+            Lotto generateNumbers = LottoNumberRandomGenerator.generate();
             lottoNumbers.add(generateNumbers);
         }
         return lottoNumbers;
     }
 
-    public LottoResult calculate(LottoNumbers winningNumbers) {
+    public LottoResult calculate(Lotto winningNumbers) {
         LottoResult lottoResult = new LottoResult();
         lottoResult.result(winningNumbers, lottoNumbers);
         return lottoResult;
