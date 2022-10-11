@@ -55,4 +55,18 @@ class StringCalculatorTest {
         assertThat(addResult).isEqualTo(-1);
     }
 
+    @Test
+    @DisplayName("곱셈 구현")
+    void multiply_test() {
+        // given
+        Integer firstNumber = 1;
+        Integer secondNumber = 2;
+
+        // when
+        Integer addResult = stringCalculator.multiply(firstNumber, secondNumber);
+
+        // then
+        assertThat(addResult).isEqualTo(2);
+    }
+
 }
