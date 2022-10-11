@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.Lotto;
 
 import java.io.PrintStream;
 import java.util.List;
@@ -12,8 +12,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printGeneratedLottoNumbers(List<LottoNumber> lottoNumbers) {
-        OUTPUT.println(lottoNumbers.size() + "개를 구매했습니다.");
-        lottoNumbers.forEach(OUTPUT::println);
+    public static void printGeneratedLottos(List<Lotto> lottos) {
+        OUTPUT.println(lottos.size() + "개를 구매했습니다.");
+        lottos.forEach(OUTPUT::println);
     }
 }

@@ -2,8 +2,8 @@ package lotto;
 
 import lotto.domain.CanNotBuyLottoException;
 import lotto.domain.Cashier;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbersGenerator;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,11 +14,9 @@ public class Application {
     public static void main(String[] args) {
         Cashier cashier = createCashier();
         int playLottoCount = cashier.findCountOfPlayLotto();
-        List<LottoNumber> lottoNumbers = LottoNumbersGenerator.generate(playLottoCount);
+        List<Lotto> lottos = LottoGenerator.generate(playLottoCount);
 
-        OutputView.printGeneratedLottoNumbers(lottoNumbers);
-
-
+        OutputView.printGeneratedLottos(lottos);
     }
 
     private static Cashier createCashier() {

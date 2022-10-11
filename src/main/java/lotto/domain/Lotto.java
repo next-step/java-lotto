@@ -6,16 +6,16 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class Lotto {
 
     private final Set<Integer> elements;
 
-    public LottoNumber(final Set<Integer> elements) {
+    public Lotto(final Set<Integer> elements) {
         validate(elements);
         this.elements = elements;
     }
 
-    public LottoNumber(final List<Integer> elements) {
+    public Lotto(final List<Integer> elements) {
         this(new HashSet<>(elements));
     }
 
@@ -25,10 +25,10 @@ public class LottoNumber {
     }
 
     private void validateElementsRange(final Set<Integer> elements) {
-        elements.forEach(this::existsLottoNumberRange);
+        elements.forEach(this::existsWithinLottoNumberRange);
     }
 
-    private void existsLottoNumberRange(final int element) {
+    private void existsWithinLottoNumberRange(final int element) {
         if (element < 1 || element > 45) {
             throw OutOfRangeLottoNumberException.of();
         }
@@ -36,7 +36,7 @@ public class LottoNumber {
 
     private void validateElementsSize(final Set<Integer> elements) {
         if (elements.size() != 6) {
-            throw InvalidLottoNumbersSizeException.of();
+            throw InvalidLottoNumberSizeException.of();
         }
     }
 
@@ -44,7 +44,7 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        Lotto that = (Lotto) o;
         return Objects.equals(elements, that.elements);
     }
 
