@@ -21,8 +21,8 @@ public class LottoMain {
         LottoWallet lottoWallet = autoLottos(lottoNum);
         ResultView.printLottoNum(lottoWallet);
 
-        Lotto lastWinner = new Lotto(InputView.getLastWinner());
-        List<Integer> results = lottoWallet.compareWithLastLotto(lastWinner);
+        Lotto lastWinnerLotto = new Lotto(InputView.getLastWinner());
+        List<Integer> results = lottoWallet.compareWithLastLotto(lastWinnerLotto);
         ResultView.printDrawResult(results);
 
         int revenue = calculateRevenue(results);
