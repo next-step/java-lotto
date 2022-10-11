@@ -2,8 +2,7 @@ package lottery;
 
 import java.util.List;
 
-import static lottery.view.InputView.getLotteryPurchasePrices;
-import static lottery.view.InputView.getWinningLotteryNumbers;
+import static lottery.view.InputView.*;
 import static lottery.view.ResultView.*;
 
 public class Controller {
