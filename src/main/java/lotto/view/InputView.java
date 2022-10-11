@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,17 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private final LottoFactory lottoFactory;
 
-    public InputView(LottoFactory lottoFactory) {
-        this.lottoFactory = new LottoFactory();
-    }
-
-    public List<Lotto> purchaseLotto() {
+    public BigDecimal inputPayAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
         BigDecimal payAmount = scanner.nextBigDecimal();
-        return lottoFactory.generateLotto(payAmount);
+        return payAmount;
     }
 
     public List<Integer> inputBeforeWinningNumber() {

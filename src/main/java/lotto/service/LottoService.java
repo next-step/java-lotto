@@ -1,11 +1,24 @@
-package lotto;
+package lotto.service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PrizeService {
-    public Map<Integer, Integer> confirmRank(List<Lotto> lottos, List<Integer> winningNumber) {
+import lotto.domain.Lotto;
+import lotto.Prize;
+
+public class LottoService {
+    private final LottoFactory lottoFactory;
+    public LottoService(LottoFactory lottoFactory) {
+        this.lottoFactory = lottoFactory;
+    }
+
+    public List<Lotto> purchaseLotto(BigDecimal payAmount) {
+        return lottoFactory.generateLotto(payAmount);
+    }
+
+    public Map<Integer, Integer> confirmLottoRank(List<Lotto> lottos, List<Integer> winningNumber) {
         Map<Integer, Integer> rankMap = initRankMap();
 
         for (Lotto lotto : lottos) {

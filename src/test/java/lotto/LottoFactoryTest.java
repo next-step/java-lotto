@@ -9,12 +9,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.domain.Lotto;
+import lotto.service.LottoFactory;
+
 public class LottoFactoryTest {
     LottoFactory lottoFactory;
 
     @BeforeEach
     public void init() {
-        lottoFactory = new LottoFactory();
+        lottoFactory = new LottoFactory(new Calculator());
     }
 
     @ParameterizedTest

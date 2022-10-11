@@ -1,20 +1,15 @@
-package lotto;
+package lotto.view;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import lotto.domain.Lotto;
+import lotto.Prize;
+
 public class OutputView {
 
-    private final Calculator calculator;
-    private final PrizeService prizeService;
-
-    public OutputView(Calculator calculator, PrizeService prizeService) {
-        this.calculator = calculator;
-        this.prizeService = prizeService;
-    }
 
     public void printPurchasedLotto(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개 구매했습니다.");
@@ -23,19 +18,15 @@ public class OutputView {
         }
     }
 
-    public void statisticLotto(List<Lotto> lottos, List<Integer> winningNumber) {
+    public void printStatisticLotto(Map<Integer, Integer> rankMap) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Map<Integer, Integer> rankMap = prizeService.confirmRank(lottos, winningNumber);
         printRank(rankMap);
-        printYield(rankMap, lottos.size());
     }
 
-    private void printYield(Map<Integer, Integer> rankMap, int purchaseCount) {
-        BigDecimal purchaseAmount = calculator.calculatePurchaseAmount(purchaseCount);
-        BigDecimal prizeMoney = calculator.calculatePrizeMoney(rankMap);
+    public void printYield(double yield) {
         System.out.println(
-                "총 수익률은 " + String.format("%.3f", calculator.calculateYield(purchaseAmount, prizeMoney)) +
+                "총 수익률은 " + String.format("%.3f", yield) +
                 "입니다.");
     }
 

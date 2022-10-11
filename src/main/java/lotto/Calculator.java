@@ -11,8 +11,8 @@ public class Calculator {
         return 1 + (earnedMoney / purchaseAmount.doubleValue());
     }
 
-    public BigDecimal calculatePurchaseAmount(int purchaseCount) {
-        return PRICE_PER_LOTTO.multiply(BigDecimal.valueOf(purchaseCount));
+    public int calculatePurchasedLottoNum(BigDecimal payAmount) {
+        return payAmount.divide(PRICE_PER_LOTTO).intValue();
     }
 
     public BigDecimal calculatePrizeMoney(Map<Integer, Integer> rankMap) {

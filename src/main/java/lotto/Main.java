@@ -1,9 +1,13 @@
 package lotto;
 
+import lotto.service.LottoFactory;
+import lotto.service.LottoService;
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
 public class Main {
     public static void main(String[] args) {
-        LottoService lottoService = new LottoService(new InputView(new LottoFactory()), new OutputView(
-                new Calculator(), new PrizeService()));
-        lottoService.purchaseLotto();
+        LottoController lottoController = new LottoController(new InputView(), new OutputView(), new LottoService(new LottoFactory(new Calculator())), new Calculator());
+        lottoController.startLotto();
     }
 }
