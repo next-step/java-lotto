@@ -1,8 +1,8 @@
 package stringcalculator.util;
 
-public class ConvertUtil {
+public class StringToIntUtil {
 
-    public static int toInt(String str) {
+    public static int apply(String str) {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
