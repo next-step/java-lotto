@@ -1,6 +1,7 @@
 package lottery.view;
 
 import lottery.Lottery;
+import lottery.LotteryNumber;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ public class InputView {
         return new Lottery(Arrays.stream(scanner.nextLine().split(","))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
-                .boxed()
+                .mapToObj(LotteryNumber::new)
                 .collect(Collectors.toList()));
     }
 

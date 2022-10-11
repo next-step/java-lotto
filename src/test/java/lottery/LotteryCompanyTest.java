@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
+import static lottery.Lottery.getInstanceByInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryCompanyTest {
@@ -13,13 +14,14 @@ public class LotteryCompanyTest {
     @CsvSource(value = {"0:0", "1:0", "2:2", "3:2", "4:0", "5:0", "6:0"}, delimiter = ':')
     void getLotteryResult(int rank, int expected) {
         LotteryWallet lotteryWallet = new LotteryWallet(Arrays.asList(
-                new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16)),
-                new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16)),
-                new Lottery(Arrays.asList(1, 2, 13, 14, 15, 16)),
-                new Lottery(Arrays.asList(1, 2, 13, 14, 15, 16))
+                getInstanceByInt(Arrays.asList(1, 2, 3, 14, 15, 16)),
+                getInstanceByInt(Arrays.asList(1, 2, 3, 14, 15, 16)),
+                getInstanceByInt(Arrays.asList(1, 2, 13, 14, 15, 16)),
+                getInstanceByInt(Arrays.asList(1, 2, 13, 14, 15, 16))
         ));
 
-        LotteryResult lotteryResult = LotteryCompany.createLotteryResult(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)), lotteryWallet);
+        LotteryResult lotteryResult = LotteryCompany
+                .createLotteryResult(getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6)), lotteryWallet);
         assertThat(lotteryResult.getWonAmountOf(rank)).isEqualTo(expected);
     }
 

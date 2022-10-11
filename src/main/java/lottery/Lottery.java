@@ -9,26 +9,33 @@ import java.util.stream.IntStream;
 
 public class Lottery {
 
-    private static final int LOTTERY_NUM_MAX = 45;
     private static final int LOTTERY_NUM_COUNT = 6;
 
-    private static final List<Integer> lotteryNumberCandidates = IntStream
-            .range(1, LOTTERY_NUM_MAX + 1)
-            .boxed()
+    private static final List<LotteryNumber> lotteryNumberCandidates = IntStream
+            .range(1, LotteryNumber.LOTTERY_NUM_MAX + 1)
+            .mapToObj(LotteryNumber::new)
             .collect(Collectors.toList());
 
-    private final List<Integer> lotteryNumbers;
+    private final List<LotteryNumber> lotteryNumbers;
 
     public Lottery() {
         this(generateLotteryNumbers());
     }
 
-    public Lottery(List<Integer> lotteryNumbers) {
+    public Lottery(List<LotteryNumber> lotteryNumbers) {
         validate(lotteryNumbers);
         this.lotteryNumbers = lotteryNumbers;
     }
 
-    private void validate(List<Integer> lotteryNumbers) {
+    public static Lottery getInstanceByInt(List<Integer> lotteryNumbers) {
+        return new Lottery(mapIntegersToLotteryNumbers(lotteryNumbers));
+    }
+
+    private static List<LotteryNumber> mapIntegersToLotteryNumbers(List<Integer> lotteryNumbers) {
+        return lotteryNumbers.stream().map(LotteryNumber::new).collect(Collectors.toList());
+    }
+
+    private void validate(List<LotteryNumber> lotteryNumbers) {
         if (lotteryNumbers.size() != LOTTERY_NUM_COUNT) {
             throw new IllegalArgumentException("로또는 6개 숫자로 구성되어야 합니다.");
         }
@@ -37,13 +44,13 @@ public class Lottery {
         }
     }
 
-    public List<Integer> getLotteryNumbers() {
+    public List<LotteryNumber> getLotteryNumbers() {
         return Collections.unmodifiableList(this.lotteryNumbers);
     }
 
-    private static List<Integer> generateLotteryNumbers() {
+    private static List<LotteryNumber> generateLotteryNumbers() {
         Collections.shuffle(lotteryNumberCandidates);
-        List<Integer> lotteryNumbers = lotteryNumberCandidates.subList(0, LOTTERY_NUM_COUNT);
+        List<LotteryNumber> lotteryNumbers = lotteryNumberCandidates.subList(0, LOTTERY_NUM_COUNT);
         Collections.sort(lotteryNumbers);
 
         return new ArrayList<>(lotteryNumbers);
