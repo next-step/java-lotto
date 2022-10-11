@@ -12,6 +12,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumberList;
     }
 
+    public int match(Lotto lotto) {
+        return lottoNumbers.match(lotto.numbers());
+    }
+
+    private LottoNumberList numbers() {
+        return this.lottoNumbers;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s]", lottoNumbers.toString());

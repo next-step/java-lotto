@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumberList {
 
@@ -34,6 +36,17 @@ public class LottoNumberList {
             throw new IllegalArgumentException(LOTTO_NUMBER_OVERLAP_EXCEPTION);
         }
         this.lottoNumberList = lottoNumbers;
+    }
+
+    public int match(LottoNumberList numbers) {
+        return lottoNumberList.stream()
+                .filter(lottoNumber -> numbers.lottoNumberList().contains(lottoNumber))
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    private List<LottoNumber> lottoNumberList() {
+        return Collections.unmodifiableList(this.lottoNumberList);
     }
 
     private boolean isOverlap(List<LottoNumber> lottoNumbers) {
