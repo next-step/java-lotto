@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.exception.ValidateInput;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -52,8 +54,17 @@ public class StringCalculator {
     }
 
     public List<String> makeInputList(String input) {
-        return Arrays.stream(input.split(" "))
+        String validateInput = validateInput(input);
+
+        return Arrays.stream(validateInput.split(" "))
                 .collect(Collectors.toList());
+    }
+
+    public String validateInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new ValidateInput();
+        }
+        return input;
     }
 
     public Integer add(Integer firstNumber, Integer secondNumber) {

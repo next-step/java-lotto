@@ -1,10 +1,13 @@
 package calculator.model;
 
 import calculator.exception.NotEssence;
+import calculator.exception.ValidateInput;
 import calculator.exception.ValidateNumber;
 import calculator.exception.ValidateOperator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
 
@@ -13,6 +16,16 @@ import static org.assertj.core.api.Assertions.*;
 class StringCalculatorTest {
 
     private final StringCalculator stringCalculator = new StringCalculator();
+
+
+    @DisplayName("인풋 값 테스트 : null or empty")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void input_test_null_empty(String input) {
+        // expected
+        assertThatExceptionOfType(ValidateInput.class)
+                .isThrownBy(() -> stringCalculator.makeInputList(input));
+    }
 
     @Test
     @DisplayName("인풋 값 테스트")
