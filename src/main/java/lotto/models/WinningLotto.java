@@ -11,6 +11,10 @@ public class WinningLotto extends Lotto {
         this.bonusNumber = bonusNumber;
     }
 
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
+
     public static WinningLotto from(WinningLottoRequest winningLottoRequest) {
         return new WinningLotto(LottoNumbers.of(winningLottoRequest.getWinningNumber()), winningLottoRequest.getBonusNumber());
     }
