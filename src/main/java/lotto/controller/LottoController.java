@@ -1,24 +1,25 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.ResultStats;
+import lotto.domain.User;
+import lotto.domain.WinningNumber;
 import lotto.view.Input;
 import lotto.view.Output;
-
-import java.util.NavigableSet;
 
 public class LottoController {
 
     public void lottoGame() {
-        User user = new User(new UserInput(new Input().price()));
-        user.receiveTickets(new Lotto().lotto(user.userInput()));
-        Output.printBuyCount(user.userInput().count());
+        User user = new User();
+        Input input = new Input();
+        Lotto lotto = new Lotto(input.payment());
+
+        user.receiveTickets(lotto.tickets());
+        Output.printBuyCount(lotto.payment());
         Output.printBuyTickets(user.lottoTickets());
 
-        final NavigableSet<Integer> raffleNumbers = new LottoRaffle().raffleNumbers();
-        Output.printRaffleResult(raffleNumbers);
-
-        ResultStats resultStats = new ResultStats(user.matchingCountsByTickets(raffleNumbers));
+        ResultStats resultStats = new ResultStats(user.matchingCountsByTickets(new WinningNumber(input.winningNumberOfLastWeek()).winningNumber()));
         Output.printLottoResult(resultStats.countsOfPrizes());
-        Output.printReturnOnInvestment(resultStats.returnOnInvestment(user.userInput().price()));
+        Output.printReturnOnInvestment(resultStats.returnOnInvestment(lotto.payment()));
     }
 }

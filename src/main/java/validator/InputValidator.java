@@ -54,6 +54,13 @@ public class InputValidator {
         return PATTERN_OPERATOR.matcher(text).matches();
     }
 
+    public static boolean isContains(String text, CharSequence separator) {
+        if (isNullOrSpace(text)) {
+            return false;
+        }
+        return text.contains(separator);
+    }
+
     private static boolean isNullOrSpace(String text) {
         return text == null || text.equals("");
     }
