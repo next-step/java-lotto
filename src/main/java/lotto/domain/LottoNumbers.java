@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoNumbers {
-    private static final int SIZE = 6;
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private List<LottoNumber> lottoNumberList;
 
@@ -27,10 +27,7 @@ public class LottoNumbers {
             .distinct()
             .count();
 
-        if (count != SIZE) {
-            return true;
-        }
-        return false;
+        return count != LOTTO_NUMBER_SIZE;
     }
 
     private static void valid(List<LottoNumber> lottoNumberList) {
