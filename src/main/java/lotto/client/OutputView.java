@@ -47,8 +47,8 @@ public class OutputView {
 
     }
 
-    public static void showReturnRate(Lotteries lotteries, Map<Rank, Long> lotteriesRank) {
-        double returnRate = lotteries.getTotalWinningMoney(lotteriesRank) / lotteries.getPurchaseAmount();
+    public static void showReturnRate(Lotteries lotteries, Map<Rank, Long> lotteriesRank, int purchaseAmount) {
+        double returnRate = lotteries.getTotalWinningMoney(lotteriesRank) / purchaseAmount;
 
         show(RETURN_RATE_FORM.replace("{rate}", String.format("%.2f", returnRate)));
 
