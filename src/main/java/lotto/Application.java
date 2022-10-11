@@ -21,13 +21,13 @@ public class Application {
 
         LottoInputView inputView = new LottoInputView();
 
-        Buy buy = new Buy(LOTTO_PRICE, inputView.readPayAmount());
+        PurchaseInfo purchaseInfo = new PurchaseInfo(LOTTO_PRICE, inputView.readPayAmount());
         LottoFactory lottoFactory = new LottoFactory(new RandomStrategy(() -> RandomUtils.getNumber(LOTTO_NUMBER_COUNT_LIMIT), LOTTO_NUMBER_COUNT));
-        List<Lotto> lotto = lottoFactory.getLotto(buy.getCount());
+        List<Lotto> lotto = lottoFactory.getLotto(purchaseInfo.getCount());
 
         view.print(lotto);
 
-        LottoStatistic lottoStatistic = new LottoStatistic(inputView.readBeforeLotto(), buy, lotto);
+        LottoStatistic lottoStatistic = new LottoStatistic(inputView.readBeforeLotto(), purchaseInfo, lotto);
 
         view.print(lottoStatistic);
     }

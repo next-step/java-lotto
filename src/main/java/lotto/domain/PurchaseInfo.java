@@ -3,13 +3,13 @@ package lotto.domain;
 /**
  * Created by seungwoo.song on 2022-10-06
  */
-public class Buy {
+public class PurchaseInfo {
 
     private final int price;
     private final int purchaseAmount;
     private final int count;
 
-    public Buy(int price, int purchaseAmount) {
+    public PurchaseInfo(int price, int purchaseAmount) {
         this.price = price;
         this.purchaseAmount = purchaseAmount;
         this.count = calculateCount(price, purchaseAmount);

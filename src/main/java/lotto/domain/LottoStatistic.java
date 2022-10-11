@@ -13,16 +13,16 @@ import static java.util.stream.Collectors.reducing;
 public class LottoStatistic {
 
     private final Lotto beforeWinLotto;
-    private final Buy buy;
+    private final PurchaseInfo purchaseInfo;
 
     private int winMoneyTotal = 0;
     private double revenue;
 
     private Map<LottoResult, Integer> lottoResultCounter = new EnumMap<>(LottoResult.class);
 
-    public LottoStatistic(Lotto beforeWinLotto, Buy buy, List<Lotto> lottos) {
+    public LottoStatistic(Lotto beforeWinLotto, PurchaseInfo purchaseInfo, List<Lotto> lottos) {
         this.beforeWinLotto = beforeWinLotto;
-        this.buy = buy;
+        this.purchaseInfo = purchaseInfo;
 
         analyze(lottos);
     }
@@ -52,7 +52,7 @@ public class LottoStatistic {
     }
 
     private void calculateRevenue() {
-        revenue = Double.valueOf(winMoneyTotal) / Double.valueOf(buy.getPurchaseAmount());
+        revenue = Double.valueOf(winMoneyTotal) / Double.valueOf(purchaseInfo.getPurchaseAmount());
     }
 
     public int getWinMoneyTotal() {
