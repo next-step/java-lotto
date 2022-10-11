@@ -28,8 +28,8 @@ public class Application {
 
         view.print(lotto);
 
-        LottoStatistic lottoStatistic = new LottoStatistic(lotto);
-        lottoStatistic.analyze(inputView.readBeforeLotto(), purchaseInfo);
+        LottoStatistic lottoStatistic = new LottoStatistic();
+        lottoStatistic.analyze(lotto, inputView.readBeforeLotto(), purchaseInfo);
 
         view.print(lottoStatistic);
     }

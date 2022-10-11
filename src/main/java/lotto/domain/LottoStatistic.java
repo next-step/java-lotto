@@ -12,24 +12,19 @@ import static java.util.stream.Collectors.reducing;
  * Created by seungwoo.song on 2022-10-06
  */
 public class LottoStatistic {
-    private final List<Lotto> lottos;
     private int winMoneyTotal = 0;
     private double revenue;
     private Map<LottoResult, Integer> lottoResultCounter = new EnumMap<>(LottoResult.class);
 
-    public LottoStatistic(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
-    public void analyze(Lotto beforeWinLotto, PurchaseInfo purchaseInfo) {
-        List<LottoResult> lottoResults = toLottoResult(beforeWinLotto);
+    public void analyze(List<Lotto> lottos, Lotto beforeWinLotto, PurchaseInfo purchaseInfo) {
+        List<LottoResult> lottoResults = toLottoResult(lottos, beforeWinLotto);
 
         plusLottoResultCount(lottoResults);
         sumWinMoney(lottoResults);
         calculateRevenue(purchaseInfo);
     }
 
-    private List<LottoResult> toLottoResult(Lotto beforeWinLotto) {
+    private List<LottoResult> toLottoResult(List<Lotto> lottos, Lotto beforeWinLotto) {
         return lottos.stream()
                 .map(lotto -> lotto.getResult(beforeWinLotto))
                 .collect(Collectors.toList());

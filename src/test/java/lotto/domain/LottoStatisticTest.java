@@ -25,9 +25,9 @@ class LottoStatisticTest {
                 Lotto.of(List.of(1, 2, 3, 4, 5, 0)),
                 Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
 
-        LottoStatistic lottoStatistic = new LottoStatistic(lottos);
+        LottoStatistic lottoStatistic = new LottoStatistic();
 
-        lottoStatistic.analyze(beforeWinLotto, purchaseInfo);
+        lottoStatistic.analyze(lottos, beforeWinLotto, purchaseInfo);
 
         int sum = LottoResult.FIRST.getMoney() + LottoResult.SECOND.getMoney() + LottoResult.THIRD.getMoney() + LottoResult.FORTH.getMoney();
 
