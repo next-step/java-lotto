@@ -9,15 +9,12 @@ public class LottoTickets {
 
     private final int ticket;
     private List<LottoNumbers> lottoNumbers = new ArrayList<>();
-    private final Money money;
 
     private LottoTickets(int money) {
-        this.money = Money.from(money);
         this.ticket = money / LOTTO_PRICE;
     }
 
     private LottoTickets(int money, LottoNumbers testResultNumberList) {
-        this.money = Money.from(money);
         this.ticket = money / LOTTO_PRICE;
         this.lottoNumbers.add(testResultNumberList);
     }
