@@ -35,15 +35,15 @@ public class LottoResultView {
         return String.format("%d원", lottoResult.getMoney());
     }
 
+    private Integer getCount(LottoStatistic lottoStatistic, LottoResult lottoResult) {
+        return lottoStatistic.getLottoResultCounter().getOrDefault(lottoResult, 0);
+    }
+
     private String getReveneMessage(LottoStatistic lottoStatistic) {
         String msg = String.format("총 수익률은 %.2f입니다.", lottoStatistic.getRevenue());
         if (lottoStatistic.isLost()) {
             msg = msg + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
         return msg;
-    }
-
-    private Integer getCount(LottoStatistic lottoStatistic, LottoResult lottoResult) {
-        return lottoStatistic.getLottoResultCounter().getOrDefault(lottoResult, 0);
     }
 }
