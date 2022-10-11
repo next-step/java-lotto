@@ -19,8 +19,8 @@ public class Lotto {
         for (int num : lastWinner.numbers) {
             sameCount += isContain(num);
         }
-            return sameCount;
-        }
+        return sameCount;
+    }
 
     private int isContain(int num) {
         if (this.numbers.contains(num)) {
