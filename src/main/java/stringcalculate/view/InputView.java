@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public InputValue askInput(Scanner scanner) {
+    public static InputValue askInput(Scanner scanner) {
         String input = scanner.nextLine();
         return new InputValue(input);
     }
