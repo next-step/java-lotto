@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,10 +32,10 @@ public class Lotto {
 
     private static List<Integer> generateLottoNumbers() {
         Collections.shuffle(lottoNumberCandidates);
-
         List<Integer> lottoNumbers = lottoNumberCandidates.subList(0, LOTTO_NUM_COUNT);
         Collections.sort(lottoNumbers);
-        return lottoNumbers;
+
+        return new ArrayList<>(lottoNumbers);
     }
 
     public int countEqualNumbers(List<Integer> lottoNumbers) {
