@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class NotThousandUnitsMoneyException extends CanNotBuyLottoException {
+public class NotThousandUnitsMoneyException extends RuntimeException {
 
     private static final NotThousandUnitsMoneyException NOT_THOUSAND_UNITS_MONEY_EXCEPTION =
             new NotThousandUnitsMoneyException("천 단위의 돈이 아닙니다.");

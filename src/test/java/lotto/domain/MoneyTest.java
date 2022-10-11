@@ -44,7 +44,7 @@ public class MoneyTest {
 
     @DisplayName("천 단위인지 확인")
     @ParameterizedTest
-    @CsvSource(value = {"1000,true", "999,false"})
+    @CsvSource(value = {"1000,true", "999,false", "0,false"})
     void is_Thousand_units(int value, boolean expected) {
         boolean actual = new Money(value).isThousandUnits();
 

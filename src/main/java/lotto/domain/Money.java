@@ -31,7 +31,7 @@ public class Money {
     }
 
     public boolean isThousandUnits() {
-        return this.value % 1000 == 0;
+        return this.value > 0 && this.value % 1000 == 0;
     }
 
     @Override

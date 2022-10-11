@@ -20,7 +20,8 @@ public class Application {
     private static Cashier createCashier() {
         try {
             return new Cashier(InputView.receiveMoney());
-        } catch (RuntimeException e) {
+        } catch (NotNumberStringException | NotThousandUnitsMoneyException | NotZeroOrMoreNumberException e) {
+            System.out.println(e.getMessage());
             return createCashier();
         }
     }
