@@ -34,7 +34,7 @@ public class LottoResultView {
     }
 
     private String getReveneMessage(LottoStatistic lottoStatistic) {
-        String msg = String.format("총 수익률은 %f입니다.", lottoStatistic.getRevenue());
+        String msg = String.format("총 수익률은 %.2f입니다.", lottoStatistic.getRevenue());
         if (lottoStatistic.isLost()) {
             msg = msg + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
