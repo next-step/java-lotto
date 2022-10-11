@@ -33,7 +33,7 @@ public class LottoFactory {
     }
 
     private void addIfNotExist(Set<Integer> lottoNumberBox, Integer lottoNumber) {
-        if (!lottoNumberBox.contains(lottoNumberBox)) {
+        if (!lottoNumberBox.contains(lottoNumber)) {
             lottoNumberBox.add(lottoNumber);
         }
     }
