@@ -10,12 +10,23 @@ import lotto.Prize;
 
 public class OutputView {
 
-
     public void printPurchasedLotto(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개 구매했습니다.");
         for (Lotto lotto : lottos) {
-            System.out.println("[" + lotto.printNumber() + "]");
+            System.out.println("[" + printLottoNumber(lotto) + "]");
         }
+    }
+
+    private String printLottoNumber(Lotto lotto) {
+        List<Integer> numbers = lotto.getNumbers();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Integer number : numbers) {
+            stringBuilder.append(number + ", ");
+        }
+
+        stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length() - 1, "");
+        return stringBuilder.toString();
     }
 
     public void printStatisticLotto(Map<Integer, Integer> rankMap) {
