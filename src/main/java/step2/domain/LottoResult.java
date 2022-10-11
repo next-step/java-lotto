@@ -7,7 +7,8 @@ import java.util.Map;
 public class LottoResult {
 
     private final List<Integer> winningNumbers;
-    private final Map<LottoNumber, Integer> drawResult = new LinkedHashMap();
+    private final Map<Integer, Integer> drawResult = new LinkedHashMap();
+    private final int LEAST_DRAW_COUNT = 3;
 
     private LottoResult(List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
@@ -18,7 +19,7 @@ public class LottoResult {
         return new LottoResult(winningNumbers);
     }
 
-    public Map<LottoNumber, Integer> drawLottoResult(List<LottoNumber> allLottoNumbers) {
+    public Map<Integer, Integer> drawLottoResult(List<LottoNumber> allLottoNumbers) {
         for (LottoNumber eachLottoNumber : allLottoNumbers) {
             List<Integer> lottoNumbers = eachLottoNumber.getLottoNumbers();
             drawEachLottoResult(eachLottoNumber, lottoNumbers);
@@ -28,10 +29,12 @@ public class LottoResult {
     }
 
     private void drawEachLottoResult(LottoNumber eachLottoNumber, List<Integer> lottoNumbers) {
-        for (int winningNumber : winningNumbers) {
-            if (lottoNumbers.contains(winningNumber)) {
-                drawResult.put(eachLottoNumber, drawResult.getOrDefault(eachLottoNumber, 0) + 1);
-            }
+        int count = (int) winningNumbers.stream()
+            .filter(winningNumber -> lottoNumbers.contains(winningNumber))
+            .count();
+
+        if (count >= LEAST_DRAW_COUNT) {
+            drawResult.put(count, drawResult.getOrDefault(count, 0) + 1);
         }
     }
 }
