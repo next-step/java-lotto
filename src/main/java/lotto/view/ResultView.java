@@ -33,7 +33,7 @@ public class ResultView {
             System.out.println(printRank + "개 일치 (" + prizeOf + ") - " + wonAmountOf + "개");
         }
 
-        System.out.println("총 수익률은 " + lottoResult.getReturnRate() + "입니다.");
+        System.out.printf("총 수익률은 %.2f 입니다.", lottoResult.getReturnRate());
     }
 
 }
