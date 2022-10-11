@@ -40,8 +40,4 @@ public class LottoNumbers {
         return this.lottoNumberList.size();
     }
 
-    @Override
-    public String toString() {
-        return lottoNumberList.toString();
-    }
 }
