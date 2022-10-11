@@ -22,6 +22,6 @@ public class Main {
         Map<Rank, Long> lotteriesRank = lotteries.getLotteriesRank(scanLastWinLotte());
 
         showResultRank(lotteriesRank);
-        showReturnRate(lotteries, lotteriesRank);
+        showReturnRate(lotteries, lotteriesRank, purchaseAmount);
     }
 }
