@@ -26,7 +26,6 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers of(String numbers) {
-        LottoNumberValidator.validate(numbers);
         List<Integer> splitNumbers = Arrays.stream(numbers.split(","))
                 .map(number -> Integer.parseInt(number.trim()))
                 .collect(Collectors.toList());

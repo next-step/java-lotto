@@ -18,8 +18,4 @@ public class Lotto {
     public static Lotto of(List<Integer> numbers) {
         return new Lotto(LottoNumbers.of(numbers));
     }
-
-    public static Lotto of(String numbers) {
-        return new Lotto(LottoNumbers.of(numbers));
-    }
 }
