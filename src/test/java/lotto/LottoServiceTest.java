@@ -36,11 +36,11 @@ class LottoServiceTest {
 
     static Stream<Arguments> lottoMatchingTestCase() {
         return Stream.of(
-                arguments(Lists.list(generateLotto(Lists.list(5, 15, 23, 0, 0, 0))),
+                arguments(Lists.list(generateLotto(Lists.list(5, 15, 23, 43, 42, 41))),
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_4TH),
-                arguments(Lists.list(generateLotto(Lists.list(5, 15, 23, 45, 0, 0))),
+                arguments(Lists.list(generateLotto(Lists.list(5, 15, 23, 45, 42, 41))),
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_3TH),
-                arguments(Lists.list(generateLotto(Lists.list(5, 15, 23, 45, 4, 0))),
+                arguments(Lists.list(generateLotto(Lists.list(5, 15, 23, 45, 4, 43))),
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_2TH),
                 arguments(Lists.list(generateLotto(Lists.list(5, 15, 23, 45, 4, 2))),
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_1TH)
