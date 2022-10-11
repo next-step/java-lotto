@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Map;
 import step2.domain.LottoNumber;
 import step2.domain.PrizeMoney;
-import step2.domain.Ticket;
 
 public class OutputView {
+
+    private static int totalIncome = 0;
 
     public static void printPriceNotification() {
         System.out.println("구매금액을 입력해 주세요");
@@ -35,9 +36,17 @@ public class OutputView {
                 .filter(prize -> prize.getMatchCount() == matchCount)
                 .findAny()
                 .get();
+
+            int prize = prizeMoney.getPrizeMoney();
+            totalIncome += prize;
             System.out.println(
-                matchCount + "개 일치 (" + prizeMoney.getPrizeMoney() + ")- " + drawLottoResult.get(
-                    matchCount));
+                matchCount + "개 일치 (" + prize + ")- " + drawLottoResult.get(matchCount));
         }
+    }
+
+    public static void printGrossReturn(int ticketCount) {
+        int purchasePrice = ticketCount * 1000;
+        int grossReturn = OutputView.totalIncome / purchasePrice;
+        System.out.println("총 수익률은 " + grossReturn + "입니다.");
     }
 }

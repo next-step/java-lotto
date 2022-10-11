@@ -25,5 +25,6 @@ public class LottoApplication {
         LottoResult lottoResult = LottoResult.from(winningNumbers);
         Map<Integer, Integer> drawLottoResult = lottoResult.drawLottoResult(lottoNumbers);
         OutputView.printDrawResult(drawLottoResult);
+        OutputView.printGrossReturn(ticketCount);
     }
 }
