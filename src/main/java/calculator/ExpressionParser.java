@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -10,6 +9,7 @@ public class ExpressionParser {
 
     private static final Pattern EXPRESSION_PATTERN = Pattern.compile("[\\d */+-]+");
     private static final String DEFAULT_DELIMITER = "";
+
     private String[] tokens;
 
     public ExpressionParser(String expression) {
