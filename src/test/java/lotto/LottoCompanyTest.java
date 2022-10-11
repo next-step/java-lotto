@@ -22,4 +22,10 @@ public class LottoCompanyTest {
         LottoResult lottoResult = LottoCompany.createLottoResult(Arrays.asList(1, 2, 3, 4, 5, 6), lottoWallet);
         assertThat(lottoResult.getWonAmountOf(rank)).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value={"500:0", "1000:1", "14000:14", "14500:14"}, delimiter = ':')
+    void getAvailablePurchaseLottoCount(int cashAmount, int expected) {
+        assertThat(LottoCompany.getAvailablePurchaseLottoCount(cashAmount)).isEqualTo(expected);
+    }
 }

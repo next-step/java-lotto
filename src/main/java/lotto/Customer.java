@@ -4,9 +4,11 @@ public class Customer {
 
     private final LottoWallet lottoWallet = new LottoWallet();
 
-    public void buy(int cashAmount) {
-        int availablePurchaseLottoCount = cashAmount / LottoCompany.getLottoPrice();
+    public int purchase(int cashAmount) {
+        int availablePurchaseLottoCount = LottoCompany.getAvailablePurchaseLottoCount(cashAmount);
         lottoWallet.generateLotto(availablePurchaseLottoCount);
+
+        return availablePurchaseLottoCount;
     }
 
     public LottoWallet getLottoWallet() {

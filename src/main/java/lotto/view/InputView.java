@@ -11,12 +11,13 @@ public class InputView {
 
     public static int getLotteryPurchasePrices() {
         System.out.println("구입 금액을 입력해주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static List<Integer> getWinningLotteryNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return Arrays.stream(scanner.nextLine().split(","))
+                .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());

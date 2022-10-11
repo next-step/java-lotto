@@ -11,10 +11,6 @@ public class LottoCompany {
     private static final int FIVE_EQUAL_PRIZE = 1500000;
     private static final int SIX_EQUAL_PRIZE = 2000000000;
 
-    public static int getLottoPrice() {
-        return LOTTO_PRICE;
-    }
-
     public static LottoResult createLottoResult(List<Integer> lottoNumbers, LottoWallet lottoWallet) {
         LottoResult lottoResult = new LottoResult();
         lottoResult.setLottoPrice(LOTTO_PRICE);
@@ -32,5 +28,9 @@ public class LottoCompany {
         }
 
         return lottoResult;
+    }
+
+    public static int getAvailablePurchaseLottoCount(int cashAmount) {
+        return cashAmount / LOTTO_PRICE;
     }
 }
