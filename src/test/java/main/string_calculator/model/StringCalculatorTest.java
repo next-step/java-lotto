@@ -1,5 +1,6 @@
 package main.string_calculator.model;
 
+import main.string_calculator.exception.NotEssence;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -67,6 +68,32 @@ class StringCalculatorTest {
 
         // then
         assertThat(addResult).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("나눗셈 구현_실패")
+    void divide_test_fail() {
+        // given
+        Integer firstNumber = 1;
+        Integer secondNumber = 2;
+
+        // expected
+        assertThatExceptionOfType(NotEssence.class)
+                .isThrownBy(() -> stringCalculator.divide(firstNumber, secondNumber));
+    }
+
+    @Test
+    @DisplayName("나눗셈 구현_성공")
+    void divide_test_success() {
+        // given
+        Integer firstNumber = 2;
+        Integer secondNumber = 2;
+
+        // when
+        Integer result = stringCalculator.divide(firstNumber, secondNumber);
+
+        // then
+        assertThat(result).isEqualTo(1);
     }
 
 }
