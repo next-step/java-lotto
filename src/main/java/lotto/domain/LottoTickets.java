@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class LottoTickets {
@@ -11,8 +10,6 @@ public class LottoTickets {
     private final int ticket;
     private List<LottoNumbers> lottoNumbers = new ArrayList<>();
     private final Money money;
-
-    private LottoResult result = LottoResult.of(new HashMap<>());
 
     private LottoTickets(int money) {
         this.money = Money.from(money);
@@ -52,14 +49,10 @@ public class LottoTickets {
         return lottoNumbers;
     }
 
-    public LottoResult result(LottoNumbers winningNumbers) {
-        for (LottoNumbers lotto : lottoNumbers) {
-            int count = lotto.matches(winningNumbers);
-            Rank calculate = Rank.calculate(count);
-
-            result.put(calculate);
-        }
-        return result;
+    public LottoResult calculate(LottoNumbers winningNumbers) {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.result(winningNumbers, lottoNumbers);
+        return lottoResult;
     }
 
 }

@@ -23,7 +23,15 @@ public class LottoResult {
         return result.get(rank);
     }
 
-    public Map<Rank, Integer> result() {
-        return result;
+    public void result(LottoNumbers winningNumbers, List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers lotto : lottoNumbers) {
+            int count = lotto.matches(winningNumbers);
+            Rank calculate = Rank.calculate(count);
+            put(calculate);
+        }
+    }
+
+    public Map<Rank, Integer> getStatistics() {
+        return this.result;
     }
 }

@@ -12,14 +12,14 @@ public class LottoController {
 
     public LottoController() {
         int totalPrice = InputView.inputTotalPrice();
-        ResultView.printTotalCount(totalPrice);
         LottoTickets lottoTickets = LottoTickets.from(totalPrice);
+        ResultView.printTotalCount(totalPrice);
         ResultView.printResultTickets(lottoTickets.createTickets());
         List<LottoNumber> winningNumbers = InputView.inputLottoNumberLastResult();
         ResultView.printWinningNumber(winningNumbers);
-        LottoResult result = lottoTickets.result(LottoNumbers.of(winningNumbers));
-        ResultView.printStatistics(result.result());
+        LottoResult lottoResult = lottoTickets.calculate(LottoNumbers.of(winningNumbers));
+        ResultView.printStatistics(lottoResult.getStatistics());
 
-        ResultView.printRating(result.result(), totalPrice);
+        ResultView.printRating(lottoResult.getStatistics(), totalPrice);
     }
 }

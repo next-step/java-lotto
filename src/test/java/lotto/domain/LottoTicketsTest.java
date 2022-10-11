@@ -5,11 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTickets;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +33,7 @@ public class LottoTicketsTest {
                 LottoNumber.from(6)));
         LottoTickets lottoTickets = LottoTickets.from(2000, LottoNumbers.of(list));
 
-        LottoResult result = lottoTickets.result(LottoNumbers.of(list));
+        LottoResult result = lottoTickets.calculate(LottoNumbers.of(list));
         assertThat(result.count(Rank.FIRST)).isEqualTo(1);
     }
 }
