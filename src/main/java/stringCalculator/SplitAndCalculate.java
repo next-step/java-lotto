@@ -1,6 +1,5 @@
 package stringCalculator;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +7,7 @@ public class SplitAndCalculate {
 
     public int splitAndCalculate(String input) {
         Values values = new Values();
-        Calculator calculator = new Calculator();
+        OperatorMap calculator = new OperatorMap();
 
         checkInputValue(input);
 

@@ -13,7 +13,7 @@ public class Values {
         try {
             addOperand(Integer.parseInt(str));
         } catch(Exception e) {
-            Arrays.stream(Operator.values()).filter(v -> v.getValue().equals(str)).findFirst().orElseThrow(
+            OperatorMap.getOperatorKey().stream().filter(v -> v.equals(str)).findFirst().orElseThrow(
                     () -> new IllegalArgumentException("사칙 연산만 입력 가능합니다.")
             );
             addOperator(str);

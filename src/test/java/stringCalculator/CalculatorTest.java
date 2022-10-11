@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
-    Calculator calculator;
-    Values values;
+    private OperatorMap operatorMap;
+    private Values values;
 
     @BeforeEach
     void init () {
-        calculator = new Calculator();
+        operatorMap = new OperatorMap();
         values = new Values();
 
     }
@@ -19,25 +19,25 @@ public class CalculatorTest {
     @Test
     void 덧셈 () {
         values.addValues("+");
-        assertThat(calculator.calculate(2, 3, values)).isEqualTo(5);
+        assertThat(operatorMap.calculate(2, 3, values)).isEqualTo(5);
     }
 
     @Test
     void 뺄셈() {
         values.addValues("-");
-        assertThat(calculator.calculate(5, 3, values)).isEqualTo(2);
+        assertThat(operatorMap.calculate(5, 3, values)).isEqualTo(2);
     }
 
     @Test
     void 곱셈() {
         values.addValues("*");
-        assertThat(calculator.calculate(2, 3, values)).isEqualTo(6);
+        assertThat(operatorMap.calculate(2, 3, values)).isEqualTo(6);
     }
 
     @Test
     void 나눗셈() {
         values.addValues("/");
-        assertThat(calculator.calculate(6, 3, values)).isEqualTo(2);
+        assertThat(operatorMap.calculate(6, 3, values)).isEqualTo(2);
     }
 
     @Test
@@ -48,6 +48,6 @@ public class CalculatorTest {
         values.addValues("*");
         values.addValues("2");
 
-        assertThat(calculator.calculate(values.pollOperand(), values.pollOperand(), values)).isEqualTo(10);
+        assertThat(operatorMap.calculate(values.pollOperand(), values.pollOperand(), values)).isEqualTo(10);
     }
 }
