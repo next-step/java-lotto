@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
+import lotto.models.WinningLotto;
+import lotto.models.request.WinningLottoRequest;
 import lotto.services.LottoService;
 import lotto.services.LottoStatisticsService;
 import lotto.services.PickNumberService;
@@ -21,7 +23,8 @@ public class LottoApplication {
         Printer.printLottoNumbers(lottos);
 
         String winningNumber = Printer.requestWinningNumber();
-        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, Lotto.of(winningNumber));
+        int bonusNumber = Printer.requestBonusNumber();
+        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, WinningLotto.from(new WinningLottoRequest(winningNumber, bonusNumber)));
         Printer.printStatistics(lottoStatistics);
 
         float revenueRatio = lottoStatisticsService.getRevenueRatio(lottoStatistics, Integer.parseInt(payment));

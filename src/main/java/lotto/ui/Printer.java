@@ -25,6 +25,11 @@ public class Printer {
         return InputScanner.stringScan();
     }
 
+    public static int requestBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return InputScanner.intScan();
+    }
+
     public static void printStatistics(List<LottoStatistics> lottoStatistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");

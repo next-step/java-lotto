@@ -2,7 +2,9 @@ package lotto.services;
 
 import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
+import lotto.models.WinningLotto;
 import lotto.models.enums.Rank;
+import lotto.models.request.WinningLottoRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +25,7 @@ class LottoStatisticsServiceTest {
     private static final String WINNING_NUMBER = "1, 2, 3, 4, 5, 6";
     private static final List<Lotto> duplicatedLottos = new ArrayList<>();
     private static final int PAYMENT = 3500;
-    private static Lotto winningLotto;
+    private static WinningLotto winningLotto;
 
     @BeforeAll
     static void setLotto() {
@@ -41,11 +43,7 @@ class LottoStatisticsServiceTest {
 
     @BeforeAll
     static void setWinningLotto() {
-        List<Integer> splitNumbers = Arrays.stream(WINNING_NUMBER.split(","))
-                .map(number -> Integer.parseInt(number.trim()))
-                .collect(Collectors.toList());
-
-        winningLotto = Lotto.of(splitNumbers);
+        winningLotto = WinningLotto.from(new WinningLottoRequest(WINNING_NUMBER, 10));
     }
 
     @Test

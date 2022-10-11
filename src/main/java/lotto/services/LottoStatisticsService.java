@@ -2,6 +2,7 @@ package lotto.services;
 
 import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
+import lotto.models.WinningLotto;
 import lotto.models.enums.Rank;
 
 import java.util.*;
@@ -10,12 +11,12 @@ import java.util.stream.Collectors;
 
 public class LottoStatisticsService {
 
-    public List<LottoStatistics> getLottoStatistics(List<Lotto> lottos, Lotto winningLotto) {
+    public List<LottoStatistics> getLottoStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
         Map<Rank, LottoStatistics> lottoStatisticsByRank = Arrays.stream(Rank.values())
                 .collect(Collectors.toMap(Function.identity(), LottoStatistics::of));
 
         lottos.forEach(lotto -> {
-            Rank rank = Rank.findRank(new ArrayList<>(winningLotto.getLottoNumbers().getNumbers()), lotto.getLottoNumbers().getNumbers());
+            Rank rank = Rank.findRank(winningLotto, lotto);
             lottoStatisticsByRank.get(rank).addCount();
         });
 

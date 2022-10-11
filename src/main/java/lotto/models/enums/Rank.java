@@ -2,7 +2,9 @@ package lotto.models.enums;
 
 import lotto.models.Lotto;
 import lotto.models.LottoNumbers;
+import lotto.models.WinningLotto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -31,12 +33,14 @@ public enum Rank {
         return amount;
     }
 
-    public static Rank findRank(List<Integer> winningLottoNumber, List<Integer> targetLottoNumber) {
-        winningLottoNumber.retainAll(targetLottoNumber);
-        return Rank.of(winningLottoNumber.size());
+    public static Rank findRank(WinningLotto winningLotto, Lotto targetLotto) {
+        List<Integer> copiedWinningNumbers = new ArrayList<>(winningLotto.getLottoNumbers().getNumbers());
+
+        copiedWinningNumbers.retainAll(targetLotto.getLottoNumbers().getNumbers());
+        return Rank.of(copiedWinningNumbers.size());
     }
 
-    public static Rank of(int equalCount) {
+    private static Rank of(int equalCount) {
         Optional<Rank> optionalRank = Arrays.stream(Rank.values())
                 .filter(rank -> rank.equalCount == equalCount)
                 .findFirst();
