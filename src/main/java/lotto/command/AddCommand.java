@@ -3,6 +3,7 @@ package lotto.command;
 import lotto.domain.Number;
 
 public class AddCommand implements Command {
+    private static final String OPERATOR = "+";
 
     @Override
     public Number execute(Number leftNumber, Number rightNumber) {
@@ -11,11 +12,11 @@ public class AddCommand implements Command {
 
     @Override
     public String toString() {
-        return "연산: +";
+        return OPERATOR;
     }
 
     @Override
     public String operator() {
-        return "+";
+        return OPERATOR;
     }
 }
