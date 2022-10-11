@@ -7,14 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class StringUtilTest
 {
     @Test
-    void isNumericTest()
-    {
+    void isNumericTest() {
         assertTrue(StringUtil.isNumeric("1234"));
     }
 
     @Test
-    void isNullOrEmptyTest()
-    {
+    void isNullOrEmptyTest() {
         assertAll(
             () -> StringUtil.isNullOrEmpty(""),
             () -> StringUtil.isNullOrEmpty(null));
