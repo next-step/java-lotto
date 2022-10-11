@@ -44,6 +44,13 @@ public class Lottery {
         }
     }
 
+    public int countEqualNumbers(Lottery lottery) {
+        return lottery.lotteryNumbers.stream()
+                .filter(this.lotteryNumbers::contains)
+                .mapToInt(lotteryNumber -> 1)
+                .sum();
+    }
+
     public List<LotteryNumber> getLotteryNumbers() {
         return Collections.unmodifiableList(this.lotteryNumbers);
     }
@@ -54,12 +61,5 @@ public class Lottery {
         Collections.sort(lotteryNumbers);
 
         return new ArrayList<>(lotteryNumbers);
-    }
-
-    public int countEqualNumbers(Lottery lottery) {
-        return lottery.lotteryNumbers.stream()
-                .filter(this.lotteryNumbers::contains)
-                .mapToInt(lotteryNumber -> 1)
-                .sum();
     }
 }
