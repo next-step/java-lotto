@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,9 +15,11 @@ class LottoFactoryTest {
 
     @Test
     void 생성() {
-        LottoFactory lottoFactory = new LottoFactory(() -> List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = lottoFactory.getLotto(1).get(0);
+        LottoFactory lottoFactory = new LottoFactory();
+        Deque<Integer> lottoNumbers = new ArrayDeque<>(List.of(1,2,3,4,5,6));
 
-        assertThat(lotto.getLottoNumbers()).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
+        List<Lotto> lotto = lottoFactory.produces(() -> lottoNumbers.pop(), 1);
+
+        assertThat(lotto.get(0)).isEqualTo(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
     }
 }
