@@ -5,7 +5,6 @@ import java.util.List;
 
 public class LottoGame {
 
-    private static final int LOTTO_TICKET_PRICE = 1000;
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private LottoGame() {
@@ -13,10 +12,6 @@ public class LottoGame {
 
     public static LottoGame newInstance() {
         return new LottoGame();
-    }
-
-    public int makeLottoTicket(int price) {
-        return price / LOTTO_TICKET_PRICE;
     }
 
     public List<LottoNumber> playLotto(int purchaseCount) {
