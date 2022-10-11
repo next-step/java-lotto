@@ -4,7 +4,8 @@ import java.util.Objects;
 
 public class Cashier {
 
-    Money money;
+    public static final int LOTTO_PURCHASING_UNIT = 1000;
+    private final Money money;
 
     public Cashier(Money money) {
         validateThousandUnits(money);
@@ -13,6 +14,10 @@ public class Cashier {
 
     public Cashier(String money) {
         this(new Money(money));
+    }
+
+    public int findCountOfPlayLotto() {
+        return this.money.divideBy(LOTTO_PURCHASING_UNIT);
     }
 
     private void validateThousandUnits(Money money) {

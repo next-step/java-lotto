@@ -13,7 +13,7 @@ public class MoneyTest {
 
     @DisplayName("생성할때 ")
     @Nested
-    class CreateMoney {
+    class Create {
 
         @DisplayName("숫자 문자열로 생성한다.")
         @Test
@@ -49,5 +49,13 @@ public class MoneyTest {
         boolean actual = new Money(value).isThousandUnits();
 
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("단위로 나눈 수를 반환한다.")
+    @Test
+    void divide_by_units() {
+        int actual = new Money(14000).divideBy(1000);
+
+        assertThat(actual).isEqualTo(14);
     }
 }

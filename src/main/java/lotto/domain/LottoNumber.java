@@ -1,18 +1,21 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class LottoNumber {
 
     private final Set<Integer> elements;
 
-    public LottoNumbers(final Set<Integer> elements) {
+    public LottoNumber(final Set<Integer> elements) {
         validate(elements);
         this.elements = elements;
     }
 
-    public LottoNumbers(final List<Integer> elements) {
+    public LottoNumber(final List<Integer> elements) {
         this(new HashSet<>(elements));
     }
 
@@ -37,22 +40,24 @@ public class LottoNumbers {
         }
     }
 
-    public List<Integer> findNumbersSortedAsc() {
-        return elements.stream()
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
+        LottoNumber that = (LottoNumber) o;
         return Objects.equals(elements, that.elements);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(elements);
+    }
+
+    @Override
+    public String toString() {
+        return elements.stream()
+                .sorted()
+                .collect(Collectors.toList())
+                .toString();
     }
 }

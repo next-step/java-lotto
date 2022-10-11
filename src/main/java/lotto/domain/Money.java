@@ -46,4 +46,8 @@ public class Money {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public int divideBy(int unit) {
+        return this.value / unit;
+    }
 }

@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class LottoNumbersTest {
+public class LottoNumberTest {
 
     @DisplayName("생성할 때")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -25,16 +25,16 @@ public class LottoNumbersTest {
         @DisplayName("List를 파라미터로 받을 수 있다.")
         @Test
         void create_by_List() {
-            LottoNumbers expected = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
+            LottoNumber expected = new LottoNumber(Set.of(1, 2, 3, 4, 5, 6));
 
-            assertThat(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))).isEqualTo(expected);
+            assertThat(new LottoNumber(List.of(1, 2, 3, 4, 5, 6))).isEqualTo(expected);
         }
 
         @DisplayName("1~45 사이의 숫자가 아니면 예외가 발생한다.")
         @ParameterizedTest
         @MethodSource("generateOutOfRangeElements")
         void validate_number_range(Set<Integer> elements) {
-            assertThatThrownBy(() -> new LottoNumbers(elements))
+            assertThatThrownBy(() -> new LottoNumber(elements))
                     .isExactlyInstanceOf(OutOfRangeLottoNumberException.class)
                     .hasMessage("로또 숫자의 범위를 벗어난 숫자가 포함되어 있습니다. 유효한 로또 숫자 범위 : 1 ~ 45");
         }
@@ -43,7 +43,7 @@ public class LottoNumbersTest {
         @ParameterizedTest
         @MethodSource("generateInvalidSizeElements")
         void validate_size(Set<Integer> elements) {
-            assertThatThrownBy(() -> new LottoNumbers(elements))
+            assertThatThrownBy(() -> new LottoNumber(elements))
                     .isExactlyInstanceOf(InvalidLottoNumbersSizeException.class)
                     .hasMessage("올바르지 않은 로또 숫자 개수 입니다. 유효한 로또 숫자 개수 : 6");
         }
@@ -63,12 +63,12 @@ public class LottoNumbersTest {
         }
     }
 
-    @DisplayName("오름 차순으로 정렬된 로또 숫자들을 반환한다.")
+    @DisplayName("오름 차순으로 정렬된 로또 숫자들을 문자형식으로 반환한다.")
     @Test
-    void find_numbers_sorted_asc() {
-        List<Integer> expected = List.of(1, 2, 3, 4, 5, 6);
+    void to_string() {
+        String expected = "[1, 2, 3, 4, 5, 6]";
 
-        List<Integer> actual = new LottoNumbers(List.of(4, 5, 3, 6, 1, 2)).findNumbersSortedAsc();
+        String actual = new LottoNumber(List.of(4, 5, 3, 6, 1, 2)).toString();
 
         assertThat(actual).isEqualTo(expected);
     }
