@@ -10,6 +10,7 @@ import static java.util.stream.Collectors.reducing;
 public class Lotto {
 
     public static final int VALID_COUNT = 6;
+
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
