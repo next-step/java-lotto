@@ -1,9 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +13,7 @@ public class LottoTest {
     @DisplayName("로또 생성")
     @Test
     void create() {
-        List<LottoNumber> numbers = Arrays.asList(
+        List<LottoNumber> numbers = List.of(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -25,7 +24,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(numbers);
 
         assertThat(lotto).isEqualTo(new Lotto(
-                Arrays.asList(new LottoNumber(1),
+                List.of(new LottoNumber(1),
                         new LottoNumber(2),
                         new LottoNumber(3),
                         new LottoNumber(4),
@@ -37,7 +36,7 @@ public class LottoTest {
     @Test
     void invalidSize() {
         assertThatThrownBy(() -> new Lotto(
-                Arrays.asList(new LottoNumber(1),
+                List.of(new LottoNumber(1),
                         new LottoNumber(2),
                         new LottoNumber(3),
                         new LottoNumber(4),
@@ -45,4 +44,25 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("6");
     }
+
+    @DisplayName("로또 생성 실패 - 로또 숫자 중복")
+    @Test
+    void duplicatedNumbers() {
+        assertThatThrownBy(() -> new Lotto(
+                List.of(new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(5))))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("중복");
+    }
+
+
+//    @ParameterizedTest
+//    @CsvSource(value = {"1,2,3,4,5,6 6", "1,2,3,4,5,5"}, delimiterString = " ")
+//    void howToMatch() {
+//
+//    }
 }

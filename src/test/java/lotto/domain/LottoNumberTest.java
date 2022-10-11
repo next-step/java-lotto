@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,6 +22,6 @@ public class LottoNumberTest {
     @ValueSource(ints = {-100, -1, 0, 46, 100})
     void invalid(final int number) {
         assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(IllegalArgumentException.class)
-                                                         .hasMessageContaining("1 ~ 45");
+                                                         .hasMessageContaining("로또 숫자 범위");
     }
 }
