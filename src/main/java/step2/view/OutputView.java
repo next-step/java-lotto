@@ -1,6 +1,7 @@
 package step2.view;
 
 import java.util.List;
+import java.util.Map;
 import step2.domain.LottoNumber;
 import step2.domain.Ticket;
 
@@ -18,5 +19,16 @@ public class OutputView {
             System.out.println(lottoNumber.getLottoNumbers());
         }
         System.out.println();
+    }
+
+    public static void printWinningNumberNotification() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    public static void printDrawResult(Map<LottoNumber, Integer> drawLottoResult) {
+        System.out.println();
+        for (LottoNumber lottoNumber : drawLottoResult.keySet()) {
+            System.out.println(drawLottoResult.get(lottoNumber) + "개 일치");
+        }
     }
 }

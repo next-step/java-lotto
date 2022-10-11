@@ -1,7 +1,9 @@
 package step2;
 
+import java.util.Map;
 import step2.domain.LottoGame;
 import step2.domain.LottoNumber;
+import step2.domain.LottoResult;
 import step2.domain.Ticket;
 import step2.view.InputView;
 import step2.view.OutputView;
@@ -17,6 +19,10 @@ public class LottoApplication {
         LottoGame lottoGame = LottoGame.newInstance();
         List<LottoNumber> lottoNumbers = lottoGame.playLotto(ticketCount);
         OutputView.printLottoNumbers(lottoNumbers);
-        int[] winningNumbers = InputView.inputWinningNumbers();
+        OutputView.printWinningNumberNotification();
+        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        LottoResult lottoResult = LottoResult.from(winningNumbers);
+        Map<LottoNumber, Integer> drawLottoResult = lottoResult.drawLottoResult(lottoNumbers);
+        OutputView.printDrawResult(drawLottoResult);
     }
 }
