@@ -7,12 +7,10 @@ public class PurchaseInfo {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private final int price;
     private final int purchaseAmount;
     private final int count;
 
     public PurchaseInfo(int price, int purchaseAmount) {
-        this.price = price;
         this.purchaseAmount = purchaseAmount;
         this.count = calculateCount(price, purchaseAmount);
     }

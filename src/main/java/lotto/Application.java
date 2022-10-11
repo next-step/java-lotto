@@ -30,7 +30,6 @@ public class Application {
 
         LottoStatistic lottoStatistic = new LottoStatistic(lotto);
         lottoStatistic.analyze(inputView.readBeforeLotto(), purchaseInfo);
-        ;
 
         view.print(lottoStatistic);
     }

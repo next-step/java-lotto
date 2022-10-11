@@ -16,7 +16,7 @@ public class LottoInputView {
 
     private static List<Integer> toList(String[] lottoNumbers) {
         return Arrays.stream(lottoNumbers)
-                .map(token -> Integer.parseInt(token))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 

@@ -31,7 +31,7 @@ public class LottoStatistic {
 
     private List<LottoResult> toLottoResult(Lotto beforeWinLotto) {
         return lottos.stream()
-                .map((lotto) -> lotto.getResult(beforeWinLotto))
+                .map(lotto -> lotto.getResult(beforeWinLotto))
                 .collect(Collectors.toList());
     }
 

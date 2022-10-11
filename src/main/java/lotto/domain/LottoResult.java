@@ -13,7 +13,7 @@ public enum LottoResult {
     FORTH(5000, 3, "원");
 
     private final int money;
-    private final int matchCount; // TODO 적절한 단어고민
+    private final int matchCount;
     private final String unitDescription;
 
     LottoResult(int money, int matchCount, String unitDescription) {

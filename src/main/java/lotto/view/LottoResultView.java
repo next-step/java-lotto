@@ -23,13 +23,11 @@ public class LottoResultView {
         System.out.println("---------");
 
         Arrays.stream(LottoResult.values())
-                .forEach((lottoResult -> {
-                    System.out.println(String.format("%d개 일치 (%d)%s)- %d개",
-                            lottoResult.getMatchCount(),
-                            lottoResult.getMoney(),
-                            lottoResult.getUnitDescription(),
-                            getCount(lottoStatistic, lottoResult)));
-                }));
+                .forEach((lottoResult -> System.out.println(String.format("%d개 일치 (%d)%s)- %d개",
+                        lottoResult.getMatchCount(),
+                        lottoResult.getMoney(),
+                        lottoResult.getUnitDescription(),
+                        getCount(lottoStatistic, lottoResult)))));
 
         System.out.println(getReveneMessage(lottoStatistic));
     }
