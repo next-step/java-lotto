@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Operand {
@@ -22,7 +21,7 @@ public class Operand {
         return new Operand(operand);
     }
 
-    public int getResult() {
+    public int getValue() {
         return operand;
     }
 

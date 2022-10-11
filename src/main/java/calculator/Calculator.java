@@ -11,9 +11,9 @@ public class Calculator {
         List<Operator> operators = parser.getOperators();
         List<Operand> operands = parser.getOperands();
 
-        for (int i = 0; i < operators.size(); i++) {
-            Operand operate = operators.get(i).operate(operands.get(i).getResult(), operands.get(i + 1).getResult());
-            result += operate.getResult();
+        for (int token = 0; token < operators.size(); token++) {
+            Operand operate = operators.get(token).operate(operands.get(token), operands.get(token + 1));
+            result += operate.getValue();
         }
         return result;
     }
