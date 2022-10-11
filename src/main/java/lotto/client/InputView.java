@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import static lotto.client.OutputView.show;
 
 public class InputView {
+    private static Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
         throw new AssertionError();
@@ -20,13 +21,13 @@ public class InputView {
     public static int scanPurchaseAmount() {
         show("구입금액을 입력해 주세요.");
 
-        return new Scanner(System.in).nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static List<LottoNumber> scanLastWinLotte() {
         show("지난 주 당첨 번호를 입력해 주세요.");
 
-        String[] number = Optional.of(new Scanner(System.in).nextLine().split(", "))
+        String[] number = Optional.of(SCANNER.nextLine().split(", "))
                 .filter(numbers -> numbers.length == 6)
                 .orElseThrow(() -> new WrongParameterException("[입력 오류] 로또 번호는 6자 이상일 수 없습니다."));
 
