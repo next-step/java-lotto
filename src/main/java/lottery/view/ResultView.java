@@ -41,8 +41,8 @@ public class ResultView {
     private static void printLotteryResultsPerRanks(LotteryResult lotteryResult) {
         for (int printRank : PRINT_RANKS) {
             int prizeOf = lotteryResult.getPrizeOf(printRank);
-            int wonAmountOf = lotteryResult.getWonAmountOf(printRank);
-            System.out.println(printRank + "개 일치 (" + prizeOf + ") - " + wonAmountOf + "개");
+            int wonCountOf = lotteryResult.getWonCountOf(printRank);
+            System.out.println(printRank + "개 일치 (" + prizeOf + ") - " + wonCountOf + "개");
         }
     }
 

@@ -22,7 +22,7 @@ public class LotteryCompanyTest {
 
         LotteryResult lotteryResult = LotteryCompany
                 .createLotteryResult(getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6)), lotteryWallet);
-        assertThat(lotteryResult.getWonAmountOf(rank)).isEqualTo(expected);
+        assertThat(lotteryResult.getWonCountOf(rank)).isEqualTo(expected);
     }
 
     @ParameterizedTest

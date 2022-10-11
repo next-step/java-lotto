@@ -20,10 +20,10 @@ public class LotteryResultTest {
         lotteryResult.setPrizeOf(5, 1500000);
         lotteryResult.setPrizeOf(6, 2000000000);
 
-        lotteryResult.setWonAmountOf(3, 1);
-        lotteryResult.setWonAmountOf(4, 2);
-        lotteryResult.setWonAmountOf(5, 0);
-        lotteryResult.setWonAmountOf(6, 0);
+        lotteryResult.setWonCountOf(3, 1);
+        lotteryResult.setWonCountOf(4, 2);
+        lotteryResult.setWonCountOf(5, 0);
+        lotteryResult.setWonCountOf(6, 0);
 
         lotteryResult.setTotalAmounts(15);
         lotteryResult.setLotteryPrice(1000);
@@ -37,8 +37,8 @@ public class LotteryResultTest {
 
     @ParameterizedTest
     @CsvSource(value = {"3:1", "4:2", "5:0", "6:0"}, delimiter = ':')
-    void getWonAmountsOf(int rank, int expectedWonAmount) {
-        assertThat(lotteryResult.getWonAmountOf(rank)).isEqualTo(expectedWonAmount);
+    void getWonCountOf(int rank, int expectedWonCount) {
+        assertThat(lotteryResult.getWonCountOf(rank)).isEqualTo(expectedWonCount);
     }
 
     @Test

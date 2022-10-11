@@ -18,7 +18,7 @@ public class LotteryCompany {
         lotteryResult.setLotteryPrice(LOTTERY_PRICE);
         lotteryResult.setTotalAmounts(lotteries.size());
         setPrizesOf(lotteryResult);
-        lotteries.forEach(lottery -> lotteryResult.addWonAmountOf(lottery.countEqualNumbers(wonLottery)));
+        lotteries.forEach(lottery -> lotteryResult.addWonCountOf(lottery.countEqualNumbers(wonLottery)));
 
         return lotteryResult;
     }

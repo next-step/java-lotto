@@ -24,7 +24,7 @@
 - [x] 각 등수의 로또 장수와 가격 정보를 Map으로 저장
 - [x] 로또 한 장 당 가격 저장 - `setlotteryPrice()`
 - [x] 전체 구매한 로또 장수 저장 - `setTotalAmount()`
-- [x] 인자로 주어진 등수에 맞는 로또 가격과 장수를 저장/반환하는 `set/getPrizeOf()`, `set/getWonAmountOf()` 메서드 제공
+- [x] 인자로 주어진 등수에 맞는 로또 가격과 장수를 저장/반환하는 `set/getPrizeOf()`, `set/getWonCountOf()` 메서드 제공
 - [x] 총 수익률을 계산해 반환하는 `getReturnRate()` 메서드 제공
 ### InputView
 - [x] 로또 구매 금액 입력 받기
