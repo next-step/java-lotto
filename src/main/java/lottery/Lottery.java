@@ -38,8 +38,8 @@ public class Lottery {
         return new ArrayList<>(lotteryNumbers);
     }
 
-    public int countEqualNumbers(List<Integer> lotteryNumbers) {
-        return lotteryNumbers.stream()
+    public int countEqualNumbers(Lottery lottery) {
+        return lottery.lotteryNumbers.stream()
                 .filter(this.lotteryNumbers::contains)
                 .mapToInt(lotteryNumber -> 1)
                 .sum();

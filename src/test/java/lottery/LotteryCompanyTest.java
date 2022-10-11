@@ -19,7 +19,7 @@ public class LotteryCompanyTest {
                 new Lottery(Arrays.asList(1, 2, 13, 14, 15, 16))
         ));
 
-        LotteryResult lotteryResult = LotteryCompany.createLotteryResult(Arrays.asList(1, 2, 3, 4, 5, 6), lotteryWallet);
+        LotteryResult lotteryResult = LotteryCompany.createLotteryResult(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)), lotteryWallet);
         assertThat(lotteryResult.getWonAmountOf(rank)).isEqualTo(expected);
     }
 

@@ -26,17 +26,17 @@ public class LotteryTest {
 
     @ParameterizedTest(name = "countEqualNumbers() - {2}")
     @MethodSource("lotteryNumbersProvider")
-    void countEqualNumbers(List<Integer> lotteryNumbers, int expected, String testMessage) {
-        Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+    void countEqualNumbers(Lottery lottery, int expected, String testMessage) {
+        Lottery wonLottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottery.countEqualNumbers(lotteryNumbers)).isEqualTo(expected);
+        assertThat(wonLottery.countEqualNumbers(lottery)).isEqualTo(expected);
     }
 
     static Stream<Arguments> lotteryNumbersProvider() {
         return Stream.of(
-                Arguments.of(Arrays.asList(10, 11, 12, 13, 14, 15), 0, "0개 일치"),
-                Arguments.of(Arrays.asList(1, 11, 12, 13, 14, 15), 1, "1개 일치"),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6, "6개 일치")
+                Arguments.of(new Lottery(Arrays.asList(10, 11, 12, 13, 14, 15)), 0, "0개 일치"),
+                Arguments.of(new Lottery(Arrays.asList(1, 11, 12, 13, 14, 15)), 1, "1개 일치"),
+                Arguments.of(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)), 6, "6개 일치")
         );
     }
 

@@ -11,14 +11,14 @@ public class LotteryCompany {
     private static final int FIVE_EQUAL_PRIZE = 1500000;
     private static final int SIX_EQUAL_PRIZE = 2000000000;
 
-    public static LotteryResult createLotteryResult(List<Integer> lotteryNumbers, LotteryWallet lotteryWallet) {
+    public static LotteryResult createLotteryResult(Lottery wonLottery, LotteryWallet lotteryWallet) {
         LotteryResult lotteryResult = new LotteryResult();
         List<Lottery> lotteries = lotteryWallet.getLotteries();
 
         lotteryResult.setLotteryPrice(LOTTERY_PRICE);
         lotteryResult.setTotalAmounts(lotteries.size());
         setPrizesOf(lotteryResult);
-        lotteries.forEach(lottery -> lotteryResult.addWonAmountOf(lottery.countEqualNumbers(lotteryNumbers)));
+        lotteries.forEach(lottery -> lotteryResult.addWonAmountOf(lottery.countEqualNumbers(wonLottery)));
 
         return lotteryResult;
     }
