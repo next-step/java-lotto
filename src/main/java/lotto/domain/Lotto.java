@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final int SUM_OF_TWO_ELEMENTS_MAX_SIZE = 12;
+
     private final Set<Integer> elements;
 
     public Lotto(final Set<Integer> elements) {
@@ -53,6 +55,12 @@ public class Lotto {
         } catch (NumberFormatException e) {
             throw NotNumberStringException.of();
         }
+    }
+
+    public int countMatches(Lotto lastWeekLotto) {
+        Set<Integer> combinedElements = new HashSet<>(this.elements);
+        combinedElements.addAll(lastWeekLotto.elements);
+        return SUM_OF_TWO_ELEMENTS_MAX_SIZE - combinedElements.size();
     }
 
     @Override

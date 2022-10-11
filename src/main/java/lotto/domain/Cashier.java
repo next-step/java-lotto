@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Cashier {
 
     public static final int LOTTO_PURCHASING_UNIT = 1000;
+
     private final Money money;
 
     public Cashier(Money money) {

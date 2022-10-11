@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -72,7 +72,6 @@ public class LottoTest {
             );
         }
     }
-
     @DisplayName("오름 차순으로 정렬된 로또 숫자들을 문자형식으로 반환한다.")
     @Test
     void to_string() {
@@ -81,5 +80,29 @@ public class LottoTest {
         String actual = new Lotto(List.of(4, 5, 3, 6, 1, 2)).toString();
 
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("중복되는 숫자의 개수를 반환한다.")
+    @ParameterizedTest
+    @MethodSource("generateMatchesElements")
+    void count_matches(Set<Integer> elements, int expected) {
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto lastWeekLotto = new Lotto(elements);
+
+        int actual = lotto.countMatches(lastWeekLotto);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private Stream<Arguments> generateMatchesElements() {
+        return Stream.of(
+                Arguments.arguments(Set.of(1, 2, 3, 4, 5, 6), 6),
+                Arguments.arguments(Set.of(2, 3, 4, 5, 6, 7), 5),
+                Arguments.arguments(Set.of(3, 4, 5, 6, 7, 8), 4),
+                Arguments.arguments(Set.of(4, 5, 6, 7, 8, 9), 3),
+                Arguments.arguments(Set.of(5, 6, 7, 8, 9, 10), 2),
+                Arguments.arguments(Set.of(6, 7, 8, 9, 10, 11), 1),
+                Arguments.arguments(Set.of(7, 8, 9, 10, 11, 12), 0)
+        );
     }
 }

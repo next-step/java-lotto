@@ -14,7 +14,7 @@ public class Application {
         List<Lotto> lottos = LottoGenerator.generate(playLottoCount);
         OutputView.printGeneratedLottos(lottos);
 
-        Lotto lastWeekWinningLotto = Lotto.of(InputView.receiveLastWeekWinningNumber());
+        Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
     }
 
     private static Cashier createCashier() {
@@ -23,6 +23,15 @@ public class Application {
         } catch (NotNumberStringException | NotThousandUnitsMoneyException | NotZeroOrMoreNumberException e) {
             System.out.println(e.getMessage());
             return createCashier();
+        }
+    }
+
+    private static Lotto createLastWeekWinningLotto() {
+        try {
+            return Lotto.of(InputView.receiveLastWeekWinningNumber());
+        } catch (NotNumberStringException | OutOfRangeLottoNumberException | InvalidLottoNumberSizeException e) {
+            System.out.println(e.getMessage());
+            return createLastWeekWinningLotto();
         }
     }
 }
