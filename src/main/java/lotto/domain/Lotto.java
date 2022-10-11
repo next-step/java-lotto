@@ -19,6 +19,13 @@ public class Lotto {
         this(new HashSet<>(elements));
     }
 
+    public static Lotto of(final List<String> elements) {
+        List<Integer> intElements = elements.stream()
+                .map(Lotto::parseInt)
+                .collect(Collectors.toList());
+        return new Lotto(intElements);
+    }
+
     private void validate(final Set<Integer> elements) {
         validateElementsRange(elements);
         validateElementsSize(elements);
@@ -37,6 +44,14 @@ public class Lotto {
     private void validateElementsSize(final Set<Integer> elements) {
         if (elements.size() != 6) {
             throw InvalidLottoNumberSizeException.of();
+        }
+    }
+
+    private static int parseInt(String stringValue) {
+        try {
+            return Integer.parseInt(stringValue);
+        } catch (NumberFormatException e) {
+            throw NotNumberStringException.of();
         }
     }
 

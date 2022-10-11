@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.CanNotBuyLottoException;
-import lotto.domain.Cashier;
-import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,15 +12,15 @@ public class Application {
         Cashier cashier = createCashier();
         int playLottoCount = cashier.findCountOfPlayLotto();
         List<Lotto> lottos = LottoGenerator.generate(playLottoCount);
-
         OutputView.printGeneratedLottos(lottos);
+
+        Lotto lastWeekWinningLotto = Lotto.of(InputView.receiveLastWeekWinningNumber());
     }
 
     private static Cashier createCashier() {
         try {
             return new Cashier(InputView.receiveMoney());
-        } catch (CanNotBuyLottoException e) {
-            System.out.println(e.getMessage());
+        } catch (RuntimeException e) {
             return createCashier();
         }
     }

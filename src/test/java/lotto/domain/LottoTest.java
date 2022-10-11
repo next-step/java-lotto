@@ -22,12 +22,22 @@ public class LottoTest {
     @Nested
     class Create {
 
-        @DisplayName("List를 파라미터로 받을 수 있다.")
+        @DisplayName("List<Integer>타입을 파라미터로 받을 수 있다.")
         @Test
         void create_by_List() {
             Lotto expected = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-            assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6))).isEqualTo(expected);
+            assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6)))
+                    .isEqualTo(expected);
+        }
+
+        @DisplayName("List<String>타입을 파라미터로 받을 수 있다.")
+        @Test
+        void create_by_string() {
+            Lotto expected = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+
+            assertThat(Lotto.of(List.of("1", "2", "3", "4", "5", "6")))
+                    .isEqualTo(expected);
         }
 
         @DisplayName("1~45 사이의 숫자가 아니면 예외가 발생한다.")
