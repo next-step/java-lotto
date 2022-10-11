@@ -13,4 +13,8 @@ public class StringCalculator {
     public Integer add(Integer firstNumber, Integer secondNumber) {
         return firstNumber + secondNumber;
     }
+
+    public Integer sub(Integer firstNumber, Integer secondNumber) {
+        return firstNumber - secondNumber;
+    }
 }

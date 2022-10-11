@@ -41,4 +41,18 @@ class StringCalculatorTest {
         assertThat(addResult).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("뺄셈 구현")
+    void sub_test() {
+        // given
+        Integer firstNumber = 1;
+        Integer secondNumber = 2;
+
+        // when
+        Integer addResult = stringCalculator.sub(firstNumber, secondNumber);
+
+        // then
+        assertThat(addResult).isEqualTo(-1);
+    }
+
 }
