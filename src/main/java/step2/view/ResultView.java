@@ -1,6 +1,7 @@
 package step2.view;
 
 import step2.domian.Lotto;
+import step2.domian.LottoWallet;
 
 import java.util.List;
 
@@ -18,10 +19,11 @@ public class ResultView {
         System.out.println(lottoNum + BUY_TEXT);
     }
 
-    public static void printLottoNum(List<Lotto> lottoLists) {
-        for (int i = 0; i < lottoLists.size(); i++) {
-            System.out.println(lottoLists.get(i).toString());
+    public static void printLottoNum(LottoWallet lottoWallet) {
+        for (Lotto lotto : lottoWallet.lottos) {
+            System.out.println(lotto.toString());
         }
+
     }
 
     public static void printDrawResult(List<Integer> results) {

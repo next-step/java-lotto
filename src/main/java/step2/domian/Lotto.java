@@ -3,7 +3,7 @@ package step2.domian;
 import java.util.List;
 
 public class Lotto {
-    public List<Integer> numbers;
+    private List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;

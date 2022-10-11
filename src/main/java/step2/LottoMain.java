@@ -1,17 +1,15 @@
 package step2;
 
 import step2.domian.Lotto;
-import step2.domian.QrMachine;
+import step2.domian.LottoWallet;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static step2.domian.Calculator.calculatePercentage;
 import static step2.domian.Calculator.calculateRevenue;
-import static step2.domian.LottoMachine.autoLottoLists;
+import static step2.domian.LottoMachine.autoLottos;
 
 public class LottoMain {
     public static final int LOTTO_PRICE = 1000;
@@ -20,11 +18,11 @@ public class LottoMain {
         int lottoNum = InputView.buyLotto() / LOTTO_PRICE;
         ResultView.printLottoCount(lottoNum);
 
-        List<Lotto> autoLottoLists = autoLottoLists(lottoNum);
-        ResultView.printLottoNum(autoLottoLists);
+        LottoWallet lottoWallet = autoLottos(lottoNum);
+        ResultView.printLottoNum(lottoWallet);
 
         Lotto lastWinner = new Lotto(InputView.getLastWinner());
-        List<Integer> results = QrMachine.compareWithLastLotto(autoLottoLists, lastWinner);
+        List<Integer> results = lottoWallet.compareWithLastLotto(lastWinner);
         ResultView.printDrawResult(results);
 
         int revenue = calculateRevenue(results);
