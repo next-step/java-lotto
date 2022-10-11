@@ -13,8 +13,8 @@ class DefaultLottoNumberProduceStrategyTest {
 
     @Test
     void 생성() {
-        DefaultLottoNumberProduceStrategy defaultLottoNumberProduceStrategy = new DefaultLottoNumberProduceStrategy(() -> 5, 1);
-        List<Integer> lottoNumber = defaultLottoNumberProduceStrategy.getLottoNumber();
+        DefaultLottoNumberProduceStrategy defaultLottoNumberProduceStrategy = new DefaultLottoNumberProduceStrategy();
+        List<Integer> lottoNumber = defaultLottoNumberProduceStrategy.getLottoNumber(() -> 5, 1);
 
         assertThat(lottoNumber).isEqualTo(List.of(5));
     }

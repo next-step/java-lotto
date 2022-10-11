@@ -11,20 +11,12 @@ import java.util.function.Supplier;
  */
 public class DefaultLottoNumberProduceStrategy implements LottoNumberProduceStrategy {
 
-    private final Supplier<Integer> numberSupplier;
-    private final int count;
-
-    public DefaultLottoNumberProduceStrategy(Supplier<Integer> numberSupplier, int count) {
-        this.numberSupplier = numberSupplier;
-        this.count = count;
-    }
-
     @Override
-    public List<Integer> getLottoNumber() {
+    public List<Integer> getLottoNumber(Supplier<Integer> strategy, int produceCount) {
         Set<Integer> lottoNumberBox = new HashSet<>();
 
-        while (lottoNumberBox.size() != count) {
-            add(lottoNumberBox, numberSupplier.get());
+        while (lottoNumberBox.size() != produceCount) {
+            add(lottoNumberBox, strategy.get());
         }
 
         return new ArrayList<>(lottoNumberBox);
