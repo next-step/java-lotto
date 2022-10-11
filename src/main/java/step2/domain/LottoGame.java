@@ -13,11 +13,11 @@ public class LottoGame {
         return new LottoGame();
     }
 
-    public void addLotto(LottoNumber lottoNumber){
-        this.lottoNumbers.add(lottoNumber);
-    }
+    public List<LottoNumber> playLotto(int purchaseCount){
+        for (int i = 0; i < purchaseCount; i++) {
+            lottoNumbers.add(LottoNumber.newInstance());
+        }
 
-    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 }
