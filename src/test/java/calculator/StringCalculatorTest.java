@@ -32,5 +32,15 @@ public class StringCalculatorTest {
         assertThat(resultList).hasSize(expectedSize);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"+", "-", "*", "/"})
+    public void isVaildOperator(String operator) {
+        assertThat(StringCalculator.isValidOperator(operator)).isTrue();
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"%", "x", "X", "="})
+    public void isVaildOperator_유효하지않은_연산자(String operator) {
+        assertThatIllegalArgumentException().isThrownBy(() -> StringCalculator.isValidOperator(operator));
+    }
 }
