@@ -11,8 +11,9 @@ public class CustomerTest {
     @CsvSource(value={"500:0", "1000:1", "14000:14", "14500:14"}, delimiter = ':')
     void purchase(int cashAmount, int purchasedLotteryCount) {
         Customer customer = new Customer();
+        customer.purchase(cashAmount);
 
-        assertThat(customer.purchase(cashAmount)).isEqualTo(purchasedLotteryCount);
+        assertThat(customer.getLotteryWallet().getLotteries()).hasSize(purchasedLotteryCount);
     }
 
 }

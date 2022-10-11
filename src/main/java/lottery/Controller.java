@@ -12,10 +12,9 @@ public class Controller {
         int lotteryPurchasePrices = getLotteryPurchasePrices();
 
         Customer customer = new Customer();
-        int purchasedLotteryAmount = customer.purchase(lotteryPurchasePrices);
+        customer.purchase(lotteryPurchasePrices);
 
-        printPurchasedLotteryAmount(purchasedLotteryAmount);
-        printPurchasedLotteryNumbers(customer.getLotteryWallet());
+        printPurchasedLotteryInfos(customer.getLotteryWallet());
 
         List<Integer> winningLotteryNumbers = getWinningLotteryNumbers();
         LotteryResult lotteryResult = LotteryCompany.createLotteryResult(winningLotteryNumbers, customer.getLotteryWallet());
