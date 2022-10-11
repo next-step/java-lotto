@@ -1,20 +1,18 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     private Map<Rank, Integer> result;
 
-    private LottoResult(Map<Rank, Integer> result) {
-        this.result = result;
-        result.put(Rank.THIRD, 0);
-        result.put(Rank.FOURTH, 0);
-        result.put(Rank.SECOND, 0);
-        result.put(Rank.FIRST, 0);
-    }
-
-    public static LottoResult of(Map<Rank, Integer> result) {
-        return new LottoResult(result);
+    public LottoResult() {
+        this.result = Arrays.stream(Rank.values())
+            .collect(Collectors.toMap(Function.identity(), value -> 0, (x, y) -> y, LinkedHashMap::new));
     }
 
     public void put(Rank rank) {
