@@ -10,18 +10,25 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LotteryTest {
 
     @Test
-    void generate() {
+    void generate_자동() {
         Lottery lottery = new Lottery();
         List<Integer> lotteryNumbers = lottery.getLotteryNumbers();
 
         assertThat(lotteryNumbers).hasSize(6);
-        assertThat(lotteryNumbers.stream().min(Integer::compareTo).get()).isGreaterThanOrEqualTo(1);
-        assertThat(lotteryNumbers.stream().max(Integer::compareTo).get()).isLessThanOrEqualTo(45);
         assertThat(lotteryNumbers).doesNotHaveDuplicates();
+    }
+
+    @Test
+    void generate_수동() {
+        assertThatThrownBy(() -> new Lottery(Arrays.asList(1, 2, 3)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lottery(Arrays.asList(1, 1, 2, 3, 4, 5)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest(name = "countEqualNumbers() - {2}")
@@ -39,5 +46,4 @@ public class LotteryTest {
                 Arguments.of(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)), 6, "6개 일치")
         );
     }
-
 }
