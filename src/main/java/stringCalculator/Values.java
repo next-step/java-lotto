@@ -6,8 +6,8 @@ import java.util.Queue;
 
 public class Values {
 
-    Queue<String> operators = new LinkedList<>();
-    Queue<Integer> operands = new LinkedList<>();
+    private Queue<String> operators = new LinkedList<>();
+    private Queue<Integer> operands = new LinkedList<>();
 
     public void addValues(String str) {
         try {
@@ -36,6 +36,8 @@ public class Values {
         return operators.poll();
     }
 
-
+    public boolean isEmptyOperator() {
+        return operators.isEmpty();
+    }
 
 }

@@ -25,7 +25,7 @@ public class Calculator {
             result = a / b;
         }
 
-        if (!values.operators.isEmpty()) {
+        if (!values.isEmptyOperator()) {
             return calculate(result, values.pollOperand(), values);
         }
 
