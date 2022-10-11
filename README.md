@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## TO DO LIST(Step1)
+- [x] 테스트 코드 작성
+- [x] 입력 뷰 클래스 구현
+- [x] 원시 값 wrapper 클래스 구현
+- [x] 연산자 클래스 구현
+- [x] 문자열 계산기 구현
