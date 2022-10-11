@@ -1,6 +1,8 @@
 package main.string_calculator.model;
 
 import main.string_calculator.exception.NotEssence;
+import main.string_calculator.exception.ValidateNumber;
+import main.string_calculator.exception.ValidateOperator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -94,6 +96,93 @@ class StringCalculatorTest {
 
         // then
         assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("계산 홀수번째 입력 값 숫자 아님")
+    void calculate_input_number_fail() {
+        // given
+        String input = "/ + 2 - 1 * 2 / 1";
+
+        // expected
+        assertThatExceptionOfType(ValidateNumber.class)
+                .isThrownBy(() -> stringCalculator.calculate(input));
+    }
+
+    @Test
+    @DisplayName("계산 짝수번째 입력 값 연산자 아님")
+    void calculate_input_operator_fail() {
+        // given
+        String input = "1 + 2 - 1 * 2 / 1";
+
+        // expected
+        assertThatExceptionOfType(ValidateOperator.class)
+                .isThrownBy(() -> stringCalculator.calculate(input));
+    }
+
+    @Test
+    @DisplayName("계산 덧셈")
+    void calculate_add() {
+        // given
+        String input = "1 + 2";
+
+        // when
+        Integer calculate = stringCalculator.calculate(input);
+
+        // then
+        assertThat(calculate).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("계산 뺄셈")
+    void calculate_sub() {
+        // given
+        String input = "1 - 2";
+
+        // when
+        Integer calculate = stringCalculator.calculate(input);
+
+        // then
+        assertThat(calculate).isEqualTo(-1);
+    }
+
+    @Test
+    @DisplayName("계산 곱셈")
+    void calculate_multiply() {
+        // given
+        String input = "1 * 2";
+
+        // when
+        Integer calculate = stringCalculator.calculate(input);
+
+        // then
+        assertThat(calculate).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("계산 나눗셈")
+    void calculate_divide() {
+        // given
+        String input = "2 / 2";
+
+        // when
+        Integer calculate = stringCalculator.calculate(input);
+
+        // then
+        assertThat(calculate).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("계산 성공")
+    void calculate() {
+        // given
+        String input = "2 + 3 * 4 / 2";
+
+        // when
+        Integer calculate = stringCalculator.calculate(input);
+
+        // then
+        assertThat(calculate).isEqualTo(10);
     }
 
 }
