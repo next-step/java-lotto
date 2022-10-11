@@ -17,20 +17,19 @@ public class LottoRunner {
         int numberOfLotto = inputView.enterLottoPrice();
 
         //로또액수로 로또 실행
-        Gambler gambler = new Gambler(new RandomGenerator());
-        gambler.playGambleWithTime(numberOfLotto);
-        List<LottoNumbers> gambleHistory = gambler.getGambleHistory();
+        LottoVendingMachine lottoVendingMachine = new LottoVendingMachine(new RandomGenerator());
+        List<LottoNumber> lottoNumbers = lottoVendingMachine.makeLottoNumberWithTimes(numberOfLotto);
 
         //실행결과 출력
-        resultView.printGambleHistory(gambleHistory);
+        resultView.printLottoNumbers(lottoNumbers);
 
         //로또 당첨번호 입력
-        LottoNumbers winNumbers = inputView.enterWinNumbers();
+        LottoNumber winNumber = inputView.enterWinNumber();
 
         //로또실행값 통계 계산
-        Analyst analyst = new Analyst(gambleHistory, winNumbers);
+        Analyst analyst = new Analyst(lottoNumbers, winNumber);
         Map<Integer, Long> countByRank = analyst.getCountByRank();
-        float revenueRatio = analyst.revenueRatio();
+        float revenueRatio = analyst.revenueRatio(countByRank);
 
         //로또실행값 통계 출력
         resultView.printCountByRank(countByRank);

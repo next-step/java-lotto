@@ -1,26 +1,26 @@
 package step2.view;
 
 import step2.domain.Analyst;
-import step2.domain.LottoNumbers;
+import step2.domain.LottoNumber;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
 public class ResultView {
-    private final String INIT_MESSAGE = "\n당청 통계\n---------";
+    private static final String INIT_MESSAGE = "\n당청 통계\n---------";
 
-    private final String REVENUE_RATIO_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.(기준값 1보다 높으면 이익, 낮으면 손해라는 의미임)";
+    private static final String REVENUE_RATIO_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.(기준값 1보다 높으면 이익, 낮으면 손해라는 의미임)";
 
-    private final String MATCH_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개\n";
+    private static final String MATCH_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개\n";
 
-    private final int PRINT_START_REVENUE = 3;
+    private static final int PRINT_START_REVENUE = 3;
 
-    private final int PRINT_END_REVENUE = 7;
+    private static final int PRINT_END_REVENUE = 7;
 
-    public void printGambleHistory(List<LottoNumbers> gambleHistory) {
-        gambleHistory.forEach(System.out::println);
-        printEndGambleHistory();
+    public void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+        lottoNumbers.forEach(System.out::println);
+        printEndLottoNumbers();
     }
 
     public void printCountByRank(Map<Integer, Long> countByRank) {
@@ -32,7 +32,7 @@ public class ResultView {
         System.out.printf(REVENUE_RATIO_MESSAGE_FORMAT, revenueRatio);
     }
 
-    private void printEndGambleHistory() {
+    private void printEndLottoNumbers() {
         System.out.println();
     }
 

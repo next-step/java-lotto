@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomGenerator implements LottoNumbersGenerator {
-    private final List<Integer> LOTTO_NUMBERS = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+public class RandomGenerator implements LottoNumberGenerator {
+    private final List<Integer> ALL_LOTTO_NUMBER = IntStream.range(1, 46).boxed().collect(Collectors.toList());
 
-    private final int PICK_NUMBER_COUNT = 6;
+    private static final int PICK_NUMBER_COUNT = 6;
 
-    public LottoNumbers create() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        List<Integer> randomNumbers = LOTTO_NUMBERS.stream()
+    public LottoNumber create() {
+        Collections.shuffle(ALL_LOTTO_NUMBER);
+        List<Integer> randomNumber = ALL_LOTTO_NUMBER.stream()
                 .limit(PICK_NUMBER_COUNT)
                 .sorted()
                 .collect(Collectors.toList());
-        return new LottoNumbers(randomNumbers);
+        return new LottoNumber(randomNumber);
     }
 }
