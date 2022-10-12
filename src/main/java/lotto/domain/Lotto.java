@@ -10,12 +10,12 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(final List<LottoNumber> numbers) {
         validateOrThrow(numbers);
         this.numbers = numbers;
     }
 
-    private static void validateOrThrow(List<LottoNumber> numbers) {
+    private static void validateOrThrow(final List<LottoNumber> numbers) {
         if (Objects.isNull(numbers) || numbers.size() != LOTTO_NUMBER_AMOUNT) {
             throw new IllegalArgumentException(String.format("로또 숫자는 %d개이여야 합니다.", LOTTO_NUMBER_AMOUNT));
         }
@@ -29,7 +29,7 @@ public class Lotto {
         return this.numbers.contains(number);
     }
 
-    public int matchNumberCount(Lotto lotto) {
+    public int matchNumberCount(final Lotto lotto) {
         return (int) this.numbers.stream()
                                  .filter(lotto::has)
                                  .count();
