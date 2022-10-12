@@ -1,31 +1,19 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final int ticket;
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
-    private LottoTickets(int money) {
-        this.ticket = money / LOTTO_PRICE;
+    private LottoTickets(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private LottoTickets(int money, Lotto testResultNumbers) {
-        this.ticket = money / LOTTO_PRICE;
-        this.lottos.add(testResultNumbers);
-    }
-
-    public static LottoTickets from(int money) {
-        valid(money);
-        return new LottoTickets(money);
-    }
-
-    public static LottoTickets from(int money, Lotto testResultNumbers) {
-        return new LottoTickets(money, testResultNumbers);
+    public static LottoTickets of(List<Lotto> lottos) {
+        return new LottoTickets(lottos);
     }
 
     private static void valid(int money) {
@@ -34,12 +22,13 @@ public class LottoTickets {
         }
     }
 
-    public int countTicket() {
-        return this.ticket;
+    public int countTicket(int money) {
+        valid(money);
+        return money / LOTTO_PRICE;
     }
 
-    public List<Lotto> createTickets() {
-        for (int i = 0; i < ticket; i++) {
+    public List<Lotto> createTickets(int tickets) {
+        for (int i = 0; i < tickets; i++) {
             Lotto generateNumbers = LottoNumberRandomGenerator.generate();
             lottos.add(generateNumbers);
         }

@@ -13,14 +13,15 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("로또 개수만큼 발급할 수 있다.")
     void create() {
-        LottoTickets lottoTickets = LottoTickets.from(14000);
-        assertThat(lottoTickets.countTicket()).isEqualTo(14);
+        LottoTickets lottoTickets = LottoTickets.of(new ArrayList<>());
+        assertThat(lottoTickets.countTicket(14000)).isEqualTo(14);
     }
 
     @Test
     @DisplayName("1000원 미만은 로또를 구매할 수 없다.")
     void valid() {
-        assertThatThrownBy(() -> LottoTickets.from(500))
+        LottoTickets lottoTickets = LottoTickets.of(new ArrayList<>());
+        assertThatThrownBy(() -> lottoTickets.countTicket(500))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -31,10 +32,9 @@ public class LottoTicketsTest {
             List.of(LottoNumber.from(1), LottoNumber.from(2),
                 LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
                 LottoNumber.from(6)));
-        LottoTickets lottoTickets = LottoTickets.from(2000, Lotto.of(list));
+        LottoTickets lottoTickets = LottoTickets.of(List.of(Lotto.of(list)));
 
         LottoResult result = lottoTickets.calculate(Lotto.of(list));
-
         LottoResult expected = new LottoResult();
         expected.put(Rank.FIRST);
 

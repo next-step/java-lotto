@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
@@ -13,10 +14,11 @@ public class LottoController {
     public void start() {
         int totalPrice = InputView.inputTotalPrice();
 
-        LottoTickets lottoTickets = LottoTickets.from(totalPrice);
+        LottoTickets lottoTickets = LottoTickets.of(new ArrayList<>());
 
-        ResultView.printTotalCount(lottoTickets.countTicket());
-        ResultView.printResultTickets(lottoTickets.createTickets());
+        int tickets = lottoTickets.countTicket(totalPrice);
+        ResultView.printTotalCount(tickets);
+        ResultView.printResultTickets(lottoTickets.createTickets(tickets));
 
         List<LottoNumber> winningNumbers = InputView.inputLottoNumberLastResult();
 
