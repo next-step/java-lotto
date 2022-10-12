@@ -22,10 +22,13 @@ public class Lotto {
         return lotto;
     }
 
-    public int getMatchCount(List<LottoNumber> lastWinLotto) {
+    public double matchCount(List<LottoNumber> lastWinLotto) {
         return toIntExact(lastWinLotto.stream()
                 .filter(lotto::contains)
                 .count());
     }
 
+    public double matchBonusBallCount(int bonusBall) {
+        return lotto.contains(new LottoNumber(bonusBall)) ? 0.5 : 0;
+    }
 }
