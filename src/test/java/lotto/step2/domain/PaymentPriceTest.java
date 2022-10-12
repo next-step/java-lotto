@@ -12,26 +12,19 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class PaymentPriceTest {
     private static final String EXCEPTION_MESSAGE = "올바른 입력 값이 아닙니다. 다시 입력해 주세요.";
-    public static final PaymentPrice PAYMENT_PRICE = new PaymentPrice("14000");
+    public final PaymentPrice paymentPrice = new PaymentPrice("14000");
     
     
     @Test
     @DisplayName("입력된 금액에 따른 로또 티켓 수")
     void numberOfTickets() {
-        assertThat(PaymentPriceTest.PAYMENT_PRICE.countOfAutoLotto()).isEqualTo(14);
+        assertThat(paymentPrice.countOfAutoLotto()).isEqualTo(14);
     }
     
     @Test
     @DisplayName("지불 금액 확인")
     void checkPaymentPrice() {
-        int paymentPrice = PAYMENT_PRICE.getPaymentPrice();
-        assertThat(paymentPrice).isEqualTo(14000);
-    }
-    
-    @Test
-    @DisplayName("로또 구입 금액 입력 값 반환")
-    void lotto_payment_price_input() {
-        assertThat(PAYMENT_PRICE.getPaymentPrice()).isEqualTo(14000);
+        assertThat(paymentPrice.getPaymentPrice()).isEqualTo(14000);
     }
     
     @EmptySource
@@ -81,9 +74,9 @@ public class PaymentPriceTest {
     @Test
     @DisplayName("자동과 수동 로또 개수 구분")
     void divideAutoAndManual() {
-        PAYMENT_PRICE.inputCountOfManualLotto("3");
-        final int countOfAutoLotto = PAYMENT_PRICE.countOfAutoLotto();
-        final int countOfManualLotto = PAYMENT_PRICE.countOfManualLotto();
+        paymentPrice.inputCountOfManualLotto("3");
+        final int countOfAutoLotto = paymentPrice.countOfAutoLotto();
+        final int countOfManualLotto = paymentPrice.countOfManualLotto();
         assertAll(
                 () -> assertThat(countOfAutoLotto).isEqualTo(11),
                 () -> assertThat(countOfManualLotto).isEqualTo(3)

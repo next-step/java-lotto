@@ -12,7 +12,7 @@ class LottoTicketsFactoryTest {
     @Test
     @DisplayName("자동으로 로또 발급하기.")
     void autoIssueLotto() {
-        LottoTickets actualLottoTickets = LottoTicketsFactory.from(paymentPrice -> LottoTicketsTest.LOTTO_TICKETS, PaymentPriceTest.PAYMENT_PRICE);
+        LottoTickets actualLottoTickets = LottoTicketsFactory.from(paymentPrice -> LottoTicketsTest.LOTTO_TICKETS, new PaymentPriceTest().paymentPrice);
         assertThat(actualLottoTickets).isEqualTo(LottoTicketsTest.LOTTO_TICKETS);
     }
 }
