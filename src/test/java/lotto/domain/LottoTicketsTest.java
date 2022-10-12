@@ -34,6 +34,10 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = LottoTickets.from(2000, Lotto.of(list));
 
         LottoResult result = lottoTickets.calculate(Lotto.of(list));
-        assertThat(result.count(Rank.FIRST)).isEqualTo(1);
+
+        LottoResult expected = new LottoResult();
+        expected.put(Rank.FIRST);
+
+        assertThat(result).isEqualTo(expected);
     }
 }
