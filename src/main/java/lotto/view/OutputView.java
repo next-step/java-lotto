@@ -43,4 +43,8 @@ public class OutputView {
         return String.format("%d개 일치 (%s원)- %d개", rank.getMatchCount(), rank.getReward(), numberOfRank);
     }
 
+    public static void printException(Exception e) {
+        System.err.println(e.getMessage());
+    }
+
 }
