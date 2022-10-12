@@ -22,10 +22,10 @@ class OperatorTest {
     @MethodSource("provideIntInput")
     void Calculate(int a, int b) {
         assertAll(
-                () -> assertEquals(Operator.calculate(a, "+", b), a + b),
-                () -> assertEquals(Operator.calculate(a, "/", b), a / b),
-                () -> assertEquals(Operator.calculate(a, "-", b), a - b),
-                () -> assertEquals(Operator.calculate(a, "*", b), a * b)
+                () -> assertEquals(Operator.ADD.calculate(a, b), a + b),
+                () -> assertEquals(Operator.DIVIDE.calculate(a, b), a / b),
+                () -> assertEquals(Operator.SUBTRACT.calculate(a, b), a - b),
+                () -> assertEquals(Operator.MULTIPLY.calculate(a, b), a * b)
         );
     }
 

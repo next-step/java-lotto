@@ -16,14 +16,13 @@ public enum Operator {
         this.biFunction = biFunction;
     }
 
-    public static Integer calculate(Integer a, String iOperator, Integer b) {
-        return getOperator(iOperator).biFunction.apply(a, b);
+    public String getOperator() {
+        return operator;
     }
 
-    private static Operator getOperator(String input) {
-        return Arrays.stream(values())
-                .filter(o -> input.equals(o.operator))
-                .findFirst()
-                .orElseThrow(() -> new WrongInputException("올바른 연산자가 없습니다."));
+    public Integer calculate(Integer a, Integer b) {
+        return biFunction.apply(a, b);
     }
+
+
 }
