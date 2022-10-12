@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatisticsResult;
+import lotto.utils.LottoUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,9 +16,10 @@ public class OutputView {
 
     private OutputView() {}
 
-    public static void printPurchasedLottos(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다." + NEW_LINE, lottos.size());
-        for (Lotto lotto : lottos) {
+    public static void printPurchasedLottos(List<Lotto> manualLottos, List<Lotto> randomLottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다." + NEW_LINE, manualLottos.size(), randomLottos.size());
+        List<Lotto> allLottos = LottoUtils.mergeTwoLottoLists(manualLottos, randomLottos);
+        for (Lotto lotto : allLottos) {
             List<LottoNumber> lottoNumbers = lotto.getNumbers();
             System.out.printf("[%s]" + NEW_LINE, lottoNumbers.stream()
                             .map(LottoNumber::toString)
