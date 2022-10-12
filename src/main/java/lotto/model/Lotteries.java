@@ -33,11 +33,10 @@ public class Lotteries {
         return this.purchasedCount;
     }
 
-    public Map<Rank, Long> getLotteriesRank(List<LottoNumber> lastWinLotto) {
+    public Map<Rank, Long> getLotteriesRank(List<LottoNumber> lastWinLotto, int bonusBall) {
         return lotteries.stream()
-                .map(lotto -> lotto.getMatchCount(lastWinLotto))
-                .map(count -> Rank.valueOf(count).orElse(null))
-                .filter(Objects::nonNull)
+                .map(lotto -> lotto.matchCount(lastWinLotto) + lotto.matchBonusBallCount(bonusBall))
+                .map(Rank::valueOf)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
