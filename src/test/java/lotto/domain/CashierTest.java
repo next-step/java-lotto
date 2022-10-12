@@ -4,8 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CashierTest {
 
@@ -13,7 +14,7 @@ public class CashierTest {
     @Nested
     class Create {
 
-        @DisplayName("돈을 받는다.")
+        @DisplayName("Money 타입을 받는다.")
         @Test
         void createCashier() {
             Cashier expected = new Cashier(new Money("14000"));
@@ -21,14 +22,6 @@ public class CashierTest {
             Cashier actual = new Cashier("14000");
 
             assertThat(actual).isEqualTo(expected);
-        }
-
-        @DisplayName("천원 단위의 Money가 아니면 예외가 발생한다.")
-        @Test
-        void validate_Thousand_money() {
-            assertThatThrownBy(() -> new Cashier("999"))
-                    .isExactlyInstanceOf(NotThousandUnitsMoneyException.class)
-                    .hasMessage("천 단위의 돈이 아닙니다.");
         }
     }
 
@@ -38,6 +31,14 @@ public class CashierTest {
         int actual = new Cashier("14000").countPlayLotto();
 
         assertThat(actual).isEqualTo(14);
+    }
+
+    @DisplayName("로또를 사고 남은 돈을 알려준다.")
+    @Test
+    void remain_money() {
+        Money actual = new Cashier("14300").receiveLeftMoney();
+
+        assertThat(actual).isEqualTo(new Money(BigInteger.valueOf(300)));
     }
 }
 

@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class Cashier {
 
-    public static final BigInteger LOTTO_PURCHASING_UNIT = BigInteger.valueOf(1000);
+    public static final Money LOTTO_PRICE = new Money(BigInteger.valueOf(1000));
 
     private final Money money;
 
     public Cashier(Money money) {
-        validateThousandUnits(money);
+        validateMinimum(money);
         this.money = money;
     }
 
@@ -18,15 +18,20 @@ public class Cashier {
         this(new Money(money));
     }
 
+    private void validateMinimum(Money money) {
+        if (!money.equalOrMoreThan(LOTTO_PRICE)) {
+            throw UnpurchasableAmountOfMoneyException.of();
+        }
+    }
+
     public int countPlayLotto() {
-        return this.money.divideBy(LOTTO_PURCHASING_UNIT)
+        return this.money.divide(LOTTO_PRICE)
                 .intValue();
     }
 
-    private void validateThousandUnits(Money money) {
-        if (!money.isThousandUnits()) {
-            throw NotThousandUnitsMoneyException.of();
-        }
+    public Money receiveLeftMoney() {
+        Money totalLottoPrice = LOTTO_PRICE.multiply(BigInteger.valueOf(countPlayLotto()));
+        return money.subtract(totalLottoPrice);
     }
 
     @Override

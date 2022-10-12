@@ -33,21 +33,8 @@ public class Money {
         }
     }
 
-    public boolean isThousandUnits() {
-        return !isZeroValue() && isMultiplesThousand();
-    }
-
-    private boolean isZeroValue() {
-        return value.compareTo(BigInteger.ZERO) == 0;
-    }
-
-    private boolean isMultiplesThousand() {
-        BigInteger remainder = value.remainder(BigInteger.valueOf(1000));
-        return remainder.compareTo(BigInteger.ZERO) == 0;
-    }
-
-    public BigInteger divideBy(BigInteger unit) {
-        return value.divide(unit);
+    public boolean equalOrMoreThan(Money money) {
+        return value.compareTo(money.value) > -1;
     }
 
     public static Money sumMoney(List<Money> moneys) {
@@ -55,6 +42,16 @@ public class Money {
                 .map(m -> m.value)
                 .reduce(BigInteger.ZERO, BigInteger::add);
         return new Money(total);
+    }
+
+    public Money subtract(Money subtrahend) {
+        BigInteger minuend = value.subtract(subtrahend.value);
+        return new Money(minuend);
+    }
+
+    public Money multiply(BigInteger multiplicand) {
+        BigInteger multiplier = value.multiply(multiplicand);
+        return new Money(multiplier);
     }
 
     public BigDecimal divide(Money divisor) {

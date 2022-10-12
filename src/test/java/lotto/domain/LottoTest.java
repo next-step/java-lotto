@@ -55,7 +55,7 @@ public class LottoTest {
         void validate_size(Set<Integer> elements) {
             assertThatThrownBy(() -> new Lotto(elements))
                     .isExactlyInstanceOf(InvalidLottoNumberSizeException.class)
-                    .hasMessage("올바르지 않은 로또 숫자 개수 입니다. 유효한 로또 숫자 개수 : 6");
+                    .hasMessage("올바르지 않은 로또 숫자 개수 입니다. 올바른 숫자 개수(중복제외) : 6");
         }
 
         private Stream<Set<Integer>> generateOutOfRangeElements() {
@@ -72,6 +72,7 @@ public class LottoTest {
             );
         }
     }
+
     @DisplayName("오름 차순으로 정렬된 로또 숫자들을 문자형식으로 반환한다.")
     @Test
     void to_string() {

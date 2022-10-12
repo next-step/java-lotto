@@ -23,13 +23,20 @@ public class OutputView {
         lottos.forEach(System.out::println);
         System.out.println();
     }
-    
+
+    public static void printMoneyLeft(Money money) {
+        System.out.printf("남은 금액는 %s원 입니다.\n\n", money);
+    }
+
     public static void printWinningStatistics(WinningStatistics winningStatistics, Money purchaseAmount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        WINNING_INFORMATIONS.forEach(it -> {
-            System.out.printf(MATCHES_COUNT_FORMAT, it.getMatchesCount(), it.getAmount(), winningStatistics.countSame(it));
-        });
+        WINNING_INFORMATIONS.forEach(it -> System.out.printf(
+                MATCHES_COUNT_FORMAT,
+                it.getMatchesCount(),
+                it.getAmount(),
+                winningStatistics.countSame(it)
+        ));
         System.out.printf("총 수익률은 %s입니다.", winningStatistics.calculateYield(purchaseAmount));
     }
 }
