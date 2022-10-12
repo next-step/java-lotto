@@ -8,7 +8,7 @@ public class LottoTickets {
     private static final int LOTTO_PRICE = 1000;
 
     private final int ticket;
-    private List<Lotto> lottoNumbers = new ArrayList<>();
+    private List<Lotto> lottos = new ArrayList<>();
 
     private LottoTickets(int money) {
         this.ticket = money / LOTTO_PRICE;
@@ -16,7 +16,7 @@ public class LottoTickets {
 
     private LottoTickets(int money, Lotto testResultNumbers) {
         this.ticket = money / LOTTO_PRICE;
-        this.lottoNumbers.add(testResultNumbers);
+        this.lottos.add(testResultNumbers);
     }
 
     public static LottoTickets from(int money) {
@@ -41,14 +41,14 @@ public class LottoTickets {
     public List<Lotto> createTickets() {
         for (int i = 0; i < ticket; i++) {
             Lotto generateNumbers = LottoNumberRandomGenerator.generate();
-            lottoNumbers.add(generateNumbers);
+            lottos.add(generateNumbers);
         }
-        return lottoNumbers;
+        return lottos;
     }
 
     public LottoResult calculate(Lotto winningNumbers) {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.result(winningNumbers, lottoNumbers);
+        lottoResult.result(winningNumbers, lottos);
         return lottoResult;
     }
 
