@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
@@ -51,8 +53,8 @@ class WinningStatisticsTest {
     @DisplayName("수익률을 반환한다.")
     @Test
     void calculateYield() {
-        double actual = winningStatistics.calculateYield();
+        BigDecimal actual = winningStatistics.calculateYield(BigDecimal.valueOf(14000));
 
-        assertThat(actual).isEqualTo(285714.64);
+        assertThat(actual).isEqualTo(BigDecimal.valueOf(285714.64));
     }
 }

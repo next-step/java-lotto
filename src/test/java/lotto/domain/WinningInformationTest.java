@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,8 +44,8 @@ class WinningInformationTest {
         List<WinningInformation> winningInformations = Arrays.stream(WinningInformation.values())
                 .collect(Collectors.toList());
 
-        int actual = WinningInformation.sumAmounts(winningInformations);
+        BigInteger actual = WinningInformation.sumAmounts(winningInformations);
 
-        assertThat(actual).isEqualTo(2_001_555_000);
+        assertThat(actual).isEqualTo(BigInteger.valueOf(2_001_555_000));
     }
 }

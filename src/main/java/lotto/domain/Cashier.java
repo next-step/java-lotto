@@ -1,10 +1,11 @@
 package lotto.domain;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 public class Cashier {
 
-    public static final int LOTTO_PURCHASING_UNIT = 1000;
+    public static final BigInteger LOTTO_PURCHASING_UNIT = BigInteger.valueOf(1000);
 
     private final Money money;
 
@@ -17,8 +18,10 @@ public class Cashier {
         this(new Money(money));
     }
 
+    // TODO: 메소드 이름 바꾸기
     public int findCountOfPlayLotto() {
-        return this.money.divideBy(LOTTO_PURCHASING_UNIT);
+        return this.money.divideBy(LOTTO_PURCHASING_UNIT)
+                .intValue();
     }
 
     private void validateThousandUnits(Money money) {
