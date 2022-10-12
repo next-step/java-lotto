@@ -1,6 +1,7 @@
 package lotto.models;
 
 import lotto.models.request.WinningLottoRequest;
+import lotto.validator.WinningLottoRequestValidator;
 
 public class WinningLotto extends Lotto {
 
@@ -16,6 +17,8 @@ public class WinningLotto extends Lotto {
     }
 
     public static WinningLotto from(WinningLottoRequest winningLottoRequest) {
+        WinningLottoRequestValidator.validate(winningLottoRequest);
+
         LottoNumbers lottoNumbers = LottoNumbers.of(winningLottoRequest.getWinningNumber());
         return new WinningLotto(lottoNumbers, winningLottoRequest.getBonusNumber());
     }
