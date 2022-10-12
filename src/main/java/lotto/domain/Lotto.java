@@ -25,6 +25,16 @@ public class Lotto {
         }
     }
 
+    public boolean has(final LottoNumber number) {
+        return this.numbers.contains(number);
+    }
+
+    public int matchNumberCount(Lotto lotto) {
+        return (int) this.numbers.stream()
+                                 .filter(lotto::has)
+                                 .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
