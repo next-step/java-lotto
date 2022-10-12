@@ -23,9 +23,27 @@ class LottoTest {
         Lotto lottoNumbers = new Lotto(createLottoNumber(1, 13, 15, 17, 20, 45));
         List<LottoNumber> lastWinLotto = createLottoNumber(1, 13, 15, 17, 33, 45);
 
-        int result = lottoNumbers.getMatchCount(lastWinLotto);
+        double result = lottoNumbers.matchCount(lastWinLotto);
 
         assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    public void 보너스_볼_일치_반환값_검증() {
+        Lotto lottoNumbers = new Lotto(createLottoNumber(1, 13, 15, 17, 20, 45));
+
+        double result = lottoNumbers.matchBonusBallCount(1);
+
+        assertThat(result).isEqualTo(0.5);
+    }
+
+    @Test
+    public void 보너스_볼_불일치_반환값_검증() {
+        Lotto lottoNumbers = new Lotto(createLottoNumber(1, 13, 15, 17, 20, 45));
+
+        double result = lottoNumbers.matchBonusBallCount(12);
+
+        assertThat(result).isEqualTo(0);
     }
 
     private List<LottoNumber> createLottoNumber(int... number) {
