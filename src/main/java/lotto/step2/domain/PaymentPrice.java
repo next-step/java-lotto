@@ -25,7 +25,15 @@ public class PaymentPrice {
     }
     
     public void inputCountOfManualLotto(final String inputCountOfManualLotto) {
+        checkCountOfManualLottoInputForm(inputCountOfManualLotto);
         this.countOfManualLotto = Integer.parseInt(inputCountOfManualLotto);
+    }
+    
+    private void checkCountOfManualLottoInputForm(final String inputCountOfManualLotto) {
+        final Matcher matcher = Pattern.compile("[0-9]+").matcher(inputCountOfManualLotto);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+        }
     }
     
     public int countOfAutoLotto() {

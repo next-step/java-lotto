@@ -72,8 +72,8 @@ public class PaymentPriceTest {
     }
     
     @Test
-    @DisplayName("자동과 수동 로또 개수 구분")
-    void divideAutoAndManual() {
+    @DisplayName("수동 로또 개수 입력 - 자동과 수동 로또 개수 구분")
+    void input_count_of_manual_lotto() {
         paymentPrice.inputCountOfManualLotto("3");
         final int countOfAutoLotto = paymentPrice.countOfAutoLotto();
         final int countOfManualLotto = paymentPrice.countOfManualLotto();
@@ -81,5 +81,13 @@ public class PaymentPriceTest {
                 () -> assertThat(countOfAutoLotto).isEqualTo(11),
                 () -> assertThat(countOfManualLotto).isEqualTo(3)
         );
+    }
+    
+    @Test
+    @DisplayName("수동 로또 개수 입력 - 음수 입력 시 예외")
+    void input_count_of_manual_lotto_negative_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> paymentPrice.inputCountOfManualLotto("-1"))
+                .withMessage(EXCEPTION_MESSAGE);
     }
 }
