@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String COUNT_OF_MANUAL_LOTTO_INPUT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_FORMAT_EXCEPTION_MESSAGE = "올바른 입력 값이 아닙니다. 다시 입력해 주세요.";
     private static final String LOTTO_PAYMENT_PRICE_INPUT_MESSAGE = "구입금액을 입력해 주세요. (1000원 단위)";
     private static final String WINNING_LOTTO_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요. (구분자는 콤마, 각 숫자 범위는 1 ~ 45)";
@@ -20,6 +21,17 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputLottoPaymentPrice();
+        }
+    }
+    
+    public static PaymentPrice inputCountOfManualLotto(PaymentPrice paymentPrice) {
+        try {
+            System.out.println(COUNT_OF_MANUAL_LOTTO_INPUT_MESSAGE);
+            paymentPrice.inputCountOfManualLotto(checkBlankException(SCANNER.nextLine()));
+            return paymentPrice;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputCountOfManualLotto(paymentPrice);
         }
     }
     
