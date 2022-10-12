@@ -21,6 +21,7 @@ public class ShuffleExtractStrategy implements ExtractStrategy {
         Collections.shuffle(baseNumber);
         List<Integer> numbers = baseNumber.subList(0, WIN_COUNT);
         Lotto lotto = new Lotto(numbers);
+        Collections.sort(baseNumber);
         return lotto;
     }
 }

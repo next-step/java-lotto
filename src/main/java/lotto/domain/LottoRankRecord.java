@@ -10,6 +10,10 @@ public class LottoRankRecord {
         this.number = number;
     }
 
+    public int calculateSum() {
+        return lottoRank.getWinPrize() * number;
+    }
+
     public LottoRank getRank() {
         return lottoRank;
     }

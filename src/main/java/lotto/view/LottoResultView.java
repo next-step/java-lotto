@@ -9,6 +9,7 @@ import lotto.domain.LottoRankRecord;
 public class LottoResultView {
 
     private static final String LOTTO_DELIMITER = ", ";
+    private static final StringBuilder sb = new StringBuilder();
 
     private LottoResultView() {
 
@@ -19,7 +20,6 @@ public class LottoResultView {
     }
 
     public static void printLottoNumber(List<Lotto> lottos) {
-        StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
             sb
                     .append("[")
@@ -27,6 +27,11 @@ public class LottoResultView {
                     .append("]\n");
         }
         System.out.println(sb);
+        clearStringBuilder();
+    }
+
+    private static void clearStringBuilder() {
+        sb.delete(0, sb.length());
     }
 
     private static String makeLottoNumberLine(Lotto lotto) {

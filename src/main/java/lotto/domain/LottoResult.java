@@ -10,16 +10,10 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private final List<LottoRankRecord> lottoRankRecords = new ArrayList<>();
+    private final List<LottoRankRecord> lottoRankRecords;
 
-    public LottoResult(List<Integer> correctNums) {
-        Map<LottoRank, Integer> rankRecord = initilizeRankRecord();
-        recordWinRank(correctNums, rankRecord);
-
-        for (LottoRank lottoRank : rankRecord.keySet()) {
-            int number = rankRecord.get(lottoRank);
-            lottoRankRecords.add(new LottoRankRecord(lottoRank, number));
-        }
+    public LottoResult(List<LottoRankRecord> lottoRankRecords) {
+        this.lottoRankRecords = lottoRankRecords;
     }
 
     public List<LottoRankRecord> getLottoRankRecords() {
@@ -36,10 +30,10 @@ public class LottoResult {
             int winPrize = rank.getWinPrize() * number;
             sum += winPrize;
         }
-        return getTwoDecimalPointResult(originAmount, sum);
+        return getTwoDecimalPointResult(sum, originAmount);
     }
 
-    private static double getTwoDecimalPointResult(int originAmount, double sum) {
+    static double getTwoDecimalPointResult(double sum, int originAmount) {
         return Math.floor(sum / originAmount * 100) / 100;
     }
 
