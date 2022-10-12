@@ -1,5 +1,7 @@
 package lotto.step2.domain;
 
+import lotto.step2.domain.factory.LottoNumbersFactory;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -29,9 +31,12 @@ public class LottoTicket {
     }
     
     private List<LottoNumber> getLottoNumbers(final String lottoTicket) {
+        final List<LottoNumber> lottoNumbersInstance = LottoNumbersFactory.getInstance();
+        
         return Arrays.stream(split(checkLottoTicketInputForm(removeSpace(lottoTicket))))
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .mapToInt(Integer::parseInt)
+                .map(lottoNumber -> lottoNumber - 1)
+                .mapToObj(lottoNumbersInstance::get)
                 .collect(Collectors.toList());
     }
     
@@ -40,7 +45,7 @@ public class LottoTicket {
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
-    
+        
         return lottoTicket;
     }
     

@@ -14,7 +14,7 @@ public class Lotto {
     public void start() {
         PaymentPrice paymentPrice = inputPaymentPrice();
         InputView.inputCountOfManualLotto(paymentPrice);
-    
+        
         final LottoTickets lottoTickets = issueManualLottoTickets(paymentPrice);
         lottoTickets.mergeAutoLottos(issueAutoLottoTickets(paymentPrice));
         print(paymentPrice, lottoTickets);
