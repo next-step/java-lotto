@@ -19,7 +19,7 @@ public class Ticket {
             throw new IllegalArgumentException("구입금액은 양수여야 합니다.");
         }
 
-        if (price % 1000 != 0) {
+        if (price % LOTTO_TICKET_PRICE != 0) {
             throw new IllegalArgumentException("로또티켓은 한 장 당 1000원입니다.");
         }
     }
@@ -30,5 +30,9 @@ public class Ticket {
 
     public int getTicketCount() {
         return ticketCount;
+    }
+
+    public int getPurchasePrice(){
+        return ticketCount * LOTTO_TICKET_PRICE;
     }
 }

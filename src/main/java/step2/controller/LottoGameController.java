@@ -5,6 +5,7 @@ import java.util.Map;
 import step2.domain.LottoGame;
 import step2.domain.LottoNumber;
 import step2.domain.LottoResult;
+import step2.domain.Prize;
 import step2.domain.Ticket;
 import step2.view.InputView;
 import step2.view.OutputView;
@@ -27,6 +28,7 @@ public class LottoGameController {
         final LottoResult lottoResult = LottoResult.from(winningNumbers);
         final Map<Integer, Integer> drawLottoResult = lottoResult.drawLottoResult(lottoNumbers);
         OutputView.printDrawResult(drawLottoResult);
-        OutputView.printGrossReturn(ticket);
+        final int totalIncome = Prize.calculateTotalIncome(drawLottoResult);
+        OutputView.printGrossReturn(ticket, totalIncome);
     }
 }

@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public enum Prize {
@@ -16,11 +17,23 @@ public enum Prize {
         this.prizeMoney = prizeMoney;
     }
 
+    public static int calculateTotalIncome(final Map<Integer, Integer> drawLottoResult){
+        int totalIncome = 0;
+        for (int matchCount : drawLottoResult.keySet()) {
+            totalIncome += getPrizeMoney(matchCount);
+        }
+        return totalIncome;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
+    public static int getPrizeMoney(int matchCount) {
+        return Arrays.stream(Prize.values())
+            .filter(prize -> prize.getMatchCount() == matchCount)
+            .findAny()
+            .get()
+            .prizeMoney;
     }
 }
