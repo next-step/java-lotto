@@ -28,10 +28,11 @@ public class WinningStatisticTest {
 
         WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
 
-        assertThat(winningStatistic.getWinningGrades().get(3).getCount()).isEqualTo(4);
-        assertThat(winningStatistic.getWinningGrades().get(4).getCount()).isEqualTo(3);
-        assertThat(winningStatistic.getWinningGrades().get(5).getCount()).isEqualTo(1);
-        assertThat(winningStatistic.getWinningGrades().get(6).getCount()).isEqualTo(1);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.FIFTH).getCount()).isEqualTo(4);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.FOURTH).getCount()).isEqualTo(3);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.THIRD).getCount()).isEqualTo(0);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.SECOND).getCount()).isEqualTo(1);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.FIRST).getCount()).isEqualTo(1);
     }
 
     @Test

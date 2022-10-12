@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.WinningGrade;
+import lotto.domain.WinningPrice;
 import lotto.domain.WinningStatistic;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class ResultView {
 
     public static void showResult(WinningStatistic winningStatistic, int purchasePrice){
 
-        Map<Integer, WinningGrade> winningResults = winningStatistic.getWinningGrades();
+        Map<WinningPrice, WinningGrade> winningResults = winningStatistic.getWinningGrades();
         System.out.println("당첨 통계");
         System.out.println("--------");
 

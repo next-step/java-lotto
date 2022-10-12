@@ -1,11 +1,15 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum WinningPrice {
 
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000)
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0)
     ;
 
     private final int matchingCount;
@@ -14,6 +18,13 @@ public enum WinningPrice {
     WinningPrice(int matchingCount, int winningPrice) {
         this.matchingCount = matchingCount;
         this.winningPrice = winningPrice;
+    }
+
+    public static WinningPrice decideWithMatchingCount(int matchingNumberCount) {
+        return Arrays.stream(values())
+                .filter(value -> value.getMatchingCount() == matchingNumberCount)
+                .findFirst()
+                .orElse(MISS);
     }
 
     public int getMatchingCount() {

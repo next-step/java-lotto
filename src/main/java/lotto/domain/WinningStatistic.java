@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class WinningStatistic {
     private final List<MatchingResult> matchingResults;
-    private final Map<Integer, WinningGrade> winningGrades;
+    private final Map<WinningPrice, WinningGrade> winningGrades;
 
     public WinningStatistic(List<MatchingResult> matchingResults) {
         this.matchingResults = matchingResults;
@@ -14,20 +14,26 @@ public class WinningStatistic {
         calculateIncome();
     }
 
-    private Map<Integer, WinningGrade> initWinningGrades() {
+    private Map<WinningPrice, WinningGrade> initWinningGrades() {
         return Map.of(
-                3, new WinningGrade(WinningPrice.THREE),
-                4, new WinningGrade(WinningPrice.FOUR),
-                5, new WinningGrade(WinningPrice.FIVE),
-                6, new WinningGrade(WinningPrice.SIX)
+                WinningPrice.FIRST, new WinningGrade(WinningPrice.FIRST),
+                WinningPrice.SECOND, new WinningGrade(WinningPrice.SECOND),
+                WinningPrice.THIRD, new WinningGrade(WinningPrice.THIRD),
+                WinningPrice.FOURTH, new WinningGrade(WinningPrice.FOURTH),
+                WinningPrice.FIFTH, new WinningGrade(WinningPrice.FIFTH),
+                WinningPrice.MISS, new WinningGrade(WinningPrice.MISS)
         );
     }
 
     private void calculateIncome() {
-        this.matchingResults.forEach(matchingResult -> this.winningGrades.get(matchingResult.matchingNumberCount()).increaseCount());
+        this.matchingResults.forEach(matchingResult -> {
+            this.winningGrades.get(
+                    WinningPrice.decideWithMatchingCount(matchingResult.matchingNumberCount())
+            ).increaseCount();
+        });
     }
 
-    public Map<Integer, WinningGrade> getWinningGrades() {
+    public Map<WinningPrice, WinningGrade> getWinningGrades() {
         return this.winningGrades;
     }
 
