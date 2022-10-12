@@ -21,8 +21,7 @@ public class LottoController {
         ResultView.printResultTickets(lottoTickets.createTickets(tickets));
 
         List<LottoNumber> winningNumbers = InputView.inputLottoNumberLastResult();
-
-        ResultView.printWinningNumber(winningNumbers);
+        int bonusBall = InputView.inputBonusBall();
 
         LottoResult lottoResult = lottoTickets.calculate(Lotto.of(winningNumbers));
 

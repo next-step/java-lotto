@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
 
@@ -19,10 +18,6 @@ public class ResultView {
         for (Lotto lottoTicket : lottoTickets) {
             System.out.println(lottoTicket);
         }
-    }
-
-    public static void printWinningNumber(List<LottoNumber> value) {
-        System.out.println(value);
     }
 
     public static void printStatistics(Map<Rank, Integer> result) {
