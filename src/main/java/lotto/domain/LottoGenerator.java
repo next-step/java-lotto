@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.Lotto.*;
+
 public class LottoGenerator {
 
-    // TODO: 로또에서 가져오기
-    private static final int LOTTO_NUMBER_MAX_SIZE = 6;
-    private static final List<Integer> LOTTO_NUMBER_RANGE = IntStream.range(1, 46)
+    private static final List<Integer> LOTTO_NUMBER_RANGE = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
             .boxed()
             .collect(Collectors.toUnmodifiableList());
 
@@ -24,7 +24,7 @@ public class LottoGenerator {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             Collections.shuffle(lottoNumberRange);
-            result.add(new Lotto(lottoNumberRange.subList(0, LOTTO_NUMBER_MAX_SIZE)));
+            result.add(new Lotto(lottoNumberRange.subList(0, MAX_SIZE)));
         }
         return result;
     }

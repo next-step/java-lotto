@@ -10,6 +10,10 @@ public class Lotto {
 
     private static final int SUM_OF_TWO_ELEMENTS_MAX_SIZE = 12;
 
+    public static final int MAX_SIZE = 6;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
+
     private final Set<Integer> elements;
 
     public Lotto(final Set<Integer> elements) {
@@ -38,15 +42,13 @@ public class Lotto {
     }
 
     private void existsWithinLottoNumberRange(final int element) {
-        // TODO: 상수화
-        if (element < 1 || element > 45) {
+        if (element < MIN_NUMBER || element > MAX_NUMBER) {
             throw OutOfRangeLottoNumberException.of();
         }
     }
 
     private void validateElementsSize(final Set<Integer> elements) {
-        // TODO: 상수화
-        if (elements.size() != 6) {
+        if (elements.size() != MAX_SIZE) {
             throw InvalidLottoNumberSizeException.of();
         }
     }
