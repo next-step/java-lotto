@@ -39,4 +39,3 @@ public class CashierTest {
         assertThat(actual).isEqualTo(new Money(300));
     }
 }
-
