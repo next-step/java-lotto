@@ -16,7 +16,7 @@ public class Input {
     private final static Scanner SCANNER = new Scanner(System.in);
     private final static String SEPARATOR_OF_LOTTO_TICKET_NUMBER = ",";
 
-    public int payment() {
+    public int amount() {
         System.out.println("구매하실 금액을 입력해주세요.(1장당 1000원 / 최대 100장 구매 가능)");
         String input = SCANNER.nextLine();
         if (isNumeric(input)) {

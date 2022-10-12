@@ -12,22 +12,15 @@ import static lotto.domain.LottoNumber.shuffleNumbers;
 public class Lotto {
 
     private final static int COUNT_OF_LOTTO_TICKET_NUMBER = 6;
-    private final static int LOTTO_TICKET_PRICE = 1000;
-    private final static int LOTTO_TICKET_BUY_MAX_PRICE = 100000;
 
-    private final int payment;
     private List<LottoTicket> lottoTickets = null;
 
-    public Lotto(final int payment) {
-        if (payment < LOTTO_TICKET_PRICE || payment > LOTTO_TICKET_BUY_MAX_PRICE) {
-            throw new IllegalArgumentException("입력하신 금액이 올바르지 않습니다. (최소 금액:" + LOTTO_TICKET_PRICE + "원, 최대 금액:" + LOTTO_TICKET_BUY_MAX_PRICE + ")");
-        }
-        this.payment = payment;
+    public Lotto() {
         this.lottoTickets = new ArrayList<>();
     }
 
-    public void issue() {
-        lottoTickets = IntStream.range(0, payment / LOTTO_TICKET_PRICE)
+    public void issue(Payment payment) {
+        lottoTickets = IntStream.range(0, payment.count())
                 .mapToObj(i -> new LottoTicket(new TreeSet<>(shuffleNumbers().stream()
                         .limit(COUNT_OF_LOTTO_TICKET_NUMBER)
                         .collect(Collectors.toList()))))
@@ -47,10 +40,6 @@ public class Lotto {
         return ticket.stream()
                 .mapToInt(number -> winningNumber.contains(number) ? 1 : 0)
                 .sum();
-    }
-
-    public int payment() {
-        return payment;
     }
 
     public List<LottoTicket> lottoTickets() {

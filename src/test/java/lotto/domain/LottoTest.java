@@ -15,26 +15,19 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
 
-    @ParameterizedTest
-    @DisplayName("생성자 금액 검증 - 최소금액(천원), 최대 금액(십만원)")
-    @ValueSource(ints = {500, 100500})
-    void constructorDI(int amount) {
-        assertThatThrownBy(() -> new Lotto(amount)).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @Test
     @DisplayName("로또 발급 검증")
     void issueLotto() {
-        Lotto lotto = new Lotto(10000);
-        lotto.issue();
+        Lotto lotto = new Lotto();
+        lotto.issue(new Payment(10000));
         assertThat(lotto.lottoTickets().size()).isEqualTo(10);
     }
 
     @RepeatedTest(100)
     @DisplayName("발급 로또 티켓, 당첨 티켓 비교")
     void matchingCountsByTickets() {
-        Lotto lotto = new Lotto(1000);
-        lotto.issue();
+        Lotto lotto = new Lotto();
+        lotto.issue(new Payment(1000));
 
         WinningNumber winningNumber = new WinningNumber(new LottoTicket(new TreeSet<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6))));
         List<Integer> matchingCounts = lotto.matchingCountsByTickets(winningNumber.winningNumber());
@@ -47,16 +40,11 @@ public class LottoTest {
     @RepeatedTest(100)
     @DisplayName("발급 로또 티켓, 당첨 티켓 비교 예외 - 로또 미발급")
     void matchingCountsByTicketsException() {
-        Lotto lotto = new Lotto(1000);
+        Lotto lotto = new Lotto();
+        lotto.issue(new Payment(10000));
         WinningNumber winningNumber = new WinningNumber(new LottoTicket(new TreeSet<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         assertThatThrownBy(() -> lotto.matchingCountsByTickets(winningNumber.winningNumber()))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("구매 금액 검증")
-    void paymentAmount() {
-        assertThat(new Lotto(10000).payment()).isEqualTo(10000);
     }
 }
