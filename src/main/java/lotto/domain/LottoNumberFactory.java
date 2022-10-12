@@ -1,11 +1,12 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Numbers {
+public class LottoNumberFactory {
 
     private static final List<Integer> numbers = Arrays.asList(
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -15,7 +16,11 @@ public class Numbers {
             41, 42, 43, 44, 45
     );
 
-    public static List<Integer> getNumbers(int number) {
+    public static List<LottoNumber> getNumbers(int number) {
+        return getIntegers(number).stream().map(i -> new LottoNumber(i)).collect(Collectors.toList());
+    }
+
+    private static List<Integer> getIntegers(int number) {
         Collections.shuffle(numbers);
         return numbers.subList(0, number).stream().sorted().collect(Collectors.toList());
     }

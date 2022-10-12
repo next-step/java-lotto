@@ -22,11 +22,7 @@ public class LottoNumberList {
     }
 
     public static LottoNumberList getLottoNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : Numbers.getNumbers(LOTTO_SIZE)) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return new LottoNumberList(lottoNumbers);
+        return new LottoNumberList(LottoNumberFactory.getNumbers(LOTTO_SIZE));
     }
 
     public LottoNumberList(List<LottoNumber> lottoNumbers) {
