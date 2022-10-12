@@ -12,14 +12,14 @@ public class Printer {
 
     public static PaymentRequest requestPayment() {
         System.out.println("구매금액을 입력해 주세요.");
-        int payment = InputScanner.intScan();
-        return PaymentRequest.of(payment);
+        String payment = InputScanner.stringScan();
+        return PaymentRequest.of(Integer.parseInt(payment));
     }
 
     public static void printLottoNumbers(List<Lotto> lottos) {
         System.out.printf("%d개를 구매했습니다.%n", lottos.size());
         lottos.forEach(lotto -> {
-            System.out.println(lotto.getLottoNumbers().toString());
+            System.out.println(lotto.getLottoNumbers().getNumbers().toString());
         });
     }
 
@@ -33,16 +33,6 @@ public class Printer {
         return WinningLottoRequest.of(winningNumbers, bonusNumber);
     }
 
-    public static String requestWinningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return InputScanner.stringScan();
-    }
-
-    public static int requestBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return InputScanner.intScan();
-    }
-
     public static void printStatistics(List<LottoStatistics> lottoStatistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -54,7 +44,12 @@ public class Printer {
                         return;
                     }
 
-                    System.out.printf("%d개 일치 (\"%d원\")- %d개%n",
+                    String statisticsText = "%d개 일치 (\"%d원\")- %d개%n";
+                    if (statistics.getRank().equals(Rank.SECOND)) {
+                        statisticsText = "%d개 일치, 보너스 볼 일치 (\"%d원\")- %d개%n";
+                    }
+
+                    System.out.printf(statisticsText,
                             statistics.getRank().getEqualCount(),
                             statistics.getRank().getAmount(),
                             statistics.getCount());

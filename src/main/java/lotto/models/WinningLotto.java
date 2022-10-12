@@ -16,6 +16,7 @@ public class WinningLotto extends Lotto {
     }
 
     public static WinningLotto from(WinningLottoRequest winningLottoRequest) {
-        return new WinningLotto(LottoNumbers.of(winningLottoRequest.getWinningNumber()), winningLottoRequest.getBonusNumber());
+        LottoNumbers lottoNumbers = LottoNumbers.of(winningLottoRequest.getWinningNumber());
+        return new WinningLotto(lottoNumbers, winningLottoRequest.getBonusNumber());
     }
 }

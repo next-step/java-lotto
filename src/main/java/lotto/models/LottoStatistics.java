@@ -4,7 +4,7 @@ import lotto.models.enums.Rank;
 
 public class LottoStatistics {
 
-    private Rank rank;
+    private final Rank rank;
     private int count;
 
     private LottoStatistics(Rank rank) {
