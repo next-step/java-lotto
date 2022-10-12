@@ -90,4 +90,13 @@ public class PaymentPriceTest {
                 .isThrownBy(() -> paymentPrice.inputCountOfManualLotto("-1"))
                 .withMessage(EXCEPTION_MESSAGE);
     }
+    
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @DisplayName("수동 로또 개수 입력 - 소문자, 대문자 알파벳 및 한글 입력 시 예외")
+    @ValueSource(strings = {"a", "A", "아"})
+    void input_count_of_manual_lotto_alphabet_and_korean_exception(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> paymentPrice.inputCountOfManualLotto(input))
+                .withMessage(EXCEPTION_MESSAGE);
+    }
 }
