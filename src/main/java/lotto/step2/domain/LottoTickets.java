@@ -26,9 +26,9 @@ public class LottoTickets {
         return LottoRank.valueOf(countMatchingNumber, isExistBonusLottoNumber);
     }
     
-    public void mergeAutoLottos(final List<LottoTicket> lottoTickets) {
+    public void mergeAutoLottos(final LottoTickets lottoTickets) {
         this.lottoTickets = new ArrayList<>(this.lottoTickets);
-        this.lottoTickets.addAll(lottoTickets);
+        this.lottoTickets.addAll(lottoTickets.lottoTickets);
     }
     
     public List<LottoTicket> getLottoTickets() {

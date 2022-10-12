@@ -3,6 +3,7 @@ package lotto.step2.controller;
 import lotto.step2.domain.*;
 import lotto.step2.domain.factory.LottoTicketsFactory;
 import lotto.step2.domain.issuelottostrategy.AutoLottoIssueStrategy;
+import lotto.step2.domain.issuelottostrategy.ManualLottoIssueStrategy;
 import lotto.step2.view.input.InputView;
 import lotto.step2.view.output.ResultView;
 
@@ -12,13 +13,19 @@ public class Lotto {
     
     public void start() {
         PaymentPrice paymentPrice = inputPaymentPrice();
-        
-        LottoTickets lottoTickets = issueAutoLottoTickets(paymentPrice);
+        InputView.inputCountOfManualLotto(paymentPrice);
+    
+        final LottoTickets lottoTickets = issueManualLottoTickets(paymentPrice);
+        lottoTickets.mergeAutoLottos(issueAutoLottoTickets(paymentPrice));
         print(paymentPrice, lottoTickets);
     }
     
     private PaymentPrice inputPaymentPrice() {
         return InputView.inputLottoPaymentPrice();
+    }
+    
+    private static LottoTickets issueManualLottoTickets(final PaymentPrice paymentPrice) {
+        return LottoTicketsFactory.of(new ManualLottoIssueStrategy(), paymentPrice);
     }
     
     private LottoTickets issueAutoLottoTickets(PaymentPrice paymentPrice) {

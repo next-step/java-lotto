@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class ResultView {
     private static final String WINS_SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static final String WINS_NUMBERS_PRINT_FORMAT = "%d개 일치 (%d원) - %d개";
-    private static final String PURCHASED_LOTTO_NUMBER_PRINT_FORM = "%d개를 구매했습니다.\n";
+    private static final String PURCHASED_LOTTO_NUMBER_PRINT_FORM = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String YIELD_PRINT_FORMAT = "총 수익률은 %s입니다.";
     private static final String WIN_NUMBERS_PRINT_MESSAGE = "\n당첨 통계";
     private static final String BARS = "---------";
@@ -18,7 +18,7 @@ public class ResultView {
     private static final String NEW_LINE = "\n";
     
     public static void purchasedLottoNumbersPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
-        System.out.printf(PURCHASED_LOTTO_NUMBER_PRINT_FORM, paymentPrice.countOfAutoLotto());
+        System.out.printf(PURCHASED_LOTTO_NUMBER_PRINT_FORM, paymentPrice.countOfManualLotto(), paymentPrice.countOfAutoLotto());
         lottoTickets.getLottoTickets().stream()
                 .map(ResultView::lottoTicketPrintFormat)
                 .forEach(System.out::println);

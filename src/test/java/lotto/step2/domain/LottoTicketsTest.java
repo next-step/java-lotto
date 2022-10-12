@@ -36,7 +36,7 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("수동, 자동 로또 합치기")
     void merge_auto_and_manual_lottos() {
-        lottoTickets.mergeAutoLottos(Arrays.asList(LottoTicketTest.LOTTO_TICKET, LottoTicketTest.LOTTO_TICKET));
+        lottoTickets.mergeAutoLottos(lottoTickets);
         assertThat(lottoTickets.getLottoTickets()).isEqualTo(Arrays.asList(LottoTicketTest.LOTTO_TICKET, LottoTicketTest.LOTTO_TICKET, LottoTicketTest.LOTTO_TICKET, LottoTicketTest.LOTTO_TICKET));
     }
 }

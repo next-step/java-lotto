@@ -13,12 +13,12 @@ import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String MANUAL_LOTTO_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
-    private static final String COUNT_OF_MANUAL_LOTTO_INPUT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_INPUT_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
+    private static final String COUNT_OF_MANUAL_LOTTO_INPUT_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_FORMAT_EXCEPTION_MESSAGE = "올바른 입력 값이 아닙니다. 다시 입력해 주세요.";
-    private static final String LOTTO_PAYMENT_PRICE_INPUT_MESSAGE = "구입금액을 입력해 주세요. (1000원 단위)";
+    private static final String LOTTO_PAYMENT_PRICE_INPUT_MESSAGE = "\n구입금액을 입력해 주세요. (1000원 단위)";
     private static final String WINNING_LOTTO_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요. (구분자는 콤마, 각 숫자 범위는 1 ~ 45)";
-    private static final String LOTTO_BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String LOTTO_BONUS_NUMBER_INPUT_MESSAGE = "\n보너스 볼을 입력해 주세요.";
     
     public static PaymentPrice inputLottoPaymentPrice() {
         try {
