@@ -3,12 +3,14 @@ package lotto.domains;
 import java.util.Arrays;
 
 public enum Prize {
-    FIRST(6), SECOND(5), THIRD(4), FOURTH(3), NONE(0);
+    FIRST(6, 2000000000L), SECOND(5, 1500000L), THIRD(4, 50000L), FOURTH(3, 5000L), NONE(0, 0L);
 
     private final int correctCount;
+    private final long reward;
 
-    Prize(int correctCount) {
+    Prize(int correctCount, long reward) {
         this.correctCount = correctCount;
+        this.reward = reward;
     }
 
     public static Prize find(long count) {
