@@ -1,6 +1,5 @@
 package lotto.step2.domain;
 
-import lotto.step2fixture.domain.LottoNumberFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +20,10 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("일치 번호 개수 리스트 반환")
     void numberOfMatches() {
-        List<LottoNumber> winningLottoNumbers = Arrays.asList(LottoNumberFixture.ONE, LottoNumberFixture.TWO, LottoNumberFixture.THREE, LottoNumberFixture.FOUR, LottoNumberFixture.FIVE, LottoNumberFixture.THIRTY);
-        List<LottoRank> lottoRanks = LottoTicketsTest.LOTTO_TICKETS.parseLottoRanks(new WinningLottoNumbers(winningLottoNumbers, LottoNumberFixture.SIX));
+        final WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,30");
+        winningLottoNumbers.inputBonusNumber("6");
+        List<LottoRank> lottoRanks = LottoTicketsTest.LOTTO_TICKETS.parseLottoRanks(winningLottoNumbers);
+        
         assertThat(lottoRanks).isEqualTo(Arrays.asList(LottoRank.SECOND, LottoRank.SECOND));
     }
 }
