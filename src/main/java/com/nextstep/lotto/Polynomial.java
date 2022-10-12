@@ -5,8 +5,9 @@ import java.util.List;
 public class Polynomial {
 
     private static final String TOO_SHORT_ARGUMENT_MSG = "polynomial must have at least 3 tokens (leftOperand, operator, rightOperand)";
+    private static final int MINIMUM_TOKENS = 3;
 
-    private List<String> tokens;
+    private final List<String> tokens;
 
     public Polynomial(String polynomialString) {
         validate(polynomialString);
@@ -14,13 +15,13 @@ public class Polynomial {
     }
 
     private void validate(String polynomial) {
-        if(isTooShort(polynomial)) {
+        if (isTooShort(polynomial)) {
             throw new IllegalArgumentException(TOO_SHORT_ARGUMENT_MSG);
         }
     }
 
     private boolean isTooShort(String polynomial) {
-        return polynomial==null || polynomial.split(" ").length < 3;
+        return polynomial == null || polynomial.split(" ").length < MINIMUM_TOKENS;
     }
 
     private List<String> split(String polynomial) {
