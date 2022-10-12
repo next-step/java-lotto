@@ -29,10 +29,10 @@ public class LottoTicket {
     }
     
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoTicket that = (LottoTicket) o;
+        final LottoTicket that = (LottoTicket) o;
         return Objects.equals(lottoTicket, that.lottoTicket);
     }
     

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
+    private List<LottoTicket> lottoTickets;
     
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
@@ -24,6 +24,11 @@ public class LottoTickets {
         int countMatchingNumber = lottoTicket.countMatchingNumber(winningLottoNumbers);
         boolean isExistBonusLottoNumber = lottoTicket.isExistBonusLottoNumber(winningLottoNumbers);
         return LottoRank.valueOf(countMatchingNumber, isExistBonusLottoNumber);
+    }
+    
+    public void mergeAutoLottos(final List<LottoTicket> lottoTickets) {
+        this.lottoTickets = new ArrayList<>(this.lottoTickets);
+        this.lottoTickets.addAll(lottoTickets);
     }
     
     public List<LottoTicket> getLottoTickets() {
