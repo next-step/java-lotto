@@ -10,7 +10,7 @@ public class LottoNumber {
     private static final int MIN_LOTTO_RANGE = 1;
     private static final int MAX_LOTTO_RANGE = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static List<Integer> lottoNumbersCache = new ArrayList<>();
+    private static final List<Integer> lottoNumbersCache = new ArrayList<>();
     private final List<Integer> lottoNumbers = new ArrayList<>();
 
     static {
@@ -18,7 +18,7 @@ public class LottoNumber {
             .forEach(i -> lottoNumbersCache.add(i));
     }
 
-    public static LottoNumber newInstance(){
+    public static final LottoNumber newInstance(){
         return new LottoNumber();
     }
 
@@ -35,7 +35,7 @@ public class LottoNumber {
             .collect(Collectors.toList()));
     }
 
-    public List<Integer> getLottoNumbers() {
+    public final List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 }

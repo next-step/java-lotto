@@ -10,16 +10,16 @@ public class LottoResult {
     private final Map<Integer, Integer> drawResult = new LinkedHashMap();
     private final int LEAST_DRAW_COUNT = 3;
 
-    private LottoResult(List<Integer> winningNumbers) {
+    private LottoResult(final List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
 
-    public static LottoResult from(List<Integer> winningNumbers) {
+    public static final LottoResult from(final List<Integer> winningNumbers) {
         return new LottoResult(winningNumbers);
     }
 
-    public Map<Integer, Integer> drawLottoResult(List<LottoNumber> allLottoNumbers) {
+    public final Map<Integer, Integer> drawLottoResult(final List<LottoNumber> allLottoNumbers) {
         for (LottoNumber eachLottoNumber : allLottoNumbers) {
             List<Integer> lottoNumbers = eachLottoNumber.getLottoNumbers();
             drawEachLottoResult(eachLottoNumber, lottoNumbers);
@@ -28,7 +28,7 @@ public class LottoResult {
         return drawResult;
     }
 
-    private void drawEachLottoResult(LottoNumber eachLottoNumber, List<Integer> lottoNumbers) {
+    private void drawEachLottoResult(final LottoNumber eachLottoNumber, final List<Integer> lottoNumbers) {
         int count = (int) winningNumbers.stream()
             .filter(winningNumber -> lottoNumbers.contains(winningNumber))
             .count();

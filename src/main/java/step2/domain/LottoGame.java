@@ -5,17 +5,18 @@ import java.util.List;
 
 public class LottoGame {
 
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private LottoGame() {
     }
 
-    public static LottoGame newInstance() {
+    public static final LottoGame newInstance() {
         return new LottoGame();
     }
 
-    public List<LottoNumber> playLotto(int purchaseCount) {
-        for (int i = 0; i < purchaseCount; i++) {
+    public List<LottoNumber> playLotto(final Ticket ticket) {
+        final int ticketCount = ticket.getTicketCount();
+        for (int i = 0; i < ticketCount; i++) {
             lottoNumbers.add(LottoNumber.newInstance());
         }
 

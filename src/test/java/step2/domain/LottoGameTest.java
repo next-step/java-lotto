@@ -19,9 +19,9 @@ class LottoGameTest {
 
     @DisplayName("playLotto 인자 갯수 만큼의 로또 번호 객체를 생성한다")
     @ParameterizedTest
-    @ValueSource(ints = {1, 3, 5, 6, 9})
-    void playLotto_make_purchaseCount_lottoNumber(int purchaseCount) {
-        List<LottoNumber> lottoNumbers = lottoGame.playLotto(purchaseCount);
-        Assertions.assertThat(lottoNumbers.size()).isEqualTo(purchaseCount);
+    @ValueSource(ints = {1000, 3000, 50000, 6000, 9000})
+    void playLotto_make_purchaseCount_lottoNumber(int price) {
+        List<LottoNumber> lottoNumbers = lottoGame.playLotto(Ticket.from(price));
+        Assertions.assertThat(lottoNumbers.size()).isEqualTo(price/1000);
     }
 }
