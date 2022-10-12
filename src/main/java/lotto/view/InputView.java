@@ -24,4 +24,11 @@ public class InputView {
                 .map(number -> Integer.parseInt(number.trim()))
                 .collect(Collectors.toList());
     }
+
+    public static int bonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        String price = scanner.nextLine();
+        return Integer.parseInt(price);
+    }
 }

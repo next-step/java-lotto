@@ -3,6 +3,7 @@ package lotto;
 import lotto.controller.LottoController;
 import lotto.domain.Lotto;
 import lotto.domain.MatchingResult;
+import lotto.domain.WinningNumber;
 import lotto.domain.WinningStatistic;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,11 +20,12 @@ public class Main {
         ResultView.printLottoNumber(lotties);
 
         List<Integer> lastWeekAnswer = InputView.lastWeekAnswer();
-//        List<MatchingResult> matchingResults = LottoController.getMatchingResults(lotties, lastWeekAnswer);
+        int bonusNumber = InputView.bonusNumber();
+        List<MatchingResult> matchingResults = LottoController.getMatchingResults(lotties, new WinningNumber(lastWeekAnswer, bonusNumber));
 
-//        WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
+        WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
 
-//        ResultView.showResult(winningStatistic, purchasePrice);
+        ResultView.showResult(winningStatistic, purchasePrice);
     }
 }
 

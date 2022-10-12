@@ -45,11 +45,19 @@ public enum WinningPrice {
                 .orElse(MISS);
     }
 
+    public boolean isSecond() {
+        return this == SECOND;
+    }
+
     public int getMatchingCount() {
         return matchingCount;
     }
 
     public int getWinningPrice() {
         return winningPrice;
+    }
+
+    public boolean isWinningGrade() {
+        return this != MISS;
     }
 }

@@ -5,6 +5,7 @@ import lotto.domain.WinningGrade;
 import lotto.domain.WinningPrice;
 import lotto.domain.WinningStatistic;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +22,14 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        winningResults.values().forEach(winningGrade ->{
-            String message = String.format("%d개 일치(%d) - %d개", winningGrade.getMatchingCount()
-                    , winningGrade.getWinningPrice(), winningGrade.getCount());
-            System.out.println(message);
-        });
+        winningResults.values().stream()
+                .filter(winningGrade -> winningGrade.isWinningGrade())
+                .sorted(Comparator.comparing(WinningGrade::getWinningPrice))
+                .forEach(winningResult -> {
+                    String message = MessageGenerator.generate(winningResult);
+                    System.out.println(message);
+                });
+
 
         String profitOrLoss = winningStatistic.totalIncomeRate(purchasePrice) >= 1 ? "이익" : "손해";
 

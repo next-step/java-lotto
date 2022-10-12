@@ -14,6 +14,11 @@ public class WinningGrade {
         this.count = count;
     }
 
+
+    public WinningPrice winningPrice(){
+        return this.winningPrice;
+    }
+
     public int getMatchingCount() {
         return this.winningPrice.getMatchingCount();
     }
@@ -40,5 +45,13 @@ public class WinningGrade {
                 "count=" + count +
                 ", winningPrice=" + winningPrice +
                 '}';
+    }
+
+    public boolean isWinningGrade() {
+        return this.winningPrice.isWinningGrade();
+    }
+
+    public boolean isSecond() {
+        return this.winningPrice.isSecond();
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public class WinningStatistic {
     }
 
     private Map<WinningPrice, WinningGrade> initWinningGrades() {
+
         return Map.of(
                 WinningPrice.FIRST, new WinningGrade(WinningPrice.FIRST),
                 WinningPrice.SECOND, new WinningGrade(WinningPrice.SECOND),
