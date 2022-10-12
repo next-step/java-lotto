@@ -18,7 +18,7 @@ public class ResultView {
     private static final String NEW_LINE = "\n";
     
     public static void purchasedLottoNumbersPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
-        System.out.printf(PURCHASED_LOTTO_NUMBER_PRINT_FORM, paymentPrice.numberOfAutoLotto());
+        System.out.printf(PURCHASED_LOTTO_NUMBER_PRINT_FORM, paymentPrice.countOfAutoLotto());
         lottoTickets.getLottoTickets().stream()
                 .map(ResultView::lottoTicketPrintFormat)
                 .forEach(System.out::println);

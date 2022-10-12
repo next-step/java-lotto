@@ -21,7 +21,7 @@ public class AutoLottoIssueStrategy implements LottoIssueStrategy {
     }
     
     private List<LottoTicket> issueLottoTicket(PaymentPrice paymentPrice) {
-        return IntStream.range(ZERO, paymentPrice.numberOfAutoLotto())
+        return IntStream.range(ZERO, paymentPrice.countOfAutoLotto())
                 .mapToObj(ticketCount -> new LottoTicket(issueLotto(shuffleLottoNumbers())))
                 .collect(Collectors.toList());
     }

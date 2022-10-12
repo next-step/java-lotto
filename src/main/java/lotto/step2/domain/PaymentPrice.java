@@ -10,6 +10,7 @@ public class PaymentPrice {
     private static final int TICKET_PRICE = 1000;
     
     private final int paymentPrice;
+    private int countOfManualLotto;
     
     public PaymentPrice(String paymentPrice) {
         this.paymentPrice = checkLottoPaymentPriceInputFormatException(paymentPrice);
@@ -23,8 +24,16 @@ public class PaymentPrice {
         return Integer.parseInt(paymentPrice);
     }
     
-    public int numberOfAutoLotto() {
-        return this.paymentPrice / TICKET_PRICE;
+    public void inputCountOfManualLotto(final String inputCountOfManualLotto) {
+        this.countOfManualLotto = Integer.parseInt(inputCountOfManualLotto);
+    }
+    
+    public int countOfAutoLotto() {
+        return (this.paymentPrice - TICKET_PRICE * countOfManualLotto) / TICKET_PRICE;
+    }
+    
+    public int countOfManualLotto() {
+        return countOfManualLotto;
     }
     
     public int getPaymentPrice() {

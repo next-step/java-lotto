@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class PaymentPriceTest {
     private static final String EXCEPTION_MESSAGE = "올바른 입력 값이 아닙니다. 다시 입력해 주세요.";
@@ -17,7 +18,7 @@ public class PaymentPriceTest {
     @Test
     @DisplayName("입력된 금액에 따른 로또 티켓 수")
     void numberOfTickets() {
-        assertThat(PaymentPriceTest.PAYMENT_PRICE.numberOfAutoLotto()).isEqualTo(14);
+        assertThat(PaymentPriceTest.PAYMENT_PRICE.countOfAutoLotto()).isEqualTo(14);
     }
     
     @Test
@@ -80,6 +81,12 @@ public class PaymentPriceTest {
     @Test
     @DisplayName("자동과 수동 로또 개수 구분")
     void divideAutoAndManual() {
-    
+        PAYMENT_PRICE.inputCountOfManualLotto("3");
+        final int countOfAutoLotto = PAYMENT_PRICE.countOfAutoLotto();
+        final int countOfManualLotto = PAYMENT_PRICE.countOfManualLotto();
+        assertAll(
+                () -> assertThat(countOfAutoLotto).isEqualTo(11),
+                () -> assertThat(countOfManualLotto).isEqualTo(3)
+        );
     }
 }
