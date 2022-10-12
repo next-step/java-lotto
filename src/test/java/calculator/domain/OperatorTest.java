@@ -32,15 +32,11 @@ public class OperatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @ParameterizedTest
+    @Test
     @DisplayName("0으로 나누면 예외 발생")
-    @CsvSource(
-            delimiter = ':',
-            value = {"0:10", "10:0", "0:0"}
-    )
-    void operateDivide(int number1, int number2) {
+    void operateDivide() {
         assertThatThrownBy(() -> {
-            Operator.DIVIDE.execute(number1, number2);
+            Operator.DIVIDE.execute(10, 0);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

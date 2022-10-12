@@ -9,8 +9,8 @@ public enum Operator {
     MINUS("-", (firstOperand, secondOperand) -> (firstOperand - secondOperand)),
     MULTIPLY("*", (firstOperand, secondOperand) -> (firstOperand * secondOperand)),
     DIVIDE("/", (firstOperand, secondOperand) -> {
-        if (firstOperand == 0 || secondOperand == 0) {
-            throw new IllegalArgumentException("0값은 나눌 수 없습니다.");
+        if (secondOperand == 0) {
+            throw new IllegalArgumentException("0값으로는 나눌 수 없습니다.");
         }
         return firstOperand / secondOperand;
     });

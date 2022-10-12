@@ -1,4 +1,4 @@
-package calculator.validate;
+package validator;
 
 import java.util.InputMismatchException;
 import java.util.regex.Pattern;
@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class InputValidator {
 
     private final static Pattern PATTERN_NUMBER = Pattern.compile("^-?\\d+$");
-    private final static Pattern PATTERN_OPER = Pattern.compile("[+\\-*/]");
+    private final static Pattern PATTERN_OPERATOR = Pattern.compile("[+\\-*/]");
     private final static String SEPARATOR = " ";
 
     private InputValidator() {
@@ -51,10 +51,17 @@ public class InputValidator {
         if (isNullOrSpace(text)) {
             return false;
         }
-        return PATTERN_OPER.matcher(text).matches();
+        return PATTERN_OPERATOR.matcher(text).matches();
+    }
+
+    public static boolean isContains(String text, CharSequence separator) {
+        if (isNullOrSpace(text)) {
+            return false;
+        }
+        return text.contains(separator);
     }
 
     private static boolean isNullOrSpace(String text) {
-        return text.equals("") || text == null;
+        return text == null || text.equals("");
     }
 }
