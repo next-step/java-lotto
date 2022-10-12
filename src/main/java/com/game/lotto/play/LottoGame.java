@@ -2,33 +2,31 @@ package com.game.lotto.play;
 
 import com.game.lotto.number.LottoNumberGenerator;
 import com.game.lotto.rate.EarningRates;
-import com.game.lotto.ticket.Ticket;
-import com.game.lotto.ticket.MyTickets;
-import com.game.lotto.ticket.TicketsByStrikes;
+import com.game.lotto.ticket.*;
 
 public class LottoGame {
     private final long inputPrice;
-    private final long ticketCount;
+    private final TicketCount ticketCount;
     private final MyTickets myTickets;
-    private TicketsByStrikes ticketsByStrikes;
+    private TicketsByRanks ticketsByRanks;
 
-    public LottoGame(long inputPrice, LottoNumberGenerator numberGenerator) {
+    public LottoGame(int inputPrice, LottoNumberGenerator numberGenerator) {
         this.inputPrice = inputPrice;
-        this.ticketCount = inputPrice / Ticket.PRICE_OF_TICKET_UNIT;
+        this.ticketCount = new TicketCount(inputPrice);
         this.myTickets = new MyTickets(ticketCount, numberGenerator);
     }
 
-    public long getTicketCount() {
-        return ticketCount;
+    public int getTicketCount() {
+        return ticketCount.getCount();
     }
 
-    public double compareWithWinnerTicketAndGetEarningRates(Ticket winnerTicket) {
-        ticketsByStrikes = new TicketsByStrikes(winnerTicket, myTickets.getTickets());
+    public double compareWithWinnerTicketAndGetEarningRates(WinnerTicket winnerTicket) {
+        ticketsByRanks = new TicketsByRanks(winnerTicket, myTickets.getTickets());
         return getEarningRates();
     }
 
     private double getEarningRates() {
-        EarningRates earningRates = new EarningRates(inputPrice, ticketsByStrikes);
+        EarningRates earningRates = new EarningRates(inputPrice, ticketsByRanks);
         return earningRates.calculateEarningRatesAndPrintResults();
     }
 }
