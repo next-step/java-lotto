@@ -18,8 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class OutputViewTest {
 
-    final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private final PrintStream standardOut = System.out;
 
     @BeforeEach
     void setUp() {
@@ -50,7 +50,7 @@ class OutputViewTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("주어진 로또의 개수와, 로또 숫자들을 출력한다.")
+    @DisplayName("당첨 통계를 출력한다.")
     @Test
     void print_winning_statistics() {
         String expected = "당첨 통계\n" +
