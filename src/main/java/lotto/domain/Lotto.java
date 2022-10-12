@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidLottoNumberSizeException;
+import lotto.domain.exception.NotNumberStringException;
+import lotto.domain.exception.OutOfRangeLottoNumberException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;

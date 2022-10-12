@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.exception.NotNumberStringException;
+import lotto.domain.exception.NotZeroOrMoreNumberException;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
