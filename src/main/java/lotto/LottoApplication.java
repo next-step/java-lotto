@@ -6,6 +6,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
 
-        new LottoController();
+        LottoController lottoController = new LottoController();
+        lottoController.start();
     }
 }

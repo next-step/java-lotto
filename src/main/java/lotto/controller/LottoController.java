@@ -10,16 +10,21 @@ import lotto.view.ResultView;
 
 public class LottoController {
 
-    public LottoController() {
+    public void start() {
         int totalPrice = InputView.inputTotalPrice();
+
         LottoTickets lottoTickets = LottoTickets.from(totalPrice);
+
         ResultView.printTotalCount(lottoTickets.countTicket());
         ResultView.printResultTickets(lottoTickets.createTickets());
-        List<LottoNumber> winningNumbers = InputView.inputLottoNumberLastResult();
-        ResultView.printWinningNumber(winningNumbers);
-        LottoResult lottoResult = lottoTickets.calculate(Lotto.of(winningNumbers));
-        ResultView.printStatistics(lottoResult.getStatistics());
 
+        List<LottoNumber> winningNumbers = InputView.inputLottoNumberLastResult();
+
+        ResultView.printWinningNumber(winningNumbers);
+
+        LottoResult lottoResult = lottoTickets.calculate(Lotto.of(winningNumbers));
+
+        ResultView.printStatistics(lottoResult.getStatistics());
         ResultView.printRating(lottoResult.getStatistics(), totalPrice);
     }
 }
