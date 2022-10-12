@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Store {
 
-
     public void buyLotto() {
         LottoNumberCreateMachine lottoNumberCreateMachine = new LottoNumberCreateMachine();
         LottoBuyResource lottoBuyResource = new LottoBuyResource(LottoInput.getPrice(), LottoInput.getManualLottoCount());

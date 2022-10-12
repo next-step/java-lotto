@@ -30,7 +30,7 @@ public class Lottos {
         return countingRank;
     }
 
-    public void addLottos(List<Lotto> newLotto){
+    public void addLottos(List<Lotto> newLotto) {
         this.lottos.addAll(newLotto);
     }
 
