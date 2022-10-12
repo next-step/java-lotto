@@ -1,4 +1,4 @@
-package lotto.command;
+package stringcalculator.command;
 
 import java.util.Set;
 

@@ -1,8 +1,8 @@
-package lotto;
+package stringcalculator;
 
 import java.util.Scanner;
 
-import lotto.domain.StringArithmeticInput;
+import stringcalculator.domain.StringArithmeticInput;
 
 public class Calculator {
     public static void main(String[] args) {

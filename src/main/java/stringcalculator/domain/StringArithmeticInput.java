@@ -1,4 +1,4 @@
-package lotto.domain;
+package stringcalculator.domain;
 
 public class StringArithmeticInput {
     private static final String DELIMITER = " ";

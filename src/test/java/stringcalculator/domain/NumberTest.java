@@ -1,4 +1,4 @@
-package lotto.domain;
+package stringcalculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
