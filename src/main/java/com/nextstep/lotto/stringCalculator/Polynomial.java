@@ -1,4 +1,4 @@
-package com.nextstep.lotto;
+package com.nextstep.lotto.stringCalculator;
 
 import java.util.List;
 
