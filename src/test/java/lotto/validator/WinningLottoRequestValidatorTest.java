@@ -16,7 +16,7 @@ public class WinningLottoRequestValidatorTest {
     @DisplayName("당첨 번호가 숫자, 공백, 콤마 외의 기호를 포함할 경우 Exception을 발생시킨다.")
     @ValueSource(strings = {"1, 2, 3; 4, 5, 6", "1, 2, 3, 4, a, 5", "1, 2, 3, *. 5, 6"})
     void exceptionTest1(String numbers) {
-        WinningLottoRequest winningLottoRequest = new WinningLottoRequest(numbers, 10);
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(numbers, 10);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> WinningLottoRequestValidator.validate(winningLottoRequest));
         assertThat(exception.getMessage()).isEqualTo(STRING_NUMBER_WRONG_CHARACTER);
@@ -26,7 +26,7 @@ public class WinningLottoRequestValidatorTest {
     @DisplayName("보너스 번호가 1~45의 범위를 벗어난 경우 Exception을 발생시킨다.")
     @ValueSource(ints = {0, 46, -10})
     void exceptionTest2(int bonusNumber) {
-        WinningLottoRequest winningLottoRequest = new WinningLottoRequest("1, 2, 3, 4, 5, 6", bonusNumber);
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of("1, 2, 3, 4, 5, 6", bonusNumber);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> WinningLottoRequestValidator.validate(winningLottoRequest));
         assertThat(exception.getMessage()).isEqualTo(WRONG_BONUS_NUMBER);

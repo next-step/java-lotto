@@ -3,6 +3,7 @@ package lotto;
 import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.WinningLotto;
+import lotto.models.request.PaymentRequest;
 import lotto.models.request.WinningLottoRequest;
 import lotto.services.LottoService;
 import lotto.services.LottoStatisticsService;
@@ -18,16 +19,15 @@ public class LottoApplication {
         LottoService lottoService = new LottoService();
         LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
 
-        String payment = Printer.requestPayment();
-        List<Lotto> lottos = lottoService.issueLotto(Integer.parseInt(payment), new NormalPickNumberStrategy());
+        PaymentRequest paymentRequest = Printer.requestPayment();
+        List<Lotto> lottos = lottoService.issueLotto(paymentRequest, new NormalPickNumberStrategy());
         Printer.printLottoNumbers(lottos);
 
-        String winningNumber = Printer.requestWinningNumber();
-        int bonusNumber = Printer.requestBonusNumber();
-        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, WinningLotto.from(new WinningLottoRequest(winningNumber, bonusNumber)));
+        WinningLottoRequest winningLottoRequest = Printer.requestWinningLotto();
+        List<LottoStatistics> lottoStatistics = lottoStatisticsService.getLottoStatistics(lottos, WinningLotto.from(winningLottoRequest));
         Printer.printStatistics(lottoStatistics);
 
-        float revenueRatio = lottoStatisticsService.getRevenueRatio(lottoStatistics, Integer.parseInt(payment));
+        float revenueRatio = lottoStatisticsService.getRevenueRatio(lottoStatistics, paymentRequest);
         Printer.printRevenueRatio(revenueRatio);
     }
 }

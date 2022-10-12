@@ -34,7 +34,7 @@ class RankTest {
 
     @BeforeAll
     static void setWinningLotto() {
-        WinningLottoRequest winningLottoRequest = new WinningLottoRequest(WINNING_NUMBER, BONUS_NUMBER);
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(WINNING_NUMBER, BONUS_NUMBER);
         winningLotto = WinningLotto.from(winningLottoRequest);
     }
 

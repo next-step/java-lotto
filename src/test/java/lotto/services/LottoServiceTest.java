@@ -1,5 +1,6 @@
 package lotto.services;
 
+import lotto.models.request.PaymentRequest;
 import lotto.strategy.NormalPickNumberStrategy;
 import lotto.strategy.PickNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ class LottoServiceTest {
     @DisplayName("입력한 금액만큼 로또를 발급한다.")
     @CsvSource({"1000,1", "2000,2", "3300,3", "4900,4"})
     void issueLotto1(int payment, int issueLottoCount) {
-        assertThat(lottoService.issueLotto(payment, strategy).size()).isEqualTo(issueLottoCount);
+        assertThat(lottoService.issueLotto(PaymentRequest.of(payment), strategy).size()).isEqualTo(issueLottoCount);
     }
 
 }

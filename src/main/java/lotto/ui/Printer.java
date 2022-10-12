@@ -3,14 +3,17 @@ package lotto.ui;
 import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.enums.Rank;
+import lotto.models.request.PaymentRequest;
+import lotto.models.request.WinningLottoRequest;
 
 import java.util.List;
 
 public class Printer {
 
-    public static String requestPayment() {
+    public static PaymentRequest requestPayment() {
         System.out.println("구매금액을 입력해 주세요.");
-        return InputScanner.stringScan();
+        int payment = InputScanner.intScan();
+        return PaymentRequest.of(payment);
     }
 
     public static void printLottoNumbers(List<Lotto> lottos) {
@@ -18,6 +21,16 @@ public class Printer {
         lottos.forEach(lotto -> {
             System.out.println(lotto.getLottoNumbers().toString());
         });
+    }
+
+    public static WinningLottoRequest requestWinningLotto() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String winningNumbers = InputScanner.stringScan();
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = InputScanner.intScan();
+
+        return WinningLottoRequest.of(winningNumbers, bonusNumber);
     }
 
     public static String requestWinningNumber() {

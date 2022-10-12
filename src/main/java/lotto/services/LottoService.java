@@ -1,6 +1,7 @@
 package lotto.services;
 
 import lotto.models.Lotto;
+import lotto.models.request.PaymentRequest;
 import lotto.strategy.NormalPickNumberStrategy;
 import lotto.strategy.PickNumberStrategy;
 
@@ -16,8 +17,8 @@ public class LottoService {
         this.pickNumberService = new PickNumberService();
     }
 
-    public List<Lotto> issueLotto(int payment, PickNumberStrategy strategy) {
-        int count = payment / LOTTO_PRICE;
+    public List<Lotto> issueLotto(PaymentRequest paymentRequest, PickNumberStrategy strategy) {
+        int count = paymentRequest.getPayment() / LOTTO_PRICE;
 
         List<Lotto> lottos = new ArrayList<>();
         while (lottos.size() < count) {

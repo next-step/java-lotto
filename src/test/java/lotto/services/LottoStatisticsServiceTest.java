@@ -4,6 +4,7 @@ import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.WinningLotto;
 import lotto.models.enums.Rank;
+import lotto.models.request.PaymentRequest;
 import lotto.models.request.WinningLottoRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -43,7 +44,7 @@ class LottoStatisticsServiceTest {
 
     @BeforeAll
     static void setWinningLotto() {
-        winningLotto = WinningLotto.from(new WinningLottoRequest(WINNING_NUMBER, 10));
+        winningLotto = WinningLotto.from(WinningLottoRequest.of(WINNING_NUMBER, 10));
     }
 
     @Test
@@ -54,7 +55,7 @@ class LottoStatisticsServiceTest {
         lottoStatistics.forEach(statistics -> {
             if (statistics.getRank().equals(Rank.FIRST)) {
                 assertThat(statistics.getCount()).isEqualTo(1);
-            } else if (statistics.getRank().equals(Rank.FOURTH)) {
+            } else if (statistics.getRank().equals(Rank.FIFTH)) {
                 assertThat(statistics.getCount()).isEqualTo(1);
             } else if (statistics.getRank().equals(Rank.OTHER)) {
                 assertThat(statistics.getCount()).isEqualTo(1);
@@ -84,7 +85,7 @@ class LottoStatisticsServiceTest {
                 .mapToLong(Long::longValue)
                 .sum();
 
-        assertThat(lottoStatisticsService.getRevenueRatio(lottoStatistics, PAYMENT)).isEqualTo(totalAmount / (PAYMENT / 1000f * 1000));
+        assertThat(lottoStatisticsService.getRevenueRatio(lottoStatistics, PaymentRequest.of(PAYMENT))).isEqualTo(totalAmount / (PAYMENT / 1000f * 1000));
     }
 
 }
