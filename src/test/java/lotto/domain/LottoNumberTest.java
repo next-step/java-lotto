@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
@@ -13,14 +13,15 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
-public class LottoTest {
+public class LottoNumberTest {
 
     @DisplayName("맞은 로또 숫자 확인 테스트")
     @ParameterizedTest
     @MethodSource("randomNumberMatchingCase")
     void match_number_find(List<Integer> lottoNum, List<Integer> winningNum, int matchingNum) {
-        Lotto lotto = new Lotto(lottoNum);
+        LottoNumber lotto = new LottoNumber(lottoNum);
         assertThat(lotto.findMatchingCount(winningNum)).isEqualTo(matchingNum);
     }
 
@@ -28,8 +29,8 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("exceptionNumberCase")
     void validate_lotto_number(List<Integer> lottoNum, String message) {
-        assertThatThrownBy(() -> new Lotto(lottoNum)).isInstanceOf(IllegalArgumentException.class)
-                                                     .hasMessageContaining(message);
+        assertThatThrownBy(() -> new LottoNumber(lottoNum)).isInstanceOf(IllegalArgumentException.class)
+                                                           .hasMessageContaining(message);
     }
 
     static Stream<Arguments> randomNumberMatchingCase() {

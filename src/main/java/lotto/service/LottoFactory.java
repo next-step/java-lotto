@@ -7,6 +7,7 @@ import java.util.List;
 
 import lotto.Calculator;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public class LottoFactory {
     private static final int PICK_NUMBER = 6;
@@ -21,14 +22,14 @@ public class LottoFactory {
         this.calculator = calculator;
     }
 
-    public List<Lotto> generateLotto(BigDecimal payAmount) {
-        List<Lotto> lottos = new ArrayList<>();
+    public Lotto generateLotto(BigDecimal payAmount) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         int num = calculator.calculatePurchasedLottoNum(payAmount);
 
         for (int i = 0; i < num; i++) {
-            lottos.add(new Lotto(generateRandomNumbers()));
+            lottoNumbers.add(new LottoNumber(generateRandomNumbers()));
         }
-        return lottos;
+        return new Lotto(lottoNumbers);
     }
 
     private List<Integer> generateRandomNumbers() {

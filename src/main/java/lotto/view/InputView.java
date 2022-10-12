@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import lotto.domain.WinningNumber;
+
 public class InputView {
 
     public BigDecimal inputPayAmount() {
@@ -14,12 +16,12 @@ public class InputView {
         return payAmount;
     }
 
-    public List<Integer> inputBeforeWinningNumber() {
+    public WinningNumber inputBeforeWinningNumber() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         String[] split = input.split(",");
-        return parseToWinningNumbers(split);
+        return new WinningNumber(parseToWinningNumbers(split));
     }
 
     private List<Integer> parseToWinningNumbers(String[] split) {

@@ -6,18 +6,20 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.Lotto;
-import lotto.Prize;
+import lotto.domain.Prize;
+import lotto.domain.LottoNumber;
 
 public class OutputView {
 
-    public void printPurchasedLotto(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개 구매했습니다.");
-        for (Lotto lotto : lottos) {
-            System.out.println("[" + printLottoNumber(lotto) + "]");
+    public void printPurchasedLotto(Lotto lotto) {
+        System.out.println(lotto.getLottoSize() + "개 구매했습니다.");
+
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            System.out.println("[" + printLottoNumber(lottoNumber) + "]");
         }
     }
 
-    private String printLottoNumber(Lotto lotto) {
+    private String printLottoNumber(LottoNumber lotto) {
         List<Integer> numbers = lotto.getNumbers();
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -29,7 +31,7 @@ public class OutputView {
         return stringBuilder.toString();
     }
 
-    public void printStatisticLotto(Map<Integer, Integer> rankMap) {
+    public void printStatisticLotto(Map<Prize, Integer> rankMap) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         printRank(rankMap);
@@ -41,10 +43,11 @@ public class OutputView {
                 "입니다.");
     }
 
-    private void printRank(Map<Integer, Integer> rankMap) {
-        Arrays.stream(Prize.values()).sorted(Comparator.comparing(Prize::getWinningCount)).forEach(p -> {
+    private void printRank(Map<Prize, Integer> rankMap) {
+        Arrays.stream(Prize.values()).filter(v -> v.getWinningCount() > 0).sorted(
+                Comparator.comparing(Prize::getWinningCount)).forEach(p -> {
             System.out.println(p.getWinningCount() + "개 일치 (" + p.getPrizeMoney() + "원) - " +
-                               rankMap.get(p.getWinningCount()) + "개");
+                               rankMap.get(p) + "개");
         });
     }
 }
