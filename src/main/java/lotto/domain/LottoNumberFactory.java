@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumberFactory {
@@ -16,8 +13,8 @@ public class LottoNumberFactory {
             41, 42, 43, 44, 45
     );
 
-    public static List<LottoNumber> getNumbers(int number) {
-        return getIntegers(number).stream().map(i -> new LottoNumber(i)).collect(Collectors.toList());
+    public static Set<LottoNumber> getNumbers(int number) {
+        return getIntegers(number).stream().map(i -> new LottoNumber(i)).collect(Collectors.toSet());
     }
 
     private static List<Integer> getIntegers(int number) {

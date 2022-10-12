@@ -2,21 +2,21 @@ package lotto.domain;
 
 public class Lotto {
 
-    private final LottoNumberList lottoNumbers;
+    private final LottoNumberSet lottoNumbers;
 
     public Lotto() {
-        this(LottoNumberList.getLottoNumbers());
+        this(LottoNumberSet.getLottoNumbers());
     }
 
-    public Lotto(LottoNumberList lottoNumberList) {
-        this.lottoNumbers = lottoNumberList;
+    public Lotto(LottoNumberSet lottoNumberSet) {
+        this.lottoNumbers = lottoNumberSet;
     }
 
     public int match(Lotto lotto) {
         return lottoNumbers.match(lotto.numbers());
     }
 
-    private LottoNumberList numbers() {
+    private LottoNumberSet numbers() {
         return this.lottoNumbers;
     }
 
