@@ -123,4 +123,12 @@ public class PaymentPriceTest {
                 .isThrownBy(() -> paymentPrice.inputCountOfManualLotto(" "))
                 .withMessage(EXCEPTION_MESSAGE);
     }
+    
+    @Test
+    @DisplayName("수동 로또 개수 입력 - 공백 입력 시 예외")
+    void input_count_of_manual_lotto_is_exceeded_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> paymentPrice.inputCountOfManualLotto("15"))
+                .withMessage("로또 개수를 초과하였습니다. 다시 입력해주세요.");
+    }
 }

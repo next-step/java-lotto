@@ -25,15 +25,23 @@ public class PaymentPrice {
     }
     
     public void inputCountOfManualLotto(final String inputCountOfManualLotto) {
-        checkCountOfManualLottoInputForm(inputCountOfManualLotto);
-        this.countOfManualLotto = Integer.parseInt(inputCountOfManualLotto);
+        countOfManualLotto = checkCountOfManualLottoInputForm(inputCountOfManualLotto);
+        checkCountOfManualLottoIsExceeded(countOfManualLotto);
     }
     
-    private void checkCountOfManualLottoInputForm(final String inputCountOfManualLotto) {
+    private void checkCountOfManualLottoIsExceeded(final int countOfManualLotto) {
+        if (countOfManualLotto * TICKET_PRICE > paymentPrice) {
+            throw new IllegalArgumentException("로또 개수를 초과하였습니다. 다시 입력해주세요.");
+        }
+    }
+    
+    private int checkCountOfManualLottoInputForm(final String inputCountOfManualLotto) {
         final Matcher matcher = Pattern.compile("[0-9]+").matcher(inputCountOfManualLotto);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
+        
+        return Integer.parseInt(inputCountOfManualLotto);
     }
     
     public int countOfAutoLotto() {
