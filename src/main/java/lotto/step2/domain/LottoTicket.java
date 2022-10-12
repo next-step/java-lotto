@@ -3,17 +3,20 @@ package lotto.step2.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private static final String EXCEEDED_NUMBER_OF_LOTTO_NUMBERS_EXCEPTION_MESSAGE = "로또 번호는 6개까지만 가질 수 있습니다.";
+    private static final String LOTTO_NUMBERS_INPUT_FORM = "(4[0-5]|[1-3][0-9]|[1-9])(,(4[0-5]|[1-3][0-9]|[1-9])){5}";
+    private static final String INPUT_FORMAT_EXCEPTION_MESSAGE = "올바른 입력 값이 아닙니다. 다시 입력해 주세요.";
     private static final int MAX_COUNT_OF_LOTTO_NUMBER = 6;
     
     private final List<LottoNumber> lottoTicket;
     
     public LottoTicket(List<LottoNumber> lottoTicket) {
         if (lottoTicket.size() > MAX_COUNT_OF_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(EXCEEDED_NUMBER_OF_LOTTO_NUMBERS_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
         this.lottoTicket = lottoTicket;
     }
@@ -23,10 +26,19 @@ public class LottoTicket {
     }
     
     private List<LottoNumber> getLottoNumbers(final String lottoTicket) {
-        return Arrays.stream(split(removeSpace(lottoTicket)))
+        return Arrays.stream(split(checkLottoTicketInputForm(removeSpace(lottoTicket))))
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+    
+    private String checkLottoTicketInputForm(final String lottoTicket) {
+        final Matcher matcher = Pattern.compile(LOTTO_NUMBERS_INPUT_FORM).matcher(lottoTicket);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+        }
+    
+        return lottoTicket;
     }
     
     private String[] split(final String removeSpace) {
