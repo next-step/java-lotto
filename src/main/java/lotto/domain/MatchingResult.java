@@ -5,14 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class MatchingResult {
-
-    private List<Integer> matchingNumbers;
     private int matchingCount;
     private boolean includeBonusNumber;
-
-    public MatchingResult(List<Integer> matchingNumbers) {
-        this.matchingNumbers = Collections.unmodifiableList(matchingNumbers);
-    }
 
     public MatchingResult(int matchingCount, boolean includeBonusNumber) {
         this.matchingCount = matchingCount;
@@ -27,11 +21,6 @@ public class MatchingResult {
         return this.includeBonusNumber;
     }
 
-    public int matchingNumberCount() {
-        return this.matchingNumbers.size();
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,4 +34,11 @@ public class MatchingResult {
         return Objects.hash(matchingCount, includeBonusNumber);
     }
 
+    @Override
+    public String toString() {
+        return "MatchingResult{" +
+                "matchingCount=" + matchingCount +
+                ", includeBonusNumber=" + includeBonusNumber +
+                '}';
+    }
 }

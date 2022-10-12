@@ -17,15 +17,6 @@ public class Lotto {
         }
     }
 
-    public MatchingResult getMatchingResult(List<Integer> answer) {
-
-        List<Integer> matchedNumbers = this.lottoNumbers.stream()
-                .filter(number -> answer.contains(number))
-                .collect(Collectors.toList());
-
-        return new MatchingResult(matchedNumbers);
-    }
-
     public WinningPrice winningPrice(WinningNumber winningNumber) {
 
         MatchingResult matchingResult = winningNumber.results(this.lottoNumbers);

@@ -33,4 +33,12 @@ public class WinningGrade {
     public void increaseCount() {
         this.count += 1;
     }
+
+    @Override
+    public String toString() {
+        return "WinningGrade{" +
+                "count=" + count +
+                ", winningPrice=" + winningPrice +
+                '}';
+    }
 }

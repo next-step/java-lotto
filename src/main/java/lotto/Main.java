@@ -19,11 +19,11 @@ public class Main {
         ResultView.printLottoNumber(lotties);
 
         List<Integer> lastWeekAnswer = InputView.lastWeekAnswer();
-        List<MatchingResult> matchingResults = LottoController.getMatchingResults(lotties, lastWeekAnswer);
+//        List<MatchingResult> matchingResults = LottoController.getMatchingResults(lotties, lastWeekAnswer);
 
-        WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
+//        WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
 
-        ResultView.showResult(winningStatistic, purchasePrice);
+//        ResultView.showResult(winningStatistic, purchasePrice);
     }
 }
 

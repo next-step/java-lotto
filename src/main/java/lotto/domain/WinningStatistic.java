@@ -27,9 +27,7 @@ public class WinningStatistic {
 
     private void calculateIncome() {
         this.matchingResults.forEach(matchingResult -> {
-            this.winningGrades.get(
-                    WinningPrice.decideWithMatchingCount(matchingResult.matchingNumberCount())
-            ).increaseCount();
+            this.winningGrades.get(WinningPrice.decideGrade(matchingResult)).increaseCount();
         });
     }
 
