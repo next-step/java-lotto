@@ -45,7 +45,7 @@ public class WinningLottoNumbers {
     
     public void inputBonusNumber(String bonusNumber) {
         this.bonusNumber = checkWinningLottoBonusNumberInputFormatException(bonusNumber);
-    
+        
         if (this.winningLottoNumbersInput.contains(this.bonusNumber)) {
             throw new IllegalArgumentException(LOTTO_BONUS_NUMBER_INPUT_EXCEPTION_MESSAGE);
         }

@@ -11,7 +11,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class WinningLottoNumbersTest {
     public final WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6");
