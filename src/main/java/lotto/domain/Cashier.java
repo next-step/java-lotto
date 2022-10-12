@@ -18,8 +18,7 @@ public class Cashier {
         this(new Money(money));
     }
 
-    // TODO: 메소드 이름 바꾸기
-    public int findCountOfPlayLotto() {
+    public int countPlayLotto() {
         return this.money.divideBy(LOTTO_PURCHASING_UNIT)
                 .intValue();
     }

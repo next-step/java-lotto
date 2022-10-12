@@ -10,7 +10,7 @@ public class Application {
 
     public static void main(String[] args) {
         Cashier cashier = createCashier();
-        int playLottoCount = cashier.findCountOfPlayLotto();
+        int playLottoCount = cashier.countPlayLotto();
         List<Lotto> lottos = LottoGenerator.generate(playLottoCount);
         OutputView.printGeneratedLottos(lottos);
 
