@@ -99,4 +99,28 @@ public class PaymentPriceTest {
                 .isThrownBy(() -> paymentPrice.inputCountOfManualLotto(input))
                 .withMessage(EXCEPTION_MESSAGE);
     }
+    
+    @Test
+    @DisplayName("수동 로또 개수 입력 - \"\" 입력 시 예외")
+    void input_count_of_manual_lotto_empty_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> paymentPrice.inputCountOfManualLotto(""))
+                .withMessage(EXCEPTION_MESSAGE);
+    }
+    
+    @Test
+    @DisplayName("수동 로또 개수 입력 - 특수문자 입력 시 예외")
+    void input_count_of_manual_lotto_special_characters_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> paymentPrice.inputCountOfManualLotto("%"))
+                .withMessage(EXCEPTION_MESSAGE);
+    }
+    
+    @Test
+    @DisplayName("수동 로또 개수 입력 - 공백 입력 시 예외")
+    void input_count_of_manual_lotto_space_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> paymentPrice.inputCountOfManualLotto(" "))
+                .withMessage(EXCEPTION_MESSAGE);
+    }
 }
