@@ -46,7 +46,13 @@ public class LottoController {
     }
 
     private void lottoResult(Money money, List<Lotto> lottos, Lotto winner) {
-        LottoOutput.statistics(lottoService.checkLotto(lottos, winner), LottoReward.values());
+        int[] matchList = lottoService.checkLotto(lottos, winner);
+        
+        LottoOutput.statistics();
+        for (int i = 3; i <= lottoService.LOTTO_SIZE; i++) {
+            LottoOutput.match(i, LottoReward.values()[lottoService.LOTTO_SIZE - i].reward(), matchList[i]);
+        }
+
         LottoOutput.yield(lottoService.yield(lottos, winner, money));
     }
 }

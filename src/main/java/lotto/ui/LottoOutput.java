@@ -1,13 +1,10 @@
 package lotto.ui;
 
-import lotto.LottoReward;
 import lotto.domain.Lotto;
 
 import java.util.List;
 
 public class LottoOutput {
-
-    public static int LOTTO_SIZE = 6;
 
     public static void purchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -31,15 +28,11 @@ public class LottoOutput {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void statistics(int[] matchList, LottoReward[] lottoReward) {
+    public static void statistics() {
         StringBuilder result = new StringBuilder();
         result.append("당첨 통계");
         result.append("---------");
         System.out.println(result);
-
-        for (int i = 3; i <= LOTTO_SIZE; i++) {
-            match(i, lottoReward[LOTTO_SIZE - i].reward(), matchList[i]);
-        }
     }
 
     public static void match(int count, int reward, int number) {
