@@ -1,9 +1,9 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.domain.Minus;
-import calculator.domain.Operator;
-import calculator.domain.Plus;
+import calculator.domain.operator.Minus;
+import calculator.domain.operator.Operator;
+import calculator.domain.operator.Plus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

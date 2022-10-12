@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.operator;
 
 public abstract class Operator {
     final int target;
