@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -40,6 +42,17 @@ public class LottoTest {
         Lotto lotto = new Lotto(myLottoNumbers);
 
         assertThat(lotto.matchingCount(answer)).isEqualTo(matchingCount);
+    }
+
+    @Test
+    @DisplayName("2등, 3등 테스트")
+    void second_or_third(){
+        Lotto myLottoNumbers1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto myLottoNumbers2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        WinningNumber answer = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 8), 6);
+
+        assertThat(myLottoNumbers1.getMatchingResult(answer)).isEqualTo(WinningPrice.SECOND);
+        assertThat(myLottoNumbers2.getMatchingResult(answer)).isEqualTo(WinningPrice.THIRD);
     }
 
 }
