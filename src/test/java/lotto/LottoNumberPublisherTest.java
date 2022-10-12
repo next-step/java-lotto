@@ -7,6 +7,7 @@ public class LottoNumberPublisherTest {
     @Test
     void 로또번호를발행한다() {
         int[] lottoNumbers = LottoNumberPublisher.publish();
+
         Assertions.assertThat(lottoNumbers).hasSize(6);
     }
 }
