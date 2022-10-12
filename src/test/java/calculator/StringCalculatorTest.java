@@ -43,4 +43,12 @@ public class StringCalculatorTest {
     public void isVaildOperator_유효하지않은_연산자(String operator) {
         assertThatIllegalArgumentException().isThrownBy(() -> StringCalculator.isValidOperator(operator));
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1 + 2:3", "1 + 3 + 5:9", "-1 + 0 + 1 + 2:2"}, delimiter = ':')
+    public void sum(String text, int expected) {
+        int result = StringCalculator.calculate(text);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }
