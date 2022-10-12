@@ -20,11 +20,13 @@ public class WinningNumber {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
-    }
+    public MatchingResult results(List<Integer> lottoNumbers) {
+        int matchingCount = (int) this.lottoNumbers.stream()
+                .filter(winningNumber -> lottoNumbers.contains(winningNumber))
+                .count();
 
-    public int getBonusNumber() {
-        return this.bonusNumber;
+        boolean containBonusNumber = lottoNumbers.contains(this.bonusNumber);
+
+        return new MatchingResult(matchingCount, containBonusNumber);
     }
 }

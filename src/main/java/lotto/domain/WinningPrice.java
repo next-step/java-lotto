@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum WinningPrice {
 
@@ -23,6 +24,23 @@ public enum WinningPrice {
     public static WinningPrice decideWithMatchingCount(int matchingNumberCount) {
         return Arrays.stream(values())
                 .filter(value -> value.getMatchingCount() == matchingNumberCount)
+                .findFirst()
+                .orElse(MISS);
+    }
+
+    private static WinningPrice secondOrThird(boolean containBonusNumber) {
+        if(containBonusNumber){
+            return WinningPrice.SECOND;
+        }
+        return WinningPrice.THIRD;
+    }
+
+    public static WinningPrice decideGrade(MatchingResult matchingResult) {
+        if(matchingResult.getMatchingCount() == 5){
+            return secondOrThird(matchingResult.isIncludeBonusNumber());
+        }
+        return Arrays.stream(values())
+                .filter(value -> value.getMatchingCount() == matchingResult.getMatchingCount())
                 .findFirst()
                 .orElse(MISS);
     }

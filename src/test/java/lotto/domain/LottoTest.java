@@ -51,8 +51,8 @@ public class LottoTest {
         Lotto myLottoNumbers2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
         WinningNumber answer = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 8), 6);
 
-        assertThat(myLottoNumbers1.getMatchingResult(answer)).isEqualTo(WinningPrice.SECOND);
-        assertThat(myLottoNumbers2.getMatchingResult(answer)).isEqualTo(WinningPrice.THIRD);
+        assertThat(myLottoNumbers1.winningPrice(answer)).isEqualTo(WinningPrice.SECOND);
+        assertThat(myLottoNumbers2.winningPrice(answer)).isEqualTo(WinningPrice.THIRD);
     }
 
 }

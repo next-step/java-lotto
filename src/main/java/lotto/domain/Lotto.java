@@ -26,14 +26,11 @@ public class Lotto {
         return new MatchingResult(matchedNumbers);
     }
 
-    public WinningPrice getMatchingResult(WinningNumber winningNumber) {
-        List<Integer> answer = winningNumber.getLottoNumbers();
-        int matchingCount = (int) this.lottoNumbers.stream()
-                .filter(number -> answer.contains(number))
-                .count();
-        boolean containBonusNumber = this.lottoNumbers.contains(winningNumber.getBonusNumber());
+    public WinningPrice winningPrice(WinningNumber winningNumber) {
 
-        return  WinningPrice.decideGrade(matchingCount, containBonusNumber);
+        MatchingResult matchingResult = winningNumber.results(this.lottoNumbers);
+
+        return  WinningPrice.decideGrade(matchingResult);
     }
 
 
