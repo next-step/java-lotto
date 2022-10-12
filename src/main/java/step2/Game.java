@@ -2,18 +2,32 @@ package step2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Game {
 	public static void start(int input) {
 		int amount = validAmount(input) / 1000;
 		Print.amount(amount);
 
-		startRaffle(amount);
+		Result guestResult = startRaffle(amount);
+		Print.winningNumber();
+
+		// Prize.result(guestResult, makeWinningResult(InputView.input().split(", ")));
+		Print.rateOfWin(input, guestResult.results(makeWinningResult(InputView.input().split(", "))));
 	}
 
-	public static void startRaffle(int amount) {
+	public static Set<Integer> makeWinningResult(String[] winningNumbers) {
+		Set<Integer> list = new TreeSet<>();
+		for (int i = 0; i < winningNumbers.length; i++) {
+			list.add(Integer.parseInt(winningNumbers[i]));
+		}
+		return list;
+	}
+
+	public static Result startRaffle(int amount) {
 		Lotto lotto = new Lotto();
 		List<Set<Integer>> list = new ArrayList<>();
 		for (int i = 1; i <= amount; i++) {
@@ -21,7 +35,8 @@ public class Game {
 			Print.result(result);
 			list.add(result);
 		}
-		Result result = new Result(list);
+		Print.newLine();
+		return new Result(list);
 	}
 
 	private static int validAmount(int inputAmount) {
