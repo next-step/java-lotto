@@ -1,9 +1,7 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.domain.operator.Minus;
-import calculator.domain.operator.Operator;
-import calculator.domain.operator.Plus;
+import calculator.domain.operator.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,9 +53,11 @@ public class CalculatorTest {
         List<Operator> operator = new ArrayList<>();
         operator.add(new Minus(5));
         operator.add(new Plus(11));
+        operator.add(new Multiple(2));
+        operator.add(new Divide(7));
 
         int result = new Calculator(number, operator).calculate();
 
-        assertThat(result).isEqualTo(19);
+        assertThat(result).isEqualTo(5);
     }
 }

@@ -12,7 +12,7 @@ public class InputView {
         System.out.println("계산할 식을 입력하세요.");
         String input = scanString();
         if (input.isBlank()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("식이 입력되지 않았습니다.");
         }
         return parseOperator(input.split(" "));
     }
