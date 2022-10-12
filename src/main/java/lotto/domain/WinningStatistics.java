@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -26,9 +25,12 @@ public class WinningStatistics {
         return Collections.frequency(this.winningInformations, winningInformation);
     }
 
-    public BigDecimal calculateYield(BigDecimal purchaseAmount) {
-        BigDecimal totalWinningAmount = new BigDecimal(WinningInformation.sumAmounts(winningInformations));
-        return totalWinningAmount.divide(purchaseAmount, 2, RoundingMode.DOWN);
+    public BigDecimal calculateYield(Money purchaseAmount) {
+        List<Money> monies = winningInformations.stream()
+                .map(WinningInformation::getAmount)
+                .collect(Collectors.toList());
+        Money totalWinningAmount = Money.sumMoney(monies);
+        return totalWinningAmount.divide(purchaseAmount);
     }
 
     @Override

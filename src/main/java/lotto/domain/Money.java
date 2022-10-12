@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.util.List;
 import java.util.Objects;
 
 public class Money {
@@ -47,6 +50,19 @@ public class Money {
         return value.divide(unit);
     }
 
+    public static Money sumMoney(List<Money> moneys) {
+        BigInteger total = moneys.stream()
+                .map(m -> m.value)
+                .reduce(BigInteger.ZERO, BigInteger::add);
+        return new Money(total);
+    }
+
+    public BigDecimal divide(Money divisor) {
+        BigDecimal decimalValue = new BigDecimal(value);
+        BigDecimal decimalDivisor = new BigDecimal(divisor.value);
+        return decimalValue.divide(decimalDivisor, 2, RoundingMode.DOWN);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,5 +74,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

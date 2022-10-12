@@ -53,7 +53,7 @@ class WinningStatisticsTest {
     @DisplayName("수익률을 반환한다.")
     @Test
     void calculateYield() {
-        BigDecimal actual = winningStatistics.calculateYield(BigDecimal.valueOf(14000));
+        BigDecimal actual = winningStatistics.calculateYield(new Money(BigInteger.valueOf(14000)));
 
         assertThat(actual).isEqualTo(BigDecimal.valueOf(285714.64));
     }

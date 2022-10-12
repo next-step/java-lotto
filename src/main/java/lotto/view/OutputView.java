@@ -1,10 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Money;
 import lotto.domain.WinningInformation;
 import lotto.domain.WinningStatistics;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static lotto.domain.WinningInformation.*;
@@ -24,7 +24,7 @@ public class OutputView {
         System.out.println();
     }
     
-    public static void printWinningStatistics(WinningStatistics winningStatistics, BigDecimal purchaseAmount) {
+    public static void printWinningStatistics(WinningStatistics winningStatistics, Money purchaseAmount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         WINNING_INFORMATIONS.forEach(it -> {

@@ -4,20 +4,22 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Application {
 
     public static void main(String[] args) {
-        Cashier cashier = createCashier();
+        Money money = new Money(InputView.receiveMoney());
+        Cashier cashier = new Cashier(money);
+
         int playLottoCount = cashier.countPlayLotto();
+
         List<Lotto> lottos = LottoGenerator.generate(playLottoCount);
         OutputView.printGeneratedLottos(lottos);
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
         WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWeekWinningLotto);
-        OutputView.printWinningStatistics(winningStatistics, new BigDecimal(14000));
+        OutputView.printWinningStatistics(winningStatistics, money);
     }
 
     private static Cashier createCashier() {

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Money;
 import lotto.domain.WinningInformation;
 import lotto.domain.WinningStatistics;
 import org.junit.jupiter.api.AfterEach;
@@ -10,10 +11,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
-import static lotto.domain.WinningInformation.*;
+import static lotto.domain.WinningInformation.THREE_MATCHES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OutputViewTest {
@@ -63,7 +64,7 @@ class OutputViewTest {
         List<WinningInformation> winningInformations = List.of(THREE_MATCHES);
         WinningStatistics winningStatistics = new WinningStatistics(winningInformations);
 
-        OutputView.printWinningStatistics(winningStatistics, BigDecimal.valueOf(14000));
+        OutputView.printWinningStatistics(winningStatistics, new Money(BigInteger.valueOf(14000)));
         String actual = outputStreamCaptor.toString().trim();
 
         assertThat(actual).isEqualTo(expected);

@@ -44,8 +44,8 @@ class WinningInformationTest {
         List<WinningInformation> winningInformations = Arrays.stream(WinningInformation.values())
                 .collect(Collectors.toList());
 
-        BigInteger actual = WinningInformation.sumAmounts(winningInformations);
+        Money actual = WinningInformation.sumAmounts(winningInformations);
 
-        assertThat(actual).isEqualTo(BigInteger.valueOf(2_001_555_000));
+        assertThat(actual).isEqualTo(new Money(BigInteger.valueOf(2_001_555_000)));
     }
 }
