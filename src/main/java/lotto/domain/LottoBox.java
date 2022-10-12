@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class LottoBox {
 
-    List<Lotto> lottos;
+    private List<Lotto> lottos;
 
     public LottoBox(List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);
@@ -23,8 +23,6 @@ public class LottoBox {
     }
 
     public List<Lotto> getLottos() {
-        return lottos.stream()
-                .map(lotto -> new Lotto(lotto.retrieveNumbers()))
-                .collect(Collectors.toList());
+        return Collections.unmodifiableList(lottos);
     }
 }

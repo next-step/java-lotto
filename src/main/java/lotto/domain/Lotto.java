@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,7 @@ public class Lotto {
     }
 
     public List<Integer> retrieveNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     public int retrieveCorrectLottoBallCount(Lotto winningLotto) {

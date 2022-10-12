@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.strategy.ExtractStrategy;
 
-public class LottoManger {
+public class LottoManager {
+
+    private LottoManager() {
+    }
 
     public static LottoBox createLottoBox(int lottoNums, ExtractStrategy extractStrategy) {
         List<Lotto> lottos = new ArrayList<>();

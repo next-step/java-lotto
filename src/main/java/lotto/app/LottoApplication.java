@@ -3,7 +3,7 @@ package lotto.app;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBox;
-import lotto.domain.LottoManger;
+import lotto.domain.LottoManager;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoSeller;
 import lotto.strategy.ShuffleExtractStrategy;
@@ -17,7 +17,7 @@ public class LottoApplication {
         int num = LottoSeller.sellLotto(amount);
         LottoResultView.printBuyLottoNumber(num);
 
-        LottoBox lottoBox = LottoManger.createLottoBox(num, new ShuffleExtractStrategy());
+        LottoBox lottoBox = LottoManager.createLottoBox(num, new ShuffleExtractStrategy());
         LottoResultView.printLottoNumber(lottoBox.getLottos());
 
         List<Integer> correctNumbers = lottoBox.retrieveCorrectNum(new Lotto(LottoInputView.getWinNumbers()));

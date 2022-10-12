@@ -8,6 +8,8 @@ import lotto.domain.LottoRankRecord;
 
 public class LottoResultView {
 
+    private static final String LOTTO_DELIMITER = ", ";
+
     private LottoResultView() {
 
     }
