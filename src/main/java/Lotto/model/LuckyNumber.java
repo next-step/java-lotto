@@ -4,7 +4,7 @@ public class LuckyNumber {
 
     private static final String LUCKY_NUMBER_CONSTRUCTOR_ERROR = "중복된 로또번호는 불가능합니다.";
     private static final int SECOND_MATCH_COUNT = 5;
-    
+
     private Lotto luckyNumber;
     private LottoNumber bonusNumber;
 

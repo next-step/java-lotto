@@ -5,24 +5,34 @@ import static Lotto.LottoConstant.LOTTO_PRICE;
 public class LottoBuyResource {
 
     private static final String PRICE_ERROR_MESSAGE = "로또는 한개당 천원입니다.";
+    private static final String MANUAL_LOTTO_COUNT_ERROR_MESSAGE = "수동으로 구매할 로또 수가 구매한 개수보다 클 수는 없습니다.";
 
     private final int lottoPrice;
-    private final int lottoCount;
+    private final int autoLottoCount;
+    private final int manualLottoCount;
 
-    public LottoBuyResource(int lottoPrice) {
-        validate(lottoPrice);
+    public LottoBuyResource(int lottoPrice, int manualLottoCount) {
+        validate(lottoPrice, manualLottoCount);
         this.lottoPrice = lottoPrice;
-        this.lottoCount = lottoPrice / LOTTO_PRICE;
+        this.manualLottoCount = manualLottoCount;
+        this.autoLottoCount = lottoPrice / LOTTO_PRICE - manualLottoCount;
     }
 
-    private void validate(int lottoPrice) {
+    private void validate(int lottoPrice, int manualLottoCount) {
         if (lottoPrice % LOTTO_PRICE != 0) {
-            new IllegalArgumentException(PRICE_ERROR_MESSAGE);
+            throw new IllegalArgumentException(PRICE_ERROR_MESSAGE);
+        }
+        if (lottoPrice / LOTTO_PRICE - manualLottoCount < 0) {
+            throw new IllegalArgumentException(MANUAL_LOTTO_COUNT_ERROR_MESSAGE);
         }
     }
 
-    public int getLottoCount() {
-        return this.lottoCount;
+    public int getAutoLottoCount() {
+        return this.autoLottoCount;
+    }
+
+    public int getManualLottoCount() {
+        return this.manualLottoCount;
     }
 
     public int getLottoPrice() {

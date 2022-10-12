@@ -30,6 +30,10 @@ public class Lottos {
         return countingRank;
     }
 
+    public void addLottos(List<Lotto> newLotto){
+        this.lottos.addAll(newLotto);
+    }
+
     private Map<Rank, Integer> putCountingRank(Map<Rank, Integer> countingRank, int matchCount, boolean secondAble) {
         if (matchCount >= WINNING_LOTTO_STANDARD) {
             Rank rank = Rank.getRank(matchCount, secondAble);

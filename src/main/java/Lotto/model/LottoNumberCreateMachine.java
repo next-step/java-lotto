@@ -1,6 +1,7 @@
 package Lotto.model;
 
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,14 +20,14 @@ public class LottoNumberCreateMachine {
         this.allLottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).mapToObj(LottoNumber::new).collect(Collectors.toList());
     }
 
-    public Lottos createLottos(LottoBuyResource lottoBuyResource) {
+    public Lottos createLottos(LottoBuyResource lottoBuyResource,Lottos manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoBuyResource.getLottoCount(); i++) {
+        for (int i = 0; i < lottoBuyResource.getAutoLottoCount(); i++) {
             Lotto lotto = new Lotto(this.pick());
             lottos.add(lotto);
         }
-        Lottos result = new Lottos(lottos);
-        return result;
+        manualLottos.addLottos(lottos);
+        return manualLottos;
     }
 
     public Lotto getLuckyNumbers(List<String> numbers) {
@@ -34,7 +35,6 @@ public class LottoNumberCreateMachine {
                 .map(it -> new LottoNumber(Integer.parseInt(it)))
                 .collect(Collectors.toList()));
     }
-
     private List<LottoNumber> pick() {
         Collections.shuffle(allLottoNumbers);
         List<LottoNumber> lotto = new ArrayList<>(allLottoNumbers.subList(0, PROPER_LOTTONUMBER_COUNT));
