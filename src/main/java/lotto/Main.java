@@ -6,8 +6,7 @@ import lotto.model.enumeration.Rank;
 
 import java.util.Map;
 
-import static lotto.client.InputView.scanLastWinLotte;
-import static lotto.client.InputView.scanPurchaseAmount;
+import static lotto.client.InputView.*;
 import static lotto.client.OutputView.*;
 
 public class Main {
@@ -19,7 +18,7 @@ public class Main {
         showCountOfLotto(lotteries);
         showCreatedLotteries(lotteries);
 
-        Map<Rank, Long> lotteriesRank = lotteries.getLotteriesRank(scanLastWinLotte());
+        Map<Rank, Long> lotteriesRank = lotteries.getLotteriesRank(scanLastWinLotte(), scanBonusBall());
 
         showResultRank(lotteriesRank);
         showReturnRate(lotteries, lotteriesRank);
