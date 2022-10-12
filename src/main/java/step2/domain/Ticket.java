@@ -24,15 +24,15 @@ public class Ticket {
         }
     }
 
-    public int toLottoTicket(final int price) {
+    private final int toLottoTicket(final int price) {
         return price / LOTTO_TICKET_PRICE;
     }
 
-    public int getTicketCount() {
+    public final int getTicketCount() {
         return ticketCount;
     }
 
-    public int getPurchasePrice(){
+    public final int getPurchasePrice(){
         return ticketCount * LOTTO_TICKET_PRICE;
     }
 }

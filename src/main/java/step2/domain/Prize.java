@@ -30,6 +30,10 @@ public enum Prize {
     }
 
     public static int getPrizeMoney(int matchCount) {
+        if (matchCount > 6) {
+            throw new IllegalArgumentException("6개 이상 당첨될 수 없습니다.");
+        }
+
         return Arrays.stream(Prize.values())
             .filter(prize -> prize.getMatchCount() == matchCount)
             .findAny()
