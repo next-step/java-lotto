@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class WinningLottoRequestValidatorTest {
     private static final String STRING_NUMBER_WRONG_CHARACTER = "문자열로 입력된 로또 번호는 숫자, 공백, 콤마(,)만을 포함해야합니다.";
     private static final String WRONG_BONUS_NUMBER = "로또 번호는 반드시 1~45의 값 입니다.";
-
     private static final String DUPLICATED_BONUS_NUMBER = "보너스 번호와 로또 번호는 중복되지 않아야합니다.";
 
     @ParameterizedTest
