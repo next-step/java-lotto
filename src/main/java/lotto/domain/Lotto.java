@@ -40,4 +40,8 @@ public class Lotto {
         return this.lotto.size();
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(lotto);
+    }
 }
