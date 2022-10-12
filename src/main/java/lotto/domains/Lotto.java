@@ -40,4 +40,9 @@ public class Lotto {
 
         return Prize.find(count);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

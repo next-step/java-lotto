@@ -29,6 +29,11 @@ public class LottoNumber {
     }
 
     @Override
+    public String toString() {
+        return Integer.toString(number);
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(number);
     }
