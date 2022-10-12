@@ -17,26 +17,30 @@ public class CalcNumber {
     }
 
     private static int toInt(String number) {
-        checkBlank(number);
         try {
+            checkNullOrBlank(number);
             return Integer.parseInt(number);
         } catch (Exception e) {
             throw new IllegalArgumentException(INPUT_INTEGER + e.getMessage());
         }
     }
 
-    private static void checkBlank(String number) {
+    private static void checkNullOrBlank(String number) {
         if (number == null || number.isBlank()) {
             throw new IllegalArgumentException(NULL_OR_BLANK_INPUT_ERROR_MESSAGE);
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CalcNumber number1 = (CalcNumber) o;
-        return number == number1.number;
+        CalcNumber that = (CalcNumber) o;
+        return number == that.number;
     }
 
     @Override
