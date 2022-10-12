@@ -15,6 +15,10 @@ public class Money {
         this.value = value;
     }
 
+    public Money(final int value) {
+        this(BigInteger.valueOf(value));
+    }
+
     public Money(final String stringValue) {
         this(parseBigInteger(stringValue));
     }

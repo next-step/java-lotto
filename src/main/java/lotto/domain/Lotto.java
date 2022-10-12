@@ -38,12 +38,14 @@ public class Lotto {
     }
 
     private void existsWithinLottoNumberRange(final int element) {
+        // TODO: 상수화
         if (element < 1 || element > 45) {
             throw OutOfRangeLottoNumberException.of();
         }
     }
 
     private void validateElementsSize(final Set<Integer> elements) {
+        // TODO: 상수화
         if (elements.size() != 6) {
             throw InvalidLottoNumberSizeException.of();
         }

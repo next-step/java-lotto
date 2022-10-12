@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
+    // TODO: 로또에서 가져오기
     private static final int LOTTO_NUMBER_MAX_SIZE = 6;
     private static final List<Integer> LOTTO_NUMBER_RANGE = IntStream.range(1, 46)
             .boxed()

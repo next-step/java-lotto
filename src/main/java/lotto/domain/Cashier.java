@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Cashier {
 
-    public static final Money LOTTO_PRICE = new Money(BigInteger.valueOf(1000));
+    private static final Money LOTTO_PRICE = new Money(1000);
 
     private final Money money;
 

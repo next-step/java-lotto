@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CashierTest {
@@ -38,7 +36,7 @@ public class CashierTest {
     void remain_money() {
         Money actual = new Cashier("14300").receiveLeftMoney();
 
-        assertThat(actual).isEqualTo(new Money(BigInteger.valueOf(300)));
+        assertThat(actual).isEqualTo(new Money(300));
     }
 }
 

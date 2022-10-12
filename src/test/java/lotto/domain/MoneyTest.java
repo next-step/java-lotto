@@ -31,10 +31,17 @@ public class MoneyTest {
         @DisplayName("숫자 문자열로 생성한다.")
         @Test
         void string() {
-            Money expected = money;
             Money actual = new Money(STRING_MONEY);
 
-            assertThat(actual).isEqualTo(expected);
+            assertThat(actual).isEqualTo(money);
+        }
+
+        @DisplayName("정수형으로 생성한다.")
+        @Test
+        void integer() {
+            Money actual = new Money(14000);
+
+            assertThat(actual).isEqualTo(money);
         }
 
         @DisplayName("숫자가 아닌 문자열이면 예외가 발생한다.")
@@ -48,7 +55,7 @@ public class MoneyTest {
         @DisplayName("0 이상의 수가 아니면 예외가 발생한다.")
         @Test
         void validate_zero_or_more() {
-            assertThatThrownBy(() -> new Money(BigInteger.valueOf(-1)))
+            assertThatThrownBy(() -> new Money(-1))
                     .isExactlyInstanceOf(NotZeroOrMoreNumberException.class)
                     .hasMessage("0이상의 수가 아닙니다.");
         }
@@ -59,7 +66,7 @@ public class MoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"1000,true", "999,false", "1001,true"})
     void equal_or_more_than(BigInteger value, boolean expected) {
-        boolean actual = new Money(value).equalOrMoreThan(new Money(BigInteger.valueOf(1000)));
+        boolean actual = new Money(value).equalOrMoreThan(new Money(1000));
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -67,15 +74,15 @@ public class MoneyTest {
     @DisplayName("뺄셈")
     @Test
     void subtract() {
-        Money actual = money.subtract(new Money(BigInteger.valueOf(1000)));
+        Money actual = money.subtract(new Money(1000));
 
-        assertThat(actual).isEqualTo(new Money(BigInteger.valueOf(13000)));
+        assertThat(actual).isEqualTo(new Money(13000));
     }
 
     @DisplayName("나눗셈")
     @Test
     void divide() {
-        BigDecimal actual = money.divide(new Money(BigInteger.valueOf(7000)));
+        BigDecimal actual = money.divide(new Money(7000));
 
         assertThat(actual).isEqualTo(new BigDecimal("2.00"));
     }
@@ -83,8 +90,8 @@ public class MoneyTest {
     @DisplayName("곱셈")
     @Test
     void multiply() {
-        Money actual = money.multiply(BigInteger.valueOf(2));
+        Money actual = money.multiply(new BigInteger("2"));
 
-        assertThat(actual).isEqualTo(new Money(BigInteger.valueOf(28000)));
+        assertThat(actual).isEqualTo(new Money(28000));
     }
 }
