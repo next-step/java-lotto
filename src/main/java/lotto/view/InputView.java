@@ -16,6 +16,7 @@ public class InputView {
     }
 
     public static List<String> receiveLastWeekWinningNumber() {
+        System.out.println("지난주 당첨 번호를 입력해 주세요. 콤마로 숫자 6개를 구분해주세요.");
         String lastWeekNumberString = new Scanner(System.in).nextLine();
         String[] lastWeekNumbers = lastWeekNumberString.split(",");
         return Arrays.stream(lastWeekNumbers)

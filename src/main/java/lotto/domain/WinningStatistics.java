@@ -1,14 +1,11 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import static lotto.domain.Cashier.LOTTO_PURCHASING_UNIT;
 
 public class WinningStatistics {
 
@@ -31,7 +28,7 @@ public class WinningStatistics {
 
     public BigDecimal calculateYield(BigDecimal purchaseAmount) {
         BigDecimal totalWinningAmount = new BigDecimal(WinningInformation.sumAmounts(winningInformations));
-        return totalWinningAmount.divide(purchaseAmount, 2, RoundingMode.HALF_EVEN);
+        return totalWinningAmount.divide(purchaseAmount, 2, RoundingMode.DOWN);
     }
 
     @Override

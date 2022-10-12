@@ -34,4 +34,12 @@ public enum WinningInformation {
                 .map(it -> it.amount)
                 .reduce(BigInteger.ZERO, BigInteger::add);
     }
+
+    public int getMatchesCount() {
+        return matchesCount;
+    }
+
+    public BigInteger getAmount() {
+        return amount;
+    }
 }

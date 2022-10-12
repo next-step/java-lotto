@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Application {
@@ -15,6 +16,8 @@ public class Application {
         OutputView.printGeneratedLottos(lottos);
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
+        WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWeekWinningLotto);
+        OutputView.printWinningStatistics(winningStatistics, new BigDecimal(14000));
     }
 
     private static Cashier createCashier() {
