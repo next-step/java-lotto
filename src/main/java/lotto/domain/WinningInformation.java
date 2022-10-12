@@ -18,6 +18,7 @@ public enum WinningInformation {
     private final Money amount;
 
     WinningInformation(int matchesCount, Money amount) {
+        NullCheckUtil.validate(amount);
         this.matchesCount = matchesCount;
         this.amount = amount;
     }

@@ -16,6 +16,7 @@ public class OutputView {
             List.of(THREE_MATCHES, FOUR_MATCHES, FIVE_MATCHES, SIX_MATCHES);
 
     private OutputView() {
+        throw new AssertionError("OutputView는 생성자를 호출할 수 없습니다.");
     }
 
     public static void printGeneratedLottos(List<Lotto> lottos) {

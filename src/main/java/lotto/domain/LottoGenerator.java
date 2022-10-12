@@ -15,6 +15,7 @@ public class LottoGenerator {
             .collect(Collectors.toUnmodifiableList());
 
     private LottoGenerator() {
+        throw new AssertionError("LottoGenerator는 생성자를 호출할 수 없습니다.");
     }
 
     public static List<Lotto> generate(int size) {

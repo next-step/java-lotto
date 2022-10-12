@@ -12,6 +12,7 @@ public class Cashier {
     private final Money money;
 
     public Cashier(Money money) {
+        NullCheckUtil.validate(money);
         validateMinimum(money);
         this.money = money;
     }

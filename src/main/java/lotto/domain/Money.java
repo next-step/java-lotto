@@ -14,6 +14,7 @@ public class Money {
     private final BigInteger value;
 
     public Money(final BigInteger value) {
+        NullCheckUtil.validate(value);
         validateZeroOrMore(value);
         this.value = value;
     }

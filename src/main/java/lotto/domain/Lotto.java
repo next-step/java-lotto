@@ -21,6 +21,7 @@ public class Lotto {
     private final Set<Integer> elements;
 
     public Lotto(final Set<Integer> elements) {
+        NullCheckUtil.validate(elements);
         validate(elements);
         this.elements = elements;
     }

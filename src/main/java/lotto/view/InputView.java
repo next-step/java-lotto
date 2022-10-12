@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private InputView() {
+        throw new AssertionError("InputView는 생성자를 호출할 수 없습니다.");
     }
 
     public static String receiveMoney() {

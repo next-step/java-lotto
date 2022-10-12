@@ -11,6 +11,7 @@ public class WinningStatistics {
     private final List<WinningInformation> winningInformations;
 
     public WinningStatistics(final List<WinningInformation> winningInformations) {
+        NullCheckUtil.validate(winningInformations);
         this.winningInformations = winningInformations;
     }
 
