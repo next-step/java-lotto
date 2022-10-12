@@ -11,6 +11,9 @@ public class LottoTicket {
     private static final String LOTTO_NUMBERS_INPUT_FORM = "(4[0-5]|[1-3][0-9]|[1-9])(,(4[0-5]|[1-3][0-9]|[1-9])){5}";
     private static final String INPUT_FORMAT_EXCEPTION_MESSAGE = "올바른 입력 값이 아닙니다. 다시 입력해 주세요.";
     private static final int MAX_COUNT_OF_LOTTO_NUMBER = 6;
+    private static final String DELIMITER = ",";
+    private static final String SPACE = " ";
+    private static final String EMPTY = "";
     
     private final List<LottoNumber> lottoTicket;
     
@@ -41,12 +44,12 @@ public class LottoTicket {
         return lottoTicket;
     }
     
-    private String[] split(final String removeSpace) {
-        return removeSpace.split(",");
+    private String[] split(final String lottoTicket) {
+        return lottoTicket.split(DELIMITER);
     }
     
     private String removeSpace(final String lottoTicket) {
-        return lottoTicket.replace(" ", "");
+        return lottoTicket.replace(SPACE, EMPTY);
     }
     
     public int countMatchingNumber(WinningLottoNumbers winningLottoNumbers) {
