@@ -5,8 +5,8 @@ import stringcalculate.InputValue;
 import java.util.Scanner;
 
 public class InputView {
-
-    public static InputValue askInput(Scanner scanner) {
+    private static final Scanner scanner = new Scanner(System.in);
+    public static InputValue askInput() {
         String input = scanner.nextLine();
         return new InputValue(input);
     }

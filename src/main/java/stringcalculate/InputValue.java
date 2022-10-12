@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class InputValue {
     private static final String BLANK = "\\s";
+
     private final List<String> expression;
 
     public InputValue(String input) {
@@ -32,8 +33,4 @@ public class InputValue {
         return Collections.unmodifiableList(expression);
     }
 
-
-    public boolean hasSize(int expect) {
-        return expression.size() == expect;
-    }
 }

@@ -6,13 +6,13 @@ import java.util.function.IntBinaryOperator;
 import java.util.stream.IntStream;
 
 public class StringCalculator {
-    private final List<String> expression = new ArrayList<>();
+    private final List<String> expression;
 
     public StringCalculator(InputValue inputValue) {
-        this.expression.addAll(inputValue.getExpression());
+        this.expression = inputValue.getExpression();
     }
 
-    public int Calculate() {
+    public int calculate() {
         return IntStream.iterate(0, i -> i + 2)
                 .limit(expression.size() / 2)
                 .reduce(parseInt(expression.get(0)), calculateExpression());
