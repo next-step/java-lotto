@@ -8,6 +8,8 @@ import lotto.util.RandomUtils;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static lotto.domain.LottoNumberProduceStrategy.MAX_LOTTO_NUMBER;
@@ -24,7 +26,7 @@ public class Application {
         LottoFactory lottoFactory = new LottoFactory();
         LottoResultView view = new LottoResultView();
 
-        List<Lotto> lotto = lottoFactory.produces(() -> RandomUtils.getNumber(MAX_LOTTO_NUMBER), purchaseInfo.getCount());
+        List<Lotto> lotto = lottoFactory.produces((numbers) -> Collections.shuffle(numbers), purchaseInfo.getCount());
 
         view.print(lotto);
 
