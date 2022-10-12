@@ -6,9 +6,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
-    public List<Lotto> generate(int money) {
+    public Lotto purchaseByManual(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public List<Lotto> purchaseByAuto(int money) {
         List<Integer> numbers = IntStream.rangeClosed(LottoNumber.START_NUMBER,
                         LottoNumber.END_NUMBER)
                 .boxed()

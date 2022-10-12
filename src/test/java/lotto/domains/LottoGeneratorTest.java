@@ -16,7 +16,7 @@ public class LottoGeneratorTest {
     void Given_Money_When_GenerateLotto_Then_SizeIsCorrect(int money, int expectedSize) {
         LottoGenerator lottoGenerator = new LottoGenerator();
 
-        List<Lotto> generate = lottoGenerator.generate(money);
+        List<Lotto> generate = lottoGenerator.purchaseByAuto(money);
 
         assertThat(generate.size()).isEqualTo(expectedSize);
     }
