@@ -21,7 +21,11 @@ public class InputView {
 
     public static Money inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new Money(inputPositiveNumber());
+        Money purchaseAmount = new Money(inputPositiveNumber());
+        if (purchaseAmount.isLessThan(Lotto.PRICE)) {
+            throw new IllegalArgumentException(String.format("최소 %s 원을 입력해주세요.", Lotto.PRICE));
+        }
+        return purchaseAmount;
     }
 
     public static List<Lotto> inputPurchaseLottos(int limitNumberOfLottos) {

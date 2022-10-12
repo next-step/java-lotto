@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -36,6 +38,17 @@ class MoneyTest {
     void multiply() {
         Money actual = new Money(1000).multiply(2);
         assertThat(actual).isEqualTo(new Money(2000));
+    }
+
+    @DisplayName("비교하려는 돈보다 작다면 true를 반환해야 하고, 그렇지 않다면 false를 반환해야 한다.")
+    @ParameterizedTest
+    @CsvSource({
+            "1000,999,false",
+            "1000,1000,false",
+            "1000,1001,true",
+    })
+    void isLessThan(int moneyValue1, int moneyValue2, boolean expected) {
+        assertThat(new Money(moneyValue1).isLessThan(new Money(moneyValue2))).isEqualTo(expected);
     }
 
 }
