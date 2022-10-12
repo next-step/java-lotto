@@ -25,9 +25,9 @@ public class Lotto {
     }
 
 
-    public int matchingCount(List<Integer> answer) {
+    public int matchingCount(List<Integer> targetNumbers) {
         return (int) this.lottoNumbers.stream()
-                .filter(number -> answer.contains(number))
+                .filter(number -> targetNumbers.contains(number))
                 .count();
     }
 

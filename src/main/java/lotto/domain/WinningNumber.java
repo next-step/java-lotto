@@ -5,12 +5,12 @@ import java.util.List;
 public class WinningNumber {
 
 
-    private List<Integer> lottoNumbers;
+    private Lotto winningLotto;
     private final int bonusNumber;
 
     public WinningNumber(List<Integer> lottoNumbers, int bonusNumber) {
         validateWinningNumber(lottoNumbers, bonusNumber);
-        this.lottoNumbers = lottoNumbers;
+        this.winningLotto = new Lotto(lottoNumbers);
         this.bonusNumber = bonusNumber;
     }
 
@@ -21,10 +21,7 @@ public class WinningNumber {
     }
 
     public MatchingResult results(List<Integer> lottoNumbers) {
-        int matchingCount = (int) this.lottoNumbers.stream()
-                .filter(winningNumber -> lottoNumbers.contains(winningNumber))
-                .count();
-
+        int matchingCount = this.winningLotto.matchingCount(lottoNumbers);
         boolean containBonusNumber = lottoNumbers.contains(this.bonusNumber);
 
         return new MatchingResult(matchingCount, containBonusNumber);
