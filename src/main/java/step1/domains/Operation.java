@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operation {
-    PLUS("+", (n, m) -> Calculator.plus(n, m)),
-    MINUS("-", (n, m) -> Calculator.subtraction(n, m)),
-    DIVIDE("/", (n, m) -> Calculator.divide(n, m)),
-    MULTIPLY("*", (n, m) -> Calculator.multiply(n, m)),
+    PLUS("+", Calculator::plus),
+    MINUS("-", Calculator::subtraction),
+    DIVIDE("/", Calculator::divide),
+    MULTIPLY("*", Calculator::multiply),
     ;
 
-    private String character;
-    private BiFunction<Integer, Integer, Integer> expression;
+    private final String character;
+    private final BiFunction<Integer, Integer, Integer> expression;
 
     Operation(String character, BiFunction<Integer, Integer, Integer> expression) {
         this.character = character;
@@ -22,7 +22,7 @@ public enum Operation {
         return expression.apply(n, m);
     }
 
-    public static Operation parse(String string) {
+    public static Operation find(String string) {
         return Arrays.stream(values())
                 .filter(o -> o.character.equals(string))
                 .findFirst()
