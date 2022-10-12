@@ -21,7 +21,7 @@ class LotteriesTest {
 
         long result = lotteries.getTotalWinningMoney(lotteriesRank);
 
-        assertThat(result).isEqualTo(4000050000L);
+        assertThat(result).isEqualTo(4001500000L);
     }
 
     @Test
@@ -42,9 +42,23 @@ class LotteriesTest {
 
         List<LottoNumber> lastWinLotto = createLottoNumber(1, 2, 4, 24, 25, 45);
 
-        Map<Rank, Long> result = lotteries.getLotteriesRank(lastWinLotto);
+        Map<Rank, Long> result = lotteries.getLotteriesRank(lastWinLotto, 33);
 
-        assertThat(result).isEqualTo(Map.of(Rank.FIRST, 1L, Rank.FOURTH, 1L));
+        assertThat(result).isEqualTo(Map.of(Rank.FIRST, 1L, Rank.FIFTH, 1L));
+    }
+
+    @Test
+    public void 로또_당첨_보너스_볼_일치_검증() {
+        Lotteries lotteries = new Lotteries(
+                List.of(new Lotto(createLottoNumber(1, 2, 4, 24, 25, 45)),
+                        new Lotto(createLottoNumber(1, 2, 3, 25, 35, 44)))
+        );
+
+        List<LottoNumber> lastWinLotto = createLottoNumber(1, 2, 4, 24, 25, 43);
+
+        Map<Rank, Long> result = lotteries.getLotteriesRank(lastWinLotto, 45);
+
+        assertThat(result).isEqualTo(Map.of(Rank.SECOND, 1L, Rank.FIFTH, 1L));
     }
 
     private Lotteries createLotteries(int amount) {
