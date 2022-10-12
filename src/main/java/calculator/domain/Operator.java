@@ -1,5 +1,10 @@
 package calculator.domain;
 
-public interface Operator {
-    int execute(int number);
+public abstract class Operator {
+    final int target;
+
+    public Operator(int target) {
+        this.target = target;
+    }
+    public abstract int execute(int number);
 }

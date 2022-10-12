@@ -1,13 +1,12 @@
 package calculator.domain;
 
-public class Plus extends Operator {
-
-    public Plus(int target) {
+public class Minus extends Operator {
+    public Minus(int target) {
         super(target);
     }
 
     @Override
     public int execute(int number) {
-        return number + target;
+        return number - target;
     }
 }
