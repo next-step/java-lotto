@@ -7,7 +7,6 @@ import lotto.models.request.PaymentRequest;
 import lotto.models.request.WinningLottoRequest;
 import lotto.services.LottoService;
 import lotto.services.LottoStatisticsService;
-import lotto.services.PickNumberService;
 import lotto.strategy.NormalPickNumberStrategy;
 import lotto.ui.Printer;
 

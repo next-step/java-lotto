@@ -3,12 +3,15 @@ package lotto.models;
 import lotto.models.request.WinningLottoRequest;
 import lotto.validator.WinningLottoRequestValidator;
 
-public class WinningLotto extends Lotto {
+import java.util.List;
 
+public class WinningLotto {
+
+    private final Lotto lotto;
     private final int bonusNumber;
 
-    private WinningLotto(LottoNumbers lottoNumbers, int bonusNumber) {
-        super(lottoNumbers);
+    private WinningLotto(Lotto lotto, int bonusNumber) {
+        this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
@@ -19,7 +22,10 @@ public class WinningLotto extends Lotto {
     public static WinningLotto from(WinningLottoRequest winningLottoRequest) {
         WinningLottoRequestValidator.validate(winningLottoRequest);
 
-        LottoNumbers lottoNumbers = LottoNumbers.of(winningLottoRequest.getWinningNumber());
-        return new WinningLotto(lottoNumbers, winningLottoRequest.getBonusNumber());
+        return new WinningLotto(Lotto.of(winningLottoRequest.getWinningNumber()), winningLottoRequest.getBonusNumber());
+    }
+
+    public List<Integer> getNumbers() {
+        return this.lotto.getNumbers();
     }
 }

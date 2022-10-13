@@ -38,10 +38,10 @@ public enum Rank {
     }
 
     public static Rank findRank(WinningLotto winningLotto, Lotto targetLotto) {
-        List<Integer> copiedWinningNumbers = new ArrayList<>(winningLotto.getLottoNumbers().getNumbers());
-        copiedWinningNumbers.retainAll(targetLotto.getLottoNumbers().getNumbers());
+        List<Integer> copiedWinningNumbers = new ArrayList<>(winningLotto.getNumbers());
+        copiedWinningNumbers.retainAll(targetLotto.getNumbers());
 
-        boolean hasBonusNumber = targetLotto.getLottoNumbers().getNumbers().contains(winningLotto.getBonusNumber());
+        boolean hasBonusNumber = targetLotto.getNumbers().contains(winningLotto.getBonusNumber());
         return Rank.of(copiedWinningNumbers.size(), hasBonusNumber);
     }
 

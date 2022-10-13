@@ -22,14 +22,14 @@ class RankTest {
 
     @BeforeAll
     static void setLotto() {
-        lottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
-        lottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 7)));
-        lottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 10)));
-        lottos.add(Lotto.of(List.of(1, 2, 3, 4, 10, 11)));
-        lottos.add(Lotto.of(List.of(1, 2, 3, 10, 11, 12)));
-        lottos.add(Lotto.of(List.of(1, 2, 10, 11, 12, 13)));
-        lottos.add(Lotto.of(List.of(1, 10, 11, 12, 13, 14)));
-        lottos.add(Lotto.of(List.of(10, 11, 12, 13, 14, 15)));
+        lottos.add(Lotto.of("1, 2, 3, 4, 5, 6"));
+        lottos.add(Lotto.of("1, 2, 3, 4, 5, 7"));
+        lottos.add(Lotto.of("1, 2, 3, 4, 5, 10"));
+        lottos.add(Lotto.of("1, 2, 3, 4, 10, 11"));
+        lottos.add(Lotto.of("1, 2, 3, 10, 11, 12"));
+        lottos.add(Lotto.of("1, 2, 10, 11, 12, 13"));
+        lottos.add(Lotto.of("1, 10, 11, 12, 13, 14"));
+        lottos.add(Lotto.of("10, 11, 12, 13, 14, 15"));
     }
 
     @BeforeAll
