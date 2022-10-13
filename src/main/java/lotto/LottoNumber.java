@@ -3,6 +3,8 @@ package lotto;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.model.WinningNumber;
+
 public class LottoNumber {
     private final List<Integer> numbers;
 
@@ -10,11 +12,11 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public LottoMatchResult match(List<Integer> winningNumbers) {
+    public LottoMatchResult match(WinningNumber winningNumber) {
         int matched = 0;
 
         for (Integer number : numbers) {
-            if (winningNumbers.contains(number)) {
+            if (winningNumber.exists(number)) {
                 matched++;
             }
         }
