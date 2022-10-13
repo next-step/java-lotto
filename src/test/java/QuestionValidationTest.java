@@ -1,4 +1,4 @@
-import domain.QuestionValidation;
+import domain.ExpressionValidation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ public class QuestionValidationTest {
     Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
         .isThrownBy(
             () -> {
-              QuestionValidation.validateQuestion(null);
+              ExpressionValidation.validateExpression(null);
             }
         );
   }
@@ -22,7 +22,7 @@ public class QuestionValidationTest {
     Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
         .isThrownBy(
             () -> {
-              QuestionValidation.validateQuestion(" ");
+              ExpressionValidation.validateExpression(" ");
             }
         );
   }
