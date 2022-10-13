@@ -4,11 +4,13 @@ public abstract class Operator {
     private static final Operator add;
     private static final Operator subtract;
     private static final Operator multiple;
+    private static final Operator divide;
 
     static {
         add = new Add();
         subtract = new Subtract();
         multiple = new Multiple();
+        divide = new Divide();
     }
 
     @Override
@@ -32,6 +34,7 @@ public abstract class Operator {
         if (value.equals("+")) return add;
         if (value.equals("-")) return subtract;
         if (value.equals("*")) return multiple;
+        if (value.equals("/")) return divide;
         return null;
     }
 }

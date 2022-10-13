@@ -34,4 +34,11 @@ public class CalculatorTest {
         int result = calculator.calculate("10 * 2 * 3");
         assertThat(result).isEqualTo(60);
     }
+
+    @Test
+    void 나눗셈_계산하기() {
+        Calculator calculator = new Calculator();
+        int result = calculator.calculate("10 / 2 / 3");
+        assertThat(result).isEqualTo(1);
+    }
 }
