@@ -36,4 +36,4 @@
 - [x] 처음 input값 validation -> Expression 클래스에서 처리하기
 - [x] Test input이 하나일때 @ParameterizedTest -> @Test 사용
 - [x] ArithmeticOperation 정적 팩토리 메서드로 처리하기.
-- [ ] 의미없는 test 삭제
+- [x] 의미없는 test 삭제
