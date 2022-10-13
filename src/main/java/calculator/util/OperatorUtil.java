@@ -12,7 +12,7 @@ public class OperatorUtil {
         throw new AssertionError();
     }
 
-    public static String isOperator(String input) {
+    public static String validateOperator(String input) {
         if (OPERATOR.matcher(input).matches()) {
             return input;
         }

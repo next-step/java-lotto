@@ -32,7 +32,7 @@ public class StringCalculator {
     }
 
     private Integer getCalculate(String operator, Integer firstNumber, Integer secondNumber) {
-        String validateOperator = isOperator(operator);
+        String validateOperator = validateOperator(operator);
 
         if (Objects.equals(validateOperator, ADD)) {
             return add(firstNumber, secondNumber);
