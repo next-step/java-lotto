@@ -73,7 +73,7 @@ public class MoneyTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("뺄셈")
+    @DisplayName("파라미터로 입력된 만큼의 돈을 빼서 반환한다.")
     @Test
     void subtract() {
         Money actual = money.subtract(new Money(1000));
@@ -81,7 +81,7 @@ public class MoneyTest {
         assertThat(actual).isEqualTo(new Money(13000));
     }
 
-    @DisplayName("나눗셈")
+    @DisplayName("파라미터로 입력된 만큼 나눠 소수점 둘째 이후 값은 버리고 BigDecimal 타입으로 반환한다.")
     @Test
     void divide() {
         BigDecimal actual = money.divide(new Money(7000));
@@ -89,7 +89,7 @@ public class MoneyTest {
         assertThat(actual).isEqualTo(new BigDecimal("2.00"));
     }
 
-    @DisplayName("곱셈")
+    @DisplayName("파라미터로 입력된 만큼 곱해서 돈을 반환한다.")
     @Test
     void multiply() {
         Money actual = money.multiply(new BigInteger("2"));
