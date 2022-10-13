@@ -29,4 +29,14 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    public Division checkDivision(List<Number> winnersNumber) {
+        int match = 0;
+        for (Number number : winnersNumber) {
+            if(numbers.contains(number)){
+                match++;
+            }
+        }
+        return Division.valueOf(match);
+    }
 }
