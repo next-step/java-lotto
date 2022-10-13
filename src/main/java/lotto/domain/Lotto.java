@@ -27,6 +27,14 @@ public class Lotto {
         return count.intValue();
     }
 
+    public boolean matchBounsBall(LottoBall bonusBall) {
+        return numbers.stream()
+                .filter(bonusBall::hasSameNumber)
+                .map(num -> true)
+                .findFirst()
+                .orElse(false);
+    }
+
     private static void validateLottoSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("Lotto에는 " + LOTTO_SIZE + "개의 숫자만 들어올 수 있습니다.");
