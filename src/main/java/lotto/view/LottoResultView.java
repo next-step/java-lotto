@@ -43,13 +43,29 @@ public class LottoResultView {
     }
 
     public static void printWinStatistics(List<LottoRankRecord> rankRecords) {
-        System.out.println("\n당첨 통계\n--------");
+        sb.append("\n당첨 통계\n--------");
         for (LottoRankRecord lottoRankRecord : rankRecords) {
+            stringBuildRankRecord(lottoRankRecord);
+        }
+        sb.append("\n");
+        System.out.println(sb);
+        clearStringBuilder();
+    }
+
+    private static void stringBuildRankRecord(LottoRankRecord lottoRankRecord) {
+        if (lottoRankRecord.isNotRank(LottoRank.NONE)) {
             LottoRank rank = lottoRankRecord.getRank();
             int number = lottoRankRecord.getNumber();
-            System.out.println(
-                    rank.getCorrectNum() + "개 일치 " + "(" + rank.getWinPrize() + ")" + "- " + number
-                            + "개");
+            sb.append("\n");
+            sb.append(rank.getCorrectNum()).append("개 일치");
+            addBonusWinMessage(rank);
+            sb.append(" (").append(rank.getWinPrize()).append("원)- ").append(number).append("개");
+        }
+    }
+
+    private static void addBonusWinMessage(LottoRank rank) {
+        if (LottoRank.BONUS.equals(rank)) {
+            sb.append(", 보너스 볼 일치");
         }
     }
 
