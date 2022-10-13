@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +18,16 @@ public class Lotto {
         return new Lotto(lottoNumberStrategy.provideNumberSet());
     }
 
+    public Division checkDivision(List<Number> winnersNumber) {
+        return Division.valueOf(match(winnersNumber));
+    }
+
+    private int match(List<Number> winnersNumber) {
+        List<Number> numbers = new ArrayList<>(this.numbers);
+        numbers.retainAll(winnersNumber);
+        return numbers.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,15 +39,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public Division checkDivision(List<Number> winnersNumber) {
-        int match = 0;
-        for (Number number : winnersNumber) {
-            if(numbers.contains(number)){
-                match++;
-            }
-        }
-        return Division.valueOf(match);
     }
 }
