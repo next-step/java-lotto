@@ -1,3 +1,5 @@
+package stringcalculator;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -6,7 +8,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class StringCalculatorTest {
+class StringCalculatorTest {
 
     private final StringCalculator calculator = new StringCalculator();
 
