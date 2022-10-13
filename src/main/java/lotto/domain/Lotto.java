@@ -9,11 +9,15 @@ import static java.util.Collections.shuffle;
 public class Lotto {
     private final static int LOTTO_FIRST_NUMBER = 0;
     private final static int LOTTO_LAST_NUMBER = 6;
+    private final static int COUNTS_OF_LOTTO_NUMBER = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != COUNTS_OF_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 6자리로 이루어져 있어야 합니다.");
+        }
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
