@@ -12,7 +12,7 @@ public class Lottery {
     private static final int LOTTERY_NUM_COUNT = 6;
 
     private static final List<LotteryNumber> LOTTERY_NUMBER_CANDIDATES = IntStream
-            .range(1, LotteryNumber.LOTTERY_NUM_MAX + 1)
+            .rangeClosed(1, LotteryNumber.LOTTERY_NUM_MAX)
             .mapToObj(LotteryNumber::new)
             .collect(Collectors.toList());
 
@@ -32,7 +32,9 @@ public class Lottery {
     }
 
     private static List<LotteryNumber> mapIntegersToLotteryNumbers(List<Integer> lotteryNumbers) {
-        return lotteryNumbers.stream().map(LotteryNumber::new).collect(Collectors.toList());
+        return lotteryNumbers.stream()
+                .map(LotteryNumber::new)
+                .collect(Collectors.toList());
     }
 
     private void validate(List<LotteryNumber> lotteryNumbers) {
