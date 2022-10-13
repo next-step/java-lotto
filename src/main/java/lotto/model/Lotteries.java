@@ -40,12 +40,6 @@ public class Lotteries {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    public long getTotalWinningMoney(Map<Rank, Long> lotteriesRank) {
-        return lotteriesRank.entrySet().stream()
-                .mapToLong((rank) -> rank.getKey().getWinningMoney() * rank.getValue())
-                .sum();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
