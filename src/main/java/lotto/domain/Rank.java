@@ -19,7 +19,10 @@ public enum Rank {
         this.money = money;
     }
 
-    public static Rank calculate(int matchCount) {
+    public static Rank calculate(int matchCount, boolean bonus) {
+        if (matchCount == SECOND.match && bonus) {
+            return SECOND;
+        }
         return Arrays.stream(values())
             .filter(rank -> rank.match == matchCount)
             .findFirst()

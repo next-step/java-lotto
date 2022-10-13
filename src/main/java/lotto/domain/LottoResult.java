@@ -20,10 +20,10 @@ public class LottoResult {
         result.merge(rank, 1, Integer::sum);
     }
 
-    public void result(Lotto winningNumbers, List<Lotto> lottoNumbers) {
+    public void result(Lotto winningNumbers, List<Lotto> lottoNumbers, int bonusBall) {
         for (Lotto lotto : lottoNumbers) {
             int count = lotto.matches(winningNumbers);
-            Rank calculate = Rank.calculate(count);
+            Rank calculate = Rank.calculate(count, lottoNumbers.contains(bonusBall));
             put(calculate);
         }
     }

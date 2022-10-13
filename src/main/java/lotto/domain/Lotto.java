@@ -16,8 +16,8 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public int matches(Lotto numbers) {
-        return (int) numbers.lotto.stream()
+    public int matches(Lotto winningNumbers) {
+        return (int) winningNumbers.lotto.stream()
             .filter(lotto::contains)
             .count();
     }
