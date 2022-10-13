@@ -1,4 +1,8 @@
-package lotto.model;
+package lotto.utils;
+
+import lotto.model.Lotteries;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
@@ -7,9 +11,15 @@ import java.util.stream.IntStream;
 
 import static lotto.model.LottoNumber.initializeLottoNumbers;
 
-public class LottoMachine implements LottoFactory {
+public class LottoCreator {
 
-    private Lotto createLotto() {
+    private static final int LOTTO_PRICE = 1000;
+
+    private LottoCreator() {
+        throw new AssertionError();
+    }
+
+    private static Lotto createLotto() {
         List<LottoNumber> lottoNumberList = initializeLottoNumbers();
         Collections.shuffle(lottoNumberList);
 
@@ -19,10 +29,11 @@ public class LottoMachine implements LottoFactory {
         return new Lotto(createdLotto);
     }
 
-    @Override
-    public List<Lotto> create(int purchasedCount) {
-        return IntStream.rangeClosed(1, purchasedCount)
+    public static Lotteries getLotteries(int purchasedAmount) {
+        List<Lotto> lotteries = IntStream.rangeClosed(1, purchasedAmount / LOTTO_PRICE)
                 .mapToObj(v -> createLotto())
                 .collect(Collectors.toList());
+
+        return new Lotteries(lotteries);
     }
 }
