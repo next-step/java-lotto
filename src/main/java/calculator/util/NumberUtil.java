@@ -1,7 +1,7 @@
 package calculator.util;
 
-import calculator.exception.NotEssence;
-import calculator.exception.ValidateNumber;
+import calculator.exception.NotEssenceException;
+import calculator.exception.ValidateNumberException;
 
 public class NumberUtil {
 
@@ -14,14 +14,14 @@ public class NumberUtil {
         if (number % 1 == 0) {
             return (int) number;
         }
-        throw new NotEssence();
+        throw new NotEssenceException();
     }
 
     public static Integer isNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new ValidateNumber();
+            throw new ValidateNumberException();
         }
     }
 

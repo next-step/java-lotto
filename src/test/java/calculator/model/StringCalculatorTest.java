@@ -1,9 +1,9 @@
 package calculator.model;
 
-import calculator.exception.NotEssence;
-import calculator.exception.ValidateInput;
-import calculator.exception.ValidateNumber;
-import calculator.exception.ValidateOperator;
+import calculator.exception.NotEssenceException;
+import calculator.exception.ValidateInputException;
+import calculator.exception.ValidateNumberException;
+import calculator.exception.ValidateOperatorException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,7 +23,7 @@ class StringCalculatorTest {
     @NullAndEmptySource
     void input_test_null_empty(String input) {
         // expected
-        assertThatExceptionOfType(ValidateInput.class)
+        assertThatExceptionOfType(ValidateInputException.class)
                 .isThrownBy(() -> stringCalculator.makeInputList(input));
     }
 
@@ -91,7 +91,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // expected
-        assertThatExceptionOfType(NotEssence.class)
+        assertThatExceptionOfType(NotEssenceException.class)
                 .isThrownBy(() -> stringCalculator.divide(firstNumber, secondNumber));
     }
 
@@ -116,7 +116,7 @@ class StringCalculatorTest {
         String input = "/ + 2 - 1 * 2 / 1";
 
         // expected
-        assertThatExceptionOfType(ValidateNumber.class)
+        assertThatExceptionOfType(ValidateNumberException.class)
                 .isThrownBy(() -> stringCalculator.calculate(input));
     }
 
@@ -127,7 +127,7 @@ class StringCalculatorTest {
         String input = "1 1 2 - 1 * 2 / 1";
 
         // expected
-        assertThatExceptionOfType(ValidateOperator.class)
+        assertThatExceptionOfType(ValidateOperatorException.class)
                 .isThrownBy(() -> stringCalculator.calculate(input));
     }
 

@@ -1,6 +1,6 @@
 package calculator.util;
 
-import calculator.exception.ValidateOperator;
+import calculator.exception.ValidateOperatorException;
 
 import java.util.regex.Pattern;
 
@@ -16,6 +16,6 @@ public class OperatorUtil {
         if (OPERATOR.matcher(input).matches()) {
             return input;
         }
-        throw new ValidateOperator();
+        throw new ValidateOperatorException();
     }
 }
