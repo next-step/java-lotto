@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PaymentPrice {
+public class PaymentInformation {
     private static final String INPUT_FORMAT_EXCEPTION_MESSAGE = "올바른 입력 값이 아닙니다. 다시 입력해 주세요.";
     private static final String LOTTO_PAYMENT_PRICE_INPUT_FORM = "[1-9][0-9]*000";
     private static final int TICKET_PRICE = 1000;
@@ -12,7 +12,7 @@ public class PaymentPrice {
     private final int paymentPrice;
     private int countOfManualLotto;
     
-    public PaymentPrice(String paymentPrice) {
+    public PaymentInformation(String paymentPrice) {
         this.paymentPrice = checkLottoPaymentPriceInputFormatException(paymentPrice);
     }
     
@@ -60,7 +60,7 @@ public class PaymentPrice {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PaymentPrice that = (PaymentPrice) o;
+        PaymentInformation that = (PaymentInformation) o;
         return paymentPrice == that.paymentPrice;
     }
     

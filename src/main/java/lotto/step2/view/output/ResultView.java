@@ -17,8 +17,8 @@ public class ResultView {
     private static final String DECIMAL_FORMAT_PATTERN = "0.##";
     private static final String NEW_LINE = "\n";
     
-    public static void purchasedLottoNumbersPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
-        System.out.printf(PURCHASED_LOTTO_NUMBER_PRINT_FORM, paymentPrice.countOfManualLotto(), paymentPrice.countOfAutoLotto());
+    public static void purchasedLottoNumbersPrint(LottoTickets lottoTickets, PaymentInformation paymentInformation) {
+        System.out.printf(PURCHASED_LOTTO_NUMBER_PRINT_FORM, paymentInformation.countOfManualLotto(), paymentInformation.countOfAutoLotto());
         lottoTickets.getLottoTickets().stream()
                 .map(ResultView::lottoTicketPrintFormat)
                 .forEach(System.out::println);

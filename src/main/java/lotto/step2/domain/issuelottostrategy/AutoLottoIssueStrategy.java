@@ -3,7 +3,7 @@ package lotto.step2.domain.issuelottostrategy;
 import lotto.step2.domain.LottoNumber;
 import lotto.step2.domain.LottoTicket;
 import lotto.step2.domain.LottoTickets;
-import lotto.step2.domain.PaymentPrice;
+import lotto.step2.domain.PaymentInformation;
 import lotto.step2.domain.factory.LottoNumbersFactory;
 
 import java.util.Collections;
@@ -16,12 +16,12 @@ public class AutoLottoIssueStrategy implements LottoIssueStrategy {
     private static final int ZERO = 0;
     
     @Override
-    public LottoTickets issueLottoTickets(PaymentPrice paymentPrice) {
-        return new LottoTickets(issueLottoTicket(paymentPrice));
+    public LottoTickets issueLottoTickets(PaymentInformation paymentInformation) {
+        return new LottoTickets(issueLottoTicket(paymentInformation));
     }
     
-    private List<LottoTicket> issueLottoTicket(PaymentPrice paymentPrice) {
-        return IntStream.range(ZERO, paymentPrice.countOfAutoLotto())
+    private List<LottoTicket> issueLottoTicket(PaymentInformation paymentInformation) {
+        return IntStream.range(ZERO, paymentInformation.countOfAutoLotto())
                 .mapToObj(ticketCount -> new LottoTicket(issueLotto(shuffleLottoNumbers())))
                 .collect(Collectors.toList());
     }

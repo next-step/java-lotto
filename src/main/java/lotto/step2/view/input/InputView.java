@@ -2,7 +2,7 @@ package lotto.step2.view.input;
 
 import lotto.step2.domain.LottoTicket;
 import lotto.step2.domain.LottoTickets;
-import lotto.step2.domain.PaymentPrice;
+import lotto.step2.domain.PaymentInformation;
 import lotto.step2.domain.WinningLottoNumbers;
 import lotto.step2.utils.StringUtils;
 
@@ -20,39 +20,39 @@ public class InputView {
     private static final String WINNING_LOTTO_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요. (구분자는 콤마, 각 숫자 범위는 1 ~ 45)";
     private static final String LOTTO_BONUS_NUMBER_INPUT_MESSAGE = "\n보너스 볼을 입력해 주세요.";
     
-    public static PaymentPrice inputLottoPaymentPrice() {
+    public static PaymentInformation inputLottoPaymentPrice() {
         try {
             System.out.println(LOTTO_PAYMENT_PRICE_INPUT_MESSAGE);
-            return new PaymentPrice(checkBlankException(SCANNER.nextLine()));
+            return new PaymentInformation(checkBlankException(SCANNER.nextLine()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputLottoPaymentPrice();
         }
     }
     
-    public static PaymentPrice inputCountOfManualLotto(PaymentPrice paymentPrice) {
+    public static PaymentInformation inputCountOfManualLotto(PaymentInformation paymentInformation) {
         try {
             System.out.println(COUNT_OF_MANUAL_LOTTO_INPUT_MESSAGE);
-            paymentPrice.inputCountOfManualLotto(checkBlankException(SCANNER.nextLine()));
-            return paymentPrice;
+            paymentInformation.inputCountOfManualLotto(checkBlankException(SCANNER.nextLine()));
+            return paymentInformation;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputCountOfManualLotto(paymentPrice);
+            return inputCountOfManualLotto(paymentInformation);
         }
     }
     
-    public static LottoTickets inputManualLottoTickets(PaymentPrice paymentPrice) {
+    public static LottoTickets inputManualLottoTickets(PaymentInformation paymentInformation) {
         try {
             System.out.println(MANUAL_LOTTO_INPUT_MESSAGE);
-            return new LottoTickets(getLottoTickets(paymentPrice));
+            return new LottoTickets(getLottoTickets(paymentInformation));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputManualLottoTickets(paymentPrice);
+            return inputManualLottoTickets(paymentInformation);
         }
     }
     
-    private static List<LottoTicket> getLottoTickets(final PaymentPrice paymentPrice) {
-        return IntStream.range(0, paymentPrice.countOfManualLotto())
+    private static List<LottoTicket> getLottoTickets(final PaymentInformation paymentInformation) {
+        return IntStream.range(0, paymentInformation.countOfManualLotto())
                 .mapToObj(index -> new LottoTicket(checkBlankException(SCANNER.nextLine())))
                 .collect(Collectors.toList());
     }
