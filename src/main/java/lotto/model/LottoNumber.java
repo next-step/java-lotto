@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
@@ -17,6 +17,11 @@ public class LottoNumber {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또번호는 1~45 사이의 범위이어야 합니다.");
         }
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.lottoNumber, o.lottoNumber);
     }
 
     @Override

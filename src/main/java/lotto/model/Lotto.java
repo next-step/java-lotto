@@ -1,9 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
 
@@ -11,19 +8,17 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lotto = new ArrayList<>();
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(Set<Integer> lottoNumbers) {
         validate(lottoNumbers);
-        for (Integer lottoNumber : lottoNumbers) {
+        for (int lottoNumber : lottoNumbers) {
             lotto.add(new LottoNumber(lottoNumber));
         }
+        Collections.sort(lotto);
     }
 
-    private void validate(List<Integer> lottoNumbers) {
+    private void validate(Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또의 개수가 맞지 않습니다.");
-        }
-        if (new HashSet<Integer>(lottoNumbers).size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또의 번호가 중복되었습니다.");
         }
     }
 

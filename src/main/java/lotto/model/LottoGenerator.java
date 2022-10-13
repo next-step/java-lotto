@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -26,10 +28,9 @@ public class LottoGenerator {
 
     private Lotto generateLotto() {
         Collections.shuffle(fullLottoNumbers);
-        List<Integer> lottoNumbers = fullLottoNumbers.stream()
+        Set<Integer> lottoNumbers = fullLottoNumbers.stream()
                 .limit(Lotto.LOTTO_SIZE)
-                .sorted()
-                .collect(toList());
+                .collect(Collectors.toSet());
         return new Lotto(lottoNumbers);
     }
 
