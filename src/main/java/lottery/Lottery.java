@@ -18,23 +18,17 @@ public class Lottery {
 
     private final List<LotteryNumber> lotteryNumbers;
 
-    public Lottery() {
-        this(generateLotteryNumbers());
-    }
-
     public Lottery(List<LotteryNumber> lotteryNumbers) {
         validate(lotteryNumbers);
         this.lotteryNumbers = lotteryNumbers;
     }
 
-    public static Lottery getInstanceByInt(List<Integer> lotteryNumbers) {
-        return new Lottery(mapIntegersToLotteryNumbers(lotteryNumbers));
-    }
+    public static List<LotteryNumber> generateRandomLotteryNumbers() {
+        Collections.shuffle(LOTTERY_NUMBER_CANDIDATES);
+        List<LotteryNumber> lotteryNumbers = LOTTERY_NUMBER_CANDIDATES.subList(0, LOTTERY_NUM_COUNT);
+        Collections.sort(lotteryNumbers);
 
-    private static List<LotteryNumber> mapIntegersToLotteryNumbers(List<Integer> lotteryNumbers) {
-        return lotteryNumbers.stream()
-                .map(LotteryNumber::new)
-                .collect(Collectors.toList());
+        return new ArrayList<>(lotteryNumbers);
     }
 
     private void validate(List<LotteryNumber> lotteryNumbers) {
@@ -55,13 +49,5 @@ public class Lottery {
 
     public List<LotteryNumber> getLotteryNumbers() {
         return Collections.unmodifiableList(this.lotteryNumbers);
-    }
-
-    private static List<LotteryNumber> generateLotteryNumbers() {
-        Collections.shuffle(LOTTERY_NUMBER_CANDIDATES);
-        List<LotteryNumber> lotteryNumbers = LOTTERY_NUMBER_CANDIDATES.subList(0, LOTTERY_NUM_COUNT);
-        Collections.sort(lotteryNumbers);
-
-        return new ArrayList<>(lotteryNumbers);
     }
 }

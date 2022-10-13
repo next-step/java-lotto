@@ -7,17 +7,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static lottery.Lottery.getInstanceByInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LotteryTest {
 
+    static Lottery createLottery(Integer... values) {
+        return new Lottery(Arrays.stream(values).map(LotteryNumber::new).collect(Collectors.toList()));
+    }
+
     @Test
     void generate_자동() {
-        Lottery lottery = new Lottery();
+        Lottery lottery = new Lottery(Lottery.generateRandomLotteryNumbers());
         List<LotteryNumber> lotteryNumbers = lottery.getLotteryNumbers();
 
         assertThat(lotteryNumbers).hasSize(6);
@@ -26,25 +30,25 @@ public class LotteryTest {
 
     @Test
     void generate_수동() {
-        assertThatThrownBy(() -> getInstanceByInt(Arrays.asList(1, 2, 3)))
+        assertThatThrownBy(() -> createLottery(1, 2, 3))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> getInstanceByInt(Arrays.asList(1, 1, 2, 3, 4, 5)))
+        assertThatThrownBy(() -> createLottery(1, 1, 2, 3, 4, 5))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest(name = "countEqualNumbers() - {2}")
     @MethodSource("lotteryNumbersProvider")
     void countEqualNumbers(Lottery lottery, int expected, String testMessage) {
-        Lottery wonLottery = getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottery wonLottery = createLottery(1, 2, 3, 4, 5, 6);
 
         assertThat(wonLottery.countEqualNumbers(lottery)).isEqualTo(expected);
     }
 
     static Stream<Arguments> lotteryNumbersProvider() {
         return Stream.of(
-                Arguments.of(getInstanceByInt(Arrays.asList(10, 11, 12, 13, 14, 15)), 0, "0개 일치"),
-                Arguments.of(getInstanceByInt(Arrays.asList(1, 11, 12, 13, 14, 15)), 1, "1개 일치"),
-                Arguments.of(getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6)), 6, "6개 일치")
+                Arguments.of(createLottery(10, 11, 12, 13, 14, 15), 0, "0개 일치"),
+                Arguments.of(createLottery(1, 11, 12, 13, 14, 15), 1, "1개 일치"),
+                Arguments.of(createLottery(1, 2, 3, 4, 5, 6), 6, "6개 일치")
         );
     }
 }

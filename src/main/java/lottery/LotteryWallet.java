@@ -18,7 +18,7 @@ public class LotteryWallet {
 
     public void generateLottery(int generateLotteryCount) {
         for (int i = 0; i < generateLotteryCount; i++) {
-            lotteries.add(new Lottery());
+            lotteries.add(new Lottery(Lottery.generateRandomLotteryNumbers()));
         }
     }
 
