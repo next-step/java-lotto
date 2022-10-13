@@ -12,7 +12,7 @@ public class LottoWallet {
         this.lottos = lottos;
     }
 
-    public List<Integer> compareWithLastLotto(Lotto lastWinner) {
+    public List<Integer> compareWithLastLotto(LastWinner lastWinner) {
         List<Integer> results = new ArrayList<>(Collections.nCopies(7, 0));
         for (Lotto lotto : this.lottos) {
             int count = lotto.countSameNumber(lastWinner);

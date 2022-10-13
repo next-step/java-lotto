@@ -1,14 +1,13 @@
 package step2;
 
-import step2.domian.Lotto;
+import step2.domian.LastWinner;
 import step2.domian.LottoWallet;
+import step2.domian.Revenue;
 import step2.view.InputView;
 import step2.view.ResultView;
 
 import java.util.List;
 
-import static step2.domian.Calculator.calculatePercentage;
-import static step2.domian.Calculator.calculateRevenue;
 import static step2.domian.LottoMachine.autoLottos;
 
 public class LottoMain {
@@ -21,11 +20,11 @@ public class LottoMain {
         LottoWallet lottoWallet = autoLottos(lottoNum);
         ResultView.printLottoNum(lottoWallet);
 
-        Lotto lastWinnerLotto = new Lotto(InputView.getLastWinner());
-        List<Integer> results = lottoWallet.compareWithLastLotto(lastWinnerLotto);
+        LastWinner lastWinner = new LastWinner(InputView.getLastWinner());
+        List<Integer> results = lottoWallet.compareWithLastLotto(lastWinner);
         ResultView.printDrawResult(results);
 
-        int revenue = calculateRevenue(results);
-        ResultView.printPercentage(calculatePercentage(lottoNum * LOTTO_PRICE, revenue));
+        Revenue revenue = new Revenue(results);
+        ResultView.printPercentage(revenue.calculatePercentage(lottoNum * LOTTO_PRICE));
     }
 }

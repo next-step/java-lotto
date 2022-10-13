@@ -14,7 +14,7 @@ public class Lotto {
         return numbers.toString();
     }
 
-    public int countSameNumber(Lotto lastWinner) {
+    public int countSameNumber(LastWinner lastWinner) {
         int sameCount = 0;
         for (int num : lastWinner.numbers) {
             sameCount += isContain(num);

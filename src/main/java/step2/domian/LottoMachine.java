@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private static final List<Integer> initLottoNum = IntStream.rangeClosed(0, 45).boxed().collect(Collectors.toList());
+    private static final List<Integer> INIT_LOTTO_NUM = IntStream.rangeClosed(0, 45).boxed().collect(Collectors.toList());
 
     public static LottoWallet autoLottos(int lottoNum) {
         List<Lotto> lottoList = new ArrayList<>();
@@ -23,7 +23,7 @@ public class LottoMachine {
     }
 
     private static List<Integer> getAutoNum() {
-        Collections.shuffle(initLottoNum);
-        return new ArrayList<>(initLottoNum.subList(0, 6));
+        Collections.shuffle(INIT_LOTTO_NUM);
+        return new ArrayList<>(INIT_LOTTO_NUM.subList(0, 6));
     }
 }
