@@ -1,19 +1,25 @@
 package lotto;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class LottoNumberGenerator {
 
-    public static int[] generate() {
+    public static List<Integer> generate() {
         Random random = new Random(System.currentTimeMillis());
-        Set<Integer> lottoNumbers = new HashSet<>();
 
+        List<Integer> lottoNumbers = new ArrayList<>();
+
+        Integer randomNumber = null;
         while(lottoNumbers.size() <6) {
-            lottoNumbers.add(random.nextInt(46));
+            randomNumber = random.nextInt(46);
+
+            if (!lottoNumbers.contains(randomNumber)) {
+                lottoNumbers.add(randomNumber);
+            }
         }
 
-        return lottoNumbers.stream().mapToInt(Integer::intValue).toArray();
+        return List.copyOf(lottoNumbers);
     }
 }
