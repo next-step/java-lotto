@@ -36,4 +36,10 @@ public enum Rank {
     public static Rank valueOf(double countOfMatch) {
         return Optional.ofNullable(RANK_MAP.get(countOfMatch)).orElse(MISS);
     }
+
+    public static long getTotalWinningMoney(Map<Rank, Long> lotteriesRank) {
+        return lotteriesRank.entrySet().stream()
+                .mapToLong((rank) -> rank.getKey().getWinningMoney() * rank.getValue())
+                .sum();
+    }
 }
