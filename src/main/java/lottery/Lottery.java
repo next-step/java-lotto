@@ -1,6 +1,5 @@
 package lottery;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,10 +24,10 @@ public class Lottery {
 
     public static List<LotteryNumber> generateRandomLotteryNumbers() {
         Collections.shuffle(LOTTERY_NUMBER_CANDIDATES);
-        List<LotteryNumber> lotteryNumbers = LOTTERY_NUMBER_CANDIDATES.subList(0, LOTTERY_NUM_COUNT);
-        Collections.sort(lotteryNumbers);
-
-        return new ArrayList<>(lotteryNumbers);
+        return LOTTERY_NUMBER_CANDIDATES.subList(0, LOTTERY_NUM_COUNT)
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private void validate(List<LotteryNumber> lotteryNumbers) {
