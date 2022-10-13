@@ -25,6 +25,6 @@ public class LottoBox {
     }
 
     public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+        return lottos;
     }
 }
