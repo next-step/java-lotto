@@ -10,19 +10,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultStatsTest {
 
-    private final List<Integer> matchingCountsByTicket = Arrays.asList(0, 0, 0, 3, 6, 3, 4);
-    private final ResultStats resultStats = new ResultStats(matchingCountsByTicket);
+    List<Lotto> lottoTickets = Arrays.asList(new Lotto(LottoNumber.lottoNumbers().subList(0, 6)));
+    WinningNumber winningNumber = new WinningNumber(new Lotto(LottoNumber.lottoNumbers().subList(0, 6)), LottoNumber.lottoNumber(7));
+
+    ResultStats resultStats = new ResultStats(lottoTickets, winningNumber);
 
     @Test
     @DisplayName("로또 1등부터 낙첨까지 갯수별 당첨 이력 검증")
     void prizeCountsByRank() {
-        List<Integer> ascendingOrderRank = Arrays.asList(1, 0, 1, 2, 3);
-        assertThat(resultStats.countsOfPrizes()).isEqualTo(ascendingOrderRank);
+        assertThat(resultStats.countPerPrize()).isEqualTo(Arrays.asList(1, 0, 0, 0, 0, 0));
     }
 
     @Test
     @DisplayName("로또 당첨금액 수익률 검증")
     void returnOnInvestment() {
-        assertThat(resultStats.returnOnInvestment(100000)).isEqualTo(20000.6);
+        assertThat(resultStats.returnOnInvestment(100000)).isEqualTo(20000.0);
     }
 }

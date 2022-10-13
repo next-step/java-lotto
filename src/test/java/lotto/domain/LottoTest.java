@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNumber.lottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -18,12 +17,6 @@ public class LottoTest {
     @DisplayName("생성자 의존성 주입 - 로또 번호")
     void constructorDI() {
         assertThat(new Lotto(lottoNumbers()).lottoNumbers().size()).isEqualTo(45);
-    }
-
-    @Test
-    @DisplayName("생성자 의존성 주입 예외 - 로또 번호 자릿수 미일치")
-    void constructorDIException() {
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 7)))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -35,10 +28,10 @@ public class LottoTest {
 
     @Test
     @DisplayName("발급 로또 조회")
-    void issuedLottoNumber() {
+    void lottoNumber() {
         Lotto lotto = new Lotto(lottoNumbers());
-        assertThat(lotto.issue(new Payment(1000)).get(0).lottoNumber()).hasSizeLessThanOrEqualTo(6);
-        assertThat(lotto.issue(new Payment(1000)).get(0).lottoNumber()).hasSizeGreaterThanOrEqualTo(0);
+        assertThat(lotto.issue(new Payment(1000)).get(0).lottoNumbers()).hasSizeLessThanOrEqualTo(6);
+        assertThat(lotto.issue(new Payment(1000)).get(0).lottoNumbers()).hasSizeGreaterThanOrEqualTo(0);
     }
 
     @RepeatedTest(100)
@@ -47,7 +40,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers());
         List<Lotto> lottoTickets = lotto.issue(new Payment(1000));
 
-        Lotto winningNumber = new WinningNumber(new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6)))).winningNumber();
+        Lotto winningNumber = new WinningNumber(new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6))), LottoNumber.lottoNumber(7)).winningNumber();
         List<Integer> matchingCounts = lottoTickets.stream()
                 .map(ticket -> ticket.compareNumber(winningNumber))
                 .collect(Collectors.toList());

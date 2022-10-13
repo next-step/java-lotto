@@ -40,4 +40,13 @@ public class Input {
         }
         throw new InputMismatchException("당첨 번호는 숫자만 입력 가능하며, 콤마로 구분해야 합니다.");
     }
+
+    public LottoNumber bonusNumberOfLastWeek() {
+        System.out.println("보너스 볼을 입력해주세요. (입력 가능 숫자:1 ~ 45)");
+        String input = SCANNER.nextLine();
+        if (isNumeric(input)) {
+            return LottoNumber.lottoNumber(Integer.parseInt(input));
+        }
+        throw new InputMismatchException("보너스 번호는 숫자만 입력 가능합니다.");
+    }
 }

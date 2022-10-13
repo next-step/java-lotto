@@ -12,9 +12,19 @@ public class LottoPrizeTest {
     @DisplayName("로또 매칭 갯수별 상금 조회")
     @CsvSource(
             delimiter = ':',
-            value = {"0:0", "1:0", "2:0", "3:5000", "4:50000", "5:1500000", "6:2000000000"}
+            value = {"0:0:false", "1:0:false", "2:0:false", "3:5000:false", "4:50000:false", "5:1500000:false", "5:30000000:true", "6:2000000000:false"}
     )
-    void selectPrize(int matchedNumber, int prizeMoney) {
-        assertThat(LottoPrize.from(matchedNumber).amount()).isEqualTo(prizeMoney);
+    void selectPrize(int matchedNumber, int prizeMoney, boolean matchBonus) {
+        assertThat(LottoPrize.of(matchedNumber, matchBonus).amount()).isEqualTo(prizeMoney);
+    }
+
+    @ParameterizedTest
+    @DisplayName("2등이 아닐 떄, 보너스 번호 포함 검증")
+    @CsvSource(
+            delimiter = ':',
+            value = {"0:0:true", "1:0:true", "2:0:true", "3:5000:true", "4:50000:true", "5:30000000:true", "6:2000000000:true"}
+    )
+    void notSecondAndContainBonusNumber(int matchedNumber, int prizeMoney, boolean matchBonus) {
+        assertThat(LottoPrize.of(matchedNumber, matchBonus).amount()).isEqualTo(prizeMoney);
     }
 }
