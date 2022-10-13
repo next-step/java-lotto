@@ -1,6 +1,10 @@
 package Lotto;
 
 public abstract class Operator {
+    private static final String ADD = "+";
+    private static final String SUBTRACT = "-";
+    private static final String MULTIPLE = "*";
+    private static final String DIVIDE = "/";
     private static final Operator add;
     private static final Operator subtract;
     private static final Operator multiple;
@@ -31,10 +35,10 @@ public abstract class Operator {
     public abstract int operate(int num1, int num2);
 
     public static Operator operatorOf(String value) {
-        if (value.equals("+")) return add;
-        if (value.equals("-")) return subtract;
-        if (value.equals("*")) return multiple;
-        if (value.equals("/")) return divide;
+        if (value.equals(ADD)) return add;
+        if (value.equals(SUBTRACT)) return subtract;
+        if (value.equals(MULTIPLE)) return multiple;
+        if (value.equals(DIVIDE)) return divide;
         return null;
     }
 }
