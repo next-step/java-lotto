@@ -36,31 +36,4 @@ public class LottoResult {
     static double getTwoDecimalPointResult(double sum, int originAmount) {
         return Math.floor(sum / originAmount * 100) / 100;
     }
-
-    private static List<LottoRank> sortRankByCorrectNum(Map<LottoRank, Integer> rankRecrod) {
-        List<LottoRank> ranks = new ArrayList<>(rankRecrod.keySet());
-        Collections.sort(ranks, Comparator.comparingInt(LottoRank::getCorrectNum));
-        return ranks;
-    }
-
-    private static void recordWinRank(List<Integer> correctNums, Map<LottoRank, Integer> rankRecrod) {
-        for (Integer winNum : correctNums) {
-            LottoRank rank = LottoRank.findRank(winNum);
-            insertRank(rankRecrod, rank);
-        }
-    }
-
-    private static void insertRank(Map<LottoRank, Integer> rankRecrod, LottoRank rank) {
-        if (!LottoRank.NONE.equals(rank)) {
-            rankRecrod.put(rank, rankRecrod.get(rank) + 1);
-        }
-    }
-
-    private static Map<LottoRank, Integer> initilizeRankRecord() {
-        Map<LottoRank, Integer> rankRecrod = new EnumMap<>(LottoRank.class);
-        for (LottoRank lottoRank : LottoRank.values()) {
-            rankRecrod.put(lottoRank, 0);
-        }
-        return rankRecrod;
-    }
 }

@@ -39,16 +39,15 @@ class LottoResultTest {
         List<LottoRankRecord> lottoRankRecords = List.of(
                 new LottoRankRecord(LottoRank.SECOND, 2),
                 new LottoRankRecord(LottoRank.FIRST, 1),
-                new LottoRankRecord(LottoRank.THRID, 2)
+                new LottoRankRecord(LottoRank.THIRD, 2)
         );
-
         int sum = lottoRankRecords.stream()
                 .mapToInt(LottoRankRecord::calculateSum)
                 .reduce(0, Integer::sum);
-
         LottoResult lottoResult = new LottoResult(lottoRankRecords);
 
         double ratio = lottoResult.retrieveProfitRatio(originAmount);
+
         Assertions.assertThat(ratio).isEqualTo(LottoResult.getTwoDecimalPointResult(sum, originAmount));
     }
 }
