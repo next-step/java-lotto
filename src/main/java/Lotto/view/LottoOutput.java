@@ -12,14 +12,28 @@ public class LottoOutput {
     private static final String ENTER = "\n";
     private static final String DELIMITER = ", ";
     private static final String LOTTO_RESULT_MESSAGE = "당첨 통계";
+    private static final String ASK_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String ASK_LUCKY_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
-    public static void noticeBuyLotto(Lottos lottos) {
+    public static void noticeBuyLotto(Lottos lottos, LottoBuyResource lottoBuyResource) {
         List<Lotto> Lottos = lottos.getLottos();
-        System.out.println(Lottos.size() + NOTICE_BUY_LOTTO_MESSAGE);
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다" + ENTER, lottoBuyResource.getManualLottoCount(), lottoBuyResource.getAutoLottoCount());
         for (Lotto lotto : Lottos) {
             List<LottoNumber> lottoNumbers = lotto.getLotto();
             System.out.printf("[%s]" + ENTER, lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(DELIMITER)));
         }
+    }
+
+    public static void AskManualLottoNumber() {
+        System.out.println(ASK_MANUAL_LOTTO_NUMBER);
+    }
+    public static void AskLuckyNumber(){
+        System.out.println(ASK_LUCKY_NUMBERS);
+    }
+
+    public static void printLottoNumber(Lotto lotto) {
+        List<LottoNumber> lottoNumbers = lotto.getLotto();
+        System.out.printf("%s" + ENTER, lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(DELIMITER)));
     }
 
     public static void noticeResult(ResultSummary resultSummary, double profit) {

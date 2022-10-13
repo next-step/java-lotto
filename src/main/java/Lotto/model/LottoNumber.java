@@ -19,7 +19,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number > LOTTO_MAX_NUMBER || number < LOTTO_MIN_NUMBER) {
             throw new IllegalArgumentException(LOTTO_CONSTRUCOR_ERROR_MESSAGE);
         }
-    };
+    }
+
+    ;
 
     @Override
     public boolean equals(Object o) {
