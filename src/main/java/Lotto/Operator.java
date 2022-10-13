@@ -20,6 +20,7 @@ public abstract class Operator {
 
     public static Operator operatorOf(String value) {
         if (value.equals("+")) return new Add();
+        if (value.equals("-")) return new Subtract();
         return null;
     }
 }
