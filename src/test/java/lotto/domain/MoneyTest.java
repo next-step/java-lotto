@@ -64,11 +64,11 @@ public class MoneyTest {
 
     }
 
-    @DisplayName("주어진 값의 이상인지 확인한다.")
+    @DisplayName("주어진 값의 미만인지 확인한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1000,true", "999,false", "1001,true"})
+    @CsvSource(value = {"1000,false", "999,true", "1001,false"})
     void equal_or_more_than(BigInteger value, boolean expected) {
-        boolean actual = new Money(value).equalOrMoreThan(new Money(1000));
+        boolean actual = new Money(value).lessThan(new Money(1000));
 
         assertThat(actual).isEqualTo(expected);
     }

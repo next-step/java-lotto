@@ -41,8 +41,8 @@ public class Money {
         }
     }
 
-    public boolean equalOrMoreThan(Money money) {
-        return value.compareTo(money.value) > -1;
+    public boolean lessThan(Money money) {
+        return value.compareTo(money.value) < 0;
     }
 
     public static Money sumMoney(List<Money> moneys) {
