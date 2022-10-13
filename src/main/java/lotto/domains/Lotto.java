@@ -18,7 +18,7 @@ public class Lotto {
             throw new IllegalArgumentException("로또 숫자의 개수는 6개여야 합니다.");
         }
 
-        if (isDuplicate(numbers)) {
+        if (containsDuplicateNumber(numbers)) {
             throw new IllegalArgumentException("로또 숫자는 중복이 될 수 없습니다. 입력값: " + numbers);
         }
 
@@ -29,7 +29,7 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    private boolean isDuplicate(List<Integer> numbers) {
+    private boolean containsDuplicateNumber(List<Integer> numbers) {
         return numbers.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .values()

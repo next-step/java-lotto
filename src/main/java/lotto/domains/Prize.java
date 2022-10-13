@@ -3,14 +3,20 @@ package lotto.domains;
 import java.util.Arrays;
 
 public enum Prize {
-    FIRST(6, 2000000000L), SECOND(5, 1500000L), THIRD(4, 50000L), FOURTH(3, 5000L), NONE(2, 0L);
+    NONE(2, 0L, false),
+    FOURTH(3, 5_000L, true),
+    THIRD(4, 50_000L, true),
+    SECOND(5, 1_500_000L, true),
+    FIRST(6, 2_000_000_000L, true);
 
     private final int correctCount;
     private final long reward;
+    private final boolean isWinner;
 
-    Prize(int correctCount, long reward) {
+    Prize(int correctCount, long reward, boolean isWinner) {
         this.correctCount = correctCount;
         this.reward = reward;
+        this.isWinner = isWinner;
     }
 
     public int getCorrectCount() {
@@ -22,13 +28,13 @@ public enum Prize {
     }
 
     public static Prize find(long count) {
-        if (count <= NONE.correctCount) {
-            return NONE;
-        }
-
         return Arrays.stream(values())
                 .filter(p -> p.correctCount == count)
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(Prize.NONE);
+    }
+
+    public boolean isWin() {
+        return isWinner;
     }
 }

@@ -8,19 +8,23 @@ import java.util.stream.IntStream;
 public class LottoGenerator {
     public static final int LOTTO_PRICE = 1000;
 
-    public Lotto purchaseByManual(List<Integer> numbers) {
-        return new Lotto(numbers);
-    }
-
     public List<Lotto> purchaseByAuto(int money) {
-        List<Integer> numbers = IntStream.rangeClosed(LottoNumber.START_NUMBER,
-                        LottoNumber.END_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
+        if (money < 0) {
+            throw new IllegalArgumentException("구입할 돈은 음수가 될 수 없습니다.");
+        }
+
+        List<Integer> numbers = generateAllLottoNumbers();
 
         return IntStream.range(0, money / LOTTO_PRICE)
                 .boxed()
                 .map(i -> getLotto(numbers))
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> generateAllLottoNumbers() {
+        return IntStream.rangeClosed(LottoNumber.START_NUMBER,
+                        LottoNumber.END_NUMBER)
+                .boxed()
                 .collect(Collectors.toList());
     }
 
