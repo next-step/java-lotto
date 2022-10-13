@@ -23,7 +23,9 @@ public class InputView {
     public static PaymentInformation inputLottoPaymentPrice() {
         try {
             System.out.println(LOTTO_PAYMENT_PRICE_INPUT_MESSAGE);
-            return new PaymentInformation(checkBlankException(SCANNER.nextLine()));
+            final String paymentPrice = SCANNER.nextLine();
+            checkBlankException(paymentPrice);
+            return new PaymentInformation(paymentPrice);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputLottoPaymentPrice();
@@ -33,7 +35,9 @@ public class InputView {
     public static PaymentInformation inputCountOfManualLotto(PaymentInformation paymentInformation) {
         try {
             System.out.println(COUNT_OF_MANUAL_LOTTO_INPUT_MESSAGE);
-            paymentInformation.inputCountOfManualLotto(checkBlankException(SCANNER.nextLine()));
+            final String inputCountOfManualLotto = SCANNER.nextLine();
+            checkBlankException(inputCountOfManualLotto);
+            paymentInformation.inputCountOfManualLotto(inputCountOfManualLotto);
             return paymentInformation;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -53,14 +57,20 @@ public class InputView {
     
     private static List<LottoTicket> getLottoTickets(final PaymentInformation paymentInformation) {
         return IntStream.range(0, paymentInformation.countOfManualLotto())
-                .mapToObj(index -> new LottoTicket(checkBlankException(SCANNER.nextLine())))
+                .mapToObj(index -> {
+                    final String lottoTicket = SCANNER.nextLine();
+                    checkBlankException(lottoTicket);
+                    return new LottoTicket(lottoTicket);
+                })
                 .collect(Collectors.toList());
     }
     
     public static WinningLottoNumbers inputWinningLottoNumber() {
         try {
             System.out.println(WINNING_LOTTO_NUMBERS_INPUT_MESSAGE);
-            return new WinningLottoNumbers(checkBlankException(SCANNER.nextLine()));
+            final String winningLottoNumbersInput = SCANNER.nextLine();
+            checkBlankException(winningLottoNumbersInput);
+            return new WinningLottoNumbers(winningLottoNumbersInput);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputWinningLottoNumber();
@@ -70,7 +80,9 @@ public class InputView {
     public static WinningLottoNumbers inputWinningBonusLottoNumber(WinningLottoNumbers winningLottoNumbers) {
         try {
             System.out.println(LOTTO_BONUS_NUMBER_INPUT_MESSAGE);
-            winningLottoNumbers.inputBonusNumber(checkBlankException(SCANNER.nextLine()));
+            final String bonusNumber = SCANNER.nextLine();
+            checkBlankException(bonusNumber);
+            winningLottoNumbers.inputBonusNumber(bonusNumber);
             return winningLottoNumbers;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -78,11 +90,9 @@ public class InputView {
         }
     }
     
-    private static String checkBlankException(String input) {
+    private static void checkBlankException(String input) {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
-        
-        return input;
     }
 }
