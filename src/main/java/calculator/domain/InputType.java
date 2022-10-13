@@ -8,7 +8,7 @@ import java.util.function.BiConsumer;
 public enum InputType {
 
     NUMBER((calculator, input) -> calculator.calculate(input.toNumber())),
-    OPERATOR((calculator, input) -> calculator.set(input.toOperator()));;
+    OPERATOR((calculator, input) -> calculator.push(input.toOperator()));;
 
     private final BiConsumer<Calculator, Input> operator;
 

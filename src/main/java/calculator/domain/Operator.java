@@ -20,17 +20,17 @@ public enum Operator {
 
     private static final Map<String, Operator> OPERATOR_CACHE;
 
+    static {
+        OPERATOR_CACHE = Arrays.stream(values())
+                .collect(Collectors.toMap(value -> value.code, value -> value));
+    }
+
     private final String code;
     private final IntBinaryOperator calculatorOperate;
 
     Operator(String code, IntBinaryOperator operator) {
         this.code = code;
         this.calculatorOperate = operator;
-    }
-
-    static {
-        OPERATOR_CACHE = Arrays.stream(values())
-                .collect(Collectors.toMap(value -> value.code, value -> value));
     }
 
     public static boolean isOperator(String code) {
@@ -47,10 +47,6 @@ public enum Operator {
         return operator;
     }
 
-    public int operate(int result, int input) {
-        return calculatorOperate.applyAsInt(result, input);
-    }
-
     private static void validateDivide(int result, int input) {
         if (input == 0) {
             throw new IllegalArgumentException("0으로 나눌수 없습니다");
@@ -63,5 +59,9 @@ public enum Operator {
 
     private static boolean isNotDividable(int result, int input) {
         return result % input != 0;
+    }
+
+    public int operate(int result, int input) {
+        return calculatorOperate.applyAsInt(result, input);
     }
 }
