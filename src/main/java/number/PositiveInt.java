@@ -8,19 +8,20 @@ import java.util.regex.Pattern;
 public class PositiveInt {
 
     private static final String POSITIVE_INT_PATTERN = "[0-9]";
+    private static final int NEGATIVE_BOUND = 0;
 
-    private int value;
+    private final int value;
 
     public PositiveInt(final int value) {
-        if (value < 0) {
-            throw new RuntimeException("허용되지 않는 값이 존재합니다.");
+        if (value < NEGATIVE_BOUND) {
+            throw new IllegalArgumentException("허용되지 않는 값이 존재합니다.");
         }
         this.value = value;
     }
 
     public static PositiveInt from(final String value) {
         if (isImpossibleToParse(value)) {
-            throw new RuntimeException("허용하지 않는 값이 존재합니다.");
+            throw new IllegalArgumentException("허용하지 않는 값이 존재합니다.");
         }
 
         return new PositiveInt(parseInt(value));
