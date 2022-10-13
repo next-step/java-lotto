@@ -1,72 +1,30 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Calculator {
 
-  List<Integer> numbers = new ArrayList<>();
-  List<String> operators = new ArrayList<>();
+  private final String DELIMITER = " ";
 
-  public int calculate(String question) {
-    QuestionValidation.validateQuestion(question);
-    String[] numsAndOperators = splitString(question);
-    extractNumbers(numsAndOperators);
-    extractOperators(numsAndOperators);
-    int result = numbers.get(0);
-    int ARRAY_LENGTH = operators.size();
-    for (int i = 0; i < ARRAY_LENGTH; i++) {
-      result = operate(operators.get(i), result, numbers.get(i + 1));
+  public int getResult(String expression) {
+    ExpressionValidation.validateExpression(expression);
+    String[] expressions = splitString(expression);
+    int ARRAY_LENGTH = expressions.length;
+    int result = Integer.parseInt(expressions[0]);
+    result = calculate(expressions, ARRAY_LENGTH, result);
+    return result;
+  }
+
+  private static int calculate(String[] expressions, int ARRAY_LENGTH, int result) {
+    for (int i = 1; i < ARRAY_LENGTH; i+=2) {
+      String operator = expressions[i];
+      ExpressionValidation.validateOperator(operator);
+      int number = Integer.parseInt(expressions[i+1]);
+      result = OperatorMapping.getOperator(operator).calculate(result,number);
     }
     return result;
   }
 
-  private String[] splitString(String question) {
-    return question.split(" ");
-  }
-
-  private void extractNumbers(String[] question) {
-    for (int i = 0; i < question.length; i += 2) {
-      this.numbers.add(Integer.parseInt(question[i]));
-    }
-  }
-
-  private void extractOperators(String[] question) {
-    for (int i = 1; i < question.length; i += 2) {
-      this.operators.add(question[i]);
-    }
-  }
-
-  private int operate(String operator, int num1, int num2) {
-    if (operator.equals("+")) {
-      return plus(num1, num2);
-    }
-    if (operator.equals("-")) {
-      return minus(num1, num2);
-    }
-    if (operator.equals("*")) {
-      return multiply(num1, num2);
-    }
-    if (operator.equals("/")) {
-      return divide(num1, num2);
-    }
-    throw new IllegalArgumentException("사칙연산 기호가 아닙니다");
-  }
-
-  private int plus(int num1, int num2) {
-    return num1 + num2;
-  }
-
-  private int minus(int num1, int num2) {
-    return num1 - num2;
-  }
-
-  private int multiply(int num1, int num2) {
-    return num1 * num2;
-  }
-
-  private int divide(int num1, int num2) {
-    return num1 / num2;
+  private String[] splitString(String expression) {
+    return expression.split(DELIMITER);
   }
 
 }
