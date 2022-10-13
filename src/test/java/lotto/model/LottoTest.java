@@ -23,7 +23,7 @@ class LottoTest {
         Lotto lottoNumbers = new Lotto(createLottoNumber(1, 13, 15, 17, 20, 45));
         List<LottoNumber> lastWinLotto = createLottoNumber(1, 13, 15, 17, 33, 45);
 
-        double result = lottoNumbers.matchCount(lastWinLotto);
+        double result = lottoNumbers.matchCount(new Lotto(lastWinLotto));
 
         assertThat(result).isEqualTo(5);
     }
