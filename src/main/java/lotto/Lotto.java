@@ -3,9 +3,15 @@ package lotto;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class Lotto {
+
+    private final List<Number> numbers;
+
+    public Lotto(List<Number> numbers) {
+        Collections.sort(numbers);
+        this.numbers = numbers;
+    }
 
     public static Lotto print(final LottoNumberStrategy lottoNumberStrategy) {
         return new Lotto(lottoNumberStrategy.provideNumberSet());
