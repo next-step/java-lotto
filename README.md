@@ -35,5 +35,5 @@
 - [x] 메서드 명사형 -> 동사형 수정 (calculator -> calculate)
 - [x] 처음 input값 validation -> Expression 클래스에서 처리하기
 - [x] Test input이 하나일때 @ParameterizedTest -> @Test 사용
-- [ ] Operation 테스트 결과 assertThat 명확한 결과로 비교하기
-- [ ] CalcOperator 생성 시 바로 ArithmeticOperation 으로 처리하기.
+- [x] ArithmeticOperation 정적 팩토리 메서드로 처리하기.
+- [ ] 의미없는 test 삭제
