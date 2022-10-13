@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    FOURTH(3,Money.from(5000)),
-    THIRD(4, Money.from(50000)),
-    SECOND(5, Money.from(1500000)),
+    FIFTH(3,Money.from(5000)),
+    FOURTH(4, Money.from(50000)),
+    THIRD(5, Money.from(1500000)),
+    SECOND(5, Money.from(30000000)),
     FIRST(6, Money.from(2000000000)),
     NONE(0, Money.from(0));
 
