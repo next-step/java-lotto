@@ -2,6 +2,7 @@ package lotto.step2.domain.factory;
 
 import lotto.step2.domain.LottoNumber;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,6 +21,7 @@ public class LottoNumbersFactory {
     }
     
     public static List<LottoNumber> getInstance() {
+        Collections.sort(LottoNumbersHolder.LOTTO_NUMBERS);
         return LottoNumbersHolder.LOTTO_NUMBERS;
     }
 }

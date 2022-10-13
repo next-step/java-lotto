@@ -3,6 +3,7 @@ package lotto.step2.domain;
 import lotto.step2.domain.factory.LottoNumbersFactory;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
