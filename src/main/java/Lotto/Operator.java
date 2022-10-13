@@ -3,10 +3,12 @@ package Lotto;
 public abstract class Operator {
     private static final Operator add;
     private static final Operator subtract;
+    private static final Operator multiple;
 
     static {
         add = new Add();
         subtract = new Subtract();
+        multiple = new Multiple();
     }
 
     @Override
@@ -29,6 +31,7 @@ public abstract class Operator {
     public static Operator operatorOf(String value) {
         if (value.equals("+")) return add;
         if (value.equals("-")) return subtract;
+        if (value.equals("*")) return multiple;
         return null;
     }
 }

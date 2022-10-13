@@ -1,0 +1,12 @@
+package Lotto;
+
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class MultipleTest {
+    @Test
+    void 연산() {
+        assertThat(new Multiple().operate(2, 3)).isEqualTo(6);
+    }
+}
