@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class LottoNumberPublisher {
+public class LottoNumberGenerator {
 
-    public static int[] publish() {
+    public static int[] generate() {
         Random random = new Random(System.currentTimeMillis());
         Set<Integer> lottoNumbers = new HashSet<>();
 
