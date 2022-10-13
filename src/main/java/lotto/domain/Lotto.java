@@ -46,6 +46,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean contains(LottoNumber number) {
+        return sortedNumbers.contains(number);
+    }
+
     public List<LottoNumber> getNumbers() {
         return sortedNumbers;
     }
@@ -68,11 +72,6 @@ public class Lotto {
         return "LottoNumbers{" +
                 "sortedNumbers=" + sortedNumbers +
                 '}';
-    }
-
-    public boolean contains(LottoNumber number) {
-        return sortedNumbers.stream()
-                .anyMatch(sortedNumber -> sortedNumber.equals(number));
     }
 
 }

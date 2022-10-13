@@ -6,6 +6,7 @@ import lotto.domain.Money;
 import lotto.domain.WinningCondition;
 import lotto.utils.LottoFactory;
 import lotto.utils.LottoStatisticsCalculator;
+import lotto.utils.LottoUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,14 +15,27 @@ import java.util.List;
 public class LottoApplication {
 
     public static void main(String[] args) {
+        try {
+            runApplication();
+        } catch (Exception e) {
+            handleException(e);
+        }
+    }
+
+    private static void runApplication() {
         Money purchaseAmount = InputView.inputPurchaseAmount();
         int numberOfLottos = (int) purchaseAmount.divideBy(Lotto.PRICE);
-        List<Lotto> purchasedLottos = LottoFactory.createLottos(numberOfLottos);
-        OutputView.printPurchasedLottos(purchasedLottos);
+        List<Lotto> manualLottos = InputView.inputPurchaseLottos(numberOfLottos);
+        List<Lotto> randomLottos = LottoFactory.createLottos(numberOfLottos - manualLottos.size());
+        OutputView.printPurchasedLottos(manualLottos, randomLottos);
 
         WinningCondition winningCondition = InputView.inputWinningCondition();
-        LottoStatisticsResult result = LottoStatisticsCalculator.calculateStatistics(winningCondition, purchasedLottos);
+        LottoStatisticsResult result = LottoStatisticsCalculator.calculateStatistics(winningCondition, LottoUtils.mergeTwoLottoLists(manualLottos, randomLottos));
         OutputView.printResult(result);
+    }
+
+    private static void handleException(Exception e) {
+        OutputView.printException(e);
     }
 
 }
