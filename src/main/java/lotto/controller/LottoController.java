@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.MatchingResult;
+import lotto.domain.*;
 import lotto.strategy.RandomNumberGenerateStrategy;
 
 import java.util.List;
@@ -18,10 +16,9 @@ public class LottoController {
                 .collect(Collectors.toList());
     }
 
-
-    public static List<MatchingResult> getMatchingResults(List<Lotto> lotties, List<Integer> lastWeekAnswer) {
+    public static List<MatchingResult> getMatchingResults(List<Lotto> lotties, WinningNumber winningNumber) {
         return lotties.stream()
-                .map(lotto -> lotto.getMatchingResult(lastWeekAnswer))
+                .map(lotto -> winningNumber.results(lotto.getLottoNumbers()))
                 .collect(Collectors.toList());
     }
 }

@@ -15,23 +15,24 @@ public class WinningStatisticTest {
     void winning_count_test() {
 
         List<MatchingResult> matchingResults = Arrays.asList(
-                new MatchingResult(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new MatchingResult(Arrays.asList(2, 3, 4, 5, 6)),
-                new MatchingResult(Arrays.asList(3, 4, 5, 6)),
-                new MatchingResult(Arrays.asList(1, 2, 5, 6)),
-                new MatchingResult(Arrays.asList(1, 2, 3)),
-                new MatchingResult(Arrays.asList(2, 3, 4)),
-                new MatchingResult(Arrays.asList(2, 3, 5)),
-                new MatchingResult(Arrays.asList(1, 3, 6)),
-                new MatchingResult(Arrays.asList(1, 2, 3, 6))
+                new MatchingResult(6, false),
+                new MatchingResult(5, true),
+                new MatchingResult(5, false),
+                new MatchingResult(4, false),
+                new MatchingResult(3, true),
+                new MatchingResult(3, true),
+                new MatchingResult(3, false),
+                new MatchingResult(3, false),
+                new MatchingResult(4, true)
         );
 
         WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
 
-        assertThat(winningStatistic.getWinningGrades().get(3).getCount()).isEqualTo(4);
-        assertThat(winningStatistic.getWinningGrades().get(4).getCount()).isEqualTo(3);
-        assertThat(winningStatistic.getWinningGrades().get(5).getCount()).isEqualTo(1);
-        assertThat(winningStatistic.getWinningGrades().get(6).getCount()).isEqualTo(1);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.FIFTH).getCount()).isEqualTo(4);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.FOURTH).getCount()).isEqualTo(2);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.THIRD).getCount()).isEqualTo(1);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.SECOND).getCount()).isEqualTo(1);
+        assertThat(winningStatistic.getWinningGrades().get(WinningPrice.FIRST).getCount()).isEqualTo(1);
     }
 
     @Test
@@ -39,13 +40,13 @@ public class WinningStatisticTest {
     void calculate_total_income_rate() {
 
         List<MatchingResult> matchingResults = Arrays.asList(
-                new MatchingResult(Arrays.asList(3, 4, 5, 6)),
-                new MatchingResult(Arrays.asList(1, 2, 5, 6)),
-                new MatchingResult(Arrays.asList(1, 2, 3)),
-                new MatchingResult(Arrays.asList(2, 3, 4)),
-                new MatchingResult(Arrays.asList(2, 3, 5)),
-                new MatchingResult(Arrays.asList(1, 3, 6)),
-                new MatchingResult(Arrays.asList(1, 2, 3, 6))
+                new MatchingResult(4, true),
+                new MatchingResult(4, false),
+                new MatchingResult(3, false),
+                new MatchingResult(3, false),
+                new MatchingResult(3, true),
+                new MatchingResult(3, true),
+                new MatchingResult(4, false)
         );
 
         WinningStatistic winningStatistic = new WinningStatistic(matchingResults);
