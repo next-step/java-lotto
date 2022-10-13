@@ -9,7 +9,7 @@ public class NullCheckUtil {
 
     public static void validate(Object object) {
         if (object == null) {
-            throw NullCannotBeConstructorArgException.of();
+            throw NullCannotBeConstructorArgException.getInstance();
         }
     }
 }

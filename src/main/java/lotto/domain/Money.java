@@ -29,7 +29,7 @@ public class Money {
 
     private void validateZeroOrMore(BigInteger value) {
         if (value.compareTo(BigInteger.ZERO) < 0) {
-            throw NotZeroOrMoreNumberException.of();
+            throw NotZeroOrMoreNumberException.getInstance();
         }
     }
 
@@ -37,7 +37,7 @@ public class Money {
         try {
             return new BigInteger(stringValue);
         } catch (NumberFormatException e) {
-            throw NotNumberStringException.of();
+            throw NotNumberStringException.getInstance();
         }
     }
 

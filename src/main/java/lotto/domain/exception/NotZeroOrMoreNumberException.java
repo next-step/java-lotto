@@ -9,7 +9,7 @@ public class NotZeroOrMoreNumberException extends RuntimeException {
         super(message);
     }
 
-    public static NotZeroOrMoreNumberException of() {
+    public static NotZeroOrMoreNumberException getInstance() {
         return NOT_NUMBER_STRING_EXCEPTION;
     }
 }

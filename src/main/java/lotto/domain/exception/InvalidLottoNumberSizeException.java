@@ -9,7 +9,7 @@ public class InvalidLottoNumberSizeException extends RuntimeException {
         super(message);
     }
 
-    public static InvalidLottoNumberSizeException of() {
+    public static InvalidLottoNumberSizeException getInstance() {
         return INVALID_LOTTO_NUMBER_SIZE_EXCEPTION;
     }
 }

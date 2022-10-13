@@ -9,7 +9,7 @@ public class NullCannotBeConstructorArgException extends RuntimeException {
         super(message);
     }
 
-    public static NullCannotBeConstructorArgException of() {
+    public static NullCannotBeConstructorArgException getInstance() {
         return NOT_NUMBER_STRING_EXCEPTION;
     }
 }

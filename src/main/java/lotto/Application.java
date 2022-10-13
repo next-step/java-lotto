@@ -46,7 +46,7 @@ public class Application {
 
     private static Lotto createLastWeekWinningLotto() {
         try {
-            return Lotto.of(InputView.receiveLastWeekWinningNumber());
+            return Lotto.from(InputView.receiveLastWeekWinningNumber());
         } catch (NotNumberStringException | OutOfRangeLottoNumberException | InvalidLottoNumberSizeException e) {
             System.out.println(e.getMessage());
             return createLastWeekWinningLotto();

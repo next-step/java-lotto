@@ -23,7 +23,7 @@ public class Cashier {
 
     private void validateMinimum(Money money) {
         if (!money.equalOrMoreThan(LOTTO_PRICE)) {
-            throw UnpurchasableAmountOfMoneyException.of();
+            throw UnpurchasableAmountOfMoneyException.getInstance();
         }
     }
 

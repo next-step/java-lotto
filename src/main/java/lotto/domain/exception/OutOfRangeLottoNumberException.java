@@ -9,7 +9,7 @@ public class OutOfRangeLottoNumberException extends RuntimeException {
         super(message);
     }
 
-    public static OutOfRangeLottoNumberException of() {
+    public static OutOfRangeLottoNumberException getInstance() {
         return OUT_OF_RANGE_LOTTO_NUMBER_EXCEPTION;
     }
 }

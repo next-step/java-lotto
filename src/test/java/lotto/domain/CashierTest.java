@@ -11,7 +11,7 @@ public class CashierTest {
     @DisplayName("생성할 때")
     @Nested
     class Create {
-
+        
         @DisplayName("Money 타입을 받는다.")
         @Test
         void createCashier() {

@@ -9,7 +9,7 @@ public class NotNumberStringException extends RuntimeException {
         super(message);
     }
 
-    public static NotNumberStringException of() {
+    public static NotNumberStringException getInstance() {
         return NOT_NUMBER_STRING_EXCEPTION;
     }
 }

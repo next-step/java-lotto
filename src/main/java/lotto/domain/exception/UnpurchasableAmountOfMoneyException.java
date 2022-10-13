@@ -9,7 +9,7 @@ public class UnpurchasableAmountOfMoneyException extends RuntimeException {
         super(message);
     }
 
-    public static UnpurchasableAmountOfMoneyException of() {
+    public static UnpurchasableAmountOfMoneyException getInstance() {
         return NOT_THOUSAND_UNITS_MONEY_EXCEPTION;
     }
 }

@@ -39,7 +39,7 @@ public class LottoTest {
         void create_by_string() {
             Lotto expected = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-            assertThat(Lotto.of(List.of("1", "2", "3", "4", "5", "6")))
+            assertThat(Lotto.from(List.of("1", "2", "3", "4", "5", "6")))
                     .isEqualTo(expected);
         }
 

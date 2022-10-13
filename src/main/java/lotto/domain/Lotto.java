@@ -30,7 +30,7 @@ public class Lotto {
         this(new HashSet<>(elements));
     }
 
-    public static Lotto of(final List<String> elements) {
+    public static Lotto from(final List<String> elements) {
         List<Integer> intElements = elements.stream()
                 .map(Lotto::parseInt)
                 .collect(Collectors.toList());
@@ -48,13 +48,13 @@ public class Lotto {
 
     private void existsWithinLottoNumberRange(final int element) {
         if (element < MIN_NUMBER || element > MAX_NUMBER) {
-            throw OutOfRangeLottoNumberException.of();
+            throw OutOfRangeLottoNumberException.getInstance();
         }
     }
 
     private void validateElementsSize(final Set<Integer> elements) {
         if (elements.size() != MAX_SIZE) {
-            throw InvalidLottoNumberSizeException.of();
+            throw InvalidLottoNumberSizeException.getInstance();
         }
     }
 
@@ -62,7 +62,7 @@ public class Lotto {
         try {
             return Integer.parseInt(stringValue);
         } catch (NumberFormatException e) {
-            throw NotNumberStringException.of();
+            throw NotNumberStringException.getInstance();
         }
     }
 
