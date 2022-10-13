@@ -19,27 +19,39 @@ public class Lotto {
     }
 
     private SortedSet<Integer> generateLotto(String numbers) {
-        numbers = numbers.replaceAll(" ", "");
-        SortedSet<Integer> lottos = new TreeSet<>();
+        numbers = preprocessingData(numbers);
+        SortedSet<Integer> lottoNumberSet = createLottoNumberSet(numbers);
 
-        for (String number : numbers.split(",")) {
-            lottos.add(Integer.parseInt(number));
-        }
-
-        if (lottos.size() < 6) {
+        if (lottoNumberSet.size() < 6) {
             throw new InvalidParameterException("중복된 번호로 로또가 생성되려 하고 있습니다.");
         }
 
+        return lottoNumberSet;
+    }
+
+    private SortedSet<Integer> createLottoNumberSet(String numbers) {
+        SortedSet<Integer> lottos = new TreeSet<>();
+
+        for (String number : numbers.split(",")) {
+            lottos.add(parseInt(number));
+        }
         return lottos;
     }
 
-    public LottoResult getResult(Lotto winningLotto) {
-        int matchCount = 0;
-        for (int number : lottoNumbers) {
-            if (winningLotto.contains(number)) {
-                matchCount += 1;
-            }
+    private int parseInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
         }
+    }
+
+    private String preprocessingData(String numbers) {
+        return numbers.replaceAll(" ", "");
+    }
+
+    public LottoResult getResult(Lotto winningLotto) {
+        int matchCount = (int) lottoNumbers.stream().filter(w->winningLotto.contains(w)).count();
         return LottoResult.values()[matchCount];
     }
 
