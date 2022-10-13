@@ -25,11 +25,17 @@ public class ResultView {
         System.out.println("-------");
         result.forEach((key, value) -> {
             if (key.match != Rank.NONE.match) {
-                System.out.println(key.match +"개 일치 (" + key.money + "원) - " + value + "개");
+                System.out.println(key.match +"개 일치"+ printBonus(key) + " (" + key.money + "원) - " + value + "개");
             }
         });
     }
 
+    private static String printBonus(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return ", 보너스볼 일치 ";
+        }
+        return "";
+    }
     public static void printRating(Map<Rank, Integer> result, int total) {
         double totalWinningMoney = 0;
         for (Entry<Rank, Integer> entry : result.entrySet()) {
