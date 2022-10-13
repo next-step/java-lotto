@@ -32,7 +32,7 @@
 - [x] 반복적인 패턴을 찾아 반복문으로 구현 
 
 ### 리뷰 요구사항
-- [ ] 메서드 명사형 -> 동사형 수정 (calculator -> calculate)
+- [x] 메서드 명사형 -> 동사형 수정 (calculator -> calculate)
 - [ ] Test input이 하나일때 @ParameterizedTest -> @Test 사용
 - [ ] Operation 테스트 결과 assertThat 명확한 결과로 비교하기
 - [ ] 처음 input값 validation 다른 클래스에서 처리하기

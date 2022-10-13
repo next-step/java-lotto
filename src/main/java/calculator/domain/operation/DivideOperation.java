@@ -4,7 +4,7 @@ import calculator.domain.CalcNumber;
 
 public class DivideOperation implements ArithmeticOperation {
     @Override
-    public CalcNumber calculator(CalcNumber a, CalcNumber b) {
+    public CalcNumber calculate(CalcNumber a, CalcNumber b) {
         return new CalcNumber(a.getNumber() / b.getNumber());
     }
 }

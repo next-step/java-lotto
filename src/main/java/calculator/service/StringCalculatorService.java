@@ -25,7 +25,7 @@ public class StringCalculatorService {
         for (int i = 2; i < operations.size(); i += 2) {
             CalcOperator operator = new CalcOperator(operations.get(i - 1));
             CalcNumber nextNum = new CalcNumber(operations.get(i));
-            result = operator.operate().calculator(result, nextNum);
+            result = operator.operate().calculate(result, nextNum);
         }
         return result;
     }
