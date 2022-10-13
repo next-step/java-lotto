@@ -2,11 +2,21 @@ package lotto;
 
 import java.util.Objects;
 
+import lotto.model.LottoReward;
+
 public class LottoMatchResult {
     private final int count;
 
-    public LottoMatchResult(int count) {
+    private LottoMatchResult(int count) {
         this.count = count;
+    }
+
+    public static LottoMatchResult of(int count) {
+        return new LottoMatchResult(count);
+    }
+
+    public LottoReward getLottoReward() {
+        return LottoReward.findByMatchResult(this);
     }
 
     @Override

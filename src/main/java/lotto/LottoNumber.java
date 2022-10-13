@@ -21,7 +21,7 @@ public class LottoNumber {
             }
         }
 
-        return new LottoMatchResult(matched);
+        return LottoMatchResult.of(matched);
     }
 
     @Override
@@ -39,5 +39,9 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

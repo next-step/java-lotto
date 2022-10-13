@@ -1,13 +1,14 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
 public class LottoNumberGenerator {
 
     public static List<Integer> generate() {
-        Random random = new Random(System.currentTimeMillis());
+        Random random = new Random();
 
         List<Integer> lottoNumbers = new ArrayList<>();
 
@@ -19,6 +20,8 @@ public class LottoNumberGenerator {
                 lottoNumbers.add(randomNumber);
             }
         }
+
+        lottoNumbers.sort(Comparator.naturalOrder());
 
         return List.copyOf(lottoNumbers);
     }

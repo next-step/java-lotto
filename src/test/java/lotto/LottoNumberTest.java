@@ -17,7 +17,7 @@ public class LottoNumberTest {
     void match(List<Integer> winningNumbers, int expectedMatchCount) {
         LottoNumber lottoNumber = new LottoNumber(List.of(1,2,3,4,5,6));
 
-        Assertions.assertThat(lottoNumber.match(new WinningNumber(winningNumbers))).isEqualTo(new LottoMatchResult(expectedMatchCount));
+        Assertions.assertThat(lottoNumber.match(new WinningNumber(winningNumbers))).isEqualTo(LottoMatchResult.of(expectedMatchCount));
     }
 
     private static Stream<Arguments> provideWinningNumbers() {
