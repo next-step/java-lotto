@@ -4,6 +4,7 @@ import static java.lang.Integer.parseInt;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
+import operator.Operator;
 
 public class PositiveInt {
 
@@ -31,6 +32,10 @@ public class PositiveInt {
         return !Pattern.matches(POSITIVE_INT_PATTERN, input);
     }
 
+    public PositiveInt calculate(PositiveInt y, Operator o) {
+        return new PositiveInt(o.execute(this.value, y.value));
+    }
+
     public int getValue() {
         return this.value;
     }
@@ -45,7 +50,7 @@ public class PositiveInt {
             return false;
         }
 
-        return this.value != ((PositiveInt) o).value;
+        return this.value == ((PositiveInt) o).value;
     }
 
     @Override

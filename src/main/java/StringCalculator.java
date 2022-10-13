@@ -1,4 +1,3 @@
-import java.util.Objects;
 import number.PositiveInt;
 import operator.Operator;
 
@@ -33,9 +32,8 @@ public class StringCalculator {
     private PositiveInt intermediateCalculate(PositiveInt x, String sign, String number) {
         Operator operator = Operator.findBySign(sign);
         PositiveInt y = PositiveInt.from(number);
-        int intermediate = operator.execute(x.getValue(), y.getValue());
 
-        return new PositiveInt(intermediate);
+        return x.calculate(y, operator);
     }
 
     public static StringCalculator getInstance() {
