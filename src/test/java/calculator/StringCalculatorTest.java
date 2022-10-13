@@ -51,4 +51,36 @@ public class StringCalculatorTest {
 
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1 - 2:-1", "1 - 3 - 5:-7", "10 - 2:8"}, delimiter = ':')
+    public void sub(String text, int expected) {
+        int result = StringCalculator.calculate(text);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1 * 2:2", "1 * 3 * 5:15", "-1 * 0 * 1 * 2:0"}, delimiter = ':')
+    public void multi(String text, int expected) {
+        int result = StringCalculator.calculate(text);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2 / 1:2", "4 / 2:2", "4 / 2 / 2:1"}, delimiter = ':')
+    public void divide(String text, int expected) {
+        int result = StringCalculator.calculate(text);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2 + 3 * 4 / 2:10", "2 + 3 * 4 / 2 - 5:5"}, delimiter = ':')
+    public void mixed_operator(String text, int expected) {
+        int result = StringCalculator.calculate(text);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

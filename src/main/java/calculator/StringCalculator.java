@@ -36,14 +36,32 @@ public class StringCalculator {
         for (int i = 1; i < tokens.size() - 1; i += 2) {
             operator = getOperator(tokens.get(i));
             currenNum = Integer.parseInt(tokens.get(i + 1));
-            if ("+".equals(operator)) {
-                result = sum(preNum, currenNum);
-            }
-            System.out.printf("preNum : %d, operator : %s, currentNum : %d, result : %d%n", preNum, operator, currenNum, result);
+            result = operate(preNum, currenNum, operator);
+
+            //debug print
+            //System.out.printf("preNum : %d, operator : %s, currentNum : %d, result : %d%n", preNum, operator, currenNum, result);
+
             preNum = result;
         }
         return result;
     }
+
+    private static int operate(int preNum, int currentNum, String operator) {
+        if ("+".equals(operator)) {
+            return sum(preNum, currentNum);
+        }
+        if ("-".equals(operator)) {
+            return sub(preNum, currentNum);
+        }
+        if ("*".equals(operator)) {
+            return multi(preNum, currentNum);
+        }
+        if ("/".equals(operator)) {
+            return divide(preNum, currentNum);
+        }
+        throw new IllegalArgumentException(String.format("input operator : [%s], 처리할수 없는 연산자가 넘어왔다", operator));
+    }
+
 
     private static String getOperator(String token) {
         isValidOperator(token);
@@ -52,5 +70,16 @@ public class StringCalculator {
 
     private static int sum(int a, int b) {
         return a + b;
+    }
+
+    private static int sub(int a, int b) {
+        return a - b;
+    }
+    private static int divide(int a, int b) {
+        return a / b;
+    }
+
+    private static int multi(int a, int b) {
+        return a * b;
     }
 }
