@@ -1,14 +1,15 @@
 import domain.Calculator;
 import view.InputView;
+import view.ResultView;
 
 public class Main {
 
   public static void main(String[] args) {
 
-    String question = InputView.question();
+    String question = InputView.expression();
     Calculator calculator = new Calculator();
-    int result = calculator.calculate(question);
-    System.out.println("정답은 " + result + " 입니다");
+    int result = calculator.getResult(question);
+    ResultView.printResult(result);
   }
 
 }
