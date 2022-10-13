@@ -12,9 +12,9 @@ public class LottoRankRecordFactory {
     private LottoRankRecordFactory() {
     }
 
-    public static List<LottoRankRecord> createLottoRankRecords(List<Integer> correctNums) {
+    public static List<LottoRankRecord> createLottoRankRecords(List<CorrectInfo> correctInfos) {
         List<LottoRankRecord> lottoRankRecords = new ArrayList<>();
-        Map<LottoRank, Integer> rankRecord = recordWinRank(correctNums);
+        Map<LottoRank, Integer> rankRecord = recordWinRank(correctInfos);
         for (LottoRank lottoRank : rankRecord.keySet()) {
             int number = rankRecord.get(lottoRank);
             lottoRankRecords.add(new LottoRankRecord(lottoRank, number));
@@ -22,10 +22,10 @@ public class LottoRankRecordFactory {
         return Collections.unmodifiableList(lottoRankRecords);
     }
 
-    private static Map<LottoRank, Integer> recordWinRank(List<Integer> correctNums) {
+    private static Map<LottoRank, Integer> recordWinRank(List<CorrectInfo> correctInfos) {
         Map<LottoRank, Integer> rankRecord = initilizeRankRecord();
-        for (Integer correctNum : correctNums) {
-            insertRankValue(rankRecord, LottoRank.findRank(correctNum));
+        for (CorrectInfo correctInfo : correctInfos) {
+            insertRankValue(rankRecord, LottoRank.findRank(correctInfo.getCorrectCount(), correctInfo.isBonus()));
         }
         return rankRecord;
     }
@@ -39,9 +39,7 @@ public class LottoRankRecordFactory {
     }
 
     private static void insertRankValue(Map<LottoRank, Integer> rankRecord, LottoRank rank) {
-        if (!LottoRank.NONE.equals(rank)) {
-            rankRecord.put(rank, rankRecord.get(rank) + 1);
-        }
+        rankRecord.put(rank, rankRecord.get(rank) + 1);
     }
 
 
