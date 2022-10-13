@@ -10,4 +10,12 @@ public class Multiple extends Operator {
     public int execute(int number) {
         return number * target;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Multiple)) {
+            return false;
+        }
+        return target == ((Operator) o).target;
+    }
 }

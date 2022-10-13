@@ -7,4 +7,12 @@ public abstract class Operator {
         this.target = target;
     }
     public abstract int execute(int number);
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Operator)) {
+            return false;
+        }
+        return target == ((Operator) o).target;
+    }
 }

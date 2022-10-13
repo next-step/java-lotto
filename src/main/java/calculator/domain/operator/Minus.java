@@ -9,4 +9,12 @@ public class Minus extends Operator {
     public int execute(int number) {
         return number - target;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Minus)) {
+            return false;
+        }
+        return target == ((Operator) o).target;
+    }
 }

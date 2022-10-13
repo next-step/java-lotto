@@ -10,4 +10,12 @@ public class Plus extends Operator {
     public int execute(int number) {
         return number + target;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Plus)) {
+            return false;
+        }
+        return target == ((Operator) o).target;
+    }
 }
