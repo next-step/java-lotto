@@ -11,11 +11,12 @@ public class StringCalculator {
     }
 
     public int calculate() {
-        int result = Integer.parseInt(stringList[START_NUM_INDEX]);
+        NumberValue result = new NumberValue(stringList[START_NUM_INDEX]);
         for (int i = START_NUM_INDEX + 1; i < stringList.length; i += 2) {
             Operation op = Operation.findBySymbol(stringList[i]);
-            result = op.apply(result, Integer.parseInt(stringList[i + 1]));
+            NumberValue numberValue = new NumberValue(stringList[i + 1]);
+            result = op.apply(result, numberValue);
         }
-        return result;
+        return result.getValue();
     }
 }

@@ -1,4 +1,4 @@
-package domain;
+package calculator.domain;
 
 import calculator.domain.StringCalculator;
 import org.assertj.core.api.Assertions;
