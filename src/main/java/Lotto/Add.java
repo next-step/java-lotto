@@ -1,7 +1,7 @@
 package Lotto;
 
 public class Add extends Operator {
-    int operate(int num1, int num2) {
+    public int operate(int num1, int num2) {
         return num1 + num2;
     }
 

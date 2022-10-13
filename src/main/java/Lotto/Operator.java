@@ -16,9 +16,9 @@ public abstract class Operator {
         return "Operator{}";
     }
 
-    abstract int operate(int num1, int num2);
+    public abstract int operate(int num1, int num2);
 
-    static Operator operatorOf(String value) {
+    public static Operator operatorOf(String value) {
         if (value.equals("+")) return new Add();
         return null;
     }
