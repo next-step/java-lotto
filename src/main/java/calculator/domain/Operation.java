@@ -25,7 +25,14 @@ public enum Operation {
     }
 
     public int apply(int x, int y) {
+        if (isDivideWithZero(y)) {
+            throw new IllegalArgumentException("0으로 나눌수 없습니다.");
+        }
         return op.apply(x, y);
+    }
+
+    private boolean isDivideWithZero(final int y) {
+        return this == DIVIDE && y == 0;
     }
 
     private String getSymbol() {
