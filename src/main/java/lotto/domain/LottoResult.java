@@ -23,7 +23,7 @@ public class LottoResult {
     public void result(Lotto winningNumbers, List<Lotto> lottoNumbers, int bonusBall) {
         for (Lotto lotto : lottoNumbers) {
             int count = lotto.matches(winningNumbers);
-            Rank calculate = Rank.calculate(count, lottoNumbers.contains(bonusBall));
+            Rank calculate = Rank.calculate(count, lotto.matches(bonusBall));
             put(calculate);
         }
     }

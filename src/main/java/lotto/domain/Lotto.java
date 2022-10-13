@@ -22,6 +22,11 @@ public class Lotto {
             .count();
     }
 
+    public boolean matches(int bonus) {
+        return lotto.stream()
+            .anyMatch(lotto::contains);
+    }
+
     private static boolean isDuplicate(List<LottoNumber> lottoNumbers) {
         int count = (int) lottoNumbers.stream()
             .distinct()
