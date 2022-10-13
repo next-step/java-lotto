@@ -24,8 +24,4 @@ public class NumberUtil {
             throw new ValidateNumberException();
         }
     }
-
-    public static Boolean isOdd(Integer i) {
-        return i % 2 == 0;
-    }
 }
