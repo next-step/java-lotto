@@ -3,11 +3,13 @@ package lotto.client;
 import lotto.model.Lotteries;
 import lotto.model.enumeration.Rank;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static lotto.model.enumeration.Rank.MISS;
-import static lotto.model.enumeration.Rank.SECOND;
+import static lotto.model.enumeration.Rank.*;
 
 public class OutputView {
 
@@ -50,8 +52,8 @@ public class OutputView {
                 );
     }
 
-    public static void showReturnRate(Lotteries lotteries, Map<Rank, Long> lotteriesRank, int purchaseAmount) {
-        double returnRate = lotteries.getTotalWinningMoney(lotteriesRank) / purchaseAmount;
+    public static void showReturnRate(Map<Rank, Long> lotteriesRank, int purchaseAmount) {
+        double returnRate = getTotalWinningMoney(lotteriesRank) / purchaseAmount;
 
         show(RETURN_RATE_FORM.replace("{rate}", String.format("%.2f", returnRate)));
 

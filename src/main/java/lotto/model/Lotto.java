@@ -22,8 +22,8 @@ public class Lotto {
         return lotto;
     }
 
-    public double matchCount(List<LottoNumber> lastWinLotto) {
-        return toIntExact(lastWinLotto.stream()
+    public double matchCount(Lotto lastWinLotto) {
+        return toIntExact(lastWinLotto.getLotto().stream()
                 .filter(lotto::contains)
                 .count());
     }
