@@ -3,10 +3,10 @@ package stringcalculator;
 import java.util.Objects;
 
 public class Number {
-    private final int number;
+    private final int value;
 
-    public Number(int number) {
-        this.number = number;
+    public Number(int value) {
+        this.value = value;
     }
 
     public static Number valueOf(String number) {
@@ -29,35 +29,35 @@ public class Number {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Number number1 = (Number) o;
-        return number == number1.number;
+        return value == number1.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
 
-    public Number plus(Number value) {
-        return new Number(number + value.number);
+    public Number plus(Number number) {
+        return new Number(this.value + number.value);
     }
 
-    public Number subtract(Number value) {
-        return new Number(number - value.number);
+    public Number subtract(Number number) {
+        return new Number(this.value - number.value);
     }
 
-    public Number multiply(Number value) {
-        return new Number(number * value.number);
+    public Number multiply(Number number) {
+        return new Number(this.value * number.value);
     }
 
-    public Number divide(Number value) {
-        if (value.number == 0) {
+    public Number divide(Number number) {
+        if (number.value == 0) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
 
-        if (number % value.number != 0) {
+        if (this.value % number.value != 0) {
             throw new ArithmeticException("나눗셈 결과가 정수로 나누어 떨어지지 않습니다.");
         }
 
-        return new Number(number / value.number);
+        return new Number(this.value / number.value);
     }
 }
