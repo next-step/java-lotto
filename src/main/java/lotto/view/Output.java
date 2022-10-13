@@ -1,7 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
-import lotto.domain.LottoTicket;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ public class Output {
         System.out.println(print);
     }
 
-    public static void printBuyTickets(final List<LottoTicket> lottoTickets) {
+    public static void printBuyTickets(final List<Lotto> lottoTickets) {
         StringBuilder print = new StringBuilder();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            print.append(lottoTicket.lottoTicket().toString()).append(ENTER);
+        for (Lotto lotto : lottoTickets) {
+            print.append(lotto.lottoNumber().toString()).append(ENTER);
         }
         System.out.println(print);
     }

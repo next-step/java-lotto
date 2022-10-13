@@ -1,13 +1,14 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.WinningNumber;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import validator.InputValidator;
 
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toCollection;
 import static validator.InputValidator.isContains;
 import static validator.InputValidator.isNumeric;
 
@@ -25,15 +26,17 @@ public class Input {
         throw new InputMismatchException("입력하신 금액이 올바르지 않습니다. 숫자만 입력 가능합니다.");
     }
 
-    public LottoTicket winningNumberOfLastWeek() {
+    public Lotto winningNumberOfLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.(ex.3,14,16,19,22,24)");
         String input = SCANNER.nextLine();
+
         if (isContains(input, SEPARATOR_OF_LOTTO_TICKET_NUMBER) && Arrays.stream(input.split(SEPARATOR_OF_LOTTO_TICKET_NUMBER))
                 .allMatch(InputValidator::isNumeric)) {
-            return new LottoTicket(Stream.of(input.split(SEPARATOR_OF_LOTTO_TICKET_NUMBER))
+
+            return new Lotto(Arrays.stream(input.split(SEPARATOR_OF_LOTTO_TICKET_NUMBER))
                     .mapToInt(Integer::parseInt)
-                    .boxed()
-                    .collect(toCollection(TreeSet::new)));
+                    .mapToObj(LottoNumber::lottoNumber)
+                    .collect(Collectors.toList()));
         }
         throw new InputMismatchException("당첨 번호는 숫자만 입력 가능하며, 콤마로 구분해야 합니다.");
     }
