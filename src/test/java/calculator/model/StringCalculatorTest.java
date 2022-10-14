@@ -1,7 +1,7 @@
 package calculator.model;
 
 import calculator.exception.NotEssenceException;
-import calculator.exception.ValidateInputException;
+import calculator.exception.InvalidInputException;
 import calculator.exception.ValidateNumberException;
 import calculator.exception.ValidateOperatorException;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +23,7 @@ class StringCalculatorTest {
     @NullAndEmptySource
     void input_test_null_empty(String input) {
         // expected
-        assertThatExceptionOfType(ValidateInputException.class)
+        assertThatExceptionOfType(InvalidInputException.class)
                 .isThrownBy(() -> stringCalculator.makeInputList(input));
     }
 

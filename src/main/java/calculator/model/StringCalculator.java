@@ -1,6 +1,6 @@
 package calculator.model;
 
-import calculator.exception.ValidateInputException;
+import calculator.exception.InvalidInputException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +33,7 @@ public class StringCalculator {
 
     public String validateInput(String input) {
         if (input == null || input.isEmpty()) {
-            throw new ValidateInputException();
+            throw new InvalidInputException();
         }
         return input;
     }
