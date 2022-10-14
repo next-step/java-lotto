@@ -13,10 +13,14 @@ public class Separator {
 	public Separator(String input) {
 		String[] split = input.split(" ");
 		for (int i = 0; i < split.length; i++) {
-			if (checkEven(split, i))
-				continue;
-			odd.add(split[i]);
+			addOdd(split, i);
 		}
+	}
+
+	private void addOdd(String[] split, int index) {
+		if (checkEven(split, index))
+			return;
+		odd.add(split[index]);
 	}
 
 	private boolean checkEven(String[] split, int i) {
