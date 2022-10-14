@@ -53,10 +53,11 @@ public class LottoController {
         Map<Integer, Integer> checkLotto = lottoService.checkLotto(lottos, winner);
 
         LottoOutput.statistics();
-        for (int i = 5; i >= 1; i--) {
-            LottoReward value = LottoReward.lottoReward(i);
-            LottoOutput.match(value.rank(), value.reward(), checkLotto.get(value.rank()));
-        }
+        LottoOutput.match(3, LottoReward.FIFTH.reward(), checkLotto.get(LottoReward.FIFTH.rank()));
+        LottoOutput.match(4, LottoReward.FOURTH.reward(), checkLotto.get(LottoReward.FOURTH.rank()));
+        LottoOutput.match(5, LottoReward.THIRD.reward(), checkLotto.get(LottoReward.THIRD.rank()));
+        LottoOutput.matchBonusNumber(5, LottoReward.SECOND.reward(), checkLotto.get(LottoReward.SECOND.rank()));
+        LottoOutput.match(6, LottoReward.FIRST.reward(), checkLotto.get(LottoReward.FIRST.rank()));
 
         LottoOutput.yield(lottoService.yield(lottos, winner, money));
     }
