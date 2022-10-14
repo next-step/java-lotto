@@ -34,7 +34,7 @@ public class LottoStatistic {
     private void plusLottoResultCount(List<LottoResult> lottoResults) {
         lottoResults.stream()
                 .filter(Objects::nonNull)
-                .forEach(lottoResult -> lottoResultCounter.merge(lottoResult, 1, (result, count) -> result + count));
+                .forEach(lottoResult -> lottoResultCounter.merge(lottoResult, 1, Integer::sum));
     }
 
     private void sumWinMoney(List<LottoResult> lottoResult) {
