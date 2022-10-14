@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumberSet {
 
@@ -53,6 +54,7 @@ public class LottoNumberSet {
     @Override
     public String toString() {
         return lottoNumberSet.stream()
+                .sorted(Comparator.comparingInt(LottoNumber::number))
                 .map(lottoNumber -> lottoNumber.toString())
                 .collect(Collectors.joining(", "));
     }
