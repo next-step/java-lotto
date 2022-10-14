@@ -4,7 +4,8 @@ public class Calculator {
     private static final String INVALID_INPUT = "유효하지 않은 입력값입니다.";
 
     public static void main(String[] args) {
-        System.out.println(Calculator.calculate("10 + 2 + 9"));
+        int result = Calculator.calculate(InputView.inputCalculation());
+        ResultView.print(result);
     }
 
     public static int calculate(String valueText) {
