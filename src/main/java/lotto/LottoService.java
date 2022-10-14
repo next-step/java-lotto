@@ -41,8 +41,8 @@ public class LottoService {
         return new Money(reward(lottos, winner)).divide(money);
     }
 
-    private int reward(List<Lotto> lottos, LottoWinner winner) {
-        int result = 0;
+    private long reward(List<Lotto> lottos, LottoWinner winner) {
+        long result = 0;
         Map<Integer, Integer> lotto = checkLotto(lottos, winner);
         for (int i = 5; i >= 1; i--) {
             result += LottoReward.reward(i) * lotto.get(i);

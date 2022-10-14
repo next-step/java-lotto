@@ -24,8 +24,4 @@ public enum LottoReward {
     public static int reward(int rank) {
         return values()[rank - 1].reward();
     }
-
-    public static LottoReward lottoReward(int rank) {
-        return LottoReward.values()[rank - 1];
-    }
 }
