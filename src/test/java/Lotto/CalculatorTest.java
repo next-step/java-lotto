@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class CalculatorTest {
     @Test
@@ -47,5 +48,13 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         int result = calculator.calculate("10 + 2 * 3 / 6 - 1");
         assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    void 연산자외_다른_기호_들어오면_exception_처리() {
+        Calculator calculator = new Calculator();
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            calculator.calculate("10 ! 10");
+        }).withMessageContaining("사칙연산이 아닙니다.");
     }
 }

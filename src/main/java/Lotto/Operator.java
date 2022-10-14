@@ -39,6 +39,7 @@ public abstract class Operator {
         if (value.equals(SUBTRACT)) return subtract;
         if (value.equals(MULTIPLE)) return multiple;
         if (value.equals(DIVIDE)) return divide;
-        return null;
+
+        throw new IllegalArgumentException("사칙연산이 아닙니다.");
     }
 }
