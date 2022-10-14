@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberSet;
 import lotto.domain.Money;
 
@@ -18,5 +19,10 @@ public class LottoInput {
         return LottoNumberSet.createLottoNumbers(
                 Arrays.stream(scanner.nextLine().split(", ")).mapToInt(i -> Integer.parseInt(i)).toArray()
         );
+    }
+
+    public static LottoNumber bonusNumber() {
+        Scanner scanner = new Scanner(System.in);
+        return new LottoNumber(scanner.nextInt());
     }
 }
