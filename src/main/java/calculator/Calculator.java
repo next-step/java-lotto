@@ -3,9 +3,6 @@ package calculator;
 import utils.StringSplit;
 
 public class Calculator {
-    public Calculator() {
-    }
-
     public static int calculate(String input) {
         String[] str = StringSplit.split(input);
         int result = Integer.parseInt(str[0]);
