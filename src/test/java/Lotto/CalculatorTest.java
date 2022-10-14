@@ -1,6 +1,8 @@
 package Lotto;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 
@@ -56,5 +58,14 @@ public class CalculatorTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             calculator.calculate("10 ! 10");
         }).withMessageContaining("사칙연산이 아닙니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", " "})
+    void 공백이_들어오면_exception_처리(String input) {
+        Calculator calculator = new Calculator();
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            calculator.calculate(input);
+        }).withMessageContaining("유효하지 않은 입력값입니다.");
     }
 }

@@ -1,14 +1,16 @@
 package Lotto;
 
 public class Calculator {
+    private static final String INVALID_INPUT = "유효하지 않은 입력값입니다.";
 
     public static void main(String[] args) {
         System.out.println(Calculator.calculate("10 + 2 + 9"));
     }
 
     public static int calculate(String valueText) {
-        String[] values = valueText.split(" ");
+        if (valueText.isBlank()) throw new IllegalArgumentException(INVALID_INPUT);
 
+        String[] values = valueText.split(" ");
         int result = toNumber(values[0]);
         for (int i = 1; i < values.length; i += 2) {
             Operator operator = Operator.operatorOf(values[i]);
@@ -21,6 +23,7 @@ public class Calculator {
     }
 
     private static int toNumber(String value) {
+        if (value.isBlank()) throw new IllegalArgumentException(INVALID_INPUT);
         return Integer.parseInt(value);
     }
 }
