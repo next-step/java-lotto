@@ -27,11 +27,7 @@ public class TicketsByRanks {
     }
 
     private void addTicketsByRanks(Rank rank, MyTicket myTicket) {
-        if (ticketsByRanks.containsKey(rank)) {
-            ticketsByRanks.get(rank).add(myTicket);
-            return;
-        }
-        ticketsByRanks.put(rank, new ArrayList<>());
+        ticketsByRanks.putIfAbsent(rank, new ArrayList<>());
         ticketsByRanks.get(rank).add(myTicket);
     }
 }

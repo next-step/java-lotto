@@ -30,9 +30,9 @@ class TicketsByRanksTest {
             int strikeTicketCount = ticketsByRanks.getTicketsByRank(rank).size();
             System.out.println("rank " + rank.name() + " => " + strikeTicketCount);
             assertThat(strikeTicketCount).isGreaterThanOrEqualTo(0);
-            assertThat(strikeTicketCount).isLessThanOrEqualTo(myTickets.getTicketCount());
+            assertThat(strikeTicketCount).isLessThanOrEqualTo(myTickets.getTickets().size());
             totalTicketCount += strikeTicketCount;
         }
-        assertThat(totalTicketCount).isEqualTo(myTickets.getTicketCount());
+        assertThat(totalTicketCount).isEqualTo(myTickets.getTickets().size());
     }
 }

@@ -5,6 +5,7 @@ import com.game.lotto.ticket.MyTicket;
 import com.game.lotto.ticket.TicketsByRanks;
 import com.game.lotto.ui.ResultView;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.game.lotto.ui.ResultView.*;
@@ -32,11 +33,9 @@ public class EarningRates {
     }
 
     private void calculateTotalPrize() {
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.FIRST_PRIZE_MONEY_AMOUNT_WITH_6_STRIKES);
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.SECOND_PRIZE_MONEY_AMOUNT_WITH_5_STRIKES_AND_BONUS);
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.THIRD_PRIZE_MONEY_AMOUNT_WITH_5_STRIKES);
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.FOURTH_PRIZE_MONEY_AMOUNT_WITH_4_STRIKES);
-        totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(Rank.FIFTH_PRIZE_MONEY_AMOUNT_WITH_3_STRIKES);
+        Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equals(Rank.NONE))
+                .forEach(rank -> totalAmountOfPrizeMoney += getTotalAmountOfPrizeMoney(rank));
     }
 
     private long getTotalAmountOfPrizeMoney(Rank rank) {

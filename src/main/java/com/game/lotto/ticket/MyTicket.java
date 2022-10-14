@@ -23,10 +23,8 @@ public class MyTicket {
         for (Integer number : this.numbers) {
             strikes = addStrikeIfNumberExists(winnerTicket, strikes, number);
         }
-        if(strikes == 5 && numbers.contains(winnerTicket.getBonusNumber())) {
-            return Rank.SECOND_PRIZE_MONEY_AMOUNT_WITH_5_STRIKES_AND_BONUS;
-        }
-        return Rank.valueOf(strikes);
+        boolean containsBonusBall = strikes == 5 && numbers.contains(winnerTicket.getBonusNumber());
+        return Rank.valueOf(strikes, containsBonusBall);
     }
 
     private int addStrikeIfNumberExists(WinnerTicket winnerTicket, int strikes, Integer number) {

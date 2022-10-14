@@ -24,11 +24,12 @@ public enum Rank {
         return moneyAmount;
     }
 
-    public static Rank valueOf(int strikes) {
-        if(strikes == 6) return FIRST_PRIZE_MONEY_AMOUNT_WITH_6_STRIKES;
-        if(strikes == 5) return THIRD_PRIZE_MONEY_AMOUNT_WITH_5_STRIKES;
-        if(strikes == 4) return FOURTH_PRIZE_MONEY_AMOUNT_WITH_4_STRIKES;
-        if(strikes == 3) return FIFTH_PRIZE_MONEY_AMOUNT_WITH_3_STRIKES;
+    public static Rank valueOf(int strikes, boolean containsBonusBall) {
+        if (strikes == 6) return FIRST_PRIZE_MONEY_AMOUNT_WITH_6_STRIKES;
+        if (strikes == 5 && containsBonusBall) return SECOND_PRIZE_MONEY_AMOUNT_WITH_5_STRIKES_AND_BONUS;
+        if (strikes == 5) return THIRD_PRIZE_MONEY_AMOUNT_WITH_5_STRIKES;
+        if (strikes == 4) return FOURTH_PRIZE_MONEY_AMOUNT_WITH_4_STRIKES;
+        if (strikes == 3) return FIFTH_PRIZE_MONEY_AMOUNT_WITH_3_STRIKES;
         return NONE;
     }
 }

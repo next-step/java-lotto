@@ -13,7 +13,6 @@ public class LottoGameApplication {
     public static void main(String[] args) {
         int inputPrice = InputView.inputPrice();
         LottoGame lottoGame = new LottoGame(inputPrice, new RandomLottoNumberGenerator());
-        ResultView.printOutputCountMessage(lottoGame.getTicketCount());
 
         List<Integer> winnerNumbers = InputView.inputLastWinnerNumber();
         int bonusNumber = InputView.inputBonusNumber();
