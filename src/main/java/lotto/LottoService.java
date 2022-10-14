@@ -30,6 +30,7 @@ public class LottoService {
         for (int i = 5; i >= 0; i--) {
             result.put(i, 0);
         }
+
         for (Lotto lotto : lottos) {
             int rank = winner.rank(lotto);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
@@ -44,7 +45,7 @@ public class LottoService {
     private long reward(List<Lotto> lottos, LottoWinner winner) {
         long result = 0;
         Map<Integer, Integer> lotto = checkLotto(lottos, winner);
-        for (int i = 5; i >= 1; i--) {
+        for (int i = 5; i >= 0; i--) {
             result += LottoReward.reward(i) * lotto.get(i);
         }
         return result;

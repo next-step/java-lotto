@@ -16,7 +16,7 @@ public class LottoInput {
 
     public static LottoNumberSet winnerNumbers() {
         Scanner scanner = new Scanner(System.in);
-        return LottoNumberSet.createLottoNumbers(
+        return LottoNumberSet.createLottoNumberSet(
                 Arrays.stream(scanner.nextLine().split(", ")).mapToInt(i -> Integer.parseInt(i)).toArray()
         );
     }

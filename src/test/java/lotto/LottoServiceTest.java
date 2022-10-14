@@ -30,16 +30,16 @@ public class LottoServiceTest {
     @Test
     void check_lotto() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(LottoNumberSet.createLottoNumbers(1, 2, 3, 4, 5, 6)),
-                new Lotto(LottoNumberSet.createLottoNumbers(2, 3, 4, 5, 6, 7)),
-                new Lotto(LottoNumberSet.createLottoNumbers(2, 3, 4, 5, 6, 9)),
-                new Lotto(LottoNumberSet.createLottoNumbers(3, 4, 5, 6, 7, 8)),
-                new Lotto(LottoNumberSet.createLottoNumbers(4, 5, 6, 7, 8, 9)),
-                new Lotto(LottoNumberSet.createLottoNumbers(5, 6, 7, 8, 9, 10)),
-                new Lotto(LottoNumberSet.createLottoNumbers(6, 7, 8, 9, 10, 11)),
-                new Lotto(LottoNumberSet.createLottoNumbers(7, 8, 9, 10, 11, 12))
+                new Lotto(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 7)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 9)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(3, 4, 5, 6, 7, 8)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(5, 6, 7, 8, 9, 10)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(6, 7, 8, 9, 10, 11)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12))
         );
-        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumbers(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
         assertThat(lottoService.checkLotto(lottoList, winner))
                 .isEqualTo(Map.of(0, 3, 1, 1, 2, 1, 3, 1, 4, 1, 5, 1));
@@ -49,12 +49,12 @@ public class LottoServiceTest {
     @Test
     void yield() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(LottoNumberSet.createLottoNumbers(4, 5, 6, 7, 8, 9)),
-                new Lotto(LottoNumberSet.createLottoNumbers(5, 6, 7, 8, 9, 10)),
-                new Lotto(LottoNumberSet.createLottoNumbers(6, 7, 8, 9, 10, 11)),
-                new Lotto(LottoNumberSet.createLottoNumbers(7, 8, 9, 10, 11, 12))
+                new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(5, 6, 7, 8, 9, 10)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(6, 7, 8, 9, 10, 11)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12))
         );
-        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumbers(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
 
         assertThat(lottoService.yield(lottoList, winner, new Money(10000))).isEqualTo(0.5);
