@@ -18,10 +18,14 @@ public enum LottoReward {
     }
 
     public int rank() {
-        return reward;
+        return rank;
     }
 
     public static int reward(int rank) {
         return values()[rank - 1].reward();
+    }
+
+    public static LottoReward lottoReward(int rank) {
+        return LottoReward.values()[rank - 1];
     }
 }

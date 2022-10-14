@@ -53,9 +53,8 @@ public class LottoController {
         Map<Integer, Integer> checkLotto = lottoService.checkLotto(lottos, winner);
 
         LottoOutput.statistics();
-        LottoReward[] values = LottoReward.values();
-        for (int i = values.length - 1; i >= 0; i--) {
-            LottoReward value = values[i];
+        for (int i = 5; i >= 1; i--) {
+            LottoReward value = LottoReward.lottoReward(i);
             LottoOutput.match(value.rank(), value.reward(), checkLotto.get(value.rank()));
         }
 
