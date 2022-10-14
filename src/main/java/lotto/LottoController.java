@@ -7,6 +7,7 @@ import lotto.ui.LottoInput;
 import lotto.ui.LottoOutput;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
 
@@ -47,11 +48,13 @@ public class LottoController {
     }
 
     private void lottoResult(Money money, List<Lotto> lottos, Lotto winner) {
-        int[] matchList = lottoService.checkLotto(lottos, winner);
-        
+        Map<Integer, Integer> checkLotto = lottoService.checkLotto(lottos, winner);
+
         LottoOutput.statistics();
-        for (int i = 3; i <= lottoService.LOTTO_SIZE; i++) {
-            LottoOutput.match(i, LottoReward.values()[lottoService.LOTTO_SIZE - i].reward(), matchList[i]);
+        LottoReward[] values = LottoReward.values();
+        for (int i = values.length - 1; i >= 0; i--) {
+            LottoReward value = values[i];
+            LottoOutput.match(value.rank(), value.reward(), checkLotto.get(value.rank()));
         }
 
         LottoOutput.yield(lottoService.yield(lottos, winner, money));

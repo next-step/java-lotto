@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -41,7 +42,8 @@ public class LottoServiceTest {
         );
         Lotto winner = new Lotto(LottoNumberSet.createLottoNumbers(new int[]{1, 2, 3, 4, 5, 6}));
 
-        assertThat(lottoService.checkLotto(lottoList, winner)).isEqualTo(new int[]{1, 1, 1, 1, 1, 1, 1});
+        assertThat(lottoService.checkLotto(lottoList, winner))
+                .isEqualTo(Map.of(0, 3, 1, 1, 2, 0, 3, 1, 4, 1, 5, 1));
     }
 
     @DisplayName("로또 수익률을 반환한다.")

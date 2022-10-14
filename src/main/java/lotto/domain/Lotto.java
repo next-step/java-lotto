@@ -12,8 +12,21 @@ public class Lotto {
         this.lottoNumbers = lottoNumberSet;
     }
 
-    public int match(Lotto lotto) {
-        return lottoNumbers.match(lotto.numbers());
+    public int rank(Lotto lotto) {
+        int match = lottoNumbers.match(lotto.numbers());
+        if (match == 3) {
+            return 5;
+        }
+        if (match == 4) {
+            return 4;
+        }
+        if (match == 5) {
+            return 3;
+        }
+        if (match == 6) {
+            return 1;
+        }
+        return 0;
     }
 
     private LottoNumberSet numbers() {

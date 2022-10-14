@@ -5,7 +5,9 @@ import lotto.domain.LottoReward;
 import lotto.domain.Money;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoService {
     public static int LOTTO_SIZE = 6;
@@ -23,12 +25,16 @@ public class LottoService {
         return lottos;
     }
 
-    public int[] checkLotto(List<Lotto> lottos, Lotto winner) {
-        int[] matchList = new int[LOTTO_SIZE + 1];
-        for (Lotto lotto : lottos) {
-            matchList[winner.match(lotto)]++;
+    public Map<Integer, Integer> checkLotto(List<Lotto> lottos, Lotto winner) {
+        Map<Integer, Integer> result = new HashMap<>();
+        for (int i = 5; i >= 0; i--) {
+            result.put(i, 0);
         }
-        return matchList;
+        for (Lotto lotto : lottos) {
+            int rank = winner.rank(lotto);
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
+        }
+        return result;
     }
 
     public double yield(List<Lotto> lottos, Lotto winner, Money money) {
@@ -37,9 +43,9 @@ public class LottoService {
 
     private int reward(List<Lotto> lottos, Lotto winner) {
         int result = 0;
-        int[] ints = checkLotto(lottos, winner);
-        for (int i = 3; i < LOTTO_SIZE; i++) {
-            result += LottoReward.values()[LOTTO_SIZE - i].reward() * ints[i];
+        Map<Integer, Integer> lotto = checkLotto(lottos, winner);
+        for (int i = 5; i >= 1; i--) {
+            result += LottoReward.reward(i) * lotto.get(i);
         }
         return result;
     }
