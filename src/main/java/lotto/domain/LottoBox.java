@@ -7,24 +7,24 @@ import java.util.stream.Collectors;
 
 public class LottoBox {
 
-    List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public LottoBox(List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public List<Integer> retrieveCorrectNum(Lotto winningLotto) {
-        List<Integer> correctCounts = new ArrayList<>();
+    public List<CorrectInfo> retrieveCorrectNum(Lotto winningLotto, LottoBall bonusBall) {
+        List<CorrectInfo> CorrectInfos = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int correctCount = lotto.retrieveCorrectLottoBallCount(winningLotto);
-            correctCounts.add(correctCount);
+            boolean bonusMatch = lotto.matchBounsBall(bonusBall);
+            CorrectInfos.add(new CorrectInfo(correctCount, bonusMatch));
         }
-        return correctCounts;
+
+        return CorrectInfos;
     }
 
     public List<Lotto> getLottos() {
-        return lottos.stream()
-                .map(lotto -> new Lotto(lotto.retrieveNumbers()))
-                .collect(Collectors.toList());
+        return lottos;
     }
 }
