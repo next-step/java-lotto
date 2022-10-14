@@ -25,9 +25,9 @@ public class ArithmeticExpression {
     public ArithmeticExpression append(String value) {
         if (Number.isNumber(value)) {
             return appendNumber(value);
-        } else {
-            return appendCommand(value);
         }
+
+        return appendCommand(value);
     }
 
     private ArithmeticExpression appendNumber(String value) {
