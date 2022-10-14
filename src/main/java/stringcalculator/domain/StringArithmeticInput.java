@@ -19,12 +19,17 @@ public class StringArithmeticInput {
 
         for (String value : expression) {
             arithmeticExpression = arithmeticExpression.append(value);
-
-            if (arithmeticExpression.complete()) {
-                arithmeticExpression = arithmeticExpression.evaluate();
-            }
+            arithmeticExpression = evaluateIfCompleted(arithmeticExpression);
         }
 
         return arithmeticExpression.getResult();
+    }
+
+    private ArithmeticExpression evaluateIfCompleted(ArithmeticExpression arithmeticExpression) {
+        if (arithmeticExpression.complete()) {
+            return arithmeticExpression.evaluate();
+        }
+
+        return arithmeticExpression;
     }
 }
