@@ -2,20 +2,18 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import validator.InputValidator;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static validator.InputValidator.isContains;
-import static validator.InputValidator.isNumeric;
 
 
 public class Input {
     private final static Scanner SCANNER = new Scanner(System.in);
     private final static String SEPARATOR_OF_LOTTO_TICKET_NUMBER = ",";
+    private final static Pattern PATTERN_NUMBER = Pattern.compile("^-?\\d+$");
 
     public int amount() {
         System.out.println("구매하실 금액을 입력해주세요.(1장당 1000원 / 최대 100장 구매 가능)");
@@ -30,8 +28,8 @@ public class Input {
         System.out.println("지난 주 당첨 번호를 입력해주세요.(ex.3,14,16,19,22,24)");
         String input = SCANNER.nextLine();
 
-        if (isContains(input, SEPARATOR_OF_LOTTO_TICKET_NUMBER) && Arrays.stream(input.split(SEPARATOR_OF_LOTTO_TICKET_NUMBER))
-                .allMatch(InputValidator::isNumeric)) {
+        if (hasSeparator(input, SEPARATOR_OF_LOTTO_TICKET_NUMBER) && Arrays.stream(input.split(SEPARATOR_OF_LOTTO_TICKET_NUMBER))
+                .allMatch(str -> isNumeric(str))) {
 
             return new Lotto(Arrays.stream(input.split(SEPARATOR_OF_LOTTO_TICKET_NUMBER))
                     .mapToInt(Integer::parseInt)
@@ -48,5 +46,23 @@ public class Input {
             return LottoNumber.lottoNumber(Integer.parseInt(input));
         }
         throw new InputMismatchException("보너스 번호는 숫자만 입력 가능합니다.");
+    }
+
+    private boolean isNumeric(String text) {
+        if (isNullOrSpace(text)) {
+            return false;
+        }
+        return PATTERN_NUMBER.matcher(text).matches();
+    }
+
+    private boolean hasSeparator(String text, CharSequence separator) {
+        if (isNullOrSpace(text)) {
+            return false;
+        }
+        return text.contains(separator);
+    }
+
+    private boolean isNullOrSpace(String text) {
+        return text == null || text.equals("");
     }
 }

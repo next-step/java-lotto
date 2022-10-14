@@ -1,4 +1,4 @@
-package validator;
+package calculator.validator;
 
 import java.util.InputMismatchException;
 import java.util.regex.Pattern;
@@ -52,13 +52,6 @@ public class InputValidator {
             return false;
         }
         return PATTERN_OPERATOR.matcher(text).matches();
-    }
-
-    public static boolean isContains(String text, CharSequence separator) {
-        if (isNullOrSpace(text)) {
-            return false;
-        }
-        return text.contains(separator);
     }
 
     private static boolean isNullOrSpace(String text) {
