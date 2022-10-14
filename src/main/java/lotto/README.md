@@ -7,6 +7,8 @@
   - 로또 숫자의 범위는 1~45 까지이다.
 - Lotto
   - 자신이 몇 등인지 알 수 있다.
+- LottoWinner
+  - 당첨 번호와 보너스 번호를 가지고 있다.
 - Prize
   - Enum 객체로 등수정보와 상금정보를 가지고 있다.
 - LottoGenerator
@@ -17,4 +19,4 @@
 - InputView
   - 구매금액과 지난 주 당첨 번호를 입력 받을 수 있다.
 - ResultView
-  - LottoStatistics 를 출력해준다.. 
+  - LottoStatistics 를 출력해준다.
