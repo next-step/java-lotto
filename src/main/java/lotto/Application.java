@@ -22,7 +22,7 @@ public class Application {
 
     public static void main(String[] args) {
         LottoInputView inputView = new LottoInputView();
-        PurchaseInfo purchaseInfo = new PurchaseInfo(LOTTO_PRICE, inputView.readPayAmount());
+        PurchaseInfo purchaseInfo = new PurchaseInfo(inputView.readPayAmount());
         LottoFactory lottoFactory = new LottoFactory();
         LottoResultView view = new LottoResultView();
 

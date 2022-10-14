@@ -15,7 +15,7 @@ class LottoStatisticTest {
     void 통계정보() {
 
         Lotto beforeWinLotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
-        PurchaseInfo purchaseInfo = new PurchaseInfo(1000, 6000);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(6000);
 
         List<Lotto> lottos = List.of(
                 Lotto.of(List.of(1, 0, 0, 0, 0, 0)),
