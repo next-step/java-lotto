@@ -10,18 +10,13 @@ import lotto.domain.number.Ticket;
 
 public class AutomaticLottoMachine implements LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
-
     public TicketBox issueTickets(PurchasePrice purchasePrice) {
-        return new TicketBox(IntStream.range(0, getTicketCount(purchasePrice))
+        return new TicketBox(IntStream.range(0, getTicketCount(purchasePrice, Ticket.getPrice()))
                 .mapToObj(i -> extractNumbers(intNumbers()))
                 .collect(Collectors.toUnmodifiableList()));
     }
 
-    @Override
-    public int getLottoPrice() {
-        return LOTTO_PRICE;
-    }
+
 
     private List<Integer> intNumbers() {
         List<Integer> numbers = IntStream.range(
