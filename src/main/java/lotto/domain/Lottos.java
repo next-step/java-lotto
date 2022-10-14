@@ -1,17 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import lotto.generator.NumberGenerator;
+import lotto.generator.RandomNumberGenerator;
+
+import java.util.*;
 
 public class Lottos {
 
     public static final int LOTTO_PRICE = 1000;
 
+    private NumberGenerator numberGenerator = new RandomNumberGenerator();
+
     private List<Lotto> lottoList;
     private Map<Integer, Integer> result;
-//    private double profitRate;
 
     public Lottos(int amount) {
         this.lottoList = new ArrayList<>();
@@ -19,7 +20,7 @@ public class Lottos {
 
         int n = amount / LOTTO_PRICE;
         for (int i = 0; i < n; i++) {
-            this.lottoList.add(new Lotto());
+            this.lottoList.add(new Lotto(numberGenerator));
         }
     }
 
@@ -34,7 +35,7 @@ public class Lottos {
 
     public Map<Integer, Integer> getResult(Lotto winning) {
         for (Lotto lotto : lottoList) {
-            int sameNumbers = lotto.getSameNumbers(winning);
+            int sameNumbers = lotto.getSameNumberCount(winning);
             int count = result.getOrDefault(sameNumbers, 0);
             result.put(sameNumbers, count + 1);
         }
