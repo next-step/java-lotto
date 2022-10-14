@@ -20,16 +20,9 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 발급 검증")
-    void issue() {
-        Lotto lotto = new Lotto(lottoNumbers());
-        assertThat(lotto.issue(new Payment(10000)).size()).isEqualTo(10);
-    }
-
-    @Test
     @DisplayName("발급 로또 조회")
     void lottoNumber() {
-        Lotto lotto = new Lotto(lottoNumbers());
+        LottoMachine lotto = new LottoMachine(lottoNumbers());
         assertThat(lotto.issue(new Payment(1000)).get(0).lottoNumbers()).hasSizeLessThanOrEqualTo(6);
         assertThat(lotto.issue(new Payment(1000)).get(0).lottoNumbers()).hasSizeGreaterThanOrEqualTo(0);
     }
@@ -37,8 +30,7 @@ public class LottoTest {
     @RepeatedTest(100)
     @DisplayName("발급 로또 티켓, 당첨 티켓 비교")
     void compareNumber() {
-        Lotto lotto = new Lotto(lottoNumbers());
-        List<Lotto> lottoTickets = lotto.issue(new Payment(1000));
+        List<Lotto> lottoTickets = new LottoMachine(lottoNumbers()).issue(new Payment(1000));
 
         Lotto winningNumber = new WinningNumber(new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6))), LottoNumber.lottoNumber(7)).winningNumber();
         List<Integer> matchingCounts = lottoTickets.stream()

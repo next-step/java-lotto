@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.Payment;
-import lotto.domain.ResultStats;
-import lotto.domain.WinningNumber;
+import lotto.domain.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -17,7 +14,7 @@ public class LottoController {
         Input input = new Input();
         Payment payment = new Payment(input.amount());
 
-        List<Lotto> lottoTickets = new Lotto(lottoNumbers()).issue(payment);
+        List<Lotto> lottoTickets = new LottoMachine(lottoNumbers()).issue(payment);
         Output.printBuyCount(payment.count());
         Output.printBuyTickets(lottoTickets);
         WinningNumber winningNumber = new WinningNumber(input.winningNumberOfLastWeek(), input.bonusNumberOfLastWeek());
