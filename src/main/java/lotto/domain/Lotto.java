@@ -5,7 +5,7 @@ public class Lotto {
     private final LottoNumberSet lottoNumbers;
 
     public Lotto() {
-        this(LottoNumberSet.getLottoNumbers());
+        this(LottoNumberSet.createLottoNumberSet());
     }
 
     public Lotto(LottoNumberSet lottoNumberSet) {

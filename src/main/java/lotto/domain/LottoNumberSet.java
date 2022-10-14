@@ -9,15 +9,13 @@ public class LottoNumberSet {
     public static int LOTTO_SIZE = 6;
     private static final String LOTTO_SIZE_EXCEPTION = "로또 번호는 " + LOTTO_SIZE + "개여야 합니다.";
 
-    public static LottoNumberSet createLottoNumbers(int[] ints) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int number : ints) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return new LottoNumberSet(lottoNumbers);
+    public static LottoNumberSet createLottoNumbers(int... ints) {
+        return new LottoNumberSet(Arrays.stream(ints)
+                .mapToObj(number -> new LottoNumber(number))
+                .collect(Collectors.toSet()));
     }
 
-    public static LottoNumberSet getLottoNumbers() {
+    public static LottoNumberSet createLottoNumberSet() {
         return new LottoNumberSet(LottoNumberFactory.getNumbers(LOTTO_SIZE));
     }
 
@@ -30,12 +28,12 @@ public class LottoNumberSet {
 
     public int match(LottoNumberSet numbers) {
         return lottoNumberSet.stream()
-                .filter(lottoNumber -> numbers.lottoNumberList().contains(lottoNumber))
+                .filter(lottoNumber -> numbers.lottoNumberSet().contains(lottoNumber))
                 .collect(Collectors.toList())
                 .size();
     }
 
-    private Set<LottoNumber> lottoNumberList() {
+    private Set<LottoNumber> lottoNumberSet() {
         return Collections.unmodifiableSet(this.lottoNumberSet);
     }
 
@@ -54,13 +52,8 @@ public class LottoNumberSet {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
-        LottoNumber[] lottoNumbers = lottoNumberSet.toArray(new LottoNumber[0]);
-        result.append(lottoNumbers[0]);
-        for (int i = 1; i < lottoNumbers.length; i++) {
-            result.append(", ");
-            result.append(lottoNumbers[i]);
-        }
-        return result.toString();
+        return lottoNumberSet.stream()
+                .map(lottoNumber -> lottoNumber.toString())
+                .collect(Collectors.joining(", "));
     }
 }
