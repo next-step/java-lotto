@@ -12,6 +12,10 @@ import java.util.List;
  */
 public class LottoResultView {
 
+    private static String getFormattedMoney(LottoResult lottoResult) {
+        return String.format("%d원", lottoResult.getMoney());
+    }
+
     public void print(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             System.out.println(lotto);
@@ -29,10 +33,6 @@ public class LottoResultView {
                         getCount(lottoStatistic, lottoResult)))));
 
         System.out.println(getReveneMessage(lottoStatistic));
-    }
-
-    private static String getFormattedMoney(LottoResult lottoResult) {
-        return String.format("%d원", lottoResult.getMoney());
     }
 
     private Integer getCount(LottoStatistic lottoStatistic, LottoResult lottoResult) {

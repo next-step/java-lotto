@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Objects;
 
 import static java.util.stream.Collectors.reducing;
 

@@ -4,16 +4,11 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoStatistic;
 import lotto.domain.PurchaseInfo;
-import lotto.util.RandomUtils;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import static lotto.domain.LottoNumberProduceStrategy.MAX_LOTTO_NUMBER;
-import static lotto.domain.PurchaseInfo.LOTTO_PRICE;
 
 /**
  * Created by seungwoo.song on 2022-10-06
