@@ -11,12 +11,12 @@ public class OperationTest {
     @ParameterizedTest
     @ValueSource(strings = {"+", "-", "*", "/"})
     void Given_Valid_String_When_ValueOf_Then_Success(String string) {
-        assertThatNoException().isThrownBy(() -> Operation.parse(string));
+        assertThatNoException().isThrownBy(() -> Operation.find(string));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"~", "!", "?", ":"})
     void Given_Invalid_String_When_ValueOf_Then_Fail(String string) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Operation.parse(string));
+        assertThatIllegalArgumentException().isThrownBy(() -> Operation.find(string));
     }
 }

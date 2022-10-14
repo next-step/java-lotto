@@ -50,7 +50,7 @@ public class CalculateOperator {
         return Stream.iterate(0, i -> i + 1)
                 .limit(split.length)
                 .filter(i -> i % 2 == 1)
-                .map(i -> Operation.parse(split[i]))
+                .map(i -> Operation.find(split[i]))
                 .collect(Collectors.toList());
     }
 
