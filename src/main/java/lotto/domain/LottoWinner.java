@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.stream.Collectors;
-
 public class LottoWinner extends Lotto {
 
     private final LottoNumber bonusNumber;
@@ -23,14 +21,18 @@ public class LottoWinner extends Lotto {
             return 4;
         }
         if (this.lottoNumbers.match(lotto.numbers()) == 5) {
-            if (lotto.numbers().contain(bonusNumber)) {
-                return 2;
-            }
-            return 3;
+            return matchBonusNumber(lotto);
         }
         if (this.lottoNumbers.match(lotto.numbers()) == 6) {
             return 1;
         }
         return 0;
+    }
+
+    private int matchBonusNumber(Lotto lotto) {
+        if (lotto.numbers().contain(bonusNumber)) {
+            return 2;
+        }
+        return 3;
     }
 }
