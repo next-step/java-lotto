@@ -46,11 +46,8 @@ public class Lottos {
         return (double) result.get(Lotto.MAX_MATCH_NUMBER) / lottosSize();
     }
 
-    public List<String> toStringList() {
-        List<String> stringList = new ArrayList<>();
-        for (Lotto lotto : lottoList) {
-            stringList.add(lotto.toString());
-        }
-        return stringList;
+    public List<Lotto> getLottoList() {
+        return this.lottoList;
     }
+
 }

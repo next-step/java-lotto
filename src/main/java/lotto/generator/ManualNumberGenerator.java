@@ -19,7 +19,7 @@ public class ManualNumberGenerator implements NumberGenerator {
         String[] splitNumbers = numbers.split(", ");
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = MIN_LOTTO_NUM; i < MAX_LOTTO_NUM; i++) {
-            lottoNumbers.add(LottoNumber.of(Integer.parseInt(splitNumbers[i])));
+            lottoNumbers.add(LottoNumber.from(Integer.parseInt(splitNumbers[i])));
         }
         return lottoNumbers;
     }

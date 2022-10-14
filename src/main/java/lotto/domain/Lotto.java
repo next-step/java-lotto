@@ -31,9 +31,9 @@ public class Lotto {
                 .size();
     }
 
-    /*public String toString() {
-        return this.lotto.toString();
-    }*/
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lotto;
+    }
 
     public boolean isEqual(Lotto numbers) {
         return this.lotto.containsAll(numbers.lotto);

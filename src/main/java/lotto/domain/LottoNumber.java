@@ -23,16 +23,15 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber from(int number) {
-        return new LottoNumber(number);
-    }
-
-    public static LottoNumber of(int number) {
-        LottoNumber lottoNumber = numbers.get(number);
+    public static LottoNumber from(int number) {LottoNumber lottoNumber = numbers.get(number);
         if (lottoNumber == null) {
             throw new IllegalArgumentException(OUT_OF_RANGE);
         }
         return lottoNumber;
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override

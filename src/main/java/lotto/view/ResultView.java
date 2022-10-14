@@ -3,8 +3,11 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -30,13 +33,20 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(Lottos lottos) {
-        for (String s : lottos.toStringList()) {
-            System.out.println(s);
+        List<String> lottonumbers = new ArrayList<>();
+        for (Lotto lotto : lottos.getLottoList()) {
+            lottonumbers.clear();
+            lotto.getLottoNumbers().stream()
+                            .forEach(number -> {
+                                lottonumbers.add(Integer.toString(number.getNumber()));
+                            });
+            System.out.println("[" + String.join(", ", lottonumbers) + "]");
         }
         System.out.println();
     }
 
     public static void printWinningResult(Map<Integer, Integer> result) {
+        System.out.println();
         System.out.println(MSG_WINNING_RESULT);
         System.out.println(DOTTED_LINE_MARK);
         for (int i = MIN_WINNING_COUNT; i <= MAX_WINNING_COUNT; i++) {
