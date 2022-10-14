@@ -16,6 +16,6 @@ public class LottoTest {
 	@DisplayName("자동 추첨 결과")
 	void makeResult() {
 		Lotto lotto = new Lotto();
-		assertThat(lotto.getRandomLotto(39).size()).isEqualTo(6);
+		assertThat(lotto.getRandomLotto().size()).isEqualTo(6);
 	}
 }
