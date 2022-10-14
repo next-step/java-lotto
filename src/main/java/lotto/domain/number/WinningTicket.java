@@ -12,8 +12,6 @@ public class WinningTicket extends Ticket {
     }
 
     public MatchResult getMatchResult(Ticket ticket) {
-        int a = countMatch(ticket);
-        boolean b = checkBonusMatch(ticket);
         return new MatchResult(countMatch(ticket), checkBonusMatch(ticket));
     }
 
