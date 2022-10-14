@@ -27,8 +27,8 @@ public class LottoResultView {
         System.out.println("---------");
 
         Arrays.stream(LottoResult.values())
-                .forEach((lottoResult -> System.out.println(String.format("%d개 일치 (%s)- %d개",
-                        lottoResult.getMatchCount(),
+                .forEach((lottoResult -> System.out.println(String.format("%s (%s)- %d개",
+                        lottoResult.getDescription(),
                         getFormattedMoney(lottoResult),
                         getCount(lottoStatistic, lottoResult)))));
 

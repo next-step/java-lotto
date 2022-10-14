@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  */
 public class LottoNumbers {
 
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MAX_LOTTO_NUMBER = 45;
 
     private final List<Integer> lottoNumbers;
 

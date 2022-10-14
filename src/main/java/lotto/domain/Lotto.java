@@ -28,8 +28,14 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public LottoResult getResult(Lotto winLottoNumber) {
-        return LottoResult.from(matchCount(winLottoNumber), true);
+    public LottoResult getResult(Lotto winLottoNumber, int bonusNumber) {
+        System.out.println("lottoNumbers = " + lottoNumbers);
+        System.out.println(lottoNumbers.contains(bonusNumber));
+        return LottoResult.from(matchCount(winLottoNumber), isBonusNumber(bonusNumber));
+    }
+
+    private boolean isBonusNumber(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     private int matchCount(Lotto winLottoNumber) {

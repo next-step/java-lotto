@@ -25,8 +25,11 @@ public class Application {
 
         view.print(lotto);
 
+        Lotto beforeWinLotto = inputView.readBeforeWinLotto();
+        int bonusNumber = inputView.readBonusNumber();
+
         LottoStatistic lottoStatistic = new LottoStatistic();
-        lottoStatistic.analyze(lotto, inputView.readBeforeLotto(), purchaseInfo);
+        lottoStatistic.analyze(lotto, beforeWinLotto, purchaseInfo, bonusNumber);
 
         view.print(lottoStatistic);
     }
