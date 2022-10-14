@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.Optional;
 
 import lotto.model.LottoReward;
 
@@ -15,7 +16,12 @@ public class LottoYield {
 
     public LottoYield(int paymentAmount, List<LottoMatchResult> matchResults) {
         this.paymentAmount = paymentAmount;
-        this.rewardAmount = matchResults.stream().map(LottoMatchResult::getLottoReward).map(LottoReward::getRewardAmount).reduce(Integer::sum).orElseGet(() -> 0);
+        this.rewardAmount = matchResults.stream()
+                                        .map(LottoMatchResult::getLottoReward)
+                                        .filter(Optional::isPresent)
+                                        .map(Optional::get)
+                                        .map(LottoReward::getRewardAmount)
+                                        .reduce(Integer::sum).orElseGet(() -> 0);
     }
 
     public double calculate() {

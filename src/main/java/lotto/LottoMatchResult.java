@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import lotto.model.LottoReward;
 
@@ -15,8 +16,12 @@ public class LottoMatchResult {
         return new LottoMatchResult(count);
     }
 
-    public LottoReward getLottoReward() {
+    public Optional<LottoReward> getLottoReward() {
         return LottoReward.findByMatchResult(this);
+    }
+
+    public boolean rewardable() {
+        return getLottoReward().isPresent();
     }
 
     @Override
@@ -34,5 +39,10 @@ public class LottoMatchResult {
     @Override
     public int hashCode() {
         return Objects.hash(count);
+    }
+
+    @Override
+    public String toString() {
+        return "일치개수: " + count;
     }
 }

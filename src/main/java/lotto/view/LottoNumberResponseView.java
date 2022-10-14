@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumberView {
+public class LottoNumberResponseView implements ResponseView {
     private final List<List<Integer>> lottoNumbers;
 
-    public LottoNumberView(List<List<Integer>> lottoNumbers) {
+    public LottoNumberResponseView(List<List<Integer>> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
+    @Override
     public String toView() {
         return lottoNumbers.stream()
                            .map(this::convertLottoNumberToView)
