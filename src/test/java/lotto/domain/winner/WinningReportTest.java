@@ -1,6 +1,7 @@
 package lotto.domain.winner;
 
 import static lotto.domain.LottoBallsHelper.numbersToBalls;
+import static lotto.domain.winner.WinningCondition.MATCH_BONUS;
 import static lotto.domain.winner.WinningCondition.MATCH_FIVE;
 import static lotto.domain.winner.WinningCondition.MATCH_FOR;
 import static lotto.domain.winner.WinningCondition.MATCH_SIX;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.util.List;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
+import lotto.domain.number.LottoBall;
 import lotto.domain.number.Ticket;
 import lotto.domain.number.WinningTicket;
 import org.junit.jupiter.api.DisplayName;
@@ -28,20 +30,24 @@ class WinningReportTest {
                         new Ticket(numbersToBalls(List.of(1, 6, 9, 24, 33, 40))),
                         new Ticket(numbersToBalls(List.of(5, 6, 7, 17, 25, 43))),
                         new Ticket(numbersToBalls(List.of(2, 10, 13, 23, 36, 42))),
-                        new Ticket(numbersToBalls(List.of(5, 13, 28, 29, 31, 39)))
+                        new Ticket(numbersToBalls(List.of(5, 13, 28, 29, 31, 39))),
+                        new Ticket(numbersToBalls(List.of(5, 7, 24, 25, 42, 43))),
+                        new Ticket(numbersToBalls(List.of(1, 5, 24, 25, 42, 43))),
+                        new Ticket(numbersToBalls(List.of(5, 6, 24, 25, 42, 43)))
                 )
         );
         WinningTicket winningNumbers = new WinningTicket(
-                numbersToBalls(List.of(5, 6, 24, 25, 42, 43)));
+                numbersToBalls(List.of(5, 6, 24, 25, 42, 43)), new LottoBall(7));
 
         winningReport.updateReport(ticketBox, winningNumbers);
 
         assertAll(
                 () -> assertThat(winningReport.getWinningCount(MATCH_THREE)).isEqualTo(1),
                 () -> assertThat(winningReport.getWinningCount(MATCH_FOR)).isEqualTo(1),
-                () -> assertThat(winningReport.getWinningCount(MATCH_FIVE)).isEqualTo(0),
-                () -> assertThat(winningReport.getWinningCount(MATCH_SIX)).isEqualTo(0),
-                () -> assertThat(winningReport.getRateOfReturn(new PurchasePrice(5000))).isEqualTo(11.00)
+                () -> assertThat(winningReport.getWinningCount(MATCH_FIVE)).isEqualTo(1),
+                () -> assertThat(winningReport.getWinningCount(MATCH_BONUS)).isEqualTo(1),
+                () -> assertThat(winningReport.getWinningCount(MATCH_SIX)).isEqualTo(1),
+                () -> assertThat(winningReport.getRateOfReturn(new PurchasePrice(8000))).isEqualTo(253944.37)
         );
     }
 

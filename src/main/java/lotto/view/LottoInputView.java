@@ -19,15 +19,16 @@ public class LottoInputView {
 
     public static WinningTicket insertWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        LottoBalls lottoBalls = new LottoBalls(
+                Arrays.stream(insertData().split(", "))
+                        .map(LottoInputView::getIntData)
+                        .map(LottoBall::new)
+                        .collect(Collectors.toUnmodifiableList()));
 
-        return new WinningTicket(
-                new LottoBalls(
-                        Arrays.stream(insertData().split(", "))
-                                .map(LottoInputView::getIntData)
-                                .map(LottoBall::new)
-                                .collect(Collectors.toUnmodifiableList())
-                )
-        );
+        System.out.println("보너스 볼을 입력해 주세요.");
+        LottoBall bonusBall = new LottoBall(getIntData(insertData()));
+
+        return new WinningTicket(lottoBalls, bonusBall);
     }
 
     private static int getIntData(String str) {

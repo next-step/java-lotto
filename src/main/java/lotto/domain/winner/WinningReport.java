@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
+import lotto.domain.number.MatchResult;
 import lotto.domain.number.Ticket;
 import lotto.domain.number.WinningTicket;
 
@@ -20,7 +21,7 @@ public class WinningReport {
 
     public void updateReport(TicketBox ticketBox, WinningTicket winningNumbers) {
         for (Ticket ticket : ticketBox.getTickets()) {
-            updateReport(winningNumbers.countMatchBalls(ticket));
+            updateReport(winningNumbers.getMatchResult(ticket));
         }
     }
 
@@ -32,8 +33,9 @@ public class WinningReport {
         return Math.floor((getSumOfPrize() / purchasePrice.getPrice()) * 100) / 100;
     }
 
-    private void updateReport(int matchCount) {
-        WinningCondition condition = WinningCondition.getConditionByMatchCount(matchCount);
+    private void updateReport(MatchResult matchResult) {
+        WinningCondition condition = WinningCondition.getConditionByMatchCount(
+                matchResult.getMatchCount(), matchResult.getBonusMatch());
         int currentCount = report.get(condition);
         report.put(condition, currentCount + 1);
     }
