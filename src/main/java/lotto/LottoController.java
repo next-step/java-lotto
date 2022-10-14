@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoReward;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.ui.LottoInput;
 import lotto.ui.LottoOutput;
 
@@ -22,7 +20,7 @@ public class LottoController {
 
         List<Lotto> lottos = purchaseLotto(money);
 
-        Lotto winner = drawWinner();
+        LottoWinner winner = drawWinner();
 
         lottoResult(money, lottos, winner);
     }
@@ -41,13 +39,17 @@ public class LottoController {
         return lottos;
     }
 
-    private Lotto drawWinner() {
+    private LottoWinner drawWinner() {
         LottoOutput.winningNumber();
-        Lotto winner = new Lotto(LottoInput.winnerNumbers());
-        return winner;
+        LottoNumberSet numbers = LottoInput.winnerNumbers();
+
+        LottoOutput.bonusNumber();
+        LottoNumber bonusNumber = LottoInput.bonusNumber();
+
+        return new LottoWinner(numbers, bonusNumber);
     }
 
-    private void lottoResult(Money money, List<Lotto> lottos, Lotto winner) {
+    private void lottoResult(Money money, List<Lotto> lottos, LottoWinner winner) {
         Map<Integer, Integer> checkLotto = lottoService.checkLotto(lottos, winner);
 
         LottoOutput.statistics();

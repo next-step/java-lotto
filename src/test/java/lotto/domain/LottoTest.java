@@ -12,22 +12,23 @@ public class LottoTest {
 
     private static Stream<Arguments> provideLottoMatch() {
         return Stream.of(
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(new int[]{1, 2, 3, 4, 5, 6})), 1),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(new int[]{2, 3, 4, 5, 6, 7})), 3),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(new int[]{3, 4, 5, 6, 7, 8})), 4),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(new int[]{4, 5, 6, 7, 8, 9})), 5),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(new int[]{5, 6, 7, 8, 9, 10})), 0),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(new int[]{6, 7, 8, 9, 10, 11})), 0),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(new int[]{7, 8, 9, 10, 11, 12})), 0)
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(1, 2, 3, 4, 5, 6)), 1),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(2, 3, 4, 5, 6, 7)), 2),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(2, 3, 4, 5, 6, 8)), 3),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(3, 4, 5, 6, 7, 8)), 4),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(4, 5, 6, 7, 8, 9)), 5),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(5, 6, 7, 8, 9, 10)), 0),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(6, 7, 8, 9, 10, 11)), 0),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumbers(7, 8, 9, 10, 11, 12)), 0)
         );
     }
 
     @ParameterizedTest(name = "로또 등수를 반환한다.")
     @MethodSource(value = "provideLottoMatch")
     void match(Lotto lotto, int matchCount) {
-        Lotto winner = new Lotto(LottoNumberSet.createLottoNumbers(new int[]{1, 2, 3, 4, 5, 6}));
+        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumbers(new int[]{1, 2, 3, 4, 5, 6}), new LottoNumber(7));
 
-        assertThat(lotto.rank(winner)).isEqualTo(matchCount);
+        assertThat(winner.rank(lotto)).isEqualTo(matchCount);
     }
 
 }

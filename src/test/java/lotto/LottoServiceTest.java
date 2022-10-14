@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumberSet;
-import lotto.domain.Money;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,30 +30,32 @@ public class LottoServiceTest {
     @Test
     void check_lotto() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{1, 2, 3, 4, 5, 6})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{2, 3, 4, 5, 6, 7})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{3, 4, 5, 6, 7, 8})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{4, 5, 6, 7, 8, 9})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{5, 6, 7, 8, 9, 10})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{6, 7, 8, 9, 10, 11})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{7, 8, 9, 10, 11, 12}))
+                new Lotto(LottoNumberSet.createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                new Lotto(LottoNumberSet.createLottoNumbers(2, 3, 4, 5, 6, 7)),
+                new Lotto(LottoNumberSet.createLottoNumbers(2, 3, 4, 5, 6, 9)),
+                new Lotto(LottoNumberSet.createLottoNumbers(3, 4, 5, 6, 7, 8)),
+                new Lotto(LottoNumberSet.createLottoNumbers(4, 5, 6, 7, 8, 9)),
+                new Lotto(LottoNumberSet.createLottoNumbers(5, 6, 7, 8, 9, 10)),
+                new Lotto(LottoNumberSet.createLottoNumbers(6, 7, 8, 9, 10, 11)),
+                new Lotto(LottoNumberSet.createLottoNumbers(7, 8, 9, 10, 11, 12))
         );
-        Lotto winner = new Lotto(LottoNumberSet.createLottoNumbers(new int[]{1, 2, 3, 4, 5, 6}));
+        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumbers(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
         assertThat(lottoService.checkLotto(lottoList, winner))
-                .isEqualTo(Map.of(0, 3, 1, 1, 2, 0, 3, 1, 4, 1, 5, 1));
+                .isEqualTo(Map.of(0, 3, 1, 1, 2, 1, 3, 1, 4, 1, 5, 1));
     }
 
     @DisplayName("로또 수익률을 반환한다.")
     @Test
     void yield() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{4, 5, 6, 7, 8, 9})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{5, 6, 7, 8, 9, 10})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{6, 7, 8, 9, 10, 11})),
-                new Lotto(LottoNumberSet.createLottoNumbers(new int[]{7, 8, 9, 10, 11, 12}))
+                new Lotto(LottoNumberSet.createLottoNumbers(4, 5, 6, 7, 8, 9)),
+                new Lotto(LottoNumberSet.createLottoNumbers(5, 6, 7, 8, 9, 10)),
+                new Lotto(LottoNumberSet.createLottoNumbers(6, 7, 8, 9, 10, 11)),
+                new Lotto(LottoNumberSet.createLottoNumbers(7, 8, 9, 10, 11, 12))
         );
-        Lotto winner = new Lotto(LottoNumberSet.createLottoNumbers(new int[]{1, 2, 3, 4, 5, 6}));
+        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumbers(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+
 
         assertThat(lottoService.yield(lottoList, winner, new Money(10000))).isEqualTo(0.5);
     }
