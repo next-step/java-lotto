@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     public LottoResult getResult(Lotto winLottoNumber) {
-        return LottoResult.from(matchCount(winLottoNumber));
+        return LottoResult.from(matchCount(winLottoNumber), true);
     }
 
     private int matchCount(Lotto winLottoNumber) {

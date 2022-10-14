@@ -29,7 +29,7 @@ class LottoStatisticTest {
 
         lottoStatistic.analyze(lottos, beforeWinLotto, purchaseInfo);
 
-        int sum = LottoResult.FIRST.getMoney() + LottoResult.SECOND.getMoney() + LottoResult.THIRD.getMoney() + LottoResult.FORTH.getMoney();
+        int sum = LottoResult.FIRST.getMoney() + LottoResult.THIRD.getMoney() + LottoResult.FORTH.getMoney() + LottoResult.FIFTH.getMoney();
 
         assertThat(lottoStatistic.getWinMoneyTotal()).isEqualTo(sum);
         assertThat(lottoStatistic.getLottoResultCounter().get(LottoResult.FIRST)).isEqualTo(1);

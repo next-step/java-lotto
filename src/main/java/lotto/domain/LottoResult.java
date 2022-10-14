@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by seungwoo.song on 2022-10-06
@@ -8,9 +10,10 @@ import java.util.Arrays;
 public enum LottoResult {
 
     FIRST(2000000000, 6),
-    SECOND(1500000, 5),
-    THIRD(50000, 4),
-    FORTH(5000, 3);
+    SECOND(30000000, 5),
+    THIRD(1500000, 5),
+    FORTH(50000, 4),
+    FIFTH(5000, 3);
 
     private final int money;
     private final int matchCount;
@@ -20,11 +23,10 @@ public enum LottoResult {
         this.matchCount = matchCount;
     }
 
-    public static LottoResult from(int inputMatchCount) {
-        return Arrays.stream(values())
+    public static LottoResult from(int inputMatchCount, boolean isBonusBallMatch) {
+        Arrays.stream(values())
                 .filter(value -> value.matchCount == inputMatchCount)
-                .findAny()
-                .orElse(null);
+                .map(Optional::ofNullable)
     }
 
     public int getMoney() {

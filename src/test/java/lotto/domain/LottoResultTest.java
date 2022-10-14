@@ -16,6 +16,7 @@ class LottoResultTest {
 
     @Test
     void 생성() {
-        assertThat(LottoResult.from(3)).isEqualTo(LottoResult.FORTH);
+        assertThat(LottoResult.from(3, false)).isEqualTo(LottoResult.FIFTH);
+        assertThat(LottoResult.from(5, true)).isEqualTo(LottoResult.SECOND);
     }
 }
