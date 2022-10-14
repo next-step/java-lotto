@@ -1,5 +1,7 @@
 package lotto.views;
 
+import lotto.domains.Lotto;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,11 +10,15 @@ import java.util.stream.Collectors;
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
-    public int inputPurchaseMoney() {
+    public String inputPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        int money = Integer.parseInt(scanner.nextLine());
+        String input = scanner.nextLine();
         System.out.println();
-        return money;
+        return input;
+    }
+
+    public void printPurchasedLottoList(List<Lotto> lottoList) {
+        lottoList.forEach(System.out::println);
     }
 
     public List<Integer> inputLastWinner() {
