@@ -25,7 +25,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber lottoNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1~45사이의 숫자만 조회 가능합니다.");
         }
         return LOTTO_NUMBERS.get(number - 1);
