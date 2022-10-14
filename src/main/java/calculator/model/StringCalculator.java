@@ -19,7 +19,7 @@ public class StringCalculator {
         for (int i = 1; i < inputList.size(); i += 2) {
             String operator = inputList.get(i);
             Integer secondNumber = isNumber(inputList.get(i + 1));
-            firstNumber = Calculation.valueOf(validateOperator(operator), firstNumber, secondNumber);
+            firstNumber = Operator.valueOf(validateOperator(operator), firstNumber, secondNumber);
         }
 
         return firstNumber;

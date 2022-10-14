@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import static calculator.util.NumberUtil.isEssence;
 
-public enum Calculation {
+public enum Operator {
 
     ADD("+"),
     SUB("-"),
@@ -15,7 +15,7 @@ public enum Calculation {
 
     private final String operator;
 
-    Calculation(String operator) {
+    Operator(String operator) {
         this.operator = operator;
     }
 
