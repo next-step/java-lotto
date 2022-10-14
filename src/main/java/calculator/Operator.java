@@ -7,7 +7,12 @@ public enum Operator {
     PLUS("+", (num1, num2) -> num1 + num2),
     MINUS("-", (num1, num2) -> num1 - num2),
     MULTIPLY("*", (num1, num2) -> num1 * num2),
-    DIVIDE("/", (num1, num2) -> num1 / num2);
+    DIVIDE("/", (num1, num2) -> {
+        if (num2 == 0) {
+            throw new IllegalArgumentException("분모에 0 이 들어올 수 없습니다.");
+        }
+        return num1 / num2;
+    });
 
     private final String operator;
     private final BiFunction<Integer, Integer, Integer> expression;
@@ -20,7 +25,7 @@ public enum Operator {
     public static Operator getOperator(String operator) {
         return Arrays.stream(values())
                 .filter(op -> op.operator.equals(operator))
-                .findAny()
+                .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 연산자입니다."));
     }
 
