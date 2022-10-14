@@ -17,11 +17,11 @@ public class Lotto {
 		}
 	}
 
-	public Set<Integer> getRandomLotto(int randomStart) {
+	public Set<Integer> getRandomLotto() {
 		Set<Integer> shuffle = new TreeSet<>();
 		Collections.shuffle(balls);
 
-		for (int i = randomStart; i <= randomStart + 5; i++) {
+		for (int i = 0; i <= 5; i++) {
 			shuffle.add(balls.get(i));
 		}
 

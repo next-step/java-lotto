@@ -2,7 +2,6 @@ package step2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -21,8 +20,8 @@ public class Game {
 
 	public static Set<Integer> makeWinningResult(String[] winningNumbers) {
 		Set<Integer> list = new TreeSet<>();
-		for (int i = 0; i < winningNumbers.length; i++) {
-			list.add(Integer.parseInt(winningNumbers[i]));
+		for (String winningNumber : winningNumbers) {
+			list.add(Integer.parseInt(winningNumber));
 		}
 		return list;
 	}
@@ -31,7 +30,7 @@ public class Game {
 		Lotto lotto = new Lotto();
 		List<Set<Integer>> list = new ArrayList<>();
 		for (int i = 1; i <= amount; i++) {
-			Set<Integer> result = lotto.getRandomLotto(new Random().nextInt(39));
+			Set<Integer> result = lotto.getRandomLotto();
 			Print.result(result);
 			list.add(result);
 		}
