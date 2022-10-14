@@ -49,7 +49,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // when
-        Integer addResult = Operator.valueOf("+", firstNumber, secondNumber);
+        Integer addResult = Operator.calculate("+", firstNumber, secondNumber);
 
         // then
         assertThat(addResult).isEqualTo(3);
@@ -63,7 +63,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // when
-        Integer addResult = Operator.valueOf("-", firstNumber, secondNumber);
+        Integer addResult = Operator.calculate("-", firstNumber, secondNumber);
 
         // then
         assertThat(addResult).isEqualTo(-1);
@@ -77,7 +77,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // when
-        Integer addResult = Operator.valueOf("*", firstNumber, secondNumber);
+        Integer addResult = Operator.calculate("*", firstNumber, secondNumber);
 
         // then
         assertThat(addResult).isEqualTo(2);
@@ -92,7 +92,7 @@ class StringCalculatorTest {
 
         // expected
         assertThatExceptionOfType(NotEssenceException.class)
-                .isThrownBy(() -> Operator.valueOf("/", firstNumber, secondNumber));
+                .isThrownBy(() -> Operator.calculate("/", firstNumber, secondNumber));
     }
 
     @Test
@@ -103,7 +103,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // when
-        Integer result = Operator.valueOf("/", firstNumber, secondNumber);
+        Integer result = Operator.calculate("/", firstNumber, secondNumber);
 
         // then
         assertThat(result).isEqualTo(1);

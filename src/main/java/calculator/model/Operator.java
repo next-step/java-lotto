@@ -8,27 +8,38 @@ import static calculator.util.NumberUtil.isEssence;
 
 public enum Operator {
 
-    ADD("+"),
-    SUB("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+    ADD("+", Operator::add),
+    SUB("-", Operator::sub),
+    MULTIPLY("*", Operator::multiply),
+    DIVIDE("/", Operator::divide);
 
+    private final Calculation calculation;
     private final String operator;
 
-    Operator(String operator) {
+    Operator(String operator, Calculation calculation) {
         this.operator = operator;
+        this.calculation = calculation;
     }
 
-    public static Integer valueOf(String operator, Integer firstNumber, Integer secondNumber) {
+    public static Integer calculate(String operator, Integer firstNumber, Integer secondNumber) {
+        return getOperator(operator).calculation.calculate(firstNumber,secondNumber);
+    }
 
-        if (Objects.equals(operator, ADD.operator)) return add(firstNumber, secondNumber);
-        if (Objects.equals(operator, SUB.operator)) return sub(firstNumber, secondNumber);
-        if (Objects.equals(operator, MULTIPLY.operator)) return multiply(firstNumber, secondNumber);
-        if (Objects.equals(operator, DIVIDE.operator)) return divide(firstNumber, secondNumber);
-
+    private static Operator getOperator(String operator) {
+        if (Objects.equals(ADD.operator, operator)) {
+            return ADD;
+        }
+        if (Objects.equals(SUB.operator, operator)) {
+            return SUB;
+        }
+        if (Objects.equals(MULTIPLY.operator, operator)) {
+            return MULTIPLY;
+        }
+        if (Objects.equals(DIVIDE.operator, operator)) {
+            return DIVIDE;
+        }
         throw new ValidateOperatorException();
     }
-
 
     private static Integer add(Integer firstNumber, Integer secondNumber) {
         return firstNumber + secondNumber;

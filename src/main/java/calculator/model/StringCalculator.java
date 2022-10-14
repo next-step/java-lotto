@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static calculator.util.NumberUtil.isNumber;
-import static calculator.util.OperatorUtil.validateOperator;
 
 public class StringCalculator {
 
@@ -19,7 +18,7 @@ public class StringCalculator {
         for (int i = 1; i < inputList.size(); i += 2) {
             String operator = inputList.get(i);
             Integer secondNumber = isNumber(inputList.get(i + 1));
-            firstNumber = Operator.valueOf(validateOperator(operator), firstNumber, secondNumber);
+            firstNumber = Operator.calculate(operator, firstNumber, secondNumber);
         }
 
         return firstNumber;
