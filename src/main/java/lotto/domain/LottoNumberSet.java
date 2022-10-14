@@ -38,6 +38,10 @@ public class LottoNumberSet {
         return Collections.unmodifiableSet(this.lottoNumberSet);
     }
 
+    public boolean contain(LottoNumber lottoNumber) {
+        return lottoNumberSet.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
