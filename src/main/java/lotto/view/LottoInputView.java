@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumberPool;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,8 +43,8 @@ public class LottoInputView {
         scanner.nextLine();
 
         Optional.of(bonusNumber)
-                .filter(n -> n > LottoNumbers.MAX_LOTTO_NUMBER)
-                .ifPresent(n -> new IllegalArgumentException(String.format("%d보다 큰값은 입력할수 없습니다. 입력값:%d", LottoNumbers.MAX_LOTTO_NUMBER, n)));
+                .filter(n -> n > LottoNumberPool.MAX_LOTTO_NUMBER)
+                .ifPresent(n -> new IllegalArgumentException(String.format("%d보다 큰값은 입력할수 없습니다. 입력값:%d", LottoNumberPool.MAX_LOTTO_NUMBER, n)));
 
         return bonusNumber;
     }

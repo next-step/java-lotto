@@ -14,19 +14,19 @@ class LottoNumbersTest {
 
     @Test
     void 생성() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumberPool lottoNumberPool = new LottoNumberPool();
 
-        assertThat(lottoNumbers).isEqualTo(new LottoNumbers());
+        assertThat(lottoNumberPool).isEqualTo(new LottoNumberPool());
     }
 
     @Test
     void 섞기() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumberPool lottoNumberPool = new LottoNumberPool();
 
-        lottoNumbers.shuffle(numbers -> {
+        lottoNumberPool.shuffle(numbers -> {
         });
 
-        List<Integer> limited = lottoNumbers.get()
+        List<Integer> limited = lottoNumberPool.get()
                 .stream()
                 .limit(6)
                 .collect(Collectors.toList());

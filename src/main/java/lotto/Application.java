@@ -21,7 +21,7 @@ public class Application {
         LottoFactory lottoFactory = new LottoFactory();
         LottoResultView view = new LottoResultView();
 
-        List<Lotto> lotto = lottoFactory.produces((numbers) -> Collections.shuffle(numbers), purchaseInfo.getCount());
+        List<Lotto> lotto = lottoFactory.produces(Collections::shuffle, purchaseInfo.getCount());
 
         view.print(lotto);
 
