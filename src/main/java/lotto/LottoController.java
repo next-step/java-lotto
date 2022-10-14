@@ -10,6 +10,8 @@ import java.util.Map;
 public class LottoController {
 
     private LottoService lottoService;
+    public static int REWARD_START_RANK = 5;
+    public static int REWARD_END_RANK = 1;
 
     public LottoController(LottoService lottoService) {
         this.lottoService = lottoService;
@@ -27,13 +29,14 @@ public class LottoController {
 
     private Money purchaseMoney() {
         LottoOutput.purchaseAmount();
-        Money money = LottoInput.money();
-        return money;
+
+        return LottoInput.money();
     }
 
     private List<Lotto> purchaseLotto(Money money) {
         int count = lottoService.purchaseNumber(money);
         LottoOutput.purchaseCount(count);
+
         List<Lotto> lottos = lottoService.purchaseLotto(count);
         LottoOutput.lotto(lottos);
         return lottos;
@@ -53,12 +56,21 @@ public class LottoController {
         Map<Integer, Integer> checkLotto = lottoService.checkLotto(lottos, winner);
 
         LottoOutput.statistics();
-        LottoOutput.match(3, LottoReward.FIFTH.reward(), checkLotto.get(LottoReward.FIFTH.rank()));
-        LottoOutput.match(4, LottoReward.FOURTH.reward(), checkLotto.get(LottoReward.FOURTH.rank()));
-        LottoOutput.match(5, LottoReward.THIRD.reward(), checkLotto.get(LottoReward.THIRD.rank()));
-        LottoOutput.matchBonusNumber(5, LottoReward.SECOND.reward(), checkLotto.get(LottoReward.SECOND.rank()));
-        LottoOutput.match(6, LottoReward.FIRST.reward(), checkLotto.get(LottoReward.FIRST.rank()));
+        for (int rank = REWARD_START_RANK; rank >= REWARD_END_RANK; rank--) {
+            lottoMatchOutput(rank, checkLotto.get(rank));
+        }
 
         LottoOutput.yield(lottoService.yield(lottos, winner, money));
+    }
+
+    private void lottoMatchOutput(int rank, int matchNumber) {
+        if (bonus_rank(rank)) {
+            LottoOutput.matchBonusNumber(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
+        }
+        LottoOutput.match(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
+    }
+
+    private boolean bonus_rank(int i) {
+        return i == 2;
     }
 }
