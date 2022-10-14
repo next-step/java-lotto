@@ -18,6 +18,6 @@ class LottoFactoryTest {
         List<Lotto> produces = lottoFactory2.produces((lottoNumbers) -> {}, 2);
 
         assertThat(produces).hasSize(2);
-        assertThat(produces).contains(Lotto.of(List.of(1,2,3,4,5,6)));
+        assertThat(produces.get(0).getLottoNumbers()).isEqualTo((List.of(1,2,3,4,5,6)));
     }
 }
