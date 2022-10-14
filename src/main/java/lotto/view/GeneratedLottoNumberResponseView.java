@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumberResponseView implements ResponseView {
+public class GeneratedLottoNumberResponseView implements ResponseView {
     private final List<List<Integer>> lottoNumbers;
 
-    public LottoNumberResponseView(List<List<Integer>> lottoNumbers) {
+    public GeneratedLottoNumberResponseView(List<List<Integer>> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
