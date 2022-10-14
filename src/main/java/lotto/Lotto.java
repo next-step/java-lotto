@@ -9,16 +9,15 @@ import lotto.model.LottoReward;
 import lotto.model.WinningNumber;
 import lotto.view.LottoNumberResponseView;
 import lotto.view.LottoResultAggregationResponseView;
+import lotto.view.LottoYieldResponseView;
 
 public class Lotto {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("구입금액을 입력해주세요.");
+    private static final Scanner scanner = new Scanner(System.in);
 
-        int paymentAmount = scanner.nextInt();
-        scanner.nextLine();
+    public static void main(String[] args) {
+        int paymentAmount = getPaymentAmount();
         int lottoQuantity = LottoVendingMachine.calculate(paymentAmount);
-        System.out.println(String.format("%d개를 구매했습니다.", lottoQuantity));
+        showBuyResult(lottoQuantity);
 
         // create Lotter numbers
         LottoNumbers lottoNumbers = LottoVendingMachine.buy(lottoQuantity);
@@ -33,8 +32,22 @@ public class Lotto {
         List<LottoMatchResult> matchResultList = lottoNumbers.guess(winningNumber);
         LottoResultAggregation lottoResultAggregation = new LottoResultAggregation(matchResultList);
 
-        for (LottoReward lottoReward : LottoReward.values()) {
-            System.out.println(new LottoResultAggregationResponseView(lottoReward, lottoResultAggregation.getCount(lottoReward)));
+        for (LottoReward lottoReward : LottoReward.getValuesOrderByMatchResult()) {
+            System.out.println(new LottoResultAggregationResponseView(lottoReward, lottoResultAggregation.getCount(lottoReward)).toView());
         }
+
+        System.out.println(new LottoYieldResponseView(new LottoYield(paymentAmount, matchResultList)).toView());
+    }
+
+    private static int getPaymentAmount() {
+        System.out.println("구입금액을 입력해주세요.");
+
+        int paymentAmount = scanner.nextInt();
+        scanner.nextLine();
+        return paymentAmount;
+    }
+
+    private static void showBuyResult(int lottoQuantity) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottoQuantity));
     }
 }

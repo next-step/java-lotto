@@ -18,6 +18,10 @@ public class LottoResultAggregation {
     }
 
     public int getCount(LottoReward lottoReward) {
-        return rewardAndCountMaps.get(lottoReward).size();
+        if (rewardAndCountMaps.containsKey(lottoReward)) {
+            return rewardAndCountMaps.get(lottoReward).size();
+        }
+
+        return 0;
     }
 }
