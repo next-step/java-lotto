@@ -41,4 +41,11 @@ public class CalculatorTest {
         int result = calculator.calculate("10 / 2 / 3");
         assertThat(result).isEqualTo(1);
     }
+
+    @Test
+    void 여러_연산자_계산하기() {
+        Calculator calculator = new Calculator();
+        int result = calculator.calculate("10 + 2 * 3 / 6 - 1");
+        assertThat(result).isEqualTo(5);
+    }
 }
