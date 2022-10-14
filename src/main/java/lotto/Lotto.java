@@ -3,6 +3,7 @@ package lotto;
 import java.util.Scanner;
 
 import lotto.model.LottoNumbers;
+import lotto.model.WinningNumber;
 import lotto.view.LottoNumberView;
 
 public class Lotto {
@@ -18,5 +19,8 @@ public class Lotto {
         LottoNumbers lottoNumbers = LottoVendingMachine.buy(lottoQuantity);
 
         System.out.println(new LottoNumberView(lottoNumbers.getLottoNumbers()).toView());
+
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        WinningNumber winningNumber = WinningNumber.from(scanner.nextLine());
     }
 }

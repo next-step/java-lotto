@@ -11,6 +11,6 @@ public class LottoVendingMachineTest {
     void buy() {
         int amount = 15000;
 
-        Assertions.assertThat(LottoVendingMachine.buy(amount)).hasSize(15);
+        Assertions.assertThat(LottoVendingMachine.calculate(amount)).isEqualTo(15);
     }
 }

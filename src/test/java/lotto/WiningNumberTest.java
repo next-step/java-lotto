@@ -13,8 +13,14 @@ public class WiningNumberTest {
     @DisplayName("주어진 숫자가 존재하는지 확인한다")
     @Test
     public void exists() {
-        WinningNumber winningNumber = new WinningNumber(List.of(1,2,3,4,5,6));
+        WinningNumber winningNumber = WinningNumber.of(List.of(1,2,3,4,5,6));
 
         Assertions.assertThat(winningNumber.exists(1)).isTrue();
+    }
+
+    @DisplayName("문자열로부터 객체를 생성한다")
+    @Test
+    void create() {
+        Assertions.assertThat(WinningNumber.from("1, 2, 3, 4, 5, 6")).isNotNull();
     }
 }
