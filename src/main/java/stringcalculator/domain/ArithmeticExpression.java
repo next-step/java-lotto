@@ -42,10 +42,6 @@ public class ArithmeticExpression {
         }
     }
 
-    private ArithmeticExpression appendLeftNumber(String value) {
-        return new ArithmeticExpression(Number.parse(value), this.command, this.rightNumber);
-    }
-
     private ArithmeticExpression appendCommand(String value) {
         return new ArithmeticExpression(this.leftNumber, new CommandFactory().getCommand(value), this.rightNumber);
     }
