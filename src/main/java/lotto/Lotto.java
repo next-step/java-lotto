@@ -1,9 +1,9 @@
 package lotto;
 
-import java.util.List;
 import java.util.Scanner;
 
 import lotto.dto.LottoResultAggregation;
+import lotto.model.LottoMatchResults;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoReward;
 import lotto.model.WinningNumber;
@@ -29,14 +29,14 @@ public class Lotto {
 
         System.out.println("당첨통계");
         System.out.println("------------------");
-        List<LottoMatchResult> matchResultList = lottoNumbers.guess(winningNumber);
-        LottoResultAggregation lottoResultAggregation = new LottoResultAggregation(matchResultList);
+        LottoMatchResults lottoMatchResults = new LottoMatchResults(lottoNumbers.guess(winningNumber));
+        LottoResultAggregation lottoResultAggregation = new LottoResultAggregation(lottoMatchResults.rewardableAggregate());
 
         for (LottoReward lottoReward : LottoReward.getValuesOrderByMatchResult()) {
-            System.out.println(new LottoResultAggregationResponseView(lottoReward, lottoResultAggregation.getCount(lottoReward)).toView());
+            System.out.println(new LottoResultAggregationResponseView(lottoReward, lottoResultAggregation.rewardMatchCount(lottoReward)).toView());
         }
 
-        System.out.println(new LottoYieldResponseView(new LottoYield(paymentAmount, matchResultList)).toView());
+        System.out.println(new LottoYieldResponseView(new LottoYield(paymentAmount, lottoMatchResults.sumRewardAmount())).toView());
     }
 
     private static int getPaymentAmount() {

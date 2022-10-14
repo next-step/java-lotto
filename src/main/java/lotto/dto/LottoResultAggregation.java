@@ -17,7 +17,15 @@ public class LottoResultAggregation {
                                                    .collect(groupingBy(lottoMatchResult -> lottoMatchResult.getLottoReward().get()));
     }
 
-    public int getCount(LottoReward lottoReward) {
+//    public LottoResultAggregation(LottoMatchResults lottoMatchResults) {
+//        this.rewardAndCountMaps = lottoMatchResults.aggregate();
+//    }
+
+    public LottoResultAggregation(Map<LottoReward, List<LottoMatchResult>> rewardAndCountMaps) {
+        this.rewardAndCountMaps = rewardAndCountMaps;
+    }
+
+    public int rewardMatchCount(LottoReward lottoReward) {
         if (rewardAndCountMaps.containsKey(lottoReward)) {
             return rewardAndCountMaps.get(lottoReward).size();
         }
