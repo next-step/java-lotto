@@ -9,7 +9,7 @@ public class NumberUtil {
         throw new AssertionError();
     }
 
-    public static Integer isEssence(Integer firstNumber, Integer secondNumber) {
+    public static Integer validateEssence(Integer firstNumber, Integer secondNumber) {
         double number = (double) firstNumber / secondNumber;
         if (number % 1 == 0) {
             return (int) number;
@@ -17,7 +17,7 @@ public class NumberUtil {
         throw new NotEssenceException();
     }
 
-    public static Integer isNumber(String input) {
+    public static Integer validateNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {

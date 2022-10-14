@@ -4,7 +4,7 @@ import calculator.exception.ValidateOperatorException;
 
 import java.util.Objects;
 
-import static calculator.util.NumberUtil.isEssence;
+import static calculator.util.NumberUtil.validateEssence;
 
 public enum Operator {
 
@@ -54,6 +54,6 @@ public enum Operator {
     }
 
     private static Integer divide(Integer firstNumber, Integer secondNumber) {
-        return isEssence(firstNumber, secondNumber);
+        return validateEssence(firstNumber, secondNumber);
     }
 }
