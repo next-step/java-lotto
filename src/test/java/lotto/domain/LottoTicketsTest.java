@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.groups.Tuple.tuple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +38,17 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = LottoTickets.of(List.of(Lotto.of(list)));
 
         LottoResult result = lottoTickets.getResult(Lotto.of(list), bonus);
-        LottoResult expected = new LottoResult();
-        expected.put(Rank.FIRST);
-        Map<Rank, Integer> statistics = result.getStatistics();
 
-        assertThat(statistics).isEqualTo(expected.getStatistics());
+        assertThat(result.getStatistics().entrySet())
+            .hasSize(6)
+            .extracting(Map.Entry::getKey, Map.Entry::getValue)
+            .containsExactly(
+                tuple(Rank.FIFTH, 0),
+                tuple(Rank.FOURTH, 0),
+                tuple(Rank.THIRD, 0),
+                tuple(Rank.SECOND, 0),
+                tuple(Rank.FIRST, 1),
+                tuple(Rank.NONE, 0)
+            );
     }
 }

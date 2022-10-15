@@ -15,7 +15,7 @@ public class LottoResult {
             .collect(Collectors.toMap(Function.identity(), value -> 0, (x, y) -> y, LinkedHashMap::new));
     }
 
-    public void put(Rank rank) {
+    private void put(Rank rank) {
         result.merge(rank, 1, Integer::sum);
     }
 
