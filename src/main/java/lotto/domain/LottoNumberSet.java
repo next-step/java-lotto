@@ -9,8 +9,8 @@ public class LottoNumberSet {
     public static int LOTTO_SIZE = 6;
     private static final String LOTTO_SIZE_EXCEPTION = "로또 번호는 " + LOTTO_SIZE + "개여야 합니다.";
 
-    public static LottoNumberSet createLottoNumberSet(int... ints) {
-        return new LottoNumberSet(Arrays.stream(ints)
+    public static LottoNumberSet createLottoNumberSet(int... numbers) {
+        return new LottoNumberSet(Arrays.stream(numbers)
                 .mapToObj(number -> new LottoNumber(number))
                 .collect(Collectors.toSet()));
     }

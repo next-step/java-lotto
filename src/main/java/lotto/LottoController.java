@@ -64,13 +64,13 @@ public class LottoController {
     }
 
     private void lottoMatchOutput(int rank, int matchNumber) {
-        if (bonus_rank(rank)) {
+        if (bonusRank(rank)) {
             LottoOutput.matchBonusNumber(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
         }
         LottoOutput.match(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
     }
 
-    private boolean bonus_rank(int i) {
-        return i == 2;
+    private boolean bonusRank(int rank) {
+        return rank == 2;
     }
 }
