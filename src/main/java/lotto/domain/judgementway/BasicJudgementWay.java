@@ -1,4 +1,4 @@
-package lotto.domain.judgeway;
+package lotto.domain.judgementway;
 
 import lotto.domain.WinningResult;
 

@@ -1,10 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import lotto.domain.judgeway.BasicJudgementWay;
-import lotto.domain.judgeway.BonusJudgementWay;
-import lotto.domain.judgeway.JudgementWay;
-import lotto.domain.judgeway.SecondJudgementWay;
+import lotto.domain.judgementway.BasicJudgementWay;
+import lotto.domain.judgementway.BonusJudgementWay;
+import lotto.domain.judgementway.JudgementWay;
+import lotto.domain.judgementway.SecondJudgementWay;
 
 public enum LottoRank {
     NONE(0, 0, BasicJudgementWay.instance()),
