@@ -1,5 +1,7 @@
-import number.PositiveInt;
-import operator.Operator;
+package calculator;
+
+import calculator.number.PositiveInt;
+import calculator.operator.Operator;
 
 public class StringCalculator {
 

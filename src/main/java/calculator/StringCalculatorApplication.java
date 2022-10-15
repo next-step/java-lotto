@@ -1,4 +1,6 @@
-import static view.InputView.inputEquation;
+package calculator;
+
+import static calculator.view.InputView.inputEquation;
 
 public class StringCalculatorApplication {
 
