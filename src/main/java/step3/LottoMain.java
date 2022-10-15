@@ -20,7 +20,7 @@ public class LottoMain {
         LottoWallet lottoWallet = autoLottos(lottoNum);
         ResultView.printLottoNum(lottoWallet);
 
-        LastWinner lastWinner = new LastWinner(InputView.inputLastWinner(),InputView.inputLastBonus());
+        LastWinner lastWinner = new LastWinner(InputView.inputLastWinner(), InputView.inputLastBonus());
         List<Integer> results = lottoWallet.compareWithLastLotto(lastWinner);
         ResultView.printDrawResult(results);
 

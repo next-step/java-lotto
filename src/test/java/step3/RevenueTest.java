@@ -2,7 +2,7 @@ package step3;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import step2.domian.Revenue;
+import step3.domian.Revenue;
 
 import java.util.List;
 

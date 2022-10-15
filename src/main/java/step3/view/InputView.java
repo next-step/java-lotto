@@ -21,6 +21,7 @@ public class InputView {
         System.out.println("\n" + LAST_WINNER_TEXT);
         return Arrays.stream(sc.nextLine().replace(" ", "").split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
     }
+
     public static int inputLastBonus() {
         System.out.println(LAST_BONUS_TEXT);
         return sc.nextInt();
