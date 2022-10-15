@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNumber.lottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -17,6 +18,12 @@ public class LottoTest {
     @DisplayName("생성자 의존성 주입 - 로또 번호")
     void constructorDI() {
         assertThat(new Lotto(lottoNumbers()).lottoNumbers().size()).isEqualTo(45);
+    }
+
+    @Test
+    @DisplayName("생성자 의존성 주입 - 당첨 번호 길이 예외")
+    void constructorDIExceptionForWinningNumberLength() {
+        assertThatThrownBy(() -> new Lotto(LottoNumber.lottoNumbers().subList(0, 7))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

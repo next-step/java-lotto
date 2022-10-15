@@ -17,13 +17,6 @@ public class WinningNumberTest {
     }
 
     @Test
-    @DisplayName("생성자 검증 - 당첨 번호 길이 예외")
-    void constructorDIExceptionForWinningNumberLength() {
-        Lotto winningNumber = new Lotto(LottoNumber.lottoNumbers().subList(0, 7));
-        assertThatThrownBy(() -> new WinningNumber(winningNumber, LottoNumber.lottoNumber(8))).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     @DisplayName("생성자 검증 - 보너스 번호 null")
     void constructorDIExceptionForBonusNumber() {
         Lotto winningNumber = new Lotto(LottoNumber.lottoNumbers().subList(0, 6));

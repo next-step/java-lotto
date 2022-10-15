@@ -6,9 +6,14 @@ import java.util.List;
 
 public class Lotto {
 
+    private final static int COUNTS_OF_LOTTO_NUMBER = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != COUNTS_OF_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 여섯 자리여야 합니다.");
+        }
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
@@ -20,10 +25,6 @@ public class Lotto {
 
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
-    }
-
-    public int sizeOfLottoNumbers() {
-        return lottoNumbers.size();
     }
 
     public boolean containsNumber(LottoNumber lottoNumber) {
