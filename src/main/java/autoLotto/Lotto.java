@@ -3,7 +3,6 @@ package autoLotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static java.util.stream.IntStream.*;
 
@@ -19,5 +18,10 @@ public class Lotto {
 
         range(0, 6).forEach(i -> lotto.add(numbers.get(i)));
         Collections.sort(lotto);
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
     }
 }

@@ -9,4 +9,12 @@ public class Lottos {
     public void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }
+
+    public int getLottosSize() {
+        return lottos.size();
+    }
+
+    public String getLottos(int i) {
+        return lottos.get(i).toString();
+    }
 }
