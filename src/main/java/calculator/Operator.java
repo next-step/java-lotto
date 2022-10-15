@@ -22,13 +22,6 @@ public enum Operator {
         this.expression = expression;
     }
 
-    public static Operator getOperator(String operator) {
-        return Arrays.stream(values())
-                .filter(op -> op.operator.equals(operator))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 연산자입니다."));
-    }
-
     public Integer execute(int num1, int num2) {
         return expression.apply(num1, num2);
     }
