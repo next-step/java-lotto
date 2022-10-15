@@ -1,8 +1,11 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoBall;
+import lotto.domain.LottoInput;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoRankRecord;
 import lotto.domain.LottoRankRecordBox;
@@ -13,11 +16,10 @@ public class LottoResultView {
     private static final StringBuilder STRING_BUILDER = new StringBuilder();
 
     private LottoResultView() {
-
     }
 
-    public static void printBuyLottoNumber(int num) {
-        System.out.println(num + "개를 구매했습니다.");
+    public static void printLottoInput(LottoInput lottoInput) {
+        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.%n", lottoInput.getManualCount(), lottoInput.getAutoCount());
     }
 
     public static void printLottoNumber(List<Lotto> lottos) {
@@ -36,8 +38,9 @@ public class LottoResultView {
     }
 
     private static String makeLottoNumberLine(Lotto lotto) {
-        List<Integer> numbers = lotto.retrieveNumbers();
+        Set<LottoBall> numbers = lotto.retrieveNumbers();
         return numbers.stream()
+                .map(LottoBall::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_DELIMITER));
     }
