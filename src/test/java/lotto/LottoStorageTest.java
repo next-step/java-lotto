@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.LottoStorage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class LottoStorageTest {
             new Lotto("4, 5, 6, 7, 8, 9"),
             new Lotto("5, 6, 7, 8, 9, 10")
         );
-        LottoStoarge storage = new LottoStoarge(lottos);
+        LottoStorage storage = new LottoStorage(lottos);
         Map<Integer, Integer> result = storage.matchWithWinningLotto(winningLotto);
 
         assertAll(() -> {
