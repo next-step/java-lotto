@@ -10,14 +10,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.model.WinningNumber;
 
-public class LottoNumberTest {
+public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("provideWinningNumbers")
     void match(List<Integer> winningNumbers, int expectedMatchCount) {
-        LottoNumber lottoNumber = new LottoNumber(List.of(1,2,3,4,5,6));
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
 
-        Assertions.assertThat(lottoNumber.match(WinningNumber.of(winningNumbers)))
+        Assertions.assertThat(lotto.match(WinningNumber.of(winningNumbers)))
                   .isEqualTo(LottoMatchResult.of(expectedMatchCount));
     }
 

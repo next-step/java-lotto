@@ -5,10 +5,10 @@ import java.util.Objects;
 
 import lotto.model.WinningNumber;
 
-public class LottoNumber {
+public class Lotto {
     private final List<Integer> numbers;
 
-    public LottoNumber(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
@@ -29,10 +29,10 @@ public class LottoNumber {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoNumber)) {
+        if (!(o instanceof Lotto)) {
             return false;
         }
-        LottoNumber that = (LottoNumber) o;
+        Lotto that = (Lotto) o;
         return numbers.equals(that.numbers);
     }
 

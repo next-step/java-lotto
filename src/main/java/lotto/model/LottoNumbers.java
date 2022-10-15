@@ -4,21 +4,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.LottoMatchResult;
-import lotto.LottoNumber;
+import lotto.Lotto;
 
 public class LottoNumbers {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final List<Lotto> lottos;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoNumbers(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<LottoMatchResult> guess(WinningNumber winningNumber) {
-        return lottoNumbers.stream().map(lottoNumber -> lottoNumber.match(winningNumber)).collect(Collectors.toList());
+        return lottos.stream().map(lotto -> lotto.match(winningNumber)).collect(Collectors.toList());
     }
 
     public List<List<Integer>> getLottoNumbers() {
-        return lottoNumbers.stream().map(LottoNumber::getNumbers).collect(Collectors.toList());
+        return lottos.stream().map(Lotto::getNumbers).collect(Collectors.toList());
     }
 }
