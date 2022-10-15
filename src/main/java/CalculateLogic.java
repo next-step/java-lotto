@@ -1,6 +1,6 @@
 import java.util.function.BinaryOperator;
 
-public enum Calculate {
+public enum CalculateLogic {
 
 	PLUS("+", (x, y) -> x + y),
 	MINUS("-", (x, y) -> x - y),
@@ -10,7 +10,7 @@ public enum Calculate {
 	private final String symbol;
 	private final BinaryOperator<Integer> operator;
 
-	Calculate(String symbol, BinaryOperator<Integer> operator) {
+	CalculateLogic(String symbol, BinaryOperator<Integer> operator) {
 		this.symbol = symbol;
 		this.operator = operator;
 	}

@@ -2,7 +2,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.NotFoundOperatorException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +29,6 @@ public class CalculatorTest {
 	void 문자열_계산테스트(){
 		Calculator calculator = new Calculator();
 
-		assertThat(calculator.answer("3 + 2 * 5")).isEqualTo(30);
+		assertThat(calculator.getAnswer("3 + 2 * 5")).isEqualTo(30);
 	}
 }
