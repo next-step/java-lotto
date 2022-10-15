@@ -1,7 +1,7 @@
-import model.Calculator;
+import controller.CalculatorController;
 
 public class CalculateApplication {
 	public static void main(String[] args) {
-		new Calculator().stringCalculator();
+		new CalculatorController().stringCalculator();
 	}
 }

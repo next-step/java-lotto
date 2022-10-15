@@ -10,13 +10,6 @@ public class Calculator {
 	private static final int DEFAULT_NUM = 0;
 	private static final int GET_ODD_NUM = 2;
 	private static final String REGEX = " ";
-	private static final OutputView OUTPUT_VIEW = new OutputView();
-	private static final InputView INPUT_VIEW = new InputView();
-
-	public void stringCalculator() {
-		String formula = INPUT_VIEW.askFormula();
-		OUTPUT_VIEW.showResult(formula, getResult(formula));
-	}
 
 	public int getResult(String formula) {
 
