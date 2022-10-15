@@ -22,20 +22,19 @@ public enum Rank {
 
     static Rank valueOf(int matchCount, boolean hasBonusBall) {
         return Rank.stream()
-            .filter(rank -> ranking(matchCount == 5, checkBonusBall(hasBonusBall, rank), rank.matchCount == matchCount))
+            .map(rank -> getRank(matchCount, hasBonusBall, rank))
             .findFirst()
             .orElse(LOSER);
     }
 
-    private static boolean ranking(boolean matchCount, boolean hasBonusBall, boolean matchCount1) {
-        if (matchCount) {
-            return hasBonusBall;
+    private static Rank getRank(int matchCount, boolean hasBonusBall, Rank rank) {
+        if (matchCount == 5 && hasBonusBall) {
+            return SECOND;
+        } else if (matchCount == 5) {
+            return THIRD;
+        } else {
+            return rank;
         }
-        return matchCount1;
-    }
-
-    private static boolean checkBonusBall(boolean hasBonusBall, Rank rank) {
-        return ranking(hasBonusBall, rank == SECOND, rank == THIRD);
     }
 
     public int matchCount() {
