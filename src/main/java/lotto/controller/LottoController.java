@@ -23,7 +23,7 @@ public class LottoController {
         List<LottoNumber> winningNumbers = InputView.inputLottoNumberLastResult();
         int bonusBall = InputView.inputBonusBall();
 
-        LottoResult lottoResult = lottoTickets.calculate(Lotto.of(winningNumbers), bonusBall);
+        LottoResult lottoResult = lottoTickets.getResult(Lotto.of(winningNumbers), bonusBall);
 
         ResultView.printStatistics(lottoResult.getStatistics());
         ResultView.printRating(lottoResult.getStatistics(), totalPrice);

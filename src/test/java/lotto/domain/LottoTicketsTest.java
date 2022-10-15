@@ -35,7 +35,7 @@ public class LottoTicketsTest {
         int bonus = 7;
         LottoTickets lottoTickets = LottoTickets.of(List.of(Lotto.of(list)));
 
-        LottoResult result = lottoTickets.calculate(Lotto.of(list), bonus);
+        LottoResult result = lottoTickets.getResult(Lotto.of(list), bonus);
         LottoResult expected = new LottoResult();
         expected.put(Rank.FIRST);
 

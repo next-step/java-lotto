@@ -35,7 +35,7 @@ public class LottoTickets {
         return lottos;
     }
 
-    public LottoResult calculate(Lotto winningNumbers, int bonusBall) {
+    public LottoResult getResult(Lotto winningNumbers, int bonusBall) {
         LottoResult lottoResult = new LottoResult();
         lottoResult.result(winningNumbers, lottos, bonusBall);
         return lottoResult;
