@@ -1,6 +1,7 @@
 package lotto;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ public class LottoVendingMachineTest {
     void buy() {
         int amount = 15000;
 
-        Assertions.assertThat(LottoVendingMachine.calculate(amount)).isEqualTo(15);
+        assertThat(LottoVendingMachine.calculate(amount))
+                .isEqualTo(15);
     }
 }

@@ -1,5 +1,7 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +15,7 @@ public class LottoMatchResultTest {
     void notRewarable(int notRewardableMatchCount) {
         LottoMatchResult lottoMatchResult = LottoMatchResult.of(notRewardableMatchCount);
 
-        Assertions.assertThat(lottoMatchResult.rewardable()).isFalse();
+        assertThat(lottoMatchResult.rewardable()).isFalse();
     }
 
     @DisplayName("3개 이상은 상금이 존재합니다")
@@ -22,6 +24,6 @@ public class LottoMatchResultTest {
     void rewardable(int rewardableMatchCount) {
         LottoMatchResult lottoMatchResult = LottoMatchResult.of(rewardableMatchCount);
 
-        Assertions.assertThat(lottoMatchResult.rewardable()).isTrue();
+        assertThat(lottoMatchResult.rewardable()).isTrue();
     }
 }

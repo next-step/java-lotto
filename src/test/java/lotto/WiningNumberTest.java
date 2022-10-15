@@ -1,8 +1,9 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +16,14 @@ public class WiningNumberTest {
     public void exists() {
         WinningNumber winningNumber = WinningNumber.of(List.of(1,2,3,4,5,6));
 
-        Assertions.assertThat(winningNumber.exists(1)).isTrue();
+        assertThat(winningNumber.exists(1))
+                .isTrue();
     }
 
     @DisplayName("문자열로부터 객체를 생성한다")
     @Test
     void create() {
-        Assertions.assertThat(WinningNumber.from("1, 2, 3, 4, 5, 6")).isNotNull();
+        assertThat(WinningNumber.from("1, 2, 3, 4, 5, 6"))
+                .isNotNull();
     }
 }
