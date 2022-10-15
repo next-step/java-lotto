@@ -12,7 +12,7 @@ public class LottoRankRecord {
         this.number = number;
     }
 
-    public int calculateSum() {
+    public long calculateSum() {
         return lottoRank.getWinPrize() * number;
     }
 

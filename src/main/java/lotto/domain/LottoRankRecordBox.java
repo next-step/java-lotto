@@ -16,7 +16,7 @@ public class LottoRankRecordBox {
         for (LottoRankRecord lottoRankRecord : lottoRankRecords) {
             LottoRank rank = lottoRankRecord.getRank();
             int number = lottoRankRecord.getNumber();
-            int winPrize = rank.getWinPrize() * number;
+            long winPrize = rank.getWinPrize() * number;
             sum += winPrize;
         }
         return sum;

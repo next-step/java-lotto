@@ -41,9 +41,9 @@ class LottoResultTest {
                 new LottoRankRecord(LottoRank.FIRST, 1),
                 new LottoRankRecord(LottoRank.THIRD, 2)
         );
-        int sum = lottoRankRecords.stream()
-                .mapToInt(LottoRankRecord::calculateSum)
-                .reduce(0, Integer::sum);
+        long sum = lottoRankRecords.stream()
+                .mapToLong(LottoRankRecord::calculateSum)
+                .reduce(0, Long::sum);
         LottoResult lottoResult = new LottoResult(new LottoRankRecordBox(lottoRankRecords));
 
         double ratio = lottoResult.retrieveProfitRatio(originAmount);

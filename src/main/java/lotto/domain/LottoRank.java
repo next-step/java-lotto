@@ -15,7 +15,7 @@ public enum LottoRank {
     FIRST(6, 2_000_000_000, BasicJudgementWay.instance()),
     ;
     private final int correctCount;
-    private final int winPrize;
+    private final long winPrize;
     private final JudgementWay judgementWay;
 
     LottoRank(int correctNum, int winPrize, JudgementWay judgementWay) {
@@ -37,7 +37,7 @@ public enum LottoRank {
         return correctCount;
     }
 
-    public int getWinPrize() {
+    public long getWinPrize() {
         return winPrize;
     }
 }
