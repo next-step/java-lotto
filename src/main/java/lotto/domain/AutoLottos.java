@@ -19,7 +19,7 @@ public class AutoLottos {
         final List<Lotto> autoLottos = new ArrayList<>();
         for (int i = 0; i < countOfAutoLotto; i++) {
             Collections.shuffle(LOTTO_NUMBERS);
-            autoLottos.add(Lotto.from(pick()));
+            autoLottos.add(LottoFactory.from(pick()));
         }
         return autoLottos;
     }
