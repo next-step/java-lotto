@@ -7,13 +7,13 @@ import lotto.model.LottoMatchResults;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoReward;
 import lotto.model.WinningNumber;
-import lotto.view.BuyResultResponseView;
-import lotto.view.GeneratedLottoResponseView;
-import lotto.view.LottoResultAggregationResponseView;
-import lotto.view.LottoYieldResponseView;
-import lotto.view.MatchResultTitle;
-import lotto.view.PaymentAmountInputView;
-import lotto.view.WinningNumberInputView;
+import lotto.view.response.BuyResultResponseView;
+import lotto.view.response.GeneratedLottoResponseView;
+import lotto.view.response.LottoResultAggregationResponseView;
+import lotto.view.response.LottoYieldResponseView;
+import lotto.view.response.MatchResultTitleResponseView;
+import lotto.view.input.PaymentAmountInputView;
+import lotto.view.input.WinningNumberInputView;
 
 public class LottoApplication {
     private static final Scanner scanner = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class LottoApplication {
 
         WinningNumber winningNumber = WinningNumberInputView.getWinningNumber(scanner);
 
-        MatchResultTitle.show();
+        MatchResultTitleResponseView.show();
         LottoMatchResults lottoMatchResults = new LottoMatchResults(lottoNumbers.guess(winningNumber));
         LottoResultAggregation lottoResultAggregation = new LottoResultAggregation(lottoMatchResults.rewardableAggregate());
 
@@ -45,6 +45,6 @@ public class LottoApplication {
     }
 
     private static void showLottoYield(int paymentAmount, int rewardAmount) {
-        System.out.println(new LottoYieldResponseView(new LottoYield(paymentAmount, rewardAmount)).toView());
+        System.out.println(new LottoYieldResponseView(new LottoYield(paymentAmount, rewardAmount)).toMessage());
     }
 }

@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.response;
 
 public class BuyResultResponseView {
 

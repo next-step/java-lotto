@@ -1,6 +1,6 @@
-package lotto.view;
+package lotto.view.response;
 
-public class MatchResultTitle {
+public class MatchResultTitleResponseView {
 
     public static void show() {
         System.out.println("당첨통계");

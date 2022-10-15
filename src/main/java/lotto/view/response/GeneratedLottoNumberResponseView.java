@@ -1,10 +1,12 @@
-package lotto.view;
+package lotto.view.response;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GeneratedLottoNumberResponseView implements ResponseView {
+import lotto.view.BuildResponseMessage;
+
+public class GeneratedLottoNumberResponseView implements BuildResponseMessage {
     private final List<List<Integer>> lottoNumbers;
 
     public GeneratedLottoNumberResponseView(List<List<Integer>> lottoNumbers) {
@@ -12,7 +14,7 @@ public class GeneratedLottoNumberResponseView implements ResponseView {
     }
 
     @Override
-    public String toView() {
+    public String toMessage() {
         return lottoNumbers.stream()
                            .map(this::convertLottoNumberToView)
                            .collect(Collectors.joining("\n"));
