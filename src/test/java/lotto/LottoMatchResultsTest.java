@@ -28,9 +28,9 @@ public class LottoMatchResultsTest {
     @Test
     void sumRewardAmount_rewarded() {
         List<LottoMatchResult> lottoMatchResults = List.of(
-                LottoMatchResult.of(LottoReward.fourthPlace.getMatchCount())
+                LottoMatchResult.of(LottoReward.FOURTH_PLACE.getMatchCount())
         );
 
-        assertThat(new LottoMatchResults(lottoMatchResults).sumRewardAmount()).isEqualTo(LottoReward.fourthPlace.getRewardAmount());
+        assertThat(new LottoMatchResults(lottoMatchResults).sumRewardAmount()).isEqualTo(LottoReward.FOURTH_PLACE.getRewardAmount());
     }
 }
