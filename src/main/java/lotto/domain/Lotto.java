@@ -2,47 +2,60 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-
+    public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private final Set<LottoBall> numbers;
+
+    public Lotto(Lotto lotto) {
+        numbers = copyLotto(lotto);
+    }
 
     public Lotto(List<Integer> numbers) {
-        validateLottoSize(numbers);
-        this.numbers = copyNumbers(numbers);
+        this.numbers = makeLottoBalls(numbers);
+        validateLottoSize();
     }
 
-    public List<Integer> retrieveNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public Set<LottoBall> retrieveNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 
-    public int retrieveCorrectLottoBallCount(Lotto winningLotto) {
-        Long count = numbers.stream()
-                .filter(winningLotto.numbers::contains)
+    public int retrieveWinnerLottoBallCount(Lotto lotto) {
+        Long count = this.numbers.stream()
+                .filter(lotto.numbers::contains)
                 .count();
         return count.intValue();
     }
 
-    public boolean matchBounsBall(LottoBall bonusBall) {
+    public boolean hasLottoBall(LottoBall lottoBall) {
         return numbers.stream()
-                .anyMatch(bonusBall::hasSameNumber);
+                .anyMatch(lottoBall::equals);
     }
 
-    private static void validateLottoSize(List<Integer> numbers) {
+    private void validateLottoSize() {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("Lotto에는 " + LOTTO_SIZE + "개의 숫자만 들어올 수 있습니다.");
+            throw new IllegalArgumentException("Lotto에는 " + LOTTO_SIZE + "개의 중복되지 않은 숫자만 들어올 수 있습니다.");
         }
-
     }
 
-    private static List<Integer> copyNumbers(List<Integer> numbers) {
+    private Set<LottoBall> makeLottoBalls(List<Integer> numbers) {
         return numbers.stream()
-                .map(Integer::new)
-                .collect(Collectors.toList());
+                .map(LottoBall::new)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<LottoBall> copyLotto(Lotto lotto) {
+        Set<LottoBall> newLottoBalls = new HashSet<>();
+        for (LottoBall lottoBall : lotto.numbers) {
+            newLottoBalls.add(new LottoBall(lottoBall));
+        }
+        return newLottoBalls;
     }
 
     @Override
