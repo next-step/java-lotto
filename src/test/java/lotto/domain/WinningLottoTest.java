@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -57,5 +58,15 @@ class WinningLottoTest {
         assertThatThrownBy(() -> WinningLotto.from("1, 2, 3, 4, 5, 6", number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 숫자는 1 ~ 45 사이여야 합니다.");
+    }
+
+    @DisplayName("보너스 번호가 일치한다.")
+    @Test
+    void match_bonus_number() {
+
+        final WinningLotto winningLotto = WinningLotto.from("1, 2, 3, 4, 5, 6", "7");
+        final Lotto lotto = LottoFactory.from("1, 2, 3, 4, 5, 7");
+
+        assertThat(winningLotto.matchBonus(lotto)).isTrue();
     }
 }
