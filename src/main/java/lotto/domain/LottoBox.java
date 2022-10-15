@@ -12,12 +12,11 @@ public class LottoBox {
         this.lottos.addAll(lottos);
     }
 
-    public List<WinningResult> retrieveCorrectNum(Lotto winningLotto, LottoBall bonusBall) {
+    public List<WinningResult> retrieveCorrectNum(WinningLotto winnerLotto) {
         List<WinningResult> winningResults = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int correctCount = lotto.retrieveCorrectLottoBallCount(winningLotto);
-            boolean bonusMatch = lotto.matchBounsBall(bonusBall);
-            winningResults.add(new WinningResult(correctCount, bonusMatch));
+            WinningResult winningResult = winnerLotto.retrieveWinnerResult(lotto);
+            winningResults.add(winningResult);
         }
 
         return winningResults;
