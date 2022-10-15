@@ -16,13 +16,14 @@ public class LottoWallet {
         List<Integer> results = new ArrayList<>(Collections.nCopies(7, 0));
         for (Lotto lotto : this.lottos) {
             int count = lotto.countSameNumber(lastWinner);
-            results.set(getCount(count, lotto,lastWinner.bonus), results.get(count) + 1);
+            int position = getPosition(count, lotto, lastWinner.bonus);
+            results.set(position, results.get(position) + 1);
         }
         return results;
     }
 
-    private int getCount(int count, Lotto lotto,int bonus){
-        if(count == 4 && lotto.isContain(bonus) == 1){
+    private int getPosition(int count, Lotto lotto, int bonus) {
+        if (count == 4 && lotto.isContain(bonus) == 1) {
             return 0;
         }
         return count;
