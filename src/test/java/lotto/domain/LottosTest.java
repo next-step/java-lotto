@@ -29,14 +29,23 @@ public class LottosTest {
     @DisplayName("당첨 번호 테스트")
     void winningNumber_check_test() {
         //given
-        List<Lotto> lottoList = List.of(new Lotto(List.of(
-            LottoNumberFactory.getLottoNumber("1"),
-            LottoNumberFactory.getLottoNumber("2"),
-            LottoNumberFactory.getLottoNumber("3"),
-            LottoNumberFactory.getLottoNumber("4"),
-            LottoNumberFactory.getLottoNumber("5"),
-            LottoNumberFactory.getLottoNumber("6")
-        )));
+        List<Lotto> lottoList = List.of(
+            new Lotto(List.of(
+                LottoNumberFactory.getLottoNumber("1"),
+                LottoNumberFactory.getLottoNumber("2"),
+                LottoNumberFactory.getLottoNumber("3"),
+                LottoNumberFactory.getLottoNumber("4"),
+                LottoNumberFactory.getLottoNumber("5"),
+                LottoNumberFactory.getLottoNumber("6")
+            )),
+            new Lotto(List.of(
+                LottoNumberFactory.getLottoNumber("1"),
+                LottoNumberFactory.getLottoNumber("5"),
+                LottoNumberFactory.getLottoNumber("6"),
+                LottoNumberFactory.getLottoNumber("9"),
+                LottoNumberFactory.getLottoNumber("10"),
+                LottoNumberFactory.getLottoNumber("13")
+            )));
         Lottos lottos = new Lottos(lottoList);
         Lotto lotto = new Lotto(List.of(
             LottoNumberFactory.getLottoNumber("1"),
@@ -47,14 +56,14 @@ public class LottosTest {
             LottoNumberFactory.getLottoNumber("11")));
 
         //when
-        Bank bank = lottos.checkWinningNumber(lotto);
+        Bank bank = lottos.checkWinningNumber(lotto, new LottoNumber(13));
 
         //then
         EnumMap<Rank, Integer> rankIntegerEnumMap = new EnumMap<>(
             Map.of(
                 Rank.LOSER, 0,
                 Rank.FIRST, 0,
-                Rank.SECOND, 0,
+                Rank.SECOND, 1,
                 Rank.THIRD, 0,
                 Rank.FOURTH, 1
             )
