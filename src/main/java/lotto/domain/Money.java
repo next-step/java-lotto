@@ -12,6 +12,8 @@ import java.util.Objects;
 
 public class Money {
 
+    private static final BigInteger LOTTO_PRICE = BigInteger.valueOf(1000);
+
     private final BigInteger value;
 
     public Money(final BigInteger value) {
@@ -42,10 +44,6 @@ public class Money {
         }
     }
 
-    public boolean lessThan(Money money) {
-        return value.compareTo(money.value) < 0;
-    }
-
     public static Money sumMoney(List<Money> moneys) {
         BigInteger total = moneys.stream()
                 .map(m -> m.value)
@@ -53,14 +51,20 @@ public class Money {
         return new Money(total);
     }
 
-    public Money subtract(Money subtrahend) {
-        BigInteger minuend = value.subtract(subtrahend.value);
-        return new Money(minuend);
+    public PlayLottoCount countPlayLotto() {
+        return new PlayLottoCount(divideLottoPrice().intValue());
     }
 
-    public Money multiply(BigInteger multiplicand) {
-        BigInteger multiplier = value.multiply(multiplicand);
-        return new Money(multiplier);
+    public Money calculateLeft() {
+        return new Money(this.value.remainder(LOTTO_PRICE));
+    }
+
+    public Money calculatePrice() {
+        return new Money(divideLottoPrice().multiply(LOTTO_PRICE));
+    }
+
+    private BigInteger divideLottoPrice() {
+        return value.divide(LOTTO_PRICE);
     }
 
     public BigDecimal divide(Money divisor) {

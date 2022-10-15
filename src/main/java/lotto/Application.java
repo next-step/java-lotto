@@ -10,19 +10,17 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        Money moneyPaid = receiveMoney();
-
-        Cashier cashier = createCashier(moneyPaid);
-        Money moneyLeft = cashier.receiveLeftMoney();
+        Money money = receiveMoney();
+        Money moneyLeft = money.calculateLeft();
         OutputView.printMoneyLeft(moneyLeft);
 
-        PlayLottoCount playLottoCount = cashier.countPlayLotto();
+        PlayLottoCount playLottoCount = money.countPlayLotto();
         List<Lotto> lottos = AutoLottoGenerator.generate(playLottoCount);
         OutputView.printGeneratedLottos(lottos);
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
         WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWeekWinningLotto);
-        OutputView.printWinningStatistics(winningStatistics, moneyPaid.subtract(moneyLeft));
+        OutputView.printWinningStatistics(winningStatistics, money.calculatePrice());
     }
 
     private static Money receiveMoney() {
@@ -31,16 +29,6 @@ public class Application {
         } catch (NotNumberStringException | NotZeroOrMoreNumberException e) {
             System.out.println(e.getMessage());
             return receiveMoney();
-        }
-    }
-
-    private static Cashier createCashier(Money moneyPaid) {
-        try {
-            return new Cashier(moneyPaid);
-        } catch (UnpurchasableAmountOfMoneyException e) {
-            System.out.println(e.getMessage());
-            moneyPaid = receiveMoney();
-            return createCashier(moneyPaid);
         }
     }
 
