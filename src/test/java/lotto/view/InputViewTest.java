@@ -40,7 +40,7 @@ public class InputViewTest {
         System.setIn(in);
     }
 
-    public static InputStream generateUserInput(String input) {
+    private static InputStream generateUserInput(String input) {
         return new ByteArrayInputStream(input.getBytes());
     }
 }

@@ -21,7 +21,7 @@ class WinningInformationTest {
     @ParameterizedTest
     @MethodSource("generateWinningAmount")
     void count_matches(int matchesCount, WinningInformation winningInformation) {
-        assertThat(WinningInformation.of(matchesCount)).isEqualTo(winningInformation);
+        assertThat(WinningInformation.from(matchesCount)).isEqualTo(winningInformation);
     }
 
     private Stream<Arguments> generateWinningAmount() {

@@ -19,7 +19,7 @@ public class WinningStatistics {
 
     public static WinningStatistics of(final List<Lotto> lottos, final Lotto lastWeekWinningLotto) {
         List<WinningInformation> winningInformations = lottos.stream()
-                .map(lotto -> WinningInformation.of(lotto.countMatches(lastWeekWinningLotto)))
+                .map(lotto -> WinningInformation.from(lotto.countMatches(lastWeekWinningLotto)))
                 .collect(Collectors.toList());
         return new WinningStatistics(winningInformations);
     }

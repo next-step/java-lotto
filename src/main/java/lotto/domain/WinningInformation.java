@@ -25,7 +25,7 @@ public enum WinningInformation {
         this.amount = amount;
     }
 
-    public static WinningInformation of(int matchesCount) {
+    public static WinningInformation from(int matchesCount) {
         return Arrays.stream(values())
                 .filter(w -> w.matchesCount == matchesCount)
                 .findFirst()

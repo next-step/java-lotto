@@ -18,10 +18,10 @@ class WinningStatisticsTest {
     @BeforeEach
     void setUp() {
         List<WinningInformation> winningInformations = List.of(
-                WinningInformation.of(6),
-                WinningInformation.of(6),
-                WinningInformation.of(3),
-                WinningInformation.of(0)
+                WinningInformation.from(6),
+                WinningInformation.from(6),
+                WinningInformation.from(3),
+                WinningInformation.from(0)
         );
         winningStatistics = new WinningStatistics(winningInformations);
     }
