@@ -3,6 +3,7 @@ package calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OperatorTest {
     @Test
@@ -25,4 +26,9 @@ class OperatorTest {
         assertThat(Operator.DIVIDE.execute(8,4)).isEqualTo(2);
     }
 
+    @Test
+    void divide_by_0() {
+        assertThatThrownBy(() -> Operator.DIVIDE.execute(8,0))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
