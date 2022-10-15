@@ -16,8 +16,8 @@ public class Application {
         Money moneyLeft = cashier.receiveLeftMoney();
         OutputView.printMoneyLeft(moneyLeft);
 
-        int playLottoCount = cashier.countPlayLotto();
-        List<Lotto> lottos = LottoGenerator.generate(playLottoCount);
+        PlayLottoCount playLottoCount = cashier.countPlayLotto();
+        List<Lotto> lottos = AutoLottoGenerator.generate(playLottoCount);
         OutputView.printGeneratedLottos(lottos);
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();

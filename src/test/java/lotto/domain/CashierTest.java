@@ -26,9 +26,9 @@ public class CashierTest {
     @DisplayName("플레이 가능한 로또 수를 가져온다.")
     @Test
     void count_play_lotto() {
-        int actual = new Cashier("14000").countPlayLotto();
+        PlayLottoCount actual = new Cashier("14000").countPlayLotto();
 
-        assertThat(actual).isEqualTo(14);
+        assertThat(actual).isEqualTo(new PlayLottoCount(14));
     }
 
     @DisplayName("로또를 사고 남은 돈을 알려준다.")

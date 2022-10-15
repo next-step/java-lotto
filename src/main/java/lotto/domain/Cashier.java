@@ -28,13 +28,14 @@ public class Cashier {
         }
     }
 
-    public int countPlayLotto() {
-        return this.money.divide(LOTTO_PRICE)
+    public PlayLottoCount countPlayLotto() {
+        int count = this.money.divide(LOTTO_PRICE)
                 .intValue();
+        return new PlayLottoCount(count);
     }
 
     public Money receiveLeftMoney() {
-        Money totalLottoPrice = LOTTO_PRICE.multiply(BigInteger.valueOf(countPlayLotto()));
+        Money totalLottoPrice = LOTTO_PRICE.multiply(BigInteger.valueOf(countPlayLotto().getValue()));
         return money.subtract(totalLottoPrice);
     }
 
