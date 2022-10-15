@@ -5,7 +5,7 @@ import lotto.domain.WinningResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBox;
 import lotto.domain.LottoManager;
-import lotto.domain.LottoRankRecordFactory;
+import lotto.domain.LottoRankRecordBoxFactory;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoSeller;
 import lotto.strategy.ShuffleExtractStrategy;
@@ -23,7 +23,7 @@ public class LottoApplication {
         LottoResultView.printLottoNumber(lottoBox.getLottos());
 
         List<WinningResult> correctInfos = lottoBox.retrieveCorrectNum(new Lotto(LottoInputView.getWinNumbers()), LottoInputView.getBonusBallNumber());
-        LottoResult lottoResult = new LottoResult(LottoRankRecordFactory.createLottoRankRecords(correctInfos));
+        LottoResult lottoResult = new LottoResult(LottoRankRecordBoxFactory.createLottoRankRecordBox(correctInfos));
 
         LottoResultView.printWinStatistics(lottoResult.getLottoRankRecords());
         LottoResultView.printProfitRatio(lottoResult.retrieveProfitRatio(amount));

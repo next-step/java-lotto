@@ -6,19 +6,21 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoRankRecordFactory {
+public class LottoRankRecordBoxFactory {
 
-    private LottoRankRecordFactory() {
+    private LottoRankRecordBoxFactory() {
     }
 
-    public static List<LottoRankRecord> createLottoRankRecords(List<WinningResult> correctInfos) {
+    public static LottoRankRecordBox createLottoRankRecordBox(List<WinningResult> correctInfos) {
         List<LottoRankRecord> lottoRankRecords = new ArrayList<>();
+
         Map<LottoRank, Integer> rankRecord = recordWinRank(correctInfos);
         for (LottoRank lottoRank : rankRecord.keySet()) {
             int number = rankRecord.get(lottoRank);
             lottoRankRecords.add(new LottoRankRecord(lottoRank, number));
         }
-        return Collections.unmodifiableList(lottoRankRecords);
+
+        return new LottoRankRecordBox(lottoRankRecords);
     }
 
     private static Map<LottoRank, Integer> recordWinRank(List<WinningResult> correctInfos) {

@@ -15,7 +15,7 @@ class LottoResultTest {
     void firstProfitRatio() {
         int originAmount = 1000;
         LottoRankRecord lottoRankRecord = new LottoRankRecord(LottoRank.FIRST, 1);
-        LottoResult lottoResult = new LottoResult(List.of(lottoRankRecord));
+        LottoResult lottoResult = new LottoResult(new LottoRankRecordBox(List.of(lottoRankRecord)));
 
         double ratio = lottoResult.retrieveProfitRatio(originAmount);
         Assertions.assertThat(ratio).isEqualTo(LottoResult.getTwoDecimalPointResult(LottoRank.FIRST.getWinPrize(), originAmount));
@@ -26,7 +26,7 @@ class LottoResultTest {
     void secondProfitRatio() {
         int originAmount = 1000;
         LottoRankRecord lottoRankRecord = new LottoRankRecord(LottoRank.SECOND, 1);
-        LottoResult lottoResult = new LottoResult(List.of(lottoRankRecord));
+        LottoResult lottoResult = new LottoResult(new LottoRankRecordBox(List.of(lottoRankRecord)));
 
         double ratio = lottoResult.retrieveProfitRatio(originAmount);
         Assertions.assertThat(ratio).isEqualTo(LottoResult.getTwoDecimalPointResult(LottoRank.SECOND.getWinPrize(), originAmount));
@@ -44,7 +44,7 @@ class LottoResultTest {
         int sum = lottoRankRecords.stream()
                 .mapToInt(LottoRankRecord::calculateSum)
                 .reduce(0, Integer::sum);
-        LottoResult lottoResult = new LottoResult(lottoRankRecords);
+        LottoResult lottoResult = new LottoResult(new LottoRankRecordBox(lottoRankRecords));
 
         double ratio = lottoResult.retrieveProfitRatio(originAmount);
 

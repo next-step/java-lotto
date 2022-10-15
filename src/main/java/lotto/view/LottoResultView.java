@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoRankRecord;
+import lotto.domain.LottoRankRecordBox;
 
 public class LottoResultView {
 
@@ -42,9 +43,9 @@ public class LottoResultView {
         return lottoLine;
     }
 
-    public static void printWinStatistics(List<LottoRankRecord> rankRecords) {
+    public static void printWinStatistics(LottoRankRecordBox lottoRankRecordBox) {
         sb.append("\n당첨 통계\n--------");
-        for (LottoRankRecord lottoRankRecord : rankRecords) {
+        for (LottoRankRecord lottoRankRecord : lottoRankRecordBox.getLottoRankRecords()) {
             stringBuildRankRecord(lottoRankRecord);
         }
         sb.append("\n");
