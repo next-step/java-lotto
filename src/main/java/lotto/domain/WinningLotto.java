@@ -5,6 +5,9 @@ import java.util.List;
 
 public class WinningLotto {
 
+    private static final int MATCH_ONE = 1;
+    private static final int NOT_MATCH_ZERO = 0;
+
     private final Lotto winnerLotto;
     private final Number bonusNumber;
 
@@ -18,23 +21,41 @@ public class WinningLotto {
 
         validate(winningLotto, bonusNumber);
 
-        return new WinningLotto(Lotto.from(winningLotto), Number.from(bonusNumber));
+        return new WinningLotto(LottoFactory.from(winningLotto), Number.from(bonusNumber));
     }
 
     private static void validate(final String winningLotto, final String bonusNumber) {
 
-        if (winningLotto == null || winningLotto.isBlank() || bonusNumber == null || bonusNumber.isBlank()) {
+        if (winningLotto == null || winningLotto.isEmpty() || bonusNumber == null || bonusNumber.isEmpty()) {
             throw new IllegalArgumentException("입력 값이 null 또는 빈 공백 입니다.");
         }
+    }
+
+    public int match(final Lotto lotto) {
+
+        int result = 0;
+        for (Number number : lotto.getLotto()) {
+            result += compare(number);
+        }
+        return result;
+    }
+
+    private int compare(final Number number) {
+
+        if (this.winnerLotto.getLotto().contains(number)) {
+            return MATCH_ONE;
+        }
+        return NOT_MATCH_ZERO;
+    }
+
+    public boolean matchBonus(final Lotto lotto) {
+
+        return lotto.getLotto()
+                .contains(this.bonusNumber);
     }
 
     public List<Number> getWinnerLotto() {
 
         return Collections.unmodifiableList(this.winnerLotto.getLotto());
-    }
-
-    public Number getBonusNumber() {
-
-        return bonusNumber;
     }
 }
