@@ -26,14 +26,11 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(Lottos lottos) {
-        List<String> lottonumbers = new ArrayList<>();
         for (Lotto lotto : lottos.getLottoList()) {
-            lottonumbers.clear();
-            lotto.getLottoNumbers().stream()
-                            .forEach(number -> {
-                                lottonumbers.add(Integer.toString(number.getNumber()));
-                            });
-            System.out.println("[" + String.join(", ", lottonumbers) + "]");
+            String lottoNumbers = lotto.getLottoNumbers().stream()
+                    .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                    .collect(Collectors.joining(", "));
+            System.out.println("[" + lottoNumbers + "]");
         }
         System.out.println();
     }
