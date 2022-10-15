@@ -11,7 +11,7 @@ class WinningLottoTest {
     void getBonusWinningResult() {
         WinningLotto winningLotto = WinningLotto.of(
                 new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new LottoBall(10)
+                LottoBall.from(10)
         );
         assertThat(
                         winningLotto.retrieveWinnerResult(new Lotto(List.of(1, 2, 3, 4, 5, 10))))
@@ -22,7 +22,7 @@ class WinningLottoTest {
     void getSecondWinningResult() {
         WinningLotto winningLotto = WinningLotto.of(
                 new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new LottoBall(10)
+                LottoBall.from(10)
         );
         assertThat(
                 winningLotto.retrieveWinnerResult(

@@ -35,7 +35,7 @@ class LottoBoxTest {
                 firstLotto
         ));
         Lotto correctLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = WinningLotto.of(correctLotto, new LottoBall(10));
+        WinningLotto winningLotto = WinningLotto.of(correctLotto, LottoBall.from(10));
         List<WinningResult> winningResults = lottoBox.retrieveCorrectNum(winningLotto);
         assertThat(winningResults)
                 .containsExactly(new WinningResult(6), new WinningResult(6), new WinningResult(6));
@@ -52,7 +52,7 @@ class LottoBoxTest {
                 noneLotto
         ));
         Lotto correctLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = WinningLotto.of(correctLotto, new LottoBall(BONUS_NUMBER));
+        WinningLotto winningLotto = WinningLotto.of(correctLotto, LottoBall.from(BONUS_NUMBER));
         List<WinningResult> winningResults = lottoBox.retrieveCorrectNum(winningLotto);
         assertThat(winningResults)
                 .containsExactly(

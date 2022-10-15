@@ -39,7 +39,7 @@ public class LottoInputView {
     public static LottoBall getBonusBallNumber() {
         System.out.println("보너스 볼을 입력해주세요.");
         int number = scanner.nextInt();
-        return new LottoBall(number);
+        return LottoBall.from(number);
     }
 
     private static List<Integer> splitText(String text) {

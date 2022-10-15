@@ -11,13 +11,13 @@ class LottoBallTest {
 
     @Test
     void create() {
-        assertThat(new LottoBall(5)).isNotNull();
+        assertThat(LottoBall.from(5)).isNotNull();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46, 47, 101})
     void 범위를_넘어서는_LottoBall(int value) {
-        assertThatThrownBy(() -> new LottoBall(value))
+        assertThatThrownBy(() -> LottoBall.from(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -46,16 +46,12 @@ public class Lotto {
 
     private Set<LottoBall> makeLottoBalls(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoBall::new)
+                .map(LottoBall::from)
                 .collect(Collectors.toSet());
     }
 
     private Set<LottoBall> copyLotto(Lotto lotto) {
-        Set<LottoBall> newLottoBalls = new HashSet<>();
-        for (LottoBall lottoBall : lotto.numbers) {
-            newLottoBalls.add(new LottoBall(lottoBall));
-        }
-        return newLottoBalls;
+        return new HashSet<>(lotto.numbers);
     }
 
     @Override
