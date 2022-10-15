@@ -3,7 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,9 +13,9 @@ public class LottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3", "1, 2, 3, 4, 5, 6, 7"})
-    @DisplayName("입력한 숫자가 6개가 아닌 경우 LottoNumber 객체를 생성할 수 없다.")
+    @DisplayName("입력한 숫자가 6개가 아닌 경우 Lotto 객체를 생성할 수 없다.")
     void create_withNot6Numbers(String input) {
-        assertThatThrownBy(() -> new LottoNumber(input))
+        assertThatThrownBy(() -> new Lotto(input))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("6개의 숫자를 입력해주세요.");
     }
@@ -25,9 +25,9 @@ public class LottoTest {
     void getNumber() {
         Lotto lotto = new Lotto("3, 6, 1, 22, 19, 35");
 
-        assertThat(List.of(1, 2, 3)).containsExactly(
-            List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(6), new LottoNumber(19),
-                new LottoNumber(22), new LottoNumber(35)));
+        assertThat(lotto.getNumbers()).containsExactly(
+            new LottoNumber(1), new LottoNumber(3), new LottoNumber(6), new LottoNumber(19),
+            new LottoNumber(22), new LottoNumber(35));
     }
 
     @Test

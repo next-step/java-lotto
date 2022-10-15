@@ -2,6 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -22,7 +23,7 @@ public class LottoNumberTest {
     @NullAndEmptySource
     @DisplayName("Null이나 빈 문자열로 LottoNumber 객체를 생성할 수 없다.")
     void create_withNullOrEmpty(String value) {
-        assertThatThrownBy(() -> new LottoNumber(value))
+        assertThatThrownBy(() -> LottoNumber.from(value))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("입력 값이 누락되었습니다.");
     }
@@ -31,9 +32,8 @@ public class LottoNumberTest {
     @ValueSource(strings = {"-9", "##51"})
     @DisplayName("숫자 이외의 문자열로 LottoNumber 객체를 생성할 수 없다.")
     void create_withInvalidString(String value) {
-        assertThatThrownBy(() -> new LottoNumber(value))
+        assertThatThrownBy(() -> LottoNumber.from(value))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("변환할 수 없는 문자가 포함되어 있습니다.");
     }
-
 }
