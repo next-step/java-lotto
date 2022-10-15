@@ -13,7 +13,7 @@ class LottoGameTest {
     private LottoGame lottoGame;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottoGame = LottoGame.newInstance();
     }
 
@@ -22,6 +22,6 @@ class LottoGameTest {
     @ValueSource(ints = {1000, 3000, 50000, 6000, 9000})
     void playLotto_make_purchaseCount_lottoNumber(int price) {
         List<LottoNumber> lottoNumbers = lottoGame.playLotto(Ticket.from(price));
-        Assertions.assertThat(lottoNumbers.size()).isEqualTo(price/1000);
+        Assertions.assertThat(lottoNumbers.size()).isEqualTo(price / 1000);
     }
 }
