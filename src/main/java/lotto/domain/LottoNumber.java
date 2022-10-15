@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String VALID_VALUE_PATTERN = "[0-9]";
     private final int MIN = 1;
@@ -23,8 +23,9 @@ public class LottoNumber {
     }
 
     public static LottoNumber from(final String value) {
-        validateToParse(value);
-        return new LottoNumber(Integer.parseInt(value));
+        String trimmed = value.trim();
+        validateToParse(trimmed);
+        return new LottoNumber(Integer.parseInt(trimmed));
     }
 
     private static void validateToParse(final String value) {
@@ -53,5 +54,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hashCode(this.value);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.value, o.value);
     }
 }
