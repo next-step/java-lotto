@@ -29,6 +29,6 @@ public class CalculatorTest {
 	void 문자열_계산테스트(){
 		Calculator calculator = new Calculator();
 
-		assertThat(calculator.getAnswer("3 + 2 * 5")).isEqualTo(30);
+		assertThat(calculator.getResult("3 + 2 * 5")).isEqualTo(30);
 	}
 }
