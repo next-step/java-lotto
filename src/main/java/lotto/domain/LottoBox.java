@@ -3,28 +3,27 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoBox {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public LottoBox(List<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableList(lottos);
+        this.lottos.addAll(lottos);
     }
 
-    public List<CorrectInfo> retrieveCorrectNum(Lotto winningLotto, LottoBall bonusBall) {
-        List<CorrectInfo> CorrectInfos = new ArrayList<>();
+    public List<WinningResult> retrieveCorrectNum(Lotto winningLotto, LottoBall bonusBall) {
+        List<WinningResult> winningResults = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int correctCount = lotto.retrieveCorrectLottoBallCount(winningLotto);
             boolean bonusMatch = lotto.matchBounsBall(bonusBall);
-            CorrectInfos.add(new CorrectInfo(correctCount, bonusMatch));
+            winningResults.add(new WinningResult(correctCount, bonusMatch));
         }
 
-        return CorrectInfos;
+        return winningResults;
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 }
