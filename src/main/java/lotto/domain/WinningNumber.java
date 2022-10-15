@@ -27,7 +27,7 @@ public class WinningNumber {
             throw new IllegalArgumentException("당첨 번호를 전달 받지 못하였습니다.");
         }
 
-        if (winningNumber.lottoNumbers().size() != COUNTS_OF_LOTTO_NUMBER) {
+        if (winningNumber.sizeOfLottoNumbers() != COUNTS_OF_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 6자리로 이루어져 있어야 합니다.");
         }
     }
@@ -37,7 +37,7 @@ public class WinningNumber {
             throw new IllegalArgumentException("당첨 번호를 전달 받지 못하였습니다.");
         }
 
-        if (winningNumber.lottoNumbers().contains(LottoNumber.lottoNumber(bonusNumber.lottoNumber()))) {
+        if (winningNumber.containsNumber(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호에 보너스 번호와 중복되는 번호가 들어가 있습니다.");
         }
     }

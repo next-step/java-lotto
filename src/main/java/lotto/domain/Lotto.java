@@ -21,4 +21,12 @@ public class Lotto {
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    public int sizeOfLottoNumbers() {
+        return lottoNumbers.size();
+    }
+
+    public boolean containsNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
