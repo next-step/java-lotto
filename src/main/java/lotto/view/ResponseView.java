@@ -1,6 +1,10 @@
 package lotto.view;
 
-@FunctionalInterface
+//@FunctionalInterface
 public interface ResponseView {
+
+    @Deprecated
     String toView();
+
+    void show();
 }

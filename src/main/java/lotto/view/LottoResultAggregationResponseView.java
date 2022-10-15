@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.model.LottoReward;
 
-public class LottoResultAggregationResponseView implements ResponseView {
+public class LottoResultAggregationResponseView {
     private static final String FORMAT = "%s개 일치 (%d원) - %d개";
     private final LottoReward lottoReward;
     private final int matchCount;
