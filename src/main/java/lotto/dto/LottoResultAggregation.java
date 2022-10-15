@@ -7,6 +7,7 @@ import lotto.LottoMatchResult;
 import lotto.model.LottoReward;
 
 public class LottoResultAggregation {
+    private static final int NO_MATCH = 0;
     private final Map<LottoReward, List<LottoMatchResult>> rewardAndCountMaps;
 
     public LottoResultAggregation(Map<LottoReward, List<LottoMatchResult>> rewardAndCountMaps) {
@@ -18,6 +19,6 @@ public class LottoResultAggregation {
             return rewardAndCountMaps.get(lottoReward).size();
         }
 
-        return 0;
+        return NO_MATCH;
     }
 }

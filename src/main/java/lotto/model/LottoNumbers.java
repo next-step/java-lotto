@@ -1,10 +1,11 @@
 package lotto.model;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toList;
 
-import lotto.LottoMatchResult;
+import java.util.List;
+
 import lotto.Lotto;
+import lotto.LottoMatchResult;
 
 public class LottoNumbers {
 
@@ -15,10 +16,14 @@ public class LottoNumbers {
     }
 
     public List<LottoMatchResult> guess(WinningNumber winningNumber) {
-        return lottos.stream().map(lotto -> lotto.match(winningNumber)).collect(Collectors.toList());
+        return lottos.stream()
+                     .map(lotto -> lotto.match(winningNumber))
+                     .collect(toList());
     }
 
     public List<List<Integer>> getLottoNumbers() {
-        return lottos.stream().map(Lotto::getNumbers).collect(Collectors.toList());
+        return lottos.stream()
+                     .map(Lotto::getNumbers)
+                     .collect(toList());
     }
 }

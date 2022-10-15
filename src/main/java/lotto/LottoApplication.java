@@ -8,7 +8,6 @@ import lotto.model.LottoMatchResults;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoReward;
 import lotto.model.WinningNumber;
-import lotto.view.GeneratedLottoNumberResponseView;
 import lotto.view.LottoResultAggregationResponseView;
 import lotto.view.LottoYieldResponseView;
 
@@ -49,7 +48,10 @@ public class LottoApplication {
     }
 
     private static void showGeneratedLottoNumbers(List<List<Integer>> lottoNumbers) {
-        System.out.println(new GeneratedLottoNumberResponseView(lottoNumbers).toView());
+        for (List<Integer> lottoNumber : lottoNumbers) {
+            System.out.println(lottoNumber);
+        }
+//        System.out.println(new GeneratedLottoNumberResponseView(lottoNumbers).toView());
     }
 
     private static WinningNumber getWinningNumber() {
