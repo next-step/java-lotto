@@ -15,15 +15,14 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("로또 개수만큼 발급할 수 있다.")
     void create() {
-        LottoTickets lottoTickets = LottoTickets.of(new ArrayList<>());
-        assertThat(lottoTickets.countTicket(14000)).isEqualTo(14);
+        LottoTickets lottoTickets = LottoTickets.of(14000);
+        assertThat(lottoTickets.getTicketCount()).isEqualTo(14);
     }
 
     @Test
     @DisplayName("1000원 미만은 로또를 구매할 수 없다.")
     void valid() {
-        LottoTickets lottoTickets = LottoTickets.of(new ArrayList<>());
-        assertThatThrownBy(() -> lottoTickets.countTicket(500))
+        assertThatThrownBy(() -> LottoTickets.of(500))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
