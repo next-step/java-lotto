@@ -42,6 +42,9 @@ public class OutputView {
         if (rank == Rank.LOSER) {
             return String.format("낙첨 %d개%n", count);
         }
+        if (rank == Rank.SECOND) {
+            return String.format("%d개 일치, 보너스볼 포함 (%d원)- %d개%n", rank.matchCount(), rank.reward(), count);
+        }
         return String.format("%d개 일치 (%d원)- %d개%n", rank.matchCount(), rank.reward(), count);
     }
 

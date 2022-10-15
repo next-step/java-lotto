@@ -3,6 +3,7 @@ package lotto.application;
 import lotto.domain.Bank;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.Lottos;
 import lotto.domain.random.AutoLotto;
@@ -26,7 +27,7 @@ public class LottoGame {
 
         outputView.lottos(lottos);
 
-        Bank bank = lottos.checkWinningNumber(new Lotto(inputView.winningNumbers()));
+        Bank bank = lottos.checkWinningNumber(new Lotto(inputView.winningNumbers()), new LottoNumber(inputView.inputBonusBall()));
 
         outputView.winningStatistics(bank);
         outputView.winningStatistics(bank, purchase);
