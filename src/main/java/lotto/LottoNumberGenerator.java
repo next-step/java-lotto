@@ -1,32 +1,30 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class LottoNumberGenerator {
+    private static final List<Integer> LOTTO_NUMBERS;
 
     private LottoNumberGenerator() {
 
     }
 
+    static {
+        LOTTO_NUMBERS = IntStream.range(1, 46)
+                 .boxed()
+                 .collect(Collectors.toList());
+    }
+
     public static List<Integer> generate() {
-        Random random = new Random();
+        Collections.shuffle(LOTTO_NUMBERS);
+        return List.copyOf(LOTTO_NUMBERS.subList(0, 6));
+    }
 
-        List<Integer> lottoNumbers = new ArrayList<>();
-
-        Integer randomNumber = null;
-        while(lottoNumbers.size() <6) {
-            randomNumber = random.nextInt(46);
-
-            if (!lottoNumbers.contains(randomNumber)) {
-                lottoNumbers.add(randomNumber);
-            }
-        }
-
-        lottoNumbers.sort(Comparator.naturalOrder());
-
-        return List.copyOf(lottoNumbers);
+    public static List<Integer> fastGenerate() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        return List.copyOf(LOTTO_NUMBERS.subList(0, 6));
     }
 }

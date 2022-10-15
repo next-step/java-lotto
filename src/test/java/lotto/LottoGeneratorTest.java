@@ -1,8 +1,9 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class LottoGeneratorTest {
@@ -10,7 +11,6 @@ public class LottoGeneratorTest {
     void 로또번호를발행한다() {
         List<Integer> lottoNumbers = LottoNumberGenerator.generate();
 
-        Assertions.assertThat(lottoNumbers).hasSize(6);
+        assertThat(lottoNumbers).hasSize(6);
     }
-
 }
