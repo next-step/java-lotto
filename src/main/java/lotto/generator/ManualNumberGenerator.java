@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class ManualNumberGenerator implements NumberGenerator {
 
-    String numbers;
+    private String numbers;
 
     public ManualNumberGenerator(String numbers) {
         this.numbers = numbers;
