@@ -22,12 +22,7 @@ public class LottoNumber {
 
     public static LottoNumber from(int number) {
         valid(number);
-        LottoNumber lottoNumber = LOTTO_NUMBERS.get(number-1);
-
-        if (Objects.isNull(lottoNumber)) {
-            lottoNumber = new LottoNumber(number);
-        }
-        return lottoNumber;
+        return LOTTO_NUMBERS.get(number-1);
     }
 
     private static void valid(int number) {
