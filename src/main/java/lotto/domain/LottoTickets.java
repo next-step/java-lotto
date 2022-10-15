@@ -52,7 +52,7 @@ public class LottoTickets {
 
     public LottoResult getResult(Lotto winningNumbers, int bonusBall) {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.result(winningNumbers, lottos, bonusBall);
+        lottoResult.result(winningNumbers, LottoTickets.of(lottos), bonusBall);
         return lottoResult;
     }
 

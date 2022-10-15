@@ -19,8 +19,9 @@ public class LottoResult {
         result.merge(rank, 1, Integer::sum);
     }
 
-    public void result(Lotto winningNumbers, List<Lotto> lottoNumbers, int bonusBall) {
-        for (Lotto lotto : lottoNumbers) {
+    public void result(Lotto winningNumbers, LottoTickets tickets, int bonusBall) {
+        List<Lotto> lottos = tickets.getTickets();
+        for (Lotto lotto : lottos) {
             int count = lotto.matches(winningNumbers);
             Rank calculate = Rank.calculate(count, lotto.matches(bonusBall));
             put(calculate);
