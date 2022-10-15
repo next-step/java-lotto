@@ -9,12 +9,13 @@ public class LottoApplication {
     public static void main(String[] args) {
 
         final Purchase purchase = Purchase.from(InputView.purchasePrint());
-        final long availableTickets = purchase.available();
-        ResultView.availablePurchasePrint(availableTickets);
+        final int countOfManualLotto = InputView.purchaseManualLottosPrint();
+        final ManualLottos manualLottos = ManualLottos.of(countOfManualLotto, InputView.manualLottosPrint(countOfManualLotto));
 
-        Lottos lottos = new Lottos(AutoLottos.autoCreate(availableTickets));
+        final Lottos lottos = new Lottos(AutoLottos.autoCreate(purchase.available(), manualLottos.count()));
         ResultView.autoLottoNumberPrint(lottos);
-        final WinningLotto winningLotto = WinningLotto.from(InputView.winnerNumberPrint(), InputView.bonusNumberPrint());
+        final WinningLotto winningLotto = WinningLotto.from(InputView.winningLottoPrint(), InputView.bonusNumberPrint());
+        lottos.add(manualLottos);
 
         final WinningResult winningResult = WinningResult.init();
         winningResult.collect(lottos.match(winningLotto));
