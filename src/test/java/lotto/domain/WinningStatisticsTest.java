@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,12 +30,22 @@ class WinningStatisticsTest {
     @Test
     void of() {
         List<Lotto> lottos = List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(4, 5, 6, 7, 8, 9)),
-                new Lotto(Set.of(7, 8, 9, 10, 11, 12))
+                new Lotto(IntStream.rangeClosed(1, 6)
+                        .mapToObj(LottoNumber::new)
+                        .collect(Collectors.toSet())),
+                new Lotto(IntStream.rangeClosed(1, 6)
+                        .mapToObj(LottoNumber::new)
+                        .collect(Collectors.toSet())),
+                new Lotto(IntStream.rangeClosed(4, 9)
+                        .mapToObj(LottoNumber::new)
+                        .collect(Collectors.toSet())),
+                new Lotto(IntStream.rangeClosed(7, 12)
+                        .mapToObj(LottoNumber::new)
+                        .collect(Collectors.toSet()))
         );
-        Lotto lastWeekWinningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto lastWeekWinningLotto = new Lotto(IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toSet()));
 
         WinningStatistics actual = WinningStatistics.of(lottos, lastWeekWinningLotto);
 

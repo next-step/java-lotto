@@ -1,17 +1,15 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoNumberSizeException;
-import lotto.domain.exception.OutOfRangeLottoNumberException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,6 +17,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LottoTest {
+
+    Lotto lotto;
+
+    @BeforeEach
+    void setUp() {
+        lotto = new Lotto(createLottoNumberSet(1, 6));
+    }
 
     @DisplayName("생성할 때")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -28,85 +33,46 @@ public class LottoTest {
         @DisplayName("List<Integer>타입을 파라미터로 받을 수 있다.")
         @Test
         void create_by_List() {
-            Lotto expected = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+            Lotto expected = lotto;
+            Lotto actual = Lotto.from(
+                    IntStream.rangeClosed(1, 6)
+                            .mapToObj(Integer::toString)
+                            .collect(Collectors.toList())
+            );
 
-            assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6)))
-                    .isEqualTo(expected);
-        }
-
-        @DisplayName("List<String>타입을 파라미터로 받을 수 있다.")
-        @Test
-        void create_by_string() {
-            Lotto expected = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-
-            assertThat(Lotto.from(List.of("1", "2", "3", "4", "5", "6")))
-                    .isEqualTo(expected);
-        }
-
-        @DisplayName("1~45 사이의 숫자가 아니면 예외가 발생한다.")
-        @ParameterizedTest
-        @MethodSource("generateOutOfRangeElements")
-        void validate_number_range(Set<Integer> elements) {
-            assertThatThrownBy(() -> new Lotto(elements))
-                    .isExactlyInstanceOf(OutOfRangeLottoNumberException.class)
-                    .hasMessage("로또 숫자의 범위를 벗어난 숫자가 포함되어 있습니다. 유효한 로또 숫자 범위 : 1 ~ 45");
+            assertThat(actual).isEqualTo(expected);
         }
 
         @DisplayName("숫자 개수가 6개가 아니면 예외가 발생한다.")
         @ParameterizedTest
         @MethodSource("generateInvalidSizeElements")
-        void validate_size(Set<Integer> elements) {
+        void validate_size(Set<LottoNumber> elements) {
             assertThatThrownBy(() -> new Lotto(elements))
                     .isExactlyInstanceOf(InvalidLottoNumberSizeException.class)
                     .hasMessage("올바르지 않은 로또 숫자 개수 입니다. 올바른 숫자 개수(중복제외) : 6");
         }
 
-        private Stream<Set<Integer>> generateOutOfRangeElements() {
+        private Stream<Set<LottoNumber>> generateInvalidSizeElements() {
             return Stream.of(
-                    Set.of(0, 1, 2, 3, 4, 5),
-                    Set.of(1, 2, 3, 4, 5, 46)
+                    createLottoNumberSet(1, 5),
+                    createLottoNumberSet(1, 7)
             );
         }
-
-        private Stream<Set<Integer>> generateInvalidSizeElements() {
-            return Stream.of(
-                    Set.of(1, 2, 3, 4, 5),
-                    Set.of(1, 2, 3, 4, 5, 6, 7)
-            );
-        }
-    }
-
-    @DisplayName("오름 차순으로 정렬된 로또 숫자들을 문자형식으로 반환한다.")
-    @Test
-    void to_string() {
-        String expected = "[1, 2, 3, 4, 5, 6]";
-
-        String actual = new Lotto(List.of(4, 5, 3, 6, 1, 2)).toString();
-
-        assertThat(actual).isEqualTo(expected);
     }
 
     @DisplayName("중복되는 숫자의 개수를 반환한다.")
-    @ParameterizedTest
-    @MethodSource("generateMatchesElements")
-    void count_matches(Set<Integer> elements, int expected) {
-        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        Lotto lastWeekLotto = new Lotto(elements);
+    @Test
+    void count_matches() {
+        Lotto lastWeekLotto = new Lotto(createLottoNumberSet(3, 8));
 
         int actual = lotto.countMatches(lastWeekLotto);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(4);
     }
 
-    private Stream<Arguments> generateMatchesElements() {
-        return Stream.of(
-                Arguments.arguments(Set.of(1, 2, 3, 4, 5, 6), 6),
-                Arguments.arguments(Set.of(2, 3, 4, 5, 6, 7), 5),
-                Arguments.arguments(Set.of(3, 4, 5, 6, 7, 8), 4),
-                Arguments.arguments(Set.of(4, 5, 6, 7, 8, 9), 3),
-                Arguments.arguments(Set.of(5, 6, 7, 8, 9, 10), 2),
-                Arguments.arguments(Set.of(6, 7, 8, 9, 10, 11), 1),
-                Arguments.arguments(Set.of(7, 8, 9, 10, 11, 12), 0)
-        );
+    private Set<LottoNumber> createLottoNumberSet(int startInclusive, int endInclusive) {
+        return IntStream.rangeClosed(startInclusive, endInclusive)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 }
