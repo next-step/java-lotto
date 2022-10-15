@@ -13,9 +13,8 @@ public class CalculatorController {
 
 	public void stringCalculator() {
 		String formula = INPUT_VIEW.askFormula();
-
-		if(formula.isEmpty()){
-			throw new BlankException("식을 작성해주세요");
+		if (formula.isBlank()) {
+			throw new BlankException("식을 입력하세요");
 		}
 		OUTPUT_VIEW.showResult(formula, CALCULATOR.getResult(formula));
 	}

@@ -2,8 +2,6 @@ package model;
 
 import exception.NotFoundOperatorException;
 import java.util.Arrays;
-import view.InputView;
-import view.OutputView;
 
 public class Calculator {
 
@@ -19,6 +17,7 @@ public class Calculator {
 		for (int i = 1; i < tokens.length; i += GET_ODD_NUM) {
 			result = calculate(isOperator(tokens[i]), result, Integer.parseInt(tokens[i + 1]));
 		}
+
 		return result;
 	}
 
