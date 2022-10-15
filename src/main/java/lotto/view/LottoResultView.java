@@ -57,7 +57,7 @@ public class LottoResultView {
             LottoRank rank = lottoRankRecord.getRank();
             int number = lottoRankRecord.getNumber();
             sb.append("\n");
-            sb.append(rank.getCorrectNum()).append("개 일치");
+            sb.append(rank.getCorrectCount()).append("개 일치");
             addBonusWinMessage(rank);
             sb.append(" (").append(rank.getWinPrize()).append("원)- ").append(number).append("개");
         }

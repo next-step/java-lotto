@@ -12,8 +12,8 @@ class LottoManagerTest {
     void 로또_맞춘_갯수_체크() {
         LottoBox lottoBox = LottoManager.createLottoBox(3, new FrontExtractStrategy());
         Lotto correctLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        List<CorrectInfo> correctInfos = lottoBox.retrieveCorrectNum(correctLotto, new LottoBall(10));
+        List<WinningResult> correctInfos = lottoBox.retrieveCorrectNum(correctLotto, new LottoBall(10));
         assertThat(correctInfos)
-                .containsExactly(new CorrectInfo(6), new CorrectInfo(6), new CorrectInfo(6));
+                .containsExactly(new WinningResult(6), new WinningResult(6), new WinningResult(6));
     }
 }

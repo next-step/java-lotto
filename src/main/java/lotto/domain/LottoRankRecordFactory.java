@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
@@ -12,7 +11,7 @@ public class LottoRankRecordFactory {
     private LottoRankRecordFactory() {
     }
 
-    public static List<LottoRankRecord> createLottoRankRecords(List<CorrectInfo> correctInfos) {
+    public static List<LottoRankRecord> createLottoRankRecords(List<WinningResult> correctInfos) {
         List<LottoRankRecord> lottoRankRecords = new ArrayList<>();
         Map<LottoRank, Integer> rankRecord = recordWinRank(correctInfos);
         for (LottoRank lottoRank : rankRecord.keySet()) {
@@ -22,10 +21,10 @@ public class LottoRankRecordFactory {
         return Collections.unmodifiableList(lottoRankRecords);
     }
 
-    private static Map<LottoRank, Integer> recordWinRank(List<CorrectInfo> correctInfos) {
+    private static Map<LottoRank, Integer> recordWinRank(List<WinningResult> correctInfos) {
         Map<LottoRank, Integer> rankRecord = initilizeRankRecord();
-        for (CorrectInfo correctInfo : correctInfos) {
-            insertRankValue(rankRecord, LottoRank.findRank(correctInfo.getCorrectCount(), correctInfo.isBonus()));
+        for (WinningResult winningResult : correctInfos) {
+            insertRankValue(rankRecord, LottoRank.findRank(winningResult));
         }
         return rankRecord;
     }
