@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
+import model.CalculateLogic;
 import org.junit.jupiter.api.Test;
 
 class CalculateTest {

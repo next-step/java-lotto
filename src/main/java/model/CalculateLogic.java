@@ -1,3 +1,5 @@
+package model;
+
 import java.util.function.BinaryOperator;
 
 public enum CalculateLogic {

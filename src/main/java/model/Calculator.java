@@ -1,15 +1,21 @@
+package model;
+
 import exception.NotFoundOperatorException;
 import java.util.Arrays;
+import view.InputView;
+import view.OutputView;
 
 public class Calculator {
 
 	private static final int DEFAULT_NUM = 0;
 	private static final int GET_ODD_NUM = 2;
 	private static final String REGEX = " ";
-	private final static OutputView OUTPUT_VIEW = new OutputView();
+	private static final OutputView OUTPUT_VIEW = new OutputView();
+	private static final InputView INPUT_VIEW = new InputView();
 
-	public void stringCalculator(String formula) {
-		OUTPUT_VIEW.showResult(formula,getResult(formula));
+	public void stringCalculator() {
+		String formula = INPUT_VIEW.askFormula();
+		OUTPUT_VIEW.showResult(formula, getResult(formula));
 	}
 
 	public int getResult(String formula) {
