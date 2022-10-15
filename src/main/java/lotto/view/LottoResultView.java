@@ -10,7 +10,7 @@ import lotto.domain.LottoRankRecordBox;
 public class LottoResultView {
 
     private static final String LOTTO_DELIMITER = ", ";
-    private static final StringBuilder sb = new StringBuilder();
+    private static final StringBuilder STRING_BUILDER = new StringBuilder();
 
     private LottoResultView() {
 
@@ -22,34 +22,33 @@ public class LottoResultView {
 
     public static void printLottoNumber(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            sb
+            STRING_BUILDER
                     .append("[")
                     .append(makeLottoNumberLine(lotto))
                     .append("]\n");
         }
-        System.out.println(sb);
+        System.out.println(STRING_BUILDER);
         clearStringBuilder();
     }
 
     private static void clearStringBuilder() {
-        sb.delete(0, sb.length());
+        STRING_BUILDER.delete(0, STRING_BUILDER.length());
     }
 
     private static String makeLottoNumberLine(Lotto lotto) {
         List<Integer> numbers = lotto.retrieveNumbers();
-        String lottoLine = numbers.stream()
+        return numbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-        return lottoLine;
+                .collect(Collectors.joining(LOTTO_DELIMITER));
     }
 
     public static void printWinStatistics(LottoRankRecordBox lottoRankRecordBox) {
-        sb.append("\n당첨 통계\n--------");
+        STRING_BUILDER.append("\n당첨 통계\n--------");
         for (LottoRankRecord lottoRankRecord : lottoRankRecordBox.getLottoRankRecords()) {
             stringBuildRankRecord(lottoRankRecord);
         }
-        sb.append("\n");
-        System.out.println(sb);
+        STRING_BUILDER.append("\n");
+        System.out.println(STRING_BUILDER);
         clearStringBuilder();
     }
 
@@ -57,16 +56,16 @@ public class LottoResultView {
         if (lottoRankRecord.isNotRank(LottoRank.NONE)) {
             LottoRank rank = lottoRankRecord.getRank();
             int number = lottoRankRecord.getNumber();
-            sb.append("\n");
-            sb.append(rank.getCorrectCount()).append("개 일치");
+            STRING_BUILDER.append("\n");
+            STRING_BUILDER.append(String.format("%s개 일치", rank.getCorrectCount()));
             addBonusWinMessage(rank);
-            sb.append(" (").append(rank.getWinPrize()).append("원)- ").append(number).append("개");
+            STRING_BUILDER.append(String.format(" (%s원)- %s개", rank.getWinPrize(), number));
         }
     }
 
     private static void addBonusWinMessage(LottoRank rank) {
         if (LottoRank.BONUS.equals(rank)) {
-            sb.append(", 보너스 볼 일치");
+            STRING_BUILDER.append(", 보너스 볼 일치");
         }
     }
 

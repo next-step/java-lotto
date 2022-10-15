@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoRankRecord {
 
     private final LottoRank lottoRank;
-    private final long number;
+    private final int number;
 
     public LottoRankRecord(LottoRank lottoRank, int number) {
         this.lottoRank = lottoRank;
