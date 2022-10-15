@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,8 @@ public class LottoTicketsTest {
         LottoResult result = lottoTickets.getResult(Lotto.of(list), bonus);
         LottoResult expected = new LottoResult();
         expected.put(Rank.FIRST);
+        Map<Rank, Integer> statistics = result.getStatistics();
 
-        assertThat(result).isEqualTo(expected);
+        assertThat(statistics).isEqualTo(expected.getStatistics());
     }
 }

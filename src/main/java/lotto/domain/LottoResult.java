@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -30,22 +29,5 @@ public class LottoResult {
 
     public Map<Rank, Integer> getStatistics() {
         return this.result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoResult that = (LottoResult) o;
-        return Objects.equals(result, that.result);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(result);
     }
 }
