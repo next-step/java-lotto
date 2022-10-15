@@ -16,7 +16,7 @@ class LottoTest {
     @NullAndEmptySource
     void error_create_lotto(final String input) {
 
-        assertThatThrownBy(() -> Lotto.from(input))
+        assertThatThrownBy(() -> LottoFactory.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력 값이 null 또는 빈 공백 입니다.");
 
@@ -27,7 +27,7 @@ class LottoTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void create_lotto(final int index) {
 
-        final Lotto lotto = Lotto.from("1, 2, 3, 4, 5, 6");
+        final Lotto lotto = LottoFactory.from("1, 2, 3, 4, 5, 6");
         final List<Number> result = lotto.getLotto();
 
         assertThat(result).contains(new Number(index));
