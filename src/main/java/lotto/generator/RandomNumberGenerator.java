@@ -5,6 +5,7 @@ import lotto.domain.LottoNumber;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RandomNumberGenerator implements NumberGenerator {
 
@@ -13,11 +14,10 @@ public class RandomNumberGenerator implements NumberGenerator {
         List<Integer> numbers = makeLandomNumberRange();
         Collections.shuffle(numbers);
 
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = MIN_LOTTO_NUM; i < MAX_LOTTO_NUM; i++) {
-            lottoNumbers.add(LottoNumber.from(numbers.get(i)));
-        }
-        return lottoNumbers;
+        List<Integer> lottoNumbers = numbers.subList(MIN_LOTTO_NUM, MAX_LOTTO_NUM);
+        return lottoNumbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
     }
 
     private List<Integer> makeLandomNumberRange() {
