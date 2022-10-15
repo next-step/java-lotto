@@ -13,15 +13,11 @@ public class Lotto {
     }
 
     public LottoMatchResult match(WinningNumber winningNumber) {
-        int matched = 0;
+        long matched = numbers.stream()
+                              .filter(winningNumber::exists)
+                              .count();
 
-        for (Integer number : numbers) {
-            if (winningNumber.exists(number)) {
-                matched++;
-            }
-        }
-
-        return LottoMatchResult.of(matched);
+        return LottoMatchResult.of((int) matched);
     }
 
     @Override
