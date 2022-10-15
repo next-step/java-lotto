@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.exception.UnpurchasableAmountOfMoneyException;
+import lotto.util.NullCheckUtil;
 
 import java.math.BigInteger;
 import java.util.Objects;

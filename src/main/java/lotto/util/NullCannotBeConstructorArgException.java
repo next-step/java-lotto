@@ -1,4 +1,4 @@
-package lotto.domain.exception;
+package lotto.util;
 
 public class NullCannotBeConstructorArgException extends RuntimeException {
 

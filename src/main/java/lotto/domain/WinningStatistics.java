@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.NullCheckUtil;
+
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;

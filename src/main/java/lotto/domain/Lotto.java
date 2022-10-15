@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoNumberSizeException;
+import lotto.util.NullCheckUtil;
 
 import java.util.List;
 import java.util.Objects;
