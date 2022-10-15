@@ -25,14 +25,15 @@ public class LottoRunner {
 
         //로또 당첨번호 입력
         LottoNumber winNumber = inputView.enterWinNumber();
+        BonusNumber bonusNumber = inputView.enterBonusNumber(winNumber);
 
         //로또실행값 통계 계산
-        Analyst analyst = new Analyst(lottoNumbers, winNumber);
-        Map<Integer, Long> countByRank = analyst.getCountByRank();
-        float revenueRatio = analyst.revenueRatio(countByRank);
+        Analyst analyst = new Analyst(lottoNumbers, winNumber, bonusNumber);
+        Map<Rank, Long> countByRanks = analyst.getCountByRanks();
+        float revenueRatio = analyst.revenueRatio(countByRanks);
 
         //로또실행값 통계 출력
-        resultView.printCountByRank(countByRank);
+        resultView.printCountByRank(countByRanks);
         resultView.printRevenueRatio(revenueRatio);
     }
 }

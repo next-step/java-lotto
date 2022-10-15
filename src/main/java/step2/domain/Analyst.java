@@ -1,43 +1,57 @@
 package step2.domain;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Analyst {
-    public static final Map<Integer, Integer> REVENUE_TABLE = Map.of(
-            0, 0,
-            1, 0,
-            2, 0,
-            3, 5000,
-            4, 50000,
-            5, 1500000,
-            6, 2000000000
-    );
 
     private final List<LottoNumber> targetData;
 
     private final LottoNumber winLottoNumber;
 
-    public Analyst(List<LottoNumber> targetData, LottoNumber winLottoNumber) {
+    private final BonusNumber bonusNumber;
+
+    public Analyst(List<LottoNumber> targetData, LottoNumber winLottoNumber, BonusNumber bonusNumber) {
         this.targetData = targetData;
         this.winLottoNumber = winLottoNumber;
+        this.bonusNumber = bonusNumber;
     }
 
-    public Map<Integer, Long> getCountByRank() {
+    public Map<Rank, Long> getCountByRanks() {
+        Map<Rank, Long> matchByCount = groupByRank();
+        return putEmptyRank(matchByCount);
+    }
+
+    private Map<Rank, Long> putEmptyRank(Map<Rank, Long> matchByCount) {
+        TreeMap<Rank, Long> countAllRanks = new TreeMap<>(matchByCount);
+        Arrays.stream(Rank.values())
+                .filter(rank -> !countAllRanks.containsKey(rank))
+                .forEach(rank -> countAllRanks.put(rank, 0L));
+        return countAllRanks;
+    }
+
+    private Map<Rank, Long> groupByRank() {
         return this.targetData.stream()
-                .map(lottoNumber -> lottoNumber.compareMatch(this.winLottoNumber))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .map(lottoNumber -> {
+                    int countOfMath = lottoNumber.compareMatch(this.winLottoNumber);
+                    boolean matchBonus = lottoNumber.isInclude(bonusNumber.getBonusNumber());
+                    return Rank.valueOf(countOfMath, matchBonus);
+                })
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        TreeMap::new,
+                        Collectors.counting()
+                ));
     }
 
-    public float revenueRatio(Map<Integer, Long> countByRank) {
+    public float revenueRatio(Map<Rank, Long> countByRank) {
         return ((float) totalRevenue(countByRank)) / targetData.size();
     }
 
-    private long totalRevenue(Map<Integer, Long> countByRank) {
+    private long totalRevenue(Map<Rank, Long> countByRank) {
         return countByRank.entrySet().stream()
-                .map(entries -> REVENUE_TABLE.get(entries.getKey()) * entries.getValue() / 1000)
+                .map(entries -> entries.getKey().getWinningMoney() * entries.getValue() / 1000)
                 .reduce(0L, Long::sum);
     }
 }

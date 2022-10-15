@@ -1,5 +1,6 @@
 package step2.view;
 
+import step2.domain.BonusNumber;
 import step2.domain.LottoNumber;
 
 import java.util.Arrays;
@@ -11,6 +12,7 @@ public class InputView {
     private static final String LOTTO_PRICE_INIT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String LOTTO_PRICE_SUFFIX = "개를 구매했습니다.";
     private static final String WIN_NUMBER_INIT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_INIT_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final int LOTTO_PRICE = 1000;
 
     private final Scanner scanner = new Scanner(System.in);
@@ -26,7 +28,6 @@ public class InputView {
     public LottoNumber enterWinNumber() {
         printWinNumberInitMessage();
         String winNumberInput = this.scanner.nextLine();
-        this.scanner.close();
         List<Integer> winNumber = parseWinNumber(winNumberInput);
         validateWinNumber(winNumber);
         return new LottoNumber(winNumber);
@@ -37,16 +38,16 @@ public class InputView {
     }
 
     private int parseNumberOfLotto(String priceInput) {
-        int lottoPrice = priceConvertToInteger(priceInput);
+        int lottoPrice = stringConvertToInteger(priceInput);
         validateLottoPrice(lottoPrice);
         return lottoPrice / LOTTO_PRICE;
     }
 
-    private static int priceConvertToInteger(String priceInput) {
+    private int stringConvertToInteger(String priceInput) {
         try {
             return Integer.parseInt(priceInput);
         } catch (Exception e) {
-            throw new IllegalArgumentException("숫자가 아닌 값은 구입금액으로 입력할 수 없습니다. 입력한 값: " + priceInput);
+            throw new IllegalArgumentException("숫자가 값은 입력할 수 없습니다. 입력한 값: " + priceInput);
         }
     }
 
@@ -83,12 +84,19 @@ public class InputView {
         if (winNumber.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다. 입력된 당첨번호 개수: " + winNumber.size());
         }
-        String inValidNumber = winNumber.stream()
-                .filter(number -> number > 45 || number < 1)
-                .map(Object::toString)
-                .collect(Collectors.joining(", "));
-        if (inValidNumber.length() > 0) {
-            throw new IllegalArgumentException("당첨 번호는 1~45 정수여야 합니다. 허용되지 않은 입력: " + inValidNumber);
-        }
     }
+
+    public BonusNumber enterBonusNumber(LottoNumber winNumber) {
+        printBonusNumberInitMessage();
+        String bonusNumberInput = this.scanner.nextLine();
+        this.scanner.close();
+        int bonusNumber = stringConvertToInteger(bonusNumberInput);
+        return new BonusNumber(bonusNumber, winNumber);
+    }
+
+
+    private void printBonusNumberInitMessage() {
+        System.out.println(BONUS_NUMBER_INIT_MESSAGE);
+    }
+
 }
