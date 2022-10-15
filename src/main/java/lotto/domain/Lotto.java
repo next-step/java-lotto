@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.generator.NumberGenerator;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -13,10 +10,8 @@ public class Lotto {
     public static final int MAX_MATCH_NUMBER = 6;
 
     private final List<LottoNumber> lotto;
-    private final NumberGenerator numberGenerator;
 
     public Lotto(NumberGenerator numberGenerator) {
-        this.numberGenerator = numberGenerator;
         this.lotto = numberGenerator.generate();
     }
 
