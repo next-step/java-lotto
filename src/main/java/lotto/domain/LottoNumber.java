@@ -5,8 +5,8 @@ import java.util.List;
 
 public class LottoNumber {
     private static final int LOTTO_LENGTH = 6;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
 
     private final List<Integer> numbers;
 
@@ -23,8 +23,8 @@ public class LottoNumber {
         return new ArrayList<>(numbers);
     }
 
-    public int findMatchingCount(List<Integer> winningNum) {
-        return (int) numbers.stream().filter(winningNum::contains).count();
+    public boolean isContainBonusNumber(Integer bonusNum) {
+        return numbers.stream().anyMatch(n -> n.equals(bonusNum));
     }
 
     private void validateLength(List<Integer> numbers) {

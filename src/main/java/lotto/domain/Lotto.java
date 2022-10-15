@@ -13,6 +13,7 @@ public class Lotto {
     public int getLottoSize() {
         return lottoNumbers.size();
     }
+
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }

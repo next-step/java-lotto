@@ -37,10 +37,35 @@ public class OutputView {
         printRank(rankMap);
     }
 
+    public void printStatisticLottoWithBonus(Map<Prize, Integer> rankMap) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        printRankWithBonus(rankMap);
+    }
+
     public void printYield(double yield) {
         System.out.println(
                 "총 수익률은 " + String.format("%.3f", yield) +
                 "입니다.");
+    }
+
+    private void printRankWithBonus(Map<Prize, Integer> rankMap) {
+        Arrays.stream(Prize.values())
+              .filter(v -> v.getWinningCount() > 0)
+              .sorted(
+                      Comparator.comparing(Prize::getPrizeMoney))
+              .forEach(p -> {
+                  System.out.println(
+                          p.getWinningCount() + "개 일치" + isBonusRank(p) + " (" + p.getPrizeMoney() + "원) - " +
+                          rankMap.get(p) + "개");
+              });
+    }
+
+    private String isBonusRank(Prize prize) {
+        if (prize == Prize.RANK_2TH_WITH_BONUS) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 
     private void printRank(Map<Prize, Integer> rankMap) {

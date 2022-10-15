@@ -9,6 +9,6 @@ public class Main {
         LottoController lottoController = new LottoController(new InputView(), new OutputView(),
                                                               new LottoFactory(new Calculator()),
                                                               new Calculator());
-        lottoController.startLotto();
+        lottoController.startLottoWithBonus();
     }
 }

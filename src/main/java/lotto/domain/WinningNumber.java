@@ -6,19 +6,41 @@ import java.util.Map;
 
 public class WinningNumber {
     private final List<Integer> numbers;
+    private final Integer bonusNumber;
 
     public WinningNumber(List<Integer> numbers) {
         this.numbers = numbers;
+        this.bonusNumber = -1;
     }
 
+    public WinningNumber(List<Integer> numbers, Integer bonusNumber) {
+        this.numbers = numbers;
+        this.bonusNumber = bonusNumber;
+    }
+
+    public Map<Prize, Integer> calcLottoRankWithBonus(Lotto lotto) {
+        Map<Prize, Integer> rankMap = initRankMap();
+
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            int matchingCount = findMatchingCount(lottoNumber);
+            boolean containBonusNumber = lottoNumber.isContainBonusNumber(bonusNumber);
+            addRankMap(rankMap, Prize.findPrize(matchingCount, containBonusNumber));
+        }
+
+        return rankMap;
+    }
     public Map<Prize, Integer> calcLottoRank(Lotto lotto) {
         Map<Prize, Integer> rankMap = initRankMap();
 
         for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
-            int matchingCount = lottoNumber.findMatchingCount(numbers);
+            int matchingCount = findMatchingCount(lottoNumber);
             addRankMap(rankMap, Prize.findPrize(matchingCount));
         }
         return rankMap;
+    }
+
+    private int findMatchingCount(LottoNumber lottoNumber) {
+        return (int) numbers.stream().filter(n -> lottoNumber.getNumbers().contains(n)).count();
     }
 
     private Map<Prize, Integer> initRankMap() {
