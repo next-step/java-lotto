@@ -1,6 +1,8 @@
 package controller;
 
+import domain.Lotto;
 import domain.LottoNumbers;
+import domain.Statistic;
 import domain.Money;
 import service.LottoMachine;
 import view.InputView;
@@ -11,13 +13,16 @@ public class Main {
     public static void main(String[] args) {
 
         Money purchasedMoney = InputView.inputPurchaseMoney();
-
         LottoMachine lottoMachine = new LottoMachine();
-        LottoNumbers lottoNumbers = lottoMachine.purchaseLotto(purchasedMoney);
+        LottoNumbers createdRandomLottoNumbers = lottoMachine.purchaseLotto(purchasedMoney);
+        ResultView.printRandomLotto(createdRandomLottoNumbers);
 
+        Lotto winnerNumber = InputView.inputLastWeekWinnerNumber();
 
-
-        ResultView.printRandomLotto();
+        Statistic statistic = new Statistic();
+        statistic.findMatchNumber(winnerNumber, createdRandomLottoNumbers);
+        statistic.calculateEarningRate(purchasedMoney);
+        ResultView.winnerStatistic(statistic);
 
     }
 

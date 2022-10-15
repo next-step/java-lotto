@@ -2,22 +2,31 @@ package domain;
 
 import exception.NullAndEmptyException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 
 public class Lotto {
 
-    private static final Pattern VALID_INPUT_REGEX = Pattern.compile("[\\d */+-]+");
+    private static final Pattern VALID_INPUT_REGEX = Pattern.compile("[\\d ,]+");
 
     private Integer[] lotto;
 
     public Lotto(String numbers) {
         validation(numbers);
-        this.lotto = convertToLotto(numbers);
+        this.lotto = convertToLottoForm(numbers);
+    }
+
+    public Lotto(List<Integer> nubmers) {
+        this.lotto = nubmers.toArray(new Integer[0]);
     }
 
     public static Lotto from(String lottoNumber) {
         return new Lotto(lottoNumber);
+    }
+
+    public static Lotto from(List<Integer> randomLottoNumber) {
+        return new Lotto(randomLottoNumber);
     }
 
     private void validation(String input) {
@@ -31,9 +40,13 @@ public class Lotto {
         }
     }
 
-    private Integer[] convertToLotto(String input) {
-        String[] values = input.split(" ");
+    private Integer[] convertToLottoForm(String input) {
+        String[] values = input.split(",");
 
         return Arrays.stream(values).map(Integer::valueOf).toArray(Integer[]::new);
+    }
+
+    public Integer[] getLotto() {
+        return lotto;
     }
 }

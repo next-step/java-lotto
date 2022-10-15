@@ -16,11 +16,11 @@ public class InputView {
         return Money.from(purchaseMoney);
     }
 
-    public static Lotto inputWinnerNumber() {
+    public static Lotto inputLastWeekWinnerNumber() {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        String winnerNumber = sc.nextLine();
+        String winnerNumber = sc.next();
 
         return Lotto.from(winnerNumber);
     }

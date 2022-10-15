@@ -15,21 +15,23 @@ public class LottoMachine {
     public LottoNumbers purchaseLotto(Money money) {
 
         int purchasedCount = money.getMoney() / LOTTO_PRICE;
-
+        LottoNumbers lottoNumbers = new LottoNumbers();
         for (int i = 0; i < purchasedCount; i++) {
-
+            lottoNumbers.addLotto(createRandomLotto());
         }
+        return lottoNumbers;
     }
 
     private Lotto createRandomLotto() {
         List<Integer> lottoNumRange = new ArrayList<>();
 
-        for (int i = 0; i <= 45; i++) {
+        for (int i = 1; i <= 45; i++) {
             lottoNumRange.add(i);
         }
         Collections.shuffle(lottoNumRange);
-        List<Integer> pickedNumbers = lottoNumRange.subList(0, 5);
+        List<Integer> pickedNumbers = lottoNumRange.subList(0, 6);
         Collections.sort(pickedNumbers);
+        return Lotto.from(pickedNumbers);
 
     }
 
