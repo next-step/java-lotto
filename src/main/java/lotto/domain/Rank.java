@@ -21,20 +21,24 @@ public enum Rank {
     }
 
     static Rank valueOf(int matchCount, boolean hasBonusBall) {
-        return Rank.stream()
-            .map(rank -> getRank(matchCount, hasBonusBall, rank))
-            .findFirst()
-            .orElse(LOSER);
+        switch (matchCount) {
+            case 6:
+                return FIRST;
+            case 5:
+                return secondOrThird(hasBonusBall);
+            case 4:
+                return FOURTH;
+            case 3:
+                return FIFTH;
+        }
+        return LOSER;
     }
 
-    private static Rank getRank(int matchCount, boolean hasBonusBall, Rank rank) {
-        if (matchCount == 5 && hasBonusBall) {
+    private static Rank secondOrThird(boolean hasBonusBall) {
+        if (hasBonusBall) {
             return SECOND;
-        } else if (matchCount == 5) {
-            return THIRD;
-        } else {
-            return rank;
         }
+        return THIRD;
     }
 
     public int matchCount() {

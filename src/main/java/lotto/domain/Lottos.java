@@ -28,8 +28,7 @@ public class Lottos {
 
     private Map<Rank, Integer> getRankMap(List<Rank> ranks) {
         return Rank.stream()
-            .collect(toMap(identity(), rank -> frequency(ranks, rank)
-            ));
+            .collect(toMap(identity(), rank -> frequency(ranks, rank)));
     }
 
     public List<Lotto> lottos() {
