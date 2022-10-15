@@ -3,6 +3,7 @@ package domain;
 public class Money {
 
     private int purchasedMoney;
+
     public Money(int purchasedMoney) {
         this.purchasedMoney = purchasedMoney;
     }

@@ -3,6 +3,7 @@ package service;
 import domain.Lotto;
 import domain.LottoNumbers;
 import domain.Money;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +11,6 @@ import java.util.List;
 public class LottoMachine {
 
     private static final int LOTTO_PRICE = 1000;
-
 
     public LottoNumbers purchaseLotto(Money money) {
 
@@ -34,6 +34,5 @@ public class LottoMachine {
         return Lotto.from(pickedNumbers);
 
     }
-
 
 }

@@ -1,6 +1,5 @@
 package enums;
 
-import exception.NotMatchingFoundException;
 import java.util.Arrays;
 
 public enum WinnerInfo {
@@ -25,10 +24,6 @@ public enum WinnerInfo {
             .findFirst()
             .orElseGet(() -> NOT_MATCH)
             .getWinningMoney();
-    }
-
-    public int getMatchFound() {
-        return matchFound;
     }
 
     public int getWinningMoney() {

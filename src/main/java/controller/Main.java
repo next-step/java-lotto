@@ -20,9 +20,8 @@ public class Main {
         Lotto winnerNumber = InputView.inputLastWeekWinnerNumber();
 
         Statistic statistic = new Statistic();
-        statistic.findMatchNumber(winnerNumber, createdRandomLottoNumbers);
-        statistic.calculateEarningRate(purchasedMoney);
-        ResultView.winnerStatistic(statistic);
+        statistic.findMatchLottoCount(winnerNumber, createdRandomLottoNumbers);
+        ResultView.winnerStatistic(statistic, purchasedMoney);
 
     }
 

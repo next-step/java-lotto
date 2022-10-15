@@ -1,10 +1,10 @@
 package domain;
 
 import exception.NullAndEmptyException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-
 
 public class Lotto {
 
@@ -13,7 +13,7 @@ public class Lotto {
     private Integer[] lotto;
 
     public Lotto(String numbers) {
-        validation(numbers);
+        inputValidation(numbers);
         this.lotto = convertToLottoForm(numbers);
     }
 
@@ -29,7 +29,7 @@ public class Lotto {
         return new Lotto(randomLottoNumber);
     }
 
-    private void validation(String input) {
+    private void inputValidation(String input) {
 
         if (input == null || input.isEmpty()) {
             throw new NullAndEmptyException("빈 값이 입력되었습니다. 값을 입력하세요.");
@@ -41,8 +41,8 @@ public class Lotto {
     }
 
     private Integer[] convertToLottoForm(String input) {
+        input = input.replaceAll(" ", "");
         String[] values = input.split(",");
-
         return Arrays.stream(values).map(Integer::valueOf).toArray(Integer[]::new);
     }
 

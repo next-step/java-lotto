@@ -2,7 +2,9 @@ package view;
 
 import domain.Lotto;
 import domain.LottoNumbers;
+import domain.Money;
 import domain.Statistic;
+
 import java.util.Arrays;
 
 public class ResultView {
@@ -11,7 +13,6 @@ public class ResultView {
     private static final int FOUR_MATCH = 4;
     private static final int FIVE_MATCH = 5;
     private static final int SIX_MATCH = 6;
-
 
     public static void printRandomLotto(LottoNumbers randomLotto) {
         int purchaseCount = randomLotto.getLottoNumbers().size();
@@ -22,10 +23,10 @@ public class ResultView {
         }
     }
 
-    public static void winnerStatistic(Statistic statistic) {
+    public static void winnerStatistic(Statistic statistic, Money purchasedMoney) {
 
-        int[] matchFounds = statistic.getMatchFound();
-        double earningRate = statistic.getRate();
+        int[] matchFounds = statistic.getMatchFoundCount();
+        double earningRate = statistic.calculateEarningRate(purchasedMoney);
         String lossMessage = Statistic.lossMessageFormat(earningRate);
 
         System.out.println("당첨 통계");
