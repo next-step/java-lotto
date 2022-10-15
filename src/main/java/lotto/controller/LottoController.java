@@ -1,6 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
+import lotto.domain.MatchingResult;
+import lotto.domain.WinningNumber;
 import lotto.strategy.RandomNumberGenerateStrategy;
 
 import java.util.List;

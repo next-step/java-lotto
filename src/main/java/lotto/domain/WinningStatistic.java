@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 

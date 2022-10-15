@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.WinningGrade;
-import lotto.domain.WinningPrice;
 
 public class MessageGenerator {
     public static String generate(WinningGrade winningResult) {
