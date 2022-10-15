@@ -1,48 +1,40 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import lotto.domain.judgeway.BasicJudgementWay;
+import lotto.domain.judgeway.BonusJudgementWay;
+import lotto.domain.judgeway.JudgementWay;
+import lotto.domain.judgeway.SecondJudgementWay;
 
 public enum LottoRank {
-    NONE(0, 0),
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
-    BONUS(5, 30_000_000),
-    FIRST(6, 2_000_000_000),
+    NONE(0, 0, BasicJudgementWay.instance()),
+    FOURTH(3, 5_000, BasicJudgementWay.instance()),
+    THIRD(4, 50_000, BasicJudgementWay.instance()),
+    SECOND(5, 1_500_000, SecondJudgementWay.instance()),
+    BONUS(5, 30_000_000, BonusJudgementWay.instance()),
+    FIRST(6, 2_000_000_000, BasicJudgementWay.instance()),
     ;
-    private final int correctNum;
+    private final int correctCount;
     private final int winPrize;
+    private final JudgementWay judgementWay;
 
-    LottoRank(int correctNum, int winPrize) {
-        this.correctNum = correctNum;
+    LottoRank(int correctNum, int winPrize, JudgementWay judgementWay) {
+        this.correctCount = correctNum;
         this.winPrize = winPrize;
+        this.judgementWay = judgementWay;
     }
 
-    public static LottoRank findRank(Integer correctNum, boolean matchBonus) {
-        LottoRank rankWithOutBonus = findRankWithOutBonus(correctNum);
-
-        if (checkBonusCondition(matchBonus, rankWithOutBonus)) {
-            return LottoRank.BONUS;
-        }
-        return rankWithOutBonus;
-    }
-
-    private static LottoRank findRankWithOutBonus(Integer correctNum) {
+    public static LottoRank findRank(WinningResult winningResult) {
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.correctNum == correctNum)
+                .filter(lottoRank ->
+                        lottoRank.judgementWay.apply(lottoRank.correctCount, winningResult)
+                )
                 .findFirst()
                 .orElseGet(() -> NONE);
     }
 
-    private static boolean checkBonusCondition(boolean matchBonus, LottoRank rankWithOutBonus) {
-        return LottoRank.SECOND.equals(rankWithOutBonus) && matchBonus;
-    }
-
-
-
-
-    public int getCorrectNum() {
-        return correctNum;
+    public int getCorrectCount() {
+        return correctCount;
     }
 
     public int getWinPrize() {
