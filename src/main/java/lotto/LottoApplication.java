@@ -10,6 +10,7 @@ import lotto.model.LottoReward;
 import lotto.model.WinningNumber;
 import lotto.view.LottoResultAggregationResponseView;
 import lotto.view.LottoYieldResponseView;
+import lotto.view.MatchResultTitle;
 
 public class LottoApplication {
     private static final Scanner scanner = new Scanner(System.in);
@@ -26,8 +27,7 @@ public class LottoApplication {
 
         WinningNumber winningNumber = getWinningNumber();
 
-        System.out.println("당첨통계");
-        System.out.println("------------------");
+        MatchResultTitle.show();
         LottoMatchResults lottoMatchResults = new LottoMatchResults(lottoNumbers.guess(winningNumber));
         LottoResultAggregation lottoResultAggregation = new LottoResultAggregation(lottoMatchResults.rewardableAggregate());
 
@@ -51,7 +51,6 @@ public class LottoApplication {
         for (List<Integer> lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber);
         }
-//        System.out.println(new GeneratedLottoNumberResponseView(lottoNumbers).toView());
     }
 
     private static WinningNumber getWinningNumber() {
