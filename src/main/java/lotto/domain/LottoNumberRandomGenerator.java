@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumberRandomGenerator {
 
@@ -10,10 +10,11 @@ public class LottoNumberRandomGenerator {
     }
 
     public static Lotto generate() {
-        List<LottoNumber> shuffleNumbers = new ArrayList<>(LottoNumber.LOTTO_NUMBERS);
+        List<LottoNumber> shuffleNumbers = LottoNumber.LOTTO_NUMBERS;
         Collections.shuffle(shuffleNumbers);
-        Lotto subList = Lotto.of(shuffleNumbers.subList(0, 6));
 
-        return subList;
+        return Lotto.of(shuffleNumbers.stream()
+            .limit(6)
+            .collect(Collectors.toList()));
     }
 }
