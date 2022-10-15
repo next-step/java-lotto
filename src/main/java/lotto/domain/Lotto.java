@@ -29,10 +29,7 @@ public class Lotto {
 
     public boolean matchBounsBall(LottoBall bonusBall) {
         return numbers.stream()
-                .filter(bonusBall::hasSameNumber)
-                .map(num -> true)
-                .findFirst()
-                .orElse(false);
+                .anyMatch(bonusBall::hasSameNumber);
     }
 
     private static void validateLottoSize(List<Integer> numbers) {
