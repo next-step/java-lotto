@@ -5,7 +5,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-public class LottoNumberGenerator {
+public final class LottoNumberGenerator {
+
+    private LottoNumberGenerator() {
+
+    }
 
     public static List<Integer> generate() {
         Random random = new Random();
