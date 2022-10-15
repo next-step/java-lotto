@@ -12,7 +12,7 @@ import lotto.view.GeneratedLottoNumberResponseView;
 import lotto.view.LottoResultAggregationResponseView;
 import lotto.view.LottoYieldResponseView;
 
-public class Lotto {
+public class LottoApplication {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
