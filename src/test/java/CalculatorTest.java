@@ -24,4 +24,12 @@ public class CalculatorTest {
 		assertThatThrownBy(() -> calculator.isOperator("+")).isInstanceOf(
 			NotFoundOperatorException.class);
 	}
+
+	@Test
+	@DisplayName("계산 테스트")
+	void 문자열_계산테스트(){
+		Calculator calculator = new Calculator();
+
+		assertThat(calculator.answer("3 + 2 * 5")).isEqualTo(30);
+	}
 }
