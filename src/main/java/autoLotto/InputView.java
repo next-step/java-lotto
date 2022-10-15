@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.*;
 
@@ -19,13 +20,14 @@ public class InputView {
         return amount;
     }
 
-    public List<Integer> inputNumbers() {
+    public void inputNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        List<Integer> numbers = new ArrayList<>();
-        stream(SCANNER.next().split(", "))
-                .map(i -> numbers.add(Integer.parseInt(i)));
+        int inputNum = SCANNER.nextInt();
 
-        return numbers;
+        System.out.println(inputNum);
+//        List<Integer> numbers = Arrays.stream(inputNum.split(", "))
+//                .map(Integer :: parseInt).collect(Collectors.toList());
+
     }
 }

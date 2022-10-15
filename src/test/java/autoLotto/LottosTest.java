@@ -2,7 +2,7 @@ package autoLotto;
 
 import org.junit.jupiter.api.Test;
 
-public class lottosTest {
+public class LottosTest {
 
     @Test
     void lotto() {
