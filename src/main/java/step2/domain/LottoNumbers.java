@@ -7,16 +7,12 @@ public class LottoNumbers {
 
     private List<Integer> lottoNumbers = new ArrayList<>();
 
-    private LottoNumbers() {
-        generateLottoNumbers();
+    private LottoNumbers(List<Integer> generatedNumbers) {
+        lottoNumbers.addAll(generatedNumbers);
     }
 
-    public static LottoNumbers newInstance() {
-        return new LottoNumbers();
-    }
-
-    private void generateLottoNumbers() {
-        lottoNumbers.addAll(LottoNumberGenerator.generateLottoNumber());
+    public static LottoNumbers from(List<Integer> generatedNumbers) {
+        return new LottoNumbers(generatedNumbers);
     }
 
     public List<Integer> getLottoNumbers() {

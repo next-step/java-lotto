@@ -17,7 +17,7 @@ public class LottoGame {
     public List<LottoNumbers> playLotto(final Ticket ticket) {
         final int ticketCount = ticket.getTicketCount();
         for (int i = 0; i < ticketCount; i++) {
-            lottoNumbers.add(LottoNumbers.newInstance());
+            lottoNumbers.add(LottoNumbers.from(LottoNumberGenerator.generateLottoNumber()));
         }
 
         return lottoNumbers;

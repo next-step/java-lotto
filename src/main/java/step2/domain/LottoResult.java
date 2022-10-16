@@ -10,7 +10,7 @@ public class LottoResult {
     private final Map<Prize, Integer> drawResult = new LinkedHashMap();
     private final int LEAST_DRAW_COUNT = 3;
 
-    private LottoResult(final List<Integer> winningNumbers) {
+    public LottoResult(final List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
