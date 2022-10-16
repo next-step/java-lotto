@@ -1,11 +1,9 @@
 package view;
 
 import domain.Lotto;
-import domain.LottoNumbers;
+import domain.Lottos;
 import domain.Money;
-import domain.Statistic;
-
-import java.util.Arrays;
+import domain.LottoResult;
 
 public class ResultView {
 
@@ -14,20 +12,25 @@ public class ResultView {
     private static final int FIVE_MATCH = 5;
     private static final int SIX_MATCH = 6;
 
-    public static void printRandomLotto(LottoNumbers randomLotto) {
+    public static void printRandomLotto(Lottos randomLotto) {
         int purchaseCount = randomLotto.getLottoNumbers().size();
 
         System.out.println(purchaseCount + "개를 구매했습니다.");
         for (Lotto lottoNumber : randomLotto.getLottoNumbers()) {
-            System.out.println(Arrays.toString(lottoNumber.getLotto()));
+            System.out.println(lottoNumber.getLotto());
         }
     }
 
-    public static void winnerStatistic(Statistic statistic, Money purchasedMoney) {
+    public static String lossMessageFormat(double rate) {
+        return rate < 1 ? "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" : "";
+    }
 
-        int[] matchFounds = statistic.getMatchFoundCount();
-        double earningRate = statistic.calculateEarningRate(purchasedMoney);
-        String lossMessage = Statistic.lossMessageFormat(earningRate);
+    public static void winnerStatistic(LottoResult lottoResult, Money purchasedMoney) {
+
+        int[] matchFounds = lottoResult.getMatchFoundCount();
+        double earningRate = lottoResult.calculateEarningRate(purchasedMoney);
+
+        String lossMessage = lossMessageFormat(earningRate);
 
         System.out.println("당첨 통계");
         System.out.println("-----------");

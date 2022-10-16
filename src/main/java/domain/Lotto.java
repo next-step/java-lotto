@@ -5,20 +5,21 @@ import exception.NullAndEmptyException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final Pattern VALID_INPUT_REGEX = Pattern.compile("[\\d ,]+");
 
-    private Integer[] lotto;
+    private List<Integer> lotto;
 
     public Lotto(String numbers) {
         inputValidation(numbers);
         this.lotto = convertToLottoForm(numbers);
     }
 
-    public Lotto(List<Integer> nubmers) {
-        this.lotto = nubmers.toArray(new Integer[0]);
+    public Lotto(List<Integer> numbers) {
+        this.lotto = numbers;
     }
 
     public static Lotto from(String lottoNumber) {
@@ -40,13 +41,14 @@ public class Lotto {
         }
     }
 
-    private Integer[] convertToLottoForm(String input) {
-        input = input.replaceAll(" ", "");
-        String[] values = input.split(",");
-        return Arrays.stream(values).map(Integer::valueOf).toArray(Integer[]::new);
+    private List<Integer> convertToLottoForm(String input) {
+        return Arrays.stream(input.split(","))
+            .map(String::trim)
+            .map(Integer::valueOf)
+            .collect(Collectors.toList());
     }
 
-    public Integer[] getLotto() {
+    public List<Integer> getLotto() {
         return lotto;
     }
 }

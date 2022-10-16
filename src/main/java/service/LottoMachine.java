@@ -1,38 +1,26 @@
 package service;
 
-import domain.Lotto;
-import domain.LottoNumbers;
+import domain.Lottos;
 import domain.Money;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class LottoMachine {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public LottoNumbers purchaseLotto(Money money) {
+    private final LottoGenerator lottoGenerator;
 
-        int purchasedCount = money.getMoney() / LOTTO_PRICE;
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        for (int i = 0; i < purchasedCount; i++) {
-            lottoNumbers.addLotto(createRandomLotto());
-        }
-        return lottoNumbers;
+    public LottoMachine(LottoGenerator lottoGenerator) {
+        this.lottoGenerator = lottoGenerator;
     }
 
-    private Lotto createRandomLotto() {
-        List<Integer> lottoNumRange = new ArrayList<>();
+    public Lottos purchaseLotto(Money money) {
 
-        for (int i = 1; i <= 45; i++) {
-            lottoNumRange.add(i);
+        int purchasedCount = money.getMoney() / LOTTO_PRICE;
+        Lottos lottos = new Lottos();
+        for (int i = 0; i < purchasedCount; i++) {
+            lottos.addLotto(lottoGenerator.createRandomLotto());
         }
-        Collections.shuffle(lottoNumRange);
-        List<Integer> pickedNumbers = lottoNumRange.subList(0, 6);
-        Collections.sort(pickedNumbers);
-        return Lotto.from(pickedNumbers);
-
+        return lottos;
     }
 
 }

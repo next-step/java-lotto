@@ -39,6 +39,6 @@ class LottoTest {
 
         Lotto result = Lotto.from(input);
 
-        assertThat(result.getLotto().length).isEqualTo(LOTTO_SIZE);
+        assertThat(result.getLotto().size()).isEqualTo(LOTTO_SIZE);
     }
 }
