@@ -35,4 +35,11 @@ public class Bank {
     public int hashCode() {
         return Objects.hash(whetherOrNot);
     }
+
+    @Override
+    public String toString() {
+        return "Bank{" +
+            "whetherOrNot=" + whetherOrNot +
+            '}';
+    }
 }

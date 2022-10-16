@@ -5,6 +5,7 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class Lottos {
     }
 
     private Map<Rank, Integer> getRankMap(List<Rank> ranks) {
-        return Rank.stream()
+        return Arrays.stream(Rank.values())
             .collect(toMap(identity(), rank -> frequency(ranks, rank)));
     }
 

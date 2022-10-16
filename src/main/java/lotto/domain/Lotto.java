@@ -47,10 +47,8 @@ public class Lotto {
     }
 
     boolean hasLottoNumber(LottoNumber bonusBall) {
-        List<LottoNumber> lottoNumberList = lottoNumbers.stream()
-            .filter(numbers -> numbers.equals(bonusBall))
-            .collect(Collectors.toList());
-        return lottoNumberList.size() > 0;
+        return lottoNumbers.stream()
+            .anyMatch(numbers -> numbers.equals(bonusBall));
     }
 
     private long agreementBall(Lotto winningNumber, LottoNumber lottoNumber) {
