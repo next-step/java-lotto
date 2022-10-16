@@ -18,8 +18,8 @@ public class LottoMachine {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public List<Lotto> issue(Payment payment) {
-        return IntStream.range(0, payment.count())
+    public List<Lotto> automaticIssue(int count) {
+        return IntStream.range(0, count)
                 .mapToObj(i -> randomLotto())
                 .collect(Collectors.toUnmodifiableList());
     }

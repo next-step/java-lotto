@@ -38,14 +38,14 @@ public class LottoTest {
     @DisplayName("발급 로또 조회")
     void lottoNumber() {
         LottoMachine lotto = new LottoMachine(lottoNumbers());
-        assertThat(lotto.issue(new Payment(1000)).get(0).lottoNumbers()).hasSizeLessThanOrEqualTo(6);
-        assertThat(lotto.issue(new Payment(1000)).get(0).lottoNumbers()).hasSizeGreaterThanOrEqualTo(0);
+        assertThat(lotto.automaticIssue(1).get(0).lottoNumbers()).hasSizeLessThanOrEqualTo(6);
+        assertThat(lotto.automaticIssue(1).get(0).lottoNumbers()).hasSizeGreaterThanOrEqualTo(0);
     }
 
     @RepeatedTest(100)
     @DisplayName("발급 로또 티켓, 당첨 티켓 비교")
     void compareNumber() {
-        List<Lotto> lottoTickets = new LottoMachine(lottoNumbers()).issue(new Payment(1000));
+        List<Lotto> lottoTickets = new LottoMachine(lottoNumbers()).automaticIssue(1);
 
         Lotto winningNumber = new WinningLotto(new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6))), LottoNumber.lottoNumber(7)).winningLotto();
         List<Integer> matchingCounts = lottoTickets.stream()

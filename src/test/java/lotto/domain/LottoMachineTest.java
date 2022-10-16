@@ -11,6 +11,6 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또 발급 검증")
     void issue() {
-        assertThat(new LottoMachine(lottoNumbers()).issue(new Payment(10000)).size()).isEqualTo(10);
+        assertThat(new LottoMachine(lottoNumbers()).automaticIssue(10).size()).isEqualTo(10);
     }
 }
