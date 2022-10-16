@@ -7,7 +7,7 @@ public class LottoNumberSet {
 
     private final Set<LottoNumber> lottoNumberSet;
     private static final int LOTTO_SET_SIZE = 6;
-    private static final String LOTTONUMBERSET_DELIMITER = ", ";
+    public static final String LOTTONUMBERSET_DELIMITER = ", ";
 
     private static final String LOTTO_SIZE_EXCEPTION = "로또 번호는 " + LOTTO_SET_SIZE + "개여야 합니다.";
 

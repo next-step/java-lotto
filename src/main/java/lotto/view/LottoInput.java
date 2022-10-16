@@ -23,7 +23,9 @@ public class LottoInput {
     public static LottoNumberSet lottoNumbers() {
         Scanner scanner = new Scanner(System.in);
         return LottoNumberSet.createLottoNumberSet(
-                Arrays.stream(scanner.nextLine().split(", ")).mapToInt(i -> Integer.parseInt(i)).toArray()
+                Arrays.stream(scanner.nextLine().split(LottoNumberSet.LOTTONUMBERSET_DELIMITER))
+                        .mapToInt(i -> Integer.parseInt(i))
+                        .toArray()
         );
     }
 
