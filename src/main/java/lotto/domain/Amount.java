@@ -19,6 +19,10 @@ public class Amount {
         return amount;
     }
 
+    public Amount minus(final Amount amount) {
+        return new Amount(this.amount - amount.amount);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,9 +39,5 @@ public class Amount {
     @Override
     public String toString() {
         return Integer.toString(amount);
-    }
-
-    public Amount minus(Amount amount) {
-        return new Amount(this.amount - amount.amount);
     }
 }
