@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Money.Money;
+import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.service.LottoService;
@@ -24,23 +24,23 @@ public class LottoController {
     }
 
     public void draw() {
-        Money money = purchaseMoney();
+        ImmutableMoney immutableMoney = purchaseMoney();
 
-        List<Lotto> lottos = purchaseLotto(money);
+        List<Lotto> lottos = purchaseLotto(immutableMoney);
 
         LottoWinner winner = drawWinner();
 
-        lottoResult(money, lottos, winner);
+        lottoResult(immutableMoney, lottos, winner);
     }
 
-    private Money purchaseMoney() {
+    private ImmutableMoney purchaseMoney() {
         LottoOutput.purchaseAmount();
 
         return LottoInput.money();
     }
 
-    private List<Lotto> purchaseLotto(Money money) {
-        Amount totalAmount = lottoService.purchaseNumber(money);
+    private List<Lotto> purchaseLotto(ImmutableMoney immutableMoney) {
+        Amount totalAmount = lottoService.purchaseNumber(immutableMoney);
         List<Lotto> lottoList = purchaseAutoLotto(totalAmount, purchaseManualLotto());
         LottoOutput.lotto(lottoList);
         return lottoList;
@@ -78,7 +78,7 @@ public class LottoController {
         return new LottoWinner(numbers, bonusNumber);
     }
 
-    private void lottoResult(Money money, List<Lotto> lottos, LottoWinner winner) {
+    private void lottoResult(ImmutableMoney money, List<Lotto> lottos, LottoWinner winner) {
         Map<Integer, Integer> checkLotto = lottoService.checkLotto(lottos, winner);
 
         LottoOutput.statistics();

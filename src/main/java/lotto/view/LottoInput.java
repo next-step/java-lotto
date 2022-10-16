@@ -1,18 +1,18 @@
 package lotto.view;
 
 import lotto.domain.Amount;
+import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
-import lotto.domain.Money.Money;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class LottoInput {
 
-    public static Money money() {
+    public static ImmutableMoney money() {
         Scanner scanner = new Scanner(System.in);
-        return new Money(scanner.nextInt());
+        return new ImmutableMoney(scanner.nextInt());
     }
 
     public static Amount purchaseManualAmount() {

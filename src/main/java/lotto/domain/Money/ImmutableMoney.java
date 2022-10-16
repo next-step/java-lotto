@@ -16,6 +16,14 @@ public class ImmutableMoney {
         this.money = money;
     }
 
+    public Money money() {
+        return new Money(money);
+    }
+
+    public long value() {
+        return money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,5 +35,10 @@ public class ImmutableMoney {
     @Override
     public int hashCode() {
         return Objects.hash(money);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(money);
     }
 }

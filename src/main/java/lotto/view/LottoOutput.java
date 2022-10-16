@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Amount;
+import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lotto.Lotto;
 
 import java.util.List;
@@ -48,12 +49,12 @@ public class LottoOutput {
         System.out.println(result);
     }
 
-    public static void match(int count, int reward, int number) {
-        System.out.println(String.format("%d개 일치 (%d원)- %d개", count, reward, number));
+    public static void match(int count, ImmutableMoney reward, int number) {
+        System.out.println(String.format("%d개 일치 (%s원)- %d개", count, reward, number));
     }
 
-    public static void matchBonusNumber(int count, int reward, int number) {
-        System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개", count, reward, number));
+    public static void matchBonusNumber(int count, ImmutableMoney reward, int number) {
+        System.out.println(String.format("%d개 일치, 보너스 볼 일치(%s원) - %d개", count, reward, number));
     }
 
     public static void yield(double yield) {

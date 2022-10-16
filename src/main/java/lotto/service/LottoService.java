@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.Money.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumberSet;
@@ -15,10 +16,10 @@ public class LottoService {
     private final int LOTTO_MINIMUM_REWARD_RANK = 5;
     private final int LOTTO_FIRST_RANK = 1;
     private final int LOTTO_MATCH_DEFAULT_COUNT = 0;
-    public static final Money LOTTO_PRICE = new Money(1000);
+    public static final ImmutableMoney LOTTO_PRICE = new ImmutableMoney(1000);
 
-    public Amount purchaseNumber(final Money money) {
-        return new Amount(money.divide(LOTTO_PRICE).intValue());
+    public Amount purchaseNumber(final ImmutableMoney immutableMoney) {
+        return new Amount(immutableMoney.money().divide(LOTTO_PRICE.value()).intValue());
     }
 
     public List<Lotto> purchaseLotto(final Amount amount) {
@@ -52,15 +53,15 @@ public class LottoService {
         return result;
     }
 
-    public double yield(final List<Lotto> lottos, final LottoWinner winner, final Money money) {
-        return reward(lottos, winner).divide(money);
+    public double yield(final List<Lotto> lottos, final LottoWinner winner, final ImmutableMoney immutableMoney) {
+        return reward(lottos, winner).money().divide(immutableMoney.value());
     }
 
-    private Money reward(final List<Lotto> lottos, final LottoWinner winner) {
+    private ImmutableMoney reward(final List<Lotto> lottos, final LottoWinner winner) {
         Money result = new Money(0);
         Map<Integer, Integer> rankMap = checkLotto(lottos, winner);
         for (int i = LOTTO_MINIMUM_REWARD_RANK; i >= LOTTO_FIRST_RANK; i--) {
-            Money reward = new Money(LottoReward.reward(i));
+            Money reward = LottoReward.reward(i).money();
             reward.multiply(rankMap.get(i));
             result.add(reward);
         }
