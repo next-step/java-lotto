@@ -8,24 +8,28 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MyTickets {
-    private final List<Ticket> tickets;
+    private final List<MyTicket> myTickets;
     private final LottoNumberGenerator numberGenerator;
 
-    public MyTickets(long tryCount, LottoNumberGenerator numberGenerator) {
-        this.tickets = new ArrayList<>();
+    public MyTickets(TicketCount ticketCount, LottoNumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
-        addRandomTicketsByCount(tryCount);
+        this.myTickets = new ArrayList<>();
+        addRandomTicketsByCount(ticketCount);
     }
 
-    private void addRandomTicketsByCount(long tryCount) {
-        for (int index = 0; index < tryCount; index++) {
-            Ticket randomTicket = new Ticket(numberGenerator);
-            ResultView.printTicketNumbers(randomTicket);
-            this.tickets.add(randomTicket);
+    private void addRandomTicketsByCount(TicketCount ticketCount) {
+        int count = 0;
+        while (ticketCount.hasNext()) {
+            count++;
+            MyTicket randomMyTicket = new MyTicket(numberGenerator);
+            ResultView.printTicketNumbers(randomMyTicket);
+            this.myTickets.add(randomMyTicket);
+            ticketCount.next();
         }
+        ResultView.printOutputCountMessage(count);
     }
 
-    public List<Ticket> getTickets() {
-        return tickets.stream().collect(Collectors.toUnmodifiableList());
+    public List<MyTicket> getTickets() {
+        return myTickets.stream().collect(Collectors.toUnmodifiableList());
     }
 }

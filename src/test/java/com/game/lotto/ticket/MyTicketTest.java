@@ -2,6 +2,7 @@ package com.game.lotto.ticket;
 
 import com.game.lotto.number.ManualLottoNumberGenerator;
 import com.game.lotto.number.RandomLottoNumberGenerator;
+import com.game.lotto.prize.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,22 +12,24 @@ import static com.game.lotto.number.LottoNumberGenerator.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class TicketTest {
+class MyTicketTest {
+
+    private final static int BONUS_NUMBER = 7;
 
     private final List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
     private final List<Integer> winnerLottoNumbers = List.of(1, 2, 3, 4, 5, 6);
-    private Ticket randomTicket;
-    private Ticket manualTicket;
+    private MyTicket randomMyTicket;
+    private MyTicket manualMyTicket;
 
     @BeforeEach
     void set_up() {
-        randomTicket = new Ticket(new RandomLottoNumberGenerator());
-        manualTicket = new Ticket(new ManualLottoNumberGenerator(lottoNumbers));
+        randomMyTicket = new MyTicket(new RandomLottoNumberGenerator());
+        manualMyTicket = new MyTicket(new ManualLottoNumberGenerator(lottoNumbers));
     }
 
     @Test
     void get_ticket_of_random_numbers() {
-        List<Integer> randomNumbersOfTicket = randomTicket.getNumbers();
+        List<Integer> randomNumbersOfTicket = randomMyTicket.getNumbers();
         assertEquals(LOTTO_NUMBER_SELECT_COUNT, randomNumbersOfTicket.size());
         for (int number : randomNumbersOfTicket) {
             assertThat(number).isGreaterThanOrEqualTo(MIN_VALUE_OF_LOTTO_NUMBER);
@@ -36,7 +39,7 @@ class TicketTest {
 
     @Test
     void get_ticket_of_manual_numbers() {
-        List<Integer> manualNumbersOfTicket = manualTicket.getNumbers();
+        List<Integer> manualNumbersOfTicket = manualMyTicket.getNumbers();
         assertEquals(LOTTO_NUMBER_SELECT_COUNT, manualNumbersOfTicket.size());
         for (int number : manualNumbersOfTicket) {
             assertThat(number).isGreaterThanOrEqualTo(MIN_VALUE_OF_LOTTO_NUMBER);
@@ -46,16 +49,16 @@ class TicketTest {
 
     @Test
     void get_ticket_strikes_by_random_numbers() {
-        Ticket winnerTicket = new Ticket(new ManualLottoNumberGenerator(winnerLottoNumbers));
-        int strikes = randomTicket.compareWinnerNumbersAndGetStrikes(winnerTicket);
-        assertThat(strikes).isGreaterThanOrEqualTo(0);
-        assertThat(strikes).isLessThanOrEqualTo(LOTTO_NUMBER_SELECT_COUNT);
+        WinnerTicket winnerTicket = new WinnerTicket(new ManualLottoNumberGenerator(winnerLottoNumbers), BONUS_NUMBER);
+        Rank rank = randomMyTicket.compareWinnerNumbersAndGetStrikes(winnerTicket);
+        assertThat(rank.getStrikes()).isGreaterThanOrEqualTo(0);
+        assertThat(rank.getStrikes()).isLessThanOrEqualTo(LOTTO_NUMBER_SELECT_COUNT);
     }
 
     @Test
     void get_ticket_strikes_by_manual_numbers() {
-        Ticket winnerTicket = new Ticket(new ManualLottoNumberGenerator(winnerLottoNumbers));
-        int strikes = manualTicket.compareWinnerNumbersAndGetStrikes(winnerTicket);
-        assertThat(strikes).isEqualTo(LOTTO_NUMBER_SELECT_COUNT);
+        WinnerTicket winnerTicket = new WinnerTicket(new ManualLottoNumberGenerator(winnerLottoNumbers), BONUS_NUMBER);
+        Rank rank = manualMyTicket.compareWinnerNumbersAndGetStrikes(winnerTicket);
+        assertThat(rank.getStrikes()).isEqualTo(LOTTO_NUMBER_SELECT_COUNT);
     }
 }

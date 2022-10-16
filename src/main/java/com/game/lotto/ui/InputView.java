@@ -9,9 +9,19 @@ public class InputView {
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_LAST_WINNER_NUMBER_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String TICKET_NUMBER_STRING_INPUT_SEPARATOR = ",";
+    private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     public static int inputPrice() {
         return inputNumber(INPUT_PRICE_MESSAGE);
+    }
+
+    public static int inputBonusNumber() {
+        return inputNumber(INPUT_BONUS_NUMBER_MESSAGE);
+    }
+
+    public static int inputNumber(String inputMessage) {
+        System.out.println(inputMessage);
+        return new Scanner(System.in).nextInt();
     }
 
     public static List<Integer> inputLastWinnerNumber() {
@@ -20,11 +30,6 @@ public class InputView {
                 .mapToInt(x -> Integer.parseInt(x.trim()))
                 .boxed()
                 .collect(Collectors.toUnmodifiableList());
-    }
-
-    public static int inputNumber(String inputMessage) {
-        System.out.println(inputMessage);
-        return new Scanner(System.in).nextInt();
     }
 
     public static String inputString(String inputMessage) {
