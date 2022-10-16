@@ -6,10 +6,8 @@ import java.util.stream.IntStream;
 
 public class LottoNumberFactory {
 
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_END_NUMBER = 45;
     private static final Set<Integer> numbers = IntStream
-            .range(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
+            .range(LottoNumber.LOTTONUMBER_MINIMUM, LottoNumber.LOTTONUMBER_MAXIMUM)
             .boxed()
             .collect(Collectors.toSet());
 
