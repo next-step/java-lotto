@@ -12,6 +12,8 @@ public class CalculatorApp {
         validateBlank(input);
 
         int result = Calculator.calculate(input);
+
+        System.out.println(result);
     }
 
     public static void validateBlank(String input) {
