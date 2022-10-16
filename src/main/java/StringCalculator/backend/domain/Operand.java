@@ -18,11 +18,11 @@ public class Operand {
         }
     }
 
-    public int apply(BinaryOperator<Integer> formula, Operand other){
+    public int apply(BinaryOperator<Integer> formula, Operand other) {
         return formula.apply(this.number, other.number);
     }
 
-    public boolean isZero(){
+    public boolean isZero() {
         return this.number == 0;
     }
 

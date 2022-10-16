@@ -8,7 +8,7 @@ public class DivideOperator implements Operator {
 
     @Override
     public int calculate(Operand x, Operand y) {
-        if(y.isZero()){
+        if (y.isZero()) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
         return x.apply(divide, y);
