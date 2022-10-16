@@ -36,4 +36,8 @@ public class Amount {
     public String toString() {
         return Integer.toString(amount);
     }
+
+    public Amount minus(Amount amount) {
+        return new Amount(this.amount - amount.amount);
+    }
 }

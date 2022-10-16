@@ -34,11 +34,15 @@ public class LottoController {
     }
 
     private List<Lotto> purchaseLotto(Money money) {
-        Amount amount = lottoService.purchaseNumber(money);
+        Amount totalAmount = lottoService.purchaseNumber(money);
 
-        LottoOutput.purchaseCount(amount);
+        LottoOutput.purchaseManualAmount();
+        Amount manualAmount = LottoInput.purchaseManualAmount();
 
-        List<Lotto> lottos = lottoService.purchaseLotto(amount);
+        Amount autoAmount = totalAmount.minus(manualAmount);
+        LottoOutput.purchaseCount(manualAmount, autoAmount);
+
+        List<Lotto> lottos = lottoService.purchaseLotto(autoAmount);
         LottoOutput.lotto(lottos);
         return lottos;
     }
