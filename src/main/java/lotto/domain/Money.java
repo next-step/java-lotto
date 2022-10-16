@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class Money {
 
-    private int money;
+    private long money;
     private static String MONEY_NEGATIVE_EXCEPTION = "Money는 음수가 될 수 없습니다.";
 
-    public Money(int money) {
+    public Money(long money) {
         if (money < 0) {
             throw new IllegalArgumentException(MONEY_NEGATIVE_EXCEPTION);
         }
@@ -18,7 +18,7 @@ public class Money {
         return (double) this.money / money.money();
     }
 
-    public int money() {
+    public long money() {
         return money;
     }
 

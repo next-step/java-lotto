@@ -28,6 +28,10 @@ public class LottoOutput {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
+    public static void bonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     public static void statistics() {
         StringBuilder result = new StringBuilder();
         result.append("당첨 통계");
@@ -37,6 +41,10 @@ public class LottoOutput {
 
     public static void match(int count, int reward, int number) {
         System.out.println(String.format("%d개 일치 (%d원)- %d개", count, reward, number));
+    }
+
+    public static void matchBonusNumber(int count, int reward, int number) {
+        System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개", count, reward, number));
     }
 
     public static void yield(double yield) {
