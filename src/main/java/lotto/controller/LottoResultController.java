@@ -9,11 +9,10 @@ import lotto.domain.lotto.*;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LottoController {
+public class LottoResultController {
 
     private final LottoService lottoService;
     private static final int REWARD_START_RANK = 5;
@@ -21,7 +20,7 @@ public class LottoController {
     private static final int BONUS_RANK = 2;
 
 
-    public LottoController(final LottoService lottoService) {
+    public LottoResultController(final LottoService lottoService) {
         this.lottoService = lottoService;
     }
 
