@@ -61,8 +61,9 @@ public class LottoService {
         Money result = new Money(0);
         Map<Integer, Integer> rankMap = checkLotto(lottos, winner);
         for (int i = LOTTO_LAST_RANK; i >= LOTTO_FIRST_RANK; i--) {
-            //TODO
-//            result.add(new Money(LottoReward.reward(i)).multiply(rankMap.get(i)))
+            Money reward = new Money(LottoReward.reward(i));
+            reward.multiply(rankMap.get(i));
+            result.add(reward);
         }
         return result;
     }

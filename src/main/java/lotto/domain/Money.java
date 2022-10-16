@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Money {
 
-    private final long money;
+    private long money;
     private static final int MONEY_MINIMUM = 0;
 
     private final static String MONEY_NEGATIVE_EXCEPTION = "Money에는 " + MONEY_MINIMUM + "이상의 값만 들어올 수 있습니다.";
@@ -16,12 +16,12 @@ public class Money {
         this.money = money;
     }
 
-    public Money add(final Money money) {
-        return new Money(this.money + money.money);
+    public void add(final Money money) {
+        this.money += money.money;
     }
 
-    public Money multiply(final int value) {
-        return new Money(this.money * value);
+    public void multiply(final int value) {
+        this.money *= value;
     }
 
     public Double divide(final Money money) {
