@@ -40,7 +40,7 @@ public enum Prize {
     public static int calculateTotalIncome(final Map<Prize, Integer> drawLottoResult){
         int totalReward = 0;
         for (Prize prize: drawLottoResult.keySet()) {
-            totalReward += prize.getReward();
+            totalReward += prize.getReward() * drawLottoResult.get(prize);
         }
         return totalReward;
     }

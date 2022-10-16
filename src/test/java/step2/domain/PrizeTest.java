@@ -1,5 +1,7 @@
 package step2.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,5 +44,15 @@ class PrizeTest {
     void matchCount_max_6(int matchCount) {
         Assertions.assertThatThrownBy(() -> Prize.getPrize(matchCount))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("총 금액 계산 테스트")
+    @Test
+    void calculate_total_income(){
+        Map<Prize, Integer> drawResult = new HashMap<>();
+        drawResult.put(Prize.THREE, 3);
+        drawResult.put(Prize.FOUR, 1);
+        int totalIncome = Prize.calculateTotalIncome(drawResult);
+        Assertions.assertThat(totalIncome).isEqualTo(65000);
     }
 }
