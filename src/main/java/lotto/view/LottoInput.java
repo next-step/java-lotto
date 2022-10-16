@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.Amount;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
-import lotto.domain.Money;
+import lotto.domain.Money.Money;
 
 import java.util.Arrays;
 import java.util.Scanner;
