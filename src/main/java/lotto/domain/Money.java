@@ -16,12 +16,16 @@ public class Money {
         this.money = money;
     }
 
-    public Double divide(final Money money) {
-        return (double) this.money / money.money;
-    }
-
     public Money add(final Money money) {
         return new Money(this.money + money.money);
+    }
+
+    public Money multiply(final int value) {
+        return new Money(this.money * value);
+    }
+
+    public Double divide(final Money money) {
+        return (double) this.money / money.money;
     }
 
     @Override

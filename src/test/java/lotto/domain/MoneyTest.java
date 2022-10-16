@@ -32,4 +32,10 @@ public class MoneyTest {
         assertThat(money.add(new Money(3000))).isEqualTo(new Money(13000));
     }
 
+    @Test
+    void multiply_money() {
+        Money money = new Money(1000);
+
+        assertThat(money.multiply(3)).isEqualTo(new Money(3000));
+    }
 }
