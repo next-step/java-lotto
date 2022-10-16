@@ -1,4 +1,4 @@
-package model;
+package step1.model;
 
 import java.util.function.BinaryOperator;
 

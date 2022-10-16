@@ -1,6 +1,6 @@
-package model;
+package step1.model;
 
-import exception.NotFoundOperatorException;
+import step1.exception.NotFoundOperatorException;
 import java.util.Arrays;
 
 public class Calculator {
