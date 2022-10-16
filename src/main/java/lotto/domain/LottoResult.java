@@ -27,17 +27,13 @@ public enum LottoResult {
 
     public static LottoResult from(int matchCount, boolean hasBonusNumber) {
         return Arrays.stream(values())
-                .filter(value -> value.match(matchCount, hasBonusNumber))
+                .filter(value -> value.resultMatcher.test(matchCount, hasBonusNumber))
                 .findAny()
                 .orElse(NONE);
     }
 
     public int getMoney() {
         return money;
-    }
-
-    private boolean match(int matchCount, boolean hasBonusNumber) {
-        return resultMatcher.test(matchCount, hasBonusNumber);
     }
 
     public String getDescription() {
