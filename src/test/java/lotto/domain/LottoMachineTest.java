@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoMachineTest {
 
     @Test
-    @DisplayName("로또 발급 검증")
-    void issue() {
-        assertThat(new LottoMachine(lottoNumbers()).automaticIssue(10).size()).isEqualTo(10);
+    @DisplayName("로또 자동 발급 수 검증")
+    void automaticIssue() {
+        assertThat(new LottoMachine(lottoNumbers()).automaticIssue(10)).hasSize(10);
     }
 }
