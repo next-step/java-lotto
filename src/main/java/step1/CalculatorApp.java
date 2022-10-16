@@ -11,7 +11,7 @@ public class CalculatorApp {
         String input = SCANNER.nextLine();
         validateBlank(input);
 
-        Calculator.calculate(input);
+        int result = Calculator.calculate(input);
     }
 
     public static void validateBlank(String input) {

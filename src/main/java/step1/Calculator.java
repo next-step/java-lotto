@@ -13,12 +13,25 @@ public class Calculator {
     private Calculator() {
     }
 
-    public static void calculate(String input) {
+    public static int calculate(String input) {
         String[] arguments = split(input);
-        validateExpression(arguments);
+        validateArgumentsCount(arguments);
         
         Deque<Integer> operands = collectOperands(arguments);
         Deque<Operator> operators = collectOperators(arguments);
+
+        return performOperation(operands, operators);
+    }
+
+    private static int performOperation(Deque<Integer> operands, Deque<Operator> operators) {
+        int result = operands.pop();
+        while (!operators.isEmpty()) {
+            Operator operator = operators.pop();
+            Integer nextOperand = operands.pop();
+            result = operator.operate(result, nextOperand);
+        }
+
+        return result;
     }
 
     public static Deque<Integer> collectOperands(String[] arguments) {
@@ -53,13 +66,13 @@ public class Calculator {
         }
     }
 
-    private static void validateExpression(String[] arguments) {
-        if (hasEvenCount(arguments)) {
-            throw new IllegalArgumentException("올바르지 않은 계산식입니다.");
+    private static void validateArgumentsCount(String[] arguments) {
+        if (hasEven(arguments)) {
+            throw new IllegalArgumentException("피연산자, 연산자 구성이 올바르지 않습니다.");
         }
     }
 
-    private static boolean hasEvenCount(String[] arguments) {
+    private static boolean hasEven(String[] arguments) {
         return arguments.length % 2 == 0;
     }
 }

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class CalculatorTest {
@@ -57,5 +58,57 @@ class CalculatorTest {
     void calculateInvalidExpressionTest(String input) {
         assertThatThrownBy(() -> Calculator.calculate(input))
             .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("덧셈 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"1 + 2:3", "2 + 3:5", "1 + 2 + 3:6"}, delimiter = ':')
+    void calculatePlus(String input, int expected) {
+        int result = Calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("뺄셈 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"1 - 2:-1", "3 - 2:1", "1 - 2 - 3:-4"}, delimiter = ':')
+    void calculateMinus(String input, int expected) {
+        int result = Calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("곱셈 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"2 * 3:6", "2 * -1:-2", "-3 * -3:9"}, delimiter = ':')
+    void calculateMultiplication(String input, int expected) {
+        int result = Calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("나눗셈 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"1 / 2:0", "2 / 2:1", "3 / 2:1", "-2 / 2:-1", "2 / -2:-1"}, delimiter = ':')
+    void calculateDivision(String input, int expected) {
+        int result = Calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("0으로 나누는 경우 예외 발생")
+    @Test
+    void calculateDivideWithZero() {
+        assertThatThrownBy(() -> Calculator.calculate("2 / 0"))
+            .isExactlyInstanceOf(ArithmeticException.class);
+    }
+
+    @DisplayName("연산자가 2개 이상인 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"1 - 2 * 3:-3", "3 / 3 + 1:2", "2 * 3 - 3:3", "2 * 4 / 3 + 2 - 1:3"}, delimiter = ':')
+    void calculateComposite(String input, int expected) {
+        int result = Calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
     }
 }
