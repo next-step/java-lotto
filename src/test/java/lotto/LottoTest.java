@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.WinningInformation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,11 +33,11 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("countSameNumbers 메소드는 주어진 로또와 일치하는 숫자의 개수를 반환한다.")
+    @DisplayName("matchWithWinningLotto 메소드는 주어진 로또와 당첨 결과를 맞춰 보고 당첨 정보를 반환한다.")
     void countSameNumbers() {
         Lotto lotto1 = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto lotto2 = new Lotto("1, 2, 3, 7, 8, 9");
 
-        assertThat(lotto1.countSameNumbers(lotto2)).isEqualTo(3);
+        assertThat(lotto1.matchWithWinningLotto(lotto2)).isEqualTo(WinningInformation.FOURTH);
     }
 }

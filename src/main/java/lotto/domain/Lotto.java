@@ -40,13 +40,20 @@ public class Lotto {
         }
     }
 
-    public int countSameNumbers(final Lotto lotto) {
-        return (int) lotto.numbers.stream()
+    public WinningInformation matchWithWinningLotto(final Lotto lotto) {
+        int countOfSameNumber = (int) lotto.numbers.stream()
             .filter(this.numbers::contains)
             .count();
+
+        return WinningInformation.findByCountOfMatchedNumber(countOfSameNumber);
     }
 
     public List<LottoNumber> getNumbers() {
         return this.numbers;
+    }
+
+    @Override
+    public String toString() {
+        return this.numbers.toString();
     }
 }

@@ -16,6 +16,10 @@ public class LottoStore {
 
     public LottoStorage buyLotto(final Money money, final IssueLottoStrategy strategy) {
         int count = money.countMaxNumberOfItemToBuy(LOTTO_PRICE);
+        if (count == 0) {
+            throw new IllegalArgumentException("로또를 구매할 수 없습니다.");
+        }
+
         return new LottoStorage(strategy.issue(count));
     }
 }
