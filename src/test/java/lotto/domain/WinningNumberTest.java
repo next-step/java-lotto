@@ -3,8 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -12,15 +11,29 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class WinningNumberTest {
 
     @Test
-    @DisplayName("생성자 검증")
-    void constructorDI() {
-        assertThatThrownBy(() -> new WinningNumber(null)).isInstanceOf(IllegalArgumentException.class);
+    @DisplayName("생성자 검증 - 당첨 번호 null")
+    void constructorDIExceptionForWinningNumberNull() {
+        assertThatThrownBy(() -> new WinningNumber(null, LottoNumber.lottoNumber(7))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("당첨 번홓 조회")
+    @DisplayName("생성자 검증 - 보너스 번호 null")
+    void constructorDIExceptionForBonusNumber() {
+        Lotto winningNumber = new Lotto(LottoNumber.lottoNumbers().subList(0, 6));
+        assertThatThrownBy(() -> new WinningNumber(winningNumber, LottoNumber.lottoNumber(6))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("당첨 번호 조회")
     void winningNumber() {
-        LottoTicket lottoTicket = new LottoTicket(new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(new WinningNumber(lottoTicket).winningNumber()).isEqualTo(lottoTicket);
+        Lotto lotto = new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6)));
+        assertThat(new WinningNumber(lotto, LottoNumber.lottoNumber(7)).winningNumber().lottoNumbers()).isEqualTo(lotto.lottoNumbers());
+    }
+
+    @Test
+    @DisplayName("보너스 번호 조회")
+    void bonusNumber() {
+        Lotto lotto = new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6)));
+        assertThat(new WinningNumber(lotto, LottoNumber.lottoNumber(7)).bonusNumber()).isEqualTo(LottoNumber.lottoNumber(7));
     }
 }

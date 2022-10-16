@@ -1,40 +1,33 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static lotto.domain.LottoNumber.shuffleNumbers;
 
 public class Lotto {
 
-    private final static int COUNT_OF_LOTTO_TICKET_NUMBER = 6;
-    private final static int LOTTO_TICKET_PRICE = 1000;
-    private final static int LOTTO_TICKET_BUY_MAX_PRICE = 100000;
+    private final static int COUNTS_OF_LOTTO_NUMBER = 6;
 
-    private final int payment;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final int payment) {
-        if (payment < LOTTO_TICKET_PRICE || payment > LOTTO_TICKET_BUY_MAX_PRICE) {
-            throw new IllegalArgumentException("입력하신 금액이 올바르지 않습니다. (최소 금액:" + LOTTO_TICKET_PRICE + "원, 최대 금액:" + LOTTO_TICKET_BUY_MAX_PRICE + ")");
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != COUNTS_OF_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 여섯 자리여야 합니다.");
         }
-        this.payment = payment;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public List<LottoTicket> tickets() {
-        return autoIssue();
+    public int compareNumber(final Lotto winningNumber) {
+        return lottoNumbers().stream()
+                .mapToInt(number -> winningNumber.lottoNumbers.contains(number) ? 1 : 0)
+                .sum();
     }
 
-    private List<LottoTicket> autoIssue() {
-        return IntStream.range(0, payment / LOTTO_TICKET_PRICE)
-                .mapToObj(i -> new LottoTicket(new TreeSet<>(shuffleNumbers().stream()
-                        .limit(COUNT_OF_LOTTO_TICKET_NUMBER)
-                        .collect(Collectors.toList()))))
-                .collect(Collectors.toUnmodifiableList());
+    public List<LottoNumber> lottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int payment() {
-        return payment;
+    public boolean containsNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }
