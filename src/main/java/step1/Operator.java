@@ -14,6 +14,7 @@ public enum Operator {
     });
 
     private static final int ZERO = 0;
+
     private final String symbol;
     private final IntBinaryOperator operator;
 
