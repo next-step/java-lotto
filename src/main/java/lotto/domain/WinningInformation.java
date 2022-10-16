@@ -14,6 +14,7 @@ public enum WinningInformation {
     THREE_MATCHES(3, new Money(5_000)),
     FOUR_MATCHES(4, new Money(50_000)),
     FIVE_MATCHES(5, new Money(1_500_000)),
+    FIVE_AND_BONUS_MATCHES(5, new Money(30_000_000)),
     SIX_MATCHES(6, new Money(2_000_000_000));
 
     private final int matchesCount;
@@ -30,6 +31,17 @@ public enum WinningInformation {
                 .filter(w -> w.matchesCount == matchesCount)
                 .findFirst()
                 .orElse(NOT_MATCHES);
+    }
+
+    public static WinningInformation of(int matchesCount, boolean isBonusMatch) {
+        if (isFiveAndBonus(matchesCount, isBonusMatch)) {
+            return FIVE_AND_BONUS_MATCHES;
+        }
+        return from(matchesCount);
+    }
+
+    private static boolean isFiveAndBonus(int matchesCount, boolean isBonusMatch) {
+        return matchesCount == 5 && isBonusMatch;
     }
 
     public static Money sumAmounts(List<WinningInformation> winningInformations) {

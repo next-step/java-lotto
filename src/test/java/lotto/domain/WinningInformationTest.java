@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.domain.WinningInformation.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -24,17 +25,24 @@ class WinningInformationTest {
         assertThat(WinningInformation.from(matchesCount)).isEqualTo(winningInformation);
     }
 
+
     private Stream<Arguments> generateWinningAmount() {
         return Stream.of(
-                Arguments.arguments(0, WinningInformation.NOT_MATCHES),
-                Arguments.arguments(1, WinningInformation.ONE_MATCHES),
-                Arguments.arguments(2, WinningInformation.TWO_MATCHES),
-                Arguments.arguments(3, WinningInformation.THREE_MATCHES),
-                Arguments.arguments(4, WinningInformation.FOUR_MATCHES),
-                Arguments.arguments(5, WinningInformation.FIVE_MATCHES),
-                Arguments.arguments(6, WinningInformation.SIX_MATCHES),
-                Arguments.arguments(7, WinningInformation.NOT_MATCHES)
+                Arguments.arguments(0, NOT_MATCHES),
+                Arguments.arguments(1, ONE_MATCHES),
+                Arguments.arguments(2, TWO_MATCHES),
+                Arguments.arguments(3, THREE_MATCHES),
+                Arguments.arguments(4, FOUR_MATCHES),
+                Arguments.arguments(5, FIVE_MATCHES),
+                Arguments.arguments(6, SIX_MATCHES),
+                Arguments.arguments(7, NOT_MATCHES)
         );
+    }
+
+    @DisplayName("파라미터에 5와 true가 입력되면 FIVE_AND_BONUS_MATCHES를 반환한다.")
+    @Test
+    void of_matchesCount_isBonusMatch() {
+        assertThat(WinningInformation.of(5, true)).isEqualTo(FIVE_AND_BONUS_MATCHES);
     }
 
     @DisplayName("상금의 총 합을 구한다.")
@@ -45,6 +53,6 @@ class WinningInformationTest {
 
         Money actual = WinningInformation.sumAmounts(winningInformations);
 
-        assertThat(actual).isEqualTo(new Money(2_001_555_000));
+        assertThat(actual).isEqualTo(new Money(2_031_555_000));
     }
 }
