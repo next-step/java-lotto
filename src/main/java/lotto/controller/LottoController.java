@@ -21,7 +21,7 @@ public class LottoController {
     private static final int BONUS_RANK = 2;
 
 
-    public LottoController(LottoService lottoService) {
+    public LottoController(final LottoService lottoService) {
         this.lottoService = lottoService;
     }
 
@@ -41,14 +41,14 @@ public class LottoController {
         return LottoInput.money();
     }
 
-    private List<Lotto> purchaseLotto(ImmutableMoney immutableMoney) {
+    private List<Lotto> purchaseLotto(final ImmutableMoney immutableMoney) {
         Amount totalAmount = lottoService.purchaseNumber(immutableMoney);
         List<Lotto> lottoList = purchaseAutoLotto(totalAmount, purchaseManualLotto());
         LottoOutput.lotto(lottoList);
         return lottoList;
     }
 
-    private List<Lotto> purchaseAutoLotto(Amount totalAmount, List<Lotto> lottoList) {
+    private List<Lotto> purchaseAutoLotto(final Amount totalAmount, final List<Lotto> lottoList) {
         Amount autoAmount = totalAmount.minus(new Amount(lottoList.size()));
         LottoOutput.purchaseCount(new Amount(lottoList.size()), autoAmount);
         lottoList.addAll(lottoService.purchaseLotto(autoAmount));
@@ -62,7 +62,7 @@ public class LottoController {
         return lottoService.purchaseLotto(inputLottoNumberSet(manualAmount));
     }
 
-    private static List<LottoNumberSet> inputLottoNumberSet(Amount manualAmount) {
+    private static List<LottoNumberSet> inputLottoNumberSet(final Amount manualAmount) {
         List<LottoNumberSet> lottoNumberSets = new ArrayList<>();
         for (int i = 0; i < manualAmount.amount(); i++) {
             lottoNumberSets.add(LottoInput.lottoNumbers());
@@ -80,7 +80,7 @@ public class LottoController {
         return new LottoWinner(numbers, bonusNumber);
     }
 
-    private void lottoResult(ImmutableMoney money, List<Lotto> lottos, LottoWinner winner) {
+    private void lottoResult(final ImmutableMoney money, final List<Lotto> lottos, final LottoWinner winner) {
         Map<Integer, Integer> checkLotto = lottoService.checkLotto(lottos, winner);
 
         LottoOutput.statistics();
@@ -91,7 +91,7 @@ public class LottoController {
         LottoOutput.yield(lottoService.yield(lottos, winner, money));
     }
 
-    private void lottoMatchOutput(int rank, int matchNumber) {
+    private void lottoMatchOutput(final int rank, final int matchNumber) {
         if (isBonusRank(rank)) {
             LottoOutput.matchBonusNumber(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
             return;
@@ -99,7 +99,7 @@ public class LottoController {
         LottoOutput.match(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
     }
 
-    private boolean isBonusRank(int rank) {
+    private boolean isBonusRank(final int rank) {
         return rank == BONUS_RANK;
     }
 }
