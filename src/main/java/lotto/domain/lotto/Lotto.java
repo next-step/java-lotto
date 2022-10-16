@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lottonumber.LottoNumberSet;
+
 public class Lotto {
 
     protected final LottoNumberSet lottoNumbers;

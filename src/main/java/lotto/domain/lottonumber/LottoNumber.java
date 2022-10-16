@@ -1,4 +1,4 @@
-package lotto.domain.lotto;
+package lotto.domain.lottonumber;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public int number(){
+    public int number() {
         return this.number;
     }
 

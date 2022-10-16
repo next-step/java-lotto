@@ -1,8 +1,8 @@
-package lotto.ui;
+package lotto.view;
 
 import lotto.domain.Amount;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumberSet;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.domain.Money;
 
 import java.util.Arrays;

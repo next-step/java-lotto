@@ -1,5 +1,8 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberSet;
+
 public class LottoWinner extends Lotto {
 
     private final LottoNumber bonusNumber;

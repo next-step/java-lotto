@@ -2,9 +2,10 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumberSet;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.domain.lotto.LottoWinner;
+import lotto.service.LottoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

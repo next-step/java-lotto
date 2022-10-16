@@ -1,4 +1,4 @@
-package lotto.ui;
+package lotto.view;
 
 import lotto.domain.Amount;
 import lotto.domain.lotto.Lotto;

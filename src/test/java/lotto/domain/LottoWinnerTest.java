@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumberSet;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.domain.lotto.LottoWinner;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

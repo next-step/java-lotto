@@ -1,9 +1,12 @@
-package lotto;
+package lotto.controller;
 
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lottonumber.LottoNumberSet;
+import lotto.service.LottoService;
 import lotto.domain.*;
 import lotto.domain.lotto.*;
-import lotto.ui.LottoInput;
-import lotto.ui.LottoOutput;
+import lotto.view.LottoInput;
+import lotto.view.LottoOutput;
 
 import java.util.ArrayList;
 import java.util.List;
