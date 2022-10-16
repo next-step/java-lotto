@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomLottoNumberGenerator extends LottoNumberGenerator {
+import static com.game.lotto.number.SelectedLottoNumbers.LOTTO_NUMBER_SELECT_COUNT;
+
+public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     @Override
-    public List<Integer> generateNumbers() {
-        List<Integer> totalNumbers = LottoNumberGenerator.getTotalNumbersOfLottoTicket();
+    public SelectedLottoNumbers generateNumbers() {
+        List<LottoNumber> totalNumbers = TotalLottoNumbers.getTotalNumbersOfLottoTicket();
         Collections.shuffle(totalNumbers);
-        ArrayList<Integer> subNumbers = new ArrayList<>(totalNumbers.subList(0, LOTTO_NUMBER_SELECT_COUNT));
-        Collections.sort(subNumbers);
-        return subNumbers;
+        ArrayList<LottoNumber> subNumbers = new ArrayList<>(totalNumbers.subList(0, LOTTO_NUMBER_SELECT_COUNT));
+        subNumbers.sort(LottoNumber::compareTo);
+        return new SelectedLottoNumbers(subNumbers);
     }
 }

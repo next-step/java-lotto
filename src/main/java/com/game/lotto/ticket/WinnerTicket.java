@@ -1,24 +1,24 @@
 package com.game.lotto.ticket;
 
+import com.game.lotto.number.LottoNumber;
 import com.game.lotto.number.LottoNumberGenerator;
-
-import java.util.List;
+import com.game.lotto.number.SelectedLottoNumbers;
 
 public class WinnerTicket {
 
-    private final List<Integer> numbers;
-    private final int bonusNumber;
+    private final SelectedLottoNumbers numbers;
+    private final LottoNumber bonusNumber;
 
-    public WinnerTicket(LottoNumberGenerator lottoNumberGenerator, int bonusNumber) {
+    public WinnerTicket(LottoNumberGenerator lottoNumberGenerator, LottoNumber bonusNumber) {
         this.numbers = lottoNumberGenerator.generateNumbers();
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getNumbers() {
+    public SelectedLottoNumbers getNumbers() {
         return numbers;
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 }

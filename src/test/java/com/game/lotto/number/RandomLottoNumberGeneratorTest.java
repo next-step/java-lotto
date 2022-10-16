@@ -1,7 +1,7 @@
 package com.game.lotto.number;
 
-import static com.game.lotto.number.LottoNumberGenerator.MAX_VALUE_OF_LOTTO_NUMBER;
-import static com.game.lotto.number.LottoNumberGenerator.MIN_VALUE_OF_LOTTO_NUMBER;
+import static com.game.lotto.number.LottoNumber.MAX_VALUE_OF_LOTTO_NUMBER;
+import static com.game.lotto.number.LottoNumber.MIN_VALUE_OF_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,10 +20,10 @@ class RandomLottoNumberGeneratorTest {
 
     @Test
     void random_number_generation() {
-        List<Integer> generatedNumbers = randomLottoNumberGenerator.generateNumbers();
-        for (Integer number : generatedNumbers) {
-            assertThat(number).isGreaterThanOrEqualTo(MIN_VALUE_OF_LOTTO_NUMBER);
-            assertThat(number).isLessThanOrEqualTo(MAX_VALUE_OF_LOTTO_NUMBER);
+        List<LottoNumber> generatedNumbers = randomLottoNumberGenerator.generateNumbers().getSelectedNumbers();
+        for (LottoNumber number : generatedNumbers) {
+            assertThat(number.getNumber()).isGreaterThanOrEqualTo(MIN_VALUE_OF_LOTTO_NUMBER);
+            assertThat(number.getNumber()).isLessThanOrEqualTo(MAX_VALUE_OF_LOTTO_NUMBER);
         }
     }
 }

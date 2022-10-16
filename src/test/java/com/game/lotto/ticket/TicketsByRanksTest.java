@@ -1,7 +1,8 @@
 package com.game.lotto.ticket;
 
+import com.game.lotto.count.TicketCount;
+import com.game.lotto.number.LottoNumber;
 import com.game.lotto.number.ManualLottoNumberGenerator;
-import com.game.lotto.number.RandomLottoNumberGenerator;
 import com.game.lotto.prize.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,15 +13,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TicketsByRanksTest {
 
-    private static final int TOTAL_AMOUNT_OF_TICKET_MONEY = 14_000;
+    private static final TicketCount TOTAL_TICKET_COUNT = new TicketCount(14);
+    private static final List<LottoNumber> WINNER_LOTTO_NUMBERS = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+    private static final LottoNumber BONUS_NUMBER = new LottoNumber(7);
+    private static final WinnerTicket WINNER_TICKET = new WinnerTicket(new ManualLottoNumberGenerator(WINNER_LOTTO_NUMBERS), BONUS_NUMBER);
 
-    private final MyTickets myTickets = new MyTickets(new TicketCount(TOTAL_AMOUNT_OF_TICKET_MONEY), new RandomLottoNumberGenerator());
-    private final WinnerTicket winnerTicket = new WinnerTicket(new ManualLottoNumberGenerator(List.of(1, 2, 3, 4, 5, 6)), 7);
+    private MyTickets myTickets;
     private TicketsByRanks ticketsByRanks;
 
     @BeforeEach
     void set_up() {
-        ticketsByRanks = new TicketsByRanks(winnerTicket, myTickets.getTickets());
+        myTickets = new MyTickets();
+        myTickets.addRandomTicketsByCount(TOTAL_TICKET_COUNT);
+        ticketsByRanks = new TicketsByRanks(WINNER_TICKET, myTickets.getTickets());
     }
 
     @Test
