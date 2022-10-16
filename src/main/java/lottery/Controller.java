@@ -16,9 +16,10 @@ public class Controller {
         for (int i = 0; i < availablePurchaseLotteryCount; i++) {
             customer.purchaseRandomLottery();
         }
-        List<Lottery> lotteries = customer.getLotteries();
 
+        List<Lottery> lotteries = customer.getLotteries();
         printPurchasedLotteryInfos(lotteries);
+
         LotteryResult lotteryResult = createLotteryResult(getWinningLotteryNumbers(), lotteries);
         printLotteryResult(lotteryResult);
     }
