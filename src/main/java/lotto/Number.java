@@ -32,6 +32,10 @@ public class Number implements Comparable<Number> {
         return new Number(number);
     }
 
+    public static Number of(String number){
+        return Number.of(Integer.parseInt(number));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,5 +47,10 @@ public class Number implements Comparable<Number> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

@@ -69,4 +69,8 @@ public class Lottos {
     private BigDecimal calculatePrincipal() {
         return BigDecimal.valueOf(lottos.size() * LOTTO_PRICE);
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }
