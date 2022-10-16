@@ -1,30 +1,9 @@
-# 문자열 계산기
+# 2단계 - 로또(자동)
 
-## Number
+## 로또 자동번호 기계 (LottoAutoMachine)
 
-- null값 체크
-- 빈공백문자 체크
+- 돈을 넣으면 돈에 맞게 1~45 사이의 숫자를 6개 뽑는다.
 
-## StringCalculator
+- 당첨번호를 입력받는다.
 
-- 문자열 계산
-
-## ArithmeticOperation
-
-- 사칙연산 기호 확인
-
-## Plus
-
-- 더하기
-
-## Minus
-
-- 빼기
-
-## Multi
-
-- 곱하기
-
-## Divide
-
-- 나누기
+- 번호를 입력하면 당첨 통계를 알린다.
