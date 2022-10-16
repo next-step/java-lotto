@@ -1,9 +1,8 @@
 package step2.view;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import step2.domain.LottoNumber;
+import step2.domain.LottoNumbers;
 import step2.domain.Prize;
 import step2.domain.Ticket;
 
@@ -17,8 +16,8 @@ public class OutputView {
         System.out.println(ticket.getTicketCount() + "개를 구매했습니다.");
     }
 
-    public static void printLottoNumbers(final List<LottoNumber> lottoNumbers) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
+    public static void printLottoNumbers(final List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber.getLottoNumbers());
         }
         System.out.println();

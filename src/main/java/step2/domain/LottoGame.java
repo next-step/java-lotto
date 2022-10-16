@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoGame {
 
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
     private LottoGame() {
     }
@@ -14,10 +14,10 @@ public class LottoGame {
         return new LottoGame();
     }
 
-    public List<LottoNumber> playLotto(final Ticket ticket) {
+    public List<LottoNumbers> playLotto(final Ticket ticket) {
         final int ticketCount = ticket.getTicketCount();
         for (int i = 0; i < ticketCount; i++) {
-            lottoNumbers.add(LottoNumber.newInstance());
+            lottoNumbers.add(LottoNumbers.newInstance());
         }
 
         return lottoNumbers;

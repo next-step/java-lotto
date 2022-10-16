@@ -19,8 +19,8 @@ public class LottoResult {
         return new LottoResult(winningNumbers);
     }
 
-    public final Map<Integer, Integer> drawLottoResult(final List<LottoNumber> allLottoNumbers) {
-        for (LottoNumber eachLottoNumber : allLottoNumbers) {
+    public final Map<Integer, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers) {
+        for (LottoNumbers eachLottoNumber : allLottoNumbers) {
             List<Integer> lottoNumbers = eachLottoNumber.getLottoNumbers();
             drawEachLottoResult(eachLottoNumber, lottoNumbers);
         }
@@ -28,7 +28,8 @@ public class LottoResult {
         return drawResult;
     }
 
-    private void drawEachLottoResult(final LottoNumber eachLottoNumber, final List<Integer> lottoNumbers) {
+    private void drawEachLottoResult(final LottoNumbers eachLottoNumber,
+        final List<Integer> lottoNumbers) {
         int count = (int) winningNumbers.stream()
             .filter(winningNumber -> lottoNumbers.contains(winningNumber))
             .count();
