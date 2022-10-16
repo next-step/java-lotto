@@ -5,7 +5,7 @@ import java.util.List;
 public interface LottoCalculateStrategy {
     int calculateLottoTicketCount(Money money);
 
-    List<List<Lotto>> buyLottoes(int ticketCount);
+    List<List<LottoNumber>> buyLottoes(int ticketCount);
 
-    Statistics calculateStatistics(List<List<Lotto>> lottoes, List<Lotto> winningLottoes, Money buyAmount);
+    Statistics calculateStatistics(List<List<LottoNumber>> lottoes, List<LottoNumber> winningLottoes, Money buyAmount);
 }

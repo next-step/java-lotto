@@ -6,11 +6,11 @@ public class LottoAutoCalculateStrategy implements LottoCalculateStrategy {
     private static final Money LOTTO_TICKET_PRICE = new Money(1000);
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int WINNING_LOTTO_COUNT = 6;
-    private static final List<Lotto> lottoCandidates = new ArrayList<>();
+    private static final List<LottoNumber> lottoCandidates = new ArrayList<>();
 
     static {
         for (int i = 0; i < MAX_LOTTO_NUMBER; i++) {
-            lottoCandidates.add(new Lotto(i + 1));
+            lottoCandidates.add(new LottoNumber(i + 1));
         }
     }
 
@@ -20,19 +20,19 @@ public class LottoAutoCalculateStrategy implements LottoCalculateStrategy {
     }
 
     @Override
-    public List<List<Lotto>> buyLottoes(int ticketCount) {
-        List<List<Lotto>> lottoes = new ArrayList<>();
+    public List<List<LottoNumber>> buyLottoes(int ticketCount) {
+        List<List<LottoNumber>> lottoes = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             Collections.shuffle(lottoCandidates);
-            List<Lotto> lottos = new ArrayList<>(lottoCandidates.subList(0, WINNING_LOTTO_COUNT));
-            lottos.sort(Comparator.comparing(Lotto::getNumber));
+            List<LottoNumber> lottos = new ArrayList<>(lottoCandidates.subList(0, WINNING_LOTTO_COUNT));
+            lottos.sort(Comparator.comparing(LottoNumber::getNumber));
             lottoes.add(lottos);
         }
         return lottoes;
     }
 
     @Override
-    public Statistics calculateStatistics(List<List<Lotto>> lottoes, List<Lotto> winningLottoes, Money buyAmount) {
+    public Statistics calculateStatistics(List<List<LottoNumber>> lottoes, List<LottoNumber> winningLottoes, Money buyAmount) {
         Map<WinningPrize, Integer> winningStats = calculateWinningStats(lottoes, winningLottoes);
 
         Money sum = new Money();
@@ -44,14 +44,14 @@ public class LottoAutoCalculateStrategy implements LottoCalculateStrategy {
         return new Statistics(winningStats, earningRate);
     }
 
-    private Map<WinningPrize, Integer> calculateWinningStats(List<List<Lotto>> lottoes, List<Lotto> winningLottoes) {
+    private Map<WinningPrize, Integer> calculateWinningStats(List<List<LottoNumber>> lottoes, List<LottoNumber> winningLottoes) {
         Map<WinningPrize, Integer> winningStats = new HashMap<>();
         winningStats.put(WinningPrize.THREE, 0);
         winningStats.put(WinningPrize.FOUR, 0);
         winningStats.put(WinningPrize.FIVE, 0);
         winningStats.put(WinningPrize.SIX, 0);
 
-        for (List<Lotto> lottoList : lottoes) {
+        for (List<LottoNumber> lottoList : lottoes) {
             int count = matchingWinningLotto(winningLottoes, lottoList);
             WinningPrize.findWinningPrize(count)
                     .ifPresent(winningPrize -> {
@@ -61,15 +61,15 @@ public class LottoAutoCalculateStrategy implements LottoCalculateStrategy {
         return winningStats;
     }
 
-    private int matchingWinningLotto(List<Lotto> winningLottoes, List<Lotto> lottoList) {
+    private int matchingWinningLotto(List<LottoNumber> winningLottoes, List<LottoNumber> lottoList) {
         int count = 0;
-        for (Lotto lotto : lottoList) {
+        for (LottoNumber lotto : lottoList) {
             count = isWinningLottoesHaveLotto(winningLottoes, count, lotto);
         }
         return count;
     }
 
-    private int isWinningLottoesHaveLotto(List<Lotto> winningLottoes, int count, Lotto lotto) {
+    private int isWinningLottoesHaveLotto(List<LottoNumber> winningLottoes, int count, LottoNumber lotto) {
         if (winningLottoes.contains(lotto)) {
             count += 1;
         }

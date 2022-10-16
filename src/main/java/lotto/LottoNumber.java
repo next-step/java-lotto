@@ -2,10 +2,10 @@ package lotto;
 
 import java.util.Objects;
 
-public class Lotto {
+public class LottoNumber {
     private final int number;
 
-    public Lotto(int number) {
+    public LottoNumber(int number) {
         this.number = number;
     }
 
@@ -17,7 +17,7 @@ public class Lotto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
+        LottoNumber lotto = (LottoNumber) o;
         return number == lotto.number;
     }
 

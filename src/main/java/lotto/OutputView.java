@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public static void printLottoes(List<List<Lotto>> lottoes) {
+    public static void printLottoes(List<List<LottoNumber>> lottoes) {
         System.out.printf("%d개를 구매했습니다.\n", lottoes.size());
         System.out.println(lottoes);
     }

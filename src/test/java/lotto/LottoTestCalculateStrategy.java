@@ -12,15 +12,15 @@ public class LottoTestCalculateStrategy implements LottoCalculateStrategy {
     }
 
     @Override
-    public List<List<Lotto>> buyLottoes(int ticketCount) {
-        List<List<Lotto>> list = new ArrayList<>();
+    public List<List<LottoNumber>> buyLottoes(int ticketCount) {
+        List<List<LottoNumber>> list = new ArrayList<>();
         list.add(new ArrayList<>());
-        list.get(0).add(new Lotto(1));
+        list.get(0).add(new LottoNumber(1));
         return list;
     }
 
     @Override
-    public Statistics calculateStatistics(List<List<Lotto>> lottoes, List<Lotto> winningLottoes, Money buyAmount) {
+    public Statistics calculateStatistics(List<List<LottoNumber>> lottoes, List<LottoNumber> winningLottoes, Money buyAmount) {
         Map<WinningPrize, Integer> winningStats = new HashMap<>();
         winningStats.put(WinningPrize.THREE, 1);
         double earningRate = 0.0;
