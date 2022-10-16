@@ -24,7 +24,9 @@ public class ResultStats {
     }
 
     public double returnOnInvestment(final int price) {
-        return prizesOfUser().stream().mapToDouble(LottoPrize::amount).sum() / (double) price;
+        return prizesOfUser().stream()
+                .mapToDouble(LottoPrize::amount)
+                .sum() / (double) price;
     }
 
     private List<LottoPrize> prizesOfUser() {
@@ -34,6 +36,6 @@ public class ResultStats {
     }
 
     private boolean containBonusNumber(final Lotto lotto) {
-        return lotto.lottoNumbers().contains(winningLotto.bonusNumber());
+        return lotto.contains(winningLotto.bonusNumber());
     }
 }
