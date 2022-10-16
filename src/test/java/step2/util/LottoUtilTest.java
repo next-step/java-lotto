@@ -6,15 +6,23 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoUtilTest {
 
     @Test
     @DisplayName("지불한 금액만큼 로또 티켓 개수 반환")
-    void getNumOfTicketsTestSuccess() {
+    void getNumOfTicketsSuccess() {
         assertThat(LottoUtil.getNumOfTickets(3000))
                 .isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("금액 부족으로 로또 티켓 개수 반환 실패")
+    void getNumOfTicketsFailByPriceLowerThan1000() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoUtil.getNumOfTickets(900));
     }
 
     @Test
@@ -30,20 +38,4 @@ public class LottoUtilTest {
                 .isEqualTo(numbers);
     }
 
-    @Test
-    @DisplayName("파라미터로 넘어온 숫자 배열의 앞 6개 번호만 잘라서 반환")
-    void generateLottoNumbersSuccess() {
-        List<Integer> numbers1 = new ArrayList<>();
-        for (int i = 5; i < 60; i++) {
-            numbers1.add(i);
-        }
-
-        List<Integer> lottoNumbers = new ArrayList<>();
-        for (int i = 5; i < 11; i++) {
-            lottoNumbers.add(i);
-        }
-
-        assertThat(LottoUtil.generateLottoNumbers(numbers1))
-                .isEqualTo(lottoNumbers);
-    }
 }
