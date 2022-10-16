@@ -122,8 +122,8 @@ class AnalystTest {
     @MethodSource("getCountByRankOneLottoParam")
     void getCountByRankOneLotto(List<LottoNumber> LottoNumbers, LottoNumber winNumber, BonusNumber bonusNumber, Map<Integer, Long> expectedCountByRank) {
         Analyst analyst = new Analyst(LottoNumbers, winNumber, bonusNumber);
-        Map<Rank, Long> countByRank = analyst.getCountByRanks();
-        Set<Map.Entry<Rank, Long>> countByRankEntrySets = countByRank.entrySet();
+        CountsByRank countsByRank = analyst.getCountsByRank();
+        Set<Map.Entry<Rank, Long>> countByRankEntrySets = countsByRank.getCountsByRank().entrySet();
         Set<Map.Entry<Integer, Long>> expectedEntrySet = expectedCountByRank.entrySet();
         countByRankEntrySets.forEach(countByRankEntrySet -> assertThat(countByRankEntrySet).isIn(expectedEntrySet));
     }
@@ -191,8 +191,8 @@ class AnalystTest {
     @MethodSource("getCountByRankMultiLottoParam")
     void getCountByRankMultiLotto(List<LottoNumber> LottoNumbers, LottoNumber winNumber, BonusNumber bonusNumber, Map<Integer, Long> expectedCountByRank) {
         Analyst analyst = new Analyst(LottoNumbers, winNumber, bonusNumber);
-        Map<Rank, Long> countByRank = analyst.getCountByRanks();
-        Set<Map.Entry<Rank, Long>> countByRankEntrySets = countByRank.entrySet();
+        CountsByRank countsByRank = analyst.getCountsByRank();
+        Set<Map.Entry<Rank, Long>> countByRankEntrySets = countsByRank.getCountsByRank().entrySet();
         Set<Map.Entry<Integer, Long>> expectedEntrySet = expectedCountByRank.entrySet();
         countByRankEntrySets.forEach(countByRankEntrySet -> assertThat(countByRankEntrySet).isIn(expectedEntrySet));
     }
@@ -245,7 +245,7 @@ class AnalystTest {
     @MethodSource("revenueRatioOneLottoParam")
     void revenueRatioOneLotto(List<LottoNumber> LottoNumbers, LottoNumber winNumber, BonusNumber bonusNumber, float expectedRatio) {
         Analyst analyst = new Analyst(LottoNumbers, winNumber, bonusNumber);
-        float revenueRatio = analyst.revenueRatio(analyst.getCountByRanks());
+        float revenueRatio = analyst.revenueRatio(analyst.getCountsByRank());
         assertThat(revenueRatio).isEqualTo(expectedRatio);
 
     }
@@ -295,7 +295,7 @@ class AnalystTest {
     @MethodSource("revenueRatioMultiLottoParam")
     void revenueRatioMultiLotto(List<LottoNumber> gambleHistory, LottoNumber winNumber, BonusNumber bonusNumber, float expectedRatio) {
         Analyst analyst = new Analyst(gambleHistory, winNumber, bonusNumber);
-        float revenueRatio = analyst.revenueRatio(analyst.getCountByRanks());
+        float revenueRatio = analyst.revenueRatio(analyst.getCountsByRank());
         assertThat(revenueRatio).isEqualTo(expectedRatio);
 
     }

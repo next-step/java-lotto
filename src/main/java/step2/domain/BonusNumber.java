@@ -1,17 +1,11 @@
 package step2.domain;
 
-public class BonusNumber {
+public class BonusNumber implements LottoNumberRange {
     private final int bonusNumber;
     public BonusNumber(int bonusNumber, LottoNumber winNumber) {
-        validateRange(bonusNumber);
+        validateNumberRange(bonusNumber);
         validateDuplicateWinLottoNumber(bonusNumber, winNumber);
         this.bonusNumber = bonusNumber;
-    }
-
-    public void validateRange(int bonusNumber) {
-        if (bonusNumber > 45 || bonusNumber < 1) {
-            throw new IllegalArgumentException("보너스 번호는 1~45 정수여야 합니다. 입력한 보너스 번호: " + bonusNumber);
-        }
     }
 
     private void validateDuplicateWinLottoNumber(int bonusNumber, LottoNumber winNumber) {

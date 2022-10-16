@@ -18,17 +18,9 @@ public class Analyst {
         this.bonusNumber = bonusNumber;
     }
 
-    public Map<Rank, Long> getCountByRanks() {
-        Map<Rank, Long> matchByCount = groupByRank();
-        return putEmptyRank(matchByCount);
-    }
-
-    private Map<Rank, Long> putEmptyRank(Map<Rank, Long> matchByCount) {
-        TreeMap<Rank, Long> countAllRanks = new TreeMap<>(matchByCount);
-        Arrays.stream(Rank.values())
-                .filter(rank -> !countAllRanks.containsKey(rank))
-                .forEach(rank -> countAllRanks.put(rank, 0L));
-        return countAllRanks;
+    public CountsByRank getCountsByRank() {
+        CountsByRank countsByRank = new CountsByRank(groupByRank());
+        return countsByRank.mergeEmptyRank();
     }
 
     private Map<Rank, Long> groupByRank() {
@@ -45,13 +37,7 @@ public class Analyst {
                 ));
     }
 
-    public float revenueRatio(Map<Rank, Long> countByRank) {
-        return ((float) totalRevenue(countByRank)) / targetData.size();
-    }
-
-    private long totalRevenue(Map<Rank, Long> countByRank) {
-        return countByRank.entrySet().stream()
-                .map(entries -> entries.getKey().getWinningMoney() * entries.getValue() / 1000)
-                .reduce(0L, Long::sum);
+    public float revenueRatio(CountsByRank countsByRank) {
+        return ((float) countsByRank.totalRevenue()) / targetData.size();
     }
 }

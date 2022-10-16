@@ -4,49 +4,49 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Rank {
-    FIRST(2_000_000_000,
-            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 6,
-            "6개 일치"
+    FIRST(6,
+            2_000_000_000,
+            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 6
     ),
-    SECOND(30_000_000,
-            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 5 && matchBonus,
-            "5개 일치, 보너스 볼 일치"
+    SECOND(5,
+            30_000_000,
+            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 5 && matchBonus
     ),
-    THIRD(1_500_000,
-            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 5 && !matchBonus,
-            "5개 일치"
+    THIRD(5,
+            1_500_000,
+            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 5 && !matchBonus
     ),
-    FOURTH(50_000,
-            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 4,
-            "4개 일치"
+    FOURTH(4,
+            50_000,
+            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 4
     ),
-    FIFTH(5_000,
-            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 3,
-            "3개 일치"
+    FIFTH(3,
+            5_000,
+            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch == 3
     ),
     MISS(0,
-            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch < 3,
-            "일치하지 않음"
+            0,
+            (Integer countOfMatch, Boolean matchBonus) -> countOfMatch < 3
     );
+
+    private final int countOfMatch;
 
     private final int winningMoney;
 
     private final BiFunction<Integer, Boolean, Boolean> createFunction;
 
-    private final String matchMessage;
-
-    Rank(int winningMoney, BiFunction<Integer, Boolean, Boolean> createFunction, String matchMessage) {
+    Rank(int countOfMatch, int winningMoney, BiFunction<Integer, Boolean, Boolean> createFunction) {
+        this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
         this.createFunction = createFunction;
-        this.matchMessage = matchMessage;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
     public int getWinningMoney() {
         return winningMoney;
-    }
-
-    public String getMatchMessage() {
-        return matchMessage;
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {

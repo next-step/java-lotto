@@ -1,5 +1,6 @@
 package step2.view;
 
+import step2.domain.CountsByRank;
 import step2.domain.LottoNumber;
 import step2.domain.Rank;
 
@@ -12,16 +13,18 @@ public class ResultView {
 
     private static final String MATCH_MESSAGE_FORMAT = "%s (%d원)- %d개\n";
 
-    private static final List<Rank> MATCH_PRINT_EXCLUDE_RANKS = List.of(Rank.MISS);
+    private static final String MATCH_COUNT_MESSAGE_SUFFIX = "개 일치";
+
+    private static final String BONUS_BALL_MATCH_MESSAGE_SUFFIX = ", 보너스 볼 일치";
 
     public void printLottoNumbers(List<LottoNumber> lottoNumbers) {
         lottoNumbers.forEach(System.out::println);
         printEndLottoNumbers();
     }
 
-    public void printCountByRank(Map<Rank, Long> countByRank) {
+    public void printCountByRank(CountsByRank countByRank, List<Rank> excludePrintRank) {
         printInitMessage();
-        printMatch(countByRank);
+        printMatch(countByRank, excludePrintRank);
     }
 
     public void printRevenueRatio(float revenueRatio) {
@@ -36,25 +39,34 @@ public class ResultView {
         System.out.println(INIT_MESSAGE);
     }
 
-    private void printMatch(Map<Rank, Long> countByRanks) {
-        Map<Rank, Long> descMap = sortByDesc(countByRanks);
-        descMap.entrySet().forEach(this::printMatch);
+    private void printMatch(CountsByRank countsByRank, List<Rank> excludePrintRank) {
+        CountsByRank descCountsByRank = countsByRank.sortByDesc();
+        descCountsByRank
+                .getCountsByRank()
+                .entrySet()
+                .forEach(entity -> printMatch(entity, excludePrintRank));
     }
 
-    private Map<Rank, Long> sortByDesc(Map<Rank, Long> countByRanks) {
-        Map<Rank, Long> descMap = new TreeMap<>(Collections.reverseOrder());
-        descMap.putAll(countByRanks);
-        return descMap;
-    }
-
-    private void printMatch(Map.Entry<Rank, Long> countByRank) {
-        if (!MATCH_PRINT_EXCLUDE_RANKS.contains(countByRank.getKey())) {
+    private void printMatch(Map.Entry<Rank, Long> countByRank, List<Rank> excludePrintRank) {
+        if (!excludePrintRank.contains(countByRank.getKey())) {
             System.out.printf(
                     MATCH_MESSAGE_FORMAT,
-                    countByRank.getKey().getMatchMessage(),
+                    getMatchCountMessage(countByRank.getKey()),
                     countByRank.getKey().getWinningMoney(),
                     countByRank.getValue()
             );
         }
+    }
+
+    private String getMatchCountMessage(Rank rank) {
+        String matchCountMessage = rank.getCountOfMatch() + MATCH_COUNT_MESSAGE_SUFFIX;
+        return addBonusBallMessage(rank, matchCountMessage);
+    }
+
+    private String addBonusBallMessage(Rank rank, String message) {
+        if (rank == Rank.SECOND) {
+            return message + BONUS_BALL_MATCH_MESSAGE_SUFFIX;
+        }
+        return message;
     }
 }
