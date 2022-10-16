@@ -1,34 +1,30 @@
 package lotto.strategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import lotto.domain.Lotto;
 
 public class AutoIssueLottoStrategy implements IssueLottoStrategy {
 
     private final static AutoIssueLottoStrategy INSTANCE = new AutoIssueLottoStrategy();
 
-    private final Random random = new Random();
+    private final List<Integer> numbers = new ArrayList<>();
     private final int DIGIT = 6;
     private final int BOUND = 45;
 
     private AutoIssueLottoStrategy() {
+        for (int i = 1; i <= BOUND; i++) {
+            numbers.add(i);
+        }
     }
 
     @Override
-    public List<Lotto> issue(final int number) {
+    public List<Lotto> issue(final int quantity) {
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            result.add(new Lotto(generateLottoNumbers()));
-        }
-        return result;
-    }
-
-    private List<Integer> generateLottoNumbers() {
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < DIGIT; i++) {
-            result.add(random.nextInt(BOUND) + 1);
+        for (int i = 0; i < quantity; i++) {
+            Collections.shuffle(numbers);
+            result.add(new Lotto(numbers.subList(0, DIGIT)));
         }
         return result;
     }
