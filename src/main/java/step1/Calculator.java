@@ -15,6 +15,8 @@ public class Calculator {
 
     public static void calculate(String input) {
         String[] arguments = split(input);
+        validateExpression(arguments);
+        
         Deque<Integer> operands = collectOperands(arguments);
         Deque<Operator> operators = collectOperators(arguments);
     }
@@ -49,5 +51,15 @@ public class Calculator {
         } catch (NumberFormatException e) {
             throw new NumberFormatException("피연산자 변환 과정에서 오류가 발생했습니다. 정수를 입력해주세요.");
         }
+    }
+
+    private static void validateExpression(String[] arguments) {
+        if (hasEvenCount(arguments)) {
+            throw new IllegalArgumentException("올바르지 않은 계산식입니다.");
+        }
+    }
+
+    private static boolean hasEvenCount(String[] arguments) {
+        return arguments.length % 2 == 0;
     }
 }

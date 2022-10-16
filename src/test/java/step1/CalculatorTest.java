@@ -50,4 +50,12 @@ class CalculatorTest {
         assertThatThrownBy(() -> Calculator.calculate(input))
             .isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("유효하지 않은 계산식일 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"1 + ", "1 +  ", "  + 2"})
+    void calculateInvalidExpressionTest(String input) {
+        assertThatThrownBy(() -> Calculator.calculate(input))
+            .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
 }
