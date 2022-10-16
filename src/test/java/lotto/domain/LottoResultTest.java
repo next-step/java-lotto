@@ -14,50 +14,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoResultTest {
 
     @ParameterizedTest
-    @MethodSource("argumentsForMatchTest")
-    void 당첨정보(LottoResult lottoResult, int count, boolean hasBonusNumber, boolean expected) {
-        assertThat(lottoResult.match(count, hasBonusNumber)).isEqualTo(expected);
-    }
-
-    private static Stream<Arguments> argumentsForMatchTest() {
-        return Stream.of(
-                Arguments.of(LottoResult.FIRST, 6, true, true),
-                Arguments.of(LottoResult.FIRST, 6, false, true),
-
-                Arguments.of(LottoResult.SECOND, 5, true, true),
-                Arguments.of(LottoResult.SECOND, 5, false, false),
-
-                Arguments.of(LottoResult.THIRD, 5, false, true),
-                Arguments.of(LottoResult.THIRD, 5, true, false),
-
-                Arguments.of(LottoResult.FORTH, 4, true, true),
-                Arguments.of(LottoResult.FORTH, 4, false, true),
-
-                Arguments.of(LottoResult.FIFTH, 3, true, true),
-                Arguments.of(LottoResult.FIFTH, 3, false, true),
-
-                Arguments.of(LottoResult.NONE, 2, true, true),
-                Arguments.of(LottoResult.NONE, 1, true, true),
-                Arguments.of(LottoResult.NONE, 0, false, true)
-        );
-    }
-
-    @ParameterizedTest
     @MethodSource("argumentsForCreateTest")
-    void 생성(LottoResult lottoResult, int matchCount, boolean hasBonusNumber) {
+    void 생성(int matchCount, boolean hasBonusNumber, LottoResult lottoResult) {
         assertThat(LottoResult.from(matchCount, hasBonusNumber)).isEqualTo(lottoResult);
     }
 
     private static Stream<Arguments> argumentsForCreateTest() {
         return Stream.of(
-                Arguments.of(LottoResult.FIRST, 6, true),
-                Arguments.of(LottoResult.SECOND, 5, true),
-                Arguments.of(LottoResult.THIRD, 5, false),
-                Arguments.of(LottoResult.FORTH, 4, true),
-                Arguments.of(LottoResult.FIFTH, 3, true),
-                Arguments.of(LottoResult.NONE, 2, true),
-                Arguments.of(LottoResult.NONE, 1, true),
-                Arguments.of(LottoResult.NONE, 0, true)
+                Arguments.of(6, true, LottoResult.FIRST),
+                Arguments.of(6, false, LottoResult.FIRST),
+
+                Arguments.of(5, true, LottoResult.SECOND),
+                Arguments.of(5, false, LottoResult.THIRD),
+
+                Arguments.of(4, true, LottoResult.FORTH),
+                Arguments.of(4, false, LottoResult.FORTH),
+
+                Arguments.of(3, true, LottoResult.FIFTH),
+                Arguments.of(3, false, LottoResult.FIFTH),
+
+                Arguments.of(2, true, LottoResult.NONE),
+                Arguments.of(2, false, LottoResult.NONE),
+                Arguments.of(1, false, LottoResult.NONE),
+                Arguments.of(0, false, LottoResult.NONE)
         );
     }
 }

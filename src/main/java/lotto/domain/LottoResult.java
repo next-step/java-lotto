@@ -7,7 +7,7 @@ import java.util.function.BiPredicate;
  * Created by seungwoo.song on 2022-10-06
  */
 public enum LottoResult {
-    
+
     FIRST(2000000000, "6개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 6),
     SECOND(30000000, "5개 일치, 보너스 볼 일치", (matchCount, isBonusNumberMatch) -> matchCount == 5 && isBonusNumberMatch),
     THIRD(1500000, "5개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 5 && !isBonusNumberMatch),
@@ -36,7 +36,7 @@ public enum LottoResult {
         return money;
     }
 
-    public boolean match(int matchCount, boolean hasBonusNumber) {
+    private boolean match(int matchCount, boolean hasBonusNumber) {
         return resultMatcher.test(matchCount, hasBonusNumber);
     }
 
