@@ -10,12 +10,8 @@ public class Lotto {
         this(LottoNumberSet.createLottoNumberSet());
     }
 
-    public Lotto(LottoNumberSet lottoNumberSet) {
+    public Lotto(final LottoNumberSet lottoNumberSet) {
         this.lottoNumbers = lottoNumberSet;
-    }
-
-    protected LottoNumberSet numbers() {
-        return this.lottoNumbers;
     }
 
     @Override
