@@ -15,9 +15,11 @@ import java.util.Map;
 
 public class LottoController {
 
-    private LottoService lottoService;
-    public static int REWARD_START_RANK = 5;
-    public static int REWARD_END_RANK = 1;
+    private final LottoService lottoService;
+    private static final int REWARD_START_RANK = 5;
+    private static final int REWARD_END_RANK = 1;
+    private static final int BONUS_RANK = 2;
+
 
     public LottoController(LottoService lottoService) {
         this.lottoService = lottoService;
@@ -90,14 +92,14 @@ public class LottoController {
     }
 
     private void lottoMatchOutput(int rank, int matchNumber) {
-        if (bonusRank(rank)) {
+        if (isBonusRank(rank)) {
             LottoOutput.matchBonusNumber(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
             return;
         }
         LottoOutput.match(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
     }
 
-    private boolean bonusRank(int rank) {
-        return rank == 2;
+    private boolean isBonusRank(int rank) {
+        return rank == BONUS_RANK;
     }
 }
