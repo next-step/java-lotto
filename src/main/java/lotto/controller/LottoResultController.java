@@ -25,9 +25,7 @@ public class LottoResultController {
     }
 
     public void draw(final List<Lotto> lottos, final ImmutableMoney money) {
-        LottoWinner winner = drawWinner();
-
-        lottoResult(money, lottos, winner);
+        lottoResult(money, lottos, drawWinner());
     }
 
     private LottoWinner drawWinner() {
