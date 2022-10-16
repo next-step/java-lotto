@@ -22,12 +22,12 @@ public class TicketsByRanks {
         }
     }
 
-    public List<MyTicket> getTicketsByRank(Rank rank) {
-        return ticketsByRanks.getOrDefault(rank, new ArrayList<>());
-    }
-
     private void addTicketsByRanks(Rank rank, MyTicket myTicket) {
         ticketsByRanks.putIfAbsent(rank, new ArrayList<>());
         ticketsByRanks.get(rank).add(myTicket);
+    }
+
+    public List<MyTicket> getTicketsByRank(Rank rank) {
+        return ticketsByRanks.getOrDefault(rank, new ArrayList<>());
     }
 }

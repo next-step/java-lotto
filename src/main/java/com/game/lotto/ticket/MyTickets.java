@@ -1,6 +1,9 @@
 package com.game.lotto.ticket;
 
-import com.game.lotto.number.LottoNumberGenerator;
+import com.game.lotto.count.TicketCount;
+import com.game.lotto.number.ManualLottoNumberGenerator;
+import com.game.lotto.number.RandomLottoNumberGenerator;
+import com.game.lotto.number.SelectedLottoNumbers;
 import com.game.lotto.ui.ResultView;
 
 import java.util.ArrayList;
@@ -9,24 +12,25 @@ import java.util.stream.Collectors;
 
 public class MyTickets {
     private final List<MyTicket> myTickets;
-    private final LottoNumberGenerator numberGenerator;
 
-    public MyTickets(TicketCount ticketCount, LottoNumberGenerator numberGenerator) {
-        this.numberGenerator = numberGenerator;
+    public MyTickets() {
         this.myTickets = new ArrayList<>();
-        addRandomTicketsByCount(ticketCount);
     }
 
-    private void addRandomTicketsByCount(TicketCount ticketCount) {
-        int count = 0;
-        while (ticketCount.hasNext()) {
-            count++;
-            MyTicket randomMyTicket = new MyTicket(numberGenerator);
-            ResultView.printTicketNumbers(randomMyTicket);
-            this.myTickets.add(randomMyTicket);
-            ticketCount.next();
+    public void addManualTicketsByCount(List<SelectedLottoNumbers> manualLottoNumbers) {
+        for (SelectedLottoNumbers manualLottoNumber : manualLottoNumbers) {
+            MyTicket ticketByGenerator = new MyTicket(new ManualLottoNumberGenerator(manualLottoNumber.getSelectedNumbers()));
+            ResultView.printTicketNumbers(ticketByGenerator);
+            this.myTickets.add(ticketByGenerator);
         }
-        ResultView.printOutputCountMessage(count);
+    }
+
+    public void addRandomTicketsByCount(TicketCount ticketCount) {
+        for (int index = 0; index < ticketCount.getCount(); index++) {
+            MyTicket ticketByGenerator = new MyTicket(new RandomLottoNumberGenerator());
+            ResultView.printTicketNumbers(ticketByGenerator);
+            this.myTickets.add(ticketByGenerator);
+        }
     }
 
     public List<MyTicket> getTickets() {

@@ -1,5 +1,8 @@
 package com.game.lotto.rate;
 
+import com.game.lotto.count.TicketCount;
+import com.game.lotto.money.Money;
+import com.game.lotto.number.LottoNumber;
 import com.game.lotto.number.RandomLottoNumberGenerator;
 import com.game.lotto.ticket.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,14 +12,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class EarningRatesTest {
 
-    private static final int TOTAL_AMOUNT_OF_TICKET_MONEY = 14_000;
-    private final static int BONUS_NUMBER = 7;
+    private static final TicketCount TICKET_COUNT = new TicketCount(14);
+    private static final LottoNumber BONUS_NUMBER = new LottoNumber(7);
+    private static final Money TOTAL_AMOUNT_OF_TICKET_MONEY = new Money(14_000);
 
     private MyTickets myTickets;
 
     @BeforeEach
     void set_up() {
-        myTickets = new MyTickets(new TicketCount(TOTAL_AMOUNT_OF_TICKET_MONEY), new RandomLottoNumberGenerator());
+        myTickets = new MyTickets();
+        myTickets.addRandomTicketsByCount(TICKET_COUNT);
     }
 
     @Test

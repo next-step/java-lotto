@@ -1,36 +1,37 @@
 package com.game.lotto.ticket;
 
+import com.game.lotto.number.LottoNumber;
 import com.game.lotto.number.LottoNumberGenerator;
+import com.game.lotto.number.SelectedLottoNumbers;
 import com.game.lotto.prize.Rank;
-
-import java.util.List;
+import com.game.lotto.count.Strike;
 
 public class MyTicket {
     public static final int PRICE_OF_TICKET_UNIT = 1_000;
 
-    private final List<Integer> numbers;
+    private final SelectedLottoNumbers numbers;
 
     public MyTicket(LottoNumberGenerator lottoNumberGenerator) {
         numbers = lottoNumberGenerator.generateNumbers();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     public Rank compareWinnerNumbersAndGetStrikes(WinnerTicket winnerTicket) {
-        int strikes = 0;
-        for (Integer number : this.numbers) {
-            strikes = addStrikeIfNumberExists(winnerTicket, strikes, number);
+        Strike strikes = new Strike();
+        for (LottoNumber number : this.numbers.getSelectedNumbers()) {
+            addStrikeIfNumberExists(winnerTicket, strikes, number);
         }
-        boolean containsBonusBall = strikes == 5 && numbers.contains(winnerTicket.getBonusNumber());
-        return Rank.valueOf(strikes, containsBonusBall);
+        boolean isMyNumberContainsBonusBall = numbers.getSelectedNumbers().contains(winnerTicket.getBonusNumber());
+        return Rank.valueOf(strikes, isMyNumberContainsBonusBall);
     }
 
-    private int addStrikeIfNumberExists(WinnerTicket winnerTicket, int strikes, Integer number) {
-        if (winnerTicket.getNumbers().contains(number)) {
-            return strikes + 1;
+    private void addStrikeIfNumberExists(WinnerTicket winnerTicket, Strike strikes, LottoNumber number) {
+        if (winnerTicket.getNumbers().getSelectedNumbers().contains(number)) {
+            strikes.addCount(1);
         }
-        return strikes;
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
