@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -65,11 +65,12 @@ public class LottosTest {
                 Rank.FIRST, 0,
                 Rank.SECOND, 1,
                 Rank.THIRD, 0,
-                Rank.FOURTH, 1
+                Rank.FOURTH, 0,
+                Rank.FIFTH, 1
             )
         );
 
-        Assertions.assertThat(bank).isEqualTo(new Bank(rankIntegerEnumMap));
+        assertThat(bank).isEqualTo(new Bank(rankIntegerEnumMap));
     }
 
 
