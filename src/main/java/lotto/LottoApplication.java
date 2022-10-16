@@ -15,8 +15,10 @@ public class LottoApplication {
         printPurchaseNumber(lottos.lottosSize());
         printLottoNumbers(lottos);
 
-        Lotto lotto = new Lotto(new ManualNumberGenerator(inputWinningNumber()));
-        LottoNumber bonus = LottoNumber.from(inputBonusBall());
+        String winningNumber = inputWinningNumber();
+        int bonusNumber = inputBonusBall();
+        Lotto lotto = new Lotto(new ManualNumberGenerator(winningNumber));
+        LottoNumber bonus = LottoNumber.from(bonusNumber);
         RankMap rankMap = lottos.getResult(lotto, bonus);
         printWinningResult(rankMap);
         printProfitRate(rankMap, lottos.lottosSize());
