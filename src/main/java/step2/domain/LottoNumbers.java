@@ -6,7 +6,6 @@ import java.util.List;
 public class LottoNumbers {
 
     private List<Integer> lottoNumbers = new ArrayList<>();
-    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private LottoNumbers() {
         generateLottoNumbers();
@@ -17,9 +16,7 @@ public class LottoNumbers {
     }
 
     private void generateLottoNumbers() {
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-            this.lottoNumbers.add(LottoNumberGenerator.generateLottoNumber());
-        }
+        lottoNumbers.addAll(LottoNumberGenerator.generateLottoNumber());
     }
 
     public List<Integer> getLottoNumbers() {

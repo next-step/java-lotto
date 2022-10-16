@@ -37,10 +37,10 @@ public enum Prize {
         this.matchCount = matchCount;
     }
 
-    public static int calculateTotalIncome(final Map<Integer, Integer> drawLottoResult){
+    public static int calculateTotalIncome(final Map<Prize, Integer> drawLottoResult){
         int totalReward = 0;
-        for (int matchCount : drawLottoResult.keySet()) {
-            totalReward += Prize.getPrize(matchCount).getReward();
+        for (Prize prize: drawLottoResult.keySet()) {
+            totalReward += prize.getReward();
         }
         return totalReward;
     }

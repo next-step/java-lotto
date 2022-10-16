@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoResult {
 
     private final List<Integer> winningNumbers;
-    private final Map<Integer, Integer> drawResult = new LinkedHashMap();
+    private final Map<Prize, Integer> drawResult = new LinkedHashMap();
     private final int LEAST_DRAW_COUNT = 3;
 
     private LottoResult(final List<Integer> winningNumbers) {
@@ -19,23 +19,27 @@ public class LottoResult {
         return new LottoResult(winningNumbers);
     }
 
-    public final Map<Integer, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers) {
+    public final Map<Prize, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers) {
         for (LottoNumbers eachLottoNumber : allLottoNumbers) {
             List<Integer> lottoNumbers = eachLottoNumber.getLottoNumbers();
-            drawEachLottoResult(eachLottoNumber, lottoNumbers);
+            int matchCount = calculateMatchCount(lottoNumbers);
+
+            if (matchCount >= LEAST_DRAW_COUNT) {
+                Prize prize = Prize.getPrize(matchCount);
+                drawResult.put(prize, drawResult.getOrDefault(prize, 0) + 1);
+            }
         }
 
         return drawResult;
     }
 
-    private void drawEachLottoResult(final LottoNumbers eachLottoNumber,
-        final List<Integer> lottoNumbers) {
-        int count = (int) winningNumbers.stream()
-            .filter(winningNumber -> lottoNumbers.contains(winningNumber))
-            .count();
-
-        if (count >= LEAST_DRAW_COUNT) {
-            drawResult.put(count, drawResult.getOrDefault(count, 0) + 1);
+    private int calculateMatchCount(List<Integer> lottoNumbers) {
+        int matchCount = 0;
+        for (Integer lottoNumber : lottoNumbers) {
+            if (winningNumbers.contains(lottoNumber)) {
+                matchCount++;
+            }
         }
+        return matchCount;
     }
 }

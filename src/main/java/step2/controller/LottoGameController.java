@@ -26,7 +26,7 @@ public class LottoGameController {
 
         final LottoResult lottoResult = LottoResult.from(InputView.inputWinningNumbers());
 
-        final Map<Integer, Integer> drawLottoResult = lottoResult.drawLottoResult(lottoNumbers);
+        final Map<Prize, Integer> drawLottoResult = lottoResult.drawLottoResult(lottoNumbers);
         OutputView.printDrawResult(drawLottoResult);
         final int totalIncome = Prize.calculateTotalIncome(drawLottoResult);
         OutputView.printGrossReturn(ticket, totalIncome);
