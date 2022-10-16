@@ -4,7 +4,7 @@ import lotto.domain.Amount;
 import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumberSet;
-import lotto.service.LottoService;
+import lotto.service.LottoPurchaseService;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
@@ -13,14 +13,14 @@ import java.util.List;
 
 public class LottoPurchaseController {
 
-    private final LottoService lottoService;
+    private final LottoPurchaseService lottoPurchaseService;
 
-    public LottoPurchaseController(LottoService lottoService) {
-        this.lottoService = lottoService;
+    public LottoPurchaseController(LottoPurchaseService lottoPurchaseService) {
+        this.lottoPurchaseService = lottoPurchaseService;
     }
 
     public List<Lotto> purchaseLotto(final ImmutableMoney immutableMoney) {
-        Amount totalAmount = lottoService.purchaseNumber(immutableMoney);
+        Amount totalAmount = lottoPurchaseService.purchaseNumber(immutableMoney);
         List<Lotto> lottoList = purchaseAutoLotto(totalAmount, purchaseManualLotto());
         LottoOutput.lotto(lottoList);
         return lottoList;
@@ -29,7 +29,7 @@ public class LottoPurchaseController {
     private List<Lotto> purchaseAutoLotto(final Amount totalAmount, final List<Lotto> lottoList) {
         Amount autoAmount = totalAmount.minus(new Amount(lottoList.size()));
         LottoOutput.purchaseCount(new Amount(lottoList.size()), autoAmount);
-        lottoList.addAll(lottoService.purchaseLotto(autoAmount));
+        lottoList.addAll(lottoPurchaseService.purchaseLotto(autoAmount));
         return lottoList;
     }
 
@@ -37,7 +37,7 @@ public class LottoPurchaseController {
         LottoOutput.purchaseManualAmount();
         Amount manualAmount = LottoInput.purchaseManualAmount();
         LottoOutput.manualLottoNumbers();
-        return lottoService.purchaseLotto(inputLottoNumberSet(manualAmount));
+        return lottoPurchaseService.purchaseLotto(inputLottoNumberSet(manualAmount));
     }
 
     private static List<LottoNumberSet> inputLottoNumberSet(final Amount manualAmount) {

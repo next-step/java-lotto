@@ -16,25 +16,6 @@ public class LottoService {
     private final int LOTTO_MINIMUM_REWARD_RANK = 5;
     private final int LOTTO_FIRST_RANK = 1;
     private final int LOTTO_MATCH_DEFAULT_COUNT = 0;
-    public static final ImmutableMoney LOTTO_PRICE = new ImmutableMoney(1000);
-
-    public Amount purchaseNumber(final ImmutableMoney immutableMoney) {
-        return new Amount(immutableMoney.money().divide(LOTTO_PRICE.value()).intValue());
-    }
-
-    public List<Lotto> purchaseLotto(final Amount amount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < amount.amount(); i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
-    }
-
-    public List<Lotto> purchaseLotto(final List<LottoNumberSet> lottoNumberSetList) {
-        return lottoNumberSetList.stream()
-                .map(lottoNumberSet -> new Lotto(lottoNumberSet))
-                .collect(Collectors.toList());
-    }
 
     public Map<Integer, Integer> checkLotto(final List<Lotto> lottos, final LottoWinner winner) {
         Map<Integer, Integer> result = getDefaultRankMap();
