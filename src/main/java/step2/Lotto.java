@@ -9,10 +9,14 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Lotto {
+	private final int LOTTO_START = 1;
+	private final int LOTTO_END = 45;
+	private final int LOTTO_PICK_START = 0;
+	private final int LOTTO_PICK_END = 5;
 	private List<Integer> balls = new ArrayList<>();
 
 	public Lotto() {
-		for (int i = 1; i <= 45 ; i++) {
+		for (int i = LOTTO_START; i <= LOTTO_END ; i++) {
 			this.balls.add(i);
 		}
 	}
@@ -21,7 +25,7 @@ public class Lotto {
 		Set<Integer> shuffle = new TreeSet<>();
 		Collections.shuffle(balls);
 
-		for (int i = 0; i <= 5; i++) {
+		for (int i = LOTTO_PICK_START; i <= LOTTO_PICK_END; i++) {
 			shuffle.add(balls.get(i));
 		}
 
