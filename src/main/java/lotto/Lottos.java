@@ -1,9 +1,13 @@
 package lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
+    private final static long LOTTO_PRICE = 1000;
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
@@ -45,5 +49,24 @@ public class Lottos {
         return lottos.stream()
             .filter(lotto -> Division.FOURTH == lotto.checkDivision(winners))
             .count();
+    }
+
+    public double calculateProfitRate(List<Number> winners) {
+        BigDecimal profitRate = calculateTotalProfit(winners).divide(calculatePrincipal(), 2, RoundingMode.DOWN);
+        return profitRate.doubleValue();
+    }
+
+    private BigDecimal calculateTotalProfit(List<Number> winners) {
+        return Division.sumPrize(getDivisions(winners));
+    }
+
+    private List<Division> getDivisions(List<Number> winners) {
+        return lottos.stream()
+            .map(lotto -> lotto.checkDivision(winners))
+            .collect(Collectors.toUnmodifiableList());
+    }
+
+    private BigDecimal calculatePrincipal() {
+        return BigDecimal.valueOf(lottos.size() * LOTTO_PRICE);
     }
 }
