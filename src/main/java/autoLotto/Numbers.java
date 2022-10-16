@@ -12,9 +12,9 @@ public class Numbers {
         }
 
         for (Integer number : numbers) {
-            if (number > 45) {
-                throw new IllegalArgumentException("당청 숫자는 1 ~ 45만 입력 가능합니다.");
-            }
+//            if (number > 45) {
+//                throw new IllegalArgumentException("당청 숫자는 1 ~ 45만 입력 가능합니다.");
+//            }
         }
         this.numbers = numbers;
     }

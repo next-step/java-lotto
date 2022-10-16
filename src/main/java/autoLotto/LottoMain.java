@@ -1,12 +1,11 @@
 package autoLotto;
 
-import java.util.List;
-
 public class LottoMain {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
+        Calculator calculator = new Calculator();
         Lottos lottos = new Lottos();
 
         Quantity quantity = new Quantity(inputView.inputAmount());
@@ -18,7 +17,8 @@ public class LottoMain {
         }
         outputView.outputLottos(lottos);
 
-        List<Integer> numbers = inputView.inputNumbers();
+        double result = calculator.matchNumber(lottos, new Numbers(inputView.inputNumbers()), quantityQuantity * 1000);
 
+        outputView.outputResult(result);
     }
 }
