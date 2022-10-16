@@ -5,8 +5,13 @@ import java.util.Objects;
 public class Amount {
 
     private final int amount;
+    private final static String AMOUNT_BOUND_EXCEPTION = "Amount에는 0이상의 값만 들어올 수 있습니다.";
+
 
     public Amount(final int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException(AMOUNT_BOUND_EXCEPTION);
+        }
         this.amount = amount;
     }
 

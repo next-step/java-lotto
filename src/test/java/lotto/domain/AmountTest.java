@@ -1,7 +1,9 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class AmountTest {
 
@@ -9,6 +11,12 @@ public class AmountTest {
     void create() {
         Amount actual = new Amount(3);
 
-        Assertions.assertThat(actual).isEqualTo(new Amount(3));
+        assertThat(actual).isEqualTo(new Amount(3));
+    }
+
+    @DisplayName("Amount는 음수 값이 들어오면 IllegalArgumentException를 반환한다.")
+    @Test
+    void valid() {
+        assertThatThrownBy(() -> new Amount(-1)).isInstanceOf(IllegalArgumentException.class);
     }
 }
