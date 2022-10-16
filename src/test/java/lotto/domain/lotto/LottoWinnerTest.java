@@ -1,9 +1,7 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
-import lotto.domain.lotto.LottoWinner;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -28,10 +26,7 @@ public class LottoWinnerTest {
                 Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 7)), 2),
                 Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 8)), 3),
                 Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(3, 4, 5, 6, 7, 8)), 4),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)), 5),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(5, 6, 7, 8, 9, 10)), 0),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(6, 7, 8, 9, 10, 11)), 0),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)), 0)
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)), 5)
         );
     }
 

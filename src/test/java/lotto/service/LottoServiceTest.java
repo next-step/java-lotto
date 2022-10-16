@@ -5,7 +5,6 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.domain.lotto.LottoWinner;
-import lotto.service.LottoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +46,7 @@ public class LottoServiceTest {
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
         assertThat(lottoService.checkLotto(lottoList, winner))
-                .isEqualTo(Map.of(0, 3, 1, 1, 2, 1, 3, 1, 4, 1, 5, 1));
+                .isEqualTo(Map.of(1, 1, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1));
     }
 
     @DisplayName("로또 수익률을 반환한다.")
