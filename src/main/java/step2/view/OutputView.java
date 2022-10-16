@@ -30,8 +30,8 @@ public class OutputView {
     public static void printDrawResult(final Map<Integer, Integer> drawLottoResult) {
         System.out.println();
         for (int matchCount : drawLottoResult.keySet()) {
-            int prizeMoney = Prize.getPrizeMoney(matchCount);
-            System.out.println(matchCount + "개 일치 (" + prizeMoney + ")-" + drawLottoResult.get(matchCount) );
+            int reward = Prize.getPrize(matchCount).getReward();
+            System.out.println(matchCount + "개 일치 (" + reward + ")-" + drawLottoResult.get(matchCount) );
         }
     }
 
