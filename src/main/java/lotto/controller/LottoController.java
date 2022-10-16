@@ -25,20 +25,12 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public void draw() {
-        ImmutableMoney immutableMoney = purchaseMoney();
-
-        List<Lotto> lottos = purchaseLotto(immutableMoney);
+    public void draw(final ImmutableMoney money) {
+        List<Lotto> lottos = purchaseLotto(money);
 
         LottoWinner winner = drawWinner();
 
-        lottoResult(immutableMoney, lottos, winner);
-    }
-
-    private ImmutableMoney purchaseMoney() {
-        LottoOutput.purchaseAmount();
-
-        return LottoInput.money();
+        lottoResult(money, lottos, winner);
     }
 
     private List<Lotto> purchaseLotto(final ImmutableMoney immutableMoney) {
