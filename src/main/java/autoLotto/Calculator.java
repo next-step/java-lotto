@@ -1,15 +1,11 @@
 package autoLotto;
 
-import static autoLotto.Match.*;
-
 public class Calculator {
-    public double matchNumber(Lottos lottos, Numbers numbers, int amount) {
-        System.out.println("amout :: " + amount);
+
+    public double calculate(Lottos lottos, Numbers numbers, int amount) {
         Long totalAmount = 0L;
         for (int i = 0 ; i < lottos.getLottosSize() ; i++) {
-            int matchNumQuantity = lottos.getLotto(i).getMatchQuantity(numbers.getNumbers());
-
-            getTotalCount(matchNumQuantity);
+            getTotalCount(lottos.getLotto(i).getMatchQuantity(numbers.getNumbers()));
             totalAmount = getTotalAmount();
         }
         return Math.floor(((double)totalAmount / amount) * 100) / 100.0;
@@ -18,29 +14,15 @@ public class Calculator {
     private Long getTotalAmount() {
         Long result = 0L;
 
-        result += THREE.getCountOfMatch() * THREE.getWinningAmount();
-        result += FOUR.getCountOfMatch() * FOUR.getWinningAmount();
-        result += FIVE.getCountOfMatch() * FIVE.getWinningAmount();
-        result += SIX.getCountOfMatch() * SIX.getWinningAmount();
+        for ( Match match : Match.values()) {
+            result += match.getTotalAmount();
+        }
 
         return result;
     }
 
     private void getTotalCount(int matchNumQuantity) {
-        if (matchNumQuantity == THREE.getMatchNum()) {
-            THREE.countOfMatch();
-        }
-
-        if (matchNumQuantity == FOUR.getMatchNum()) {
-            FOUR.countOfMatch();
-        }
-
-        if (matchNumQuantity == FIVE.getMatchNum()) {
-            FIVE.countOfMatch();
-        }
-
-        if (matchNumQuantity == SIX.getMatchNum()) {
-            SIX.countOfMatch();
-        }
+        Match match = Matcher.get(matchNumQuantity);
+        match.countOfMatch();
     }
 }

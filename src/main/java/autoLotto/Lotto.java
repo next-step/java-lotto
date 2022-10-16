@@ -1,7 +1,7 @@
 package autoLotto;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +21,10 @@ public class Lotto {
         Collections.sort(lotto);
     }
 
+    public Lotto(Integer[] numbers) {
+        this.lotto = Arrays.asList(numbers);
+    }
+
     @Override
     public String toString() {
         return lotto.toString();
@@ -28,11 +32,19 @@ public class Lotto {
 
     public int getMatchQuantity(List<Integer> numbers) {
         int count = 0;
+
         for (Integer number : numbers) {
-            if (lotto.contains(number)) {
-                count++;
-            }
+            count = getCount(count, number);
+        }
+
+        return count;
+    }
+
+    private int getCount(int count, Integer number) {
+        if (lotto.contains(number)) {
+            count++;
         }
         return count;
     }
+
 }
