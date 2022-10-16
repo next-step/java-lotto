@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final String VALID_VALUE_PATTERN = "[0-9]";
+    private static final String VALID_VALUE_PATTERN = "[0-9]+";
     private final int MIN = 1;
     private final int MAX = 45;
 
@@ -23,9 +23,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber from(final String value) {
-        String trimmed = value.trim();
-        validateToParse(trimmed);
-        return new LottoNumber(Integer.parseInt(trimmed));
+        validateToParse(value);
+        return new LottoNumber(Integer.parseInt(value.trim()));
     }
 
     private static void validateToParse(final String value) {
@@ -33,7 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new IllegalArgumentException("입력 값이 누락되었습니다.");
         }
 
-        if (!Pattern.matches(VALID_VALUE_PATTERN, value)) {
+        if (!Pattern.matches(VALID_VALUE_PATTERN, value.trim())) {
             throw new IllegalArgumentException("변환할 수 없는 문자가 포함되어 있습니다.");
         }
     }

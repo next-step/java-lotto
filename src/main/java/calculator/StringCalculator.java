@@ -5,7 +5,7 @@ import calculator.operator.Operator;
 
 public class StringCalculator {
 
-    private static final StringCalculator instance = new StringCalculator();
+    private static final StringCalculator INSTANCE = new StringCalculator();
 
     private StringCalculator() {
     }
@@ -39,6 +39,6 @@ public class StringCalculator {
     }
 
     public static StringCalculator getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }

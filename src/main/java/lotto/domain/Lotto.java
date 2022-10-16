@@ -3,20 +3,26 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.random.RandomLottoNumberGenerator;
 
 public class Lotto {
 
-    private final int PLACE = 6;
+    private final int DIGIT = 6;
     private final String SEPARATOR = ",";
 
     private final List<LottoNumber> numbers = new ArrayList<>();
 
-    public Lotto() {
-        for (int i = 0; i < PLACE; i++) {
-            this.numbers.add(RandomLottoNumberGenerator.generate());
-        }
+    public Lotto(List<Integer> values) {
+        validateCount(values);
+        values.forEach(value -> {
+            this.numbers.add(new LottoNumber(value));
+        });
         Collections.sort(this.numbers);
+    }
+
+    private void validateCount(final List<Integer> values) {
+        if (values.size() != DIGIT) {
+            throw new IllegalArgumentException("6개의 숫자를 입력해주세요.");
+        }
     }
 
     public Lotto(final String value) {
@@ -29,7 +35,7 @@ public class Lotto {
     }
 
     private void validateCount(final String[] splited) {
-        if (splited.length != PLACE) {
+        if (splited.length != DIGIT) {
             throw new IllegalArgumentException("6개의 숫자를 입력해주세요.");
         }
     }

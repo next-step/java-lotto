@@ -15,7 +15,7 @@ public class LottoStorageTest {
     @Test
     @DisplayName("matchWithWinningLotto 메소드는 저장된 로또와 주어진 로또를 비교한 결과를 반환한다.")
     void matchWithWinningLotto() {
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6,");
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
         List<Lotto> lottos = List.of(
             new Lotto("2, 3, 4, 5, 6, 7"),
             new Lotto("3, 4, 5, 6, 7, 8"),

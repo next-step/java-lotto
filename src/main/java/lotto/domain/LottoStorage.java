@@ -22,4 +22,8 @@ public class LottoStorage {
 
         return result;
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }
