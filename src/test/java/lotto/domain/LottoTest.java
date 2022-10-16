@@ -3,18 +3,9 @@ package lotto.domain;
 import lotto.generator.ManualNumberGenerator;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-
-   /* @Test
-    public void 로또번호_서로다른_6개숫자() {
-        List<Integer> lottoNumbers = new Lotto(lotto).getRandomNumbers();
-        Set<Integer> lottoSet = new HashSet<>(lottoNumbers);
-        assertThat(lottoSet).hasSize(6);
-    }*/
 
     @Test
     public void 로또_일치하는_번호_6개() {

@@ -12,11 +12,9 @@ public class Lottos {
     private NumberGenerator numberGenerator = new RandomNumberGenerator();
 
     private List<Lotto> lottoList;
-    private Map<Integer, Integer> result;
 
     public Lottos(int amount) {
         this.lottoList = new ArrayList<>();
-        this.result = new HashMap<>();
 
         int n = amount / LOTTO_PRICE;
         for (int i = 0; i < n; i++) {
@@ -26,24 +24,22 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
-        this.result = new HashMap<>();
     }
 
     public int lottosSize() {
         return this.lottoList.size();
     }
 
-    public Map<Integer, Integer> getResult(Lotto winning) {
+    public RankMap getResult(Lotto winning, LottoNumber bonus) {
+        RankMap rankMap = new RankMap();
         for (Lotto lotto : lottoList) {
             int sameNumbers = lotto.getSameNumberCount(winning);
-            int count = result.getOrDefault(sameNumbers, 0);
-            result.put(sameNumbers, count + 1);
-        }
-        return result;
-    }
+            boolean winBonus = lotto.getLottoNumbers().contains(bonus);
 
-    public double getProfitRate() {
-        return (double) result.get(Lotto.MAX_MATCH_NUMBER) / lottosSize();
+            Rank rank = Rank.valueOf(sameNumbers, winBonus);
+            rankMap.addRank(rank);
+        }
+        return rankMap;
     }
 
     public List<Lotto> getLottoList() {

@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.RankMap;
 import lotto.generator.ManualNumberGenerator;
 
 import static lotto.view.InputView.*;
@@ -15,7 +16,9 @@ public class LottoApplication {
         printLottoNumbers(lottos);
 
         Lotto lotto = new Lotto(new ManualNumberGenerator(inputWinningNumber()));
-        printWinningResult(lottos.getResult(lotto));
-        printProfitRate(lottos);
+        LottoNumber bonus = LottoNumber.from(inputBonusBall());
+        RankMap rankMap = lottos.getResult(lotto, bonus);
+        printWinningResult(rankMap);
+        printProfitRate(rankMap, lottos.lottosSize());
     }
 }

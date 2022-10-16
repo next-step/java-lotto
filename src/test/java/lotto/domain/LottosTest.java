@@ -4,7 +4,6 @@ import lotto.generator.ManualNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -26,15 +25,19 @@ public class LottosTest {
         lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 5, 20")));
         lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 15, 20")));
         lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 3, 14, 15, 20")));
+        lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 13, 14, 15, 20")));
 
         Lottos lottos = new Lottos(lottoList);
         Lotto winning = new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 5, 6"));
-        Map<Integer, Integer> result = lottos.getResult(winning);
+        LottoNumber bonus = LottoNumber.from(10);
+        RankMap rankMap = lottos.getResult(winning, bonus);
 
-        assertThat(result.get(3)).isEqualTo(1);
-        assertThat(result.get(4)).isEqualTo(1);
-        assertThat(result.get(5)).isEqualTo(2);
-        assertThat(result.get(6)).isEqualTo(1);
+        assertThat(rankMap.getRankCount(Rank.MISS)).isEqualTo(1);
+        assertThat(rankMap.getRankCount(Rank.FIFTH)).isEqualTo(1);
+        assertThat(rankMap.getRankCount(Rank.FOURTH)).isEqualTo(1);
+        assertThat(rankMap.getRankCount(Rank.THIRD)).isEqualTo(1);
+        assertThat(rankMap.getRankCount(Rank.SECOND)).isEqualTo(1);
+        assertThat(rankMap.getRankCount(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
@@ -48,13 +51,14 @@ public class LottosTest {
         lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 5, 10")));
         lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 5, 20")));
         lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 5, 20")));
-        lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 15, 20")));
-        lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 3, 14, 15, 20")));
+        lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 13, 14, 15, 20")));
+        lottoList.add(new Lotto(new ManualNumberGenerator("1, 2, 13, 14, 15, 20")));
 
         Lottos lottos = new Lottos(lottoList);
         Lotto winning = new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 5, 6"));
-        lottos.getResult(winning);
+        LottoNumber bonus = LottoNumber.from(10);
+        RankMap rankMap = lottos.getResult(winning, bonus);
 
-        assertThat(lottos.getProfitRate()).isEqualTo(0.4);
+        assertThat(rankMap.getProfitRate(lottos.lottosSize())).isEqualTo(0.8);
     }
 }

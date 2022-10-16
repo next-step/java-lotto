@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
-    private final static int MIN_LOTTO_NUMBER = 1;
-    private final static int MAX_LOTTO_NUMBER = 45;
+    public final static int MIN_LOTTO_NUMBER = 1;
+    public final static int MAX_LOTTO_NUMBER = 45;
     public final static String OUT_OF_RANGE = "로또 번호는 1~45의 범위입니다.";
     private final static Map<Integer, LottoNumber> numbers = new HashMap<>();
 
