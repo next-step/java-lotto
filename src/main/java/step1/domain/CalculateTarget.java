@@ -2,15 +2,15 @@ package step1.domain;
 
 public class CalculateTarget {
 
-    private final int firstNum;
+    private final int firstOperand;
     private final String operator;
-    private final int secondNum;
+    private final int secondOperand;
 
-    public CalculateTarget(int firstNum, String operator, String secondNum) {
+    public CalculateTarget(int firstOperand, String operator, String secondOperand) {
         // 정수, 연산자 검증 및 int 변환
-        this.firstNum = firstNum;
+        this.firstOperand = firstOperand;
         this.operator = operator;
-        this.secondNum = Integer.parseInt(secondNum);
+        this.secondOperand = Integer.parseInt(secondOperand);
     }
 
     private int validation(int number) {
@@ -24,11 +24,11 @@ public class CalculateTarget {
         return operator;
     }
 
-    public int getFirstNum() {
-        return firstNum;
+    public int getFirstOperand() {
+        return firstOperand;
     }
 
-    public int getSecondNum() {
-        return secondNum;
+    public int getSecondOperand() {
+        return secondOperand;
     }
 }
