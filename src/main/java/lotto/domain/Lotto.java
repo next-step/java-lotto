@@ -45,7 +45,7 @@ public class Lotto {
                 .size();
     }
 
-    private boolean isMatch(LottoNumber lottoNumber) {
+    public boolean isMatch(LottoNumber lottoNumber) {
         return elements.contains(lottoNumber);
     }
 

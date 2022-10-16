@@ -19,6 +19,7 @@ public class Application {
         OutputView.printGeneratedLottos(lottos);
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
+        BonusBall bonusBall = createBonusBall(lastWeekWinningLotto);
         WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWeekWinningLotto);
         OutputView.printWinningStatistics(winningStatistics, money.calculatePrice());
     }
@@ -38,6 +39,15 @@ public class Application {
         } catch (NotNumberStringException | OutOfRangeLottoNumberException | InvalidLottoNumberSizeException e) {
             System.out.println(e.getMessage());
             return createLastWeekWinningLotto();
+        }
+    }
+
+    private static BonusBall createBonusBall(final Lotto lastWeekWinningLotto) {
+        try {
+            return new BonusBall(InputView.receiveBonusBall(), lastWeekWinningLotto);
+        } catch (NotNumberStringException | OutOfRangeLottoNumberException | DuplicateLottoNumberException e) {
+            System.out.println(e.getMessage());
+            return createBonusBall(lastWeekWinningLotto);
         }
     }
 }
