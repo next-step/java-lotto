@@ -18,6 +18,16 @@ public final class LottoUtil {
         return paidAmount / LOTTO_PRICE;
     }
 
+    private static void verifyInputNumber(int value) {
+        if (!isPurchasable(value)) {
+            throw new IllegalArgumentException(value + "원으로 로또를 구매할 수 없습니다.");
+        }
+    }
+
+    private static boolean isPurchasable(int paidAmount) {
+        return paidAmount >= 1000;
+    }
+
     public static List<Integer> splitStringToNumbers(String winningNumbers) {
         String[] splitNumbers = winningNumbers.split(SPLIT_COMMA_SPACE);
         List<Integer> numbers = new ArrayList<>();
@@ -34,15 +44,5 @@ public final class LottoUtil {
         if (numbers.size() != LOTTO_NUMBERS) {
             throw new IllegalArgumentException("로또는 6개의 숫자를 입력하셔야 합니다.");
         }
-    }
-
-    public static void verifyInputNumber(int value) {
-        if (!isPurchasable(value)) {
-            throw new IllegalArgumentException(value + "원으로 로또를 구매할 수 없습니다.");
-        }
-    }
-
-    private static boolean isPurchasable(int paidAmount) {
-        return paidAmount >= 1000;
     }
 }
