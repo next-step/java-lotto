@@ -9,7 +9,7 @@ public class Calculator {
     }
 
     public static int calculate(String valueText) {
-        if (valueText.isBlank()) throw new IllegalArgumentException(INVALID_INPUT);
+        if (valueText == null || valueText.isBlank()) throw new IllegalArgumentException(INVALID_INPUT);
 
         String[] values = valueText.split(" ");
         int result = toNumber(values[0]);

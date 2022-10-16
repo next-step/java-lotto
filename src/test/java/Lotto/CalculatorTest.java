@@ -2,7 +2,7 @@ package Lotto;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -52,7 +52,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", " "})
+    @NullAndEmptySource
     void 공백이_들어오면_exception_처리(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             Calculator.calculate(input);
