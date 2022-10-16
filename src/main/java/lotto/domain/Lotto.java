@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,13 @@ public class Lotto {
     private final static int COUNTS_OF_LOTTO_NUMBER = 6;
 
     private final List<LottoNumber> lottoNumbers;
+
+    public Lotto(String[] lottoNumbers) {
+        this(Arrays.stream(lottoNumbers)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::lottoNumber)
+                .collect(Collectors.toList()));
+    }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateLength(lottoNumbers);
