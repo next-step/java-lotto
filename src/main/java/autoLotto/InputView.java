@@ -1,6 +1,9 @@
 package autoLotto;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -13,14 +16,12 @@ public class InputView {
         return amount;
     }
 
-    public void inputNumbers() {
+    public List<Integer> inputNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        int inputNum = SCANNER.nextInt();
+        SCANNER.nextLine();
 
-        System.out.println(inputNum);
-//        List<Integer> numbers = Arrays.stream(inputNum.split(", "))
-//                .map(Integer :: parseInt).collect(Collectors.toList());
-
+        return Arrays.stream(SCANNER.nextLine().split(", "))
+                .map(Integer :: parseInt).collect(Collectors.toList());
     }
 }

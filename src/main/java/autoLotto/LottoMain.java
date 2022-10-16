@@ -1,5 +1,7 @@
 package autoLotto;
 
+import java.util.List;
+
 public class LottoMain {
 
     public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class LottoMain {
         }
         outputView.outputLottos(lottos);
 
-//        inputView.inputNumbers();
+        List<Integer> numbers = inputView.inputNumbers();
 
     }
 }
