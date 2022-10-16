@@ -56,17 +56,30 @@ public class Output {
     }
 
     private static String pickPrintLottoPurchaseDetail(final int countOfAutomaticTickets, final int countOfManualTickets) {
-        if (countOfManualTickets >= 1 && countOfAutomaticTickets < 1) {
+        if (isOnlyManualLotto(countOfAutomaticTickets, countOfManualTickets)) {
             return String.format(LOTTO_PURCHASE_MANUAL, countOfManualTickets);
         }
-        if (countOfAutomaticTickets >= 1 && countOfManualTickets < 1) {
+        if (isOnlyAutomaticLotto(countOfAutomaticTickets, countOfManualTickets)) {
             return String.format(LOTTO_PURCHASE_AUTOMATIC, countOfAutomaticTickets);
         }
-        if (countOfAutomaticTickets >= 1 && countOfManualTickets >= 1) {
+        if (isComplexLotto(countOfAutomaticTickets, countOfManualTickets)) {
             return String.format(LOTTO_PURCHASE_COMPLEX
                     , countOfManualTickets
                     , countOfAutomaticTickets);
         }
         throw new IllegalArgumentException("발급된 로또가 없습니다.");
     }
+
+    private static boolean isOnlyManualLotto(final int countOfAutomaticTickets, final int countOfManualTickets) {
+        return countOfManualTickets >= 1 && countOfAutomaticTickets < 1 ? true : false;
+    }
+
+    private static boolean isOnlyAutomaticLotto(final int countOfAutomaticTickets, final int countOfManualTickets) {
+        return countOfManualTickets < 1 && countOfAutomaticTickets >= 1 ? true : false;
+    }
+
+    private static boolean isComplexLotto(final int countOfAutomaticTickets, final int countOfManualTickets) {
+        return countOfManualTickets >= 1 && countOfAutomaticTickets >= 1 ? true : false;
+    }
+
 }
