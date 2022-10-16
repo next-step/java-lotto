@@ -9,7 +9,8 @@ public class OutputView {
     }
 
     public void outputLottos(Lottos lottos) {
+
         range(0, lottos.getLottosSize())
-                .forEach(i -> System.out.println(lottos.getLottos(i)));
+                 .forEach(i -> System.out.println(lottos.getLotto(i)));
     }
 }

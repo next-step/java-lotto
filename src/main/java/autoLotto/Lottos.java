@@ -14,7 +14,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public String getLottos(int i) {
-        return lottos.get(i).toString();
+    public Lotto getLotto(int i) {
+        return lottos.get(i);
     }
 }
