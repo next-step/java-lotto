@@ -1,6 +1,6 @@
-package lotto.command;
+package stringcalculator.command;
 
-import lotto.domain.Number;
+import stringcalculator.domain.Number;
 
 public interface Command {
     Number execute(Number leftNumber, Number rightNumber);

@@ -1,13 +1,13 @@
-package lotto.command;
+package stringcalculator.command;
 
-import lotto.domain.Number;
+import stringcalculator.domain.Number;
 
-public class MultiplyCommand implements Command {
-    private static final String OPERATOR = "*";
+public class DivideCommand implements Command {
+    private static final String OPERATOR = "/";
 
     @Override
     public Number execute(Number leftNumber, Number rightNumber) {
-        return leftNumber.multiply(rightNumber);
+        return leftNumber.divide(rightNumber);
     }
 
     @Override

@@ -1,7 +1,7 @@
-package lotto.domain;
+package stringcalculator.domain;
 
-import lotto.command.Command;
-import lotto.command.CommandFactory;
+import stringcalculator.command.Command;
+import stringcalculator.command.CommandFactory;
 
 public class ArithmeticExpression {
     private final Number leftNumber;
@@ -25,9 +25,9 @@ public class ArithmeticExpression {
     public ArithmeticExpression append(String value) {
         if (Number.isNumber(value)) {
             return appendNumber(value);
-        } else {
-            return appendCommand(value);
         }
+
+        return appendCommand(value);
     }
 
     private ArithmeticExpression appendNumber(String value) {
@@ -40,10 +40,6 @@ public class ArithmeticExpression {
         } else {
             return new ArithmeticExpression(this.leftNumber, this.command, Number.parse(value));
         }
-    }
-
-    private ArithmeticExpression appendLeftNumber(String value) {
-        return new ArithmeticExpression(Number.parse(value), this.command, this.rightNumber);
     }
 
     private ArithmeticExpression appendCommand(String value) {

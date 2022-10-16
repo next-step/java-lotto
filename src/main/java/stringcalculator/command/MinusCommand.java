@@ -1,6 +1,6 @@
-package lotto.command;
+package stringcalculator.command;
 
-import lotto.domain.Number;
+import stringcalculator.domain.Number;
 
 public class MinusCommand implements Command {
     private static final String OPERATOR = "-";

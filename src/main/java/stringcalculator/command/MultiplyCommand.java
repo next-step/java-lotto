@@ -1,13 +1,13 @@
-package lotto.command;
+package stringcalculator.command;
 
-import lotto.domain.Number;
+import stringcalculator.domain.Number;
 
-public class AddCommand implements Command {
-    private static final String OPERATOR = "+";
+public class MultiplyCommand implements Command {
+    private static final String OPERATOR = "*";
 
     @Override
     public Number execute(Number leftNumber, Number rightNumber) {
-        return leftNumber.add(rightNumber);
+        return leftNumber.multiply(rightNumber);
     }
 
     @Override
