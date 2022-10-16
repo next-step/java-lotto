@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class LottoRankRecord {
 
-    private LottoRank lottoRank;
-    private int number;
+    private final LottoRank lottoRank;
+    private final int number;
 
     public LottoRankRecord(LottoRank lottoRank, int number) {
         this.lottoRank = lottoRank;
         this.number = number;
     }
 
-    public int calculateSum() {
+    public long calculateSum() {
         return lottoRank.getWinPrize() * number;
     }
 

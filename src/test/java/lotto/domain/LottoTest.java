@@ -15,7 +15,7 @@ class LottoTest {
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5);
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("개의 숫자만 들어올 수 있습니다.");
+                .hasMessageContaining("개의 중복되지 않은 숫자만 들어올 수 있습니다.");
     }
 
     @Test
@@ -23,6 +23,7 @@ class LottoTest {
     void retrieveCopyLotto() {
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
+
         assertThat(lottoNumbers).isNotSameAs(lotto.retrieveNumbers());
     }
 
@@ -33,6 +34,6 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         Lotto correctLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
-        assertThat(lotto.retrieveCorrectLottoBallCount(correctLotto)).isEqualTo(5);
+        assertThat(lotto.retrieveWinnerLottoBallCount(correctLotto)).isEqualTo(5);
     }
 }
