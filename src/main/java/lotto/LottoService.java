@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoReward;
-import lotto.domain.LottoWinner;
-import lotto.domain.Money;
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,13 +10,13 @@ import java.util.Map;
 public class LottoService {
     public static final Money LOTTO_PRICE = new Money(1000);
 
-    public int purchaseNumber(Money money) {
-        return (int) money.divide(LOTTO_PRICE);
+    public Amount purchaseNumber(Money money) {
+        return new Amount(money.divide(LOTTO_PRICE).intValue());
     }
 
-    public List<Lotto> purchaseLotto(int count) {
+    public List<Lotto> purchaseLotto(Amount amount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < amount.amount(); i++) {
             lottos.add(new Lotto());
         }
         return lottos;

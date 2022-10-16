@@ -14,7 +14,7 @@ public class Money {
         this.money = money;
     }
 
-    public double divide(Money money) {
+    public Double divide(Money money) {
         return (double) this.money / money.money();
     }
 

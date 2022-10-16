@@ -15,6 +15,10 @@ public class Amount {
         this.amount = amount;
     }
 
+    public int amount() {
+        return amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -26,5 +30,10 @@ public class Amount {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(amount);
     }
 }
