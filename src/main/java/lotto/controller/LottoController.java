@@ -4,10 +4,7 @@ import lotto.domain.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static lotto.domain.LottoNumber.lottoNumbers;
 
@@ -15,10 +12,12 @@ public class LottoController {
 
     public void lottoGame() {
         Payment payment = new Payment(Input.amount(), Input.manualCount());
+        LottoMachine lottoMachine = new LottoMachine(lottoNumbers());
 
-        List<Lotto> manualLottoTickets = Input.manualLottoTickets(payment.manualCount()).stream().map(Lotto::new).collect(Collectors.toUnmodifiableList());
-        List<Lotto> automaticLottoTickets = new LottoMachine(lottoNumbers()).automaticIssue(payment.automaticCount());
-        List<Lotto> lottoTickets = Stream.concat(manualLottoTickets.stream(), automaticLottoTickets.stream()).collect(Collectors.toUnmodifiableList());
+        lottoMachine.manualIssue(Input.manualLottoTickets(payment.manualCount()));
+        lottoMachine.automaticIssue(payment.automaticCount());
+
+        List<Lotto> lottoTickets = lottoMachine.lottoTickets();
         Output.printPurchaseTickets(lottoTickets, payment.automaticCount(), payment.manualCount());
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(Input.winningNumberOfLastWeek()), LottoNumber.lottoNumber(Input.bonusNumberOfLastWeek()));

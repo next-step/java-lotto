@@ -50,10 +50,11 @@ public class LottoTest {
     @RepeatedTest(100)
     @DisplayName("발급된 로또와 당첨 번호의 매칭된 숫자의 수를 검증한다.")
     void compareNumber() {
-        List<Lotto> lottoTickets = new LottoMachine(lottoNumbers()).automaticIssue(1);
+        LottoMachine lottoMachine = new LottoMachine(lottoNumbers());
+        lottoMachine.automaticIssue(1);
 
         Lotto winningNumber = new WinningLotto(new Lotto(lottoNumbers), LottoNumber.lottoNumber(7)).winningLotto();
-        List<Integer> matchingCounts = lottoTickets.stream()
+        List<Integer> matchingCounts = lottoMachine.lottoTickets().stream()
                 .map(ticket -> ticket.compareNumber(winningNumber))
                 .collect(Collectors.toList());
 
