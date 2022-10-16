@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.domain.*;
 import lotto.domain.Money.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
@@ -16,13 +15,13 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoServiceTest {
+public class LottoResultServiceTest {
 
-    private LottoService lottoService;
+    private LottoResultService lottoResultService;
 
     @BeforeEach
     void setUp() {
-        this.lottoService = new LottoService();
+        this.lottoResultService = new LottoResultService();
     }
 
     @DisplayName("당첨번호와 일치하는 갯수 배열을 반환한다.")
@@ -40,7 +39,7 @@ public class LottoServiceTest {
         );
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
-        assertThat(lottoService.checkLotto(lottoList, winner))
+        assertThat(lottoResultService.checkLotto(lottoList, winner))
                 .isEqualTo(Map.of(1, 1, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1));
     }
 
@@ -56,6 +55,6 @@ public class LottoServiceTest {
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
 
-        assertThat(lottoService.yield(lottoList, winner, new Money(10000))).isEqualTo(0.5);
+        assertThat(lottoResultService.yield(lottoList, winner, new Money(10000))).isEqualTo(0.5);
     }
 }

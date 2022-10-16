@@ -1,17 +1,14 @@
 package lotto.service;
 
-import lotto.domain.*;
 import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.Money.Money;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.domain.LottoReward;
 import lotto.domain.lotto.LottoWinner;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class LottoService {
+public class LottoResultService {
 
     private final int LOTTO_MINIMUM_REWARD_RANK = 5;
     private final int LOTTO_FIRST_RANK = 1;
