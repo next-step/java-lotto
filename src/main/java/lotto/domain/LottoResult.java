@@ -26,7 +26,7 @@ public enum LottoResult {
 
     public static LottoResult from(int inputMatchCount, boolean isBonusBallMatch) {
         return Arrays.stream(values())
-                .filter(value -> value.resultMatcher.test(inputMatchCount, isBonusBallMatch))
+                .filter(value -> value.match(inputMatchCount, isBonusBallMatch))
                 .findAny()
                 .orElse(null);
     }
@@ -35,8 +35,8 @@ public enum LottoResult {
         return money;
     }
 
-    public BiPredicate<Integer, Boolean> getResultMatcher() {
-        return resultMatcher;
+    public boolean match(int inputMatchCount, boolean isBonusBallMatch) {
+        return resultMatcher.test(inputMatchCount, isBonusBallMatch);
     }
 
     public String getDescription() {

@@ -1,6 +1,11 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,23 +13,30 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by seungwoo.song on 2022-10-06
  */
 class LottoResultTest {
-    @Test
-    void 당첨정보() {
-        assertThat(LottoResult.FIRST.getMoney()).isEqualTo(2000000000);
-        assertThat(LottoResult.FIRST.getResultMatcher().test(6, true)).isTrue();
-        assertThat(LottoResult.FIRST.getResultMatcher().test(6, false)).isTrue();
 
-        assertThat(LottoResult.SECOND.getResultMatcher().test(5, true)).isTrue();
-        assertThat(LottoResult.SECOND.getResultMatcher().test(5, false)).isFalse();
+    private static Stream<Arguments> argumentsForLottoResultTest() {
+        return Stream.of(
+                Arguments.of(LottoResult.FIRST, 6, true, true),
+                Arguments.of(LottoResult.FIRST, 6, false, true),
 
-        assertThat(LottoResult.THIRD.getResultMatcher().test(5, true)).isFalse();
-        assertThat(LottoResult.THIRD.getResultMatcher().test(5, false)).isTrue();
+                Arguments.of(LottoResult.SECOND, 5, true, true),
+                Arguments.of(LottoResult.SECOND, 5, false, false),
 
-        assertThat(LottoResult.FORTH.getResultMatcher().test(4, true)).isTrue();
-        assertThat(LottoResult.FORTH.getResultMatcher().test(4, false)).isTrue();
+                Arguments.of(LottoResult.THIRD, 5, true, false),
+                Arguments.of(LottoResult.THIRD, 5, false, true),
 
-        assertThat(LottoResult.FIFTH.getResultMatcher().test(3, true)).isTrue();
-        assertThat(LottoResult.FIFTH.getResultMatcher().test(3, false)).isTrue();
+                Arguments.of(LottoResult.FORTH, 4, true, true),
+                Arguments.of(LottoResult.FORTH, 4, false, true),
+
+                Arguments.of(LottoResult.FIFTH, 3, true, true),
+                Arguments.of(LottoResult.FIFTH, 3, false, true)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("argumentsForLottoResultTest")
+    void 당첨정보(LottoResult lottoResult, int count, boolean hasBonusNumber, boolean expected) {
+        assertThat(lottoResult.match(count, hasBonusNumber)).isEqualTo(expected);
     }
 
     @Test
