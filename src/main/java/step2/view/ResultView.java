@@ -2,15 +2,19 @@ package step2.view;
 
 import step2.domain.LottoResult;
 import step2.domain.LottoTicket;
-import step2.domain.LottoTickets;
 import step2.domain.RankingAward;
 
+import java.util.List;
 import java.util.Map;
 
 public class ResultView {
 
-    public void printAllLottoNumbers(LottoTickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.getLottoNumbers()) {
+    public void printNumOfTickets(int numOfTickets) {
+        System.out.println(numOfTickets + "개를 구매했습니다.");
+    }
+
+    public void printAllLottoNumbers(List<LottoTicket> lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getNumbers());
         }
         System.out.println();

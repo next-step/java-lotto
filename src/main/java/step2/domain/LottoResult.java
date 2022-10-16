@@ -9,11 +9,14 @@ public class LottoResult {
 
     private final Map<Integer, Integer> lottoRankings = new HashMap<>();
 
+    private static final int MINIMUM_RANKING = 3;
+    private static final int MAXIMUM_RANKING = 6;
+
     private int prizeMoney;
     private String prizePercentage;
 
     public LottoResult() {
-        for (int i = 3; i < 7; i++) {
+        for (int i = MINIMUM_RANKING; i <= MAXIMUM_RANKING; i++) {
             lottoRankings.put(i, 0);
         }
     }
