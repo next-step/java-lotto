@@ -1,12 +1,16 @@
 package lottery;
 
+import java.util.List;
+
 public class Customer {
 
-    private final LotteryWallet lotteryWallet = new LotteryWallet();
+    private LotteryWallet lotteryWallet = new LotteryWallet();
 
-    public void purchase(int cashAmount) {
-        int availablePurchaseLotteryCount = LotteryCompany.getAvailablePurchaseLotteryCount(cashAmount);
-        lotteryWallet.generateLottery(availablePurchaseLotteryCount);
+    public void purchaseRandomLottery() {
+        List<Lottery> lotteries = lotteryWallet.getLotteries();
+        lotteries.add(LotteryCompany.generateRandomLotteryNumbers());
+
+        lotteryWallet = new LotteryWallet(lotteries);
     }
 
     public LotteryWallet getLotteryWallet() {

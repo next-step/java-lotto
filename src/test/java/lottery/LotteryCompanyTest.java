@@ -1,9 +1,11 @@
 package lottery;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,6 +14,15 @@ public class LotteryCompanyTest {
 
     static Lottery createLottery(Integer... values) {
         return new Lottery(Arrays.stream(values).map(LotteryNumber::new).collect(Collectors.toList()));
+    }
+
+    @Test
+    void generateRandomLotteryNumbers() {
+        Lottery lottery = LotteryCompany.generateRandomLotteryNumbers();
+        List<LotteryNumber> lotteryNumbers = lottery.getLotteryNumbers();
+
+        assertThat(lotteryNumbers).hasSize(6);
+        assertThat(lotteryNumbers).doesNotHaveDuplicates();
     }
 
     @ParameterizedTest

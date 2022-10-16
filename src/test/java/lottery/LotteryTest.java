@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,15 +16,6 @@ public class LotteryTest {
 
     static Lottery createLottery(Integer... values) {
         return new Lottery(Arrays.stream(values).map(LotteryNumber::new).collect(Collectors.toList()));
-    }
-
-    @Test
-    void generate_자동() {
-        Lottery lottery = new Lottery(Lottery.generateRandomLotteryNumbers());
-        List<LotteryNumber> lotteryNumbers = lottery.getLotteryNumbers();
-
-        assertThat(lotteryNumbers).hasSize(6);
-        assertThat(lotteryNumbers).doesNotHaveDuplicates();
     }
 
     @Test
