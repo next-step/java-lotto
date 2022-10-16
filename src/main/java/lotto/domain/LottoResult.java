@@ -8,11 +8,13 @@ import java.util.function.BiPredicate;
  */
 public enum LottoResult {
 
+
     FIRST(2000000000, "6개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 6),
     SECOND(30000000, "5개 일치, 보너스 볼 일치", (matchCount, isBonusNumberMatch) -> matchCount == 5 && isBonusNumberMatch),
     THIRD(1500000, "5개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 5 && !isBonusNumberMatch),
     FORTH(50000, "4개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 4),
-    FIFTH(5000, "3개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 3);
+    FIFTH(5000, "3개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 3),
+    NONE(0, "꽝", (matchCount, isBonusNumberMatch) -> matchCount < 3);
 
     private final int money;
     private final String description;
@@ -24,19 +26,19 @@ public enum LottoResult {
         this.resultMatcher = resultMatcher;
     }
 
-    public static LottoResult from(int inputMatchCount, boolean isBonusBallMatch) {
+    public static LottoResult from(int matchCount, boolean hasBonusNumber) {
         return Arrays.stream(values())
-                .filter(value -> value.match(inputMatchCount, isBonusBallMatch))
+                .filter(value -> value.match(matchCount, hasBonusNumber))
                 .findAny()
-                .orElse(null);
+                .orElse(NONE);
     }
 
     public int getMoney() {
         return money;
     }
 
-    public boolean match(int inputMatchCount, boolean isBonusBallMatch) {
-        return resultMatcher.test(inputMatchCount, isBonusBallMatch);
+    public boolean match(int matchCount, boolean hasBonusNumber) {
+        return resultMatcher.test(matchCount, hasBonusNumber);
     }
 
     public String getDescription() {
