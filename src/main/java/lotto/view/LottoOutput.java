@@ -24,11 +24,11 @@ public class LottoOutput {
         System.out.println(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", manual, auto));
     }
 
-    public static void lotto(Lotto lotto) {
+    public static void lotto(final Lotto lotto) {
         System.out.println(lotto.toString());
     }
 
-    public static void lotto(List<Lotto> lottoList) {
+    public static void lotto(final List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
             System.out.println(lotto);
         }
@@ -49,15 +49,15 @@ public class LottoOutput {
         System.out.println(result);
     }
 
-    public static void match(int count, ImmutableMoney reward, int number) {
+    public static void match(final int count, final ImmutableMoney reward, final int number) {
         System.out.println(String.format("%d개 일치 (%s원)- %d개", count, reward, number));
     }
 
-    public static void matchBonusNumber(int count, ImmutableMoney reward, int number) {
+    public static void matchBonusNumber(final int count, final ImmutableMoney reward, final int number) {
         System.out.println(String.format("%d개 일치, 보너스 볼 일치(%s원) - %d개", count, reward, number));
     }
 
-    public static void yield(double yield) {
+    public static void yield(final double yield) {
         if (yield < 1) {
             System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", yield));
         } else {
