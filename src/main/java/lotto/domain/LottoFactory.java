@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 /**
  * Created by seungwoo.song on 2022-10-06
@@ -18,18 +17,8 @@ public class LottoFactory {
 
         for (int i = 0; i < toProduceLottoCount; i++) {
             LOTTO_NUMBER_POOL.shuffle(shuffler);
-            lottos.add(createLotto(LOTTO_NUMBER_POOL));
+            lottos.add(Lotto.of(LOTTO_NUMBER_POOL.getRandomNumbers(LOTTO_NUMBER_COUNT)));
         }
         return lottos;
-    }
-
-    private Lotto createLotto(LottoNumberPool lottoNumberPool) {
-        List<Integer> collect = lottoNumberPool.get()
-                .stream()
-                .limit(LOTTO_NUMBER_COUNT)
-                .sorted()
-                .collect(Collectors.toList());
-
-        return Lotto.of(collect);
     }
 }

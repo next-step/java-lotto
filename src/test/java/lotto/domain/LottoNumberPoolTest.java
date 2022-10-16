@@ -3,14 +3,13 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by seungwoo.song on 2022-10-14
  */
-class LottoNumbersTest {
+class LottoNumberPoolTest {
 
     @Test
     void 생성() {
@@ -26,10 +25,7 @@ class LottoNumbersTest {
         lottoNumberPool.shuffle(numbers -> {
         });
 
-        List<Integer> limited = lottoNumberPool.get()
-                .stream()
-                .limit(6)
-                .collect(Collectors.toList());
+        List<Integer> limited = lottoNumberPool.getRandomNumbers(6);
 
         assertThat(limited).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }

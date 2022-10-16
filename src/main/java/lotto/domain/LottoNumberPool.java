@@ -21,8 +21,12 @@ public class LottoNumberPool {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> get() {
-        return lottoNumbers;
+    public List<Integer> getRandomNumbers(int count) {
+        return lottoNumbers
+                .stream()
+                .limit(count)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public void shuffle(Consumer<List<Integer>> shuffler) {
