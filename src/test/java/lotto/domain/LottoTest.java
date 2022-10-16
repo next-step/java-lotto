@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,40 +16,43 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
+    private List<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    public void initialLottoNumber() {
+        this.lottoNumbers = new ArrayList<>(Arrays.asList(
+                LottoNumber.lottoNumber(3), LottoNumber.lottoNumber(5), LottoNumber.lottoNumber(13)
+                , LottoNumber.lottoNumber(27), LottoNumber.lottoNumber(35), LottoNumber.lottoNumber(41)));
+    }
+
     @Test
-    @DisplayName("생성자 의존성 주입 - 로또 번호")
+    @DisplayName("로또 생성시 등록된 로또 번호를 조회한다.")
     void constructorDI() {
-        assertThat(new Lotto(LottoNumber.lottoNumbers().subList(0,6)).lottoNumbers().size()).isEqualTo(6);
+        assertThat(new Lotto(lottoNumbers).lottoNumbers()).hasSize(6);
     }
 
     @Test
-    @DisplayName("생성자 의존성 주입 - 당첨 번호 길이 예외")
+    @DisplayName("로또 생성시 로또 번호의 수가 6자리가 아닐 경우 예외가 발생한다.")
     void constructorDIExceptionForNumberLength() {
-        assertThatThrownBy(() -> new Lotto(LottoNumber.lottoNumbers().subList(0, 7))).isInstanceOf(IllegalArgumentException.class);
+        lottoNumbers.add(LottoNumber.lottoNumber(45));
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("생성자 의존성 주입 - 당첨 번호 중복 예외")
+    @DisplayName("로또 생성시 로또 번호에 중복되는 숫자가 있을 경우 예외가 발생한다.")
     void constructorDIExceptionForDuplicate() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumbers().subList(0, 5));
-        lottoNumbers.add(LottoNumber.lottoNumber(5));
-        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("발급 로또 조회")
-    void lottoNumber() {
-        LottoMachine lotto = new LottoMachine(lottoNumbers());
-        assertThat(lotto.automaticIssue(1).get(0).lottoNumbers()).hasSizeLessThanOrEqualTo(6);
-        assertThat(lotto.automaticIssue(1).get(0).lottoNumbers()).hasSizeGreaterThanOrEqualTo(0);
+        lottoNumbers.add(LottoNumber.lottoNumber(3));
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @RepeatedTest(100)
-    @DisplayName("발급 로또 티켓, 당첨 티켓 비교")
+    @DisplayName("발급된 로또와 당첨 번호의 매칭된 숫자의 수를 검증한다.")
     void compareNumber() {
         List<Lotto> lottoTickets = new LottoMachine(lottoNumbers()).automaticIssue(1);
 
-        Lotto winningNumber = new WinningLotto(new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6))), LottoNumber.lottoNumber(7)).winningLotto();
+        Lotto winningNumber = new WinningLotto(new Lotto(lottoNumbers), LottoNumber.lottoNumber(7)).winningLotto();
         List<Integer> matchingCounts = lottoTickets.stream()
                 .map(ticket -> ticket.compareNumber(winningNumber))
                 .collect(Collectors.toList());

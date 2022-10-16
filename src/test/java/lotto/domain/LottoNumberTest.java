@@ -15,7 +15,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("기본 생성 로또 번호 조회")
     void lottoNumbers() {
-        assertThat(LottoNumber.lottoNumbers().size()).isEqualTo(45);
+        assertThat(LottoNumber.lottoNumbers()).hasSize(45);
     }
 
     @Test
