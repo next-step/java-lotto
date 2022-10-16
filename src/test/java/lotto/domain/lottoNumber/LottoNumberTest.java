@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottoNumber;
 
 import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.Assertions;

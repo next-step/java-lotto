@@ -1,4 +1,4 @@
-package lotto;
+package lotto.service;
 
 import lotto.domain.*;
 import lotto.domain.lotto.Lotto;
