@@ -16,7 +16,7 @@ public class Output {
     private final static String LOTTO_RESULT = "== 로또 당첨 결과 ==";
     private final static String LOTTO_STATS_RANK = "%d개 일치 (%d원) - %d개";
     private final static String LOTTO_STATS_SECOND_RANK = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
-    private final static String LOTTO_RETURN_INVESTMENT = "총 수익률은 %f 입니다.";
+    private final static String LOTTO_RETURN_INVESTMENT = "총 수익률은 %.2f 입니다.";
 
     private Output() {
         throw new AssertionError();
