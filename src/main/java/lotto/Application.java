@@ -20,7 +20,7 @@ public class Application {
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
         BonusBall bonusBall = createBonusBall(lastWeekWinningLotto);
-        WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWeekWinningLotto);
+        WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWeekWinningLotto, bonusBall);
         OutputView.printWinningStatistics(winningStatistics, money.calculatePrice());
     }
 

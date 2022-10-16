@@ -11,9 +11,10 @@ import static lotto.domain.WinningInformation.*;
 
 public class OutputView {
 
-    private static final String MATCHES_COUNT_FORMAT = "%s개 일치 (%s원)- %s개\n";
+    private static final String MATCHES_COUNT_FORMAT = "%s개 일치%s (%s원)- %s개\n";
+    private static final String ADDITIONAL_BONUS_MESSAGE = ", 보너스 볼 일치";
     private static final List<WinningInformation> WINNING_INFORMATIONS =
-            List.of(THREE_MATCHES, FOUR_MATCHES, FIVE_MATCHES, SIX_MATCHES);
+            List.of(THREE_MATCHES, FOUR_MATCHES, FIVE_MATCHES, FIVE_AND_BONUS_MATCHES, SIX_MATCHES);
 
     private OutputView() {
         throw new AssertionError("OutputView는 생성자를 호출할 수 없습니다.");
@@ -35,9 +36,17 @@ public class OutputView {
         WINNING_INFORMATIONS.forEach(it -> System.out.printf(
                 MATCHES_COUNT_FORMAT,
                 it.getMatchesCount(),
+                additionalBonusMessage(it),
                 it.getAmount(),
                 winningStatistics.countSame(it)
         ));
         System.out.printf("총 수익률은 %s입니다.", winningStatistics.calculateYield(purchaseAmount));
+    }
+
+    private static String additionalBonusMessage(WinningInformation winningInformation) {
+        if(winningInformation.equals(FIVE_AND_BONUS_MATCHES)) {
+            return ADDITIONAL_BONUS_MESSAGE;
+        }
+        return "";
     }
 }

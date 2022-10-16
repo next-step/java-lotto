@@ -17,9 +17,9 @@ public class WinningStatistics {
         this.winningInformations = winningInformations;
     }
 
-    public static WinningStatistics of(final List<Lotto> lottos, final Lotto lastWeekWinningLotto) {
+    public static WinningStatistics of(final List<Lotto> lottos, final Lotto lastWeekWinningLotto, BonusBall bonusBall) {
         List<WinningInformation> winningInformations = lottos.stream()
-                .map(lotto -> WinningInformation.from(lotto.countMatches(lastWeekWinningLotto)))
+                .map(lotto -> WinningInformation.of(lotto.countMatches(lastWeekWinningLotto), lotto.isMatch(bonusBall)))
                 .collect(Collectors.toList());
         return new WinningStatistics(winningInformations);
     }
