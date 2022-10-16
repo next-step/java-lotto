@@ -1,49 +1,52 @@
 package lottery;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LotteryResult {
 
-    private final Map<Integer, Integer> prizes = new HashMap<>();
+    private final List<Integer> ranksInUse;
     private final Map<Integer, Integer> wonCounts = new HashMap<>();
 
-    private int totalAmounts;
-    private int lotteryPrice;
+    private final int totalAmounts;
+    private final int lotteryPrice;
+
+    public LotteryResult(List<Integer> ranksInUse, int totalAmounts, int lotteryPrice) {
+        this.ranksInUse = ranksInUse;
+        this.totalAmounts = totalAmounts;
+        this.lotteryPrice = lotteryPrice;
+    }
 
     public int getPrizeOf(int rank) {
-        return prizes.get(rank);
+        return LotteryRanks.getPrizeOfRank(rank);
     }
 
     public int getWonCountOf(int rank) {
+        validateRankInUse(rank);
         return wonCounts.getOrDefault(rank, 0);
     }
 
     public double getReturnRate() {
         double totalWonPrizes = 0.0;
-        for (int rank : prizes.keySet()) {
+        for (int rank : ranksInUse) {
             totalWonPrizes += getPrizeOf(rank) * getWonCountOf(rank);
         }
         return totalWonPrizes / (totalAmounts * lotteryPrice);
-    }
-
-    public void setPrizeOf(int rank, int prize) {
-        prizes.put(rank, prize);
-    }
-
-    public void setWonCountOf(int rank, int wonCount) {
-        wonCounts.put(rank, wonCount);
     }
 
     public void addWonCountOf(int rank) {
         wonCounts.put(rank, wonCounts.getOrDefault(rank, 0) + 1);
     }
 
-    public void setTotalAmounts(int totalAmounts) {
-        this.totalAmounts = totalAmounts;
+    protected void setWonCountOf(int rank, int wonCount) {
+        wonCounts.put(rank, wonCount);
     }
 
-    public void setLotteryPrice(int lotteryPrice) {
-        this.lotteryPrice = lotteryPrice;
+    private void validateRankInUse(int rank) {
+        if (!ranksInUse.contains(rank)) {
+            throw new IllegalArgumentException("지원하지 않는 등수입니다.");
+        }
     }
+
 }

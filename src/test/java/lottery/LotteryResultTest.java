@@ -13,20 +13,12 @@ public class LotteryResultTest {
 
     @BeforeEach
     void setUp() {
-        lotteryResult = new LotteryResult();
-
-        lotteryResult.setPrizeOf(3, 5000);
-        lotteryResult.setPrizeOf(4, 50000);
-        lotteryResult.setPrizeOf(5, 1500000);
-        lotteryResult.setPrizeOf(6, 2000000000);
+        lotteryResult = new LotteryResult(LotteryRanks.getRanksInUse(), 15, 1000);
 
         lotteryResult.setWonCountOf(3, 1);
         lotteryResult.setWonCountOf(4, 2);
         lotteryResult.setWonCountOf(5, 0);
         lotteryResult.setWonCountOf(6, 0);
-
-        lotteryResult.setTotalAmounts(15);
-        lotteryResult.setLotteryPrice(1000);
     }
 
     @ParameterizedTest

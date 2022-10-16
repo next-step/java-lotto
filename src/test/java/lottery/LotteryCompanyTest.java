@@ -15,7 +15,7 @@ public class LotteryCompanyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0:0", "1:0", "2:2", "3:2", "4:0", "5:0", "6:0"}, delimiter = ':')
+    @CsvSource(value = {"3:2", "4:0", "5:0", "6:0"}, delimiter = ':')
     void getLotteryResult(int rank, int expected) {
         LotteryWallet lotteryWallet = new LotteryWallet(Arrays.asList(
                 createLottery(1, 2, 3, 14, 15, 16),
