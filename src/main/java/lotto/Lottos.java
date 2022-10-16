@@ -22,4 +22,28 @@ public class Lottos {
     public int hashCode() {
         return Objects.hash(lottos);
     }
+
+    public long numberOfFirstDivision(List<Number> winners) {
+        return lottos.stream()
+            .filter(lotto -> Division.FIRST == lotto.checkDivision(winners))
+            .count();
+    }
+
+    public long numberOfSecondDivision(List<Number> winners) {
+        return lottos.stream()
+            .filter(lotto -> Division.SECOND == lotto.checkDivision(winners))
+            .count();
+    }
+
+    public long numberOfThirdDivision(List<Number> winners) {
+        return lottos.stream()
+            .filter(lotto -> Division.THIRD == lotto.checkDivision(winners))
+            .count();
+    }
+
+    public long numberOfFourthDivision(List<Number> winners) {
+        return lottos.stream()
+            .filter(lotto -> Division.FOURTH == lotto.checkDivision(winners))
+            .count();
+    }
 }
