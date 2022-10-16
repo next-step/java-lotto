@@ -47,7 +47,7 @@ class LottosTest {
                 )
         );
 
-        LottoResult result = lottos.getResult(winningNumbers);
+        LottoResult result = lottos.getResult(winningNumbers, new LottoNumber(7));
         List<Rank> ranks = result.getRanks();
 
         assertThat(ranks).isEqualTo(List.of(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.NONE, Rank.NONE));

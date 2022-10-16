@@ -14,7 +14,7 @@ public class LottoController {
         Lottos lottos = lottoGenerator.generateLottos(InputView.inputMoney());
         OutputView.printLotto(lottos.getLottos());
 
-        LottoResult result = lottos.getResult(InputView.inputWinningNumbers());
+        LottoResult result = lottos.getResult(InputView.inputWinningNumbers(), InputView.inputBonusBall());
         OutputView.printLottoResult(result);
     }
 }

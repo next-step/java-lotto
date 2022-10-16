@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Money;
 
 import java.util.Arrays;
@@ -27,5 +28,10 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
         return new Lotto(winningNumbers);
+    }
+
+    public static LottoNumber inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new LottoNumber(scanner.nextInt());
     }
 }

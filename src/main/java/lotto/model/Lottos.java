@@ -18,7 +18,7 @@ public class Lottos {
         }
     }
 
-    public LottoResult getResult(Lotto winningNumbers) {
+    public LottoResult getResult(Lotto winningNumbers, LottoNumber lottoNumber) {
         List<Rank> rewards = lottos.stream()
                 .map(lotto -> Rank.findRank(lotto.countCorrectNumber(winningNumbers)))
                 .collect(Collectors.toList());
