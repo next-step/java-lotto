@@ -1,7 +1,8 @@
 package lottoGame;
 
-import java.util.ArrayList;
-import java.util.List;
+import lottoGame.model.InputParameter;
+import lottoGame.model.Lottery;
+import lottoGame.model.factory.DefaultLottoFactory;
 
 public class LottoGenerator {
     private final int lotteryNum;
@@ -12,6 +13,6 @@ public class LottoGenerator {
 
     public Lottery create() {
 
-        return new Lottery(lotteryNum);
+        return new Lottery(lotteryNum, new DefaultLottoFactory());
     }
 }

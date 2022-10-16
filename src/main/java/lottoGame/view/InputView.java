@@ -1,7 +1,7 @@
 package lottoGame.view;
 
 import lottoGame.InputException;
-import lottoGame.InputParameter;
+import lottoGame.model.InputParameter;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;

@@ -1,5 +1,6 @@
 package lottoGame;
 
+import lottoGame.model.InputParameter;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
