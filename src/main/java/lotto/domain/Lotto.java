@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -26,7 +23,7 @@ public class Lotto {
     }
 
     public int compareNumber(final Lotto anotherLotto) {
-        return (int)lottoNumbers.stream()
+        return (int) lottoNumbers.stream()
                 .filter(lotto -> anotherLotto.contains(lotto))
                 .count();
     }
@@ -46,7 +43,7 @@ public class Lotto {
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().collect(Collectors.toList()).size() != COUNTS_OF_LOTTO_NUMBER) {
+        if (new HashSet<>(lottoNumbers).size() != COUNTS_OF_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호에는 중복된 숫자가 들어갈 수 없습니다.");
         }
     }
