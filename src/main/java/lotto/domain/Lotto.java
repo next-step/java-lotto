@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -11,23 +12,34 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != COUNTS_OF_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 여섯 자리여야 합니다.");
-        }
+        validateLength(lottoNumbers);
+        validateDuplicate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public int compareNumber(final Lotto winningNumber) {
-        return lottoNumbers().stream()
-                .mapToInt(number -> winningNumber.lottoNumbers.contains(number) ? 1 : 0)
-                .sum();
+    public int compareNumber(final Lotto anotherLotto) {
+        return (int)lottoNumbers.stream()
+                .filter(lotto -> anotherLotto.contains(lotto))
+                .count();
     }
 
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public boolean containsNumber(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    private void validateLength(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != COUNTS_OF_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 여섯 자리여야 합니다.");
+        }
+    }
+
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().collect(Collectors.toList()).size() != COUNTS_OF_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호에는 중복된 숫자가 들어갈 수 없습니다.");
+        }
     }
 }

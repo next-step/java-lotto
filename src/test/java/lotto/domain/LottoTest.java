@@ -17,13 +17,21 @@ public class LottoTest {
     @Test
     @DisplayName("생성자 의존성 주입 - 로또 번호")
     void constructorDI() {
-        assertThat(new Lotto(lottoNumbers()).lottoNumbers().size()).isEqualTo(45);
+        assertThat(new Lotto(LottoNumber.lottoNumbers().subList(0,6)).lottoNumbers().size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("생성자 의존성 주입 - 당첨 번호 길이 예외")
-    void constructorDIExceptionForWinningNumberLength() {
+    void constructorDIExceptionForNumberLength() {
         assertThatThrownBy(() -> new Lotto(LottoNumber.lottoNumbers().subList(0, 7))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("생성자 의존성 주입 - 당첨 번호 중복 예외")
+    void constructorDIExceptionForDuplicate() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumbers().subList(0, 5));
+        lottoNumbers.add(LottoNumber.lottoNumber(5));
+        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -39,7 +47,7 @@ public class LottoTest {
     void compareNumber() {
         List<Lotto> lottoTickets = new LottoMachine(lottoNumbers()).issue(new Payment(1000));
 
-        Lotto winningNumber = new WinningNumber(new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6))), LottoNumber.lottoNumber(7)).winningNumber();
+        Lotto winningNumber = new WinningLotto(new Lotto(new ArrayList<>(LottoNumber.lottoNumbers().subList(0, 6))), LottoNumber.lottoNumber(7)).winningLotto();
         List<Integer> matchingCounts = lottoTickets.stream()
                 .map(ticket -> ticket.compareNumber(winningNumber))
                 .collect(Collectors.toList());

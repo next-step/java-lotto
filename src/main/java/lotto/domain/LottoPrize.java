@@ -10,6 +10,8 @@ public enum LottoPrize {
     FIFTH(3, 5_000, false),
     MISS(0, 0, false);
 
+    private final static int MATCH_COUNT_OF_SECOND_PRIZE = 5;
+
     private final int matchCount;
     private final int amount;
     private final boolean matchBonus;
@@ -41,7 +43,7 @@ public enum LottoPrize {
     }
 
     private static boolean isValidMatchBonusNumber(final int matchCount, final boolean matchBonus) {
-        if (matchCount != 5) {
+        if (matchCount != MATCH_COUNT_OF_SECOND_PRIZE) {
             return false;
         }
         return matchBonus;

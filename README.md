@@ -30,6 +30,6 @@
 * `ResultStats`: 로또 결과를 통계내는 도메인
   * `countsOfPrizes`: `LottoPrize`에 관리되는 경품의 등수별 통계 숫자를 내는 기능
   * `returnOfInvestment`: 사용자가 입력한 금액 대비 투자 수익률을 내는 기능
-* `WinningNumber`: 당첨 번호 도메인
-  * `winningNumber`: 당첨 번호를 `Lotto`타입으로 반환
+* `winningLotto`: 당첨 번호 도메인
+  * `winningLotto`: 당첨 번호를 `Lotto`타입으로 반환
   * `bonusNumber`: 보너스 번호 반환
