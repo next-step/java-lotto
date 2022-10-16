@@ -12,6 +12,7 @@ public class DefaultLottoStrategy implements LottoStrategy {
                 .ints(1, 45)
                 .limit(6)
                 .boxed()
+                .sorted()
                 .collect(Collectors.toList());
     }
 }
