@@ -5,6 +5,11 @@ import java.util.Deque;
 
 public class Calculator {
 
+    private static final int OPERAND_START_INDEX = 0;
+    private static final int OPERATOR_START_INDEX = 1;
+    private static final int STEP = 2;
+    private static final String BLANK = " ";
+
     private Calculator() {
     }
 
@@ -17,7 +22,7 @@ public class Calculator {
     public static Deque<Integer> collectOperands(String[] arguments) {
         Deque<Integer> operands = new ArrayDeque<>();
 
-        for (int i = 0; i < arguments.length; i += 2) {
+        for (int i = OPERAND_START_INDEX; i < arguments.length; i += STEP) {
             operands.add(toInt(arguments[i]));
         }
 
@@ -27,7 +32,7 @@ public class Calculator {
     public static Deque<Operator> collectOperators(String[] arguments) {
         Deque<Operator> operators = new ArrayDeque<>();
 
-        for (int i = 1; i < arguments.length; i += 2) {
+        for (int i = OPERATOR_START_INDEX; i < arguments.length; i += STEP) {
             operators.add(Operator.of(arguments[i]));
         }
 
@@ -35,7 +40,7 @@ public class Calculator {
     }
 
     public static String[] split(String input) {
-        return input.split(" ");
+        return input.split(BLANK);
     }
 
     public static int toInt(String value) {
