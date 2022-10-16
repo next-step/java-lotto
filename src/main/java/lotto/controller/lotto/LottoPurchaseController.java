@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.controller.lotto;
 
 import lotto.domain.Amount;
 import lotto.domain.Money.ImmutableMoney;

@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.controller.LottoResultController;
-import lotto.controller.LottoPurchaseController;
+import lotto.controller.lotto.LottoResultController;
+import lotto.controller.lotto.LottoPurchaseController;
 import lotto.controller.MoneyController;
 import lotto.domain.Money.ImmutableMoney;
 import lotto.service.LottoPurchaseService;
