@@ -34,7 +34,11 @@ public class Payment {
     }
 
     private void validateManualCount(final int manualCount, final int amount) {
-        if (manualCount > (amount / LOTTO_TICKET_PRICE) && manualCount > 0) {
+        if (manualCount < 0) {
+            throw new IllegalArgumentException("구매 수량은 0 또는 양수만 입력 가능합니다.");
+        }
+
+        if (manualCount > (amount / LOTTO_TICKET_PRICE)) {
             throw new IllegalArgumentException("수동 구매 로또의 수가 전체 구매 수량을 초과하였습니다.");
         }
     }
