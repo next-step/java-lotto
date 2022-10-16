@@ -13,6 +13,7 @@ class DivisionTest {
         Assertions.assertThat(Division.valueOf(4)).isEqualTo(Division.THIRD);
         Assertions.assertThat(Division.valueOf(5)).isEqualTo(Division.SECOND);
         Assertions.assertThat(Division.valueOf(6)).isEqualTo(Division.FIRST);
+        Assertions.assertThat(Division.valueOf(0)).isEqualTo(Division.NO_DIVISION);
     }
 
 }
