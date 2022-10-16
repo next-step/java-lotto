@@ -27,6 +27,7 @@ public class LottoResultView {
         System.out.println("---------");
 
         Arrays.stream(LottoResult.values())
+                .filter(lottoResult -> lottoResult != LottoResult.NONE)
                 .forEach((lottoResult -> System.out.println(String.format("%s (%s)- %d개",
                         lottoResult.getDescription(),
                         getFormattedMoney(lottoResult),
