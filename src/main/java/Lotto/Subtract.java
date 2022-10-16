@@ -1,4 +1,4 @@
-package Lotto;
+package lotto;
 
 public class Subtract extends Operator {
     @Override

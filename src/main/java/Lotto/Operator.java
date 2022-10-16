@@ -1,4 +1,4 @@
-package Lotto;
+package lotto;
 
 public abstract class Operator {
     private static final String ADD = "+";

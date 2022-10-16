@@ -1,4 +1,4 @@
-package Lotto;
+package lotto;
 
 import java.util.Scanner;
 
