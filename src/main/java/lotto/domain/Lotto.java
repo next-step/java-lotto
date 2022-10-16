@@ -29,12 +29,10 @@ public class Lotto {
     }
 
     public LottoResult getResult(Lotto winLottoNumber, int bonusNumber) {
-        System.out.println("lottoNumbers = " + lottoNumbers);
-        System.out.println(lottoNumbers.contains(bonusNumber));
-        return LottoResult.from(matchCount(winLottoNumber), isBonusNumber(bonusNumber));
+        return LottoResult.from(matchCount(winLottoNumber), hasBonusNumber(bonusNumber));
     }
 
-    private boolean isBonusNumber(int bonusNumber) {
+    private boolean hasBonusNumber(int bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 
