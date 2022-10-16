@@ -2,7 +2,6 @@ package lottery.view;
 
 import lottery.Lottery;
 import lottery.LotteryResult;
-import lottery.LotteryWallet;
 
 import java.util.List;
 
@@ -10,17 +9,16 @@ public class ResultView {
 
     public static final int[] PRINT_RANKS = {3, 4, 5, 6};
 
-    public static void printPurchasedLotteryInfos(LotteryWallet lotteryWallet) {
-        printPurchasedLotteryAmount(lotteryWallet.getLotteries().size());
-        printPurchasedLotteryNumbers(lotteryWallet);
+    public static void printPurchasedLotteryInfos(List<Lottery> lotteries) {
+        printPurchasedLotteryAmount(lotteries.size());
+        printPurchasedLotteryNumbers(lotteries);
     }
 
     private static void printPurchasedLotteryAmount(int purchasedLotteryAmount) {
         System.out.println(purchasedLotteryAmount + "개를 구매했습니다.");
     }
 
-    private static void printPurchasedLotteryNumbers(LotteryWallet lotteryWallet) {
-        List<Lottery> lotteries = lotteryWallet.getLotteries();
+    private static void printPurchasedLotteryNumbers(List<Lottery> lotteries) {
         for (Lottery lottery : lotteries) {
             System.out.println(lottery.getLotteryNumbers());
         }

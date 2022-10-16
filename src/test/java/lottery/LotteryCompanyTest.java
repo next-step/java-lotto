@@ -28,15 +28,16 @@ public class LotteryCompanyTest {
     @ParameterizedTest
     @CsvSource(value = {"3:2", "4:0", "5:0", "6:0"}, delimiter = ':')
     void getLotteryResult(int rank, int expected) {
-        LotteryWallet lotteryWallet = new LotteryWallet(Arrays.asList(
+        List<Lottery> lotteries = Arrays.asList(
                 createLottery(1, 2, 3, 14, 15, 16),
                 createLottery(1, 2, 3, 14, 15, 16),
                 createLottery(1, 2, 13, 14, 15, 16),
                 createLottery(1, 2, 13, 14, 15, 16)
-        ));
+        );
+
 
         LotteryResult lotteryResult = LotteryCompany
-                .createLotteryResult(createLottery(1, 2, 3, 4, 5, 6), lotteryWallet);
+                .createLotteryResult(createLottery(1, 2, 3, 4, 5, 6), lotteries);
         assertThat(lotteryResult.getWonCountOf(rank)).isEqualTo(expected);
     }
 

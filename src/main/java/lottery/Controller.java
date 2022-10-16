@@ -1,5 +1,7 @@
 package lottery;
 
+import java.util.List;
+
 import static lottery.LotteryCompany.createLotteryResult;
 import static lottery.LotteryCompany.getAvailablePurchaseLotteryCount;
 import static lottery.view.InputView.*;
@@ -14,9 +16,10 @@ public class Controller {
         for (int i = 0; i < availablePurchaseLotteryCount; i++) {
             customer.purchaseRandomLottery();
         }
+        List<Lottery> lotteries = customer.getLotteries();
 
-        printPurchasedLotteryInfos(customer.getLotteryWallet());
-        LotteryResult lotteryResult = createLotteryResult(getWinningLotteryNumbers(), customer.getLotteryWallet());
+        printPurchasedLotteryInfos(lotteries);
+        LotteryResult lotteryResult = createLotteryResult(getWinningLotteryNumbers(), lotteries);
         printLotteryResult(lotteryResult);
     }
 

@@ -1,19 +1,26 @@
 package lottery;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Customer {
 
-    private LotteryWallet lotteryWallet = new LotteryWallet();
+    private final List<Lottery> lotteries;
 
-    public void purchaseRandomLottery() {
-        List<Lottery> lotteries = lotteryWallet.getLotteries();
-        lotteries.add(LotteryCompany.generateRandomLotteryNumbers());
-
-        lotteryWallet = new LotteryWallet(lotteries);
+    public Customer() {
+        lotteries = new ArrayList<>();
     }
 
-    public LotteryWallet getLotteryWallet() {
-        return lotteryWallet;
+    public Customer(List<Lottery> lotteries) {
+        this.lotteries = lotteries;
+    }
+
+    public void purchaseRandomLottery() {
+        lotteries.add(LotteryCompany.generateRandomLotteryNumbers());
+    }
+
+    public List<Lottery> getLotteries() {
+        return Collections.unmodifiableList(lotteries);
     }
 }

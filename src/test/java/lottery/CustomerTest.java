@@ -11,7 +11,7 @@ public class CustomerTest {
         Customer customer = new Customer();
         customer.purchaseRandomLottery();
 
-        assertThat(customer.getLotteryWallet().getLotteries()).hasSize(1);
+        assertThat(customer.getLotteries()).hasSize(1);
     }
 
 }

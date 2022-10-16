@@ -23,9 +23,7 @@ public class LotteryCompany {
                 .collect(Collectors.toList()));
     }
 
-    public static LotteryResult createLotteryResult(Lottery wonLottery, LotteryWallet lotteryWallet) {
-        List<Lottery> lotteries = lotteryWallet.getLotteries();
-
+    public static LotteryResult createLotteryResult(Lottery wonLottery, List<Lottery> lotteries) {
         LotteryResult lotteryResult = new LotteryResult(LotteryRanks.getRanksInUse(), lotteries.size(), LOTTERY_PRICE);
         lotteries.forEach(lottery -> lotteryResult.addWonCountOf(wonLottery.countEqualNumbers(lottery)));
 
