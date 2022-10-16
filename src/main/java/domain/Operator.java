@@ -1,37 +1,23 @@
 package domain;
 
+import java.util.function.BiFunction;
+
 public enum Operator {
-  PLUS("+"){
-    @Override
-    public int calculate(int num1,int num2){
-      return num1 + num2;
-    }
-  },
-  MINUS("-"){
-    @Override
-    public int calculate(int num1,int num2){
-      return num1 - num2;
-    }
-  },
-  MULTIPLY("*"){
-    @Override
-    public int calculate(int num1,int num2){
-      return num1 * num2;
-    }
-  },
-  DIVIDE("/"){
-    @Override
-    public int calculate(int num1,int num2){
-      ExpressionValidation.validateDenominator(num2);
-      return num1 / num2;
-    }
-  }
-  ;
+  PLUS("+", (a, b) -> a + b),
+  MINUS("-", (a, b) -> a - b),
+  MULTIPLY("*", (a, b) -> a * b),
+  DIVIDE("/", (a, b) -> a / b);
 
   private final String Operator;
+  private final BiFunction<Integer, Integer, Integer> calculateFunc;
 
-  Operator(final String Operator) {
-    this.Operator = Operator;
+  public Integer calculate(int a, int b) {
+    return this.calculateFunc.apply(a, b);
   }
-  public abstract int calculate(int num1, int num2);
+
+  Operator(final String Operator, BiFunction<Integer, Integer, Integer> calculateFunc) {
+    this.Operator = Operator;
+    this.calculateFunc = calculateFunc;
+  }
+
 }
