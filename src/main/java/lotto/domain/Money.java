@@ -5,10 +5,12 @@ import java.util.Objects;
 public class Money {
 
     private final long money;
-    private final static String MONEY_NEGATIVE_EXCEPTION = "Money는 음수가 될 수 없습니다.";
+    private static final int MONEY_MINIMUM = 0;
+
+    private final static String MONEY_NEGATIVE_EXCEPTION = "Money에는 " + MONEY_MINIMUM + "이상의 값만 들어올 수 있습니다.";
 
     public Money(final long money) {
-        if (money < 0) {
+        if (money < MONEY_MINIMUM) {
             throw new IllegalArgumentException(MONEY_NEGATIVE_EXCEPTION);
         }
         this.money = money;
