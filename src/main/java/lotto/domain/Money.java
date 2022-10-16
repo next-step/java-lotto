@@ -20,6 +20,10 @@ public class Money {
         return (double) this.money / money.money;
     }
 
+    public Money add(final Money money) {
+        return new Money(this.money + money.money);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,5 +41,4 @@ public class Money {
     public String toString() {
         return String.valueOf(money);
     }
-
 }

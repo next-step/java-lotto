@@ -25,4 +25,11 @@ public class MoneyTest {
         assertThat(money.divide(new Money(1000))).isEqualTo(10);
     }
 
+    @Test
+    void add_money() {
+        Money money = new Money(10000);
+
+        assertThat(money.add(new Money(3000))).isEqualTo(new Money(13000));
+    }
+
 }
