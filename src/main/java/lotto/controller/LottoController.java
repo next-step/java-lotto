@@ -25,41 +25,10 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public void draw(final ImmutableMoney money) {
-        List<Lotto> lottos = purchaseLotto(money);
-
+    public void draw(final List<Lotto> lottos, final ImmutableMoney money) {
         LottoWinner winner = drawWinner();
 
         lottoResult(money, lottos, winner);
-    }
-
-    private List<Lotto> purchaseLotto(final ImmutableMoney immutableMoney) {
-        Amount totalAmount = lottoService.purchaseNumber(immutableMoney);
-        List<Lotto> lottoList = purchaseAutoLotto(totalAmount, purchaseManualLotto());
-        LottoOutput.lotto(lottoList);
-        return lottoList;
-    }
-
-    private List<Lotto> purchaseAutoLotto(final Amount totalAmount, final List<Lotto> lottoList) {
-        Amount autoAmount = totalAmount.minus(new Amount(lottoList.size()));
-        LottoOutput.purchaseCount(new Amount(lottoList.size()), autoAmount);
-        lottoList.addAll(lottoService.purchaseLotto(autoAmount));
-        return lottoList;
-    }
-
-    private List<Lotto> purchaseManualLotto() {
-        LottoOutput.purchaseManualAmount();
-        Amount manualAmount = LottoInput.purchaseManualAmount();
-        LottoOutput.manualLottoNumbers();
-        return lottoService.purchaseLotto(inputLottoNumberSet(manualAmount));
-    }
-
-    private static List<LottoNumberSet> inputLottoNumberSet(final Amount manualAmount) {
-        List<LottoNumberSet> lottoNumberSets = new ArrayList<>();
-        for (int i = 0; i < manualAmount.amount(); i++) {
-            lottoNumberSets.add(LottoInput.lottoNumbers());
-        }
-        return lottoNumberSets;
     }
 
     private LottoWinner drawWinner() {
