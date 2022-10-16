@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.ui.LottoInput;
 import lotto.ui.LottoOutput;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,21 +36,36 @@ public class LottoController {
 
     private List<Lotto> purchaseLotto(Money money) {
         Amount totalAmount = lottoService.purchaseNumber(money);
+        List<Lotto> lottoList = purchaseAutoLotto(totalAmount, purchaseManualLotto());
+        LottoOutput.lotto(lottoList);
+        return lottoList;
+    }
 
+    private List<Lotto> purchaseAutoLotto(Amount totalAmount, List<Lotto> lottoList) {
+        Amount autoAmount = totalAmount.minus(new Amount(lottoList.size()));
+        LottoOutput.purchaseCount(new Amount(lottoList.size()), autoAmount);
+        lottoList.addAll(lottoService.purchaseLotto(autoAmount));
+        return lottoList;
+    }
+
+    private List<Lotto> purchaseManualLotto() {
         LottoOutput.purchaseManualAmount();
         Amount manualAmount = LottoInput.purchaseManualAmount();
+        LottoOutput.manualLottoNumbers();
+        return lottoService.purchaseLotto(inputLottoNumberSet(manualAmount));
+    }
 
-        Amount autoAmount = totalAmount.minus(manualAmount);
-        LottoOutput.purchaseCount(manualAmount, autoAmount);
-
-        List<Lotto> lottos = lottoService.purchaseLotto(autoAmount);
-        LottoOutput.lotto(lottos);
-        return lottos;
+    private static List<LottoNumberSet> inputLottoNumberSet(Amount manualAmount) {
+        List<LottoNumberSet> lottoNumberSets = new ArrayList<>();
+        for (int i = 0; i < manualAmount.amount(); i++) {
+            lottoNumberSets.add(LottoInput.lottoNumbers());
+        }
+        return lottoNumberSets;
     }
 
     private LottoWinner drawWinner() {
         LottoOutput.winningNumber();
-        LottoNumberSet numbers = LottoInput.winnerNumbers();
+        LottoNumberSet numbers = LottoInput.lottoNumbers();
 
         LottoOutput.bonusNumber();
         LottoNumber bonusNumber = LottoInput.bonusNumber();
@@ -71,6 +87,7 @@ public class LottoController {
     private void lottoMatchOutput(int rank, int matchNumber) {
         if (bonusRank(rank)) {
             LottoOutput.matchBonusNumber(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
+            return;
         }
         LottoOutput.match(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
     }

@@ -20,7 +20,7 @@ public class LottoInput {
         return new Amount(scanner.nextInt());
     }
 
-    public static LottoNumberSet winnerNumbers() {
+    public static LottoNumberSet lottoNumbers() {
         Scanner scanner = new Scanner(System.in);
         return LottoNumberSet.createLottoNumberSet(
                 Arrays.stream(scanner.nextLine().split(", ")).mapToInt(i -> Integer.parseInt(i)).toArray()

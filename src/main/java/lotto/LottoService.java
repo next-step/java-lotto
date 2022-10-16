@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoService {
     public static final Money LOTTO_PRICE = new Money(1000);
@@ -20,6 +21,12 @@ public class LottoService {
             lottos.add(new Lotto());
         }
         return lottos;
+    }
+
+    public List<Lotto> purchaseLotto(List<LottoNumberSet> lottoNumberSetList) {
+        return lottoNumberSetList.stream()
+                .map(lottoNumberSet -> new Lotto(lottoNumberSet))
+                .collect(Collectors.toList());
     }
 
     public Map<Integer, Integer> checkLotto(List<Lotto> lottos, LottoWinner winner) {

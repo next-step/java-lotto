@@ -15,8 +15,12 @@ public class LottoOutput {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
+    public static void manualLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     public static void purchaseCount(final Amount manual, final Amount auto) {
-        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manual, auto));
+        System.out.println(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", manual, auto));
     }
 
     public static void lotto(Lotto lotto) {
