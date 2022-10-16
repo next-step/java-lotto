@@ -4,22 +4,18 @@ import java.util.Objects;
 
 public class Money {
 
-    private long money;
-    private static String MONEY_NEGATIVE_EXCEPTION = "Money는 음수가 될 수 없습니다.";
+    private final long money;
+    private final static String MONEY_NEGATIVE_EXCEPTION = "Money는 음수가 될 수 없습니다.";
 
-    public Money(long money) {
+    public Money(final long money) {
         if (money < 0) {
             throw new IllegalArgumentException(MONEY_NEGATIVE_EXCEPTION);
         }
         this.money = money;
     }
 
-    public Double divide(Money money) {
-        return (double) this.money / money.money();
-    }
-
-    public long money() {
-        return money;
+    public Double divide(final Money money) {
+        return (double) this.money / money.money;
     }
 
     @Override
