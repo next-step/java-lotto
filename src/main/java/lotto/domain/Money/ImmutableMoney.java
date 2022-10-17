@@ -7,7 +7,7 @@ public class ImmutableMoney {
     protected long money;
     protected static final int MONEY_MINIMUM = 0;
 
-    protected final static String MONEY_NEGATIVE_EXCEPTION = "Money에는 " + MONEY_MINIMUM + "이상의 값만 들어올 수 있습니다.";
+    protected static final String MONEY_NEGATIVE_EXCEPTION = "Money에는 " + MONEY_MINIMUM + "이상의 값만 들어올 수 있습니다.";
 
     public ImmutableMoney(long money) {
         if (money < MONEY_MINIMUM) {

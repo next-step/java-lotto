@@ -8,7 +8,6 @@ public class Amount {
     private static final int AMOUNT_MINIMUM = 0;
     private static final String AMOUNT_BOUND_EXCEPTION = "Amount에는 " + AMOUNT_MINIMUM + "이상의 값만 들어올 수 있습니다.";
 
-
     public Amount(final int amount) {
         if (amount < AMOUNT_MINIMUM) {
             throw new IllegalArgumentException(AMOUNT_BOUND_EXCEPTION);

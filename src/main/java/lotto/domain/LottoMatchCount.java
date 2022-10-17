@@ -5,8 +5,8 @@ import java.util.Objects;
 public class LottoMatchCount {
 
     private final int count;
-    private final static int LOTTOCOUNT_MINIMUM = 0;
-    private final static int LOTTOCOUNT_MAXIMUM = 6;
+    private static final int LOTTOCOUNT_MINIMUM = 0;
+    private static final int LOTTOCOUNT_MAXIMUM = 6;
     public static final LottoMatchCount REQUIRE_CHECK_BONUSNUMBER = new LottoMatchCount(5);
     private static final String LOTTOCOUNT_BOUND_EXCEPTION = "LottoCount는 " + LOTTOCOUNT_MINIMUM + "이상 " + LOTTOCOUNT_MAXIMUM + "이하여야 합니다.";
 
