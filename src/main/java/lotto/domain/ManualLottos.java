@@ -12,37 +12,20 @@ public class ManualLottos {
         this.manualLottos = manualLottos;
     }
 
-    public static ManualLottos of(final int countOfLottos, final List<String> manualLottos) {
+    public static ManualLottos from(final List<String> manualLottos) {
 
-        validate(countOfLottos, manualLottos.size());
         return new ManualLottos(new Lottos(convertLottos(manualLottos)));
-    }
-
-    private static void validate(final int countOfTotalLotto, final int countOfManualLotto) {
-
-        if (countOfTotalLotto < countOfManualLotto) {
-            throw new IllegalArgumentException("지불한 금액보다 수동으로 구입하려는 로또가 더 많습니다.");
-        }
-        if (countOfTotalLotto != countOfManualLotto) {
-            throw new IllegalArgumentException("수동 구매한 로또수와 수동 로또 입력값이 맞지 않습니다.");
-        }
     }
 
     private static List<Lotto> convertLottos(final List<String> manualLottosInput) {
 
         return manualLottosInput.stream()
-                .map(LottoFactory::from)
+                .map(Lotto::from)
                 .collect(Collectors.toList());
     }
 
     public Lottos getManualLottos() {
 
         return manualLottos;
-    }
-
-    public int count() {
-
-        return this.manualLottos.getLottos()
-                .size();
     }
 }
