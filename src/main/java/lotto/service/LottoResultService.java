@@ -30,7 +30,7 @@ public class LottoResultService {
     }
 
     public ProfitRate caculateProfitRate(final List<Lotto> lottos, final LottoWinner winner) {
-        return new ProfitRate(reward(lottos, winner).money().divide(lottoPrice(lottos).value()));
+        return new ProfitRate(reward(lottos, winner).money().divideValue(lottoPrice(lottos).value()));
     }
 
     private ImmutableMoney reward(final List<Lotto> lottos, final LottoWinner winner) {

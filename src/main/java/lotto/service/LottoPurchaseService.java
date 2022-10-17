@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class LottoPurchaseService {
 
     public Amount purchaseNumber(final ImmutableMoney immutableMoney) {
-        return new Amount(immutableMoney.money().divide(Lotto.LOTTO_PRICE.value()).intValue());
+        return new Amount(immutableMoney.money().divideValue(Lotto.LOTTO_PRICE.value()).intValue());
     }
 
     public List<Lotto> purchaseLotto(final Amount amount) {

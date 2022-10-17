@@ -16,8 +16,8 @@ public class Money extends ImmutableMoney {
         this.money *= value;
     }
 
-    public Double divide(final long money) {
-        return (double) this.money / money;
+    public Double divideValue(final long value) {
+        return (double) this.money / value;
     }
 
     @Override
