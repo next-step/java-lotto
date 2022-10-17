@@ -4,6 +4,7 @@ import lotto.domain.Amount;
 import lotto.domain.LottoMatchCount;
 import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.ProfitRate;
+import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
 
 import java.util.List;
@@ -51,12 +52,12 @@ public class LottoOutput {
         System.out.println(result);
     }
 
-    public static void match(final LottoMatchCount count, final ImmutableMoney reward, final Amount number) {
-        System.out.println(count + "개 일치 (" + reward + "원)- " + number + "개");
+    public static void match(final Rank rank, final Amount number) {
+        System.out.println(rank.matchCount() + "개 일치 (" + rank.reward() + "원)- " + number + "개");
     }
 
-    public static void matchBonusNumber(final LottoMatchCount count, final ImmutableMoney reward, final Amount number) {
-        System.out.println(count + "개 일치, 보너스 볼 일치(" + reward + "원) - " + number + "개");
+    public static void matchBonusNumber(final Rank rank, final Amount number) {
+        System.out.println(rank.matchCount() + "개 일치, 보너스 볼 일치(" + rank.reward() + "원) - " + number + "개");
     }
 
     public static void profitRate(final ProfitRate profitRate) {
