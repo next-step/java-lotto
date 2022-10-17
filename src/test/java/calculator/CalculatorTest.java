@@ -25,4 +25,20 @@ public class CalculatorTest {
         int result = calculator.calculate(input);
         assertThat(result).isEqualTo(6);
     }
+
+    @ParameterizedTest
+    @DisplayName("두개의 정수를 가진 문자열에 +가 있는 경우 덧셈 연산하는지 확인")
+    @ValueSource(strings = {"1 - 2"})
+    void testMinusWith2Ints(String input){
+        int result = calculator.calculate(input);
+        assertThat(result).isEqualTo(-1);
+    }
+
+    @ParameterizedTest
+    @DisplayName("세개의 정수를 가진 문자열에 +, -가 있는 경우 덧셈 연산하는지 확인")
+    @ValueSource(strings = {"1 + 2 - 3"})
+    void testMinusWith3Ints(String input){
+        int result = calculator.calculate(input);
+        assertThat(result).isEqualTo(0);
+    }
 }
