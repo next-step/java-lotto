@@ -13,13 +13,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 import lotto.model.BonusNumber;
 import lotto.model.WinningNumber;
 
-public class LottoTest {
+public class LottosTest {
 
     @DisplayName("주어진 당첨번호와 비교한다")
     @ParameterizedTest
     @MethodSource("provideWinningNumbers")
     void match(List<Integer> winningNumbers, int expectedMatchCount) {
-        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        Lottos lotto = new Lottos(List.of(1,2,3,4,5,6));
 
         assertThat(lotto.match(WinningNumber.of(winningNumbers), BonusNumber.of(1)))
                   .isEqualTo(LottoMatchResult.of(expectedMatchCount, true));
