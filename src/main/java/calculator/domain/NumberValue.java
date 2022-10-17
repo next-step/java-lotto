@@ -1,20 +1,22 @@
 package calculator.domain;
 
+import calculator.utils.StringUtils;
+
 public class NumberValue {
 
     private final int value;
+
+    public NumberValue(final int value) {
+        this(Integer.toString(value));
+    }
 
     public NumberValue(final String value) {
         validateNumber(value);
         this.value = Integer.parseInt(value);
     }
 
-    public NumberValue(final int value) {
-        this.value = value;
-    }
-
     private static void validateNumber(final String number) {
-        if (number.isEmpty()) {
+        if (StringUtils.isEmpty(number)) {
             throw new IllegalArgumentException("숫자는 빈 값일 수 없습니다.");
         }
     }

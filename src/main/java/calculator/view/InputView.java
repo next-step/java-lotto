@@ -1,5 +1,7 @@
 package calculator.view;
 
+import calculator.utils.StringUtils;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -13,7 +15,7 @@ public class InputView {
 
     public static String[] getInput() {
         System.out.println(INPUT_START_MESSAGE);
-        try(Scanner scanner = new Scanner(System.in)) {
+        try (Scanner scanner = new Scanner(System.in)) {
             String input = scanner.nextLine();
             validateInput(input);
             return input.split(SPACE_SEPARATOR);
@@ -21,7 +23,7 @@ public class InputView {
     }
 
     private static void validateInput(final String input) {
-        if (input.isEmpty()) {
+        if (StringUtils.isEmpty(input)) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
     }
