@@ -16,7 +16,7 @@ public class CalculatorTest {
     @DisplayName("두개의 정수를 가진 문자열에 +가 있는 경우 덧셈 연산하는지 확인")
     @ValueSource(strings = {"1 + 2"})
     void testAddWith2Ints(String input){
-        int result = calculator.calculate(input);
+        int result = calculator.execute(input);
         assertThat(result).isEqualTo(3);
     }
 
@@ -24,7 +24,7 @@ public class CalculatorTest {
     @DisplayName("세개의 정수를 가진 문자열에 +가 있는 경우 덧셈 연산하는지 확인")
     @ValueSource(strings = {"1 + 2 + 3"})
     void testAddWith3Ints(String input){
-        int result = calculator.calculate(input);
+        int result = calculator.execute(input);
         assertThat(result).isEqualTo(6);
     }
 
@@ -32,7 +32,7 @@ public class CalculatorTest {
     @DisplayName("두개의 정수를 가진 문자열에 +가 있는 경우 덧셈 연산하는지 확인")
     @ValueSource(strings = {"1 - 2"})
     void testMinusWith2Ints(String input){
-        int result = calculator.calculate(input);
+        int result = calculator.execute(input);
         assertThat(result).isEqualTo(-1);
     }
 
@@ -40,7 +40,7 @@ public class CalculatorTest {
     @DisplayName("세개의 정수를 가진 문자열에 +, -가 있는 경우 덧셈 연산하는지 확인")
     @ValueSource(strings = {"1 + 2 - 3"})
     void testMinusWith3Ints(String input){
-        int result = calculator.calculate(input);
+        int result = calculator.execute(input);
         assertThat(result).isEqualTo(0);
     }
 
@@ -48,7 +48,7 @@ public class CalculatorTest {
     @DisplayName("두개의 정수를 가진 문자열에 *가 있는 경우 곱하기 연산하는지 확인")
     @ValueSource(strings = {"1 * 2"})
     void testMultiplyWith2Ints(String input){
-        int result = calculator.calculate(input);
+        int result = calculator.execute(input);
         assertThat(result).isEqualTo(2);
     }
 
@@ -56,7 +56,7 @@ public class CalculatorTest {
     @DisplayName("세개의 정수를 가진 문자열에 *, -가 있는 경우 곱하기 연산하는지 확인")
     @ValueSource(strings = {"1 * 2 - 3"})
     void testMultiplyWith3Ints(String input){
-        int result = calculator.calculate(input);
+        int result = calculator.execute(input);
         assertThat(result).isEqualTo(-1);
     }
 
@@ -64,7 +64,7 @@ public class CalculatorTest {
     @DisplayName("두개의 정수를 가진 문자열에 /가 있는 경우 나누기 연산하는지 확인")
     @ValueSource(strings = {"3 / 1"})
     void testDivideWith2Ints(String input){
-        int result = calculator.calculate(input);
+        int result = calculator.execute(input);
         assertThat(result).isEqualTo(3);
     }
 
@@ -72,14 +72,14 @@ public class CalculatorTest {
     @DisplayName("네개의 정수를 가진 문자열에 *, -, /가 있는 경우 나누기 연산하는지 확인")
     @ValueSource(strings = {"1 * 2 / 2 - 1"})
     void testDivideWith3Ints(String input){
-        int result = calculator.calculate(input);
+        int result = calculator.execute(input);
         assertThat(result).isEqualTo(0);
     }
 
     @Test
     @DisplayName("null 이 입력값인 경우 Exception 확인")
     void testNullInput(){
-        assertThatThrownBy(() -> calculator.calculate(null))
+        assertThatThrownBy(() -> calculator.execute(null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("input cannot be empty");
     }
@@ -88,7 +88,7 @@ public class CalculatorTest {
     @DisplayName("입력값이 공백인 경우 Exception 확인")
     @ValueSource(strings = {""})
     void testEmptyInput(String input){
-        assertThatThrownBy(() -> calculator.calculate(input))
+        assertThatThrownBy(() -> calculator.execute(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("input cannot be empty");
     }
@@ -97,7 +97,7 @@ public class CalculatorTest {
     @DisplayName("연산자 중 사친연산 기호가 아닌 경우")
     @ValueSource(strings = {"1 * 2 / 2 ! 1"})
     void testWrongOperator(String input){
-        assertThatThrownBy(() -> calculator.calculate(input))
+        assertThatThrownBy(() -> calculator.execute(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("wrong operator type");
     }
