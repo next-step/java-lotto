@@ -24,9 +24,7 @@ public class Lotto {
 
     public boolean matches(int bonus) {
         return lotto.stream()
-            .findFirst()
-            .filter(lottoNumber -> lottoNumber.equals(LottoNumber.from(bonus)))
-            .isPresent();
+            .anyMatch(lottoNumber -> lottoNumber.equals(LottoNumber.from(bonus)));
     }
 
     private static boolean isDuplicate(List<LottoNumber> lottoNumbers) {
