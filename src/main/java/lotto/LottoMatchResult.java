@@ -7,17 +7,19 @@ import lotto.model.LottoReward;
 
 public class LottoMatchResult {
     private final int count;
+    private final boolean bonusNumberMatched;
 
-    private LottoMatchResult(int count) {
+    private LottoMatchResult(int count, boolean bonusNumberMatched) {
         this.count = count;
+        this.bonusNumberMatched = bonusNumberMatched;
     }
 
     public static LottoMatchResult of(int count) {
-        return new LottoMatchResult(count);
+        return new LottoMatchResult(count, false);
     }
 
     public Optional<LottoReward> getLottoReward() {
-        return LottoReward.findByMatchResult(this);
+        return LottoReward.findByMatchResult(this.count, this.bonusNumberMatched);
     }
 
     public boolean rewardable() {

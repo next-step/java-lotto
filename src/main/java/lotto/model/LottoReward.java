@@ -7,31 +7,36 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import lotto.LottoMatchResult;
-
 public enum LottoReward {
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 50000),
-    FOURTH_PLACE(3, 5000),
+    FIRST_PLACE(6, null, 2000000000),
+    SECOND_PLACE(5, true, 30000000),
+    THIRD_PLACE(5, false, 1500000),
+    FOURTH_PLACE(4, null, 50000),
+    FIFTH_PLACE(3, null, 5000),
     ;
 
     private final int matchCount;
+    private final Optional<Boolean> maybeBonusNumberMatched;
     private final int rewardAmount;
 
-    LottoReward(int matchResult, int rewardAmount) {
+    LottoReward(int matchResult, Boolean maybeBonusNumberMatched, int rewardAmount) {
         this.matchCount = matchResult;
+        this.maybeBonusNumberMatched = Optional.ofNullable(maybeBonusNumberMatched);
         this.rewardAmount = rewardAmount;
     }
 
-    public LottoMatchResult getLottoMatchResult() {
-        return LottoMatchResult.of(this.matchCount);
+    public static Optional<LottoReward> findByMatchResult(int count, boolean bonusNumberMatched) {
+        return Arrays.stream(values())
+                     .filter(lottoReward -> lottoReward.matched(count, bonusNumberMatched))
+                     .findFirst();
     }
 
-    public static Optional<LottoReward> findByMatchResult(LottoMatchResult lottoMatchResult) {
-        return Arrays.stream(values())
-                     .filter(lottoReward -> Objects.equals(lottoReward.getLottoMatchResult(), lottoMatchResult))
-                     .findFirst();
+    public boolean matched(int count, boolean bonusNumberMatched) {
+        if (this.maybeBonusNumberMatched.isPresent()) {
+            return Objects.equals(this.matchCount, count) && Objects.equals(this.maybeBonusNumberMatched.get(), bonusNumberMatched);
+        }
+
+        return Objects.equals(this.matchCount, count);
     }
 
     public int getRewardAmount() {
