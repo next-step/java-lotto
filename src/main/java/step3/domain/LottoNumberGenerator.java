@@ -26,7 +26,6 @@ public class LottoNumberGenerator {
 
         return lottoNumbersCache.stream()
             .limit(LOTTO_NUMBER_COUNT)
-            .sorted()
             .collect(Collectors.toList());
     }
 }

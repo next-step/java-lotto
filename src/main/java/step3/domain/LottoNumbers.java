@@ -1,11 +1,12 @@
 package step3.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoNumbers {
 
-    private List<Integer> lottoNumbers = new ArrayList<>();
+    private Set<Integer> lottoNumbers = new TreeSet<>();
 
     private LottoNumbers(List<Integer> generatedNumbers) {
         lottoNumbers.addAll(generatedNumbers);
@@ -15,7 +16,7 @@ public class LottoNumbers {
         return new LottoNumbers(generatedNumbers);
     }
 
-    public List<Integer> getLottoNumbers() {
+    public Set<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 }
