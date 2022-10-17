@@ -37,10 +37,28 @@
       - [x] 6개 일치 2000000000원
     - [x] 수익률 기능
     - [x] 결과 출력
-    * 자가점검 리팩토링 목록
-      * ENUM 활용을 제대로(ENUM 자체적으로 활용되도록)
-      * MVC 구조로 개선
-      * LottoResult 로직 개선
-      * OutPutView.printDrawResult 개선 -> View가 아니라 도메인 영역에서 계산하도록
-      * 네이밍 개선
-      * 테스트 코드, 예외처리 좀 더 꼼꼼히
+  * 자가점검 리팩토링 목록
+    * ENUM 활용을 제대로(ENUM 자체적으로 활용되도록)
+    * MVC 구조로 개선
+    * LottoResult 로직 개선
+    * OutPutView.printDrawResult 개선 -> View가 아니라 도메인 영역에서 계산하도록
+    * 네이밍 개선
+    * 테스트 코드, 예외처리 좀 더 꼼꼼히
+  * 피드백
+    - [x] 파일 마지막의 개행, FOSIX 표준
+    - [x] 입력을 위한 출력도 InputView 책임으로 이동
+    - [x] 메소드 내부 의미 단위로 개행 추가
+    - [x] LottoNumber 역할 분리
+    - [x] Enum 내부 Abstract Method 활용
+    - [x] Shuffle 테스트 가능한 구조로 변경
+* Step3 - 로또(2등)
+  * Step2 추가 피드백
+    - [ ] LottoNumbers 에게 번호가 몇 개 일치하는지 물어보기
+    - [ ] LottoNumber Collection Type 고민하기
+    - [ ] LottoResult indent 줄이기
+    - [ ] Prize 당첨이 안됨을 나타내는 값을 추가하기
+    - [ ] Prize enum 에서 reward 를 값으로 가지기
+  * 기능 목록
+    - [ ] 보너스 번호 입력
+    - [ ] 2등 추가(5개 일치 + 보너스 볼 일치 - 30000000)
+    - [ ] 출력
