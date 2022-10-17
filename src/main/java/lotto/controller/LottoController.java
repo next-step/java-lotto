@@ -14,12 +14,12 @@ public class LottoController {
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
 
-    public void buyLottoTickets() {
+    public void buyLotto() {
         int paidAmount = inputView.receiveInputNumber();
         int numOfTickets = LottoUtil.getNumOfTickets(paidAmount);
 
         resultView.printNumOfTickets(numOfTickets);
-        List<LottoTicket> lottoTickets = LottoTickets.createLottoTickets(numOfTickets);
+        List<LottoTicket> lottoTickets = LottoTickets.create(numOfTickets);
 
         resultView.printAllLottoNumbers(lottoTickets);
         getLottoResult(lottoTickets, paidAmount);
