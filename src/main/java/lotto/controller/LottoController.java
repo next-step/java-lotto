@@ -29,8 +29,10 @@ public class LottoController {
         String winningNumbers = inputView.receiveInputString();
         List<Integer> numbers = LottoUtil.splitStringToNumbers(winningNumbers);
 
+        int bonusBall = inputView.receiveExtraInput();
+
         LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateLottoResult(lottoTickets, numbers, paidAmount);
+        lottoResult.calculateLottoResult(lottoTickets, numbers, paidAmount, bonusBall);
 
         resultView.printWinningResult(lottoResult);
     }
