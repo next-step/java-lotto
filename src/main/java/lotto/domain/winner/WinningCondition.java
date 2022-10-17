@@ -41,9 +41,13 @@ public enum WinningCondition {
         return Arrays.stream(WinningCondition.values())
                 .filter(condition ->
                         condition.matchCount == matchCount
-                                && (!condition.requiredBonus || condition.bonusMatch == bonusMatch))
+                                && checkBonusRule(bonusMatch, condition))
                 .findFirst()
                 .orElseThrow(UnknownWinningConditionException::new);
+    }
+
+    private static boolean checkBonusRule(boolean bonusMatch, WinningCondition condition) {
+        return !condition.requiredBonus || condition.bonusMatch == bonusMatch;
     }
 
     public static List<WinningCondition> getConditionsWithPrize() {
