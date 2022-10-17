@@ -26,10 +26,11 @@ public class LottoPurchaseController {
         return lottoList;
     }
 
-    private List<Lotto> purchaseAutoLotto(final Amount totalAmount, final List<Lotto> lottoList) {
-        Amount autoAmount = totalAmount.minus(new Amount(lottoList.size()));
-        LottoOutput.purchaseCount(new Amount(lottoList.size()), autoAmount);
-        lottoList.addAll(lottoPurchaseService.purchaseLotto(autoAmount));
+    private List<Lotto> purchaseAutoLotto(final Amount amount, final List<Lotto> lottoList) {
+        Amount manualLottoAmount = new Amount(lottoList.size());
+        amount.minus(manualLottoAmount);
+        LottoOutput.purchaseCount(manualLottoAmount, amount);
+        lottoList.addAll(lottoPurchaseService.purchaseLotto(amount));
         return lottoList;
     }
 

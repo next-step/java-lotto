@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Amount {
 
-    private final int amount;
+    private int amount;
     private static final int AMOUNT_MINIMUM = 0;
     private final static String AMOUNT_BOUND_EXCEPTION = "Amount에는 " + AMOUNT_MINIMUM + "이상의 값만 들어올 수 있습니다.";
 
@@ -20,8 +20,8 @@ public class Amount {
         return amount;
     }
 
-    public Amount minus(final Amount amount) {
-        return new Amount(this.amount - amount.amount);
+    public void minus(final Amount amount) {
+        this.amount -= amount.amount;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,9 @@ public class AmountTest {
 
     @Test
     void minus() {
-        Amount actual = new Amount(3).minus(new Amount(2));
+        Amount actual = new Amount(3);
+        actual.minus(new Amount(2));
+
         assertThat(actual).isEqualTo(new Amount(1));
     }
 }
