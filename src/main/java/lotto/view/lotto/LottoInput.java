@@ -13,19 +13,23 @@ public class LottoInput {
         Scanner scanner = new Scanner(System.in);
         try {
             return new Amount(scanner.nextInt());
-        } catch (Exception e){
-            LottoOutput.purchaseManualAmountException();
+        } catch (Exception e) {
+            LottoOutput.purchaseManualAmountInputException();
         }
         return purchaseManualAmount();
     }
 
     public static LottoNumberSet lottoNumbers() {
         Scanner scanner = new Scanner(System.in);
-        return LottoNumberSet.createLottoNumberSet(
-                Arrays.stream(scanner.nextLine().split(LottoNumberSet.LOTTONUMBERSET_DELIMITER))
-                        .mapToInt(i -> Integer.parseInt(i))
-                        .toArray()
-        );
+        try {
+            return LottoNumberSet.createLottoNumberSet(
+                    Arrays.stream(scanner.nextLine().split(LottoNumberSet.LOTTONUMBERSET_DELIMITER))
+                            .mapToInt(i -> Integer.parseInt(i))
+                            .toArray());
+        } catch (Exception e) {
+            LottoOutput.lottoNumbersInputException();
+        }
+        return lottoNumbers();
     }
 
     public static LottoNumber bonusNumber() {
