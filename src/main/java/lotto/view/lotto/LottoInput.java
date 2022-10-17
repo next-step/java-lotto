@@ -34,6 +34,11 @@ public class LottoInput {
 
     public static LottoNumber bonusNumber() {
         Scanner scanner = new Scanner(System.in);
-        return new LottoNumber(scanner.nextInt());
+        try {
+            return new LottoNumber(scanner.nextInt());
+        } catch (Exception e) {
+            LottoOutput.bonusNumberInputException();
+        }
+        return bonusNumber();
     }
 }

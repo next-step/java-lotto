@@ -66,7 +66,11 @@ public class LottoOutput {
         if (profitRate.loss()) {
             System.out.println("총 수익률은 " + profitRate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         } else {
-            System.out.println("총 수익률은 " + profitRate + "f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+            System.out.println("총 수익률은 " + profitRate + "입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
         }
+    }
+
+    public static void bonusNumberInputException() {
+        System.out.println("보너스 번호 입력이 잘못됐습니다 다시 입력해주세요.");
     }
 }

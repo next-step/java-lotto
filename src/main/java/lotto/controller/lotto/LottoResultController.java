@@ -26,11 +26,18 @@ public class LottoResultController {
     private LottoWinner drawWinner() {
         LottoOutput.winningNumber();
         LottoNumberSet numbers = LottoInput.lottoNumbers();
-
         LottoOutput.bonusNumber();
-        LottoNumber bonusNumber = LottoInput.bonusNumber();
+        return createLottoWinner(numbers);
+    }
 
-        return new LottoWinner(numbers, bonusNumber);
+    private static LottoWinner createLottoWinner(final LottoNumberSet numbers) {
+        try {
+            LottoNumber bonusNumber = LottoInput.bonusNumber();
+            return new LottoWinner(numbers, bonusNumber);
+        } catch (Exception e) {
+            LottoOutput.bonusNumberInputException();
+        }
+        return createLottoWinner(numbers);
     }
 
     private void lottoResult(final List<Lotto> lottos, final LottoWinner winner) {
