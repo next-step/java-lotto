@@ -22,9 +22,9 @@ public class Lotto {
             .count();
     }
 
-    public boolean matches(int bonus) {
+    public boolean matches(LottoNumber bonus) {
         return lotto.stream()
-            .anyMatch(lottoNumber -> lottoNumber.equals(LottoNumber.from(bonus)));
+            .anyMatch(lottoNumber -> lottoNumber.equals(bonus));
     }
 
     private static boolean isDuplicate(List<LottoNumber> lottoNumbers) {

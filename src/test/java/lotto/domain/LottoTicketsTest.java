@@ -33,7 +33,7 @@ public class LottoTicketsTest {
             List.of(LottoNumber.from(1), LottoNumber.from(2),
                 LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
                 LottoNumber.from(6)));
-        int bonus = 7;
+        LottoNumber bonus = LottoNumber.from(7);
         LottoTickets lottoTickets = LottoTickets.of(List.of(Lotto.of(list)));
 
         LottoResult result = lottoTickets.getResult(Lotto.of(list), bonus);

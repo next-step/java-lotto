@@ -46,14 +46,14 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호 중 보너스 번호가 있으면 true 를 반환한다.")
     void bonus() {
-        int bonus = 1;
+        LottoNumber bonus = LottoNumber.from(1);
         assertThat(lotto.matches(bonus)).isTrue();
     }
 
     @Test
     @DisplayName("로또 번호 중 보너스 번호가 있으면 false 를 반환한다.")
     void doesNotMatchBonus() {
-        int bonus = 10;
+        LottoNumber bonus = LottoNumber.from(10);
         assertThat(lotto.matches(bonus)).isFalse();
     }
 }

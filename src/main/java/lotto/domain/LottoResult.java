@@ -19,7 +19,7 @@ public class LottoResult {
         result.merge(rank, 1, Integer::sum);
     }
 
-    public void result(Lotto winningNumbers, LottoTickets tickets, int bonusBall) {
+    public void result(Lotto winningNumbers, LottoTickets tickets, LottoNumber bonusBall) {
         List<Lotto> lottos = tickets.getTickets();
         for (Lotto lotto : lottos) {
             int count = lotto.matches(winningNumbers);
