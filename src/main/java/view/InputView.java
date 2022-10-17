@@ -1,19 +1,29 @@
 package view;
 
-import java.util.Scanner;
+import domain.Lotto;
+import domain.Money;
 
-import service.InputValueParser;
+import java.util.Scanner;
 
 public class InputView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static InputValueParser inputInfo() {
+    public static Money inputPurchaseMoney() {
 
-        System.out.println("계산할 값을 입력하세요");
-
-        String input = sc.nextLine();
-
-        return new InputValueParser(input);
+        System.out.println("구입금액을 입력해 주세요.");
+        int purchaseMoney = sc.nextInt();
+        sc.nextLine();
+        return Money.from(purchaseMoney);
     }
+
+    public static Lotto inputLastWeekWinnerNumber() {
+
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
+        String winnerNumber = sc.nextLine();
+
+        return Lotto.from(winnerNumber);
+    }
+
 }

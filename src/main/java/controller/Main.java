@@ -1,7 +1,13 @@
 package controller;
 
-import service.InputValueParser;
-import service.Calculator;
+import domain.Lotto;
+import domain.Lottos;
+import domain.LottoResult;
+import domain.Money;
+import service.LottoGenerator;
+import service.LottoMachine;
+
+import service.RandomLottoGenerator;
 import view.InputView;
 import view.ResultView;
 
@@ -9,12 +15,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        InputValueParser inputValueParser = InputView.inputInfo();
-        Calculator calculator = new Calculator();
+        Money purchasedMoney = InputView.inputPurchaseMoney();
+        LottoGenerator lottoGenerator = new RandomLottoGenerator();
+        LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
+        Lottos createdRandomLottos = lottoMachine.purchaseLotto(purchasedMoney);
+        ResultView.printRandomLotto(createdRandomLottos);
 
-        int result = calculator.calculateInputValue(inputValueParser);
+        Lotto winnerNumber = InputView.inputLastWeekWinnerNumber();
 
-        ResultView resultView = new ResultView();
-        resultView.printResult(result);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.findMatchLottoCount(winnerNumber, createdRandomLottos);
+        ResultView.winnerStatistic(lottoResult, purchasedMoney);
+
     }
+
 }
