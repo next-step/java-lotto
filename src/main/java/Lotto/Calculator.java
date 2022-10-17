@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Calculator {
     private static final String INVALID_INPUT = "유효하지 않은 입력값입니다.";
+    private static final int EVEN_NUMBER = 2;
 
     public static void main(String[] args) {
         int result = Calculator.calculate(InputView.inputCalculation());
@@ -55,10 +56,10 @@ public class Calculator {
     }
 
     private static boolean isEven(int value) {
-        return value % 2 == 0;
+        return value % EVEN_NUMBER == 0;
     }
 
     private static boolean isOdd(int value) {
-        return value % 2 != 0;
+        return value % EVEN_NUMBER != 0;
     }
 }
