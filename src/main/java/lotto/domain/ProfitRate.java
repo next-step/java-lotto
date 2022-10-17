@@ -5,8 +5,12 @@ import java.util.Objects;
 public class ProfitRate {
 
     private final double profitRate;
+    private final String PROFITRATE_NEGATIVE_EXCEPTION = "수익률은 음수일 수 없습니다.";
 
     public ProfitRate(double profitRate) {
+        if (profitRate < 0) {
+            throw new IllegalArgumentException(PROFITRATE_NEGATIVE_EXCEPTION);
+        }
         this.profitRate = profitRate;
     }
 

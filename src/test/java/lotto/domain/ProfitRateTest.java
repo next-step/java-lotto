@@ -12,4 +12,9 @@ public class ProfitRateTest {
 
         assertThat(actual).isEqualTo(new ProfitRate(0.25));
     }
+
+    @Test
+    void valid() {
+        assertThatThrownBy(() -> new ProfitRate(-1)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
