@@ -17,7 +17,7 @@ class AutoLottosTest {
     @ValueSource(ints = {0, 2, 1, 3, 4, 5})
     void create_auto_lotto(final int index) {
 
-        final List<Lotto> autoLottoNumbers = AutoLottos.autoCreate(1, 0);
+        final List<Lotto> autoLottoNumbers = AutoLottos.autoCreate(1);
 
         final List<Number> lottoNumber = autoLottoNumbers.get(0).getLotto();
         assertAll(
@@ -28,14 +28,14 @@ class AutoLottosTest {
 
     @DisplayName("구매 가능한 금액에서 수동 로또 번호를 제외한 자동 로또 번호 6자리를 생성한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1,0,1", "5,3,2", "10,5,5"})
-    void create_auto_lotto2(final int countOfPurchaseLotto, final int countOfManualLotto, final int countOfAutoLotto) {
+    @CsvSource(value = {"1,1", "2,2", "5,5"})
+    void create_auto_lotto2(final int countOfAutoLotto, final int expected) {
 
-        final List<Lotto> autoLottoNumbers = AutoLottos.autoCreate(countOfPurchaseLotto, countOfManualLotto);
+        final List<Lotto> autoLottoNumbers = AutoLottos.autoCreate(countOfAutoLotto);
 
         final List<Number> lottoNumber = autoLottoNumbers.get(0).getLotto();
         assertAll(
-                () -> assertThat(autoLottoNumbers).hasSize(countOfAutoLotto),
+                () -> assertThat(autoLottoNumbers).hasSize(expected),
                 () -> assertThat(lottoNumber).hasSize(6)
         );
     }
