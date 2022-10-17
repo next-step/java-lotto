@@ -37,18 +37,26 @@ public enum Prize {
         return reward;
     }
 
-    public static Prize getPrize(int matchCount) {
-        if (matchCount > MAXIMUM_PRIZE_RANGE) {
+    public static Prize valueOf(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch > MAXIMUM_PRIZE_RANGE) {
             throw new IllegalArgumentException("6개 이상 당첨될 수 없습니다.");
         }
 
-        if (matchCount < MINIMUM_PRIZE_RANGE) {
-            return Prize.MISS;
+        if (countOfMatch < MINIMUM_PRIZE_RANGE) {
+            return MISS;
+        }
+
+        if (countOfMatch == 5 && matchBonus) {
+            return SECOND;
+        }
+
+        if (countOfMatch == 5 && !matchBonus) {
+            return THIRD;
         }
 
         return Arrays.stream(Prize.values())
-            .filter(prize -> prize.getCountOfMatch() == matchCount)
-            .findAny()
+            .filter(prize -> prize.getCountOfMatch() == countOfMatch)
+            .findFirst()
             .get();
     }
 }

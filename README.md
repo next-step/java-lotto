@@ -54,11 +54,12 @@
 * Step3 - 로또(2등)
   * Step2 추가 피드백
     - [ ] LottoNumbers 에게 번호가 몇 개 일치하는지 물어보기
+    - [ ] LottoNumber 도메인을 통해 항상 1~45 사이의 값을 가지고 있음을 알리기
     - [x] LottoNumber Collection Type 고민하기
-    - [ ] LottoResult indent 줄이기
-    - [ ] Prize 당첨이 안됨을 나타내는 값을 추가하기
-    - [ ] Prize enum 에서 reward 를 값으로 가지기
+    - [x] LottoResult indent 줄이기
+    - [x] Prize 당첨이 안됨을 나타내는 값을 추가하기
+    - [x] Prize enum 에서 reward 를 값으로 가지기
   * 기능 목록
     - [ ] 보너스 번호 입력
-    - [ ] 2등 추가(5개 일치 + 보너스 볼 일치 - 30000000)
+    - [x] 2등 추가(5개 일치 + 보너스 볼 일치 - 30000000)
     - [ ] 출력

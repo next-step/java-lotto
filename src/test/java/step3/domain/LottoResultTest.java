@@ -30,12 +30,12 @@ class LottoResultTest {
         );
 
         Map<Prize, Integer> drawLottoResult =
-            lottoResult.drawLottoResult(allLottoNumbers);
+            lottoResult.drawLottoResult(allLottoNumbers, false);
 
         Assertions.assertAll(
-            () -> assertThat(drawLottoResult.get(Prize.THREE)).isEqualTo(2),
-            () -> assertThat(drawLottoResult.get(Prize.FOUR)).isEqualTo(1),
-            () -> assertThat(drawLottoResult.get(Prize.FIVE)).isEqualTo(1)
+            () -> assertThat(drawLottoResult.get(Prize.FIFTH)).isEqualTo(2),
+            () -> assertThat(drawLottoResult.get(Prize.FOURTH)).isEqualTo(1),
+            () -> assertThat(drawLottoResult.get(Prize.THIRD)).isEqualTo(1)
         );
     }
 }

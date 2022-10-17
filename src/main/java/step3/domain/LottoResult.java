@@ -19,12 +19,12 @@ public class LottoResult {
         return new LottoResult(winningNumbers);
     }
 
-    public final Map<Prize, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers) {
+    public final Map<Prize, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers, boolean matchBonus) {
         for (LottoNumbers eachLottoNumber : allLottoNumbers) {
             Set<Integer> lottoNumbers = eachLottoNumber.getLottoNumbers();
             int matchCount = calculateMatchCount(lottoNumbers);
 
-            Prize prize = Prize.getPrize(matchCount);
+            Prize prize = Prize.valueOf(matchCount, false);
             drawResult.put(prize, drawResult.getOrDefault(prize, 0) + 1);
         }
 
