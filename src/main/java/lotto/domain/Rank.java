@@ -39,12 +39,12 @@ public enum Rank {
         return THIRD;
     }
 
-    public int rankValue() {
-        return rank;
-    }
-
     public LottoMatchCount matchCount() {
         return matchCount;
+    }
+
+    public int index() {
+        return rank - 1;
     }
 
     @Override
@@ -52,7 +52,4 @@ public enum Rank {
         return String.valueOf(rank);
     }
 
-    public int index() {
-        return rank - 1;
-    }
 }
