@@ -19,26 +19,20 @@ public class LottoRewardTest {
 
     private static Stream<Arguments> provideLottoReward() {
         return Stream.of(
-                Arguments.of(new ImmutableMoney(2_000_000_000), 1, 6),
-                Arguments.of(new ImmutableMoney(30_000_000), 2, 5),
-                Arguments.of(new ImmutableMoney(1_500_000), 3, 5),
-                Arguments.of(new ImmutableMoney(50_000), 4, 4),
-                Arguments.of(new ImmutableMoney(5_000), 5, 3),
-                Arguments.of(new ImmutableMoney(0), 6, 2),
-                Arguments.of(new ImmutableMoney(0), 7, 1),
-                Arguments.of(new ImmutableMoney(0), 8, 0)
+                Arguments.of(new ImmutableMoney(2_000_000_000), Rank.FIRST),
+                Arguments.of(new ImmutableMoney(30_000_000), Rank.SECOND),
+                Arguments.of(new ImmutableMoney(1_500_000), Rank.THIRD),
+                Arguments.of(new ImmutableMoney(50_000), Rank.FOURTH),
+                Arguments.of(new ImmutableMoney(5_000), Rank.FIFTH),
+                Arguments.of(new ImmutableMoney(0), Rank.SIXTH),
+                Arguments.of(new ImmutableMoney(0), Rank.SEVENTH),
+                Arguments.of(new ImmutableMoney(0), Rank.EIGHTH)
         );
     }
 
     @ParameterizedTest(name = "등수에 따른 상금을 반환한다.")
     @MethodSource(value = "provideLottoReward")
-    void reward(ImmutableMoney reward, int rank, int count) {
+    void reward(ImmutableMoney reward, Rank rank) {
         assertThat(LottoReward.reward(rank)).isEqualTo(reward);
-    }
-
-    @ParameterizedTest(name = "등수에 따른 맞힌 개수를 반환한다.")
-    @MethodSource(value = "provideLottoReward")
-    void count(ImmutableMoney reward, int rank, int count) {
-        assertThat(LottoReward.count(rank)).isEqualTo(count);
     }
 }

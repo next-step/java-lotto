@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.Rank;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
 import org.junit.jupiter.api.Test;
@@ -22,19 +23,19 @@ public class LottoWinnerTest {
 
     private static Stream<Arguments> provideLottoMatch() {
         return Stream.of(
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6)), 1),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 7)), 2),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 8)), 3),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(3, 4, 5, 6, 7, 8)), 4),
-                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)), 5)
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 7)), Rank.SECOND),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 8)), Rank.THIRD),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(3, 4, 5, 6, 7, 8)), Rank.FOURTH),
+                Arguments.of(new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)), Rank.FIFTH)
         );
     }
 
     @ParameterizedTest(name = "로또 등수를 반환한다.")
     @MethodSource(value = "provideLottoMatch")
-    void match(Lotto lotto, int matchCount) {
+    void match(Lotto lotto, Rank rank) {
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(new int[]{1, 2, 3, 4, 5, 6}), new LottoNumber(7));
 
-        assertThat(winner.rank(lotto)).isEqualTo(matchCount);
+        assertThat(winner.rank(lotto)).isEqualTo(rank);
     }
 }

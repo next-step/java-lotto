@@ -15,10 +15,6 @@ import java.util.Map;
 public class LottoResultController {
 
     private final LottoResultService lottoResultService;
-    private static final int REWARD_START_RANK = 5;
-    private static final int REWARD_END_RANK = 1;
-    private static final int BONUS_RANK = 2;
-
 
     public LottoResultController(final LottoResultService lottoResultService) {
         this.lottoResultService = lottoResultService;
@@ -39,25 +35,25 @@ public class LottoResultController {
     }
 
     private void lottoResult(final ImmutableMoney money, final List<Lotto> lottos, final LottoWinner winner) {
-        Map<Integer, Integer> checkLotto = lottoResultService.checkLotto(lottos, winner);
-
+        Map<Rank, Integer> checkLotto = lottoResultService.checkLotto(lottos, winner);
         LottoOutput.statistics();
-        for (int rank = REWARD_START_RANK; rank >= REWARD_END_RANK; rank--) {
+        for (int rankIndex = Rank.REWARD_START_RANK_INDEX; rankIndex >= Rank.REWARD_END_RANK_INDEX; rankIndex--) {
+            Rank rank = Rank.values()[rankIndex];
             lottoMatchOutput(rank, checkLotto.get(rank));
         }
 
         LottoOutput.yield(lottoResultService.yield(lottos, winner, money));
     }
 
-    private void lottoMatchOutput(final int rank, final int matchNumber) {
+    private void lottoMatchOutput(final Rank rank, final int matchNumber) {
         if (isBonusRank(rank)) {
-            LottoOutput.matchBonusNumber(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
+            LottoOutput.matchBonusNumber(rank.matchCount(), LottoReward.reward(rank), matchNumber);
             return;
         }
-        LottoOutput.match(LottoReward.count(rank), LottoReward.reward(rank), matchNumber);
+        LottoOutput.match(rank.matchCount(), LottoReward.reward(rank), matchNumber);
     }
 
-    private boolean isBonusRank(final int rank) {
-        return rank == BONUS_RANK;
+    private boolean isBonusRank(final Rank rank) {
+        return rank == Rank.SECOND;
     }
 }

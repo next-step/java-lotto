@@ -1,30 +1,55 @@
 package lotto.domain;
 
-import java.util.Objects;
+public enum Rank {
 
-public class Rank {
+    FIRST(1, 6), SECOND(2, 5), THIRD(3, 5),
+    FOURTH(4, 4), FIFTH(5, 3),
+    SIXTH(6, 2), SEVENTH(7, 1), EIGHTH(8, 0);
 
     private final int rank;
-    private static final int RANK_MINIMUM = 1;
-    private static final String RANK_BOUND_EXCEPTION = String.format("Rank는 %d 이상이어야 합니다.", RANK_MINIMUM);
+    private final int matchCount;
+    private static final int REQUIRE_CHECK_BONUSNUMBER = 5;
+    public static final int REWARD_START_RANK_INDEX = 4;
+    public static final int REWARD_END_RANK_INDEX = 0;
 
-    public Rank(final int rank) {
-        if (rank < RANK_MINIMUM) {
-            throw new IllegalArgumentException(RANK_BOUND_EXCEPTION);
-        }
+    Rank(final int rank, int matchCount) {
         this.rank = rank;
+        this.matchCount = matchCount;
+    }
+
+    public static Rank rankValue(final int matchCount, final boolean containBonusNumber) {
+        if (matchCount == REQUIRE_CHECK_BONUSNUMBER) {
+            return checkBonusNumber(containBonusNumber);
+        }
+        return rankValue(matchCount);
+    }
+
+    private static Rank rankValue(int matchCount) {
+        for (Rank rank : Rank.values()) {
+            if (rank.matchCount == matchCount) {
+                return rank;
+            }
+        }
+        return Rank.EIGHTH;
+    }
+
+    private static Rank checkBonusNumber(boolean containBonusNumber) {
+        if (containBonusNumber) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
+    public int rankValue() {
+        return rank;
+    }
+
+    public int matchCount() {
+        return matchCount;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rank rank1 = (Rank) o;
-        return rank == rank1.rank;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(rank);
+    public String toString() {
+        return String.valueOf(rank);
     }
 }
