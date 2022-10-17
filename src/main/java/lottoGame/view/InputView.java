@@ -6,7 +6,7 @@ import lottoGame.model.InputParameter;
 import java.util.Scanner;
 
 public class InputView {
-    public static final Scanner scanner = new Scanner(System.in);
+    public final Scanner scanner = new Scanner(System.in);
 
     public InputParameter print() {
         System.out.println("구입금액을 입력해 주세요.");

@@ -1,14 +1,14 @@
 package lottoGame.model;
 
 public class InputParameter {
-    private static final int ticketPrice = 1000;
+    private static final int TICKET_PRICE = 1000;
     private final int lotteryNum;
     private final int amount;
 
 
     public InputParameter(int amount) {
         this.amount = amount;
-        this.lotteryNum = amount / ticketPrice;
+        this.lotteryNum = amount / TICKET_PRICE;
     }
 
     public int getLotteryNum() {
