@@ -1,46 +1,38 @@
 package lottoGame.model;
 
-import lottoGame.model.factory.DefaultLottoFactory;
+import lottoGame.WinningNumbers;
 import lottoGame.model.factory.LottoFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottery {
     private final List<Lotto> lottery = new ArrayList<>();
-    private final LottoFactory lottoFactory;
 
-    public Lottery(LottoFactory lottoFactory) {
-        this.lottoFactory = lottoFactory;
+    public List<Lotto> getLottery() {
+        return lottery;
     }
 
-    public int getSize() {
-        return lottery.size();
-    }
-
-    public List<Lotto> create(int lotteryNum) {
+    public List<Lotto> create(int lotteryNum, LottoFactory lottoFactory) {
         for (int i = 0; i < lotteryNum; i++) {
             lottery.add(lottoFactory.createLotto());
         }
         return lottery;
     }
-
-    public int calculate(List<Integer> winningNumer) {
-        return lottery.stream().map(
-                lotto -> {
-                    if (lotto.isContain(winningNumer) == 3) {
-                        return 5000;
-                    }
-                    if (lotto.isContain(winningNumer) == 4) {
-                        return 50000;
-                    }
-                    if (lotto.isContain(winningNumer) == 5) {
-                        return 1500000;
-                    }
-                    if (lotto.isContain(winningNumer) == 6) {
-                        return 2000000000;
-                    }
-                    return 0;
-                }).findFirst().get();
+    public void putBoard(List<Integer> winningNum, EnumMap<WinningNumbers, Integer> lotteryBoard) {
+        for (WinningNumbers winningNumbers : WinningNumbers.values()) {
+            lotteryBoard.put(winningNumbers, Collections.frequency(findMatchNumber(winningNum), winningNumbers.getNumberOfWins()));
+        }
     }
+    private List<Integer> findMatchNumber(List<Integer> winningNumer) {
+        return lottery.stream()
+                .map(lotto -> lotto.isContain(winningNumer))
+                .filter(match -> match >= WinningNumbers.FOURTH.getNumberOfWins())
+                .collect(Collectors.toList());
+    }
+
+
 }

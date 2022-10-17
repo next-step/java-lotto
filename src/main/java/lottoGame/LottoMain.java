@@ -1,10 +1,12 @@
 package lottoGame;
 
-import lottoGame.model.DefaultLotto;
 import lottoGame.model.factory.DefaultLottoFactory;
+import lottoGame.view.InputView;
+import lottoGame.view.ResultView;
 
 public class LottoMain {
     public static void main(String[] args) {
-
+        LottoGenerator lottoGenerator = new LottoGenerator(new InputView(), new DefaultLottoFactory(), new ResultView());
+        lottoGenerator.start();
     }
 }

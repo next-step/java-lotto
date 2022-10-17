@@ -19,9 +19,7 @@ public class DefaultLotto implements Lotto {
 
     @Override
     public String toString() {
-        return "DefaultLotto{" +
-                "lottoNum=" + lottoNum +
-                '}';
+        return "" + lottoNum + "";
     }
 
     @Override

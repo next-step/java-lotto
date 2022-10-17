@@ -10,6 +10,7 @@ public class DefaultLottoStrategy implements LottoStrategy {
         return ThreadLocalRandom
                 .current()
                 .ints(1, 45)
+                .distinct()
                 .limit(6)
                 .boxed()
                 .sorted()
