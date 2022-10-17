@@ -4,8 +4,8 @@ import java.util.function.BinaryOperator;
 
 public enum Operator {
 
-    PLUS("+", (a, b) -> a + b)
-    ;
+    PLUS("+", (a, b) -> a + b),
+    MINUS("-", (a, b) -> a - b);
 
     private final String arithmetic;
     private final BinaryOperator<Integer> formula;
