@@ -24,10 +24,14 @@ public class LottoNumberSet {
     }
 
     public LottoNumberSet(final Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SET_SIZE) {
+        if (checkLottoNumberSize(lottoNumbers)) {
             throw new IllegalArgumentException(LOTTO_SIZE_EXCEPTION);
         }
         this.lottoNumberSet = lottoNumbers;
+    }
+
+    private static boolean checkLottoNumberSize(final Set<LottoNumber> lottoNumbers) {
+        return lottoNumbers.size() != LOTTO_SET_SIZE;
     }
 
     public LottoMatchCount match(final LottoNumberSet numbers) {
