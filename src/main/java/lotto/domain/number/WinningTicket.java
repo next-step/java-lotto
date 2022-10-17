@@ -23,7 +23,7 @@ public class WinningTicket extends Ticket {
 
     private boolean checkBonusMatch(Ticket ticket) {
         return getBallStream(ticket)
-                .anyMatch(ball -> ball.getNumber() == bonusBall.getNumber());
+                .anyMatch(bonusBall::equals);
     }
 
     private Stream<LottoBall> getBallStream(Ticket ticket) {

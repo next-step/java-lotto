@@ -31,7 +31,7 @@ public class LottoBall implements Comparable<LottoBall> {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         LottoBall lottoBall = (LottoBall) obj;
