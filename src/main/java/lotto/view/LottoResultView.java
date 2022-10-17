@@ -9,6 +9,10 @@ import lotto.domain.winner.WinningReport;
 
 public class LottoResultView {
 
+    private LottoResultView() {
+
+    }
+
     public static void printTicketCount(int count) {
         System.out.printf("%d개를 구매했습니다.%n", count);
     }

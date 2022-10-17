@@ -10,6 +10,11 @@ import lotto.domain.number.WinningTicket;
 
 public class LottoInputView {
 
+    private LottoInputView() {
+
+    }
+
+    private static final String DELIMITER = ", ";
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int insertPurchasePrice() {
@@ -20,7 +25,7 @@ public class LottoInputView {
     public static WinningTicket insertWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         LottoBalls lottoBalls = new LottoBalls(
-                Arrays.stream(insertData().split(", "))
+                Arrays.stream(insertData().split(DELIMITER))
                         .map(LottoInputView::getIntData)
                         .map(LottoBall::new)
                         .collect(Collectors.toUnmodifiableList()));
