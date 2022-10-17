@@ -6,15 +6,11 @@ public class Calculator {
         isBlank(str);
         String[] arr = str.split(REGEX);
         int result = Integer.parseInt(arr[0]);
-        for (int i = 0; i < arr.length; i++) {
-            try {
-                Integer.parseInt(arr[i]);
-            } catch (NumberFormatException e) {
-                String symbol = arr[i];
-                Operation operation = Operation.valueOfSymbol(symbol);
-                int number = Integer.parseInt(arr[++i]);
-                result = operation.apply(result, number);
-            }
+        for (int i = 1; i < arr.length; i++) {
+            String symbol = arr[i];
+            Operation operation = Operation.valueOfSymbol(symbol);
+            int number = Integer.parseInt(arr[++i]);
+            result = operation.apply(result, number);
         }
         return result;
     }
