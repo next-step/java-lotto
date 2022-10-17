@@ -40,7 +40,7 @@ public class LottoTickets {
     private static List<Lotto> createTickets(int tickets) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < tickets; i++) {
-            Lotto generateNumbers = LottoNumberRandomGenerator.generate();
+            Lotto generateNumbers = LottoRandomGenerator.generate();
             lottos.add(generateNumbers);
         }
         return lottos;
