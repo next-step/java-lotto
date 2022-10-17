@@ -5,9 +5,10 @@ import java.util.Arrays;
 public enum Rank {
 
     NONE(new Money(0), 0),
-    FOURTH(new Money(5_000), 3),
-    THIRD(new Money(50_000), 4),
-    SECOND(new Money(1_500_000), 5),
+    FIFTH(new Money(5_000), 3),
+    FOURTH(new Money(50_000), 4),
+    THIRD(new Money(1_500_000), 5),
+    SECOND(new Money(30_000_000), 5),
     FIRST(new Money(2_000_000_000), 6);
 
     public static final Rank[] values = values();
@@ -19,11 +20,18 @@ public enum Rank {
         this.correctCount = correctCount;
     }
 
-    public static Rank findRank(int correctCount) {
+    public static Rank findRank(int correctCount, boolean matchBonus) {
+        if (isSecond(correctCount, matchBonus)) {
+            return Rank.SECOND;
+        }
         return Arrays.stream(values)
                 .filter(rank -> rank.correctCount == correctCount)
                 .findFirst()
                 .orElse(Rank.NONE);
+    }
+
+    private static boolean isSecond(int correctCount, boolean matchBonus) {
+        return correctCount == SECOND.correctCount && matchBonus;
     }
 
     public Money getReward() {

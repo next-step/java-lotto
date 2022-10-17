@@ -9,6 +9,9 @@ import java.util.List;
 
 public class OutputView {
 
+    private OutputView() {
+    }
+
     public static void printLotto(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
@@ -27,9 +30,17 @@ public class OutputView {
 
     private static void printRankCount(LottoResult lottoResult) {
         Arrays.stream(Rank.values).filter(value -> value != Rank.NONE).forEach(value -> {
-            System.out.printf("%d개 일치 (%s원)- %d개", value.getCorrectCount(), value.getReward(), lottoResult.countRank(value));
+            printRankMessage(lottoResult, value);
             System.out.println();
         });
+    }
+
+    private static void printRankMessage(LottoResult lottoResult, Rank value) {
+        if (value == Rank.SECOND) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%s원)- %d개", value.getCorrectCount(), value.getReward(), lottoResult.countRank(value));
+            return;
+        }
+        System.out.printf("%d개 일치 (%s원)- %d개", value.getCorrectCount(), value.getReward(), lottoResult.countRank(value));
     }
 
     private static void printYield(Double yield) {
