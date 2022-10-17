@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Amount;
+import lotto.domain.LottoMatchCount;
 import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lotto.Lotto;
 
@@ -21,7 +22,7 @@ public class LottoOutput {
     }
 
     public static void purchaseCount(final Amount manual, final Amount auto) {
-        System.out.println(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", manual, auto));
+        System.out.println("수동으로 " + manual + "장, 자동으로 " + auto + "개를 구매했습니다.");
     }
 
     public static void lotto(final Lotto lotto) {
@@ -49,12 +50,12 @@ public class LottoOutput {
         System.out.println(result);
     }
 
-    public static void match(final int count, final ImmutableMoney reward, final int number) {
-        System.out.println(String.format("%d개 일치 (%s원)- %d개", count, reward, number));
+    public static void match(final LottoMatchCount count, final ImmutableMoney reward, final Amount number) {
+        System.out.println(count + "개 일치 (" + reward + "원)- " + number + "개");
     }
 
-    public static void matchBonusNumber(final int count, final ImmutableMoney reward, final int number) {
-        System.out.println(String.format("%d개 일치, 보너스 볼 일치(%s원) - %d개", count, reward, number));
+    public static void matchBonusNumber(final LottoMatchCount count, final ImmutableMoney reward, final Amount number) {
+        System.out.println(count + "개 일치, 보너스 볼 일치(" + reward + "원) - " + number + "개");
     }
 
     public static void yield(final double yield) {

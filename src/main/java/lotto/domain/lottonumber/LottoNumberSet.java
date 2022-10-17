@@ -1,5 +1,7 @@
 package lotto.domain.lottonumber;
 
+import lotto.domain.LottoMatchCount;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,11 +30,11 @@ public class LottoNumberSet {
         this.lottoNumberSet = lottoNumbers;
     }
 
-    public int match(final LottoNumberSet numbers) {
-        return lottoNumberSet.stream()
+    public LottoMatchCount match(final LottoNumberSet numbers) {
+        return new LottoMatchCount(lottoNumberSet.stream()
                 .filter(lottoNumber -> numbers.lottoNumberSet().contains(lottoNumber))
                 .collect(Collectors.toList())
-                .size();
+                .size());
     }
 
     public boolean contain(final LottoNumber lottoNumber) {

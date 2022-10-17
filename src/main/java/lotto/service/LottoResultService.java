@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Amount;
 import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.Money.Money;
 import lotto.domain.Rank;
@@ -11,21 +12,19 @@ import java.util.*;
 
 public class LottoResultService {
 
-    private final int LOTTO_MATCH_DEFAULT_COUNT = 0;
-
-    public Map<Rank, Integer> checkLotto(final List<Lotto> lottos, final LottoWinner winner) {
-        Map<Rank, Integer> result = getDefaultRankMap();
+    public Map<Rank, Amount> checkLotto(final List<Lotto> lottos, final LottoWinner winner) {
+        Map<Rank, Amount> result = getDefaultRankMap();
         for (Lotto lotto : lottos) {
             Rank rank = winner.rank(lotto);
-            result.put(rank, result.getOrDefault(rank, LOTTO_MATCH_DEFAULT_COUNT) + 1);
+            result.get(rank).add(new Amount(1));
         }
         return Collections.unmodifiableMap(result);
     }
 
-    private Map<Rank, Integer> getDefaultRankMap() {
-        Map<Rank, Integer> result = new HashMap<>();
+    private Map<Rank, Amount> getDefaultRankMap() {
+        Map<Rank, Amount> result = new HashMap<>();
         for (Rank rank : Rank.values()) {
-            result.put(rank, LOTTO_MATCH_DEFAULT_COUNT);
+            result.put(rank, new Amount(0));
         }
         return result;
     }
@@ -36,10 +35,10 @@ public class LottoResultService {
 
     private ImmutableMoney reward(final List<Lotto> lottos, final LottoWinner winner) {
         Money result = new Money(0);
-        Map<Rank, Integer> rankMap = checkLotto(lottos, winner);
+        Map<Rank, Amount> rankMap = checkLotto(lottos, winner);
         for (Rank rank : Rank.values()) {
             Money reward = LottoReward.reward(rank).money();
-            reward.multiply(rankMap.get(rank));
+            reward.multiply(rankMap.get(rank).amount());
             result.add(reward);
         }
         return result;

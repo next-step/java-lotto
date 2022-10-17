@@ -12,20 +12,20 @@ public class RankTest {
 
     private static Stream<Arguments> provideForRank() {
         return Stream.of(
-                Arguments.of(0, false, Rank.EIGHTH),
-                Arguments.of(1, false, Rank.SEVENTH),
-                Arguments.of(2, false, Rank.SIXTH),
-                Arguments.of(3, false, Rank.FIFTH),
-                Arguments.of(4, false, Rank.FOURTH),
-                Arguments.of(5, false, Rank.THIRD),
-                Arguments.of(5, true, Rank.SECOND),
-                Arguments.of(6, false, Rank.FIRST)
+                Arguments.of(new LottoMatchCount(0), false, Rank.EIGHTH),
+                Arguments.of(new LottoMatchCount(1), false, Rank.SEVENTH),
+                Arguments.of(new LottoMatchCount(2), false, Rank.SIXTH),
+                Arguments.of(new LottoMatchCount(3), false, Rank.FIFTH),
+                Arguments.of(new LottoMatchCount(4), false, Rank.FOURTH),
+                Arguments.of(new LottoMatchCount(5), false, Rank.THIRD),
+                Arguments.of(new LottoMatchCount(5), true, Rank.SECOND),
+                Arguments.of(new LottoMatchCount(6), false, Rank.FIRST)
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideForRank")
-    void rank(int matchCount, boolean containBonusNumber, Rank rank) {
+    void rank(LottoMatchCount matchCount, boolean containBonusNumber, Rank rank) {
         assertThat(Rank.rankValue(matchCount, containBonusNumber)).isEqualTo(rank);
     }
 }

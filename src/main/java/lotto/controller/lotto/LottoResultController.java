@@ -35,7 +35,7 @@ public class LottoResultController {
     }
 
     private void lottoResult(final List<Lotto> lottos, final LottoWinner winner) {
-        Map<Rank, Integer> checkLotto = lottoResultService.checkLotto(lottos, winner);
+        Map<Rank, Amount> checkLotto = lottoResultService.checkLotto(lottos, winner);
         LottoOutput.statistics();
         for (int rankIndex = Rank.REWARD_START_RANK_INDEX; rankIndex >= Rank.REWARD_END_RANK_INDEX; rankIndex--) {
             Rank rank = Rank.values()[rankIndex];
@@ -45,12 +45,12 @@ public class LottoResultController {
         LottoOutput.yield(lottoResultService.yield(lottos, winner));
     }
 
-    private void lottoMatchOutput(final Rank rank, final int matchNumber) {
+    private void lottoMatchOutput(final Rank rank, final Amount amount) {
         if (isBonusRank(rank)) {
-            LottoOutput.matchBonusNumber(rank.matchCount(), LottoReward.reward(rank), matchNumber);
+            LottoOutput.matchBonusNumber(rank.matchCount(), LottoReward.reward(rank), amount);
             return;
         }
-        LottoOutput.match(rank.matchCount(), LottoReward.reward(rank), matchNumber);
+        LottoOutput.match(rank.matchCount(), LottoReward.reward(rank), amount);
     }
 
     private boolean isBonusRank(final Rank rank) {

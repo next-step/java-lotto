@@ -23,6 +23,9 @@ public class Amount {
     public void minus(final Amount amount) {
         this.amount -= amount.amount;
     }
+    public void add(final Amount amount) {
+        this.amount += amount.amount;
+    }
 
     @Override
     public boolean equals(Object o) {

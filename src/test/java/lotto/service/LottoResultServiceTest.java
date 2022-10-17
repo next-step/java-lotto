@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Amount;
 import lotto.domain.Money.Money;
 import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
@@ -39,17 +40,11 @@ public class LottoResultServiceTest {
                 new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12))
         );
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        Map<Rank, Amount> rankAmountMap = lottoResultService.checkLotto(lottoList, winner);
 
-        assertThat(lottoResultService.checkLotto(lottoList, winner))
-                .isEqualTo(Map.of(Rank.FIRST, 1,
-                        Rank.SECOND, 1,
-                        Rank.THIRD, 1,
-                        Rank.FOURTH, 1,
-                        Rank.FIFTH, 1,
-                        Rank.SIXTH, 1,
-                        Rank.SEVENTH, 1,
-                        Rank.EIGHTH, 1)
-                );
+        for (Amount amount : rankAmountMap.values()) {
+            assertThat(amount).isEqualTo(new Amount(1));
+        }
     }
 
     @DisplayName("로또 수익률을 반환한다.")
