@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lottos {
     private final static long LOTTO_PRICE = 1000;
+    private final static double BENEFIT_POINT = 1.0;
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
@@ -74,5 +75,9 @@ public class Lottos {
     //FIXME: 리스트 채로 반환하면 가면 리스트를 전달한다. 수정 필요 :)
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public boolean hasBenefit(List<Number> winnerNumbers) {
+        return calculateProfitRate(winnerNumbers) >= BENEFIT_POINT;
     }
 }
