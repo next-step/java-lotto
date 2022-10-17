@@ -51,4 +51,8 @@ public enum Rank {
     public String toString() {
         return String.valueOf(rank);
     }
+
+    public int index() {
+        return rank - 1;
+    }
 }
