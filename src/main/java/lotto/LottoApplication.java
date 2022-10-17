@@ -25,8 +25,7 @@ public class LottoApplication {
 
         final List<String> manualLottoList = InputView.manualLottosPrint(countOfManualLotto);
         ManualLottosValidator.validate(countOfManualLotto, manualLottoList.size());
-        final ManualLottos manualLottos = ManualLottos.from(manualLottoList);
-        return manualLottos;
+        return ManualLottos.from(manualLottoList);
     }
 
     private static Lottos getLottos(final int countOfAutoLotto, final ManualLottos manualLottos) {
