@@ -9,6 +9,7 @@ public class Lotto {
 
     private final List<Number> numbers;
 
+    //FIXME: 중복이 없는 자료 구조형 사용, 정렬을 위해서 TreeSet 이용 검토
     public Lotto(List<Number> numbers) {
         Collections.sort(numbers);
         this.numbers = numbers;

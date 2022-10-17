@@ -27,6 +27,7 @@ public class Lottos {
         return Objects.hash(lottos);
     }
 
+    //FIXME: 함수별 출력이 아닌 통계 도메인 생성 :)
     public long numberOfFirstDivision(List<Number> winners) {
         return lottos.stream()
             .filter(lotto -> Division.FIRST == lotto.checkDivision(winners))
@@ -70,6 +71,7 @@ public class Lottos {
         return BigDecimal.valueOf(lottos.size() * LOTTO_PRICE);
     }
 
+    //FIXME: 리스트 채로 반환하면 가면 리스트를 전달한다. 수정 필요 :)
     public List<Lotto> getLottos() {
         return lottos;
     }

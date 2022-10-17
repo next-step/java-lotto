@@ -38,6 +38,7 @@ public class Output {
         System.out.printf("4개 일치 (50000원)- %d개\n", lottos.numberOfThirdDivision(winnerNumbers));
         System.out.printf("5개 일치 (1500000원)- %d개\n", lottos.numberOfSecondDivision(winnerNumbers));
         System.out.printf("6개 일치 (2000000000원)- %d개\n", lottos.numberOfFirstDivision(winnerNumbers));
+        //FIXME: 항상 손해는 아닐 수 있으므로 수정 :)
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lottos.calculateProfitRate(winnerNumbers));
     }
 }

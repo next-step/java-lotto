@@ -4,11 +4,12 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+//FIXME: 좀더 명시적인 이름으로 변경 :)
 public enum Division {
-    FIRST(6, 2000000000L),
-    SECOND(5, 1500000L),
-    THIRD(4, 50000L),
-    FOURTH(3, 5000L),
+    FIRST(6, 2_000_000_000L),
+    SECOND(5, 1_500_000L),
+    THIRD(4, 50_000L),
+    FOURTH(3, 5_000L),
     NO_DIVISION(0, 0L);
 
     private final int matchedCount;
