@@ -32,12 +32,9 @@ public class LottoTicket {
     }
     
     private List<LottoNumber> getLottoNumbers(final String lottoTicket) {
-        final List<LottoNumber> lottoNumbersInstance = LottoNumbersFactory.getInstance();
-        
         return Arrays.stream(split(checkLottoTicketInputForm(removeSpace(lottoTicket))))
                 .mapToInt(Integer::parseInt)
-                .map(lottoNumber -> lottoNumber - 1)
-                .mapToObj(lottoNumbersInstance::get)
+                .mapToObj(LottoNumbersFactory::getLottoNumber)
                 .collect(Collectors.toList());
     }
     
