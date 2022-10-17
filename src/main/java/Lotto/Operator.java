@@ -1,25 +1,34 @@
 package lotto;
 
-public abstract class Operator {
-    private static final Operator add;
-    private static final Operator subtract;
-    private static final Operator multiple;
-    private static final Operator divide;
+import java.util.function.BiFunction;
 
-    static {
-        add = new Add();
-        subtract = new Subtract();
-        multiple = new Multiple();
-        divide = new Divide();
+public enum Operator {
+    ADD("+", (num1, num2) -> num1 + num2),
+    SUBTRACT("-", (num1, num2) -> num1 - num2),
+    MULTIPLE("*", (num1, num2) -> num1 * num2),
+    DIVIDE("/", (num1, num2) -> num1 / num2);
+
+    private final String type;
+    private final BiFunction<Integer, Integer, Integer> operate;
+
+    Operator(String type, BiFunction<Integer, Integer, Integer> operate) {
+        this.type = type;
+        this.operate = operate;
     }
 
-    public abstract int operate(int num1, int num2);
+    public String type() {
+        return type;
+    }
+
+    public int operate(int num1, int num2) {
+        return operate.apply(num1, num2);
+    }
 
     public static Operator operatorOf(String value) {
-        if (value.equals(OperatorType.ADD.type())) return add;
-        if (value.equals(OperatorType.SUBTRACT.type())) return subtract;
-        if (value.equals(OperatorType.MULTIPLE.type())) return multiple;
-        if (value.equals(OperatorType.DIVIDE.type())) return divide;
+        if (value.equals(Operator.ADD.type())) return ADD;
+        if (value.equals(Operator.SUBTRACT.type())) return SUBTRACT;
+        if (value.equals(Operator.MULTIPLE.type())) return MULTIPLE;
+        if (value.equals(Operator.DIVIDE.type())) return DIVIDE;
 
         throw new IllegalArgumentException("사칙연산이 아닙니다.");
     }
