@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoCount {
+public class LottoMatchCount {
 
     private final int count;
     private final static int LOTTOCOUNT_MINIMUM = 0;
     private final static int LOTTOCOUNT_MAXIMUM = 6;
     private static String LOTTOCOUNT_BOUND_EXCEPTION = "LottoCount는 %d이상 %d이하여야 합니다.";
 
-    public LottoCount(final int count) {
+    public LottoMatchCount(final int count) {
         if (checkCount(count)) {
             throw new IllegalArgumentException(LOTTOCOUNT_BOUND_EXCEPTION);
         }
@@ -24,7 +24,7 @@ public class LottoCount {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoCount that = (LottoCount) o;
+        LottoMatchCount that = (LottoMatchCount) o;
         return count == that.count;
     }
 
