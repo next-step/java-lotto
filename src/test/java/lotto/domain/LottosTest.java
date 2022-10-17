@@ -25,7 +25,7 @@ class LottosTest {
     void winning_lotto(final String autoLotto, final int countOfMatch, final boolean bonusOfMatch) {
 
         final WinningLotto winningLotto = WinningLotto.from("1, 2, 3, 4, 5, 6", "45");
-        final Lotto lotto = LottoFactory.from(autoLotto);
+        final Lotto lotto = Lotto.from(autoLotto);
         final Lottos lottos = new Lottos(List.of(lotto));
 
         assertThat(lottos.match(winningLotto)).contains(WinningPrize.from(countOfMatch, bonusOfMatch));
@@ -36,7 +36,7 @@ class LottosTest {
     @ValueSource(strings = {"1, 2, 2, 4, 5, 6", "1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
     void error_create_lotto2(final String input) {
 
-        assertThatThrownBy(() -> LottoFactory.from(input))
+        assertThatThrownBy(() -> Lotto.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("6개의 숫자를 입력해야 하며 중복 숫자는 입력할 수 없습니다.");
     }
