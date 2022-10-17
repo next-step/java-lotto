@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.Amount;
+import lotto.domain.ProfitRate;
 import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
@@ -64,6 +65,6 @@ public class LottoResultServiceTest {
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
 
-        assertThat(lottoResultService.caculateProfitRate(lottoList, winner)).isEqualTo(0.5);
+        assertThat(lottoResultService.caculateProfitRate(lottoList, winner)).isEqualTo(new ProfitRate(0.50));
     }
 }
