@@ -11,8 +11,12 @@ public class LottoInput {
 
     public static Amount purchaseManualAmount() {
         Scanner scanner = new Scanner(System.in);
-
-        return new Amount(scanner.nextInt());
+        try {
+            return new Amount(scanner.nextInt());
+        } catch (Exception e){
+            LottoOutput.purchaseManualAmountException();
+        }
+        return purchaseManualAmount();
     }
 
     public static LottoNumberSet lottoNumbers() {

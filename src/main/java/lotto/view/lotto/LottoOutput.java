@@ -13,6 +13,10 @@ public class LottoOutput {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
+    public static void purchaseManualAmountException() {
+        System.out.println("수동으로 구매할 로또 수 입력이 잘못됐습니다 다시 입력해주세요.");
+    }
+
     public static void manualLottoNumbers() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
