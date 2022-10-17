@@ -64,6 +64,6 @@ public class LottoResultServiceTest {
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
 
-        assertThat(lottoResultService.yield(lottoList, winner)).isEqualTo(0.5);
+        assertThat(lottoResultService.caculateProfitRate(lottoList, winner)).isEqualTo(0.5);
     }
 }

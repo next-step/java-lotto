@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Amount;
 import lotto.domain.LottoMatchCount;
 import lotto.domain.Money.ImmutableMoney;
+import lotto.domain.ProfitRate;
 import lotto.domain.lotto.Lotto;
 
 import java.util.List;
@@ -58,11 +59,11 @@ public class LottoOutput {
         System.out.println(count + "개 일치, 보너스 볼 일치(" + reward + "원) - " + number + "개");
     }
 
-    public static void yield(final double yield) {
-        if (yield < 1) {
-            System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", yield));
+    public static void profitRate(final ProfitRate profitRate) {
+        if (profitRate.loss()) {
+            System.out.println("총 수익률은 " + profitRate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         } else {
-            System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)", yield));
+            System.out.println("총 수익률은 " + profitRate + "f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
         }
     }
 }

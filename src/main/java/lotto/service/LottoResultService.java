@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.domain.Amount;
 import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.Money.Money;
+import lotto.domain.ProfitRate;
 import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.LottoReward;
@@ -29,8 +30,8 @@ public class LottoResultService {
         return result;
     }
 
-    public double yield(final List<Lotto> lottos, final LottoWinner winner) {
-        return reward(lottos, winner).money().divide(lottoPrice(lottos).value());
+    public ProfitRate caculateProfitRate(final List<Lotto> lottos, final LottoWinner winner) {
+        return new ProfitRate(reward(lottos, winner).money().divide(lottoPrice(lottos).value()));
     }
 
     private ImmutableMoney reward(final List<Lotto> lottos, final LottoWinner winner) {

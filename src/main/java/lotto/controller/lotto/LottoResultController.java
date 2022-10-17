@@ -1,6 +1,5 @@
 package lotto.controller.lotto;
 
-import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.service.LottoResultService;
@@ -42,7 +41,7 @@ public class LottoResultController {
             lottoMatchOutput(rank, checkLotto.get(rank));
         }
 
-        LottoOutput.yield(lottoResultService.yield(lottos, winner));
+        LottoOutput.profitRate(lottoResultService.caculateProfitRate(lottos, winner));
     }
 
     private void lottoMatchOutput(final Rank rank, final Amount amount) {

@@ -26,4 +26,13 @@ public class ProfitRate {
     public int hashCode() {
         return Objects.hash(profitRate);
     }
+
+    public boolean loss() {
+        return profitRate < 1;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%.2f", profitRate);
+    }
 }
