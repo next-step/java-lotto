@@ -9,6 +9,7 @@ import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoPurchaseController {
@@ -23,7 +24,7 @@ public class LottoPurchaseController {
         Amount totalAmount = lottoPurchaseService.purchaseNumber(immutableMoney);
         List<Lotto> lottoList = purchaseAutoLotto(totalAmount, purchaseManualLotto());
         LottoOutput.lotto(lottoList);
-        return lottoList;
+        return Collections.unmodifiableList(lottoList);
     }
 
     private List<Lotto> purchaseAutoLotto(final Amount amount, final List<Lotto> lottoList) {
