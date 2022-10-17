@@ -1,6 +1,6 @@
-package step2;
+package lotto;
 
-import step2.controller.LottoController;
+import lotto.controller.LottoController;
 
 public class LottoMain {
 

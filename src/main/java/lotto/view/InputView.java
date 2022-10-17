@@ -1,4 +1,4 @@
-package step2.view;
+package lotto.view;
 
 import java.util.Scanner;
 

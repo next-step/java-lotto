@@ -1,4 +1,4 @@
-package step2.util;
+package lotto.util;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

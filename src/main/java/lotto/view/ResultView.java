@@ -1,8 +1,8 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.LottoResult;
-import step2.domain.LottoTicket;
-import step2.domain.RankingAward;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.RankingAward;
 
 import java.util.List;
 import java.util.Map;
