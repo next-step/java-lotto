@@ -11,10 +11,8 @@ import java.util.stream.Collectors;
 
 public class LottoPurchaseService {
 
-    public static final ImmutableMoney LOTTO_PRICE = new ImmutableMoney(1000);
-
     public Amount purchaseNumber(final ImmutableMoney immutableMoney) {
-        return new Amount(immutableMoney.money().divide(LOTTO_PRICE.value()).intValue());
+        return new Amount(immutableMoney.money().divide(Lotto.LOTTO_PRICE.value()).intValue());
     }
 
     public List<Lotto> purchaseLotto(final Amount amount) {
