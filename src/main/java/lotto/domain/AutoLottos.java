@@ -13,13 +13,12 @@ public class AutoLottos {
 
     private AutoLottos() {}
 
-    public static List<Lotto> autoCreate(final int countOfPurchaseLotto, final int countOfManualLotto) {
+    public static List<Lotto> autoCreate(final int countOfAutoLotto) {
 
-        final int countOfAutoLotto = countOfPurchaseLotto - countOfManualLotto;
         final List<Lotto> autoLottos = new ArrayList<>();
         for (int i = 0; i < countOfAutoLotto; i++) {
             Collections.shuffle(LOTTO_NUMBERS);
-            autoLottos.add(LottoFactory.from(pick()));
+            autoLottos.add(Lotto.from(pick()));
         }
         return autoLottos;
     }
