@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomLottoPublisher {
+public class RandomLottoPublisher implements LottoPublisher {
     private final List<Integer> allNumbers;
 
     public RandomLottoPublisher() {
@@ -19,7 +19,8 @@ public class RandomLottoPublisher {
         return list;
     }
 
-    public List<Integer> randomNumber() {
+    @Override
+    public List<Integer> get() {
         Collections.shuffle(allNumbers);
         List<Integer> result = allNumbers.subList(0, 6);
         Collections.sort(result);

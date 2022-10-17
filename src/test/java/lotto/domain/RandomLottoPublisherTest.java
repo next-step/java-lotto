@@ -14,7 +14,7 @@ public class RandomLottoPublisherTest {
     void random() {
         RandomLottoPublisher publisher = new RandomLottoPublisher();
         for (int i = 0; i < 100; i++) {
-            List<Integer> result = publisher.randomNumber();
+            List<Integer> result = publisher.get();
             assertThat(result)
                     .hasSize(6)
                     .matches(this::isNumberListSorted)
