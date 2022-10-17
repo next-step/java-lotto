@@ -2,7 +2,7 @@ package autoLotto;
 
 public class Quantity {
 
-    private int quantity;
+    private final int quantity;
 
     public Quantity(final int amount) {
         if (amount % 1000 != 0) {
