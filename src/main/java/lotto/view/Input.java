@@ -2,9 +2,7 @@ package lotto.view;
 
 import lotto.Number;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Input {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -22,11 +20,11 @@ public class Input {
         return Integer.parseInt(input);
     }
 
-    public static List<Number> inputWinnerNumbers(){
+    public static Set<Number> inputWinnerNumbers(){
         String input = input();
         String[] split = input.split(SEPARATOR);
 
-        List<Number> numbers = new ArrayList<>();
+        Set<Number> numbers = new TreeSet<>();
         for (String number : split) {
             numbers.add(Number.of(number));
         }

@@ -1,17 +1,12 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
 
-    private final List<Number> numbers;
+    private final Set<Number> numbers;
 
-    //FIXME: 중복이 없는 자료 구조형 사용, 정렬을 위해서 TreeSet 이용 검토
-    public Lotto(List<Number> numbers) {
-        Collections.sort(numbers);
+    public Lotto(Set<Number> numbers) {
         this.numbers = numbers;
     }
 
@@ -19,11 +14,11 @@ public class Lotto {
         return new Lotto(lottoNumberStrategy.provideNumberSet());
     }
 
-    public Rank checkRank(List<Number> winnersNumber) {
+    public Rank checkRank(Set<Number> winnersNumber) {
         return Rank.valueOf(match(winnersNumber));
     }
 
-    private int match(List<Number> winnersNumber) {
+    private int match(Set<Number> winnersNumber) {
         List<Number> numbers = new ArrayList<>(this.numbers);
         numbers.retainAll(winnersNumber);
         return numbers.size();

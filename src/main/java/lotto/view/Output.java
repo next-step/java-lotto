@@ -5,6 +5,7 @@ import lotto.Lottos;
 import lotto.Number;
 
 import java.util.List;
+import java.util.Set;
 
 public class Output {
     private Output() {
@@ -30,7 +31,7 @@ public class Output {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printResult(Lottos lottos, List<Number> winnerNumbers) {
+    public static void printResult(Lottos lottos, Set<Number> winnerNumbers) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");

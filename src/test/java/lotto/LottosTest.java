@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottosTest {
 
@@ -16,7 +17,7 @@ public class LottosTest {
             Lotto.print(() -> Number.of(4, 5, 6, 7, 8, 9))
         ));
 
-        List<Number> winners = Number.of(1, 2, 3, 4, 5, 6);
+        Set<Number> winners = Number.of(1, 2, 3, 4, 5, 6);
 
         Assertions.assertThat(lottos.numberOfFirstRank(winners)).isEqualTo(1L);
         Assertions.assertThat(lottos.numberOfSecondRank(winners)).isEqualTo(1L);
@@ -43,7 +44,7 @@ public class LottosTest {
             Lotto.print(() -> Number.of(3, 8, 27, 30, 35, 44))
         ));
 
-        List<Number> winners = Number.of(1, 2, 3, 4, 5, 6);
+        Set<Number> winners = Number.of(1, 2, 3, 4, 5, 6);
 
         Assertions.assertThat(lottos.calculateProfitRate(winners)).isEqualTo(0.35);
     }

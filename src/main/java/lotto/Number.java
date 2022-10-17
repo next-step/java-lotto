@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 //FIXME: 너무 범용적인 이름 사용. 구체적인 이름으로 명명 시도 :)
 public class Number implements Comparable<Number> {
@@ -21,8 +19,8 @@ public class Number implements Comparable<Number> {
         return Integer.compare(this.number, other.number);
     }
 
-    public static List<Number> of(int... numbers){
-        List<Number> numberList = new ArrayList<>();
+    public static Set<Number> of(int... numbers){
+        Set<Number> numberList = new TreeSet<>();
         for (int number : numbers) {
             numberList.add(Number.of(number));
         }

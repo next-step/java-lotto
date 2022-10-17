@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -29,40 +30,40 @@ public class Lottos {
     }
 
     //FIXME: 함수별 출력이 아닌 통계 도메인 생성 :)
-    public long numberOfFirstRank(List<Number> winners) {
+    public long numberOfFirstRank(Set<Number> winners) {
         return lottos.stream()
             .filter(lotto -> Rank.FIRST == lotto.checkRank(winners))
             .count();
     }
 
-    public long numberOfSecondRank(List<Number> winners) {
+    public long numberOfSecondRank(Set<Number> winners) {
         return lottos.stream()
             .filter(lotto -> Rank.SECOND == lotto.checkRank(winners))
             .count();
     }
 
-    public long numberOfThirdRank(List<Number> winners) {
+    public long numberOfThirdRank(Set<Number> winners) {
         return lottos.stream()
             .filter(lotto -> Rank.THIRD == lotto.checkRank(winners))
             .count();
     }
 
-    public long numberOfFourthRank(List<Number> winners) {
+    public long numberOfFourthRank(Set<Number> winners) {
         return lottos.stream()
             .filter(lotto -> Rank.FOURTH == lotto.checkRank(winners))
             .count();
     }
 
-    public double calculateProfitRate(List<Number> winners) {
+    public double calculateProfitRate(Set<Number> winners) {
         BigDecimal profitRate = calculateTotalProfit(winners).divide(calculatePrincipal(), 2, RoundingMode.DOWN);
         return profitRate.doubleValue();
     }
 
-    private BigDecimal calculateTotalProfit(List<Number> winners) {
+    private BigDecimal calculateTotalProfit(Set<Number> winners) {
         return Rank.sumPrize(getRanks(winners));
     }
 
-    private List<Rank> getRanks(List<Number> winners) {
+    private List<Rank> getRanks(Set<Number> winners) {
         return lottos.stream()
             .map(lotto -> lotto.checkRank(winners))
             .collect(Collectors.toUnmodifiableList());
@@ -77,7 +78,7 @@ public class Lottos {
         return lottos;
     }
 
-    public boolean hasBenefit(List<Number> winnerNumbers) {
+    public boolean hasBenefit(Set<Number> winnerNumbers) {
         return calculateProfitRate(winnerNumbers) >= BENEFIT_POINT;
     }
 }
