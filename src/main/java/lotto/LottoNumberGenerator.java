@@ -20,11 +20,8 @@ public final class LottoNumberGenerator {
 
     public static List<Integer> generate() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return List.copyOf(LOTTO_NUMBERS.subList(0, 6));
-    }
-
-    public static List<Integer> fastGenerate() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return List.copyOf(LOTTO_NUMBERS.subList(0, 6));
+        List<Integer> newLotto = LOTTO_NUMBERS.subList(0, 6);
+        Collections.sort(newLotto);
+        return List.copyOf(newLotto);
     }
 }
