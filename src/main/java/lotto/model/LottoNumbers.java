@@ -15,9 +15,9 @@ public class LottoNumbers {
         this.lottos = lottos;
     }
 
-    public List<LottoMatchResult> guess(WinningNumber winningNumber) {
+    public List<LottoMatchResult> guess(WinningNumber winningNumber, BonusNumber bonusNumber) {
         return lottos.stream()
-                     .map(lotto -> lotto.match(winningNumber))
+                     .map(lotto -> lotto.match(winningNumber, bonusNumber))
                      .collect(toList());
     }
 

@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.model.BonusNumber;
 import lotto.model.WinningNumber;
 
 public class LottoTest {
@@ -20,8 +21,8 @@ public class LottoTest {
     void match(List<Integer> winningNumbers, int expectedMatchCount) {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
 
-        assertThat(lotto.match(WinningNumber.of(winningNumbers)))
-                  .isEqualTo(LottoMatchResult.of(expectedMatchCount));
+        assertThat(lotto.match(WinningNumber.of(winningNumbers), BonusNumber.of(1)))
+                  .isEqualTo(LottoMatchResult.of(expectedMatchCount, true));
     }
 
     private static Stream<Arguments> provideWinningNumbers() {

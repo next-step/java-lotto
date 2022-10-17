@@ -3,6 +3,7 @@ package lotto;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.model.BonusNumber;
 import lotto.model.WinningNumber;
 
 public class Lotto {
@@ -12,12 +13,15 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public LottoMatchResult match(WinningNumber winningNumber) {
+    public LottoMatchResult match(WinningNumber winningNumber, BonusNumber bonusNumber) {
         long matched = numbers.stream()
                               .filter(winningNumber::exists)
                               .count();
 
-        return LottoMatchResult.of((int) matched);
+        boolean bonusNumberMatched = numbers.stream()
+                                            .anyMatch(bonusNumber::match);
+
+        return LottoMatchResult.of((int) matched, bonusNumberMatched);
     }
 
     @Override

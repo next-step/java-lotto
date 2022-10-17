@@ -2,7 +2,6 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,7 +12,7 @@ public class LottoMatchResultTest {
     @ParameterizedTest
     @ValueSource(ints = { 1, 2 })
     void notRewarable(int notRewardableMatchCount) {
-        LottoMatchResult lottoMatchResult = LottoMatchResult.of(notRewardableMatchCount);
+        LottoMatchResult lottoMatchResult = LottoMatchResult.of(notRewardableMatchCount, true);
 
         assertThat(lottoMatchResult.rewardable()).isFalse();
     }
@@ -22,7 +21,7 @@ public class LottoMatchResultTest {
     @ParameterizedTest
     @ValueSource(ints = { 3, 4, 5, 6 })
     void rewardable(int rewardableMatchCount) {
-        LottoMatchResult lottoMatchResult = LottoMatchResult.of(rewardableMatchCount);
+        LottoMatchResult lottoMatchResult = LottoMatchResult.of(rewardableMatchCount, false);
 
         assertThat(lottoMatchResult.rewardable()).isTrue();
     }

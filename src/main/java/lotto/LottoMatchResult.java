@@ -14,8 +14,8 @@ public class LottoMatchResult {
         this.bonusNumberMatched = bonusNumberMatched;
     }
 
-    public static LottoMatchResult of(int count) {
-        return new LottoMatchResult(count, false);
+    public static LottoMatchResult of(int count, boolean bonusNumberMatched) {
+        return new LottoMatchResult(count, bonusNumberMatched);
     }
 
     public Optional<LottoReward> getLottoReward() {
@@ -35,12 +35,12 @@ public class LottoMatchResult {
             return false;
         }
         LottoMatchResult that = (LottoMatchResult) o;
-        return count == that.count;
+        return count == that.count && bonusNumberMatched == that.bonusNumberMatched;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(count);
+        return Objects.hash(count, bonusNumberMatched);
     }
 
     @Override

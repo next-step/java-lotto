@@ -4,6 +4,7 @@ import lotto.model.LottoReward;
 
 public class LottoResultAggregationResponseView {
     private static final String FORMAT = "%s개 일치 (%d원) - %d개";
+    private static final String SECOND_PLACE_FORMAT = "%s개 일치, 보너스 볼 일치 (%d원) - %d개";
     private final LottoReward lottoReward;
     private final int matchCount;
 
@@ -12,8 +13,16 @@ public class LottoResultAggregationResponseView {
         this.matchCount = matchCount;
     }
 
+    private String getFormat() {
+        if (this.lottoReward == LottoReward.SECOND_PLACE) {
+            return SECOND_PLACE_FORMAT;
+        }
+
+        return FORMAT;
+    }
+
     public String toView() {
-        return String.format(FORMAT,
+        return String.format(getFormat(),
                 this.lottoReward.getMatchCount(),
                 this.lottoReward.getRewardAmount(),
                 this.matchCount);

@@ -3,10 +3,12 @@ package lotto;
 import java.util.Scanner;
 
 import lotto.dto.LottoResultAggregation;
+import lotto.model.BonusNumber;
 import lotto.model.LottoMatchResults;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoReward;
 import lotto.model.WinningNumber;
+import lotto.view.input.BonusNumberInputView;
 import lotto.view.response.BuyResultResponseView;
 import lotto.view.response.GeneratedLottoResponseView;
 import lotto.view.response.LottoResultAggregationResponseView;
@@ -29,9 +31,10 @@ public class LottoApplication {
         GeneratedLottoResponseView.show(lottoNumbers.getLottoNumbers());
 
         WinningNumber winningNumber = WinningNumberInputView.getWinningNumber(scanner);
+        BonusNumber bonusNumber = BonusNumberInputView.getBonusNumber(scanner);
 
         MatchResultTitleResponseView.show();
-        LottoMatchResults lottoMatchResults = new LottoMatchResults(lottoNumbers.guess(winningNumber));
+        LottoMatchResults lottoMatchResults = new LottoMatchResults(lottoNumbers.guess(winningNumber, bonusNumber));
         LottoResultAggregation lottoResultAggregation = new LottoResultAggregation(lottoMatchResults.rewardableAggregate());
 
         showLottoResultAggregation(lottoResultAggregation);
