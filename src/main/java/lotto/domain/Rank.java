@@ -12,7 +12,7 @@ public enum Rank {
     public static final int REWARD_START_RANK_INDEX = 4;
     public static final int REWARD_END_RANK_INDEX = 0;
 
-    Rank(final int rank, int matchCount) {
+    Rank(final int rank, final int matchCount) {
         this.rank = rank;
         this.matchCount = matchCount;
     }
@@ -24,7 +24,7 @@ public enum Rank {
         return rankValue(matchCount);
     }
 
-    private static Rank rankValue(int matchCount) {
+    private static Rank rankValue(final int matchCount) {
         for (Rank rank : Rank.values()) {
             if (rank.matchCount == matchCount) {
                 return rank;
@@ -33,7 +33,7 @@ public enum Rank {
         return Rank.EIGHTH;
     }
 
-    private static Rank checkBonusNumber(boolean containBonusNumber) {
+    private static Rank checkBonusNumber(final boolean containBonusNumber) {
         if (containBonusNumber) {
             return SECOND;
         }
