@@ -1,23 +1,14 @@
 package step2.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
+
+import java.util.*;
 
 public class CountsByRank {
     private final Map<Rank, Long> countsByRank;
 
     public CountsByRank(Map<Rank, Long> countsByRank) {
-        this.countsByRank = countsByRank;
-    }
-
-    public CountsByRank mergeEmptyRank() {
-        TreeMap<Rank, Long> countAllRanks = new TreeMap<>(this.countsByRank);
-        Arrays.stream(Rank.values())
-                .filter(rank -> !countAllRanks.containsKey(rank))
-                .forEach(rank -> countAllRanks.put(rank, 0L));
-        return new CountsByRank(countAllRanks);
+        Map<Rank, Long> countAllRanks = mergeEmptyRank(countsByRank);
+        this.countsByRank = sortByDesc(countAllRanks);
     }
 
     public long totalRevenue() {
@@ -26,10 +17,23 @@ public class CountsByRank {
                 .reduce(0L, Long::sum);
     }
 
-    public CountsByRank sortByDesc() {
+    public CountsByRank filter(List<Rank> excludeRanks) {
+        excludeRanks.forEach(countsByRank::remove);
+        return this;
+    }
+
+    private Map<Rank, Long> mergeEmptyRank(Map<Rank, Long> countsByRank) {
+        TreeMap<Rank, Long> countAllRanks = new TreeMap<>(countsByRank);
+        Arrays.stream(Rank.values())
+                .filter(rank -> !countAllRanks.containsKey(rank))
+                .forEach(rank -> countAllRanks.put(rank, 0L));
+        return countAllRanks;
+    }
+
+    private Map<Rank, Long> sortByDesc(Map<Rank, Long> countAllRanks) {
         Map<Rank, Long> descMap = new TreeMap<>(Collections.reverseOrder());
-        descMap.putAll(countsByRank);
-        return new CountsByRank(descMap);
+        descMap.putAll(countAllRanks);
+        return descMap;
     }
 
     public Map<Rank, Long> getCountsByRank() {

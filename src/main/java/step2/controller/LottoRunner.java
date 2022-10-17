@@ -32,8 +32,8 @@ public class LottoRunner {
         float revenueRatio = analyst.revenueRatio(countsByRank);
 
         //로또실행값 통계 출력
-        List<Rank> excludePrintRank = List.of(Rank.MISS);
-        resultView.printCountByRank(countsByRank, excludePrintRank);
+        List<Rank> excludeRanks = List.of(Rank.MISS);
+        resultView.printCountByRank(countsByRank, excludeRanks);
         resultView.printRevenueRatio(revenueRatio);
     }
 }

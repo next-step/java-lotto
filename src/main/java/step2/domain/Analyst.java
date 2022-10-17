@@ -19,8 +19,7 @@ public class Analyst {
     }
 
     public CountsByRank getCountsByRank() {
-        CountsByRank countsByRank = new CountsByRank(groupByRank());
-        return countsByRank.mergeEmptyRank();
+        return new CountsByRank(groupByRank());
     }
 
     private Map<Rank, Long> groupByRank() {

@@ -22,9 +22,9 @@ public class ResultView {
         printEndLottoNumbers();
     }
 
-    public void printCountByRank(CountsByRank countByRank, List<Rank> excludePrintRank) {
+    public void printCountByRank(CountsByRank countsByRank, List<Rank> excludeRanks) {
         printInitMessage();
-        printMatch(countByRank, excludePrintRank);
+        printPartOfCount(countsByRank, excludeRanks);
     }
 
     public void printRevenueRatio(float revenueRatio) {
@@ -39,23 +39,15 @@ public class ResultView {
         System.out.println(INIT_MESSAGE);
     }
 
-    private void printMatch(CountsByRank countsByRank, List<Rank> excludePrintRank) {
-        CountsByRank descCountsByRank = countsByRank.sortByDesc();
-        descCountsByRank
-                .getCountsByRank()
-                .entrySet()
-                .forEach(entity -> printMatch(entity, excludePrintRank));
-    }
-
-    private void printMatch(Map.Entry<Rank, Long> countByRank, List<Rank> excludePrintRank) {
-        if (!excludePrintRank.contains(countByRank.getKey())) {
-            System.out.printf(
-                    MATCH_MESSAGE_FORMAT,
-                    getMatchCountMessage(countByRank.getKey()),
-                    countByRank.getKey().getWinningMoney(),
-                    countByRank.getValue()
-            );
-        }
+    private void printPartOfCount(CountsByRank countsByRank, List<Rank> excludeRanks) {
+        CountsByRank filteredCountsByRank = countsByRank.filter(excludeRanks);
+        filteredCountsByRank.getCountsByRank()
+                .forEach((key, value) -> System.out.printf(
+                        MATCH_MESSAGE_FORMAT,
+                        getMatchCountMessage(key),
+                        key.getWinningMoney(),
+                        value
+                ));
     }
 
     private String getMatchCountMessage(Rank rank) {
