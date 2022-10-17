@@ -7,25 +7,19 @@ public class LottoTickets {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final int ticket;
-    private List<Lotto> lottoNumbers = new ArrayList<>();
+    private List<Lotto> lottos;
 
-    private LottoTickets(int money) {
-        this.ticket = money / LOTTO_PRICE;
+    private LottoTickets(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private LottoTickets(int money, Lotto testResultNumbers) {
-        this.ticket = money / LOTTO_PRICE;
-        this.lottoNumbers.add(testResultNumbers);
+    public static LottoTickets of(List<Lotto> lottos) {
+        return new LottoTickets(lottos);
     }
 
-    public static LottoTickets from(int money) {
-        valid(money);
-        return new LottoTickets(money);
-    }
-
-    public static LottoTickets from(int money, Lotto testResultNumbers) {
-        return new LottoTickets(money, testResultNumbers);
+    public static LottoTickets of(int money) {
+        int tickets = countTicket(money);
+        return new LottoTickets(createTickets(tickets));
     }
 
     private static void valid(int money) {
@@ -34,21 +28,31 @@ public class LottoTickets {
         }
     }
 
-    public int countTicket() {
-        return this.ticket;
+    private static int countTicket(int money) {
+        valid(money);
+        return money / LOTTO_PRICE;
     }
 
-    public List<Lotto> createTickets() {
-        for (int i = 0; i < ticket; i++) {
+    public int getTicketCount() {
+        return lottos.size();
+    }
+
+    private static List<Lotto> createTickets(int tickets) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < tickets; i++) {
             Lotto generateNumbers = LottoNumberRandomGenerator.generate();
-            lottoNumbers.add(generateNumbers);
+            lottos.add(generateNumbers);
         }
-        return lottoNumbers;
+        return lottos;
     }
 
-    public LottoResult calculate(Lotto winningNumbers) {
+    public List<Lotto> getTickets() {
+        return new ArrayList<>(lottos);
+    }
+
+    public LottoResult getResult(Lotto winningNumbers, int bonusBall) {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.result(winningNumbers, lottoNumbers);
+        lottoResult.result(winningNumbers, LottoTickets.of(lottos), bonusBall);
         return lottoResult;
     }
 

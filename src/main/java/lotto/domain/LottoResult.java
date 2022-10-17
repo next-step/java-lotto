@@ -15,18 +15,15 @@ public class LottoResult {
             .collect(Collectors.toMap(Function.identity(), value -> 0, (x, y) -> y, LinkedHashMap::new));
     }
 
-    public void put(Rank rank) {
+    private void put(Rank rank) {
         result.merge(rank, 1, Integer::sum);
     }
 
-    public Integer count(Rank rank) {
-        return result.get(rank);
-    }
-
-    public void result(Lotto winningNumbers, List<Lotto> lottoNumbers) {
-        for (Lotto lotto : lottoNumbers) {
+    public void result(Lotto winningNumbers, LottoTickets tickets, int bonusBall) {
+        List<Lotto> lottos = tickets.getTickets();
+        for (Lotto lotto : lottos) {
             int count = lotto.matches(winningNumbers);
-            Rank calculate = Rank.calculate(count);
+            Rank calculate = Rank.calculate(count, lotto.matches(bonusBall));
             put(calculate);
         }
     }

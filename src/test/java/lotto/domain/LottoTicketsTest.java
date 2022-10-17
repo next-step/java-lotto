@@ -2,9 +2,11 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.groups.Tuple.tuple;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,14 +15,14 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("로또 개수만큼 발급할 수 있다.")
     void create() {
-        LottoTickets lottoTickets = LottoTickets.from(14000);
-        assertThat(lottoTickets.countTicket()).isEqualTo(14);
+        LottoTickets lottoTickets = LottoTickets.of(14000);
+        assertThat(lottoTickets.getTicketCount()).isEqualTo(14);
     }
 
     @Test
     @DisplayName("1000원 미만은 로또를 구매할 수 없다.")
     void valid() {
-        assertThatThrownBy(() -> LottoTickets.from(500))
+        assertThatThrownBy(() -> LottoTickets.of(500))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -31,9 +33,21 @@ public class LottoTicketsTest {
             List.of(LottoNumber.from(1), LottoNumber.from(2),
                 LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
                 LottoNumber.from(6)));
-        LottoTickets lottoTickets = LottoTickets.from(2000, Lotto.of(list));
+        int bonus = 7;
+        LottoTickets lottoTickets = LottoTickets.of(List.of(Lotto.of(list)));
 
-        LottoResult result = lottoTickets.calculate(Lotto.of(list));
-        assertThat(result.count(Rank.FIRST)).isEqualTo(1);
+        LottoResult result = lottoTickets.getResult(Lotto.of(list), bonus);
+
+        assertThat(result.getStatistics().entrySet())
+            .hasSize(6)
+            .extracting(Map.Entry::getKey, Map.Entry::getValue)
+            .containsExactly(
+                tuple(Rank.FIFTH, 0),
+                tuple(Rank.FOURTH, 0),
+                tuple(Rank.THIRD, 0),
+                tuple(Rank.SECOND, 0),
+                tuple(Rank.FIRST, 1),
+                tuple(Rank.NONE, 0)
+            );
     }
 }

@@ -16,10 +16,17 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public int matches(Lotto numbers) {
-        return (int) numbers.lotto.stream()
+    public int matches(Lotto winningNumbers) {
+        return (int) winningNumbers.lotto.stream()
             .filter(lotto::contains)
             .count();
+    }
+
+    public boolean matches(int bonus) {
+        return lotto.stream()
+            .findFirst()
+            .filter(lottoNumber -> lottoNumber.equals(LottoNumber.from(bonus)))
+            .isPresent();
     }
 
     private static boolean isDuplicate(List<LottoNumber> lottoNumbers) {
@@ -40,4 +47,8 @@ public class Lotto {
         return this.lotto.size();
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(lotto);
+    }
 }

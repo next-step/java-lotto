@@ -33,4 +33,27 @@ public class LottoTest {
                 LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))).isInstanceOf(
             IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("지난 주 당첨 번호와 일치하는 개수를 반환한다.")
+    void matches() {
+        Lotto winningNumbers = Lotto.of(
+            List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(10)));
+        assertThat(lotto.matches(winningNumbers)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("로또 번호 중 보너스 번호가 있으면 true 를 반환한다.")
+    void bonus() {
+        int bonus = 1;
+        assertThat(lotto.matches(bonus)).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또 번호 중 보너스 번호가 있으면 false 를 반환한다.")
+    void doesNotMatchBonus() {
+        int bonus = 10;
+        assertThat(lotto.matches(bonus)).isFalse();
+    }
 }
