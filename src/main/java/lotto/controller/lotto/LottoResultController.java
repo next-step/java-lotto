@@ -46,10 +46,10 @@ public class LottoResultController {
 
     private void lottoMatchOutput(final Rank rank, final Amount amount) {
         if (isBonusRank(rank)) {
-            LottoOutput.matchBonusNumber(rank.matchCount(), LottoReward.reward(rank), amount);
+            LottoOutput.matchBonusNumber(rank.matchCount(), rank.reward(), amount);
             return;
         }
-        LottoOutput.match(rank.matchCount(), LottoReward.reward(rank), amount);
+        LottoOutput.match(rank.matchCount(), rank.reward(), amount);
     }
 
     private boolean isBonusRank(final Rank rank) {

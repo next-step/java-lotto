@@ -6,7 +6,6 @@ import lotto.domain.Money.Money;
 import lotto.domain.ProfitRate;
 import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.LottoReward;
 import lotto.domain.lotto.LottoWinner;
 
 import java.util.*;
@@ -38,7 +37,7 @@ public class LottoResultService {
         Money result = new Money(0);
         Map<Rank, Amount> rankMap = checkLotto(lottos, winner);
         for (Rank rank : Rank.values()) {
-            Money reward = LottoReward.reward(rank).money();
+            Money reward = rank.reward().money();
             reward.multiply(rankMap.get(rank).amount());
             result.add(reward);
         }
