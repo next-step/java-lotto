@@ -26,6 +26,7 @@ public enum Sign {
 			.collect(Collectors.toMap(Sign::getSign, Function.identity()))
 	);
 
+	private static final String SIGN_EXCEPTION_MESSAGE = "사칙연산 기호가 아닙니다";
 	private final String sign;
 	private final BiFunction<Integer, Integer, Integer> expression;
 
@@ -39,6 +40,9 @@ public enum Sign {
 	}
 
 	public static Sign find(String sign) {
+		if (!SIGN_MAP.containsKey(sign)) {
+			throw new IllegalArgumentException(SIGN_EXCEPTION_MESSAGE);
+		}
 		return SIGN_MAP.get(sign);
 	}
 
