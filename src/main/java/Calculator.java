@@ -1,26 +1,19 @@
 import java.util.Objects;
 
 public class Calculator {
+    private static final String REGEX = " ";
     public static int calculate(String str) {
         isBlank(str);
-        String[] arr = str.split(" ");
+        String[] arr = str.split(REGEX);
         int result = Integer.parseInt(arr[0]);
         for (int i = 0; i < arr.length; i++) {
             try {
-                int number = Integer.parseInt(arr[i]);
+                Integer.parseInt(arr[i]);
             } catch (NumberFormatException e) {
                 String symbol = arr[i];
-                if (Objects.equals(symbol, "+")) {
-                    result += Integer.parseInt(arr[++i]);
-                } else if (Objects.equals(symbol, "-")) {
-                    result -= Integer.parseInt(arr[++i]);
-                } else if (Objects.equals(symbol, "*")) {
-                    result *= Integer.parseInt(arr[++i]);
-                } else if (Objects.equals(symbol, "/")) {
-                    result /= Integer.parseInt(arr[++i]);
-                } else {
-                    throw new IllegalArgumentException();
-                }
+                Operation operation = Operation.valueOfSymbol(symbol);
+                int number = Integer.parseInt(arr[++i]);
+                result = operation.apply(result, number);
             }
         }
         return result;
