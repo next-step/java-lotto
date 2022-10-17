@@ -19,4 +19,18 @@ public class LottoNumbers {
     public Set<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public int calculateMatchCount(List<Integer> winningNumbers) {
+        int matchCount = 0;
+        for (Integer lottoNumber : lottoNumbers) {
+            matchCount += winningNumbers.stream()
+                .filter(winningNumber -> winningNumber == lottoNumber)
+                .count();
+        }
+        return matchCount;
+    }
+
+    public boolean isBonusBallMatch(int bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
+    }
 }
