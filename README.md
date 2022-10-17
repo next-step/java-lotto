@@ -53,7 +53,7 @@
     - [x] Shuffle 테스트 가능한 구조로 변경
 * Step3 - 로또(2등)
   * Step2 추가 피드백
-    - [ ] LottoNumbers 에게 번호가 몇 개 일치하는지 물어보기
+    - [x] LottoNumbers 에게 번호가 몇 개 일치하는지 물어보기
     - [ ] LottoNumber 도메인을 통해 항상 1~45 사이의 값을 가지고 있음을 알리기
     - [x] LottoNumber Collection Type 고민하기
     - [x] LottoResult indent 줄이기

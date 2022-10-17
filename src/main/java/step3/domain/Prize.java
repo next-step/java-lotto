@@ -46,11 +46,11 @@ public enum Prize {
             return MISS;
         }
 
-        if (countOfMatch == 5 && matchBonus) {
+        if (matchBonus && countOfMatch == 5) {
             return SECOND;
         }
 
-        if (countOfMatch == 5 && !matchBonus) {
+        if (!matchBonus && countOfMatch == 5) {
             return THIRD;
         }
 

@@ -21,25 +21,13 @@ public class LottoResult {
     public final Map<Prize, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers,
         int bonusBall) {
         for (LottoNumbers eachLottoNumber : allLottoNumbers) {
-            Set<Integer> lottoNumbers = eachLottoNumber.getLottoNumbers();
-            int matchCount = calculateMatchCount(lottoNumbers);
-            boolean isBonusBallMatch = lottoNumbers.contains(bonusBall);
-
+            int matchCount = eachLottoNumber.calculateMatchCount(winningNumbers);
+            boolean isBonusBallMatch = eachLottoNumber.isBonusBallMatch(bonusBall);
             Prize prize = Prize.valueOf(matchCount, isBonusBallMatch);
             drawResult.put(prize, drawResult.getOrDefault(prize, 0) + 1);
         }
 
         drawResult.remove(Prize.MISS);
         return drawResult;
-    }
-
-    private int calculateMatchCount(Set<Integer> lottoNumbers) {
-        int matchCount = 0;
-        for (Integer lottoNumber : lottoNumbers) {
-            if (winningNumbers.contains(lottoNumber)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
     }
 }
