@@ -3,17 +3,12 @@ package lottery;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static lottery.TestLotteryFactory.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLotteryTest {
-
-    static Lottery createLottery(Integer... values) {
-        return new Lottery(Arrays.stream(values).map(LotteryNumber::new).collect(Collectors.toList()));
-    }
 
     @ParameterizedTest
     @CsvSource(value = {"3:2", "4:1", "5:1"}, delimiter = ':')
