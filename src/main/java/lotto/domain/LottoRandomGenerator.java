@@ -14,7 +14,7 @@ public class LottoRandomGenerator {
         Collections.shuffle(shuffleNumbers);
 
         return Lotto.of(shuffleNumbers.stream()
-            .limit(6)
+            .limit(Lotto.LOTTO_NUMBER_SIZE)
             .collect(Collectors.toList()));
     }
 }
