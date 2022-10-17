@@ -1,8 +1,14 @@
 package lotto.domain.winner;
 
+import static lotto.domain.winner.WinningCondition.MATCH_BONUS;
+import static lotto.domain.winner.WinningCondition.MATCH_FIVE;
+import static lotto.domain.winner.WinningCondition.MATCH_FOR;
+import static lotto.domain.winner.WinningCondition.MATCH_SIX;
+import static lotto.domain.winner.WinningCondition.MATCH_THREE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import java.util.List;
 import lotto.domain.exception.UnknownWinningConditionException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,15 +19,15 @@ class WinningConditionTest {
     @DisplayName("주어진 일치 횟수로 해당 당첨 조건 구하기")
     void get_winning_condition_by_match_count() {
         assertThat(WinningCondition.getConditionByMatchCount(3, false)).isEqualTo(
-                WinningCondition.MATCH_THREE);
+                MATCH_THREE);
         assertThat(WinningCondition.getConditionByMatchCount(3, true)).isEqualTo(
-                WinningCondition.MATCH_THREE);
+                MATCH_THREE);
         assertThat(WinningCondition.getConditionByMatchCount(5, false)).isEqualTo(
-                WinningCondition.MATCH_FIVE);
+                MATCH_FIVE);
         assertThat(WinningCondition.getConditionByMatchCount(5, true)).isEqualTo(
-                WinningCondition.MATCH_BONUS);
+                MATCH_BONUS);
         assertThat(WinningCondition.getConditionByMatchCount(6, false)).isEqualTo(
-                WinningCondition.MATCH_SIX);
+                MATCH_SIX);
     }
 
     @Test
@@ -29,5 +35,17 @@ class WinningConditionTest {
     void fail_to_get_winning_condition_by_unknown_match_count() {
         assertThatExceptionOfType(UnknownWinningConditionException.class)
                 .isThrownBy(() -> WinningCondition.getConditionByMatchCount(100, false));
+    }
+
+    @Test
+    @DisplayName("당첨금이 주어진 당첨 조건들 구하기")
+    void get_conditions_with_prize() {
+        List<WinningCondition> prizeConditions = WinningCondition.getConditionsWithPrize();
+        
+        assertThat(prizeConditions).contains(MATCH_THREE, MATCH_FOR, MATCH_FIVE, MATCH_BONUS, MATCH_SIX);
+        assertThat(prizeConditions.stream()
+                .filter(condition -> condition.getPrizeMoney() > 0)
+                .count()
+        ).isEqualTo(5);
     }
 }
