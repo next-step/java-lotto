@@ -54,7 +54,7 @@
 * Step3 - 로또(2등)
   * Step2 추가 피드백
     - [ ] LottoNumbers 에게 번호가 몇 개 일치하는지 물어보기
-    - [ ] LottoNumber Collection Type 고민하기
+    - [x] LottoNumber Collection Type 고민하기
     - [ ] LottoResult indent 줄이기
     - [ ] Prize 당첨이 안됨을 나타내는 값을 추가하기
     - [ ] Prize enum 에서 reward 를 값으로 가지기

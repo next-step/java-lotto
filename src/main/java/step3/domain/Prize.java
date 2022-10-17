@@ -4,37 +4,21 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum Prize {
-    THREE(3){
-        @Override
-        public int getReward() {
-            return 5000;
-        }
-    },
-    FOUR(4) {
-        @Override
-        public int getReward() {
-            return 50000;
-        }
-    },
-    FIVE(5){
-        @Override
-        public int getReward(){
-            return 1500000;
-        }
-    },
-    SIX(6) {
-        @Override
-        public int getReward() {
-            return 2000000000;
-        }
-    };
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
-    private final int matchCount;
+    private final int countOfMatch;
+    private final int reward;
+    private static final int MINIMUM_PRIZE_RANGE = 3;
+    private static final int MAXIMUM_PRIZE_RANGE = 6;
 
-    public abstract int getReward();
-
-    Prize(int matchCount){
-        this.matchCount = matchCount;
+    Prize(int countOfMatch, int reward){
+        this.countOfMatch = countOfMatch;
+        this.reward = reward;
     }
 
     public static int calculateTotalIncome(final Map<Prize, Integer> drawLottoResult){
@@ -45,17 +29,25 @@ public enum Prize {
         return totalReward;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getReward() {
+        return reward;
     }
 
     public static Prize getPrize(int matchCount) {
-        if (matchCount > 6) {
+        if (matchCount > MAXIMUM_PRIZE_RANGE) {
             throw new IllegalArgumentException("6개 이상 당첨될 수 없습니다.");
         }
 
+        if (matchCount < MINIMUM_PRIZE_RANGE) {
+            return Prize.MISS;
+        }
+
         return Arrays.stream(Prize.values())
-            .filter(prize -> prize.getMatchCount() == matchCount)
+            .filter(prize -> prize.getCountOfMatch() == matchCount)
             .findAny()
             .get();
     }

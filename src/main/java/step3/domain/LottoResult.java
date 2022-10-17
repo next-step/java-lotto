@@ -9,7 +9,6 @@ public class LottoResult {
 
     private final List<Integer> winningNumbers;
     private final Map<Prize, Integer> drawResult = new LinkedHashMap();
-    private final int LEAST_DRAW_COUNT = 3;
 
     public LottoResult(final List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
@@ -25,12 +24,11 @@ public class LottoResult {
             Set<Integer> lottoNumbers = eachLottoNumber.getLottoNumbers();
             int matchCount = calculateMatchCount(lottoNumbers);
 
-            if (matchCount >= LEAST_DRAW_COUNT) {
-                Prize prize = Prize.getPrize(matchCount);
-                drawResult.put(prize, drawResult.getOrDefault(prize, 0) + 1);
-            }
+            Prize prize = Prize.getPrize(matchCount);
+            drawResult.put(prize, drawResult.getOrDefault(prize, 0) + 1);
         }
 
+        drawResult.remove(Prize.MISS);
         return drawResult;
     }
 
