@@ -2,11 +2,16 @@ package lotto.service;
 
 import lotto.domain.Amount;
 import lotto.domain.Money.Money;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lottonumber.LottoNumberSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,5 +34,14 @@ public class LottoPurchaseServiceTest {
     @ValueSource(ints = {1, 333, 666, 9999})
     void purchase_lotto_amount(int amount) {
         assertThat(lottoPurchaseService.purchaseLotto(new Amount(amount)).size()).isEqualTo(amount);
+    }
+
+    @DisplayName("로또 번호로 로또를 구매한다.")
+    @Test
+    void purchase_lotto_lottonumberset() {
+        LottoNumberSet lottoNumbers = LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6);
+        String actual = lottoPurchaseService.purchaseLotto(Arrays.asList(lottoNumbers)).get(0).toString();
+
+        assertThat(actual).isEqualTo(new Lotto(lottoNumbers).toString());
     }
 }
