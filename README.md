@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 구현 기능 목록
+
+- 로또 번호 자동 생성 구현
+- 당첨 통계 확인 구현
+- 구입금액 입력 구현
+- 당첨 번호 입력 구현
