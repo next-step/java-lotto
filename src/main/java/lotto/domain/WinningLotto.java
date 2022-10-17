@@ -19,16 +19,7 @@ public class WinningLotto {
 
     public static WinningLotto from(final String winningLotto, final String bonusNumber) {
 
-        validate(winningLotto, bonusNumber);
-
-        return new WinningLotto(LottoFactory.from(winningLotto), Number.from(bonusNumber));
-    }
-
-    private static void validate(final String winningLotto, final String bonusNumber) {
-
-        if (winningLotto == null || winningLotto.isEmpty() || bonusNumber == null || bonusNumber.isEmpty()) {
-            throw new IllegalArgumentException("입력 값이 null 또는 빈 공백 입니다.");
-        }
+        return new WinningLotto(Lotto.from(winningLotto), Number.from(bonusNumber));
     }
 
     public int match(final Lotto lotto) {
