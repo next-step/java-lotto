@@ -10,4 +10,8 @@ public class InputScanner {
         return SCANNER.nextLine();
     }
 
+    public static int intScan() {
+        return SCANNER.nextInt();
+    }
+
 }

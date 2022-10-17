@@ -1,6 +1,7 @@
 package lotto.services;
 
 import lotto.models.Lotto;
+import lotto.models.request.PaymentRequest;
 import lotto.strategy.NormalPickNumberStrategy;
 import lotto.strategy.PickNumberStrategy;
 
@@ -9,18 +10,14 @@ import java.util.List;
 
 public class LottoService {
 
-    private final PickNumberService pickNumberService;
+    private static final int LOTTO_PRICE = 1000;
 
-    public LottoService(PickNumberService pickNumberService) {
-        this.pickNumberService = pickNumberService;
-    }
-
-    public List<Lotto> issueLotto(int count) {
-        PickNumberStrategy strategy = new NormalPickNumberStrategy();
+    public List<Lotto> issueLotto(PaymentRequest paymentRequest, PickNumberStrategy strategy) {
+        int count = paymentRequest.getPayment() / LOTTO_PRICE;
 
         List<Lotto> lottos = new ArrayList<>();
         while (lottos.size() < count) {
-            lottos.add(Lotto.of(pickNumberService.pickNumbers(strategy)));
+            lottos.add(Lotto.of(strategy.getNumbers()));
         }
 
         return lottos;
