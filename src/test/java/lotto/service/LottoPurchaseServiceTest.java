@@ -5,10 +5,12 @@ import lotto.domain.Money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoPurchaseTest {
+public class LottoPurchaseServiceTest {
 
     private LottoPurchaseService lottoPurchaseService;
 
@@ -21,5 +23,11 @@ public class LottoPurchaseTest {
     @Test
     void lotto_purchase_count() {
         assertThat(lottoPurchaseService.purchaseNumber(new Money(3000))).isEqualTo(new Amount(3));
+    }
+
+    @ParameterizedTest(name = "Amount를 넘기면 Amount수 만큼 Lotto를 구매한다.")
+    @ValueSource(ints = {1, 333, 666, 9999})
+    void purchase_lotto_amount(int amount) {
+        assertThat(lottoPurchaseService.purchaseLotto(new Amount(amount)).size()).isEqualTo(amount);
     }
 }
