@@ -1,7 +1,7 @@
 package lottery.view;
 
-import lottery.Lottery;
 import lottery.LotteryNumber;
+import lottery.WinningLottery;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -16,9 +16,9 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static Lottery getWinningLotteryNumbers() {
+    public static WinningLottery getWinningLotteryNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lottery(Arrays.stream(scanner.nextLine().split(","))
+        return new WinningLottery(Arrays.stream(scanner.nextLine().split(","))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .mapToObj(LotteryNumber::new)

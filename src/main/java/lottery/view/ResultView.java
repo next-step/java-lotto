@@ -1,13 +1,12 @@
 package lottery.view;
 
 import lottery.Lottery;
+import lottery.LotteryRank;
 import lottery.LotteryResult;
 
 import java.util.List;
 
 public class ResultView {
-
-    public static final int[] PRINT_RANKS = {3, 4, 5, 6};
 
     public static void printPurchasedLotteryInfos(List<Lottery> lotteries) {
         printPurchasedLotteryAmount(lotteries.size());
@@ -37,10 +36,11 @@ public class ResultView {
     }
 
     private static void printLotteryResultsPerRanks(LotteryResult lotteryResult) {
-        for (int printRank : PRINT_RANKS) {
-            int prizeOf = lotteryResult.getPrizeOf(printRank);
-            int wonCountOf = lotteryResult.getWonCountOf(printRank);
-            System.out.println(printRank + "개 일치 (" + prizeOf + ") - " + wonCountOf + "개");
+        for (int rank : LotteryRank.getUsedRanks()) {
+            int prizeOfRank = LotteryRank.getPrizeOfRank(rank);
+            int winningCountOfRank = lotteryResult.getWinningCountOfRank(rank);
+
+            System.out.println(rank + "개 일치 (" + prizeOfRank + ") - " + winningCountOfRank + "개");
         }
     }
 

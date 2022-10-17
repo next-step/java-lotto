@@ -7,8 +7,9 @@ import java.util.stream.IntStream;
 
 public class LotteryCompany {
 
+    // todo private? 상수 위치 고민
     static final int LOTTERY_NUM_COUNT = 6;
-    private static final int LOTTERY_PRICE = 1000;
+    static final int LOTTERY_PRICE = 1000;
 
     private static final List<LotteryNumber> LOTTERY_NUMBER_CANDIDATES = IntStream
             .rangeClosed(1, LotteryNumber.LOTTERY_NUM_MAX)
@@ -21,13 +22,6 @@ public class LotteryCompany {
                 .stream()
                 .sorted()
                 .collect(Collectors.toList()));
-    }
-
-    public static LotteryResult createLotteryResult(Lottery wonLottery, List<Lottery> lotteries) {
-        LotteryResult lotteryResult = new LotteryResult(LotteryRanks.getRanksInUse(), lotteries.size(), LOTTERY_PRICE);
-        lotteries.forEach(lottery -> lotteryResult.addWonCountOf(wonLottery.countEqualNumbers(lottery)));
-
-        return lotteryResult;
     }
 
     public static int getAvailablePurchaseLotteryCount(int cashAmount) {

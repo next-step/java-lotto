@@ -2,7 +2,6 @@ package lottery;
 
 import java.util.List;
 
-import static lottery.LotteryCompany.createLotteryResult;
 import static lottery.LotteryCompany.getAvailablePurchaseLotteryCount;
 import static lottery.view.InputView.*;
 import static lottery.view.ResultView.*;
@@ -20,7 +19,8 @@ public class Controller {
         List<Lottery> lotteries = customer.getLotteries();
         printPurchasedLotteryInfos(lotteries);
 
-        LotteryResult lotteryResult = createLotteryResult(getWinningLotteryNumbers(), lotteries);
+        WinningLottery winningLottery = getWinningLotteryNumbers();
+        LotteryResult lotteryResult = winningLottery.createLotteryResult(lotteries);
         printLotteryResult(lotteryResult);
     }
 
