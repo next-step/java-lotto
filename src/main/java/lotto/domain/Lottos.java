@@ -5,6 +5,7 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -19,18 +20,16 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Bank checkWinningNumber(Lotto winningNumber) {
+    public Bank checkWinningNumber(Lotto winningNumber, LottoNumber bonusBall) {
         List<Rank> rankList = lottos.stream()
-            .map(lotto -> lotto.winningNumberCount(winningNumber))
-            .map(Rank::valueOf)
+            .map(lotto -> Rank.valueOf(lotto.winningNumberCount(winningNumber), lotto.hasLottoNumber(bonusBall)))
             .collect(Collectors.toList());
         return new Bank(new EnumMap<>(getRankMap(rankList)));
     }
 
     private Map<Rank, Integer> getRankMap(List<Rank> ranks) {
-        return Rank.stream()
-            .collect(toMap(identity(), rank -> frequency(ranks, rank)
-            ));
+        return Arrays.stream(Rank.values())
+            .collect(toMap(identity(), rank -> frequency(ranks, rank)));
     }
 
     public List<Lotto> lottos() {

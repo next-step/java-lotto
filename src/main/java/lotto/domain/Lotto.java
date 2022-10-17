@@ -46,6 +46,11 @@ public class Lotto {
             .count();
     }
 
+    boolean hasLottoNumber(LottoNumber bonusBall) {
+        return lottoNumbers.stream()
+            .anyMatch(numbers -> numbers.equals(bonusBall));
+    }
+
     private long agreementBall(Lotto winningNumber, LottoNumber lottoNumber) {
         return winningNumber.lottoNumbers.stream()
             .filter(winner -> winner.equals(lottoNumber))

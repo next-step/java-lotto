@@ -86,6 +86,24 @@ public class LottoTest {
         assertThat(count).isEqualTo(5);
     }
 
+    @Test
+    @DisplayName("로또에 보너스볼이 있는지 체크한다.")
+    void lotto_hasBonusball_check_test() {
+        //given
+        Lotto lotto = new Lotto(
+            List.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+            )
+        );
+
+        assertThat(lotto.hasLottoNumber(new LottoNumber(5))).isTrue();
+        assertThat(lotto.hasLottoNumber(new LottoNumber(7))).isFalse();
+    }
 
 
 
