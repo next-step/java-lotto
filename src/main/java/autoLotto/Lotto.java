@@ -8,16 +8,21 @@ import java.util.List;
 import static java.util.stream.IntStream.*;
 
 public class Lotto {
+    private static final int LOTTO_START = 1;
+    private static final int LOTTO_END = 46;
+    private static final int ZERO = 0;
+    private static final int NUMBER_SIZE = 6;
+
 
     private List<Integer> lotto = new ArrayList<>();
 
     public Lotto() {
         List<Integer> numbers = new ArrayList<>();
 
-        range(1, 46).forEach(numbers :: add);
+        range(LOTTO_START, LOTTO_END).forEach(numbers :: add);
         Collections.shuffle(numbers);
 
-        range(0, 6).forEach(i -> lotto.add(numbers.get(i)));
+        range(ZERO, NUMBER_SIZE).forEach(i -> lotto.add(numbers.get(i)));
         Collections.sort(lotto);
     }
 
