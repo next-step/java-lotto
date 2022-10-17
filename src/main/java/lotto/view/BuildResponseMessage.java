@@ -1,6 +1,6 @@
 package lotto.view;
 
 @FunctionalInterface
-public interface BuildResponseMessage {
-    String toMessage();
+public interface BuildResponseMessage<T> {
+    String toMessage(T t);
 }

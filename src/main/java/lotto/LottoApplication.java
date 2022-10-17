@@ -48,6 +48,6 @@ public class LottoApplication {
     }
 
     private static void showLottoYield(int paymentAmount, int rewardAmount) {
-        System.out.println(new LottoYieldResponseView(new LottoYield(paymentAmount, rewardAmount)).toMessage());
+        System.out.println(new LottoYieldResponseView().toMessage(new LottoYield(paymentAmount, rewardAmount)));
     }
 }
