@@ -1,8 +1,9 @@
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
 
-    ADD("+", Operator::sum),
+    ADD("+", Integer::sum),
     SUBTRACT("-", Operator::subtract),
     MULTIPLY("*", Operator::multiply),
     DIVIDE("/", Operator::divide);
@@ -15,19 +16,26 @@ public enum Operator {
         this.function = function;
     }
 
-    public static int sum(int a, int b) {
-        return a + b;
+    public static Operator of(String operation) {
+        return Arrays.stream(values())
+                .filter(operator -> operator.operation.equals(operation))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("올바른 사칙연산 기호가 아닙니다."));
     }
 
-    public static int subtract(int a, int b) {
+    public int calculate(int a, int b) {
+        return function.apply(a, b);
+    }
+
+    private static int subtract(int a, int b) {
         return a - b;
     }
 
-    public static int multiply(int a, int b) {
+    private static int multiply(int a, int b) {
         return a * b;
     }
 
-    public static int divide(int a, int b) {
+    private static int divide(int a, int b) {
         if (b == 0) {
             throw new ArithmeticException("0을 나눌 수 없습니다.");
         }
