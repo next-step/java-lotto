@@ -16,6 +16,6 @@ public class LottoMain {
 
         ImmutableMoney purchaseMoney = moneyController.purchaseMoney();
 
-        lottoResultController.draw(lottoPurchaseController.purchaseLotto(purchaseMoney), purchaseMoney);
+        lottoResultController.draw(lottoPurchaseController.purchaseLotto(purchaseMoney));
     }
 }

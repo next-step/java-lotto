@@ -30,8 +30,8 @@ public class LottoResultService {
         return result;
     }
 
-    public double yield(final List<Lotto> lottos, final LottoWinner winner, final ImmutableMoney immutableMoney) {
-        return reward(lottos, winner).money().divide(immutableMoney.value());
+    public double yield(final List<Lotto> lottos, final LottoWinner winner) {
+        return reward(lottos, winner).money().divide(lottoPrice(lottos).value());
     }
 
     private ImmutableMoney reward(final List<Lotto> lottos, final LottoWinner winner) {
@@ -44,4 +44,11 @@ public class LottoResultService {
         }
         return result;
     }
+
+    private ImmutableMoney lottoPrice(final List<Lotto> lottos) {
+        Money lottoPrice = Lotto.LOTTO_PRICE.money();
+        lottoPrice.multiply(lottos.size());
+        return lottoPrice;
+    }
+
 }

@@ -20,8 +20,8 @@ public class LottoResultController {
         this.lottoResultService = lottoResultService;
     }
 
-    public void draw(final List<Lotto> lottos, final ImmutableMoney money) {
-        lottoResult(money, lottos, drawWinner());
+    public void draw(final List<Lotto> lottos) {
+        lottoResult(lottos, drawWinner());
     }
 
     private LottoWinner drawWinner() {
@@ -34,7 +34,7 @@ public class LottoResultController {
         return new LottoWinner(numbers, bonusNumber);
     }
 
-    private void lottoResult(final ImmutableMoney money, final List<Lotto> lottos, final LottoWinner winner) {
+    private void lottoResult(final List<Lotto> lottos, final LottoWinner winner) {
         Map<Rank, Integer> checkLotto = lottoResultService.checkLotto(lottos, winner);
         LottoOutput.statistics();
         for (int rankIndex = Rank.REWARD_START_RANK_INDEX; rankIndex >= Rank.REWARD_END_RANK_INDEX; rankIndex--) {
@@ -42,7 +42,7 @@ public class LottoResultController {
             lottoMatchOutput(rank, checkLotto.get(rank));
         }
 
-        LottoOutput.yield(lottoResultService.yield(lottos, winner, money));
+        LottoOutput.yield(lottoResultService.yield(lottos, winner));
     }
 
     private void lottoMatchOutput(final Rank rank, final int matchNumber) {

@@ -59,11 +59,17 @@ public class LottoResultServiceTest {
                 new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)),
                 new Lotto(LottoNumberSet.createLottoNumberSet(5, 6, 7, 8, 9, 10)),
                 new Lotto(LottoNumberSet.createLottoNumberSet(6, 7, 8, 9, 10, 11)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
                 new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12))
         );
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
 
-        assertThat(lottoResultService.yield(lottoList, winner, new Money(10000))).isEqualTo(0.5);
+        assertThat(lottoResultService.yield(lottoList, winner)).isEqualTo(0.5);
     }
 }
