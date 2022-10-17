@@ -37,3 +37,38 @@
 - [x] Test input이 하나일때 @ParameterizedTest -> @Test 사용
 - [x] ArithmeticOperation 정적 팩토리 메서드로 처리하기.
 - [x] 의미없는 test 삭제
+---
+
+---
+##Step2 - 로또(자동)
+###기능 요구사항
+> - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+> - 로또 1장의 가격은 1000원이다.
+
+###기능 목록
+- [ ] LottoAmount
+  - 로또 하나당 1000원씩
+  - 로또는 1000원 이상 있어야 구입 가능하다.
+- [ ] LottoNumber 제약조건에 맞춰 구현
+  - 1~45까지의 수만 허용한다.
+- [ ] Lotto
+  - Set<LottoNumber>
+  - 중복 없이 6개의 숫자 
+  - 지난주 로또 개수도 입력 받아야 함.
+- [ ] LottoTicket
+  - List< Lotto >
+  - 금액에 따라 Lotto 리스트 개수 출력
+- [ ] LottoPrize
+  - 로또 당첨 여부 -> 번호 일치 개수
+- [ ] LottoWinningRate
+  - 승률 구하기
+- [ ] InputView
+  - 구입금액 입력해 주세요. => int
+  - 지난 주 당첨 번호를 입력해 주세요. 
+    - List< Integer >
+    - split ","
+    - 6개
+- [ ] ResultView
+  - ~개를 구매했습니다.
+  - 당첨통계
+  - 수익률
