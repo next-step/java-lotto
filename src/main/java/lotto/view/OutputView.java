@@ -1,11 +1,11 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
-import lotto.domain.WinningInformation;
-import lotto.domain.WinningStatistics;
+import lotto.domain.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static lotto.domain.WinningInformation.*;
 
@@ -22,22 +22,40 @@ public class OutputView {
 
     public static void printGeneratedLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        lottos.forEach(System.out::println);
-        System.out.println();
+        lottos.stream()
+                .map(Lotto::getElements)
+                .map(OutputView::sortLottoNumbers)
+                .forEach(OutputView::printLottoNumbers);
+    }
+
+    private static Stream<LottoNumber> sortLottoNumbers(Set<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted(LottoNumber::compareTo);
+    }
+
+    private static void printLottoNumbers(Stream<LottoNumber> lottoNumbers) {
+        System.out.print("[");
+        System.out.print(
+                lottoNumbers
+                        .map(it -> Integer.toString(it.getValue()))
+                        .collect(Collectors.joining(", "))
+        );
+        System.out.println("]");
     }
 
     public static void printMoneyLeft(Money money) {
-        System.out.printf("남은 금액는 %s원 입니다.\n\n", money);
+        System.out.printf("남은 금액는 %s원 입니다.", money.getValue());
     }
 
     public static void printWinningStatistics(WinningStatistics winningStatistics, Money purchaseAmount) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         WINNING_INFORMATIONS.forEach(it -> System.out.printf(
                 MATCHES_COUNT_FORMAT,
                 it.getMatchesCount(),
                 additionalBonusMessage(it),
-                it.getAmount(),
+                it.findAmountValue(),
                 winningStatistics.countSame(it)
         ));
         System.out.printf("총 수익률은 %s입니다.", winningStatistics.calculateYield(purchaseAmount));
@@ -48,5 +66,9 @@ public class OutputView {
             return ADDITIONAL_BONUS_MESSAGE;
         }
         return "";
+    }
+
+    public static void printNewLine() {
+        System.out.println();
     }
 }

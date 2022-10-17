@@ -13,10 +13,12 @@ public class Application {
         Money money = receiveMoney();
         Money moneyLeft = money.calculateLeft();
         OutputView.printMoneyLeft(moneyLeft);
+        OutputView.printNewLine();
 
         PlayLottoCount playLottoCount = money.countPlayLotto();
         List<Lotto> lottos = AutoLottoGenerator.generate(playLottoCount);
         OutputView.printGeneratedLottos(lottos);
+        OutputView.printNewLine();
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
         BonusBall bonusBall = createBonusBall(lastWeekWinningLotto);

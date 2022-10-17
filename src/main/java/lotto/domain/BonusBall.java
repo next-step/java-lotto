@@ -10,7 +10,7 @@ public class BonusBall extends LottoNumber {
     }
 
     private void validateDuplicate(final Lotto lotto) {
-        if (lotto.isMatch(this)) {
+        if (lotto.contains(this)) {
             throw DuplicateLottoNumberException.getInstance();
         }
     }

@@ -19,7 +19,7 @@ public class WinningStatistics {
 
     public static WinningStatistics of(final List<Lotto> lottos, final Lotto lastWeekWinningLotto, BonusBall bonusBall) {
         List<WinningInformation> winningInformations = lottos.stream()
-                .map(lotto -> WinningInformation.of(lotto.countMatches(lastWeekWinningLotto), lotto.isMatch(bonusBall)))
+                .map(lotto -> WinningInformation.of(lotto.countMatches(lastWeekWinningLotto), lotto.contains(bonusBall)))
                 .collect(Collectors.toList());
         return new WinningStatistics(winningInformations);
     }
@@ -47,5 +47,12 @@ public class WinningStatistics {
     @Override
     public int hashCode() {
         return Objects.hash(winningInformations);
+    }
+
+    @Override
+    public String toString() {
+        return "WinningStatistics{" +
+                "winningInformations=" + winningInformations +
+                '}';
     }
 }

@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.exception.InvalidLottoNumberSizeException;
 import lotto.util.NullCheckUtil;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -40,13 +41,17 @@ public class Lotto {
     public int countMatches(Lotto lastWeekLotto) {
         return lastWeekLotto.elements
                 .stream()
-                .filter(this::isMatch)
+                .filter(this::contains)
                 .collect(Collectors.toSet())
                 .size();
     }
 
-    public boolean isMatch(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return elements.contains(lottoNumber);
+    }
+
+    public Set<LottoNumber> getElements() {
+        return Collections.unmodifiableSet(elements);
     }
 
     @Override
@@ -64,6 +69,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return elements.toString();
+        return "Lotto{" +
+                "elements=" + elements +
+                '}';
     }
 }

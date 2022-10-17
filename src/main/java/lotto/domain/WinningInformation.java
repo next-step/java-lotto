@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.util.NullCheckUtil;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,11 +53,27 @@ public enum WinningInformation {
         );
     }
 
+    public int amountCompareTo(Money money) {
+        return amount.compareTo(money);
+    }
+
+    public BigInteger findAmountValue() {
+        return amount.getValue();
+    }
+
     public int getMatchesCount() {
         return matchesCount;
     }
 
     public Money getAmount() {
         return amount;
+    }
+
+    @Override
+    public String toString() {
+        return "WinningInformation{" +
+                "matchesCount=" + matchesCount +
+                ", amount=" + amount +
+                '}';
     }
 }

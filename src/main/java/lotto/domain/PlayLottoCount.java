@@ -17,6 +17,10 @@ public class PlayLottoCount {
         }
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -30,7 +34,10 @@ public class PlayLottoCount {
         return Objects.hash(value);
     }
 
-    public int getValue() {
-        return value;
+    @Override
+    public String toString() {
+        return "PlayLottoCount{" +
+                "value=" + value +
+                '}';
     }
 }
