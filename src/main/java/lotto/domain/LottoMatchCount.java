@@ -8,7 +8,7 @@ public class LottoMatchCount {
     private final static int LOTTOCOUNT_MINIMUM = 0;
     private final static int LOTTOCOUNT_MAXIMUM = 6;
     public static final LottoMatchCount REQUIRE_CHECK_BONUSNUMBER = new LottoMatchCount(5);
-    private static String LOTTOCOUNT_BOUND_EXCEPTION = "LottoCount는 %d이상 %d이하여야 합니다.";
+    private static final String LOTTOCOUNT_BOUND_EXCEPTION = "LottoCount는 " + LOTTOCOUNT_MINIMUM + "이상 " + LOTTOCOUNT_MAXIMUM + "이하여야 합니다.";
 
     public LottoMatchCount(final int count) {
         if (checkCount(count)) {
