@@ -12,4 +12,9 @@ public class RankTest {
 
         assertThat(rank).isEqualTo(new Rank(1));
     }
+
+    @Test
+    void valid() {
+        assertThatThrownBy(() -> new Rank(0)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
