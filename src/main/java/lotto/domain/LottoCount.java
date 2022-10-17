@@ -5,9 +5,19 @@ import java.util.Objects;
 public class LottoCount {
 
     private final int count;
+    private final static int LOTTOCOUNT_MINIMUM = 0;
+    private final static int LOTTOCOUNT_MAXIMUM = 6;
+    private static String LOTTOCOUNT_BOUND_EXCEPTION = "LottoCount는 %d이상 %d이하여야 합니다.";
 
     public LottoCount(final int count) {
+        if (checkCount(count)) {
+            throw new IllegalArgumentException(LOTTOCOUNT_BOUND_EXCEPTION);
+        }
         this.count = count;
+    }
+
+    private boolean checkCount(final int count) {
+        return count < LOTTOCOUNT_MINIMUM || count > LOTTOCOUNT_MAXIMUM;
     }
 
     @Override
