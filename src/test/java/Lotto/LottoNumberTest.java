@@ -16,4 +16,8 @@ public class LottoNumberTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(46)).withMessageContaining("유효하지 않은 로또 번호입니다.");
     }
 
+    // 어떻게 테스트?
+    @Test
+    void 유니크한_랜덤_번호로_생성() {
+    }
 }

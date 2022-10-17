@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber {
     private static final String INVALID_NUMBER = "유효하지 않은 로또 번호입니다.";
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
     private int number;
 
