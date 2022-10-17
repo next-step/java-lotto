@@ -4,56 +4,65 @@ public class App {
 
     public static final String NOT_CORRECT_INPUT = "올바른 형식의 문자열이 아닙니다";
 
-    private App() {}
+    private App() {
+    }
 
-    public static int calculate(String source) {
-        validation(isNullOrBlank(source));
-        return calculate(source.split(" "));
+    public static int calculate(String input) {
+        validate(input);
+        return calculate(split("+ " + input));
+    }
+
+    private static void validate(String source) {
+        validate(isNotNullAndNotBlank(source));
+        validate(isUpperMinLength(source.length()));
+    }
+
+    private static String[] split(String source) {
+        return source.split(" ");
     }
 
     private static int calculate(String[] inputs) {
-        validation(isUnderMinLength(inputs.length));
-        int result = firstCalculate(inputs);
-        result = calculateRemains(inputs, result);
-        return result;
-    }
-
-    private static int firstCalculate(String[] inputs) {
-        return Calculator.calculate(toInt(inputs[0]), toInt(inputs[2]), inputs[1]);
-    }
-
-    private static int calculateRemains(String[] inputs, int result) {
-        for (int i = 3; i < inputs.length; i+=2) {
-            result = Calculator.calculate(result, toInt(inputs[i + 1]), inputs[i]);
+        int result = 0;
+        Calculator calculator = new Calculator();
+        for (int i = 1; i < inputs.length; i += 2) {
+            result = calculator.calculate(result, toInt(inputs[i]), inputs[i - 1]);
         }
         return result;
     }
 
     private static int toInt(String numberCandidate) {
-        validation(isNotNumeric(numberCandidate));
+        validate(isNumeric(numberCandidate));
         return Integer.parseInt(numberCandidate);
     }
 
-    private static void validation(boolean validation) {
-        if (validation) {
+    private static void validate(boolean isValid) {
+        if (!isValid) {
             throw new IllegalArgumentException(NOT_CORRECT_INPUT);
         }
     }
 
-    private static boolean isNullOrBlank(String source) {
-        return source == null || source.isBlank();
+    private static boolean isNotNullAndNotBlank(String source) {
+        return isNotNull(source) && isNotBlank(source);
     }
 
-    private static boolean isUnderMinLength(int length) {
-        return length < 3;
+    private static boolean isNotBlank(String source) {
+        return !source.isBlank();
     }
 
-    private static boolean isNotNumeric(String numberCandidate) {
+    private static boolean isNotNull(String source) {
+        return source != null;
+    }
+
+    private static boolean isUpperMinLength(int length) {
+        return length > 4;
+    }
+
+    private static boolean isNumeric(String numberCandidate) {
         try {
             Integer.parseInt(numberCandidate);
-            return false;
-        } catch (NumberFormatException e) {
             return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }
