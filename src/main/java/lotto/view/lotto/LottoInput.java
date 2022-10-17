@@ -1,7 +1,6 @@
-package lotto.view;
+package lotto.view.lotto;
 
 import lotto.domain.Amount;
-import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
 
@@ -10,13 +9,9 @@ import java.util.Scanner;
 
 public class LottoInput {
 
-    public static ImmutableMoney money() {
-        Scanner scanner = new Scanner(System.in);
-        return new ImmutableMoney(scanner.nextInt());
-    }
-
     public static Amount purchaseManualAmount() {
         Scanner scanner = new Scanner(System.in);
+
         return new Amount(scanner.nextInt());
     }
 

@@ -5,8 +5,8 @@ import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.service.LottoPurchaseService;
-import lotto.view.LottoInput;
-import lotto.view.LottoOutput;
+import lotto.view.lotto.LottoInput;
+import lotto.view.lotto.LottoOutput;
 
 import java.util.ArrayList;
 import java.util.Collections;

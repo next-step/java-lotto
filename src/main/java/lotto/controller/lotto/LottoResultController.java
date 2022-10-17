@@ -5,8 +5,8 @@ import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.service.LottoResultService;
 import lotto.domain.*;
 import lotto.domain.lotto.*;
-import lotto.view.LottoInput;
-import lotto.view.LottoOutput;
+import lotto.view.lotto.LottoInput;
+import lotto.view.lotto.LottoOutput;
 
 import java.util.List;
 import java.util.Map;

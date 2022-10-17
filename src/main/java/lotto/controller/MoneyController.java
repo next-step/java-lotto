@@ -1,14 +1,14 @@
 package lotto.controller;
 
 import lotto.domain.Money.ImmutableMoney;
-import lotto.view.LottoInput;
-import lotto.view.LottoOutput;
+import lotto.view.money.MoneyInput;
+import lotto.view.money.MoneyOutput;
 
 public class MoneyController {
 
     public ImmutableMoney purchaseMoney() {
-        LottoOutput.purchaseAmount();
+        MoneyOutput.purchaseMoney();
 
-        return LottoInput.money();
+        return MoneyInput.money();
     }
 }

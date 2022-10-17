@@ -1,8 +1,6 @@
-package lotto.view;
+package lotto.view.lotto;
 
 import lotto.domain.Amount;
-import lotto.domain.LottoMatchCount;
-import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.ProfitRate;
 import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
@@ -10,10 +8,6 @@ import lotto.domain.lotto.Lotto;
 import java.util.List;
 
 public class LottoOutput {
-
-    public static void purchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
 
     public static void purchaseManualAmount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
