@@ -14,6 +14,10 @@ public class ProfitRate {
         this.profitRate = profitRate;
     }
 
+    public boolean loss() {
+        return profitRate < 1;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -25,10 +29,6 @@ public class ProfitRate {
     @Override
     public int hashCode() {
         return Objects.hash(profitRate);
-    }
-
-    public boolean loss() {
-        return profitRate < 1;
     }
 
     @Override
