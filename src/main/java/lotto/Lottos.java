@@ -2,6 +2,7 @@ package lotto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -73,9 +74,8 @@ public class Lottos {
         return BigDecimal.valueOf(lottos.size() * LOTTO_PRICE);
     }
 
-    //FIXME: 리스트 채로 반환하면 가면 리스트를 전달한다. 수정 필요 :)
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
     public boolean hasBenefit(Set<Number> winnerNumbers) {
