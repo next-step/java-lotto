@@ -11,15 +11,17 @@ import static lotto.domain.LottoNumber.lottoNumbers;
 public class LottoController {
 
     public void lottoGame() {
-        Input input = new Input();
-        Payment payment = new Payment(input.amount());
+        Payment payment = new Payment(Input.amount(), Input.manualCount());
+        LottoMachine lottoMachine = new LottoMachine(lottoNumbers());
 
-        List<Lotto> lottoTickets = new LottoMachine(lottoNumbers()).issue(payment);
-        Output.printBuyCount(payment.count());
-        Output.printBuyTickets(lottoTickets);
-        WinningNumber winningNumber = new WinningNumber(input.winningNumberOfLastWeek(), input.bonusNumberOfLastWeek());
+        lottoMachine.manualIssue(Input.manualLottoTickets(payment.manualCount()));
+        lottoMachine.automaticIssue(payment.automaticCount());
 
-        ResultStats resultStats = new ResultStats(lottoTickets, winningNumber);
+        List<Lotto> lottoTickets = lottoMachine.lottoTickets();
+        Output.printPurchaseTickets(lottoTickets, payment.automaticCount(), payment.manualCount());
+
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Input.winningNumberOfLastWeek()), LottoNumber.lottoNumber(Input.bonusNumberOfLastWeek()));
+        ResultStats resultStats = new ResultStats(lottoTickets, winningLotto);
         Output.printLottoResult(resultStats.countPerPrize());
         Output.printReturnOnInvestment(resultStats.returnOnInvestment(payment.amount()));
     }

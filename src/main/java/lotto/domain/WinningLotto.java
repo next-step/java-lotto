@@ -1,37 +1,37 @@
 package lotto.domain;
 
-public class WinningNumber {
+public class WinningLotto {
 
-    private final Lotto winningNumber;
+    private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningNumber(Lotto winningNumber, LottoNumber bonusNumber) {
-        validateWinningNumber(winningNumber);
-        validateBonusNumber(winningNumber, bonusNumber);
-        this.winningNumber = winningNumber;
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        validateWinningLotto(winningLotto);
+        validateBonusNumber(winningLotto, bonusNumber);
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public Lotto winningNumber() {
-        return winningNumber;
+    public Lotto winningLotto() {
+        return winningLotto;
     }
 
     public LottoNumber bonusNumber() {
         return bonusNumber;
     }
 
-    private void validateWinningNumber(Lotto winningNumber) {
-        if (winningNumber == null) {
+    private void validateWinningLotto(Lotto winningLotto) {
+        if (winningLotto == null) {
             throw new IllegalArgumentException("당첨 번호를 전달 받지 못하였습니다.");
         }
     }
 
-    private void validateBonusNumber(Lotto winningNumber, LottoNumber bonusNumber) {
+    private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         if (bonusNumber == null) {
             throw new IllegalArgumentException("당첨 번호를 전달 받지 못하였습니다.");
         }
 
-        if (winningNumber.containsNumber(bonusNumber)) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호에 보너스 번호와 중복되는 번호가 들어가 있습니다.");
         }
     }

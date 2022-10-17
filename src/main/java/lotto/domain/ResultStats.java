@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 public class ResultStats {
 
     private final List<Lotto> lottoTickets;
-    private final WinningNumber winningNumber;
+    private final WinningLotto winningLotto;
 
-    public ResultStats(final List<Lotto> lottoTickets, final WinningNumber winningNumber) {
+    public ResultStats(final List<Lotto> lottoTickets, final WinningLotto winningLotto) {
         this.lottoTickets = lottoTickets;
-        this.winningNumber = winningNumber;
+        this.winningLotto = winningLotto;
     }
 
     public List<Integer> countPerPrize() {
@@ -24,16 +24,18 @@ public class ResultStats {
     }
 
     public double returnOnInvestment(final int price) {
-        return prizesOfUser().stream().mapToDouble(LottoPrize::amount).sum() / (double) price;
+        return prizesOfUser().stream()
+                .mapToDouble(LottoPrize::amount)
+                .sum() / (double) price;
     }
 
     private List<LottoPrize> prizesOfUser() {
         return lottoTickets.stream()
-                .map(ticket -> LottoPrize.of(ticket.compareNumber(winningNumber.winningNumber()), containBonusNumber(ticket)))
+                .map(ticket -> LottoPrize.of(ticket.compareNumber(winningLotto.winningLotto()), containBonusNumber(ticket)))
                 .collect(Collectors.toList());
     }
 
     private boolean containBonusNumber(final Lotto lotto) {
-        return lotto.lottoNumbers().contains(winningNumber.bonusNumber());
+        return lotto.contains(winningLotto.bonusNumber());
     }
 }
