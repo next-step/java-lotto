@@ -20,7 +20,7 @@ class LottoResultTest {
 
     @DisplayName("수익률을 계산한다.")
     @ParameterizedTest
-    @CsvSource(value = {"FIRST,2_000_000", "SECOND,1_500", "THIRD,50", "FOURTH,5", "NONE,0"})
+    @CsvSource(value = {"FIRST,2_000_000", "SECOND,30_000", "THIRD,1_500", "FOURTH,50", "FIFTH,5", "NONE,0"})
     void calculateYield(Rank input, double expected) {
         LottoResult lottoResult = new LottoResult(List.of(input));
         assertThat(lottoResult.calculateYield()).isEqualTo(expected);

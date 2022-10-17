@@ -39,6 +39,7 @@ class LottosTest {
         Lottos lottos = new Lottos(
                 List.of(
                         new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
+                        new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
                         new Lotto(Set.of(11, 2, 3, 4, 5, 6)),
                         new Lotto(Set.of(11, 12, 3, 4, 5, 6)),
                         new Lotto(Set.of(11, 12, 13, 4, 5, 6)),
@@ -50,6 +51,6 @@ class LottosTest {
         LottoResult result = lottos.getResult(winningNumbers, new LottoNumber(7));
         List<Rank> ranks = result.getRanks();
 
-        assertThat(ranks).isEqualTo(List.of(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.NONE, Rank.NONE));
+        assertThat(ranks).isEqualTo(List.of(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH,Rank.NONE, Rank.NONE));
     }
 }

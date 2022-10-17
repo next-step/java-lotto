@@ -26,6 +26,10 @@ public class Lotto {
         return (int) lotto.getLotto().stream().filter(this.lotto::contains).count();
     }
 
+    public boolean isMatch(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getLotto() {
         return Collections.unmodifiableList(lotto);
     }
