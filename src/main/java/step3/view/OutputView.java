@@ -30,15 +30,29 @@ public class OutputView {
     public static void printDrawResult(final Map<Prize, Integer> drawLottoResult) {
         System.out.println();
         for (Prize prize : drawLottoResult.keySet()) {
-            int matchCount = prize.getCountOfMatch();
-            int reward = prize.getReward();
-            System.out.println(matchCount + "개 일치 (" + reward + ")-" + drawLottoResult.get(prize));
+            printEachResult(drawLottoResult, prize);
         }
+    }
+
+    private static void printEachResult(Map<Prize, Integer> drawLottoResult, Prize prize) {
+        int matchCount = prize.getCountOfMatch();
+        int reward = prize.getReward();
+
+        if (prize.equals(Prize.SECOND)) {
+            System.out.println(matchCount + "개 일치, 보너스 볼 일치(30000000원) -" + drawLottoResult.get(prize));
+            return;
+        }
+
+        System.out.println(matchCount + "개 일치 (" + reward + ")- " + drawLottoResult.get(prize));
     }
 
     public static void printGrossReturn(final Ticket ticket, final int totalIncome) {
         final double purchasePrice = ticket.getPurchasePrice();
         final double grossReturn = totalIncome / purchasePrice;
         System.out.println("총 수익률은 " + String.format("%.2f", grossReturn) + "입니다.");
+    }
+
+    public static void printBonusBallNotification() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 }

@@ -14,17 +14,18 @@ public class LottoResult {
         this.winningNumbers = winningNumbers;
     }
 
-
     public static final LottoResult from(final List<Integer> winningNumbers) {
         return new LottoResult(winningNumbers);
     }
 
-    public final Map<Prize, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers, boolean matchBonus) {
+    public final Map<Prize, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers,
+        int bonusBall) {
         for (LottoNumbers eachLottoNumber : allLottoNumbers) {
             Set<Integer> lottoNumbers = eachLottoNumber.getLottoNumbers();
             int matchCount = calculateMatchCount(lottoNumbers);
+            boolean isBonusBallMatch = lottoNumbers.contains(bonusBall);
 
-            Prize prize = Prize.valueOf(matchCount, false);
+            Prize prize = Prize.valueOf(matchCount, isBonusBallMatch);
             drawResult.put(prize, drawResult.getOrDefault(prize, 0) + 1);
         }
 

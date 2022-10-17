@@ -30,7 +30,7 @@ class LottoResultTest {
         );
 
         Map<Prize, Integer> drawLottoResult =
-            lottoResult.drawLottoResult(allLottoNumbers, false);
+            lottoResult.drawLottoResult(allLottoNumbers, 8);
 
         Assertions.assertAll(
             () -> assertThat(drawLottoResult.get(Prize.FIFTH)).isEqualTo(2),

@@ -21,4 +21,10 @@ public class InputView {
             .boxed()
             .collect(Collectors.toList());
     }
+
+    public static int inputBonusBall() {
+        OutputView.printBonusBallNotification();
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
 }
