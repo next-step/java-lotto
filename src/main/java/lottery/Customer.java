@@ -12,10 +12,6 @@ public class Customer {
         lotteries = new ArrayList<>();
     }
 
-    public Customer(List<Lottery> lotteries) {
-        this.lotteries = lotteries;
-    }
-
     public void purchaseRandomLottery() {
         lotteries.add(LotteryCompany.generateRandomLotteryNumbers());
     }
