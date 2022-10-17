@@ -19,8 +19,8 @@ public class Lotto {
         return new Lotto(lottoNumberStrategy.provideNumberSet());
     }
 
-    public Division checkDivision(List<Number> winnersNumber) {
-        return Division.valueOf(match(winnersNumber));
+    public Rank checkRank(List<Number> winnersNumber) {
+        return Rank.valueOf(match(winnersNumber));
     }
 
     private int match(List<Number> winnersNumber) {

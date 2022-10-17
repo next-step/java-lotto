@@ -34,10 +34,10 @@ public class Output {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (5000원)- %d개\n", lottos.numberOfFourthDivision(winnerNumbers));
-        System.out.printf("4개 일치 (50000원)- %d개\n", lottos.numberOfThirdDivision(winnerNumbers));
-        System.out.printf("5개 일치 (1500000원)- %d개\n", lottos.numberOfSecondDivision(winnerNumbers));
-        System.out.printf("6개 일치 (2000000000원)- %d개\n", lottos.numberOfFirstDivision(winnerNumbers));
+        System.out.printf("3개 일치 (5000원)- %d개\n", lottos.numberOfFourthRank(winnerNumbers));
+        System.out.printf("4개 일치 (50000원)- %d개\n", lottos.numberOfThirdRank(winnerNumbers));
+        System.out.printf("5개 일치 (1500000원)- %d개\n", lottos.numberOfSecondRank(winnerNumbers));
+        System.out.printf("6개 일치 (2000000000원)- %d개\n", lottos.numberOfFirstRank(winnerNumbers));
         if (lottos.hasBenefit(winnerNumbers)) {
             System.out.printf("총 수익률은 %.2f입니다.(어떻게 하셧죠??????)", lottos.calculateProfitRate(winnerNumbers));
             return;

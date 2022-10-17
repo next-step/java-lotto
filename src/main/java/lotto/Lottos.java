@@ -29,27 +29,27 @@ public class Lottos {
     }
 
     //FIXME: 함수별 출력이 아닌 통계 도메인 생성 :)
-    public long numberOfFirstDivision(List<Number> winners) {
+    public long numberOfFirstRank(List<Number> winners) {
         return lottos.stream()
-            .filter(lotto -> Division.FIRST == lotto.checkDivision(winners))
+            .filter(lotto -> Rank.FIRST == lotto.checkRank(winners))
             .count();
     }
 
-    public long numberOfSecondDivision(List<Number> winners) {
+    public long numberOfSecondRank(List<Number> winners) {
         return lottos.stream()
-            .filter(lotto -> Division.SECOND == lotto.checkDivision(winners))
+            .filter(lotto -> Rank.SECOND == lotto.checkRank(winners))
             .count();
     }
 
-    public long numberOfThirdDivision(List<Number> winners) {
+    public long numberOfThirdRank(List<Number> winners) {
         return lottos.stream()
-            .filter(lotto -> Division.THIRD == lotto.checkDivision(winners))
+            .filter(lotto -> Rank.THIRD == lotto.checkRank(winners))
             .count();
     }
 
-    public long numberOfFourthDivision(List<Number> winners) {
+    public long numberOfFourthRank(List<Number> winners) {
         return lottos.stream()
-            .filter(lotto -> Division.FOURTH == lotto.checkDivision(winners))
+            .filter(lotto -> Rank.FOURTH == lotto.checkRank(winners))
             .count();
     }
 
@@ -59,12 +59,12 @@ public class Lottos {
     }
 
     private BigDecimal calculateTotalProfit(List<Number> winners) {
-        return Division.sumPrize(getDivisions(winners));
+        return Rank.sumPrize(getRanks(winners));
     }
 
-    private List<Division> getDivisions(List<Number> winners) {
+    private List<Rank> getRanks(List<Number> winners) {
         return lottos.stream()
-            .map(lotto -> lotto.checkDivision(winners))
+            .map(lotto -> lotto.checkRank(winners))
             .collect(Collectors.toUnmodifiableList());
     }
 

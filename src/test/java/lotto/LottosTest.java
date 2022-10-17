@@ -18,10 +18,10 @@ public class LottosTest {
 
         List<Number> winners = Number.of(1, 2, 3, 4, 5, 6);
 
-        Assertions.assertThat(lottos.numberOfFirstDivision(winners)).isEqualTo(1L);
-        Assertions.assertThat(lottos.numberOfSecondDivision(winners)).isEqualTo(1L);
-        Assertions.assertThat(lottos.numberOfThirdDivision(winners)).isEqualTo(1L);
-        Assertions.assertThat(lottos.numberOfFourthDivision(winners)).isEqualTo(1L);
+        Assertions.assertThat(lottos.numberOfFirstRank(winners)).isEqualTo(1L);
+        Assertions.assertThat(lottos.numberOfSecondRank(winners)).isEqualTo(1L);
+        Assertions.assertThat(lottos.numberOfThirdRank(winners)).isEqualTo(1L);
+        Assertions.assertThat(lottos.numberOfFourthRank(winners)).isEqualTo(1L);
     }
 
     @Test
