@@ -15,6 +15,10 @@ public enum LottoReward {
     }
 
     public static ImmutableMoney reward(final Rank rank) {
-        return values()[rank.rankValue() - 1].reward;
+        return values()[rankIndex(rank)].reward;
+    }
+
+    private static int rankIndex(final Rank rank) {
+        return rank.rankValue() - 1;
     }
 }
