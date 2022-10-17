@@ -8,13 +8,17 @@ public class LottoNumber {
     public static final int LOTTONUMBER_MINIMUM = 1;
     public static final int LOTTONUMBER_MAXIMUM = 45;
     private static final String LOTTONUMBER_BOUND_EXCEPTION
-            = String.format("로또 번호는 %d부터 %d까지입니다.", LOTTONUMBER_MINIMUM, LOTTONUMBER_MAXIMUM);
+            = "로또 번호는 " + LOTTONUMBER_MINIMUM + "부터 " + LOTTONUMBER_MAXIMUM + "까지입니다.";
 
     public LottoNumber(final int number) {
-        if (number < 1 || number > 45) {
+        if (checkLottoNumberBound(number)) {
             throw new IllegalArgumentException(LOTTONUMBER_BOUND_EXCEPTION);
         }
         this.number = number;
+    }
+
+    private static boolean checkLottoNumberBound(int number) {
+        return number < 1 || number > 45;
     }
 
     public int number() {
