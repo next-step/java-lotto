@@ -15,4 +15,10 @@ class OperatorTest {
     void 뺄셈이_가능하다() {
         assertThat(Operator.MINUS.executedResult(1, 1)).isZero();
     }
+
+    @Test
+    void 곱셈이_가능하다() {
+        assertThat(Operator.MULTIPLY.executedResult(1, 1)).isOne();
+    }
+
 }
