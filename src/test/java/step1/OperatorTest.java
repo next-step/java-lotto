@@ -11,4 +11,8 @@ class OperatorTest {
         assertThat(Operator.PLUS.executedResult(1, 1)).isEqualTo(2);
     }
 
+    @Test
+    void 뺄셈이_가능하다() {
+        assertThat(Operator.MINUS.executedResult(1, 1)).isZero();
+    }
 }
