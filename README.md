@@ -53,7 +53,7 @@
 - [x] InputView
   - 구입금액 입력해 주세요.
   - 지난 주 당첨 번호를 입력해 주세요.
-- [ ] LottoNumber 제약조건에 맞춰 구현
+- [x] LottoNumber 제약조건에 맞춰 구현
   - 1~45까지의 수만 허용한다.
 - [ ] Lotto
   - Set<LottoNumber>
