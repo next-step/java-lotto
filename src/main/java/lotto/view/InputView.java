@@ -24,4 +24,10 @@ public class InputView {
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
+
+    public static String receiveBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusBall = new Scanner(System.in).nextLine();
+        return bonusBall.trim();
+    }
 }

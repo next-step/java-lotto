@@ -3,17 +3,14 @@ package lotto.domain;
 import lotto.domain.exception.InvalidLottoNumberSizeException;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LottoTest {
@@ -68,6 +65,16 @@ public class LottoTest {
         int actual = lotto.countMatches(lastWeekLotto);
 
         assertThat(actual).isEqualTo(4);
+    }
+
+    @DisplayName("로또번호 포함여부를 반환한다.")
+    @Test
+    void contains() {
+        Lotto lotto = new Lotto(createLottoNumberSet(3, 8));
+
+        boolean actual = lotto.contains(new LottoNumber("3"));
+
+        assertThat(actual).isTrue();
     }
 
     private Set<LottoNumber> createLottoNumberSet(int startInclusive, int endInclusive) {

@@ -73,6 +73,14 @@ public class Money {
         return decimalValue.divide(decimalDivisor, 2, RoundingMode.DOWN);
     }
 
+    public int compareTo(Money money) {
+        return this.value.compareTo(money.value);
+    }
+
+    public BigInteger getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,6 +96,8 @@ public class Money {
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return "Money{" +
+                "value=" + value +
+                '}';
     }
 }

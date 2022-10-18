@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -91,5 +93,13 @@ public class MoneyTest {
         BigDecimal actual = money.divide(new Money(7000));
 
         assertThat(actual).isEqualTo(new BigDecimal("2.04"));
+    }
+
+    @DisplayName("인자가 비교값보다 작으면 1, 비교값과 같으면 0, 비교값보다 크면 -1을 리턴한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"999,1", "1000,0", "1001,-1"})
+    void compareTo(int comparison, int result) {
+        Money money = new Money(1000);
+        assertThat(money.compareTo(new Money(comparison))).isEqualTo(result);
     }
 }

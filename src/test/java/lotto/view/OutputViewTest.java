@@ -58,6 +58,7 @@ class OutputViewTest {
                 "3개 일치 (5000원)- 1개\n" +
                 "4개 일치 (50000원)- 0개\n" +
                 "5개 일치 (1500000원)- 0개\n" +
+                "5개 일치, 보너스 볼 일치 (30000000원)- 0개\n" +
                 "6개 일치 (2000000000원)- 0개\n" +
                 "총 수익률은 0.35입니다.";
         List<WinningInformation> winningInformations = List.of(THREE_MATCHES);

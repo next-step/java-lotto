@@ -35,6 +35,19 @@ public class InputViewTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @DisplayName("보너스 볼을 입력받는다.")
+    @ParameterizedTest
+    @ValueSource(strings = " 7 ")
+    void receive_bonus_ball(String input) {
+        setIn(input);
+        String expected = "7";
+
+        String actual = InputView.receiveBonusBall();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+
     private void setIn(String input) {
         InputStream in = generateUserInput(input);
         System.setIn(in);
