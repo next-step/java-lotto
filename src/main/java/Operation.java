@@ -2,7 +2,9 @@ public class Operation {
     private final String operation;
 
     public Operation(String operation) {
-        if (!isOperation(operation)) throw new IllegalArgumentException("유효하지 않은 문자열입니다.");
+        if (!isOperation(operation)) {
+            throw new IllegalArgumentException("유효하지 않은 문자열입니다.");
+        }
         this.operation = operation;
     }
 

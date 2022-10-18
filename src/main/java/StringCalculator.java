@@ -6,26 +6,33 @@ import java.util.List;
 public class StringCalculator {
     private final TotalNumber totalNumber;
 
+    private static final int MULTIPLY_ASCII = 42;
+    private static final int PLUS_ASCII = 43;
+    private static final int MINUS_ASCII = 45;
+    private static final int DIVIDE_ASCII = 47;
+
     public StringCalculator() {
         totalNumber = new TotalNumber(new Number("0"));
     }
 
     public long calculate(String input) throws IllegalArgumentException {
-        if (!isCorrectFormedEquation(input)) throw new IllegalArgumentException("유효하지 않은 문자열입니다.");
-        String[] numbersAndOperations = input.split(" ");
-
-        Numbers numbers = extractNumbers(numbersAndOperations);
-        Operations operations = extractOperations(numbersAndOperations);
-
-        List<Number> numberList = numbers.getNumbers();
-        List<Operation> operationList = operations.getOperations();
-
-        totalNumber.add(numberList.get(0));
-        for (int index = 0; index < operationList.size(); index++) {
-            operate(operationList.get(index), numberList.get(index + 1));
+        if (!isCorrectFormedEquation(input)) {
+            throw new IllegalArgumentException("유효하지 않은 문자열입니다.");
         }
 
+        Numbers numbers = extractNumbers(input.split(" "));
+        Operations operations = extractOperations(input.split(" "));
+
+        calculate(numbers, operations);
+
         return totalNumber.getTotal();
+    }
+
+    private void calculate(Numbers numbers, Operations operations) {
+        totalNumber.add(numbers.getNumbers().get(0));
+        for (int index = 0; index < operations.getOperations().size(); index++) {
+            operate(operations.getOperations().get(index), numbers.getNumbers().get(index + 1));
+        }
     }
 
     private void operate(@NotNull Operation operation, Number number) {
@@ -70,13 +77,8 @@ public class StringCalculator {
     }
 
     private boolean startsAndEndsWithNumber(Character first, Character last) {
-        // 사칙연산 ASCII 코드 기준으로 분기 처리
-        // *: 42
-        // +: 43
-        // -: 45
-        // /: 47
-        if (first >= 42 && first <= 47) return false;
-        if (last >= 42 && last <= 47) return false;
+        if (first >= MULTIPLY_ASCII && first <= DIVIDE_ASCII) return false;
+        if (last >= MULTIPLY_ASCII && last <= DIVIDE_ASCII) return false;
         return true;
     }
 }
