@@ -125,7 +125,7 @@ public class PaymentInformationTest {
     }
     
     @Test
-    @DisplayName("수동 로또 개수 입력 - 공백 입력 시 예외")
+    @DisplayName("수동 로또 개수 입력 - 수동 로또 개수 초과 입력 시 예외")
     void input_count_of_manual_lotto_is_exceeded_exception() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> paymentInformation.inputCountOfManualLotto("15"))

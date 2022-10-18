@@ -21,7 +21,7 @@ public class LottoTicket {
     private final List<LottoNumber> lottoTicket;
     
     public LottoTicket(List<LottoNumber> lottoTicket) {
-        if (lottoTicket.size() > MAX_COUNT_OF_LOTTO_NUMBER) {
+        if (lottoTicket.size() != MAX_COUNT_OF_LOTTO_NUMBER) {
             throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
         this.lottoTicket = lottoTicket;
@@ -29,11 +29,16 @@ public class LottoTicket {
     
     public LottoTicket(String lottoTicket) {
         this.lottoTicket = getLottoNumbers(lottoTicket);
+        
+        if (this.lottoTicket.size() != MAX_COUNT_OF_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+        }
     }
     
     private List<LottoNumber> getLottoNumbers(final String lottoTicket) {
         return Arrays.stream(split(checkLottoTicketInputForm(removeSpace(lottoTicket))))
                 .mapToInt(Integer::parseInt)
+                .distinct()
                 .mapToObj(LottoNumbersFactory::getLottoNumber)
                 .collect(Collectors.toList());
     }
@@ -64,7 +69,7 @@ public class LottoTicket {
     }
     
     public List<LottoNumber> getLottoTicket() {
-        return lottoTicket;
+        return Collections.unmodifiableList(lottoTicket);
     }
     
     @Override

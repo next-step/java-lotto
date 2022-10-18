@@ -158,10 +158,18 @@ public class LottoTicketTest {
     }
     
     @Test
-    @DisplayName("음수일 시 예외")
+    @DisplayName("로또 입력 개수 6개 아닐 시 예외")
     void exceeded_count_input_exception() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoTicket("1, 2, 3, 4,5, 6, 7"))
+                .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
+    }
+    
+    @Test
+    @DisplayName("같은 번호 연속으로 입력 시 예외")
+    void same_lotto_number_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoTicket("1, 1, 3, 4,5, 6"))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
 }
