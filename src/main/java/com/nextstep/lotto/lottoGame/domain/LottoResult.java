@@ -8,9 +8,18 @@ import java.util.stream.Collectors;
 public class LottoResult {
     private final Map<Rank, Long> rankMap;
 
-    public LottoResult(List<Rank> ranks) {
-        this.rankMap = ranks.stream()
+    public LottoResult(List<Integer> winningNumbers, List<LottoTicket> tickets) {
+        this.rankMap = getRankMap(winningNumbers, tickets);
+    }
+
+    private Map<Rank, Long> getRankMap(List<Integer> winningNumbers, List<LottoTicket> tickets) {
+        List<Rank> ranks = tickets.stream()
+                .map(ticket -> ticket.rank(winningNumbers))
+                .filter(rank -> rank != Rank.NONE)
+                .collect(Collectors.toList());
+        return ranks.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
     }
 
     public boolean contains(Rank rank) {

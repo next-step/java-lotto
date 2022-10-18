@@ -16,9 +16,9 @@ public class InputView {
     public static List<Integer> getLottoNumbers() {
         System.out.println("지난주 당첨 번호를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
-        String[] numbers = scanner.nextLine().split(",");
-        return Arrays.stream(numbers)
-                .map(n -> toUnsignedInteger(n))
+        String[] lottoNumbers = scanner.nextLine().split(",");
+        return Arrays.stream(lottoNumbers)
+                .map(InputView::toUnsignedInteger)
                 .collect(Collectors.toList());
     }
 

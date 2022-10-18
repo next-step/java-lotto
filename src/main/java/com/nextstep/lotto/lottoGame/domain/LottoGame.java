@@ -1,24 +1,16 @@
 package com.nextstep.lotto.lottoGame.domain;
 
-import com.nextstep.lotto.lottoGame.view.InputView;
-import com.nextstep.lotto.lottoGame.view.OutputView;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
-    private static final int LOTTO_TICKET_PRICE = 1000;
-
-    private List<LottoTicket> tickets;
+    private final List<LottoTicket> tickets;
 
     public LottoGame(List<LottoTicket> tickets) {
         this.tickets = tickets;
-        OutputView.drawPublishResult(tickets);
     }
 
-    public static LottoGame byBudget() {
-        int budget = InputView.getBudget();
+    public static LottoGame byBudget(int budget) {
         int ticketCount = getAvailableTicketCount(budget);
         return new LottoGame(publishAutoTickets(ticketCount));
     }
@@ -32,18 +24,19 @@ public class LottoGame {
     }
 
     private static int getAvailableTicketCount(int budget) {
-        return budget / LOTTO_TICKET_PRICE;
+        return budget / LottoTicket.LOTTO_TICKET_PRICE;
     }
 
-    public void result() {
-        List<Integer> winningNumbers = InputView.getLottoNumbers();
-        List<Rank> ranks = tickets.stream()
-                .map(ticket -> ticket.rank(winningNumbers))
-                .filter(rank -> rank != Rank.NONE)
-                .collect(Collectors.toList());
+    public List<LottoTicket> getTickets() {
+        return this.tickets;
+    }
 
-        LottoResult result = new LottoResult(ranks);
-        OutputView.drawResult(result, tickets.size() * LOTTO_TICKET_PRICE);
+    public int getUsedBudget() {
+        return tickets.size() * LottoTicket.LOTTO_TICKET_PRICE;
+    }
+
+    public LottoResult result(List<Integer> winningNumbers) {
+        return new LottoResult(winningNumbers, tickets);
     }
 
 }
