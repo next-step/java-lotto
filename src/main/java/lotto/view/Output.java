@@ -71,15 +71,15 @@ public class Output {
     }
 
     private static boolean isOnlyManualLotto(final int countOfAutomaticTickets, final int countOfManualTickets) {
-        return countOfManualTickets >= 1 && countOfAutomaticTickets < 1 ? true : false;
+        return countOfManualTickets >= 1 && countOfAutomaticTickets < 1;
     }
 
     private static boolean isOnlyAutomaticLotto(final int countOfAutomaticTickets, final int countOfManualTickets) {
-        return countOfManualTickets < 1 && countOfAutomaticTickets >= 1 ? true : false;
+        return countOfManualTickets < 1 && countOfAutomaticTickets >= 1;
     }
 
     private static boolean isComplexLotto(final int countOfAutomaticTickets, final int countOfManualTickets) {
-        return countOfManualTickets >= 1 && countOfAutomaticTickets >= 1 ? true : false;
+        return countOfManualTickets >= 1 && countOfAutomaticTickets >= 1;
     }
 
 }
