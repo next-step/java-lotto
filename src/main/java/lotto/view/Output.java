@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.Lotto;
+import lotto.LottoResult;
 import lotto.Lottos;
 import lotto.Number;
 
@@ -31,18 +32,18 @@ public class Output {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printResult(Lottos lottos, Set<Number> winnerNumbers) {
+    public static void printResult(LottoResult result) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (5000원)- %d개\n", lottos.numberOfFourthRank(winnerNumbers));
-        System.out.printf("4개 일치 (50000원)- %d개\n", lottos.numberOfThirdRank(winnerNumbers));
-        System.out.printf("5개 일치 (1500000원)- %d개\n", lottos.numberOfSecondRank(winnerNumbers));
-        System.out.printf("6개 일치 (2000000000원)- %d개\n", lottos.numberOfFirstRank(winnerNumbers));
-        if (lottos.hasBenefit(winnerNumbers)) {
-            System.out.printf("총 수익률은 %.2f입니다.(어떻게 하셧죠??????)", lottos.calculateProfitRate(winnerNumbers));
+        System.out.printf("3개 일치 (5000원)- %d개\n", result.numberOfFourthRank());
+        System.out.printf("4개 일치 (50000원)- %d개\n", result.numberOfThirdRank());
+        System.out.printf("5개 일치 (1500000원)- %d개\n", result.numberOfSecondRank());
+        System.out.printf("6개 일치 (2000000000원)- %d개\n", result.numberOfFirstRank());
+        if (result.hasBenefit()) {
+            System.out.printf("총 수익률은 %.2f입니다.(어떻게 하셧죠??????)", result.calculateProfitRate());
             return;
         }
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lottos.calculateProfitRate(winnerNumbers));
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result.calculateProfitRate());
     }
 }

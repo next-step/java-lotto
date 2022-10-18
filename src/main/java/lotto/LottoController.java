@@ -14,6 +14,6 @@ public class LottoController {
         Output.printPurchasedLotto(lottos);
 
         Output.printWinnerNumbersRequest();
-        Output.printResult(lottos, Input.inputWinnerNumbers());
+        Output.printResult(lottos.getResult(Input.inputWinnerNumbers()));
     }
 }
