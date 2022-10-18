@@ -24,7 +24,7 @@ public enum Operator {
         return Arrays.stream(Operator.values())
                 .filter(operator -> Objects.equals(operator.arithmetic, arithmetic))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalStateException("올바른 연산자가 아닙니다."));
     }
 
     public int executedResult(int operand, int anotherOperand) {
