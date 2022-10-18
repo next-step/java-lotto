@@ -6,20 +6,21 @@ import java.util.Objects;
 
 public class Lotteries {
 
-	private List<Lotto> lottos;
+	private List<Lotto> lotteries;
 
-	public Lotteries(List<Lotto> lottos) {
-		this.lottos = lottos;
+	public Lotteries(List<Lotto> lotteries) {
+		this.lotteries = lotteries;
 	}
 
-	public static Lotteries of(int round,LottoFactory lottoFactory) {
-		List<Lotto> lottos = new ArrayList<>();
+	public static Lotteries of(int totalTicket,LottoFactory lottoFactory) {
 
-		for (int i = 0; i < round; i++) {
-			lottos.add(new Lotto(lottoFactory));
+		List<Lotto> lotteries = new ArrayList<>();
+
+		for (int i = 0; i < totalTicket; i++) {
+			lotteries.add(new Lotto(lottoFactory));
 		}
 
-		return new Lotteries(lottos);
+		return new Lotteries(lotteries);
 	}
 
 	@Override
@@ -31,12 +32,12 @@ public class Lotteries {
 			return false;
 		}
 		Lotteries lotteries = (Lotteries) o;
-		return Objects.equals(lottos, lotteries.lottos);
+		return Objects.equals(lotteries, lotteries.lotteries);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lottos);
+		return Objects.hash(lotteries);
 	}
 
 }
