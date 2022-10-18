@@ -1,6 +1,5 @@
 package domain;
 
-import domain.Operator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -35,19 +34,16 @@ public class OperatorTest {
                 });
     }
 
-/*    @Test
-    void 입력값_null_또는_공백_문자열_IllegalArgumentException_발생() {
-
-    }
-
     @Test
     void 사칙연산_기호_아닐때_IllegalArgumentException_발생() {
-
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    Operator.of("&").calculate(1, 2);
+                });
     }
 
     @Test
     void 사칙연산_모두_포함() {
 
-    }*/
-
+    }
 }

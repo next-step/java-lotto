@@ -19,4 +19,12 @@ public class CalculatorTest {
                     new Calculator(null);
                 });
     }
+
+    @Test
+    void 입력값_숫자아닐때_예외발생() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    new Calculator("a");
+                });
+    }
 }
