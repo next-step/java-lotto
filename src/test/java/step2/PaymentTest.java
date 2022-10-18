@@ -3,6 +3,8 @@ package step2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.exception.LackOfMoneyException;
+import step2.model.Payment;
 
 public class PaymentTest {
 
@@ -19,6 +21,7 @@ public class PaymentTest {
 	void 금액_부족_테스트(){
 		int money = 900;
 		Payment payment = new Payment();
-		Assertions.assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(LackOfMoneyException.class);
+		Assertions.assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(
+			LackOfMoneyException.class);
 	}
 }

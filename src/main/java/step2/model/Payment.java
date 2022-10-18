@@ -1,4 +1,6 @@
-package step2;
+package step2.model;
+
+import step2.exception.LackOfMoneyException;
 
 public class Payment {
 

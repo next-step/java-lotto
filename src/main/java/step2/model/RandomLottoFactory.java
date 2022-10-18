@@ -1,10 +1,11 @@
-package step2;
+package step2.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import step2.model.LottoFactory;
 
-public class RandomLottoFactory implements LottoFactory{
+public class RandomLottoFactory implements LottoFactory {
 
 	@Override
 	public List<Integer> getLottoNum() {

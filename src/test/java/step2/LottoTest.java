@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.model.Lotto;
+import step2.model.RandomLottoFactory;
 
 public class LottoTest {
 	@Test

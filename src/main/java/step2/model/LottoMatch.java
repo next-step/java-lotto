@@ -1,8 +1,9 @@
-package step2;
+package step2.model;
 
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import step2.model.Lotto;
 
 public class LottoMatch {
 

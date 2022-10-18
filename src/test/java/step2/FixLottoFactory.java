@@ -1,9 +1,8 @@
 package step2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import step2.LottoFactory;
+import step2.model.LottoFactory;
 
 public class FixLottoFactory implements LottoFactory {
 

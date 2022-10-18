@@ -1,4 +1,4 @@
-package step2;
+package step2.exception;
 
 public class LackOfMoneyException extends RuntimeException{
 

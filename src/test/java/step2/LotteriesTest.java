@@ -6,6 +6,8 @@ import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.model.Lotteries;
+import step2.model.Lotto;
 
 public class LotteriesTest {
 

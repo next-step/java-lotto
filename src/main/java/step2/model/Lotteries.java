@@ -1,4 +1,4 @@
-package step2;
+package step2.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class Lotteries {
 		this.lotteries = lotteries;
 	}
 
-	public static Lotteries of(int totalTicket,LottoFactory lottoFactory) {
+	public static Lotteries of(int totalTicket, LottoFactory lottoFactory) {
 
 		List<Lotto> lotteries = new ArrayList<>();
 
