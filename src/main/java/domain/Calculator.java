@@ -28,7 +28,7 @@ public class Calculator {
     }
 
     private void addValue(String[] value, int index) {
-        if (isOddNumber(index)) {
+        if (isEvenNumber(index)) {
             validateNumber(value[index]);
             numbers.add(Integer.valueOf(value[index]));
             return;
@@ -36,7 +36,7 @@ public class Calculator {
        operators.add(Operator.of(value[index]));
     }
 
-    private boolean isOddNumber(int index) {
+    private boolean isEvenNumber(int index) {
         return index % 2 == 0;
     }
 
@@ -44,6 +44,15 @@ public class Calculator {
         if (!value.matches(NUMBER_FORMAT)) {
             throw new IllegalArgumentException("숫자를 입력해야 합니다.");
         }
+    }
+
+    public int calculate(List<Integer> numbers, List<Operator> operators) {
+        int result = numbers.get(0);
+        for (int i = 0; i < operators.size(); i++) {
+            Operator operator = operators.get(i);
+            result = operator.calculate(result, numbers.get(i+1));
+        }
+        return result;
     }
 
     public List<Integer> getNumbers() {
