@@ -16,42 +16,22 @@ public class LottosTest {
 
     @Test
     public void 당첨번호_통계() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto("1, 2, 3, 4, 5, 6"));
-        lottoList.add(new Lotto("1, 2, 3, 4, 5, 10"));
-        lottoList.add(new Lotto("1, 2, 3, 4, 5, 20"));
-        lottoList.add(new Lotto("1, 2, 3, 4, 15, 20"));
-        lottoList.add(new Lotto("1, 2, 3, 41, 15, 20"));
-        lottoList.add(new Lotto("1, 2, 13, 41, 15, 20"));
-
-        Lottos lottos = new Lottos(lottoList);
+        Lottos lottos = new Lottos(LottoUtils.createTestLottos());
         Lotto winning = new Lotto("1, 2, 3, 4, 5, 6");
         LottoNumber bonus = LottoNumber.from(10);
         LottoResults lottoResults = lottos.getResult(winning, bonus);
 
-        assertThat(lottoResults.getRankCount(Rank.MISS)).isEqualTo(1);
-        assertThat(lottoResults.getRankCount(Rank.FIFTH)).isEqualTo(1);
-        assertThat(lottoResults.getRankCount(Rank.FOURTH)).isEqualTo(1);
+        assertThat(lottoResults.getRankCount(Rank.MISS)).isEqualTo(2);
+        assertThat(lottoResults.getRankCount(Rank.FIFTH)).isEqualTo(2);
+        assertThat(lottoResults.getRankCount(Rank.FOURTH)).isEqualTo(2);
         assertThat(lottoResults.getRankCount(Rank.THIRD)).isEqualTo(1);
         assertThat(lottoResults.getRankCount(Rank.SECOND)).isEqualTo(1);
-        assertThat(lottoResults.getRankCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoResults.getRankCount(Rank.FIRST)).isEqualTo(2);
     }
 
     @Test
     public void 수익률_구하기() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto("1, 2, 3, 4, 5, 6"));
-        lottoList.add(new Lotto("1, 2, 3, 4, 5, 6"));
-        lottoList.add(new Lotto("1, 2, 3, 4, 5, 10"));
-        lottoList.add(new Lotto("1, 2, 3, 4, 5, 10"));
-        lottoList.add(new Lotto("1, 2, 3, 4, 15, 20"));
-        lottoList.add(new Lotto("1, 2, 3, 4, 15, 20"));
-        lottoList.add(new Lotto("1, 2, 3, 14, 15, 20"));
-        lottoList.add(new Lotto("1, 2, 3, 14, 15, 20"));
-        lottoList.add(new Lotto("1, 2, 13, 14, 15, 20"));
-        lottoList.add(new Lotto("1, 2, 13, 14, 15, 20"));
-
-        Lottos lottos = new Lottos(lottoList);
+        Lottos lottos = new Lottos(LottoUtils.createTestLottos());
         Lotto winning = new Lotto("1, 2, 3, 4, 5, 6");
         LottoNumber bonus = LottoNumber.from(10);
         LottoResults lottoResults = lottos.getResult(winning, bonus);
