@@ -42,4 +42,8 @@ public class Game {
                 .map(lotto -> lotto.matches(winNumbers))
                 .collect(Collectors.toList());
     }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
 }
