@@ -12,6 +12,8 @@ public class LottoController {
 
     public void start() {
         int totalPrice = InputView.inputTotalPrice();
+        int manualCount = InputView.inputManualCountNumber();
+        List<Lotto> manualLottos = InputView.inputManualLottoNumber(manualCount);
 
         LottoTickets lottoTickets = LottoTickets.of(totalPrice);
 
