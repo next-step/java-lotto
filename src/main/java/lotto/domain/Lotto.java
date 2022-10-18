@@ -8,11 +8,11 @@ public class Lotto {
     private List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
+        valid(lotto);
         this.lotto = lotto;
     }
 
     public static Lotto of(List<LottoNumber> lottoNumbers) {
-        valid(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
@@ -27,7 +27,7 @@ public class Lotto {
             .anyMatch(lottoNumber -> lottoNumber.equals(bonus));
     }
 
-    private static boolean isDuplicate(List<LottoNumber> lottoNumbers) {
+    private boolean isDuplicate(List<LottoNumber> lottoNumbers) {
         int count = (int) lottoNumbers.stream()
             .distinct()
             .count();
@@ -35,7 +35,7 @@ public class Lotto {
         return count != LOTTO_NUMBER_SIZE;
     }
 
-    private static void valid(List<LottoNumber> lottoNumbers) {
+    private void valid(List<LottoNumber> lottoNumbers) {
         if (isDuplicate(lottoNumbers)) {
             throw new IllegalArgumentException("번호는 중복될 수 없습니다.");
         }
