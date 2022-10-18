@@ -5,7 +5,6 @@ import step2.view.InputView;
 import step2.view.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoRunner {
     public static void main(String[] args) {
@@ -25,14 +24,16 @@ public class LottoRunner {
 
         //로또 당첨번호 입력
         LottoNumber winNumber = inputView.enterWinNumber();
+        BonusNumber bonusNumber = inputView.enterBonusNumber(winNumber);
 
         //로또실행값 통계 계산
-        Analyst analyst = new Analyst(lottoNumbers, winNumber);
-        Map<Integer, Long> countByRank = analyst.getCountByRank();
-        float revenueRatio = analyst.revenueRatio(countByRank);
+        Analyst analyst = new Analyst(lottoNumbers, winNumber, bonusNumber);
+        CountsByRank countsByRank = analyst.getCountsByRank();
+        float revenueRatio = analyst.revenueRatio(countsByRank);
 
         //로또실행값 통계 출력
-        resultView.printCountByRank(countByRank);
+        List<Rank> excludeRanks = List.of(Rank.MISS);
+        resultView.printCountByRank(countsByRank, excludeRanks);
         resultView.printRevenueRatio(revenueRatio);
     }
 }

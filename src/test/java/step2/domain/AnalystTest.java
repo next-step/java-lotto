@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,56 +16,121 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AnalystTest {
     static Stream<Arguments> getCountByRankOneLottoParam() {
         LottoNumber winNumber = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        BonusNumber bonusNumber = new BonusNumber(20, winNumber);
         return Stream.of(
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(7, 8, 9, 10, 11, 12)))),
                         winNumber,
-                        Map.of(0, 1L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 0L,
+                                Rank.MISS, 1L)
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 8, 9, 10, 11, 12)))),
                         winNumber,
-                        Map.of(1, 1L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 0L,
+                                Rank.MISS, 1L)
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 9, 10, 11, 12)))),
                         winNumber,
-                        Map.of(2, 1L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 0L,
+                                Rank.MISS, 1L)
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 10, 11, 12)))),
                         winNumber,
-                        Map.of(3, 1L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 1L,
+                                Rank.MISS, 0L)
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 11, 12)))),
                         winNumber,
-                        Map.of(4, 1L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 1L,
+                                Rank.FIFTH, 0L,
+                                Rank.MISS, 0L)
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 12)))),
                         winNumber,
-                        Map.of(5, 1L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 1L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 0L,
+                                Rank.MISS, 0L)
+                ),
+                Arguments.arguments(
+                        List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 20)))),
+                        winNumber,
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 1L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 0L,
+                                Rank.MISS, 0L)
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)))),
                         winNumber,
-                        Map.of(6, 1L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 1L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 0L,
+                                Rank.MISS, 0L)
                 )
         );
     }
 
-    @DisplayName("로또를 한개산 경우 맞춘수별 개수 계산")
-    @ParameterizedTest(name = "{displayName} {index} 로또번호: {0} |통계값: {1}")
+    @DisplayName("로또를 한개 구입한 경우 맞춘수별 개수 계산")
+    @ParameterizedTest(name = "{displayName} {index} 로또번호: {0} |당첨번호: {1} |보너스번호: {2}")
     @MethodSource("getCountByRankOneLottoParam")
-    void getCountByRankOneLotto(List<LottoNumber> gambleHistory, LottoNumber winNumber, Map<Integer, Long> expectedCountByRank) {
-        Analyst analyst = new Analyst(gambleHistory, winNumber);
-        Map<Integer, Long> countByRank = analyst.getCountByRank();
-        assertThat(countByRank).isEqualTo(expectedCountByRank);
+    void getCountByRankOneLotto(List<LottoNumber> LottoNumbers, LottoNumber winNumber, BonusNumber bonusNumber, Map<Integer, Long> expectedCountByRank) {
+        Analyst analyst = new Analyst(LottoNumbers, winNumber, bonusNumber);
+        CountsByRank countsByRank = analyst.getCountsByRank();
+        Set<Map.Entry<Rank, Long>> countByRankEntrySets = countsByRank.getCountsByRank().entrySet();
+        Set<Map.Entry<Integer, Long>> expectedEntrySet = expectedCountByRank.entrySet();
+        countByRankEntrySets.forEach(countByRankEntrySet -> assertThat(countByRankEntrySet).isIn(expectedEntrySet));
     }
 
     static Stream<Arguments> getCountByRankMultiLottoParam() {
         LottoNumber winNumber = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        BonusNumber bonusNumber = new BonusNumber(20, winNumber);
         return Stream.of(
                 Arguments.arguments(
                         List.of(
@@ -72,7 +138,14 @@ class AnalystTest {
                                 new LottoNumber(new ArrayList<>(List.of(7, 8, 9, 10, 11, 12)))
                         ),
                         winNumber,
-                        Map.of(0, 2L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 0L,
+                                Rank.MISS, 2L)
                 ),
                 Arguments.arguments(
                         List.of(
@@ -80,7 +153,14 @@ class AnalystTest {
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 10, 11, 12)))
                         ),
                         winNumber,
-                        Map.of(3, 2L)
+                        bonusNumber,
+                        Map.of(
+                                Rank.FIRST, 0L,
+                                Rank.SECOND, 0L,
+                                Rank.THIRD, 0L,
+                                Rank.FOURTH, 0L,
+                                Rank.FIFTH, 2L,
+                                Rank.MISS, 0L)
                 ),
                 Arguments.arguments(
                         List.of(
@@ -90,74 +170,89 @@ class AnalystTest {
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 10, 11, 12))),
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 11, 12))),
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 12))),
+                                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 20))),
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)))
                         ),
                         winNumber,
+                        bonusNumber,
                         Map.of(
-                                0, 1L,
-                                1, 1L,
-                                2, 1L,
-                                3, 1L,
-                                4, 1L,
-                                5, 1L,
-                                6, 1L
-                        )
+                                Rank.FIRST, 1L,
+                                Rank.SECOND, 1L,
+                                Rank.THIRD, 1L,
+                                Rank.FOURTH, 1L,
+                                Rank.FIFTH, 1L,
+                                Rank.MISS, 3L)
                 )
         );
     }
 
     @DisplayName("로또를 두개이상 산 경우 맞춘수별 개수 계산")
-    @ParameterizedTest(name = "{displayName} {index} 로또번호: {0} |통계값: {1}")
+    @ParameterizedTest(name = "{displayName} {index} 로또번호: {0} |당첨번호: {1} |보너스번호: {2}")
     @MethodSource("getCountByRankMultiLottoParam")
-    void getCountByRankMultiLotto(List<LottoNumber> gambleHistory, LottoNumber winNumber, Map<Integer, Long> expectedCountByRank) {
-        Analyst analyst = new Analyst(gambleHistory, winNumber);
-        Map<Integer, Long> countByRank = analyst.getCountByRank();
-        assertThat(countByRank).isEqualTo(expectedCountByRank);
+    void getCountByRankMultiLotto(List<LottoNumber> LottoNumbers, LottoNumber winNumber, BonusNumber bonusNumber, Map<Integer, Long> expectedCountByRank) {
+        Analyst analyst = new Analyst(LottoNumbers, winNumber, bonusNumber);
+        CountsByRank countsByRank = analyst.getCountsByRank();
+        Set<Map.Entry<Rank, Long>> countByRankEntrySets = countsByRank.getCountsByRank().entrySet();
+        Set<Map.Entry<Integer, Long>> expectedEntrySet = expectedCountByRank.entrySet();
+        countByRankEntrySets.forEach(countByRankEntrySet -> assertThat(countByRankEntrySet).isIn(expectedEntrySet));
     }
 
     static Stream<Arguments> revenueRatioOneLottoParam() {
         LottoNumber winNumber = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        BonusNumber bonusNumber = new BonusNumber(20, winNumber);
         return Stream.of(
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(7, 8, 9, 10, 11, 12)))),
                         winNumber,
+                        bonusNumber,
                         0.0f
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 10, 11, 12)))),
                         winNumber,
+                        bonusNumber,
                         5.0f
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 11, 12)))),
                         winNumber,
+                        bonusNumber,
                         50.0f
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 12)))),
                         winNumber,
-                        1500.0f
+                        bonusNumber,
+                        1_500.0f
+                ),
+                Arguments.arguments(
+                        List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 20)))),
+                        winNumber,
+                        bonusNumber,
+                        30_000.0f
                 ),
                 Arguments.arguments(
                         List.of(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)))),
                         winNumber,
-                        2000000.0f
+                        bonusNumber,
+                        2_000_000.0f
                 )
         );
     }
 
     @DisplayName("로또를 한개산 경우 수익률 계산")
-    @ParameterizedTest(name = "{displayName} {index} 연산자: {0} |연산대상: {1}")
+    @ParameterizedTest(name = "{displayName} {index} 로또번호: {0} |당첨번호: {1} |보너스번호: {2}")
     @MethodSource("revenueRatioOneLottoParam")
-    void revenueRatioOneLotto(List<LottoNumber> gambleHistory, LottoNumber winNumber, float expectedRatio) {
-        Analyst analyst = new Analyst(gambleHistory, winNumber);
-        float revenueRatio = analyst.revenueRatio(analyst.getCountByRank());
+    void revenueRatioOneLotto(List<LottoNumber> LottoNumbers, LottoNumber winNumber, BonusNumber bonusNumber, float expectedRatio) {
+        Analyst analyst = new Analyst(LottoNumbers, winNumber, bonusNumber);
+        float revenueRatio = analyst.revenueRatio(analyst.getCountsByRank());
         assertThat(revenueRatio).isEqualTo(expectedRatio);
 
     }
 
     static Stream<Arguments> revenueRatioMultiLottoParam() {
         LottoNumber winNumber = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        BonusNumber bonusNumber = new BonusNumber(20, winNumber);
         return Stream.of(
                 Arguments.arguments(
                         List.of(
@@ -165,6 +260,7 @@ class AnalystTest {
                                 new LottoNumber(new ArrayList<>(List.of(7, 8, 9, 10, 11, 12)))
                         ),
                         winNumber,
+                        bonusNumber,
                         0.0f
                 ),
                 Arguments.arguments(
@@ -173,6 +269,7 @@ class AnalystTest {
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 10, 11, 12)))
                         ),
                         winNumber,
+                        bonusNumber,
                         5.0f
                 ),
                 Arguments.arguments(
@@ -183,20 +280,22 @@ class AnalystTest {
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 10, 11, 12))),
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 11, 12))),
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 12))),
+                                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 20))),
                                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)))
                         ),
                         winNumber,
-                        2001555.0f / 7
+                        bonusNumber,
+                        2031555.0f / 8
                 )
         );
     }
 
     @DisplayName("로또를 두개이상 산 경우 수익률 계산")
-    @ParameterizedTest(name = "{displayName} {index} 연산자: {0} |연산대상: {1}")
+    @ParameterizedTest(name = "{displayName} {index} 로또번호: {0} |당첨번호: {1} |보너스번호: {2}")
     @MethodSource("revenueRatioMultiLottoParam")
-    void revenueRatioMultiLotto(List<LottoNumber> gambleHistory, LottoNumber winNumber, float expectedRatio) {
-        Analyst analyst = new Analyst(gambleHistory, winNumber);
-        float revenueRatio = analyst.revenueRatio(analyst.getCountByRank());
+    void revenueRatioMultiLotto(List<LottoNumber> gambleHistory, LottoNumber winNumber, BonusNumber bonusNumber, float expectedRatio) {
+        Analyst analyst = new Analyst(gambleHistory, winNumber, bonusNumber);
+        float revenueRatio = analyst.revenueRatio(analyst.getCountsByRank());
         assertThat(revenueRatio).isEqualTo(expectedRatio);
 
     }
