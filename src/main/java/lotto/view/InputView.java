@@ -11,7 +11,7 @@ public class InputView {
     public static int inputPrice() {
         System.out.println("구입 금액을 입력해 주세요.");
         int price = scanner.nextInt();
-        if (price < 0) {
+        if (price <= 0) {
             throw new IllegalArgumentException("구입 금액은 0보다 커야 합니다");
         }
         return price;
@@ -25,8 +25,8 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        if (result.size() != 6) {
-            throw new IllegalArgumentException("6개의 당첨 번호가 입력되어야 합니다.");
+        if (result.stream().distinct().count() != 6) {
+            throw new IllegalArgumentException("6개의 서로 다른 당첨 번호가 입력되어야 합니다.");
         }
         return result;
     }

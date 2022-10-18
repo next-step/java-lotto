@@ -13,7 +13,7 @@ public class LottoTest {
     @DisplayName("로또 번호 모두 일치")
     void matches_all() {
         Lotto lotto = new Lotto(List.of(1, 10, 13, 16, 18, 20));
-        int result = lotto.matches(List.of(1, 10, 13, 16, 18, 20));
+        int result = lotto.matches(new Lotto(List.of(1, 10, 13, 16, 18, 20)));
         assertThat(result).isEqualTo(6);
     }
 
@@ -21,7 +21,7 @@ public class LottoTest {
     @DisplayName("로또 번호 5개 일치")
     void matches_5() {
         Lotto lotto = new Lotto(List.of(1, 10, 13, 16, 18, 20));
-        int result = lotto.matches(List.of(1, 10, 13, 15, 18, 20));
+        int result = lotto.matches(new Lotto(List.of(1, 10, 13, 15, 18, 20)));
         assertThat(result).isEqualTo(5);
     }
 
@@ -29,7 +29,7 @@ public class LottoTest {
     @DisplayName("로또 번호 4개 일치")
     void matches_4() {
         Lotto lotto = new Lotto(List.of(1, 10, 13, 16, 18, 20));
-        int result = lotto.matches(List.of(1, 10, 11, 15, 18, 20));
+        int result = lotto.matches(new Lotto(List.of(1, 10, 11, 15, 18, 20)));
         assertThat(result).isEqualTo(4);
     }
 
@@ -37,7 +37,7 @@ public class LottoTest {
     @DisplayName("로또 번호 3개 일치")
     void matches_3() {
         Lotto lotto = new Lotto(List.of(1, 10, 13, 16, 18, 20));
-        int result = lotto.matches(List.of(1, 10, 11, 15, 17, 20));
+        int result = lotto.matches(new Lotto(List.of(1, 10, 11, 15, 17, 20)));
         assertThat(result).isEqualTo(3);
     }
 }

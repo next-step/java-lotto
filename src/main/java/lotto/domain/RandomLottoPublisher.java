@@ -13,7 +13,7 @@ public class RandomLottoPublisher implements LottoPublisher {
 
     private List<Integer> allNumbers() {
         List<Integer> list = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = Lotto.MIN; i <= Lotto.MAX; i++) {
             list.add(i);
         }
         return list;

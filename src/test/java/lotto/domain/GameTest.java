@@ -15,7 +15,7 @@ public class GameTest {
     @DisplayName("모든 게임에 당첨")
     void game_win() {
         Game game = new Game(10, () -> List.of(1, 11, 14, 15, 18, 20));
-        Map<Integer, Integer> result = game.play(List.of(1, 11, 14, 15, 18, 20));
+        Map<Integer, Integer> result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)));
 
         assertThat(result)
                 .hasSize(1)
@@ -34,7 +34,7 @@ public class GameTest {
                 List.of(3, 14, 18, 20, 21, 22),
                 List.of(3, 7, 14, 19, 20, 33)
         )));
-        Map<Integer, Integer> result = game.play(List.of(1, 11, 14, 15, 18, 20));
+        Map<Integer, Integer> result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)));
 
         assertThat(result)
                 .hasSize(6)

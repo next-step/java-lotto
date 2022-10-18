@@ -27,7 +27,7 @@ public class Game {
         return result;
     }
 
-    public Map<Integer, Integer> play(List<Integer> winNumbers) {
+    public Map<Integer, Integer> play(Lotto winNumbers) {
         Map<Integer, Integer> result = new HashMap<>();
         List<Integer> winCounts = winCounts(winNumbers);
         for (int winCount: winCounts) {
@@ -37,7 +37,7 @@ public class Game {
         return result;
     }
 
-    private List<Integer> winCounts(List<Integer> winNumbers) {
+    private List<Integer> winCounts(Lotto winNumbers) {
         return lottoList.stream()
                 .map(lotto -> lotto.matches(winNumbers))
                 .collect(Collectors.toList());
