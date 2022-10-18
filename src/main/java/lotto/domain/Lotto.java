@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import lotto.generator.ManualNumberGenerator;
 import lotto.generator.NumberGenerator;
+import lotto.generator.RandomNumberGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,9 +11,16 @@ public class Lotto {
 
     public static final int MAX_MATCH_NUMBER = 6;
 
-    private final List<LottoNumber> lotto;
+    private List<LottoNumber> lotto;
+    private NumberGenerator numberGenerator;
 
-    public Lotto(NumberGenerator numberGenerator) {
+    public Lotto() {
+        this.setNumberGenerator(new RandomNumberGenerator());
+        this.lotto = numberGenerator.generate();
+    }
+
+    public Lotto(String numbers) {
+        this.setNumberGenerator(new ManualNumberGenerator(numbers));
         this.lotto = numberGenerator.generate();
     }
 
@@ -32,5 +41,9 @@ public class Lotto {
 
     public boolean isEqual(Lotto numbers) {
         return this.lotto.containsAll(numbers.lotto);
+    }
+
+    public void setNumberGenerator(NumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
     }
 }

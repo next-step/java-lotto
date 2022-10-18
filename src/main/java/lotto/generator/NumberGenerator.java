@@ -8,6 +8,6 @@ public interface NumberGenerator {
     public static final int MIN_LOTTO_NUM_COUNT = 0;
     public static final int MAX_LOTTO_NUM_COUNT = 6;
 
-    List<LottoNumber> generate();
+    public List<LottoNumber> generate();
 
 }

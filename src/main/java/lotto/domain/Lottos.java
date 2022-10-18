@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.generator.ManualNumberGenerator;
 import lotto.generator.NumberGenerator;
 import lotto.generator.RandomNumberGenerator;
 
@@ -9,17 +10,10 @@ public class Lottos {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private NumberGenerator numberGenerator = new RandomNumberGenerator();
-
     private List<Lotto> lottoList;
 
-    public Lottos(int amount) {
+    public Lottos() {
         this.lottoList = new ArrayList<>();
-
-        int n = amount / LOTTO_PRICE;
-        for (int i = 0; i < n; i++) {
-            this.lottoList.add(new Lotto(numberGenerator));
-        }
     }
 
     public Lottos(List<Lotto> lottoList) {
@@ -45,5 +39,21 @@ public class Lottos {
     public List<Lotto> getLottoList() {
         return this.lottoList;
     }
+
+    public Lottos createAutoLottos(int amount) {
+        int n = amount / LOTTO_PRICE;
+        for (int i = 0; i < n; i++) {
+            this.lottoList.add(new Lotto());
+        }
+        return this;
+    }
+
+    public Lottos createManualLottos(int count, List<String> numbers) {
+        for (int i = 0; i < count; i++) {
+            this.lottoList.add(new Lotto(numbers.get(i)));
+        }
+        return this;
+    }
+
 
 }
