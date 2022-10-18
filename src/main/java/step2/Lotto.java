@@ -9,29 +9,14 @@ public class Lotto {
 
 	private List<Integer> lottoSet;
 
+	public Lotto (LottoFactory lottoFactory) {
+		this(lottoFactory.getLottoNum());
+	}
+
 	public Lotto(List<Integer> lottoSet) {
 		this.lottoSet = lottoSet;
 	}
 
-	public static Lotto randomNumLotto() {
-
-		List<Integer> totalLottoNum = new ArrayList<Integer>();
-		List<Integer> lottoSet = new ArrayList<>();
-
-		for (int i = 1; i <= 45; i++) {
-			totalLottoNum.add(i);
-		}
-
-		Collections.shuffle(totalLottoNum);
-
-		for (int i = 0; i < 6; i++) {
-			lottoSet.add(totalLottoNum.get(i));
-		}
-
-		Collections.sort(lottoSet);
-		return new Lotto(lottoSet);
-
-	}
 
 	public boolean equals(Object o) {
 		if (this == o) {
