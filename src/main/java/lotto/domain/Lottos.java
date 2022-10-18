@@ -23,7 +23,7 @@ public class Lottos {
 
         List<WinningPrize> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            final int countOfMatch = lotto.match(winningLotto);
+            final int countOfMatch = winningLotto.match(lotto);
             final boolean bonusResult = canMatch(winningLotto, lotto, countOfMatch);
             final WinningPrize winningPrize = WinningPrize.from(countOfMatch, bonusResult);
             result.add(winningPrize);
@@ -34,8 +34,15 @@ public class Lottos {
     private boolean canMatch(final WinningLotto winningLotto, final Lotto lotto, final int countOfMatch) {
 
         if (countOfMatch == MATCH_COUNT_FIVE) {
-            return lotto.matchBonus(winningLotto);
+            return winningLotto.matchBonus(lotto);
         }
         return false;
+    }
+
+    public void add(final ManualLottos manualLottos) {
+
+        final List<Lotto> lottos = manualLottos.getManualLottos()
+                .getLottos();
+        this.lottos.addAll(lottos);
     }
 }

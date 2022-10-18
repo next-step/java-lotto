@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -25,16 +26,16 @@ class AutoLottosTest {
         );
     }
 
-    @DisplayName("구매 가능한 금액만큼 생성하며 자동 로또 번호 6자리를 생성한다.")
+    @DisplayName("구매 가능한 금액에서 수동 로또 번호를 제외한 자동 로또 번호 6자리를 생성한다.")
     @ParameterizedTest
-    @ValueSource(ints = {1, 5, 10})
-    void create_auto_lotto2(final int count) {
+    @CsvSource(value = {"1,1", "2,2", "5,5"})
+    void create_auto_lotto2(final int countOfAutoLotto, final int expected) {
 
-        final List<Lotto> autoLottoNumbers = AutoLottos.autoCreate(count);
+        final List<Lotto> autoLottoNumbers = AutoLottos.autoCreate(countOfAutoLotto);
 
         final List<Number> lottoNumber = autoLottoNumbers.get(0).getLotto();
         assertAll(
-                () -> assertThat(autoLottoNumbers).hasSize(count),
+                () -> assertThat(autoLottoNumbers).hasSize(expected),
                 () -> assertThat(lottoNumber).hasSize(6)
         );
     }

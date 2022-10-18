@@ -11,15 +11,15 @@ public class Purchase {
         this.purchase = purchase;
     }
 
-    public static Purchase from(final String input) {
+    public static Purchase from(final String amount) {
 
-        validate(input);
-        return new Purchase(convert(input));
+        validate(amount);
+        return new Purchase(convert(amount));
     }
 
     private static void validate(final String purchase) {
 
-        if (purchase == null || purchase.isBlank()) {
+        if (purchase == null || purchase.isEmpty()) {
             throw new IllegalArgumentException("구매금액은 입력해야 합니다.");
         }
     }
@@ -29,7 +29,7 @@ public class Purchase {
         return Integer.parseInt(purchase);
     }
 
-    public long available() {
+    public int available() {
 
         return Math.floorDiv(this.purchase, LOTTO_TICKET_PRICE);
     }

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -10,17 +9,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
-
-    @DisplayName("null 또는 빈 값일 경우 익셉션 처리한다.")
-    @ParameterizedTest
-    @NullAndEmptySource
-    void error_create_lotto(final String input) {
-
-        assertThatThrownBy(() -> Lotto.from(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력 값이 null 또는 빈 공백 입니다.");
-
-    }
 
     @DisplayName("입력받은 로또 번호를 생성한다.")
     @ParameterizedTest

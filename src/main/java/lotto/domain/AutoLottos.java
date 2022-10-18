@@ -9,15 +9,15 @@ public class AutoLottos {
 
     public static final int LOTTO_INDEX_START = 0;
     public static final int LOTTO_INDEX_END = 6;
-    private static final List<Integer> lottos = Number.range();
+    private static final List<Integer> LOTTO_NUMBERS = Number.range();
 
     private AutoLottos() {}
 
-    public static List<Lotto> autoCreate(final long count) {
+    public static List<Lotto> autoCreate(final int countOfAutoLotto) {
 
         final List<Lotto> autoLottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            Collections.shuffle(lottos);
+        for (int i = 0; i < countOfAutoLotto; i++) {
+            Collections.shuffle(LOTTO_NUMBERS);
             autoLottos.add(Lotto.from(pick()));
         }
         return autoLottos;
@@ -25,7 +25,7 @@ public class AutoLottos {
 
     private static List<Integer> pick() {
 
-        return lottos.subList(LOTTO_INDEX_START, LOTTO_INDEX_END)
+        return LOTTO_NUMBERS.subList(LOTTO_INDEX_START, LOTTO_INDEX_END)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());
