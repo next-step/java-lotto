@@ -16,7 +16,8 @@ public class InputOperators {
     }
 
     public static InputOperators from(InputStrings inputStrings) {
-        List<OperatorType> result = inputStrings.getStream()
+        List<OperatorType> result = inputStrings.getStrings()
+                .stream()
                 .filter(str -> !str.matches(NUMBER_REGEX))
                 .map(OperatorType::from)
                 .collect(Collectors.toList());

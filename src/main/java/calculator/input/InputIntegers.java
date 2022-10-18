@@ -15,11 +15,11 @@ public class InputIntegers {
     }
 
     public static InputIntegers from(InputStrings inputStrings) {
-        List<Integer> result = inputStrings.getStream()
+        return inputStrings.getStrings()
+                .stream()
                 .filter(str -> str.matches(NUMBER_REGEX))
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
-        return new InputIntegers(result);
+                .collect(Collectors.collectingAndThen(Collectors.toList(), InputIntegers::new));
     }
 
     public void executeOperator(Operator operator) {

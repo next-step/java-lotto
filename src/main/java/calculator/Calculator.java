@@ -3,7 +3,6 @@ package calculator;
 import calculator.input.InputIntegers;
 import calculator.input.InputOperators;
 import calculator.input.InputStrings;
-import calculator.operator.OperatorFactory;
 import calculator.operator.OperatorType;
 
 public class Calculator {
@@ -16,9 +15,8 @@ public class Calculator {
     }
 
     private Integer calculate(InputIntegers inputIntegers, InputOperators inputOperators) {
-        OperatorFactory operatorFactory = new OperatorFactory();
         for (OperatorType type : inputOperators.getOperators()) {
-            inputIntegers.executeOperator(operatorFactory.getOperator(type));
+            inputIntegers.executeOperator(type.getOperator());
         }
         return inputIntegers.getResult();
     }

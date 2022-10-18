@@ -1,7 +1,7 @@
 package calculator.input;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.List;
 
 public class InputStrings {
 
@@ -11,12 +11,14 @@ public class InputStrings {
         this.strings = strings;
     }
 
-    public Stream<String> getStream() {
-        return Arrays.stream(strings.clone());
+    public List<String> getStrings() {
+        return Arrays.asList(strings);
     }
 
     public static InputStrings from(String userInput) {
-        if (userInput == null || userInput.equals("")) throw new IllegalArgumentException("input cannot be empty");
+        if (userInput == null || userInput.equals("")) {
+            throw new IllegalArgumentException("input cannot be empty");
+        }
         return new InputStrings(userInput.split(" "));
     }
 }

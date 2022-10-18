@@ -1,5 +1,10 @@
 package calculator.operator;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public enum OperatorType {
 
     ADD("+", new AddOperator()),
@@ -9,6 +14,13 @@ public enum OperatorType {
 
     private final String operatorStr;
     private final Operator operator;
+    private static final Map<String, OperatorType> BY_OPERATOR_STRING = new HashMap<>();
+
+    static {
+        for (OperatorType operatorType : values()) {
+            BY_OPERATOR_STRING.put(operatorType.operatorStr, operatorType);
+        }
+    }
 
     OperatorType(String operatorStr, Operator operator) {
         this.operatorStr = operatorStr;
@@ -16,17 +28,13 @@ public enum OperatorType {
     }
 
     public static OperatorType from(String input) {
-        switch (input) {
-            case "+":
-                return ADD;
-            case "-":
-                return MINUS;
-            case "*":
-                return MULTIPLY;
-            case "/":
-                return DIVIDE;
-            default:
-                throw new IllegalArgumentException("wrong operator type");
+        if (!BY_OPERATOR_STRING.containsKey(input)) {
+            throw new IllegalArgumentException("wrong operator type");
         }
+        return BY_OPERATOR_STRING.get(input);
+    }
+
+    public Operator getOperator() {
+        return operator;
     }
 }
