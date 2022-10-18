@@ -19,9 +19,8 @@ class LotteriesTest {
                         new Lotto(createLottoNumber(1, 2, 3, 25, 35, 44)))
         );
 
-        List<LottoNumber> lastWinLotto = createLottoNumber(1, 2, 4, 24, 25, 45);
-
-        Map<Rank, Long> result = lotteries.getLotteriesRank(new Lotto(lastWinLotto), 33);
+        WinningLotto winningLotto = new WinningLotto(createLottoNumber(1, 2, 4, 24, 25, 45), new LottoNumber(44));
+        Map<Rank, Long> result = lotteries.getLotteriesRank(winningLotto);
 
         assertThat(result).isEqualTo(Map.of(Rank.FIRST, 1L, Rank.FIFTH, 1L));
     }
@@ -33,9 +32,8 @@ class LotteriesTest {
                         new Lotto(createLottoNumber(1, 2, 3, 25, 35, 44)))
         );
 
-        List<LottoNumber> lastWinLotto = createLottoNumber(1, 2, 4, 24, 25, 43);
-
-        Map<Rank, Long> result = lotteries.getLotteriesRank(new Lotto(lastWinLotto), 45);
+        WinningLotto winningLotto = new WinningLotto(createLottoNumber(1, 2, 4, 24, 25, 43), new LottoNumber(45));
+        Map<Rank, Long> result = lotteries.getLotteriesRank(winningLotto);
 
         assertThat(result).isEqualTo(Map.of(Rank.SECOND, 1L, Rank.FIFTH, 1L));
     }
