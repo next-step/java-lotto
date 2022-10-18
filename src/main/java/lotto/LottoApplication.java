@@ -27,8 +27,8 @@ public class LottoApplication {
         int bonusNumber = inputBonusBall();
         Lotto lotto = new Lotto(winningNumber);
         LottoNumber bonus = LottoNumber.from(bonusNumber);
-        RankMap rankMap = lottoGame.getResult(lotto, bonus);
-        printWinningResult(rankMap);
-        printProfitRate(rankMap, lottoGame.getManualCount() + lottoGame.getAutoCount());
+        LottoResults lottoResults = lottoGame.getResult(lotto, bonus);
+        printWinningResult(lottoResults);
+        printProfitRate(lottoResults, lottoGame.getManualCount() + lottoGame.getAutoCount());
     }
 }

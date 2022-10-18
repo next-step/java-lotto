@@ -26,7 +26,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printWinningResult(RankMap rankMap) {
+    public static void printWinningResult(LottoResults lottoResults) {
         System.out.println();
         System.out.println(MSG_WINNING_RESULT);
         System.out.println(DOTTED_LINE_MARK);
@@ -35,11 +35,11 @@ public class ResultView {
         for (int i = ranks.length - 1; i >= 0; i--) {
             Rank rank = ranks[i];
             String matchBonus = rank == Rank.SECOND ? MSG_MATCH_BONUS : "";
-            System.out.printf(MSG_SAME_COUNT, rank.getMatchCount(), matchBonus, rank.getReward(), rankMap.getRankCount(rank));
+            System.out.printf(MSG_SAME_COUNT, rank.getMatchCount(), matchBonus, rank.getReward(), lottoResults.getRankCount(rank));
         }
     }
 
-    public static void printProfitRate(RankMap rankMap, int totalLottoCnt) {
-        System.out.printf(MSG_PROFIT_RATE, rankMap.getProfitRate(totalLottoCnt));
+    public static void printProfitRate(LottoResults lottoResults, int totalLottoCnt) {
+        System.out.printf(MSG_PROFIT_RATE, lottoResults.getProfitRate(totalLottoCnt));
     }
 }

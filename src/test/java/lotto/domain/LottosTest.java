@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.generator.ManualNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -28,14 +27,14 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoList);
         Lotto winning = new Lotto("1, 2, 3, 4, 5, 6");
         LottoNumber bonus = LottoNumber.from(10);
-        RankMap rankMap = lottos.getResult(winning, bonus);
+        LottoResults lottoResults = lottos.getResult(winning, bonus);
 
-        assertThat(rankMap.getRankCount(Rank.MISS)).isEqualTo(1);
-        assertThat(rankMap.getRankCount(Rank.FIFTH)).isEqualTo(1);
-        assertThat(rankMap.getRankCount(Rank.FOURTH)).isEqualTo(1);
-        assertThat(rankMap.getRankCount(Rank.THIRD)).isEqualTo(1);
-        assertThat(rankMap.getRankCount(Rank.SECOND)).isEqualTo(1);
-        assertThat(rankMap.getRankCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoResults.getRankCount(Rank.MISS)).isEqualTo(1);
+        assertThat(lottoResults.getRankCount(Rank.FIFTH)).isEqualTo(1);
+        assertThat(lottoResults.getRankCount(Rank.FOURTH)).isEqualTo(1);
+        assertThat(lottoResults.getRankCount(Rank.THIRD)).isEqualTo(1);
+        assertThat(lottoResults.getRankCount(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottoResults.getRankCount(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
@@ -55,8 +54,8 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoList);
         Lotto winning = new Lotto("1, 2, 3, 4, 5, 6");
         LottoNumber bonus = LottoNumber.from(10);
-        RankMap rankMap = lottos.getResult(winning, bonus);
+        LottoResults lottoResults = lottos.getResult(winning, bonus);
 
-        assertThat(rankMap.getProfitRate(lottos.lottosSize())).isEqualTo(0.8);
+        assertThat(lottoResults.getProfitRate(lottos.lottosSize())).isEqualTo(0.8);
     }
 }

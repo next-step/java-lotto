@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
@@ -37,8 +35,8 @@ public class LottoGame {
         return this.autoAmount / Lottos.LOTTO_PRICE;
     }
 
-    public RankMap getResult(Lotto winning, LottoNumber bonus) {
-        RankMap rankMap = new RankMap();
+    public LottoResults getResult(Lotto winning, LottoNumber bonus) {
+        LottoResults lottoResults = new LottoResults();
         int sameNumbers = 0;
         boolean winBonus = false;
 
@@ -46,16 +44,16 @@ public class LottoGame {
             sameNumbers = lotto.getSameNumberCount(winning);
             winBonus = lotto.getLottoNumbers().contains(bonus);
             Rank rank = Rank.valueOf(sameNumbers, winBonus);
-            rankMap.addRank(rank);
+            lottoResults.addRank(rank);
         }
 
         for (Lotto lotto : autoLottos.getLottoList()) {
             sameNumbers = lotto.getSameNumberCount(winning);
             winBonus = lotto.getLottoNumbers().contains(bonus);
             Rank rank = Rank.valueOf(sameNumbers, winBonus);
-            rankMap.addRank(rank);
+            lottoResults.addRank(rank);
         }
 
-        return rankMap;
+        return lottoResults;
     }
 }

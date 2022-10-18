@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import lotto.generator.ManualNumberGenerator;
-import lotto.generator.NumberGenerator;
-import lotto.generator.RandomNumberGenerator;
-
 import java.util.*;
 
 public class Lottos {
@@ -24,16 +20,16 @@ public class Lottos {
         return this.lottoList.size();
     }
 
-    public RankMap getResult(Lotto winning, LottoNumber bonus) {
-        RankMap rankMap = new RankMap();
+    public LottoResults getResult(Lotto winning, LottoNumber bonus) {
+        LottoResults lottoResults = new LottoResults();
         for (Lotto lotto : lottoList) {
             int sameNumbers = lotto.getSameNumberCount(winning);
             boolean winBonus = lotto.getLottoNumbers().contains(bonus);
 
             Rank rank = Rank.valueOf(sameNumbers, winBonus);
-            rankMap.addRank(rank);
+            lottoResults.addRank(rank);
         }
-        return rankMap;
+        return lottoResults;
     }
 
     public List<Lotto> getLottoList() {
