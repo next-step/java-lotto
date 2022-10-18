@@ -4,8 +4,7 @@ import exception.ErrorCode;
 
 public enum CalculatorErrorCode implements ErrorCode {
 
-    INPUT_VALUE_NULL_POINT_ERROR("값을 입력해주세요"),
-    NOT_OPERATION_SYMBOL("사칙연산 기호가 아닙니다");
+    INPUT_VALUE_NULL_POINT_ERROR("값을 입력해주세요");
 
     private final String message;
 
