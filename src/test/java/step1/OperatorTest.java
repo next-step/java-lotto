@@ -21,4 +21,9 @@ class OperatorTest {
         assertThat(Operator.MULTIPLY.executedResult(1, 1)).isOne();
     }
 
+    @Test
+    void 나눗셈이_가능하다() {
+        assertThat(Operator.DIVIDE.executedResult(1, 1)).isOne();
+    }
+
 }
