@@ -24,19 +24,6 @@ public class LottoController {
         this.calculator = calculator;
     }
 
-    public void startLotto() {
-        BigDecimal payAmount = inputView.inputPayAmount();
-        Lotto lotto = lottoFactory.generateLotto(payAmount);
-        outputView.printPurchasedLotto(lotto);
-
-        WinningNumber winningNumber = inputView.inputBeforeWinningNumber();
-        Map<Prize, Integer> lottoRankMap = winningNumber.calcLottoRank(lotto);
-        outputView.printStatisticLotto(lottoRankMap);
-
-        BigDecimal prizeMoney = calculator.calculatePrizeMoney(lottoRankMap);
-        outputView.printYield(calculator.calculateYield(payAmount, prizeMoney));
-    }
-
     public void startLottoWithBonus() {
         BigDecimal payAmount = inputView.inputPayAmount();
         Lotto lotto = lottoFactory.generateLotto(payAmount);

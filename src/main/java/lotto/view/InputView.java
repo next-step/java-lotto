@@ -16,11 +16,6 @@ public class InputView {
         return payAmount;
     }
 
-    public WinningNumber inputBeforeWinningNumber() {
-        List<Integer> winningNumber = inputWinningNumber();
-        return new WinningNumber(winningNumber);
-    }
-
     public WinningNumber inputWinningNumberWithBonus() {
         List<Integer> winningNumber = inputWinningNumber();
         int bonusNumber = inputBonusNumber();

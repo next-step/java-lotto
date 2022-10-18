@@ -41,8 +41,8 @@ class PrizeTest {
     static Stream<Arguments> testNumbersWithBonus() {
         return Stream.of(
                 arguments(6, true, Prize.RANK_1TH),
-                arguments(5, true, Prize.RANK_2TH),
-                arguments(4, true, Prize.RANK_2TH_WITH_BONUS),
+                arguments(5, false, Prize.RANK_2TH),
+                arguments(5, true, Prize.RANK_2TH_WITH_BONUS),
                 arguments(4, false, Prize.RANK_3TH)
         );
     }

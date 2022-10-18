@@ -8,11 +8,6 @@ public class WinningNumber {
     private final List<Integer> numbers;
     private final Integer bonusNumber;
 
-    public WinningNumber(List<Integer> numbers) {
-        this.numbers = numbers;
-        this.bonusNumber = -1;
-    }
-
     public WinningNumber(List<Integer> numbers, Integer bonusNumber) {
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
@@ -27,15 +22,6 @@ public class WinningNumber {
             addRankMap(rankMap, Prize.findPrize(matchingCount, containBonusNumber));
         }
 
-        return rankMap;
-    }
-    public Map<Prize, Integer> calcLottoRank(Lotto lotto) {
-        Map<Prize, Integer> rankMap = initRankMap();
-
-        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
-            int matchingCount = findMatchingCount(lottoNumber);
-            addRankMap(rankMap, Prize.findPrize(matchingCount));
-        }
         return rankMap;
     }
 

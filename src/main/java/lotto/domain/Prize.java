@@ -25,11 +25,11 @@ public enum Prize {
     }
 
     public static Prize findPrize(int winningCount, boolean containBonusNum) {
-        if (winningCount != 4 || !containBonusNum) {
-            return findPrize(winningCount);
+        if (winningCount == Prize.RANK_2TH.getWinningCount() && containBonusNum) {
+            return Prize.RANK_2TH_WITH_BONUS;
         }
 
-        return Prize.RANK_2TH_WITH_BONUS;
+        return findPrize(winningCount);
     }
 
     public int getWinningCount() {
