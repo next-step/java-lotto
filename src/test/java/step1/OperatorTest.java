@@ -1,5 +1,6 @@
 package step1;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -44,6 +45,13 @@ class OperatorTest {
                 Arguments.of("*", Operator.MULTIPLY),
                 Arguments.of("/", Operator.DIVIDE)
         );
+    }
+
+    @Test
+    void 잘못된_문자열을_입력할_경우_예외가_발생한다() {
+        Assertions.assertThatThrownBy(() -> Operator.foundOperator("z"))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("올바른 연산자가 아닙니다.");
     }
 
 }
