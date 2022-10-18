@@ -1,7 +1,14 @@
+package calculator;
+
+import calculator.exception.CalculatorErrorCode;
+import calculator.exception.OperationErrorCode;
+import exception.CustomException;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public enum Operation {
+
     PLUS("+") {
         public int apply(int x, int y) {
             return x+y;
@@ -39,7 +46,7 @@ public enum Operation {
 
     public static Operation valueOfSymbol(String symbol) {
         Operation operation = BY_SYMBOL.get(symbol);
-        if (operation == null) throw new IllegalArgumentException();
+        if (operation == null) throw new CustomException(OperationErrorCode.NOT_OPERATION_SYMBOL);
         return operation;
     }
 
