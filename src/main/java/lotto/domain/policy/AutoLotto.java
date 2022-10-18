@@ -1,4 +1,4 @@
-package lotto.domain.random;
+package lotto.domain.policy;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberFactory;
-import lotto.domain.LottoPolicy;
 
 public class AutoLotto implements LottoPolicy {
 
