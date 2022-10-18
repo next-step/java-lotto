@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import lotto.domain.LottoPolicy.FakeLottoPolicy;
+import lotto.domain.policy.LottoPolicy.FakeLottoPolicy;
 import lotto.domain.exception.MoneyException;
-import lotto.domain.random.AutoLotto;
+import lotto.domain.policy.AutoLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

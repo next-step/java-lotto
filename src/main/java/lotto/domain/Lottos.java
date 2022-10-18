@@ -36,6 +36,13 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
+    public Lottos compositeLotto(final Lottos lottos) {
+        List<Lotto> lottoArrayList = new ArrayList<>();
+        lottoArrayList.addAll(this.lottos);
+        lottoArrayList.addAll(lottos.lottos);
+        return new Lottos(lottoArrayList);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

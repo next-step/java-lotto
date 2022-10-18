@@ -6,7 +6,7 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.Lottos;
-import lotto.domain.random.AutoLotto;
+import lotto.domain.policy.AutoLotto;
 
 public class LottoGame {
 
@@ -19,15 +19,22 @@ public class LottoGame {
     }
 
     public void play() {
+        LottoPrice lottoPrice = new LottoPrice();
+
         int purchase = inputView.purchase();
         outputView.lottoCount(purchase);
 
-        LottoMachine lottoMachine = new LottoMachine(new AutoLotto(), new LottoPrice());
-        Lottos lottos = lottoMachine.buyLotto(purchase);
+        int quantity = inputView.manualLottoQuantity();
+        Lottos manualLottos = inputView.manualLottos(quantity);
 
-        outputView.lottos(lottos);
+        LottoMachine lottoMachine = new LottoMachine(new AutoLotto(), lottoPrice);
+        int autoLottoCost = purchase - lottoPrice.manualLottoCost(quantity);
 
-        Bank bank = lottos.checkWinningNumber(new Lotto(inputView.winningNumbers()), new LottoNumber(inputView.inputBonusBall()));
+        Lottos manualAndAutoLotto = manualLottos.compositeLotto(lottoMachine.buyLotto(autoLottoCost));
+
+        outputView.lottos(manualAndAutoLotto, quantity, lottoPrice.lottoCount(purchase) - quantity);
+
+        Bank bank = manualAndAutoLotto.checkWinningNumber(new Lotto(inputView.winningNumbers()), new LottoNumber(inputView.inputBonusBall()));
 
         outputView.winningStatistics(bank);
         outputView.winningStatistics(bank, purchase);

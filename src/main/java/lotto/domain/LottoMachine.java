@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.policy.LottoPolicy;
 
 public class LottoMachine {
 
@@ -13,6 +14,7 @@ public class LottoMachine {
         this.lottoPolicy = lottoPolicy;
         this.lottoPrice = lottoPrice;
     }
+
 
     public Lottos buyLotto(int purchaseMoney) {
         int lottoCount = lottoPrice.lottoCount(purchaseMoney);

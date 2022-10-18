@@ -1,6 +1,8 @@
-package lotto.domain;
+package lotto.domain.policy;
 
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public interface LottoPolicy {
 
