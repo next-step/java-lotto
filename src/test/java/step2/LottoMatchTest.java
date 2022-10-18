@@ -15,7 +15,7 @@ public class LottoMatchTest {
 		List<Integer> winNum = Arrays.asList(1,2,3,4,5,6);
 		LottoMatch lotteryWin = new LottoMatch(winNum);
 
-		assertThat(lotteryWin.match(new Lotto(new FixLottoFactory()))).contains(1,6);
+		assertThat(lotteryWin.isMatch(new Lotto(new FixLottoFactory()))).contains(1,6);
 	}
 
 }

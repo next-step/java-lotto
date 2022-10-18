@@ -1,7 +1,5 @@
 package step2;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +7,7 @@ public class Lotto {
 
 	private List<Integer> lottoSet;
 
-	public Lotto (LottoFactory lottoFactory) {
+	public Lotto(LottoFactory lottoFactory) {
 		this(lottoFactory.getLottoNum());
 	}
 
@@ -17,6 +15,9 @@ public class Lotto {
 		this.lottoSet = lottoSet;
 	}
 
+	public List<Integer> getLotto(){
+		return lottoSet;
+	}
 
 	public boolean equals(Object o) {
 		if (this == o) {
