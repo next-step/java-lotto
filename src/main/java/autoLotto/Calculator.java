@@ -24,7 +24,6 @@ public class Calculator {
     }
 
     private void getTotalCount(int matchNumQuantity) {
-
         if (matchNumQuantity >= 3) {
             Match match = Matcher.get(matchNumQuantity);
             match.countOfMatch();
