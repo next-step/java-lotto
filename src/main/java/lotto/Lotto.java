@@ -3,11 +3,13 @@ package lotto;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lotto {
 
-    private List<LottoTicket> tickets;
+    final private List<LottoTicket> tickets;
 
     public Lotto(int ticketCount) {
         List<LottoTicket> tickets = new ArrayList<>();
@@ -19,7 +21,11 @@ public class Lotto {
         this.tickets = tickets;
     }
 
-    public void checkWin(List<Integer> winningNumbers) {
+    public List<LottoTicket> getTickets() {
+        return tickets;
+    }
+
+    public void checkWin(List<LottoNumber> winningNumbers) {
         for (LottoTicket ticket : tickets) {
             ticket.checkRank(winningNumbers);
         }
@@ -38,5 +44,19 @@ public class Lotto {
         }
 
         return totalPrize;
+    }
+
+    public Map<LottoRank, Long> getWinningStat() {
+        Map<LottoRank, Long> stat = new HashMap<>();
+
+        for (LottoRank rank: LottoRank.values()) {
+            Long count = tickets.stream()
+                .filter(lottoTicket -> lottoTicket.isRank(rank))
+                .count();
+
+            stat.put(rank, count);
+        }
+
+        return stat;
     }
 }
