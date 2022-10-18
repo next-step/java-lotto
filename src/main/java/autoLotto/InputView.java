@@ -10,7 +10,7 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public int inputAmount() {
+    public static int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             int amount = SCANNER.nextInt();
@@ -20,7 +20,7 @@ public class InputView {
         }
     }
 
-    public List<Integer> inputNumbers() {
+    public static List<Integer> inputNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
 
         SCANNER.nextLine();
