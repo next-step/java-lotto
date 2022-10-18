@@ -12,7 +12,7 @@ public class LottoNumber {
     private static final Integer LOTTO_DEFAULT_START_NUMBER = 1;
     private static final Integer LOTTO_DEFAULT_END_NUMBER = 45;
 
-    public static List<Integer> getLottoNumberList() {
+    public static List<Integer> getAutoNumberList() {
         return makeAutoNumberList(defaultNumberList());
     }
 

@@ -12,6 +12,6 @@ class LottoNumberTest {
     void getLottoNumberList() {
 
         // expected
-        assertThat(LottoNumber.getLottoNumberList()).hasSize(LottoNumber.LOTTO_NUMBER_SIZE);
+        assertThat(LottoNumber.getAutoNumberList()).hasSize(LottoNumber.LOTTO_NUMBER_SIZE);
     }
 }
