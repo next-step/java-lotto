@@ -28,7 +28,7 @@ class LottoResultTest {
     }
 
     @Test
-    void 수익률_확인_테스트(){
+    void 수익률_확인_테스트() {
         Lottos lottos = new Lottos(List.of(
             Lotto.print(() -> Number.of(8, 21, 23, 41, 42, 43)),
             Lotto.print(() -> Number.of(3, 5, 11, 16, 32, 38)),

@@ -12,13 +12,6 @@ public class LottoShopTest {
         LottoNumberStrategy lottoNumberStrategy = () -> Number.of(1, 2);
         LottoShop shop = new LottoShop(lottoNumberStrategy);
         Lottos lottos = shop.buy(new Money(2000));
-        Assertions.assertThat(lottos).isEqualTo(
-            new Lottos(
-                List.of(
-                    new Lotto(Number.of(1,2)),
-                    new Lotto(Number.of(1,2))
-                )
-            )
-        );
+        Assertions.assertThat(lottos).isEqualTo(new Lottos(List.of(new Lotto(Number.of(1, 2)), new Lotto(Number.of(1, 2)))));
     }
 }

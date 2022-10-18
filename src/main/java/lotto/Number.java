@@ -10,7 +10,7 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    public int getNumber(){
+    public int getNumber() {
         return number;
     }
 
@@ -19,7 +19,7 @@ public class Number implements Comparable<Number> {
         return Integer.compare(this.number, other.number);
     }
 
-    public static Set<Number> of(int... numbers){
+    public static Set<Number> of(int... numbers) {
         Set<Number> numberList = new TreeSet<>();
         for (int number : numbers) {
             numberList.add(Number.of(number));
@@ -27,11 +27,11 @@ public class Number implements Comparable<Number> {
         return numberList;
     }
 
-    public static Number of(int number){
+    public static Number of(int number) {
         return new Number(number);
     }
 
-    public static Number of(String number){
+    public static Number of(String number) {
         return Number.of(Integer.parseInt(number));
     }
 

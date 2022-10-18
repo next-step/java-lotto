@@ -11,16 +11,16 @@ public class Input {
     private Input() {
     }
 
-    private static String input(){
+    private static String input() {
         return SCANNER.nextLine();
     }
 
-    public static int inputPrice(){
+    public static int inputPrice() {
         String input = input();
         return Integer.parseInt(input);
     }
 
-    public static Set<Number> inputWinnerNumbers(){
+    public static Set<Number> inputWinnerNumbers() {
         String input = input();
         String[] split = input.split(SEPARATOR);
 

@@ -9,7 +9,7 @@ import java.util.Set;
 public class LottosTest {
 
     @Test
-    void 로또_결과_통계_조회(){
+    void 로또_결과_통계_조회() {
         Lottos lottos = new Lottos(List.of(
             Lotto.print(() -> Number.of(8, 21, 23, 41, 42, 43)),
             Lotto.print(() -> Number.of(3, 5, 11, 16, 32, 38)),

@@ -9,14 +9,14 @@ public class CalculatorFactory {
     private CalculatorFactory() {
     }
 
-    public static Calculator getCalculator(String arithmetic){
-        if(ADDITION.equals(arithmetic)){
+    public static Calculator getCalculator(String arithmetic) {
+        if (ADDITION.equals(arithmetic)) {
             return new AddCalculator();
         }
-        if(SUBTRACTION.equals(arithmetic)){
+        if (SUBTRACTION.equals(arithmetic)) {
             return new SubtractCalculator();
         }
-        if(MULTIPLICATION.equals(arithmetic)){
+        if (MULTIPLICATION.equals(arithmetic)) {
             return new MultiplyCalculator();
         }
         return new DivideCalculator();
