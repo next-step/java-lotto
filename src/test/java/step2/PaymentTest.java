@@ -14,4 +14,11 @@ public class PaymentTest {
 		Assertions.assertThat(payment.lottoAmount(money)).isEqualTo(14000/1000);
 	}
 
+	@Test
+	@DisplayName("1000원이하를 지불하면 예외 발생")
+	void 금액_부족_테스트(){
+		int money = 900;
+		Payment payment = new Payment();
+		Assertions.assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(new LackOfMoneyException.class);
+	}
 }
