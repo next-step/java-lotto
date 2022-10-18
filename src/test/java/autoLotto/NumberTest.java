@@ -51,5 +51,8 @@ public class NumberTest {
         numbers.add(45);
         numbers.add(10);
         numbers.add(11);
+
+        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+        assertThat(winningNumbers.getWinningNumbers()).containsExactly(3,6,9,45,10,11);
     }
 }
