@@ -27,11 +27,11 @@ public class CalculatorController {
 		result = numbers.get(0);
 
 		operators.forEach(
-			operator -> operator.operate(numbers.get(operators.indexOf(operator) + 1).getNumber(), result)
+			operator -> operator.operate(numbers.get(operators.indexOf(operator) + 1).getValue(), result)
 		);
 	}
 
 	public void end() {
-		outputView.printResult(result.getNumber());
+		outputView.printResult(result.getValue());
 	}
 }

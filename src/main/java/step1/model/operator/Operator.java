@@ -18,7 +18,7 @@ public class Operator {
 		if (OPERATORS.contains(operator)) {
 			return;
 		}
-		throw new BadRequestException("");
+		throw new BadRequestException("연산자로 변환가능한 문자열이 아닙니다.");
 	}
 
 	public void operate(int a, Number number) {

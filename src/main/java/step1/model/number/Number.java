@@ -4,41 +4,37 @@ import step1.exception.BadRequestException;
 
 public class Number {
 	private static final String Numeric = "[0-9.]+";
-	private int number;
+	private int value;
 
 	public Number(String number) {
 		checkNumeric(number);
-		this.number = Integer.parseInt(number);
+		this.value = Integer.parseInt(number);
 	}
 
 	public void checkNumeric(String numeric) {
 		if (numeric.matches(Numeric)) {
 			return;
 		}
-		throw new BadRequestException("");
+		throw new BadRequestException("숫자로 변환가능한 문자열이 아닙니다.");
 	}
 
-	public int getNumber() {
-		return this.number;
+	public int getValue() {
+		return this.value;
 	}
 
-	public int plus(int a) {
-		this.number += a;
-		return this.number;
+	public void plus(int a) {
+		this.value += a;
 	}
 
-	public int minus(int a) {
-		this.number -= a;
-		return this.number;
+	public void minus(int a) {
+		this.value -= a;
 	}
 
-	public int multiply(int a) {
-		this.number *= a;
-		return this.number;
+	public void multiply(int a) {
+		this.value *= a;
 	}
 
-	public int divide(int a) {
-		this.number /= a;
-		return this.number;
+	public void divide(int a) {
+		this.value /= a;
 	}
 }

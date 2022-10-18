@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
-	private static final String BLANK = "\\s";
+	private static final String BLANK = " ";
 
 	public List<String> getInput() {
 		System.out.print("계산식 입력 : ");

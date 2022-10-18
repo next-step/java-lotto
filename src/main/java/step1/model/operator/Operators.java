@@ -6,7 +6,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Operators implements Iterable<Operator> {
-	private static final List<String> OPERATORS = List.of(new String[] {"+", "-", "*", "/"});
 	private List<Operator> operators;
 
 	public Operators() {
@@ -18,6 +17,7 @@ public class Operators implements Iterable<Operator> {
 
 	public Operators convertToOperators(List<String> strings) {
 		return new Operators(strings.stream()
+			.filter(string -> strings.indexOf(string) % 2 == 1)
 			.map(Operator::new)
 			.collect(Collectors.toList()));
 	}
