@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OperandExtractor implements Extractor<Integer> {
+public class OperandExtractor implements Extractor<Long> {
     private static final Pattern OPERAND_PATTERN = Pattern.compile("[0-9]");
 
     private OperandExtractor() {}
@@ -19,12 +19,12 @@ public class OperandExtractor implements Extractor<Integer> {
     }
 
     @Override
-    public Deque<Integer> extractToDeque(String text) {
-        Deque<Integer> operandDeque = new LinkedList<>();
+    public Deque<Long> extractToDeque(String text) {
+        Deque<Long> operandDeque = new LinkedList<>();
         Matcher matcher = OPERAND_PATTERN.matcher(text);
 
         while (matcher.find()) {
-            operandDeque.add(Integer.parseInt(matcher.group()));
+            operandDeque.add(Long.parseLong(matcher.group()));
         }
 
         return operandDeque;
