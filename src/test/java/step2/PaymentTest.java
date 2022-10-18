@@ -19,6 +19,6 @@ public class PaymentTest {
 	void 금액_부족_테스트(){
 		int money = 900;
 		Payment payment = new Payment();
-		Assertions.assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(new LackOfMoneyException.class);
+		Assertions.assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(LackOfMoneyException.class);
 	}
 }
