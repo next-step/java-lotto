@@ -1,5 +1,7 @@
 package autoLotto;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.internal.bytebuddy.build.ToStringPlugin;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -38,5 +40,16 @@ public class NumberTest {
                     new WinningNumbers(numbers);
                 }
         );
+    }
+
+    @Test
+    void checkNum() {
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(3);
+        numbers.add(6);
+        numbers.add(9);
+        numbers.add(45);
+        numbers.add(10);
+        numbers.add(11);
     }
 }
