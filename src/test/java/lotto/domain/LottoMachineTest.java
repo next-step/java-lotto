@@ -2,12 +2,11 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Collections;
 import java.util.List;
-import lotto.domain.policy.LottoPolicy.FakeLottoPolicy;
-import lotto.domain.exception.MoneyException;
 import lotto.domain.policy.AutoLotto;
+import lotto.domain.policy.LottoPolicy.FakeLottoPolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,14 +19,12 @@ public class LottoMachineTest {
     }
 
     @Test
-    @DisplayName("1000원 미만으로 구매할 시 예외가 발생한다.")
+    @DisplayName("1000원 미만으로 구매할 시 빈 값이 반환된다.")
     void under_1000_throw_exception() {
         //given
         LottoMachine lottoMachine = new LottoMachine(new AutoLotto(), new LottoPrice());
 
-        assertThatThrownBy(() -> lottoMachine.buyLotto(999))
-            .isInstanceOf(MoneyException.class)
-            .hasMessage("1000원 이하로는 구매할 수 없습니다.");
+        assertThat(lottoMachine.buyLotto(999)).isEqualTo(new Lottos(Collections.emptyList()));
     }
 
     @Test
