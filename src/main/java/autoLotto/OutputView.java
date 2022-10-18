@@ -14,13 +14,13 @@ public class OutputView {
                  .forEach(i -> System.out.println(lottos.getLotto(i)));
     }
 
-    public void outputResult(double result) {
+    public void outputResult(double result, int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {
         System.out.println("\n당첨 통계\n" +
                 "---------");
-        System.out.println("3개 일치 (5000원)-"+ THREE.getCountOfMatch() + "개");
-        System.out.println("4개 일치 (50000원)-"+ FOUR.getCountOfMatch() + "개");
-        System.out.println("5개 일치 (1500000원)-"+ FIVE.getCountOfMatch() + "개");
-        System.out.println("6개 일치 (2000000000원)-"+ SIX.getCountOfMatch() + "개");
+        System.out.println("3개 일치 (5000원)-"+ threeMatch + "개");
+        System.out.println("4개 일치 (50000원)-"+ fourMatch + "개");
+        System.out.println("5개 일치 (1500000원)-"+ fiveMatch + "개");
+        System.out.println("6개 일치 (2000000000원)-"+ sixMatch + "개");
 
         System.out.print("총 수익률은 " + result +"입니다.");
         if (result < 1) {

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static autoLotto.Match.*;
-import static autoLotto.Match.SIX;
 
 public class Matcher {
     private static Map<Integer, Match> matcher = new HashMap<>();

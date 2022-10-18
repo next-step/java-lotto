@@ -1,5 +1,7 @@
 package autoLotto;
 
+import static autoLotto.Match.*;
+
 public class AutoLotto {
 
     public static void run() {
@@ -17,8 +19,9 @@ public class AutoLotto {
         }
 
         outputView.outputLottos(lottos);
-
-        outputView.outputResult(calculator.calculate(lottos, new WinningNumbers(inputView.inputNumbers()),
-                countOfLotto * 1000));
+        double result = calculator.calculate(lottos, new WinningNumbers(inputView.inputNumbers()),
+                countOfLotto * 1000);
+        outputView.outputResult(result, THREE.getCountOfMatch(), FOUR.getCountOfMatch(),
+                FIVE.getCountOfMatch(), SIX.getCountOfMatch());
     }
 }
