@@ -22,8 +22,6 @@ public class LottoGame {
         LottoPrice lottoPrice = new LottoPrice();
 
         int purchase = inputView.purchase();
-        outputView.lottoCount(purchase);
-
         int quantity = inputView.manualLottoQuantity();
         Lottos manualLottos = inputView.manualLottos(quantity);
 
