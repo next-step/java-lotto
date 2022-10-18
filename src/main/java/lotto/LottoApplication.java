@@ -1,10 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.RankMap;
-import lotto.generator.ManualNumberGenerator;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -13,25 +9,26 @@ import static lotto.view.ResultView.*;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int autoLottoCnt = inputAutoPurchaseNumber();
-        Lottos lottos = new Lottos(autoLottoCnt);
 
-        List<Lotto> lottoList = lottos.getLottoList();
+        //input
+        int autoLottoAmount = inputAutoPurchaseNumber();
         int manualLottoCnt = inputManualPurchaseNumber();
-        List<String> manualLottoNumber = inputManualLottoNumber(manualLottoCnt);
-        for (int i = 0; i < manualLottoCnt; i++) {
-            lottoList.add(new Lotto(new ManualNumberGenerator(manualLottoNumber.get(i))));
-        }
+        List<String> manualLottoNumbers = inputManualLottoNumber(manualLottoCnt);
 
-        printLottoNumbers(lottos);
-        printPurchaseNumber(lottos.lottosSize());
+        //create game
+        LottoGame lottoGame = new LottoGame(autoLottoAmount, manualLottoCnt);
+        lottoGame.createLottos(manualLottoNumbers);
+
+        printLottoNumbers(lottoGame.getManualLottos());
+        printLottoNumbers(lottoGame.getAutoLottos());
+        printPurchaseNumber(lottoGame);
 
         String winningNumber = inputWinningNumber();
         int bonusNumber = inputBonusBall();
-        Lotto lotto = new Lotto(new ManualNumberGenerator(winningNumber));
+        Lotto lotto = new Lotto(winningNumber);
         LottoNumber bonus = LottoNumber.from(bonusNumber);
-        RankMap rankMap = lottos.getResult(lotto, bonus);
+        RankMap rankMap = lottoGame.getResult(lotto, bonus);
         printWinningResult(rankMap);
-        printProfitRate(rankMap, lottos.lottosSize());
+        printProfitRate(rankMap, lottoGame.getManualCount() + lottoGame.getAutoCount());
     }
 }

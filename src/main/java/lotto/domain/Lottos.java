@@ -48,8 +48,8 @@ public class Lottos {
         return this;
     }
 
-    public Lottos createManualLottos(int count, List<String> numbers) {
-        for (int i = 0; i < count; i++) {
+    public Lottos createManualLottos(List<String> numbers) {
+        for (int i = 0; i < numbers.size(); i++) {
             this.lottoList.add(new Lotto(numbers.get(i)));
         }
         return this;

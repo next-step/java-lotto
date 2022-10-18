@@ -1,23 +1,20 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.RankMap;
+import lotto.domain.*;
 
 import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static final String MSG_PURCHASE_NUMBER = "개를 구매했습니다.";
+    public static final String MSG_PURCHASE_NUMBER = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     public static final String MSG_WINNING_RESULT = "당첨 통계";
     public static final String DOTTED_LINE_MARK = "---------";
     public static final String MSG_SAME_COUNT = "%d개 일치 %s(%d원) - %d개\n";
     public static final String MSG_MATCH_BONUS = ", 보너스 볼 일치";
     public static final String MSG_PROFIT_RATE = "총 수익률은 %.2f 입니다.\n";
 
-    public static void printPurchaseNumber(int n) {
-        System.out.println(n + MSG_PURCHASE_NUMBER);
+    public static void printPurchaseNumber(LottoGame lottoGame) {
+        System.out.printf(MSG_PURCHASE_NUMBER, lottoGame.getManualCount(), lottoGame.getAutoCount());
 
     }
 
