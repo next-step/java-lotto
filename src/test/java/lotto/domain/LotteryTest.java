@@ -17,7 +17,7 @@ class LotteryTest {
         Lottery lottery = new Lottery(size);
 
         // then
-        assertThat(lottery.getLottos().getLottoList()).hasSize(size);
+        assertThat(lottery.drawLottery(size).getLottoList()).hasSize(size);
     }
 
 }

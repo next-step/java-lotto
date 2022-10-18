@@ -21,17 +21,6 @@ public class ExchangerTest {
     }
 
     @Test
-    @DisplayName("구매 금액 확인")
-    void purchase_amount() {
-        // given
-        String inputPrice = "14000";
-        Exchanger exchanger = new Exchanger(inputPrice);
-
-        // expected
-        assertThat(exchanger.getPurchasePrice()).isEqualTo(14000);
-    }
-
-    @Test
     @DisplayName("로또 개수 확인")
     void lotto_amount() {
         // given
@@ -39,7 +28,7 @@ public class ExchangerTest {
         Exchanger exchanger = new Exchanger(inputPrice);
 
         // expected
-        assertThat(exchanger.getAmount()).isEqualTo(14);
+        assertThat(exchanger.purchase()).isEqualTo(14);
     }
 
     @Test

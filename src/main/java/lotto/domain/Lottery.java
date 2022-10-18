@@ -11,11 +11,7 @@ public class Lottery {
         this.lottos = drawLottery(amount);
     }
 
-    public Lottos getLottos() {
-        return lottos;
-    }
-
-    private Lottos drawLottery(Integer amount) {
+    public Lottos drawLottery(Integer amount) {
 
         List<Lotto> lottoList = new ArrayList<>();
 
