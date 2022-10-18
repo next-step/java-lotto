@@ -10,6 +10,10 @@ public class PurchaseInfo {
     private final int purchaseAmount;
     private final int count;
 
+    public PurchaseInfo(int purchaseAmount) {
+        this(LOTTO_PRICE, purchaseAmount);
+    }
+
     public PurchaseInfo(int price, int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
         this.count = calculateCount(price, purchaseAmount);

@@ -1,37 +1,42 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.BiPredicate;
 
 /**
  * Created by seungwoo.song on 2022-10-06
  */
 public enum LottoResult {
 
-    FIRST(2000000000, 6),
-    SECOND(1500000, 5),
-    THIRD(50000, 4),
-    FORTH(5000, 3);
+    FIRST(2000000000, "6개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 6),
+    SECOND(30000000, "5개 일치, 보너스 볼 일치", (matchCount, isBonusNumberMatch) -> matchCount == 5 && isBonusNumberMatch),
+    THIRD(1500000, "5개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 5 && !isBonusNumberMatch),
+    FORTH(50000, "4개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 4),
+    FIFTH(5000, "3개 일치", (matchCount, isBonusNumberMatch) -> matchCount == 3),
+    NONE(0, "꽝", (matchCount, isBonusNumberMatch) -> matchCount < 3);
 
     private final int money;
-    private final int matchCount;
+    private final String description;
+    private final BiPredicate<Integer, Boolean> resultMatcher;
 
-    LottoResult(int money, int matchCount) {
+    LottoResult(int money, String description, BiPredicate<Integer, Boolean> resultMatcher) {
         this.money = money;
-        this.matchCount = matchCount;
+        this.description = description;
+        this.resultMatcher = resultMatcher;
     }
 
-    public static LottoResult from(int inputMatchCount) {
+    public static LottoResult from(int matchCount, boolean hasBonusNumber) {
         return Arrays.stream(values())
-                .filter(value -> value.matchCount == inputMatchCount)
+                .filter(value -> value.resultMatcher.test(matchCount, hasBonusNumber))
                 .findAny()
-                .orElse(null);
+                .orElse(NONE);
     }
 
     public int getMoney() {
         return money;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public String getDescription() {
+        return description;
     }
 }

@@ -23,15 +23,16 @@ public class LottoResultView {
         System.out.println("---------");
 
         Arrays.stream(LottoResult.values())
-                .forEach((lottoResult -> System.out.println(String.format("%d개 일치 (%s)- %d개",
-                        lottoResult.getMatchCount(),
+                .filter(lottoResult -> lottoResult != LottoResult.NONE)
+                .forEach((lottoResult -> System.out.println(String.format("%s (%s)- %d개",
+                        lottoResult.getDescription(),
                         getFormattedMoney(lottoResult),
                         getCount(lottoStatistic, lottoResult)))));
 
-        System.out.println(getReveneMessage(lottoStatistic));
+        System.out.println(getRevenueMessage(lottoStatistic));
     }
 
-    private static String getFormattedMoney(LottoResult lottoResult) {
+    private String getFormattedMoney(LottoResult lottoResult) {
         return String.format("%d원", lottoResult.getMoney());
     }
 
@@ -39,7 +40,7 @@ public class LottoResultView {
         return lottoStatistic.getLottoResultCounter().getOrDefault(lottoResult, 0);
     }
 
-    private String getReveneMessage(LottoStatistic lottoStatistic) {
+    private String getRevenueMessage(LottoStatistic lottoStatistic) {
         String msg = String.format("총 수익률은 %.2f입니다.", lottoStatistic.getRevenue());
         if (lottoStatistic.isLost()) {
             msg = msg + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";

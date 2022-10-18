@@ -12,11 +12,11 @@ class PurchaseInfoTest {
 
     @Test
     void 생성() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseInfo(1000, 300).getCount());
+        assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseInfo(300).getCount());
     }
 
     @Test
     void 구매장수() {
-        assertThat(new PurchaseInfo(1000, 2000).getCount()).isEqualTo(2);
+        assertThat(new PurchaseInfo(2000).getCount()).isEqualTo(2);
     }
 }
