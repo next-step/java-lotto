@@ -1,10 +1,8 @@
 package calculator.operator;
 
-import calculator.operator.Calculable;
-
-public class MultiplyOperator implements Calculable {
+public class MultiplyOperator implements Operator {
     @Override
-    public int execute(int num1, int num2) {
-        return num1 * num2;
+    public int applyAsInt(int left, int right) {
+        return left * right;
     }
 }

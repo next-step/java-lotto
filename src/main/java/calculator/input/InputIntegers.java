@@ -1,6 +1,6 @@
 package calculator.input;
 
-import calculator.operator.Calculable;
+import calculator.operator.Operator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,8 +22,8 @@ public class InputIntegers {
         return new InputIntegers(result);
     }
 
-    public void executeOperator(Calculable calculable) {
-        int result = calculable.execute(integers.get(0), integers.get(1));
+    public void executeOperator(Operator operator) {
+        int result = operator.applyAsInt(integers.get(0), integers.get(1));
         replaceResult(result);
     }
 

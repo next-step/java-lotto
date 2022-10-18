@@ -2,10 +2,18 @@ package calculator.operator;
 
 public enum OperatorType {
 
-    ADD,
-    MINUS,
-    MULTIPLY,
-    DIVIDE;
+    ADD("+", new AddOperator()),
+    MINUS("-", new MinusOperator()),
+    MULTIPLY("*", new MultiplyOperator()),
+    DIVIDE("/", new DivideOperator());
+
+    private final String operatorStr;
+    private final Operator operator;
+
+    OperatorType(String operatorStr, Operator operator) {
+        this.operatorStr = operatorStr;
+        this.operator = operator;
+    }
 
     public static OperatorType from(String input) {
         switch (input) {

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class OperatorFactory {
 
-    private final HashMap<OperatorType, Calculable> operatorMap = new HashMap<>();
+    private final HashMap<OperatorType, Operator> operatorMap = new HashMap<>();
 
     public OperatorFactory() {
 
@@ -15,7 +15,7 @@ public class OperatorFactory {
 
     }
 
-    public Calculable getOperator(OperatorType type) {
+    public Operator getOperator(OperatorType type) {
         return operatorMap.get(type);
     }
 }
