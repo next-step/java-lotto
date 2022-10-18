@@ -18,7 +18,7 @@ public class AutoLotto {
 
         outputView.outputLottos(lottos);
 
-        outputView.outputResult(calculator.calculate(lottos, new Numbers(inputView.inputNumbers()),
+        outputView.outputResult(calculator.calculate(lottos, new WinningNumbers(inputView.inputNumbers()),
                 countOfLotto * 1000));
     }
 }

@@ -2,10 +2,10 @@ package autoLotto;
 
 public class Calculator {
 
-    public double calculate(Lottos lottos, Numbers numbers, int amount) {
+    public double calculate(Lottos lottos, WinningNumbers winningNumbers, int amount) {
         Long totalAmount = 0L;
         for (int i = 0 ; i < lottos.getLottosSize() ; i++) {
-            getTotalCount(lottos.getLotto(i).getMatchQuantity(numbers.getNumbers()));
+            getTotalCount(lottos.getLotto(i).getMatchQuantity(winningNumbers.getWinningNumbers()));
             totalAmount = getTotalAmount();
         }
         return Math.floor(((double)totalAmount / amount) * 100) / 100.0;

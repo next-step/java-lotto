@@ -18,7 +18,7 @@ public class NumberTest {
                     numbers.add(9);
                     numbers.add(45);
 
-                    new Numbers(numbers);
+                    new WinningNumbers(numbers);
                 }
         );
     }
@@ -35,7 +35,7 @@ public class NumberTest {
                     numbers.add(10);
                     numbers.add(51);
 
-                    new Numbers(numbers);
+                    new WinningNumbers(numbers);
                 }
         );
     }
