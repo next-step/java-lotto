@@ -15,6 +15,14 @@ public class Exchanger {
         this.amount = purchase();
     }
 
+    public Integer getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
     private String validateInput(String input) {
         if (input == null || input.isEmpty()) {
             throw new InvalidInputException();
@@ -36,14 +44,6 @@ public class Exchanger {
         }
         this.amount = this.purchasePrice / LOTTO_PRICE;
         return this.amount;
-    }
-
-    public Integer getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public Integer getAmount() {
-        return amount;
     }
 
     @Override
