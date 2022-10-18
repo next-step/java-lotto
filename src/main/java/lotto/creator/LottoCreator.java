@@ -1,4 +1,4 @@
-package lotto.utils;
+package lotto.creator;
 
 import lotto.model.Lotteries;
 import lotto.model.Lotto;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.model.LottoNumber.initializeLottoNumbers;
+import static lotto.model.LottoNumber.getCachedInitLottoNumbers;
 
 public class LottoCreator {
 
@@ -20,13 +20,10 @@ public class LottoCreator {
     }
 
     private static Lotto createLotto() {
-        List<LottoNumber> lottoNumberList = initializeLottoNumbers();
-        Collections.shuffle(lottoNumberList);
+        List<LottoNumber> lottoNumberList = getCachedInitLottoNumbers();
+        Collections.shuffle(getCachedInitLottoNumbers());
 
-        List<LottoNumber> createdLotto = lottoNumberList.subList(0, 6);
-        Collections.sort(createdLotto);
-
-        return new Lotto(createdLotto);
+        return new Lotto(lottoNumberList.subList(0, 6));
     }
 
     public static Lotteries getLotteries(int purchasedAmount) {
