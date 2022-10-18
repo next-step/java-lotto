@@ -1,5 +1,7 @@
 package step1;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
@@ -7,7 +9,7 @@ public enum Operator {
     PLUS("+", (a, b) -> a + b),
     MINUS("-", (a, b) -> a - b),
     MULTIPLY("*", (a, b) -> a * b),
-    DIVIDE("-", (a, b) -> a / b)
+    DIVIDE("/", (a, b) -> a / b)
     ;
 
     private final String arithmetic;
@@ -16,6 +18,13 @@ public enum Operator {
     Operator(String arithmetic, BinaryOperator<Integer> formula) {
         this.arithmetic = arithmetic;
         this.formula = formula;
+    }
+
+    public static Operator foundOperator(String arithmetic) {
+        return Arrays.stream(Operator.values())
+                .filter(operator -> Objects.equals(operator.arithmetic, arithmetic))
+                .findFirst()
+                .orElseThrow();
     }
 
     public int executedResult(int operand, int anotherOperand) {
