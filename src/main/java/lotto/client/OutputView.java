@@ -1,6 +1,7 @@
 package lotto.client;
 
 import lotto.model.Lotteries;
+import lotto.model.Profit;
 import lotto.model.enumeration.Rank;
 
 import java.util.Arrays;
@@ -9,7 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static lotto.model.enumeration.Rank.*;
+import static lotto.model.enumeration.Rank.MISS;
+import static lotto.model.enumeration.Rank.SECOND;
 
 public class OutputView {
 
@@ -28,6 +30,7 @@ public class OutputView {
     public static void showCreatedLotteries(Lotteries lotteries) {
         lotteries.getLotteries().forEach(lotto -> {
                     String result = lotto.getLotto().stream()
+                            .sorted()
                             .map(number -> String.valueOf(number.getValue()))
                             .collect(Collectors.joining(", "));
 
@@ -52,9 +55,8 @@ public class OutputView {
                 );
     }
 
-    public static void showReturnRate(Map<Rank, Long> lotteriesRank, int purchaseAmount) {
-        double returnRate = getTotalWinningMoney(lotteriesRank) / purchaseAmount;
-
+    public static void showReturnRate(Profit profit, int purchaseAmount) {
+        double returnRate = profit.getTotalWinningMoney() / purchaseAmount;
         show(RETURN_RATE_FORM.replace("{rate}", String.format("%.2f", returnRate)));
 
         if (returnRate < 1) {

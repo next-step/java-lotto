@@ -21,29 +21,12 @@ class LottoTest {
     @Test
     public void 로또_번호_일치_검증() {
         Lotto lottoNumbers = new Lotto(createLottoNumber(1, 13, 15, 17, 20, 45));
-        List<LottoNumber> lastWinLotto = createLottoNumber(1, 13, 15, 17, 33, 45);
 
-        double result = lottoNumbers.matchCount(new Lotto(lastWinLotto));
+        WinningLotto winningLotto = new WinningLotto(createLottoNumber(1, 13, 15, 17, 33, 45), new LottoNumber(40));
+
+        double result = winningLotto.matchCount(lottoNumbers);
 
         assertThat(result).isEqualTo(5);
-    }
-
-    @Test
-    public void 보너스_볼_일치_반환값_검증() {
-        Lotto lottoNumbers = new Lotto(createLottoNumber(1, 13, 15, 17, 20, 45));
-
-        double result = lottoNumbers.matchBonusBallCount(1);
-
-        assertThat(result).isEqualTo(0.5);
-    }
-
-    @Test
-    public void 보너스_볼_불일치_반환값_검증() {
-        Lotto lottoNumbers = new Lotto(createLottoNumber(1, 13, 15, 17, 20, 45));
-
-        double result = lottoNumbers.matchBonusBallCount(12);
-
-        assertThat(result).isEqualTo(0);
     }
 
     private List<LottoNumber> createLottoNumber(int... number) {

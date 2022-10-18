@@ -2,7 +2,6 @@ package lotto.model;
 
 import lotto.exception.InvalidLottoNumberException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -39,8 +38,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return value;
     }
 
-    public static List<LottoNumber> initializeLottoNumbers() {
-        return new ArrayList<>(LOTTO_NUMBERS);
+    public static List<LottoNumber> getCachedInitLottoNumbers() {
+        return LOTTO_NUMBERS;
     }
 
     @Override

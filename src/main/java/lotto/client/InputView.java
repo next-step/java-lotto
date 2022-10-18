@@ -36,9 +36,9 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public static int scanBonusBall() {
+    public static LottoNumber scanBonusBall() {
         show("보너스 볼을 입력해 주세요.");
 
-        return Integer.parseInt(SCANNER.nextLine());
+        return new LottoNumber(Integer.parseInt(SCANNER.nextLine()));
     }
 }

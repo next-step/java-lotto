@@ -24,9 +24,9 @@ public class Lotteries {
         return this.lotteries.size();
     }
 
-    public Map<Rank, Long> getLotteriesRank(Lotto lastWinLotto, int bonusBall) {
+    public Map<Rank, Long> getLotteriesRank(WinningLotto winningLotto) {
         return lotteries.stream()
-                .map(lotto -> lotto.matchCount(lastWinLotto) + lotto.matchBonusBallCount(bonusBall))
+                .map(winningLotto::matchCount)
                 .map(Rank::valueOf)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
