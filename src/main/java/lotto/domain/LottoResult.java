@@ -10,17 +10,15 @@ public class LottoResult {
     private final Map<Integer, Integer> lottoRankings = new HashMap<>();
 
     private static final int MINIMUM_RANKING = 3;
-    private static final int MAXIMUM_RANKING = 6;
     private static final int BONUS_BALL_RANKING = 7;
 
     private int prizeMoney;
     private String prizePercentage;
 
     public LottoResult() {
-        for (int i = MINIMUM_RANKING; i <= MAXIMUM_RANKING; i++) {
+        for (int i = MINIMUM_RANKING; i <= BONUS_BALL_RANKING; i++) {
             lottoRankings.put(i, 0);
         }
-        lottoRankings.put(BONUS_BALL_RANKING, 0);
     }
 
     public void calculateLottoResult(List<LottoTicket> lottoTickets, List<Integer> numbers, int paidAmount, int bonusBall) {
@@ -33,7 +31,7 @@ public class LottoResult {
     private void addEachResult(LottoTicket lottoTicket, List<Integer> numbers, int bonusBall) {
         int grade = filterMatchingNumbers(lottoTicket, numbers);
 
-        if (grade == 5) {
+        if (grade == 4) {
             checkBonusBallMatch(lottoTicket, bonusBall);
             return;
         }

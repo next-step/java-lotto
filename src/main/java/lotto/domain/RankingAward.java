@@ -25,5 +25,4 @@ public enum RankingAward {
                 .findFirst().orElseThrow(IllegalArgumentException::new);
         return rankingAward.award;
     }
-
 }

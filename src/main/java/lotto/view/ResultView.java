@@ -26,9 +26,16 @@ public class ResultView {
         System.out.println("--------------");
 
         for (Map.Entry<Integer, Integer> entry : lottoResult.getLottoRankings().entrySet()) {
-            System.out.println(entry.getKey() + "개 일치 (" + RankingAward.getAward(entry.getKey()) + "원) - " + entry.getValue() + "개");
+            printBonusBallResult(entry.getKey(), entry.getValue());
         }
-
         System.out.println("총 수익률은 " + lottoResult.getPrizePercentage() + "입니다.");
+    }
+
+    private void printBonusBallResult(int ranking, int award) {
+        if (ranking == 7) {
+            System.out.println((ranking - 2) + "개 일치, 보너스 볼 일치 (" + RankingAward.getAward(ranking) + "원) - " + award + "개");
+            return;
+        }
+        System.out.println(ranking + "개 일치 (" + RankingAward.getAward(ranking) + "원) - " + award + "개");
     }
 }
