@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,36 +9,33 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     private static final int TICKET_AMOUNT = 1000;
-
-    private static final int RANGE_BEGIN_NUMBER = 1;
-    private static final int RANGE_END_NUMBER = 45;
-    private static final int NUMBER_SIZE = 6;
     private final int ticketCount;
 
-
+    private final List<Ticket> ticketList;
 
     public Lotto(int amount) {
         this.ticketCount = convertAmountToTicketCount(amount);
+        this.ticketList = makeTicketList(ticketCount);
     }
 
     public static int convertAmountToTicketCount(int amount) {
         return amount / TICKET_AMOUNT;
     }
 
-    public static List<Integer> generateLottoNumbers() {
-        List<Integer> lottoRangeNumbers = IntStream.range(RANGE_BEGIN_NUMBER, RANGE_END_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-
-        Collections.shuffle(lottoRangeNumbers);
-        lottoRangeNumbers = lottoRangeNumbers.stream()
-                .limit(NUMBER_SIZE)
-                .sorted()
-                .collect(Collectors.toList());
-        return lottoRangeNumbers;
+    public static List<Ticket> makeTicketList(int count) {
+        List<Ticket> ticketList = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Ticket ticket = new Ticket();
+            ticketList.add(ticket);
+        }
+        return ticketList;
     }
 
     public int getTicketCount() {
         return ticketCount;
+    }
+
+    public List<Ticket> getTicketList() {
+        return ticketList;
     }
 }
