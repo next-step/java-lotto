@@ -9,6 +9,10 @@ public class Ticket {
         this.lottoNumbers = LottoNumberGenerator.generate();
     }
 
+    public Ticket(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }

@@ -9,13 +9,21 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     private static final int TICKET_AMOUNT = 1000;
-    private final int ticketCount;
-
     private final List<Ticket> ticketList;
 
+    private int threeMatchRankCount = 0;
+    private int fourMatchRankCount = 0;
+    private int fiveMatchRankCount = 0;
+    private int sixMatchRankCount = 0;
+
+
     public Lotto(int amount) {
-        this.ticketCount = convertAmountToTicketCount(amount);
+        int ticketCount = convertAmountToTicketCount(amount);
         this.ticketList = makeTicketList(ticketCount);
+    }
+
+    public Lotto(List<Ticket> ticketList) {
+        this.ticketList = ticketList;
     }
 
     public static int convertAmountToTicketCount(int amount) {
@@ -32,10 +40,67 @@ public class Lotto {
     }
 
     public int getTicketCount() {
-        return ticketCount;
+        return ticketList.size();
     }
 
     public List<Ticket> getTicketList() {
         return ticketList;
+    }
+
+    public void rankedWinningNumbers(List<Integer> winningNumbers) {
+        for (Ticket ticket : ticketList) {
+            int matchCount = getWinningNumbersMatchCount(winningNumbers, ticket);
+            increaseRankMatchCount(matchCount);
+        }
+    }
+
+
+    public void increaseRankMatchCount(int matchCount) {
+        if (matchCount == 3) {
+            threeMatchRankCount++;
+            return;
+        }
+        if (matchCount == 4) {
+            fourMatchRankCount++;
+            return;
+        }
+        if (matchCount == 5) {
+            fiveMatchRankCount++;
+            return;
+        }
+        if (matchCount == 6) {
+            sixMatchRankCount++;
+        }
+    }
+
+    public static int getWinningNumbersMatchCount(List<Integer> winningNumbers, Ticket ticket) {
+        int matchCount = 0;
+        for (Integer tiketNumber : ticket.getLottoNumbers()) {
+            matchCount = increaseMatchCount(winningNumbers, tiketNumber, matchCount);
+        }
+        return matchCount;
+    }
+
+    public static int increaseMatchCount(List<Integer> winningNumbers, Integer tiketNumber, int matchCount) {
+        if (winningNumbers.contains(tiketNumber)) {
+            matchCount++;
+        }
+        return matchCount;
+    }
+
+    public int getThreeMatchRankCount() {
+        return threeMatchRankCount;
+    }
+
+    public int getFourMatchRankCount() {
+        return fourMatchRankCount;
+    }
+
+    public int getFiveMatchRankCount() {
+        return fiveMatchRankCount;
+    }
+
+    public int getSixMatchRankCount() {
+        return sixMatchRankCount;
     }
 }
