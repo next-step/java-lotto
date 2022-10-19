@@ -1,6 +1,6 @@
-package calculator;
+package calculator.domain;
 
-import utils.StringSplit;
+import calculator.utils.StringSplit;
 
 public class Calculator {
     public static int from(String express) {
