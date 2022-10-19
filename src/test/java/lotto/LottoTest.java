@@ -113,4 +113,13 @@ public class LottoTest {
         assertThat(lotto.getFiveMatchRankCount()).isEqualTo(0);
         assertThat(lotto.getSixMatchRankCount()).isEqualTo(0);
     }
+
+    @Test
+    void test() {
+        Lotto lotto = new Lotto(14000);
+
+        List<Integer> lottoWinnigNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
+        lotto.rankedWinningNumbers(lottoWinnigNumbers);
+
+    }
 }

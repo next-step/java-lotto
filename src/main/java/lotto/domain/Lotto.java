@@ -9,6 +9,10 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     private static final int TICKET_AMOUNT = 1000;
+    public static final int THREE_MATCH_RANK_REWARD = 5000;
+    public static final int FOUR_MATCH_RANK_REWARD = 50000;
+    public static final int FIVE_MATCH_RANK_REWARD = 1500000;
+    public static final int SIX_MATCH_RANK_REWARD = 2000000000;
     private final List<Ticket> ticketList;
 
     private int threeMatchRankCount = 0;

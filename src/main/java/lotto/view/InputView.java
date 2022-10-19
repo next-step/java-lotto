@@ -20,7 +20,8 @@ public class InputView {
     public static List<Integer> inputWinnigNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputText = SCANNER.nextLine();
-        String[] tokens = inputText.trim().split(",");
-        return Arrays.stream(tokens).map(NumberUtil::getPositiveInteger).collect(Collectors.toList());
+        String[] tokens = inputText.split(",");
+
+        return Arrays.stream(tokens).map(String::trim).map(NumberUtil::getPositiveInteger).collect(Collectors.toList());
     }
 }

@@ -16,5 +16,7 @@ public class LottoMain {
 
         List<Integer> winnigNumbers = InputView.inputWinnigNumber();
         lotto.rankedWinningNumbers(winnigNumbers);
+
+        ResultView.printLottoResult(lotto);
     }
 }
