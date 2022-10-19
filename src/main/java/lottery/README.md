@@ -42,7 +42,8 @@
   - 타 클래스에서도 `일치하는 로또 번호의 개수`로 사용되는 변수의 이름을 `rank`에서 `matchingCount`로 변경
 - [x] `LotteryRank`에 당첨되지 않은 로또에 해당하는 value `NONE(0, 0)`를 추가하고, `LotteryResult`의 `EnumMap`에 함께 저장하여 `totalPurchaseAmount`를 제거하고 계산으로 구하도록 변경
   - enum value의 이름도 등수(기존의 `rank`와 다름)로 변경 
-- [ ] `LotteryRank`에서 기존에 인자로 `rank(matchingCount)`를 받아 값을 반환하던 메소드들 `LotteryRank` 인스턴스를 받아 동작하도록 통일, 제거
+- [x] `LotteryRank`에서 기존에 인자로 `rank(matchingCount)`를 받아 값을 반환하던 메소드들 `LotteryRank` 인스턴스를 받아 동작하도록 통일, 제거
+  - [x] static 메소드들도 가능하면 인스턴스 메소드로 변경
 
 ## 기능 요구사항
 - [ ] 보너스 볼 입력받는 로직 추가 - `InputView`

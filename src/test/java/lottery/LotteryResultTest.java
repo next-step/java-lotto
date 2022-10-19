@@ -25,8 +25,8 @@ public class LotteryResultTest {
 
     @Test
     void getWinningCountOfRank() {
-        assertThat(lotteryResult.getWinningCountOfRank(3)).isEqualTo(2);
-        assertThat(lotteryResult.getWinningCountOfRank(6)).isEqualTo(1);
+        assertThat(lotteryResult.getWinningCountOfRank(LotteryRank.FOURTH)).isEqualTo(2);
+        assertThat(lotteryResult.getWinningCountOfRank(LotteryRank.FIRST)).isEqualTo(1);
     }
 
     @Test

@@ -2,7 +2,6 @@ package lottery;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public enum LotteryRank {
 
@@ -20,22 +19,16 @@ public enum LotteryRank {
         this.prize = prize;
     }
 
-    public static int getMatchingCount(LotteryRank lotteryRank) {
-        return lotteryRank.matchingCount;
+    public int getMatchingCount() {
+        return matchingCount;
     }
 
-    public static int getPrize(LotteryRank lotteryRank) {
-        return lotteryRank.prize;
+    public int getPrize() {
+        return prize;
     }
 
-    public static List<Integer> getUsedMatchingCounts() {
-        return Arrays.stream(values())
-                .map(LotteryRank::getMatchingCount)
-                .collect(Collectors.toList());
-    }
-
-    public static int getPrizeOfMatchingCount(int matchingCount) {
-        return getPrize(valueOf(matchingCount));
+    public static List<LotteryRank> getLotteryRanks() {
+        return List.of(values());
     }
 
     public static LotteryRank valueOf(int matchingCount) {

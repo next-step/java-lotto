@@ -2,12 +2,9 @@ package lottery;
 
 import java.util.EnumMap;
 
-import static lottery.LotteryRank.valueOf;
-
 public class LotteryResult {
 
     private final EnumMap<LotteryRank, Integer> winningCounts;
-
     private final int lotteryPrice;
 
     public LotteryResult(EnumMap<LotteryRank, Integer> winningCounts, int lotteryPrice) {
@@ -15,23 +12,24 @@ public class LotteryResult {
         this.lotteryPrice = lotteryPrice;
     }
 
-    public int getWinningCountOfRank(int matchingCount) {
-        return winningCounts.getOrDefault(valueOf(matchingCount), 0);
+    public int getWinningCountOfRank(LotteryRank lotteryRank) {
+        return winningCounts.getOrDefault(lotteryRank, 0);
     }
 
     public double getReturnRate() {
-        double totalWonPrizes = 0.0;
-        for (LotteryRank lotteryRank : winningCounts.keySet()) {
-            int matchingCount = LotteryRank.getMatchingCount(lotteryRank);
-            totalWonPrizes += LotteryRank.getPrizeOfMatchingCount(matchingCount) * getWinningCountOfRank(matchingCount);
-        }
-        return totalWonPrizes / (getTotalPurchaseAmount() * lotteryPrice);
+        return getTotalPrizes() / (getTotalPurchaseAmount() * lotteryPrice);
+    }
+
+    private double getTotalPrizes() {
+        return winningCounts.keySet().stream()
+                .mapToDouble(lotteryRank -> lotteryRank.getPrize() * getWinningCountOfRank(lotteryRank))
+                .sum();
     }
 
     private int getTotalPurchaseAmount() {
-        return winningCounts.values().stream().
-                mapToInt(Integer::intValue).
-                sum();
+        return winningCounts.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
 }

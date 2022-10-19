@@ -8,25 +8,14 @@ public class LotteryRankTest {
 
     @Test
     void getRank() {
-        assertThat(LotteryRank.getMatchingCount(LotteryRank.FOURTH)).isEqualTo(3);
-        assertThat(LotteryRank.getMatchingCount(LotteryRank.FIRST)).isEqualTo(6);
+        assertThat(LotteryRank.FOURTH.getMatchingCount()).isEqualTo(3);
+        assertThat(LotteryRank.FIRST.getMatchingCount()).isEqualTo(6);
     }
 
     @Test
     void getPrize() {
-        assertThat(LotteryRank.getPrize(LotteryRank.FOURTH)).isEqualTo(5000);
-        assertThat(LotteryRank.getPrize(LotteryRank.FIRST)).isEqualTo(2000000000);
-    }
-
-    @Test
-    void getUsedRanks() {
-        assertThat(LotteryRank.getUsedMatchingCounts()).containsOnly(0, 3, 4, 5, 6);
-    }
-
-    @Test
-    void getPrizeOfMatchingCount() {
-        assertThat(LotteryRank.getPrizeOfMatchingCount(3)).isEqualTo(LotteryRank.getPrize(LotteryRank.FOURTH));
-        assertThat(LotteryRank.getPrizeOfMatchingCount(6)).isEqualTo(LotteryRank.getPrize(LotteryRank.FIRST));
+        assertThat(LotteryRank.FOURTH.getPrize()).isEqualTo(5000);
+        assertThat(LotteryRank.FIRST.getPrize()).isEqualTo(2000000000);
     }
 
     @Test
