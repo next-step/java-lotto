@@ -8,7 +8,12 @@ import static java.util.Collections.shuffle;
 
 public class LottoNumber {
 
-    protected static final Integer LOTTO_NUMBER_SIZE = 6;
+    private LottoNumber() {
+        throw new AssertionError();
+    }
+
+    private static final Integer LOTTO_NUMBER_MIN_INDEX = 0;
+    private static final Integer LOTTO_NUMBER_MAX_INDEX = 6;
     private static final Integer LOTTO_DEFAULT_START_NUMBER = 1;
     private static final Integer LOTTO_DEFAULT_END_NUMBER = 45;
 
@@ -26,7 +31,7 @@ public class LottoNumber {
 
     private static List<Integer> makeAutoNumberList(List<Integer> defaultNumberList) {
         shuffle(defaultNumberList);
-        List<Integer> lottoNumberList = defaultNumberList.subList(0, LOTTO_NUMBER_SIZE);
+        List<Integer> lottoNumberList = defaultNumberList.subList(LOTTO_NUMBER_MIN_INDEX, LOTTO_NUMBER_MAX_INDEX);
         lottoNumberList.sort(Comparator.comparing(Integer::intValue));
         return lottoNumberList;
     }

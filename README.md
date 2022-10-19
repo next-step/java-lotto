@@ -27,14 +27,18 @@
 
 # 로또
 
+## 로또(Lotto)
+- numberList 를 가지고 있다.
+
+## 로또들(Lottos)
+- Lotto 객체를 관리한다.
+- 발행 수량을 가지고 있다.
+- 자동 픽을 한다.
+
 ## 교환기(LottoExchanger)
 - lottos = purchaseLottos(금액)
 - 금액은 1000 단위로 나눈다.
 - 금액이 1000 단위가 아니라면 에러 메시지를 보낸다.
-
-## 추첨기(Lottery)
-- 수량을 받는다.
-- 수량 만큼 로또를 생성한다. (List<Lotto> -> Lottos)
 
 ## 로또 번호 생성기(LottoNumber)
 - 1 ~ 45 번 리스트를 가지고 있다.

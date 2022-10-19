@@ -5,6 +5,10 @@ import lotto.exception.InvalidInputException;
 
 public class LottoExchanger {
 
+    private LottoExchanger() {
+        throw new AssertionError();
+    }
+
     private static final Integer LOTTO_PRICE = 1000;
 
     public static Lottos purchaseLottos(Integer purchasePrice) {
