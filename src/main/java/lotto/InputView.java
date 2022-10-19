@@ -22,4 +22,10 @@ public class InputView {
         return list;
     }
 
+    public static int enterBonusBall() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
 }

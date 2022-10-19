@@ -12,11 +12,11 @@ public class LottoMachineTest {
         // given
         LottoMachine lottoMachine = new LottoMachine(new LottoTestCalculateStrategy());
         // when
-        List<List<LottoNumber>> lottoes = lottoMachine.buyLottoes(null);
+        List<SelectedLottoes> lottoes = lottoMachine.buyLottoes(null);
         // then
         assertThat(lottoes).hasSize(1);
-        assertThat(lottoes.get(0)).hasSize(1);
-        assertThat(lottoes.get(0).get(0)).isEqualTo(new LottoNumber(1));
+        assertThat(lottoes.get(0).getSelectedLottoes()).hasSize(1);
+        assertThat(lottoes.get(0).getSelectedLottoes().get(0)).isEqualTo(new LottoNumber(1));
     }
 
     @Test
@@ -27,6 +27,6 @@ public class LottoMachineTest {
         Statistics statistics = lottoMachine.calculateStatistics(null, null, null);
         // then
         assertThat(statistics.getEarningRate()).isEqualTo(0.0);
-        assertThat(statistics.getWinningStats()).containsEntry(WinningPrize.THREE, 1);
+        assertThat(statistics.getWinningStats()).containsEntry(RANK.THREE, 1);
     }
 }

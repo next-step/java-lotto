@@ -3,9 +3,11 @@ package lotto;
 import java.util.List;
 
 public interface LottoCalculateStrategy {
-    int calculateLottoTicketCount(Money money);
+    int countLottoTickets(Money money);
 
-    List<List<LottoNumber>> buyLottoes(int ticketCount);
+    Money getTicketPrice();
 
-    Statistics calculateStatistics(List<List<LottoNumber>> lottoes, List<LottoNumber> winningLottoes, Money buyAmount);
+    List<SelectedLottoes> buyLottoTickets(int ticketCount);
+
+    Statistics calculateStatistics(List<SelectedLottoes> lottoes, LottoWinningStrategy winningLottoes, Money buyAmount);
 }

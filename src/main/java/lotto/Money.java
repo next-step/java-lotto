@@ -21,8 +21,8 @@ public class Money {
         return new Money(money * count);
     }
 
-    public int countBy(Money other) {
-        return money / other.money;
+    public int countBy(LottoCalculateStrategy lottoCalculateStrategy) {
+        return money / lottoCalculateStrategy.getTicketPrice().money;
     }
 
     public double calculateRate(Money other) {

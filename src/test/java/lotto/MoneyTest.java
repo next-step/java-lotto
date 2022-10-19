@@ -33,7 +33,7 @@ public class MoneyTest {
         Money money1 = new Money(1000);
         Money money2 = new Money(1000);
         // when
-        int result = money1.countBy(money2);
+        int result = money1.countBy(new LottoTestCalculateStrategy());
         // then
         assertThat(result).isEqualTo(1);
     }
