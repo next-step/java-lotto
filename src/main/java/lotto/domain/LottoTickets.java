@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoTickets {
 
@@ -24,6 +26,15 @@ public class LottoTickets {
         return new LottoTickets(createTickets(tickets));
     }
 
+    public static LottoTickets of(int money, List<Lotto> manualLottos) {
+        int tickets = countTicket(money, manualLottos.size());
+        List<Lotto> randomLottos = createTickets(tickets);
+        List<Lotto> lottos = Stream.of(manualLottos, randomLottos)
+            .flatMap(Collection::stream)
+            .collect(Collectors.toList());
+        return new LottoTickets(lottos);
+    }
+
     private static void valid(int money) {
         if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException(LOTTO_PRICE + " 미만은 로또를 구매할 수 없습니다.");
@@ -33,6 +44,12 @@ public class LottoTickets {
     private static int countTicket(int money) {
         valid(money);
         return money / LOTTO_PRICE;
+    }
+
+    private static int countTicket(int money, int manualCount) {
+        int leftMoney = money - (manualCount * LOTTO_PRICE);
+        valid(leftMoney);
+        return leftMoney / LOTTO_PRICE;
     }
 
     public int getTicketCount() {
