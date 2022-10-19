@@ -16,8 +16,8 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult getResult(Set<Number> winners) {
-        return new LottoResult(getLottos(), winners);
+    public LottoResult getResult(Set<Number> winners, Number bonus) {
+        return new LottoResult(getLottos(), winners, bonus);
     }
 
     @Override
