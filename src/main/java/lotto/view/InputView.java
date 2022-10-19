@@ -2,9 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -22,14 +20,14 @@ public class InputView {
     public static List<Integer> inputWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.next();
-        List<Integer> result = Arrays.stream(input.split(","))
+        Set<Integer> result = Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-        if (result.stream().distinct().count() != Lotto.COUNT) {
+        if (result.size() != Lotto.COUNT) {
             throw new IllegalArgumentException("6개의 서로 다른 당첨 번호가 입력되어야 합니다.");
         }
-        return result;
+        return new ArrayList<>(result);
     }
 }
