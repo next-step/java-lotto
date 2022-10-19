@@ -1,20 +1,15 @@
 package step3.domian;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
 public class Revenue {
 
-    private int revenue;
+    private final int revenue;
 
-    public Revenue(List<Integer> results) {
-        int result = 0;
-        result += (Prize.THREE_PRIZE.prizeMoney * results.get(Prize.THREE_PRIZE.position));
-        result += (Prize.FOUR_PRIZE.prizeMoney * results.get(Prize.FOUR_PRIZE.position));
-        result += (Prize.FIVE_PRIZE.prizeMoney * results.get(Prize.FIVE_PRIZE.position));
-        result += (Prize.FIVE_BONUS_PRIZE.prizeMoney * results.get(Prize.FIVE_BONUS_PRIZE.position));
-        result += (Prize.SIX_PRIZE.prizeMoney * results.get(Prize.SIX_PRIZE.position));
-        this.revenue = result;
+    public Revenue(LottoResult results) {
+        this.revenue = Arrays.stream(Prize.values()).map(it -> it.prizeMoney * results.getResultCount(it)).mapToInt(it -> it.intValue()).sum();
     }
 
     public Revenue(int revenue) {
@@ -34,7 +29,7 @@ public class Revenue {
         return Objects.hash(revenue);
     }
 
-    public float calculatePercentage(int lottoPrice) {
-        return (float) this.revenue / (float) lottoPrice;
+    public double calculatePercentage(int lottoPrice) {
+        return (double) this.revenue / (double) lottoPrice;
     }
 }

@@ -1,19 +1,35 @@
 package step3.domian;
 
 public enum Prize {
-    THREE_PRIZE(3, 5_000, "3개 일치 (5000원)- "),
-    FOUR_PRIZE(4, 50_000, "4개 일치 (50000원)- "),
-    FIVE_PRIZE(5, 1_500_000, "5개 일치 (1500000원)- "),
-    FIVE_BONUS_PRIZE(0, 30_000_000, "5개 일치, 보너스 볼 일치(30000000원)- "),
-    SIX_PRIZE(6, 2_000_000_000, "6개 일치 (2000000000원)- ");
+    THREE_PRIZE(5_000),
+    FOUR_PRIZE(50_000),
+    FIVE_PRIZE(1_500_000),
+    FIVE_BONUS_PRIZE(30_000_000),
+    SIX_PRIZE(2_000_000_000);
 
-    public final int position;
     public final int prizeMoney;
-    public final String text;
 
-    Prize(int position, int prizeMoney, String text) {
-        this.position = position;
+
+    Prize(int prizeMoney) {
         this.prizeMoney = prizeMoney;
-        this.text = text;
+    }
+
+    public static Prize getPrize(int count, Lotto lotto, int bonus) {
+        switch (count) {
+            case 3:
+                return THREE_PRIZE;
+            case 4:
+                return FOUR_PRIZE;
+            case 5: {
+                if (lotto.isContain(bonus) == 1) return FIVE_BONUS_PRIZE;
+                return FIVE_PRIZE;
+            }
+            case 6:
+                return SIX_PRIZE;
+            case 7:
+                return FIVE_BONUS_PRIZE;
+            default:
+                return null;
+        }
     }
 }

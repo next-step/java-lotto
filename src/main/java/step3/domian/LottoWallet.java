@@ -1,8 +1,8 @@
 package step3.domian;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoWallet {
 
@@ -12,20 +12,11 @@ public class LottoWallet {
         this.lottos = lottos;
     }
 
-    public List<Integer> compareWithLastLotto(LastWinner lastWinner) {
-        List<Integer> results = new ArrayList<>(Collections.nCopies(7, 0));
-        for (Lotto lotto : this.lottos) {
-            int count = lotto.countSameNumber(lastWinner);
-            int position = getPosition(count, lotto, lastWinner.bonus);
-            results.set(position, results.get(position) + 1);
-        }
-        return results;
-    }
-
-    private int getPosition(int count, Lotto lotto, int bonus) {
-        if (count == 4 && lotto.isContain(bonus) == 1) {
-            return 0;
-        }
-        return count;
+    public LottoResult compareWithLastLotto(LastWinner lastWinner) {
+        return new LottoResult(this.lottos.stream().map(lotto -> {
+                    int count = lotto.countSameNumber(lastWinner);
+                    return Prize.getPrize(count, lotto, lastWinner.bonus);
+                }).filter(it -> it != null)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }
 }
