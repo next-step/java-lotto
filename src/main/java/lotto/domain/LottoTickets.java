@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import lotto.dto.LottoDto;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<Lotto> tickets;
@@ -17,6 +20,10 @@ public class LottoTickets {
             lottoTickets.add(lotto);
         }
         return lottoTickets;
+    }
+
+    public List<LottoDto> generateTickets() {
+        return tickets.stream().map(LottoDto::new).collect(Collectors.toList());
     }
 
     public List<Lotto> getTickets() {
