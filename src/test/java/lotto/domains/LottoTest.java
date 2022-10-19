@@ -13,8 +13,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class LottoTest {
     @ParameterizedTest
     @MethodSource("parametersProvider")
-    void Given_LottoAndWinner_When_GetPrize_Then_EqualsTo_Expected(Lotto winner, Prize expected) {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+    void Given_LottoAndWinner_When_GetPrize_Then_EqualsTo_Expected(Lotto lotto, Prize expected) {
+        LottoWinner winner = new LottoWinner(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
         assertThat(lotto.getPrize(winner)).isEqualTo(expected);
     }
@@ -27,11 +27,11 @@ public class LottoTest {
     static Stream<Arguments> parametersProvider() {
         return Stream.of(
                 arguments(new Lotto(10, 11, 12, 13, 14, 15), Prize.NONE),
-                arguments(new Lotto(1, 10, 11, 12, 13, 14), Prize.NONE),
-                arguments(new Lotto(1, 2, 10, 11, 12, 13), Prize.NONE),
-                arguments(new Lotto(1, 2, 3, 10, 11, 12), Prize.FOURTH),
-                arguments(new Lotto(1, 2, 3, 4, 10, 11), Prize.THIRD),
-                arguments(new Lotto(1, 2, 3, 4, 5, 10), Prize.SECOND),
+                arguments(new Lotto(1, 2, 7, 10, 11, 12), Prize.NONE),
+                arguments(new Lotto(1, 2, 3, 10, 11, 12), Prize.FIFTH),
+                arguments(new Lotto(1, 2, 3, 4, 10, 11), Prize.FOURTH),
+                arguments(new Lotto(1, 2, 3, 4, 5, 10), Prize.THIRD),
+                arguments(new Lotto(1, 2, 3, 4, 5, 7), Prize.SECOND),
                 arguments(new Lotto(1, 2, 3, 4, 5, 6), Prize.FIRST)
         );
     }

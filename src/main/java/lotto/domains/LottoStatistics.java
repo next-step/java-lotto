@@ -11,7 +11,7 @@ public class LottoStatistics {
     private final long totalPurchased;
     private final Map<Prize, Long> statistics;
 
-    public LottoStatistics(List<Lotto> lottoList, Lotto lastWinner) {
+    public LottoStatistics(List<Lotto> lottoList, LottoWinner lastWinner) {
         this.totalPurchased = lottoList.size() * LottoGenerator.LOTTO_PRICE;
         this.statistics = lottoList.stream()
                 .map(lotto -> lotto.getPrize(lastWinner))

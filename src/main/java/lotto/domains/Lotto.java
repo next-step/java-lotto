@@ -33,15 +33,22 @@ public class Lotto {
         return new HashSet<>(numbers).size() != LOTTO_NUMBERS_SIZE;
     }
 
-    public Prize getPrize(Lotto winner) {
+    public Prize getPrize(LottoWinner winner) {
         long count = numbers.stream()
                 .filter(num -> winner.contains(num))
                 .count();
 
-        return Prize.find(count);
+        boolean bonus = numbers.stream()
+                .anyMatch(num -> winner.isBonus(num));
+
+        return Prize.find(count, isPossibleGetBonus(count) && bonus);
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    private boolean isPossibleGetBonus(long count) {
+        return count == Prize.THIRD.getCorrectCount();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 
