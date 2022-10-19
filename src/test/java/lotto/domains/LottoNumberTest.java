@@ -18,4 +18,16 @@ public class LottoNumberTest {
     void Given_OutRangeNumber_When_CreateLottoNumber_Then_Fail(int number) {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(number));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "10", "45"})
+    void testSuccessCreateLottoNumberByString(String string) {
+        assertThatNoException().isThrownBy(() -> LottoNumber.of(string));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "46"})
+    void testFailCreateLottoNumberByString(String string) {
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(string));
+    }
 }
