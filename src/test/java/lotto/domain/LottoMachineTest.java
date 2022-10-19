@@ -1,12 +1,15 @@
 package lotto.domain;
 
+import lotto.exception.EmptyIssuedLottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+import static lotto.domain.LottoNumber.*;
 import static lotto.domain.LottoNumber.lottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,16 +17,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoMachineTest {
 
     private LottoMachine lottoMachine;
+    private List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumbers());
 
     @BeforeEach
     public void initialMachine() {
-        this.lottoMachine = new LottoMachine(lottoNumbers());
+        this.lottoMachine = new LottoMachine();
     }
 
     @Test
     @DisplayName("자동으로 발급된 로또의 수를 검증한다.")
     void automaticIssue() {
-        lottoMachine.automaticIssue(10);
+        lottoMachine.automaticIssue(lottoNumbers, 10);
         assertThat(lottoMachine.lottoTickets()).hasSize(10);
     }
 
@@ -37,15 +41,15 @@ public class LottoMachineTest {
     @Test
     @DisplayName("발급된 자동 로또와 수동 로또의 수를 조회한다.")
     void getLottoTickets() {
-        lottoMachine.automaticIssue(15);
+        lottoMachine.automaticIssue(lottoNumbers, 15);
         lottoMachine.manualIssue(new ArrayList<>(Collections.singleton("1,7,13,18,22,43".split(","))));
         assertThat(lottoMachine.lottoTickets()).hasSize(16);
     }
 
     @Test
     @DisplayName("발급된 로또가 없으면 예외가 발생한다.")
-    void unIssuedLottoException() {
+    void unissuedLottoException() {
         assertThatThrownBy(() -> lottoMachine.lottoTickets())
-                .isInstanceOf(RuntimeException.class);
+                .isExactlyInstanceOf(EmptyIssuedLottoException.class);
     }
 }

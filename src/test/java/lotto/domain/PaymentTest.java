@@ -13,19 +13,22 @@ public class PaymentTest {
     @ParameterizedTest
     @DisplayName("생성자 금액 검증 - 최소금액(천원), 최대 금액(십만원)")
     @ValueSource(ints = {500, 100500})
-    void constructorDI(int amount) {
-        assertThatThrownBy(() -> new Payment(amount, 0)).isInstanceOf(IllegalArgumentException.class);
+    void checkAmountRange(int amount) {
+        assertThatThrownBy(() -> new Payment(amount, 0))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("금액 조회")
-    void amount() {
-        assertThat(new Payment(10000, 0).amount()).isEqualTo(10000);
+    @DisplayName("입력된 금액을 조회한다.")
+    void checkAmount() {
+        assertThat(new Payment(10000, 0).amount())
+                .isEqualTo(10000);
     }
 
     @Test
-    @DisplayName("구매 가능 수량 조회")
-    void count() {
-        assertThat(new Payment(10000, 0).automaticCount()).isEqualTo(10);
+    @DisplayName("입력된 구매 가능 수량을 조회 한다.")
+    void checkCount() {
+        assertThat(new Payment(10000, 0).automaticCount())
+                .isEqualTo(10);
     }
 }
