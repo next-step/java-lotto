@@ -17,8 +17,8 @@ class StringCalculatorTest {
     @EmptySource
     void create(String equation) {
         assertThatThrownBy(() -> calculator.calculate(equation))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("공백이나 null은 계산할 수 없습니다.");
+                .isInstanceOf(CaculateException.class)
+                .hasMessage(ErrorCode.CALCULATE_NULL.getErrorMessage());
     }
 
     @Test
@@ -34,7 +34,7 @@ class StringCalculatorTest {
     @Test
     void wrong_equation() {
         assertThatThrownBy(() -> calculator.calculate("2 + 2 - 1 1"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 수식 입니다.");
+                .isInstanceOf(CaculateException.class)
+                .hasMessage(ErrorCode.WRONG_EQUATION_FORMAT.getErrorMessage());
     }
 }

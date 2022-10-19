@@ -23,7 +23,7 @@ public enum Operator {
     public static Operator of(String sign) {
         Operator operator = find(sign);
         if (Objects.isNull(operator)) {
-            throw new IllegalArgumentException("잘못된 연산자 입니다.");
+            throw new CaculateException(ErrorCode.WRONG_OPERATOR);
         }
         return operator;
     }
