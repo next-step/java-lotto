@@ -31,4 +31,9 @@ public class Input {
         return numbers;
     }
 
+    public static Number inputBonusNumber() {
+        String input = input();
+        return Number.of(input);
+    }
+
 }

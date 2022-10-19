@@ -3,6 +3,8 @@ package lotto;
 import lotto.view.Input;
 import lotto.view.Output;
 
+import java.util.Set;
+
 public class LottoController {
 
     public static void main(String[] args) {
@@ -14,6 +16,9 @@ public class LottoController {
         Output.printPurchasedLotto(lottos);
 
         Output.printWinnerNumbersRequest();
-        Output.printResult(lottos.getResult(Input.inputWinnerNumbers()));
+        Set<Number> winnerNumbers = Input.inputWinnerNumbers();
+        Output.printBonusNumbersRequest();
+        Number bonusNumber = Input.inputBonusNumber();
+        Output.printResult(lottos.getResult(winnerNumbers, bonusNumber));
     }
 }

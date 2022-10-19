@@ -3,10 +3,8 @@ package lotto.view;
 import lotto.Lotto;
 import lotto.LottoResult;
 import lotto.Lottos;
-import lotto.Number;
 
 import java.util.List;
-import java.util.Set;
 
 public class Output {
     private Output() {
@@ -32,6 +30,10 @@ public class Output {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
+    public static void printBonusNumbersRequest() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     public static void printResult(LottoResult result) {
         System.out.println();
         System.out.println("당첨 통계");
@@ -39,6 +41,7 @@ public class Output {
         System.out.printf("3개 일치 (5000원)- %d개\n", result.numberOfFourthRank());
         System.out.printf("4개 일치 (50000원)- %d개\n", result.numberOfThirdRank());
         System.out.printf("5개 일치 (1500000원)- %d개\n", result.numberOfSecondRank());
+        System.out.printf("5개 일치, 보너스 볼 일치(30000000원) - %d개\n", result.numberOfSecondRankWithBonus());
         System.out.printf("6개 일치 (2000000000원)- %d개\n", result.numberOfFirstRank());
         if (result.hasBenefit()) {
             System.out.printf("총 수익률은 %.2f입니다.(어떻게 하셧죠??????)", result.calculateProfitRate());
