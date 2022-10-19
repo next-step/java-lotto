@@ -15,6 +15,8 @@ public class LottoRandomGenerator {
 
         return Lotto.of(shuffleNumbers.stream()
             .limit(Lotto.LOTTO_NUMBER_SIZE)
+            .mapToInt(LottoNumber::toInt)
+            .boxed()
             .collect(Collectors.toList()));
     }
 }

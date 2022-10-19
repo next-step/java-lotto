@@ -14,9 +14,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        this.lotto = Lotto.of(
-            List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
+        this.lotto = Lotto.of(List.of(1,2,3,4,5,6));
     }
 
     @Test
@@ -28,18 +26,14 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호는 중복될 수 없다.")
     void duplicate() {
-        assertThatThrownBy(() -> Lotto.of(
-            List.of(LottoNumber.from(1), LottoNumber.from(1), LottoNumber.from(1),
-                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))).isInstanceOf(
+        assertThatThrownBy(() -> Lotto.of(List.of(1,2,3,4,5,5))).isInstanceOf(
             IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("지난 주 당첨 번호와 일치하는 개수를 반환한다.")
     void matches() {
-        Lotto winningNumbers = Lotto.of(
-            List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(10)));
+        Lotto winningNumbers = Lotto.of(List.of(1,2,3,4,5,10));
         assertThat(lotto.matches(winningNumbers)).isEqualTo(5);
     }
 

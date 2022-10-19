@@ -22,11 +22,11 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<LottoNumber> inputLottoNumberLastResult() {
+    public static List<Integer> inputLottoNumberLastResult() {
         System.out.println(LAST_LOTTO_RESULT);
         return Arrays.stream(SCANNER.next().split(","))
             .mapToInt(Integer::parseInt)
-            .mapToObj(LottoNumber::from)
+            .boxed()
             .collect(Collectors.toList());
     }
 
@@ -44,9 +44,9 @@ public class InputView {
         System.out.println(MANUAL_LOTTO_NUMBER);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            List<LottoNumber> collect = Arrays.stream(SCANNER.next().split(","))
+            List<Integer> collect = Arrays.stream(SCANNER.next().split(","))
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::from)
+                .boxed()
                 .collect(Collectors.toList());
             lottos.add(Lotto.of(collect));
         }

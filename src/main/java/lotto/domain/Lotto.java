@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
+
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private List<LottoNumber> lotto;
@@ -12,7 +14,10 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public static Lotto of(List<LottoNumber> lottoNumbers) {
+    public static Lotto of(List<Integer> values) {
+        List<LottoNumber> lottoNumbers = values.stream()
+            .map(LottoNumber::from)
+            .collect(Collectors.toList());
         return new Lotto(lottoNumbers);
     }
 
