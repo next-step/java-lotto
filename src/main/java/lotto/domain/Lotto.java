@@ -15,7 +15,7 @@ public class Lotto {
         return rank;
     }
 
-    public Lotto purchase(List<Integer> numberList) {
+    public Lotto makeNumbers(List<Integer> numberList) {
         this.numberList = numberList;
         return this;
     }
