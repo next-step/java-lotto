@@ -19,10 +19,10 @@ public class Formula {
     }
 
     private void validate(String formula) {
-        if(formula == null){
+        if (formula == null) {
             throw new IllegalArgumentException("null 사용 금지");
         }
-        if(formula.isBlank()){
+        if (formula.isBlank()) {
             throw new IllegalArgumentException("빈 문자열 사용 금지");
         }
     }
