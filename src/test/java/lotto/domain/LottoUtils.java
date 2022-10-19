@@ -24,7 +24,7 @@ public class LottoUtils {
     }
 
     public static LottoGame createLottoGame() {
-        LottoGame lottoGame = new LottoGame(0, 10);
+        LottoGame lottoGame = new LottoGame(10000, 10);
 
         List<String> numbers = new ArrayList<>();
         numbers.add("1, 2, 3, 4, 5, 6");    //1
