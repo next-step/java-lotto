@@ -6,10 +6,11 @@ import java.util.stream.Collectors;
 
 public enum LotteryRank {
 
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    FIRST(6, 2000000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FOURTH(3, 5000),
+    NONE(0, 0);
 
     private final int matchingCount;
     private final int prize;
@@ -33,11 +34,6 @@ public enum LotteryRank {
                 .collect(Collectors.toList());
     }
 
-    public static boolean isUsedMatchingCount(int matchingCount) {
-        return Arrays.stream(values())
-                .anyMatch(lotteryRank -> lotteryRank.matchingCount == matchingCount);
-    }
-
     public static int getPrizeOfMatchingCount(int matchingCount) {
         return getPrize(valueOf(matchingCount));
     }
@@ -46,7 +42,7 @@ public enum LotteryRank {
         return Arrays.stream(values())
                 .filter(lotteryRank -> lotteryRank.matchingCount == matchingCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("지원하지 않는 등수입니다."));
+                .orElse(NONE);
     }
 
 }

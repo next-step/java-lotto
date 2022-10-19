@@ -15,10 +15,11 @@ public class LotteryResultTest {
     @BeforeEach
     void setUp() {
         EnumMap<LotteryRank, Integer> winningCounts = new EnumMap<>(Map.of(
-                LotteryRank.THREE, 2,
-                LotteryRank.SIX, 1
+                LotteryRank.FOURTH, 2,
+                LotteryRank.FIRST, 1,
+                LotteryRank.NONE, 7
         ));
-        lotteryResult = new LotteryResult(winningCounts, 10, 1000);
+        lotteryResult = new LotteryResult(winningCounts, LotteryCompany.LOTTERY_PRICE);
     }
 
 

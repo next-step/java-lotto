@@ -2,6 +2,7 @@ package lottery;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class WinningLottery extends Lottery {
@@ -10,14 +11,13 @@ public class WinningLottery extends Lottery {
     }
 
     public LotteryResult createLotteryResult(List<Lottery> lotteries) {
-        return new LotteryResult(countEqualNumbers(lotteries), lotteries.size(), LotteryCompany.LOTTERY_PRICE);
+        return new LotteryResult(countEqualNumbers(lotteries), LotteryCompany.LOTTERY_PRICE);
     }
 
     private EnumMap<LotteryRank, Integer> countEqualNumbers(List<Lottery> lotteries) {
         return new EnumMap<>(lotteries.stream()
-                .map(this::countEqualNumbers)
-                .filter(LotteryRank::isUsedMatchingCount)
-                .collect(Collectors.toMap(LotteryRank::valueOf, value -> 1,
+                .map(lottery -> LotteryRank.valueOf(countEqualNumbers(lottery)))
+                .collect(Collectors.toMap(Function.identity(), value -> 1,
                         (existing, replacement) -> existing + 1)));
     }
 
