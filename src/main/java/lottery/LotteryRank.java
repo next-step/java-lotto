@@ -39,10 +39,10 @@ public enum LotteryRank {
     }
 
     public static int getPrizeOfRank(int rank) {
-        return getPrize(getInstanceOfRank(rank));
+        return getPrize(valueOf(rank));
     }
 
-    public static LotteryRank getInstanceOfRank(int rank) {
+    public static LotteryRank valueOf(int rank) {
         return Arrays.stream(values())
                 .filter(lotteryRank -> lotteryRank.rank == rank)
                 .findFirst()

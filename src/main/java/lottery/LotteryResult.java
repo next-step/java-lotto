@@ -2,7 +2,7 @@ package lottery;
 
 import java.util.EnumMap;
 
-import static lottery.LotteryRank.getInstanceOfRank;
+import static lottery.LotteryRank.valueOf;
 
 public class LotteryResult {
 
@@ -18,7 +18,7 @@ public class LotteryResult {
     }
 
     public int getWinningCountOfRank(int rank) {
-        return winningCounts.getOrDefault(getInstanceOfRank(rank), 0);
+        return winningCounts.getOrDefault(valueOf(rank), 0);
     }
 
     public double getReturnRate() {

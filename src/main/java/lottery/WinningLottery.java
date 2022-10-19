@@ -17,7 +17,7 @@ public class WinningLottery extends Lottery {
         return new EnumMap<>(lotteries.stream()
                 .map(this::countEqualNumbers)
                 .filter(LotteryRank::isUsedRank)
-                .collect(Collectors.toMap(LotteryRank::getInstanceOfRank, value -> 1,
+                .collect(Collectors.toMap(LotteryRank::valueOf, value -> 1,
                         (existing, replacement) -> existing + 1)));
     }
 

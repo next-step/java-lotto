@@ -38,9 +38,9 @@ public class LotteryRankTest {
     }
 
     @Test
-    void getInstanceOfRank() {
-        assertThat(LotteryRank.getInstanceOfRank(3)).isEqualTo(LotteryRank.THREE);
-        assertThat(LotteryRank.getInstanceOfRank(6)).isEqualTo(LotteryRank.SIX);
+    void valueOf() {
+        assertThat(LotteryRank.valueOf(3)).isEqualTo(LotteryRank.THREE);
+        assertThat(LotteryRank.valueOf(6)).isEqualTo(LotteryRank.SIX);
     }
 
 }
