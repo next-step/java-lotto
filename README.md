@@ -63,9 +63,10 @@
   - List< Lotto >
   - 금액에 따라 Lotto 리스트 개수 출력
 - [x] 로또 생성 List 담을 LottoDto
-- [ ] LottoPrize
+- [x] LottoPrize
   - 로또 당첨 여부 -> 번호 일치 개수
-- [ ] LottoWinningRate
+- [x] Lotto match result 구현.
+- [x] LottoWinningRate
   - 승률 구하기
 - [ ] ResultView
   - ~개를 구매했습니다.
