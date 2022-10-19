@@ -10,11 +10,19 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        if (numbers.size() != COUNT) {
-            throw new IllegalArgumentException("로또 숫자는 " + COUNT +"개 선택되어야 합니다.");
-        }
+        checkNumberCount(numbers);
         numbers.forEach(this::checkNumberRange);
         this.numbers = numbers;
+    }
+
+
+    private void checkNumberCount(List<Integer> numbers) {
+        int distinctCount = (int) numbers.stream()
+                .distinct()
+                .count();
+        if (distinctCount != COUNT) {
+            throw new IllegalArgumentException("로또 숫자는 " + COUNT +"개 선택되어야 합니다.");
+        }
     }
 
     private void checkNumberRange(int number) {
