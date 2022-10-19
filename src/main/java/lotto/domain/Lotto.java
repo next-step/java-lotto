@@ -14,7 +14,6 @@ public class Lotto {
     public static final int FIVE_MATCH_RANK_REWARD = 1500000;
     public static final int SIX_MATCH_RANK_REWARD = 2000000000;
     private final List<Ticket> ticketList;
-
     private int threeMatchRankCount = 0;
     private int fourMatchRankCount = 0;
     private int fiveMatchRankCount = 0;
@@ -106,5 +105,17 @@ public class Lotto {
 
     public int getSixMatchRankCount() {
         return sixMatchRankCount;
+    }
+
+    public double caculateIncomePercentage(){
+        int purchageAmount = ticketList.size() * TICKET_AMOUNT;
+        return  getTotalWinningAmount() / (double)purchageAmount;
+    }
+
+    public int getTotalWinningAmount() {
+        return threeMatchRankCount * THREE_MATCH_RANK_REWARD
+                + fourMatchRankCount * FOUR_MATCH_RANK_REWARD
+                + fiveMatchRankCount * FIVE_MATCH_RANK_REWARD
+                + sixMatchRankCount * SIX_MATCH_RANK_REWARD;
     }
 }

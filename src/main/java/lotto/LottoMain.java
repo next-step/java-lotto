@@ -18,5 +18,6 @@ public class LottoMain {
         lotto.rankedWinningNumbers(winnigNumbers);
 
         ResultView.printLottoResult(lotto);
+        ResultView.printIncomePercentage(lotto.caculateIncomePercentage());
     }
 }
