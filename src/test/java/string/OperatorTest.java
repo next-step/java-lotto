@@ -1,6 +1,7 @@
-package lotto;
+package string;
 
 import org.junit.jupiter.api.Test;
+import string.Operator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

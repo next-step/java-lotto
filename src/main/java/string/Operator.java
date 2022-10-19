@@ -1,4 +1,4 @@
-package lotto;
+package string;
 
 import java.util.function.BiFunction;
 
