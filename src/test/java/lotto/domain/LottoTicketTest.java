@@ -6,19 +6,19 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class LottoTest {
+class LottoTicketTest {
 
     @Test
     void 로또_생성_사이즈() {
-        List<Long> zeroSizeList = new ArrayList<>();
-        Assertions.assertThatThrownBy(() -> new Lotto(zeroSizeList))
+        List<Integer> zeroSizeList = new ArrayList<>();
+        Assertions.assertThatThrownBy(() -> new LottoTicket(zeroSizeList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 로또_생성_중복번호() {
-        List<Long> duplicateNumberList = List.of(1L, 1L, 2L, 3L, 4L, 5L);
-        Assertions.assertThatThrownBy(() -> new Lotto(duplicateNumberList))
+        List<Integer> duplicateNumberList = List.of(1, 1, 2, 3, 4, 5);
+        Assertions.assertThatThrownBy(() -> new LottoTicket(duplicateNumberList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
