@@ -59,7 +59,7 @@
   - List<LottoNumber>
   - 중복 없이 6개의 숫자 
   - 지난주 로또 개수도 입력 받아야 함.
-- [ ] LottoTickets
+- [x] LottoTickets
   - List< Lotto >
   - 금액에 따라 Lotto 리스트 개수 출력
 - [ ] LottoPrize
