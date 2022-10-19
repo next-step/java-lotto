@@ -1,7 +1,10 @@
 package stringcalculator;
 
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
 
 public enum Operator {
     PLUS("+", Number::plus),
@@ -26,12 +29,10 @@ public enum Operator {
     }
 
     private static Operator find(String sign) {
-        for (Operator operator : values()) {
-            if (operator.sign.equals(sign)) {
-                return operator;
-            }
-        }
-        return null;
+        return Arrays.stream(values())
+                .filter(operator -> operator.sign.equals(sign))
+                .findFirst()
+                .orElse(null);
     }
 
     public Number calculate(Number a, Number b) {
