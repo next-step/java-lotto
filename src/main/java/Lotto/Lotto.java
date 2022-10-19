@@ -1,25 +1,20 @@
 package lotto;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     private static final int LENGTH = 6;
 
-    private final List<LottoNumber> numbers;
-    private static final List<LottoNumber> candidateNumbers;
+    private final List<Integer> numbers;
 
-    static {
-        candidateNumbers = new ArrayList<>();
-        for (int i = LottoNumber.MAX_NUMBER; i <= LottoNumber.MAX_NUMBER; i ++) {
-            candidateNumbers.add(new LottoNumber(i));
-        }
-    }
-
-    Lotto(List<LottoNumber> numbers) {
+    Lotto(List<Integer> numbers) {
         this.numbers = numbers;
-
     }
 
     Lotto() {
@@ -46,16 +41,15 @@ public class Lotto {
                 '}';
     }
 
-    private List<LottoNumber> randomNumbers() {
-        List<LottoNumber> numbers = new ArrayList<>();
-        List<LottoNumber> dupCandidateNumbers = candidateNumbers;
+    private List<Integer> randomNumbers() {
+        List<Integer> numbers = shuffle(MIN_NUMBER, MAX_NUMBER + 1);
+        return numbers.subList(0, LENGTH);
+    }
 
-        for (int i = 0; i < LENGTH; i ++) {
-            int randomIndex = (int) Math.random() * dupCandidateNumbers.size() + 1;
-            numbers.add(dupCandidateNumbers.get(randomIndex));
-            dupCandidateNumbers.remove(randomIndex);
-        }
+    private List<Integer> shuffle(int min, int max) {
+        List<Integer> range = IntStream.range(min, max).boxed().collect(Collectors.toList());
+        Collections.shuffle(range);
 
-        return numbers;
+        return range;
     }
 }
