@@ -1,10 +1,5 @@
-package lotto.second;
+package lotto;
 
-import lotto.LottoCalculateStrategy;
-import lotto.LottoNumber;
-import lotto.Money;
-import lotto.SelectedLottoes;
-import lotto.auto.AutoLottoCalculateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,9 +7,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SecondLottoCalculateStrategyTest {
+class NormalLottoCalculateStrategyTest {
 
-    LottoCalculateStrategy lottoCalculateStrategy = new SecondLottoCalculateStrategy();
+    LottoCalculateStrategy lottoCalculateStrategy = new NormalLottoCalculateStrategy();
 
     @Test
     @DisplayName("로또 티켓 카운트")

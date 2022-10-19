@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class AutoLottoMain {
     public static void main(String[] args) {
         Money buyAmount = new Money(InputView.enterBuyPrice());
-        LottoMachine lottoMachine = new LottoMachine(new AutoLottoCalculateStrategy());
+        LottoMachine lottoMachine = new LottoMachine(new NormalLottoCalculateStrategy());
         List<SelectedLottoes> lottoes = lottoMachine.buyLottoes(buyAmount);
         OutputView.printLottoes(lottoes);
 

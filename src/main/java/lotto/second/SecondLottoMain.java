@@ -1,8 +1,6 @@
 package lotto.second;
 
 import lotto.*;
-import lotto.auto.AutoLottoCalculateStrategy;
-import lotto.auto.AutoWinningLottoes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +8,7 @@ import java.util.stream.Collectors;
 public class SecondLottoMain {
     public static void main(String[] args) {
         Money buyAmount = new Money(InputView.enterBuyPrice());
-        LottoMachine lottoMachine = new LottoMachine(new SecondLottoCalculateStrategy());
+        LottoMachine lottoMachine = new LottoMachine(new NormalLottoCalculateStrategy());
         List<SelectedLottoes> lottoes = lottoMachine.buyLottoes(buyAmount);
         OutputView.printLottoes(lottoes);
 

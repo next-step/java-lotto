@@ -1,10 +1,8 @@
-package lotto.second;
-
-import lotto.*;
+package lotto;
 
 import java.util.*;
 
-public class SecondLottoCalculateStrategy implements LottoCalculateStrategy {
+public class NormalLottoCalculateStrategy implements LottoCalculateStrategy {
     private static final Money LOTTO_TICKET_PRICE = new Money(1000);
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int WINNING_LOTTO_COUNT = 6;
