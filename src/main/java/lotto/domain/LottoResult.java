@@ -23,7 +23,6 @@ public class LottoResult {
         List<Lotto> lottos = tickets.getTickets();
         for (Lotto lotto : lottos) {
             int count = winningLotto.matches(lotto);
-            System.out.println("내가 산 로또 번호들" + lotto + " 맞춘 개수" +count);
             Rank calculate = Rank.calculate(count, winningLotto.matchBonus(lotto));
             put(calculate);
         }
