@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoResult {
@@ -30,6 +31,6 @@ public class LottoResult {
     }
 
     public List<Rank> getRanks() {
-        return ranks;
+        return Collections.unmodifiableList(ranks);
     }
 }
