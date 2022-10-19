@@ -27,13 +27,13 @@ public class StringCalculator {
 
     private void validateNumberOfNumberAndOperator(int length) {
         if (length % 2 == 0) {
-            throw new IllegalArgumentException("잘못된 수식 입니다.");
+            throw new CaculateException(ErrorCode.WRONG_EQUATION_FORMAT);
         }
     }
 
     private void validateNullOrEmpty(String equation) {
         if (Objects.isNull(equation) || equation.isEmpty()) {
-            throw new IllegalArgumentException("공백이나 null은 계산할 수 없습니다.");
+            throw new CaculateException(ErrorCode.CALCULATE_NULL);
         }
     }
 }
