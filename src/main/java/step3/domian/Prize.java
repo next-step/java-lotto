@@ -7,7 +7,7 @@ public enum Prize {
     FIVE_BONUS_PRIZE(30_000_000),
     SIX_PRIZE(2_000_000_000);
 
-    public final int prizeMoney;
+    final int prizeMoney;
 
 
     Prize(int prizeMoney) {

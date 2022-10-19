@@ -5,7 +5,7 @@ import step3.domian.LastWinner;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         if (numbers.size() != 6) {
