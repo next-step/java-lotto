@@ -8,10 +8,10 @@ public class RandomLottoPublisher implements LottoPublisher {
     private final List<Integer> allNumbers;
 
     public RandomLottoPublisher() {
-        allNumbers = allNumbers();
+        allNumbers = buildAllLottoNumbers();
     }
 
-    private List<Integer> allNumbers() {
+    private List<Integer> buildAllLottoNumbers() {
         List<Integer> list = new ArrayList<>();
         for (int i = Lotto.MIN; i <= Lotto.MAX; i++) {
             list.add(i);

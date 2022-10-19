@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Game {
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
     private final LottoPublisher lottoPublisher;
 
     public Game(int count) {
@@ -16,7 +16,7 @@ public class Game {
 
     public Game(int count, LottoPublisher lottoPublisher) {
         this.lottoPublisher = lottoPublisher;
-        this.lottoList = createLottoList(count);
+        this.lottos = createLottoList(count);
     }
 
     private List<Lotto> createLottoList(int count) {
@@ -38,12 +38,12 @@ public class Game {
     }
 
     private List<Integer> winCounts(Lotto winNumbers) {
-        return lottoList.stream()
+        return lottos.stream()
                 .map(lotto -> lotto.matches(winNumbers))
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
