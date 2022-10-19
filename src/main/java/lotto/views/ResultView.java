@@ -28,7 +28,10 @@ public class ResultView {
     }
 
     private void printPrize(Prize prize, LottoStatistics statistics) {
-        System.out.printf("%d개 일치 (%d원)- %d개",
+        String normalFormat = "%d개 일치 (%d원)- %d개";
+        String bonusFormat = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
+
+        System.out.printf(prize == Prize.SECOND ? bonusFormat : normalFormat,
                 prize.getCorrectCount(),
                 prize.getReward(),
                 statistics.getWinningCount(prize));

@@ -1,11 +1,10 @@
 package lotto.views;
 
-import lotto.domains.Lotto;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domains.Lotto;
 
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
@@ -30,5 +29,12 @@ public class InputView {
         System.out.println();
 
         return numbers;
+    }
+
+    public String inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String input = scanner.nextLine();
+        System.out.println();
+        return input;
     }
 }
