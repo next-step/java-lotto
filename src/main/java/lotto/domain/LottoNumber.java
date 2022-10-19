@@ -22,7 +22,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
-        LottoNumber lottoNumber = CACHE.get(number);
+        LottoNumber lottoNumber = CACHE.get(number - 1);
         if (Objects.isNull(lottoNumber)) {
             lottoNumber = new LottoNumber(number);
         }
