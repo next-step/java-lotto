@@ -9,6 +9,10 @@ import lotto.domain.winner.WinningReport;
 
 public class LottoResultView {
 
+    private LottoResultView() {
+
+    }
+
     public static void printTicketCount(int count) {
         System.out.printf("%d개를 구매했습니다.%n", count);
     }
@@ -34,11 +38,20 @@ public class LottoResultView {
 
     private static void printWinningResult(WinningReport winningReport) {
         for (WinningCondition condition : WinningCondition.getConditionsWithPrize()) {
-            System.out.printf("%d개 일치 (%d원)- %d개%n",
+            System.out.printf(resultFormat(condition),
                     condition.getMatchCount(),
                     condition.getPrizeMoney(),
                     winningReport.getWinningCount(condition));
         }
+    }
+
+    private static String resultFormat(WinningCondition condition) {
+        String format = "%d개 일치";
+        if(condition.getRequiredBonus() && condition.getBonusMatch()) {
+            format = format.concat(", 보너스 볼 일치");
+        }
+        format = format.concat("(%d원)- %d개%n");
+        return format;
     }
 
     private static void printRateOfReturn(WinningReport winningReport, PurchasePrice purchase) {

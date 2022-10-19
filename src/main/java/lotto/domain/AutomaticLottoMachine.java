@@ -10,31 +10,25 @@ import lotto.domain.number.Ticket;
 
 public class AutomaticLottoMachine implements LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
+    private final List<Integer> numbers = intNumbers();
 
     public TicketBox issueTickets(PurchasePrice purchasePrice) {
-        return new TicketBox(IntStream.range(0, getTicketCount(purchasePrice))
-                .mapToObj(i -> extractNumbers(intNumbers()))
+        return new TicketBox(IntStream.range(0, getTicketCount(purchasePrice, Ticket.getPrice()))
+                .mapToObj(i -> extractNumbers())
                 .collect(Collectors.toUnmodifiableList()));
     }
 
-    @Override
-    public int getLottoPrice() {
-        return LOTTO_PRICE;
-    }
-
     private List<Integer> intNumbers() {
-        List<Integer> numbers = IntStream.range(
+        return IntStream.range(
                         LottoBall.getFirstOfNumberRange(),
                         LottoBall.getLastOfNumberRange() + 1
                 )
                 .boxed()
                 .collect(Collectors.toList());
-        Collections.shuffle(numbers);
-        return numbers;
     }
 
-    private Ticket extractNumbers(List<Integer> numbers) {
+    private Ticket extractNumbers() {
+        Collections.shuffle(numbers);
         List<Integer> extractedNumbers = numbers.subList(0, LottoBalls.getBallsSize());
 
         return new Ticket(

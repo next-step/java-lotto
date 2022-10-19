@@ -6,15 +6,13 @@ public interface LottoMachine {
 
     TicketBox issueTickets(PurchasePrice purchasePrice);
 
-    int getLottoPrice();
-
-    default int getTicketCount(PurchasePrice purchasePrice) {
-        validatePurchasePrice(purchasePrice);
-        return purchasePrice.getPrice() / getLottoPrice();
+    default int getTicketCount(PurchasePrice purchasePrice, int ticketPrice) {
+        validatePurchasePrice(purchasePrice, ticketPrice);
+        return purchasePrice.getPrice() / ticketPrice;
     }
 
-    private void validatePurchasePrice(PurchasePrice purchasePrice) {
-        if (purchasePrice.getPrice() < getLottoPrice()) {
+    private void validatePurchasePrice(PurchasePrice purchasePrice, int ticketPrice) {
+        if (purchasePrice.getPrice() < ticketPrice) {
             throw new InvalidLottoPurchasePriceException();
         }
     }

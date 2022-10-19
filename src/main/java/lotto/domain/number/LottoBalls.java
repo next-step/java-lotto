@@ -11,14 +11,14 @@ public class LottoBalls {
     private static final int LOTTO_BALLS_SIZE = 6;
     private final Set<LottoBall> balls;
 
-    public LottoBalls(List<LottoBall> lottoBallList) {
-        if (lottoBallList == null) {
+    public LottoBalls(List<LottoBall> lottoBalls) {
+        if (lottoBalls == null) {
             throw new InvalidLottoBallsException(LOTTO_BALLS_SIZE);
         }
 
-        Set<LottoBall> lottoBallSet = new HashSet<>(lottoBallList);
+        Set<LottoBall> lottoBallSet = new HashSet<>(lottoBalls);
 
-        if (lottoBallSet.size() != LOTTO_BALLS_SIZE || lottoBallSet.size() < lottoBallList.size()) {
+        if (lottoBallSet.size() != LOTTO_BALLS_SIZE || lottoBallSet.size() < lottoBalls.size()) {
             throw new InvalidLottoBallsException(LOTTO_BALLS_SIZE);
         }
 

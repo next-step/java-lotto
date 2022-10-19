@@ -4,6 +4,8 @@ import lotto.domain.exception.NullLottoBallsListException;
 
 public class Ticket {
 
+    private static final int PRICE = 1000;
+
     private final LottoBalls lottoBalls;
 
     public Ticket(LottoBalls lottoBalls) {
@@ -16,5 +18,9 @@ public class Ticket {
 
     public LottoBalls getLottoBalls() {
         return lottoBalls;
+    }
+
+    public static int getPrice() {
+        return PRICE;
     }
 }
