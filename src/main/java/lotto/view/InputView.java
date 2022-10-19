@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +27,7 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        if (result.stream().distinct().count() != 6) {
+        if (result.stream().distinct().count() != Lotto.COUNT) {
             throw new IllegalArgumentException("6개의 서로 다른 당첨 번호가 입력되어야 합니다.");
         }
         return result;

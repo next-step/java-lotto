@@ -13,7 +13,7 @@ public class App {
     public static void main(String[] args) {
         int price = InputView.inputPrice();
 
-        Game game = new Game(price / 1000);
+        Game game = new Game(price / Lotto.PRICE);
         ResultView.printLottoList(game.getLottoList());
 
         List<Integer> winNumbers = InputView.inputWinNumbers();
