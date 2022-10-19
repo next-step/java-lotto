@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Lottery {
 
+    protected static final String LOTTERY_NUM_DUPLICATED_ERR_MSG = "로또 번호는 중복될 수 없습니다.";
+    public static final String LOTTERY_NUM_COUNT_ERR_MSG = "로또는 6개 숫자로 구성되어야 합니다.";
+
     protected final List<LotteryNumber> lotteryNumbers;
 
     public Lottery(List<LotteryNumber> lotteryNumbers) {
@@ -15,10 +18,10 @@ public class Lottery {
 
     private void validate(List<LotteryNumber> lotteryNumbers) {
         if (lotteryNumbers.size() != LotteryCompany.LOTTERY_NUM_COUNT) {
-            throw new IllegalArgumentException("로또는 6개 숫자로 구성되어야 합니다.");
+            throw new IllegalArgumentException(LOTTERY_NUM_COUNT_ERR_MSG);
         }
         if (new HashSet<>(lotteryNumbers).size() != LotteryCompany.LOTTERY_NUM_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(LOTTERY_NUM_DUPLICATED_ERR_MSG);
         }
     }
 

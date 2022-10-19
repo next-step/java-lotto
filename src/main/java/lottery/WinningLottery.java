@@ -6,8 +6,20 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class WinningLottery extends Lottery {
-    public WinningLottery(List<LotteryNumber> lotteryNumbers) {
+
+    private final LotteryNumber bonusLotteryNumber;
+
+    public WinningLottery(List<LotteryNumber> lotteryNumbers, LotteryNumber bonusLotteryNumber) {
         super(lotteryNumbers);
+
+        validate(bonusLotteryNumber);
+        this.bonusLotteryNumber = bonusLotteryNumber;
+    }
+
+    private void validate(LotteryNumber bonusLotteryNumber) {
+        if (lotteryNumbers.contains(bonusLotteryNumber)) {
+            throw new IllegalArgumentException(LOTTERY_NUM_DUPLICATED_ERR_MSG);
+        }
     }
 
     public LotteryResult createLotteryResult(List<Lottery> lotteries) {
