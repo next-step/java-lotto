@@ -68,7 +68,7 @@
 - [x] Lotto match result 구현.
 - [x] LottoWinningRate
   - 승률 구하기
-- [ ] ResultView
+- [x] ResultView
   - ~개를 구매했습니다.
   - 당첨통계
   - 수익률
