@@ -43,8 +43,8 @@ public class OutputView {
         System.out.println("]");
     }
 
-    public static void printMoneyLeft(Money money) {
-        System.out.printf("남은 금액는 %s원 입니다.", money.getValue());
+    public static void printLottoCountAndMoneyLeft(PlayLottoCount playLottoCount, Money money) {
+        System.out.printf("%s개를 구매했습니다. 남은 금액는 %s원 입니다.\n", playLottoCount.getValue(), money.getValue());
     }
 
     public static void printWinningStatistics(WinningStatistics winningStatistics, Money purchaseAmount) {

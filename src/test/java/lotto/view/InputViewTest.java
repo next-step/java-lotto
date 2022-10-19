@@ -47,6 +47,17 @@ public class InputViewTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @DisplayName("수동 로또 수를 입력받는다.")
+    @ParameterizedTest
+    @ValueSource(strings = " 7 ")
+    void receive_manual_lotto_count(String input) {
+        setIn(input);
+        String expected = "7";
+
+        String actual = InputView.receiveManualLottoCount();
+
+        assertThat(actual).isEqualTo(expected);
+    }
 
     private void setIn(String input) {
         InputStream in = generateUserInput(input);

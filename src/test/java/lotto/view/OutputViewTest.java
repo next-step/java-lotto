@@ -73,9 +73,9 @@ class OutputViewTest {
     @DisplayName("거스름돈을 출력한다.")
     @Test
     void print_left_money() {
-        String expected = "남은 금액는 300원 입니다.";
+        String expected = "14개를 구매했습니다. 남은 금액는 300원 입니다.";
 
-        OutputView.printMoneyLeft(new Money(300));
+        OutputView.printLottoCountAndMoneyLeft(new PlayLottoCount(14), new Money(300));
         String actual = outputStreamCaptor.toString().trim();
 
         assertThat(actual).isEqualTo(expected);

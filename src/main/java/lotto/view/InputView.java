@@ -13,7 +13,8 @@ public class InputView {
 
     public static String receiveMoney() {
         System.out.println("로또 금액을 입력해주세요. 로또는 개당 천원입니다.");
-        return new Scanner(System.in).nextLine();
+        return new Scanner(System.in).nextLine()
+                .trim();
     }
 
     public static List<String> receiveLastWeekWinningNumber() {
@@ -27,7 +28,13 @@ public class InputView {
 
     public static String receiveBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String bonusBall = new Scanner(System.in).nextLine();
-        return bonusBall.trim();
+        return new Scanner(System.in).nextLine()
+                .trim();
+    }
+
+    public static String receiveManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return new Scanner(System.in).nextLine()
+                .trim();
     }
 }

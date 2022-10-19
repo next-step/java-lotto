@@ -12,10 +12,13 @@ public class Application {
     public static void main(String[] args) {
         Money money = receiveMoney();
         Money moneyLeft = money.calculateLeft();
-        OutputView.printMoneyLeft(moneyLeft);
+        PlayLottoCount playLottoCount = money.countPlayLotto();
+        OutputView.printLottoCountAndMoneyLeft(playLottoCount, moneyLeft);
         OutputView.printNewLine();
 
-        PlayLottoCount playLottoCount = money.countPlayLotto();
+        ManualLottoCount manualLottoCount = createManualLottoCount(playLottoCount);
+        OutputView.printNewLine();
+
         List<Lotto> lottos = AutoLottoGenerator.generate(playLottoCount);
         OutputView.printGeneratedLottos(lottos);
         OutputView.printNewLine();
@@ -32,6 +35,15 @@ public class Application {
         } catch (NotNumberStringException | NotZeroOrMoreNumberException e) {
             System.out.println(e.getMessage());
             return receiveMoney();
+        }
+    }
+
+    private static ManualLottoCount createManualLottoCount(PlayLottoCount playLottoCount) {
+        try {
+            return new ManualLottoCount(playLottoCount, InputView.receiveManualLottoCount());
+        } catch (NotNumberStringException | CannotBeGreaterPlayableLottoCount e) {
+            System.out.println(e.getMessage());
+            return createManualLottoCount(playLottoCount);
         }
     }
 

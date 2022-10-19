@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.NotNumberStringException;
+
 import java.util.Objects;
 
 public class PlayLottoCount {
@@ -11,9 +13,21 @@ public class PlayLottoCount {
         this.value = value;
     }
 
+    public PlayLottoCount(String value) {
+        this(parseInt(value));
+    }
+
     private static void validateSize(int value) {
         if (value < 1) {
             throw new IllegalArgumentException("1보다 작은 수로 생성할 수 없습니다.");
+        }
+    }
+
+    private static int parseInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw NotNumberStringException.getInstance();
         }
     }
 
@@ -39,5 +53,9 @@ public class PlayLottoCount {
         return "PlayLottoCount{" +
                 "value=" + value +
                 '}';
+    }
+
+    public boolean isLessThan(int value) {
+        return this.value < value;
     }
 }
