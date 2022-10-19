@@ -1,13 +1,15 @@
-package lotto;
+package lotto.core;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int MAX_SIZE = 6;
     public static final int LOTTO_BOUND_NUM = 46;
 
-    private List<Integer> lottoNums = new ArrayList<>();
+    private final List<Integer> lottoNums;
 
     public Lotto() {
         Random random = new Random();
@@ -20,6 +22,10 @@ public class Lotto {
         Collections.sort(lottoNums);
     }
 
+    public Lotto(List<Integer> lottoNums) {
+        this.lottoNums = lottoNums;
+    }
+
     public List<Integer> getLottoNums() {
         return lottoNums;
     }
@@ -29,7 +35,11 @@ public class Lotto {
         return "" + lottoNums;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Lotto());
+    public int getCorrectCount(WinningNumbers winningNumbers){
+        List<Integer> winningNumbersToCompare = winningNumbers.getWinningNumbers();
+        List<Integer> result = lottoNums.stream()
+                .filter(old -> winningNumbersToCompare.stream().anyMatch(Predicate.isEqual(old)))
+                .collect(Collectors.toList());
+        return result.size();
     }
 }

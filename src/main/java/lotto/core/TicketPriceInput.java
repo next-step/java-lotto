@@ -1,15 +1,15 @@
-package lotto;
+package lotto.core;
 
 import java.util.Objects;
 
-public class ClientInput {
+public class TicketPriceInput {
 
-    private static final int DEFAULT_TICKET_PRICE = 1000;
+    public static final int DEFAULT_TICKET_PRICE = 1000;
 
     private final int priceInput;
     private final int ticketAmt;
 
-    public ClientInput(int priceInput, int ticketAmt) {
+    public TicketPriceInput(int priceInput, int ticketAmt) {
         this.priceInput = priceInput;
         this.ticketAmt = priceInput / DEFAULT_TICKET_PRICE;
     }
@@ -18,15 +18,15 @@ public class ClientInput {
         return ticketAmt;
     }
 
-    public static ClientInput.ClientInputBuilder builder() {
-        return new ClientInput.ClientInputBuilder();
+    public static TicketPriceInput.ClientInputBuilder builder() {
+        return new TicketPriceInput.ClientInputBuilder();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ClientInput that = (ClientInput) o;
+        TicketPriceInput that = (TicketPriceInput) o;
         return priceInput == that.priceInput && ticketAmt == that.ticketAmt;
     }
 
@@ -42,18 +42,18 @@ public class ClientInput {
         public ClientInputBuilder() {
         }
 
-        public ClientInput.ClientInputBuilder priceInput(int priceInput){
+        public TicketPriceInput.ClientInputBuilder priceInput(int priceInput){
             this.priceInput = priceInput;
             return this;
         }
 
-        public ClientInput.ClientInputBuilder ticketAmt(int ticketAmt){
+        public TicketPriceInput.ClientInputBuilder ticketAmt(int ticketAmt){
             this.ticketAmt = ticketAmt;
             return this;
         }
 
-        public ClientInput build() {
-            return new ClientInput(this.priceInput, this.ticketAmt);
+        public TicketPriceInput build() {
+            return new TicketPriceInput(this.priceInput, this.ticketAmt);
         }
     }
 }

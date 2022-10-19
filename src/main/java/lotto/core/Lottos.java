@@ -1,11 +1,11 @@
-package lotto;
+package lotto.core;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(int lottoSize) {
         while (lottos.size() < lottoSize) {
@@ -13,7 +13,15 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottos){
+        this.lottos = lottos;
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public int getLottosAmount(){
+        return lottos.size();
     }
 }
