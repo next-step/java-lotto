@@ -10,10 +10,6 @@ public class Game {
     private final List<Lotto> lottos;
     private final LottoPublisher lottoPublisher;
 
-    public Game(int count) {
-        this(count, new RandomLottoPublisher());
-    }
-
     public Game(int count, LottoPublisher lottoPublisher) {
         this.lottoPublisher = lottoPublisher;
         this.lottos = createLottoList(count);
