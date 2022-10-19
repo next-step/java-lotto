@@ -5,8 +5,7 @@ public class Calculator {
 
     public static double calculate(Lottos lottos, WinningNumbers winningNumbers, int amount) {
         long totalAmount = INIT_NUM;
-        for (int i = 0 ; i < lottos.getLottosSize() ; i++) {
-            Lotto lotto = lottos.getLotto(i);
+        for (Lotto lotto : lottos.getLottos()) {
             countOfMatch(lotto.getMatchQuantity(winningNumbers.getWinningNumbers()));
             totalAmount = getTotalAmount();
         }

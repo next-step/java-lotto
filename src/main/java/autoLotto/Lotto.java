@@ -52,4 +52,7 @@ public class Lotto {
         return count;
     }
 
+    public List<Integer> getLotto() {
+        return lotto;
+    }
 }

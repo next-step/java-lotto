@@ -1,5 +1,7 @@
 package autoLotto;
 
+import java.util.List;
+
 import static autoLotto.Match.*;
 import static java.util.stream.IntStream.*;
 
@@ -10,8 +12,9 @@ public class OutputView {
     }
 
     public static void outputLottos(Lottos lottos) {
-        range(0, lottos.getLottosSize())
-                 .forEach(i -> System.out.println(lottos.getLotto(i)));
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(lotto.getLotto());
+        }
     }
 
     public static void outputResult(double result, int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {

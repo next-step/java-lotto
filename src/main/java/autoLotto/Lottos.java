@@ -14,7 +14,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Lotto getLotto(int i) {
-        return lottos.get(i);
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
