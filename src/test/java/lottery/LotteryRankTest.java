@@ -10,8 +10,8 @@ public class LotteryRankTest {
 
     @Test
     void getRank() {
-        assertThat(LotteryRank.getRank(LotteryRank.THREE)).isEqualTo(3);
-        assertThat(LotteryRank.getRank(LotteryRank.SIX)).isEqualTo(6);
+        assertThat(LotteryRank.getMatchingCount(LotteryRank.THREE)).isEqualTo(3);
+        assertThat(LotteryRank.getMatchingCount(LotteryRank.SIX)).isEqualTo(6);
     }
 
     @Test
@@ -22,19 +22,19 @@ public class LotteryRankTest {
 
     @Test
     void getUsedRanks() {
-        assertThat(LotteryRank.getUsedRanks()).containsExactly(3, 4, 5, 6);
+        assertThat(LotteryRank.getUsedMatchingCounts()).containsExactly(3, 4, 5, 6);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"2:false", "3:true", "6:true", "7:false"}, delimiter = ':')
-    void isUsedRank(int rank, boolean expected) {
-        assertThat(LotteryRank.isUsedRank(rank)).isEqualTo(expected);
+    void isUsedMatchingCount(int matchingCount, boolean expected) {
+        assertThat(LotteryRank.isUsedMatchingCount(matchingCount)).isEqualTo(expected);
     }
 
     @Test
-    void getPrizeOfRank() {
-        assertThat(LotteryRank.getPrizeOfRank(3)).isEqualTo(LotteryRank.getPrize(LotteryRank.THREE));
-        assertThat(LotteryRank.getPrizeOfRank(6)).isEqualTo(LotteryRank.getPrize(LotteryRank.SIX));
+    void getPrizeOfMatchingCount() {
+        assertThat(LotteryRank.getPrizeOfMatchingCount(3)).isEqualTo(LotteryRank.getPrize(LotteryRank.THREE));
+        assertThat(LotteryRank.getPrizeOfMatchingCount(6)).isEqualTo(LotteryRank.getPrize(LotteryRank.SIX));
     }
 
     @Test

@@ -17,15 +17,15 @@ public class LotteryResult {
         this.lotteryPrice = lotteryPrice;
     }
 
-    public int getWinningCountOfRank(int rank) {
-        return winningCounts.getOrDefault(valueOf(rank), 0);
+    public int getWinningCountOfRank(int matchingCount) {
+        return winningCounts.getOrDefault(valueOf(matchingCount), 0);
     }
 
     public double getReturnRate() {
         double totalWonPrizes = 0.0;
         for (LotteryRank lotteryRank : winningCounts.keySet()) {
-            int rank = LotteryRank.getRank(lotteryRank);
-            totalWonPrizes += LotteryRank.getPrizeOfRank(rank) * getWinningCountOfRank(rank);
+            int matchingCount = LotteryRank.getMatchingCount(lotteryRank);
+            totalWonPrizes += LotteryRank.getPrizeOfMatchingCount(matchingCount) * getWinningCountOfRank(matchingCount);
         }
         return totalWonPrizes / (totalPurchaseAmount * lotteryPrice);
     }

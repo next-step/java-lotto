@@ -36,11 +36,11 @@ public class ResultView {
     }
 
     private static void printLotteryResultsPerRanks(LotteryResult lotteryResult) {
-        for (int rank : LotteryRank.getUsedRanks()) {
-            int prizeOfRank = LotteryRank.getPrizeOfRank(rank);
-            int winningCountOfRank = lotteryResult.getWinningCountOfRank(rank);
+        for (int matchingCount : LotteryRank.getUsedMatchingCounts()) {
+            int prizeOfRank = LotteryRank.getPrizeOfMatchingCount(matchingCount);
+            int winningCountOfRank = lotteryResult.getWinningCountOfRank(matchingCount);
 
-            System.out.println(rank + "개 일치 (" + prizeOfRank + ") - " + winningCountOfRank + "개");
+            System.out.println(matchingCount + "개 일치 (" + prizeOfRank + ") - " + winningCountOfRank + "개");
         }
     }
 

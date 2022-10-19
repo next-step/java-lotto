@@ -38,7 +38,7 @@
 # Step3
 ## 리팩토링 요구사항
 - [x] `LotteryRank`의 `getInstanceOfRank()` 메소드를 `valueOf()`로 변경
-- [ ] `LotteryRank`의 프로퍼티 `rank`를 `matchingCount`로 명확하게 변경
+- [x] `LotteryRank`의 프로퍼티 `rank`를 `matchingCount`로 명확하게 변경
   - 타 클래스에서도 `일치하는 로또 번호의 개수`로 사용되는 변수의 이름을 `rank`에서 `matchingCount`로 변경
 - [ ] `LotteryRank`에 당첨되지 않은 로또에 해당하는 value를 추가하고, `LotteryResult`의 `EnumMap`에 함께 저장하여 `totalPurchaseAmount`를 제거하고 계산으로 구하도록 변경
 - [ ] `LotteryRank`에서 기존에 인자로 `rank(matchingCount)`를 받아 값을 반환하던 메소드들 `LotteryRank` 인스턴스를 받아 동작하도록 통일, 제거
