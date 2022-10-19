@@ -1,7 +1,6 @@
 package lottoGame.model.factory;
 
 import lottoGame.model.DefaultLotto;
-import lottoGame.model.Lotto;
 import lottoGame.model.strategy.DefaultLottoStrategy;
 
 public class DefaultLottoFactory extends LottoFactory {

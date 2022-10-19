@@ -10,27 +10,25 @@ import java.text.DecimalFormat;
 import java.util.EnumMap;
 
 public class LottoGenerator {
-    private final InputView inputView;
+    private final InputParameter inputParameter;
     private final LottoFactory lottoFactory;
 
     private final ResultView resultView;
 
-    private final EnumMap<WinningNumbers, Integer> lotteryBoard = new EnumMap<>(WinningNumbers.class);
+    private final EnumMap<WinningRanks, Integer> lotteryBoard = new EnumMap<>(WinningRanks.class);
 
     private final DecimalFormat df = new DecimalFormat("0.00");
 
 
-    public LottoGenerator(InputView inputView, LottoFactory lottoFactory, ResultView resultView) {
-        this.inputView = inputView;
+    public LottoGenerator(InputParameter inputParameter, LottoFactory lottoFactory, ResultView resultView) {
+        this.inputParameter = inputParameter;
         this.lottoFactory = lottoFactory;
         this.resultView = resultView;
 
     }
 
     public void start() {
-        InputParameter inputParameter = inputView.print();
         Lottery lottery = create(inputParameter);
-
         resultView.printLottery(inputParameter, lottery);
         lottery.putBoard(resultView.inputWinningNumer(), lotteryBoard);
         resultView.printStatistics(lotteryBoard);
@@ -43,7 +41,7 @@ public class LottoGenerator {
         return lottery;
     }
 
-    private Integer getTotalSum(EnumMap<WinningNumbers, Integer> winningMap) {
+    private Integer getTotalSum(EnumMap<WinningRanks, Integer> winningMap) {
         return winningMap.entrySet()
                 .stream()
                 .map(winningEntry -> winningEntry.getKey().getWinnings() * winningEntry.getValue())

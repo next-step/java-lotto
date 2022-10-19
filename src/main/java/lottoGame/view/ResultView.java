@@ -1,7 +1,7 @@
 package lottoGame.view;
 
 import lottoGame.InputException;
-import lottoGame.WinningNumbers;
+import lottoGame.WinningRanks;
 import lottoGame.model.InputParameter;
 import lottoGame.model.Lottery;
 
@@ -33,9 +33,9 @@ public class ResultView {
         return changeInteger(winningString);
     }
 
-    public void printStatistics(EnumMap<WinningNumbers, Integer> winningMap) {
+    public void printStatistics(EnumMap<WinningRanks, Integer> winningMap) {
         System.out.printf("%s%s%n", startStatics, line);
-        winningMap.forEach((key, value) -> System.out.printf("%s개 일치 (%s원)- %s개%n", key.getNumberOfWins(), key.getWinnings(), value));
+        winningMap.forEach((key, value) -> System.out.printf("%s개 일치 (%s원)- %s개%n", key.getMatchNum(), key.getWinnings(), value));
     }
 
     public void printYield(String lottoYield) {

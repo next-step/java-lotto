@@ -1,6 +1,6 @@
 package lottoGame.model;
 
-import lottoGame.WinningNumbers;
+import lottoGame.WinningRanks;
 import lottoGame.model.factory.TestLottoFactory;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LotteryTest {
     private final TestLottoFactory testLottoFactory = new TestLottoFactory();
-    private final EnumMap<WinningNumbers, Integer> lotteryBoard = new EnumMap<>(WinningNumbers.class);
+    private final EnumMap<WinningRanks, Integer> lotteryBoard = new EnumMap<>(WinningRanks.class);
 
     @Test
     void create() {

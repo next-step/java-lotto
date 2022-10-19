@@ -6,7 +6,7 @@ import lottoGame.view.ResultView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        LottoGenerator lottoGenerator = new LottoGenerator(new InputView(), new DefaultLottoFactory(), new ResultView());
+        LottoGenerator lottoGenerator = new LottoGenerator(InputView.print(), new DefaultLottoFactory(), new ResultView());
         lottoGenerator.start();
     }
 }

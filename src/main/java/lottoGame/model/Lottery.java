@@ -1,6 +1,6 @@
 package lottoGame.model;
 
-import lottoGame.WinningNumbers;
+import lottoGame.WinningRanks;
 import lottoGame.model.factory.LottoFactory;
 
 import java.util.ArrayList;
@@ -22,15 +22,15 @@ public class Lottery {
         }
         return lottery;
     }
-    public void putBoard(List<Integer> winningNum, EnumMap<WinningNumbers, Integer> lotteryBoard) {
-        for (WinningNumbers winningNumbers : WinningNumbers.values()) {
-            lotteryBoard.put(winningNumbers, Collections.frequency(findMatchNumber(winningNum), winningNumbers.getNumberOfWins()));
+    public void putBoard(List<Integer> winningNum, EnumMap<WinningRanks, Integer> lotteryBoard) {
+        for (WinningRanks winningRanks : WinningRanks.values()) {
+            lotteryBoard.put(winningRanks, Collections.frequency(findMatchNumber(winningNum), winningRanks.getMatchNum()));
         }
     }
     private List<Integer> findMatchNumber(List<Integer> winningNumer) {
         return lottery.stream()
                 .map(lotto -> lotto.isContain(winningNumer))
-                .filter(match -> match >= WinningNumbers.FOURTH.getNumberOfWins())
+                .filter(match -> match >= WinningRanks.FOURTH.getMatchNum())
                 .collect(Collectors.toList());
     }
 
