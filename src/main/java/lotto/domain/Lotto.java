@@ -14,14 +14,9 @@ public class Lotto {
     private List<LottoNumber> lotto;
     private NumberGenerator numberGenerator;
 
-    public Lotto() {
-        this.setNumberGenerator(new RandomNumberGenerator());
+    public Lotto(NumberGenerator numberGenerator) {
         this.lotto = numberGenerator.generate();
-    }
-
-    public Lotto(String numbers) {
-        this.setNumberGenerator(new ManualNumberGenerator(numbers));
-        this.lotto = numberGenerator.generate();
+        this.numberGenerator = numberGenerator;
     }
 
     public int getSameNumberCount(Lotto winning) {

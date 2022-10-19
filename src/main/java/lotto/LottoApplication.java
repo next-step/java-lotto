@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.generator.ManualNumberGenerator;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class LottoApplication {
 
         String winningNumber = inputWinningNumber();
         int bonusNumber = inputBonusBall();
-        Lotto winning = new Lotto(winningNumber);
+        Lotto winning = new Lotto(new ManualNumberGenerator(winningNumber));
         LottoNumber bonus = LottoNumber.from(bonusNumber);
         LottoResults lottoResults = new LottoResults();
         lottoResults.getTotalResults(lottoGame, winning, bonus);

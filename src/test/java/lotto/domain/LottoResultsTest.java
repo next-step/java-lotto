@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.generator.ManualNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,7 +11,7 @@ class LottoResultsTest {
     @Test
     public void 당첨번호_통계() {
         LottoGame lottoGame = LottoUtils.createLottoGame();
-        Lotto winning = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto winning = new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 5, 6"));
         LottoNumber bonus = LottoNumber.from(10);
         LottoResults lottoResults = new LottoResults();
 
@@ -27,7 +28,7 @@ class LottoResultsTest {
     @Test
     public void 수익률_구하기() {
         LottoGame lottoGame = LottoUtils.createLottoGame();
-        Lotto winning = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto winning = new Lotto(new ManualNumberGenerator("1, 2, 3, 4, 5, 6"));
         LottoNumber bonus = LottoNumber.from(10);
         LottoResults lottoResults = new LottoResults();
         lottoResults.getTotalResults(lottoGame, winning, bonus);
