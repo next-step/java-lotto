@@ -55,11 +55,11 @@
   - 지난 주 당첨 번호를 입력해 주세요.
 - [x] LottoNumber 제약조건에 맞춰 구현
   - 1~45까지의 수만 허용한다.
-- [ ] Lotto
-  - Set<LottoNumber>
+- [x] Lotto
+  - List<LottoNumber>
   - 중복 없이 6개의 숫자 
   - 지난주 로또 개수도 입력 받아야 함.
-- [ ] LottoTicket
+- [ ] LottoTickets
   - List< Lotto >
   - 금액에 따라 Lotto 리스트 개수 출력
 - [ ] LottoPrize
