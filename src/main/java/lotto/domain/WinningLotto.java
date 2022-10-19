@@ -13,8 +13,15 @@ public class WinningLotto {
     }
 
     public static WinningLotto of(List<Integer> winningValues, int bonusValue) {
+        valid(winningValues, bonusValue);
         Lotto winningNumbers = Lotto.of(winningValues);
         LottoNumber bonusNumber = LottoNumber.from(bonusValue);
         return new WinningLotto(winningNumbers, bonusNumber);
+    }
+
+    private static void valid(List<Integer> winningValues, int bonusValue) {
+        if (winningValues.contains(bonusValue)) {
+            throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
     }
 }
