@@ -24,11 +24,12 @@ public class LottoRunner {
 
         //로또 당첨번호 입력
         LottoNumber winNumber = inputView.enterWinNumber();
-        BonusNumber bonusNumber = inputView.enterBonusNumber(winNumber);
+        BonusLottoNumber bonusNumber = inputView.enterBonusNumber(winNumber);
 
         //로또실행값 통계 계산
         Analyst analyst = new Analyst(lottoNumbers, winNumber, bonusNumber);
         CountsByRank countsByRank = analyst.getCountsByRank();
+        System.out.println("countsByRank = " + countsByRank);
         float revenueRatio = analyst.revenueRatio(countsByRank);
 
         //로또실행값 통계 출력

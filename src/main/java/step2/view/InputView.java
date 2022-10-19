@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.domain.BonusNumber;
+import step2.domain.BonusLottoNumber;
 import step2.domain.LottoNumber;
 
 import java.util.Arrays;
@@ -86,12 +86,12 @@ public class InputView {
         }
     }
 
-    public BonusNumber enterBonusNumber(LottoNumber winNumber) {
+    public BonusLottoNumber enterBonusNumber(LottoNumber winNumber) {
         printBonusNumberInitMessage();
         String bonusNumberInput = this.scanner.nextLine();
         this.scanner.close();
         int bonusNumber = stringConvertToInteger(bonusNumberInput);
-        return new BonusNumber(bonusNumber, winNumber);
+        return new BonusLottoNumber(bonusNumber, winNumber);
     }
 
 

@@ -39,4 +39,11 @@ public class CountsByRank {
     public Map<Rank, Long> getCountsByRank() {
         return countsByRank;
     }
+
+    @Override
+    public String toString() {
+        return "CountsByRank{" +
+                "countsByRank=" + countsByRank +
+                '}';
+    }
 }

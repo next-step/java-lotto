@@ -10,12 +10,12 @@ public class Analyst {
 
     private final LottoNumber winLottoNumber;
 
-    private final BonusNumber bonusNumber;
+    private final BonusLottoNumber bonusLottoNumber;
 
-    public Analyst(List<LottoNumber> targetData, LottoNumber winLottoNumber, BonusNumber bonusNumber) {
+    public Analyst(List<LottoNumber> targetData, LottoNumber winLottoNumber, BonusLottoNumber bonusLottoNumber) {
         this.targetData = targetData;
         this.winLottoNumber = winLottoNumber;
-        this.bonusNumber = bonusNumber;
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     public CountsByRank getCountsByRank() {
@@ -25,8 +25,8 @@ public class Analyst {
     private Map<Rank, Long> groupByRank() {
         return this.targetData.stream()
                 .map(lottoNumber -> {
-                    int countOfMath = lottoNumber.compareMatch(this.winLottoNumber);
-                    boolean matchBonus = lottoNumber.isInclude(bonusNumber.getBonusNumber());
+                    int countOfMath = lottoNumber.compareMatch(winLottoNumber);
+                    boolean matchBonus = lottoNumber.isInclude(bonusLottoNumber);
                     return Rank.valueOf(countOfMath, matchBonus);
                 })
                 .collect(Collectors.groupingBy(
