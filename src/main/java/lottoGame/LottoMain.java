@@ -1,12 +1,12 @@
 package lottoGame;
 
-import lottoGame.model.factory.DefaultLottoFactory;
+import lottoGame.model.strategy.AutoShuffleStrategy;
 import lottoGame.view.InputView;
 import lottoGame.view.ResultView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        LottoGenerator lottoGenerator = new LottoGenerator(InputView.print(), new DefaultLottoFactory(), new ResultView());
-        lottoGenerator.start();
+        LottoGameController lottoController = new LottoGameController(InputView.print(), new AutoShuffleStrategy(), new ResultView());
+        lottoController.start();
     }
 }

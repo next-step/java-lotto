@@ -1,6 +1,6 @@
 package lottoGame.view;
 
-import lottoGame.InputException;
+import lottoGame.model.exception.InputException;
 import lottoGame.model.InputParameter;
 
 import java.util.Scanner;

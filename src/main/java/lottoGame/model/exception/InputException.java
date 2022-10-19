@@ -1,4 +1,4 @@
-package lottoGame;
+package lottoGame.model.exception;
 
 public class InputException extends IllegalArgumentException {
    public InputException(String message){

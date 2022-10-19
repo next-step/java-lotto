@@ -1,12 +1,14 @@
 package lottoGame.view;
 
-import lottoGame.InputException;
-import lottoGame.WinningRanks;
-import lottoGame.model.InputParameter;
-import lottoGame.model.Lottery;
+import lottoGame.model.exception.InputException;
+import lottoGame.RankResult;
+import lottoGame.model.lotto.AutoLotto;
+import lottoGame.model.lotto.WinningLotto;
+import lottoGame.model.lotto.lottoNumber.DefaultLottoNumber;
+import lottoGame.model.lotto.Lottery;
+import lottoGame.model.lotto.lottoNumber.LottoNumber;
 
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -17,35 +19,35 @@ public class ResultView {
     private static final String startStatics = "당첨 통계";
 
     private static final String line = "\n---------\n";
-
-    private static final Pattern FILTER = Pattern.compile("^([1-9]{1}$|^[1-3]{1}[0-9]{1}$|^4{1}[0-5]{1}$|^,+$)");
     private final Scanner scanner = new Scanner(System.in);
 
 
-    public void printLottery(InputParameter inputParameter, Lottery lottery) {
-        System.out.println(inputParameter.getLotteryNum() + start);
-        lottery.getLottery().forEach(lotto -> System.out.println(lotto.toString()));
+    public void printLottery(Lottery lottery) {
+        System.out.println(lottery.countAllLotto() + start);
+        lottery.getLottery().forEach(autoLotto -> System.out.println(autoLotto.toString()));
     }
 
-    public List<Integer> inputWinningNumer() {
+    public WinningLotto inputWinningNumer() {
         System.out.println(inputWinningNum);
         String winningString = scanner.nextLine();
-        return changeInteger(winningString);
+        return new WinningLotto(changeInteger(winningString));
     }
 
-    public void printStatistics(EnumMap<WinningRanks, Integer> winningMap) {
+    public void printStatistics(RankResult rankResult) {
+
         System.out.printf("%s%s%n", startStatics, line);
-        winningMap.forEach((key, value) -> System.out.printf("%s개 일치 (%s원)- %s개%n", key.getMatchNum(), key.getWinnings(), value));
+        rankResult.getLotteryBoard().forEach((ranks, matchCount) ->
+                System.out.printf("%s개 일치 (%s원)- %s개\n", ranks.getMatchNum(), ranks.getRank(), matchCount));
     }
 
     public void printYield(String lottoYield) {
         System.out.printf("총 수익률은 %s 입니다.", lottoYield);
     }
 
-    private List<Integer> changeInteger(String winningString) {
+    private List<LottoNumber> changeInteger(String winningString) {
         return Arrays.stream(checkNumCount(split(winningString)))
-                .filter(this::validateNumRange)
                 .map(Integer::parseInt)
+                .map(DefaultLottoNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -55,18 +57,10 @@ public class ResultView {
 
 
     private String[] checkNumCount(String[] split) {
-        if (split.length > 6) {
+        if (split.length > AutoLotto.LOTTO_NUMBER_SIZE) {
             throw new InputException("6개 이상의 숫자를 입력했습니다.");
         }
         return split;
     }
-
-    private boolean validateNumRange(String inputWinningNum) {
-        if (FILTER.matcher(inputWinningNum).matches()) {
-            return true;
-        }
-        throw new InputException("로또 숫자 범위 안의 숫자와 , 입력해주세요.");
-    }
-
 
 }
