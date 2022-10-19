@@ -26,7 +26,6 @@ public class LottoResult {
                 .stream()
                 .mapToInt(l -> l.getRank().getWinningMoney())
                 .sum();
-
         return totalWinningMoney / lottos.getPurchasePrice();
     }
 

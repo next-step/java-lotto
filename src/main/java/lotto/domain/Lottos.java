@@ -39,6 +39,10 @@ public class Lottos {
         return this;
     }
 
+    public Integer getAmount() {
+        return amount;
+    }
+
     public Integer getPurchasePrice() {
         return purchasePrice;
     }
