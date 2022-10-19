@@ -10,7 +10,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto print(final LottoNumberStrategy lottoNumberStrategy) {
+    public static Lotto create(final LottoNumberStrategy lottoNumberStrategy) {
         return new Lotto(lottoNumberStrategy.provideNumberSet());
     }
 
