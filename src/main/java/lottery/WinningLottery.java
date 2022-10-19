@@ -28,7 +28,7 @@ public class WinningLottery extends Lottery {
 
     private EnumMap<LotteryRank, Integer> countEqualNumbers(List<Lottery> lotteries) {
         return new EnumMap<>(lotteries.stream()
-                .map(lottery -> LotteryRank.valueOf(countEqualNumbers(lottery)))
+                .map(lottery -> LotteryRank.valueOf(countEqualNumbers(lottery), isBonusMatched(lottery)))
                 .collect(Collectors.toMap(Function.identity(), value -> 1,
                         (existing, replacement) -> existing + 1)));
     }
@@ -38,6 +38,10 @@ public class WinningLottery extends Lottery {
                 .filter(lottery.lotteryNumbers::contains)
                 .mapToInt(lotteryNumber -> 1)
                 .sum();
+    }
+
+    private boolean isBonusMatched(Lottery lottery) {
+        return lottery.lotteryNumbers.contains(bonusLotteryNumber);
     }
 
 }

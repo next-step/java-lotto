@@ -15,7 +15,7 @@ public class LotteryResultTest {
     @BeforeEach
     void setUp() {
         EnumMap<LotteryRank, Integer> winningCounts = new EnumMap<>(Map.of(
-                LotteryRank.FOURTH, 2,
+                LotteryRank.FIFTH, 2,
                 LotteryRank.FIRST, 1,
                 LotteryRank.NONE, 7
         ));
@@ -25,7 +25,7 @@ public class LotteryResultTest {
 
     @Test
     void getWinningCountOfRank() {
-        assertThat(lotteryResult.getWinningCountOfRank(LotteryRank.FOURTH)).isEqualTo(2);
+        assertThat(lotteryResult.getWinningCountOfRank(LotteryRank.FIFTH)).isEqualTo(2);
         assertThat(lotteryResult.getWinningCountOfRank(LotteryRank.FIRST)).isEqualTo(1);
     }
 

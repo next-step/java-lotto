@@ -42,9 +42,9 @@ public class WinningLotteryTest {
 
     static Stream<Arguments> lotteryRankProvider() {
         return Stream.of(
-                Arguments.of(LotteryRank.FOURTH, 2),
-                Arguments.of(LotteryRank.THIRD, 1),
-                Arguments.of(LotteryRank.SECOND, 1)
+                Arguments.of(LotteryRank.FIFTH, 2),
+                Arguments.of(LotteryRank.FOURTH, 1),
+                Arguments.of(LotteryRank.THIRD, 1)
         );
     }
 }
