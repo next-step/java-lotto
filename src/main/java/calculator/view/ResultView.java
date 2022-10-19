@@ -2,7 +2,7 @@ package calculator.view;
 
 public class ResultView {
 
-    public static final String RESULT_MESSAGE = "실행결과를 출력합니다: ";
+    private static final String RESULT_MESSAGE = "실행결과를 출력합니다: ";
 
     private ResultView() {
     }

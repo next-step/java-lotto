@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static final String INPUT_START_MESSAGE = "계산할 식을 입력하세요.";
-    public static final String SPACE_SEPARATOR = " ";
-    public static final String EXCEPTION_MESSAGE = "입력값이 존재해야 합니다.";
+    private static final String INPUT_START_MESSAGE = "계산할 식을 입력하세요.";
+    private static final String SPACE_SEPARATOR = " ";
+    private static final String EXCEPTION_MESSAGE = "입력값이 존재해야 합니다.";
 
     private InputView() {
     }
