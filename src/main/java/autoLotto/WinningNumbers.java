@@ -13,8 +13,9 @@ public class WinningNumbers {
             throw new IllegalArgumentException("당첨 숫자는 6개 입력 해야합니다.");
         }
 
-        winningNumbers.forEach(n -> checkMaxNum(n));
-
+        for (Integer winningNumber : winningNumbers) {
+            checkMaxNum(winningNumber);
+        }
         this.winningNumbers = winningNumbers;
     }
 
