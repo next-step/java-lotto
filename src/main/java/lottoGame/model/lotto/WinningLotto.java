@@ -20,8 +20,4 @@ public class WinningLotto {
         return "" + lottoNumbers + "";
     }
 
-    public boolean existedMatchNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNum -> lottoNum.isMatchOrNot(lottoNumber.getLottoNumber()));
-    }
 }
