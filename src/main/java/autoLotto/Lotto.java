@@ -8,10 +8,10 @@ import java.util.List;
 import static java.util.stream.IntStream.*;
 
 public class Lotto {
-    private static final int LOTTO_START = 1;
-    private static final int LOTTO_END = 46;
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 46;
     private static final int ZERO = 0;
-    private static final int NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
 
     private List<Integer> lotto = new ArrayList<>();
@@ -19,10 +19,10 @@ public class Lotto {
     public Lotto() {
         List<Integer> numbers = new ArrayList<>();
 
-        range(LOTTO_START, LOTTO_END).forEach(numbers :: add);
+        range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX).forEach(numbers :: add);
         Collections.shuffle(numbers);
 
-        range(ZERO, NUMBER_SIZE).forEach(i -> lotto.add(numbers.get(i)));
+        range(ZERO, LOTTO_NUMBER_SIZE).forEach(i -> lotto.add(numbers.get(i)));
         Collections.sort(lotto);
     }
 
