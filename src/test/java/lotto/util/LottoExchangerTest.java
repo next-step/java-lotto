@@ -18,6 +18,6 @@ class LottoExchangerTest {
         Lottos lottos = LottoExchanger.purchaseLottos(purchasePrice);
 
         // then
-        assertThat(lottos).isEqualTo(new Lottos(14));
+        assertThat(lottos).isEqualTo(new Lottos(14, purchasePrice));
     }
 }

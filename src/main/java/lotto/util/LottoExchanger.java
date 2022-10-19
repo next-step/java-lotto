@@ -15,7 +15,7 @@ public class LottoExchanger {
         if (purchasePrice % LOTTO_PRICE != 0) {
             throw new InvalidInputException();
         }
-        return new Lottos(purchasePrice / LOTTO_PRICE);
+        return new Lottos(purchasePrice / LOTTO_PRICE, purchasePrice);
     }
 
 }
