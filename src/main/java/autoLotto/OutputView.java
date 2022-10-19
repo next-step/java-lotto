@@ -1,10 +1,5 @@
 package autoLotto;
 
-import java.util.List;
-
-import static autoLotto.Match.*;
-import static java.util.stream.IntStream.*;
-
 public class OutputView {
 
     public static void outputQuantity(int quantity) {
@@ -17,13 +12,15 @@ public class OutputView {
         }
     }
 
-    public static void outputResult(double result, int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {
+    public static void outputResult(GameResult gameResult) {
+        double result = gameResult.getResult();
+
         System.out.println("\n당첨 통계\n" +
                 "---------");
-        System.out.println("3개 일치 (5000원)-"+ threeMatch + "개");
-        System.out.println("4개 일치 (50000원)-"+ fourMatch + "개");
-        System.out.println("5개 일치 (1500000원)-"+ fiveMatch + "개");
-        System.out.println("6개 일치 (2000000000원)-"+ sixMatch + "개");
+        System.out.println("3개 일치 (5000원)-"+ gameResult.getThreeMatch() + "개");
+        System.out.println("4개 일치 (50000원)-"+ gameResult.getFourMatch() + "개");
+        System.out.println("5개 일치 (1500000원)-"+ gameResult.getFiveMatch() + "개");
+        System.out.println("6개 일치 (2000000000원)-"+ gameResult.getSixMatch() + "개");
 
         System.out.print("총 수익률은 " + result +"입니다.");
         if (result < 1) {
