@@ -13,8 +13,7 @@ public class InputView {
     public static int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
-            int amount = SCANNER.nextInt();
-            return amount;
+            return SCANNER.nextInt();
         } catch (InputMismatchException e) {
             throw new IllegalArgumentException(e);
         }
