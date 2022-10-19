@@ -21,6 +21,10 @@ public class Lotto {
         this.numbers = randomNumbers();
     }
 
+    public int correctCount(Lotto myLotto) {
+        return (int) numbers.stream().filter(myLotto.numbers::contains).count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
