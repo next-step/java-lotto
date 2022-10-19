@@ -14,7 +14,7 @@ public class LottoMachine {
     private final static int LOTTO_FIRST_NUMBER = 0;
     private final static int LOTTO_LAST_NUMBER = 6;
 
-    private List<Lotto> lottoTickets = new ArrayList<>();
+    private final List<Lotto> lottoTickets = new ArrayList<>();
 
     public void automaticIssue(List<LottoNumber> lottoNumbers, int count) {
         lottoTickets.addAll(IntStream.range(0, count)

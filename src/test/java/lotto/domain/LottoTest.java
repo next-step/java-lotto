@@ -52,7 +52,7 @@ public class LottoTest {
     @DisplayName("발급된 로또와 당첨 번호의 매칭된 숫자의 수를 검증한다.")
     void compareIssuedNumberWithWinningLotto() {
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.automaticIssue(lottoNumbers(), 1);
+        lottoMachine.automaticIssue(new ArrayList<>(lottoNumbers()), 1);
 
         Lotto winningNumber = new WinningLotto(new Lotto(lottoNumbers), LottoNumber.lottoNumber(7)).winningLotto();
         List<Integer> matchingCounts = lottoMachine.lottoTickets()

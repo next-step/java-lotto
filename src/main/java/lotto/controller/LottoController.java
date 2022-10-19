@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.domain.LottoNumber.lottoNumbers;
@@ -15,7 +16,7 @@ public class LottoController {
         LottoMachine lottoMachine = new LottoMachine();
 
         lottoMachine.manualIssue(Input.manualLottoTickets(payment.manualCount()));
-        lottoMachine.automaticIssue(lottoNumbers(), payment.automaticCount());
+        lottoMachine.automaticIssue(new ArrayList<>(lottoNumbers()), payment.automaticCount());
 
         List<Lotto> lottoTickets = lottoMachine.lottoTickets();
         Output.printPurchaseTickets(lottoTickets, payment.automaticCount(), payment.manualCount());
