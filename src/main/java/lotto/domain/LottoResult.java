@@ -19,11 +19,11 @@ public class LottoResult {
         result.merge(rank, 1, Integer::sum);
     }
 
-    public void result(Lotto winningNumbers, LottoTickets tickets, LottoNumber bonusBall) {
+    public void result(WinningLotto winningLotto, LottoTickets tickets) {
         List<Lotto> lottos = tickets.getTickets();
         for (Lotto lotto : lottos) {
-            int count = lotto.matches(winningNumbers);
-            Rank calculate = Rank.calculate(count, lotto.matches(bonusBall));
+            int count = winningLotto.matches(lotto);
+            Rank calculate = Rank.calculate(count, winningLotto.matchBonus(lotto));
             put(calculate);
         }
     }

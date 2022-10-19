@@ -2,9 +2,9 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -24,7 +24,7 @@ public class LottoController {
         List<Integer> winningNumbers = InputView.inputLottoNumberLastResult();
         int bonusBall = InputView.inputBonusBall();
 
-        LottoResult lottoResult = lottoTickets.getResult(Lotto.of(winningNumbers), LottoNumber.from(bonusBall));
+        LottoResult lottoResult = lottoTickets.getResult(WinningLotto.of(winningNumbers, bonusBall));
 
         ResultView.printStatistics(lottoResult.getStatistics());
         ResultView.printRating(lottoResult.getStatistics(), totalPrice);

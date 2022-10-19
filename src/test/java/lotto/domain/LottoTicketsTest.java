@@ -29,10 +29,10 @@ public class LottoTicketsTest {
     @DisplayName("6개를 맞추면 1등을 하는 결과가 나온다.")
     void result() {
         List<Integer> list = List.of(1,2,3,4,5,6);
-        LottoNumber bonus = LottoNumber.from(7);
+        int bonus = 7;
         LottoTickets lottoTickets = LottoTickets.of(List.of(Lotto.of(list)));
 
-        LottoResult result = lottoTickets.getResult(Lotto.of(list), bonus);
+        LottoResult result = lottoTickets.getResult(WinningLotto.of(list, bonus));
 
         assertThat(result.getStatistics().entrySet())
             .hasSize(6)

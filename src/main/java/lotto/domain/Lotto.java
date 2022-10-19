@@ -21,17 +21,6 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public int matches(Lotto winningNumbers) {
-        return (int) winningNumbers.lotto.stream()
-            .filter(lotto::contains)
-            .count();
-    }
-
-    public boolean matches(LottoNumber bonus) {
-        return lotto.stream()
-            .anyMatch(lottoNumber -> lottoNumber.equals(bonus));
-    }
-
     private boolean isDuplicate(List<LottoNumber> lottoNumbers) {
         int count = (int) lottoNumbers.stream()
             .distinct()
@@ -48,6 +37,10 @@ public class Lotto {
 
     public int size() {
         return this.lotto.size();
+    }
+
+    public List<LottoNumber> getLotto() {
+        return this.lotto;
     }
 
     @Override

@@ -48,10 +48,9 @@ public class LottoTickets {
         return new ArrayList<>(lottos);
     }
 
-    public LottoResult getResult(Lotto winningNumbers, LottoNumber bonusBall) {
+    public LottoResult getResult(WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.result(winningNumbers, LottoTickets.of(lottos), bonusBall);
+        lottoResult.result(winningLotto, LottoTickets.of(lottos));
         return lottoResult;
     }
-
 }
