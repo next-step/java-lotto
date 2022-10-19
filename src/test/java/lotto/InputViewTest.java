@@ -14,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputViewTest {
 
-    private final InputView inputView = new InputView();
-
     @BeforeEach
     void setOutStream(){
         OutputStream out= new ByteArrayOutputStream();
@@ -29,6 +27,7 @@ public class InputViewTest {
         InputStream in1 = new ByteArrayInputStream(priceInput.getBytes());
         System.setIn(in1);
 
+        InputView inputView = new InputView();
         TicketPriceInput result = inputView.getTicketPriceInput();
 
         TicketPriceInput expected = TicketPriceInput.builder()
@@ -45,6 +44,7 @@ public class InputViewTest {
         InputStream in1 = new ByteArrayInputStream(winningNumbersString.getBytes());
         System.setIn(in1);
 
+        InputView inputView = new InputView();
         WinningNumbers result = inputView.getWinningNumbers();
 
         WinningNumbers expected = new WinningNumbers(Arrays.asList(1,2,3,4,5,6));

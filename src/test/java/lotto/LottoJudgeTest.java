@@ -21,13 +21,13 @@ public class LottoJudgeTest {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1,2,3,4,5,6));
 
         LottoJudge lottoJudge = new LottoJudge();
-        lottoJudge.judge(lottos, winningNumbers);
+        WinnerCount result = lottoJudge.judge(lottos, winningNumbers);
 
         WinnerCount expected = new WinnerCount();
         expected.plusCount(WinnerRank.FIRST);
         expected.plusCount(WinnerRank.SECOND);
         expected.plusCount(WinnerRank.THIRD);
         expected.plusCount(WinnerRank.FORTH);
-        assertThat(lottoJudge.getWinnerCount()).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 }

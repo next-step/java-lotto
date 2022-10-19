@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static lotto.core.TicketPriceInput.DEFAULT_TICKET_PRICE;
+
 public class WinnerCount {
 
     private final Map<WinnerRank, Integer> winnerCount = new EnumMap<>(WinnerRank.class);
@@ -28,6 +30,10 @@ public class WinnerCount {
             result += entry.getKey().getAward() * entry.getValue();
         }
         return result;
+    }
+
+    public double getProfitRatio(Lottos lottos){
+        return getAllProfit() / (double) (lottos.getLottosAmount() * DEFAULT_TICKET_PRICE);
     }
 
     public Map<WinnerRank, Integer> getWinnerCount() {
