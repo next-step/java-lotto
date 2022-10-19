@@ -3,11 +3,19 @@ package lotto;
 import java.util.*;
 
 public class Lotto {
+    private final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private final Set<Number> numbers;
 
     public Lotto(Set<Number> numbers) {
+        validate(numbers);
         this.numbers = numbers;
+    }
+
+    private void validate(Set<Number> numbers) {
+        if (numbers.size() != NUMBER_OF_LOTTO_NUMBERS) {
+            throw new IllegalArgumentException("로또의 숫자 갯수는 6개 입니다.");
+        }
     }
 
     public static Lotto create(final LottoNumberStrategy lottoNumberStrategy) {
