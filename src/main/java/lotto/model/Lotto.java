@@ -13,7 +13,6 @@ public class Lotto {
         for (int lottoNumber : lottoNumbers) {
             lotto.add(new LottoNumber(lottoNumber));
         }
-        Collections.sort(lotto);
     }
 
     private void validate(Set<Integer> lottoNumbers) {

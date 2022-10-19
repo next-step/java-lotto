@@ -1,9 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,7 +27,7 @@ public class LottoGenerator {
         Collections.shuffle(fullLottoNumbers);
         Set<Integer> lottoNumbers = fullLottoNumbers.stream()
                 .limit(Lotto.LOTTO_SIZE)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
         return new Lotto(lottoNumbers);
     }
 
