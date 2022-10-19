@@ -1,4 +1,4 @@
-package lotto.auto;
+package lotto.second;
 
 import lotto.LottoNumber;
 import lotto.LottoWinningStrategy;
@@ -8,11 +8,14 @@ import lotto.SelectedLottoes;
 import java.util.List;
 import java.util.Optional;
 
-public class AutoWinningLottoes implements LottoWinningStrategy {
-    private final List<LottoNumber> winningLottoes;
+public class SecondWinningLottoes implements LottoWinningStrategy {
 
-    public AutoWinningLottoes(List<LottoNumber> winningLottoes) {
+    private final List<LottoNumber> winningLottoes;
+    private final LottoNumber bonusLotto;
+
+    public SecondWinningLottoes(List<LottoNumber> winningLottoes, LottoNumber bonusLotto) {
         this.winningLottoes = winningLottoes;
+        this.bonusLotto = bonusLotto;
     }
 
     @Override
@@ -21,7 +24,6 @@ public class AutoWinningLottoes implements LottoWinningStrategy {
         for (LottoNumber winningLotto : winningLottoes) {
             count += selectedLottoes.isWinning(winningLotto) ? 1 : 0;
         }
-        return RANK.findWinningPrize(count, false);
+        return RANK.findWinningPrize(count, selectedLottoes.isWinning(bonusLotto));
     }
-
 }

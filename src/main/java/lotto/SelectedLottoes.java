@@ -13,6 +13,10 @@ public class SelectedLottoes {
         return selectedLottoes;
     }
 
+    public boolean isWinning(LottoNumber lottoNumber) {
+        return selectedLottoes.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return selectedLottoes.toString();
