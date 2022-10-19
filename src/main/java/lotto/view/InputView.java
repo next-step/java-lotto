@@ -23,11 +23,7 @@ public class InputView {
 
     public static Lotto inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Set<Integer> winningNumbers = Arrays.stream(scanner.next().split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toSet());
-        return new Lotto(winningNumbers);
+        return new Lotto(scanner.next());
     }
 
     public static LottoNumber inputBonusBall() {

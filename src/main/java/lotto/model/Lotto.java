@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -13,6 +14,17 @@ public class Lotto {
         for (int lottoNumber : lottoNumbers) {
             lotto.add(new LottoNumber(lottoNumber));
         }
+    }
+
+    public Lotto(String winningNumbers) {
+        this(splitLotto(winningNumbers));
+    }
+
+    private static Set<Integer> splitLotto(String winningNumbers) {
+        return Arrays.stream(winningNumbers.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 
     private void validate(Set<Integer> lottoNumbers) {
