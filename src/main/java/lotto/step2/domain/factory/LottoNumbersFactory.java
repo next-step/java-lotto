@@ -2,24 +2,29 @@ package lotto.step2.domain.factory;
 
 import lotto.step2.domain.LottoNumber;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersFactory {
     private static class LottoNumbersHolder {
-        private static final List<LottoNumber> LOTTO_NUMBERS = lottoNumbersCreate();
+        private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = lottoNumbersCreate();
         private static final int LOTTO_MAX_NUMBER = 45;
         private static final int LOTTO_MIN_NUMBER = 1;
     
-        private static List<LottoNumber> lottoNumbersCreate() {
+        private static Map<Integer, LottoNumber> lottoNumbersCreate() {
             return IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                    .mapToObj(LottoNumber::new)
-                    .collect(Collectors.toList());
+                    .boxed()
+                    .collect(Collectors.toMap(lottoNumber -> lottoNumber, LottoNumber::new));
         }
     }
     
-    public static List<LottoNumber> getInstance() {
-        return LottoNumbersHolder.LOTTO_NUMBERS;
+    private static Map<Integer, LottoNumber> getInstance() {
+        return Collections.unmodifiableMap(LottoNumbersHolder.LOTTO_NUMBERS);
+    }
+    
+    public static LottoNumber getLottoNumber(final Integer lottoNumber) {
+        return getInstance().get(lottoNumber);
     }
 }

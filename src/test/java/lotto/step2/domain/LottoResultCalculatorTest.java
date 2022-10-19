@@ -11,7 +11,7 @@ public class LottoResultCalculatorTest {
     @Test
     @DisplayName("수익률 계산하기")
     void calculate_yield() {
-        double yield = LottoResultCalculator.parseYield(List.of(LottoRank.FIFTH), PaymentPriceTest.PAYMENT_PRICE);
+        double yield = LottoResultCalculator.parseYield(List.of(LottoRank.FIFTH), new PaymentInformationTest().paymentInformation);
         assertThat(yield).isEqualTo(0.35);
     }
 }

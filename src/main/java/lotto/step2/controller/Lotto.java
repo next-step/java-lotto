@@ -11,36 +11,49 @@ import java.util.List;
 public class Lotto {
     
     public void start() {
-        PaymentPrice paymentPrice = inputPaymentPrice();
-        LottoTickets lottoTickets = issueAutoLottoTickets(paymentPrice);
-        print(paymentPrice, lottoTickets);
+        PaymentInformation paymentInformation = inputPaymentPrice();
+        InputView.inputCountOfManualLotto(paymentInformation);
+        
+        final LottoTickets lottoTickets = issueManualLottoTickets(paymentInformation);
+        lottoTickets.mergeAutoLottos(issueAutoLottoTickets(paymentInformation));
+        print(paymentInformation, lottoTickets);
     }
     
-    private PaymentPrice inputPaymentPrice() {
-        return InputView.lottoPaymentPriceInput();
+    private PaymentInformation inputPaymentPrice() {
+        return InputView.inputLottoPaymentPrice();
     }
     
-    private LottoTickets issueAutoLottoTickets(PaymentPrice paymentPrice) {
-        return LottoTicketsFactory.from(new AutoLottoIssueStrategy(), paymentPrice);
+    private LottoTickets issueManualLottoTickets(final PaymentInformation paymentInformation) {
+        return InputView.inputManualLottoTickets(paymentInformation);
     }
     
-    private void print(PaymentPrice paymentPrice, LottoTickets lottoTickets) {
-        purchasedLottoNumbersPrint(paymentPrice, lottoTickets);
-        resultPrint(lottoTickets, paymentPrice);
+    private LottoTickets issueAutoLottoTickets(PaymentInformation paymentInformation) {
+        return LottoTicketsFactory.of(new AutoLottoIssueStrategy(), paymentInformation);
     }
     
-    private void purchasedLottoNumbersPrint(PaymentPrice paymentPrice, LottoTickets lottoTickets) {
-        ResultView.purchasedLottoNumbersPrint(lottoTickets, paymentPrice);
+    private void print(PaymentInformation paymentInformation, LottoTickets lottoTickets) {
+        purchasedLottoNumbersPrint(paymentInformation, lottoTickets);
+        resultPrint(lottoTickets, paymentInformation);
     }
     
-    private void resultPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
-        List<LottoRank> lottoRanks = lottoTickets.parseLottoRanks(inputWinningLottoNumbers());
+    private void purchasedLottoNumbersPrint(PaymentInformation paymentInformation, LottoTickets lottoTickets) {
+        ResultView.purchasedLottoNumbersPrint(lottoTickets, paymentInformation);
+    }
+    
+    private void resultPrint(LottoTickets lottoTickets, PaymentInformation paymentInformation) {
+        List<LottoRank> lottoRanks = getLottoRanks(lottoTickets);
         
         ResultView.winsNumbersPrint(lottoRanks);
-        ResultView.yieldPrint(LottoResultCalculator.parseYield(lottoRanks, paymentPrice));
+        ResultView.yieldPrint(LottoResultCalculator.parseYield(lottoRanks, paymentInformation));
+    }
+    
+    private List<LottoRank> getLottoRanks(final LottoTickets lottoTickets) {
+        return lottoTickets.parseLottoRanks(inputWinningLottoNumbers());
     }
     
     private WinningLottoNumbers inputWinningLottoNumbers() {
-        return InputView.winningLottoNumber();
+        final WinningLottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumber();
+        InputView.inputWinningBonusLottoNumber(winningLottoNumbers);
+        return winningLottoNumbers;
     }
 }

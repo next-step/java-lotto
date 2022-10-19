@@ -1,11 +1,12 @@
 package lotto.step2.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
+    private List<LottoTicket> lottoTickets;
     
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
@@ -26,8 +27,13 @@ public class LottoTickets {
         return LottoRank.valueOf(countMatchingNumber, isExistBonusLottoNumber);
     }
     
+    public void mergeAutoLottos(final LottoTickets lottoTickets) {
+        this.lottoTickets = new ArrayList<>(this.lottoTickets);
+        this.lottoTickets.addAll(lottoTickets.lottoTickets);
+    }
+    
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return Collections.unmodifiableList(lottoTickets);
     }
     
     @Override
