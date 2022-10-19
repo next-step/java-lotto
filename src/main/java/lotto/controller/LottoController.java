@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.util.LottoUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,15 +16,15 @@ public class LottoController {
         LottoCount count = new LottoCount(lottoPrice);
 
         resultView.printLottoCount(count);
-        List<LottoTicket> lottoTickets = LottoTickets.createLottoTickets(count);
+        List<LottoNumbers> lottoTickets = LottoMachine.createLottoTickets(count);
 
         resultView.printAllLottoNumbers(lottoTickets);
         getLottoResult(lottoTickets, lottoPrice);
     }
 
-    private void getLottoResult(List<LottoTicket> lottoTickets, int price) {
+    private void getLottoResult(List<LottoNumbers> lottoTickets, int price) {
         String[] winningNumbers = inputView.lastWeekLottoNumbersScan();
-        LastWeekLottoNumbers lottoNumbers = LastWeekLottoNumbers.createLottoNumbers(winningNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(LottoUtil.ArrayToList(winningNumbers));
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.calculateLottoResult(lottoTickets, lottoNumbers, price);

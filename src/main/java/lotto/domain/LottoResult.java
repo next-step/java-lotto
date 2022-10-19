@@ -12,8 +12,8 @@ public class LottoResult {
     private final int MIN_RANKING = 3;
     private final int MAX_RANKING = 6;
 
-    private int award;
-    private String winPercentage;
+    private long award;
+    double percentage;
 
     public LottoResult() {
         for (int i = MIN_RANKING; i <= MAX_RANKING; i++) {
@@ -21,38 +21,39 @@ public class LottoResult {
         }
     }
 
-    public void calculateLottoResult(List<LottoTicket> lottoTickets, LastWeekLottoNumbers lottoNumbers, int price) {
-        for (LottoTicket lottoTicket : lottoTickets) {
+    public void calculateLottoResult(List<LottoNumbers> lottoTickets, LottoNumbers lottoNumbers, int price) {
+        for (LottoNumbers lottoTicket : lottoTickets) {
             lottoMatchingResult(lottoTicket, lottoNumbers);
         }
         calculatePercentage(price);
     }
 
-    private void lottoMatchingResult(LottoTicket lottoTicket, LastWeekLottoNumbers lottoNumbers) {
+    private void lottoMatchingResult(LottoNumbers lottoTicket, LottoNumbers lottoNumbers) {
         int grade = filterMatchingNumbers(lottoTicket, lottoNumbers);
-        if (lottoRankings.containsKey(grade)) {
-            lottoRankings.put(grade, lottoRankings.get(grade) + 1);
+        lottoRankings.computeIfPresent(grade, (key, value) -> {
             award += LottoRanking.getAward(grade);
-        }
+            return value + 1;
+        });
+
     }
 
-    private int filterMatchingNumbers(LottoTicket lottoTicket, LastWeekLottoNumbers lastWeekLottoNumbers) {
-        List<Integer> match = lottoTicket.getNumbers().stream()
+    private int filterMatchingNumbers(LottoNumbers lottoNumbers, LottoNumbers lastWeekLottoNumbers) {
+        List<Integer> match = lottoNumbers.getLottoNumbers().stream()
                 .filter(lastWeekLottoNumbers::contains)
+                .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
         return match.size();
     }
 
     private void calculatePercentage(int price) {
-        double percentage = ((double) award / price);
-        this.winPercentage = String.format("%2.02f", percentage);
+        this.percentage = ((double) award / price);
     }
 
     public Map<Integer, Integer> getLottoRankings() {
         return this.lottoRankings;
     }
 
-    public String getWinPercentage() {
-        return this.winPercentage;
+    public double getPercentage() {
+        return this.percentage;
     }
 }
