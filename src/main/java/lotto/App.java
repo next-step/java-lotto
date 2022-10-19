@@ -18,6 +18,7 @@ public class App {
 
         List<Integer> winNumbers = InputView.inputWinNumbers();
         Map<Integer, Integer> result = game.play(new Lotto(winNumbers));
-        ResultView.printResult(price, result);
+        ResultView.printResult(result);
+        ResultView.printProfit(price, result);
     }
 }
