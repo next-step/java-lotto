@@ -14,11 +14,11 @@ public class Calculator {
         return calculate(str.split(REGEX));
     }
 
-    private static int calculate(String[] arr) {
-        int result = Integer.parseInt(arr[0]);
-        for (int i = 1; i < arr.length; i++) {
-            Operation operation = Operation.valueOfSymbol(arr[i]);
-            int number = Integer.parseInt(arr[++i]);
+    private static int calculate(String[] calculateStrings) {
+        int result = Integer.parseInt(calculateStrings[0]);
+        for (int i = 1; i < calculateStrings.length; i++) {
+            Operation operation = Operation.valueOfSymbol(calculateStrings[i]);
+            int number = Integer.parseInt(calculateStrings[++i]);
             result = operation.apply(result, number);
         }
         return result;
