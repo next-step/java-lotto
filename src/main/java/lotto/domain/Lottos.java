@@ -20,18 +20,6 @@ public class Lottos {
         return this.lottoList.size();
     }
 
-    public LottoResults getResult(Lotto winning, LottoNumber bonus) {
-        LottoResults lottoResults = new LottoResults();
-        for (Lotto lotto : lottoList) {
-            int sameNumbers = lotto.getSameNumberCount(winning);
-            boolean winBonus = lotto.getLottoNumbers().contains(bonus);
-
-            Rank rank = Rank.valueOf(sameNumbers, winBonus);
-            lottoResults.addRank(rank);
-        }
-        return lottoResults;
-    }
-
     public List<Lotto> getLottoList() {
         return this.lottoList;
     }

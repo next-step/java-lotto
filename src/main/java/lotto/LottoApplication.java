@@ -25,9 +25,10 @@ public class LottoApplication {
 
         String winningNumber = inputWinningNumber();
         int bonusNumber = inputBonusBall();
-        Lotto lotto = new Lotto(winningNumber);
+        Lotto winning = new Lotto(winningNumber);
         LottoNumber bonus = LottoNumber.from(bonusNumber);
-        LottoResults lottoResults = lottoGame.getResult(lotto, bonus);
+        LottoResults lottoResults = new LottoResults();
+        lottoResults.getTotalResults(lottoGame, winning, bonus);
         printWinningResult(lottoResults);
         printProfitRate(lottoResults, lottoGame.getManualCount() + lottoGame.getAutoCount());
     }

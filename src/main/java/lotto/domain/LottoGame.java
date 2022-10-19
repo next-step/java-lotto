@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
 
@@ -35,25 +37,6 @@ public class LottoGame {
         return this.autoAmount / Lottos.LOTTO_PRICE;
     }
 
-    public LottoResults getResult(Lotto winning, LottoNumber bonus) {
-        LottoResults lottoResults = new LottoResults();
-        int sameNumbers = 0;
-        boolean winBonus = false;
 
-        for (Lotto lotto : manualLottos.getLottoList()) {
-            sameNumbers = lotto.getSameNumberCount(winning);
-            winBonus = lotto.getLottoNumbers().contains(bonus);
-            Rank rank = Rank.valueOf(sameNumbers, winBonus);
-            lottoResults.addRank(rank);
-        }
 
-        for (Lotto lotto : autoLottos.getLottoList()) {
-            sameNumbers = lotto.getSameNumberCount(winning);
-            winBonus = lotto.getLottoNumbers().contains(bonus);
-            Rank rank = Rank.valueOf(sameNumbers, winBonus);
-            lottoResults.addRank(rank);
-        }
-
-        return lottoResults;
-    }
 }
