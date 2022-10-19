@@ -43,7 +43,7 @@ public class NumberTest {
     }
 
     @Test
-    void checkNum() {
+    void 당첨번호_성공() {
         List<Integer> numbers = new ArrayList<>();
         numbers.add(3);
         numbers.add(6);

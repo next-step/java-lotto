@@ -9,7 +9,7 @@ import java.util.List;
 public class CalculatorTest {
 
     @Test
-    void test() {
+    void 결과_계산() {
         Calculator calculator = new Calculator();
 
         Lottos lottos = new Lottos();
