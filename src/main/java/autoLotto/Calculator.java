@@ -7,7 +7,7 @@ public class Calculator {
         long totalAmount = INIT_NUM;
         for (int i = 0 ; i < lottos.getLottosSize() ; i++) {
             Lotto lotto = lottos.getLotto(i);
-            getTotalCount(lotto.getMatchQuantity(winningNumbers.getWinningNumbers()));
+            countOfMatch(lotto.getMatchQuantity(winningNumbers.getWinningNumbers()));
             totalAmount = getTotalAmount();
         }
         return Math.floor(((double)totalAmount / amount) * 100) / 100.0;
@@ -23,7 +23,7 @@ public class Calculator {
         return result;
     }
 
-    private static void getTotalCount(int matchNumQuantity) {
+    private static void countOfMatch(int matchNumQuantity) {
         if (matchNumQuantity >= 3) {
             Match match = Matcher.get(matchNumQuantity);
             match.countOfMatch();
