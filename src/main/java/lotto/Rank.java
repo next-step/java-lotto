@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-//FIXME: 좀더 명시적인 이름으로 변경 :)
 public enum Rank {
     FIRST(6, 2_000_000_000L),
     SECOND(5, 1_500_000L),
