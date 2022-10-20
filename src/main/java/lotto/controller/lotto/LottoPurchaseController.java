@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoPurchaseController {
 
@@ -40,14 +41,11 @@ public class LottoPurchaseController {
         LottoOutput.purchaseManualAmount();
         Amount manualAmount = new Amount(LottoInput.purchaseManualAmount());
         LottoOutput.manualLottoNumbers();
-        return lottoPurchaseService.purchaseLotto(inputLottoNumber(manualAmount));
-    }
 
-    private static List<LottoNumberSet> inputLottoNumber(Amount manualAmount) {
-        List<LottoNumberSet> lottoNumberSetList = new ArrayList<>();
-        for (int i = 0; i < manualAmount.amount(); i++) {
-            lottoNumberSetList.add(LottoNumberSet.createLottoNumberSet(LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER)));
-        }
-        return lottoNumberSetList;
+        List<LottoNumberSet> lottoNumberSetList = IntStream.range(0, manualAmount.amount())
+                .mapToObj(i -> LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER))
+                .map(ints -> LottoNumberSet.createLottoNumberSet(ints))
+                .collect(Collectors.toList());
+        return lottoPurchaseService.purchaseLotto(lottoNumberSetList);
     }
 }
