@@ -76,7 +76,7 @@
   - 수익률
 
 ### 리뷰 요구사항
-- [ ] InputView 에서 질문에 해당하는 입력 값 바로 리턴하게 수정.
+- [x] InputView 에서 질문에 해당하는 입력 값 바로 리턴하게 수정.
 - [ ] 객체가 직접 Validation 관리하게 수정
 - [ ] LottoAmountExpression -> LottoAmount 로 이동.
 - [ ] LottoNumber

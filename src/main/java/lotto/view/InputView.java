@@ -10,15 +10,17 @@ public final class InputView {
     private InputView() {
     }
 
-    public static void askAmount() {
+    public static String askAmount() {
         System.out.println(AMOUNT_QUESTION_MESSAGE);
+        return inputAnswer();
     }
 
-    public static void askLastWeekWinningLottoNumbers() {
+    public static String askLastWeekWinningLottoNumbers() {
         System.out.println(LAST_WEEK_WINNING_NUMBERS_QUESTION_MESSAGE);
+        return inputAnswer();
     }
 
-    public static String inputAnswer() {
+    private static String inputAnswer() {
         return SCANNER.nextLine();
     }
 }

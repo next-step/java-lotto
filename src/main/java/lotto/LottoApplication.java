@@ -12,8 +12,7 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        InputView.askAmount();
-        LottoAmount lottoAmount = new LottoAmount(InputView.inputAnswer());
+        LottoAmount lottoAmount = new LottoAmount(InputView.askAmount());
         int lottoCount = lottoAmount.calcLottoCount();
         ResultView.showLottoCount(lottoCount);
 
@@ -21,8 +20,7 @@ public class LottoApplication {
         List<LottoDto> lottos = lottoTickets.generateTickets();
         ResultView.showAutoLottoTickets(lottos);
 
-        InputView.askLastWeekWinningLottoNumbers();
-        Lotto lotto = new Lotto(InputView.inputAnswer());
+        Lotto lotto = new Lotto(InputView.askLastWeekWinningLottoNumbers());
 
         LottoWinning winning = lottoTickets.result(lotto);
         ResultView.printWinning(winning);
