@@ -2,14 +2,14 @@ package lotto.domain;
 
 import lotto.dto.LottoDto;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoGenerator.toLotto;
 import static lotto.domain.LottoGenerator.validateSize;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto() {
         this(createLotto());
@@ -19,12 +19,12 @@ public class Lotto {
         this(toLotto(numbers));
     }
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(Set<LottoNumber> numbers) {
         validateSize(numbers);
         this.numbers = numbers;
     }
 
-    private static List<LottoNumber> createLotto() {
+    private static Set<LottoNumber> createLotto() {
         return LottoGenerator.generate();
     }
 
