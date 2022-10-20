@@ -3,6 +3,7 @@ package domain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import view.View;
 
 import java.util.Arrays;
 import java.util.Deque;
@@ -16,7 +17,7 @@ public class CalculatorTest {
     @Test
     void calculate() {
         Calculator calculator = Calculator.getInstance();
-        assertThat(calculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+        assertThat(calculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10L);
     }
 
     @ParameterizedTest
@@ -31,7 +32,7 @@ public class CalculatorTest {
 
     @Test
     void extractOperand() {
-        Deque<String> operandDeque = new LinkedList(Arrays.asList(2, 3, 4, 2));
+        Deque<String> operandDeque = new LinkedList(Arrays.asList(2L, 3L, 4L, 2L));
         assertThat(OperandExtractor.getInstance().extractToDeque("2 + 3 * 4 / 2")).isEqualTo(operandDeque);
     }
 
@@ -72,5 +73,11 @@ public class CalculatorTest {
         assertThatThrownBy(() -> {
             calculator.divide(6, 0);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void as() {
+
+        System.out.println(2 / 3);
     }
 }

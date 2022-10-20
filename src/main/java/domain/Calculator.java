@@ -13,8 +13,8 @@ public class Calculator {
         private static final Calculator instance = new Calculator();
     }
 
-    public int calculate(String text) {
-        Deque<Integer> operands = OperandExtractor.getInstance().extractToDeque(text);
+    public long calculate(String text) {
+        Deque<Long> operands = OperandExtractor.getInstance().extractToDeque(text);
         Deque<String> operators = OperatorExtractor.getInstance().extractToDeque(text);
         validate(operands, operators);
 
@@ -25,7 +25,7 @@ public class Calculator {
         return operands.poll();
     }
 
-    public int calculate(int firstOperand, int secondOperand, String operator) {
+    public long calculate(long firstOperand, long secondOperand, String operator) {
         switch (operator) {
             case "+":
                 return add(firstOperand, secondOperand);
@@ -40,19 +40,19 @@ public class Calculator {
         }
     }
 
-    public int add(int firstOperand, int secondOperand) {
+    public long add(long firstOperand, long secondOperand) {
         return firstOperand + secondOperand;
     }
 
-    public int subtract(int firstOperand, int secondOperand) {
+    public long subtract(long firstOperand, long secondOperand) {
         return firstOperand - secondOperand;
     }
 
-    public int multiple(int firstOperand, int secondOperand) {
+    public long multiple(long firstOperand, long secondOperand) {
         return firstOperand * secondOperand;
     }
 
-    public int divide(int firstOperand, int secondOperand) {
+    public long divide(long firstOperand, long secondOperand) {
         if (secondOperand == 0) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
@@ -60,7 +60,15 @@ public class Calculator {
         return firstOperand / secondOperand;
     }
 
-    private void validate(Deque<Integer> operands, Deque<String> operators) {
+    public double divide(long firstOperand, double secondOperand) {
+        if (secondOperand == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+
+        return firstOperand / secondOperand;
+    }
+
+    private void validate(Deque<Long> operands, Deque<String> operators) {
         if (operands.size() != operators.size() + 1) {
             throw new IllegalArgumentException("연산자 혹은 피연산자가 부족합니다.");
         }
