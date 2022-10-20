@@ -10,6 +10,7 @@ import java.util.Map;
 import static lotto.client.InputView.*;
 import static lotto.client.OutputView.*;
 import static lotto.creator.LottoCreator.createAutoLotto;
+import static lotto.model.Profit.getReturnRate;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,9 +22,11 @@ public class Main {
         showCountOfLotto(lotteries);
         showCreatedLotteries(lotteries);
 
-        Map<Rank, Long> lotteriesRank = lotteries.getLotteriesRank(new WinningLotto(scanLastWinLotte(), scanBonusBall()));
+        Profit profit = new Profit(new WinningLotto(scanLastWinLotte(), scanBonusBall()));
+
+        Map<Rank, Long> lotteriesRank = profit.getLotteriesRank(lotteries.getAllLotteries());
 
         showResultRank(lotteriesRank);
-        showReturnRate(new Profit(lotteriesRank), purchaseAmount);
+        showReturnRate(getReturnRate(lotteriesRank, purchaseAmount));
     }
 }

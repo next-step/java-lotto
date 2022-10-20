@@ -25,7 +25,7 @@ public class Lotto {
         validateLottoSize();
     }
 
-    private void validateLottoSize(){
+    private void validateLottoSize() {
         if (this.lotto.size() != 6) {
             throw new InvalidLottoSizeException(String.format("[사이즈 오류] 로또는 6개의 숫자가 생성되어야 합니다. %s", lotto.size()));
         }

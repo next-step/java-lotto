@@ -17,8 +17,8 @@ public enum Rank {
     private static final Map<Double, Rank> RANK_MAP = Arrays.stream(Rank.values())
             .collect(Collectors.toMap(rank -> rank.countOfMatch, Function.identity()));
 
-    private double countOfMatch;
-    private int winningMoney;
+    private final double countOfMatch;
+    private final int winningMoney;
 
     Rank(double countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
@@ -33,7 +33,17 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(double countOfMatch) {
-        return Optional.ofNullable(RANK_MAP.get(countOfMatch)).orElse(MISS);
+    public static Rank valueOf(double countOfMatch, boolean isContainBonusBall) {
+        return Optional.ofNullable(RANK_MAP.get(countOfMatch))
+                .map(rank -> rank.containBonusBallRank(isContainBonusBall))
+                .orElse(MISS);
+    }
+
+    private Rank containBonusBallRank(boolean isMatchBonusBall) {
+        if (isMatchBonusBall && this.equals(THIRD)) {
+            return SECOND;
+        }
+
+        return this;
     }
 }
