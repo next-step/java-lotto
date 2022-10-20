@@ -14,10 +14,26 @@ public class ExpressionAsArithmeticExpression {
     }
 
     public Numbers numbers() {
+        verifyValidExpression();
+
         return new Numbers(new ExpressionAsNumbers(expression));
     }
 
     public Operators operators() {
+        verifyValidExpression();
+
         return new Operators(new ExpressionAsOperators(expression));
     }
+
+    public void verifyValidExpression() {
+        if (expression == null) {
+            throw new IllegalStateException("유효한 연산식이 아닙니다.");
+        }
+
+        if (!expression.matches("^([+\\-]?\\d+)( [+\\-/*] \\d+)*")) {
+            throw new IllegalStateException("유효한 연산식이 아닙니다.");
+        }
+    }
+
+
 }
