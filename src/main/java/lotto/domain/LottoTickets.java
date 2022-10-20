@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static lotto.util.LottoNumber.getAutoNumberList;
 
@@ -51,16 +50,4 @@ public class LottoTickets {
         return lottoList;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoTickets lottoTickets = (LottoTickets) o;
-        return Objects.equals(amount, lottoTickets.amount) && Objects.equals(lottoList, lottoTickets.lottoList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(amount, lottoList);
-    }
 }
