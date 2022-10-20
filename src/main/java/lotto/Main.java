@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static lotto.client.InputView.*;
 import static lotto.client.OutputView.*;
-import static lotto.creator.LottoCreator.createAutoLotto;
+import static lotto.model.LottoCreator.createAutoLotto;
 import static lotto.model.Profit.getReturnRate;
 
 public class Main {

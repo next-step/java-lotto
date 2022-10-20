@@ -4,10 +4,7 @@ import lotto.exception.WrongParameterException;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -33,6 +30,8 @@ public class InputView {
     }
 
     public static List<Lotto> scanManualLottoNumber(int count) {
+        if(count == 0) return new ArrayList<>();
+
         show("수동으로 구매할 번호를 입력해 주세요.");
 
         return IntStream.rangeClosed(1, count)

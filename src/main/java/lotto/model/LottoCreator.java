@@ -1,8 +1,4 @@
-package lotto.creator;
-
-import lotto.model.Lotteries;
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
+package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
