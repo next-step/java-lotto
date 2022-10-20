@@ -7,7 +7,7 @@ public class ManualLottoCount extends PlayLottoCount {
 
     public ManualLottoCount(PlayLottoCount playLottoCount, int value) {
         super(value);
-        if (playLottoCount.getValue() < value) {
+        if (playLottoCount.isLessThan(value)) {
             throw CannotBeGreaterPlayableLottoCount.getInstance();
         }
     }

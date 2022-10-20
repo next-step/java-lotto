@@ -27,6 +27,7 @@ public class Lotto {
 
     public static Lotto from(String value) {
         List<String> values = Arrays.stream(value.split(SEPARATOR))
+                .map(String::trim)
                 .collect(Collectors.toList());
         return Lotto.from(values);
     }

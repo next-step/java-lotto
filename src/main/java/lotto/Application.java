@@ -1,11 +1,9 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.exception.*;
+import lotto.domain.exception.LottoDomainException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.List;
 
 public class Application {
 
@@ -19,16 +17,16 @@ public class Application {
         ManualLottoCount manualLottoCount = createManualLottoCount(playLottoCount);
         OutputView.printNewLine();
 
-        LottoPaper lottoPaper = createLottoPaper(manualLottoCount);
+        LottoPaper manualLottoPaper = createLottoPaper(manualLottoCount);
         OutputView.printNewLine();
 
-        List<Lotto> lottos = AutoLottoGenerator.generate(playLottoCount);
-        OutputView.printGeneratedLottos(lottos);
+        LottoPaper lottoPaper = manualLottoPaper.generateAutoLottos(playLottoCount.subtract(manualLottoCount), new AutoLottoGenerator());
+        OutputView.printGeneratedLottos(lottoPaper.getElements());
         OutputView.printNewLine();
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
         BonusBall bonusBall = createBonusBall(lastWeekWinningLotto);
-        WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWeekWinningLotto, bonusBall);
+        WinningStatistics winningStatistics = WinningStatistics.of(lottoPaper.getElements(), lastWeekWinningLotto, bonusBall);
         OutputView.printWinningStatistics(winningStatistics, money.calculatePrice());
     }
 

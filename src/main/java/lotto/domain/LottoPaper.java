@@ -2,9 +2,12 @@ package lotto.domain;
 
 import lotto.util.NullCheckUtil;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoPaper {
 
@@ -21,6 +24,19 @@ public class LottoPaper {
                         .map(Lotto::from)
                         .collect(Collectors.toList())
         );
+    }
+
+    public LottoPaper generateAutoLottos(PlayLottoCount playLottoCount, LottoGenerable lottoGenerable) {
+        List<Lotto> lottos = lottoGenerable.generate(playLottoCount);
+        return new LottoPaper(
+                Stream.of(elements, lottos)
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.toList())
+        );
+    }
+
+    public List<Lotto> getElements() {
+        return Collections.unmodifiableList(elements);
     }
 
     @Override

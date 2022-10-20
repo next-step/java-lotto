@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class PlayLottoCount {
 
+    private static final int MINIMUM = 0;
     private final int value;
 
     public PlayLottoCount(int value) {
@@ -18,8 +19,8 @@ public class PlayLottoCount {
     }
 
     private static void validateSize(int value) {
-        if (value < 1) {
-            throw new IllegalArgumentException("1보다 작은 수로 생성할 수 없습니다.");
+        if (value < MINIMUM) {
+            throw new IllegalArgumentException(String.format("%s보다 작은 수로 생성할 수 없습니다.", MINIMUM));
         }
     }
 
@@ -29,6 +30,14 @@ public class PlayLottoCount {
         } catch (NumberFormatException e) {
             throw NotNumberStringException.getInstance();
         }
+    }
+
+    public boolean isLessThan(int value) {
+        return this.value < value;
+    }
+
+    public PlayLottoCount subtract(PlayLottoCount playLottoCount) {
+        return new PlayLottoCount(this.value - playLottoCount.value);
     }
 
     public int getValue() {
@@ -53,9 +62,5 @@ public class PlayLottoCount {
         return "PlayLottoCount{" +
                 "value=" + value +
                 '}';
-    }
-
-    public boolean isLessThan(int value) {
-        return this.value < value;
     }
 }
