@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
@@ -14,6 +15,11 @@ public class CalculatorTest {
     @ValueSource(strings = {"", "  "})
     void test_empty_string(String value) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Calculator(value));
+    }
+
+    @Test
+    void test_invalid_operator() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Calculator("2 . 3").calculate());
     }
 
     @ParameterizedTest

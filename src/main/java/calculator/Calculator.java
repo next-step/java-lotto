@@ -4,7 +4,7 @@ public class Calculator {
     private final String expr;
     public Calculator(String expr) {
         if (expr == null || expr.isBlank()) {
-            throw new IllegalArgumentException("null or empty string input");
+            throw new IllegalArgumentException("should not null or empty string");
         }
         this.expr = expr;
     }
@@ -24,6 +24,8 @@ public class Calculator {
                 lhs = lhs * rhs;
             } else if (op.equals("/")) {
                 lhs = lhs / rhs;
+            } else {
+                throw new IllegalArgumentException("invalid operator");
             }
         }
 
