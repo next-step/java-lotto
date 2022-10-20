@@ -1,29 +1,35 @@
-package step1.numbers;
+package step1.arithmeticExpression.operators;
 
+import step1.arithmeticExpression.operators.operator.Operator;
+
+import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class ExpressionAsNumbers {
+public class ExpressionAsOperators {
 
-    private static final Pattern NUMBERS_EXTRACTION_RULE = Pattern.compile("-?\\d+");
+    private static final Pattern OPERATORS_EXTRACTION_RULE = Pattern.compile("[+\\-/*]");
 
     private final String expression;
 
-    public ExpressionAsNumbers(String expression) {
+    public ExpressionAsOperators(String expression) {
         this.expression = expression;
     }
 
-    public List<Integer> numbers() {
+    public Queue<Operator> operators() {
         verifyValidExpression();
 
-        return NUMBERS_EXTRACTION_RULE.matcher(expression)
+        List<Operator> operators = OPERATORS_EXTRACTION_RULE.matcher(expression)
                 .results()
                 .map(MatchResult::group)
-                .map(Integer::parseInt)
+                .map(Operator::foundOperator)
                 .collect(Collectors.toUnmodifiableList());
+
+        return new ArrayDeque<>(operators);
     }
 
     private void verifyValidExpression() {
@@ -34,14 +40,18 @@ public class ExpressionAsNumbers {
 
     @Override
     public boolean equals(Object o) {
+        verifyValidExpression();
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ExpressionAsNumbers that = (ExpressionAsNumbers) o;
+        ExpressionAsOperators that = (ExpressionAsOperators) o;
         return Objects.equals(expression, that.expression);
     }
 
     @Override
     public int hashCode() {
+        verifyValidExpression();
+
         return Objects.hash(expression);
     }
 }

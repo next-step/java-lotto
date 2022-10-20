@@ -1,7 +1,7 @@
-package step1;
+package step1.arithmeticExpression;
 
-import step1.numbers.Numbers;
-import step1.operators.Operators;
+import step1.arithmeticExpression.numbers.Numbers;
+import step1.arithmeticExpression.operators.Operators;
 
 public class ArithmeticExpression {
 

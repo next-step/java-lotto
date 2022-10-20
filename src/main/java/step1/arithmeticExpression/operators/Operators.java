@@ -1,6 +1,6 @@
-package step1.operators;
+package step1.arithmeticExpression.operators;
 
-import step1.operators.operator.Operator;
+import step1.arithmeticExpression.operators.operator.Operator;
 
 import java.util.Objects;
 import java.util.Queue;

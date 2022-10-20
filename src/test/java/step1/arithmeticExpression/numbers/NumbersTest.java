@@ -1,10 +1,8 @@
-package step1.numbers;
+package step1.arithmeticExpression.numbers;
 
 import org.junit.jupiter.api.Test;
-import step1.numbers.ExpressionAsNumbers;
-import step1.numbers.Numbers;
-import step1.operators.ExpressionAsOperators;
-import step1.operators.Operators;
+import step1.arithmeticExpression.operators.ExpressionAsOperators;
+import step1.arithmeticExpression.operators.Operators;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

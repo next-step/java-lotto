@@ -1,7 +1,7 @@
-package step1.numbers;
+package step1.arithmeticExpression.numbers;
 
-import step1.operators.Operators;
-import step1.operators.operator.Operator;
+import step1.arithmeticExpression.operators.Operators;
+import step1.arithmeticExpression.operators.operator.Operator;
 
 import java.util.Objects;
 import java.util.Queue;

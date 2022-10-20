@@ -1,13 +1,14 @@
-package step1;
+package step1.arithmeticExpression;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import step1.numbers.ExpressionAsNumbers;
-import step1.numbers.Numbers;
-import step1.operators.ExpressionAsOperators;
-import step1.operators.Operators;
+import step1.arithmeticExpression.ExpressionAsArithmeticExpression;
+import step1.arithmeticExpression.numbers.ExpressionAsNumbers;
+import step1.arithmeticExpression.numbers.Numbers;
+import step1.arithmeticExpression.operators.ExpressionAsOperators;
+import step1.arithmeticExpression.operators.Operators;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

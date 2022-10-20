@@ -1,4 +1,4 @@
-package step1.operators.operator;
+package step1.arithmeticExpression.operators.operator;
 
 import java.util.Arrays;
 import java.util.Objects;

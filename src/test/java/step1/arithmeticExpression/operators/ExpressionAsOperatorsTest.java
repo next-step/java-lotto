@@ -1,29 +1,29 @@
-package step1.numbers;
+package step1.arithmeticExpression.operators;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import step1.numbers.ExpressionAsNumbers;
+import step1.arithmeticExpression.operators.operator.Operator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class ExpressionAsNumbersTest {
+class ExpressionAsOperatorsTest {
 
     @Test
-    void 연산식로부터_양수를_추출할_수_있다() {
+    void 연산식로부터_산술_연산자를_추출할_수_있다() {
         String expression = "1 + 1";
-        ExpressionAsNumbers sut = new ExpressionAsNumbers(expression);
+        ExpressionAsOperators sut = new ExpressionAsOperators(expression);
 
-        assertThat(sut.numbers()).containsExactly(1, 1);
+        assertThat(sut.operators()).containsExactly(Operator.PLUS);
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     void 올바른_연산식이_아닐_경우_예외가_발생한다(String expression) {
-        ExpressionAsNumbers sut = new ExpressionAsNumbers(expression);
+        ExpressionAsOperators sut = new ExpressionAsOperators(expression);
 
-        assertThatThrownBy(() -> sut.numbers())
+        assertThatThrownBy(() -> sut.operators())
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("올바른 연산식이 아닙니다.");
     }
