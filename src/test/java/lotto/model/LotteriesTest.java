@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.model.enumeration.Rank;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ class LotteriesTest {
         Lotteries lotteries = new Lotteries(
                 List.of(new Lotto(createLottoNumber(1, 2, 4, 24, 25, 45)),
                         new Lotto(createLottoNumber(1, 2, 3, 25, 35, 44)))
+                , new ArrayList<>()
         );
 
         WinningLotto winningLotto = new WinningLotto(createLottoNumber(1, 2, 4, 24, 25, 45), new LottoNumber(44));
@@ -30,6 +32,7 @@ class LotteriesTest {
         Lotteries lotteries = new Lotteries(
                 List.of(new Lotto(createLottoNumber(1, 2, 4, 24, 25, 45)),
                         new Lotto(createLottoNumber(1, 2, 3, 25, 35, 44)))
+                , new ArrayList<>()
         );
 
         WinningLotto winningLotto = new WinningLotto(createLottoNumber(1, 2, 4, 24, 25, 43), new LottoNumber(45));

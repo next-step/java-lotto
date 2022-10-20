@@ -9,12 +9,14 @@ import java.util.Map;
 
 import static lotto.client.InputView.*;
 import static lotto.client.OutputView.*;
-import static lotto.creator.LottoCreator.getLotteries;
+import static lotto.creator.LottoCreator.createAutoLotto;
 
 public class Main {
     public static void main(String[] args) {
         int purchaseAmount = scanPurchaseAmount();
-        Lotteries lotteries = getLotteries(purchaseAmount);
+        int manualLottoCount = scanManualLottoCount();
+
+        Lotteries lotteries = new Lotteries(createAutoLotto(purchaseAmount), scanManualLottoNumber(manualLottoCount));
 
         showCountOfLotto(lotteries);
         showCreatedLotteries(lotteries);
