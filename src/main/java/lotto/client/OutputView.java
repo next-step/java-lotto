@@ -1,7 +1,6 @@
 package lotto.client;
 
 import lotto.model.Lotteries;
-import lotto.model.Profit;
 import lotto.model.enumeration.Rank;
 
 import java.util.Arrays;
@@ -55,8 +54,7 @@ public class OutputView {
                 );
     }
 
-    public static void showReturnRate(Profit profit, int purchaseAmount) {
-        double returnRate = profit.getTotalWinningMoney() / purchaseAmount;
+    public static void showReturnRate(double returnRate) {
         show(RETURN_RATE_FORM.replace("{rate}", String.format("%.2f", returnRate)));
 
         if (returnRate < 1) {
