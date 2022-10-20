@@ -25,6 +25,10 @@ public class Lotto {
         return (int) numbers.stream().filter(myLotto.numbers::contains).count();
     }
 
+    public List<Integer> getSortedNumbers() {
+        return numbers.stream().sorted().collect(Collectors.toList());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
