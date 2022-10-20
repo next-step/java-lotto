@@ -2,6 +2,7 @@ package step1.operators;
 
 import step1.operators.operator.Operator;
 
+import java.util.Objects;
 import java.util.Queue;
 
 public class Operators {
@@ -16,4 +17,16 @@ public class Operators {
         return expressionAsOperators.operators();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Operators operators = (Operators) o;
+        return Objects.equals(expressionAsOperators, operators.expressionAsOperators);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expressionAsOperators);
+    }
 }
