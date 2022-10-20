@@ -33,7 +33,9 @@ public class ExpressionAsArithmeticExpression {
         if (!expression.matches("^([+\\-]?\\d+)( [+\\-/*] \\d+)*")) {
             throw new IllegalStateException("유효한 연산식이 아닙니다.");
         }
+
+        if (expression.contains("/ 0")) {
+            throw new IllegalStateException("0으로 나눌 수 없습니다.");
+        }
     }
-
-
 }
