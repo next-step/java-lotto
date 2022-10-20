@@ -1,6 +1,6 @@
 package lotto.domain.exception;
 
-public class DuplicateLottoNumberException extends RuntimeException {
+public class DuplicateLottoNumberException extends LottoDomainException {
 
     private static final DuplicateLottoNumberException DUPLICATE_LOTTO_NUMBER_EXCEPTION =
             new DuplicateLottoNumberException("중복된 로또 번호가 있습니다.");

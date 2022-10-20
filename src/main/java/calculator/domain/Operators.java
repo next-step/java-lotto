@@ -15,7 +15,7 @@ public class Operators {
         this.values = values;
     }
 
-    public static Operators of(final List<String> values) {
+    public static Operators from(final List<String> values) {
         return new Operators(parseOperator(values));
     }
 
@@ -27,7 +27,7 @@ public class Operators {
 
     private static List<Operator> parseOperator(List<String> values) {
         return values.stream()
-                .map(Operator::of)
+                .map(Operator::from)
                 .collect(Collectors.toList());
     }
 

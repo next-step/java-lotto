@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.exception.InvalidLottoNumberSizeException;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Set;
@@ -10,7 +11,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LottoTest {
@@ -27,7 +29,7 @@ public class LottoTest {
     @Nested
     class Create {
 
-        @DisplayName("List<Integer>타입을 파라미터로 받을 수 있다.")
+        @DisplayName("List<String>타입을 파라미터로 받을 수 있다.")
         @Test
         void create_by_List() {
             Lotto expected = lotto;
@@ -36,6 +38,15 @@ public class LottoTest {
                             .mapToObj(Integer::toString)
                             .collect(Collectors.toList())
             );
+
+            assertThat(actual).isEqualTo(expected);
+        }
+
+        @DisplayName("String 타입을 파라미터로 받을 수 있다.")
+        @Test
+        void create_by_string() {
+            Lotto expected = lotto;
+            Lotto actual = Lotto.from("1,2,3,4,5,6");
 
             assertThat(actual).isEqualTo(expected);
         }
@@ -68,13 +79,14 @@ public class LottoTest {
     }
 
     @DisplayName("로또번호 포함여부를 반환한다.")
-    @Test
-    void contains() {
+    @ParameterizedTest
+    @CsvSource(value = {"3,true", "9,false"})
+    void contains(String number, boolean expected) {
         Lotto lotto = new Lotto(createLottoNumberSet(3, 8));
 
-        boolean actual = lotto.contains(new LottoNumber("3"));
+        boolean actual = lotto.contains(new LottoNumber(number));
 
-        assertThat(actual).isTrue();
+        assertThat(actual).isEqualTo(expected);
     }
 
     private Set<LottoNumber> createLottoNumberSet(int startInclusive, int endInclusive) {

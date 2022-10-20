@@ -8,17 +8,16 @@ import static lotto.domain.Lotto.MAX_SIZE;
 import static lotto.domain.LottoNumber.MAX_NUMBER;
 import static lotto.domain.LottoNumber.MIN_NUMBER;
 
-public class AutoLottoGenerator {
+public class AutoLottoGenerator implements LottoGenerable {
 
     private static final List<LottoNumber> LOTTO_NUMBER_RANGE = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
-    private AutoLottoGenerator() {
-        throw new AssertionError("LottoGenerator는 생성자를 호출할 수 없습니다.");
+    public AutoLottoGenerator() {
     }
 
-    public static List<Lotto> generate(PlayLottoCount playLottoCount) {
+    public List<Lotto> generate(PlayLottoCount playLottoCount) {
         List<LottoNumber> copiedLottoNumbers = new ArrayList<>(LOTTO_NUMBER_RANGE);
 
         List<Lotto> result = new ArrayList<>();

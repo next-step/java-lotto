@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import lotto.domain.exception.NotNumberStringException;
+
 import java.util.Objects;
 
 public class PlayLottoCount {
 
+    private static final int MINIMUM = 0;
     private final int value;
 
     public PlayLottoCount(int value) {
@@ -11,10 +14,30 @@ public class PlayLottoCount {
         this.value = value;
     }
 
+    public PlayLottoCount(String value) {
+        this(parseInt(value));
+    }
+
     private static void validateSize(int value) {
-        if (value < 1) {
-            throw new IllegalArgumentException("1보다 작은 수로 생성할 수 없습니다.");
+        if (value < MINIMUM) {
+            throw new IllegalArgumentException(String.format("%s보다 작은 수로 생성할 수 없습니다.", MINIMUM));
         }
+    }
+
+    private static int parseInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw NotNumberStringException.getInstance();
+        }
+    }
+
+    public boolean isLessThan(int value) {
+        return this.value < value;
+    }
+
+    public int subtract(PlayLottoCount playLottoCount) {
+        return this.value - playLottoCount.value;
     }
 
     public int getValue() {

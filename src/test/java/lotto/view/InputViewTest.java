@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.ManualLottoCount;
+import lotto.domain.PlayLottoCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -47,6 +49,34 @@ public class InputViewTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @DisplayName("수동 로또 수를 입력받는다.")
+    @ParameterizedTest
+    @ValueSource(strings = " 7 ")
+    void receive_manual_lotto_count(String input) {
+        setIn(input);
+        String expected = "7";
+
+        String actual = InputView.receiveManualLottoCount();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("수동 로또 번호를 입력 받는다.")
+    @ParameterizedTest
+    @ValueSource(strings = "1,2,3,4,5,6\n2,3,4,5,6,7\n3,4,5,6,7,8\n")
+    void receive_manual_lottos(String input) {
+        List<String> expected = List.of(
+                "1,2,3,4,5,6",
+                "2,3,4,5,6,7",
+                "3,4,5,6,7,8"
+        );
+        ManualLottoCount manualLottoCount = new ManualLottoCount(new PlayLottoCount(5), 3);
+        setIn(input);
+
+        List<String> actual = InputView.receiveManualLottos(manualLottoCount);
+
+        assertThat(actual).isEqualTo(expected);
+    }
 
     private void setIn(String input) {
         InputStream in = generateUserInput(input);

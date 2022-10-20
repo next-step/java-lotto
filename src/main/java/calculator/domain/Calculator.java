@@ -2,6 +2,7 @@ package calculator.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,7 +20,7 @@ public class Calculator {
     }
 
     public Calculator(final List<String> formula) {
-        this(Numbers.of(extractEvenIndexString(formula)), Operators.of(extractOddIndexString(formula)));
+        this(Numbers.from(extract(formula, isEvenIndex())), Operators.from(extract(formula, isOddIndex())));
     }
 
     private void validateComputableSize(Numbers numbers, Operators operators) {
@@ -28,18 +29,19 @@ public class Calculator {
         }
     }
 
-    private static List<String> extractEvenIndexString(List<String> formula) {
+    private static List<String> extract(List<String> formula, ExtractConditional extractConditional) {
         return IntStream.range(0, formula.size())
-                .filter(i -> i % 2 == 0)
+                .filter(extractConditional::check)
                 .mapToObj(formula::get)
                 .collect(Collectors.toList());
     }
 
-    private static List<String> extractOddIndexString(List<String> formula) {
-        return IntStream.range(0, formula.size())
-                .filter(i -> i % 2 == 1)
-                .mapToObj(formula::get)
-                .collect(Collectors.toList());
+    private static ExtractConditional isEvenIndex() {
+        return (number) -> number % 2 == 0;
+    }
+
+    private static ExtractConditional isOddIndex() {
+        return (number) -> number % 2 == 1;
     }
 
     public int doCalculations() {

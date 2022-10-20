@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.domain.ManualLottoCount;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +16,8 @@ public class InputView {
 
     public static String receiveMoney() {
         System.out.println("로또 금액을 입력해주세요. 로또는 개당 천원입니다.");
-        return new Scanner(System.in).nextLine();
+        return new Scanner(System.in).nextLine()
+                .trim();
     }
 
     public static List<String> receiveLastWeekWinningNumber() {
@@ -27,7 +31,29 @@ public class InputView {
 
     public static String receiveBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String bonusBall = new Scanner(System.in).nextLine();
-        return bonusBall.trim();
+        return new Scanner(System.in).nextLine()
+                .trim();
+    }
+
+    public static String receiveManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return new Scanner(System.in).nextLine()
+                .trim();
+    }
+
+    public static List<String> receiveManualLottos(ManualLottoCount manualLottoCount) {
+        Scanner scanner = new Scanner(System.in);
+        printManualLottoNumberMessage(manualLottoCount);
+        List<String> lottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount.getValue(); i++) {
+            lottos.add(scanner.nextLine());
+        }
+        return lottos;
+    }
+
+    private static void printManualLottoNumberMessage(ManualLottoCount manualLottoCount) {
+        if (!manualLottoCount.isLessThan(1)) {
+            System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
+        }
     }
 }

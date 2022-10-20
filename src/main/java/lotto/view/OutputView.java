@@ -20,8 +20,9 @@ public class OutputView {
         throw new AssertionError("OutputView는 생성자를 호출할 수 없습니다.");
     }
 
-    public static void printGeneratedLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printGeneratedLottos(LottoPaper lottoPaper) {
+        System.out.println(lottoPaper.countLottos() + "개를 구매했습니다.");
+        List<Lotto> lottos = lottoPaper.getElements();
         lottos.stream()
                 .map(Lotto::getElements)
                 .map(OutputView::sortLottoNumbers)
@@ -43,8 +44,8 @@ public class OutputView {
         System.out.println("]");
     }
 
-    public static void printMoneyLeft(Money money) {
-        System.out.printf("남은 금액는 %s원 입니다.", money.getValue());
+    public static void printLottoCountAndMoneyLeft(PlayLottoCount playLottoCount, Money money) {
+        System.out.printf("%s개를 구매했습니다. 남은 금액는 %s원 입니다.\n", playLottoCount.getValue(), money.getValue());
     }
 
     public static void printWinningStatistics(WinningStatistics winningStatistics, Money purchaseAmount) {
@@ -62,7 +63,7 @@ public class OutputView {
     }
 
     private static String additionalBonusMessage(WinningInformation winningInformation) {
-        if(winningInformation.equals(FIVE_AND_BONUS_MATCHES)) {
+        if (winningInformation.equals(FIVE_AND_BONUS_MATCHES)) {
             return ADDITIONAL_BONUS_MESSAGE;
         }
         return "";
