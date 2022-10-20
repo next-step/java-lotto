@@ -21,9 +21,9 @@ class LottoGameTest {
                 new LottoTicket(List.of(3, 4, 5, 6, 7, 8))
         ));
 
-        LottoResult result = lotto.result(List.of(1, 2, 3, 4, 5, 6));
+        LottoResult result = lotto.result(List.of(1, 2, 3, 4, 5, 6), 7);
         assertThat(result.getCount(Rank.FIRST)).isEqualTo(1);
         assertThat(result.getCount(Rank.SECOND)).isEqualTo(0);
-        assertThat(result.getCount(Rank.THIRD)).isEqualTo(1);
+        assertThat(result.getCount(Rank.FOURTH)).isEqualTo(1);
     }
 }

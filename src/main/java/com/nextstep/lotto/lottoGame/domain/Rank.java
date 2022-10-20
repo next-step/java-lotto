@@ -4,9 +4,10 @@ import java.util.stream.Stream;
 
 public enum Rank {
     FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
     NONE(2, 0);
 
     private int matchCount;
@@ -17,15 +18,26 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank rank(final int matchCount) {
+    public static Rank rank(final int matchCount, final boolean matchBonus) {
         if (matchCount < 3) {
             return NONE;
+        }
+
+        if (matchCount == SECOND.matchCount) {
+            return rankSecondOrThird(matchBonus);
         }
 
         return Stream.of(values())
                 .filter(rank -> rank.isMatchCount(matchCount))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    private static Rank rankSecondOrThird(final boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public int getPrize() {

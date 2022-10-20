@@ -36,8 +36,8 @@ public class LottoGame {
         return tickets.size() * LottoTicket.LOTTO_TICKET_PRICE;
     }
 
-    public LottoResult result(List<Integer> winningNumbers) {
-        return new LottoResult(winningNumbers, tickets);
+    public LottoResult result(List<Integer> winningNumbers, final int bonusNumber) {
+        return new LottoResult(winningNumbers, bonusNumber, tickets);
     }
 
 }

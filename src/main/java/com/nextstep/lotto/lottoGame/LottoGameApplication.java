@@ -15,7 +15,8 @@ public class LottoGameApplication {
         OutputView.drawPublishResult(lotto.getTickets());
 
         List<Integer> winningNumbers = InputView.getLottoNumbers();
-        LottoResult result = lotto.result(winningNumbers);
+        int bonusNumber = InputView.getBonusNumber();
+        LottoResult result = lotto.result(winningNumbers, bonusNumber);
         OutputView.drawResult(result, lotto.getUsedBudget());
     }
 }

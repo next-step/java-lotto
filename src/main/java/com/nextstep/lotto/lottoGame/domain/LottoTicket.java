@@ -34,9 +34,10 @@ public class LottoTicket {
         return lottoNumbers.contains(number);
     }
 
-    public Rank rank(List<Integer> winningNumbers) {
+    public Rank rank(final List<Integer> winningNumbers, final int bonusNumber) {
         int matchCount = getMatchCount(winningNumbers);
-        return Rank.rank(matchCount);
+        boolean matchBonus = lottoNumbers.contains(bonusNumber);
+        return Rank.rank(matchCount, matchBonus);
     }
 
     private int getMatchCount(List<Integer> winningNumbers) {

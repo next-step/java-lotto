@@ -9,16 +9,16 @@ public class RankTest {
 
     @Test
     public void rank() {
-        assertThat(Rank.rank(6)).isEqualTo(Rank.FIRST);
-        assertThat(Rank.rank(5)).isEqualTo(Rank.SECOND);
-        assertThat(Rank.rank(4)).isEqualTo(Rank.THIRD);
-        assertThat(Rank.rank(3)).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.rank(6, false)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.rank(5, true)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.rank(5, false)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.rank(4, true)).isEqualTo(Rank.FOURTH);
     }
 
     @Test
     public void rank_invalid() {
         assertThatThrownBy(() ->{
-            Rank.rank(7);
+            Rank.rank(7, false);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

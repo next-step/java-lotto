@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 public class LottoResult {
     private final Map<Rank, Long> rankMap;
 
-    public LottoResult(List<Integer> winningNumbers, List<LottoTicket> tickets) {
-        this.rankMap = getRankMap(winningNumbers, tickets);
+    public LottoResult(List<Integer> winningNumbers, int bonusNumber, List<LottoTicket> tickets) {
+        this.rankMap = getRankMap(winningNumbers, bonusNumber, tickets);
     }
 
-    private Map<Rank, Long> getRankMap(List<Integer> winningNumbers, List<LottoTicket> tickets) {
+    private Map<Rank, Long> getRankMap(List<Integer> winningNumbers, int bonusNumber, List<LottoTicket> tickets) {
         List<Rank> ranks = tickets.stream()
-                .map(ticket -> ticket.rank(winningNumbers))
+                .map(ticket -> ticket.rank(winningNumbers, bonusNumber))
                 .filter(rank -> rank != Rank.NONE)
                 .collect(Collectors.toList());
         return ranks.stream()

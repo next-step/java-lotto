@@ -44,9 +44,9 @@ public class LottoTicketTest {
     @Test
     public void rank() {
         LottoTicket lotto = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.rank(List.of(1, 2, 3, 4, 5, 6))).isEqualTo(Rank.FIRST);
-        assertThat(lotto.rank(List.of(2, 3, 4, 5, 6, 7))).isEqualTo(Rank.SECOND);
-        assertThat(lotto.rank(List.of(3, 4, 5, 6, 8, 9))).isEqualTo(Rank.THIRD);
-        assertThat(lotto.rank(List.of(7, 8, 9, 10, 11, 12))).isEqualTo(Rank.NONE);
+        assertThat(lotto.rank(List.of(1, 2, 3, 4, 5, 6), 7)).isEqualTo(Rank.FIRST);
+        assertThat(lotto.rank(List.of(2, 3, 4, 5, 6, 7), 1)).isEqualTo(Rank.SECOND);
+        assertThat(lotto.rank(List.of(2, 3, 4, 5, 6, 7), 8)).isEqualTo(Rank.THIRD);
+        assertThat(lotto.rank(List.of(7, 8, 9, 10, 11, 12), 13)).isEqualTo(Rank.NONE);
     }
 }
