@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import lotto.domain.Money.ImmutableMoney;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -47,5 +50,14 @@ public class RankTest {
     @MethodSource(value = "provideLottoReward")
     void reward(ImmutableMoney reward, Rank rank) {
         assertThat(rank.reward()).isEqualTo(reward);
+    }
+
+    @DisplayName("2등일 경우 True를 반환한다.")
+    @Test
+    void isBonus() {
+        Assertions.assertAll(
+                () -> assertThat(Rank.SECOND.isBonus()).isTrue(),
+                () -> assertThat(Rank.FIRST.isBonus()).isFalse()
+        );
     }
 }

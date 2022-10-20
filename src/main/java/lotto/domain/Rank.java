@@ -5,9 +5,13 @@ import lotto.domain.Money.ImmutableMoney;
 public enum Rank {
 
     FIRST(1, new LottoMatchCount(6), new ImmutableMoney(2_000_000_000)),
-    SECOND(2, new LottoMatchCount(5), new ImmutableMoney(30_000_000)), THIRD(3, new LottoMatchCount(5), new ImmutableMoney(1_500_000)),
-    FOURTH(4, new LottoMatchCount(4), new ImmutableMoney(50_000)), FIFTH(5, new LottoMatchCount(3), new ImmutableMoney(5_000)),
-    SIXTH(6, new LottoMatchCount(2), new ImmutableMoney(0)), SEVENTH(7, new LottoMatchCount(1), new ImmutableMoney(0)), EIGHTH(8, new LottoMatchCount(0), new ImmutableMoney(0));
+    SECOND(2, new LottoMatchCount(5), new ImmutableMoney(30_000_000)),
+    THIRD(3, new LottoMatchCount(5), new ImmutableMoney(1_500_000)),
+    FOURTH(4, new LottoMatchCount(4), new ImmutableMoney(50_000)),
+    FIFTH(5, new LottoMatchCount(3), new ImmutableMoney(5_000)),
+    SIXTH(6, new LottoMatchCount(2), new ImmutableMoney(0)),
+    SEVENTH(7, new LottoMatchCount(1), new ImmutableMoney(0)),
+    EIGHTH(8, new LottoMatchCount(0), new ImmutableMoney(0));
 
     private final int rank;
     private final LottoMatchCount matchCount;
@@ -52,9 +56,12 @@ public enum Rank {
         return reward;
     }
 
+    public boolean isBonus() {
+        return this.equals(Rank.SECOND);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(rank);
     }
-
 }
