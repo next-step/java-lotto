@@ -2,11 +2,12 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.expressions.LottoAmountExpression.toInt;
-import static lotto.expressions.LottoAmountExpression.validateAmount;
-
 public class LottoAmount {
     private static final int PRICE_PER_LOTTO = 1000;
+    private static final String NOT_NUMBER_MESSAGE = "숫자가 아닙니다.";
+    private static final String INVALID_PRICE_PER_PIECE_MESSAGE = PRICE_PER_LOTTO + "원 단위로 입력해주세요.";
+    private static final String INVALID_PRICE_FOR_PURCHASE_MESSAGE =
+            "로또를 구입하려면 1장에 " + PRICE_PER_LOTTO + "원 입니다. " + INVALID_PRICE_PER_PIECE_MESSAGE;
 
     private final int amount;
 
@@ -20,6 +21,24 @@ public class LottoAmount {
 
     public int calcLottoCount() {
         return amount / PRICE_PER_LOTTO;
+    }
+
+    public static int validateAmount(int amount) {
+        if (amount < PRICE_PER_LOTTO) {
+            throw new IllegalArgumentException(INVALID_PRICE_FOR_PURCHASE_MESSAGE);
+        }
+        if (amount % PRICE_PER_LOTTO != 0) {
+            throw new IllegalArgumentException(INVALID_PRICE_PER_PIECE_MESSAGE);
+        }
+        return amount;
+    }
+
+    public static int toInt(String amount) {
+        try {
+            return Integer.parseInt(amount);
+        } catch (Exception e) {
+            throw new NumberFormatException(NOT_NUMBER_MESSAGE);
+        }
     }
 
     public int getAmount() {

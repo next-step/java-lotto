@@ -78,9 +78,9 @@
 ### 리뷰 요구사항
 - [x] InputView 에서 질문에 해당하는 입력 값 바로 리턴하게 수정.
 - [ ] 객체가 직접 Validation 관리하게 수정
-- [ ] LottoAmountExpression -> LottoAmount 로 이동.
-- [ ] LottoNumber
+  - [x] LottoAmountExpression -> LottoAmount 로 이동.
   - [ ] LottoNumberExpression -> LottoNumber 로 이동.
+- [ ] LottoNumber
   - [ ] 접근제어자 알맞은지 확인
   - [ ] LottoNumber 의 null 에 대해.
   - [ ] LottoNumber 생성 test
