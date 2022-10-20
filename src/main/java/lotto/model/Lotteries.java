@@ -1,11 +1,7 @@
 package lotto.model;
 
-import lotto.model.enumeration.Rank;
-
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,16 +27,9 @@ public class Lotteries {
         return this.manualLotteries.size();
     }
 
-    private List<Lotto> getAllLotteries() {
+    public List<Lotto> getAllLotteries() {
         return Stream.concat(lotteries.stream(), manualLotteries.stream())
                 .collect(Collectors.toList());
-    }
-
-    public Map<Rank, Long> getLotteriesRank(WinningLotto winningLotto) {
-        return getAllLotteries().stream()
-                .map(winningLotto::matchCount)
-                .map(Rank::valueOf)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     @Override
