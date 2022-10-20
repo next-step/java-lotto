@@ -1,6 +1,7 @@
 package com.nextstep.lotto.lottoGame.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
@@ -28,7 +29,7 @@ public class LottoGame {
     }
 
     public List<LottoTicket> getTickets() {
-        return this.tickets;
+        return Collections.unmodifiableList(this.tickets);
     }
 
     public int getUsedBudget() {
