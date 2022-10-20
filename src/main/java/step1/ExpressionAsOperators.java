@@ -18,6 +18,8 @@ public class ExpressionAsOperators {
     }
 
     public Queue<Operator> operators() {
+        verifyValidExpression();
+
         List<Operator> operators = OPERATORS_EXTRACTION_RULE.matcher(expression)
                 .results()
                 .map(MatchResult::group)
@@ -25,6 +27,12 @@ public class ExpressionAsOperators {
                 .collect(Collectors.toUnmodifiableList());
 
         return new ArrayDeque<>(operators);
+    }
+
+    private void verifyValidExpression() {
+        if (expression == null || expression.equals("")) {
+            throw new IllegalStateException("올바른 연산식이 아닙니다.");
+        }
     }
 
 }
