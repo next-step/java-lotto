@@ -1,10 +1,6 @@
 package lotto.controller;
 
 import lotto.model.*;
-import lotto.view.InputView;
-import lotto.view.OutputView;
-
-import java.util.ArrayList;
 
 import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
@@ -18,7 +14,7 @@ public class LottoController {
         int manualLottoCount = inputManualLottoCount();
 
         Lottos lottos = lottoGenerator.generateLottos(money.buyManualLotto(manualLottoCount), inputManualLotto(manualLottoCount));
-        printLotto(lottos.getLottos());
+        printLottos(manualLottoCount, lottos.getLottos());
 
         LottoResult result = lottos.getResult(inputWinningNumbers(), inputBonusBall());
         printLottoResult(result);

@@ -12,12 +12,19 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLotto(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.toString());
-        }
+    public static void printLottos(int manualLottoCount, List<Lotto> lottos) {
+        printLottoCount(manualLottoCount, lottos);
+        printLottos(lottos);
         System.out.println();
+    }
+
+    private static void printLottoCount(int manualLottoCount, List<Lotto> lottos) {
+        int autoLottoCount = lottos.size() - manualLottoCount;
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
+    }
+
+    private static void printLottos(List<Lotto> lottos) {
+        lottos.stream().map(Lotto::toString).forEach(System.out::println);
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
