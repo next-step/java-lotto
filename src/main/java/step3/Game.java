@@ -33,7 +33,7 @@ public class Game {
 			list.add(result);
 		}
 		Print.newLine();
-		return new Result(list);
+		return new Result(new Lottos(list));
 	}
 
 	private static int validAmount(int inputAmount) {

@@ -1,6 +1,5 @@
 package step3;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -8,7 +7,7 @@ import java.util.TreeMap;
 
 public class Result {
 
-	private final List<Set<Integer>> list;
+	private final Lottos lottos;
 	private final Map<Operator, Integer> map = new TreeMap<>(){{
 		put(Operator.THREE, 0);
 		put(Operator.FOUR, 0);
@@ -16,42 +15,30 @@ public class Result {
 		put(Operator.SIX, 0);
 	}};
 
-	public Result(List<Set<Integer>> list) {
-		this.list = list;
+	public Result(Lottos lottos) {
+		this.lottos = lottos;
 	}
 
 	public List<Set<Integer>> getList() {
-		return list;
+		return lottos.getLottos();
 	}
 
 	public Map<Operator, Integer> results(Set<Integer> winningNumbers) {
-		for (Set<Integer> guestLotto : list) {
-			result(winningNumbers, guestLotto);
+		for (Set<Integer> lottos : getList()) {
+			result(lottos, winningNumbers);
 		}
 		return map;
 	}
 
-	private void result(Set<Integer> winningNumbers, Set<Integer> guestLotto) {
-		Operator rank = Operator.find(checkRank(guestLotto, winningNumbers));
+	private void result(Set<Integer> lottos, Set<Integer> winningNumbers) {
+		Operator rank = Operator.find(checkRank(lottos, winningNumbers));
 		if (rank == null) {
 			return;
 		}
 		map.put(rank, map.get(rank) + 1);
 	}
 
-	private int checkRank(Set<Integer> guestLotto, Set<Integer> winningNumbers) {
-		int count = 0;
-		Iterator<Integer> itr = winningNumbers.iterator();
-		while (itr.hasNext()) {
-			count = checkContains(guestLotto, count, itr);
-		}
-		return count;
-	}
-
-	private int checkContains(Set<Integer> guestLotto, int count, Iterator<Integer> itr) {
-		if (guestLotto.contains(itr.next())) {
-			count++;
-		}
-		return count;
+	private int checkRank(Set<Integer> lottos, Set<Integer> winningNumbers) {
+		return this.lottos.results(lottos, winningNumbers);
 	}
 }
