@@ -15,12 +15,12 @@ public class Lotto {
         }
     }
 
-    public Lotto(String winningNumbers) {
-        this(splitLotto(winningNumbers));
+    public Lotto(String lottoNumbers) {
+        this(splitLotto(lottoNumbers));
     }
 
-    private static Set<Integer> splitLotto(String winningNumbers) {
-        return Arrays.stream(winningNumbers.split(","))
+    private static Set<Integer> splitLotto(String lottoNumbers) {
+        return Arrays.stream(lottoNumbers.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());

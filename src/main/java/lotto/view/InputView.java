@@ -4,6 +4,7 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Money;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
@@ -24,6 +25,15 @@ public class InputView {
     public static int inputManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return scanner.nextInt();
+    }
+
+    public static ArrayList<Lotto> inputManualLotto(int manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        ArrayList<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottos.add(new Lotto(scanner.next()));
+        }
+        return manualLottos;
     }
 
     public static Lotto inputWinningNumbers() {
