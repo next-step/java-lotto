@@ -32,4 +32,21 @@ class MoneyTest {
                     new Money(1500);
                 }).withMessageMatching("1000원 단위만 입력 가능합니다.");
     }
+
+    @DisplayName("구입 금액에서 수동로또 수만큼 금액 차감된다.")
+    @Test
+    void buyManualLotto() {
+        Money money = new Money(5000);
+        Assertions.assertThat(money.buyManualLotto(3)).isEqualTo(new Money(2000));
+    }
+
+    @DisplayName("구입 금액보다 수동로또 개수가 많을 경우 에러 반환한다.")
+    @Test
+    void validateOverCountManualLotto() {
+        Money money = new Money(5000);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    money.buyManualLotto(6);
+                });
+    }
 }

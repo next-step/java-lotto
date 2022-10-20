@@ -21,6 +21,10 @@ public class Money {
         }
     }
 
+    public Money buyManualLotto(int manualLottoCount) {
+        return new Money(this.money - LOTTO_PRICE.getMoney() * manualLottoCount);
+    }
+
     public int getLottoCount() {
         return this.money / LOTTO_PRICE.getMoney();
     }
