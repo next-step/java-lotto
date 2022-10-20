@@ -21,8 +21,8 @@ class LottoWinningTest {
         Lotto lotto4 = new Lotto("1,2,3,23,24,25");
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
         Lotto lastWeekTicket = new Lotto("1,2,3,4,5,6");
-        LottoTickets lottoTickets = new LottoTickets(lottos);
-        result = lottoTickets.result(lastWeekTicket);
+        LottoTicket lottoTicket = new LottoTicket(lottos);
+        result = lottoTicket.result(lastWeekTicket);
     }
 
     @Test

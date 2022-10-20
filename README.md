@@ -77,7 +77,7 @@
 
 ### 리뷰 요구사항
 - [x] InputView 에서 질문에 해당하는 입력 값 바로 리턴하게 수정.
-- [ㅌ] 객체가 직접 Validation 관리하게 수정
+- [x] 객체가 직접 Validation 관리하게 수정
   - [x] LottoAmountExpression -> LottoAmount 로 이동.
   - [x] LottoNumberExpression -> LottoNumber 로 이동.
 - [x] LottoNumber
@@ -93,7 +93,7 @@
   - Lotto generateReport()
   - LottoTicket generateTicket().
   - 등수를 나타내게 Enum 수정.
-- [ ] 필드명, 함수명 수정
+- [x] 필드명, 함수명 수정
   - List<lotto> -> lottoTicket
   - lastWeekTicket -> winningTicket
 

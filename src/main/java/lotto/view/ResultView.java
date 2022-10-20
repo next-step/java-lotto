@@ -19,7 +19,7 @@ public class ResultView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void showAutoLottoTickets(List<LottoDto> lottos) {
+    public static void showAutoLottoTicket(List<LottoDto> lottos) {
         for (LottoDto lotto : lottos) {
             System.out.println(lotto.getNumbers().toString());
         }
