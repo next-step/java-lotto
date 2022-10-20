@@ -27,7 +27,7 @@ public class LottoTickets {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
-            lottoList.add(new Lotto().auto(getAutoNumberList()));
+            lottoList.add(new Lotto(getAutoNumberList()));
         }
 
         this.lottoList = lottoList;

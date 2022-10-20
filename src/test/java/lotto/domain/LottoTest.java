@@ -15,7 +15,7 @@ class LottoTest {
     @DisplayName("로또 생성 중복 확인")
     void auto() {
         // given
-        Lotto lotto = new Lotto().auto(getAutoNumberList());
+        Lotto lotto = new Lotto(getAutoNumberList());
 
         // expected
         assertThat(lotto.getNumberList()).isEqualTo(lotto.getNumberList().stream().distinct().collect(Collectors.toList()));
@@ -29,7 +29,7 @@ class LottoTest {
         List<Integer> matchList = List.of(1, 2, 3, 10, 12, 13);
 
         // when
-        Lotto lotto = new Lotto().auto(numberList);
+        Lotto lotto = new Lotto(numberList);
         Lotto result = lotto.rank(matchList);
 
         // then

@@ -4,12 +4,11 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> numberList;
+    private final List<Integer> numberList;
     private Rank rank;
 
-    public Lotto auto(List<Integer> numberList) {
+    public Lotto(List<Integer> numberList) {
         this.numberList = numberList;
-        return this;
     }
 
     public Lotto rank(List<Integer> matchNumberList) {

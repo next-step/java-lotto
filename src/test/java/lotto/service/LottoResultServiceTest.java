@@ -33,7 +33,7 @@ class LottoResultServiceTest {
     @DisplayName("수익률 확인")
     void yieldResult() {
         // given
-        Lotto lotto = new Lotto().auto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         LottoTickets pickedLottoTickets = new LottoTickets(1, 1000, List.of(lotto));
         LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(List.of(1, 2, 3, 4, 5, 6));
 
