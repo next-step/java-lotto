@@ -4,12 +4,12 @@ import lotto.domain.Money.ImmutableMoney;
 
 public enum Rank {
 
-    FIRST(1, new LottoMatchCount(6), new ImmutableMoney(2_000_000_000)),
-    SECOND(2, new LottoMatchCount(5), new ImmutableMoney(30_000_000)),
-    THIRD(3, new LottoMatchCount(5), new ImmutableMoney(1_500_000)),
-    FOURTH(4, new LottoMatchCount(4), new ImmutableMoney(50_000)),
-    FIFTH(5, new LottoMatchCount(3), new ImmutableMoney(5_000)),
-    MISS(6, new LottoMatchCount(0), new ImmutableMoney(0));
+    FIRST(1, 6, 2_000_000_000),
+    SECOND(2, 5, 30_000_000),
+    THIRD(3, 5, 1_500_000),
+    FOURTH(4, 4, 50_000),
+    FIFTH(5, 3, 5_000),
+    MISS(6, 0, 0);
 
     private final int rank;
     private final LottoMatchCount matchCount;
@@ -17,10 +17,10 @@ public enum Rank {
     public static final int REWARD_START_RANK_INDEX = 4;
     public static final int REWARD_END_RANK_INDEX = 0;
 
-    Rank(final int rank, final LottoMatchCount matchCount, ImmutableMoney reward) {
+    Rank(final int rank, final int matchCount, int reward) {
         this.rank = rank;
-        this.matchCount = matchCount;
-        this.reward = reward;
+        this.matchCount = new LottoMatchCount(matchCount);
+        this.reward = new ImmutableMoney(reward);
     }
 
     public static Rank rankValue(final LottoMatchCount matchCount, final boolean containBonusNumber) {
