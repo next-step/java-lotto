@@ -23,9 +23,6 @@ public enum Rank {
         if (matchCount < FIFTH.matchCount) {
             return MISS;
         }
-        if (matchCount == FIRST.matchCount) {
-            return FIRST;
-        }
         if (matchBonus && matchCount == SECOND.matchCount) {
             return SECOND;
         }

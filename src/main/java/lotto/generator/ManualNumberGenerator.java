@@ -2,8 +2,9 @@ package lotto.generator;
 
 import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManualNumberGenerator implements NumberGenerator {
 
@@ -16,10 +17,9 @@ public class ManualNumberGenerator implements NumberGenerator {
     @Override
     public List<LottoNumber> generate() {
         String[] splitNumbers = numbers.split(", ");
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = MIN_LOTTO_NUM_COUNT; i < MAX_LOTTO_NUM_COUNT; i++) {
-            lottoNumbers.add(LottoNumber.from(Integer.parseInt(splitNumbers[i])));
-        }
-        return lottoNumbers;
+        return Arrays.stream(splitNumbers)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toList());
     }
 }
