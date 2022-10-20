@@ -15,15 +15,15 @@ public enum Operator {
     }
     );
 
-    private String operator;
-    private BiFunction<Integer, Integer, Integer> expression;
+    private final String operator;
+    private final BiFunction<Integer, Integer, Integer> expression;
 
     Operator(String operator, BiFunction<Integer, Integer, Integer> expression) {
         this.operator = operator;
         this.expression = expression;
     }
 
-    public int mapCalculate(int num1, int num2) {
+    public int calculate(int num1, int num2) {
         return expression.apply(num1, num2);
     }
 
