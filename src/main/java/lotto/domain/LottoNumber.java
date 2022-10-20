@@ -24,11 +24,11 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
-        LottoNumber lottoNumber = CACHE.get(number - 1);
-        if (Objects.isNull(lottoNumber)) {
-            lottoNumber = new LottoNumber(number);
+        try {
+            return CACHE.get(number - 1);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
         }
-        return lottoNumber;
     }
 
     public void validateNumber(int number) {

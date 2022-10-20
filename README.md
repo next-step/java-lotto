@@ -81,8 +81,8 @@
   - [x] LottoAmountExpression -> LottoAmount 로 이동.
   - [x] LottoNumberExpression -> LottoNumber 로 이동.
 - [ ] LottoNumber
-  - [ ] 접근제어자 알맞은지 확인
-  - [ ] LottoNumber 의 null 에 대해.
+  - [x] 접근제어자 알맞은지 확인
+  - [X] LottoNumber 의 null 에 대해.
   - [ ] LottoNumber 생성 test
 - [ ] Lotto 
   - [ size 검증 메소드 이동.
