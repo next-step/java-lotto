@@ -7,7 +7,9 @@ import java.util.TreeSet;
 
 public class Game {
 	public static void start(int input) {
-		int amount = validAmount(input) / 1000;
+		LottoAmount lottoMoney = new LottoAmount(input);
+		int amount = lottoMoney.amountOfLottos();
+
 		Print.amount(amount);
 
 		Result guestResult = startRaffle(amount);
@@ -34,12 +36,5 @@ public class Game {
 		}
 		Print.newLine();
 		return new Result(new Lottos(list));
-	}
-
-	private static int validAmount(int inputAmount) {
-		if (inputAmount < 1000) {
-			throw new IllegalArgumentException("최소 금액은 1000원 입니다");
-		}
-		return inputAmount;
 	}
 }
