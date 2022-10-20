@@ -25,19 +25,19 @@ public class LottoResult {
     }
 
     public long numberOfSecondRankWithBonus() {
-        return lottos.stream().filter(lotto -> Rank.SECOND_WITH_BONUS == lotto.checkRank(winners, bonus)).count();
-    }
-
-    public long numberOfSecondRank() {
         return lottos.stream().filter(lotto -> Rank.SECOND == lotto.checkRank(winners, bonus)).count();
     }
 
-    public long numberOfThirdRank() {
+    public long numberOfSecondRank() {
         return lottos.stream().filter(lotto -> Rank.THIRD == lotto.checkRank(winners, bonus)).count();
     }
 
-    public long numberOfFourthRank() {
+    public long numberOfThirdRank() {
         return lottos.stream().filter(lotto -> Rank.FOURTH == lotto.checkRank(winners, bonus)).count();
+    }
+
+    public long numberOfFourthRank() {
+        return lottos.stream().filter(lotto -> Rank.FIFTH == lotto.checkRank(winners, bonus)).count();
     }
 
     public double calculateProfitRate() {
