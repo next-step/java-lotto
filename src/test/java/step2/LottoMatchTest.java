@@ -17,7 +17,7 @@ public class LottoMatchTest {
 	void winner() {
 		List<Integer> winNum = Arrays.asList(1,2,3,4,5,6);
 		LottoMatcher lotteryWin = new LottoMatcher(winNum);
-		Assertions.assertThat(lotteryWin.isMatch(new Lotto(new FixLottoFactory()))).isEqualTo(2);
+		Assertions.assertThat(lotteryWin.countMatch(new Lotto(new FixLottoFactory()))).isEqualTo(2);
 	}
 
 
