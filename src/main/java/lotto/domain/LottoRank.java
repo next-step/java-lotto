@@ -2,17 +2,17 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoPrize {
-    NOT_SAME(0, 0),
-    SAME_THREE(3, 5000),
-    SAME_FOUR(4, 50000),
-    SAME_FIVE(5, 1500000),
-    SAME_SIX(6, 2000000000);
+public enum LottoRank {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
+    MISS(0, 0);
 
     private final int match;
     private final int money;
 
-    LottoPrize(int match, int money) {
+    LottoRank(int match, int money) {
         this.match = match;
         this.money = money;
     }
@@ -25,10 +25,10 @@ public enum LottoPrize {
         return money;
     }
 
-    public static LottoPrize win(int matchCount) {
+    public static LottoRank win(int matchCount) {
         return Arrays.stream(values())
                 .filter(prize -> prize.match == matchCount)
                 .findFirst()
-                .orElse(NOT_SAME);
+                .orElse(MISS);
     }
 }

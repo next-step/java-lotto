@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoAmount;
-import lotto.domain.LottoPrize;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoWinning;
 import lotto.dto.LottoDto;
 
@@ -30,7 +30,7 @@ public class ResultView {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println("----------");
         winning.getWinning().forEach((key, value) -> {
-            if (key != LottoPrize.NOT_SAME) {
+            if (key != LottoRank.MISS) {
                 System.out.println(key.getMatch() + "개 일치 (" + key.getMoney() + "원) - " + value + "개");
             }
         });

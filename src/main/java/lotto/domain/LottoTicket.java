@@ -32,8 +32,8 @@ public class LottoTicket {
 
     public LottoWinning result(Lotto winningLotto) {
         LottoWinning winning = new LottoWinning();
-        for (Lotto lotto : lottos) {
-            winning.put(LottoPrize.win(winningLotto.matches(lotto)));
+        for (Lotto ticket : lottos) {
+            winning.put(LottoRank.win(winningLotto.matches(ticket)));
         }
         return winning;
     }

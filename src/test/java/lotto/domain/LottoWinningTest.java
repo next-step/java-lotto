@@ -28,10 +28,10 @@ class LottoWinningTest {
     @Test
     @DisplayName("지난주 당첨 로또랑 비교하여 일치하는 로또 숫의의 개수에 따라 각 로또티켓 개수를 확인한다.")
     void prizeCountTest() {
-        assertThat(result.count(LottoPrize.SAME_THREE)).isEqualTo(1);
-        assertThat(result.count(LottoPrize.SAME_FOUR)).isEqualTo(0);
-        assertThat(result.count(LottoPrize.SAME_FIVE)).isEqualTo(0);
-        assertThat(result.count(LottoPrize.SAME_SIX)).isEqualTo(1);
+        assertThat(result.count(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(result.count(LottoRank.SECOND)).isEqualTo(0);
+        assertThat(result.count(LottoRank.THIRD)).isEqualTo(0);
+        assertThat(result.count(LottoRank.FOURTH)).isEqualTo(1);
     }
 
     @Test

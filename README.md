@@ -87,7 +87,7 @@
 - [ ] Lotto 
   - size 검증 메소드 이동.
 - [x] Lotto List -> Set
-- [ ] LottoPrize -> Rank
+- [x] LottoPrize -> Rank
 - [ ] 당첨된 결과 winning 에서 처리 후 ResultView 로 넘기기
 - [ ] method UI 의존성 수정
   - Lotto generateReport()
