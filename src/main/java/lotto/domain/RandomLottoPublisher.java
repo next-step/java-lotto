@@ -22,7 +22,7 @@ public class RandomLottoPublisher implements LottoPublisher {
     @Override
     public List<Integer> get() {
         Collections.shuffle(allNumbers);
-        List<Integer> result = new ArrayList<>(allNumbers.subList(0, 6));
+        List<Integer> result = new ArrayList<>(allNumbers.subList(0, Lotto.COUNT));
         Collections.sort(result);
         return result;
     }
