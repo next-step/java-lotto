@@ -1,4 +1,6 @@
-package step1;
+package step1.operators;
+
+import step1.Operator;
 
 import java.util.ArrayDeque;
 import java.util.List;
