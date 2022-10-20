@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.exception.InvalidInputException;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ public class InputView {
     private static final String VALIDATE_NULL_OR_EMPTY_MESSAGE = "빈 값은 입력할 수 없습니다.";
     private static final String VALIDATE_INTEGER = "양수만 입력할 수 있습니다.";
     private static final Integer MATCH_NUMBER_LIST_SIZE = 6;
-    private static final String VALIDATE_MATCH_NUMBER_SIZE_MESSAGE = "당첨 번호는 " + MATCH_NUMBER_LIST_SIZE + "개를 입력해 주세요.";
+    private static final String VALIDATE_MATCH_NUMBER_SIZE_MESSAGE = "당첨 번호는 중복되지 않는 " + MATCH_NUMBER_LIST_SIZE + "개 숫자를 입력해 주세요.";
 
     private InputView() {
         throw new AssertionError();
@@ -38,7 +39,7 @@ public class InputView {
     }
 
     private static List<Integer> validateMatchNumberList(List<Integer> matchNumberList) {
-        if (!(matchNumberList.size() == MATCH_NUMBER_LIST_SIZE)) {
+        if (!(new HashSet<>(matchNumberList).size() == MATCH_NUMBER_LIST_SIZE)) {
             throw new InvalidInputException(VALIDATE_MATCH_NUMBER_SIZE_MESSAGE);
         }
         return matchNumberList;
