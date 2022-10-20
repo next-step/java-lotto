@@ -40,14 +40,14 @@ public class LottoPurchaseController {
         LottoOutput.purchaseManualAmount();
         Amount manualAmount = new Amount(LottoInput.purchaseManualAmount());
         LottoOutput.manualLottoNumbers();
-        return lottoPurchaseService.purchaseLotto(inputLottoNumberSet(manualAmount));
+        return lottoPurchaseService.purchaseLotto(inputLottoNumber(manualAmount));
     }
 
-    private static List<LottoNumberSet> inputLottoNumberSet(final Amount manualAmount) {
-        List<LottoNumberSet> lottoNumberSets = new ArrayList<>();
+    private static List<LottoNumberSet> inputLottoNumber(Amount manualAmount) {
+        List<LottoNumberSet> lottoNumberSetList = new ArrayList<>();
         for (int i = 0; i < manualAmount.amount(); i++) {
-            lottoNumberSets.add(LottoNumberSet.createLottoNumberSet(LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER)));
+            lottoNumberSetList.add(LottoNumberSet.createLottoNumberSet(LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER)));
         }
-        return lottoNumberSets;
+        return lottoNumberSetList;
     }
 }
