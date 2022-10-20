@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.core.TicketPriceInput;
-import lotto.core.WinningNumbers;
+import lotto.core.WinningLottoNumbers;
 import lotto.view.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -45,9 +45,9 @@ public class InputViewTest {
         System.setIn(in1);
 
         InputView inputView = new InputView();
-        WinningNumbers result = inputView.getWinningNumbers();
+        WinningLottoNumbers result = inputView.getWinningNumbers();
 
-        WinningNumbers expected = new WinningNumbers(Arrays.asList(1,2,3,4,5,6));
+        WinningLottoNumbers expected = new WinningLottoNumbers(Arrays.asList(1,2,3,4,5,6));
         assertThat(result).isEqualTo(expected);
     }
 }

@@ -1,25 +1,16 @@
 package lotto.core;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int MAX_SIZE = 6;
-    public static final int LOTTO_BOUND_NUM = 46;
-
     private final List<Integer> lottoNums;
 
-    public Lotto() {
-        Random random = new Random();
-        Set<Integer> tmpLottoNums = new HashSet<>();
-        while (tmpLottoNums.size() < MAX_SIZE) {
-            int lottoNum = random.nextInt(LOTTO_BOUND_NUM);
-            tmpLottoNums.add(lottoNum);
-        }
-        lottoNums = new ArrayList<>(tmpLottoNums);
-        Collections.sort(lottoNums);
+    public Lotto(LottoGenerateStrategy lottoGenerateStrategy) {
+        lottoNums = lottoGenerateStrategy.generateLotto();
     }
 
     public Lotto(List<Integer> lottoNums) {
@@ -32,11 +23,11 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "" + lottoNums;
+        return lottoNums.toString();
     }
 
-    public int getCorrectCount(WinningNumbers winningNumbers){
-        List<Integer> winningNumbersToCompare = winningNumbers.getWinningNumbers();
+    public int getCorrectCount(WinningLottoNumbers winningLottoNumbers){
+        List<Integer> winningNumbersToCompare = winningLottoNumbers.getWinningNumbers();
         List<Integer> result = lottoNums.stream()
                 .filter(old -> winningNumbersToCompare.stream().anyMatch(Predicate.isEqual(old)))
                 .collect(Collectors.toList());

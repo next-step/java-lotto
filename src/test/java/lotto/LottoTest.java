@@ -1,7 +1,8 @@
 package lotto;
 
 import lotto.core.Lotto;
-import lotto.core.WinningNumbers;
+import lotto.core.LottoCommonGenerateStrategy;
+import lotto.core.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ public class LottoTest {
     @Test
     @DisplayName("6개의 숫자가 생성되는지 확인")
     void testIfGenerate6Nums(){
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(new LottoCommonGenerateStrategy());
 
         List<Integer> lottoNums = lotto.getLottoNums();
         assertThat(lottoNums).hasSize(6);
@@ -26,9 +27,9 @@ public class LottoTest {
     void testIfGetLottoCorrectCount6(){
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1,2,3,4,5,6));
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Arrays.asList(1,2,3,4,5,6));
 
-        int result = lotto.getCorrectCount(winningNumbers);
+        int result = lotto.getCorrectCount(winningLottoNumbers);
         assertThat(result).isEqualTo(6);
     }
 
@@ -37,9 +38,9 @@ public class LottoTest {
     void testIfGetLottoCorrectCount5(){
         Lotto lotto = new Lotto(Arrays.asList(1,2,33,4,5,6));
 
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1,2,3,4,5,6));
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Arrays.asList(1,2,3,4,5,6));
 
-        int result = lotto.getCorrectCount(winningNumbers);
+        int result = lotto.getCorrectCount(winningLottoNumbers);
         assertThat(result).isEqualTo(5);
     }
 }

@@ -9,9 +9,14 @@ public class TicketPriceInput {
     private final int priceInput;
     private final int ticketAmt;
 
-    public TicketPriceInput(int priceInput, int ticketAmt) {
+    public TicketPriceInput(int priceInput) {
         this.priceInput = priceInput;
         this.ticketAmt = priceInput / DEFAULT_TICKET_PRICE;
+    }
+
+    public TicketPriceInput(int priceInput, int ticketAmt) {
+        this.priceInput = priceInput;
+        this.ticketAmt = ticketAmt;
     }
 
     public int getTicketAmt() {

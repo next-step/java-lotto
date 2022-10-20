@@ -1,13 +1,12 @@
 package lotto.view;
 
 import lotto.core.TicketPriceInput;
-import lotto.core.WinningNumbers;
+import lotto.core.WinningLottoNumbers;
 
 import java.util.Scanner;
 
 public class InputView {
 
-    private final Scanner scanner = new Scanner(System.in);
 
     private static final String FIRST_MSG = "구입금액을 입력해 주세요";
     private static final String TICKET_AMT_MSG = "개를 구매했습니다.";
@@ -16,19 +15,19 @@ public class InputView {
     public TicketPriceInput getTicketPriceInput() {
         System.out.println(FIRST_MSG);
         TicketPriceInput result;
-        String priceInput = scanner.nextLine();
-        result = TicketPriceInput.builder()
-                .priceInput(Integer.parseInt(priceInput))
-                .build();
+        Scanner scanner = new Scanner(System.in);
+        int priceInput = scanner.nextInt();
+        result = new TicketPriceInput(priceInput);
         System.out.println(result.getTicketAmt() + TICKET_AMT_MSG);
         return result;
     }
 
-    public WinningNumbers getWinningNumbers() {
+    public WinningLottoNumbers getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MSG);
-        WinningNumbers result;
+        WinningLottoNumbers result;
+        Scanner scanner = new Scanner(System.in);
         String winningNumbersString = scanner.nextLine();
-        result = new WinningNumbers(winningNumbersString);
+        result = new WinningLottoNumbers(winningNumbersString);
         return result;
     }
 }

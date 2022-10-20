@@ -9,7 +9,7 @@ public class Lottos {
 
     public Lottos(int lottoSize) {
         while (lottos.size() < lottoSize) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(new LottoCommonGenerateStrategy()));
         }
     }
 
