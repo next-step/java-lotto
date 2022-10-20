@@ -14,14 +14,14 @@ public enum Prize {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Prize getPrize(int count, Lotto lotto, int bonus) {
+    public static Prize getPrize(int count, boolean isBonus) {
         switch (count) {
             case 3:
                 return THREE_PRIZE;
             case 4:
                 return FOUR_PRIZE;
             case 5:
-                return isContainBonus(lotto, bonus);
+                return isContainBonus(isBonus);
             case 6:
                 return SIX_PRIZE;
             case 7:
@@ -31,8 +31,8 @@ public enum Prize {
         }
     }
 
-    private static Prize isContainBonus(Lotto lotto, int bonus) {
-        if (lotto.isContain(bonus) == 1) {
+    private static Prize isContainBonus(boolean isBonus) {
+        if (isBonus) {
             return FIVE_BONUS_PRIZE;
         }
         return FIVE_PRIZE;

@@ -10,10 +10,9 @@ import java.util.List;
 public class LottoTest {
 
     @Test
-    void count_로또_두개의_같은숫자_갯수() {
-        LastWinner lastWinner = new LastWinner(List.of(1, 2, 3, 4, 5, 6), 7);
+    void 로또가_숫자를_포함하는지() {
         Lotto lotto = new Lotto(List.of(3, 4, 5, 6, 7, 8));
 
-        Assertions.assertThat(lotto.countSameNumber(lastWinner)).isEqualTo(4);
+        Assertions.assertThat(lotto.isContain(5)).isEqualTo(1);
     }
 }

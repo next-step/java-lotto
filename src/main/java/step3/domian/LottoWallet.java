@@ -1,7 +1,6 @@
 package step3.domian;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoWallet {
@@ -14,8 +13,8 @@ public class LottoWallet {
 
     public LottoResult compareWithLastLotto(LastWinner lastWinner) {
         return new LottoResult(this.lottos.stream().map(lotto -> {
-                    int count = lotto.countSameNumber(lastWinner);
-                    return Prize.getPrize(count, lotto, lastWinner.bonus);
+                    int count = lastWinner.countSameNumber(lotto);
+                    return Prize.getPrize(count, checkBonus(count, lastWinner, lotto));
                 }).filter(it -> it != null)
                 .collect(Collectors.toMap(
                         prize -> prize,
@@ -23,5 +22,12 @@ public class LottoWallet {
                         Long::sum,
                         () -> new EnumMap<>(Prize.class)))
         );
+    }
+
+    private boolean checkBonus(int count, LastWinner lastWinner, Lotto lotto) {
+        if (count == 5) {
+            return lastWinner.isContainBonus(lotto);
+        }
+        return false;
     }
 }
