@@ -30,14 +30,14 @@ public class LottoResultServiceTest {
     @Test
     void check_lotto() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 7)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 9)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(3, 4, 5, 6, 7, 8)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(5, 6, 7, 8, 9, 10))
+                new Lotto(new LottoNumberSet(1, 2, 3, 4, 5, 6)),
+                new Lotto(new LottoNumberSet(2, 3, 4, 5, 6, 7)),
+                new Lotto(new LottoNumberSet(2, 3, 4, 5, 6, 9)),
+                new Lotto(new LottoNumberSet(3, 4, 5, 6, 7, 8)),
+                new Lotto(new LottoNumberSet(4, 5, 6, 7, 8, 9)),
+                new Lotto(new LottoNumberSet(5, 6, 7, 8, 9, 10))
         );
-        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
         Map<Rank, Amount> rankAmountMap = lottoResultService.checkLotto(lottoList, winner);
 
         for (Amount amount : rankAmountMap.values()) {
@@ -49,18 +49,18 @@ public class LottoResultServiceTest {
     @Test
     void yield() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(5, 6, 7, 8, 9, 10)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(6, 7, 8, 9, 10, 11)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12))
+                new Lotto(new LottoNumberSet(4, 5, 6, 7, 8, 9)),
+                new Lotto(new LottoNumberSet(5, 6, 7, 8, 9, 10)),
+                new Lotto(new LottoNumberSet(6, 7, 8, 9, 10, 11)),
+                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
+                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12))
         );
-        LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
 
         assertThat(lottoResultService.caculateProfitRate(lottoList, winner)).isEqualTo(new ProfitRate(0.50));

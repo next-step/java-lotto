@@ -39,7 +39,7 @@ public class LottoPurchaseServiceTest {
     @DisplayName("로또 번호로 로또를 구매한다.")
     @Test
     void purchase_lotto_lottonumberset() {
-        LottoNumberSet lottoNumbers = LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6);
+        LottoNumberSet lottoNumbers = new LottoNumberSet(1, 2, 3, 4, 5, 6);
         String actual = lottoPurchaseService.purchaseLotto(Arrays.asList(lottoNumbers)).get(0).toString();
 
         assertThat(actual).isEqualTo(new Lotto(lottoNumbers).toString());

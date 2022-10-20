@@ -13,14 +13,14 @@ public class LottoNumberSet {
 
     private static final String LOTTO_SIZE_EXCEPTION = "로또 번호는 " + LOTTO_SET_SIZE + "개여야 합니다.";
 
-    public static LottoNumberSet createLottoNumberSet(final int... numbers) {
-        return new LottoNumberSet(Arrays.stream(numbers)
-                .mapToObj(number -> new LottoNumber(number))
-                .collect(Collectors.toSet()));
-    }
-
     public static LottoNumberSet createLottoNumberSet() {
         return new LottoNumberSet(LottoNumberFactory.getNumbers(LOTTO_SET_SIZE));
+    }
+
+    public LottoNumberSet(final int... numbers) {
+        this(Arrays.stream(numbers)
+                .mapToObj(number -> new LottoNumber(number))
+                .collect(Collectors.toSet()));
     }
 
     public LottoNumberSet(final Set<LottoNumber> lottoNumbers) {

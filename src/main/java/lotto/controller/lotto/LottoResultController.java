@@ -25,7 +25,7 @@ public class LottoResultController {
 
     private LottoWinner drawWinner() {
         LottoOutput.winningNumber();
-        LottoNumberSet numbers = LottoNumberSet.createLottoNumberSet(LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER));
+        LottoNumberSet numbers = new LottoNumberSet(LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER));
         LottoOutput.bonusNumber();
         return createLottoWinner(numbers);
     }

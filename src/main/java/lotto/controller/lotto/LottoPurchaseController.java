@@ -44,7 +44,7 @@ public class LottoPurchaseController {
 
         List<LottoNumberSet> lottoNumberSetList = IntStream.range(0, manualAmount.amount())
                 .mapToObj(i -> LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER))
-                .map(ints -> LottoNumberSet.createLottoNumberSet(ints))
+                .map(ints -> new LottoNumberSet(ints))
                 .collect(Collectors.toList());
         return lottoPurchaseService.purchaseLotto(lottoNumberSetList);
     }
