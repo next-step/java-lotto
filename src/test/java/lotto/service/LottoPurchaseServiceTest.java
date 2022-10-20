@@ -42,6 +42,6 @@ public class LottoPurchaseServiceTest {
         LottoNumberSet lottoNumbers = new LottoNumberSet(1, 2, 3, 4, 5, 6);
         String actual = lottoPurchaseService.purchaseLotto(Arrays.asList(lottoNumbers)).get(0).toString();
 
-        assertThat(actual).isEqualTo(new Lotto(lottoNumbers).toString());
+        assertThat(actual).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6).toString());
     }
 }

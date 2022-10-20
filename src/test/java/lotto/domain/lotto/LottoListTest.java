@@ -14,7 +14,7 @@ public class LottoListTest {
 
     @BeforeEach
     public void setLotto() {
-        lotto = new Lotto(new LottoNumberSet(1, 2, 3, 4, 5, 6));
+        lotto = new Lotto(1, 2, 3, 4, 5, 6);
     }
 
     @Test

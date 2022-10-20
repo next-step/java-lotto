@@ -12,6 +12,10 @@ public class Lotto {
         this(LottoNumberSet.createLottoNumberSet());
     }
 
+    public Lotto(int... ints) {
+        this.lottoNumbers = new LottoNumberSet(ints);
+    }
+
     public Lotto(final LottoNumberSet lottoNumberSet) {
         this.lottoNumbers = lottoNumberSet;
     }

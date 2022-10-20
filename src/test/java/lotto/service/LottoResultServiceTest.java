@@ -30,12 +30,12 @@ public class LottoResultServiceTest {
     @Test
     void check_lotto() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(new LottoNumberSet(1, 2, 3, 4, 5, 6)),
-                new Lotto(new LottoNumberSet(2, 3, 4, 5, 6, 7)),
-                new Lotto(new LottoNumberSet(2, 3, 4, 5, 6, 9)),
-                new Lotto(new LottoNumberSet(3, 4, 5, 6, 7, 8)),
-                new Lotto(new LottoNumberSet(4, 5, 6, 7, 8, 9)),
-                new Lotto(new LottoNumberSet(5, 6, 7, 8, 9, 10))
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(2, 3, 4, 5, 6, 7),
+                new Lotto(2, 3, 4, 5, 6, 9),
+                new Lotto(3, 4, 5, 6, 7, 8),
+                new Lotto(4, 5, 6, 7, 8, 9),
+                new Lotto(5, 6, 7, 8, 9, 10)
         );
         LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
         Map<Rank, Amount> rankAmountMap = lottoResultService.checkLotto(lottoList, winner);
@@ -49,16 +49,16 @@ public class LottoResultServiceTest {
     @Test
     void yield() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(new LottoNumberSet(4, 5, 6, 7, 8, 9)),
-                new Lotto(new LottoNumberSet(5, 6, 7, 8, 9, 10)),
-                new Lotto(new LottoNumberSet(6, 7, 8, 9, 10, 11)),
-                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12)),
-                new Lotto(new LottoNumberSet(7, 8, 9, 10, 11, 12))
+                new Lotto(4, 5, 6, 7, 8, 9),
+                new Lotto(5, 6, 7, 8, 9, 10),
+                new Lotto(6, 7, 8, 9, 10, 11),
+                new Lotto(7, 8, 9, 10, 11, 12),
+                new Lotto(7, 8, 9, 10, 11, 12),
+                new Lotto(7, 8, 9, 10, 11, 12),
+                new Lotto(7, 8, 9, 10, 11, 12),
+                new Lotto(7, 8, 9, 10, 11, 12),
+                new Lotto(7, 8, 9, 10, 11, 12),
+                new Lotto(7, 8, 9, 10, 11, 12)
         );
         LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
