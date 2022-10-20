@@ -4,14 +4,14 @@ import java.util.Queue;
 
 public class Operators {
 
-    private final Queue<Operator> arithmetics;
+    private final ExpressionAsOperators expressionAsOperators;
 
-    public Operators(Queue<Operator> arithmetics) {
-        this.arithmetics = arithmetics;
+    public Operators(ExpressionAsOperators expressionAsOperators) {
+        this.expressionAsOperators = expressionAsOperators;
     }
 
-    public int executedResult(int operand, int anotherOperand) {
-        return arithmetics.poll().executedResult(operand, anotherOperand);
+    public Queue<Operator> operators() {
+        return expressionAsOperators.operators();
     }
 
 }
