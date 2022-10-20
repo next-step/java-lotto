@@ -1,6 +1,6 @@
 package step1.operators;
 
-import step1.Operator;
+import step1.operators.operator.Operator;
 
 import java.util.Queue;
 

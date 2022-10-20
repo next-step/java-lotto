@@ -3,8 +3,7 @@ package step1.operators;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import step1.Operator;
-import step1.operators.ExpressionAsOperators;
+import step1.operators.operator.Operator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
