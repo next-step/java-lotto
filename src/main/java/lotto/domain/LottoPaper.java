@@ -35,6 +35,14 @@ public class LottoPaper {
         );
     }
 
+    public int countLottos() {
+        return elements.size();
+    }
+
+    public WinningStatistics produceWinningStatistics(Lotto lastWeekWinningLotto, BonusBall bonusBall) {
+        return WinningStatistics.of(elements, lastWeekWinningLotto, bonusBall);
+    }
+
     public List<Lotto> getElements() {
         return Collections.unmodifiableList(elements);
     }

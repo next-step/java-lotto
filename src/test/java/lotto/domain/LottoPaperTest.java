@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.domain.WinningInformation.FIVE_AND_BONUS_MATCHES;
+import static lotto.domain.WinningInformation.NOT_MATCHES;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -70,6 +72,29 @@ public class LottoPaperTest {
         PlayLottoCount playLottoCount = new PlayLottoCount(2);
 
         LottoPaper actual = lottoPaper.generateAutoLottos(playLottoCount, new FixedLottoGenerator());
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("로또 수를 알려준다.")
+    @Test
+    void size() {
+        int actual = lottoPaper.countLottos();
+
+        assertThat(actual).isEqualTo(3);
+    }
+
+    @DisplayName("당첨 통계를 알려준다.")
+    @Test
+    void produce_winning_statistics() {
+        WinningStatistics expected = new WinningStatistics(List.of(
+                FIVE_AND_BONUS_MATCHES,
+                NOT_MATCHES,
+                NOT_MATCHES));
+        Lotto lastWeekWinningLotto = Lotto.from("1,2,3,4,5,7");
+        BonusBall bonusBall = new BonusBall("6", lastWeekWinningLotto);
+
+        WinningStatistics actual = lottoPaper.produceWinningStatistics(lastWeekWinningLotto, bonusBall);
 
         assertThat(actual).isEqualTo(expected);
     }

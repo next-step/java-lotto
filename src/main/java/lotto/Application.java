@@ -21,12 +21,12 @@ public class Application {
         OutputView.printNewLine();
 
         LottoPaper lottoPaper = manualLottoPaper.generateAutoLottos(playLottoCount.subtract(manualLottoCount), new AutoLottoGenerator());
-        OutputView.printGeneratedLottos(lottoPaper.getElements());
+        OutputView.printGeneratedLottos(lottoPaper);
         OutputView.printNewLine();
 
         Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
         BonusBall bonusBall = createBonusBall(lastWeekWinningLotto);
-        WinningStatistics winningStatistics = WinningStatistics.of(lottoPaper.getElements(), lastWeekWinningLotto, bonusBall);
+        WinningStatistics winningStatistics = lottoPaper.produceWinningStatistics(lastWeekWinningLotto, bonusBall);
         OutputView.printWinningStatistics(winningStatistics, money.calculatePrice());
     }
 

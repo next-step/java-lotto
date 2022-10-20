@@ -34,17 +34,17 @@ class OutputViewTest {
     @DisplayName("주어진 로또의 개수와, 로또 숫자들을 출력한다.")
     @Test
     void print_generated_lotto() {
-        List<Lotto> lottos = List.of(
+        LottoPaper lottoPaper = new LottoPaper(List.of(
                 new Lotto(createLottoNumberSet(1, 6)),
                 new Lotto(createLottoNumberSet(21, 26)),
                 new Lotto(createLottoNumberSet(3, 8))
-        );
+        ));
         String expected = "3개를 구매했습니다.\n" +
                 "[1, 2, 3, 4, 5, 6]\n" +
                 "[21, 22, 23, 24, 25, 26]\n" +
                 "[3, 4, 5, 6, 7, 8]";
 
-        OutputView.printGeneratedLottos(lottos);
+        OutputView.printGeneratedLottos(lottoPaper);
         String actual = outputStreamCaptor.toString().trim();
 
         assertThat(actual).isEqualTo(expected);

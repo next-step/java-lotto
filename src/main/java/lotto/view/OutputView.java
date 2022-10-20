@@ -20,8 +20,9 @@ public class OutputView {
         throw new AssertionError("OutputView는 생성자를 호출할 수 없습니다.");
     }
 
-    public static void printGeneratedLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printGeneratedLottos(LottoPaper lottoPaper) {
+        System.out.println(lottoPaper.countLottos() + "개를 구매했습니다.");
+        List<Lotto> lottos = lottoPaper.getElements();
         lottos.stream()
                 .map(Lotto::getElements)
                 .map(OutputView::sortLottoNumbers)
