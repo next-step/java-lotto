@@ -16,7 +16,6 @@ public class LottoResult {
     public LottoResult(List<Lotto> lottos, Set<Number> winners, Number bonus) {
         this.lottos = lottos;
         this.winners = winners;
-        winners.add(bonus);
         this.bonus = bonus;
     }
 

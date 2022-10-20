@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.Number;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +15,12 @@ class LottoResultTest {
             Lotto.create(() -> Number.of(2, 3, 4, 5, 6, 8)),
             Lotto.create(() -> Number.of(3, 4, 5, 6, 7, 8)),
             Lotto.create(() -> Number.of(4, 5, 6, 7, 8, 9)),
-            Lotto.create(() -> Number.of(5, 6, 7, 8, 9, 10)),
-            Lotto.create(() -> Number.of(6, 7, 8, 9, 10, 11))
+            Lotto.create(() -> Number.of(5, 6, 7, 8, 9, 10))
         ));
 
         LottoResult result = lottos.getResult(Number.of(1, 2, 3, 4, 5, 6), Number.of(7));
 
-        Assertions.assertThat(result.numberOfFirstRank()).isEqualTo(2L);
+        Assertions.assertThat(result.numberOfFirstRank()).isEqualTo(1L);
         Assertions.assertThat(result.numberOfSecondRankWithBonus()).isEqualTo(1L);
         Assertions.assertThat(result.numberOfSecondRank()).isEqualTo(1L);
         Assertions.assertThat(result.numberOfThirdRank()).isEqualTo(1L);
