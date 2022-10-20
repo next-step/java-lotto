@@ -51,4 +51,20 @@ class ExpressionAsArithmeticExpressionTest {
                         .hasMessage("유효한 연산식이 아닙니다.")
         );
     }
+
+    @Test
+    void 숫자0으로_나눌_경우_예외가_발생한다() {
+        String expression = "1 / 0";
+        ExpressionAsArithmeticExpression sut = new ExpressionAsArithmeticExpression(expression);
+
+        assertAll(
+                () -> assertThatThrownBy(() -> sut.numbers())
+                        .isInstanceOf(IllegalStateException.class)
+                        .hasMessage("0으로 나눌 수 없습니다."),
+
+                () -> assertThatThrownBy(() -> sut.operators())
+                        .isInstanceOf(IllegalStateException.class)
+                        .hasMessage("0으로 나눌 수 없습니다.")
+        );
+    }
 }
