@@ -1,12 +1,12 @@
 package calculator.model;
 
-import calculator.exception.ValidateInputException;
+import calculator.exception.InvalidInputException;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static calculator.util.NumberUtil.isNumber;
+import static calculator.util.NumberUtil.validateNumber;
 import static calculator.util.OperatorUtil.validateOperator;
 
 public class StringCalculator {
@@ -14,12 +14,12 @@ public class StringCalculator {
     public Integer calculate(String input) {
         List<String> inputList = makeInputList(input);
 
-        Integer firstNumber = isNumber(inputList.get(0));
+        Integer firstNumber = validateNumber(inputList.get(0));
 
         for (int i = 1; i < inputList.size(); i += 2) {
             String operator = inputList.get(i);
-            Integer secondNumber = isNumber(inputList.get(i + 1));
-            firstNumber = Calculation.valueOf(validateOperator(operator), firstNumber, secondNumber);
+            Integer secondNumber = validateNumber(inputList.get(i + 1));
+            firstNumber = Operator.calculate(validateOperator(operator), firstNumber, secondNumber);
         }
 
         return firstNumber;
@@ -34,7 +34,7 @@ public class StringCalculator {
 
     public String validateInput(String input) {
         if (input == null || input.isEmpty()) {
-            throw new ValidateInputException();
+            throw new InvalidInputException();
         }
         return input;
     }

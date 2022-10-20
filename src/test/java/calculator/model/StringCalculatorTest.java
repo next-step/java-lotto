@@ -1,7 +1,7 @@
 package calculator.model;
 
 import calculator.exception.NotEssenceException;
-import calculator.exception.ValidateInputException;
+import calculator.exception.InvalidInputException;
 import calculator.exception.ValidateNumberException;
 import calculator.exception.ValidateOperatorException;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +23,7 @@ class StringCalculatorTest {
     @NullAndEmptySource
     void input_test_null_empty(String input) {
         // expected
-        assertThatExceptionOfType(ValidateInputException.class)
+        assertThatExceptionOfType(InvalidInputException.class)
                 .isThrownBy(() -> stringCalculator.makeInputList(input));
     }
 
@@ -49,7 +49,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // when
-        Integer addResult = Calculation.valueOf("+", firstNumber, secondNumber);
+        Integer addResult = Operator.calculate("+", firstNumber, secondNumber);
 
         // then
         assertThat(addResult).isEqualTo(3);
@@ -63,7 +63,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // when
-        Integer addResult = Calculation.valueOf("-", firstNumber, secondNumber);
+        Integer addResult = Operator.calculate("-", firstNumber, secondNumber);
 
         // then
         assertThat(addResult).isEqualTo(-1);
@@ -77,7 +77,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // when
-        Integer addResult = Calculation.valueOf("*", firstNumber, secondNumber);
+        Integer addResult = Operator.calculate("*", firstNumber, secondNumber);
 
         // then
         assertThat(addResult).isEqualTo(2);
@@ -92,7 +92,7 @@ class StringCalculatorTest {
 
         // expected
         assertThatExceptionOfType(NotEssenceException.class)
-                .isThrownBy(() -> Calculation.valueOf("/", firstNumber, secondNumber));
+                .isThrownBy(() -> Operator.calculate("/", firstNumber, secondNumber));
     }
 
     @Test
@@ -103,7 +103,7 @@ class StringCalculatorTest {
         Integer secondNumber = 2;
 
         // when
-        Integer result = Calculation.valueOf("/", firstNumber, secondNumber);
+        Integer result = Operator.calculate("/", firstNumber, secondNumber);
 
         // then
         assertThat(result).isEqualTo(1);
