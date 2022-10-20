@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 import java.util.Iterator;
 import java.util.List;
@@ -26,13 +26,17 @@ public class Result {
 
 	public Map<Operator, Integer> results(Set<Integer> winningNumbers) {
 		for (Set<Integer> guestLotto : list) {
-			Operator rank = Operator.find(checkRank(guestLotto, winningNumbers));
-			if (rank == null) {
-				continue;
-			}
-			map.put(rank, map.get(rank) + 1);
+			result(winningNumbers, guestLotto);
 		}
 		return map;
+	}
+
+	private void result(Set<Integer> winningNumbers, Set<Integer> guestLotto) {
+		Operator rank = Operator.find(checkRank(guestLotto, winningNumbers));
+		if (rank == null) {
+			return;
+		}
+		map.put(rank, map.get(rank) + 1);
 	}
 
 	private int checkRank(Set<Integer> guestLotto, Set<Integer> winningNumbers) {

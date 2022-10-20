@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 import java.util.Map;
 import java.util.Set;
@@ -30,12 +30,17 @@ public class Print {
 		double rate = 0d;
 		Set<Map.Entry<Operator, Integer>> entries = results.entrySet();
 		for (Map.Entry<Operator, Integer> entry : entries) {
-			if (entry.getKey() != null) {
-				rate += entry.getKey().getWinning() * entry.getValue();
-				System.out.println(
-					entry.getKey().getCount() + "개 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개");
-			}
+			rate = printPrize(rate, entry);
 		}
 		System.out.println("총 수익률은 " + String.format("%.2f", (rate / amount)) + "입니다.");
+	}
+
+	private static double printPrize(double rate, Map.Entry<Operator, Integer> entry) {
+		if (entry.getKey() != null) {
+			rate += entry.getKey().getWinning() * entry.getValue();
+			System.out.println(
+				entry.getKey().getCount() + "개 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개");
+		}
+		return rate;
 	}
 }

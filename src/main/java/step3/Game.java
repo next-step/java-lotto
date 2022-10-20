@@ -1,8 +1,7 @@
-package step2;
+package step3;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -14,7 +13,6 @@ public class Game {
 		Result guestResult = startRaffle(amount);
 		Print.winningNumber();
 
-		// Prize.result(guestResult, makeWinningResult(InputView.input().split(", ")));
 		Print.rateOfWin(input, guestResult.results(makeWinningResult(InputView.input().split(", "))));
 	}
 
@@ -27,7 +25,7 @@ public class Game {
 	}
 
 	public static Result startRaffle(int amount) {
-		Lotto lotto = new Lotto();
+		LottoFactory lotto = new LottoFactory();
 		List<Set<Integer>> list = new ArrayList<>();
 		for (int i = 1; i <= amount; i++) {
 			Set<Integer> result = lotto.getRandomLotto();
