@@ -37,6 +37,8 @@
 - [x] Test input이 하나일때 @ParameterizedTest -> @Test 사용
 - [x] ArithmeticOperation 정적 팩토리 메서드로 처리하기.
 - [x] 의미없는 test 삭제
+- [x] StaticFactoryMethod 구현 수정. - Enum 추가
+- [ ] Operation Map 구현.
 ---
 
 ---
@@ -72,3 +74,26 @@
   - ~개를 구매했습니다.
   - 당첨통계
   - 수익률
+
+### 리뷰 요구사항
+- [ ] InputView 에서 질문에 해당하는 입력 값 바로 리턴하게 수정.
+- [ ] 객체가 직접 Validation 관리하게 수정
+- [ ] LottoAmountExpression -> LottoAmount 로 이동.
+- [ ] LottoNumber
+  - [ ] LottoNumberExpression -> LottoNumber 로 이동.
+  - [ ] 접근제어자 알맞은지 확인
+  - [ ] LottoNumber 의 null 에 대해.
+  - [ ] LottoNumber 생성 test
+- [ ] Lotto 
+  - [ size 검증 메소드 이동.
+- [ ] Lotto List -> Set
+- [ ] LottoPrize -> Rank
+- [ ] 당첨된 결과 winning 에서 처리 후 ResultView 로 넘기기
+- [ ] method UI 의존성 수정
+  - Lotto generateReport()
+  - LottoTicket generateTicket().
+  - 등수를 나타내게 Enum 수정.
+- [ ] 필드명, 함수명 수정
+  - List<lotto> -> lottoTicket
+  - lastWeekTicket -> winningTicket
+
