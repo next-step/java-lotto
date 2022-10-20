@@ -35,4 +35,10 @@ public class InputView {
                 .map(num -> new LottoNumber(num))
                 .collect(Collectors.toList());
     }
+
+    public static LottoNumber scanBonusBall() {
+        show("보너스 볼을 입력해 주세요.");
+
+        return new LottoNumber(Integer.parseInt(SCANNER.nextLine()));
+    }
 }

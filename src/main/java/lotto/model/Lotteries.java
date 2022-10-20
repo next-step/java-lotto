@@ -10,19 +10,10 @@ import java.util.stream.Collectors;
 
 public class Lotteries {
 
-    private static final int LOTTO_PRICE = 1000;
-
     private final List<Lotto> lotteries;
-    private final int purchasedCount;
 
     public Lotteries(List<Lotto> lotteries) {
         this.lotteries = lotteries;
-        this.purchasedCount = getLottoCount();
-    }
-
-    public Lotteries(LottoFactory lottoFactory, int purchaseAmount) {
-        this.purchasedCount = purchaseAmount / LOTTO_PRICE;
-        this.lotteries = lottoFactory.create(this.purchasedCount);
     }
 
     public List<Lotto> getLotteries() {
@@ -30,21 +21,14 @@ public class Lotteries {
     }
 
     public int getLottoCount() {
-        return this.purchasedCount;
+        return this.lotteries.size();
     }
 
-    public Map<Rank, Long> getLotteriesRank(List<LottoNumber> lastWinLotto) {
+    public Map<Rank, Long> getLotteriesRank(WinningLotto winningLotto) {
         return lotteries.stream()
-                .map(lotto -> lotto.getMatchCount(lastWinLotto))
-                .map(count -> Rank.valueOf(count).orElse(null))
-                .filter(Objects::nonNull)
+                .map(winningLotto::matchCount)
+                .map(Rank::valueOf)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-    }
-
-    public long getTotalWinningMoney(Map<Rank, Long> lotteriesRank) {
-        return lotteriesRank.entrySet().stream()
-                .mapToLong((rank) -> rank.getKey().getWinningMoney() * rank.getValue())
-                .sum();
     }
 
     @Override

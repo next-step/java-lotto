@@ -21,9 +21,10 @@ class LottoTest {
     @Test
     public void 로또_번호_일치_검증() {
         Lotto lottoNumbers = new Lotto(createLottoNumber(1, 13, 15, 17, 20, 45));
-        List<LottoNumber> lastWinLotto = createLottoNumber(1, 13, 15, 17, 33, 45);
 
-        int result = lottoNumbers.getMatchCount(lastWinLotto);
+        WinningLotto winningLotto = new WinningLotto(createLottoNumber(1, 13, 15, 17, 33, 45), new LottoNumber(40));
+
+        double result = winningLotto.matchCount(lottoNumbers);
 
         assertThat(result).isEqualTo(5);
     }

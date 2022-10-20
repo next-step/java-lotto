@@ -1,17 +1,22 @@
 package lotto.client;
 
 import lotto.model.Lotteries;
+import lotto.model.Profit;
 import lotto.model.enumeration.Rank;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static lotto.model.enumeration.Rank.MISS;
+import static lotto.model.enumeration.Rank.SECOND;
+
 public class OutputView {
 
     private static final String LOTTO_FORM = "[{result}]";
-    private static final String RANK_FORM = "{matchCount}개 일치 ({amount}원)- {count}개";
+    private static final String RANK_FORM = "{matchCount}개 일치{matchBonus}({amount}원)- {count}개";
     private static final String RETURN_RATE_FORM = "총 수익률은 {rate} 입니다.";
 
     private OutputView() {
@@ -25,6 +30,7 @@ public class OutputView {
     public static void showCreatedLotteries(Lotteries lotteries) {
         lotteries.getLotteries().forEach(lotto -> {
                     String result = lotto.getLotto().stream()
+                            .sorted()
                             .map(number -> String.valueOf(number.getValue()))
                             .collect(Collectors.joining(", "));
 
@@ -39,17 +45,18 @@ public class OutputView {
         show("당첨 통계");
         show("---------");
 
-        Arrays.stream(Rank.values()).forEach((value) ->
-                show(RANK_FORM.replace("{matchCount}", String.valueOf(value.getCountOfMatch()))
-                        .replace("{amount}", String.valueOf(value.getWinningMoney()))
-                        .replace("{count}", String.valueOf(Optional.ofNullable(lotteriesRank.get(value)).orElse(0L))))
-        );
-
+        Arrays.stream(Rank.values()).filter(rank -> !MISS.equals(rank))
+                .sorted(Comparator.comparingDouble(Rank::getCountOfMatch))
+                .forEach((value) ->
+                        show(RANK_FORM.replace("{matchCount}", String.valueOf((int) value.getCountOfMatch()))
+                                .replace("{amount}", String.valueOf(value.getWinningMoney()))
+                                .replace("{matchBonus}", SECOND.equals(value) ? ", 보너스 볼 일치" : " ")
+                                .replace("{count}", String.valueOf(Optional.ofNullable(lotteriesRank.get(value)).orElse(0L))))
+                );
     }
 
-    public static void showReturnRate(Lotteries lotteries, Map<Rank, Long> lotteriesRank, int purchaseAmount) {
-        double returnRate = lotteries.getTotalWinningMoney(lotteriesRank) / purchaseAmount;
-
+    public static void showReturnRate(Profit profit, int purchaseAmount) {
+        double returnRate = profit.getTotalWinningMoney() / purchaseAmount;
         show(RETURN_RATE_FORM.replace("{rate}", String.format("%.2f", returnRate)));
 
         if (returnRate < 1) {
