@@ -65,5 +65,4 @@ class ProfitTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
-
 }
