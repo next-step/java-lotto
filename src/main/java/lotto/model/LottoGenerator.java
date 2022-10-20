@@ -12,15 +12,11 @@ public class LottoGenerator {
 
     public Lottos generateLottos(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = getLottoCount(money);
+        int lottoCount = money.getLottoCount();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(generateLotto());
         }
         return new Lottos(lottos);
-    }
-
-    private int getLottoCount(Money money) {
-        return money.getMoney() / Lotto.LOTTO_PRICE.getMoney();
     }
 
     private Lotto generateLotto() {

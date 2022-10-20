@@ -9,7 +9,7 @@ public class LottoResult {
     private final List<Rank> ranks;
 
     public LottoResult(List<Rank> rewards) {
-        this.money = rewards.size() * Lotto.LOTTO_PRICE.getMoney();
+        this.money = Money.LOTTO_PRICE.getTotalMoney(rewards.size());
         this.ranks = rewards;
     }
 
