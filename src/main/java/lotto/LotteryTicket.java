@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 
 public class LotteryTicket {
-    private static final int COUNT_OF_LOTTERY_NUMBER = 6;
+    public static final int COUNT_OF_LOTTERY_NUMBER = 6;
     private List<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<LotteryNumber> lotteryNumbers) {
