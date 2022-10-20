@@ -2,6 +2,8 @@ package step3.view;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.Prize;
 import step3.domain.Ticket;
@@ -18,7 +20,10 @@ public class OutputView {
 
     public static void printLottoNumbers(final List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.getLottoNumbers());
+            lottoNumber.getLottoNumbers()
+                .stream()
+                .forEach(number -> System.out.print(number.getLottoNumber() + " "));
+            System.out.println();
         }
         System.out.println();
     }

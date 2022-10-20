@@ -21,11 +21,12 @@ public class LottoNumberGenerator {
     private LottoNumberGenerator() {
     }
 
-    public static List<Integer> generateLottoNumber() {
+    public static List<LottoNumber> generateLottoNumber() {
         Collections.shuffle(lottoNumbersCache);
 
         return lottoNumbersCache.stream()
             .limit(LOTTO_NUMBER_COUNT)
+            .map(number -> LottoNumber.from(number))
             .collect(Collectors.toList());
     }
 }

@@ -1,32 +1,22 @@
 package step3.domain;
 
-import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoNumberTest {
+class LottoNumberTest {
 
-    @DisplayName("로또 발행 시 6개의 번호가 있는 로또가 발행")
+    @DisplayName("로또 번호 생성 시 1미만의 번호가 입력되면 예외 처리")
     @Test
-    void lotto_list_size_6(){
-        LottoNumbers lottoNumbers = LottoNumbers.from(LottoNumberGenerator.generateLottoNumber());
-        Assertions.assertThat(lottoNumbers.getLottoNumbers().size()).isEqualTo(6);
+    void lotto_number_greater_than_0() {
+        Assertions.assertThatIllegalArgumentException()
+            .isThrownBy(() -> LottoNumber.from(0));
     }
 
-    @DisplayName("MatchCount 계산 시 당첨 번호와 로또 번호 일치 개수를 반환")
+    @DisplayName("로또 번호 생성 시 45 초과 번호가 입력되면 예외 처리")
     @Test
-    void calculateMatchCount(){
-        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int countOfMatch = lottoNumbers.calculateMatchCount(Arrays.asList(1, 2, 3, 4, 5));
-        Assertions.assertThat(countOfMatch).isEqualTo(5);
-    }
-
-    @DisplayName("BonusBall 당첨 확인 시 로또 번호 중 일치 확인")
-    @Test
-    void lottoNumbers_contains_bonusBall_return_true(){
-        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        boolean isBonusBallMatch = lottoNumbers.isBonusBallMatch(5);
-        Assertions.assertThat(isBonusBallMatch).isTrue();
+    void lotto_number_less_than_46(){
+        Assertions.assertThatIllegalArgumentException()
+            .isThrownBy(() -> LottoNumber.from(46));
     }
 }
