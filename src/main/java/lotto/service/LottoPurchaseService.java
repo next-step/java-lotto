@@ -5,9 +5,9 @@ import lotto.domain.Money.ImmutableMoney;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumberSet;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoPurchaseService {
 
@@ -16,11 +16,9 @@ public class LottoPurchaseService {
     }
 
     public List<Lotto> purchaseLotto(final Amount amount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < amount.amount(); i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
+        return IntStream.range(0, amount.amount())
+                .mapToObj(i -> new Lotto())
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> purchaseLotto(final List<LottoNumberSet> lottoNumberSetList) {
