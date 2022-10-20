@@ -1,5 +1,10 @@
-package lotto;
+package lotto.controller;
 
+import lotto.domain.LottoShop;
+import lotto.domain.Lottos;
+import lotto.domain.Money;
+import lotto.domain.Number;
+import lotto.domain.RandomNumberStrategy;
 import lotto.view.Input;
 import lotto.view.Output;
 
