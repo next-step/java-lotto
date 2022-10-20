@@ -16,10 +16,18 @@ public class ExpressionAsNumbers {
     }
 
     public List<Integer> numbers() {
+        verifyValidExpression();
+
         return NUMBERS_EXTRACTION_RULE.matcher(expression)
                 .results()
                 .map(MatchResult::group)
                 .map(Integer::parseInt)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    private void verifyValidExpression() {
+        if (expression == null || expression.equals("")) {
+            throw new IllegalStateException("올바른 연산식이 아닙니다.");
+        }
     }
 }
