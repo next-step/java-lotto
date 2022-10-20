@@ -25,14 +25,14 @@ public class LottoResultController {
 
     private LottoWinner drawWinner() {
         LottoOutput.winningNumber();
-        LottoNumberSet numbers = LottoInput.lottoNumbers();
+        LottoNumberSet numbers = LottoNumberSet.createLottoNumberSet(LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER));
         LottoOutput.bonusNumber();
         return createLottoWinner(numbers);
     }
 
     private static LottoWinner createLottoWinner(final LottoNumberSet numbers) {
         try {
-            LottoNumber bonusNumber = LottoInput.bonusNumber();
+            LottoNumber bonusNumber = new LottoNumber(LottoInput.bonusNumber());
             return new LottoWinner(numbers, bonusNumber);
         } catch (Exception e) {
             LottoOutput.bonusNumberInputException();

@@ -1,41 +1,35 @@
 package lotto.view.lotto;
 
-import lotto.domain.Amount;
-import lotto.domain.lottonumber.LottoNumber;
-import lotto.domain.lottonumber.LottoNumberSet;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class LottoInput {
 
-    public static Amount purchaseManualAmount() {
-        Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static int purchaseManualAmount() {
         try {
-            return new Amount(scanner.nextInt());
+            return scanner.nextInt();
         } catch (Exception e) {
             LottoOutput.purchaseManualAmountInputException();
         }
         return purchaseManualAmount();
     }
 
-    public static LottoNumberSet lottoNumbers() {
-        Scanner scanner = new Scanner(System.in);
+    public static int[] lottoNumbers(String lottoNumberDelimiter) {
         try {
-            return LottoNumberSet.createLottoNumberSet(
-                    Arrays.stream(scanner.nextLine().split(LottoNumberSet.LOTTONUMBERSET_DELIMITER))
-                            .mapToInt(i -> Integer.parseInt(i))
-                            .toArray());
+            return Arrays.stream(scanner.nextLine().split(lottoNumberDelimiter))
+                    .mapToInt(i -> Integer.parseInt(i))
+                    .toArray();
         } catch (Exception e) {
             LottoOutput.lottoNumbersInputException();
         }
-        return lottoNumbers();
+        return lottoNumbers(lottoNumberDelimiter);
     }
 
-    public static LottoNumber bonusNumber() {
-        Scanner scanner = new Scanner(System.in);
+    public static int bonusNumber() {
         try {
-            return new LottoNumber(scanner.nextInt());
+            return scanner.nextInt();
         } catch (Exception e) {
             LottoOutput.bonusNumberInputException();
         }
