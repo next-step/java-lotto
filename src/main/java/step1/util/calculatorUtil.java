@@ -1,6 +1,6 @@
-package step1;
+package step1.util;
 
-public class Calculator {
+public class calculatorUtil {
 	public int plus(String a, String b){
 		return Integer.parseInt(a) + Integer.parseInt(b);
 	}

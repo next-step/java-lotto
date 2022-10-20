@@ -1,6 +1,7 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
+import step1.Controller.CalculatorController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,7 +11,7 @@ public class PlusTest {
 	void plusTest(){
 		String a = "1";
 		String b = "2";
-		Calculator calculator = new Calculator();
-		assertEquals(calculator.plus(a, b), 3);
+		CalculatorController calculatorController = new CalculatorController();
+		assertEquals(calculatorController.plus(a, b), 3);
 	}
 }

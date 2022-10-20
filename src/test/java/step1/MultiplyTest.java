@@ -1,6 +1,7 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
+import step1.Controller.CalculatorController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,7 +10,7 @@ public class MultiplyTest {
 	void multiplyTest(){
 		String a = "3";
 		String b = "5";
-		Calculator calculator = new Calculator();
-		assertEquals(calculator.multiply(a, b), 15);
+		CalculatorController calculatorController = new CalculatorController();
+		assertEquals(calculatorController.multiply(a, b), 15);
 	}
 }
