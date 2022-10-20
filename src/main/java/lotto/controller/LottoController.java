@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.Number;
 import lotto.util.LottoUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -27,7 +28,7 @@ public class LottoController {
 
     private void getLottoResult(List<LottoTicket> lottoTickets, int paidAmount) {
         String winningNumbers = inputView.receiveInputString();
-        List<Integer> numbers = LottoUtil.splitStringToNumbers(winningNumbers);
+        List<Number> numbers = LottoUtil.splitStringToNumbers(winningNumbers);
 
         int bonusBall = inputView.receiveExtraInput();
 

@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.RankingAward;
+import lotto.util.LottoUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class ResultView {
 
     public void printAllLottoNumbers(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.getNumbers());
+            System.out.println(LottoUtil.convertToIntegers(lottoTicket.getNumbers()));
         }
         System.out.println();
     }

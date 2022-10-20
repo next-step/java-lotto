@@ -10,6 +10,7 @@ public class LottoResult {
     private final Map<Integer, Integer> lottoRankings = new HashMap<>();
 
     private static final int MINIMUM_RANKING = 3;
+    private static final int FOURTH_RANKING = 4;
     private static final int BONUS_BALL_RANKING = 7;
 
     private int prizeMoney;
@@ -21,39 +22,46 @@ public class LottoResult {
         }
     }
 
-    public void calculateLottoResult(List<LottoTicket> lottoTickets, List<Integer> numbers, int paidAmount, int bonusBall) {
+    public void calculateLottoResult(List<LottoTicket> lottoTickets, List<Number> numbers, int paidAmount, int bonusBall) {
+        LottoDto winningNumbers = new LottoDto(numbers);
+
         for (LottoTicket lottoTicket : lottoTickets) {
-            addEachResult(lottoTicket, numbers, bonusBall);
+            LottoDto lotto = new LottoDto(lottoTicket.getNumbers());
+            checkEachResult(lotto, winningNumbers, bonusBall);
         }
         calculatePrizePercentage(paidAmount);
     }
 
-    private void addEachResult(LottoTicket lottoTicket, List<Integer> numbers, int bonusBall) {
-        int grade = filterMatchingNumbers(lottoTicket, numbers);
-
-        if (grade == 4) {
-            checkBonusBallMatch(lottoTicket, bonusBall);
-            return;
-        }
+    private void checkEachResult(LottoDto lotto, LottoDto winningNumbers, int bonusBall) {
+        int grade = filterMatchingNumbers(lotto, winningNumbers);
 
         if (this.lottoRankings.containsKey(grade)) {
-            lottoRankings.put(grade, lottoRankings.get(grade) + 1);
-            prizeMoney += RankingAward.getAward(grade);
+            addEachResult(lotto, grade, bonusBall);
         }
     }
 
-    private int filterMatchingNumbers(LottoTicket lottoTicket, List<Integer> numbers) {
-        List<Integer> match = lottoTicket.getNumbers().stream()
-                .filter(numbers::contains)
+    private int filterMatchingNumbers(LottoDto lotto, LottoDto winningNumbers) {
+        List<Integer> match = lotto.getLottoNumbers().stream()
+                .filter(number -> winningNumbers.getLottoNumbers().contains(number))
                 .collect(Collectors.toList());
         return match.size();
     }
 
-    private void checkBonusBallMatch(LottoTicket lottoTicket, int bonusBall) {
-        if (lottoTicket.getNumbers().contains(bonusBall)) {
-            lottoRankings.put(BONUS_BALL_RANKING, lottoRankings.get(BONUS_BALL_RANKING) + 1);
-            prizeMoney += RankingAward.getAward(BONUS_BALL_RANKING);
+    private void addEachResult(LottoDto lotto, int grade, int bonusBall) {
+        if (grade == FOURTH_RANKING) {
+            grade = checkBonusBallMatch(lotto, bonusBall);
         }
+        lottoRankings.put(grade, lottoRankings.get(grade) + 1);
+        prizeMoney += RankingAward.getAward(grade);
+    }
+
+    private int checkBonusBallMatch(LottoDto lotto, int bonusBall) {
+        int grade = FOURTH_RANKING;
+
+        if (lotto.getLottoNumbers().contains(bonusBall)) {
+            grade = BONUS_BALL_RANKING;
+        }
+        return grade;
     }
 
     private void calculatePrizePercentage(int paidAmount) {

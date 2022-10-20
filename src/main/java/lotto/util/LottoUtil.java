@@ -1,7 +1,10 @@
 package lotto.util;
 
+import lotto.domain.Number;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class LottoUtil {
 
@@ -28,21 +31,27 @@ public final class LottoUtil {
         return paidAmount >= 1000;
     }
 
-    public static List<Integer> splitStringToNumbers(String winningNumbers) {
+    public static List<Number> splitStringToNumbers(String winningNumbers) {
         String[] splitNumbers = winningNumbers.split(SPLIT_COMMA_SPACE);
-        List<Integer> numbers = new ArrayList<>();
+        List<Number> numbers = new ArrayList<>();
 
         for (String splitNumber : splitNumbers) {
-            numbers.add(Integer.parseInt(splitNumber));
+            numbers.add(new Number(Integer.parseInt(splitNumber)));
         }
         verifyLottoNumbers(numbers);
 
         return numbers;
     }
 
-    private static void verifyLottoNumbers(List<Integer> numbers) {
+    private static void verifyLottoNumbers(List<Number> numbers) {
         if (numbers.size() != LOTTO_NUMBERS) {
             throw new IllegalArgumentException("로또는 6개의 숫자를 입력하셔야 합니다.");
         }
+    }
+
+    public static List<Integer> convertToIntegers(List<Number> numbers) {
+        return numbers.stream()
+                .map(Number::getNumber)
+                .collect(Collectors.toList());
     }
 }
