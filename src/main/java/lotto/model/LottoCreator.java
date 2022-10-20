@@ -23,10 +23,8 @@ public class LottoCreator {
     }
 
     public static List<Lotto> createAutoLotto(int purchasedAmount) {
-        List<Lotto> lotteries = IntStream.rangeClosed(1, purchasedAmount / LOTTO_PRICE)
+        return IntStream.rangeClosed(1, purchasedAmount / LOTTO_PRICE)
                 .mapToObj(v -> createLotto())
                 .collect(Collectors.toList());
-
-        return lotteries;
     }
 }

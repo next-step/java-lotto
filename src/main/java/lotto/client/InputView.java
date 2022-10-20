@@ -30,7 +30,7 @@ public class InputView {
     }
 
     public static List<Lotto> scanManualLottoNumber(int count) {
-        if(count == 0) return new ArrayList<>();
+        if (count == 0) return new ArrayList<>();
 
         show("수동으로 구매할 번호를 입력해 주세요.");
 
