@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class Number {
     int number;
 
@@ -20,5 +22,18 @@ public class Number {
 
     private boolean isIntegerNumber(String value) {
         return (Double.valueOf(value)) % 1 == 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Number number1 = (Number) o;
+        return number == number1.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
