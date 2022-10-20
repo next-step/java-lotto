@@ -16,22 +16,15 @@ public class LottoMain {
             LottoGenerator lottoGenerator = new LottoGenerator();
             InputView inputView = new InputView();
 
-            String moneyString = inputView.inputPurchaseMoney();
-            List<Lotto> lottoList = lottoGenerator.purchaseByAuto(new LottoPurchasedAmount(moneyString));
+            List<Lotto> lottoList = lottoGenerator.purchaseByAuto(new LottoPurchasedAmount(inputView.inputPurchaseMoney()));
             inputView.printPurchasedLottoList(lottoList);
 
-            List<Integer> lastWinnerNumbers = inputView.inputLastWinner();
-            Lotto lastWinnerLotto = new Lotto(lastWinnerNumbers);
-
-            String bonusNumberString = inputView.inputBonusNumber();
-            LottoNumber bonusNumber = new LottoNumber(bonusNumberString);
-
+            Lotto lastWinnerLotto = new Lotto(inputView.inputLastWinner());
+            LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
             LottoWinner lastWinner = new LottoWinner(lastWinnerLotto, bonusNumber);
 
             LottoStatistics statistics = new LottoStatistics(lottoList, lastWinner);
-
-            ResultView resultView = new ResultView(statistics);
-            resultView.printStatistics();
+            new ResultView(statistics).printStatistics();
         } catch (Exception e) {
             e.printStackTrace();
         }
