@@ -1,6 +1,6 @@
 package lotto.domain.exception;
 
-public class CannotBeGreaterPlayableLottoCount extends RuntimeException {
+public class CannotBeGreaterPlayableLottoCount extends LottoDomainException {
 
     private static final CannotBeGreaterPlayableLottoCount CANNOT_BE_GREATER_PLAYABLE_LOTTO_COUNT =
             new CannotBeGreaterPlayableLottoCount("플레이 가능한 수 보다 큰 수는 입력될 수 없습니다.");

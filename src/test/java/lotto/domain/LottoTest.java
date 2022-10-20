@@ -27,7 +27,7 @@ public class LottoTest {
     @Nested
     class Create {
 
-        @DisplayName("List<Integer>타입을 파라미터로 받을 수 있다.")
+        @DisplayName("List<String>타입을 파라미터로 받을 수 있다.")
         @Test
         void create_by_List() {
             Lotto expected = lotto;
@@ -36,6 +36,15 @@ public class LottoTest {
                             .mapToObj(Integer::toString)
                             .collect(Collectors.toList())
             );
+
+            assertThat(actual).isEqualTo(expected);
+        }
+
+        @DisplayName("String 타입을 파라미터로 받을 수 있다.")
+        @Test
+        void create_by_string() {
+            Lotto expected = lotto;
+            Lotto actual = Lotto.from("1,2,3,4,5,6");
 
             assertThat(actual).isEqualTo(expected);
         }

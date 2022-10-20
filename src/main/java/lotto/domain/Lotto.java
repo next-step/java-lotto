@@ -3,15 +3,13 @@ package lotto.domain;
 import lotto.domain.exception.InvalidLottoNumberSizeException;
 import lotto.util.NullCheckUtil;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int MAX_SIZE = 6;
+    private static final String SEPARATOR = ",";
 
     private final Set<LottoNumber> elements;
 
@@ -25,6 +23,12 @@ public class Lotto {
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
         return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto from(String value) {
+        List<String> values = Arrays.stream(value.split(SEPARATOR))
+                .collect(Collectors.toList());
+        return Lotto.from(values);
     }
 
     private void validate(final Set<LottoNumber> elements) {

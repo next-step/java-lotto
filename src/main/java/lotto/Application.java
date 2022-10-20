@@ -19,6 +19,9 @@ public class Application {
         ManualLottoCount manualLottoCount = createManualLottoCount(playLottoCount);
         OutputView.printNewLine();
 
+        LottoPaper lottoPaper = createLottoPaper(manualLottoCount);
+        OutputView.printNewLine();
+
         List<Lotto> lottos = AutoLottoGenerator.generate(playLottoCount);
         OutputView.printGeneratedLottos(lottos);
         OutputView.printNewLine();
@@ -32,7 +35,7 @@ public class Application {
     private static Money receiveMoney() {
         try {
             return new Money(InputView.receiveMoney());
-        } catch (NotNumberStringException | NotZeroOrMoreNumberException e) {
+        } catch (LottoDomainException e) {
             System.out.println(e.getMessage());
             return receiveMoney();
         }
@@ -41,16 +44,25 @@ public class Application {
     private static ManualLottoCount createManualLottoCount(PlayLottoCount playLottoCount) {
         try {
             return new ManualLottoCount(playLottoCount, InputView.receiveManualLottoCount());
-        } catch (NotNumberStringException | CannotBeGreaterPlayableLottoCount e) {
+        } catch (LottoDomainException e) {
             System.out.println(e.getMessage());
             return createManualLottoCount(playLottoCount);
+        }
+    }
+
+    private static LottoPaper createLottoPaper(ManualLottoCount manualLottoCount) {
+        try {
+            return LottoPaper.from(InputView.receiveManualLottos(manualLottoCount));
+        } catch (LottoDomainException e) {
+            System.out.println(e.getMessage());
+            return createLottoPaper(manualLottoCount);
         }
     }
 
     private static Lotto createLastWeekWinningLotto() {
         try {
             return Lotto.from(InputView.receiveLastWeekWinningNumber());
-        } catch (NotNumberStringException | OutOfRangeLottoNumberException | InvalidLottoNumberSizeException e) {
+        } catch (LottoDomainException e) {
             System.out.println(e.getMessage());
             return createLastWeekWinningLotto();
         }
@@ -59,7 +71,7 @@ public class Application {
     private static BonusBall createBonusBall(final Lotto lastWeekWinningLotto) {
         try {
             return new BonusBall(InputView.receiveBonusBall(), lastWeekWinningLotto);
-        } catch (NotNumberStringException | OutOfRangeLottoNumberException | DuplicateLottoNumberException e) {
+        } catch (LottoDomainException e) {
             System.out.println(e.getMessage());
             return createBonusBall(lastWeekWinningLotto);
         }
