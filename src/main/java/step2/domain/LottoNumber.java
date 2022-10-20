@@ -1,9 +1,11 @@
 package step2.domain;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static step2.domain.Util.exceptionWrapper;
 
@@ -14,6 +16,12 @@ public class LottoNumber {
         List<LottoNumberElement> lottoNumber = integersToLottoNumber(integerLottoNumber);
         duplicateCheck(lottoNumber);
         this.lottoNumber = Collections.unmodifiableList(lottoNumber);
+    }
+
+    public static List<LottoNumber> merge(List<LottoNumber> manualLottoNumbers, List<LottoNumber> randomLottoNumbers) {
+        return Stream.of(manualLottoNumbers, randomLottoNumbers)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     private void duplicateCheck(List<LottoNumberElement> lottoNumber) {

@@ -5,19 +5,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoVendingMachine {
-    private final LottoNumberGenerator lottoNumberGenerator;
 
-    public LottoVendingMachine(LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    public LottoVendingMachine() {
     }
 
-    public List<LottoNumber> makeLottoNumberWithTimes(int times) {
+    public static int calculateRandomNumberOfLotto(int totalNumberOfLotto, int manualNumberOfLotto) {
+        return totalNumberOfLotto - manualNumberOfLotto;
+    }
+
+    public List<LottoNumber> makeLottoNumberWithTimes(LottoNumberGenerator lottoNumberGenerator, int times) {
         return IntStream.range(0, times)
-                .mapToObj(i -> makeLottoNumber())
+                .mapToObj(i -> lottoNumberGenerator.create())
                 .collect(Collectors.toList());
-    }
-
-    private LottoNumber makeLottoNumber() {
-        return lottoNumberGenerator.create();
     }
 }

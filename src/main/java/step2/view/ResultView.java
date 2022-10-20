@@ -7,6 +7,7 @@ import step2.domain.Rank;
 import java.util.*;
 
 public class ResultView {
+    private static final String INIT_LOTTO_NUMBER_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String INIT_MESSAGE = "\n당청 통계\n---------";
 
     private static final String REVENUE_RATIO_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.(기준값 1보다 높으면 이익, 낮으면 손해라는 의미임)";
@@ -17,9 +18,14 @@ public class ResultView {
 
     private static final String BONUS_BALL_MATCH_MESSAGE_SUFFIX = ", 보너스 볼 일치";
 
-    public void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+    public void printLottoNumbers(List<LottoNumber> lottoNumbers, int manualNumberOfLotto, int randomNumberOfLotto) {
+        printInitLottoNumbers(manualNumberOfLotto, randomNumberOfLotto);
         lottoNumbers.forEach(System.out::println);
         printEndLottoNumbers();
+    }
+
+    private void printInitLottoNumbers(int manualNumberOfLotto, int randomNumberOfLotto) {
+        System.out.printf(INIT_LOTTO_NUMBER_MESSAGE_FORMAT, manualNumberOfLotto, randomNumberOfLotto);
     }
 
     public void printCountByRank(CountsByRank countsByRank, List<Rank> excludeRanks) {
