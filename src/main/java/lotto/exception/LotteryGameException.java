@@ -1,4 +1,4 @@
-package lotto;
+package lotto.exception;
 
 public class LotteryGameException extends RuntimeException {
 

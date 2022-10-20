@@ -1,4 +1,7 @@
-package lotto;
+package lotto.domain;
+
+import lotto.exception.ErrorCode;
+import lotto.exception.LotteryGameException;
 
 public class Price {
     private static final int MINIMUM_PRICE = 0;

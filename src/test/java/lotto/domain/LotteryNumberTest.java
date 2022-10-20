@@ -1,5 +1,7 @@
-package lotto;
+package lotto.domain;
 
+import lotto.exception.ErrorCode;
+import lotto.exception.LotteryGameException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

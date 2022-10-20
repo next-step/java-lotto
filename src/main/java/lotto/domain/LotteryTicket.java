@@ -1,4 +1,7 @@
-package lotto;
+package lotto.domain;
+
+import lotto.exception.ErrorCode;
+import lotto.exception.LotteryGameException;
 
 import java.util.List;
 
@@ -23,5 +26,9 @@ public class LotteryTicket {
         if(count != COUNT_OF_LOTTERY_NUMBER) {
             throw new LotteryGameException(ErrorCode.HAS_SAME_NUMBER);
         }
+    }
+
+    public List<LotteryNumber> getLotteryNumbers() {
+        return lotteryNumbers;
     }
 }

@@ -1,4 +1,7 @@
-package lotto;
+package lotto.domain;
+
+import lotto.exception.ErrorCode;
+import lotto.exception.LotteryGameException;
 
 public class LotteryNumber {
     public static final int MIN_VALUE = 1;
@@ -17,4 +20,7 @@ public class LotteryNumber {
         }
     }
 
+    public int getNumber() {
+        return number;
+    }
 }

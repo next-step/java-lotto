@@ -1,4 +1,7 @@
-package lotto;
+package lotto.domain;
+
+import lotto.exception.ErrorCode;
+import lotto.exception.LotteryGameException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,5 +27,9 @@ public class Amount {
             lotteryTickets.add(lotteryTicketAutoGenerator.generate());
         }
         return new LotteryTickets(lotteryTickets);
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }
