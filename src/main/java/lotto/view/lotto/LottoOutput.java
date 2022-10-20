@@ -45,12 +45,12 @@ public class LottoOutput {
         System.out.println(result);
     }
 
-    public static void match(final String rank, final int number) {
-        System.out.println(rank + "개 일치 (" + rank + "원)- " + number + "개");
+    public static void match(final String rank, final String reward, final int number) {
+        System.out.println(rank + "개 일치 (" + reward + "원)- " + number + "개");
     }
 
-    public static void matchBonusNumber(final String rank, final int number) {
-        System.out.println(rank + "개 일치, 보너스 볼 일치(" + rank + "원) - " + number + "개");
+    public static void matchBonusNumber(final String rank, final String reward, final int number) {
+        System.out.println(rank + "개 일치, 보너스 볼 일치(" + reward + "원) - " + number + "개");
     }
 
     public static void profitRateLoss(final String profitRate) {

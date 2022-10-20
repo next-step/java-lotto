@@ -59,10 +59,10 @@ public class LottoResultController {
 
     private void lottoMatchOutput(final Rank rank, final Amount amount) {
         if (rank.isBonus()) {
-            LottoOutput.matchBonusNumber(rank.toString(), amount.amount());
+            LottoOutput.matchBonusNumber(rank.toString(), rank.reward().toString(), amount.amount());
         }
         if (!rank.isBonus()) {
-            LottoOutput.match(rank.toString(), amount.amount());
+            LottoOutput.match(rank.toString(), rank.reward().toString(), amount.amount());
         }
     }
 }
