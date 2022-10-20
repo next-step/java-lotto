@@ -9,9 +9,7 @@ public enum Rank {
     THIRD(3, new LottoMatchCount(5), new ImmutableMoney(1_500_000)),
     FOURTH(4, new LottoMatchCount(4), new ImmutableMoney(50_000)),
     FIFTH(5, new LottoMatchCount(3), new ImmutableMoney(5_000)),
-    SIXTH(6, new LottoMatchCount(2), new ImmutableMoney(0)),
-    SEVENTH(7, new LottoMatchCount(1), new ImmutableMoney(0)),
-    EIGHTH(8, new LottoMatchCount(0), new ImmutableMoney(0));
+    MISS(6, new LottoMatchCount(0), new ImmutableMoney(0));
 
     private final int rank;
     private final LottoMatchCount matchCount;
@@ -38,7 +36,7 @@ public enum Rank {
                 return rank;
             }
         }
-        return Rank.EIGHTH;
+        return Rank.MISS;
     }
 
     private static Rank checkBonusNumber(final boolean containBonusNumber) {
@@ -46,10 +44,6 @@ public enum Rank {
             return SECOND;
         }
         return THIRD;
-    }
-
-    public LottoMatchCount matchCount() {
-        return matchCount;
     }
 
     public ImmutableMoney reward() {

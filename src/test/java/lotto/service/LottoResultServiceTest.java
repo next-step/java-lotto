@@ -35,9 +35,7 @@ public class LottoResultServiceTest {
                 new Lotto(LottoNumberSet.createLottoNumberSet(2, 3, 4, 5, 6, 9)),
                 new Lotto(LottoNumberSet.createLottoNumberSet(3, 4, 5, 6, 7, 8)),
                 new Lotto(LottoNumberSet.createLottoNumberSet(4, 5, 6, 7, 8, 9)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(5, 6, 7, 8, 9, 10)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(6, 7, 8, 9, 10, 11)),
-                new Lotto(LottoNumberSet.createLottoNumberSet(7, 8, 9, 10, 11, 12))
+                new Lotto(LottoNumberSet.createLottoNumberSet(5, 6, 7, 8, 9, 10))
         );
         LottoWinner winner = new LottoWinner(LottoNumberSet.createLottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
         Map<Rank, Amount> rankAmountMap = lottoResultService.checkLotto(lottoList, winner);

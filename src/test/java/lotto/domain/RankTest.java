@@ -16,9 +16,7 @@ public class RankTest {
 
     private static Stream<Arguments> provideForRank() {
         return Stream.of(
-                Arguments.of(new LottoMatchCount(0), false, Rank.EIGHTH),
-                Arguments.of(new LottoMatchCount(1), false, Rank.SEVENTH),
-                Arguments.of(new LottoMatchCount(2), false, Rank.SIXTH),
+                Arguments.of(new LottoMatchCount(0), false, Rank.MISS),
                 Arguments.of(new LottoMatchCount(3), false, Rank.FIFTH),
                 Arguments.of(new LottoMatchCount(4), false, Rank.FOURTH),
                 Arguments.of(new LottoMatchCount(5), false, Rank.THIRD),
@@ -40,9 +38,7 @@ public class RankTest {
                 Arguments.of(new ImmutableMoney(1_500_000), Rank.THIRD),
                 Arguments.of(new ImmutableMoney(50_000), Rank.FOURTH),
                 Arguments.of(new ImmutableMoney(5_000), Rank.FIFTH),
-                Arguments.of(new ImmutableMoney(0), Rank.SIXTH),
-                Arguments.of(new ImmutableMoney(0), Rank.SEVENTH),
-                Arguments.of(new ImmutableMoney(0), Rank.EIGHTH)
+                Arguments.of(new ImmutableMoney(0), Rank.MISS)
         );
     }
 
