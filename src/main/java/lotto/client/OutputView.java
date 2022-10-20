@@ -24,7 +24,7 @@ public class OutputView {
     }
 
     public static void showCountOfLotto(Lotteries lotteries) {
-        show(String.format("%s개를 구매했습니다.", lotteries.getLottoCount()));
+        show(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", lotteries.getManualLottoCount(), lotteries.getLottoCount() - lotteries.getManualLottoCount()));
     }
 
     public static void showCreatedLotteries(Lotteries lotteries) {
