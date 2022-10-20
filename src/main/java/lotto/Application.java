@@ -9,8 +9,8 @@ public class Application {
 
     public static void main(String[] args) {
         Money money = receiveMoney();
-        Money moneyLeft = money.calculateLeft();
         PlayLottoCount playLottoCount = money.countPlayLotto();
+        Money moneyLeft = money.calculateLeft();
         OutputView.printLottoCountAndMoneyLeft(playLottoCount, moneyLeft);
         OutputView.printNewLine();
 
@@ -20,11 +20,12 @@ public class Application {
         LottoPaper manualLottoPaper = createLottoPaper(manualLottoCount);
         OutputView.printNewLine();
 
-        LottoPaper lottoPaper = manualLottoPaper.generateAutoLottos(playLottoCount.subtract(manualLottoCount), new AutoLottoGenerator());
+        AutoLottoCount autoLottoCount = AutoLottoCount.of(playLottoCount, manualLottoCount);
+        LottoPaper lottoPaper = manualLottoPaper.generateAutoLottos(autoLottoCount, new AutoLottoGenerator());
         OutputView.printGeneratedLottos(lottoPaper);
         OutputView.printNewLine();
 
-        Lotto lastWeekWinningLotto = createLastWeekWinningLotto();
+        WinningLotto lastWeekWinningLotto = createLastWeekWinningLotto();
         BonusBall bonusBall = createBonusBall(lastWeekWinningLotto);
         WinningStatistics winningStatistics = lottoPaper.produceWinningStatistics(lastWeekWinningLotto, bonusBall);
         OutputView.printWinningStatistics(winningStatistics, money.calculatePrice());
@@ -57,9 +58,9 @@ public class Application {
         }
     }
 
-    private static Lotto createLastWeekWinningLotto() {
+    private static WinningLotto createLastWeekWinningLotto() {
         try {
-            return Lotto.from(InputView.receiveLastWeekWinningNumber());
+            return WinningLotto.from(InputView.receiveLastWeekWinningNumber());
         } catch (LottoDomainException e) {
             System.out.println(e.getMessage());
             return createLastWeekWinningLotto();

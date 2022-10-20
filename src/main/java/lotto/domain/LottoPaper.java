@@ -26,8 +26,8 @@ public class LottoPaper {
         );
     }
 
-    public LottoPaper generateAutoLottos(PlayLottoCount playLottoCount, LottoGenerable lottoGenerable) {
-        List<Lotto> lottos = lottoGenerable.generate(playLottoCount);
+    public LottoPaper generateAutoLottos(AutoLottoCount autoLottoCount, LottoGenerable lottoGenerable) {
+        List<Lotto> lottos = lottoGenerable.generate(autoLottoCount);
         return new LottoPaper(
                 Stream.of(elements, lottos)
                         .flatMap(Collection::stream)
@@ -39,7 +39,7 @@ public class LottoPaper {
         return elements.size();
     }
 
-    public WinningStatistics produceWinningStatistics(Lotto lastWeekWinningLotto, BonusBall bonusBall) {
+    public WinningStatistics produceWinningStatistics(WinningLotto lastWeekWinningLotto, BonusBall bonusBall) {
         return WinningStatistics.of(elements, lastWeekWinningLotto, bonusBall);
     }
 

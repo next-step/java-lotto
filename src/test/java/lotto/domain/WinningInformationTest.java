@@ -18,21 +18,35 @@ class WinningInformationTest {
     @ParameterizedTest
     @EnumSource(WinningInformation.class)
     void count_matches(WinningInformation information) {
-        assertThat(information.getMatchesCount() >= 0 && information.getMatchesCount() <= 7).isTrue();
+        assertThat(information.getMatchesCount() >= 0 && information.getMatchesCount() <= 6)
+                .isTrue();
     }
 
     @DisplayName("당첨금액의 경계값은 0 ~ 2,000,000,000원 이다.")
     @ParameterizedTest
     @EnumSource(WinningInformation.class)
     void amount(WinningInformation information) {
-        assertThat(information.amountCompareTo(new Money(0))).isGreaterThanOrEqualTo(0);
-        assertThat(information.amountCompareTo(new Money(2_000_000_000))).isLessThanOrEqualTo(0);
+        assertThat(information.amountCompareTo(new Money(0)))
+                .isGreaterThanOrEqualTo(0);
+        assertThat(information.amountCompareTo(new Money(2_000_000_000)))
+                .isLessThanOrEqualTo(0);
+    }
+
+    @DisplayName("일치수에 따른 상금정보를 알고있다.")
+    @ParameterizedTest
+    @EnumSource(WinningInformation.class)
+    void of(WinningInformation information) {
+        if (information.equals(FIVE_AND_BONUS_MATCHES)) {
+            return;
+        }
+        assertThat(WinningInformation.of(information.getMatchesCount(), false)).isEqualTo(information);
     }
 
     @DisplayName("파라미터에 5와 true가 입력되면 FIVE_AND_BONUS_MATCHES를 반환한다.")
     @Test
     void of_matchesCount_isBonusMatch() {
-        assertThat(WinningInformation.of(5, true)).isEqualTo(FIVE_AND_BONUS_MATCHES);
+        assertThat(WinningInformation.of(5, true))
+                .isEqualTo(FIVE_AND_BONUS_MATCHES);
     }
 
     @DisplayName("상금의 총 합을 구한다.")

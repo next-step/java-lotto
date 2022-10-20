@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.exception.DuplicateLottoNumberException;
+import lotto.util.NullCannotBeConstructorArgException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,14 @@ public class BonusBallTest {
     @Test
     void bonus_ball_same_lotto_number() {
         assertThat(new BonusBall("7", lotto)).isEqualTo(new LottoNumber("7"));
+    }
+
+    @DisplayName("보너스볼을 생성할 때 lotto 가 null 이면 예외가 발생한다.")
+    @Test
+    void validate_null() {
+        assertThatThrownBy(() -> new BonusBall("6", null))
+                .isExactlyInstanceOf(NullCannotBeConstructorArgException.class)
+                .hasMessage("Null은 생성자의 인자가 될 수 없습니다.");
     }
 
     @DisplayName("보너스볼을 생성할 때 lotto와 중복되는 숫자가 있으면 예외가 발생한다.")

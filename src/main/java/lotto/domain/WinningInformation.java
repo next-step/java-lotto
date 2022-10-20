@@ -27,13 +27,6 @@ public enum WinningInformation {
         this.amount = amount;
     }
 
-    public static WinningInformation from(int matchesCount) {
-        return Arrays.stream(values())
-                .filter(w -> w.matchesCount == matchesCount)
-                .findFirst()
-                .orElse(NOT_MATCHES);
-    }
-
     public static WinningInformation of(int matchesCount, boolean isBonusMatch) {
         if (isFiveAndBonus(matchesCount, isBonusMatch)) {
             return FIVE_AND_BONUS_MATCHES;
@@ -41,8 +34,15 @@ public enum WinningInformation {
         return from(matchesCount);
     }
 
+    private static WinningInformation from(int matchesCount) {
+        return Arrays.stream(values())
+                .filter(information -> information.matchesCount == matchesCount)
+                .findFirst()
+                .orElse(NOT_MATCHES);
+    }
+
     private static boolean isFiveAndBonus(int matchesCount, boolean isBonusMatch) {
-        return matchesCount == 5 && isBonusMatch;
+        return matchesCount == FIVE_AND_BONUS_MATCHES.matchesCount && isBonusMatch;
     }
 
     public static Money sumAmounts(List<WinningInformation> winningInformations) {

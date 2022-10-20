@@ -36,8 +36,8 @@ public class PlayLottoCount {
         return this.value < value;
     }
 
-    public PlayLottoCount subtract(PlayLottoCount playLottoCount) {
-        return new PlayLottoCount(this.value - playLottoCount.value);
+    public int subtract(PlayLottoCount playLottoCount) {
+        return this.value - playLottoCount.value;
     }
 
     public int getValue() {

@@ -43,11 +43,17 @@ public class InputView {
 
     public static List<String> receiveManualLottos(ManualLottoCount manualLottoCount) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
+        printManualLottoNumberMessage(manualLottoCount);
         List<String> lottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount.getValue(); i++) {
             lottos.add(scanner.nextLine());
         }
         return lottos;
+    }
+
+    private static void printManualLottoNumberMessage(ManualLottoCount manualLottoCount) {
+        if (!manualLottoCount.isLessThan(1)) {
+            System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
+        }
     }
 }

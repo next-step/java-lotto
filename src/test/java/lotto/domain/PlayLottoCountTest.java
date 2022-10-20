@@ -12,7 +12,7 @@ public class PlayLottoCountTest {
 
     @DisplayName("생성할때 0보다 작은 수가 주어지면 예외가 발생한다.")
     @Test
-    void less_than_1() {
+    void validate_less_than_zero() {
         assertThatThrownBy(() -> new PlayLottoCount(-1))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("0보다 작은 수로 생성할 수 없습니다.");
@@ -23,5 +23,12 @@ public class PlayLottoCountTest {
     @CsvSource(value = {"14,false", "15,true"})
     void less_than(int value, boolean expected) {
         assertThat(new PlayLottoCount(14).isLessThan(value)).isEqualTo(expected);
+    }
+
+    @DisplayName("플레이로또 수 에서 ")
+    @Test
+    void subtract() {
+        int actual = new PlayLottoCount(14).subtract(new PlayLottoCount(10));
+        assertThat(actual).isEqualTo(4);
     }
 }

@@ -69,9 +69,9 @@ public class LottoPaperTest {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         LottoPaper expected = LottoPaper.from(merged);
-        PlayLottoCount playLottoCount = new PlayLottoCount(2);
+        AutoLottoCount autoLottoCount = new AutoLottoCount(2);
 
-        LottoPaper actual = lottoPaper.generateAutoLottos(playLottoCount, new FixedLottoGenerator());
+        LottoPaper actual = lottoPaper.generateAutoLottos(autoLottoCount, new FixedLottoGenerator());
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -91,7 +91,7 @@ public class LottoPaperTest {
                 FIVE_AND_BONUS_MATCHES,
                 NOT_MATCHES,
                 NOT_MATCHES));
-        Lotto lastWeekWinningLotto = Lotto.from("1,2,3,4,5,7");
+        WinningLotto lastWeekWinningLotto = WinningLotto.from(List.of("1", "2", "3", "4", "5", "7"));
         BonusBall bonusBall = new BonusBall("6", lastWeekWinningLotto);
 
         WinningStatistics actual = lottoPaper.produceWinningStatistics(lastWeekWinningLotto, bonusBall);

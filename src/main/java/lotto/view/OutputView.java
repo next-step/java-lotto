@@ -63,7 +63,7 @@ public class OutputView {
     }
 
     private static String additionalBonusMessage(WinningInformation winningInformation) {
-        if(winningInformation.equals(FIVE_AND_BONUS_MATCHES)) {
+        if (winningInformation.equals(FIVE_AND_BONUS_MATCHES)) {
             return ADDITIONAL_BONUS_MESSAGE;
         }
         return "";

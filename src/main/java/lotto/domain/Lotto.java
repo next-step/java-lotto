@@ -25,7 +25,7 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto from(String value) {
+    public static Lotto from(final String value) {
         List<String> values = Arrays.stream(value.split(SEPARATOR))
                 .map(String::trim)
                 .collect(Collectors.toList());
@@ -62,7 +62,7 @@ public class Lotto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Lotto)) return false;
         Lotto that = (Lotto) o;
         return Objects.equals(elements, that.elements);
     }
