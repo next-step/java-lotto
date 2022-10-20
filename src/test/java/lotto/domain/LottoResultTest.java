@@ -17,15 +17,15 @@ public class LottoResultTest {
         // setting
         LottoResult lottoResult = new LottoResult();
 
-        List<Integer> numbers1 = new ArrayList<>();
+        List<Number> numbers1 = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
-            numbers1.add(i);
+            numbers1.add(new Number(i));
         }
         LottoTicket lottoTicket1 = new LottoTicket(numbers1);
 
-        List<Integer> numbers2 = new ArrayList<>();
+        List<Number> numbers2 = new ArrayList<>();
         for (int i = 15; i < 21; i++) {
-            numbers2.add(i);
+            numbers2.add(new Number(i));
         }
         LottoTicket lottoTicket2 = new LottoTicket(numbers2);
 
@@ -33,9 +33,9 @@ public class LottoResultTest {
         tickets.add(lottoTicket1);
         tickets.add(lottoTicket2);
 
-        List<Integer> actualNumbers = new ArrayList<>();
+        List<Number> actualNumbers = new ArrayList<>();
         for (int i = 4; i < 10; i++) {
-            actualNumbers.add(i);
+            actualNumbers.add(new Number(i));
         }
 
         lottoResult.calculateLottoResult(tickets, actualNumbers, 2000, 21);
