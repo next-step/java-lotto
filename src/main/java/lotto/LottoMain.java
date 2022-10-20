@@ -17,15 +17,14 @@ public class LottoMain {
             InputView inputView = new InputView();
 
             String moneyString = inputView.inputPurchaseMoney();
-            List<Lotto> lottoList = lottoGenerator.purchaseByAuto(
-                    new LottoPurchasedAmount(moneyString));
+            List<Lotto> lottoList = lottoGenerator.purchaseByAuto(new LottoPurchasedAmount(moneyString));
             inputView.printPurchasedLottoList(lottoList);
 
             List<Integer> lastWinnerNumbers = inputView.inputLastWinner();
             Lotto lastWinnerLotto = new Lotto(lastWinnerNumbers);
 
             String bonusNumberString = inputView.inputBonusNumber();
-            LottoNumber bonusNumber = LottoNumber.of(bonusNumberString);
+            LottoNumber bonusNumber = new LottoNumber(bonusNumberString);
 
             LottoWinner lastWinner = new LottoWinner(lastWinnerLotto, bonusNumber);
 

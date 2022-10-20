@@ -17,6 +17,7 @@ public class InputView {
     }
 
     public void printPurchasedLottoList(List<Lotto> lottoList) {
+        System.out.println(lottoList.size() + "개를 구매했습니다.");
         lottoList.forEach(System.out::println);
     }
 
