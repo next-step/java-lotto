@@ -26,11 +26,11 @@ public class LottoCreator {
         return new Lotto(lottoNumberList.subList(0, 6));
     }
 
-    public static Lotteries getLotteries(int purchasedAmount) {
+    public static List<Lotto> createAutoLotto(int purchasedAmount) {
         List<Lotto> lotteries = IntStream.rangeClosed(1, purchasedAmount / LOTTO_PRICE)
                 .mapToObj(v -> createLotto())
                 .collect(Collectors.toList());
 
-        return new Lotteries(lotteries);
+        return lotteries;
     }
 }

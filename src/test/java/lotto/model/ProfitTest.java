@@ -1,6 +1,6 @@
-package lotto.model.enumeration;
+package lotto.model;
 
-import lotto.model.Profit;
+import lotto.model.enumeration.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RankTest {
+class ProfitTest {
     @Test
     public void 로또_당첨금_검증() {
         Profit profit = new Profit(Map.of(Rank.FIRST, 2L, Rank.THIRD, 1L));
