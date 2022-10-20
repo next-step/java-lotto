@@ -20,10 +20,8 @@ public enum Prize {
                 return THREE_PRIZE;
             case 4:
                 return FOUR_PRIZE;
-            case 5: {
-                if (lotto.isContain(bonus) == 1) return FIVE_BONUS_PRIZE;
-                return FIVE_PRIZE;
-            }
+            case 5:
+                return isContainBonus(lotto, bonus);
             case 6:
                 return SIX_PRIZE;
             case 7:
@@ -31,5 +29,12 @@ public enum Prize {
             default:
                 return null;
         }
+    }
+
+    private static Prize isContainBonus(Lotto lotto, int bonus) {
+        if (lotto.isContain(bonus) == 1) {
+            return FIVE_BONUS_PRIZE;
+        }
+        return FIVE_PRIZE;
     }
 }

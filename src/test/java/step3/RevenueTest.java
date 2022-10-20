@@ -7,7 +7,6 @@ import step3.domian.Prize;
 import step3.domian.Revenue;
 
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 public class RevenueTest {
@@ -18,14 +17,5 @@ public class RevenueTest {
         enumMap.put(Prize.THREE_PRIZE, 1L);
         LottoResult results = new LottoResult(enumMap);
         Assertions.assertThat(new Revenue(results).calculatePercentage(10000)).isEqualTo(0.5);
-    }
-
-    @Test
-    void calculate_수익금_3개가_3개맞았을_때() {
-        Map<Prize, Long> enumMap = new EnumMap<>(Prize.class);
-        enumMap.put(Prize.THREE_PRIZE, 3L);
-        LottoResult results = new LottoResult(enumMap);
-
-        Assertions.assertThat(new Revenue(results)).isEqualTo(new Revenue(15000));
     }
 }

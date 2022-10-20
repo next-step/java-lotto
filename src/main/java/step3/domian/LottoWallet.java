@@ -17,6 +17,11 @@ public class LottoWallet {
                     int count = lotto.countSameNumber(lastWinner);
                     return Prize.getPrize(count, lotto, lastWinner.bonus);
                 }).filter(it -> it != null)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+                .collect(Collectors.toMap(
+                        prize -> prize,
+                        prize -> 1L,
+                        Long::sum,
+                        () -> new EnumMap<>(Prize.class)))
+        );
     }
 }
