@@ -10,13 +10,16 @@ public class LottoController {
     private final LottoGenerator lottoGenerator = new LottoGenerator();
 
     public void run() {
-        Money money = inputMoney();
-        int manualLottoCount = inputManualLottoCount();
+        getResult(generateLottos(inputMoney(), inputManualLottoCount()));
+    }
 
+    private Lottos generateLottos(Money money, int manualLottoCount) {
         Lottos lottos = lottoGenerator.generateLottos(money.buyManualLotto(manualLottoCount), inputManualLotto(manualLottoCount));
         printLottos(manualLottoCount, lottos.getLottos());
+        return lottos;
+    }
 
-        LottoResult result = lottos.getResult(inputWinningNumbers(), inputBonusBall());
-        printLottoResult(result);
+    private void getResult(Lottos lottos) {
+        printLottoResult(lottos.getResult(inputWinningNumbers(), inputBonusBall()));
     }
 }
