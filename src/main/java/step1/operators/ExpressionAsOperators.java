@@ -4,6 +4,7 @@ import step1.operators.operator.Operator;
 
 import java.util.ArrayDeque;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
@@ -37,4 +38,20 @@ public class ExpressionAsOperators {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        verifyValidExpression();
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExpressionAsOperators that = (ExpressionAsOperators) o;
+        return Objects.equals(expression, that.expression);
+    }
+
+    @Override
+    public int hashCode() {
+        verifyValidExpression();
+
+        return Objects.hash(expression);
+    }
 }
