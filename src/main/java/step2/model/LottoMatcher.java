@@ -5,8 +5,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LottoMatcher {
-	private List<Integer> winNumList;
 
+	private List<Integer> winNumList;
 
 	public LottoMatcher(List<Integer> winNumList) {
 		this.winNumList = winNumList;

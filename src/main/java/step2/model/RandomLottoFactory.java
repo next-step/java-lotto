@@ -7,12 +7,15 @@ import step2.model.LottoFactory;
 
 public class RandomLottoFactory implements LottoFactory {
 
+	private static final int FIRST_NUM = 1;
+	private static final int LAST_NUM = 45;
+
 	@Override
 	public List<Integer> getLottoNum() {
 		List<Integer> totalLottoNum = new ArrayList<Integer>();
 		List<Integer> lottoSet = new ArrayList<>();
 
-		for (int i = 1; i <= 45; i++) {
+		for (int i = FIRST_NUM; i <= LAST_NUM; i++) {
 			totalLottoNum.add(i);
 		}
 

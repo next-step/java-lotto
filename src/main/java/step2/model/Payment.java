@@ -19,7 +19,7 @@ public class Payment {
 
 	public String rateBenefit(int cash, HashMap<Integer, Integer> totalCountMap) {
 
-		for (int i = MIN_MATCH; i < MAX_MATCH; i++) {
+		for (int i = MIN_MATCH; i < MAX_MATCH + 1; i++) {
 			calculate(i, totalCountMap);
 		}
 

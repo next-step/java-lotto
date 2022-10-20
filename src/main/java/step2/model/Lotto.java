@@ -15,7 +15,7 @@ public class Lotto {
 		this.lottoSet = lottoSet;
 	}
 
-	public List<Integer> getLotto(){
+	public List<Integer> getLotto() {
 		return lottoSet;
 	}
 
