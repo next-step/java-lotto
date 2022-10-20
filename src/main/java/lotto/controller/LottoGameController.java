@@ -12,7 +12,7 @@ import static lotto.view.InputView.inputMatchNumberList;
 import static lotto.view.InputView.inputPurchasePrice;
 import static lotto.view.ResultView.*;
 
-public class main {
+public class LottoGameController {
 
     public static void main(String[] args) {
 
