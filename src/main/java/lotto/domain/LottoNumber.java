@@ -31,6 +31,10 @@ public class LottoNumber {
         }
     }
 
+    public int toInt() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

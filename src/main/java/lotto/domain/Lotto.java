@@ -1,35 +1,27 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_SIZE = 6;
+
+    public static final int LOTTO_NUMBER_SIZE = 6;
 
     private List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
+        valid(lotto);
         this.lotto = lotto;
     }
 
-    public static Lotto of(List<LottoNumber> lottoNumbers) {
-        valid(lottoNumbers);
+    public static Lotto of(List<Integer> values) {
+        List<LottoNumber> lottoNumbers = values.stream()
+            .map(LottoNumber::from)
+            .collect(Collectors.toList());
         return new Lotto(lottoNumbers);
     }
 
-    public int matches(Lotto winningNumbers) {
-        return (int) winningNumbers.lotto.stream()
-            .filter(lotto::contains)
-            .count();
-    }
-
-    public boolean matches(int bonus) {
-        return lotto.stream()
-            .findFirst()
-            .filter(lottoNumber -> lottoNumber.equals(LottoNumber.from(bonus)))
-            .isPresent();
-    }
-
-    private static boolean isDuplicate(List<LottoNumber> lottoNumbers) {
+    private boolean isDuplicate(List<LottoNumber> lottoNumbers) {
         int count = (int) lottoNumbers.stream()
             .distinct()
             .count();
@@ -37,7 +29,7 @@ public class Lotto {
         return count != LOTTO_NUMBER_SIZE;
     }
 
-    private static void valid(List<LottoNumber> lottoNumbers) {
+    private void valid(List<LottoNumber> lottoNumbers) {
         if (isDuplicate(lottoNumbers)) {
             throw new IllegalArgumentException("번호는 중복될 수 없습니다.");
         }
@@ -45,6 +37,10 @@ public class Lotto {
 
     public int size() {
         return this.lotto.size();
+    }
+
+    public List<LottoNumber> getLotto() {
+        return this.lotto;
     }
 
     @Override

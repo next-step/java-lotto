@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.groups.Tuple.tuple;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -29,14 +28,11 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("6개를 맞추면 1등을 하는 결과가 나온다.")
     void result() {
-        List<LottoNumber> list = new ArrayList<>(
-            List.of(LottoNumber.from(1), LottoNumber.from(2),
-                LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
-                LottoNumber.from(6)));
+        List<Integer> list = List.of(1,2,3,4,5,6);
         int bonus = 7;
         LottoTickets lottoTickets = LottoTickets.of(List.of(Lotto.of(list)));
 
-        LottoResult result = lottoTickets.getResult(Lotto.of(list), bonus);
+        LottoResult result = lottoTickets.getResult(WinningLotto.of(list, bonus));
 
         assertThat(result.getStatistics().entrySet())
             .hasSize(6)

@@ -1,20 +1,23 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumberRandomGenerator {
+public class LottoRandomGenerator {
 
-    private LottoNumberRandomGenerator() {
+    private LottoRandomGenerator() {
     }
 
     public static Lotto generate() {
-        List<LottoNumber> shuffleNumbers = LottoNumber.LOTTO_NUMBERS;
+        List<LottoNumber> shuffleNumbers = new ArrayList<>(LottoNumber.LOTTO_NUMBERS);
         Collections.shuffle(shuffleNumbers);
 
         return Lotto.of(shuffleNumbers.stream()
-            .limit(6)
+            .limit(Lotto.LOTTO_NUMBER_SIZE)
+            .mapToInt(LottoNumber::toInt)
+            .boxed()
             .collect(Collectors.toList()));
     }
 }
