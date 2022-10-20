@@ -1,15 +1,16 @@
 package lotto.view.lotto;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class LottoInput {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     public static int purchaseManualAmount() {
         try {
-            return scanner.nextInt();
+            return Integer.parseInt(bufferedReader.readLine());
         } catch (Exception e) {
             LottoOutput.purchaseManualAmountInputException();
         }
@@ -18,10 +19,11 @@ public class LottoInput {
 
     public static int[] lottoNumbers(String lottoNumberDelimiter) {
         try {
-            return Arrays.stream(scanner.nextLine().split(lottoNumberDelimiter))
+            return Arrays.stream(bufferedReader.readLine().split(lottoNumberDelimiter))
                     .mapToInt(i -> Integer.parseInt(i))
                     .toArray();
         } catch (Exception e) {
+            e.printStackTrace();
             LottoOutput.lottoNumbersInputException();
         }
         return lottoNumbers(lottoNumberDelimiter);
@@ -29,7 +31,7 @@ public class LottoInput {
 
     public static int bonusNumber() {
         try {
-            return scanner.nextInt();
+            return Integer.parseInt(bufferedReader.readLine());
         } catch (Exception e) {
             LottoOutput.bonusNumberInputException();
         }
