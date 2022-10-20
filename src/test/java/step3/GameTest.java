@@ -33,6 +33,7 @@ public class GameTest {
 	@DisplayName("지난 주 당첨 번호 생성")
 	void makeWinningNumbers() {
 		String str = "1, 2, 3, 4, 5, 6";
+		int bonus = 7;
 		assertThat(Game.makeWinningResult(str.split(", "))).isEqualTo(Set.of(1, 2, 3, 4, 5, 6));
 	}
 }

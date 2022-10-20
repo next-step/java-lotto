@@ -14,8 +14,11 @@ public class Game {
 
 		Result guestResult = startRaffle(amount);
 		Print.winningNumber();
+		String[] lastweekLotto = InputView.input().split(", ");
+		Print.bonusBall();
+		String bonus = InputView.input();
 
-		Print.rateOfWin(input, guestResult.results(makeWinningResult(InputView.input().split(", "))));
+		Print.rateOfWin(input, guestResult.results(makeWinningResult(lastweekLotto), Integer.parseInt(bonus)));
 	}
 
 	public static Set<Integer> makeWinningResult(String[] winningNumbers) {

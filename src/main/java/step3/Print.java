@@ -38,9 +38,22 @@ public class Print {
 	private static double printPrize(double rate, Map.Entry<Operator, Integer> entry) {
 		if (entry.getKey() != null) {
 			rate += entry.getKey().getWinning() * entry.getValue();
+			checkBonus(entry);
+		}
+		return rate;
+	}
+
+	private static void checkBonus(Map.Entry<Operator, Integer> entry) {
+		if (entry.getKey().equals(Operator.FIVE_BONUS)) {
+			System.out.println(
+				"5개 일치, 보너스 볼 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개");
+		} else {
 			System.out.println(
 				entry.getKey().getCount() + "개 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개");
 		}
-		return rate;
+	}
+
+	public static void bonusBall() {
+		System.out.println("보너스 볼을 입력해 주세요.");
 	}
 }

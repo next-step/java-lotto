@@ -12,11 +12,21 @@ public class Lottos {
 		this.lottos = lotto;
 	}
 
-	public int results(Set<Integer> lottos, Set<Integer> winningNumbers) {
+	public int results(Set<Integer> lottos, Set<Integer> winningNumbers, int bonus) {
 		int count = 0;
 		Iterator<Integer> itr = winningNumbers.iterator();
 		while (itr.hasNext()) {
 			count = checkContains(lottos, count, itr);
+		}
+		if (count == 4) {
+			return checkBonus(lottos, count, bonus);
+		}
+		return count;
+	}
+
+	private int checkBonus(Set<Integer> lottos, int count, int bonus) {
+		if (lottos.contains(bonus)) {
+			return count + 3;
 		}
 		return count;
 	}
