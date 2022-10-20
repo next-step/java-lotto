@@ -10,29 +10,29 @@ public class Lottos {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private List<Lotto> lottoList;
+    private List<Lotto> lottos;
 
     public Lottos() {
-        this.lottoList = new ArrayList<>();
+        this.lottos = new ArrayList<>();
     }
 
     public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+        this.lottos = lottoList;
     }
 
     public int lottosSize() {
-        return this.lottoList.size();
+        return this.lottos.size();
     }
 
-    public List<Lotto> getLottoList() {
-        return this.lottoList;
+    public List<Lotto> getLottos() {
+        return this.lottos;
     }
 
     public Lottos createAutoLottos(int amount) {
         NumberGenerator numberGenerator = new RandomNumberGenerator();
         int n = amount / LOTTO_PRICE;
         for (int i = 0; i < n; i++) {
-            this.lottoList.add(new Lotto(numberGenerator));
+            this.lottos.add(new Lotto(numberGenerator));
         }
         return this;
     }
@@ -41,7 +41,7 @@ public class Lottos {
         NumberGenerator numberGenerator;
         for (int i = 0; i < numbers.size(); i++) {
             numberGenerator = new ManualNumberGenerator(numbers.get(i));
-            this.lottoList.add(new Lotto(numberGenerator));
+            this.lottos.add(new Lotto(numberGenerator));
         }
         return this;
     }

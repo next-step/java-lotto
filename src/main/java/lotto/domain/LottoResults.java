@@ -41,7 +41,7 @@ public class LottoResults {
     }
 
     private void getResults(Lottos lottos, Lotto winning, LottoNumber bonus) {
-        for (Lotto lotto : lottos.getLottoList()) {
+        for (Lotto lotto : lottos.getLottos()) {
             int sameNumbers = lotto.getSameNumberCount(winning);
             boolean winBonus = lotto.getLottoNumbers().contains(bonus);
 
