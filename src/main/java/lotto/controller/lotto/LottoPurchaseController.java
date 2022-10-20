@@ -11,6 +11,7 @@ import lotto.view.lotto.LottoOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoPurchaseController {
 
@@ -23,14 +24,14 @@ public class LottoPurchaseController {
     public List<Lotto> purchaseLotto(final ImmutableMoney immutableMoney) {
         Amount totalAmount = lottoPurchaseService.purchaseNumber(immutableMoney);
         List<Lotto> lottoList = purchaseAutoLotto(totalAmount, purchaseManualLotto());
-        LottoOutput.lotto(lottoList);
+        LottoOutput.lotto(lottoList.stream().map(lotto -> lotto.toString()).collect(Collectors.toList()));
         return Collections.unmodifiableList(lottoList);
     }
 
     private List<Lotto> purchaseAutoLotto(final Amount amount, final List<Lotto> lottoList) {
         Amount manualLottoAmount = new Amount(lottoList.size());
         amount.minus(manualLottoAmount);
-        LottoOutput.purchaseCount(manualLottoAmount, amount);
+        LottoOutput.purchaseCount(manualLottoAmount.amount(), amount.amount());
         lottoList.addAll(lottoPurchaseService.purchaseLotto(amount));
         return lottoList;
     }

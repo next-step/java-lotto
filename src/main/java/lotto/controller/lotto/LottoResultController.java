@@ -48,14 +48,21 @@ public class LottoResultController {
             lottoMatchOutput(rank, checkLotto.get(rank));
         }
 
-        LottoOutput.profitRate(lottoResultService.caculateProfitRate(lottos, winner));
+        ProfitRate profitRate = lottoResultService.caculateProfitRate(lottos, winner);
+        if (profitRate.loss()) {
+            LottoOutput.profitRateLoss(profitRate.toString());
+        }
+        if (!profitRate.loss()) {
+            LottoOutput.profitRateBenefit(profitRate.toString());
+        }
     }
 
     private void lottoMatchOutput(final Rank rank, final Amount amount) {
         if (rank.isBonus()) {
-            LottoOutput.matchBonusNumber(rank, amount);
-            return;
+            LottoOutput.matchBonusNumber(rank.toString(), amount.amount());
         }
-        LottoOutput.match(rank, amount);
+        if (!rank.isBonus()) {
+            LottoOutput.match(rank.toString(), amount.amount());
+        }
     }
 }
