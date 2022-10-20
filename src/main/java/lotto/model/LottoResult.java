@@ -26,7 +26,6 @@ public class LottoResult {
     private int getTotalReward() {
         return ranks.stream()
                 .map(Rank::getReward)
-                .map(Money::getMoney)
                 .reduce(0, Integer::sum);
     }
 
