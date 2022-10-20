@@ -15,9 +15,6 @@ public class LottoResults {
         int count = lottoResults.getOrDefault(rank, 0);
         lottoResults.put(rank, count + 1);
     }
-
-
-
     public double getProfitRate(int totalLottoCnt) {
         int countSum = 0;
         for (Rank rank : lottoResults.keySet()) {
@@ -33,17 +30,17 @@ public class LottoResults {
         return lottoResults.get(rank);
     }
 
-    public LottoResults getTotalResults(LottoGame lottoGame, Lotto winning, LottoNumber bonus) {
-        getResults(lottoGame.getManualLottos(), winning, bonus);
-        getResults(lottoGame.getAutoLottos(), winning, bonus);
+    public LottoResults getTotalResults(LottoGame lottoGame) {
+        getResults(lottoGame.getManualLottos(), lottoGame.getWinningLotto());
+        getResults(lottoGame.getAutoLottos(), lottoGame.getWinningLotto());
 
         return this;
     }
 
-    private void getResults(Lottos lottos, Lotto winning, LottoNumber bonus) {
+    private void getResults(Lottos lottos, WinningLotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
-            int sameNumbers = lotto.getSameNumberCount(winning);
-            boolean winBonus = lotto.getLottoNumbers().contains(bonus);
+            int sameNumbers = lotto.getSameNumberCount(winningLotto.getWinningLotto());
+            boolean winBonus = lotto.getLottoNumbers().contains(winningLotto.getBonusNumber());
 
             Rank rank = Rank.valueOf(sameNumbers, winBonus);
             int count = lottoResults.getOrDefault(rank, 0);

@@ -21,9 +21,9 @@ class LottoGameTest {
         assertThat(lottoGame.getAutoCount()).isEqualTo(10);
     }
 
-    @Test
-    public void 수동로또갯수() {
-        assertThat(lottoGame.getManualCount()).isEqualTo(10);
-    }
+//    @Test
+//    public void 수동로또갯수() {
+//        assertThat(lottoGame.getM()).isEqualTo(10);
+//    }
 
 }

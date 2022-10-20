@@ -10,7 +10,7 @@ public class Lottos {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos() {
         this.lottos = new ArrayList<>();
@@ -34,7 +34,7 @@ public class Lottos {
         for (int i = 0; i < n; i++) {
             this.lottos.add(new Lotto(numberGenerator));
         }
-        return this;
+        return new Lottos(lottos);
     }
 
     public Lottos createManualLottos(List<String> numbers) {
@@ -43,7 +43,7 @@ public class Lottos {
             numberGenerator = new ManualNumberGenerator(numbers.get(i));
             this.lottos.add(new Lotto(numberGenerator));
         }
-        return this;
+        return new Lottos(lottos);
     }
 
 

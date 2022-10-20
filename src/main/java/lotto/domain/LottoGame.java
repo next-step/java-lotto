@@ -7,13 +7,14 @@ import java.util.Map;
 public class LottoGame {
 
     private int autoAmount;
-    private int manualCount;
+//    private int manualCount;
     private Lottos manualLottos;
     private Lottos autoLottos;
+    private WinningLotto winningLotto;
 
-    public LottoGame(int autoAmount, int manualCount) {
+    public LottoGame(int autoAmount, WinningLotto winningLotto) {
         this.autoAmount = autoAmount;
-        this.manualCount = manualCount;
+        this.winningLotto = winningLotto;
     }
 
     public void createLottos(List<String> manualNumbers) {
@@ -29,14 +30,11 @@ public class LottoGame {
         return this.autoLottos;
     }
 
-    public int getManualCount() {
-        return this.manualCount;
-    }
-
     public int getAutoCount() {
         return this.autoAmount / Lottos.LOTTO_PRICE;
     }
 
-
-
+    public WinningLotto getWinningLotto() {
+        return winningLotto;
+    }
 }

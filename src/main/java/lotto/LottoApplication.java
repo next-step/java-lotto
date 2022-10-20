@@ -17,20 +17,21 @@ public class LottoApplication {
         List<String> manualLottoNumbers = inputManualLottoNumber(manualLottoCnt);
 
         //create game
-        LottoGame lottoGame = new LottoGame(autoLottoAmount, manualLottoCnt);
-        lottoGame.createLottos(manualLottoNumbers);
-
-        printLottoNumbers(lottoGame.getManualLottos());
-        printLottoNumbers(lottoGame.getAutoLottos());
-        printPurchaseNumber(lottoGame);
-
         String winningNumber = inputWinningNumber();
         int bonusNumber = inputBonusBall();
         Lotto winning = new Lotto(new ManualNumberGenerator(winningNumber));
         LottoNumber bonus = LottoNumber.from(bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winning, bonus);
+
+        LottoGame lottoGame = new LottoGame(autoLottoAmount, winningLotto);
+        lottoGame.createLottos(manualLottoNumbers);
+        printLottoNumbers(lottoGame.getManualLottos());
+        printLottoNumbers(lottoGame.getAutoLottos());
+        printPurchaseNumber(lottoGame);
+
         LottoResults lottoResults = new LottoResults();
-        lottoResults.getTotalResults(lottoGame, winning, bonus);
+        lottoResults.getTotalResults(lottoGame);
         printWinningResult(lottoResults);
-        printProfitRate(lottoResults, lottoGame.getManualCount() + lottoGame.getAutoCount());
+        printProfitRate(lottoResults, lottoGame.getAutoCount() + manualLottoCnt);
     }
 }

@@ -14,7 +14,7 @@ public class ResultView {
     public static final String MSG_PROFIT_RATE = "총 수익률은 %.2f 입니다.\n";
 
     public static void printPurchaseNumber(LottoGame lottoGame) {
-        System.out.printf(MSG_PURCHASE_NUMBER, lottoGame.getManualCount(), lottoGame.getAutoCount());
+        System.out.printf(MSG_PURCHASE_NUMBER, lottoGame.getManualLottos().lottosSize(), lottoGame.getAutoCount());
 
     }
 
