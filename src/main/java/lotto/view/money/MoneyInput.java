@@ -1,15 +1,14 @@
 package lotto.view.money;
 
-import lotto.domain.Money.ImmutableMoney;
-
 import java.util.Scanner;
 
 public class MoneyInput {
 
-    public static ImmutableMoney money() {
-        Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static long money() {
         try {
-            return new ImmutableMoney(scanner.nextInt());
+            return scanner.nextLong();
         } catch (Exception e) {
             MoneyOutput.moneyInputError();
         }

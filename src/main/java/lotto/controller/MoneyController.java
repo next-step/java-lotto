@@ -9,6 +9,6 @@ public class MoneyController {
     public ImmutableMoney purchaseMoney() {
         MoneyOutput.purchaseMoney();
 
-        return MoneyInput.money();
+        return new ImmutableMoney(MoneyInput.money());
     }
 }
