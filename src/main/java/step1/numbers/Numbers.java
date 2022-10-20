@@ -1,4 +1,4 @@
-package step1;
+package step1.numbers;
 
 import step1.operators.Operators;
 import step1.operators.operator.Operator;

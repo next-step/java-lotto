@@ -1,6 +1,8 @@
-package step1;
+package step1.numbers;
 
 import org.junit.jupiter.api.Test;
+import step1.numbers.ExpressionAsNumbers;
+import step1.numbers.Numbers;
 import step1.operators.ExpressionAsOperators;
 import step1.operators.Operators;
 

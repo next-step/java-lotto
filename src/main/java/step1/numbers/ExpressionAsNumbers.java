@@ -1,4 +1,4 @@
-package step1;
+package step1.numbers;
 
 import java.util.List;
 import java.util.regex.MatchResult;
