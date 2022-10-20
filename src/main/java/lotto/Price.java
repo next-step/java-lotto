@@ -14,4 +14,8 @@ public class Price {
             throw new LotteryGameException(ErrorCode.OUT_OF_RANGE_PRICE);
         }
     }
+
+    public Amount calculateAmount(Price price) {
+        return new Amount(this.price / price.price);
+    }
 }
