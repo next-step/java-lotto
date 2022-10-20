@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +14,6 @@ public class LotteryTicketAutoGenerator {
 
     public LotteryTicket generate() {
         Collections.shuffle(numbers);
-        return new LotteryTicket(numbers.subList(0, LotteryTicket.COUNT_OF_LOTTERY_NUMBER));
+        return new LotteryTicket(new ArrayList<>(numbers.subList(0, LotteryTicket.COUNT_OF_LOTTERY_NUMBER)));
     }
 }

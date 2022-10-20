@@ -2,8 +2,7 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class AmountTest {
     @Test
@@ -16,5 +15,12 @@ public class AmountTest {
     @Test
     void amount_over_zero() {
         assertThatNoException().isThrownBy(() -> new Amount(1));
+    }
+
+    @Test
+    void create_lottery_ticket_with_amount() {
+        LotteryTickets lotteryTickets = new Amount(2).createTickets(new LotteryTicketAutoGenerator());
+        assertThat(lotteryTickets).isInstanceOf(LotteryTickets.class);
+        assertThat(lotteryTickets.getLotteryTickets()).hasSize(2);
     }
 }
