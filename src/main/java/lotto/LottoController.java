@@ -24,14 +24,14 @@ public class LottoController {
         this.calculator = calculator;
     }
 
-    public void startLotto() {
+    public void startLottoWithBonus() {
         BigDecimal payAmount = inputView.inputPayAmount();
         Lotto lotto = lottoFactory.generateLotto(payAmount);
         outputView.printPurchasedLotto(lotto);
 
-        WinningNumber winningNumber = inputView.inputBeforeWinningNumber();
-        Map<Prize, Integer> lottoRankMap = winningNumber.calcLottoRank(lotto);
-        outputView.printStatisticLotto(lottoRankMap);
+        WinningNumber winningNumber = inputView.inputWinningNumberWithBonus();
+        Map<Prize, Integer> lottoRankMap = winningNumber.calcLottoRankWithBonus(lotto);
+        outputView.printStatisticLottoWithBonus(lottoRankMap);
 
         BigDecimal prizeMoney = calculator.calculatePrizeMoney(lottoRankMap);
         outputView.printYield(calculator.calculateYield(payAmount, prizeMoney));

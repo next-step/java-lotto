@@ -31,10 +31,10 @@ public class OutputView {
         return stringBuilder.toString();
     }
 
-    public void printStatisticLotto(Map<Prize, Integer> rankMap) {
+    public void printStatisticLottoWithBonus(Map<Prize, Integer> rankMap) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printRank(rankMap);
+        printRankWithBonus(rankMap);
     }
 
     public void printYield(double yield) {
@@ -43,11 +43,29 @@ public class OutputView {
                 "입니다.");
     }
 
-    private void printRank(Map<Prize, Integer> rankMap) {
-        Arrays.stream(Prize.values()).filter(v -> v.getWinningCount() > 0).sorted(
-                Comparator.comparing(Prize::getWinningCount)).forEach(p -> {
-            System.out.println(p.getWinningCount() + "개 일치 (" + p.getPrizeMoney() + "원) - " +
-                               rankMap.get(p) + "개");
-        });
+    private void printRankWithBonus(Map<Prize, Integer> rankMap) {
+        Arrays.stream(Prize.values())
+              .filter(v -> v.getWinningCount() > 0)
+              .sorted(Comparator.comparing(Prize::getPrizeMoney))
+              .forEach(p -> {
+                  System.out.println(printRank(rankMap, p));
+              });
+    }
+
+    private String printRank(Map<Prize, Integer> rankMap, Prize prize) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(prize.getWinningCount());
+        stringBuilder.append("개 일치");
+        stringBuilder.append(isBonusRank(prize) + " (");
+        stringBuilder.append(prize.getPrizeMoney() + "원) - ");
+        stringBuilder.append(rankMap.get(prize) + "개");
+        return stringBuilder.toString();
+    }
+
+    private String isBonusRank(Prize prize) {
+        if (prize == Prize.RANK_2TH_WITH_BONUS) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 }

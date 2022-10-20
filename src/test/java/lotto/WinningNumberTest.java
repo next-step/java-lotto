@@ -22,25 +22,35 @@ class WinningNumberTest {
     @DisplayName("당첨 번호 확인 테스트")
     @ParameterizedTest
     @MethodSource("lottoMatchingTestCase")
-    public void confirm_prize_test(Lotto lotto, List<Integer> winningNumbers, Prize prize) {
-        WinningNumber winningNumber = new WinningNumber(winningNumbers);
-        Map<Prize, Integer> rankMap = winningNumber.calcLottoRank(lotto);
+    public void confirm_prize_test(Lotto lotto, Integer bonusNum, List<Integer> winningNumbers, Prize prize) {
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNum);
+        Map<Prize, Integer> rankMap = winningNumber.calcLottoRankWithBonus(lotto);
         assertThat(rankMap.get(prize)).isOne();
     }
 
     static Stream<Arguments> lottoMatchingTestCase() {
         return Stream.of(
                 arguments(generateLotto(Lists.list(1, 2, 3, 43, 42, 41)),
-                         Lists.list(5, 15, 23, 45, 4, 2), Prize.NO_RANK),
+                          30,
+                          Lists.list(5, 15, 23, 45, 4, 2), Prize.NO_RANK),
                 arguments(generateLotto(Lists.list(5, 15, 23, 43, 42, 41)),
+                          30,
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_4TH),
                 arguments(generateLotto(Lists.list(5, 15, 23, 43, 42, 41)),
+                          30,
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_4TH),
                 arguments(generateLotto(Lists.list(5, 15, 23, 45, 42, 41)),
+                          30,
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_3TH),
                 arguments(generateLotto(Lists.list(5, 15, 23, 45, 4, 43)),
+                          30,
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_2TH),
+
+                arguments(generateLotto(Lists.list(5, 15, 23, 45, 4, 30)),
+                          30,
+                          Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_2TH_WITH_BONUS),
                 arguments(generateLotto(Lists.list(5, 15, 23, 45, 4, 2)),
+                          30,
                           Lists.list(5, 15, 23, 45, 4, 2), Prize.RANK_1TH)
         );
     }

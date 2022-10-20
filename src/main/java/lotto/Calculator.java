@@ -21,10 +21,8 @@ public class Calculator {
         BigDecimal prizeMoney = BigDecimal.ZERO;
 
         for (Prize value : Prize.values()) {
-            prizeMoney =
-                    prizeMoney.add(
-                            BigDecimal.valueOf(rankMap.get(value))
-                                      .multiply(value.getPrizeMoney()));
+            BigDecimal bigDecimal = BigDecimal.valueOf(rankMap.get(value));
+            prizeMoney = prizeMoney.add(bigDecimal.multiply(value.getPrizeMoney()));
         }
 
         return prizeMoney;

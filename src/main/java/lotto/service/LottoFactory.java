@@ -11,14 +11,10 @@ import lotto.domain.LottoNumber;
 
 public class LottoFactory {
     private static final int PICK_NUMBER = 6;
-    private final List<Integer> lottoNumbers;
     private final Calculator calculator;
 
     public LottoFactory(Calculator calculator) {
-        this.lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            lottoNumbers.add(i);
-        }
+
         this.calculator = calculator;
     }
 
@@ -33,12 +29,21 @@ public class LottoFactory {
     }
 
     private List<Integer> generateRandomNumbers() {
+        List<Integer> lottoNumbers = generateLottoNumbers();
         List<Integer> pickNumber = new ArrayList<>();
-        Collections.shuffle(lottoNumbers);
         for (int i = 0; i < PICK_NUMBER; i++) {
             pickNumber.add(lottoNumbers.get(i));
         }
 
         return pickNumber;
+    }
+
+    private List<Integer> generateLottoNumbers() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (int i = LottoNumber.MIN_LOTTO_NUMBER; i <= LottoNumber.MAX_LOTTO_NUMBER; i++) {
+            lottoNumbers.add(i);
+        }
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers;
     }
 }
