@@ -3,6 +3,7 @@ package domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class NumberTest {
@@ -11,7 +12,7 @@ public class NumberTest {
     @ValueSource(strings = {"7", "9999", "-3", "32"})
     public void 정수_문자_입력_expect_Success(String text) {
         Number number = new Number(text);
-        number.equals(new Number(text));
+        assertThat(number).isEqualTo(new Number(text));
     }
 
     @ParameterizedTest
