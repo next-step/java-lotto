@@ -41,11 +41,7 @@ public class Lotto {
         boolean bonus = numbers.stream()
                 .anyMatch(num -> winner.isBonus(num));
 
-        return Prize.find(count, isPossibleGetBonus(count) && bonus);
-    }
-
-    private boolean isPossibleGetBonus(long count) {
-        return count == Prize.THIRD.getCorrectCount();
+        return Prize.find(count, bonus);
     }
 
     public boolean contains(LottoNumber lottoNumber) {

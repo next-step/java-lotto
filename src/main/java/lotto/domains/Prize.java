@@ -31,8 +31,12 @@ public enum Prize {
     }
 
     public static Prize find(long count, boolean bonus) {
+        if (count == SECOND.correctCount && bonus) {
+            return SECOND;
+        }
+
         return Arrays.stream(values())
-                .filter(p -> p.correctCount == count && p.bonus == bonus)
+                .filter(p -> p.correctCount == count && !p.bonus)
                 .findFirst()
                 .orElse(Prize.NONE);
     }
