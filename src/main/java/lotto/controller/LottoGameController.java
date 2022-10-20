@@ -1,13 +1,12 @@
 package lotto.controller;
 
-import lotto.domain.Lottos;
+import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
-import lotto.util.LottoExchanger;
+import lotto.service.LottoExchangeService;
+import lotto.service.LottoResultService;
 
 import java.util.List;
 
-import static lotto.util.LottoResult.rankResult;
-import static lotto.util.LottoResult.yieldResult;
 import static lotto.view.InputView.inputMatchNumberList;
 import static lotto.view.InputView.inputPurchasePrice;
 import static lotto.view.ResultView.*;
@@ -16,24 +15,22 @@ public class LottoGameController {
 
     public static void main(String[] args) {
 
-        Lottos lottos = LottoExchanger.purchaseLottos(inputPurchasePrice());
+        Integer inputPurchasePrice = inputPurchasePrice();
+        LottoExchangeService lottoExchangeService = new LottoExchangeService();
+        LottoTickets lottoTickets = lottoExchangeService.purchaseLottoTickets(inputPurchasePrice);
+        purchaseAmount(lottoTickets);
 
-        purchaseAmount(lottos);
-
-        Lottos pickedLottos = lottos.pick();
-
-        pickedLottos(pickedLottos);
+        LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
+        pickedLottos(pickedLottoTickets);
 
         List<Integer> matchNumberList = inputMatchNumberList();
+        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(matchNumberList);
 
-        Lottos rankedLottos = pickedLottos.rank(matchNumberList);
-
-        List<Rank> rankList = rankResult(rankedLottos);
-
+        LottoResultService lottoResultService = new LottoResultService();
+        List<Rank> rankList = lottoResultService.rankResult(rankedLottoTickets);
         rankedLottos(rankList);
 
-        Integer yieldResult = yieldResult(rankedLottos);
-
+        Integer yieldResult = lottoResultService.yieldResult(rankedLottoTickets);
         yieldLottos(yieldResult);
 
     }

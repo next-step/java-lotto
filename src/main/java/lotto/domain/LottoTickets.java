@@ -6,24 +6,24 @@ import java.util.Objects;
 
 import static lotto.util.LottoNumber.getAutoNumberList;
 
-public class Lottos {
+public class LottoTickets {
 
     private final Integer amount;
     private final Integer purchasePrice;
     private List<Lotto> lottoList;
 
-    public Lottos(Integer amount, Integer purchasePrice) {
+    public LottoTickets(Integer amount, Integer purchasePrice) {
         this.amount = amount;
         this.purchasePrice = purchasePrice;
     }
 
-    public Lottos(Integer amount, Integer purchasePrice, List<Lotto> lottoList) {
+    public LottoTickets(Integer amount, Integer purchasePrice, List<Lotto> lottoList) {
         this.amount = amount;
         this.purchasePrice = purchasePrice;
         this.lottoList = lottoList;
     }
 
-    public Lottos pick() {
+    public LottoTickets pickNumbers() {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
@@ -34,7 +34,7 @@ public class Lottos {
         return this;
     }
 
-    public Lottos rank(List<Integer> matchNumberList) {
+    public LottoTickets putRankings(List<Integer> matchNumberList) {
         lottoList.forEach(l -> l.rank(matchNumberList));
         return this;
     }
@@ -55,8 +55,8 @@ public class Lottos {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lottos lottos = (Lottos) o;
-        return Objects.equals(amount, lottos.amount) && Objects.equals(lottoList, lottos.lottoList);
+        LottoTickets lottoTickets = (LottoTickets) o;
+        return Objects.equals(amount, lottoTickets.amount) && Objects.equals(lottoList, lottoTickets.lottoList);
     }
 
     @Override

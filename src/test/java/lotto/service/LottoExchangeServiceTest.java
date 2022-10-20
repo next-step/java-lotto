@@ -1,12 +1,12 @@
-package lotto.util;
+package lotto.service;
 
-import lotto.domain.Lottos;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoExchangerTest {
+class LottoExchangeServiceTest {
 
     @Test
     @DisplayName("로또 교환기 생성 확인")
@@ -15,9 +15,9 @@ class LottoExchangerTest {
         Integer purchasePrice = 14000;
 
         // when
-        Lottos lottos = LottoExchanger.purchaseLottos(purchasePrice);
+        LottoTickets lottoTickets = new LottoExchangeService().purchaseLottoTickets(purchasePrice);
 
         // then
-        assertThat(lottos).isEqualTo(new Lottos(14, purchasePrice));
+        assertThat(lottoTickets).isEqualTo(new LottoTickets(14, purchasePrice));
     }
 }

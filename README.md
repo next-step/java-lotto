@@ -39,7 +39,7 @@
 - 순위를 확인한다.
 
 ## 교환기(LottoExchanger)
-- lottos = purchaseLottos(금액)
+- lottoTickets = purchaseLottos(금액)
 - 금액은 1000 단위로 나눈다.
 - 금액이 1000 단위가 아니라면 에러 메시지를 보낸다.
 
