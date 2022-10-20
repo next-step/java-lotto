@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Money {
 
+    public static final Money LOTTO_PRICE = new Money(1000);
     private final int money;
 
     public Money(int money) {
@@ -18,6 +19,18 @@ public class Money {
         if (money % 1000 != 0) {
             throw new IllegalArgumentException("1000원 단위만 입력 가능합니다.");
         }
+    }
+
+    public Money buyManualLotto(int manualLottoCount) {
+        return new Money(this.money - LOTTO_PRICE.getMoney() * manualLottoCount);
+    }
+
+    public int getLottoCount() {
+        return this.money / LOTTO_PRICE.getMoney();
+    }
+
+    public int getTotalMoney(int lottoCount) {
+        return lottoCount * LOTTO_PRICE.getMoney();
     }
 
     public int getMoney() {

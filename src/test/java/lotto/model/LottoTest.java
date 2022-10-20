@@ -42,9 +42,9 @@ class LottoTest {
 
     @DisplayName("로또 맞은 개수 반환한다.")
     @Test
-    void countCorrectNumber() {
+    void countMatchNumber() {
         Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        int count = lotto.countCorrectNumber(new Lotto(Set.of(1, 2, 3, 7, 8, 9)));
+        int count = lotto.countMatchNumber(new Lotto(Set.of(1, 2, 3, 7, 8, 9)));
         assertThat(count).isEqualTo(3);
     }
 }

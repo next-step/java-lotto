@@ -13,11 +13,11 @@ public enum Rank {
 
     public static final Rank[] values = values();
     private final Money reward;
-    private final int correctCount;
+    private final int matchCount;
 
-    Rank(Money reward, int correctCount) {
+    Rank(Money reward, int matchCount) {
         this.reward = reward;
-        this.correctCount = correctCount;
+        this.matchCount = matchCount;
     }
 
     public static Rank findRank(int correctCount, boolean matchBonus) {
@@ -25,20 +25,20 @@ public enum Rank {
             return Rank.SECOND;
         }
         return Arrays.stream(values)
-                .filter(rank -> rank.correctCount == correctCount)
+                .filter(rank -> rank.matchCount == correctCount)
                 .findFirst()
                 .orElse(Rank.NONE);
     }
 
     private static boolean isSecond(int correctCount, boolean matchBonus) {
-        return correctCount == SECOND.correctCount && matchBonus;
+        return correctCount == SECOND.matchCount && matchBonus;
     }
 
-    public Money getReward() {
-        return reward;
+    public int getReward() {
+        return reward.getMoney();
     }
 
     public int getCorrectCount() {
-        return correctCount;
+        return matchCount;
     }
 }

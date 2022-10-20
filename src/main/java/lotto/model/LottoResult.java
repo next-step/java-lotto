@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoResult {
@@ -8,7 +9,7 @@ public class LottoResult {
     private final List<Rank> ranks;
 
     public LottoResult(List<Rank> rewards) {
-        this.money = rewards.size() * Lotto.LOTTO_PRICE.getMoney();
+        this.money = Money.LOTTO_PRICE.getTotalMoney(rewards.size());
         this.ranks = rewards;
     }
 
@@ -25,11 +26,10 @@ public class LottoResult {
     private int getTotalReward() {
         return ranks.stream()
                 .map(Rank::getReward)
-                .map(Money::getMoney)
                 .reduce(0, Integer::sum);
     }
 
     public List<Rank> getRanks() {
-        return ranks;
+        return Collections.unmodifiableList(ranks);
     }
 }

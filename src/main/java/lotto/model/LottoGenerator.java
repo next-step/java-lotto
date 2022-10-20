@@ -1,9 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,25 +9,31 @@ import static java.util.stream.Collectors.toList;
 public class LottoGenerator {
 
     private static final List<Integer> fullLottoNumbers = getFullLottoNumbers();
+    private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos generateLottos(Money money) {
-        List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = getLottoCount(money);
+    public Lottos generateLottos(Money money, List<Lotto> manualLottos) {
+        addManualLottos(manualLottos);
+        generateAutoLottos(money);
+        return new Lottos(lottos);
+    }
+
+    private void addManualLottos(List<Lotto> manualLottos) {
+        lottos.addAll(manualLottos);
+    }
+
+    public Lottos generateAutoLottos(Money money) {
+        int lottoCount = money.getLottoCount();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(generateLotto());
+            lottos.add(generateAutoLotto());
         }
         return new Lottos(lottos);
     }
 
-    private int getLottoCount(Money money) {
-        return money.getMoney() / Lotto.LOTTO_PRICE.getMoney();
-    }
-
-    private Lotto generateLotto() {
+    private Lotto generateAutoLotto() {
         Collections.shuffle(fullLottoNumbers);
         Set<Integer> lottoNumbers = fullLottoNumbers.stream()
                 .limit(Lotto.LOTTO_SIZE)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
         return new Lotto(lottoNumbers);
     }
 
