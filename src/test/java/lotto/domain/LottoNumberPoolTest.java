@@ -25,8 +25,14 @@ class LottoNumberPoolTest {
         lottoNumberPool.shuffle(numbers -> {
         });
 
-        List<Integer> limited = lottoNumberPool.getRandomNumbers(6);
+        List<LottoNumber> limited = lottoNumberPool.getRandomNumbers(6);
 
-        assertThat(limited).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(limited).isEqualTo(List.of(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)));
     }
 }

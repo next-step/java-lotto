@@ -19,7 +19,10 @@ public class LottoNumber {
         }
     }
 
-    private final int number;
+    private int number;
+    
+    private LottoNumber() {
+    }
 
     private LottoNumber(int number) {
         if (number < MIN || number > MAX) {
@@ -27,6 +30,10 @@ public class LottoNumber {
         }
 
         this.number = number;
+    }
+
+    public static LottoNumber of(String number) {
+        return LottoNumber.of(Integer.parseInt(number));
     }
 
     public static LottoNumber of(int number) {

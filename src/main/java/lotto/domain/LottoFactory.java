@@ -12,12 +12,12 @@ public class LottoFactory {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final LottoNumberPool LOTTO_NUMBER_POOL = new LottoNumberPool();
 
-    public List<Lotto> produces(Consumer<List<Integer>> shuffler, int toProduceLottoCount) {
+    public List<Lotto> produces(Consumer<List<LottoNumber>> shuffler, int toProduceLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < toProduceLottoCount; i++) {
             LOTTO_NUMBER_POOL.shuffle(shuffler);
-            lottos.add(Lotto.of(LOTTO_NUMBER_POOL.getRandomNumbers(LOTTO_NUMBER_COUNT)));
+            lottos.add(Lotto.ofLottoNumber(LOTTO_NUMBER_POOL.getRandomNumbers(LOTTO_NUMBER_COUNT)));
         }
         return lottos;
     }

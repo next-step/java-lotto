@@ -3,11 +3,8 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumberPool;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 /**
  * Created by seungwoo.song on 2022-10-06
@@ -15,12 +12,6 @@ import java.util.stream.Collectors;
 public class LottoInputView {
 
     private final Scanner scanner = new Scanner(System.in);
-
-    private static List<Integer> toList(String[] lottoNumbers) {
-        return Arrays.stream(lottoNumbers)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
 
     public int readPayAmount() {
         System.out.println("구입 금액을 입력해 주세요");
@@ -34,7 +25,7 @@ public class LottoInputView {
         String text = scanner.nextLine();
         String[] lottoNumbers = text.replace(" ", "").split(",");
 
-        return Lotto.of(toList(lottoNumbers));
+        return Lotto.ofString(lottoNumbers);
     }
 
     public int readBonusNumber() {
