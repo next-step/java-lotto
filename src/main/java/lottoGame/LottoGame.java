@@ -7,19 +7,15 @@ import lottoGame.model.strategy.ShuffleStrategy;
 import java.util.List;
 
 public class LottoGame {
-    private final InputParameter inputParameter;
-    private final ShuffleStrategy shuffleStrategy;
-    ;
-
+    private final InputParameter inputParameter;;
     private final Lottery lottery = new Lottery();
 
 
-    public LottoGame(InputParameter inputParameter, ShuffleStrategy shuffleStrategy) {
+    public LottoGame(InputParameter inputParameter) {
         this.inputParameter = inputParameter;
-        this.shuffleStrategy = shuffleStrategy;
     }
 
-    public Lottery start() {
+    public Lottery start(ShuffleStrategy shuffleStrategy) {
         lottery.create(inputParameter.getLotteryNum(), shuffleStrategy);
         return lottery;
     }

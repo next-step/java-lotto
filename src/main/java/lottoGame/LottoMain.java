@@ -7,8 +7,8 @@ import lottoGame.view.ResultView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        LottoGame lottogame = new LottoGame(InputView.print(), new AutoShuffleStrategy());
-        Lottery lottery = lottogame.start();
+        LottoGame lottogame = new LottoGame(InputView.print());
+        Lottery lottery = lottogame.start(new AutoShuffleStrategy());
         ResultView resultView = new ResultView(lottery);
         resultView.printLottery();
         RankResult rankResult = lottery.createRankResult(InputView.inputWinningNumer());
