@@ -7,18 +7,22 @@ import lotto.domain.LottoWinning;
 import lotto.dto.LottoDto;
 import lotto.dto.LottoTicketDto;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
 
-    private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String WINNING_STATISTICS_MESSAGE = LINE_SEPARATOR + "당첨 통계";
+    private static final String NEXT_LINE = System.lineSeparator();
+    private static final String COUNT_MESSAGE = "%d개를 구매했습니다." + NEXT_LINE;
+    private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계" + NEXT_LINE + "--------------------";
+    private static final String LOTTO_MATCH_MESSAGE = "%d개 일치 (%d원) - %d개" + NEXT_LINE;
+    private static final String WINNING_RATE_MESSAGE = NEXT_LINE + "총 수익률은 %.2f 입니다. (기준은 1입니다. 1보다 크면 이득, 1보다 작으면 손해)";
 
     private ResultView() {
     }
 
     public static void showLottoCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+        System.out.printf(COUNT_MESSAGE, lottoCount);
     }
 
     public static void showAutoLottoTicket(LottoTicket lottoTicket) {
@@ -26,7 +30,6 @@ public class ResultView {
         for (LottoDto lotto : lottos) {
             System.out.println(lotto.numbers().toString());
         }
-        System.out.println(System.lineSeparator());
     }
 
     public static void printWinning(LottoWinning winning) {
@@ -40,8 +43,6 @@ public class ResultView {
     }
 
     public static void printWinningRate(LottoWinning winning, LottoAmount lottoAmount) {
-        double sum = winning.sumPrizeMoney();
-        double rate = sum / lottoAmount.getAmount();
-        System.out.printf("총 수익률은 %.2f 입니다. (기준은 1입니다. 1보다 크면 이득, 1보다 작으면 손해)", rate);
+        System.out.printf(WINNING_RATE_MESSAGE, lottoAmount.calcWinningRate(winning.sumPrizeMoney()));
     }
 }

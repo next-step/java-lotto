@@ -23,7 +23,11 @@ public class LottoAmount {
         return amount / PRICE_PER_LOTTO;
     }
 
-    public static int validateAmount(int amount) {
+    public double calcWinningRate(final double sum) {
+        return sum / amount;
+    }
+
+    private static int validateAmount(int amount) {
         if (amount < PRICE_PER_LOTTO) {
             throw new IllegalArgumentException(INVALID_PRICE_FOR_PURCHASE_MESSAGE);
         }
@@ -33,16 +37,12 @@ public class LottoAmount {
         return amount;
     }
 
-    public static int toInt(String amount) {
+    private static int toInt(String amount) {
         try {
             return Integer.parseInt(amount);
         } catch (Exception e) {
             throw new NumberFormatException(NOT_NUMBER_MESSAGE);
         }
-    }
-
-    public int getAmount() {
-        return amount;
     }
 
     @Override

@@ -89,7 +89,7 @@
   - generate 함수 오버로딩.
 - [x] Lotto List -> Set
 - [x] LottoPrize -> Rank
-- [ ] 당첨된 결과 winning 에서 처리 후 ResultView 로 넘기기
+- [x] 당첨된 결과 winning 에서 처리 후 ResultView 로 넘기기
 - [x] method UI 의존성 수정
   - Lotto generateReport()
   - LottoTicket generateTicket().
@@ -97,3 +97,4 @@
   - List<lotto> -> lottoTicket
   - lastWeekTicket -> winningTicket
 
+- [x] LottoAmount 에서 가격에대한 수익률 구하기.
