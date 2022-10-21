@@ -1,8 +1,8 @@
 package step2.exception;
 
-public class LackOfMoneyException extends RuntimeException {
+public class MoneyException extends RuntimeException {
 
-	public LackOfMoneyException(String message) {
+	public MoneyException(String message) {
 		super(message);
 	}
 
