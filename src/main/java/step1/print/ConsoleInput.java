@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class ConsoleInput {
 
-    public String input() throws IOException {
+    public String inputValue() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         return br.readLine();

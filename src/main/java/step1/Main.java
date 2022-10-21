@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ConsoleInput consoleInput = new ConsoleInput();
-        String expression = consoleInput.input();
+        String expression = consoleInput.inputValue();
 
         ArithmeticExpression arithmeticExpression = new ArithmeticExpression(new ExpressionAsArithmeticExpression(expression));
 
