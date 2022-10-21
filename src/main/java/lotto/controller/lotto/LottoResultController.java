@@ -10,8 +10,6 @@ import lotto.domain.lotto.*;
 import lotto.view.lotto.LottoInput;
 import lotto.view.lotto.LottoOutput;
 
-import java.util.List;
-
 public class LottoResultController {
 
     private final LottoResultService lottoResultService;
@@ -20,7 +18,7 @@ public class LottoResultController {
         this.lottoResultService = lottoResultService;
     }
 
-    public void draw(final List<Lotto> lottos) {
+    public void draw(final LottoList lottos) {
         lottoResult(lottos, drawWinner());
     }
 
@@ -41,7 +39,7 @@ public class LottoResultController {
         return createLottoWinner(numbers);
     }
 
-    private void lottoResult(final List<Lotto> lottos, final LottoWinner winner) {
+    private void lottoResult(final LottoList lottos, final LottoWinner winner) {
         RankMap checkLotto = lottoResultService.checkLotto(lottos, winner);
         LottoOutput.statistics();
 

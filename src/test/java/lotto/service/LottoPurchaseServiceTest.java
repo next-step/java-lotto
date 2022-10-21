@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.Amount;
+import lotto.domain.lotto.LottoList;
 import lotto.domain.money.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumberSet;
@@ -39,7 +40,7 @@ public class LottoPurchaseServiceTest {
     @Test
     void purchase_lotto_lottonumberset() {
         LottoNumberSet lottoNumbers = new LottoNumberSet(1, 2, 3, 4, 5, 6);
-        String actual = lottoPurchaseService.purchaseLotto(Arrays.asList(lottoNumbers)).get(0).toString();
+        String actual = lottoPurchaseService.purchaseLotto(Arrays.asList(lottoNumbers)).toStringList().get(0);
 
         assertThat(actual).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6).toString());
     }

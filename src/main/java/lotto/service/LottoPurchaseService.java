@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.Amount;
+import lotto.domain.lotto.LottoList;
 import lotto.domain.money.ImmutableMoney;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumberSet;
@@ -15,15 +16,15 @@ public class LottoPurchaseService {
         return new Amount(immutableMoney.money().divideValue(Lotto.LOTTO_PRICE.value()).intValue());
     }
 
-    public List<Lotto> purchaseLotto(final Amount amount) {
-        return IntStream.range(0, amount.amount())
+    public LottoList purchaseLotto(final Amount amount) {
+        return new LottoList(IntStream.range(0, amount.amount())
                 .mapToObj(i -> new Lotto())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
-    public List<Lotto> purchaseLotto(final List<LottoNumberSet> lottoNumberSetList) {
-        return lottoNumberSetList.stream()
+    public LottoList purchaseLotto(final List<LottoNumberSet> lottoNumberSetList) {
+        return new LottoList(lottoNumberSetList.stream()
                 .map(lottoNumberSet -> new Lotto(lottoNumberSet))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }
