@@ -5,7 +5,11 @@ import step1.arithmeticExpression.numbers.Numbers;
 import step1.arithmeticExpression.operators.ExpressionAsOperators;
 import step1.arithmeticExpression.operators.Operators;
 
+import java.util.regex.Pattern;
+
 public class ExpressionAsArithmeticExpression {
+
+    private static final Pattern VALID_ARITHMETIC_EXPRESSION_RULE = Pattern.compile("^([+\\-]?\\d+)( [+\\-/*] \\d+)*");
 
     private final String expression;
 
@@ -30,7 +34,7 @@ public class ExpressionAsArithmeticExpression {
             throw new IllegalStateException("유효한 연산식이 아닙니다.");
         }
 
-        if (!expression.matches("^([+\\-]?\\d+)( [+\\-/*] \\d+)*")) {
+        if (VALID_ARITHMETIC_EXPRESSION_RULE.matcher(expression).find()) {
             throw new IllegalStateException("유효한 연산식이 아닙니다.");
         }
 
