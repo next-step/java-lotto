@@ -20,12 +20,12 @@ public class ResultView {
         System.out.println(purchasePrice.getAmount() + PURCHASE_AMOUNT_MESSAGE);
     }
 
-    public static void pickedLottoTickets(LottoTickets lottoTickets) {
+    public static void printPickedLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottoList().forEach(l -> System.out.println(l.getNumberList()));
         System.out.println();
     }
 
-    public static void rankedLottoTickets(List<Rank> rankList) {
+    public static void printRankedLottoTickets(List<Rank> rankList) {
         System.out.println(RANK_INIT_MESSAGE);
         Arrays.stream(Rank.values())
                 .collect(Collectors.toList())
@@ -36,7 +36,7 @@ public class ResultView {
                 );
     }
 
-    public static void yieldLottoTickets(Integer yield) {
+    public static void printYieldLottoTickets(Integer yield) {
         System.out.println(YIELD_MESSAGE.replace("{yield}", String.valueOf(yield)));
     }
 
