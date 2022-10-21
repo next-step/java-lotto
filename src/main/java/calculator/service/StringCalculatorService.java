@@ -12,12 +12,14 @@ public class StringCalculatorService {
     private StringCalculatorService() {
     }
 
-    public static CalcNumber calculate(String input) {
+    public static int calculate(String input) {
         List<String> operations = SeparatorExpression.getOperations(input);
-        CalcNumber result = new CalcNumber(operations.get(FIRST_INPUT_INDEX));
+        int result = new CalcNumber(operations.get(FIRST_INPUT_INDEX)).number();
         for (int i = 2; i < operations.size(); i += 2) {
-            CalcNumber nextNum = new CalcNumber(operations.get(i));
-            result = OperatorFactory.valueOf(operations.get(i - 1)).calculate(result, nextNum);
+            int nextNum = new CalcNumber(operations.get(i)).number();
+            result = OperatorFactory
+                    .valueOf(operations.get(i - 1))
+                    .apply(result, nextNum);
         }
         return result;
     }

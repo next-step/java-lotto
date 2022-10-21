@@ -38,7 +38,7 @@
 - [x] ArithmeticOperation 정적 팩토리 메서드로 처리하기.
 - [x] 의미없는 test 삭제
 - [x] StaticFactoryMethod 구현 수정. - Enum 추가
-- [ ] Operation Map 구현.
+- [x] Operation 성능 보완 구현.
 ---
 
 ---
