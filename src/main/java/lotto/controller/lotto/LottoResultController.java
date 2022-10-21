@@ -2,6 +2,7 @@ package lotto.controller.lotto;
 
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
+import lotto.domain.rank.Rank;
 import lotto.service.LottoResultService;
 import lotto.domain.*;
 import lotto.domain.lotto.*;

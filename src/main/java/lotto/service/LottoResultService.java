@@ -4,7 +4,7 @@ import lotto.domain.Amount;
 import lotto.domain.money.ImmutableMoney;
 import lotto.domain.money.Money;
 import lotto.domain.ProfitRate;
-import lotto.domain.Rank;
+import lotto.domain.rank.Rank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoWinner;
 

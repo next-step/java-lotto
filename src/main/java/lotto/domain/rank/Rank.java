@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.rank;
 
+import lotto.domain.LottoMatchCount;
 import lotto.domain.money.ImmutableMoney;
 
 public enum Rank {

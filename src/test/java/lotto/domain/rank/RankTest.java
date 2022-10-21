@@ -1,6 +1,8 @@
-package lotto.domain;
+package lotto.domain.rank;
 
+import lotto.domain.LottoMatchCount;
 import lotto.domain.money.ImmutableMoney;
+import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

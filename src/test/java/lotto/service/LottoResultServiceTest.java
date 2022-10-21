@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.domain.Amount;
 import lotto.domain.ProfitRate;
-import lotto.domain.Rank;
+import lotto.domain.rank.Rank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
