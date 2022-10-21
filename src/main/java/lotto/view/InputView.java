@@ -53,9 +53,9 @@ public class InputView {
         return input;
     }
 
-    private static Integer convertToInt(String purchaseAmount) {
+    private static Integer convertToInt(String number) {
         try {
-            int parseInt = Integer.parseInt(purchaseAmount);
+            int parseInt = Integer.parseInt(number);
             if (parseInt <= 0) {
                 throw new InvalidInputException(VALIDATE_INTEGER);
             }
