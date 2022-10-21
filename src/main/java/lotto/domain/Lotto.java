@@ -1,11 +1,14 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
     private List<Integer> numberList;
     private Rank rank;
+
+    public Lotto() {}
 
     public List<Integer> getNumberList() {
         return numberList;
@@ -27,5 +30,26 @@ public class Lotto {
                         .filter(winnerNumberList::contains)
                         .count());
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numberList, lotto.numberList) && rank == lotto.rank;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numberList, rank);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numberList=" + numberList +
+                ", rank=" + rank +
+                '}';
     }
 }
