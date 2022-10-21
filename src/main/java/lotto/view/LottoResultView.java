@@ -13,9 +13,7 @@ import java.util.List;
 public class LottoResultView {
 
     public void print(List<Lotto> lottos) {
-        lottos.stream()
-                .sorted()
-                .forEach(System.out::println);
+        lottos.stream().forEach(System.out::println);
     }
 
     public void print(LottoStatistic lottoStatistic) {

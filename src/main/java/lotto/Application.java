@@ -17,11 +17,12 @@ public class Application {
 
     public static void main(String[] args) {
         LottoInputView inputView = new LottoInputView();
-        PurchaseInfo purchaseInfo = new PurchaseInfo(inputView.readPayAmount());
+        PurchaseInfo purchaseInfo = inputView.read();
+
         LottoFactory lottoFactory = new LottoFactory();
         LottoResultView view = new LottoResultView();
 
-        List<Lotto> lotto = lottoFactory.produces(Collections::shuffle, purchaseInfo.getCount());
+        List<Lotto> lotto = lottoFactory.produces(Collections::shuffle, purchaseInfo.getAutoLottoCount());
 
         view.print(lotto);
 
