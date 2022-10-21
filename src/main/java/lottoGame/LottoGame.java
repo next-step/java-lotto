@@ -7,6 +7,7 @@ import lottoGame.model.strategy.ShuffleStrategy;
 import java.util.List;
 
 public class LottoGame {
+    private static final int TICKET_PRICE = 1000;
     private final InputParameter inputParameter;;
     private final Lottery lottery = new Lottery();
 
@@ -16,7 +17,7 @@ public class LottoGame {
     }
 
     public Lottery start(ShuffleStrategy shuffleStrategy) {
-        lottery.create(inputParameter.getLotteryNum(), shuffleStrategy);
+        lottery.create(inputParameter.getAmount()/ TICKET_PRICE, shuffleStrategy);
         return lottery;
     }
 

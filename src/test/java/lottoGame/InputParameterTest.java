@@ -10,6 +10,6 @@ public class InputParameterTest {
     void input_amount_return_lotteryNumber() {
         int amount = 14000;
         InputParameter inputParameter = new InputParameter(amount);
-        assertThat(inputParameter.getLotteryNum()).isEqualTo(14);
+        assertThat(inputParameter.getAmount()).isEqualTo(14000);
     }
 }
