@@ -1,9 +1,10 @@
-package lottoGame.model;
+package lottoGame.model.lotto;
 
 import lottoGame.model.lotto.Lotto;
 import lottoGame.model.lotto.WinningLotto;
 import lottoGame.model.lotto.lottoNumber.DefaultLottoNumber;
 import lottoGame.model.lotto.lottoNumber.LottoNumber;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -33,4 +34,20 @@ class LottoTest {
         WinningLotto winningLotto = new WinningLotto(winnerNum, new DefaultLottoNumber(7));
         assertEquals(lotto.countMatch(winningLotto), 6);
     }
+
+    @ParameterizedTest
+    @MethodSource("provideIntInput")
+    void isBonus(List<LottoNumber> winnerNum) {
+        Lotto lotto = new Lotto(List.of(
+                new DefaultLottoNumber(1),
+                new DefaultLottoNumber(2),
+                new DefaultLottoNumber(3),
+                new DefaultLottoNumber(4),
+                new DefaultLottoNumber(5),
+                new DefaultLottoNumber(7)));
+
+        WinningLotto winningLotto = new WinningLotto(winnerNum, new DefaultLottoNumber(7));
+        assertTrue(lotto.isBonus(winningLotto));
+    }
+
 }

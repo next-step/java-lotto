@@ -1,4 +1,4 @@
-package lottoGame.model;
+package lottoGame.model.lotto;
 
 import lottoGame.Rank;
 import lottoGame.RankResult;

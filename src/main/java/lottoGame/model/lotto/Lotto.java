@@ -33,7 +33,7 @@ public class Lotto {
         return lottoNumber;
     }
 
-    public boolean existedMatchNumber(LottoNumber winningNum) {
+    private boolean existedMatchNumber(LottoNumber winningNum) {
         return lottoNumber.stream()
                 .anyMatch(lottoNo -> lottoNo.isMatchOrNot(winningNum.getLottoNumber()));
     }

@@ -1,4 +1,4 @@
-package lottoGame.model;
+package lottoGame.model.lotto;
 
 import lottoGame.model.exception.InputException;
 import lottoGame.model.lotto.lottoNumber.DefaultLottoNumber;
