@@ -1,6 +1,8 @@
 package calculator.operator;
 
-public class MultiplyOperator implements Operator {
+import java.util.function.IntBinaryOperator;
+
+public class MultiplyOperator implements IntBinaryOperator {
     @Override
     public int applyAsInt(int left, int right) {
         return left * right;

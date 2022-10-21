@@ -1,8 +1,7 @@
 package calculator.input;
 
-import calculator.operator.Operator;
-
 import java.util.List;
+import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
 
 public class InputIntegers {
@@ -22,7 +21,7 @@ public class InputIntegers {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), InputIntegers::new));
     }
 
-    public void executeOperator(Operator operator) {
+    public void executeOperator(IntBinaryOperator operator) {
         int result = operator.applyAsInt(integers.get(0), integers.get(1));
         replaceResult(result);
     }
