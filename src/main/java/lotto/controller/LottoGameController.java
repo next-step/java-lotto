@@ -1,8 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.LottoTickets;
+import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
-import lotto.service.LottoExchangeService;
 import lotto.service.LottoResultService;
 
 import java.util.List;
@@ -15,11 +15,10 @@ public class LottoGameController {
 
     public static void main(String[] args) {
 
-        Integer inputPurchasePrice = inputPurchasePrice();
-        LottoExchangeService lottoExchangeService = new LottoExchangeService();
-        LottoTickets lottoTickets = lottoExchangeService.purchaseLottoTickets(inputPurchasePrice);
-        purchaseAmount(lottoTickets);
+        PurchasePrice purchasePrice = inputPurchasePrice();
+        printPurchaseAmount(purchasePrice);
 
+        LottoTickets lottoTickets = new LottoTickets(purchasePrice);
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
         pickedLottoTickets(pickedLottoTickets);
 

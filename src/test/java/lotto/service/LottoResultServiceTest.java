@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
+import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,7 @@ class LottoResultServiceTest {
     void rankResult() {
         // given
         Integer purchasePrice = 14000;
-        LottoExchangeService lottoExchangeService = new LottoExchangeService();
-        LottoTickets lottoTickets = lottoExchangeService.purchaseLottoTickets(purchasePrice);
+        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
         LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(List.of(1, 2, 3, 4, 5, 6));
 
@@ -34,7 +34,7 @@ class LottoResultServiceTest {
     void yieldResult() {
         // given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoTickets pickedLottoTickets = new LottoTickets(1, 1000, List.of(lotto));
+        LottoTickets pickedLottoTickets = new LottoTickets(new PurchasePrice(14000), List.of(lotto));
         LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(List.of(1, 2, 3, 4, 5, 6));
 
         // when

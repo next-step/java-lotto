@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.service.LottoExchangeService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ class LottoTicketsTest {
         Integer purchasePrice = 14000;
 
         // when
-        LottoTickets lottoTickets = new LottoExchangeService().purchaseLottoTickets(purchasePrice);
+        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
         LottoTickets autoPickLottoTickets = lottoTickets.pickNumbers();
 
         // then
@@ -32,7 +31,7 @@ class LottoTicketsTest {
         List<Integer> matchNumberList = List.of(1, 2, 3, 4, 5, 6);
 
         // when
-        LottoTickets lottoTickets = new LottoExchangeService().purchaseLottoTickets(purchasePrice);
+        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
         LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(matchNumberList);
 

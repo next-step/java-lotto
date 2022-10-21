@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.PurchasePrice;
 import lotto.exception.InvalidInputException;
 
 import java.util.Arrays;
@@ -22,10 +23,10 @@ public class InputView {
         throw new AssertionError();
     }
 
-    public static Integer inputPurchasePrice() {
+    public static PurchasePrice inputPurchasePrice() {
         System.out.println(PURCHASE_PRICE_MESSAGE);
         String input = SCANNER.next();
-        return convertToInt(validateInput(input));
+        return new PurchasePrice(convertToInt(validateInput(input)));
     }
 
     public static List<Integer> inputMatchNumberList() {

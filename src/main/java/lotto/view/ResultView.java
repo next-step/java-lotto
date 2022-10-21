@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoTickets;
+import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
 
 import java.util.Arrays;
@@ -15,8 +16,8 @@ public class ResultView {
     private static final String RANK_MESSAGE = "{countOfMatch}개 일치 ({winningMoney}원)- {amount}개";
     private static final String YIELD_MESSAGE = "총 수익률은 {yield}입니다.";
 
-    public static void purchaseAmount(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getAmount() + PURCHASE_AMOUNT_MESSAGE);
+    public static void printPurchaseAmount(PurchasePrice purchasePrice) {
+        System.out.println(purchasePrice.getAmount() + PURCHASE_AMOUNT_MESSAGE);
     }
 
     public static void pickedLottoTickets(LottoTickets lottoTickets) {
