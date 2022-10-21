@@ -19,16 +19,16 @@ public class LottoGameController {
 
         LottoTickets lottoTickets = new LottoTickets(purchasePrice);
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
-        printPickedLottoTickets(pickedLottoTickets);
+        printLottoNumbers(pickedLottoTickets);
 
         List<Integer> matchNumberList = inputMatchNumberList();
         LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(matchNumberList);
 
         List<Rank> rankList = rankedLottoTickets.getRank();
-        printRankedLottoTickets(rankList);
+        printRanks(rankList);
 
         Integer yieldResult = rankedLottoTickets.getYield();
-        printYieldLottoTickets(yieldResult);
+        printYield(yieldResult);
 
     }
 }
