@@ -25,7 +25,7 @@ public enum Rank {
             .filter(rank -> rank.matchedCount == matchedCount)
             .findFirst()
             .orElse(MISS);
-        if(SECOND == result && !withBonus){
+        if (SECOND == result && !withBonus) {
             return THIRD;
         }
         return result;
@@ -37,5 +37,25 @@ public enum Rank {
             result += rank.winnerPrize;
         }
         return BigDecimal.valueOf(result);
+    }
+
+    public boolean isFirst() {
+        return this == FIRST;
+    }
+
+    public boolean isSecond() {
+        return this == SECOND;
+    }
+
+    public boolean isThird() {
+        return this == THIRD;
+    }
+
+    public boolean isFourth() {
+        return this == FOURTH;
+    }
+
+    public boolean isFifth() {
+        return this == FIFTH;
     }
 }

@@ -2,50 +2,47 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoResult {
     private final static long LOTTO_PRICE = 1000;
     private final static double BENEFIT_POINT = 1.0;
 
-    private final List<Lotto> lottos;
-    private final Set<Number> winners;
-    private final Number bonus;
+    private final List<Rank> ranks;
 
-    public LottoResult(List<Lotto> lottos, Set<Number> winners, Number bonus) {
-        this.lottos = lottos;
-        this.winners = winners;
-        this.bonus = bonus;
+    public LottoResult(List<Rank> ranks) {
+        this.ranks = ranks;
     }
 
     public long numberOfFirstRank() {
-        return lottos.stream()
-            .filter(lotto -> Rank.FIRST == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+        return ranks.stream()
+            .filter(Rank::isFirst)
             .count();
     }
 
     public long numberOfSecondRankWithBonus() {
-        return lottos.stream()
-            .filter(lotto -> Rank.SECOND == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+        return ranks.stream()
+            .filter(Rank::isSecond)
             .count();
     }
 
     public long numberOfSecondRank() {
-        return lottos.stream()
-            .filter(lotto -> Rank.THIRD == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+        return ranks.stream()
+            .filter(Rank::isThird)
             .count();
     }
 
     public long numberOfThirdRank() {
-        return lottos.stream()
-            .filter(lotto -> Rank.FOURTH == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+        return ranks.stream()
+            .filter(Rank::isFourth)
             .count();
     }
 
     public long numberOfFourthRank() {
-        return lottos.stream()
-            .filter(lotto -> Rank.FIFTH == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+        return ranks.stream()
+            .filter(Rank::isFifth)
             .count();
     }
 
@@ -59,13 +56,11 @@ public class LottoResult {
     }
 
     private List<Rank> getRanks() {
-        return lottos.stream()
-            .map(lotto -> lotto.checkRank(new WinnerNumbers(winners, bonus)))
-            .collect(Collectors.toUnmodifiableList());
+        return Collections.unmodifiableList(ranks);
     }
 
     private BigDecimal calculatePrincipal() {
-        return BigDecimal.valueOf(lottos.size() * LOTTO_PRICE);
+        return BigDecimal.valueOf(ranks.size() * LOTTO_PRICE);
     }
 
     public boolean hasBenefit() {
@@ -77,11 +72,11 @@ public class LottoResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return Objects.equals(lottos, that.lottos) && Objects.equals(winners, that.winners);
+        return Objects.equals(ranks, that.ranks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos, winners);
+        return Objects.hash(ranks);
     }
 }

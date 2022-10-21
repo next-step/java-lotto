@@ -1,10 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.LottoShop;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.domain.Number;
-import lotto.domain.RandomNumberStrategy;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -24,6 +21,6 @@ public class LottoController {
         Set<Number> winnerNumbers = Input.inputWinnerNumbers();
         Output.printBonusNumbersRequest();
         Number bonusNumber = Input.inputBonusNumber();
-        Output.printResult(lottos.getResult(winnerNumbers, bonusNumber));
+        Output.printResult(lottos.getResult(new WinnerNumbers(winnerNumbers, bonusNumber)));
     }
 }
