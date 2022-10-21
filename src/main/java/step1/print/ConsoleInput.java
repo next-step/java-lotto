@@ -7,9 +7,9 @@ import java.io.InputStreamReader;
 public class ConsoleInput {
 
     public String inputValue() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        return br.readLine();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            return br.readLine();
+        }
     }
 
 }
