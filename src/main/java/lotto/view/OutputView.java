@@ -3,11 +3,11 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import lotto.domain.Lotto;
-import lotto.domain.Prize;
 import lotto.domain.LottoNumber;
+import lotto.domain.Prize;
+import lotto.domain.Rank;
 
 public class OutputView {
 
@@ -31,10 +31,10 @@ public class OutputView {
         return stringBuilder.toString();
     }
 
-    public void printStatisticLottoWithBonus(Map<Prize, Integer> rankMap) {
+    public void printStatisticLottoWithBonus(Rank rank) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printRankWithBonus(rankMap);
+        printRankWithBonus(rank);
     }
 
     public void printYield(double yield) {
@@ -43,7 +43,7 @@ public class OutputView {
                 "입니다.");
     }
 
-    private void printRankWithBonus(Map<Prize, Integer> rankMap) {
+    private void printRankWithBonus(Rank rankMap) {
         Arrays.stream(Prize.values())
               .filter(v -> v.getWinningCount() > 0)
               .sorted(Comparator.comparing(Prize::getPrizeMoney))
@@ -52,13 +52,13 @@ public class OutputView {
               });
     }
 
-    private String printRank(Map<Prize, Integer> rankMap, Prize prize) {
+    private String printRank(Rank rank, Prize prize) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(prize.getWinningCount());
         stringBuilder.append("개 일치");
         stringBuilder.append(isBonusRank(prize) + " (");
         stringBuilder.append(prize.getPrizeMoney() + "원) - ");
-        stringBuilder.append(rankMap.get(prize) + "개");
+        stringBuilder.append(rank.findRank(prize) + "개");
         return stringBuilder.toString();
     }
 

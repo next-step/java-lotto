@@ -1,10 +1,9 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 import lotto.domain.Lotto;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumber;
 import lotto.service.LottoFactory;
 import lotto.view.InputView;
@@ -30,7 +29,7 @@ public class LottoController {
         outputView.printPurchasedLotto(lotto);
 
         WinningNumber winningNumber = inputView.inputWinningNumberWithBonus();
-        Map<Prize, Integer> lottoRankMap = winningNumber.calcLottoRankWithBonus(lotto);
+        Rank lottoRankMap = winningNumber.calcLottoRankWithBonus(lotto);
         outputView.printStatisticLottoWithBonus(lottoRankMap);
 
         BigDecimal prizeMoney = calculator.calculatePrizeMoney(lottoRankMap);

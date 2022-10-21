@@ -1,9 +1,9 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 import lotto.domain.Prize;
+import lotto.domain.Rank;
 
 public class Calculator {
     private static final BigDecimal PRICE_PER_LOTTO = BigDecimal.valueOf(1000);
@@ -17,11 +17,11 @@ public class Calculator {
         return payAmount.divide(PRICE_PER_LOTTO).intValue();
     }
 
-    public BigDecimal calculatePrizeMoney(Map<Prize, Integer> rankMap) {
+    public BigDecimal calculatePrizeMoney(Rank rank) {
         BigDecimal prizeMoney = BigDecimal.ZERO;
 
         for (Prize value : Prize.values()) {
-            BigDecimal bigDecimal = BigDecimal.valueOf(rankMap.get(value));
+            BigDecimal bigDecimal = BigDecimal.valueOf(rank.findRank(value));
             prizeMoney = prizeMoney.add(bigDecimal.multiply(value.getPrizeMoney()));
         }
 
