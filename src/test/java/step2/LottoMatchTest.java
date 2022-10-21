@@ -15,9 +15,11 @@ public class LottoMatchTest {
 	@Test
 	@DisplayName("일치하는 로또 개수 구한다")
 	void winner() {
-		List<Integer> winNum = Arrays.asList(1,2,3,4,5,6);
+		List<Integer> winNum = Arrays.asList(1, 2, 3, 4, 5, 6);
 		LottoMatcher lotteryWin = new LottoMatcher(winNum);
-		Assertions.assertThat(lotteryWin.countMatch(new Lotto(new FixLottoFactory()))).isEqualTo(2);
+
+		Assertions.assertThat(lotteryWin.countMatch(new Lotto(Arrays.asList(1, 2, 22, 33, 41, 45))))
+			.isEqualTo(2);
 	}
 
 
