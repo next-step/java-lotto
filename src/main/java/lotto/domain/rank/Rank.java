@@ -57,6 +57,10 @@ public enum Rank {
         return rankList;
     }
 
+    public LottoMatchCount matchCount() {
+        return matchCount;
+    }
+
     public Money reward() {
         return reward;
     }
