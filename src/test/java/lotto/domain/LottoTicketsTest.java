@@ -38,4 +38,38 @@ class LottoTicketsTest {
         // then
         assertThat(rankedLottoTickets.getLottoList().get(0).getRank()).isNotNull();
     }
+
+    @Test
+    @DisplayName("랭킹 확인")
+    void getRank() {
+        // given
+        Integer purchasePrice = 14000;
+        List<Integer> matchNumberList = List.of(1, 2, 3, 4, 5, 6);
+
+        // when
+        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
+        LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
+        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(matchNumberList);
+        List<Rank> rankList = rankedLottoTickets.getRank();
+
+        // then
+        assertThat(rankList).hasSize(14);
+    }
+
+    @Test
+    @DisplayName("수익률 확인")
+    void getYield() {
+        // given
+        Integer purchasePrice = 1000;
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 14, 15, 16));
+        List<Integer> matchNumberList = List.of(1, 2, 3, 4, 5, 6);
+
+        // when
+        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), List.of(lotto));
+        LottoTickets rankedLottoTickets = lottoTickets.putRankings(matchNumberList);
+        Integer yield = rankedLottoTickets.getYield();
+
+        // then
+        assertThat(yield).isEqualTo(5);
+    }
 }

@@ -11,6 +11,11 @@ public class LottoTickets {
     private final PurchasePrice purchasePrice;
     private List<Lotto> lottoList;
 
+    public LottoTickets(PurchasePrice purchasePrice, List<Lotto> lottoList) {
+        this(purchasePrice);
+        this.lottoList = lottoList;
+    }
+
     public LottoTickets(PurchasePrice purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
