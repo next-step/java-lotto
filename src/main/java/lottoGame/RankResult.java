@@ -3,6 +3,7 @@ package lottoGame;
 import java.text.DecimalFormat;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Objects;
 
 public class RankResult {
     private final EnumMap<Rank, Integer> lotteryBoard = new EnumMap<>(Rank.class);

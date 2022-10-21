@@ -42,13 +42,12 @@ public class Lottery {
     }
 
     private Lotto createLotto(ShuffleStrategy shuffleStrategy) {
-        return new Lotto(sortAndLimitLottoNum(shuffleStrategy));
+        return new Lotto(sortLottoNum(shuffleStrategy));
     }
 
-    private List<LottoNumber> sortAndLimitLottoNum(ShuffleStrategy shuffleStrategy) {
+    private List<LottoNumber> sortLottoNum(ShuffleStrategy shuffleStrategy) {
         return shuffleLottoNum(shuffleStrategy)
                 .stream()
-                .limit(Lotto.LOTTO_NUMBER_SIZE)
                 .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
                 .collect(Collectors.toList());
     }
