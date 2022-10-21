@@ -24,6 +24,7 @@ public class LottoNumberPool {
         return LOTTO_NUMBERS_CACHE
                 .stream()
                 .limit(count)
+                .sorted()
                 .collect(Collectors.toList());
     }
 

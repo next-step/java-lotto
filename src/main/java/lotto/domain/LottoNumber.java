@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Created by seungwoo.song on 2022-10-21
  */
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MAX = 45;
     public static final int MIN = 1;
@@ -20,7 +20,7 @@ public class LottoNumber {
     }
 
     private int number;
-    
+
     private LottoNumber() {
     }
 
@@ -45,6 +45,7 @@ public class LottoNumber {
         return lottoNumber;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -56,5 +57,17 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return number + "";
+    }
+
+    @Override
+    public int compareTo(LottoNumber compare) {
+        Objects.requireNonNull(compare);
+
+        return this.number - compare.number;
     }
 }
