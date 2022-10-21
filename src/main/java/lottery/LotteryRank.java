@@ -1,6 +1,6 @@
 package lottery;
 
-import java.util.*;
+import java.util.Arrays;
 
 public enum LotteryRank {
 
@@ -28,14 +28,9 @@ public enum LotteryRank {
     }
 
     public static LotteryRank valueOf(int matchingCount, boolean isBonusMatched) {
-        if (SECOND.matchingCount == matchingCount && isBonusMatched) {
-            return SECOND;
-        }
-        if (SECOND.matchingCount == matchingCount) {
-            return THIRD;
-        }
         return Arrays.stream(values())
                 .filter(lotteryRank -> lotteryRank.matchingCount == matchingCount)
+                .filter(lotteryRank -> !lotteryRank.equals(SECOND) || isBonusMatched)
                 .findFirst()
                 .orElse(NONE);
     }
