@@ -7,19 +7,19 @@ import step2.model.Lotteries;
 public class OutputView {
 
 	private static final int DEFAULT_COUNT = 0;
+	private static final int MIN_WIN_COUNT = 3;
+	private static final int MAX_WIN_COUNT = 6;
 
 	public void resultView(HashMap<Integer, Integer> finalMatch) {
-
 		System.out.println("당첨 통계");
 		System.out.println("--------");
 
-		for (int key = 3; key < 7; key++) {
+		for (int key = MIN_WIN_COUNT; key < MAX_WIN_COUNT + 1; key++) {
 			showResult(key, isValid(finalMatch.get(key)));
 		}
 	}
 
 	private int isValid(Integer matchSum) {
-
 		if (matchSum == null) {
 			return DEFAULT_COUNT;
 		}
@@ -27,7 +27,6 @@ public class OutputView {
 	}
 
 	private void showResult(int key, int matchSum) {
-
 		if (key == 3) {
 			System.out.println("3개 일치" + "(5000원)- " + matchSum + "개");
 		}
@@ -48,7 +47,7 @@ public class OutputView {
 
 	public void showLotteries(int tickets, Lotteries lotteries) {
 		for (int i = 0; i < tickets; i++) {
-			System.out.println(Arrays.toString(lotteries.showLotteries(i).getLotto().toArray()));
+			System.out.println(lotteries.showLotteries(i).getLotto().toArray());
 		}
 	}
 
