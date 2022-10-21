@@ -17,13 +17,13 @@ public class Payment {
 		return cash / LOTTO_PRICE;
 	}
 
-	public String rateBenefit(int cash, HashMap<Integer, Integer> totalCountMap) {
+	public double rateBenefit(int cash, HashMap<Integer, Integer> totalCountMap) {
 
 		for (int i = MIN_MATCH; i < MAX_MATCH + 1; i++) {
 			calculate(i, totalCountMap);
 		}
 
-		return String.format("%.2f", benefit / (double) cash);
+		return benefit / (double) cash;
 
 	}
 
