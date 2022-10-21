@@ -42,9 +42,4 @@ public class Lotto {
     public List<LottoNumber> getLotto() {
         return this.lotto;
     }
-
-    @Override
-    public String toString() {
-        return String.valueOf(lotto);
-    }
 }
