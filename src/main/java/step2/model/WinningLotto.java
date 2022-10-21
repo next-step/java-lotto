@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class LottoMatcher {
+public class WinningLotto {
 
 	private List<Integer> winNumList;
 
-	public LottoMatcher(List<Integer> winNumList) {
+	public WinningLotto(List<Integer> winNumList) {
 		this.winNumList = winNumList;
 	}
 
