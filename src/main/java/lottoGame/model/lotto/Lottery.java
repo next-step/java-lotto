@@ -1,6 +1,6 @@
 package lottoGame.model.lotto;
 
-import lottoGame.Ranks;
+import lottoGame.Rank;
 import lottoGame.model.lotto.lottoNumber.DefaultLottoNumber;
 import lottoGame.model.lotto.lottoNumber.LottoNumber;
 import lottoGame.model.strategy.ShuffleStrategy;
@@ -31,7 +31,7 @@ public class Lottery {
     public List<Integer> findMatchNumber(WinningLotto winningNumber) {
         return lottery.stream()
                 .map(autoLotto -> autoLotto.countMatch(winningNumber))
-                .filter(matchNum -> matchNum >= Ranks.FOURTH.getMatchNum())
+                .filter(matchNum -> matchNum >= Rank.FOURTH.getMatchNum())
                 .collect(Collectors.toList());
     }
 

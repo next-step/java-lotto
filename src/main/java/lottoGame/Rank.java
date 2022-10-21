@@ -3,7 +3,7 @@ package lottoGame;
 import java.util.Collections;
 import java.util.List;
 
-public enum Ranks {
+public enum Rank {
     FOURTH(3, 5000),
 
     THIRD(4, 50_000),
@@ -15,7 +15,7 @@ public enum Ranks {
     private Integer matchNum;
     private Integer rank;
 
-    Ranks(Integer mathNum, Integer rank) {
+    Rank(Integer mathNum, Integer rank) {
         this.matchNum = mathNum;
         this.rank = rank;
     }

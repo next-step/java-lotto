@@ -5,16 +5,16 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class RankResult {
-    private final EnumMap<Ranks, Integer> lotteryBoard = new EnumMap<>(Ranks.class);
+    private final EnumMap<Rank, Integer> lotteryBoard = new EnumMap<>(Rank.class);
     private final DecimalFormat df = new DecimalFormat("0.00");
 
-    public EnumMap<Ranks, Integer> getLotteryBoard() {
+    public EnumMap<Rank, Integer> getLotteryBoard() {
         return lotteryBoard;
     }
 
     public void putResult(List<Integer> matchNumbers) {
-        for (Ranks ranks : Ranks.values()) {
-            lotteryBoard.put(ranks, ranks.findMatch(matchNumbers));
+        for (Rank rank : Rank.values()) {
+            lotteryBoard.put(rank, rank.findMatch(matchNumbers));
         }
     }
 
