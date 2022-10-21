@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,8 +31,8 @@ class LottoTest {
 
     //given
     Set<Integer> item = Sets.set(1, 2, 3, 4, 5, 6);
-    Set<Number> item1 = IntStream.rangeClosed(7, 12)
-        .mapToObj(Number::from).collect(
+    Set<LottoNumber> item1 = IntStream.rangeClosed(7, 12)
+        .mapToObj(LottoNumber::from).collect(
             Collectors.toSet());
     Lotto lotto = Lotto.from(item);
     int compareCount = 0;

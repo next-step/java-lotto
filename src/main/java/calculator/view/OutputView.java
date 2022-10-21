@@ -1,8 +1,8 @@
 package calculator.view;
 
-public class OutputView
-{
-    private OutputView() {
+public class OutputView {
+    private OutputView()
+    {
         throw new IllegalArgumentException("utility class");
     }
 

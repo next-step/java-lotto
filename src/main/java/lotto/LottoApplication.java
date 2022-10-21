@@ -4,9 +4,9 @@ import lotto.controller.LottoController;
 
 public class LottoApplication {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    LottoController lottoController = LottoController.getLottoController();
-    lottoController.run();
-  }
+        LottoController lottoController = LottoController.getLottoController();
+        lottoController.run();
+    }
 }
