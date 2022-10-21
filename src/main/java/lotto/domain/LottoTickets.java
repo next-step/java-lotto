@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.util.LottoNumber.getAutoNumberList;
+import static lotto.domain.LottoNumber.getAutoNumberList;
 
 public class LottoTickets {
 

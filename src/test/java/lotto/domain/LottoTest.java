@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.util.LottoNumber.getAutoNumberList;
+import static lotto.domain.LottoNumber.getAutoNumberList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {

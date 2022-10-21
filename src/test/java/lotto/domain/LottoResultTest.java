@@ -1,9 +1,6 @@
-package lotto.service;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoTickets;
-import lotto.domain.PurchasePrice;
-import lotto.domain.Rank;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoResultServiceTest {
+class LottoResultTest {
 
     @Test
     @DisplayName("결과 배열 확인")
@@ -23,7 +20,7 @@ class LottoResultServiceTest {
         LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        List<Rank> rankList = new LottoResultService().rankResult(rankedLottoTickets);
+        List<Rank> rankList = new LottoResult().rankResult(rankedLottoTickets);
 
         // then
         assertThat(rankList).hasSize(14);
@@ -38,7 +35,7 @@ class LottoResultServiceTest {
         LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        Integer integer = new LottoResultService().yieldResult(rankedLottoTickets);
+        Integer integer = new LottoResult().yieldResult(rankedLottoTickets);
 
         // then
         assertThat(integer).isEqualTo(2000000);

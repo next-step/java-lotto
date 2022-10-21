@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoTickets;
 import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
-import lotto.service.LottoResultService;
+import lotto.domain.LottoResult;
 
 import java.util.List;
 
@@ -25,11 +25,11 @@ public class LottoGameController {
         List<Integer> matchNumberList = inputMatchNumberList();
         LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(matchNumberList);
 
-        LottoResultService lottoResultService = new LottoResultService();
-        List<Rank> rankList = lottoResultService.rankResult(rankedLottoTickets);
+        LottoResult lottoResult = new LottoResult();
+        List<Rank> rankList = lottoResult.rankResult(rankedLottoTickets);
         printRankedLottoTickets(rankList);
 
-        Integer yieldResult = lottoResultService.yieldResult(rankedLottoTickets);
+        Integer yieldResult = lottoResult.yieldResult(rankedLottoTickets);
         printYieldLottoTickets(yieldResult);
 
     }
