@@ -4,27 +4,25 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoGenerator.toLotto;
-import static lotto.domain.LottoGenerator.validateSize;
+import static lotto.domain.LottoGenerator.generate;
 
 public class Lotto {
+    static final int VALID_SIZE = 6;
+    private static final String INVALID_SIZE_MESSAGE = "로또 번호 1~45 사이 자연수 6개 입력해주세요.";
+
     private final Set<LottoNumber> numbers;
 
     public Lotto() {
-        this(createLotto());
+        this(generate());
     }
 
     public Lotto(String numbers) {
-        this(toLotto(numbers));
+        this(generate(numbers));
     }
 
     public Lotto(Set<LottoNumber> numbers) {
         validateSize(numbers);
         this.numbers = numbers;
-    }
-
-    private static Set<LottoNumber> createLotto() {
-        return LottoGenerator.generate();
     }
 
     public Set<Integer> generateReport() {
@@ -38,6 +36,18 @@ public class Lotto {
         return (int) lotto.numbers
                 .stream()
                 .filter(numbers::contains)
+                .count();
+    }
+
+    private void validateSize(Set<LottoNumber> lotto) {
+        if (isInvalidSize(lotto)) {
+            throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
+        }
+    }
+
+    private boolean isInvalidSize(Set<LottoNumber> numbers) {
+        return VALID_SIZE != numbers.stream()
+                .distinct()
                 .count();
     }
 }

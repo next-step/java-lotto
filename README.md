@@ -84,8 +84,9 @@
   - [x] 접근제어자 알맞은지 확인
   - [X] LottoNumber 의 null 에 대해.
   - [x] LottoNumber 생성 test
-- [ ] Lotto 
+- [x] Lotto 
   - size 검증 메소드 이동.
+  - generate 함수 오버로딩.
 - [x] Lotto List -> Set
 - [x] LottoPrize -> Rank
 - [ ] 당첨된 결과 winning 에서 처리 후 ResultView 로 넘기기
