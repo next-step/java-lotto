@@ -22,9 +22,8 @@ public class AmountTest {
 
     @Test
     void minus() {
-        Amount actual = new Amount(3);
-        actual.minus(new Amount(2));
+        Amount amount = new Amount(3);
 
-        assertThat(actual).isEqualTo(new Amount(1));
+        assertThat(amount.minus(2)).isEqualTo(new Amount(1));
     }
 }

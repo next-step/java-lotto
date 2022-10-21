@@ -12,10 +12,10 @@ public class RankMap {
 
     public RankMap(Rank[] values) {
         for (Rank rank : Rank.values()) {
-            rankMap.put(rank, new Amount(0));
+            rankMap.put(rank, new Amount());
         }
         for (Rank rank : values) {
-            rankMap.get(rank).add(new Amount(1));
+            rankMap.put(rank, rankMap.get(rank).plusOne());
         }
     }
 

@@ -4,9 +4,13 @@ import java.util.Objects;
 
 public class Amount {
 
-    private int amount;
+    private final int amount;
     private static final int AMOUNT_MINIMUM = 0;
     private static final String AMOUNT_BOUND_EXCEPTION = "Amount에는 " + AMOUNT_MINIMUM + "이상의 값만 들어올 수 있습니다.";
+
+    public Amount() {
+        this(AMOUNT_MINIMUM);
+    }
 
     public Amount(final int amount) {
         if (amount < AMOUNT_MINIMUM) {
@@ -19,11 +23,12 @@ public class Amount {
         return amount;
     }
 
-    public void minus(final Amount amount) {
-        this.amount -= amount.amount;
+    public Amount minus(final int amount) {
+        return new Amount(this.amount - amount);
     }
-    public void add(final Amount amount) {
-        this.amount += amount.amount;
+
+    public Amount plusOne() {
+        return new Amount(this.amount + 1);
     }
 
     @Override

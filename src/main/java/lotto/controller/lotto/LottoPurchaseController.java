@@ -28,9 +28,9 @@ public class LottoPurchaseController {
 
     private LottoList purchaseAutoLotto(final Amount amount, final LottoList lottoList) {
         Amount manualLottoAmount = new Amount(lottoList.size());
-        amount.minus(manualLottoAmount);
-        LottoOutput.purchaseCount(manualLottoAmount.amount(), amount.amount());
-        return lottoList.addAll(lottoPurchaseService.purchaseLotto(amount));
+        Amount autoLottoAmount = amount.minus(manualLottoAmount.amount());
+        LottoOutput.purchaseCount(manualLottoAmount.amount(), autoLottoAmount.amount());
+        return lottoList.addAll(lottoPurchaseService.purchaseLotto(autoLottoAmount));
     }
 
     private LottoList purchaseManualLotto() {
