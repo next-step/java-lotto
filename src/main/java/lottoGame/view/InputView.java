@@ -19,7 +19,7 @@ public class InputView {
 
     public static InputParameter print() {
         System.out.println("구입금액을 입력해 주세요.");
-        int amount = scanner.nextInt();
+        double amount = scanner.nextDouble();
         validateInput(amount);
         return new InputParameter(amount);
     }
@@ -31,7 +31,7 @@ public class InputView {
         return new WinningLotto(changeInteger(winningString));
     }
 
-    private static void validateInput(int amount) {
+    private static void validateInput(double amount) {
         if (amount < 1000) {
             throw new InputException("최소 금액 이상을 입력해주세요");
         }

@@ -1,9 +1,12 @@
 package lottoGame;
 
+import lottoGame.model.TicketPrice;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Objects;
 
 public class RankResult {
     private final EnumMap<Rank, Integer> lotteryBoard = new EnumMap<>(Rank.class);
@@ -20,8 +23,9 @@ public class RankResult {
         return lotteryBoard;
     }
 
-    public String getYield(Integer amount) {
-        return df.format((double) getTotalSum() / amount);
+    public BigDecimal getYield(Double amount) {
+
+        return BigDecimal.valueOf(getTotalSum() / amount).setScale(2, RoundingMode.FLOOR);
     }
 
     private Integer getTotalSum() {

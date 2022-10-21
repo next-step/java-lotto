@@ -1,13 +1,13 @@
 package lottoGame.model;
 
 public class InputParameter {
-    private final int amount;
+    private final double amount;
 
-    public InputParameter(int amount) {
+    public InputParameter(double amount) {
         this.amount = amount;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 }

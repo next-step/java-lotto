@@ -4,6 +4,7 @@ import lottoGame.model.lotto.lottoNumber.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
@@ -38,4 +39,16 @@ public class Lotto {
         return "" + lottoNumber + "";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumber, lotto.lottoNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
 }

@@ -1,13 +1,11 @@
 package lottoGame;
 
 import lottoGame.model.InputParameter;
+import lottoGame.model.TicketPrice;
 import lottoGame.model.lotto.Lottery;
 import lottoGame.model.strategy.ShuffleStrategy;
 
-import java.util.List;
-
-public class LottoGame {
-    private static final int TICKET_PRICE = 1000;
+public class LottoGame { ;
     private final InputParameter inputParameter;;
     private final Lottery lottery = new Lottery();
 
@@ -17,7 +15,7 @@ public class LottoGame {
     }
 
     public Lottery start(ShuffleStrategy shuffleStrategy) {
-        lottery.create(inputParameter.getAmount()/ TICKET_PRICE, shuffleStrategy);
+        lottery.create(inputParameter.getAmount()/ TicketPrice.TICKET_PRICE, shuffleStrategy);
         return lottery;
     }
 

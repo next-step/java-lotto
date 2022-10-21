@@ -12,17 +12,16 @@ import java.util.stream.IntStream;
 
 public class Lottery {
 
-    private final RankResult rankResult = new RankResult();
     private final List<Lotto> lottery = new ArrayList<>();
 
 
-    public List<Lotto> create(int lotteryNum, ShuffleStrategy shuffleStrategy) {
+    public List<Lotto> create(double lotteryNum, ShuffleStrategy shuffleStrategy) {
         for (int i = 0; i < lotteryNum; i++) {
             lottery.add(createLotto(shuffleStrategy));
         }
         return lottery;
     }
-    public RankResult createRankResult(WinningLotto winningNumber) {
+    public RankResult createRankResult(WinningLotto winningNumber,RankResult rankResult) {
          rankResult.putResult(findMatchNumber(winningNumber));
          return rankResult;
     }
