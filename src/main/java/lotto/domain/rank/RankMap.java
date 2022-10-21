@@ -1,7 +1,6 @@
 package lotto.domain.rank;
 
 import lotto.domain.Amount;
-import lotto.domain.money.ImmutableMoney;
 import lotto.domain.money.Money;
 
 import java.util.*;
@@ -19,12 +18,11 @@ public class RankMap {
         }
     }
 
-    public ImmutableMoney reward() {
-        Money totalReward = new Money(0);
+    public Money reward() {
+        Money totalReward = new Money();
         for (Rank rank : rankMap.keySet()) {
-            Money reward = rank.reward().money();
-            reward.multiply(rankMap.get(rank).amount());
-            totalReward.add(reward);
+            Money reward = rank.reward().multiply(rankMap.get(rank).amount());
+            totalReward = totalReward.add(reward.money());
         }
         return totalReward;
     }

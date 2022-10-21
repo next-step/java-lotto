@@ -1,7 +1,7 @@
 package lotto.domain.rank;
 
 import lotto.domain.LottoMatchCount;
-import lotto.domain.money.ImmutableMoney;
+import lotto.domain.money.Money;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,14 +18,14 @@ public enum Rank {
 
     private final int rank;
     private final LottoMatchCount matchCount;
-    private final ImmutableMoney reward;
+    private final Money reward;
     public static final int REWARD_START_RANK_INDEX = 4;
     public static final int REWARD_END_RANK_INDEX = 0;
 
     Rank(final int rank, final int matchCount, int reward) {
         this.rank = rank;
         this.matchCount = new LottoMatchCount(matchCount);
-        this.reward = new ImmutableMoney(reward);
+        this.reward = new Money(reward);
     }
 
     public static Rank rankValue(final LottoMatchCount matchCount, final boolean containBonusNumber) {
@@ -57,7 +57,7 @@ public enum Rank {
         return rankList;
     }
 
-    public ImmutableMoney reward() {
+    public Money reward() {
         return reward;
     }
 

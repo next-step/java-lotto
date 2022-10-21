@@ -1,8 +1,7 @@
 package lotto.domain.rank;
 
 import lotto.domain.LottoMatchCount;
-import lotto.domain.money.ImmutableMoney;
-import lotto.domain.rank.Rank;
+import lotto.domain.money.Money;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,18 +38,18 @@ public class RankTest {
 
     private static Stream<Arguments> provideLottoReward() {
         return Stream.of(
-                Arguments.of(new ImmutableMoney(2_000_000_000), Rank.FIRST),
-                Arguments.of(new ImmutableMoney(30_000_000), Rank.SECOND),
-                Arguments.of(new ImmutableMoney(1_500_000), Rank.THIRD),
-                Arguments.of(new ImmutableMoney(50_000), Rank.FOURTH),
-                Arguments.of(new ImmutableMoney(5_000), Rank.FIFTH),
-                Arguments.of(new ImmutableMoney(0), Rank.MISS)
+                Arguments.of(new Money(2_000_000_000), Rank.FIRST),
+                Arguments.of(new Money(30_000_000), Rank.SECOND),
+                Arguments.of(new Money(1_500_000), Rank.THIRD),
+                Arguments.of(new Money(50_000), Rank.FOURTH),
+                Arguments.of(new Money(5_000), Rank.FIFTH),
+                Arguments.of(new Money(0), Rank.MISS)
         );
     }
 
     @ParameterizedTest(name = "등수에 따른 상금을 반환한다.")
     @MethodSource(value = "provideLottoReward")
-    void reward(ImmutableMoney reward, Rank rank) {
+    void reward(Money reward, Rank rank) {
         assertThat(rank.reward()).isEqualTo(reward);
     }
 

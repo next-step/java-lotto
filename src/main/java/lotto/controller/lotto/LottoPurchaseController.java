@@ -2,8 +2,8 @@ package lotto.controller.lotto;
 
 import lotto.domain.Amount;
 import lotto.domain.lotto.LottoList;
-import lotto.domain.money.ImmutableMoney;
 import lotto.domain.lottonumber.LottoNumberSet;
+import lotto.domain.money.Money;
 import lotto.service.LottoPurchaseService;
 import lotto.view.lotto.LottoInput;
 import lotto.view.lotto.LottoOutput;
@@ -19,8 +19,8 @@ public class LottoPurchaseController {
         this.lottoPurchaseService = lottoPurchaseService;
     }
 
-    public LottoList purchaseLotto(final ImmutableMoney immutableMoney) {
-        Amount totalAmount = lottoPurchaseService.purchaseNumber(immutableMoney);
+    public LottoList purchaseLotto(final Money money) {
+        Amount totalAmount = lottoPurchaseService.purchaseNumber(money);
         LottoList lottoList = purchaseAutoLotto(totalAmount, purchaseManualLotto());
         LottoOutput.lotto(lottoList.toStringList());
         return lottoList;

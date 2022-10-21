@@ -12,8 +12,7 @@ public class MoneyTest {
         Money money = new Money(1000);
 
         Assertions.assertAll(
-                () -> assertThat(money).isEqualTo(new Money(1000)),
-                () -> assertThat(money).isEqualTo(new ImmutableMoney(1000))
+                () -> assertThat(money).isEqualTo(new Money(1000))
         );
     }
 
@@ -26,22 +25,20 @@ public class MoneyTest {
     void divide_money() {
         Money money = new Money(10000);
 
-        assertThat(money.divideValue(new Money(1000).value())).isEqualTo(10);
+        assertThat(money.divideValue(new Money(1000).money())).isEqualTo(10);
     }
 
     @Test
     void add_money() {
-        Money actual = new Money(10000);
-        actual.add(new Money(3000));
+        Money money = new Money(10000);
 
-        assertThat(actual).isEqualTo(new Money(13000));
+        assertThat(money.add(3000)).isEqualTo(new Money(13000));
     }
 
     @Test
     void multiply_money() {
-        Money actual = new Money(1000);
-        actual.multiply(3);
+        Money money = new Money(1000);
 
-        assertThat(actual).isEqualTo(new Money(3000));
+        assertThat(money.multiply(3)).isEqualTo(new Money(3000));
     }
 }

@@ -2,9 +2,9 @@ package lotto.service;
 
 import lotto.domain.Amount;
 import lotto.domain.lotto.LottoList;
-import lotto.domain.money.ImmutableMoney;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumberSet;
+import lotto.domain.money.Money;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,8 +12,8 @@ import java.util.stream.IntStream;
 
 public class LottoPurchaseService {
 
-    public Amount purchaseNumber(final ImmutableMoney immutableMoney) {
-        return new Amount(immutableMoney.money().divideValue(Lotto.LOTTO_PRICE.value()).intValue());
+    public Amount purchaseNumber(final Money money) {
+        return new Amount(money.divideValue(Lotto.LOTTO_PRICE.money()).intValue());
     }
 
     public LottoList purchaseLotto(final Amount amount) {

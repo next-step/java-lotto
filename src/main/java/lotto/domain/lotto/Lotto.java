@@ -1,12 +1,12 @@
 package lotto.domain.lotto;
 
-import lotto.domain.money.ImmutableMoney;
 import lotto.domain.lottonumber.LottoNumberSet;
+import lotto.domain.money.Money;
 
 public class Lotto {
 
     protected final LottoNumberSet lottoNumbers;
-    public static final ImmutableMoney LOTTO_PRICE = new ImmutableMoney(1000);
+    public static final Money LOTTO_PRICE = new Money(1000);
 
     public Lotto() {
         this(LottoNumberSet.createLottoNumberSet());
