@@ -3,7 +3,10 @@ package lotto;
 import java.util.List;
 import lotto.domains.Lotto;
 import lotto.domains.LottoGenerator;
+import lotto.domains.LottoNumber;
+import lotto.domains.LottoPurchasedAmount;
 import lotto.domains.LottoStatistics;
+import lotto.domains.LottoWinner;
 import lotto.views.InputView;
 import lotto.views.ResultView;
 
@@ -13,17 +16,15 @@ public class LottoMain {
             LottoGenerator lottoGenerator = new LottoGenerator();
             InputView inputView = new InputView();
 
-            int money = inputView.inputPurchaseMoney();
-            List<Lotto> lottoList = lottoGenerator.purchaseByAuto(money);
-            lottoList.forEach(System.out::println);
+            List<Lotto> lottoList = lottoGenerator.purchaseByAuto(new LottoPurchasedAmount(inputView.inputPurchaseMoney()));
+            inputView.printPurchasedLottoList(lottoList);
 
-            List<Integer> lastWinnerNumbers = inputView.inputLastWinner();
-            Lotto lastWinner = new Lotto(lastWinnerNumbers);
+            Lotto lastWinnerLotto = new Lotto(inputView.inputLastWinner());
+            LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
+            LottoWinner lastWinner = new LottoWinner(lastWinnerLotto, bonusNumber);
 
             LottoStatistics statistics = new LottoStatistics(lottoList, lastWinner);
-
-            ResultView resultView = new ResultView(statistics);
-            resultView.printStatistics();
+            new ResultView(statistics).printStatistics();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,7 +1,7 @@
 package lotto.domains;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -30,21 +30,22 @@ public class Lotto {
     }
 
     private boolean containsDuplicateNumber(List<Integer> numbers) {
-        return numbers.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .values()
-                .stream()
-                .filter(v -> v > 1)
-                .findAny()
-                .isPresent();
+        return new HashSet<>(numbers).size() != LOTTO_NUMBERS_SIZE;
     }
 
-    public Prize getPrize(Lotto winner) {
+    public Prize getPrize(LottoWinner winner) {
         long count = numbers.stream()
-                .filter(num -> winner.numbers.contains(num))
+                .filter(num -> winner.contains(num))
                 .count();
 
-        return Prize.find(count);
+        boolean bonus = numbers.stream()
+                .anyMatch(num -> winner.isBonus(num));
+
+        return Prize.find(count, bonus);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override

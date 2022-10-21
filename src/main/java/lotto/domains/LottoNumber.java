@@ -1,6 +1,7 @@
 package lotto.domains;
 
 import java.util.Objects;
+import lotto.exceptions.LottoNumberFormatException;
 
 public class LottoNumber {
     protected static final int START_NUMBER = 1;
@@ -8,12 +9,25 @@ public class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(String string) {
+        try {
+            int number = Integer.parseInt(string);
+            validateNumber(number);
+            this.number = number;
+        } catch (NumberFormatException e) {
+            throw new LottoNumberFormatException(string);
+        }
+    }
+
     public LottoNumber(int number) {
+        validateNumber(number);
+        this.number = number;
+    }
+
+    private void validateNumber(int number) {
         if (number < START_NUMBER || END_NUMBER < number) {
             throw new IllegalArgumentException("로또 숫자(1 ~ 45)가 아닙니다. 입력값: " + number);
         }
-
-        this.number = number;
     }
 
     @Override

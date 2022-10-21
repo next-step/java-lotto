@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class LottoStatisticsTest {
     @ParameterizedTest
     @MethodSource("testGetYieldSource")
-    void testGetYield(List<Lotto> lottoList, Lotto lastWinner, double expected) {
+    void testGetYield(List<Lotto> lottoList, LottoWinner lastWinner, double expected) {
         LottoStatistics statistics = new LottoStatistics(lottoList, lastWinner);
 
         assertThat(statistics.getYield()).isEqualTo(expected);
@@ -20,7 +20,8 @@ public class LottoStatisticsTest {
 
     @ParameterizedTest
     @MethodSource("testGetWinningCountSource")
-    void testGetWinningCount(List<Lotto> lottoList, Lotto lastWinner, Prize prize, long expectedWinningCount) {
+    void testGetWinningCount(List<Lotto> lottoList, LottoWinner lastWinner, Prize prize,
+            long expectedWinningCount) {
         LottoStatistics statistics = new LottoStatistics(lottoList, lastWinner);
 
         assertThat(statistics.getWinningCount(prize)).isEqualTo(expectedWinningCount);
@@ -30,15 +31,21 @@ public class LottoStatisticsTest {
         return Stream.of(
                 arguments(
                         List.of(
-                                new Lotto(1, 2, 3, 4, 5, 6),
-                                new Lotto(1, 2, 3, 10 ,11, 12)
+                                new Lotto(1, 2, 3, 4, 5, 7)
                         ),
-                        new Lotto(1, 2, 3, 4, 5, 6),
-                        (Prize.FIRST.getReward() + Prize.FOURTH.getReward()) / ((double) LottoGenerator.LOTTO_PRICE * 2)
-                ),
+                        new LottoWinner(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7)),
+                        Prize.SECOND.getReward() / ((double) LottoGenerator.LOTTO_PRICE
+                        )),
+                arguments(
+                        List.of(
+                                new Lotto(1, 2, 3, 4, 5, 8)
+                        ),
+                        new LottoWinner(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7)),
+                        Prize.THIRD.getReward() / ((double) LottoGenerator.LOTTO_PRICE
+                        )),
                 arguments(
                         List.of(),
-                        new Lotto(1, 2, 3, 4, 5, 6),
+                        new LottoWinner(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7)),
                         0
                 )
         );
@@ -49,15 +56,15 @@ public class LottoStatisticsTest {
                 arguments(
                         List.of(
                                 new Lotto(1, 2, 3, 4, 5, 6),
-                                new Lotto(1, 2, 3, 10 ,11, 12)
+                                new Lotto(1, 2, 3, 10, 11, 12)
                         ),
-                        new Lotto(1, 2, 3, 4, 5, 6),
+                        new LottoWinner(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7)),
                         Prize.FIRST,
                         1
                 ),
                 arguments(
                         List.of(),
-                        new Lotto(1, 2, 3, 4, 5, 6),
+                        new LottoWinner(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7)),
                         Prize.FIRST,
                         0
                 )

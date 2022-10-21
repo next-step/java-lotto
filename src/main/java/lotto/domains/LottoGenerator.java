@@ -8,14 +8,10 @@ import java.util.stream.IntStream;
 public class LottoGenerator {
     public static final int LOTTO_PRICE = 1000;
 
-    public List<Lotto> purchaseByAuto(int money) {
-        if (money < 0) {
-            throw new IllegalArgumentException("구입할 돈은 음수가 될 수 없습니다.");
-        }
-
+    public List<Lotto> purchaseByAuto(LottoPurchasedAmount amount) {
         List<Integer> numbers = generateAllLottoNumbers();
 
-        return IntStream.range(0, money / LOTTO_PRICE)
+        return IntStream.range(0, amount.getAmount() / LOTTO_PRICE)
                 .boxed()
                 .map(i -> getLotto(numbers))
                 .collect(Collectors.toList());
