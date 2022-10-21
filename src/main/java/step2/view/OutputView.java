@@ -15,7 +15,7 @@ public class OutputView {
 		System.out.println("당첨 통계");
 		System.out.println("--------");
 
-		for (int key = MIN_WIN_COUNT; key < MAX_WIN_COUNT + 1; key++) {
+		for (int key = MIN_WIN_COUNT; key <= MAX_WIN_COUNT; key++) {
 			showResult(key, isValid(finalMatch.get(key)));
 		}
 	}
@@ -37,7 +37,7 @@ public class OutputView {
 		if (key == MIN_WIN_COUNT + 2) {
 			System.out.println("5개 일치" + "(1500000원)- " + matchSum + "개");
 		}
-		if (key == MIN_WIN_COUNT) {
+		if (key == MAX_WIN_COUNT) {
 			System.out.println("6개 일치" + "(2000000000원)- " + matchSum + "개");
 		}
 	}
@@ -48,7 +48,7 @@ public class OutputView {
 
 	public void showLotteries(int tickets, Lotteries lotteries) {
 		for (int i = 0; i < tickets; i++) {
-			System.out.println(lotteries.showLotteries(i).getLotto().toArray());
+			System.out.println(Arrays.toString(lotteries.showLotteries(i).getLotto().toArray()));
 		}
 	}
 

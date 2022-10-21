@@ -14,5 +14,4 @@ public class LottoTest {
 	void 로또_한세트_테스트(){
 		assertThat(new Lotto(new RandomLottoFactory())).hasSameClassAs(new Lotto(Arrays.asList(1,2,3,4,5,6)));
 	}
-
 }

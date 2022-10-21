@@ -23,17 +23,14 @@ public class Payment {
 	}
 
 	public double rateBenefit(int cash, HashMap<Integer, Integer> totalCountMap) {
-
 		for (int i = MIN_MATCH; i < MAX_MATCH + 1; i++) {
 			calculate(i, totalCountMap);
 		}
-
 		return benefit / (double) cash;
 
 	}
 
 	private void calculate(int matchNum, HashMap<Integer, Integer> totalCountMap) {
-
 		if (matchNum == MIN_MATCH) {
 			benefit += (5000 * totalCountMap.get(3));
 		}
@@ -46,6 +43,5 @@ public class Payment {
 		if (matchNum == MAX_MATCH) {
 			benefit += (2000000000 * totalCountMap.get(6));
 		}
-
 	}
 }

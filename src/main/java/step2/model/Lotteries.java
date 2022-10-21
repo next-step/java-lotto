@@ -9,9 +9,7 @@ public class Lotteries {
 
 	private static final int MATCH = 1;
 	private List<Lotto> lotteries;
-
 	private static HashMap<Integer, Integer> matchTotalMap = new HashMap<>();
-
 
 	private Lotteries(List<Lotto> lotteries, HashMap<Integer, Integer> matchTotalMap) {
 		this.lotteries = lotteries;
@@ -19,12 +17,10 @@ public class Lotteries {
 	}
 
 	public static Lotteries of(int totalTicket, LottoFactory lottoFactory) {
-
 		List<Lotto> lotteries = new ArrayList<>();
 
 		for (int i = 0; i < totalTicket; i++) {
 			lotteries.add(new Lotto(lottoFactory));
-
 		}
 
 		for (int i = 0; i < 7; i++) {
