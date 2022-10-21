@@ -24,15 +24,9 @@ public class WinningLotto {
             throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
         }
     }
-
-    public int matches(Lotto userLotto) {
-        return (int) userLotto.getLotto().stream()
-            .filter(winningNumbers.getLotto()::contains)
-            .count();
-    }
-
-    public boolean matchBonus(Lotto userLotto) {
-        return userLotto.getLotto().stream()
-            .anyMatch(userNumber -> userNumber.equals(bonusNumber));
+    public Rank matches(Lotto userLotto) {
+        int matchLottoCount = userLotto.match(winningNumbers);
+        boolean isMatchedBonus = userLotto.matchBonus(bonusNumber);
+        return Rank.calculate(matchLottoCount, isMatchedBonus);
     }
 }

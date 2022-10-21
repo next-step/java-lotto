@@ -29,4 +29,18 @@ public class LottoTest {
         assertThatThrownBy(() -> Lotto.of(List.of(1,2,3,4,5,5)))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또 번호 중 보너스 번호가 있으면 true 를 반환한다.")
+    void bonus() {
+        boolean isMatched = lotto.matchBonus(LottoNumber.from(6));
+        assertThat(isMatched).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또 번호 중 보너스 번호가 있으면 false 를 반환한다.")
+    void doesNotMatchBonus() {
+        boolean isMatched = lotto.matchBonus(LottoNumber.from(7));
+        assertThat(isMatched).isFalse();
+    }
 }

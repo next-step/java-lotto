@@ -42,4 +42,19 @@ public class Lotto {
     public List<LottoNumber> getLotto() {
         return this.lotto;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
+    public int match(Lotto winningLotto) {
+        return (int) lotto.stream()
+            .filter(winningLotto::contains)
+            .count();
+    }
+
+    public boolean matchBonus(LottoNumber bonus) {
+        return lotto.stream()
+            .anyMatch(userLotto -> userLotto.equals(bonus));
+    }
 }
