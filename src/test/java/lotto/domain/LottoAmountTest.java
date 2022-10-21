@@ -29,6 +29,13 @@ class LottoAmountTest {
     @DisplayName("로또 가격을 입력 받고 구입 받을 수 있는 로또의 개수를 알 수 있다.")
     void calcLottoAmount_isEqualToLottoCount() {
         assertThat(new LottoAmount("14000").calcLottoCount()).isEqualTo(14);
-        assertThat(new LottoAmount(14000).calcLottoCount()).isEqualTo(14);
     }
+
+    @Test
+    @DisplayName("로또 수익률 구할 수 있다.")
+    void calcLottoWinningRateTest() {
+        int sum = 5000;
+        assertThat(new LottoAmount("6000").calcWinningRate(sum)).isEqualTo(0.83);
+    }
+
 }

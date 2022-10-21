@@ -24,7 +24,7 @@ public class LottoAmount {
     }
 
     public double calcWinningRate(final double sum) {
-        return sum / amount;
+        return Math.round(sum / amount * 100) / 100.0;
     }
 
     private static int validateAmount(int amount) {
