@@ -66,11 +66,13 @@ public class RankTest {
     @Test
     void rank_reward_descending_list() {
         List<Rank> ranks = Rank.rewardDescendingRankList();
-        List<Rank> rankList = Arrays.stream(
-                        Arrays.copyOfRange(Rank.values(), Rank.REWARD_END_RANK_INDEX, Rank.REWARD_START_RANK_INDEX)
-                )
-                .collect(Collectors.toList());
-        Collections.reverse(rankList);
+        List<Rank> rankList = List.of(
+                Rank.FIFTH,
+                Rank.FOURTH,
+                Rank.THIRD,
+                Rank.SECOND,
+                Rank.FIRST
+        );
 
         assertThat(ranks).containsExactly(rankList.toArray(Rank[]::new));
     }

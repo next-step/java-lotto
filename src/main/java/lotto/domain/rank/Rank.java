@@ -52,7 +52,7 @@ public enum Rank {
     }
 
     public static List<Rank> rewardDescendingRankList() {
-        List<Rank> rankList = Arrays.asList(Arrays.copyOfRange(Rank.values(), Rank.REWARD_END_RANK_INDEX, Rank.REWARD_START_RANK_INDEX));
+        List<Rank> rankList = Arrays.asList(Arrays.copyOfRange(Rank.values(), Rank.REWARD_END_RANK_INDEX, Rank.REWARD_START_RANK_INDEX + 1));
         Collections.reverse(rankList);
         return rankList;
     }
