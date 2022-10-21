@@ -22,17 +22,18 @@ public class Lotto {
                 .count());
     }
 
-    public boolean isBonus(int bonus){
-        return lottoNumber
-                .stream()
-                .anyMatch(lottoNo ->lottoNo.isMatchOrNot(bonus));
+    public boolean isBonus(WinningLotto winningNumber) {
+        if (countMatch(winningNumber) == Rank.SECOND.getMatchNum()) {
+            return existedMatchNumber(winningNumber.getBonus());
+        }
+        return false;
     }
 
     public List<LottoNumber> getLotto() {
         return lottoNumber;
     }
 
-    private boolean existedMatchNumber(LottoNumber winningNum) {
+    public boolean existedMatchNumber(LottoNumber winningNum) {
         return lottoNumber.stream()
                 .anyMatch(lottoNo -> lottoNo.isMatchOrNot(winningNum.getLottoNumber()));
     }
@@ -58,4 +59,6 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
+
+
 }

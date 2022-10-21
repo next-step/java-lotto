@@ -8,12 +8,12 @@ import lottoGame.view.ResultView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        InputParameter inputParmeter = InputView.print();
-        LottoGame lottogame = new LottoGame(inputParmeter);
+        InputParameter inputParameter = InputView.print();
+        LottoGame lottogame = new LottoGame(inputParameter);
         Lottery lottery = lottogame.start(new AutoShuffleStrategy());
         ResultView resultView = new ResultView(lottery);
         resultView.printLottery();
         RankResult rankResult = lottery.createRankResult(InputView.inputWinningNumer(), new RankResult());
-        resultView.printStatistics(rankResult,inputParmeter);
+        resultView.printStatistics(rankResult,inputParameter);
     }
 }

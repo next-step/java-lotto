@@ -31,7 +31,7 @@ public class InputView {
         String winningString = scanner.nextLine();
         System.out.println(inputBonus);
         int bonus = scanner.nextInt();
-        return new WinningLotto(changeInteger(winningString), bonus);
+        return new WinningLotto(changeInteger(winningString), new DefaultLottoNumber(bonus));
     }
 
     private static void validateInput(double amount) {

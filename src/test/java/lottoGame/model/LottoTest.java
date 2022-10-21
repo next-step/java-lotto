@@ -30,7 +30,7 @@ class LottoTest {
     @MethodSource("provideIntInput")
     void countMatch(List<LottoNumber> winnerNum) {
         Lotto lotto = new Lotto(winnerNum);
-        WinningLotto winningLotto = new WinningLotto(winnerNum, 7);
+        WinningLotto winningLotto = new WinningLotto(winnerNum, new DefaultLottoNumber(7));
         assertEquals(lotto.countMatch(winningLotto), 6);
     }
 }

@@ -29,7 +29,7 @@ class LotteryTest {
                         new DefaultLottoNumber(3),
                         new DefaultLottoNumber(4),
                         new DefaultLottoNumber(5),
-                        new DefaultLottoNumber(6)), 7))
+                        new DefaultLottoNumber(6)), new DefaultLottoNumber(7)))
         );
     }
 

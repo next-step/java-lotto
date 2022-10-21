@@ -45,15 +45,9 @@ public class Lottery {
     }
 
     private static Function<Lotto, Stream<Rank>> findRank(WinningLotto winningNumber) {
-        return lotto -> Arrays.stream(Rank.values()).map(rank ->
-                rank.findRank(lotto.countMatch(winningNumber), lotto.isBonus(winningNumber.getBonus())));
+        return lotto -> Arrays.stream(Rank.values()).map(rank -> rank.findRank(lotto.countMatch(winningNumber), lotto.isBonus(winningNumber)));
     }
 
-    private boolean findBonus(WinningLotto winningLotto) {
-        return lottery.stream()
-                .filter(lotto -> lotto.countMatch(winningLotto) == Rank.SECOND.getMatchNum())
-                .anyMatch(lotto -> lotto.isBonus(winningLotto.getBonus()));
-    }
 
     private Lotto createLotto(ShuffleStrategy shuffleStrategy) {
         return new Lotto(sortLottoNum(shuffleStrategy));
