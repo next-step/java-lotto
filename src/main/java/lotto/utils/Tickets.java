@@ -2,7 +2,7 @@ package lotto.utils;
 
 import java.math.BigDecimal;
 
-public class Ticket {
+public class Tickets {
 
     private static final int TICKET_PRICE = 1000;
 

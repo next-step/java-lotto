@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TicketTest {
+class TicketsTest {
 
     @Test
     void buyTickets() {
-        assertThat(Ticket.getNumberOfTickets(BigDecimal.valueOf(10000))).isEqualTo(10);
+        assertThat(Tickets.getNumberOfTickets(BigDecimal.valueOf(10000))).isEqualTo(10);
     }
 }
