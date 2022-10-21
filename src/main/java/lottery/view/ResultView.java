@@ -42,7 +42,7 @@ public class ResultView {
 
     private static List<LotteryRank> getLotteryRanksToPrint() {
         return Stream.of(LotteryRank.values())
-                .filter(r -> r != LotteryRank.NONE)
+                .filter(r -> !r.equals(LotteryRank.NONE))
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toUnmodifiableList());
     }
