@@ -1,7 +1,6 @@
 package lotto.models.enums;
 
 import lotto.models.Lotto;
-import lotto.models.LottoNumbers;
 import lotto.models.WinningLotto;
 
 import java.util.ArrayList;

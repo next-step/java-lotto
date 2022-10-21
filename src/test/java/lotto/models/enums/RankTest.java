@@ -2,6 +2,7 @@ package lotto.models.enums;
 
 import lotto.models.Lotto;
 import lotto.models.WinningLotto;
+import lotto.models.request.LottoNumberRequest;
 import lotto.models.request.WinningLottoRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +35,7 @@ class RankTest {
 
     @BeforeAll
     static void setWinningLotto() {
-        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(WINNING_NUMBER, BONUS_NUMBER);
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(LottoNumberRequest.of(WINNING_NUMBER), BONUS_NUMBER);
         winningLotto = WinningLotto.from(winningLottoRequest);
     }
 

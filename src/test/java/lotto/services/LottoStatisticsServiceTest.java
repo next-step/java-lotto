@@ -4,6 +4,7 @@ import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.WinningLotto;
 import lotto.models.enums.Rank;
+import lotto.models.request.LottoNumberRequest;
 import lotto.models.request.PaymentRequest;
 import lotto.models.request.WinningLottoRequest;
 import org.junit.jupiter.api.BeforeAll;
@@ -44,7 +45,7 @@ class LottoStatisticsServiceTest {
 
     @BeforeAll
     static void setWinningLotto() {
-        winningLotto = WinningLotto.from(WinningLottoRequest.of(WINNING_NUMBER, 10));
+        winningLotto = WinningLotto.from(WinningLottoRequest.of(LottoNumberRequest.of(WINNING_NUMBER), 10));
     }
 
     @Test

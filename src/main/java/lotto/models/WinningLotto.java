@@ -22,7 +22,7 @@ public class WinningLotto {
     public static WinningLotto from(WinningLottoRequest winningLottoRequest) {
         WinningLottoRequestValidator.validate(winningLottoRequest);
 
-        return new WinningLotto(Lotto.of(winningLottoRequest.getWinningNumber()), winningLottoRequest.getBonusNumber());
+        return new WinningLotto(Lotto.of(winningLottoRequest.getWinningNumber().getNumber()), winningLottoRequest.getBonusNumber());
     }
 
     public List<Integer> getNumbers() {

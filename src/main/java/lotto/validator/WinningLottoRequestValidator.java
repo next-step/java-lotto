@@ -16,7 +16,7 @@ public class WinningLottoRequestValidator {
     }
 
     public static void validate(WinningLottoRequest winningLottoRequest) {
-        if (!COMMON_SEPARATOR_PATTERN.matcher(winningLottoRequest.getWinningNumber()).matches()) {
+        if (!COMMON_SEPARATOR_PATTERN.matcher(winningLottoRequest.getWinningNumber().getNumber()).matches()) {
             throw new IllegalArgumentException(STRING_NUMBER_WRONG_CHARACTER);
         }
 
@@ -30,7 +30,7 @@ public class WinningLottoRequestValidator {
     }
 
     private static boolean bonusNumberIsDuplicated(WinningLottoRequest winningLottoRequest) {
-        String[] winningNumbers = winningLottoRequest.getWinningNumber().split(",");
+        String[] winningNumbers = winningLottoRequest.getWinningNumber().getNumber().split(",");
         return Arrays.stream(winningNumbers).anyMatch(number -> Integer.parseInt(number.trim()) == winningLottoRequest.getBonusNumber());
     }
 }

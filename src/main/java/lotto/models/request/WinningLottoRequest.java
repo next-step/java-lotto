@@ -2,23 +2,23 @@ package lotto.models.request;
 
 public class WinningLottoRequest {
 
-    private final String winningNumber;
+    private final LottoNumberRequest lottoNumberRequest;
     private final int bonusNumber;
 
-    private WinningLottoRequest(String winningNumber, int bonusNumber) {
-        this.winningNumber = winningNumber;
+    private WinningLottoRequest(LottoNumberRequest lottoNumberRequest, int bonusNumber) {
+        this.lottoNumberRequest = lottoNumberRequest;
         this.bonusNumber = bonusNumber;
     }
 
-    public String getWinningNumber() {
-        return winningNumber;
+    public LottoNumberRequest getWinningNumber() {
+        return lottoNumberRequest;
     }
 
     public int getBonusNumber() {
         return bonusNumber;
     }
 
-    public static WinningLottoRequest of(String winningNumber, int bonusNumber) {
-        return new WinningLottoRequest(winningNumber, bonusNumber);
+    public static WinningLottoRequest of(LottoNumberRequest lottoNumberRequest, int bonusNumber) {
+        return new WinningLottoRequest(lottoNumberRequest, bonusNumber);
     }
 }
