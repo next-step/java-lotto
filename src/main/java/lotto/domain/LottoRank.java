@@ -31,4 +31,8 @@ public enum LottoRank {
                 .findFirst()
                 .orElse(MISS);
     }
+
+    public int multiply(int winningCount) {
+        return money * winningCount;
+    }
 }

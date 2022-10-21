@@ -14,12 +14,11 @@ public class LottoWinning {
                 .collect(Collectors.toMap(Function.identity(), value -> 0, (x, y) -> y, LinkedHashMap::new));
     }
 
-    public double sumPrizeMoney() {
+    public double sumWinningMoney() {
         double money = 0;
         for (Map.Entry<LottoRank, Integer> entry : winning.entrySet()) {
-            LottoRank key = entry.getKey();
-            Integer value = entry.getValue();
-            money += key.getMoney() * value;
+            LottoRank rank = entry.getKey();
+            money += rank.multiply(entry.getValue());
         }
         return money;
     }

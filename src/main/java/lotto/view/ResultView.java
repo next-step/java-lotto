@@ -43,6 +43,6 @@ public class ResultView {
     }
 
     public static void printWinningRate(LottoWinning winning, LottoAmount lottoAmount) {
-        System.out.printf(WINNING_RATE_MESSAGE, lottoAmount.calcWinningRate(winning.sumPrizeMoney()));
+        System.out.printf(WINNING_RATE_MESSAGE, lottoAmount.calcWinningRate(winning.sumWinningMoney()));
     }
 }

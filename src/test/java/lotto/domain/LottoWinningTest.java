@@ -37,6 +37,6 @@ class LottoWinningTest {
     @Test
     @DisplayName("지난주 당첨 로또랑 비교하여 당첨된 것이 있어 2000005000 금액을 받음을 확인한다.")
     void prizeMoneyTest() {
-        assertThat(result.sumPrizeMoney()).isEqualTo(2000005000);
+        assertThat(result.sumWinningMoney()).isEqualTo(2000005000);
     }
 }
