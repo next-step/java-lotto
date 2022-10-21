@@ -15,7 +15,7 @@ class LottoNumberPoolTest {
     void 생성() {
         LottoNumberPool lottoNumberPool = new LottoNumberPool();
 
-        assertThat(lottoNumberPool).isEqualTo(new LottoNumberPool());
+        assertThat(lottoNumberPool.getRandomNumbers(1).get(0)).isEqualTo(LottoNumber.of(1));
     }
 
     @Test

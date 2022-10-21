@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,18 +29,5 @@ public class LottoNumberPool {
 
     public void shuffle(Consumer<List<LottoNumber>> shuffler) {
         shuffler.accept(LOTTO_NUMBERS_CACHE);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumberPool that = (LottoNumberPool) o;
-        return Objects.equals(LOTTO_NUMBERS_CACHE, that.LOTTO_NUMBERS_CACHE);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(LOTTO_NUMBERS_CACHE);
     }
 }
