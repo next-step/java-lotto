@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.HashMap;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.exception.LackOfMoneyException;
+import step2.exception.MoneyException;
 import step2.model.Payment;
 
 public class PaymentTest {
@@ -25,7 +25,16 @@ public class PaymentTest {
 		int money = 900;
 		Payment payment = new Payment();
 		assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(
-			LackOfMoneyException.class);
+			MoneyException.class);
+	}
+
+	@Test
+	@DisplayName("1000원 단위를 지불하지 않으면 예외 발생")
+	void 단위_예외_테스트() {
+		int money = 1900;
+		Payment payment = new Payment();
+		assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(
+			MoneyException.class);
 	}
 
 	@Test
