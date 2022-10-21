@@ -3,6 +3,10 @@ package lotto.domain.rank;
 import lotto.domain.LottoMatchCount;
 import lotto.domain.money.ImmutableMoney;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public enum Rank {
 
     FIRST(1, 6, 2_000_000_000),
@@ -45,6 +49,12 @@ public enum Rank {
             return SECOND;
         }
         return THIRD;
+    }
+
+    public static List<Rank> rewardDescendingRankList() {
+        List<Rank> rankList = Arrays.asList(Arrays.copyOfRange(Rank.values(), Rank.REWARD_END_RANK_INDEX, Rank.REWARD_START_RANK_INDEX));
+        Collections.reverse(rankList);
+        return rankList;
     }
 
     public ImmutableMoney reward() {

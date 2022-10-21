@@ -10,7 +10,6 @@ public class RankMapTest {
     @Test
     void create() {
         Assertions.assertAll(
-                () -> assertThat(new RankMap()).isEqualTo(new RankMap(Rank.values())),
                 () -> assertThat(new RankMap(Rank.values())).isEqualTo(new RankMap(Rank.values()))
         );
     }

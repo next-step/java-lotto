@@ -3,6 +3,7 @@ package lotto.controller.lotto;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.domain.rank.Rank;
+import lotto.domain.rank.RankMap;
 import lotto.service.LottoResultService;
 import lotto.domain.*;
 import lotto.domain.lotto.*;
@@ -10,7 +11,6 @@ import lotto.view.lotto.LottoInput;
 import lotto.view.lotto.LottoOutput;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoResultController {
 
@@ -42,12 +42,11 @@ public class LottoResultController {
     }
 
     private void lottoResult(final List<Lotto> lottos, final LottoWinner winner) {
-        Map<Rank, Amount> checkLotto = lottoResultService.checkLotto(lottos, winner);
+        RankMap checkLotto = lottoResultService.checkLotto(lottos, winner);
         LottoOutput.statistics();
-        for (int rankIndex = Rank.REWARD_START_RANK_INDEX; rankIndex >= Rank.REWARD_END_RANK_INDEX; rankIndex--) {
-            Rank rank = Rank.values()[rankIndex];
-            lottoMatchOutput(rank, checkLotto.get(rank));
-        }
+
+        Rank.rewardDescendingRankList()
+                .forEach(rank -> lottoMatchOutput(rank, checkLotto.amount(rank)));
 
         ProfitRate profitRate = lottoResultService.caculateProfitRate(lottos, winner);
         if (profitRate.loss()) {

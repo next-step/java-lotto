@@ -10,6 +10,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -57,5 +61,18 @@ public class RankTest {
                 () -> assertThat(Rank.SECOND.isBonus()).isTrue(),
                 () -> assertThat(Rank.FIRST.isBonus()).isFalse()
         );
+    }
+
+    @DisplayName("보상을 제공하는 Rank의 리스트를 내림차순으로 반환한다.")
+    @Test
+    void rank_reward_descending_list() {
+        List<Rank> ranks = Rank.rewardDescendingRankList();
+        List<Rank> rankList = Arrays.stream(
+                        Arrays.copyOfRange(Rank.values(), Rank.REWARD_END_RANK_INDEX, Rank.REWARD_START_RANK_INDEX)
+                )
+                .collect(Collectors.toList());
+        Collections.reverse(rankList);
+
+        assertThat(ranks).containsExactly(rankList.toArray(Rank[]::new));
     }
 }
