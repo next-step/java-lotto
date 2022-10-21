@@ -1,34 +1,69 @@
 package lotto.domain;
 
+import lotto.utils.AutoNumberList;
+import lotto.utils.Tickets;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Lottos {
 
-    private final Integer amount;
-    private final BigDecimal price;
+    private final BigDecimal amount;
     private List<Lotto> lottoList;
 
-    public Lottos(Integer amount, BigDecimal price) {
+    public Lottos(BigDecimal amount) {
         this.amount = amount;
-        this.price = price;
     }
 
-    public Lottos(Integer amount, BigDecimal price, List<Lotto> lottoList) {
+    public Lottos(BigDecimal amount, List<Lotto> lottoList) {
         this.amount = amount;
-        this.price = price;
         this.lottoList = lottoList;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
     }
 
     public List<Lotto> getLottoList() {
         return lottoList;
+    }
+
+    public Lottos buyLottos(BigDecimal amount) {
+        List<Lotto> lottoList = new ArrayList<>();
+
+        int tryNum = Tickets.getNumberOfTickets(amount);
+        for (int i = 0; i < tryNum; i++) {
+            lottoList.add(
+                    new Lotto().makeNumbers(
+                            AutoNumberList.makeNumberList()
+                    )
+            );
+        }
+
+        this.lottoList = lottoList;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos = (Lottos) o;
+        return Objects.equals(amount, lottos.amount) && Objects.equals(lottoList, lottos.lottoList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount, lottoList);
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "amount=" + amount +
+                ", lottoList=" + lottoList +
+                '}';
     }
 }
