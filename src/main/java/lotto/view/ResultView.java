@@ -2,8 +2,10 @@ package lotto.view;
 
 import lotto.domain.LottoAmount;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinning;
 import lotto.dto.LottoDto;
+import lotto.dto.LottoTicketDto;
 
 import java.util.List;
 
@@ -19,9 +21,10 @@ public class ResultView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void showAutoLottoTicket(List<LottoDto> lottos) {
+    public static void showAutoLottoTicket(LottoTicket lottoTicket) {
+        List<LottoDto> lottos = new LottoTicketDto(lottoTicket).lottoTicket();
         for (LottoDto lotto : lottos) {
-            System.out.println(lotto.getNumbers().toString());
+            System.out.println(lotto.numbers().toString());
         }
         System.out.println(System.lineSeparator());
     }

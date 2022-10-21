@@ -2,20 +2,20 @@ package lotto.dto;
 
 import lotto.domain.Lotto;
 
-import java.util.List;
+import java.util.Set;
 
 public class LottoDto {
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
     public LottoDto(Lotto numbers) {
-        this(numbers.generateReport().getNumbers());
+        this(numbers.generateReport());
     }
 
-    public LottoDto(List<Integer> numbers) {
+    public LottoDto(Set<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> numbers() {
         return numbers;
     }
 }

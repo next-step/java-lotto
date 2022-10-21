@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoDto;
-
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,11 +27,11 @@ public class Lotto {
         return LottoGenerator.generate();
     }
 
-    public LottoDto generateReport() {
-        return new LottoDto(numbers.stream()
+    public Set<Integer> generateReport() {
+        return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .sorted()
-                .collect(Collectors.toList()));
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public int matches(Lotto lotto) {

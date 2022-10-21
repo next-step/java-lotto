@@ -89,10 +89,9 @@
 - [x] Lotto List -> Set
 - [x] LottoPrize -> Rank
 - [ ] 당첨된 결과 winning 에서 처리 후 ResultView 로 넘기기
-- [ ] method UI 의존성 수정
+- [x] method UI 의존성 수정
   - Lotto generateReport()
   - LottoTicket generateTicket().
-  - 등수를 나타내게 Enum 수정.
 - [x] 필드명, 함수명 수정
   - List<lotto> -> lottoTicket
   - lastWeekTicket -> winningTicket
