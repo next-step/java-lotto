@@ -1,18 +1,17 @@
 package lotto.domain;
 
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumberTest {
+class LottoNumbersTest {
 
     @Test
     @DisplayName("기준 번호 개수")
     void getLottoNumberList() {
 
         // expected
-        assertThat(LottoNumber.getAutoNumberList()).hasSize(6);
+        assertThat(LottoNumbers.getAutoNumberList()).hasSize(6);
     }
 }

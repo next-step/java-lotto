@@ -6,14 +6,14 @@ import java.util.List;
 
 import static java.util.Collections.shuffle;
 
-public class LottoNumber {
+public class LottoNumbers {
 
     private static final Integer LOTTO_NUMBER_MIN_INDEX = 0;
     private static final Integer LOTTO_NUMBER_MAX_INDEX = 6;
     private static final Integer LOTTO_DEFAULT_START_NUMBER = 1;
     private static final Integer LOTTO_DEFAULT_END_NUMBER = 45;
 
-    private LottoNumber() {
+    private LottoNumbers() {
         throw new AssertionError();
     }
 
