@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +11,9 @@ public class LottoNumberGenerator {
         List<Integer> validNumbers = getValidNumbers();
         List<Integer> lottoNumbers = selectRandomNumbers(validNumbers);
 
-        return lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        return lottoNumbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     private static List<Integer> getValidNumbers() {

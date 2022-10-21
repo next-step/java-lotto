@@ -1,8 +1,12 @@
-package lotto;
+package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
+
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
@@ -14,6 +18,10 @@ public class LottoNumber {
         }
 
         this.number = number;
+    }
+
+    public static List<LottoNumber> createLottoNumbers(int...args) {
+        return Arrays.stream(args).mapToObj(LottoNumber::new).collect(Collectors.toList());
     }
 
     private boolean isValidLottoNumber(int number) {
