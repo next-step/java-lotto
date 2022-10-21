@@ -1,24 +1,21 @@
 package lottoGame;
 
-import lottoGame.model.TicketPrice;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
 public class RankResult {
     private final EnumMap<Rank, Integer> lotteryBoard = new EnumMap<>(Rank.class);
-    private final DecimalFormat df = new DecimalFormat("0.00");
 
     public EnumMap<Rank, Integer> getLotteryBoard() {
         return lotteryBoard;
     }
 
-    public EnumMap<Rank, Integer> putResult(List<Integer> matchNumbers) {
+    public EnumMap<Rank, Integer> putResult(List<Rank> ranks) {
         for (Rank rank : Rank.values()) {
-            lotteryBoard.put(rank, rank.findMatch(matchNumbers));
+            lotteryBoard.put(rank, Collections.frequency(ranks, rank));
         }
         return lotteryBoard;
     }

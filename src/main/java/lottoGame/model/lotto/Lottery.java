@@ -7,8 +7,10 @@ import lottoGame.model.lotto.lottoNumber.LottoNumber;
 import lottoGame.model.strategy.ShuffleStrategy;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottery {
 
@@ -21,9 +23,10 @@ public class Lottery {
         }
         return lottery;
     }
-    public RankResult createRankResult(WinningLotto winningNumber,RankResult rankResult) {
-         rankResult.putResult(findMatchNumber(winningNumber));
-         return rankResult;
+
+    public RankResult createRankResult(WinningLotto winningNumber, RankResult rankResult) {
+        rankResult.putResult(findRanks(winningNumber));
+        return rankResult;
     }
 
     public List<Lotto> getLottery() {
@@ -33,11 +36,23 @@ public class Lottery {
     public int countAllLotto() {
         return lottery.size();
     }
-    private List<Integer> findMatchNumber(WinningLotto winningNumber) {
+
+    private List<Rank> findRanks(WinningLotto winningNumber) {
         return lottery.stream()
-                .map(lotto -> lotto.countMatch(winningNumber))
-                .filter(matchNum -> matchNum >= Rank.FOURTH.getMatchNum())
+                .map(findRank(winningNumber))
+                .flatMap(Stream::distinct)
                 .collect(Collectors.toList());
+    }
+
+    private static Function<Lotto, Stream<Rank>> findRank(WinningLotto winningNumber) {
+        return lotto -> Arrays.stream(Rank.values()).map(rank ->
+                rank.findRank(lotto.countMatch(winningNumber), lotto.isBonus(winningNumber.getBonus())));
+    }
+
+    private boolean findBonus(WinningLotto winningLotto) {
+        return lottery.stream()
+                .filter(lotto -> lotto.countMatch(winningLotto) == Rank.SECOND.getMatchNum())
+                .anyMatch(lotto -> lotto.isBonus(winningLotto.getBonus()));
     }
 
     private Lotto createLotto(ShuffleStrategy shuffleStrategy) {

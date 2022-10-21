@@ -1,5 +1,6 @@
 package lottoGame.model.lotto;
 
+import lottoGame.Rank;
 import lottoGame.model.lotto.lottoNumber.LottoNumber;
 
 import java.util.Collections;
@@ -19,6 +20,12 @@ public class Lotto {
                 .stream()
                 .filter(this::existedMatchNumber)
                 .count());
+    }
+
+    public boolean isBonus(int bonus){
+        return lottoNumber
+                .stream()
+                .anyMatch(lottoNo ->lottoNo.isMatchOrNot(bonus));
     }
 
     public List<LottoNumber> getLotto() {
