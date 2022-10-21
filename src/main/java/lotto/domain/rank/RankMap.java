@@ -9,6 +9,10 @@ public class RankMap {
     private final Map<Rank, Integer> rankMap = new HashMap<>();
     private final int RANK_COUNT_DEFAULT = 0;
 
+    public RankMap() {
+        this(Rank.values());
+    }
+
     public RankMap(Rank[] values) {
         for (Rank rank : values) {
             rankMap.put(rank, RANK_COUNT_DEFAULT);
