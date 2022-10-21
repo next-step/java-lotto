@@ -7,25 +7,7 @@ import java.util.List;
 
 class LottoResultTest {
 
-    @Test
-    void 등수별_인원_조회() {
-        Lottos lottos = new Lottos(List.of(
-            Lotto.create(() -> Number.of(1, 2, 3, 4, 5, 6)),
-            Lotto.create(() -> Number.of(2, 3, 4, 5, 6, 7)),
-            Lotto.create(() -> Number.of(2, 3, 4, 5, 6, 8)),
-            Lotto.create(() -> Number.of(3, 4, 5, 6, 7, 8)),
-            Lotto.create(() -> Number.of(4, 5, 6, 7, 8, 9)),
-            Lotto.create(() -> Number.of(5, 6, 7, 8, 9, 10))
-        ));
 
-        LottoResult result = lottos.getResult(Number.of(1, 2, 3, 4, 5, 6), Number.of(7));
-
-        Assertions.assertThat(result.numberOfFirstRank()).isEqualTo(1L);
-        Assertions.assertThat(result.numberOfSecondRankWithBonus()).isEqualTo(1L);
-        Assertions.assertThat(result.numberOfSecondRank()).isEqualTo(1L);
-        Assertions.assertThat(result.numberOfThirdRank()).isEqualTo(1L);
-        Assertions.assertThat(result.numberOfFourthRank()).isEqualTo(1L);
-    }
 
     @Test
     void 수익률_확인_테스트() {

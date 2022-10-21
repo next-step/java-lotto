@@ -20,23 +20,33 @@ public class LottoResult {
     }
 
     public long numberOfFirstRank() {
-        return lottos.stream().filter(lotto -> Rank.FIRST == lotto.checkRank(winners, bonus)).count();
+        return lottos.stream()
+            .filter(lotto -> Rank.FIRST == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+            .count();
     }
 
     public long numberOfSecondRankWithBonus() {
-        return lottos.stream().filter(lotto -> Rank.SECOND == lotto.checkRank(winners, bonus)).count();
+        return lottos.stream()
+            .filter(lotto -> Rank.SECOND == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+            .count();
     }
 
     public long numberOfSecondRank() {
-        return lottos.stream().filter(lotto -> Rank.THIRD == lotto.checkRank(winners, bonus)).count();
+        return lottos.stream()
+            .filter(lotto -> Rank.THIRD == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+            .count();
     }
 
     public long numberOfThirdRank() {
-        return lottos.stream().filter(lotto -> Rank.FOURTH == lotto.checkRank(winners, bonus)).count();
+        return lottos.stream()
+            .filter(lotto -> Rank.FOURTH == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+            .count();
     }
 
     public long numberOfFourthRank() {
-        return lottos.stream().filter(lotto -> Rank.FIFTH == lotto.checkRank(winners, bonus)).count();
+        return lottos.stream()
+            .filter(lotto -> Rank.FIFTH == lotto.checkRank(new WinnerNumbers(winners, bonus)))
+            .count();
     }
 
     public double calculateProfitRate() {
@@ -49,7 +59,9 @@ public class LottoResult {
     }
 
     private List<Rank> getRanks() {
-        return lottos.stream().map(lotto -> lotto.checkRank(winners, bonus)).collect(Collectors.toUnmodifiableList());
+        return lottos.stream()
+            .map(lotto -> lotto.checkRank(new WinnerNumbers(winners, bonus)))
+            .collect(Collectors.toUnmodifiableList());
     }
 
     private BigDecimal calculatePrincipal() {

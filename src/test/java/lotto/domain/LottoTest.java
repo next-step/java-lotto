@@ -20,7 +20,7 @@ public class LottoTest {
     void 당첨_번호로_로또_등수_확인() {
         LottoNumberStrategy lottoNumberStrategy = () -> Number.of(16, 15, 14, 13, 12, 11);
         Lotto lotto = Lotto.create(lottoNumberStrategy);
-        Assertions.assertThat(lotto.checkRank(Number.of(12, 14, 15, 20, 22, 24), Number.of(25)))
+        Assertions.assertThat(lotto.checkRank(new WinnerNumbers(Number.of(12, 14, 15, 20, 22, 24), Number.of(25))))
             .isEqualTo(Rank.FIFTH);
     }
 

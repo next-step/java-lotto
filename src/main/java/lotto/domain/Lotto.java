@@ -22,14 +22,8 @@ public class Lotto {
         return new Lotto(lottoNumberStrategy.provideNumberSet());
     }
 
-    public Rank checkRank(Set<Number> winnersNumber, Number bonus) {
-        return Rank.valueOf(match(winnersNumber), numbers.contains(bonus));
-    }
-
-    private int match(Set<Number> winnersNumber) {
-        List<Number> numbers = new ArrayList<>(this.numbers);
-        numbers.retainAll(winnersNumber);
-        return numbers.size();
+    public Rank checkRank(WinnerNumbers winnerNumbers) {
+        return winnerNumbers.checkRank(numbers);
     }
 
     @Override
