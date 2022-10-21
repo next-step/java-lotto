@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -16,8 +16,11 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult getResult(Set<Number> winners, Number bonus) {
-        return new LottoResult(getLottos(), winners, bonus);
+    public LottoResult getResult(WinnerNumbers winnerNumbers) {
+        List<Rank> ranks = lottos.stream()
+            .map(lotto -> lotto.checkRank(winnerNumbers))
+            .collect(Collectors.toUnmodifiableList());
+        return new LottoResult(ranks);
     }
 
     @Override
