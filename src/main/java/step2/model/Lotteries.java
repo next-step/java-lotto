@@ -35,11 +35,10 @@ public class Lotteries {
 	}
 
 	public HashMap<Integer, Integer> isMatch(List<Integer> winNumList) {
+		WinningLotto lottoMatcher = new WinningLotto(winNumList);
 
 		for (Lotto lotto : lotteries) {
-			LottoMatcher lottoMatcher = new LottoMatcher(winNumList);
-
-			int countLottoMatch = lottoMatcher.countMatch(lotto);
+			int countLottoMatch = lottoMatcher.countMatch(lotto.getLotto());
 			matchTotalMap.put(countLottoMatch, matchTotalMap.get(countLottoMatch) + MATCH);
 		}
 

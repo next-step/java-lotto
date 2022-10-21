@@ -12,10 +12,10 @@ public class WinningLotto {
 		this.winNumList = winNumList;
 	}
 
-	public int countMatch(Lotto lotto) {
+	public int countMatch(List<Integer> lotto) {
 		return winNumList.stream()
 			.filter(
-				target -> lotto.getLotto().stream().distinct().anyMatch(Predicate.isEqual(target)))
+				target -> lotto.stream().distinct().anyMatch(Predicate.isEqual(target)))
 			.collect(Collectors.toList())
 			.size();
 	}
