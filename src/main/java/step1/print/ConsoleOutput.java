@@ -4,7 +4,7 @@ import step1.arithmeticExpression.ArithmeticExpression;
 
 public class ConsoleOutput {
 
-    public void output(ArithmeticExpression arithmeticExpression) {
+    public void print(ArithmeticExpression arithmeticExpression) {
         System.out.println(arithmeticExpression.calculatedResult());
     }
 

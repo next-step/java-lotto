@@ -16,7 +16,7 @@ public class Main {
         ArithmeticExpression arithmeticExpression = new ArithmeticExpression(new ExpressionAsArithmeticExpression(expression));
 
         ConsoleOutput consoleOutput = new ConsoleOutput();
-        consoleOutput.output(arithmeticExpression);
+        consoleOutput.print(arithmeticExpression);
 
     }
 
