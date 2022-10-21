@@ -2,12 +2,28 @@ package caculator;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserInput {
 
+    private static final String SPLITERATOR = " ";
     private static final Scanner sc = new Scanner(System.in);
+
+    public List<String> inputFormula() {
+        String str = sc.nextLine();
+        return strToList(str);
+    }
+
+    public List<String> strToList(String str) {
+        checkBlank(str);
+        List<String> list = Arrays.asList(str.split(SPLITERATOR));
+        if (checkFormula(list)) {
+            return list;
+        }
+        return null;
+    }
 
     public void checkBlank(String input) {
         if (StringUtils.isBlank(input)) {

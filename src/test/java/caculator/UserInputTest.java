@@ -45,4 +45,10 @@ class UserInputTest {
                 .isThrownBy(() -> input.checkFormula(Arrays.asList("1", "%", "2")))
                 .withMessageMatching("사칙 연산 기호만 입력 가능합니다.");
     }
+
+    @Test
+    void 문자열_리스트_변환() {
+        UserInput input = new UserInput();
+        assertThat(input.strToList("1 + 2")).isEqualTo(Arrays.asList("1", "+", "2"));
+    }
 }
