@@ -3,13 +3,8 @@ package lotto;
 import lotto.controller.lotto.LottoResultController;
 import lotto.controller.lotto.LottoPurchaseController;
 import lotto.controller.MoneyController;
-import lotto.domain.Money.ImmutableMoney;
-import lotto.domain.lotto.Lotto;
 import lotto.service.LottoPurchaseService;
 import lotto.service.LottoResultService;
-
-import java.util.Collections;
-import java.util.List;
 
 public class LottoMain {
 

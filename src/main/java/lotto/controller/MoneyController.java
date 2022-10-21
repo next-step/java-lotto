@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Money.ImmutableMoney;
+import lotto.domain.money.ImmutableMoney;
 import lotto.view.money.MoneyInput;
 import lotto.view.money.MoneyOutput;
 

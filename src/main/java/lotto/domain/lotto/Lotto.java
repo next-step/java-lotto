@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.Money.ImmutableMoney;
+import lotto.domain.money.ImmutableMoney;
 import lotto.domain.lottonumber.LottoNumberSet;
 
 public class Lotto {

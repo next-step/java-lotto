@@ -1,8 +1,8 @@
 package lotto.service;
 
 import lotto.domain.Amount;
-import lotto.domain.Money.ImmutableMoney;
-import lotto.domain.Money.Money;
+import lotto.domain.money.ImmutableMoney;
+import lotto.domain.money.Money;
 import lotto.domain.ProfitRate;
 import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;

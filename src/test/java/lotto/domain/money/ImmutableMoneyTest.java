@@ -1,7 +1,5 @@
 package lotto.domain.money;
 
-import lotto.domain.Money.ImmutableMoney;
-import lotto.domain.Money.Money;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

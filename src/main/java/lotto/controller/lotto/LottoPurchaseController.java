@@ -1,14 +1,13 @@
 package lotto.controller.lotto;
 
 import lotto.domain.Amount;
-import lotto.domain.Money.ImmutableMoney;
+import lotto.domain.money.ImmutableMoney;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottonumber.LottoNumberSet;
 import lotto.service.LottoPurchaseService;
 import lotto.view.lotto.LottoInput;
 import lotto.view.lotto.LottoOutput;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
