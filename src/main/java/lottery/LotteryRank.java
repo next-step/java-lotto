@@ -1,7 +1,6 @@
 package lottery;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public enum LotteryRank {
 
@@ -26,10 +25,6 @@ public enum LotteryRank {
 
     public int getPrize() {
         return prize;
-    }
-
-    public static List<LotteryRank> getLotteryRanks() {
-        return List.of(values());
     }
 
     public static LotteryRank valueOf(int matchingCount, boolean isBonusMatched) {

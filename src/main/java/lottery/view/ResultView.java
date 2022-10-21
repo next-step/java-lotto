@@ -4,13 +4,29 @@ import lottery.Lottery;
 import lottery.LotteryRank;
 import lottery.LotteryResult;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ResultView {
 
     public static void printPurchasedLotteryInfos(List<Lottery> lotteries) {
         printPurchasedLotteryAmount(lotteries.size());
         printPurchasedLotteryNumbers(lotteries);
+    }
+
+    public static void printResult(LotteryResult lotteryResult) {
+        System.out.println();
+
+        System.out.println("당첨 통계");
+        System.out.println("--------");
+
+        for (LotteryRank lotteryRank : getLotteryRanksToPrint()) {
+            System.out.println(generateResultMessage(lotteryRank, lotteryResult.getWinningCountOfRank(lotteryRank)));
+        }
+
+        System.out.printf("총 수익률은 %.2f 입니다.", lotteryResult.getReturnRate());
     }
 
     private static void printPurchasedLotteryAmount(int purchasedLotteryAmount) {
@@ -24,25 +40,22 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLotteryResult(LotteryResult lotteryResult) {
-        System.out.println();
-
-        System.out.println("당첨 통계");
-        System.out.println("--------");
-
-        printLotteryResultsPerRanks(lotteryResult);
-
-        System.out.printf("총 수익률은 %.2f 입니다.", lotteryResult.getReturnRate());
+    private static List<LotteryRank> getLotteryRanksToPrint() {
+        return Stream.of(LotteryRank.values())
+                .filter(r -> r != LotteryRank.NONE)
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    private static void printLotteryResultsPerRanks(LotteryResult lotteryResult) {
-        for (LotteryRank lotteryRank : LotteryRank.getLotteryRanks()) {
-            int matchingCount = lotteryRank.getMatchingCount();
-            int prizeOfRank = lotteryRank.getPrize();
-            int winningCountOfRank = lotteryResult.getWinningCountOfRank(lotteryRank);
+    private static String generateResultMessage(LotteryRank lotteryRank, int winningCountOfRank) {
+        int matchingCount = lotteryRank.getMatchingCount();
+        int prizeOfRank = lotteryRank.getPrize();
+        String bonusMessage = "";
 
-            System.out.println(matchingCount + "개 일치 (" + prizeOfRank + ") - " + winningCountOfRank + "개");
+        if (lotteryRank.equals(LotteryRank.SECOND)) {
+            bonusMessage = ", 보너스볼 일치";
         }
+        return matchingCount + "개 일치" + bonusMessage + "(" + prizeOfRank + "원) - " + winningCountOfRank + "개";
     }
 
 }

@@ -53,4 +53,4 @@
   - [x] `LotteryRank` 의 `valueOf(int matchingCount)` 메소드에서 인스턴스 생성을 위해 추가로 위에서 확인한 `보너스 볼과의 일치 여부`를 인자로 받도록 변경
   - [x] 따라서 `WinningLottery`에 기존에 입력받은 로또 번호들과의 일치 여부 확인 이후 / 보너스 볼과의 일치 여부를 확인하는 로직을 별도로 추가 
 - 결과적으로, `LotteryResult` 에는 `EnumMap`에 모든 정보가 담기게 됨
-  - [ ] `ResultView` 에서 출력하는 로직 변경 필요
+  - [x] `ResultView` 에서 출력하는 로직 변경 필요

@@ -4,7 +4,8 @@ import java.util.List;
 
 import static lottery.LotteryCompany.getAvailablePurchaseLotteryCount;
 import static lottery.view.InputView.*;
-import static lottery.view.ResultView.*;
+import static lottery.view.ResultView.printPurchasedLotteryInfos;
+import static lottery.view.ResultView.printResult;
 
 public class Controller {
 
@@ -21,7 +22,7 @@ public class Controller {
 
         WinningLottery winningLottery = new WinningLottery(getWinningLotteryNumbers(), getBonusLotteryNumber());
         LotteryResult lotteryResult = winningLottery.createLotteryResult(lotteries);
-        printLotteryResult(lotteryResult);
+        printResult(lotteryResult);
     }
 
 }
