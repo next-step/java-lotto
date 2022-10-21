@@ -31,13 +31,12 @@ public class ResultView {
 
     public static void printWinning(LottoWinning winning) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
-        System.out.println("----------");
-        winning.getWinning().forEach((key, value) -> {
-            if (key != LottoRank.MISS) {
-                System.out.println(key.getMatch() + "개 일치 (" + key.getMoney() + "원) - " + value + "개");
-            }
-        });
-        System.out.println("===================");
+        Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.MISS)
+                .forEach(rank -> {
+                        Integer count = winning.count(rank);
+                        System.out.printf(LOTTO_MATCH_MESSAGE, rank.getMatch(), rank.getMoney(), count);
+                });
     }
 
     public static void printWinningRate(LottoWinning winning, LottoAmount lottoAmount) {

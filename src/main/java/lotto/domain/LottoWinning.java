@@ -31,9 +31,4 @@ public class LottoWinning {
     public Integer count(LottoRank prize) {
         return winning.get(prize);
     }
-
-    public Map<LottoRank, Integer> getWinning() {
-        return winning;
-    }
-
 }
