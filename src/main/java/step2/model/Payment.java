@@ -9,8 +9,7 @@ public class Payment {
 	private static final int MIN_MATCH = 3;
 	private static final int MAX_MATCH = 6;
 	private static final int DEFAULT = 0;
-	private static int benefit = 0;
-
+	private int benefit = 0;
 
 	public int lottoAmount(int cash) {
 		if (cash < LOTTO_PRICE) {
