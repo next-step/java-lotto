@@ -8,6 +8,11 @@ import step2.exception.IllegalNumberException;
 
 public class InputView {
 
+	private static final String DELIMITER = ",";
+	private static final int MIN_NUMBER = 1;
+	private static final int MAX_NUMBER = 45;
+	private static final int TOTAL_SIZE = 6;
+	private static final List<Integer> winNumber = new ArrayList<>();
 	private final Scanner scanner;
 
 	public InputView() {
@@ -19,33 +24,29 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	private String[] askWinnerNum() {
+	private String[] askWinNumber() {
 		System.out.println("지난 주 당첨 번호를 입력하세요");
-		return scanner.next().split(",");
+		return scanner.next().split(DELIMITER);
 
 	}
 
-	public List<Integer> winnerNumList() {
-		List<Integer> winNumList = new ArrayList<>();
-
-		for (String num : askWinnerNum()) {
-			isValid(Integer.parseInt(num));
-			winNumList.add(Integer.parseInt(num));
+	public List<Integer> winNumber() {
+		for (String inputNumber : askWinNumber()) {
+			isValid(Integer.parseInt(inputNumber));
+			winNumber.add(Integer.parseInt(inputNumber));
 		}
 
-		if (winNumList.size() != 6) {
+		if (winNumber.size() != TOTAL_SIZE) {
 			throw new IllegalNumberException("6개의 숫자를 입력하세요");
 		}
 
-		return winNumList;
+		return winNumber;
 	}
 
-	private void isValid(int num) {
-
-		if (1 >= num || num >= 45) {
+	private void isValid(int inputNumber) {
+		if (inputNumber < MIN_NUMBER || inputNumber > MAX_NUMBER) {
 			throw new IllegalNumberException("1~45안의 숫자를 골라주세요");
 		}
-
 	}
 
 }
