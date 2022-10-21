@@ -5,11 +5,11 @@ import lottoGame.model.lotto.lottoNumber.LottoNumber;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoLotto  {
+public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private final List<LottoNumber> lottoNumber;
 
-    public AutoLotto(List<LottoNumber> lottoNumber) {
+    public Lotto(List<LottoNumber> lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 

@@ -1,6 +1,6 @@
 package lottoGame.model;
 
-import lottoGame.model.lotto.AutoLotto;
+import lottoGame.model.lotto.Lotto;
 import lottoGame.model.lotto.WinningLotto;
 import lottoGame.model.lotto.lottoNumber.DefaultLottoNumber;
 import lottoGame.model.lotto.lottoNumber.LottoNumber;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AutoLottoTest {
+class LottoTest {
     private static Stream<Arguments> provideIntInput() {
         return Stream.of(
                 Arguments.of(List.of(
@@ -29,8 +29,8 @@ class AutoLottoTest {
     @ParameterizedTest
     @MethodSource("provideIntInput")
     void countMatch(List<LottoNumber> winnerNum) {
-        AutoLotto autoLotto = new AutoLotto(winnerNum);
+        Lotto lotto = new Lotto(winnerNum);
         WinningLotto winningLotto = new WinningLotto(winnerNum);
-        assertEquals(autoLotto.countMatch(winningLotto), 6);
+        assertEquals(lotto.countMatch(winningLotto), 6);
     }
 }

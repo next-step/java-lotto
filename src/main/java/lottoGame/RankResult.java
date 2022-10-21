@@ -12,10 +12,11 @@ public class RankResult {
         return lotteryBoard;
     }
 
-    public void putResult(List<Integer> matchNumbers) {
+    public EnumMap<Rank, Integer> putResult(List<Integer> matchNumbers) {
         for (Rank rank : Rank.values()) {
             lotteryBoard.put(rank, rank.findMatch(matchNumbers));
         }
+        return lotteryBoard;
     }
 
     public String getYield(Integer amount) {

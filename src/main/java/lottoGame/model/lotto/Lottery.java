@@ -1,6 +1,7 @@
 package lottoGame.model.lotto;
 
 import lottoGame.Rank;
+import lottoGame.RankResult;
 import lottoGame.model.lotto.lottoNumber.DefaultLottoNumber;
 import lottoGame.model.lotto.lottoNumber.LottoNumber;
 import lottoGame.model.strategy.ShuffleStrategy;
@@ -10,39 +11,44 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottery {
-    private final List<AutoLotto> lottery = new ArrayList<>();
+
+    private final RankResult rankResult = new RankResult();
+    private final List<Lotto> lottery = new ArrayList<>();
 
 
-    public List<AutoLotto> getLottery() {
+    public List<Lotto> create(int lotteryNum, ShuffleStrategy shuffleStrategy) {
+        for (int i = 0; i < lotteryNum; i++) {
+            lottery.add(createLotto(shuffleStrategy));
+        }
+        return lottery;
+    }
+    public RankResult createRankResult(WinningLotto winningNumber) {
+         rankResult.putResult(findMatchNumber(winningNumber));
+         return rankResult;
+    }
+
+    public List<Lotto> getLottery() {
         return lottery;
     }
 
     public int countAllLotto() {
         return lottery.size();
     }
-
-    public List<AutoLotto> create(int lotteryNum, ShuffleStrategy shuffleStrategy) {
-        for (int i = 0; i < lotteryNum; i++) {
-            lottery.add(createLotto(shuffleStrategy));
-        }
-        return lottery;
-    }
-
-    public List<Integer> findMatchNumber(WinningLotto winningNumber) {
+    private List<Integer> findMatchNumber(WinningLotto winningNumber) {
         return lottery.stream()
-                .map(autoLotto -> autoLotto.countMatch(winningNumber))
+                .map(lotto -> lotto.countMatch(winningNumber))
                 .filter(matchNum -> matchNum >= Rank.FOURTH.getMatchNum())
                 .collect(Collectors.toList());
     }
 
-    private AutoLotto createLotto(ShuffleStrategy shuffleStrategy) {
-        return new AutoLotto(sortAndLimitLottoNum(shuffleStrategy));
+    private Lotto createLotto(ShuffleStrategy shuffleStrategy) {
+        return new Lotto(sortAndLimitLottoNum(shuffleStrategy));
     }
 
     private List<LottoNumber> sortAndLimitLottoNum(ShuffleStrategy shuffleStrategy) {
         return shuffleLottoNum(shuffleStrategy)
                 .stream()
-                .limit(AutoLotto.LOTTO_NUMBER_SIZE)
+                .limit(Lotto.LOTTO_NUMBER_SIZE)
                 .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
                 .collect(Collectors.toList());
     }

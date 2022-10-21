@@ -37,8 +37,7 @@ class LotteryTest {
         lottery.create(2, testShuffleStrategy);
 
         assertAll(
-                () -> assertThat(lottery.countAllLotto()).isEqualTo(2),
-                () -> assertThat(lottery.findMatchNumber(lotto)).contains(6,6));
+                () -> assertThat(lottery.countAllLotto()).isEqualTo(2));
     }
 
 }

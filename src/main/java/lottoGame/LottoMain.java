@@ -1,12 +1,17 @@
 package lottoGame;
 
+import lottoGame.model.lotto.Lottery;
 import lottoGame.model.strategy.AutoShuffleStrategy;
 import lottoGame.view.InputView;
 import lottoGame.view.ResultView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        LottoGameController lottoController = new LottoGameController(InputView.print(), new AutoShuffleStrategy(), new ResultView());
-        lottoController.start();
+        LottoGame lottogame = new LottoGame(InputView.print(), new AutoShuffleStrategy());
+        Lottery lottery = lottogame.start();
+        ResultView resultView = new ResultView(lottery);
+        resultView.printLottery();
+        RankResult rankResult = lottery.createRankResult(InputView.inputWinningNumer());
+        resultView.printStatistics(rankResult);
     }
 }
