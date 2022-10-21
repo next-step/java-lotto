@@ -26,10 +26,10 @@ public class LottoTickets {
         return new LottoTickets(createTickets(tickets));
     }
 
-    public static LottoTickets of(int money, List<Lotto> manualLottos) {
-        int tickets = countTicket(money, manualLottos.size());
+    public static LottoTickets of(OrderInformation orderInformation) {
+        int tickets = orderInformation.countAutoTickets();
         List<Lotto> randomLottos = createTickets(tickets);
-        List<Lotto> lottos = Stream.of(manualLottos, randomLottos)
+        List<Lotto> lottos = Stream.of(orderInformation.getManualLottos(), randomLottos)
             .flatMap(Collection::stream)
             .collect(Collectors.toList());
         return new LottoTickets(lottos);
@@ -44,12 +44,6 @@ public class LottoTickets {
     private static int countTicket(int money) {
         valid(money);
         return money / LOTTO_PRICE;
-    }
-
-    private static int countTicket(int money, int manualCount) {
-        int leftMoney = money - (manualCount * LOTTO_PRICE);
-        valid(leftMoney);
-        return leftMoney / LOTTO_PRICE;
     }
 
     public int getTicketCount() {
