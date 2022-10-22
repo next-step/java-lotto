@@ -16,7 +16,7 @@ public class CalculatorTest {
         lottos.addLotto(new Lotto(new Integer[]{3, 5, 7, 11, 45, 23}));
 
         List<Integer> integerList = Arrays.asList(new Integer[]{3, 5, 7, 12, 43, 22});
-        double result = calculator.calculate(lottos, new WinningNumbers(integerList), 1000);
+        double result = calculator.calculate(lottos, new WinningNumbers(integerList, 1), 1000);
 
         Assertions.assertThat(result).isEqualTo(5.0);
     }

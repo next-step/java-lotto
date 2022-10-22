@@ -1,10 +1,7 @@
 package autoLotto;
 
-import org.assertj.core.api.Assertions;
-import org.assertj.core.internal.bytebuddy.build.ToStringPlugin;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class NumberTest {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
                     List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10});
-                    new WinningNumbers(numbers);
+                    new WinningNumbers(numbers, 1);
                 }
         );
     }
@@ -26,25 +23,35 @@ public class NumberTest {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
                     List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10, 11, 12});
-                    new WinningNumbers(numbers);
+                    new WinningNumbers(numbers, 1);
                 }
         );
     }
 
     @Test
-    void 숫자_46_입력() {
+    void 숫자_46이상_입력() {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
                     List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10, 51});
-                    new WinningNumbers(numbers);
+                    new WinningNumbers(numbers, 1);
                 }
         );
     }
 
     @Test
-    void 당첨번호_성공() {
+    void 보너스볼_46이상_입력() {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> {
+                    List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10,11});
+                    new WinningNumbers(numbers, 46);
+                }
+        );
+    }
+
+    @Test
+    void 당첨번호_입력_성공() {
         List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10, 11});
-        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+        WinningNumbers winningNumbers = new WinningNumbers(numbers, 1);
 
         assertThat(winningNumbers.getWinningNumbers()).containsExactly(3,6,9,45,10,11);
     }
