@@ -1,6 +1,10 @@
 package calculator;
 
 public class OperatorFactory {
+    private OperatorFactory() {
+
+    }
+
     public static Operator create(String operator) {
         if (operator.equals("+")) {
             return new Plus();
