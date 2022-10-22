@@ -26,5 +26,8 @@
 - [x] 출력 뷰 클래스 구현
 
 ## TO DO LIST(Step3)
-- [ ] WinningInformation 를 추가 번호에 맞춰 수정
+- [x] WinningInformation 수정
+  - [x] 2등 추가
+  - [x] 보너스 볼 포함 여부 추가
+  - [x] findByCountOfMatchedNumber 수정
 - [ ] InputView 에 추가 번호를 입력할 수 있도록 수정

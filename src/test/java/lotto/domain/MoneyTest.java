@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static lotto.exception.ExceptionMessage.ERROR_NEGATIVE_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;

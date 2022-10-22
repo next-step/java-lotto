@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static lotto.exception.ExceptionMessage.ERROR_INVALID_LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;

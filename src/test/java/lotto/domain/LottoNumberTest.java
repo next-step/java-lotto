@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static lotto.exception.ExceptionMessage.ERROR_EMPTY_VALUE;
 import static lotto.exception.ExceptionMessage.ERROR_INVALID_VALUE_TO_CONVERT;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static lotto.exception.ExceptionMessage.ERROR_NOT_ENOUGH_MONEY;
 import static org.assertj.core.api.Assertions.assertThat;

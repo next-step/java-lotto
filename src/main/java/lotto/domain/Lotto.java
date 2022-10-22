@@ -48,7 +48,7 @@ public class Lotto {
             .filter(this.numbers::contains)
             .count();
 
-        return WinningInformation.findByCountOfMatchedNumber(countOfSameNumber);
+        return WinningInformation.findByMatchedInformation(countOfSameNumber);
     }
 
     @Override
