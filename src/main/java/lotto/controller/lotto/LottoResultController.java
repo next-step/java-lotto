@@ -24,9 +24,18 @@ public class LottoResultController {
 
     private LottoWinner drawWinner() {
         LottoOutput.winningNumber();
-        LottoNumberSet numbers = new LottoNumberSet(LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER));
+        LottoNumberSet numbers = inputWinnerLottoNumberSet();
         LottoOutput.bonusNumber();
         return createLottoWinner(numbers);
+    }
+
+    private static LottoNumberSet inputWinnerLottoNumberSet() {
+        try {
+            return new LottoNumberSet(LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER));
+        } catch (Exception e) {
+            LottoOutput.lottoNumbersInputException();
+        }
+        return inputWinnerLottoNumberSet();
     }
 
     private static LottoWinner createLottoWinner(final LottoNumberSet numbers) {
