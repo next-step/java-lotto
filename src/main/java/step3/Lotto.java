@@ -25,8 +25,4 @@ public class Lotto {
 	public boolean isExist(Integer next) {
 		return lotto.contains(next);
 	}
-
-	public boolean isBonus(int bonus) {
-		return lotto.contains(bonus);
-	}
 }

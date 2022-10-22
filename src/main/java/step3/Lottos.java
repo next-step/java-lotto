@@ -25,7 +25,7 @@ public class Lottos {
 	}
 
 	private int checkBonus(Lotto lotto, int count, int bonus) {
-		if (lotto.isBonus(bonus)) {
+		if (lotto.isExist(bonus)) {
 			return count + 3;
 		}
 		return count;

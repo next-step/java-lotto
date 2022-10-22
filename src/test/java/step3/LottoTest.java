@@ -28,15 +28,6 @@ class LottoTest {
 	}
 
 	@Test
-	@DisplayName("보너스 번호 포함 여부")
-	void bonus() {
-		Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-
-		assertThat(lotto.isBonus(7)).isFalse();
-		assertThat(lotto.isBonus(6)).isTrue();
-	}
-
-	@Test
 	@DisplayName("자동로또, 당첨번호 포함 여부")
 	void lotto() {
 		Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
