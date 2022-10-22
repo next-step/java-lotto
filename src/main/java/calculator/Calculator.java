@@ -4,13 +4,12 @@ import java.util.List;
 
 public class Calculator {
 
-	private final Expressions expressions;
+	private static final InputView inputView = new InputView();
+	private static final OutputView outputView = new OutputView();
 
-	public Calculator(List<String> expressions) {
-		this.expressions = new Expressions(expressions);
-	}
-
-	public int calculate() {
-		return expressions.calculate();
+	public static void main(String[] args) {
+		List<String> rawExpressions = inputView.readExpressions();
+		Expressions expressions = new Expressions(rawExpressions);
+		outputView.printResult(expressions.calculate());
 	}
 }
