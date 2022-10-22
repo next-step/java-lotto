@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,8 +7,6 @@ import java.text.MessageFormat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import calculator.domain.Calculator;
-import calculator.domain.StringCalculator;
 import calculator.exception.ErrorMessage;
 import calculator.exception.OperatorInvalidException;
 
