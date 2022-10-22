@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class Expressions {
 	public int calculate() {
 		Iterator<Operator> operatorIterator = operators.iterator();
 		return numbers.stream()
-			.reduce(operatorIterator.next()::calculate)
+			.reduce((number, otherNumber) -> operatorIterator.next().calculate(number, otherNumber))
 			.orElseThrow(() -> new RuntimeException("연산할 숫자가 없습니다."));
 	}
 
