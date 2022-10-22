@@ -34,7 +34,7 @@ public class ExpressionAsArithmeticExpression {
             throw new IllegalStateException("유효한 연산식이 아닙니다.");
         }
 
-        if (!VALID_ARITHMETIC_EXPRESSION_RULE.matcher(expression).find()) {
+        if (!VALID_ARITHMETIC_EXPRESSION_RULE.matcher(expression).matches()) {
             throw new IllegalStateException("유효한 연산식이 아닙니다.");
         }
 
