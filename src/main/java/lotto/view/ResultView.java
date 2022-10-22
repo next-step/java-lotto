@@ -1,8 +1,9 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.LottoResult;
-import step2.domain.LottoTicket;
-import step2.domain.RankingAward;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.RankingAward;
+import lotto.util.LottoUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class ResultView {
 
     public void printAllLottoNumbers(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.getNumbers());
+            System.out.println(LottoUtil.convertToIntegers(lottoTicket.getNumbers()));
         }
         System.out.println();
     }
@@ -26,9 +27,16 @@ public class ResultView {
         System.out.println("--------------");
 
         for (Map.Entry<Integer, Integer> entry : lottoResult.getLottoRankings().entrySet()) {
-            System.out.println(entry.getKey() + "개 일치 (" + RankingAward.getAward(entry.getKey()) + "원) - " + entry.getValue() + "개");
+            printBonusBallResult(entry.getKey(), entry.getValue());
         }
-
         System.out.println("총 수익률은 " + lottoResult.getPrizePercentage() + "입니다.");
+    }
+
+    private void printBonusBallResult(int ranking, int award) {
+        if (ranking == 7) {
+            System.out.println((ranking - 2) + "개 일치, 보너스 볼 일치 (" + RankingAward.getAward(ranking) + "원) - " + award + "개");
+            return;
+        }
+        System.out.println(ranking + "개 일치 (" + RankingAward.getAward(ranking) + "원) - " + award + "개");
     }
 }

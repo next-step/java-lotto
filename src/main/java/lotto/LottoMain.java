@@ -1,11 +1,11 @@
-package step2;
+package lotto;
 
-import step2.controller.LottoController;
+import lotto.controller.LottoController;
 
 public class LottoMain {
 
     public static void main(String[] args) {
         LottoController lottoController = new LottoController();
-        lottoController.buyLottoTickets();
+        lottoController.buyLotto();
     }
 }
