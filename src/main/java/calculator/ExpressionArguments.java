@@ -5,17 +5,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import calculator.exception.ErrorMessage;
+import calculator.exception.InputNullOrBlankException;
+import calculator.exception.OperandNumberFormatException;
+import calculator.exception.OperatorInvalidException;
+
 public class ExpressionArguments {
 	private static final String BLANK_DELIMITER = " ";
-	private final List<Integer> operands;
+	private final List<Operand> operands;
 	private final List<Operator> operators;
 
-	public ExpressionArguments(String expression) {
+	public ExpressionArguments(String expression) throws OperandNumberFormatException, OperatorInvalidException {
+		if (isNullOrBlank(expression)) {
+			throw new InputNullOrBlankException(ErrorMessage.ILLEGAL_ARGUMENT, expression);
+		}
 		final List<String> splitedExpressions = splitExpression(expression);
 
 		this.operands = IntStream.range(0, splitedExpressions.size())
 			.filter(i -> i % 2 == 0)
-			.mapToObj(i -> Integer.parseInt(splitedExpressions.get(i)))
+			.mapToObj(i -> new Operand(splitedExpressions.get(i)))
 			.collect(Collectors.toList());
 
 		this.operators = IntStream.range(0, splitedExpressions.size())
@@ -24,11 +32,15 @@ public class ExpressionArguments {
 			.collect(Collectors.toList());
 	}
 
+	private boolean isNullOrBlank(String expression) {
+		return expression == null || expression.isBlank();
+	}
+
 	private List<String> splitExpression(String expression) {
 		return Arrays.asList(expression.split(BLANK_DELIMITER));
 	}
 
-	public int getFirstOperand() {
+	public Operand getFirstOperand() {
 		return operands.get(0);
 	}
 
@@ -36,7 +48,7 @@ public class ExpressionArguments {
 		return operators.size();
 	}
 
-	public int getOperand(int index) {
+	public Operand getOperand(int index) {
 		return operands.get(index);
 	}
 
