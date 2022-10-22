@@ -29,17 +29,6 @@ public class Expressions {
 			.orElseThrow(() -> new NoSuchElementException("연산할 숫자가 없습니다"));
 	}
 
-	private List<Integer> getNumbers(List<String> expressions) {
-		return expressions.stream()
-			.filter(this::isNumber)
-			.map(Integer::parseInt)
-			.collect(Collectors.toUnmodifiableList());
-	}
-
-	private boolean isNumber(String expression) {
-		return NUMBER_REGEX.matcher(expression).matches();
-	}
-
 	private List<Operator> getOperators(List<String> expressions) {
 		return expressions.stream()
 			.filter(this::isOperator)
@@ -49,6 +38,17 @@ public class Expressions {
 
 	private boolean isOperator(String expression) {
 		return OPERATOR_REGEX.matcher(expression).matches();
+	}
+
+	private List<Integer> getNumbers(List<String> expressions) {
+		return expressions.stream()
+			.filter(this::isNumber)
+			.map(Integer::parseInt)
+			.collect(Collectors.toUnmodifiableList());
+	}
+
+	private boolean isNumber(String expression) {
+		return NUMBER_REGEX.matcher(expression).matches();
 	}
 
 	private void validateNotNull(List<String> expressions) {
