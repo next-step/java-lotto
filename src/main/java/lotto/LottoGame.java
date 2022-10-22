@@ -1,8 +1,9 @@
 package lotto;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
+import lotto.domain.Money;
 import lotto.domain.Store;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -13,7 +14,8 @@ import java.util.stream.Collectors;
 public class LottoGame {
 
     public static void main(String[] args) {
-        Store store = new Store(InputView.getMoney());
+        Money money = new Money(InputView.getMoney());
+        Store store = new Store(money);
         List<LottoTicket> lottoTickets = store.getLottoTickets();
 
         ResultView.viewCountOfLotto(lottoTickets.size());
@@ -24,7 +26,6 @@ public class LottoGame {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        List<Rank> ranks = store.match(winningNumbers);
-        System.out.println(ranks);
+        ResultView.viewWinningStatics(new LottoResult(store.match(winningNumbers), money));
     }
 }

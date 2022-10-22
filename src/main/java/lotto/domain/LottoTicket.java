@@ -33,9 +33,13 @@ public class LottoTicket {
         }
     }
     public Rank match(final List<LottoNumber> winningLottoTicket) {
-        int count = (int) this.lottoNumbers.stream()
-                .filter(winningLottoTicket::contains)
-                .count();
+        long result = 0L;
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            if (winningLottoTicket.contains(lottoNumber)) {
+                result++;
+            }
+        }
+        int count = (int) result;
         return Rank.of(count);
     }
 

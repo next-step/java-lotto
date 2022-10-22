@@ -25,7 +25,19 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
+    public int totalMoney(final int count) {
+        return this.winningMoney * count;
+    }
+
     private boolean isSameAsMatchCount(final int countOfMatch) {
         return this.countOfMatch == countOfMatch;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }

@@ -12,12 +12,8 @@ public class Store {
 
     private final List<LottoTicket> lottoTickets;
 
-    public Store(final int money) {
-        this.lottoTickets = createLottoTickets(getCountOfTickets(money));
-    }
-
-    private int getCountOfTickets(final int money) {
-        return money / PRICE_OF_LOTTO_TICKET;
+    public Store(final Money money) {
+        this.lottoTickets = createLottoTickets(money.countOfTickets(PRICE_OF_LOTTO_TICKET));
     }
 
     private List<LottoTicket> createLottoTickets(final int countOfTickets) {
@@ -46,6 +42,5 @@ public class Store {
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(this.lottoTickets);
     }
-
 
 }

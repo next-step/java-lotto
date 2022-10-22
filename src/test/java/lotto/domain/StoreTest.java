@@ -7,7 +7,7 @@ class StoreTest {
 
     @Test
     void 로또_구매() {
-        Assertions.assertThat(new Store(15000).getLottoTickets()).hasSize(15);
+        Assertions.assertThat(new Store(new Money(15000)).getLottoTickets()).hasSize(15);
     }
 
 }
