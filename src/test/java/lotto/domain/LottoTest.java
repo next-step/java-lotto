@@ -10,8 +10,8 @@ class LottoTest {
 
     @Test
     void duplicate_Lotto_Tickets() {
-        Lotto lotto_one = new Lotto().makeNumbers(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto_two = new Lotto().makeNumbers(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto_one = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto_two = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         assertThat(lotto_one.getNumberList()).isEqualTo(lotto_two.getNumberList());
     }
@@ -19,10 +19,14 @@ class LottoTest {
     @Test
     void compare_Lotto_Rank() {
         List<Integer> numberList = List.of(1, 2, 3, 4, 5, 6);
-        List<Integer> WinnerNumberList = List.of(1, 2, 3, 4, 5, 7);
+        List<Integer> winnerNumberList = List.of(1, 2, 3, 4, 5, 7);
 
-        Lotto lotto = new Lotto().makeNumbers(numberList);
-        Lotto rank = lotto.matchRank(WinnerNumberList);
+        Lotto lotto = new Lotto(numberList);
+        Lotto rank = lotto.matchRank(winnerNumberList);
+
+        System.out.println(lotto);
+        System.out.println(rank);
+        System.out.println(winnerNumberList);
 
         assertThat(rank.getRank()).isEqualTo(Rank.SECOND);
     }

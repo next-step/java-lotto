@@ -8,7 +8,9 @@ public class Lotto {
     private List<Integer> numberList;
     private Rank rank;
 
-    public Lotto() {}
+    public Lotto(List<Integer> numberList) {
+        this.numberList = numberList;
+    }
 
     public List<Integer> getNumberList() {
         return numberList;
@@ -18,11 +20,6 @@ public class Lotto {
         return rank;
     }
 
-    public Lotto makeNumbers(List<Integer> numberList) {
-        this.numberList = numberList;
-        return this;
-    }
-
     public Lotto matchRank(List<Integer> winnerNumberList) {
         this.rank = Rank.getRank(
                 (int) numberList
@@ -30,6 +27,10 @@ public class Lotto {
                         .filter(winnerNumberList::contains)
                         .count());
         return this;
+    }
+
+    public int match() {
+        return rank.getCount();
     }
 
     @Override

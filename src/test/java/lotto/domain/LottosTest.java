@@ -11,7 +11,10 @@ class LottosTest {
     @Test
     void generate_Number_of_tickets() {
         BigDecimal amount = BigDecimal.valueOf(14000);
-        Lottos lottos = new Lottos(amount).buyLottos(amount);
+
+        Lottos lottos = new Lottos(amount);
+        lottos.buyLottos(lottos.getNumberOfTickets(amount));
+
         assertThat(lottos.getLottoList()).hasSize(14);
     }
 }

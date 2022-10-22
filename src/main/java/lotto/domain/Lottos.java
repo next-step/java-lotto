@@ -17,11 +17,6 @@ public class Lottos {
         this.amount = amount;
     }
 
-    public Lottos(BigDecimal amount, List<Lotto> lottoList) {
-        this.amount = amount;
-        this.lottoList = lottoList;
-    }
-
     public BigDecimal getAmount() {
         return amount;
     }
@@ -30,15 +25,16 @@ public class Lottos {
         return lottoList;
     }
 
-    public Lottos buyLottos(BigDecimal amount) {
+    public int getNumberOfTickets(BigDecimal amount) {
+        return Tickets.getNumberOfTickets(amount);
+    }
+
+    public Lottos buyLottos(int tryNum) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        int tryNum = Tickets.getNumberOfTickets(amount);
         for (int i = 0; i < tryNum; i++) {
             lottoList.add(
-                    new Lotto().makeNumbers(
-                            AutoNumberList.makeNumberList()
-                    )
+                    new Lotto(AutoNumberList.makeNumberList())
             );
         }
 
