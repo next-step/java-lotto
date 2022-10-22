@@ -38,22 +38,19 @@ public enum Operator {
 
 	private final String symbol;
 
-	Operator(String value) {
-		if (!isValidSymbol(value)) {
-			throw new OperatorInvalidException(ErrorMessage.INVALID_OPERATOR, value);
-		}
-		symbol = value;
+	Operator(String symbol) {
+		this.symbol = symbol;
+	}
+
+	public static Operator findBySymbol(String value) {
+		return Arrays.stream(values())
+			.filter(operator -> operator.getSymbol().equals(value))
+			.findAny()
+			.orElseThrow(() -> new OperatorInvalidException(ErrorMessage.INVALID_OPERATOR, value));
 	}
 
 	public String getSymbol() {
 		return symbol;
-	}
-
-	public boolean isValidSymbol(String value) {
-		return Arrays.stream(values())
-			.anyMatch(
-				operator -> operator.getSymbol().equals(value)
-			);
 	}
 
 	public abstract int operate(Operand preOperand, Operand postOperand);

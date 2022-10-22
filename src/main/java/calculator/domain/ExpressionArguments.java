@@ -26,7 +26,7 @@ public class ExpressionArguments {
 
 		this.operators = IntStream.range(0, splitedExpressions.size())
 			.filter(i -> i % 2 == 1)
-			.mapToObj(i -> Operator.valueOf(splitedExpressions.get(i)))
+			.mapToObj(i -> Operator.findBySymbol(splitedExpressions.get(i)))
 			.collect(Collectors.toList());
 	}
 
