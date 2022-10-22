@@ -31,7 +31,7 @@ public class CalcNumber {
         }
     }
 
-    public int getNumber() {
+    public int number() {
         return number;
     }
 

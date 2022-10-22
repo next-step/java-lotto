@@ -10,6 +10,6 @@ class StringCalculatorServiceTest {
     @Test
     @DisplayName("사칙연산을 순서대로 수행하는 테스트")
     void calculateTest() {
-        assertThat(StringCalculatorService.calculate("2 + 3 * 4 / 2")).isEqualTo(new CalcNumber(10));
+        assertThat(StringCalculatorService.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
     }
 }

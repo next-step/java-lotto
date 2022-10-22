@@ -37,3 +37,64 @@
 - [x] Test input이 하나일때 @ParameterizedTest -> @Test 사용
 - [x] ArithmeticOperation 정적 팩토리 메서드로 처리하기.
 - [x] 의미없는 test 삭제
+- [x] StaticFactoryMethod 구현 수정. - Enum 추가
+- [x] Operation 성능 보완 구현.
+---
+
+---
+##Step2 - 로또(자동)
+###기능 요구사항
+> - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+> - 로또 1장의 가격은 1000원이다.
+
+###기능 목록
+- [x] LottoAmount
+  - 로또 가격에 대하여 로또 개수를 구한다.
+  - 로또는 1000원 이상 있어야 구입 가능하다.
+  - 로또 하나당 1000원씩 받아야 한다.
+- [x] InputView
+  - 구입금액 입력해 주세요.
+  - 지난 주 당첨 번호를 입력해 주세요.
+- [x] LottoNumber 제약조건에 맞춰 구현
+  - 1~45까지의 수만 허용한다.
+- [x] Lotto
+  - List<LottoNumber>
+  - 중복 없이 6개의 숫자 
+  - 지난주 로또 개수도 입력 받아야 함.
+- [x] LottoTickets
+  - List< Lotto >
+  - 금액에 따라 Lotto 리스트 개수 출력
+- [x] 로또 생성 List 담을 LottoDto
+- [x] LottoPrize
+  - 로또 당첨 여부 -> 번호 일치 개수
+- [x] Lotto match result 구현.
+- [x] LottoWinningRate
+  - 승률 구하기
+- [x] ResultView
+  - ~개를 구매했습니다.
+  - 당첨통계
+  - 수익률
+
+### 리뷰 요구사항
+- [x] InputView 에서 질문에 해당하는 입력 값 바로 리턴하게 수정.
+- [x] 객체가 직접 Validation 관리하게 수정
+  - [x] LottoAmountExpression -> LottoAmount 로 이동.
+  - [x] LottoNumberExpression -> LottoNumber 로 이동.
+- [x] LottoNumber
+  - [x] 접근제어자 알맞은지 확인
+  - [X] LottoNumber 의 null 에 대해.
+  - [x] LottoNumber 생성 test
+- [x] Lotto 
+  - size 검증 메소드 이동.
+  - generate 함수 오버로딩.
+- [x] Lotto List -> Set
+- [x] LottoPrize -> Rank
+- [x] 당첨된 결과 winning 에서 처리 후 ResultView 로 넘기기
+- [x] method UI 의존성 수정
+  - Lotto generateReport()
+  - LottoTicket generateTicket().
+- [x] 필드명, 함수명 수정
+  - List<lotto> -> lottoTicket
+  - lastWeekTicket -> winningTicket
+
+- [x] LottoAmount 에서 가격에대한 수익률 구하기.
