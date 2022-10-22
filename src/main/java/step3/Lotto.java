@@ -1,6 +1,7 @@
 package step3;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 
@@ -11,6 +12,7 @@ public class Lotto {
 	}
 
 	public Lotto(String[] inputs) {
+		this.lotto = new TreeSet<>();
 		for (String input : inputs) {
 			this.lotto.add(Integer.parseInt(input));
 		}
