@@ -9,12 +9,16 @@ public enum Rank {
     FORTH(3, BigDecimal.valueOf(5000)),
     ZERO(0, BigDecimal.valueOf(0));
 
-    private int count;
-    private BigDecimal amount;
+    private final int count;
+    private final BigDecimal amount;
 
     Rank(int count, BigDecimal amount) {
         this.count = count;
         this.amount = amount;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     public BigDecimal getAmount() {
