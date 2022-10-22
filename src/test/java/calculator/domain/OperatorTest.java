@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class OperatorTest {
+
     private final int num1 = 1;
     private final int num2 = 2;
 

@@ -1,7 +1,9 @@
 package calculator.util;
 
 public class StringUtil {
-    private StringUtil() {
+
+    private StringUtil()
+    {
         throw new IllegalArgumentException("utility class");
     }
 
@@ -13,8 +15,7 @@ public class StringUtil {
         boolean numeric = true;
         try {
             Integer.parseInt(str);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             numeric = false;
         }
         return numeric;

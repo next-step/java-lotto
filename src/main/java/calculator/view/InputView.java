@@ -2,8 +2,7 @@ package calculator.view;
 
 import java.util.Scanner;
 
-public class InputView
-{
+public class InputView {
     private InputView() {
         throw new IllegalArgumentException("utility class");
     }

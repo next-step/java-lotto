@@ -35,6 +35,6 @@ public enum Operator {
             .collect(Collectors.toMap(Operator::getOpCode, Function.identity())));
 
     private static Operator getOperator(String opCode) {
-        return Optional.ofNullable(map.get(opCode)).orElseThrow(IllegalArgumentException::new);
+        return Optional.ofNullable(map.get(opCode)).orElseThrow(() -> new IllegalArgumentException("사칙연산 문자가 아닌 문자입니다."));
     }
 }

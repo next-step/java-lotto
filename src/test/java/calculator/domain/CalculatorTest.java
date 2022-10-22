@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class CalculatorTest {
+
     @Test
     void 계산식을_확인한다() {
         Calculator mapper = Calculator.from("2 + 3 * 4 / 2");

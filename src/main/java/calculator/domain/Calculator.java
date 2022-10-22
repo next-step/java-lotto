@@ -7,7 +7,9 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
-public class Calculator {
+public class Calculator
+{
+
     private static final String BLANK = " ";
     private static final String ERROR_NULL_OR_EMPTY_MESSAGE = "NULL 또는 공백은 입력할 수 없습니다.";
     private static final String ERROR_FIRST_NOT_NUMBER_MESSAGE = "코드의 시작이 숫자가 아닙니다.";
@@ -20,7 +22,8 @@ public class Calculator {
         this.codes = new LinkedList<>(Arrays.asList(code.split(BLANK)));
     }
 
-    public static Calculator from(String str) {
+    public static Calculator from(String str)
+    {
         return new Calculator(str);
     }
 
@@ -36,5 +39,4 @@ public class Calculator {
         }
         return result;
     }
-
 }
