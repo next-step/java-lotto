@@ -38,10 +38,10 @@ public class Output {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (5000원)- %d개\n", result.numberOfFourthRank());
-        System.out.printf("4개 일치 (50000원)- %d개\n", result.numberOfThirdRank());
-        System.out.printf("5개 일치 (1500000원)- %d개\n", result.numberOfSecondRank());
-        System.out.printf("5개 일치, 보너스 볼 일치(30000000원) - %d개\n", result.numberOfSecondRankWithBonus());
+        System.out.printf("3개 일치 (5000원)- %d개\n", result.numberOfFifthRank());
+        System.out.printf("4개 일치 (50000원)- %d개\n", result.numberOfFourthRank());
+        System.out.printf("5개 일치 (1500000원)- %d개\n", result.numberOfThirdRank());
+        System.out.printf("5개 일치, 보너스 볼 일치(30000000원) - %d개\n", result.numberOfSecondRank());
         System.out.printf("6개 일치 (2000000000원)- %d개\n", result.numberOfFirstRank());
         if (result.hasBenefit()) {
             System.out.printf("총 수익률은 %.2f입니다.(어떻게 하셧죠??????)", result.calculateProfitRate());
