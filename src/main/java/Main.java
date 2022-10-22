@@ -1,15 +1,16 @@
-import domain.Calculator;
+import domain.LottoMachine;
 import view.InputView;
 import view.ResultView;
 
 public class Main {
 
   public static void main(String[] args) {
+    int amount = InputView.paybill();
+    LottoMachine lottoMachine = new LottoMachine();
 
-    String question = InputView.expression();
-    Calculator calculator = new Calculator();
-    int result = calculator.getResult(question);
-    ResultView.printResult(result);
+    float totalPrize = lottoMachine.calculateTotalPrize(InputView.winningNums(),amount);
+    float revenueRatio =lottoMachine.revenueRatio(amount,totalPrize);
+    ResultView.showPrizeStatistics(lottoMachine.getPrizeMap(),revenueRatio);
   }
 
 }
