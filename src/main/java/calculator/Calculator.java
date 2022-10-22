@@ -2,6 +2,7 @@ package calculator;
 
 public class Calculator {
     private final String expr;
+
     public Calculator(String expr) {
         if (expr == null || expr.isBlank()) {
             throw new IllegalArgumentException("should not null or empty string");
