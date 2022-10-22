@@ -21,4 +21,8 @@ public class Price {
     public Amount calculateAmount(Price price) {
         return new Amount(this.price / price.price);
     }
+
+    public double divide(int price) {
+        return price / this.price;
+    }
 }

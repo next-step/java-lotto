@@ -5,6 +5,7 @@ import lotto.exception.LotteryGameException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Amount {
 
@@ -31,5 +32,18 @@ public class Amount {
 
     public int getAmount() {
         return amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Amount amount1 = (Amount) o;
+        return amount == amount1.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
     }
 }

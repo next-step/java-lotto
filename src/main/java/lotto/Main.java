@@ -19,5 +19,8 @@ public class Main {
         outputView.printTickets(tickets);
 
         LotteryTicket winningTicket = LotteryTicket.of(inputView.enterWinningNumbers());
+        Ranks ranks = tickets.calculateRanks(winningTicket);
+        Double rateOfRank = ranks.calculateRateOfReturn(price);
+        outputView.printResult(ranks, rateOfRank);
     }
 }

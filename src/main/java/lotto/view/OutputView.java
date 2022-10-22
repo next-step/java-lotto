@@ -1,11 +1,9 @@
 package lotto.view;
 
-import lotto.domain.Amount;
-import lotto.domain.LotteryNumber;
-import lotto.domain.LotteryTicket;
-import lotto.domain.LotteryTickets;
+import lotto.domain.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -27,5 +25,21 @@ public class OutputView {
                 .collect(Collectors.toList());
 
         System.out.printf("[%s]%n", String.join(", ", numbers));
+    }
+
+    public void printResult(Ranks ranks, Double prize) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for(var rank : ranks.getRanks().entrySet()) {
+            printRank(rank.getKey(), rank.getValue());
+        }
+        System.out.println();
+        System.out.printf("총 수익률은 %.2f입니다.", prize);
+    }
+
+    private void printRank(Rank rank, Integer count) {
+        if(rank != Rank.NON_MATCH) {
+            System.out.printf("%d개 일치 (%d원)- %d개%n", rank.getCount(), rank.getPrize(), count);
+        }
     }
 }
