@@ -32,8 +32,16 @@ public class Store {
             numList.add(i);
         }
         Collections.shuffle(numList);
-        return new LottoTicket(numList.subList(0, 6));
+        return new LottoTicket(numList.subList(0, LottoTicket.LOTTO_NUMBER_SIZE));
     }
+
+    // public List<Rank> match(final List<Integer> winningsNumber) {
+    //     int result = 0;
+    //     for (LottoTicket lottoTicket : this.lottoTickets) {
+    //         Rank rank = lottoTicket.getWinner(winningsNumber);
+    //
+    //     }
+    // }
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(this.lottoTickets);

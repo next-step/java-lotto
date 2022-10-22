@@ -7,7 +7,7 @@ import lotto.view.ResultView;
 
 import java.util.List;
 
-public class LottoController {
+public class LottoGame {
 
     public static void main(String[] args) {
         Store store = new Store(InputView.getMoney());
@@ -16,5 +16,6 @@ public class LottoController {
         ResultView.viewCountOfLotto(lottoTickets.size());
         ResultView.viewLottoTickets(lottoTickets);
 
+        InputView.getWinningNumbers();
     }
 }
