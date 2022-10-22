@@ -26,7 +26,7 @@ public class Expressions {
 		Iterator<Operator> operatorIterator = operators.iterator();
 		return numbers.stream()
 			.reduce((number, otherNumber) -> operatorIterator.next().calculate(number, otherNumber))
-			.orElseThrow(() -> new RuntimeException("연산할 숫자가 없습니다."));
+			.orElseThrow(() -> new NoSuchElementException("연산할 숫자가 없습니다"));
 	}
 
 	private List<Integer> getNumbers(List<String> expressions) {
