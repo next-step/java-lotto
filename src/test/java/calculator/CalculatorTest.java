@@ -28,9 +28,15 @@ public class CalculatorTest {
 	@DisplayName("사칙연산은 특정 기호만 허용한다")
 	void only_certain_operators_are_allowed() {
 		List<String> expressionsWithAllowedOperators = List.of("1 + 2 / 3 - 1 * 2".split(SINGLE_SPACE));
-		List<String> expressionsWithNotAllowedOperators = List.of("1 + 2 ^ 3 @ 4".split(SINGLE_SPACE));
 
 		assertThatNoException().isThrownBy(() -> new Calculator(expressionsWithAllowedOperators));
+	}
+
+	@Test
+	@DisplayName("허용되지 않은 사칙연산 기호는 오류를 발생시킨다")
+	void not_allowed_operators_throws_exception() {
+		List<String> expressionsWithNotAllowedOperators = List.of("1 + 2 ^ 3 @ 4".split(SINGLE_SPACE));
+
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> new Calculator(expressionsWithNotAllowedOperators));
 	}
