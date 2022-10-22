@@ -16,12 +16,23 @@ public class Numbers {
 
 
     public int calculatedResult(Operators operators) {
+        verifyValidOperators(operators);
+
         Queue<Operator> arithmeticOperators = operators.operators();
 
         return expressionAsNumbers.numbers()
                 .stream()
                 .reduce((operand, anotherOperand) -> arithmeticOperators.poll().executedResult(operand, anotherOperand))
                 .orElse(0);
+    }
+
+    private void verifyValidOperators(Operators operators) {
+        int numbersSize = expressionAsNumbers.numbers().size();
+        int operatorsSize = operators.operators().size();
+
+        if (numbersSize - operatorsSize != 1) {
+            throw new IllegalArgumentException("유효한 연산자가 아닙니다.");
+        }
     }
 
     @Override
