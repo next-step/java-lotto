@@ -39,9 +39,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public boolean contain(int number){
-        return this.lottoNumbers.contains(number);
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
-
-
 }

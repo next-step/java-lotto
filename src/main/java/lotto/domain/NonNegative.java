@@ -5,7 +5,7 @@ public class NonNegative {
     private final int number;
 
     public NonNegative(int number) {
-        if(number <= 0){
+        if(number < 0){
             throw new IllegalArgumentException("숫자가 0이상이어야 합니다.");
         }
         this.number = number;

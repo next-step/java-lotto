@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.WinningGrade;
-import lotto.domain.WinningPrice;
-import lotto.domain.WinningStatistic;
+import lotto.domain.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -11,8 +8,13 @@ import java.util.Map;
 
 public class ResultView {
 
+
+    public static void printPurchaseMethodMessage(LottoPurchaseMethod lottoPurchaseMethod){
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
+                lottoPurchaseMethod.getManualCount(), lottoPurchaseMethod.autoCount());
+    }
+
     public static void printLottoNumber(List<Lotto> lotties){
-        System.out.println(lotties.size() + "개를 구매했습니다.");
         lotties.forEach(lotto -> System.out.println(lotto.getLottoNumbers()));
     }
 
