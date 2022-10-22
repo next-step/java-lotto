@@ -1,6 +1,10 @@
 package lotto.domains;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
+import lotto.exceptions.InvalidLottoNumberException;
 import lotto.exceptions.LottoNumberFormatException;
 
 public class LottoNumber {
@@ -8,25 +12,40 @@ public class LottoNumber {
     protected static final int END_NUMBER = 45;
 
     private final int number;
+    private static Map<Integer, LottoNumber> cache = new HashMap<>();
 
-    public LottoNumber(String string) {
+    static {
+        IntStream.rangeClosed(START_NUMBER, END_NUMBER)
+                .forEach(i -> cache.put(i, new LottoNumber(i)));
+    }
+
+    public static LottoNumber of(String string) {
         try {
-            int number = Integer.parseInt(string);
-            validateNumber(number);
-            this.number = number;
+            return get(Integer.parseInt(string));
         } catch (NumberFormatException e) {
             throw new LottoNumberFormatException(string);
         }
     }
 
-    public LottoNumber(int number) {
+    public static LottoNumber of(int number) {
+        return get(number);
+    }
+
+    private static LottoNumber get(int number) {
+        if (!cache.containsKey(number)) {
+            throw new InvalidLottoNumberException(number);
+        }
+        return cache.get(number);
+    }
+
+    private LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
 
     private void validateNumber(int number) {
         if (number < START_NUMBER || END_NUMBER < number) {
-            throw new IllegalArgumentException("로또 숫자(1 ~ 45)가 아닙니다. 입력값: " + number);
+            throw new InvalidLottoNumberException(number);
         }
     }
 

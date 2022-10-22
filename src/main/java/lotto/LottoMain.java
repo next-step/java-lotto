@@ -21,7 +21,7 @@ public class LottoMain {
             inputView.printPurchasedLottoList(lottoList);
 
             Lotto lastWinnerLotto = new Lotto(inputView.inputLastWinner());
-            LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
+            LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
             LottoWinner lastWinner = new LottoWinner(lastWinnerLotto, bonusNumber);
 
             resultView.printStatistics(new LottoStatistics(lottoList, lastWinner));

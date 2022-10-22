@@ -14,7 +14,7 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("parametersProvider")
     void Given_LottoAndWinner_When_GetPrize_Then_EqualsTo_Expected(Lotto lotto, Prize expected) {
-        LottoWinner winner = new LottoWinner(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        LottoWinner winner = new LottoWinner(new Lotto(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
 
         assertThat(lotto.getPrize(winner)).isEqualTo(expected);
     }
