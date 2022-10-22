@@ -21,10 +21,14 @@ public enum Rank {
     }
 
     public static Rank valueOf(final int matchedCount, final boolean withBonus) {
-        Rank result = Arrays.stream(Rank.values())
+        return Arrays.stream(Rank.values())
             .filter(rank -> rank.matchedCount == matchedCount)
+            .map(rank -> checkBonus(withBonus, rank))
             .findFirst()
             .orElse(MISS);
+    }
+
+    private static Rank checkBonus(boolean withBonus, Rank result) {
         if (SECOND == result && !withBonus) {
             return THIRD;
         }
