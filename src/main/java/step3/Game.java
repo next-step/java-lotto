@@ -22,11 +22,7 @@ public class Game {
 	}
 
 	public static Lotto makeWinningResult(String[] winningNumbers) {
-		Set<Integer> list = new TreeSet<>();
-		for (String winningNumber : winningNumbers) {
-			list.add(Integer.parseInt(winningNumber));
-		}
-		return new Lotto(list);
+		return new Lotto(winningNumbers);
 	}
 
 	public static Result startRaffle(int amount) {

@@ -10,6 +10,12 @@ public class Lotto {
 		this.lotto = lotto;
 	}
 
+	public Lotto(String[] inputs) {
+		for (String input : inputs) {
+			this.lotto.add(Integer.parseInt(input));
+		}
+	}
+
 	public Set<Integer> getLotto() {
 		return lotto;
 	}
