@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class CalculatorTest {
 
@@ -42,12 +44,12 @@ public class CalculatorTest {
 			.isThrownBy(() -> new Calculator(expressionsWithNotAllowedOperators));
 	}
 
-	@Test
-	@DisplayName("입력 순서대로 사칙연산을 할 수 있다")
-	void calculate_between_numbers() {
-		List<String> expressions = List.of("2 + 3 * 4 / 2".split(SINGLE_SPACE));
+	@ParameterizedTest(name = "입력 순서대로 사칙연산을 할 수 있다 {index}")
+	@CsvSource(value = {"2 + 3 * 4 / 2 = 10", "22 + 3 * 4 / 2 = 50"}, delimiterString = " = ")
+	void calculate_between_numbers(String rawExpressions, int expectedNumber) {
+		List<String> expressions = List.of(rawExpressions.split(SINGLE_SPACE));
 		Calculator calculator = new Calculator(expressions);
 
-		assertThat(calculator.calculate()).isEqualTo(10);
+		assertThat(calculator.calculate()).isEqualTo(expectedNumber);
 	}
 }
