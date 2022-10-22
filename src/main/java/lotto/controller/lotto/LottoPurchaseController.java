@@ -35,14 +35,23 @@ public class LottoPurchaseController {
 
     private LottoList purchaseManualLotto() {
         LottoOutput.purchaseManualAmount();
-        Amount manualAmount = new Amount(LottoInput.purchaseManualAmount());
+        Amount manualAmount = inputManualAmount();
         LottoOutput.manualLottoNumbers();
 
         return lottoPurchaseService.purchaseLotto(
                 IntStream.range(0, manualAmount.amount())
-                .mapToObj(i -> LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER))
-                .map(ints -> new LottoNumberSet(ints))
-                .collect(Collectors.toList())
+                        .mapToObj(i -> LottoInput.lottoNumbers(LottoNumberSet.LOTTONUMBERSET_DELIMITER))
+                        .map(ints -> new LottoNumberSet(ints))
+                        .collect(Collectors.toList())
         );
+    }
+
+    private static Amount inputManualAmount() {
+        try {
+            return new Amount(LottoInput.purchaseManualAmount());
+        } catch (Exception e) {
+            LottoOutput.purchaseManualAmountInputException();
+        }
+        return inputManualAmount();
     }
 }
