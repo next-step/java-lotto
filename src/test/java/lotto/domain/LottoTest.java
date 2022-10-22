@@ -30,4 +30,21 @@ public class LottoTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("로또의 숫자 갯수는 6개 입니다.");
     }
+
+    @Test
+    void 등수확인() {
+        Lotto first = new Lotto(Number.of(1, 2, 3, 4, 5, 6));
+        Lotto second = new Lotto(Number.of(2, 3, 4, 5, 6, 7));
+        Lotto third = new Lotto(Number.of(2, 3, 4, 5, 6, 8));
+        Lotto fourth = new Lotto(Number.of(3, 4, 5, 6, 7, 8));
+        Lotto fifth = new Lotto(Number.of(4, 5, 6, 7, 8, 9));
+
+        WinnerNumbers winnerNumbers = new WinnerNumbers(Number.of(1, 2, 3, 4, 5, 6), Number.of(7));
+
+        Assertions.assertThat(first.checkRank(winnerNumbers)).isEqualTo(Rank.FIRST);
+        Assertions.assertThat(second.checkRank(winnerNumbers)).isEqualTo(Rank.SECOND);
+        Assertions.assertThat(third.checkRank(winnerNumbers)).isEqualTo(Rank.THIRD);
+        Assertions.assertThat(fourth.checkRank(winnerNumbers)).isEqualTo(Rank.FOURTH);
+        Assertions.assertThat(fifth.checkRank(winnerNumbers)).isEqualTo(Rank.FIFTH);
+    }
 }

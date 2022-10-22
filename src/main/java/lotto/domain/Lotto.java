@@ -23,7 +23,7 @@ public class Lotto {
     }
 
     public Rank checkRank(WinnerNumbers winnerNumbers) {
-        return winnerNumbers.checkRank(numbers);
+        return Rank.valueOf(winnerNumbers.match(numbers), winnerNumbers.hasBonus(numbers));
     }
 
     @Override

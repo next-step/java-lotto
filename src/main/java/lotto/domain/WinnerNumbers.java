@@ -12,14 +12,14 @@ public class WinnerNumbers {
         this.numbers = numbers;
         this.bonus = bonus;
     }
-    
-    public Rank checkRank(Set<Number> lottoNumbers) {
-        return Rank.valueOf(match(lottoNumbers), lottoNumbers.contains(bonus));
-    }
 
-    private int match(Set<Number> lottoNumbers) {
+    public int match(Set<Number> lottoNumbers) {
         List<Number> numbers = new ArrayList<>(this.numbers);
         numbers.retainAll(lottoNumbers);
         return numbers.size();
+    }
+
+    public boolean hasBonus(Set<Number> lottoNumbers) {
+        return lottoNumbers.contains(bonus);
     }
 }
