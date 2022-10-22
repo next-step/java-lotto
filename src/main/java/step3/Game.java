@@ -14,15 +14,11 @@ public class Game {
 
 		Result guestResult = startRaffle(amount);
 		Print.winningNumber();
-		String[] lastweekLotto = InputView.input().split(", ");
+		Lotto winLotto = new Lotto(InputView.input().split(", "));
 		Print.bonusBall();
-		String bonus = InputView.input();
+		int bonus = Integer.parseInt(InputView.input());
 
-		Print.rateOfWin(input, guestResult.results(makeWinningResult(lastweekLotto), Integer.parseInt(bonus)));
-	}
-
-	public static Lotto makeWinningResult(String[] winningNumbers) {
-		return new Lotto(winningNumbers);
+		Print.rateOfWin(input, guestResult.results(winLotto, bonus));
 	}
 
 	public static Result startRaffle(int amount) {
