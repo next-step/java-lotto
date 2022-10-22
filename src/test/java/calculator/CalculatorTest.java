@@ -21,6 +21,7 @@ public class CalculatorTest {
 	@DisplayName("수식은 공백을 포함할 수 없다")
 	void expressions_is_not_containing_blank() {
 		List<String> expressions = List.of(" ", "  ");
+
 		assertThatThrownBy(() -> new Calculator(expressions)).isInstanceOf(IllegalArgumentException.class);
 	}
 
