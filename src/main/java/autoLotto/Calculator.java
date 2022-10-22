@@ -4,28 +4,18 @@ public class Calculator {
     private static final int INIT_NUM = 0;
 
     public static double calculate(Lottos lottos, WinningNumbers winningNumbers, int amount) {
-        long totalAmount = INIT_NUM;
-        for (Lotto lotto : lottos.getLottos()) {
-            countOfMatch(lotto.getMatchQuantity(winningNumbers.getWinningNumbers()));
-            totalAmount = getTotalAmount();
-        }
+        long totalAmount = getTotalAmount(lottos, winningNumbers);
         return Math.floor(((double)totalAmount / amount) * 100) / 100.0;
     }
 
-    private static long getTotalAmount() {
-        long result = INIT_NUM;
+    private static long getTotalAmount(Lottos lottos, WinningNumbers winningNumbers) {
+        long totalAmount = INIT_NUM;
+        for (Lotto lotto : lottos.getLottos()) {
+            int count = lotto.countOfMatch(winningNumbers.getWinningNumbers());
+            boolean bonus = lotto.matchBonus(winningNumbers.getBonusNumber());
 
-        for (Match match : Match.values()) {
-            result += match.getTotalAmount();
+            totalAmount += Rank.valueOf(count, bonus).getWinningMoney();
         }
-
-        return result;
-    }
-
-    private static void countOfMatch(int matchNumQuantity) {
-        if (matchNumQuantity >= 3) {
-            Match match = Matcher.get(matchNumQuantity);
-            match.countOfMatch();
-        }
+        return totalAmount;
     }
 }

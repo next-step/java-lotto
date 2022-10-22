@@ -1,37 +1,42 @@
 package autoLotto;
 
-import static autoLotto.Match.*;
+import static autoLotto.Rank.*;
 
 public class GameResult {
-
-    private int threeMatch;
-    private int fourMatch;
-    private int fiveMatch;
-    private int sixMatch;
     private double result;
+    private int firstRank;
+    private int secondRank;
+    private int thirdRank;
+    private int fourthRank;
+    private int fifthRank;
 
     public GameResult(double result) {
-        this.threeMatch = THREE.getCountOfMatch();
-        this.fourMatch = FOUR.getCountOfMatch();
-        this.fiveMatch = FIVE.getCountOfMatch();
-        this.sixMatch = SIX.getCountOfMatch();
+        this.firstRank = FIRST.getCountOfRank();
+        this.secondRank = SECOND.getCountOfRank();
+        this.thirdRank = THIRD.getCountOfRank();
+        this.fourthRank = FOURTH.getCountOfRank();
+        this.fifthRank = FIFTH.getCountOfRank();
         this.result = result;
     }
 
-    public int getThreeMatch() {
-        return threeMatch;
+    public int getFirstRank() {
+        return firstRank;
     }
 
-    public int getFourMatch() {
-        return fourMatch;
+    public int getSecondRank() {
+        return secondRank;
     }
 
-    public int getFiveMatch() {
-        return fiveMatch;
+    public int getThirdRank() {
+        return thirdRank;
     }
 
-    public int getSixMatch() {
-        return sixMatch;
+    public int getFourthRank() {
+        return fourthRank;
+    }
+
+    public int getFifthRank() {
+        return fifthRank;
     }
 
     public double getResult() {

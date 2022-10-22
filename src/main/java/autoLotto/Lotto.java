@@ -35,7 +35,7 @@ public class Lotto {
         return lotto.toString();
     }
 
-    public int getMatchQuantity(List<Integer> numbers) {
+    public int countOfMatch(List<Integer> numbers) {
         int count = 0;
 
         for (Integer number : numbers) {
@@ -43,6 +43,10 @@ public class Lotto {
         }
 
         return count;
+    }
+
+    public boolean matchBonus(int number) {
+        return lotto.contains(number);
     }
 
     private int getCount(int count, Integer number) {

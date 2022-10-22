@@ -10,13 +10,14 @@ public class AutoLotto {
         int countOfLotto = quantity.getQuantity();
         OutputView.outputQuantity(countOfLotto);
 
-        for ( int i = 0 ; i < countOfLotto ; i++) {
+        for (int i = 0 ; i < countOfLotto ; i++) {
             lottos.addLotto(new Lotto());
         }
 
         OutputView.outputLottos(lottos);
-        double result = Calculator.calculate(lottos, new WinningNumbers(InputView.inputNumbers(), InputView.inputBonusNumber()),
-                countOfLotto * LOTTO_PRICE);
+
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.inputNumbers(), InputView.inputBonusNumber());
+        double result = Calculator.calculate(lottos, winningNumbers, countOfLotto * LOTTO_PRICE);
 
         OutputView.outputResult(new GameResult(result));
     }

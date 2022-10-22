@@ -23,7 +23,7 @@ public class LottosTest {
         Lotto lotto = new Lotto(new Integer[]{1, 2, 3, 4, 5, 6});
         List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 5, 45, 10, 11});
 
-        assertThat(lotto.getMatchQuantity(numbers)).isEqualTo(3);
+        assertThat(lotto.countOfMatch(numbers)).isEqualTo(3);
 
     }
 }

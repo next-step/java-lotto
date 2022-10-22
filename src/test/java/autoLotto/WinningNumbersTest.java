@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class NumberTest {
+public class WinningNumbersTest {
     @Test
     void 숫자_6개미만_입력() {
         assertThatIllegalArgumentException().isThrownBy(
