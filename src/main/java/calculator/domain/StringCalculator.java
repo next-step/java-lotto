@@ -2,8 +2,6 @@ package calculator.domain;
 
 import static java.lang.System.*;
 
-import java.util.stream.IntStream;
-
 public class StringCalculator implements Calculator {
 
 	@Override
@@ -19,12 +17,13 @@ public class StringCalculator implements Calculator {
 	}
 
 	private int getResult(ExpressionArguments expressionArguments) {
-		return IntStream.range(0, expressionArguments.getOperatorsSize())
-			.reduce(expressionArguments.getFirstOperand(),
-				(preIdx, postIdx) ->
-					expressionArguments.getOperators().get(postIdx)
-						.operate(expressionArguments.getOperands().get(preIdx),
-							expressionArguments.getOperands().get(postIdx))
-			);
+		int result = expressionArguments.getFirstOperand();
+		for (int i = 0; i < expressionArguments.getOperatorsSize(); i++) {
+			result = expressionArguments.getOperators()
+				.get(i)
+				.operate(result, expressionArguments.getOperands().get(i + 1).getNumber());
+		}
+
+		return result;
 	}
 }

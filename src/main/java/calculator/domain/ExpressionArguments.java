@@ -28,6 +28,7 @@ public class ExpressionArguments {
 			.filter(i -> i % 2 == 1)
 			.mapToObj(i -> Operator.findBySymbol(splitedExpressions.get(i)))
 			.collect(Collectors.toList());
+		System.out.println(operands.toString() + " " + operators.toString());
 	}
 
 	private boolean isNullOrBlank(String expression) {

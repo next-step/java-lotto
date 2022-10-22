@@ -9,27 +9,27 @@ import calculator.exception.ZeroDivideException;
 public enum Operator {
 	ADDITION("+") {
 		@Override
-		public int operate(Operand preOperand, Operand postOperand) {
-			return preOperand.getNumber() + postOperand.getNumber();
+		public int operate(int preOperand, int postOperand) {
+			return preOperand + postOperand;
 		}
 	},
 	SUBTRACTION("-") {
 		@Override
-		public int operate(Operand preOperand, Operand postOperand) {
-			return preOperand.getNumber() - postOperand.getNumber();
+		public int operate(int preOperand, int postOperand) {
+			return preOperand - postOperand;
 		}
 	},
 	MULTIPLICATION("*") {
 		@Override
-		public int operate(Operand preOperand, Operand postOperand) {
-			return preOperand.getNumber() * postOperand.getNumber();
+		public int operate(int preOperand, int postOperand) {
+			return preOperand * postOperand;
 		}
 	},
 	DIVISION("/") {
 		@Override
-		public int operate(Operand preOperand, Operand postOperand) {
+		public int operate(int preOperand, int postOperand) {
 			try {
-				return preOperand.getNumber() / postOperand.getNumber();
+				return preOperand / postOperand;
 			} catch (ZeroDivideException exception) {
 				throw new ZeroDivideException(ErrorMessage.ZERO_DIVIDE);
 			}
@@ -53,5 +53,5 @@ public enum Operator {
 		return symbol;
 	}
 
-	public abstract int operate(Operand preOperand, Operand postOperand);
+	public abstract int operate(int preOperand, int postOperand);
 }
