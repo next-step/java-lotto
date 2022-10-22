@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
@@ -20,17 +21,22 @@ public class LottoGame {
     }
 
     public void start(NumberGenerateStrategy method) {
-        output.showResult(Result.of(buyNumbers(method), lastLuckyNumber()));
+        Money paidMoney = input.paidMoney();
+        output.showResult(Result.of(buyNumbers(method, paidMoney), lastLuckyNumber(), bonusNumber(), paidMoney));
     }
 
-    private LottoNumbers buyNumbers(NumberGenerateStrategy method) {
-        LottoNumbers numbers = LottoNumbers.of(method, input.paidMoney().lottoCount(price));
+    private LottoNumbers buyNumbers(NumberGenerateStrategy method, Money paidMoney) {
+        LottoNumbers numbers = LottoNumbers.of(method, paidMoney.lottoCount(price));
         output.showPurchase(numbers);
         return numbers;
     }
     
     private LottoNumber lastLuckyNumber() {
         return input.lastLuckyNumber();
+    }
+    
+    private BonusNumber bonusNumber() {
+        return input.bonusNumber();
     }
 }
 

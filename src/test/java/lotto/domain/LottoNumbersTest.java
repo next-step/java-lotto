@@ -34,14 +34,7 @@ class LottoNumbersTest {
     void equals(LottoNumbers numbers, LottoNumbers other, boolean expected) {
         assertThat(numbers.equals(other)).isEqualTo(expected);
     }
-
-    @DisplayName("특정한 갯수만큼 당첨번호와 일치하는 로또번호들을 리턴한다.")
-    @ParameterizedTest
-    @MethodSource("matchSet")
-    void match(LottoNumbers actual, LottoNumber luckyLottoNumber, int matchCount, LottoNumbers expected) {
-        assertThat(actual.match(luckyLottoNumber, matchCount)).isEqualTo(expected);
-    }
-
+    
     private static Stream<Arguments> countSet() {
         return Stream.of(
             Arguments.arguments(lottoNumbers(number(1, 2, 3, 4, 5, 6)), 1),   
@@ -74,29 +67,6 @@ class LottoNumbersTest {
                 )
         );
     }
-    
-    private static Stream<Arguments> matchSet() {
-        return Stream.of(
-            Arguments.arguments(
-                    lottoNumbers(number(1, 2, 3, 4, 5, 6), number(5, 6, 7, 8, 9, 10)),
-                    number(5, 6, 11, 12, 13, 14),
-                    3,
-                    lottoNumbers()
-            ),
-            Arguments.arguments(
-                    lottoNumbers(number(1, 2, 3, 4, 5, 6), number(5, 6, 7, 8, 9, 10)),
-                    number(5, 6, 7, 12, 13, 14),
-                    3,
-                    lottoNumbers(number(5, 6, 7, 8, 9, 10))
-            ),
-            Arguments.arguments(
-                    lottoNumbers(number(1, 2, 3, 4, 5, 6), number(5, 6, 7, 8, 9, 10)),
-                    number(3, 4, 5, 6, 7, 8),
-                    4,
-                    lottoNumbers(number(1, 2, 3, 4, 5, 6), number(5, 6, 7, 8, 9, 10))
-            )
-        );
-    }
 
     private static LottoNumbers lottoNumbers(LottoNumber... lottoNumbers) {
         return new LottoNumbers(Arrays.stream(lottoNumbers).collect(Collectors.toList()));
@@ -105,5 +75,4 @@ class LottoNumbersTest {
     private static LottoNumber number(int... numbers) {
         return new LottoNumber(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
     }
-
 }

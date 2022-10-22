@@ -1,39 +1,46 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum Prize {
-    FIRST(6, new Money(2_000_000_000)), 
-    SECOND(5, new Money(1_500_000)), 
-    THIRD(4, new Money(50_000)), 
-    FOURTH(3, new Money(5_000)), 
-    NO_PRIZE(0, new Money(0));
+    FIRST(new Money(2_000_000_000), new MatchingCount(6)), 
+    SECOND(new Money(30_000_000), new MatchingCount(5, true)), 
+    THIRD(new Money(1_500_000), new MatchingCount(5)), 
+    FOURTH(new Money(50_000), new MatchingCount(4)), 
+    FIFTH(new Money(5_000), new MatchingCount(3)), 
+    NO_PRIZE(new Money(0), new MatchingCount(0));
 
-    private final int matchCount;
     private final Money money;
+    private final MatchingCount count;
 
-    Prize(int matchCount, Money money) {
-        this.matchCount = matchCount;
+    Prize(Money money, MatchingCount count) {
         this.money = money;
+        this.count = count;
+    }
+
+    public static Prize valueOf(MatchingCount count) {
+        return Arrays.stream(values()).filter(prize -> prize.count.equals(count))
+                     .findFirst()
+                     .orElse(NO_PRIZE);
     }
 
     public int getMatchCount() {
-        return matchCount;
+        return count.getCountOfMatch();
     }
-    
+
+    public Money getMoney() {
+        return money;
+    }
+
     public long value() {
         return money.value();
     }
     
-    public static Prize get(int matchCount) {
-        return Arrays.stream(values()).filter(prize -> prize.matchCount == matchCount)
-                                      .findFirst()
-                                      .orElse(NO_PRIZE);
+    public boolean exist() {
+        return this != NO_PRIZE;
     }
-    
-    public static List<Prize> getAll() {
-        return Arrays.stream(values()).filter(prize -> prize != NO_PRIZE).collect(Collectors.toList());
+
+    public boolean hasBonusNumber() {
+        return count.hasBonusNumber();
     }
 }

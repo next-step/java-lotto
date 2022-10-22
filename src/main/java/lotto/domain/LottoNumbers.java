@@ -10,7 +10,7 @@ import lotto.domain.strategy.NumberGenerateStrategy;
 public class LottoNumbers implements Iterable<LottoNumber> {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -20,24 +20,6 @@ public class LottoNumbers implements Iterable<LottoNumber> {
             lottoNumbers.add(number(method));
         }
         return new LottoNumbers(lottoNumbers);
-    }
-    
-    public LottoNumbers match(LottoNumber luckyLottoNumber, int matchCount) {
-        List<LottoNumber> matchLottoNumbers = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            addMatchNumber(luckyLottoNumber, matchCount, matchLottoNumbers, lottoNumber);
-        }
-        return new LottoNumbers(matchLottoNumbers);
-    }
-
-    public boolean exist() {
-        return !lottoNumbers.isEmpty();
-    }
-    
-    private void addMatchNumber(LottoNumber luckyLottoNumber, int matchCount, List<LottoNumber> matchLottoNumbers, LottoNumber lottoNumber) {
-        if (lottoNumber.matchCount(luckyLottoNumber) == matchCount) {
-            matchLottoNumbers.add(lottoNumber);
-        }
     }
 
     public int count() {

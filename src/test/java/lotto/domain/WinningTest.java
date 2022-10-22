@@ -25,6 +25,13 @@ class WinningTest {
         assertThat(winning.numberCount()).isEqualTo(expected);
     }
 
+    @DisplayName("당첨된 로또번호가 있다면 true 를 리턴하고 없다면 false 를 리턴한다.")
+    @ParameterizedTest
+    @MethodSource("existSet")
+    void exist(Winning winning, boolean expected) {
+        assertThat(winning.exist()).isEqualTo(expected);
+    }
+
     private static Stream<Arguments> winningsSet() {
         return Stream.of(
                 Arguments.arguments(
@@ -55,6 +62,18 @@ class WinningTest {
                                             lottoNumber(1, 7, 8, 4, 5, 6))),
                                     3)
         );
+    }
+
+    private static Stream<Arguments> existSet() {
+        return Stream.of(
+                Arguments.arguments(new Winning(Prize.FOURTH, lottoNumbers(lottoNumber(1, 2, 3, 4, 5, 6))), true),
+                Arguments.arguments(new Winning(Prize.FOURTH, lottoNumbers(
+                                            lottoNumber(1, 2, 3, 4, 5, 6),
+                                            lottoNumber(10, 12, 23, 34, 35, 36))),
+                                    true),
+                Arguments.arguments(new Winning(Prize.FOURTH, lottoNumbers()), false),
+                Arguments.arguments(new Winning(Prize.FOURTH, null), false)
+            );
     }
 
     private static LottoNumber lottoNumber(Integer... numbers) {
