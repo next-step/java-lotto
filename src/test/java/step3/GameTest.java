@@ -22,10 +22,10 @@ public class GameTest {
 	@ParameterizedTest
 	@DisplayName("구입금액에 따라 로또 개수 확인")
 	@CsvSource(value = {
-		"10:10",
-		"3:3"
+		"10000:10",
+		"3000:3"
 	}, delimiter = ':')
 	void inputAmountOfLotto(int lottoByMoney, int lotto) {
-		assertThat(Game.startRaffle(lottoByMoney).lottoList().size()).isEqualTo(lotto);
+		assertThat(Game.startRaffle(new LottoAmount(lottoByMoney)).lottoList().size()).isEqualTo(lotto);
 	}
 }

@@ -8,11 +8,10 @@ import java.util.TreeSet;
 public class Game {
 	public static void start(int input) {
 		LottoAmount lottoMoney = new LottoAmount(input);
-		int amount = lottoMoney.amountOfLottos();
 
-		Print.amount(amount);
+		Print.amount(lottoMoney.amountOfLottos());
 
-		Result guestResult = startRaffle(amount);
+		Result guestResult = startRaffle(lottoMoney);
 		Print.winningNumber();
 		Lotto winLotto = new Lotto(InputView.input().split(", "));
 		Print.bonusBall();
@@ -21,10 +20,10 @@ public class Game {
 		Print.rateOfWin(input, guestResult.results(winLotto, bonus));
 	}
 
-	public static Result startRaffle(int amount) {
+	public static Result startRaffle(LottoAmount lottoMoney) {
 		LottoFactory lotto = new LottoFactory();
 		List<Lotto> list = new ArrayList<>();
-		for (int i = 1; i <= amount; i++) {
+		for (int i = 1; i <= lottoMoney.amountOfLottos(); i++) {
 			Lotto result = new Lotto(lotto.getRandomLotto());
 			Print.result(result);
 			list.add(result);
