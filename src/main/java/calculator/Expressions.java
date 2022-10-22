@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -7,12 +8,35 @@ import java.util.stream.Collectors;
 public class Expressions {
 
 	private static final Pattern OPERATOR_REGEX = Pattern.compile("\\D");
+	private static final Pattern NUMBER_REGEX = Pattern.compile("\\d");
+
+	private final List<Operator> operators;
+	private final List<Integer> numbers;
 
 	public Expressions(List<String> expressions) {
 		validateNotNull(expressions);
 		validateNotContainingBlank(expressions);
 
-		List<Operator> operators = getOperators(expressions);
+		this.operators = getOperators(expressions);
+		this.numbers = getNumbers(expressions);
+	}
+
+	public int calculate() {
+		Iterator<Operator> operatorIterator = operators.iterator();
+		return numbers.stream()
+			.reduce(operatorIterator.next()::calculate)
+			.orElseThrow(() -> new RuntimeException("연산할 숫자가 없습니다."));
+	}
+
+	private List<Integer> getNumbers(List<String> expressions) {
+		return expressions.stream()
+			.filter(this::isNumber)
+			.map(Integer::parseInt)
+			.collect(Collectors.toUnmodifiableList());
+	}
+
+	private boolean isNumber(String expression) {
+		return NUMBER_REGEX.matcher(expression).matches();
 	}
 
 	private List<Operator> getOperators(List<String> expressions) {

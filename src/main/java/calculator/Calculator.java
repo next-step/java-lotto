@@ -9,4 +9,8 @@ public class Calculator {
 	public Calculator(List<String> expressions) {
 		this.expressions = new Expressions(expressions);
 	}
+
+	public int calculate() {
+		return expressions.calculate();
+	}
 }
