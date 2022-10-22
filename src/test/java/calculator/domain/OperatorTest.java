@@ -1,8 +1,12 @@
-package calculator.operator;
+package calculator.domain;
 
+import static calculator.exception.ExceptionMessage.ERROR_EMPTY_OPERATOR;
+import static calculator.exception.ExceptionMessage.ERROR_INVALID_OPERATOR;
+import static calculator.exception.ExceptionMessage.ERROR_INVALID_VALUE_TO_DIVIDE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.domain.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,7 +29,7 @@ public class OperatorTest {
         assertThatThrownBy(() -> {
             Operator.DIVIDE.execute(5, 3);
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("결과 값이 정수로 떨어지는 값만 계산 가능합니다.");
+            .hasMessage(ERROR_INVALID_VALUE_TO_DIVIDE.getMessage());
     }
 
     @Test
@@ -41,7 +45,7 @@ public class OperatorTest {
         assertThatThrownBy(() -> {
             Operator.findBySign(sign);
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("부호가 누락되었습니다.");
+            .hasMessage(ERROR_EMPTY_OPERATOR.getMessage());
     }
 
     @Test
@@ -50,6 +54,6 @@ public class OperatorTest {
         assertThatThrownBy(() -> {
             Operator.findBySign("x");
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("잘못된 부호입니다.");
+            .hasMessage(ERROR_INVALID_OPERATOR.getMessage());
     }
 }

@@ -1,5 +1,8 @@
 package lotto;
 
+import static lotto.exception.ExceptionMessage.ERROR_EMPTY_VALUE;
+import static lotto.exception.ExceptionMessage.ERROR_INVALID_VALUE_TO_CONVERT;
+import static lotto.exception.ExceptionMessage.ERROR_OUT_OF_LOTTO_NUMBER_BOUND;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.domain.LottoNumber;
@@ -16,7 +19,7 @@ public class LottoNumberTest {
     void create_withNullOrEmpty(int value) {
         assertThatThrownBy(() -> new LottoNumber(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("1 ~ 45 외의 숫자는 허용되지 않습니다.");
+            .hasMessage(ERROR_OUT_OF_LOTTO_NUMBER_BOUND.getMessage());
     }
 
     @ParameterizedTest
@@ -25,7 +28,7 @@ public class LottoNumberTest {
     void create_withNullOrEmpty(String value) {
         assertThatThrownBy(() -> LottoNumber.from(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("입력 값이 누락되었습니다.");
+            .hasMessage(ERROR_EMPTY_VALUE.getMessage());
     }
 
     @ParameterizedTest
@@ -34,6 +37,6 @@ public class LottoNumberTest {
     void create_withInvalidString(String value) {
         assertThatThrownBy(() -> LottoNumber.from(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("변환할 수 없는 문자가 포함되어 있습니다.");
+            .hasMessage(ERROR_INVALID_VALUE_TO_CONVERT.getMessage());
     }
 }

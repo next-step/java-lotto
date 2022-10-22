@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.exception.ExceptionMessage.ERROR_NOT_ENOUGH_MONEY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -28,6 +29,6 @@ public class LottoStoreTest {
         assertThatThrownBy(() ->
             store.buyLotto(new Money(100), AutoIssueLottoStrategy.getInstance()))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또를 구매할 수 없습니다.");
+            .hasMessage(ERROR_NOT_ENOUGH_MONEY.getMessage());
     }
 }

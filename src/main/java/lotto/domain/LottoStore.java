@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.exception.ExceptionMessage.ERROR_NOT_ENOUGH_MONEY;
+
 import lotto.strategy.IssueLottoStrategy;
 
 public class LottoStore {
@@ -17,7 +19,7 @@ public class LottoStore {
     public LottoStorage buyLotto(final Money money, final IssueLottoStrategy strategy) {
         int count = money.countMaxNumberOfItemToBuy(LOTTO_PRICE);
         if (count == 0) {
-            throw new IllegalArgumentException("로또를 구매할 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_NOT_ENOUGH_MONEY.getMessage());
         }
 
         return new LottoStorage(strategy.issue(count));

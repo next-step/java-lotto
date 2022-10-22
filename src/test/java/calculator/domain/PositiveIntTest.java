@@ -1,9 +1,13 @@
-package calculator.number;
+package calculator.domain;
 
+import static calculator.exception.ExceptionMessage.ERROR_EMPTY_VALUE;
+import static calculator.exception.ExceptionMessage.ERROR_INVALID_VALUE_TO_CONVERT;
+import static calculator.exception.ExceptionMessage.ERROR_NEGATIVE_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.operator.Operator;
+import calculator.domain.Operator;
+import calculator.domain.PositiveInt;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +22,7 @@ class PositiveIntTest {
     void create_withUnderZero(int value) {
         assertThatThrownBy(() -> new PositiveInt(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("0 미만의 숫자는 허용되지 않습니다.");
+            .hasMessage(ERROR_NEGATIVE_VALUE.getMessage());
     }
 
     @ParameterizedTest
@@ -27,7 +31,7 @@ class PositiveIntTest {
     void create_withNullOrEmpty(String value) {
         assertThatThrownBy(() -> PositiveInt.from(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("입력 값이 누락되었습니다.");
+            .hasMessage(ERROR_EMPTY_VALUE.getMessage());
     }
 
     @ParameterizedTest
@@ -36,7 +40,7 @@ class PositiveIntTest {
     void create_withInvalidString(String value) {
         assertThatThrownBy(() -> PositiveInt.from(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("변환할 수 없는 문자가 포함되어 있습니다.");
+            .hasMessage(ERROR_INVALID_VALUE_TO_CONVERT.getMessage());
     }
 
     @Test

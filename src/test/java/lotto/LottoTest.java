@@ -1,10 +1,10 @@
 package lotto;
 
+import static lotto.exception.ExceptionMessage.ERROR_INVALID_LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningInformation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,17 +19,7 @@ public class LottoTest {
     void create_withNot6Numbers(String input) {
         assertThatThrownBy(() -> new Lotto(input))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("6개의 숫자를 입력해주세요.");
-    }
-
-    @Test
-    @DisplayName("getNumber 메소드는 오름차순으로 정렬된 LottoNumber 리스트를 반환한다.")
-    void getNumber() {
-        Lotto lotto = new Lotto("3, 6, 1, 22, 19, 35");
-
-        assertThat(lotto.getNumbers()).containsExactly(
-            new LottoNumber(1), new LottoNumber(3), new LottoNumber(6), new LottoNumber(19),
-            new LottoNumber(22), new LottoNumber(35));
+            .hasMessage(ERROR_INVALID_LOTTO_NUMBER_COUNT.getMessage());
     }
 
     @Test

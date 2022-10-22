@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.exception.ExceptionMessage.ERROR_EMPTY_LOTTO;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -24,7 +26,7 @@ public class LottoStorage {
 
     private void validateLottos(final List<Lotto> lottos) {
         if (lottos == null || lottos.size() == 0) {
-            throw new IllegalStateException("로또를 구매하지 않았습니다.");
+            throw new IllegalStateException(ERROR_EMPTY_LOTTO.getMessage());
         }
     }
 
@@ -33,7 +35,7 @@ public class LottoStorage {
             .map(lotto -> lotto.matchWithWinningLotto(winningLotto))
             .filter(wi -> wi != WinningInformation.NO_PRIZE)
             .forEach(wi -> {
-                result.put(wi, result.get(wi) + 1);
+                result.merge(wi, 1L, Long::sum);
             });
     }
 

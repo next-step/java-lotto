@@ -1,4 +1,9 @@
-package calculator.operator;
+package calculator.domain;
+
+import static calculator.exception.ExceptionMessage.ERROR_DIVIDE_ZERO;
+import static calculator.exception.ExceptionMessage.ERROR_EMPTY_OPERATOR;
+import static calculator.exception.ExceptionMessage.ERROR_INVALID_OPERATOR;
+import static calculator.exception.ExceptionMessage.ERROR_INVALID_VALUE_TO_DIVIDE;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -20,13 +25,13 @@ public enum Operator {
 
     public static Operator findBySign(final String sign) {
         if (sign == null || sign.isEmpty()) {
-            throw new IllegalArgumentException("부호가 누락되었습니다.");
+            throw new IllegalArgumentException(ERROR_EMPTY_OPERATOR.getMessage());
         }
 
         return Arrays.stream(values())
             .filter(operator -> Objects.equals(operator.sign, sign))
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("잘못된 부호입니다."));
+            .orElseThrow(() -> new IllegalArgumentException(ERROR_INVALID_OPERATOR.getMessage()));
     }
 
     public int execute(final int x, final int y) {
@@ -38,11 +43,11 @@ public enum Operator {
 
     private void validateNumbers(final int x, final int y) {
         if (y == 0) {
-            throw new IllegalArgumentException("0은 나눗셈의 피연산자로 사용될 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_DIVIDE_ZERO.getMessage());
         }
 
         if ((x % y) != 0) {
-            throw new IllegalArgumentException("결과 값이 정수로 떨어지는 값만 계산 가능합니다.");
+            throw new IllegalArgumentException(ERROR_INVALID_VALUE_TO_DIVIDE.getMessage());
         }
     }
 }

@@ -7,11 +7,11 @@ import lotto.domain.Lotto;
 
 public class AutoIssueLottoStrategy implements IssueLottoStrategy {
 
-    private final static AutoIssueLottoStrategy INSTANCE = new AutoIssueLottoStrategy();
+    private static final AutoIssueLottoStrategy INSTANCE = new AutoIssueLottoStrategy();
+    private static final int DIGIT = 6;
+    private static final int BOUND = 45;
 
     private final List<Integer> numbers = new ArrayList<>();
-    private final int DIGIT = 6;
-    private final int BOUND = 45;
 
     private AutoIssueLottoStrategy() {
         for (int i = 1; i <= BOUND; i++) {
