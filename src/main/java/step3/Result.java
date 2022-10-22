@@ -20,12 +20,12 @@ public class Result {
 		this.lottos = lottos;
 	}
 
-	public List<Set<Integer>> getList() {
+	public List<Set<Integer>> lottoList() {
 		return lottos.getLottos();
 	}
 
 	public Map<Operator, Integer> results(Set<Integer> winningNumbers, int bonus) {
-		for (Set<Integer> lottos : getList()) {
+		for (Set<Integer> lottos : lottoList()) {
 			result(lottos, winningNumbers, bonus);
 		}
 		return map;

@@ -26,7 +26,7 @@ public class GameTest {
 		"3:3"
 	}, delimiter = ':')
 	void inputAmountOfLotto(int lottoByMoney, int lotto) {
-		assertThat(Game.startRaffle(lottoByMoney).getList().size()).isEqualTo(lotto);
+		assertThat(Game.startRaffle(lottoByMoney).lottoList().size()).isEqualTo(lotto);
 	}
 
 	@Test
