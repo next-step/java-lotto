@@ -8,7 +8,15 @@ public class MoneyController {
 
     public Money purchaseMoney() {
         MoneyOutput.purchaseMoney();
+        return inputMoney();
+    }
 
-        return new Money(MoneyInput.money());
+    private Money inputMoney() {
+        try {
+            return new Money(MoneyInput.money());
+        } catch (Exception e) {
+            MoneyOutput.moneyInputError();
+        }
+        return inputMoney();
     }
 }
