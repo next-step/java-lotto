@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -30,7 +31,10 @@ class WinningNumberTest {
     @Test
     @DisplayName("당첨 결과 조회(result 테스트)")
     void results_test(){
-        List<Integer> myNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> myNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+                .mapToObj(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
+
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 6, 7), 44);
 
         MatchingResult results = winningNumber.results(myNumbers);

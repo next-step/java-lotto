@@ -38,7 +38,11 @@ public class LottoTest {
         List<Integer> myLottoNumbers = Arrays.asList(numbers.split(",")).stream()
                 .map(number -> Integer.parseInt(number))
                 .collect(Collectors.toList());
-        List<Integer> answer = Arrays.asList(30, 31, 32, 33, 34, 35);
+
+        List<LottoNumber> answer = Arrays.stream(new int[]{30, 31, 32, 33, 34, 35})
+                .mapToObj(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
+
         Lotto lotto = new Lotto(myLottoNumbers);
 
         assertThat(lotto.matchingCount(answer)).isEqualTo(matchingCount);

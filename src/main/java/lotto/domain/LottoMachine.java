@@ -1,17 +1,29 @@
 package lotto.domain;
 
+import lotto.strategy.ManualNumberGenerateStrategy;
 import lotto.strategy.NumberGenerateStrategy;
+import lotto.strategy.RandomNumberGenerateStrategy;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static List<Lotto> createLotto(LottoPurchaseMethod lottoPurchaseMethod) {
 
-    public static int lottoTryCount(int money) {
-        return money / LOTTO_PRICE;
+        List<Lotto> manual = createLotto(lottoPurchaseMethod.getManualCount(), new ManualNumberGenerateStrategy());
+        List<Lotto> auto = createLotto(lottoPurchaseMethod.autoCount(), new RandomNumberGenerateStrategy());
+
+        return Stream.concat(manual.stream(), auto.stream())
+                .collect(Collectors.toList());
     }
 
-    public static Lotto createLotto(NumberGenerateStrategy numberGenerateStrategy) {
-        return new Lotto(numberGenerateStrategy.generateNumbers());
+    private static List<Lotto> createLotto(int purchaseCount, NumberGenerateStrategy numberGenerateStrategy) {
+        return IntStream.range(0, purchaseCount)
+                .mapToObj(index -> new Lotto(numberGenerateStrategy.generateNumbers()))
+                .collect(Collectors.toList());
     }
 
 }

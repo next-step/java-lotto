@@ -6,12 +6,12 @@ public class WinningNumber {
 
 
     private Lotto winningLotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningNumber(List<Integer> lottoNumbers, int bonusNumber) {
         validateWinningNumber(lottoNumbers, bonusNumber);
         this.winningLotto = new Lotto(lottoNumbers);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     private void validateWinningNumber(List<Integer> lottoNumbers, int bonusNumber) {
@@ -20,7 +20,7 @@ public class WinningNumber {
         }
     }
 
-    public MatchingResult results(List<Integer> lottoNumbers) {
+    public MatchingResult results(List<LottoNumber> lottoNumbers) {
         int matchingCount = this.winningLotto.matchingCount(lottoNumbers);
         boolean containBonusNumber = lottoNumbers.contains(this.bonusNumber);
 

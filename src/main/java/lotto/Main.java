@@ -1,10 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.Lotto;
-import lotto.domain.MatchingResult;
-import lotto.domain.WinningNumber;
-import lotto.domain.WinningStatistic;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,8 +12,13 @@ public class Main {
     public static void main(String[] args) {
 
         int purchasePrice = InputView.inputPurchasePrice();
+        int manualCount = InputView.intputManualCount();
+        LottoPurchaseMethod lottoPurchaseMethod = new LottoPurchaseMethod(purchasePrice, manualCount);
 
-        List<Lotto> lotties = LottoController.buy(purchasePrice);
+        InputView.showManualInputMessage();
+        List<Lotto> lotties = LottoMachine.createLotto(lottoPurchaseMethod);
+
+        ResultView.printPurchaseMethodMessage(lottoPurchaseMethod);
         ResultView.printLottoNumber(lotties);
 
         List<Integer> lastWeekAnswer = InputView.lastWeekAnswer();

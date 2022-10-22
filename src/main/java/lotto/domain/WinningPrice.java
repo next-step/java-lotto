@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum WinningPrice {
 
@@ -19,13 +18,6 @@ public enum WinningPrice {
     WinningPrice(int matchingCount, int winningPrice) {
         this.matchingCount = matchingCount;
         this.winningPrice = winningPrice;
-    }
-
-    public static WinningPrice decideWithMatchingCount(int matchingNumberCount) {
-        return Arrays.stream(values())
-                .filter(value -> value.getMatchingCount() == matchingNumberCount)
-                .findFirst()
-                .orElse(MISS);
     }
 
     private static WinningPrice secondOrThird(boolean containBonusNumber) {
