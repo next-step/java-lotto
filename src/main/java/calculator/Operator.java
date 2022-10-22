@@ -24,6 +24,7 @@ public enum Operator {
 
     public static Operator findOperator(String input) {
         return Arrays.stream(Operator.values())
+                .filter(operator -> operator.op != null)
                 .filter(operator -> operator.op.equals(input))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("사칙연산이 잘못되었다."));
