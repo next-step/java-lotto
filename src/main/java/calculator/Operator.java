@@ -1,5 +1,5 @@
 package calculator;
 
 public interface Operator {
-    int calculate(int lhs, int rhs);
+    Number calculate(Number lhs, Number rhs);
 }

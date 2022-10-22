@@ -7,6 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MultiplyTest {
     @Test
     void test_calculate() {
-        assertThat(new Multiply().calculate(3, 2)).isEqualTo(6);
+        assertThat(new Multiply().calculate(new Number(3), new Number(2))).isEqualTo(new Number(6));
     }
 }

@@ -25,6 +25,6 @@ public class CalculatorTest {
     @ParameterizedTest
     @CsvSource({"2,2","2 + 3,5", "3 - 2,1", "2 * 3,6", "8 / 3,2", "2 + 3 * 4 / 2,10"})
     void test_calculate(String expr, int result) {
-        assertThat(new Calculator(expr).calculate()).isEqualTo(result);
+        assertThat(new Calculator(expr).calculate()).isEqualTo(new Number(result));
     }
 }

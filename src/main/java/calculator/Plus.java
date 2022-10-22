@@ -2,7 +2,7 @@ package calculator;
 
 public class Plus implements Operator {
     @Override
-    public int calculate(int lhs, int rhs) {
-        return lhs + rhs;
+    public Number calculate(Number lhs, Number rhs) {
+        return lhs.plus(rhs);
     }
 }

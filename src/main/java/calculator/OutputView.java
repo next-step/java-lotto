@@ -7,7 +7,7 @@ public class OutputView {
 
     }
 
-    public static void printResult(int result) {
-        System.out.printf(RESULT_MESSAGE_FORMAT, result);
+    public static void printResult(Number result) {
+        System.out.printf(RESULT_MESSAGE_FORMAT, result.getValue());
     }
 }

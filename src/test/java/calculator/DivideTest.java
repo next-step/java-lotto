@@ -7,6 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DivideTest {
     @Test
     void test_calculate() {
-        assertThat(new Divide().calculate(3, 2)).isEqualTo(1);
+        assertThat(new Divide().calculate(new Number(3), new Number(2))).isEqualTo(new Number(1));
     }
 }

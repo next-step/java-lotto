@@ -7,6 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MinusTest {
     @Test
     void test_calculate() {
-        assertThat(new Minus().calculate(1, 2)).isEqualTo(-1);
+        assertThat(new Minus().calculate(new Number(1), new Number(2))).isEqualTo(new Number(-1));
     }
 }
