@@ -13,20 +13,10 @@ public class Calculator {
         String[] splits = expr.split(" ");
         int lhs = Integer.parseInt(splits[0]);
         for (int i = 1; i < splits.length; i += 2) {
-            String op = splits[i];
+            Operator operator = OperatorFactory.create(splits[i]);
             int rhs = Integer.parseInt(splits[i + 1]);
 
-            if (op.equals("+")) {
-                lhs = lhs + rhs;
-            } else if (op.equals("-")) {
-                lhs = lhs - rhs;
-            } else if (op.equals("*")) {
-                lhs = lhs * rhs;
-            } else if (op.equals("/")) {
-                lhs = lhs / rhs;
-            } else {
-                throw new IllegalArgumentException("invalid operator");
-            }
+            lhs = operator.calculate(lhs, rhs);
         }
 
         return lhs;
