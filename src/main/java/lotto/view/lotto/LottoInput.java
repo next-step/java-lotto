@@ -23,7 +23,6 @@ public class LottoInput {
                     .mapToInt(i -> Integer.parseInt(i))
                     .toArray();
         } catch (Exception e) {
-            e.printStackTrace();
             LottoOutput.lottoNumbersInputException();
         }
         return lottoNumbers(lottoNumberDelimiter);
