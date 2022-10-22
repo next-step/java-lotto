@@ -12,7 +12,7 @@ public class LottoNumberFactory {
             .collect(Collectors.toSet());
 
     public static Set<LottoNumber> getNumbers(final int number) {
-        return getIntegers(number).stream().map(i -> new LottoNumber(i)).collect(Collectors.toSet());
+        return getIntegers(number).stream().map(i -> LottoNumber.get(i)).collect(Collectors.toSet());
     }
 
     private static Set<Integer> getIntegers(final int number) {

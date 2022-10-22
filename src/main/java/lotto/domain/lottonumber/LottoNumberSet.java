@@ -19,7 +19,7 @@ public class LottoNumberSet {
 
     public LottoNumberSet(final int... numbers) {
         this(Arrays.stream(numbers)
-                .mapToObj(number -> new LottoNumber(number))
+                .mapToObj(number -> LottoNumber.get(number))
                 .collect(Collectors.toSet()));
     }
 

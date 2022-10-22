@@ -17,7 +17,7 @@ public class LottoWinnerTest {
     @Test
     void valid() {
         assertThatThrownBy(
-                () -> new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(6)))
+                () -> new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), LottoNumber.get(6)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -34,7 +34,7 @@ public class LottoWinnerTest {
     @ParameterizedTest(name = "로또 등수를 반환한다.")
     @MethodSource(value = "provideLottoMatch")
     void match(Lotto lotto, Rank rank) {
-        LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), LottoNumber.get(7));
 
         assertThat(winner.rank(lotto)).isEqualTo(rank);
     }

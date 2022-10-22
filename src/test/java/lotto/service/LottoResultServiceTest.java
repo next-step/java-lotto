@@ -39,7 +39,7 @@ public class LottoResultServiceTest {
                 new Lotto(4, 5, 6, 7, 8, 9),
                 new Lotto(5, 6, 7, 8, 9, 10)
         ));
-        LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), LottoNumber.get(7));
         RankMap rankMap = lottoResultService.checkLotto(lottoList, winner);
 
         assertThat(rankMap).isEqualTo(new RankMap(Rank.values()));
@@ -60,7 +60,7 @@ public class LottoResultServiceTest {
                 new Lotto(7, 8, 9, 10, 11, 12),
                 new Lotto(7, 8, 9, 10, 11, 12)
         ));
-        LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        LottoWinner winner = new LottoWinner(new LottoNumberSet(1, 2, 3, 4, 5, 6), LottoNumber.get(7));
 
 
         assertThat(lottoResultService.caculateProfitRate(lottoList, winner)).isEqualTo(new ProfitRate(0.50));

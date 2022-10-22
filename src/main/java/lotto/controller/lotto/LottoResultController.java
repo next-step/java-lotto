@@ -40,7 +40,7 @@ public class LottoResultController {
 
     private static LottoWinner createLottoWinner(final LottoNumberSet numbers) {
         try {
-            LottoNumber bonusNumber = new LottoNumber(LottoInput.bonusNumber());
+            LottoNumber bonusNumber = LottoNumber.get(LottoInput.bonusNumber());
             return new LottoWinner(numbers, bonusNumber);
         } catch (Exception e) {
             LottoOutput.bonusNumberInputException();

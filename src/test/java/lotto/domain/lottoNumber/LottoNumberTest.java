@@ -10,17 +10,23 @@ public class LottoNumberTest {
 
     @Test
     void create() {
-        LottoNumber lottoNumber = new LottoNumber(1);
+        LottoNumber lottoNumber = LottoNumber.get(1);
 
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
+        assertThat(lottoNumber).isEqualTo(LottoNumber.get(1));
     }
 
     @Test
     void valid() {
         Assertions.assertAll(
-                () -> assertThatThrownBy(() -> new LottoNumber(0)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNumber(46)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNumber(-1)).isInstanceOf(IllegalArgumentException.class)
+                () -> assertThatThrownBy(() -> LottoNumber.get(0)).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> LottoNumber.get(46)).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> LottoNumber.get(-1)).isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void lotto번호_캐싱() {
+        LottoNumber lottoNumber = LottoNumber.get(1);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.get(1));
     }
 }
