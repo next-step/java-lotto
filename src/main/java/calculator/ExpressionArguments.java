@@ -7,15 +7,13 @@ import java.util.stream.IntStream;
 
 import calculator.exception.ErrorMessage;
 import calculator.exception.InputNullOrBlankException;
-import calculator.exception.OperandNumberFormatException;
-import calculator.exception.OperatorInvalidException;
 
 public class ExpressionArguments {
 	private static final String BLANK_DELIMITER = " ";
 	private final List<Operand> operands;
 	private final List<Operator> operators;
 
-	public ExpressionArguments(String expression) throws OperandNumberFormatException, OperatorInvalidException {
+	public ExpressionArguments(String expression) {
 		if (isNullOrBlank(expression)) {
 			throw new InputNullOrBlankException(ErrorMessage.ILLEGAL_ARGUMENT, expression);
 		}
@@ -40,19 +38,19 @@ public class ExpressionArguments {
 		return Arrays.asList(expression.split(BLANK_DELIMITER));
 	}
 
-	public Operand getFirstOperand() {
-		return operands.get(0);
+	public int getFirstOperand() {
+		return operands.get(0).getNumber();
 	}
 
 	public int getOperatorsSize() {
 		return operators.size();
 	}
 
-	public Operand getOperand(int index) {
-		return operands.get(index);
+	public List<Operand> getOperands() {
+		return operands;
 	}
 
-	public Operator getOperator(int index) {
-		return operators.get(index);
+	public List<Operator> getOperators() {
+		return operators;
 	}
 }
