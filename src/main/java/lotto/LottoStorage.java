@@ -8,7 +8,7 @@ public class LottoStorage {
     private final List<Lotto> lottoList;
 
     private LottoStorage(int count) {
-        lottoList = new ArrayList<>();
+        this.lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Lotto lotto = Lotto.generate();
             lottoList.add(lotto);
