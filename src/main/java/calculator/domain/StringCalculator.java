@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import static java.lang.System.*;
 

@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import calculator.exception.ErrorMessage;
 import calculator.exception.OperandNumberFormatException;
