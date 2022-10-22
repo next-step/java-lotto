@@ -16,7 +16,7 @@ class ExpressionsTest {
 	@Test
 	@DisplayName("수식은 null일 수 없다")
 	void expressions_itself_is_not_null() {
-		assertThatThrownBy(() -> new Expressions(null)).isInstanceOf(IllegalArgumentException.class);
+		assertThatIllegalArgumentException().isThrownBy(() -> new Expressions(null));
 	}
 
 	@Test
@@ -24,7 +24,7 @@ class ExpressionsTest {
 	void expressions_is_not_containing_blank() {
 		List<String> expressions = List.of(" ", "  ");
 
-		assertThatThrownBy(() -> new Expressions(expressions)).isInstanceOf(IllegalArgumentException.class);
+		assertThatIllegalArgumentException().isThrownBy(() -> new Expressions(expressions));
 	}
 
 	@ParameterizedTest(name = "순서대로 사칙연산을 할 수 있다 {index}")
