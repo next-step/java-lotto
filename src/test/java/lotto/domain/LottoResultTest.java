@@ -8,7 +8,7 @@ import java.util.List;
 class LottoResultTest {
 
     @Test
-    void 등수_확인(){
+    void 등수_확인() {
         LottoResult lottoResult = new LottoResult(
             List.of(
                 Rank.MISS,
@@ -36,7 +36,7 @@ class LottoResultTest {
     }
 
     @Test
-    void 수익률_확인(){
+    void 수익률_확인() {
         LottoResult lottoResult = new LottoResult(
             List.of(
                 Rank.MISS,
@@ -60,7 +60,7 @@ class LottoResultTest {
     }
 
     @Test
-    void 이득을_봤는지_확인(){
+    void 이득을_봤는지_확인() {
         LottoResult lottoResult = new LottoResult(
             List.of(
                 Rank.MISS,
