@@ -20,16 +20,16 @@ public enum Rank {
         this.winnerPrize = winnerPrize;
     }
 
-    public static Rank valueOf(final int matchedCount, final boolean withBonus) {
+    public static Rank valueOf(final int matchedCount, final boolean hasBonus) {
         return Arrays.stream(Rank.values())
             .filter(rank -> rank.matchedCount == matchedCount)
-            .map(rank -> checkBonus(withBonus, rank))
+            .map(rank -> checkBonus(hasBonus, rank))
             .findFirst()
             .orElse(MISS);
     }
 
-    private static Rank checkBonus(boolean withBonus, Rank result) {
-        if (SECOND == result && !withBonus) {
+    private static Rank checkBonus(boolean hasBonus, Rank result) {
+        if (SECOND == result && !hasBonus) {
             return THIRD;
         }
         return result;
