@@ -10,18 +10,22 @@ public enum Rank {
     NO_MATCH(0, 0),
     ;
 
-    private final int matchCount;
-    private final int winnings;
+    private final int countOfMatch;
+    private final int winningMoney;
 
-    Rank(final int matchCount, final int winnings) {
-        this.matchCount = matchCount;
-        this.winnings = winnings;
+    Rank(final int countOfMatch, final int winningMoney) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
     }
 
-    public static Rank of(final int matchCount) {
+    public static Rank of(final int countOfMatch) {
         return Arrays.stream(values())
-                .filter(v -> v.matchCount == matchCount)
+                .filter(v -> v.isSameAsMatchCount(countOfMatch))
                 .findFirst()
                 .orElse(NO_MATCH);
+    }
+
+    private boolean isSameAsMatchCount(final int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
     }
 }

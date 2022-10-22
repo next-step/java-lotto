@@ -36,4 +36,9 @@ public class LottoNumber {
     public int hashCode() {
         return number;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.number);
+    }
 }

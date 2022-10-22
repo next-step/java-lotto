@@ -32,20 +32,11 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 번호들은 중복될 수 없습니다.");
         }
     }
-
-    public Rank getWinner(final List<LottoNumber> winningsNumbers) {
-        int result = 0;
-        for (LottoNumber number : winningsNumbers) {
-            result = add(result, number);
-        }
-        return Rank.of(result);
-    }
-
-    private int add(int result, final LottoNumber number) {
-        if (this.lottoNumbers.contains(number)) {
-            result += 1;
-        }
-        return result;
+    public Rank match(final List<LottoNumber> winningLottoTicket) {
+        int count = (int) this.lottoNumbers.stream()
+                .filter(winningLottoTicket::contains)
+                .count();
+        return Rank.of(count);
     }
 
     public List<LottoNumber> getLottoNumbers() {

@@ -35,15 +35,17 @@ public class Store {
         return new LottoTicket(numList.subList(0, LottoTicket.LOTTO_NUMBER_SIZE));
     }
 
-    // public List<Rank> match(final List<Integer> winningsNumber) {
-    //     int result = 0;
-    //     for (LottoTicket lottoTicket : this.lottoTickets) {
-    //         Rank rank = lottoTicket.getWinner(winningsNumber);
-    //
-    //     }
-    // }
+    public List<Rank> match(final List<LottoNumber> winningNumbers) {
+        List<Rank> ranks = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            ranks.add(lottoTicket.match(winningNumbers));
+        }
+        return ranks;
+    }
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(this.lottoTickets);
     }
+
+
 }
