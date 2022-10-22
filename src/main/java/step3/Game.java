@@ -21,19 +21,19 @@ public class Game {
 		Print.rateOfWin(input, guestResult.results(makeWinningResult(lastweekLotto), Integer.parseInt(bonus)));
 	}
 
-	public static Set<Integer> makeWinningResult(String[] winningNumbers) {
+	public static Lotto makeWinningResult(String[] winningNumbers) {
 		Set<Integer> list = new TreeSet<>();
 		for (String winningNumber : winningNumbers) {
 			list.add(Integer.parseInt(winningNumber));
 		}
-		return list;
+		return new Lotto(list);
 	}
 
 	public static Result startRaffle(int amount) {
 		LottoFactory lotto = new LottoFactory();
-		List<Set<Integer>> list = new ArrayList<>();
+		List<Lotto> list = new ArrayList<>();
 		for (int i = 1; i <= amount; i++) {
-			Set<Integer> result = lotto.getRandomLotto();
+			Lotto result = new Lotto(lotto.getRandomLotto());
 			Print.result(result);
 			list.add(result);
 		}

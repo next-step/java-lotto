@@ -6,39 +6,39 @@ import java.util.Set;
 
 public class Lottos {
 
-	private final List<Set<Integer>> lottos;
+	private final List<Lotto> lottos;
 
-	public Lottos(List<Set<Integer>> lotto) {
+	public Lottos(List<Lotto> lotto) {
 		this.lottos = lotto;
 	}
 
-	public int results(Set<Integer> lottos, Set<Integer> winningNumbers, int bonus) {
+	public int results(Lotto lotto, Lotto winningNumbers, int bonus) {
 		int count = 0;
-		Iterator<Integer> itr = winningNumbers.iterator();
+		Iterator<Integer> itr = winningNumbers.getLotto().iterator();
 		while (itr.hasNext()) {
-			count = checkContains(lottos, count, itr);
+			count = checkContains(lotto, count, itr);
 		}
 		if (count == 4) {
-			return checkBonus(lottos, count, bonus);
+			return checkBonus(lotto, count, bonus);
 		}
 		return count;
 	}
 
-	private int checkBonus(Set<Integer> lottos, int count, int bonus) {
-		if (lottos.contains(bonus)) {
+	private int checkBonus(Lotto lotto, int count, int bonus) {
+		if (lotto.isBonus(bonus)) {
 			return count + 3;
 		}
 		return count;
 	}
 
-	private int checkContains(Set<Integer> guestLotto, int count, Iterator<Integer> itr) {
-		if (guestLotto.contains(itr.next())) {
+	private int checkContains(Lotto guestLotto, int count, Iterator<Integer> itr) {
+		if (guestLotto.isExist(itr.next())) {
 			count++;
 		}
 		return count;
 	}
 
-	public List<Set<Integer>> getLottos() {
+	public List<Lotto> getLottos() {
 		return lottos;
 	}
 }

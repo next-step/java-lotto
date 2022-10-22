@@ -20,26 +20,26 @@ public class Result {
 		this.lottos = lottos;
 	}
 
-	public List<Set<Integer>> lottoList() {
+	public List<Lotto> lottoList() {
 		return lottos.getLottos();
 	}
 
-	public Map<Operator, Integer> results(Set<Integer> winningNumbers, int bonus) {
-		for (Set<Integer> lottos : lottoList()) {
-			result(lottos, winningNumbers, bonus);
+	public Map<Operator, Integer> results(Lotto winningNumbers, int bonus) {
+		for (Lotto lotto : lottoList()) {
+			result(lotto, winningNumbers, bonus);
 		}
 		return map;
 	}
 
-	private void result(Set<Integer> lottos, Set<Integer> winningNumbers, int bonus) {
-		Operator rank = Operator.find(checkRank(lottos, winningNumbers, bonus));
+	private void result(Lotto lotto, Lotto winningNumbers, int bonus) {
+		Operator rank = Operator.find(checkRank(lotto, winningNumbers, bonus));
 		if (rank == null) {
 			return;
 		}
 		map.put(rank, map.get(rank) + 1);
 	}
 
-	private int checkRank(Set<Integer> lottos, Set<Integer> winningNumbers, int bonus) {
-		return this.lottos.results(lottos, winningNumbers, bonus);
+	private int checkRank(Lotto lotto, Lotto winningNumbers, int bonus) {
+		return this.lottos.results(lotto, winningNumbers, bonus);
 	}
 }

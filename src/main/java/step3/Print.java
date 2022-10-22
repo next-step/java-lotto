@@ -12,8 +12,8 @@ public class Print {
 		System.out.println(input + "개를 구매했습니다.");
 	}
 
-	public static void result(Set<Integer> result) {
-		System.out.println(result);
+	public static void result(Lotto result) {
+		System.out.println(result.getLotto());
 	}
 
 	public static void winningNumber() {
