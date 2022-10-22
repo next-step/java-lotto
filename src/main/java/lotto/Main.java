@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Amount;
-import lotto.domain.LotteryTicketAutoGenerator;
-import lotto.domain.LotteryTickets;
-import lotto.domain.Price;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,5 +17,7 @@ public class Main {
 
         LotteryTickets tickets = amount.createTickets(new LotteryTicketAutoGenerator());
         outputView.printTickets(tickets);
+
+        LotteryTicket winningTicket = LotteryTicket.of(inputView.enterWinningNumbers());
     }
 }
