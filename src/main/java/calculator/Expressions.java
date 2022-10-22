@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class Expressions {
 
 	private static final Pattern OPERATOR_REGEX = Pattern.compile("\\D");
-	private static final Pattern NUMBER_REGEX = Pattern.compile("\\d");
+	private static final Pattern NUMBER_REGEX = Pattern.compile("\\d+");
 
 	private final List<Operator> operators;
 	private final List<Integer> numbers;
