@@ -15,6 +15,7 @@ public class LottoMain {
         try {
             LottoGenerator lottoGenerator = new LottoGenerator();
             InputView inputView = new InputView();
+            ResultView resultView = new ResultView();
 
             List<Lotto> lottoList = lottoGenerator.purchaseByAuto(new LottoPurchasedAmount(inputView.inputPurchaseMoney()));
             inputView.printPurchasedLottoList(lottoList);
@@ -23,8 +24,7 @@ public class LottoMain {
             LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
             LottoWinner lastWinner = new LottoWinner(lastWinnerLotto, bonusNumber);
 
-            LottoStatistics statistics = new LottoStatistics(lottoList, lastWinner);
-            new ResultView(statistics).printStatistics();
+            resultView.printStatistics(new LottoStatistics(lottoList, lastWinner));
         } catch (Exception e) {
             e.printStackTrace();
         }
