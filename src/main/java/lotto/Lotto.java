@@ -1,5 +1,8 @@
 package lotto;
 
+import exception.CustomException;
+import lotto.exception.LottoErrorCode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,28 +10,41 @@ import java.util.Objects;
 
 public class Lotto {
 
-    private static final int MINIMUM_VALUE = 1;
-    private static final int MAXIMUM_VALUE = 45;
-    private static final int SELECT_QUANTITY = 6;
+    public static final int SELECT_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    private Lotto(List<Integer> numbers) {
+    private Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
     public static Lotto generate() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        for (int i = MINIMUM_VALUE; i <= MAXIMUM_VALUE; i++) {
-            lottoNumbers.add(i);
-        }
-        Collections.shuffle(lottoNumbers);
-        List<Integer> numbers = lottoNumbers.subList(0, SELECT_QUANTITY);
-        return new Lotto(numbers);
+        List<LottoNumber> lottoNumbersRange = LottoNumber.getLottoNumbersRange();
+        Collections.shuffle(lottoNumbersRange);
+        return new Lotto(lottoNumbersRange.subList(0, SELECT_SIZE));
     }
 
     public static Lotto from(Lotto lotto) {
         return new Lotto(lotto.numbers);
+    }
+
+    public static Lotto from(List<LottoNumber> lottoNumbers) {
+        checkLottoSize(lottoNumbers.size());
+        return new Lotto(lottoNumbers);
+    }
+
+    private static void checkLottoSize(int size) {
+        if (size != SELECT_SIZE) {
+            throw new CustomException(LottoErrorCode.LOTTO_SIZE_BAD_REQUEST);
+        }
+    }
+
+    public List<LottoNumber> getLotto() {
+        List<LottoNumber> result = new ArrayList<>();
+        for (LottoNumber lotto : numbers) {
+            result.add(LottoNumber.from(lotto));
+        }
+        return result;
     }
 
     @Override

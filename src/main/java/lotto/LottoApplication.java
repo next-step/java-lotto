@@ -12,5 +12,7 @@ public class LottoApplication {
         List<Lotto> lotto = lottoStore.getLotto();
         LottoResultView.printLottoCount(lotto.size());
         LottoResultView.printLotto(lotto);
+        String winningLottoNumbers = LottoInputView.inputWinningLottoNumbers();
+        lottoStore.registerWinningLotto(winningLottoNumbers);
     }
 }

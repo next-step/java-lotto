@@ -12,6 +12,13 @@ public class LottoInputView {
 
     public static int inputAmount() {
         System.out.println("구매금액을 입력해 주세요.");
-        return SCANNER.nextInt();
+        int result = SCANNER.nextInt();
+        SCANNER.nextLine();
+        return result;
+    }
+
+    public static String inputWinningLottoNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return SCANNER.nextLine();
     }
 }
