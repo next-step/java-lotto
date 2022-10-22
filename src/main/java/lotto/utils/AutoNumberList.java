@@ -17,10 +17,9 @@ public class AutoNumberList {
     }
 
     private static List<Integer> sortNumber(List<Integer> numberList) {
-        List<Integer> sortNumber = numberList.stream()
+        return numberList.stream()
                 .sorted(Integer::compareTo)
                 .collect(Collectors.toList());
-        return sortNumber;
     }
 
     private static List<Integer> getNumberList() {
@@ -30,9 +29,8 @@ public class AutoNumberList {
             pickNumber.add(i);
         }
         Collections.shuffle(pickNumber);
-        List<Integer> numberList = pickNumber.subList(START_UNIT, END_UNIT);
 
-        return numberList;
+        return pickNumber.subList(START_UNIT, END_UNIT);
     }
 
 }
