@@ -15,7 +15,7 @@ public class AutoLotto {
         }
 
         OutputView.outputLottos(lottos);
-        double result = Calculator.calculate(lottos, new WinningNumbers(InputView.inputNumbers()),
+        double result = Calculator.calculate(lottos, new WinningNumbers(InputView.inputNumbers(), InputView.inputBonusNumber()),
                 countOfLotto * LOTTO_PRICE);
 
         OutputView.outputResult(new GameResult(result));
