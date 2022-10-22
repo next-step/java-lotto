@@ -46,7 +46,7 @@ public class CalculatorTest {
 
 	@ParameterizedTest(name = "입력 순서대로 사칙연산을 할 수 있다 {index}")
 	@CsvSource(value = {"2 + 3 * 4 / 2 = 10", "22 + 3 * 4 / 2 = 50"}, delimiterString = " = ")
-	void calculate_between_numbers(String rawExpressions, int expectedNumber) {
+	void calculate_expressions_sequentially(String rawExpressions, int expectedNumber) {
 		List<String> expressions = List.of(rawExpressions.split(SINGLE_SPACE));
 		Calculator calculator = new Calculator(expressions);
 
