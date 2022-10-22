@@ -1,8 +1,8 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Expressions {
 
@@ -18,13 +18,9 @@ public class Expressions {
 	}
 
 	private List<String> getOperators(List<String> expressions) {
-		List<String> operations = new ArrayList<>();
-		for (String expression : expressions) {
-			if (isOperator(expression)) {
-				operations.add(expression);
-			}
-		}
-		return operations;
+		return expressions.stream()
+			.filter(this::isOperator)
+			.collect(Collectors.toUnmodifiableList());
 	}
 
 	private boolean isOperator(String expression) {
@@ -33,14 +29,14 @@ public class Expressions {
 
 	private void validateOperators(List<String> operators) {
 		for (String operator : operators) {
-			if (!isAllowedOperator(operator)) {
-				throw new IllegalArgumentException("허용되지 않은 사칙연산 기호입니다");
-			}
+			validateOperator(operator);
 		}
 	}
 
-	private boolean isAllowedOperator(String operator) {
-		return ALLOWED_OPERATORS.contains(operator);
+	private void validateOperator(String operator) {
+		if (!ALLOWED_OPERATORS.contains(operator)) {
+			throw new IllegalArgumentException("허용되지 않은 사칙연산 기호입니다");
+		}
 	}
 
 	private void validateNotNull(List<String> expressions) {
