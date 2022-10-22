@@ -51,13 +51,9 @@ public class LotteryTicket {
     }
 
     private int countSameNumbers(LotteryTicket compare) {
-        int count = 0;
-        for(LotteryNumber number : compare.lotteryNumbers) {
-            if (lotteryNumbers.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) compare.lotteryNumbers.stream()
+                .filter(number -> lotteryNumbers.contains(number))
+                .count();
     }
 
 }
