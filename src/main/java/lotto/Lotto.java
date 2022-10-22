@@ -3,10 +3,7 @@ package lotto;
 import exception.CustomException;
 import lotto.exception.LottoErrorCode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
 
@@ -21,6 +18,8 @@ public class Lotto {
     public static Lotto generate() {
         List<LottoNumber> lottoNumbersRange = LottoNumber.getLottoNumbersRange();
         Collections.shuffle(lottoNumbersRange);
+        Lotto lotto = new Lotto(lottoNumbersRange.subList(0, SELECT_SIZE));
+        lotto.numbers.sort(Comparator.comparing(LottoNumber::getNumber));
         return new Lotto(lottoNumbersRange.subList(0, SELECT_SIZE));
     }
 
