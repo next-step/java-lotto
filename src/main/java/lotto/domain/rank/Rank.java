@@ -36,12 +36,9 @@ public enum Rank {
     }
 
     private static Rank rankValue(final LottoMatchCount matchCount) {
-        for (Rank rank : Rank.values()) {
-            if (rank.matchCount.equals(matchCount)) {
-                return rank;
-            }
-        }
-        return Rank.MISS;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount.equals(matchCount))
+                .findFirst().orElse(Rank.MISS);
     }
 
     private static Rank checkBonusNumber(final boolean containBonusNumber) {
