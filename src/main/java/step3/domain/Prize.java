@@ -4,12 +4,42 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum Prize {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(6, 2_000_000_000){
+        @Override
+        boolean isWin(int countOfMatch, boolean isMatchBonus) {
+            return countOfMatch == 6;
+        }
+    },
+    SECOND(5, 30_000_000) {
+        @Override
+        boolean isWin(int countOfMatch, boolean isMatchBonus) {
+            return countOfMatch == 5 && isMatchBonus;
+        }
+    },
+    THIRD(5, 1_500_000) {
+        @Override
+        boolean isWin(int countOfMatch, boolean isMatchBonus) {
+            return countOfMatch == 5 && !isMatchBonus;
+        }
+    },
+    FOURTH(4, 50_000) {
+        @Override
+        boolean isWin(int countOfMatch, boolean isMatchBonus) {
+            return countOfMatch == 4;
+        }
+    },
+    FIFTH(3, 5_000) {
+        @Override
+        boolean isWin(int countOfMatch, boolean isMatchBonus) {
+            return countOfMatch == 3;
+        }
+    },
+    MISS(0, 0) {
+        @Override
+        boolean isWin(int countOfMatch, boolean isMatchBonus) {
+            return countOfMatch < MINIMUM_PRIZE_RANGE;
+        }
+    };
 
     private final int countOfMatch;
     private final int reward;
@@ -37,26 +67,16 @@ public enum Prize {
         return reward;
     }
 
-    public static Prize valueOf(int countOfMatch, boolean matchBonus) {
+    public static Prize valueOf(int countOfMatch, boolean isMatchBonus) {
         if (countOfMatch > MAXIMUM_PRIZE_RANGE) {
             throw new IllegalArgumentException("6개 이상 당첨될 수 없습니다.");
         }
 
-        if (countOfMatch < MINIMUM_PRIZE_RANGE) {
-            return MISS;
-        }
-
-        if (matchBonus && countOfMatch == 5) {
-            return SECOND;
-        }
-
-        if (!matchBonus && countOfMatch == 5) {
-            return THIRD;
-        }
-
         return Arrays.stream(Prize.values())
-            .filter(prize -> prize.getCountOfMatch() == countOfMatch)
+            .filter(prize -> prize.isWin(countOfMatch, isMatchBonus))
             .findFirst()
             .get();
     }
+
+    abstract boolean isWin(int countOfMatch, boolean isMatchBonus);
 }
