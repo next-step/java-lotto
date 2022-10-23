@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseMoney;
+import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,5 +18,8 @@ public class LottoApp {
 
         ResultView resultView = new ResultView();
         resultView.printLottos(lottos);
+
+        WinningNumbers winningNumbers = inputView.inputLastWeekWinningNumbers();
+
     }
 }
