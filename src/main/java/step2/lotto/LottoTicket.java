@@ -27,6 +27,8 @@ public class LottoTicket {
     }
 
     public long numberOfMatchingNumbers(Set<Integer> winningNumbers) {
+        verifyNumbersSize(winningNumbers);
+
         return numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
