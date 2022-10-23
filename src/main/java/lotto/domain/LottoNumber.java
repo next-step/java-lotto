@@ -9,7 +9,7 @@ public class LottoNumber {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER_BOUND_MESSAGE = "로또 번호는 1 ~ 45 의 숫자만 가능합니다.";
-    static final List<LottoNumber> CACHE = new ArrayList<>();
+    public static final List<LottoNumber> CACHE = new ArrayList<>();
 
     static {
         IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)

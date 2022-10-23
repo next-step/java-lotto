@@ -104,7 +104,7 @@
   - 로또 당첨금액 비율 계산에서 sum 의 이름 구체화
   - LottoRank 에서 match, money 구체화
   - Lotto 에서 generateReport 함수 변경
-- [ ] Lotto와 LottoGenerator 의 결합 끊기.
+- [x] Lotto와 LottoGenerator 의 결합 끊기.
 
 ---
 
@@ -124,4 +124,4 @@
 - [x] LottoRank 2등 추가
 - [x] 보너스 번호에 로직 추가
   - 2, 3등 가리는 로직
-- [ ] Result View '보너스볼 일치' 글씨 추가
+- [x] Result View '보너스볼 일치' 글씨 추가

@@ -1,9 +1,7 @@
 package lotto;
 
-import lotto.domain.LottoAmount;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoWinning;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
+import lotto.strategy.LottoGeneratorAutoStrategy;
 
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
@@ -14,7 +12,7 @@ public class LottoApplication {
         int lottoCount = lottoAmount.calcLottoCount();
         showLottoCount(lottoCount);
 
-        LottoTicket lottoTicket = new LottoTicket(lottoCount);
+        LottoTicket lottoTicket = new LottoTicket(lottoCount, new LottoGeneratorAutoStrategy());
         showAutoLottoTicket(lottoTicket);
 
         WinningNumbers winningNumbers = new WinningNumbers(askWinningLottoNumbers(), askBonusNumber());
