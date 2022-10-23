@@ -1,8 +1,10 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.Rank;
+import lotto.domain.Ranks;
 import lotto.domain.Ticket;
 
+import java.util.EnumMap;
 import java.util.List;
 
 public class ResultView {
@@ -14,12 +16,18 @@ public class ResultView {
         ticketList.forEach(t -> System.out.println(t.getLottoNumbers()));
     }
 
-    public static void printLottoResult(Lotto lotto) {
+    public static void printLottoResult(Ranks ranks) {
         System.out.println("\n당첨 통계\n---------");
-        System.out.printf("3개 일치 (%d원) = %d개\n", Lotto.THREE_MATCH_RANK_REWARD, lotto.getThreeMatchRankCount());
-        System.out.printf("4개 일치 (%d원) = %d개\n", Lotto.FOUR_MATCH_RANK_REWARD, lotto.getFourMatchRankCount());
-        System.out.printf("5개 일치 (%d원) = %d개\n", Lotto.FIVE_MATCH_RANK_REWARD, lotto.getFiveMatchRankCount());
-        System.out.printf("6개 일치 (%d원) = %d개\n", Lotto.SIX_MATCH_RANK_REWARD, lotto.getSixMatchRankCount());
+        EnumMap<Rank, Integer> rankMap = ranks.getRanks();
+
+        printRank(Rank.FOURTH, rankMap);
+        printRank(Rank.THIRD, rankMap);
+        printRank(Rank.SECOND, rankMap);
+        printRank(Rank.FIRST, rankMap);
+    }
+
+    private static void printRank(Rank rank, EnumMap<Rank, Integer> rankMap) {
+        System.out.printf("%d개 일치 (%d원)- %d개%n", rank.getMatchCount(), rank.getMoney(), rankMap.get(rank));
     }
 
     public static void printIncomePercentage(double incomePercentage) {

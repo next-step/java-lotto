@@ -1,24 +1,13 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private static final int TICKET_AMOUNT = 1000;
-    public static final int THREE_MATCH_RANK_REWARD = 5000;
-    public static final int FOUR_MATCH_RANK_REWARD = 50000;
-    public static final int FIVE_MATCH_RANK_REWARD = 1500000;
-    public static final int SIX_MATCH_RANK_REWARD = 2000000000;
-    private final List<Ticket> ticketList;
-    private int threeMatchRankCount = 0;
-    private int fourMatchRankCount = 0;
-    private int fiveMatchRankCount = 0;
-    private int sixMatchRankCount = 0;
+    public static final int TICKET_AMOUNT = 1000;
 
+    private final List<Ticket> ticketList;
 
     public Lotto(int amount) {
         int ticketCount = convertAmountToTicketCount(amount);
@@ -50,30 +39,12 @@ public class Lotto {
         return ticketList;
     }
 
-    public void rankedWinningNumbers(List<Integer> winningNumbers) {
+    public Ranks rankedWinningNumbers(List<Integer> winningNumbers) {
+        List<Rank> ranks = new ArrayList<>();
         for (Ticket ticket : ticketList) {
-            int matchCount = getWinningNumbersMatchCount(winningNumbers, ticket);
-            increaseRankMatchCount(matchCount);
+            ranks.add(matchRank(winningNumbers, ticket));
         }
-    }
-
-
-    public void increaseRankMatchCount(int matchCount) {
-        if (matchCount == 3) {
-            threeMatchRankCount++;
-            return;
-        }
-        if (matchCount == 4) {
-            fourMatchRankCount++;
-            return;
-        }
-        if (matchCount == 5) {
-            fiveMatchRankCount++;
-            return;
-        }
-        if (matchCount == 6) {
-            sixMatchRankCount++;
-        }
+        return new Ranks(ranks, getPurchageAmount());
     }
 
     public static int getWinningNumbersMatchCount(List<Integer> winningNumbers, Ticket ticket) {
@@ -83,6 +54,9 @@ public class Lotto {
         }
         return matchCount;
     }
+    public static Rank matchRank(List<Integer> winningNumbers, Ticket ticket) {
+        return Rank.of(getWinningNumbersMatchCount(winningNumbers, ticket));
+    }
 
     public static int increaseMatchCount(List<Integer> winningNumbers, Integer tiketNumber, int matchCount) {
         if (winningNumbers.contains(tiketNumber)) {
@@ -91,31 +65,11 @@ public class Lotto {
         return matchCount;
     }
 
-    public int getThreeMatchRankCount() {
-        return threeMatchRankCount;
+    public int getPurchageAmount(){
+        return ticketList.size() * Lotto.TICKET_AMOUNT;
     }
 
-    public int getFourMatchRankCount() {
-        return fourMatchRankCount;
-    }
 
-    public int getFiveMatchRankCount() {
-        return fiveMatchRankCount;
-    }
 
-    public int getSixMatchRankCount() {
-        return sixMatchRankCount;
-    }
 
-    public double caculateIncomePercentage(){
-        int purchageAmount = ticketList.size() * TICKET_AMOUNT;
-        return  getTotalWinningAmount() / (double)purchageAmount;
-    }
-
-    public int getTotalWinningAmount() {
-        return threeMatchRankCount * THREE_MATCH_RANK_REWARD
-                + fourMatchRankCount * FOUR_MATCH_RANK_REWARD
-                + fiveMatchRankCount * FIVE_MATCH_RANK_REWARD
-                + sixMatchRankCount * SIX_MATCH_RANK_REWARD;
-    }
 }

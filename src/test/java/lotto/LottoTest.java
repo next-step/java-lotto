@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,8 +27,6 @@ public class LottoTest {
 
         assertThat(lotto.getTicketCount()).isEqualTo(14);
     }
-
-
 
     @Test
     void makeTicketList() {
@@ -78,94 +75,4 @@ public class LottoTest {
         matchCount = Lotto.increaseMatchCount(lottoWinnigNumbers, 7, matchCount);
         assertThat(matchCount).isEqualTo(2);
     }
-
-    @Test
-    void increaseRankMatchCount() {
-        Lotto lotto = new Lotto(1000);
-
-        lotto.increaseRankMatchCount(3);
-        assertThat(lotto.getThreeMatchRankCount()).isEqualTo(1);
-        lotto.increaseRankMatchCount(3);
-        assertThat(lotto.getThreeMatchRankCount()).isEqualTo(2);
-        lotto.increaseRankMatchCount(4);
-        assertThat(lotto.getFourMatchRankCount()).isEqualTo(1);
-        lotto.increaseRankMatchCount(5);
-        assertThat(lotto.getFiveMatchRankCount()).isEqualTo(1);
-        lotto.increaseRankMatchCount(6);
-        assertThat(lotto.getSixMatchRankCount()).isEqualTo(1);
-    }
-
-    @Test
-    void rankedWinningNumbers() {
-        List<Ticket> ticketList = new ArrayList<>();
-        List<Integer> ticketNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(ticketNumbers);
-        ticketList.add(ticket);
-
-        Lotto lotto = new Lotto(ticketList);
-
-        List<Integer> lottoWinnigNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
-        lotto.rankedWinningNumbers(lottoWinnigNumbers);
-
-        assertThat(lotto.getThreeMatchRankCount()).isEqualTo(0);
-        assertThat(lotto.getFourMatchRankCount()).isEqualTo(1);
-        assertThat(lotto.getFiveMatchRankCount()).isEqualTo(0);
-        assertThat(lotto.getSixMatchRankCount()).isEqualTo(0);
-    }
-
-    @Test
-    void getTotalWinningAmount() {
-        List<Ticket> ticketList = new ArrayList<>();
-        List<Integer> ticketNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(ticketNumbers);
-        ticketList.add(ticket);
-
-        Lotto lotto = new Lotto(ticketList);
-
-        List<Integer> lottoWinnigNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
-        lotto.rankedWinningNumbers(lottoWinnigNumbers);
-
-        assertThat(lotto.getTotalWinningAmount()).isEqualTo(50000);
-
-    }
-
-    @ParameterizedTest(name = "{index}. 번호매칭 - args : [{arguments}]")
-    @CsvSource(value = {"1,2,3,4,5,6:2000000000",
-            "2,3,4,5,6,7:1500000",
-            "3,4,5,6,7,8:50000",
-            "4,5,6,7,8,9:5000",
-            "5,6,7,8,9,10:0"}, delimiter = ':')
-    void getTotalWinningAmount(String ticketNumberText, int expected) {
-
-        String[] tokens = ticketNumberText.split(",");
-        List<Integer> ticketNumbers = Arrays.stream(tokens)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-        Ticket ticket = new Ticket(ticketNumbers);
-
-        List<Ticket> ticketList = new ArrayList<>();
-        ticketList.add(ticket);
-
-        Lotto lotto = new Lotto(ticketList);
-
-        List<Integer> lottoWinnigNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        lotto.rankedWinningNumbers(lottoWinnigNumbers);
-        assertThat(lotto.getTotalWinningAmount()).isEqualTo(expected);
-    }
-
-    @Test
-    void caculateIncomePercentage() {
-        List<Ticket> ticketList = new ArrayList<>();
-        List<Integer> ticketNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(ticketNumbers);
-        ticketList.add(ticket);
-
-        Lotto lotto = new Lotto(ticketList);
-
-        List<Integer> lottoWinnigNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
-        lotto.rankedWinningNumbers(lottoWinnigNumbers);
-        assertThat(lotto.caculateIncomePercentage()).isEqualTo(50);
-
-    }
-
 }
