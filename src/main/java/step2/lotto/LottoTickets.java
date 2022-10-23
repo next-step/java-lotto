@@ -31,11 +31,12 @@ public class LottoTickets {
 
     public String yield(Set<Integer> winningNumbers) {
         double totalAmountEarned = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.numberOfMatchingNumbers(winningNumbers))
+                .map(lottoTicket -> lottoTicket.rank(winningNumbers))
                 .map(Rank::prizeAmount)
                 .reduce(Double::sum)
                 .orElse(0.0);
 
         return String.format("%.2f", totalAmountEarned / (LOTTO_PRICE * lottoTickets.size()));
     }
+
 }
