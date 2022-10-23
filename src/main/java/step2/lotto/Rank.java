@@ -11,14 +11,14 @@ enum Rank {
     ;
 
     private final long numberOfMatchingNumbers;
-    private final long prizeAmount;
+    private final double prizeAmount;
 
-    Rank(long numberOfMatchingNumbers, int prizeAmount) {
+    Rank(long numberOfMatchingNumbers, double prizeAmount) {
         this.numberOfMatchingNumbers = numberOfMatchingNumbers;
         this.prizeAmount = prizeAmount;
     }
 
-    public static long prizeAmount(long numberOfMatchingNumbers) {
+    public static double prizeAmount(long numberOfMatchingNumbers) {
         return EnumSet.allOf(Rank.class)
                 .stream()
                 .filter(rank -> rank.numberOfMatchingNumbers == numberOfMatchingNumbers)
