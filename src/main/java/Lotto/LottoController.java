@@ -53,7 +53,6 @@ public class LottoController {
     }
 
     private static void showResult() {
-        LottoWinningCalculator calculator = new LottoWinningCalculator(winnerLotto, myLotto);
-        ResultView.result(calculator.countPrizeMap());
+        ResultView.result(Rank.calculate(winnerLotto, myLotto));
     }
 }

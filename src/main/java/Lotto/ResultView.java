@@ -22,9 +22,15 @@ public class ResultView {
         System.out.println(LAST_WEEK_WINNER_LOTTO);
     }
 
-    public static void result(HashMap<Integer, Integer> prizeMap) {
-        for (Integer key : prizeMap.keySet()) {
-            System.out.println(String.format("%s개 일치 - %s", key, prizeMap.get(key)));
+    public static void result(List<Rank> ranking) {
+        for (Rank rank : ranking) {
+            String msg = String.format(
+                    "%s개 일치 (%s원)- %s개",
+                    rank.getCorrectCount(),
+                    rank.getPrize(),
+                    rank.getCount()
+            );
+            System.out.println(msg);
         }
     }
 
