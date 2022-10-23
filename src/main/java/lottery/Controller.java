@@ -20,7 +20,7 @@ public class Controller {
         List<Lottery> lotteries = customer.getLotteries();
         printPurchasedLotteryInfos(lotteries);
 
-        WinningLottery winningLottery = new WinningLottery(getWinningLotteryNumbers(), getBonusLotteryNumber());
+        WinningLottery winningLottery = getWinningLottery();
         LotteryResult lotteryResult = winningLottery.createLotteryResult(lotteries);
         printResult(lotteryResult);
     }
