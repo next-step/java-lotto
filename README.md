@@ -99,7 +99,7 @@
   - lastWeekTicket -> winningTicket
 - [x] LottoAmount 에서 가격에대한 수익률 구하기.
 
-- [ ] distinct 제거하며, validateSize 함수 통합.
+- [x] distinct 제거하며, validateSize 함수 통합.
 - [ ] 이름 수정
   - 로또 당첨금액 비율 계산에서 sum 의 이름 구체화
   - LottoRank 에서 match, money 구체화

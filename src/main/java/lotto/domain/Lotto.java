@@ -39,15 +39,9 @@ public class Lotto {
                 .count();
     }
 
-    private void validateSize(Set<LottoNumber> lotto) {
-        if (isInvalidSize(lotto)) {
+    private void validateSize(Set<LottoNumber> numbers) {
+        if (numbers.size() != VALID_SIZE) {
             throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
         }
-    }
-
-    private boolean isInvalidSize(Set<LottoNumber> numbers) {
-        return VALID_SIZE != numbers.stream()
-                .distinct()
-                .count();
     }
 }
