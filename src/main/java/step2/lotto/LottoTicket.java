@@ -26,11 +26,13 @@ public class LottoTicket {
         outputView.print(numbers);
     }
 
-    public long numberOfMatchingNumbers(Set<Integer> winningNumbers) {
+    public Rank rank(Set<Integer> winningNumbers) {
         verifyNumbersSize(winningNumbers);
 
-        return numbers.stream()
+        long numberOfMatchingNumbers = numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
+
+        return Rank.rank(numberOfMatchingNumbers);
     }
 }
