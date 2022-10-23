@@ -8,6 +8,7 @@ enum Rank {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
+    NOTHING(0, 0),
     ;
 
     private final long numberOfMatchingNumbers;
@@ -25,6 +26,14 @@ enum Rank {
                 .map(rank -> rank.prizeAmount)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("일치하는 개수가 3 ~ 6 개기어야 합니다."));
+    }
+
+    public static Rank rank(long numberOfMatchingNumbers) {
+        return EnumSet.allOf(Rank.class)
+                .stream()
+                .filter(rank -> rank.numberOfMatchingNumbers == numberOfMatchingNumbers)
+                .findFirst()
+                .orElse(Rank.NOTHING);
     }
 
 }
