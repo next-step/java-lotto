@@ -1,19 +1,17 @@
 package lotto.view.input;
 
-import java.util.Scanner;
-
 import lotto.model.BonusNumber;
 
 public class BonusNumberInputView {
+    private final UserInterface userInterface;
 
-    private BonusNumberInputView() {
+    public BonusNumberInputView(UserInterface userInterface) {
+        this.userInterface = userInterface;
     }
 
-    public static BonusNumber getBonusNumber(Scanner scanner) {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        BonusNumber bonusNumber = BonusNumber.of(scanner.nextInt());
-        scanner.nextLine();
+    public BonusNumber getBonusNumber() {
+        userInterface.show("보너스 볼을 입력해 주세요.");
 
-        return bonusNumber;
+        return BonusNumber.of(userInterface.getInt());
     }
 }
