@@ -18,9 +18,12 @@ public class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(String number) {
+        this(validateNumber(toInt(number)));
+    }
+
     public LottoNumber(int number) {
-        validateNumber(number);
-        this.number = number;
+        this.number = validateNumber(number);
     }
 
     public static LottoNumber of(int number) {
@@ -31,10 +34,19 @@ public class LottoNumber {
         }
     }
 
-    public void validateNumber(int number) {
+    private static int toInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
+        }
+    }
+
+    private static int validateNumber(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
         }
+        return number;
     }
 
     int getNumber() {
