@@ -24,7 +24,7 @@ enum Rank {
                 .filter(rank -> rank.numberOfMatchingNumbers == numberOfMatchingNumbers)
                 .map(rank -> rank.prizeAmount)
                 .findFirst()
-                .orElse(0L);
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 개수가 3 ~ 6 개기어야 합니다."));
     }
 
 }
