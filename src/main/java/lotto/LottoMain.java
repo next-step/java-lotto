@@ -16,8 +16,8 @@ public class LottoMain {
         ResultView.printTicketCount(lotto.getTicketCount());
         ResultView.printTickeList(lotto.getTicketList());
 
-        List<Integer> winnigNumbers = InputView.inputWinnigNumber();
-        Ticket lottoWinningTicket = Ticket.of(winnigNumbers);
+        List<Integer> winningNumbers = InputView.inputWinnigNumber();
+        Ticket lottoWinningTicket = Ticket.of(winningNumbers);
         Ranks ranks = lotto.rankedWinningNumbers(lottoWinningTicket);
 
         ResultView.printLottoResult(ranks);
