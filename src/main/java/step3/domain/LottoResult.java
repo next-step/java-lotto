@@ -26,7 +26,6 @@ public class LottoResult {
             drawResult.put(prize, drawResult.getOrDefault(prize, 0) + 1);
         }
 
-        drawResult.remove(Prize.MISS);
         return drawResult;
     }
 }

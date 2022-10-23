@@ -66,3 +66,4 @@
   * Step3 추가 피드백
     - [x] LottoNumber 도메인 사용
     - [x] isBonusBallMatch 메서드 네이밍 수정
+    - [x] Prize.MISS를 도메인에서는 가지고 있고 출력단에서만 제거하도록 변경

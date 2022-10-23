@@ -34,6 +34,7 @@ public class OutputView {
 
     public static void printDrawResult(final Map<Prize, Integer> drawLottoResult) {
         System.out.println();
+        drawLottoResult.remove(Prize.MISS);
         for (Prize prize : drawLottoResult.keySet()) {
             printEachResult(drawLottoResult, prize);
         }
