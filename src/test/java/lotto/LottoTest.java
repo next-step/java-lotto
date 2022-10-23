@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -50,29 +51,29 @@ public class LottoTest {
             "4,5,6,7,8,9:3",
             "5,6,7,8,9,10:2"}, delimiter = ':')
     void checkWinningNumbers(String ticketNumberText, int expected) {
-        List<Integer> lottoWinnigNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket lottoWinningTicket = Ticket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         String[] tokens = ticketNumberText.split(",");
         List<Integer> ticketNumbers = Arrays.stream(tokens)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        Ticket ticket = new Ticket(ticketNumbers);
+        Ticket ticket = Ticket.of(ticketNumbers);
 
-        int matchCount = Lotto.getWinningNumbersMatchCount(lottoWinnigNumbers, ticket);
+        int matchCount = Lotto.getWinningNumbersMatchCount(lottoWinningTicket, ticket);
         assertThat(matchCount).isEqualTo(expected);
     }
 
     @Test
     void increaseMatchCount() {
-        List<Integer> lottoWinnigNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket lottoWinningTicket = Ticket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         int matchCount = 0;
 
-        matchCount = Lotto.increaseMatchCount(lottoWinnigNumbers, 1, matchCount);
+        matchCount = Lotto.increaseMatchCount(lottoWinningTicket, LottoNumber.of(1), matchCount);
         assertThat(matchCount).isEqualTo(1);
 
-        matchCount = Lotto.increaseMatchCount(lottoWinnigNumbers, 2, matchCount);
+        matchCount = Lotto.increaseMatchCount(lottoWinningTicket, LottoNumber.of(2), matchCount);
         assertThat(matchCount).isEqualTo(2);
 
-        matchCount = Lotto.increaseMatchCount(lottoWinnigNumbers, 7, matchCount);
+        matchCount = Lotto.increaseMatchCount(lottoWinningTicket, LottoNumber.of(7), matchCount);
         assertThat(matchCount).isEqualTo(2);
     }
 }

@@ -1,19 +1,27 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Ticket {
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Ticket() {
-        this.lottoNumbers = LottoNumberGenerator.generate();
-    }
-
-    public Ticket(List<Integer> lottoNumbers) {
+    public Ticket(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public static Ticket of(List<Integer> numberList) {
+        return numberList.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Ticket::new));
+    }
+
+    public static Ticket create() {
+        return of(LottoNumberGenerator.generate());
+    }
+
+
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 }

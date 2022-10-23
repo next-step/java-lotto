@@ -25,7 +25,7 @@ public class Lotto {
     public static List<Ticket> makeTicketList(int count) {
         List<Ticket> ticketList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Ticket ticket = new Ticket();
+            Ticket ticket = Ticket.create();
             ticketList.add(ticket);
         }
         return ticketList;
@@ -39,27 +39,29 @@ public class Lotto {
         return ticketList;
     }
 
-    public Ranks rankedWinningNumbers(List<Integer> winningNumbers) {
+    public Ranks rankedWinningNumbers(Ticket winningTicket) {
         List<Rank> ranks = new ArrayList<>();
         for (Ticket ticket : ticketList) {
-            ranks.add(matchRank(winningNumbers, ticket));
+            ranks.add(matchRank(winningTicket, ticket));
         }
         return new Ranks(ranks, getPurchageAmount());
     }
 
-    public static int getWinningNumbersMatchCount(List<Integer> winningNumbers, Ticket ticket) {
+    public static Rank matchRank(Ticket winningTicket, Ticket ticket) {
+        return Rank.of(getWinningNumbersMatchCount(winningTicket, ticket));
+    }
+
+    public static int getWinningNumbersMatchCount(Ticket winningTicket, Ticket ticket) {
         int matchCount = 0;
-        for (Integer tiketNumber : ticket.getLottoNumbers()) {
-            matchCount = increaseMatchCount(winningNumbers, tiketNumber, matchCount);
+        for (LottoNumber tiketNumber : ticket.getLottoNumbers()) {
+            matchCount = increaseMatchCount(winningTicket, tiketNumber, matchCount);
         }
         return matchCount;
     }
-    public static Rank matchRank(List<Integer> winningNumbers, Ticket ticket) {
-        return Rank.of(getWinningNumbersMatchCount(winningNumbers, ticket));
-    }
 
-    public static int increaseMatchCount(List<Integer> winningNumbers, Integer tiketNumber, int matchCount) {
-        if (winningNumbers.contains(tiketNumber)) {
+
+    public static int increaseMatchCount(Ticket winningTicket, LottoNumber tiketNumber, int matchCount) {
+        if (winningTicket.getLottoNumbers().contains(tiketNumber)) {
             matchCount++;
         }
         return matchCount;

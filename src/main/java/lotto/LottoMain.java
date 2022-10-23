@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Ranks;
+import lotto.domain.Ticket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,7 +17,8 @@ public class LottoMain {
         ResultView.printTickeList(lotto.getTicketList());
 
         List<Integer> winnigNumbers = InputView.inputWinnigNumber();
-        Ranks ranks = lotto.rankedWinningNumbers(winnigNumbers);
+        Ticket lottoWinningTicket = Ticket.of(winnigNumbers);
+        Ranks ranks = lotto.rankedWinningNumbers(lottoWinningTicket);
 
         ResultView.printLottoResult(ranks);
         ResultView.printIncomePercentage(ranks.caculateIncomePercentage());

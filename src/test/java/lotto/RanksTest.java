@@ -21,16 +21,14 @@ public class RanksTest {
     @Test
     void rankedWinningNumbers() {
         List<Ticket> ticketList = new ArrayList<>();
-        List<Integer> ticketNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(ticketNumbers);
+        Ticket ticket = Ticket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         ticketList.add(ticket);
 
         Lotto lotto = new Lotto(ticketList);
 
-        List<Integer> lottoWinnigNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
-        lotto.rankedWinningNumbers(lottoWinnigNumbers);
+        Ticket lottoWinningTicket = Ticket.of(Arrays.asList(3, 4, 5, 6, 7, 8));
 
-        Ranks ranks = lotto.rankedWinningNumbers(lottoWinnigNumbers);
+        Ranks ranks = lotto.rankedWinningNumbers(lottoWinningTicket);
         EnumMap<Rank, Integer> rankMap = ranks.getRanks();
 
         assertThat(rankMap.get(Rank.FOURTH)).isEqualTo(0);
@@ -42,16 +40,14 @@ public class RanksTest {
     @Test
     void getTotalWinningAmount() {
         List<Ticket> ticketList = new ArrayList<>();
-        List<Integer> ticketNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(ticketNumbers);
+        Ticket ticket = Ticket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         ticketList.add(ticket);
 
         Lotto lotto = new Lotto(ticketList);
 
-        List<Integer> lottoWinnigNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
-        lotto.rankedWinningNumbers(lottoWinnigNumbers);
+        Ticket lottoWinningTicket = Ticket.of(Arrays.asList(3, 4, 5, 6, 7, 8));
 
-        Ranks ranks = lotto.rankedWinningNumbers(lottoWinnigNumbers);
+        Ranks ranks = lotto.rankedWinningNumbers(lottoWinningTicket);
         assertThat(ranks.getTotalWinningAmount()).isEqualTo(50000);
 
     }
@@ -68,34 +64,30 @@ public class RanksTest {
         List<Integer> ticketNumbers = Arrays.stream(tokens)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        Ticket ticket = new Ticket(ticketNumbers);
+        Ticket ticket = Ticket.of(ticketNumbers);
 
         List<Ticket> ticketList = new ArrayList<>();
         ticketList.add(ticket);
 
         Lotto lotto = new Lotto(ticketList);
 
-        List<Integer> lottoWinnigNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        lotto.rankedWinningNumbers(lottoWinnigNumbers);
+        Ticket lottoWinningTicket = Ticket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        Ranks ranks = lotto.rankedWinningNumbers(lottoWinnigNumbers);
+        Ranks ranks = lotto.rankedWinningNumbers(lottoWinningTicket);
         assertThat(ranks.getTotalWinningAmount()).isEqualTo(expected);
     }
 
     @Test
     void caculateIncomePercentage() {
         List<Ticket> ticketList = new ArrayList<>();
-        List<Integer> ticketNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(ticketNumbers);
+        Ticket ticket = Ticket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         ticketList.add(ticket);
 
         Lotto lotto = new Lotto(ticketList);
 
-        List<Integer> lottoWinnigNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
-        lotto.rankedWinningNumbers(lottoWinnigNumbers);
+        Ticket lottoWinningTicket = Ticket.of(Arrays.asList(3, 4, 5, 6, 7, 8));
 
-
-        Ranks ranks = lotto.rankedWinningNumbers(lottoWinnigNumbers);
+        Ranks ranks = lotto.rankedWinningNumbers(lottoWinningTicket);
         assertThat(ranks.caculateIncomePercentage()).isEqualTo(50);
     }
 }
