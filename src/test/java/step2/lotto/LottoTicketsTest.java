@@ -2,6 +2,7 @@ package step2.lotto;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,4 +32,16 @@ class LottoTicketsTest {
         assertThat(lottoTickets.yield(winningNumbers)).isEqualTo(String.format("%.2f", firstPrizeAmount / totalPrice));
     }
 
+    @Test
+    void 로또의_당첨_통계를_구할_수_있다() {
+        int numberOfTickets = 1;
+        int lottoPrice = 1000;
+        int totalPrice = lottoPrice * numberOfTickets;
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
+
+        LottoTickets lottoTickets = LottoTickets.of(totalPrice, numbersGenerator);
+
+        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
+        assertThat(lottoTickets.ranks(winningNumbers)).containsExactly(Map.entry(Rank.FIRST, 1L));
+    }
 }
