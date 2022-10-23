@@ -10,16 +10,15 @@ public class LottoNumberGenerator {
     private static final int RANGE_END_NUMBER = 45;
     private static final int NUMBER_SIZE = 6;
 
-    public static List<Integer> generate() {
-        List<Integer> lottoRangeNumbers = IntStream.range(RANGE_BEGIN_NUMBER, RANGE_END_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
+    private static final List<Integer> lottoRangeNumbers = IntStream.range(RANGE_BEGIN_NUMBER, RANGE_END_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
 
+    public static List<Integer> generate() {
         Collections.shuffle(lottoRangeNumbers);
-        lottoRangeNumbers = lottoRangeNumbers.stream()
+        return lottoRangeNumbers.stream()
                 .limit(NUMBER_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
-        return lottoRangeNumbers;
     }
 }
