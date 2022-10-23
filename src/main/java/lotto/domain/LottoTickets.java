@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumbers.getAutoNumberList;
-
 public class LottoTickets {
 
     private final PurchasePrice purchasePrice;
@@ -28,15 +26,15 @@ public class LottoTickets {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < this.purchasePrice.getAmount(); i++) {
-            lottoList.add(new Lotto(getAutoNumberList()));
+            lottoList.add(new Lotto());
         }
 
         this.lottoList = lottoList;
         return this;
     }
 
-    public LottoTickets putRankings(List<Integer> matchNumberList) {
-        this.lottoList.forEach(l -> l.rank(matchNumberList));
+    public LottoTickets putRankings(LottoNumbers winnerLottoNumbers) {
+        this.lottoList.forEach(l -> l.rank(winnerLottoNumbers));
         return this;
     }
 

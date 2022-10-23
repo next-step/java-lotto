@@ -21,7 +21,7 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(LottoTickets lottoTickets) {
-        lottoTickets.getLottoList().forEach(l -> System.out.println(l.getNumberList()));
+        lottoTickets.getLottoList().forEach(l -> System.out.println(l.getLottoNumbers()));
         System.out.println();
     }
 

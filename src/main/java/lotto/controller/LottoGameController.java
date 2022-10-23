@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTickets;
 import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
@@ -21,8 +22,8 @@ public class LottoGameController {
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
         printLottoNumbers(pickedLottoTickets);
 
-        List<Integer> matchNumberList = inputMatchNumberList();
-        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(matchNumberList);
+        LottoNumbers winnerLottoNumbers = inputMatchNumberList();
+        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(winnerLottoNumbers);
 
         List<Rank> rankList = rankedLottoTickets.getRank();
         printRanks(rankList);

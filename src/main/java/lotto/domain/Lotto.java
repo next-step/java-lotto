@@ -1,29 +1,31 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class Lotto {
 
-    private final List<Integer> numberList;
+    private final LottoNumbers lottoNumbers;
     private Rank rank;
 
-    public Lotto(List<Integer> numberList) {
-        this.numberList = numberList;
+    public Lotto() {
+        this(new LottoNumbers());
     }
 
-    public Lotto rank(List<Integer> matchNumberList) {
-        this.rank = Rank.valueOf((int) numberList
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public Lotto rank(LottoNumbers winnerLottoNumbers) {
+        this.rank = Rank.valueOf((int) this.lottoNumbers.getLottoNumberList()
                 .stream()
-                .filter(matchNumberList::contains)
+                .filter(winnerLottoNumbers.getLottoNumberList()::contains)
                 .count());
         return this;
     }
 
-    public List<Integer> getNumberList() {
-        return numberList;
+    public LottoNumbers getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     public Rank getRank() {
-        return rank;
+        return this.rank;
     }
 }

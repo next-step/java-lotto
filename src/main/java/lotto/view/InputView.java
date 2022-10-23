@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.PurchasePrice;
 import lotto.exception.InvalidInputException;
 
@@ -29,14 +30,14 @@ public class InputView {
         return new PurchasePrice(convertToInt(validateInput(input)));
     }
 
-    public static List<Integer> inputMatchNumberList() {
+    public static LottoNumbers inputMatchNumberList() {
         System.out.println(MATCH_NUMBER_LIST_MESSAGE);
         String input = SCANNER.next();
         System.out.println();
-        return validateMatchNumberList(Arrays.stream(input.trim().split(","))
+        return new LottoNumbers(validateMatchNumberList(Arrays.stream(input.trim().split(","))
                 .map(InputView::validateInput)
                 .map(InputView::convertToInt)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
     }
 
     private static List<Integer> validateMatchNumberList(List<Integer> matchNumberList) {

@@ -28,12 +28,12 @@ class LottoTicketsTest {
     void rank() {
         // given
         Integer purchasePrice = 14000;
-        List<Integer> matchNumberList = List.of(1, 2, 3, 4, 5, 6);
+        LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
-        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(matchNumberList);
+        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(winnerLottoNumbers);
 
         // then
         assertThat(rankedLottoTickets.getLottoList().get(0).getRank()).isNotNull();
@@ -44,12 +44,12 @@ class LottoTicketsTest {
     void getRank() {
         // given
         Integer purchasePrice = 14000;
-        List<Integer> matchNumberList = List.of(1, 2, 3, 4, 5, 6);
+        LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
-        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(matchNumberList);
+        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(winnerLottoNumbers);
         List<Rank> rankList = rankedLottoTickets.getRank();
 
         // then
@@ -61,12 +61,12 @@ class LottoTicketsTest {
     void getYield() {
         // given
         Integer purchasePrice = 1000;
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 14, 15, 16));
-        List<Integer> matchNumberList = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto();
+        LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), List.of(lotto));
-        LottoTickets rankedLottoTickets = lottoTickets.putRankings(matchNumberList);
+        LottoTickets rankedLottoTickets = lottoTickets.putRankings(winnerLottoNumbers);
         Integer yield = rankedLottoTickets.getYield();
 
         // then

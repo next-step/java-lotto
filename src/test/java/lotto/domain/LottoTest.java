@@ -4,9 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumbers.getAutoNumberList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
@@ -15,22 +13,22 @@ class LottoTest {
     @DisplayName("로또 생성 중복 확인")
     void auto() {
         // given
-        Lotto lotto = new Lotto(getAutoNumberList());
+        Lotto lotto = new Lotto();
 
         // expected
-        assertThat(lotto.getNumberList()).isEqualTo(lotto.getNumberList().stream().distinct().collect(Collectors.toList()));
+        assertThat(lotto.getLottoNumbers()).isEqualTo(lotto.getLottoNumbers());
     }
 
     @Test
     @DisplayName("로또 랭크 확인")
     void rank() {
         // given
-        List<Integer> numberList = List.of(1, 2, 3, 4, 5, 6);
-        List<Integer> matchList = List.of(1, 2, 3, 10, 12, 13);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 10, 12, 13));
 
         // when
-        Lotto lotto = new Lotto(numberList);
-        Lotto result = lotto.rank(matchList);
+        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto result = lotto.rank(winnerLottoNumbers);
 
         // then
         assertThat(result.getRank()).isEqualTo(Rank.FIFTH);
