@@ -37,8 +37,8 @@ public class ResultView {
         Arrays.stream(LottoRank.values())
                 .filter(rank -> rank != LottoRank.MISS)
                 .forEach(rank -> {
-                        Integer count = winning.count(rank);
-                        System.out.printf(LOTTO_MATCH_MESSAGE, rank.getMatch(), rank.getMoney(), count);
+                    Integer count = winning.count(rank);
+                    System.out.printf(LOTTO_MATCH_MESSAGE, rank.getCountOfMatch(), rank.getWinningMoney(), count);
                 });
     }
 

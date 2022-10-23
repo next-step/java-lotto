@@ -25,7 +25,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Set<Integer> generateReport() {
+    public Set<Integer> toIntSet() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .sorted()

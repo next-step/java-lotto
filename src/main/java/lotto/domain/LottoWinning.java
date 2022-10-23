@@ -23,11 +23,11 @@ public class LottoWinning {
         return money;
     }
 
-    public void put(LottoRank prize) {
-        winning.merge(prize, 1, Integer::sum);
+    public void put(LottoRank rank) {
+        winning.merge(rank, 1, Integer::sum);
     }
 
-    public Integer count(LottoRank prize) {
-        return winning.get(prize);
+    public Integer count(LottoRank rank) {
+        return winning.get(rank);
     }
 }

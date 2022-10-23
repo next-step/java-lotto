@@ -9,30 +9,30 @@ public enum LottoRank {
     SECOND(5, 1_500_000),
     FIRST(6, 2_000_000_000);
 
-    private final int match;
-    private final int money;
+    private final int countOfMatch;
+    private final int winningMoney;
 
-    LottoRank(int match, int money) {
-        this.match = match;
-        this.money = money;
+    LottoRank(int countOfMatch, int winningMoney) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
     }
 
-    public int getMatch() {
-        return match;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public int getMoney() {
-        return money;
+    public int getWinningMoney() {
+        return winningMoney;
     }
 
-    public static LottoRank win(int matchCount) {
+    public static LottoRank win(int countOfMatch) {
         return Arrays.stream(values())
-                .filter(prize -> prize.match == matchCount)
+                .filter(rank -> rank.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(MISS);
     }
 
-    public int multiply(int winningCount) {
-        return money * winningCount;
+    public int multiply(int countOfMatch) {
+        return winningMoney * countOfMatch;
     }
 }

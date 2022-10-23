@@ -100,8 +100,16 @@
 - [x] LottoAmount 에서 가격에대한 수익률 구하기.
 
 - [x] distinct 제거하며, validateSize 함수 통합.
-- [ ] 이름 수정
+- [x] 이름 수정
   - 로또 당첨금액 비율 계산에서 sum 의 이름 구체화
   - LottoRank 에서 match, money 구체화
   - Lotto 에서 generateReport 함수 변경
 - [ ] Lotto와 LottoGenerator 의 결합 끊기.
+
+---
+
+---
+##Step2 - 로또(자동)
+###기능 요구사항
+> - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+> - 로또 1장의 가격은 1000원이다.
