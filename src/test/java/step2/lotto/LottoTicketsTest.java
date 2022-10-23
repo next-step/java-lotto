@@ -17,4 +17,18 @@ class LottoTicketsTest {
 
         assertThat(lottoTickets.numberOfTickets()).isOne();
     }
+
+    @Test
+    void 로또의_수익률을_구할_수_있다() {
+        int numberOfTickets = 1;
+        int lottoPrice = 1000;
+        int totalPrice = lottoPrice * numberOfTickets;
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
+        LottoTickets lottoTickets = LottoTickets.of(totalPrice, numbersGenerator);
+
+        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
+        double firstPrizeAmount = 2_000_000_000;
+        assertThat(lottoTickets.yield(winningNumbers)).isEqualTo(String.format("%.2f", firstPrizeAmount / totalPrice));
+    }
+
 }
