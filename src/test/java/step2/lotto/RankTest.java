@@ -24,4 +24,9 @@ class RankTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("일치하는 개수가 3 ~ 6 개기어야 합니다.");
     }
+
+    @Test
+    void 일치하는_개수를_통해_등급을_구할_수_있다() {
+        assertThat(Rank.rank(6)).isEqualTo(Rank.FIRST);
+    }
 }
