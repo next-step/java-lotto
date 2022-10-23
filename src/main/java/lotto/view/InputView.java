@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.util.NumberUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -22,6 +21,9 @@ public class InputView {
         String inputText = SCANNER.nextLine();
         String[] tokens = inputText.split(",");
 
-        return Arrays.stream(tokens).map(String::trim).map(NumberUtil::getPositiveInteger).collect(Collectors.toList());
+        return Arrays.stream(tokens)
+                .map(String::trim)
+                .map(NumberUtil::getPositiveInteger)
+                .collect(Collectors.toList());
     }
 }
