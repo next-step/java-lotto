@@ -7,8 +7,6 @@ import java.util.stream.IntStream;
 
 public class LotteryCompany {
 
-    // todo private? 상수 위치 고민
-    static final int LOTTERY_NUM_COUNT = 6;
     static final int LOTTERY_PRICE = 1000;
 
     private static final List<LotteryNumber> LOTTERY_NUMBER_CANDIDATES = IntStream
@@ -18,7 +16,7 @@ public class LotteryCompany {
 
     public static Lottery generateRandomLotteryNumbers() {
         Collections.shuffle(LOTTERY_NUMBER_CANDIDATES);
-        return new Lottery(LOTTERY_NUMBER_CANDIDATES.subList(0, LOTTERY_NUM_COUNT)
+        return new Lottery(LOTTERY_NUMBER_CANDIDATES.subList(0, Lottery.LOTTERY_NUM_COUNT)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList()));
