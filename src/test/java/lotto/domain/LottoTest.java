@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +15,19 @@ class LottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         assertThat(lotto.getNumbers()).hasSize(6);
+    }
+
+    @DisplayName("로또 자동 생성")
+    @Test
+    void createFromGeneratorTEst() {
+        NumberGenerator numberGenerator = () -> List.of(3, 1, 5, 23, 44, 12);
+
+        Lotto lotto = Lotto.createFrom(numberGenerator);
+
+        assertAll(
+            () -> assertThat(lotto.getNumbers()).hasSize(6),
+            () -> assertThat(lotto.getNumbers()).containsExactly(1, 3, 5, 12, 23, 44)
+        );
     }
 
     @DisplayName("로또 번호가 6개가 아닐 경우 예외 발생")
