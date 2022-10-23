@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class LottoShop {
     public Lottos buy(final Money money) {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < money.calculateQuantity(LOTTO_PRICE); i++) {
-            result.add(Lotto.print(lottoNumberStrategy));
+            result.add(Lotto.create(lottoNumberStrategy));
         }
         return new Lottos(result);
     }

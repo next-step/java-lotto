@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.Number;
+import lotto.domain.Number;
 
 import java.util.*;
 
@@ -29,6 +29,11 @@ public class Input {
             numbers.add(Number.of(number));
         }
         return numbers;
+    }
+
+    public static Number inputBonusNumber() {
+        String input = input();
+        return Number.of(input);
     }
 
 }

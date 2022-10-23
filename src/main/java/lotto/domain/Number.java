@@ -1,8 +1,7 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 
-//FIXME: 너무 범용적인 이름 사용. 구체적인 이름으로 명명 시도 :)
 public class Number implements Comparable<Number> {
     private final int number;
 
