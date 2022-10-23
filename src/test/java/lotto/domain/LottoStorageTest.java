@@ -24,12 +24,12 @@ public class LottoStorageTest {
             new Lotto("5, 6, 7, 8, 9, 10")
         );
         LottoStorage storage = new LottoStorage(lottos);
-        storage.matchAllWithWinningLotto(winningLotto, 7);
+        storage.matchAllWithWinningLotto(winningLotto, new LottoNumber(7));
         Map<WinningInformation, Long> result = storage.getResult();
 
         assertAll(() -> {
+            assertThat(result.get(WinningInformation.FIFTH)).isEqualTo(1);
             assertThat(result.get(WinningInformation.FOURTH)).isEqualTo(1);
-            assertThat(result.get(WinningInformation.THIRD)).isEqualTo(1);
             assertThat(result.get(WinningInformation.SECOND)).isEqualTo(1);
         });
     }
@@ -45,8 +45,8 @@ public class LottoStorageTest {
             new Lotto("5, 6, 7, 8, 9, 10")
         );
         LottoStorage storage = new LottoStorage(lottos);
-        storage.matchAllWithWinningLotto(winningLotto, 7);
+        storage.matchAllWithWinningLotto(winningLotto, new LottoNumber(7));
 
-        assertThat(storage.getProfit()).isEqualTo(1_555_000 / 4_000);
+        assertThat(storage.getProfit()).isEqualTo(30_055_000 / 4_000);
     }
 }

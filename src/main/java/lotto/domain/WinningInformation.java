@@ -26,8 +26,12 @@ public enum WinningInformation {
             .orElse(NO_PRIZE);
     }
 
-    public MatchingResult getMatchingResult() {
-        return matchingResult;
+    public int getCountOfMatchedNumber() {
+        return matchingResult.getCountOfMatchedNumber();
+    }
+
+    public boolean isContainedBonus() {
+        return matchingResult.isContainedBonus();
     }
 
     public long getPrizeMoney() {

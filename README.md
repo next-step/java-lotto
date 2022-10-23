@@ -34,4 +34,5 @@
   - [x] Lotto.matchWithWinningLotto 수정
   - [x] WinningInformation 필드 타입을 MatchingResult로 수정
 - [x] LottoStorage.matchAllWithWinningLotto 수정
-- [ ] InputView 에 추가 번호를 입력할 수 있도록 수정
+- [x] InputView 에 추가 번호를 입력할 수 있도록 수정
+  - [x] Lotto에 contains 메소드 추가

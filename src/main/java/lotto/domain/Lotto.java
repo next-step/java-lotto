@@ -43,14 +43,21 @@ public class Lotto {
         }
     }
 
-    public WinningInformation matchWithWinningLotto(final Lotto lotto, final int bonus) {
+    public WinningInformation matchWithWinningLotto(final Lotto lotto, final LottoNumber bonusNumber) {
         int countOfSameNumber = (int) lotto.numbers.stream()
             .filter(this.numbers::contains)
             .count();
 
-        boolean isContainedBonus = lotto.numbers.contains(new LottoNumber(bonus));
+        boolean isContainedBonus = false;
+        if (countOfSameNumber == 5) {
+            isContainedBonus = this.numbers.contains(bonusNumber);
+        }
 
         return WinningInformation.findByMatchingResult(new MatchingResult(countOfSameNumber, isContainedBonus));
+    }
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     @Override

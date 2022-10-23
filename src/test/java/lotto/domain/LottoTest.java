@@ -28,6 +28,14 @@ public class LottoTest {
         Lotto lotto1 = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto lotto2 = new Lotto("1, 2, 3, 7, 8, 9");
 
-        assertThat(lotto1.matchWithWinningLotto(lotto2, 7)).isEqualTo(WinningInformation.FOURTH);
+        assertThat(lotto1.matchWithWinningLotto(lotto2, new LottoNumber(10))).isEqualTo(WinningInformation.FIFTH);
+    }
+
+    @Test
+    @DisplayName("contains 메소드는 주어진 번호가 해당 로또에 포함되어있는지 확인한다.")
+    void contains() {
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+
+        assertThat(lotto.contains(new LottoNumber(6))).isTrue();
     }
 }

@@ -5,7 +5,6 @@ import static lotto.exception.ExceptionMessage.ERROR_INVALID_VALUE_TO_CONVERT;
 import static lotto.exception.ExceptionMessage.ERROR_OUT_OF_LOTTO_NUMBER_BOUND;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;

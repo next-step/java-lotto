@@ -12,6 +12,14 @@ public class MatchingResult {
         this.isContainedBonus = isContainedBonus;
     }
 
+    public int getCountOfMatchedNumber() {
+        return countOfMatchedNumber;
+    }
+
+    public boolean isContainedBonus() {
+        return isContainedBonus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
