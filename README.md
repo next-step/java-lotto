@@ -39,7 +39,7 @@
 - [x] 의미없는 test 삭제
 - [x] StaticFactoryMethod 구현 수정. - Enum 추가
 - [x] Operation 성능 보완 구현.
-- [ ] Operation operator 탐색 알고리즘 수정.
+- [x] Operation operator 탐색 알고리즘 수정.
 ---
 
 ---
