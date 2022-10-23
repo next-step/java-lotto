@@ -23,10 +23,10 @@ public class LottoTicket {
         return lottos;
     }
 
-    public LottoWinning result(Lotto winningLotto) {
+    public LottoWinning result(WinningNumbers winningLotto) {
         LottoWinning winning = new LottoWinning();
         for (Lotto lotto : lottos) {
-            winning.put(LottoRank.win(winningLotto.matches(lotto)));
+            winning.put(LottoRank.win(winningLotto.matches(lotto), winningLotto.hasBonus(lotto)));
         }
         return winning;
     }

@@ -26,14 +26,29 @@ public enum LottoRank {
         return winningMoney;
     }
 
-    public static LottoRank win(int countOfMatch) {
+    public static LottoRank win(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
+                .map(rank -> checkBonus(rank, matchBonus))
                 .findFirst()
                 .orElse(MISS);
     }
 
     public int multiply(int countOfMatch) {
         return winningMoney * countOfMatch;
+    }
+
+    private static LottoRank checkBonus(LottoRank rank, boolean matchBonus) {
+        if (rank.countOfMatch == 5) {
+            return rankWithMatchedBonus(matchBonus);
+        }
+        return rank;
+    }
+
+    private static LottoRank rankWithMatchedBonus(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 }
