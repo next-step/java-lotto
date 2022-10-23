@@ -8,7 +8,7 @@ public class LottoJudge {
 
     private static final int MIN_CORRECT_COUNT = 3;
 
-    public WinnerCount judge(Lottos lottos, WinningLottoNumbers winningLottoNumbers) {
+    public WinnerCount judge(Lottos lottos, Lotto winningLottoNumbers) {
         WinnerCount winnerCount = new WinnerCount();
         List<Lotto> lottosToJudge = lottos.getLottos();
         lottosToJudge.stream()

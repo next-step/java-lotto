@@ -18,7 +18,7 @@ public class LottoJudgeTest {
         Lotto lotto3 = new Lotto(Arrays.asList(11,22,3,4,5,6));
         Lotto lotto4 = new Lotto(Arrays.asList(11,22,33,4,5,6));
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        Lotto winningLottoNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
         LottoJudge lottoJudge = new LottoJudge();
         WinnerCount result = lottoJudge.judge(lottos, winningLottoNumbers);

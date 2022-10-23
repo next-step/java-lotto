@@ -2,9 +2,6 @@ package lotto.view;
 
 import lotto.core.Lottos;
 import lotto.core.WinnerCount;
-import lotto.core.WinnerRank;
-
-import java.util.List;
 
 public class ResultView {
 

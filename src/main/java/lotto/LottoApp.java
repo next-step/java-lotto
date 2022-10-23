@@ -14,9 +14,10 @@ public class LottoApp {
         Lottos lottos = new Lottos(ticketPriceInput.getTicketAmt());
         resultView.printLottos(lottos);
 
-        WinningLottoNumbers winningLottoNumbersInput = inputView.getWinningNumbers();
+        String winningLottoNumbersInput = inputView.getWinningNumbers();
         LottoJudge lottoJudge = new LottoJudge();
-        WinnerCount winnerCount = lottoJudge.judge(lottos, winningLottoNumbersInput);
+        Lotto winningLotto = new Lotto(new LottoWinningGenerateStrategy(winningLottoNumbersInput));
+        WinnerCount winnerCount = lottoJudge.judge(lottos, winningLotto);
         resultView.printResult(winnerCount, winnerCount.getProfitRatio(lottos));
     }
 }

@@ -22,12 +22,10 @@ public class InputView {
         return result;
     }
 
-    public WinningLottoNumbers getWinningNumbers() {
+    public String getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MSG);
         WinningLottoNumbers result;
         Scanner scanner = new Scanner(System.in);
-        String winningNumbersString = scanner.nextLine();
-        result = new WinningLottoNumbers(winningNumbersString);
-        return result;
+        return scanner.nextLine();
     }
 }

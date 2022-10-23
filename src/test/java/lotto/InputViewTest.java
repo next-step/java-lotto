@@ -45,9 +45,9 @@ public class InputViewTest {
         System.setIn(in1);
 
         InputView inputView = new InputView();
-        WinningLottoNumbers result = inputView.getWinningNumbers();
+        String result = inputView.getWinningNumbers();
 
-        WinningLottoNumbers expected = new WinningLottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        String expected = "1, 2, 3, 4, 5, 6";
         assertThat(result).isEqualTo(expected);
     }
 }
