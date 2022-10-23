@@ -29,13 +29,13 @@ class LottoTicketTest {
     }
 
     @Test
-    void 로또_번호가_몇_개_일치하는지_알_수_있다() {
+    void 등수를_구할_수_있다() {
         NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
 
         LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
 
         Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        assertThat(lottoTicket.numberOfMatchingNumbers(winningNumbers)).isEqualTo(6);
+        assertThat(lottoTicket.rank(winningNumbers)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -45,7 +45,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
 
         Set<Integer> winningNumbers = Set.of(1);
-        assertThatThrownBy(() -> lottoTicket.numberOfMatchingNumbers(winningNumbers))
+        assertThatThrownBy(() -> lottoTicket.rank(winningNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개이어야 합니다.");
     }
