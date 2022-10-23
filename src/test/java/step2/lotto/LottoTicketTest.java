@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketTest {
 
@@ -27,5 +26,15 @@ class LottoTicketTest {
         OutputView<Integer> outputView = new OutputView.Fake<>();
         assertThatCode(() -> lottoTicket.print(outputView))
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    void 로또_번호가_몇_개_일치하는지_알_수_있다() {
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
+
+        LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
+
+        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
+        assertThat(lottoTicket.numberOfMatchingNumbers(winningNumbers)).isEqualTo(6);
     }
 }
