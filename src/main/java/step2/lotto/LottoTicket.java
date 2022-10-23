@@ -25,4 +25,10 @@ public class LottoTicket {
     public void print(OutputView outputView) {
         outputView.print(numbers);
     }
+
+    public long numberOfMatchingNumbers(Set<Integer> winningNumbers) {
+        return numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
 }
