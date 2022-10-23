@@ -28,6 +28,6 @@ public class LottoTest {
         Lotto lotto1 = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto lotto2 = new Lotto("1, 2, 3, 7, 8, 9");
 
-        assertThat(lotto1.matchWithWinningLotto(lotto2)).isEqualTo(WinningInformation.FOURTH);
+        assertThat(lotto1.matchWithWinningLotto(lotto2, 7)).isEqualTo(WinningInformation.FOURTH);
     }
 }

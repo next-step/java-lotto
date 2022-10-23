@@ -20,7 +20,6 @@ public class LottoStorage {
         this.lottos = lottos;
         Arrays.stream(WinningInformation.values())
             .filter(wi -> wi != WinningInformation.NO_PRIZE)
-            .sorted(Comparator.comparingInt(WinningInformation::getCountOfMatchedNumber))
             .forEach(wi -> this.result.put(wi, 0L));
     }
 

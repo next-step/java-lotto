@@ -4,32 +4,30 @@ import java.util.Arrays;
 
 public enum WinningInformation {
 
-    FIRST(6, false, 2_000_000_000),
-    SECOND(5, true, 30_000_000),
-    THIRD(5, false, 1_500_000),
-    FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000),
-    NO_PRIZE(0, false, 0);
+    FIRST(new MatchingResult(6, false), 2_000_000_000),
+    SECOND(new MatchingResult(5, true), 30_000_000),
+    THIRD(new MatchingResult(5, false), 1_500_000),
+    FOURTH(new MatchingResult(4, false), 50_000),
+    FIFTH(new MatchingResult(3, false), 5_000),
+    NO_PRIZE(new MatchingResult(0, false), 0);
 
-    private final int countOfMatchedNumber;
-    private final boolean isRequiredBonus;
+    private final MatchingResult matchingResult;
     private final long prizeMoney;
 
-    WinningInformation(final int countOfMatchedNumber, final boolean isRequiredBonus, final long prizeMoney) {
-        this.countOfMatchedNumber = countOfMatchedNumber;
-        this.isRequiredBonus = isRequiredBonus;
+    WinningInformation(final MatchingResult matchingResult, final long prizeMoney) {
+        this.matchingResult = matchingResult;
         this.prizeMoney = prizeMoney;
     }
 
-    public static WinningInformation findByMatchedInformation(final int count, final boolean isRequiredBonus) {
+    public static WinningInformation findByMatchingResult(final MatchingResult matchingResult) {
         return Arrays.stream(values())
-            .filter(wi -> (wi.countOfMatchedNumber == count) && (wi.isRequiredBonus == isRequiredBonus))
+            .filter(wi -> wi.matchingResult.equals(matchingResult))
             .findFirst()
             .orElse(NO_PRIZE);
     }
 
-    public int getCountOfMatchedNumber() {
-        return countOfMatchedNumber;
+    public MatchingResult getMatchingResult() {
+        return matchingResult;
     }
 
     public long getPrizeMoney() {

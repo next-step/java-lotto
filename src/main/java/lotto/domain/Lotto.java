@@ -43,12 +43,14 @@ public class Lotto {
         }
     }
 
-    public WinningInformation matchWithWinningLotto(final Lotto lotto) {
+    public WinningInformation matchWithWinningLotto(final Lotto lotto, final int bonus) {
         int countOfSameNumber = (int) lotto.numbers.stream()
             .filter(this.numbers::contains)
             .count();
 
-        return WinningInformation.findByMatchedInformation(countOfSameNumber);
+        boolean isContainedBonus = lotto.numbers.contains(new LottoNumber(bonus));
+
+        return WinningInformation.findByMatchingResult(new MatchingResult(countOfSameNumber, isContainedBonus));
     }
 
     @Override
