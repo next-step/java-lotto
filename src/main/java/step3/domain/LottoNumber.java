@@ -3,7 +3,7 @@ package step3.domain;
 import java.util.Objects;
 import java.util.Optional;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private int lottoNumber;
     private static final int MIN_LOTTO_RANGE = 1;
@@ -45,5 +45,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
     }
 }

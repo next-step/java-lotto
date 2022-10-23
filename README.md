@@ -67,3 +67,5 @@
     - [x] LottoNumber 도메인 사용
     - [x] isBonusBallMatch 메서드 네이밍 수정
     - [x] Prize.MISS를 도메인에서는 가지고 있고 출력단에서만 제거하도록 변경
+    - [x] Prize.valueOf 추상메서드로 IF 문 제거
+    - [x] LottoNumbers 정렬되도록 comparable 구현

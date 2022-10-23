@@ -9,6 +9,7 @@ public class LottoNumbers {
 
     private LottoNumbers(List<LottoNumber> generatedNumbers) {
         lottoNumbers.addAll(generatedNumbers);
+        lottoNumbers.sort(LottoNumber::compareTo);
     }
 
     public static LottoNumbers from(List<LottoNumber> generatedNumbers) {
