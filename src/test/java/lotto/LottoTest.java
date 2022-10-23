@@ -69,11 +69,5 @@ public class LottoTest {
 
         matchCount = Lotto.increaseMatchCount(lottoWinningTicket, LottoNumber.of(1), matchCount);
         assertThat(matchCount).isEqualTo(1);
-
-        matchCount = Lotto.increaseMatchCount(lottoWinningTicket, LottoNumber.of(2), matchCount);
-        assertThat(matchCount).isEqualTo(2);
-
-        matchCount = Lotto.increaseMatchCount(lottoWinningTicket, LottoNumber.of(7), matchCount);
-        assertThat(matchCount).isEqualTo(2);
     }
 }
