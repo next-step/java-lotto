@@ -24,7 +24,7 @@ public class LottoStorageTest {
             new Lotto("5, 6, 7, 8, 9, 10")
         );
         LottoStorage storage = new LottoStorage(lottos);
-        storage.matchAllWithWinningLotto(winningLotto);
+        storage.matchAllWithWinningLotto(winningLotto, 7);
         Map<WinningInformation, Long> result = storage.getResult();
 
         assertAll(() -> {
@@ -45,7 +45,7 @@ public class LottoStorageTest {
             new Lotto("5, 6, 7, 8, 9, 10")
         );
         LottoStorage storage = new LottoStorage(lottos);
-        storage.matchAllWithWinningLotto(winningLotto);
+        storage.matchAllWithWinningLotto(winningLotto, 7);
 
         assertThat(storage.getProfit()).isEqualTo(1_555_000 / 4_000);
     }

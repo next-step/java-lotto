@@ -29,9 +29,9 @@ public class LottoStorage {
         }
     }
 
-    public void matchAllWithWinningLotto(final Lotto winningLotto) {
+    public void matchAllWithWinningLotto(final Lotto winningLotto, final int bonus) {
         this.lottos.stream()
-            .map(lotto -> lotto.matchWithWinningLotto(winningLotto))
+            .map(lotto -> lotto.matchWithWinningLotto(winningLotto, bonus))
             .filter(wi -> wi != WinningInformation.NO_PRIZE)
             .forEach(wi -> {
                 result.merge(wi, 1L, Long::sum);
