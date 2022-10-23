@@ -19,15 +19,6 @@ enum Rank {
         this.prizeAmount = prizeAmount;
     }
 
-    public static double prizeAmount(long numberOfMatchingNumbers) {
-        return EnumSet.allOf(Rank.class)
-                .stream()
-                .filter(rank -> rank.numberOfMatchingNumbers == numberOfMatchingNumbers)
-                .map(rank -> rank.prizeAmount)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("일치하는 개수가 3 ~ 6 개기어야 합니다."));
-    }
-
     public static Rank rank(long numberOfMatchingNumbers) {
         return EnumSet.allOf(Rank.class)
                 .stream()
