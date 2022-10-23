@@ -1,6 +1,7 @@
 package step2.lotto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -37,6 +38,16 @@ public class LottoTickets {
                 .orElse(0.0);
 
         return String.format("%.2f", totalAmountEarned / (LOTTO_PRICE * lottoTickets.size()));
+    }
+
+    public void print(OutputView outputView) {
+        lottoTickets.forEach(lottoTicket -> lottoTicket.print(outputView));
+    }
+
+    public Map<Rank, Long> ranks(Set<Integer> winningNumbers) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.rank(winningNumbers))
+                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 
 }
