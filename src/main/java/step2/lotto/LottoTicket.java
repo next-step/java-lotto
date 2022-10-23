@@ -22,4 +22,7 @@ public class LottoTicket {
         return new LottoTicket(numbersGenerator.numbers());
     }
 
+    public void print(OutputView outputView) {
+        outputView.print(numbers);
+    }
 }
