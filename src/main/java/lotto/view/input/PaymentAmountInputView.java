@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class PaymentAmountInputView {
 
+    private PaymentAmountInputView() {
+
+    }
+
     public static int getPaymentAmount(Scanner scanner) {
         System.out.println("구입금액을 입력해주세요.");
 

@@ -6,6 +6,9 @@ import lotto.model.BonusNumber;
 
 public class BonusNumberInputView {
 
+    private BonusNumberInputView() {
+    }
+
     public static BonusNumber getBonusNumber(Scanner scanner) {
         System.out.println("보너스 볼을 입력해 주세요.");
         BonusNumber bonusNumber = BonusNumber.of(scanner.nextInt());
