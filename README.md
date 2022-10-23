@@ -69,3 +69,4 @@
     - [x] Prize.MISS를 도메인에서는 가지고 있고 출력단에서만 제거하도록 변경
     - [x] Prize.valueOf 추상메서드로 IF 문 제거
     - [x] LottoNumbers 정렬되도록 comparable 구현
+    - [x] LottoNumbers 갯수 검증 로직 추가
