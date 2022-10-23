@@ -23,7 +23,7 @@ class LottoTicketTest {
 
         LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
 
-        OutputView<Integer> outputView = new OutputView.Fake<>();
+        OutputView outputView = new OutputView.Fake();
         assertThatCode(() -> lottoTicket.print(outputView))
                 .doesNotThrowAnyException();
     }
