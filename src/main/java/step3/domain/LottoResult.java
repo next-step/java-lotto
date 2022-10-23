@@ -3,7 +3,6 @@ package step3.domain;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoResult {
 
@@ -22,7 +21,7 @@ public class LottoResult {
         int bonusBall) {
         for (LottoNumbers eachLottoNumber : allLottoNumbers) {
             int matchCount = eachLottoNumber.calculateMatchCount(winningNumbers);
-            boolean isBonusBallMatch = eachLottoNumber.isBonusBallMatch(bonusBall);
+            boolean isBonusBallMatch = eachLottoNumber.hasNumber(bonusBall);
             Prize prize = Prize.valueOf(matchCount, isBonusBallMatch);
             drawResult.put(prize, drawResult.getOrDefault(prize, 0) + 1);
         }

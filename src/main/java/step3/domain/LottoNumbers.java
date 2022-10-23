@@ -29,7 +29,7 @@ public class LottoNumbers {
         return matchCount;
     }
 
-    public boolean isBonusBallMatch(int bonusBall) {
+    public boolean hasNumber(int bonusBall) {
         return this.lottoNumbers.contains(LottoNumber.from(bonusBall));
     }
 }
