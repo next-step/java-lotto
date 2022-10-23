@@ -39,6 +39,7 @@
 - [x] 의미없는 test 삭제
 - [x] StaticFactoryMethod 구현 수정. - Enum 추가
 - [x] Operation 성능 보완 구현.
+- [ ] Operation operator 탐색 알고리즘 수정.
 ---
 
 ---
@@ -96,5 +97,11 @@
 - [x] 필드명, 함수명 수정
   - List<lotto> -> lottoTicket
   - lastWeekTicket -> winningTicket
-
 - [x] LottoAmount 에서 가격에대한 수익률 구하기.
+
+- [ ] distinct 제거하며, validateSize 함수 통합.
+- [ ] 이름 수정
+  - 로또 당첨금액 비율 계산에서 sum 의 이름 구체화
+  - LottoRank 에서 match, money 구체화
+  - Lotto 에서 generateReport 함수 변경
+- [ ] Lotto와 LottoGenerator 의 결합 끊기.
