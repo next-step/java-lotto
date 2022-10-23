@@ -37,4 +37,16 @@ class LottoTicketTest {
         Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
         assertThat(lottoTicket.numberOfMatchingNumbers(winningNumbers)).isEqualTo(6);
     }
+
+    @Test
+    void 비교하려는_로또_번호의_개수가_6개가_아닐경우_예외가_발생한다() {
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
+
+        LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
+
+        Set<Integer> winningNumbers = Set.of(1);
+        assertThatThrownBy(() -> lottoTicket.numberOfMatchingNumbers(winningNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 6개이어야 합니다.");
+    }
 }
