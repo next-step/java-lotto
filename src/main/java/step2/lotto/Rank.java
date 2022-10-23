@@ -31,4 +31,7 @@ enum Rank {
         return prizeAmount;
     }
 
+    public long numberOfMatchingNumbers() {
+        return numberOfMatchingNumbers;
+    }
 }
