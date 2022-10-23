@@ -47,6 +47,7 @@ public class LottoTickets {
     public Map<Rank, Long> ranks(Set<Integer> winningNumbers) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.rank(winningNumbers))
+                .filter(rank -> rank != Rank.NOTHING)
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 
