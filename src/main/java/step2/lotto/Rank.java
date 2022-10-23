@@ -27,4 +27,8 @@ enum Rank {
                 .orElse(Rank.NOTHING);
     }
 
+    public double prizeAmount() {
+        return prizeAmount;
+    }
+
 }
