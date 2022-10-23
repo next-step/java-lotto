@@ -29,4 +29,12 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
             .isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("로또 번호를 오름차순으로 확인")
+    @Test
+    void numbersAscendingTest() {
+        Lotto lotto = new Lotto(List.of(10, 4, 20, 7, 34, 1));
+
+        assertThat(lotto.getNumbers()).containsExactly(1, 4, 7, 10, 20, 34);
+    }
 }

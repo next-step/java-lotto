@@ -13,4 +13,8 @@ public class Lottos {
     public int getCount() {
         return lottos.size();
     }
+
+    public List<Lotto> getLottos() {
+        return List.copyOf(lottos);
+    }
 }

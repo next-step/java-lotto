@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final String DELIMITER_COMMA = ", ";
 
     private final List<Integer> numbers;
 
@@ -19,7 +21,10 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return List.copyOf(numbers);
+        return List.copyOf(this.numbers)
+            .stream()
+            .sorted()
+            .collect(Collectors.toList());
     }
 
     private void validateCount(List<Integer> numbers) {
@@ -35,5 +40,12 @@ public class Lotto {
         if (count != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return getNumbers().stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining(DELIMITER_COMMA));
     }
 }

@@ -16,6 +16,6 @@ public class LottoApp {
         Lottos lottos = lottoShop.purchase(purchaseMoney);
 
         ResultView resultView = new ResultView();
-        resultView.printPurchaseQuantity(lottos);
+        resultView.printLottos(lottos);
     }
 }
