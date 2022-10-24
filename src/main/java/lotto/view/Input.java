@@ -20,6 +20,11 @@ public class Input {
         return Integer.parseInt(input);
     }
 
+    public static int inputManuallyPurchaseCount() {
+        String input = input();
+        return Integer.parseInt(input);
+    }
+
     public static Set<Number> inputWinnerNumbers() {
         String input = input();
         String[] split = input.split(SEPARATOR);
