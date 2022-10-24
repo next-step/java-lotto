@@ -1,12 +1,14 @@
 package lotto.application;
 
-import lotto.domain.Bank;
+import lotto.domain.WinningLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberFactory;
 import lotto.domain.LottoPrice;
 import lotto.domain.Lottos;
-import lotto.domain.policy.AutoLotto;
+import lotto.domain.policy.AutoLottoGenerator;
+import lotto.domain.policy.LottoPolicy;
+import lotto.domain.policy.ManualLottoGenerator;
 
 public class LottoGame {
 
@@ -22,19 +24,19 @@ public class LottoGame {
         LottoPrice lottoPrice = new LottoPrice();
 
         int purchase = inputView.purchase();
-        int quantity = inputView.manualLottoQuantity();
-        Lottos manualLottos = inputView.manualLottos(quantity);
+        int manualLottoQuantity = inputView.manualLottoQuantity();
 
-        LottoMachine lottoMachine = new LottoMachine(new AutoLotto(), lottoPrice);
-        int autoLottoCost = purchase - lottoPrice.manualLottoCost(quantity);
+        LottoPolicy manualLottoGenerator = new ManualLottoGenerator(inputView.manualLottos(manualLottoQuantity));
+        LottoPolicy autoLottoGenerator = new AutoLottoGenerator();
 
-        Lottos manualAndAutoLotto = manualLottos.compositeLotto(lottoMachine.buyLotto(autoLottoCost));
+        Lottos manualLottos = new LottoMachine(manualLottoGenerator, manualLottoQuantity).buyLotto();
+        Lottos manualAndAutoLottos = manualLottos.compositeLotto(new LottoMachine(autoLottoGenerator, lottoPrice.lottoCount(purchase) - manualLottos.count()).buyLotto());
 
-        outputView.lottos(manualAndAutoLotto, quantity, lottoPrice.lottoCount(purchase) - quantity);
+        outputView.lottos(manualAndAutoLottos, manualLottoQuantity, lottoPrice.lottoCount(purchase) - manualLottoQuantity);
 
-        Bank bank = manualAndAutoLotto.checkWinningNumber(new Lotto(inputView.winningNumbers()), new LottoNumber(inputView.inputBonusBall()));
+        WinningLotto winningLotto = manualAndAutoLottos.checkWinningNumber(new Lotto(inputView.winningNumbers()), LottoNumberFactory.getLottoNumber(inputView.inputBonusBall()));
 
-        outputView.winningStatistics(bank);
-        outputView.winningStatistics(bank, purchase);
+        outputView.winningStatistics(winningLotto);
+        outputView.winningStatistics(winningLotto, purchase);
     }
 }
