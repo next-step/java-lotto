@@ -14,13 +14,19 @@ public class LottoGameController {
 
     public Ticket prepareLottoTicket() {
         final Ticket ticket = Ticket.from(InputView.inputPrice());
-        OutputView.printPurchaseResult(ticket);
         return ticket;
     }
 
-    public void playLotto(final Ticket ticket) {
+    public Ticket prepareManualLottoTicket() {
+        Ticket manualLottoTicket = Ticket.from(InputView.inputManualLottoCount() * 1000);
+        return manualLottoTicket;
+    }
+
+    public void playLotto(final Ticket ticket, final Ticket manualLottoTicket) {
+        List<int[]> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoTicket);
+        OutputView.printPurchaseResult(ticket, manualLottoTicket);
         final LottoGame lottoGame = LottoGame.newInstance();
-        final List<LottoNumbers> lottoNumbers = lottoGame.playLotto(ticket);
+        final List<LottoNumbers> lottoNumbers = lottoGame.playLotto(ticket, manualLottoNumbers);
         OutputView.printLottoNumbers(lottoNumbers);
 
         final LottoResult lottoResult = LottoResult.from(InputView.inputWinningNumbers());

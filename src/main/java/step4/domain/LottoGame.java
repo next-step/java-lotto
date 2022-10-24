@@ -14,12 +14,11 @@ public class LottoGame {
         return new LottoGame();
     }
 
-    public List<LottoNumbers> playLotto(final Ticket ticket) {
+    public List<LottoNumbers> playLotto(final Ticket ticket, List<int[]> manualLottoNumbers) {
         final int ticketCount = ticket.getTicketCount();
         for (int i = 0; i < ticketCount; i++) {
-            lottoNumbers.add(LottoNumbers.from(LottoNumberGenerator.generateLottoNumber()));
+            lottoNumbers.add(LottoNumbers.from(LottoNumberGenerator.generateAutoLottoNumber()));
         }
-
         return lottoNumbers;
     }
 }

@@ -12,8 +12,20 @@ public class OutputView {
         System.out.println("구매금액을 입력해 주세요");
     }
 
-    public static void printPurchaseResult(final Ticket ticket) {
-        System.out.println(ticket.getTicketCount() + "개를 구매했습니다.");
+
+    public static void printManualLottoCount() {
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printManualLottoNumberNotification() {
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printPurchaseResult(final Ticket ticket, final Ticket manualLottoTicket) {
+        System.out.println("수동으로 " + manualLottoTicket.getTicketCount() + "장," +
+            "자동으로 " + ticket.getTicketCount() + "개를 구매했습니다.");
     }
 
     public static void printLottoNumbers(final List<LottoNumbers> lottoNumbers) {

@@ -11,6 +11,7 @@ public class LottoApplication {
     public static void run(){
         final LottoGameController lottoGameController = new LottoGameController();
         final Ticket ticket = lottoGameController.prepareLottoTicket();
-        lottoGameController.playLotto(ticket);
+        final Ticket manualLottoTicket = lottoGameController.prepareManualLottoTicket();
+        lottoGameController.playLotto(ticket, manualLottoTicket);
     }
 }
