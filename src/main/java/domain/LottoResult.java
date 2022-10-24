@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -12,23 +12,24 @@ public class LottoResult {
 
     private static final int MIN_MATCHING_NUMBER = 3;
     private static final int MAX_MATCHING_NUMBER = 6;
+    private static final int MATCH_FIVE_NUMBER = 5;
 
-    private final Map<Integer, Integer> matchFoundCount = new HashMap<>();
+    private final Map<LottoWinnerRank, Integer> matchFoundCount = new EnumMap<>(LottoWinnerRank.class);
 
     public LottoResult() {
     }
 
-    public void findMatchLottoCount(Lotto winnerNumber, Lottos lottos) {
+    public void findMatchLottoCount(Lotto winnerNumber, Lottos lottos, BonusNumber bonusNumber) {
 
         for (Lotto randomLotto : lottos.getLottoNumbers()) {
             List<Integer> matchNumberFounds = compareWinnerNumber(randomLotto, winnerNumber);
 
-            if (matchFoundCount.containsKey(matchNumberFounds.size())) {
-                matchFoundCount.put(matchNumberFounds.size(), matchFoundCount.get(matchNumberFounds.size()) + 1);
+            LottoWinnerRank ranking = LottoWinnerRank.findKey(matchNumberFounds.size());
+
+            if (matchNumberFounds.size() == MATCH_FIVE_NUMBER) {
+                ranking = checkBonusNumber(randomLotto, bonusNumber);
             }
-            if (!matchFoundCount.containsKey(matchNumberFounds.size())) {
-                matchFoundCount.put(matchNumberFounds.size(), 1);
-            }
+            updateMatchFoundCount(ranking, matchFoundCount);
         }
     }
 
@@ -42,23 +43,37 @@ public class LottoResult {
             .collect(Collectors.toList());
     }
 
-    private List<Integer> checkBonusNumber(Lotto randomLotto, Integer bonusNumber) {
+    private LottoWinnerRank checkBonusNumber(Lotto randomLotto, BonusNumber bonusNumber) {
+        if (randomLotto.getLotto().contains(bonusNumber.getBonusNumber())) {
+            return LottoWinnerRank.SECOND;
+        }
+        return LottoWinnerRank.THIRD;
+    }
 
-        return ran
+    private void updateMatchFoundCount(LottoWinnerRank ranking, Map<LottoWinnerRank, Integer> matchFoundCount) {
+
+        if (matchFoundCount.containsKey(ranking)) {
+            matchFoundCount.put(ranking, matchFoundCount.get(ranking) + 1);
+        }
+        if (!matchFoundCount.containsKey(ranking)) {
+            matchFoundCount.put(ranking, 1);
+        }
     }
 
     public double calculateEarningRate(Money purchasedMoney) {
 
         double totalEarningMoney = 0;
 
-        for (int i = MIN_MATCHING_NUMBER; i <= MAX_MATCHING_NUMBER; i++) {
-            totalEarningMoney += LottoWinnerRank.getWinningMoney(i) * matchFoundCount.getOrDefault(i, 0);
+        for (Map.Entry<LottoWinnerRank, Integer> entry : matchFoundCount.entrySet()) {
+            LottoWinnerRank rank = entry.getKey();
+            int rankMatchFound = entry.getValue();
+            totalEarningMoney += LottoWinnerRank.getWinningMoney(rank) * rankMatchFound;
         }
 
         return Math.round(totalEarningMoney / purchasedMoney.getMoney() * 100) / 100.0;
     }
 
-    public Map<Integer, Integer> getMatchFoundCount() {
+    public Map<LottoWinnerRank, Integer> getMatchFoundCount() {
         return matchFoundCount;
     }
 

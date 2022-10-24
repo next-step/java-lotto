@@ -5,21 +5,19 @@ import domain.Lotto;
 import domain.LottoResult;
 import domain.Lottos;
 import domain.Money;
-import service.LottoGenerator;
-import service.LottoMachine;
+import service.LottoIssueMachine;
 import service.RandomLottoGenerator;
 import view.InputView;
 import view.ResultView;
 
 public class Main {
 
-
     public static void main(String[] args) {
 
         Money purchasedMoney = InputView.inputPurchaseMoney();
-        LottoGenerator lottoGenerator = new RandomLottoGenerator();
-        LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
-        Lottos createdRandomLottos = lottoMachine.purchaseLotto(purchasedMoney);
+        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
+        LottoIssueMachine lottoIssueMachine = new LottoIssueMachine(randomLottoGenerator);
+        Lottos createdRandomLottos = lottoIssueMachine.purchaseLotto(purchasedMoney);
         ResultView.printRandomLotto(createdRandomLottos);
 
         Lotto winnerNumber = InputView.inputLastWeekWinnerNumber();
@@ -27,7 +25,7 @@ public class Main {
         BonusNumber bonusNumber = InputView.inputBonusNumber();
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.findMatchLottoCount(winnerNumber, createdRandomLottos);
+        lottoResult.findMatchLottoCount(winnerNumber, createdRandomLottos, bonusNumber);
         ResultView.winnerStatistic(lottoResult, purchasedMoney);
 
     }
