@@ -27,8 +27,8 @@ public class Output {
     }
 
 
-    public static void printPurchasedLotto(Lottos lottos) {
-        System.out.println("구입금액을 입력해 주세요.");
+    public static void printPurchasedLotto(int autoQuantity, int manualQuantity, Lottos lottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", autoQuantity, manualQuantity);
         printLotto(lottos.getLottos());
     }
 
@@ -60,6 +60,6 @@ public class Output {
             System.out.printf("총 수익률은 %.2f입니다.(어떻게 하셧죠??????)", result.calculateProfitRate());
             return;
         }
-        printBlank();
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result.calculateProfitRate());
     }
 }

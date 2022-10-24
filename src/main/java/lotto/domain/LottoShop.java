@@ -32,6 +32,10 @@ public class LottoShop {
         return payed.calculateQuantity(LOTTO_PRICE) - manualPurchaseCount;
     }
 
+    public int numberOfManualPurchase(){
+        return manualPurchaseCount;
+    }
+
     public void buyManually(Set<Number> numbers) {
         if(!possibleBuyManually()){
             throw new IllegalArgumentException("수동 구입가능 횟수를 초과 하였습니다.");
