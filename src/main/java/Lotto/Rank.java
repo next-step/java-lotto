@@ -27,14 +27,6 @@ public enum Rank {
         return null;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void plusCount() {
-        count += 1;
-    }
-
     public static List<Rank> calculate(Lotto winner, List<Lotto> myLotto) {
         for (Lotto lotto : myLotto) {
             int correctCount = winner.correctCount(lotto);
@@ -47,11 +39,19 @@ public enum Rank {
         return Arrays.asList(Rank.values());
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public int getCorrectCount() {
         return correctCount;
     }
 
     public int getPrize() {
         return prize;
+    }
+
+    public void plusCount() {
+        count += 1;
     }
 }

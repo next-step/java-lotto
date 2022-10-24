@@ -33,6 +33,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
+    private void validate(int number) {
+        if (number >= MIN_NUMBER && number <= MAX_NUMBER) return;
+
+        throw new IllegalArgumentException(INVALID_NUMBER);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,12 +57,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return "LottoNumber{" +
                 "number=" + number +
                 '}';
-    }
-
-    private void validate(int number) {
-        if (number >= MIN_NUMBER && number <= MAX_NUMBER) return;
-
-        throw new IllegalArgumentException(INVALID_NUMBER);
     }
 
     @Override

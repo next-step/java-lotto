@@ -25,6 +25,11 @@ public class Lotto {
         return numbers.stream().sorted().collect(Collectors.toList());
     }
 
+    private List<LottoNumber> randomNumbers() {
+        List<LottoNumber> numbers = LottoNumber.shuffleNumbers();
+        return numbers.subList(0, LENGTH);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,10 +48,5 @@ public class Lotto {
         return "Lotto{" +
                 "numbers=" + numbers +
                 '}';
-    }
-
-    private List<LottoNumber> randomNumbers() {
-        List<LottoNumber> numbers = LottoNumber.shuffleNumbers();
-        return numbers.subList(0, LENGTH);
     }
 }

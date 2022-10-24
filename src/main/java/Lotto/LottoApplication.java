@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoController {
+public class LottoApplication {
     private static final int LOTTO_PRICE = 1000;
 
     private static final List<Lotto> myLotto = new ArrayList<>();
     private static Lotto winnerLotto;
 
     public static void main(String[] args) {
-        LottoController.start();
+        LottoApplication.start();
     }
 
     private static void start() {
@@ -31,7 +31,7 @@ public class LottoController {
     }
 
     private static void buyLotto(int count) {
-        for (int i = 0; i < count; i ++) {
+        for (int i = 0; i < count; i++) {
             myLotto.add(new Lotto());
         }
     }
@@ -47,9 +47,9 @@ public class LottoController {
         ResultView.inputWinnerLotto();
         String values = InputView.inputString();
         List<LottoNumber> numbers = Arrays.stream(values.split(", "))
-                                    .map(Integer::parseInt)
-                                    .map(v -> new LottoNumber(v))
-                                    .collect(Collectors.toList());
+                .map(Integer::parseInt)
+                .map(v -> new LottoNumber(v))
+                .collect(Collectors.toList());
         winnerLotto = new Lotto(numbers);
     }
 
