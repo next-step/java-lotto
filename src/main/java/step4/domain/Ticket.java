@@ -15,6 +15,10 @@ public class Ticket {
     }
 
     private void validatePrice(final int price) {
+        if (price == 0) {
+            return;
+        }
+
         if (price <= 0) {
             throw new IllegalArgumentException("구입금액은 양수여야 합니다.");
         }
