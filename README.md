@@ -130,7 +130,7 @@
 - [ ] 함수명 수정
   - LottoAmount : calcWinningRate -> 로또 금액의 입장에서 다름 금액과의 비율을 게산해주는 메소드 이름.
   - LottoWinning : put -> 로또 게임 결과 정도를 나타낼 수 있는 이름.
-- [ ] 객체가 능동적으로 행동할 수 있는곳에 역할주기
+- [x] 객체가 능동적으로 행동할 수 있는곳에 역할주기
   - hasBonus : WinningNumber -> Lotto 에게 역할 넘겨주기
 - [x] 상속 끊기
   - WinningNumbers 에 Lotto 변수 두어 관리

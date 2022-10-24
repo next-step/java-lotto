@@ -8,7 +8,7 @@ public class WinningNumbers {
 
     public WinningNumbers(String numbers, String bonus) {
         this(new Lotto(numbers), new LottoNumber(bonus));
-        validateBonusNumber(bonus);
+        validateBonusNumber();
     }
 
     public WinningNumbers(Lotto lotto, LottoNumber bonus) {
@@ -16,14 +16,14 @@ public class WinningNumbers {
         this.bonusNumber = bonus;
     }
 
-    private void validateBonusNumber(String bonus) {
-        if (isDuplicated(new LottoNumber(bonus))) {
+    private void validateBonusNumber() {
+        if (isDuplicated()) {
             throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER_MESSAGE);
         }
     }
 
-    private boolean isDuplicated(LottoNumber bonus) {
-        return winningLotto.toIntSet().contains(bonus.getNumber());
+    private boolean isDuplicated() {
+        return winningLotto.hasBonus(bonusNumber);
     }
 
     Lotto getWinningLotto() {

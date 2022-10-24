@@ -29,6 +29,17 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+
+    private static Set<LottoNumber> create(String numbers) {
+        if (isNullOrBlank(numbers)) {
+            throw new IllegalArgumentException(NULL_OR_BLANK_MESSAGE);
+        }
+        List<String> values = Arrays.asList(numbers.split(SEPARATOR));
+        return values.stream()
+                .map(number -> LottoNumber.of(Integer.parseInt(number.trim())))
+                .collect(Collectors.toSet());
+    }
+
     public Set<Integer> toIntSet() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
@@ -43,14 +54,8 @@ public class Lotto {
                 .count();
     }
 
-    private static Set<LottoNumber> create(String numbers) {
-        if (isNullOrBlank(numbers)) {
-            throw new IllegalArgumentException(NULL_OR_BLANK_MESSAGE);
-        }
-        List<String> values = Arrays.asList(numbers.split(SEPARATOR));
-        return values.stream()
-                .map(number -> LottoNumber.of(Integer.parseInt(number.trim())))
-                .collect(Collectors.toSet());
+    boolean hasBonus(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     private static boolean isNullOrBlank(String numbers) {
