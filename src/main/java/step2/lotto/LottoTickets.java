@@ -1,10 +1,7 @@
 package step2.lotto;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTickets {
 
@@ -12,18 +9,8 @@ public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    private LottoTickets(List<LottoTicket> lottoTickets) {
+    LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
-    }
-
-    public static LottoTickets of(int price, NumbersGenerator numbersGenerator) {
-        int numberOfTickets = price / LOTTO_PRICE;
-
-        List<LottoTicket> lottoTickets = IntStream.range(0, numberOfTickets)
-                .mapToObj(numberOfTicket -> LottoTicket.from(numbersGenerator))
-                .collect(Collectors.toUnmodifiableList());
-
-        return new LottoTickets(lottoTickets);
     }
 
     public int numberOfTickets() {
@@ -51,4 +38,16 @@ public class LottoTickets {
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets that = (LottoTickets) o;
+        return Objects.equals(lottoTickets, that.lottoTickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoTickets);
+    }
 }
