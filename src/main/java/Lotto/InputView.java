@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class InputView {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int inputInteger() {
-        int value = scanner.nextInt();
-        scanner.nextLine();
+        int value = SCANNER.nextInt();
+        SCANNER.nextLine();
         return value;
     }
 
     public static String inputString() {
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 }
