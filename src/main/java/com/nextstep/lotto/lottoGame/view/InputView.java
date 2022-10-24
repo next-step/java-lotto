@@ -22,9 +22,15 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
+    public static Integer getBonusNumber() {
+        System.out.println("보너스 번호를 입력하세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
     private static int toUnsignedInteger(String numericString) {
         try {
-            return Integer.parseUnsignedInt(numericString.replaceAll("\\s",""));
+            return Integer.parseUnsignedInt(numericString.replaceAll("\\s", ""));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }

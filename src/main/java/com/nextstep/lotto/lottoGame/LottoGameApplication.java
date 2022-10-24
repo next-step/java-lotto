@@ -1,21 +1,19 @@
 package com.nextstep.lotto.lottoGame;
 
-import com.nextstep.lotto.lottoGame.domain.LottoGame;
 import com.nextstep.lotto.lottoGame.domain.LottoResult;
+import com.nextstep.lotto.lottoGame.domain.LottoTickets;
+import com.nextstep.lotto.lottoGame.domain.WinningNumbers;
 import com.nextstep.lotto.lottoGame.view.InputView;
 import com.nextstep.lotto.lottoGame.view.OutputView;
-
-import java.util.List;
 
 public class LottoGameApplication {
 
     public static void main(String[] args) {
+        LottoTickets lottoTickets = LottoTickets.ofBudget(InputView.getBudget());
+        OutputView.drawPublishResult(lottoTickets);
 
-        LottoGame lotto = LottoGame.byBudget(InputView.getBudget());
-        OutputView.drawPublishResult(lotto.getTickets());
-
-        List<Integer> winningNumbers = InputView.getLottoNumbers();
-        LottoResult result = lotto.result(winningNumbers);
-        OutputView.drawResult(result, lotto.getUsedBudget());
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.getLottoNumbers(), InputView.getBonusNumber());
+        LottoResult result = new LottoResult(winningNumbers, lottoTickets);
+        OutputView.drawResult(result, lottoTickets.getUsedBudget());
     }
 }

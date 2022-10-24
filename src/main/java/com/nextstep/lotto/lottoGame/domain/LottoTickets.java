@@ -1,18 +1,19 @@
 package com.nextstep.lotto.lottoGame.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class LottoGame {
+public class LottoTickets {
     private final List<LottoTicket> tickets;
 
-    public LottoGame(List<LottoTicket> tickets) {
+    public LottoTickets(final List<LottoTicket> tickets) {
         this.tickets = tickets;
     }
 
-    public static LottoGame byBudget(int budget) {
+    public static LottoTickets ofBudget(int budget) {
         int ticketCount = getAvailableTicketCount(budget);
-        return new LottoGame(publishAutoTickets(ticketCount));
+        return new LottoTickets(publishAutoTickets(ticketCount));
     }
 
     private static List<LottoTicket> publishAutoTickets(int ticketCount) {
@@ -27,16 +28,15 @@ public class LottoGame {
         return budget / LottoTicket.LOTTO_TICKET_PRICE;
     }
 
-    public List<LottoTicket> getTickets() {
-        return this.tickets;
-    }
-
     public int getUsedBudget() {
         return tickets.size() * LottoTicket.LOTTO_TICKET_PRICE;
     }
 
-    public LottoResult result(List<Integer> winningNumbers) {
-        return new LottoResult(winningNumbers, tickets);
+    public int getSize() {
+        return tickets.size();
     }
 
+    public List<LottoTicket> getTickets() {
+        return Collections.unmodifiableList(tickets);
+    }
 }

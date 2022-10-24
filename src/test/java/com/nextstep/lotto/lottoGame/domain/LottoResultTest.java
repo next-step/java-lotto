@@ -7,7 +7,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
-    private LottoResult result;
 
     @Test
     void create_getCount() {
@@ -15,11 +14,11 @@ class LottoResultTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(List.of(3, 4, 5, 6, 7, 8))
         );
-        LottoResult result = new LottoResult(List.of(1, 2, 3, 4, 5, 6), tickets);
+        LottoResult result = new LottoResult(new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7), new LottoTickets(tickets));
 
         assertThat(result.getCount(Rank.FIRST)).isEqualTo(1);
         assertThat(result.getCount(Rank.SECOND)).isEqualTo(0);
-        assertThat(result.getCount(Rank.THIRD)).isEqualTo(1);
+        assertThat(result.getCount(Rank.FOURTH)).isEqualTo(1);
     }
 
     @Test
@@ -28,11 +27,11 @@ class LottoResultTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(List.of(3, 4, 5, 6, 7, 8))
         );
-        LottoResult result = new LottoResult(List.of(1, 2, 3, 4, 5, 6), tickets);
+        LottoResult result = new LottoResult(new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7), new LottoTickets(tickets));
 
         assertThat(result.contains(Rank.FIRST)).isTrue();
         assertThat(result.contains(Rank.SECOND)).isFalse();
-        assertThat(result.contains(Rank.THIRD)).isTrue();
+        assertThat(result.contains(Rank.FOURTH)).isTrue();
     }
 
     @Test
@@ -41,8 +40,8 @@ class LottoResultTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(List.of(3, 4, 5, 6, 7, 8))
         );
-        LottoResult result = new LottoResult(List.of(1, 2, 3, 4, 5, 6), tickets);
+        LottoResult result = new LottoResult(new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7), new LottoTickets(tickets));
 
-        assertThat(result.getPrizeSum()).isEqualTo(Rank.FIRST.getPrize() + Rank.THIRD.getPrize());
+        assertThat(result.getPrizeSum()).isEqualTo(Rank.FIRST.getPrize() + Rank.FOURTH.getPrize());
     }
 }
