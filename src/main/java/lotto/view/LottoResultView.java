@@ -5,6 +5,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoStatistic;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class LottoResultView {
 
         Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult != LottoResult.NONE)
+                .sorted(Comparator.reverseOrder())
                 .forEach((lottoResult -> System.out.println(String.format("%s (%s)- %d개",
                         lottoResult.getDescription(),
                         getFormattedMoney(lottoResult),

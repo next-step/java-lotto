@@ -22,15 +22,16 @@ public class Application {
         LottoFactory lottoFactory = new LottoFactory();
         LottoResultView view = new LottoResultView();
 
-        List<Lotto> lotto = lottoFactory.produces(Collections::shuffle, purchaseInfo.getAutoLottoCount());
+        List<Lotto> lottos = lottoFactory.produces(Collections::shuffle, purchaseInfo.getAutoLottoCount());
+        lottos.addAll(purchaseInfo.getManualLottos());
 
-        view.print(lotto);
-
+        view.print(lottos);
+        
         Lotto beforeWinLotto = inputView.readBeforeWinLotto();
         int bonusNumber = inputView.readBonusNumber();
 
         LottoStatistic lottoStatistic = new LottoStatistic();
-        lottoStatistic.analyze(lotto, beforeWinLotto, purchaseInfo, bonusNumber);
+        lottoStatistic.analyze(lottos, beforeWinLotto, purchaseInfo, bonusNumber);
 
         view.print(lottoStatistic);
     }

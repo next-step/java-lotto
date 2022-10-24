@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class PurchaseInfo {
 
     public static final int LOTTO_PRICE = 1000;
-    
+
     private final int purchaseAmount;
     private final int autoLottoCount;
     private final List<Lotto> manualLottos;
@@ -48,5 +48,9 @@ public class PurchaseInfo {
 
     public int getPurchaseAmount() {
         return purchaseAmount;
+    }
+
+    public List<Lotto> getManualLottos() {
+        return manualLottos;
     }
 }
