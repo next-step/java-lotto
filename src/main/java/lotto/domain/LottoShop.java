@@ -22,14 +22,17 @@ public class LottoShop {
     }
 
     public Lottos buy() {
-        List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < payed.calculateQuantity(LOTTO_PRICE); i++) {
-            result.add(Lotto.create(lottoNumberStrategy));
+        for (int i = 0; i < numberOfPurchasingAuto(); i++) {
+            lottos.add(Lotto.create(lottoNumberStrategy));
         }
-        return new Lottos(result);
+        return new Lottos(lottos);
     }
 
     public int numberOfPurchasingAuto() {
         return payed.calculateQuantity(LOTTO_PRICE) - manualPurchaseCount;
+    }
+
+    public void buyManually(Set<Number> numbers) {
+        lottos.add(new Lotto(numbers));
     }
 }
