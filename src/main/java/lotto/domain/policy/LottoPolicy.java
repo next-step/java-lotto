@@ -2,7 +2,7 @@ package lotto.domain.policy;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberFactory;
 
 public interface LottoPolicy {
 
@@ -13,12 +13,12 @@ public interface LottoPolicy {
         @Override
         public Lotto ball() {
             return new Lotto(List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumberFactory.getLottoNumber(1),
+                LottoNumberFactory.getLottoNumber(2),
+                LottoNumberFactory.getLottoNumber(3),
+                LottoNumberFactory.getLottoNumber(4),
+                LottoNumberFactory.getLottoNumber(5),
+                LottoNumberFactory.getLottoNumber(6)
             ));
         }
     }
