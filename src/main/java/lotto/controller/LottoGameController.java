@@ -15,21 +15,42 @@ public class LottoGameController {
 
     public static void main(String[] args) {
 
-        PurchasePrice purchasePrice = inputPurchasePrice();
-        printPurchaseAmount(purchasePrice);
+        PurchasePrice purchasePrice = getPurchasePrice();
 
-        LottoTickets lottoTickets = new LottoTickets(purchasePrice);
-        LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
-        printLottoNumbers(pickedLottoTickets);
+        LottoTickets pickedLottoTickets = getLottoTickets(purchasePrice);
 
-        LottoNumbers winnerLottoNumbers = inputMatchNumberList();
-        LottoTickets rankedLottoTickets = pickedLottoTickets.putRankings(winnerLottoNumbers);
+        LottoTickets rankedLottoTickets = getLottoTickets(pickedLottoTickets);
 
-        List<Rank> rankList = rankedLottoTickets.getRank();
-        printRanks(rankList);
+        getRank(rankedLottoTickets);
 
+        getYield(rankedLottoTickets);
+
+    }
+
+    private static void getYield(LottoTickets rankedLottoTickets) {
         Integer yieldResult = rankedLottoTickets.getYield();
         printYield(yieldResult);
+    }
 
+    private static void getRank(LottoTickets rankedLottoTickets) {
+        List<Rank> rankList = rankedLottoTickets.getRank();
+        printRanks(rankList);
+    }
+
+    private static LottoTickets getLottoTickets(LottoTickets pickedLottoTickets) {
+        LottoNumbers winnerLottoNumbers = inputMatchNumberList();
+        return pickedLottoTickets.putRankings(winnerLottoNumbers);
+    }
+
+    private static LottoTickets getLottoTickets(PurchasePrice purchasePrice) {
+        LottoTickets pickedLottoTickets = new LottoTickets(purchasePrice).pickNumbers();
+        printLottoNumbers(pickedLottoTickets);
+        return pickedLottoTickets;
+    }
+
+    private static PurchasePrice getPurchasePrice() {
+        PurchasePrice purchasePrice = inputPurchasePrice();
+        printPurchaseAmount(purchasePrice);
+        return purchasePrice;
     }
 }
