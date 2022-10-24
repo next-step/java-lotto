@@ -14,8 +14,8 @@ public class Money {
     }
 
     private static void valid(int money) {
-        if (money < LottoTickets.LOTTO_PRICE) {
-            throw new IllegalArgumentException(LottoTickets.LOTTO_PRICE + " 미만은 로또를 구매할 수 없습니다.");
+        if (money < 0 ) {
+            throw new IllegalArgumentException("돈은 0 미만으로 입력할 수 없습니다.");
         }
     }
 

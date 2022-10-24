@@ -36,6 +36,7 @@ public class LottoTickets {
     }
 
     private static int countTicket(int money) {
+        valid(money);
         return Money.from(money).getMoney() / LOTTO_PRICE;
     }
 
@@ -56,5 +57,11 @@ public class LottoTickets {
         LottoResult lottoResult = new LottoResult();
         lottoResult.result(winningLotto, LottoTickets.of(lottos));
         return lottoResult;
+    }
+
+    private static void valid(int money) {
+        if (money < LottoTickets.LOTTO_PRICE) {
+            throw new IllegalArgumentException(LOTTO_PRICE + " 미만은 로또를 구매할 수 없습니다.");
+        }
     }
 }
