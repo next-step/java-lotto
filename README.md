@@ -70,3 +70,7 @@
     - [x] Prize.valueOf 추상메서드로 IF 문 제거
     - [x] LottoNumbers 정렬되도록 comparable 구현
     - [x] LottoNumbers 갯수 검증 로직 추가
+* Step4 - 로또(수동)
+  * 기능 목록
+    - [ ] 수동 추첨 번호 입력 기능
+    - [ ] 수동 로또 이외의 로또 티켓은 자동으로 추첨 되도록
