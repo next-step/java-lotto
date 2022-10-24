@@ -29,7 +29,7 @@ public class LottoTest {
 
         Lotto winningLottoNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
-        int result = lotto.getCorrectCount(winningLottoNumbers);
+        int result = lotto.getSameElements(winningLottoNumbers).size();
         assertThat(result).isEqualTo(6);
     }
 
@@ -40,7 +40,7 @@ public class LottoTest {
 
         Lotto winningLottoNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
-        int result = lotto.getCorrectCount(winningLottoNumbers);
+        int result = lotto.getSameElements(winningLottoNumbers).size();
         assertThat(result).isEqualTo(5);
     }
 

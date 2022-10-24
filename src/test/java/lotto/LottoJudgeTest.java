@@ -24,13 +24,13 @@ public class LottoJudgeTest {
         Lotto winningLottoNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
         LottoJudge lottoJudge = new LottoJudge();
-        RewardCalculator result = lottoJudge.judge(lottos, winningLottoNumbers);
+        RewardCalculator result = lottoJudge.judge(lottos, winningLottoNumbers, "7");
 
         RewardCalculator expected = new RewardCalculator();
         expected.plusCount(WinnerRank.FIRST);
-        expected.plusCount(WinnerRank.SECOND);
         expected.plusCount(WinnerRank.THIRD);
         expected.plusCount(WinnerRank.FORTH);
+        expected.plusCount(WinnerRank.FIFTH);
         assertThat(result).isEqualTo(expected);
     }
 }

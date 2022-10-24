@@ -37,14 +37,13 @@ public class Lotto {
         return lottoNums.toString();
     }
 
-    public int getCorrectCount(Lotto winningLottoNumbers){
-        List<Integer> result = lottoNums.stream()
+    public List<Integer> getSameElements(Lotto winningLottoNumbers){
+        return lottoNums.stream()
                 .filter(old -> winningLottoNumbers.lottoNums.stream().anyMatch(Predicate.isEqual(old)))
                 .collect(Collectors.toList());
-        return result.size();
     }
 
-    private final boolean hasDuplicateNumbers(List<Integer> integers){
+    private boolean hasDuplicateNumbers(List<Integer> integers){
         Set<Integer> tmpSet = new HashSet<>();
 
         Optional<Integer> duplicateNumber = integers.stream()

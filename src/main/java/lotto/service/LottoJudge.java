@@ -10,17 +10,24 @@ public class LottoJudge {
 
     private static final int MIN_CORRECT_COUNT = 3;
 
-    public RewardCalculator judge(Lottos lottos, Lotto winningLottoNumbers) {
+    public RewardCalculator judge(Lottos lottos, Lotto winningLottoNumbers, String bonusNumberString) {
+        int bonusNumber = Integer.parseInt(bonusNumberString);
         RewardCalculator rewardCalculator = new RewardCalculator();
         List<Lotto> lottosToJudge = lottos.getLottos();
         lottosToJudge.stream()
-                .mapToInt(lotto -> lotto.getCorrectCount(winningLottoNumbers))
+                .map(lotto -> lotto.getSameElements(winningLottoNumbers))
                 .filter(this::isValidCount)
-                .forEach(correctCount -> rewardCalculator.plusCount(WinnerRank.fromCount(correctCount)));
+                .forEach(correctNumbers -> {
+                    if(correctNumbers.size() == 5 && correctNumbers.contains(bonusNumber)){
+                        rewardCalculator.plusCount(WinnerRank.SECOND);
+                        return;
+                    }
+                    rewardCalculator.plusCount(WinnerRank.fromCount(correctNumbers.size()));
+                });
         return rewardCalculator;
     }
 
-    private boolean isValidCount(int correctCount) {
-        return correctCount >= MIN_CORRECT_COUNT;
+    private boolean isValidCount(List<Integer> correctNumbers) {
+        return correctNumbers.size() >= MIN_CORRECT_COUNT;
     }
 }

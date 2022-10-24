@@ -20,6 +20,7 @@ public class RewardCalculator {
         winnerCount.put(WinnerRank.SECOND, 0);
         winnerCount.put(WinnerRank.THIRD, 0);
         winnerCount.put(WinnerRank.FORTH, 0);
+        winnerCount.put(WinnerRank.FIFTH, 0);
     }
 
     public void plusCount(WinnerRank winnerRank){
