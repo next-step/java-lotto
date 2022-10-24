@@ -13,8 +13,8 @@ public class LottoController {
         Output.printPurchaseRequest();
         int inputPrice = Input.inputPrice();
 
-        LottoShop lottoShop = new LottoShop(new RandomNumberStrategy());
-        Lottos lottos = lottoShop.buy(new Money(inputPrice));
+        LottoShop lottoShop = new LottoShop(new RandomNumberStrategy(), new Money(inputPrice));
+        Lottos lottos = lottoShop.buy();
         Output.printPurchasedLotto(lottos);
 
         Output.printWinnerNumbersRequest();
