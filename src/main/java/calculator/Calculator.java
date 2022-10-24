@@ -32,8 +32,9 @@ public enum Calculator {
     public static int run(String inputString) {
         validateInput(inputString);
         List<String> inputs = List.of(inputString.split(INPUT_REGEX));
-        List<Integer> digits = extractDigits(inputs);
         List<String> operators = extractOperators(inputs);
+        validateOperators(operators);
+        List<Integer> digits = extractDigits(inputs);
         int result = digits.get(0);
         for (int i = 0; i < operators.size(); i++) {
             int nextOperand = digits.get(i + 1);
@@ -41,6 +42,19 @@ public enum Calculator {
             result = calculate(result, nextOperand, operator);
         }
         return result;
+    }
+
+    private static void validateOperators(List<String> operators) throws IllegalArgumentException {
+        if (operators.stream().anyMatch(operator -> !isArithmeticOperation(operator))) {
+            throw new IllegalArgumentException(ILLEGAL_OPERATOR_EXCEPTION);
+        };
+    }
+
+    private static boolean isArithmeticOperation(String operator) {
+        return Objects.equals(operator, "+")
+                || Objects.equals(operator, "-")
+                || Objects.equals(operator, "*")
+                || Objects.equals(operator, "/");
     }
 
     private static void validateInput(String inputString) throws IllegalArgumentException {
