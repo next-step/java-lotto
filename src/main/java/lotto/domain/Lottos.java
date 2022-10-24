@@ -17,10 +17,9 @@ public class Lottos {
     }
 
     public LottoResult getResult(WinnerNumbers winnerNumbers) {
-        List<Rank> ranks = lottos.stream()
+        return lottos.stream()
             .map(lotto -> lotto.checkRank(winnerNumbers))
-            .collect(Collectors.toUnmodifiableList());
-        return new LottoResult(ranks);
+            .collect(Collectors.collectingAndThen(Collectors.toUnmodifiableList(), LottoResult::new));
     }
 
     @Override
