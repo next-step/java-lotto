@@ -56,7 +56,7 @@ public class LottosTest {
             LottoNumberFactory.getLottoNumber("11")));
 
         //when
-        Bank bank = lottos.checkWinningNumber(lotto, new LottoNumber(13));
+        WinningLotto winningLotto = lottos.checkWinningNumber(lotto, new LottoNumber(13));
 
         //then
         EnumMap<Rank, Integer> rankIntegerEnumMap = new EnumMap<>(
@@ -70,7 +70,7 @@ public class LottosTest {
             )
         );
 
-        assertThat(bank).isEqualTo(new Bank(rankIntegerEnumMap));
+        assertThat(winningLotto).isEqualTo(new WinningLotto(rankIntegerEnumMap));
     }
 
 

@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.Objects;
 
-public class Bank {
+public class WinningLotto {
 
     private final EnumMap<Rank, Integer> whetherOrNot;
 
-    public Bank(EnumMap<Rank, Integer> whetherOrNot) {
+    public WinningLotto(EnumMap<Rank, Integer> whetherOrNot) {
         this.whetherOrNot = whetherOrNot;
     }
 
@@ -27,8 +27,8 @@ public class Bank {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Bank bank = (Bank) o;
-        return Objects.equals(whetherOrNot, bank.whetherOrNot);
+        WinningLotto winningLotto = (WinningLotto) o;
+        return Objects.equals(whetherOrNot, winningLotto.whetherOrNot);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class Bank {
 
     @Override
     public String toString() {
-        return "Bank{" +
+        return "WinningLotto{" +
             "whetherOrNot=" + whetherOrNot +
             '}';
     }
