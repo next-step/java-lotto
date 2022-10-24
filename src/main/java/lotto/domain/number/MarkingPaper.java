@@ -25,7 +25,4 @@ public class MarkingPaper {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public void clear() {
-        markedBalls.clear();
-    }
 }

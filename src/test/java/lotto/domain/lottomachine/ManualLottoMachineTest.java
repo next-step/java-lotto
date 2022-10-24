@@ -8,7 +8,9 @@ import java.util.List;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
 import lotto.domain.exception.InvalidManualLottoPurchasePriceException;
+import lotto.domain.exception.NullMarkingPaperException;
 import lotto.domain.number.LottoBalls;
+import lotto.domain.number.MarkingPaper;
 import lotto.domain.number.Ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,10 +27,12 @@ class ManualLottoMachineTest {
         );
         PurchasePrice purchasePrice = new PurchasePrice(Ticket.getPrice() * inputLottoBalls.size());
 
-        ManualLottoMachine lottoMachine = new ManualLottoMachine();
-        lottoMachine.markLottoBalls(inputLottoBalls.get(0));
-        lottoMachine.markLottoBalls(inputLottoBalls.get(1));
-        lottoMachine.markLottoBalls(inputLottoBalls.get(2));
+        MarkingPaper markingPaper = new MarkingPaper();
+        markingPaper.markLottoBalls(inputLottoBalls.get(0));
+        markingPaper.markLottoBalls(inputLottoBalls.get(1));
+        markingPaper.markLottoBalls(inputLottoBalls.get(2));
+
+        ManualLottoMachine lottoMachine = new ManualLottoMachine(markingPaper);
         TicketBox ticketBox = lottoMachine.issueTickets(purchasePrice);
 
         assertThatEqualsBalls(inputLottoBalls, ticketBox);
@@ -37,13 +41,20 @@ class ManualLottoMachineTest {
     @Test
     @DisplayName("작성한 티켓들의 총 값이 투입금액과 일치하지 않을 경우 예외 발생")
     void fail_to_issue_ticket_not_equals_price() {
-        ManualLottoMachine lottoMachine = new ManualLottoMachine();
-        lottoMachine.markLottoBalls(numbersToBalls(List.of(1, 2, 3, 4, 5, 6)));
+        MarkingPaper markingPaper = new MarkingPaper();
+        markingPaper.markLottoBalls(numbersToBalls(List.of(1, 2, 3, 4, 5, 6)));
+        ManualLottoMachine lottoMachine = new ManualLottoMachine(markingPaper);
 
         assertThatExceptionOfType(InvalidManualLottoPurchasePriceException.class)
                 .isThrownBy(() -> lottoMachine.issueTickets(new PurchasePrice(10000)));
     }
 
+    @Test
+    @DisplayName("로또머신 초기화 시 null 인 마킹지를 주입하면 예외 발생")
+    void fail_to_init_machine_by_null_marking_paper() {
+        assertThatExceptionOfType(NullMarkingPaperException.class)
+                .isThrownBy(() -> new ManualLottoMachine(null));
+    }
 
     private void assertThatEqualsBalls(List<LottoBalls> inputLottoBalls, TicketBox ticketBox) {
         for (int i = 0; i < ticketBox.getSize(); i++) {

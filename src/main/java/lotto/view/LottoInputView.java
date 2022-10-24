@@ -9,6 +9,7 @@ import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.lottomachine.ManualLottoMachine;
 import lotto.domain.number.LottoBall;
 import lotto.domain.number.LottoBalls;
+import lotto.domain.number.MarkingPaper;
 import lotto.domain.number.Ticket;
 import lotto.domain.number.WinningTicket;
 
@@ -42,18 +43,23 @@ public class LottoInputView {
     }
 
     public static LottoMachine insertManualLottoNumbers(PurchasePrice purchasePrice) {
-        ManualLottoMachine lottoMachine = new ManualLottoMachine();
+        MarkingPaper markingPaper = new MarkingPaper();
+        ManualLottoMachine lottoMachine = new ManualLottoMachine(markingPaper);
+
         if (purchasePrice.getPrice() == 0) {
             return lottoMachine;
         }
 
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        int count = lottoMachine.getTicketCount(purchasePrice, Ticket.getPrice());
-        for (int i = 0; i < count; i++) {
-            lottoMachine.markLottoBalls(insertLottoBalls());
-        }
+        markPaper(markingPaper, lottoMachine.getTicketCount(purchasePrice, Ticket.getPrice()));
 
         return lottoMachine;
+    }
+
+    private static void markPaper(MarkingPaper markingPaper, int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < count; i++) {
+            markingPaper.markLottoBalls(insertLottoBalls());
+        }
     }
 
     private static LottoBalls insertLottoBalls() {

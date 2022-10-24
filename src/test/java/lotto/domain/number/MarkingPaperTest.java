@@ -48,16 +48,6 @@ class MarkingPaperTest {
         );
     }
 
-    @Test
-    @DisplayName("로또마킹지 비우기")
-    void clear_marking_paper() {
-        MarkingPaper markingPaper = new MarkingPaper();
-        markingPaper.markLottoBalls(numbersToBalls(List.of(3, 5, 12, 14, 15, 17)));
-        markingPaper.clear();
-
-        assertThat(markingPaper.getMarkingSize()).isZero();
-    }
-
     private long getMatchCount(Ticket ticket, List<Integer> numbers) {
         return ticket.getLottoBalls()
                 .getBalls()

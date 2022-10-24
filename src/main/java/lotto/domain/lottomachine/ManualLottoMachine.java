@@ -1,15 +1,21 @@
 package lotto.domain.lottomachine;
 
+import java.util.Optional;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
 import lotto.domain.exception.InvalidManualLottoPurchasePriceException;
-import lotto.domain.number.LottoBalls;
+import lotto.domain.exception.NullMarkingPaperException;
 import lotto.domain.number.MarkingPaper;
 import lotto.domain.number.Ticket;
 
 public class ManualLottoMachine implements LottoMachine {
 
-    private final MarkingPaper markingPaper = new MarkingPaper();
+    private final MarkingPaper markingPaper;
+
+    public ManualLottoMachine(MarkingPaper markingPaper) {
+        this.markingPaper = Optional.ofNullable(markingPaper)
+                .orElseThrow(NullMarkingPaperException::new);
+    }
 
     @Override
     public TicketBox issueTickets(PurchasePrice purchasePrice) {
@@ -18,13 +24,7 @@ public class ManualLottoMachine implements LottoMachine {
             throw new InvalidManualLottoPurchasePriceException(Ticket.getPrice());
         }
 
-        TicketBox ticketBox = new TicketBox(markingPaper.convertPapersToTickets());
-        markingPaper.clear();
-
-        return ticketBox;
+        return new TicketBox(markingPaper.convertPapersToTickets());
     }
 
-    public void markLottoBalls(LottoBalls lottoBalls) {
-        markingPaper.markLottoBalls(lottoBalls);
-    }
 }
