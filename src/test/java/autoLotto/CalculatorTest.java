@@ -20,7 +20,7 @@ public class CalculatorTest {
 
     @Test
     void 등수_1등() {
-        List<Integer> integerList = Arrays.asList(new Integer[]{3, 5, 7, 11, 45, 23});
+        List<Integer> integerList = Arrays.asList(3, 5, 7, 11, 45, 23);
         double result = calculator.calculate(lottos, new WinningNumbers(integerList, 1), 1000);
 
         Assertions.assertThat(result).isEqualTo(2000000.0);
@@ -28,7 +28,7 @@ public class CalculatorTest {
 
     @Test
     void 등수_2등() {
-        List<Integer> integerList = Arrays.asList(new Integer[]{3, 5, 7, 11, 45, 24});
+        List<Integer> integerList = Arrays.asList(3, 5, 7, 11, 45, 24);
         double result = calculator.calculate(lottos, new WinningNumbers(integerList, 23), 1000);
 
         Assertions.assertThat(result).isEqualTo(30000.0);
@@ -36,7 +36,7 @@ public class CalculatorTest {
 
     @Test
     void 등수_3등() {
-        List<Integer> integerList = Arrays.asList(new Integer[]{3, 5, 7, 11, 45, 24});
+        List<Integer> integerList = Arrays.asList(3, 5, 7, 11, 45, 24);
         double result = calculator.calculate(lottos, new WinningNumbers(integerList, 25), 1000);
 
         Assertions.assertThat(result).isEqualTo(1500.0);
@@ -44,7 +44,7 @@ public class CalculatorTest {
 
     @Test
     void 등수_4등() {
-        List<Integer> integerList = Arrays.asList(new Integer[]{3, 5, 7, 11, 44, 24});
+        List<Integer> integerList = Arrays.asList(3, 5, 7, 11, 44, 24);
         double result = calculator.calculate(lottos, new WinningNumbers(integerList, 25), 1000);
 
         Assertions.assertThat(result).isEqualTo(50.0);
@@ -52,7 +52,7 @@ public class CalculatorTest {
 
     @Test
     void 등수_5등() {
-        List<Integer> integerList = Arrays.asList(new Integer[]{3, 5, 7, 10, 44, 24});
+        List<Integer> integerList = Arrays.asList(3, 5, 7, 10, 44, 24);
         double result = calculator.calculate(lottos, new WinningNumbers(integerList, 25), 1000);
 
         Assertions.assertThat(result).isEqualTo(5.0);
@@ -60,7 +60,7 @@ public class CalculatorTest {
 
     @Test
     void 등수_MISS() {
-        List<Integer> integerList = Arrays.asList(new Integer[]{3, 5, 6, 10, 44, 24});
+        List<Integer> integerList = Arrays.asList(3, 5, 6, 10, 44, 24);
         double result = calculator.calculate(lottos, new WinningNumbers(integerList, 25), 1000);
 
         Assertions.assertThat(result).isEqualTo(0.0);

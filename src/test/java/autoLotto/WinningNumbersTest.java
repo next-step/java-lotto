@@ -12,7 +12,7 @@ public class WinningNumbersTest {
     void 숫자_6개미만_입력() {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
-                    List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10});
+                    List<Integer> numbers = Arrays.asList(3, 6, 9, 45, 10);
                     new WinningNumbers(numbers, 1);
                 }
         );
@@ -22,7 +22,7 @@ public class WinningNumbersTest {
     void 숫자_6개초과_입력() {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
-                    List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10, 11, 12});
+                    List<Integer> numbers = Arrays.asList(3, 6, 9, 45, 10, 11, 12);
                     new WinningNumbers(numbers, 1);
                 }
         );
@@ -32,7 +32,7 @@ public class WinningNumbersTest {
     void 숫자_46이상_입력() {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
-                    List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10, 51});
+                    List<Integer> numbers = Arrays.asList(3, 6, 9, 45, 10, 51);
                     new WinningNumbers(numbers, 1);
                 }
         );
@@ -42,7 +42,7 @@ public class WinningNumbersTest {
     void 보너스볼_46이상_입력() {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
-                    List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10,11});
+                    List<Integer> numbers = Arrays.asList(3, 6, 9, 45, 10,11);
                     new WinningNumbers(numbers, 46);
                 }
         );
@@ -50,7 +50,7 @@ public class WinningNumbersTest {
 
     @Test
     void 당첨번호_입력_성공() {
-        List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 9, 45, 10, 11});
+        List<Integer> numbers = Arrays.asList(3, 6, 9, 45, 10, 11);
         WinningNumbers winningNumbers = new WinningNumbers(numbers, 1);
 
         assertThat(winningNumbers.getWinningNumbers()).containsExactly(3,6,9,45,10,11);

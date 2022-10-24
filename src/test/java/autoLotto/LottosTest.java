@@ -21,7 +21,7 @@ public class LottosTest {
     @Test
     void 당첨번호_맞는_번호개수() {
         Lotto lotto = new Lotto(new Integer[]{1, 2, 3, 4, 5, 6});
-        List<Integer> numbers = Arrays.asList(new Integer[]{3, 6, 5, 45, 10, 11});
+        List<Integer> numbers = Arrays.asList(3, 6, 5, 45, 10, 11);
 
         assertThat(lotto.countOfMatch(numbers)).isEqualTo(3);
 

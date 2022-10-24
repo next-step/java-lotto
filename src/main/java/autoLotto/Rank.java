@@ -60,7 +60,7 @@ public enum Rank {
     }
     
     private static Rank getSecondOrThirdRank(Rank[] ranks, boolean matchBonus) {
-        if (matchBonus == true) {
+        if (matchBonus) {
             return getSecondRank(ranks);
         }
         return getThirdRank(ranks);
