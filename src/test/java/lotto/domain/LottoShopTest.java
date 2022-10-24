@@ -29,4 +29,25 @@ public class LottoShopTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("수동 구입분이 입력 금액을 초과 했습니다.");
     }
+
+    @Test
+    void 수동_구입분_번호_입력받아서_로또_구입_구현(){
+        LottoNumberStrategy lottoNumberStrategy = () -> lotto.domain.Number.of(1, 2, 3, 4, 5, 6);
+        LottoShop shop = new LottoShop(lottoNumberStrategy, new Money(14000), 3);
+        shop.buyManually(Number.of(1, 2, 3, 4, 5, 6));
+        shop.buyManually(Number.of(2, 3, 4, 5, 6, 7));
+        shop.buyManually(Number.of(3, 4, 5, 6, 7, 8));
+
+        Lottos lottos = shop.buy();
+
+        Assertions.assertThat(lottos.getLottos())
+            .hasSize(14)
+            .containsAll(
+                List.of(
+                    new Lotto(Number.of(1, 2, 3, 4, 5, 6)),
+                    new Lotto(Number.of(2, 3, 4, 5, 6, 7)),
+                    new Lotto(Number.of(3, 4, 5, 6, 7, 8))
+                )
+            );
+    }
 }
