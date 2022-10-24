@@ -2,6 +2,7 @@ package step4.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class LottoGame {
 
@@ -14,9 +15,9 @@ public class LottoGame {
         return new LottoGame();
     }
 
-    public List<LottoNumbers> playLotto(final Ticket ticket, List<int[]> manualLottoNumbers) {
+    public List<LottoNumbers> playLotto(final Ticket ticket, List<Set<Integer>> manualLottoNumbers) {
         final int ticketCount = ticket.getTicketCount();
-        for (int[] manualLottoNumber : manualLottoNumbers) {
+        for (Set manualLottoNumber : manualLottoNumbers) {
             lottoNumbers.add(LottoNumbers.from(
                 LottoNumberGenerator.generateManualLottoNumber(manualLottoNumber)));
         }

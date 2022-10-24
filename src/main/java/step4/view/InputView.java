@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
-import step4.domain.LottoNumber;
-import step4.domain.LottoNumberGenerator;
-import step4.domain.LottoNumbers;
 import step4.domain.Ticket;
 
 public class InputView {
@@ -25,16 +23,17 @@ public class InputView {
     }
 
 
-    public static List<int[]> inputManualLottoNumbers(Ticket manualLottoTicket) {
+    public static List<Set<Integer>> inputManualLottoNumbers(Ticket manualLottoTicket) {
         OutputView.printManualLottoNumberNotification();
 
         Scanner scanner = new Scanner(System.in);
         int ticketCount = manualLottoTicket.getTicketCount();
-        List<int[]> manualLottoNumbers = new ArrayList<>();
+        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
-            manualLottoNumbers.add(Arrays.stream(scanner.nextLine().split(", "))
-                .mapToInt(Integer::parseInt)
-                .toArray());
+            manualLottoNumbers.add(Arrays.
+                stream(scanner.nextLine().split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet()));
         }
         return manualLottoNumbers;
     }

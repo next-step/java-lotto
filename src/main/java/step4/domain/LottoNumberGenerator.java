@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -31,22 +32,9 @@ public class LottoNumberGenerator {
             .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> generateManualLottoNumber(int[] manualNumbers) {
-        validateManualNumber(manualNumbers);
-
-        return Arrays.stream(manualNumbers)
-            .mapToObj(number -> LottoNumber.from(number))
+    public static List<LottoNumber> generateManualLottoNumber(Set<Integer> manualNumbers) {
+        return manualNumbers.stream()
+            .map(number -> LottoNumber.from(number))
             .collect(Collectors.toList());
-    }
-
-    private static void validateManualNumber(int[] manualNumbers) {
-        int lottoNumbersLength = Arrays.stream(manualNumbers)
-            .distinct()
-            .toArray()
-            .length;
-
-        if (lottoNumbersLength != 6) {
-            throw new IllegalArgumentException("로또 번호는 중복 없이 6개 입력해야 합니다.");
-        }
     }
 }

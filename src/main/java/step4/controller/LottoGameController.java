@@ -2,6 +2,7 @@ package step4.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import step4.domain.LottoGame;
 import step4.domain.LottoNumbers;
 import step4.domain.LottoResult;
@@ -23,7 +24,7 @@ public class LottoGameController {
     }
 
     public void playLotto(final Ticket ticket, final Ticket manualLottoTicket) {
-        List<int[]> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoTicket);
+        List<Set<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoTicket);
         OutputView.printPurchaseResult(ticket, manualLottoTicket);
         final LottoGame lottoGame = LottoGame.newInstance();
         final List<LottoNumbers> lottoNumbers = lottoGame.playLotto(ticket, manualLottoNumbers);
