@@ -36,4 +36,12 @@ public class CalculatorTest {
 
         assertThat(actual).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("문자열 계산기는 사칙연산 법칙이 아닌 입력 값에 따라 계산해 결과를 반환한다.")
+    public void divide() {
+        int actual = Calculator.run("2 + 3 * 4 / 2");
+
+        assertThat(actual).isEqualTo(10);
+    }
 }
