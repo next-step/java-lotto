@@ -17,10 +17,10 @@ public class LottoJudge {
         RewardCalculator rewardCalculator = new RewardCalculator();
         List<Lotto> lottosToJudge = lottos.getLottos();
         lottosToJudge.forEach(lotto -> {
-                    int sameSize = lotto.getSameElements(winningLottoNumbers).size();
-                    boolean correctBonus = getCorrectBonus(bonusNumber, lotto, sameSize);
-                    rewardCalculator.plusCount(WinnerRank.valueOf(new WinnerRankCondition(sameSize, correctBonus)));
-                });
+            int sameSize = lotto.getSameElementsSize(winningLottoNumbers);
+            boolean correctBonus = getCorrectBonus(bonusNumber, lotto, sameSize);
+            rewardCalculator.plusCount(WinnerRank.valueOf(new WinnerRankCondition(sameSize, correctBonus)));
+        });
         return rewardCalculator;
     }
 

@@ -47,6 +47,10 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
+    public int getSameElementsSize(Lotto winningLottoNumbers){
+        return getSameElements(winningLottoNumbers).size();
+    }
+
     private boolean hasDuplicateNumbers(List<Integer> integers){
         Set<Integer> tmpSet = new HashSet<>();
 
