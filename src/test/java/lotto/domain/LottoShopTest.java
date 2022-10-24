@@ -50,4 +50,29 @@ public class LottoShopTest {
                 )
             );
     }
+
+    @Test
+    void 수동구매_가능여부_확인(){
+        LottoNumberStrategy lottoNumberStrategy = () -> lotto.domain.Number.of(1, 2, 3, 4, 5, 6);
+        LottoShop shop = new LottoShop(lottoNumberStrategy, new Money(14000), 3);
+        shop.buyManually(Number.of(1, 2, 3, 4, 5, 6));
+
+        Assertions.assertThat(shop.possibleBuyManually()).isTrue();
+
+        shop.buyManually(Number.of(1, 2, 3, 4, 5, 6));
+        shop.buyManually(Number.of(1, 2, 3, 4, 5, 6));
+        Assertions.assertThat(shop.possibleBuyManually()).isFalse();
+    }
+
+    @Test
+    void 수동구매_가능횟수_초과시_에러발생(){
+        LottoNumberStrategy lottoNumberStrategy = () -> lotto.domain.Number.of(1, 2, 3, 4, 5, 6);
+        LottoShop shop = new LottoShop(lottoNumberStrategy, new Money(14000), 3);
+        shop.buyManually(Number.of(1, 2, 3, 4, 5, 6));
+        shop.buyManually(Number.of(1, 2, 3, 4, 5, 6));
+        shop.buyManually(Number.of(1, 2, 3, 4, 5, 6));
+        Assertions.assertThatThrownBy(() -> shop.buyManually(Number.of(1, 2, 3, 4, 5, 6)))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("수동 구입가능 횟수를 초과 하였습니다.");
+    }
 }
