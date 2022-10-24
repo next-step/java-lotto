@@ -3,12 +3,16 @@ package domain;
 import java.util.Objects;
 
 public class Price {
-    private static final Calculator calculator = Calculator.getInstance();
+    private static final Calculator CALCULATOR = Calculator.getInstance();
     private long value;
 
     public Price(long value) {
         validate(value);
         this.value = value;
+    }
+
+    public static Price zero() {
+        return new Price(0L);
     }
 
     private void validate(long value) {
@@ -31,15 +35,15 @@ public class Price {
     }
 
     public long divide(Price price) {
-        return calculator.divide(this.value, price.value);
+        return CALCULATOR.divide(this.value, price.value);
     }
 
     public Price add(Price price) {
-        return new Price(calculator.add(this.value, price.value));
+        return new Price(CALCULATOR.add(this.value, price.value));
     }
 
     public Price multiple(long number) {
-        return new Price(calculator.multiple(this.value, number));
+        return new Price(CALCULATOR.multiple(this.value, number));
     }
 
     @Override
@@ -48,6 +52,6 @@ public class Price {
     }
 
     public double divideWithDecimalPoint(Price price) {
-        return calculator.divide(this.value, price.value);
+        return CALCULATOR.divide(this.value, price.value);
     }
 }

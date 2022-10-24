@@ -37,7 +37,7 @@ public class LottoTest {
         Lotto winningLotto = LottoGenerator.getInstance().generate(List.of(1,2,3,4,5,6));
         Lotto lotto = LottoGenerator.getInstance().generate(List.of(1,2,3,4,5,14));
 
-        assertThat(winningLotto.countEqualNumber(lotto)).isEqualTo(5);
+        assertThat(winningLotto.matchCount(lotto)).isEqualTo(5);
     }
 
 

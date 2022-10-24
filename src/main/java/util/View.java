@@ -1,6 +1,9 @@
-package view;
+package util;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class View {
     public static final OutputView outputView = new OutputView();
@@ -32,6 +35,20 @@ public class View {
 
         public static String inputString() {
             return scanner.nextLine();
+        }
+
+        public static List<String> inputStrings(String delimiter) {
+            return Arrays.stream(scanner.nextLine().split(delimiter))
+                    .map(string -> string.trim())
+                    .collect(Collectors.toList());
+        }
+
+        public static List<Integer> inputStringsToIntegers(String delimiter) {
+            return inputStrings(delimiter)
+                    .stream()
+                    .mapToInt(i -> Integer.valueOf(i))
+                    .boxed()
+                    .collect(Collectors.toList());
         }
     }
 }

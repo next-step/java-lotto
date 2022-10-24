@@ -1,14 +1,13 @@
 package controller;
+
 import domain.Lotto;
 import domain.LottoGenerator;
 import domain.LottoStatistics;
 import domain.Price;
+import util.View;
 import view.ResultView;
-import view.View;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -25,21 +24,18 @@ public class LottoController {
         List<Lotto> lottos = lottoGenerator.generate(purchasePrice);
         ResultView.printLottos(lottos);
 
-        // 중간 결과력 출력
+        // 중간 결과 출력
         View.outputView.println(MESSAGE_FOR_WINNING_LOTTO_NUMBERS);
 
         // 당첨 로또 번호 입력
-        List<Integer> numbers = Arrays.stream(View.inputView.inputString().split(", "))
-                .mapToInt(i -> Integer.valueOf(i))
-                .boxed()
-                .collect(Collectors.toList());
+        List<Integer> numbers = View.inputView.inputStringsToIntegers(",");
 
         // 로또 생성 및 결과 분석
         Lotto winningLotto = lottoGenerator.generate(numbers);
-        LottoStatistics lottoStatistics = new LottoStatistics(purchasePrice);
-        lottoStatistics.analysis(lottos, winningLotto);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winningLotto, purchasePrice);
+        lottoStatistics.analyzeRank();
 
-        // 결과 출
+        // 결과 출력
         ResultView.printStatistics(lottoStatistics);
     }
 }

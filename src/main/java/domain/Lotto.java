@@ -1,42 +1,50 @@
 package domain;
 
-import util.RandomNumberGenerator;
+import util.RandomLottoNumberGenerator;
 
 import java.util.*;
 
 public class Lotto {
-    private static final int MAXIMUM_NUMBER_BOUND = 45;
     private static final int STANDARD_SIZE = 6;
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        lottoNumbers = generateNumbers();
+        List<LottoNumber> numbers = generateNumbers();
+        sortLottoNumber(numbers);
+        this.lottoNumbers = Collections.unmodifiableList(numbers);
     }
 
     public Lotto(List<LottoNumber> numbers) {
-        this.lottoNumbers = new HashSet<>(numbers);
-        validateNumbersSize();
+        validateNumbers(numbers);
+        sortLottoNumber(numbers);
+        this.lottoNumbers = Collections.unmodifiableList(numbers);
     }
 
-    private void validateNumbersSize() {
-        if (this.lottoNumbers.size() != STANDARD_SIZE) {
+    private List<LottoNumber> sortLottoNumber(List<LottoNumber> numbers) {
+        numbers.sort(LottoNumber::compareTo);
+        return numbers;
+    }
+
+    private void validateNumbers(List<LottoNumber> numbers) {
+        if (numbers.size() != STANDARD_SIZE && new HashSet<>(numbers).size() != STANDARD_SIZE) {
             throw new RuntimeException("로또는 6개의 숫자로 이루어져야 합니다.");
         }
     }
 
-    private Set<LottoNumber> generateNumbers() {
+    private List<LottoNumber> generateNumbers() {
         Set<LottoNumber> tempNumbers = new HashSet<>();
 
-        RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.getInstance();
+        RandomLottoNumberGenerator randomLottoNumberGenerator = RandomLottoNumberGenerator.getInstance();
         while(tempNumbers.size() < STANDARD_SIZE) {
-            tempNumbers.add(new LottoNumber(randomNumberGenerator.generateNonZero(MAXIMUM_NUMBER_BOUND)));
+            LottoNumber lottoNumber = randomLottoNumberGenerator.generate();
+            tempNumbers.add(lottoNumber);
         }
 
-        return Collections.unmodifiableSet(tempNumbers);
+        return new ArrayList<>(tempNumbers);
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
@@ -45,7 +53,7 @@ public class Lotto {
         return String.valueOf(lottoNumbers);
     }
 
-    public long countEqualNumber(Lotto lotto) {
+    public long matchCount(Lotto lotto) {
         return lotto.lottoNumbers
                 .stream()
                 .filter(lottoNumber -> this.lottoNumbers.contains(lottoNumber))
