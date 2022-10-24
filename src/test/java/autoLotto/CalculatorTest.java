@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorTest {
-    Calculator calculator;
-    Lottos lottos;
+    private Calculator calculator;
+    private Lottos lottos;
     @BeforeEach
     void init() {
         calculator = new Calculator();
