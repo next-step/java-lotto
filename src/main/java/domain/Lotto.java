@@ -1,47 +1,14 @@
 package domain;
 
-import util.RandomLottoNumberGenerator;
-
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
-    private static final int STANDARD_SIZE = 6;
-
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        List<LottoNumber> numbers = generateNumbers();
-        sortLottoNumber(numbers);
-        this.lottoNumbers = Collections.unmodifiableList(numbers);
-    }
-
     public Lotto(List<LottoNumber> numbers) {
-        validateNumbers(numbers);
-        sortLottoNumber(numbers);
         this.lottoNumbers = Collections.unmodifiableList(numbers);
-    }
-
-    private List<LottoNumber> sortLottoNumber(List<LottoNumber> numbers) {
-        numbers.sort(LottoNumber::compareTo);
-        return numbers;
-    }
-
-    private void validateNumbers(List<LottoNumber> numbers) {
-        if (numbers.size() != STANDARD_SIZE && new HashSet<>(numbers).size() != STANDARD_SIZE) {
-            throw new RuntimeException("로또는 6개의 숫자로 이루어져야 합니다.");
-        }
-    }
-
-    private List<LottoNumber> generateNumbers() {
-        Set<LottoNumber> tempNumbers = new HashSet<>();
-
-        RandomLottoNumberGenerator randomLottoNumberGenerator = RandomLottoNumberGenerator.getInstance();
-        while(tempNumbers.size() < STANDARD_SIZE) {
-            LottoNumber lottoNumber = randomLottoNumberGenerator.generate();
-            tempNumbers.add(lottoNumber);
-        }
-
-        return new ArrayList<>(tempNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -51,13 +18,6 @@ public class Lotto {
     @Override
     public String toString() {
         return String.valueOf(lottoNumbers);
-    }
-
-    public long matchCount(Lotto lotto) {
-        return lotto.lottoNumbers
-                .stream()
-                .filter(lottoNumber -> this.lottoNumbers.contains(lottoNumber))
-                .count();
     }
 
     @Override

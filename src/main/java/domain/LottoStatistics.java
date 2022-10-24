@@ -7,14 +7,12 @@ import java.util.Map;
 
 public class LottoStatistics {
     private final List<Lotto> lottos;
-    private final Lotto winningLotto;
-    private final Price purchasePrice;
+    private final WinningLotto winningLotto;
     private final Map<Rank, Integer> rankRecord;
 
-    public LottoStatistics(List<Lotto> lottos, Lotto winningLotto, Price purchasePrice) {
+    public LottoStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
         this.lottos = lottos;
         this.winningLotto = winningLotto;
-        this.purchasePrice = purchasePrice;
         this.rankRecord = new HashMap<>();
     }
 
@@ -22,15 +20,14 @@ public class LottoStatistics {
         return LottoWinningsCalculator.calculateWinnings(lottos, winningLotto);
     }
 
-    public double calculateEfficiency() {
+    public double calculateEfficiency(final Price purchasePrice) {
         return findWinningPrice().divideWithDecimalPoint(purchasePrice);
     }
 
     public void analyzeRank() {
         initializeRankRecord();
         lottos.stream()
-                .map(lotto -> winningLotto.matchCount(lotto))
-                .map(Rank::of)
+                .map(lotto -> winningLotto.getRank(lotto))
                 .forEach(rank -> increaseRecord(rank));
     }
 
