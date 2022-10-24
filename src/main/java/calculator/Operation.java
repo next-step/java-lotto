@@ -19,14 +19,19 @@ public enum Operation {
         this.operator = operator;
     }
 
-    public static void validateOperators(List<String> operators) throws IllegalArgumentException {
+    private static void validateOperators(List<String> operators) throws IllegalArgumentException {
         if (operators.stream().anyMatch(operator -> !isValidArithmeticOperation(operator))) {
             throw new IllegalArgumentException(ILLEGAL_OPERATOR_EXCEPTION);
         };
     }
 
-    public static List<String> parseOperators(List<String> inputs) {
-        return inputs.stream().filter(Operation::isValidArithmeticOperation).collect(Collectors.toList());
+    public static List<String> getOperators(List<String> inputs) {
+        List<String> operators = inputs.stream()
+                .filter(input -> !Calculator.isDigit(input))
+                .collect(Collectors.toList());
+
+        validateOperators(operators);
+        return operators;
     }
 
     private static boolean isValidArithmeticOperation(String operator) {

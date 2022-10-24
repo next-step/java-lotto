@@ -12,16 +12,16 @@ public class OperationTest {
 
     @Test
     @DisplayName("사칙연산이 아닌 연산자가 존재하면 IllegalArgumentException을 throw한다.")
-    public void validateOperators() {
-        assertThatThrownBy(() -> Operation.validateOperators(List.of("+", "?", "/")))
+    public void getOperations_ShouldThrowWhenWrongOperators() {
+        assertThatThrownBy(() -> Operation.getOperators(List.of("+", "?", "/")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("잘못된 사칙연산 기호입니다.");
     }
 
     @Test
-    @DisplayName("연산자를 파싱해 반환한다.")
-    public void parseOperations() {
-        List<String> actual = Operation.parseOperators(List.of("6", "+", "3"));
+    @DisplayName("연산자를 반환한다.")
+    public void getOperations() {
+        List<String> actual = Operation.getOperators(List.of("6", "+", "3"));
 
         assertThat(actual).isEqualTo(List.of("+"));
     }
