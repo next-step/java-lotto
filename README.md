@@ -134,7 +134,7 @@
   - hasBonus : WinningNumber -> Lotto 에게 역할 넘겨주기
 - [ ] 상속 끊기
   - WinningNumbers 에 Lotto 변수 두어 관리
-- [ ] 사용하지 않는 hasCode 삭제
+- [x] 사용하지 않는 hasCode 삭제
 - [ ] CACHE 접근제한 private & ImmutableList
 - [ ] LottoRank : 2,3등 로직
   1. enum abstract method 키워드로 각각의 당첨여부를 관리하도록 고민

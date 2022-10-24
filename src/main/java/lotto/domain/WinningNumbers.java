@@ -27,17 +27,4 @@ public class WinningNumbers extends Lotto {
     private boolean isDuplicated(LottoNumber bonus) {
         return this.toIntSet().contains(bonus.getNumber());
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WinningNumbers that = (WinningNumbers) o;
-        return Objects.equals(bonus, that.bonus);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(bonus);
-    }
 }
