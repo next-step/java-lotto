@@ -4,8 +4,6 @@ import java.util.List;
 
 public class OrderInformation {
 
-    private static final int LOTTO_PRICE = 1000;
-
     private Money money;
     private List<Lotto> manualLottos;
 
@@ -19,7 +17,7 @@ public class OrderInformation {
     }
 
     public int countTotalTickets() {
-        return money.getMoney() / LOTTO_PRICE;
+        return money.getMoney() / LottoTickets.LOTTO_PRICE;
     }
 
     public int countManualTickets() {
@@ -27,8 +25,8 @@ public class OrderInformation {
     }
 
     public int countAutoTickets() {
-        int leftMoney = money.getMoney() - (countManualTickets() * LOTTO_PRICE);
-        return leftMoney / LOTTO_PRICE;
+        int leftMoney = money.getMoney() - (countManualTickets() * LottoTickets.LOTTO_PRICE);
+        return leftMoney / LottoTickets.LOTTO_PRICE;
     }
 
     public List<Lotto> getManualLottos() {

@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class LottoTickets {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private List<Lotto> lottos;
 
