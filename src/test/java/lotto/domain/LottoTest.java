@@ -34,13 +34,6 @@ public class LottoTest {
     }
 
     @Test
-    void 로또는_정렬을_위해_TreeSet만_사용가능() {
-        Assertions.assertThatThrownBy(() -> new Lotto(new HashSet<>(Number.of(1, 2, 3, 4, 5, 6))))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또는 정렬을 위해 TreeSet 만 이용 가능합니다.");
-    }
-
-    @Test
     void 등수확인() {
         Lotto first = new Lotto(Number.of(1, 2, 3, 4, 5, 6));
         Lotto second = new Lotto(Number.of(2, 3, 4, 5, 6, 7));
