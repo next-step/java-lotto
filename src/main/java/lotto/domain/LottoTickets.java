@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class LottoTickets {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private List<Lotto> lottos;
 
@@ -26,30 +26,18 @@ public class LottoTickets {
         return new LottoTickets(createTickets(tickets));
     }
 
-    public static LottoTickets of(int money, List<Lotto> manualLottos) {
-        int tickets = countTicket(money, manualLottos.size());
+    public static LottoTickets of(LottoCount lottoCount) {
+        int tickets = lottoCount.countAutoTickets();
         List<Lotto> randomLottos = createTickets(tickets);
-        List<Lotto> lottos = Stream.of(manualLottos, randomLottos)
+        List<Lotto> lottos = Stream.of(lottoCount.getManualLottos(), randomLottos)
             .flatMap(Collection::stream)
             .collect(Collectors.toList());
         return new LottoTickets(lottos);
     }
 
-    private static void valid(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(LOTTO_PRICE + " 미만은 로또를 구매할 수 없습니다.");
-        }
-    }
-
     private static int countTicket(int money) {
         valid(money);
-        return money / LOTTO_PRICE;
-    }
-
-    private static int countTicket(int money, int manualCount) {
-        int leftMoney = money - (manualCount * LOTTO_PRICE);
-        valid(leftMoney);
-        return leftMoney / LOTTO_PRICE;
+        return Money.from(money).getMoney() / LOTTO_PRICE;
     }
 
     public int getTicketCount() {
@@ -69,5 +57,11 @@ public class LottoTickets {
         LottoResult lottoResult = new LottoResult();
         lottoResult.result(winningLotto, LottoTickets.of(lottos));
         return lottoResult;
+    }
+
+    private static void valid(int money) {
+        if (money < LottoTickets.LOTTO_PRICE) {
+            throw new IllegalArgumentException(LOTTO_PRICE + " 미만은 로또를 구매할 수 없습니다.");
+        }
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoCount;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -15,9 +16,10 @@ public class LottoController {
         int manualCount = InputView.inputManualCountNumber();
         List<Lotto> manualLottos = InputView.inputManualLottoNumber(manualCount);
 
-        LottoTickets lottoTickets = LottoTickets.of(totalPrice, manualLottos);
+        LottoCount lottoCount = LottoCount.of(totalPrice, manualLottos);
+        LottoTickets lottoTickets = LottoTickets.of(lottoCount);
 
-        int tickets = lottoTickets.getTicketCount();
+        int tickets = lottoCount.countTotalTickets();
         ResultView.printTotalCount(tickets);
         ResultView.printResultTickets(lottoTickets.getTickets());
 

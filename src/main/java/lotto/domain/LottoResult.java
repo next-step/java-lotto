@@ -22,9 +22,8 @@ public class LottoResult {
     public void result(WinningLotto winningLotto, LottoTickets tickets) {
         List<Lotto> lottos = tickets.getTickets();
         for (Lotto lotto : lottos) {
-            int count = winningLotto.matches(lotto);
-            Rank calculate = Rank.calculate(count, winningLotto.matchBonus(lotto));
-            put(calculate);
+            Rank rank = winningLotto.matches(lotto);
+            put(rank);
         }
     }
 

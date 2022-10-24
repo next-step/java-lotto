@@ -16,7 +16,7 @@ public class ResultView {
 
     public static void printResultTickets(List<Lotto> lottoTickets) {
         for (Lotto lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket);
+            System.out.println(lottoTicket.getLotto());
         }
     }
 

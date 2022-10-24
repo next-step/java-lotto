@@ -14,7 +14,7 @@ public class Money {
     }
 
     private static void valid(int money) {
-        if (money < 0) {
+        if (money < 0 ) {
             throw new IllegalArgumentException("돈은 0 미만으로 입력할 수 없습니다.");
         }
     }

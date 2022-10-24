@@ -1,20 +1,22 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    public static final List<LottoNumber> LOTTO_NUMBERS = IntStream
-        .range(MIN_NUMBER, MAX_NUMBER + 1)
-        .mapToObj(LottoNumber::new)
-        .collect(Collectors.toList());
+    public static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>(MAX_NUMBER);
 
     private int number;
+
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            LOTTO_NUMBERS.put(i, new LottoNumber(i));
+        }
+    }
 
     private LottoNumber(int number) {
         this.number = number;
@@ -22,7 +24,7 @@ public class LottoNumber {
 
     public static LottoNumber from(int number) {
         valid(number);
-        return LOTTO_NUMBERS.get(number-1);
+        return LOTTO_NUMBERS.get(number);
     }
 
     private static void valid(int number) {
@@ -31,7 +33,7 @@ public class LottoNumber {
         }
     }
 
-    public int toInt() {
+    public int getNumber() {
         return number;
     }
 

@@ -43,8 +43,18 @@ public class Lotto {
         return this.lotto;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(lotto);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
+    public int match(Lotto winningLotto) {
+        return (int) lotto.stream()
+            .filter(winningLotto::contains)
+            .count();
+    }
+
+    public boolean matchBonus(LottoNumber bonus) {
+        return lotto.stream()
+            .anyMatch(userLotto -> userLotto.equals(bonus));
     }
 }
