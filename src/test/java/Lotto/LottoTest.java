@@ -18,9 +18,10 @@ public class LottoTest {
         assertThat(new Lotto(numbers(1, 7))).isEqualTo(new Lotto(numbers(1, 7)));
     }
 
-    // 어떻게 테스트?
     @Test
-    void 유니크한_랜덤_번호로_생성() {}
+    void 유니크한_랜덤_번호로_생성() {
+        assertThat(new Lotto().getSortedNumbers()).doesNotHaveDuplicates();
+    }
 
     @Test
     void 교집합으로_숫자_추리기() {
