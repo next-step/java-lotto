@@ -2,6 +2,8 @@ package lotto.domain;
 
 public class Money {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private int money;
 
     private Money(int money) {
@@ -14,8 +16,8 @@ public class Money {
     }
 
     private static void valid(int money) {
-        if (money < 0) {
-            throw new IllegalArgumentException("돈은 0 미만으로 입력할 수 없습니다.");
+        if (money < LOTTO_PRICE) {
+            throw new IllegalArgumentException(LOTTO_PRICE + " 미만은 로또를 구매할 수 없습니다.");
         }
     }
 

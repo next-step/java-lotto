@@ -15,7 +15,6 @@ public class OrderInformation {
     }
 
     public static OrderInformation of(int money, List<Lotto> manualLottos) {
-        valid(money);
         return new OrderInformation(Money.from(money), manualLottos);
     }
 
@@ -34,11 +33,5 @@ public class OrderInformation {
 
     public List<Lotto> getManualLottos() {
         return this.manualLottos;
-    }
-
-    private static void valid(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(LOTTO_PRICE + " 미만은 로또를 구매할 수 없습니다.");
-        }
     }
 }
