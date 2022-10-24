@@ -1,6 +1,8 @@
 package domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -11,7 +13,7 @@ public class LottoResult {
     private static final int MIN_MATCHING_NUMBER = 3;
     private static final int MAX_MATCHING_NUMBER = 6;
 
-    private final int[] matchFoundCount = new int[7];
+    private final Map<Integer, Integer> matchFoundCount = new HashMap<>();
 
     public LottoResult() {
     }
@@ -20,7 +22,13 @@ public class LottoResult {
 
         for (Lotto randomLotto : lottos.getLottoNumbers()) {
             List<Integer> matchNumberFounds = compareWinnerNumber(randomLotto, winnerNumber);
-            matchFoundCount[matchNumberFounds.size()] += 1;
+
+            if (matchFoundCount.containsKey(matchNumberFounds.size())) {
+                matchFoundCount.put(matchNumberFounds.size(), matchFoundCount.get(matchNumberFounds.size()) + 1);
+            }
+            if (!matchFoundCount.containsKey(matchNumberFounds.size())) {
+                matchFoundCount.put(matchNumberFounds.size(), 1);
+            }
         }
     }
 
@@ -44,13 +52,13 @@ public class LottoResult {
         double totalEarningMoney = 0;
 
         for (int i = MIN_MATCHING_NUMBER; i <= MAX_MATCHING_NUMBER; i++) {
-            totalEarningMoney += LottoWinnerRank.getWinningMoney(i) * matchFoundCount[i];
+            totalEarningMoney += LottoWinnerRank.getWinningMoney(i) * matchFoundCount.getOrDefault(i, 0);
         }
 
         return Math.round(totalEarningMoney / purchasedMoney.getMoney() * 100) / 100.0;
     }
 
-    public int[] getMatchFoundCount() {
+    public Map<Integer, Integer> getMatchFoundCount() {
         return matchFoundCount;
     }
 

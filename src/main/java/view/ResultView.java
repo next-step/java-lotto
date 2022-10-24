@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Map;
+
 import domain.Lotto;
 import domain.LottoResult;
 import domain.Lottos;
@@ -27,17 +29,17 @@ public class ResultView {
 
     public static void winnerStatistic(LottoResult lottoResult, Money purchasedMoney) {
 
-        int[] matchFounds = lottoResult.getMatchFoundCount();
+        Map<Integer, Integer> matchFounds = lottoResult.getMatchFoundCount();
         double earningRate = lottoResult.calculateEarningRate(purchasedMoney);
 
         String lossMessage = lossMessageFormat(earningRate);
 
         System.out.println("당첨 통계");
         System.out.println("-----------");
-        System.out.println("3개 일치 (5000원)- " + matchFounds[THREE_MATCH]);
-        System.out.println("4개 일치 (50000원)- " + matchFounds[FOUR_MATCH]);
-        System.out.println("5개 일치, 보너스 볼 일치(1500000원)- " + matchFounds[FIVE_MATCH]);
-        System.out.println("6개 일치 (2000000000원)- " + matchFounds[SIX_MATCH]);
+        System.out.println("3개 일치 (5000원)- " + matchFounds.getOrDefault(THREE_MATCH, 0) + "개");
+        System.out.println("4개 일치 (50000원)- " + matchFounds.getOrDefault(FOUR_MATCH, 0) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(1500000원)- " + matchFounds.getOrDefault(FIVE_MATCH, 0) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + matchFounds.getOrDefault(SIX_MATCH, 0) + "개");
         System.out.println("총 수익률은 " + earningRate + "입니다." + lossMessage);
     }
 }
