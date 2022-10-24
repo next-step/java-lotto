@@ -18,11 +18,17 @@ public class LottoController {
         Output.printBlank();
 
         LottoShop lottoShop = new LottoShop(new RandomNumberStrategy(), new Money(inputPrice), manuallyPurchaseCount);
+        Output.printManuallyLottoNumberRequest();
+        while(lottoShop.possibleBuyManually()){
+            lottoShop.buyManually(Input.inputLottoNumber());
+        }
+        Output.printBlank();
+
         Lottos lottos = lottoShop.buy();
         Output.printPurchasedLotto(lottos);
 
         Output.printWinnerNumbersRequest();
-        Set<Number> winnerNumbers = Input.inputWinnerNumbers();
+        Set<Number> winnerNumbers = Input.inputLottoNumber();
         Output.printBonusNumbersRequest();
         Number bonusNumber = Input.inputBonusNumber();
         Output.printResult(lottos.getResult(new WinnerNumbers(winnerNumbers, bonusNumber)));

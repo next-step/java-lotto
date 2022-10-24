@@ -25,7 +25,7 @@ public class Input {
         return Integer.parseInt(input);
     }
 
-    public static Set<Number> inputWinnerNumbers() {
+    public static Set<Number> inputLottoNumber() {
         String input = input();
         String[] split = input.split(SEPARATOR);
 
