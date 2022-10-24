@@ -7,9 +7,12 @@ public class Calculator {
 
     private final static String DIGIT_REGEX = "^[0-9]*$";
 
-    private final static String ILLEGAL_OPERATOR_EXCEPTION = "잘못된 연산자를 입력했습니다.";
+    private final static String ILLEGAL_OPERATOR_EXCEPTION = "잘못된 사칙연산 기호입니다.";
+
+    private final static String NO_INPUT_EXCEPTION = "입력 값이 null 이거나 빈 공백 문자입니다.";
 
     public static int run(String inputString) {
+        validateInput(inputString);
         List<String> inputs = List.of(inputString.split(INPUT_REGEX));
         List<Integer> digits = extractDigits(inputs);
         List<String> operators = extractOperators(inputs);
@@ -20,6 +23,12 @@ public class Calculator {
             result = calculate(result, nextOperand, operator);
         }
         return result;
+    }
+
+    private static void validateInput(String inputString) throws IllegalArgumentException {
+        if (inputString == null || inputString.isBlank()) {
+            throw new IllegalArgumentException(NO_INPUT_EXCEPTION);
+        }
     }
 
     private static int calculate(int firstOperand, int secondOperand, String operator) throws IllegalArgumentException {
