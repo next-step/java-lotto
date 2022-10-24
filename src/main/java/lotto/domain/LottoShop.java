@@ -33,6 +33,13 @@ public class LottoShop {
     }
 
     public void buyManually(Set<Number> numbers) {
+        if(!possibleBuyManually()){
+            throw new IllegalArgumentException("수동 구입가능 횟수를 초과 하였습니다.");
+        }
         lottos.add(new Lotto(numbers));
+    }
+
+    public boolean possibleBuyManually(){
+        return lottos.size() < manualPurchaseCount;
     }
 }
