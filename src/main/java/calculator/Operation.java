@@ -25,9 +25,9 @@ public enum Operation {
         };
     }
 
-    public static List<String> getOperators(List<String> inputs) {
+    public static List<String> getFrom(List<String> inputs) throws IllegalArgumentException {
         List<String> operators = inputs.stream()
-                .filter(input -> !Calculator.isDigit(input))
+                .filter(input -> !Digit.isDigit(input))
                 .collect(Collectors.toList());
 
         validateOperators(operators);

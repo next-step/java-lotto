@@ -13,7 +13,7 @@ public class OperationTest {
     @Test
     @DisplayName("사칙연산이 아닌 연산자가 존재하면 IllegalArgumentException을 throw한다.")
     public void getOperations_ShouldThrowWhenWrongOperators() {
-        assertThatThrownBy(() -> Operation.getOperators(List.of("+", "?", "/")))
+        assertThatThrownBy(() -> Operation.getFrom(List.of("+", "?", "/")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("잘못된 사칙연산 기호입니다.");
     }
@@ -21,7 +21,7 @@ public class OperationTest {
     @Test
     @DisplayName("연산자를 반환한다.")
     public void getOperations() {
-        List<String> actual = Operation.getOperators(List.of("6", "+", "3"));
+        List<String> actual = Operation.getFrom(List.of("6", "+", "3"));
 
         assertThat(actual).isEqualTo(List.of("+"));
     }

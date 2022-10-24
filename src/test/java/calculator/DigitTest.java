@@ -19,7 +19,7 @@ public class DigitTest {
 
     @Test
     @DisplayName("숫자를 파싱해 반환한다.")
-    public void isDigit() {
+    public void parseDigits() {
         List<Integer> actual = Digit.parseDigits(List.of("3", "+", "5"));
 
         assertThat(actual).isEqualTo(List.of(3, 5));
