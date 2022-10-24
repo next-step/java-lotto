@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.core.Lottos;
-import lotto.core.WinnerCount;
+import lotto.domain.Lottos;
+import lotto.service.RewardCalculator;
 
 public class ResultView {
 
@@ -14,9 +14,9 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    public void printResult(WinnerCount winnerCount, double profitRatio){
+    public void printResult(RewardCalculator rewardCalculator, double profitRatio){
         System.out.println(RESULT_BANNER);
-        winnerCount.getWinnerCount().forEach((winnerRank, integer) -> {
+        rewardCalculator.getWinnerCount().forEach((winnerRank, integer) -> {
             System.out.printf(LOTTOS_PRINT_FORMAT, winnerRank.getCorrectNumberCount(), winnerRank.getAward(), integer);
             System.out.println();
         });

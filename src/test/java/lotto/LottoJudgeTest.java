@@ -1,6 +1,9 @@
 package lotto;
 
-import lotto.core.*;
+import lotto.common.type.WinnerRank;
+import lotto.service.*;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +24,9 @@ public class LottoJudgeTest {
         Lotto winningLottoNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
         LottoJudge lottoJudge = new LottoJudge();
-        WinnerCount result = lottoJudge.judge(lottos, winningLottoNumbers);
+        RewardCalculator result = lottoJudge.judge(lottos, winningLottoNumbers);
 
-        WinnerCount expected = new WinnerCount();
+        RewardCalculator expected = new RewardCalculator();
         expected.plusCount(WinnerRank.FIRST);
         expected.plusCount(WinnerRank.SECOND);
         expected.plusCount(WinnerRank.THIRD);

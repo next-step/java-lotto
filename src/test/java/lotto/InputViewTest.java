@@ -1,14 +1,12 @@
 package lotto;
 
-import lotto.core.TicketPriceInput;
-import lotto.core.WinningLottoNumbers;
+import lotto.input.TicketPriceInput;
 import lotto.view.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

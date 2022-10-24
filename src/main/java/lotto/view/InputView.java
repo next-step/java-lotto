@@ -1,7 +1,6 @@
 package lotto.view;
 
-import lotto.core.TicketPriceInput;
-import lotto.core.WinningLottoNumbers;
+import lotto.input.TicketPriceInput;
 
 import java.util.Scanner;
 
@@ -24,7 +23,6 @@ public class InputView {
 
     public String getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MSG);
-        WinningLottoNumbers result;
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }

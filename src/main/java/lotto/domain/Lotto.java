@@ -1,4 +1,6 @@
-package lotto.core;
+package lotto.domain;
+
+import lotto.strategy.LottoGenerateStrategy;
 
 import java.util.HashSet;
 import java.util.List;

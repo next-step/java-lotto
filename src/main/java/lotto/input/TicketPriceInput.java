@@ -1,4 +1,4 @@
-package lotto.core;
+package lotto.input;
 
 import java.util.Objects;
 

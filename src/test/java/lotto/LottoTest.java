@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.core.Lotto;
-import lotto.core.LottoCommonGenerateStrategy;
+import lotto.domain.Lotto;
+import lotto.strategy.LottoCommonGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package lotto.core;
+package lotto.strategy;
 
 import java.util.List;
 

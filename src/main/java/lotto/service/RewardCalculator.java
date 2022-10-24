@@ -1,19 +1,21 @@
-package lotto.core;
+package lotto.service;
+
+import lotto.common.type.WinnerRank;
+import lotto.domain.Lottos;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static lotto.core.TicketPriceInput.DEFAULT_TICKET_PRICE;
+import static lotto.input.TicketPriceInput.DEFAULT_TICKET_PRICE;
 
-public class WinnerCount {
+public class RewardCalculator {
 
     private final Map<WinnerRank, Integer> winnerCount = new EnumMap<>(WinnerRank.class);
 
     private final static int DEFAULT_OFFSET = 1;
 
-    public WinnerCount() {
+    public RewardCalculator() {
         winnerCount.put(WinnerRank.FIRST, 0);
         winnerCount.put(WinnerRank.SECOND, 0);
         winnerCount.put(WinnerRank.THIRD, 0);
@@ -44,7 +46,7 @@ public class WinnerCount {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WinnerCount that = (WinnerCount) o;
+        RewardCalculator that = (RewardCalculator) o;
         return Objects.equals(winnerCount, that.winnerCount);
     }
 

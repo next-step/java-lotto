@@ -1,4 +1,6 @@
-package lotto.core;
+package lotto.domain;
+
+import lotto.strategy.LottoCommonGenerateStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

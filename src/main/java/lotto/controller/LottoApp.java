@@ -1,6 +1,10 @@
-package lotto;
+package lotto.controller;
 
-import lotto.core.*;
+import lotto.service.*;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.input.TicketPriceInput;
+import lotto.strategy.LottoWinningGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,7 +21,7 @@ public class LottoApp {
         String winningLottoNumbersInput = inputView.getWinningNumbers();
         LottoJudge lottoJudge = new LottoJudge();
         Lotto winningLotto = new Lotto(new LottoWinningGenerateStrategy(winningLottoNumbersInput));
-        WinnerCount winnerCount = lottoJudge.judge(lottos, winningLotto);
-        resultView.printResult(winnerCount, winnerCount.getProfitRatio(lottos));
+        RewardCalculator rewardCalculator = lottoJudge.judge(lottos, winningLotto);
+        resultView.printResult(rewardCalculator, rewardCalculator.getProfitRatio(lottos));
     }
 }
