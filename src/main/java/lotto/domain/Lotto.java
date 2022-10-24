@@ -24,7 +24,7 @@ public class Lotto {
     }
 
     public Lotto rank(LottoNumbers winnerLottoNumbers) {
-        this.rank = Rank.valueOf(lottoNumbers.getMatchCount(winnerLottoNumbers));
+        this.rank = lottoNumbers.getMatchCount(winnerLottoNumbers);
         return this;
     }
 

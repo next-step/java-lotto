@@ -12,7 +12,8 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String PURCHASE_PRICE_MESSAGE = "구매금액을 입력해 주세요.";
-    private static final String MATCH_NUMBER_LIST_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String WINNER_NUMBER_LIST_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String VALIDATE_NULL_OR_EMPTY_MESSAGE = "빈 값은 입력할 수 없습니다.";
     private static final String VALIDATE_INTEGER = "양수만 입력할 수 있습니다.";
 
@@ -26,14 +27,15 @@ public class InputView {
         return new PurchasePrice(convertToInt(validateInput(input)));
     }
 
-    public static LottoNumbers inputMatchNumberList() {
-        System.out.println(MATCH_NUMBER_LIST_MESSAGE);
-        String input = SCANNER.next();
-        System.out.println();
-        return new LottoNumbers(Arrays.stream(input.trim().split(","))
+    public static LottoNumbers inputWinnerNumberList() {
+        System.out.println(WINNER_NUMBER_LIST_MESSAGE);
+        String inputNumberList = SCANNER.next();
+        System.out.println(BONUS_NUMBER_MESSAGE);
+        String inputBonus = SCANNER.next();
+        return new LottoNumbers(Arrays.stream(inputNumberList.trim().split(","))
                 .map(InputView::validateInput)
                 .map(InputView::convertToInt)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), convertToInt(validateInput(inputBonus)));
     }
 
     private static String validateInput(String input) {
