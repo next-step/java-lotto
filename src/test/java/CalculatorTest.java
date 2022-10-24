@@ -7,7 +7,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("두 수를 더한 값을 반환한다.")
-    public void add() {
+    public void run_Add() {
         int actual = Calculator.run("1 + 2");
 
         assertThat(actual).isEqualTo(3);
@@ -15,7 +15,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("앞 수에서 뒷 수를 뺀 값을 반환한다.")
-    public void subtract() {
+    public void run_Subtract() {
         int actual = Calculator.run("2 - 1");
 
         assertThat(actual).isEqualTo(1);
@@ -23,7 +23,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("두 수를 곱한 값을 반환한다.")
-    public void multiply() {
+    public void run_Multiply() {
         int actual = Calculator.run("2 * 3");
 
         assertThat(actual).isEqualTo(6);
@@ -31,7 +31,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("앞 수에서 뒷 수를 나눈 값을 반환한다.")
-    public void divide() {
+    public void run_Divide() {
         int actual = Calculator.run("6 / 3");
 
         assertThat(actual).isEqualTo(2);
@@ -39,7 +39,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("문자열 계산기는 사칙연산 법칙이 아닌 입력 값에 따라 계산해 결과를 반환한다.")
-    public void divide() {
+    public void run_ShouldHaveNoMathematicalPriority() {
         int actual = Calculator.run("2 + 3 * 4 / 2");
 
         assertThat(actual).isEqualTo(10);
