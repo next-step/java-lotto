@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.regex.Pattern;
-
 public class BonusNumber {
 
     private final Integer bonusNumber;

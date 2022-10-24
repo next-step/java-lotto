@@ -14,7 +14,7 @@ public class LottoNumber {
 
     public void lottoNumberRange() {
         IntStream
-            .range(1, 45)
+            .range(1, 46)
             .forEach(i -> this.lottoNumbers.add(i));
     }
 

@@ -10,8 +10,6 @@ import enums.LottoWinnerRank;
 
 public class LottoResult {
 
-    private static final int MIN_MATCHING_NUMBER = 3;
-    private static final int MAX_MATCHING_NUMBER = 6;
     private static final int MATCH_FIVE_NUMBER = 5;
 
     private final Map<LottoWinnerRank, Integer> matchFoundCount = new EnumMap<>(LottoWinnerRank.class);
