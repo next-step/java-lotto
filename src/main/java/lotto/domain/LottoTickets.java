@@ -26,10 +26,10 @@ public class LottoTickets {
         return new LottoTickets(createTickets(tickets));
     }
 
-    public static LottoTickets of(OrderInformation orderInformation) {
-        int tickets = orderInformation.countAutoTickets();
+    public static LottoTickets of(LottoCount lottoCount) {
+        int tickets = lottoCount.countAutoTickets();
         List<Lotto> randomLottos = createTickets(tickets);
-        List<Lotto> lottos = Stream.of(orderInformation.getManualLottos(), randomLottos)
+        List<Lotto> lottos = Stream.of(lottoCount.getManualLottos(), randomLottos)
             .flatMap(Collection::stream)
             .collect(Collectors.toList());
         return new LottoTickets(lottos);
