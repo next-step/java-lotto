@@ -33,4 +33,21 @@ public class LottoJudgeTest {
         expected.plusCount(WinnerRank.FIFTH);
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("로또 번호와 보너스 당첨 번호가 주어졌을 때 WinnerCount 반환 확인 ")
+    void testIfGetValidWinnerCountWithBonus(){
+        Lotto lotto1 = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto lotto2 = new Lotto(Arrays.asList(11,2,3,4,5,6));
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
+        Lotto winningLottoNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
+
+        LottoJudge lottoJudge = new LottoJudge();
+        RewardCalculator result = lottoJudge.judge(lottos, winningLottoNumbers, "11");
+
+        RewardCalculator expected = new RewardCalculator();
+        expected.plusCount(WinnerRank.FIRST);
+        expected.plusCount(WinnerRank.SECOND);
+        assertThat(result).isEqualTo(expected);
+    }
 }
