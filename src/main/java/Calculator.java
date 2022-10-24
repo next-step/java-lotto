@@ -24,22 +24,38 @@ public class Calculator {
 
     private static int calculate(int firstOperand, int secondOperand, String operator) throws IllegalArgumentException {
         if (Objects.equals(operator, "+")) {
-            return firstOperand + secondOperand;
+            return add(firstOperand, secondOperand);
         }
 
         if (Objects.equals(operator, "-")) {
-            return firstOperand - secondOperand;
+            return subtract(firstOperand, secondOperand);
         }
 
         if (Objects.equals(operator, "*")) {
-            return firstOperand * secondOperand;
+            return multiply(firstOperand, secondOperand);
         }
 
         if (Objects.equals(operator, "/")) {
-            return firstOperand / secondOperand;
+            return divide(firstOperand, secondOperand);
         }
 
         throw new IllegalArgumentException(ILLEGAL_OPERATOR_EXCEPTION);
+    }
+
+    public static int add(int firstOperand, int secondOperand) {
+        return firstOperand + secondOperand;
+    }
+
+    public static int subtract(int firstOperand, int secondOperand) {
+        return firstOperand - secondOperand;
+    }
+
+    public static int multiply(int firstOperand, int secondOperand) {
+        return firstOperand * secondOperand;
+    }
+
+    public static int divide(int firstOperand, int secondOperand) {
+        return firstOperand / secondOperand;
     }
 
     private static List<String> extractOperators(List<String> inputs) {
