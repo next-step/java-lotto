@@ -1,4 +1,4 @@
-package step2.view;
+package step3.view;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,5 +20,11 @@ public class InputView {
             .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
+    }
+
+    public static int inputBonusBall() {
+        OutputView.printBonusBallNotification();
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 }

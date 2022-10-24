@@ -1,7 +1,7 @@
-package step2;
+package step3;
 
-import step2.controller.LottoGameController;
-import step2.domain.Ticket;
+import step3.controller.LottoGameController;
+import step3.domain.Ticket;
 
 public class LottoApplication {
     public static void main(String[] args) {

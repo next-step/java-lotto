@@ -1,10 +1,12 @@
-package step2.view;
+package step3.view;
 
 import java.util.List;
 import java.util.Map;
-import step2.domain.LottoNumbers;
-import step2.domain.Prize;
-import step2.domain.Ticket;
+import java.util.stream.Collectors;
+import step3.domain.LottoNumber;
+import step3.domain.LottoNumbers;
+import step3.domain.Prize;
+import step3.domain.Ticket;
 
 public class OutputView {
 
@@ -18,7 +20,10 @@ public class OutputView {
 
     public static void printLottoNumbers(final List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.getLottoNumbers());
+            lottoNumber.getLottoNumbers()
+                .stream()
+                .forEach(number -> System.out.print(number.getLottoNumber() + " "));
+            System.out.println();
         }
         System.out.println();
     }
@@ -29,16 +34,31 @@ public class OutputView {
 
     public static void printDrawResult(final Map<Prize, Integer> drawLottoResult) {
         System.out.println();
+        drawLottoResult.remove(Prize.MISS);
         for (Prize prize : drawLottoResult.keySet()) {
-            int matchCount = prize.getMatchCount();
-            int reward = prize.getReward();
-            System.out.println(matchCount + "개 일치 (" + reward + ")-" + drawLottoResult.get(prize));
+            printEachResult(drawLottoResult, prize);
         }
+    }
+
+    private static void printEachResult(Map<Prize, Integer> drawLottoResult, Prize prize) {
+        int matchCount = prize.getCountOfMatch();
+        int reward = prize.getReward();
+
+        if (prize.equals(Prize.SECOND)) {
+            System.out.println(matchCount + "개 일치, 보너스 볼 일치(30000000원) -" + drawLottoResult.get(prize));
+            return;
+        }
+
+        System.out.println(matchCount + "개 일치 (" + reward + ")- " + drawLottoResult.get(prize));
     }
 
     public static void printGrossReturn(final Ticket ticket, final int totalIncome) {
         final double purchasePrice = ticket.getPurchasePrice();
         final double grossReturn = totalIncome / purchasePrice;
         System.out.println("총 수익률은 " + String.format("%.2f", grossReturn) + "입니다.");
+    }
+
+    public static void printBonusBallNotification() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 }
