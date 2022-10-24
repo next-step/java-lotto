@@ -1,5 +1,7 @@
 package lotto.domain.number;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import lotto.domain.exception.InvalidLottoNumberException;
 
@@ -10,11 +12,24 @@ public class LottoBall implements Comparable<LottoBall> {
 
     private final int number;
 
-    public LottoBall(int number) {
+    private static final Map<Integer, LottoBall> BUCKET;
+
+    static {
+        BUCKET = new HashMap<>();
+        for (int i = FIRST_NUMBER; i <= LAST_NUMBER; i++) {
+            BUCKET.put(i, new LottoBall(i));
+        }
+    }
+
+    private LottoBall(int number) {
+        this.number = number;
+    }
+
+    public static LottoBall of(int number) {
         if (number < FIRST_NUMBER || number > LAST_NUMBER) {
             throw new InvalidLottoNumberException(FIRST_NUMBER, LAST_NUMBER);
         }
-        this.number = number;
+        return BUCKET.get(number);
     }
 
     public static int getFirstOfNumberRange() {

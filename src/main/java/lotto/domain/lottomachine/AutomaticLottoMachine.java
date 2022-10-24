@@ -1,9 +1,11 @@
-package lotto.domain;
+package lotto.domain.lottomachine;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.PurchasePrice;
+import lotto.domain.TicketBox;
 import lotto.domain.number.LottoBall;
 import lotto.domain.number.LottoBalls;
 import lotto.domain.number.Ticket;
@@ -34,7 +36,7 @@ public class AutomaticLottoMachine implements LottoMachine {
         return new Ticket(
                 new LottoBalls(
                         extractedNumbers.stream()
-                                .map(LottoBall::new)
+                                .map(LottoBall::of)
                                 .collect(Collectors.toUnmodifiableList())
                 ));
     }

@@ -1,8 +1,9 @@
-package lotto.domain;
+package lotto.domain.lottomachine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import lotto.domain.PurchasePrice;
 import lotto.domain.exception.InvalidLottoPurchasePriceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

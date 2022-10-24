@@ -18,12 +18,12 @@ class LottoBallsTest {
     @Test
     @DisplayName("로또볼 리스트는 오름차순으로 정렬되어 반환된다.")
     void get_sorted_lotto_balls() {
-        LottoBall lottoBall1 = new LottoBall(1);
-        LottoBall lottoBall2 = new LottoBall(2);
-        LottoBall lottoBall3 = new LottoBall(3);
-        LottoBall lottoBall4 = new LottoBall(4);
-        LottoBall lottoBall5 = new LottoBall(5);
-        LottoBall lottoBall6 = new LottoBall(6);
+        LottoBall lottoBall1 = LottoBall.of(1);
+        LottoBall lottoBall2 = LottoBall.of(2);
+        LottoBall lottoBall3 = LottoBall.of(3);
+        LottoBall lottoBall4 = LottoBall.of(4);
+        LottoBall lottoBall5 = LottoBall.of(5);
+        LottoBall lottoBall6 = LottoBall.of(6);
 
         List<LottoBall> lottoBallList = List.of(
                 lottoBall6,
@@ -57,19 +57,19 @@ class LottoBallsTest {
         return Stream.of(
                 Arguments.arguments(
                         List.of(
-                                new LottoBall(1),
-                                new LottoBall(2),
-                                new LottoBall(1),
-                                new LottoBall(4),
-                                new LottoBall(5),
-                                new LottoBall(6)
+                                LottoBall.of(1),
+                                LottoBall.of(2),
+                                LottoBall.of(1),
+                                LottoBall.of(4),
+                                LottoBall.of(5),
+                                LottoBall.of(6)
                         )
                 ),
                 Arguments.arguments(
                         List.of(
-                                new LottoBall(1),
-                                new LottoBall(2),
-                                new LottoBall(3)
+                                LottoBall.of(1),
+                                LottoBall.of(2),
+                                LottoBall.of(3)
                         )
                 )
         );

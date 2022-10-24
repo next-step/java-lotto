@@ -26,17 +26,17 @@ class WinningTicketTest {
     private static Stream<Arguments> getMatchTestArguments() {
         return Stream.of(
                 Arguments.arguments(
-                        new WinningTicket(numbersToBalls(List.of(3, 8, 12, 14, 15, 17)), new LottoBall(40)),
+                        new WinningTicket(numbersToBalls(List.of(3, 8, 12, 14, 15, 17)), LottoBall.of(40)),
                         new Ticket(numbersToBalls(List.of(1, 2, 3, 4, 5, 6))),
                         new MatchResult(1, false)
                 ),
                 Arguments.arguments(
-                        new WinningTicket(numbersToBalls(List.of(3, 8, 12, 14, 15, 17)), new LottoBall(40)),
+                        new WinningTicket(numbersToBalls(List.of(3, 8, 12, 14, 15, 17)), LottoBall.of(40)),
                         new Ticket(numbersToBalls(List.of(3, 8, 12, 14, 15, 17))),
                         new MatchResult(6, false)
                 ),
                 Arguments.arguments(
-                        new WinningTicket(numbersToBalls(List.of(3, 8, 12, 14, 15, 17)), new LottoBall(5)),
+                        new WinningTicket(numbersToBalls(List.of(3, 8, 12, 14, 15, 17)), LottoBall.of(5)),
                         new Ticket(numbersToBalls(List.of(3, 5, 12, 14, 15, 17))),
                         new MatchResult(5, true)
                 )

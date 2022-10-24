@@ -55,7 +55,7 @@ class WinningReportTest {
 
     private static WinningTicket getWinningTicket() {
         return new WinningTicket(
-                numbersToBalls(List.of(5, 6, 24, 25, 42, 43)), new LottoBall(7));
+                numbersToBalls(List.of(5, 6, 24, 25, 42, 43)), LottoBall.of(7));
     }
 
     private static TicketBox getTicketBox() {

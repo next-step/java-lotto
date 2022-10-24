@@ -18,19 +18,19 @@ public enum WinningCondition {
     ;
 
     private final int matchCount;
-    private final int prizeMoney;
+    private final long prizeMoney;
 
     private final boolean requiredBonus;
     private final boolean bonusMatch;
 
-    WinningCondition(int matchCount, int prizeMoney) {
+    WinningCondition(int matchCount, long prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
         this.requiredBonus = false;
         this.bonusMatch = false;
     }
 
-    WinningCondition(int matchCount, int prizeMoney, boolean requiredBonus, boolean bonusMatch) {
+    WinningCondition(int matchCount, long prizeMoney, boolean requiredBonus, boolean bonusMatch) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
         this.requiredBonus = requiredBonus;
@@ -60,7 +60,7 @@ public enum WinningCondition {
         return matchCount;
     }
 
-    public int getPrizeMoney() {
+    public long getPrizeMoney() {
         return prizeMoney;
     }
 

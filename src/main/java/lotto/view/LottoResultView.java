@@ -13,8 +13,8 @@ public class LottoResultView {
 
     }
 
-    public static void printTicketCount(int count) {
-        System.out.printf("%d개를 구매했습니다.%n", count);
+    public static void printTicketCount(int manualCount, int automaticCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장를 구매했습니다.%n", manualCount, automaticCount);
     }
 
     public static void printTickets(TicketBox ticketBox) {
@@ -47,7 +47,7 @@ public class LottoResultView {
 
     private static String resultFormat(WinningCondition condition) {
         String format = "%d개 일치";
-        if(condition.getRequiredBonus() && condition.getBonusMatch()) {
+        if (condition.getRequiredBonus() && condition.getBonusMatch()) {
             format = format.concat(", 보너스 볼 일치");
         }
         format = format.concat("(%d원)- %d개%n");
