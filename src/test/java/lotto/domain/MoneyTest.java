@@ -1,9 +1,9 @@
-package lotto;
+package lotto.domain;
 
+import static lotto.exception.ExceptionMessage.ERROR_NEGATIVE_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +17,7 @@ public class MoneyTest {
     void create_withUnderZero(int value) {
         assertThatThrownBy(() -> new Money(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("0 미만의 숫자는 허용되지 않습니다.");
+            .hasMessage(ERROR_NEGATIVE_VALUE.getMessage());
     }
 
     @Test

@@ -1,7 +1,11 @@
 package lotto.view;
 
+import static lotto.exception.ExceptionMessage.ERROR_INVALID_BONUS_NUMBER;
+
 import java.util.Objects;
 import java.util.Scanner;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public class InputView {
 
@@ -36,6 +40,20 @@ public class InputView {
     private static void validateInputLotto(final String input) {
         if (Objects.isNull(input) || input.isEmpty()) {
             throw new IllegalArgumentException("입력 값이 누락되었습니다.");
+        }
+    }
+
+    public static LottoNumber inputBonusNumber(final Lotto winningLotto) {
+        System.out.println("\n보너스 볼을 입력해 주세요.");
+        LottoNumber input = new LottoNumber(scanner.nextInt());
+        validateInputBonus(winningLotto, input);
+
+        return input;
+    }
+
+    private static void validateInputBonus(final Lotto winningLotto, final LottoNumber input) {
+        if (winningLotto.contains(input)) {
+            throw new IllegalArgumentException(ERROR_INVALID_BONUS_NUMBER.getMessage());
         }
     }
 }

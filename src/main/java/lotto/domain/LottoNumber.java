@@ -1,13 +1,17 @@
 package lotto.domain;
 
+import static lotto.exception.ExceptionMessage.ERROR_EMPTY_VALUE;
+import static lotto.exception.ExceptionMessage.ERROR_INVALID_VALUE_TO_CONVERT;
+import static lotto.exception.ExceptionMessage.ERROR_OUT_OF_LOTTO_NUMBER_BOUND;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String VALID_VALUE_PATTERN = "[0-9]+";
-    private final int MIN = 1;
-    private final int MAX = 45;
+    private static final int MIN = 1;
+    private static final int MAX = 45;
 
     private final int value;
 
@@ -18,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateValue(final int value) {
         if (value < MIN || value > MAX) {
-            throw new IllegalArgumentException("1 ~ 45 외의 숫자는 허용되지 않습니다.");
+            throw new IllegalArgumentException(ERROR_OUT_OF_LOTTO_NUMBER_BOUND.getMessage());
         }
     }
 
@@ -29,11 +33,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validateToParse(final String value) {
         if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException("입력 값이 누락되었습니다.");
+            throw new IllegalArgumentException(ERROR_EMPTY_VALUE.getMessage());
         }
 
         if (!Pattern.matches(VALID_VALUE_PATTERN, value.trim())) {
-            throw new IllegalArgumentException("변환할 수 없는 문자가 포함되어 있습니다.");
+            throw new IllegalArgumentException(ERROR_INVALID_VALUE_TO_CONVERT.getMessage());
         }
     }
 

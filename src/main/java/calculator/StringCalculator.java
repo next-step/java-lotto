@@ -1,11 +1,16 @@
 package calculator;
 
-import calculator.number.PositiveInt;
-import calculator.operator.Operator;
+import static calculator.exception.ExceptionMessage.ERROR_EMPTY_VALUE;
+import static calculator.exception.ExceptionMessage.ERROR_INVALID_VALUE_CALCULATE;
+
+import calculator.domain.PositiveInt;
+import calculator.domain.Operator;
 
 public class StringCalculator {
 
     private static final StringCalculator INSTANCE = new StringCalculator();
+    private static final int OPERATOR_INDEX = 2;
+    private static final int MIN_TOKEN = 3;
 
     private StringCalculator() {
     }
@@ -14,7 +19,7 @@ public class StringCalculator {
         validateTokens(tokens);
 
         PositiveInt result = PositiveInt.from(tokens[0]);
-        for (int i = 1; i < tokens.length - 1; i += 2) {
+        for (int i = 1; i < tokens.length - 1; i += OPERATOR_INDEX) {
             result = intermediateCalculate(result, tokens[i], tokens[i + 1]);
         }
 
@@ -23,11 +28,11 @@ public class StringCalculator {
 
     private void validateTokens(String[] tokens) {
         if (tokens == null || tokens.length == 0) {
-            throw new IllegalArgumentException("문자열이 누락되었습니다.");
+            throw new IllegalArgumentException(ERROR_EMPTY_VALUE.getMessage());
         }
 
-        if (tokens.length < 3) {
-            throw new IllegalArgumentException("계산할 수 없는 식입니다.");
+        if (tokens.length < MIN_TOKEN) {
+            throw new IllegalArgumentException(ERROR_INVALID_VALUE_CALCULATE.getMessage());
         }
     }
 

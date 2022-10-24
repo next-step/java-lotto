@@ -1,9 +1,10 @@
 package calculator;
 
+import static calculator.exception.ExceptionMessage.ERROR_EMPTY_VALUE;
+import static calculator.exception.ExceptionMessage.ERROR_INVALID_VALUE_CALCULATE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +28,7 @@ public class StringCalculatorTest {
     void failToCalculate_withNullOrEmptyValue(final String[] value) {
         assertThatThrownBy(() -> calculator.calculate(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("문자열이 누락되었습니다.");
+            .hasMessage(ERROR_EMPTY_VALUE.getMessage());
     }
 
     @Test
@@ -37,6 +38,6 @@ public class StringCalculatorTest {
 
         assertThatThrownBy(() -> calculator.calculate(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("계산할 수 없는 식입니다.");
+            .hasMessage(ERROR_INVALID_VALUE_CALCULATE.getMessage());
     }
 }

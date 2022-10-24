@@ -1,10 +1,12 @@
-package calculator.number;
+package calculator.domain;
 
+import static calculator.exception.ExceptionMessage.ERROR_EMPTY_VALUE;
+import static calculator.exception.ExceptionMessage.ERROR_INVALID_VALUE_TO_CONVERT;
+import static calculator.exception.ExceptionMessage.ERROR_NEGATIVE_VALUE;
 import static java.lang.Integer.parseInt;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
-import calculator.operator.Operator;
 
 public class PositiveInt {
 
@@ -15,7 +17,7 @@ public class PositiveInt {
 
     public PositiveInt(final int value) {
         if (value < NEGATIVE_BOUND) {
-            throw new IllegalArgumentException("0 미만의 숫자는 허용되지 않습니다.");
+            throw new IllegalArgumentException(ERROR_NEGATIVE_VALUE.getMessage());
         }
         this.value = value;
     }
@@ -28,11 +30,11 @@ public class PositiveInt {
 
     private static void validateToParse(final String value) {
         if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException("입력 값이 누락되었습니다.");
+            throw new IllegalArgumentException(ERROR_EMPTY_VALUE.getMessage());
         }
 
         if (!Pattern.matches(POSITIVE_INT_PATTERN, value)) {
-            throw new IllegalArgumentException("변환할 수 없는 문자가 포함되어 있습니다.");
+            throw new IllegalArgumentException(ERROR_INVALID_VALUE_TO_CONVERT.getMessage());
         }
     }
 

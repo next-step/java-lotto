@@ -24,3 +24,15 @@
 - [x] 로또 상점 클래스 구현
 - [x] 입력 뷰 클래스 구현
 - [x] 출력 뷰 클래스 구현
+
+## TO DO LIST(Step3)
+- [x] WinningInformation 수정
+  - [x] 2등 추가
+  - [x] 보너스 볼 포함 여부 추가
+  - [x] findByCountOfMatchedNumber 수정
+- [x] MatchingResult 생성
+  - [x] Lotto.matchWithWinningLotto 수정
+  - [x] WinningInformation 필드 타입을 MatchingResult로 수정
+- [x] LottoStorage.matchAllWithWinningLotto 수정
+- [x] InputView 에 추가 번호를 입력할 수 있도록 수정
+  - [x] Lotto에 contains 메소드 추가
