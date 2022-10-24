@@ -1,10 +1,26 @@
 package calculator;
 
+import calculator.calculatableImpl.Adder;
+import calculator.calculatableImpl.Divider;
+import calculator.calculatableImpl.Multiplier;
+import calculator.calculatableImpl.Subtractor;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Calculator {
+public enum Calculator {
+    ADDER(new Adder()),
+    SUBTRACTOR(new Subtractor()),
+    MULTIPLIER(new Multiplier()),
+    DIVIDER(new Divider());
+
+    private final Calculatable calculatable;
+
+    Calculator(Calculatable calculatable) {
+        this.calculatable = calculatable;
+    }
+
     private final static String INPUT_REGEX = " ";
 
     private final static String DIGIT_REGEX = "^[0-9]*$";
@@ -33,24 +49,24 @@ public class Calculator {
         }
     }
 
-    private static int calculate(int firstOperand, int secondOperand, String operator) throws IllegalArgumentException {
+    private static int calculate(int firstOperand, int secondOperand, String operator) {
+        return calculator(operator).run(firstOperand, secondOperand);
+    }
+
+    private static Calculatable calculator(String operator) {
         if (Objects.equals(operator, "+")) {
-            return add(firstOperand, secondOperand);
+            return ADDER.calculatable;
         }
 
         if (Objects.equals(operator, "-")) {
-            return subtract(firstOperand, secondOperand);
+            return SUBTRACTOR.calculatable;
         }
 
         if (Objects.equals(operator, "*")) {
-            return multiply(firstOperand, secondOperand);
+            return MULTIPLIER.calculatable;
         }
 
-        if (Objects.equals(operator, "/")) {
-            return divide(firstOperand, secondOperand);
-        }
-
-        throw new IllegalArgumentException(ILLEGAL_OPERATOR_EXCEPTION);
+        return DIVIDER.calculatable;
     }
 
     public static int add(int firstOperand, int secondOperand) {
