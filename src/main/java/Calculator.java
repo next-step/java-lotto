@@ -19,11 +19,7 @@ public class Calculator {
         Deque<String> operators = new LinkedList<>();
         while (!numbersAndOps.isEmpty()) {
             String unit = numbersAndOps.remove(0);
-            if (isOperator(unit)) {
-                operators.push(unit);
-                continue;
-            }
-            numbers.push(toInt(unit));
+            pushNumberOrOperator(numbers, operators, unit);
         }
 
         while (!operators.isEmpty()) {
@@ -35,6 +31,14 @@ public class Calculator {
         }
 
         return numbers.pop();
+    }
+
+    private void pushNumberOrOperator(Deque<Integer> numbers, Deque<String> operators, String unit) {
+        if (isOperator(unit)) {
+            operators.push(unit);
+            return;
+        }
+        numbers.push(toInt(unit));
     }
 
     private void validateArgument(String[] numbersAndOps) {
