@@ -8,18 +8,19 @@ import lotto.domain.policy.LottoPolicy;
 public class LottoMachine {
 
     private final LottoPolicy lottoPolicy;
-    private final LottoPrice lottoPrice;
+    private final int quantity;
 
-    public LottoMachine(LottoPolicy lottoPolicy, LottoPrice lottoPrice) {
+    public LottoMachine(LottoPolicy lottoPolicy, int quantity) {
         this.lottoPolicy = lottoPolicy;
-        this.lottoPrice = lottoPrice;
+        this.quantity = quantity;
     }
 
-    public Lottos buyLotto(int purchaseMoney) {
-            List<Lotto> lottoList = IntStream.range(0, lottoPrice.lottoCount(purchaseMoney))
-                .mapToObj(__ -> lottoPolicy.ball())
-                .collect(Collectors.toList());
+    public Lottos buyLotto() {
+        List<Lotto> lottoList = IntStream.range(0, quantity)
+            .mapToObj(__ -> lottoPolicy.ball())
+            .collect(Collectors.toList());
 
-            return new Lottos(lottoList);
+        return new Lottos(lottoList);
     }
+
 }
