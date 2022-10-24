@@ -1,5 +1,6 @@
 package step2.lotto;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoTicket {
@@ -34,5 +35,18 @@ public class LottoTicket {
                 .count();
 
         return Rank.rank(numberOfMatchingNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
