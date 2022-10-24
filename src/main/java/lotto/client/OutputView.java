@@ -14,6 +14,8 @@ import static lotto.model.enumeration.Rank.SECOND;
 
 public class OutputView {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private static final String LOTTO_FORM = "[{result}]";
     private static final String RANK_FORM = "{matchCount}개 일치{matchBonus}({amount}원)- {count}개";
     private static final String RETURN_RATE_FORM = "총 수익률은 {rate} 입니다.";
@@ -22,8 +24,8 @@ public class OutputView {
         throw new AssertionError();
     }
 
-    public static void showCountOfLotto(Lotteries lotteries) {
-        show(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", lotteries.getManualLottoCount(), lotteries.getLottoCount() - lotteries.getManualLottoCount()));
+    public static void showCountOfLotto(int purchaseAmount, int manualLottoCount) {
+        show(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", manualLottoCount, (purchaseAmount / LOTTO_PRICE) - manualLottoCount));
     }
 
     public static void showCreatedLotteries(Lotteries lotteries) {
