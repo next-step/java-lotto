@@ -1,14 +1,10 @@
 package lotto;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private static final int LENGTH = 6;
 
     private final List<LottoNumber> numbers;
@@ -50,14 +46,7 @@ public class Lotto {
     }
 
     private List<LottoNumber> randomNumbers() {
-        List<LottoNumber> numbers = shuffle(MIN_NUMBER, MAX_NUMBER + 1);
+        List<LottoNumber> numbers = LottoNumber.shuffleNumbers();
         return numbers.subList(0, LENGTH);
-    }
-
-    private List<LottoNumber> shuffle(int min, int max) {
-        List<LottoNumber> range = IntStream.range(min, max).boxed().map(v -> new LottoNumber(v)).collect(Collectors.toList());
-        Collections.shuffle(range);
-
-        return range;
     }
 }

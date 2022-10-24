@@ -1,17 +1,32 @@
 package lotto;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final String INVALID_NUMBER = "유효하지 않은 로또 번호입니다.";
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
     private int number;
 
     LottoNumber(int number) {
         validate(number);
         this.number = number;
+    }
+
+    public static List<LottoNumber> shuffleNumbers() {
+        List<LottoNumber> range = IntStream
+                .range(MIN_NUMBER, MAX_NUMBER + 1)
+                .boxed()
+                .map(v -> new LottoNumber(v))
+                .collect(Collectors.toList());
+        Collections.shuffle(range);
+
+        return range;
     }
 
     public int getNumber() {
