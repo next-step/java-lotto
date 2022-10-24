@@ -1,10 +1,10 @@
 package lotto;
 
 import java.util.ArrayList;
-import lotto.domain.AutomaticLottoMachine;
-import lotto.domain.LottoMachine;
 import lotto.domain.PurchasePrice;
 import lotto.domain.TicketBox;
+import lotto.domain.lottomachine.AutomaticLottoMachine;
+import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.number.Ticket;
 import lotto.domain.number.WinningTicket;
 import lotto.domain.winner.WinningReport;

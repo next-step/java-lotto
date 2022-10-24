@@ -1,10 +1,12 @@
-package lotto.domain;
+package lotto.domain.lottomachine;
 
 import static lotto.domain.LottoBallsHelper.numbersToBalls;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.List;
+import lotto.domain.PurchasePrice;
+import lotto.domain.TicketBox;
 import lotto.domain.exception.InvalidManualLottoPurchasePriceException;
 import lotto.domain.number.LottoBalls;
 import lotto.domain.number.Ticket;

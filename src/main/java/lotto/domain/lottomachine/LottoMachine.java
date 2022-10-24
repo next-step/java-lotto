@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottomachine;
 
+import lotto.domain.PurchasePrice;
+import lotto.domain.TicketBox;
 import lotto.domain.exception.InvalidLottoPurchasePriceException;
 
 public interface LottoMachine {

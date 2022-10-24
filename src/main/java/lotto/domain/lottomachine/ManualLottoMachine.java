@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottomachine;
 
+import lotto.domain.PurchasePrice;
+import lotto.domain.TicketBox;
 import lotto.domain.exception.InvalidManualLottoPurchasePriceException;
 import lotto.domain.number.LottoBalls;
 import lotto.domain.number.MarkingPaper;
