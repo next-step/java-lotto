@@ -31,7 +31,7 @@ public class LottoInputView {
         LottoBalls lottoBalls = insertLottoBalls();
 
         System.out.println("보너스 볼을 입력해 주세요.");
-        LottoBall bonusBall = new LottoBall(getIntData(insertData()));
+        LottoBall bonusBall = LottoBall.of(getIntData(insertData()));
 
         return new WinningTicket(lottoBalls, bonusBall);
     }
@@ -60,7 +60,7 @@ public class LottoInputView {
         return new LottoBalls(
                 Arrays.stream(insertData().split(DELIMITER))
                         .map(LottoInputView::getIntData)
-                        .map(LottoBall::new)
+                        .map(LottoBall::of)
                         .collect(Collectors.toUnmodifiableList()));
     }
 

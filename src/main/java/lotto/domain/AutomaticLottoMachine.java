@@ -34,7 +34,7 @@ public class AutomaticLottoMachine implements LottoMachine {
         return new Ticket(
                 new LottoBalls(
                         extractedNumbers.stream()
-                                .map(LottoBall::new)
+                                .map(LottoBall::of)
                                 .collect(Collectors.toUnmodifiableList())
                 ));
     }

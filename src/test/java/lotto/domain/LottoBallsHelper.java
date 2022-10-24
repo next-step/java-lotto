@@ -9,7 +9,7 @@ public class LottoBallsHelper {
 
     public static LottoBalls numbersToBalls(List<Integer> numbers) {
         return new LottoBalls(numbers.stream()
-                .map(LottoBall::new)
+                .map(LottoBall::of)
                 .collect(Collectors.toUnmodifiableList()));
     }
 }

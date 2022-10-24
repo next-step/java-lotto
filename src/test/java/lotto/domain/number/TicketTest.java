@@ -20,7 +20,7 @@ class TicketTest {
         numbers.forEach(
                 number ->
                         assertThat(ticket.getLottoBalls()
-                                .isContain(new LottoBall(number))
+                                .isContain(LottoBall.of(number))
                         ).isTrue()
         );
     }
