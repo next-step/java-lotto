@@ -125,3 +125,17 @@
 - [x] 보너스 번호에 로직 추가
   - 2, 3등 가리는 로직
 - [x] Result View '보너스볼 일치' 글씨 추가
+
+### 리뷰 요구사항
+- [ ] 함수명 수정
+  - LottoAmount : calcWinningRate -> 로또 금액의 입장에서 다름 금액과의 비율을 게산해주는 메소드 이름.
+  - LottoWinning : put -> 로또 게임 결과 정도를 나타낼 수 있는 이름.
+- [ ] 객체가 능동적으로 행동할 수 있는곳에 역할주기
+  - hasBonus : WinningNumber -> Lotto 에게 역할 넘겨주기
+- [ ] 상속 끊기
+  - WinningNumbers 에 Lotto 변수 두어 관리
+- [ ] 사용하지 않는 hasCode 삭제
+- [ ] CACHE 접근제한 private & ImmutableList
+- [ ] LottoRank : 2,3등 로직
+  1. enum abstract method 키워드로 각각의 당첨여부를 관리하도록 고민
+  2. BiFunction 을 이용하여 각 개체의 필드로 당첨여부 관리
