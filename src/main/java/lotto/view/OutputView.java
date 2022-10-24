@@ -11,12 +11,15 @@ import lotto.domain.Rank;
 
 public class OutputView {
 
-    public void printPurchasedLotto(Lotto lotto) {
-        System.out.println(lotto.getLottoSize() + "개 구매했습니다.");
-
+    public void printPurchasedLotto(Lotto lotto, int manualNumber) {
+        System.out.println("수동으로" + getAutoNumber(lotto, manualNumber) + "장, 자동으로 " + manualNumber + "개 구매했습니다.");
         for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
             System.out.println("[" + printLottoNumber(lottoNumber) + "]");
         }
+    }
+
+    private int getAutoNumber(Lotto lotto, int manualNumber) {
+        return lotto.getLottoSize() - manualNumber;
     }
 
     private String printLottoNumber(LottoNumber lotto) {

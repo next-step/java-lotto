@@ -4,7 +4,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CalculatorTest {
+public class MoneyCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("더하기가 정상적으로 동작하는지 확인")

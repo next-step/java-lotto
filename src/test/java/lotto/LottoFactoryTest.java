@@ -16,7 +16,7 @@ public class LottoFactoryTest {
 
     @BeforeEach
     public void init() {
-        lottoFactory = new LottoFactory(new Calculator());
+        lottoFactory = new LottoFactory(new MoneyCalculator());
     }
 
     @ParameterizedTest

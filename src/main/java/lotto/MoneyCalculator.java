@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import lotto.domain.Prize;
 import lotto.domain.Rank;
 
-public class Calculator {
+public class MoneyCalculator {
     private static final BigDecimal PRICE_PER_LOTTO = BigDecimal.valueOf(1000);
 
     public double calculateYield(BigDecimal purchaseAmount, BigDecimal prizeMoney) {
