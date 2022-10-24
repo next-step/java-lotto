@@ -16,11 +16,6 @@ public class LottoPrice {
         if (money < price) {
             return 0;
         }
-
         return money / price;
-    }
-
-    public int manualLottoCost(int money) {
-        return money * price;
     }
 }
