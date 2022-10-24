@@ -12,8 +12,7 @@ public class LottosTest {
 
     @Test
     void 로또_생성() {
-        Lottos lottos = new Lottos();
-        lottos.addLotto(new Lotto());
+        Lottos lottos = new Lottos(1000);
 
         assertThat(lottos.getLottosSize()).isEqualTo(1);
     }
