@@ -25,15 +25,13 @@ public enum Calculator {
 
     private final static String DIGIT_REGEX = "^[0-9]*$";
 
-    private final static String ILLEGAL_OPERATOR_EXCEPTION = "잘못된 사칙연산 기호입니다.";
-
     private final static String NO_INPUT_EXCEPTION = "입력 값이 null 이거나 빈 공백 문자입니다.";
 
     public static int run(String inputString) {
         validateInput(inputString);
         List<String> inputs = List.of(inputString.split(INPUT_REGEX));
-        List<String> operators = extractOperators(inputs);
-        validateOperators(operators);
+        List<String> operators = Operation.parseOperators(inputs);
+        Operation.validateOperators(operators);
         List<Integer> digits = extractDigits(inputs);
         int result = digits.get(0);
         for (int i = 0; i < operators.size(); i++) {
@@ -42,19 +40,6 @@ public enum Calculator {
             result = calculate(result, nextOperand, operator);
         }
         return result;
-    }
-
-    private static void validateOperators(List<String> operators) throws IllegalArgumentException {
-        if (operators.stream().anyMatch(operator -> !isArithmeticOperation(operator))) {
-            throw new IllegalArgumentException(ILLEGAL_OPERATOR_EXCEPTION);
-        };
-    }
-
-    private static boolean isArithmeticOperation(String operator) {
-        return Objects.equals(operator, "+")
-                || Objects.equals(operator, "-")
-                || Objects.equals(operator, "*")
-                || Objects.equals(operator, "/");
     }
 
     private static void validateInput(String inputString) throws IllegalArgumentException {
@@ -68,23 +53,19 @@ public enum Calculator {
     }
 
     private static Calculatable calculator(String operator) {
-        if (Objects.equals(operator, "+")) {
+        if (Operation.isAddOperator(operator)) {
             return ADDER.calculatable;
         }
 
-        if (Objects.equals(operator, "-")) {
+        if (Operation.isSubtractOperator(operator)) {
             return SUBTRACTOR.calculatable;
         }
 
-        if (Objects.equals(operator, "*")) {
+        if (Operation.isMultiplyOperator(operator)) {
             return MULTIPLIER.calculatable;
         }
 
         return DIVIDER.calculatable;
-    }
-
-    private static List<String> extractOperators(List<String> inputs) {
-        return inputs.stream().filter(input -> !isDigit(input)).collect(Collectors.toList());
     }
 
     private static List<Integer> extractDigits(List<String> inputs) {
