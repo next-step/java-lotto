@@ -14,25 +14,23 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoVendingMachineTest {
-    @DisplayName("makeLottoNumberWithTimes 자동생성: 시도횟수와 기록의 길이가 같아야 함")
+    @DisplayName("makeLottoPapers 자동생성: 시도횟수와 기록의 길이가 같아야 함")
     @ParameterizedTest(name = "{index} {displayName} parameter=\"{0}\"")
     @ValueSource(ints = {1, 10})
-    void makeLottoNumberWithTimesByRandom(int numberOfLotto) {
+    void makeLottoPapersByRandom(int randomLottoPaperCount) {
         LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
-        List<LottoNumber> gambleHistory = lottoVendingMachine.makeLottoNumberWithTimes(new RandomGenerator(), numberOfLotto);
-        assertThat(gambleHistory.size()).isEqualTo(numberOfLotto);
+        LottoPapers randomLottoPapers = lottoVendingMachine.makeLottoPapers(new RandomGenerator(randomLottoPaperCount));
+        assertThat(randomLottoPapers.size()).isEqualTo(randomLottoPaperCount);
     }
 
-    static Stream<Arguments> makeLottoNumberWithTimesByManualParam() {
+    static Stream<Arguments> makeLottoPapersByManualParam() {
         return Stream.of(
                 Arguments.arguments(
-                        1,
                         new ArrayList<>(Arrays.asList(
                                 new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))
                         ))
                 ),
                 Arguments.arguments(
-                        5,
                         new ArrayList<>(Arrays.asList(
                                 new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)),
                                 new ArrayList<>(Arrays.asList(11, 12, 13, 14, 15, 16)),
@@ -44,12 +42,12 @@ class LottoVendingMachineTest {
         );
     }
 
-    @DisplayName("makeLottoNumberWithTimes 수동생성: 시도횟수와 기록의 길이가 같아야 함")
-    @ParameterizedTest(name = "{displayName} {index} 수동로또 횟수: {0} |수동번호: {1}")
-    @MethodSource("makeLottoNumberWithTimesByManualParam")
-    void makeLottoNumberWithTimesByManual(int numberOfLotto, List<List<Integer>> manualLottoNumberInput) {
+    @DisplayName("makeLottoPapers 수동생성: manualLottoNumberInput의 길이와 생성된 LottoPapers의 길이가 같아야 함")
+    @ParameterizedTest(name = "{displayName} {index} manualLottoNumberInput: {0}")
+    @MethodSource("makeLottoPapersByManualParam")
+    void makeLottoPapersByManual(List<List<Integer>> manualLottoNumberInput) {
         LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
-        List<LottoNumber> gambleHistory = lottoVendingMachine.makeLottoNumberWithTimes(new ManualGenerator(manualLottoNumberInput), numberOfLotto);
-        assertThat(gambleHistory.size()).isEqualTo(numberOfLotto);
+        LottoPapers lottoPapers = lottoVendingMachine.makeLottoPapers(new ManualGenerator(manualLottoNumberInput));
+        assertThat(lottoPapers.size()).isEqualTo(manualLottoNumberInput.size());
     }
 }

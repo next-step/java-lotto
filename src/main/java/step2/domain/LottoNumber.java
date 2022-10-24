@@ -1,81 +1,44 @@
 package step2.domain;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static step2.domain.Util.exceptionWrapper;
+import java.util.Objects;
 
 public class LottoNumber {
-    private final List<LottoNumberElement> lottoNumber;
+    private static final int MIN_LOTTO_NUMBER = 1;
 
-    public LottoNumber(List<Integer> integerLottoNumber) {
-        List<LottoNumberElement> lottoNumber = integersToLottoNumber(integerLottoNumber);
-        duplicateCheck(lottoNumber);
-        this.lottoNumber = Collections.unmodifiableList(lottoNumber);
+    private static final int MAX_LOTTO_NUMBER = 45;
+
+    protected final int lottoNumber;
+
+    public LottoNumber(int lottoNumber) {
+        validateLottoRange(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
-    public static List<LottoNumber> merge(List<LottoNumber> manualLottoNumbers, List<LottoNumber> randomLottoNumbers) {
-        return Stream.of(manualLottoNumbers, randomLottoNumbers)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-    }
-
-    private void duplicateCheck(List<LottoNumberElement> lottoNumber) {
-        Map<Integer, Long> countPerNumber = getCountPerNumber(lottoNumber);
-        Map<Integer, Long> duplicateNumbers = getDuplicateArgs(countPerNumber);
-        if (duplicateNumbers.size() > 0) {
-            throw new IllegalArgumentException("같은 숫자를 2번이상 입력할 수 없습니다. " + getDuplicateExceptionMessage(duplicateNumbers));
+    public static void validateLottoRange(int lottoNumber) {
+        if (lottoNumber > MAX_LOTTO_NUMBER || lottoNumber < MIN_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 1~45여야 합니다. 입력한 번호: " + lottoNumber);
         }
     }
 
-    private Map<Integer, Long> getCountPerNumber(List<LottoNumberElement> lottoNumber) {
-        return lottoNumber.stream()
-                .collect(Collectors.groupingBy(
-                        LottoNumberElement::getLottoNumberElement,
-                        Collectors.counting()
-                ));
-    }
-
-    private Map<Integer, Long> getDuplicateArgs(Map<Integer, Long> countPerNumber) {
-        return countPerNumber.entrySet().stream()
-                .filter(entry -> entry.getValue() > 1)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-    }
-
-    private String getDuplicateExceptionMessage(Map<Integer, Long> duplicateNumbers) {
-        return duplicateNumbers.entrySet().stream()
-                .map(entry -> "입력한 숫자: " + entry.getKey() + ", 중복 입력한 횟수: " + entry.getValue())
-                .collect(Collectors.joining("|"));
-    }
-
-    private List<LottoNumberElement> integersToLottoNumber(List<Integer> integerLottoNumber) {
-        List<LottoNumberElement> lottoNumber = integerLottoNumber.stream()
-                .map(exceptionWrapper(LottoNumberElement::new))
-                .collect(Collectors.toList());
-        if (lottoNumber.contains(null)) {
-            throw new IllegalArgumentException();
-        }
+    protected int getLottoNumber() {
         return lottoNumber;
-//        return integerLottoNumber.stream().map(LottoNumberElement::new).collect(Collectors.toList());
     }
 
-    public boolean isInclude(LottoNumberElement lottoNumberElement) {
-        return lottoNumber.contains(lottoNumberElement);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoNumber)) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
     }
 
-
-    public int compareMatch(LottoNumber targetLottoNumber) {
-        return (int) this.lottoNumber.stream()
-                .filter(targetLottoNumber::isInclude)
-                .count();
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 
     @Override
     public String toString() {
-        return lottoNumber.toString();
+        return Integer.toString(lottoNumber);
     }
 }

@@ -1,20 +1,20 @@
 package step2.domain;
 
-public class BonusLottoNumber extends LottoNumberElement {
+public class BonusLottoNumber extends LottoNumber {
 
-    public BonusLottoNumber(int bonusNumber, LottoNumber winNumber) {
-        super(bonusNumber);
-        validateDuplicateWinLottoNumber(winNumber);
+    public BonusLottoNumber(int bonusLottoNumber, LottoPaper winLottoPaper) {
+        super(bonusLottoNumber);
+        validateDuplicateWinLottoPaper(winLottoPaper);
     }
 
-    private void validateDuplicateWinLottoNumber(LottoNumber winNumber) {
-        if (winNumber.isInclude(this)) {
-            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 같을 수 없습니다. 당첨번호: " + winNumber + " |입력한 보너스 번호: " + lottoNumberElement);
+    private void validateDuplicateWinLottoPaper(LottoPaper winLottoPaper) {
+        if (winLottoPaper.isInclude(this)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 같을 수 없습니다. 당첨번호: " + winLottoPaper + " |입력한 보너스 번호: " + lottoNumber);
         }
     }
 
     @Override
     public String toString() {
-        return Integer.toString(this.lottoNumberElement);
+        return Integer.toString(this.lottoNumber);
     }
 }

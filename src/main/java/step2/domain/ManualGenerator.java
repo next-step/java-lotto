@@ -1,22 +1,24 @@
 package step2.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ManualGenerator implements LottoNumberGenerator {
-    private final List<List<Integer>> manualLottoNumberInput;
+public class ManualGenerator implements LottoPagersGenerator {
+    private final LottoPapers lottoPapers;
 
-    public ManualGenerator(List<List<Integer>> manualLottoNumberInput) {
-        this.manualLottoNumberInput = manualLottoNumberInput;
-    }
-    public LottoNumber create() {
-        isPossibleCreate();
-        List<Integer> inputNumber = manualLottoNumberInput.remove(0);
-        return new LottoNumber(inputNumber);
+    public ManualGenerator(List<List<Integer>> manualLottoPapersInput) {
+        lottoPapers = create(manualLottoPapersInput);
     }
 
-    private void isPossibleCreate() {
-        if (manualLottoNumberInput.size() < 1) {
-            throw new IndexOutOfBoundsException("더이상 수동입력 로또번호를 생성할 수 없습니다.");
-        }
+    @Override
+    public LottoPapers getLottoPapers() {
+        return lottoPapers;
+    }
+
+    private LottoPapers create(List<List<Integer>> manualLottoPapersInput) {
+        List<LottoPaper> lottoPapers = manualLottoPapersInput.stream()
+                .map(LottoPaper::new)
+                .collect(Collectors.toList());
+        return new LottoPapers(lottoPapers);
     }
 }
