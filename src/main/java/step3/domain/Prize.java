@@ -2,53 +2,26 @@ package step3.domain;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.function.BiFunction;
 
 public enum Prize {
-    FIRST(6, 2_000_000_000){
-        @Override
-        boolean isWin(int countOfMatch, boolean isMatchBonus) {
-            return countOfMatch == 6;
-        }
-    },
-    SECOND(5, 30_000_000) {
-        @Override
-        boolean isWin(int countOfMatch, boolean isMatchBonus) {
-            return countOfMatch == 5 && isMatchBonus;
-        }
-    },
-    THIRD(5, 1_500_000) {
-        @Override
-        boolean isWin(int countOfMatch, boolean isMatchBonus) {
-            return countOfMatch == 5 && !isMatchBonus;
-        }
-    },
-    FOURTH(4, 50_000) {
-        @Override
-        boolean isWin(int countOfMatch, boolean isMatchBonus) {
-            return countOfMatch == 4;
-        }
-    },
-    FIFTH(3, 5_000) {
-        @Override
-        boolean isWin(int countOfMatch, boolean isMatchBonus) {
-            return countOfMatch == 3;
-        }
-    },
-    MISS(0, 0) {
-        @Override
-        boolean isWin(int countOfMatch, boolean isMatchBonus) {
-            return countOfMatch < MINIMUM_PRIZE_RANGE;
-        }
-    };
+
+    FIRST(6, 2_000_000_000, (countOfMatch, isMatchBonus) -> countOfMatch == 6),
+    SECOND(5, 30_000_000, (countOfMatch, isMatchBonus) -> countOfMatch == 5 && isMatchBonus),
+    THIRD(5, 1_500_000, (countOfMatch, isMatchBonus) -> countOfMatch == 5 && !isMatchBonus),
+    FOURTH(4, 50_000, (countOfMatch, isMatchBonus) -> countOfMatch == 4),
+    FIFTH(3, 5_000, (countOfMatch, isMatchBonus) -> countOfMatch == 3),
+    MISS(0, 0, (countOfMatch, isMatchBonus) -> countOfMatch < 3);
 
     private final int countOfMatch;
     private final int reward;
-    private static final int MINIMUM_PRIZE_RANGE = 3;
     private static final int MAXIMUM_PRIZE_RANGE = 6;
+    private final BiFunction<Integer, Boolean, Boolean> biFunction;
 
-    Prize(int countOfMatch, int reward){
+    Prize(int countOfMatch, int reward, BiFunction<Integer, Boolean, Boolean> biFunction){
         this.countOfMatch = countOfMatch;
         this.reward = reward;
+        this.biFunction = biFunction;
     }
 
     public static int calculateTotalIncome(final Map<Prize, Integer> drawLottoResult){
@@ -73,10 +46,8 @@ public enum Prize {
         }
 
         return Arrays.stream(Prize.values())
-            .filter(prize -> prize.isWin(countOfMatch, isMatchBonus))
+            .filter(prize -> prize.biFunction.apply(countOfMatch, isMatchBonus))
             .findFirst()
             .get();
     }
-
-    abstract boolean isWin(int countOfMatch, boolean isMatchBonus);
 }

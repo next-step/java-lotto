@@ -36,7 +36,8 @@ public class LottoNumbersTest {
                 LottoNumber.from(2),
                 LottoNumber.from(3),
                 LottoNumber.from(4),
-                LottoNumber.from(5)));
+                LottoNumber.from(5),
+                LottoNumber.from(6)));
         boolean isBonusBallMatch = lottoNumbers.hasNumber(5);
         Assertions.assertThat(isBonusBallMatch).isTrue();
     }
