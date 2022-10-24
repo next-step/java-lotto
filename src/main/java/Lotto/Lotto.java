@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private static final int LENGTH = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    Lotto(List<Integer> numbers) {
+    Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
@@ -25,7 +25,7 @@ public class Lotto {
         return (int) numbers.stream().filter(myLotto.numbers::contains).count();
     }
 
-    public List<Integer> getSortedNumbers() {
+    public List<LottoNumber> getSortedNumbers() {
         return numbers.stream().sorted().collect(Collectors.toList());
     }
 
@@ -49,13 +49,13 @@ public class Lotto {
                 '}';
     }
 
-    private List<Integer> randomNumbers() {
-        List<Integer> numbers = shuffle(MIN_NUMBER, MAX_NUMBER + 1);
+    private List<LottoNumber> randomNumbers() {
+        List<LottoNumber> numbers = shuffle(MIN_NUMBER, MAX_NUMBER + 1);
         return numbers.subList(0, LENGTH);
     }
 
-    private List<Integer> shuffle(int min, int max) {
-        List<Integer> range = IntStream.range(min, max).boxed().collect(Collectors.toList());
+    private List<LottoNumber> shuffle(int min, int max) {
+        List<LottoNumber> range = IntStream.range(min, max).boxed().map(v -> new LottoNumber(v)).collect(Collectors.toList());
         Collections.shuffle(range);
 
         return range;

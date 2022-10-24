@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String AMOUNT_INPUT = "구입금액을 입력해 주세요.";
@@ -14,8 +15,13 @@ public class ResultView {
         System.out.println(purchasedMsg);
     }
 
-    public static void showLottoNumbers(List<Integer> numbers) {
-        System.out.println(String.join(",", numbers.toString()));
+    public static void showLottoNumbers(List<LottoNumber> numbers) {
+        String msg = numbers
+                .stream()
+                .map(v -> v.getNumber())
+                .map(v -> v.toString())
+                .collect(Collectors.joining(", "));
+        System.out.println(msg);
     }
 
     public static void inputWinnerLotto() {

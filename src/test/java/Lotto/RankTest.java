@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
-    private List<Integer> numbers(int min, int max) {
-        return IntStream.range(min, max).boxed().collect(Collectors.toList());
+    private List<LottoNumber> numbers(int min, int max) {
+        return IntStream.range(min, max).boxed().map(v -> new LottoNumber(v)).collect(Collectors.toList());
     }
 
     @Test
@@ -22,12 +22,6 @@ public class RankTest {
     @Test
     void 당첨_1등() {
         assertThat(Rank.RankOf(6)).isEqualTo(Rank.FIRST);
-    }
-
-    @Test
-    void 당청_개수_증가() {
-        Rank.FIRST.plusCount();
-        assertThat(Rank.FIRST.getCount()).isEqualTo(1);
     }
 
     @Test
