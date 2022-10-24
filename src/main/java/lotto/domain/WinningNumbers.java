@@ -13,4 +13,8 @@ public class WinningNumbers {
     public WinningNumbers(List<Integer> numbers) {
         this(new LottoNumbers(numbers));
     }
+
+    public List<Integer> getNumbers() {
+        return this.numbers.getNumbers();
+    }
 }

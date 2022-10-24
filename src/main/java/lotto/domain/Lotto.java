@@ -25,6 +25,13 @@ public class Lotto {
         return this.numbers.getNumbers();
     }
 
+    public long countSameNumbers(WinningNumbers winningNumbers) {
+        return winningNumbers.getNumbers()
+            .stream()
+            .filter(this.numbers::contains)
+            .count();
+    }
+
     @Override
     public String toString() {
         return getNumbers().stream()

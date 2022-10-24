@@ -25,6 +25,10 @@ public class LottoNumbers {
             .collect(Collectors.toList());
     }
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
     private void validateCount(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개입니다.");

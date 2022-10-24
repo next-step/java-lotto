@@ -51,4 +51,15 @@ class LottoTest {
 
         assertThat(lotto.getNumbers()).containsExactly(1, 4, 7, 10, 20, 34);
     }
+
+    @DisplayName("당첨 번호와 일치하는 로또 번호의 개수")
+    @Test
+    void countSameNumbersTest() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 40, 41, 42));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 5, 8, 10));
+
+        long result = lotto.countSameNumbers(winningNumbers);
+
+        assertThat(result).isEqualTo(3);
+    }
 }
