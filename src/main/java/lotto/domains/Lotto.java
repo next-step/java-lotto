@@ -1,35 +1,54 @@
 package lotto.domains;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
     protected static final int LOTTO_NUMBERS_SIZE = 6;
+    protected static final int PRICE = 1000;
 
     private final List<LottoNumber> numbers;
 
-    public Lotto(int n1, int n2, int n3, int n4, int n5, int n6) {
-        this(List.of(n1, n2, n3, n4, n5, n6));
+    protected static Lotto createByAuto() {
+        List<Integer> numbers = IntStream.rangeClosed(LottoNumber.START_NUMBER, LottoNumber.END_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+
+        Collections.shuffle(numbers);
+
+        return new Lotto(numbers
+                .stream()
+                .limit(LOTTO_NUMBERS_SIZE)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
     }
 
-    public Lotto(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBERS_SIZE) {
+    public static Lotto createByString(String string) {
+        return new Lotto(Arrays.stream(string.split(","))
+                .map(String::trim)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
+
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 숫자의 개수는 6개여야 합니다.");
         }
 
-        if (containsDuplicateNumber(numbers)) {
-            throw new IllegalArgumentException("로또 숫자는 중복이 될 수 없습니다. 입력값: " + numbers);
+        if (containsDuplicateNumber(lottoNumbers)) {
+            throw new IllegalArgumentException("로또 숫자는 중복이 될 수 없습니다. 입력값: " + lottoNumbers);
         }
 
-        this.numbers = numbers
-                .stream()
-                .sorted()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
+        this.numbers = new ArrayList<>(lottoNumbers);
     }
 
-    private boolean containsDuplicateNumber(List<Integer> numbers) {
+    private boolean containsDuplicateNumber(List<LottoNumber> numbers) {
         return new HashSet<>(numbers).size() != LOTTO_NUMBERS_SIZE;
     }
 

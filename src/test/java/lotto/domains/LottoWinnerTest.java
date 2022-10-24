@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class LottoWinnerTest {
     @Test
     void testDuplicatedBonusNumberToLotto() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.createByString("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = LottoNumber.of(1);
 
         assertThatThrownBy(() -> new LottoWinner(lotto, bonusNumber))
@@ -17,7 +17,7 @@ public class LottoWinnerTest {
 
     @Test
     void testSuccessIsBonusNumber() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.createByString("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = LottoNumber.of(7);
         LottoWinner winner = new LottoWinner(lotto, bonusNumber);
 

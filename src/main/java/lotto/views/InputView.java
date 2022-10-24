@@ -21,15 +21,11 @@ public class InputView {
         lottoList.forEach(System.out::println);
     }
 
-    public List<Integer> inputLastWinner() {
+    public String inputLastWinner() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> numbers = Arrays.stream(scanner.nextLine().split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        String input =  scanner.nextLine();
         System.out.println();
-
-        return numbers;
+        return input;
     }
 
     public String inputBonusNumber() {

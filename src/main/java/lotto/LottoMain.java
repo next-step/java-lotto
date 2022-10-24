@@ -20,7 +20,7 @@ public class LottoMain {
             List<Lotto> lottoList = lottoGenerator.purchaseByAuto(new LottoPurchasedAmount(inputView.inputPurchaseMoney()));
             inputView.printPurchasedLottoList(lottoList);
 
-            Lotto lastWinnerLotto = new Lotto(inputView.inputLastWinner());
+            Lotto lastWinnerLotto = Lotto.createByString(inputView.inputLastWinner());
             LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
             LottoWinner lastWinner = new LottoWinner(lastWinnerLotto, bonusNumber);
 
