@@ -132,7 +132,7 @@
   - LottoWinning : put -> 로또 게임 결과 정도를 나타낼 수 있는 이름.
 - [ ] 객체가 능동적으로 행동할 수 있는곳에 역할주기
   - hasBonus : WinningNumber -> Lotto 에게 역할 넘겨주기
-- [ ] 상속 끊기
+- [x] 상속 끊기
   - WinningNumbers 에 Lotto 변수 두어 관리
 - [x] 사용하지 않는 hasCode 삭제
 - [ ] CACHE 접근제한 private & ImmutableList
