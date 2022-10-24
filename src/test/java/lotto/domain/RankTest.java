@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,6 +20,13 @@ class RankTest {
         assertThat(rank.findRank(prize)).isOne();
     }
 
+    @ParameterizedTest
+    @MethodSource("yieldTestParameters")
+    public void yield_test(BigDecimal purchasePrice, Rank rank, double expectYield) {
+        double yield = rank.calculateYield(purchasePrice);
+        assertThat(yield).isEqualTo(expectYield,  withPrecision(0.01));
+    }
+
     static Stream<Arguments> testNumbersWithBonus() {
         return Stream.of(
                 arguments(6, true, Prize.RANK_1TH),
@@ -27,4 +35,20 @@ class RankTest {
                 arguments(4, false, Prize.RANK_3TH)
         );
     }
+
+    static Stream<Arguments> yieldTestParameters() {
+        return Stream.of(
+                arguments(BigDecimal.valueOf(1000L), initRank(4, false), 50.0),
+                arguments(BigDecimal.valueOf(14000L), initRank(5, false), 107.142),
+                arguments(BigDecimal.valueOf(1000L), initRank(5, true), 30000.0),
+                arguments(BigDecimal.valueOf(14000L), initRank(6, false), 142857.14)
+        );
+    }
+
+    private static Rank initRank(int matchingCount, boolean containBouns) {
+        Rank rank = new Rank();
+        rank.settingRank(matchingCount, containBouns);
+        return rank;
+    }
+
 }

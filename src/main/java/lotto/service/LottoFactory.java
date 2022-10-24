@@ -5,22 +5,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import lotto.MoneyCalculator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
 public class LottoFactory {
     private static final int PICK_NUMBER = 6;
-    private final MoneyCalculator moneyCalculator;
+    private static final BigDecimal PRICE_PER_LOTTO = BigDecimal.valueOf(1000);
 
-    public LottoFactory(MoneyCalculator moneyCalculator) {
-
-        this.moneyCalculator = moneyCalculator;
-    }
+    public LottoFactory() {}
 
     public Lotto generateLotto(BigDecimal payAmount, List<LottoNumber> manualNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>(manualNumbers);
-        int num = moneyCalculator.calculatePurchasedLottoNum(payAmount) - manualNumbers.size();
+        int num = calculatePurchasedLottoNum(payAmount) - manualNumbers.size();
 
         for (int i = 0; i < num; i++) {
             lottoNumbers.add(new LottoNumber(generateRandomNumbers()));
@@ -29,14 +25,8 @@ public class LottoFactory {
         return new Lotto(lottoNumbers);
     }
 
-    public Lotto generateLotto(BigDecimal payAmount) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        int num = moneyCalculator.calculatePurchasedLottoNum(payAmount);
-
-        for (int i = 0; i < num; i++) {
-            lottoNumbers.add(new LottoNumber(generateRandomNumbers()));
-        }
-        return new Lotto(lottoNumbers);
+    private int calculatePurchasedLottoNum(BigDecimal payAmount) {
+        return payAmount.divide(PRICE_PER_LOTTO).intValue();
     }
 
     private List<Integer> generateRandomNumbers() {

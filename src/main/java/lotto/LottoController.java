@@ -15,14 +15,11 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoFactory lottoFactory;
-    private final MoneyCalculator moneyCalculator;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoFactory lottoFactory,
-                           MoneyCalculator moneyCalculator) {
+    public LottoController(InputView inputView, OutputView outputView, LottoFactory lottoFactory) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoFactory = lottoFactory;
-        this.moneyCalculator = moneyCalculator;
     }
 
     public void startLottoWithBonus() {
@@ -37,7 +34,6 @@ public class LottoController {
         Rank lottoRankMap = winningNumber.calcLottoRankWithBonus(lotto);
         outputView.printStatisticLottoWithBonus(lottoRankMap);
 
-        BigDecimal prizeMoney = moneyCalculator.calculatePrizeMoney(lottoRankMap);
-        outputView.printYield(moneyCalculator.calculateYield(payAmount, prizeMoney));
+        outputView.printYield(lottoRankMap.calculateYield(payAmount));
     }
 }
