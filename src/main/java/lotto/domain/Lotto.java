@@ -28,6 +28,10 @@ public class Lotto {
         this.lottoNums = lottoNums;
     }
 
+    public boolean hasSameElement(Integer number){
+        return lottoNums.contains(number);
+    }
+
     public List<Integer> getLottoNums() {
         return lottoNums;
     }

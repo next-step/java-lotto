@@ -14,15 +14,15 @@ public class LottoJudge {
         int bonusNumber = Integer.parseInt(bonusNumberString);
         RewardCalculator rewardCalculator = new RewardCalculator();
         List<Lotto> lottosToJudge = lottos.getLottos();
-        lottosToJudge.stream()
-                .map(lotto -> lotto.getSameElements(winningLottoNumbers))
-                .filter(this::isValidCount)
-                .forEach(correctNumbers -> {
-                    if(correctNumbers.size() == 5 && correctNumbers.contains(bonusNumber)){
+        lottosToJudge
+                .forEach(lotto -> {
+                    if(!isValidCount(lotto.getSameElements(winningLottoNumbers))) return;
+                    int sameSize = lotto.getSameElements(winningLottoNumbers).size();
+                    if(sameSize == 5 && lotto.hasSameElement(bonusNumber)){
                         rewardCalculator.plusCount(WinnerRank.SECOND);
                         return;
                     }
-                    rewardCalculator.plusCount(WinnerRank.fromCount(correctNumbers.size()));
+                    rewardCalculator.plusCount(WinnerRank.fromCount(sameSize));
                 });
         return rewardCalculator;
     }
