@@ -34,17 +34,10 @@ public class LottoTicket {
         return lottoNumbers.contains(number);
     }
 
-    public Rank rank(final List<Integer> winningNumbers, final int bonusNumber) {
-        int matchCount = getMatchCount(winningNumbers);
-        boolean matchBonus = lottoNumbers.contains(bonusNumber);
+    public Rank rank(final WinningNumbers winningNumbers) {
+        int matchCount = winningNumbers.getMatchCount(lottoNumbers);
+        boolean matchBonus = winningNumbers.isMatchBonus(lottoNumbers);
         return Rank.rank(matchCount, matchBonus);
-    }
-
-    private int getMatchCount(List<Integer> winningNumbers) {
-        Long matchCount = winningNumbers.stream()
-                .filter(lottoNumbers::contains)
-                .count();
-        return matchCount.intValue();
     }
 
     public List<Integer> getLottoNumbers() {

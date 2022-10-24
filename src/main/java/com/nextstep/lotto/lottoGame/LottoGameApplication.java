@@ -2,10 +2,9 @@ package com.nextstep.lotto.lottoGame;
 
 import com.nextstep.lotto.lottoGame.domain.LottoResult;
 import com.nextstep.lotto.lottoGame.domain.LottoTickets;
+import com.nextstep.lotto.lottoGame.domain.WinningNumbers;
 import com.nextstep.lotto.lottoGame.view.InputView;
 import com.nextstep.lotto.lottoGame.view.OutputView;
-
-import java.util.List;
 
 public class LottoGameApplication {
 
@@ -13,10 +12,8 @@ public class LottoGameApplication {
         LottoTickets lottoTickets = LottoTickets.ofBudget(InputView.getBudget());
         OutputView.drawPublishResult(lottoTickets);
 
-        List<Integer> winningNumbers = InputView.getLottoNumbers();
-        int bonusNumber = InputView.getBonusNumber();
-
-        LottoResult result = new LottoResult(winningNumbers, bonusNumber, lottoTickets);
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.getLottoNumbers(), InputView.getBonusNumber());
+        LottoResult result = new LottoResult(winningNumbers, lottoTickets);
         OutputView.drawResult(result, lottoTickets.getUsedBudget());
     }
 }

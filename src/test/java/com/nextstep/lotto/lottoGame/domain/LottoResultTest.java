@@ -14,7 +14,7 @@ class LottoResultTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(List.of(3, 4, 5, 6, 7, 8))
         );
-        LottoResult result = new LottoResult(List.of(1, 2, 3, 4, 5, 6), 7, new LottoTickets(tickets));
+        LottoResult result = new LottoResult(new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7), new LottoTickets(tickets));
 
         assertThat(result.getCount(Rank.FIRST)).isEqualTo(1);
         assertThat(result.getCount(Rank.SECOND)).isEqualTo(0);
@@ -27,7 +27,7 @@ class LottoResultTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(List.of(3, 4, 5, 6, 7, 8))
         );
-        LottoResult result = new LottoResult(List.of(1, 2, 3, 4, 5, 6), 7, new LottoTickets(tickets));
+        LottoResult result = new LottoResult(new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7), new LottoTickets(tickets));
 
         assertThat(result.contains(Rank.FIRST)).isTrue();
         assertThat(result.contains(Rank.SECOND)).isFalse();
@@ -40,7 +40,7 @@ class LottoResultTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(List.of(3, 4, 5, 6, 7, 8))
         );
-        LottoResult result = new LottoResult(List.of(1, 2, 3, 4, 5, 6), 7, new LottoTickets(tickets));
+        LottoResult result = new LottoResult(new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7), new LottoTickets(tickets));
 
         assertThat(result.getPrizeSum()).isEqualTo(Rank.FIRST.getPrize() + Rank.FOURTH.getPrize());
     }
