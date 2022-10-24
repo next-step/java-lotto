@@ -2,9 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.domain.exception.MoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,14 +16,12 @@ class LottoPriceTest {
     }
 
     @Test
-    @DisplayName("구매할 때 로또 가격보다 낮은 금액을 입력하면 예외가 발생한다.")
+    @DisplayName("구매할 때 로또 가격보다 낮은 금액을 입력하면 0개가 반환된다.")
     void buy_lotto_low_money_throw_exception() {
         LottoPrice lottoPrice = new LottoPrice();
         int money = 999;
 
-        assertThatThrownBy(() -> lottoPrice.lottoCount(money))
-            .isInstanceOf(MoneyException.class)
-            .hasMessage("1000원 이하로는 구매할 수 없습니다.");
+        assertThat(lottoPrice.lottoCount(money)).isEqualTo(0);
     }
 
     @Test
