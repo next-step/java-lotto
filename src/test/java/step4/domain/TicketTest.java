@@ -7,9 +7,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class TicketTest {
 
-    @DisplayName("Price 생성 시 0이하의 수를 입력하면 예외처리한다")
+    @DisplayName("Price 생성 시 0미만의 수를 입력하면 예외처리한다")
     @ParameterizedTest
-    @ValueSource(ints = {-1000, -3000, 0})
+    @ValueSource(ints = {-1000, -3000})
     void price_can_positive(int negativePrice) {
         Assertions.assertThatThrownBy(() -> Ticket.from(negativePrice)
         ).isInstanceOf(IllegalArgumentException.class);

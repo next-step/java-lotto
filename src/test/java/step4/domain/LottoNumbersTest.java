@@ -11,7 +11,7 @@ public class LottoNumbersTest {
     @Test
     void lotto_list_size_6() {
         LottoNumbers lottoNumbers = LottoNumbers.from(
-            LottoNumberGenerator.generateLottoNumber());
+            LottoNumberGenerator.generateAutoLottoNumber());
         Assertions.assertThat(lottoNumbers.getLottoNumbers().size()).isEqualTo(6);
     }
 

@@ -1,5 +1,6 @@
 package step4.domain;
 
+import java.util.Collections;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +21,7 @@ class LottoGameTest {
     @ParameterizedTest
     @ValueSource(ints = {1000, 3000, 50000, 6000, 9000})
     void playLotto_make_purchaseCount_lottoNumber(int price) {
-        List<LottoNumbers> lottoNumbers = lottoGame.playLotto(Ticket.from(price));
+        List<LottoNumbers> lottoNumbers = lottoGame.playLotto(Ticket.from(price), Collections.emptyList());
         Assertions.assertThat(lottoNumbers.size()).isEqualTo(price / 1000);
     }
 }
