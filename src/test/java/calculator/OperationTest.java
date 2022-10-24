@@ -13,32 +13,48 @@ public class OperationTest {
     @Test
     @DisplayName("사칙연산이 아닌 연산자가 존재하면 IllegalArgumentException을 throw한다.")
     public void validateOperators() {
-        assertThatThrownBy(() -> Operation.validateOperators("1 ? 3"))
+        assertThatThrownBy(() -> Operation.validateOperators(List.of("+", "?", "/")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("잘못된 사칙연산 기호입니다.");
     }
 
     @Test
-    @DisplayName("사칙연산이 맞으면 true를 반환한다.")
-    public void isArithmeticOperation_ShouldReturnTrueWhenArithmeticOperation() {
-        boolean actual = Operation.isArithmeticOperation("+");
+    @DisplayName("연산자를 파싱해 반환한다.")
+    public void parseOperations() {
+        List<String> actual = Operation.parseOperators(List.of("6", "+", "3"));
+
+        assertThat(actual).isEqualTo(List.of("+"));
+    }
+
+    @Test
+    @DisplayName("더하기 연산자가 맞으면 True를 반환한다.")
+    public void isAddOperator() {
+        boolean actual = Operation.isAddOperator("+");
 
         assertThat(actual).isEqualTo(true);
     }
 
     @Test
-    @DisplayName("사칙연산이 아니면 false를 반환한다.")
-    public void isArithmeticOperation_ShouldReturnFalseWhenWrongArithmeticOperation() {
-        boolean actual = Operation.isArithmeticOperation("?");
+    @DisplayName("빼기 연산자가 맞으면 True를 반환한다.")
+    public void isSubtractOperator() {
+        boolean actual = Operation.isSubtractOperator("-");
 
-        assertThat(actual).isEqualTo(false);
+        assertThat(actual).isEqualTo(true);
     }
 
     @Test
-    @DisplayName("연산자를 파싱해 반환한다.")
-    public void parseOperations() {
-        List<String> actual = Operation.parseOperations(List.of("6", "+", "3"));
+    @DisplayName("곱하기 연산자가 맞으면 True를 반환한다.")
+    public void isMultiplyOperator() {
+        boolean actual = Operation.isMultiplyOperator("*");
 
-        assertThat(actual).isEqualTo(List.of("+"));
+        assertThat(actual).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("나누기 연산자가 맞으면 True를 반환한다.")
+    public void isDivideOperator() {
+        boolean actual = Operation.isDivideOperator("/");
+
+        assertThat(actual).isEqualTo(true);
     }
 }
