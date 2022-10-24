@@ -21,7 +21,11 @@ public class Number {
     }
 
     private boolean isIntegerNumber(String value) {
-        return (Double.valueOf(value)) % 1 == 0;
+        try {
+            return (Double.valueOf(value)) % 1 == 0;
+        } catch (NumberFormatException e){
+            throw new NumberFormatException("입력값이 숫자가 아닙니다.");
+        }
     }
 
     @Override
