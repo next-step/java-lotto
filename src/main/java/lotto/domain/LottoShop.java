@@ -13,6 +13,9 @@ public class LottoShop {
     private final List<Lotto> lottos = new ArrayList<>();
 
     public LottoShop(LottoNumberStrategy lottoNumberStrategy, final Money payed, final int manualPurchaseCount) {
+        if(payed.calculateQuantity(LOTTO_PRICE) < manualPurchaseCount){
+            throw new IllegalArgumentException("수동 구입분이 입력 금액을 초과 했습니다.");
+        }
         this.payed = payed;
         this.lottoNumberStrategy = lottoNumberStrategy;
         this.manualPurchaseCount = manualPurchaseCount;
