@@ -23,6 +23,6 @@ public class LottoApp {
         LottoJudge lottoJudge = new LottoJudge();
         Lotto winningLotto = new Lotto(new LottoWinningGenerateStrategy(winningLottoNumbersInput.getWinningNumberString()));
         RewardCalculator rewardCalculator = lottoJudge.judge(lottos, winningLotto, winningLottoNumbersInput.getBonusWinningNumberString());
-        resultView.printResult(rewardCalculator, rewardCalculator.getProfitRatio(lottos));
+        resultView.printAllResult(rewardCalculator, rewardCalculator.getProfitRatio(lottos));
     }
 }

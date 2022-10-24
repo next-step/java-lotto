@@ -4,14 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum WinnerRank {
-    FIRST(new WinnerRankCondition(6, false), 2_000_000_000),
-    SECOND(new WinnerRankCondition(5, true), 30_000_000),
-    THIRD(new WinnerRankCondition(5, false), 1_500_000),
-    FORTH(new WinnerRankCondition(4, false), 50_000),
-    FIFTH(new WinnerRankCondition(3, false), 5_000),
-    MISS_WITH_TWO(new WinnerRankCondition(2, false), 0),
+    MISS(new WinnerRankCondition(0, false), 0),
     MISS_WITH_ONE(new WinnerRankCondition(1, false), 0),
-    MISS(new WinnerRankCondition(0, false), 0);
+    MISS_WITH_TWO(new WinnerRankCondition(2, false), 0),
+
+    FIFTH(new WinnerRankCondition(3, false), 5_000),
+    FORTH(new WinnerRankCondition(4, false), 50_000),
+    THIRD(new WinnerRankCondition(5, false), 1_500_000),
+    SECOND(new WinnerRankCondition(5, true), 30_000_000),
+    FIRST(new WinnerRankCondition(6, false), 2_000_000_000);
+
 
     private final WinnerRankCondition winnerRankCondition;
     private final int reward;

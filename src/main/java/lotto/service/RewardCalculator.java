@@ -4,6 +4,7 @@ import lotto.common.type.WinnerRank;
 import lotto.domain.Lottos;
 
 import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ import static lotto.input.TicketPriceInput.DEFAULT_TICKET_PRICE;
 
 public class RewardCalculator {
 
-    private final Map<WinnerRank, Integer> winnerCount = new EnumMap<>(WinnerRank.class);
+    private final EnumMap<WinnerRank, Integer> winnerCount = new EnumMap<>(WinnerRank.class);
 
     private final static int DEFAULT_OFFSET = 1;
 
@@ -24,13 +25,14 @@ public class RewardCalculator {
     }
 
     public void plusCount(WinnerRank winnerRank){
+        if(!winnerCount.containsKey(winnerRank)) return;
         winnerCount.put(winnerRank, winnerCount.get(winnerRank) + DEFAULT_OFFSET);
     }
 
     public int getAllProfit(){
         int result = 0;
         for(Map.Entry<WinnerRank, Integer> entry : winnerCount.entrySet()){
-            result += entry.getKey().getAward() * entry.getValue();
+            result += entry.getKey().getReward() * entry.getValue();
         }
         return result;
     }
