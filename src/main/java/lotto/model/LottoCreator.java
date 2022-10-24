@@ -27,4 +27,11 @@ public class LottoCreator {
                 .mapToObj(v -> createLotto())
                 .collect(Collectors.toList());
     }
+
+    public static List<Lotto> createManualLotto(List<String> numbers) {
+        return numbers.stream()
+                .map(number -> number.split(", "))
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
 }

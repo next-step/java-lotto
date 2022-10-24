@@ -1,35 +1,31 @@
 package lotto.model;
 
+import lotto.model.enumeration.Rank;
+
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotteries {
 
     private final List<Lotto> lotteries;
-    private final List<Lotto> manualLotteries;
 
     public Lotteries(List<Lotto> lotteries, List<Lotto> manualLotteries) {
-        this.lotteries = lotteries;
-        this.manualLotteries = manualLotteries;
+        this.lotteries = Stream.concat(lotteries.stream(), manualLotteries.stream())
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLotteries() {
-        return lotteries;
+        return this.lotteries;
     }
 
-    public int getLottoCount() {
-        return this.lotteries.size();
-    }
-
-    public int getManualLottoCount() {
-        return this.manualLotteries.size();
-    }
-
-    public List<Lotto> getAllLotteries() {
-        return Stream.concat(lotteries.stream(), manualLotteries.stream())
-                .collect(Collectors.toList());
+    public Map<Rank, Long> getLotteriesRank(WinningLotto winningLotto) {
+        return lotteries.stream()
+                .map(winningLotto::match)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     @Override
