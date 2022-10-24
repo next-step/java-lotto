@@ -1,15 +1,17 @@
 package lotto;
 
 import lotto.model.Lotteries;
-import lotto.model.Profit;
+import lotto.model.Lotto;
 import lotto.model.WinningLotto;
 import lotto.model.enumeration.Rank;
 
+import java.util.List;
 import java.util.Map;
 
 import static lotto.client.InputView.*;
 import static lotto.client.OutputView.*;
 import static lotto.model.LottoCreator.createAutoLotto;
+import static lotto.model.LottoCreator.createManualLotto;
 import static lotto.model.Profit.getReturnRate;
 
 public class Main {
@@ -17,14 +19,15 @@ public class Main {
         int purchaseAmount = scanPurchaseAmount();
         int manualLottoCount = scanManualLottoCount();
 
-        Lotteries lotteries = new Lotteries(createAutoLotto(purchaseAmount), scanManualLottoNumber(manualLottoCount));
+        List<Lotto> autoLotto = createAutoLotto(purchaseAmount);
+        List<Lotto> manualLotto = createManualLotto(scanManualLottoNumber(manualLottoCount));
 
-        showCountOfLotto(lotteries);
+        Lotteries lotteries = new Lotteries(autoLotto, manualLotto);
+
+        showCountOfLotto(purchaseAmount, manualLottoCount);
         showCreatedLotteries(lotteries);
 
-        Profit profit = new Profit(new WinningLotto(scanLastWinLotte(), scanBonusBall()));
-
-        Map<Rank, Long> lotteriesRank = profit.getLotteriesRank(lotteries.getAllLotteries());
+        Map<Rank, Long> lotteriesRank = lotteries.getLotteriesRank(new WinningLotto(scanLastWinLotte(), scanBonusBall()));
 
         showResultRank(lotteriesRank);
         showReturnRate(getReturnRate(lotteriesRank, purchaseAmount));

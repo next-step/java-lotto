@@ -1,7 +1,6 @@
 package lotto.client;
 
 import lotto.exception.WrongParameterException;
-import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
 import java.util.*;
@@ -29,14 +28,13 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<Lotto> scanManualLottoNumber(int count) {
+    public static List<String> scanManualLottoNumber(int count) {
         if (count == 0) return new ArrayList<>();
 
         show("수동으로 구매할 번호를 입력해 주세요.");
 
         return IntStream.rangeClosed(1, count)
-                .mapToObj(i -> Optional.ofNullable(SCANNER.nextLine().split(", "))
-                        .map(Lotto::new)
+                .mapToObj(i -> Optional.ofNullable(SCANNER.nextLine())
                         .orElseThrow(() -> new WrongParameterException("[입력 오류] 수동 구매 번호를 입력해주세요.")))
                 .collect(Collectors.toList());
     }
