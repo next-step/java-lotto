@@ -5,18 +5,18 @@ import java.util.Objects;
 
 public class Lotto {
 
-	private List<Integer> lottoSet;
+	private List<Integer> numbers;
 
 	public Lotto(LottoFactory lottoFactory) {
 		this(lottoFactory.getLottoNum());
 	}
 
-	public Lotto(List<Integer> lottoSet) {
-		this.lottoSet = lottoSet;
+	public Lotto(List<Integer> numbers) {
+		this.numbers = numbers;
 	}
 
 	public List<Integer> getLotto() {
-		return lottoSet;
+		return numbers;
 	}
 
 	public boolean equals(Object o) {
@@ -27,10 +27,10 @@ public class Lotto {
 			return false;
 		}
 		Lotto lotto = (Lotto) o;
-		return Objects.equals(lottoSet, lotto.lottoSet);
+		return Objects.equals(numbers, lotto.numbers);
 	}
 
 	public int hashCode() {
-		return Objects.hash(lottoSet);
+		return Objects.hash(numbers);
 	}
 }

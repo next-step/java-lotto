@@ -48,24 +48,27 @@ public class OutputView {
 
 	public void showLotteries(int tickets, Lotteries lotteries) {
 		for (int i = 0; i < tickets; i++) {
-			System.out.println(Arrays.toString(lotteries.showLotteries(i).getLotto().toArray()));
+			System.out.println(lotteries.showLotteries(i).getLotto());
 		}
 	}
 
 	public void showRate(double rate) {
-		if (checkRate(rate)) {
-			System.out.println("수익률은 " + String.format("%.2f", rate) + "입니다");
+		defaultMessage(rate);
+		if (isProfit(rate)) {
 			return;
 		}
-		System.out.println(
-			"수익률은 " + String.format("%.2f", rate) + "입니다(기준이 1이기 때문에 결과적으로 손해라는 의미임");
+		System.out.println("기준이 1이기 때문에 결과적으로 손해라는 의미임");
 	}
 
-	private boolean checkRate(double rate) {
+	private boolean isProfit(double rate) {
 		if (rate < BENEFIT_STANDARD) {
 			return false;
 		}
 		return true;
+	}
+
+	private void defaultMessage(double rate){
+		System.out.println("수익률은 " + String.format("%.2f", rate) + "입니다");
 	}
 
 

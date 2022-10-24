@@ -13,11 +13,9 @@ public class WinningLotto {
 	}
 
 	public int countMatch(List<Integer> lotto) {
-		return winNumList.stream()
-			.filter(
-				target -> lotto.stream().distinct().anyMatch(Predicate.isEqual(target)))
-			.collect(Collectors.toList())
-			.size();
+		return (int) winNumList.stream()
+			.filter(lotto::contains)
+			.count();
 	}
 
 }
