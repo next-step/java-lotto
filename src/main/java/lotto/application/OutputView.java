@@ -1,7 +1,7 @@
 package lotto.application;
 
 import java.util.ArrayDeque;
-import lotto.domain.Bank;
+import lotto.domain.WinningLotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.Lottos;
@@ -30,11 +30,11 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    public void winningStatistics(Bank bank) {
+    public void winningStatistics(WinningLotto winningLotto) {
         System.out.println("당첨 통계");
         System.out.println("----------");
         StringBuilder stringBuilder = new StringBuilder();
-        bank.winningConfirmation()
+        winningLotto.winningConfirmation()
             .forEach((rank, count) -> stringBuilder.append(getRank(rank, count)));
         System.out.println(stringBuilder);
     }
@@ -59,8 +59,8 @@ public class OutputView {
         stringBuilder.append(lottoNumber.value()).append("]").append("\n");
     }
 
-    public void winningStatistics(Bank bank, int purchase) {
-        System.out.println("총 수익률은 " + bank.yield(purchase) + "입니다.");
+    public void winningStatistics(WinningLotto winningLotto, int purchase) {
+        System.out.println("총 수익률은 " + winningLotto.yield(purchase) + "입니다.");
     }
 
 }
