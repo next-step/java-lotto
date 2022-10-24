@@ -16,6 +16,11 @@ public class LottoGame {
 
     public List<LottoNumbers> playLotto(final Ticket ticket, List<int[]> manualLottoNumbers) {
         final int ticketCount = ticket.getTicketCount();
+        for (int[] manualLottoNumber : manualLottoNumbers) {
+            lottoNumbers.add(LottoNumbers.from(
+                LottoNumberGenerator.generateManualLottoNumber(manualLottoNumber)));
+        }
+
         for (int i = 0; i < ticketCount; i++) {
             lottoNumbers.add(LottoNumbers.from(LottoNumberGenerator.generateAutoLottoNumber()));
         }
