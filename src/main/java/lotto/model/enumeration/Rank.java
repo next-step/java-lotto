@@ -35,11 +35,11 @@ public enum Rank {
 
     public static Rank valueOf(double countOfMatch, boolean isContainBonusBall) {
         return Optional.ofNullable(RANK_MAP.get(countOfMatch))
-                .map(rank -> rank.containBonusBallRank(isContainBonusBall))
+                .map(rank -> rank.getContainBonusBallRank(isContainBonusBall))
                 .orElse(MISS);
     }
 
-    private Rank containBonusBallRank(boolean isMatchBonusBall) {
+    private Rank getContainBonusBallRank(boolean isMatchBonusBall) {
         if (isMatchBonusBall && this.equals(THIRD)) {
             return SECOND;
         }

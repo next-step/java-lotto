@@ -26,7 +26,7 @@ public class WinningLotto {
                 .filter(lastWinningLotto::contains)
                 .count());
 
-        boolean isMatchBonusBall = lotto.getLotto().contains(bonusBall);
+        boolean isMatchBonusBall = lotto.contains(bonusBall);
 
         return Rank.valueOf(matchLottoCount, isMatchBonusBall);
     }
