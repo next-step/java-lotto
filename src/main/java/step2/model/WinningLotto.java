@@ -7,9 +7,13 @@ public class WinningLotto {
 	private List<Integer> winNumList;
 	private int bonusNumber;
 
-	public WinningLotto(List<Integer> winNumList,int bonusNumber) {
+	private WinningLotto(List<Integer> winNumList,int bonusNumber) {
 		this.winNumList = winNumList;
 		this.bonusNumber = bonusNumber;
+	}
+
+	public static WinningLotto of(List<Integer> winNumList,int bonusNumber){
+		return new WinningLotto(winNumList,bonusNumber);
 	}
 
 	public int countOfMatch(List<Integer> lotto) {
