@@ -5,12 +5,12 @@ import java.util.List;
 public class WinningLotto {
 
 	private static final int SECOND_MATCH_NUM = 5;
-	private List<Integer> winNumList;
+	private List<Integer> winLotto;
 	private int bonusNumber;
 
 
-	private WinningLotto(List<Integer> winNumList, int bonusNumber) {
-		this.winNumList = winNumList;
+	private WinningLotto(List<Integer> winLotto, int bonusNumber) {
+		this.winLotto = winLotto;
 		this.bonusNumber = bonusNumber;
 	}
 
@@ -19,7 +19,7 @@ public class WinningLotto {
 	}
 
 	public int countOfMatch(List<Integer> lotto) {
-		return (int) winNumList.stream()
+		return (int) winLotto.stream()
 			.filter(lotto::contains)
 			.count();
 	}

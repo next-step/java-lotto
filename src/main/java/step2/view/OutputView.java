@@ -1,5 +1,8 @@
 package step2.view;
 
+import static step2.model.Rank.SECOND;
+import static step2.model.Rank.THIRD;
+
 import java.util.HashMap;
 import step2.model.Lotteries;
 import step2.model.Rank;
@@ -11,27 +14,25 @@ public class OutputView {
 	private static final int MAX_WIN_COUNT = 6;
 	private static final int BENEFIT_STANDARD = 1;
 
-	public void resultView(HashMap<Integer, Integer> totalCount) {
+	public void resultView(HashMap<Integer, Integer> totalCount, int bonusMatchCount) {
 		System.out.println("당첨 통계");
 		System.out.println("--------");
 
 		for (int key = MIN_WIN_COUNT; key <= MAX_WIN_COUNT; key++) {
-			showResult(key, isValid(totalCount.get(key)));
+			showResult(key, bonusMatchCount, totalCount);
 		}
 	}
 
-	private int isValid(Integer matchSum) {
-		if (matchSum == null) {
-			return DEFAULT_COUNT;
-		}
-		return matchSum;
-	}
+	private void showResult(int key, int bonusMatchCount, HashMap<Integer, Integer> totalCount) {
+		int countOfMatch = Rank.of(key).getCountOfMatch();
 
-	private void showResult(int key, int matchSum) {
-		if (key >= MIN_WIN_COUNT && key <= MAX_WIN_COUNT) {
-			System.out.printf("%s개 일치" + "(%d)- " + matchSum + "개\n",
-				Rank.of(key).getCountOfMatch(), Rank.of(key).getWinningMoney());
+		if (countOfMatch == SECOND.getCountOfMatch()) {
+			rankSecondMessage(bonusMatchCount, countOfMatch);
+			return;
 		}
+
+		System.out.printf("%s개 일치" + "(%d)- " + totalCount.get(key) + "개\n", countOfMatch,
+			Rank.of(key).getWinningMoney());
 	}
 
 	public void showTotalTicket(int tickets) {
@@ -61,6 +62,15 @@ public class OutputView {
 
 	private void defaultMessage(double rate) {
 		System.out.println("수익률은 " + String.format("%.2f", rate) + "입니다");
+	}
+
+	private void rankSecondMessage(int countOfBonus, int countOfMatch) {
+		System.out.printf(
+			"%s개 일치" + "(%d)- " + (SECOND.getCountOfMatch() - countOfBonus) + "개\n",
+			countOfMatch, THIRD.getWinningMoney());
+
+		System.out.printf("%s개 일치,보너스 볼 일치" + "(%d)- " + countOfBonus + "개\n",
+			countOfMatch, SECOND.getWinningMoney());
 	}
 
 
