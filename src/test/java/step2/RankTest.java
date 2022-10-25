@@ -13,6 +13,13 @@ public class RankTest {
 	void 등급_반환_테스트() {
 		int countOfMatch = 3;
 		Assertions.assertThat(Rank.of(countOfMatch)).isEqualTo(FIFTH);
-		}
+	}
+
+	@Test
+	void 가격_반환_테스트() {
+		int countOfMatch = 5;
+		Assertions.assertThat(Rank.of(countOfMatch).getWinningMoney()).isEqualTo(30_000_000);
+	}
+
 
 }
