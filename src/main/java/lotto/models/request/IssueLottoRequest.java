@@ -3,8 +3,8 @@ package lotto.models.request;
 import java.util.List;
 
 public class IssueLottoRequest {
-    private int payment;
-    private List<String> manualLottoNumbers;
+    private final int payment;
+    private final List<String> manualLottoNumbers;
 
     private IssueLottoRequest(int payment, List<String> manualLottoNumbers) {
         this.payment = payment;
