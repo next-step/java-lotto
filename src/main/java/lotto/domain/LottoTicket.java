@@ -28,7 +28,7 @@ public class LottoTicket {
     public LottoWinning result(WinningNumbers winningNumbers) {
         LottoWinning winning = new LottoWinning();
         for (Lotto lotto : lottos) {
-            winning.put(
+            winning.addCountOfMatch(
                     LottoRank.win(lotto.matches(winningNumbers.getWinningLotto()),
                             lotto.hasBonus(winningNumbers.getBonusNumber())));
         }

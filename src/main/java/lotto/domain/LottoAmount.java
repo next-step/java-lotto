@@ -23,7 +23,7 @@ public class LottoAmount {
         return amount / PRICE_PER_LOTTO;
     }
 
-    public double calcWinningRate(final double sumWinningMoney) {
+    public double calcSumWinningMoneyRate(final double sumWinningMoney) {
         return Math.round(sumWinningMoney / amount * 100) / 100.0;
     }
 
