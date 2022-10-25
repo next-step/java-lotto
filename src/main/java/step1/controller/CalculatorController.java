@@ -1,28 +1,28 @@
 package step1.controller;
 
 import step1.model.Calculator;
-import step1.model.Operator;
-
-import java.util.stream.IntStream;
+import step1.model.Operations;
 
 public class CalculatorController {
 
 	private static final String NUMBER_PATTERN = "[0-9]";
 	private static final String OPERATOR_PATTERN = "[+\\-*/]";
 
-	private final Operator operator;
+	private final Operations operations;
 
 	public CalculatorController(final String input) {
-		this.operator = new Operator(input);
+		this.operations = new Operations(input);
 	}
 
 	public int calculating() {
-		String[] operations = operator.getOperations();
-		Calculator calculator = Calculator.init(checkNumberStatus(operations[0]));
-		IntStream.iterate(1, i -> i < operations.length, i -> i + 2).forEachOrdered(i -> {
-			calculator.calculate(checkOperatorStatus(operations[i]), checkNumberStatus(operations[i + 1]));
-		});
-		return calculator.getResult();
+		String[] operations = this.operations.getOperations();
+		int result = checkNumberStatus(operations[0]);
+		Calculator calculator = new Calculator();
+		for (int i = 1; i < operations.length; i += 2) {
+			calculator.init(checkOperatorStatus(operations[i]));
+			result = calculator.calculate(result, checkNumberStatus(operations[i + 1]));
+		}
+		return result;
 	}
 
 	private int checkNumberStatus(String number) {

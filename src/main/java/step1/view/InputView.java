@@ -1,11 +1,11 @@
-package step1.view.input;
+package step1.view;
 
 import java.util.Scanner;
 
-public class InputViewImpl implements InputView {
+public class InputView {
 	public final Scanner scanner;
 
-	public InputViewImpl(Scanner scanner) {
+	public InputView(Scanner scanner) {
 		this.scanner = scanner;
 	}
 
