@@ -17,7 +17,7 @@ public class LottoApplication {
 
         List<LottoNumber> winningNumbers = InputView.readWinningNumbers();
         LottoNumber bonusBall = InputView.readBonusBall();
-        ResultView.printWinningStatistics(lotto.getWinningStat(winningNumbers), lotto);
+        ResultView.printWinningStatistics(lotto.getWinningStat(winningNumbers, bonusBall), lotto);
     }
 
 }

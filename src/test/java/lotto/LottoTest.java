@@ -17,6 +17,7 @@ public class LottoTest {
 
     private Lotto lotto;
     private List<LottoNumber> winningNumbers;
+    private LottoNumber bonusBall;
 
     @BeforeEach
     void setUp() {
@@ -28,16 +29,19 @@ public class LottoTest {
         lotto = new Lotto(lottoTickets);
 
         winningNumbers = LottoNumber.createLottoNumbers(1, 2, 3, 4, 5, 6);
+        bonusBall = new LottoNumber(13);
+
     }
 
     @Test
     void testGetWinningStat() {
-        Map<LottoRank, Long> winningStat = lotto.getWinningStat(winningNumbers);
+        Map<LottoRank, Long> winningStat = lotto.getWinningStat(winningNumbers, bonusBall);
         Map<LottoRank, Long> expected = Map.of(
             LottoRank.FIRST, 1L,
             LottoRank.SECOND, 0L,
             LottoRank.THIRD, 0L,
-            LottoRank.FOURTH, 2L,
+            LottoRank.FOURTH, 0L,
+            LottoRank.FIFTH, 2L,
             LottoRank.NONE, 0L
         );
 
@@ -46,7 +50,7 @@ public class LottoTest {
 
     @Test
     void testGetReturnRate() {
-        Map<LottoRank, Long> winningStat = lotto.getWinningStat(winningNumbers);
+        Map<LottoRank, Long> winningStat = lotto.getWinningStat(winningNumbers, bonusBall);
         BigDecimal returnRate = lotto.getReturnRate(winningStat);
 
         assertThat(returnRate).isEqualTo(new BigDecimal(666670).setScale(2, RoundingMode.DOWN));

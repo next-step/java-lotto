@@ -29,8 +29,9 @@ public class LottoTicketTest {
     @Test
     void testGetLottoRankWithWinningNumbers() {
         LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoNumber bonusBall = new LottoNumber(20);
 
-        assertThat(lottoTicket.getRank(winningNumbers)).isEqualTo(LottoRank.THIRD);
+        assertThat(lottoTicket.getRank(winningNumbers, bonusBall)).isEqualTo(LottoRank.FOURTH);
     }
 
     @ParameterizedTest
