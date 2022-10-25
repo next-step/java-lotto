@@ -30,6 +30,12 @@ public class InputView {
 
 	}
 
+	public int askBonusNumber() {
+		System.out.println("보너스 볼을 입력해주세요");
+		return scanner.nextInt();
+
+	}
+
 	public List<Integer> winNumber() {
 		for (String inputNumber : askWinNumber()) {
 			isValid(Integer.parseInt(inputNumber));
