@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.domain.UserInputHandler;
-
-import java.util.List;
+import lotto.util.UserInputHandler;
 
 public class InputView {
     public static int getMoney() {

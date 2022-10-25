@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.util;
+
+import lotto.domain.LottoResult;
 
 import java.util.List;
 
@@ -9,5 +11,9 @@ public class WinningsCalculator {
             totalPrize += result.getReward();
         }
         return totalPrize;
+    }
+
+    public static double calculateYield(int investment, int winnings) {
+        return (double) winnings / investment;
     }
 }

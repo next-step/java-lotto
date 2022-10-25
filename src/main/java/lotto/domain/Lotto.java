@@ -39,11 +39,7 @@ public class Lotto {
     }
 
     private int parseInt(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
+        return Integer.parseInt(number);
     }
 
     private String preprocessingData(String numbers) {
@@ -52,11 +48,15 @@ public class Lotto {
 
     public LottoResult getResult(Lotto winningLotto) {
         int matchCount = (int) lottoNumbers.stream().filter(w->winningLotto.contains(w)).count();
-        return LottoResult.values()[matchCount];
+        return LottoResult.of(matchCount);
     }
 
     private boolean contains(int number) {
         return lottoNumbers.contains(number);
+    }
+
+    public SortedSet<Integer> getLottoNumbers(){
+        return lottoNumbers;
     }
 
     @Override
@@ -74,14 +74,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    @Override
-    public String toString() {
-        List<String> result = new ArrayList<>();
-        for (int number : lottoNumbers) {
-            result.add("" + number);
-        }
-        return String.join(",", result);
     }
 }

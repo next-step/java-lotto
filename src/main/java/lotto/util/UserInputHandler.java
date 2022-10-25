@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.util;
 
 import java.security.InvalidParameterException;
 import java.util.Scanner;

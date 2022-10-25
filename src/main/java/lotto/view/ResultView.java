@@ -1,15 +1,26 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.getSize() + "개를 구매했습니다.");
-        System.out.println(lottos);
+
+        for(Lotto lotto : lottos.getLottos()){
+            printLotto(lotto);
+        }
+    }
+
+    public static void printLotto(Lotto lotto){
+         System.out.println("["+String.join(",",lotto.getLottoNumbers().stream()
+                .map(Object::toString)
+                .collect(Collectors.toList()))+"]");
     }
 
     public static void printResults(List<LottoResult> results) {

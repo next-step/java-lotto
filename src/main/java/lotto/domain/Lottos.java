@@ -35,12 +35,8 @@ public class Lottos {
         return lottos.size();
     }
 
-    @Override
-    public String toString() {
-        String result = "";
-        for (Lotto lotto : lottos) {
-            result += "[" + lotto.toString() + "]\n";
-        }
-        return result;
+    public List<Lotto> getLottos(){
+        return this.lottos;
     }
+
 }
