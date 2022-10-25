@@ -3,11 +3,9 @@ package lotto.client;
 import lotto.exception.WrongParameterException;
 import lotto.model.LottoNumber;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static lotto.client.OutputView.show;
 
@@ -22,6 +20,23 @@ public class InputView {
         show("구입금액을 입력해 주세요.");
 
         return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static int scanManualLottoCount() {
+        show("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static List<String> scanManualLottoNumber(int count) {
+        if (count == 0) return new ArrayList<>();
+
+        show("수동으로 구매할 번호를 입력해 주세요.");
+
+        return IntStream.rangeClosed(1, count)
+                .mapToObj(i -> Optional.ofNullable(SCANNER.nextLine())
+                        .orElseThrow(() -> new WrongParameterException("[입력 오류] 수동 구매 번호를 입력해주세요.")))
+                .collect(Collectors.toList());
     }
 
     public static List<LottoNumber> scanLastWinLotte() {

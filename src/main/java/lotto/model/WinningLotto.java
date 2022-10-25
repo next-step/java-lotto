@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.exception.InvalidLottoSizeException;
+import lotto.model.enumeration.Rank;
 
 import java.util.List;
 
@@ -20,15 +21,13 @@ public class WinningLotto {
         }
     }
 
-    public double matchCount(Lotto lotto) {
+    public Rank match(Lotto lotto) {
         double matchLottoCount = toIntExact(lotto.getLotto().stream()
                 .filter(lastWinningLotto::contains)
                 .count());
 
-        if (matchLottoCount == 5) {
-            return matchLottoCount + (lotto.getLotto().contains(bonusBall) ? 0.5 : 0);
-        }
+        boolean isMatchBonusBall = lotto.contains(bonusBall);
 
-        return matchLottoCount;
+        return Rank.valueOf(matchLottoCount, isMatchBonusBall);
     }
 }

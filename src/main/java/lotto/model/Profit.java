@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class Profit {
 
-    private Map<Rank, Long> lotteriesRank;
-
-    public Profit(Map<Rank, Long> lotteriesRank) {
-        this.lotteriesRank = lotteriesRank;
+    public Profit() {
+        throw new AssertionError();
     }
 
-    public long getTotalWinningMoney() {
-        return lotteriesRank.entrySet().stream()
+    public static double getReturnRate(Map<Rank, Long> lotteriesRank, int purchaseAmount) {
+        double totalAmount = lotteriesRank.entrySet().stream()
                 .mapToLong((rank) -> rank.getKey().getWinningMoney() * rank.getValue())
                 .sum();
+
+        return totalAmount / purchaseAmount;
     }
 }

@@ -7,27 +7,24 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotteries {
 
     private final List<Lotto> lotteries;
 
-    public Lotteries(List<Lotto> lotteries) {
-        this.lotteries = lotteries;
+    public Lotteries(List<Lotto> lotteries, List<Lotto> manualLotteries) {
+        this.lotteries = Stream.concat(lotteries.stream(), manualLotteries.stream())
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLotteries() {
-        return lotteries;
-    }
-
-    public int getLottoCount() {
-        return this.lotteries.size();
+        return this.lotteries;
     }
 
     public Map<Rank, Long> getLotteriesRank(WinningLotto winningLotto) {
         return lotteries.stream()
-                .map(winningLotto::matchCount)
-                .map(Rank::valueOf)
+                .map(winningLotto::match)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 

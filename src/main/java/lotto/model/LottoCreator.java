@@ -1,8 +1,4 @@
-package lotto.creator;
-
-import lotto.model.Lotteries;
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
+package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,11 +22,16 @@ public class LottoCreator {
         return new Lotto(lottoNumberList.subList(0, 6));
     }
 
-    public static Lotteries getLotteries(int purchasedAmount) {
-        List<Lotto> lotteries = IntStream.rangeClosed(1, purchasedAmount / LOTTO_PRICE)
+    public static List<Lotto> createAutoLotto(int purchasedAmount) {
+        return IntStream.rangeClosed(1, purchasedAmount / LOTTO_PRICE)
                 .mapToObj(v -> createLotto())
                 .collect(Collectors.toList());
+    }
 
-        return new Lotteries(lotteries);
+    public static List<Lotto> createManualLotto(List<String> numbers) {
+        return numbers.stream()
+                .map(number -> number.split(", "))
+                .map(Lotto::new)
+                .collect(Collectors.toList());
     }
 }
