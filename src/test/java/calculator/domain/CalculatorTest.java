@@ -41,7 +41,7 @@ public class CalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"a / 0", "가 / 0", "2+3 * 4/2"})
     void 숫자가_아닌_값이_들어오면_안된다(String input) {
-        assertThatExceptionOfType(NumberFormatException.class)
+        assertThatExceptionOfType(InvalidParameterException.class)
                 .isThrownBy(() -> {
                     Calculator.calculate(input);
                 });

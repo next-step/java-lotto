@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.util;
 
-import lotto.domain.UserInputHandler;
+import lotto.util.UserInputHandler;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
