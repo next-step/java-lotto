@@ -16,12 +16,16 @@ public class Input {
     }
 
     public static int inputPrice() {
+        System.out.println("구입금액을 입력해 주세요.");
         String input = input();
+        System.out.println();
         return Integer.parseInt(input);
     }
 
     public static int inputManuallyPurchaseCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         String input = input();
+        System.out.println();
         return Integer.parseInt(input);
     }
 
@@ -37,6 +41,7 @@ public class Input {
     }
 
     public static Number inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
         String input = input();
         return Number.of(input);
     }
