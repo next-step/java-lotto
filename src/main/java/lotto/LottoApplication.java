@@ -15,7 +15,7 @@ public class LottoApplication {
         final ManualLottos manualLottos = getManualLottos(countOfManualLotto);
 
         final int countOfAutoLotto = purchase.available() - countOfManualLotto;
-        final Lottos lottos = getLottos(countOfAutoLotto, manualLottos);
+        final Lottos lottos = purchaseLottos(countOfAutoLotto, manualLottos.getManualLottos());
 
         final WinningLotto winningLotto = WinningLotto.from(InputView.winningLottoPrint(), InputView.bonusNumberPrint());
         result(lottos, winningLotto, purchase);
@@ -28,12 +28,13 @@ public class LottoApplication {
         return ManualLottos.from(manualLottoList);
     }
 
-    private static Lottos getLottos(final int countOfAutoLotto, final ManualLottos manualLottos) {
+    private static Lottos purchaseLottos(final int countOfAutoLotto, final Lottos manualLottos) {
 
-        final Lottos lottos = new Lottos(AutoLottos.autoCreate(countOfAutoLotto));
-        ResultView.autoLottoNumberPrint(lottos);
-        lottos.add(manualLottos);
-        return lottos;
+        final List<Lotto> lottos = AutoLottos.autoCreate(countOfAutoLotto);
+        lottos.addAll(manualLottos.getLottos());
+        final Lottos totalLottos = new Lottos(lottos);
+        ResultView.autoLottoNumberPrint(totalLottos);
+        return totalLottos;
     }
 
     private static void result(final Lottos lottos, final WinningLotto winningLotto, final Purchase purchase) {
