@@ -1,6 +1,6 @@
 package lotto.strategy;
 
-import java.util.List;
+import java.util.Set;
 
 public interface LottoGenerateStrategy {
 
@@ -8,5 +8,5 @@ public interface LottoGenerateStrategy {
     int LOTTO_MAX_BOUND_NUM = 46;
     int LOTTO_MIN_NUM = 1;
 
-    List<Integer> generateLotto();
+    Set<Integer> generateLotto();
 }

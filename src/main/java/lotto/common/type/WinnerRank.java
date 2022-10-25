@@ -39,7 +39,7 @@ public enum WinnerRank {
     }
 
     public boolean isSecond(){
-        return this.winnerRankCondition.equals(new WinnerRankCondition(5, true));
+        return this == SECOND;
     }
 
     public int getReward() {

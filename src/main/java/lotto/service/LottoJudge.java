@@ -9,7 +9,6 @@ import java.util.List;
 
 public class LottoJudge {
 
-
     public static final int SECOND_PLACE_CORRECT_COUNT = 5;
 
     public RewardCalculator judge(Lottos lottos, Lotto winningLottoNumbers, String bonusNumberString) {

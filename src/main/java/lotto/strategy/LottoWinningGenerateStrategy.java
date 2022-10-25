@@ -1,7 +1,8 @@
 package lotto.strategy;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoWinningGenerateStrategy implements LottoGenerateStrategy{
@@ -13,11 +14,11 @@ public class LottoWinningGenerateStrategy implements LottoGenerateStrategy{
     }
 
     @Override
-    public List<Integer> generateLotto() {
+    public Set<Integer> generateLotto() {
         String tempWinningNumbersString = winningNumbersString.replace(" ", "");
         String[] tempWinningNumbers = tempWinningNumbersString.split(",");
         return Arrays.stream(tempWinningNumbers)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }

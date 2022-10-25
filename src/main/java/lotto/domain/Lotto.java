@@ -11,18 +11,18 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int MAX_SIZE = 6;
-    private final List<Integer> lottoNums;
+    private static final int DEFAULT_SIZE = 6;
+    private final Set<Integer> lottoNums;
 
     public Lotto(LottoGenerateStrategy lottoGenerateStrategy) {
         this(lottoGenerateStrategy.generateLotto());
     }
 
-    public Lotto(List<Integer> lottoNums) {
-        if(lottoNums.size() > MAX_SIZE) {
+    public Lotto(Set<Integer> lottoNums) {
+        if(lottoNums.size() > DEFAULT_SIZE) {
             throw new IllegalArgumentException("lotto cannot have number quantity bigger than 6");
         }
-        if(hasDuplicateNumbers(lottoNums)){
+        if(lottoNums.size() != DEFAULT_SIZE){
             throw new IllegalArgumentException("lotto cannot have duplicate numbers");
         }
         this.lottoNums = lottoNums;
@@ -32,7 +32,7 @@ public class Lotto {
         return lottoNums.contains(number);
     }
 
-    public List<Integer> getLottoNums() {
+    public Set<Integer> getLottoNums() {
         return lottoNums;
     }
 
@@ -51,13 +51,4 @@ public class Lotto {
         return getSameElements(winningLottoNumbers).size();
     }
 
-    private boolean hasDuplicateNumbers(List<Integer> integers){
-        Set<Integer> tmpSet = new HashSet<>();
-
-        Optional<Integer> duplicateNumber = integers.stream()
-                .filter(integer -> !tmpSet.add(integer))
-                .findAny();
-
-        return duplicateNumber.isPresent();
-    }
 }

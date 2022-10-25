@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,12 +17,12 @@ public class LottoJudgeTest {
     @Test
     @DisplayName("로또 번호와 당첨 번호가 주어졌을 때 WinnerCount 반환 확인 ")
     void testIfGetValidWinnerCount(){
-        Lotto lotto1 = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        Lotto lotto2 = new Lotto(Arrays.asList(11,2,3,4,5,6));
-        Lotto lotto3 = new Lotto(Arrays.asList(11,22,3,4,5,6));
-        Lotto lotto4 = new Lotto(Arrays.asList(11,22,33,4,5,6));
+        Lotto lotto1 = new Lotto(new TreeSet<>(Arrays.asList(1,2,3,4,5,6)));
+        Lotto lotto2 = new Lotto(new TreeSet<>(Arrays.asList(11,2,3,4,5,6)));
+        Lotto lotto3 = new Lotto(new TreeSet<>(Arrays.asList(11,22,3,4,5,6)));
+        Lotto lotto4 = new Lotto(new TreeSet<>(Arrays.asList(11,22,33,4,5,6)));
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
-        Lotto winningLottoNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto winningLottoNumbers = new Lotto(new TreeSet<>(Arrays.asList(1,2,3,4,5,6)));
 
         LottoJudge lottoJudge = new LottoJudge();
         RewardCalculator result = lottoJudge.judge(lottos, winningLottoNumbers, "7");
@@ -37,10 +38,10 @@ public class LottoJudgeTest {
     @Test
     @DisplayName("로또 번호와 보너스 당첨 번호가 주어졌을 때 WinnerCount 반환 확인 ")
     void testIfGetValidWinnerCountWithBonus(){
-        Lotto lotto1 = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        Lotto lotto2 = new Lotto(Arrays.asList(11,2,3,4,5,6));
+        Lotto lotto1 = new Lotto(new TreeSet<>(Arrays.asList(1,2,3,4,5,6)));
+        Lotto lotto2 = new Lotto(new TreeSet<>(Arrays.asList(11,2,3,4,5,6)));
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
-        Lotto winningLottoNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto winningLottoNumbers = new Lotto(new TreeSet<>(Arrays.asList(1,2,3,4,5,6)));
 
         LottoJudge lottoJudge = new LottoJudge();
         RewardCalculator result = lottoJudge.judge(lottos, winningLottoNumbers, "11");

@@ -9,7 +9,7 @@ import lotto.strategy.LottoWinningGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-public class LottoApp {
+public class LottoController {
 
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
