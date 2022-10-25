@@ -22,9 +22,9 @@ public class Lotto {
                 .count());
     }
 
-    public boolean isBonus(WinningLotto winningNumber) {
-        if (countMatch(winningNumber) == Rank.SECOND.getMatchNum()) {
-            return existedMatchNumber(winningNumber.getBonusNumber());
+    public boolean isBonus(WinningLotto winningNumbers) {
+        if (countMatch(winningNumbers) == Rank.SECOND.getMatchNum()) {
+            return existedMatchNumber(winningNumbers.getBonusNumber());
         }
         return false;
     }
