@@ -1,7 +1,7 @@
 package step2.lotto;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoTickets {
 
@@ -17,25 +17,8 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public String yield(Set<Integer> winningNumbers) {
-        double totalAmountEarned = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.rank(winningNumbers))
-                .map(Rank::prizeAmount)
-                .reduce(Double::sum)
-                .orElse(0.0);
-
-        return String.format("%.2f", totalAmountEarned / (LOTTO_PRICE * lottoTickets.size()));
-    }
-
     public void print(OutputView outputView) {
         lottoTickets.forEach(lottoTicket -> lottoTicket.print(outputView));
-    }
-
-    public Map<Rank, Long> ranks(Set<Integer> winningNumbers) {
-        return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.rank(winningNumbers))
-                .filter(rank -> rank != Rank.NOTHING)
-                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 
     @Override
@@ -50,4 +33,6 @@ public class LottoTickets {
     public int hashCode() {
         return Objects.hash(lottoTickets);
     }
+
 }
+
