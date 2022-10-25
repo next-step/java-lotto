@@ -34,6 +34,10 @@ public class LottoPurchasedAmount {
         this.amount = amount;
     }
 
+    public LottoPurchasedAmount spend(int amount) {
+        return new LottoPurchasedAmount(this.amount - amount);
+    }
+
     public int getAmount() {
         return amount;
     }
