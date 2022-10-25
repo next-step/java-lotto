@@ -1,6 +1,5 @@
 package step2.domain;
 
-
 import java.util.*;
 
 public class CountsByRank {
@@ -11,15 +10,19 @@ public class CountsByRank {
         this.countsByRank = sortByDesc(countAllRanks);
     }
 
-    public long totalRevenue() {
-        return countsByRank.entrySet().stream()
-                .map(entries -> entries.getKey().getWinningMoney() * entries.getValue() / 1000)
-                .reduce(0L, Long::sum);
-    }
-
     public CountsByRank filter(List<Rank> excludeRanks) {
         excludeRanks.forEach(countsByRank::remove);
         return this;
+    }
+
+    public float revenueRatio(int lottoPapersSize) {
+        return ((float) totalRevenue()) / lottoPapersSize;
+    }
+
+    private long totalRevenue() {
+        return countsByRank.entrySet().stream()
+                .map(entries -> entries.getKey().getWinningMoney() * entries.getValue() / 1000)
+                .reduce(0L, Long::sum);
     }
 
     private Map<Rank, Long> mergeEmptyRank(Map<Rank, Long> countsByRank) {
@@ -38,5 +41,12 @@ public class CountsByRank {
 
     public Map<Rank, Long> getCountsByRank() {
         return countsByRank;
+    }
+
+    @Override
+    public String toString() {
+        return "CountsByRank{" +
+                "countsByRank=" + countsByRank +
+                '}';
     }
 }

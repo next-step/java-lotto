@@ -1,43 +1,44 @@
 package step2.domain;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
 
-public class LottoNumber implements LottoNumberRange {
-    private final List<Integer> lottoNumber;
+public class LottoNumber {
+    private static final int MIN_LOTTO_NUMBER = 1;
 
-    public boolean isInclude(int number) {
-        return lottoNumber.contains(number);
+    private static final int MAX_LOTTO_NUMBER = 45;
+
+    protected final int lottoNumber;
+
+    public LottoNumber(int lottoNumber) {
+        validateLottoRange(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
-    public LottoNumber(List<Integer> LottoNumber) {
-        validate(LottoNumber);
-        this.lottoNumber = Collections.unmodifiableList(LottoNumber);
+    public static void validateLottoRange(int lottoNumber) {
+        if (lottoNumber > MAX_LOTTO_NUMBER || lottoNumber < MIN_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 1~45여야 합니다. 입력한 번호: " + lottoNumber);
+        }
     }
 
-    public int compareMatch(LottoNumber lottoNumber) {
-        return (int) lottoNumber.getLottoNumber().stream()
-                .filter(this.lottoNumber::contains)
-                .count();
-    }
-
-    public List<Integer> getLottoNumber() {
+    protected int getLottoNumber() {
         return lottoNumber;
     }
 
-    private void validate(List<Integer> LottoNumber) {
-        LottoNumber.forEach(this::validateNumberRange);
-//        String inValidNumber = LottoNumber.stream()
-//                .filter(number -> number > 45 || number < 1)
-//                .map(Object::toString)
-//                .collect(Collectors.joining(", "));
-//        if (inValidNumber.length() > 0) {
-//            throw new IllegalArgumentException("번호는 1~45 정수여야 합니다. 허용되지 않은 입력: " + inValidNumber);
-//        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoNumber)) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 
     @Override
     public String toString() {
-        return lottoNumber.toString();
+        return Integer.toString(lottoNumber);
     }
 }

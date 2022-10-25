@@ -1,18 +1,21 @@
 package step2.view;
 
-import step2.domain.BonusNumber;
-import step2.domain.LottoNumber;
+import step2.domain.BonusLottoNumber;
+import step2.domain.LottoPaper;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final String LOTTO_PRICE_INIT_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String LOTTO_PRICE_SUFFIX = "개를 구매했습니다.";
-    private static final String WIN_NUMBER_INIT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String BONUS_NUMBER_INIT_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String MANUAL_LOTTO_PAPER_COUNT_INIT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_PAPER_INIT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String WIN_LOTTO_PAPER_INIT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_LOTTO_NUMBER_INIT_MESSAGE = "보너스 볼을 입력해 주세요.";
+
     private static final int LOTTO_PRICE = 1000;
 
     private final Scanner scanner = new Scanner(System.in);
@@ -20,24 +23,22 @@ public class InputView {
     public int enterLottoPrice() {
         printLottoPriceInitMessage();
         String priceInput = this.scanner.nextLine();
-        int numberOfLotto = parseNumberOfLotto(priceInput);
-        System.out.println(numberOfLotto + LOTTO_PRICE_SUFFIX);
-        return numberOfLotto;
+        int totalLottoPaperCount = parseTotalLottoPaperCount(priceInput);
+        printEmptyLine();
+        return totalLottoPaperCount;
     }
 
-    public LottoNumber enterWinNumber() {
-        printWinNumberInitMessage();
-        String winNumberInput = this.scanner.nextLine();
-        List<Integer> winNumber = parseWinNumber(winNumberInput);
-        validateWinNumber(winNumber);
-        return new LottoNumber(winNumber);
+    public List<Integer> enterWinLottoPaper() {
+        printWinLottoPaperInitMessage();
+        String winLottoPaperInput = this.scanner.nextLine();
+        return parseLottoPaper(winLottoPaperInput);
     }
 
     private void printLottoPriceInitMessage() {
         System.out.println(LOTTO_PRICE_INIT_MESSAGE);
     }
 
-    private int parseNumberOfLotto(String priceInput) {
+    private int parseTotalLottoPaperCount(String priceInput) {
         int lottoPrice = stringConvertToInteger(priceInput);
         validateLottoPrice(lottoPrice);
         return lottoPrice / LOTTO_PRICE;
@@ -47,7 +48,7 @@ public class InputView {
         try {
             return Integer.parseInt(priceInput);
         } catch (Exception e) {
-            throw new IllegalArgumentException("숫자가 값은 입력할 수 없습니다. 입력한 값: " + priceInput);
+            throw new IllegalArgumentException("숫자가 아닌 값은 입력할 수 없습니다. 입력한 값: " + priceInput);
         }
     }
 
@@ -60,17 +61,17 @@ public class InputView {
         }
     }
 
-    private void printWinNumberInitMessage() {
-        System.out.println(WIN_NUMBER_INIT_MESSAGE);
+    private void printWinLottoPaperInitMessage() {
+        System.out.println(WIN_LOTTO_PAPER_INIT_MESSAGE);
     }
 
-    private List<Integer> parseWinNumber(String winNumberInput) {
-        String[] splitNumbers = winNumberInput.split(", ");
+    private List<Integer> parseLottoPaper(String lottoPaperInput) {
+        String[] splitNumbers = lottoPaperInput.split(", ");
         try {
             return convertInters(splitNumbers);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("숫자가 아닌 값은 당첨번호로 입력할 수 없습니다. 입력한 값: " + winNumberInput);
+            throw new IllegalArgumentException("숫자가 아닌 값은 입력할 수 없습니다. 입력한 값: " + lottoPaperInput);
         }
     }
 
@@ -80,23 +81,68 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    private void validateWinNumber(List<Integer> winNumber) {
-        if (winNumber.size() != 6) {
-            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다. 입력된 당첨번호 개수: " + winNumber.size());
+    private void validateLottoPaper(List<Integer> lottoPaper) {
+        if (lottoPaper.size() != 6) {
+            throw new IllegalArgumentException("번호는 6개여야 합니다. 입력된 번호 개수: " + lottoPaper.size());
         }
     }
 
-    public BonusNumber enterBonusNumber(LottoNumber winNumber) {
-        printBonusNumberInitMessage();
-        String bonusNumberInput = this.scanner.nextLine();
+    public BonusLottoNumber enterBonusLottoNumber(LottoPaper winLottoPaper) {
+        printBonusLottoNumberInitMessage();
+        String bonusLottoNumberInput = this.scanner.nextLine();
         this.scanner.close();
-        int bonusNumber = stringConvertToInteger(bonusNumberInput);
-        return new BonusNumber(bonusNumber, winNumber);
+        int bonusLottoNumber = stringConvertToInteger(bonusLottoNumberInput);
+        return new BonusLottoNumber(bonusLottoNumber, winLottoPaper);
     }
 
 
-    private void printBonusNumberInitMessage() {
-        System.out.println(BONUS_NUMBER_INIT_MESSAGE);
+    private void printBonusLottoNumberInitMessage() {
+        System.out.println(BONUS_LOTTO_NUMBER_INIT_MESSAGE);
     }
 
+    public int enterManualLottoPaperCount(int totalLottoPaperCount) {
+        printManualLottoPaperCountInitMessage();
+        String countInput = this.scanner.nextLine();
+        printEmptyLine();
+        return parseManualLottoPaperCount(countInput, totalLottoPaperCount);
+    }
+    private void printManualLottoPaperCountInitMessage() {
+        System.out.println(MANUAL_LOTTO_PAPER_COUNT_INIT_MESSAGE);
+    }
+    private int parseManualLottoPaperCount(String countInput, int totalLottoPaperCount) {
+        int manualLottoPaperCount = stringConvertToInteger(countInput);
+        validateManualLottoPaperCount(manualLottoPaperCount, totalLottoPaperCount);
+        return manualLottoPaperCount;
+    }
+
+    private void validateManualLottoPaperCount(int manualLottoPaperCount, int totalLottoPaperCount) {
+        if (manualLottoPaperCount > totalLottoPaperCount) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 구입 로또수를 넘을 수 없습니다. 수동로또수: " + manualLottoPaperCount + ", 총구매로또수: " + totalLottoPaperCount);
+        }
+    }
+
+    public List<List<Integer>> enterManualLottoPapers(int manualLottoPaperCount) {
+        printManualLottoPaperInitMessage();
+        List<List<Integer>> manualLottoPapers = IntStream.range(0, manualLottoPaperCount)
+                .mapToObj(i -> this.enterManualLottoPaper())
+                .collect(Collectors.toList());
+        printEmptyLine();
+        return manualLottoPapers;
+    }
+
+    private List<Integer> enterManualLottoPaper() {
+        String numbersInput = this.scanner.nextLine();
+        List<Integer> manualLottoPaper = parseLottoPaper(numbersInput);
+        validateLottoPaper(manualLottoPaper);
+        return manualLottoPaper;
+
+    }
+
+    private void printManualLottoPaperInitMessage() {
+        System.out.println(MANUAL_LOTTO_PAPER_INIT_MESSAGE);
+    }
+
+    private void printEmptyLine() {
+        System.out.println();
+    }
 }
