@@ -41,7 +41,6 @@ public class InputView {
     }
 
     public static List<Integer> inputLastWinner() {
-        sc.nextLine();
         System.out.println("\n" + LAST_WINNER_TEXT);
         return Arrays.stream(sc.nextLine().replace(" ", "").split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
     }

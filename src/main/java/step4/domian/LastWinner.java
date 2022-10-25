@@ -11,7 +11,19 @@ public class LastWinner {
         this.bonus = bonus;
     }
 
-    public int countSameNumber(Lotto lotto) {
+    public Prize getPrizeByComparingWithLotto(Lotto lotto) {
+        int count = countSameNumber(lotto);
+        return Prize.getPrize(count, checkBonus(count, lotto));
+    }
+
+    private boolean checkBonus(int count, Lotto lotto) {
+        if (count == 5) {
+            return lotto.isContain(this.bonus) == 1;
+        }
+        return false;
+    }
+
+    private int countSameNumber(Lotto lotto) {
         int sameCount = 0;
         for (int num : this.numbers) {
             sameCount += lotto.isContain(num);
@@ -19,10 +31,4 @@ public class LastWinner {
         return sameCount;
     }
 
-    public boolean isContainBonus(Lotto lotto) {
-        if (lotto.isContain(this.bonus) == 1) {
-            return true;
-        }
-        return false;
-    }
 }

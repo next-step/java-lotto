@@ -1,40 +1,28 @@
 package step4.domian;
 
-public enum Prize {
-    THREE_PRIZE(5_000),
-    FOUR_PRIZE(50_000),
-    FIVE_PRIZE(1_500_000),
-    FIVE_BONUS_PRIZE(30_000_000),
-    SIX_PRIZE(2_000_000_000);
+import java.util.Arrays;
 
+public enum Prize {
+    THREE_PRIZE(3, 5_000),
+    FOUR_PRIZE(4, 50_000),
+    FIVE_PRIZE(5, 1_500_000),
+    FIVE_BONUS_PRIZE(5, 30_000_000),
+    SIX_PRIZE(5, 2_000_000_000),
+    NONE(0, 0);
+
+    private final int count;
     final int prizeMoney;
 
 
-    Prize(int prizeMoney) {
+    Prize(int count, int prizeMoney) {
+        this.count = count;
         this.prizeMoney = prizeMoney;
     }
 
     public static Prize getPrize(int count, boolean isBonus) {
-        switch (count) {
-            case 3:
-                return THREE_PRIZE;
-            case 4:
-                return FOUR_PRIZE;
-            case 5:
-                return isContainBonus(isBonus);
-            case 6:
-                return SIX_PRIZE;
-            case 7:
-                return FIVE_BONUS_PRIZE;
-            default:
-                return null;
-        }
-    }
-
-    private static Prize isContainBonus(boolean isBonus) {
-        if (isBonus) {
-            return FIVE_BONUS_PRIZE;
-        }
-        return FIVE_PRIZE;
+        return Arrays.stream(Prize.values())
+                .filter(it -> it.count == count)
+                .filter(it -> (!isBonus && it != Prize.FIVE_BONUS_PRIZE) || (isBonus && it == Prize.FIVE_BONUS_PRIZE))
+                .findFirst().orElse(Prize.NONE);
     }
 }

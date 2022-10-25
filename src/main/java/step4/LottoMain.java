@@ -1,14 +1,11 @@
 package step4;
 
-import step4.domian.Lotto;
 import step4.domian.LastWinner;
 import step4.domian.LottoResult;
 import step4.domian.LottoWallet;
 import step4.domian.Revenue;
 import step4.view.InputView;
-import step4.view.ResultView;
-
-import java.util.List;
+import step4.view.ResultView;;
 
 import static step4.domian.LottoMachine.autoLottos;
 

@@ -21,10 +21,9 @@ public class LottoWallet {
     }
 
     public LottoResult compareWithLastLotto(LastWinner lastWinner) {
-        return new LottoResult(this.lottos.stream().map(lotto -> {
-                    int count = lastWinner.countSameNumber(lotto);
-                    return Prize.getPrize(count, checkBonus(count, lastWinner, lotto));
-                }).filter(it -> it != null)
+        return new LottoResult(this.lottos.stream()
+                .map(lotto -> lastWinner.getPrizeByComparingWithLotto(lotto))
+                .filter(it -> it != null)
                 .collect(Collectors.toMap(
                         prize -> prize,
                         prize -> 1L,
@@ -33,10 +32,5 @@ public class LottoWallet {
         );
     }
 
-    private boolean checkBonus(int count, LastWinner lastWinner, Lotto lotto) {
-        if (count == 5) {
-            return lastWinner.isContainBonus(lotto);
-        }
-        return false;
-    }
+
 }
