@@ -1,5 +1,6 @@
 package lottoGame.view;
 
+import lottoGame.Rank;
 import lottoGame.RankResult;
 import lottoGame.model.InputParameter;
 import lottoGame.model.lotto.Lottery;
@@ -23,10 +24,8 @@ public class ResultView {
 
     public void printStatistics(RankResult rankResult, InputParameter inputParameter) {
         System.out.printf("%s%s%n", startStatics, line);
-
         rankResult.getLotteryBoard().forEach((ranks, matchCount) ->
                 System.out.printf("%s개 일치 (%s원)- %s개\n", ranks.getMatchNum(), ranks.getRank(), matchCount));
-
         System.out.printf("총 수익률은 %s 입니다.", rankResult.getYield(inputParameter.getAmount()));
     }
 }

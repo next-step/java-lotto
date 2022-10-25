@@ -45,7 +45,8 @@ public class Lottery {
     }
 
     private static Function<Lotto, Stream<Rank>> findRank(WinningLotto winningNumber) {
-        return lotto -> Arrays.stream(Rank.values()).map(rank -> rank.findRank(lotto.countMatch(winningNumber), lotto.isBonus(winningNumber)));
+        return lotto -> Arrays.stream(Rank.values())
+                .map(rank -> rank.findRank(lotto.countMatch(winningNumber), lotto.isBonus(winningNumber)));
     }
 
 
@@ -65,9 +66,7 @@ public class Lottery {
     }
 
     private List<LottoNumber> createLottoNum() {
-        return IntStream.range(DefaultLottoNumber.MIN, DefaultLottoNumber.MAX)
-                .mapToObj(DefaultLottoNumber::new)
-                .collect(Collectors.toList());
+        return DefaultLottoNumber.getLottoNumbers();
     }
 
 

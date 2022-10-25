@@ -32,5 +32,4 @@ public class RankResult {
                 .reduce(Integer::sum)
                 .orElse(0);
     }
-
 }

@@ -2,16 +2,26 @@ package lottoGame.model.lotto.lottoNumber;
 
 import lottoGame.model.exception.InputException;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class DefaultLottoNumber implements LottoNumber {
-    public static final int MAX = 45;
-    public static final int MIN = 1;
+    private static final int MAX = 45;
+    private static final int MIN = 1;
+    private static final List<LottoNumber> lottoNumbers = IntStream.range(MIN, MAX)
+            .mapToObj(DefaultLottoNumber::new)
+            .collect(Collectors.toList());
     private int lottoNumber;
 
     public DefaultLottoNumber(int lottoNum) {
         validateNum(lottoNum);
         this.lottoNumber = lottoNum;
+    }
+
+    public static List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
@@ -21,8 +31,8 @@ public class DefaultLottoNumber implements LottoNumber {
     }
 
     @Override
-    public boolean isMatchOrNot(int winningNumber) {
-        return lottoNumber == winningNumber;
+    public boolean isMatchOrNot(int lottoNum) {
+        return lottoNumber == lottoNum;
     }
 
     public int getLottoNumber() {
