@@ -1,7 +1,7 @@
 package step2.lotto;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -17,6 +17,13 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
+    public Ranks ranks(Set<Integer> winningNumbers) {
+        List<Rank> ranks = lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.rank(winningNumbers))
+                .collect(Collectors.toUnmodifiableList());
+
+        return new Ranks(ranks);
+    }
     public void print(OutputView outputView) {
         lottoTickets.forEach(lottoTicket -> lottoTicket.print(outputView));
     }
