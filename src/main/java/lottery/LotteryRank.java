@@ -29,10 +29,19 @@ public enum LotteryRank {
 
     public static LotteryRank valueOf(int matchingCount, boolean isBonusMatched) {
         return Arrays.stream(values())
-                .filter(lotteryRank -> lotteryRank.matchingCount == matchingCount)
-                .filter(lotteryRank -> !lotteryRank.equals(SECOND) || isBonusMatched)
+                .filter(lotteryRank -> lotteryRank.isValueOf(matchingCount, isBonusMatched))
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    private boolean isValueOf(int matchingCount, boolean isBonusMatched) {
+        if (this.matchingCount != matchingCount) {
+            return false;
+        }
+        if (this == SECOND) {
+            return isBonusMatched;
+        }
+        return true;
     }
 
 }

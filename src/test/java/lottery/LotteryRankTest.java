@@ -24,17 +24,24 @@ public class LotteryRankTest {
     }
 
     @ParameterizedTest
-    @MethodSource("valueOfProvider")
-    void valueOf_일반(int matchingCount, boolean isBonusMatched, LotteryRank expectedRank) {
+    @MethodSource("등수_판단_Provider")
+    void 등수_판단(int matchingCount, boolean isBonusMatched, LotteryRank expectedRank) {
         assertThat(LotteryRank.valueOf(matchingCount, isBonusMatched)).isEqualTo(expectedRank);
     }
 
-    static Stream<Arguments> valueOfProvider() {
+    static Stream<Arguments> 등수_판단_Provider() {
         return Stream.of(
                 Arguments.of(0, true, LotteryRank.NONE),
                 Arguments.of(0, false, LotteryRank.NONE),
                 Arguments.of(1, true, LotteryRank.NONE),
                 Arguments.of(1, false, LotteryRank.NONE),
+                Arguments.of(2, true, LotteryRank.NONE),
+                Arguments.of(2, false, LotteryRank.NONE),
+
+                Arguments.of(3, true, LotteryRank.FIFTH),
+                Arguments.of(3, false, LotteryRank.FIFTH),
+                Arguments.of(4, true, LotteryRank.FOURTH),
+                Arguments.of(4, false, LotteryRank.FOURTH),
                 Arguments.of(6, true, LotteryRank.FIRST),
                 Arguments.of(6, false, LotteryRank.FIRST),
 
