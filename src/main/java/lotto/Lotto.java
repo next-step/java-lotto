@@ -56,7 +56,9 @@ public class Lotto {
     }
 
     public Long containCount(Lotto lotto) {
-        return this.numbers.stream().filter(lotto.numbers::contains).count();
+        return this.numbers.stream()
+                .filter(lotto.numbers::contains)
+                .count();
     }
 
     @Override
