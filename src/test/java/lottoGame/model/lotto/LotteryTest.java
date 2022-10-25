@@ -2,9 +2,6 @@ package lottoGame.model.lotto;
 
 import lottoGame.Rank;
 import lottoGame.RankResult;
-import lottoGame.model.lotto.Lottery;
-import lottoGame.model.lotto.Lotto;
-import lottoGame.model.lotto.WinningLotto;
 import lottoGame.model.lotto.lottoNumber.DefaultLottoNumber;
 import lottoGame.model.strategy.SecondStrategy;
 import lottoGame.model.strategy.TestShuffleStrategy;
@@ -63,7 +60,7 @@ class LotteryTest {
                 new DefaultLottoNumber(7)));
         Lottery lottery = new Lottery();
         lottery.create(1, new SecondStrategy());
-        RankResult rankResult = lottery.createRankResult(lotto, new RankResult());
+        RankResult rankResult = lottery.fillRankResult(lotto, new RankResult());
         System.out.println(rankResult.getLotteryBoard());
     }
 
@@ -75,7 +72,7 @@ class LotteryTest {
         testResult.putResult(matchNum);
         Lottery lottery = new Lottery();
         lottery.create(1, testShuffleStrategy);
-        assertThat(lottery.createRankResult(lotto,new RankResult()).getLotteryBoard()).isEqualTo(testResult.getLotteryBoard());
+        assertThat(lottery.fillRankResult(lotto,new RankResult()).getLotteryBoard()).isEqualTo(testResult.getLotteryBoard());
     }
 
 }

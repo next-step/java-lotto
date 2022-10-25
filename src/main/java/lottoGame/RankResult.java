@@ -20,9 +20,9 @@ public class RankResult {
         return lotteryBoard;
     }
 
-    public BigDecimal getYield(Double amount) {
+    public BigDecimal getYield() {
 
-        return BigDecimal.valueOf(getTotalSum() / amount).setScale(2, RoundingMode.FLOOR);
+        return BigDecimal.valueOf(getTotalSum() / (countLotto() * LottoGame.TICKET_PRICE)).setScale(2, RoundingMode.FLOOR);
     }
 
     private Integer getTotalSum() {
@@ -32,4 +32,12 @@ public class RankResult {
                 .reduce(Integer::sum)
                 .orElse(0);
     }
+
+    private Integer countLotto() {
+        return lotteryBoard.values()
+                .stream()
+                .reduce(Integer::sum)
+                .orElseThrow();
+    }
+
 }

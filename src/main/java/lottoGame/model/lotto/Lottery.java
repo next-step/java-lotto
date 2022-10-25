@@ -7,10 +7,7 @@ import lottoGame.model.lotto.lottoNumber.LottoNumber;
 import lottoGame.model.strategy.ShuffleStrategy;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Lottery {
 
@@ -24,7 +21,7 @@ public class Lottery {
         return lottery;
     }
 
-    public RankResult createRankResult(WinningLotto winningNumber, RankResult rankResult) {
+    public RankResult fillRankResult(WinningLotto winningNumber, RankResult rankResult) {
         rankResult.putResult(findRanks(winningNumber));
         return rankResult;
     }

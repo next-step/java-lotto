@@ -1,7 +1,6 @@
 package lottoGame.view;
 
 import lottoGame.model.exception.InputException;
-import lottoGame.model.InputParameter;
 import lottoGame.model.lotto.Lotto;
 import lottoGame.model.lotto.WinningLotto;
 import lottoGame.model.lotto.lottoNumber.DefaultLottoNumber;
@@ -18,11 +17,11 @@ public class InputView {
     private static final String inputWinningNum = "지난 주 당첨 번호를 입력해주세요";
     private static final String inputBonus = "보너스 볼을 입력해주세요";
 
-    public static InputParameter print() {
+    public static double print() {
         System.out.println("구입금액을 입력해 주세요.");
         double amount = scanner.nextDouble();
         validateInput(amount);
-        return new InputParameter(amount);
+        return amount;
     }
 
     public static WinningLotto inputWinningNumer() {
