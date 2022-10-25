@@ -4,22 +4,22 @@ import java.util.List;
 
 public class Lotto {
 
-    private final LottoNumbers lottoNumbers;
+    private final LottoResult lottoResult;
 
     public Lotto(List<Integer> lottoNumberList) {
-        this(new LottoNumbers(lottoNumberList));
+        this(new LottoResult(lottoNumberList));
     }
 
-    public Lotto(LottoNumbers lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(LottoResult lottoResult) {
+        this.lottoResult = lottoResult;
     }
 
     public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers.getLottoNumberList();
+        return this.lottoResult.getLottoNumbers();
     }
 
-    public Rank rank(LottoNumbers winnerLottoNumbers) {
-        return lottoNumbers.getMatchCount(winnerLottoNumbers);
+    public Rank rank(LottoResult winnerLottoResult) {
+        return lottoResult.getMatchCount(winnerLottoResult);
     }
 
 }

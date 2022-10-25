@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
@@ -33,15 +33,15 @@ public class LottoGameController {
     private static List<Rank> getRank(LottoTickets lottoTickets) {
         List<Integer> winnerNumberList = inputWinnerNumberList();
         Integer bonusNumber = inputBonusNumber();
-        List<Rank> rankList = lottoTickets.putRankings(new LottoNumbers(winnerNumberList, bonusNumber));
+        List<Rank> rankList = lottoTickets.putRankings(new LottoResult(winnerNumberList, bonusNumber));
         printRanks(rankList);
         return rankList;
     }
 
     private static LottoTickets getLottoTickets(PurchasePrice purchasePrice) {
-        LottoTickets pickedLottoTickets = new LottoTickets(purchasePrice).pickNumbers();
-        printLottoNumbers(pickedLottoTickets);
-        return pickedLottoTickets;
+        LottoTickets lottoTickets = new LottoTickets(purchasePrice).pickNumbers();
+        printLottoNumbers(lottoTickets);
+        return lottoTickets;
     }
 
     private static PurchasePrice getPurchasePrice() {

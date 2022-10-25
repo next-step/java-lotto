@@ -33,20 +33,20 @@ public enum Rank {
                 .orElse(MISS);
     }
 
-    public static Rank getRank(LottoNumbers lottoNumbers, LottoNumbers winnerLottoNumbers) {
-        int count = getCount(lottoNumbers, winnerLottoNumbers);
+    public static Rank getRank(LottoResult lottoResult, LottoResult winnerLottoResult) {
+        int count = getCount(lottoResult, winnerLottoResult);
 
         if (count == THIRD.getCountOfMatch()) {
-            return lottoNumbers.getLottoNumberList().contains(winnerLottoNumbers.getBonusNumber()) ? Rank.SECOND : Rank.THIRD;
+            return lottoResult.getLottoNumbers().contains(winnerLottoResult.getBonusNumber()) ? Rank.SECOND : Rank.THIRD;
         }
 
         return valueOf(count);
     }
 
-    private static int getCount(LottoNumbers lottoNumbers, LottoNumbers winnerLottoNumbers) {
-        return (int) lottoNumbers.getLottoNumberList()
+    private static int getCount(LottoResult lottoResult, LottoResult winnerLottoResult) {
+        return (int) lottoResult.getLottoNumbers()
                 .stream()
-                .filter(winnerLottoNumbers.getLottoNumberList()::contains)
+                .filter(winnerLottoResult.getLottoNumbers()::contains)
                 .count();
     }
 }

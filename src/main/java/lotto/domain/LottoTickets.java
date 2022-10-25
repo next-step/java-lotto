@@ -36,9 +36,9 @@ public class LottoTickets {
         return this;
     }
 
-    public List<Rank> putRankings(LottoNumbers winnerLottoNumbers) {
+    public List<Rank> putRankings(LottoResult winnerLottoResult) {
         List<Rank> rankList = new ArrayList<>();
-        this.lottoList.forEach(l -> rankList.add(l.rank(winnerLottoNumbers)));
+        this.lottoList.forEach(l -> rankList.add(l.rank(winnerLottoResult)));
         return rankList;
     }
 

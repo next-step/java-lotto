@@ -25,12 +25,12 @@ class LottoTest {
     void rank() {
         // given
         List<Integer> lottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 10, 12, 13));
+        LottoResult lottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6));
+        LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 10, 12, 13));
 
         // when
         Lotto lotto = new Lotto(lottoNumberList);
-        Rank rank = lotto.rank(winnerLottoNumbers);
+        Rank rank = lotto.rank(winnerLottoResult);
 
         // then
         assertThat(rank).isEqualTo(Rank.FIFTH);

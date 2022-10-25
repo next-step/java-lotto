@@ -29,12 +29,12 @@ class LottoTicketsTest {
     void rank() {
         // given
         Integer purchasePrice = 14000;
-        LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6));
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
-        List<Rank> rankList = pickedLottoTickets.putRankings(winnerLottoNumbers);
+        List<Rank> rankList = pickedLottoTickets.putRankings(winnerLottoResult);
 
         // then
         assertThat(rankList).isNotNull();
@@ -45,12 +45,12 @@ class LottoTicketsTest {
     void getRank() {
         // given
         Integer purchasePrice = 14000;
-        LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6));
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
-        List<Rank> rankList = pickedLottoTickets.putRankings(winnerLottoNumbers);
+        List<Rank> rankList = pickedLottoTickets.putRankings(winnerLottoResult);
 
         // then
         assertThat(rankList).hasSize(14);
@@ -63,11 +63,11 @@ class LottoTicketsTest {
         Integer purchasePrice = 1000;
         List<Integer> lottoNumberList = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumberList);
-        LottoNumbers winnerLottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoResult winnerLottoResult = new LottoResult(lottoNumberList);
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), List.of(lotto));
-        List<Rank> rankList = lottoTickets.putRankings(winnerLottoNumbers);
+        List<Rank> rankList = lottoTickets.putRankings(winnerLottoResult);
         BigDecimal yield = lottoTickets.getYield(rankList);
 
         // then

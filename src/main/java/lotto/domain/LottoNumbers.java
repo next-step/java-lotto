@@ -4,38 +4,27 @@ import lotto.exception.InvalidInputException;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private static final Integer MATCH_NUMBER_LIST_SIZE = 6;
-    private static final String VALIDATE_MATCH_NUMBER_SIZE_MESSAGE = "당첨 번호는 중복되지 않는 " + MATCH_NUMBER_LIST_SIZE + "개 숫자를 입력해 주세요.";
-    private static final String VALIDATE_BONUS_NUMBER = "보너스 볼은 지난 주 당첨 번호와 중복될 수 없습니다.";
+    private static final String VALIDATE_MATCH_NUMBER_SIZE_MESSAGE = "중복되지 않는 " + MATCH_NUMBER_LIST_SIZE + "개 숫자를 입력해 주세요.";
 
-    private final List<Integer> lottoNumberList;
-    private Integer bonusNumber;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumberList, Integer bonusNumber) {
-        this.lottoNumberList = validateLottoNumberList(lottoNumberList);
-        this.bonusNumber = validateBonusNumber(bonusNumber);
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        this.lottoNumbers = validateLottoNumbers(lottoNumbers)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public LottoNumbers(List<Integer> lottoNumberList) {
-        this.lottoNumberList = validateLottoNumberList(lottoNumberList);
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
     }
 
-    public List<Integer> getLottoNumberList() {
-        return lottoNumberList;
-    }
-
-    public Integer getBonusNumber() {
-        return bonusNumber;
-    }
-
-    public Rank getMatchCount(LottoNumbers winnerLottoNumbers) {
-        return Rank.getRank(this, winnerLottoNumbers);
-    }
-
-    private List<Integer> validateLottoNumberList(List<Integer> matchNumberList) {
+    private List<Integer> validateLottoNumbers(List<Integer> matchNumberList) {
         Integer deduplicationNumberListSize = getDeduplicationNumberListSize(matchNumberList);
         if (!(deduplicationNumberListSize.equals(MATCH_NUMBER_LIST_SIZE))) {
             throw new InvalidInputException(VALIDATE_MATCH_NUMBER_SIZE_MESSAGE);
@@ -46,12 +35,4 @@ public class LottoNumbers {
     private Integer getDeduplicationNumberListSize(List<Integer> matchNumberList) {
         return new HashSet<>(matchNumberList).size();
     }
-
-    private Integer validateBonusNumber(Integer bonusNumber) {
-        if (this.getLottoNumberList().contains(bonusNumber)) {
-            throw new InvalidInputException(VALIDATE_BONUS_NUMBER);
-        }
-        return bonusNumber;
-    }
-
 }
