@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.util.NumberUtil.makeAutoNumberList;
+
 public class LottoTickets {
 
     private final PurchasePrice purchasePrice;
@@ -27,7 +29,7 @@ public class LottoTickets {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < this.purchasePrice.getAmount(); i++) {
-            lottoList.add(new Lotto());
+            lottoList.add(new Lotto(makeAutoNumberList()));
         }
 
         this.lottoList = lottoList;

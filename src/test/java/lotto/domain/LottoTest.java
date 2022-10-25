@@ -13,7 +13,8 @@ class LottoTest {
     @DisplayName("로또 생성 중복 확인")
     void auto() {
         // given
-        Lotto lotto = new Lotto();
+        List<Integer> lottoNumberList = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(lottoNumberList);
 
         // expected
         assertThat(lotto.getLottoNumbers()).isEqualTo(lotto.getLottoNumbers());
@@ -23,11 +24,12 @@ class LottoTest {
     @DisplayName("로또 랭크 확인")
     void rank() {
         // given
+        List<Integer> lottoNumberList = List.of(1, 2, 3, 4, 5, 6);
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 10, 12, 13));
 
         // when
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(lottoNumberList);
         Rank rank = lotto.rank(winnerLottoNumbers);
 
         // then

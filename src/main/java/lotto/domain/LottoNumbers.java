@@ -5,8 +5,6 @@ import lotto.exception.InvalidInputException;
 import java.util.HashSet;
 import java.util.List;
 
-import static lotto.util.NumberUtil.makeAutoNumberList;
-
 public class LottoNumbers {
 
     private static final Integer MATCH_NUMBER_LIST_SIZE = 6;
@@ -15,10 +13,6 @@ public class LottoNumbers {
 
     private final List<Integer> lottoNumberList;
     private Integer bonusNumber;
-
-    public LottoNumbers() {
-        this(makeAutoNumberList());
-    }
 
     public LottoNumbers(List<Integer> lottoNumberList, Integer bonusNumber) {
         this.lottoNumberList = validateLottoNumberList(lottoNumberList);

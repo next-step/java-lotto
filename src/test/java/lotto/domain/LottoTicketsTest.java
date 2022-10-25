@@ -61,8 +61,9 @@ class LottoTicketsTest {
     void getYield() {
         // given
         Integer purchasePrice = 1000;
-        Lotto lotto = new Lotto();
-        LottoNumbers winnerLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        List<Integer> lottoNumberList = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(lottoNumberList);
+        LottoNumbers winnerLottoNumbers = new LottoNumbers(lottoNumberList);
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), List.of(lotto));

@@ -6,8 +6,8 @@ public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
-    public Lotto() {
-        this(new LottoNumbers());
+    public Lotto(List<Integer> lottoNumberList) {
+        this(new LottoNumbers(lottoNumberList));
     }
 
     public Lotto(LottoNumbers lottoNumbers) {
