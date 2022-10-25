@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.exceptions.LottoNumberFormatException;
 
 public class Lotto {
     protected static final int LOTTO_NUMBERS_SIZE = 6;
@@ -24,16 +25,23 @@ public class Lotto {
         return new Lotto(numbers
                 .stream()
                 .limit(LOTTO_NUMBERS_SIZE)
+                .sorted()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList())
         );
     }
 
     public static Lotto createByString(String string) {
-        return new Lotto(Arrays.stream(string.split(","))
-                .map(String::trim)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+        try {
+            return new Lotto(Arrays.stream(string.split(","))
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .sorted()
+                    .map(LottoNumber::of)
+                    .collect(Collectors.toList()));
+        } catch (NumberFormatException e) {
+            throw new LottoNumberFormatException(string);
+        }
     }
 
     private Lotto(List<LottoNumber> lottoNumbers) {
