@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_START = 0;
+    private static final int LOTTO_NUMBER_END = 6;
     private static final String DELIMITER = ", ";
 
     private final List<Number> lotto;
@@ -25,21 +26,29 @@ public class Lotto {
 
     public static Lotto from(final List<Integer> lottoNumber) {
 
-        return new Lotto(convert(lottoNumber));
+        return new Lotto(convert(pick(lottoNumber)));
+    }
+
+    private static List<Integer> pick(final List<Integer> lottoNumber) {
+
+        return lottoNumber.subList(LOTTO_NUMBER_START, LOTTO_NUMBER_END)
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private static List<Number> split(final String input) {
 
         return Arrays.stream(input.split(DELIMITER))
                 .sorted()
-                .map(number -> new Number(Integer.parseInt(number)))
+                .map(Number::from)
                 .collect(Collectors.toList());
     }
 
     private static void validateSize(final List<Number> lottoNumbers) {
 
         final Set<Number> numbers = new HashSet<>(lottoNumbers);
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+        if (numbers.size() != LOTTO_NUMBER_END) {
             throw new IllegalArgumentException("6개의 숫자를 입력해야 하며 중복 숫자는 입력할 수 없습니다.");
         }
     }
@@ -56,18 +65,9 @@ public class Lotto {
         return Collections.unmodifiableList(this.lotto);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    public boolean matchBonus(final Number bonusNumber) {
 
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lotto, lotto1.lotto);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(lotto);
+        return this.getLotto()
+                .contains(bonusNumber);
     }
 }
