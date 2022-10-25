@@ -1,13 +1,11 @@
 import java.util.*;
+import java.util.function.IntBinaryOperator;
 
 public class Calculator {
 
-    private final List<String> numbersAndOps;
+    private static final Map<String, IntBinaryOperator> OPERATOR_MAP = Map.of("+", (a, b) -> a + b, "-", (a, b) -> a - b, "/", (a, b) -> a / b, "*", (a, b) -> a * b);
 
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String DIVIDE = "/";
-    private static final String MULTIPLY = "*";
+    private final List<String> numbersAndOps;
 
     public Calculator(String[] numbersAndOps) {
         validateArgument(numbersAndOps);
@@ -56,21 +54,11 @@ public class Calculator {
     }
 
     private int calculateOperation(int left, int right, String operator) {
-        switch (operator) {
-            case PLUS:
-                return left + right;
-            case MINUS:
-                return left - right;
-            case DIVIDE:
-                return left / right;
-            case MULTIPLY:
-                return left * right;
-            default:
-                throw new IllegalArgumentException();
-        }
+        IntBinaryOperator operateFunction = OPERATOR_MAP.get(operator);
+        return operateFunction.applyAsInt(left, right);
     }
 
     private boolean isOperator(String unit) {
-        return unit.equals(PLUS) || unit.equals(MINUS) || unit.equals(DIVIDE) || unit.equals(MULTIPLY);
+        return OPERATOR_MAP.containsKey(unit);
     }
 }
