@@ -18,7 +18,7 @@ public class OutputView {
 
     public static void outputResult(GameResult gameResult) {
         double result = gameResult.getResult();
-        Map<Rank, Integer> rankCount = RankMap.getRankMap();
+        Map<Rank, Integer> rankCount = gameResult.getRankCount();
 
         System.out.println("\n당첨 통계\n" +
                 "---------");

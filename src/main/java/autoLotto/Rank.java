@@ -41,7 +41,7 @@ public enum Rank {
                 .findFirst()
                 .orElse(ranks[MISS_RANK]);
 
-        RankMap.count(rank);
+//        RankMap.count(rank);
 
         return rank.winningMoney;
     }
@@ -62,12 +62,12 @@ public enum Rank {
     }
 
     private static int getSecondRank(Rank rank) {
-        RankMap.count(rank);
+//        RankMap.count(rank);
         return rank.winningMoney;
     }
 
     private static int getThirdRank(Rank rank) {
-        RankMap.count(rank);
+//        RankMap.count(rank);
         return rank.winningMoney;
     }
 }
