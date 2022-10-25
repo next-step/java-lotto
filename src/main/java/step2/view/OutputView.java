@@ -1,8 +1,8 @@
 package step2.view;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import step2.model.Lotteries;
+import step2.model.Rank;
 
 public class OutputView {
 
@@ -11,12 +11,12 @@ public class OutputView {
 	private static final int MAX_WIN_COUNT = 6;
 	private static final int BENEFIT_STANDARD = 1;
 
-	public void resultView(HashMap<Integer, Integer> finalMatch) {
+	public void resultView(HashMap<Integer, Integer> totalCount) {
 		System.out.println("당첨 통계");
 		System.out.println("--------");
 
 		for (int key = MIN_WIN_COUNT; key <= MAX_WIN_COUNT; key++) {
-			showResult(key, isValid(finalMatch.get(key)));
+			showResult(key, isValid(totalCount.get(key)));
 		}
 	}
 
@@ -28,17 +28,9 @@ public class OutputView {
 	}
 
 	private void showResult(int key, int matchSum) {
-		if (key == MIN_WIN_COUNT) {
-			System.out.println("3개 일치" + "(5000원)- " + matchSum + "개");
-		}
-		if (key == MIN_WIN_COUNT + 1) {
-			System.out.println("4개 일치" + "(50000원)- " + matchSum + "개");
-		}
-		if (key == MIN_WIN_COUNT + 2) {
-			System.out.println("5개 일치" + "(1500000원)- " + matchSum + "개");
-		}
-		if (key == MAX_WIN_COUNT) {
-			System.out.println("6개 일치" + "(2000000000원)- " + matchSum + "개");
+		if (key >= MIN_WIN_COUNT && key <= MAX_WIN_COUNT) {
+			System.out.printf("%s개 일치" + "(%d)- " + matchSum + "개\n",
+				Rank.of(key).getCountOfMatch(), Rank.of(key).getWinningMoney());
 		}
 	}
 
@@ -47,7 +39,7 @@ public class OutputView {
 	}
 
 	public void showLotteries(int tickets, Lotteries lotteries) {
-		for (int i = 0; i < tickets; i++) {
+		for (int i = DEFAULT_COUNT; i < tickets; i++) {
 			System.out.println(lotteries.showLotteries(i).getLotto());
 		}
 	}
@@ -67,7 +59,7 @@ public class OutputView {
 		return true;
 	}
 
-	private void defaultMessage(double rate){
+	private void defaultMessage(double rate) {
 		System.out.println("수익률은 " + String.format("%.2f", rate) + "입니다");
 	}
 
