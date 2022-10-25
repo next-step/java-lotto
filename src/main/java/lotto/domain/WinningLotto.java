@@ -41,8 +41,7 @@ public class WinningLotto {
 
     public boolean matchBonus(final Lotto lotto) {
 
-        return lotto.getLotto()
-                .contains(this.bonusNumber);
+        return  lotto.matchBonus(this.bonusNumber);
     }
 
     public List<Number> getWinnerLotto() {
