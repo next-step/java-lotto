@@ -5,14 +5,7 @@ public class Calculator {
 
     private static final Map<String, IntBinaryOperator> OPERATOR_MAP = Map.of("+", (a, b) -> a + b, "-", (a, b) -> a - b, "/", (a, b) -> a / b, "*", (a, b) -> a * b);
 
-    private final List<String> numbersAndOps;
-
-    public Calculator(String[] numbersAndOps) {
-        validateArgument(numbersAndOps);
-        this.numbersAndOps = new ArrayList<>(Arrays.asList(numbersAndOps));
-    }
-
-    public int calculate() {
+    public int calculate(List<String> numbersAndOps) {
         Deque<Integer> numbers = new LinkedList<>();
         Deque<String> operators = new LinkedList<>();
         while (!numbersAndOps.isEmpty()) {
@@ -37,12 +30,6 @@ public class Calculator {
             return;
         }
         numbers.push(toInt(unit));
-    }
-
-    private void validateArgument(String[] numbersAndOps) {
-        if (numbersAndOps.length == 0 || Arrays.stream(numbersAndOps).anyMatch(String::isBlank)) {
-            throw new IllegalArgumentException("array is empty or not valid element");
-        }
     }
 
     private int toInt(String unit) {

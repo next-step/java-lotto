@@ -3,6 +3,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
@@ -22,7 +24,7 @@ public class CalculatorTest {
     }
 
     private int calculateResult(String expression) {
-        String[] numbersAndOps = expression.split(" ");
-        return new Calculator(numbersAndOps).calculate();
+        List<String> numbersAndOps = InputNumbers.inputNumbers(expression);
+        return new Calculator().calculate(numbersAndOps);
     }
 }
