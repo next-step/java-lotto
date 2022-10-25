@@ -1,6 +1,5 @@
 package lotto;
 
-import calculator.Operation;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
