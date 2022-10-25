@@ -1,11 +1,10 @@
 package lotto.services;
 
 import lotto.models.IssuedLotto;
-import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.WinningLotto;
 import lotto.models.enums.Rank;
-import lotto.models.request.PaymentRequest;
+import lotto.models.request.IssueLottoRequest;
 
 import java.util.*;
 import java.util.function.Function;
@@ -25,14 +24,14 @@ public class LottoStatisticsService {
         return new ArrayList<>(lottoStatisticsByRank.values());
     }
 
-    public float getRevenueRatio(List<LottoStatistics> lottoStatistics, PaymentRequest paymentRequest) {
+    public float getRevenueRatio(List<LottoStatistics> lottoStatistics, IssueLottoRequest issueLottoRequest) {
         long totalAmount = lottoStatistics.stream()
                 .filter(statistics -> statistics.getCount() > 0)
                 .map(statistics -> statistics.getRank().getAmount())
                 .mapToLong(Long::longValue)
                 .sum();
 
-        return calculateRevenueRatio(paymentRequest.getPayment(), totalAmount);
+        return calculateRevenueRatio(issueLottoRequest.getPayment(), totalAmount);
     }
 
     private float calculateRevenueRatio(int payment, long totalAmount) {

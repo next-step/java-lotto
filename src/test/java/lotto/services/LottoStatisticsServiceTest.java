@@ -1,23 +1,18 @@
 package lotto.services;
 
 import lotto.models.IssuedLotto;
-import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.WinningLotto;
+import lotto.models.enums.IssueType;
 import lotto.models.enums.Rank;
-import lotto.models.request.LottoNumberRequest;
-import lotto.models.request.PaymentRequest;
+import lotto.models.request.IssueLottoRequest;
 import lotto.models.request.WinningLottoRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,21 +27,21 @@ class LottoStatisticsServiceTest {
 
     @BeforeAll
     static void setLotto() {
-        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6)));
-        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 7, 8, 9)));
-        lottos.add(IssuedLotto.of(List.of(11, 12, 13, 14, 15, 16)));
+        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.manual));
+        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 7, 8, 9), IssueType.manual));
+        lottos.add(IssuedLotto.of(List.of(11, 12, 13, 14, 15, 16), IssueType.manual));
     }
 
     @BeforeAll
     static void setDuplicatedLottos() {
-        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6)));
-        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6)));
-        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.manual));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.manual));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.manual));
     }
 
     @BeforeAll
     static void setWinningLotto() {
-        winningLotto = WinningLotto.from(WinningLottoRequest.of(LottoNumberRequest.of(WINNING_NUMBER), 10));
+        winningLotto = WinningLotto.from(WinningLottoRequest.of(WINNING_NUMBER, 10));
     }
 
     @Test
@@ -87,7 +82,7 @@ class LottoStatisticsServiceTest {
                 .mapToLong(Long::longValue)
                 .sum();
 
-        assertThat(lottoStatisticsService.getRevenueRatio(lottoStatistics, PaymentRequest.of(PAYMENT))).isEqualTo(totalAmount / (PAYMENT / 1000f * 1000));
+        assertThat(lottoStatisticsService.getRevenueRatio(lottoStatistics, IssueLottoRequest.of(PAYMENT, new ArrayList<>()))).isEqualTo(totalAmount / (PAYMENT / 1000f * 1000));
     }
 
 }

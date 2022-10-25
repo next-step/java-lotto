@@ -1,9 +1,7 @@
 package lotto.models.enums;
 
 import lotto.models.IssuedLotto;
-import lotto.models.Lotto;
 import lotto.models.WinningLotto;
-import lotto.models.request.LottoNumberRequest;
 import lotto.models.request.WinningLottoRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -24,22 +22,22 @@ class RankTest {
 
     @BeforeAll
     static void setLotto() {
-        List<LottoNumberRequest> lottoNumberRequest = new ArrayList<>();
-        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 4, 5, 6"));
-        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 4, 5, 7"));
-        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 4, 5, 10"));
-        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 4, 10, 11"));
-        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 10, 11, 12"));
-        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 10, 11, 12, 13"));
-        lottoNumberRequest.add(LottoNumberRequest.of("1, 10, 11, 12, 13, 14"));
-        lottoNumberRequest.add(LottoNumberRequest.of("10, 11, 12, 13, 14, 15"));
+        List<String> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add("1, 2, 3, 4, 5, 6");
+        lottoNumbers.add("1, 2, 3, 4, 5, 7");
+        lottoNumbers.add("1, 2, 3, 4, 5, 10");
+        lottoNumbers.add("1, 2, 3, 4, 10, 11");
+        lottoNumbers.add("1, 2, 3, 10, 11, 12");
+        lottoNumbers.add("1, 2, 10, 11, 12, 13");
+        lottoNumbers.add("1, 10, 11, 12, 13, 14");
+        lottoNumbers.add("10, 11, 12, 13, 14, 15");
 
-        lottoNumberRequest.forEach(req -> lottos.add(IssuedLotto.from(req)));
+        lottoNumbers.forEach(req -> lottos.add(IssuedLotto.of(req, IssueType.manual)));
     }
 
     @BeforeAll
     static void setWinningLotto() {
-        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(LottoNumberRequest.of(WINNING_NUMBER), BONUS_NUMBER);
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(WINNING_NUMBER, BONUS_NUMBER);
         winningLotto = WinningLotto.from(winningLottoRequest);
     }
 
