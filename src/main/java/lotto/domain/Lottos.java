@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Lottos {
 
-    public static final int MATCH_COUNT_FIVE = 5;
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
@@ -23,20 +22,10 @@ public class Lottos {
 
         List<WinningPrize> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            final int countOfMatch = winningLotto.match(lotto);
-            final boolean bonusResult = canMatch(winningLotto, lotto, countOfMatch);
-            final WinningPrize winningPrize = WinningPrize.from(countOfMatch, bonusResult);
+            final WinningPrize winningPrize = WinningPrize.of(winningLotto, lotto);
             result.add(winningPrize);
         }
         return result;
-    }
-
-    private boolean canMatch(final WinningLotto winningLotto, final Lotto lotto, final int countOfMatch) {
-
-        if (countOfMatch == MATCH_COUNT_FIVE) {
-            return winningLotto.matchBonus(lotto);
-        }
-        return false;
     }
 
     public void add(final ManualLottos manualLottos) {
