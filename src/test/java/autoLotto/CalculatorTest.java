@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +17,14 @@ public class CalculatorTest {
         calculator = new Calculator();
         result = new GameResult();
 
-        lottos = new Lottos(new Lotto(new Integer[]{3, 5, 7, 11, 45, 23}));
+        lottos = new Lottos(getLottos());
+    }
+
+    private List<Lotto> getLottos() {
+        Lotto lotto = new Lotto(new Integer[]{3, 5, 7, 11, 45, 23});
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(lotto);
+        return lottoList;
     }
 
     @Test

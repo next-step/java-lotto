@@ -1,9 +1,12 @@
 package autoLotto;
 
+import java.util.List;
+
 public class AutoLotto {
 
     public static void run() {
-        Lottos lottos = new Lottos(InputView.inputAmount());
+        List<Lotto> lottoList = LottoFactory.makeLotto(InputView.inputAmount());
+        Lottos lottos = new Lottos(lottoList);
         GameResult result = new GameResult();
 
         OutputView.outputQuantity(lottos);
