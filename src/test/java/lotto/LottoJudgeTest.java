@@ -25,10 +25,9 @@ public class LottoJudgeTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
         Lotto winningLottoNumbers = new Lotto(new TreeSet<>(Arrays.asList(1,2,3,4,5,6)));
 
-        LottoJudge lottoJudge = new LottoJudge();
-        RewardCalculator result = lottoJudge.judge(lottos, new WinningLotto(winningLottoNumbers, 7));
+        Reward result = lottos.countWinningNumbers(new WinningLotto(winningLottoNumbers, 7));
 
-        RewardCalculator expected = new RewardCalculator();
+        Reward expected = new Reward();
         expected.plusCount(WinnerRank.FIRST);
         expected.plusCount(WinnerRank.THIRD);
         expected.plusCount(WinnerRank.FORTH);
@@ -44,10 +43,9 @@ public class LottoJudgeTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
         Lotto winningLottoNumbers = new Lotto(new TreeSet<>(Arrays.asList(1,2,3,4,5,6)));
 
-        LottoJudge lottoJudge = new LottoJudge();
-        RewardCalculator result = lottoJudge.judge(lottos, new WinningLotto(winningLottoNumbers, 11));
+        Reward result = lottos.countWinningNumbers(new WinningLotto(winningLottoNumbers, 11));
 
-        RewardCalculator expected = new RewardCalculator();
+        Reward expected = new Reward();
         expected.plusCount(WinnerRank.FIRST);
         expected.plusCount(WinnerRank.SECOND);
         assertThat(result).isEqualTo(expected);

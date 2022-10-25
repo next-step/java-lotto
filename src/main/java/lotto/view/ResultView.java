@@ -1,9 +1,8 @@
 package lotto.view;
 
 import lotto.common.type.WinnerRank;
-import lotto.common.type.WinnerRankCondition;
 import lotto.domain.Lottos;
-import lotto.service.RewardCalculator;
+import lotto.service.Reward;
 
 public class ResultView {
 
@@ -19,9 +18,9 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    public void printAllResult(RewardCalculator rewardCalculator, double profitRatio){
+    public void printAllResult(Reward reward, double profitRatio){
         System.out.println(RESULT_BANNER);
-        rewardCalculator.getWinnerCount().forEach(this::printEachResult);
+        reward.getWinnerCount().forEach(this::printEachResult);
         System.out.printf(RATIO_PRINT_FORMAT, profitRatio);
     }
 

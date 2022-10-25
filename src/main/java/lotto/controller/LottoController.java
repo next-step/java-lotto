@@ -18,8 +18,7 @@ public class LottoController {
         resultView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.getWinningNumbers();
-        LottoJudge lottoJudge = new LottoJudge();
-        RewardCalculator rewardCalculator = lottoJudge.judge(lottos, winningLotto);
-        resultView.printAllResult(rewardCalculator, rewardCalculator.getProfitRatio(lottos));
+        Reward reward = lottos.countWinningNumbers(winningLotto);
+        resultView.printAllResult(reward, reward.getProfitRatio(lottos));
     }
 }
