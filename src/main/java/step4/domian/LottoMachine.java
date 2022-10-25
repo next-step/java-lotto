@@ -10,12 +10,12 @@ public class LottoMachine {
 
     private static final List<Integer> INIT_LOTTO_NUM = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
-    public static LottoWallet autoLottos(int lottoNum) {
+    public static List<Lotto> autoLottos(int lottoNum) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoNum; i++) {
             lottoList.add(getNewLotto());
         }
-        return new LottoWallet(lottoList);
+        return lottoList;
     }
 
     private static Lotto getNewLotto() {

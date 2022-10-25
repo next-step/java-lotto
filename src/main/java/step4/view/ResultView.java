@@ -15,16 +15,13 @@ public class ResultView {
     public static final String SIX_TEXT = "6개 일치 (2000000000원)- ";
     public static final String COUNT_TEXT = "개";
     public static final String LOSS_TEXT = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String LOTTO_NUM_TEXT = "\n수동으로 %d, 자동으로 %d개를 구매했습니다.\n";
 
-    public static void printLottoCount(int lottoNum) {
-        System.out.println(lottoNum + BUY_TEXT);
-    }
-
-    public static void printLottoNum(LottoWallet lottoWallet) {
+    public static void printLottoNum(int manualNum, int autoNum, LottoWallet lottoWallet) {
+        System.out.printf(LOTTO_NUM_TEXT, manualNum, autoNum);
         for (Lotto lotto : lottoWallet.lottos) {
             System.out.println(lotto.toString());
         }
-
     }
 
     public static void printDrawResult(LottoResult results) {

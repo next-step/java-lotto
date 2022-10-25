@@ -1,8 +1,10 @@
 package step4.domian;
 
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoWallet {
 
@@ -10,6 +12,12 @@ public class LottoWallet {
 
     public LottoWallet(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public LottoWallet(List<Lotto> manual, List<Lotto> autos) {
+        this(Stream.of(manual, autos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList()));
     }
 
     public LottoResult compareWithLastLotto(LastWinner lastWinner) {
