@@ -37,7 +37,7 @@ public class Lotto {
 		return lotto;
 	}
 
-	public boolean isExist(Integer next) {
-		return lotto.contains(next);
+	public boolean isExist(Integer lottoNumber) {
+		return lotto.contains(lottoNumber);
 	}
 }
