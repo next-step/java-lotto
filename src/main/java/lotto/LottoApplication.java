@@ -19,7 +19,7 @@ public class LottoApplication {
 
     public static void main(String[] args){
         IssueLottoRequest issueLottoRequest = Printer.requestIssueLotto();
-        List<IssuedLotto> lottos = issueLottos(issueLottoRequest);
+        List<IssuedLotto> lottos = lottoService.issueLottos(issueLottoRequest, new NormalPickNumberStrategy());
         Printer.printLottoNumbers(lottos);
 
         WinningLottoRequest winningLottoRequest = Printer.requestWinningLotto();
@@ -28,9 +28,5 @@ public class LottoApplication {
 
         float revenueRatio = lottoStatisticsService.getRevenueRatio(lottoStatistics, issueLottoRequest);
         Printer.printRevenueRatio(revenueRatio);
-    }
-
-    private static List<IssuedLotto> issueLottos(IssueLottoRequest issueLottoRequest) {
-        return lottoService.issueLottos(issueLottoRequest, new NormalPickNumberStrategy());
     }
 }
