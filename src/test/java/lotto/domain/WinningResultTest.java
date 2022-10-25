@@ -14,25 +14,40 @@ class WinningResultTest {
     @Test
     void total_price() {
 
-        final List<WinningPrize> resultList = List.of(WinningPrize.from(6, false)
-                , WinningPrize.from(5, false)
-                , WinningPrize.from(5, true)
-                , WinningPrize.from(4, false)
-                , WinningPrize.from(3, false)
-                , WinningPrize.from(2, false)
-                , WinningPrize.from(1, false));
+        final WinningLotto 우승로또 = WinningLotto.from("1, 2, 3, 4, 5, 6", "45");
+        final Lotto 여섯개일치로또 = Lotto.from("1, 2, 3, 4, 5, 6");
+        final Lotto 다섯개보너스일치로또 = Lotto.from("1, 2, 3, 4, 5, 45");
+        final Lotto 다섯개일치로또 = Lotto.from("1, 2, 3, 4, 5, 7");
+        final Lotto 네개일치로또 = Lotto.from("1, 2, 3, 4, 7, 8");
+        final Lotto 세개일치로또 = Lotto.from("1, 2, 3, 7, 8, 9");
+        final Lotto 두개일치로또 = Lotto.from("1, 2, 7, 8, 9, 10");
+        final Lotto 한개일치로또 = Lotto.from("1, 7, 8, 9, 10, 11");
+
+        final List<WinningPrize> resultList = List.of(
+                WinningPrize.of(우승로또, 여섯개일치로또)
+                , WinningPrize.of(우승로또, 다섯개보너스일치로또)
+                , WinningPrize.of(우승로또, 다섯개일치로또)
+                , WinningPrize.of(우승로또, 네개일치로또)
+                , WinningPrize.of(우승로또, 세개일치로또)
+                , WinningPrize.of(우승로또, 두개일치로또)
+                , WinningPrize.of(우승로또, 한개일치로또));
         final WinningResult winningResult = WinningResult.init();
         winningResult.collect(resultList);
 
         assertThat(winningResult.sum()).isEqualTo(new BigDecimal(2_031_555_000));
     }
 
-    @DisplayName("5개 매칭된 등수가 2개인 우승 상금을 구한다.")
+    @DisplayName("2등과 3등(5개 매치, 보너스 매치 여부) 우승 상금을 구한다.")
     @Test
-    void tie_price() {
+    void match_price() {
 
-        final List<WinningPrize> resultList = List.of(WinningPrize.from(5, false)
-                , WinningPrize.from(5, true));
+        final WinningLotto 우승로또 = WinningLotto.from("1, 2, 3, 4, 5, 6", "45");
+        final Lotto 다섯개일치로또1 = Lotto.from("1, 2, 3, 4, 5, 45");
+        final Lotto 다섯개일치로또2 = Lotto.from("1, 2, 3, 4, 5, 7");
+
+        final List<WinningPrize> resultList = List.of(
+                WinningPrize.of(우승로또, 다섯개일치로또1)
+                , WinningPrize.of(우승로또, 다섯개일치로또2));
         final WinningResult winningResult = WinningResult.init();
         winningResult.collect(resultList);
 
