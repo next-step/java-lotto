@@ -3,6 +3,7 @@ package step2.lotto;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Ranks {
@@ -44,4 +45,16 @@ public class Ranks {
                 .forEach(rank -> ranks.put(rank, 0L));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ranks ranks = (Ranks) o;
+        return Objects.equals(rankingAggregation, ranks.rankingAggregation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rankingAggregation);
+    }
 }
