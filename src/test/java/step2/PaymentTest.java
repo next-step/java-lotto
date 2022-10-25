@@ -49,7 +49,8 @@ public class PaymentTest {
 		totalCountMap.put(5, 0);
 		totalCountMap.put(6, 0);
 
-		assertThat(String.format("%.2f", payment.isProfit(money, totalCountMap))).isEqualTo("0.36");
+		assertThat(String.format("%.2f", payment.calculateBenefit(money, totalCountMap))).isEqualTo(
+			"0.36");
 	}
 
 }

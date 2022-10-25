@@ -21,7 +21,7 @@ public class Payment {
 		return cash / LOTTO_PRICE;
 	}
 
-	public double isProfit(int cash, HashMap<Integer, Integer> totalCount) {
+	public double calculateBenefit(int cash, HashMap<Integer, Integer> totalCount) {
 		int benefit = DEFAULT_PRICE;
 
 		for (int matchNumber = MIN_MATCH; matchNumber <= MAX_MATCH; matchNumber++) {
