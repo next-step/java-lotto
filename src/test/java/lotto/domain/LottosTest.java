@@ -50,4 +50,19 @@ public class LottosTest {
             )
         );
     }
+
+    @Test
+    void 로또_유형별_갯수_확인(){
+        Lottos lottos = new Lottos(
+            List.of(
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL)
+            )
+        );
+        Assertions.assertThat(lottos.getAutoQuantity()).isEqualTo(3);
+        Assertions.assertThat(lottos.getManualQuantity()).isEqualTo(2);
+    }
 }
