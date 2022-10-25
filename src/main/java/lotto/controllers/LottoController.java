@@ -1,12 +1,15 @@
 package lotto.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lotto.domains.Lotto;
 import lotto.domains.LottoGenerator;
 import lotto.domains.LottoNumber;
 import lotto.domains.LottoPurchasedAmount;
 import lotto.domains.LottoStatistics;
 import lotto.domains.LottoWinner;
+import lotto.domains.UnsignedInteger;
 import lotto.views.InputView;
 import lotto.views.ResultView;
 
@@ -16,11 +19,17 @@ public class LottoController {
         LottoGenerator lottoGenerator = new LottoGenerator();
 
         LottoPurchasedAmount money = LottoPurchasedAmount.of(inputView.inputPurchaseMoney());
-        List<Lotto> lottoList = lottoGenerator.purchaseByAuto(money);
+        UnsignedInteger manualLottoCount = UnsignedInteger.parse(inputView.inputPurchaseCountByManual());
+        List<String> lottoListByManual = inputView.inputLottoByManual(manualLottoCount.getValue());
 
-        inputView.printPurchasedLottoList(lottoList);
+        List<Lotto> manualLottoList = lottoGenerator.purchaseByManual(money, lottoListByManual);
+        List<Lotto> autoLottoList = lottoGenerator.purchaseByAuto(money.spend(manualLottoCount));
 
-        return lottoList;
+        inputView.printPurchasedLottoList(manualLottoList, autoLottoList);
+
+        return Stream
+                .concat(manualLottoList.stream(), autoLottoList.stream())
+                .collect(Collectors.toList());
     }
 
     public LottoWinner drawLottery() {
