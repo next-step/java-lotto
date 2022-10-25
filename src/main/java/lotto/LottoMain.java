@@ -17,7 +17,7 @@ public class LottoMain {
             InputView inputView = new InputView();
             ResultView resultView = new ResultView();
 
-            List<Lotto> lottoList = lottoGenerator.purchaseByAuto(new LottoPurchasedAmount(inputView.inputPurchaseMoney()));
+            List<Lotto> lottoList = lottoGenerator.purchaseByAuto(LottoPurchasedAmount.of(inputView.inputPurchaseMoney()));
             inputView.printPurchasedLottoList(lottoList);
 
             Lotto lastWinnerLotto = Lotto.createByString(inputView.inputLastWinner());
