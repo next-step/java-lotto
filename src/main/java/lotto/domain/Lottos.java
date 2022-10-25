@@ -22,6 +22,18 @@ public class Lottos {
             .collect(Collectors.collectingAndThen(Collectors.toUnmodifiableList(), LottoResult::new));
     }
 
+    public long getAutoQuantity() {
+        return lottos.stream()
+            .filter(Lotto::isAuto)
+            .count();
+    }
+
+    public long getManualQuantity() {
+        return lottos.stream()
+            .filter(Lotto::isManual)
+            .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
