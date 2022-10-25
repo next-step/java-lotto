@@ -39,16 +39,9 @@ public class Lottery {
 
     private List<Rank> findRanks(WinningLotto winningNumber) {
         return lottery.stream()
-                .map(findRank(winningNumber))
-                .flatMap(Stream::distinct)
+                .map(lotto -> Rank.findRank(lotto.countMatch(winningNumber),lotto.isBonus(winningNumber)))
                 .collect(Collectors.toList());
     }
-
-    private static Function<Lotto, Stream<Rank>> findRank(WinningLotto winningNumber) {
-        return lotto -> Arrays.stream(Rank.values())
-                .map(rank -> rank.findRank(lotto.countMatch(winningNumber), lotto.isBonus(winningNumber)));
-    }
-
 
     private Lotto createLotto(ShuffleStrategy shuffleStrategy) {
         return new Lotto(sortLottoNum(shuffleStrategy));
