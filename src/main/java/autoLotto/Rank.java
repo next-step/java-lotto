@@ -29,11 +29,11 @@ public enum Rank {
     }
 
 
-    public static int valueOf(int countOfMatch, boolean matchBonus) {
+    public static int valueOf(int countOfMatch, boolean matchBonus, GameResult result) {
         Rank[] ranks = values();
         
         if (isFiveMatches(countOfMatch)) {
-            return getSecondOrThirdRank(ranks, matchBonus);
+            return getSecondOrThirdRank(ranks, matchBonus, result);
         }
 
         Rank rank = Arrays.stream(ranks)
@@ -41,7 +41,7 @@ public enum Rank {
                 .findFirst()
                 .orElse(ranks[MISS_RANK]);
 
-//        RankMap.count(rank);
+        result.count(rank);
 
         return rank.winningMoney;
     }
@@ -54,20 +54,15 @@ public enum Rank {
         return countOfMatch == FIVE_MATCHES;
     }
     
-    private static int getSecondOrThirdRank(Rank[] ranks, boolean matchBonus) {
+    private static int getSecondOrThirdRank(Rank[] ranks, boolean matchBonus, GameResult result) {
         if (matchBonus) {
-            return getSecondRank(ranks[SECOND_RANK]);
+            return getRank(ranks[SECOND_RANK], result);
         }
-        return getThirdRank(ranks[THIRD_RANK]);
+        return getRank(ranks[THIRD_RANK], result);
     }
 
-    private static int getSecondRank(Rank rank) {
-//        RankMap.count(rank);
-        return rank.winningMoney;
-    }
-
-    private static int getThirdRank(Rank rank) {
-//        RankMap.count(rank);
+    private static int getRank(Rank rank, GameResult result) {
+        result.count(rank);
         return rank.winningMoney;
     }
 }
