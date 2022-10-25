@@ -2,15 +2,18 @@ package lotto.strategy;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoCommonGenerateStrategy implements LottoGenerateStrategy{
+
+    private static final List<Integer> NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
+            .boxed()
+            .collect(Collectors.toList());
+
     @Override
     public Set<Integer> generateLotto() {
-        Set<Integer> tmpLottoNums = new TreeSet<>();
-        while (tmpLottoNums.size() < MAX_SIZE) {
-            int lottoNum = ThreadLocalRandom.current().nextInt(LOTTO_MIN_NUM, LOTTO_MAX_BOUND_NUM);
-            tmpLottoNums.add(lottoNum);
-        }
-        return tmpLottoNums;
+        Collections.shuffle(NUMBERS);
+        return new TreeSet<>(NUMBERS.subList(0, 6));
     }
 }
