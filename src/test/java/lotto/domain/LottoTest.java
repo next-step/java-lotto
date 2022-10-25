@@ -28,9 +28,9 @@ class LottoTest {
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
-        Lotto result = lotto.rank(winnerLottoNumbers);
+        Rank rank = lotto.rank(winnerLottoNumbers);
 
         // then
-        assertThat(result.getRank()).isEqualTo(Rank.FIFTH);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 }

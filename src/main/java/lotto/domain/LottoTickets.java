@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -35,22 +34,15 @@ public class LottoTickets {
         return this;
     }
 
-    public LottoTickets putRankings(LottoNumbers winnerLottoNumbers) {
-        this.lottoList.forEach(l -> l.rank(winnerLottoNumbers));
-        return this;
+    public List<Rank> putRankings(LottoNumbers winnerLottoNumbers) {
+        List<Rank> rankList = new ArrayList<>();
+        this.lottoList.forEach(l -> rankList.add(l.rank(winnerLottoNumbers)));
+        return rankList;
     }
 
-    public List<Rank> getRank() {
-        return this.lottoList
-                .stream()
-                .map(Lotto::getRank)
-                .collect(Collectors.toList());
-    }
-
-    public BigDecimal getYield() {
-        int totalWinningMoney = this.lottoList
-                .stream()
-                .mapToInt(l -> l.getRank().getWinningMoney())
+    public BigDecimal getYield(List<Rank> rankList) {
+        int totalWinningMoney = rankList.stream()
+                .mapToInt(Rank::getWinningMoney)
                 .sum();
         return BigDecimal.valueOf(totalWinningMoney)
                 .divide(BigDecimal.valueOf(this.purchasePrice.getPurchasePrice()), 2, RoundingMode.HALF_UP);

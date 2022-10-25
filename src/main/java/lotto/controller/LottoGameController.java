@@ -17,30 +17,25 @@ public class LottoGameController {
 
         PurchasePrice purchasePrice = getPurchasePrice();
 
-        LottoTickets pickedLottoTickets = getLottoTickets(purchasePrice);
+        LottoTickets lottoTickets = getLottoTickets(purchasePrice);
 
-        LottoTickets rankedLottoTickets = getLottoTickets(pickedLottoTickets);
+        List<Rank> rankList = getRank(lottoTickets);
 
-        getRank(rankedLottoTickets);
-
-        getYield(rankedLottoTickets);
+        getYield(lottoTickets, rankList);
 
     }
 
-    private static void getYield(LottoTickets rankedLottoTickets) {
-        BigDecimal yieldResult = rankedLottoTickets.getYield();
+    private static void getYield(LottoTickets lottoTickets, List<Rank> rankList) {
+        BigDecimal yieldResult = lottoTickets.getYield(rankList);
         printYield(yieldResult);
     }
 
-    private static void getRank(LottoTickets rankedLottoTickets) {
-        List<Rank> rankList = rankedLottoTickets.getRank();
-        printRanks(rankList);
-    }
-
-    private static LottoTickets getLottoTickets(LottoTickets pickedLottoTickets) {
+    private static List<Rank> getRank(LottoTickets lottoTickets) {
         List<Integer> winnerNumberList = inputWinnerNumberList();
         Integer bonusNumber = inputBonusNumber();
-        return pickedLottoTickets.putRankings(new LottoNumbers(winnerNumberList, bonusNumber));
+        List<Rank> rankList = lottoTickets.putRankings(new LottoNumbers(winnerNumberList, bonusNumber));
+        printRanks(rankList);
+        return rankList;
     }
 
     private static LottoTickets getLottoTickets(PurchasePrice purchasePrice) {
