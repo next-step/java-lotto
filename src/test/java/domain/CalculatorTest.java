@@ -3,11 +3,8 @@ package domain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import view.View;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -77,7 +74,10 @@ public class CalculatorTest {
 
     @Test
     void as() {
+        Map<Rank, Integer> rankIntegerMap = new HashMap<>();
+        rankIntegerMap.put(Rank.ONE, 1);
+        rankIntegerMap.computeIfPresent(Rank.ONE, (k, v) -> v+1);
 
-        System.out.println(2 / 3);
+        System.out.println(rankIntegerMap.get(Rank.ONE));
     }
 }

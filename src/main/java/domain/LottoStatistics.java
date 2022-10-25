@@ -1,63 +1,46 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoStatistics {
-    private Price winningPrice;
-    private Price purchasePrice;
+    private final List<Lotto> lottos;
+    private final WinningLotto winningLotto;
+    private final Map<Rank, Integer> rankRecord;
 
-    private long numberOfThreeEqualNumber;
-    private long numberOfFourEqualNumber;
-    private long numberOfFiveEqualNumber;
-    private long numberOfSixEqualNumber;
-
-    public LottoStatistics(Price purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public LottoStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
+        this.lottos = lottos;
+        this.winningLotto = winningLotto;
+        this.rankRecord = new HashMap<>();
     }
 
-    public void analysis(List<Lotto> lottos, Lotto winningLotto) {
-        this.numberOfThreeEqualNumber = countEqualNumber(LottoUnitWinnings.THREE.getEqualCount(), lottos, winningLotto);
-        this.numberOfFourEqualNumber = countEqualNumber(LottoUnitWinnings.FOUR.getEqualCount(), lottos, winningLotto);
-        this.numberOfFiveEqualNumber = countEqualNumber(LottoUnitWinnings.FIVE.getEqualCount(), lottos, winningLotto);
-        this.numberOfSixEqualNumber = countEqualNumber(LottoUnitWinnings.SIX.getEqualCount(), lottos, winningLotto);
-
-        calculateWinningPrice();
+    public Price findWinningPrice() {
+        return LottoWinningsCalculator.calculateWinnings(lottos, winningLotto);
     }
 
-    private long countEqualNumber(int numberOfEqualNumber, List<Lotto> lottos, Lotto winningLotto) {
-        return lottos.stream()
-                .filter(lotto -> winningLotto.countEqualNumber(lotto) == numberOfEqualNumber)
-                .count();
+    public double calculateEfficiency(final Price purchasePrice) {
+        return findWinningPrice().divideWithDecimalPoint(purchasePrice);
     }
 
-    private void calculateWinningPrice() {
-        this.winningPrice = LottoWinningsCalculator.calculateWinnings(LottoUnitWinnings.THREE.getEqualCount(), numberOfThreeEqualNumber)
-                .add(LottoWinningsCalculator.calculateWinnings(LottoUnitWinnings.FOUR.getEqualCount(), numberOfFourEqualNumber))
-                .add(LottoWinningsCalculator.calculateWinnings(LottoUnitWinnings.FIVE.getEqualCount(), numberOfFiveEqualNumber))
-                .add(LottoWinningsCalculator.calculateWinnings(LottoUnitWinnings.SIX.getEqualCount(), numberOfSixEqualNumber));
+    public void analyzeRank() {
+        initializeRankRecord();
+        lottos.stream()
+                .map(lotto -> winningLotto.getRank(lotto))
+                .forEach(rank -> increaseRecord(rank));
     }
 
-    public Price getWinningPrice() {
-        return this.winningPrice;
+    private void initializeRankRecord() {
+        Arrays.stream(Rank.values())
+                .forEach(rank -> rankRecord.put(rank, 0));
     }
 
-    public double calculateEfficiency() {
-        return winningPrice.divideWithDecimalPoint(purchasePrice);
+    private void increaseRecord(Rank rank) {
+        rankRecord.computeIfPresent(rank, (k, v) -> v+1);
     }
 
-    public long getNumberOfThreeEqualNumber() {
-        return numberOfThreeEqualNumber;
-    }
-
-    public long getNumberOfFourEqualNumber() {
-        return numberOfFourEqualNumber;
-    }
-
-    public long getNumberOfFiveEqualNumber() {
-        return numberOfFiveEqualNumber;
-    }
-
-    public long getNumberOfSixEqualNumber() {
-        return numberOfSixEqualNumber;
+    public int matchRank(Rank rank) {
+        return rankRecord.getOrDefault(rank, 0);
     }
 }
