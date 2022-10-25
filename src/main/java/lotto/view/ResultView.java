@@ -23,10 +23,19 @@ public class ResultView {
             .sorted(Comparator.comparing(LottoRank::getDisplayOrder)).collect(Collectors.toList());
 
         for (LottoRank rank : sortedLottoRank) {
-            System.out.printf("%d개 일치 (%d원)- %d개 \n", rank.getMatchCount(), rank.getPrize(), winningStat.get(rank));
+            printRankCount(winningStat, rank);
         }
 
         printReturnRate(winningStat, lotto);
+    }
+
+    private static void printRankCount(Map<LottoRank, Long> winningStat, LottoRank rank) {
+        if (rank == LottoRank.SECOND) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개 \n", rank.getMatchCount(), rank.getPrize(), winningStat.get(rank));
+            return;
+        }
+
+        System.out.printf("%d개 일치 (%d원)- %d개 \n", rank.getMatchCount(), rank.getPrize(), winningStat.get(rank));
     }
 
     private static void printReturnRate(Map<LottoRank, Long> winningStat, Lotto lotto) {
