@@ -8,11 +8,11 @@ public class LottoMachine {
         this.lottoCalculateStrategy = lottoCalculateStrategy;
     }
 
-    public List<SelectedLottoes> buyLottoes(Money money) {
+    public List<SelectedLottoNumbers> buyLottoes(Money money) {
         return lottoCalculateStrategy.buyLottoTickets(lottoCalculateStrategy.countLottoTickets(money));
     }
 
-    public Statistics calculateStatistics(List<SelectedLottoes> lottoes, LottoWinningStrategy winningLottoes, Money buyAmount) {
+    public Statistics calculateStatistics(List<SelectedLottoNumbers> lottoes, LottoWinningStrategy winningLottoes, Money buyAmount) {
         return lottoCalculateStrategy.calculateStatistics(lottoes, winningLottoes, buyAmount);
     }
 }

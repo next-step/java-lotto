@@ -3,7 +3,7 @@ package lotto.auto;
 import lotto.LottoNumber;
 import lotto.LottoWinningStrategy;
 import lotto.RANK;
-import lotto.SelectedLottoes;
+import lotto.SelectedLottoNumbers;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +16,19 @@ public class AutoWinningLottoes implements LottoWinningStrategy {
     }
 
     @Override
-    public Optional<RANK> calculateWinningResult(SelectedLottoes selectedLottoes) {
+    public Optional<RANK> calculateWinningResult(SelectedLottoNumbers selectedLottoNumbers) {
         int count = 0;
         for (LottoNumber winningLotto : winningLottoes) {
-            count += selectedLottoes.isWinning(winningLotto) ? 1 : 0;
+            count += getWinningCount(selectedLottoNumbers, winningLotto);
         }
         return RANK.findWinningPrize(count, false);
+    }
+
+    private int getWinningCount(SelectedLottoNumbers selectedLottoNumbers, LottoNumber winningLotto) {
+        if (selectedLottoNumbers.isWinning(winningLotto)) {
+            return 1;
+        }
+        return 0;
     }
 
 }

@@ -12,11 +12,11 @@ public class LottoMachineTest {
         // given
         LottoMachine lottoMachine = new LottoMachine(new LottoTestCalculateStrategy());
         // when
-        List<SelectedLottoes> lottoes = lottoMachine.buyLottoes(null);
+        List<SelectedLottoNumbers> lottoes = lottoMachine.buyLottoes(null);
         // then
         assertThat(lottoes).hasSize(1);
-        assertThat(lottoes.get(0).getSelectedLottoes()).hasSize(1);
-        assertThat(lottoes.get(0).getSelectedLottoes().get(0)).isEqualTo(new LottoNumber(1));
+        assertThat(lottoes.get(0).getSelectedLottoNumbers()).hasSize(1);
+        assertThat(lottoes.get(0).getSelectedLottoNumbers().get(0)).isEqualTo(new LottoNumber(1));
     }
 
     @Test

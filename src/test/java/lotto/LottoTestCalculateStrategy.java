@@ -12,22 +12,17 @@ public class LottoTestCalculateStrategy implements LottoCalculateStrategy {
     }
 
     @Override
-    public Money getTicketPrice() {
-        return new Money(1000);
-    }
-
-    @Override
-    public List<SelectedLottoes> buyLottoTickets(int ticketCount) {
+    public List<SelectedLottoNumbers> buyLottoTickets(int ticketCount) {
         List<LottoNumber> list = new ArrayList<>();
         list.add(new LottoNumber(1));
-        SelectedLottoes selectedLottoes = new SelectedLottoes(list);
-        List<SelectedLottoes> list2 = new ArrayList<>();
-        list2.add(selectedLottoes);
+        SelectedLottoNumbers selectedLottoNumbers = new SelectedLottoNumbers(list);
+        List<SelectedLottoNumbers> list2 = new ArrayList<>();
+        list2.add(selectedLottoNumbers);
         return list2;
     }
 
     @Override
-    public Statistics calculateStatistics(List<SelectedLottoes> lottoes, LottoWinningStrategy winningLottoes, Money buyAmount) {
+    public Statistics calculateStatistics(List<SelectedLottoNumbers> lottoes, LottoWinningStrategy winningLottoes, Money buyAmount) {
         Map<RANK, Integer> winningStats = new HashMap<>();
         winningStats.put(RANK.THREE, 1);
         double earningRate = 0.0;

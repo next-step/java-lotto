@@ -3,7 +3,7 @@ package lotto.second;
 import lotto.LottoNumber;
 import lotto.LottoWinningStrategy;
 import lotto.RANK;
-import lotto.SelectedLottoes;
+import lotto.SelectedLottoNumbers;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,11 +19,11 @@ public class SecondWinningLottoes implements LottoWinningStrategy {
     }
 
     @Override
-    public Optional<RANK> calculateWinningResult(SelectedLottoes selectedLottoes) {
+    public Optional<RANK> calculateWinningResult(SelectedLottoNumbers selectedLottoNumbers) {
         int count = 0;
         for (LottoNumber winningLotto : winningLottoes) {
-            count += selectedLottoes.isWinning(winningLotto) ? 1 : 0;
+            count += selectedLottoNumbers.isWinning(winningLotto) ? 1 : 0;
         }
-        return RANK.findWinningPrize(count, selectedLottoes.isWinning(bonusLotto));
+        return RANK.findWinningPrize(count, selectedLottoNumbers.isWinning(bonusLotto));
     }
 }

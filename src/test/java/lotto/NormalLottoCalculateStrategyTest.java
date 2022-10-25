@@ -27,18 +27,18 @@ class NormalLottoCalculateStrategyTest {
     void test2() {
         // given
         // when
-        List<SelectedLottoes> selectedLottoes = lottoCalculateStrategy.buyLottoTickets(5);
+        List<SelectedLottoNumbers> selectedLottoes = lottoCalculateStrategy.buyLottoTickets(5);
         // then
         for (int i = 0; i < selectedLottoes.size(); i++) {
             for (int j = i + 1; j < selectedLottoes.size(); j++) {
-                SelectedLottoes l1 = selectedLottoes.get(i);
-                SelectedLottoes l2 = selectedLottoes.get(j);
+                SelectedLottoNumbers l1 = selectedLottoes.get(i);
+                SelectedLottoNumbers l2 = selectedLottoes.get(j);
 
                 int count = 0;
-                for (int p = 0; p < l1.getSelectedLottoes().size(); p++) {
-                    LottoNumber lottoNumber1 = l1.getSelectedLottoes().get(p);
-                    for (int q = 0; q < l2.getSelectedLottoes().size(); q++) {
-                        LottoNumber lottoNumber2 = l2.getSelectedLottoes().get(q);
+                for (int p = 0; p < l1.getSelectedLottoNumbers().size(); p++) {
+                    LottoNumber lottoNumber1 = l1.getSelectedLottoNumbers().get(p);
+                    for (int q = 0; q < l2.getSelectedLottoNumbers().size(); q++) {
+                        LottoNumber lottoNumber2 = l2.getSelectedLottoNumbers().get(q);
                         if (lottoNumber1.equals(lottoNumber2)) {
                             count += 1;
                         }

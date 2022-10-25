@@ -9,7 +9,7 @@ public class AutoLottoMain {
     public static void main(String[] args) {
         Money buyAmount = new Money(InputView.enterBuyPrice());
         LottoMachine lottoMachine = new LottoMachine(new NormalLottoCalculateStrategy());
-        List<SelectedLottoes> lottoes = lottoMachine.buyLottoes(buyAmount);
+        List<SelectedLottoNumbers> lottoes = lottoMachine.buyLottoes(buyAmount);
         OutputView.printLottoes(lottoes);
 
         LottoWinningStrategy winningLottoes = new AutoWinningLottoes(

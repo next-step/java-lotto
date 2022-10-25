@@ -16,28 +16,23 @@ public class NormalLottoCalculateStrategy implements LottoCalculateStrategy {
 
     @Override
     public int countLottoTickets(Money money) {
-        return money.countBy(this);
+        return money.divideBy(LOTTO_TICKET_PRICE);
     }
 
     @Override
-    public Money getTicketPrice() {
-        return LOTTO_TICKET_PRICE;
-    }
-
-    @Override
-    public List<SelectedLottoes> buyLottoTickets(int ticketCount) {
-        List<SelectedLottoes> lottoes = new ArrayList<>();
+    public List<SelectedLottoNumbers> buyLottoTickets(int ticketCount) {
+        List<SelectedLottoNumbers> lottoes = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             Collections.shuffle(lottoCandidates);
             List<LottoNumber> list = new ArrayList<>(lottoCandidates.subList(0, WINNING_LOTTO_COUNT));
             list.sort(Comparator.comparing(LottoNumber::getNumber));
-            lottoes.add(new SelectedLottoes(list));
+            lottoes.add(new SelectedLottoNumbers(list));
         }
         return lottoes;
     }
 
     @Override
-    public Statistics calculateStatistics(List<SelectedLottoes> selectedLottoes, LottoWinningStrategy winningLottoes, Money buyAmount) {
+    public Statistics calculateStatistics(List<SelectedLottoNumbers> selectedLottoes, LottoWinningStrategy winningLottoes, Money buyAmount) {
         Map<RANK, Integer> winningStats = calculateWinningStats(selectedLottoes, winningLottoes);
 
         Money sum = new Money();
@@ -49,9 +44,9 @@ public class NormalLottoCalculateStrategy implements LottoCalculateStrategy {
         return new Statistics(winningStats, earningRate);
     }
 
-    private Map<RANK, Integer> calculateWinningStats(List<SelectedLottoes> selectedLottoes, LottoWinningStrategy winningLottoes) {
+    private Map<RANK, Integer> calculateWinningStats(List<SelectedLottoNumbers> selectedLottoes, LottoWinningStrategy winningLottoes) {
         Map<RANK, Integer> winningStats = RANK.getEmptyRanks();
-        for (SelectedLottoes selectedLotto : selectedLottoes) {
+        for (SelectedLottoNumbers selectedLotto : selectedLottoes) {
             winningLottoes.calculateWinningResult(selectedLotto)
                     .ifPresent(rank -> winningStats.put(rank, winningStats.get(rank) + 1));
         }
