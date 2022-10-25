@@ -14,7 +14,7 @@ public class WinningLottoTest {
 	void match_num() {
 		List<Integer> winNum = Arrays.asList(1, 2, 3, 4, 5, 6);
 		int bonusNumber = 7;
-		WinningLotto lotteryWin = new WinningLotto(winNum,bonusNumber);
+		WinningLotto lotteryWin = WinningLotto.of(winNum,bonusNumber);
 
 		Assertions.assertThat(lotteryWin.countOfMatch(Arrays.asList(1, 2, 22, 33, 41, 45)))
 			.isEqualTo(2);
@@ -25,9 +25,9 @@ public class WinningLottoTest {
 	void match_bonus(){
 		List<Integer> winNum = Arrays.asList(1, 2, 3, 4, 5, 6);
 		int bonusNumber = 7;
-		WinningLotto lotteryWin = new WinningLotto(winNum,bonusNumber);
+		WinningLotto lotteryWin = WinningLotto.of(winNum,bonusNumber);
 
-		Assertions.assertThat(lotteryWin.isBonusNumber(Arrays.asList(1, 2, 5, bonusNumber, 41, 45)))
+		Assertions.assertThat(lotteryWin.isBonus(5,Arrays.asList(1, 2, 5, bonusNumber, 41, 45)))
 			.isEqualTo(true);
 	}
 }
