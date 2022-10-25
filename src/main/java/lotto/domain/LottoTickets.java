@@ -1,53 +1,53 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.util.LottoNumber.getAutoNumberList;
+import static lotto.util.NumberUtil.makeAutoNumberList;
 
 public class LottoTickets {
 
-    private final Integer amount;
-    private final Integer purchasePrice;
+    private final PurchasePrice purchasePrice;
     private List<Lotto> lottoList;
 
-    public LottoTickets(Integer amount, Integer purchasePrice) {
-        this.amount = amount;
+    public LottoTickets(PurchasePrice purchasePrice, List<Lotto> lottoList) {
+        this(purchasePrice);
+        this.lottoList = lottoList;
+    }
+
+    public LottoTickets(PurchasePrice purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
-    public LottoTickets(Integer amount, Integer purchasePrice, List<Lotto> lottoList) {
-        this.amount = amount;
-        this.purchasePrice = purchasePrice;
-        this.lottoList = lottoList;
+    public List<Lotto> getLottoList() {
+        return this.lottoList;
     }
 
     public LottoTickets pickNumbers() {
         List<Lotto> lottoList = new ArrayList<>();
 
-        for (int i = 0; i < amount; i++) {
-            lottoList.add(new Lotto(getAutoNumberList()));
+        for (int i = 0; i < this.purchasePrice.getAmount(); i++) {
+            lottoList.add(new Lotto(makeAutoNumberList()));
         }
 
         this.lottoList = lottoList;
         return this;
     }
 
-    public LottoTickets putRankings(List<Integer> matchNumberList) {
-        lottoList.forEach(l -> l.rank(matchNumberList));
-        return this;
+    public List<Rank> putRankings(LottoResult winnerLottoResult) {
+        List<Rank> rankList = new ArrayList<>();
+        this.lottoList.forEach(l -> rankList.add(l.rank(winnerLottoResult)));
+        return rankList;
     }
 
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public Integer getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public BigDecimal getYield(List<Rank> rankList) {
+        int totalWinningMoney = rankList.stream()
+                .mapToInt(Rank::getWinningMoney)
+                .sum();
+        return BigDecimal.valueOf(totalWinningMoney)
+                .divide(BigDecimal.valueOf(this.purchasePrice.getPurchasePrice()), 2, RoundingMode.HALF_UP);
     }
 
 }

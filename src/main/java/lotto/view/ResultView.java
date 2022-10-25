@@ -1,8 +1,10 @@
 package lotto.view;
 
 import lotto.domain.LottoTickets;
+import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,16 +17,16 @@ public class ResultView {
     private static final String RANK_MESSAGE = "{countOfMatch}개 일치 ({winningMoney}원)- {amount}개";
     private static final String YIELD_MESSAGE = "총 수익률은 {yield}입니다.";
 
-    public static void purchaseAmount(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getAmount() + PURCHASE_AMOUNT_MESSAGE);
+    public static void printPurchaseAmount(PurchasePrice purchasePrice) {
+        System.out.println(purchasePrice.getAmount() + PURCHASE_AMOUNT_MESSAGE);
     }
 
-    public static void pickedLottoTickets(LottoTickets lottoTickets) {
-        lottoTickets.getLottoList().forEach(l -> System.out.println(l.getNumberList()));
+    public static void printLottoNumbers(LottoTickets lottoTickets) {
+        lottoTickets.getLottoList().forEach(l -> System.out.println(l.getLottoNumbers()));
         System.out.println();
     }
 
-    public static void rankedLottoTickets(List<Rank> rankList) {
+    public static void printRanks(List<Rank> rankList) {
         System.out.println(RANK_INIT_MESSAGE);
         Arrays.stream(Rank.values())
                 .collect(Collectors.toList())
@@ -35,7 +37,7 @@ public class ResultView {
                 );
     }
 
-    public static void yieldLottoTickets(Integer yield) {
+    public static void printYield(BigDecimal yield) {
         System.out.println(YIELD_MESSAGE.replace("{yield}", String.valueOf(yield)));
     }
 

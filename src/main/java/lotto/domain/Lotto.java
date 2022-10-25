@@ -4,26 +4,22 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> numberList;
-    private Rank rank;
+    private final LottoResult lottoResult;
 
-    public Lotto(List<Integer> numberList) {
-        this.numberList = numberList;
+    public Lotto(List<Integer> lottoNumberList) {
+        this(new LottoResult(lottoNumberList));
     }
 
-    public Lotto rank(List<Integer> matchNumberList) {
-        this.rank = Rank.valueOf((int) numberList
-                .stream()
-                .filter(matchNumberList::contains)
-                .count());
-        return this;
+    public Lotto(LottoResult lottoResult) {
+        this.lottoResult = lottoResult;
     }
 
-    public List<Integer> getNumberList() {
-        return numberList;
+    public List<Integer> getLottoNumbers() {
+        return this.lottoResult.getLottoNumbers();
     }
 
-    public Rank getRank() {
-        return rank;
+    public Rank rank(LottoResult winnerLottoResult) {
+        return lottoResult.getMatchCount(winnerLottoResult);
     }
+
 }
