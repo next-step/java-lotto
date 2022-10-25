@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -25,11 +26,15 @@ public class Lotto {
         }
     }
 
-    public boolean has(final LottoNumber number) {
+    private boolean has(final LottoNumber number) {
         return this.numbers.contains(number);
     }
 
     public int matchNumberCount(final Lotto lotto) {
+        if (Objects.isNull(lotto)) {
+            return 0;
+        }
+
         return (int) this.numbers.stream()
                                  .filter(lotto::has)
                                  .count();
@@ -46,5 +51,15 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                this.numbers.stream()
+                            .sorted()
+                            .map(LottoNumber::toString)
+                            .collect(Collectors.joining(", ")) +
+                "]";
     }
 }
