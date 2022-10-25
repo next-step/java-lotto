@@ -15,7 +15,6 @@ public class StringCalculator {
                 .collect(Collectors.toList());
 
         Queue<Integer> operands = extractedOperands(inputList);
-        validateOperands(operands);
         Queue<String> operators = extractedOperators(inputList);
         validateOperators(operators);
 
@@ -25,12 +24,6 @@ public class StringCalculator {
     private static void validateOperators(final Queue<String> operators) {
         if (operators.stream().anyMatch(o -> !possibleOperators.contains(o))) {
             throw new IllegalArgumentException("허용되지 않은 연산 기호가 포함되어 있습니다");
-        }
-    }
-
-    private static void validateOperands(final Queue<Integer> operands) {
-        if (operands.stream().anyMatch(o -> o < 0)) {
-            throw new IllegalArgumentException("양수만 입력해주세요");
         }
     }
 

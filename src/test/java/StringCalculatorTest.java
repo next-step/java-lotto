@@ -43,8 +43,4 @@ public class StringCalculatorTest {
         assertThatThrownBy(() -> StringCalculator.calculate("10 % 3"));
     }
 
-    @Test
-    void 음수가_들어왔을때() {
-        assertThatThrownBy(() -> StringCalculator.calculate("10 + -1"));
-    }
 }
