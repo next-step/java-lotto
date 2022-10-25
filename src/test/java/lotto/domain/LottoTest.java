@@ -25,7 +25,6 @@ class LottoTest {
     void rank() {
         // given
         List<Integer> lottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        LottoResult lottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6));
         LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 10, 12, 13));
 
         // when

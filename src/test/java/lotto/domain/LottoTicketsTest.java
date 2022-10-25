@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -71,6 +72,6 @@ class LottoTicketsTest {
         BigDecimal yield = lottoTickets.getYield(rankList);
 
         // then
-        assertThat(yield).isEqualTo(BigDecimal.valueOf(5));
+        assertThat(yield).isEqualTo(BigDecimal.valueOf(2000000).setScale(2, RoundingMode.HALF_UP));
     }
 }
