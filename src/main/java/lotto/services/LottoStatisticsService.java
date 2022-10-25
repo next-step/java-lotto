@@ -1,5 +1,6 @@
 package lotto.services;
 
+import lotto.models.IssuedLotto;
 import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.WinningLotto;
@@ -12,12 +13,12 @@ import java.util.stream.Collectors;
 
 public class LottoStatisticsService {
 
-    public List<LottoStatistics> getLottoStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
+    public List<LottoStatistics> getLottoStatistics(List<IssuedLotto> issuedLottos, WinningLotto winningLotto) {
         Map<Rank, LottoStatistics> lottoStatisticsByRank = Arrays.stream(Rank.values())
                 .collect(Collectors.toMap(Function.identity(), LottoStatistics::of));
 
-        lottos.forEach(lotto -> {
-            Rank rank = Rank.findRank(winningLotto, lotto);
+        issuedLottos.forEach(issuedLotto -> {
+            Rank rank = Rank.findRank(winningLotto, issuedLotto);
             lottoStatisticsByRank.get(rank).addCount();
         });
 

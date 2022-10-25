@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.models.IssuedLotto;
 import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.enums.Rank;
@@ -18,11 +19,9 @@ public class Printer {
         return PaymentRequest.of(Integer.parseInt(payment));
     }
 
-    public static void printLottoNumbers(List<Lotto> lottos, int manualLottoCount) {
+    public static void printLottoNumbers(List<IssuedLotto> lottos, int manualLottoCount) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount, lottos.size() - manualLottoCount);
-        lottos.forEach(lotto -> {
-            System.out.println(lotto.getNumbers().toString());
-        });
+        lottos.forEach(lotto -> System.out.println(lotto.getLotto().getNumbers().toString()));
     }
 
     public static WinningLottoRequest requestWinningLotto() {

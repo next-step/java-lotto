@@ -1,9 +1,9 @@
 package lotto.services;
 
+import lotto.models.IssuedLotto;
 import lotto.models.Lotto;
 import lotto.models.request.LottoNumberRequest;
 import lotto.models.request.PaymentRequest;
-import lotto.strategy.NormalPickNumberStrategy;
 import lotto.strategy.PickNumberStrategy;
 
 import java.util.ArrayList;
@@ -12,17 +12,19 @@ import java.util.stream.Collectors;
 
 public class LottoService {
 
-    private static final int LOTTO_PRICE = 1000;
-
-    public List<Lotto> issueLotto(PaymentRequest paymentRequest, List<LottoNumberRequest> lottoNumberRequests, PickNumberStrategy strategy) {
-        int count = paymentRequest.getPayment() / LOTTO_PRICE;
-
-        List<Lotto> lottos = lottoNumberRequests
+    public List<IssuedLotto> issueManualLotto(List<LottoNumberRequest> lottoNumberRequests) {
+        return lottoNumberRequests
                 .stream()
-                .map(req -> Lotto.of(req.getNumber()))
+                .map(IssuedLotto::from)
                 .collect(Collectors.toList());
+    }
+
+    public List<IssuedLotto> issueRandomLotto(PaymentRequest paymentRequest, PickNumberStrategy strategy) {
+        int count = paymentRequest.getPayment() / IssuedLotto.PRICE;
+
+        List<IssuedLotto> lottos = new ArrayList<>();
         while (lottos.size() < count) {
-            lottos.add(Lotto.of(strategy.getNumbers()));
+            lottos.add(IssuedLotto.of(strategy.getNumbers()));
         }
 
         return lottos;

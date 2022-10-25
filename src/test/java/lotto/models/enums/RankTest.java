@@ -1,5 +1,6 @@
 package lotto.models.enums;
 
+import lotto.models.IssuedLotto;
 import lotto.models.Lotto;
 import lotto.models.WinningLotto;
 import lotto.models.request.LottoNumberRequest;
@@ -16,21 +17,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
-    private static final List<Lotto> lottos = new ArrayList<>();
+    private static final List<IssuedLotto> lottos = new ArrayList<>();
     private static final String WINNING_NUMBER = "1, 2, 3, 4, 5, 6";
     private static final int BONUS_NUMBER = 7;
     private static WinningLotto winningLotto;
 
     @BeforeAll
     static void setLotto() {
-        lottos.add(Lotto.of("1, 2, 3, 4, 5, 6"));
-        lottos.add(Lotto.of("1, 2, 3, 4, 5, 7"));
-        lottos.add(Lotto.of("1, 2, 3, 4, 5, 10"));
-        lottos.add(Lotto.of("1, 2, 3, 4, 10, 11"));
-        lottos.add(Lotto.of("1, 2, 3, 10, 11, 12"));
-        lottos.add(Lotto.of("1, 2, 10, 11, 12, 13"));
-        lottos.add(Lotto.of("1, 10, 11, 12, 13, 14"));
-        lottos.add(Lotto.of("10, 11, 12, 13, 14, 15"));
+        List<LottoNumberRequest> lottoNumberRequest = new ArrayList<>();
+        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 4, 5, 6"));
+        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 4, 5, 7"));
+        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 4, 5, 10"));
+        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 4, 10, 11"));
+        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 3, 10, 11, 12"));
+        lottoNumberRequest.add(LottoNumberRequest.of("1, 2, 10, 11, 12, 13"));
+        lottoNumberRequest.add(LottoNumberRequest.of("1, 10, 11, 12, 13, 14"));
+        lottoNumberRequest.add(LottoNumberRequest.of("10, 11, 12, 13, 14, 15"));
+
+        lottoNumberRequest.forEach(req -> lottos.add(IssuedLotto.from(req)));
     }
 
     @BeforeAll

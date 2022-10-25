@@ -1,5 +1,6 @@
 package lotto.services;
 
+import lotto.models.IssuedLotto;
 import lotto.models.Lotto;
 import lotto.models.LottoStatistics;
 import lotto.models.WinningLotto;
@@ -23,24 +24,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoStatisticsServiceTest {
 
     private static final LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
-    private static final List<Lotto> lottos = new ArrayList<>();
+    private static final List<IssuedLotto> lottos = new ArrayList<>();
     private static final String WINNING_NUMBER = "1, 2, 3, 4, 5, 6";
-    private static final List<Lotto> duplicatedLottos = new ArrayList<>();
+    private static final List<IssuedLotto> duplicatedLottos = new ArrayList<>();
     private static final int PAYMENT = 3500;
     private static WinningLotto winningLotto;
 
     @BeforeAll
     static void setLotto() {
-        lottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
-        lottos.add(Lotto.of(List.of(1, 2, 3, 7, 8, 9)));
-        lottos.add(Lotto.of(List.of(11, 12, 13, 14, 15, 16)));
+        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 7, 8, 9)));
+        lottos.add(IssuedLotto.of(List.of(11, 12, 13, 14, 15, 16)));
     }
 
     @BeforeAll
     static void setDuplicatedLottos() {
-        duplicatedLottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
-        duplicatedLottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
-        duplicatedLottos.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @BeforeAll
