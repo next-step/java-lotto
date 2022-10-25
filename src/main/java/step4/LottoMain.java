@@ -1,11 +1,14 @@
 package step4;
 
+import step3.domian.Lotto;
 import step4.domian.LastWinner;
 import step4.domian.LottoResult;
 import step4.domian.LottoWallet;
 import step4.domian.Revenue;
 import step4.view.InputView;
 import step4.view.ResultView;
+
+import java.util.List;
 
 import static step4.domian.LottoMachine.autoLottos;
 
@@ -14,7 +17,8 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int lottoNum = InputView.buyLotto() / LOTTO_PRICE;
-        ResultView.printLottoCount(lottoNum);
+        int manualNum = InputView.inputManualNum();
+        List<Lotto> manualLottos = InputView.inputManualLottos(manualNum);
 
         LottoWallet lottoWallet = autoLottos(lottoNum);
         ResultView.printLottoNum(lottoWallet);
