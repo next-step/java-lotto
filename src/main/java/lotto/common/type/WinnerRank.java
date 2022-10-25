@@ -5,8 +5,6 @@ import java.util.Map;
 
 public enum WinnerRank {
     MISS(new WinnerRankCondition(0, false), 0),
-    MISS_WITH_ONE(new WinnerRankCondition(1, false), 0),
-    MISS_WITH_TWO(new WinnerRankCondition(2, false), 0),
 
     FIFTH(new WinnerRankCondition(3, false), 5_000),
     FORTH(new WinnerRankCondition(4, false), 50_000),

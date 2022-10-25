@@ -18,7 +18,7 @@ public class LottoJudge {
         lottosToJudge.forEach(lotto -> {
             int sameSize = lotto.getSameElementsSize(winningLotto.getWinningLotto());
             boolean correctBonus = getCorrectBonus(winningLotto.getBonusWinningNumber(), lotto, sameSize);
-            rewardCalculator.plusCount(WinnerRank.valueOf(new WinnerRankCondition(sameSize, correctBonus)));
+            rewardCalculator.plusCount(WinnerRank.valueOf(WinnerRankCondition.missCountFrom(sameSize, correctBonus)));
         });
         return rewardCalculator;
     }
