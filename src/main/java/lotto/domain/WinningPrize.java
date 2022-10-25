@@ -16,6 +16,8 @@ public enum WinningPrize {
     FIFTH(3, false, BigDecimal.valueOf(5_000)),
     MISS(0, false, BigDecimal.valueOf(0));
 
+    private static final int MATCH_COUNT_FIVE = 5;
+
     private final int countOfMatch;
     private final boolean matchOfBonus;
     private final BigDecimal price;
@@ -27,12 +29,27 @@ public enum WinningPrize {
         this.price = price;
     }
 
-    public static WinningPrize from(final int matchCount, final boolean matchBonus) {
+    public static WinningPrize of(final WinningLotto winningLotto, final Lotto lotto) {
+
+        final int countOfMatch = winningLotto.match(lotto);
+        final boolean matchBonus = canMatch(countOfMatch, winningLotto, lotto);
+        return getWinningPrize(countOfMatch, matchBonus);
+    }
+
+    public static WinningPrize getWinningPrize(int countOfMatch, boolean matchBonus) {
 
         return Arrays.stream(WinningPrize.values())
-                .filter(oper -> oper.countOfMatch == matchCount && oper.matchOfBonus == matchBonus)
+                .filter(oper -> oper.countOfMatch == countOfMatch && oper.matchOfBonus == matchBonus)
                 .findFirst()
                 .orElse(WinningPrize.MISS);
+    }
+
+    private static boolean canMatch(final int countOfMatch, final WinningLotto winningLotto, final Lotto lotto) {
+
+        if (countOfMatch == MATCH_COUNT_FIVE) {
+            return winningLotto.matchBonus(lotto);
+        }
+        return false;
     }
 
     public static Map<WinningPrize, BigDecimal> init() {
