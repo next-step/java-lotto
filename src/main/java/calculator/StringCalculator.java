@@ -1,5 +1,8 @@
 package calculator;
 
+import calculator.operator.Operator;
+import calculator.operator.OperatorFactory;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,43 +18,22 @@ public class StringCalculator {
                 .collect(Collectors.toList());
 
         Queue<Integer> operands = extractedOperands(inputList);
-        Queue<String> operators = extractedOperators(inputList);
-        validateOperators(operators);
+        Queue<Operator> operators = extractedOperators(inputList);
 
         return calculateResult(operands, operators);
     }
 
-    private static void validateOperators(final Queue<String> operators) {
-        if (operators.stream().anyMatch(o -> !possibleOperators.contains(o))) {
-            throw new IllegalArgumentException("허용되지 않은 연산 기호가 포함되어 있습니다");
-        }
-    }
-
-    private static int calculateResult(final Queue<Integer> operands, final Queue<String> operators) {
+    private static int calculateResult(final Queue<Integer> operands, final Queue<Operator> operators) {
         if (operands.isEmpty()) {
             return 0;
         }
 
         int result = operands.poll();
-
         while (!operators.isEmpty()) {
-            String operator = operators.poll();
+            Operator operator = operators.poll();
             int operand = operands.poll();
 
-            switch (operator) {
-                case "+":
-                    result = add(result, operand);
-                    break;
-                case "-":
-                    result = subtract(result, operand);
-                    break;
-                case "*":
-                    result = multiply(result, operand);
-                    break;
-                case "/":
-                    result = divide(result, operand);
-                    break;
-            }
+            result = operator.operate(result, operand);
         }
 
         return result;
@@ -66,28 +48,12 @@ public class StringCalculator {
         return operands;
     }
 
-    private static Queue<String> extractedOperators(final List<String> inputList) {
-        Queue<String> operators = new LinkedList<>();
+    private static Queue<Operator> extractedOperators(final List<String> inputList) {
+        Queue<Operator> operators = new LinkedList<>();
         for (int i = 1; i < inputList.size(); i = i + 2) {
-            operators.add(inputList.get(i));
+            operators.add(OperatorFactory.getOperator(inputList.get(i)));
         }
 
         return operators;
-    }
-
-    public static int add(int num1, int num2) {
-        return num1 + num2;
-    }
-
-    public static int subtract(int num1, int num2) {
-        return num1 - num2;
-    }
-
-    public static int multiply(int num1, int num2) {
-        return num1 * num2;
-    }
-
-    public static int divide(int num1, int num2) {
-        return num1 / num2;
     }
 }
