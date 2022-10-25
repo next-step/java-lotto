@@ -12,15 +12,15 @@ public class ResultView {
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.getSize() + "개를 구매했습니다.");
 
-        for(Lotto lotto : lottos.getLottos()){
+        for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto);
         }
     }
 
-    public static void printLotto(Lotto lotto){
-         System.out.println("["+String.join(",",lotto.getLottoNumbers().stream()
+    public static void printLotto(Lotto lotto) {
+        System.out.println("[" + String.join(",", lotto.getLottoNumbers().stream()
                 .map(Object::toString)
-                .collect(Collectors.toList()))+"]");
+                .collect(Collectors.toList())) + "]");
     }
 
     public static void printResults(List<LottoResult> results) {

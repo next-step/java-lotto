@@ -47,7 +47,7 @@ public class Lotto {
     }
 
     public LottoResult getResult(Lotto winningLotto) {
-        int matchCount = (int) lottoNumbers.stream().filter(w->winningLotto.contains(w)).count();
+        int matchCount = (int) lottoNumbers.stream().filter(w -> winningLotto.contains(w)).count();
         return LottoResult.of(matchCount);
     }
 
@@ -55,7 +55,7 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
 
-    public SortedSet<Integer> getLottoNumbers(){
+    public SortedSet<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 

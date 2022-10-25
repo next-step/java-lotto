@@ -17,14 +17,14 @@ public enum LottoResult {
         this.reward = reward;
     }
 
-    public static LottoResult of(int rank){
+    public static LottoResult of(int rank) {
         return Arrays.stream(values())
                 .filter(value -> value.isSameAsMatch(rank))
                 .findFirst()
                 .orElse(NoMatch);
     }
 
-    public int getReward(){
+    public int getReward() {
         return this.reward;
     }
 
