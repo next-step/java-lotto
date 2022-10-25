@@ -5,9 +5,6 @@ import lotto.domains.LottoStatistics;
 import lotto.domains.Prize;
 
 public class ResultView {
-    public ResultView() {
-    }
-
     public void printStatistics(LottoStatistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -18,13 +15,13 @@ public class ResultView {
         System.out.println();
     }
 
-    public void printCountEachPrize(LottoStatistics statistics) {
+    private void printCountEachPrize(LottoStatistics statistics) {
         Arrays.stream(Prize.values())
                 .filter(Prize::isWin)
                 .forEach(prize -> printPrize(prize, statistics));
     }
 
-    public void printPrize(Prize prize, LottoStatistics statistics) {
+    private void printPrize(Prize prize, LottoStatistics statistics) {
         String normalFormat = "%d개 일치 (%d원)- %d개";
         String bonusFormat = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
 
