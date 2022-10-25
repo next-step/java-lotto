@@ -10,7 +10,7 @@ public class LottoStorage {
     private LottoStorage(int count) {
         this.lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Lotto lotto = Lotto.generate();
+            Lotto lotto = LottoNumberRange.createLotto();
             lottoList.add(lotto);
         }
     }

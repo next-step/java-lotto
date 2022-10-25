@@ -35,7 +35,7 @@ public class LottoStatisticalServiceTest {
     @DisplayName("당첨 로또와 구매한 로또를 비교해 당첨 통계 결과값을 반환한다")
     void giveStatistics() {
         List<Lotto> purchasedLotto = new ArrayList<>();
-        Lotto winningLotto = Lotto.generate();
+        Lotto winningLotto = LottoNumberRange.createLotto();
         purchasedLotto.add(winningLotto);
 
         LottoStatisticalService lottoStatisticalService = new LottoStatisticalService(winningLotto);
@@ -53,7 +53,8 @@ public class LottoStatisticalServiceTest {
         int paymentAmount = 14000;
         Long winningAmount = 5000L;
 
-        LottoStatisticalService lottoStatisticalService = new LottoStatisticalService(Lotto.generate());
+        LottoStatisticalService lottoStatisticalService =
+                new LottoStatisticalService(LottoNumberRange.createLotto());
         float result = lottoStatisticalService.calculateYield(paymentAmount, winningAmount);
 
         assertThat(result).isEqualTo((float) winningAmount / paymentAmount);

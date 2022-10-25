@@ -27,14 +27,6 @@ public class Lotto {
         }
     }
 
-    public static Lotto generate() {
-        List<LottoNumber> lottoNumbersRange = LottoNumber.getLottoNumbersRange();
-        Collections.shuffle(lottoNumbersRange);
-        Lotto lotto = new Lotto(lottoNumbersRange.subList(0, SELECT_SIZE));
-        lotto.numbers.sort(Comparator.comparing(LottoNumber::getNumber));
-        return new Lotto(lottoNumbersRange.subList(0, SELECT_SIZE));
-    }
-
     public static Lotto from(Lotto lotto) {
         return new Lotto(lotto.numbers);
     }
