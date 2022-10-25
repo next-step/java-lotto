@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Test;
 import calculator.StringCalculator;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -36,6 +36,15 @@ public class StringCalculatorTest {
     void 나눗셈() {
         assertThat(StringCalculator.calculate("10 / 2")).isEqualTo(5);
         assertThat(StringCalculator.calculate("10 / 3")).isEqualTo(3);
+    }
+
+    @Test
+    void 사칙연산_섞여있을_때() {
+        assertThat(StringCalculator.calculate("10 / 2 + 1 * 3 - 3")).isEqualTo(15);
+        assertThat(StringCalculator.calculate("5 + 3 * 2 - 10 / 2")).isEqualTo(3);
+        assertThat(StringCalculator.calculate("-5 - 3 / 2 + 10 * 2")).isEqualTo(12);
+        assertThat(StringCalculator.calculate("5 * -3 - 2 + 10 * 0")).isEqualTo(0);
+        assertThat(StringCalculator.calculate("-5 * -3 - -2 + -10 / -1")).isEqualTo(-7);
     }
 
     @Test
