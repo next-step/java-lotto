@@ -1,10 +1,10 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
 import lotto.domain.PurchasePrice;
 import lotto.exception.InvalidInputException;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -27,15 +27,19 @@ public class InputView {
         return new PurchasePrice(convertToInt(validateInput(input)));
     }
 
-    public static LottoNumbers inputWinnerNumberList() {
+    public static List<Integer> inputWinnerNumberList() {
         System.out.println(WINNER_NUMBER_LIST_MESSAGE);
         String inputNumberList = SCANNER.next();
-        System.out.println(BONUS_NUMBER_MESSAGE);
-        String inputBonus = SCANNER.next();
-        return new LottoNumbers(Arrays.stream(inputNumberList.trim().split(","))
+        return Arrays.stream(inputNumberList.trim().split(","))
                 .map(InputView::validateInput)
                 .map(InputView::convertToInt)
-                .collect(Collectors.toList()), convertToInt(validateInput(inputBonus)));
+                .collect(Collectors.toList());
+    }
+
+    public static Integer inputBonusNumber() {
+        System.out.println(BONUS_NUMBER_MESSAGE);
+        String inputBonus = SCANNER.next();
+        return convertToInt(validateInput(inputBonus));
     }
 
     private static String validateInput(String input) {

@@ -7,8 +7,7 @@ import lotto.domain.Rank;
 
 import java.util.List;
 
-import static lotto.view.InputView.inputWinnerNumberList;
-import static lotto.view.InputView.inputPurchasePrice;
+import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
 public class LottoGameController {
@@ -38,8 +37,9 @@ public class LottoGameController {
     }
 
     private static LottoTickets getLottoTickets(LottoTickets pickedLottoTickets) {
-        LottoNumbers winnerLottoNumbers = inputWinnerNumberList();
-        return pickedLottoTickets.putRankings(winnerLottoNumbers);
+        List<Integer> winnerNumberList = inputWinnerNumberList();
+        Integer bonusNumber = inputBonusNumber();
+        return pickedLottoTickets.putRankings(new LottoNumbers(winnerNumberList, bonusNumber));
     }
 
     private static LottoTickets getLottoTickets(PurchasePrice purchasePrice) {
