@@ -22,6 +22,6 @@ class LottoWinnersTest
         LottoWinners lottoWinners = LottoWinners.of(lottoList, weekendLotto);
         //then
         assertThat(lottoWinners.getTotalPrize()).isEqualTo(2000000000);
-        assertThat(lottoWinners.getLottoPlaceCount(6)).isEqualTo(1);
+        assertThat(lottoWinners.getWinnerValue(LottoPlace.FIRST_PLACE)).isEqualTo(1);
     }
 }

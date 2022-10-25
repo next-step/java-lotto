@@ -7,16 +7,16 @@ import org.junit.jupiter.api.Test;
 
 class LottoListTest {
 
-  private static final int COUNT = 3;
+    private static final int COUNT = 3;
 
-  @Test
-  @DisplayName("지정 갯수만큼 로또가 생성되는지 확인한다.")
-  void createLottoListTest() {
+    @Test
+    @DisplayName("지정 갯수만큼 로또가 생성되는지 확인한다.")
+    void createLottoListTest() {
 
-    //given
-    LottoList lottoList = LottoList.of(COUNT);
+        //given
+        LottoList lottoList = LottoList.of(COUNT);
 
-    //then
-    assertThat(lottoList.getLottoList()).hasSize(COUNT);
-  }
+        //then
+        assertThat(lottoList.getLottoList()).hasSize(COUNT);
+    }
 }
