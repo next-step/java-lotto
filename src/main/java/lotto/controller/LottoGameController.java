@@ -5,6 +5,7 @@ import lotto.domain.LottoTickets;
 import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static lotto.view.InputView.*;
@@ -27,7 +28,7 @@ public class LottoGameController {
     }
 
     private static void getYield(LottoTickets rankedLottoTickets) {
-        Integer yieldResult = rankedLottoTickets.getYield();
+        BigDecimal yieldResult = rankedLottoTickets.getYield();
         printYield(yieldResult);
     }
 

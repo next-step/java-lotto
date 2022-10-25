@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,12 +47,13 @@ public class LottoTickets {
                 .collect(Collectors.toList());
     }
 
-    public Integer getYield() {
+    public BigDecimal getYield() {
         int totalWinningMoney = this.lottoList
                 .stream()
                 .mapToInt(l -> l.getRank().getWinningMoney())
                 .sum();
-        return totalWinningMoney / this.purchasePrice.getPurchasePrice();
+        return BigDecimal.valueOf(totalWinningMoney)
+                .divide(BigDecimal.valueOf(this.purchasePrice.getPurchasePrice()), 2, RoundingMode.HALF_UP);
     }
 
 }

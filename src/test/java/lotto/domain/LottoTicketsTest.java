@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,9 +68,9 @@ class LottoTicketsTest {
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), List.of(lotto));
         LottoTickets rankedLottoTickets = lottoTickets.putRankings(winnerLottoNumbers);
-        Integer yield = rankedLottoTickets.getYield();
+        BigDecimal yield = rankedLottoTickets.getYield();
 
         // then
-        assertThat(yield).isEqualTo(5);
+        assertThat(yield).isEqualTo(BigDecimal.valueOf(5));
     }
 }

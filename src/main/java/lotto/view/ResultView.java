@@ -4,6 +4,7 @@ import lotto.domain.LottoTickets;
 import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ResultView {
                 );
     }
 
-    public static void printYield(Integer yield) {
+    public static void printYield(BigDecimal yield) {
         System.out.println(YIELD_MESSAGE.replace("{yield}", String.valueOf(yield)));
     }
 
