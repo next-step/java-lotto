@@ -7,42 +7,59 @@ import java.util.Objects;
 
 public class Lotteries {
 
-	private static final int MATCH = 1;
-	private List<Lotto> lotteries;
-	private static HashMap<Integer, Integer> matchTotalMap = new HashMap<>();
+	private static final int ADD_MATCH_COUNT = 1;
+	private static final int DEFAULT_MATCH_COUNT = 0;
+	private static final int DEFAULT_MIN_LENGTH = 0;
+	private static final int DEFAULT_MAX_LENGTH = 6;
 
-	private Lotteries(List<Lotto> lotteries, HashMap<Integer, Integer> matchTotalMap) {
+	private static HashMap<Integer, Integer> totalMatchInfo = new HashMap<>();
+	private static WinningLotto winningLotto;
+	private List<Lotto> lotteries;
+	private int countOfMatchBonus = 0;
+
+	private Lotteries(List<Lotto> lotteries, HashMap<Integer, Integer> totalMatchInfo) {
 		this.lotteries = lotteries;
-		this.matchTotalMap = matchTotalMap;
+		this.totalMatchInfo = totalMatchInfo;
 	}
 
 	public static Lotteries of(int totalTicket, LottoFactory lottoFactory) {
 		List<Lotto> lotteries = new ArrayList<>();
 
-		for (int i = 0; i < totalTicket; i++) {
+		for (int i = DEFAULT_MIN_LENGTH; i < totalTicket; i++) {
 			lotteries.add(new Lotto(lottoFactory));
 		}
 
-		for (int i = 0; i < 7; i++) {
-			matchTotalMap.put(i, 0);
+		for (int i = DEFAULT_MIN_LENGTH; i < DEFAULT_MAX_LENGTH; i++) {
+			totalMatchInfo.put(i, DEFAULT_MATCH_COUNT);
 		}
 
-		return new Lotteries(lotteries, matchTotalMap);
+		return new Lotteries(lotteries, totalMatchInfo);
 	}
 
-	public HashMap<Integer, Integer> isMatch(List<Integer> winNumList) {
-		WinningLotto lottoMatcher = new WinningLotto(winNumList);
+	public HashMap<Integer, Integer> isMatch(List<Integer> winNumList, int bonusNumber) {
+		winningLotto = WinningLotto.of(winNumList, bonusNumber);
 
 		for (Lotto lotto : lotteries) {
-			int countLottoMatch = lottoMatcher.countMatch(lotto.getLotto());
-			matchTotalMap.put(countLottoMatch, matchTotalMap.get(countLottoMatch) + MATCH);
-		}
+			int countOfMatch = winningLotto.countOfMatch(lotto.getLotto());
+			isBonus(countOfMatch, lotto.getLotto());
 
-		return matchTotalMap;
+			totalMatchInfo.put(countOfMatch, totalMatchInfo.get(countOfMatch) + ADD_MATCH_COUNT);
+		}
+		return totalMatchInfo;
+	}
+
+	private void isBonus(int countLottoMatch, List<Integer> lotto) {
+		if (winningLotto.isBonus(countLottoMatch, lotto)) {
+			countOfMatchBonus += ADD_MATCH_COUNT;
+		}
 	}
 
 	public Lotto showLotteries(int i) {
 		return lotteries.get(i);
+	}
+
+	public int countOfMatchBonus() {
+		return countOfMatchBonus;
 	}
 
 	@Override
@@ -61,5 +78,6 @@ public class Lotteries {
 	public int hashCode() {
 		return Objects.hash(lotteries);
 	}
+
 
 }

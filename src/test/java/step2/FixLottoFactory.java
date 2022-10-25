@@ -6,7 +6,7 @@ import step2.model.LottoFactory;
 
 public class FixLottoFactory implements LottoFactory {
 
-	private final static List<Integer> FIX_NUM_LIST = Arrays.asList(1,6,22,33,41,45);
+	private final static List<Integer> FIX_NUM_LIST = Arrays.asList(1,2,3,4,5,6);
 
 	@Override
 	public List<Integer> getLottoNum() {
