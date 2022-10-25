@@ -10,8 +10,6 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
-    static final List<String> possibleOperators = Arrays.asList("+", "-", "*", "/");
-
     public static int calculate(final String input) {
         List<String> inputList = Arrays.stream(input.split("\\s"))
                 .filter(s -> !s.isEmpty())
