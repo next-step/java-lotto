@@ -3,8 +3,6 @@ package lotto.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-
 public class LottoTest {
 
     @Test
@@ -48,5 +46,13 @@ public class LottoTest {
         Assertions.assertThat(third.checkRank(winnerNumbers)).isEqualTo(Rank.THIRD);
         Assertions.assertThat(fourth.checkRank(winnerNumbers)).isEqualTo(Rank.FOURTH);
         Assertions.assertThat(fifth.checkRank(winnerNumbers)).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    void 로또_구매_유형_확인() {
+        Lotto auto = new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO);
+        Lotto manual = new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL);
+        Assertions.assertThat(auto.isAuto()).isTrue();
+        Assertions.assertThat(manual.isManual()).isTrue();
     }
 }
