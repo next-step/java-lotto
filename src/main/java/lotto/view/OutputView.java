@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -12,7 +11,7 @@ public class OutputView {
     }
 
     public void printTickets(LotteryTickets tickets) {
-        for(LotteryTicket ticket : tickets.getLotteryTickets()) {
+        for (LotteryTicket ticket : tickets.getLotteryTickets()) {
             printTicket(ticket);
         }
     }
@@ -30,7 +29,7 @@ public class OutputView {
     public void printResult(Ranks ranks, Double prize) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for(var rank : ranks.getRanks().entrySet()) {
+        for (var rank : ranks.getRanks().entrySet()) {
             printRank(rank.getKey(), rank.getValue());
         }
         System.out.println();
@@ -38,7 +37,7 @@ public class OutputView {
     }
 
     private void printRank(Rank rank, Integer count) {
-        if(rank != Rank.NON_MATCH) {
+        if (rank != Rank.NON_MATCH) {
             System.out.printf("%d개 일치 (%d원)- %d개%n", rank.getCount(), rank.getPrize(), count);
         }
     }
