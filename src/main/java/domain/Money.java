@@ -1,7 +1,6 @@
 package domain;
 
 import exception.NotValidInputException;
-import exception.NullAndEmptyException;
 
 public class Money {
 
