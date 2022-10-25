@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.input.TicketPriceInput;
-import lotto.input.WinningNumbersInput;
+import lotto.domain.WinningLotto;
 
 import java.util.Scanner;
 
@@ -22,12 +22,12 @@ public class InputView {
         return result;
     }
 
-    public WinningNumbersInput getWinningNumbers() {
+    public WinningLotto getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MSG);
         Scanner scanner = new Scanner(System.in);
         String winningNumbersString =  scanner.nextLine();
         System.out.println(BONUS_WINNING_NUMBER_MSG);
         String bonusWinningNumberString = scanner.nextLine();
-        return new WinningNumbersInput(winningNumbersString, bonusWinningNumberString);
+        return WinningLotto.from(winningNumbersString, bonusWinningNumberString);
     }
 }

@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.common.type.WinnerRank;
+import lotto.domain.WinningLotto;
 import lotto.service.*;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
@@ -25,7 +26,7 @@ public class LottoJudgeTest {
         Lotto winningLottoNumbers = new Lotto(new TreeSet<>(Arrays.asList(1,2,3,4,5,6)));
 
         LottoJudge lottoJudge = new LottoJudge();
-        RewardCalculator result = lottoJudge.judge(lottos, winningLottoNumbers, "7");
+        RewardCalculator result = lottoJudge.judge(lottos, new WinningLotto(winningLottoNumbers, 7));
 
         RewardCalculator expected = new RewardCalculator();
         expected.plusCount(WinnerRank.FIRST);
@@ -44,7 +45,7 @@ public class LottoJudgeTest {
         Lotto winningLottoNumbers = new Lotto(new TreeSet<>(Arrays.asList(1,2,3,4,5,6)));
 
         LottoJudge lottoJudge = new LottoJudge();
-        RewardCalculator result = lottoJudge.judge(lottos, winningLottoNumbers, "11");
+        RewardCalculator result = lottoJudge.judge(lottos, new WinningLotto(winningLottoNumbers, 11));
 
         RewardCalculator expected = new RewardCalculator();
         expected.plusCount(WinnerRank.FIRST);
