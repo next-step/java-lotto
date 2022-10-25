@@ -33,11 +33,21 @@ public class Lotto {
 		return change;
 	}
 
-	public Set<Integer> getLotto() {
-		return lotto;
+	public int count(Lotto guestLotto) {
+		int count = 0;
+		for (Integer number : guestLotto.getLotto()) {
+			if (isExist(number)) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	public boolean isExist(Integer lottoNumber) {
 		return lotto.contains(lottoNumber);
+	}
+
+	public Set<Integer> getLotto() {
+		return lotto;
 	}
 }

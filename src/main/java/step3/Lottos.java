@@ -14,10 +14,7 @@ public class Lottos {
 
 	public int results(Lotto lotto, Lotto winningNumbers, int bonus) {
 		int count = 0;
-		Iterator<Integer> itr = winningNumbers.getLotto().iterator();
-		while (itr.hasNext()) {
-			count = checkContains(lotto, count, itr);
-		}
+		count = winningNumbers.count(lotto);
 		if (count == 4) {
 			return checkBonus(lotto, count, bonus);
 		}
