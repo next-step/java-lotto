@@ -12,10 +12,15 @@ public class Lotto {
 	}
 
 	public Lotto(String[] inputs) {
-		this.lotto = new TreeSet<>();
+		this(makeLotto(inputs));
+	}
+
+	private static Set<Integer> makeLotto(String[] inputs) {
+		Set<Integer> lotto = new TreeSet<>();
 		for (String input : inputs) {
-			this.lotto.add(Integer.parseInt(input));
+			lotto.add(Integer.parseInt(input));
 		}
+		return lotto;
 	}
 
 	public Set<Integer> getLotto() {
