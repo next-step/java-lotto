@@ -56,4 +56,12 @@ public class LottoTest {
         assertThat(returnRate).isEqualTo(new BigDecimal(666670).setScale(2, RoundingMode.DOWN));
     }
 
+    @Test
+    void testLottoTicketGeneration() {
+        int ticketCount = 5;
+        Lotto countTestLotto = Lotto.of(ticketCount);
+
+        assertThat(countTestLotto.getTickets().size()).isEqualTo(ticketCount);
+    }
+
 }
