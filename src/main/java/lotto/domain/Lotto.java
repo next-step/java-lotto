@@ -6,10 +6,16 @@ public class Lotto {
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private final Set<Number> numbers;
+    private final LottoType type;
 
     public Lotto(Set<Number> numbers) {
+        this(numbers, LottoType.AUTO);
+    }
+
+    public Lotto(Set<Number> numbers, final LottoType type){
         validate(numbers);
         this.numbers = new TreeSet<>(numbers);
+        this.type = type;
     }
 
     private void validate(Set<Number> numbers) {
@@ -24,6 +30,14 @@ public class Lotto {
 
     public Rank checkRank(WinnerNumbers winnerNumbers) {
         return Rank.valueOf(winnerNumbers.match(numbers), winnerNumbers.hasBonus(numbers));
+    }
+
+    public boolean isAuto(){
+        return type == LottoType.AUTO;
+    }
+
+    public boolean isManual(){
+        return type == LottoType.MANUAL;
     }
 
     @Override
