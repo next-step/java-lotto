@@ -20,11 +20,7 @@ public enum LottoWinnerRank {
     }
 
     public static int getWinningMoney(LottoWinnerRank rank) {
-        return Arrays.stream(values())
-            .filter(it -> it.equals(rank))
-            .findFirst()
-            .orElseGet(() -> MISS)
-            .getWinningMoney();
+        return rank.getWinningMoney();
     }
 
     public static LottoWinnerRank findKey(int matchFound) {

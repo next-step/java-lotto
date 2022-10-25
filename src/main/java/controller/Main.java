@@ -14,15 +14,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Money purchasedMoney = InputView.inputPurchaseMoney();
+        int money = InputView.inputPurchaseMoney();
+        Money purchasedMoney = new Money(money);
+
         RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
         LottoIssueMachine lottoIssueMachine = new LottoIssueMachine(randomLottoGenerator);
         Lottos createdRandomLottos = lottoIssueMachine.purchaseLotto(purchasedMoney);
         ResultView.printRandomLotto(createdRandomLottos);
 
-        Lotto winnerNumber = InputView.inputLastWeekWinnerNumber();
+        String winnerInputValue = InputView.inputLastWeekWinnerNumber();
+        Lotto winnerNumber = new Lotto(winnerInputValue);
 
-        BonusNumber bonusNumber = InputView.inputBonusNumber();
+        String bonusInputValue = InputView.inputBonusNumber();
+        BonusNumber bonusNumber = new BonusNumber(bonusInputValue);
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.findMatchLottoCount(winnerNumber, createdRandomLottos, bonusNumber);

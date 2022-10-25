@@ -12,8 +12,8 @@ public class RandomLottoGenerator {
 
         LottoNumber lottoNumber = new LottoNumber();
 
-        Collections.shuffle(lottoNumber.getLottoNumbers());
-        List<Integer> pickedNumbers = lottoNumber.getLottoNumbers().subList(0, 6);
+        Collections.shuffle(lottoNumber.getLottos());
+        List<Integer> pickedNumbers = lottoNumber.getLottos().subList(0, 6);
         Collections.sort(pickedNumbers);
         return Lotto.from(pickedNumbers);
 

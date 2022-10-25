@@ -1,7 +1,6 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +19,7 @@ class LottoNumberTest {
 
         LottoNumber lottoNumber = new LottoNumber();
 
-        List<Integer> lottoNumberRange = lottoNumber.getLottoNumbers();;
+        List<Integer> lottoNumberRange = lottoNumber.getLottos();;
 
         assertThat(Collections.max(lottoNumberRange)).isLessThanOrEqualTo(LOTTO_MAX_RANGE);
         assertThat(Collections.min(lottoNumberRange)).isGreaterThanOrEqualTo(LOTTO_MIN_RANGE);

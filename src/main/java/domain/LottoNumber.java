@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    List<Integer> lottoNumbers = new ArrayList<>();
+    List<Integer> lottos = new ArrayList<>();
 
     public LottoNumber() {
         lottoNumberRange();
@@ -15,10 +15,10 @@ public class LottoNumber {
     public void lottoNumberRange() {
         IntStream
             .range(1, 46)
-            .forEach(i -> this.lottoNumbers.add(i));
+            .forEach(i -> this.lottos.add(i));
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> getLottos() {
+        return lottos;
     }
 }

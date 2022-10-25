@@ -1,10 +1,15 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import javax.swing.*;
 
 import enums.LottoWinnerRank;
 
@@ -17,10 +22,10 @@ public class LottoResult {
     public LottoResult() {
     }
 
-    public void findMatchLottoCount(Lotto winnerNumber, Lottos lottos, BonusNumber bonusNumber) {
+    public void findMatchLottoCount(Lotto winningLotto, Lottos lottos, BonusNumber bonusNumber) {
 
         for (Lotto randomLotto : lottos.getLottoNumbers()) {
-            List<Integer> matchNumberFounds = compareWinnerNumber(randomLotto, winnerNumber);
+            List<Integer> matchNumberFounds = compareWinnerNumber(randomLotto, winningLotto);
 
             LottoWinnerRank ranking = LottoWinnerRank.findKey(matchNumberFounds.size());
 
