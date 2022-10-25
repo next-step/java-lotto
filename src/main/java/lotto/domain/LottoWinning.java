@@ -18,7 +18,7 @@ public class LottoWinning {
         double money = 0;
         for (Map.Entry<LottoRank, Integer> entry : winning.entrySet()) {
             LottoRank rank = entry.getKey();
-            money += rank.multiply(entry.getValue());
+            money += rank.calcWinningMoneyPerRank(entry.getValue());
         }
         return money;
     }
