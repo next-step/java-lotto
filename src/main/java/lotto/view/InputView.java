@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.PurchasePrice;
 import lotto.exception.InvalidInputException;
+import lotto.util.NumberUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,7 @@ public class InputView {
     private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String VALIDATE_NULL_OR_EMPTY_MESSAGE = "빈 값은 입력할 수 없습니다.";
     private static final String VALIDATE_INTEGER = "양수만 입력할 수 있습니다.";
+    private static final String VALIDATE_BONUS_NUMBER = "보너스 볼은 1 ~ 45 숫자 1개만 입력할 수 있습니다.";
 
     private InputView() {
         throw new AssertionError();
@@ -39,7 +41,15 @@ public class InputView {
     public static Integer inputBonusNumber() {
         System.out.println(BONUS_NUMBER_MESSAGE);
         String inputBonus = SCANNER.next();
-        return convertToInt(validateInput(inputBonus));
+        return validateBonusNumber(inputBonus);
+    }
+
+    private static Integer validateBonusNumber(String inputBonus) {
+        Integer bonusNumber = convertToInt(validateInput(inputBonus));
+        if (!NumberUtil.defaultNumberList().contains(bonusNumber)) {
+            throw new InvalidInputException(VALIDATE_BONUS_NUMBER);
+        }
+        return bonusNumber;
     }
 
     private static String validateInput(String input) {

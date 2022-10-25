@@ -25,7 +25,7 @@ public class NumberUtil {
         return lottoNumberList;
     }
 
-    private static List<Integer> defaultNumberList() {
+    public static List<Integer> defaultNumberList() {
         List<Integer> defaultNumberList = new ArrayList<>();
         for (int i = LOTTO_DEFAULT_START_NUMBER; i <= LOTTO_DEFAULT_END_NUMBER; i++) {
             defaultNumberList.add(i);
