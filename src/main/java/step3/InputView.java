@@ -8,4 +8,8 @@ public class InputView {
 	public static String input() {
 		return sc.nextLine();
 	}
+
+	public static String[] inputWinningNumber() {
+		return sc.nextLine().split(", ");
+	}
 }

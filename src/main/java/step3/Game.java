@@ -13,7 +13,7 @@ public class Game {
 
 		Result guestResult = startRaffle(lottoMoney);
 		Print.winningNumber();
-		Lotto winLotto = new Lotto(InputView.input().split(", "));
+		Lotto winLotto = new Lotto(InputView.inputWinningNumber());
 		Print.bonusBall();
 		int bonus = Integer.parseInt(InputView.input());
 
