@@ -33,21 +33,12 @@ public class LottoNumbers {
         return lottoNumberList;
     }
 
-    public Rank getMatchCount(LottoNumbers winnerLottoNumbers) {
-        int count = getCount(winnerLottoNumbers);
-
-        if (count == Rank.THIRD.getCountOfMatch()) {
-            return this.lottoNumberList.contains(winnerLottoNumbers.bonusNumber) ? Rank.SECOND : Rank.THIRD;
-        }
-
-        return Rank.valueOf(count);
+    public Integer getBonusNumber() {
+        return bonusNumber;
     }
 
-    private int getCount(LottoNumbers winnerLottoNumbers) {
-        return (int) this.lottoNumberList
-                .stream()
-                .filter(winnerLottoNumbers.lottoNumberList::contains)
-                .count();
+    public Rank getMatchCount(LottoNumbers winnerLottoNumbers) {
+        return Rank.getRank(this, winnerLottoNumbers);
     }
 
     private List<Integer> validateLottoNumberList(List<Integer> matchNumberList) {

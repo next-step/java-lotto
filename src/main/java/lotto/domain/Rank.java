@@ -26,10 +26,27 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch) {
+    private static Rank valueOf(int countOfMatch) {
         return Arrays.stream(Rank.values())
                 .filter(r -> r.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    public static Rank getRank(LottoNumbers lottoNumbers, LottoNumbers winnerLottoNumbers) {
+        int count = getCount(lottoNumbers, winnerLottoNumbers);
+
+        if (count == THIRD.getCountOfMatch()) {
+            return lottoNumbers.getLottoNumberList().contains(winnerLottoNumbers.getBonusNumber()) ? Rank.SECOND : Rank.THIRD;
+        }
+
+        return valueOf(count);
+    }
+
+    private static int getCount(LottoNumbers lottoNumbers, LottoNumbers winnerLottoNumbers) {
+        return (int) lottoNumbers.getLottoNumberList()
+                .stream()
+                .filter(winnerLottoNumbers.getLottoNumberList()::contains)
+                .count();
     }
 }
