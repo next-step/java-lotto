@@ -5,33 +5,43 @@ import static java.util.stream.Collectors.groupingBy;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Set;
 
 public class LottoWinners {
 
-    private static final int MIN_COUNT = 3;
-    private final Map<Integer, Long> winners;
+    private final Map<LottoPlace, Long> winners;
 
-    private LottoWinners(Map<Integer, Long> winners) {
+    private LottoWinners(Map<LottoPlace, Long> winners) {
         this.winners = winners;
     }
 
     public static LottoWinners of(List<Lotto> lottoList, Lotto weekendLottoNumber) {
         return new LottoWinners(lottoList
             .stream()
-            .map(lotto -> lotto.compare(weekendLottoNumber.getItem()))
-            .filter(count -> count >= MIN_COUNT)
-            .map(LottoPlace::getLottoPlace)
-            .collect(groupingBy(LottoPlace::getCount, counting())));
+            .map(lotto -> match(lotto.getItem(), weekendLottoNumber))
+            .filter(lottoPlace -> lottoPlace != LottoPlace.NONE_PLACE)
+            .collect(groupingBy(r -> r, counting())));
     }
 
-    public long getLottoPlaceCount(Integer count) {
-        return Optional.ofNullable(winners.get(count)).orElse(0L);
+    public Map<LottoPlace, Long> getWinners() {
+        return winners;
+    }
+
+    public Long getWinnerValue(LottoPlace lottoPlace) {
+        return winners.get(lottoPlace);
     }
 
     public long getTotalPrize() {
         return winners.keySet()
-            .stream().mapToLong(count -> LottoPlace.getLottoPlace(count).getPrize() * winners.get(count))
+            .stream().mapToLong(lottoPlace -> lottoPlace.getPrize() * winners.get(lottoPlace))
             .sum();
     }
+
+    private static LottoPlace match(Set<LottoNumber> item, Lotto weekendLottoNumber) {
+        int matchCount = weekendLottoNumber.compare(item);
+        boolean bonus = weekendLottoNumber.bonusCompare(item);
+
+        return LottoPlace.getLottoPlace(matchCount, bonus);
+    }
+
 }

@@ -29,10 +29,12 @@ public class LottoController {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Lotto weekendLotto = Lotto.from(InputView.getWeekendNumbers());
+        System.out.println("보너스 볼을 입력해 주세요.");
+        weekendLotto.setBonusItem(InputView.getWeekendBonusNumber());
 
         LottoWinners winners = LottoWinners.of(lottoList.getLottoList(), weekendLotto);
 
-        OutputView.printWinner(winners);
+        OutputView.printWinner(winners.getWinners());
 
         OutputView.printYield(lottoMoney.calYield(winners.getTotalPrize()));
     }

@@ -9,6 +9,7 @@ public class Lotto
 
     private static final int LOTTO_COUNT = 6;
     private final Set<LottoNumber> item;
+    private LottoNumber bonusItem;
 
     private Lotto(Set<LottoNumber> item) {
         this.item = item;
@@ -29,9 +30,22 @@ public class Lotto
         return item;
     }
 
+    public void setBonusItem(int bonusNumber) {
+
+        this.bonusItem = LottoNumber.from(bonusNumber);
+
+        if (item.contains(bonusItem)) {
+            throw new IllegalArgumentException("해당 번호는 이미 등록된 번호 입니다.");
+        }
+    }
+
     public int compare(Set<LottoNumber> item) {
         return Math.toIntExact(this.item.stream()
             .filter(item::contains).count());
+    }
+
+    public boolean bonusCompare(Set<LottoNumber> item) {
+        return item.contains(this.bonusItem);
     }
 
     @Override
