@@ -24,7 +24,7 @@ public class Lotto {
 
     public boolean isBonus(WinningLotto winningNumber) {
         if (countMatch(winningNumber) == Rank.SECOND.getMatchNum()) {
-            return existedMatchNumber(winningNumber.getBonus());
+            return existedMatchNumber(winningNumber.getBonusNumber());
         }
         return false;
     }
