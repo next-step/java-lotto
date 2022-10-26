@@ -4,9 +4,9 @@ public class Application {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        Calcurator calcurator = new Calcurator();
 
         List<String> inputList = inputView.getUserInputToStringList();
-        calcurator.calculate(inputList);
+        Calcurator calcurator = new Calcurator(inputList);
+        int result = calcurator.calculate().getNumber();
     }
 }

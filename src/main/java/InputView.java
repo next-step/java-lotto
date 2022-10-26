@@ -6,7 +6,7 @@ public class InputView {
 
     private static final String DELIMITER = " ";
 
-    public void validInputText(String text) {
+    private void validInputText(String text) {
         if (text == null || text.isEmpty() || text.isBlank()) {
             throw new IllegalArgumentException();
         }

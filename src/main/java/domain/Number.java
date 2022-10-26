@@ -3,13 +3,14 @@ package domain;
 import java.util.Objects;
 
 public class Number {
-    int number;
+    private int number;
 
     public Number(String value) {
-        if (!isIntegerNumber(value)) {
-            throw new NumberFormatException("정수가 아닙니다.");
+        try {
+            this.number = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("입력값이 정수가 아닙니다.");
         }
-        this.number = Integer.valueOf(value);
     }
 
     public Number(int number) {
@@ -23,7 +24,7 @@ public class Number {
     private boolean isIntegerNumber(String value) {
         try {
             return (Double.valueOf(value)) % 1 == 0;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new NumberFormatException("입력값이 숫자가 아닙니다.");
         }
     }
