@@ -27,7 +27,7 @@ public class InputView {
         OutputView.printManualLottoNumberNotification();
 
         Scanner scanner = new Scanner(System.in);
-        int ticketCount = manualLottoTicket.getTicketCount();
+        int ticketCount = manualLottoTicket.getCountOfTicket();
         List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             manualLottoNumbers.add(Arrays.

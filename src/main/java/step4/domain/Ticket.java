@@ -3,40 +3,21 @@ package step4.domain;
 public class Ticket {
 
     private static final int LOTTO_TICKET_PRICE = 1000;
-    private final int ticketCount;
+    private final int countOfTicket;
 
-    private Ticket(final int price) {
-        validatePrice(price);
-        this.ticketCount = toLottoTicket(price);
+    private Ticket(final int countOfTicket) {
+        this.countOfTicket = countOfTicket;
     }
 
-    public static final Ticket from(final int price) {
-        return new Ticket(price);
+    public static final Ticket from(final int ticketCount) {
+        return new Ticket(ticketCount);
     }
 
-    private void validatePrice(final int price) {
-        if (price == 0) {
-            return;
-        }
-
-        if (price <= 0) {
-            throw new IllegalArgumentException("구입금액은 양수여야 합니다.");
-        }
-
-        if (price % LOTTO_TICKET_PRICE != 0) {
-            throw new IllegalArgumentException("로또티켓은 한 장 당 1000원입니다.");
-        }
-    }
-
-    private final int toLottoTicket(final int price) {
-        return price / LOTTO_TICKET_PRICE;
-    }
-
-    public final int getTicketCount() {
-        return ticketCount;
+    public final int getCountOfTicket() {
+        return countOfTicket;
     }
 
     public final int getPurchasePrice(){
-        return ticketCount * LOTTO_TICKET_PRICE;
+        return countOfTicket * LOTTO_TICKET_PRICE;
     }
 }

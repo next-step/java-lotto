@@ -16,7 +16,7 @@ public class LottoGame {
     }
 
     public List<LottoNumbers> playLotto(final Ticket ticket, List<Set<Integer>> manualLottoNumbers) {
-        final int ticketCount = ticket.getTicketCount();
+        final int ticketCount = ticket.getCountOfTicket();
         for (Set manualLottoNumber : manualLottoNumbers) {
             lottoNumbers.add(LottoNumbers.from(
                 LottoNumberGenerator.generateManualLottoNumber(manualLottoNumber)));

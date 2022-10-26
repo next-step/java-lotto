@@ -74,3 +74,13 @@
   * 기능 목록
     - [x] 수동 추첨 번호 입력 기능
     - [x] 수동 로또 이외의 로또 티켓은 자동으로 추첨 되도록
+    * Step4 추가 피드백
+    - [x] Ticket 클래스 역할 고민. 수동과 자동을 DTO로 관리하기
+    - [ ] 총 구매 금액과 수동 구매 수량 사이의 밸리데이션
+    - [ ] 로또번호 캐시를 Integer -> LottoNumber, LottoNumber 내부에서 캐시 관리
+    - [ ] LottoNumbers 필드를 중복이 발생하지 않는 컬렉션으로 변경
+    - [ ] 로또번호의 정렬을 도메인 -> 출력 레이어로 변경
+    - [ ] 메소드 내에서 알 수 있는 정보와 역할을 바탕으로 변수명 짓기
+    - [ ] winningNumbers Integer -> LottoNumber 
+    - [ ] drawLottoResult 를 두 번 호출 한다면?
+    - [ ] List<Set<Integer>> 중 Set<Integer>를 DTO로 관리하기

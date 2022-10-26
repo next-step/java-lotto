@@ -5,6 +5,7 @@ import java.util.Map;
 import step4.domain.LottoNumbers;
 import step4.domain.Prize;
 import step4.domain.Ticket;
+import step4.dto.TicketDTO;
 
 public class OutputView {
 
@@ -23,9 +24,10 @@ public class OutputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static void printPurchaseResult(final Ticket ticket, final Ticket manualLottoTicket) {
-        System.out.println("수동으로 " + manualLottoTicket.getTicketCount() + "장," +
-            "자동으로 " + ticket.getTicketCount() + "개를 구매했습니다.");
+    public static void printPurchaseResult(final TicketDTO ticketDTO) {
+        System.out.println();
+        System.out.println("수동으로 " + ticketDTO.getCountOfManualTicket() + "장," +
+            "자동으로 " + ticketDTO.getCountOfAutoTicket() + "개를 구매했습니다.");
     }
 
     public static void printLottoNumbers(final List<LottoNumbers> lottoNumbers) {
@@ -62,8 +64,7 @@ public class OutputView {
         System.out.println(matchCount + "개 일치 (" + reward + ")- " + drawLottoResult.get(prize));
     }
 
-    public static void printGrossReturn(final Ticket ticket, final int totalIncome) {
-        final double purchasePrice = ticket.getPurchasePrice();
+    public static void printGrossReturn(final double purchasePrice, final int totalIncome) {
         final double grossReturn = totalIncome / purchasePrice;
         System.out.println("총 수익률은 " + String.format("%.2f", grossReturn) + "입니다.");
     }

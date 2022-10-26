@@ -8,14 +8,16 @@ import step4.domain.LottoNumbers;
 import step4.domain.LottoResult;
 import step4.domain.Prize;
 import step4.domain.Ticket;
+import step4.dto.TicketDTO;
 import step4.view.InputView;
 import step4.view.OutputView;
 
 public class LottoGameController {
 
-    public Ticket prepareLottoTicket() {
-        final Ticket ticket = Ticket.from(InputView.inputPrice());
-        return ticket;
+    public TicketDTO prepareLottoTicket() {
+        final int purchasePrice = InputView.inputPrice();
+        final int countOfManualTicket = InputView.inputManualLottoCount();
+        return TicketDTO.of(purchasePrice, countOfManualTicket);
     }
 
     public Ticket prepareManualLottoTicket() {
@@ -23,11 +25,15 @@ public class LottoGameController {
         return manualLottoTicket;
     }
 
-    public void playLotto(final Ticket ticket, final Ticket manualLottoTicket) {
-        List<Set<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoTicket);
-        OutputView.printPurchaseResult(ticket, manualLottoTicket);
+    public void playLotto(final TicketDTO ticketDTO) {
+        Ticket manualTicket = ticketDTO.toManualTicket();
+        Ticket autoTicket = ticketDTO.toAutoTicket();
+        int purchasePrice = ticketDTO.getPurchasePrice();
+
+        List<Set<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualTicket);
+        OutputView.printPurchaseResult(ticketDTO);
         final LottoGame lottoGame = LottoGame.newInstance();
-        final List<LottoNumbers> lottoNumbers = lottoGame.playLotto(ticket, manualLottoNumbers);
+        final List<LottoNumbers> lottoNumbers = lottoGame.playLotto(autoTicket, manualLottoNumbers);
         OutputView.printLottoNumbers(lottoNumbers);
 
         final LottoResult lottoResult = LottoResult.from(InputView.inputWinningNumbers());
@@ -36,6 +42,6 @@ public class LottoGameController {
         final Map<Prize, Integer> drawLottoResult = lottoResult.drawLottoResult(lottoNumbers, bonusBall);
         OutputView.printDrawResult(drawLottoResult);
         final int totalIncome = Prize.calculateTotalIncome(drawLottoResult);
-        OutputView.printGrossReturn(ticket, totalIncome);
+        OutputView.printGrossReturn(purchasePrice, totalIncome);
     }
 }
