@@ -38,6 +38,8 @@ public class Lotto {
 	}
 
 	private List<Integer> pick() {
-		return range(0, LOTTO_SIZE).mapToObj(AVAILABLE_NUMBERS::get).collect(Collectors.toList());
+		return range(0, LOTTO_SIZE)
+			.mapToObj(AVAILABLE_NUMBERS::get)
+			.collect(Collectors.toList());
 	}
 }

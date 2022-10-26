@@ -8,8 +8,8 @@ public enum WinningAmount {
 	FIVE_MATCH(5, 1500000),
 	SIX_MATCH(6, 2000000000);
 
-	private int matchCount;
-	private int prize;
+	private final int matchCount;		// 일치하는 개수
+	private final int prize;				// 당첨 상금
 
 	WinningAmount(int matchCount, int prize) {
 		this.matchCount = matchCount;
