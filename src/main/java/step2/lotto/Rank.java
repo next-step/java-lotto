@@ -2,7 +2,7 @@ package step2.lotto;
 
 import java.util.EnumSet;
 
-enum Rank {
+public enum Rank {
 
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
