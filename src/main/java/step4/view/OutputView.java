@@ -1,11 +1,12 @@
 package step4.view;
 
-import java.util.List;
-import java.util.Map;
+import step4.domain.LottoNumber;
 import step4.domain.LottoNumbers;
 import step4.domain.Prize;
-import step4.domain.Ticket;
 import step4.dto.TicketDTO;
+
+import java.util.List;
+import java.util.Map;
 
 public class OutputView {
 
@@ -27,14 +28,15 @@ public class OutputView {
     public static void printPurchaseResult(final TicketDTO ticketDTO) {
         System.out.println();
         System.out.println("수동으로 " + ticketDTO.getCountOfManualTicket() + "장," +
-            "자동으로 " + ticketDTO.getCountOfAutoTicket() + "개를 구매했습니다.");
+                "자동으로 " + ticketDTO.getCountOfAutoTicket() + "개를 구매했습니다.");
     }
 
     public static void printLottoNumbers(final List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            lottoNumber.getLottoNumbers()
-                .stream()
-                .forEach(number -> System.out.print(number.getLottoNumber() + " "));
+            List<LottoNumber> eachLottoNumbers = lottoNumber.getLottoNumbers();
+            eachLottoNumbers.sort(LottoNumber::compareTo);
+            eachLottoNumbers.stream()
+                    .forEach(number -> System.out.print(number.getLottoNumber() + " "));
             System.out.println();
         }
         System.out.println();

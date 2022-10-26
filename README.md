@@ -80,7 +80,7 @@
     - [x] Optional 보다 명확하게 이해할 수 있는 if문으로 수정
     - [ ] 로또번호 캐시를 Integer -> LottoNumber, LottoNumber 내부에서 캐시 관리
     - [ ] LottoNumbers 필드를 중복이 발생하지 않는 컬렉션으로 변경
-    - [ ] 로또번호의 정렬을 도메인 -> 출력 레이어로 변경
+    - [x] 로또번호의 정렬을 도메인 -> 출력 레이어로 변경
     - [ ] 메소드 내에서 알 수 있는 정보와 역할을 바탕으로 변수명 짓기
     - [ ] winningNumbers Integer -> LottoNumber 
     - [ ] drawLottoResult 를 두 번 호출 한다면?
