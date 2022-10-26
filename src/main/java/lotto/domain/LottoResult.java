@@ -25,7 +25,16 @@ public class LottoResult {
     }
 
     public Rank getMatchCount(LottoResult winnerLottoResult) {
-        return Rank.getRank(this, winnerLottoResult);
+        int count = getCount(this, winnerLottoResult);
+        boolean isBonus = getLottoNumbers().contains(winnerLottoResult.getBonusNumber());
+        return Rank.valueOf(count, isBonus);
+    }
+
+    private int getCount(LottoResult lottoResult, LottoResult winnerLottoResult) {
+        return (int) lottoResult.getLottoNumbers()
+                .stream()
+                .filter(winnerLottoResult.getLottoNumbers()::contains)
+                .count();
     }
 
 }

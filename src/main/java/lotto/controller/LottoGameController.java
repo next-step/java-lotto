@@ -14,15 +14,10 @@ import static lotto.view.ResultView.*;
 public class LottoGameController {
 
     public static void main(String[] args) {
-
         PurchasePrice purchasePrice = getPurchasePrice();
-
         LottoTickets lottoTickets = getLottoTickets(purchasePrice);
-
         List<Rank> rankList = getRank(lottoTickets);
-
         getYield(lottoTickets, rankList);
-
     }
 
     private static void getYield(LottoTickets lottoTickets, List<Rank> rankList) {
