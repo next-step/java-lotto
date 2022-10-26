@@ -22,15 +22,17 @@ class LottoGenerator1Test {
 
     private Money purchaseMoney;
 
-    private LottoMachine lottoMachine;
+    private LottoIssueMachine lottoIssueMachine;
 
-    private LottoGenerator lottoGenerator;
+    private RandomLottoGenerator randomLottoGenerator;
+
 
     @BeforeEach
     void setUp() {
-        lottoGenerator = new RandomLottoGenerator();
 
-        lottoMachine = new LottoMachine(lottoGenerator);
+        randomLottoGenerator = new RandomLottoGenerator();
+
+        lottoIssueMachine = new LottoIssueMachine(randomLottoGenerator);
 
         purchaseMoney = Money.from(2000);
     }
@@ -39,7 +41,7 @@ class LottoGenerator1Test {
     @DisplayName("로또가 갯수에 맞게 구입되었는지 확인하는 테스트")
     void 로또가_갯수에_맞게_구입되었는지_확인하는_테스트() {
 
-        Lottos purchaseLotto = lottoMachine.purchaseLotto(purchaseMoney);
+        Lottos purchaseLotto = lottoIssueMachine.purchaseLotto(purchaseMoney);
 
         assertThat(purchaseLotto.getLottoNumbers().size()).isEqualTo(purchaseMoney.getMoney() / LOTTO_PRICE);
 
@@ -49,7 +51,7 @@ class LottoGenerator1Test {
     @DisplayName("로또가 1, 45 사이의 범위내에서 제대로 생성되었는지 테스트")
     void 로또가_허용_생성_범위내에서_제대로_생성되었는지_테스트() {
 
-        Lotto randomLotto = lottoGenerator.createRandomLotto();
+        Lotto randomLotto = randomLottoGenerator.createRandomLotto();
 
         randomLotto.getLotto().sort(Comparator.naturalOrder());
 

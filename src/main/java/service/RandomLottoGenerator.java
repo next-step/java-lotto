@@ -1,22 +1,19 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import domain.Lotto;
+import domain.LottoNumber;
 
-public class RandomLottoGenerator implements LottoGenerator {
+public class RandomLottoGenerator {
 
-    @Override
     public Lotto createRandomLotto() {
-        List<Integer> lottoNumRange = new ArrayList<>();
 
-        for (int i = 1; i <= 45; i++) {
-            lottoNumRange.add(i);
-        }
-        Collections.shuffle(lottoNumRange);
-        List<Integer> pickedNumbers = lottoNumRange.subList(0, 6);
+        LottoNumber lottoNumber = new LottoNumber();
+
+        Collections.shuffle(lottoNumber.getLottos());
+        List<Integer> pickedNumbers = lottoNumber.getLottos().subList(0, 6);
         Collections.sort(pickedNumbers);
         return Lotto.from(pickedNumbers);
 

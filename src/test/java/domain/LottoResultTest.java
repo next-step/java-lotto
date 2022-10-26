@@ -6,71 +6,66 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import view.ResultView;
+import service.LottoIssueMachine;
+import service.RandomLottoGenerator;
 
 class LottoResultTest {
 
     private static final int MATCH_FOUND_COUNT = 1;
 
-    private static final double FULL_MATCH_EARNING_RATE = 2000000.0;
+    private static final double EXPECT_SECOND_RANK_EARNING_RATE = 1500.0;
 
     private static final Lotto WINNER_NUMBER = Lotto.from("1, 2, 3, 4, 5, 6");
 
-    private static final Lotto NO_MATCH_NUMBER = Lotto.from("13, 14, 15, 16, 17, 18");
+    private static final String BONUS_NUMBER = "7";
+
+    private static final Lotto EXPECT_SECOND_RANKED_NUMBER = Lotto.from("1, 2, 3, 4, 5, 8");
+
+    private BonusNumber bonusNumber;
 
     private LottoResult lottoResult;
 
-    private Lottos randomLottoList = new Lottos();
+    private Lottos lottos;
+
+    private RandomLottoGenerator randomLottoGenerator;
+
+    private LottoIssueMachine lottoIssueMachine;
 
     private Money purchaseMoney;
 
-    private ResultView resultView;
-
     @BeforeEach
     void setUp() {
+        lottos = new Lottos();
+        randomLottoGenerator = new RandomLottoGenerator();
+        lottoIssueMachine = new LottoIssueMachine(randomLottoGenerator);
         lottoResult = new LottoResult();
-        resultView = new ResultView();
-
-        Lotto randomLotto1 = Lotto.from("1, 2, 3, 4, 5, 6");
-        Lotto randomLotto2 = Lotto.from("7, 8, 9, 10, 11, 12");
+        bonusNumber = new BonusNumber(BONUS_NUMBER);
 
         purchaseMoney = Money.from(1000);
 
-        randomLottoList.addLotto(randomLotto1);
-        randomLottoList.addLotto(randomLotto2);
+        lottos.getLottoNumbers().add(EXPECT_SECOND_RANKED_NUMBER);
+    }
+
+    @Test
+    @DisplayName("일치하는 로또번호를 제대로 갱신하는지 확인하는 테스트")
+    void 일치하는_로또번호를_제대로_갱신하는지_확인하는_테스트() {
+
+        lottoResult.findMatchLottoCount(WINNER_NUMBER, lottos, bonusNumber);
+
+        assertThat(lottoResult.getMatchFoundCount().size()).isEqualTo(MATCH_FOUND_COUNT);
 
     }
 
     @Test
-    @DisplayName("맞는 로또의 갯수를 카운트 하는 테스트")
-    void 당첨번호와_맞는_로또의_갯수가_몇개인지_확인하는_테스트() {
+    @DisplayName("기대수익금을 제대로 계산하는지 테스트")
+    void 기대수익금을_제대로_계산하는지_테스트() {
 
-        lottoResult.findMatchLottoCount(WINNER_NUMBER, randomLottoList);
+        lottoResult.findMatchLottoCount(WINNER_NUMBER, lottos, bonusNumber);
 
-        assertThat(lottoResult.getMatchFoundCount()[WINNER_NUMBER.getLotto().size()]).isEqualTo(MATCH_FOUND_COUNT);
+        double expectExpectMoney = lottoResult.calculateEarningRate(purchaseMoney);
+
+        assertThat(expectExpectMoney).isEqualTo(EXPECT_SECOND_RANK_EARNING_RATE);
+
     }
 
-    @Test
-    @DisplayName("당첨금과 비교하여 수익률 계산하는 테스트")
-    void 당첨금과_비교하여_수익률_계산하는_테스트() {
-
-        lottoResult.findMatchLottoCount(WINNER_NUMBER, randomLottoList);
-
-        double result = lottoResult.calculateEarningRate(purchaseMoney);
-
-        assertThat(result).isEqualTo(FULL_MATCH_EARNING_RATE);
-    }
-
-    @Test
-    @DisplayName("수익률이 1 미만일시 손실 메시지 출력하는지 테스트")
-    void 수익률이_1_미만일시_손실_메시지_출력하는지_테스트() {
-
-        lottoResult.findMatchLottoCount(NO_MATCH_NUMBER, randomLottoList);
-
-        double result = lottoResult.calculateEarningRate(purchaseMoney);
-
-        String message = ResultView.lossMessageFormat(result);
-
-        assertThat(message).isNotEmpty();
-    }
 }

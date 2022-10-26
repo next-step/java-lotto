@@ -1,12 +1,11 @@
 package controller;
 
+import domain.BonusNumber;
 import domain.Lotto;
-import domain.Lottos;
 import domain.LottoResult;
+import domain.Lottos;
 import domain.Money;
-import service.LottoGenerator;
-import service.LottoMachine;
-
+import service.LottoIssueMachine;
 import service.RandomLottoGenerator;
 import view.InputView;
 import view.ResultView;
@@ -15,18 +14,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Money purchasedMoney = InputView.inputPurchaseMoney();
-        LottoGenerator lottoGenerator = new RandomLottoGenerator();
-        LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
-        Lottos createdRandomLottos = lottoMachine.purchaseLotto(purchasedMoney);
+        int money = InputView.inputPurchaseMoney();
+        Money purchasedMoney = new Money(money);
+
+        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
+        LottoIssueMachine lottoIssueMachine = new LottoIssueMachine(randomLottoGenerator);
+        Lottos createdRandomLottos = lottoIssueMachine.purchaseLotto(purchasedMoney);
         ResultView.printRandomLotto(createdRandomLottos);
 
-        Lotto winnerNumber = InputView.inputLastWeekWinnerNumber();
+        String winnerInputValue = InputView.inputLastWeekWinnerNumber();
+        Lotto winnerNumber = new Lotto(winnerInputValue);
+
+        String bonusInputValue = InputView.inputBonusNumber();
+        BonusNumber bonusNumber = new BonusNumber(bonusInputValue);
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.findMatchLottoCount(winnerNumber, createdRandomLottos);
+        lottoResult.findMatchLottoCount(winnerNumber, createdRandomLottos, bonusNumber);
         ResultView.winnerStatistic(lottoResult, purchasedMoney);
 
     }
-
 }
