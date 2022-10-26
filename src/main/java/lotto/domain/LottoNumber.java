@@ -1,18 +1,43 @@
 package lotto.domain;
 
-import lotto.utils.AutoNumberList;
+import java.util.Objects;
 
-import java.util.List;
+public class LottoNumber {
 
-public class LottoBall {
+    private final int MIN_NUMBER = 1;
+    private final int MAX_NUMBER = 45;
+    private final int number;
 
-    private int lottoNumber;
-
-    public LottoBall(int number) {
-        this.lottoNumber = number;
+    public LottoNumber(int number) {
+        validateNumber(number);
+        this.number = number;
     }
 
-    public static LottoBall getLottoNumbers() {
-        return AutoNumberList.makeNumberList();
+    private void validateNumber(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new IllegalArgumentException("로또 숫자 범위를 벗어났습니다.");
+        }
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return MIN_NUMBER == that.MIN_NUMBER && MAX_NUMBER == that.MAX_NUMBER && number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(MIN_NUMBER, MAX_NUMBER, number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

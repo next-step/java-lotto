@@ -2,17 +2,18 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<Integer> numberList;
+    private final List<LottoNumber> numberList;
     private Rank rank;
 
-    public Lotto(List<Integer> numberList) {
+    public Lotto(final List<LottoNumber> numberList) {
         this.numberList = numberList;
     }
 
-    public List<Integer> getNumberList() {
+    public List<LottoNumber> getNumberList() {
         return numberList;
     }
 
@@ -21,11 +22,17 @@ public class Lotto {
     }
 
     public Lotto matchRank(List<Integer> winnerNumberList) {
+
+        List<LottoNumber> winnerNumberListToCompare = winnerNumberList.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
         this.rank = Rank.getRank(
-                (int) numberList
-                        .stream()
-                        .filter(winnerNumberList::contains)
-                        .count());
+                (int) numberList.stream()
+                        .filter(winnerNumberListToCompare::contains)
+                        .count()
+        );
+
         return this;
     }
 
