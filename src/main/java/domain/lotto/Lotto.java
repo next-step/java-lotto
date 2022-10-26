@@ -1,4 +1,5 @@
-package domain;
+package domain.lotto;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,5 +10,4 @@ public class Lotto {
   public Lotto(List<Integer> lotto) {
     this.lotto = lotto;
   }
-
 }
