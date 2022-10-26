@@ -1,6 +1,7 @@
 package lotto;
 
 import exception.CustomException;
+import lotto.domain.LottoNumber;
 import lotto.exception.LottoErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

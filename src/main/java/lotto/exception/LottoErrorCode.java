@@ -1,8 +1,8 @@
 package lotto.exception;
 
 import exception.ErrorCode;
-import lotto.Lotto;
-import lotto.LottoNumber;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public enum LottoErrorCode implements ErrorCode {
     LOTTO_NUMBER_BAD_REQUEST("로또는 " + LottoNumber.MINIMUM_VALUE + "에서 " + LottoNumber.MAXIMUM_VALUE + "사이의 값만 입력가능합니다."),

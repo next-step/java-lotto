@@ -1,7 +1,12 @@
 package lotto;
 
 import exception.CustomException;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberRange;
+import lotto.domain.enums.MatchNumberAndPrize;
 import lotto.exception.LottoErrorCode;
+import lotto.service.LottoStatisticalService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

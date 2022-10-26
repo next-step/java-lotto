@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.MatchNumberAndPrize;
+import lotto.domain.Lotto;
+import lotto.domain.enums.MatchNumberAndPrize;
 
 import java.util.List;
 import java.util.Map;

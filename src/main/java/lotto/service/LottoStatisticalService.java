@@ -1,4 +1,8 @@
-package lotto;
+package lotto.service;
+
+import lotto.domain.enums.MatchNumberAndPrize;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.HashMap;
 import java.util.List;

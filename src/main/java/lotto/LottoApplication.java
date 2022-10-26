@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoStore;
+import lotto.domain.enums.MatchNumberAndPrize;
+import lotto.service.LottoStatisticalService;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
