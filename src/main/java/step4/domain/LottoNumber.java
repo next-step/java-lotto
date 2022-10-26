@@ -1,7 +1,6 @@
 package step4.domain;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 

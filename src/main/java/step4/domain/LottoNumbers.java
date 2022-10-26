@@ -1,30 +1,30 @@
 package step4.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoNumbers {
 
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private Set<LottoNumber> lottoNumbers = new TreeSet<>();
     public static final int LOTTO_DEFAULT_SIZE = 6;
 
-    private LottoNumbers(List<LottoNumber> generatedNumbers) {
+    private LottoNumbers(Set<LottoNumber> generatedNumbers) {
         validateLottoNumbers(generatedNumbers);
-        lottoNumbers.addAll(generatedNumbers);
-        lottoNumbers.sort(LottoNumber::compareTo);
+        this.lottoNumbers = generatedNumbers;
     }
 
-    private void validateLottoNumbers(List<LottoNumber> generatedNumbers) {
+    private void validateLottoNumbers(Set<LottoNumber> generatedNumbers) {
         if (generatedNumbers.size() != LOTTO_DEFAULT_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
         }
     }
 
-    public static LottoNumbers from(List<LottoNumber> generatedNumbers) {
+    public static LottoNumbers from(Set<LottoNumber> generatedNumbers) {
         return new LottoNumbers(generatedNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

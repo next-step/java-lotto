@@ -1,6 +1,5 @@
 package step4.view;
 
-import step4.domain.LottoNumber;
 import step4.domain.LottoNumbers;
 import step4.domain.Prize;
 import step4.dto.TicketDTO;
@@ -33,9 +32,9 @@ public class OutputView {
 
     public static void printLottoNumbers(final List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            List<LottoNumber> eachLottoNumbers = lottoNumber.getLottoNumbers();
-            eachLottoNumbers.sort(LottoNumber::compareTo);
-            eachLottoNumbers.stream()
+            lottoNumber.getLottoNumbers()
+                    .stream()
+                    .sorted()
                     .forEach(number -> System.out.print(number.getLottoNumber() + " "));
             System.out.println();
         }
