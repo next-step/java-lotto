@@ -12,7 +12,8 @@ import lotto.domain.Rank;
 public class OutputView {
 
     public void printPurchasedLotto(Lotto lotto, int manualNumber) {
-        System.out.println("수동으로" + getAutoNumber(lotto, manualNumber) + "장, 자동으로 " + manualNumber + "개 구매했습니다.");
+        System.out.println(
+                "수동으로" + getAutoNumber(lotto, manualNumber) + "장, 자동으로 " + manualNumber + "개 구매했습니다.");
         for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
             System.out.println("[" + printLottoNumber(lottoNumber) + "]");
         }
@@ -56,13 +57,8 @@ public class OutputView {
     }
 
     private String printRank(Rank rank, Prize prize) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(prize.getWinningCount());
-        stringBuilder.append("개 일치");
-        stringBuilder.append(isBonusRank(prize) + " (");
-        stringBuilder.append(prize.getPrizeMoney() + "원) - ");
-        stringBuilder.append(rank.findRank(prize) + "개");
-        return stringBuilder.toString();
+        return prize.getWinningCount() + "개 일치" + isBonusRank(prize) + " (" + prize.getPrizeMoney() + "원) - " +
+               rank.findRank(prize) + "개";
     }
 
     private String isBonusRank(Prize prize) {

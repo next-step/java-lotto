@@ -1,16 +1,25 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Rank {
-    private final RankMap rankMap;
+    private final Map<Prize, RankCount> rankMap;
 
     public Rank() {
-        this.rankMap = new RankMap();
+        this.rankMap = new HashMap<>();
+        initRankMap(this.rankMap);
+    }
+
+    private void initRankMap(Map<Prize, RankCount> rankMap) {
+        for (Prize value : Prize.values()) {
+            rankMap.put(value, new RankCount(0));
+        }
     }
 
     public Integer findRank(Prize prize) {
-        return rankMap.getCount(prize).getCount();
+        return rankMap.get(prize).getCount();
     }
 
     public void settingRank(int matchingCount, boolean containBonusNumber) {
@@ -18,8 +27,8 @@ public class Rank {
     }
 
     private void addRankMap(Prize prize) {
-        RankCount rankCount = rankMap.getCount(prize);
-        rankMap.putCount(prize, rankCount.rankCountPlusOne());
+        RankCount rankCount = rankMap.get(prize);
+        rankMap.put(prize, rankCount.rankCountPlusOne());
     }
 
     public double calculateYield(BigDecimal purchaseAmount) {
