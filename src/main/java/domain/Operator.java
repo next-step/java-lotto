@@ -6,9 +6,9 @@ import java.util.function.BiFunction;
 public enum Operator {
 
     ADD("+", Integer::sum),
-    SUBTRACT("-", Operator::subtract),
-    MULTIPLY("*", Operator::multiply),
-    DIVIDE("/", Operator::divide);
+    SUBTRACT("-", (a, b) -> a - b),
+    MULTIPLY("*", (a, b) -> a * b),
+    DIVIDE("/", (a, b) -> a / b);
 
     private final String operation;
     private final BiFunction<Integer, Integer, Integer> function;
@@ -28,19 +28,5 @@ public enum Operator {
     public int calculate(int a, int b) {
         return function.apply(a, b);
     }
-
-    private static int subtract(int a, int b) {
-        return a - b;
-    }
-
-    private static int multiply(int a, int b) {
-        return a * b;
-    }
-
-    private static int divide(int a, int b) {
-        if (b == 0) {
-            throw new ArithmeticException("0을 나눌 수 없습니다.");
-        }
-        return a / b;
-    }
 }
+

@@ -41,9 +41,4 @@ public class OperatorTest {
                     Operator.of("&").calculate(1, 2);
                 });
     }
-
-    @Test
-    void 사칙연산_모두_포함() {
-
-    }
 }
