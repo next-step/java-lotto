@@ -13,6 +13,7 @@ public class Lotteries {
 	private static final int DEFAULT_MAX_LENGTH = 6;
 	private static HashMap<Integer, Integer> totalMatch = new HashMap<>();
 	private static WinningLotto winningLotto;
+
 	private List<Lotto> lotteries;
 	private int countOfMatchBonus = 0;
 

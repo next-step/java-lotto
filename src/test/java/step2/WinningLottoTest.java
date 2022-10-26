@@ -1,8 +1,10 @@
 package step2;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.Arrays;
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.IllegalNumberException;
@@ -17,7 +19,7 @@ public class WinningLottoTest {
 		int bonusNumber = 7;
 		WinningLotto lotteryWin = WinningLotto.of(winNum, bonusNumber);
 
-		Assertions.assertThat(lotteryWin.countOfMatch(Arrays.asList(1, 2, 22, 33, 41, 45)))
+		assertThat(lotteryWin.countOfMatch(Arrays.asList(1, 2, 22, 33, 41, 45)))
 			.isEqualTo(2);
 	}
 
@@ -28,7 +30,7 @@ public class WinningLottoTest {
 		int bonusNumber = 7;
 		WinningLotto lotteryWin = WinningLotto.of(winNum, bonusNumber);
 
-		Assertions.assertThat(lotteryWin.isBonus(5, Arrays.asList(1, 2, 5, bonusNumber, 41, 45)))
+		assertThat(lotteryWin.isBonus(5, Arrays.asList(1, 2, 5, bonusNumber, 41, 45)))
 			.isEqualTo(true);
 	}
 
@@ -37,7 +39,7 @@ public class WinningLottoTest {
 	void bonus_valid() {
 		List<Integer> winNum = Arrays.asList(1, 2, 3, 4, 5, 6);
 		int bonusNumber = 6;
-		Assertions.assertThatThrownBy(() -> WinningLotto.of(winNum, bonusNumber))
+		assertThatThrownBy(() -> WinningLotto.of(winNum, bonusNumber))
 			.isInstanceOf(IllegalNumberException.class);
 	}
 	}

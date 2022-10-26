@@ -21,14 +21,16 @@ public enum Rank {
 	public int getCountOfMatch() {
 		return countOfMatch;
 	}
+
 	public int getWinningMoney() {
 		return winningMoney;
 	}
 
 	public static Rank of(int countOfMatch) {
-		return Arrays.stream(Rank.values()).filter(
-			rank -> rank.getCountOfMatch() == countOfMatch).findFirst().orElse(MISS);
-
+		return Arrays.stream(Rank.values())
+			.filter(rank ->
+				rank.getCountOfMatch() == countOfMatch)
+			.findFirst().orElse(MISS);
 	}
 
 }

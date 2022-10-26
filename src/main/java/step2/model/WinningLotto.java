@@ -7,6 +7,7 @@ import step2.exception.IllegalNumberException;
 public class WinningLotto {
 
 	private static final int SECOND_MATCH_NUM = 5;
+
 	private List<Integer> winLottoNumber;
 	private int bonusNumber;
 
