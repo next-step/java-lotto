@@ -1,9 +1,6 @@
 package step2.lotto;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MatchIndicatorCalculator {
@@ -17,7 +14,7 @@ public class MatchIndicatorCalculator {
     public Map<Rank, Long> matchIndicators() {
         Map<Rank, Long> ranks = countedWinningRanks();
         countNotWinningRanks(ranks);
-        return Map.copyOf(ranks);
+        return Map.copyOf(new TreeMap<>(ranks));
     }
 
     private Map<Rank, Long> countedWinningRanks() {
