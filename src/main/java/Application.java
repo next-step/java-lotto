@@ -6,7 +6,8 @@ public class Application {
         InputView inputView = new InputView();
 
         List<String> inputList = inputView.getUserInputToStringList();
-        Calcurator calcurator = new Calcurator(inputList);
-        int result = calcurator.calculate().getNumber();
+        Calculator calculator = new Calculator(inputList);
+        int result = calculator.calculate().getNumber();
+        System.out.println("result is... " + result);
     }
 }
