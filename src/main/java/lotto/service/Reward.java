@@ -23,20 +23,20 @@ public class Reward {
         winnerCount.put(WinnerRank.FIFTH, 0);
     }
 
-    public void plusCount(WinnerRank winnerRank){
-        if(!winnerCount.containsKey(winnerRank)) return;
+    public void plusCount(WinnerRank winnerRank) {
+        if (!winnerCount.containsKey(winnerRank)) return;
         winnerCount.put(winnerRank, winnerCount.get(winnerRank) + DEFAULT_OFFSET);
     }
 
-    public int getAllProfit(){
+    public int getAllProfit() {
         int result = 0;
-        for(Map.Entry<WinnerRank, Integer> entry : winnerCount.entrySet()){
+        for (Map.Entry<WinnerRank, Integer> entry : winnerCount.entrySet()) {
             result += entry.getKey().getReward() * entry.getValue();
         }
         return result;
     }
 
-    public double getProfitRatio(Lottos lottos){
+    public double getProfitRatio(Lottos lottos) {
         return getAllProfit() / (double) (lottos.getLottosAmount() * DEFAULT_TICKET_PRICE);
     }
 

@@ -36,7 +36,7 @@ public enum WinnerRank {
         return BY_RANK_CONDITION.get(condition);
     }
 
-    public boolean isSecond(){
+    public boolean isSecond() {
         return this == SECOND;
     }
 

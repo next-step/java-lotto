@@ -1,28 +1,27 @@
 package lotto.domain;
 
-import lotto.strategy.LottoGenerateStrategy;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
     private static final int DEFAULT_SIZE = 6;
+    public static final int LOTTO_MAX_NUM = 45;
+    public static final int LOTTO_MIN_NUM = 1;
+
     private final Set<Integer> lottoNums;
 
-    public Lotto(LottoGenerateStrategy lottoGenerateStrategy) {
-        this(lottoGenerateStrategy.generateLotto());
-    }
+    private static final List<Integer> NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
+            .boxed()
+            .collect(Collectors.toList());
 
     public Lotto(Set<Integer> lottoNums) {
         if(lottoNums.size() > DEFAULT_SIZE) {
             throw new IllegalArgumentException("lotto cannot have number quantity bigger than 6");
         }
-        if(lottoNums.size() != DEFAULT_SIZE){
+        if(lottoNums.size() < DEFAULT_SIZE){
             throw new IllegalArgumentException("lotto cannot have duplicate numbers");
         }
         this.lottoNums = lottoNums;
@@ -51,4 +50,8 @@ public class Lotto {
         return getSameElements(winningLottoNumbers).size();
     }
 
+    public static Lotto generateRandomLotto() {
+        Collections.shuffle(NUMBERS);
+        return new Lotto(new TreeSet<>(NUMBERS.subList(0, 6)));
+    }
 }

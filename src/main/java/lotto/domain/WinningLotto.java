@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import lotto.strategy.LottoWinningGenerateStrategy;
-
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final Lotto winningLotto;
@@ -13,10 +15,22 @@ public class WinningLotto {
         this.bonusWinningNumber = bonusWinningNumber;
     }
 
-    public static WinningLotto from(String winningNumbers, String bonusWinningNumber){
-        Lotto resultLotto = new Lotto(new LottoWinningGenerateStrategy(winningNumbers));
+    public static WinningLotto from(String winningLottoNumbers, String bonusWinningNumber) {
+        String winningNumbersNoSpace = removeSpace(winningLottoNumbers);
+        Set<Integer> result = Arrays.stream(splitStringToLottoNumbers(winningNumbersNoSpace))
+                .map(Integer::parseInt)
+                .collect(Collectors.toCollection(TreeSet::new));
+        Lotto resultLotto = new Lotto(result);
         Integer resultBonus = Integer.parseInt(bonusWinningNumber);
         return new WinningLotto(resultLotto, resultBonus);
+    }
+
+    private static String[] splitStringToLottoNumbers(String winningNumbersNoSpace) {
+        return winningNumbersNoSpace.split(",");
+    }
+
+    private static String removeSpace(String winningLottoNumbers) {
+        return winningLottoNumbers.replace(" ", "");
     }
 
     public Lotto getWinningLotto() {
