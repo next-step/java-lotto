@@ -18,8 +18,8 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public void print(OutputView outputView) {
-        lottoTickets.forEach(lottoTicket -> lottoTicket.print(outputView));
+    public void printNumbers(OutputDevice outputDevice) {
+        lottoTickets.forEach(lottoTicket -> lottoTicket.printNumbers(outputDevice));
     }
 
     @Override
