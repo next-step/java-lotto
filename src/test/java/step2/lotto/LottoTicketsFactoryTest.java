@@ -17,7 +17,7 @@ class LottoTicketsFactoryTest {
         LottoTicketsFactory lottoTicketsFactory = new LottoTicketsFactory(price, numbersGenerator);
 
         List<LottoTicket> lottoTickets = List.of(LottoTicket.from(numbersGenerator));
-        assertThat(lottoTicketsFactory.lottoTickets()).isEqualTo(new LottoTickets(lottoTickets));
+        assertThat(lottoTicketsFactory.lottoTickets()).isEqualTo(new LottoTickets(lottoTickets, price));
     }
 
 }
