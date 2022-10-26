@@ -26,7 +26,6 @@ public class WinningLotto {
 		return new WinningLotto(winLottoNumber, bonusNumber);
 	}
 
-
 	public int countOfMatch(List<Integer> lotto) {
 		return (int) winLottoNumber.stream()
 			.filter(lotto::contains)
@@ -37,7 +36,9 @@ public class WinningLotto {
 		long countOfBonus = DEFAULT_COUNT_OF_BONUS;
 
 		if (countLottoMatch == SECOND_MATCH_NUM) {
-			countOfBonus = lotto.stream().filter(s -> s.equals(bonusNumber)).count();
+			countOfBonus = lotto.stream()
+				.filter(lottoNumber -> lottoNumber.equals(bonusNumber))
+				.count();
 		}
 
 		return countOfBonus > DEFAULT_COUNT_OF_BONUS;

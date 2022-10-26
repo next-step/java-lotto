@@ -10,14 +10,13 @@ public class Lotteries {
 	private static final int ADD_MATCH_COUNT = 1;
 	private static final int DEFAULT_MATCH_COUNT = 0;
 	private static final int DEFAULT_MIN_LENGTH = 0;
-	private static final int DEFAULT_MAX_LENGTH = 6;
-	private static HashMap<Integer, Integer> totalMatch = new HashMap<>();
-	private static WinningLotto winningLotto;
 
+	private static HashMap<Rank, Integer> totalMatch;
+	private WinningLotto winningLotto;
 	private List<Lotto> lotteries;
-	private int countOfMatchBonus = 0;
+	private int countOfMatchBonus = DEFAULT_MATCH_COUNT;
 
-	private Lotteries(List<Lotto> lotteries, HashMap<Integer, Integer> totalMatch) {
+	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
 		this.lotteries = lotteries;
 		this.totalMatch = totalMatch;
 	}
@@ -29,27 +28,28 @@ public class Lotteries {
 			lotteries.add(new Lotto(lottoFactory));
 		}
 
-		for (int matchNumber = DEFAULT_MIN_LENGTH; matchNumber <= DEFAULT_MAX_LENGTH; matchNumber++) {
-			totalMatch.put(matchNumber, DEFAULT_MATCH_COUNT);
+		for (Rank rank : Rank.values()) {
+			totalMatch.put(rank, DEFAULT_MATCH_COUNT);
 		}
 
 		return new Lotteries(lotteries, totalMatch);
 	}
 
-	public HashMap<Integer, Integer> isMatch(List<Integer> winNumber, int bonusNumber) {
+	public HashMap<Rank, Integer> isMatch(List<Integer> winNumber, int bonusNumber) {
 		winningLotto = WinningLotto.of(winNumber, bonusNumber);
 
 		for (Lotto lotto : lotteries) {
 			int countOfMatch = winningLotto.countOfMatch(lotto.getLotto());
+			Rank rank = Rank.of(countOfMatch);
 			countOfMatchBonus(countOfMatch, lotto.getLotto());
 
-			totalMatch.put(countOfMatch, totalMatch.get(countOfMatch) + ADD_MATCH_COUNT);
+			totalMatch.put(rank, totalMatch.get(rank) + ADD_MATCH_COUNT);
 		}
 		return totalMatch;
 	}
 
-	private void countOfMatchBonus(int countLottoMatch, List<Integer> lotto) {
-		if (winningLotto.isBonus(countLottoMatch, lotto)) {
+	private void countOfMatchBonus(int countOfMatch, List<Integer> lotto) {
+		if (winningLotto.isBonus(countOfMatch, lotto)) {
 			countOfMatchBonus += ADD_MATCH_COUNT;
 		}
 	}

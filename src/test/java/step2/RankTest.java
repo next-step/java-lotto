@@ -4,6 +4,7 @@ package step2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static step2.model.Rank.FIFTH;
 
+import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import step2.model.Rank;
 

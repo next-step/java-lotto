@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.MoneyException;
 import step2.model.Payment;
+import step2.model.Rank;
 
 public class PaymentTest {
 
@@ -43,11 +44,12 @@ public class PaymentTest {
 		int money = 14000;
 		Payment payment = new Payment();
 
-		HashMap<Integer, Integer> totalCountMap = new HashMap<>();
-		totalCountMap.put(3, 1);
-		totalCountMap.put(4, 0);
-		totalCountMap.put(5, 0);
-		totalCountMap.put(6, 0);
+		HashMap<Rank, Integer> totalCountMap = new HashMap<>();
+		totalCountMap.put(Rank.FIFTH, 1);
+		totalCountMap.put(Rank.FOURTH, 0);
+		totalCountMap.put(Rank.THIRD, 0);
+		totalCountMap.put(Rank.SECOND, 0);
+		totalCountMap.put(Rank.FIRST, 0);
 
 		assertThat(String.format("%.2f", payment.calculateBenefit(money, totalCountMap))).isEqualTo(
 			"0.36");

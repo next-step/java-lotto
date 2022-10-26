@@ -4,6 +4,7 @@ import java.util.HashMap;
 import step2.model.Lotteries;
 import step2.model.LottoFactory;
 import step2.model.Payment;
+import step2.model.Rank;
 import step2.view.InputView;
 import step2.view.OutputView;
 
@@ -24,7 +25,8 @@ public class LottoController {
 
 		OUTPUT_VIEW.showLotteries(totalTicket, lotteries);
 		int bonusNumber = INPUT_VIEW.askBonusNumber();
-		HashMap<Integer, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),bonusNumber);
+
+		HashMap<Rank, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),bonusNumber);
 
 		OUTPUT_VIEW.resultView(totalCount,lotteries.countOfMatchBonus());
 		OUTPUT_VIEW.showRate(payment.calculateBenefit(money, totalCount));

@@ -10,29 +10,26 @@ import step2.model.Rank;
 public class OutputView {
 
 	private static final int DEFAULT_COUNT = 0;
-	private static final int MIN_WIN_COUNT = 3;
-	private static final int MAX_WIN_COUNT = 6;
 	private static final int BENEFIT_STANDARD = 1;
 
-	public void resultView(HashMap<Integer, Integer> totalCount, int bonusMatchCount) {
+	public void resultView(HashMap<Rank, Integer> totalCount, int bonusMatchCount) {
 		System.out.println("당첨 통계");
 		System.out.println("--------");
-
-		for (int key = MIN_WIN_COUNT; key <= MAX_WIN_COUNT; key++) {
-			showResult(key, bonusMatchCount, totalCount);
+		for (Rank rank : Rank.values()) {
+			showResult(rank, bonusMatchCount, totalCount);
 		}
 	}
 
-	private void showResult(int key, int bonusMatchCount, HashMap<Integer, Integer> totalCount) {
-		int countOfMatch = Rank.of(key).getCountOfMatch();
+	private void showResult(Rank rank, int bonusMatchCount, HashMap<Rank, Integer> totalCount) {
+		int countOfMatch = rank.getCountOfMatch();
 
 		if (countOfMatch == SECOND.getCountOfMatch()) {
 			rankSecondMessage(bonusMatchCount, countOfMatch);
 			return;
 		}
 
-		System.out.printf("%s개 일치" + "(%d)- " + totalCount.get(key) + "개\n", countOfMatch,
-			Rank.of(key).getWinningMoney());
+		System.out.printf("%s개 일치" + "(%d)- " + totalCount.get(rank) + "개\n", countOfMatch,
+			rank.getWinningMoney());
 	}
 
 	public void showTotalTicket(int tickets) {
