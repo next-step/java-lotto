@@ -1,10 +1,15 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.constant.LottoRanking;
+import lotto.domain.LottoCount;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResult;
 import lotto.util.LottoUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -24,11 +29,11 @@ public class LottoController {
 
     private void getLottoResult(List<LottoNumbers> lottoTickets, int price) {
         String[] winningNumbers = inputView.lastWeekLottoNumbersScan();
-        LottoNumbers lottoNumbers = new LottoNumbers(LottoUtil.ArrayToList(winningNumbers));
+        LottoNumbers winLottoNumbers = new LottoNumbers(LottoUtil.ArrayToList(winningNumbers));
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateLottoResult(lottoTickets, lottoNumbers, price);
-
+        ArrayList<LottoRanking> lottoRankings = winLottoNumbers.matchingLottoNumbers(lottoTickets);
+        lottoResult.calculateLottoResult(lottoRankings, price);
         resultView.printResult(lottoResult);
     }
 

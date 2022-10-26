@@ -1,6 +1,10 @@
 package lotto.domain;
 
+import lotto.constant.LottoRanking;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER = 6;
@@ -18,7 +22,23 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+    public ArrayList<LottoRanking> matchingLottoNumbers(List<LottoNumbers> lottoTickets) {
+        ArrayList<LottoRanking> rank = new ArrayList<>();
+        for (LottoNumbers lottoTicket : lottoTickets) {
+            rank.add(lottoMatchingResult(lottoTicket));
+        }
+        return rank;
+    }
+
+    private LottoRanking lottoMatchingResult(LottoNumbers lottoTicket) {
+        return LottoRanking.of(filterMatchingNumbers(lottoTicket));
+    }
+
+    private int filterMatchingNumbers(LottoNumbers lottoTicket) {
+        List<Integer> match = lottoTicket.getLottoNumbers().stream()
+                .filter(lottoNumbers::contains)
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
+        return match.size();
     }
 }

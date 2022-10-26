@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import lotto.constant.LottoRanking;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,25 +35,28 @@ class LottoResultTest {
         purchasedLottoNumbers = List.of(
                 new LottoNumbers(List.of(one, three, five, seven, nine, twentyTwo)),
                 new LottoNumbers(List.of(one, three, eight, twentyTwo, twentyOne, thirtyTwo)),
-                new LottoNumbers(List.of(one, three, five, twelve, nine, twentyOne))
+                new LottoNumbers(List.of(one, three, five, twelve, nine, twentyOne)),
+                new LottoNumbers(List.of(one, three, five, nine, thirtyTwo, twentyOne))
         );
 
-        lastWeekLottoNumbers = new LottoNumbers(List.of(one, three, eight, twelve, twentyTwo, fortyFive));
+        lastWeekLottoNumbers = new LottoNumbers(List.of(new LottoNumber(1), three, eight, twelve, twentyTwo, fortyFive));
     }
 
     @Test
     @DisplayName("4개 맞은 사람이 1명, 3개맞은 사람이 2명인지 확인")
     void 로또_결과_테스트() {
-        lottoResult.calculateLottoResult(purchasedLottoNumbers, lastWeekLottoNumbers, 3000);
-        Map<Integer, Integer> lottoRankings = lottoResult.getLottoRankings();
-        assertThat(lottoRankings.get(4)).isEqualTo(1);
-        assertThat(lottoRankings.get(3)).isEqualTo(2);
+        ArrayList<LottoRanking> lottoRankingsList = lastWeekLottoNumbers.matchingLottoNumbers(purchasedLottoNumbers);
+        lottoResult.calculateLottoResult(lottoRankingsList, 3000);
+        Map<LottoRanking, Integer> lottoRankings = lottoResult.getLottoRankings();
+        assertThat(lottoRankings.get(LottoRanking.FOUR)).isEqualTo(1);
+        assertThat(lottoRankings.get(LottoRanking.THREE)).isEqualTo(2);
     }
 
     @Test
     @DisplayName("복권 수익/구입금액 확인")
     void 로또_수익률_테스트() {
-        lottoResult.calculateLottoResult(purchasedLottoNumbers, lastWeekLottoNumbers, 3000);
+        ArrayList<LottoRanking> lottoRankingsList = lastWeekLottoNumbers.matchingLottoNumbers(purchasedLottoNumbers);
+        lottoResult.calculateLottoResult(lottoRankingsList, 3000);
         assertThat(lottoResult.getPercentage()).isEqualTo(20.0);
     }
 }
