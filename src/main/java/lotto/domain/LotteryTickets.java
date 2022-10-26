@@ -11,6 +11,10 @@ public class LotteryTickets {
         this.lotteryTickets = lotteryTickets;
     }
 
+    public static LotteryTickets of(LotteryTicket... tickets) {
+        return new LotteryTickets(List.of(tickets));
+    }
+
     public List<LotteryTicket> getLotteryTickets() {
         return lotteryTickets;
     }
