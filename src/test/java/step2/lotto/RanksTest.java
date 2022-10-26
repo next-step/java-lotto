@@ -20,7 +20,7 @@ class RanksTest {
     }
 
     @Test
-    void 통계를_구할_수_있다() {
+    void 일치_지표를_구할_수_있다() {
         List<Rank> rankingAggregation = List.of(Rank.FOURTH);
 
         Ranks ranks = new Ranks(rankingAggregation);
@@ -31,7 +31,7 @@ class RanksTest {
                 Map.entry(Rank.THIRD, 0L),
                 Map.entry(Rank.FOURTH, 1L)
         );
-        assertThat(ranks.statisticsRanks()).isEqualTo(statisticsRanks);
+        assertThat(ranks.matchIndicators()).isEqualTo(statisticsRanks);
     }
 
 }

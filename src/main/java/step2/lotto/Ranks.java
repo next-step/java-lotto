@@ -25,7 +25,7 @@ public class Ranks {
                 .reduce(0.0, (prizeAmount, rank) -> rank.addedPrizeAmount(prizeAmount), Double::sum);
     }
 
-    public Map<Rank, Long> statisticsRanks() {
+    public Map<Rank, Long> matchIndicators() {
         Map<Rank, Long> ranks = countedWinningRanks();
         countNotWinningRanks(ranks);
         return Map.copyOf(ranks);
