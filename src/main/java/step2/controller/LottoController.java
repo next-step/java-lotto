@@ -12,10 +12,11 @@ public class LottoController {
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
 	private static final int LOTTE_PRICE = 1000;
+	private static final int MIN_MATCH_COUNT = 3;
+	private static final int MAX_MATCH_COUNT = 6;
 
 	private Lottos lottos;
 	private Lotto winningLotto;
-	private HashMap<Integer, Integer> countMap;
 
 	public void purchase() {
 		final int count = getLottoCount(inputView.getPurchaseAmount());
@@ -30,21 +31,25 @@ public class LottoController {
 	}
 
 	public void getWinningStatistics() {
-		double yeild = 0;
 		outputView.printWinningStatisticsHeader();
+		HashMap<Integer, Integer>  countMap = lottos.getMatchCountMap(winningLotto);
 
-		countMap = lottos.getMatchCountMap(winningLotto);
-		for (int i = 3; i <= 6; i++) {
-			WinningAmount winningAmount = WinningAmount.findByMatchCount(i);
-			yeild += winningAmount.getPrize() * countMap.get(winningAmount.getMatchCount());
-			outputView.printWinningStatistics(winningAmount, countMap.get(winningAmount.getMatchCount()));
-		}
-		yeild /= lottos.size() * LOTTE_PRICE;
-
-		outputView.printYield(yeild);
+		double prize = getPrize(countMap);
+		outputView.printYield(prize, lottos.size() * LOTTE_PRICE);
 	}
 
 	private int getLottoCount(int purchaseAmount) {
 		return purchaseAmount / LOTTE_PRICE;
+	}
+
+	private double getPrize(HashMap<Integer, Integer> countMap) {
+		double prize = 0;
+
+		for (int matchCount = MIN_MATCH_COUNT; matchCount < MAX_MATCH_COUNT + 1; matchCount++) {
+			WinningAmount winningAmount = WinningAmount.findByMatchCount(matchCount);
+			prize += winningAmount.getPrize() * countMap.get(winningAmount.getMatchCount());
+			outputView.printWinningStatistics(winningAmount, countMap.get(winningAmount.getMatchCount()));
+		}
+		return prize;
 	}
 }

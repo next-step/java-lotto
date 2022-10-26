@@ -24,7 +24,7 @@ public class OutputView {
 		System.out.printf("%d 개 일치 (%d원)- %d개 \n", winningAmount.getMatchCount(), winningAmount.getPrize(), count);
 	}
 
-	public void printYield(double yield) {
-		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", Math.floor(yield * 100) / 100);
+	public void printYield(double prize, double amount) {
+		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", Math.floor(prize / amount * 100) / 100);
 	}
 }
