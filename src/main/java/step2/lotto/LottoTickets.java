@@ -24,6 +24,7 @@ public class LottoTickets {
 
         return new Ranks(ranks);
     }
+
     public void print(OutputView outputView) {
         lottoTickets.forEach(lottoTicket -> lottoTicket.print(outputView));
     }
