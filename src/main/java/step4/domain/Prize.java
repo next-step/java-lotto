@@ -1,4 +1,4 @@
-package step4.domian;
+package step4.domain;
 
 import java.util.Arrays;
 
@@ -19,10 +19,11 @@ public enum Prize {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Prize getPrize(int count, boolean isBonus) {
+    static Prize getPrize(int count, boolean isBonus) {
         return Arrays.stream(Prize.values())
-                .filter(it -> it.count == count)
-                .filter(it -> (!isBonus && it != Prize.FIVE_BONUS_PRIZE) || (isBonus && it == Prize.FIVE_BONUS_PRIZE))
-                .findFirst().orElse(Prize.NONE);
+                .filter(it -> it.count == count
+                        && ((!isBonus && it != Prize.FIVE_BONUS_PRIZE) || (isBonus && it == Prize.FIVE_BONUS_PRIZE)))
+                .findFirst()
+                .orElse(Prize.NONE);
     }
 }

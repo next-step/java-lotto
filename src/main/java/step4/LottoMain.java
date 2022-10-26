@@ -1,13 +1,13 @@
 package step4;
 
-import step4.domian.LastWinner;
-import step4.domian.LottoResult;
-import step4.domian.LottoWallet;
-import step4.domian.Revenue;
+import step4.domain.LastWinner;
+import step4.domain.LottoResult;
+import step4.domain.LottoWallet;
+import step4.domain.Revenue;
 import step4.view.InputView;
 import step4.view.ResultView;;
 
-import static step4.domian.LottoMachine.autoLottos;
+import static step4.domain.LottoMachine.autoLottos;
 
 public class LottoMain {
     public static final int LOTTO_PRICE = 1000;

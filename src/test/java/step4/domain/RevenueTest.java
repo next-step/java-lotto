@@ -2,9 +2,6 @@ package step4.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import step4.domian.LottoResult;
-import step4.domian.Prize;
-import step4.domian.Revenue;
 
 import java.util.EnumMap;
 import java.util.Map;

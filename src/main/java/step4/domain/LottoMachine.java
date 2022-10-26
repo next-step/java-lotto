@@ -1,4 +1,4 @@
-package step4.domian;
+package step4.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;

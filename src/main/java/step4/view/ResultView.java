@@ -1,9 +1,9 @@
 package step4.view;
 
-import step4.domian.Lotto;
-import step4.domian.LottoResult;
-import step4.domian.LottoWallet;
-import step4.domian.Prize;
+import step4.domain.Lotto;
+import step4.domain.LottoResult;
+import step4.domain.LottoWallet;
+import step4.domain.Prize;
 
 public class ResultView {
     public static final String RESULT_TEXT = "\n당첨 통계\n---------";

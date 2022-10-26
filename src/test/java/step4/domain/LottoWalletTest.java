@@ -2,10 +2,6 @@ package step4.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import step4.domian.LastWinner;
-import step4.domian.Lotto;
-import step4.domian.LottoWallet;
-import step4.domian.Prize;
 
 import java.util.List;
 

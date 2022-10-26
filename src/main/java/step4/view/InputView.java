@@ -1,6 +1,6 @@
 package step4.view;
 
-import step4.domian.Lotto;
+import step4.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,14 +35,24 @@ public class InputView {
 
         List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            manualLottos.add(new Lotto(Arrays.stream(sc.nextLine().replace(" ", "").split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList())));
+            manualLottos.add(new Lotto(Arrays.stream(sc.nextLine()
+                            .replace(" ", "")
+                            .split(","))
+                            .mapToInt(Integer::parseInt)
+                            .boxed()
+                            .collect(Collectors.toList())));
         }
         return manualLottos;
     }
 
     public static List<Integer> inputLastWinner() {
         System.out.println("\n" + LAST_WINNER_TEXT);
-        return Arrays.stream(sc.nextLine().replace(" ", "").split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        return Arrays.stream(sc.nextLine()
+                        .replace(" ", "")
+                        .split(","))
+                        .mapToInt(Integer::parseInt)
+                        .boxed().collect(Collectors
+                        .toList());
     }
 
     public static int inputLastBonus() {

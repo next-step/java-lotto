@@ -1,4 +1,4 @@
-package step4.domian;
+package step4.domain;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class LastWinner {
         this.bonus = bonus;
     }
 
-    public Prize getPrizeByComparingWithLotto(Lotto lotto) {
+    Prize getPrizeByComparingWithLotto(Lotto lotto) {
         int count = countSameNumber(lotto);
         return Prize.getPrize(count, checkBonus(count, lotto));
     }
