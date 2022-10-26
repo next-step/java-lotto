@@ -6,6 +6,7 @@ public class LotteryNumber implements Comparable<LotteryNumber>{
 
     public static final int LOTTERY_NUM_MIN = 1;
     public static final int LOTTERY_NUM_MAX = 45;
+    public static final String LOTTERY_NUM_RANGE_ERR_MSG = "로또 번호는 1과 45 사이의 정수여야 합니다.";
 
     private final int lotteryNumber;
 
@@ -16,7 +17,7 @@ public class LotteryNumber implements Comparable<LotteryNumber>{
 
     private void validate(int lotteryNumber) {
         if (lotteryNumber < LOTTERY_NUM_MIN || lotteryNumber > LOTTERY_NUM_MAX) {
-            throw new IllegalArgumentException("로또 번호는 1과 45 사이의 정수여야 합니다.");
+            throw new IllegalArgumentException(LOTTERY_NUM_RANGE_ERR_MSG);
         }
     }
 

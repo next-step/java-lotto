@@ -1,52 +1,47 @@
 package lottery;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum LotteryRank {
 
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    FIRST(6, 2000000000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    NONE(0, 0);
 
-    private final int rank;
+    private final int matchingCount;
     private final int prize;
 
-    LotteryRank(int rank, int prize) {
-        this.rank = rank;
+    LotteryRank(int matchingCount, int prize) {
+        this.matchingCount = matchingCount;
         this.prize = prize;
     }
 
-    public static int getRank(LotteryRank lotteryRank) {
-        return lotteryRank.rank;
+    public int getMatchingCount() {
+        return matchingCount;
     }
 
-    public static int getPrize(LotteryRank lotteryRank) {
-        return lotteryRank.prize;
+    public int getPrize() {
+        return prize;
     }
 
-    public static List<Integer> getUsedRanks() {
+    public static LotteryRank valueOf(int matchingCount, boolean isBonusMatched) {
         return Arrays.stream(values())
-                .map(LotteryRank::getRank)
-                .collect(Collectors.toList());
-    }
-
-    public static boolean isUsedRank(int rank) {
-        return Arrays.stream(values())
-                .anyMatch(lotteryRank -> lotteryRank.rank == rank);
-    }
-
-    public static int getPrizeOfRank(int rank) {
-        return getPrize(getInstanceOfRank(rank));
-    }
-
-    public static LotteryRank getInstanceOfRank(int rank) {
-        return Arrays.stream(values())
-                .filter(lotteryRank -> lotteryRank.rank == rank)
+                .filter(lotteryRank -> lotteryRank.isValueOf(matchingCount, isBonusMatched))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("지원하지 않는 등수입니다."));
+                .orElse(NONE);
+    }
+
+    private boolean isValueOf(int matchingCount, boolean isBonusMatched) {
+        if (this.matchingCount != matchingCount) {
+            return false;
+        }
+        if (this == SECOND) {
+            return isBonusMatched;
+        }
+        return true;
     }
 
 }

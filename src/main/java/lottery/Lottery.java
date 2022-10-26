@@ -6,7 +6,9 @@ import java.util.List;
 
 public class Lottery {
 
-    protected final List<LotteryNumber> lotteryNumbers;
+    static final int LOTTERY_NUM_COUNT = 6;
+
+    private final List<LotteryNumber> lotteryNumbers;
 
     public Lottery(List<LotteryNumber> lotteryNumbers) {
         validate(lotteryNumbers);
@@ -14,12 +16,23 @@ public class Lottery {
     }
 
     private void validate(List<LotteryNumber> lotteryNumbers) {
-        if (lotteryNumbers.size() != LotteryCompany.LOTTERY_NUM_COUNT) {
+        if (lotteryNumbers.size() != LOTTERY_NUM_COUNT) {
             throw new IllegalArgumentException("로또는 6개 숫자로 구성되어야 합니다.");
         }
-        if (new HashSet<>(lotteryNumbers).size() != LotteryCompany.LOTTERY_NUM_COUNT) {
+        if (new HashSet<>(lotteryNumbers).size() != LOTTERY_NUM_COUNT) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
+    }
+
+    public int contains(Lottery lottery) {
+        return this.lotteryNumbers.stream()
+                .filter(lottery::contains)
+                .mapToInt(lotteryNumber -> 1)
+                .sum();
+    }
+
+    public boolean contains(LotteryNumber lotteryNumber) {
+        return this.lotteryNumbers.contains(lotteryNumber);
     }
 
     public List<LotteryNumber> getLotteryNumbers() {
