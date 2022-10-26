@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatics;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.*;
+import lotto.strategy.AutoNumberList;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,7 +15,7 @@ public class Output {
         int NumberOfTickets = lottos.getNumberOfTickets(amount);
         System.out.println(NumberOfTickets + OUTPUT_UNIT_MESSAGE);
 
-        Lottos numberList = lottos.buyLottos(NumberOfTickets);
+        Lottos numberList = lottos.buyLottos(NumberOfTickets, new AutoNumberList());
         List<Lotto> lottoList = numberList.getLottoList();
         for (Lotto lotto : lottoList) {
             System.out.println(lotto.getNumberList());
@@ -29,7 +27,7 @@ public class Output {
 
     public static List<Lotto> getRank(List<Lotto> lottoList, List<Integer> winnerNumberList) {
 
-        int[] matchList = new int[5 + 1];
+        int[] matchList = new int[6 + 1];
         for (Lotto lotto : lottoList) {
             Lotto matchRank = lotto.matchRank(winnerNumberList);
             matchList[matchRank.match()]++;
@@ -38,7 +36,7 @@ public class Output {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (int i = 3; i <= 5; i++) {
+        for (int i = 3; i <= 6; i++) {
             match(i, Rank.getRank(i).getAmount(), matchList[i]);
         }
 
@@ -46,7 +44,7 @@ public class Output {
     }
 
     private static void match(int count, BigDecimal amount, int number) {
-        System.out.printf(String.format("%d개 일치 (%.2f원)- %d개\n", count, amount, number));
+        System.out.printf(String.format("%d개 일치 (%.0f원)- %d개\n", count, amount, number));
     }
 
     public static void getResult(List<Lotto> lottoList) {

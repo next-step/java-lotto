@@ -54,8 +54,8 @@ class LottoTest {
                 Arguments.arguments(givenNumbers(1, 2, 3, 4, 5, 7), 5),
                 Arguments.arguments(givenNumbers(1, 2, 3, 4, 7, 8), 4),
                 Arguments.arguments(givenNumbers(1, 2, 3, 7, 8, 9), 3),
-                Arguments.arguments(givenNumbers(1, 2, 7, 8, 9, 10), 0),
-                Arguments.arguments(givenNumbers(1, 7, 8, 9, 10, 11), 0),
+                Arguments.arguments(givenNumbers(1, 2, 7, 8, 9, 10), 2),
+                Arguments.arguments(givenNumbers(1, 7, 8, 9, 10, 11), 1),
                 Arguments.arguments(givenNumbers(7, 8, 9, 10, 11, 12), 0)
         );
     }

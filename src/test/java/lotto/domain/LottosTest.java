@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.strategy.AutoNumberList;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ class LottosTest {
         BigDecimal amount = BigDecimal.valueOf(14000);
 
         Lottos lottos = new Lottos(amount);
-        lottos.buyLottos(lottos.getNumberOfTickets(amount));
+        lottos.buyLottos(lottos.getNumberOfTickets(amount), new AutoNumberList());
 
         assertThat(lottos.getLottoList()).hasSize(14);
     }

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.AutoNumberList;
+import lotto.strategy.NumberList;
 import lotto.utils.Tickets;
 
 import java.math.BigDecimal;
@@ -11,10 +11,18 @@ import java.util.Objects;
 public class Lottos {
 
     private final BigDecimal amount;
-    private List<Lotto> lottoList;
+    private List<Lotto> lottoLists;
 
     public Lottos(BigDecimal amount) {
+        validateAmount(amount);
         this.amount = amount;
+    }
+
+    private void validateAmount(BigDecimal amount) {
+        BigDecimal baseAmount = new BigDecimal(1000);
+        if (amount.compareTo(baseAmount) == -1) {
+            throw new IllegalArgumentException("천 원 이상 내세요.");
+        }
     }
 
     public BigDecimal getAmount() {
@@ -22,23 +30,23 @@ public class Lottos {
     }
 
     public List<Lotto> getLottoList() {
-        return lottoList;
+        return lottoLists;
     }
 
     public int getNumberOfTickets(BigDecimal amount) {
         return Tickets.getNumberOfTickets(amount);
     }
 
-    public Lottos buyLottos(int tryNum) {
+    public Lottos buyLottos(int tryNum, NumberList numberList) {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < tryNum; i++) {
             lottoList.add(
-                    new Lotto(AutoNumberList.makeNumberList())
+                    new Lotto(numberList.makeNumberList())
             );
         }
 
-        this.lottoList = lottoList;
+        this.lottoLists = lottoList;
         return this;
     }
 
@@ -47,19 +55,11 @@ public class Lottos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lottos lottos = (Lottos) o;
-        return Objects.equals(amount, lottos.amount) && Objects.equals(lottoList, lottos.lottoList);
+        return Objects.equals(amount, lottos.amount) && Objects.equals(lottoLists, lottos.lottoLists);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount, lottoList);
-    }
-
-    @Override
-    public String toString() {
-        return "Lottos{" +
-                "amount=" + amount +
-                ", lottoList=" + lottoList +
-                '}';
+        return Objects.hash(amount, lottoLists);
     }
 }
