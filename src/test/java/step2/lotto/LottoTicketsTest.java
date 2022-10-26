@@ -22,15 +22,16 @@ class LottoTicketsTest {
     }
 
     @Test
-    void 순위들을_생성할_수_있다() {
+    void 수익률_계산기를_생성할_수_있다() {
         int numberOfTickets = 1;
         int lottoPrice = 1000;
         int totalPrice = lottoPrice * numberOfTickets;
-        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
+        Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(lottoNumbers);
 
         LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
 
-        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        assertThat(lottoTickets.ranks(winningNumbers)).isEqualTo(new Ranks(List.of(Rank.FIRST)));
+        assertThat(lottoTickets.yieldCalculator(lottoNumbers)).isEqualTo(new YieldCalculator(lottoPrice, List.of(Rank.FIRST)));
     }
+
 }
