@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class LotteryTicket {
     public static final int COUNT_OF_LOTTERY_NUMBER = 6;
-    private List<LotteryNumber> lotteryNumbers;
+    private final List<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<LotteryNumber> lotteryNumbers) {
         validateCountOfLotteryNumbers(lotteryNumbers);
