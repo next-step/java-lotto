@@ -9,6 +9,7 @@ import step2.view.InputView;
 import step2.view.OutputView;
 
 public class LottoController {
+
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
 	private static final int LOTTE_PRICE = 1000;

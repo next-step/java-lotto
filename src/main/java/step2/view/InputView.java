@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class InputView {
+
 	private static final Scanner SCANNER = new Scanner(System.in);
 	private static final String SEPARATOR = ", ";
 
