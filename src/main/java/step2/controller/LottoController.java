@@ -22,13 +22,11 @@ public class LottoController {
 		OUTPUT_VIEW.showTotalTicket(totalTicket);
 
 		Lotteries lotteries = Lotteries.of(totalTicket, lottoFactory);
-
 		OUTPUT_VIEW.showLotteries(totalTicket, lotteries);
-		int bonusNumber = INPUT_VIEW.askBonusNumber();
 
-		HashMap<Rank, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),bonusNumber);
+		HashMap<Rank, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),INPUT_VIEW.askBonusNumber());
 
-		OUTPUT_VIEW.resultView(totalCount,lotteries.countOfMatchBonus());
+		OUTPUT_VIEW.resultView(totalCount, lotteries.countOfMatchBonus());
 		OUTPUT_VIEW.showRate(payment.calculateBenefit(money, totalCount));
 	}
 }

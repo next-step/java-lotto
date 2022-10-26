@@ -11,24 +11,26 @@ public class OutputView {
 
 	private static final int DEFAULT_COUNT = 0;
 	private static final int BENEFIT_STANDARD = 1;
+	private static final int MIN_MATCH = 3;
+	private static final int MAX_MATCH = 6;
 
 	public void resultView(HashMap<Rank, Integer> totalCount, int bonusMatchCount) {
 		System.out.println("당첨 통계");
 		System.out.println("--------");
-		for (Rank rank : Rank.values()) {
-			showResult(rank, bonusMatchCount, totalCount);
+		for (int i = MIN_MATCH; i <= MAX_MATCH; i++) {
+			showResult(Rank.of(i), bonusMatchCount, totalCount);
 		}
 	}
 
 	private void showResult(Rank rank, int bonusMatchCount, HashMap<Rank, Integer> totalCount) {
-		int countOfMatch = rank.getCountOfMatch();
 
-		if (countOfMatch == SECOND.getCountOfMatch()) {
-			rankSecondMessage(bonusMatchCount, countOfMatch);
+		if (rank == SECOND) {
+			rankSecondMessage(bonusMatchCount, totalCount.get(rank));
 			return;
 		}
 
-		System.out.printf("%s개 일치" + "(%d)- " + totalCount.get(rank) + "개\n", countOfMatch,
+		System.out.printf("%s개 일치" + "(%d)- " + totalCount.get(rank) + "개\n",
+			rank.getCountOfMatch(),
 			rank.getWinningMoney());
 	}
 
@@ -60,12 +62,11 @@ public class OutputView {
 
 	private void rankSecondMessage(int countOfBonus, int countOfMatch) {
 		System.out.printf(
-			"%s개 일치" + "(%d)- " + (SECOND.getCountOfMatch() - countOfBonus) + "개\n",
-			countOfMatch, THIRD.getWinningMoney());
+			"%s개 일치" + "(%d)- " + (countOfMatch - countOfBonus) + "개\n",
+			SECOND.getCountOfMatch(), SECOND.getWinningMoney());
 
 		System.out.printf("%s개 일치,보너스 볼 일치" + "(%d)- " + countOfBonus + "개\n",
-			countOfMatch, SECOND.getWinningMoney());
+			SECOND.getCountOfMatch(), SECOND.getWinningMoney());
 	}
-
 
 }
