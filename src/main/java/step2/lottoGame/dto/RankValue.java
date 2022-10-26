@@ -1,4 +1,4 @@
-package step2.dto;
+package step2.lottoGame.dto;
 
 import step2.lotto.Rank;
 
