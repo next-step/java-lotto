@@ -84,4 +84,4 @@
     - [x] 메소드 내에서 알 수 있는 정보와 역할을 바탕으로 변수명 짓기
     - [x] winningNumbers Integer -> Lotto Number 
     - [x] drawLottoResult 를 두 번 호출 한다면?
-    - [ ] List<Set<Integer>> 중 Set<Integer>를 DTO로 관리하기
+    - [x] List<Set<Integer>> 중 Set<Integer>를 DTO로 관리하기

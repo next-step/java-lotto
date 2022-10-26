@@ -2,6 +2,7 @@ package step4.view;
 
 import step4.domain.LottoNumber;
 import step4.domain.Ticket;
+import step4.dto.ManualLottoNumberDTO;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,17 +22,19 @@ public class InputView {
     }
 
 
-    public static List<Set<Integer>> inputManualLottoNumbers(Ticket manualLottoTicket) {
+    public static List<ManualLottoNumberDTO> inputManualLottoNumbers(Ticket manualLottoTicket) {
         OutputView.printManualLottoNumberNotification();
 
         Scanner scanner = new Scanner(System.in);
         int ticketCount = manualLottoTicket.getCountOfTicket();
-        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
+        List<ManualLottoNumberDTO> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
-            manualLottoNumbers.add(Arrays.
-                stream(scanner.nextLine().split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toSet()));
+            ManualLottoNumberDTO manualLottoNumberDTO = ManualLottoNumberDTO.from(Arrays.
+                    stream(scanner.nextLine().split(", "))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toSet()));
+
+            manualLottoNumbers.add(manualLottoNumberDTO);
         }
         return manualLottoNumbers;
     }
