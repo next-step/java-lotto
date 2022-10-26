@@ -1,8 +1,6 @@
 package step4.domain;
 
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class LottoNumbers {
 
@@ -28,11 +26,11 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public int calculateMatchCount(List<Integer> winningNumbers) {
+    public int calculateMatchCount(Set<LottoNumber> winningNumbers) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
             matchCount += winningNumbers.stream()
-                .filter(winningNumber -> lottoNumber.equals(LottoNumber.from(winningNumber)))
+                .filter(winningNumber -> lottoNumber.equals(winningNumber))
                 .count();
         }
         return matchCount;

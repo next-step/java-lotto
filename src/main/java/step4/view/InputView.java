@@ -1,12 +1,10 @@
 package step4.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
+import step4.domain.LottoNumber;
 import step4.domain.Ticket;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -38,13 +36,14 @@ public class InputView {
         return manualLottoNumbers;
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static Set<LottoNumber> inputWinningNumbers() {
         OutputView.printWinningNumberNotification();
         Scanner scanner = new Scanner(System.in);
+
         return Arrays.stream(scanner.nextLine().split(", "))
-            .mapToInt(Integer::parseInt)
-            .boxed()
-            .collect(Collectors.toList());
+                .mapToInt(Integer::parseInt)
+                .mapToObj(number -> LottoNumber.from(number))
+                .collect(Collectors.toSet());
     }
 
     public static int inputBonusBall() {

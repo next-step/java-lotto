@@ -3,11 +3,8 @@ package step4.controller;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import step4.domain.LottoGame;
-import step4.domain.LottoNumbers;
-import step4.domain.LottoResult;
-import step4.domain.Prize;
-import step4.domain.Ticket;
+
+import step4.domain.*;
 import step4.dto.TicketDTO;
 import step4.view.InputView;
 import step4.view.OutputView;
@@ -35,7 +32,7 @@ public class LottoGameController {
         final LottoGame lottoGame = LottoGame.newInstance();
         final List<LottoNumbers> lottoNumbers = lottoGame.playLotto(autoTicket, manualLottoNumbers);
         OutputView.printLottoNumbers(lottoNumbers);
-
+;
         final LottoResult lottoResult = LottoResult.from(InputView.inputWinningNumbers());
         int bonusBall = InputView.inputBonusBall();
 

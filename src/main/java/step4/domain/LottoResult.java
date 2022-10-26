@@ -3,17 +3,18 @@ package step4.domain;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoResult {
 
-    private final List<Integer> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
     private final Map<Prize, Integer> drawResult = new LinkedHashMap();
 
-    public LottoResult(final List<Integer> winningNumbers) {
+    public LottoResult(final Set<LottoNumber> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
-    public static final LottoResult from(final List<Integer> winningNumbers) {
+    public static final LottoResult from(final Set<LottoNumber> winningNumbers) {
         return new LottoResult(winningNumbers);
     }
 
