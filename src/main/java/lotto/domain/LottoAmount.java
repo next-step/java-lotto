@@ -23,8 +23,8 @@ public class LottoAmount {
         return amount / PRICE_PER_LOTTO;
     }
 
-    public double calcWinningRate(final double sum) {
-        return Math.round(sum / amount * 100) / 100.0;
+    public double calcSumWinningMoneyRate(final double sumWinningMoney) {
+        return Math.round(sumWinningMoney / amount * 100) / 100.0;
     }
 
     private static int validateAmount(int amount) {

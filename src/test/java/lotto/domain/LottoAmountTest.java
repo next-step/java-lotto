@@ -35,7 +35,7 @@ class LottoAmountTest {
     @DisplayName("로또 수익률 구할 수 있다.")
     void calcLottoWinningRateTest() {
         int sum = 5000;
-        assertThat(new LottoAmount("6000").calcWinningRate(sum)).isEqualTo(0.83);
+        assertThat(new LottoAmount("6000").calcSumWinningMoneyRate(sum)).isEqualTo(0.83);
     }
 
 }

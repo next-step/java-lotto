@@ -7,8 +7,8 @@ import java.util.Set;
 public class LottoDto {
     private final Set<Integer> numbers;
 
-    public LottoDto(Lotto numbers) {
-        this(numbers.generateReport());
+    public LottoDto(Lotto lotto) {
+        this(lotto.toIntSet());
     }
 
     public LottoDto(Set<Integer> numbers) {

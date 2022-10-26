@@ -39,6 +39,7 @@
 - [x] 의미없는 test 삭제
 - [x] StaticFactoryMethod 구현 수정. - Enum 추가
 - [x] Operation 성능 보완 구현.
+- [x] Operation operator 탐색 알고리즘 수정.
 ---
 
 ---
@@ -96,5 +97,45 @@
 - [x] 필드명, 함수명 수정
   - List<lotto> -> lottoTicket
   - lastWeekTicket -> winningTicket
-
 - [x] LottoAmount 에서 가격에대한 수익률 구하기.
+
+- [x] distinct 제거하며, validateSize 함수 통합.
+- [x] 이름 수정
+  - 로또 당첨금액 비율 계산에서 sum 의 이름 구체화
+  - LottoRank 에서 match, money 구체화
+  - Lotto 에서 generateReport 함수 변경
+- [x] Lotto와 LottoGenerator 의 결합 끊기.
+
+---
+
+---
+##Step2 - 로또(자동)
+###기능 요구사항
+> - 2등을 위해 추가 번호를 하나 더 추첨한다.
+> - 당첨 통계에 2등도 추가해야 한다.
+
+###기능 목록
+- [x] 로또 당첨 객체 새로 생성
+  - 로또 당첨 번호 6개 + bonus 번호 생성
+  - 상속으로
+  - 로또 번호와 중복 번호 있으면 에러
+  - 보너스 번호 일치 여부 체크 함수 추가
+- [x] InputView Bonus 번호 입력받음.
+- [x] LottoRank 2등 추가
+- [x] 보너스 번호에 로직 추가
+  - 2, 3등 가리는 로직
+- [x] Result View '보너스볼 일치' 글씨 추가
+
+### 리뷰 요구사항
+- [x] 함수명 수정
+  - LottoAmount : calcWinningRate -> 로또 금액의 입장에서 다름 금액과의 비율을 게산해주는 메소드 이름.
+  - LottoWinning : put -> 로또 게임 결과 정도를 나타낼 수 있는 이름.
+- [x] 객체가 능동적으로 행동할 수 있는곳에 역할주기
+  - hasBonus : WinningNumber -> Lotto 에게 역할 넘겨주기
+- [x] 상속 끊기
+  - WinningNumbers 에 Lotto 변수 두어 관리
+- [x] 사용하지 않는 hasCode 삭제
+- [x] CACHE 접근제한 private & ImmutableList
+- [x] LottoRank : 2,3등 로직
+  1. enum abstract method 키워드로 각각의 당첨여부를 관리하도록 고민
+  2. BiFunction 을 이용하여 각 개체의 필드로 당첨여부 관리

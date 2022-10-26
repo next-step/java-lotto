@@ -9,7 +9,7 @@ public class LottoNumber {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER_BOUND_MESSAGE = "로또 번호는 1 ~ 45 의 숫자만 가능합니다.";
-    static final List<LottoNumber> CACHE = new ArrayList<>();
+    private static final List<LottoNumber> CACHE = new ArrayList<>();
 
     static {
         IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
@@ -18,9 +18,12 @@ public class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(String number) {
+        this(validateNumber(toInt(number)));
+    }
+
     public LottoNumber(int number) {
-        validateNumber(number);
-        this.number = number;
+        this.number = validateNumber(number);
     }
 
     public static LottoNumber of(int number) {
@@ -31,14 +34,27 @@ public class LottoNumber {
         }
     }
 
-    public void validateNumber(int number) {
-        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
+    private static int toInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (Exception e) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
         }
     }
 
+    private static int validateNumber(int number) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
+        }
+        return number;
+    }
+
     int getNumber() {
         return number;
+    }
+
+    public static List<LottoNumber> allLottoNumbers() {
+        return CACHE;
     }
 
     @Override

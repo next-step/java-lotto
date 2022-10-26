@@ -1,7 +1,7 @@
 package calculator.service;
 
 import calculator.domain.CalcNumber;
-import calculator.domain.OperatorFactory;
+import calculator.domain.Operation;
 import calculator.domain.SeparatorExpression;
 
 import java.util.List;
@@ -17,8 +17,7 @@ public class StringCalculatorService {
         int result = new CalcNumber(operations.get(FIRST_INPUT_INDEX)).number();
         for (int i = 2; i < operations.size(); i += 2) {
             int nextNum = new CalcNumber(operations.get(i)).number();
-            result = OperatorFactory
-                    .valueOf(operations.get(i - 1))
+            result = Operation.calculate(operations.get(i - 1))
                     .apply(result, nextNum);
         }
         return result;

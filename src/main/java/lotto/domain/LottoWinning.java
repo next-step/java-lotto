@@ -18,16 +18,16 @@ public class LottoWinning {
         double money = 0;
         for (Map.Entry<LottoRank, Integer> entry : winning.entrySet()) {
             LottoRank rank = entry.getKey();
-            money += rank.multiply(entry.getValue());
+            money += rank.calcWinningMoneyPerRank(entry.getValue());
         }
         return money;
     }
 
-    public void put(LottoRank prize) {
-        winning.merge(prize, 1, Integer::sum);
+    public void addCountOfMatch(LottoRank rank) {
+        winning.merge(rank, 1, Integer::sum);
     }
 
-    public Integer count(LottoRank prize) {
-        return winning.get(prize);
+    public Integer count(LottoRank rank) {
+        return winning.get(rank);
     }
 }
