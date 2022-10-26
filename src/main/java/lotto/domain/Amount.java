@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.ErrorCode;
 import lotto.exception.LotteryGameException;
+import lotto.strategy.AutoGenerateStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +23,12 @@ public class Amount {
         }
     }
 
-    public LotteryTickets createTickets(LotteryTicketAutoGenerator lotteryTicketAutoGenerator) {
+    public LotteryTickets createTickets(AutoGenerateStrategy autoGenerateStrategy) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            lotteryTickets.add(lotteryTicketAutoGenerator.generate());
+            lotteryTickets.add(autoGenerateStrategy.generate());
         }
         return new LotteryTickets(lotteryTickets);
-    }
-
-    public int getAmount() {
-        return amount;
     }
 
     @Override

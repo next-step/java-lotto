@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.strategy;
+
+import lotto.domain.LotteryNumber;
+import lotto.domain.LotteryTicket;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LotteryTicketAutoGenerator {
+public class AutoGenerateStrategy {
     public static final List<LotteryNumber> numbers = IntStream.range(LotteryNumber.MIN_VALUE, LotteryNumber.MAX_NUMBER)
             .mapToObj(LotteryNumber::new)
             .collect(Collectors.toList());

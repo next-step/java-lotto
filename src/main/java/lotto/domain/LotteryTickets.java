@@ -26,4 +26,8 @@ public class LotteryTickets {
         }
         return new Ranks(ranks);
     }
+
+    public int getCount() {
+        return lotteryTickets.size();
+    }
 }

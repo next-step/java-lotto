@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.ErrorCode;
 import lotto.exception.LotteryGameException;
+import lotto.strategy.AutoGenerateStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -21,7 +22,7 @@ public class AmountTest {
 
     @Test
     void create_lottery_ticket_with_amount() {
-        LotteryTickets lotteryTickets = new Amount(2).createTickets(new LotteryTicketAutoGenerator());
+        LotteryTickets lotteryTickets = new Amount(2).createTickets(new AutoGenerateStrategy());
         assertThat(lotteryTickets).isInstanceOf(LotteryTickets.class);
         assertThat(lotteryTickets.getLotteryTickets()).hasSize(2);
     }
