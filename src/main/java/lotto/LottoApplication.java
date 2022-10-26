@@ -18,9 +18,10 @@ public class LottoApplication {
         String winningLottoNumbers = LottoInputView.inputWinningLottoNumbers();
         Lotto winningLotto = Lotto.from(winningLottoNumbers);
 
-        int bonusNumber = LottoInputView.inputBonusNumber();
+        int inputBonusNumber = LottoInputView.inputBonusNumber();
+        LottoNumber bonusNumber = LottoNumber.from(inputBonusNumber);
 
-        LottoStatisticalService lottoStatisticalService = new LottoStatisticalService(winningLotto);
+        LottoStatisticalService lottoStatisticalService = new LottoStatisticalService(winningLotto, bonusNumber);
         Map<MatchNumberAndPrize, Integer> statistics = lottoStatisticalService.giveStatistics(lotto);
 
         LottoResultView.printLottoStatistical(statistics);
