@@ -26,7 +26,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1;1;1", "27;3;9", "0;4;0"}, delimiter = ';')
+    @CsvSource(value = {"1;1;1", "27;3;9", "0;4;0", "1;4;0.25"}, delimiter = ';')
     public void divideTest(int num1, int num2, float result) {
         assertThat(Calculator.divide(num1, num2)).isEqualTo(result);
     }
