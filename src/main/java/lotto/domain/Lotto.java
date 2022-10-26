@@ -10,6 +10,7 @@ import java.util.List;
 public class Lotto {
 
     private static final int DIGIT = 6;
+    private static final int CHECK_BONUS_COUNT = 5;
     private static final String SEPARATOR = ",";
 
     private final List<LottoNumber> numbers = new ArrayList<>();
@@ -44,16 +45,24 @@ public class Lotto {
     }
 
     public WinningInformation matchWithWinningLotto(final Lotto lotto, final LottoNumber bonusNumber) {
-        int countOfSameNumber = (int) lotto.numbers.stream()
-            .filter(this.numbers::contains)
-            .count();
-
-        boolean isContainedBonus = false;
-        if (countOfSameNumber == 5) {
-            isContainedBonus = this.numbers.contains(bonusNumber);
-        }
+        int countOfSameNumber = countSameNumber(lotto);
+        boolean isContainedBonus = checkBonus(countOfSameNumber, bonusNumber);
 
         return WinningInformation.findByMatchingResult(new MatchingResult(countOfSameNumber, isContainedBonus));
+    }
+
+    private int countSameNumber(final Lotto lotto) {
+        return (int) lotto.numbers.stream()
+            .filter(this.numbers::contains)
+            .count();
+    }
+
+    private boolean checkBonus(final int countOfSameNumber, final LottoNumber bonusNumber) {
+        if (countOfSameNumber != CHECK_BONUS_COUNT) {
+            return false;
+        }
+
+        return this.numbers.contains(bonusNumber);
     }
 
     public boolean contains(final LottoNumber lottoNumber) {
