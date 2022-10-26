@@ -45,5 +45,8 @@ public class LottoTickets {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    public MatchIndicatorCalculator matchIndicatorCalculator(Set<Integer> winningNumbers) {
+        return new MatchIndicatorCalculator(ranks(winningNumbers));
+    }
 }
 
