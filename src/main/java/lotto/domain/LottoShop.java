@@ -40,7 +40,7 @@ public class LottoShop {
         if(!possibleBuyManually()){
             throw new IllegalArgumentException("수동 구입가능 횟수를 초과 하였습니다.");
         }
-        lottos.add(new Lotto(numbers));
+        lottos.add(new Lotto(numbers, LottoType.MANUAL));
     }
 
     public boolean possibleBuyManually(){

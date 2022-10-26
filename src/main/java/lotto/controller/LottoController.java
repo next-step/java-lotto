@@ -21,7 +21,7 @@ public class LottoController {
         Output.printBlank();
 
         Lottos lottos = lottoShop.buy();
-        Output.printPurchasedLotto(lottoShop.numberOfPurchasingAuto(), lottoShop.numberOfManualPurchase(), lottos);
+        Output.printPurchasedLotto(lottos);
 
         Output.printWinnerNumbersRequest();
         Set<Number> winnerNumbers = Input.inputLottoNumber();

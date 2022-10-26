@@ -19,8 +19,8 @@ public class Output {
     }
 
 
-    public static void printPurchasedLotto(int autoQuantity, int manualQuantity, Lottos lottos) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", autoQuantity, manualQuantity);
+    public static void printPurchasedLotto(Lottos lottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottos.getAutoQuantity(), lottos.getManualQuantity());
         printLotto(lottos.getLottos());
     }
 
