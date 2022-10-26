@@ -6,22 +6,22 @@ import java.util.TreeSet;
 
 public class LottoNumbers {
 
-    private Set<LottoNumber> lottoNumbers = new TreeSet<>();
+    private Set<LottoNumber> lottoNumbers;
     public static final int LOTTO_DEFAULT_SIZE = 6;
 
-    private LottoNumbers(Set<LottoNumber> generatedNumbers) {
-        validateLottoNumbers(generatedNumbers);
-        this.lottoNumbers = generatedNumbers;
+    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateLottoNumbers(Set<LottoNumber> generatedNumbers) {
-        if (generatedNumbers.size() != LOTTO_DEFAULT_SIZE) {
+    private void validateLottoNumbers(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_DEFAULT_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
         }
     }
 
-    public static LottoNumbers from(Set<LottoNumber> generatedNumbers) {
-        return new LottoNumbers(generatedNumbers);
+    public static LottoNumbers from(Set<LottoNumber> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers);
     }
 
     public Set<LottoNumber> getLottoNumbers() {
@@ -38,7 +38,7 @@ public class LottoNumbers {
         return matchCount;
     }
 
-    public boolean hasNumber(int bonusBall) {
-        return this.lottoNumbers.contains(LottoNumber.from(bonusBall));
+    public boolean hasNumber(int bonusNumber) {
+        return this.lottoNumbers.contains(LottoNumber.from(bonusNumber));
     }
 }
