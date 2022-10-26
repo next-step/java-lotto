@@ -45,6 +45,7 @@ public class PaymentTest {
 		Payment payment = new Payment();
 
 		HashMap<Rank, Integer> totalCountMap = new HashMap<>();
+		totalCountMap.put(Rank.MISS, 0);
 		totalCountMap.put(Rank.FIFTH, 1);
 		totalCountMap.put(Rank.FOURTH, 0);
 		totalCountMap.put(Rank.THIRD, 0);

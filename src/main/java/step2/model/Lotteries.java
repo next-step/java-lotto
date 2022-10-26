@@ -11,7 +11,7 @@ public class Lotteries {
 	private static final int DEFAULT_MATCH_COUNT = 0;
 	private static final int DEFAULT_MIN_LENGTH = 0;
 
-	private static HashMap<Rank, Integer> totalMatch;
+	private static HashMap<Rank, Integer> totalMatch = new HashMap<>();
 	private WinningLotto winningLotto;
 	private List<Lotto> lotteries;
 	private int countOfMatchBonus = DEFAULT_MATCH_COUNT;
