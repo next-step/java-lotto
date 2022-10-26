@@ -19,10 +19,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(int number) {
-        Optional.of(number)
-            .filter(num -> num >= MIN_LOTTO_RANGE)
-            .filter(num -> num <= MAX_LOTTO_RANGE)
-            .orElseThrow(IllegalArgumentException::new);
+        if (number < MIN_LOTTO_RANGE || number > MAX_LOTTO_RANGE) {
+            throw new IllegalArgumentException("로또 번호의 범위는 1~45까지입니다.");
+        }
     }
 
     public int getLottoNumber() {
