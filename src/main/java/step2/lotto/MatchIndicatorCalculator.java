@@ -3,6 +3,7 @@ package step2.lotto;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MatchIndicatorCalculator {
@@ -31,6 +32,19 @@ public class MatchIndicatorCalculator {
                 .filter(Rank::isNotNothing)
                 .filter(rank -> !ranks.containsKey(rank))
                 .forEach(rank -> ranks.put(rank, 0L));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchIndicatorCalculator that = (MatchIndicatorCalculator) o;
+        return Objects.equals(rankingAggregation, that.rankingAggregation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rankingAggregation);
     }
 
 }
