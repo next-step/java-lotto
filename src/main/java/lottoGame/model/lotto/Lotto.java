@@ -1,15 +1,17 @@
 package lottoGame.model.lotto;
 
+import lottoGame.Rank;
 import lottoGame.model.lotto.lottoNumber.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-public class AutoLotto  {
+public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private final List<LottoNumber> lottoNumber;
 
-    public AutoLotto(List<LottoNumber> lottoNumber) {
+    public Lotto(List<LottoNumber> lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
@@ -18,6 +20,13 @@ public class AutoLotto  {
                 .stream()
                 .filter(this::existedMatchNumber)
                 .count());
+    }
+
+    public boolean isBonus(WinningLotto winningNumbers) {
+        if (countMatch(winningNumbers) == Rank.SECOND.getMatchNum()) {
+            return existedMatchNumber(winningNumbers.getBonusNumber());
+        }
+        return false;
     }
 
     public List<LottoNumber> getLotto() {
@@ -37,5 +46,19 @@ public class AutoLotto  {
     public String toString() {
         return "" + lottoNumber + "";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumber, lotto.lottoNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
+
 
 }

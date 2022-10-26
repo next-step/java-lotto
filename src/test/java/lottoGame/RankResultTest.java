@@ -2,18 +2,21 @@ package lottoGame;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RankResultTest {
-    private final List<Integer> matches = List.of(3,3,4);
+    private final List<Rank> matches = List.of(Rank.FIFTH,Rank.NONE,Rank.NONE,Rank.NONE,Rank.NONE,Rank.NONE,Rank.NONE
+    ,Rank.NONE,Rank.NONE,Rank.NONE,Rank.NONE,Rank.NONE,Rank.NONE,Rank.NONE);
 
     @Test
-    void getYield() {
+    void getYield()  {
         RankResult rankResult = new RankResult();
         rankResult.putResult(matches);
-        assertThat(rankResult.getYield(10000)).isEqualTo("6.00");
+        BigDecimal bigDecimal = new BigDecimal("0.35");
+        assertEquals(0, rankResult.getYield().compareTo(bigDecimal));
     }
+
 }

@@ -1,25 +1,28 @@
 package lottoGame;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
 public class RankResult {
-    private final EnumMap<Ranks, Integer> lotteryBoard = new EnumMap<>(Ranks.class);
-    private final DecimalFormat df = new DecimalFormat("0.00");
+    private final EnumMap<Rank, Integer> lotteryBoard = new EnumMap<>(Rank.class);
 
-    public EnumMap<Ranks, Integer> getLotteryBoard() {
+    public EnumMap<Rank, Integer> getLotteryBoard() {
         return lotteryBoard;
     }
 
-    public void putResult(List<Integer> matchNumbers) {
-        for (Ranks ranks : Ranks.values()) {
-            lotteryBoard.put(ranks, ranks.findMatch(matchNumbers));
+    public EnumMap<Rank, Integer> putResult(List<Rank> ranks) {
+        for (Rank rank : Rank.values()) {
+            lotteryBoard.put(rank, Collections.frequency(ranks, rank));
         }
+        return lotteryBoard;
     }
 
-    public String getYield(Integer amount) {
-        return df.format((double) getTotalSum() / amount);
+    public BigDecimal getYield() {
+
+        return BigDecimal.valueOf(getTotalSum() / (countLotto() * LottoGame.TICKET_PRICE)).setScale(2, RoundingMode.FLOOR);
     }
 
     private Integer getTotalSum() {
@@ -28,6 +31,13 @@ public class RankResult {
                 .map(winningEntry -> winningEntry.getKey().getRank() * winningEntry.getValue())
                 .reduce(Integer::sum)
                 .orElse(0);
+    }
+
+    private Integer countLotto() {
+        return lotteryBoard.values()
+                .stream()
+                .reduce(Integer::sum)
+                .orElseThrow();
     }
 
 }
