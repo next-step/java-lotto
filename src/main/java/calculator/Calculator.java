@@ -1,5 +1,4 @@
 package calculator;
-
 import calculator.input.InputIntegers;
 import calculator.input.InputOperators;
 import calculator.input.InputStrings;
@@ -20,5 +19,4 @@ public class Calculator {
         }
         return inputIntegers.getResult();
     }
-
 }

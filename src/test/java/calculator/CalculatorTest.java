@@ -25,6 +25,7 @@ public class CalculatorTest {
     @ValueSource(strings = {"1 + 2 + 3"})
     void testAddWith3Ints(String input){
         int result = calculator.execute(input);
+
         assertThat(result).isEqualTo(6);
     }
 
