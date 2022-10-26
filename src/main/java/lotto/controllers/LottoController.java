@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domains.Lotto;
 import lotto.domains.LottoGenerator;
-import lotto.domains.LottoNumber;
 import lotto.domains.LottoPurchasedAmount;
 import lotto.domains.LottoStatistics;
 import lotto.domains.LottoWinner;
@@ -16,14 +15,13 @@ import lotto.views.ResultView;
 public class LottoController {
     public List<Lotto> purchaseLotto() {
         InputView inputView = new InputView();
-        LottoGenerator lottoGenerator = new LottoGenerator();
 
         LottoPurchasedAmount money = LottoPurchasedAmount.of(inputView.inputPurchaseMoney());
         UnsignedInteger manualLottoCount = UnsignedInteger.parse(inputView.inputPurchaseCountByManual());
         List<String> lottoListByManual = inputView.inputLottoByManual(manualLottoCount.getValue());
 
-        List<Lotto> manualLottoList = lottoGenerator.purchaseByManual(money, lottoListByManual);
-        List<Lotto> autoLottoList = lottoGenerator.purchaseByAuto(money.spend(manualLottoCount));
+        List<Lotto> manualLottoList = LottoGenerator.INSTANCE.purchaseByManual(money, lottoListByManual);
+        List<Lotto> autoLottoList = LottoGenerator.INSTANCE.purchaseByAuto(money.spend(manualLottoCount));
 
         inputView.printPurchasedLottoList(manualLottoList, autoLottoList);
 
@@ -35,10 +33,7 @@ public class LottoController {
     public LottoWinner drawLottery() {
         InputView inputView = new InputView();
 
-        Lotto lastWinnerLotto = Lotto.createByString(inputView.inputLastWinner());
-        LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
-
-        return new LottoWinner(lastWinnerLotto, bonusNumber);
+        return LottoGenerator.INSTANCE.createLottoWinner(inputView.inputLastWinner(), inputView.inputBonusNumber());
     }
 
     public void play(List<Lotto> lottoList, LottoWinner winner) {

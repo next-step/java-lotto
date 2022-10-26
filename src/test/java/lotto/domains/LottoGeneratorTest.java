@@ -5,13 +5,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
+import lotto.exceptions.LottoNumberFormatException;
 import lotto.exceptions.NotEnoughPurchasedAmountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoGeneratorTest {
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
+    private final LottoGenerator lottoGenerator = LottoGenerator.INSTANCE;
 
     @ParameterizedTest
     @CsvSource(value = {
@@ -45,5 +46,11 @@ public class LottoGeneratorTest {
         assertThatNoException().isThrownBy(
                 () -> lottoGenerator.purchaseByManual(amount, purchasedByManualList)
         );
+    }
+
+    @Test
+    void testFailParseLottoString() {
+        assertThatThrownBy(() -> lottoGenerator.createLotto("1,2,3,a,4,5"))
+                .isInstanceOf(LottoNumberFormatException.class);
     }
 }

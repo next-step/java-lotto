@@ -19,7 +19,7 @@ public class LottoNumber {
                 .forEach(i -> cache.put(i, new LottoNumber(i)));
     }
 
-    public static LottoNumber of(String string) {
+    protected static LottoNumber of(String string) {
         try {
             return get(Integer.parseInt(string));
         } catch (NumberFormatException e) {
@@ -27,7 +27,7 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber of(int number) {
+    protected static LottoNumber of(int number) {
         return get(number);
     }
 

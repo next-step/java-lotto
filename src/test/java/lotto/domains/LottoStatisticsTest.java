@@ -31,21 +31,21 @@ public class LottoStatisticsTest {
         return Stream.of(
                 arguments(
                         List.of(
-                                Lotto.createByString("1, 2, 3, 4, 5, 7")
+                                LottoGenerator.INSTANCE.createLotto("1, 2, 3, 4, 5, 7")
                         ),
-                        new LottoWinner(Lotto.createByString("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
-                        Prize.SECOND.getReward() / ((double) Lotto.PRICE
+                        new LottoWinner(LottoGenerator.INSTANCE.createLotto("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
+                        Prize.SECOND.getReward() / ((double) LottoGenerator.PRICE
                         )),
                 arguments(
                         List.of(
-                                Lotto.createByString("1, 2, 3, 4, 5, 8")
+                                LottoGenerator.INSTANCE.createLotto("1, 2, 3, 4, 5, 8")
                         ),
-                        new LottoWinner(Lotto.createByString("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
-                        Prize.THIRD.getReward() / ((double) Lotto.PRICE
+                        new LottoWinner(LottoGenerator.INSTANCE.createLotto("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
+                        Prize.THIRD.getReward() / ((double) LottoGenerator.PRICE
                         )),
                 arguments(
                         List.of(),
-                        new LottoWinner(Lotto.createByString("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
+                        new LottoWinner(LottoGenerator.INSTANCE.createLotto("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
                         0
                 )
         );
@@ -55,16 +55,16 @@ public class LottoStatisticsTest {
         return Stream.of(
                 arguments(
                         List.of(
-                                Lotto.createByString("1, 2, 3, 4, 5, 6"),
-                                Lotto.createByString("1, 2, 3, 10, 11, 12")
+                                LottoGenerator.INSTANCE.createLotto("1, 2, 3, 4, 5, 6"),
+                                LottoGenerator.INSTANCE.createLotto("1, 2, 3, 10, 11, 12")
                         ),
-                        new LottoWinner(Lotto.createByString("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
+                        new LottoWinner(LottoGenerator.INSTANCE.createLotto("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
                         Prize.FIRST,
                         1
                 ),
                 arguments(
                         List.of(),
-                        new LottoWinner(Lotto.createByString("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
+                        new LottoWinner(LottoGenerator.INSTANCE.createLotto("1, 2, 3, 4, 5, 6"), LottoNumber.of(7)),
                         Prize.FIRST,
                         0
                 )

@@ -35,7 +35,7 @@ public class LottoPurchasedAmount {
     }
 
     public LottoPurchasedAmount spend(UnsignedInteger count) {
-        int spendMoney = count.getValue() * Lotto.PRICE;
+        int spendMoney = count.getValue() * LottoGenerator.PRICE;
         return new LottoPurchasedAmount(this.amount - spendMoney);
     }
 
