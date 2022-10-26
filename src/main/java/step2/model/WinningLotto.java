@@ -7,6 +7,7 @@ import step2.exception.IllegalNumberException;
 public class WinningLotto {
 
 	private static final int SECOND_MATCH_NUM = 5;
+	private static final int DEFAULT_COUNT_OF_BONUS = 0;
 
 	private List<Integer> winLottoNumber;
 	private int bonusNumber;
@@ -33,15 +34,12 @@ public class WinningLotto {
 	}
 
 	public boolean isBonus(int countLottoMatch, List<Integer> lotto) {
-		long countOfBonus = 0;
+		long countOfBonus = DEFAULT_COUNT_OF_BONUS;
 
 		if (countLottoMatch == SECOND_MATCH_NUM) {
 			countOfBonus = lotto.stream().filter(s -> s.equals(bonusNumber)).count();
 		}
 
-		if (countOfBonus > 0) {
-			return true;
-		}
-		return false;
+		return countOfBonus > DEFAULT_COUNT_OF_BONUS;
 	}
 }

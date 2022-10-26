@@ -54,10 +54,7 @@ public class OutputView {
 	}
 
 	private boolean isProfit(double rate) {
-		if (rate < BENEFIT_STANDARD) {
-			return false;
-		}
-		return true;
+		return rate > BENEFIT_STANDARD;
 	}
 
 	private void defaultMessage(double rate) {
