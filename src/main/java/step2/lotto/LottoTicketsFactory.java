@@ -18,7 +18,7 @@ public class LottoTicketsFactory {
 
     public LottoTickets lottoTickets() {
         int numberOfTickets = purchaseAmount / LOTTO_PRICE;
-        return new LottoTickets(numberAsLottoTickets(numberOfTickets));
+        return new LottoTickets(numberAsLottoTickets(numberOfTickets), LOTTO_PRICE);
     }
 
     private List<LottoTicket> numberAsLottoTickets(int numberOfTickets) {
