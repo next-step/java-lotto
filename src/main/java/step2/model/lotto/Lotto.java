@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import step2.exception.BadRequestException;
+
 public class Lotto {
 	private static final int MIN_NUMBER = 1;
 	private static final int MAX_NUMBER = 45;
@@ -21,6 +23,9 @@ public class Lotto {
 	}
 
 	public Lotto(List<Integer> numbers) {
+		if (numbers.size() > LOTTO_SIZE) {
+			throw new BadRequestException("당첨 번호는 6을 초과할 수 없습니다.");
+		}
 		this.numbers = numbers;
 	}
 
