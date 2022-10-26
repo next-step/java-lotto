@@ -15,13 +15,14 @@ public class LottoController {
 
 	public void startLotto(LottoFactory lottoFactory) {
 		int money = INPUT_VIEW.askMoneyForLotto();
-		int totalTicket = payment.lottoAmount(money);
-		int bonusNumber = INPUT_VIEW.askBonusNumber();
+		int totalTicket = payment.amountOfTicket(money);
+
 		OUTPUT_VIEW.showTotalTicket(totalTicket);
 
 		Lotteries lotteries = Lotteries.of(totalTicket, lottoFactory);
 
 		OUTPUT_VIEW.showLotteries(totalTicket, lotteries);
+		int bonusNumber = INPUT_VIEW.askBonusNumber();
 		HashMap<Integer, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),bonusNumber);
 
 		OUTPUT_VIEW.resultView(totalCount,lotteries.countOfMatchBonus());

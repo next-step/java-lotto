@@ -10,13 +10,9 @@ public class Payment {
 	private static final int MAX_MATCH = 6;
 	private static final int DEFAULT_PRICE = 0;
 
-	public int lottoAmount(int cash) {
+	public int amountOfTicket(int cash) {
 		if (cash < LOTTO_PRICE) {
 			throw new MoneyException("금액이 부족합니다");
-		}
-
-		if ((cash % LOTTO_PRICE) > DEFAULT_PRICE) {
-			throw new MoneyException("1000원 단위로만 입력해주세요");
 		}
 		return cash / LOTTO_PRICE;
 	}

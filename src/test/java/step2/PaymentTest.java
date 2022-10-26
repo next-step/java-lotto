@@ -16,7 +16,7 @@ public class PaymentTest {
 	void 구입금액테스트() {
 		int money = 14000;
 		Payment payment = new Payment();
-		assertThat(payment.lottoAmount(money)).isEqualTo(14000 / 1000);
+		assertThat(payment.amountOfTicket(money)).isEqualTo(14000 / 1000);
 	}
 
 	@Test
@@ -24,17 +24,17 @@ public class PaymentTest {
 	void 금액_부족_테스트() {
 		int money = 900;
 		Payment payment = new Payment();
-		assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(
+		assertThatThrownBy(() -> payment.amountOfTicket(money)).isInstanceOf(
 			MoneyException.class);
 	}
 
 	@Test
-	@DisplayName("1000원 단위를 지불하지 않으면 예외 발생")
-	void 단위_예외_테스트() {
+	@DisplayName("티켓은 1000원당 한장이 생긴다.")
+	void 잔돈_테스트() {
 		int money = 1900;
 		Payment payment = new Payment();
-		assertThatThrownBy(() -> payment.lottoAmount(money)).isInstanceOf(
-			MoneyException.class);
+		assertThat(payment.amountOfTicket(money)).isEqualTo(1900 / 1000);
+
 	}
 
 	@Test
