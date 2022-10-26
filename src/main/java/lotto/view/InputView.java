@@ -1,9 +1,14 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.input.TicketPriceInput;
 import lotto.domain.WinningLotto;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -25,9 +30,23 @@ public class InputView {
     public WinningLotto getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MSG);
         Scanner scanner = new Scanner(System.in);
-        String winningNumbersString =  scanner.nextLine();
+        String winningNumbers =  scanner.nextLine();
         System.out.println(BONUS_WINNING_NUMBER_MSG);
-        String bonusWinningNumberString = scanner.nextLine();
-        return WinningLotto.from(winningNumbersString, bonusWinningNumberString);
+        String bonusWinningNumber = scanner.nextLine();
+
+        Set<Integer> refinedWinningNumbers = Arrays.stream(splitStringToLottoNumbers(removeSpace(winningNumbers)))
+                .map(Integer::parseInt)
+                .collect(Collectors.toCollection(TreeSet::new));
+        int refinedBonusNumber = Integer.parseInt(bonusWinningNumber);
+
+        return new WinningLotto(new Lotto(refinedWinningNumbers), refinedBonusNumber);
+    }
+
+    private static String[] splitStringToLottoNumbers(String winningNumbersNoSpace) {
+        return winningNumbersNoSpace.split(",");
+    }
+
+    private static String removeSpace(String winningLottoNumbers) {
+        return winningLottoNumbers.replace(" ", "");
     }
 }

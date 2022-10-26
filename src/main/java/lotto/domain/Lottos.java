@@ -35,13 +35,10 @@ public class Lottos {
         Reward reward = new Reward();
         lottos.forEach(lotto -> {
             int sameSize = lotto.getSameElementsSize(winningLotto.getWinningLotto());
-            boolean correctBonus = getCorrectBonus(winningLotto.getBonusWinningNumber(), lotto, sameSize);
-            reward.plusCount(WinnerRank.valueOf(WinnerRankCondition.missCountFrom(sameSize, correctBonus)));
+            boolean correctBonus = lotto.hasSameElement(winningLotto.getBonusWinningNumber());
+            boolean needBonus = sameSize == SECOND_PLACE_CORRECT_COUNT;
+            reward.plusCount(WinnerRank.valueOf(new WinnerRankCondition(sameSize, needBonus && correctBonus)));
         });
         return reward;
-    }
-
-    private boolean getCorrectBonus(int bonusNumber, Lotto lotto, int sameSize) {
-        return sameSize == SECOND_PLACE_CORRECT_COUNT && lotto.hasSameElement(bonusNumber);
     }
 }

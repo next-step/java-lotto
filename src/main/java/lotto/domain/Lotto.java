@@ -18,13 +18,10 @@ public class Lotto {
             .collect(Collectors.toList());
 
     public Lotto(Set<Integer> lottoNums) {
-        if(lottoNums.size() > DEFAULT_SIZE) {
-            throw new IllegalArgumentException("lotto cannot have number quantity bigger than 6");
+        if(lottoNums.size() != DEFAULT_SIZE) {
+            throw new IllegalArgumentException("lotto input has wrong size");
         }
-        if(lottoNums.size() < DEFAULT_SIZE){
-            throw new IllegalArgumentException("lotto cannot have duplicate numbers");
-        }
-        this.lottoNums = lottoNums;
+        this.lottoNums = new TreeSet<>(lottoNums);
     }
 
     public boolean hasSameElement(Integer number){
@@ -40,14 +37,10 @@ public class Lotto {
         return lottoNums.toString();
     }
 
-    public List<Integer> getSameElements(Lotto winningLottoNumbers){
-        return lottoNums.stream()
-                .filter(old -> winningLottoNumbers.lottoNums.stream().anyMatch(Predicate.isEqual(old)))
-                .collect(Collectors.toList());
-    }
-
     public int getSameElementsSize(Lotto winningLottoNumbers){
-        return getSameElements(winningLottoNumbers).size();
+        return (int) lottoNums.stream()
+                .filter(winningLottoNumbers::hasSameElement)
+                .count();
     }
 
     public static Lotto generateRandomLotto() {

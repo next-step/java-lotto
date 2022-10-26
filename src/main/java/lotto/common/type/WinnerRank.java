@@ -30,10 +30,7 @@ public enum WinnerRank {
     }
 
     public static WinnerRank valueOf(WinnerRankCondition condition) {
-        if (!BY_RANK_CONDITION.containsKey(condition)) {
-            throw new IllegalArgumentException("No winner rank matched with the count");
-        }
-        return BY_RANK_CONDITION.get(condition);
+        return BY_RANK_CONDITION.getOrDefault(condition, MISS);
     }
 
     public boolean isSecond() {
