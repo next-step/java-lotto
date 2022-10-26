@@ -5,24 +5,17 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
 
-    private static final int LOTTO_PRICE = 1_000;
-
     private final List<LottoTicket> lottoTickets;
 
-    LottoTickets(List<LottoTicket> lottoTickets) {
+    private final int lottoPrice;
+
+    public LottoTickets(List<LottoTicket> lottoTickets, int lottoPrice) {
         this.lottoTickets = lottoTickets;
+        this.lottoPrice = lottoPrice;
     }
 
     public int numberOfTickets() {
         return lottoTickets.size();
-    }
-
-    public Ranks ranks(Set<Integer> winningNumbers) {
-        List<Rank> ranks = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.rank(winningNumbers))
-                .collect(Collectors.toUnmodifiableList());
-
-        return new Ranks(ranks);
     }
 
     public void print(OutputView outputView) {
@@ -40,6 +33,16 @@ public class LottoTickets {
     @Override
     public int hashCode() {
         return Objects.hash(lottoTickets);
+    }
+
+    public YieldCalculator yieldCalculator(Set<Integer> winningNumbers) {
+        return new YieldCalculator(lottoPrice, ranks(winningNumbers));
+    }
+
+    private List<Rank> ranks(Set<Integer> winningNumbers) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.rank(winningNumbers))
+                .collect(Collectors.toUnmodifiableList());
     }
 
 }
