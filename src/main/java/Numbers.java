@@ -7,7 +7,7 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    public List<Number> getNumbers() {
+    public List<Number> fromList() {
         return numbers;
     }
 }

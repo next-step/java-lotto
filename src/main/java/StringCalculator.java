@@ -29,9 +29,9 @@ public class StringCalculator {
     }
 
     private void calculate(Numbers numbers, Operations operations) {
-        totalNumber.add(numbers.getNumbers().get(0));
+        totalNumber.add(numbers.fromList().get(0));
         for (int index = 0; index < operations.getOperations().size(); index++) {
-            operate(operations.getOperations().get(index), numbers.getNumbers().get(index + 1));
+            operate(operations.getOperations().get(index), numbers.fromList().get(index + 1));
         }
     }
 
