@@ -34,4 +34,17 @@ class LottoTicketsTest {
         assertThat(lottoTickets.yieldCalculator(lottoNumbers)).isEqualTo(new YieldCalculator(lottoPrice, List.of(Rank.FIRST)));
     }
 
+    @Test
+    void 일치_지표_계산기를_생성할_수_있다() {
+        int numberOfTickets = 1;
+        int lottoPrice = 1000;
+        int totalPrice = lottoPrice * numberOfTickets;
+        Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(lottoNumbers);
+
+        LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
+
+        assertThat(lottoTickets.matchIndicatorCalculator(lottoNumbers)).isEqualTo(new MatchIndicatorCalculator(List.of(Rank.FIRST)));
+    }
+
 }
