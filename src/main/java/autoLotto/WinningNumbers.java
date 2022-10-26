@@ -7,8 +7,9 @@ public class WinningNumbers {
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
 
     private List<Integer> winningNumbers;
+    private int bonusNumber;
 
-    public WinningNumbers(final List<Integer> winningNumbers) {
+    public WinningNumbers(final List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.size() != NUMBER_OF_WINNING_NUM) {
             throw new IllegalArgumentException("당첨 숫자는 6개 입력 해야합니다.");
         }
@@ -16,7 +17,10 @@ public class WinningNumbers {
         for (Integer winningNumber : winningNumbers) {
             checkMaxNum(winningNumber);
         }
+        checkMaxNum(bonusNumber);
+
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     private void checkMaxNum(Integer number) {
@@ -27,5 +31,9 @@ public class WinningNumbers {
 
     public List<Integer> getWinningNumbers() {
         return winningNumbers;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 }

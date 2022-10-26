@@ -31,4 +31,14 @@ public class InputView {
             throw new IllegalArgumentException(e);
         }
     }
+
+    public static int inputBonusNumber() {
+        System.out.println("\n보너스 볼을 입력해 주세요.");
+
+        try {
+            return SCANNER.nextInt();
+        } catch (InputMismatchException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
 }

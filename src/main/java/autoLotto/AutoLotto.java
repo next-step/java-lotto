@@ -1,23 +1,20 @@
 package autoLotto;
 
+import java.util.List;
+
 public class AutoLotto {
-    private static final int LOTTO_PRICE = 1000;
 
     public static void run() {
-        Lottos lottos = new Lottos();
-        Quantity quantity = new Quantity(InputView.inputAmount());
+        List<Lotto> lottoList = LottoFactory.makeLotto(InputView.inputAmount());
+        Lottos lottos = new Lottos(lottoList);
+        GameResult result = new GameResult();
 
-        int countOfLotto = quantity.getQuantity();
-        OutputView.outputQuantity(countOfLotto);
-
-        for ( int i = 0 ; i < countOfLotto ; i++) {
-            lottos.addLotto(new Lotto());
-        }
+        OutputView.outputQuantity(lottos);
 
         OutputView.outputLottos(lottos);
-        double result = Calculator.calculate(lottos, new WinningNumbers(InputView.inputNumbers()),
-                countOfLotto * LOTTO_PRICE);
 
-        OutputView.outputResult(new GameResult(result));
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.inputNumbers(), InputView.inputBonusNumber());
+        Calculator.calculate(lottos, winningNumbers, result);
+        OutputView.outputResult(result);
     }
 }
