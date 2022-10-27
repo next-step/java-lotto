@@ -4,9 +4,9 @@ import step2.controller.LottoController;
 
 public class Main {
 
-	private static final LottoController lottoController = new LottoController();
-
 	public static void main(String[] args) {
+		LottoController lottoController = new LottoController();
+
 		lottoController.purchase();
 		lottoController.getWinningNumber();
 		lottoController.getWinningStatistics();
