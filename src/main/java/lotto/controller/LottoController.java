@@ -17,6 +17,7 @@ public class LottoController {
         TicketPriceInput ticketPriceInput = inputView.getTicketPriceInput();
         ManualLottoInput manualLottoInput = inputView.getManualCountInput();
         Lottos lottos = Lottos.of(ticketPriceInput, manualLottoInput);
+        resultView.printLottoCount(ticketPriceInput, manualLottoInput);
         resultView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.getWinningNumbers();

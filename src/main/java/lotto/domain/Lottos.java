@@ -46,12 +46,12 @@ public class Lottos {
     }
 
     public static Lottos of(TicketPriceInput ticketPriceInput, ManualLottoInput manualLottoInput){
-        if(ticketPriceInput.getTicketAmt() < manualLottoInput.inputCount()) {
+        if(ticketPriceInput.getTicketAmt() < manualLottoInput.getInputSize()) {
             throw new IllegalArgumentException("manual input count cannot be bigger than total lotto count");
         }
 
         List<Lotto> result = new ArrayList<>();
-        int manualLottoAmt = manualLottoInput.inputCount();
+        int manualLottoAmt = manualLottoInput.getInputSize();
         int randomLottoAmt = ticketPriceInput.getTicketAmt() - manualLottoAmt;
 
         for (String lottoInput : manualLottoInput.getManualLottoInput()){

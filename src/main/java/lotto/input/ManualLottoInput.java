@@ -9,7 +9,7 @@ public class ManualLottoInput {
         this.manualLottoInput = manualLottoInput;
     }
 
-    public int inputCount(){
+    public int getInputSize(){
         return manualLottoInput.size();
     }
 
