@@ -1,35 +1,40 @@
 package lotto.backend.domain;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum LottoRank {
 
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     NOTHING(0, 0);
 
-    private final int match;
-    private final double prize;
+    private static final Map<Integer, LottoRank> CACHED_LOTTO_RANK = new HashMap<>();
 
-    LottoRank(int match, double prize) {
+    static {
+        for (LottoRank rank : LottoRank.values()) {
+            CACHED_LOTTO_RANK.put(rank.match, rank);
+        }
+    }
+
+    private final int match;
+    private final int prize;
+
+    LottoRank(int match, int prize) {
         this.match = match;
         this.prize = prize;
     }
 
     public static LottoRank of(int match) {
-        return Arrays.stream(LottoRank.values())
-                .filter(item -> item.getMatch() == match)
-                .findFirst()
-                .orElse(NOTHING);
+        if (CACHED_LOTTO_RANK.containsKey(match)) {
+            return CACHED_LOTTO_RANK.get(match);
+        }
+        return CACHED_LOTTO_RANK.get(0);
     }
 
-    public int getMatch() {
-        return this.match;
-    }
-
-    public double getPrize() {
+    public int getPrize() {
         return this.prize;
     }
 }
