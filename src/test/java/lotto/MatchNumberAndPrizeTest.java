@@ -1,6 +1,6 @@
 package lotto;
 
-import org.assertj.core.api.Assertions;
+import lotto.domain.enums.MatchNumberAndPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,7 +34,7 @@ class MatchNumberAndPrizeTest {
     void valueOfMatchNumber(int matchNumber) {
 
         MatchNumberAndPrize matchNumberAndPrize =
-                MatchNumberAndPrize.valueOfMatchNumber(matchNumber);
+                MatchNumberAndPrize.valueOfMatchNumber(matchNumber, false);
 
         assertThat(matchNumberAndPrize.getMatchNumber()).isEqualTo(matchNumber);
     }
@@ -44,8 +44,17 @@ class MatchNumberAndPrizeTest {
     @DisplayName("맞춘 숫자가 없으면 NON을 반환한다.")
     void valueOfMatchNumberNON(int matchNumber) {
         MatchNumberAndPrize matchNumberAndPrize =
-                MatchNumberAndPrize.valueOfMatchNumber(matchNumber);
+                MatchNumberAndPrize.valueOfMatchNumber(matchNumber, false);
 
         assertThat(matchNumberAndPrize).isEqualTo(MatchNumberAndPrize.NON);
+    }
+
+    @Test
+    @DisplayName("5개의 당첨 개수와 보너스볼을 맞추면 2등을 반환한다")
+    void valueOfBonusMatchNumber() {
+        MatchNumberAndPrize matchNumberAndPrize =
+                MatchNumberAndPrize.valueOfMatchNumber(MatchNumberAndPrize.SECOND_MATCH_NUMBER, true);
+
+        assertThat(matchNumberAndPrize).isEqualTo(MatchNumberAndPrize.SECOND);
     }
 }

@@ -1,15 +1,18 @@
-package lotto;
+package lotto.domain.enums;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum MatchNumberAndPrize {
-    NON(0, 0L),
-    FOURTH(3, 5000L),
-    THIRD(4, 50000L),
-    SECOND(5, 1500000L),
-    FIRST(6, 2000000000L);
 
+    NON(0, 0L),
+    FIFTH(3, 5_000L),
+    FOURTH(4, 50_000L),
+    THIRD(5, 1_500_000L),
+    SECOND(5, 30_000_000L),
+    FIRST(6, 2_000_000_000L);
+
+    public static final int SECOND_MATCH_NUMBER = 5;
     private final int matchNumber;
     private final Long prize;
 
@@ -17,6 +20,7 @@ public enum MatchNumberAndPrize {
 
     static {
         for (MatchNumberAndPrize matchNumberAndPrize : values()) {
+            if (matchNumberAndPrize == SECOND) continue;
             BY_MATCH_NUMBER.put(matchNumberAndPrize.matchNumber, matchNumberAndPrize);
         }
     }
@@ -26,7 +30,8 @@ public enum MatchNumberAndPrize {
         this.prize = prize;
     }
 
-    public static MatchNumberAndPrize valueOfMatchNumber(int matchNumber) {
+    public static MatchNumberAndPrize valueOfMatchNumber(int matchNumber, boolean isBonusContain) {
+        if (matchNumber == SECOND_MATCH_NUMBER && isBonusContain) return SECOND;
         MatchNumberAndPrize matchNumberAndPrize = BY_MATCH_NUMBER.get(matchNumber);
         if (matchNumberAndPrize == null) return NON;
         return matchNumberAndPrize;

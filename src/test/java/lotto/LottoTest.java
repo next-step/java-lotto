@@ -1,6 +1,9 @@
 package lotto;
 
 import exception.CustomException;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberRange;
 import lotto.exception.LottoErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,17 +16,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoTest {
 
     @Test
-    @DisplayName("로또 생성 테스트")
-    void generate() {
-        Lotto lotto = Lotto.generate();
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-        assertThat(lottoNumbers).hasSize(Lotto.SELECT_SIZE);
-    }
-
-    @Test
     @DisplayName("로또 객체로 로또를 생성하는 테스트")
     void fromLotto() {
-        Lotto lotto = Lotto.generate();
+        Lotto lotto = LottoNumberRange.createLotto();
         Lotto fromLotto = Lotto.from(lotto);
         assertThat(lotto).isEqualTo(fromLotto);
     }
@@ -31,7 +26,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호 리스트로 로또를 생성하는 테스트")
     void fromLottoNumberList() {
-        Lotto lotto = Lotto.generate();
+        Lotto lotto = LottoNumberRange.createLotto();
         List<LottoNumber> lottoNumberList = lotto.getLottoNumbers();
         Lotto fromLotto = Lotto.from(lottoNumberList);
         assertThat(lotto).isEqualTo(fromLotto);

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import exception.CustomException;
 import lotto.exception.LottoErrorCode;
@@ -25,14 +25,6 @@ public class Lotto {
         if (distinct.size() != numbers.size()) {
             throw new CustomException(LottoErrorCode.LOTTO_NUMBER_OVERLAP);
         }
-    }
-
-    public static Lotto generate() {
-        List<LottoNumber> lottoNumbersRange = LottoNumber.getLottoNumbersRange();
-        Collections.shuffle(lottoNumbersRange);
-        Lotto lotto = new Lotto(lottoNumbersRange.subList(0, SELECT_SIZE));
-        lotto.numbers.sort(Comparator.comparing(LottoNumber::getNumber));
-        return new Lotto(lottoNumbersRange.subList(0, SELECT_SIZE));
     }
 
     public static Lotto from(Lotto lotto) {
@@ -64,7 +56,14 @@ public class Lotto {
     }
 
     public Long containCount(Lotto lotto) {
-        return this.numbers.stream().filter(lotto.numbers::contains).count();
+        return this.numbers.stream()
+                .filter(lotto.numbers::contains)
+                .count();
+    }
+
+    public boolean contain(LottoNumber lottoNumber) {
+        return this.numbers
+                .contains(lottoNumber);
     }
 
     @Override

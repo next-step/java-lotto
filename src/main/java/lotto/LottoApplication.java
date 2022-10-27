@@ -1,6 +1,10 @@
 package lotto;
 
-import calculator.Operation;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoStore;
+import lotto.domain.enums.MatchNumberAndPrize;
+import lotto.service.LottoStatisticalService;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
@@ -18,7 +22,11 @@ public class LottoApplication {
 
         String winningLottoNumbers = LottoInputView.inputWinningLottoNumbers();
         Lotto winningLotto = Lotto.from(winningLottoNumbers);
-        LottoStatisticalService lottoStatisticalService = new LottoStatisticalService(winningLotto);
+
+        int inputBonusNumber = LottoInputView.inputBonusNumber();
+        LottoNumber bonusNumber = LottoNumber.from(inputBonusNumber);
+
+        LottoStatisticalService lottoStatisticalService = new LottoStatisticalService(winningLotto, bonusNumber);
         Map<MatchNumberAndPrize, Integer> statistics = lottoStatisticalService.giveStatistics(lotto);
 
         LottoResultView.printLottoStatistical(statistics);

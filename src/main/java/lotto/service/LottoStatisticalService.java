@@ -1,4 +1,8 @@
-package lotto;
+package lotto.service;
+
+import lotto.domain.enums.MatchNumberAndPrize;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,16 +11,19 @@ import java.util.Map;
 public class LottoStatisticalService {
 
     private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    public LottoStatisticalService(Lotto winningLotto) {
+    public LottoStatisticalService(Lotto winningLotto, LottoNumber bonusNumber) {
         this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
     }
 
     public Map<MatchNumberAndPrize, Integer> giveStatistics(List<Lotto> purchasedLotto) {
         Map<MatchNumberAndPrize, Integer> result = initStatistics();
         for (Lotto lotto : purchasedLotto) {
             int matchNumber = lotto.containCount(winningLotto).intValue();
-            MatchNumberAndPrize matchNumberAndPrize = MatchNumberAndPrize.valueOfMatchNumber(matchNumber);
+            boolean contain = lotto.contain(bonusNumber);
+            MatchNumberAndPrize matchNumberAndPrize = MatchNumberAndPrize.valueOfMatchNumber(matchNumber, contain);
             result.put(matchNumberAndPrize, result.get(matchNumberAndPrize) + 1);
         }
         return result;

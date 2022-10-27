@@ -1,8 +1,8 @@
 package lotto;
 
 import exception.CustomException;
+import lotto.domain.LottoNumber;
 import lotto.exception.LottoErrorCode;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoNumberTest {
 
@@ -31,7 +32,7 @@ public class LottoNumberTest {
                 .max()
                 .getAsInt();
 
-        org.junit.jupiter.api.Assertions.assertAll(
+        assertAll(
                 () -> assertThat(max).isLessThanOrEqualTo(LottoNumber.MAXIMUM_VALUE),
                 () -> assertThat(min).isGreaterThanOrEqualTo(LottoNumber.MINIMUM_VALUE)
         );
