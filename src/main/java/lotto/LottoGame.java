@@ -26,6 +26,6 @@ public class LottoGame {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        ResultView.viewWinningStatics(new LottoResult(store.match(winningNumbers), money));
+        ResultView.viewWinningStatics(new LottoResult(store.match(winningNumbers)), money);
     }
 }

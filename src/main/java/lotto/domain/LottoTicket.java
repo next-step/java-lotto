@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -27,19 +28,16 @@ public class LottoTicket {
     }
 
     private static void validateDuplicate(final List<LottoNumber> lottoNumbers) {
-        HashSet<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
+        Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
         if (nonDuplicateNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호들은 중복될 수 없습니다.");
         }
     }
+
     public Rank match(final List<LottoNumber> winningLottoTicket) {
-        long result = 0L;
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            if (winningLottoTicket.contains(lottoNumber)) {
-                result++;
-            }
-        }
-        int count = (int) result;
+        int count = Math.toIntExact(this.lottoNumbers.stream()
+                .filter(winningLottoTicket::contains)
+                .count());
         return Rank.of(count);
     }
 

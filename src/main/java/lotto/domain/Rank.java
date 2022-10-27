@@ -25,7 +25,7 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
-    public int totalMoney(final int count) {
+    public long totalMoney(final long count) {
         return this.winningMoney * count;
     }
 

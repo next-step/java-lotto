@@ -24,10 +24,8 @@ public class InputView {
         System.out.println();
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
         String[] input = scanner.nextLine().split(COMMA_SEPARATOR);
-        List<Integer> result = Arrays.stream(input)
+        return Arrays.stream(input)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        scanner.close();
-        return result;
     }
 }

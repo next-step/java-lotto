@@ -5,9 +5,9 @@ package lotto.domain;
  */
 public class LottoNumber {
 
-    private static final int START_NUM = 1;
+    static final int START_NUM = 1;
 
-    private static final int END_NUM = 45;
+    static final int END_NUM = 45;
 
     private final int number;
 

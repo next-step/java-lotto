@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 
 import java.util.Arrays;
@@ -29,11 +30,11 @@ public class ResultView {
         }
     }
 
-    public static void viewWinningStatics(final LottoResult lottoResult) {
+    public static void viewWinningStatics(final LottoResult lottoResult, final Money money) {
         System.out.println();
         System.out.println("당첨 통계\n---------");
 
-        Map<Rank, Integer> result = lottoResult.getResult();
+        Map<Rank, Long> result = lottoResult.getResult();
         List<Rank> ranks = Arrays.stream(Rank.values())
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
@@ -41,18 +42,18 @@ public class ResultView {
             viewRank(result, rank);
         }
 
-        System.out.println("총 수익률 " + lottoResult.calculateRateOfReturn() + "입니다.");
+        System.out.println("총 수익률 " + lottoResult.calculateRateOfReturn(money) + "입니다.");
     }
 
-    private static void viewRank(final Map<Rank, Integer> result, final Rank rank) {
+    private static void viewRank(final Map<Rank, Long> result, final Rank rank) {
         if (NO_MATCH == rank) {
             return;
         }
         System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), getCount(result, rank));
     }
 
-    private static int getCount(final Map<Rank, Integer> result, final Rank rank) {
-        int count = 0;
+    private static long getCount(final Map<Rank, Long> result, final Rank rank) {
+        long count = 0;
         if (result.containsKey(rank)) {
             count = result.get(rank);
         }
