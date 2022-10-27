@@ -22,17 +22,17 @@ public class LottoNumberGenerator {
     private LottoNumberGenerator() {
     }
 
-    public static Set<LottoNumber> generateAutoLottoNumber() {
+    public static LottoNumbers generateAutoLottoNumber() {
         Collections.shuffle(lottoNumbersCache);
 
-        return lottoNumbersCache.stream()
+        return LottoNumbers.from(lottoNumbersCache.stream()
             .limit(LOTTO_NUMBER_COUNT)
-            .collect(Collectors.toSet());
+            .collect(Collectors.toSet()));
     }
 
-    public static Set<LottoNumber> generateManualLottoNumber(Set<Integer> manualNumbers) {
-        return manualNumbers.stream()
-            .map(number -> LottoNumber.from(number))
-            .collect(Collectors.toSet());
+    public static LottoNumbers generateManualLottoNumber(Set<Integer> manualNumbers) {
+        return LottoNumbers.from(manualNumbers.stream()
+                .map(number -> LottoNumber.from(number))
+                .collect(Collectors.toSet()));
     }
 }

@@ -1,7 +1,6 @@
 package step4;
 
 import step4.controller.LottoGameController;
-import step4.domain.Ticket;
 import step4.dto.TicketDTO;
 
 public class LottoApplication {

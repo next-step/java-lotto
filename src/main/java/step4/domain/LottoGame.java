@@ -26,16 +26,13 @@ public class LottoGame {
 
     private void playAutoLotto(int ticketCount) {
         for (int i = 0; i < ticketCount; i++) {
-            lottoNumbers.add(LottoNumbers.from(LottoNumberGenerator
-                    .generateAutoLottoNumber()));
+            lottoNumbers.add(LottoNumberGenerator.generateAutoLottoNumber());
         }
     }
 
     private void playManualLotto(List<ManualLottoNumberDTO> manualLottoNumbers) {
         for (ManualLottoNumberDTO manualLottoNumber : manualLottoNumbers) {
-            lottoNumbers.add(LottoNumbers.from(
-                    LottoNumberGenerator.generateManualLottoNumber(manualLottoNumber
-                            .getManualLottoNumbers())));
+            lottoNumbers.add(LottoNumberGenerator.generateManualLottoNumber(manualLottoNumber.getManualLottoNumbers()));
         }
     }
 }
