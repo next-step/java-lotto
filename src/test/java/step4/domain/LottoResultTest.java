@@ -63,7 +63,7 @@ class LottoResultTest {
                         LottoNumber.from(17)).collect(Collectors.toSet())));
 
         Map<Prize, Integer> drawLottoResult =
-                lottoResult.drawLottoResult(allLottoNumbers, 8);
+                lottoResult.drawLottoResult(allLottoNumbers, LottoNumber.from(8));
 
         Assertions.assertAll(
                 () -> assertThat(drawLottoResult.get(Prize.FIFTH)).isEqualTo(2),

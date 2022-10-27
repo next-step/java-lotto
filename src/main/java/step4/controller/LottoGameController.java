@@ -29,7 +29,7 @@ public class LottoGameController {
         OutputView.printLottoNumbers(lottoNumbers);
 ;
         final LottoResult lottoResult = LottoResult.from(InputView.inputWinningNumbers());
-        int bonusBall = InputView.inputBonusBall();
+        LottoNumber bonusBall = LottoNumber.from(InputView.inputBonusBall());
 
         final Map<Prize, Integer> drawLottoResult = lottoResult.drawLottoResult(lottoNumbers, bonusBall);
         OutputView.printDrawResult(drawLottoResult);

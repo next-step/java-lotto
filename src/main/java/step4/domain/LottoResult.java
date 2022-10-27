@@ -19,7 +19,7 @@ public class LottoResult {
     }
 
     public final Map<Prize, Integer> drawLottoResult(final List<LottoNumbers> allLottoNumbers,
-        int bonusBall) {
+        LottoNumber bonusBall) {
         drawResult.clear();
         for (LottoNumbers eachLottoNumber : allLottoNumbers) {
             int matchCount = eachLottoNumber.calculateMatchCount(winningNumbers);

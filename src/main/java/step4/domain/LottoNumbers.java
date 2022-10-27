@@ -36,7 +36,7 @@ public class LottoNumbers {
         return matchCount;
     }
 
-    public boolean hasNumber(int bonusNumber) {
-        return this.lottoNumbers.contains(LottoNumber.from(bonusNumber));
+    public boolean hasNumber(LottoNumber number) {
+        return this.lottoNumbers.contains(number);
     }
 }
