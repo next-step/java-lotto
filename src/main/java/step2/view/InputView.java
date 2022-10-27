@@ -27,7 +27,11 @@ public class InputView {
 	private String[] askWinNumber() {
 		System.out.println("지난 주 당첨 번호를 입력하세요");
 		return scanner.next().split(DELIMITER);
+	}
 
+	public int askBonusNumber() {
+		System.out.println("보너스 볼을 입력해주세요");
+		return scanner.nextInt();
 	}
 
 	public List<Integer> winNumber() {
