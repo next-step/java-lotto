@@ -21,7 +21,9 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> createLottoNumbers(int...args) {
-        return Arrays.stream(args).mapToObj(LottoNumber::new).collect(Collectors.toList());
+        return Arrays.stream(args)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     private boolean isValidLottoNumber(int number) {

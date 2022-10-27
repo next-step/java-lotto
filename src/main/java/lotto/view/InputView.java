@@ -38,6 +38,13 @@ public class InputView {
             .collect(Collectors.toList());
     }
 
+    public static LottoNumber readBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int number = Integer.parseInt(SCANNER.nextLine());
+
+        return new LottoNumber(number);
+    }
+
     private static List<Integer> splitLottoNumbers(String numberString) {
         if (numberString.isBlank()) {
             throw new IllegalArgumentException();

@@ -21,13 +21,15 @@ public class LottoTicket {
         this.numbers = LottoNumber.createLottoNumbers(args);
     }
 
-    public LottoRank getRank(List<LottoNumber> winningNumbers) {
+    public LottoRank getRank(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
         int matchCount = 0;
         for (LottoNumber winningNumber : winningNumbers) {
             matchCount += checkMatchNumber(winningNumber);
         }
 
-        return LottoRank.getRank(matchCount);
+        boolean bonusMatch = checkMatchNumber(bonusBall) == 1;
+
+        return LottoRank.getRank(matchCount, bonusMatch);
     }
 
     public int checkMatchNumber(LottoNumber lottoNumber) {

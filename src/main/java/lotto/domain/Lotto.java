@@ -47,12 +47,12 @@ public class Lotto {
         return totalPrize;
     }
 
-    public Map<LottoRank, Long> getWinningStat(List<LottoNumber> winningNumbers) {
+    public Map<LottoRank, Long> getWinningStat(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
         Map<LottoRank, Long> stat = Arrays.stream(LottoRank.values()).collect(Collectors.toMap(
             Function.identity(), rank -> 0L));
 
         for (LottoTicket ticket: tickets) {
-            LottoRank rank = ticket.getRank(winningNumbers);
+            LottoRank rank = ticket.getRank(winningNumbers, bonusBall);
             stat.put(rank, stat.get(rank) + 1);
         }
 
