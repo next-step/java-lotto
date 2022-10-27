@@ -28,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> createNumbers(int size) {
-        List<Integer> keys = new ArrayList(cachedLottoNumber.keySet());
+        List<Integer> keys = new ArrayList<>(cachedLottoNumber.keySet());
         Collections.shuffle(keys);
         return keys.stream()
                 .limit(size)
@@ -40,10 +40,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (MIN_LOTTO_NUMBER > number || MAX_LOTTO_NUMBER < number) {
             throw new IllegalArgumentException("입력 값은 1 이상 45 이하입니다.");
         }
-    }
-
-    public String print() {
-        return String.valueOf(this.value);
     }
 
     @Override
@@ -62,5 +58,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }
