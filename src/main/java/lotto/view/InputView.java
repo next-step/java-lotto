@@ -18,4 +18,9 @@ public class InputView {
         System.out.println(Question.LAST_WEEK_LOTTO_NUMBER.getQuestion());
         return scanner.nextLine().split(",");
     }
+
+    public int bonusNumberScan() {
+        System.out.println(Question.BONUS_NUMBER.getQuestion());
+        return scanner.nextInt();
+    }
 }

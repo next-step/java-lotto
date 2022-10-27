@@ -1,10 +1,7 @@
 package lotto.controller;
 
 import lotto.constant.LottoRanking;
-import lotto.domain.LottoCount;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 import lotto.util.LottoUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -29,6 +26,7 @@ public class LottoController {
 
     private void getLottoResult(List<LottoNumbers> lottoTickets, int price) {
         String[] winningNumbers = inputView.lastWeekLottoNumbersScan();
+        LottoNumber bonusNumber = new LottoNumber(inputView.bonusNumberScan());
         LottoNumbers winLottoNumbers = new LottoNumbers(LottoUtil.ArrayToList(winningNumbers));
 
         LottoResult lottoResult = new LottoResult();

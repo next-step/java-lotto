@@ -48,8 +48,8 @@ class LottoResultTest {
         ArrayList<LottoRanking> lottoRankingsList = lastWeekLottoNumbers.matchingLottoNumbers(purchasedLottoNumbers);
         lottoResult.calculateLottoResult(lottoRankingsList, 3000);
         Map<LottoRanking, Integer> lottoRankings = lottoResult.getLottoRankings();
-        assertThat(lottoRankings.get(LottoRanking.FOUR)).isEqualTo(1);
-        assertThat(lottoRankings.get(LottoRanking.THREE)).isEqualTo(2);
+        assertThat(lottoRankings.get(LottoRanking.FOURTH)).isEqualTo(1);
+        assertThat(lottoRankings.get(LottoRanking.FIFTH)).isEqualTo(2);
     }
 
     @Test
