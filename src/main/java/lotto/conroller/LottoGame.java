@@ -14,14 +14,18 @@ import java.util.Map;
 public class LottoGame {
 
     public void buyLotto() {
-        int money = UserInput.inputMoney();
-        Purchasing purchasing = new Purchasing(money);
+        String inputMoney = UserInput.inputMoney();
+        Purchasing purchasing = new Purchasing(inputMoney);
         ResultView.printLottoCnt(purchasing.getLottoCnt());
         ResultView.printLottos(purchasing.getLottoList());
 
-        List<Integer> inputNumbers = UserInput.inputWinningLotto();
-        Lotto winningLotto = new Lotto(new ManualNumberStrategy(inputNumbers));
+        String inputWinnigLotto = UserInput.inputWinningLotto();
+        Lotto winningLotto = new Lotto(new ManualNumberStrategy(inputWinnigLotto));
 
+        collectStatistics(Integer.parseInt(inputMoney), purchasing, winningLotto);
+    }
+
+    private static void collectStatistics(int money, Purchasing purchasing, Lotto winningLotto) {
         List<Long> matchCntList =  purchasing.getMatchCntList(winningLotto);
         Statistics statistics = new Statistics();
         Map<WinnigType, Integer> statisticsMap = statistics.getStatistics(matchCntList);
@@ -31,7 +35,7 @@ public class LottoGame {
         ResultView.printRateOfReturn(statistics.getRateOfReturn(money));
     }
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         LottoGame customer = new LottoGame();
         customer.buyLotto();
     }
