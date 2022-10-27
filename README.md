@@ -145,3 +145,13 @@
   - Lotto : hasBonus -> hasLottoNumber 로 변경
 - [x] winningNumbers 에게 등수 물어보기
 - [x] LottoRank : 필요없는 변수 삭제 
+---
+
+---
+##Step4 - 로또(수동)
+###기능 요구사항
+- [ ] 수동 로또 수 입력 
+- [ ] 수동으로 구매한 번호 입력 받아 Lotto 만들기
+- [ ] 수동으로 몇장, 자동으로 몇장 구매했는지 출력하기
+- [ ] 수동과 자동을 넣은 LottoTicket 만들기
+- [ ] 수동 전략 패턴 사용.
