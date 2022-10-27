@@ -2,28 +2,18 @@ package step4.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static step4.domain.Prize.*;
 
 class PrizeTest {
-    @Test
-    void 등수_확인_2등일경우() {
-        Assertions.assertThat(getPrize(5,true)).isEqualTo(FIVE_BONUS_PRIZE);
-    }
 
-    @Test
-    void 등수_확인_3등일경우() {
-        Assertions.assertThat(getPrize(5,false)).isEqualTo(FIVE_PRIZE);
-    }
-
-    @Test
-    void 등수_확인_5등일경우() {
-        Assertions.assertThat(getPrize(3,false)).isEqualTo(THREE_PRIZE);
-    }
-
-    @Test
-    void 등수_밖일경우() {
-        Assertions.assertThat(getPrize(2,false)).isEqualTo(NONE);
+    @ParameterizedTest
+    @CsvSource(value = {"6,false,SIX_PRIZE", "5,true,FIVE_BONUS_PRIZE","4,false,FOUR_PRIZE", "5,false,FIVE_PRIZE","3,false,THREE_PRIZE","2,false,NONE"})
+    void 등수_확인(int count, Boolean isBonus, Prize expected) {
+        Assertions.assertThat(getPrize(count,isBonus)).isEqualTo(expected);
     }
 }
