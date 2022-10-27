@@ -23,8 +23,10 @@ public class Lottos implements Iterable<Lotto>{
 
 	public HashMap<Integer, Integer> getMatchCountMap(Lotto winningLotto) {
 		// 로또의 숫자개수 만큼 해시맵을 생성
-		HashMap<Integer, Integer> countMap = range(1, winningLotto.getNumbers().size() + 1).boxed()
-			.collect(Collectors.toMap(matchCount -> matchCount, matchCount -> 0, (a, b) -> b, HashMap::new));
+		HashMap<Integer, Integer> countMap = new HashMap<>();
+		for (int matchCount = 1; matchCount < winningLotto.getNumbers().size() + 1; matchCount++) {
+			countMap.put(matchCount, 0);
+		}
 
 		this.lottos.forEach(lotto -> {
 			countMap.computeIfPresent(lotto.getMatchCount(winningLotto.getNumbers()), (matchCount, cnt) -> cnt + 1);
