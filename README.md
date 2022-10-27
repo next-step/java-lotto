@@ -74,7 +74,7 @@
   * 기능 목록
     - [x] 수동 추첨 번호 입력 기능
     - [x] 수동 로또 이외의 로또 티켓은 자동으로 추첨 되도록
-    * Step4 추가 피드백
+  * Step4 추가 피드백
     - [x] Ticket 클래스 역할 고민. 수동과 자동을 DTO로 관리하기
     - [x] 총 구매 금액과 수동 구매 수량 사이의 밸리데이션
     - [x] Optional 보다 명확하게 이해할 수 있는 if문으로 수정
@@ -85,3 +85,5 @@
     - [x] winningNumbers Integer -> Lotto Number 
     - [x] drawLottoResult 를 두 번 호출 한다면?
     - [x] List<Set<Integer>> 중 Set<Integer>를 DTO로 관리하기
+    - [x] 사용하지 않는 코드 정리
+    - [x] POSIX 마지막 라인 개행 IDE 적용
