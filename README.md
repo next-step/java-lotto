@@ -109,7 +109,7 @@
 ---
 
 ---
-##Step2 - 로또(자동)
+##Step3 - 로또(2등)
 ###기능 요구사항
 > - 2등을 위해 추가 번호를 하나 더 추첨한다.
 > - 당첨 통계에 2등도 추가해야 한다.
@@ -139,3 +139,9 @@
 - [x] LottoRank : 2,3등 로직
   1. enum abstract method 키워드로 각각의 당첨여부를 관리하도록 고민
   2. BiFunction 을 이용하여 각 개체의 필드로 당첨여부 관리
+- [ ] CACHE 복제해서 반환
+- [ ] 함수명 변경 -> 객체가 주체가 되게 수정.
+  - LottoAmount : 의 입장에서 calcSumWinningMoneyRate -> calcAmountRate
+  - Lotto : hasBonus -> hasLottoNumber 로 변경
+- [ ] winningNumbers 에게 등수 물어보기
+- [ ] LottoRank : 필요없는 변수 삭제 money
