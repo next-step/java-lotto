@@ -15,8 +15,7 @@ public class Lotto
     }
 
     public static Lotto from(Set<Integer> item) {
-        if (item.size() < LOTTO_COUNT)
-        {
+        if (item.size() < LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호의 갯수가 올바르지 않습니다");
         }
         return new Lotto(item.stream()

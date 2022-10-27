@@ -28,7 +28,6 @@ public enum LottoPlace {
     }
 
     public static LottoPlace getLottoPlace(int count, boolean matchBonus) {
-
         return Arrays.stream(values())
             .filter(lottoPlace -> lottoPlace.count == count)
             .map(lottoPlace -> checkBonus(lottoPlace, matchBonus))
@@ -48,6 +47,4 @@ public enum LottoPlace {
         }
         return THIRD_PLACE;
     }
-
-
 }

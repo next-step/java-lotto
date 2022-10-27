@@ -37,7 +37,6 @@ public class LottoController {
         LottoWinners winners = LottoWinners.of(lottoList.getLottoList(), weekendLotto, weekendBonusNumber);
 
         OutputView.printWinner(winners.getWinners());
-
         OutputView.printYield(lottoMoney.calYield(winners.getTotalPrize()));
     }
 }
