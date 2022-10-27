@@ -1,14 +1,13 @@
 package step4.controller;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import step4.domain.*;
 import step4.dto.ManualLottoNumberDTO;
 import step4.dto.TicketDTO;
 import step4.view.InputView;
 import step4.view.OutputView;
+
+import java.util.List;
+import java.util.Map;
 
 public class LottoGameController {
 
@@ -16,11 +15,6 @@ public class LottoGameController {
         final int purchasePrice = InputView.inputPrice();
         final int countOfManualTicket = InputView.inputManualLottoCount();
         return TicketDTO.of(purchasePrice, countOfManualTicket);
-    }
-
-    public Ticket prepareManualLottoTicket() {
-        Ticket manualLottoTicket = Ticket.from(InputView.inputManualLottoCount() * 1000);
-        return manualLottoTicket;
     }
 
     public void playLotto(final TicketDTO ticketDTO) {
