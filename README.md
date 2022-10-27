@@ -143,5 +143,5 @@
 - [x] 함수명 변경 -> 객체가 주체가 되게 수정.
   - LottoAmount : 의 입장에서 calcSumWinningMoneyRate -> calcAmountRate
   - Lotto : hasBonus -> hasLottoNumber 로 변경
-- [ ] winningNumbers 에게 등수 물어보기
+- [x] winningNumbers 에게 등수 물어보기
 - [ ] LottoRank : 필요없는 변수 삭제 money

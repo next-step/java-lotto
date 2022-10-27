@@ -29,8 +29,7 @@ public class LottoTicket {
         LottoWinning winning = new LottoWinning();
         for (Lotto lotto : lottos) {
             winning.addCountOfMatch(
-                    LottoRank.win(lotto.matches(winningNumbers.getWinningLotto()),
-                            lotto.hasBonus(winningNumbers.getBonusNumber())));
+                    LottoRank.win(winningNumbers.matches(lotto), winningNumbers.hasBonusNumber(lotto)));
         }
         return winning;
     }
