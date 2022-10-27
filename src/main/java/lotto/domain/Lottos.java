@@ -12,16 +12,10 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos){
         this.lottos = lottos;
-    }
-
-    public Lottos(int lottoSize) {
-        while (lottos.size() < lottoSize) {
-            lottos.add(new Lotto(new LottoRandomGenerateStrategy()));
-        }
     }
 
     public List<Lotto> getLottos() {
@@ -53,7 +47,7 @@ public class Lottos {
         for (String lottoInput : manualLottoInput.getManualLottoInput()){
             result.add(new Lotto(StringUtils.refineNumbers(lottoInput)));
         }
-        for (int i = 0; i < lottoTicket.getRandomTicketAmt(manualLottoInput.getInputSize()); i++) {
+        for (int i = 0; i < lottoTicket.calculateRandomTicketAmt(manualLottoInput.getInputSize()); i++) {
             result.add(new Lotto(new LottoRandomGenerateStrategy()));
         }
         return new Lottos(result);

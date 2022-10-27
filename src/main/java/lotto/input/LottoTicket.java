@@ -31,7 +31,7 @@ public class LottoTicket {
         return Objects.hash(priceInput, ticketAmt);
     }
 
-    public int getRandomTicketAmt(int manualTicketAmt){
+    public int calculateRandomTicketAmt(int manualTicketAmt){
         return ticketAmt - manualTicketAmt;
     }
 
