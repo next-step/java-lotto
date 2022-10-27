@@ -1,6 +1,7 @@
 package step4.view;
 
 import step4.domain.LottoNumbers;
+import step4.domain.LottoResult;
 import step4.domain.Prize;
 import step4.dto.TicketDTO;
 
@@ -45,8 +46,9 @@ public class OutputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printDrawResult(final Map<Prize, Integer> drawLottoResult) {
+    public static void printDrawResult(final LottoResult lottoResult) {
         System.out.println();
+        Map<Prize, Integer> drawLottoResult = lottoResult.getLottoResult();
         drawLottoResult.remove(Prize.MISS);
         for (Prize prize : drawLottoResult.keySet()) {
             printEachResult(drawLottoResult, prize);

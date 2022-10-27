@@ -19,13 +19,13 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        lottoResult = LottoResult.from(Stream.of(
+        lottoResult = LottoResult.of(Stream.of(
                 LottoNumber.from(1),
                 LottoNumber.from(2),
                 LottoNumber.from(3),
                 LottoNumber.from(4),
                 LottoNumber.from(5),
-                LottoNumber.from(6)).collect(Collectors.toSet()));
+                LottoNumber.from(6)).collect(Collectors.toSet()), LottoNumber.from(45));
     }
 
     @DisplayName("drawLottoResult Test")
@@ -33,12 +33,12 @@ class LottoResultTest {
     void drawLottoResult_return_prize_and_prize_matchCount() {
         List<LottoNumbers> allLottoNumbers = Arrays.asList(
                 LottoNumbers.from(Stream.of(
-                        LottoNumber.from(1),
-                        LottoNumber.from(2),
-                        LottoNumber.from(3),
-                        LottoNumber.from(9),
-                        LottoNumber.from(10),
-                        LottoNumber.from(11))
+                                LottoNumber.from(1),
+                                LottoNumber.from(2),
+                                LottoNumber.from(3),
+                                LottoNumber.from(9),
+                                LottoNumber.from(10),
+                                LottoNumber.from(11))
                         .collect(Collectors.toSet())),
                 LottoNumbers.from(Stream.of(
                         LottoNumber.from(4),
@@ -62,13 +62,12 @@ class LottoResultTest {
                         LottoNumber.from(5),
                         LottoNumber.from(17)).collect(Collectors.toSet())));
 
-        Map<Prize, Integer> drawLottoResult =
-                lottoResult.drawLottoResult(allLottoNumbers, LottoNumber.from(8));
+        lottoResult.drawLottoResult(allLottoNumbers);
 
         Assertions.assertAll(
-                () -> assertThat(drawLottoResult.get(Prize.FIFTH)).isEqualTo(2),
-                () -> assertThat(drawLottoResult.get(Prize.FOURTH)).isEqualTo(1),
-                () -> assertThat(drawLottoResult.get(Prize.THIRD)).isEqualTo(1)
+                () -> assertThat(lottoResult.getLottoResult().get(Prize.FIFTH)).isEqualTo(2),
+                () -> assertThat(lottoResult.getLottoResult().get(Prize.FOURTH)).isEqualTo(1),
+                () -> assertThat(lottoResult.getLottoResult().get(Prize.THIRD)).isEqualTo(1)
         );
     }
 }

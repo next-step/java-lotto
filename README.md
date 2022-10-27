@@ -88,3 +88,4 @@
     - [x] 사용하지 않는 코드 정리
     - [x] POSIX 마지막 라인 개행 IDE 적용
     - [x] LottoNumberGenerator Set<LottoNumber> 반환 -> LottoNumbers 반환
+    - [x] LottoResult 객체를 활용하기(필드를 바로 반환 -> 객체의 필드를 조작 해서 객체 자체를 사용)
