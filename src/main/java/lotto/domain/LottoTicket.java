@@ -14,7 +14,7 @@ public class LottoTicket {
 
     public LottoTicket(final List<Integer> lottoNumbers) {
         List<LottoNumber> lottoNumberList = lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         validateSize(lottoNumberList);
         validateDuplicate(lottoNumberList);

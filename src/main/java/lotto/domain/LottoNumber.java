@@ -1,23 +1,34 @@
 package lotto.domain;
 
-/**
- * 인스턴스 풀 개념 도입해보자
- */
+import java.util.stream.IntStream;
+
 public class LottoNumber {
 
-    static final int START_NUM = 1;
+    static final int MIN_LOTTO_NUMBER = 1;
 
-    static final int END_NUM = 45;
+    static final int MAX_LOTTO_NUMBER = 45;
+
+    private static final LottoNumber[] LOTTO_NUMBER_CACHE = new LottoNumber[MAX_LOTTO_NUMBER + 1];
+
+    static {
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .forEach(number -> LOTTO_NUMBER_CACHE[number] = new LottoNumber(number));
+    }
 
     private final int number;
 
-    public LottoNumber(final int number) {
+    private LottoNumber(final int number) {
         validateRange(number);
         this.number = number;
     }
 
-    private void validateRange(final int number) {
-        if (number < START_NUM || number > END_NUM) {
+    public static LottoNumber valueOf(final int number) {
+        validateRange(number);
+        return LOTTO_NUMBER_CACHE[number];
+    }
+
+    private static void validateRange(final int number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1-45 사이 숫자입니다.");
         }
     }

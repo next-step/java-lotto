@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.LottoNumber.END_NUM;
-import static lotto.domain.LottoNumber.START_NUM;
+import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 
 public class Store {
 
@@ -27,7 +27,7 @@ public class Store {
 
     private LottoTicket createLottoTicket() {
         List<Integer> numList = new ArrayList<>();
-        for (int i = START_NUM; i <= END_NUM; i++) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             numList.add(i);
         }
         Collections.shuffle(numList);

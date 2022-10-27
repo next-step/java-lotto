@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.domain.LottoNumber.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
 class LottoTicketTest {
@@ -39,16 +40,16 @@ class LottoTicketTest {
 
     static Stream<Arguments> match() {
         return Stream.of(
-                arguments(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)), Rank.FIRST),
-                arguments(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(7)), Rank.SECOND),
-                arguments(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(8), new LottoNumber(7)), Rank.THIRD),
-                arguments(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(9), new LottoNumber(8), new LottoNumber(7)), Rank.FOURTH),
-                arguments(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(10),
-                        new LottoNumber(9), new LottoNumber(8), new LottoNumber(7)), Rank.NO_MATCH)
+                arguments(List.of(valueOf(1), valueOf(2), valueOf(3),
+                        valueOf(4), valueOf(5), valueOf(6)), Rank.FIRST),
+                arguments(List.of(valueOf(1), valueOf(2), valueOf(3),
+                        valueOf(4), valueOf(5), valueOf(7)), Rank.SECOND),
+                arguments(List.of(valueOf(1), valueOf(2), valueOf(3),
+                        valueOf(4), valueOf(8), valueOf(7)), Rank.THIRD),
+                arguments(List.of(valueOf(1), valueOf(2), valueOf(3),
+                        valueOf(9), valueOf(8), valueOf(7)), Rank.FOURTH),
+                arguments(List.of(valueOf(1), valueOf(2), valueOf(10),
+                        valueOf(9), valueOf(8), valueOf(7)), Rank.NO_MATCH)
         );
     }
 

@@ -23,7 +23,7 @@ public class LottoGame {
 
         List<LottoNumber> winningNumbers = InputView.getWinningNumbers()
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         ResultView.viewWinningStatics(new LottoResult(store.match(winningNumbers)), money);
