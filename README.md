@@ -87,3 +87,4 @@
     - [x] List<Set<Integer>> 중 Set<Integer>를 DTO로 관리하기
     - [x] 사용하지 않는 코드 정리
     - [x] POSIX 마지막 라인 개행 IDE 적용
+    - [x] LottoNumberGenerator Set<LottoNumber> 반환 -> LottoNumbers 반환

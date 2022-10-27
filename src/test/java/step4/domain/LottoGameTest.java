@@ -17,11 +17,11 @@ class LottoGameTest {
         lottoGame = LottoGame.newInstance();
     }
 
-    @DisplayName("playLotto 인자 갯수 만큼의 로또 번호 객체를 생성한다")
+    @DisplayName("playLotto 의 로또 티켓 수만큼의 로또 번호 객체를 생성한다")
     @ParameterizedTest
-    @ValueSource(ints = {1000, 3000, 50000, 6000, 9000})
-    void playLotto_make_purchaseCount_lottoNumber(int price) {
-        List<LottoNumbers> lottoNumbers = lottoGame.playLotto(Ticket.from(price), Collections.emptyList());
-        Assertions.assertThat(lottoNumbers.size()).isEqualTo(price / 1000);
+    @ValueSource(ints = {1, 3, 5, 7, 9})
+    void playLotto_make_purchaseCount_lottoNumber(int ticketCount) {
+        List<LottoNumbers> lottoNumbers = lottoGame.playLotto(Ticket.from(ticketCount), Collections.emptyList());
+        Assertions.assertThat(lottoNumbers.size()).isEqualTo(ticketCount);
     }
 }
