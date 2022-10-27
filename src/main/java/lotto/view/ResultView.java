@@ -38,21 +38,18 @@ public class ResultView {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         Arrays.stream(LottoRank.values())
                 .filter(rank -> rank != LottoRank.MISS)
-                .forEach(rank -> {
-                    Integer count = winning.count(rank);
-                    printWiningResult(count, rank);
-                });
+                .forEach(rank -> printWiningResult(winning, rank));
     }
 
     public static void printWinningRate(LottoWinning winning, LottoAmount lottoAmount) {
         System.out.printf(WINNING_RATE_MESSAGE, lottoAmount.calcAmountRate(winning.sumWinningMoney()));
     }
 
-    private static void printWiningResult(Integer count, LottoRank rank) {
+    private static void printWiningResult(LottoWinning winning, LottoRank rank) {
         System.out.printf(LOTTO_MATCH_MESSAGE, rank.getCountOfMatch());
         if (rank == LottoRank.SECOND) {
             System.out.printf(BONUS_MATCH_MESSAGE);
         }
-        System.out.printf(LOTTO_MATCH_RESULT_MESSAGE, rank.getWinningMoney(), count);
+        System.out.printf(LOTTO_MATCH_RESULT_MESSAGE, rank.winningMoneyPerRank(), winning.count(rank));
     }
 }

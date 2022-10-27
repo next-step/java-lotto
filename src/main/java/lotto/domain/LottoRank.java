@@ -4,51 +4,50 @@ import java.util.Arrays;
 import java.util.function.BiPredicate;
 
 public enum LottoRank {
-    MISS(0, 0, (matchCount, hasBonus) -> matchCount < 3) {
+    MISS(0, (matchCount, hasBonus) -> matchCount < 3) {
         @Override
-        public long calcWinningMoneyPerRank(int winningCount) {
+        public long winningMoneyPerRank() {
             return 0;
         }
     },
-    FIFTH(3, 5_000, (matchCount, hasBonus) -> matchCount == 3) {
+    FIFTH(3, (matchCount, hasBonus) -> matchCount == 3) {
         @Override
-        public long calcWinningMoneyPerRank(int winningCount) {
-            return 5_000L * winningCount;
+        public long winningMoneyPerRank() {
+            return 5_000L;
         }
     },
-    FOURTH(4, 50_000, (matchCount, hasBonus) -> matchCount == 4) {
+    FOURTH(4, (matchCount, hasBonus) -> matchCount == 4) {
         @Override
-        public long calcWinningMoneyPerRank(int winningCount) {
-            return 50_000L * winningCount;
+        public long winningMoneyPerRank() {
+            return 50_000L;
         }
     },
-    THIRD(5, 1_500_000, (matchCount, hasBonus) -> matchCount == 5 && !hasBonus) {
+    THIRD(5, (matchCount, hasBonus) -> matchCount == 5 && !hasBonus) {
         @Override
-        public long calcWinningMoneyPerRank(int winningCount) {
-            return 1_500_000L * winningCount;
+        public long winningMoneyPerRank() {
+            return 1_500_000L;
         }
     },
-    SECOND(5, 30_000_000, (matchCount, hasBonus) -> matchCount == 5 && hasBonus) {
+    SECOND(5, (matchCount, hasBonus) -> matchCount == 5 && hasBonus) {
         @Override
-        public long calcWinningMoneyPerRank(int winningCount) {
-            return 30_000_000L * winningCount;
+        public long winningMoneyPerRank() {
+            return 30_000_000L;
         }
     },
-    FIRST(6, 2_000_000_000, (matchCount, hasBonus) -> matchCount == 6) {
+    FIRST(6, (matchCount, hasBonus) -> matchCount == 6) {
         @Override
-        public long calcWinningMoneyPerRank(int winningCount) {
-            return 2_000_000_000L * winningCount;
+        public long winningMoneyPerRank() {
+            return 2_000_000_000L;
         }
     };
 
     private final int countOfMatch;
-    private final int winningMoney;
     private final BiPredicate<Integer, Boolean> rankChecker;
-    public abstract long calcWinningMoneyPerRank(int winningCount);
 
-    LottoRank(int countOfMatch, int winningMoney, BiPredicate<Integer, Boolean> rankChecker) {
+    public abstract long winningMoneyPerRank();
+
+    LottoRank(int countOfMatch, BiPredicate<Integer, Boolean> rankChecker) {
         this.countOfMatch = countOfMatch;
-        this.winningMoney = winningMoney;
         this.rankChecker = rankChecker;
     }
 
@@ -61,9 +60,5 @@ public enum LottoRank {
 
     public int getCountOfMatch() {
         return countOfMatch;
-    }
-
-    public int getWinningMoney() {
-        return winningMoney;
     }
 }

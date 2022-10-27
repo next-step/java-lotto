@@ -144,4 +144,4 @@
   - LottoAmount : 의 입장에서 calcSumWinningMoneyRate -> calcAmountRate
   - Lotto : hasBonus -> hasLottoNumber 로 변경
 - [x] winningNumbers 에게 등수 물어보기
-- [ ] LottoRank : 필요없는 변수 삭제 money
+- [x] LottoRank : 필요없는 변수 삭제 
