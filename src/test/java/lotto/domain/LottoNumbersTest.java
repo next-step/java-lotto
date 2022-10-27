@@ -21,4 +21,10 @@ class LottoNumbersTest {
         // then
         assertThat(lottoNumbers.getLottoNumbers()).isEqualTo(inputNumbers);
     }
+
+    @Test
+    @DisplayName("로또 번호 벨리데이션 테스트")
+    void getLottoNumbers_fail() {
+
+    }
 }

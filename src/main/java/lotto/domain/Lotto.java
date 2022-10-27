@@ -18,7 +18,7 @@ public class Lotto {
         return this.lottoResult.getLottoNumbers();
     }
 
-    public Rank rank(LottoResult winnerLottoResult) {
+    public Rank getRank(LottoResult winnerLottoResult) {
         return lottoResult.getMatchCount(winnerLottoResult);
     }
 

@@ -11,24 +11,24 @@ import static lotto.view.ResultView.*;
 public class LottoGameController {
 
     public static void main(String[] args) {
-        PurchaseInfo purchasePrice = inputPurchaseInfo();
-        LottoTickets lottoTickets = getLottoTickets(purchasePrice);
-        List<Rank> rankList = getRank(lottoTickets);
+        PurchaseInfo purchaseInfo = inputPurchaseInfo();
+        LottoTickets lottoTickets = getLottoTickets(purchaseInfo);
+        List<Rank> rankList = getRanks(lottoTickets);
         getYield(lottoTickets, rankList);
     }
 
     private static LottoTickets getLottoTickets(PurchaseInfo purchaseInfo) {
-        List<Integer> manualNumberList = getManualNumberList(purchaseInfo.getManualAmount());
-        printPurchaseAmount(purchaseInfo);
+        List<List<Integer>> manualNumberList = getManualNumberList(purchaseInfo.getManualAmount());
         LottoTickets lottoTickets = new LottoTickets(purchaseInfo).pickNumbers(manualNumberList);
+        printPurchaseAmount(purchaseInfo);
         printLottoNumbers(lottoTickets);
         return lottoTickets;
     }
 
-    private static List<Rank> getRank(LottoTickets lottoTickets) {
+    private static List<Rank> getRanks(LottoTickets lottoTickets) {
         List<Integer> winnerNumberList = inputWinnerNumberList();
         Integer bonusNumber = inputBonusNumber();
-        List<Rank> rankList = lottoTickets.putRankings(new LottoResult(winnerNumberList, bonusNumber));
+        List<Rank> rankList = lottoTickets.getRanks(new LottoResult(winnerNumberList, bonusNumber));
         printRanks(rankList);
         return rankList;
     }

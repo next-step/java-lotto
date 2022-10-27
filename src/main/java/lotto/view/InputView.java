@@ -21,7 +21,6 @@ public class InputView {
     private static final String VALIDATE_NULL_OR_EMPTY_MESSAGE = "빈 값은 입력할 수 없습니다.";
     private static final String VALIDATE_INTEGER = "양수만 입력할 수 있습니다.";
     private static final String VALIDATE_BONUS_NUMBER = "보너스 볼은 1 ~ 45 숫자 1개만 입력할 수 있습니다.";
-    private static final String VALIDATE_MANUAL_AMOUNT = "수동으로 구매한 로또의 수량은 총 구입 수량을 넘을 수 없습니다.";
 
     private InputView() {
         throw new AssertionError();
@@ -35,12 +34,12 @@ public class InputView {
         return new PurchaseInfo(convertToInt(validateInput(inputPurchasePrice)), convertToInt(validateInput(inputManualAmount)));
     }
 
-    public static List<Integer> getManualNumberList(Integer manualAmount) {
+    public static List<List<Integer>> getManualNumberList(Integer manualAmount) {
         System.out.println(MANUAL_NUMBER_MESSAGE);
-        List<Integer> manualNumberList = new ArrayList<>();
+        List<List<Integer>> manualNumberList = new ArrayList<>();
         for (int i = 0; i < manualAmount; i++) {
             String inputNumberList = SCANNER.next();
-            manualNumberList.addAll(validateNumberList(inputNumberList));
+            manualNumberList.add(validateNumberList(inputNumberList));
         }
         return manualNumberList;
     }

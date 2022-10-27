@@ -30,12 +30,12 @@ class LottoTicketsTest {
     void rank() {
         // given
         Integer purchasePrice = 14000;
-        LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6));
+        LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6), 7);
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchaseInfo(purchasePrice, 0));
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers(null);
-        List<Rank> rankList = pickedLottoTickets.putRankings(winnerLottoResult);
+        List<Rank> rankList = pickedLottoTickets.getRanks(winnerLottoResult);
 
         // then
         assertThat(rankList).isNotNull();
@@ -51,7 +51,7 @@ class LottoTicketsTest {
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchaseInfo(purchasePrice, 0));
         LottoTickets pickedLottoTickets = lottoTickets.pickNumbers(null);
-        List<Rank> rankList = pickedLottoTickets.putRankings(winnerLottoResult);
+        List<Rank> rankList = pickedLottoTickets.getRanks(winnerLottoResult);
 
         // then
         assertThat(rankList).hasSize(14);
@@ -64,11 +64,11 @@ class LottoTicketsTest {
         Integer purchasePrice = 1000;
         List<Integer> lottoNumberList = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumberList);
-        LottoResult winnerLottoResult = new LottoResult(lottoNumberList);
+        LottoResult winnerLottoResult = new LottoResult(lottoNumberList, 7);
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchaseInfo(purchasePrice, 0), List.of(lotto));
-        List<Rank> rankList = lottoTickets.putRankings(winnerLottoResult);
+        List<Rank> rankList = lottoTickets.getRanks(winnerLottoResult);
         BigDecimal yield = lottoTickets.getYield(rankList);
 
         // then

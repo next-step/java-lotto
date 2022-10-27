@@ -25,7 +25,7 @@ public class LottoTickets {
         return this.lottoList;
     }
 
-    public LottoTickets pickNumbers(List<Integer> manualLottoList) {
+    public LottoTickets pickNumbers(List<List<Integer>> manualLottoList) {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < this.purchaseInfo.getAutoAmount(); i++) {
@@ -33,16 +33,16 @@ public class LottoTickets {
         }
 
         for (int i = 0; i < this.purchaseInfo.getManualAmount(); i++) {
-            lottoList.add(new Lotto(manualLottoList));
+            lottoList.add(new Lotto(manualLottoList.get(i)));
         }
 
         this.lottoList = lottoList;
         return this;
     }
 
-    public List<Rank> putRankings(LottoResult winnerLottoResult) {
+    public List<Rank> getRanks(LottoResult winnerLottoResult) {
         List<Rank> rankList = new ArrayList<>();
-        this.lottoList.forEach(l -> rankList.add(l.rank(winnerLottoResult)));
+        this.lottoList.forEach(l -> rankList.add(l.getRank(winnerLottoResult)));
         return rankList;
     }
 
