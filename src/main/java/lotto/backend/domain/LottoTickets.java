@@ -3,7 +3,6 @@ package lotto.backend.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -17,16 +16,8 @@ public class LottoTickets {
         return values.size();
     }
 
-    public String print(String delimiter) {
-        return values.stream()
-                .map(LottoTicket::print)
-                .collect(Collectors.joining(delimiter));
-    }
-
     public int orderAmount() {
-        return values.stream()
-                .mapToInt(LottoTicket::price)
-                .sum();
+        return size() * LottoTicket.PRICE_PER_LOTTO;
     }
 
     public List<LottoTicket> getValues() {
