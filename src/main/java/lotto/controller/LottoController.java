@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.input.ManualLottoInput;
-import lotto.input.TicketPriceInput;
+import lotto.input.LottoTicket;
 import lotto.domain.RewardStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -14,10 +14,10 @@ public class LottoController {
     private final ResultView resultView = new ResultView();
 
     public void start() {
-        TicketPriceInput ticketPriceInput = inputView.getTicketPriceInput();
+        LottoTicket lottoTicket = inputView.getLottoTicket();
         ManualLottoInput manualLottoInput = inputView.getManualCountInput();
-        Lottos lottos = Lottos.of(ticketPriceInput, manualLottoInput);
-        resultView.printLottoCount(ticketPriceInput, manualLottoInput);
+        Lottos lottos = Lottos.of(lottoTicket, manualLottoInput);
+        resultView.printLottoCount(lottoTicket, manualLottoInput);
         resultView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.getWinningNumbers();

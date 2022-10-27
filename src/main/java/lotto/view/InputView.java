@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.input.ManualLottoInput;
-import lotto.input.TicketPriceInput;
+import lotto.input.LottoTicket;
 import lotto.domain.WinningLotto;
 
 import java.util.*;
@@ -19,11 +19,11 @@ public class InputView {
     private static final String WINNING_NUMBERS_MSG = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_WINNING_NUMBER_MSG = "보너스 볼을 입력해 주세요.";
 
-    public TicketPriceInput getTicketPriceInput() {
+    public LottoTicket getLottoTicket() {
         System.out.println(PURCHASE_PRICE_MSG);
-        TicketPriceInput result;
+        LottoTicket result;
         int priceInput = scanner.nextInt();
-        result = new TicketPriceInput(priceInput);
+        result = new LottoTicket(priceInput);
         return result;
     }
 

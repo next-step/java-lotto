@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.common.type.WinnerRank;
 import lotto.common.type.WinnerRankCondition;
 import lotto.input.ManualLottoInput;
-import lotto.input.TicketPriceInput;
+import lotto.input.LottoTicket;
 import lotto.strategy.LottoRandomGenerateStrategy;
 import lotto.util.StringUtils;
 
@@ -45,23 +45,17 @@ public class Lottos {
         return rewardStatistics;
     }
 
-    public static Lottos of(TicketPriceInput ticketPriceInput, ManualLottoInput manualLottoInput){
-        if(ticketPriceInput.getTicketAmt() < manualLottoInput.getInputSize()) {
+    public static Lottos of(LottoTicket lottoTicket, ManualLottoInput manualLottoInput){
+        if(lottoTicket.getTicketAmt() < manualLottoInput.getInputSize()) {
             throw new IllegalArgumentException("manual input count cannot be bigger than total lotto count");
         }
-
         List<Lotto> result = new ArrayList<>();
-        int manualLottoAmt = manualLottoInput.getInputSize();
-        int randomLottoAmt = ticketPriceInput.getTicketAmt() - manualLottoAmt;
-
         for (String lottoInput : manualLottoInput.getManualLottoInput()){
             result.add(new Lotto(StringUtils.refineNumbers(lottoInput)));
         }
-
-        for (int i = 0; i < randomLottoAmt; i++) {
+        for (int i = 0; i < lottoTicket.getRandomTicketAmt(manualLottoInput.getInputSize()); i++) {
             result.add(new Lotto(new LottoRandomGenerateStrategy()));
         }
-
         return new Lottos(result);
     }
 }

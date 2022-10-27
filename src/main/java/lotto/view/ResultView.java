@@ -4,7 +4,7 @@ import lotto.common.type.WinnerRank;
 import lotto.domain.Lottos;
 import lotto.domain.RewardStatistics;
 import lotto.input.ManualLottoInput;
-import lotto.input.TicketPriceInput;
+import lotto.input.LottoTicket;
 
 public class ResultView {
 
@@ -15,8 +15,8 @@ public class ResultView {
     public static final String REWARD_COUNT_PRINT_FORMAT = "- %d개";
     public static final String RATIO_PRINT_FORMAT = "총 수익률은 %.2f입니다.";
 
-    public void printLottoCount(TicketPriceInput ticketPriceInput, ManualLottoInput manualLottoInput){
-        int totalLottoCount = ticketPriceInput.getTicketAmt();
+    public void printLottoCount(LottoTicket lottoTicket, ManualLottoInput manualLottoInput){
+        int totalLottoCount = lottoTicket.getTicketAmt();
         int manualLottoCount = manualLottoInput.getInputSize();
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, totalLottoCount - manualLottoCount);
         System.out.println();
