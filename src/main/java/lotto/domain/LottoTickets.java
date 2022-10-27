@@ -9,27 +9,31 @@ import static lotto.util.NumberUtil.makeAutoNumberList;
 
 public class LottoTickets {
 
-    private final PurchasePrice purchasePrice;
+    private final PurchaseInfo purchaseInfo;
     private List<Lotto> lottoList;
 
-    public LottoTickets(PurchasePrice purchasePrice, List<Lotto> lottoList) {
-        this(purchasePrice);
+    public LottoTickets(PurchaseInfo purchaseInfo, List<Lotto> lottoList) {
+        this(purchaseInfo);
         this.lottoList = lottoList;
     }
 
-    public LottoTickets(PurchasePrice purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public LottoTickets(PurchaseInfo purchaseInfo) {
+        this.purchaseInfo = purchaseInfo;
     }
 
     public List<Lotto> getLottoList() {
         return this.lottoList;
     }
 
-    public LottoTickets pickNumbers() {
+    public LottoTickets pickNumbers(List<Integer> manualLottoList) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        for (int i = 0; i < this.purchasePrice.getAmount(); i++) {
+        for (int i = 0; i < this.purchaseInfo.getAutoAmount(); i++) {
             lottoList.add(new Lotto(makeAutoNumberList()));
+        }
+
+        for (int i = 0; i < this.purchaseInfo.getManualAmount(); i++) {
+            lottoList.add(new Lotto(manualLottoList));
         }
 
         this.lottoList = lottoList;
@@ -47,7 +51,7 @@ public class LottoTickets {
                 .mapToInt(Rank::getWinningMoney)
                 .sum();
         return BigDecimal.valueOf(totalWinningMoney)
-                .divide(BigDecimal.valueOf(this.purchasePrice.getPurchasePrice()), 2, RoundingMode.HALF_UP);
+                .divide(BigDecimal.valueOf(this.purchaseInfo.getPurchasePrice()), 2, RoundingMode.HALF_UP);
     }
 
 }

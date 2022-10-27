@@ -18,8 +18,8 @@ class LottoTicketsTest {
         Integer purchasePrice = 14000;
 
         // when
-        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
-        LottoTickets autoPickLottoTickets = lottoTickets.pickNumbers();
+        LottoTickets lottoTickets = new LottoTickets(new PurchaseInfo(purchasePrice, 0));
+        LottoTickets autoPickLottoTickets = lottoTickets.pickNumbers(null);
 
         // then
         assertThat(autoPickLottoTickets.getLottoList()).hasSize(14);
@@ -33,8 +33,8 @@ class LottoTicketsTest {
         LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
-        LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
+        LottoTickets lottoTickets = new LottoTickets(new PurchaseInfo(purchasePrice, 0));
+        LottoTickets pickedLottoTickets = lottoTickets.pickNumbers(null);
         List<Rank> rankList = pickedLottoTickets.putRankings(winnerLottoResult);
 
         // then
@@ -49,8 +49,8 @@ class LottoTicketsTest {
         LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice));
-        LottoTickets pickedLottoTickets = lottoTickets.pickNumbers();
+        LottoTickets lottoTickets = new LottoTickets(new PurchaseInfo(purchasePrice, 0));
+        LottoTickets pickedLottoTickets = lottoTickets.pickNumbers(null);
         List<Rank> rankList = pickedLottoTickets.putRankings(winnerLottoResult);
 
         // then
@@ -67,7 +67,7 @@ class LottoTicketsTest {
         LottoResult winnerLottoResult = new LottoResult(lottoNumberList);
 
         // when
-        LottoTickets lottoTickets = new LottoTickets(new PurchasePrice(purchasePrice), List.of(lotto));
+        LottoTickets lottoTickets = new LottoTickets(new PurchaseInfo(purchasePrice, 0), List.of(lotto));
         List<Rank> rankList = lottoTickets.putRankings(winnerLottoResult);
         BigDecimal yield = lottoTickets.getYield(rankList);
 
