@@ -5,7 +5,7 @@ import java.util.HashMap;
 import step2.exception.BadRequestException;
 import step2.model.lotto.Lotto;
 import step2.model.lotto.Lottos;
-import step2.model.lotto.WinningAmount;
+import step2.model.winning.WinningResult;
 import step2.view.InputView;
 import step2.view.OutputView;
 
@@ -17,8 +17,9 @@ public class LottoController {
 	private static final int MIN_MATCH_COUNT = 3;
 	private static final int MAX_MATCH_COUNT = 6;
 
-	private Lottos lottos;
+	private Lottos purchaseLottos;
 	private Lotto winningLotto;
+	private WinningResult winningResult;
 
 	public void purchase() {
 		final int count = getLottoCount(inputView.getPurchaseAmount());
@@ -28,8 +29,8 @@ public class LottoController {
 		}
 		outputView.printLottoCount(count);
 
-		lottos = new Lottos(count);
-		outputView.printLottos(lottos);
+		purchaseLottos = new Lottos(count);
+		outputView.printLottos(purchaseLottos);
 	}
 
 	public void getWinningNumber() {
@@ -38,25 +39,17 @@ public class LottoController {
 
 	public void getWinningStatistics() {
 		outputView.printWinningStatisticsHeader();
-		HashMap<Integer, Integer>  countMap = lottos.getMatchCountMap(winningLotto);
+		winningResult = new WinningResult(winningLotto, purchaseLottos);
+		HashMap<Integer, Integer>  countMap = winningResult.getCountMap();
 
-		double prize = getPrize(countMap);
-		outputView.printYield(prize, lottos.size() * LOTTE_PRICE);
+		outputView.printWinningStatistics(countMap);
+
+		double prize = winningResult.getPrize();
+		outputView.printYield(prize, purchaseLottos.size() * LOTTE_PRICE);
 	}
 
 	private int getLottoCount(int purchaseAmount) {
 		return purchaseAmount / LOTTE_PRICE;
-	}
-
-	private double getPrize(HashMap<Integer, Integer> countMap) {
-		double prize = 0;
-
-		for (int matchCount = MIN_MATCH_COUNT; matchCount < MAX_MATCH_COUNT + 1; matchCount++) {
-			WinningAmount winningAmount = WinningAmount.findByMatchCount(matchCount);
-			prize += winningAmount.getPrize() * countMap.get(winningAmount.getMatchCount());
-			outputView.printWinningStatistics(winningAmount, countMap.get(winningAmount.getMatchCount()));
-		}
-		return prize;
 	}
 
 	private boolean isAvailableCount(int count) {

@@ -1,9 +1,14 @@
 package step2.view;
 
+import java.util.HashMap;
+
 import step2.model.lotto.Lottos;
-import step2.model.lotto.WinningAmount;
+import step2.model.winning.WinningAmount;
 
 public class OutputView {
+
+	private static final int MIN_MATCH_COUNT = 3;
+	private static final int MAX_MATCH_COUNT = 6;
 
 	public void printLottoCount(int lottoCount) {
 		System.out.println(lottoCount + "개를 구매했습니다.");
@@ -20,8 +25,11 @@ public class OutputView {
 		System.out.println("---------");
 	}
 
-	public void printWinningStatistics(WinningAmount winningAmount, int count) {
-		System.out.printf("%d 개 일치 (%d원)- %d개 \n", winningAmount.getMatchCount(), winningAmount.getPrize(), count);
+	public void printWinningStatistics(HashMap<Integer, Integer> countMap) {
+		for (int matchCount = MIN_MATCH_COUNT; matchCount < MAX_MATCH_COUNT + 1; matchCount++) {
+			WinningAmount winningAmount = WinningAmount.findByMatchCount(matchCount);
+			System.out.printf("%d 개 일치 (%d원)- %d개 \n", winningAmount.getMatchCount(), winningAmount.getPrize(), countMap.get(winningAmount.getMatchCount()));
+		}
 	}
 
 	public void printYield(double prize, double amount) {

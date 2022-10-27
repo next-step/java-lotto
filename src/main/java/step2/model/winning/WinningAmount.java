@@ -1,4 +1,4 @@
-package step2.model.lotto;
+package step2.model.winning;
 
 import java.util.Arrays;
 
