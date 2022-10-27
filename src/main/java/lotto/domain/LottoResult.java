@@ -2,8 +2,9 @@ package lotto.domain;
 
 import lotto.constant.LottoRanking;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class LottoResult {
     private final EnumMap<LottoRanking, Integer> lottoRankings = new EnumMap<>(LottoRanking.class);

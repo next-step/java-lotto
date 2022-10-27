@@ -19,9 +19,11 @@ public enum LottoRanking {
         this.award = award;
     }
 
-    public static LottoRanking of(int matchCount) {
+    public static LottoRanking of(int matchCount, boolean matchBonus) {
+        System.out.println("matchCount :: " + matchCount + " matchBonus :: " + matchBonus);
         return Arrays.stream(LottoRanking.values())
                 .filter(value -> value.ranking == matchCount)
+                .filter(lottoRank -> lottoRank.checkBonusMatch(matchBonus))
                 .findFirst()
                 .orElse(MISS);
     }
@@ -32,6 +34,18 @@ public enum LottoRanking {
 
     public int getRanking() {
         return ranking;
+    }
+
+    private boolean checkBonusMatch(boolean bonusMatch) {
+        if (this == SECOND) {
+            return bonusMatch;
+        }
+
+        if (this == THIRD) {
+            return !bonusMatch;
+        }
+
+        return true;
     }
 }
 

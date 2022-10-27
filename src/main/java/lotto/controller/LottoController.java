@@ -27,7 +27,7 @@ public class LottoController {
     private void getLottoResult(List<LottoNumbers> lottoTickets, int price) {
         String[] winningNumbers = inputView.lastWeekLottoNumbersScan();
         LottoNumber bonusNumber = new LottoNumber(inputView.bonusNumberScan());
-        LottoNumbers winLottoNumbers = new LottoNumbers(LottoUtil.ArrayToList(winningNumbers));
+        LottoNumbers winLottoNumbers = new LottoNumbers(LottoUtil.ArrayToList(winningNumbers), bonusNumber);
 
         LottoResult lottoResult = new LottoResult();
         ArrayList<LottoRanking> lottoRankings = winLottoNumbers.matchingLottoNumbers(lottoTickets);

@@ -39,7 +39,7 @@ class LottoResultTest {
                 new LottoNumbers(List.of(one, three, five, nine, thirtyTwo, twentyOne))
         );
 
-        lastWeekLottoNumbers = new LottoNumbers(List.of(new LottoNumber(1), three, eight, twelve, twentyTwo, fortyFive));
+        lastWeekLottoNumbers = new LottoNumbers(List.of(one, three, eight, twelve, twentyTwo, fortyFive));
     }
 
     @Test
