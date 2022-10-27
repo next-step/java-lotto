@@ -17,8 +17,9 @@ class NumberTest {
     @NullSource
     @EmptySource
     void parse_null_or_empty(String number) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Number.valueOf(number))
-                .withMessage("숫자는 빈 값일 수 없습니다.");
+        assertThatThrownBy(() -> Number.valueOf(number))
+                .isInstanceOf(CaculateException.class)
+                .hasMessage(ErrorCode.NUMBER_IS_NULL.getErrorMessage());
     }
 
     @Test
@@ -29,8 +30,8 @@ class NumberTest {
     @Test
     void parse_not_number() {
         assertThatThrownBy(() -> Number.valueOf("a"))
-                .isInstanceOf(NumberFormatException.class)
-                .hasMessage("잘못된 숫자 형식 입니다.");
+                .isInstanceOf(CaculateException.class)
+                .hasMessage(ErrorCode.WRONG_NUMBER_FORMAT.getErrorMessage());
     }
 
     @Test
@@ -53,8 +54,8 @@ class NumberTest {
         Number a = new Number(2);
         Number b = new Number(0);
         assertThatThrownBy(() -> a.divide(b))
-                .isInstanceOf(ArithmeticException.class)
-                .hasMessage("0으로 나눌 수 없습니다.");
+                .isInstanceOf(CaculateException.class)
+                .hasMessage(ErrorCode.DIVIDE_WITH_ZERO.getErrorMessage());
     }
 
     @Test
@@ -62,8 +63,8 @@ class NumberTest {
         Number a = new Number(2);
         Number b = new Number(3);
         assertThatThrownBy(() -> a.divide(b))
-                .isInstanceOf(ArithmeticException.class)
-                .hasMessage("나눗셈 결과가 정수로 나누어 떨어지지 않습니다.");
+                .isInstanceOf(CaculateException.class)
+                .hasMessage(ErrorCode.EXIST_REMAINDER.getErrorMessage());
     }
 
     @Test

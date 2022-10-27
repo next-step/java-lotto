@@ -14,13 +14,13 @@ public class Number {
             validateNullOrEmpty(number);
             return new Number(Integer.parseInt(number));
         } catch (NumberFormatException nfe) {
-            throw new NumberFormatException("잘못된 숫자 형식 입니다.");
+            throw new CaculateException(ErrorCode.WRONG_NUMBER_FORMAT);
         }
     }
 
     private static void validateNullOrEmpty(String number) {
         if (Objects.isNull(number) || number.isEmpty()) {
-            throw new IllegalArgumentException("숫자는 빈 값일 수 없습니다.");
+            throw new CaculateException(ErrorCode.NUMBER_IS_NULL);
         }
     }
 
@@ -51,11 +51,11 @@ public class Number {
 
     public Number divide(Number number) {
         if (number.value == 0) {
-            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+            throw new CaculateException(ErrorCode.DIVIDE_WITH_ZERO);
         }
 
         if (this.value % number.value != 0) {
-            throw new ArithmeticException("나눗셈 결과가 정수로 나누어 떨어지지 않습니다.");
+            throw new CaculateException(ErrorCode.EXIST_REMAINDER);
         }
 
         return new Number(this.value / number.value);

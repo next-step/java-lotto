@@ -7,8 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class OperatorTest {
     public static Stream<Arguments> provideOperatorSign() {
@@ -38,8 +37,9 @@ class OperatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "(", "a"})
     void not_operator_sign(String sign) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Operator.of(sign))
-                .withMessage("잘못된 연산자 입니다.");
+        assertThatThrownBy(() -> Operator.of(sign))
+                .isInstanceOf(CaculateException.class)
+                .hasMessage(ErrorCode.WRONG_OPERATOR.getErrorMessage());
     }
 
     @ParameterizedTest
