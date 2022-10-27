@@ -38,21 +38,22 @@ class LottoTest {
         int compareCount = 0;
 
         //when
-        int compare = lotto.compare(item1);
+        int compare = lotto.compareLottoNumber(item1);
         //when
         assertThat(compare).isEqualTo(compareCount);
     }
 
     @Test
-    @DisplayName("set의 이미 등록된 숫자로 bonusNumber 가 추가되지 않는다")
+    @DisplayName("set의 이미 등록된 숫자인지 보너스번호를 확인한다.")
     void setNotBonusLottoTest() {
 
         //given
         Set<Integer> item = Sets.set(1, 2, 3, 4, 5, 6);
         Lotto lotto = Lotto.from(item);
+        LottoNumber bonusNumber = LottoNumber.from(6);
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> lotto.setBonusItem(6));
+            .isThrownBy(() ->  lotto.validBonusNumber(bonusNumber));
     }
 }
