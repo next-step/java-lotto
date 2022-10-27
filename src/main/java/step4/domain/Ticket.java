@@ -2,10 +2,10 @@ package step4.domain;
 
 public class Ticket {
 
-    private static final int LOTTO_TICKET_PRICE = 1000;
     private final int countOfTicket;
 
     private Ticket(final int countOfTicket) {
+        validateTicket(countOfTicket);
         this.countOfTicket = countOfTicket;
     }
 
@@ -13,11 +13,13 @@ public class Ticket {
         return new Ticket(ticketCount);
     }
 
-    public final int getCountOfTicket() {
-        return countOfTicket;
+    private void validateTicket(final int countOfTicket) {
+        if (countOfTicket < 0) {
+            throw new IllegalArgumentException("티켓 갯수는 음수일 수 없습니다.");
+        }
     }
 
-    public final int getPurchasePrice(){
-        return countOfTicket * LOTTO_TICKET_PRICE;
+    public final int getCountOfTicket() {
+        return countOfTicket;
     }
 }
