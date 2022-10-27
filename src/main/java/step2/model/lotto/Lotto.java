@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import step2.exception.BadRequestException;
+import step2.util.NumberUtil;
 
 public class Lotto {
 
@@ -28,7 +29,8 @@ public class Lotto {
 
 	public Lotto(List<Integer> numbers) {
 		checkLottoSize(numbers);
-		checkLottoNumbers(numbers);
+		checkDuplicatedNumbers(numbers);
+		checkRange(numbers);
 		this.numbers = numbers;
 	}
 
@@ -57,10 +59,24 @@ public class Lotto {
 		}
 	}
 
-	private void checkLottoNumbers(List<Integer> numbers) {
+	private void checkDuplicatedNumbers(List<Integer> numbers) {
 		Set<Integer> numbersSet = new HashSet<>(numbers);
 		if (numbersSet.size() != numbers.size()) {
 			throw new BadRequestException("로또 번호는 중복될 수 없습니다.");
+		}
+
+		for (Integer number : numbers) {
+			if (NumberUtil.isOver(number, MAX_NUMBER) || NumberUtil.isUnder(number, MIN_NUMBER)) {
+				throw new BadRequestException("로또 번호는 1 ~ 45 범위 내에 있어야 합니다.");
+			}
+		}
+	}
+
+	private void checkRange(List<Integer> numbers) {
+		for (Integer number : numbers) {
+			if (NumberUtil.isOver(number, MAX_NUMBER) || NumberUtil.isUnder(number, MIN_NUMBER)) {
+				throw new BadRequestException("로또 번호는 1 ~ 45 범위 내에 있어야 합니다.");
+			}
 		}
 	}
 }

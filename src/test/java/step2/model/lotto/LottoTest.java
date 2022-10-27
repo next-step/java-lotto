@@ -42,7 +42,7 @@ class LottoTest {
 		assertThat(matchCount).isEqualTo(list.size());
 	}
 
-	@DisplayName("6이 아닌 개수를 입력하면 예외를 던진다.")
+	@DisplayName("입력가능하지 않은 로또 번호를 입력하면 예외를 던진다.")
 	@ParameterizedTest
 	@MethodSource("generateWrongData")
 	void Given_NotLottoSize_Then_ThrowException(List<Integer> list) {
@@ -51,8 +51,11 @@ class LottoTest {
 
 	static Stream<List<Integer>> generateWrongData() {
 		return Stream.of(
-			Arrays.asList(1, 2, 3, 4, 5, 6, 7),
-			Arrays.asList(1, 2, 3)
+			Arrays.asList(1, 2, 3, 4, 5, 6, 7),		// 사이즈가 6이 아닌 경우
+			Arrays.asList(1, 2, 3),					// 사이즈가 6이 아닌 경우
+			Arrays.asList(1, 2, 3, 4, 5, 100),		// 숫자 범위가 1 ~ 45 를 벗어나는 경우
+			Arrays.asList(-1, 2, 3, 4, 5, 6),		// 숫자 범위가 1 ~ 45 를 벗어나는 경우
+			Arrays.asList(1, 1, 3, 4, 5, 6)			// 중복된 숫자가 있는 경우
 		);
 	}
 }
