@@ -21,8 +21,8 @@ public class Money {
         return new Money(money * count);
     }
 
-    public int countBy(Money other) {
-        return money / other.money;
+    public int divideBy(Money ticketPrice) {
+        return money / ticketPrice.money;
     }
 
     public double calculateRate(Money other) {

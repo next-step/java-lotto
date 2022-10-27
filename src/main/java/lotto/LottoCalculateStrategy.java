@@ -3,9 +3,9 @@ package lotto;
 import java.util.List;
 
 public interface LottoCalculateStrategy {
-    int calculateLottoTicketCount(Money money);
+    int countLottoTickets(Money money);
 
-    List<List<LottoNumber>> buyLottoes(int ticketCount);
+    List<SelectedLottoNumbers> buyLottoTickets(int ticketCount);
 
-    Statistics calculateStatistics(List<List<LottoNumber>> lottoes, List<LottoNumber> winningLottoes, Money buyAmount);
+    Statistics calculateStatistics(List<SelectedLottoNumbers> lottoes, LottoWinningStrategy winningLottoes, Money buyAmount);
 }
