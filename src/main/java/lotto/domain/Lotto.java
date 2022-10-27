@@ -9,7 +9,6 @@ public class Lotto
 
     private static final int LOTTO_COUNT = 6;
     private final Set<LottoNumber> item;
-    private LottoNumber bonusItem;
 
     private Lotto(Set<LottoNumber> item) {
         this.item = item;
@@ -26,26 +25,24 @@ public class Lotto
             .collect(Collectors.toCollection(LinkedHashSet::new)));
     }
 
-    public Set<LottoNumber> getItem() {
-        return item;
-    }
+    public void validBonusNumber(LottoNumber bonusNumber) {
 
-    public void setBonusItem(int bonusNumber) {
-
-        this.bonusItem = LottoNumber.from(bonusNumber);
-
-        if (item.contains(bonusItem)) {
+        if (item.contains(bonusNumber)) {
             throw new IllegalArgumentException("해당 번호는 이미 등록된 번호 입니다.");
         }
     }
 
-    public int compare(Set<LottoNumber> item) {
-        return Math.toIntExact(this.item.stream()
-            .filter(item::contains).count());
+    public Set<LottoNumber> getItem() {
+        return item;
     }
 
-    public boolean bonusCompare(Set<LottoNumber> item) {
-        return item.contains(this.bonusItem);
+    public int compareLottoNumber(Set<LottoNumber> weekendLottoNumber) {
+        return (int) item.stream()
+            .filter(weekendLottoNumber::contains).count();
+    }
+
+    public boolean isBonusNumberContains(LottoNumber weekendBonusNumber) {
+        return item.contains(weekendBonusNumber);
     }
 
     @Override
