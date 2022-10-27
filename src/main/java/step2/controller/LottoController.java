@@ -2,6 +2,7 @@ package step2.controller;
 
 import java.util.HashMap;
 
+import step2.exception.BadRequestException;
 import step2.model.lotto.Lotto;
 import step2.model.lotto.Lottos;
 import step2.model.lotto.WinningAmount;
@@ -21,6 +22,10 @@ public class LottoController {
 
 	public void purchase() {
 		final int count = getLottoCount(inputView.getPurchaseAmount());
+
+		if (!isAvailableCount(count)) {
+			throw new BadRequestException("입력가능한 최소 구매 금액은 1000 입니다.");
+		}
 		outputView.printLottoCount(count);
 
 		lottos = new Lottos(count);
@@ -52,5 +57,9 @@ public class LottoController {
 			outputView.printWinningStatistics(winningAmount, countMap.get(winningAmount.getMatchCount()));
 		}
 		return prize;
+	}
+
+	private boolean isAvailableCount(int count) {
+		return count > 0;
 	}
 }
