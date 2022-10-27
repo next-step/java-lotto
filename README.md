@@ -139,7 +139,7 @@
 - [x] LottoRank : 2,3등 로직
   1. enum abstract method 키워드로 각각의 당첨여부를 관리하도록 고민
   2. BiFunction 을 이용하여 각 개체의 필드로 당첨여부 관리
-- [ ] CACHE 복제해서 반환
+- [x] CACHE 복제해서 반환
 - [ ] 함수명 변경 -> 객체가 주체가 되게 수정.
   - LottoAmount : 의 입장에서 calcSumWinningMoneyRate -> calcAmountRate
   - Lotto : hasBonus -> hasLottoNumber 로 변경
