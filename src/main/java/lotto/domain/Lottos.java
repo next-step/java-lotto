@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.common.type.WinnerRank;
 import lotto.common.type.WinnerRankCondition;
-import lotto.service.Reward;
+import lotto.strategy.LottoRandomGenerateStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Lottos {
 
     public Lottos(int lottoSize) {
         while (lottos.size() < lottoSize) {
-            lottos.add(Lotto.generateRandomLotto());
+            lottos.add(new Lotto(new LottoRandomGenerateStrategy()));
         }
     }
 

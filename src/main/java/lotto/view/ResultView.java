@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.common.type.WinnerRank;
 import lotto.domain.Lottos;
-import lotto.service.Reward;
+import lotto.domain.Reward;
 
 public class ResultView {
 

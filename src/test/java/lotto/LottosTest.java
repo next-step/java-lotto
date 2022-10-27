@@ -4,7 +4,7 @@ import lotto.common.type.WinnerRank;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
-import lotto.service.Reward;
+import lotto.domain.Reward;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

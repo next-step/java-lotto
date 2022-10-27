@@ -1,7 +1,6 @@
-package lotto.service;
+package lotto.domain;
 
 import lotto.common.type.WinnerRank;
-import lotto.domain.Lottos;
 
 import java.util.EnumMap;
 import java.util.Map;

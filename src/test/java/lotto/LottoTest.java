@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.strategy.LottoRandomGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ public class LottoTest {
     @Test
     @DisplayName("6개의 숫자가 생성되는지 확인")
     void testIfGenerate6Nums() {
-        Lotto lotto = Lotto.generateRandomLotto();
+        Lotto lotto = new Lotto(new LottoRandomGenerateStrategy());
 
         Set<Integer> lottoNums = lotto.getLottoNums();
         assertThat(lottoNums).hasSize(6);

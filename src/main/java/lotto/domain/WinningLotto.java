@@ -7,6 +7,9 @@ public class WinningLotto {
     private final Integer bonusWinningNumber;
 
     public WinningLotto(Lotto winningLotto, Integer bonusWinningNumber) {
+        if(winningLotto.hasSameElement(bonusWinningNumber)){
+            throw new IllegalArgumentException("winning numbers has the same number with the bonus number");
+        }
         this.winningLotto = winningLotto;
         this.bonusWinningNumber = bonusWinningNumber;
     }
