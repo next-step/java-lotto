@@ -2,8 +2,9 @@ package lotto.controller;
 
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
+import lotto.input.ManualLottoInput;
 import lotto.input.TicketPriceInput;
-import lotto.domain.Reward;
+import lotto.domain.RewardStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,11 +15,12 @@ public class LottoController {
 
     public void start() {
         TicketPriceInput ticketPriceInput = inputView.getTicketPriceInput();
-        Lottos lottos = new Lottos(ticketPriceInput.getTicketAmt());
+        ManualLottoInput manualLottoInput = inputView.getManualCountInput();
+        Lottos lottos = Lottos.of(ticketPriceInput, manualLottoInput);
         resultView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.getWinningNumbers();
-        Reward reward = lottos.countWinningNumbers(winningLotto);
-        resultView.printAllResult(reward, reward.getProfitRatio(lottos));
+        RewardStatistics rewardStatistics = lottos.countWinningNumbers(winningLotto);
+        resultView.printAllResult(rewardStatistics, rewardStatistics.getProfitRatio(lottos));
     }
 }

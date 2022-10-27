@@ -2,7 +2,10 @@ package lotto.domain;
 
 import lotto.common.type.WinnerRank;
 import lotto.common.type.WinnerRankCondition;
+import lotto.input.ManualLottoInput;
+import lotto.input.TicketPriceInput;
 import lotto.strategy.LottoRandomGenerateStrategy;
+import lotto.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +14,14 @@ public class Lottos {
 
     private List<Lotto> lottos = new ArrayList<>();
 
+    public Lottos(List<Lotto> lottos){
+        this.lottos = lottos;
+    }
+
     public Lottos(int lottoSize) {
         while (lottos.size() < lottoSize) {
             lottos.add(new Lotto(new LottoRandomGenerateStrategy()));
         }
-    }
-
-    public Lottos(List<Lotto> lottos){
-        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {
@@ -31,14 +34,34 @@ public class Lottos {
 
     public static final int SECOND_PLACE_CORRECT_COUNT = 5;
 
-    public Reward countWinningNumbers(WinningLotto winningLotto) {
-        Reward reward = new Reward();
+    public RewardStatistics countWinningNumbers(WinningLotto winningLotto) {
+        RewardStatistics rewardStatistics = new RewardStatistics();
         lottos.forEach(lotto -> {
             int sameSize = lotto.getSameElementsSize(winningLotto.getWinningLotto());
             boolean correctBonus = lotto.hasSameElement(winningLotto.getBonusWinningNumber());
             boolean needBonus = sameSize == SECOND_PLACE_CORRECT_COUNT;
-            reward.plusCount(WinnerRank.valueOf(new WinnerRankCondition(sameSize, needBonus && correctBonus)));
+            rewardStatistics.plusCount(WinnerRank.valueOf(new WinnerRankCondition(sameSize, needBonus && correctBonus)));
         });
-        return reward;
+        return rewardStatistics;
+    }
+
+    public static Lottos of(TicketPriceInput ticketPriceInput, ManualLottoInput manualLottoInput){
+        if(ticketPriceInput.getTicketAmt() < manualLottoInput.inputCount()) {
+            throw new IllegalArgumentException("manual input count cannot be bigger than total lotto count");
+        }
+
+        List<Lotto> result = new ArrayList<>();
+        int manualLottoAmt = manualLottoInput.inputCount();
+        int randomLottoAmt = ticketPriceInput.getTicketAmt() - manualLottoAmt;
+
+        for (String lottoInput : manualLottoInput.getManualLottoInput()){
+            result.add(new Lotto(StringUtils.refineNumbers(lottoInput)));
+        }
+
+        for (int i = 0; i < randomLottoAmt; i++) {
+            result.add(new Lotto(new LottoRandomGenerateStrategy()));
+        }
+
+        return new Lottos(result);
     }
 }

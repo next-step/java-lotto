@@ -4,7 +4,7 @@ import lotto.common.type.WinnerRank;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
-import lotto.domain.Reward;
+import lotto.domain.RewardStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,9 +33,9 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
         Lotto winningLottoNumbers = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        Reward result = lottos.countWinningNumbers(new WinningLotto(winningLottoNumbers, 7));
+        RewardStatistics result = lottos.countWinningNumbers(new WinningLotto(winningLottoNumbers, 7));
 
-        Reward expected = new Reward();
+        RewardStatistics expected = new RewardStatistics();
         expected.plusCount(WinnerRank.FIRST);
         expected.plusCount(WinnerRank.THIRD);
         expected.plusCount(WinnerRank.FORTH);
@@ -51,9 +51,9 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
         Lotto winningLottoNumbers = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        Reward result = lottos.countWinningNumbers(new WinningLotto(winningLottoNumbers, 11));
+        RewardStatistics result = lottos.countWinningNumbers(new WinningLotto(winningLottoNumbers, 11));
 
-        Reward expected = new Reward();
+        RewardStatistics expected = new RewardStatistics();
         expected.plusCount(WinnerRank.FIRST);
         expected.plusCount(WinnerRank.SECOND);
         assertThat(result).isEqualTo(expected);

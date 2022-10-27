@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.common.type.WinnerRank;
 import lotto.domain.Lottos;
-import lotto.domain.Reward;
+import lotto.domain.RewardStatistics;
 
 public class ResultView {
 
@@ -18,9 +18,9 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    public void printAllResult(Reward reward, double profitRatio){
+    public void printAllResult(RewardStatistics rewardStatistics, double profitRatio){
         System.out.println(RESULT_BANNER);
-        reward.getWinnerCount().forEach(this::printEachResult);
+        rewardStatistics.getWinnerCount().forEach(this::printEachResult);
         System.out.printf(RATIO_PRINT_FORMAT, profitRatio);
     }
 

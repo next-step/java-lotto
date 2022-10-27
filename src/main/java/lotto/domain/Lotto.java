@@ -9,7 +9,6 @@ public class Lotto {
 
     private static final int DEFAULT_SIZE = 6;
 
-
     private final Set<Integer> lottoNums;
 
     public Lotto(LottoGenerateStrategy lottoGenerateStrategy){

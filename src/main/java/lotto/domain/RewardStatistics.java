@@ -8,13 +8,13 @@ import java.util.Objects;
 
 import static lotto.input.TicketPriceInput.DEFAULT_TICKET_PRICE;
 
-public class Reward {
+public class RewardStatistics {
 
     private final EnumMap<WinnerRank, Integer> winnerCount = new EnumMap<>(WinnerRank.class);
 
     private final static int DEFAULT_OFFSET = 1;
 
-    public Reward() {
+    public RewardStatistics() {
         winnerCount.put(WinnerRank.FIRST, 0);
         winnerCount.put(WinnerRank.SECOND, 0);
         winnerCount.put(WinnerRank.THIRD, 0);
@@ -47,7 +47,7 @@ public class Reward {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Reward that = (Reward) o;
+        RewardStatistics that = (RewardStatistics) o;
         return Objects.equals(winnerCount, that.winnerCount);
     }
 
