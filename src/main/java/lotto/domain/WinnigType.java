@@ -23,6 +23,10 @@ public enum WinnigType {
                 .orElseThrow(() -> new IllegalArgumentException(""));
     }
 
+    public long getMatchCnt() {
+        return matchCnt;
+    }
+
     public int getWinningAmount() {
         return winningAmount;
     }
