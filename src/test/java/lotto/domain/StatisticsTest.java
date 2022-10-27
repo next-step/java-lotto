@@ -12,7 +12,7 @@ class StatisticsTest {
     @Test
     void 통계() {
         Lotto winningLotto = new Lotto(new RandomNumberStrategy());
-        Purchasing purchasing = new Purchasing(50000);
+        Purchasing purchasing = new Purchasing("50000");
         List<Long> matchCntList =  purchasing.getMatchCntList(winningLotto);
 
         Statistics statistics = new Statistics();
