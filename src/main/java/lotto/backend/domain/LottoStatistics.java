@@ -1,43 +1,32 @@
 package lotto.backend.domain;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.Map;
 
 public class LottoStatistics {
 
-    private final EnumMap<LottoRank, Integer> statistics = new EnumMap<>(LottoRank.class);
-    private final int orderAmount;
+    private final Map<LottoRank, Integer> values = new EnumMap<>(LottoRank.class);
 
-    public LottoStatistics(LottoTicket winningLotto, LottoTickets lottoTickets) {
-        initialize();
-        this.orderAmount = lottoTickets.orderAmount();
+    private LottoStatistics(LottoTicket winningLotto, LottoTickets lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets.getValues()) {
             int match = lottoTicket.countMatch(winningLotto);
             LottoRank rank = LottoRank.of(match);
-            statistics.put(rank, statistics.get(rank) + 1);
+            this.values.put(rank, values.getOrDefault(rank, 0) + 1);
         }
     }
 
-    private void initialize() {
-        Arrays.stream(LottoRank.values())
-                .forEach(lottoRank -> statistics.put(lottoRank, 0));
+    public static LottoStatistics of(LottoTicket winningLotto, LottoTickets lottoTickets) {
+        return new LottoStatistics(winningLotto, lottoTickets);
     }
 
-    public int printMatch(int match) {
-        return statistics.get(LottoRank.of(match));
-    }
-
-    public int printPrize(int match) {
-        return (int) LottoRank.of(match).getPrize();
-    }
-
-    public double printProfit() {
-        return prizeAmount() / orderAmount;
-    }
-
-    private double prizeAmount() {
-        return statistics.entrySet().stream()
-                .mapToDouble(i -> i.getKey().getPrize() * i.getValue())
+    public int prizeAmount() {
+        return values.entrySet().stream()
+                .mapToInt(i -> i.getKey().getPrize() * i.getValue())
                 .sum();
+    }
+
+    public Map<LottoRank, Integer> getValues() {
+        return Collections.unmodifiableMap(values);
     }
 }
