@@ -16,6 +16,14 @@ public class WinningNumbers {
         this.bonusNumber = bonus;
     }
 
+    public int matches(Lotto lotto) {
+        return winningLotto.matches(lotto);
+    }
+
+    public boolean hasBonusNumber(Lotto lotto) {
+        return lotto.hasLottoNumber(bonusNumber);
+    }
+
     private void validateBonusNumber() {
         if (isDuplicated()) {
             throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER_MESSAGE);
@@ -23,14 +31,6 @@ public class WinningNumbers {
     }
 
     private boolean isDuplicated() {
-        return winningLotto.hasBonus(bonusNumber);
-    }
-
-    Lotto getWinningLotto() {
-        return winningLotto;
-    }
-
-    LottoNumber getBonusNumber() {
-        return bonusNumber;
+        return winningLotto.hasLottoNumber(bonusNumber);
     }
 }

@@ -45,7 +45,7 @@ public class ResultView {
     }
 
     public static void printWinningRate(LottoWinning winning, LottoAmount lottoAmount) {
-        System.out.printf(WINNING_RATE_MESSAGE, lottoAmount.calcSumWinningMoneyRate(winning.sumWinningMoney()));
+        System.out.printf(WINNING_RATE_MESSAGE, lottoAmount.calcAmountRate(winning.sumWinningMoney()));
     }
 
     private static void printWiningResult(Integer count, LottoRank rank) {
