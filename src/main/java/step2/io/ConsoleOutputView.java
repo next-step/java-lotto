@@ -11,6 +11,11 @@ public class ConsoleOutputView {
     }
 
     public void printYield(double yield) {
+        if (yield < 1) {
+            System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n", yield);
+            return;
+        }
+
         System.out.printf("총 수익률은 %.2f입니다.%n", yield);
     }
 
