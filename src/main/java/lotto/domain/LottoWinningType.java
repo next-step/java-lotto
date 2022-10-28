@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,13 +38,7 @@ public enum LottoWinningType {
 
     public static List<LottoWinningType> valuesByMatchNumbersCountAsc() {
         return Arrays.stream(LottoWinningType.values())
-                     .sorted((type1, type2) -> {
-                         if (type1.matchNumbersCount == type2.matchNumbersCount) {
-                             return 0;
-                         }
-
-                         return type1.matchNumbersCount < type2.matchNumbersCount ? -1 : 1;
-                     })
+                     .sorted(Comparator.comparingInt(LottoWinningType::getMatchNumbersCount))
                      .collect(Collectors.toList());
     }
 }
