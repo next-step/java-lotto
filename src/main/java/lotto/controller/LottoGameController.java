@@ -11,8 +11,9 @@ import static lotto.view.ResultView.*;
 public class LottoGameController {
 
     public static void main(String[] args) {
-        PurchaseInfo purchaseInfo = inputPurchaseInfo();
-        LottoTickets lottoTickets = getLottoTickets(purchaseInfo);
+        Integer purchasePrice = inputPurchasePrice();
+        Integer manualAmount = inputManualAmount();
+        LottoTickets lottoTickets = getLottoTickets(new PurchaseInfo(purchasePrice, manualAmount));
         List<Rank> rankList = getRanks(lottoTickets);
         getYield(lottoTickets, rankList);
     }

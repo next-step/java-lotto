@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.PurchaseInfo;
 import lotto.util.NumberUtil;
 
 import java.util.ArrayList;
@@ -24,13 +23,16 @@ public class InputView {
         throw new AssertionError();
     }
 
-    public static PurchaseInfo inputPurchaseInfo() {
+    public static Integer inputPurchasePrice() {
         System.out.println(PURCHASE_PRICE_MESSAGE);
         String inputPurchasePrice = SCANNER.next();
+        return convertStringToInt(inputPurchasePrice);
+    }
+
+    public static Integer inputManualAmount() {
         System.out.println(MANUAL_AMOUNT_MESSAGE);
         String inputManualAmount = SCANNER.next();
-
-        return new PurchaseInfo(convertStringToInt(inputPurchasePrice), convertStringToInt(inputManualAmount));
+        return convertStringToInt(inputManualAmount);
     }
 
     public static List<List<Integer>> getManualNumberList(Integer manualAmount) {
