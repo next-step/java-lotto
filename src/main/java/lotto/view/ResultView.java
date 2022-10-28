@@ -20,7 +20,7 @@ public class ResultView {
     }
 
     public static void showLottoCount(LottoCount lottoCount, LottoCount manualCount) {
-        System.out.printf(COUNT_MESSAGE, manualCount.number(), lottoCount.minus(manualCount));
+        System.out.printf(COUNT_MESSAGE, manualCount.number(), lottoCount.findAbsoluteValue(manualCount));
     }
 
     public static void showLottoTicket(LottoTicket lottoTicket) {
@@ -44,7 +44,7 @@ public class ResultView {
     private static void printWiningResult(LottoWinning winning, LottoRank rank) {
         System.out.printf(LOTTO_MATCH_MESSAGE, rank.getCountOfMatch());
         if (rank == LottoRank.SECOND) {
-            System.out.printf(BONUS_MATCH_MESSAGE);
+            System.out.print(BONUS_MATCH_MESSAGE);
         }
         System.out.printf(LOTTO_MATCH_RESULT_MESSAGE, rank.winningMoneyPerRank(), winning.count(rank));
     }

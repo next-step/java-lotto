@@ -24,6 +24,6 @@ class LottoCountTest {
     void calculateMinusTest() {
         LottoCount lottoCount = new LottoCount(5);
         LottoCount manualCount = new LottoCount(1);
-        assertThat(lottoCount.minus(manualCount)).isEqualTo(4);
+        assertThat(lottoCount.findAbsoluteValue(manualCount)).isEqualTo(4);
     }
 }

@@ -13,7 +13,7 @@ public class LottoCount {
         this.count = count;
     }
 
-    public int minus(LottoCount count) {
+    public int findAbsoluteValue(LottoCount count) {
         if (this.count >= count.count) {
             return this.count - count.count;
         }
