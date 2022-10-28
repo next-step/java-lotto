@@ -10,6 +10,9 @@ import java.util.Set;
 
 public class LottoFactory {
 
+    private LottoFactory() {
+    }
+
     public static Lotto make(final LottoNumberStrategy lottoNumberStrategy) {
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
         while (lottoNumberSet.size() < 6) {

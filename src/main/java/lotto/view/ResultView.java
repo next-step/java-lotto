@@ -9,6 +9,9 @@ import java.util.Map;
 
 public class ResultView {
 
+    private ResultView() {
+    }
+
     public static void printLottoAmountAndNumbers(final List<Lotto> lottos) {
         System.out.printf("%d개를 구매했습니다.\n", lottos.size());
         lottos.forEach(System.out::println);
