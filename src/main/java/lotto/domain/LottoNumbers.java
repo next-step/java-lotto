@@ -24,6 +24,10 @@ public class LottoNumbers {
         return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
     }
 
+    public Boolean isValidBonusNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
+
     private List<Integer> validateLottoNumbers(List<Integer> matchNumberList) {
         Integer deduplicationNumberListSize = getDeduplicationNumberListSize(matchNumberList);
         if (!(deduplicationNumberListSize.equals(MATCH_NUMBER_LIST_SIZE))) {
