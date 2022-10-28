@@ -1,16 +1,14 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public enum LottoPlace {
 
-    FOURTH_PLACE(5000, 3),
-    THIRD_PLACE(50000, 4),
-    SECOND_PLACE(1500000, 5),
+    NONE_PLACE(0, 0),
+    FIFTH_PLACE(5000, 3),
+    FOURTH_PLACE(50000, 4),
+    THIRD_PLACE(1500000, 5),
+    SECOND_PLACE(30000000, 5),
     FIRST_PLACE(2000000000, 6);
 
     private final int prize;
@@ -29,12 +27,24 @@ public enum LottoPlace {
         return count;
     }
 
-    private static final Map<Integer, LottoPlace> map = Arrays.stream(values())
-        .collect(Collectors.toUnmodifiableMap(LottoPlace::getCount, Function.identity()));
+    public static LottoPlace getLottoPlace(int count, boolean matchBonus) {
+        return Arrays.stream(values())
+            .filter(lottoPlace -> lottoPlace.count == count)
+            .map(lottoPlace -> checkBonus(lottoPlace, matchBonus))
+            .findFirst().orElse(NONE_PLACE);
+    }
 
-    public static LottoPlace getLottoPlace(int count) {
+    private static LottoPlace checkBonus(LottoPlace lottoPlace, boolean matchBonus) {
+        if (lottoPlace.count == 5) {
+            return rankWithMatchedBonus(matchBonus);
+        }
+        return lottoPlace;
+    }
 
-        return Optional.ofNullable(map.get(count))
-            .orElseThrow(() -> new IllegalArgumentException("존재 하지 않은 등 수 입니다"));
+    private static LottoPlace rankWithMatchedBonus(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND_PLACE;
+        }
+        return THIRD_PLACE;
     }
 }

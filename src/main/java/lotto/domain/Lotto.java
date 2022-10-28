@@ -15,8 +15,7 @@ public class Lotto
     }
 
     public static Lotto from(Set<Integer> item) {
-        if (item.size() < LOTTO_COUNT)
-        {
+        if (item.size() < LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호의 갯수가 올바르지 않습니다");
         }
         return new Lotto(item.stream()
@@ -25,13 +24,24 @@ public class Lotto
             .collect(Collectors.toCollection(LinkedHashSet::new)));
     }
 
+    public void validBonusNumber(LottoNumber bonusNumber) {
+
+        if (item.contains(bonusNumber)) {
+            throw new IllegalArgumentException("해당 번호는 이미 등록된 번호 입니다.");
+        }
+    }
+
     public Set<LottoNumber> getItem() {
         return item;
     }
 
-    public int compare(Set<LottoNumber> item) {
-        return Math.toIntExact(this.item.stream()
-            .filter(item::contains).count());
+    public int compareLottoNumber(Set<LottoNumber> weekendLottoNumber) {
+        return (int) item.stream()
+            .filter(weekendLottoNumber::contains).count();
+    }
+
+    public boolean isBonusNumberContains(LottoNumber weekendBonusNumber) {
+        return item.contains(weekendBonusNumber);
     }
 
     @Override
