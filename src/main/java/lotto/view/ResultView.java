@@ -13,18 +13,19 @@ public class ResultView {
     }
 
     public static void printLottoAmountAndNumbers(final List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
         lottos.forEach(System.out::println);
         System.out.println();
     }
 
     public static void printLottoWinningStatistics(final LottoWinningStatistics lottoWinningStatistics) {
-        System.out.println("\n당첨 통계");
+        System.out.println();
+        System.out.println("당첨 통계");
         System.out.println("---------");
 
         Map<LottoWinningType, Integer> lottoWinningTypeCountMap = lottoWinningStatistics.getLottoWinningTypeCountMap();
         for (LottoWinningType lottoWinningType : LottoWinningType.valuesByMatchNumbersCountAsc()) {
-            System.out.printf("%d 개 일치 (%d 원)-%d 개\n",
+            System.out.printf("%d 개 일치 (%d 원)-%d 개%n",
                     lottoWinningType.getMatchNumbersCount(), lottoWinningType.getWinningAmount()
                     , lottoWinningTypeCountMap.getOrDefault(lottoWinningType, 0));
         }
