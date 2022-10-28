@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    private static final String PURCHASE_AMOUNT_MESSAGE = "수동으로 {manualAmount}장 자동으로 {autoAmount}를 구매했습니다.";
+    private static final String PURCHASE_AMOUNT_MESSAGE = "수동으로 {manualAmount}장 자동으로 {autoAmount}장을 구매했습니다.";
     private static final String RANK_INIT_MESSAGE = "당첨 통계\n-------";
     private static final String RANK_MESSAGE = "{countOfMatch}개 일치 ({winningMoney}원)- {amount}개";
     private static final String YIELD_MESSAGE = "총 수익률은 {yield}입니다.";

@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class AmountTest {
 
     @Test
-    @DisplayName("로또 수동, 자동 수량")
+    @DisplayName("로또 수동, 자동 수량 확인")
     void getAmount() {
         // given / when
         Amount amount = new Amount(10, 5);
@@ -21,7 +21,7 @@ class AmountTest {
     }
 
     @Test
-    @DisplayName("로또 수량 벨리데이션 확인")
+    @DisplayName("수동 로또 수량이 총 구입 수량을 초과하면 예외 발생")
     void getAmount_fail() {
         // expected
         assertThatThrownBy(() -> new Amount(10, 11))

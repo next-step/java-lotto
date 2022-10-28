@@ -42,7 +42,7 @@ public class LottoResult {
     }
 
     private LottoNumber validateBonusNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
-        if (!lottoNumbers.isValidBonusNumber(bonusNumber)) {
+        if (lottoNumbers.isValidBonusNumber(bonusNumber)) {
             throw new InvalidInputException(VALIDATE_BONUS_NUMBER);
         }
         return bonusNumber;

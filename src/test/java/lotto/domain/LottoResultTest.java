@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoResultTest {
 
     @Test
-    @DisplayName("보너스 번호 테스트")
+    @DisplayName("5개가 일치하고 보너스 번호가 일치하면 2등")
     void getLottoNumberList() {
 
         // given
