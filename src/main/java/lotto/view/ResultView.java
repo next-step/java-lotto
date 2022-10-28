@@ -4,6 +4,7 @@ import lotto.constant.LottoRanking;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
+
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +25,11 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("--------------");
 
-        for (Map.Entry<Integer, Integer> entry : lottoResult.getLottoRankings().entrySet()) {
-            System.out.println(entry.getKey() + "개 일치 (" + LottoRanking.getAward(entry.getKey()) + "원) - " + entry.getValue() + "개");
+        for (Map.Entry<LottoRanking, Integer> entry : lottoResult.getLottoRankings().entrySet()) {
+            LottoRanking key = entry.getKey();
+            if (key != LottoRanking.MISS) {
+                System.out.println(key.getRanking() + "개 일치 (" + key.getAward() + "원) - " + entry.getValue() + "개");
+            }
         }
 
         System.out.printf("총 수익률은 %2.02f 입니다.", lottoResult.getPercentage());
