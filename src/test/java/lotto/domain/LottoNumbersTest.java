@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoNumbersTest {
@@ -32,7 +33,7 @@ class LottoNumbersTest {
         lottoNumberTest = Lists.newArrayList(one, three, five, seven, nine, twentyTwo);
 
         purchasedLottoNumbers = List.of(
-                new LottoNumbers(List.of(one, three, five, twentyTwo, twelve, fortyFive)),
+                new LottoNumbers(List.of(one, three, five, seven, nine, fortyFive)),
                 new LottoNumbers(List.of(one, three, five, seven, nine, twentyOne))
         );
 
@@ -62,13 +63,20 @@ class LottoNumbersTest {
     }
 
     @Test
-        @DisplayName("매칭된 당첨번호 리스트")
-    void 로또_매칭_랭킹() {
+    @DisplayName("당첨 번호가 5개, 보너스 번호를 포함할 경우 2등인지 확인")
+    void 로또_매칭_2등() {
         LottoNumbers bonusLottoTest = new LottoNumbers(lottoNumberTest, fortyFive);
-        System.out.println(bonusLottoTest.getLottoNumbers());
-        System.out.println(bonusLottoTest.getBonusNumber());
 
         ArrayList<LottoRanking> lottoRankings = bonusLottoTest.matchingLottoNumbers(purchasedLottoNumbers);
-        System.out.println(lottoRankings);
+        assertThat(lottoRankings.get(0)).isEqualTo(LottoRanking.SECOND);
+    }
+
+    @Test
+    @DisplayName("당첨 번호가 5개, 보너스 번호를 포함하지 않을 경우 3등인지 확인")
+    void 로또_매칭_3등() {
+        LottoNumbers bonusLottoTest = new LottoNumbers(lottoNumberTest, fortyFive);
+
+        ArrayList<LottoRanking> lottoRankings = bonusLottoTest.matchingLottoNumbers(purchasedLottoNumbers);
+        assertThat(lottoRankings.get(1)).isEqualTo(LottoRanking.THIRD);
     }
 }

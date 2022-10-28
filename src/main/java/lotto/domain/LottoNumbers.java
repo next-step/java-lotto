@@ -4,7 +4,6 @@ import lotto.constant.LottoRanking;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER = 6;
@@ -33,10 +32,6 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
-
     public ArrayList<LottoRanking> matchingLottoNumbers(List<LottoNumbers> lottoTickets) {
         ArrayList<LottoRanking> rank = new ArrayList<>();
         for (LottoNumbers lottoTicket : lottoTickets) {
@@ -50,27 +45,12 @@ public class LottoNumbers {
     }
 
     private int filterMatchingNumbers(LottoNumbers lottoTicket) {
-        System.out.println(lottoNumbers);
-        return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> lottoTicket.getLottoNumbers().contains(lottoNumber))
+        return (int) lottoTicket.getLottoNumbers().stream()
+                .filter(lottoNumbers::contains)
                 .count();
     }
 
     private boolean hasBonusNumber(LottoNumbers lottoTicket) {
-        System.out.println("오잉 ? : " + lottoTicket.getLottoNumbers());
         return lottoTicket.getLottoNumbers().contains(bonusNumber);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers) && Objects.equals(bonusNumber, that.bonusNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers, bonusNumber);
     }
 }

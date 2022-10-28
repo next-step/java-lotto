@@ -20,7 +20,6 @@ public enum LottoRanking {
     }
 
     public static LottoRanking of(int matchCount, boolean matchBonus) {
-        System.out.println("matchCount :: " + matchCount + " matchBonus :: " + matchBonus);
         return Arrays.stream(LottoRanking.values())
                 .filter(value -> value.ranking == matchCount)
                 .filter(lottoRank -> lottoRank.checkBonusMatch(matchBonus))
