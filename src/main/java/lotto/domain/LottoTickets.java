@@ -5,12 +5,10 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.util.NumberUtil.makeAutoNumberList;
-
 public class LottoTickets {
 
     private final PurchaseInfo purchaseInfo;
-    private List<Lotto> lottoList;
+    private List<Lotto> lottoList = new ArrayList<>();
 
     public LottoTickets(PurchaseInfo purchaseInfo, List<Lotto> lottoList) {
         this(purchaseInfo);
@@ -26,17 +24,8 @@ public class LottoTickets {
     }
 
     public LottoTickets pickNumbers(List<List<Integer>> manualLottoList) {
-        List<Lotto> lottoList = new ArrayList<>();
-
-        for (int i = 0; i < this.purchaseInfo.getAutoAmount(); i++) {
-            lottoList.add(new Lotto(makeAutoNumberList()));
-        }
-
-        for (int i = 0; i < this.purchaseInfo.getManualAmount(); i++) {
-            lottoList.add(new Lotto(manualLottoList.get(i)));
-        }
-
-        this.lottoList = lottoList;
+        makeAutoLotto();
+        makeManualLotto(manualLottoList);
         return this;
     }
 
@@ -52,6 +41,18 @@ public class LottoTickets {
                 .sum();
         return BigDecimal.valueOf(totalWinningMoney)
                 .divide(BigDecimal.valueOf(this.purchaseInfo.getPurchasePrice()), 2, RoundingMode.HALF_UP);
+    }
+
+    private void makeManualLotto(List<List<Integer>> manualLottoList) {
+        for (int i = 0; i < this.purchaseInfo.getManualAmount(); i++) {
+            lottoList.add(new Lotto(manualLottoList.get(i)));
+        }
+    }
+
+    private void makeAutoLotto() {
+        for (int i = 0; i < this.purchaseInfo.getAutoAmount(); i++) {
+            lottoList.add(new Lotto().pickAuto());
+        }
     }
 
 }
