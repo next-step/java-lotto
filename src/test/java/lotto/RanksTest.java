@@ -8,10 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +26,7 @@ public class RanksTest {
         Ticket lottoWinningTicket = Ticket.of(Arrays.asList(3, 4, 5, 6, 7, 8));
 
         Ranks ranks = lotto.rankedWinningNumbers(lottoWinningTicket);
-        EnumMap<Rank, Integer> rankMap = ranks.getRanks();
+        Map<Rank, Integer> rankMap = ranks.getRanks();
 
         assertThat(rankMap.get(Rank.FOURTH)).isEqualTo(0);
         assertThat(rankMap.get(Rank.THIRD)).isEqualTo(1);

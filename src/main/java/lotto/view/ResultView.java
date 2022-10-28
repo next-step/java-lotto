@@ -4,8 +4,8 @@ import lotto.domain.Rank;
 import lotto.domain.Ranks;
 import lotto.domain.Ticket;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     public static void printTicketCount(int ticketCount) {
@@ -18,7 +18,7 @@ public class ResultView {
 
     public static void printLottoResult(Ranks ranks) {
         System.out.println("\n당첨 통계\n---------");
-        EnumMap<Rank, Integer> rankMap = ranks.getRanks();
+        Map<Rank, Integer> rankMap = ranks.getRanks();
 
         printRank(Rank.FOURTH, rankMap);
         printRank(Rank.THIRD, rankMap);
@@ -26,7 +26,7 @@ public class ResultView {
         printRank(Rank.FIRST, rankMap);
     }
 
-    private static void printRank(Rank rank, EnumMap<Rank, Integer> rankMap) {
+    private static void printRank(Rank rank, Map<Rank, Integer> rankMap) {
         System.out.printf("%d개 일치 (%d원)- %d개%n", rank.getMatchCount(), rank.getMoney(), rankMap.get(rank));
     }
 
