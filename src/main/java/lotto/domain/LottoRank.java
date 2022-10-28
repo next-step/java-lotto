@@ -4,50 +4,20 @@ import java.util.Arrays;
 import java.util.function.BiPredicate;
 
 public enum LottoRank {
-    MISS(0, (matchCount, hasBonus) -> matchCount < 3) {
-        @Override
-        public long winningMoneyPerRank() {
-            return 0;
-        }
-    },
-    FIFTH(3, (matchCount, hasBonus) -> matchCount == 3) {
-        @Override
-        public long winningMoneyPerRank() {
-            return 5_000L;
-        }
-    },
-    FOURTH(4, (matchCount, hasBonus) -> matchCount == 4) {
-        @Override
-        public long winningMoneyPerRank() {
-            return 50_000L;
-        }
-    },
-    THIRD(5, (matchCount, hasBonus) -> matchCount == 5 && !hasBonus) {
-        @Override
-        public long winningMoneyPerRank() {
-            return 1_500_000L;
-        }
-    },
-    SECOND(5, (matchCount, hasBonus) -> matchCount == 5 && hasBonus) {
-        @Override
-        public long winningMoneyPerRank() {
-            return 30_000_000L;
-        }
-    },
-    FIRST(6, (matchCount, hasBonus) -> matchCount == 6) {
-        @Override
-        public long winningMoneyPerRank() {
-            return 2_000_000_000L;
-        }
-    };
+    MISS(0, 0L, (matchCount, hasBonus) -> matchCount < 3),
+    FIFTH(3, 5_000L, (matchCount, hasBonus) -> matchCount == 3),
+    FOURTH(4, 50_000L, (matchCount, hasBonus) -> matchCount == 4),
+    THIRD(5, 1_500_000L, (matchCount, hasBonus) -> matchCount == 5 && !hasBonus),
+    SECOND(5, 30_000_000L, (matchCount, hasBonus) -> matchCount == 5 && hasBonus),
+    FIRST(6, 2_000_000_000L, (matchCount, hasBonus) -> matchCount == 6);
 
     private final int countOfMatch;
+    private final long winningMoney;
     private final BiPredicate<Integer, Boolean> rankChecker;
 
-    public abstract long winningMoneyPerRank();
-
-    LottoRank(int countOfMatch, BiPredicate<Integer, Boolean> rankChecker) {
+    LottoRank(int countOfMatch, long winningMoney, BiPredicate<Integer, Boolean> rankChecker) {
         this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
         this.rankChecker = rankChecker;
     }
 
@@ -60,5 +30,9 @@ public enum LottoRank {
 
     public int getCountOfMatch() {
         return countOfMatch;
+    }
+
+    public long getWinningMoney() {
+        return winningMoney;
     }
 }

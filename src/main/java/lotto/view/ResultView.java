@@ -46,6 +46,6 @@ public class ResultView {
         if (rank == LottoRank.SECOND) {
             System.out.print(BONUS_MATCH_MESSAGE);
         }
-        System.out.printf(LOTTO_MATCH_RESULT_MESSAGE, rank.winningMoneyPerRank(), winning.count(rank));
+        System.out.printf(LOTTO_MATCH_RESULT_MESSAGE, rank.getWinningMoney(), winning.count(rank));
     }
 }
