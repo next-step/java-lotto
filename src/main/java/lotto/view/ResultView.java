@@ -24,11 +24,12 @@ public class ResultView {
         System.out.println("---------");
 
         Map<LottoWinningType, Integer> lottoWinningTypeCountMap = lottoWinningStatistics.getLottoWinningTypeCountMap();
-        for (LottoWinningType lottoWinningType : LottoWinningType.valuesByMatchNumbersCountAsc()) {
-            System.out.printf("%d 개 일치 (%d 원)-%d 개%n",
-                    lottoWinningType.getMatchNumbersCount(), lottoWinningType.getWinningAmount()
-                    , lottoWinningTypeCountMap.getOrDefault(lottoWinningType, 0));
-        }
+        LottoWinningType.valuesByMatchNumbersCountAsc()
+                        .stream()
+                        .filter(lottoWinningType -> !LottoWinningType.NONE.equals(lottoWinningType))
+                        .forEach(lottoWinningType -> System.out.printf("%d 개 일치 (%d 원)-%d 개%n",
+                                lottoWinningType.getMatchNumbersCount(), lottoWinningType.getWinningAmount()
+                                , lottoWinningTypeCountMap.getOrDefault(lottoWinningType, 0)));
 
         System.out.printf("총 수익률은 %.2f 입니다.", lottoWinningStatistics.getYield());
 
