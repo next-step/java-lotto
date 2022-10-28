@@ -160,5 +160,5 @@
 ###리뷰 요구사항
 - [x] LottoCount : 함수명 minus 수정
 - [x] LottoRank : 로또 머니 반환 메서드 필드로 변경하기
-- [ ] LottoGeneratorAutoStrategy 생성 메서드 재사용 선언
+- [x] LottoGeneratorAutoStrategy 생성 메서드 재사용 선언
 - [ ] LottoCount 수동 발급 시 로또 구입보다 많이 발급 징수될 밸리데이션 추가

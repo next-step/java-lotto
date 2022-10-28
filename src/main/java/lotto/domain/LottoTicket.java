@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.strategy.LottoGeneratorAutoStrategy;
 import lotto.strategy.LottoGeneratorManualStrategy;
+import lotto.strategy.LottoGeneratorStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,10 @@ public class LottoTicket {
     }
 
     private List<Lotto> createAuto(int autoCount) {
+        LottoGeneratorStrategy lottoGeneratorStrategy = new LottoGeneratorAutoStrategy();
         List<Lotto> autos = new ArrayList<>();
         for (int i = 0; i < autoCount; i++) {
-            Lotto lotto = new Lotto(new LottoGeneratorAutoStrategy());
+            Lotto lotto = new Lotto(lottoGeneratorStrategy);
             autos.add(lotto);
         }
         return autos;
