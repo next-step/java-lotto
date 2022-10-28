@@ -20,10 +20,11 @@ public class ResultView {
         System.out.println("\n당첨 통계\n---------");
         Map<Rank, Integer> rankMap = ranks.getRanks();
 
-        printRank(Rank.FOURTH, rankMap);
-        printRank(Rank.THIRD, rankMap);
-        printRank(Rank.SECOND, rankMap);
-        printRank(Rank.FIRST, rankMap);
+        Rank[] rankList = Rank.values();
+        for (int i = rankList.length - 2; i >= 0; i--) {
+            Rank rank = rankList[i];
+            printRank(rank, rankMap);
+        }
     }
 
     private static void printRank(Rank rank, Map<Rank, Integer> rankMap) {
