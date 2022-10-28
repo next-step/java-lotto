@@ -9,7 +9,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoAmount lottoAmount = new LottoAmount(askAmount());
         LottoCount lottoCount = new LottoCount(lottoAmount.calcLottoCount());
-        LottoCount manualCount = new LottoCount(askManualLottoCount());
+        LottoCount manualCount = new LottoManualCount(askManualLottoCount()).validateCount(lottoCount);
 
         LottoTicket lottoTicket = new LottoTicket(lottoCount, askInputManualLottos(manualCount));
         showLottoCount(lottoCount, manualCount);
