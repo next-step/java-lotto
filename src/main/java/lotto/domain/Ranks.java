@@ -22,7 +22,7 @@ public class Ranks {
         }
     }
 
-    private Integer countRank(Rank rank) {
+    private int countRank(Rank rank) {
         return this.ranks.get(rank) + 1;
     }
 
