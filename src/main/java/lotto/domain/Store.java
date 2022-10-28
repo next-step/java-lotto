@@ -34,10 +34,10 @@ public class Store {
         return new LottoTicket(numList.subList(0, LottoTicket.LOTTO_NUMBER_SIZE));
     }
 
-    public List<Rank> match(final List<LottoNumber> winningNumbers) {
+    public List<Rank> match(final List<LottoNumber> winningNumbers, final LottoNumber bonusNumber) {
         List<Rank> ranks = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            ranks.add(lottoTicket.match(winningNumbers));
+            ranks.add(lottoTicket.match(winningNumbers, bonusNumber));
         }
         return ranks;
     }

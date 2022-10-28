@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static lotto.domain.LottoNumber.*;
+import static lotto.domain.Rank.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
 class LottoTicketTest {
@@ -33,23 +34,20 @@ class LottoTicketTest {
     @ParameterizedTest
     @MethodSource
     @DisplayName("당첨번호를 전달받아서 등수 반환")
-    void match(List<LottoNumber> winningLottoTicket, Rank rank) {
-        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        Assertions.assertThat(lottoTicket.match(winningLottoTicket)).isEqualTo(rank);
+    void match(LottoTicket lottoTicket, Rank rank) {
+        List<LottoNumber> winningNumbers = List.of(valueOf(1), valueOf(2), valueOf(3),
+                valueOf(4), valueOf(5), valueOf(6));
+        Assertions.assertThat(lottoTicket.match(winningNumbers, LottoNumber.valueOf(7))).isEqualTo(rank);
     }
 
     static Stream<Arguments> match() {
         return Stream.of(
-                arguments(List.of(valueOf(1), valueOf(2), valueOf(3),
-                        valueOf(4), valueOf(5), valueOf(6)), Rank.FIRST),
-                arguments(List.of(valueOf(1), valueOf(2), valueOf(3),
-                        valueOf(4), valueOf(5), valueOf(7)), Rank.SECOND),
-                arguments(List.of(valueOf(1), valueOf(2), valueOf(3),
-                        valueOf(4), valueOf(8), valueOf(7)), Rank.THIRD),
-                arguments(List.of(valueOf(1), valueOf(2), valueOf(3),
-                        valueOf(9), valueOf(8), valueOf(7)), Rank.FOURTH),
-                arguments(List.of(valueOf(1), valueOf(2), valueOf(10),
-                        valueOf(9), valueOf(8), valueOf(7)), Rank.NO_MATCH)
+                arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), FIRST),
+                arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), SECOND),
+                arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 8)), THIRD),
+                arguments(new LottoTicket(List.of(1, 2, 3, 4, 7, 8)), FOURTH),
+                arguments(new LottoTicket(List.of(1, 2, 3, 7, 8, 9)), FIFTH),
+                arguments(new LottoTicket(List.of(1, 2, 7, 8, 9, 10)), NO_MATCH)
         );
     }
 

@@ -34,11 +34,11 @@ public class LottoTicket {
         }
     }
 
-    public Rank match(final List<LottoNumber> winningLottoTicket) {
+    public Rank match(final List<LottoNumber> winningLottoTicket, final LottoNumber bonusNumber) {
         int count = Math.toIntExact(this.lottoNumbers.stream()
                 .filter(winningLottoTicket::contains)
                 .count());
-        return Rank.of(count);
+        return Rank.of(count, this.lottoNumbers.contains(bonusNumber));
     }
 
     public List<LottoNumber> getLottoNumbers() {

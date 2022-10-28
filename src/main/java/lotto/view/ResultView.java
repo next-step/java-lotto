@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static lotto.domain.Rank.NO_MATCH;
+import static lotto.domain.Rank.SECOND;
 
 public class ResultView {
 
@@ -49,7 +50,13 @@ public class ResultView {
         if (NO_MATCH == rank) {
             return;
         }
-        System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), getCount(result, rank));
+
+        String additionalMsg = "";
+        if (SECOND == rank) {
+            additionalMsg = ", 보너스 볼 일치";
+        }
+
+        System.out.printf("%d개 일치%s(%d원) - %d개%n", rank.getCountOfMatch(), additionalMsg, rank.getWinningMoney(), getCount(result, rank));
     }
 
     private static long getCount(final Map<Rank, Long> result, final Rank rank) {
