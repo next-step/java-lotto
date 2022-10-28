@@ -25,13 +25,13 @@ public class InputView {
 
     public static Integer inputPurchasePrice() {
         System.out.println(PURCHASE_PRICE_MESSAGE);
-        String inputPurchasePrice = SCANNER.next();
+        String inputPurchasePrice = SCANNER.nextLine();
         return convertNumberStringToInt(inputPurchasePrice);
     }
 
     public static Integer inputManualAmount() {
         System.out.println(MANUAL_AMOUNT_MESSAGE);
-        String inputManualAmount = SCANNER.next();
+        String inputManualAmount = SCANNER.nextLine();
         return convertAmountStringToInt(inputManualAmount);
     }
 
@@ -43,7 +43,7 @@ public class InputView {
         System.out.println(MANUAL_NUMBER_MESSAGE);
         List<List<Integer>> manualNumberList = new ArrayList<>();
         for (int i = 0; i < manualAmount; i++) {
-            String inputNumberList = SCANNER.next().trim();
+            String inputNumberList = SCANNER.nextLine();
             manualNumberList.add(validateNumberList(inputNumberList));
         }
         return manualNumberList;
@@ -51,18 +51,19 @@ public class InputView {
 
     public static List<Integer> inputWinnerNumberList() {
         System.out.println(WINNER_NUMBER_LIST_MESSAGE);
-        String inputNumberList = SCANNER.next().trim();
+        String inputNumberList = SCANNER.nextLine();
         return validateNumberList(inputNumberList);
     }
 
     public static Integer inputBonusNumber() {
         System.out.println(BONUS_NUMBER_MESSAGE);
-        String inputBonus = SCANNER.next();
+        String inputBonus = SCANNER.nextLine();
         return convertNumberStringToInt(inputBonus);
     }
 
     private static List<Integer> validateNumberList(String inputNumberList) {
-        return Arrays.stream(inputNumberList.trim().split(","))
+        String trimmedInputNumberList = inputNumberList.replaceAll(" ", "");
+        return Arrays.stream(trimmedInputNumberList.split(","))
                 .map(NumberUtil::convertNumberStringToInt)
                 .collect(Collectors.toList());
     }
