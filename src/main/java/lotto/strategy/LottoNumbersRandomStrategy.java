@@ -1,14 +1,12 @@
 package lotto.strategy;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberPool;
-
-import java.util.List;
+import lotto.domain.LottoNumbers;
 
 public class LottoNumbersRandomStrategy implements LottoNumbersStrategy {
 
     @Override
-    public List<LottoNumber> generate() {
-        return LottoNumberPool.getLottoNumbers();
+    public LottoNumbers generate() {
+        return new LottoNumbers(LottoNumberPool.getLottoNumbers());
     }
 }
