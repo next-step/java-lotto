@@ -46,7 +46,7 @@ class LottoTicketsTest {
     void getRank() {
         // given
         Integer purchasePrice = 14000;
-        LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6));
+        LottoResult winnerLottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6), 7);
 
         // when
         LottoTickets lottoTickets = new LottoTickets(new PurchaseInfo(purchasePrice, 0));
