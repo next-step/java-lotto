@@ -39,7 +39,7 @@ public class Winning {
     }
 
     public boolean hasBonusNumber() {
-        return prize.hasBonusNumber();
+        return prize.needBonusNumber();
     }
     
     @Override

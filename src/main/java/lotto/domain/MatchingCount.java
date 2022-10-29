@@ -4,39 +4,33 @@ import java.util.Objects;
 
 public class MatchingCount {
     private final int countOfMatch;
-    private final Boolean hasBonusNumber;
-
-    public MatchingCount(final int countOfMatch) {
-        this(countOfMatch, null);
-    }
+    private final boolean hasBonusNumber;
 
     public MatchingCount(final int countOfMatch, final Boolean hasBonusNumber) {
         this.countOfMatch = countOfMatch;
         this.hasBonusNumber = hasBonusNumber;
     }
     
-    public int getCountOfMatch() {
-        return countOfMatch;
+    public boolean is(int countOfMatch, boolean needBonusNumber) {
+        if (needBonusNumber) {
+            return countOfMatch == this.countOfMatch && hasBonusNumber;
+        }
+        return is(countOfMatch);
     }
 
-    public Boolean hasBonusNumber() {
-        if (hasBonusNumber == null) {
-            return false;
+    public boolean is(int countOfMatch) {
+        if (hasBonusNumber) {
+            return countOfMatch == this.countOfMatch - 1;
         }
-        return hasBonusNumber;
+        return this.countOfMatch == countOfMatch;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) {return true;}
         if (o == null || getClass() != o.getClass()) {return false;}
-        
         MatchingCount count = (MatchingCount) o;
-        boolean equalsCountOfMatch = countOfMatch == count.countOfMatch;
-        if (hasBonusNumber == null) {
-            return equalsCountOfMatch;
-        }
-        return equalsCountOfMatch && hasBonusNumber == count.hasBonusNumber;
+        return countOfMatch == count.countOfMatch && hasBonusNumber == count.hasBonusNumber;
     }
 
     @Override
