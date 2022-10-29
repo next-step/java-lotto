@@ -31,7 +31,7 @@ class LottoNumberTest {
     @DisplayName("일치하는 갯수를 리턴한다.")
     @ParameterizedTest
     @MethodSource("matchingCountSet")
-    void matchingCount(LottoNumber number, LottoNumber other, BonusNumber bonusNumber, MatchingCount expected) {
+    void matchingCount(LottoNumber number, LottoNumber other, int bonusNumber, MatchingCount expected) {
         assertThat(number.matchCount(other, bonusNumber)).isEqualTo(expected);
     }
 
@@ -40,19 +40,19 @@ class LottoNumberTest {
                 Arguments.arguments(
                         lottoNumber(1, 2, 3, 4, 5, 6),
                         lottoNumber(7, 8, 9, 10, 11, 12),
-                        bonusNumber(13),
+                        13,
                         matchingCount(0, false)
                 ),
                 Arguments.arguments(
                         lottoNumber(1, 2, 3, 4, 5, 6),
                         lottoNumber(6, 8, 9, 10, 11, 12),
-                        bonusNumber(5),
+                        5,
                         matchingCount(1, true)
                 ),
                 Arguments.arguments(
                         lottoNumber(1, 2, 3, 4, 5, 6),
                         lottoNumber(2, 3, 4, 5, 6, 7),
-                        bonusNumber(1),
+                        1,
                         matchingCount(5, true)
                 )
         );
@@ -74,21 +74,8 @@ class LottoNumberTest {
         );
     }
     
-    private static Stream<Arguments> matchCountSet() {
-        return Stream.of(
-            Arguments.arguments(lottoNumber(1, 2, 3, 4, 5, 6), lottoNumber(1, 2, 3, 4, 5, 6), 6),
-            Arguments.arguments(lottoNumber(1, 2, 3, 4, 5, 6), lottoNumber(7, 8, 9, 10, 11, 12), 0),
-            Arguments.arguments(lottoNumber(1, 2, 3, 4, 5, 6), lottoNumber(), 0),
-            Arguments.arguments(lottoNumber(1, 2, 3, 4, 5, 6), lottoNumber(1, 2, 6, 7, 8, 9), 3)
-        );
-    }
-    
     private static LottoNumber lottoNumber(int... numbers) {
         return new LottoNumber(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
-    }
-    
-    private static BonusNumber bonusNumber(int number) {
-        return new BonusNumber(number);
     }
     
     private static MatchingCount matchingCount(int countOfMatch, boolean hasBonusNumber) {

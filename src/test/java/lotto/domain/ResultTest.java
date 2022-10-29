@@ -17,11 +17,11 @@ class ResultTest {
     @DisplayName("당첨번호를 리턴한다.")
     @ParameterizedTest
     @MethodSource("winningsSet")
-    void winnings(LottoNumbers lottoNumbers, LottoNumber luckyNumber, BonusNumber bonusNumber, List<Winning> expected) {
+    void winnings(LottoNumbers lottoNumbers, LottoNumber luckyNumber, int bonusNumber, List<Winning> expected) {
         assertThat(winnings(lottoNumbers, luckyNumber, bonusNumber)).hasSameElementsAs(expected);
     }
     
-    private List<Winning> winnings(LottoNumbers lottoNumbers, LottoNumber luckyNumber, BonusNumber bonusNumber) {
+    private List<Winning> winnings(LottoNumbers lottoNumbers, LottoNumber luckyNumber, int bonusNumber) {
         List<Winning> winnings = new ArrayList<>();
         Result.of(lottoNumbers, luckyNumber, bonusNumber, new Money(1000)).winnings().iterator().forEachRemaining(winnings::add);
         return winnings;
@@ -40,7 +40,7 @@ class ResultTest {
                                 lottoNumber(1, 2, 3, 8, 9, 10)
                         ),
                         lottoNumber(1, 2, 3, 4, 5, 6),
-                        bonusNumber(11),
+                        11,
                         winnings(
                                 winning(Prize.FIRST, lottoNumbers(lottoNumber(1, 2, 3, 4, 5, 6))),
                                 winning(Prize.SECOND, lottoNumbers(lottoNumber(1, 2, 3, 4, 5, 11))),
@@ -70,7 +70,4 @@ class ResultTest {
         return new Winning(prize, matchNumbers);
     }
     
-    private static BonusNumber bonusNumber(int number) {
-        return new BonusNumber(number);
-    }
 }

@@ -11,7 +11,7 @@ public class Result {
         this.rateOfReturn = new RateOfReturn(investment, winnings.income());
     }
     
-    public static Result of(final LottoNumbers numbers, final LottoNumber luckyLottoNumber, final BonusNumber bonusNumber, final Money investment) {
+    public static Result of(final LottoNumbers numbers, final LottoNumber luckyLottoNumber, final int bonusNumber, final Money investment) {
         return new Result(winnings(numbers, luckyLottoNumber, bonusNumber), investment);
     }
     
@@ -23,13 +23,13 @@ public class Result {
         return rateOfReturn.value();
     }
     
-    private static Winnings winnings(LottoNumbers numbers, LottoNumber luckyLottoNumber, BonusNumber bonusNumber) {
+    private static Winnings winnings(LottoNumbers numbers, LottoNumber luckyLottoNumber, int bonusNumber) {
         Winnings winnings = new Winnings();
         for (LottoNumber number : numbers) {
             MatchingCount count = number.matchCount(luckyLottoNumber, bonusNumber);
             winnings.add(new Winning(Prize.valueOf(count), new LottoNumbers(List.of(number))));
         }
-        
+
         return winnings;
     }
 }

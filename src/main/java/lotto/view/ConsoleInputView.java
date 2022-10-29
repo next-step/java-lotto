@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 
@@ -25,13 +24,9 @@ public class ConsoleInputView {
         return lastWeeksLottoNumber(enteredLottoNumber());
     }
 
-    public BonusNumber bonusNumber() {
+    public int bonusNumber() {
         System.out.println("보너스 볼을 입력해주세요.");
-        return bonusNumber(enteredLottoNumber());
-    }
-
-    private BonusNumber bonusNumber(String bonusNumber) {
-        return new BonusNumber(parseInt(bonusNumber));
+        return parseInt(enteredLottoNumber());
     }
 
     String enteredLottoNumber() {

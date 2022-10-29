@@ -17,7 +17,7 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public MatchingCount matchCount(LottoNumber other, BonusNumber bonusNumber) {
+    public MatchingCount matchCount(LottoNumber other, int bonusNumber) {
         return new MatchingCount(matchingCount(other), contains(bonusNumber));
     }
     
@@ -35,8 +35,8 @@ public class LottoNumber {
         return numbers.size();
     }
     
-    private boolean contains(BonusNumber number) {
-        return numbers.contains(number.value());
+    private boolean contains(int number) {
+        return numbers.contains(number);
     }
     
     @Override

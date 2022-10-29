@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
@@ -35,7 +34,7 @@ public class LottoGame {
         return input.lastLuckyNumber();
     }
     
-    private BonusNumber bonusNumber() {
+    private int bonusNumber() {
         return input.bonusNumber();
     }
 }
