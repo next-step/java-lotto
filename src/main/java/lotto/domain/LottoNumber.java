@@ -2,12 +2,16 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber implements Comparable<LottoNumber>, Cloneable {
 
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private final int number;
+
+    public LottoNumber(final LottoNumber lottoNumber) {
+        this(lottoNumber.number);
+    }
 
     public LottoNumber(final int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
