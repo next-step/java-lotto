@@ -11,6 +11,7 @@ public class InputView {
 	}
 
 	public String inputLastWeekNumber(){
+		scanner.nextLine();
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		return scanner.nextLine();
 	}
