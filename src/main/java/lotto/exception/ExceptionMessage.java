@@ -10,7 +10,8 @@ public enum ExceptionMessage {
     ERROR_EMPTY_LOTTO("로또를 구매하지 않았습니다."),
     ERROR_NOT_ENOUGH_MONEY("로또를 구매할 수 없습니다."),
     ERROR_INVALID_BONUS_NUMBER("로또 당첨 번호 회의 번호를 입력해주세요."),
-    ERROR_ZERO_OR_NEGATIVE_VALUE("0 이하의 숫자는 허용되지 않습니다.");
+    ERROR_ZERO_OR_NEGATIVE_VALUE("0 이하의 숫자는 허용되지 않습니다."),
+    ERROR_MISMATCH_QUANTITY("입력한 구매 수량과 로또 번호 수가 일치하지 않습니다.");
 
     private final String message;
 
