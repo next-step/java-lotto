@@ -27,9 +27,17 @@ public class ResultView {
         LottoWinningType.valuesByMatchNumbersCountAsc()
                         .stream()
                         .filter(lottoWinningType -> !LottoWinningType.NONE.equals(lottoWinningType))
-                        .forEach(lottoWinningType -> System.out.printf("%d 개 일치 (%d 원)-%d 개%n",
-                                lottoWinningType.getMatchNumbersCount(), lottoWinningType.getWinningAmount()
-                                , lottoWinningTypeCountMap.getOrDefault(lottoWinningType, 0)));
+                        .forEach(lottoWinningType -> {
+                            System.out.printf("%d개 일치", lottoWinningType.getMatchNumbersCount());
+
+                            if (lottoWinningType.isMatchBonusNumber()) {
+                                System.out.print(", 보너스 볼 일치");
+                            }
+
+                            System.out.printf(" (%d 원) - %d 개%n",
+                                    lottoWinningType.getWinningAmount(),
+                                    lottoWinningTypeCountMap.getOrDefault(lottoWinningType, 0));
+                        });
 
         System.out.printf("총 수익률은 %.2f 입니다.", lottoWinningStatistics.getYield());
 

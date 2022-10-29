@@ -32,9 +32,10 @@ public class LottoMain {
                                                                   .map(Integer::parseInt)
                                                                   .map(LottoNumber::new)
                                                                   .collect(Collectors.toList()));
+        LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputBonusLottoNumber());
 
         LottoWinningStatistics lottoWinningStatistics = LottoWinningStatisticsGenerator.giveOut(
-                lottoPurchaseAmount, lottos, winningLottoNumbers);
+                lottoPurchaseAmount, lottos, winningLottoNumbers, bonusLottoNumber);
         ResultView.printLottoWinningStatistics(lottoWinningStatistics);
     }
 }

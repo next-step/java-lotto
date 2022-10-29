@@ -31,6 +31,10 @@ public class Lotto {
         }
     }
 
+    public boolean has(final LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
+    }
+
     public int matchNumberCount(final LottoNumbers winningLottoNumbers) {
         return this.numbers.countOfMatch(winningLottoNumbers);
     }

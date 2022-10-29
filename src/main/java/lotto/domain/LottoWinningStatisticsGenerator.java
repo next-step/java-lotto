@@ -7,20 +7,23 @@ import java.util.Map;
 public class LottoWinningStatisticsGenerator {
 
     public static LottoWinningStatistics giveOut(final int lottoPurchaseAmount, final List<Lotto> lottos,
-                                                 final LottoNumbers winningLottoNumbers) {
-        Map<LottoWinningType, Integer> lottoWinningTypeCountMap = countLottoWinningTypes(lottos, winningLottoNumbers);
+                                                 final LottoNumbers winningLottoNumbers,
+                                                 final LottoNumber bonusLottoNumber) {
+        Map<LottoWinningType, Integer> lottoWinningTypeCountMap
+                = countLottoWinningTypes(lottos, winningLottoNumbers, bonusLottoNumber);
         double yield = calculateYield(lottoPurchaseAmount, lottoWinningTypeCountMap);
 
         return new LottoWinningStatistics(lottoWinningTypeCountMap, yield);
     }
 
     private static Map<LottoWinningType, Integer> countLottoWinningTypes(final List<Lotto> lottos,
-                                                                         final LottoNumbers winningLottoNumbers) {
+                                                                         final LottoNumbers winningLottoNumbers,
+                                                                         final LottoNumber bonusLottoNumber) {
         Map<LottoWinningType, Integer> countMap = new HashMap<>();
 
         lottos.forEach(lotto -> {
             LottoWinningType lottoWinningType =
-                    LottoWinningType.valueOfMatchNumbersCount(lotto.matchNumberCount(winningLottoNumbers));
+                    LottoWinningType.valueOf(lotto.matchNumberCount(winningLottoNumbers), lotto.has(bonusLottoNumber));
             countMap.put(lottoWinningType, countMap.getOrDefault(lottoWinningType, 0) + 1);
         });
 
