@@ -15,6 +15,11 @@ public class LottoStatistics {
         return new AccordanceCount(countsByWinningAccordance);
     }
 
+    public double calculateProfitRatio(AccordanceCount accordanceCount, PurchaseMoney purchaseMoney) {
+        long totalWinningPrize = accordanceCount.calculateTotalPrize();
+        return (double) totalWinningPrize / purchaseMoney.getValue();
+    }
+
     private Map<WinningAccordance, Long> collectEachAccordanceCount(List<Long> accordanceCounts) {
         Map<WinningAccordance, Long> countsByWinningAccordance = initCountsByWinningAccordance();
         for (long accordCount : accordanceCounts) {

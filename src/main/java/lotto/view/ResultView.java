@@ -29,4 +29,8 @@ public class ResultView {
                 entry.getValue()
             )));
     }
+
+    public void printProfitRatio(double profitRatio) {
+        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", profitRatio));
+    }
 }

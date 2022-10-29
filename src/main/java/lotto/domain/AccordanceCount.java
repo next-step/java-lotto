@@ -19,4 +19,11 @@ public class AccordanceCount {
             .sorted(Comparator.comparing(entry -> entry.getKey().getMatchCount()))
             .collect(Collectors.toList());
     }
+
+    public long calculateTotalPrize() {
+        return countsByWinningAccordance.entrySet()
+            .stream()
+            .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
+            .sum();
+    }
 }

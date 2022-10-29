@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,5 +30,26 @@ class LottoStatisticsTest {
         AccordanceCount result = lottoStatistics.collectAccordanceCount(lottos, winningNumbers);
 
         assertThat(result.getCountsByWinningAccordanceInSequence()).hasSize(4);
+    }
+
+    @DisplayName("수익률 구하기")
+    @Test
+    void calculateProfitRatioTest() {
+        PurchaseMoney purchaseMoney = new PurchaseMoney(50000);
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        AccordanceCount accordanceCount = new AccordanceCount(Map.of(
+            WinningAccordance.THREE,
+            3L,
+            WinningAccordance.FOUR,
+            1L,
+            WinningAccordance.FIVE,
+            0L,
+            WinningAccordance.SIX,
+            0L
+        ));
+
+        double result = lottoStatistics.calculateProfitRatio(accordanceCount, purchaseMoney);
+
+        assertThat(result).isEqualTo(1.3);
     }
 }
