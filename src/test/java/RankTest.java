@@ -1,5 +1,6 @@
 import constant.Rank;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,11 +17,13 @@ public class RankTest {
     }
 
     @Test
+    @Order(1)
     public void 순위찾기_1등() {
         assertThat(firstRankCase.findRank()).isEqualTo("FIRST");
     }
 
     @Test
+    @Order(2)
     public void 순위찾기_순위없음() {
         assertThat(noRankCase.findRank()).isEqualTo("UNKNOWN");
     }
