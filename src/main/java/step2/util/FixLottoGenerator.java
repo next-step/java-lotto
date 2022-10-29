@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class FixLottoGenerator implements LottoGenerator {
 
-	private String fiexdNumber;
+	private final String fiexdNumber;
 
 	public FixLottoGenerator(String fixedNumber) {
 		this.fiexdNumber = fixedNumber;
