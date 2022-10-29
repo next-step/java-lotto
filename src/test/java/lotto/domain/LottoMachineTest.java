@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.List;
 import lotto.domain.policy.AutoLottoGenerator;
-import lotto.domain.policy.LottoPolicy.FakeLottoPolicy;
+import lotto.domain.policy.FakeLottoPolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,15 +14,15 @@ public class LottoMachineTest {
     @Test
     @DisplayName("생성 테스트")
     void lottoMachine_ctor_test() {
-        assertThatNoException().isThrownBy(() -> new LottoMachine(new AutoLottoGenerator(), 0));
+        assertThatNoException().isThrownBy(() -> new LottoMachine(new AutoLottoGenerator()));
     }
 
     @Test
     @DisplayName("로또 뽑기")
     void lottoMachine_get_lotto_test() {
-        LottoMachine lottoMachine = new LottoMachine(new FakeLottoPolicy(), 2);
+        LottoMachine lottoMachine = new LottoMachine(new FakeLottoPolicy());
 
-        Lottos lottos = lottoMachine.buyLotto();
+        Lottos lottos = lottoMachine.buyLotto(2);
 
         List<Lotto> lottoList = List.of(
             new Lotto(List.of(new LottoNumber(1),

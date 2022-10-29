@@ -29,8 +29,8 @@ public class LottoGame {
         LottoPolicy manualLottoGenerator = new ManualLottoGenerator(inputView.manualLottos(manualLottoQuantity));
         LottoPolicy autoLottoGenerator = new AutoLottoGenerator();
 
-        Lottos manualLottos = new LottoMachine(manualLottoGenerator, manualLottoQuantity).buyLotto();
-        Lottos manualAndAutoLottos = manualLottos.compositeLotto(new LottoMachine(autoLottoGenerator, lottoPrice.lottoCount(purchase) - manualLottos.count()).buyLotto());
+        Lottos manualLottos = new LottoMachine(manualLottoGenerator).buyLotto(manualLottoQuantity);
+        Lottos manualAndAutoLottos = manualLottos.compositeLotto(new LottoMachine(autoLottoGenerator).buyLotto(lottoPrice.lottoCount(purchase) - manualLottos.count()));
 
         outputView.lottos(manualAndAutoLottos, manualLottoQuantity, lottoPrice.lottoCount(purchase) - manualLottoQuantity);
 
