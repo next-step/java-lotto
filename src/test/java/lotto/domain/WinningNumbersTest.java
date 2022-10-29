@@ -19,6 +19,6 @@ class WinningNumbersTest {
     void hasBonusTest() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 7");
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "10");
-        assertThat(lotto.hasBonus(winningNumbers.getBonusNumber())).isFalse();
+        assertThat(winningNumbers.hasBonusNumber(lotto)).isFalse();
     }
 }

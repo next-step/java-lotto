@@ -19,7 +19,7 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(String number) {
-        this(validateNumber(toInt(number)));
+        this(toInt(number));
     }
 
     public LottoNumber(int number) {
@@ -54,7 +54,7 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> allLottoNumbers() {
-        return CACHE;
+        return List.copyOf(CACHE);
     }
 
     @Override

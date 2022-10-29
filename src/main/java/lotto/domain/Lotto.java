@@ -54,8 +54,8 @@ public class Lotto {
                 .count();
     }
 
-    boolean hasBonus(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+    boolean hasLottoNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     private static boolean isNullOrBlank(String numbers) {
