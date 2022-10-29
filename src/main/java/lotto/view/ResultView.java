@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.text.MessageFormat;
+import lotto.domain.AccordanceCount;
 import lotto.domain.Lottos;
 
 public class ResultView {
@@ -17,5 +18,15 @@ public class ResultView {
     private void printEachLotto(Lottos lottos) {
         lottos.getLottos()
             .forEach(lotto -> System.out.println("[" + lotto + "]"));
+    }
+
+    public void printWinningStatistics(AccordanceCount accordanceCount) {
+        accordanceCount.getCountsByWinningAccordanceInSequence()
+            .forEach(entry -> System.out.println(MessageFormat.format(
+                "{0}개 일치 ({1}원)- {2}개",
+                entry.getKey().getMatchCount(),
+                entry.getKey().getPrize(),
+                entry.getValue()
+            )));
     }
 }

@@ -1,6 +1,8 @@
 package lotto;
 
+import lotto.domain.AccordanceCount;
 import lotto.domain.LottoShop;
+import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseMoney;
 import lotto.domain.WinningNumbers;
@@ -21,5 +23,8 @@ public class LottoApp {
 
         WinningNumbers winningNumbers = inputView.inputLastWeekWinningNumbers();
 
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        AccordanceCount accordanceCount = lottoStatistics.collectAccordanceCount(lottos, winningNumbers);
+        resultView.printWinningStatistics(accordanceCount);
     }
 }
