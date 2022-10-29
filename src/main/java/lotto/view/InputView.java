@@ -23,7 +23,7 @@ public class InputView {
     }
 
     public WinningNumbers inputLastWeekWinningNumbers() {
-        System.out.println(INPUT_WINNINGNUMBERS_MESSAGE);
+        System.out.println(System.lineSeparator() + INPUT_WINNINGNUMBERS_MESSAGE);
         List<Integer> lastWeekWinningNumbers = split(SCANNER.nextLine());
 
         return new WinningNumbers(lastWeekWinningNumbers);

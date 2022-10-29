@@ -21,13 +21,23 @@ public class ResultView {
     }
 
     public void printWinningStatistics(AccordanceCount accordanceCount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(System.lineSeparator());
+        stringBuilder.append("당첨 통계");
+        stringBuilder.append(System.lineSeparator());
+        stringBuilder.append("---------");
+        stringBuilder.append(System.lineSeparator());
+
         accordanceCount.getCountsByWinningAccordanceInSequence()
-            .forEach(entry -> System.out.println(MessageFormat.format(
-                "{0}개 일치 ({1}원)- {2}개",
-                entry.getKey().getMatchCount(),
-                entry.getKey().getPrize(),
-                entry.getValue()
-            )));
+            .forEach(entry -> stringBuilder.append(MessageFormat.format(
+                    "{0}개 일치 ({1}원)- {2}개",
+                    entry.getKey().getMatchCount(),
+                    entry.getKey().getPrize(),
+                    entry.getValue()))
+                .append(System.lineSeparator())
+            );
+
+        System.out.println(stringBuilder);
     }
 
     public void printProfitRatio(double profitRatio) {
