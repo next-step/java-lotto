@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoWinningStatistics;
-import lotto.domain.LottoWinningStatisticsGenerator;
+import lotto.domain.*;
 import lotto.factory.LottoFactory;
 import lotto.strategy.LottoNumbersRandomStrategy;
 import lotto.strategy.LottoNumbersStrategy;
@@ -30,15 +27,14 @@ public class LottoMain {
         ResultView.printLottoAmountAndNumbers(lottos);
 
         String winningLottoNumbersString = InputView.inputWinningLottoNumbersString();
-        List<LottoNumber> LottoWinningNumbers = Stream.of(winningLottoNumbersString.split(","))
-                                                      .map(String::trim)
-                                                      .map(Integer::parseInt)
-                                                      .map(LottoNumber::new)
-                                                      .collect(Collectors.toList());
-        Lotto winningLotto = new Lotto(LottoWinningNumbers);
+        LottoNumbers winningLottoNumbers = new LottoNumbers(Stream.of(winningLottoNumbersString.split(","))
+                                                                  .map(String::trim)
+                                                                  .map(Integer::parseInt)
+                                                                  .map(LottoNumber::new)
+                                                                  .collect(Collectors.toList()));
 
         LottoWinningStatistics lottoWinningStatistics = LottoWinningStatisticsGenerator.giveOut(
-                lottoPurchaseAmount, lottos, winningLotto);
+                lottoPurchaseAmount, lottos, winningLottoNumbers);
         ResultView.printLottoWinningStatistics(lottoWinningStatistics);
     }
 }

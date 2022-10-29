@@ -31,12 +31,8 @@ public class Lotto {
         }
     }
 
-    public int matchNumberCount(final Lotto lotto) {
-        if (Objects.isNull(lotto)) {
-            return 0;
-        }
-
-        return this.numbers.countOfMatch(lotto.numbers);
+    public int matchNumberCount(final LottoNumbers winningLottoNumbers) {
+        return this.numbers.countOfMatch(winningLottoNumbers);
     }
 
     @Override

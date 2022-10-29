@@ -21,16 +21,16 @@ public class LottoWinningStatisticsGeneratorTest {
                 new LottoNumber(6));
         List<Lotto> lottos = List.of(new Lotto(lottoNumbers));
 
-        List<LottoNumber> winningLottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(16));
-        Lotto winningLotto = new Lotto(winningLottoNumbers);
+        LottoNumbers winningLottoNumbers = new LottoNumbers(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(14),
+                        new LottoNumber(15),
+                        new LottoNumber(16)));
         LottoWinningStatistics lottoWinningStatistics =
-                LottoWinningStatisticsGenerator.giveOut(14000, lottos, winningLotto);
+                LottoWinningStatisticsGenerator.giveOut(14000, lottos, winningLottoNumbers);
 
         assertThat(lottoWinningStatistics)
                 .isEqualTo(new LottoWinningStatistics(Map.of(LottoWinningType.FOURTH, 1), 0.35));
