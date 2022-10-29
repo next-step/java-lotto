@@ -11,7 +11,8 @@ public enum ExceptionMessage {
     ERROR_NOT_ENOUGH_MONEY("로또를 구매할 수 없습니다."),
     ERROR_INVALID_BONUS_NUMBER("로또 당첨 번호 회의 번호를 입력해주세요."),
     ERROR_ZERO_OR_NEGATIVE_VALUE("0 이하의 숫자는 허용되지 않습니다."),
-    ERROR_MISMATCH_QUANTITY("입력한 구매 수량과 로또 번호 수가 일치하지 않습니다.");
+    ERROR_MISMATCH_QUANTITY("입력한 구매 수량과 로또 번호 수가 일치하지 않습니다."),
+    ERROR_OVER_TAKE_MONEY("현재 가지고 있는 금액보다 더 많은 금액을 가져갈 수 없습니다.");
 
     private final String message;
 
