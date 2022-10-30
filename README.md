@@ -44,6 +44,9 @@
 - [x] 수동 로또 전략 클래스 추가
   - [x] 수동 구매 로또 수와 수동 구매 로또 세트 수를 비교하는 검증 메소드 추가
 - [x] Money.take 메소드 추가
+- [x] LottoStorage 수정
+  - [x] 기본 생성자 추가
+  - [x] add 메소드 추가
 - [ ] LottoStore 수정
   - [ ] buyLotto 메소드 파라미터로 LottoStorage를 받도록 수정
   - [ ] buyLotto 메소드 반환 타입을 void로 수정

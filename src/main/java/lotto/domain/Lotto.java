@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
@@ -67,6 +68,24 @@ public class Lotto {
 
     public boolean contains(final LottoNumber lottoNumber) {
         return this.numbers.contains(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Lotto)) {
+            return false;
+        }
+
+        return this.numbers.equals(((Lotto) o).numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.numbers);
     }
 
     @Override

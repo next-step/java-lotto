@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.exception.ExceptionMessage.ERROR_EMPTY_LOTTO;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -14,6 +15,10 @@ public class LottoStorage {
 
     private final List<Lotto> lottos;
     private final Map<WinningInformation, Long> result = new HashMap<>();
+
+    public LottoStorage() {
+        this.lottos = new ArrayList<>();
+    }
 
     public LottoStorage(final List<Lotto> lottos) {
         validateLottos(lottos);
@@ -36,6 +41,11 @@ public class LottoStorage {
             .forEach(wi -> {
                 result.merge(wi, 1L, Long::sum);
             });
+    }
+
+    public void add(final List<Lotto> lottos) {
+        validateLottos(lottos);
+        this.lottos.addAll(lottos);
     }
 
     public List<Lotto> getLottos() {
