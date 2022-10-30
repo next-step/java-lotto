@@ -34,8 +34,7 @@ class LottoTicketTest {
 
         LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
 
-        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        assertThat(lottoTicket.rank(winningNumbers)).isEqualTo(Rank.FIRST);
+        assertThat(lottoTicket.rank(LottoTicket.from(numbersGenerator))).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -44,8 +43,8 @@ class LottoTicketTest {
 
         LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
 
-        Set<Integer> winningNumbers = Set.of(1);
-        assertThatThrownBy(() -> lottoTicket.rank(winningNumbers))
+        NumbersGenerator winningNumbers = new NumbersGenerator.Fake(Set.of(1));
+        assertThatThrownBy(() -> lottoTicket.rank(LottoTicket.from(winningNumbers)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개이어야 합니다.");
     }
