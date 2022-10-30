@@ -1,4 +1,4 @@
-import domain.TicketCountService;
+import domain.ticket.TicketCountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

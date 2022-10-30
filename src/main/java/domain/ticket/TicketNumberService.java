@@ -1,8 +1,8 @@
 package domain.ticket;
 
 import util.RandomNumberGenerator;
-import lottery.LotteryTicket;
-import lottery.WinnerLotteryTicket;
+import dto.lottery.LotteryTicket;
+import dto.lottery.WinnerLotteryTicket;
 
 import java.util.ArrayList;
 import java.util.List;

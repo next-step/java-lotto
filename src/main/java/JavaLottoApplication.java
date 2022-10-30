@@ -1,5 +1,5 @@
 import ui.AutoResultView;
-import ui.ResultView;
+import ui.common.ResultView;
 
 public class JavaLottoApplication {
     public static void main(String... args) {

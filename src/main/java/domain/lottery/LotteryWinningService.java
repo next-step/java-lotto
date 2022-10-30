@@ -4,9 +4,9 @@ import constant.Prize;
 import constant.Rank;
 import domain.ticket.TicketNumberService;
 import dto.Result;
-import lottery.LotteryTicket;
-import lottery.LotteryTickets;
-import lottery.WinnerLotteryTicket;
+import dto.lottery.LotteryTicket;
+import dto.lottery.LotteryTickets;
+import dto.lottery.WinnerLotteryTicket;
 
 import java.util.List;
 

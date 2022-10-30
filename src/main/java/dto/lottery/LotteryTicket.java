@@ -1,4 +1,4 @@
-package lottery;
+package dto.lottery;
 
 import java.util.List;
 
