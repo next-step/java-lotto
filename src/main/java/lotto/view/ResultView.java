@@ -1,10 +1,9 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoWinningStatistics;
 import lotto.domain.LottoWinningType;
+import lotto.domain.Lottos;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -12,9 +11,10 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoAmountAndNumbers(final List<Lotto> lottos) {
+    public static void printLottoAmountAndNumbers(final Lottos lottos) {
         System.out.printf("%d개를 구매했습니다.%n", lottos.size());
-        lottos.forEach(System.out::println);
+        lottos.getLottos()
+              .forEach(System.out::println);
         System.out.println();
     }
 

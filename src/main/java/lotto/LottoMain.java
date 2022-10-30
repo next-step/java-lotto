@@ -1,28 +1,25 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoWinningStatistics;
+import lotto.domain.Lottos;
 import lotto.factory.LottoFactory;
 import lotto.strategy.LottoNumbersRandomStrategy;
 import lotto.strategy.LottoNumbersStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoMain {
-
-    private static final int LOTTO_AMOUNT = 1000;
 
     public static void main(String[] args) {
         LottoNumbersStrategy strategy = new LottoNumbersRandomStrategy();
 
         int lottoPurchaseAmount = InputView.inputLottoPurchaseAmount();
-        List<Lotto> lottos = IntStream.rangeClosed(1, lottoPurchaseAmount / LOTTO_AMOUNT)
-                                      .mapToObj(order -> LottoFactory.make(strategy))
-                                      .collect(Collectors.toList());
+        Lottos lottos = LottoFactory.createLottos(strategy, lottoPurchaseAmount);
 
         ResultView.printLottoAmountAndNumbers(lottos);
 
@@ -34,8 +31,8 @@ public class LottoMain {
                                                                   .collect(Collectors.toList()));
         LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputBonusLottoNumber());
 
-        LottoWinningStatistics lottoWinningStatistics = LottoWinningStatisticsGenerator.giveOut(
-                lottoPurchaseAmount, lottos, winningLottoNumbers, bonusLottoNumber);
+        LottoWinningStatistics lottoWinningStatistics = lottos.giveOutWinningStatistics(
+                lottoPurchaseAmount, winningLottoNumbers, bonusLottoNumber);
         ResultView.printLottoWinningStatistics(lottoWinningStatistics);
     }
 }
