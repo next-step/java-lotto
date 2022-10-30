@@ -32,10 +32,23 @@ public class Lotto {
         }
     }
 
-    public int matches(Lotto winNumbers) {
+    public Prize matches(Lotto winNumbers, int bonusNumber) {
+        int matchNumber = matchNumberCount(winNumbers);
+        Prize prize = Prize.toPrize(matchNumber);
+        if (prize == Prize.FIVE) {
+            prize = hasNumber(bonusNumber) ? Prize.FIVE_BONUS : Prize.FIVE;
+        }
+        return prize;
+    }
+
+    private int matchNumberCount(Lotto winNumbers) {
         return (int) numbers.stream()
                 .filter(winNumbers.numbers::contains)
                 .count();
+    }
+
+    public boolean hasNumber(int number) {
+        return numbers.contains(number);
     }
 
     public List<Integer> getNumbers() {

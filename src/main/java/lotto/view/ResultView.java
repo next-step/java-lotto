@@ -16,16 +16,17 @@ public class ResultView {
         }
     }
 
-    public static void printResult(Map<Integer, Integer> result) {
+    public static void printResult(Map<Prize, Integer> result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (%d) - %d개\n", Prize.THREE.getValue(), result.getOrDefault(3, 0));
-        System.out.printf("4개 일치 (%d) - %d개\n", Prize.FOUR.getValue(), result.getOrDefault(4, 0));
-        System.out.printf("5개 일치 (%d) - %d개\n", Prize.FIVE.getValue(), result.getOrDefault(5, 0));
-        System.out.printf("6개 일치 (%d) - %d개\n", Prize.SIX.getValue(), result.getOrDefault(6, 0));
+        System.out.printf("3개 일치 (%d) - %d개\n", Prize.THREE.getValue(), result.getOrDefault(Prize.THREE, 0));
+        System.out.printf("4개 일치 (%d) - %d개\n", Prize.FOUR.getValue(), result.getOrDefault(Prize.FOUR, 0));
+        System.out.printf("5개 일치 (%d) - %d개\n", Prize.FIVE.getValue(), result.getOrDefault(Prize.FIVE, 0));
+        System.out.printf("5개 일치, 보너스 볼 일치 (%d) - %d개\n", Prize.FIVE_BONUS.getValue(), result.getOrDefault(Prize.FIVE_BONUS, 0));
+        System.out.printf("6개 일치 (%d) - %d개\n", Prize.SIX.getValue(), result.getOrDefault(Prize.SIX, 0));
     }
 
-    public static void printProfit(int price, Map<Integer, Integer> result) {
+    public static void printProfit(int price, Map<Prize, Integer> result) {
         float profit = new LottoProfitCalculator(price, result).calculate();
 
         System.out.printf("총 수익률은 %.2f입니다.", profit);

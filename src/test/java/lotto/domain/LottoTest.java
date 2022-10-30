@@ -18,32 +18,48 @@ public class LottoTest {
     @DisplayName("로또 번호 모두 일치")
     void matches_all() {
         Lotto lotto = new Lotto(List.of(1, 10, 13, 16, 18, 20));
-        int result = lotto.matches(new Lotto(List.of(1, 10, 13, 16, 18, 20)));
-        assertThat(result).isEqualTo(6);
+        Prize result = lotto.matches(new Lotto(List.of(1, 10, 13, 16, 18, 20)), 45);
+        assertThat(result).isEqualTo(Prize.SIX);
+    }
+
+    @Test
+    @DisplayName("로또 번호 5개 일치, 보너스 일치")
+    void matches_5_bonus() {
+        Lotto lotto = new Lotto(List.of(1, 10, 13, 15, 18, 45));
+        Prize result = lotto.matches(new Lotto(List.of(1, 10, 13, 15, 18, 20)), 45);
+        assertThat(result).isEqualTo(Prize.FIVE_BONUS);
     }
 
     @Test
     @DisplayName("로또 번호 5개 일치")
     void matches_5() {
         Lotto lotto = new Lotto(List.of(1, 10, 13, 16, 18, 20));
-        int result = lotto.matches(new Lotto(List.of(1, 10, 13, 15, 18, 20)));
-        assertThat(result).isEqualTo(5);
+        Prize result = lotto.matches(new Lotto(List.of(1, 10, 13, 15, 18, 20)), 45);
+        assertThat(result).isEqualTo(Prize.FIVE);
     }
 
     @Test
     @DisplayName("로또 번호 4개 일치")
     void matches_4() {
         Lotto lotto = new Lotto(List.of(1, 10, 13, 16, 18, 20));
-        int result = lotto.matches(new Lotto(List.of(1, 10, 11, 15, 18, 20)));
-        assertThat(result).isEqualTo(4);
+        Prize result = lotto.matches(new Lotto(List.of(1, 10, 11, 15, 18, 20)), 45);
+        assertThat(result).isEqualTo(Prize.FOUR);
     }
 
     @Test
     @DisplayName("로또 번호 3개 일치")
     void matches_3() {
         Lotto lotto = new Lotto(List.of(1, 10, 13, 16, 18, 20));
-        int result = lotto.matches(new Lotto(List.of(1, 10, 11, 15, 17, 20)));
-        assertThat(result).isEqualTo(3);
+        Prize result = lotto.matches(new Lotto(List.of(1, 10, 11, 15, 17, 20)), 45);
+        assertThat(result).isEqualTo(Prize.THREE);
+    }
+
+    @Test
+    @DisplayName("로또 번호 1개 일치, 상금 없음")
+    void matches_1() {
+        Lotto lotto = new Lotto(List.of(1, 9, 13, 16, 18, 20));
+        Prize result = lotto.matches(new Lotto(List.of(1, 10, 11, 15, 17, 20)), 45);
+        assertThat(result).isEqualTo(Prize.NONE);
     }
 
     @Test
