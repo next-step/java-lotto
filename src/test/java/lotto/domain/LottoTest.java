@@ -34,6 +34,7 @@ public class LottoTest {
     @Test
     @DisplayName("번호 6개가 아닌 다른 개수로 로또 티켓을 생성하려는 경우")
     void notSixNumbers() {
+        numberString = "1, 2, 3, 4, 5, 6, 7";
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numberString));
     }

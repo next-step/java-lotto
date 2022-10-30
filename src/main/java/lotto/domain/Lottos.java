@@ -21,12 +21,17 @@ public class Lottos {
 
     public void calculateLottoResult(Lotto winningNumbers, LottoNumber bonusBall, PaidAmount paidAmount) {
         for (Lotto lotto : this.lottos) {
-            int matchingCount = lotto.match(winningNumbers);
-            if (matchingCount >= MINIMUM_RANK) {
-                lottoResult.addWinningResult(getMatchingRank(lotto, matchingCount, bonusBall));
-            }
+            checkMinimumMatching(lotto, winningNumbers, bonusBall);
         }
         lottoResult.calculatePrizeRate(paidAmount);
+    }
+
+    private void checkMinimumMatching(Lotto lotto, Lotto winningNumbers, LottoNumber bonusBall) {
+        int matchingCount = lotto.match(winningNumbers);
+
+        if (matchingCount >= MINIMUM_RANK) {
+            lottoResult.addWinningResult(getMatchingRank(lotto, matchingCount, bonusBall));
+        }
     }
 
     private Rank getMatchingRank(Lotto lotto, int matchingCount, LottoNumber bonusBall) {

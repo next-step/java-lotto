@@ -22,20 +22,16 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber of(String number) {
-        LottoNumber lottoNumber = lottoRange.get(Integer.parseInt(number));
-        if (Objects.isNull(lottoNumber)) {
-            throw new IllegalArgumentException("로또 번호는 1과 45 사이의 값만 가능합니다.");
-        }
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoRange.get(number);
+        verifyNumberWithinRange(lottoNumber);
         return lottoNumber;
     }
 
-    public static LottoNumber of(int number) {
-        LottoNumber lottoNumber = lottoRange.get(number);
+    private static void verifyNumberWithinRange(LottoNumber lottoNumber) {
         if (Objects.isNull(lottoNumber)) {
             throw new IllegalArgumentException("로또 번호는 1과 45 사이의 값만 가능합니다.");
         }
-        return lottoNumber;
     }
 
     public String getNumberByString() {

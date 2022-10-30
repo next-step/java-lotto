@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.LottoNumberGenerator;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,7 +32,7 @@ public class Lotto {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (String value : splitNumbers) {
-            lottoNumbers.add(LottoNumber.of(value));
+            lottoNumbers.add(LottoNumber.of(Integer.parseInt(value)));
         }
         return lottoNumbers;
     }
