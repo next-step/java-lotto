@@ -14,8 +14,8 @@ public class Lottos {
 
 	public int results(Lotto lotto, Lotto winningNumbers, int bonus) {
 		int count = winningNumbers.count(lotto);
-		if (count == 4) {
-			return lotto.checkBonus(bonus);
+		if (count == 5) {
+			return lotto.checkBonus(count, bonus);
 		}
 		return count;
 	}
