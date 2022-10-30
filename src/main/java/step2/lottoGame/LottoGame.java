@@ -1,12 +1,12 @@
 package step2.lottoGame;
 
-import step2.lottoGame.dto.RankValues;
 import step2.io.ConsoleInputView;
 import step2.io.ConsoleOutputView;
 import step2.lotto.*;
+import step2.lottoGame.dto.RankValues;
+import step2.randomNumbers.InfusedNumbersGenerator;
 
 import java.io.IOException;
-import java.util.Set;
 
 public class LottoGame {
 
@@ -38,20 +38,21 @@ public class LottoGame {
         lottoTickets.printNumbers(outputDevice);
     }
 
-
     public void winningStatistics(LottoTickets lottoTickets) throws IOException {
-        Set<Integer> winningNumbers = consoleInputView.winningNumbers();
-        printMatchIndicator(lottoTickets, winningNumbers);
-        printYield(lottoTickets, winningNumbers);
+        InfusedNumbersGenerator infusedNumbersGenerator = new InfusedNumbersGenerator(consoleInputView.winningNumbers());
+        LottoTicket winningLottoTicket = LottoTicket.from(infusedNumbersGenerator);
+
+        printMatchIndicator(lottoTickets, winningLottoTicket);
+        printYield(lottoTickets, winningLottoTicket);
     }
 
-    private void printMatchIndicator(LottoTickets lottoTickets, Set<Integer> winningNumbers) {
-        MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(winningNumbers);
+    private void printMatchIndicator(LottoTickets lottoTickets, LottoTicket winningLottoTicket) {
+        MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(winningLottoTicket);
         consoleOutputView.printMatchIndicator(new RankValues(matchIndicatorCalculator.matchIndicators()));
     }
 
-    private void printYield(LottoTickets lottoTickets, Set<Integer> winningNumbers) {
-        YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(winningNumbers);
+    private void printYield(LottoTickets lottoTickets, LottoTicket winningLottoTicket) {
+        YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(winningLottoTicket);
         consoleOutputView.printYield(yieldCalculator.yield());
     }
 

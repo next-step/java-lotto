@@ -31,7 +31,7 @@ class LottoTicketsTest {
 
         LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
 
-        assertThat(lottoTickets.yieldCalculator(lottoNumbers)).isEqualTo(new YieldCalculator(lottoPrice, List.of(Rank.FIRST)));
+        assertThat(lottoTickets.yieldCalculator(LottoTicket.from(numbersGenerator))).isEqualTo(new YieldCalculator(lottoPrice, List.of(Rank.FIRST)));
     }
 
     @Test
@@ -44,7 +44,7 @@ class LottoTicketsTest {
 
         LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
 
-        assertThat(lottoTickets.matchIndicatorCalculator(lottoNumbers)).isEqualTo(new MatchIndicatorCalculator(List.of(Rank.FIRST)));
+        assertThat(lottoTickets.matchIndicatorCalculator(LottoTicket.from(numbersGenerator))).isEqualTo(new MatchIndicatorCalculator(List.of(Rank.FIRST)));
     }
 
 }

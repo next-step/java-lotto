@@ -35,18 +35,18 @@ public class LottoTickets {
         return Objects.hash(lottoTickets);
     }
 
-    public YieldCalculator yieldCalculator(Set<Integer> winningNumbers) {
-        return new YieldCalculator(lottoPrice, ranks(winningNumbers));
+    public YieldCalculator yieldCalculator(LottoTicket winningLottoTicket) {
+        return new YieldCalculator(lottoPrice, ranks(winningLottoTicket));
     }
 
-    private List<Rank> ranks(Set<Integer> winningNumbers) {
+    private List<Rank> ranks(LottoTicket winningLottoTicket) {
         return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.rank(winningNumbers))
+                .map(lottoTicket -> lottoTicket.rank(winningLottoTicket))
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public MatchIndicatorCalculator matchIndicatorCalculator(Set<Integer> winningNumbers) {
-        return new MatchIndicatorCalculator(ranks(winningNumbers));
+    public MatchIndicatorCalculator matchIndicatorCalculator(LottoTicket winningLottoTicket) {
+        return new MatchIndicatorCalculator(ranks(winningLottoTicket));
     }
 }
 

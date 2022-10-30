@@ -34,11 +34,9 @@ public class LottoTicket {
         outputDevice.printNumbers(copiedNumbers);
     }
 
-    public Rank rank(Set<Integer> winningNumbers) {
-        verifyNumbersSize(winningNumbers);
-
+    public Rank rank(LottoTicket winningLottoTicket) {
         long numberOfMatchingNumbers = numbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLottoTicket.numbers::contains)
                 .count();
 
         return Rank.rank(numberOfMatchingNumbers);
