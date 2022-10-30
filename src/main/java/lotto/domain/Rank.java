@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6,2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     NO_MATCH(0, 0);
 
     private final int matchCount;
@@ -17,9 +18,10 @@ public enum Rank {
         this.money = money;
     }
 
-    public static Rank of(int matchCount) {
+    public static Rank of(int matchCount, boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameMatchCount(matchCount))
+                .filter(rank -> !rank.equals(SECOND) || hasBonusNumber) // 2등 확인 로직
                 .findFirst()
                 .orElse(NO_MATCH);
 

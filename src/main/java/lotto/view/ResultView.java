@@ -28,7 +28,8 @@ public class ResultView {
     }
 
     private static void printRank(Rank rank, Map<Rank, Integer> rankMap) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n", rank.getMatchCount(), rank.getMoney(), rankMap.get(rank));
+
+        System.out.printf("%d개 일치%s(%d원)- %d개%n", rank.getMatchCount(), printBonusBallMatch(rank), rank.getMoney(), rankMap.get(rank));
     }
 
     public static void printIncomePercentage(double incomePercentage) {
@@ -38,4 +39,11 @@ public class ResultView {
         }
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", incomePercentage, result);
     }
+    private static String printBonusBallMatch(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
+    }
+
 }
