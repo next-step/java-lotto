@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class LottoFactory {
-	private final int LOTTO_START = 1;
-	private final int LOTTO_END = 45;
-	private final int LOTTO_PICK_START = 0;
-	private final int LOTTO_PICK_END = 5;
+	private static final int LOTTO_START = 1;
+	private static final int LOTTO_END = 45;
+	private static final int LOTTO_PICK_START = 0;
+	private static final int LOTTO_PICK_END = 5;
 	private List<Integer> balls = new ArrayList<>();
 
 	public LottoFactory() {
