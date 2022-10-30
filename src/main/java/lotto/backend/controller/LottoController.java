@@ -1,11 +1,14 @@
 package lotto.backend.controller;
 
 import lotto.backend.domain.Lotto;
+import lotto.backend.domain.LottoResult;
 import lotto.backend.domain.LottoTickets;
 import lotto.backend.dto.LottoResultDto;
 import lotto.backend.dto.LottoTicketsDto;
 import lotto.frontend.InputView;
 import lotto.frontend.ResultView;
+
+import java.util.List;
 
 public class LottoController {
 
@@ -18,7 +21,10 @@ public class LottoController {
         LottoTickets lottoTickets = lotto.buy(INPUT_VIEW.askEnterMoney());
         RESULT_VIEW.printLottoNumber(LottoTicketsDto.of(lottoTickets));
 
-        LottoResultDto lottoResultDto = lotto.match(INPUT_VIEW.askEnterWinningNumbers());
-        RESULT_VIEW.printLottoResult(lottoResultDto);
+        List<Integer> winningNumbers = INPUT_VIEW.askEnterWinningNumbers();
+        int bonus = INPUT_VIEW.askEnterBonusNumber();
+
+        LottoResult lottoResult = lotto.match(winningNumbers, bonus);
+        RESULT_VIEW.printLottoResult(LottoResultDto.of(lottoResult));
     }
 }
