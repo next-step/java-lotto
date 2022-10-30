@@ -56,4 +56,7 @@ public class LotteryTicket {
                 .count();
     }
 
+    public boolean contain(LotteryNumber lotteryNumber) {
+        return lotteryNumbers.contains(lotteryNumber);
+    }
 }

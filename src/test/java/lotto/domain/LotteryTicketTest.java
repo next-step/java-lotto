@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.exception.ErrorCode;
 import lotto.exception.LotteryGameException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -42,5 +44,11 @@ public class LotteryTicketTest {
     void find_same_number_count() {
         assertThat(LotteryTicket.of(1, 2, 3, 4, 5, 6).findRank(LotteryTicket.of(1, 2, 3, 4, 5, 6)))
                 .isEqualTo(Rank.FIRST);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,true", "2,true", "3,true", "4,true", "5,true", "6,true", "7,false"})
+    void check_contain_number(int number, boolean result) {
+        assertThat(LotteryTicket.of(1, 2, 3, 4, 5, 6).contain(new LotteryNumber(number))).isEqualTo(result);
     }
 }
