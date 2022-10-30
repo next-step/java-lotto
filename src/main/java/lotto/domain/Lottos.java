@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static lotto.domain.Lotto.LOTTO_PRICE;
+
 public class Lottos {
     private final List<Lotto> lottos;
 
@@ -53,5 +55,9 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(lottos);
+    }
+
+    public Money totalPrice() {
+        return new Money(lottos.size() * LOTTO_PRICE);
     }
 }
