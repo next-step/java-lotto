@@ -12,8 +12,15 @@ public class LottoTicketsFactory {
     private final NumbersGenerator numbersGenerator;
 
     public LottoTicketsFactory(int purchaseAmount, NumbersGenerator numbersGenerator) {
+        verifyPurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
         this.numbersGenerator = numbersGenerator;
+    }
+
+    private void verifyPurchaseAmount(int purchaseAmount) {
+        if (purchaseAmount < LOTTO_PRICE || purchaseAmount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("금액이 천원 단위가 아니거나 천원 미민일 수 없습니다.");
+        }
     }
 
     public LottoTickets lottoTickets() {
