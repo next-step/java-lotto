@@ -7,9 +7,9 @@ class WinnerNumbersTest {
 
     @Test
     void 당첨_번호_갯수는_6개_확인() {
-        Assertions.assertThatThrownBy(() -> new WinnerNumbers(Number.of(1, 2), Number.of(3)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("당첨번호의 갯수는 6개 입니다.");
+        Assertions.assertThatIllegalArgumentException()
+            .isThrownBy(() -> new WinnerNumbers(Number.of(1, 2), Number.of(3)))
+            .withMessage("당첨번호의 갯수는 6개 입니다.");
     }
 
     @Test

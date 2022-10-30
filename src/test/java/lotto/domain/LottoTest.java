@@ -26,9 +26,9 @@ public class LottoTest {
 
     @Test
     void 로또의_숫자_갯수는_6개_이다() {
-        Assertions.assertThatThrownBy(() -> new Lotto(Number.of(1, 2)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또의 숫자 갯수는 6개 입니다.");
+        Assertions.assertThatIllegalArgumentException()
+            .isThrownBy(() -> new Lotto(Number.of(1, 2)))
+            .withMessage("로또의 숫자 갯수는 6개 입니다.");
     }
 
     @Test

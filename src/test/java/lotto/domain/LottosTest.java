@@ -91,7 +91,7 @@ public class LottosTest {
     }
 
     @Test
-    void 로또구입_총액_계산(){
+    void 로또구입_총액_계산() {
         Lottos lottos = new Lottos(
             List.of(
                 new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
