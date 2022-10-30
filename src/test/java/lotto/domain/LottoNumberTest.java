@@ -11,15 +11,15 @@ public class LottoNumberTest {
     @Test
     @DisplayName("로또 번호 1개 생성")
     void create() {
-        LottoNumber number = LottoNumber.of("3");
-        assertThat(number).isEqualTo(LottoNumber.of("3"));
+        LottoNumber number = LottoNumber.of(Integer.parseInt("3"));
+        assertThat(number).isEqualTo(LottoNumber.of(Integer.parseInt("3")));
     }
 
     @Test
     @DisplayName("로또 번호가 1에서 45 사이의 값이 아닌 경우")
     void numberOutOfRange() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumber.of("46"));
+                .isThrownBy(() -> LottoNumber.of(Integer.parseInt("46")));
     }
 
     @Test
