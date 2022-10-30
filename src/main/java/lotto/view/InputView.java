@@ -31,17 +31,20 @@ public class InputView {
         return new ArrayList<>(result);
     }
 
-    public static int inputBonusNumber() {
+    public static int inputBonusNumber(List<Integer> winNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         int input;
         try {
             input = scanner.nextInt();
         } catch (InputMismatchException e) {
-            throw new IllegalArgumentException("1개의 당첨 번호가 입력되어야 합니다.");
+            throw new IllegalArgumentException("1개의 보너스 번호가 입력되어야 합니다.");
         }
 
         if (Lotto.MIN > input || input > Lotto.MAX) {
             throw new IllegalArgumentException("입력 범위를 벗어났습니다.");
+        }
+        if (winNumbers.contains(input)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 달라야 합니다.");
         }
         return input;
     }

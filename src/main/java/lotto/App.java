@@ -19,7 +19,7 @@ public class App {
         ResultView.printLottoList(game.getLottos());
 
         List<Integer> winNumbers = InputView.inputWinNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        int bonusNumber = InputView.inputBonusNumber(winNumbers);
         Map<Prize, Integer> result = game.play(new Lotto(winNumbers), bonusNumber);
         ResultView.printResult(result);
         ResultView.printProfit(price, result);
