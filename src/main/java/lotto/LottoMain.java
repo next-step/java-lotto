@@ -1,12 +1,9 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoWinningStatistics;
-import lotto.domain.LottoWinningStatisticsGenerator;
+import lotto.domain.*;
 import lotto.factory.LottoFactory;
-import lotto.strategy.LottoNumberRandomStrategy;
-import lotto.strategy.LottoNumberStrategy;
+import lotto.strategy.LottoNumbersRandomStrategy;
+import lotto.strategy.LottoNumbersStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -20,7 +17,7 @@ public class LottoMain {
     private static final int LOTTO_AMOUNT = 1000;
 
     public static void main(String[] args) {
-        LottoNumberStrategy strategy = new LottoNumberRandomStrategy();
+        LottoNumbersStrategy strategy = new LottoNumbersRandomStrategy();
 
         int lottoPurchaseAmount = InputView.inputLottoPurchaseAmount();
         List<Lotto> lottos = IntStream.rangeClosed(1, lottoPurchaseAmount / LOTTO_AMOUNT)
@@ -30,15 +27,15 @@ public class LottoMain {
         ResultView.printLottoAmountAndNumbers(lottos);
 
         String winningLottoNumbersString = InputView.inputWinningLottoNumbersString();
-        List<LottoNumber> LottoWinningNumbers = Stream.of(winningLottoNumbersString.split(","))
-                                                      .map(String::trim)
-                                                      .map(Integer::parseInt)
-                                                      .map(LottoNumber::new)
-                                                      .collect(Collectors.toList());
-        Lotto winningLotto = new Lotto(LottoWinningNumbers);
+        LottoNumbers winningLottoNumbers = new LottoNumbers(Stream.of(winningLottoNumbersString.split(","))
+                                                                  .map(String::trim)
+                                                                  .map(Integer::parseInt)
+                                                                  .map(LottoNumber::new)
+                                                                  .collect(Collectors.toList()));
+        LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputBonusLottoNumber());
 
         LottoWinningStatistics lottoWinningStatistics = LottoWinningStatisticsGenerator.giveOut(
-                lottoPurchaseAmount, lottos, winningLotto);
+                lottoPurchaseAmount, lottos, winningLottoNumbers, bonusLottoNumber);
         ResultView.printLottoWinningStatistics(lottoWinningStatistics);
     }
 }

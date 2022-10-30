@@ -9,11 +9,16 @@ public class Lotto {
 
     private static final int LOTTO_NUMBER_AMOUNT = 6;
 
-    private final List<LottoNumber> numbers;
+    private final LottoNumbers numbers;
+
+    public Lotto(final LottoNumbers numbers) {
+        validateOrThrow(numbers.getLottoNumbers());
+        this.numbers = numbers;
+    }
 
     public Lotto(final List<LottoNumber> numbers) {
         validateOrThrow(numbers);
-        this.numbers = numbers;
+        this.numbers = new LottoNumbers(numbers);
     }
 
     private static void validateOrThrow(final List<LottoNumber> numbers) {
@@ -26,18 +31,12 @@ public class Lotto {
         }
     }
 
-    private boolean has(final LottoNumber number) {
-        return this.numbers.contains(number);
+    public boolean has(final LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
-    public int matchNumberCount(final Lotto lotto) {
-        if (Objects.isNull(lotto)) {
-            return 0;
-        }
-
-        return (int) this.numbers.stream()
-                                 .filter(lotto::has)
-                                 .count();
+    public int matchNumberCount(final LottoNumbers winningLottoNumbers) {
+        return this.numbers.countOfMatch(winningLottoNumbers);
     }
 
     @Override
@@ -56,7 +55,8 @@ public class Lotto {
     @Override
     public String toString() {
         return "[" +
-                this.numbers.stream()
+                this.numbers.getLottoNumbers()
+                            .stream()
                             .sorted()
                             .map(LottoNumber::toString)
                             .collect(Collectors.joining(", ")) +

@@ -1,21 +1,14 @@
 package lotto.factory;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.strategy.LottoNumberStrategy;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import lotto.strategy.LottoNumbersStrategy;
 
 public class LottoFactory {
 
-    public static Lotto make(final LottoNumberStrategy lottoNumberStrategy) {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
-        while (lottoNumberSet.size() < 6) {
-            lottoNumberSet.add(lottoNumberStrategy.generate());
-        }
+    private LottoFactory() {
+    }
 
-        return new Lotto(new ArrayList<>(lottoNumberSet));
+    public static Lotto make(final LottoNumbersStrategy lottoNumbersStrategy) {
+        return new Lotto(lottoNumbersStrategy.generate());
     }
 }

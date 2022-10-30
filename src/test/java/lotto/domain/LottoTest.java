@@ -74,10 +74,10 @@ public class LottoTest {
                                       .map(Integer::parseInt)
                                       .map(LottoNumber::new)
                                       .collect(Collectors.toList()));
-        Lotto winningLotto = new Lotto(Arrays.stream(winningNumbersJointComma.split(","))
-                                             .map(Integer::parseInt)
-                                             .map(LottoNumber::new)
-                                             .collect(Collectors.toList()));
-        assertThat(lotto.matchNumberCount(winningLotto)).isEqualTo(Integer.parseInt(matchNumberCount));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.stream(winningNumbersJointComma.split(","))
+                                                                  .map(Integer::parseInt)
+                                                                  .map(LottoNumber::new)
+                                                                  .collect(Collectors.toList()));
+        assertThat(lotto.matchNumberCount(winningLottoNumbers)).isEqualTo(Integer.parseInt(matchNumberCount));
     }
 }

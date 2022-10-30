@@ -9,22 +9,35 @@ import java.util.Map;
 
 public class ResultView {
 
+    private ResultView() {
+    }
+
     public static void printLottoAmountAndNumbers(final List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
         lottos.forEach(System.out::println);
         System.out.println();
     }
 
     public static void printLottoWinningStatistics(final LottoWinningStatistics lottoWinningStatistics) {
-        System.out.println("\n당첨 통계");
+        System.out.println();
+        System.out.println("당첨 통계");
         System.out.println("---------");
 
         Map<LottoWinningType, Integer> lottoWinningTypeCountMap = lottoWinningStatistics.getLottoWinningTypeCountMap();
-        for (LottoWinningType lottoWinningType : LottoWinningType.valuesByMatchNumbersCountAsc()) {
-            System.out.printf("%d 개 일치 (%d 원)-%d 개\n",
-                    lottoWinningType.getMatchNumbersCount(), lottoWinningType.getWinningAmount()
-                    , lottoWinningTypeCountMap.getOrDefault(lottoWinningType, 0));
-        }
+        LottoWinningType.valuesByMatchNumbersCountAsc()
+                        .stream()
+                        .filter(lottoWinningType -> !LottoWinningType.NONE.equals(lottoWinningType))
+                        .forEach(lottoWinningType -> {
+                            System.out.printf("%d개 일치", lottoWinningType.getMatchNumbersCount());
+
+                            if (lottoWinningType.isMatchBonusNumber()) {
+                                System.out.print(", 보너스 볼 일치");
+                            }
+
+                            System.out.printf(" (%d 원) - %d 개%n",
+                                    lottoWinningType.getWinningAmount(),
+                                    lottoWinningTypeCountMap.getOrDefault(lottoWinningType, 0));
+                        });
 
         System.out.printf("총 수익률은 %.2f 입니다.", lottoWinningStatistics.getYield());
 
