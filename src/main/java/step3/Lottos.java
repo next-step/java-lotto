@@ -13,24 +13,9 @@ public class Lottos {
 	}
 
 	public int results(Lotto lotto, Lotto winningNumbers, int bonus) {
-		int count = 0;
-		count = winningNumbers.count(lotto);
+		int count = winningNumbers.count(lotto);
 		if (count == 4) {
-			return checkBonus(lotto, count, bonus);
-		}
-		return count;
-	}
-
-	private int checkBonus(Lotto lotto, int count, int bonus) {
-		if (lotto.isExist(bonus)) {
-			return count + 3;
-		}
-		return count;
-	}
-
-	private int checkContains(Lotto guestLotto, int count, Iterator<Integer> itr) {
-		if (guestLotto.isExist(itr.next())) {
-			count++;
+			return lotto.checkBonus(bonus);
 		}
 		return count;
 	}
