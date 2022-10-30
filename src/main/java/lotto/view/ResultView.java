@@ -17,8 +17,16 @@ public class ResultView {
     public void printLottoResult(Lottos lottos) {
         LottoResult result = lottos.getLottoResult();
         for (Rank rank : Rank.values()) {
-            System.out.println(rank.getRank() + "개 일치 (" + rank.getPrize() + ") - " + result.getResultByRank(rank) + "개");
+            printMatch(result, rank);
         }
         System.out.println("총 수익률은 " + result.getPrizeRate() + "입니다.");
+    }
+
+    private void printMatch(LottoResult result, Rank rank) {
+        if (rank.getMatch() == 7) {
+            System.out.println(rank.getRank() + "개 일치, 보너스 볼 일치 (" + rank.getPrize() + ") - " + result.getResultByRank(rank) + "개");
+            return;
+        }
+        System.out.println(rank.getRank() + "개 일치 (" + rank.getPrize() + ") - " + result.getResultByRank(rank) + "개");
     }
 }
