@@ -4,12 +4,12 @@ import java.util.Collection;
 
 public interface OutputDevice {
 
-    void printNumbers(Collection collection);
+    <E> void printNumbers(Collection<E> collection);
 
     class Fake implements OutputDevice {
 
         @Override
-        public void printNumbers(Collection collection) {
+        public <E> void printNumbers(Collection<E> collection) {
             System.out.println("출력기 API 호출 성공");
         }
 
