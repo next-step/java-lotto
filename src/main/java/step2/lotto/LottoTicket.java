@@ -13,19 +13,26 @@ public class LottoTicket {
     private final Set<Integer> numbers;
 
     private LottoTicket(Set<Integer> numbers) {
-        verifyNumbersSize(numbers);
-
         this.numbers = numbers;
     }
 
-    private static void verifyNumbersSize(Set<Integer> numbers) {
+    public static LottoTicket from(NumbersGenerator numbersGenerator) {
+        Set<Integer> numbers = numbersGenerator.numbers();
+        verifyNumbers(numbers);
+
+        return new LottoTicket(numbers);
+    }
+
+    private static void verifyNumbers(Set<Integer> numbers) {
         if (numbers.size() != NUMBER_OF_LOTTO) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
-    }
 
-    public static LottoTicket from(NumbersGenerator numbersGenerator) {
-        return new LottoTicket(numbersGenerator.numbers());
+        boolean isValidNumber = numbers.stream().anyMatch(number -> number < 1 ||  45 < number);
+        if (isValidNumber) {
+            throw new IllegalArgumentException("로또 번호는 1 이상 45이하 이어야 합니다.");
+        }
+
     }
 
     public void printNumbers(OutputDevice outputDevice) {
