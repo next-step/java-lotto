@@ -8,7 +8,8 @@ import java.util.TreeMap;
 public class Result {
 
 	private final Lottos lottos;
-	private final Map<Operator, Integer> map = new TreeMap<>(){{
+	private final Map<Operator, Integer> map = new TreeMap<>() {{
+		put(Operator.NOT_RANK, 0);
 		put(Operator.THREE, 0);
 		put(Operator.FOUR, 0);
 		put(Operator.FIVE, 0);
@@ -32,14 +33,15 @@ public class Result {
 	}
 
 	private void result(Lotto lotto, Lotto winningNumbers, int bonus) {
-		Operator rank = Operator.find(checkRank(lotto, winningNumbers, bonus));
+		int count = checkRank(lotto, winningNumbers);
+		Operator rank = Operator.find(count, lotto.checkBonus(count, bonus));
 		if (rank == null) {
 			return;
 		}
 		map.put(rank, map.get(rank) + 1);
 	}
 
-	private int checkRank(Lotto lotto, Lotto winningNumbers, int bonus) {
-		return this.lottos.results(lotto, winningNumbers, bonus);
+	private int checkRank(Lotto lotto, Lotto winningNumbers) {
+		return this.lottos.results(lotto, winningNumbers);
 	}
 }

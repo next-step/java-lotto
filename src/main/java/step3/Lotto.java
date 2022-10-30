@@ -33,11 +33,8 @@ public class Lotto {
 		return change;
 	}
 
-	public int checkBonus(int count, int bonus) {
-		if (lotto.contains(bonus)) {
-			return count + 2;
-		}
-		return count;
+	public boolean checkBonus(int count, int bonus) {
+		return lotto.contains(bonus);
 	}
 
 	public int count(Lotto guestLotto) {

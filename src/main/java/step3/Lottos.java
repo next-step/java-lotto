@@ -12,12 +12,8 @@ public class Lottos {
 		this.lottos = lotto;
 	}
 
-	public int results(Lotto lotto, Lotto winningNumbers, int bonus) {
-		int count = winningNumbers.count(lotto);
-		if (count == 5) {
-			return lotto.checkBonus(count, bonus);
-		}
-		return count;
+	public int results(Lotto lotto, Lotto winningNumbers) {
+		return winningNumbers.count(lotto);
 	}
 
 	public List<Lotto> getLottos() {

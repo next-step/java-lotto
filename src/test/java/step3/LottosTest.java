@@ -22,8 +22,8 @@ public class LottosTest {
 
 		Lottos lottos = new Lottos(Arrays.asList(ex1, ex2, exBonus));
 
-		assertThat(lottos.results(ex1, winningLotto, bonus)).isEqualTo(6);
-		assertThat(lottos.results(ex2, winningLotto, bonus)).isEqualTo(5);
-		assertThat(lottos.results(exBonus, winningLotto, bonus)).isEqualTo(7);
+		assertThat(lottos.results(ex1, winningLotto)).isEqualTo(6);
+		assertThat(lottos.results(ex2, winningLotto)).isEqualTo(5);
+		assertThat(lottos.results(exBonus, winningLotto)).isEqualTo(5);
 	}
 }
