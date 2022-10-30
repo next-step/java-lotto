@@ -1,7 +1,7 @@
 package step2.view;
 
 import step2.domain.PurchasePrice;
-import step2.util.Utils;
+import step2.domain.WinningNumbers;
 
 import java.util.Scanner;
 
@@ -18,9 +18,9 @@ public class InputView {
         return new PurchasePrice(SCANNER.nextLine());
     }
 
-    public static void winningNumbers() {
+    public static WinningNumbers winningNumbers() {
         System.out.println(WINNING_NUMBERS_MESSAGE);
-        Utils.winningNumbers(SCANNER.nextLine());
+        return new WinningNumbers(SCANNER.nextLine());
     }
 
 }

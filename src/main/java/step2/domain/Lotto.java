@@ -31,6 +31,13 @@ public class Lotto {
         return numbers;
     }
 
+    public int countMatchNumber(WinningNumbers winningNumbers) {
+        return (int) winningNumbers.getWinningNumbers()
+                .stream()
+                .filter(numbers::contains)
+                .count();
+    }
+
     public List<Integer> getLotto() {
         return numbers;
     }

@@ -29,6 +29,13 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public List<LottoRank> lottoRanks(WinningNumbers winningLottoNumbers) {
+        return lottos.stream()
+                .map(lotto -> lotto.countMatchNumber(winningLottoNumbers))
+                .map(LottoRank::valueOf)
+                .collect(Collectors.toList());
+    }
+
     public static int getLottoCount(int purchasePrice) {
         return purchasePrice / LOTTO_PRICE;
     }
