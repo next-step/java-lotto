@@ -1,7 +1,7 @@
 package lotto.backend.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -15,13 +15,13 @@ public class LottoTicket {
     private final Set<LottoNumber> value;
 
     public LottoTicket(Set<LottoNumber> value) {
-        validate(value);
+        checkSize(value);
         this.value = value;
     }
 
-    public static LottoTicket of(int[] value) {
-        return Arrays.stream(value)
-                .mapToObj(LottoNumber::of)
+    public static LottoTicket of(List<Integer> winningNumbers) {
+        return winningNumbers.stream()
+                .map(LottoNumber::of)
                 .collect(collectingAndThen(toSet(), LottoTicket::new));
     }
 
@@ -37,20 +37,20 @@ public class LottoTicket {
                 .collect(collectingAndThen(toSet(), LottoTicket::new));
     }
 
-    public int countMatch(LottoTicket other) {
-        return (int) value.stream()
-                .filter(other.value::contains)
-                .count();
-    }
-
-    private void validate(Set<LottoNumber> value) {
-        checkSize(value);
-    }
-
     private void checkSize(Set<LottoNumber> value) {
         if (LOTTO_NUMBER_SIZE != value.size()) {
             throw new IllegalArgumentException("로또 번호의 숫자는 6개 입니다.");
         }
+    }
+
+    public int countOfMatch(LottoTicket winningLotto) {
+        return (int) value.stream()
+                .filter(i -> winningLotto.value.contains(i))
+                .count();
+    }
+
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return value.contains(bonusNumber);
     }
 
     public Set<LottoNumber> getValue() {
