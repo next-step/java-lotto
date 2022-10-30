@@ -46,11 +46,7 @@ public class LotteryTicket {
         return lotteryNumbers;
     }
 
-    public Rank findRank(LotteryTicket compare) {
-        return Rank.match(countSameNumbers(compare));
-    }
-
-    private int countSameNumbers(LotteryTicket compare) {
+    public int countSameNumbers(LotteryTicket compare) {
         return (int) compare.lotteryNumbers.stream()
                 .filter(lotteryNumbers::contains)
                 .count();

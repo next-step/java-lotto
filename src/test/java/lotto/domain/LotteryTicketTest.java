@@ -42,8 +42,8 @@ public class LotteryTicketTest {
 
     @Test
     void find_same_number_count() {
-        assertThat(LotteryTicket.of(1, 2, 3, 4, 5, 6).findRank(LotteryTicket.of(1, 2, 3, 4, 5, 6)))
-                .isEqualTo(Rank.FIRST);
+        assertThat(LotteryTicket.of(1, 2, 3, 4, 5, 6).countSameNumbers(LotteryTicket.of(1, 2, 3, 4, 5, 6)))
+                .isEqualTo(6);
     }
 
     @ParameterizedTest

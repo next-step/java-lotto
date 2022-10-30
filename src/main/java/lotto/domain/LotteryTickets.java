@@ -19,10 +19,10 @@ public class LotteryTickets {
         return lotteryTickets;
     }
 
-    public Ranks calculateRanks(LotteryTicket winningNumbers) {
+    public Ranks calculateRanks(WinningTicket winningTicket) {
         List<Rank> ranks = new ArrayList<>();
-        for(LotteryTicket ticket : lotteryTickets) {
-            ranks.add(ticket.findRank(winningNumbers));
+        for (LotteryTicket ticket : lotteryTickets) {
+            ranks.add(winningTicket.findRank(ticket));
         }
         return new Ranks(ranks);
     }

@@ -19,7 +19,7 @@ public class LotteryGame {
         buyTickets(price);
         outputView.printBuyingTickets(tickets);
 
-        LotteryTicket winningTicket = LotteryTicket.of(inputView.enterWinningNumbers());
+        WinningTicket winningTicket = new WinningTicket(inputView.enterWinningNumbers(), inputView.enterBonusBoll());
         calculateRank(winningTicket);
         outputView.printResult(result);
     }
@@ -29,7 +29,7 @@ public class LotteryGame {
         tickets = amount.createTickets(new AutoGenerateStrategy());
     }
 
-    private void calculateRank(LotteryTicket winningTicket) {
+    private void calculateRank(WinningTicket winningTicket) {
         Ranks ranks = tickets.calculateRanks(winningTicket);
         Double rateOfRank = ranks.calculateRateOfReturn(lotteryTicketPrice);
         result = new Result(ranks, rateOfRank);
