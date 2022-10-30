@@ -7,7 +7,7 @@ import java.util.Map;
 public class Rank {
     private final Map<Prize, RankCount> rankMap;
 
-    public Rank() {
+    Rank() {
         this.rankMap = new HashMap<>();
         initRankMap(this.rankMap);
     }

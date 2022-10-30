@@ -12,6 +12,14 @@ public class WinningNumber {
     }
 
     public Rank calcLottoRankWithBonus(Lotto lotto) {
-        return lotto.calculateRank(numbers, bonusNumber);
+        Rank rank = new Rank();
+        lotto.calculateRank(this, rank);
+        return rank;
+    }
+
+    void calculateRank(LottoNumber lottoNumber, Rank rank) {
+        int matchingNumberCount = lottoNumber.findMatchingNumberCount(numbers);
+        boolean containBonusNumber = lottoNumber.isContainBonusNumber(bonusNumber);
+        rank.settingRank(matchingNumberCount, containBonusNumber);
     }
 }

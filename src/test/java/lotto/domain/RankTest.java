@@ -6,6 +6,7 @@ import static org.junit.jupiter.params.provider.Arguments.*;
 import java.math.BigDecimal;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,6 +21,7 @@ class RankTest {
         assertThat(rank.findRank(prize)).isOne();
     }
 
+    @DisplayName("구매금액과 당첨금액의 수익금 계산 테스트")
     @ParameterizedTest
     @MethodSource("yieldTestParameters")
     public void yield_test(BigDecimal purchasePrice, Rank rank, double expectYield) {

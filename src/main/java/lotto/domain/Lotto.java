@@ -10,15 +10,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Rank calculateRank(List<Integer> winningNumbers, Integer bonusNumber) {
-        Rank rank = new Rank();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            int matchingNumberCount = lottoNumber.findMatchingNumberCount(winningNumbers);
-            boolean containBonusNumber = lottoNumber.isContainBonusNumber(bonusNumber);
-            rank.settingRank(matchingNumberCount, containBonusNumber);
-        }
-
-        return rank;
+    public void calculateRank(WinningNumber winningNumber, Rank rank) {
+        lottoNumbers.forEach(l -> winningNumber.calculateRank(l, rank));
     }
 
     public int getLottoSize() {
