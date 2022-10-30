@@ -24,6 +24,6 @@ public class WinningTicket {
     }
 
     public Rank findRank(LotteryTicket lotteryTicket) {
-        return Rank.match(winningNumbers.countSameNumbers(lotteryTicket));
+        return Rank.match(winningNumbers.countSameNumbers(lotteryTicket), lotteryTicket.contain(bonusBoll));
     }
 }
