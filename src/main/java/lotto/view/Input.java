@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Money;
 import lotto.domain.Number;
 
 import java.util.*;
@@ -15,11 +16,15 @@ public class Input {
         return SCANNER.nextLine();
     }
 
-    public static int inputPrice() {
-        System.out.println("구입금액을 입력해 주세요.");
-        String input = input();
-        System.out.println();
-        return Integer.parseInt(input);
+    public static Money inputPrice() {
+        try {
+            System.out.println("구입금액을 입력해 주세요.");
+            String input = input();
+            System.out.println();
+            return new Money(Integer.parseInt(input));
+        }catch (NumberFormatException e){
+            return inputPrice();
+        }
     }
 
     public static int inputManuallyPurchaseCount() {

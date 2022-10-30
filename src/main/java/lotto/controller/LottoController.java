@@ -10,10 +10,10 @@ import java.util.Set;
 public class LottoController {
 
     public static void main(String[] args) {
-        int inputPrice = Input.inputPrice();
+        Money inputMoney = Input.inputPrice();
         int manuallyPurchaseCount = Input.inputManuallyPurchaseCount();
 
-        LottoShop lottoShop = new LottoShop(new RandomNumberStrategy(), new Money(inputPrice), manuallyPurchaseCount);
+        LottoShop lottoShop = new LottoShop(new RandomNumberStrategy(), inputMoney, manuallyPurchaseCount);
         Output.printManuallyLottoNumberRequest();
         while(lottoShop.possibleBuyManually()){
             lottoShop.buyManually(Input.inputLottoNumber());
