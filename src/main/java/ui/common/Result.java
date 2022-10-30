@@ -1,8 +1,8 @@
-package ui;
+package ui.common;
 
-import domain.LotteryWinningService;
-import domain.TicketCountService;
-import domain.TicketNumberService;
+import domain.lottery.LotteryWinningService;
+import domain.ticket.TicketCountService;
+import domain.ticket.TicketNumberService;
 
 public interface Result {
     void printAll();

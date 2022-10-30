@@ -1,4 +1,4 @@
-package vo;
+package lottery;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package domain;
+package domain.ticket;
 
 import util.Calculator;
 
