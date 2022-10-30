@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.domain.Number;
 
 import java.util.*;
@@ -35,6 +35,7 @@ public class Input {
     }
 
     public static Set<Number> inputLottoNumber() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = input();
         String[] split = input.split(SEPARATOR);
 
@@ -51,4 +52,12 @@ public class Input {
         return Number.of(input);
     }
 
+    public static Lottos inputManualLotto(int manuallyPurchaseCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manuallyPurchaseCount; i++){
+            manualLottos.add(new Lotto(Input.inputLottoNumber(), LottoType.MANUAL));
+        }
+        System.out.println();
+        return new Lottos(manualLottos);
+    }
 }
