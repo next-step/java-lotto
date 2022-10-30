@@ -6,7 +6,6 @@ import step2.lottoGame.dto.RankValues;
 public class ConsoleOutputView {
 
     public void printNumberOfPurchases(LottoTickets lottoTickets) {
-        lottoTickets.numberOfTickets();
         System.out.printf("%d개를 구매했습니다.%n", lottoTickets.numberOfTickets());
     }
 

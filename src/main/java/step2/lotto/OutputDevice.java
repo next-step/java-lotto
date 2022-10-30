@@ -1,15 +1,15 @@
 package step2.lotto;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface OutputDevice {
 
-    void printNumbers(Set set);
+    void printNumbers(Collection collection);
 
     class Fake implements OutputDevice {
 
         @Override
-        public void printNumbers(Set set) {
+        public void printNumbers(Collection collection) {
             System.out.println("출력기 API 호출 성공");
         }
 
