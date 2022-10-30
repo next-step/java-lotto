@@ -8,21 +8,27 @@ public class LottoStatistics {
 
     private final Map<LottoRank, Integer> values = new EnumMap<>(LottoRank.class);
 
-    private LottoStatistics(LottoTicket winningLotto, LottoTickets lottoTickets) {
+    private LottoStatistics(WinningLotto winningLotto, LottoTickets lottoTickets) {
+        initializeEnumMap();
         for (LottoTicket lottoTicket : lottoTickets.getValues()) {
-            int match = lottoTicket.countMatch(winningLotto);
-            LottoRank rank = LottoRank.of(match);
-            this.values.put(rank, values.getOrDefault(rank, 0) + 1);
+            LottoRank rank = winningLotto.analysis(lottoTicket);
+            this.values.computeIfPresent(rank, (k, v) -> v + 1);
         }
     }
 
-    public static LottoStatistics of(LottoTicket winningLotto, LottoTickets lottoTickets) {
+    private void initializeEnumMap() {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            values.put(lottoRank, 0);
+        }
+    }
+
+    public static LottoStatistics of(WinningLotto winningLotto, LottoTickets lottoTickets) {
         return new LottoStatistics(winningLotto, lottoTickets);
     }
 
     public int prizeAmount() {
         return values.entrySet().stream()
-                .mapToInt(i -> i.getKey().getPrize() * i.getValue())
+                .mapToInt(i -> i.getKey().getMoneyPrize() * i.getValue())
                 .sum();
     }
 
