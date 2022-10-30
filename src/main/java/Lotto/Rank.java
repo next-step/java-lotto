@@ -39,6 +39,15 @@ public enum Rank {
         return Arrays.asList(Rank.values());
     }
 
+    public static double profit(List<Rank> ranking, double paidAmount) {
+        double sum = 0.0;
+        for (Rank rank : ranking) {
+            sum += rank.prize * rank.count;
+        }
+
+        return sum / paidAmount;
+    }
+
     public int getCount() {
         return count;
     }

@@ -10,6 +10,7 @@ public class LottoApplication {
 
     private static final List<Lotto> myLotto = new ArrayList<>();
     private static Lotto winnerLotto;
+    private static double paidAmount;
 
     public static void main(String[] args) {
         LottoApplication.start();
@@ -24,8 +25,8 @@ public class LottoApplication {
 
     private static void buy() {
         ResultView.inputAmount();
-        int amount = InputView.inputInteger();
-        int count = amount / LOTTO_PRICE;
+        paidAmount = InputView.inputInteger();
+        int count = (int) paidAmount / LOTTO_PRICE;
         ResultView.purchased(count);
         buyLotto(count);
     }
@@ -54,6 +55,8 @@ public class LottoApplication {
     }
 
     private static void showResult() {
-        ResultView.result(Rank.calculate(winnerLotto, myLotto));
+        List<Rank> ranking = Rank.calculate(winnerLotto, myLotto);
+        ResultView.result(ranking);
+        ResultView.profit(Rank.profit(ranking, paidAmount));
     }
 }

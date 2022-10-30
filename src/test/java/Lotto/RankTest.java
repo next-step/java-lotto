@@ -40,4 +40,15 @@ public class RankTest {
 
         assertThat(Rank.calculate(winner, myLotto)).containsAll(ranking);
     }
+
+    @Test
+    void 수익률_계산하기() {
+        List<Rank> ranking = new ArrayList<>();
+        Rank.FOURTH.plusCount();
+        for (Rank rank : Rank.values()) {
+            ranking.add(rank);
+        }
+
+        assertThat(Rank.profit(ranking, 140000)).isEqualTo(5000.0 / 140000.0);
+    }
 }
