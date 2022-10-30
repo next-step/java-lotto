@@ -52,7 +52,7 @@ public class LotteryTicket {
 
     private int countSameNumbers(LotteryTicket compare) {
         return (int) compare.lotteryNumbers.stream()
-                .filter(number -> lotteryNumbers.contains(number))
+                .filter(lotteryNumbers::contains)
                 .count();
     }
 
