@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +33,13 @@ public class Lottos {
         return lottos.stream()
             .filter(Lotto::isManual)
             .count();
+    }
+
+    public Lottos merge(Lottos otherLottos){
+        List<Lotto> newLottos = new ArrayList<>();
+        newLottos.addAll(this.lottos);
+        newLottos.addAll(otherLottos.lottos);
+        return new Lottos(newLottos);
     }
 
     @Override
