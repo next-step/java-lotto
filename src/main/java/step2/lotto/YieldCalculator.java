@@ -15,12 +15,12 @@ public class YieldCalculator {
     }
 
     public double yield() {
-        return totalPrizeAmount() / (rankingAggregation.size() * individualAmount);
+        return totalPrizeAmount() / (double)(rankingAggregation.size() * individualAmount);
     }
 
-    private double totalPrizeAmount() {
+    private long totalPrizeAmount() {
         return rankingAggregation.stream()
-                .reduce(0.0, (prizeAmount, rank) -> rank.addedPrizeAmount(prizeAmount), Double::sum);
+                .reduce(0L, (prizeAmount, rank) -> rank.addedPrizeAmount(prizeAmount), Long::sum);
     }
 
     @Override

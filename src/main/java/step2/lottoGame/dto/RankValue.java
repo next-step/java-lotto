@@ -7,10 +7,10 @@ import java.util.Map;
 public class RankValue {
 
     private final long numberOfWinnings;
-    private final double prizeAmount;
+    private final long prizeAmount;
     private final long numberOfMatchingNumbers;
 
-    public RankValue(long numberOfWinnings, double prizeAmount, long numberOfMatchingNumbers) {
+    public RankValue(long numberOfWinnings, long prizeAmount, long numberOfMatchingNumbers) {
         this.numberOfWinnings = numberOfWinnings;
         this.prizeAmount = prizeAmount;
         this.numberOfMatchingNumbers = numberOfMatchingNumbers;
@@ -27,7 +27,7 @@ public class RankValue {
     }
 
     public long prizeAmount() {
-        return (long) prizeAmount;
+        return prizeAmount;
     }
 
     public long numberOfMatchingNumbers() {

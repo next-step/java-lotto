@@ -12,9 +12,9 @@ public enum Rank {
     ;
 
     private final long numberOfMatchingNumbers;
-    private final double prizeAmount;
+    private final long prizeAmount;
 
-    Rank(long numberOfMatchingNumbers, double prizeAmount) {
+    Rank(long numberOfMatchingNumbers, long prizeAmount) {
         this.numberOfMatchingNumbers = numberOfMatchingNumbers;
         this.prizeAmount = prizeAmount;
     }
@@ -27,7 +27,7 @@ public enum Rank {
                 .orElse(Rank.NOTHING);
     }
 
-    public double prizeAmount() {
+    public long prizeAmount() {
         return prizeAmount;
     }
 
@@ -35,7 +35,7 @@ public enum Rank {
         return numberOfMatchingNumbers;
     }
 
-    public double addedPrizeAmount(Double prizeAmount) {
+    public long addedPrizeAmount(Long prizeAmount) {
         return this.prizeAmount + prizeAmount;
     }
 
