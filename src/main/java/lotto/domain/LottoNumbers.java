@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class LottoNumbers {
 
@@ -31,9 +30,6 @@ public class LottoNumbers {
         }
 
         return (int) lottoNumbers.stream()
-                                 .map(Optional::ofNullable)
-                                 .filter(Optional::isPresent)
-                                 .map(Optional::get)
                                  .filter(this.lottoNumbers::contains)
                                  .count();
     }
