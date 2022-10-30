@@ -11,14 +11,13 @@ public class Lotto {
 
     private final LottoNumbers numbers;
 
+    public Lotto(final List<LottoNumber> numbers) {
+        this(new LottoNumbers(numbers));
+    }
+
     public Lotto(final LottoNumbers numbers) {
         validateOrThrow(numbers.getLottoNumbers());
         this.numbers = numbers;
-    }
-
-    public Lotto(final List<LottoNumber> numbers) {
-        validateOrThrow(numbers);
-        this.numbers = new LottoNumbers(numbers);
     }
 
     private static void validateOrThrow(final List<LottoNumber> numbers) {
