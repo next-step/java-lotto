@@ -64,6 +64,7 @@ public class InputView {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         int input = scanner.nextInt();
         validateInputQuantity(input);
+        scanner.nextLine();
 
         return input;
     }
@@ -84,8 +85,9 @@ public class InputView {
                 break;
             }
             validateInputLotto(next);
-            input.add(scanner.nextLine());
+            input.add(next);
         }
+        scanner.nextLine();
 
         return input;
     }

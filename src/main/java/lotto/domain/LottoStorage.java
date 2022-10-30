@@ -18,6 +18,9 @@ public class LottoStorage {
 
     public LottoStorage() {
         this.lottos = new ArrayList<>();
+        Arrays.stream(WinningInformation.values())
+            .filter(wi -> wi != WinningInformation.NO_PRIZE)
+            .forEach(wi -> this.result.put(wi, 0L));
     }
 
     public LottoStorage(final List<Lotto> lottos) {

@@ -50,3 +50,4 @@
 - [x] LottoStore 수정
   - [x] buyLotto 메소드 파라미터로 LottoStorage를 받도록 수정
   - [x] buyLotto 메소드 반환 타입을 void로 수정
+- [x] LottoApplication 수정

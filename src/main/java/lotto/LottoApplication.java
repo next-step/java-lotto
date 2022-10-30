@@ -15,8 +15,11 @@ import lotto.domain.LottoStorage;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
 import lotto.strategy.AutoIssueLottoStrategy;
+import lotto.strategy.ManualIssueLottoStrategy;
 
 public class LottoApplication {
+
+    private static final int LOTTO_PRICE = 1_000;
 
     public static void main(String[] args) {
         Money money = new Money(inputMoney());
@@ -24,7 +27,14 @@ public class LottoApplication {
         List<String> manualLottos = inputManualLottos();
 
         LottoStore store = LottoStore.getInstance();
-        LottoStorage storage = store.buyLotto(money, AutoIssueLottoStrategy.getInstance());
+        LottoStorage storage = new LottoStorage();
+
+        ManualIssueLottoStrategy strategy = new ManualIssueLottoStrategy(manualLottos);
+        store.buyLotto(storage, new Money(manualQuantity * LOTTO_PRICE), strategy);
+
+        Money left = money.take(manualQuantity * LOTTO_PRICE);
+        store.buyLotto(storage, left, AutoIssueLottoStrategy.getInstance());
+
         printLottos(storage.getLottos());
 
         Lotto winningLotto = new Lotto(inputWinningLotto());
