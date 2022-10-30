@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.domain.Lotto.LOTTO_PRICE;
+
 public class Money {
     private final int money;
 
@@ -9,8 +11,8 @@ public class Money {
         this.money = money;
     }
 
-    public int calculateQuantity(int price) {
-        return money / price;
+    public int calculateMaxQuantity() {
+        return money / LOTTO_PRICE;
     }
 
     @Override

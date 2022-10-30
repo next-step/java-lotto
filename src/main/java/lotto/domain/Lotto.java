@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.*;
 
 public class Lotto {
+    public final static int LOTTO_PRICE = 1000;
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private final Set<Number> numbers;
