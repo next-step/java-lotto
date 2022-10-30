@@ -35,10 +35,6 @@ public enum Rank {
         return numberOfMatchingNumbers;
     }
 
-    public long addedPrizeAmount(Long prizeAmount) {
-        return this.prizeAmount + prizeAmount;
-    }
-
     public boolean isNotNothing() {
         return this != NOTHING;
     }

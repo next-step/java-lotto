@@ -20,7 +20,9 @@ public class YieldCalculator {
 
     private long totalPrizeAmount() {
         return rankingAggregation.stream()
-                .reduce(0L, (prizeAmount, rank) -> rank.addedPrizeAmount(prizeAmount), Long::sum);
+                .map(Rank::prizeAmount)
+                .reduce(Long::sum)
+                .orElse(0L);
     }
 
     @Override
