@@ -3,7 +3,6 @@ package step2.lottoGame;
 import step2.io.ConsoleInputView;
 import step2.io.ConsoleOutputView;
 import step2.lotto.*;
-import step2.lottoGame.dto.RankValues;
 import step2.randomNumbers.InfusedNumbersGenerator;
 
 import java.io.IOException;
@@ -48,7 +47,7 @@ public class LottoGame {
 
     private void printMatchIndicator(LottoTickets lottoTickets, LottoTicket winningLottoTicket) {
         MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(winningLottoTicket);
-        consoleOutputView.printMatchIndicator(new RankValues(matchIndicatorCalculator.matchIndicators()));
+        consoleOutputView.printMatchIndicator(matchIndicatorCalculator.matchIndicators());
     }
 
     private void printYield(LottoTickets lottoTickets, LottoTicket winningLottoTicket) {
