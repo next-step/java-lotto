@@ -14,7 +14,8 @@ public class MatchIndicatorCalculator {
     public Map<Rank, Long> matchIndicators() {
         Map<Rank, Long> ranks = countedWinningRanks();
         countNotWinningRanks(ranks);
-        return Map.copyOf(new TreeMap<>(ranks));
+
+        return sortedRanks(ranks);
     }
 
     private Map<Rank, Long> countedWinningRanks() {
@@ -29,6 +30,12 @@ public class MatchIndicatorCalculator {
                 .filter(Rank::isNotNothing)
                 .filter(rank -> !ranks.containsKey(rank))
                 .forEach(rank -> ranks.put(rank, 0L));
+    }
+
+    private TreeMap<Rank, Long> sortedRanks(Map<Rank, Long> ranks) {
+        TreeMap<Rank, Long> sortedRanks = new TreeMap<>(Comparator.comparing(Rank::numberOfMatchingNumbers));
+        sortedRanks.putAll(ranks);
+        return sortedRanks;
     }
 
     @Override
