@@ -20,7 +20,7 @@ public class LottoController {
         Lottos mergedLotto = manualLottos.merge(lottos);
         Output.printPurchasedLotto(mergedLotto);
 
-        Set<Number> winnerNumbers = Input.inputLottoNumber();
+        Set<Number> winnerNumbers = Input.inputWinnersNumber();
         Number bonusNumber = Input.inputBonusNumber();
         Output.printResult(mergedLotto.getResult(new WinnerNumbers(winnerNumbers, bonusNumber)));
     }
