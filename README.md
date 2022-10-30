@@ -47,6 +47,6 @@
 - [x] LottoStorage 수정
   - [x] 기본 생성자 추가
   - [x] add 메소드 추가
-- [ ] LottoStore 수정
-  - [ ] buyLotto 메소드 파라미터로 LottoStorage를 받도록 수정
-  - [ ] buyLotto 메소드 반환 타입을 void로 수정
+- [x] LottoStore 수정
+  - [x] buyLotto 메소드 파라미터로 LottoStorage를 받도록 수정
+  - [x] buyLotto 메소드 반환 타입을 void로 수정
