@@ -30,4 +30,19 @@ public class InputView {
         }
         return new ArrayList<>(result);
     }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int input;
+        try {
+            input = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            throw new IllegalArgumentException("1개의 당첨 번호가 입력되어야 합니다.");
+        }
+
+        if (Lotto.MIN > input || input > Lotto.MAX) {
+            throw new IllegalArgumentException("입력 범위를 벗어났습니다.");
+        }
+        return input;
+    }
 }
