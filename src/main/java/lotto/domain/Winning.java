@@ -6,7 +6,7 @@ public class Winning {
     private final Prize prize;
     private final LottoNumbers numbers;
 
-    public Winning(Prize prize, LottoNumbers matchNumbers) {
+    public Winning(final Prize prize, final LottoNumbers matchNumbers) {
         this.prize = prize;
         this.numbers = matchNumbers;
     }
@@ -22,7 +22,26 @@ public class Winning {
     public long prize() {
         return prize.value();
     }
+    
+    public Money prizeMoney() {
+        return prize.getMoney();
+    }
+    
+    public boolean exist() {
+        if (numbers == null) {
+            return false;
+        }
+        return numbers.count() > 0;
+    }
 
+    public boolean hasPrize() {
+        return prize.exist();
+    }
+
+    public boolean hasBonusNumber() {
+        return prize.needBonusNumber();
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {return true;}

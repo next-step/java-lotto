@@ -1,33 +1,35 @@
 package lotto.domain;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Result implements Iterable<Winning> {
-    private final List<Winning> winning;
+public class Result {
+    private final Winnings winnings;
+    private final RateOfReturn rateOfReturn;
 
-    public Result(List<Winning> winning) {
-        this.winning = winning;
+    public Result(final Winnings winnings, final Money investment) {
+        this.winnings = winnings;
+        this.rateOfReturn = new RateOfReturn(investment, winnings.income());
     }
     
-    public static Result of(LottoNumbers numbers, LottoNumber luckyLottoNumber) {
-        return new Result(winnings(numbers, luckyLottoNumber));
+    public static Result of(final LottoNumbers numbers, final LottoNumber luckyLottoNumber, final int bonusNumber, final Money investment) {
+        return new Result(winnings(numbers, luckyLottoNumber, bonusNumber), investment);
+    }
+    
+    public List<Winning> winnings() {
+        return winnings.getWinnings();
     }
 
-    private static List<Winning> winnings(LottoNumbers numbers, LottoNumber luckyLottoNumber) {
-        return Prize.getAll()
-                    .stream()
-                    .map(prize -> winning(prize, numbers.match(luckyLottoNumber, prize.getMatchCount())))
-                    .filter(winning -> winning.numberCount() > 0).collect(Collectors.toList());
+    public double rateOfReturn() {
+        return rateOfReturn.value();
     }
+    
+    private static Winnings winnings(LottoNumbers numbers, LottoNumber luckyLottoNumber, int bonusNumber) {
+        Winnings winnings = new Winnings();
+        for (LottoNumber number : numbers) {
+            MatchingCount count = number.matchCount(luckyLottoNumber, bonusNumber);
+            winnings.add(new Winning(Prize.valueOf(count), new LottoNumbers(List.of(number))));
+        }
 
-    private static Winning winning(Prize prize, LottoNumbers lottoNumbers) {
-        return new Winning(prize, lottoNumbers);
-    }
-
-    @Override
-    public Iterator<Winning> iterator() {
-        return winning.iterator();
+        return winnings;
     }
 }

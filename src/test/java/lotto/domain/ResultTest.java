@@ -17,14 +17,13 @@ class ResultTest {
     @DisplayName("당첨번호를 리턴한다.")
     @ParameterizedTest
     @MethodSource("winningsSet")
-    void winnings(LottoNumbers lottoNumbers, LottoNumber luckyNumber, List<Winning> expected) {
-        List<Winning> winnings = winnings(lottoNumbers, luckyNumber);
-        assertThat(winnings).hasSameElementsAs(expected);
+    void winnings(LottoNumbers lottoNumbers, LottoNumber luckyNumber, int bonusNumber, List<Winning> expected) {
+        assertThat(winnings(lottoNumbers, luckyNumber, bonusNumber)).hasSameElementsAs(expected);
     }
     
-    private List<Winning> winnings(LottoNumbers lottoNumbers, LottoNumber luckyNumber) {
+    private List<Winning> winnings(LottoNumbers lottoNumbers, LottoNumber luckyNumber, int bonusNumber) {
         List<Winning> winnings = new ArrayList<>();
-        Result.of(lottoNumbers, luckyNumber).iterator().forEachRemaining(winnings::add);
+        Result.of(lottoNumbers, luckyNumber, bonusNumber, new Money(1000)).winnings().iterator().forEachRemaining(winnings::add);
         return winnings;
     }
     
@@ -32,13 +31,24 @@ class ResultTest {
         return Stream.of(
                 Arguments.arguments(
                         lottoNumbers(
-                                lottoNumber(1, 2, 3, 4, 5, 6), 
-                                lottoNumber(5, 6, 4, 8, 9, 10)
+                                lottoNumber(1, 2, 3, 4, 5, 6),
+                                lottoNumber(1, 2, 3, 4, 5, 11),
+                                lottoNumber(1, 2, 3, 4, 5, 13),
+                                lottoNumber(1, 2, 3, 4, 20, 21),
+                                lottoNumber(1, 3, 5, 6, 30, 31),
+                                lottoNumber(5, 6, 4, 8, 9, 10),
+                                lottoNumber(1, 2, 3, 8, 9, 10)
                         ),
                         lottoNumber(1, 2, 3, 4, 5, 6),
+                        11,
                         winnings(
-                                winning(Prize.FOURTH, lottoNumbers(lottoNumber(5, 6, 4, 8, 9, 10))),
-                                winning(Prize.FIRST, lottoNumbers(lottoNumber(1, 2, 3, 4, 5, 6)))
+                                winning(Prize.FIRST, lottoNumbers(lottoNumber(1, 2, 3, 4, 5, 6))),
+                                winning(Prize.SECOND, lottoNumbers(lottoNumber(1, 2, 3, 4, 5, 11))),
+                                winning(Prize.THIRD, lottoNumbers(lottoNumber(1, 2, 3, 4, 5, 13))),
+                                winning(Prize.FOURTH, lottoNumbers(lottoNumber(1, 2, 3, 4, 20, 21))),
+                                winning(Prize.FOURTH, lottoNumbers(lottoNumber(1, 3, 5, 6, 30, 31))),
+                                winning(Prize.FIFTH, lottoNumbers(lottoNumber(5, 6, 4, 8, 9, 10))),
+                                winning(Prize.FIFTH, lottoNumbers(lottoNumber(1, 2, 3, 8, 9, 10)))
                         )
                 )
         );
@@ -59,4 +69,5 @@ class ResultTest {
     private static Winning winning(Prize prize, LottoNumbers matchNumbers) {
         return new Winning(prize, matchNumbers);
     }
+    
 }

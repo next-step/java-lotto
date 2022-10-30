@@ -20,17 +20,22 @@ public class LottoGame {
     }
 
     public void start(NumberGenerateStrategy method) {
-        output.showResult(Result.of(buyNumbers(method), lastLuckyNumber()));
+        Money paidMoney = input.paidMoney();
+        output.showResult(Result.of(buyNumbers(method, paidMoney), lastLuckyNumber(), bonusNumber(), paidMoney));
     }
 
-    private LottoNumbers buyNumbers(NumberGenerateStrategy method) {
-        LottoNumbers numbers = LottoNumbers.of(method, input.paidMoney().lottoCount(price));
+    private LottoNumbers buyNumbers(NumberGenerateStrategy method, Money paidMoney) {
+        LottoNumbers numbers = LottoNumbers.of(method, paidMoney.lottoCount(price));
         output.showPurchase(numbers);
         return numbers;
     }
     
     private LottoNumber lastLuckyNumber() {
         return input.lastLuckyNumber();
+    }
+    
+    private int bonusNumber() {
+        return input.bonusNumber();
     }
 }
 

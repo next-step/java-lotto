@@ -1,26 +1,44 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
     private final List<Integer> numbers;
 
-    public LottoNumber(List<Integer> numbers) {
+    public LottoNumber(final int... numbers) {
+        this(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
+    }
+    
+    public LottoNumber(final List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public int matchCount(LottoNumber other) {
-        List<Integer> numbers = new ArrayList<>(this.numbers);
-        numbers.retainAll(other.numbers);
-        return numbers.size();
+    public MatchingCount matchCount(LottoNumber other, int bonusNumber) {
+        return new MatchingCount(matchingCount(other), contains(bonusNumber));
     }
-
+    
     public List<Integer> numbers() {
         return numbers;
     }
 
+    public int count() {
+        return numbers == null ? 0 : numbers.size();
+    }
+
+    private int matchingCount(LottoNumber other) {
+        List<Integer> numbers = new ArrayList<>(this.numbers);
+        numbers.retainAll(other.numbers);
+        return numbers.size();
+    }
+    
+    private boolean contains(int number) {
+        return numbers.contains(number);
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {return true;}
@@ -32,9 +50,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public int count() {
-        return numbers == null ? 0 : numbers.size();
     }
 }

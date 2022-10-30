@@ -1,39 +1,52 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum Prize {
-    FIRST(6, new Money(2_000_000_000)), 
-    SECOND(5, new Money(1_500_000)), 
-    THIRD(4, new Money(50_000)), 
-    FOURTH(3, new Money(5_000)), 
-    NO_PRIZE(0, new Money(0));
-
-    private final int matchCount;
+    FIRST(new Money(2_000_000_000), 6, false), 
+    SECOND(new Money(30_000_000), 5, true), 
+    THIRD(new Money(1_500_000), 5, false), 
+    FOURTH(new Money(50_000), 4, false), 
+    FIFTH(new Money(5_000), 3, false), 
+    NO_PRIZE(new Money(0), 0, false);
+    
     private final Money money;
+    private final int countOfMatch;
+    private final boolean needBonusNumber;
 
-    Prize(int matchCount, Money money) {
-        this.matchCount = matchCount;
+    Prize(Money money, int countOfMatch, boolean needBonusNumber) {
         this.money = money;
+        this.countOfMatch = countOfMatch;
+        this.needBonusNumber = needBonusNumber;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public static Prize valueOf(MatchingCount count) {
+        return Arrays.stream(values()).filter(prize -> match(prize, count))
+                     .findFirst()
+                     .orElse(NO_PRIZE);
+    }
+
+    private static boolean match(Prize prize, MatchingCount count) {
+        return count.is(prize.countOfMatch, prize.needBonusNumber);
     }
     
+    public int getMatchCount() {
+        return countOfMatch;
+    }
+
+    public Money getMoney() {
+        return money;
+    }
+
     public long value() {
         return money.value();
     }
     
-    public static Prize get(int matchCount) {
-        return Arrays.stream(values()).filter(prize -> prize.matchCount == matchCount)
-                                      .findFirst()
-                                      .orElse(NO_PRIZE);
+    public boolean exist() {
+        return this != NO_PRIZE;
     }
-    
-    public static List<Prize> getAll() {
-        return Arrays.stream(values()).filter(prize -> prize != NO_PRIZE).collect(Collectors.toList());
+
+    public boolean needBonusNumber() {
+        return needBonusNumber;
     }
 }

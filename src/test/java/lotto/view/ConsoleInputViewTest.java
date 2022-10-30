@@ -47,7 +47,16 @@ class ConsoleInputViewTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Only numbers between 1 and 45 are available.");
     }
-    
+
+    @DisplayName("입력된 보너스 번호가 유효하지 않은 값이라면 예외를 발생시킨다.")
+    @ParameterizedTest
+    @ValueSource(strings = { "1,", "", "0", "46" })
+    void bonusNumber_when_invalid_numbers(String bonusNumber) {
+        assertThatThrownBy(() -> consoleInputView(bonusNumber).bonusNumber())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Only numbers between 1 and 45 are available.");
+    }
+
     private ConsoleInputView consoleInputView(String lottoNumber) {
         return new MockConsoleInputView() {
             @Override

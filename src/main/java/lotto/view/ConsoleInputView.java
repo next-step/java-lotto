@@ -24,6 +24,11 @@ public class ConsoleInputView {
         return lastWeeksLottoNumber(enteredLottoNumber());
     }
 
+    public int bonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        return parseInt(enteredLottoNumber());
+    }
+
     String enteredLottoNumber() {
         return input.next();
     }
@@ -57,8 +62,17 @@ public class ConsoleInputView {
     }
 
     private static int parseInt(String value) {
+        int number = toInt(value);
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException("Only numbers between 1 and 45 are available.");
+        }
+        
+        return number;
+    }
+    
+    private static int toInt(String number) {
         try {
-            return Integer.parseInt(value);
+            return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Only numbers between 1 and 45 are available.");
         }
