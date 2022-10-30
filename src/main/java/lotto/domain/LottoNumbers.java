@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class LottoNumbers {
 
-    List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -25,7 +25,7 @@ public class LottoNumbers {
     }
 
 
-    public int countOfMatch(final List<LottoNumber> lottoNumbers) {
+    private int countOfMatch(final List<LottoNumber> lottoNumbers) {
         if (Objects.isNull(lottoNumbers)) {
             return 0;
         }
