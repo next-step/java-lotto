@@ -1,31 +1,16 @@
 package lotto.domain;
 
 import java.util.Objects;
-import lotto.domain.exception.BallException;
 
 public class LottoNumber {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
-        validation(lottoNumber);
+    LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
-    }
-
-    LottoNumber(String lottoNumber) {
-        this(Integer.parseInt(lottoNumber));
-    }
-
-    private void validation(int lottoNumber) {
-        if (lottoNumber < MIN_NUMBER) {
-            throw new BallException("로또 번호는 1이상의 값을 가져야 합니다.");
-        }
-        if (lottoNumber > MAX_NUMBER) {
-            throw new BallException("로또 번호는 45이하의 값을 가져야 합니다.");
-        }
     }
 
     @Override

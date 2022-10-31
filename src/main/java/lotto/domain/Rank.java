@@ -36,7 +36,7 @@ public enum Rank {
 
     static double yield(EnumMap<Rank, Integer> rankIntegerEnumMap, int purchaseMoney) {
         double sum = rankIntegerEnumMap.entrySet().stream()
-            .mapToDouble(rankIntegerEntry -> rankIntegerEntry.getValue() * rankIntegerEntry.getKey().reward)
+            .mapToDouble(rankIntegerEntry -> (double) rankIntegerEntry.getValue() * rankIntegerEntry.getKey().reward)
             .sum();
         return sum / purchaseMoney;
     }

@@ -1,12 +1,14 @@
 package lotto.application;
 
-import lotto.domain.Bank;
+import lotto.domain.WinningLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberFactory;
 import lotto.domain.LottoPrice;
 import lotto.domain.Lottos;
-import lotto.domain.random.AutoLotto;
+import lotto.domain.policy.AutoLottoGenerator;
+import lotto.domain.policy.LottoPolicy;
+import lotto.domain.policy.ManualLottoGenerator;
 
 public class LottoGame {
 
@@ -19,17 +21,22 @@ public class LottoGame {
     }
 
     public void play() {
+        LottoPrice lottoPrice = new LottoPrice();
+
         int purchase = inputView.purchase();
-        outputView.lottoCount(purchase);
+        int manualLottoQuantity = inputView.manualLottoQuantity();
 
-        LottoMachine lottoMachine = new LottoMachine(new AutoLotto(), new LottoPrice());
-        Lottos lottos = lottoMachine.buyLotto(purchase);
+        LottoPolicy manualLottoGenerator = new ManualLottoGenerator(inputView.manualLottos(manualLottoQuantity));
+        LottoPolicy autoLottoGenerator = new AutoLottoGenerator();
 
-        outputView.lottos(lottos);
+        Lottos manualLottos = new LottoMachine(manualLottoGenerator).buyLotto(manualLottoQuantity);
+        Lottos manualAndAutoLottos = manualLottos.compositeLotto(new LottoMachine(autoLottoGenerator).buyLotto(lottoPrice.lottoCount(purchase) - manualLottos.count()));
 
-        Bank bank = lottos.checkWinningNumber(new Lotto(inputView.winningNumbers()), new LottoNumber(inputView.inputBonusBall()));
+        outputView.lottos(manualAndAutoLottos, manualLottoQuantity, lottoPrice.lottoCount(purchase) - manualLottoQuantity);
 
-        outputView.winningStatistics(bank);
-        outputView.winningStatistics(bank, purchase);
+        WinningLotto winningLotto = manualAndAutoLottos.checkWinningNumber(new Lotto(inputView.winningNumbers()), LottoNumberFactory.getLottoNumber(inputView.inputBonusBall()));
+
+        outputView.winningStatistics(winningLotto);
+        outputView.winningStatistics(winningLotto, purchase);
     }
 }

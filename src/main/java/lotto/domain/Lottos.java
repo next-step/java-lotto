@@ -20,11 +20,11 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Bank checkWinningNumber(Lotto winningNumber, LottoNumber bonusBall) {
+    public WinningLotto checkWinningNumber(Lotto winningNumber, LottoNumber bonusBall) {
         List<Rank> rankList = lottos.stream()
             .map(lotto -> Rank.valueOf(lotto.winningNumberCount(winningNumber), lotto.hasLottoNumber(bonusBall)))
             .collect(Collectors.toList());
-        return new Bank(new EnumMap<>(getRankMap(rankList)));
+        return new WinningLotto(new EnumMap<>(getRankMap(rankList)));
     }
 
     private Map<Rank, Integer> getRankMap(List<Rank> ranks) {
@@ -34,6 +34,17 @@ public class Lottos {
 
     public List<Lotto> lottos() {
         return new ArrayList<>(lottos);
+    }
+
+    public Lottos compositeLotto(final Lottos lottos) {
+        List<Lotto> lottoArrayList = new ArrayList<>();
+        lottoArrayList.addAll(this.lottos);
+        lottoArrayList.addAll(lottos.lottos);
+        return new Lottos(lottoArrayList);
+    }
+
+    public int count() {
+        return lottos.size();
     }
 
     @Override
