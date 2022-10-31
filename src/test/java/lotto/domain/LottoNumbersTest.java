@@ -25,10 +25,21 @@ class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("로또 번호가 6개가 아니면 예외 처리")
-    void getLottoNumbers_fail() {
+    @DisplayName("로또 번호가 6개 보다 적으면 예외 처리")
+    void getLottoNumbers_fail_1() {
         // given
         List<Integer> inputNumbers = List.of(1, 2, 3, 4, 5);
+
+        // exception
+        assertThatThrownBy(() -> new LottoNumbers(inputNumbers))
+                .isInstanceOf(InvalidInputException.class);
+    }
+
+    @Test
+    @DisplayName("로또 번호가 6개 보다 많으면 예외 처리")
+    void getLottoNumbers_fail_2() {
+        // given
+        List<Integer> inputNumbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
         // exception
         assertThatThrownBy(() -> new LottoNumbers(inputNumbers))
