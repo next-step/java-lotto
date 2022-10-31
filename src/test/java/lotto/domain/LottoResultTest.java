@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoResultTest {
 
     @Test
-    @DisplayName("보너스 번호 테스트")
-    void getLottoNumberList() {
+    @DisplayName("5개가 일치하고 보너스 번호가 일치하면 2등")
+    void getLottoNumberList_second() {
 
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 7);
@@ -23,5 +23,21 @@ class LottoResultTest {
 
         // then
         assertThat(lottoResult.getMatchCount(winnerLottoResult)).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("6개가 일치하면 1등")
+    void getLottoNumberList_first() {
+
+        // given
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> winners = List.of(1, 2, 3, 4, 5, 6);
+
+        // when
+        LottoResult lottoResult = new LottoResult(numbers);
+        LottoResult winnerLottoResult = new LottoResult(winners, 7);
+
+        // then
+        assertThat(lottoResult.getMatchCount(winnerLottoResult)).isEqualTo(Rank.FIRST);
     }
 }

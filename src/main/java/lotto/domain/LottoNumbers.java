@@ -21,7 +21,14 @@ public class LottoNumbers {
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
+        return lottoNumbers
+                .stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+    }
+
+    public Boolean isContainsNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     private List<Integer> validateLottoNumbers(List<Integer> matchNumberList) {

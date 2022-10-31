@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoTickets;
-import lotto.domain.PurchasePrice;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.Rank;
 
 import java.math.BigDecimal;
@@ -12,13 +12,16 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    private static final String PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String PURCHASE_AMOUNT_MESSAGE = "수동으로 {manualAmount}장 자동으로 {autoAmount}장을 구매했습니다.";
     private static final String RANK_INIT_MESSAGE = "당첨 통계\n-------";
     private static final String RANK_MESSAGE = "{countOfMatch}개 일치 ({winningMoney}원)- {amount}개";
     private static final String YIELD_MESSAGE = "총 수익률은 {yield}입니다.";
 
-    public static void printPurchaseAmount(PurchasePrice purchasePrice) {
-        System.out.println(purchasePrice.getAmount() + PURCHASE_AMOUNT_MESSAGE);
+    public static void printPurchaseAmount(PurchaseInfo purchaseInfo) {
+        System.out.println(PURCHASE_AMOUNT_MESSAGE
+                .replace("{manualAmount}", String.valueOf(purchaseInfo.getManualAmount()))
+                .replace("{autoAmount}", String.valueOf(purchaseInfo.getAutoAmount()))
+        );
     }
 
     public static void printLottoNumbers(LottoTickets lottoTickets) {

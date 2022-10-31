@@ -4,20 +4,15 @@ import lotto.exception.InvalidInputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
 
     @Test
-    @DisplayName("보너스 번호 테스트 - 중복")
-    void getNumber() {
-        // given
-        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-
+    @DisplayName("로또 번호가 1~45 범위를 벗어 날 때 예외 발생")
+    void getNumber_fail() {
         // expected
-        assertThatThrownBy(() -> new LottoNumber(lottoNumbers, 6))
+        assertThatThrownBy(() -> new LottoNumber(77))
                 .isInstanceOf(InvalidInputException.class);
     }
 }

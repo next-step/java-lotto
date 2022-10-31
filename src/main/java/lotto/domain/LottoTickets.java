@@ -5,40 +5,35 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.util.NumberUtil.makeAutoNumberList;
-
 public class LottoTickets {
+    private static final Integer LOTTO_DEFAULT_START_NUMBER = 1;
+    private static final Integer LOTTO_DEFAULT_END_NUMBER = 45;
 
-    private final PurchasePrice purchasePrice;
-    private List<Lotto> lottoList;
+    private final PurchaseInfo purchaseInfo;
+    private List<Lotto> lottoList = new ArrayList<>();
 
-    public LottoTickets(PurchasePrice purchasePrice, List<Lotto> lottoList) {
-        this(purchasePrice);
+    public LottoTickets(PurchaseInfo purchaseInfo, List<Lotto> lottoList) {
+        this(purchaseInfo);
         this.lottoList = lottoList;
     }
 
-    public LottoTickets(PurchasePrice purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public LottoTickets(PurchaseInfo purchaseInfo) {
+        this.purchaseInfo = purchaseInfo;
     }
 
     public List<Lotto> getLottoList() {
         return this.lottoList;
     }
 
-    public LottoTickets pickNumbers() {
-        List<Lotto> lottoList = new ArrayList<>();
-
-        for (int i = 0; i < this.purchasePrice.getAmount(); i++) {
-            lottoList.add(new Lotto(makeAutoNumberList()));
-        }
-
-        this.lottoList = lottoList;
+    public LottoTickets pickNumbers(List<List<Integer>> manualLottoList) {
+        makeAutoLotto();
+        makeManualLotto(manualLottoList);
         return this;
     }
 
-    public List<Rank> putRankings(LottoResult winnerLottoResult) {
+    public List<Rank> getRanks(LottoResult winnerLottoResult) {
         List<Rank> rankList = new ArrayList<>();
-        this.lottoList.forEach(l -> rankList.add(l.rank(winnerLottoResult)));
+        this.lottoList.forEach(l -> rankList.add(l.getRank(winnerLottoResult)));
         return rankList;
     }
 
@@ -47,7 +42,29 @@ public class LottoTickets {
                 .mapToInt(Rank::getWinningMoney)
                 .sum();
         return BigDecimal.valueOf(totalWinningMoney)
-                .divide(BigDecimal.valueOf(this.purchasePrice.getPurchasePrice()), 2, RoundingMode.HALF_UP);
+                .divide(BigDecimal.valueOf(this.purchaseInfo.getPurchasePrice()), 2, RoundingMode.HALF_UP);
+    }
+
+    private void makeManualLotto(List<List<Integer>> manualLottoList) {
+        for (int i = 0; i < this.purchaseInfo.getManualAmount(); i++) {
+            lottoList.add(new Lotto(manualLottoList.get(i)));
+        }
+    }
+
+    private void makeAutoLotto() {
+        List<Integer> defaultNumberList = defaultNumberList();
+
+        for (int i = 0; i < this.purchaseInfo.getAutoAmount(); i++) {
+            lottoList.add(new Lotto().pickAuto(defaultNumberList));
+        }
+    }
+
+    private List<Integer> defaultNumberList() {
+        List<Integer> defaultNumberList = new ArrayList<>();
+        for (int i = LOTTO_DEFAULT_START_NUMBER; i <= LOTTO_DEFAULT_END_NUMBER; i++) {
+            defaultNumberList.add(i);
+        }
+        return defaultNumberList;
     }
 
 }

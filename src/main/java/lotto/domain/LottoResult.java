@@ -1,15 +1,19 @@
 package lotto.domain;
 
+import lotto.exception.InvalidInputException;
+
 import java.util.List;
 
 public class LottoResult {
+
+    private static final String VALIDATE_BONUS_NUMBER = "보너스 볼은 지난 주 당첨 번호와 중복될 수 없습니다.";
 
     private final LottoNumbers lottoNumbers;
     private LottoNumber bonusNumber;
 
     public LottoResult(List<Integer> lottoNumbers, Integer bonusNumber) {
         this(lottoNumbers);
-        this.bonusNumber = new LottoNumber(new LottoNumbers(lottoNumbers), bonusNumber);
+        this.bonusNumber = validateBonusNumber(new LottoNumbers(lottoNumbers), new LottoNumber(bonusNumber));
     }
 
     public LottoResult(List<Integer> lottoNumbers) {
@@ -25,7 +29,23 @@ public class LottoResult {
     }
 
     public Rank getMatchCount(LottoResult winnerLottoResult) {
-        return Rank.getRank(this, winnerLottoResult);
+        int count = getCount(this, winnerLottoResult);
+        boolean isBonus = getLottoNumbers().contains(winnerLottoResult.getBonusNumber());
+        return Rank.valueOf(count, isBonus);
+    }
+
+    private int getCount(LottoResult lottoResult, LottoResult winnerLottoResult) {
+        return (int) lottoResult.getLottoNumbers()
+                .stream()
+                .filter(winnerLottoResult.getLottoNumbers()::contains)
+                .count();
+    }
+
+    private LottoNumber validateBonusNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.isContainsNumber(bonusNumber)) {
+            throw new InvalidInputException(VALIDATE_BONUS_NUMBER);
+        }
+        return bonusNumber;
     }
 
 }
