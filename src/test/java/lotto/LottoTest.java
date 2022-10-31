@@ -14,6 +14,6 @@ class LottoTest {
 	void Should_Have_Six_Number_When_Create_Lotto_By_Deafult_Constructor() {
 		Lotto lotto = new Lotto();
 
-		assertThat(lotto.numbers.size()).isEqualTo(Lotto.LOTTO_NUMBER_QUANTITY);
+		assertThat(lotto.getNumbers().size()).isEqualTo(Lotto.LOTTO_NUMBER_QUANTITY);
 	}
 }
