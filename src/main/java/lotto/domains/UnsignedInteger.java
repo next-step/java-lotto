@@ -3,6 +3,10 @@ package lotto.domains;
 public class UnsignedInteger {
     private final int value;
 
+    private UnsignedInteger(int value) {
+        this.value = value;
+    }
+
     public static UnsignedInteger parse(String string) {
         try {
             int value = Integer.parseUnsignedInt(string);
@@ -12,11 +16,11 @@ public class UnsignedInteger {
         }
     }
 
-    private UnsignedInteger(int value) {
-        this.value = value;
-    }
-
     public int getValue() {
         return value;
+    }
+
+    public boolean isZero() {
+        return value == 0;
     }
 }

@@ -1,6 +1,7 @@
 package lotto.domains;
 
 import lotto.exceptions.ExceedPurchasedAmountException;
+import lotto.exceptions.NotEnoughPurchasedAmountException;
 
 public class LottoPurchasedAmount {
     private static final int MAX_AMOUNT = 100_000;
@@ -36,7 +37,11 @@ public class LottoPurchasedAmount {
 
     public LottoPurchasedAmount spend(UnsignedInteger count) {
         int spendMoney = count.getValue() * LottoGenerator.PRICE;
-        return new LottoPurchasedAmount(this.amount - spendMoney);
+        if (amount < spendMoney) {
+            throw new NotEnoughPurchasedAmountException(amount, spendMoney);
+        }
+
+        return new LottoPurchasedAmount(amount - spendMoney);
     }
 
     public int getAmount() {
