@@ -17,7 +17,11 @@ public class LottoServiceTest {
 
     @Test
     public void calculateWinningStatisticsTest() {
-        //todo: 1등인 번호와 비교하여 제대로 WinningStatistics 객체를 반환하는지 테스트 코드 작성
-        throw new RuntimeException("not implemented yet");
+        LottoService lottoService = new LottoService(() -> List.of(1, 2, 3, 4, 5, 6));
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<List<Integer>> lottoList = lottoService.buyLotto(5000);
+
+        WinningStatistics winningStatistics = lottoService.calculateWinningStatistics(winningNumbers, lottoList);
+        assertThat(winningStatistics.getFirst()).isEqualTo(5);
     }
 }

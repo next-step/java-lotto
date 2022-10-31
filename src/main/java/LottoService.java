@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LottoService {
 
@@ -19,7 +20,18 @@ public class LottoService {
         return lottoList;
     }
 
-    public WinningStatistics calculateWinningStatistics(List<Integer> winningNumbers) {
-        throw new RuntimeException("not implemented yet");
+    public WinningStatistics calculateWinningStatistics(List<Integer> winningNumbers, List<List<Integer>> lottoList) {
+        WinningStatistics winningStatistics = new WinningStatistics();
+        for (List<Integer> lotto : lottoList) {
+            int matchCount = getMatchCount(winningNumbers, lotto);
+            int originalCount = winningStatistics.getWinningMap().get(matchCount);
+            winningStatistics.getWinningMap().replace(matchCount, ++originalCount);
+        }
+        return winningStatistics;
+    }
+
+    public int getMatchCount(List<Integer> winningNumbers, List<Integer> lotto) {
+        Stream<Integer> matchStream = lotto.stream().filter(winningNumbers::contains);
+        return (int) matchStream.count();
     }
 }
