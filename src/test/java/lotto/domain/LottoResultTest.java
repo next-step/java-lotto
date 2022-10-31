@@ -3,54 +3,56 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoResultTest {
 
     @Test
-    @DisplayName("구매한 로또 번호와 실제 당첨 번호를 비교해 당첨 등수와 당첨 금액을 반환")
-    void calculateLottoResultSuccess() {
-        // setting
+    @DisplayName("로또 결과 생성")
+    void create() {
         LottoResult lottoResult = new LottoResult();
 
-        List<Number> numbers1 = new ArrayList<>();
-        for (int i = 1; i < 7; i++) {
-            numbers1.add(new Number(i));
-        }
-        LottoTicket lottoTicket1 = new LottoTicket(numbers1);
+        assertAll(
+                () -> assertThat(lottoResult.getResultByRank(Rank.FIRST))
+                        .isEqualTo(0),
+                () -> assertThat(lottoResult.getResultByRank(Rank.BONUS))
+                        .isEqualTo(0),
+                () -> assertThat(lottoResult.getResultByRank(Rank.SECOND))
+                        .isEqualTo(0),
+                () -> assertThat(lottoResult.getResultByRank(Rank.THIRD))
+                        .isEqualTo(0),
+                () -> assertThat(lottoResult.getResultByRank(Rank.FOURTH))
+                        .isEqualTo(0)
+        );
+    }
 
-        List<Number> numbers2 = new ArrayList<>();
-        for (int i = 15; i < 21; i++) {
-            numbers2.add(new Number(i));
-        }
-        LottoTicket lottoTicket2 = new LottoTicket(numbers2);
+    @Test
+    @DisplayName("지정된 랭크 당첨 개수 증가")
+    void addWinningResultTest() {
+        LottoResult lottoResult = new LottoResult();
 
-        List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(lottoTicket1);
-        tickets.add(lottoTicket2);
+        // 기존 세팅에서 해당 랭크의 당첨 개수가 0인지 확인
+        assertThat(lottoResult.getResultByRank(Rank.FIRST))
+                .isEqualTo(0);
 
-        List<Number> actualNumbers = new ArrayList<>();
-        for (int i = 4; i < 10; i++) {
-            actualNumbers.add(new Number(i));
-        }
+        // 당첨 되어 하나 추가하는 로직 수행
+        lottoResult.addWinningResult(Rank.FIRST);
+        assertThat(lottoResult.getResultByRank(Rank.FIRST))
+                .isEqualTo(1);
+    }
 
-        lottoResult.calculateLottoResult(tickets, actualNumbers, 2000, 21);
+    @Test
+    @DisplayName("당첨금 확률값 반환")
+    void calculatePrizeRateTest() {
+        LottoResult lottoResult = new LottoResult();
 
-        // test
-        Map<Integer, Integer> lottoRankings = lottoResult.getLottoRankings();
+        lottoResult.addWinningResult(Rank.FOURTH);
+        PaidAmount paidAmount = new PaidAmount(6000);
 
-        // ranking test
-        assertThat(lottoRankings.get(3)).isEqualTo(1);
-        assertThat(lottoRankings.get(4)).isEqualTo(0);
-        assertThat(lottoRankings.get(5)).isEqualTo(0);
-        assertThat(lottoRankings.get(6)).isEqualTo(0);
-        assertThat(lottoRankings.get(7)).isEqualTo(0);
+        lottoResult.calculatePrizeRate(paidAmount);
 
-        // prize test
-        assertThat(lottoResult.getPrizePercentage()).isEqualTo("2.50");
+        assertThat(lottoResult.getPrizeRate())
+                .isEqualTo("0.83");
     }
 }

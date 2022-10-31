@@ -1,10 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.Number;
-import lotto.util.LottoUtil;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,26 +12,24 @@ public class LottoController {
     private final ResultView resultView = new ResultView();
 
     public void buyLotto() {
-        int paidAmount = inputView.receivePayment();
-        int numOfTickets = LottoUtil.getNumOfTickets(paidAmount);
+        PaidAmount paidAmount = new PaidAmount(inputView.getPaidAmount());
 
-        resultView.printNumOfTickets(numOfTickets);
-        List<LottoTicket> lottoTickets = LottoTickets.create(numOfTickets);
+        int ticketInput = inputView.getManualCount();
+        Tickets tickets = new Tickets(ticketInput, paidAmount);
 
-        resultView.printAllLottoNumbers(lottoTickets);
-        getLottoResult(lottoTickets, paidAmount);
+        List<Lotto> manual = inputView.getManualLottoNumbers(tickets.getManualCount());
+        Lottos lottos = new Lottos(manual, tickets.getAutoCount());
+
+        resultView.printAllLotto(lottos, tickets);
+        checkResult(lottos, paidAmount);
     }
 
-    private void getLottoResult(List<LottoTicket> lottoTickets, int paidAmount) {
-        String winningNumbers = inputView.receiveWinningNumbers();
-        List<Number> numbers = LottoUtil.splitStringToNumbers(winningNumbers);
+    private void checkResult(Lottos lottos, PaidAmount paidAmount) {
+        Lotto winningNumbers = new Lotto(inputView.getWinningNumbers());
+        LottoNumber bonusBall = LottoNumber.of(inputView.getBonusBall());
 
-        int bonusBall = inputView.receiveBonusBall();
+        lottos.calculateLottoResult(winningNumbers, bonusBall, paidAmount);
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateLottoResult(lottoTickets, numbers, paidAmount, bonusBall);
-
-        resultView.printWinningResult(lottoResult);
+        resultView.printLottoResult(lottos);
     }
-
 }

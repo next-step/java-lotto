@@ -1,26 +1,15 @@
 package lotto.util;
 
-import lotto.domain.Number;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Random;
 
 public class LottoNumberGenerator {
 
-    private final List<Number> lottoNumberRange = new ArrayList<>();
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
 
-    public LottoNumberGenerator() {
-        for (int i = 1; i < 46; i++) {
-            lottoNumberRange.add(new Number(i));
-        }
-    }
+    private static final Random random = new Random();
 
-    public List<Number> getLottoNumbers() {
-        Collections.shuffle(this.lottoNumberRange);
-        return lottoNumberRange.stream()
-                .limit(LottoUtil.LOTTO_NUMBERS)
-                .collect(Collectors.toList());
+    public static int generateNumber() {
+        return random.nextInt(MAXIMUM_LOTTO_NUMBER) + MINIMUM_LOTTO_NUMBER;
     }
 }

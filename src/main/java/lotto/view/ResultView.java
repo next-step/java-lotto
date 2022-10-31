@@ -1,42 +1,32 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.RankingAward;
-import lotto.util.LottoUtil;
-
-import java.util.List;
-import java.util.Map;
+import lotto.domain.*;
 
 public class ResultView {
 
-    public void printNumOfTickets(int numOfTickets) {
-        System.out.println(numOfTickets + "개를 구매했습니다.");
-    }
+    public void printAllLotto(Lottos lottos, Tickets tickets) {
+        int manualCount = tickets.getManualCount();
+        int autoCount = tickets.getAutoCount();
 
-    public void printAllLottoNumbers(List<LottoTicket> lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(LottoUtil.convertToIntegers(lottoTicket.getNumbers()));
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "장이 생성 됐습니다");
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(lotto.toString());
         }
-        System.out.println();
     }
 
-    public void printWinningResult(LottoResult lottoResult) {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("--------------");
-
-        for (Map.Entry<Integer, Integer> entry : lottoResult.getLottoRankings().entrySet()) {
-            printBonusBallResult(entry.getKey(), entry.getValue());
+    public void printLottoResult(Lottos lottos) {
+        LottoResult result = lottos.getLottoResult();
+        for (Rank rank : Rank.values()) {
+            printMatch(result, rank);
         }
-        System.out.println("총 수익률은 " + lottoResult.getPrizePercentage() + "입니다.");
+        System.out.println("총 수익률은 " + result.getPrizeRate() + "입니다.");
     }
 
-    private void printBonusBallResult(int ranking, int award) {
-        if (ranking == 7) {
-            System.out.println((ranking - 2) + "개 일치, 보너스 볼 일치 (" + RankingAward.getAward(ranking) + "원) - " + award + "개");
+    private void printMatch(LottoResult result, Rank rank) {
+        if (rank.getMatch() == 7) {
+            System.out.println(rank.getRank() + "개 일치, 보너스 볼 일치 (" + rank.getPrize() + ") - " + result.getResultByRank(rank) + "개");
             return;
         }
-        System.out.println(ranking + "개 일치 (" + RankingAward.getAward(ranking) + "원) - " + award + "개");
+        System.out.println(rank.getRank() + "개 일치 (" + rank.getPrize() + ") - " + result.getResultByRank(rank) + "개");
     }
 }
