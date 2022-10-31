@@ -1,11 +1,19 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
+
+    public LottoNumbers(final int... intLottoNumbers) {
+        this.lottoNumbers = Arrays.stream(intLottoNumbers)
+                                  .mapToObj(LottoNumber::new)
+                                  .collect(Collectors.toList());
+    }
 
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;

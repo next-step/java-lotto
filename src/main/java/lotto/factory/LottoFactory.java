@@ -1,6 +1,7 @@
 package lotto.factory;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.strategy.LottoNumbersStrategy;
 
@@ -10,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    private static final int LOTTO_AMOUNT = 1000;
+    public static final int LOTTO_AMOUNT = 1000;
 
     private LottoFactory() {
     }
@@ -19,10 +20,16 @@ public class LottoFactory {
         return new Lotto(lottoNumbersStrategy.generate());
     }
 
-    public static Lottos createLottos(final LottoNumbersStrategy lottoNumbersStrategy, final int lottoPurchaseAmount) {
-        List<Lotto> lottos = IntStream.rangeClosed(1, lottoPurchaseAmount / LOTTO_AMOUNT)
+    public static Lottos createLottos(final LottoNumbersStrategy lottoNumbersStrategy, final int lottoPurchaseCount) {
+        List<Lotto> lottos = IntStream.rangeClosed(1, lottoPurchaseCount)
                                       .mapToObj(order -> LottoFactory.createLotto(lottoNumbersStrategy))
                                       .collect(Collectors.toList());
         return new Lottos(lottos);
+    }
+
+    public static Lottos createLottos(final List<LottoNumbers> lottoNumbersList) {
+        return new Lottos(lottoNumbersList.stream()
+                                          .map(Lotto::new)
+                                          .collect(Collectors.toList()));
     }
 }

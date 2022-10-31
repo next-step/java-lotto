@@ -23,23 +23,20 @@ public class InputView {
         return lottoPurchaseAmount;
     }
 
-    public static List<LottoNumbers> inputManualPurchaseLottoNumbers() {
-        return inputManualPurchaseLottoNumbersStrings(inputManualPurchaseLottoCount()).stream()
-                                                                                      .map(InputView::toLottoNumbers)
-                                                                                      .collect(Collectors.toList());
-    }
-
-    private static int inputManualPurchaseLottoCount() {
+    public static int inputManualPurchaseLottoCount() {
+        System.out.println();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualPurchaseLottoCount = SCANNER.nextInt();
         SCANNER.skip("\n");
         return manualPurchaseLottoCount;
     }
 
-    private static List<String> inputManualPurchaseLottoNumbersStrings(final int manualPurchaseLottoCount) {
+    public static List<LottoNumbers> inputManualPurchaseLottoNumbersList(final int manualPurchaseLottoCount) {
+        System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         return IntStream.rangeClosed(1, manualPurchaseLottoCount)
                         .mapToObj(order -> SCANNER.nextLine())
+                        .map(InputView::toLottoNumbers)
                         .collect(Collectors.toList());
     }
 

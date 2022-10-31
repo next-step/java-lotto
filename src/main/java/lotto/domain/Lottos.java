@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Lottos {
 
@@ -17,8 +14,11 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int size() {
-        return this.lottos.size();
+    public static Lottos union(final Lottos first, final Lottos second) {
+        return new Lottos(new ArrayList<>() {{
+            addAll(first.lottos);
+            addAll(second.lottos);
+        }});
     }
 
     public LottoWinningStatistics giveOutWinningStatistics(final int lottoPurchaseAmount,

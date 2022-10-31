@@ -21,8 +21,12 @@ public class ResultView {
                 "]";
     }
 
-    public static void printLottoAmountAndNumbers(final Lottos lottos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
+    public static void printLottoAmountAndNumbers(final int manualPurchaseLottoCount,
+                                                  final int autoPurchaseLottoCount,
+                                                  final Lottos lottos) {
+        System.out.println();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                manualPurchaseLottoCount, autoPurchaseLottoCount);
         lottos.getLottos()
               .stream()
               .map(ResultView::getFormattedLottoString)
