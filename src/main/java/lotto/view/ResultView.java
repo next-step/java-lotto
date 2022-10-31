@@ -27,7 +27,7 @@ public class ResultView {
     }
 
     public static void printProfit(int price, Map<Prize, Integer> result) {
-        float profit = new LottoProfitCalculator(price, result).calculate();
+        float profit = new LottoProfitCalculator().calculate(price, result);
 
         System.out.printf("총 수익률은 %.2f입니다.", profit);
         if (profit > 1) {

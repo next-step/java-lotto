@@ -4,16 +4,7 @@ import java.util.Map;
 
 public class LottoProfitCalculator {
 
-    private final int price;
-    private final Map<Prize, Integer> result;
-
-    public LottoProfitCalculator(int price, Map<Prize, Integer> result) {
-        this.price = price;
-        this.result = result;
-    }
-
-
-    public float calculate() {
+    public float calculate(int price, Map<Prize, Integer> result) {
         return (float) getTotalPrize(result) / price;
     }
 
