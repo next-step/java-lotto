@@ -3,31 +3,28 @@ package calculator.domain;
 import calculator.Operator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
 public class CalculatorDatas {
     private static final String NUMBER_NULL_ERROR_MESSAGE = "데이터가 없습니다";
-    private static final String REGEX = "^[0-9]*$";
 
     private List<String> calculratorDatas;
 
-    public CalculatorDatas(List<String> data) {
-        nullChk(data);
-        this.calculratorDatas = data;
+    public CalculatorDatas(List<String> datas) {
+        nullChk(datas);
+        this.calculratorDatas = datas;
     }
 
-    private void nullChk(List<String> numbers){
-        if(numbers.isEmpty()){
+    private void nullChk(List<String> datas){
+        if(datas.isEmpty() || datas == null){
             throw new IllegalArgumentException(NUMBER_NULL_ERROR_MESSAGE);
         }
     }
 
-    public static CalculatorDatas numbersMake(List<String> datas){
-        List<String> caculatorDatas = new ArrayList<>();
-        for(String value : datas){
-            caculatorDatas.add(value);
-        }
-
-        return new CalculatorDatas(caculatorDatas);
+    public static CalculatorDatas numbersMake(String data){
+        return new CalculatorDatas(Arrays.asList(data.split(" ")));
     }
 
     public int startCalculator(){

@@ -9,8 +9,7 @@ import static calculator.view.ResultView.resultCalculator;
 public class CalculatorApplication {
 
     public static void main(String[] args) {
-        List<String> datas = Arrays.asList(inputNumber().split(" "));
-        Calculator calculator = new Calculator(datas);
+        Calculator calculator = new Calculator(inputNumber());
         resultCalculator(calculator.start());
     }
 }

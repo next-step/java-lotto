@@ -11,8 +11,8 @@ public class Calculator {
 
     private CalculatorDatas calculatorDatas;
 
-    public Calculator(List<String> datas){
-        this.calculatorDatas = CalculatorDatas.numbersMake(Arrays.asList(inputNumber().split(" ")));
+    public Calculator(String data){
+        this.calculatorDatas = CalculatorDatas.numbersMake(data);
     }
 
     public int start(){
