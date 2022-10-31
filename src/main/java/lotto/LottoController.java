@@ -1,10 +1,11 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 
 import lotto.domain.Lotto;
-import lotto.domain.Prize;
+import lotto.domain.LottoNumber;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumber;
 import lotto.service.LottoFactory;
 import lotto.view.InputView;
@@ -14,26 +15,25 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoFactory lottoFactory;
-    private final Calculator calculator;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoFactory lottoFactory,
-                           Calculator calculator) {
+    public LottoController(InputView inputView, OutputView outputView, LottoFactory lottoFactory) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoFactory = lottoFactory;
-        this.calculator = calculator;
     }
 
     public void startLottoWithBonus() {
         BigDecimal payAmount = inputView.inputPayAmount();
-        Lotto lotto = lottoFactory.generateLotto(payAmount);
-        outputView.printPurchasedLotto(lotto);
+
+        int manualCount = inputView.inputManualCount();
+        List<LottoNumber> manualNumbers = inputView.inputManualNumber(manualCount);
+        Lotto lotto = lottoFactory.generateLotto(payAmount, manualNumbers);
+        outputView.printPurchasedLotto(lotto, manualCount);
 
         WinningNumber winningNumber = inputView.inputWinningNumberWithBonus();
-        Map<Prize, Integer> lottoRankMap = winningNumber.calcLottoRankWithBonus(lotto);
+        Rank lottoRankMap = winningNumber.calcLottoRankWithBonus(lotto);
         outputView.printStatisticLottoWithBonus(lottoRankMap);
 
-        BigDecimal prizeMoney = calculator.calculatePrizeMoney(lottoRankMap);
-        outputView.printYield(calculator.calculateYield(payAmount, prizeMoney));
+        outputView.printYield(lottoRankMap.calculateYield(payAmount));
     }
 }

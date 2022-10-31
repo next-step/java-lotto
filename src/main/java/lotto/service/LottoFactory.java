@@ -5,27 +5,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import lotto.Calculator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
 public class LottoFactory {
     private static final int PICK_NUMBER = 6;
-    private final Calculator calculator;
+    private static final BigDecimal PRICE_PER_LOTTO = BigDecimal.valueOf(1000);
 
-    public LottoFactory(Calculator calculator) {
+    public LottoFactory() {}
 
-        this.calculator = calculator;
-    }
-
-    public Lotto generateLotto(BigDecimal payAmount) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        int num = calculator.calculatePurchasedLottoNum(payAmount);
+    public Lotto generateLotto(BigDecimal payAmount, List<LottoNumber> manualNumbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(manualNumbers);
+        int num = calculatePurchasedLottoNum(payAmount) - manualNumbers.size();
 
         for (int i = 0; i < num; i++) {
             lottoNumbers.add(new LottoNumber(generateRandomNumbers()));
         }
+
         return new Lotto(lottoNumbers);
+    }
+
+    private int calculatePurchasedLottoNum(BigDecimal payAmount) {
+        return payAmount.divide(PRICE_PER_LOTTO).intValue();
     }
 
     private List<Integer> generateRandomNumbers() {

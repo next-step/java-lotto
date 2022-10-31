@@ -23,7 +23,11 @@ public class LottoNumber {
         return new ArrayList<>(numbers);
     }
 
-    public boolean isContainBonusNumber(Integer bonusNum) {
+    int findMatchingNumberCount(List<Integer> winningNumbers) {
+        return (int) numbers.stream().filter(winningNumbers::contains).count();
+    }
+
+    boolean isContainBonusNumber(Integer bonusNum) {
         return numbers.stream().anyMatch(n -> n.equals(bonusNum));
     }
 

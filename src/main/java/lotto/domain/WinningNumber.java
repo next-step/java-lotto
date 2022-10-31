@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class WinningNumber {
     private final List<Integer> numbers;
@@ -13,31 +11,15 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public Map<Prize, Integer> calcLottoRankWithBonus(Lotto lotto) {
-        Map<Prize, Integer> rankMap = initRankMap();
-
-        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
-            int matchingCount = findMatchingCount(lottoNumber);
-            boolean containBonusNumber = lottoNumber.isContainBonusNumber(bonusNumber);
-            addRankMap(rankMap, Prize.findPrize(matchingCount, containBonusNumber));
-        }
-
-        return rankMap;
+    public Rank calcLottoRankWithBonus(Lotto lotto) {
+        Rank rank = new Rank();
+        lotto.calculateRank(this, rank);
+        return rank;
     }
 
-    private int findMatchingCount(LottoNumber lottoNumber) {
-        return (int) numbers.stream().filter(n -> lottoNumber.getNumbers().contains(n)).count();
-    }
-
-    private Map<Prize, Integer> initRankMap() {
-        Map<Prize, Integer> rankMap = new HashMap<>();
-        for (Prize value : Prize.values()) {
-            rankMap.put(value, 0);
-        }
-        return rankMap;
-    }
-
-    private void addRankMap(Map<Prize, Integer> rankMap, Prize prize) {
-        rankMap.put(prize, rankMap.get(prize) + 1);
+    void calculateRank(LottoNumber lottoNumber, Rank rank) {
+        int matchingNumberCount = lottoNumber.findMatchingNumberCount(numbers);
+        boolean containBonusNumber = lottoNumber.isContainBonusNumber(bonusNumber);
+        rank.settingRank(matchingNumberCount, containBonusNumber);
     }
 }

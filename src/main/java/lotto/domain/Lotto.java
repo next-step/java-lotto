@@ -10,6 +10,10 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public void calculateRank(WinningNumber winningNumber, Rank rank) {
+        lottoNumbers.forEach(l -> winningNumber.calculateRank(l, rank));
+    }
+
     public int getLottoSize() {
         return lottoNumbers.size();
     }

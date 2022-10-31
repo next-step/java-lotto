@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import org.assertj.core.util.Lists;
@@ -16,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Prize;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumber;
 
 class WinningNumberTest {
@@ -24,8 +24,8 @@ class WinningNumberTest {
     @MethodSource("lottoMatchingTestCase")
     public void confirm_prize_test(Lotto lotto, Integer bonusNum, List<Integer> winningNumbers, Prize prize) {
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNum);
-        Map<Prize, Integer> rankMap = winningNumber.calcLottoRankWithBonus(lotto);
-        assertThat(rankMap.get(prize)).isOne();
+        Rank rank = winningNumber.calcLottoRankWithBonus(lotto);
+        assertThat(rank.findRank(prize)).isOne();
     }
 
     static Stream<Arguments> lottoMatchingTestCase() {

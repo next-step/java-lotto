@@ -7,8 +7,7 @@ import lotto.view.OutputView;
 public class Main {
     public static void main(String[] args) {
         LottoController lottoController = new LottoController(new InputView(), new OutputView(),
-                                                              new LottoFactory(new Calculator()),
-                                                              new Calculator());
+                                                              new LottoFactory());
         lottoController.startLottoWithBonus();
     }
 }
