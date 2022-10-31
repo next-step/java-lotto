@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoWinningStatistics;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.factory.LottoFactory;
 import lotto.strategy.LottoNumbersRandomStrategy;
 import lotto.strategy.LottoNumbersStrategy;
@@ -24,15 +21,16 @@ public class LottoMain {
         ResultView.printLottoAmountAndNumbers(lottos);
 
         String winningLottoNumbersString = InputView.inputWinningLottoNumbersString();
-        LottoNumbers winningLottoNumbers = new LottoNumbers(Stream.of(winningLottoNumbersString.split(","))
-                                                                  .map(String::trim)
-                                                                  .map(Integer::parseInt)
-                                                                  .map(LottoNumber::new)
-                                                                  .collect(Collectors.toList()));
-        LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputBonusLottoNumber());
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(
+                new LottoNumbers(Stream.of(winningLottoNumbersString.split(","))
+                                       .map(String::trim)
+                                       .map(Integer::parseInt)
+                                       .map(LottoNumber::new)
+                                       .collect(Collectors.toList())),
+                new LottoNumber(InputView.inputBonusLottoNumber()));
 
         LottoWinningStatistics lottoWinningStatistics = lottos.giveOutWinningStatistics(
-                lottoPurchaseAmount, winningLottoNumbers, bonusLottoNumber);
+                lottoPurchaseAmount, winningLottoNumbers);
         ResultView.printLottoWinningStatistics(lottoWinningStatistics);
     }
 }
