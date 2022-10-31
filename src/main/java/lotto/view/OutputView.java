@@ -18,7 +18,7 @@ public class OutputView {
     }
 
     public static void printResult(final Map<WinningInformation, Long> lottoResult, final double profit) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("-".repeat(10));
         lottoResult.forEach((key, value) -> {
             System.out.println(resultMessage(key, value));

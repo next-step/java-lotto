@@ -17,7 +17,8 @@ public class LottoStoreTest {
     @DisplayName("buyLotto 메소드는 주어진 돈으로 살 수 있는 최대 개수의 로또를 발권하고 이를 LottoStorage 객체에 저장하여 돌려준다.")
     void buyLotto() {
         LottoStore store = LottoStore.getInstance();
-        LottoStorage storage = store.buyLotto(new Money(14000), AutoIssueLottoStrategy.getInstance());
+        LottoStorage storage = new LottoStorage();
+        store.buyLotto(storage, new Money(14000), AutoIssueLottoStrategy.getInstance());
 
         assertThat(storage.getLottos().size()).isEqualTo(14);
     }
@@ -26,8 +27,10 @@ public class LottoStoreTest {
     @DisplayName("주어진 돈이 로또 가격보다 적으면 로또를 구매할 수 없다.")
     void failToBuyLotto() {
         LottoStore store = LottoStore.getInstance();
+        LottoStorage storage = new LottoStorage();
+
         assertThatThrownBy(() ->
-            store.buyLotto(new Money(100), AutoIssueLottoStrategy.getInstance()))
+            store.buyLotto(storage, new Money(100), AutoIssueLottoStrategy.getInstance()))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_NOT_ENOUGH_MONEY.getMessage());
     }

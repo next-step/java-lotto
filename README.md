@@ -36,3 +36,18 @@
 - [x] LottoStorage.matchAllWithWinningLotto 수정
 - [x] InputView 에 추가 번호를 입력할 수 있도록 수정
   - [x] Lotto에 contains 메소드 추가
+
+## TO DO LIST(Step4)
+- [x] InputView 수정
+  - [x] 수동으로 구매할 로또 수 입력 메소드 추가
+  - [x] 수동으로 구매할 로또 번호 입력 메소드 추가
+- [x] 수동 로또 전략 클래스 추가
+  - [x] 수동 구매 로또 수와 수동 구매 로또 세트 수를 비교하는 검증 메소드 추가
+- [x] Money.take 메소드 추가
+- [x] LottoStorage 수정
+  - [x] 기본 생성자 추가
+  - [x] add 메소드 추가
+- [x] LottoStore 수정
+  - [x] buyLotto 메소드 파라미터로 LottoStorage를 받도록 수정
+  - [x] buyLotto 메소드 반환 타입을 void로 수정
+- [x] LottoApplication 수정

@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
@@ -48,5 +49,26 @@ public class LottoStorageTest {
         storage.matchAllWithWinningLotto(winningLotto, new LottoNumber(7));
 
         assertThat(storage.getProfit()).isEqualTo(30_055_000 / 4_000);
+    }
+
+    @Test
+    @DisplayName("add 메소드는 LottoStorage에 로또를 추가한다.")
+    void add() {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto("2, 3, 4, 5, 6, 7"));
+        lottos.add(new Lotto("3, 4, 5, 6, 7, 8"));
+
+        LottoStorage storage = new LottoStorage(lottos);
+        storage.add(List.of(
+            new Lotto("4, 5, 6, 7, 8, 9"),
+            new Lotto("5, 6, 7, 8, 9, 10")
+        ));
+
+        assertThat(storage.getLottos()).contains(
+            new Lotto("2, 3, 4, 5, 6, 7"),
+            new Lotto("3, 4, 5, 6, 7, 8"),
+            new Lotto("4, 5, 6, 7, 8, 9"),
+            new Lotto("5, 6, 7, 8, 9, 10")
+        );
     }
 }

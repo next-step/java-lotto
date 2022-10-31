@@ -16,12 +16,12 @@ public class LottoStore {
         return INSTANCE;
     }
 
-    public LottoStorage buyLotto(final Money money, final IssueLottoStrategy strategy) {
+    public void buyLotto(final LottoStorage storage, final Money money, final IssueLottoStrategy strategy) {
         int count = money.countMaxNumberOfItemToBuy(LOTTO_PRICE);
         if (count == 0) {
             throw new IllegalArgumentException(ERROR_NOT_ENOUGH_MONEY.getMessage());
         }
 
-        return new LottoStorage(strategy.issue(count));
+        storage.add(strategy.issue(count));
     }
 }
