@@ -19,11 +19,17 @@ public enum Prize {
         this.matchCount = matchCount;
     }
 
-    public static Prize toPrize(int matchCount) {
-        return Arrays.stream(Prize.values())
+    public static Prize toPrize(int matchCount, boolean hasBonusNumber) {
+        Prize prize = Arrays.stream(Prize.values())
                 .filter(value -> value.matchCount == matchCount)
                 .findFirst()
                 .orElse(NONE);
+
+        if (prize != FIVE) {
+            return prize;
+        }
+
+        return hasBonusNumber ? FIVE_BONUS : FIVE;
     }
 
     public int getValue() {

@@ -34,11 +34,8 @@ public class Lotto {
 
     public Prize matches(Lotto winNumbers, int bonusNumber) {
         int matchNumber = matchNumberCount(winNumbers);
-        Prize prize = Prize.toPrize(matchNumber);
-        if (prize == Prize.FIVE) {
-            prize = hasNumber(bonusNumber) ? Prize.FIVE_BONUS : Prize.FIVE;
-        }
-        return prize;
+        boolean hasBonusNumber = hasNumber(bonusNumber);
+        return Prize.toPrize(matchNumber, hasBonusNumber);
     }
 
     private int matchNumberCount(Lotto winNumbers) {
