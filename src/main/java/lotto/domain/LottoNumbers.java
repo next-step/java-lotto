@@ -27,7 +27,7 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public Boolean isValidBonusNumber(LottoNumber bonusNumber) {
+    public Boolean isContainsNumber(LottoNumber bonusNumber) {
         return this.lottoNumbers.contains(bonusNumber);
     }
 
