@@ -26,7 +26,7 @@ public class LottoWinnerStatTest {
                 LottoWinnerClass.FOURTH, 1
         ));
 
-        LottoWinnerStat stat = new LottoWinnerStat(totalTicketCount, winners);
+        LottoWinnerStat stat = new LottoWinnerStat(totalTicketCount, new LottoWinners(winners));
         assertThat(stat.getProfitMargin(price, prizeInfo)).isEqualTo(1, withPrecision(0.000001));
     }
 }

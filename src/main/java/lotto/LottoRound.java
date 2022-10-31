@@ -11,13 +11,13 @@ public class LottoRound {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoWinner> getWinners(LottoTicket winningTicket) {
+    public LottoWinners getWinners(LottoTicket winningTicket) {
         List<LottoWinner> result = new ArrayList<>();
         for (LottoTicket ticket : lottoTickets) {
             int count = ticket.getMatchingCount(winningTicket);
             addWinner(result, ticket, count);
         }
-        return result;
+        return new LottoWinners(result);
     }
 
     private void addWinner(List<LottoWinner> result, LottoTicket ticket, int matchingCount) {

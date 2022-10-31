@@ -17,7 +17,7 @@ public class Main {
 
         List<Integer> winningNumbers = InputView.queryWinningNumbers();
         LottoTicket winningTicket = LottoTicket.from(winningNumbers);
-        List<LottoWinner> winners = lottoRound.getWinners(winningTicket);
+        LottoWinners winners = lottoRound.getWinners(winningTicket);
 
         LottoWinnerStat winnerStat = new LottoWinnerStat(lottoTickets.size(), winners);
         LottoPrizeInfo prizeInfo = getPrizeInfo();
