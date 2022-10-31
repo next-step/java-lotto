@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import calculator.Operation;
-import lotto.domain.Lotto;
-import lotto.domain.LottoStorage;
 
 import java.util.List;
 

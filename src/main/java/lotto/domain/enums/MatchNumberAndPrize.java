@@ -9,7 +9,15 @@ public enum MatchNumberAndPrize {
     FIFTH(3, 5_000L),
     FOURTH(4, 50_000L),
     THIRD(5, 1_500_000L),
-    SECOND(5, 30_000_000L),
+    SECOND(5, 30_000_000L) {
+        @Override
+        public void print(int matchNumber) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n",
+                    getMatchNumber(),
+                    getPrize(),
+                    matchNumber);
+        }
+    },
     FIRST(6, 2_000_000_000L);
 
     public static final int SECOND_MATCH_NUMBER = 5;
@@ -28,6 +36,13 @@ public enum MatchNumberAndPrize {
     MatchNumberAndPrize(int matchNumber, Long prize) {
         this.matchNumber = matchNumber;
         this.prize = prize;
+    }
+
+    public void print(int matchNumber) {
+        System.out.printf("%d개 일치 (%d원)- %d개\n",
+                getMatchNumber(),
+                getPrize(),
+                matchNumber);
     }
 
     public static MatchNumberAndPrize valueOfMatchNumber(int matchNumber, boolean isBonusContain) {

@@ -26,10 +26,11 @@ public class LottoResultView {
         System.out.println("---------");
         for (MatchNumberAndPrize matchNumberAndPrize : MatchNumberAndPrize.values()) {
             if (matchNumberAndPrize == MatchNumberAndPrize.NON) continue;
-            System.out.printf("%d개 일치 (%d원)- %d개\n",
+            matchNumberAndPrize.print(winningAmountIntegerMap.get(matchNumberAndPrize));
+            /*System.out.printf("%d개 일치 (%d원)- %d개\n",
                     matchNumberAndPrize.getMatchNumber(),
                     matchNumberAndPrize.getPrize(),
-                    winningAmountIntegerMap.get(matchNumberAndPrize));
+                    winningAmountIntegerMap.get(matchNumberAndPrize));*/
         }
     }
 
