@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class View {
     public static final OutputView outputView = new OutputView();
@@ -48,6 +49,12 @@ public class View {
                     .stream()
                     .mapToInt(i -> Integer.valueOf(i))
                     .boxed()
+                    .collect(Collectors.toList());
+        }
+
+        public static List<List<Integer>> inputStringsToIntegers(int repeatCount, String delimiter) {
+            return IntStream.range(0, repeatCount)
+                    .mapToObj(i -> inputStringsToIntegers(delimiter))
                     .collect(Collectors.toList());
         }
     }
