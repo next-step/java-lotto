@@ -37,7 +37,7 @@ public enum Calculator {
         return result;
     }
 
-    private static void validateInput(String inputString) throws IllegalArgumentException {
+    private static void validateInput(String inputString) {
         if (inputString == null || inputString.isBlank()) {
             throw new IllegalArgumentException(NO_INPUT_EXCEPTION);
         }
