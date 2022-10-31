@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.exceptions.LottoNumberFormatException;
-import lotto.exceptions.NotEnoughPurchasedAmountException;
 
 public enum LottoGenerator {
     INSTANCE;
@@ -21,16 +20,8 @@ public enum LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> purchaseByManual(LottoPurchasedAmount amount, List<String> purchasedByManualList) {
-        int amountForManual = purchasedByManualList.size() * PRICE;
-
-        if (amount.getAmount() < amountForManual) {
-            throw new NotEnoughPurchasedAmountException(amount.getAmount(), amountForManual);
-        }
-
-        return purchasedByManualList.stream()
-                .map(this::createLotto)
-                .collect(Collectors.toList());
+    public Lotto purchaseByManual(String lottoString) {
+        return createLotto(lottoString);
     }
 
     public LottoWinner createLottoWinner(String numberString, String bonusString) {
