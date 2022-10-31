@@ -1,35 +1,38 @@
 package step2.controller;
 
+import step2.model.LottoChecker;
 import step2.model.Lottos;
+import step2.model.Money;
+import step2.util.FixLottoGenerator;
 import step2.util.LottoGenerator;
 import step2.view.InputView;
 import step2.view.OutputView;
 
-import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoController {
-	private final static String DELIMITER = ", ";
 
 	private final Lottos lottos;
+	private final LottoChecker lottoChecker;
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
 
 	public LottoController(LottoGenerator lottoGenerator) {
-		lottos = new Lottos(inputView.inputMoney(), lottoGenerator);
+		Money money = new Money(inputView.inputMoney());
+		lottos = new Lottos(money, lottoGenerator);
+		lottoChecker = new LottoChecker(lottos, money);
 	}
 
 	public void buyLotto() {
 		outputView.printTicketCnt(lottos.getTicketCnt());
 		outputView.printLottoNumbers(lottos.getLottos());
 		Map<Integer, Integer> hitCntMap =
-				lottos.checkHit(
-					Arrays.stream(inputView.inputLastWeekNumber().split(DELIMITER))
-						.mapToInt(Integer::parseInt)
-						.boxed()
-						.collect(Collectors.toList()));
-		Double earningRate = lottos.getEarningRate(hitCntMap);
+				lottoChecker
+						.checkHit(
+								new FixLottoGenerator(inputView.inputLastWeekNumber()
+										.replaceAll(" ", ""))
+										.generating());
+		double earningRate = lottoChecker.getEarningRate(hitCntMap);
 		outputView.pritnHitStatistics(hitCntMap, earningRate);
 	}
 }

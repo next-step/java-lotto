@@ -6,15 +6,17 @@ import java.util.stream.Collectors;
 
 public class FixLottoGenerator implements LottoGenerator {
 
-	private final String fiexdNumber;
+	private static final String DELIMITER = ",";
+
+	private final String fixedNumber;
 
 	public FixLottoGenerator(String fixedNumber) {
-		this.fiexdNumber = fixedNumber;
+		this.fixedNumber = fixedNumber;
 	}
 
 	@Override
 	public List<Integer> generating() {
-		return Arrays.stream(fiexdNumber.split(","))
+		return Arrays.stream(fixedNumber.split(DELIMITER))
 				.mapToInt(Integer::parseInt)
 				.boxed()
 				.collect(Collectors.toList());

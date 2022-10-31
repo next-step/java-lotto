@@ -6,7 +6,7 @@ import step2.util.RandomLottoGenerator;
 
 public class MainApplication {
 	public static void main(String[] args) {
-		LottoGenerator lottoGenerator = RandomLottoGenerator.init();
+		LottoGenerator lottoGenerator = new RandomLottoGenerator();
 		LottoController lottoController = new LottoController(lottoGenerator);
 		lottoController.buyLotto();
 	}

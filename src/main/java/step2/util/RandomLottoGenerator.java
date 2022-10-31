@@ -14,9 +14,8 @@ public class RandomLottoGenerator implements LottoGenerator{
 
 	private static final List<Integer> lottoNumberList = new ArrayList<>();
 
-	public static RandomLottoGenerator init(){
+	static {
 		IntStream.range(RANGE_START, RANGE_END).forEachOrdered(lottoNumberList::add);
-		return new RandomLottoGenerator();
 	}
 
 	@Override

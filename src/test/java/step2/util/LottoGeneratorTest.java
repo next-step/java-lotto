@@ -8,7 +8,7 @@ class LottoGeneratorTest {
 
 	@Test
 	void randomGeneratingTest(){
-		LottoGenerator randomLottoGenerator = RandomLottoGenerator.init();
+		LottoGenerator randomLottoGenerator = new RandomLottoGenerator();
 		assertThat(randomLottoGenerator.generating().size()).isEqualTo(6);
 	}
 }

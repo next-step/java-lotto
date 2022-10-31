@@ -2,6 +2,8 @@ package step2.model;
 
 import step2.util.LottoGenerator;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -12,7 +14,7 @@ public class Lotto {
 		lottoNumbers = lottoGenerator.generating();
 	}
 
-	public static Lotto generate(LottoGenerator lottoGenerator) {
+	public static Lotto generate(final LottoGenerator lottoGenerator) {
 		return new Lotto(lottoGenerator);
 	}
 
@@ -24,6 +26,6 @@ public class Lotto {
 	}
 
 	public List<Integer> getLottoNumbers() {
-		return lottoNumbers;
+		return List.copyOf(lottoNumbers);
 	}
 }
