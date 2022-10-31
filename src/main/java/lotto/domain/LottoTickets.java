@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
+    private static final Integer LOTTO_DEFAULT_START_NUMBER = 1;
+    private static final Integer LOTTO_DEFAULT_END_NUMBER = 45;
 
     private final PurchaseInfo purchaseInfo;
     private List<Lotto> lottoList = new ArrayList<>();
@@ -50,9 +52,19 @@ public class LottoTickets {
     }
 
     private void makeAutoLotto() {
+        List<Integer> defaultNumberList = defaultNumberList();
+
         for (int i = 0; i < this.purchaseInfo.getAutoAmount(); i++) {
-            lottoList.add(new Lotto().pickAuto());
+            lottoList.add(new Lotto().pickAuto(defaultNumberList));
         }
+    }
+
+    private List<Integer> defaultNumberList() {
+        List<Integer> defaultNumberList = new ArrayList<>();
+        for (int i = LOTTO_DEFAULT_START_NUMBER; i <= LOTTO_DEFAULT_END_NUMBER; i++) {
+            defaultNumberList.add(i);
+        }
+        return defaultNumberList;
     }
 
 }
