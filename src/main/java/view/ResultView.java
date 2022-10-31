@@ -7,14 +7,18 @@ import domain.Rank;
 import util.View;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ResultView {
 
-    public static void printLottos(List<Lotto> lottos) {
-        View.outputView.printf("%d개를 구매했습니다.", lottos.size());
+    public static void printLottos(List<Lotto> autoLottos, List<Lotto> manualLottos) {
+        View.outputView.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottos.size(), autoLottos.size());
         View.outputView.println();
-        lottos.stream()
-                .forEach(lotto -> System.out.println(lotto));
+
+        Stream.of(autoLottos, manualLottos)
+                .flatMap(List::stream)
+                .forEach(System.out::println);
+
     }
 
     public static void printStatistics(Price purchasePrice, LottoStatistics lottoStatistics) {

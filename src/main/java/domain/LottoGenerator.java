@@ -2,6 +2,7 @@ package domain;
 
 import util.RandomLottoNumberGenerator;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +46,7 @@ public class LottoGenerator {
         Set<LottoNumber> tempNumbers = new HashSet<>();
 
         RandomLottoNumberGenerator randomLottoNumberGenerator = RandomLottoNumberGenerator.getInstance();
-        while(isValidateNumbers(tempNumbers)) {
+        while (isValidateNumbers(tempNumbers)) {
             LottoNumber lottoNumber = randomLottoNumberGenerator.generate();
             tempNumbers.add(lottoNumber);
         }
@@ -64,12 +65,31 @@ public class LottoGenerator {
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
-        if(isValidateNumbers(lottoNumbers)) {
+        if (isValidateNumbers(lottoNumbers)) {
             throw new RuntimeException("로또는 6개의 숫자로 이루어져야 합니다.");
-        };
+        }
+    }
+
+    public List<Lotto> generateLotto(int numberOfManualLotto, List<List<Integer>> manualLottoNumbers) {
+        validateManual(numberOfManualLotto, manualLottoNumbers);
+
+        return manualLottoNumbers.stream()
+                .map(this::generateLotto)
+                .collect(Collectors.toList());
+    }
+
+    private void validateManual(int numberOfManualLotto, List<List<Integer>> manualLottoNumbers) {
+        if (numberOfManualLotto != manualLottoNumbers.size()) {
+            throw new IllegalArgumentException("구매하고자 하는 로또의 수와 입력한 로또 번호수가 일치하지 않습니다.");
+        }
+    }
+
+    public Price calculatePrice(List<Lotto> lottos) {
+        return UNIT_PRICE.multiple(lottos.size());
     }
 
     private final static class LazyHolder {
+
         private final static LottoGenerator instance = new LottoGenerator();
     }
 
