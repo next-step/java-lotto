@@ -2,7 +2,13 @@ package lotto.domain;
 
 public class Money {
 
-	public Money(int value) {
+	private int value;
 
+	public Money(int value) {
+		this.value = value;
+	}
+
+	public int getValue() {
+		return value;
 	}
 }
