@@ -19,8 +19,9 @@ public class Application {
         LottoFactory lottoFactory = new LottoFactory();
         LottoResultView view = new LottoResultView();
 
-        List<Lotto> lottos = lottoFactory.produces(Collections::shuffle, purchaseInfo.getAutoLottoCount());
-        lottos.addAll(purchaseInfo.getManualLottos());
+        List<Lotto> lottos = lottoFactory.produceAutoLottos(Collections::shuffle, purchaseInfo.getAutoLottoCount());
+        List<Lotto> manuLottos = lottoFactory.produceManualLottos(purchaseInfo.getManualLottos());
+        lottos.addAll(manuLottos);
 
         view.print(lottos);
 
