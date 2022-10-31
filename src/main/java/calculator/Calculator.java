@@ -14,7 +14,9 @@ public enum Calculator {
     DIVIDER(new Divider());
 
     private final static String INPUT_REGEX = " ";
+
     private final static String NO_INPUT_EXCEPTION = "입력 값이 null 이거나 빈 공백 문자입니다.";
+
     private final Calculatable calculatable;
 
     Calculator(Calculatable calculatable) {
