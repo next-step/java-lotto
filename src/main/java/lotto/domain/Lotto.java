@@ -39,7 +39,7 @@ public class Lotto {
         return ticketList;
     }
 
-    public Ranks rankedWinningNumbers(WinnigTicket winningTicket) {
+    public Ranks rankedWinningNumbers(WinningTicket winningTicket) {
         List<Rank> ranks = new ArrayList<>();
         for (Ticket ticket : ticketList) {
             ranks.add(matchRank(winningTicket, ticket));
@@ -47,7 +47,7 @@ public class Lotto {
         return new Ranks(ranks, getPurchageAmount());
     }
 
-    public static Rank matchRank(WinnigTicket winningTicket, Ticket ticket) {
+    public static Rank matchRank(WinningTicket winningTicket, Ticket ticket) {
         int matchCount = getWinningNumbersMatchCount(winningTicket.getTicket(), ticket);
         boolean matchBonus = ticket.getLottoNumbers().contains(winningTicket.getBonusNumber());
         return Rank.of(matchCount, matchBonus);

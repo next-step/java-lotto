@@ -21,9 +21,9 @@ public class RanksTest {
         Lotto lotto = new Lotto(ticketList);
 
         Ticket lottoWinningTicket = Ticket.of(Arrays.asList(3, 4, 5, 6, 7, 8));
-        WinnigTicket winnigTicket = new WinnigTicket(lottoWinningTicket, 9);
+        WinningTicket winningTicket = new WinningTicket(lottoWinningTicket, 9);
 
-        Ranks ranks = lotto.rankedWinningNumbers(winnigTicket);
+        Ranks ranks = lotto.rankedWinningNumbers(winningTicket);
         Map<Rank, Integer> rankMap = ranks.getRanks();
 
         assertThat(rankMap.get(Rank.FIFTH)).isEqualTo(0);
@@ -42,8 +42,8 @@ public class RanksTest {
         Lotto lotto = new Lotto(ticketList);
 
         Ticket lottoWinningTicket = Ticket.of(Arrays.asList(3, 4, 5, 6, 7, 8));
-        WinnigTicket winnigTicket = new WinnigTicket(lottoWinningTicket, 9);
-        Ranks ranks = lotto.rankedWinningNumbers(winnigTicket);
+        WinningTicket winningTicket = new WinningTicket(lottoWinningTicket, 9);
+        Ranks ranks = lotto.rankedWinningNumbers(winningTicket);
 
         assertThat(ranks.getTotalWinningAmount()).isEqualTo(50000);
 
@@ -70,8 +70,8 @@ public class RanksTest {
         Lotto lotto = new Lotto(ticketList);
 
         Ticket lottoWinningTicket = Ticket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinnigTicket winnigTicket = new WinnigTicket(lottoWinningTicket, 9);
-        Ranks ranks = lotto.rankedWinningNumbers(winnigTicket);
+        WinningTicket winningTicket = new WinningTicket(lottoWinningTicket, 9);
+        Ranks ranks = lotto.rankedWinningNumbers(winningTicket);
 
         assertThat(ranks.getTotalWinningAmount()).isEqualTo(expected);
     }
@@ -85,8 +85,8 @@ public class RanksTest {
         Lotto lotto = new Lotto(ticketList);
 
         Ticket lottoWinningTicket = Ticket.of(Arrays.asList(3, 4, 5, 6, 7, 8));
-        WinnigTicket winnigTicket = new WinnigTicket(lottoWinningTicket, 9);
-        Ranks ranks = lotto.rankedWinningNumbers(winnigTicket);
+        WinningTicket winningTicket = new WinningTicket(lottoWinningTicket, 9);
+        Ranks ranks = lotto.rankedWinningNumbers(winningTicket);
 
         assertThat(ranks.caculateIncomePercentage()).isEqualTo(50);
     }
