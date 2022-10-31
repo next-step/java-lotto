@@ -1,14 +1,12 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Lottos;
+import lotto.domain.WinningLottoNumbers;
 import lotto.factory.LottoFactory;
 import lotto.strategy.LottoNumbersRandomStrategy;
 import lotto.strategy.LottoNumbersStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoMain {
 
@@ -20,17 +18,9 @@ public class LottoMain {
 
         ResultView.printLottoAmountAndNumbers(lottos);
 
-        String winningLottoNumbersString = InputView.inputWinningLottoNumbersString();
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(
-                new LottoNumbers(Stream.of(winningLottoNumbersString.split(","))
-                                       .map(String::trim)
-                                       .map(Integer::parseInt)
-                                       .map(LottoNumber::new)
-                                       .collect(Collectors.toList())),
-                new LottoNumber(InputView.inputBonusLottoNumber()));
+                InputView.inputWinningLottoNumbers(), InputView.inputBonusLottoNumber());
 
-        LottoWinningStatistics lottoWinningStatistics = lottos.giveOutWinningStatistics(
-                lottoPurchaseAmount, winningLottoNumbers);
-        ResultView.printLottoWinningStatistics(lottoWinningStatistics);
+        ResultView.printLottoWinningStatistics(lottos.giveOutWinningStatistics(lottoPurchaseAmount, winningLottoNumbers));
     }
 }
