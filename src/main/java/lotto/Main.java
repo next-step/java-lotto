@@ -17,12 +17,12 @@ public class Main {
 
         List<Integer> winningNumbers = InputView.queryWinningNumbers();
         LottoTicket winningTicket = LottoTicket.from(winningNumbers);
-        LottoWinners winners = lottoRound.getWinners(winningTicket);
+        List<LottoResult> results = lottoRound.finishRound(winningTicket);
 
-        LottoWinnerStat winnerStat = new LottoWinnerStat(lottoTickets.size(), winners);
+        LottoResultStat resultStat = new LottoResultStat(results);
         LottoPrizeInfo prizeInfo = getPrizeInfo();
-        double profitMargin = winnerStat.getProfitMargin(lottoPrice, prizeInfo);
-        ResultView.printWinnerStat(winnerStat, prizeInfo);
+        double profitMargin = resultStat.getProfitMargin(lottoPrice, prizeInfo);
+        ResultView.printLottoResult(resultStat, prizeInfo);
         ResultView.printProfitMargin(profitMargin);
     }
 
@@ -32,10 +32,10 @@ public class Main {
 
     private static LottoPrizeInfo getPrizeInfo() {
         return new LottoPrizeInfo(Map.of(
-                LottoWinnerClass.FIRST, 2000000000,
-                LottoWinnerClass.SECOND, 1500000,
-                LottoWinnerClass.THIRD, 50000,
-                LottoWinnerClass.FOURTH, 5000
+                LottoResult.FIRST, 2000000000,
+                LottoResult.SECOND, 1500000,
+                LottoResult.THIRD, 50000,
+                LottoResult.FOURTH, 5000
         ));
     }
 }

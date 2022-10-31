@@ -14,7 +14,6 @@ public class LottoRoundTest {
         LottoRound round = new LottoRound(List.of(ticket1, ticket2));
         LottoTicket winningTicket = LottoTicket.from(3, 4, 5, 6, 7, 8);
 
-        assertThat(round.getWinners(winningTicket))
-                .isEqualTo(new LottoWinners(List.of(new LottoWinner(4, ticket1))));
+        assertThat(round.finishRound(winningTicket)).containsExactly(LottoResult.THIRD, LottoResult.NONE);
     }
 }
