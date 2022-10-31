@@ -18,6 +18,6 @@ public class LottoWinnerStat {
         for (LottoWinnerClass winnerClass : LottoWinnerClass.values()) {
             result += prizeInfo.getPrize(winnerClass) * getWinnerCount(winnerClass);
         }
-        return result / (ticketCount * price.getPrice());
+        return result / price.getPurchasePrice(ticketCount);
     }
 }
