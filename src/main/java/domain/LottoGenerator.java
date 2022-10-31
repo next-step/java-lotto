@@ -76,13 +76,16 @@ public class LottoGenerator {
         return manualLottoNumbers.stream()
                 .map(this::generateLotto)
                 .collect(Collectors.toList());
-
     }
 
     private void validateManual(int numberOfManualLotto, List<List<Integer>> manualLottoNumbers) {
         if (numberOfManualLotto != manualLottoNumbers.size()) {
             throw new IllegalArgumentException("구매하고자 하는 로또의 수와 입력한 로또 번호수가 일치하지 않습니다.");
         }
+    }
+
+    public Price calculatePrice(List<Lotto> lottos) {
+        return UNIT_PRICE.multiple(lottos.size());
     }
 
     private final static class LazyHolder {

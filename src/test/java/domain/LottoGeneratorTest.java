@@ -41,14 +41,14 @@ public class LottoGeneratorTest {
                 .collect(Collectors.toList());
         int bonus = 7;
 
-        assertThat(LOTTO_GENERATOR.generateWinningLotto(List.of(1,2,3,4,5,6), bonus)).isEqualTo(new WinningLotto(lottoNumbers, new LottoNumber(bonus)));
+        assertThat(LOTTO_GENERATOR.generateWinningLotto(List.of(1, 2, 3, 4, 5, 6), bonus)).isEqualTo(new WinningLotto(lottoNumbers, new LottoNumber(bonus)));
     }
 
     @Test
     void 수동으로_로또를_생성한다() {
         int numberOfManualLotto = 3;
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        List<Integer> lottoNumbers = List.of(1,2,3,4,5,6);
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         manualLottoNumbers.add(lottoNumbers);
         manualLottoNumbers.add(lottoNumbers);
         manualLottoNumbers.add(lottoNumbers);
@@ -60,7 +60,7 @@ public class LottoGeneratorTest {
     void 수동으로_로또를_생성할때_개수와_번호의수가_일치하지않으면_예외를뱉는다() {
         int numberOfManualLotto = 2;
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        List<Integer> lottoNumbers = List.of(1,2,3,4,5,6);
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         manualLottoNumbers.add(lottoNumbers);
         manualLottoNumbers.add(lottoNumbers);
         manualLottoNumbers.add(lottoNumbers);
@@ -68,5 +68,15 @@ public class LottoGeneratorTest {
         assertThatThrownBy(() -> {
             assertThat(LOTTO_GENERATOR.generateLotto(numberOfManualLotto, manualLottoNumbers)).hasSize(numberOfManualLotto);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 로또생성기는_로또를_통해_구매한_가격을_알_수_있다() {
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<Lotto> lottos = List.of(LOTTO_GENERATOR.generateLotto(lottoNumbers)
+                , LOTTO_GENERATOR.generateLotto(lottoNumbers)
+                , LOTTO_GENERATOR.generateLotto(lottoNumbers));
+
+        assertThat(LOTTO_GENERATOR.calculatePrice(lottos)).isEqualTo(new Price(3000));
     }
 }

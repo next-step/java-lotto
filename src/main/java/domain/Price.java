@@ -42,6 +42,10 @@ public class Price {
         return new Price(CALCULATOR.add(this.value, price.value));
     }
 
+    public Price minus(Price price) {
+        return new Price(CALCULATOR.subtract(this.value, price.value));
+    }
+
     public Price multiple(long number) {
         return new Price(CALCULATOR.multiple(this.value, number));
     }
