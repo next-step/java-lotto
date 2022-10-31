@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
@@ -29,7 +30,7 @@ public class LottosTest {
         WinnerNumbers winnerNumbers = new WinnerNumbers(Number.of(1, 2, 3, 4, 5, 6), Number.of(7));
         LottoResult result = lottos.getResult(winnerNumbers);
 
-        Assertions.assertThat(result).isEqualTo(
+        assertThat(result).isEqualTo(
             new LottoResult(
                 List.of(
                     Rank.MISS,
@@ -49,5 +50,56 @@ public class LottosTest {
                 )
             )
         );
+    }
+
+    @Test
+    void 로또_유형별_갯수_확인() {
+        Lottos lottos = new Lottos(
+            List.of(
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL)
+            )
+        );
+        assertThat(lottos.getAutoQuantity()).isEqualTo(3);
+        assertThat(lottos.getManualQuantity()).isEqualTo(2);
+    }
+
+    @Test
+    void 다른_로또_병합() {
+        Lottos lottos = new Lottos(
+            List.of(
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO)
+            )
+        );
+        Lottos mergedLotto = lottos.merge(
+            new Lottos(
+                List.of(
+                    new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL),
+                    new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL),
+                    new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL)
+                )
+            )
+        );
+
+        assertThat(mergedLotto.getAutoQuantity()).isEqualTo(3);
+        assertThat(mergedLotto.getManualQuantity()).isEqualTo(3);
+    }
+
+    @Test
+    void 로또구입_총액_계산() {
+        Lottos lottos = new Lottos(
+            List.of(
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO),
+                new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO)
+            )
+        );
+
+        assertThat(lottos.totalPrice()).isEqualTo(new Money(3000));
     }
 }

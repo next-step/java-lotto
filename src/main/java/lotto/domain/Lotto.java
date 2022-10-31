@@ -3,21 +3,25 @@ package lotto.domain;
 import java.util.*;
 
 public class Lotto {
-    private final int NUMBER_OF_LOTTO_NUMBERS = 6;
+    public final static int LOTTO_PRICE = 1000;
+    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private final Set<Number> numbers;
+    private final LottoType type;
 
     public Lotto(Set<Number> numbers) {
+        this(numbers, LottoType.AUTO);
+    }
+
+    public Lotto(Set<Number> numbers, final LottoType type){
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = new TreeSet<>(numbers);
+        this.type = type;
     }
 
     private void validate(Set<Number> numbers) {
         if (numbers.size() != NUMBER_OF_LOTTO_NUMBERS) {
             throw new IllegalArgumentException("로또의 숫자 갯수는 6개 입니다.");
-        }
-        if (!(numbers instanceof TreeSet)) {
-            throw new IllegalArgumentException("로또는 정렬을 위해 TreeSet 만 이용 가능합니다.");
         }
     }
 
@@ -27,6 +31,14 @@ public class Lotto {
 
     public Rank checkRank(WinnerNumbers winnerNumbers) {
         return Rank.valueOf(winnerNumbers.match(numbers), winnerNumbers.hasBonus(numbers));
+    }
+
+    public boolean isAuto(){
+        return type == LottoType.AUTO;
+    }
+
+    public boolean isManual(){
+        return type == LottoType.MANUAL;
     }
 
     @Override

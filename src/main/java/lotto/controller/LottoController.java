@@ -10,17 +10,18 @@ import java.util.Set;
 public class LottoController {
 
     public static void main(String[] args) {
-        Output.printPurchaseRequest();
-        int inputPrice = Input.inputPrice();
+        Money money = Input.inputPrice();
+        Lottos manualLottos = Input.inputManualLotto(Input.inputManuallyPurchaseCount());
+        money.minus(manualLottos.totalPrice());
 
         LottoShop lottoShop = new LottoShop(new RandomNumberStrategy());
-        Lottos lottos = lottoShop.buy(new Money(inputPrice));
-        Output.printPurchasedLotto(lottos);
+        Lottos lottos = lottoShop.buy(money);
 
-        Output.printWinnerNumbersRequest();
-        Set<Number> winnerNumbers = Input.inputWinnerNumbers();
-        Output.printBonusNumbersRequest();
+        Lottos mergedLotto = manualLottos.merge(lottos);
+        Output.printPurchasedLotto(mergedLotto);
+
+        Set<Number> winnerNumbers = Input.inputWinnersNumber();
         Number bonusNumber = Input.inputBonusNumber();
-        Output.printResult(lottos.getResult(new WinnerNumbers(winnerNumbers, bonusNumber)));
+        Output.printResult(mergedLotto.getResult(new WinnerNumbers(winnerNumbers, bonusNumber)));
     }
 }

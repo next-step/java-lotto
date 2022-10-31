@@ -3,8 +3,6 @@ package lotto.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-
 public class LottoTest {
 
     @Test
@@ -28,16 +26,9 @@ public class LottoTest {
 
     @Test
     void 로또의_숫자_갯수는_6개_이다() {
-        Assertions.assertThatThrownBy(() -> new Lotto(Number.of(1, 2)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또의 숫자 갯수는 6개 입니다.");
-    }
-
-    @Test
-    void 로또는_정렬을_위해_TreeSet만_사용가능() {
-        Assertions.assertThatThrownBy(() -> new Lotto(new HashSet<>(Number.of(1, 2, 3, 4, 5, 6))))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또는 정렬을 위해 TreeSet 만 이용 가능합니다.");
+        Assertions.assertThatIllegalArgumentException()
+            .isThrownBy(() -> new Lotto(Number.of(1, 2)))
+            .withMessage("로또의 숫자 갯수는 6개 입니다.");
     }
 
     @Test
@@ -55,5 +46,13 @@ public class LottoTest {
         Assertions.assertThat(third.checkRank(winnerNumbers)).isEqualTo(Rank.THIRD);
         Assertions.assertThat(fourth.checkRank(winnerNumbers)).isEqualTo(Rank.FOURTH);
         Assertions.assertThat(fifth.checkRank(winnerNumbers)).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    void 로또_구매_유형_확인() {
+        Lotto auto = new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.AUTO);
+        Lotto manual = new Lotto(Number.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL);
+        Assertions.assertThat(auto.isAuto()).isTrue();
+        Assertions.assertThat(manual.isManual()).isTrue();
     }
 }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoShop {
-    private final static int LOTTO_PRICE = 1000;
-
     private final LottoNumberStrategy lottoNumberStrategy;
 
     public LottoShop(LottoNumberStrategy lottoNumberStrategy) {
@@ -13,10 +11,11 @@ public class LottoShop {
     }
 
     public Lottos buy(final Money money) {
-        List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < money.calculateQuantity(LOTTO_PRICE); i++) {
-            result.add(Lotto.create(lottoNumberStrategy));
+        List<Lotto> lottos = new ArrayList<>();
+        int quantity = money.calculateMaxQuantity();
+        for (int i = 0; i < quantity; i++) {
+            lottos.add(Lotto.create(lottoNumberStrategy));
         }
-        return new Lottos(result);
+        return new Lottos(lottos);
     }
 }

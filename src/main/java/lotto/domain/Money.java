@@ -2,15 +2,21 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.domain.Lotto.LOTTO_PRICE;
+
 public class Money {
-    private final int money;
+    private int money;
 
     public Money(int money) {
         this.money = money;
     }
 
-    public int calculateQuantity(int price) {
-        return money / price;
+    public int calculateMaxQuantity() {
+        return money / LOTTO_PRICE;
+    }
+
+    public void minus(Money totalPrice) {
+        this.money -= totalPrice.money;
     }
 
     @Override
