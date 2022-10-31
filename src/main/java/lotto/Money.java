@@ -5,27 +5,35 @@ import java.util.Objects;
 public class Money {
     private final int money;
 
-    public Money(int money) {
+    private Money(int money) {
         this.money = money;
     }
 
-    public Money() {
-        this.money = 0;
+    public static Money of(int money) {
+        return new Money(money);
     }
 
-    public Money add(Money other) {
+    public Money plus(Money other) {
         return new Money(money + other.money);
     }
 
-    public Money multiplication(int count) {
+    public Money minus(Money other) {
+        int rest = money - other.money;
+        if (rest < 0) {
+            throw new IllegalArgumentException("Money는 음수가 될 수 없습니다.");
+        }
+        return new Money(rest);
+    }
+
+    public int countBy(Money other) {
+        return money / other.money;
+    }
+
+    public Money multiplyBy(int count) {
         return new Money(money * count);
     }
 
-    public int divideBy(Money ticketPrice) {
-        return money / ticketPrice.money;
-    }
-
-    public double calculateRate(Money other) {
+    public double earningRate(Money other) {
         return (double) money / (double) other.money;
     }
 
@@ -45,6 +53,4 @@ public class Money {
     public int hashCode() {
         return Objects.hash(money);
     }
-
-
 }

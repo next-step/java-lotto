@@ -1,33 +1,51 @@
 package lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final int number;
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
 
-    public LottoNumber(int number) {
-        this.number = number;
+    static {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
     }
 
-    public int getNumber() {
-        return number;
+    private final int lottoNumber;
+
+    private LottoNumber(int lottoNumber) {
+        if (lottoNumber < 1 || 45 < lottoNumber) {
+            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하이어야 합니다.");
+        }
+        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber of(int lottoNumber) {
+        if (lottoNumber < 1 || 45 < lottoNumber) {
+            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하이어야 합니다.");
+        }
+        return lottoNumbers.get(lottoNumber);
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber lotto = (LottoNumber) o;
-        return number == lotto.number;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(lottoNumber);
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(number);
-    }
 }
