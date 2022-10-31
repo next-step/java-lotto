@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
-import lotto.domain.LottoStatistic;
-import lotto.domain.PurchaseInfo;
+import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
@@ -26,9 +23,9 @@ public class Application {
         lottos.addAll(purchaseInfo.getManualLottos());
 
         view.print(lottos);
-        
+
         Lotto beforeWinLotto = inputView.readBeforeWinLotto();
-        int bonusNumber = inputView.readBonusNumber();
+        LottoNumber bonusNumber = inputView.readBonusNumber();
 
         LottoStatistic lottoStatistic = new LottoStatistic();
         lottoStatistic.analyze(lottos, beforeWinLotto, purchaseInfo, bonusNumber);

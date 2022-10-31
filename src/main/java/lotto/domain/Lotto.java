@@ -51,12 +51,12 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public LottoResult getResult(Lotto winLottoNumber, int bonusNumber) {
+    public LottoResult getResult(Lotto winLottoNumber, LottoNumber bonusNumber) {
         return LottoResult.from(matchCount(winLottoNumber), hasBonusNumber(bonusNumber));
     }
 
-    private boolean hasBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(LottoNumber.of(bonusNumber));
+    private boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     private int matchCount(Lotto winLottoNumber) {

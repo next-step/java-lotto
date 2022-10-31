@@ -21,7 +21,7 @@ class LottoTest {
     void 결과() {
         Lotto beforeLotto = Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto = Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 7));
-        LottoResult result = lotto.getResult(beforeLotto, 7);
+        LottoResult result = lotto.getResult(beforeLotto, LottoNumber.of(7));
 
         assertThat(result).isEqualTo(LottoResult.SECOND);
     }

@@ -1,12 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumberPool;
+import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -24,17 +23,13 @@ public class LottoInputView {
         return Lotto.ofString(lottoNumbers);
     }
 
-    public int readBonusNumber() {
+    public LottoNumber readBonusNumber() {
         System.out.println("보너스 번호를 입력해 주세요");
         int bonusNumber = scanner.nextInt();
         scanner.nextLine();
-
-        Optional.of(bonusNumber)
-                .filter(n -> n > LottoNumberPool.MAX_LOTTO_NUMBER)
-                .ifPresent(n -> new IllegalArgumentException(String.format("%d보다 큰값은 입력할수 없습니다. 입력값:%d", LottoNumberPool.MAX_LOTTO_NUMBER, n)));
-
-        return bonusNumber;
+        return LottoNumber.of(bonusNumber);
     }
+
 
     public PurchaseInfo read() {
         int purchaseAmount = readPurchaseAmount();

@@ -14,7 +14,7 @@ class LottoStatisticTest {
 
     @Test
     void 통계정보() {
-        int bonusNumber = 7;
+        LottoNumber bonusNumber = LottoNumber.of(7);
         Lotto beforeWinLotto = Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 6));
         PurchaseInfo purchaseInfo = new PurchaseInfo(6000);
 
@@ -44,7 +44,7 @@ class LottoStatisticTest {
 
     @Test
     void 이등() {
-        int bonusNumber = 7;
+        LottoNumber bonusNumber = LottoNumber.of(7);
         Lotto beforeWinLotto = Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 6));
         PurchaseInfo purchaseInfo = new PurchaseInfo(3000);
 
