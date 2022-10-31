@@ -12,13 +12,13 @@ public class LottoProfitCalculatorTest {
     @Test
     @DisplayName("모든 등수에 한번씩 당첨")
     void calculate() {
-        Map<Prize, Integer> result = Map.of(
+        LottoResult result = new LottoResult(Map.of(
                 Prize.NONE, 1,
                 Prize.THREE, 1,
                 Prize.FOUR, 1,
                 Prize.FIVE, 1,
                 Prize.SIX, 1
-        );
+        ));
 
         float profit = new LottoProfitCalculator().calculate(1, result);
         assertThat(profit).isEqualTo(
@@ -31,7 +31,7 @@ public class LottoProfitCalculatorTest {
     @Test
     @DisplayName("당첨된 번호 없음")
     void calculate_zero() {
-        Map<Prize, Integer> result = Map.of(Prize.NONE, 1000);
+        LottoResult result = new LottoResult(Map.of(Prize.NONE, 1000));
 
         float profit = new LottoProfitCalculator().calculate(10000, result);
         assertThat(profit).isEqualTo(0);
@@ -40,7 +40,7 @@ public class LottoProfitCalculatorTest {
     @Test
     @DisplayName("이득은 총 상금 / price")
     void calculate_profit() {
-        Map<Prize, Integer> result = Map.of(Prize.FIVE, 3);
+        LottoResult result = new LottoResult(Map.of(Prize.FIVE, 3));
 
         float profit = new LottoProfitCalculator().calculate(77, result);
         assertThat(profit).isEqualTo((float) (Prize.FIVE.getValue() * 3) / 77);

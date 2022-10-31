@@ -23,14 +23,9 @@ public class Game {
         return result;
     }
 
-    public Map<Prize, Integer> play(Lotto winNumbers, int bonusNumber) {
-        Map<Prize, Integer> result = new HashMap<>();
+    public LottoResult play(Lotto winNumbers, int bonusNumber) {
         List<Prize> prizes = winPrizes(winNumbers, bonusNumber);
-        for (Prize prize: prizes) {
-            int count = result.getOrDefault(prize, 0);
-            result.put(prize, count + 1);
-        }
-        return result;
+        return new LottoResult(prizes);
     }
 
     private List<Prize> winPrizes(Lotto winNumbers, int bonusNumber) {
