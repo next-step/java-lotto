@@ -26,7 +26,7 @@ public enum Calculator {
     public static int run(String inputString) {
         validateInput(inputString);
         List<String> inputs = List.of(inputString.split(INPUT_REGEX));
-        List<String> operators = Operation.getFrom(inputs);
+        List<String> operators = Operator.getFrom(inputs);
         List<Integer> digits = Digit.parseDigits(inputs);
         int result = digits.get(0);
         for (int i = 0; i < operators.size(); i++) {
@@ -48,15 +48,15 @@ public enum Calculator {
     }
 
     private static Calculatable calculator(String operator) {
-        if (Operation.isAddOperator(operator)) {
+        if (Operator.isAddOperator(operator)) {
             return ADDER.calculatable;
         }
 
-        if (Operation.isSubtractOperator(operator)) {
+        if (Operator.isSubtractOperator(operator)) {
             return SUBTRACTOR.calculatable;
         }
 
-        if (Operation.isMultiplyOperator(operator)) {
+        if (Operator.isMultiplyOperator(operator)) {
             return MULTIPLIER.calculatable;
         }
 

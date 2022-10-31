@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public enum Operation {
+public enum Operator {
     ADD_OPERATOR("+"),
     SUBTRACT_OPERATOR("-"),
     MULTIPLY_OPERATOR("*"),
@@ -15,12 +15,12 @@ public enum Operation {
 
     private final String operator;
 
-    Operation(String operator) {
+    Operator(String operator) {
         this.operator = operator;
     }
 
     private static void validateOperators(List<String> operators) throws IllegalArgumentException {
-        if (operators.stream().anyMatch(operator -> !isValidArithmeticOperation(operator))) {
+        if (operators.stream().anyMatch(operator -> !isValidArithmeticOperator(operator))) {
             throw new IllegalArgumentException(ILLEGAL_OPERATOR_EXCEPTION);
         };
     }
@@ -34,7 +34,7 @@ public enum Operation {
         return operators;
     }
 
-    private static boolean isValidArithmeticOperation(String operator) {
+    private static boolean isValidArithmeticOperator(String operator) {
         return isAddOperator(operator)
                 || isSubtractOperator(operator)
                 || isMultiplyOperator(operator)
