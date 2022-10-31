@@ -8,6 +8,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.LotteryMachine;
+import lotto.domain.Lotto;
+import lotto.domain.Money;
+
 class LotteryMachineTest {
 
 	@DisplayName("n*1000원으로 발행을 요청하면 n개의 로또 객체를 발행해야 한다.")
