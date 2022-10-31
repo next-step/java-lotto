@@ -12,7 +12,7 @@ public class Calculator {
     private CalculatorDatas calculatorDatas;
 
     public Calculator(String data){
-        this.calculatorDatas = CalculatorDatas.numbersMake(data);
+        this.calculatorDatas = new CalculatorDatas(data);
     }
 
     public int start(){
