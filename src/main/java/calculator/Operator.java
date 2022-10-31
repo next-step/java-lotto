@@ -19,12 +19,6 @@ public enum Operator {
         this.operator = operator;
     }
 
-    private static void validateOperators(List<String> operators) throws IllegalArgumentException {
-        if (operators.stream().anyMatch(operator -> !isValidArithmeticOperator(operator))) {
-            throw new IllegalArgumentException(ILLEGAL_OPERATOR_EXCEPTION);
-        };
-    }
-
     public static List<String> getFrom(List<String> inputs) throws IllegalArgumentException {
         List<String> operators = inputs.stream()
                 .filter(input -> !Digit.isDigit(input))
@@ -32,6 +26,12 @@ public enum Operator {
 
         validateOperators(operators);
         return operators;
+    }
+
+    private static void validateOperators(List<String> operators) throws IllegalArgumentException {
+        if (operators.stream().anyMatch(operator -> !isValidArithmeticOperator(operator))) {
+            throw new IllegalArgumentException(ILLEGAL_OPERATOR_EXCEPTION);
+        };
     }
 
     private static boolean isValidArithmeticOperator(String operator) {
