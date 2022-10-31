@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoRound {
-    public static final int WINNING_COUNT_THRESHOLD = 3;
+    private static final int WINNING_COUNT_THRESHOLD = 3;
     private final List<LottoTicket> lottoTickets;
 
     public LottoRound(List<LottoTicket> lottoTickets) {
