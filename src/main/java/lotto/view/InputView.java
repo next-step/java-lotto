@@ -25,10 +25,14 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
 
-        if (result.size() != Lotto.COUNT) {
+        checkWinNumbers(result);
+        return new ArrayList<>(result);
+    }
+
+    private static void checkWinNumbers(Set<Integer> winNumbers) {
+        if (winNumbers.size() != Lotto.COUNT) {
             throw new IllegalArgumentException("6개의 서로 다른 당첨 번호가 입력되어야 합니다.");
         }
-        return new ArrayList<>(result);
     }
 
     public static int inputBonusNumber(List<Integer> winNumbers) {
@@ -39,13 +43,17 @@ public class InputView {
         } catch (InputMismatchException e) {
             throw new IllegalArgumentException("1개의 보너스 번호가 입력되어야 합니다.");
         }
+        checkBonusInput(input, winNumbers);
+        return input;
+    }
 
-        if (Lotto.MIN > input || input > Lotto.MAX) {
+    private static void checkBonusInput(int bonusNumber, List<Integer> winNumbers) {
+        if (Lotto.MIN > bonusNumber || bonusNumber > Lotto.MAX) {
             throw new IllegalArgumentException("입력 범위를 벗어났습니다.");
         }
-        if (winNumbers.contains(input)) {
+        if (winNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 달라야 합니다.");
         }
-        return input;
+
     }
 }
