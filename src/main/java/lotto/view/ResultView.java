@@ -1,19 +1,31 @@
 package lotto.view;
 
-import lotto.domain.LottoWinningStatistics;
-import lotto.domain.LottoWinningType;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
     private ResultView() {
     }
 
+    private static String getFormattedLottoString(final Lotto lotto) {
+        return "[" +
+                lotto.getNumbers()
+                     .getLottoNumbers()
+                     .stream()
+                     .sorted()
+                     .map(LottoNumber::toString)
+                     .collect(Collectors.joining(", ")) +
+                "]";
+    }
+
     public static void printLottoAmountAndNumbers(final Lottos lottos) {
         System.out.printf("%d개를 구매했습니다.%n", lottos.size());
         lottos.getLottos()
+              .stream()
+              .map(ResultView::getFormattedLottoString)
               .forEach(System.out::println);
         System.out.println();
     }
