@@ -70,3 +70,22 @@
     - [x] Prize.valueOf 추상메서드로 IF 문 제거
     - [x] LottoNumbers 정렬되도록 comparable 구현
     - [x] LottoNumbers 갯수 검증 로직 추가
+* Step4 - 로또(수동)
+  * 기능 목록
+    - [x] 수동 추첨 번호 입력 기능
+    - [x] 수동 로또 이외의 로또 티켓은 자동으로 추첨 되도록
+  * Step4 추가 피드백
+    - [x] Ticket 클래스 역할 고민. 수동과 자동을 DTO로 관리하기
+    - [x] 총 구매 금액과 수동 구매 수량 사이의 밸리데이션
+    - [x] Optional 보다 명확하게 이해할 수 있는 if문으로 수정
+    - [x] 로또번호 캐시를 Integer -> LottoNumber
+    - [x] LottoNumbers 필드를 중복이 발생하지 않는 컬렉션으로 변경 -> TreeSet
+    - [x] 로또번호의 정렬을 도메인 -> 출력 레이어로 변경
+    - [x] 메소드 내에서 알 수 있는 정보와 역할을 바탕으로 변수명 짓기
+    - [x] winningNumbers Integer -> Lotto Number 
+    - [x] drawLottoResult 를 두 번 호출 한다면?
+    - [x] List<Set<Integer>> 중 Set<Integer>를 DTO로 관리하기
+    - [x] 사용하지 않는 코드 정리
+    - [x] POSIX 마지막 라인 개행 IDE 적용
+    - [x] LottoNumberGenerator Set<LottoNumber> 반환 -> LottoNumbers 반환
+    - [x] LottoResult 객체를 활용하기(필드를 바로 반환 -> 객체의 필드를 조작 해서 객체 자체를 사용)
