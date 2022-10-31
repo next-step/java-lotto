@@ -18,7 +18,7 @@ public class LottoStore {
         int count = getPurchaseCount(purchasePrice);
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            tickets.add(LottoTicket.create());
+            tickets.add(LottoTicket.random());
         }
         return tickets;
     }

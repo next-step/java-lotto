@@ -4,14 +4,10 @@ import java.util.Objects;
 import java.util.Random;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int VALUE_MIN = 1;
-    private static final int VALUE_MAX = 45;
+    public static final int VALUE_MIN = 1;
+    public static final int VALUE_MAX = 45;
 
     private final int value;
-
-    public LottoNumber() {
-        this(getRandomNumber());
-    }
 
     public LottoNumber(int value) {
         if (value < VALUE_MIN || value > VALUE_MAX) {

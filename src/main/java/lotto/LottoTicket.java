@@ -1,10 +1,7 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicket {
     public static final int LOTTO_NUMBER_COUNT = 6;
@@ -12,15 +9,16 @@ public class LottoTicket {
     private final List<LottoNumber> numbers;
 
     private LottoTicket(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
+        if (new HashSet<>(numbers).size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("겹치지 않는 로또 숫자가 총 6개여야 합니다.");
         }
+
         this.numbers = numbers.stream()
                 .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static LottoTicket create() {
+    public static LottoTicket random() {
         return new LottoTicket(createLottoNumbers());
     }
 
@@ -64,8 +62,14 @@ public class LottoTicket {
     }
 
     private static List<LottoNumber> createLottoNumbers() {
-        return IntStream.range(0, LOTTO_NUMBER_COUNT)
-                .mapToObj(i -> new LottoNumber())
+        List<Integer> candidates = new ArrayList<>();
+        for (int i = LottoNumber.VALUE_MIN; i <= LottoNumber.VALUE_MAX; i++) {
+            candidates.add(i);
+        }
+        Collections.shuffle(candidates);
+        return candidates.stream()
+                .map(LottoNumber::new)
+                .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList());
     }
 

@@ -10,9 +10,9 @@ public class LottoWinnersTest {
     @Test
     void name() {
         LottoWinners winners = new LottoWinners(List.of(
-                new LottoWinner(3, LottoTicket.create()),
-                new LottoWinner(3, LottoTicket.create()),
-                new LottoWinner(4, LottoTicket.create())
+                new LottoWinner(3, LottoTicket.random()),
+                new LottoWinner(3, LottoTicket.random()),
+                new LottoWinner(4, LottoTicket.random())
         ));
 
         assertThat(winners.getWinnerCount(LottoWinnerClass.getByMatchingCount(3))).isEqualTo(2);

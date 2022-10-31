@@ -18,6 +18,11 @@ public class LottoTicketTest {
     }
 
     @Test
+    void test_uniq_number() {
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.from(1, 1, 2, 3, 4, 5));
+    }
+
+    @Test
     void test_is_equal_to() {
         assertThat(LottoTicket.from(1, 2, 3, 4, 5, 6)).isEqualTo(LottoTicket.from(5, 3, 2, 1, 4, 6));
     }

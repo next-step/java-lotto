@@ -13,10 +13,10 @@ public class LottoWinnerStatTest {
     void test_get_profit_margin() {
         int totalTicketCount = 10;
         List<LottoWinner> winners = List.of(
-                new LottoWinner(3, LottoTicket.create()),
-                new LottoWinner(4, LottoTicket.create()),
-                new LottoWinner(5, LottoTicket.create()),
-                new LottoWinner(6, LottoTicket.create())
+                new LottoWinner(3, LottoTicket.random()),
+                new LottoWinner(4, LottoTicket.random()),
+                new LottoWinner(5, LottoTicket.random()),
+                new LottoWinner(6, LottoTicket.random())
         );
         LottoPrice price = new LottoPrice(1);
         LottoPrizeInfo prizeInfo = new LottoPrizeInfo(Map.of(

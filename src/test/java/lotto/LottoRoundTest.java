@@ -10,7 +10,7 @@ public class LottoRoundTest {
     @Test
     void test_get_winners() {
         LottoTicket ticket1 = LottoTicket.from(1, 2, 3, 4, 5, 6);
-        LottoTicket ticket2 = LottoTicket.from(3, 4, 9, 9, 9, 9);
+        LottoTicket ticket2 = LottoTicket.from(3, 4, 9, 10, 11, 12);
         LottoRound round = new LottoRound(List.of(ticket1, ticket2));
         LottoTicket winningTicket = LottoTicket.from(3, 4, 5, 6, 7, 8);
 
