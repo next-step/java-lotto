@@ -11,5 +11,7 @@ public class LottoGameApplication {
         List<LottoTicket> tickets = LottoGame.buy(moneyForTicket);
 
         LottoResultView.print(tickets);
+
+        LottoTicket lastWeekWinner = LottoInputView.getLastWeekWinnerNumber();
     }
 }
