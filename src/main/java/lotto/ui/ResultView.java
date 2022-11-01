@@ -22,16 +22,16 @@ public class ResultView {
         }
     }
 
-    public static void printLottoResult(LottoResultStat stat, LottoPrizeInfo prizeInfo) {
+    public static void printLottoResults(LottoResultStat stat) {
         System.out.println(LOTTO_WINNER_STAT_BANNER);
-        for (LottoResult winnerClass : PRINTABLE_LOTTO_RESULT) {
-            printWinnerClass(stat, winnerClass, prizeInfo.getPrize(winnerClass));
+        for (LottoResult result : PRINTABLE_LOTTO_RESULT) {
+            printLottoResult(stat, result);
         }
     }
 
-    private static void printWinnerClass(LottoResultStat stat, LottoResult winnerClass, Integer prize) {
+    private static void printLottoResult(LottoResultStat stat, LottoResult result) {
         System.out.printf(LOTTO_WINNER_STAT_FORMAT,
-                winnerClass.getMatchingCount(), prize, stat.getWinnerCount(winnerClass));
+                result.getMatchingCount(), result.getPrize(), stat.getWinnerCount(result));
     }
 
     private static void printLottoTicket(LottoTicket ticket) {

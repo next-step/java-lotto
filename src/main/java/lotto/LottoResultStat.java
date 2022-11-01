@@ -18,12 +18,12 @@ public class LottoResultStat {
         return resultMap.getOrDefault(result, 0);
     }
 
-    public double getProfitMargin(LottoPrice price, LottoPrizeInfo prizeInfo) {
-        double result = 0.0;
-        for (LottoResult winnerClass : LottoResult.values()) {
-            result += prizeInfo.getPrize(winnerClass) * getWinnerCount(winnerClass);
+    public double getProfitMargin(LottoPrice price) {
+        double sum = 0.0;
+        for (LottoResult result : LottoResult.values()) {
+            sum += result.getPrize() * getWinnerCount(result);
         }
-        return result / price.getPurchasePrice(totalTicketCount());
+        return sum / price.getPurchasePrice(totalTicketCount());
     }
 
     private int totalTicketCount() {
