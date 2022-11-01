@@ -1,12 +1,10 @@
 package step3;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

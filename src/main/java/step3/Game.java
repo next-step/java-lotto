@@ -2,8 +2,6 @@ package step3;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Game {
 	public static void start(int input) {

@@ -1,9 +1,7 @@
 package step3;
 
-import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class Lotto {
 	private static final int LOTTO_START = 1;
