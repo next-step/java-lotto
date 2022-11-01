@@ -19,11 +19,6 @@ public enum Operator {
 	private int winning;
 	private Boolean bonusCheck;
 
-	// private static final Map<Integer, Operator> RANK_MAP = Collections.unmodifiableMap(
-	// 	Stream.of(values())
-	// 		.collect(Collectors.toMap(Operator::getCount, Function.identity()))
-	// );
-
 	Operator(int count, Boolean bonusCheck, int winning) {
 		this.count = count;
 		this.bonusCheck = bonusCheck;

@@ -1,7 +1,9 @@
 package step3;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
 	private static final int LOTTO_START = 1;
@@ -38,13 +40,9 @@ public class Lotto {
 	}
 
 	public int count(Lotto guestLotto) {
-		int count = 0;
-		for (Integer number : guestLotto.getLotto()) {
-			if (isExist(number)) {
-				count++;
-			}
-		}
-		return count;
+		return (int)guestLotto.getLotto().stream()
+			.filter(this::isExist)
+			.count();
 	}
 
 	public boolean isExist(Integer lottoNumber) {
