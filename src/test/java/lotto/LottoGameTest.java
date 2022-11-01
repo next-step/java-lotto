@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "2000,2", "15000,15"})
-    void 장당_1000원일때(int moneyToBuyTicket, int numberOfTickets) {
+    void 로또_구입금액에_따른_로또티켓_개수_확인(int moneyToBuyTicket, int numberOfTickets) {
         assertThat(LottoGame.buy(moneyToBuyTicket).size()).isEqualTo(numberOfTickets);
     }
 }
