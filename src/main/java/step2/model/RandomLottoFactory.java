@@ -9,11 +9,12 @@ public class RandomLottoFactory implements LottoFactory {
 	private static final int FIRST_NUM = 1;
 	private static final int MAX_NUM = 45;
 	private static final int LAST_NUM = 6;
-	private static final List<Integer> TOTAL_LOTTO = new ArrayList<Integer>();
+	private List<Integer> totalLotto;
 
 	private void lottoField() {
+		totalLotto = new ArrayList<>();
 		for (int i = FIRST_NUM; i <= MAX_NUM; i++) {
-			TOTAL_LOTTO.add(i);
+			totalLotto.add(i);
 		}
 	}
 
@@ -21,10 +22,10 @@ public class RandomLottoFactory implements LottoFactory {
 	public List<Integer> getLottoNum() {
 		lottoField();
 		List<Integer> lottoSet = new ArrayList<>();
-		Collections.shuffle(TOTAL_LOTTO);
+		Collections.shuffle(totalLotto);
 
 		for (int i = FIRST_NUM; i <= LAST_NUM; i++) {
-			lottoSet.add(TOTAL_LOTTO.get(i));
+			lottoSet.add(totalLotto.get(i));
 		}
 
 		Collections.sort(lottoSet);
