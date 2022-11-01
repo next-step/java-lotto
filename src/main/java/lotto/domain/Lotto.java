@@ -19,17 +19,16 @@ public class Lotto {
             .collect(Collectors.toList());
     private static final int DEFAULT_SIZE = 6;
 
-
     private final Set<LottoNumber> lottoNums;
 
     public Lotto(Set<LottoNumber> lottoNums) {
-        if(lottoNums.size() != DEFAULT_SIZE) {
+        if (lottoNums.size() != DEFAULT_SIZE) {
             throw new IllegalArgumentException("lotto input has wrong size");
         }
         this.lottoNums = new TreeSet<>(lottoNums);
     }
 
-    public Lotto(LottoGenerateStrategy lottoGenerateStrategy){
+    public Lotto(LottoGenerateStrategy lottoGenerateStrategy) {
         this(lottoGenerateStrategy.generateLotto());
     }
 
@@ -42,7 +41,7 @@ public class Lotto {
         return lottoNums.toString();
     }
 
-    public int getSameElementsSize(Lotto winningLottoNumbers){
+    public int getSameElementsSize(Lotto winningLottoNumbers) {
         return (int) lottoNums.stream()
                 .filter(winningLottoNumbers::hasSameElement)
                 .count();

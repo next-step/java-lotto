@@ -12,11 +12,11 @@ public class ManualLottoInput {
         this.manualLottos = manualLottos;
     }
 
-    public int getInputSize(){
+    public int getInputSize() {
         return manualLottos.size();
     }
 
-    public List<Lotto> getLottos(){
+    public List<Lotto> toLottos() {
         return manualLottos.stream().map(Lotto::from).collect(Collectors.toList());
     }
 

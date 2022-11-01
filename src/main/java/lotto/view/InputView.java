@@ -2,11 +2,13 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.input.ManualLottoInput;
-import lotto.input.LottoTicketInput;
 import lotto.domain.WinningLotto;
+import lotto.input.LottoTicketInput;
+import lotto.input.ManualLottoInput;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import static lotto.util.StringUtils.refineNumbers;
 
@@ -29,7 +31,7 @@ public class InputView {
         return result;
     }
 
-    public ManualLottoInput getManualCountInput(LottoTicketInput lottoTicketInput){
+    public ManualLottoInput getManualCountInput(LottoTicketInput lottoTicketInput) {
         System.out.println(MANUAL_LOTTO_COUNT_MSG);
         int manualLottoCount = scanner.nextInt();
         scanner.nextLine();
@@ -43,7 +45,7 @@ public class InputView {
     }
 
     private void validateManualCount(LottoTicketInput lottoTicketInput, int manualLottoCount) {
-        if(manualLottoCount > lottoTicketInput.getTicketCount()) {
+        if (manualLottoCount > lottoTicketInput.getTicketCount()) {
             throw new IllegalArgumentException("manual input count cannot be bigger than total lotto count");
         }
     }
@@ -51,7 +53,7 @@ public class InputView {
     public WinningLotto getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MSG);
         Scanner scanner = new Scanner(System.in);
-        String winningNumbers =  scanner.nextLine();
+        String winningNumbers = scanner.nextLine();
         System.out.println(BONUS_WINNING_NUMBER_MSG);
         String bonusWinningNumber = scanner.nextLine();
 

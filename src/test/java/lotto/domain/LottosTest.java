@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.common.type.WinnerRank;
 import lotto.domain.*;

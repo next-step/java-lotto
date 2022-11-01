@@ -3,8 +3,8 @@ package lotto.view;
 import lotto.common.type.WinnerRank;
 import lotto.domain.Lottos;
 import lotto.domain.RewardStatistics;
-import lotto.input.ManualLottoInput;
 import lotto.input.LottoTicketInput;
+import lotto.input.ManualLottoInput;
 
 public class ResultView {
 

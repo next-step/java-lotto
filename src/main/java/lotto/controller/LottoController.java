@@ -15,16 +15,21 @@ public class LottoController {
     private final ResultView resultView = new ResultView();
 
     public void start() {
-        LottoTicketInput lottoTicketInput = inputView.getLottoTicket();
-        ManualLottoInput manualLottoInput = inputView.getManualCountInput(lottoTicketInput);
-        List<Lotto> manualLottos = manualLottoInput.getLottos();
-        Lottos lottos = new Lottos(makeRandomLottos(lottoTicketInput.getTicketCount() - manualLottos.size()));
-        lottos.addAll(manualLottos);
+        LottoTicketInput lottoTicketInput;
+        ManualLottoInput manualLottoInput;
+        try{
+            lottoTicketInput = inputView.getLottoTicket();
+            manualLottoInput = inputView.getManualCountInput(lottoTicketInput);
+        } catch (InputMismatchException e){
+            System.out.println("input should be number");
+            return;
+        }
+        Lottos lottos = new Lottos(makeRandomLottos(lottoTicketInput.getTicketCount() - manualLottoInput.getInputSize()));
+        lottos.addAll(manualLottoInput.toLottos());
         resultView.printLottoCount(lottoTicketInput, manualLottoInput);
         resultView.printLottos(lottos);
 
-        WinningLotto winningLotto = inputView.getWinningNumbers();
-        RewardStatistics rewardStatistics = lottos.match(winningLotto);
+        RewardStatistics rewardStatistics = lottos.match(inputView.getWinningNumbers());
         resultView.printAllResult(rewardStatistics, rewardStatistics.getProfitRatio(lottos));
     }
 

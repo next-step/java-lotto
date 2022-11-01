@@ -1,4 +1,4 @@
-package lotto;
+package lotto.common.type;
 
 import lotto.common.type.WinnerRank;
 import lotto.common.type.WinnerRankCondition;

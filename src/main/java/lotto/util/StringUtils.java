@@ -11,7 +11,7 @@ public final class StringUtils {
         throw new AssertionError("no instance available");
     }
 
-    public static Set<Integer> refineNumbers(String text){
+    public static Set<Integer> refineNumbers(String text) {
         return Arrays.stream(splitStringToLottoNumbers(removeSpace(text)))
                 .map(Integer::parseInt)
                 .collect(Collectors.toCollection(TreeSet::new));
