@@ -5,7 +5,7 @@ import lotto.exception.MoneyNegativeException;
 
 public class Money {
 
-	private int value;
+	private final int value;
 
 	public Money(int value) {
 		if (isNegative(value)) {

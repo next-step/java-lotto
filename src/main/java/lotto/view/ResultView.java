@@ -35,8 +35,8 @@ public class ResultView {
 
 		for (int matchingCount = WinningStatisticDto.MIN_MATCHING_COUNT;
 			 matchingCount <= WinningStatisticDto.MAX_MATCHING_COUNT; matchingCount++) {
-			int rewardMoney = Reward.getRewardByMatchCount(matchingCount).getMoney();
-			int count = winningStatisticDto.getWinningStatistic().getOrDefault(matchingCount, 0);
+			final int rewardMoney = Reward.getRewardByMatchCount(matchingCount).getMoney();
+			final int count = winningStatisticDto.getWinningStatistic().getOrDefault(matchingCount, 0);
 
 			print(MessageFormat.format(STATISTIC_FORMAT, matchingCount, rewardMoney, count));
 			print(LINE_BREAK);

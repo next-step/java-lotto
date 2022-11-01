@@ -20,21 +20,20 @@ public class LotteryApp {
 		final ResultView resultView = new ResultView();
 		final LotteryMachine lotteryMachine = new LotteryMachine();
 
-		int purchaseAmount = inputView.askMoney();
-		Money money = new Money(purchaseAmount);
+		final int purchaseAmount = inputView.askMoney();
+		final Money money = new Money(purchaseAmount);
 
-		Lottos lottos = lotteryMachine.issue(money);
-		PurchaseCountDto purchaseCountDto = PurchaseCountDto.of(lottos.getCount());
+		final Lottos lottos = lotteryMachine.issue(money);
+		final PurchaseCountDto purchaseCountDto = PurchaseCountDto.of(lottos.getCount());
 		resultView.printPurchaseCount(purchaseCountDto);
 
-		LottoStringsDto lottosStringDto = LottoStringsDto.of(lottos.lottoStrings());
+		final LottoStringsDto lottosStringDto = LottoStringsDto.of(lottos.lottoStrings());
 		resultView.printLottosString(lottosStringDto);
 
-		List<Integer> numbers = inputView.askWinningNumbers();
-		Lotto winningLotto = new Lotto(numbers);
+		final List<Integer> numbers = inputView.askWinningNumbers();
+		final Lotto winningLotto = new Lotto(numbers);
 
-		Map<Integer, Integer> matchCountsMap = lottos.getMatchingCountsMap(winningLotto);
-
+		final Map<Integer, Integer> matchCountsMap = lottos.getMatchingCountsMap(winningLotto);
 		resultView.printWinningStatistic(WinningStatisticDto.of(matchCountsMap, purchaseAmount));
 	}
 }
