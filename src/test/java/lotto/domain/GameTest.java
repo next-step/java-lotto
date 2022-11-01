@@ -15,11 +15,9 @@ public class GameTest {
     @DisplayName("모든 게임에 당첨")
     void game_win() {
         Game game = new Game(10, () -> List.of(1, 11, 14, 15, 18, 20));
-        Map<Integer, Integer> result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)));
+        LottoResult result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)), 21);
 
-        assertThat(result)
-                .hasSize(1)
-                .containsOnly(new AbstractMap.SimpleEntry<>(6, 10));
+        assertThat(result.getOrZero(Prize.SIX)).isEqualTo(10);
     }
 
     @Test
@@ -34,15 +32,11 @@ public class GameTest {
                 List.of(3, 14, 18, 20, 21, 22),
                 List.of(3, 7, 14, 19, 20, 33)
         )));
-        Map<Integer, Integer> result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)));
+        LottoResult result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)), 21);
 
-        assertThat(result)
-                .hasSize(6)
-                .contains(new AbstractMap.SimpleEntry<>(0, 1))
-                .contains(new AbstractMap.SimpleEntry<>(1, 1))
-                .contains(new AbstractMap.SimpleEntry<>(2, 1))
-                .contains(new AbstractMap.SimpleEntry<>(3, 2))
-                .contains(new AbstractMap.SimpleEntry<>(5, 1))
-                .contains(new AbstractMap.SimpleEntry<>(6, 1));
+        assertThat(result.getOrZero(Prize.NONE)).isEqualTo(3);
+        assertThat(result.getOrZero(Prize.THREE)).isEqualTo(2);
+        assertThat(result.getOrZero(Prize.FIVE)).isEqualTo(1);
+        assertThat(result.getOrZero(Prize.SIX)).isEqualTo(1);
     }
 }

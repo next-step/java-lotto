@@ -23,19 +23,14 @@ public class Game {
         return result;
     }
 
-    public Map<Integer, Integer> play(Lotto winNumbers) {
-        Map<Integer, Integer> result = new HashMap<>();
-        List<Integer> winCounts = winCounts(winNumbers);
-        for (int winCount: winCounts) {
-            int count = result.getOrDefault(winCount, 0);
-            result.put(winCount, count + 1);
-        }
-        return result;
+    public LottoResult play(Lotto winNumbers, int bonusNumber) {
+        List<Prize> prizes = winPrizes(winNumbers, bonusNumber);
+        return new LottoResult(prizes);
     }
 
-    private List<Integer> winCounts(Lotto winNumbers) {
+    private List<Prize> winPrizes(Lotto winNumbers, int bonusNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.matches(winNumbers))
+                .map(lotto -> lotto.matches(winNumbers, bonusNumber))
                 .collect(Collectors.toList());
     }
 

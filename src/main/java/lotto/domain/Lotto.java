@@ -7,6 +7,7 @@ public class Lotto {
     public static final int MAX = 45;
     public static final int PRICE = 1000;
     public static final int COUNT = 6;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -31,10 +32,20 @@ public class Lotto {
         }
     }
 
-    public int matches(Lotto winNumbers) {
+    public Prize matches(Lotto winNumbers, int bonusNumber) {
+        int matchNumber = matchNumberCount(winNumbers);
+        boolean hasBonusNumber = hasNumber(bonusNumber);
+        return Prize.toPrize(matchNumber, hasBonusNumber);
+    }
+
+    private int matchNumberCount(Lotto winNumbers) {
         return (int) numbers.stream()
                 .filter(winNumbers.numbers::contains)
                 .count();
+    }
+
+    public boolean hasNumber(int number) {
+        return numbers.contains(number);
     }
 
     public List<Integer> getNumbers() {

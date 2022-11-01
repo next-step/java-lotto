@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Game;
-import lotto.domain.Lotto;
-import lotto.domain.RandomLottoPublisher;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,7 +16,8 @@ public class App {
         ResultView.printLottoList(game.getLottos());
 
         List<Integer> winNumbers = InputView.inputWinNumbers();
-        Map<Integer, Integer> result = game.play(new Lotto(winNumbers));
+        int bonusNumber = InputView.inputBonusNumber(winNumbers);
+        LottoResult result = game.play(new Lotto(winNumbers), bonusNumber);
         ResultView.printResult(result);
         ResultView.printProfit(price, result);
     }

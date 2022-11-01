@@ -2,10 +2,10 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoProfitCalculator;
+import lotto.domain.LottoResult;
 import lotto.domain.Prize;
 
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
 
@@ -16,17 +16,18 @@ public class ResultView {
         }
     }
 
-    public static void printResult(Map<Integer, Integer> result) {
+    public static void printResult(LottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (%d) - %d개\n", Prize.THREE.getValue(), result.getOrDefault(3, 0));
-        System.out.printf("4개 일치 (%d) - %d개\n", Prize.FOUR.getValue(), result.getOrDefault(4, 0));
-        System.out.printf("5개 일치 (%d) - %d개\n", Prize.FIVE.getValue(), result.getOrDefault(5, 0));
-        System.out.printf("6개 일치 (%d) - %d개\n", Prize.SIX.getValue(), result.getOrDefault(6, 0));
+        System.out.printf("3개 일치 (%d) - %d개\n", Prize.THREE.getValue(), result.getOrZero(Prize.THREE));
+        System.out.printf("4개 일치 (%d) - %d개\n", Prize.FOUR.getValue(), result.getOrZero(Prize.FOUR));
+        System.out.printf("5개 일치 (%d) - %d개\n", Prize.FIVE.getValue(), result.getOrZero(Prize.FIVE));
+        System.out.printf("5개 일치, 보너스 볼 일치 (%d) - %d개\n", Prize.FIVE_BONUS.getValue(), result.getOrZero(Prize.FIVE_BONUS));
+        System.out.printf("6개 일치 (%d) - %d개\n", Prize.SIX.getValue(), result.getOrZero(Prize.SIX));
     }
 
-    public static void printProfit(int price, Map<Integer, Integer> result) {
-        float profit = new LottoProfitCalculator(price, result).calculate();
+    public static void printProfit(int price, LottoResult result) {
+        float profit = new LottoProfitCalculator().calculate(price, result);
 
         System.out.printf("총 수익률은 %.2f입니다.", profit);
         if (profit > 1) {
