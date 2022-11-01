@@ -12,7 +12,11 @@ public class LottoInputView {
 
     public static int getMoneyForTicket() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("숫자로 입력해주세요");
+        }
     }
 
     public static LottoTicket getLastWeekWinnerNumber() {
