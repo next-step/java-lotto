@@ -1,4 +1,8 @@
-package lotto;
+package lotto.view;
+
+import lotto.domain.LottoEarningCalculator;
+import lotto.domain.LottoPrize;
+import lotto.domain.LottoTicket;
 
 import java.util.Arrays;
 import java.util.Comparator;

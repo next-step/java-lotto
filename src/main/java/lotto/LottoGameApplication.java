@@ -1,5 +1,12 @@
 package lotto;
 
+import lotto.domain.LottoEarningCalculator;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoPrize;
+import lotto.domain.LottoTicket;
+import lotto.view.LottoInputView;
+import lotto.view.LottoResultView;
+
 import java.util.List;
 
 public class LottoGameApplication {
