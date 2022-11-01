@@ -31,6 +31,8 @@ public class Lotto {
 	}
 
 	public int getMatchingCount(List<Integer> winningNumbers) {
-		return 0;
+		return (int)IntStream.range(0, winningNumbers.size())
+			.filter(i -> numbers.contains(winningNumbers.get(i)))
+			.count();
 	}
 }

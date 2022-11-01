@@ -53,8 +53,8 @@ class LottoTest {
 		int expected
 	) {
 		Lotto lotto = new Lotto(lottoNumbers);
-		assertThat(lotto.getMatchingCount(winningNumbers)).isEqualTo(expected);
 
+		assertThat(lotto.getMatchingCount(winningNumbers)).isEqualTo(expected);
 	}
 
 }
