@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<LottoNumber> numberList;
+    private final List<LottoNumber> lottoBalls;
     private Rank rank;
 
     public Lotto(final List<LottoNumber> numberList) {
-        this.numberList = numberList;
+        this.lottoBalls = numberList;
     }
 
     public List<LottoNumber> getNumberList() {
-        return numberList;
+        return lottoBalls;
     }
 
     public Rank getRank() {
@@ -28,7 +28,7 @@ public class Lotto {
                 .collect(Collectors.toList());
 
         this.rank = Rank.getRank(
-                (int) numberList.stream()
+                (int) lottoBalls.stream()
                         .filter(winnerNumberListToCompare::contains)
                         .count()
         );
@@ -45,18 +45,18 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numberList, lotto.numberList) && rank == lotto.rank;
+        return Objects.equals(lottoBalls, lotto.lottoBalls) && rank == lotto.rank;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberList, rank);
+        return Objects.hash(lottoBalls, rank);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-                "numberList=" + numberList +
+                "numberList=" + lottoBalls +
                 ", rank=" + rank +
                 '}';
     }
