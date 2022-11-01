@@ -30,7 +30,7 @@ public class WinningLottoTest {
 		int bonusNumber = 7;
 		WinningLotto lotteryWin = WinningLotto.of(winNum, bonusNumber);
 
-		assertThat(lotteryWin.isBonus(5, Arrays.asList(1, 2, 5, bonusNumber, 41, 45)))
+		assertThat(lotteryWin.isBonus( Arrays.asList(1, 2, 5, bonusNumber, 41, 45)))
 			.isEqualTo(true);
 	}
 

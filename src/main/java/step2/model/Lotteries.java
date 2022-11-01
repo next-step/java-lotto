@@ -6,15 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotteries {
-
-	private static final int ADD_MATCH_COUNT = 1;
 	private static final int DEFAULT_MATCH_COUNT = 0;
 	private static final int DEFAULT_MIN_LENGTH = 0;
 
 	private static HashMap<Rank, Integer> totalMatch = new HashMap<>();
 	private WinningLotto winningLotto;
 	private List<Lotto> lotteries;
-	private int countOfMatchBonus = DEFAULT_MATCH_COUNT;
 
 	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
 		this.lotteries = lotteries;
@@ -40,26 +37,16 @@ public class Lotteries {
 
 		for (Lotto lotto : lotteries) {
 			int countOfMatch = winningLotto.countOfMatch(lotto.getLotto());
-			Rank rank = Rank.of(countOfMatch);
-			countOfMatchBonus(countOfMatch, lotto.getLotto());
+			Rank rank = Rank.of(countOfMatch, winningLotto.isBonus(lotto.getLotto()));
 
-			totalMatch.put(rank, totalMatch.get(rank) + ADD_MATCH_COUNT);
+			totalMatch.put(rank, totalMatch.get(rank) + 1);
 		}
+
 		return totalMatch;
-	}
-
-	private void countOfMatchBonus(int countOfMatch, List<Integer> lotto) {
-		if (winningLotto.isBonus(countOfMatch, lotto)) {
-			countOfMatchBonus += ADD_MATCH_COUNT;
-		}
 	}
 
 	public Lotto showLotteries(int i) {
 		return lotteries.get(i);
-	}
-
-	public int countOfMatchBonus() {
-		return countOfMatchBonus;
 	}
 
 }

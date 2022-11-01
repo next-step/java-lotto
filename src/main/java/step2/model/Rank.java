@@ -26,11 +26,13 @@ public enum Rank {
 		return winningMoney;
 	}
 
-	public static Rank of(int countOfMatch) {
+	public static Rank of(int countOfMatch, boolean isBonus) {
 		return Arrays.stream(Rank.values())
 			.filter(rank ->
 				rank.getCountOfMatch() == countOfMatch)
-			.findFirst().orElse(MISS);
+			.filter(rank -> !rank.equals(SECOND) || isBonus)
+			.findFirst()
+			.orElse(MISS);
 	}
 
 }

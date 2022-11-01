@@ -24,9 +24,10 @@ public class LottoController {
 		Lotteries lotteries = Lotteries.of(totalTicket, lottoFactory);
 		OUTPUT_VIEW.showLotteries(totalTicket, lotteries);
 
-		HashMap<Rank, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),INPUT_VIEW.askBonusNumber());
+		HashMap<Rank, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),
+			INPUT_VIEW.askBonusNumber());
 
-		OUTPUT_VIEW.resultView(totalCount, lotteries.countOfMatchBonus());
+		OUTPUT_VIEW.resultView(totalCount);
 		OUTPUT_VIEW.showRate(payment.calculateBenefit(money, totalCount));
 	}
 }

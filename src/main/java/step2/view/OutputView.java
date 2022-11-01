@@ -1,8 +1,9 @@
 package step2.view;
 
-import static step2.model.Rank.SECOND;
-import static step2.model.Rank.THIRD;
+import static step2.model.Rank.MISS;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import step2.model.Lotteries;
 import step2.model.Rank;
@@ -11,27 +12,23 @@ public class OutputView {
 
 	private static final int DEFAULT_COUNT = 0;
 	private static final int BENEFIT_STANDARD = 1;
-	private static final int MIN_MATCH = 3;
-	private static final int MAX_MATCH = 6;
 
-	public void resultView(HashMap<Rank, Integer> totalCount, int bonusMatchCount) {
+	public void resultView(HashMap<Rank, Integer> totalCount) {
 		System.out.println("당첨 통계");
 		System.out.println("--------");
-		for (int i = MIN_MATCH; i <= MAX_MATCH; i++) {
-			showResult(Rank.of(i), bonusMatchCount, totalCount);
-		}
+		showResult(totalCount);
+
 	}
 
-	private void showResult(Rank rank, int bonusMatchCount, HashMap<Rank, Integer> totalCount) {
 
-		if (rank == SECOND) {
-			rankSecondMessage(bonusMatchCount, totalCount.get(rank));
-			return;
-		}
-
-		System.out.printf("%s개 일치" + "(%d)- " + totalCount.get(rank) + "개\n",
-			rank.getCountOfMatch(),
-			rank.getWinningMoney());
+	private void showResult(HashMap<Rank, Integer> totalCount) {
+		Arrays.stream(Rank.values())
+			.sorted(Comparator.reverseOrder())
+			.filter(rank -> rank != MISS)
+			.forEach(rank ->
+				System.out.printf("%d개 일치 (%d원)- %d\n", rank.getCountOfMatch()
+					, rank.getWinningMoney()
+					, totalCount.get(rank)));
 	}
 
 	public void showTotalTicket(int tickets) {
@@ -60,13 +57,5 @@ public class OutputView {
 		System.out.println("수익률은 " + String.format("%.2f", rate) + "입니다");
 	}
 
-	private void rankSecondMessage(int countOfBonus, int countOfMatch) {
-		System.out.printf(
-			"%s개 일치" + "(%d)- " + (countOfMatch - countOfBonus) + "개\n",
-			SECOND.getCountOfMatch(), SECOND.getWinningMoney());
-
-		System.out.printf("%s개 일치,보너스 볼 일치" + "(%d)- " + countOfBonus + "개\n",
-			SECOND.getCountOfMatch(), SECOND.getWinningMoney());
-	}
 
 }
