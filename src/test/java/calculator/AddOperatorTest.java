@@ -1,3 +1,5 @@
+package calculator;
+
 import calculator.operator.AddOperator;
 import org.junit.jupiter.api.Test;
 

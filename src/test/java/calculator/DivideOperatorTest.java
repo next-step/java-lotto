@@ -1,3 +1,5 @@
+package calculator;
+
 import calculator.operator.DivideOperator;
 import org.junit.jupiter.api.Test;
 
