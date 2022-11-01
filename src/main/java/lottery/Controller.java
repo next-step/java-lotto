@@ -2,7 +2,7 @@ package lottery;
 
 import java.util.List;
 
-import static lottery.LotteryCompany.getAvailablePurchaseLotteryCount;
+import static lottery.LotteryCompany.getAvailablePurchaseCount;
 import static lottery.view.InputView.*;
 import static lottery.view.ResultView.printPurchasedLotteryInfos;
 import static lottery.view.ResultView.printResult;
@@ -12,7 +12,7 @@ public class Controller {
     public static void main(String[] args) {
         Customer customer = new Customer();
 
-        int availablePurchaseLotteryCount = getAvailablePurchaseLotteryCount(getLotteryPurchasePrices());
+        int availablePurchaseLotteryCount = getAvailablePurchaseCount(getLotteryPurchasePrices());
         for (int i = 0; i < availablePurchaseLotteryCount; i++) {
             customer.purchaseRandomLottery();
         }

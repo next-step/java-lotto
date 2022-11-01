@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LotteryCompanyTest {
 
@@ -20,8 +21,14 @@ public class LotteryCompanyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value={"500:0", "1000:1", "14000:14", "14500:14"}, delimiter = ':')
-    void getAvailablePurchaseLotteryCount(int cashAmount, int expected) {
-        assertThat(LotteryCompany.getAvailablePurchaseLotteryCount(cashAmount)).isEqualTo(expected);
+    @CsvSource(value={"1000:1", "14000:14", "14500:14"}, delimiter = ':')
+    void 구입가능금액_1000원_이상(int cashAmount, int expected) {
+        assertThat(LotteryCompany.getAvailablePurchaseCount(cashAmount)).isEqualTo(expected);
+    }
+
+    @Test
+    void 구입가능금액_1000원_미만() {
+        assertThatThrownBy(() -> LotteryCompany.getAvailablePurchaseCount(999))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
