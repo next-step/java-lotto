@@ -3,5 +3,8 @@ package calculator.view;
 import calculator.Calculator;
 
 public class ResultView {
-    Calculator calculator = new Calculator(InputView.inputLine());
+
+    public static void printResult(String result) {
+        System.out.println("계산 결과 : " + result);
+    }
 }
