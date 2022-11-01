@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 public class Lotto {
 	public static final int PRICE = 1000;
 	public static final int LOTTO_NUMBER_QUANTITY = 6;
-	public static final List<Integer> CANDIDATES = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+	public final List<Integer> candidates = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
 	private final List<Integer> numbers;
 
@@ -21,9 +21,9 @@ public class Lotto {
 	}
 
 	private List<Integer> generate() {
-		Collections.shuffle(CANDIDATES);
+		Collections.shuffle(candidates);
 
-		return CANDIDATES.subList(0, LOTTO_NUMBER_QUANTITY);
+		return candidates.subList(0, LOTTO_NUMBER_QUANTITY);
 	}
 
 	public List<Integer> getNumbers() {
@@ -34,5 +34,11 @@ public class Lotto {
 		return (int)IntStream.range(0, winningNumbers.size())
 			.filter(i -> numbers.contains(winningNumbers.get(i)))
 			.count();
+	}
+
+	@Override
+	public String toString() {
+		List<Integer> sortedNumbers = numbers.stream().sorted().collect(Collectors.toList());
+		return sortedNumbers.toString();
 	}
 }

@@ -1,12 +1,14 @@
 package lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+import lotto.view.dto.LottoStringsDto;
 import lotto.view.dto.PurchaseCountDto;
 
 public class LotteryApp {
@@ -22,5 +24,12 @@ public class LotteryApp {
 		List<Lotto> lottos = lotteryMachine.issue(money);
 		PurchaseCountDto purchaseCountDto = PurchaseCountDto.of(lottos.size());
 		resultView.printPurchaseCount(purchaseCountDto);
+
+		LottoStringsDto lottosStringDto = LottoStringsDto.of(
+			lottos.stream()
+				.map(Lotto::toString)
+				.collect(Collectors.toList())
+		);
+		resultView.printLottosString(lottosStringDto);
 	}
 }
