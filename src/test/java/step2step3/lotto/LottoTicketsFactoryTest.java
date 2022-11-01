@@ -1,4 +1,4 @@
-package step2.lotto;
+package step2step3.lotto;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

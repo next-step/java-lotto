@@ -1,7 +1,7 @@
-package step2.io;
+package step2step3.io;
 
-import step2.lotto.LottoTickets;
-import step2.lotto.Rank;
+import step2step3.lotto.LottoTickets;
+import step2step3.lotto.Rank;
 
 import java.util.Map;
 

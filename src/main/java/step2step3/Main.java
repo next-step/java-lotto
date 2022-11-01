@@ -1,13 +1,13 @@
-package step2;
+package step2step3;
 
-import step2.io.ConsoleInputView;
-import step2.io.ConsoleOutputDevice;
-import step2.io.ConsoleOutputView;
-import step2.lottoGame.LottoGame;
-import step2.lotto.LottoTickets;
-import step2.lotto.NumbersGenerator;
-import step2.lotto.OutputDevice;
-import step2.randomNumbers.RandomNumbersGenerator;
+import step2step3.io.ConsoleInputView;
+import step2step3.io.ConsoleOutputDevice;
+import step2step3.io.ConsoleOutputView;
+import step2step3.lottoGame.LottoGame;
+import step2step3.lotto.LottoTickets;
+import step2step3.lotto.NumbersGenerator;
+import step2step3.lotto.OutputDevice;
+import step2step3.randomNumbers.RandomNumbersGenerator;
 
 import java.io.IOException;
 

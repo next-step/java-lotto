@@ -1,9 +1,9 @@
-package step2.lottoGame;
+package step2step3.lottoGame;
 
-import step2.io.ConsoleInputView;
-import step2.io.ConsoleOutputView;
-import step2.lotto.*;
-import step2.randomNumbers.InfusedNumbersGenerator;
+import step2step3.io.ConsoleInputView;
+import step2step3.io.ConsoleOutputView;
+import step2step3.lotto.*;
+import step2step3.randomNumbers.InfusedNumbersGenerator;
 
 import java.io.IOException;
 

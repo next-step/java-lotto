@@ -1,4 +1,4 @@
-package step2.lotto;
+package step2step3.lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;

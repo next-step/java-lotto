@@ -1,6 +1,6 @@
-package step2.io;
+package step2step3.io;
 
-import step2.lotto.OutputDevice;
+import step2step3.lotto.OutputDevice;
 
 import java.util.Collection;
 
