@@ -14,11 +14,12 @@ public class LottoGameApplication {
     public static void main(String[] args) {
         int moneyForTicket = LottoInputView.getMoneyForTicket();
         List<LottoTicket> tickets = LottoGame.buy(moneyForTicket);
+
+        LottoResultView.printTickets(tickets);
+
         if (tickets.isEmpty()) {
             return;
         }
-
-        LottoResultView.printTickets(tickets);
 
         LottoTicket lastWeekWinner = LottoInputView.getLastWeekWinnerNumber();
         List<LottoPrize> prizes = LottoEarningCalculator.findPrize(tickets, lastWeekWinner);
