@@ -9,23 +9,21 @@ public class RandomLottoFactory implements LottoFactory {
 	private static final int FIRST_NUM = 1;
 	private static final int MAX_NUM = 45;
 	private static final int LAST_NUM = 6;
-	private List<Integer> totalLotto;
+	private static final List<Integer> LOTTO_NUMBERS_POOL = new ArrayList<>();
 
-	private void lottoField() {
-		totalLotto = new ArrayList<>();
+	static {
 		for (int i = FIRST_NUM; i <= MAX_NUM; i++) {
-			totalLotto.add(i);
+			LOTTO_NUMBERS_POOL.add(i);
 		}
 	}
 
 	@Override
 	public List<Integer> getLottoNum() {
-		lottoField();
 		List<Integer> lottoSet = new ArrayList<>();
-		Collections.shuffle(totalLotto);
+		Collections.shuffle(LOTTO_NUMBERS_POOL);
 
 		for (int i = FIRST_NUM; i <= LAST_NUM; i++) {
-			lottoSet.add(totalLotto.get(i));
+			lottoSet.add(LOTTO_NUMBERS_POOL.get(i));
 		}
 
 		Collections.sort(lottoSet);
