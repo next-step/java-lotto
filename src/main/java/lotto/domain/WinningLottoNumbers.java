@@ -11,12 +11,12 @@ public class WinningLottoNumbers {
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return this.lottoNumbers;
+    public int countOfMatch(final Lotto lotto) {
+        return this.lottoNumbers.countOfMatch(lotto.getNumbers());
     }
 
-    public LottoNumber getBonusLottoNumber() {
-        return this.bonusLottoNumber;
+    public boolean matchBonus(final Lotto lotto) {
+        return lotto.has(this.bonusLottoNumber);
     }
 
     private void validateOrThrow(final LottoNumbers lottoNumbers, final LottoNumber bonusLottoNumber) {

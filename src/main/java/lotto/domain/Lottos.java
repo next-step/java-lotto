@@ -35,9 +35,8 @@ public class Lottos {
         Map<LottoWinningType, Integer> countMap = new EnumMap<>(LottoWinningType.class);
 
         lottos.forEach(lotto -> {
-            LottoWinningType lottoWinningType =
-                    LottoWinningType.valueOf(lotto.matchNumberCount(winningLottoNumbers.getLottoNumbers()),
-                            lotto.has(winningLottoNumbers.getBonusLottoNumber()));
+            LottoWinningType lottoWinningType = LottoWinningType.valueOf(winningLottoNumbers.countOfMatch(lotto),
+                    winningLottoNumbers.matchBonus(lotto));
             countMap.put(lottoWinningType, countMap.getOrDefault(lottoWinningType, 0) + 1);
         });
 

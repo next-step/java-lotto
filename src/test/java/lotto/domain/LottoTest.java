@@ -78,6 +78,6 @@ public class LottoTest {
                                                                   .map(Integer::parseInt)
                                                                   .map(LottoNumber::new)
                                                                   .collect(Collectors.toList()));
-        assertThat(lotto.matchNumberCount(winningLottoNumbers)).isEqualTo(Integer.parseInt(matchNumberCount));
+        assertThat(winningLottoNumbers.countOfMatch(lotto.getNumbers())).isEqualTo(Integer.parseInt(matchNumberCount));
     }
 }
