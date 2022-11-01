@@ -16,8 +16,7 @@ public class WinningLotto {
 	}
 
 	public static WinningLotto of(List<Integer> winLottoNumber, int bonusNumber) {
-		if (winLottoNumber.stream()
-			.anyMatch(Predicate.isEqual(bonusNumber))) {
+		if (winLottoNumber.contains(bonusNumber)) {
 			throw new IllegalNumberException("보너스 번호는 당첨 번호랑 같을 수 없습니다.");
 		}
 		return new WinningLotto(winLottoNumber, bonusNumber);

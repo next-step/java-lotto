@@ -9,7 +9,7 @@ public class Lotteries {
 	private static final int DEFAULT_MATCH_COUNT = 0;
 	private static final int DEFAULT_MIN_LENGTH = 0;
 
-	private static HashMap<Rank, Integer> totalMatch = new HashMap<>();
+	private HashMap<Rank, Integer> totalMatch;
 	private WinningLotto winningLotto;
 	private List<Lotto> lotteries;
 
@@ -19,6 +19,7 @@ public class Lotteries {
 	}
 
 	public static Lotteries of(int totalTicket, LottoFactory lottoFactory) {
+		HashMap<Rank,Integer> totalMatch = new HashMap<>();
 		List<Lotto> lotteries = new ArrayList<>();
 
 		for (int ticket = DEFAULT_MIN_LENGTH; ticket < totalTicket; ticket++) {
