@@ -22,7 +22,6 @@ public class Lotto {
     }
 
     public Lotto matchRank(List<Integer> winnerNumberList) {
-
         List<LottoNumber> winnerNumberListToCompare = winnerNumberList.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
