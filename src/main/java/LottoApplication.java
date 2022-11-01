@@ -3,7 +3,7 @@ import java.util.List;
 public class LottoApplication {
 
     public static void main(String[] arg) {
-        LottoService lottoService = new LottoService(() -> List.of(1, 2, 3, 4, 5, 6));
+        LottoService lottoService = new LottoService(new LottoIntegerArrayGenerator());
 
         int amount = InputView.inputAmount();
         List<List<Integer>> lottoList = lottoService.buyLotto(amount);
