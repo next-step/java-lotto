@@ -18,7 +18,7 @@ public class Lottos {
         this.amount = amount;
     }
 
-    private void validateAmount(BigDecimal amount) {
+    private static void validateAmount(BigDecimal amount) {
         BigDecimal baseAmount = new BigDecimal(1000);
         if (amount.compareTo(baseAmount) == -1) {
             throw new IllegalArgumentException("천 원 이상 내세요.");
