@@ -30,7 +30,9 @@ public class LottoTicket {
         List<Integer> shuffledList = Arrays.stream(possibleNumbers).boxed().collect(Collectors.toList());
         Collections.shuffle(shuffledList);
 
-        return shuffledList.subList(0, 6);
+        return shuffledList.subList(0, 6).stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private static void validateCountOfNumbers(final List<Integer> numbers) {
