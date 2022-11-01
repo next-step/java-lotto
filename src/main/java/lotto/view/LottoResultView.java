@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 public class LottoResultView {
     public static void printTickets(List<LottoTicket> ticketList) {
         System.out.println(ticketList.size() + "개를 구매했습니다.");
-        for (LottoTicket ticket : ticketList) {
-            System.out.println(ticket);
-        }
+        ticketList.stream()
+                .map(LottoTicketView::new)
+                .forEach(System.out::println);
     }
 
     public static void printResult(List<LottoPrize> prizeList, int numberOfTickets) {
