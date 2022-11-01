@@ -22,10 +22,11 @@ public class LottoController {
 		int money = INPUT_VIEW.askMoneyForLotto();
 		int totalTicket = payment.amountOfTicket(money);
 		int handTicket = INPUT_VIEW.askForHand();
-		int autoTicket = payment.autoTicket(totalTicket, handTicket);
+		payment.isValid(handTicket,totalTicket);
 
-		OUTPUT_VIEW.showTotalTicket(handTicket, autoTicket);
+		int autoTicket = payment.autoTicket(totalTicket, handTicket);
 		Lotteries lotteries = Lotteries.of(handLotteries(handTicket), autoTicket, lottoFactory);
+		OUTPUT_VIEW.showTotalTicket(handTicket, autoTicket);
 		OUTPUT_VIEW.showLotteries(totalTicket, lotteries);
 
 		HashMap<Rank, Integer> totalCount =

@@ -1,6 +1,7 @@
 package step2.view;
 
 import static step2.model.Rank.MISS;
+import static step2.model.Rank.SECOND;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -25,10 +26,21 @@ public class OutputView {
 		Arrays.stream(Rank.values())
 			.sorted(Comparator.reverseOrder())
 			.filter(rank -> rank != MISS)
-			.forEach(rank ->
-				System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch()
-					, rank.getWinningMoney()
-					, totalCount.get(rank)));
+			.forEach(rank -> printMessage(rank, totalCount));
+	}
+
+	private void printMessage(Rank rank, HashMap<Rank, Integer> totalCount) {
+		if (rank.equals(SECOND)) {
+			System.out.printf("%d개 일치 보너스 볼 일치(%d원)- %d개\n"
+				, rank.getCountOfMatch()
+				, rank.getWinningMoney()
+				, totalCount.get(rank));
+			return;
+		}
+
+		System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch()
+			, rank.getWinningMoney()
+			, totalCount.get(rank));
 	}
 
 	public void showTotalTicket(int handTicket, int autoTicket) {
