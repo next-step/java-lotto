@@ -10,6 +10,7 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     Lotto(List<LottoNumber> numbers) {
+        validate(numbers);
         this.numbers = numbers;
     }
 
@@ -28,6 +29,12 @@ public class Lotto {
     private List<LottoNumber> randomNumbers() {
         List<LottoNumber> numbers = LottoNumber.shuffleNumbers();
         return numbers.subList(0, LENGTH);
+    }
+
+    private void validate(List<LottoNumber> numbers) {
+        if (numbers.stream().mapToInt(v -> v.getNumber()).distinct().count() != numbers.size()) {
+            throw new IllegalArgumentException("유니크한 값으로만 구성해야합니다.");
+        }
     }
 
     @Override

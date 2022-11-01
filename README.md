@@ -36,3 +36,4 @@
 11. [x] `Rank#calculate`에서 단일 Rank 리턴하도록 변경 & MyRank 생성
 12. [X] Rank.NONE 은 제외하고 출력하기
 13. [X] Rank 출력시 정렬
+14. [X] Lotto 모두 유니크한 값으로 이루어졌는지 검사
