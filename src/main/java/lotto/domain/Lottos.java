@@ -32,7 +32,7 @@ public class Lottos {
 
     private Map<LottoWinningType, Integer> countLottoWinningTypes(final List<Lotto> lottos,
                                                                   final WinningLottoNumbers winningLottoNumbers) {
-        Map<LottoWinningType, Integer> countMap = new HashMap<>();
+        Map<LottoWinningType, Integer> countMap = new EnumMap<>(LottoWinningType.class);
 
         lottos.forEach(lotto -> {
             LottoWinningType lottoWinningType =
