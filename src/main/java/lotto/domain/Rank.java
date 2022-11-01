@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     NO_MATCH(0, 0),
     ;
 
@@ -20,17 +20,17 @@ public enum Rank {
     }
 
     public static Rank of(final int countOfMatch, final boolean isMatchBonus) {
+        if (SECOND.isSameAsMatchCount(countOfMatch)) {
+            return rankSecondAndThird(isMatchBonus);
+        }
+
         return Arrays.stream(values())
                 .filter(v -> v.isSameAsMatchCount(countOfMatch))
-                .map(v -> getRankWithBonusNumber(v, isMatchBonus))
                 .findFirst()
                 .orElse(NO_MATCH);
     }
 
-    private static Rank getRankWithBonusNumber(final Rank rank, final boolean isMatchBonus) {
-        if (!(SECOND == rank || THIRD == rank)) {
-            return rank;
-        }
+    private static Rank rankSecondAndThird(final boolean isMatchBonus) {
         if (isMatchBonus) {
             return SECOND;
         }

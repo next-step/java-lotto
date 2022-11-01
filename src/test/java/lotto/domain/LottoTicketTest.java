@@ -1,19 +1,12 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
-import static lotto.domain.LottoNumber.*;
-import static lotto.domain.Rank.*;
-import static org.junit.jupiter.params.provider.Arguments.*;
+import static lotto.domain.LottoNumber.valueOf;
 
 class LottoTicketTest {
 
@@ -31,24 +24,20 @@ class LottoTicketTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @ParameterizedTest
-    @MethodSource
-    @DisplayName("당첨번호를 전달받아서 등수 반환")
-    void match(LottoTicket lottoTicket, Rank rank) {
-        List<LottoNumber> winningNumbers = List.of(valueOf(1), valueOf(2), valueOf(3),
-                valueOf(4), valueOf(5), valueOf(6));
-        Assertions.assertThat(lottoTicket.match(winningNumbers, LottoNumber.valueOf(7))).isEqualTo(rank);
+    @Test
+    void 로또번호_포함_불포함() {
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+
+        Assertions.assertThat(lottoTicket.contains(valueOf(1))).isSameAs(true);
+        Assertions.assertThat(lottoTicket.contains(valueOf(7))).isSameAs(false);
     }
 
-    static Stream<Arguments> match() {
-        return Stream.of(
-                arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), FIRST),
-                arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), SECOND),
-                arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 8)), THIRD),
-                arguments(new LottoTicket(List.of(1, 2, 3, 4, 7, 8)), FOURTH),
-                arguments(new LottoTicket(List.of(1, 2, 3, 7, 8, 9)), FIFTH),
-                arguments(new LottoTicket(List.of(1, 2, 7, 8, 9, 10)), NO_MATCH)
-        );
+    @Test
+    void 티켓을_넘겨받아_로또번호가_일치하는_갯수_반환() {
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket winningNumbers = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+
+        Assertions.assertThat(lottoTicket.countSameNumber(winningNumbers)).isEqualTo(6);
     }
 
 }
