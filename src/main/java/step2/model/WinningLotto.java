@@ -28,10 +28,7 @@ public class WinningLotto {
 	}
 
 	public boolean isBonus(List<Integer> lotto) {
-		return lotto.stream()
-			.filter((lottoNumber) -> lottoNumber.equals(bonusNumber))
-			.findFirst()
-			.isPresent();
+		return lotto.contains(bonusNumber);
 	}
 }
 
