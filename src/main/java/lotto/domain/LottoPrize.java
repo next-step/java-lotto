@@ -10,16 +10,16 @@ public enum LottoPrize {
     FORTH(5_000, 3);
 
     private final int reward;
-    private final int winningConditionCommonNumberCount;
+    private final int commonNumberCount;
 
-    LottoPrize(final int reward, final int winningConditionCommonNumberCount) {
+    LottoPrize(final int reward, final int commonNumberCount) {
         this.reward = reward;
-        this.winningConditionCommonNumberCount = winningConditionCommonNumberCount;
+        this.commonNumberCount = commonNumberCount;
     }
 
     public static Optional<LottoPrize> findByCommonNumberCount(int commonNumberCount) {
         return Arrays.stream(LottoPrize.values())
-                .filter(lottoPrize -> commonNumberCount == lottoPrize.winningConditionCommonNumberCount)
+                .filter(lottoPrize -> commonNumberCount == lottoPrize.commonNumberCount)
                 .findFirst();
     }
 
@@ -27,7 +27,7 @@ public enum LottoPrize {
         return this.reward;
     }
 
-    public int getWinningConditionCommonNumberCount() {
-        return this.winningConditionCommonNumberCount;
+    public int getCommonNumberCount() {
+        return this.commonNumberCount;
     }
 }

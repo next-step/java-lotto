@@ -26,7 +26,7 @@ public class LottoResultView {
                 .collect(Collectors.toList());
 
         for (LottoPrize prize : ascendingOrderedLottoPrizeList) {
-            String prizeInfo = prize.getWinningConditionCommonNumberCount() + "개 일치 (" + prize.getReward() + ")";
+            String prizeInfo = prize.getCommonNumberCount() + "개 일치 (" + prize.getReward() + ")";
             long prizeCount = prizeList.stream().filter(p -> p == prize).count();
             System.out.println(prizeInfo + " - " + prizeCount + "개");
         }
