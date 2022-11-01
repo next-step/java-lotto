@@ -1,12 +1,19 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
+
+    public LottoNumbers(final int... intLottoNumbers) {
+        this.lottoNumbers = Arrays.stream(intLottoNumbers)
+                                  .mapToObj(LottoNumber::new)
+                                  .collect(Collectors.toList());
+    }
 
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -25,15 +32,12 @@ public class LottoNumbers {
     }
 
 
-    public int countOfMatch(final List<LottoNumber> lottoNumbers) {
+    private int countOfMatch(final List<LottoNumber> lottoNumbers) {
         if (Objects.isNull(lottoNumbers)) {
             return 0;
         }
 
         return (int) lottoNumbers.stream()
-                                 .map(Optional::ofNullable)
-                                 .filter(Optional::isPresent)
-                                 .map(Optional::get)
                                  .filter(this.lottoNumbers::contains)
                                  .count();
     }

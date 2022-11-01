@@ -1,20 +1,36 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoWinningStatistics;
-import lotto.domain.LottoWinningType;
+import lotto.domain.*;
 
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
     private ResultView() {
     }
 
-    public static void printLottoAmountAndNumbers(final List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
-        lottos.forEach(System.out::println);
+    private static String getFormattedLottoString(final Lotto lotto) {
+        return "[" +
+                lotto.getNumbers()
+                     .getLottoNumbers()
+                     .stream()
+                     .sorted()
+                     .map(LottoNumber::toString)
+                     .collect(Collectors.joining(", ")) +
+                "]";
+    }
+
+    public static void printLottoAmountAndNumbers(final int manualPurchaseLottoCount,
+                                                  final int autoPurchaseLottoCount,
+                                                  final Lottos lottos) {
+        System.out.println();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                manualPurchaseLottoCount, autoPurchaseLottoCount);
+        lottos.getLottos()
+              .stream()
+              .map(ResultView::getFormattedLottoString)
+              .forEach(System.out::println);
         System.out.println();
     }
 

@@ -1,6 +1,13 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class InputView {
 
@@ -16,13 +23,40 @@ public class InputView {
         return lottoPurchaseAmount;
     }
 
-    public static String inputWinningLottoNumbersString() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return SCANNER.nextLine();
+    public static int inputManualPurchaseLottoCount() {
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualPurchaseLottoCount = SCANNER.nextInt();
+        SCANNER.skip("\n");
+        return manualPurchaseLottoCount;
     }
 
-    public static int inputBonusLottoNumber() {
+    public static List<LottoNumbers> inputManualPurchaseLottoNumbersList(final int manualPurchaseLottoCount) {
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return IntStream.rangeClosed(1, manualPurchaseLottoCount)
+                        .mapToObj(order -> SCANNER.nextLine())
+                        .map(InputView::toLottoNumbers)
+                        .collect(Collectors.toList());
+    }
+
+    public static LottoNumbers inputWinningLottoNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return toLottoNumbers(SCANNER.nextLine());
+    }
+
+    public static LottoNumber inputBonusLottoNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return SCANNER.nextInt();
+        int bonusLottoNumber = SCANNER.nextInt();
+        SCANNER.skip("\n");
+        return new LottoNumber(bonusLottoNumber);
+    }
+
+    private static LottoNumbers toLottoNumbers(final String lottoNumbersString) {
+        return new LottoNumbers(Stream.of(lottoNumbersString.split(","))
+                                      .map(String::trim)
+                                      .map(Integer::parseInt)
+                                      .map(LottoNumber::new)
+                                      .collect(Collectors.toList()));
     }
 }

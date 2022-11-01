@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -11,14 +10,13 @@ public class Lotto {
 
     private final LottoNumbers numbers;
 
+    public Lotto(final List<LottoNumber> numbers) {
+        this(new LottoNumbers(numbers));
+    }
+
     public Lotto(final LottoNumbers numbers) {
         validateOrThrow(numbers.getLottoNumbers());
         this.numbers = numbers;
-    }
-
-    public Lotto(final List<LottoNumber> numbers) {
-        validateOrThrow(numbers);
-        this.numbers = new LottoNumbers(numbers);
     }
 
     private static void validateOrThrow(final List<LottoNumber> numbers) {
@@ -39,6 +37,10 @@ public class Lotto {
         return this.numbers.countOfMatch(winningLottoNumbers);
     }
 
+    public LottoNumbers getNumbers() {
+        return numbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,16 +52,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return "[" +
-                this.numbers.getLottoNumbers()
-                            .stream()
-                            .sorted()
-                            .map(LottoNumber::toString)
-                            .collect(Collectors.joining(", ")) +
-                "]";
     }
 }
