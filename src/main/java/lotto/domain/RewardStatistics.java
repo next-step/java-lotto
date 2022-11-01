@@ -6,7 +6,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static lotto.input.LottoTicket.DEFAULT_TICKET_PRICE;
+import static lotto.input.LottoTicketInput.DEFAULT_TICKET_PRICE;
 
 public class RewardStatistics {
 

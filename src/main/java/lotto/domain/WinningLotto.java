@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class WinningLotto {
     private final Lotto winningLotto;
-    private final Integer bonusWinningNumber;
+    private final LottoNumber bonusWinningNumber;
 
-    public WinningLotto(Lotto winningLotto, Integer bonusWinningNumber) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusWinningNumber) {
         if(winningLotto.hasSameElement(bonusWinningNumber)){
-            throw new IllegalArgumentException("winning numbers has the same number with the bonus number");
+            throw new IllegalArgumentException("winning numbers cannot have the same number with the bonus number");
         }
         this.winningLotto = winningLotto;
         this.bonusWinningNumber = bonusWinningNumber;
@@ -18,7 +18,7 @@ public class WinningLotto {
         return winningLotto;
     }
 
-    public Integer getBonusWinningNumber() {
+    public LottoNumber getBonusWinningNumber() {
         return bonusWinningNumber;
     }
 
