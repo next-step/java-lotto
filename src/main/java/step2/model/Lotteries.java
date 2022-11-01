@@ -13,20 +13,18 @@ public class Lotteries {
 	private WinningLotto winningLotto;
 	private List<Lotto> lotteries;
 
-	public Lotteries(List<Lotto> lotteries){
-		this(lotteries,new HashMap<>());
-	}
 
 	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
 		this.lotteries = lotteries;
 		this.totalMatch = totalMatch;
 	}
 
-	public static Lotteries of(int totalTicket, LottoFactory lottoFactory) {
+	public static Lotteries of(List<Lotto> handLotto,int autoTicket, LottoFactory lottoFactory) {
 		HashMap<Rank,Integer> totalMatch = new HashMap<>();
-		List<Lotto> lotteries = new ArrayList<>();
 
-		for (int ticket = DEFAULT_MIN_LENGTH; ticket < totalTicket; ticket++) {
+		List<Lotto> lotteries = new ArrayList<>();
+		lotteries.addAll(handLotto);
+		for (int ticket = DEFAULT_MIN_LENGTH; ticket < autoTicket; ticket++) {
 			lotteries.add(new Lotto(lottoFactory));
 		}
 

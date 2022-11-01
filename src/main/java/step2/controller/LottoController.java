@@ -23,12 +23,12 @@ public class LottoController {
 		int money = INPUT_VIEW.askMoneyForLotto();
 
 		int handTicket = INPUT_VIEW.askForHand();
-		handLotteries(handTicket);
+		List<Lotto> handLotto = handLotteries(handTicket);
 		int autoTicket = payment.autoTicket(money,handTicket);
 
 		OUTPUT_VIEW.showTotalTicket(handTicket,autoTicket);
 
-		Lotteries lotteries = Lotteries.of(autoTicket, lottoFactory);
+		Lotteries lotteries = Lotteries.of(handLotto, autoTicket, lottoFactory);
 		OUTPUT_VIEW.showLotteries(autoTicket, lotteries);
 
 		HashMap<Rank, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),
@@ -38,12 +38,12 @@ public class LottoController {
 		OUTPUT_VIEW.showRate(payment.calculateBenefit(money, totalCount));
 	}
 
-	public Lotteries handLotteries(int countOfHand){
+	public List<Lotto> handLotteries(int countOfHand){
 		INPUT_VIEW.askHandNumber();
 		List<Lotto> handLotto  = new ArrayList<>();
 		for(int i = 0 ; i< countOfHand ; i++) {
 			handLotto.add(new Lotto(INPUT_VIEW.handNumber()));
 		}
-		return new Lotteries(handLotto);
+		return handLotto;
 	}
 }
