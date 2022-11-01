@@ -8,7 +8,7 @@ public class Payment {
 	private static final int LOTTO_PRICE = 1000;
 	private static final int DEFAULT_PRICE = 0;
 
-	private int amountOfTicket(int cash) {
+	public int amountOfTicket(int cash) {
 		if (cash < LOTTO_PRICE) {
 			throw new MoneyException("금액이 부족합니다");
 		}

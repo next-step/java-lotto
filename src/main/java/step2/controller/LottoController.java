@@ -21,6 +21,7 @@ public class LottoController {
 
 	public void startLotto(LottoFactory lottoFactory) {
 		int money = INPUT_VIEW.askMoneyForLotto();
+		int totalTicket = payment.amountOfTicket(money);
 
 		int handTicket = INPUT_VIEW.askForHand();
 		List<Lotto> handLotto = handLotteries(handTicket);
@@ -29,7 +30,7 @@ public class LottoController {
 		OUTPUT_VIEW.showTotalTicket(handTicket,autoTicket);
 
 		Lotteries lotteries = Lotteries.of(handLotto, autoTicket, lottoFactory);
-		OUTPUT_VIEW.showLotteries(autoTicket, lotteries);
+		OUTPUT_VIEW.showLotteries(totalTicket, lotteries);
 
 		HashMap<Rank, Integer> totalCount = lotteries.isMatch(INPUT_VIEW.winNumber(),
 			INPUT_VIEW.askBonusNumber());

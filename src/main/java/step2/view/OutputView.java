@@ -26,13 +26,13 @@ public class OutputView {
 			.sorted(Comparator.reverseOrder())
 			.filter(rank -> rank != MISS)
 			.forEach(rank ->
-				System.out.printf("%d개 일치 (%d원)- %d\n", rank.getCountOfMatch()
+				System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch()
 					, rank.getWinningMoney()
 					, totalCount.get(rank)));
 	}
 
 	public void showTotalTicket(int handTicket,int autoTicket) {
-		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다",handTicket,autoTicket);
+		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다\n",handTicket,autoTicket);
 	}
 
 	public void showLotteries(int tickets, Lotteries lotteries) {
