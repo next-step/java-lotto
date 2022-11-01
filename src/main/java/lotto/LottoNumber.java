@@ -3,7 +3,6 @@ package lotto;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int VALUE_MIN = 1;

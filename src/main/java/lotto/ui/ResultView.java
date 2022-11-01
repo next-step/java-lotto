@@ -1,6 +1,9 @@
 package lotto.ui;
 
-import lotto.*;
+import lotto.LottoNumber;
+import lotto.LottoResult;
+import lotto.LottoResultStat;
+import lotto.LottoTicket;
 
 import java.util.List;
 import java.util.stream.Collectors;
