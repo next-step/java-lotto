@@ -2,8 +2,8 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,5 +20,11 @@ public class MyRankTest {
         MyRank myRank = new MyRank();
         myRank.add(Rank.FOURTH);
         assertThat(myRank.profit(140000.0)).isEqualTo(5000.0 / 140000.0);
+    }
+
+    @Test
+    void 순위대로_정렬() {
+        MyRank myRank = new MyRank();
+        assertThat(myRank.all()).containsAll(Arrays.stream(Rank.values()).filter(Rank::isNotNone).collect(Collectors.toList()));
     }
 }

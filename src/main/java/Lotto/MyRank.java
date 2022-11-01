@@ -1,7 +1,10 @@
 package lotto;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MyRank {
     private Map<Rank, Integer> rankMap;
@@ -29,6 +32,14 @@ public class MyRank {
 
     public int getCount(Rank rank) {
         return rankMap.get(rank);
+    }
+
+    public List<Rank> all() {
+        return rankMap.keySet()
+                .stream()
+                .filter(Rank::isNotNone)
+                .sorted(Comparator.comparing(Rank::ordinal))
+                .collect(Collectors.toList());
     }
 
     private void initializeRankMap() {

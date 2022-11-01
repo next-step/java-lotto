@@ -1,8 +1,5 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.List;
-
 public enum Rank {
     NONE(0, 0),
     FOURTH(3, 5000),
@@ -28,6 +25,10 @@ public enum Rank {
 
     public static Rank getRank(Lotto winner, Lotto myLotto) {
         return RankOf(winner.correctCount(myLotto));
+    }
+
+    public boolean isNotNone() {
+        return this != NONE;
     }
 
     public int getCorrectCount() {

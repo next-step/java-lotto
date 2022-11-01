@@ -60,7 +60,7 @@ public class LottoApplication {
             Rank rank = Rank.getRank(winnerLotto, lotto);
             myRank.add(rank);
         }
-        ResultView.result(myRank.getRankMap());
+        ResultView.result(myRank);
         ResultView.profit(myRank.profit(paidAmount));
     }
 }

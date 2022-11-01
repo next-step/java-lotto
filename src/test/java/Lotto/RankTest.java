@@ -30,4 +30,9 @@ public class RankTest {
 
         assertThat(Rank.getRank(winner, myLotto)).isEqualTo(Rank.FIRST);
     }
+
+    @Test
+    void NONE_Rank_인지_확인() {
+        assertThat(Rank.FIRST.isNotNone()).isTrue();
+    }
 }

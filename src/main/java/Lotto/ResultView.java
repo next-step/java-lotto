@@ -31,15 +31,15 @@ public class ResultView {
         System.out.println(LAST_WEEK_WINNER_LOTTO);
     }
 
-    public static void result(Map<Rank, Integer> myRankMap) {
+    public static void result(MyRank myRank) {
         System.out.println(STATS_RESULT);
         System.out.println(INDICATOR);
-        for (Rank rank : myRankMap.keySet()) {
+        for (Rank rank : myRank.all()) {
             String msg = String.format(
                     "%s개 일치 (%s원)- %s개",
                     rank.getCorrectCount(),
                     rank.getPrize(),
-                    myRankMap.get(rank)
+                    myRank.getCount(rank)
             );
             System.out.println(msg);
         }
