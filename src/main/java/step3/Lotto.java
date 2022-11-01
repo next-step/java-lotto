@@ -37,8 +37,8 @@ public class Lotto {
 		return lotto.contains(bonus);
 	}
 
-	public int count(Lotto guestLotto) {
-		return (int)guestLotto.getLotto().stream()
+	public int count(Lotto other) {
+		return (int)other.getLotto().stream()
 			.filter(this::isExist)
 			.count();
 	}
