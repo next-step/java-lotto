@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
     private static final int[] possibleNumbers = IntStream.rangeClosed(1, 45).toArray();
+    public static final int FIXED_NUMBER_COUNT = 6;
     private final List<Integer> numbers;
 
     public LottoTicket() {
@@ -33,8 +34,8 @@ public class LottoTicket {
     }
 
     private static void validateCountOfNumbers(final List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("6개의 숫자를 입력하세요");
+        if (numbers.size() != FIXED_NUMBER_COUNT) {
+            throw new IllegalArgumentException(FIXED_NUMBER_COUNT + "개의 숫자를 입력하세요");
         }
     }
 
