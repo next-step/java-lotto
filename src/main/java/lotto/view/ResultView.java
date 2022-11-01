@@ -4,8 +4,8 @@ import lotto.domain.Rank;
 import lotto.domain.Ranks;
 import lotto.domain.Ticket;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     public static void printTicketCount(int ticketCount) {
@@ -18,16 +18,18 @@ public class ResultView {
 
     public static void printLottoResult(Ranks ranks) {
         System.out.println("\n당첨 통계\n---------");
-        EnumMap<Rank, Integer> rankMap = ranks.getRanks();
+        Map<Rank, Integer> rankMap = ranks.getRanks();
 
-        printRank(Rank.FOURTH, rankMap);
-        printRank(Rank.THIRD, rankMap);
-        printRank(Rank.SECOND, rankMap);
-        printRank(Rank.FIRST, rankMap);
+        Rank[] rankList = Rank.values();
+        for (int i = rankList.length - 2; i >= 0; i--) {
+            Rank rank = rankList[i];
+            printRank(rank, rankMap);
+        }
     }
 
-    private static void printRank(Rank rank, EnumMap<Rank, Integer> rankMap) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n", rank.getMatchCount(), rank.getMoney(), rankMap.get(rank));
+    private static void printRank(Rank rank, Map<Rank, Integer> rankMap) {
+
+        System.out.printf("%d개 일치%s(%d원)- %d개%n", rank.getMatchCount(), printBonusBallMatch(rank), rank.getMoney(), rankMap.get(rank));
     }
 
     public static void printIncomePercentage(double incomePercentage) {
@@ -37,4 +39,11 @@ public class ResultView {
         }
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", incomePercentage, result);
     }
+    private static String printBonusBallMatch(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
+    }
+
 }

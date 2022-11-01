@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Ranks {
     private final EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
@@ -22,11 +23,11 @@ public class Ranks {
         }
     }
 
-    private Integer countRank(Rank rank) {
+    private int countRank(Rank rank) {
         return this.ranks.get(rank) + 1;
     }
 
-    public EnumMap<Rank, Integer> getRanks() {
+    public Map<Rank, Integer> getRanks() {
         return ranks;
     }
 
