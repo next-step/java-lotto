@@ -1,19 +1,14 @@
 package step3;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum Operator {
 	NOT_RANK(0, null, 0),
-	THREE(3, false, 5000),
-	FOUR(4, false, 50000),
-	FIVE(5, false, 1500000),
-	FIVE_BONUS(5, true, 30000000),
-	SIX(6, false, 2000000000);
+	THREE(3, false, 5_000),
+	FOUR(4, false, 50_000),
+	FIVE(5, false, 1_500_000),
+	FIVE_BONUS(5, true, 30_000_000),
+	SIX(6, false, 2_000_000_000);
 
 	private int count;
 	private int winning;
