@@ -31,8 +31,8 @@ public class OutputView {
 					, totalCount.get(rank)));
 	}
 
-	public void showTotalTicket(int tickets) {
-		System.out.println(tickets + "매를 구매했습니다");
+	public void showTotalTicket(int handTicket,int autoTicket) {
+		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다",handTicket,autoTicket);
 	}
 
 	public void showLotteries(int tickets, Lotteries lotteries) {

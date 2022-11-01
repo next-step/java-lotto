@@ -22,11 +22,11 @@ public class LottoController {
 	public void startLotto(LottoFactory lottoFactory) {
 		int money = INPUT_VIEW.askMoneyForLotto();
 
-		int countOfHand = INPUT_VIEW.askForHand();
-		handLotteries(countOfHand);
-		int autoTicket = payment.autoTicket(money,countOfHand);
+		int handTicket = INPUT_VIEW.askForHand();
+		handLotteries(handTicket);
+		int autoTicket = payment.autoTicket(money,handTicket);
 
-		OUTPUT_VIEW.showTotalTicket(autoTicket);
+		OUTPUT_VIEW.showTotalTicket(handTicket,autoTicket);
 
 		Lotteries lotteries = Lotteries.of(autoTicket, lottoFactory);
 		OUTPUT_VIEW.showLotteries(autoTicket, lotteries);
