@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-import calculator.exception.ErrorMessage;
+import lotto.exception.ErrorMessage;
 import lotto.exception.InvalidMatchCountException;
 
 public enum Reward {

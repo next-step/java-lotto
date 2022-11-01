@@ -4,8 +4,8 @@ public enum ErrorMessage {
 	OPERAND_MUST_BE_NUMBER("피연산자 {0}은(는) 숫자이어야 합니다."),
 	INVALID_OPERATOR("유효하지 않은 연산자 {0} 입니다."),
 	ILLEGAL_ARGUMENT("잘못된 인자 {0} 입니다."),
-	ZERO_DIVIDE("0으로 나누기를 할 수 없습니다"),
-	INVALID_MATCH_COUNT("유효하지 않은 일치 갯수 입니다.");
+	ZERO_DIVIDE("0으로 나누기를 할 수 없습니다");
+
 	String message;
 
 	ErrorMessage(String message) {
