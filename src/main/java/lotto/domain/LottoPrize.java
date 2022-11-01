@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum LottoPrize {
-    FIRST(2000000000, 6),
-    SECOND(1500000, 5),
-    THIRD(50000, 4),
-    FORTH(5000, 3);
+    FIRST(2_000_000_000, 6),
+    SECOND(1_500_000, 5),
+    THIRD(50_000, 4),
+    FORTH(5_000, 3);
 
     private final int reward;
     private final int winningConditionCommonNumberCount;
