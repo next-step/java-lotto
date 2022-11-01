@@ -1,5 +1,7 @@
 package step2.view;
 
+import static java.lang.Integer.parseInt;
+
 import java.util.ArrayList;
 
 import java.util.List;
@@ -46,8 +48,8 @@ public class InputView {
 
 	public List<Integer> winNumber() {
 		for (String inputNumber : askWinNumber()) {
-			isRangeValid(Integer.parseInt(inputNumber));
-			winNumber.add(Integer.parseInt(inputNumber));
+			isRangeValid(parseInt(inputNumber));
+			winNumber.add(parseInt(inputNumber));
 		}
 
 		isCountValid(winNumber.size());
@@ -57,8 +59,8 @@ public class InputView {
 	public List<Integer> handNumber() {
 		List<Integer> handNumber = new ArrayList<>();
 		for (String inputNumber : scanner.next().split(DELIMITER)) {
-			isRangeValid(Integer.parseInt(inputNumber));
-			handNumber.add(Integer.parseInt(inputNumber));
+			isRangeValid(parseInt(inputNumber));
+			handNumber.add(parseInt(inputNumber));
 		}
 		isCountValid(handNumber.size());
 

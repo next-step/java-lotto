@@ -3,9 +3,9 @@ package step2.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class Lotteries {
+
 	private static final int DEFAULT_MATCH_COUNT = 0;
 	private static final int DEFAULT_MIN_LENGTH = 0;
 
@@ -13,17 +13,15 @@ public class Lotteries {
 	private WinningLotto winningLotto;
 	private List<Lotto> lotteries;
 
-
 	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
 		this.lotteries = lotteries;
 		this.totalMatch = totalMatch;
 	}
 
-	public static Lotteries of(List<Lotto> handLotto,int autoTicket, LottoFactory lottoFactory) {
-		HashMap<Rank,Integer> totalMatch = new HashMap<>();
+	public static Lotteries of(List<Lotto> handLotto, int autoTicket, LottoFactory lottoFactory) {
+		HashMap<Rank, Integer> totalMatch = new HashMap<>();
+		List<Lotto> lotteries = new ArrayList<>(handLotto);
 
-		List<Lotto> lotteries = new ArrayList<>();
-		lotteries.addAll(handLotto);
 		for (int ticket = DEFAULT_MIN_LENGTH; ticket < autoTicket; ticket++) {
 			lotteries.add(new Lotto(lottoFactory));
 		}

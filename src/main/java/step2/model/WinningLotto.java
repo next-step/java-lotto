@@ -1,7 +1,6 @@
 package step2.model;
 
 import java.util.List;
-import java.util.function.Predicate;
 import step2.exception.IllegalNumberException;
 
 public class WinningLotto {
