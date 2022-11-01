@@ -1,7 +1,8 @@
 package lotto.exception;
 
 public enum ErrorMessage {
-	MONEY_MUST_BE_POSITIVE("돈은 양수이어야 합니다.");
+	MONEY_MUST_BE_POSITIVE("돈은 양수이어야 합니다."),
+	LOTTO_NUMBERS_QUANTITY_MUST_BE_SIX("로또 숫자 갯수는 6개이어야 합니다.");
 
 	String message;
 

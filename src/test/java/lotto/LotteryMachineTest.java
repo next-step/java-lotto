@@ -2,14 +2,13 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 
 class LotteryMachineTest {
@@ -21,10 +20,10 @@ class LotteryMachineTest {
 		LotteryMachine lotteryMachine = new LotteryMachine();
 		Money money = new Money(value);
 
-		List<Lotto> lottos = lotteryMachine.issue(money);
+		Lottos lottos = lotteryMachine.issue(money);
 		int expected = value / Lotto.PRICE;
 
-		assertThat(lottos.size()).isEqualTo(expected);
+		assertThat(lottos.getCount()).isEqualTo(expected);
 	}
 
 }
