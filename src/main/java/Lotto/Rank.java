@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
+    NONE(0, 0, 0),
     FOURTH(3, 5000, 0),
     THIRD(4, 50000, 0),
     SECOND(5, 1500000, 0),
@@ -24,16 +25,16 @@ public enum Rank {
         if (correctCount == 5) return Rank.SECOND;
         if (correctCount == 4) return Rank.THIRD;
         if (correctCount == 3) return Rank.FOURTH;
-        return null;
+        return Rank.NONE;
     }
 
     public static List<Rank> calculate(Lotto winner, List<Lotto> myLotto) {
         for (Lotto lotto : myLotto) {
             int correctCount = winner.correctCount(lotto);
             Rank rank = RankOf(correctCount);
-            if (rank == null) continue;
+            if (rank == Rank.NONE) continue;
 
-            RankOf(correctCount).plusCount();
+            rank.plusCount();
         }
 
         return Arrays.asList(Rank.values());
