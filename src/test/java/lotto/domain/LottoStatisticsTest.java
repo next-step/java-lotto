@@ -26,6 +26,7 @@ class LottoStatisticsTest {
     void collectAccordanceCountTest() {
         LottoStatistics lottoStatistics = new LottoStatistics();
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(7);
 
         AccordanceCount result = lottoStatistics.collectAccordanceCount(lottos, winningNumbers);
 

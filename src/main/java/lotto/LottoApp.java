@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.AccordanceCount;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
@@ -22,6 +23,7 @@ public class LottoApp {
         resultView.printLottos(lottos);
 
         WinningNumbers winningNumbers = inputView.inputLastWeekWinningNumbers();
+        LottoNumber bonusNumber = inputView.inputBonusNumber();
 
         LottoStatistics lottoStatistics = new LottoStatistics();
         AccordanceCount accordanceCount = lottoStatistics.collectAccordanceCount(lottos, winningNumbers);

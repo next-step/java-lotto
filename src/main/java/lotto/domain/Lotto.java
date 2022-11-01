@@ -14,14 +14,14 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        this(new LottoNumbers(numbers));
+        this(LottoNumbers.of(numbers));
     }
 
     public static Lotto createFrom(NumberGenerator numberGenerator) {
         return new Lotto(numberGenerator.generate());
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return this.numbers.getNumbers();
     }
 
@@ -35,7 +35,7 @@ public class Lotto {
     @Override
     public String toString() {
         return getNumbers().stream()
-            .map(String::valueOf)
+            .map(LottoNumber::toString)
             .collect(Collectors.joining(DELIMITER_COMMA));
     }
 }
