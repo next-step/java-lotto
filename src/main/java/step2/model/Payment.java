@@ -25,4 +25,15 @@ public class Payment {
 		return benefit / (double) cash;
 	}
 
+	public int autoTicket(int cash, int handCount) {
+		int autoTicket = amountOfTicket(cash) - handCount;
+
+		if(autoTicket < DEFAULT_PRICE){
+			throw new MoneyException("티켓을 살 돈이 부족합니다");
+		}
+
+		return autoTicket;
+
+
+	}
 }
