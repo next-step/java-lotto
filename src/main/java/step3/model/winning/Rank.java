@@ -5,20 +5,18 @@ import java.util.stream.Stream;
 
 public enum Rank {
 
-	FIRST(6, false, 2_000_000_000),
-	SECOND(5, false, 30_000_000),
-	THIRD(5, true, 1_500_000),
-	FOURTH(4, false, 50_000),
-	FIFTH(3, false, 5_000),
-	MISS(0, false,  0);
+	FIRST(6, 2_000_000_000),
+	SECOND(5, 30_000_000),
+	THIRD(5, 1_500_000),
+	FOURTH(4, 50_000),
+	FIFTH(3, 5_000),
+	MISS(0,  0);
 
 	private int countOfMatch;		// 일치하는 개수
-	private boolean matchBonus;		// 일치하는 개수
 	private int winningMoney;		// 당첨 상금
 
-	private Rank(int countOfMatch, boolean matchBonus, int winningMoney) {
+	private Rank(int countOfMatch, int winningMoney) {
 		this.countOfMatch = countOfMatch;
-		this.matchBonus = matchBonus;
 		this.winningMoney = winningMoney;
 	}
 
@@ -30,19 +28,22 @@ public enum Rank {
 		return winningMoney;
 	}
 
-	public boolean getMatchBonus() {
-		return matchBonus;
-	}
-
 	public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+		if (isSecond(countOfMatch, matchBonus)) {
+			return Rank.SECOND;
+		}
+
 		return Arrays.stream(values())
 			.filter(rank -> rank.getCountOfMatch() == countOfMatch)
-			.filter(rank -> rank.getMatchBonus() == matchBonus)
 			.findAny()
 			.orElse(Rank.MISS);
 	}
 
 	public static Stream<Rank> stream() {
 		return Arrays.stream(values());
+	}
+
+	private static boolean isSecond(int countOfMatch, boolean matchBonus) {
+		return countOfMatch == 5 && matchBonus;
 	}
 }
