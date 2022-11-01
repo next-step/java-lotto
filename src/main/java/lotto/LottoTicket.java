@@ -64,20 +64,20 @@ public class LottoTicket {
         }
         Collections.shuffle(candidates);
         return candidates.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList());
     }
 
     private static List<LottoNumber> toLottoNumbers(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
     private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 }

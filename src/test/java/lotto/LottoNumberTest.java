@@ -12,14 +12,14 @@ public class LottoNumberTest {
     @ValueSource(ints={0, 46})
     void test_invalid_number(int value) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumber(value);
+            LottoNumber.of(value);
         });
     }
 
     @Test
     void test_compare_to() {
-        assertThat(new LottoNumber(3).compareTo(new LottoNumber(4))).isEqualTo(-1);
-        assertThat(new LottoNumber(3).compareTo(new LottoNumber(3))).isEqualTo(0);
-        assertThat(new LottoNumber(3).compareTo(new LottoNumber(2))).isEqualTo(1);
+        assertThat(LottoNumber.of(3).compareTo(LottoNumber.of(4))).isEqualTo(-1);
+        assertThat(LottoNumber.of(3).compareTo(LottoNumber.of(3))).isEqualTo(0);
+        assertThat(LottoNumber.of(3).compareTo(LottoNumber.of(2))).isEqualTo(1);
     }
 }

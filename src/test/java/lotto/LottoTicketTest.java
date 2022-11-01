@@ -30,8 +30,8 @@ public class LottoTicketTest {
     @Test
     void test_has_number() {
         LottoTicket ticket = LottoTicket.from(1, 2, 3, 4, 5, 6);
-        assertThat(ticket.hasNumber(new LottoNumber(1))).isTrue();
-        assertThat(ticket.hasNumber(new LottoNumber(7))).isFalse();
+        assertThat(ticket.hasNumber(LottoNumber.of(1))).isTrue();
+        assertThat(ticket.hasNumber(LottoNumber.of(7))).isFalse();
     }
 
     @Test
