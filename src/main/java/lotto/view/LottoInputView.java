@@ -23,12 +23,15 @@ public class LottoInputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String inputString = scanner.nextLine();
+        try {
+            List<Integer> lastWeekWinningNumbers = Arrays.stream(inputString.split(","))
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
 
-        List<Integer> lastWeekWinningNumbers = Arrays.stream(inputString.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        return new LottoTicket(lastWeekWinningNumbers);
+            return new LottoTicket(lastWeekWinningNumbers);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자만 입력해주세요");
+        }
     }
 }
