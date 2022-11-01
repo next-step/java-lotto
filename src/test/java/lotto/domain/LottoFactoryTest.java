@@ -12,13 +12,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoFactoryTest {
 
     @Test
-    void 생성() {
-        LottoFactory lottoFactory2 = new LottoFactory();
+    void 생성_자동() {
+        LottoFactory lottoFactory = new LottoFactory();
 
-        List<Lotto> produces = lottoFactory2.produces((lottoNumbers) -> {
+        List<Lotto> produces = lottoFactory.produceAutoLottos((lottoNumbers) -> {
         }, 2);
 
         assertThat(produces).hasSize(2);
-        assertThat(produces.get(0).getLottoNumbers()).isEqualTo((List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(produces.get(0)).isEqualTo((Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 6))));
+    }
+
+    @Test
+    void 생성_수동() {
+        LottoFactory lottoFactory = new LottoFactory();
+
+        List<Lotto> produces = lottoFactory.produceManualLottos(List.of("1,2,3,4,5,6", "1,2,3,4,5,6"));
+
+        assertThat(produces).hasSize(2);
+        assertThat(produces.get(0)).isEqualTo((Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 6))));
     }
 }

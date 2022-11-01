@@ -15,8 +15,8 @@ public class LottoStatistic {
     private int winMoneyTotal = 0;
     private double revenue;
     private Map<LottoResult, Integer> lottoResultCounter = new EnumMap<>(LottoResult.class);
-
-    public void analyze(List<Lotto> lottos, Lotto beforeWinLotto, PurchaseInfo purchaseInfo, int bonusNumber) {
+    
+    public void analyze(List<Lotto> lottos, Lotto beforeWinLotto, PurchaseInfo purchaseInfo, LottoNumber bonusNumber) {
         List<LottoResult> lottoResults = toLottoResult(lottos, beforeWinLotto, bonusNumber);
 
         plusLottoResultCount(lottoResults);
@@ -24,7 +24,7 @@ public class LottoStatistic {
         calculateRevenue(purchaseInfo);
     }
 
-    private List<LottoResult> toLottoResult(List<Lotto> lottos, Lotto beforeWinLotto, int bonusNumber) {
+    private List<LottoResult> toLottoResult(List<Lotto> lottos, Lotto beforeWinLotto, LottoNumber bonusNumber) {
         return lottos.stream()
                 .map(lotto -> lotto.getResult(beforeWinLotto, bonusNumber))
                 .filter(Objects::nonNull)

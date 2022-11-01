@@ -14,18 +14,18 @@ class LottoStatisticTest {
 
     @Test
     void 통계정보() {
-        int bonusNumber = 7;
-        Lotto beforeWinLotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = LottoNumber.of(7);
+        Lotto beforeWinLotto = Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 6));
         PurchaseInfo purchaseInfo = new PurchaseInfo(6000);
 
         List<Lotto> lottos = List.of(
-                Lotto.of(List.of(1, 0, 0, 0, 0, 0)),
-                Lotto.of(List.of(1, 2, 0, 0, 0, 0)),
-                Lotto.of(List.of(1, 2, 3, 0, 0, 0)),
-                Lotto.of(List.of(1, 2, 3, 4, 0, 0)),
-                Lotto.of(List.of(1, 2, 3, 4, 5, 0)),
-                Lotto.of(List.of(1, 2, 3, 4, 5, 7)),
-                Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
+                Lotto.ofInteger(List.of(1, 10, 11, 12, 13, 14)),
+                Lotto.ofInteger(List.of(1, 2, 10, 11, 12, 13)),
+                Lotto.ofInteger(List.of(1, 2, 3, 10, 11, 12)),
+                Lotto.ofInteger(List.of(1, 2, 3, 4, 10, 11)),
+                Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 10)),
+                Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 7)),
+                Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 6)));
 
         LottoStatistic lottoStatistic = new LottoStatistic();
 
@@ -44,12 +44,12 @@ class LottoStatisticTest {
 
     @Test
     void 이등() {
-        int bonusNumber = 7;
-        Lotto beforeWinLotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = LottoNumber.of(7);
+        Lotto beforeWinLotto = Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 6));
         PurchaseInfo purchaseInfo = new PurchaseInfo(3000);
 
         List<Lotto> lottos = List.of(
-                Lotto.of(List.of(1, 2, 3, 4, 5, 7)));
+                Lotto.ofInteger(List.of(1, 2, 3, 4, 5, 7)));
 
         LottoStatistic lottoStatistic = new LottoStatistic();
 

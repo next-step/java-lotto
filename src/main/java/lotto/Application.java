@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
-import lotto.domain.LottoStatistic;
-import lotto.domain.PurchaseInfo;
+import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
@@ -17,19 +14,22 @@ public class Application {
 
     public static void main(String[] args) {
         LottoInputView inputView = new LottoInputView();
-        PurchaseInfo purchaseInfo = new PurchaseInfo(inputView.readPayAmount());
+        PurchaseInfo purchaseInfo = inputView.read();
+
         LottoFactory lottoFactory = new LottoFactory();
         LottoResultView view = new LottoResultView();
 
-        List<Lotto> lotto = lottoFactory.produces(Collections::shuffle, purchaseInfo.getCount());
+        List<Lotto> lottos = lottoFactory.produceAutoLottos(Collections::shuffle, purchaseInfo.getAutoLottoCount());
+        List<Lotto> manuLottos = lottoFactory.produceManualLottos(purchaseInfo.getManualLottos());
+        lottos.addAll(manuLottos);
 
-        view.print(lotto);
+        view.print(lottos);
 
         Lotto beforeWinLotto = inputView.readBeforeWinLotto();
-        int bonusNumber = inputView.readBonusNumber();
+        LottoNumber bonusNumber = inputView.readBonusNumber();
 
         LottoStatistic lottoStatistic = new LottoStatistic();
-        lottoStatistic.analyze(lotto, beforeWinLotto, purchaseInfo, bonusNumber);
+        lottoStatistic.analyze(lottos, beforeWinLotto, purchaseInfo, bonusNumber);
 
         view.print(lottoStatistic);
     }
