@@ -23,18 +23,16 @@ public class Lottos {
 
     public LottoWinningStatistics giveOutWinningStatistics(final int lottoPurchaseAmount,
                                                            final WinningLottoNumbers winningLottoNumbers) {
-        Map<LottoWinningType, Integer> lottoWinningTypeCountMap
-                = countLottoWinningTypes(this.lottos, winningLottoNumbers);
+        Map<LottoWinningType, Integer> lottoWinningTypeCountMap = countLottoWinningTypes(winningLottoNumbers);
         double yield = calculateYield(lottoPurchaseAmount, lottoWinningTypeCountMap);
 
         return new LottoWinningStatistics(lottoWinningTypeCountMap, yield);
     }
 
-    private Map<LottoWinningType, Integer> countLottoWinningTypes(final List<Lotto> lottos,
-                                                                  final WinningLottoNumbers winningLottoNumbers) {
+    private Map<LottoWinningType, Integer> countLottoWinningTypes(final WinningLottoNumbers winningLottoNumbers) {
         Map<LottoWinningType, Integer> countMap = new EnumMap<>(LottoWinningType.class);
 
-        lottos.forEach(lotto -> {
+        this.lottos.forEach(lotto -> {
             LottoWinningType lottoWinningType = LottoWinningType.valueOf(winningLottoNumbers.countOfMatch(lotto),
                     winningLottoNumbers.matchBonus(lotto));
             countMap.put(lottoWinningType, countMap.getOrDefault(lottoWinningType, 0) + 1);
