@@ -58,4 +58,25 @@ public class LottoTicketTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 6, 7)));
     }
+
+    @Test
+    void 공통된_숫자_갯수_반환() {
+        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(
+                new LottoTicket(List.of(11, 12, 13, 14, 15, 16)).getTheNumberOfCommonNumbers(winningTicket)
+        ).isEqualTo(0);
+
+        assertThat(
+                new LottoTicket(List.of(1, 12, 13, 14, 15, 16)).getTheNumberOfCommonNumbers(winningTicket)
+        ).isEqualTo(1);
+
+        assertThat(
+                new LottoTicket(List.of(1, 2, 3, 14, 15, 16)).getTheNumberOfCommonNumbers(winningTicket)
+        ).isEqualTo(3);
+
+        assertThat(
+                new LottoTicket(List.of(6, 5, 4, 3, 2, 1)).getTheNumberOfCommonNumbers(winningTicket)
+        ).isEqualTo(6);
+    }
 }

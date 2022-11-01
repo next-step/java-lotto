@@ -20,4 +20,7 @@ public class LottoGame {
         return moneyToBuyTicket / TICKET_PRICE;
     }
 
+    public static int getTicketCost(final int numberOfTickets) {
+        return numberOfTickets * TICKET_PRICE;
+    }
 }

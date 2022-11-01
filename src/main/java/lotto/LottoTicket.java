@@ -54,4 +54,10 @@ public class LottoTicket {
     public String toString() {
         return numbers.stream().map(Object::toString).collect(Collectors.joining(", ", "[", "]"));
     }
+
+    public int getTheNumberOfCommonNumbers(final LottoTicket winningTicket) {
+        return (int) numbers.stream()
+                .filter(winningTicket.numbers::contains)
+                .count();
+    }
 }
