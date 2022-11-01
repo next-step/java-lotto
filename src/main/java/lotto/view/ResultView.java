@@ -12,8 +12,10 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void printLottoTickets(Lotto lotto) {
-        System.out.println(lotto.getTickets().size() + "개를 구매했습니다.\n" + lotto);
+    public static void printLottoTickets(Lotto lotto, int manualLottoCount) {
+        int autoLottoCount = lotto.getTickets().size() - manualLottoCount;
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, autoLottoCount);
+        System.out.println(lotto);
     }
 
     public static void printWinningStatistics(Map<LottoRank, Long> winningStat, Lotto lotto) {

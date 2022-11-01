@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -24,13 +25,40 @@ public class InputView {
         return amount;
     }
 
+    public static int readManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int count = Integer.parseInt(SCANNER.nextLine());
+
+        if (count < 0) {
+            throw new IllegalArgumentException("로또 수는 0 미만이 될 수 없습니다.");
+        }
+
+        return count;
+    }
+
+    public static List<LottoTicket> readManualLottoTickets(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            List<LottoNumber> lottoNumbers = readLottoNumbers();
+            tickets.add(new LottoTicket(lottoNumbers));
+        }
+
+        return tickets;
+    }
+
     public static List<LottoNumber> readWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return readLottoNumbers();
+    }
+
+    private static List<LottoNumber> readLottoNumbers() {
         String input = SCANNER.nextLine();
 
         List<Integer> winningNumbers = splitLottoNumbers(input);
         if (winningNumbers.size() != LottoTicket.LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("당첨 번호의 개수가 부족하거나 초과합니다.");
+            throw new IllegalArgumentException("번호의 개수가 부족하거나 초과합니다.");
         }
 
         return winningNumbers.stream()

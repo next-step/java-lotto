@@ -11,9 +11,13 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         long paidAmount = InputView.readPurchaseAmount();
-        int ticketCount = LottoTicket.getLottoTicketCount(paidAmount);
-        Lotto lotto = Lotto.of(ticketCount);
-        ResultView.printLottoTickets(lotto);
+        int totalLottoCount = LottoTicket.getLottoTicketCount(paidAmount);
+        int manualLottoCount = InputView.readManualLottoCount();
+
+        List<LottoTicket> manualLottoTickets = InputView.readManualLottoTickets(manualLottoCount);
+        Lotto lotto = new Lotto(manualLottoTickets);
+        lotto.generateAutoLottoTickets(totalLottoCount - manualLottoCount);
+        ResultView.printLottoTickets(lotto, manualLottoCount);
 
         List<LottoNumber> winningNumbers = InputView.readWinningNumbers();
         LottoNumber bonusBall = InputView.readBonusBall();

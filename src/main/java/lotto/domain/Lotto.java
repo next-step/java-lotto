@@ -27,6 +27,13 @@ public class Lotto {
         return new Lotto(tickets);
     }
 
+    public void generateAutoLottoTickets(int autoTicketCount) {
+        for (int i = 0; i < autoTicketCount; i++) {
+            List<LottoNumber> numbers = LottoNumberGenerator.generateLottoNumbers();
+            tickets.add(new LottoTicket(numbers));
+        }
+    }
+
     public List<LottoTicket> getTickets() {
         return tickets;
     }
