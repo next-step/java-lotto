@@ -57,7 +57,7 @@ public class InputView {
         System.out.println(BONUS_WINNING_NUMBER_MSG);
         String bonusWinningNumber = scanner.nextLine();
 
-        return new WinningLotto(Lotto.from(refineNumbers(winningNumbers)),
+        return new WinningLotto(Lotto.from(winningNumbers),
                 new LottoNumber(Integer.parseInt(bonusWinningNumber)));
     }
 

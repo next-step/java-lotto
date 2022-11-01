@@ -47,8 +47,8 @@ public class Lotto {
                 .count();
     }
 
-    public static Lotto from(Set<Integer> lottoNums) {
-        return new Lotto(lottoNums.stream().map(LottoNumber::new).collect(Collectors.toSet()));
+    public static Lotto from(Set<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toSet()));
     }
 
     public static Lotto from(String lottoNumbers) {
