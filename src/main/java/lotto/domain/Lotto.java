@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getNumberList() {
-        return lottoBalls;
+        return Collections.unmodifiableList(lottoBalls);
     }
 
     public Rank getRank() {
