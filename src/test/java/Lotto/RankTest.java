@@ -49,6 +49,6 @@ public class RankTest {
             ranking.add(rank);
         }
 
-        assertThat(Rank.profit(ranking, 140000)).isEqualTo(5000.0 / 140000.0);
+        assertThat(Rank.profit(ranking, 140000.0)).isEqualTo(5000.0 / 140000.0);
     }
 }
