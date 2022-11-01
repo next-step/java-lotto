@@ -13,6 +13,7 @@ public class InputView {
 	private static final int MAX_NUMBER = 45;
 	private static final int TOTAL_SIZE = 6;
 	private static final List<Integer> winNumber = new ArrayList<>();
+
 	private final Scanner scanner;
 
 	public InputView() {
@@ -22,6 +23,15 @@ public class InputView {
 	public int askMoneyForLotto() {
 		System.out.println("구입금액을 입력해주세요");
 		return scanner.nextInt();
+	}
+
+	public int askForHand() {
+		System.out.println("수동으로 구매할 로또 수를 입력해주세요");
+		return scanner.nextInt();
+	}
+
+	public void askHandNumber() {
+		System.out.println("수동으로 구매할 로또 번호를 입력해주세요");
 	}
 
 	private String[] askWinNumber() {
@@ -36,20 +46,34 @@ public class InputView {
 
 	public List<Integer> winNumber() {
 		for (String inputNumber : askWinNumber()) {
-			isValid(Integer.parseInt(inputNumber));
+			isRangeValid(Integer.parseInt(inputNumber));
 			winNumber.add(Integer.parseInt(inputNumber));
 		}
 
-		if (winNumber.size() != TOTAL_SIZE) {
-			throw new IllegalNumberException("6개의 숫자를 입력하세요");
-		}
-
+		isCountValid(winNumber.size());
 		return winNumber;
 	}
 
-	private void isValid(int inputNumber) {
+	public List<Integer> handNumber() {
+		List<Integer> handNumber = new ArrayList<>();
+		for (String inputNumber : scanner.next().split(DELIMITER)) {
+			isRangeValid(Integer.parseInt(inputNumber));
+			handNumber.add(Integer.parseInt(inputNumber));
+		}
+		isCountValid(handNumber.size());
+
+		return handNumber;
+	}
+
+	private void isRangeValid(int inputNumber) {
 		if (inputNumber < MIN_NUMBER || inputNumber > MAX_NUMBER) {
 			throw new IllegalNumberException("1~45안의 숫자를 골라주세요");
+		}
+	}
+
+	private void isCountValid(int inputSize) {
+		if (inputSize != TOTAL_SIZE) {
+			throw new IllegalNumberException("6개의 숫자를 입력하세요");
 		}
 	}
 

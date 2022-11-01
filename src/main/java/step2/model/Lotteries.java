@@ -13,6 +13,10 @@ public class Lotteries {
 	private WinningLotto winningLotto;
 	private List<Lotto> lotteries;
 
+	public Lotteries(List<Lotto> lotteries){
+		this(lotteries,new HashMap<>());
+	}
+
 	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
 		this.lotteries = lotteries;
 		this.totalMatch = totalMatch;

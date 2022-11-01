@@ -4,9 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperties;
+import step2.controller.LottoController;
 import step2.model.Lotteries;
+import step2.model.Lotto;
 import step2.model.Rank;
 
 public class LotteriesTest {
