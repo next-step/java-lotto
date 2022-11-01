@@ -33,7 +33,7 @@ public class Lotto {
 		return change;
 	}
 
-	public boolean checkBonus(int count, int bonus) {
+	public boolean checkBonus(int bonus) {
 		return lotto.contains(bonus);
 	}
 

@@ -51,8 +51,4 @@ public enum Operator {
 	public int getWinning() {
 		return winning;
 	}
-
-	public Boolean isBonusCheck() {
-		return bonusCheck;
-	}
 }

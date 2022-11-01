@@ -34,7 +34,7 @@ public class Result {
 
 	private void result(Lotto lotto, Lotto winningNumbers, int bonus) {
 		int count = checkRank(lotto, winningNumbers);
-		Operator rank = Operator.find(count, lotto.checkBonus(count, bonus));
+		Operator rank = Operator.find(count, lotto.checkBonus(bonus));
 		if (rank == null) {
 			return;
 		}
