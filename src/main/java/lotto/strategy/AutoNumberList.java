@@ -1,5 +1,6 @@
 package lotto.strategy;
 
+import lotto.domain.LottoBall;
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
@@ -9,8 +10,6 @@ import java.util.stream.Collectors;
 
 public class AutoNumberList implements NumberList {
 
-    private static final int START_LOTTO_NUMBER = 1;
-    private static final int END_LOTTO_NUMBER = 45;
     private static final int START_UNIT = 0;
     private static final int END_UNIT = 6;
 
@@ -31,7 +30,7 @@ public class AutoNumberList implements NumberList {
     private static List<Integer> getNumberList() {
         List<Integer> pickNumber = new ArrayList<>();
 
-        for (int i = START_LOTTO_NUMBER; i < END_LOTTO_NUMBER; i++) {
+        for (int i = LottoBall.getStartNumber(); i < LottoBall.getLastNumber(); i++) {
             pickNumber.add(i);
         }
         Collections.shuffle(pickNumber);
