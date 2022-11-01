@@ -47,6 +47,10 @@ public class ResultView {
 		print(LINE_BREAK);
 	}
 
+	public void printExceptionMessage(Exception exception) {
+		print(exception.getMessage());
+	}
+
 	private void print(String text) {
 		out.print(text);
 	}

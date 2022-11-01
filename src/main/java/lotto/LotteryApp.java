@@ -20,20 +20,24 @@ public class LotteryApp {
 		final ResultView resultView = new ResultView();
 		final LotteryMachine lotteryMachine = new LotteryMachine();
 
-		final int purchaseAmount = inputView.askMoney();
-		final Money money = new Money(purchaseAmount);
+		try {
+			final int purchaseAmount = inputView.askMoney();
+			final Money money = new Money(purchaseAmount);
 
-		final Lottos lottos = lotteryMachine.issue(money);
-		final PurchaseCountDto purchaseCountDto = PurchaseCountDto.of(lottos.getCount());
-		resultView.printPurchaseCount(purchaseCountDto);
+			final Lottos lottos = lotteryMachine.issue(money);
+			final PurchaseCountDto purchaseCountDto = PurchaseCountDto.of(lottos.getCount());
+			resultView.printPurchaseCount(purchaseCountDto);
 
-		final LottoStringsDto lottosStringDto = LottoStringsDto.of(lottos.lottoStrings());
-		resultView.printLottosString(lottosStringDto);
+			final LottoStringsDto lottosStringDto = LottoStringsDto.of(lottos.lottoStrings());
+			resultView.printLottosString(lottosStringDto);
 
-		final List<Integer> numbers = inputView.askWinningNumbers();
-		final Lotto winningLotto = new Lotto(numbers);
+			final List<Integer> numbers = inputView.askWinningNumbers();
+			final Lotto winningLotto = new Lotto(numbers);
 
-		final Map<Integer, Integer> matchCountsMap = lottos.getMatchingCountsMap(winningLotto);
-		resultView.printWinningStatistic(WinningStatisticDto.of(matchCountsMap, purchaseAmount));
+			final Map<Integer, Integer> matchCountsMap = lottos.getMatchingCountsMap(winningLotto);
+			resultView.printWinningStatistic(WinningStatisticDto.of(matchCountsMap, purchaseAmount));
+		} catch (Exception exception) {
+			resultView.printExceptionMessage(exception);
+		}
 	}
 }
