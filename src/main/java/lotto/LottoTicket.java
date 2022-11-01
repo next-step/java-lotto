@@ -30,10 +30,6 @@ public class LottoTicket {
         return new LottoTicket(toLottoNumbers(numbers));
     }
 
-    public boolean hasNumber(int number) {
-        return hasNumber(new LottoNumber(number));
-    }
-
     public boolean hasNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
