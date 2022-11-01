@@ -18,7 +18,7 @@ public class PaymentTest {
 	void 구입금액테스트() {
 		int money = 14000;
 		Payment payment = new Payment();
-		assertThat(payment.autoTicket(money, 0)).isEqualTo(14000 / 1000);
+		assertThat(payment.amountOfTicket(money)).isEqualTo(14000 / 1000);
 	}
 
 	@Test
@@ -26,7 +26,7 @@ public class PaymentTest {
 	void 금액_부족_테스트() {
 		int money = 900;
 		Payment payment = new Payment();
-		assertThatThrownBy(() -> payment.autoTicket(money, 0)).isInstanceOf(
+		assertThatThrownBy(() -> payment.amountOfTicket(money)).isInstanceOf(
 			MoneyException.class);
 	}
 
@@ -35,7 +35,7 @@ public class PaymentTest {
 	void 잔돈_테스트() {
 		int money = 1900;
 		Payment payment = new Payment();
-		assertThat(payment.autoTicket(money, 0)).isEqualTo(1900 / 1000);
+		assertThat(payment.amountOfTicket(money)).isEqualTo(1900 / 1000);
 
 	}
 
@@ -61,9 +61,9 @@ public class PaymentTest {
 	@DisplayName("전체티켓 - 수동 티켓 = 자동티켓")
 	void 수동티켓() {
 		Payment payment = new Payment();
-		int money = 14000;
-		int handCount = 3;
-		Assertions.assertThat(payment.autoTicket(money, handCount)).isEqualTo(11);
+		int totalTicket = 14;
+		int handTicket =  3;
+		assertThat(payment.autoTicket(totalTicket, handTicket)).isEqualTo(11);
 	}
 
 }
