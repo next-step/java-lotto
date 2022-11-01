@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
@@ -29,6 +27,6 @@ public class LottoTest {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
 
-        assertThat(lotto.getResult(winningLotto)).isEqualTo(LottoResult.FirstPrize);
+        assertThat(lotto.getResult(winningLotto)).isEqualTo(LottoResult.FIRST_PRIZE);
     }
 }

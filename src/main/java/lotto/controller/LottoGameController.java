@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.util.WinningsCalculator;
+import lotto.domain.WinningsCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,7 +11,7 @@ public class LottoGameController {
     public static void start() {
         int inputMoney = InputView.getMoney();
 
-        Lottos lottos = LottoStore.buyLottos(inputMoney);
+        Lottos lottos = Lottos.buyLottos(inputMoney);
         ResultView.printLottos(lottos);
 
         Lotto winnings = new Lotto(InputView.getWinningNumbers());

@@ -1,9 +1,14 @@
 package lotto.domain;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
+    private static final int PRICE = 1000;
     private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(List<Lotto> lottos) {
@@ -17,18 +22,9 @@ public class Lottos {
     }
 
     public List<LottoResult> getResults(Lotto winning) {
-        List<LottoResult> results = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            LottoResult result = lotto.getResult(winning);
-            addResult(results, result);
-        }
-        return results;
-    }
-
-    private void addResult(List<LottoResult> results, LottoResult result) {
-        if (result != null) {
-            results.add(result);
-        }
+        return lottos.stream()
+                .map(lotto -> lotto.getResult(winning))
+                .collect(Collectors.toList());
     }
 
     public int getSize() {
@@ -39,4 +35,10 @@ public class Lottos {
         return this.lottos;
     }
 
+    public static Lottos buyLottos(int money) {
+        if (money < PRICE) {
+            throw new InvalidParameterException("1000 원 이하면 게임이 불가능합니다.");
+        }
+        return new Lottos(money / PRICE);
+    }
 }

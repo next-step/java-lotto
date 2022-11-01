@@ -4,23 +4,20 @@ import java.security.InvalidParameterException;
 import java.util.*;
 
 public class Lotto {
-    private final SortedSet<Integer> lottoNumbers;
+    private int NUMBER_SIZE = 6;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this(LottoNumberGenerator.generateNumbers());
+        lottoNumbers = generateNumbers();
     }
 
     public Lotto(String numbers) {
         lottoNumbers = generateLotto(numbers);
     }
 
-    public Lotto(List<Integer> numbers) {
-        lottoNumbers = new TreeSet<>(numbers);
-    }
-
-    private SortedSet<Integer> generateLotto(String numbers) {
+    private SortedSet<LottoNumber> generateLotto(String numbers) {
         numbers = preprocessingData(numbers);
-        SortedSet<Integer> lottoNumberSet = createLottoNumberSet(numbers);
+        SortedSet<LottoNumber> lottoNumberSet = createLottoNumberSet(numbers);
 
         if (lottoNumberSet.size() < 6) {
             throw new InvalidParameterException("중복된 번호로 로또가 생성되려 하고 있습니다.");
@@ -29,11 +26,11 @@ public class Lotto {
         return lottoNumberSet;
     }
 
-    private SortedSet<Integer> createLottoNumberSet(String numbers) {
-        SortedSet<Integer> lottos = new TreeSet<>();
+    private SortedSet<LottoNumber> createLottoNumberSet(String numbers) {
+        SortedSet<LottoNumber> lottos = new TreeSet<>();
 
         for (String number : numbers.split(",")) {
-            lottos.add(parseInt(number));
+            lottos.add(new LottoNumber(parseInt(number)));
         }
         return lottos;
     }
@@ -51,12 +48,21 @@ public class Lotto {
         return LottoResult.of(matchCount);
     }
 
-    private boolean contains(int number) {
+    private boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
-    public SortedSet<Integer> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    private Set<LottoNumber> generateNumbers() {
+        Set<LottoNumber> numbers = new TreeSet<>();
+        while (numbers.size() < this.NUMBER_SIZE) {
+            LottoNumber number = LottoNumberGenerator.getRandomNumber();
+            numbers.add(number);
+        }
+        return numbers;
     }
 
     @Override

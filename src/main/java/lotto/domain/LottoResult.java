@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoResult {
-    NoMatch(0, 0),
-    FourthPrize(3, 5000),
-    ThirdPrize(4, 50000),
-    SecondPrize(5, 1500000),
-    FirstPrize(6, 2000000000);
+    NO_MATCH(0, 0),
+    FOURTH_PRIZE(3, 5000),
+    THIRD_PRIZE(4, 50000),
+    SECOND_PRIZE(5, 1500000),
+    FIRST_PRIZE(6, 2000000000);
 
     private final int reward;
     private final int match;
@@ -17,18 +17,14 @@ public enum LottoResult {
         this.reward = reward;
     }
 
-    public static LottoResult of(int rank) {
+    public static LottoResult of(int match) {
         return Arrays.stream(values())
-                .filter(value -> value.isSameAsMatch(rank))
+                .filter(value -> match == value.match)
                 .findFirst()
-                .orElse(NoMatch);
+                .orElse(NO_MATCH);
     }
 
     public int getReward() {
         return this.reward;
-    }
-
-    private boolean isSameAsMatch(int match) {
-        return this.match == match;
     }
 }
