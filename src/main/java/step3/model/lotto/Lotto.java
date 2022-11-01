@@ -31,6 +31,7 @@ public class Lotto {
 		checkLottoSize(numbers);
 		checkDuplicatedNumbers(numbers);
 		checkRange(numbers);
+		Collections.sort(numbers);
 		this.numbers = numbers;
 	}
 

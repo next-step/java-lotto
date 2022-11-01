@@ -1,11 +1,8 @@
 package step3.controller;
 
-import java.util.HashMap;
-
 import step3.exception.BadRequestException;
 import step3.model.lotto.Lotto;
 import step3.model.lotto.Lottos;
-import step3.model.winning.Rank;
 import step3.model.winning.WinningResult;
 import step3.view.InputView;
 import step3.view.OutputView;
@@ -35,15 +32,17 @@ public class LottoController {
 
 	public void getWinningNumber() {
 		winningLotto = new Lotto(inputView.getWinningNumber());
+	}
+
+	public void getBonusNumber() {
 		bonusNumber = inputView.getBonusNumber();
-		winningResult = new WinningResult(bonusNumber, winningLotto, purchaseLottos);
 	}
 
 	public void getWinningStatistics() {
 		outputView.printWinningStatisticsHeader();
-		HashMap<Rank, Integer>  rankCountMap = winningResult.getCountMap();
+		winningResult = new WinningResult(bonusNumber, winningLotto, purchaseLottos);
 
-		outputView.printWinningStatistics(rankCountMap);
+		outputView.printWinningStatistics(winningResult.getCountMap());
 
 		double prize = winningResult.getPrize();
 		outputView.printYield(prize, purchaseLottos.size() * LOTTE_PRICE);

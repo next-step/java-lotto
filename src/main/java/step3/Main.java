@@ -9,6 +9,7 @@ public class Main {
 
 		lottoController.purchase();
 		lottoController.getWinningNumber();
+		lottoController.getBonusNumber();
 		lottoController.getWinningStatistics();
 	}
 }
