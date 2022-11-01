@@ -20,10 +20,12 @@ public class AutoNumberList implements NumberList {
     }
 
     private static List<LottoNumber> sortNumber(List<Integer> numberList) {
-        return numberList.stream()
+        List<LottoNumber> sortedNumber = numberList.stream()
                 .sorted(Integer::compareTo)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+
+        return Collections.unmodifiableList(sortedNumber);
     }
 
     private static List<Integer> getNumberList() {
