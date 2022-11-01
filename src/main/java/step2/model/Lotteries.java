@@ -10,7 +10,6 @@ public class Lotteries {
 	private static final int DEFAULT_MIN_LENGTH = 0;
 
 	private HashMap<Rank, Integer> totalMatch;
-	private WinningLotto winningLotto;
 	private List<Lotto> lotteries;
 
 	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
@@ -34,7 +33,7 @@ public class Lotteries {
 	}
 
 	public HashMap<Rank, Integer> isMatch(List<Integer> winNumber, int bonusNumber) {
-		winningLotto = WinningLotto.of(winNumber, bonusNumber);
+		WinningLotto winningLotto = WinningLotto.of(winNumber, bonusNumber);
 
 		for (Lotto lotto : lotteries) {
 			int countOfMatch = winningLotto.countOfMatch(lotto.getLotto());
