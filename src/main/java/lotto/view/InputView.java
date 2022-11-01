@@ -39,8 +39,6 @@ public class InputView {
 		print(ASK_WINNING_NUMBER_QUESTION);
 		print(LINE_BREAK);
 
-		scanner.useDelimiter(COMMA_DELIMITER);
-
 		final String input = scanner.nextLine();
 		final List<String> splitedInput = splitInput(input);
 
