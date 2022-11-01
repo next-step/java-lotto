@@ -52,8 +52,4 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int hashCode() {
         return Objects.hash(value);
     }
-
-    private static int getRandomNumber() {
-        return new Random().nextInt(VALUE_MAX) + 1;
-    }
 }
