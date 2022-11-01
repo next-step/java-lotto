@@ -1,12 +1,26 @@
 package lotto;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MyRank {
-    private HashMap<Rank, Integer> rankMap;
+    private Map<Rank, Integer> rankMap;
 
     public MyRank() {
         initializeRankMap();
+    }
+
+    public double profit(double paidAmount) {
+        double sum = 0.0;
+        for (Rank rank : rankMap.keySet()) {
+            sum += rank.getPrize() * rankMap.get(rank);
+        }
+
+        return sum / paidAmount;
+    }
+
+    public Map<Rank, Integer> getRankMap() {
+        return rankMap;
     }
 
     public void add(Rank rank) {

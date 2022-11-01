@@ -2,7 +2,6 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,30 +24,10 @@ public class RankTest {
     }
 
     @Test
-    void 랭킹_계산하기() {
+    void 당첨된_랭킹_가져오기() {
         Lotto winner = new Lotto(numbers(1, 7));
-        List<Lotto> myLotto = new ArrayList<>();
-        myLotto.add(new Lotto(numbers(1, 7))); // 6개 일치, 1등
-        myLotto.add(new Lotto(numbers(4, 10))); // 4개 일치, 3등
+        Lotto myLotto = new Lotto(numbers(1, 7));
 
-        List<Rank> ranking = new ArrayList<>();
-        Rank.FIRST.plusCount();
-        Rank.THIRD.plusCount();
-        for (Rank rank : Rank.values()) {
-            ranking.add(rank);
-        }
-
-        assertThat(Rank.calculate(winner, myLotto)).containsAll(ranking);
-    }
-
-    @Test
-    void 수익률_계산하기() {
-        List<Rank> ranking = new ArrayList<>();
-        Rank.FOURTH.plusCount();
-        for (Rank rank : Rank.values()) {
-            ranking.add(rank);
-        }
-
-        assertThat(Rank.profit(ranking, 140000.0)).isEqualTo(5000.0 / 140000.0);
+        assertThat(Rank.getRank(winner, myLotto)).isEqualTo(Rank.FIRST);
     }
 }

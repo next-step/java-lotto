@@ -55,8 +55,12 @@ public class LottoApplication {
     }
 
     private static void showResult() {
-        List<Rank> ranking = Rank.calculate(winnerLotto, myLotto);
-        ResultView.result(ranking);
-        ResultView.profit(Rank.profit(ranking, paidAmount));
+        MyRank myRank = new MyRank();
+        for (Lotto lotto : myLotto) {
+            Rank rank = Rank.getRank(winnerLotto, lotto);
+            myRank.add(rank);
+        }
+        ResultView.result(myRank.getRankMap());
+        ResultView.profit(myRank.profit(paidAmount));
     }
 }

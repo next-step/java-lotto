@@ -4,20 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
-    NONE(0, 0, 0),
-    FOURTH(3, 5000, 0),
-    THIRD(4, 50000, 0),
-    SECOND(5, 1500000, 0),
-    FIRST(6, 2000000000, 0);
+    NONE(0, 0),
+    FOURTH(3, 5000),
+    THIRD(4, 50000),
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000);
 
     private int correctCount;
     private int prize;
-    private int count;
 
-    Rank(int correctCount, int prize, int count) {
+    Rank(int correctCount, int prize) {
         this.correctCount = correctCount;
         this.prize = prize;
-        this.count = count;
     }
 
     public static Rank RankOf(int correctCount) {
@@ -28,29 +26,8 @@ public enum Rank {
         return Rank.NONE;
     }
 
-    public static List<Rank> calculate(Lotto winner, List<Lotto> myLotto) {
-        for (Lotto lotto : myLotto) {
-            int correctCount = winner.correctCount(lotto);
-            Rank rank = RankOf(correctCount);
-            if (rank == Rank.NONE) continue;
-
-            rank.plusCount();
-        }
-
-        return Arrays.asList(Rank.values());
-    }
-
-    public static double profit(List<Rank> ranking, double paidAmount) {
-        double sum = 0.0;
-        for (Rank rank : ranking) {
-            sum += rank.prize * rank.count;
-        }
-
-        return sum / paidAmount;
-    }
-
-    public int getCount() {
-        return count;
+    public static Rank getRank(Lotto winner, Lotto myLotto) {
+        return RankOf(winner.correctCount(myLotto));
     }
 
     public int getCorrectCount() {
@@ -59,9 +36,5 @@ public enum Rank {
 
     public int getPrize() {
         return prize;
-    }
-
-    public void plusCount() {
-        count += 1;
     }
 }

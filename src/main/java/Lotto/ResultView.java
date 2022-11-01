@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -30,19 +31,18 @@ public class ResultView {
         System.out.println(LAST_WEEK_WINNER_LOTTO);
     }
 
-    public static void result(List<Rank> ranking) {
+    public static void result(Map<Rank, Integer> myRankMap) {
         System.out.println(STATS_RESULT);
         System.out.println(INDICATOR);
-        for (Rank rank : ranking) {
+        for (Rank rank : myRankMap.keySet()) {
             String msg = String.format(
                     "%s개 일치 (%s원)- %s개",
                     rank.getCorrectCount(),
                     rank.getPrize(),
-                    rank.getCount()
+                    myRankMap.get(rank)
             );
             System.out.println(msg);
         }
-
     }
 
     public static void printLine() {
