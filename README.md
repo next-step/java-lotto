@@ -24,6 +24,10 @@
     - 숫자 6개를 중복없이 오름차순으로 생성할 수 있다.
 - LottoStatistics
     - 로또 숫자와 지난주 당첨번호를 가지고 통계를 낼 수 있다.
+- LottoPurchasedAmount
+  - 로또 구입 금액을 검증하고 관리한다.
+- UnsignedInteger
+  - 수동 구입 로또 수를 관리하기 위한 0이상의 정수를 담은 클래스.
 ### UI
 - InputView
     - 구매금액과 지난 주 당첨 번호를 입력 받을 수 있다.
