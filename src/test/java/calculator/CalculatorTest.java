@@ -13,7 +13,7 @@ public class CalculatorTest {
     @DisplayName("더하기 테스트")
     void plusTest(String data){
         CalculatorDatas calculatorDatas = new CalculatorDatas(data);
-        assertThat(calculatorDatas.startCalculator()).isEqualTo(3);
+        assertThat(calculatorDatas.startCalculate()).isEqualTo(3);
     }
 
     @ParameterizedTest
@@ -21,7 +21,7 @@ public class CalculatorTest {
     @DisplayName("빼기 테스트")
     void minusTest(String data){
         CalculatorDatas calculatorDatas =  new CalculatorDatas(data);
-        assertThat(calculatorDatas.startCalculator()).isEqualTo(1);
+        assertThat(calculatorDatas.startCalculate()).isEqualTo(1);
     }
 
     @ParameterizedTest
@@ -29,7 +29,7 @@ public class CalculatorTest {
     @DisplayName("나누기 테스트")
     void divideTest(String data){
         CalculatorDatas calculatorDatas =  new CalculatorDatas(data);
-        assertThat(calculatorDatas.startCalculator()).isEqualTo(2);
+        assertThat(calculatorDatas.startCalculate()).isEqualTo(2);
     }
 
     @ParameterizedTest
@@ -37,6 +37,6 @@ public class CalculatorTest {
     @DisplayName("곱하기 테스트")
     void multiplyTest(String data){
         CalculatorDatas calculatorDatas =  new CalculatorDatas(data);
-        assertThat(calculatorDatas.startCalculator()).isEqualTo(8);
+        assertThat(calculatorDatas.startCalculate()).isEqualTo(8);
     }
 }

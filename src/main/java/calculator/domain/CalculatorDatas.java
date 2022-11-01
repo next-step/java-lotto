@@ -1,11 +1,7 @@
 package calculator.domain;
 
-import calculator.Operator;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CalculatorDatas {
 
@@ -24,7 +20,7 @@ public class CalculatorDatas {
         }
     }
 
-    public int startCalculator(){
+    public int startCalculate(){
         int number = Integer.parseInt(calculratorDatas.get(0));
         for(int i = 2; i < calculratorDatas.size(); i+=2){
             int nextNumber = Integer.parseInt(calculratorDatas.get(i));

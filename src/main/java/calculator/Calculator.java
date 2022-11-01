@@ -2,11 +2,6 @@ package calculator;
 
 import calculator.domain.CalculatorDatas;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static calculator.view.InputView.inputNumber;
-
 public class Calculator {
 
     private CalculatorDatas calculatorDatas;
@@ -16,6 +11,6 @@ public class Calculator {
     }
 
     public int start(){
-        return calculatorDatas.startCalculator();
+        return calculatorDatas.startCalculate();
     }
 }
