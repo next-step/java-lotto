@@ -16,6 +16,10 @@ public class Lotto {
 		this.numbers = generate();
 	}
 
+	public Lotto(List<Integer> numbers) {
+		this.numbers = numbers;
+	}
+
 	private List<Integer> generate() {
 		Collections.shuffle(CANDIDATES);
 
@@ -24,5 +28,9 @@ public class Lotto {
 
 	public List<Integer> getNumbers() {
 		return numbers;
+	}
+
+	public int getMatchingCount(List<Integer> winningNumbers) {
+		return 0;
 	}
 }
