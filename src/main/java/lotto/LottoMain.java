@@ -19,9 +19,12 @@ public class LottoMain {
 
         int lottoPurchaseAmount = InputView.inputLottoPurchaseAmount();
         int manualPurchaseLottoCount = InputView.inputManualPurchaseLottoCount();
-        List<LottoNumbers> lottoNumbersList =
-                InputView.inputManualPurchaseLottoNumbersList(manualPurchaseLottoCount);
-        Lottos manualLottos = LottoFactory.createLottos(lottoNumbersList);
+        Lottos manualLottos = null;
+        if (manualPurchaseLottoCount != 0) {
+            List<LottoNumbers> lottoNumbersList =
+                    InputView.inputManualPurchaseLottoNumbersList(manualPurchaseLottoCount);
+            manualLottos = LottoFactory.createLottos(lottoNumbersList);
+        }
 
         int autoPurchaseLottoCount = lottoPurchaseAmount / LottoFactory.LOTTO_AMOUNT - manualPurchaseLottoCount;
         Lottos autoLottos = LottoFactory.createLottos(strategy, autoPurchaseLottoCount);

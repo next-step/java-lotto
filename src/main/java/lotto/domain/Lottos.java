@@ -6,6 +6,10 @@ public class Lottos {
 
     public final List<Lotto> lottos;
 
+    public Lottos(final Lottos lottos) {
+        this(lottos.lottos);
+    }
+
     public Lottos(final List<Lotto> lottos) {
         this.lottos = lottos;
     }
@@ -15,6 +19,14 @@ public class Lottos {
     }
 
     public static Lottos union(final Lottos first, final Lottos second) {
+        if (Objects.isNull(first)) {
+            return new Lottos(second);
+        }
+
+        if (Objects.isNull(second)) {
+            return new Lottos(first);
+        }
+
         return new Lottos(new ArrayList<>() {{
             addAll(first.lottos);
             addAll(second.lottos);
