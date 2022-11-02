@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int MIN = 1;
@@ -13,7 +14,9 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         checkNumberCount(numbers);
         numbers.forEach(this::checkNumberRange);
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
 

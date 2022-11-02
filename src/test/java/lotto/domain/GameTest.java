@@ -37,4 +37,31 @@ public class GameTest {
         assertThat(result.getPrizeCount(Prize.FIVE)).isEqualTo(1);
         assertThat(result.getPrizeCount(Prize.SIX)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("수동으로 입력한 로또 확인")
+    void game_self() {
+        List<Lotto> selfLotto = List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 7)),
+                new Lotto(List.of(1, 11, 14, 15, 18, 21)),
+                new Lotto(List.of(1, 11, 14, 15, 18, 20))
+        );
+        Game game = new Game(11, selfLotto, new TestLottoPublisher(List.of(
+                List.of(1, 11, 14, 15, 18, 20),
+                List.of(1, 11, 14, 16, 18, 20),
+                List.of(3, 4, 5, 6, 7, 8),
+                List.of(3, 4, 5, 6, 7, 18),
+                List.of(1, 14, 15, 16, 30, 45),
+                List.of(3, 14, 18, 20, 21, 22),
+                List.of(3, 7, 14, 19, 20, 33)
+        )));
+        LottoResult result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)), 21);
+
+        assertThat(result.getPrizeCount(Prize.NONE)).isEqualTo(5);
+        assertThat(result.getPrizeCount(Prize.THREE)).isEqualTo(2);
+        assertThat(result.getPrizeCount(Prize.FIVE)).isEqualTo(1);
+        assertThat(result.getPrizeCount(Prize.FIVE_BONUS)).isEqualTo(1);
+        assertThat(result.getPrizeCount(Prize.SIX)).isEqualTo(2);
+    }
 }

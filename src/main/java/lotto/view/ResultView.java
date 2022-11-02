@@ -9,9 +9,8 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void printLottoList(List<Lotto> selfLottoList, List<Lotto> lottoList) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", selfLottoList.size(), lottoList.size());
-        selfLottoList.forEach(lotto -> System.out.println(lotto.getNumbers()));
+    public static void printLottoList(int selfLottoCount, List<Lotto> lottoList) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", selfLottoCount, lottoList.size());
         lottoList.forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 

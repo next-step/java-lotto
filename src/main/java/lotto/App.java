@@ -10,12 +10,13 @@ public class App {
 
     public static void main(String[] args) {
         int price = InputView.inputPrice();
+        int lottoCount = price / Lotto.PRICE;
 
-        int selfCount = InputView.inputSelfCount();
+        int selfCount = InputView.inputSelfCount(lottoCount);
         List<Lotto> selfLottos = InputView.inputSelfLottos(selfCount);
 
-        Game game = new Game(price / Lotto.PRICE, new RandomLottoPublisher());
-        ResultView.printLottoList(selfLottos, game.getLottos());
+        Game game = new Game(price / Lotto.PRICE, selfLottos, new RandomLottoPublisher());
+        ResultView.printLottoList(selfLottos.size(), game.getLottos());
 
         Lotto winNumbers = InputView.inputWinLotto();
         int bonusNumber = InputView.inputBonusNumber(winNumbers);

@@ -16,10 +16,13 @@ public class InputView {
         return input;
     }
 
-    public static int inputSelfCount() {
+    public static int inputSelfCount(int lottoCount) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int input = inputSingleNumber();
         checkPositive(input);
+        if (lottoCount < input) {
+            throw new IllegalArgumentException("구매하려는 로또 수와 같거나 작아야 합니다.");
+        }
         return input;
     }
 

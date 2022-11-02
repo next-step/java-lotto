@@ -1,14 +1,20 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Game {
     private final List<Lotto> lottos;
     private final LottoPublisher lottoPublisher;
+
+    public Game(int count, List<Lotto> selfLottos, LottoPublisher lottoPublisher) {
+        this.lottoPublisher = lottoPublisher;
+        int autoLottoCount = count - selfLottos.size();
+        this.lottos = Stream.concat(selfLottos.stream(), createLottoList(autoLottoCount).stream())
+                .collect(Collectors.toList());
+    }
 
     public Game(int count, LottoPublisher lottoPublisher) {
         this.lottoPublisher = lottoPublisher;
