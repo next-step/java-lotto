@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    public static void printTicketCount(int ticketCount) {
-        System.out.printf("%d개를 구매했습니다.\n", ticketCount);
+    public static void printTicketCount(int manualCount, int autoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, autoCount);
     }
 
     public static void printTickeList(List<Ticket> ticketList) {
@@ -45,5 +45,12 @@ public class ResultView {
         }
         return " ";
     }
+
+    public static void printManualLottoInputGuide(int index) {
+        if(index == 0 ){
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
+    }
+
 
 }
