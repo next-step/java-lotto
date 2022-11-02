@@ -18,6 +18,6 @@ public class LottoTicketTest {
     public void matchTest(String buyNumbers, String winNumbers, Integer matchingCount) {
         LottoTicket lottoTicket = new LottoTicket(buyNumbers);
         LottoWinNumbers lottoWinNumbers = new LottoWinNumbers(winNumbers);
-        assertThat(lottoTicket.match(lottoWinNumbers)).isEqualTo(matchingCount);
+        assertThat(lottoTicket.match(lottoWinNumbers)).isEqualTo(LottoReward.valueOfMatchCount(matchingCount));
     }
 }
