@@ -16,9 +16,9 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank RankOf(int correctCount, boolean isMatchedBonus) {
+    public static Rank RankOf(int correctCount, boolean matchedBonus) {
         if (correctCount == 6) return Rank.FIRST;
-        if (correctCount == 5 && isMatchedBonus) return Rank.SECOND;
+        if (correctCount == 5 && matchedBonus) return Rank.SECOND;
         if (correctCount == 5) return Rank.SECOND;
         if (correctCount == 4) return Rank.THIRD;
         if (correctCount == 3) return Rank.FOURTH;
