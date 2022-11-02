@@ -21,9 +21,9 @@ public class Lottos {
         }
     }
 
-    public List<LottoResult> getResults(Lotto winning) {
+    public List<LottoResult> getResults(Lotto winning, LottoNumber bonusNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.getResult(winning))
+                .map(lotto -> lotto.getResult(winning, bonusNumber))
                 .collect(Collectors.toList());
     }
 

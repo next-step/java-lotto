@@ -15,8 +15,9 @@ public class LottoGameController {
         ResultView.printLottos(lottos);
 
         Lotto winnings = new Lotto(InputView.getWinningNumbers());
+        LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
 
-        List<LottoResult> results = lottos.getResults(winnings);
+        List<LottoResult> results = lottos.getResults(winnings, bonusNumber);
 
         ResultView.printResults(results);
         ResultView.printYield(WinningsCalculator.calculateYield(inputMoney, WinningsCalculator.calculateWinnings(results)));

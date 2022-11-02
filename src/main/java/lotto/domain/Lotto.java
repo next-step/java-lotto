@@ -43,9 +43,10 @@ public class Lotto {
         return numbers.replaceAll(" ", "");
     }
 
-    public LottoResult getResult(Lotto winningLotto) {
+    public LottoResult getResult(Lotto winningLotto, LottoNumber bonus) {
         int matchCount = (int) lottoNumbers.stream().filter(w -> winningLotto.contains(w)).count();
-        return LottoResult.of(matchCount);
+        boolean matchBonus = lottoNumbers.contains(bonus);
+        return LottoResult.of(matchCount, matchBonus);
     }
 
     private boolean contains(LottoNumber number) {

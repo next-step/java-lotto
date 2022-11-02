@@ -5,9 +5,14 @@ import java.util.Objects;
 public class LottoNumber implements Comparable{
     private int number;
 
+    public LottoNumber(String number) {
+        this.number = Integer.parseInt(number);
+    }
+
     public LottoNumber(int number) {
         this.number = number;
     }
+
 
     public int getNumber() {
         return number;
