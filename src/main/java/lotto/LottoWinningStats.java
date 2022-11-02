@@ -21,15 +21,24 @@ public class LottoWinningStats {
     public void calculateWinningStats() {
         // 로또 객체를 기반으로 당첨 통계 계산
         for (int i=0 ; i<lotto.getNumbersSize() ; i++) {
-            int count = 0;
             List<Integer> targetNumbers = lotto.getNumbers().get(i);
-            for (Integer winningNumber : winningNumbers) {
-                if (targetNumbers.contains(winningNumber)) {
-                    count++;
-                }
-            }
-            winningStats.add(i, count);
+            winningStats.add(i, getCount(targetNumbers));
         }
+    }
+
+    private int getCount(List<Integer> targetNumbers) {
+        int count = 0;
+        for (Integer winningNumber : winningNumbers) {
+            count = checkCount(targetNumbers, winningNumber, count);
+        }
+        return count;
+    }
+
+    private int checkCount(List<Integer> targetNumbers, Integer winningNumber, int count) {
+        if (targetNumbers.contains(winningNumber)) {
+            count++;
+        }
+        return count;
     }
 
     public void calculateWinningCounts() {
