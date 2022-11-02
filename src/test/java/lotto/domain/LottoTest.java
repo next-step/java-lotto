@@ -26,7 +26,8 @@ public class LottoTest {
     void 당첨_번호와_비교하여_몇등인지_계산() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = new LottoNumber(7);
 
-        assertThat(lotto.getResult(winningLotto)).isEqualTo(LottoResult.FIRST_PRIZE);
+        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(LottoResult.FIRST_PRIZE);
     }
 }

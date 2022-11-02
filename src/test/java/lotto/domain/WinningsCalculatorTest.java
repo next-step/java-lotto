@@ -15,7 +15,13 @@ public class WinningsCalculatorTest {
                 LottoResult.FIRST_PRIZE,
                 LottoResult.SECOND_PRIZE,
                 LottoResult.THIRD_PRIZE,
-                LottoResult.THIRD_PRIZE))).isEqualTo(2000000000 + 1500000 + 50000 + 50000);
+                LottoResult.FOURTH_PRIZE,
+                LottoResult.FIFTH_PRIZE))).isEqualTo(
+                        LottoResult.FIRST_PRIZE.getReward()
+                                + LottoResult.SECOND_PRIZE.getReward()
+                                + LottoResult.THIRD_PRIZE.getReward()
+                                + LottoResult.FOURTH_PRIZE.getReward()
+                                + LottoResult.FIFTH_PRIZE.getReward());
     }
 
     @Test
