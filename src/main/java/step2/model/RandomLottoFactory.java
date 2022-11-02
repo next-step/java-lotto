@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomLottoFactory implements LottoFactory {
+public class RandomLottoFactory {
 
 	private static final int FIRST_NUM = 1;
 	private static final int MAX_NUM = 45;
@@ -17,8 +17,7 @@ public class RandomLottoFactory implements LottoFactory {
 		}
 	}
 
-	@Override
-	public List<Integer> getLottoNum() {
+	public List<Integer> randomLotto() {
 		List<Integer> lottoSet = new ArrayList<>();
 		Collections.shuffle(LOTTO_NUMBERS_POOL);
 
@@ -29,4 +28,5 @@ public class RandomLottoFactory implements LottoFactory {
 		Collections.sort(lottoSet);
 		return lottoSet;
 	}
+
 }

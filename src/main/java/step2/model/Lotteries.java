@@ -1,5 +1,8 @@
 package step2.model;
 
+import static step2.model.Lotto.handLotto;
+import static step2.model.Lotto.randomLotto;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,17 +15,20 @@ public class Lotteries {
 	private HashMap<Rank, Integer> totalMatch;
 	private List<Lotto> lotteries;
 
+
 	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
 		this.lotteries = lotteries;
 		this.totalMatch = totalMatch;
 	}
 
-	public static Lotteries of(List<Lotto> handLotto, int autoTicket, LottoFactory lottoFactory) {
+	public static Lotteries of(List<Integer> handLotto, int autoTicket) {
 		HashMap<Rank, Integer> totalMatch = new HashMap<>();
-		List<Lotto> lotteries = new ArrayList<>(handLotto);
+		List<Lotto> lotteries = new ArrayList<>();
+
+		lotteries.add(handLotto(handLotto));
 
 		for (int ticket = DEFAULT_MIN_LENGTH; ticket < autoTicket; ticket++) {
-			lotteries.add(new Lotto(lottoFactory));
+			lotteries.add(randomLotto());
 		}
 
 		for (Rank rank : Rank.values()) {
