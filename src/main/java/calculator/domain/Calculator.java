@@ -53,7 +53,7 @@ public class Calculator {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자 포멧이 아닙니다.");
+            throw new InvalidParameterException("숫자 포멧이 아닙니다.");
         }
     }
 }
