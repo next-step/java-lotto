@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Positive;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,41 +10,32 @@ import java.util.stream.IntStream;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int inputPrice() {
+    public static Positive inputPrice() {
         System.out.println("구입 금액을 입력해 주세요.");
-        int input = inputSingleNumber();
-        checkPositive(input);
-        return input;
+        return inputSingleNumber();
     }
 
-    public static int inputSelfCount(int lottoCount) {
+    public static Positive inputSelfCount(Positive lottoCount) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int input = inputSingleNumber();
-        checkPositive(input);
-        if (lottoCount < input) {
+        Positive input = inputSingleNumber();
+        if (lottoCount.smallerThan(input)) {
             throw new IllegalArgumentException("구매하려는 로또 수와 같거나 작아야 합니다.");
         }
         return input;
     }
 
-    private static int inputSingleNumber() {
+    private static Positive inputSingleNumber() {
         try {
-            return scanner.nextInt();
+            return new Positive(scanner.nextInt());
         } catch (InputMismatchException e) {
             throw new IllegalArgumentException("1개의 숫자가 입력되어야 합니다.");
         }
     }
 
-    private static void checkPositive(int number) {
-        if (number <= 0) {
-            throw new IllegalArgumentException("0보다 큰 값을 입력해야 합니다");
-        }
-    }
-
-    public static List<Lotto> inputSelfLottos(int count) {
+    public static List<Lotto> inputSelfLottos(Positive count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        return IntStream.range(0, count)
+        return IntStream.range(0, count.get())
                 .mapToObj(i -> inputLotto())
                 .collect(Collectors.toList());
     }
@@ -63,6 +55,7 @@ public class InputView {
         return new Lotto(new ArrayList<>(result));
     }
 
+    // TODO: LottoNumber 클래스 적용
     public static int inputBonusNumber(Lotto winNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         int input;

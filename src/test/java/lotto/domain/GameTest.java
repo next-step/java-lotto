@@ -12,7 +12,7 @@ public class GameTest {
     @Test
     @DisplayName("모든 게임에 당첨")
     void game_win() {
-        Game game = new Game(10, () -> List.of(1, 11, 14, 15, 18, 20));
+        Game game = new Game(new Positive(10), () -> List.of(1, 11, 14, 15, 18, 20));
         LottoResult result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)), 21);
 
         assertThat(result.getPrizeCount(Prize.SIX)).isEqualTo(10);
@@ -21,7 +21,7 @@ public class GameTest {
     @Test
     @DisplayName("당첨 결과 확인")
     void game() {
-        Game game = new Game(7, new TestLottoPublisher(List.of(
+        Game game = new Game(new Positive(7), new TestLottoPublisher(List.of(
                 List.of(1, 11, 14, 15, 18, 20),
                 List.of(1, 11, 14, 16, 18, 20),
                 List.of(3, 4, 5, 6, 7, 8),
@@ -47,7 +47,7 @@ public class GameTest {
                 new Lotto(List.of(1, 11, 14, 15, 18, 21)),
                 new Lotto(List.of(1, 11, 14, 15, 18, 20))
         );
-        Game game = new Game(11, selfLotto, new TestLottoPublisher(List.of(
+        Game game = new Game(new Positive(11), selfLotto, new TestLottoPublisher(List.of(
                 List.of(1, 11, 14, 15, 18, 20),
                 List.of(1, 11, 14, 16, 18, 20),
                 List.of(3, 4, 5, 6, 7, 8),

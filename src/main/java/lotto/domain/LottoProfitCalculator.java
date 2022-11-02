@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class LottoProfitCalculator {
 
-    public static float calculate(int price, LottoResult result) {
-        return (float) getTotalPrize(result) / price;
+    public static float calculate(Positive price, LottoResult result) {
+        return (float) getTotalPrize(result) / price.get();
     }
 
     private static int getTotalPrize(LottoResult lottoResult) {

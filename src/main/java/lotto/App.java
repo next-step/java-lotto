@@ -9,13 +9,13 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) {
-        int price = InputView.inputPrice();
-        int lottoCount = price / Lotto.PRICE;
+        Positive price = InputView.inputPrice();
+        Positive lottoCount = price.divide(Lotto.PRICE);
 
-        int selfCount = InputView.inputSelfCount(lottoCount);
+        Positive selfCount = InputView.inputSelfCount(lottoCount);
         List<Lotto> selfLottos = InputView.inputSelfLottos(selfCount);
 
-        Game game = new Game(price / Lotto.PRICE, selfLottos, new RandomLottoPublisher());
+        Game game = new Game(lottoCount, selfLottos, new RandomLottoPublisher());
         ResultView.printLottoList(selfLottos.size(), game.getLottos());
 
         Lotto winNumbers = InputView.inputWinLotto();

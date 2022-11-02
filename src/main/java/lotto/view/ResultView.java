@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoProfitCalculator;
-import lotto.domain.LottoResult;
-import lotto.domain.Prize;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class ResultView {
         System.out.printf("6개 일치 (%d) - %d개\n", Prize.SIX.getValue(), result.getPrizeCount(Prize.SIX));
     }
 
-    public static void printProfit(int price, LottoResult result) {
+    public static void printProfit(Positive price, LottoResult result) {
         float profit = LottoProfitCalculator.calculate(price, result);
 
         System.out.printf("총 수익률은 %.2f입니다.", profit);
