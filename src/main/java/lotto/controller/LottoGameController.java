@@ -19,7 +19,8 @@ public class LottoGameController {
 
         List<LottoResult> results = lottos.getResults(winnings, bonusNumber);
 
+        WinningsCalculator winningsCalculator = new WinningsCalculator();
         ResultView.printResults(results);
-        ResultView.printYield(WinningsCalculator.calculateYield(inputMoney, WinningsCalculator.calculateWinnings(results)));
+        ResultView.printYield(winningsCalculator.calculateYield(inputMoney, results));
     }
 }

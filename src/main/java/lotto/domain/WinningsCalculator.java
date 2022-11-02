@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import lotto.domain.LottoResult;
-
 import java.util.List;
 
 public class WinningsCalculator {
-    public static int calculateWinnings(List<LottoResult> lottoResults) {
+    public int calculateWinnings(List<LottoResult> lottoResults) {
         int totalPrize = 0;
         for (LottoResult result : lottoResults) {
             totalPrize += result.getReward();
@@ -13,7 +11,7 @@ public class WinningsCalculator {
         return totalPrize;
     }
 
-    public static double calculateYield(int investment, int winnings) {
-        return (double) winnings / investment;
+    public double calculateYield(int investment, List<LottoResult> results) {
+        return (double) calculateWinnings(results) / investment;
     }
 }
