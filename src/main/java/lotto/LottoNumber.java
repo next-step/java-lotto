@@ -18,15 +18,17 @@ public class LottoNumber {
     private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
-        if (lottoNumber < 1 || 45 < lottoNumber) {
-            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하이어야 합니다.");
+        if (lottoNumber < MIN_LOTTO_NUMBER || MAX_LOTTO_NUMBER < lottoNumber) {
+            throw new IllegalArgumentException(
+                    String.format("로또 숫자는 %d 이상 %d 이하이어야 합니다.", MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
         this.lottoNumber = lottoNumber;
     }
 
     public static LottoNumber of(int lottoNumber) {
-        if (lottoNumber < 1 || 45 < lottoNumber) {
-            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하이어야 합니다.");
+        if (lottoNumber < MIN_LOTTO_NUMBER || MAX_LOTTO_NUMBER < lottoNumber) {
+            throw new IllegalArgumentException(
+                    String.format("로또 숫자는 %d 이상 %d 이하이어야 합니다.", MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
         return lottoNumbers.get(lottoNumber);
     }
