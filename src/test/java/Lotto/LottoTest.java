@@ -34,4 +34,19 @@ public class LottoTest {
         List<LottoNumber> notUniqueNumbers = List.of(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1));
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(notUniqueNumbers)).withMessageContaining("유니크한 값으로만 구성해야합니다.");
     }
+
+    @Test
+    void 보너스_맞았는지_확인() {
+        Lotto winningLotto = new Lotto(numbers(1, 7), 7);
+        Lotto lotto1 = new Lotto(numbers(1, 7));
+        assertThat(winningLotto.matchedBonus(lotto1)).isFalse();
+
+        Lotto lotto2 = new Lotto(numbers(2, 8));
+        assertThat(winningLotto.matchedBonus(lotto2)).isTrue();
+    }
+
+    @Test
+    void 보너스_번호_유니크한_값을_갖는지_검사() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numbers(1, 7), 1)).withMessageContaining("보너스 점수에 당청 번호를 제외한 번호만 입력해주세요.");
+    }
 }

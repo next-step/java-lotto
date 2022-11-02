@@ -9,15 +9,27 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    Lotto(List<LottoNumber> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
-    }
+    private LottoNumber bonusNumber;
 
     Lotto() {
         this.numbers = randomNumbers();
     }
 
+    Lotto(List<LottoNumber> numbers) {
+        validate(numbers);
+        this.numbers = numbers;
+    }
+
+    Lotto(List<LottoNumber> numbers, int bonusNumber) {
+        validate(numbers);
+        this.numbers = numbers;
+        this.bonusNumber = new LottoNumber(bonusNumber);
+        validateBonusNumber();
+    }
+
+    public boolean matchedBonus(Lotto myLotto) {
+        return myLotto.numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
+    }
     public int correctCount(Lotto myLotto) {
         return (int) numbers.stream().filter(myLotto.numbers::contains).count();
     }
@@ -35,6 +47,11 @@ public class Lotto {
         if (numbers.stream().mapToInt(lottoNumber -> lottoNumber.getNumber()).distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("유니크한 값으로만 구성해야합니다.");
         }
+    }
+
+    private void validateBonusNumber() {
+        if (matchedBonus(this)) throw new IllegalArgumentException("보너스 점수에 당청 번호를 제외한 번호만 입력해주세요.");
+
     }
 
     @Override
