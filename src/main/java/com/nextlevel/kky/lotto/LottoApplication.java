@@ -8,10 +8,10 @@ public class LottoApplication {
         LottoService lottoService = new LottoService(new LottoIntegerArrayGenerator());
 
         int amount = InputView.inputAmount();
-        List<List<Integer>> lottoList = lottoService.buyLotto(amount);
+        List<Lotto> lottoList = lottoService.buyLotto(amount);
         ResultView.printBoughtLotto(lottoList);
 
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        Lotto winningNumbers = new Lotto(InputView.inputWinningNumbers());
         WinningStatistics winningStatistics = lottoService.calculateWinningStatistics(winningNumbers, lottoList);
         ResultView.printWinningStatistics(winningStatistics);
     }

@@ -2,7 +2,6 @@ package com.nextlevel.kky.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoService {
@@ -14,22 +13,18 @@ public class LottoService {
         this.integerArrayGenerator = integerArrayGenerator;
     }
 
-    public List<List<Integer>> buyLotto(int amount) {
+    public List<Lotto> buyLotto(int amount) {
         int count = amount / LOTTO_PRICE;
-        List<List<Integer>> lottoList = new ArrayList<>(amount);
+        List<Lotto> lottoList = new ArrayList<>(amount);
         for (int i = 0; i < count; i++) {
-            lottoList.add(integerArrayGenerator.getIntegerArray());
+            lottoList.add(new Lotto(integerArrayGenerator.getIntegerArray()));
         }
         return lottoList;
     }
 
-    public WinningStatistics calculateWinningStatistics(List<Integer> winningNumbers, List<List<Integer>> lottoList) {
-        if (validateWinningNumbers(winningNumbers)) {
-            throw new IllegalArgumentException("당첨번호는 6개 이고 중복없이 1와 45 사이의 수이어야 합니다");
-        }
-
+    public WinningStatistics calculateWinningStatistics(Lotto winningNumbers, List<Lotto> lottoList) {
         WinningStatistics winningStatistics = new WinningStatistics();
-        for (List<Integer> lotto : lottoList) {
+        for (Lotto lotto : lottoList) {
             int matchCount = getMatchCount(winningNumbers, lotto);
             int originalCount = winningStatistics.getWinningMap().get(matchCount);
             winningStatistics.getWinningMap().replace(matchCount, ++originalCount);
@@ -37,13 +32,10 @@ public class LottoService {
         return winningStatistics;
     }
 
-    public int getMatchCount(List<Integer> winningNumbers, List<Integer> lotto) {
-        Stream<Integer> matchStream = lotto.stream().filter(winningNumbers::contains);
-        return (int) matchStream.count();
-    }
+    public int getMatchCount(Lotto winningNumbers, Lotto lotto) {
+        Stream<Integer> matchStream = lotto.getNumbers().stream()
+                .filter(number -> winningNumbers.getNumbers().contains(number));
 
-    private boolean validateWinningNumbers(List<Integer> winningNumbers) {
-        List<Integer> distinctList = winningNumbers.stream().distinct().collect(Collectors.toList());
-        return distinctList.size() != 6 || distinctList.stream().anyMatch(num -> num > 45 || num < 0);
+        return (int) matchStream.count();
     }
 }

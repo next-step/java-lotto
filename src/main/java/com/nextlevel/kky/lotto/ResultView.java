@@ -5,10 +5,14 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void printBoughtLotto(List<List<Integer>> lottoList) {
+    public static void printBoughtLotto(List<Lotto> lottoList) {
         System.out.println(lottoList.size() + "개 구매하였습니다");
-        for (List<Integer> lotto : lottoList) {
-            List<String> lottoString = lotto.stream().map(Object::toString).collect(Collectors.toList());
+        for (Lotto lotto : lottoList) {
+            List<String> lottoString = lotto.getNumbers()
+                    .stream()
+                    .map(Object::toString)
+                    .collect(Collectors.toList());
+
             System.out.println("[" + String.join(",", lottoString) + "]");
         }
     }
