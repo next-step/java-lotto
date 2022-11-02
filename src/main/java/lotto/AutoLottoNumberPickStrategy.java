@@ -13,9 +13,12 @@ public class AutoLottoNumberPickStrategy implements LottoNumberPickStrategy {
     public List<Integer> pickNumbers() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < 6) {
-            numbers.add(ThreadLocalRandom.current().nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);
+            numbers.add(ThreadLocalRandom.current()
+                    .nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);
         }
-        return numbers.stream().sorted().collect(toList());
+        return numbers.stream()
+                .sorted()
+                .collect(toList());
     }
 
 }
