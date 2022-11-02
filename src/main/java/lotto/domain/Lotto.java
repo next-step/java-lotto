@@ -1,38 +1,39 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.function.Predicate;
+import lotto.strategy.LottoGenerateStrategy;
+import lotto.util.StringUtils;
+
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.LottoNumber.LOTTO_MAX_NUM;
+import static lotto.domain.LottoNumber.LOTTO_MIN_NUM;
+
 public class Lotto {
 
-    private static final int DEFAULT_SIZE = 6;
-    public static final int LOTTO_MAX_NUM = 45;
-    public static final int LOTTO_MIN_NUM = 1;
-
-    private final Set<Integer> lottoNums;
-
-    private static final List<Integer> NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
-            .boxed()
+    public static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
+    private static final int DEFAULT_SIZE = 6;
 
-    public Lotto(Set<Integer> lottoNums) {
-        if(lottoNums.size() > DEFAULT_SIZE) {
-            throw new IllegalArgumentException("lotto cannot have number quantity bigger than 6");
+    private final Set<LottoNumber> lottoNums;
+
+    public Lotto(Set<LottoNumber> lottoNums) {
+        if (lottoNums.size() != DEFAULT_SIZE) {
+            throw new IllegalArgumentException("lotto input has wrong size");
         }
-        if(lottoNums.size() < DEFAULT_SIZE){
-            throw new IllegalArgumentException("lotto cannot have duplicate numbers");
-        }
-        this.lottoNums = lottoNums;
+        this.lottoNums = new TreeSet<>(lottoNums);
     }
 
-    public boolean hasSameElement(Integer number){
-        return lottoNums.contains(number);
+    public Lotto(LottoGenerateStrategy lottoGenerateStrategy) {
+        this(lottoGenerateStrategy.generateLotto());
     }
 
-    public Set<Integer> getLottoNums() {
-        return lottoNums;
+    public boolean hasSameElement(LottoNumber lottoNumber) {
+        return lottoNums.contains(lottoNumber);
     }
 
     @Override
@@ -40,18 +41,17 @@ public class Lotto {
         return lottoNums.toString();
     }
 
-    public List<Integer> getSameElements(Lotto winningLottoNumbers){
-        return lottoNums.stream()
-                .filter(old -> winningLottoNumbers.lottoNums.stream().anyMatch(Predicate.isEqual(old)))
-                .collect(Collectors.toList());
+    public int getSameElementsSize(Lotto winningLottoNumbers) {
+        return (int) lottoNums.stream()
+                .filter(winningLottoNumbers::hasSameElement)
+                .count();
     }
 
-    public int getSameElementsSize(Lotto winningLottoNumbers){
-        return getSameElements(winningLottoNumbers).size();
+    public static Lotto from(Set<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toSet()));
     }
 
-    public static Lotto generateRandomLotto() {
-        Collections.shuffle(NUMBERS);
-        return new Lotto(new TreeSet<>(NUMBERS.subList(0, 6)));
+    public static Lotto from(String lottoNumbers) {
+        return from(StringUtils.refineNumbers(lottoNumbers));
     }
 }

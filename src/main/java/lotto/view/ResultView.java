@@ -2,7 +2,9 @@ package lotto.view;
 
 import lotto.common.type.WinnerRank;
 import lotto.domain.Lottos;
-import lotto.service.Reward;
+import lotto.domain.RewardStatistics;
+import lotto.input.LottoTicketInput;
+import lotto.input.ManualLottoInput;
 
 public class ResultView {
 
@@ -13,14 +15,21 @@ public class ResultView {
     public static final String REWARD_COUNT_PRINT_FORMAT = "- %d개";
     public static final String RATIO_PRINT_FORMAT = "총 수익률은 %.2f입니다.";
 
+    public void printLottoCount(LottoTicketInput lottoTicketInput, ManualLottoInput manualLottoInput){
+        int totalLottoCount = lottoTicketInput.getTicketCount();
+        int manualLottoCount = manualLottoInput.getInputSize();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, totalLottoCount - manualLottoCount);
+        System.out.println();
+    }
+
     public void printLottos(Lottos lottos) {
         lottos.getLottos()
                 .forEach(System.out::println);
     }
 
-    public void printAllResult(Reward reward, double profitRatio){
+    public void printAllResult(RewardStatistics rewardStatistics, double profitRatio){
         System.out.println(RESULT_BANNER);
-        reward.getWinnerCount().forEach(this::printEachResult);
+        rewardStatistics.getWinnerCount().forEach(this::printEachResult);
         System.out.printf(RATIO_PRINT_FORMAT, profitRatio);
     }
 

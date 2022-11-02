@@ -28,14 +28,4 @@ public class WinnerRankCondition {
         return Objects.hash(correctNumberCount, needBonus);
     }
 
-    public static WinnerRankCondition missCountFrom(int correctNumberCount, boolean needBonus) {
-        if (isMiss(correctNumberCount)) {
-            correctNumberCount = 0;
-        }
-        return new WinnerRankCondition(correctNumberCount, needBonus);
-    }
-
-    private static boolean isMiss(int correctNumberCount) {
-        return correctNumberCount == 1 || correctNumberCount == 2;
-    }
 }
