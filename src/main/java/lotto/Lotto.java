@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class Lotto {
     public static final int AMOUNT = 1000;
-    private static final int TOTAL_NUMBERS = 6;
+    public static final int TOTAL_NUMBERS = 6;
     private static final int LAST_NUMBER = 45;
 
     private final int purchaseCount;
