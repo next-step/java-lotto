@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.Positive;
 
 import java.util.*;
@@ -33,12 +34,12 @@ public class InputView {
         }
     }
 
-    public static List<Lotto> inputSelfLottos(Positive count) {
+    public static Lottos inputSelfLottos(Positive count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        return IntStream.range(0, count.get())
+        return new Lottos(IntStream.range(0, count.get())
                 .mapToObj(i -> inputLotto())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public static Lotto inputWinLotto() {

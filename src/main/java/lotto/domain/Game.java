@@ -2,19 +2,16 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Game {
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
     private final LottoPublisher lottoPublisher;
 
-    public Game(Positive count, List<Lotto> selfLottos, LottoPublisher lottoPublisher) {
+    public Game(Positive count, Lottos selfLottos, LottoPublisher lottoPublisher) {
         this.lottoPublisher = lottoPublisher;
 
         Positive autoLottoCount = count.minus(selfLottos.size());
-        this.lottos = Stream.concat(selfLottos.stream(), createLottoList(autoLottoCount).stream())
-                .collect(Collectors.toList());
+        this.lottos = selfLottos.concat(createLottoList(autoLottoCount));
     }
 
     public Game(Positive count, LottoPublisher lottoPublisher) {
@@ -22,26 +19,20 @@ public class Game {
         this.lottos = createLottoList(count);
     }
 
-    private List<Lotto> createLottoList(Positive count) {
+    private Lottos createLottoList(Positive count) {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < count.get(); i++) {
             result.add(new Lotto(lottoPublisher.get()));
         }
-        return result;
+        return new Lottos(result);
     }
 
     public LottoResult play(Lotto winNumbers, LottoNumber bonusNumber) {
-        List<Prize> prizes = winPrizes(winNumbers, bonusNumber);
+        List<Prize> prizes = lottos.winPrizes(winNumbers, bonusNumber);
         return new LottoResult(prizes);
     }
 
-    private List<Prize> winPrizes(Lotto winNumbers, LottoNumber bonusNumber) {
-        return lottos.stream()
-                .map(lotto -> lotto.matches(winNumbers, bonusNumber))
-                .collect(Collectors.toList());
-    }
-
-    public List<Lotto> getLottos() {
+    public Lottos getLottos() {
         return lottos;
     }
 }

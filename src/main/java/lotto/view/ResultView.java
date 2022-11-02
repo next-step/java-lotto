@@ -2,13 +2,11 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.List;
-
 public class ResultView {
 
-    public static void printLottoList(int selfLottoCount, List<Lotto> lottoList) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", selfLottoCount, lottoList.size());
-        lottoList.forEach(lotto -> System.out.println(lotto.getNumbers()));
+    public static void printLottoList(int selfLottoCount, Lottos lottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", selfLottoCount, lottos.size());
+        lottos.forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 
     public static void printResult(LottoResult result) {

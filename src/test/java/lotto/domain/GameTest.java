@@ -41,12 +41,12 @@ public class GameTest {
     @Test
     @DisplayName("수동으로 입력한 로또 확인")
     void game_self() {
-        List<Lotto> selfLotto = List.of(
+        Lottos selfLotto = new Lottos(List.of(
                 new Lotto(LottoTestUtil.toLottoNumberList(1, 2, 3, 4, 5, 6)),
                 new Lotto(LottoTestUtil.toLottoNumberList(1, 2, 3, 4, 5, 7)),
                 new Lotto(LottoTestUtil.toLottoNumberList(1, 11, 14, 15, 18, 21)),
                 new Lotto(LottoTestUtil.toLottoNumberList(1, 11, 14, 15, 18, 20))
-        );
+        ));
         Game game = new Game(new Positive(11), selfLotto, new TestLottoPublisher(List.of(
                 List.of(1, 11, 14, 15, 18, 20),
                 List.of(1, 11, 14, 16, 18, 20),
