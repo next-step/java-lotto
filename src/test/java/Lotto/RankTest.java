@@ -35,4 +35,9 @@ public class RankTest {
     void NONE_Rank_인지_확인() {
         assertThat(Rank.FIRST.isNotNone()).isTrue();
     }
+
+    @Test
+    void RANK_2등_당청금() {
+        assertThat(Rank.SECOND.getPrize()).isEqualTo(30000000);
+    }
 }
