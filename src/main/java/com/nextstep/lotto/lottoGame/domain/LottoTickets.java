@@ -16,6 +16,17 @@ public class LottoTickets {
         return new LottoTickets(publishAutoTickets(ticketCount));
     }
 
+    public static LottoTickets ofBudgetAndNumbers(int budget, List<LottoTicket> manualTickets) {
+        int ticketCount = getAvailableTicketCount(budget);
+        int autoTicketCount = ticketCount - manualTickets.size();
+        if (autoTicketCount < 0) {
+            throw new IllegalArgumentException("예산이 부족합니다");
+        }
+        List<LottoTicket> tickets = publishAutoTickets(autoTicketCount);
+        tickets.addAll(manualTickets);
+        return new LottoTickets(tickets);
+    }
+
     private static List<LottoTicket> publishAutoTickets(int ticketCount) {
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
