@@ -4,11 +4,7 @@ public class NumberUtil {
 
 	private NumberUtil() {}
 
-	public static boolean isOver(Integer source, Integer target) {
-		return source.compareTo(target) > 0;
-	}
-
-	public static boolean isUnder(Integer source, Integer target) {
-		return source.compareTo(target) < 0;
+	public static boolean isInRange(Integer source, Integer minTarget, Integer maxTarget) {
+		return source.compareTo(minTarget) >= 0 && source.compareTo(maxTarget) <= 0;
 	}
 }

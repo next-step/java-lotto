@@ -1,6 +1,7 @@
 package step3.controller;
 
 import step3.exception.BadRequestException;
+import step3.model.Amount;
 import step3.model.lotto.Lotto;
 import step3.model.lotto.Lottos;
 import step3.model.winning.WinningResult;
@@ -16,10 +17,12 @@ public class LottoController {
 	private Lottos purchaseLottos;
 	private Lotto winningLotto;
 	private WinningResult winningResult;
+	private Amount amount;
 	private int bonusNumber;
 
 	public void purchase() {
-		final int count = getLottoCount(inputView.getPurchaseAmount());
+		amount = new Amount(inputView.getPurchaseAmount());
+		final int count = amount.getLottoCount();
 
 		if (!isAvailableCount(count)) {
 			throw new BadRequestException("입력가능한 최소 구매 금액은 1000 입니다.");
@@ -43,13 +46,7 @@ public class LottoController {
 		winningResult = new WinningResult(bonusNumber, winningLotto, purchaseLottos);
 
 		outputView.printWinningStatistics(winningResult.getCountMap());
-
-		double prize = winningResult.getPrize();
-		outputView.printYield(prize, purchaseLottos.size() * LOTTE_PRICE);
-	}
-
-	private int getLottoCount(int purchaseAmount) {
-		return purchaseAmount / LOTTE_PRICE;
+		outputView.printYield(amount.getYield(winningResult.calculatePrize()));
 	}
 
 	private boolean isAvailableCount(int count) {
