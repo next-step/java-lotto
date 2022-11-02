@@ -31,11 +31,9 @@ public class Lottos {
 
     public Map<Winning, Integer> matching(WinningLotto winningLotto) {
         Map<Winning, Integer> winnings = new HashMap<>();
-        winnings.put(Winning.THIRD, 0);
-        winnings.put(Winning.FOURTH, 0);
-        winnings.put(Winning.FIFTH, 0);
-        winnings.put(Winning.FIFTH_BONUS, 0);
-        winnings.put(Winning.SIXTH, 0);
+        for (Winning winning : Winning.values()) {
+            winnings.put(winning, 0);
+        }
         for (Lotto lotto : lottos) {
             Winning.of(lotto.matchCount(winningLotto.getLotto()),
                             lotto.doesLottoContainsLottoNumber(winningLotto.getBonusBall()) == 1)
