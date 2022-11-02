@@ -19,7 +19,7 @@ public class App {
         ResultView.printLottoList(selfLottos.size(), game.getLottos());
 
         Lotto winNumbers = InputView.inputWinLotto();
-        int bonusNumber = InputView.inputBonusNumber(winNumbers);
+        LottoNumber bonusNumber = InputView.inputBonusNumber(winNumbers);
         LottoResult result = game.play(winNumbers, bonusNumber);
         ResultView.printResult(result);
         ResultView.printProfit(price, result);

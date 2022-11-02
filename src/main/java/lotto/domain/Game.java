@@ -30,12 +30,12 @@ public class Game {
         return result;
     }
 
-    public LottoResult play(Lotto winNumbers, int bonusNumber) {
+    public LottoResult play(Lotto winNumbers, LottoNumber bonusNumber) {
         List<Prize> prizes = winPrizes(winNumbers, bonusNumber);
         return new LottoResult(prizes);
     }
 
-    private List<Prize> winPrizes(Lotto winNumbers, int bonusNumber) {
+    private List<Prize> winPrizes(Lotto winNumbers, LottoNumber bonusNumber) {
         return lottos.stream()
                 .map(lotto -> lotto.matches(winNumbers, bonusNumber))
                 .collect(Collectors.toList());

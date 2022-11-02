@@ -3,10 +3,6 @@ package lotto.domain;
 public class Positive {
     private final int number;
 
-    public Positive(String s) {
-        this(Integer.parseInt(s));
-    }
-
     public Positive(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("음수 값이 들어올 수 없습니다.");

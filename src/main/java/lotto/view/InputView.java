@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Positive;
 
 import java.util.*;
@@ -47,16 +48,16 @@ public class InputView {
 
     private static Lotto inputLotto() {
         String input = scanner.next();
-        Set<Integer> result = Arrays.stream(input.split(","))
+        Set<LottoNumber> result = Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
         return new Lotto(new ArrayList<>(result));
     }
 
-    // TODO: LottoNumber 클래스 적용
-    public static int inputBonusNumber(Lotto winNumbers) {
+    public static LottoNumber inputBonusNumber(Lotto winNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         int input;
         try {
@@ -64,14 +65,13 @@ public class InputView {
         } catch (InputMismatchException e) {
             throw new IllegalArgumentException("1개의 보너스 번호가 입력되어야 합니다.");
         }
-        checkBonusInput(input, winNumbers);
-        return input;
+
+        LottoNumber bonusNumber = new LottoNumber(input);
+        checkBonusInput(bonusNumber, winNumbers);
+        return bonusNumber;
     }
 
-    private static void checkBonusInput(int bonusNumber, Lotto winNumbers) {
-        if (Lotto.MIN > bonusNumber || bonusNumber > Lotto.MAX) {
-            throw new IllegalArgumentException("입력 범위를 벗어났습니다.");
-        }
+    private static void checkBonusInput(LottoNumber bonusNumber, Lotto winNumbers) {
         if (winNumbers.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 달라야 합니다.");
         }

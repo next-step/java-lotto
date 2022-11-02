@@ -5,5 +5,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface LottoPublisher {
-    List<Integer> get();
+    List<LottoNumber> get();
 }

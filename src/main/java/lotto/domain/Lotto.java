@@ -4,23 +4,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int MIN = 1;
-    public static final int MAX = 45;
     public static final int PRICE = 1000;
     public static final int COUNT = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         checkNumberCount(numbers);
-        numbers.forEach(this::checkNumberRange);
         this.numbers = numbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
 
 
-    private void checkNumberCount(List<Integer> numbers) {
+    private void checkNumberCount(List<LottoNumber> numbers) {
         int distinctCount = (int) numbers.stream()
                 .distinct()
                 .count();
@@ -29,13 +26,7 @@ public class Lotto {
         }
     }
 
-    private void checkNumberRange(int number) {
-        if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException("로또 숫자는 " + MIN + "과 " + MAX + " 사이의 값이어야 합니다");
-        }
-    }
-
-    public Prize matches(Lotto winNumbers, int bonusNumber) {
+    public Prize matches(Lotto winNumbers, LottoNumber bonusNumber) {
         int matchNumber = matchNumberCount(winNumbers);
         boolean hasBonusNumber = hasNumber(bonusNumber);
         return Prize.toPrize(matchNumber, hasBonusNumber);
@@ -47,11 +38,11 @@ public class Lotto {
                 .count();
     }
 
-    public boolean hasNumber(int number) {
+    public boolean hasNumber(LottoNumber number) {
         return numbers.contains(number);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 

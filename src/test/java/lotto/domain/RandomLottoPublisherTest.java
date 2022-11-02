@@ -14,21 +14,22 @@ public class RandomLottoPublisherTest {
     void random() {
         RandomLottoPublisher publisher = new RandomLottoPublisher();
         for (int i = 0; i < 100; i++) {
-            List<Integer> result = publisher.get();
+            List<LottoNumber> result = publisher.get();
             assertThat(result)
                     .hasSize(6)
                     .matches(this::isNumberListSorted)
-                    .allMatch(number -> (1 <= number && number <= 45));
+                    .allMatch(number -> number.smallerThan(LottoNumber.MAX + 1))
+                    .allMatch(number -> number.biggerThan(LottoNumber.MIN - 1));
         }
     }
 
 
-    private boolean isNumberListSorted(List<? extends Integer> numbers) {
+    private boolean isNumberListSorted(List<? extends LottoNumber> numbers) {
         boolean result = true;
         for (int i = 0; i < numbers.size() - 1; i++) {
-            int current = numbers.get(i);
-            int next = numbers.get(i + 1);
-            result = Boolean.logicalAnd(result, current < next);
+            LottoNumber current = numbers.get(i);
+            LottoNumber next = numbers.get(i + 1);
+            result = Boolean.logicalAnd(result, current.smallerThan(next));
         }
         return result;
     }
