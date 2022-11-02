@@ -8,12 +8,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int VALUE_MIN = 1;
     public static final int VALUE_MAX = 45;
 
-    private static final Map<Integer, LottoNumber> cache;
+    private static final Map<Integer, LottoNumber> CACHE;
 
     static {
-        cache = new HashMap<>();
+        CACHE = new HashMap<>();
         for (int i = VALUE_MIN; i <= VALUE_MAX; i++) {
-            cache.put(i, new LottoNumber(i));
+            CACHE.put(i, new LottoNumber(i));
         }
     }
 
@@ -27,7 +27,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (value < VALUE_MIN || value > VALUE_MAX) {
             throw new IllegalArgumentException("잘못된 로또 숫자입니다.");
         }
-        return cache.get(value);
+        return CACHE.get(value);
     }
 
     public int getValue() {
