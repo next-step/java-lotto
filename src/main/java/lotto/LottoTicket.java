@@ -58,15 +58,9 @@ public class LottoTicket {
     }
 
     private static List<LottoNumber> createLottoNumbers() {
-        List<Integer> candidates = new ArrayList<>();
-        for (int i = LottoNumber.VALUE_MIN; i <= LottoNumber.VALUE_MAX; i++) {
-            candidates.add(i);
-        }
+        List<LottoNumber> candidates = new ArrayList<>(LottoNumber.selectableNumbers());
         Collections.shuffle(candidates);
-        return candidates.stream()
-                .map(LottoNumber::of)
-                .limit(LOTTO_NUMBER_COUNT)
-                .collect(Collectors.toList());
+        return candidates.subList(0, LOTTO_NUMBER_COUNT);
     }
 
     private static List<LottoNumber> toLottoNumbers(int... numbers) {

@@ -1,12 +1,10 @@
 package lotto;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final int VALUE_MIN = 1;
-    public static final int VALUE_MAX = 45;
+    private static final int VALUE_MIN = 1;
+    private static final int VALUE_MAX = 45;
 
     private static final Map<Integer, LottoNumber> CACHE;
 
@@ -32,6 +30,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public int getValue() {
         return value;
+    }
+
+    public static Collection<LottoNumber> selectableNumbers() {
+        return CACHE.values();
     }
 
     @Override
