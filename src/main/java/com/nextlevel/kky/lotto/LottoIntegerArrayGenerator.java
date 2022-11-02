@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoIntegerArrayGenerator implements IntegerArrayGenerator {
 
-    private static final List<Integer> LOTTO_NUMBERS = IntStream.range(1,46).boxed().collect(Collectors.toList());
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());
 
     @Override
     public List<Integer> getIntegerArray() {
