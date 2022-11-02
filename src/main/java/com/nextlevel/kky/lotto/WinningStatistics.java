@@ -12,6 +12,17 @@ public class WinningStatistics {
 
     private final Map<Integer, Integer> winningMap;
 
+    public WinningStatistics() {
+        winningMap = new HashMap<>();
+        winningMap.put(0, 0);
+        winningMap.put(1, 0);
+        winningMap.put(2, 0);
+        winningMap.put(3, 0);
+        winningMap.put(4, 0);
+        winningMap.put(5, 0);
+        winningMap.put(6, 0);
+    }
+
     public double getAdvantageRate() {
         double count = winningMap.values().stream().mapToInt(Integer::intValue).sum();
         double firstAmount = winningMap.get(6) * FIRST_REWARD;
@@ -39,16 +50,5 @@ public class WinningStatistics {
 
     public Map<Integer, Integer> getWinningMap() {
         return winningMap;
-    }
-
-    public WinningStatistics() {
-        winningMap = new HashMap<>();
-        winningMap.put(0, 0);
-        winningMap.put(1, 0);
-        winningMap.put(2, 0);
-        winningMap.put(3, 0);
-        winningMap.put(4, 0);
-        winningMap.put(5, 0);
-        winningMap.put(6, 0);
     }
 }
