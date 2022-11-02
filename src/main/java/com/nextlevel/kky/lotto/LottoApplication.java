@@ -5,14 +5,14 @@ import java.util.List;
 public class LottoApplication {
 
     public static void main(String[] arg) {
-        LottoService lottoService = new LottoService(new LottoIntegerArrayGenerator());
+        LottoShop lottoShop = new LottoShop(new LottoIntegerArrayGenerator());
 
         int amount = InputView.inputAmount();
-        List<Lotto> lottoList = lottoService.buyLotto(amount);
+        List<Lotto> lottoList = lottoShop.buyLotto(amount);
         ResultView.printBoughtLotto(lottoList);
 
         Lotto winningNumbers = new Lotto(InputView.inputWinningNumbers());
-        WinningStatistics winningStatistics = lottoService.calculateWinningStatistics(winningNumbers, lottoList);
+        WinningStatistics winningStatistics = LotteryCommission.calculateWinningStatistics(winningNumbers, lottoList);
         ResultView.printWinningStatistics(winningStatistics);
     }
 }
