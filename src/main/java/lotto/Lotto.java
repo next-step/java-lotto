@@ -44,12 +44,12 @@ public class Lotto {
     public int matchCount(Lotto winning) {
         int count = 0;
         for (LottoNumber lottoNumber : winning.lotto) {
-            count += matchCount(lottoNumber);
+            count += doesLottoContainsLottoNumber(lottoNumber);
         }
         return count;
     }
 
-    public int matchCount(LottoNumber lottoNumber) {
+    public int doesLottoContainsLottoNumber(LottoNumber lottoNumber) {
         if (lotto.contains(lottoNumber)) {
             return 1;
         }

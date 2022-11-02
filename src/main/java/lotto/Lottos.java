@@ -38,7 +38,7 @@ public class Lottos {
         winnings.put(Winning.SIXTH, 0);
         for (Lotto lotto : lottos) {
             Winning.of(lotto.matchCount(winningLotto.getLotto()),
-                            lotto.matchCount(winningLotto.getBonusBall()) == 1)
+                            lotto.doesLottoContainsLottoNumber(winningLotto.getBonusBall()) == 1)
                     .ifPresent(winning -> {
                         winnings.put(winning, winnings.get(winning) + 1);
                     });

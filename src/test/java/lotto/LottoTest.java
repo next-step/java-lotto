@@ -83,7 +83,7 @@ public class LottoTest {
         Lotto lotto = Lotto.manual(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber lottoNumber = LottoNumber.of(1);
         // when
-        int count = lotto.matchCount(lottoNumber);
+        int count = lotto.doesLottoContainsLottoNumber(lottoNumber);
         // then
         assertThat(count).isEqualTo(1);
     }
