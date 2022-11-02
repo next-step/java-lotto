@@ -13,19 +13,16 @@ public class Lotteries {
 	private static final int DEFAULT_MIN_LENGTH = 0;
 
 	private HashMap<Rank, Integer> totalMatch;
-	private List<Lotto> lotteries;
 
+	private static List<Lotto> lotteries = new ArrayList<>();
 
 	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
 		this.lotteries = lotteries;
 		this.totalMatch = totalMatch;
 	}
 
-	public static Lotteries of(List<Integer> handLotto, int autoTicket) {
+	public static Lotteries of(int autoTicket) {
 		HashMap<Rank, Integer> totalMatch = new HashMap<>();
-		List<Lotto> lotteries = new ArrayList<>();
-
-		lotteries.add(handLotto(handLotto));
 
 		for (int ticket = DEFAULT_MIN_LENGTH; ticket < autoTicket; ticket++) {
 			lotteries.add(randomLotto());
@@ -53,6 +50,10 @@ public class Lotteries {
 
 	public Lotto showLotteries(int i) {
 		return lotteries.get(i);
+	}
+
+	public static void handLotteries(Lotto handLotto) {
+		lotteries.add(handLotto);
 	}
 
 }

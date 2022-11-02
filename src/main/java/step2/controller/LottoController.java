@@ -1,7 +1,14 @@
 package step2.controller;
 
+import static step2.model.Lotteries.handLotteries;
+import static step2.model.Lotto.handLotto;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import step2.model.Lotteries;
+import step2.model.Lotto;
 import step2.model.Payment;
 import step2.model.Rank;
 import step2.view.InputView;
@@ -22,8 +29,13 @@ public class LottoController {
 		payment.isValid(handTicket, totalTicket);
 
 		int autoTicket = payment.autoTicket(totalTicket, handTicket);
-		INPUT_VIEW.askHandNumber();// 수동 로또
-		Lotteries lotteries = Lotteries.of(INPUT_VIEW.handNumber(), autoTicket);
+		INPUT_VIEW.askHandNumber();
+
+		for (int i = 0; i < handTicket; i++) {
+			handLotteries(handLotto(INPUT_VIEW.handNumber()));
+		}
+
+		Lotteries lotteries = Lotteries.of(autoTicket);
 		OUTPUT_VIEW.showTotalTicket(handTicket, autoTicket);
 		OUTPUT_VIEW.showLotteries(totalTicket, lotteries);
 
@@ -33,7 +45,6 @@ public class LottoController {
 				INPUT_VIEW.askBonusNumber());
 
 		OUTPUT_VIEW.resultView(totalCount);
-
 		OUTPUT_VIEW.showRate(
 			payment.calculateBenefit(money, totalCount));
 	}

@@ -16,13 +16,12 @@ public class Lotto {
 	}
 
 	public static Lotto randomLotto() {
-		RandomLottoFactory lottoFactory = new RandomLottoFactory();
-		return new Lotto(lottoFactory.randomLotto());
+		RandomLottoFactory randomLottoFactory = new RandomLottoFactory();
+		return new Lotto(randomLottoFactory.randomLotto());
 	}
 
 	public static Lotto handLotto(List<Integer> handLotto) {
 		return new Lotto(handLotto);
-
 	}
 
 }
