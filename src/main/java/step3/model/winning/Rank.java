@@ -44,6 +44,6 @@ public enum Rank {
 	}
 
 	private static boolean isSecond(int countOfMatch, boolean matchBonus) {
-		return countOfMatch == 5 && matchBonus;
+		return countOfMatch == Rank.SECOND.getCountOfMatch() && matchBonus;
 	}
 }
