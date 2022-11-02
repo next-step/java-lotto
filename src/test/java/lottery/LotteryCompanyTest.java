@@ -23,12 +23,12 @@ public class LotteryCompanyTest {
     @ParameterizedTest
     @CsvSource(value={"1000:1", "14000:14", "14500:14"}, delimiter = ':')
     void 구입가능금액_1000원_이상(int cashAmount, int expected) {
-        assertThat(LotteryCompany.getAvailablePurchaseCount(cashAmount)).isEqualTo(expected);
+        assertThat(LotteryCompany.getAvailablePurchaseAmount(cashAmount)).isEqualTo(expected);
     }
 
     @Test
     void 구입가능금액_1000원_미만() {
-        assertThatThrownBy(() -> LotteryCompany.getAvailablePurchaseCount(999))
+        assertThatThrownBy(() -> LotteryCompany.getAvailablePurchaseAmount(999))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

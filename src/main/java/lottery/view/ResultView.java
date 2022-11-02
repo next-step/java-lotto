@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 
 public class ResultView {
 
-    public static void printPurchasedLotteryInfos(List<Lottery> lotteries) {
-        printPurchasedLotteryAmount(lotteries.size());
+    public static void printPurchasedLotteryInfos(List<Lottery> lotteries, int manuallyPurchasedAmount) {
+        printPurchasedLotteryAmount(lotteries.size() - manuallyPurchasedAmount, manuallyPurchasedAmount);
         printPurchasedLotteryNumbers(lotteries);
     }
 
@@ -29,8 +29,8 @@ public class ResultView {
         System.out.printf("총 수익률은 %.2f 입니다.", lotteryResult.getReturnRate());
     }
 
-    private static void printPurchasedLotteryAmount(int purchasedLotteryAmount) {
-        System.out.println(purchasedLotteryAmount + "개를 구매했습니다.");
+    private static void printPurchasedLotteryAmount(int randomlyPurchasedAmount, int manuallyPurchasedAmount) {
+        System.out.println("수동으로 " + manuallyPurchasedAmount + "장, 자동으로 " + randomlyPurchasedAmount + "개를 구매했습니다.");
     }
 
     private static void printPurchasedLotteryNumbers(List<Lottery> lotteries) {

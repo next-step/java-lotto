@@ -22,11 +22,12 @@ public class LotteryCompany {
                 .collect(Collectors.toList()));
     }
 
-    public static int getAvailablePurchaseCount(int cashAmount) {
+    public static int getAvailablePurchaseAmount(int cashAmount) {
         int availablePurchaseCount = cashAmount / LOTTERY_PRICE;
         if (availablePurchaseCount <= 0) {
             throw new IllegalArgumentException("입력한 구입 금액으로 로또를 구입할 수 없습니다.");
         }
         return availablePurchaseCount;
     }
+
 }

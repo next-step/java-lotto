@@ -58,9 +58,13 @@
 # Step4
 ## 기능 요구사항
 - [x] 로또 구매 개수가 0개일 경우 그대로 로직을 진행하지 않고 예외 발생
-- [ ] InputView 에서 수동으로 구매할 로또의 개수를 입력받는 로직 추가
-- [ ] InputView 의 getWinningLotteryNumbers 메서드를 재활용하여 수동 구입 로또 번호를 입력받을 수 있도록 수정
-- [ ] Customer 에 List<Lottery>를 인자로 받아 로또를 생성해주는 메서드 추가
+- [x] InputView 에서 수동으로 구매할 로또의 개수를 입력받는 로직 추가
+- [x] InputView 의 getWinningLotteryNumbers 메서드를 재활용하여 수동 구입 로또 번호를 입력받을 수 있도록 수정
+- [x] Customer 에 List<Lottery>를 인자로 받아 로또를 생성해주는 메서드 추가
   - Controller에서 호출하여 수동 번호로 로또 생성
 
 ## 리팩토링 요구사항 
+- [ ] 변수명 정리
+- [ ] `LotteryNumber` 생성자 private로 전환하고 정적 팩토리 메서드 도입
+- [ ] `LotteryNumber` 정적 팩토리 메서드에서 인스턴스 캐싱 하도록 변경
+- [ ] `Lottery` 중복 값 validation 로직 제거하고 인스턴스를 `Set`으로 유지하여 그 역할을 수행하도록 변경
