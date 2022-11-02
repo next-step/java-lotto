@@ -32,7 +32,7 @@ public class Lotto {
     }
 
     private void validate(List<LottoNumber> numbers) {
-        if (numbers.stream().mapToInt(v -> v.getNumber()).distinct().count() != numbers.size()) {
+        if (numbers.stream().mapToInt(lottoNumber -> lottoNumber.getNumber()).distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("유니크한 값으로만 구성해야합니다.");
         }
     }
