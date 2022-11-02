@@ -1,8 +1,9 @@
 package com.nextlevel.kky.lotto;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -10,15 +11,17 @@ public class InputView {
 
     public static int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        int amount = scanner.nextInt();
+        scanner.nextLine();
+        return amount;
     }
 
     public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> winningNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            winningNumbers.add(scanner.nextInt());
-        }
-        return winningNumbers;
+        String input = scanner.nextLine().replace(" ", "");
+
+        return Arrays.stream(input.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
