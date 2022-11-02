@@ -19,11 +19,11 @@ public class ResultView {
     public static void printResult(LottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (%d) - %d개\n", Prize.THREE.getValue(), result.getOrZero(Prize.THREE));
-        System.out.printf("4개 일치 (%d) - %d개\n", Prize.FOUR.getValue(), result.getOrZero(Prize.FOUR));
-        System.out.printf("5개 일치 (%d) - %d개\n", Prize.FIVE.getValue(), result.getOrZero(Prize.FIVE));
-        System.out.printf("5개 일치, 보너스 볼 일치 (%d) - %d개\n", Prize.FIVE_BONUS.getValue(), result.getOrZero(Prize.FIVE_BONUS));
-        System.out.printf("6개 일치 (%d) - %d개\n", Prize.SIX.getValue(), result.getOrZero(Prize.SIX));
+        System.out.printf("3개 일치 (%d) - %d개\n", Prize.THREE.getValue(), result.getPrizeCount(Prize.THREE));
+        System.out.printf("4개 일치 (%d) - %d개\n", Prize.FOUR.getValue(), result.getPrizeCount(Prize.FOUR));
+        System.out.printf("5개 일치 (%d) - %d개\n", Prize.FIVE.getValue(), result.getPrizeCount(Prize.FIVE));
+        System.out.printf("5개 일치, 보너스 볼 일치 (%d) - %d개\n", Prize.FIVE_BONUS.getValue(), result.getPrizeCount(Prize.FIVE_BONUS));
+        System.out.printf("6개 일치 (%d) - %d개\n", Prize.SIX.getValue(), result.getPrizeCount(Prize.SIX));
     }
 
     public static void printProfit(int price, LottoResult result) {

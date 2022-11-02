@@ -3,9 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.AbstractMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +15,7 @@ public class GameTest {
         Game game = new Game(10, () -> List.of(1, 11, 14, 15, 18, 20));
         LottoResult result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)), 21);
 
-        assertThat(result.getOrZero(Prize.SIX)).isEqualTo(10);
+        assertThat(result.getPrizeCount(Prize.SIX)).isEqualTo(10);
     }
 
     @Test
@@ -34,9 +32,9 @@ public class GameTest {
         )));
         LottoResult result = game.play(new Lotto(List.of(1, 11, 14, 15, 18, 20)), 21);
 
-        assertThat(result.getOrZero(Prize.NONE)).isEqualTo(3);
-        assertThat(result.getOrZero(Prize.THREE)).isEqualTo(2);
-        assertThat(result.getOrZero(Prize.FIVE)).isEqualTo(1);
-        assertThat(result.getOrZero(Prize.SIX)).isEqualTo(1);
+        assertThat(result.getPrizeCount(Prize.NONE)).isEqualTo(3);
+        assertThat(result.getPrizeCount(Prize.THREE)).isEqualTo(2);
+        assertThat(result.getPrizeCount(Prize.FIVE)).isEqualTo(1);
+        assertThat(result.getPrizeCount(Prize.SIX)).isEqualTo(1);
     }
 }

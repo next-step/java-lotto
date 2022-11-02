@@ -9,7 +9,7 @@ public class LottoProfitCalculator {
     private static int getTotalPrize(LottoResult lottoResult) {
         int sum = 0;
         for (Prize prize: Prize.values()) {
-            sum += prize.getValue() * lottoResult.getOrZero(prize);
+            sum += prize.getValue() * lottoResult.getPrizeCount(prize);
         }
         return sum;
     }

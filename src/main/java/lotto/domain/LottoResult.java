@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private Map<Prize, Integer> lottoResult;
+    private final Map<Prize, Integer> prizeCounts;
 
-    public LottoResult(Map<Prize, Integer> lottoResult) {
-        this.lottoResult = lottoResult;
+    public LottoResult(Map<Prize, Integer> prizeCounts) {
+        this.prizeCounts = prizeCounts;
     }
 
     public LottoResult(List<Prize> prizes) {
@@ -18,10 +18,10 @@ public class LottoResult {
             int count = result.getOrDefault(prize, 0);
             result.put(prize, count + 1);
         }
-        lottoResult = result;
+        prizeCounts = result;
     }
 
-    public int getOrZero(Prize prize) {
-        return lottoResult.getOrDefault(prize, 0);
+    public int getPrizeCount(Prize prize) {
+        return prizeCounts.getOrDefault(prize, 0);
     }
 }
