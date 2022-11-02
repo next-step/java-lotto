@@ -15,9 +15,9 @@ public class WinningResult {
 	private final Lottos purchaseLottos;
 	private final HashMap<Rank, Integer> rankCountMap;
 
-	public WinningResult(int bonusNumber, Lotto winningLotto, Lottos purchaseLottos) {
+	public WinningResult(int bonusNumber, Lotto winningLotto, Lottos manualLottos, Lottos automaticLottos) {
 		this.winningLotto = winningLotto;
-		this.purchaseLottos = purchaseLottos;
+		this.purchaseLottos = manualLottos.addAll(automaticLottos);
 		this.bonusLotto = setBonusLotto(bonusNumber);
 		this.rankCountMap = matchCountMap();
 	}

@@ -3,16 +3,14 @@ package step3.view;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import step3.model.Amount;
 import step3.model.lotto.Lottos;
 import step3.model.winning.Rank;
 
 public class OutputView {
 
-	private static final int MIN_MATCH_COUNT = 3;
-	private static final int MAX_MATCH_COUNT = 6;
-
-	public void printLottoCount(int lottoCount) {
-		System.out.println(lottoCount + "개를 구매했습니다.");
+	public void printLottoCount(Amount amount) {
+		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", amount.getManualCount(), amount.getAutomaticCount());
 	}
 
 	public void printLottos(Lottos lottos) {
