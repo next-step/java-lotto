@@ -1,3 +1,7 @@
+package com.nextlevel.kky.lotto;
+
+import com.nextlevel.kky.lotto.LottoService;
+import com.nextlevel.kky.lotto.WinningStatistics;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

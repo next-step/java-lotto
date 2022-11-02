@@ -1,3 +1,5 @@
+package com.nextlevel.kky.lotto;
+
 import java.util.HashMap;
 import java.util.Map;
 

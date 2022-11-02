@@ -1,3 +1,7 @@
+package com.nextlevel.kky.calculator;
+
+import com.nextlevel.kky.calculator.Calculator;
+import com.nextlevel.kky.calculator.InputNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

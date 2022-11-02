@@ -1,3 +1,5 @@
+package com.nextlevel.kky.lotto;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
