@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class LottoProfitCalculator {
 
-    public float calculate(int price, LottoResult result) {
+    public static float calculate(int price, LottoResult result) {
         return (float) getTotalPrize(result) / price;
     }
 
