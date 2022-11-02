@@ -21,7 +21,7 @@ public class WinningLotto {
         }
 
         public WinningLottoBuilder winningNumbers(int n1, int n2, int n3, int n4, int n5, int n6) {
-            winningLotto.lotto = Lotto.manual(n1, n2, n3, n4, n5, n6);
+            winningLotto.lotto = Lotto.manual(List.of(n1, n2, n3, n4, n5, n6));
             return this;
         }
 

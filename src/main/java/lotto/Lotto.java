@@ -18,10 +18,6 @@ public class Lotto {
         return Lotto.of(lottoNumberPickStrategy.pickNumbers());
     }
 
-    public static Lotto manual(int l1, int l2, int l3, int l4, int l5, int l6) {
-        return Lotto.of(List.of(l1, l2, l3, l4, l5, l6));
-    }
-
     public static Lotto manual(List<Integer> numbers) {
         return Lotto.of(numbers);
     }

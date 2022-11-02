@@ -43,7 +43,7 @@ public class LottoMachineTest {
         Lottos lottos = lottoMachine.buyLottoManually(lottoNumbers);
         // then
         assertThat(lottos.getLottosSize()).isEqualTo(1);
-        assertThat(lottos.getLottos()).containsExactly(Lotto.manual(1, 2, 3, 4, 5, 6));
+        assertThat(lottos.getLottos()).containsExactly(Lotto.manual(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @Test

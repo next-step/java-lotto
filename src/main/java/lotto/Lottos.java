@@ -18,7 +18,7 @@ public class Lottos {
 
     public Lottos(int n1, int n2, int n3, int n4, int n5, int n6) {
         lottos = new ArrayList<>();
-        lottos.add(Lotto.manual(n1, n2, n3, n4, n5, n6));
+        lottos.add(Lotto.manual(List.of(n1, n2, n3, n4, n5, n6)));
     }
 
     public void add(Lotto lotto) {

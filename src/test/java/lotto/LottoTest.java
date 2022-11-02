@@ -47,8 +47,8 @@ public class LottoTest {
     void test4() {
         // given
         // when
-        Lotto lotto1 = Lotto.manual(1, 2, 3, 4, 5, 6);
-        Lotto lotto2 = Lotto.manual(6, 5, 4, 3, 2, 1);
+        Lotto lotto1 = Lotto.manual(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.manual(List.of(6, 5, 4, 3, 2, 1));
         // then
         assertThat(lotto1).isEqualTo(lotto2);
     }
@@ -60,7 +60,7 @@ public class LottoTest {
         // when
         // then
         assertThatThrownBy(() -> {
-            Lotto.manual(-1, 2, 3, 4, 5, 99);
+            Lotto.manual(List.of(-1, 2, 3, 4, 5, 99));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -68,8 +68,8 @@ public class LottoTest {
     @DisplayName("로또 숫자 매칭")
     void test6() {
         // given
-        Lotto lotto1 = Lotto.manual(1, 2, 3, 4, 5, 6);
-        Lotto lotto2 = Lotto.manual(1, 2, 3, 4, 5, 7);
+        Lotto lotto1 = Lotto.manual(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.manual(List.of(1, 2, 3, 4, 5, 7));
         // when
         int count = lotto1.matchCount(lotto2);
         // then
@@ -80,7 +80,7 @@ public class LottoTest {
     @DisplayName("로또 숫자 매칭 한개")
     void test7() {
         // given
-        Lotto lotto = Lotto.manual(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.manual(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber lottoNumber = LottoNumber.of(1);
         // when
         int count = lotto.matchCount(lottoNumber);
