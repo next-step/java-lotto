@@ -1,7 +1,7 @@
 package calculator;
 
 public class OutputView {
-    public static final String RESULT_MESSAGE_FORMAT = "Result: %d\n";
+    private static final String RESULT_MESSAGE_FORMAT = "Result: %d\n";
 
     private OutputView() {
 
