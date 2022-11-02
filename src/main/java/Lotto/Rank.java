@@ -16,8 +16,9 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank RankOf(int correctCount) {
+    public static Rank RankOf(int correctCount, boolean isMatchedBonus) {
         if (correctCount == 6) return Rank.FIRST;
+        if (correctCount == 5 && isMatchedBonus) return Rank.SECOND;
         if (correctCount == 5) return Rank.SECOND;
         if (correctCount == 4) return Rank.THIRD;
         if (correctCount == 3) return Rank.FOURTH;
@@ -25,7 +26,7 @@ public enum Rank {
     }
 
     public static Rank getRank(Lotto winner, Lotto myLotto) {
-        return RankOf(winner.correctCount(myLotto));
+        return RankOf(winner.correctCount(myLotto), winner.matchedBonus(myLotto));
     }
 
     public boolean isNotNone() {

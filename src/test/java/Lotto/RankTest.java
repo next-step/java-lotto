@@ -20,7 +20,7 @@ public class RankTest {
 
     @Test
     void 당첨_1등() {
-        assertThat(Rank.RankOf(6)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.RankOf(6, false)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -39,5 +39,10 @@ public class RankTest {
     @Test
     void RANK_2등_당청금() {
         assertThat(Rank.SECOND.getPrize()).isEqualTo(30000000);
+    }
+
+    @Test
+    void 당첨_2등() {
+        assertThat(Rank.RankOf(5, true)).isEqualTo(Rank.SECOND);
     }
 }
