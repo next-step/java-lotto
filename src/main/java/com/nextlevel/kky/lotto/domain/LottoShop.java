@@ -1,4 +1,6 @@
-package com.nextlevel.kky.lotto;
+package com.nextlevel.kky.lotto.domain;
+
+import com.nextlevel.kky.lotto.model.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;

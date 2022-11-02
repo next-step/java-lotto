@@ -1,4 +1,4 @@
-package com.nextlevel.kky.lotto;
+package com.nextlevel.kky.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package com.nextlevel.kky.lotto;
+package com.nextlevel.kky.lotto.ui;
 
 import java.util.Arrays;
 import java.util.List;

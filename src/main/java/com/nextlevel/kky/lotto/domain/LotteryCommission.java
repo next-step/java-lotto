@@ -1,4 +1,7 @@
-package com.nextlevel.kky.lotto;
+package com.nextlevel.kky.lotto.domain;
+
+import com.nextlevel.kky.lotto.model.Lotto;
+import com.nextlevel.kky.lotto.model.WinningStatistics;
 
 import java.util.List;
 import java.util.stream.Stream;

@@ -1,4 +1,4 @@
-package com.nextlevel.kky.lotto;
+package com.nextlevel.kky.lotto.model;
 
 import java.util.List;
 

@@ -1,5 +1,9 @@
 package com.nextlevel.kky.lotto;
 
+import com.nextlevel.kky.lotto.domain.LotteryCommission;
+import com.nextlevel.kky.lotto.domain.LottoShop;
+import com.nextlevel.kky.lotto.model.Lotto;
+import com.nextlevel.kky.lotto.model.WinningStatistics;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
