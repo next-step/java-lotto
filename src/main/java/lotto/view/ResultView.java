@@ -4,8 +4,8 @@ import lotto.domain.*;
 
 public class ResultView {
 
-    public static void printLottoList(int selfLottoCount, Lottos lottos) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", selfLottoCount, lottos.size());
+    public static void printLottoList(Positive selfLottoCount, Lottos lottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", selfLottoCount.get(), lottos.size().get());
         lottos.forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 

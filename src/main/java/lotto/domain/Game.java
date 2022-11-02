@@ -22,14 +22,13 @@ public class Game {
     private Lottos createLottoList(Positive count) {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < count.get(); i++) {
-            result.add(new Lotto(lottoPublisher.get()));
+            result.add(lottoPublisher.get());
         }
         return new Lottos(result);
     }
 
     public LottoResult play(Lotto winNumbers, LottoNumber bonusNumber) {
-        List<Prize> prizes = lottos.winPrizes(winNumbers, bonusNumber);
-        return new LottoResult(prizes);
+        return lottos.winPrizes(winNumbers, bonusNumber);
     }
 
     public Lottos getLottos() {

@@ -12,10 +12,10 @@ public class RandomLottoPublisher implements LottoPublisher {
     }
 
     @Override
-    public List<LottoNumber> get() {
+    public Lotto get() {
         Collections.shuffle(allNumbers);
         List<LottoNumber> result = new ArrayList<>(allNumbers.subList(0, Lotto.COUNT));
         Collections.sort(result);
-        return result;
+        return new Lotto(result);
     }
 }

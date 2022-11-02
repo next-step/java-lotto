@@ -17,17 +17,17 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
-    public List<Prize> winPrizes(Lotto winNumbers, LottoNumber bonusNumber) {
-        return list.stream()
+    public LottoResult winPrizes(Lotto winNumbers, LottoNumber bonusNumber) {
+        return new LottoResult(list.stream()
                 .map(lotto -> lotto.matches(winNumbers, bonusNumber))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public void forEach(Consumer<? super Lotto> consumer) {
         list.forEach(consumer);
     }
 
-    public int size() {
-        return list.size();
+    public Positive size() {
+        return new Positive(list.size());
     }
 }

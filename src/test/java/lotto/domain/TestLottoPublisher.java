@@ -18,7 +18,7 @@ public class TestLottoPublisher implements LottoPublisher {
     }
 
     @Override
-    public List<LottoNumber> get() {
-        return lottoList.get(counter++ % lottoList.size()).getNumbers();
+    public Lotto get() {
+        return new Lotto(lottoList.get(counter++ % lottoList.size()).getNumbers());
     }
 }

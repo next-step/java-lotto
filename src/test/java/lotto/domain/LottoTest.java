@@ -17,48 +17,48 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호 모두 일치")
     void matches_all() {
-        Lotto lotto = new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20));
-        Prize result = lotto.matches(new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20)), new LottoNumber(45));
+        Lotto lotto = LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20);
+        Prize result = lotto.matches(LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20), new LottoNumber(45));
         assertThat(result).isEqualTo(Prize.SIX);
     }
 
     @Test
     @DisplayName("로또 번호 5개 일치, 보너스 일치")
     void matches_5_bonus() {
-        Lotto lotto = new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 15, 18, 45));
-        Prize result = lotto.matches(new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 15, 18, 20)), new LottoNumber(45));
+        Lotto lotto = LottoTestUtil.toLottoNumberList(1, 10, 13, 15, 18, 45);
+        Prize result = lotto.matches(LottoTestUtil.toLottoNumberList(1, 10, 13, 15, 18, 20), new LottoNumber(45));
         assertThat(result).isEqualTo(Prize.FIVE_BONUS);
     }
 
     @Test
     @DisplayName("로또 번호 5개 일치")
     void matches_5() {
-        Lotto lotto = new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20));
-        Prize result = lotto.matches(new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 15, 18, 20)), new LottoNumber(45));
+        Lotto lotto = LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20);
+        Prize result = lotto.matches(LottoTestUtil.toLottoNumberList(1, 10, 13, 15, 18, 20), new LottoNumber(45));
         assertThat(result).isEqualTo(Prize.FIVE);
     }
 
     @Test
     @DisplayName("로또 번호 4개 일치")
     void matches_4() {
-        Lotto lotto = new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20));
-        Prize result = lotto.matches(new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 11, 15, 18, 20)), new LottoNumber(45));
+        Lotto lotto = LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20);
+        Prize result = lotto.matches(LottoTestUtil.toLottoNumberList(1, 10, 11, 15, 18, 20), new LottoNumber(45));
         assertThat(result).isEqualTo(Prize.FOUR);
     }
 
     @Test
     @DisplayName("로또 번호 3개 일치")
     void matches_3() {
-        Lotto lotto = new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20));
-        Prize result = lotto.matches(new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 11, 15, 17, 20)), new LottoNumber(45));
+        Lotto lotto = LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, 20);
+        Prize result = lotto.matches(LottoTestUtil.toLottoNumberList(1, 10, 11, 15, 17, 20), new LottoNumber(45));
         assertThat(result).isEqualTo(Prize.THREE);
     }
 
     @Test
     @DisplayName("로또 번호 1개 일치, 상금 없음")
     void matches_1() {
-        Lotto lotto = new Lotto(LottoTestUtil.toLottoNumberList(1, 9, 13, 16, 18, 20));
-        Prize result = lotto.matches(new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 11, 15, 17, 20)), new LottoNumber(45));
+        Lotto lotto = LottoTestUtil.toLottoNumberList(1, 9, 13, 16, 18, 20);
+        Prize result = lotto.matches(LottoTestUtil.toLottoNumberList(1, 10, 11, 15, 17, 20), new LottoNumber(45));
         assertThat(result).isEqualTo(Prize.NONE);
     }
 
@@ -66,7 +66,7 @@ public class LottoTest {
     @DisplayName("범위보다 큰 숫자의 로또 번호 입력 불가")
     void big_number() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Lotto(LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, LottoNumber.MAX + 1)))
+                .isThrownBy(() -> LottoTestUtil.toLottoNumberList(1, 10, 13, 16, 18, LottoNumber.MAX + 1))
                 .withMessageContaining("사이의 값이어야 합니다");
     }
 
@@ -74,7 +74,7 @@ public class LottoTest {
     @DisplayName("범위보다 작은 숫자의 로또 번호 입력 불가")
     void small_number() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Lotto(LottoTestUtil.toLottoNumberList(LottoNumber.MIN - 1, 10, 13, 16, 18, 40)))
+                .isThrownBy(() -> LottoTestUtil.toLottoNumberList(LottoNumber.MIN - 1, 10, 13, 16, 18, 40))
                 .withMessageContaining("사이의 값이어야 합니다");
     }
 

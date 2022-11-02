@@ -14,9 +14,8 @@ public class RandomLottoPublisherTest {
     void random() {
         RandomLottoPublisher publisher = new RandomLottoPublisher();
         for (int i = 0; i < 100; i++) {
-            List<LottoNumber> result = publisher.get();
-            assertThat(result)
-                    .hasSize(6)
+            Lotto result = publisher.get();
+            assertThat(result.getNumbers())
                     .matches(this::isNumberListSorted)
                     .allMatch(number -> number.smallerThan(LottoNumber.MAX + 1))
                     .allMatch(number -> number.biggerThan(LottoNumber.MIN - 1));
