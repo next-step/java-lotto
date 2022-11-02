@@ -1,13 +1,12 @@
 package lotto;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String AMOUNT_INPUT = "구입금액을 입력해 주세요.";
     private static final String LAST_WEEK_WINNER_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String STATS_RESULT = "당첨 통계";
     private static final String INDICATOR = "----------";
 
@@ -29,6 +28,10 @@ public class ResultView {
 
     public static void inputWinnerLotto() {
         System.out.println(LAST_WEEK_WINNER_LOTTO);
+    }
+
+    public static void inputBonusNumber() {
+        System.out.println(BONUS_NUMBER);
     }
 
     public static void result(MyRank myRank) {

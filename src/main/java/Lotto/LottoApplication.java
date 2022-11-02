@@ -38,6 +38,7 @@ public class LottoApplication {
     }
 
     private static void showLottoNumbers() {
+        ResultView.printLine();
         for (Lotto lotto : myLotto) {
             ResultView.showLottoNumbers(lotto.getSortedNumbers());
         }
@@ -47,11 +48,13 @@ public class LottoApplication {
     private static void makeWinnerLotto() {
         ResultView.inputWinnerLotto();
         String values = InputView.inputString();
+        ResultView.inputBonusNumber();
+        int bonusNumber = InputView.inputInteger();
         List<LottoNumber> numbers = Arrays.stream(values.split(","))
                 .map(Integer::parseInt)
                 .map(number -> new LottoNumber(number))
                 .collect(Collectors.toList());
-        winnerLotto = new Lotto(numbers);
+        winnerLotto = new Lotto(numbers, bonusNumber);
     }
 
     private static void showResult() {
