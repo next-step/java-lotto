@@ -17,11 +17,11 @@ public class WinningsCalculatorTest {
                 LottoResult.THIRD_PRIZE,
                 LottoResult.FOURTH_PRIZE,
                 LottoResult.FIFTH_PRIZE))).isEqualTo(
-                        LottoResult.FIRST_PRIZE.getReward()
-                                + LottoResult.SECOND_PRIZE.getReward()
-                                + LottoResult.THIRD_PRIZE.getReward()
-                                + LottoResult.FOURTH_PRIZE.getReward()
-                                + LottoResult.FIFTH_PRIZE.getReward());
+                LottoResult.FIRST_PRIZE.getReward()
+                        + LottoResult.SECOND_PRIZE.getReward()
+                        + LottoResult.THIRD_PRIZE.getReward()
+                        + LottoResult.FOURTH_PRIZE.getReward()
+                        + LottoResult.FIFTH_PRIZE.getReward());
     }
 
     @Test

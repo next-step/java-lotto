@@ -39,7 +39,6 @@ public class LottosTest {
     }
 
 
-
     @Test
     void 원하는_갯수만큼_로또번호를_발행() {
         assertThat(new Lottos(2).getSize()).isEqualTo(2);
