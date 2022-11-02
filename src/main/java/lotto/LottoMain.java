@@ -2,7 +2,8 @@ package lotto;
 
 public class LottoMain {
     public static void main(String[] args) {
-        LottoMachine lottoMachine = new LottoMachine(Money.of(InputView.inputMoney()));
+        Money money = Money.of(InputView.inputMoney());
+        LottoMachine lottoMachine = new LottoMachine(money);
         Lottos manualLottos = new Lottos();
         int willBuyManualLottoCount = InputView.inputWillBuyManualLottoCount();
         if (lottoMachine.canBuyLotto(willBuyManualLottoCount)) {
@@ -17,7 +18,7 @@ public class LottoMain {
                 .bonusBall(InputView.inputBonusBall())
                 .build();
 
-        Statistic statistic = lottoMachine.calculateStatistic(manualLottos, autoLottos, winningLotto);
+        Statistic statistic = lottoMachine.calculateStatistic(money, winningLotto, manualLottos, autoLottos);
         OutputView.outputStatistics(statistic);
     }
 }

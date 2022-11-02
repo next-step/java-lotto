@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoMachine {
-    private final Money orginal;
     private int canBuyLottoCount;
 
     public LottoMachine(Money money) {
-        orginal = money;
         this.canBuyLottoCount = money.countBy(Lotto.PRICE);
     }
 
@@ -33,11 +31,12 @@ public class LottoMachine {
         return lottos;
     }
 
-    public Statistic calculateStatistic(Lottos manualLottos, Lottos autoLottos, WinningLotto winningLotto) {
+    public Statistic calculateStatistic(Money money, WinningLotto winningLotto, Lottos... lottoArray) {
         Lottos lottos = new Lottos();
-        lottos.addAll(manualLottos);
-        lottos.addAll(autoLottos);
+        for (Lottos lotto : lottoArray) {
+            lottos.addAll(lotto);
+        }
         Map<Winning, Integer> matching = lottos.matching(winningLotto);
-        return new Statistic(orginal, matching);
+        return new Statistic(money, matching);
     }
 }
