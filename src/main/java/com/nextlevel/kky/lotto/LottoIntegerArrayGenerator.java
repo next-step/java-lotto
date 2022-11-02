@@ -12,7 +12,6 @@ public class LottoIntegerArrayGenerator implements IntegerArrayGenerator {
 
     @Override
     public List<Integer> getIntegerArray() {
-        Collections.sort(LOTTO_NUMBERS);
         Collections.shuffle(LOTTO_NUMBERS);
         return new ArrayList<>(LOTTO_NUMBERS.subList(0, 6));
     }
