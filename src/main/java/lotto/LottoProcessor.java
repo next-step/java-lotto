@@ -18,14 +18,16 @@ public class LottoProcessor {
     }
 
     public static void printLotto(Lotto lotto) {
-        lotto.generateLottoNumbers();
+        lotto.generateNumbers();
         lotto.printNumbers();
     }
 
-    public static void getWinningStats(Lotto lotto) {
+    public static String inputLastWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String inputNumbers = SCANNER.nextLine();
+        return SCANNER.nextLine();
+    }
 
+    public static void getWinningStats(String inputNumbers, Lotto lotto) {
         LottoWinningStats lottoWinningStats = new LottoWinningStats(getWinningNumbers(inputNumbers), lotto);
         lottoWinningStats.calculateWinningStats();
         lottoWinningStats.calculateWinningCounts();

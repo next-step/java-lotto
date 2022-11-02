@@ -6,6 +6,8 @@ public class Main {
         Lotto lotto = new Lotto(purchaseAmount);
 
         LottoProcessor.printLotto(lotto);
-        LottoProcessor.getWinningStats(lotto);
+
+        String winningNumbers = LottoProcessor.inputLastWinningNumbers();
+        LottoProcessor.getWinningStats(winningNumbers, lotto);
     }
 }

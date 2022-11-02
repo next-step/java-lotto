@@ -22,7 +22,7 @@ public class Lotto {
         allNumbers = IntStream.range(1, LAST_NUMBER + 1).boxed().collect(Collectors.toList());
     }
 
-    public void generateLottoNumbers() {
+    public void generateNumbers() {
         for (int i=0 ; i<purchaseCount ; i++) {
             Collections.shuffle(allNumbers);
             List<Integer> newNumbers = new ArrayList<>(List.copyOf(allNumbers.subList(0, TOTAL_NUMBERS)));
