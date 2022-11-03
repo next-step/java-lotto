@@ -4,30 +4,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomLottoFactory implements LottoFactory {
+public class RandomLottoFactory {
 
 	private static final int FIRST_NUM = 1;
 	private static final int MAX_NUM = 45;
 	private static final int LAST_NUM = 6;
-	private static final List<Integer> TOTAL_LOTTO = new ArrayList<Integer>();
+	private static final List<Integer> LOTTO_NUMBERS_POOL = new ArrayList<>();
 
-	private void lottoField() {
+	static {
 		for (int i = FIRST_NUM; i <= MAX_NUM; i++) {
-			TOTAL_LOTTO.add(i);
+			LOTTO_NUMBERS_POOL.add(i);
 		}
 	}
 
-	@Override
-	public List<Integer> getLottoNum() {
-		lottoField();
+	public List<Integer> randomLotto() {
 		List<Integer> lottoSet = new ArrayList<>();
-		Collections.shuffle(TOTAL_LOTTO);
+		Collections.shuffle(LOTTO_NUMBERS_POOL);
 
 		for (int i = FIRST_NUM; i <= LAST_NUM; i++) {
-			lottoSet.add(TOTAL_LOTTO.get(i));
+			lottoSet.add(LOTTO_NUMBERS_POOL.get(i));
 		}
 
 		Collections.sort(lottoSet);
 		return lottoSet;
 	}
+
 }

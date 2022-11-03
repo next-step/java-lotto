@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashMap;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.MoneyException;
@@ -54,6 +55,15 @@ public class PaymentTest {
 
 		assertThat(String.format("%.2f", payment.calculateBenefit(money, totalCountMap))).isEqualTo(
 			"0.36");
+	}
+
+	@Test
+	@DisplayName("전체티켓 - 수동 티켓 = 자동티켓")
+	void 수동티켓() {
+		Payment payment = new Payment();
+		int totalTicket = 14;
+		int handTicket =  3;
+		assertThat(payment.autoTicket(totalTicket, handTicket)).isEqualTo(11);
 	}
 
 }

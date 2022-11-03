@@ -1,36 +1,26 @@
 package step2.model;
 
-import java.util.List;
-import java.util.Objects;
+import static step2.model.LottoNumbers.randomNumbers;
 
 public class Lotto {
 
-	private List<Integer> numbers;
+	private LottoNumbers lottoNumbers;
 
-	public Lotto(LottoFactory lottoFactory) {
-		this(lottoFactory.getLottoNum());
+
+	private Lotto(LottoNumbers lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
 	}
 
-	public Lotto(List<Integer> numbers) {
-		this.numbers = numbers;
+	public LottoNumbers getLotto() {
+		return lottoNumbers;
 	}
 
-	public List<Integer> getLotto() {
-		return numbers;
+	public static Lotto randomLotto() {
+		return new Lotto(randomNumbers());
 	}
 
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		Lotto lotto = (Lotto) o;
-		return Objects.equals(numbers, lotto.numbers);
+	public static Lotto handLotto(LottoNumbers lottoNumbers){
+		return new Lotto(lottoNumbers);
 	}
 
-	public int hashCode() {
-		return Objects.hash(numbers);
-	}
 }

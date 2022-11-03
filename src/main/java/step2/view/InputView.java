@@ -1,10 +1,13 @@
 package step2.view;
 
+import static java.lang.Integer.parseInt;
+
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Scanner;
 import step2.exception.IllegalNumberException;
+import step2.model.LottoNumbers;
 
 public class InputView {
 
@@ -24,6 +27,15 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
+	public int askForHand() {
+		System.out.println("수동으로 구매할 로또 수를 입력해주세요");
+		return scanner.nextInt();
+	}
+
+	public void askHandNumber() {
+		System.out.println("수동으로 구매할 로또 번호를 입력해주세요");
+	}
+
 	private String[] askWinNumber() {
 		System.out.println("지난 주 당첨 번호를 입력하세요");
 		return scanner.next().split(DELIMITER);
@@ -36,20 +48,43 @@ public class InputView {
 
 	public List<Integer> winNumber() {
 		for (String inputNumber : askWinNumber()) {
-			isValid(Integer.parseInt(inputNumber));
-			winNumber.add(Integer.parseInt(inputNumber));
+			isRangeValid(parseInt(inputNumber));
+			winNumber.add(parseInt(inputNumber));
 		}
 
-		if (winNumber.size() != TOTAL_SIZE) {
-			throw new IllegalNumberException("6개의 숫자를 입력하세요");
-		}
-
+		isCountValid(winNumber.size());
 		return winNumber;
 	}
 
-	private void isValid(int inputNumber) {
+	private List<Integer> handNumber() {
+		List<Integer> handNumber = new ArrayList<>();
+		for (String inputNumber : scanner.next().split(DELIMITER)) {
+			isRangeValid(parseInt(inputNumber));
+			handNumber.add(parseInt(inputNumber));
+		}
+		isCountValid(handNumber.size());
+
+		return handNumber;
+	}
+
+	public List<LottoNumbers> handNumbers(int handTicket) {
+		List<LottoNumbers> handNumbers = new ArrayList<>();
+		for (int i = 0; i < handTicket; i++) {
+			handNumbers.add(
+				LottoNumbers.handNumbers(handNumber()));
+		}
+		return handNumbers;
+	}
+
+	private void isRangeValid(int inputNumber) {
 		if (inputNumber < MIN_NUMBER || inputNumber > MAX_NUMBER) {
 			throw new IllegalNumberException("1~45안의 숫자를 골라주세요");
+		}
+	}
+
+	private void isCountValid(int inputSize) {
+		if (inputSize != TOTAL_SIZE) {
+			throw new IllegalNumberException("6개의 숫자를 입력하세요");
 		}
 	}
 
