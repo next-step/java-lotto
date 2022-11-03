@@ -30,7 +30,7 @@ public class Lotto {
         SortedSet<LottoNumber> lottos = new TreeSet<>();
 
         for (String number : numbers.split(",")) {
-            lottos.add(new LottoNumber(parseInt(number)));
+            lottos.add(LottoNumberGenerator.getNumber(parseInt(number)));
         }
         return lottos;
     }
