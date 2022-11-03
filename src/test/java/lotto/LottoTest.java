@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.Lotto;
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.ErrorMessage;
 
 class LottoTest {
 
@@ -23,6 +25,14 @@ class LottoTest {
 			Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 7, 8, 9), 3),
 			Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 7, 8, 9, 10), 2),
 			Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 7, 8, 9, 10, 11), 1)
+		);
+	}
+
+	static Stream<Arguments> providerOfDuplicatedLottoArguments() {
+		return Stream.of(
+			Arguments.arguments(List.of(1, 1, 3, 4, 5, 6)),
+			Arguments.arguments(List.of(1, 2, 3, 3, 3, 6)),
+			Arguments.arguments(List.of(1, 2, 6, 6, 6, 6))
 		);
 	}
 
@@ -55,6 +65,17 @@ class LottoTest {
 		Lotto lotto = new Lotto(lottoNumbers);
 
 		assertThat(lotto.getMatchingCount(winningNumbers)).isEqualTo(expected);
+	}
+
+	@DisplayName("중복된 숫자가 있으면 중복 예외를 던진다.")
+	@ParameterizedTest
+	@MethodSource("providerOfDuplicatedLottoArguments")
+	void Should_Throw_Duplicate_Exception_When_Lotto_Has_Duplicated_Number(
+		List<Integer> duplicatedNumbers) {
+		assertThatThrownBy(() -> {
+			Lotto lotto = new Lotto(duplicatedNumbers);
+		}).isInstanceOf(DuplicateLottoNumberException.class)
+			.hasMessage(ErrorMessage.LOTTO_NUMBERS_MUST_NOT_BE_DUPLICATED.getMessage());
 	}
 
 }

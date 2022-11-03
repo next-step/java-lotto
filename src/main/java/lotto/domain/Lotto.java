@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.exception.DuplicateLottoNumberException;
 import lotto.exception.ErrorMessage;
 import lotto.exception.InvalidLottoNumberQuantityException;
 
@@ -22,11 +23,18 @@ public class Lotto implements LottoGenerate {
 		if (!isValidNumbersSize(numbers)) {
 			throw new InvalidLottoNumberQuantityException(ErrorMessage.LOTTO_NUMBERS_QUANTITY_MUST_BE_SIX);
 		}
+		if (!isValidDistinctNumbers(numbers)) {
+			throw new DuplicateLottoNumberException(ErrorMessage.LOTTO_NUMBERS_MUST_NOT_BE_DUPLICATED);
+		}
 		this.numbers = numbers;
 	}
 
 	private boolean isValidNumbersSize(List<Integer> numbers) {
 		return numbers.size() == LOTTO_NUMBER_QUANTITY;
+	}
+
+	private boolean isValidDistinctNumbers(List<Integer> numbers) {
+		return numbers.size() == numbers.stream().distinct().count();
 	}
 
 	public List<Integer> generate() {
