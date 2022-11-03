@@ -25,7 +25,7 @@ public class RankTest {
 
     @Test
     void 당첨된_랭킹_가져오기() {
-        Lotto winner = new Lotto(numbers(1, 7));
+        WinningLotto winner = new WinningLotto(numbers(1, 7), 7);
         Lotto myLotto = new Lotto(numbers(1, 7));
 
         assertThat(Rank.getRank(winner, myLotto)).isEqualTo(Rank.FIRST);

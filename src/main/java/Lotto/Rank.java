@@ -25,7 +25,7 @@ public enum Rank {
         return Rank.NONE;
     }
 
-    public static Rank getRank(Lotto winner, Lotto myLotto) {
+    public static Rank getRank(WinningLotto winner, Lotto myLotto) {
         return RankOf(winner.correctCount(myLotto), winner.matchedBonus(myLotto));
     }
 

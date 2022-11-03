@@ -9,7 +9,7 @@ public class LottoApplication {
     private static final int LOTTO_PRICE = 1000;
 
     private static final List<Lotto> myLotto = new ArrayList<>();
-    private static Lotto winnerLotto;
+    private static WinningLotto winnerLotto;
     private static double paidAmount;
 
     public static void main(String[] args) {
@@ -54,7 +54,7 @@ public class LottoApplication {
                 .map(Integer::parseInt)
                 .map(number -> new LottoNumber(number))
                 .collect(Collectors.toList());
-        winnerLotto = new Lotto(numbers, bonusNumber);
+        winnerLotto = new WinningLotto(numbers, bonusNumber);
     }
 
     private static void showResult() {
