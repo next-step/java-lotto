@@ -21,14 +21,14 @@ public class WinningLotto {
 		return new WinningLotto(winLottoNumber, bonusNumber);
 	}
 
-	public int countOfMatch(List<Integer> lotto) {
+	public int countOfMatch(LottoNumbers lottoNumbers) {
 		return (int) winLottoNumber.stream()
-			.filter(lotto::contains)
+			.filter(lottoNumbers::contains)
 			.count();
 	}
 
-	public boolean isBonus(List<Integer> lotto) {
-		return lotto.contains(bonusNumber);
+	public boolean isBonus(LottoNumbers lottoNumbers) {
+		return lottoNumbers.contains(bonusNumber);
 	}
 }
 

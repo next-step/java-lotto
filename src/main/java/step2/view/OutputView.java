@@ -49,7 +49,10 @@ public class OutputView {
 
 	public void showLotteries(int tickets, Lotteries lotteries) {
 		for (int i = DEFAULT_COUNT; i < tickets; i++) {
-			System.out.println(lotteries.showLotteries(i).getLotto());
+			System.out.println(lotteries
+				.showLotteries(i)
+				.getLotto()
+				.getLottoNumbers());
 		}
 	}
 

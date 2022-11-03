@@ -1,14 +1,10 @@
 package step2.controller;
 
-import static step2.model.Lotteries.handLotteries;
-import static step2.model.Lotto.handLotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import step2.model.Lotteries;
-import step2.model.Lotto;
+import step2.model.LottoNumbers;
 import step2.model.Payment;
 import step2.model.Rank;
 import step2.view.InputView;
@@ -20,7 +16,6 @@ public class LottoController {
 	private static final InputView INPUT_VIEW = new InputView();
 	private Payment payment = new Payment();
 
-
 	public void startLotto() {
 
 		int money = INPUT_VIEW.askMoneyForLotto();
@@ -31,11 +26,11 @@ public class LottoController {
 		int autoTicket = payment.autoTicket(totalTicket, handTicket);
 		INPUT_VIEW.askHandNumber();
 
-		for (int i = 0; i < handTicket; i++) {
-			handLotteries(handLotto(INPUT_VIEW.handNumber()));
-		}
+		List<LottoNumbers> handNumbers = INPUT_VIEW.handNumbers(handTicket);
 
 		Lotteries lotteries = Lotteries.of(autoTicket);
+		lotteries.handLotteries(handNumbers);
+
 		OUTPUT_VIEW.showTotalTicket(handTicket, autoTicket);
 		OUTPUT_VIEW.showLotteries(totalTicket, lotteries);
 

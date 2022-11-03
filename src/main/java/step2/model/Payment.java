@@ -26,10 +26,10 @@ public class Payment {
 	}
 
 	public int autoTicket(int totalTicket, int handCount) {
-		return  totalTicket - handCount;
+		return totalTicket - handCount;
 	}
 
-	public void isValid(int handTicket,int totalTicket){
+	public void isValid(int handTicket, int totalTicket) {
 		if (handTicket > totalTicket) {
 			throw new MoneyException("금액이 부족합니다");
 		}

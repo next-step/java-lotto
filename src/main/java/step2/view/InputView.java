@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import step2.exception.IllegalNumberException;
+import step2.model.LottoNumbers;
 
 public class InputView {
 
@@ -15,7 +16,6 @@ public class InputView {
 	private static final int MAX_NUMBER = 45;
 	private static final int TOTAL_SIZE = 6;
 	private static final List<Integer> winNumber = new ArrayList<>();
-
 	private final Scanner scanner;
 
 	public InputView() {
@@ -56,7 +56,7 @@ public class InputView {
 		return winNumber;
 	}
 
-	public List<Integer> handNumber() {
+	private List<Integer> handNumber() {
 		List<Integer> handNumber = new ArrayList<>();
 		for (String inputNumber : scanner.next().split(DELIMITER)) {
 			isRangeValid(parseInt(inputNumber));
@@ -65,6 +65,15 @@ public class InputView {
 		isCountValid(handNumber.size());
 
 		return handNumber;
+	}
+
+	public List<LottoNumbers> handNumbers(int handTicket) {
+		List<LottoNumbers> handNumbers = new ArrayList<>();
+		for (int i = 0; i < handTicket; i++) {
+			handNumbers.add(
+				LottoNumbers.handNumbers(handNumber()));
+		}
+		return handNumbers;
 	}
 
 	private void isRangeValid(int inputNumber) {

@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.IllegalNumberException;
+import step2.model.LottoNumbers;
 import step2.model.WinningLotto;
 
 public class WinningLottoTest {
@@ -19,7 +20,8 @@ public class WinningLottoTest {
 		int bonusNumber = 7;
 		WinningLotto lotteryWin = WinningLotto.of(winNum, bonusNumber);
 
-		assertThat(lotteryWin.countOfMatch(Arrays.asList(1, 2, 22, 33, 41, 45)))
+		assertThat(lotteryWin.countOfMatch(
+			LottoNumbers.handNumbers(Arrays.asList(1, 2, 22, 33, 41, 45))))
 			.isEqualTo(2);
 	}
 
@@ -30,7 +32,8 @@ public class WinningLottoTest {
 		int bonusNumber = 7;
 		WinningLotto lotteryWin = WinningLotto.of(winNum, bonusNumber);
 
-		assertThat(lotteryWin.isBonus( Arrays.asList(1, 2, 5, bonusNumber, 41, 45)))
+		assertThat(lotteryWin.isBonus(
+			LottoNumbers.handNumbers(Arrays.asList(1, 2, 5, bonusNumber, 41, 45))))
 			.isEqualTo(true);
 	}
 
@@ -42,4 +45,4 @@ public class WinningLottoTest {
 		assertThatThrownBy(() -> WinningLotto.of(winNum, bonusNumber))
 			.isInstanceOf(IllegalNumberException.class);
 	}
-	}
+}

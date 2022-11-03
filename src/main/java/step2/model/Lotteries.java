@@ -6,6 +6,7 @@ import static step2.model.Lotto.randomLotto;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lotteries {
 
@@ -14,7 +15,7 @@ public class Lotteries {
 
 	private HashMap<Rank, Integer> totalMatch;
 
-	private static List<Lotto> lotteries = new ArrayList<>();
+	private List<Lotto> lotteries;
 
 	private Lotteries(List<Lotto> lotteries, HashMap<Rank, Integer> totalMatch) {
 		this.lotteries = lotteries;
@@ -22,7 +23,9 @@ public class Lotteries {
 	}
 
 	public static Lotteries of(int autoTicket) {
+
 		HashMap<Rank, Integer> totalMatch = new HashMap<>();
+		List<Lotto> lotteries = new ArrayList<>();
 
 		for (int ticket = DEFAULT_MIN_LENGTH; ticket < autoTicket; ticket++) {
 			lotteries.add(randomLotto());
@@ -52,8 +55,16 @@ public class Lotteries {
 		return lotteries.get(i);
 	}
 
-	public static void handLotteries(Lotto handLotto) {
-		lotteries.add(handLotto);
+	public void handLotteries(LottoNumbers handNumber) {
+		lotteries.add(handLotto(handNumber));
 	}
+
+	public void handLotteries(List<LottoNumbers> handNumbers) {
+		AtomicInteger index = new AtomicInteger();
+		handNumbers.stream()
+			.forEach(handNumber ->
+				lotteries.add(index.getAndIncrement(), handLotto(handNumber)));
+	}
+
 
 }
