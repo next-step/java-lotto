@@ -6,10 +6,10 @@ import lotto.exception.ErrorMessage;
 import lotto.exception.InvalidMatchCountException;
 
 public enum Reward {
-	THREE_MATCH_REWARD(3, 5000),
-	FOUR_MATCH_REWARD(4, 50000),
-	FIVE_MATCH_REWARD(5, 1500000),
-	SIX_MATCH_REWARD(6, 2000000000);
+	THREE_MATCH_REWARD(3, 5_000),
+	FOUR_MATCH_REWARD(4, 50_000),
+	FIVE_MATCH_REWARD(5, 1_500_000),
+	SIX_MATCH_REWARD(6, 2_000_000_000);
 
 	int matchCount;
 	int money;
