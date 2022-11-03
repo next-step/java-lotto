@@ -8,10 +8,9 @@ import java.util.stream.IntStream;
 import lotto.exception.ErrorMessage;
 import lotto.exception.InvalidLottoNumberQuantityException;
 
-public class Lotto {
+public class Lotto implements LottoGenerate {
 	public static final int PRICE = 1000;
 	public static final int LOTTO_NUMBER_QUANTITY = 6;
-	public final List<Integer> candidates = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
 	private final List<Integer> numbers;
 
@@ -30,7 +29,11 @@ public class Lotto {
 		return numbers.size() == LOTTO_NUMBER_QUANTITY;
 	}
 
-	private List<Integer> generate() {
+	public List<Integer> generate() {
+		final List<Integer> candidates = IntStream.rangeClosed(1, 45)
+			.boxed()
+			.collect(Collectors.toList());
+
 		Collections.shuffle(candidates);
 
 		return candidates.subList(0, LOTTO_NUMBER_QUANTITY);
