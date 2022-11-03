@@ -7,7 +7,6 @@ import java.util.List;
 public class LottoStatics {
 
     public static BigDecimal calculate(List<Lotto> lottoList) {
-
         BigDecimal sum = lottoList.stream()
                 .map(x -> x.getRank().getAmount()
                         .add(x.getRank().getAmount()))

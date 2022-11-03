@@ -56,7 +56,7 @@ public class Lotto {
     @Override
     public String toString() {
         return "Lotto{" +
-                "numberList=" + lottoBalls +
+                "lottoBalls=" + lottoBalls +
                 ", rank=" + rank +
                 '}';
     }
