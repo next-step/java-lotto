@@ -1,4 +1,4 @@
-package step3.model.winning;
+package step3.model.result;
 
 import java.util.Arrays;
 import java.util.stream.Stream;

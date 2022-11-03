@@ -1,15 +1,15 @@
-package step3.model;
+package step3.model.amount;
 
 import step3.exception.BadRequestException;
 import step3.util.NumberUtil;
 
 public class Amount {
 
-	private static final int LOTTE_PRICE = 1000;
+	private static final int LOTTE_PRICE = 1000;		// 로또 가격
 
-	private final int purchase;
-	private final int manualCount;
-	private final int automaticCount;
+	private final int purchase;						// 구입금액
+	private final int manualCount;					// 수동 로또 개수
+	private final int automaticCount;				// 자동 로또 개수
 
 	public Amount(int purchase, int manualCount) {
 		checkPurchase(purchase);
