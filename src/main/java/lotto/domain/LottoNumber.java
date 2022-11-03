@@ -43,6 +43,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return this.number < lottoNumber.number;
     }
 
+    public int get() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         assert o instanceof LottoNumber;

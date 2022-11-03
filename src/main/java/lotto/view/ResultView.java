@@ -2,11 +2,22 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.stream.Collectors;
+
 public class ResultView {
 
     public static void printLottoList(Positive selfLottoCount, Lottos lottos) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", selfLottoCount.get(), lottos.size().get());
-        lottos.forEach(lotto -> System.out.println(lotto.getNumbers()));
+        lottos.forEach(ResultView::printLottoNumbers);
+    }
+
+    private static void printLottoNumbers(Lotto lotto) {
+        String numbers = lotto.getNumbers()
+                .stream()
+                .map(LottoNumber::get)
+                .map(number -> Integer.toString(number))
+                .collect(Collectors.joining(", "));
+        System.out.println("[" + numbers + "]");
     }
 
     public static void printResult(LottoResult result) {
