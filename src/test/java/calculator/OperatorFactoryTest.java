@@ -1,3 +1,5 @@
+package calculator;
+
 import calculator.operator.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
