@@ -29,10 +29,14 @@ public enum Rank {
 	public static Rank of(int countOfMatch, boolean isBonus) {
 		return Arrays.stream(Rank.values())
 			.filter(rank ->
-				rank.getCountOfMatch() == countOfMatch)
+				isMatchCount(countOfMatch, rank))
 			.filter(rank -> !rank.equals(SECOND) || isBonus)
 			.findFirst()
 			.orElse(MISS);
+	}
+
+	private static boolean isMatchCount(int countOfMatch, Rank rank) {
+		return rank.getCountOfMatch() == countOfMatch;
 	}
 
 }
