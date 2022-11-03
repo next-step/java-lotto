@@ -26,7 +26,7 @@ public class LottoApp {
         LottoNumber bonusNumber = inputView.inputBonusNumber();
 
         LottoStatistics lottoStatistics = new LottoStatistics();
-        AccordanceCount accordanceCount = lottoStatistics.collectAccordanceCount(lottos, winningNumbers);
+        AccordanceCount accordanceCount = lottoStatistics.collectAccordanceCount(lottos, winningNumbers, bonusNumber);
         resultView.printWinningStatistics(accordanceCount);
 
         double profitRatio = lottoStatistics.calculateProfitRatio(accordanceCount, purchaseMoney);

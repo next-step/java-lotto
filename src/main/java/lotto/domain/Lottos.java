@@ -18,6 +18,13 @@ public class Lottos {
             .collect(toList());
     }
 
+    public long countMatchingFiveNumberAndBonusNumber(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+        return lottos.stream()
+            .filter(lotto -> lotto.countSameNumbers(winningNumbers) == 5)
+            .filter(lotto -> lotto.containsBonusNumber(bonusNumber))
+            .count();
+    }
+
     public int getCount() {
         return lottos.size();
     }

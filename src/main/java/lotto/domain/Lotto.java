@@ -32,6 +32,10 @@ public class Lotto {
             .count();
     }
 
+    public boolean containsBonusNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return getNumbers().stream()
