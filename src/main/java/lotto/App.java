@@ -1,23 +1,25 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.view.InputView;
+import lotto.view.AutoRetryInputView;
 import lotto.view.ResultView;
-
-import java.util.List;
-import java.util.Map;
 
 public class App {
 
     public static void main(String[] args) {
-        int price = InputView.inputPrice();
+        Positive price = AutoRetryInputView.inputPrice();
+        Positive lottoCount = price.divide(Lotto.PRICE);
 
-        Game game = new Game(price / Lotto.PRICE, new RandomLottoPublisher());
-        ResultView.printLottoList(game.getLottos());
+        Positive selfCount = AutoRetryInputView.inputSelfCount(lottoCount);
+        Lottos selfLottos = AutoRetryInputView.inputSelfLottos(selfCount);
 
-        List<Integer> winNumbers = InputView.inputWinNumbers();
-        int bonusNumber = InputView.inputBonusNumber(winNumbers);
-        LottoResult result = game.play(new Lotto(winNumbers), bonusNumber);
+        Game game = new Game(lottoCount, selfLottos, new RandomLottoPublisher());
+        ResultView.printLottoList(selfLottos.size(), game.getLottos());
+
+        Lotto winNumbers = AutoRetryInputView.inputWinLotto();
+        LottoNumber bonusNumber = AutoRetryInputView.inputBonusNumber(winNumbers);
+        LottoResult result = game.play(winNumbers, bonusNumber);
+
         ResultView.printResult(result);
         ResultView.printProfit(price, result);
     }

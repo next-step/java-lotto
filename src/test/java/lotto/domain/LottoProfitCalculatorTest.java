@@ -20,7 +20,7 @@ public class LottoProfitCalculatorTest {
                 Prize.SIX, 1
         ));
 
-        float profit = new LottoProfitCalculator().calculate(1, result);
+        float profit = LottoProfitCalculator.calculate(new Positive(1), result);
         assertThat(profit).isEqualTo(
                 Prize.THREE.getValue()
                         + Prize.FOUR.getValue()
@@ -33,7 +33,7 @@ public class LottoProfitCalculatorTest {
     void calculate_zero() {
         LottoResult result = new LottoResult(Map.of(Prize.NONE, 1000));
 
-        float profit = new LottoProfitCalculator().calculate(10000, result);
+        float profit = LottoProfitCalculator.calculate(new Positive(10000), result);
         assertThat(profit).isEqualTo(0);
     }
 
@@ -42,7 +42,7 @@ public class LottoProfitCalculatorTest {
     void calculate_profit() {
         LottoResult result = new LottoResult(Map.of(Prize.FIVE, 3));
 
-        float profit = new LottoProfitCalculator().calculate(77, result);
+        float profit = LottoProfitCalculator.calculate(new Positive(77), result);
         assertThat(profit).isEqualTo((float) (Prize.FIVE.getValue() * 3) / 77);
     }
 }

@@ -1,59 +1,82 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.Positive;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int inputPrice() {
+    public static Positive inputPrice() {
         System.out.println("구입 금액을 입력해 주세요.");
-        int price = scanner.nextInt();
-        if (price <= 0) {
-            throw new IllegalArgumentException("구입 금액은 0보다 커야 합니다");
-        }
-        return price;
+        return inputSingleNumber();
     }
 
-    public static List<Integer> inputWinNumbers() {
+    public static Positive inputSelfCount(Positive lottoCount) {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Positive input = inputSingleNumber();
+        if (lottoCount.smallerThan(input)) {
+            throw new IllegalArgumentException("구매하려는 로또 수와 같거나 작아야 합니다.");
+        }
+        return input;
+    }
+
+    private static Positive inputSingleNumber() {
+        try {
+            return new Positive(scanner.nextInt());
+        } catch (InputMismatchException e) {
+            scanner.next();
+            throw new IllegalArgumentException("1개의 숫자가 입력되어야 합니다.");
+        }
+    }
+
+    public static Lottos inputSelfLottos(Positive count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        return new Lottos(IntStream.range(0, count.get())
+                .mapToObj(i -> inputLotto())
+                .collect(Collectors.toList()));
+    }
+
+    public static Lotto inputWinLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return inputLotto();
+    }
+
+    private static Lotto inputLotto() {
         String input = scanner.next();
-        Set<Integer> result = Arrays.stream(input.split(","))
+        Set<LottoNumber> result = Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
-        checkWinNumbers(result);
-        return new ArrayList<>(result);
+        return new Lotto(new ArrayList<>(result));
     }
 
-    private static void checkWinNumbers(Set<Integer> winNumbers) {
-        if (winNumbers.size() != Lotto.COUNT) {
-            throw new IllegalArgumentException("6개의 서로 다른 당첨 번호가 입력되어야 합니다.");
-        }
-    }
-
-    public static int inputBonusNumber(List<Integer> winNumbers) {
+    public static LottoNumber inputBonusNumber(Lotto winNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         int input;
         try {
             input = scanner.nextInt();
         } catch (InputMismatchException e) {
+            scanner.next();
             throw new IllegalArgumentException("1개의 보너스 번호가 입력되어야 합니다.");
         }
-        checkBonusInput(input, winNumbers);
-        return input;
+
+        LottoNumber bonusNumber = new LottoNumber(input);
+        checkBonusInput(bonusNumber, winNumbers);
+        return bonusNumber;
     }
 
-    private static void checkBonusInput(int bonusNumber, List<Integer> winNumbers) {
-        if (Lotto.MIN > bonusNumber || bonusNumber > Lotto.MAX) {
-            throw new IllegalArgumentException("입력 범위를 벗어났습니다.");
-        }
-        if (winNumbers.contains(bonusNumber)) {
+    private static void checkBonusInput(LottoNumber bonusNumber, Lotto winNumbers) {
+        if (winNumbers.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 달라야 합니다.");
         }
-
     }
 }
