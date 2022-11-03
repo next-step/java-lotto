@@ -7,16 +7,15 @@ public class Game {
     private final Lottos lottos;
     private final LottoPublisher lottoPublisher;
 
+    public Game(Positive count, LottoPublisher lottoPublisher) {
+        this(count, new Lottos(new ArrayList<>()), lottoPublisher);
+    }
+
     public Game(Positive count, Lottos selfLottos, LottoPublisher lottoPublisher) {
         this.lottoPublisher = lottoPublisher;
 
         Positive autoLottoCount = count.minus(selfLottos.size());
         this.lottos = selfLottos.concat(createLottoList(autoLottoCount));
-    }
-
-    public Game(Positive count, LottoPublisher lottoPublisher) {
-        this.lottoPublisher = lottoPublisher;
-        this.lottos = createLottoList(count);
     }
 
     private Lottos createLottoList(Positive count) {
