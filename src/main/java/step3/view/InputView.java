@@ -32,7 +32,6 @@ public class InputView {
 	}
 
 	public List<Integer> getWinningNumber() {
-		SCANNER.nextLine();
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		return splitInput(SCANNER.nextLine(), SEPARATOR);
 	}

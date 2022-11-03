@@ -3,9 +3,9 @@ package step3.view;
 import java.util.Comparator;
 import java.util.HashMap;
 
-import step3.model.Amount;
+import step3.model.amount.Amount;
 import step3.model.lotto.Lottos;
-import step3.model.winning.Rank;
+import step3.model.result.Rank;
 
 public class OutputView {
 

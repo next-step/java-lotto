@@ -29,18 +29,6 @@ public class Lottos implements Iterable<Lotto> {
 		return new Lottos(this.lottos);
 	}
 
-	public int size() {
-		return this.lottos.size();
-	}
-
-	public Lotto get(int index) {
-		return this.lottos.get(index);
-	}
-
-	public List<Lotto> getLottos() {
-		return this.lottos;
-	}
-
 	@Override
 	public Iterator<Lotto> iterator() {
 		return lottos.iterator();
