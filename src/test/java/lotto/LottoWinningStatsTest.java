@@ -40,6 +40,20 @@ public class LottoWinningStatsTest {
         assertThat(lottoWinningStats.getWinningCounts().length).isEqualTo(LottoWinningStats.TOTAL_WINNING_COUNTS);
     }
 
+    @ParameterizedTest
+    @MethodSource("lottoWinningStatsParams")
+    public void getYield(List<Integer> winningNumbers, Lotto lotto) {
+        LottoWinningStats lottoWinningStats = new LottoWinningStats(winningNumbers, lotto);
+        lotto.generateNumbers();
+
+        lottoWinningStats.calculateWinningStats();
+        lottoWinningStats.calculateWinningCounts();
+
+        assertThat(lottoWinningStats.getYield()).isNotNaN();
+        assertThat(lottoWinningStats.getYield()).isInstanceOfAny(Double.class);
+
+    }
+
 
     public static Stream<Arguments> lottoWinningStatsParams() {
         return Stream.of(
