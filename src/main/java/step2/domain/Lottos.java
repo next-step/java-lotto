@@ -32,7 +32,7 @@ public class Lottos {
     public List<LottoRank> lottoRanks(WinningNumbers winningLottoNumbers) {
         return lottos.stream()
                 .map(lotto -> lotto.countMatchNumber(winningLottoNumbers))
-                .map(LottoRank::valueOf)
+                .map(LottoRank::countOfMatchNumber)
                 .collect(Collectors.toList());
     }
 

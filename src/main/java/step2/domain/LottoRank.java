@@ -19,21 +19,17 @@ public enum LottoRank {
         this.countOfMatchNumber = countOfMatchNumber;
     }
 
-    public static LottoRank valueOf(Integer countOfMatchNumber) {
+    public static LottoRank countOfMatchNumber(Integer countOfMatchNumber) {
         return Arrays.stream(values())
                 .filter(LottoRank -> LottoRank.countOfMatchNumber == countOfMatchNumber)
                 .findAny()
                 .orElse(MISS);
     }
 
-    public static int getTotalReward(List<LottoRank> lottoRankList) {
-        return lottoRankList.stream()
-                .mapToInt(LottoRank::getReward)
-                .sum();
-    }
-
     public static double getYield(List<LottoRank> lottoRanks, PurchasePrice purchasePrice) {
-        return Math.round((double) getTotalReward(lottoRanks) / purchasePrice.getPurchasePrice() * 100) / 100.0;
+        return Math.round((double) lottoRanks.stream()
+                .mapToInt(LottoRank::getReward)
+                .sum() / purchasePrice.getPurchasePrice() * 100) / 100.0;
     }
 
     public int getReward() {

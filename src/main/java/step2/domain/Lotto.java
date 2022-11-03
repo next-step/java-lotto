@@ -1,34 +1,14 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-
     private final List<Integer> numbers;
 
     public Lotto() {
-        this.numbers = createLottoNumber();
-    }
-
-    private static List<Integer> createLottoNumber() {
-        List<Integer> numbers = lottoNumberLoop();
-        Collections.shuffle(numbers);
-        Collections.sort(numbers.subList(0, 6));
-        return numbers.subList(0, 6);
-    }
-
-    private static List<Integer> lottoNumberLoop() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            numbers.add(i);
-        }
-        return numbers;
+        this.numbers = new LottoNumber().getLottoNumbers();
     }
 
     public int countMatchNumber(WinningNumbers winningNumbers) {
@@ -53,5 +33,12 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
