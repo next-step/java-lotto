@@ -1,8 +1,6 @@
-package step2;
+package step3;
 
 import static org.assertj.core.api.Assertions.*;
-
-import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,17 +20,10 @@ public class GameTest {
 	@ParameterizedTest
 	@DisplayName("구입금액에 따라 로또 개수 확인")
 	@CsvSource(value = {
-		"10:10",
-		"3:3"
+		"10000:10",
+		"3000:3"
 	}, delimiter = ':')
 	void inputAmountOfLotto(int lottoByMoney, int lotto) {
-		assertThat(Game.startRaffle(lottoByMoney).getList().size()).isEqualTo(lotto);
-	}
-
-	@Test
-	@DisplayName("지난 주 당첨 번호 생성")
-	void makeWinningNumbers() {
-		String str = "1, 2, 3, 4, 5, 6";
-		assertThat(Game.makeWinningResult(str.split(", "))).isEqualTo(Set.of(1, 2, 3, 4, 5, 6));
+		assertThat(Game.startRaffle(new LottoAmount(lottoByMoney)).lottoList().size()).isEqualTo(lotto);
 	}
 }

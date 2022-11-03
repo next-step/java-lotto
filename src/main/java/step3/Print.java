@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 import java.util.Map;
 import java.util.Set;
@@ -12,8 +12,8 @@ public class Print {
 		System.out.println(input + "개를 구매했습니다.");
 	}
 
-	public static void result(Set<Integer> result) {
-		System.out.println(result);
+	public static void result(Lotto result) {
+		System.out.println(result.getLotto());
 	}
 
 	public static void winningNumber() {
@@ -30,12 +30,28 @@ public class Print {
 		double rate = 0d;
 		Set<Map.Entry<Operator, Integer>> entries = results.entrySet();
 		for (Map.Entry<Operator, Integer> entry : entries) {
-			if (entry.getKey() != null) {
-				rate += entry.getKey().getWinning() * entry.getValue();
-				System.out.println(
-					entry.getKey().getCount() + "개 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개");
-			}
+			rate = printPrize(rate, entry);
 		}
 		System.out.println("총 수익률은 " + String.format("%.2f", (rate / amount)) + "입니다.");
+	}
+
+	private static double printPrize(double rate, Map.Entry<Operator, Integer> entry) {
+		if (entry.getKey() != null) {
+			rate += entry.getKey().getWinning() * entry.getValue();
+			System.out.println(checkBonus(entry));
+		}
+		return rate;
+	}
+
+	private static String checkBonus(Map.Entry<Operator, Integer> entry) {
+		if (entry.getKey().equals(Operator.FIVE_BONUS)) {
+			return
+				"5개 일치, 보너스 볼 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개";
+		}
+		return entry.getKey().getCount() + "개 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개";
+	}
+
+	public static void bonusBall() {
+		System.out.println("보너스 볼을 입력해 주세요.");
 	}
 }
