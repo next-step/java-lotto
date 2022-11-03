@@ -5,27 +5,24 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.Store;
+import lotto.domain.WinningLotto;
+import lotto.domain.lottogenerator.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
 
     public static void main(String[] args) {
         Money money = new Money(InputView.getMoney());
-        Store store = new Store(money);
+        Store store = new Store(new RandomLottoGenerator(), money);
         List<LottoTicket> lottoTickets = store.getLottoTickets();
 
         ResultView.viewCountOfLotto(lottoTickets.size());
         ResultView.viewLottoTickets(lottoTickets);
 
-        List<LottoNumber> winningNumbers = InputView.getWinningNumbers()
-                .stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-
-        ResultView.viewWinningStatics(new LottoResult(store.match(winningNumbers)), money);
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(InputView.getWinningNumbers()), LottoNumber.valueOf(InputView.getBonusNumber()));
+        ResultView.viewWinningStatics(new LottoResult(store.match(winningLotto)), money);
     }
 }

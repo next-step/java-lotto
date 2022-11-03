@@ -25,7 +25,7 @@ class LottoResultTest {
     @Test
     @DisplayName("Money 객체를 전달받아서 수익률 반환")
     void calculateRateOfReturn() {
-        Assertions.assertThat(lottoResult.calculateRateOfReturn(new Money(5000))).isEqualTo(400001.0f);
+        Assertions.assertThat(lottoResult.calculateRateOfReturn(new Money(5000))).isEqualTo(400010.0f);
     }
 
 }

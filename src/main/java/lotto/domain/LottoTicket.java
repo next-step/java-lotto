@@ -34,11 +34,14 @@ public class LottoTicket {
         }
     }
 
-    public Rank match(final List<LottoNumber> winningLottoTicket) {
-        int count = Math.toIntExact(this.lottoNumbers.stream()
-                .filter(winningLottoTicket::contains)
+    public int countSameNumber(final LottoTicket lottoTicket) {
+        return Math.toIntExact(this.lottoNumbers.stream()
+                .filter(lottoTicket::contains)
                 .count());
-        return Rank.of(count);
+    }
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> getLottoNumbers() {
