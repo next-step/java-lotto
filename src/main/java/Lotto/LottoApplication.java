@@ -50,7 +50,7 @@ public class LottoApplication {
         String values = InputView.inputString();
         ResultView.inputBonusNumber();
         int bonusNumber = InputView.inputInteger();
-        List<LottoNumber> numbers = Arrays.stream(values.split(","))
+        List<LottoNumber> numbers = Arrays.stream(values.replaceAll(" ", "").split(","))
                 .map(Integer::parseInt)
                 .map(number -> new LottoNumber(number))
                 .collect(Collectors.toList());
