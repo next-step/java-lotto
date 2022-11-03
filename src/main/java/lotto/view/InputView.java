@@ -30,6 +30,7 @@ public class InputView {
         try {
             return new Positive(scanner.nextInt());
         } catch (InputMismatchException e) {
+            scanner.next();
             throw new IllegalArgumentException("1개의 숫자가 입력되어야 합니다.");
         }
     }
@@ -64,6 +65,7 @@ public class InputView {
         try {
             input = scanner.nextInt();
         } catch (InputMismatchException e) {
+            scanner.next();
             throw new IllegalArgumentException("1개의 보너스 번호가 입력되어야 합니다.");
         }
 
@@ -76,6 +78,5 @@ public class InputView {
         if (winNumbers.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 달라야 합니다.");
         }
-
     }
 }
