@@ -6,7 +6,7 @@ import step2.exception.MoneyException;
 public class Payment {
 
 	private static final int LOTTO_PRICE = 1000;
-	private static final int DEFAULT_PRICE = 0;
+	private static final long DEFAULT_BENEFIT = 0L;
 
 	public int amountOfTicket(int cash) {
 		if (cash < LOTTO_PRICE) {
@@ -16,7 +16,7 @@ public class Payment {
 	}
 
 	public double calculateBenefit(int cash, HashMap<Rank, Integer> totalCount) {
-		int benefit = DEFAULT_PRICE;
+		long benefit = DEFAULT_BENEFIT;
 
 		for (Rank rank : Rank.values()) {
 			benefit += (rank.getWinningMoney() * totalCount.get(rank));

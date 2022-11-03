@@ -11,9 +11,9 @@ public enum Rank {
 	MISS(0, 0);
 
 	private int countOfMatch;
-	private int winningMoney;
+	private long winningMoney;
 
-	Rank(int countOfMatch, int winningMoney) {
+	Rank(int countOfMatch, long winningMoney) {
 		this.countOfMatch = countOfMatch;
 		this.winningMoney = winningMoney;
 	}
@@ -22,7 +22,7 @@ public enum Rank {
 		return countOfMatch;
 	}
 
-	public int getWinningMoney() {
+	public long getWinningMoney() {
 		return winningMoney;
 	}
 
