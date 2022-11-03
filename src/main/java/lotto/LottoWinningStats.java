@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWinningStats {
-    private static final int TOTAL_WINNING_COUNTS = 4; // 3개, 4개, 5개, 6개 총 4가지 케이스
+    public static final int TOTAL_WINNING_COUNTS = 4; // 3개, 4개, 5개, 6개 총 4가지 케이스
 
     private final List<Integer> winningNumbers; // 사용자로부터 입력받는 값.
     private final List<Integer> winningStats;
@@ -82,4 +82,8 @@ public class LottoWinningStats {
         }
         return (double) totalWinningAmounts / totalAmounts;
     }
+
+    public List<Integer> getWinningNumbers() { return this.winningNumbers; }
+    public List<Integer> getWinningStats() { return this.winningStats; }
+    public int[] getWinningCounts() { return this.winningCounts; }
 }
