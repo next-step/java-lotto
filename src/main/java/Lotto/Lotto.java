@@ -18,10 +18,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int correctCount(Lotto myLotto) {
-        return (int) numbers.stream().filter(myLotto.numbers::contains).count();
-    }
-
     public List<LottoNumber> getSortedNumbers() {
         return numbers.stream().sorted().collect(Collectors.toList());
     }

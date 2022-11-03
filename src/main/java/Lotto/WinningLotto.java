@@ -11,6 +11,10 @@ public class WinningLotto extends Lotto {
         validateBonusNumber();
     }
 
+    public int correctCount(Lotto myLotto) {
+        return (int) numbers.stream().filter(myLotto.numbers::contains).count();
+    }
+
     public boolean matchedBonus(Lotto myLotto) {
         return myLotto.numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
