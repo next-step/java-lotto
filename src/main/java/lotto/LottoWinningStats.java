@@ -77,7 +77,7 @@ public class LottoWinningStats {
     public double getYield() {
         int totalAmounts = this.lotto.getPurchaseCount() * Lotto.AMOUNT;
         int totalWinningAmounts = (5000 * winningCounts[0] + 50000 * winningCounts[1] + 1500000 * winningCounts[2] + 2000000000 * winningCounts[3]);
-        if(totalWinningAmounts == 0) {
+        if (totalWinningAmounts == 0) {
             return 0;
         }
         return (double) totalWinningAmounts / totalAmounts;
