@@ -1,43 +1,42 @@
 package lotto.domain;
 
 
-import static java.util.stream.Collectors.toList;
+import lotto.domain.strategy.LottoAutoConstructStrategy;
+import lotto.domain.strategy.LottoConstructStrategy;
+import lotto.domain.strategy.LottoManualConstructStrategy;
 
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
-
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 
 public class LottoList {
 
-    private static final int LOTTO_COUNT = 6;
-    private static final List<Integer> numList = IntStream
-        .rangeClosed(1, 45)
-        .boxed()
-        .collect(toList());
-    private final List<Lotto> lottos;
+    private final List<Lotto> autoLottoList;
+    private final List<Lotto> manualLottoList;
 
-    private LottoList(List<Lotto> lottoList) {
-        this.lottos = lottoList;
+    private LottoList(List<Lotto> autoLottoList, List<Lotto> manualLottoList) {
+        this.autoLottoList = autoLottoList;
+        this.manualLottoList = manualLottoList;
     }
 
-    public static LottoList of(int count) {
-        return new LottoList(IntStream.rangeClosed(1, count)
-            .mapToObj(value -> getLottoNumbers())
-            .map(Lotto::from)
-            .collect(toList()));
+    public static LottoList of(int totalCount, int manualCount) {
+        return new LottoList(new LottoAutoConstructStrategy().create(totalCount - manualCount)
+            , new LottoManualConstructStrategy().create(manualCount));
     }
 
     public List<Lotto> getLottoList() {
-        return lottos;
+        return Stream.of(autoLottoList, manualLottoList)
+            .flatMap(Collection::stream)
+            .collect(Collectors.toUnmodifiableList());
     }
 
-    private static Set<Integer> getLottoNumbers() {
-        Collections.shuffle(numList);
-        return numList.stream()
-            .limit(LOTTO_COUNT)
-            .collect(Collectors.toSet());
+    public int getAutoListCount() {
+        return autoLottoList.size();
+    }
+
+    public int getManualListCount() {
+        return manualLottoList.size();
     }
 }
