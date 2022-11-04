@@ -1,11 +1,12 @@
 package lotto;
 
+import lotto.model.Profit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.Profit.LOTTO_PRICE;
+import static lotto.model.Profit.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ProfitTest {

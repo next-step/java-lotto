@@ -1,9 +1,14 @@
 package lotto;
 
+import lotto.model.LottoGenerator;
+import lotto.model.Profit;
+import lotto.model.Winning;
+import lotto.view.InputView;
+
 import java.util.List;
 
-import static lotto.InputView.*;
-import static lotto.ResultView.*;
+import static lotto.view.InputView.*;
+import static lotto.view.ResultView.*;
 
 public class Main {
     public static void main(String[] args) {

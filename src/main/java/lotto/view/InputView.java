@@ -1,8 +1,8 @@
-package lotto;
+package lotto.view;
 
 import java.util.Scanner;
 
-import static lotto.Profit.LOTTO_PRICE;
+import static lotto.model.Profit.LOTTO_PRICE;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
