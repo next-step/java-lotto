@@ -2,9 +2,10 @@ package lotto;
 
 public enum Rank {
     NONE(0, 0),
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
+    FIFTH(3, 5000),
+    FOURTH(4, 50000),
+    THIRD(5, 1500000),
+    SECOND(5, 30000000),
     FIRST(6, 2000000000);
 
     private int correctCount;
@@ -15,16 +16,17 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank RankOf(int correctCount) {
-        if (correctCount == 6) return Rank.FIRST;
-        if (correctCount == 5) return Rank.SECOND;
-        if (correctCount == 4) return Rank.THIRD;
-        if (correctCount == 3) return Rank.FOURTH;
+    public static Rank RankOf(int correctCount, boolean matchedBonus) {
+        if (correctCount == 5 && matchedBonus) return Rank.SECOND;
+        for (Rank rank : Rank.values()) {
+            if (rank.correctCount == correctCount) return rank;
+        }
+
         return Rank.NONE;
     }
 
-    public static Rank getRank(Lotto winner, Lotto myLotto) {
-        return RankOf(winner.correctCount(myLotto));
+    public static Rank getRank(WinningLotto winner, Lotto myLotto) {
+        return RankOf(winner.correctCount(myLotto), winner.matchedBonus(myLotto));
     }
 
     public boolean isNotNone() {

@@ -1,15 +1,16 @@
 package lotto;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String AMOUNT_INPUT = "구입금액을 입력해 주세요.";
     private static final String LAST_WEEK_WINNER_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String STATS_RESULT = "당첨 통계";
     private static final String INDICATOR = "----------";
+    private static final String SECOND_RANK_MESSAGE_FORMAT = "%s개 일치, 보너스 볼 일치(%s원)- %s개";
+    private static final String MESSAGE_FORMAT = "%s개 일치, (%s원)- %s개";
 
     public static void inputAmount() { System.out.println(AMOUNT_INPUT); }
 
@@ -31,18 +32,28 @@ public class ResultView {
         System.out.println(LAST_WEEK_WINNER_LOTTO);
     }
 
+    public static void inputBonusNumber() {
+        System.out.println(BONUS_NUMBER);
+    }
+
     public static void result(MyRank myRank) {
         System.out.println(STATS_RESULT);
         System.out.println(INDICATOR);
+
         for (Rank rank : myRank.all()) {
             String msg = String.format(
-                    "%s개 일치 (%s원)- %s개",
+                    messageFormat(rank),
                     rank.getCorrectCount(),
                     rank.getPrize(),
                     myRank.getCount(rank)
             );
             System.out.println(msg);
         }
+    }
+
+    private static String messageFormat(Rank rank) {
+        if (rank == Rank.SECOND) return SECOND_RANK_MESSAGE_FORMAT;
+        return MESSAGE_FORMAT;
     }
 
     public static void printLine() {

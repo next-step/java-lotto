@@ -9,7 +9,7 @@ public class LottoApplication {
     private static final int LOTTO_PRICE = 1000;
 
     private static final List<Lotto> myLotto = new ArrayList<>();
-    private static Lotto winnerLotto;
+    private static WinningLotto winnerLotto;
     private static double paidAmount;
 
     public static void main(String[] args) {
@@ -38,6 +38,7 @@ public class LottoApplication {
     }
 
     private static void showLottoNumbers() {
+        ResultView.printLine();
         for (Lotto lotto : myLotto) {
             ResultView.showLottoNumbers(lotto.getSortedNumbers());
         }
@@ -47,11 +48,13 @@ public class LottoApplication {
     private static void makeWinnerLotto() {
         ResultView.inputWinnerLotto();
         String values = InputView.inputString();
-        List<LottoNumber> numbers = Arrays.stream(values.split(", "))
+        ResultView.inputBonusNumber();
+        int bonusNumber = InputView.inputInteger();
+        List<LottoNumber> numbers = Arrays.stream(values.replaceAll(" ", "").split(","))
                 .map(Integer::parseInt)
                 .map(number -> new LottoNumber(number))
                 .collect(Collectors.toList());
-        winnerLotto = new Lotto(numbers);
+        winnerLotto = new WinningLotto(numbers, bonusNumber);
     }
 
     private static void showResult() {

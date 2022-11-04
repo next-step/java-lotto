@@ -7,19 +7,15 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int LENGTH = 6;
 
-    private final List<LottoNumber> numbers;
-
-    Lotto(List<LottoNumber> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
-    }
+    protected final List<LottoNumber> numbers;
 
     Lotto() {
         this.numbers = randomNumbers();
     }
 
-    public int correctCount(Lotto myLotto) {
-        return (int) numbers.stream().filter(myLotto.numbers::contains).count();
+    public Lotto(List<LottoNumber> numbers) {
+        validate(numbers);
+        this.numbers = numbers;
     }
 
     public List<LottoNumber> getSortedNumbers() {
@@ -30,13 +26,11 @@ public class Lotto {
         List<LottoNumber> numbers = LottoNumber.shuffleNumbers();
         return numbers.subList(0, LENGTH);
     }
-
     private void validate(List<LottoNumber> numbers) {
-        if (numbers.stream().mapToInt(v -> v.getNumber()).distinct().count() != numbers.size()) {
+        if (numbers.stream().mapToInt(lottoNumber -> lottoNumber.getNumber()).distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("유니크한 값으로만 구성해야합니다.");
         }
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
