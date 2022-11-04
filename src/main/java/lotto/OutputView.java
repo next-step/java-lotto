@@ -1,27 +1,48 @@
 package lotto;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.StringJoiner;
 
 public class OutputView {
-    public static void printLottoes(List<SelectedLottoNumbers> lottoes) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoes.size());
-        System.out.println(lottoes);
+    public static void outputBuyLottoResult(Lottos manualLottos, Lottos autoLottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualLottos.getLottosSize(), autoLottos.getLottosSize());
+        for (Lotto lotto : manualLottos.getLottos()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[");
+            StringJoiner sj = new StringJoiner(", ");
+            for (LottoNumber lottoNumber : lotto.getLotto()) {
+                sj.add(String.valueOf(lottoNumber.getLottoNumber()));
+            }
+            sb.append(sj);
+            sb.append("]");
+            System.out.println(sb);
+        }
+        for (Lotto lotto : autoLottos.getLottos()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[");
+            StringJoiner sj = new StringJoiner(", ");
+            for (LottoNumber lottoNumber : lotto.getLotto()) {
+                sj.add(String.valueOf(lottoNumber.getLottoNumber()));
+            }
+            sb.append(sj);
+            sb.append("]");
+            System.out.println(sb);
+        }
+        System.out.println();
     }
 
-    public static void printStatistics(Statistics statistics) {
+    public static void outputStatistics(Statistic statistic) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        List<Map.Entry<RANK, Integer>> winningStats = statistics.getWinningStats()
-                .entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByKey(Comparator.comparingInt(RANK::getCountOfMatch)))
-                .collect(Collectors.toList());
-        for (Map.Entry<RANK, Integer> winningStat : winningStats) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", winningStat.getKey().getCountOfMatch(), winningStat.getKey().getWinningMoney().getMoney(), winningStat.getValue());
+        for (Statistic.MatchingResult result : statistic.getMatching()) {
+            Winning winning = result.getWinning();
+            System.out.printf("%d개 일치", winning.getMatchCount());
+            if(winning.isBonusBallUse()) {
+                System.out.print(", 보너스볼 일치");
+            }
+            System.out.printf("(%d원) - %d개\n", winning.getPrize().getMoney(), result.getCount());
         }
-        System.out.printf("총 수익률은 %f입니다.", statistics.getEarningRate());
+        System.out.printf("총 수익률은 %.2f입니다.", statistic.getEarningRate());
     }
+
+
 }
