@@ -31,6 +31,9 @@ public class Lotto {
         if (numbers.stream().mapToInt(lottoNumber -> lottoNumber.getNumber()).distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("유니크한 값으로만 구성해야합니다.");
         }
+        if (numbers.size() != LENGTH ) {
+            throw new IllegalArgumentException("로또 전체 번호는 6개여야합니다.");
+        }
     }
     @Override
     public boolean equals(Object o) {

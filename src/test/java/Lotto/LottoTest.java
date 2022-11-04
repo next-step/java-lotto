@@ -29,4 +29,9 @@ public class LottoTest {
         List<LottoNumber> notUniqueNumbers = List.of(LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(1));
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(notUniqueNumbers)).withMessageContaining("유니크한 값으로만 구성해야합니다.");
     }
+
+    @Test
+    void 로또_번호_6개_검사() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto((numbers(1, 1)))).withMessageContaining("로또 전체 번호는 6개여야합니다.");
+    }
 }
