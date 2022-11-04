@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoTest {
     private List<LottoNumber> numbers(int min, int max) {
-        return IntStream.range(min, max).boxed().map(v -> new LottoNumber(v)).collect(Collectors.toList());
+        return IntStream.range(min, max).boxed().map(v -> LottoNumber.of(v)).collect(Collectors.toList());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class LottoTest {
 
     @Test
     void 모든_번호가_유니크한_값을_갖는지_검사() {
-        List<LottoNumber> notUniqueNumbers = List.of(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1));
+        List<LottoNumber> notUniqueNumbers = List.of(LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(1), LottoNumber.of(1));
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(notUniqueNumbers)).withMessageContaining("유니크한 값으로만 구성해야합니다.");
     }
 }

@@ -52,7 +52,7 @@ public class LottoApplication {
         int bonusNumber = InputView.inputInteger();
         List<LottoNumber> numbers = Arrays.stream(values.replaceAll(" ", "").split(","))
                 .map(Integer::parseInt)
-                .map(number -> new LottoNumber(number))
+                .map(number -> LottoNumber.of(number))
                 .collect(Collectors.toList());
         winnerLotto = new WinningLotto(numbers, bonusNumber);
     }

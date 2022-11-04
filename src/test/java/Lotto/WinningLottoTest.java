@@ -39,6 +39,6 @@ public class WinningLottoTest {
     }
 
     private List<LottoNumber> numbers(int min, int max) {
-        return IntStream.range(min, max).boxed().map(v -> new LottoNumber(v)).collect(Collectors.toList());
+        return IntStream.range(min, max).boxed().map(v -> LottoNumber.of(v)).collect(Collectors.toList());
     }
 }

@@ -7,7 +7,7 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(List<LottoNumber> numbers, int bonusNumber) {
         super(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
         validateBonusNumber();
     }
 
