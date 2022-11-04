@@ -9,11 +9,8 @@ public class LottoStatistics {
     private static final long INITIAL_COUNT = 0L;
 
     public AccordanceCount collectAccordanceCount(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        List<Long> accordanceCounts = lottos.getAccordanceCounts(winningNumbers);
-        Map<WinningAccordance, Long> countsByWinningAccordance = collectEachAccordanceCount(accordanceCounts);
-
-        long countOfSecondWinningAccordance = lottos.countMatchingFiveNumberAndBonusNumber(winningNumbers, bonusNumber);
-        calculateMatchingBonusNumberCount(countsByWinningAccordance, countOfSecondWinningAccordance);
+        List<Accordance> accordances = lottos.getAccordances(winningNumbers, bonusNumber);
+        Map<WinningAccordance, Long> countsByWinningAccordance = collectEachAccordanceCount(accordances);
 
         return new AccordanceCount(countsByWinningAccordance);
     }
@@ -23,30 +20,16 @@ public class LottoStatistics {
         return (double) totalWinningPrize / purchaseMoney.getValue();
     }
 
-    private Map<WinningAccordance, Long> collectEachAccordanceCount(List<Long> accordanceCounts) {
+    private Map<WinningAccordance, Long> collectEachAccordanceCount(List<Accordance> accordances) {
         Map<WinningAccordance, Long> countsByWinningAccordance = initCountsByWinningAccordance();
-        for (long accordCount : accordanceCounts) {
+        for (Accordance accordance : accordances) {
             countsByWinningAccordance.computeIfPresent(
-                WinningAccordance.of(accordCount),
+                WinningAccordance.of(accordance),
                 (winningAccordance, count) -> count + 1L
             );
         }
 
         return countsByWinningAccordance;
-    }
-
-    private void calculateMatchingBonusNumberCount(
-        Map<WinningAccordance, Long> countsByWinningAccordance, long countOfSecondWinningAccordance
-    ) {
-        countsByWinningAccordance.computeIfPresent(
-            WinningAccordance.THIRD,
-            (winningAccordance, count) -> count - countOfSecondWinningAccordance
-        );
-
-        countsByWinningAccordance.computeIfPresent(
-            WinningAccordance.SECOND,
-            (winningAccordance, count) -> count + countOfSecondWinningAccordance
-        );
     }
 
     private Map<WinningAccordance, Long> initCountsByWinningAccordance() {

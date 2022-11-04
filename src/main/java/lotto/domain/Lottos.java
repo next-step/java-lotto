@@ -12,17 +12,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Long> getAccordanceCounts(WinningNumbers winningNumbers) {
+    public List<Accordance> getAccordances(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         return lottos.stream()
-            .map(lotto -> lotto.countSameNumbers(winningNumbers))
+            .map(lotto -> new Accordance(
+                lotto.countSameNumbers(winningNumbers),
+                lotto.containsBonusNumber(bonusNumber)
+            ))
             .collect(toList());
-    }
-
-    public long countMatchingFiveNumberAndBonusNumber(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        return lottos.stream()
-            .filter(lotto -> lotto.countSameNumbers(winningNumbers) == 5)
-            .filter(lotto -> lotto.containsBonusNumber(bonusNumber))
-            .count();
     }
 
     public int getCount() {
