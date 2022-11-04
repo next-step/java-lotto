@@ -1,6 +1,8 @@
-package lotto;
+package lotto.views;
 
 import java.util.Scanner;
+
+import lotto.LottoProcessor;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);

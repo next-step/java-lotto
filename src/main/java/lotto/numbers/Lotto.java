@@ -1,9 +1,11 @@
-package lotto;
+package lotto.numbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import lotto.numbers.AllNumbers;
 
 public class Lotto {
     public static final int TOTAL_NUMBERS_SIZE = 6;
