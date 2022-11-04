@@ -4,8 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Lotto
-{
+public class Lotto {
 
     private static final int LOTTO_COUNT = 6;
     private final Set<LottoNumber> item;
@@ -24,11 +23,14 @@ public class Lotto
             .collect(Collectors.toCollection(LinkedHashSet::new)));
     }
 
-    public void validBonusNumber(LottoNumber bonusNumber) {
+    public LottoNumber validBonusNumber(int bonusNumber) {
 
-        if (item.contains(bonusNumber)) {
+        LottoNumber lottoNumber = LottoNumber.from(bonusNumber);
+        if (item.contains(lottoNumber)) {
             throw new IllegalArgumentException("해당 번호는 이미 등록된 번호 입니다.");
         }
+
+        return lottoNumber;
     }
 
     public Set<LottoNumber> getItem() {
