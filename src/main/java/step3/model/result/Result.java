@@ -1,4 +1,4 @@
-package step3.model.winning;
+package step3.model.result;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,28 +8,29 @@ import java.util.Map;
 import step3.model.lotto.Lotto;
 import step3.model.lotto.Lottos;
 
-public class WinningResult {
+public class Result {
 
-	private final double prize;
-	private final Lotto winningLotto;
-	private final Lotto bonusLotto;
-	private final Lottos purchaseLottos;
-	private final HashMap<Rank, Integer> rankCountMap;
+	private final Lotto winningLotto;		// 당첨 로또
+	private final Lotto bonusLotto;			// 보너스 로또
+	private final Lottos purchaseLottos;		// 구입한 로또(수동 로또 + 자동 로또)
 
-	public WinningResult(int bonusNumber, Lotto winningLotto, Lottos purchaseLottos) {
+	public Result(int bonusNumber, Lotto winningLotto, Lottos manualLottos, Lottos automaticLottos) {
 		this.winningLotto = winningLotto;
-		this.purchaseLottos = purchaseLottos;
+		this.purchaseLottos = manualLottos.addAll(automaticLottos);
 		this.bonusLotto = setBonusLotto(bonusNumber);
-		this.rankCountMap = matchCountMap();
-		this.prize = calculatePrize();
 	}
 
 	public HashMap<Rank, Integer> getCountMap() {
-		return this.rankCountMap;
+		return matchCountMap();
 	}
 
-	public double getPrize() {
-		return this.prize;
+	public double calculatePrize() {
+		HashMap<Rank, Integer> rankCountMap = matchCountMap();
+		double prize = 0;
+		for (Map.Entry<Rank, Integer> rankCount : rankCountMap.entrySet()) {
+			prize += rankCount.getKey().getWinningMoney() * rankCount.getValue();
+		}
+		return prize;
 	}
 
 	private HashMap<Rank, Integer> matchCountMap() {
@@ -40,17 +41,8 @@ public class WinningResult {
 			countMap.computeIfPresent(Rank.valueOf(lotto.getMatchCount(winningLotto.getNumbers()), false), (rank, cnt) -> cnt + 1);
 			countMap.putIfAbsent(Rank.valueOf(lotto.getMatchCount(bonusLotto.getNumbers()), true), 0);
 			countMap.computeIfPresent(Rank.valueOf(lotto.getMatchCount(bonusLotto.getNumbers()), true), (rank, cnt) -> cnt + 1);
-
 		});
 		return countMap;
-	}
-
-	private double calculatePrize() {
-		double prize = 0;
-		for (Map.Entry<Rank, Integer> rankCount : rankCountMap.entrySet()) {
-			prize += rankCount.getKey().getWinningMoney() * rankCount.getValue();
-		}
-		return prize;
 	}
 
 	private Lotto setBonusLotto(int bonusNumber) {

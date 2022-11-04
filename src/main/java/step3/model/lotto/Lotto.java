@@ -16,8 +16,7 @@ public class Lotto {
 	private static final int MIN_NUMBER = 1;
 	private static final int MAX_NUMBER = 45;
 	private static final int LOTTO_SIZE = 6;
-	private static final List<Integer> AVAILABLE_NUMBERS = range(MIN_NUMBER, MAX_NUMBER + 1).boxed()
-		.collect(Collectors.toList());
+	private static final List<Integer> AVAILABLE_NUMBERS = range(MIN_NUMBER, MAX_NUMBER + 1).boxed().collect(Collectors.toList());
 
 	private final List<Integer> numbers;
 
@@ -65,19 +64,13 @@ public class Lotto {
 		if (numbersSet.size() != numbers.size()) {
 			throw new BadRequestException("로또 번호는 중복될 수 없습니다.");
 		}
-
-		for (Integer number : numbers) {
-			if (NumberUtil.isOver(number, MAX_NUMBER) || NumberUtil.isUnder(number, MIN_NUMBER)) {
-				throw new BadRequestException("로또 번호는 1 ~ 45 범위 내에 있어야 합니다.");
-			}
-		}
 	}
 
 	private void checkRange(List<Integer> numbers) {
-		for (Integer number : numbers) {
-			if (NumberUtil.isOver(number, MAX_NUMBER) || NumberUtil.isUnder(number, MIN_NUMBER)) {
-				throw new BadRequestException("로또 번호는 1 ~ 45 범위 내에 있어야 합니다.");
-			}
+		boolean isInRange = numbers.stream()
+			.allMatch(number -> NumberUtil.isInRange(number, MIN_NUMBER, MAX_NUMBER));
+		if (!isInRange) {
+			throw new BadRequestException("로또 번호는 1 ~ 45 범위 내에 있어야 합니다.");
 		}
 	}
 }

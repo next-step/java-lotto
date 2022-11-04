@@ -1,4 +1,4 @@
-package step3.model.winning;
+package step3.model.result;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -44,6 +44,6 @@ public enum Rank {
 	}
 
 	private static boolean isSecond(int countOfMatch, boolean matchBonus) {
-		return countOfMatch == 5 && matchBonus;
+		return countOfMatch == Rank.SECOND.getCountOfMatch() && matchBonus;
 	}
 }

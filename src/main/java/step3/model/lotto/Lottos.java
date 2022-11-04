@@ -7,12 +7,16 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class Lottos implements Iterable<Lotto>{
+public class Lottos implements Iterable<Lotto> {
 
-	private final List<Lotto> lottos;
+	private List<Lotto> lottos;
 
 	public Lottos(int count) {
 		this.lottos = generateLottos(count);
+	}
+
+	public Lottos(List<Lotto> lottos) {
+		this.lottos = lottos;
 	}
 
 	public List<Lotto> generateLottos(int count) {
@@ -20,12 +24,9 @@ public class Lottos implements Iterable<Lotto>{
 			.mapToObj(i -> new Lotto()).collect(Collectors.toList());
 	}
 
-	public int size() {
-		return this.lottos.size();
-	}
-
-	public Lotto get(int index) {
-		return this.lottos.get(index);
+	public Lottos addAll(Lottos temp) {
+		this.lottos.addAll(temp.lottos);
+		return new Lottos(this.lottos);
 	}
 
 	@Override

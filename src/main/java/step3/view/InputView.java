@@ -1,5 +1,6 @@
 package step3.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -15,8 +16,22 @@ public class InputView {
 		return SCANNER.nextInt();
 	}
 
-	public List<Integer> getWinningNumber() {
+	public int getManualLottoCount() {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+		return SCANNER.nextInt();
+	}
+
+	public ArrayList<List<Integer>> getManualLottos(int manualLottoCount) {
 		SCANNER.nextLine();
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		ArrayList<List<Integer>> list = new ArrayList<>();
+		for (int i = 0; i < manualLottoCount; i++) {
+			list.add(splitInput(SCANNER.nextLine(), SEPARATOR));
+		}
+		return list;
+	}
+
+	public List<Integer> getWinningNumber() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		return splitInput(SCANNER.nextLine(), SEPARATOR);
 	}

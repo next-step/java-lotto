@@ -3,16 +3,14 @@ package step3.view;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import step3.model.amount.Amount;
 import step3.model.lotto.Lottos;
-import step3.model.winning.Rank;
+import step3.model.result.Rank;
 
 public class OutputView {
 
-	private static final int MIN_MATCH_COUNT = 3;
-	private static final int MAX_MATCH_COUNT = 6;
-
-	public void printLottoCount(int lottoCount) {
-		System.out.println(lottoCount + "개를 구매했습니다.");
+	public void printLottoCount(Amount amount) {
+		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", amount.getManualCount(), amount.getAutomaticCount());
 	}
 
 	public void printLottos(Lottos lottos) {
@@ -33,7 +31,7 @@ public class OutputView {
 			.forEach(rank -> System.out.printf("%d 개 일치 (%d원)- %d개 \n", rank.getCountOfMatch(), rank.getWinningMoney(), countMap.getOrDefault(rank, 0)));
 	}
 
-	public void printYield(double prize, double amount) {
-		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", Math.floor(prize / amount * 100) / 100);
+	public void printYield(double yield) {
+		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", yield);
 	}
 }
