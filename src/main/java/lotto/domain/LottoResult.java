@@ -2,41 +2,24 @@ package lotto.domain;
 
 import lotto.constant.LottoRanking;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResult {
-    private final EnumMap<LottoRanking, Integer> lottoRankings = new EnumMap<>(LottoRanking.class);
+    private final EnumMap<LottoRanking, Integer> lottoRankings;
 
-    private long award;
-    double percentage;
-
-    public LottoResult() {
-        for(LottoRanking rank : LottoRanking.values()) {
-            this.lottoRankings.put(rank, 0);
-        }
+    public LottoResult(EnumMap<LottoRanking, Integer> lottoRankings) {
+       this.lottoRankings = lottoRankings;
     }
 
-    public void calculateLottoResult(ArrayList<LottoRanking> rank, int price){
-        for (LottoRanking lottoRanking : rank) {
-            lottoRankings.computeIfPresent(lottoRanking, (key, value) -> {
-                award += key.getAward();
-                return value + 1;
-            });
+    public double calculatePercentage(int price) {
+        double award = 0.0;
+        for (LottoRanking lottoRanking : lottoRankings.keySet()) {
+            award += lottoRanking.calculateAward(lottoRankings.get(lottoRanking));
         }
-        calculatePercentage(price);
-    }
-
-    private void calculatePercentage(int price) {
-        this.percentage = ((double) award / price);
+        return award / (double) price;
     }
 
     public Map<LottoRanking, Integer> getLottoRankings() {
         return this.lottoRankings;
-    }
-
-    public double getPercentage() {
-        return this.percentage;
     }
 }

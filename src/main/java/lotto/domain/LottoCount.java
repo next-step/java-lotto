@@ -1,15 +1,15 @@
 package lotto.domain;
 
 public class LottoCount {
-    private static final int MIN_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final int count;
 
     public LottoCount(int price) {
-        if (price < MIN_PRICE || price % MIN_PRICE != 0) {
+        if (price < LOTTO_PRICE || price % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("1000원 단위로 가능합니다.");
         }
-        this.count = price / MIN_PRICE;
+        this.count = price / LOTTO_PRICE;
     }
 
     public int getCount() {

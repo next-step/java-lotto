@@ -20,7 +20,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public void printResult(LottoResult lottoResult) {
+    public void printResult(LottoResult lottoResult, int price) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------------");
@@ -32,6 +32,6 @@ public class ResultView {
             }
         }
 
-        System.out.printf("총 수익률은 %2.02f 입니다.", lottoResult.getPercentage());
+        System.out.printf("총 수익률은 %2.02f 입니다.", lottoResult.calculatePercentage(price));
     }
 }

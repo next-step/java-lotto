@@ -1,12 +1,10 @@
 package lotto.controller;
 
-import lotto.constant.LottoRanking;
 import lotto.domain.*;
 import lotto.util.LottoUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -27,12 +25,10 @@ public class LottoController {
     private void getLottoResult(List<LottoNumbers> lottoTickets, int price) {
         String[] winningNumbers = inputView.lastWeekLottoNumbersScan();
         LottoNumber bonusNumber = new LottoNumber(inputView.bonusNumberScan());
-        LottoNumbers winLottoNumbers = new LottoNumbers(LottoUtil.ArrayToList(winningNumbers), bonusNumber);
 
-        LottoResult lottoResult = new LottoResult();
-        ArrayList<LottoRanking> lottoRankings = winLottoNumbers.matchingLottoNumbers(lottoTickets);
-        lottoResult.calculateLottoResult(lottoRankings, price);
-        resultView.printResult(lottoResult);
+        WinningLottoNumbers winLottoNumbers = new WinningLottoNumbers(new LottoNumbers(LottoUtil.CastingArrayToList(winningNumbers)), bonusNumber);
+        LottoResult lottoResult = winLottoNumbers.lottoMatchingResult(lottoTickets);
+        resultView.printResult(lottoResult, price);
     }
 
 }
