@@ -50,10 +50,9 @@ class LottoTest {
         //given
         Set<Integer> item = Sets.set(1, 2, 3, 4, 5, 6);
         Lotto lotto = Lotto.from(item);
-        LottoNumber bonusNumber = LottoNumber.from(6);
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() ->  lotto.validBonusNumber(bonusNumber));
+            .isThrownBy(() ->  lotto.validBonusNumber(6));
     }
 }

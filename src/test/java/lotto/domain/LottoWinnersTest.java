@@ -10,18 +10,18 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoWinnersTest
-{
+class LottoWinnersTest {
 
     private Lotto weekendLotto;
     private List<Lotto> lottoList;
     private LottoNumber bonusNumber;
+
     @BeforeEach
     void setUp() {
+
         weekendLotto = Lotto.from(Sets.set(1,2,3,4,5,6));
         lottoList = List.of(weekendLotto, Lotto.from(Set.of(1,2,3,4,5,13)));
         bonusNumber = LottoNumber.from(13);
-
     }
 
     @Test
