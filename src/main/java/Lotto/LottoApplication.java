@@ -24,16 +24,25 @@ public class LottoApplication {
     }
 
     private static void buy() {
+        int count = lottoCount();
+        int manualLottoCount = manualLottoCount();
+        if (count < manualLottoCount) throw new IllegalArgumentException("구입 가능한 로또 수를 초과했습니다.");
+        buyManualLotto(manualLottoCount);
+
+        int autoCount = count - manualLottoCount;
+        ResultView.purchased(manualLottoCount, manualLottoCount);
+        buyAutoLotto(autoCount);
+    }
+
+    private static int lottoCount() {
         ResultView.inputAmount();
         paidAmount = InputView.inputInteger();
-        ResultView.inputManualLottoCount();
-        int count = (int) paidAmount / LOTTO_PRICE;
-        int manualLottoCount = InputView.inputInteger();
-        int autoCount = count - manualLottoCount;
+        return (int) paidAmount / LOTTO_PRICE;
+    }
 
-        buyManualLotto(manualLottoCount);
-        ResultView.purchased(manualLottoCount, autoCount);
-        buyAutoLotto(autoCount);
+    private static int manualLottoCount() {
+        ResultView.inputManualLottoCount();
+        return InputView.inputInteger();
     }
 
     private static void buyAutoLotto(int count) {
