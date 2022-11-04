@@ -7,26 +7,24 @@ import java.util.List;
 public class LottoWinningStats {
     public static final int TOTAL_WINNING_COUNTS = 4; // 3개, 4개, 5개, 6개 총 4가지 케이스 // TODO enum
 
-    private final List<Integer> winningNumbers; // 사용자로부터 입력받는 값.
     private final List<Integer> winningStats; // TODO
+
     private final Lotto lotto;
     private final int[] winningCounts = new int[TOTAL_WINNING_COUNTS];
 
-
-    public LottoWinningStats(List<Integer> winningNumbers, Lotto lotto) {
-        this.winningNumbers = winningNumbers;
+    public LottoWinningStats(Lotto lotto) {
         this.lotto = lotto;
         this.winningStats = new ArrayList<>(lotto.getNumbersSize());
     }
 
-    public void calculateWinningStats() {
+    public void calculateWinningStats(List<Integer> winningNumbers) {
         // 로또 객체를 기반으로 당첨 통계 계산
         for (int i=0 ; i<lotto.getNumbersSize() ; i++) {
-            winningStats.add(i, getCount(i));
+            winningStats.add(i, getCount(i, winningNumbers));
         }
     }
 
-    private int getCount(int index) {
+    private int getCount(int index, List<Integer> winningNumbers) {
         int count = 0;
         for (Integer winningNumber : winningNumbers) {
             count = checkCount(index, winningNumber, count);
@@ -81,8 +79,4 @@ public class LottoWinningStats {
         }
         return (double) totalWinningAmounts / purchaseAmount;
     }
-
-    public List<Integer> getWinningNumbers() { return this.winningNumbers; }
-    public List<Integer> getWinningStats() { return this.winningStats; }
-    public int[] getWinningCounts() { return this.winningCounts; }
 }
