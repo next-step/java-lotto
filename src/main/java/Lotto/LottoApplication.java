@@ -26,14 +26,26 @@ public class LottoApplication {
     private static void buy() {
         ResultView.inputAmount();
         paidAmount = InputView.inputInteger();
+        ResultView.inputManualLottoCount();
         int count = (int) paidAmount / LOTTO_PRICE;
-        ResultView.purchased(count);
-        buyLotto(count);
+        int manualLottoCount = InputView.inputInteger();
+        int autoCount = count - manualLottoCount;
+
+        buyManualLotto(manualLottoCount);
+        ResultView.purchased(manualLottoCount, autoCount);
+        buyAutoLotto(autoCount);
     }
 
-    private static void buyLotto(int count) {
+    private static void buyAutoLotto(int count) {
         for (int i = 0; i < count; i++) {
             myLotto.add(new Lotto());
+        }
+    }
+
+    private static void buyManualLotto(int count) {
+        ResultView.inputManualLottoNumbers();
+        for (int i = 0; i < count; i ++) {
+            myLotto.add(new Lotto(splitNumbers(InputView.inputString())));
         }
     }
 
@@ -50,11 +62,15 @@ public class LottoApplication {
         String values = InputView.inputString();
         ResultView.inputBonusNumber();
         int bonusNumber = InputView.inputInteger();
-        List<LottoNumber> numbers = Arrays.stream(values.replaceAll(" ", "").split(","))
+        List<LottoNumber> numbers = splitNumbers(values);
+        winnerLotto = new WinningLotto(numbers, bonusNumber);
+    }
+
+    private static List<LottoNumber> splitNumbers(String values) {
+        return Arrays.stream(values.replaceAll(" ", "").split(","))
                 .map(Integer::parseInt)
                 .map(number -> LottoNumber.of(number))
                 .collect(Collectors.toList());
-        winnerLotto = new WinningLotto(numbers, bonusNumber);
     }
 
     private static void showResult() {
