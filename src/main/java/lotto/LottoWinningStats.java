@@ -3,6 +3,8 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.numbers.Lotto;
+
 // TODO 일급컬렉션
 public class LottoWinningStats {
     public static final int TOTAL_WINNING_COUNTS = 4; // 3개, 4개, 5개, 6개 총 4가지 케이스 // TODO enum

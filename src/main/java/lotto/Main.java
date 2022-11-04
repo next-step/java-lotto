@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.views.InputView;
+
 public class Main {
     public static void main(String[] args) {
         int purchaseAmount = InputView.inputAmount();

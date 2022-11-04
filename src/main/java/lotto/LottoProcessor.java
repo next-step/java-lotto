@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.numbers.Lotto;
+import lotto.numbers.WinningNumbers;
+
 public class LottoProcessor {
     public static final int AMOUNT = 1000;
 
