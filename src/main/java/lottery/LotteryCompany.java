@@ -11,7 +11,7 @@ public class LotteryCompany {
 
     private static final List<LotteryNumber> LOTTERY_NUMBER_CANDIDATES = IntStream
             .rangeClosed(1, LotteryNumber.LOTTERY_NUM_MAX)
-            .mapToObj(LotteryNumber::new)
+            .mapToObj(LotteryNumber::lotteryNumber)
             .collect(Collectors.toList());
 
     public static Lottery randomLottery() {

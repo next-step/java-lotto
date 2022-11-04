@@ -18,7 +18,7 @@ public class WinningLotteryTest {
     void create_보너스볼_중복() {
         assertThatThrownBy(() -> new WinningLottery(
                 createLottery(1, 2, 3, 4, 5, 6).lotteryNumbers(),
-                new LotteryNumber(1)
+                LotteryNumber.lotteryNumber(1)
         )).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -27,7 +27,7 @@ public class WinningLotteryTest {
     void result(LotteryRank lotteryRank, int expected) {
         WinningLottery winningLottery = new WinningLottery(
                 createLottery(1, 2, 3, 4, 5, 6).lotteryNumbers(),
-                new LotteryNumber(45)
+                LotteryNumber.lotteryNumber(45)
         );
         List<Lottery> lotteries = List.of(
                 createLottery(1, 2, 3, 14, 15, 16),

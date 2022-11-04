@@ -39,12 +39,12 @@ public class InputView {
         return Arrays.stream(scanner.nextLine().split(","))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LotteryNumber::new)
+                .mapToObj(LotteryNumber::lotteryNumber)
                 .collect(Collectors.toUnmodifiableList());
     }
 
     private static LotteryNumber getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LotteryNumber(scanner.nextInt());
+        return LotteryNumber.lotteryNumber(scanner.nextInt());
     }
 }

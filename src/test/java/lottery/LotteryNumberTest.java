@@ -11,13 +11,13 @@ public class LotteryNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     void create_정상(int lotteryNumber) {
-        assertThatCode(() -> new LotteryNumber(lotteryNumber)).doesNotThrowAnyException();
+        assertThatCode(() -> LotteryNumber.lotteryNumber(lotteryNumber)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void create_비정상(int lotteryNumber) {
-        assertThatThrownBy(() -> new LotteryNumber(lotteryNumber)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LotteryNumber.lotteryNumber(lotteryNumber)).isInstanceOf(IllegalArgumentException.class);
     }
 
 

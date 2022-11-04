@@ -10,9 +10,13 @@ public class LotteryNumber implements Comparable<LotteryNumber>{
 
     private final int lotteryNumber;
 
-    public LotteryNumber(int lotteryNumber) {
+    private LotteryNumber(int lotteryNumber) {
         validate(lotteryNumber);
         this.lotteryNumber = lotteryNumber;
+    }
+
+    public static LotteryNumber lotteryNumber(int lotteryNumber) {
+        return new LotteryNumber(lotteryNumber);
     }
 
     private void validate(int lotteryNumber) {
