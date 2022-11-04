@@ -1,5 +1,6 @@
 package automaticlotto.view;
 
+import automaticlotto.automaticexception.ExceptionCommand;
 import automaticlotto.automaticexception.InputValueException;
 
 import java.util.Scanner;
@@ -28,4 +29,30 @@ public class InputView {
         }
     }
 
+    public static String[] splitWinningNumbers() {
+        String winningNumber = enterWinningNumber();
+        winningNumber = winningNumber.trim();
+        String[] winningNumbers = winningNumber.split(",");
+        validateNumberWinningNumbers(winningNumbers.length);
+        return winningNumbers;
+    }
+
+    private static String enterWinningNumber() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String winningNumber = sc.nextLine();
+        validateWinningNumber(winningNumber);
+        return winningNumber;
+    }
+
+    private static void validateWinningNumber(String winningNumber) {
+        if (winningNumber == null || winningNumber.isBlank()) {
+            throw new InputValueException(ExceptionCommand.NULL_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private static void validateNumberWinningNumbers(int winningNumberCount) {
+        if (winningNumberCount != 6) {
+            throw new InputValueException(ExceptionCommand.NUMBER_WINNING_NUMBERS_EXCEPTION_MESSAGE);
+        }
+    }
 }
