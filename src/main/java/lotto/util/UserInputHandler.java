@@ -19,6 +19,6 @@ public class UserInputHandler {
     }
 
     public static String scan() {
-        return scanner.nextLine();
+        return scanner.nextLine().replaceAll(" ", "");
     }
 }

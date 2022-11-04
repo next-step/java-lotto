@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,15 +22,15 @@ public class ResultView {
                 .collect(Collectors.toList())) + "]");
     }
 
-    public static void printResults(List<LottoResult> results) {
+    public static void printResults(LottoResults results) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        System.out.println("3개 일치 (5000원)- " + Collections.frequency(results, LottoResult.FIFTH_PRIZE));
-        System.out.println("4개 일치 (50000원)- " + Collections.frequency(results, LottoResult.FOURTH_PRIZE));
-        System.out.println("5개 일치 (1500000원)- " + Collections.frequency(results, LottoResult.THIRD_PRIZE));
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + Collections.frequency(results, LottoResult.SECOND_PRIZE));
-        System.out.println("6개 일치 (2000000000원)- " + Collections.frequency(results, LottoResult.FIRST_PRIZE));
+        System.out.println("3개 일치 (5000원)- " + Collections.frequency(results.getLottoResults(), LottoResult.FIFTH_PRIZE));
+        System.out.println("4개 일치 (50000원)- " + Collections.frequency(results.getLottoResults(), LottoResult.FOURTH_PRIZE));
+        System.out.println("5개 일치 (1500000원)- " + Collections.frequency(results.getLottoResults(), LottoResult.THIRD_PRIZE));
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + Collections.frequency(results.getLottoResults(), LottoResult.SECOND_PRIZE));
+        System.out.println("6개 일치 (2000000000원)- " + Collections.frequency(results.getLottoResults(), LottoResult.FIRST_PRIZE));
     }
 
     public static void printYield(double calculateYield) {

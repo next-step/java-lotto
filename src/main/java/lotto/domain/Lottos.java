@@ -20,11 +20,10 @@ public class Lottos {
             lottos.add(new Lotto());
         }
     }
-
-    public List<LottoResult> getResults(Lotto winning, LottoNumber bonusNumber) {
-        return lottos.stream()
-                .map(lotto -> lotto.getResult(winning, bonusNumber))
-                .collect(Collectors.toList());
+    public LottoResults getResults(WinningLotto winningLotto) {
+        return new LottoResults(lottos.stream()
+                .map(lotto -> winningLotto.getResult(lotto))
+                .collect(Collectors.toList()));
     }
 
     public int getSize() {
