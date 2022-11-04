@@ -12,21 +12,21 @@ public class LotteryResult {
         this.lotteryPrice = lotteryPrice;
     }
 
-    public int getWinningCountOfRank(LotteryRank lotteryRank) {
+    public int winningCounts(LotteryRank lotteryRank) {
         return winningCounts.getOrDefault(lotteryRank, 0);
     }
 
-    public double getReturnRate() {
-        return getTotalPrizes() / (getTotalPurchaseAmount() * lotteryPrice);
+    public double returnRate() {
+        return totalPrizes() / (totalPurchaseAmount() * lotteryPrice);
     }
 
-    private double getTotalPrizes() {
+    private double totalPrizes() {
         return winningCounts.keySet().stream()
-                .mapToDouble(lotteryRank -> lotteryRank.getPrize() * getWinningCountOfRank(lotteryRank))
+                .mapToDouble(lotteryRank -> lotteryRank.prize() * winningCounts(lotteryRank))
                 .sum();
     }
 
-    private int getTotalPurchaseAmount() {
+    private int totalPurchaseAmount() {
         return winningCounts.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();

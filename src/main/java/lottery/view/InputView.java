@@ -11,12 +11,12 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int getLotteryPurchasePrices() {
+    public static int getTotalPurchasePrice() {
         System.out.println("구입 금액을 입력해주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static int getManualLotteryPurchaseAmount() {
+    public static int getManualLotteryAmount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
@@ -32,7 +32,7 @@ public class InputView {
 
     public static WinningLottery getWinningLottery() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new WinningLottery(getLotteryNumbers(), getBonusLotteryNumber());
+        return new WinningLottery(getLotteryNumbers(), getBonusNumber());
     }
 
     public static List<LotteryNumber> getLotteryNumbers() {
@@ -43,7 +43,7 @@ public class InputView {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private static LotteryNumber getBonusLotteryNumber() {
+    private static LotteryNumber getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return new LotteryNumber(scanner.nextInt());
     }

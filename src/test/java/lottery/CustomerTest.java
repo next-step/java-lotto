@@ -26,8 +26,8 @@ public class CustomerTest {
         Customer customer = new Customer();
         customer.purchaseLotteries(10, lotteries);
 
-        assertThat(customer.getLotteries()).hasSize(10);
-        assertThat(customer.getLotteries()).containsAll(lotteries);
+        assertThat(customer.lotteries()).hasSize(10);
+        assertThat(customer.lotteries()).containsAll(lotteries);
     }
 
     @Test

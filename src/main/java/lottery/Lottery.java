@@ -15,15 +15,6 @@ public class Lottery {
         this.lotteryNumbers = lotteryNumbers;
     }
 
-    private void validate(List<LotteryNumber> lotteryNumbers) {
-        if (lotteryNumbers.size() != LOTTERY_NUM_COUNT) {
-            throw new IllegalArgumentException("로또는 6개 숫자로 구성되어야 합니다.");
-        }
-        if (new HashSet<>(lotteryNumbers).size() != LOTTERY_NUM_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
-    }
-
     public int contains(Lottery lottery) {
         return this.lotteryNumbers.stream()
                 .filter(lottery::contains)
@@ -35,7 +26,16 @@ public class Lottery {
         return this.lotteryNumbers.contains(lotteryNumber);
     }
 
-    public List<LotteryNumber> getLotteryNumbers() {
+    public List<LotteryNumber> lotteryNumbers() {
         return Collections.unmodifiableList(this.lotteryNumbers);
+    }
+
+    private void validate(List<LotteryNumber> lotteryNumbers) {
+        if (lotteryNumbers.size() != LOTTERY_NUM_COUNT) {
+            throw new IllegalArgumentException("로또는 6개 숫자로 구성되어야 합니다.");
+        }
+        if (new HashSet<>(lotteryNumbers).size() != LOTTERY_NUM_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
     }
 }

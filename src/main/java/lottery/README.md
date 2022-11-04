@@ -64,7 +64,7 @@
   - Controller에서 호출하여 수동 번호로 로또 생성
 
 ## 리팩토링 요구사항 
-- [ ] 변수명 정리
+- [x] 변수명 정리
 - [ ] `LotteryNumber` 생성자 private로 전환하고 정적 팩토리 메서드 도입
 - [ ] `LotteryNumber` 정적 팩토리 메서드에서 인스턴스 캐싱 하도록 변경
 - [ ] `Lottery` 중복 값 validation 로직 제거하고 인스턴스를 `Set`으로 유지하여 그 역할을 수행하도록 변경

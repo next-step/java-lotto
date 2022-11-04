@@ -24,14 +24,14 @@ public class LotteryResultTest {
 
 
     @Test
-    void getWinningCountOfRank() {
-        assertThat(lotteryResult.getWinningCountOfRank(LotteryRank.FIFTH)).isEqualTo(2);
-        assertThat(lotteryResult.getWinningCountOfRank(LotteryRank.FIRST)).isEqualTo(1);
+    void winningCounts() {
+        assertThat(lotteryResult.winningCounts(LotteryRank.FIFTH)).isEqualTo(2);
+        assertThat(lotteryResult.winningCounts(LotteryRank.FIRST)).isEqualTo(1);
     }
 
     @Test
-    void getReturnRate() {
-        assertThat(lotteryResult.getReturnRate()).isEqualTo(200001);
+    void returnRate() {
+        assertThat(lotteryResult.returnRate()).isEqualTo(200001);
     }
 
 }

@@ -12,9 +12,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LotteryCompanyTest {
 
     @Test
-    void generateRandomLotteryNumbers() {
-        Lottery lottery = LotteryCompany.generateRandomLotteryNumbers();
-        List<LotteryNumber> lotteryNumbers = lottery.getLotteryNumbers();
+    void randomLottery() {
+        Lottery lottery = LotteryCompany.randomLottery();
+        List<LotteryNumber> lotteryNumbers = lottery.lotteryNumbers();
 
         assertThat(lotteryNumbers).hasSize(6);
         assertThat(lotteryNumbers).doesNotHaveDuplicates();
@@ -23,12 +23,12 @@ public class LotteryCompanyTest {
     @ParameterizedTest
     @CsvSource(value={"1000:1", "14000:14", "14500:14"}, delimiter = ':')
     void 구입가능금액_1000원_이상(int cashAmount, int expected) {
-        assertThat(LotteryCompany.getAvailablePurchaseAmount(cashAmount)).isEqualTo(expected);
+        assertThat(LotteryCompany.availablePurchaseAmount(cashAmount)).isEqualTo(expected);
     }
 
     @Test
     void 구입가능금액_1000원_미만() {
-        assertThatThrownBy(() -> LotteryCompany.getAvailablePurchaseAmount(999))
+        assertThatThrownBy(() -> LotteryCompany.availablePurchaseAmount(999))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -12,21 +12,24 @@ public class Customer {
         lotteries = new ArrayList<>();
     }
 
-    public void purchaseLotteries(int availablePurchaseLotteryAmount, List<Lottery> manualLotteries) {
-        validateManualLotteryAmount(availablePurchaseLotteryAmount, manualLotteries.size());
+    public void purchaseLotteries(int availablePurchaseAmount, List<Lottery> manualLotteries) {
+        int randomLotteryAmount = randomLotteryAmount(availablePurchaseAmount, manualLotteries.size());
+
         lotteries.addAll(manualLotteries);
-        for (int i = 0; i < availablePurchaseLotteryAmount - manualLotteries.size(); i++) {
-            lotteries.add(LotteryCompany.generateRandomLotteryNumbers());
+        for (int i = 0; i < randomLotteryAmount; i++) {
+            lotteries.add(LotteryCompany.randomLottery());
         }
     }
 
-    public List<Lottery> getLotteries() {
+    public List<Lottery> lotteries() {
         return Collections.unmodifiableList(lotteries);
     }
 
-    private void validateManualLotteryAmount(int availablePurchaseLotteryAmount, int manualPurchaseLotteryAmount) {
-        if (manualPurchaseLotteryAmount > availablePurchaseLotteryAmount) {
+    private int randomLotteryAmount(int availablePurchaseAmount, int manualLotteryAmount) {
+        int randomLotteryAmount = availablePurchaseAmount - manualLotteryAmount;
+        if (randomLotteryAmount < 0) {
             throw new IllegalArgumentException("수동 로또 장수는 전체 구매 로또 장수를 초과할 수 없습니다.");
         }
+        return randomLotteryAmount;
     }
 }
