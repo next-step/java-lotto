@@ -4,31 +4,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
-    public static final int AMOUNT = 1000;
-    public static final int TOTAL_NUMBERS = 6;
-    private static final int LAST_NUMBER = 45;
+    public static final int TOTAL_NUMBERS_SIZE = 6;
 
-    private final int purchaseCount;
-    private final List<Integer> allNumbers;
     private final List<List<Integer>> numbers;
 
-    public Lotto(int purchaseAmount) {
-        purchaseCount = purchaseAmount / AMOUNT;
+    public Lotto(int purchaseCount) {
         this.numbers = new ArrayList<>(purchaseCount);
-        allNumbers = IntStream.range(1, LAST_NUMBER + 1).boxed().collect(Collectors.toList());
     }
 
-    public void generateNumbers() {
+    public void generateNumbers(int purchaseCount) {
+        List<Integer> allNumbers = AllNumbers.getNumbers();
         for (int i=0 ; i<purchaseCount ; i++) {
             Collections.shuffle(allNumbers);
-            List<Integer> newNumbers = new ArrayList<>(List.copyOf(allNumbers.subList(0, TOTAL_NUMBERS)));
+            List<Integer> newNumbers = new ArrayList<>(List.copyOf(allNumbers.subList(0, TOTAL_NUMBERS_SIZE)));
             newNumbers.sort(Comparator.naturalOrder());
             numbers.add(i, newNumbers);
         }
+    }
+
+    public boolean containsNumber(int index, int number) {
+        return numbers.get(index).contains(number);
     }
 
     public void printNumbers() {
@@ -55,13 +52,5 @@ public class Lotto {
 
     public int getNumbersSize() {
         return this.numbers.size();
-    }
-
-    public List<List<Integer>> getNumbers() {
-        return this.numbers;
-    }
-
-    public int getPurchaseCount() {
-        return this.purchaseCount;
     }
 }

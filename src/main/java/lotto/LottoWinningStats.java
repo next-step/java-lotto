@@ -3,11 +3,12 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO 일급컬렉션
 public class LottoWinningStats {
-    public static final int TOTAL_WINNING_COUNTS = 4; // 3개, 4개, 5개, 6개 총 4가지 케이스
+    public static final int TOTAL_WINNING_COUNTS = 4; // 3개, 4개, 5개, 6개 총 4가지 케이스 // TODO enum
 
     private final List<Integer> winningNumbers; // 사용자로부터 입력받는 값.
-    private final List<Integer> winningStats;
+    private final List<Integer> winningStats; // TODO
     private final Lotto lotto;
     private final int[] winningCounts = new int[TOTAL_WINNING_COUNTS];
 
@@ -21,21 +22,20 @@ public class LottoWinningStats {
     public void calculateWinningStats() {
         // 로또 객체를 기반으로 당첨 통계 계산
         for (int i=0 ; i<lotto.getNumbersSize() ; i++) {
-            List<Integer> targetNumbers = lotto.getNumbers().get(i);
-            winningStats.add(i, getCount(targetNumbers));
+            winningStats.add(i, getCount(i));
         }
     }
 
-    private int getCount(List<Integer> targetNumbers) {
+    private int getCount(int index) {
         int count = 0;
         for (Integer winningNumber : winningNumbers) {
-            count = checkCount(targetNumbers, winningNumber, count);
+            count = checkCount(index, winningNumber, count);
         }
         return count;
     }
 
-    private int checkCount(List<Integer> targetNumbers, Integer winningNumber, int count) {
-        if (targetNumbers.contains(winningNumber)) {
+    private int checkCount(int index, Integer winningNumber, int count) {
+        if (lotto.containsNumber(index, winningNumber)) {
             count++;
         }
         return count;
@@ -74,13 +74,12 @@ public class LottoWinningStats {
         System.out.println("6개 일치 (2000000000원)-" + winningCounts[3] + " 개");
     }
 
-    public double getYield() {
-        int totalAmounts = this.lotto.getPurchaseCount() * Lotto.AMOUNT;
+    public double getYield(int purchaseAmount) { // TODO enum
         int totalWinningAmounts = (5000 * winningCounts[0] + 50000 * winningCounts[1] + 1500000 * winningCounts[2] + 2000000000 * winningCounts[3]);
         if (totalWinningAmounts == 0) {
             return 0;
         }
-        return (double) totalWinningAmounts / totalAmounts;
+        return (double) totalWinningAmounts / purchaseAmount;
     }
 
     public List<Integer> getWinningNumbers() { return this.winningNumbers; }

@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoProcessor {
+    public static final int AMOUNT = 1000;
+
     private final Lotto lotto;
     private LottoWinningStats lottoWinningStats;
 
-    public LottoProcessor(Lotto lotto) {
-        this.lotto = lotto;
+    public LottoProcessor(int purchaseAmount) {
+        this.lotto = new Lotto(purchaseAmount / AMOUNT);
         this.lottoWinningStats = null;
     }
     public LottoProcessor(Lotto lotto, String inputNumbers) {
@@ -17,8 +19,8 @@ public class LottoProcessor {
         this.lottoWinningStats = new LottoWinningStats(getWinningNumbers(inputNumbers), lotto);
     }
 
-    public void publish() {
-        lotto.generateNumbers();
+    public void publish(int purchaseAmount) {
+        lotto.generateNumbers(purchaseAmount / AMOUNT);
         lotto.printNumbers();
     }
     public void calculateWinningStats(String inputNumbers) {
@@ -27,9 +29,9 @@ public class LottoProcessor {
         lottoWinningStats.calculateWinningCounts();
     }
 
-    public void printWinningStats() {
+    public void printWinningStats(int purchaseAmount) {
         lottoWinningStats.printWinningCounts();
-        System.out.println("총 수익률은 " + lottoWinningStats.getYield() + "입니다.");
+        System.out.println("총 수익률은 " + lottoWinningStats.getYield(purchaseAmount) + "입니다.");
     }
 
     private List<Integer> getWinningNumbers(String inputNumbers) {
