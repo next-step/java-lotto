@@ -1,6 +1,7 @@
 package lottery.view;
 
 import lottery.Lottery;
+import lottery.LotteryNumber;
 import lottery.LotteryRank;
 import lottery.LotteryResult;
 
@@ -35,7 +36,10 @@ public class ResultView {
 
     private static void printPurchasedLotteryNumbers(List<Lottery> lotteries) {
         for (Lottery lottery : lotteries) {
-            System.out.println(lottery.lotteryNumbers());
+            List<LotteryNumber> lotteryNumbers = lottery.lotteryNumbers().stream()
+                    .sorted()
+                    .collect(Collectors.toList());
+            System.out.println(lotteryNumbers);
         }
         System.out.println();
     }
