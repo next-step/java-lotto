@@ -1,5 +1,7 @@
 package automaticlotto.view;
 
+import java.util.List;
+
 public class OutputView {
 
     private static final int LOTTO_PRICE = 1000;
@@ -21,4 +23,9 @@ public class OutputView {
         return purchaseAmount / LOTTO_PRICE;
     }
 
+    public static void showBuyingLotto(List<List<String>> buyLotto) {
+        for (List<String> lotto : buyLotto) {
+            System.out.println(lotto);
+        }
+    }
 }
