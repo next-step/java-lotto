@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -25,6 +27,12 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> LottoFactory.createManualLotto(Arrays.asList(1,2,3,4,5,46))
         );
+    }
+
+    @Test
+    void 자동_로또_생성() {
+        Lotto lotto = LottoFactory.createAutoLotto();
+        Assertions.assertThat(lotto.getSize()).isEqualTo(6);
     }
 
 }
