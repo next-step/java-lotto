@@ -3,35 +3,29 @@ package step3;
 import java.util.Arrays;
 
 public enum Operator {
-	NOT_RANK(0, null, 0),
-	THREE(3, false, 5_000),
-	FOUR(4, false, 50_000),
-	FIVE(5, false, 1_500_000),
-	FIVE_BONUS(5, true, 30_000_000),
-	SIX(6, false, 2_000_000_000);
+	NOT_RANK(0, 0),
+	THREE(3, 5_000),
+	FOUR(4, 50_000),
+	FIVE(5, 1_500_000),
+	FIVE_BONUS(5, 30_000_000),
+	SIX(6, 2_000_000_000);
 
-	private int count;
-	private int winning;
-	private Boolean bonusCheck;
+	private final int count;
+	private final int winning;
 
-	Operator(int count, Boolean bonusCheck, int winning) {
+	Operator(int count, int winning) {
 		this.count = count;
-		this.bonusCheck = bonusCheck;
 		this.winning = winning;
 	}
 
 	public static Operator find(int count, boolean bonus) {
+		if (count == 5 && bonus) {
+			return FIVE_BONUS;
+		}
 		return Arrays.stream(values())
-			.filter(ranks -> isRank(ranks, count, bonus))
+			.filter(ranks -> ranks.count == count)
 			.findFirst()
 			.orElse(NOT_RANK);
-	}
-
-	private static boolean isRank(Operator rank, int count, boolean bonus) {
-		if (rank.bonusCheck != null) {
-			return rank.count == count && rank.bonusCheck == bonus;
-		}
-		return rank.count == count;
 	}
 
 	public int getCount() {

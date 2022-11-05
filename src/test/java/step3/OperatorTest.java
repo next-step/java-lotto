@@ -1,8 +1,7 @@
 package step3;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +25,12 @@ public class OperatorTest {
 		assertThat(five).isEqualTo(Operator.FIVE);
 		assertThat(bonus).isEqualTo(Operator.FIVE_BONUS);
 		assertThat(six).isEqualTo(Operator.SIX);
+	}
+
+	@Test
+	@DisplayName("로또매칭 카운트와 true 값 넘겼을 때 확인")
+	void notFound() {
+		Operator four = Operator.find(4, true);
+		assertThat(four).isEqualTo(Operator.FOUR);
 	}
 }
