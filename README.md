@@ -23,10 +23,10 @@
 	- [x] 뺄셈
 	- [x] 곱셈
 	- [x] 나눗셈
-	- [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
-	- [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-	- [ ] 사칙 연산을 모두 포함하는 기능 구현
-- [ ] 공백 문자열을 빈 공백 문자로 분리하려면 String 클래스의 split(" ") 메소드를 활용한다.
+	- [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+	- [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+	- [x] 사칙 연산을 모두 포함하는 기능 구현
+- [x] 공백 문자열을 빈 공백 문자로 분리하려면 String 클래스의 split(" ") 메소드를 활용한다.
 - 반복적인 패턴을 찾아 반복문으로 구현한다.
 
 ### TODO-list 
@@ -38,19 +38,19 @@
 		- 입력 문자열의 숫자와 사칙 연산 사이에는 반드시 빈 공백 문자열이 있다고 가정
 		- 나눗셈의 경우 결과 값을 정수로 떨어지는 값으로 한정
 - Flow 
-	- [ ] Validate Input String
-	- [ ] Split String to String[]  by space
-	- [ ] Validate splitted strings
-	- [ ] 피연산자, 연산자용 Deque 초기화
-		- [ ] 각 String을, 피연산자, 연산자로구분하여, 각 큐에 addLast()
-	- [ ] Validate 연산 초기조건
+	- [x] Validate Input String
+	- [x] Split String to String[]  by space
+	- [x] Validate splitted strings
+	- [x] 피연산자, 연산자용 Deque 초기화
+		- [x] 각 String을, 피연산자, 연산자로구분하여, 각 큐에 addLast()
+	- [x] Validate 연산 초기조건
 		- 초기조건 : Number of 피연산자Deque >=2 and Number of 연산자 Deque >= 1
-	- [ ] Start 연산
+	- [x] Start 연산
 		- 종료 조건 : Number of 피연산자Deque == 1 and Number of 연산자 Deque == 0
-		- [ ] 피연산자큐로부터, 원소 2개 pop()
-		- [ ] 연산자큐로부터, 연산자 1개 pop()
-		- [ ] 연산 수행하고 그 결과 값을 피 연산자큐에 addFirst
-	- [ ] 피연산자큐에서 마지막 원소를 pop()하여 반환.
+		- [x] 피연산자큐로부터, 원소 2개 pop()
+		- [x] 연산자큐로부터, 연산자 1개 pop()
+		- [x] 연산 수행하고 그 결과 값을 피 연산자큐에 addFirst
+	- [x] 피연산자큐에서 마지막 원소를 pop()하여 반환.
 ### Note
 - Try to use assertThatIllegalArgumentException()
 - Q : How to check if given string is a numeric?
