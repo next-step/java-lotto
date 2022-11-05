@@ -10,17 +10,18 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class LottoCountTest {
     @ParameterizedTest
-    @ValueSource(ints = {900, 1500})
-    @DisplayName("입력 값이 1000원 미만이거나 1000단위가 아닌 경우 예외 발생")
-    void 로또_금액_1000단위(int input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoCount(input));
+    @ValueSource(ints = {-1, 30, 4})
+    @DisplayName("수동구매시 구매가능 개수가 아닐 경우 에러 발생")
+    void 로또_수동_개수(int input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoCount(input, new LottoPrice(3000)));
     }
 
     @Test
-    @DisplayName("로또 금액 입력 시 구매 가능한 복권 개수 리턴")
-    void 로또_복권_개수(){
-        assertThat(new LottoCount(3000).getCount()).isEqualTo(3);
-        assertThat(new LottoCount(12000).getCount()).isEqualTo(12);
+    @DisplayName("수동구매 후 자동구매 개수 확인")
+    void 로또_복권_개수() {
+        assertThat(new LottoCount(3, new LottoPrice(3000)).getAutoLottoCount()).isEqualTo(0);
+        assertThat(new LottoCount(0, new LottoPrice(3000)).getAutoLottoCount()).isEqualTo(3);
     }
+
 
 }

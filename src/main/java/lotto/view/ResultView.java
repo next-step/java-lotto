@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.constant.LottoRanking;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoPrice;
 import lotto.domain.LottoResult;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public class ResultView {
     public void printLottoCount(LottoCount lottoCount) {
-        System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 "+ lottoCount.getManualLottoCount()+"장, 자동으로 "+ lottoCount.getAutoLottoCount()+"개를 구매했습니다.");
     }
 
     public void printAllLottoNumbers(List<LottoNumbers> lottoNumbers) {
@@ -20,7 +21,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public void printResult(LottoResult lottoResult) {
+    public void printResult(LottoResult lottoResult, LottoPrice price) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------------");
@@ -32,6 +33,6 @@ public class ResultView {
             }
         }
 
-        System.out.printf("총 수익률은 %2.02f 입니다.", lottoResult.getPercentage());
+        System.out.printf("총 수익률은 %2.02f 입니다.", lottoResult.calculatePercentage(price.getPrice()));
     }
 }

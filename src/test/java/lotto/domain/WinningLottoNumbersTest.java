@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class LottoNumbersTest {
+class WinningLottoNumbersTest {
     List<LottoNumber> lottoNumberTest;
     List<LottoNumbers> purchasedLottoNumbers;
 
@@ -17,36 +17,30 @@ class LottoNumbersTest {
     LottoNumber three = new LottoNumber(3);
     LottoNumber five = new LottoNumber(5);
     LottoNumber seven = new LottoNumber(7);
+    LottoNumber eight = new LottoNumber(8);
     LottoNumber nine = new LottoNumber(9);
+    LottoNumber twelve = new LottoNumber(12);
     LottoNumber twentyOne = new LottoNumber(21);
     LottoNumber twentyTwo = new LottoNumber(22);
     LottoNumber thirtyTwo = new LottoNumber(32);
-    LottoNumber fortyFive = new LottoNumber(45);
 
     @BeforeEach
     void setUp() {
         lottoNumberTest = Lists.newArrayList(one, three, five, seven, nine, twentyTwo);
-
         purchasedLottoNumbers = List.of(
-                new LottoNumbers(List.of(one, three, five, seven, nine, fortyFive)),
-                new LottoNumbers(List.of(one, three, five, seven, nine, twentyOne))
+                new LottoNumbers(List.of(one, three, five, seven, nine, twentyTwo)),
+                new LottoNumbers(List.of(one, three, eight, twentyTwo, twentyOne, thirtyTwo)),
+                new LottoNumbers(List.of(one, three, five, twelve, nine, twentyOne)),
+                new LottoNumbers(List.of(one, three, five, nine, thirtyTwo, twentyOne))
         );
 
     }
 
     @Test
-    @DisplayName("로또 번호가 6자리가 아닌 경우 예외 발생")
-    void 로또_5자리_확인() {
-        lottoNumberTest.remove(1);
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(
-                lottoNumberTest));
+    @DisplayName("보너스 번호가 이미 당첨된 번호인 경우 에러 발생")
+    void 로또_보너스_확인_에러() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningLottoNumbers(
+                new LottoNumbers(lottoNumberTest), three));
     }
 
-    @Test
-    @DisplayName("로또 번호가 6자리가 아닌 경우 예외 발생")
-    void 로또_7자리_확인() {
-        lottoNumberTest.add(thirtyTwo);
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(
-                lottoNumberTest));
-    }
 }

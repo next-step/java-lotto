@@ -1,12 +1,10 @@
 package lotto.controller;
 
-import lotto.constant.LottoRanking;
 import lotto.domain.*;
 import lotto.util.LottoUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -14,25 +12,26 @@ public class LottoController {
     private final ResultView resultView = new ResultView();
 
     public void buyLottoTickets() {
-        int lottoPrice = inputView.priceScan();
-        LottoCount count = new LottoCount(lottoPrice);
+        LottoPrice price = new LottoPrice(inputView.priceScan());
+        int manualCount = inputView.manualCountScan();
+        LottoCount count = new LottoCount(manualCount, price);
+
+        List<LottoNumbers> lottoTickets = inputView.manualNumberScan(count);
 
         resultView.printLottoCount(count);
-        List<LottoNumbers> lottoTickets = LottoMachine.createLottoTickets(count);
+        lottoTickets.addAll(LottoMachine.createLottoTickets(count));
 
         resultView.printAllLottoNumbers(lottoTickets);
-        getLottoResult(lottoTickets, lottoPrice);
+        getLottoResult(lottoTickets, price);
     }
 
-    private void getLottoResult(List<LottoNumbers> lottoTickets, int price) {
+    private void getLottoResult(List<LottoNumbers> lottoTickets, LottoPrice price) {
         String[] winningNumbers = inputView.lastWeekLottoNumbersScan();
         LottoNumber bonusNumber = new LottoNumber(inputView.bonusNumberScan());
-        LottoNumbers winLottoNumbers = new LottoNumbers(LottoUtil.ArrayToList(winningNumbers), bonusNumber);
 
-        LottoResult lottoResult = new LottoResult();
-        ArrayList<LottoRanking> lottoRankings = winLottoNumbers.matchingLottoNumbers(lottoTickets);
-        lottoResult.calculateLottoResult(lottoRankings, price);
-        resultView.printResult(lottoResult);
+        WinningLottoNumbers winLottoNumbers = new WinningLottoNumbers(new LottoNumbers(LottoUtil.CastingArrayToList(winningNumbers)), bonusNumber);
+        LottoResult lottoResult = winLottoNumbers.lottoMatchingResult(lottoTickets);
+        resultView.printResult(lottoResult, price);
     }
 
 }

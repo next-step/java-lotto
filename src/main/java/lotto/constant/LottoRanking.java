@@ -8,8 +8,7 @@ public enum LottoRanking {
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
     SECOND(5, 30_000_000),
-    FIRST(6, 2_000_000_000)
-    ;
+    FIRST(6, 2_000_000_000);
 
     private final int ranking;
     private final int award;
@@ -45,6 +44,10 @@ public enum LottoRanking {
         }
 
         return true;
+    }
+
+    public double calculateAward(int count) {
+        return (double) award * count;
     }
 }
 
