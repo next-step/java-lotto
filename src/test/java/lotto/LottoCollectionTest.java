@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoCollectionTest {
 
     private LottoCollection collection;
-    private String[] numbers;
+    private List<String> numbers;
 
     @BeforeEach
     void setup() {
@@ -25,7 +26,7 @@ class LottoCollectionTest {
         List<List<Integer>> lottos = List.of(lotto1, lotto2, lotto3);
 
         collection = new LottoCollection(lottos);
-        numbers = new String[]{"1","2","3","4","5","6"};
+        numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
     }
 
     @Test
@@ -44,7 +45,7 @@ class LottoCollectionTest {
     @CsvSource(value = {"3,1", "4,1", "5,0", "6,0"})
     @DisplayName("일치하는 번호개수를 카운팅한다")
     void test3(int element, int expected) {
-        Winning winning = new Winning(collection, new String[]{"3", "5", "10", "11", "13", "18"});
+        Winning winning = new Winning(collection, Arrays.asList("3", "5", "10", "11", "13", "18"));
         assertThat(winning.getMatchingCount(integer -> integer == element)).isEqualTo(expected);
     }
 }

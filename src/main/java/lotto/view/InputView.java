@@ -1,5 +1,8 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import static lotto.model.Profit.LOTTO_PRICE;
@@ -15,13 +18,11 @@ public class InputView {
         return SCANNER.nextInt() / LOTTO_PRICE;
     }
 
-    public static void printQuantity(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
-    }
-
-    public static String[] inputWinningNumber() {
+    public static List<String> inputWinningNumber() {
         System.out.println("지난주 당첨 번호를 입력해주세요");
         SCANNER.nextLine();
-        return SCANNER.nextLine().split(",");
+
+        String[] split = SCANNER.nextLine().split(",");
+        return new ArrayList<>(Arrays.asList(split));
     }
 }

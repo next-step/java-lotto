@@ -10,7 +10,7 @@ public class LottoCollection {
         this.lottos = lottos;
     }
 
-    public List<Integer> checkWinningNumber(String[] winningNumber) {
+    public List<Integer> checkWinningNumber(List<String> winningNumber) {
         List<Integer> inventory = new ArrayList<>();
         for (List<Integer> lotto : lottos) {
             inventory.add(countMatchingNumber(winningNumber, lotto));
@@ -23,7 +23,7 @@ public class LottoCollection {
         return lottos;
     }
 
-    private int countMatchingNumber(String[] winningNumber, List<Integer> lotto) {
+    private int countMatchingNumber(List<String> winningNumber, List<Integer> lotto) {
         int matchingWinningNumber = 0;
         for (Integer lottoNumber : lotto) {
             matchingWinningNumber = getMatchingNumber(winningNumber, matchingWinningNumber, lottoNumber);
@@ -32,7 +32,7 @@ public class LottoCollection {
         return matchingWinningNumber;
     }
 
-    private int getMatchingNumber(String[] winningNumber, int matchingCount, Integer lottoNumber) {
+    private int getMatchingNumber(List<String> winningNumber, int matchingCount, Integer lottoNumber) {
         for (String string : winningNumber) {
             matchingCount = addNumberCount(matchingCount, lottoNumber, string);
         }

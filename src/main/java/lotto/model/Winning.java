@@ -13,7 +13,7 @@ public class Winning {
     private static final int FOURTH_PLACE = 3;
     private final List<Integer> list;
 
-    public Winning(LottoCollection collection, String[] winningNumbers) {
+    public Winning(LottoCollection collection, List<String> winningNumbers) {
         validation(winningNumbers);
         this.list = collection.checkWinningNumber(winningNumbers);
     }
@@ -39,12 +39,12 @@ public class Winning {
         return count;
     }
 
-    private void validation(String[] winningNumbers) {
+    private void validation(List<String> winningNumbers) {
         checkLength(winningNumbers);
         checkBounds(winningNumbers);
     }
 
-    private void checkBounds(String[] winningNumbers) {
+    private void checkBounds(List<String> winningNumbers) {
         for (String winningNumber : winningNumbers) {
             if (isOutOfNumberBounds(winningNumber)) {
                 throw new IllegalArgumentException("당첨번호를 확인해주세요");
@@ -52,14 +52,14 @@ public class Winning {
         }
     }
 
-    private void checkLength(String[] winningNumbers) {
+    private void checkLength(List<String> winningNumbers) {
         if (isLessThanNumberQuantity(winningNumbers)) {
             throw new IllegalArgumentException("당첨번호 개수를 확인해주세요");
         }
     }
 
-    private boolean isLessThanNumberQuantity(String[] winningNumbers) {
-        return winningNumbers.length != WINNING_NUMBER_QUANTITY;
+    private boolean isLessThanNumberQuantity(List<String> winningNumbers) {
+        return winningNumbers.size() != WINNING_NUMBER_QUANTITY;
     }
 
     private boolean isOutOfNumberBounds(String winningNumber) {

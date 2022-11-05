@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,7 +23,7 @@ class WinningTest {
     @DisplayName("로또번호는 1과 45 사이값이어야만 한다")
     void winningNumberBoundTest(String input) {
         assertThatThrownBy(() -> {
-            new Winning(collection, new String[]{input, "2", "3", "4", "5", "6"});
+            new Winning(collection, Arrays.asList(input, "2", "3", "4", "5", "6"));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,7 +31,7 @@ class WinningTest {
     @DisplayName("로또번호는 6개를 입력해야한다")
     void winningNumberQuantityTest() {
         assertThatThrownBy(() -> {
-            new Winning(collection, new String[]{"2", "3", "4", "5", "6"});
+            new Winning(collection, Arrays.asList("2", "3", "4", "5", "6"));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
