@@ -11,7 +11,7 @@ public class LottoProcessor {
     public static final int PRICE = 1000;
 
     private final Lotto lotto;
-    private LottoWinningStats lottoWinningStats;
+    private final LottoWinningStats lottoWinningStats;
 
     public LottoProcessor(int purchaseAmount) {
         this.lotto = new Lotto(purchaseAmount / PRICE);
