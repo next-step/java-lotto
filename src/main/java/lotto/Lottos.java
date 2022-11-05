@@ -15,7 +15,7 @@ public class Lottos {
     }
 
 
-    public int lottoQuantity() {
+    public int totalQuantity() {
         return this.quantity;
     }
 }

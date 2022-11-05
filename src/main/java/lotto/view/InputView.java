@@ -15,6 +15,4 @@ public class InputView {
             throw new IllegalArgumentException(ONLY_NUMBER_EXCEPTION, e);
         }
     }
-
-
 }

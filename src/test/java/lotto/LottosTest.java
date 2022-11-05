@@ -7,7 +7,7 @@ public class LottosTest {
     @Test
     void 로또개수입력() {
         Lottos lottos = new Lottos(1000);
-        Assertions.assertThat(lottos.lottoQuantity()).isEqualTo(1);
+        Assertions.assertThat(lottos.totalQuantity()).isEqualTo(1);
     }
 
     @Test
