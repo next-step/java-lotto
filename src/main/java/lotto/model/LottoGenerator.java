@@ -23,7 +23,7 @@ public class LottoGenerator {
         return lottos;
     }
 
-    public List<Integer> createLotto() {
+    private List<Integer> createLotto() {
         List<Integer> range = collectNumbers();
         Collections.shuffle(range);
 

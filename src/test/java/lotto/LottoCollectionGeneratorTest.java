@@ -22,10 +22,4 @@ class LottoCollectionGeneratorTest {
     void test() {
         assertThat(generator.addLotto(10).size()).isEqualTo(10);
     }
-
-    @Test
-    @DisplayName("로또는 6자리 번호를 생성한다")
-    void test2() {
-        assertThat(generator.createLotto().size()).isEqualTo(6);
-    }
 }

@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.model.LottoCollection;
 import lotto.model.LottoGenerator;
 import lotto.model.Profit;
 import lotto.model.Winning;
@@ -13,7 +14,7 @@ import static lotto.view.ResultView.*;
 public class Main {
     public static void main(String[] args) {
         int lottoQuantity = InputView.inputQuantity();
-        InputView.printQuantity(lottoQuantity);
+        printQuantity(lottoQuantity);
 
         LottoGenerator generator = new LottoGenerator(lottoQuantity);
         printLottoNumbers(generator.getCollection());
