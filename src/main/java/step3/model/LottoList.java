@@ -17,7 +17,7 @@ public class LottoList {
 		generate();
 	}
 
-	private void generate(){
+	private void generate() {
 		IntStream.range(0, ticketCnt)
 				.mapToObj(lotto -> new Lotto(lottoGenerator))
 				.forEach(lottoList::add);

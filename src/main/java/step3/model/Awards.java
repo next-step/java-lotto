@@ -12,22 +12,18 @@ public enum Awards {
 	FOUR(4, 50000),
 	THREE(3, 5000);
 
-	private final int hitCnt;
-	private final int award;
-
-	private static List<Awards> awards;
+	private static final List<Awards> awards;
 
 	static {
 		awards = Arrays.stream(Awards.values()).collect(Collectors.toList());
 	}
 
+	private final int hitCnt;
+	private final int award;
+
 	Awards(int hitCnt, int award) {
 		this.hitCnt = hitCnt;
 		this.award = award;
-	}
-
-	public boolean isDEFAULT() {
-		return this == DEFAULT;
 	}
 
 	public static int getPrize(int awardRank, int awardCnt) {

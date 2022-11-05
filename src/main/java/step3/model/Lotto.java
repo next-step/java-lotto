@@ -2,6 +2,7 @@ package step3.model;
 
 import step3.util.LottoGenerator;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
@@ -9,6 +10,10 @@ public class Lotto {
 
 	public Lotto(LottoGenerator lottoGenerator) {
 		this.numberList = lottoGenerator.generating();
+	}
+
+	public Lotto(List<Integer> list){
+		this.numberList = list;
 	}
 
 	public List<Integer> getNumberList() {
