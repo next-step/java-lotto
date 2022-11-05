@@ -15,11 +15,7 @@ public class LottoProcessor {
 
     public LottoProcessor(int purchaseAmount) {
         this.lotto = new Lotto(purchaseAmount / PRICE);
-        this.lottoWinningStats = null;
-    }
-    public LottoProcessor(Lotto lotto, String inputNumbers) {
-        this.lotto = lotto;
-        this.lottoWinningStats = new LottoWinningStats(lotto);
+        this.lottoWinningStats = new LottoWinningStats(lotto);;
     }
 
     public void publish(int purchaseAmount) {
@@ -27,7 +23,6 @@ public class LottoProcessor {
         OutputView.printNumbers(lotto);
     }
     public void calculateWinningStats(String inputNumbers, int purchaseAmount) {
-        this.lottoWinningStats = new LottoWinningStats(lotto); // FIXME
         lottoWinningStats.calculateWinningStats(lotto, WinningNumbers.getNumbers(inputNumbers), purchaseAmount / PRICE);
     }
 
