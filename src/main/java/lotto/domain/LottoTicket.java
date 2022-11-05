@@ -17,11 +17,8 @@ public class LottoTicket {
 
     public LottoTicket(final List<Integer> numbers) {
         validateCountOfNumbers(numbers);
-
         validateNumberRange(numbers);
-
         validateDuplicateNumbers(numbers);
-
 
         this.numbers = numbers;
     }
@@ -35,19 +32,19 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    private static void validateCountOfNumbers(final List<Integer> numbers) {
+    private void validateCountOfNumbers(final List<Integer> numbers) {
         if (numbers.size() != FIXED_NUMBER_COUNT) {
             throw new IllegalArgumentException(FIXED_NUMBER_COUNT + "개의 숫자를 입력하세요");
         }
     }
 
-    private static void validateDuplicateNumbers(final List<Integer> numbers) {
+    private void validateDuplicateNumbers(final List<Integer> numbers) {
         if (numbers.stream().distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("중복된 숫자는 입력 불가능합니다");
         }
     }
 
-    private static void validateNumberRange(final List<Integer> numbers) {
+    private void validateNumberRange(final List<Integer> numbers) {
         if (numbers.stream().anyMatch(n -> n < 1 || 45 < n)) {
             throw new IllegalArgumentException("1부터 45까지 정수만 입력 가능합니다");
         }
