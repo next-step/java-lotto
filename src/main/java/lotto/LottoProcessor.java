@@ -1,16 +1,20 @@
 package lotto;
 
+import java.util.Map;
+
+import lotto.enums.Rank;
 import lotto.numbers.Lotto;
 import lotto.numbers.WinningNumbers;
+import lotto.views.OutputView;
 
 public class LottoProcessor {
-    public static final int AMOUNT = 1000;
+    public static final int PRICE = 1000;
 
     private final Lotto lotto;
     private LottoWinningStats lottoWinningStats;
 
     public LottoProcessor(int purchaseAmount) {
-        this.lotto = new Lotto(purchaseAmount / AMOUNT);
+        this.lotto = new Lotto(purchaseAmount / PRICE);
         this.lottoWinningStats = null;
     }
     public LottoProcessor(Lotto lotto, String inputNumbers) {
@@ -19,18 +23,28 @@ public class LottoProcessor {
     }
 
     public void publish(int purchaseAmount) {
-        lotto.generateNumbers(purchaseAmount / AMOUNT);
-        lotto.printNumbers();
+        lotto.generateNumbers(purchaseAmount / PRICE);
+        OutputView.printNumbers(lotto);
     }
-    public void calculateWinningStats(String inputNumbers) {
-        this.lottoWinningStats = new LottoWinningStats(lotto);
-        lottoWinningStats.calculateWinningStats(WinningNumbers.getNumbers(inputNumbers));
-        lottoWinningStats.calculateWinningCounts();
+    public void calculateWinningStats(String inputNumbers, int purchaseAmount) {
+        this.lottoWinningStats = new LottoWinningStats(lotto); // FIXME
+        lottoWinningStats.calculateWinningStats(lotto, WinningNumbers.getNumbers(inputNumbers), purchaseAmount / PRICE);
     }
 
-    public void printWinningStats(int purchaseAmount) {
-        lottoWinningStats.printWinningCounts();
-        System.out.println("총 수익률은 " + lottoWinningStats.getYield(purchaseAmount) + "입니다.");
+    public Map<Rank, Integer> getRanks() {
+        return this.lottoWinningStats.getRanks();
+    }
+
+    public double getYield(int purchaseCount) {
+        Map<Rank, Integer> rankingMap = this.lottoWinningStats.getRanks();
+        int totalAmounts = purchaseCount * LottoProcessor.PRICE;
+        int totalWinningAmounts = rankingMap.entrySet().stream()
+                                            .mapToInt(entry -> entry.getKey().getRewards().intValue() * entry.getValue()).sum();
+
+        if (rankingMap.isEmpty() || totalWinningAmounts == 0) {
+            return 0;
+        }
+        return (double) totalWinningAmounts / totalAmounts;
     }
 
 

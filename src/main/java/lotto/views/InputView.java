@@ -11,7 +11,7 @@ public class InputView {
         System.out.println("구입 금액을 입력해주세요.");
         int purchaseAmount = SCANNER.nextInt();
         SCANNER.nextLine();
-        System.out.println((purchaseAmount / LottoProcessor.AMOUNT) + "개를 구매했습니다.");
+        System.out.println((purchaseAmount / LottoProcessor.PRICE) + "개를 구매했습니다.");
         return purchaseAmount;
     }
 

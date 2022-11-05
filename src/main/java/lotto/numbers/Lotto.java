@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import lotto.numbers.AllNumbers;
-
 public class Lotto {
     public static final int TOTAL_NUMBERS_SIZE = 6;
 
@@ -30,29 +28,11 @@ public class Lotto {
         return numbers.get(index).contains(number);
     }
 
-    public void printNumbers() {
-        for (List<Integer> targetNumbers : numbers) {
-            System.out.print("[");
-            printEachNumber(targetNumbers);
-            System.out.println("]");
-        }
-        System.out.println();
-    }
-
-    private void printEachNumber(List<Integer> targetNumbers) {
-        for (int j = 0; j < targetNumbers.size(); j++) {
-            System.out.print(targetNumbers.get(j));
-            printComma(j, targetNumbers.size() - 1);
-        }
-    }
-
-    private void printComma(int index, int endIndex) {
-        if (index < endIndex) {
-            System.out.print(", ");
-        }
-    }
-
     public int getNumbersSize() {
         return this.numbers.size();
+    }
+
+    public List<List<Integer>> getNumbers() {
+        return this.numbers;
     }
 }
