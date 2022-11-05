@@ -1,18 +1,24 @@
 package lotto.domain;
 
+import java.util.OptionalInt;
+
 public class LottoCount {
-    public static final int LOTTO_PRICE = 1000;
+    private final int manualLottoCount;
+    private final int autoLottoCount;
 
-    private final int count;
-
-    public LottoCount(int price) {
-        if (price < LOTTO_PRICE || price % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("1000원 단위로 가능합니다.");
+    public LottoCount(int manualLottoCount, LottoPrice lottoCount) {
+        if (!lottoCount.validManualCount(manualLottoCount)) {
+            throw new IllegalArgumentException("구매 가능한 복권 개수가 아닙니다.");
         }
-        this.count = price / LOTTO_PRICE;
+        this.manualLottoCount = OptionalInt.of(manualLottoCount).orElse(0);
+        this.autoLottoCount = lottoCount.buyManualLottoCount(manualLottoCount);
     }
 
-    public int getCount() {
-        return count;
+    public int getManualLottoCount() {
+        return manualLottoCount;
+    }
+
+    public int getAutoLottoCount() {
+        return autoLottoCount;
     }
 }

@@ -5,10 +5,13 @@ import lotto.constant.LottoRanking;
 import java.util.*;
 
 public class LottoResult {
-    private final EnumMap<LottoRanking, Integer> lottoRankings;
+    private final EnumMap<LottoRanking, Integer> lottoRankings = new EnumMap<>(LottoRanking.class);
 
     public LottoResult(EnumMap<LottoRanking, Integer> lottoRankings) {
-       this.lottoRankings = lottoRankings;
+        for(LottoRanking rank : LottoRanking.values()) {
+            this.lottoRankings.put(rank, 0);
+        }
+       this.lottoRankings.putAll(lottoRankings);
     }
 
     public double calculatePercentage(int price) {
