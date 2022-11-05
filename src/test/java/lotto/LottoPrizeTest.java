@@ -10,7 +10,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoPrizeTest {
-
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2})
     void 당첨번호가_3개_미만(int commonNumberCount) {
