@@ -11,10 +11,10 @@ public class WinningNumbers {
     }
 
     public WinningNumbers(List<Integer> numbers) {
-        this(new LottoNumbers(numbers));
+        this(LottoNumbers.of(numbers));
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return this.numbers.getNumbers();
     }
 }

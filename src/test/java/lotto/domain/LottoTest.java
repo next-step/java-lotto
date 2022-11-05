@@ -26,7 +26,13 @@ class LottoTest {
 
         assertAll(
             () -> assertThat(lotto.getNumbers()).hasSize(6),
-            () -> assertThat(lotto.getNumbers()).containsExactly(1, 3, 5, 12, 23, 44)
+            () -> assertThat(lotto.getNumbers()).containsExactly(
+                new LottoNumber(1),
+                new LottoNumber(3),
+                new LottoNumber(5),
+                new LottoNumber(12),
+                new LottoNumber(23),
+                new LottoNumber(44))
         );
     }
 
@@ -49,7 +55,14 @@ class LottoTest {
     void numbersAscendingTest() {
         Lotto lotto = new Lotto(List.of(10, 4, 20, 7, 34, 1));
 
-        assertThat(lotto.getNumbers()).containsExactly(1, 4, 7, 10, 20, 34);
+        assertThat(lotto.getNumbers()).containsExactly(
+            new LottoNumber(1),
+            new LottoNumber(4),
+            new LottoNumber(7),
+            new LottoNumber(10),
+            new LottoNumber(20),
+            new LottoNumber(34)
+        );
     }
 
     @DisplayName("당첨 번호와 일치하는 로또 번호의 개수")

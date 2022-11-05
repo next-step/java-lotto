@@ -12,13 +12,15 @@ class AccordanceCountTest {
     @Test
     void calculateTotalPrizeTest() {
         AccordanceCount accordanceCount = new AccordanceCount(Map.of(
-            WinningAccordance.THREE,
+            WinningAccordance.FIFTH,
             3L,
-            WinningAccordance.FOUR,
+            WinningAccordance.FOURTH,
             1L,
-            WinningAccordance.FIVE,
+            WinningAccordance.THIRD,
             0L,
-            WinningAccordance.SIX,
+            WinningAccordance.SECOND,
+            0L,
+            WinningAccordance.FIRST,
             0L
         ));
 

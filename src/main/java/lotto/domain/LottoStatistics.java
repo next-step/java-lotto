@@ -8,9 +8,9 @@ public class LottoStatistics {
 
     private static final long INITIAL_COUNT = 0L;
 
-    public AccordanceCount collectAccordanceCount(Lottos lottos, WinningNumbers winningNumbers) {
-        List<Long> accordanceCounts = lottos.getAccordanceCounts(winningNumbers);
-        Map<WinningAccordance, Long> countsByWinningAccordance = collectEachAccordanceCount(accordanceCounts);
+    public AccordanceCount collectAccordanceCount(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+        List<Accordance> accordances = lottos.getAccordances(winningNumbers, bonusNumber);
+        Map<WinningAccordance, Long> countsByWinningAccordance = collectEachAccordanceCount(accordances);
 
         return new AccordanceCount(countsByWinningAccordance);
     }
@@ -20,16 +20,16 @@ public class LottoStatistics {
         return (double) totalWinningPrize / purchaseMoney.getValue();
     }
 
-    private Map<WinningAccordance, Long> collectEachAccordanceCount(List<Long> accordanceCounts) {
+    private Map<WinningAccordance, Long> collectEachAccordanceCount(List<Accordance> accordances) {
         Map<WinningAccordance, Long> countsByWinningAccordance = initCountsByWinningAccordance();
-        for (long accordCount : accordanceCounts) {
+        for (Accordance accordance : accordances) {
             countsByWinningAccordance.computeIfPresent(
-                WinningAccordance.of(accordCount),
+                WinningAccordance.of(accordance),
                 (winningAccordance, count) -> count + 1L
             );
         }
 
-        return Map.copyOf(countsByWinningAccordance);
+        return countsByWinningAccordance;
     }
 
     private Map<WinningAccordance, Long> initCountsByWinningAccordance() {
