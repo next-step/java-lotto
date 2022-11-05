@@ -1,19 +1,39 @@
 package lotto;
 
-import java.util.List;
+import lotto.domain.Lotto;
 
-public class ManualLottoFactory {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.IntStream;
+
+public class LottoFactory {
+
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
+    private static final int ZERO = 0;
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    public static Lotto create(List<Integer> numbers) {
+    public static Lotto createManualLotto(List<Integer> numbers) {
         checkLottoNumbersSize(numbers.size());
         for (int number : numbers) {
             checkNumber(number);
         }
 
         return new Lotto(numbers);
+    }
+
+    public static Lotto createAutoLotto() {
+        List<Integer> numbers = new ArrayList<>();
+        List<Integer> lotto = new ArrayList<>();
+
+        IntStream.range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX).forEach(numbers :: add);
+        Collections.shuffle(numbers);
+
+        IntStream.range(ZERO, LOTTO_NUMBERS_SIZE).forEach(i -> lotto.add(numbers.get(i)));
+        Collections.sort(lotto);
+
+        return new Lotto(lotto);
     }
 
     private static void checkLottoNumbersSize(int size) {

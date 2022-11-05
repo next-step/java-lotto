@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.ManualLottoFactory;
+import lotto.domain.Lotto;
+import lotto.LottoFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,7 +38,7 @@ public class InputView {
             List<Integer> numbers = Arrays.stream(inputAndSplitString())
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-            ManualLottoFactory.create(numbers);
+            lottos.add(LottoFactory.createManualLotto(numbers));
         }
 
         return lottos;
