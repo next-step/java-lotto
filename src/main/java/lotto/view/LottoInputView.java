@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -19,17 +17,15 @@ public class LottoInputView {
         }
     }
 
-    public static LottoTicket getLastWeekWinnerNumber() {
+    public static List<Integer> getLastWeekWinnerNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String inputString = scanner.nextLine();
         try {
-            List<Integer> lastWeekWinningNumbers = Arrays.stream(inputString.split(","))
+            return Arrays.stream(inputString.split(","))
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-
-            return new LottoTicket(lastWeekWinningNumbers);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력해주세요");
         }
