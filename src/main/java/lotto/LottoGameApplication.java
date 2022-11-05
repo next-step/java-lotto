@@ -21,8 +21,10 @@ public class LottoGameApplication {
             return;
         }
 
-        LottoTicket lastWeekWinner = new LottoTicket(LottoInputView.getLastWeekWinnerNumber());
-        List<LottoPrize> prizes = LottoEarningCalculator.findPrize(tickets, lastWeekWinner);
+        LottoTicket lastWeekWinnerTicket = new LottoTicket(LottoInputView.getLastWeekWinnerNumber());
+        int lasWeekBonusNumber = LottoInputView.getLastWeekBonusNumber();
+
+        List<LottoPrize> prizes = LottoEarningCalculator.findPrize(tickets, lastWeekWinnerTicket);
 
         LottoResultView.printResult(prizes, tickets.size());
     }

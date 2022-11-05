@@ -10,11 +10,7 @@ public class LottoInputView {
 
     public static int getMoneyForTicket() {
         System.out.println("구입금액을 입력해 주세요.");
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (Exception e) {
-            throw new IllegalArgumentException("숫자로 입력해주세요");
-        }
+        return getIntInput();
     }
 
     public static List<Integer> getLastWeekWinnerNumber() {
@@ -28,6 +24,19 @@ public class LottoInputView {
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력해주세요");
+        }
+    }
+
+    public static int getLastWeekBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return getIntInput();
+    }
+
+    private static int getIntInput() {
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("숫자로 입력해주세요");
         }
     }
 }
