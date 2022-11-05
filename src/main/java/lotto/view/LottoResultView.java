@@ -17,7 +17,8 @@ public class LottoResultView {
     public static void printTickets(List<LottoTicket> ticketList) {
         System.out.println(ticketList.size() + "개를 구매했습니다.");
         ticketList.stream()
-                .map(LottoTicketView::new)
+                .map(LottoTicket::getNumbers)
+                .map(numbers -> numbers.stream().map(Object::toString).collect(Collectors.joining(", ", "[", "]")))
                 .forEach(System.out::println);
     }
 
