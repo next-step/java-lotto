@@ -42,5 +42,4 @@ class AwardsTest {
 				arguments(6, 2000000000)
 		);
 	}
-
 }
