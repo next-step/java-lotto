@@ -1,34 +1,34 @@
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.IntBinaryOperator;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public enum Operator implements IntBinaryOperator {
+public enum Operator implements BinaryOperator<Operand> {
 
     PLUS("+") {
         @Override
-        public int applyAsInt(final int left, final int right) {
-            return left + right;
+        public Operand apply(final Operand left, final Operand right) {
+            return left.plus(right);
         }
     },
     MINUS("-") {
         @Override
-        public int applyAsInt(final int left, final int right) {
-            return left - right;
+        public Operand apply(final Operand left, final Operand right) {
+            return left.minus(right);
         }
     },
     TIMES("*") {
         @Override
-        public int applyAsInt(final int left, final int right) {
-            return left * right;
+        public Operand apply(final Operand left, final Operand right) {
+            return left.times(right);
         }
     },
     DIVIDE("/") {
         @Override
-        public int applyAsInt(final int left, final int right) {
-            return left / right;
+        public Operand apply(final Operand left, final Operand right) {
+            return left.divide(right);
         }
     };
 
@@ -44,11 +44,6 @@ public enum Operator implements IntBinaryOperator {
 
     public static Optional<Operator> fromString(final String symbol) {
         return Optional.ofNullable(stringToEnum.get(symbol));
-    }
-
-    public static boolean isOperator(final String symbol) {
-        final Optional<Operator> op = fromString(symbol);
-        return op.isPresent();
     }
 
     @Override

@@ -14,24 +14,25 @@ public final class StringCalculator {
     private StringCalculator() {
     }
 
-    public static Integer compute(final String input) {
+    public static int compute(final String input) {
         validateInput(input);
         final List<String> inputs = split(input);
-        final Queue<Integer> operands = mapToOperandQueue(inputs);
+        final Queue<Operand> operands = mapToOperandQueue(inputs);
         final Queue<Operator> operators = mapToOperatorQueue(inputs);
         validatePreConditions(inputs, operands, operators);
         if (operands.size() == SINGLE) {
-            return operands.poll();
+            return operands.poll().intValue();
         }
-        final Integer startOperand = operands.poll();
-        return operands.stream()
+        final Operand startOperand = operands.poll();
+        final Operand finalOperand = operands.stream()
             .reduce(startOperand, (partialResult, operand) ->
-                Objects.requireNonNull(operators.poll()).applyAsInt(partialResult, operand));
+                Objects.requireNonNull(operators.poll()).apply(partialResult, operand));
+        return finalOperand.intValue();
     }
 
     private static void validatePreConditions(
         final List<String> inputs,
-        final Queue<Integer> operands,
+        final Queue<Operand> operands,
         final Queue<Operator> operators
     ) {
         if (inputs.isEmpty()) {
@@ -71,25 +72,11 @@ public final class StringCalculator {
             .collect(Collectors.toCollection(ArrayDeque::new));
     }
 
-    private static Queue<Integer> mapToOperandQueue(final List<String> inputs) {
+    private static Queue<Operand> mapToOperandQueue(final List<String> inputs) {
         return inputs.stream()
-            .filter(StringCalculator::isOperand)
-            .map(StringCalculator::mapToOperand)
+            .filter(Operand::canParseOperand)
+            .map(Operand::valueOf)
             .collect(Collectors.toCollection(ArrayDeque::new));
     }
-
-    private static Integer mapToOperand(final String value) {
-        return Integer.parseInt(value);
-    }
-
-    private static boolean isOperand(final String value) {
-        try {
-            Integer.parseInt(value);
-            return true;
-        } catch (final NumberFormatException numberFormatException) {
-            return false;
-        }
-    }
-
 
 }
