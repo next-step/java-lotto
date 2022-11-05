@@ -6,5 +6,7 @@ import lotto.view.InputView;
 public class LottoController {
     public static void run() {
         Lottos lottos = new Lottos(InputView.inputAmount());
+        int manualLottoQuantity = InputView.inputManualLottoQuantity();
+
     }
 }
