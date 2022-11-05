@@ -14,7 +14,7 @@ public class Game {
         Print.manualLotto();
 
         int manualLottoAmount = Integer.parseInt(InputView.input());
-        checkManualLottoAmount(lottoMoney, manualLottoAmount);
+        lottoMoney.checkManualAmount(manualLottoAmount);
         Print.makeManualLotto();
         List<Lotto> manualLotto = makeManualLotto(manualLottoAmount);
         List<Lotto> autoLotto = makeAutoLotto(lottoMoney.amountOfLottos() - manualLottoAmount);
@@ -35,12 +35,6 @@ public class Game {
         Lottos lottos = new Lottos(combineLotto);
 
         Print.rateOfWin(input, new Result(lottos).results(winLotto, bonus));
-    }
-
-    private static void checkManualLottoAmount(LottoAmount lottoMoney, int manualLottoAmount) {
-        if (manualLottoAmount > lottoMoney.amountOfLottos()) {
-            throw new IllegalArgumentException(lottoMoney.amountOfLottos() + "개 초과하여 구매할 수 없습니다.");
-        }
     }
 
     private static List<Lotto> makeManualLotto(int input) {
