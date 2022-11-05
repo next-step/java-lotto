@@ -35,4 +35,13 @@ class LottoTest {
 		assertThat(lotto.isExist(7)).isFalse();
 		assertThat(lotto.isExist(6)).isTrue();
 	}
+
+	@Test
+	@DisplayName("매개변수 String[], 당첨 번호 중복 체크")
+	void validCreateWinLotto() {
+		String[] winLotto = {"1", "2", "3", "4", "6", "6"};
+
+		assertThatThrownBy(() -> new Lotto(winLotto))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
 }

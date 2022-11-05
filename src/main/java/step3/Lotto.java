@@ -20,14 +20,17 @@ public class Lotto {
 	private static Set<Integer> makeLotto(String[] inputs) {
 		Set<Integer> lotto = new TreeSet<>();
 		for (String input : inputs) {
-			lotto.add(checkInt(input));
+			lotto.add(checkInt(lotto, input));
 		}
 		return lotto;
 	}
 
-	private static Integer checkInt(String input) {
+	private static Integer checkInt(Set<Integer> lotto, String input) {
 		int change = Integer.parseInt(input);
 		if (change < LOTTO_START || LOTTO_END < change) {
+			throw new IllegalArgumentException(LOTTO_START + " ~ " + LOTTO_END + " 수만 입력해주세요");
+		}
+		if (lotto.contains(change)) {
 			throw new IllegalArgumentException(LOTTO_START + " ~ " + LOTTO_END + " 중복되지 않는 수를 입력해주세요");
 		}
 		return change;
