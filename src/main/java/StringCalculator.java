@@ -20,6 +20,10 @@ public final class StringCalculator {
         final Queue<Operand> operands = mapToOperandQueue(inputs);
         final Queue<Operator> operators = mapToOperatorQueue(inputs);
         validatePreConditions(inputs, operands, operators);
+        return compute(operands, operators);
+    }
+
+    private static int compute(final Queue<Operand> operands, final Queue<Operator> operators) {
         if (operands.size() == SINGLE) {
             return operands.poll().intValue();
         }
