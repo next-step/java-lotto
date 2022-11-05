@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.LottoFactory;
 import lotto.domain.Lottos;
+import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -19,7 +20,11 @@ public class LottoController {
         List<Lotto> autoLottos = createAutoLottos(lottos.autoLottoQuantity());
         lottos.saveLotto(autoLottos);
 
-        OutputView.outputLottoQuantity(lottos);
+        OutputView.outputLottos(lottos);
+
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.inputNumbers(), InputView.inputBonusNumber());
+
+
     }
 
     private static List<Lotto> createAutoLottos(int quantity) {

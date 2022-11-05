@@ -27,10 +27,12 @@ public class LottoFactory {
         List<Integer> numbers = new ArrayList<>();
         List<Integer> lotto = new ArrayList<>();
 
-        IntStream.range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX).forEach(numbers :: add);
+        IntStream.range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
+                .forEach(numbers :: add);
         Collections.shuffle(numbers);
 
-        IntStream.range(ZERO, LOTTO_NUMBERS_SIZE).forEach(i -> lotto.add(numbers.get(i)));
+        IntStream.range(ZERO, LOTTO_NUMBERS_SIZE)
+                .forEach(i -> lotto.add(numbers.get(i)));
         Collections.sort(lotto);
 
         return new Lotto(lotto);
