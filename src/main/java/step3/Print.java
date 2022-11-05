@@ -48,6 +48,9 @@ public class Print {
             return
                     "5개 일치, 보너스 볼 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개";
         }
+        if (entry.getKey().getCount() == 0) {
+            return "";
+        }
         return entry.getKey().getCount() + "개 일치 (" + entry.getKey().getWinning() + "원)- " + entry.getValue() + "개";
     }
 
