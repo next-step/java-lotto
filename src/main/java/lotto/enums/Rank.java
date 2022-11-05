@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, BigDecimal.valueOf(2000000000)),
-    SECOND(5, BigDecimal.valueOf(30000000)),
-    THIRD(5, BigDecimal.valueOf(1500000)),
+    FIFTH(3, BigDecimal.valueOf(5000)),
     FOURTH(4, BigDecimal.valueOf(50000)),
-    FIFTH(3, BigDecimal.valueOf(5000));
+    THIRD(5, BigDecimal.valueOf(1500000)),
+    SECOND(5, BigDecimal.valueOf(30000000)),
+    FIRST(6, BigDecimal.valueOf(2000000000));
 
 
     int countsOfSameNumbers;
