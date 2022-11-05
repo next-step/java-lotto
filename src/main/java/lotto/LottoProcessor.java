@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Map;
 
-import lotto.enums.Rank;
+import lotto.enums.Ranks;
 import lotto.numbers.Lotto;
 import lotto.numbers.WinningNumbers;
 import lotto.views.OutputView;
@@ -26,12 +26,12 @@ public class LottoProcessor {
         lottoWinningStats.calculateWinningStats(lotto, WinningNumbers.getNumbers(inputNumbers), purchaseAmount / PRICE);
     }
 
-    public Map<Rank, Integer> getRanks() {
+    public Map<Ranks, Integer> getRanks() {
         return this.lottoWinningStats.getRanks();
     }
 
     public double getYield(int purchaseCount) {
-        Map<Rank, Integer> rankingMap = this.lottoWinningStats.getRanks();
+        Map<Ranks, Integer> rankingMap = this.lottoWinningStats.getRanks();
         int totalAmounts = purchaseCount * LottoProcessor.PRICE;
         int totalWinningAmounts = rankingMap.entrySet().stream()
                                             .mapToInt(entry -> entry.getKey().getRewards().intValue() * entry.getValue()).sum();

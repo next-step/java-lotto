@@ -6,12 +6,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import lotto.enums.Rank;
+import lotto.enums.Ranks;
 import lotto.numbers.Lotto;
 
 public class LottoWinningStats {
     private final List<Integer> winningStats;
-    private final Map<Rank, Integer> rankingMap;
+    private final Map<Ranks, Integer> rankingMap;
 
     public LottoWinningStats(Lotto lotto) {
         this.winningStats = new ArrayList<>(lotto.getNumbersSize());
@@ -25,22 +25,22 @@ public class LottoWinningStats {
         }
     }
 
-    public Map<Rank, Integer> getRanks() {
+    public Map<Ranks, Integer> getRanks() {
         if (rankingMap.isEmpty()) {
             return calculateRanks();
         }
         return this.rankingMap;
     }
 
-    private Map<Rank, Integer> calculateRanks() {
+    private Map<Ranks, Integer> calculateRanks() {
         for (int targetCount : this.winningStats) {
             countByCase(targetCount, rankingMap);
         }
         return rankingMap;
     }
 
-    private void countByCase(int targetCount, Map<Rank, Integer> rankingMap) { // FIXME 메서드 분리
-        Arrays.stream(Rank.values()).forEach(rank -> {
+    private void countByCase(int targetCount, Map<Ranks, Integer> rankingMap) { // FIXME 메서드 분리
+        Arrays.stream(Ranks.values()).forEach(rank -> {
             if (rank.getCountsOfSameNumbers() == targetCount) {
                 rankingMap.put(rank, rankingMap.getOrDefault(rank, 0) + 1);
             }

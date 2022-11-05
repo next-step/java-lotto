@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.LottoProcessor;
-import lotto.enums.Rank;
+import lotto.enums.Ranks;
 import lotto.numbers.Lotto;
 
 public class OutputView {
@@ -19,15 +19,15 @@ public class OutputView {
     }
 
     public static void printWinningStatsResult(LottoProcessor lottoProcessor, int purchaseAmount) {
-        Map<Rank, Integer> rankingMap = lottoProcessor.getRanks();
+        Map<Ranks, Integer> rankingMap = lottoProcessor.getRanks();
         printWinningStats(rankingMap);
         System.out.println("총 수익률은 " + lottoProcessor.getYield(purchaseAmount / LottoProcessor.PRICE)+ "입니다.");
     }
 
-    public static void printWinningStats(Map<Rank, Integer> rankingMap) {
+    public static void printWinningStats(Map<Ranks, Integer> rankingMap) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Arrays.stream(Rank.values()).forEach(rank -> {
+        Arrays.stream(Ranks.values()).forEach(rank -> {
             int count = rankingMap.getOrDefault(rank,0);
             System.out.println(rank.getCountsOfSameNumbers() + "개 일치 (" + rank.getRewards() + ")원-" + count + "개");
         });
