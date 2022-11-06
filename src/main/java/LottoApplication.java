@@ -12,7 +12,7 @@ public class LottoApplication {
         List<Integer> winnerNumberList = Input.inputWinnerNumberList();
         Integer bonusBallNumber = Input.inputBonusBallNumber();
 
-        List<Lotto> lottoList = Output.getRank(numberList, winnerNumberList);
+        List<Lotto> lottoList = Output.getRank(numberList, winnerNumberList, bonusBallNumber);
         Output.getResult(lottoList);
     }
 }

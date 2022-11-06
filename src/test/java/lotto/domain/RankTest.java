@@ -12,9 +12,9 @@ class RankTest {
     private Rank rank;
 
     @ParameterizedTest
-    @CsvSource({"6, 2000000000", "5, 1500000", "4, 50000", "3, 5000", "0, 0"})
-    void winner_gets_amount(int input, BigDecimal expected) {
-        BigDecimal amount = rank.getRank(input).getAmount();
+    @CsvSource({"6, 45, 2000000000", "5, 45, 1500000", "4, 45, 50000", "3, 45, 5000", "0, 45, 0"})
+    void winner_gets_amount(int input, Integer number, BigDecimal expected) {
+        BigDecimal amount = rank.getRank(input, number).getAmount();
         assertEquals(expected, amount);
     }
 }

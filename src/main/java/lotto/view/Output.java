@@ -25,11 +25,11 @@ public class Output {
         return lottoList;
     }
 
-    public static List<Lotto> getRank(List<Lotto> lottoList, List<Integer> winnerNumberList) {
+    public static List<Lotto> getRank(List<Lotto> lottoList, List<Integer> winnerNumberList, Integer bonusBallNumber) {
 
         int[] matchList = new int[6 + 1];
         for (Lotto lotto : lottoList) {
-            Lotto matchRank = lotto.matchRank(winnerNumberList);
+            Lotto matchRank = lotto.matchRank(winnerNumberList, bonusBallNumber);
             matchList[matchRank.match()]++;
         }
 
@@ -37,7 +37,7 @@ public class Output {
         System.out.println("---------");
 
         for (int i = 3; i <= 6; i++) {
-            match(i, Rank.getRank(i).getAmount(), matchList[i]);
+            match(i, Rank.getRank(i, bonusBallNumber).getAmount(), matchList[i]);
         }
 
         return lottoList;

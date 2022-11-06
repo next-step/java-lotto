@@ -39,11 +39,11 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("provideNumberList")
-    void compare_Lotto_Rank(List<LottoNumber> numberList, int count) {
+    void compare_Lotto_Rank(List<LottoNumber> numberList, int count, Integer bonusBallNumber) {
         List<Integer> winnerNumberList = List.of(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = new Lotto(numberList);
-        Lotto matchRank = lotto.matchRank(winnerNumberList);
+        Lotto matchRank = lotto.matchRank(winnerNumberList, bonusBallNumber);
 
         assertEquals(matchRank.getRank().getCount(), count);
     }
