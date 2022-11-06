@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AutoNumberList implements NumberList {
 
@@ -28,11 +29,10 @@ public class AutoNumberList implements NumberList {
     }
 
     private static List<Integer> getNumberList() {
-        List<Integer> pickNumber = new ArrayList<>();
+        List<Integer> pickNumber = IntStream.range(LottoBall.getStartNumber(), LottoBall.getLastNumber())
+                .boxed()
+                .collect(Collectors.toList());
 
-        for (int i = LottoBall.getStartNumber(); i < LottoBall.getLastNumber(); i++) {
-            pickNumber.add(i);
-        }
         Collections.shuffle(pickNumber);
 
         return pickNumber.subList(START_UNIT, END_UNIT);
