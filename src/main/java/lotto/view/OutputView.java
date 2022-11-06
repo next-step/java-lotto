@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void printAmountOfTickets(Amount amountOfManualTickets, Amount amountOfAutoTickets) {
+    public static void printAmountOfTickets(Amount amountOfManualTickets, Amount amountOfAutoTickets) {
         System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.%n", amountOfManualTickets.getAmount(), amountOfAutoTickets.getAmount());
     }
 
-    public void printBuyingTickets(LotteryTickets tickets) {
+    public static void printBuyingTickets(LotteryTickets tickets) {
         for (LotteryTicket ticket : tickets.getLotteryTickets()) {
             printTicket(ticket);
         }
@@ -26,7 +26,7 @@ public class OutputView {
         System.out.printf("[%s]%n", String.join(", ", numbers));
     }
 
-    public void printResult(Result result) {
+    public static void printResult(Result result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         printRanks(result.getRanks());
