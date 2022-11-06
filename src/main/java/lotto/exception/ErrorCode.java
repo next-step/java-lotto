@@ -7,7 +7,8 @@ public enum ErrorCode {
     OUT_OF_RANGE_PRICE("구입금액은 1000원보다 커야 합니다."),
     AMOUNT_UNDER_ZERO("0보다 커야 합니다."),
     NULL_OR_EMPTY("입력 값이 빈 값이나 공백일 수 없습니다."),
-    WRONG_NUMBER_FORMAT("숫자 포맷이 아닙니다.");
+    WRONG_NUMBER_FORMAT("숫자 포맷이 아닙니다."),
+    CANNOT_DIVIDE_BY_TICKET_PRICE("구입 금액이 1000원으로 나누어 떨어지지 않습니다.");
 
     private final String message;
 

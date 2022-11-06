@@ -33,7 +33,7 @@ public class Price {
 
     public Amount calculateAmount() {
         if (this.price % LOTTERY_TICKET_PRICE != 0) {
-            throw new LotteryGameException(ErrorCode.AMOUNT_UNDER_ZERO);
+            throw new LotteryGameException(ErrorCode.CANNOT_DIVIDE_BY_TICKET_PRICE);
         }
         return new Amount(this.price / LOTTERY_TICKET_PRICE);
     }
