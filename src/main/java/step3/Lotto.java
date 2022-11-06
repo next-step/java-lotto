@@ -6,6 +6,7 @@ import java.util.TreeSet;
 public class Lotto {
     private static final int LOTTO_START = 1;
     private static final int LOTTO_END = 45;
+    private static final int LOTTO_SIZE = 6;
 
     private Set<Integer> lotto;
 
@@ -35,7 +36,7 @@ public class Lotto {
     }
 
     private static void checkSizeOfLotto(Set<Integer> lotto) {
-        if (lotto.size() != 6) {
+        if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_START + " ~ " + LOTTO_END + " 중복되지 않는 수를 입력해주세요");
         }
     }
