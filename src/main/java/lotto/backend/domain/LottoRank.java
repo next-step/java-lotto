@@ -31,7 +31,7 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(Matching matching) {
-        if (matching.countOfMatch() == 2) {
+        if (matching.countOfMatch() == 5) {
             return matching.hasBonusNumber() ? SECOND : THIRD;
         }
         return CACHED_BY_MATCHING.getOrDefault(matching.countOfMatch(), NOTHING);
