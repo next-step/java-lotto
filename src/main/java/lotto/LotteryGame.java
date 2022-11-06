@@ -16,11 +16,10 @@ public class LotteryGame {
 
     private void buyTickets() {
         price = new Price(InputView.enterPurchasePrice());
-        Amount amountOfTickets = price.calculateAmount();
-
         Amount amountOfManualTickets = new Amount(InputView.enterAmountOfManualTickets());
         tickets = LotteryTickets.of(InputView.enterManualTickets(amountOfManualTickets));
 
+        Amount amountOfTickets = price.calculateAmount();
         Amount amountOfAutoTickets = amountOfTickets.minus(amountOfManualTickets);
         tickets.add(amountOfAutoTickets.createTickets(new AutoGenerateStrategy()));
 
