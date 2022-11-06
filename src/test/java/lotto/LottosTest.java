@@ -14,8 +14,8 @@ import static org.assertj.core.api.Assertions.*;
 public class LottosTest {
     @Test
     void 로또개수입력() {
-        Lottos lottos = new Lottos(1000, 3);
-        assertThat(lottos.totalQuantity()).isEqualTo(1);
+        Lottos lottos = new Lottos(5000, 3);
+        assertThat(lottos.totalQuantity()).isEqualTo(5);
         assertThat(lottos.autoLottoQuantity()).isEqualTo(2);
     }
 

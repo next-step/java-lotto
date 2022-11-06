@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import static lotto.domain.Rank.*;
 
 public class RankCount {
+    private static final int ZERO = 0;
 
     private EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
 
@@ -18,7 +19,7 @@ public class RankCount {
     }
 
     public void countRank(Lotto lotto, WinningNumbers winningNumbers) {
-        int countOfMatch = 0;
+        int countOfMatch = ZERO;
         boolean bonusBallMatch = false;
 
         for (int number : lotto.numbers()) {
@@ -26,10 +27,10 @@ public class RankCount {
             bonusBallMatch = matchBonusBall(winningNumbers, number);
         }
 
-        countRank(countOfMatch, bonusBallMatch);
+        plusRank(countOfMatch, bonusBallMatch);
     }
 
-    private void countRank(int countOfMatch, boolean bonusBallMatch) {
+    private void plusRank(int countOfMatch, boolean bonusBallMatch) {
         Rank rank = Rank.valueOf(countOfMatch, bonusBallMatch);
         int count = rankCount.get(rank);
         rankCount.put(rank, count + 1);
@@ -50,11 +51,15 @@ public class RankCount {
     }
 
     public long winningAmount() {
-        long totalWinningMoney = 0;
+        long totalWinningMoney = ZERO;
         for (Rank rank : Rank.values()) {
             totalWinningMoney += rank.winningMoney() * rankCount.get(rank);
         }
         return totalWinningMoney;
+    }
+
+    public int numberOfRank(Rank rank) {
+        return rankCount.get(rank);
     }
 
 }
