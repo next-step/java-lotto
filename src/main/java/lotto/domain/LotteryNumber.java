@@ -17,7 +17,14 @@ public class LotteryNumber {
     }
 
     public LotteryNumber(String number) {
-        this.number = Integer.parseInt(number);
+        this.number = parseInt(number);
+    }
+
+    private static int parseInt(String number) {
+        if (Objects.isNull(number) || number.isEmpty()) {
+            throw new LotteryGameException(ErrorCode.NULL_OR_EMPTY);
+        }
+        return Integer.parseInt(number);
     }
 
     private void validateRange(int number) {

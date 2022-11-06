@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.exception.ErrorCode;
 import lotto.exception.LotteryGameException;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -16,6 +18,16 @@ public class LotteryNumberTest {
                 .isInstanceOf(LotteryGameException.class)
                 .hasMessage(ErrorCode.OUT_OF_RANGE_NUMBER.getMessage());
     }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void null_or_empty(String number) {
+        assertThatThrownBy(() -> new LotteryNumber(number))
+                .isInstanceOf(LotteryGameException.class)
+                .hasMessage(ErrorCode.NULL_OR_EMPTY.getMessage());
+    }
+
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 45})

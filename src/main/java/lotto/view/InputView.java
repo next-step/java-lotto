@@ -5,13 +5,9 @@ import java.util.Scanner;
 public class InputView {
     public static final Scanner scanner = new Scanner(System.in);
 
-    public int enterPurchasePrice() {
+    public String enterPurchasePrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanInt();
-    }
-
-    private int scanInt() {
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine();
     }
 
     public String enterWinningNumbers() {
@@ -19,8 +15,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public int enterBonusBoll() {
+    public String enterBonusBoll() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanInt();
+        return scanner.nextLine();
     }
 }
