@@ -11,6 +11,7 @@ public class Price {
 
     public Price(int price) {
         validateOutOfRange(price);
+        validateDivideByTicketPrice(price);
         this.price = price;
     }
 
@@ -32,10 +33,13 @@ public class Price {
     }
 
     public Amount calculateAmount() {
-        if (this.price % LOTTERY_TICKET_PRICE != 0) {
+        return new Amount(this.price / LOTTERY_TICKET_PRICE);
+    }
+
+    private void validateDivideByTicketPrice(int price) {
+        if (price % LOTTERY_TICKET_PRICE != 0) {
             throw new LotteryGameException(ErrorCode.CANNOT_DIVIDE_BY_TICKET_PRICE);
         }
-        return new Amount(this.price / LOTTERY_TICKET_PRICE);
     }
 
     public double divide(int price) {

@@ -34,7 +34,7 @@ public class PriceTest {
 
     @Test
     void cannot_divide_by_ticket_price() {
-        assertThatThrownBy(() -> new Price(1500).calculateAmount())
+        assertThatThrownBy(() -> new Price(1500))
                 .isInstanceOf(LotteryGameException.class)
                 .hasMessage(ErrorCode.CANNOT_DIVIDE_BY_TICKET_PRICE.getMessage());
     }
