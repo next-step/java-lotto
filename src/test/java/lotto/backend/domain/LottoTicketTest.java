@@ -49,7 +49,7 @@ class LottoTicketTest {
     @Test
     @DisplayName("수동번호 생성인지 판별")
     void custom_ticket() {
-        List numbers = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         LottoTicket lottoTicket = LottoTicket.create(new CustomNumberGenerator(numbers));
         assertThat(lottoTicket.isAutoType()).isEqualTo(false);
     }
