@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PriceTest {
     @Test
-    void under_zero() {
-        assertThatThrownBy(() -> new Price(0))
+    void under_lottery_ticket_price() {
+        assertThatThrownBy(() -> new Price(999))
                 .isInstanceOf(LotteryGameException.class)
                 .hasMessage(ErrorCode.OUT_OF_RANGE_PRICE.getMessage());
     }
@@ -29,6 +29,6 @@ public class PriceTest {
 
     @Test
     void calculate_amount() {
-        assertThat(new Price(10000).calculateAmount(new Price(1000))).isEqualTo(new Amount(10));
+        assertThat(new Price(10000).calculateAmount()).isEqualTo(new Amount(10));
     }
 }
