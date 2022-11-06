@@ -10,6 +10,7 @@ public class LottoApplication {
         BigDecimal amount = Input.inputAmount();
         List<Lotto> numberList = Output.print(amount);
         List<Integer> winnerNumberList = Input.inputWinnerNumberList();
+        Integer bonusBallNumber = Input.inputBonusBallNumber();
 
         List<Lotto> lottoList = Output.getRank(numberList, winnerNumberList);
         Output.getResult(lottoList);
