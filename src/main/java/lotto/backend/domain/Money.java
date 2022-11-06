@@ -10,4 +10,8 @@ public class Money {
     public int howManyLottoTickets(int pricePerMoney) {
         return value / pricePerMoney;
     }
+
+    public double calculateRatio(Money money) {
+        return (double) value / money.value;
+    }
 }

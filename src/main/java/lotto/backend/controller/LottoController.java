@@ -16,10 +16,15 @@ public class LottoController {
     private static final ResultView RESULT_VIEW = new ResultView();
 
     public void start() {
-        Lotto lotto = new Lotto();
 
-        LottoTickets lottoTickets = lotto.buy(INPUT_VIEW.askEnterMoney());
-        RESULT_VIEW.printLottoNumber(LottoTicketsDto.of(lottoTickets));
+        int money = INPUT_VIEW.askEnterMoney();
+        Lotto lotto = new Lotto(money);
+
+        int countOfCustomLotto = INPUT_VIEW.askEnterCountOfCustomLotto();
+        List<List<Integer>> customNumbers = INPUT_VIEW.askEnterCustomNumbers(countOfCustomLotto);
+        LottoTickets lottoTickets = lotto.buy(customNumbers);
+
+        RESULT_VIEW.printLottoNumber(new LottoTicketsDto(lottoTickets));
 
         List<Integer> winningNumbers = INPUT_VIEW.askEnterWinningNumbers();
         int bonus = INPUT_VIEW.askEnterBonusNumber();
