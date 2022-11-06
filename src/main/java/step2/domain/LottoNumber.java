@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.*;
 
 public class LottoNumber {
 
@@ -11,6 +14,10 @@ public class LottoNumber {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int NUMBER_OF_DRAWS = 6;
     private static final int ZERO = 0;
+    private static final List<Integer> NUMBERS =
+            IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                    .boxed()
+                    .collect(toList());
 
     private final List<Integer> lottoNumbers;
 
@@ -19,18 +26,10 @@ public class LottoNumber {
     }
 
     private static List<Integer> createLottoNumber() {
-        List<Integer> numbers = createFromMinToMaxNumber();
+        List<Integer> numbers = new ArrayList<>(NUMBERS);
         Collections.shuffle(numbers);
         Collections.sort(numbers.subList(ZERO, NUMBER_OF_DRAWS));
         return numbers.subList(ZERO, NUMBER_OF_DRAWS);
-    }
-
-    private static List<Integer> createFromMinToMaxNumber() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            numbers.add(i);
-        }
-        return numbers;
     }
 
     public List<Integer> getLottoNumbers() {
