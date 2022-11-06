@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import lotto.LottoProcessor;
+import lotto.LottoWinningStats;
 import lotto.enums.Ranks;
 import lotto.numbers.Lotto;
 
@@ -18,10 +18,10 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printWinningStatsResult(LottoProcessor lottoProcessor, int purchaseAmount) {
-        Map<Ranks, Integer> rankingMap = lottoProcessor.getRanks();
+    public static void printWinningStatsResult(LottoWinningStats lottoWinningStats, int purchaseAmount) {
+        Map<Ranks, Integer> rankingMap = lottoWinningStats.getRanks();
         printWinningStats(rankingMap);
-        System.out.println("총 수익률은 " + lottoProcessor.getYield(purchaseAmount / LottoProcessor.PRICE)+ "입니다.");
+        System.out.println("총 수익률은 " + lottoWinningStats.getYield(purchaseAmount / LottoWinningStats.PRICE)+ "입니다.");
     }
 
     public static void printWinningStats(Map<Ranks, Integer> rankingMap) {

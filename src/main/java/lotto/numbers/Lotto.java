@@ -12,9 +12,10 @@ public class Lotto {
 
     public Lotto(int purchaseCount) {
         this.numbers = new ArrayList<>(purchaseCount);
+        generateNumbers(purchaseCount);
     }
 
-    public void generateNumbers(int purchaseCount) {
+    private void generateNumbers(int purchaseCount) {
         List<Integer> allNumbers = AllNumbers.getNumbers();
         for (int i=0 ; i<purchaseCount ; i++) {
             Collections.shuffle(allNumbers);

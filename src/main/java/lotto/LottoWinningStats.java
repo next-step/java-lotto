@@ -10,17 +10,21 @@ import lotto.enums.Ranks;
 import lotto.numbers.Lotto;
 
 public class LottoWinningStats {
+    public static final int PRICE = 1000;
+
     private final List<Integer> winningStats;
     private final Map<Ranks, Integer> rankingMap;
 
-    public LottoWinningStats(Lotto lotto) {
+    public LottoWinningStats(Lotto lotto, List<Integer> winningNumbers) {
         this.winningStats = new ArrayList<>(lotto.getNumbersSize());
         this.rankingMap = new LinkedHashMap<>();
+
+        calculateWinningStats(lotto, winningNumbers);
     }
 
-    public void calculateWinningStats(Lotto lotto, List<Integer> winningNumbers, int totalCount) {
+    private void calculateWinningStats(Lotto lotto, List<Integer> winningNumbers) {
         // 로또 객체를 기반으로 당첨 통계 계산
-        for (int i=0 ; i<totalCount ; i++) {
+        for (int i=0 ; i<lotto.getNumbersSize() ; i++) {
             winningStats.add(i, getCount(lotto, i, winningNumbers));
         }
     }
@@ -32,11 +36,31 @@ public class LottoWinningStats {
         return this.rankingMap;
     }
 
+    public double getYield(int purchaseCount) {
+        Map<Ranks, Integer> rankingMap = getRanks();
+        int totalAmounts = purchaseCount * PRICE;
+        int totalWinningAmounts = rankingMap.entrySet().stream()
+                                            .mapToInt(entry -> entry.getKey().getRewards().intValue() * entry.getValue()).sum();
+
+        if (rankingMap.isEmpty() || totalWinningAmounts == 0) {
+            return 0;
+        }
+        return (double) totalWinningAmounts / totalAmounts;
+    }
+
     private Map<Ranks, Integer> calculateRanks() {
+        validateWinningStats();
+
         for (int targetCount : this.winningStats) {
             countByCase(targetCount, rankingMap);
         }
         return rankingMap;
+    }
+
+    private void validateWinningStats(){
+        if(this.winningStats.isEmpty()) {
+            throw new RuntimeException("winningStats 인스턴스 변수 셋팅이 필요합니다.");
+        }
     }
 
     private void countByCase(int targetCount, Map<Ranks, Integer> rankingMap) {
