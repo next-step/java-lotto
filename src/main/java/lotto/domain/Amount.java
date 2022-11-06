@@ -17,6 +17,17 @@ public class Amount {
         this.amount = amount;
     }
 
+    public Amount(String amount) {
+        this(parseInt(amount));
+    }
+
+    private static int parseInt(String number) {
+        if (Objects.isNull(number) || number.isEmpty()) {
+            throw new LotteryGameException(ErrorCode.NULL_OR_EMPTY);
+        }
+        return Integer.parseInt(number);
+    }
+
     private void validateAmountUnderZero(int amount) {
         if (amount <= 0) {
             throw new LotteryGameException(ErrorCode.AMOUNT_UNDER_ZERO);
@@ -42,5 +53,13 @@ public class Amount {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    public Amount minus(Amount amount) {
+        return new Amount(this.amount - amount.amount);
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }
