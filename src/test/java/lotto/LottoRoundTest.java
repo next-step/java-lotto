@@ -15,6 +15,6 @@ public class LottoRoundTest {
 
         WinningLotto winningLotto = new WinningLotto(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
 
-        assertThat(round.finishRound(winningLotto)).contains(LottoResult.FIRST, LottoResult.BONUS);
+        assertThat(round.finishRound(winningLotto)).contains(LottoResult.FIRST, LottoResult.SECOND);
     }
 }

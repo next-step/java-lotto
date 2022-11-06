@@ -15,24 +15,24 @@ public class LottoResultTest {
 
     @Test
     void test_bonus() {
-        assertThat(LottoResult.of(5, true)).isEqualTo(LottoResult.BONUS);
+        assertThat(LottoResult.of(5, true)).isEqualTo(LottoResult.SECOND);
     }
 
     @Test
     void test_second() {
-        assertThat(LottoResult.of(5, false)).isEqualTo(LottoResult.SECOND);
+        assertThat(LottoResult.of(5, false)).isEqualTo(LottoResult.THIRD);
     }
 
     @Test
     void test_third() {
-        assertThat(LottoResult.of(4, false)).isEqualTo(LottoResult.THIRD);
-        assertThat(LottoResult.of(4, true)).isEqualTo(LottoResult.THIRD);
+        assertThat(LottoResult.of(4, false)).isEqualTo(LottoResult.FOURTH);
+        assertThat(LottoResult.of(4, true)).isEqualTo(LottoResult.FOURTH);
     }
 
     @Test
     void test_fourth() {
-        assertThat(LottoResult.of(3, false)).isEqualTo(LottoResult.FOURTH);
-        assertThat(LottoResult.of(3, true)).isEqualTo(LottoResult.FOURTH);
+        assertThat(LottoResult.of(3, false)).isEqualTo(LottoResult.FIFTH);
+        assertThat(LottoResult.of(3, true)).isEqualTo(LottoResult.FIFTH);
     }
 
     @ParameterizedTest

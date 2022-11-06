@@ -12,10 +12,10 @@ public class LottoResultStatTest {
     void test_get_profit_margin() {
         List<LottoResult> results = List.of(
                 LottoResult.FIRST,
-                LottoResult.SECOND,
                 LottoResult.THIRD,
                 LottoResult.FOURTH,
-                LottoResult.BONUS,
+                LottoResult.FIFTH,
+                LottoResult.SECOND,
                 LottoResult.NONE
         );
         LottoPrice price = new LottoPrice(1);

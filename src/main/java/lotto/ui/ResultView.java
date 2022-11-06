@@ -14,8 +14,8 @@ public class ResultView {
     private static final String LOTTO_WINNER_BONUS = ", 보너스 볼 일치";
     private static final String PROFIT_MARGIN_FORMAT = "총 수익률은 %.2f 입니다.\n";
     private static final List<LottoResult> PRINTABLE_LOTTO_RESULT = List.of(
-            LottoResult.FOURTH, LottoResult.THIRD, LottoResult.SECOND,
-            LottoResult.BONUS, LottoResult.FIRST);
+            LottoResult.FIFTH, LottoResult.FOURTH, LottoResult.THIRD,
+            LottoResult.SECOND, LottoResult.FIRST);
 
     private ResultView() {
 
