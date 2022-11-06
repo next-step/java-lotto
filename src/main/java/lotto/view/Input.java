@@ -21,7 +21,7 @@ public class Input {
     }
 
     private static void checkAmount(BigDecimal amount) {
-        if (amount == null | amount.equals(" ")) {
+        if (amount == null || amount.equals(" ")) {
             throw new IllegalArgumentException(ERROR_CHECK_AMOUNT);
         }
     }
