@@ -3,7 +3,7 @@ package lotto;
 import lotto.model.LottoCollection;
 import lotto.model.LottoGenerator;
 import lotto.model.Profit;
-import lotto.model.Winning;
+import lotto.model.WinningNumber;
 import lotto.view.InputView;
 
 import java.util.List;
@@ -13,16 +13,16 @@ import static lotto.view.ResultView.*;
 
 public class Main {
     public static void main(String[] args) {
-        int lottoQuantity = InputView.inputQuantity();
-        printQuantity(lottoQuantity);
+        int quantity = InputView.inputQuantity();
+        printQuantity(quantity);
 
-        LottoGenerator generator = new LottoGenerator(lottoQuantity);
-        printLottoNumbers(generator.getCollection());
+        LottoCollection collection = new LottoCollection(new LottoGenerator().addLotto(quantity));
+        printLottoNumbers(collection);
 
-        Winning winning = new Winning(generator.getCollection(),inputWinningNumber());
-        List<Integer> winningNumberCount = winning.getWinningNumberCount();
+        WinningNumber winningNumber = new WinningNumber(collection,inputWinningNumber());
+        List<Integer> winningNumberCount = winningNumber.getWinningNumberCount();
 
-        Profit profit = new Profit(lottoQuantity);
+        Profit profit = new Profit(quantity);
         printResult(winningNumberCount, profit.calculate(winningNumberCount));
     }
 }

@@ -4,49 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoCollection {
-    private final List<List<Integer>> lottos;
+    private final List<Lotto> lottos;
 
-    public LottoCollection(List<List<Integer>> lottos) {
+    public LottoCollection(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
     public List<Integer> checkWinningNumber(List<String> winningNumber) {
         List<Integer> inventory = new ArrayList<>();
-        for (List<Integer> lotto : lottos) {
-            inventory.add(countMatchingNumber(winningNumber, lotto));
+        for (Lotto lotto : lottos) {
+            inventory.add(lotto.findWinner(winningNumber));
         }
-
         return inventory;
     }
 
-    public List<List<Integer>> getLottos() {
+    public List<Lotto> getLottos() {
         return lottos;
-    }
-
-    private int countMatchingNumber(List<String> winningNumber, List<Integer> lotto) {
-        int matchingWinningNumber = 0;
-        for (Integer lottoNumber : lotto) {
-            matchingWinningNumber = getMatchingNumber(winningNumber, matchingWinningNumber, lottoNumber);
-        }
-
-        return matchingWinningNumber;
-    }
-
-    private int getMatchingNumber(List<String> winningNumber, int matchingCount, Integer lottoNumber) {
-        for (String string : winningNumber) {
-            matchingCount = addNumberCount(matchingCount, lottoNumber, string);
-        }
-        return matchingCount;
-    }
-
-    private int addNumberCount(int matchingToWinningNumber, Integer integer, String string) {
-        if (isWinningNumber(integer, string)) {
-            matchingToWinningNumber++;
-        }
-        return matchingToWinningNumber;
-    }
-
-    private boolean isWinningNumber(Integer integer, String string) {
-        return Integer.parseInt(string) == integer;
     }
 }
