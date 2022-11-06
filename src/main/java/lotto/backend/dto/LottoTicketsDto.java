@@ -8,21 +8,27 @@ import java.util.List;
 
 public class LottoTicketsDto {
 
-    private final List<LottoTicket> values;
+    private final LottoTickets values;
 
-    public LottoTicketsDto(List<LottoTicket> lottoTickets) {
+    public LottoTicketsDto(LottoTickets lottoTickets) {
         this.values = lottoTickets;
-    }
-
-    public static LottoTicketsDto of(LottoTickets lottoTickets) {
-        return new LottoTicketsDto(lottoTickets.getValues());
     }
 
     public int countOfTicket() {
         return values.size();
     }
 
-    public List<LottoTicket> getValues() {
-        return Collections.unmodifiableList(values);
+    public int countOfAuto() {
+        return values.countOfAutoLotto();
     }
+
+    public int countOfCustom() {
+        return values.countOfCustomLotto();
+    }
+
+    public List<LottoTicket> getValues() {
+        return Collections.unmodifiableList(values.getValues());
+    }
+
+
 }

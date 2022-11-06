@@ -17,29 +17,35 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("2000원으로 1등 과 2등_보너이 당첨됐을 경우 수익률")
+    @DisplayName("2000원으로 로또 1개 3등 수익률")
     void profit() {
-        LottoTickets purchasedLotto = new LottoTickets(List.of(
-                LottoTicket.of(List.of(1, 7, 10, 23, 40, 42)), //6개 모두 일치 (1등)
-                LottoTicket.of(List.of(1, 7, 20, 23, 40, 42)) //5개 + bonus (2등)
+        LottoTickets LottoTickets = new LottoTickets();
+        LottoTickets.add(List.of(
+                LottoTicket.create(List.of(1, 7, 10, 22, 41, 44)),
+                LottoTicket.create(List.of(2, 9, 12, 30, 40, 42))
         ));
-        LottoResult lottoResult = LottoResult.of(winningLotto, purchasedLotto);
-        double expected = (double) (2000000000 + 3000000) / 2000;
-        assertThat(lottoResult.getProfit()).isEqualTo(expected);
+        Money money = new Money(2000);
+        LottoStatistics lottoStatistics = LottoStatistics.of(winningLotto, LottoTickets);
+        LottoProfit lottoProfit = LottoProfit.of(lottoStatistics.prizeAmount(), money);
+
+        double expected = (double) LottoRank.FIFTH.getMoneyPrize() / 2000;
+        assertThat(lottoProfit.getValue()).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("4000원으로 3등 2개 당첨됐을 경우 수익률")
+    @DisplayName("4000원으로 로또 1개 3등 수익률")
     void profit_ver2() {
-        //1, 7, 10, 23, 40, 42
-        LottoTickets purchasedLotto = new LottoTickets(List.of(
-                LottoTicket.of(List.of(1, 8, 11, 24, 41, 43)), //1개 일치
-                LottoTicket.of(List.of(1, 7, 20, 25, 42, 45)), //3개 일치
-                LottoTicket.of(List.of(1, 7, 20, 23, 44, 45)), //3개 일치
-                LottoTicket.of(List.of(2, 15, 20, 25, 41, 42)) //0개 일치
+        LottoTickets LottoTickets = new LottoTickets();
+        LottoTickets.add(List.of(
+                LottoTicket.create(List.of(1, 7, 10, 22, 41, 44)),
+                LottoTicket.create(List.of(5, 11, 12, 30, 41, 45)),
+                LottoTicket.create(List.of(4, 5, 6, 26, 27, 44)),
+                LottoTicket.create(List.of(3, 4, 5, 6, 41, 45))
         ));
-        LottoResult lottoResult = LottoResult.of(winningLotto, purchasedLotto);
-        double expected = (double) (LottoRank.FIFTH.getMoneyPrize() + LottoRank.FIFTH.getMoneyPrize()) / 4000;
-        assertThat(lottoResult.getProfit()).isEqualTo(expected);
+        LottoStatistics lottoStatistics = LottoStatistics.of(winningLotto, LottoTickets);
+        LottoProfit lottoProfit = LottoProfit.of(lottoStatistics.prizeAmount(), new Money(4000));
+
+        double expected = (double) LottoRank.FIFTH.getMoneyPrize() / 4000;
+        assertThat(lottoProfit.getValue()).isEqualTo(expected);
     }
 }

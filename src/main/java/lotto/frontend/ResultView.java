@@ -18,6 +18,7 @@ public class ResultView {
     private static final String DELIMITER = ", ";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final StringBuilder STRING_BUILDER = new StringBuilder();
+    private static final String LOTTO_COUNT_MESSAGE_PATTERN = "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.";
     private static final String MATCH_MESSAGE_PATTERN = "{0}개 일치 ({1}원)- {2}개";
     private static final String MATCH_BONUS_MESSAGE_PATTERN = "{0}개 일치, 보너스 볼 일치 ({1}원)- {2}개";
     private static final String PROFIT_MESSAGE_PATTERN = "총 수익률은 {0,number,0.00}입니다. {1}";
@@ -28,12 +29,16 @@ public class ResultView {
     }
 
     private String assembleBuyingResult(LottoTicketsDto lottoTicketsDto) {
-        return STRING_BUILDER.append(lottoTicketsDto.countOfTicket())
-                .append("개를 구매하였습니다.")
+        return STRING_BUILDER.append(LINE_SEPARATOR)
+                .append(assembleLottoCount(lottoTicketsDto))
                 .append(LINE_SEPARATOR)
                 .append(assembleLottoTickets(lottoTicketsDto))
                 .append(LINE_SEPARATOR)
                 .toString();
+    }
+
+    private String assembleLottoCount(LottoTicketsDto lottoTicketsDto) {
+        return MessageFormat.format(LOTTO_COUNT_MESSAGE_PATTERN, lottoTicketsDto.countOfAuto(), lottoTicketsDto.countOfCustom());
     }
 
     private String assembleLottoTickets(LottoTicketsDto lottoTicketsDto) {
@@ -69,7 +74,7 @@ public class ResultView {
 
     private String assembleLottoMatchResult2(Map<LottoRank, Integer> ranking) {
         return ranking.entrySet().stream()
-                .map(i -> assembleMatchResult(i.getKey().getCountOfMatch(), i.getKey().HasBonus(), i.getKey().getMoneyPrize(), i.getValue()))
+                .map(i -> assembleMatchResult(i.getKey().getCountOfMatch(), i.getKey().hasBonusNumber(), i.getKey().getMoneyPrize(), i.getValue()))
                 .collect(Collectors.joining(LINE_SEPARATOR));
     }
 

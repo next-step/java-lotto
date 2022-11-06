@@ -8,8 +8,8 @@ public class LottoProfit {
         this.value = value;
     }
 
-    public static LottoProfit of(double prizeAmount, int orderAmount) {
-        return new LottoProfit(prizeAmount / orderAmount);
+    public static LottoProfit of(Money prizeAmount, Money orderAmount) {
+        return new LottoProfit(prizeAmount.calculateRatio(orderAmount));
     }
 
     public double getValue() {

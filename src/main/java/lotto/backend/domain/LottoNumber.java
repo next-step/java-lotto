@@ -1,9 +1,8 @@
 package lotto.backend.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.toList;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -18,22 +17,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
 
-    private LottoNumber(final int number) {
+    public LottoNumber(final int number) {
         checkNumberRange(number);
         this.value = number;
     }
 
-    public static LottoNumber of(int number) {
-        return new LottoNumber(number);
-    }
-
-    public static List<LottoNumber> createNumbers(int size) {
+    public static Set<LottoNumber> createNumbers(int size) {
         List<Integer> keys = new ArrayList<>(cachedLottoNumber.keySet());
         Collections.shuffle(keys);
         return keys.stream()
                 .limit(size)
                 .map(LottoNumber::new)
-                .collect(toList());
+                .collect(Collectors.toSet());
     }
 
     private static void checkNumberRange(int number) {

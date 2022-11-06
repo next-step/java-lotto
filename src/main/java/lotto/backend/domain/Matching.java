@@ -12,6 +12,14 @@ public class Matching {
         this.hasBonusNumber = hasBonusNumber;
     }
 
+    public int countOfMatch() {
+        return countOfMatch;
+    }
+
+    public boolean hasBonusNumber() {
+        return hasBonusNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

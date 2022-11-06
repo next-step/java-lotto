@@ -12,32 +12,29 @@ public enum LottoRank {
     SECOND(5, 3_000_000, true),
     FIRST(6, 2_000_000_000, false);
 
-    private static final Map<Matching, LottoRank> CACHED_BY_MATCHING = new HashMap<>();
-    private static final Map<Integer, Boolean> CACHED_BY_HAS_BONUS = new HashMap<>();
+    private static final Map<Integer, LottoRank> CACHED_BY_MATCHING = new HashMap<>();
 
     static {
         for (LottoRank rank : LottoRank.values()) {
-            CACHED_BY_MATCHING.put(new Matching(rank.countOfMatch, rank.hasBonus), rank);
-            CACHED_BY_HAS_BONUS.put(rank.countOfMatch, rank.hasBonus);
+            CACHED_BY_MATCHING.put(rank.countOfMatch, rank);
         }
     }
 
     private final int countOfMatch;
     private final int moneyPrize;
-    private final boolean hasBonus;
+    private final boolean hasBonusNumber;
 
-    LottoRank(int countOfMatch, int moneyPrize, boolean hasBonus) {
+    LottoRank(int countOfMatch, int moneyPrize, boolean hasBonusNumber) {
         this.countOfMatch = countOfMatch;
         this.moneyPrize = moneyPrize;
-        this.hasBonus = hasBonus;
+        this.hasBonusNumber = hasBonusNumber;
     }
 
-    public static LottoRank of(Matching match) {
-        return CACHED_BY_MATCHING.getOrDefault(match, LottoRank.NOTHING);
-    }
-
-    public static boolean hasBonusNumber(int countOfMatch) {
-        return CACHED_BY_HAS_BONUS.getOrDefault(countOfMatch, false);
+    public static LottoRank valueOf(Matching matching) {
+        if (matching.countOfMatch() == 5) {
+            return matching.hasBonusNumber() ? SECOND : THIRD;
+        }
+        return CACHED_BY_MATCHING.getOrDefault(matching.countOfMatch(), NOTHING);
     }
 
     public int getCountOfMatch() {
@@ -48,7 +45,7 @@ public enum LottoRank {
         return moneyPrize;
     }
 
-    public boolean HasBonus() {
-        return hasBonus;
+    public boolean hasBonusNumber() {
+        return hasBonusNumber;
     }
 }
