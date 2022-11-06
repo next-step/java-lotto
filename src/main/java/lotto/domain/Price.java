@@ -27,7 +27,7 @@ public class Price {
     }
 
     private void validateOutOfRange(int price) {
-        if (price <= LOTTERY_TICKET_PRICE) {
+        if (price < LOTTERY_TICKET_PRICE) {
             throw new LotteryGameException(ErrorCode.OUT_OF_RANGE_PRICE);
         }
     }
