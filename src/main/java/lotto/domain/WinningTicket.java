@@ -14,7 +14,7 @@ public class WinningTicket {
     }
 
     public WinningTicket(String winningNumbers, String bonusBoll) {
-        this(LotteryTicket.of(winningNumbers), new LotteryNumber(bonusBoll));
+        this(LotteryTicket.of(winningNumbers), LotteryNumber.number(bonusBoll));
     }
 
     private void validateSameNumber(LotteryTicket winningNumbers, LotteryNumber bonusBoll) {

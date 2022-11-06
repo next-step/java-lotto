@@ -10,14 +10,14 @@ public class WinningTicketTest {
     @Test
     void create() {
         assertThatNoException().isThrownBy(() -> new WinningTicket(
-                LotteryTicket.of(1, 2, 3, 4, 5, 6), new LotteryNumber(7)
+                LotteryTicket.of(1, 2, 3, 4, 5, 6), LotteryNumber.number(7)
         ));
     }
 
     @Test
     void duplicate_winning_number_and_bonus_boll() {
         assertThatThrownBy(() -> new WinningTicket(
-                LotteryTicket.of(1, 2, 3, 4, 5, 6), new LotteryNumber(6))
+                LotteryTicket.of(1, 2, 3, 4, 5, 6), LotteryNumber.number(6))
         ).isInstanceOf(LotteryGameException.class)
                 .hasMessage(ErrorCode.HAS_SAME_NUMBER.getMessage());
     }
@@ -25,7 +25,7 @@ public class WinningTicketTest {
     @Test
     void find_same_number_count() {
         assertThat(new WinningTicket(
-                LotteryTicket.of(1, 2, 3, 4, 5, 6), new LotteryNumber(7)
+                LotteryTicket.of(1, 2, 3, 4, 5, 6), LotteryNumber.number(7)
         ).findRank(LotteryTicket.of(1, 2, 3, 4, 5, 6)))
                 .isEqualTo(Rank.FIRST);
     }

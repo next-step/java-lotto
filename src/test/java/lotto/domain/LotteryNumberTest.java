@@ -14,7 +14,7 @@ public class LotteryNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void out_of_range(int number) {
-        assertThatThrownBy(() -> new LotteryNumber(number))
+        assertThatThrownBy(() -> LotteryNumber.number(number))
                 .isInstanceOf(LotteryGameException.class)
                 .hasMessage(ErrorCode.OUT_OF_RANGE_NUMBER.getMessage());
     }
@@ -23,7 +23,7 @@ public class LotteryNumberTest {
     @NullSource
     @EmptySource
     void null_or_empty(String number) {
-        assertThatThrownBy(() -> new LotteryNumber(number))
+        assertThatThrownBy(() -> LotteryNumber.number(number))
                 .isInstanceOf(LotteryGameException.class)
                 .hasMessage(ErrorCode.NULL_OR_EMPTY.getMessage());
     }
@@ -32,6 +32,6 @@ public class LotteryNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 45})
     void create_lottery_number(int number) {
-        assertThatNoException().isThrownBy(() -> new LotteryNumber(number));
+        assertThatNoException().isThrownBy(() -> LotteryNumber.number(number));
     }
 }
