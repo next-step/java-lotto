@@ -28,7 +28,7 @@ public enum Rank {
         return amount;
     }
 
-    public static Rank getRank(int count, Integer bonusBall) {
+    public static Rank getRank(int count) {
         return Arrays.stream(values())
                 .filter(cnt -> cnt.getCount() == count)
                 .findFirst()
