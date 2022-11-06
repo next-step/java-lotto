@@ -16,21 +16,26 @@ public class LottosTest {
     @Test
     void 당첨_로또에따른_결과_리스트를_반환() {
         Lottos lottos = new Lottos(Arrays.asList(
-                new Lotto("1, 2, 3, 4, 5, 6"),
-                new Lotto("1, 2, 3, 4, 5, 7"),
-                new Lotto("1, 2, 3, 4, 7, 8"),
-                new Lotto("1, 2, 3, 6, 7, 8")
+                new Lotto("1,2,3,4,5,6"),
+                new Lotto("1,2,3,4,5,7"),
+                new Lotto("1,2,3,4,5,8"),
+                new Lotto("1,2,3,4,7,8"),
+                new Lotto("1,2,3,7,8,9"),
+                new Lotto("7,8,9,10,11,12")
         ));
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
 
-        Lotto winning = new Lotto("1, 2, 3, 4, 5, 6");
-
-        assertThat(lottos.getResults(winning)).isEqualTo(Arrays.asList(
+        assertThat(lottos.getResults(winningLotto)).isEqualTo(new LottoResults(Arrays.asList(
                 LottoResult.FIRST_PRIZE,
                 LottoResult.SECOND_PRIZE,
                 LottoResult.THIRD_PRIZE,
-                LottoResult.THIRD_PRIZE
+                LottoResult.FOURTH_PRIZE,
+                LottoResult.FIFTH_PRIZE,
+                LottoResult.NO_MATCH
+        )
         ));
     }
+
 
     @Test
     void 원하는_갯수만큼_로또번호를_발행() {

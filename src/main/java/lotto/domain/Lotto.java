@@ -12,26 +12,20 @@ public class Lotto {
     }
 
     public Lotto(String numbers) {
-        lottoNumbers = generateLotto(numbers);
-    }
-
-    private SortedSet<LottoNumber> generateLotto(String numbers) {
-        numbers = preprocessingData(numbers);
-        SortedSet<LottoNumber> lottoNumberSet = createLottoNumberSet(numbers);
-
-        if (lottoNumberSet.size() < 6) {
-            throw new InvalidParameterException("중복된 번호로 로또가 생성되려 하고 있습니다.");
-        }
-
-        return lottoNumberSet;
+        lottoNumbers = createLottoNumberSet(numbers);
     }
 
     private SortedSet<LottoNumber> createLottoNumberSet(String numbers) {
         SortedSet<LottoNumber> lottos = new TreeSet<>();
 
         for (String number : numbers.split(",")) {
-            lottos.add(new LottoNumber(parseInt(number)));
+            lottos.add(LottoNumberGenerator.getNumber(parseInt(number)));
         }
+
+        if(lottos.size() < 6){
+            throw new InvalidParameterException("중복된 숫자가 들어왔습니다.");
+        }
+
         return lottos;
     }
 
@@ -39,21 +33,19 @@ public class Lotto {
         return Integer.parseInt(number);
     }
 
-    private String preprocessingData(String numbers) {
-        return numbers.replaceAll(" ", "");
-    }
-
-    public LottoResult getResult(Lotto winningLotto) {
-        int matchCount = (int) lottoNumbers.stream().filter(w -> winningLotto.contains(w)).count();
-        return LottoResult.of(matchCount);
-    }
-
-    private boolean contains(LottoNumber number) {
+    public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
+
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int hitCount(Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .filter(number -> lotto.contains(number))
+                .count();
     }
 
     private Set<LottoNumber> generateNumbers() {
@@ -81,4 +73,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
 }

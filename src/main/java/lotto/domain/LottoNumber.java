@@ -2,8 +2,12 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable{
+public class LottoNumber implements Comparable {
     private int number;
+
+    public LottoNumber(String number) {
+        this.number = Integer.parseInt(number);
+    }
 
     public LottoNumber(int number) {
         this.number = number;
@@ -30,11 +34,10 @@ public class LottoNumber implements Comparable{
         return Objects.hash(number);
     }
 
-
     @Override
     public int compareTo(Object o) {
         LottoNumber that = (LottoNumber) o;
-        if(this.number == that.getNumber())
+        if (this.number == that.getNumber())
             return 0;
         return (this.number > that.getNumber()) ? 1 : -1;
     }
