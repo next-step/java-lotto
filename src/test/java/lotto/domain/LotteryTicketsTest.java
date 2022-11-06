@@ -31,4 +31,11 @@ public class LotteryTicketsTest {
     void create() {
         assertThatNoException().isThrownBy(() -> LotteryTickets.of(List.of("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6")));
     }
+
+    @Test
+    void add_tickets() {
+        LotteryTickets tickets = LotteryTickets.of(LotteryTicket.of(1, 2, 3, 4, 5, 6));
+        tickets.add(LotteryTickets.of(LotteryTicket.of(1, 2, 3, 4, 5, 7)));
+        assertThat(tickets.getCount()).isEqualTo(2);
+    }
 }
