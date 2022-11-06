@@ -36,16 +36,15 @@ public class LottoWinningStats {
         return this.rankingMap;
     }
 
-    public double getYield(int purchaseCount) {
+    public double getYield(int purchaseAmount) {
         Map<Ranks, Integer> rankingMap = getRanks();
-        int totalAmounts = purchaseCount * PRICE;
         int totalWinningAmounts = rankingMap.entrySet().stream()
                                             .mapToInt(entry -> entry.getKey().getRewards().intValue() * entry.getValue()).sum();
 
         if (rankingMap.isEmpty() || totalWinningAmounts == 0) {
             return 0;
         }
-        return (double) totalWinningAmounts / totalAmounts;
+        return (double) totalWinningAmounts / purchaseAmount;
     }
 
     private Map<Ranks, Integer> calculateRanks() {

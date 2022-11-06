@@ -21,7 +21,7 @@ public class OutputView {
     public static void printWinningStatsResult(LottoWinningStats lottoWinningStats, int purchaseAmount) {
         Map<Ranks, Integer> rankingMap = lottoWinningStats.getRanks();
         printWinningStats(rankingMap);
-        System.out.println("총 수익률은 " + lottoWinningStats.getYield(purchaseAmount / LottoWinningStats.PRICE)+ "입니다.");
+        System.out.println("총 수익률은 " + lottoWinningStats.getYield(purchaseAmount) + "입니다.");
     }
 
     public static void printWinningStats(Map<Ranks, Integer> rankingMap) {
