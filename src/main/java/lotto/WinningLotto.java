@@ -1,20 +1,13 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
     private static final int WINNING_LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
-
-    public WinningLotto(int bonusNumber, int... winningNumbers) {
-        this(Arrays.stream(winningNumbers).mapToObj(LottoNumber::of).collect(Collectors.toList()),
-                LottoNumber.of(bonusNumber));
-    }
 
     public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         HashSet<LottoNumber> uniqNumbers = new HashSet<>(winningNumbers);
