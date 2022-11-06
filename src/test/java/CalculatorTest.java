@@ -12,7 +12,7 @@ public class CalculatorTest {
     void addTest() {
         Calculator calculator = new Calculator(3);
         calculator.add(1);
-        int result = calculator.printResult();
+        int result = calculator.getResult();
         assertThat(result).isEqualTo(4);
     }
 
@@ -21,7 +21,7 @@ public class CalculatorTest {
     void minusTest() {
         Calculator calculator = new Calculator(3);
         calculator.minus(2);
-        int result = calculator.printResult();
+        int result = calculator.getResult();
         assertThat(result).isEqualTo(1);
     }
 
@@ -30,7 +30,7 @@ public class CalculatorTest {
     void multipleTest() {
         Calculator calculator = new Calculator(3);
         calculator.multiple(2);
-        int result = calculator.printResult();
+        int result = calculator.getResult();
         assertThat(result).isEqualTo(6);
     }
 
@@ -39,17 +39,18 @@ public class CalculatorTest {
     void divideTest() {
         Calculator calculator = new Calculator(3);
         calculator.divide(2);
-        int result = calculator.printResult();
+        int result = calculator.getResult();
         assertThat(result).isEqualTo(1);
     }
 
     @Test
+    @DisplayName("전체 계산 테스트")
     void calculateTest() {
         String[] input = new String[] {"1", "+", "2", "*", "3"};
 
         Calculator calculator = new Calculator(input);
         calculator.calculateAll();
-        int result = calculator.printResult();
+        int result = calculator.getResult();
         assertThat(result).isEqualTo(9);
     }
 

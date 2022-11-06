@@ -52,7 +52,7 @@ public class Calculator {
         tempResult /= number;
     }
 
-    public int printResult() {
+    public int getResult() {
         return this.tempResult;
     }
 }
