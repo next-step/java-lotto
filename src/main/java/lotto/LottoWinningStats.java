@@ -48,18 +48,10 @@ public class LottoWinningStats {
     }
 
     private Map<Ranks, Integer> calculateRanks() {
-        validateWinningStats();
-
         for (int targetCount : this.winningStats) {
             countByCase(targetCount, rankingMap);
         }
         return rankingMap;
-    }
-
-    private void validateWinningStats(){
-        if(this.winningStats.isEmpty()) {
-            throw new RuntimeException("winningStats 인스턴스 변수 셋팅이 필요합니다.");
-        }
     }
 
     private void countByCase(int targetCount, Map<Ranks, Integer> rankingMap) {
