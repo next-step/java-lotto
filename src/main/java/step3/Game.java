@@ -28,13 +28,11 @@ public class Game {
         Lotto winLotto = new Lotto(InputView.inputWinningNumber());
         Print.bonusBall();
         int bonus = Integer.parseInt(InputView.input());
-        if (winLotto.checkBonus(bonus)) {
-            throw new IllegalArgumentException("보너스 번호는 지난 주 당첨 번호와 중복될 수 없습니다.");
-        }
+        BonusLotto bonusLotto = new BonusLotto(winLotto, bonus);
 
         Lottos lottos = new Lottos(combineLotto);
 
-        Print.rateOfWin(input, new Result(lottos).results(winLotto, bonus));
+        Print.rateOfWin(input, new Result(lottos).results(bonusLotto));
     }
 
     private static List<Lotto> makeManualLotto(int input) {
