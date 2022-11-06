@@ -1,7 +1,11 @@
 package lotto.view;
 
+import lotto.model.Lotto;
 import lotto.model.LottoCollection;
+import lotto.model.LottoNumber;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ResultView {
@@ -10,9 +14,13 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(LottoCollection collection) {
-        for (List<Integer> lotto : collection.getLottos()) {
-            System.out.println(lotto);
+        for (Lotto lotto : collection.getLottos()) {
+            System.out.println(getLottoList(lotto));
         }
+    }
+
+    public static void printQuantity(int quantity) {
+        System.out.println(quantity + "개를 구매했습니다.");
     }
 
     public static void printResult(List<Integer> winningNumberCount, double totalProfit) {
@@ -25,5 +33,14 @@ public class ResultView {
         System.out.println("6개 일치(2000000000)- " + winningNumberCount.get(3) + "개");
 
         System.out.println("총 수익률은 " + totalProfit + "입니다.");
+    }
+
+    private static List<Integer> getLottoList(Lotto lotto) {
+        List<Integer> list = new ArrayList<>();
+        for (LottoNumber lottoNumber : lotto.getLotto()) {
+            list.add(lottoNumber.getNumber());
+        }
+        Collections.sort(list);
+        return list;
     }
 }
