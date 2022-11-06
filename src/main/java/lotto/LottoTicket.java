@@ -19,25 +19,15 @@ public class LottoTicket {
     }
 
     public static LottoTicket random() {
-        return new LottoTicket(createLottoNumbers());
+        return new LottoTicket(randomLottoNumbers());
     }
 
-    public static LottoTicket from(int... numbers) {
-        return new LottoTicket(toLottoNumbers(numbers));
-    }
-
-    public static LottoTicket from(List<Integer> numbers) {
+    public static LottoTicket of(int... numbers) {
         return new LottoTicket(toLottoNumbers(numbers));
     }
 
     public boolean hasNumber(LottoNumber number) {
         return this.numbers.contains(number);
-    }
-
-    public int getMatchingCount(LottoTicket ticket) {
-        return (int) numbers.stream()
-                .filter(ticket::hasNumber)
-                .count();
     }
 
     public List<LottoNumber> getNumbers() {
@@ -57,7 +47,7 @@ public class LottoTicket {
         return Objects.hash(numbers);
     }
 
-    private static List<LottoNumber> createLottoNumbers() {
+    private static List<LottoNumber> randomLottoNumbers() {
         List<LottoNumber> candidates = new ArrayList<>(LottoNumber.selectableNumbers());
         Collections.shuffle(candidates);
         return candidates.subList(0, LOTTO_NUMBER_COUNT);
@@ -66,12 +56,6 @@ public class LottoTicket {
     private static List<LottoNumber> toLottoNumbers(int... numbers) {
         return Arrays.stream(numbers)
                 .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
-    }
-
-    private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 }

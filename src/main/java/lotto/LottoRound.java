@@ -10,10 +10,10 @@ public class LottoRound {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoResult> finishRound(LottoTicket winningTicket) {
+    public List<LottoResult> finishRound(WinningLotto winingLotto) {
         List<LottoResult> result = new ArrayList<>();
         for (LottoTicket ticket : lottoTickets) {
-            result.add(LottoResult.match(ticket, winningTicket));
+            result.add(winingLotto.match(ticket));
         }
         return result;
     }
