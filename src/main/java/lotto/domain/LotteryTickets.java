@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LotteryTickets {
 
@@ -13,6 +14,12 @@ public class LotteryTickets {
 
     public static LotteryTickets of(LotteryTicket... tickets) {
         return new LotteryTickets(List.of(tickets));
+    }
+
+    public static LotteryTickets of(List<String> tickets) {
+        return new LotteryTickets(tickets.stream()
+                .map(LotteryTicket::of)
+                .collect(Collectors.toList()));
     }
 
     public List<LotteryTicket> getLotteryTickets() {

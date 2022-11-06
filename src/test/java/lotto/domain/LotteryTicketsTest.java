@@ -2,8 +2,9 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class LotteryTicketsTest {
     @Test
@@ -24,5 +25,10 @@ public class LotteryTicketsTest {
                 entry(Rank.FIFTH, 1),
                 entry(Rank.NON_MATCH, 0)
         );
+    }
+
+    @Test
+    void create() {
+        assertThatNoException().isThrownBy(() -> LotteryTickets.of(List.of("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6")));
     }
 }
