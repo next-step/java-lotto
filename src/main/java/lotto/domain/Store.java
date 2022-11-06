@@ -8,22 +8,25 @@ import java.util.stream.Collectors;
 
 public class Store {
 
-    private static final int PRICE_OF_LOTTO_TICKET = 1000;
-    private final LottoGenerator lottoGenerator;
     private final List<LottoTicket> lottoTickets;
 
-    public Store(final LottoGenerator lottoGenerator, final Money money) {
-        this.lottoGenerator = lottoGenerator;
-        this.lottoTickets = createLottoTickets(money.countOfTickets(PRICE_OF_LOTTO_TICKET));
+    public Store(final LottoGenerator lottoGenerator) {
+        this.lottoTickets = lottoGenerator.create();
     }
 
-    private List<LottoTicket> createLottoTickets(final int countOfTickets) {
-        return lottoGenerator.create(countOfTickets);
+    public Store(final List<Store> lottoTickets) {
+        this.lottoTickets = lottoTickets.stream()
+                .flatMap(lottoTicket -> lottoTicket.getLottoTickets().stream()).collect(Collectors.toList());
     }
+
     public List<Rank> match(final WinningLotto winningLotto) {
         return lottoTickets.stream()
                 .map(winningLotto::match)
                 .collect(Collectors.toList());
+    }
+
+    public int sizeOfLottoTickets() {
+        return this.lottoTickets.size();
     }
 
     public List<LottoTicket> getLottoTickets() {

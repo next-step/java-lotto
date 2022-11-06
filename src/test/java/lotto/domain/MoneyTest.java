@@ -15,7 +15,7 @@ class MoneyTest {
 
     @Test
     void 티켓_장수_계산() {
-        Assertions.assertThat(money.countOfTickets(10)).isEqualTo(1000);
+        Assertions.assertThat(money.countOfTickets()).isEqualTo(10);
     }
 
     @Test

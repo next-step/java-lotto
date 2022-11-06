@@ -13,8 +13,14 @@ import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
+    private final int countOfTickets;
+
+    public RandomLottoGenerator(final int countOfTickets) {
+        this.countOfTickets = countOfTickets;
+    }
+
     @Override
-    public List<LottoTicket> create(final int countOfTickets) {
+    public List<LottoTicket> create() {
         return IntStream.range(0, countOfTickets)
                 .mapToObj(i -> createLottoTicket())
                 .collect(Collectors.toList());

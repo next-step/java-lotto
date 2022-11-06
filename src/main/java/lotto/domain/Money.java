@@ -2,14 +2,16 @@ package lotto.domain;
 
 public class Money {
 
+    private static final int PRICE_OF_LOTTO_TICKET = 1000;
+
     private final int money;
 
     public Money(final int money) {
         this.money = money;
     }
 
-    public int countOfTickets(final int priceOfTicket) {
-        return money / priceOfTicket;
+    public int countOfTickets() {
+        return money / PRICE_OF_LOTTO_TICKET;
     }
 
     public float rateOfReturn(final float sumResult) {

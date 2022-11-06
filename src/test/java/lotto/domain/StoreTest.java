@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.domain.Rank.*;
+import static lotto.domain.Rank.FIRST;
+import static lotto.domain.Rank.NO_MATCH;
 
 class StoreTest {
 
@@ -15,14 +16,18 @@ class StoreTest {
 
     @BeforeEach
     void setUp() {
-        LottoGenerator lottoGenerator = countOfTickets -> List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoTicket(List.of(7, 8, 9, 10, 11, 12)));
-        Money money = new Money(3000);
-        store = new Store(lottoGenerator, money);
+        LottoGenerator lottoGenerator = () -> List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoTicket(List.of(7, 8, 9, 10, 11, 12)));
+        store = new Store(lottoGenerator);
     }
 
     @Test
     void 로또_구매() {
         Assertions.assertThat(store.getLottoTickets()).hasSize(2);
+    }
+
+    @Test
+    void 발급된_로또티켓_사이즈_반환() {
+        Assertions.assertThat(store.sizeOfLottoTickets()).isEqualTo(2);
     }
 
     @Test

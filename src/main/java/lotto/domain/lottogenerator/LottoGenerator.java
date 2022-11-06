@@ -7,5 +7,6 @@ import java.util.List;
 @FunctionalInterface
 public interface LottoGenerator {
 
-    List<LottoTicket> create(final int countOfTickets);
+    List<LottoTicket> create();
+
 }
