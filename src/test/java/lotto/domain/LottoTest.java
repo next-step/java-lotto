@@ -65,8 +65,6 @@ class LottoTest {
                 .mapToObj(LottoNumber::new)
                         .collect(Collectors.toList());
 
-        System.out.println("외않되" + result);
-
         return result;
     }
 
