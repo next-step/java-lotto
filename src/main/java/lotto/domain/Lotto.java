@@ -22,15 +22,13 @@ public class Lotto {
         return rank;
     }
 
-    public Lotto matchRank(List<Integer> winnerNumberList, Integer bonusBallNumber) {
+    public Lotto matchRank(List<Integer> winnerNumberList) {
         List<LottoNumber> winnerNumberListToCompare = matchNumberList(winnerNumberList);
-        boolean hasBonusNumber = hasNumber(bonusBallNumber);
 
         this.rank = Rank.getRank(
                 (int) lottoBalls.stream()
                         .filter(winnerNumberListToCompare::contains)
                         .count()
-                , bonusBallNumber
         );
 
         return this;
@@ -40,10 +38,6 @@ public class Lotto {
         return numberList.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    private boolean hasNumber(Integer number) {
-        return lottoBalls.contains(number);
     }
 
     public int match() {
