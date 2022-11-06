@@ -51,10 +51,8 @@ public class InputView {
     public static List<Integer> inputNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
 
-        SCANNER.nextLine();
-
         try {
-            return Arrays.stream(SCANNER.nextLine().split(", "))
+            return Arrays.stream(SCANNER.nextLine().split(COMMA))
                     .map(Integer :: parseInt).collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(e);

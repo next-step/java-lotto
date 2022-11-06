@@ -30,11 +30,11 @@ public class WinningNumbers {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
+    public List<Integer> numbers() {
         return winningNumbers;
     }
 
-    public int getBonusNumber() {
+    public int bonusNumber() {
         return bonusNumber;
     }
 }

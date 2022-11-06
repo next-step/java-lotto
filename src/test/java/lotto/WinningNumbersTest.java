@@ -11,7 +11,7 @@ public class WinningNumbersTest {
     void 당첨번호_입력() {
 
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        Assertions.assertThat(winningNumbers.getWinningNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        Assertions.assertThat(winningNumbers.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
 
     @Test

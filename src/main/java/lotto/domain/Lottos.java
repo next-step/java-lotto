@@ -47,4 +47,8 @@ public class Lottos {
     public int getSize() {
         return this.lottos.size();
     }
+
+    public int amount() {
+        return this.totalQuantity * LOTTO_PRICE;
+    }
 }

@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.LottoFactory;
 import lotto.domain.Lottos;
+import lotto.domain.RankCount;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -23,6 +24,11 @@ public class LottoController {
         OutputView.outputLottos(lottos);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.inputNumbers(), InputView.inputBonusNumber());
+        RankCount rankCount = new RankCount();
+
+        for (Lotto lotto : lottos.getLottos()) {
+            rankCount.countRank(lotto, winningNumbers);
+        }
 
 
     }
