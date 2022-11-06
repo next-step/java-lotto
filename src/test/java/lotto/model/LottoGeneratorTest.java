@@ -1,20 +1,18 @@
-package lotto;
+package lotto.model;
 
-import lotto.model.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoCollectionGeneratorTest {
+class LottoGeneratorTest {
 
     private LottoGenerator generator;
 
     @BeforeEach
     void setup() {
-        generator = new LottoGenerator(10);
+        generator = new LottoGenerator();
     }
 
     @Test

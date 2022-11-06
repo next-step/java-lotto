@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Winning {
+public class WinningNumber {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
     private static final int WINNING_NUMBER_QUANTITY = 6;
@@ -13,7 +13,7 @@ public class Winning {
     private static final int FOURTH_PLACE = 3;
     private final List<Integer> list;
 
-    public Winning(LottoCollection collection, List<String> winningNumbers) {
+    public WinningNumber(LottoCollection collection, List<String> winningNumbers) {
         validation(winningNumbers);
         this.list = collection.checkWinningNumber(winningNumbers);
     }
