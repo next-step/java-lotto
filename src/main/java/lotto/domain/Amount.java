@@ -29,7 +29,7 @@ public class Amount {
     }
 
     private void validateAmountUnderZero(int amount) {
-        if (amount <= 0) {
+        if (amount < 0) {
             throw new LotteryGameException(ErrorCode.AMOUNT_UNDER_ZERO);
         }
     }
