@@ -39,12 +39,16 @@ public class LottoWinningStats {
         return rankingMap;
     }
 
-    private void countByCase(int targetCount, Map<Ranks, Integer> rankingMap) { // FIXME 메서드 분리
+    private void countByCase(int targetCount, Map<Ranks, Integer> rankingMap) {
         Arrays.stream(Ranks.values()).forEach(rank -> {
-            if (rank.getCountsOfSameNumbers() == targetCount) {
-                rankingMap.put(rank, rankingMap.getOrDefault(rank, 0) + 1);
-            }
+            checkRankingMap(rank, targetCount, rankingMap);
         });
+    }
+
+    private void checkRankingMap(Ranks rank, int targetCount, Map<Ranks, Integer> rankingMap) {
+        if (rank.getCountsOfSameNumbers() == targetCount) {
+            rankingMap.put(rank, rankingMap.getOrDefault(rank, 0) + 1);
+        }
     }
 
     private int getCount(Lotto lotto, int index, List<Integer> winningNumbers) {
