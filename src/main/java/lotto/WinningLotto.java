@@ -1,24 +1,20 @@
 package lotto;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class WinningLotto {
-    private static final int WINNING_LOTTO_NUMBER_COUNT = 6;
-
-    private final List<LottoNumber> winningNumbers;
+    private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        HashSet<LottoNumber> uniqNumbers = new HashSet<>(winningNumbers);
-        if (uniqNumbers.size() != WINNING_LOTTO_NUMBER_COUNT){
-            throw new IllegalArgumentException("겹치지 않는 당첨 번호가 총 6개여야 합니다.");
-        }
-        if (uniqNumbers.contains(bonusNumber)) {
+        this(LottoTicket.of(winningNumbers), bonusNumber);
+    }
+
+    public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        if (winningTicket.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼이 당첨 번호와 겹치면 안됩니다.");
         }
-
-        this.winningNumbers = winningNumbers;
+        this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
     }
 
@@ -31,8 +27,6 @@ public class WinningLotto {
     }
 
     private int getMatchCount(LottoTicket ticket) {
-        return (int) winningNumbers.stream()
-                .filter(ticket::hasNumber)
-                .count();
+        return winningTicket.getMatchCount(ticket);
     }
 }

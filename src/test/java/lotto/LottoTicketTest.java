@@ -33,4 +33,11 @@ public class LottoTicketTest {
         assertThat(ticket.hasNumber(LottoNumber.of(1))).isTrue();
         assertThat(ticket.hasNumber(LottoNumber.of(7))).isFalse();
     }
+
+    @Test
+    void test_get_match_count() {
+        LottoTicket ticket1 = LottoTicket.of(1, 2, 3, 4, 5, 6);
+        LottoTicket ticket2 = LottoTicket.of(3, 4, 5, 6, 7, 8);
+        assertThat(ticket1.getMatchCount(ticket2)).isEqualTo(4);
+    }
 }

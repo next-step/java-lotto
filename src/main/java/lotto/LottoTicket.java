@@ -26,6 +26,10 @@ public class LottoTicket {
         return new LottoTicket(toLottoNumbers(numbers));
     }
 
+    public static LottoTicket of(List<LottoNumber> numbers) {
+        return new LottoTicket(numbers);
+    }
+
     public boolean hasNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
@@ -57,5 +61,11 @@ public class LottoTicket {
         return Arrays.stream(numbers)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
+    }
+
+    public int getMatchCount(LottoTicket ticket) {
+        return (int) numbers.stream()
+                .filter(ticket::hasNumber)
+                .count();
     }
 }
