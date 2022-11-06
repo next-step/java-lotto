@@ -7,26 +7,28 @@ import lotto.view.OutputView;
 
 public class LotteryGame {
     private static final Price lotteryTicketPrice = new Price(1000);
+    private static final InputView inputView = new InputView();
+    private static final OutputView outputView = new OutputView();
 
     private LotteryTickets tickets;
     private Result result;
 
     public void start() {
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
-
         Price price = new Price(inputView.enterPurchasePrice());
-        buyTickets(price);
-        outputView.printBuyingTickets(tickets);
+        Amount amountOfManualTickets = new Amount(inputView.enterAmountOfManualTickets());
+        tickets = LotteryTickets.of(inputView.enterManualTickets(amountOfManualTickets));
+        buyAutoTickets(price, amountOfManualTickets);
+        outputView.printBuyingTickets(tickets, amountOfManualTickets);
 
         WinningTicket winningTicket = new WinningTicket(inputView.enterWinningNumbers(), inputView.enterBonusBoll());
         calculateRank(winningTicket);
         outputView.printResult(result);
     }
 
-    private void buyTickets(Price price) {
-        Amount amount = price.calculateAmount(lotteryTicketPrice);
-        tickets = amount.createTickets(new AutoGenerateStrategy());
+    private void buyAutoTickets(Price price, Amount amountOfManualTicket) {
+        Amount amountOfTickets = price.calculateAmount(lotteryTicketPrice);
+        Amount amountOfAutoTicket = amountOfTickets.minus(amountOfManualTicket);
+        tickets.add(amountOfAutoTicket.createTickets(new AutoGenerateStrategy()));
     }
 
     private void calculateRank(WinningTicket winningTicket) {
@@ -34,5 +36,4 @@ public class LotteryGame {
         Double rateOfRank = ranks.calculateRateOfReturn(lotteryTicketPrice);
         result = new Result(ranks, rateOfRank);
     }
-
 }

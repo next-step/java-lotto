@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void printBuyingTickets(LotteryTickets tickets) {
-        System.out.printf("%d개를 구매했습니다.%n", tickets.getCount());
+    public void printBuyingTickets(LotteryTickets tickets, Amount amountOfManualTickets) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.%n", amountOfManualTickets.getAmount(), tickets.getCount() - amountOfManualTickets.getAmount());
         for (LotteryTicket ticket : tickets.getLotteryTickets()) {
             printTicket(ticket);
         }
