@@ -33,7 +33,7 @@ public class LotteryApp {
 			resultView.printLottosString(lottosStringDto);
 
 			final List<Integer> numbers = inputView.askWinningNumbers();
-			final Integer bonusNumber = inputView.askBonusNumber();
+			final int bonusNumber = inputView.askBonusNumber();
 			final WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
 
 			final Map<Reward, Integer> rewardStatistic = lottos.getRewardStatistic(winningLotto, bonusNumber);
