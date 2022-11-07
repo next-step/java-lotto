@@ -13,7 +13,7 @@ public class Lotto implements LottoGenerate {
 	public static final int PRICE = 1000;
 	public static final int LOTTO_NUMBER_QUANTITY = 6;
 
-	private final List<Integer> numbers;
+	protected final List<Integer> numbers;
 
 	public Lotto() {
 		this.numbers = generate();
