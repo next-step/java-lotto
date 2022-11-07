@@ -22,17 +22,18 @@ class RankTest {
 
     @BeforeAll
     static void setLotto() {
-        List<String> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add("1, 2, 3, 4, 5, 6");
-        lottoNumbers.add("1, 2, 3, 4, 5, 7");
-        lottoNumbers.add("1, 2, 3, 4, 5, 10");
-        lottoNumbers.add("1, 2, 3, 4, 10, 11");
-        lottoNumbers.add("1, 2, 3, 10, 11, 12");
-        lottoNumbers.add("1, 2, 10, 11, 12, 13");
-        lottoNumbers.add("1, 10, 11, 12, 13, 14");
-        lottoNumbers.add("10, 11, 12, 13, 14, 15");
+        List<String> lottoNumbers = List.of(
+                "1, 2, 3, 4, 5, 6",
+                "1, 2, 3, 4, 5, 7",
+                "1, 2, 3, 4, 5, 10",
+                "1, 2, 3, 4, 10, 11",
+                "1, 2, 3, 10, 11, 12",
+                "1, 2, 10, 11, 12, 13",
+                "1, 10, 11, 12, 13, 14",
+                "10, 11, 12, 13, 14, 15"
+        );
 
-        lottoNumbers.forEach(req -> lottos.add(IssuedLotto.of(req, IssueType.MANUAL)));
+        lottoNumbers.forEach(lottoNumber -> lottos.add(IssuedLotto.of(lottoNumber, IssueType.MANUAL)));
     }
 
     @BeforeAll
