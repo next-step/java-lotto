@@ -6,16 +6,11 @@ import java.util.Map;
 
 import lotto.LottoWinningStats;
 import lotto.enums.Ranks;
-import lotto.numbers.Lotto;
+import lotto.numbers.LottoBundle;
 
 public class OutputView {
-    public static void printNumbers(Lotto lotto) {
-        for (List<Integer> targetNumbers : lotto.getNumbers()) {
-            System.out.print("[");
-            printEachNumber(targetNumbers);
-            System.out.println("]");
-        }
-        System.out.println();
+    public static void printNumbers(LottoBundle lottoBundle) {
+        System.out.println(lottoBundle.toString());
     }
 
     public static void printWinningStatsResult(LottoWinningStats lottoWinningStats, int purchaseAmount) {
