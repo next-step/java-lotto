@@ -108,12 +108,12 @@
 
 [x] Money - 구입금액을 나타내는 value object
 
-[ ] LottoCusomter - 로또 구매자를 나타내는 domain model
-- [ ] 가진 금액으로, 구입 가능한 만큼 로또를 구입 할 수 있다.
-- [ ] 가진 금액이 로또 가격보다 적다면 로또를 구입 할 수 없다.
+[x] LottoCusomter - 로또 구매자를 나타내는 domain model
+- [x] 가진 금액으로, 구입 가능한 만큼 로또를 구입 할 수 있다.
+- [x] 가진 금액이 로또 가격보다 적다면 로또를 구입 할 수 없다.
 
-[ ] LottoStore - 로또 상점을 나타내는 domain model
-- [ ] 주어진 로또티켓을, 로또 구매자에게 팔 수 있다.
+[x] LottoStore - 로또 상점을 나타내는 domain model
+- [x] 주어진 로또티켓을, 로또 구매자에게 팔 수 있다.
 
 [ ] LottoResultStatsCalculator - 로또 당첨 통계 계산 객체
 - [ ] 주어진 로또티켓과 당첨 로또 번호를 이용하여, 당첨 통계를 계산할 수 있다.
