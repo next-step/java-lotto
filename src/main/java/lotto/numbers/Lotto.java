@@ -14,25 +14,10 @@ public class Lotto {
         this.numbers.addAll(getNumbers(AllNumbers.getNumbers()));
     }
 
-    private List<Integer> getNumbers(List<Integer> allNumbers) {
-        Collections.shuffle(allNumbers);
-        List<Integer> newNumbers = new ArrayList<>(List.copyOf(allNumbers.subList(0, TOTAL_NUMBERS_SIZE)));
-        newNumbers.sort(Comparator.naturalOrder());
-        return newNumbers;
-    }
-
-    public boolean containsNumber(int number) {
-        return this.numbers.contains(number);
-    }
-
     public int countSameNumbers(List<Integer> winningNumbers) {
        List<Integer> numbersCopy = new ArrayList<>(List.copyOf(numbers));
        numbersCopy.retainAll(winningNumbers);
        return numbersCopy.size();
-    }
-
-    public List<Integer> getNumbers() {
-        return this.numbers;
     }
 
     public String toString() {
@@ -44,6 +29,13 @@ public class Lotto {
         }
         result.append("]");
         return result.toString();
+    }
+
+    private List<Integer> getNumbers(List<Integer> allNumbers) {
+        Collections.shuffle(allNumbers);
+        List<Integer> newNumbers = new ArrayList<>(List.copyOf(allNumbers.subList(0, TOTAL_NUMBERS_SIZE)));
+        newNumbers.sort(Comparator.naturalOrder());
+        return newNumbers;
     }
 
     private void addComma(int index, int endIndex, StringBuilder result) {
