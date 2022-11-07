@@ -1,42 +1,31 @@
 package lotto.domain;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Statistics {
 
-    private static final int CRITERIA_OF_WINNING = 3;
-    private static final int UNIT = 1;
-    private Map<WinnigType, Integer> statistics;
+    private final Map<WinningType, Integer> statistics;
 
-    public Statistics() {
+    public Statistics(Map<WinningType, Integer> winningResult) {
         statistics = new LinkedHashMap<>();
-        for (WinnigType winnigType : WinnigType.values()) {
-            statistics.put(winnigType, 0);
+        for (WinningType winningType : WinningType.values()) {
+            statistics.put(winningType, 0);
         }
+        statistics.putAll(winningResult);
     }
 
-    public Map<WinnigType, Integer> getStatistics(List<Long> matchCntList) {
-        statistics.putAll(statisticsOfLotto(matchCntList));
+    public Map<WinningType, Integer> getStatistics() {
         return statistics;
     }
 
-    private Map<WinnigType, Integer> statisticsOfLotto(List<Long> matchCntList) {
-        return matchCntList.stream()
-                .filter(value -> value >= CRITERIA_OF_WINNING)
-                .collect(Collectors.toMap(matchCnt -> WinnigType.of(matchCnt), value -> UNIT, Integer::sum));
-    }
-
-    public double getRateOfReturn(int money) {
-        int earning = getEarning();
-        return Math.floor(earning / (double)money * 100) / 100;
+    public double getRateOfReturn(Money money) {
+        return Math.floor(getEarning() / money.getMoney() * 100) / 100;
     }
 
     private int getEarning() {
         int sum = 0;
-        for (Map.Entry<WinnigType, Integer> entry : statistics.entrySet()) {
+        for (Map.Entry<WinningType, Integer> entry : statistics.entrySet()) {
             sum += entry.getKey().getWinningAmount() * entry.getValue();
         }
         return sum;

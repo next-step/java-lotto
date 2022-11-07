@@ -9,17 +9,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManualNumberStrategy implements NumberStrategy {
+public class ManualNumberStrategy implements LottoNumberStrategy {
 
     private static final int START = 1;
     private static final int END = 45;
     private static final int CNT = 6;
     private static final String SEPARATOR = ",";
+    
     private final List<Integer> numbers;
 
     public ManualNumberStrategy(String input) {
         checkNull(input);
-        List<Integer> inputNumbers = stringToList(input);
+        List<Integer> inputNumbers = inputToNumbers(input);
         checkNumbers(inputNumbers);
         numbers = new ArrayList<>(inputNumbers);
     }
@@ -29,10 +30,10 @@ public class ManualNumberStrategy implements NumberStrategy {
         return numbers;
     }
 
-    private static List<Integer> stringToList(String input) {
+    private List<Integer> inputToNumbers(String input) {
         return Arrays.stream(input.split(SEPARATOR))
                 .map(strNumber -> {
-                    checkNotPositive(strNumber);
+                    checkNotPositive(strNumber.trim());
                     return Integer.parseInt(strNumber.trim());
                 })
                 .collect(Collectors.toList());
@@ -44,7 +45,7 @@ public class ManualNumberStrategy implements NumberStrategy {
         }
     }
 
-    private static void checkNotPositive(String input) {
+    private void checkNotPositive(String input) {
         if (!StringUtils.isNumeric(input)) {
             throw new NotPositiveException();
         }
@@ -58,9 +59,12 @@ public class ManualNumberStrategy implements NumberStrategy {
             throw new LottoNumberException();
         }
         inputNumbers.forEach(number -> {
-            if(number < START || number > END) {
+            if (number < START || number > END) {
                 throw new LottoNumberException();
             }
         });
+        if (inputNumbers.stream().distinct().count() != CNT) {
+            throw new LottoNumberException();
+        }
     }
 }

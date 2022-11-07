@@ -2,6 +2,6 @@ package lotto.strategy;
 
 import java.util.List;
 
-public interface NumberStrategy {
+public interface LottoNumberStrategy {
     List<Integer> getNumbers();
 }

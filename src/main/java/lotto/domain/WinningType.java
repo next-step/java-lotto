@@ -2,25 +2,27 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum WinnigType {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+public enum WinningType {
+
+    NOT_WINNING(0, 0),
+    FOURTH_PLACE(3, 5_000),
+    THIRD_PLACE(4, 50_000),
+    SECOND_PLACE(5, 1_500_000),
+    FIRST_PLACE(6, 2_000_000_000);
 
     private final long matchCnt;
     private final int winningAmount;
 
-    WinnigType(long matchCnt, int winningAmount) {
+    WinningType(long matchCnt, int winningAmount) {
         this.matchCnt = matchCnt;
         this.winningAmount = winningAmount;
     }
 
-    public static WinnigType of(long lottoMatchCnt) {
+    public static WinningType of(long lottoMatchCnt) {
         return Arrays.stream(values())
-                .filter(winnigType -> winnigType.matchCnt == lottoMatchCnt)
+                .filter(winningType -> winningType.matchCnt == lottoMatchCnt)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(""));
+                .orElse(NOT_WINNING);
     }
 
     public long getMatchCnt() {

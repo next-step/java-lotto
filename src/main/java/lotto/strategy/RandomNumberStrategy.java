@@ -1,31 +1,19 @@
 package lotto.strategy;
 
-import java.util.ArrayList;
+import lotto.domain.LottoNumbers;
+
 import java.util.Collections;
 import java.util.List;
 
-public class RandomNumberStrategy implements NumberStrategy {
+public class RandomNumberStrategy implements LottoNumberStrategy {
 
-    private static final int START = 1;
-    private static final int END = 31;
     private static final int MIN_IDX = 0;
     private static final int CNT = 6;
+    private static final List<Integer> numbers = LottoNumbers.getLottoNumbers();
 
     @Override
     public List<Integer> getNumbers() {
-        return shuffleNumbers(setList());
-    }
-
-    private List<Integer> shuffleNumbers(List<Integer> list) {
-        Collections.shuffle(list);
-        return list.subList(MIN_IDX, CNT);
-    }
-
-    private List<Integer> setList() {
-        List<Integer> list = new ArrayList<>();
-        for (int i = START; i < END; i++) {
-            list.add(i);
-        }
-        return list;
+        Collections.shuffle(numbers);
+        return numbers.subList(MIN_IDX, CNT);
     }
 }

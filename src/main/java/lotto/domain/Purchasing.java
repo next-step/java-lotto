@@ -1,54 +1,37 @@
 package lotto.domain;
 
-import lotto.exception.NotPositiveException;
 import lotto.strategy.RandomNumberStrategy;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Purchasing {
 
     private static final int LOTTO_PRICE = 1000;
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
 
-    public Purchasing(String input) {
-        checkNull(input);
-        checkNotPositive(input);
-        int money = Integer.parseInt(input);
-        lottoList = new ArrayList<>();
-        for (int i = 0; i < money / LOTTO_PRICE; i++) {
-            lottoList.add(new Lotto(new RandomNumberStrategy()));
+    public Purchasing(Money money) {
+        lottos = new ArrayList<>();
+        for (int i = 0; i < money.divideMoney(LOTTO_PRICE); i++) {
+            lottos.add(new Lotto(new RandomNumberStrategy()));
         }
     }
 
-    private void checkNull(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new NotPositiveException();
-        }
-    }
-
-    private static void checkNotPositive(String input) {
-        if (!StringUtils.isNumeric(input)) {
-            throw new NotPositiveException();
-        }
-        if (Integer.parseInt(input) < 0) {
-            throw new NotPositiveException();
-        }
-    }
-
-    public List<Long> getMatchCntList(Lotto winningLotto) {
-        return lottoList.stream()
+    public Map<WinningType, Integer> getWinningResult(Lotto winningLotto) {
+        return lottos.stream()
                 .map(lotto -> lotto.matchCnt(winningLotto))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                .stream()
+                .collect(Collectors.toMap(matchCnt -> WinningType.of(matchCnt), value -> 1, Integer::sum));
     }
 
     public int getLottoCnt() {
-        return lottoList.size();
+        return lottos.size();
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
     }
 }

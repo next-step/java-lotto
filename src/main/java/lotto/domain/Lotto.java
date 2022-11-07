@@ -1,28 +1,30 @@
 package lotto.domain;
 
 
-import lotto.strategy.NumberStrategy;
+import lotto.strategy.LottoNumberStrategy;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> lotto;
+    private final List<Integer> numbers;
 
-    public Lotto(NumberStrategy numberStrategy) {
-        lotto = new ArrayList<>(numberStrategy.getNumbers());
-        Collections.sort(lotto);
+    public Lotto(LottoNumberStrategy numberStrategy) {
+        numbers = new ArrayList<>(numberStrategy.getNumbers());
     }
 
     public long matchCnt(Lotto winningLotto) {
-        return lotto.stream()
-                .filter(winningLotto.getLotto()::contains)
+        return winningLotto.winningCnt(numbers);
+    }
+
+    public long winningCnt(List<Integer> lottoNumbers) {
+        return numbers.stream()
+                .filter(lottoNumbers::contains)
                 .count();
     }
 
-    public List<Integer> getLotto() {
-        return lotto;
+    public List<Integer> getNumbers() {
+        return new ArrayList<>(numbers);
     }
 }

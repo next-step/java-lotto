@@ -8,7 +8,8 @@ class PurchasingTest {
 
     @Test
     void 금액_로또_개수() {
-        assertThat(new Purchasing("10000").getLottoCnt()).isEqualTo(10);
-        assertThat(new Purchasing("900").getLottoCnt()).isEqualTo(0);
+        assertThat(new Purchasing(new Money("7200")).getLottoCnt()).isEqualTo(7);
+        assertThat(new Purchasing(new Money("1001")).getLottoCnt()).isEqualTo(1);
+        assertThat(new Purchasing(new Money("999")).getLottoCnt()).isEqualTo(0);
     }
 }
