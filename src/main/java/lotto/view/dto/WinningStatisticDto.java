@@ -5,10 +5,6 @@ import java.util.Map;
 import lotto.domain.Reward;
 
 public class WinningStatisticDto {
-
-	public static final int MIN_MATCHING_COUNT = 3;
-	public static final int MAX_MATCHING_COUNT = 6;
-
 	private final Map<Reward, Integer> winningStatistic;
 	private final float performance;
 

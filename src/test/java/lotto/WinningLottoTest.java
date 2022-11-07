@@ -27,17 +27,6 @@ class WinningLottoTest {
 		);
 	}
 
-	static Stream<Arguments> providerOfWinningLottoParameters() {
-		return Stream.of(
-			Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), 7),
-			Arguments.arguments(List.of(1, 2, 3, 4, 5, 7), 8),
-			Arguments.arguments(List.of(1, 2, 3, 4, 7, 8), 9),
-			Arguments.arguments(List.of(1, 2, 3, 7, 8, 9), 10),
-			Arguments.arguments(List.of(1, 2, 7, 8, 9, 10), 11),
-			Arguments.arguments(List.of(1, 7, 8, 9, 10, 11), 12)
-		);
-	}
-
 	@DisplayName("보너스 번호가 6개 번호 중 하나와 중복되면 예외를 던진다.")
 	@ParameterizedTest
 	@MethodSource("providerOfWinningLottoHasDuplicatedBonusNumber")
