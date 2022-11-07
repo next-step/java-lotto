@@ -12,27 +12,8 @@ public class Calculator {
             int first = result;
             String operator = parsedQueue.poll();
             int second = Integer.parseInt(parsedQueue.poll());
-            int operated = operate(first, operator, second);
-            result = operated;
+            result = Operator.of(operator).operate(first, second);
         }
         return result;
-    }
-
-    private int operate(int first, String operator, int second) {
-        if (operator.equals("+")){
-            return first + second;
-        }
-        if (operator.equals("-")){
-            return first - second;
-        }
-        if (operator.equals("*")){
-            return first * second;
-        }
-        else {
-            if(second == 0) {
-                throw new IllegalArgumentException("나눗셈 분모에 0이 올 수 없습니다.");
-            }
-            return first / second;
-        }
     }
 }
