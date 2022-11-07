@@ -3,10 +3,7 @@ package com.nextstep.lotto.lottoGame.view;
 import com.nextstep.lotto.lottoGame.domain.LottoTicket;
 import com.nextstep.lotto.lottoGame.domain.WinningNumbers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -24,6 +21,10 @@ public class InputView {
     }
 
     public static List<LottoTicket> getManualLottoNumbers(final int count) {
+        if (count < 1) {
+            return Collections.EMPTY_LIST;
+        }
+        System.out.println("수동 구매할 로또 번호들을 입력해주세요.");
         List<LottoTicket> manualTickets = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < count; i++) {
