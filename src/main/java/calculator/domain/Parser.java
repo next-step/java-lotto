@@ -13,9 +13,6 @@ public class Parser {
         }
 
         String[] strings = input.split(" ");
-
-        Queue<String> queue = new LinkedList<>();
-        Arrays.stream(strings).forEach(string -> queue.add(string));
-        return queue;
+        return new LinkedList<>(Arrays.asList(strings));
     }
 }
