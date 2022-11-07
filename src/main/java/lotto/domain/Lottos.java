@@ -27,7 +27,7 @@ public class Lottos {
 		return purchasedLottos.size();
 	}
 
-	public Map<Integer, Integer> getMatchingCountsMap(Lotto winningLotto) {
+	public Map<Integer, Integer> getMatchingCountsMap(WinningLotto winningLotto) {
 		Map<Integer, Integer> matchingCountsMap = new HashMap<>();
 		for (Lotto lotto : purchasedLottos) {
 			matchingCountsMap.put(
