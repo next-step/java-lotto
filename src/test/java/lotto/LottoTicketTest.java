@@ -14,30 +14,30 @@ public class LottoTicketTest {
     @ValueSource(ints={5, 7})
     void test_invalid_number_count(int size) {
         int[] numbers = IntStream.rangeClosed(0, size).toArray();
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.from(numbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.of(numbers));
     }
 
     @Test
     void test_uniq_number() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.from(1, 1, 2, 3, 4, 5));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.of(1, 1, 2, 3, 4, 5));
     }
 
     @Test
     void test_is_equal_to() {
-        assertThat(LottoTicket.from(1, 2, 3, 4, 5, 6)).isEqualTo(LottoTicket.from(5, 3, 2, 1, 4, 6));
+        assertThat(LottoTicket.of(1, 2, 3, 4, 5, 6)).isEqualTo(LottoTicket.of(5, 3, 2, 1, 4, 6));
     }
 
     @Test
     void test_has_number() {
-        LottoTicket ticket = LottoTicket.from(1, 2, 3, 4, 5, 6);
+        LottoTicket ticket = LottoTicket.of(1, 2, 3, 4, 5, 6);
         assertThat(ticket.hasNumber(LottoNumber.of(1))).isTrue();
         assertThat(ticket.hasNumber(LottoNumber.of(7))).isFalse();
     }
 
     @Test
-    void test_get_matching_count() {
-        LottoTicket ticket1 = LottoTicket.from(1, 2, 3, 4, 5, 6);
-        LottoTicket ticket2 = LottoTicket.from(3, 4, 5, 6, 7, 8);
-        assertThat(ticket1.getMatchingCount(ticket2)).isEqualTo(4);
+    void test_get_match_count() {
+        LottoTicket ticket1 = LottoTicket.of(1, 2, 3, 4, 5, 6);
+        LottoTicket ticket2 = LottoTicket.of(3, 4, 5, 6, 7, 8);
+        assertThat(ticket1.getMatchCount(ticket2)).isEqualTo(4);
     }
 }

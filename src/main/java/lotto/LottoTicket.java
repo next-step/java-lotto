@@ -19,25 +19,19 @@ public class LottoTicket {
     }
 
     public static LottoTicket random() {
-        return new LottoTicket(createLottoNumbers());
+        return new LottoTicket(randomLottoNumbers());
     }
 
-    public static LottoTicket from(int... numbers) {
+    public static LottoTicket of(int... numbers) {
         return new LottoTicket(toLottoNumbers(numbers));
     }
 
-    public static LottoTicket from(List<Integer> numbers) {
-        return new LottoTicket(toLottoNumbers(numbers));
+    public static LottoTicket of(List<LottoNumber> numbers) {
+        return new LottoTicket(numbers);
     }
 
     public boolean hasNumber(LottoNumber number) {
         return this.numbers.contains(number);
-    }
-
-    public int getMatchingCount(LottoTicket ticket) {
-        return (int) numbers.stream()
-                .filter(ticket::hasNumber)
-                .count();
     }
 
     public List<LottoNumber> getNumbers() {
@@ -57,16 +51,10 @@ public class LottoTicket {
         return Objects.hash(numbers);
     }
 
-    private static List<LottoNumber> createLottoNumbers() {
-        List<Integer> candidates = new ArrayList<>();
-        for (int i = LottoNumber.VALUE_MIN; i <= LottoNumber.VALUE_MAX; i++) {
-            candidates.add(i);
-        }
+    private static List<LottoNumber> randomLottoNumbers() {
+        List<LottoNumber> candidates = new ArrayList<>(LottoNumber.selectableNumbers());
         Collections.shuffle(candidates);
-        return candidates.stream()
-                .map(LottoNumber::of)
-                .limit(LOTTO_NUMBER_COUNT)
-                .collect(Collectors.toList());
+        return candidates.subList(0, LOTTO_NUMBER_COUNT);
     }
 
     private static List<LottoNumber> toLottoNumbers(int... numbers) {
@@ -75,9 +63,9 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
+    public int getMatchCount(LottoTicket ticket) {
+        return (int) numbers.stream()
+                .filter(ticket::hasNumber)
+                .count();
     }
 }
