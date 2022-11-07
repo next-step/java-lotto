@@ -27,16 +27,16 @@ class LottoStatisticsServiceTest {
 
     @BeforeAll
     static void setLotto() {
-        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.manual));
-        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 7, 8, 9), IssueType.manual));
-        lottos.add(IssuedLotto.of(List.of(11, 12, 13, 14, 15, 16), IssueType.manual));
+        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.MANUAL));
+        lottos.add(IssuedLotto.of(List.of(1, 2, 3, 7, 8, 9), IssueType.MANUAL));
+        lottos.add(IssuedLotto.of(List.of(11, 12, 13, 14, 15, 16), IssueType.MANUAL));
     }
 
     @BeforeAll
     static void setDuplicatedLottos() {
-        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.manual));
-        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.manual));
-        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.manual));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.MANUAL));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.MANUAL));
+        duplicatedLottos.add(IssuedLotto.of(List.of(1, 2, 3, 4, 5, 6), IssueType.MANUAL));
     }
 
     @BeforeAll

@@ -17,10 +17,10 @@ public class LottoService {
 
         List<IssuedLotto> lottos = issueLottoRequest.getManualLottoNumbers()
                 .stream()
-                .map(manualLottoNumber -> IssuedLotto.of(manualLottoNumber, IssueType.manual))
+                .map(manualLottoNumber -> IssuedLotto.of(manualLottoNumber, IssueType.MANUAL))
                 .collect(Collectors.toList());
         while (lottos.size() < count) {
-            lottos.add(IssuedLotto.of(strategy.getNumbers(), IssueType.random));
+            lottos.add(IssuedLotto.of(strategy.getNumbers(), IssueType.RANDOM));
         }
 
         return lottos;

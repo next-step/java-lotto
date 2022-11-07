@@ -32,7 +32,7 @@ class RankTest {
         lottoNumbers.add("1, 10, 11, 12, 13, 14");
         lottoNumbers.add("10, 11, 12, 13, 14, 15");
 
-        lottoNumbers.forEach(req -> lottos.add(IssuedLotto.of(req, IssueType.manual)));
+        lottoNumbers.forEach(req -> lottos.add(IssuedLotto.of(req, IssueType.MANUAL)));
     }
 
     @BeforeAll

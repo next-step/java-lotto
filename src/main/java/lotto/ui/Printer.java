@@ -30,8 +30,8 @@ public class Printer {
     }
 
     public static void printLottoNumbers(List<IssuedLotto> lottos) {
-        long manualCount = lottos.stream().filter(lotto -> lotto.getIssueType().equals(IssueType.manual)).count();
-        long randomCount = lottos.stream().filter(lotto -> lotto.getIssueType().equals(IssueType.random)).count();
+        long manualCount = lottos.stream().filter(lotto -> lotto.getIssueType().equals(IssueType.MANUAL)).count();
+        long randomCount = lottos.stream().filter(lotto -> lotto.getIssueType().equals(IssueType.RANDOM)).count();
 
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, randomCount);
         lottos.forEach(lotto -> System.out.println(lotto.getLotto().getNumbers().toString()));

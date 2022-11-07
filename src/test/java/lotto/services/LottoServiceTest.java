@@ -8,8 +8,6 @@ import lotto.strategy.PickNumberStrategy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +46,10 @@ class LottoServiceTest {
         IssueLottoRequest issueLottoRequest = IssueLottoRequest.of(PAYMENT, new ArrayList<>());
         List<IssuedLotto> issuedLottos = lottoService.issueLottos(issueLottoRequest, strategy);
 
-        long randomIssuedLottoCount = issuedLottos.stream().filter(lotto -> lotto.getIssueType().equals(IssueType.random)).count();
+        long randomIssuedLottoCount = issuedLottos
+                .stream()
+                .filter(lotto -> lotto.getIssueType().equals(IssueType.RANDOM))
+                .count();
         assertThat(randomIssuedLottoCount).isEqualTo(PAYMENT / IssuedLotto.PRICE);
     }
 
@@ -59,7 +60,10 @@ class LottoServiceTest {
         IssueLottoRequest issueLottoRequest = IssueLottoRequest.of(payment, manualLottoNumbers);
         List<IssuedLotto> issuedLottos = lottoService.issueLottos(issueLottoRequest, strategy);
 
-        long manualIssuedLottoCount = issuedLottos.stream().filter(lotto -> lotto.getIssueType().equals(IssueType.manual)).count();
+        long manualIssuedLottoCount = issuedLottos
+                .stream()
+                .filter(lotto -> lotto.getIssueType().equals(IssueType.MANUAL))
+                .count();
         assertThat(manualIssuedLottoCount).isEqualTo(payment / IssuedLotto.PRICE);
     }
 
