@@ -18,14 +18,7 @@ public class Input {
     public static BigDecimal inputAmount() {
         System.out.println(INPUT_AMOUNT_MESSAGE);
         BigDecimal amount = sc1.nextBigDecimal();
-        checkAmount(amount);
         return amount;
-    }
-
-    private static void checkAmount(BigDecimal amount) {
-        if (amount == null || amount.equals(" ")) {
-            throw new IllegalArgumentException(ERROR_CHECK_AMOUNT);
-        }
     }
 
     public static List<Integer> inputWinnerNumberList() {
