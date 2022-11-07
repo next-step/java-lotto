@@ -2,14 +2,13 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-import lotto.exception.ErrorMessage;
-import lotto.exception.InvalidMatchCountException;
-
 public enum Reward {
-	THREE_MATCH_REWARD(3, 5_000),
-	FOUR_MATCH_REWARD(4, 50_000),
-	FIVE_MATCH_REWARD(5, 1_500_000),
-	SIX_MATCH_REWARD(6, 2_000_000_000);
+	FIRST(6, 2_000_000_000),
+	SECOND(5, 30_000_000),
+	THIRD(5, 1_500_000),
+	FOURTH(4, 50_000),
+	FIFTH(3, 5_000),
+	MISS(0, 0);
 
 	int matchCount;
 	int money;
@@ -19,11 +18,18 @@ public enum Reward {
 		this.money = money;
 	}
 
-	public static Reward getRewardByMatchCount(int matchCount) {
+	public static Reward getRewardByMatchCount(int matchCount, boolean hasBonusNumber) {
+		if (isSecond(matchCount, hasBonusNumber)) {
+			return SECOND;
+		}
 		return Arrays.stream(values())
 			.filter(reward -> reward.getMatchCount() == (matchCount))
 			.findFirst()
-			.orElseThrow(() -> new InvalidMatchCountException(ErrorMessage.INVALID_MATCH_COUNT));
+			.orElse(MISS);
+	}
+
+	private static boolean isSecond(int matchCount, boolean hasBonusNumber) {
+		return matchCount == 5 && hasBonusNumber;
 	}
 
 	public int getMatchCount() {

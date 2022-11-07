@@ -18,12 +18,12 @@ class RewardTest {
 
 	static Stream<Arguments> providerOfSecondPlaceLottos() {
 		return Stream.of(
-			Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 44, 45), 5),
-			Arguments.arguments(List.of(1, 2, 3, 4, 6, 7), List.of(1, 2, 3, 4, 44, 45), 6),
-			Arguments.arguments(List.of(1, 2, 3, 4, 7, 8), List.of(1, 2, 3, 4, 44, 45), 7),
-			Arguments.arguments(List.of(1, 2, 3, 4, 8, 9), List.of(1, 2, 3, 4, 44, 45), 8),
-			Arguments.arguments(List.of(1, 2, 3, 4, 9, 10), List.of(1, 2, 3, 4, 44, 45), 9),
-			Arguments.arguments(List.of(1, 2, 3, 4, 10, 11), List.of(1, 2, 3, 4, 44, 45), 10)
+			Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 45), 6),
+			Arguments.arguments(List.of(1, 2, 3, 4, 6, 7), List.of(1, 2, 3, 4, 6, 45), 7),
+			Arguments.arguments(List.of(1, 2, 3, 4, 7, 8), List.of(1, 2, 3, 4, 7, 45), 8),
+			Arguments.arguments(List.of(1, 2, 3, 4, 8, 9), List.of(1, 2, 3, 4, 8, 45), 9),
+			Arguments.arguments(List.of(1, 2, 3, 4, 9, 10), List.of(1, 2, 3, 4, 9, 45), 10),
+			Arguments.arguments(List.of(1, 2, 3, 4, 10, 11), List.of(1, 2, 3, 4, 10, 45), 11)
 		);
 	}
 
@@ -35,8 +35,10 @@ class RewardTest {
 		Lotto lotto = new Lotto(numbers);
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-		assertThat(lotto.getMatchingCount(winningLotto.getWholeNumbers())).isEqualTo(5);
-		assertThat(Reward.getRewardByMatchCount(winningLotto.getWholeNumbers().lotto.hasBonusNumber())).is(
-			Reward.SECOND);
+		assertThat(lotto.getMatchingCount(winningLotto.getNumbers())).isEqualTo(5);
+		assertThat(
+			Reward.getRewardByMatchCount(lotto.getMatchingCount(winningLotto.getNumbers()),
+				lotto.hasBonusNumber(bonusNumber)))
+			.isEqualTo(Reward.SECOND);
 	}
 }

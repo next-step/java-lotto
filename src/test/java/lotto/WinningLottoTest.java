@@ -10,12 +10,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.exception.DuplicateBonusNumberException;
 import lotto.exception.ErrorMessage;
 
-public class WinningLottoTest {
+class WinningLottoTest {
 
 	static Stream<Arguments> providerOfWinningLottoHasDuplicatedBonusNumber() {
 		return Stream.of(
@@ -49,13 +48,4 @@ public class WinningLottoTest {
 		}).isInstanceOf(DuplicateBonusNumberException.class)
 			.hasMessage(ErrorMessage.BONUS_NUMBER_MUST_NOT_BE_DUPLICATED.getMessage());
 	}
-
-	@DisplayName("WinningLotto wholeNumbers의 총 갯수는 7개이다.")
-	@ParameterizedTest
-	@MethodSource("providerOfWinningLottoParameters")
-	void Should_Be_Seven_When_Create_Winning_Lotto(List<Integer> numbers, int bonusNumber) {
-		WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
-		assertThat(winningLotto.getWholeNumbers().size()).isEqualTo(Lotto.LOTTO_NUMBER_QUANTITY + 1);
-	}
-
 }

@@ -27,14 +27,16 @@ public class Lottos {
 		return purchasedLottos.size();
 	}
 
-	public Map<Integer, Integer> getMatchingCountsMap(WinningLotto winningLotto) {
-		Map<Integer, Integer> matchingCountsMap = new HashMap<>();
+	public Map<Reward, Integer> getRewardStatistic(WinningLotto winningLotto, int bonusNumber) {
+		Map<Reward, Integer> rewardStatistic = new HashMap<>();
 		for (Lotto lotto : purchasedLottos) {
-			matchingCountsMap.put(
-				lotto.getMatchingCount(winningLotto.getNumbers()),
-				matchingCountsMap.getOrDefault(lotto.getMatchingCount(winningLotto.getNumbers()), 0) + 1
+			Reward reward = Reward.getRewardByMatchCount(lotto.getMatchingCount(winningLotto.getNumbers()),
+				lotto.hasBonusNumber(bonusNumber));
+			rewardStatistic.put(
+				reward,
+				rewardStatistic.getOrDefault(reward, 0) + 1
 			);
 		}
-		return matchingCountsMap;
+		return rewardStatistic;
 	}
 }

@@ -57,6 +57,10 @@ public class Lotto implements LottoGenerate {
 			.count();
 	}
 
+	public boolean hasBonusNumber(int bonusNumber) {
+		return numbers.contains(bonusNumber);
+	}
+
 	@Override
 	public String toString() {
 		List<Integer> sortedNumbers = numbers.stream().sorted().collect(Collectors.toList());

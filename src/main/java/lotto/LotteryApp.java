@@ -6,6 +6,7 @@ import java.util.Map;
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.Reward;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -35,8 +36,8 @@ public class LotteryApp {
 			final Integer bonusNumber = inputView.askBonusNumber();
 			final WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
 
-			final Map<Integer, Integer> matchCountsMap = lottos.getMatchingCountsMap(winningLotto);
-			resultView.printWinningStatistic(WinningStatisticDto.of(matchCountsMap, purchaseAmount));
+			final Map<Reward, Integer> rewardStatistic = lottos.getRewardStatistic(winningLotto, bonusNumber);
+			resultView.printWinningStatistic(WinningStatisticDto.of(rewardStatistic, purchaseAmount));
 		} catch (Exception exception) {
 			resultView.printExceptionMessage(exception);
 		}
