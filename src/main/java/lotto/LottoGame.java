@@ -4,22 +4,23 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
+import lotto.utils.RandomLottoGenerator;
 import lotto.domain.Store;
 import lotto.domain.WinningLotto;
-import lotto.domain.lottogenerator.ManualLottoGenerator;
-import lotto.domain.lottogenerator.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
     public static void main(String[] args) {
         Money money = new Money(InputView.getMoney());
-        Store manualStore = new Store(new ManualLottoGenerator(InputView.getManualLottoNumbers()));
-        Store randomStore = new Store(new RandomLottoGenerator(money.countOfTickets()));
-        Store totalStore = new Store(List.of(manualStore, randomStore));
+        Store manualStore = new Store(InputView.getManualLottoNumbers().stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList()));
+        Store randomStore = new Store(RandomLottoGenerator.create(money.countOfTickets()));
+        Store totalStore = manualStore.add(randomStore);
 
         ResultView.viewCountOfLotto(manualStore.sizeOfLottoTickets(), randomStore.sizeOfLottoTickets());
         ResultView.viewLottoTickets(totalStore.getLottoTickets());

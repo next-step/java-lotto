@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.lottogenerator.LottoGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +15,7 @@ class StoreTest {
 
     @BeforeEach
     void setUp() {
-        LottoGenerator lottoGenerator = () -> List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoTicket(List.of(7, 8, 9, 10, 11, 12)));
-        store = new Store(lottoGenerator);
+        store = new Store(List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoTicket(List.of(7, 8, 9, 10, 11, 12))));
     }
 
     @Test
@@ -28,6 +26,12 @@ class StoreTest {
     @Test
     void 발급된_로또티켓_사이즈_반환() {
         Assertions.assertThat(store.sizeOfLottoTickets()).isEqualTo(2);
+    }
+
+    @Test
+    void 로또티켓_합쳐서_객체생성() {
+        Store combinedStore = new Store(List.of(new LottoTicket(List.of(13, 14, 15, 16, 17, 18))));
+        Assertions.assertThat(store.add(combinedStore).getLottoTickets()).hasSize(3);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package lotto.domain.lottogenerator;
+package lotto.utils;
 
 import lotto.domain.LottoTicket;
 
@@ -11,22 +11,18 @@ import java.util.stream.IntStream;
 import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 
-public class RandomLottoGenerator implements LottoGenerator {
+public final class RandomLottoGenerator {
 
-    private final int countOfTickets;
-
-    public RandomLottoGenerator(final int countOfTickets) {
-        this.countOfTickets = countOfTickets;
+    private RandomLottoGenerator() {
     }
 
-    @Override
-    public List<LottoTicket> create() {
+    public static List<LottoTicket> create(final int countOfTickets) {
         return IntStream.range(0, countOfTickets)
                 .mapToObj(i -> createLottoTicket())
                 .collect(Collectors.toList());
     }
 
-    private LottoTicket createLottoTicket() {
+    private static LottoTicket createLottoTicket() {
         List<Integer> numList = new ArrayList<>();
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             numList.add(i);
