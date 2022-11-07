@@ -36,7 +36,7 @@ public class LotteryApp {
 			final int bonusNumber = inputView.askBonusNumber();
 			final WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
 
-			final Map<Reward, Integer> rewardStatistic = lottos.getRewardStatistic(winningLotto, bonusNumber);
+			final Map<Reward, Integer> rewardStatistic = lottos.getRewardStatistic(winningLotto);
 			resultView.printWinningStatistic(WinningStatisticDto.of(rewardStatistic, purchaseAmount));
 		} catch (Exception exception) {
 			resultView.printExceptionMessage(exception);

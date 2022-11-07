@@ -19,4 +19,8 @@ public class WinningLotto extends Lotto {
 	private boolean isValidBonusNumber(int bonusNumber) {
 		return !numbers.contains(bonusNumber);
 	}
+
+	public int getBonusNumber() {
+		return bonusNumber;
+	}
 }

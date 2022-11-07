@@ -27,11 +27,11 @@ public class Lottos {
 		return purchasedLottos.size();
 	}
 
-	public Map<Reward, Integer> getRewardStatistic(WinningLotto winningLotto, int bonusNumber) {
+	public Map<Reward, Integer> getRewardStatistic(WinningLotto winningLotto) {
 		Map<Reward, Integer> rewardStatistic = new EnumMap<>(Reward.class);
 		for (Lotto lotto : purchasedLottos) {
 			Reward reward = Reward.getRewardByMatchCount(lotto.getMatchingCount(winningLotto.getNumbers()),
-				lotto.hasBonusNumber(bonusNumber));
+				lotto.hasBonusNumber(winningLotto.getBonusNumber()));
 			rewardStatistic.put(
 				reward,
 				rewardStatistic.getOrDefault(reward, 0) + 1
