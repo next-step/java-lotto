@@ -8,7 +8,7 @@ import java.util.List;
 public class Lotto {
     public static final int TOTAL_NUMBERS_SIZE = 6;
 
-    private final List<List<Integer>> numbers;
+    private final List<List<Integer>> numbers; // TODO 1개의 리스트로 분리
 
     public Lotto(int purchaseCount) {
         this.numbers = new ArrayList<>(purchaseCount);
@@ -18,11 +18,15 @@ public class Lotto {
     private void generateNumbers(int purchaseCount) {
         List<Integer> allNumbers = AllNumbers.getNumbers();
         for (int i=0 ; i<purchaseCount ; i++) {
-            Collections.shuffle(allNumbers);
-            List<Integer> newNumbers = new ArrayList<>(List.copyOf(allNumbers.subList(0, TOTAL_NUMBERS_SIZE)));
-            newNumbers.sort(Comparator.naturalOrder());
-            numbers.add(i, newNumbers);
+            numbers.add(i, getNewNumbers(allNumbers));
         }
+    }
+
+    private List<Integer> getNewNumbers(List<Integer> allNumbers) {
+        Collections.shuffle(allNumbers);
+        List<Integer> newNumbers = new ArrayList<>(List.copyOf(allNumbers.subList(0, TOTAL_NUMBERS_SIZE)));
+        newNumbers.sort(Comparator.naturalOrder());
+        return newNumbers;
     }
 
     public boolean containsNumber(int index, int number) {
