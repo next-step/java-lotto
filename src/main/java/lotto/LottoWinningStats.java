@@ -49,22 +49,6 @@ public class LottoWinningStats {
         return (double) totalWinningAmounts / purchaseAmount;
     }
 
-    private int getCount(Lotto lotto, List<Integer> winningNumbers) {
-//        int count = 0;
-//        for (Integer winningNumber : winningNumbers) {
-//            count = checkCount(lotto, winningNumber, count);
-//        }
-//        return count;
-        return lotto.countSameNumbers(winningNumbers);
-    }
-
-    private int checkCount(Lotto lotto, Integer winningNumber, int count) {
-        if (lotto.containsNumber(winningNumber)) {
-            count++;
-        }
-        return count;
-    }
-
     private Map<Ranks, Integer> calculateRanks() {
         for (int targetCount : this.winningStats) {
             countByCase(targetCount, rankingMap);
