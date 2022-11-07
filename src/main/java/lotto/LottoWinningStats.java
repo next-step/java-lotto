@@ -8,6 +8,7 @@ import java.util.Map;
 
 import lotto.enums.Ranks;
 import lotto.numbers.Lotto;
+import lotto.numbers.LottoBundle;
 
 public class LottoWinningStats {
     public static final int PRICE = 1000;
@@ -15,17 +16,18 @@ public class LottoWinningStats {
     private final List<Integer> winningStats;
     private final Map<Ranks, Integer> rankingMap;
 
-    public LottoWinningStats(Lotto lotto, List<Integer> winningNumbers) {
-        this.winningStats = new ArrayList<>(lotto.getNumbersSize());
+    public LottoWinningStats(LottoBundle lottoBundle, List<Integer> winningNumbers) {
+        this.winningStats = new ArrayList<>(lottoBundle.getBundleSize());
         this.rankingMap = new LinkedHashMap<>();
 
-        calculateWinningStats(lotto, winningNumbers);
+        calculateWinningStats(lottoBundle, winningNumbers);
     }
 
-    private void calculateWinningStats(Lotto lotto, List<Integer> winningNumbers) {
+    private void calculateWinningStats(LottoBundle lottoBundle, List<Integer> winningNumbers) {
         // 로또 객체를 기반으로 당첨 통계 계산
-        for (int i=0 ; i<lotto.getNumbersSize() ; i++) {
-            winningStats.add(i, getCount(lotto, i, winningNumbers));
+        for (int i=0 ; i<lottoBundle.getBundleSize() ; i++) {
+            Lotto lotto = lottoBundle.getLottoByIndex(i);
+            winningStats.add(i, lotto.countSameNumbers(winningNumbers));
         }
     }
 
@@ -47,6 +49,22 @@ public class LottoWinningStats {
         return (double) totalWinningAmounts / purchaseAmount;
     }
 
+    private int getCount(Lotto lotto, List<Integer> winningNumbers) {
+//        int count = 0;
+//        for (Integer winningNumber : winningNumbers) {
+//            count = checkCount(lotto, winningNumber, count);
+//        }
+//        return count;
+        return lotto.countSameNumbers(winningNumbers);
+    }
+
+    private int checkCount(Lotto lotto, Integer winningNumber, int count) {
+        if (lotto.containsNumber(winningNumber)) {
+            count++;
+        }
+        return count;
+    }
+
     private Map<Ranks, Integer> calculateRanks() {
         for (int targetCount : this.winningStats) {
             countByCase(targetCount, rankingMap);
@@ -64,20 +82,5 @@ public class LottoWinningStats {
         if (rank.getCountsOfSameNumbers() == targetCount) {
             rankingMap.put(rank, rankingMap.getOrDefault(rank, 0) + 1);
         }
-    }
-
-    private int getCount(Lotto lotto, int index, List<Integer> winningNumbers) {
-        int count = 0;
-        for (Integer winningNumber : winningNumbers) {
-            count = checkCount(lotto, index, winningNumber, count);
-        }
-        return count;
-    }
-
-    private int checkCount(Lotto lotto, int index, Integer winningNumber, int count) {
-        if (lotto.containsNumber(index, winningNumber)) {
-            count++;
-        }
-        return count;
     }
 }
