@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.exception.DuplicateBonusNumberException;
 import lotto.exception.ErrorMessage;
@@ -27,6 +28,17 @@ public class WinningLottoTest {
 		);
 	}
 
+	static Stream<Arguments> providerOfWinningLottoParameters() {
+		return Stream.of(
+			Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), 7),
+			Arguments.arguments(List.of(1, 2, 3, 4, 5, 7), 8),
+			Arguments.arguments(List.of(1, 2, 3, 4, 7, 8), 9),
+			Arguments.arguments(List.of(1, 2, 3, 7, 8, 9), 10),
+			Arguments.arguments(List.of(1, 2, 7, 8, 9, 10), 11),
+			Arguments.arguments(List.of(1, 7, 8, 9, 10, 11), 12)
+		);
+	}
+
 	@DisplayName("보너스 번호가 6개 번호 중 하나와 중복되면 예외를 던진다.")
 	@ParameterizedTest
 	@MethodSource("providerOfWinningLottoHasDuplicatedBonusNumber")
@@ -36,6 +48,14 @@ public class WinningLottoTest {
 			WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
 		}).isInstanceOf(DuplicateBonusNumberException.class)
 			.hasMessage(ErrorMessage.BONUS_NUMBER_MUST_NOT_BE_DUPLICATED.getMessage());
+	}
+
+	@DisplayName("WinningLotto wholeNumbers의 총 갯수는 7개이다.")
+	@ParameterizedTest
+	@MethodSource("providerOfWinningLottoParameters")
+	void Should_Be_Seven_When_Create_Winning_Lotto(List<Integer> numbers, int bonusNumber) {
+		WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
+		assertThat(winningLotto.getWholeNumbers().size()).isEqualTo(Lotto.LOTTO_NUMBER_QUANTITY + 1);
 	}
 
 }
