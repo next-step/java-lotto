@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.LotteryMachine;
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import lotto.view.dto.LottoStringsDto;
@@ -32,7 +32,8 @@ public class LotteryApp {
 			resultView.printLottosString(lottosStringDto);
 
 			final List<Integer> numbers = inputView.askWinningNumbers();
-			final Lotto winningLotto = new Lotto(numbers);
+			final Integer bonusNumber = inputView.askBonusNumber();
+			final WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
 
 			final Map<Integer, Integer> matchCountsMap = lottos.getMatchingCountsMap(winningLotto);
 			resultView.printWinningStatistic(WinningStatisticDto.of(matchCountsMap, purchaseAmount));
