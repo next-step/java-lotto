@@ -1,15 +1,18 @@
 package lotto;
 
+import lotto.numbers.Lotto;
+import lotto.numbers.WinningNumbers;
 import lotto.views.InputView;
+import lotto.views.OutputView;
 
 public class Main {
     public static void main(String[] args) {
         int purchaseAmount = InputView.inputAmount();
-        LottoProcessor lottoProcessor = new LottoProcessor(purchaseAmount);
-        lottoProcessor.publish(purchaseAmount);
+        Lotto lotto = new Lotto(purchaseAmount / LottoWinningStats.PRICE);
+        OutputView.printNumbers(lotto);
 
-        String winningNumbers = InputView.inputLastWinningNumbers();
-        lottoProcessor.calculateWinningStats(winningNumbers);
-        lottoProcessor.printWinningStats(purchaseAmount);
+        String inputNumbers = InputView.inputLastWinningNumbers();
+        LottoWinningStats lottoWinningStats = new LottoWinningStats(lotto, WinningNumbers.getNumbers(inputNumbers));
+        OutputView.printWinningStatsResult(lottoWinningStats, purchaseAmount);
     }
 }

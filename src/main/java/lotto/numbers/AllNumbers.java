@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AllNumbers {
-    private static final int LAST_NUMBER = 45;
+    public static final int LAST_NUMBER = 45;
 
     private static List<Integer> allNumbers;
 
