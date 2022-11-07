@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class LottoResultView {
 
     public static final String RESULT_OUTPUT_COMMENT = "당첨 통계\n---------";
+    public static final String BONUS_MATCH_COMMENT = ", 보너스 볼 일치";
 
     public static void printTickets(List<LottoTicket> ticketList) {
         System.out.println(ticketList.size() + "개를 구매했습니다.");
@@ -26,7 +27,7 @@ public class LottoResultView {
         System.out.println(RESULT_OUTPUT_COMMENT);
 
         List<LottoPrize> ascendingOrderedLottoPrizeList = Arrays.stream(LottoPrize.values())
-                .sorted(Comparator.comparingInt(LottoPrize::getReward))
+                .sorted(Comparator.comparingInt(LottoPrize::reward))
                 .collect(Collectors.toList());
         Map<LottoPrize, Long> prizeCountMap = prizeList.stream().collect(Collectors.groupingBy(p -> p, Collectors.counting()));
 
@@ -36,7 +37,10 @@ public class LottoResultView {
 
     private static void printLottoPrizes(final List<LottoPrize> ascendingOrderedLottoPrizeList, final Map<LottoPrize, Long> prizeCountingMap) {
         for (LottoPrize prize : ascendingOrderedLottoPrizeList) {
-            String prizeInfo = prize.getCommonNumberCount() + "개 일치 (" + prize.getReward() + ")";
+            String prizeInfo = prize.commonNumberCount() + "개 일치 (" + prize.reward() + ")";
+            if (prize == LottoPrize.SECOND) {
+                prizeInfo = prizeInfo.concat(BONUS_MATCH_COMMENT);
+            }
             long prizeCount = prizeCountingMap.getOrDefault(prize, 0L);
 
             System.out.println(prizeInfo + " - " + prizeCount + "개");

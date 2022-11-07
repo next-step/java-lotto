@@ -49,6 +49,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public boolean matchBonus(final LottoNumber bonus) {
+        return numbers.stream().anyMatch(n -> n.equals(bonus));
+    }
+
     public List<LottoNumber> getNumbers() {
         return this.numbers;
     }

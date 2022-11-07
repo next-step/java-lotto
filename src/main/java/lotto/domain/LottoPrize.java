@@ -5,9 +5,10 @@ import java.util.Optional;
 
 public enum LottoPrize {
     FIRST(2_000_000_000, 6),
-    SECOND(1_500_000, 5),
-    THIRD(50_000, 4),
-    FORTH(5_000, 3);
+    SECOND(30_000_000, 5),
+    THIRD(1_500_000, 5),
+    FORTH(50_000, 4),
+    FIFTH(5_000, 3);
 
     private final int reward;
     private final int commonNumberCount;
@@ -17,17 +18,22 @@ public enum LottoPrize {
         this.commonNumberCount = commonNumberCount;
     }
 
-    public static Optional<LottoPrize> findByCommonNumberCount(int commonNumberCount) {
-        return Arrays.stream(LottoPrize.values())
+    public static Optional<LottoPrize> find(int commonNumberCount, boolean bonusMatch) {
+        Optional<LottoPrize> prize = Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> commonNumberCount == lottoPrize.commonNumberCount)
                 .findFirst();
+
+        if (prize.equals(Optional.of(LottoPrize.SECOND)) && !bonusMatch) {
+            return Optional.of(LottoPrize.THIRD);
+        }
+        return prize;
     }
 
-    public int getReward() {
+    public int reward() {
         return this.reward;
     }
 
-    public int getCommonNumberCount() {
+    public int commonNumberCount() {
         return this.commonNumberCount;
     }
 }
