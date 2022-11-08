@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoTest {
+public class LottoFactoryTest {
 
     @Test
     void 수동_로또_생성() {
