@@ -2,8 +2,7 @@ package stringcalculator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,8 +13,7 @@ class NumberTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @EmptySource
+    @NullAndEmptySource
     void parse_null_or_empty(String number) {
         assertThatThrownBy(() -> Number.valueOf(number))
                 .isInstanceOf(CaculateException.class)

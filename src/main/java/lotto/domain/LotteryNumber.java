@@ -3,24 +3,45 @@ package lotto.domain;
 import lotto.exception.ErrorCode;
 import lotto.exception.LotteryGameException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LotteryNumber {
     public static final int MIN_VALUE = 1;
     public static final int MAX_NUMBER = 45;
 
+    public static final Map<Integer, LotteryNumber> cacheNumbers;
     private final int number;
 
-    public LotteryNumber(int number) {
-        validateRange(number);
+    static {
+        cacheNumbers = new HashMap<>();
+        for (int i = MIN_VALUE; i <= MAX_NUMBER; i++) {
+            cacheNumbers.put(i, new LotteryNumber(i));
+        }
+    }
+
+    private LotteryNumber(int number) {
         this.number = number;
     }
 
-    public LotteryNumber(String number) {
-        this.number = Integer.parseInt(number);
+    private static int parseInt(String number) {
+        if (Objects.isNull(number) || number.isEmpty()) {
+            throw new LotteryGameException(ErrorCode.NULL_OR_EMPTY);
+        }
+        return Integer.parseInt(number);
     }
 
-    private void validateRange(int number) {
+    public static LotteryNumber valueOf(int number) {
+        validateRange(number);
+        return cacheNumbers.get(number);
+    }
+
+    public static LotteryNumber valueOf(String number) {
+        return valueOf(parseInt(number));
+    }
+
+    private static void validateRange(int number) {
         if (number < MIN_VALUE || number > MAX_NUMBER) {
             throw new LotteryGameException(ErrorCode.OUT_OF_RANGE_NUMBER);
         }

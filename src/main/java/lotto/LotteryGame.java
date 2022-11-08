@@ -6,33 +6,34 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LotteryGame {
-    private static final Price lotteryTicketPrice = new Price(1000);
-
+    private Price price;
     private LotteryTickets tickets;
-    private Result result;
 
     public void start() {
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
-
-        Price price = new Price(inputView.enterPurchasePrice());
-        buyTickets(price);
-        outputView.printBuyingTickets(tickets);
-
-        WinningTicket winningTicket = new WinningTicket(inputView.enterWinningNumbers(), inputView.enterBonusBoll());
-        calculateRank(winningTicket);
-        outputView.printResult(result);
+        buyTickets();
+        calculateRank();
     }
 
-    private void buyTickets(Price price) {
-        Amount amount = price.calculateAmount(lotteryTicketPrice);
-        tickets = amount.createTickets(new AutoGenerateStrategy());
+    private void buyTickets() {
+        price = new Price(InputView.enterPurchasePrice());
+        Amount amountOfManualTickets = new Amount(InputView.enterAmountOfManualTickets());
+        tickets = LotteryTickets.of(InputView.enterManualTickets(amountOfManualTickets));
+
+        Amount amountOfTickets = price.calculateAmount();
+        Amount amountOfAutoTickets = amountOfTickets.minus(amountOfManualTickets);
+        tickets.add(amountOfAutoTickets.createTickets(new AutoGenerateStrategy()));
+
+        OutputView.printAmountOfTickets(amountOfManualTickets, amountOfAutoTickets);
+        OutputView.printBuyingTickets(tickets);
     }
 
-    private void calculateRank(WinningTicket winningTicket) {
+    private void calculateRank() {
+        WinningTicket winningTicket = new WinningTicket(InputView.enterWinningNumbers(), InputView.enterBonusBoll());
+
         Ranks ranks = tickets.calculateRanks(winningTicket);
-        Double rateOfRank = ranks.calculateRateOfReturn(lotteryTicketPrice);
-        result = new Result(ranks, rateOfRank);
-    }
+        Double rateOfRank = ranks.calculateRateOfReturn(price);
+        Result result = new Result(ranks, rateOfRank);
 
+        OutputView.printResult(result);
+    }
 }

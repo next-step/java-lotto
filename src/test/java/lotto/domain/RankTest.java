@@ -18,9 +18,10 @@ public class RankTest {
                 Arguments.of(1, true, Rank.NON_MATCH),
                 Arguments.of(2, false, Rank.NON_MATCH),
                 Arguments.of(2, true, Rank.NON_MATCH),
-                Arguments.of(3, false, Rank.NON_MATCH),
-                Arguments.of(3, true, Rank.NON_MATCH),
+                Arguments.of(3, false, Rank.FIFTH),
+                Arguments.of(3, true, Rank.FIFTH),
                 Arguments.of(4, false, Rank.FORTH),
+                Arguments.of(4, true, Rank.FORTH),
                 Arguments.of(5, false, Rank.THIRD),
                 Arguments.of(5, true, Rank.SECOND),
                 Arguments.of(6, false, Rank.FIRST)

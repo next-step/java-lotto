@@ -13,8 +13,8 @@ public class WinningTicket {
         this.bonusBoll = bonusBoll;
     }
 
-    public WinningTicket(String winningNumbers, int bonusBoll) {
-        this(LotteryTicket.of(winningNumbers), new LotteryNumber(bonusBoll));
+    public WinningTicket(String winningNumbers, String bonusBoll) {
+        this(LotteryTicket.of(winningNumbers), LotteryNumber.valueOf(bonusBoll));
     }
 
     private void validateSameNumber(LotteryTicket winningNumbers, LotteryNumber bonusBoll) {

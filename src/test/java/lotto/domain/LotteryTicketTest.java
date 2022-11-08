@@ -31,12 +31,12 @@ public class LotteryTicketTest {
     @Test
     void parse_winning_numbers() {
         assertThat(LotteryTicket.of("1, 2, 3, 4, 5, 6").getLotteryNumbers()).contains(
-                new LotteryNumber(1),
-                new LotteryNumber(2),
-                new LotteryNumber(3),
-                new LotteryNumber(4),
-                new LotteryNumber(5),
-                new LotteryNumber(6)
+                LotteryNumber.valueOf(1),
+                LotteryNumber.valueOf(2),
+                LotteryNumber.valueOf(3),
+                LotteryNumber.valueOf(4),
+                LotteryNumber.valueOf(5),
+                LotteryNumber.valueOf(6)
         );
     }
 
@@ -49,6 +49,6 @@ public class LotteryTicketTest {
     @ParameterizedTest
     @CsvSource(value = {"1,true", "2,true", "3,true", "4,true", "5,true", "6,true", "7,false"})
     void check_contain_number(int number, boolean result) {
-        assertThat(LotteryTicket.of(1, 2, 3, 4, 5, 6).contain(new LotteryNumber(number))).isEqualTo(result);
+        assertThat(LotteryTicket.of(1, 2, 3, 4, 5, 6).contain(LotteryNumber.valueOf(number))).isEqualTo(result);
     }
 }

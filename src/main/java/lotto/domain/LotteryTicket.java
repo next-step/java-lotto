@@ -19,13 +19,13 @@ public class LotteryTicket {
 
     public static LotteryTicket of(Integer... numbers) {
         return new LotteryTicket(Arrays.stream(numbers)
-                .map(LotteryNumber::new)
+                .map(LotteryNumber::valueOf)
                 .collect(Collectors.toList()));
     }
 
     public static LotteryTicket of(String numbers) {
         return  new LotteryTicket(Arrays.stream(numbers.split(", "))
-                .map(LotteryNumber::new)
+                .map(LotteryNumber::valueOf)
                 .collect(Collectors.toList()));
     }
 

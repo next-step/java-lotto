@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class AutoGenerateStrategy {
     public static final List<LotteryNumber> numbers = IntStream.range(LotteryNumber.MIN_VALUE, LotteryNumber.MAX_NUMBER)
-            .mapToObj(LotteryNumber::new)
+            .mapToObj(LotteryNumber::valueOf)
             .collect(Collectors.toList());
 
     public LotteryTicket generate() {
