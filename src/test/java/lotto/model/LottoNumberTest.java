@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.*;
+
+import static lotto.model.WinningNumber.LOTTO_END_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -27,5 +30,12 @@ class LottoNumberTest {
     @DisplayName("1부터 45까지의 숫자들이 저장되어있다")
     void boundary(int element, boolean expected) {
         assertThat(LottoNumber.cache().containsKey(element)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("로또번호는 중복되지않는 45개이다.")
+    void size2() {
+        Set<Integer> testSet = new HashSet<>(new ArrayList<>(LottoNumber.cache().keySet()));
+        assertThat(testSet.size()).isEqualTo(LOTTO_END_NUMBER);
     }
 }
