@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoEarningCalculator;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoPrize;
-import lotto.domain.LottoTicket;
+import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
