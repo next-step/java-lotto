@@ -37,7 +37,7 @@ public enum Rank {
     }
 
     private static Rank getSecondOrThirdRank(boolean matchBonus) {
-        if (matchBonus == true) {
+        if (matchBonus) {
             return SECOND;
         }
         return THIRD;
