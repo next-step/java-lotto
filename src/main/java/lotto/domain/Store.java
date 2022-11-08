@@ -1,29 +1,31 @@
 package lotto.domain;
 
-import lotto.domain.lottogenerator.LottoGenerator;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Store {
 
-    private static final int PRICE_OF_LOTTO_TICKET = 1000;
-    private final LottoGenerator lottoGenerator;
     private final List<LottoTicket> lottoTickets;
 
-    public Store(final LottoGenerator lottoGenerator, final Money money) {
-        this.lottoGenerator = lottoGenerator;
-        this.lottoTickets = createLottoTickets(money.countOfTickets(PRICE_OF_LOTTO_TICKET));
+    public Store(final List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
-    private List<LottoTicket> createLottoTickets(final int countOfTickets) {
-        return lottoGenerator.create(countOfTickets);
+    public Store add(final Store store) {
+        return new Store(Stream.concat(this.lottoTickets.stream(), store.lottoTickets.stream())
+                .collect(Collectors.toList()));
     }
+
     public List<Rank> match(final WinningLotto winningLotto) {
         return lottoTickets.stream()
                 .map(winningLotto::match)
                 .collect(Collectors.toList());
+    }
+
+    public int sizeOfLottoTickets() {
+        return this.lottoTickets.size();
     }
 
     public List<LottoTicket> getLottoTickets() {

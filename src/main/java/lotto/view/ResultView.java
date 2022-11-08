@@ -16,13 +16,11 @@ import static lotto.domain.Rank.SECOND;
 
 public class ResultView {
 
-    private static final String COUNT_OF_LOTTO_MESSAGE = "개를 구매했습니다.";
-
     private ResultView() {
     }
 
-    public static void viewCountOfLotto(int countOfTickets) {
-        System.out.println(countOfTickets + COUNT_OF_LOTTO_MESSAGE);
+    public static void viewCountOfLotto(int countOfManualLottoSize, int countOfRandomLottoSize) {
+        System.out.println(String.format("수동으 %d, 자동으로 %d개를 구매했습니다.", countOfManualLottoSize, countOfRandomLottoSize));
     }
 
     public static void viewLottoTickets(List<LottoTicket> lottoTickets) {

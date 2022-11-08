@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import lotto.domain.lottogenerator.LottoGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.domain.Rank.*;
+import static lotto.domain.Rank.FIRST;
+import static lotto.domain.Rank.NO_MATCH;
 
 class StoreTest {
 
@@ -15,14 +15,23 @@ class StoreTest {
 
     @BeforeEach
     void setUp() {
-        LottoGenerator lottoGenerator = countOfTickets -> List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoTicket(List.of(7, 8, 9, 10, 11, 12)));
-        Money money = new Money(3000);
-        store = new Store(lottoGenerator, money);
+        store = new Store(List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoTicket(List.of(7, 8, 9, 10, 11, 12))));
     }
 
     @Test
     void 로또_구매() {
         Assertions.assertThat(store.getLottoTickets()).hasSize(2);
+    }
+
+    @Test
+    void 발급된_로또티켓_사이즈_반환() {
+        Assertions.assertThat(store.sizeOfLottoTickets()).isEqualTo(2);
+    }
+
+    @Test
+    void 로또티켓_합쳐서_객체생성() {
+        Store combinedStore = new Store(List.of(new LottoTicket(List.of(13, 14, 15, 16, 17, 18))));
+        Assertions.assertThat(store.add(combinedStore).getLottoTickets()).hasSize(3);
     }
 
     @Test
