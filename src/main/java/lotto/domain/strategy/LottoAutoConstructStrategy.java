@@ -1,7 +1,6 @@
 package lotto.domain.strategy;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,10 +11,6 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoAutoConstructStrategy implements LottoConstructStrategy {
-    private static final List<Integer> numList = IntStream
-        .rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-        .boxed()
-        .collect(toList());
 
     @Override
     public List<Set<Integer>> create(int count) {
@@ -25,8 +20,8 @@ public class LottoAutoConstructStrategy implements LottoConstructStrategy {
     }
 
     private static Set<Integer> getLottoNumbers() {
-        Collections.shuffle(numList);
-        return numList.stream()
+        Collections.shuffle(Lotto.NUMBER_LIST);
+        return Lotto.NUMBER_LIST.stream()
             .limit(Lotto.LOTTO_COUNT)
             .collect(Collectors.toSet());
     }
