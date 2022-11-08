@@ -1,10 +1,11 @@
-package autoLotto;
+package lotto.domain;
 
 import java.util.List;
 
 public class WinningNumbers {
     private static final int NUMBER_OF_WINNING_NUM = 6;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
+    private static final int LOTTO_MIN_NUMBER = 1;
 
     private List<Integer> winningNumbers;
     private int bonusNumber;
@@ -15,25 +16,25 @@ public class WinningNumbers {
         }
 
         for (Integer winningNumber : winningNumbers) {
-            checkMaxNum(winningNumber);
+            checkNumbers(winningNumber);
         }
-        checkMaxNum(bonusNumber);
+        checkNumbers(bonusNumber);
 
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void checkMaxNum(Integer number) {
-        if (number > LOTTO_MAXIMUM_NUMBER) {
+    private void checkNumbers(Integer number) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAXIMUM_NUMBER) {
             throw new IllegalArgumentException("당청 숫자는 1 ~ 45만 입력 가능합니다.");
         }
     }
 
-    public List<Integer> getWinningNumbers() {
+    public List<Integer> numbers() {
         return winningNumbers;
     }
 
-    public int getBonusNumber() {
+    public int bonusNumber() {
         return bonusNumber;
     }
 }
