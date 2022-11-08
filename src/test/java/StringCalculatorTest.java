@@ -87,11 +87,15 @@ class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"-5 + -1:-6", "-1 * 0:0", "4 / 2:2", "1 + 5 + 7:13",
-        "5 + 10 * 20 / 100:3"}, delimiter = ':')
+    @CsvSource(value = {
+        "-5 + -1 = -6",
+        "-1 * 0 = 0",
+        "4 / 2 = 2",
+        "1 + 5 + 7 = 13",
+        "5 + 10 * 20 / 100 = 3"
+    }, delimiter = '=')
     void matched_operands_operators(final String input, final int answer) {
         assertThat(StringCalculator.compute(input)).isEqualTo(answer);
     }
-
 
 }
