@@ -27,46 +27,70 @@ public class Output {
 
     public static List<Lotto> getRank(List<Lotto> lottoList, List<Integer> winnerNumberList, Integer bonusBallNumber) {
 
+        boolean hasBonusNumber = matchNumber(lottoList, bonusBallNumber);
+        Integer bonusBall = getTrueOrFalse(hasBonusNumber);
+
         int[] matchList = new int[6 + 1];
         for (Lotto lotto : lottoList) {
-            Lotto matchRank = lotto.matchRank(winnerNumberList);
+            Lotto matchRank = lotto.matchRank(winnerNumberList, hasBonusNumber);
             matchList[matchRank.match()]++;
         }
-
-        boolean hasBonusNumber = hasNumber(lottoList, bonusBallNumber);
-        Integer bonusBall = getTrueOrFalse(hasBonusNumber);
 
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (int i = 3; i <= 6; i++) {
-            match(i, Rank.getRank(i).getAmount(), matchList[i]);
-            if (i == 5) {
-                matchBonusBall(i, bonusBall);
-            }
+        match(3, Rank.FIFTH.getAmount(), matchList[3]);
+        match(4, Rank.FORTH.getAmount(), matchList[4]);
+
+        if (Lottos.getRank(lottoList)) {
+            match(5, Rank.THIRD.getAmount(), 0);
+            matchBonusBall(5, Rank.SECOND.getAmount(), matchList[5]);
         }
+
+        if (!Lottos.getRank(lottoList)) {
+            match(5, Rank.THIRD.getAmount(), matchList[5]);
+            matchBonusBall(5, Rank.SECOND.getAmount(), 0);
+        }
+
+        match(6, Rank.FIRST.getAmount(), matchList[6]);
+
+        // for 문을 살릴 수 있는 방법을 찾는 중
+//        for (int i = 3; i <= 6; i++) {
+//            match(i, Rank.getRank(i, hasBonusNumber).getAmount(), matchList[i]);
+//            if (i == 5) {
+//                match(i, Rank.THIRD.getAmount(), matchList[i]);
+//                matchBonusBall(i, Rank.SECOND.getAmount(), matchList[i]);
+//            }
+//        }
 
         return lottoList;
     }
 
     private static Integer getTrueOrFalse(boolean hasBonusNumber) {
-        Integer bonusBall = null;
-        if (hasBonusNumber == false) {
+        Integer bonusBall = 0;
+        if (!hasBonusNumber) {
             bonusBall = 1;
         }
         return bonusBall;
     }
 
-    private static boolean hasNumber(List<Lotto> lottoList, Integer number) {
-        return lottoList.contains(number);
+    private static boolean matchNumber(List<Lotto> lottoList, Integer number) {
+        for (int i = 0; i < lottoList.size(); i++) {
+            for (int j = 0; j < lottoList.get(i).getNumberList().size(); j++) {
+                if (lottoList.get(i).getNumberList().get(j).getNumber() == number) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static void match(int count, BigDecimal amount, int number) {
         System.out.printf(String.format("%d개 일치 (%.0f원)- %d개\n", count, amount, number));
     }
 
-    private static void matchBonusBall(int count, Integer bonusBall) {
-        System.out.printf(String.format("%d개 일치, 보너스 볼 일치(30000000원)- %d개\n", count, bonusBall));
+    private static void matchBonusBall(int count, BigDecimal amount, int number) {
+        System.out.printf(String.format("%d개 일치, 보너스 볼 일치(%.0f원)- %d개\n", count, amount, number));
     }
 
     public static void getResult(List<Lotto> lottoList) {
