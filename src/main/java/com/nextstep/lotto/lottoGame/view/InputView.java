@@ -1,8 +1,9 @@
 package com.nextstep.lotto.lottoGame.view;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import com.nextstep.lotto.lottoGame.domain.LottoTicket;
+import com.nextstep.lotto.lottoGame.domain.WinningNumbers;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -13,19 +14,42 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> getLottoNumbers() {
-        System.out.println("지난주 당첨 번호를 입력해주세요.");
-        Scanner scanner = new Scanner(System.in);
-        String[] lottoNumbers = scanner.nextLine().split(",");
-        return Arrays.stream(lottoNumbers)
-                .map(InputView::toUnsignedInteger)
-                .collect(Collectors.toList());
-    }
-
-    public static Integer getBonusNumber() {
-        System.out.println("보너스 번호를 입력하세요.");
+    public static int getManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
+    }
+
+    public static List<LottoTicket> getManualLottoNumbers(final int count) {
+        if (count < 1) {
+            return Collections.EMPTY_LIST;
+        }
+        System.out.println("수동 구매할 로또 번호들을 입력해주세요.");
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < count; i++) {
+            String[] split = scanner.nextLine().split(",");
+            List<Integer> lottoNumbers = Arrays.stream(split)
+                    .map(InputView::toUnsignedInteger)
+                    .collect(Collectors.toList());
+            manualTickets.add(new LottoTicket(lottoNumbers));
+        }
+
+        return manualTickets;
+    }
+
+    public static WinningNumbers getLottoNumbers() {
+        System.out.println("지난주 당첨 번호를 입력해주세요.");
+        Scanner scanner = new Scanner(System.in);
+        String[] split = scanner.nextLine().split(",");
+        List<Integer> lottoNumbers = Arrays.stream(split)
+                .map(InputView::toUnsignedInteger)
+                .collect(Collectors.toList());
+
+        System.out.println("보너스 번호를 입력하세요.");
+        int bonusNumber = scanner.nextInt();
+
+        return new WinningNumbers(lottoNumbers, bonusNumber);
     }
 
     private static int toUnsignedInteger(String numericString) {
