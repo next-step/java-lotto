@@ -1,14 +1,21 @@
 package lotto.domain;
 
 public class Money {
-    private static final int lottoPirce = 1000;
+    private static final int lottoPrice = 1000;
 
     int money;
 
     public Money(int money) {
        validationNegative(money);
        validationMoney(money);
-       this.money = money / lottoPirce;
+       validationThousand(money);
+       this.money = money / lottoPrice;
+    }
+
+    public void validationThousand(int money){
+        if(money % lottoPrice != 0){
+            throw new IllegalArgumentException("1000원 단위로 입력해주세요.");
+        }
     }
 
     public void validationMoney(int money){

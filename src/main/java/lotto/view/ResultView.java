@@ -33,4 +33,8 @@ public class ResultView {
                 .forEach(reward -> System.out.printf("%d개 일치 (%d원)- %d개\n", reward.getNumberMatch()
                         , reward.getRewordMoney(), rewardMap.getOrDefault(reward, 0)));
     }
+
+    public static void lottoYieldCalculate(int yield){
+        System.out.printf("총 수익률은 %.2f 입니다.", yield);
+    }
 }
