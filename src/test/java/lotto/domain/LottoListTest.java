@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.domain.strategy.LottoAutoConstructStrategy;
+import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,7 @@ class LottoListTest {
     void createAutoLottoListTest() {
 
         //given
-        LottoList lottoList = LottoList.of(AUTO_COUNT, 0);
+        LottoList lottoList = LottoList.from(new LottoAutoConstructStrategy().create(AUTO_COUNT));
 
         //then
         assertThat(lottoList.getLottoList()).hasSize(AUTO_COUNT);
@@ -33,8 +35,7 @@ class LottoListTest {
         String input = "1,2,3,4,5,6";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        LottoList lottoList = LottoList.of(0, MANUAL_COUNT);
-
+        LottoList lottoList = LottoList.from(InputView.getManualNumbers(MANUAL_COUNT));
 
         //then
         assertThat(lottoList.getLottoList()).hasSize(MANUAL_COUNT);
