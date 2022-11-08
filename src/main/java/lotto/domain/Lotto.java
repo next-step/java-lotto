@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -22,13 +23,18 @@ public class Lotto {
         return rank;
     }
 
-    public Lotto matchRank(List<Integer> winnerNumberList) {
+    public <E> BigDecimal getAmount() {
+        return rank.getAmount();
+    }
+
+    public Lotto matchRank(List<Integer> winnerNumberList, boolean matchBonus) {
         List<LottoNumber> winnerNumberListToCompare = matchNumberList(winnerNumberList);
 
         this.rank = Rank.getRank(
                 (int) lottoBalls.stream()
                         .filter(winnerNumberListToCompare::contains)
                         .count()
+                , matchBonus
         );
 
         return this;

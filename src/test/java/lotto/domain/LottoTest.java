@@ -39,24 +39,25 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("provideNumberList")
-    void compare_Lotto_Rank(List<LottoNumber> numberList, int count) {
+    void compare_Lotto_Rank(List<LottoNumber> numberList, int count, boolean matchBonus) {
         List<Integer> winnerNumberList = List.of(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = new Lotto(numberList);
-        Lotto matchRank = lotto.matchRank(winnerNumberList);
+        Lotto matchRank = lotto.matchRank(winnerNumberList, matchBonus);
 
         assertEquals(matchRank.getRank().getCount(), count);
     }
 
     private static Stream<? extends Arguments> provideNumberList() {
         return Stream.of(
-                Arguments.arguments(givenNumbers(1, 2, 3, 4, 5, 6), 6),
-                Arguments.arguments(givenNumbers(1, 2, 3, 4, 5, 7), 5),
-                Arguments.arguments(givenNumbers(1, 2, 3, 4, 7, 8), 4),
-                Arguments.arguments(givenNumbers(1, 2, 3, 7, 8, 9), 3),
-                Arguments.arguments(givenNumbers(1, 2, 7, 8, 9, 10), 2),
-                Arguments.arguments(givenNumbers(1, 7, 8, 9, 10, 11), 1),
-                Arguments.arguments(givenNumbers(7, 8, 9, 10, 11, 12), 0)
+                Arguments.arguments(givenNumbers(1, 2, 3, 4, 5, 6), 6, false),
+                Arguments.arguments(givenNumbers(1, 2, 3, 4, 5, 7), 5, false),
+                Arguments.arguments(givenNumbers(1, 2, 3, 4, 5, 7), 5, true),
+                Arguments.arguments(givenNumbers(1, 2, 3, 4, 7, 8), 4, false),
+                Arguments.arguments(givenNumbers(1, 2, 3, 7, 8, 9), 3, false),
+                Arguments.arguments(givenNumbers(1, 2, 7, 8, 9, 10), 2, false),
+                Arguments.arguments(givenNumbers(1, 7, 8, 9, 10, 11), 1, false),
+                Arguments.arguments(givenNumbers(7, 8, 9, 10, 11, 12), 0, false)
         );
     }
 
