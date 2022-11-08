@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoEarningCalculator;
+import lotto.domain.LottoEarningRateCalculator;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 
@@ -48,7 +48,7 @@ public class LottoResultView {
     }
 
     private static void printLottoEarningRate(final List<LottoPrize> prizeList, final int numberOfTickets) {
-        float earningRate = LottoEarningCalculator.calculateEarningRate(prizeList, numberOfTickets);
+        float earningRate = LottoEarningRateCalculator.calculate(prizeList, numberOfTickets);
         System.out.println("총 수익률은 " + earningRate + "입니다.");
     }
 }

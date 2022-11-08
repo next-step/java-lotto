@@ -5,7 +5,6 @@ import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGameApplication {
 
@@ -19,13 +18,11 @@ public class LottoGameApplication {
             return;
         }
 
-        List<LottoNumber> lastWeekNumbers = LottoInputView.getLastWeekWinnerNumber().stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        LottoTicket lastWeekWinnerTicket = new LottoTicket(lastWeekNumbers);
-        LottoNumber lasWeekBonusNumber = new LottoNumber(LottoInputView.getLastWeekBonusNumber());
+        LottoTicket lastWeekWinnerTicket = LottoTicket.createFromIntegerList(LottoInputView.getLastWeekWinnerNumber());
+        LottoNumber lastWeekBonusNumber = new LottoNumber(LottoInputView.getLastWeekBonusNumber());
+        WinningLotto lastWeekWinningLotto = new WinningLotto(lastWeekWinnerTicket, lastWeekBonusNumber);
 
-        List<LottoPrize> prizes = LottoEarningCalculator.findPrize(tickets, lastWeekWinnerTicket, lasWeekBonusNumber);
+        List<LottoPrize> prizes = lastWeekWinningLotto.prizes(tickets);
 
         LottoResultView.printResult(prizes, tickets.size());
     }
