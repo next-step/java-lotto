@@ -37,7 +37,7 @@ class LottosTest {
 
     @Test
     void test_True_If_A_is_smaller_than_B() {
-        assertThat(SMALL_THING.compareTo(BIG_THING) == -1).isTrue();
+        assertThat(SMALL_THING.compareTo(BIG_THING)).isEqualTo(-1);
     }
 
     @Test
