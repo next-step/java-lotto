@@ -1,26 +1,40 @@
 package lotto.ui;
 
-import lotto.models.Lotto;
+import lotto.models.IssuedLotto;
 import lotto.models.LottoStatistics;
+import lotto.models.enums.IssueType;
 import lotto.models.enums.Rank;
-import lotto.models.request.PaymentRequest;
+import lotto.models.request.IssueLottoRequest;
 import lotto.models.request.WinningLottoRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Printer {
 
-    public static PaymentRequest requestPayment() {
+    public static IssueLottoRequest requestIssueLotto() {
         System.out.println("구매금액을 입력해 주세요.");
         String payment = InputScanner.stringScan();
-        return PaymentRequest.of(Integer.parseInt(payment));
+
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualLottoCount = Integer.parseInt(InputScanner.stringScan());
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> manualLottoNumbers = new ArrayList<>();
+        while (manualLottoCount-- > 0) {
+            String number = InputScanner.stringScan();
+            manualLottoNumbers.add(number);
+        }
+
+        return IssueLottoRequest.of(Integer.parseInt(payment), manualLottoNumbers);
     }
 
-    public static void printLottoNumbers(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
-        lottos.forEach(lotto -> {
-            System.out.println(lotto.getNumbers().toString());
-        });
+    public static void printLottoNumbers(List<IssuedLotto> lottos) {
+        long manualCount = lottos.stream().filter(lotto -> lotto.getIssueType().equals(IssueType.MANUAL)).count();
+        long randomCount = lottos.stream().filter(lotto -> lotto.getIssueType().equals(IssueType.RANDOM)).count();
+
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, randomCount);
+        lottos.forEach(lotto -> System.out.println(lotto.getLotto().getNumbers().toString()));
     }
 
     public static WinningLottoRequest requestWinningLotto() {
@@ -63,5 +77,4 @@ public class Printer {
         }
         System.out.println(description);
     }
-
 }

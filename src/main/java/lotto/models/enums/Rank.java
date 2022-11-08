@@ -1,7 +1,7 @@
 package lotto.models.enums;
 
+import lotto.models.IssuedLotto;
 import lotto.models.Lotto;
-import lotto.models.LottoNumbers;
 import lotto.models.WinningLotto;
 
 import java.util.ArrayList;
@@ -37,11 +37,11 @@ public enum Rank {
         return amount;
     }
 
-    public static Rank findRank(WinningLotto winningLotto, Lotto targetLotto) {
+    public static Rank findRank(WinningLotto winningLotto, IssuedLotto targetLotto) {
         List<Integer> copiedWinningNumbers = new ArrayList<>(winningLotto.getNumbers());
-        copiedWinningNumbers.retainAll(targetLotto.getNumbers());
+        copiedWinningNumbers.retainAll(targetLotto.getLotto().getNumbers());
 
-        boolean hasBonusNumber = targetLotto.getNumbers().contains(winningLotto.getBonusNumber());
+        boolean hasBonusNumber = targetLotto.getLotto().getNumbers().contains(winningLotto.getBonusNumber());
         return Rank.of(copiedWinningNumbers.size(), hasBonusNumber);
     }
 

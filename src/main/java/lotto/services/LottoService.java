@@ -1,23 +1,26 @@
 package lotto.services;
 
-import lotto.models.Lotto;
-import lotto.models.request.PaymentRequest;
-import lotto.strategy.NormalPickNumberStrategy;
+import lotto.models.IssuedLotto;
+import lotto.models.enums.IssueType;
+import lotto.models.request.IssueLottoRequest;
 import lotto.strategy.PickNumberStrategy;
+import lotto.validator.IssueLottoRequestValidator;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
 
-    private static final int LOTTO_PRICE = 1000;
+    public List<IssuedLotto> issueLottos(IssueLottoRequest issueLottoRequest, PickNumberStrategy strategy) {
+        IssueLottoRequestValidator.validate(issueLottoRequest);
+        int count = issueLottoRequest.getPayment() / IssuedLotto.PRICE;
 
-    public List<Lotto> issueLotto(PaymentRequest paymentRequest, PickNumberStrategy strategy) {
-        int count = paymentRequest.getPayment() / LOTTO_PRICE;
-
-        List<Lotto> lottos = new ArrayList<>();
+        List<IssuedLotto> lottos = issueLottoRequest.getManualLottoNumbers()
+                .stream()
+                .map(manualLottoNumber -> IssuedLotto.of(manualLottoNumber, IssueType.MANUAL))
+                .collect(Collectors.toList());
         while (lottos.size() < count) {
-            lottos.add(Lotto.of(strategy.getNumbers()));
+            lottos.add(IssuedLotto.of(strategy.getNumbers(), IssueType.RANDOM));
         }
 
         return lottos;

@@ -1,6 +1,6 @@
 package lotto.models.enums;
 
-import lotto.models.Lotto;
+import lotto.models.IssuedLotto;
 import lotto.models.WinningLotto;
 import lotto.models.request.WinningLottoRequest;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,21 +15,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
-    private static final List<Lotto> lottos = new ArrayList<>();
+    private static final List<IssuedLotto> lottos = new ArrayList<>();
     private static final String WINNING_NUMBER = "1, 2, 3, 4, 5, 6";
     private static final int BONUS_NUMBER = 7;
     private static WinningLotto winningLotto;
 
     @BeforeAll
     static void setLotto() {
-        lottos.add(Lotto.of("1, 2, 3, 4, 5, 6"));
-        lottos.add(Lotto.of("1, 2, 3, 4, 5, 7"));
-        lottos.add(Lotto.of("1, 2, 3, 4, 5, 10"));
-        lottos.add(Lotto.of("1, 2, 3, 4, 10, 11"));
-        lottos.add(Lotto.of("1, 2, 3, 10, 11, 12"));
-        lottos.add(Lotto.of("1, 2, 10, 11, 12, 13"));
-        lottos.add(Lotto.of("1, 10, 11, 12, 13, 14"));
-        lottos.add(Lotto.of("10, 11, 12, 13, 14, 15"));
+        List<String> lottoNumbers = List.of(
+                "1, 2, 3, 4, 5, 6",
+                "1, 2, 3, 4, 5, 7",
+                "1, 2, 3, 4, 5, 10",
+                "1, 2, 3, 4, 10, 11",
+                "1, 2, 3, 10, 11, 12",
+                "1, 2, 10, 11, 12, 13",
+                "1, 10, 11, 12, 13, 14",
+                "10, 11, 12, 13, 14, 15"
+        );
+
+        lottoNumbers.forEach(lottoNumber -> lottos.add(IssuedLotto.of(lottoNumber, IssueType.MANUAL)));
     }
 
     @BeforeAll
