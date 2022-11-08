@@ -1,42 +1,38 @@
 package lotto.domain;
 
 
-import lotto.domain.strategy.LottoAutoConstructStrategy;
-import lotto.domain.strategy.LottoConstructStrategy;
-import lotto.domain.strategy.LottoManualConstructStrategy;
-
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 
 public class LottoList {
 
-    private final List<Lotto> autoLottoList;
-    private final List<Lotto> manualLottoList;
+    private final List<Lotto> lottoList;
 
-    private LottoList(List<Lotto> autoLottoList, List<Lotto> manualLottoList) {
-        this.autoLottoList = autoLottoList;
-        this.manualLottoList = manualLottoList;
+    private LottoList(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
-    public static LottoList of(int totalCount, int manualCount) {
-        return new LottoList(new LottoAutoConstructStrategy().create(totalCount - manualCount)
-            , new LottoManualConstructStrategy().create(manualCount));
+    public static LottoList from(List<Set<Integer>> lottoList) {
+        return new LottoList(lottoProcess(lottoList));
+    }
+
+    public void add(List<Set<Integer>> lottoList) {
+        this.lottoList.addAll(lottoProcess(lottoList));
+    }
+
+    private static List<Lotto> lottoProcess(List<Set<Integer>> lottoList) {
+        return lottoList
+            .stream()
+            .map(Lotto::from)
+            .collect(toList());
     }
 
     public List<Lotto> getLottoList() {
-        return Stream.of(autoLottoList, manualLottoList)
-            .flatMap(Collection::stream)
+        return lottoList.stream()
             .collect(Collectors.toUnmodifiableList());
-    }
-
-    public int getAutoListCount() {
-        return autoLottoList.size();
-    }
-
-    public int getManualListCount() {
-        return manualLottoList.size();
     }
 }

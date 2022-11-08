@@ -2,10 +2,11 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.function.LongToDoubleFunction;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -25,12 +26,19 @@ public class InputView {
         }
     }
 
+    public static List<Set<Integer>> getManualNumbers(int manualCount)
+    {
+        return IntStream.rangeClosed(1, manualCount)
+            .mapToObj(value -> getLottoNumbers())
+            .collect(Collectors.toList());
+    }
+
     public static Set<Integer> getWeekendNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return getLottoNumbers();
     }
 
-    public static Set<Integer> getLottoNumbers() {
+    private static Set<Integer> getLottoNumbers() {
         return Arrays.stream(scanner.next().split(COMMA))
             .map(Integer::parseInt)
             .collect(Collectors.toSet());
