@@ -9,20 +9,19 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoEarningCalculatorTest {
 
-    final LottoTicket winningTicket = new LottoTicket(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList()));
-    final LottoNumber bonus = new LottoNumber(7);
+    private final LottoTicket winningTicket = createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    private final LottoNumber bonus = new LottoNumber(7);
 
     @Test
     void 당첨된_로또_확인_없을때() {
         List<LottoTicket> tickets = List.of(
-                new LottoTicket(Stream.of(10, 11, 12, 13, 14, 15).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList()))
+                createLottoTicket(List.of(10, 11, 12, 13, 14, 15)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25))
         );
 
         assertThat(LottoEarningCalculator.findPrize(tickets, winningTicket, bonus)).isEmpty();
@@ -31,8 +30,8 @@ public class LottoEarningCalculatorTest {
     @Test
     void 당첨된_로또_확인_5등_1장() {
         List<LottoTicket> tickets = List.of(
-                new LottoTicket(Stream.of(1, 2, 3, 13, 14, 15).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList()))
+                createLottoTicket(List.of(1, 2, 3, 13, 14, 15)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25))
         );
 
         assertThat(LottoEarningCalculator.findPrize(tickets, winningTicket, bonus)).containsExactly(LottoPrize.FIFTH);
@@ -41,8 +40,8 @@ public class LottoEarningCalculatorTest {
     @Test
     void 당첨된_로또_확인_4등_1장() {
         List<LottoTicket> tickets = List.of(
-                new LottoTicket(Stream.of(1, 2, 3, 4, 14, 15).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList()))
+                createLottoTicket(List.of(1, 2, 3, 4, 14, 15)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25))
         );
 
         assertThat(LottoEarningCalculator.findPrize(tickets, winningTicket, bonus)).containsExactly(LottoPrize.FORTH);
@@ -51,8 +50,8 @@ public class LottoEarningCalculatorTest {
     @Test
     void 당첨된_로또_확인_3등_1장() {
         List<LottoTicket> tickets = List.of(
-                new LottoTicket(Stream.of(1, 2, 3, 4, 5, 10).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList()))
+                createLottoTicket(List.of(1, 2, 3, 4, 5, 10)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25))
         );
 
         assertThat(LottoEarningCalculator.findPrize(tickets, winningTicket, bonus)).containsExactly(LottoPrize.THIRD);
@@ -61,8 +60,8 @@ public class LottoEarningCalculatorTest {
     @Test
     void 당첨된_로또_확인_2등_1장() {
         List<LottoTicket> tickets = List.of(
-                new LottoTicket(Stream.of(1, 2, 3, 4, 5, 7).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList()))
+                createLottoTicket(List.of(1, 2, 3, 4, 5, 7)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25))
         );
 
         assertThat(LottoEarningCalculator.findPrize(tickets, winningTicket, bonus)).containsExactly(LottoPrize.SECOND);
@@ -72,8 +71,8 @@ public class LottoEarningCalculatorTest {
     @Test
     void 당첨된_로또_확인_1등_1장() {
         List<LottoTicket> tickets = List.of(
-                new LottoTicket(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList()))
+                createLottoTicket(List.of(1, 2, 3, 4, 5, 6)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25))
         );
 
         assertThat(LottoEarningCalculator.findPrize(tickets, winningTicket, bonus)).containsExactly(LottoPrize.FIRST);
@@ -82,28 +81,32 @@ public class LottoEarningCalculatorTest {
     @Test
     void 당첨된_로또_확인_여러장_당첨_5등_1개_4등_1개_3등_1개_2등_1개_1등_2개() {
         List<LottoTicket> tickets = List.of(
-                new LottoTicket(Stream.of(1, 2, 3, 13, 14, 15).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(1, 2, 3, 4, 14, 15).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(1, 2, 3, 4, 5, 15).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(1, 2, 3, 4, 5, 7).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList())),
-                new LottoTicket(Stream.of(20, 21, 22, 23, 24, 25).map(LottoNumber::new).collect(Collectors.toList()))
+                createLottoTicket(List.of(1, 2, 3, 13, 14, 15)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(1, 2, 3, 4, 14, 15)),
+                createLottoTicket(List.of(1, 2, 3, 4, 5, 15)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(1, 2, 3, 4, 5, 7)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(1, 2, 3, 4, 5, 6)),
+                createLottoTicket(List.of(1, 2, 3, 4, 5, 6)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25)),
+                createLottoTicket(List.of(20, 21, 22, 23, 24, 25))
         );
 
         assertThat(LottoEarningCalculator.findPrize(tickets, winningTicket, bonus)).isEqualTo(
                 List.of(LottoPrize.FIFTH, LottoPrize.FORTH, LottoPrize.THIRD, LottoPrize.SECOND, LottoPrize.FIRST, LottoPrize.FIRST))
         ;
+    }
+
+    private LottoTicket createLottoTicket(List<Integer> numbers) {
+        return new LottoTicket(numbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
 
