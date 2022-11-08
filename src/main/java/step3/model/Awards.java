@@ -26,6 +26,20 @@ public enum Awards {
 		this.award = award;
 	}
 
+	public static int rank(final int matchCnt, final boolean matchBonus) {
+		if (matchCnt == 6) return SIX.ordinal();
+		if (matchCnt == 5 && matchBonus) return FIVE_BONUS.ordinal();
+		if (matchCnt == 5) return FIVE.ordinal();
+		if (matchCnt == 4) return FOUR.ordinal();
+		if (matchCnt == 3) return THREE.ordinal();
+
+		return DEFAULT.ordinal();
+	}
+
+	public static boolean isBonus(int i){
+		return FIVE_BONUS.ordinal() == i;
+	}
+
 	public static int getPrize(int awardRank, int awardCnt) {
 		return awards.get(awardRank).award * awardCnt;
 	}

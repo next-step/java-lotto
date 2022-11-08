@@ -16,6 +16,17 @@ public class Lotto {
 		this.numberList = list;
 	}
 
+	public int match(WinnerLotto winnerLotto){
+		return (int) winnerLotto.getWinningNumber().stream()
+				.mapToInt(hitNumber -> hitNumber)
+				.filter(numberList::contains)
+				.count();
+	}
+
+	public boolean checkBonus(WinnerLotto winnerLotto){
+		return numberList.contains(winnerLotto.getBonusNumber());
+	}
+
 	public List<Integer> getNumberList() {
 		return numberList;
 	}

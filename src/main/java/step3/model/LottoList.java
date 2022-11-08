@@ -4,6 +4,7 @@ import step3.util.LottoGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoList {
@@ -16,7 +17,6 @@ public class LottoList {
 		this.lottoGenerator = lottoGenerator;
 		generate();
 	}
-
 	private void generate() {
 		IntStream.range(0, ticketCnt)
 				.mapToObj(lotto -> new Lotto(lottoGenerator))

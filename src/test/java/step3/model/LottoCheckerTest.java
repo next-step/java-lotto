@@ -8,16 +8,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoCheckerTest {
-	@Test
-	void getEarningRate() {
-		HashMap<Integer, Integer> testMap = new HashMap<>();
-		testMap.put(1, 1);
-		testMap.put(4, 1);
-		testMap.put(5, 1);
-		Money money = new Money(2100000000);
-		double earningRate = LottoChecker.getEarningRate(testMap, money);
-		assertEquals(Math.floor(earningRate * 100) / 100.0, 0.95);
-	}
 
 	@Test
 	void match() {

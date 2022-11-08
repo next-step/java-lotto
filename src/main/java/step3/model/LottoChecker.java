@@ -1,7 +1,8 @@
 package step3.model;
 
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoChecker {
 
@@ -11,36 +12,20 @@ public class LottoChecker {
 		this.winnerLotto = winnerLotto;
 	}
 
-	public static int rank(final int matchCnt, final boolean matchBonus) {
-		if (matchCnt == 6) return 1;
-		if (matchCnt == 5 && matchBonus) return 2;
-		if (matchCnt > 2) {
-			return 6 - matchCnt + 2;
-		}
-		return 0;
-	}
-
-	public static double getEarningRate(Map<Integer, Integer> hitCntMap, Money money) {
-		int prizeMoneySum = hitCntMap.keySet().stream()
-				.mapToInt(rank -> rank)
-				.map(rank -> Awards.getPrize(rank, hitCntMap.get(rank)))
-				.sum();
-		return (double) prizeMoneySum / money.getMoney();
-	}
-
 	public int match(Lotto lotto) {
-		List<Integer> numberList = lotto.getNumberList();
-		return rank(countHit(numberList), checkBonusHit(numberList));
+		return Awards.rank(lotto.match(winnerLotto), lotto.checkBonus(winnerLotto));
 	}
 
-	private int countHit(List<Integer> lottoList) {
-		return (int) winnerLotto.getWinningNumber().stream()
-				.mapToInt(hitNumber -> hitNumber)
-				.filter(lottoList::contains)
-				.count();
-	}
+	public Map<Integer, Integer> checkHitCnt(LottoList lottoList){
+		Map<Integer, Integer> hitMap = IntStream.range(0, 6)
+				.boxed()
+				.collect(Collectors.toMap(i -> i, i -> 0, (a, b) -> b));
 
-	private boolean checkBonusHit(List<Integer> lottoList) {
-		return lottoList.contains(winnerLotto.getBonusNumber());
+		lottoList.getLottoList().stream()
+				.mapToInt(this::match)
+				.filter(hitMap::containsKey)
+				.forEachOrdered(awardRank -> hitMap.put(awardRank, hitMap.get(awardRank) + 1));
+
+		return hitMap;
 	}
 }

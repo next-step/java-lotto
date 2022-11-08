@@ -1,17 +1,12 @@
 package step3.controller;
 
 
-import step3.model.LottoChecker;
-import step3.model.LottoList;
-import step3.model.Money;
-import step3.model.WinnerLotto;
+import step3.model.*;
 import step3.util.LottoGenerator;
 import step3.view.InputView;
 import step3.view.OutputView;
 
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoController {
 
@@ -30,17 +25,9 @@ public class LottoController {
 		outputView.printLottoNumbers(lottoList);
 		WinnerLotto winnerLotto = new WinnerLotto(inputView.inputWinnerNumber(), inputView.inputBonusNumber());
 		LottoChecker lottoChecker = new LottoChecker(winnerLotto);
+		Map<Integer, Integer> hitMap = lottoChecker.checkHitCnt(lottoList);
 
-		Map<Integer, Integer> hitMap = IntStream.range(0, 6)
-				.boxed()
-				.collect(Collectors.toMap(i -> i, i -> 0, (a, b) -> b));
-
-		lottoList.getLottoList().stream()
-				.mapToInt(lottoChecker::match)
-				.filter(hitMap::containsKey)
-				.forEachOrdered(awardRank -> hitMap.put(awardRank, hitMap.get(awardRank) + 1));
-
-		outputView.printHitStatistics(hitMap, LottoChecker.getEarningRate(hitMap, money));
+		outputView.printHitStatistics(hitMap, RateChecker.getEarningRate(hitMap, money));
 	}
 
 

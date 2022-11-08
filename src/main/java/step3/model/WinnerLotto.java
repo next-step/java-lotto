@@ -2,6 +2,7 @@ package step3.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinnerLotto {
@@ -9,7 +10,7 @@ public class WinnerLotto {
 	private final static int LOTTO_START_NUM = 1;
 	private final static int LOTTO_END_NUM = 45;
 
-	private static List<Integer> winningNumber;
+	private static Set<Integer> winningNumber;
 	private static int bonusNumber;
 
 	public WinnerLotto(String winningNumber, int bonusNumber) {
@@ -19,10 +20,10 @@ public class WinnerLotto {
 		checkBonusNumber();
 	}
 
-	private List<Integer> splitWinningNumber(String winningNumber) {
+	private Set<Integer> splitWinningNumber(String winningNumber) {
 		return Arrays.stream(winningNumber.replaceAll(" ", "").split(DELIMITER))
 				.map(Integer::parseInt)
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 	}
 
 	private void checkWinningNumber() {
@@ -32,7 +33,7 @@ public class WinnerLotto {
 					throw new IllegalArgumentException("지난주 당첨 번호가 잘못 입력되었습니다.");
 				});
 
-		if (winningNumber.size() != winningNumber.stream().distinct().count()) {
+		if (winningNumber.size() != 6) {
 			throw new IllegalArgumentException("지난 주 당첨 번호에 중복된 번호가 들어있습니다.");
 		}
 	}
@@ -47,7 +48,7 @@ public class WinnerLotto {
 		}
 	}
 
-	public List<Integer> getWinningNumber() {
+	public Set<Integer> getWinningNumber() {
 		return winningNumber;
 	}
 
