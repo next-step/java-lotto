@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 
 import static lotto.domain.Rank.*;
@@ -10,12 +11,8 @@ public class RankCount {
     private EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
 
     public RankCount() {
-        rankCount.put(FIRST, 0);
-        rankCount.put(SECOND, 0);
-        rankCount.put(THIRD, 0);
-        rankCount.put(FOURTH, 0);
-        rankCount.put(FIFTH, 0);
-        rankCount.put(MISS, 0);
+        Arrays.stream(values())
+                .forEach(rank -> rankCount.put(rank, 0));
     }
 
     public void countRank(Lotto lotto, WinningNumbers winningNumbers) {
