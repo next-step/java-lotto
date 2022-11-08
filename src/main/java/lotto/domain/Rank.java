@@ -27,7 +27,7 @@ public enum Rank {
         Rank[] ranks= Rank.values();
 
         if (countOfMatch == FIVE_MATCH) {
-            return secondOrThirdRank(matchBonus);
+            return getSecondOrThirdRank(matchBonus);
         }
 
         return Arrays.stream(ranks)
@@ -36,7 +36,7 @@ public enum Rank {
                 .orElse(MISS);
     }
 
-    private static Rank secondOrThirdRank(boolean matchBonus) {
+    private static Rank getSecondOrThirdRank(boolean matchBonus) {
         if (matchBonus == true) {
             return SECOND;
         }
