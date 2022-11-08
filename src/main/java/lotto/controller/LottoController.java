@@ -12,24 +12,23 @@ public class LottoController {
     public static void run() {
         Lottos lottos = new Lottos(InputView.inputAmount(), InputView.inputManualLottoQuantity());
 
+        createLottos(lottos);
+        OutputView.outputLottos(lottos);
+
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.inputNumbers(), InputView.inputBonusNumber());
+        RankCount rankCount = new RankCount();
+        lottos.countRank(rankCount, winningNumbers);
+
+        double result = Calculator.calculate(lottos, rankCount);
+        OutputView.outputResult(new GameResult(rankCount, result));
+    }
+
+    private static void createLottos(Lottos lottos) {
         List<Lotto> manualLottos = InputView.inputManualLottoNumbers(lottos.manualLottoQuantity());
         lottos.saveLotto(manualLottos);
 
         List<Lotto> autoLottos = createAutoLottos(lottos.autoLottoQuantity());
         lottos.saveLotto(autoLottos);
-
-        OutputView.outputLottos(lottos);
-
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.inputNumbers(), InputView.inputBonusNumber());
-        RankCount rankCount = new RankCount();
-
-        for (Lotto lotto : lottos.getLottos()) {
-            rankCount.countRank(lotto, winningNumbers);
-        }
-
-        double result = Calculator.calculate(lottos, rankCount);
-        OutputView.outputResult(new GameResult(rankCount, result));
-
     }
 
     private static List<Lotto> createAutoLottos(int quantity) {

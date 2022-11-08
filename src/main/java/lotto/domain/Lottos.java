@@ -49,4 +49,10 @@ public class Lottos {
     public int amount() {
         return this.totalQuantity * LOTTO_PRICE;
     }
+
+    public void countRank(RankCount rankCount, WinningNumbers winningNumbers) {
+        for (Lotto lotto : lottos) {
+            rankCount.countRank(lotto, winningNumbers);
+        }
+    }
 }

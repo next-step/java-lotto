@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,13 +25,27 @@ public class LottosTest {
 
     @Test
     void addLotto() {
-        List<Lotto> lottoList = new ArrayList<>();
-        Lotto lotto = LottoFactory.createManualLotto(Arrays.asList(1,2,3,4,5,6));
-        lottoList.add(lotto);
+        Lottos lottos = createLottos();
 
-        Lottos lottos = new Lottos(2000, 2);
-        lottos.saveLotto(lottoList);
-        Assertions.assertThat(lottos.getSize()).isEqualTo(1);
+        Assertions.assertThat(lottos.getSize()).isEqualTo(2);
     }
 
+    @Test
+    void countRank() {
+        Lottos lottos = createLottos();
+
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 11, 12, 13), 7);
+        RankCount rankCount = new RankCount();
+        lottos.countRank(rankCount, winningNumbers);
+
+        Assertions.assertThat(rankCount.numberOfRank(Rank.FIFTH)).isEqualTo(2);
+    }
+
+    private Lottos createLottos() {
+        Lottos lottos = new Lottos(2000, 2);
+        Lotto lotto1 = LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 7, 8, 9));
+        lottos.saveLotto(Arrays.asList(lotto1, lotto2));
+        return lottos;
+    }
 }
