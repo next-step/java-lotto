@@ -1,10 +1,8 @@
 package lotto.domain.strategy;
 
-import lotto.domain.Lotto;
-
 import java.util.List;
+import java.util.Set;
 
 public interface LottoConstructStrategy {
-    int LOTTO_COUNT = 6;
-    List<Lotto> create(int count);
+    List<Set<Integer>> create(int count);
 }
