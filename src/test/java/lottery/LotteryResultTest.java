@@ -24,13 +24,18 @@ public class LotteryResultTest {
 
 
     @Test
-    void winningCounts() {
+    void Rank별_당첨_count_확인() {
         assertThat(lotteryResult.winningCounts(LotteryRank.FIFTH)).isEqualTo(2);
         assertThat(lotteryResult.winningCounts(LotteryRank.FIRST)).isEqualTo(1);
     }
 
     @Test
-    void returnRate() {
+    void 존재하지_않는_Rank() {
+        assertThat(lotteryResult.winningCounts(LotteryRank.SECOND)).isEqualTo(0);
+    }
+
+    @Test
+    void 수익률_계산() {
         assertThat(lotteryResult.returnRate()).isEqualTo(200001);
     }
 

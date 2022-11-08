@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LotteryCompanyTest {
 
     @Test
-    void randomLottery() {
+    void 랜덤_Lottery_생성() {
         Lottery lottery = LotteryCompany.randomLottery();
         List<LotteryNumber> lotteryNumbers = lottery.lotteryNumbers();
 

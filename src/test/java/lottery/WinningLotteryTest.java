@@ -24,7 +24,7 @@ public class WinningLotteryTest {
 
     @ParameterizedTest
     @MethodSource("lotteryRankProvider")
-    void result(LotteryRank lotteryRank, int expected) {
+    void 로또_결과_생성(LotteryRank lotteryRank, int expected) {
         WinningLottery winningLottery = new WinningLottery(
                 createLottery(1, 2, 3, 4, 5, 6).lotteryNumbers(),
                 LotteryNumber.lotteryNumber(45)
