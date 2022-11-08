@@ -6,20 +6,22 @@ import java.util.List;
 
 public class LottoStatics {
 
-    private static final int UNIT_OF_ACCOUNT = 1000;
+    private static final int UNIT_OF_ACCOUNT = 1000;    // 1000원
+    private static final int PERCENT = 100;             // 100%
 
     public static BigDecimal calculate(List<Lotto> lottoList) {
         validateNull(lottoList);
+        return divideOfListCount(sumOfLottoList(lottoList), lottoList.size());
+    }
 
-        BigDecimal sum = lottoList.stream()
-                .map(numberList -> numberList.getRank().getAmount()
-                        .add(numberList.getRank().getAmount()))
+    private static BigDecimal sumOfLottoList(List<Lotto> lottoList) {
+        return lottoList.stream()
+                .map(Lotto::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
-        BigDecimal divide = sum.divide(
-                BigDecimal.valueOf(2 * UNIT_OF_ACCOUNT * 1000), 2, RoundingMode.HALF_EVEN);
-
-        return divide;
+    private static BigDecimal divideOfListCount(BigDecimal sum, int count) {
+        return sum.divide(BigDecimal.valueOf(UNIT_OF_ACCOUNT * PERCENT * count), 2, RoundingMode.HALF_EVEN);
     }
 
     private static void validateNull(List<Lotto> lottoList) {
