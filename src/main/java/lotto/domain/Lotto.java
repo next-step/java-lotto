@@ -13,7 +13,9 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     private Lotto(List<LottoNumber> numbers) {
+        checkLottoSize(numbers.size());
         checkOverlap(numbers);
+        numbers.sort(Comparator.comparing(LottoNumber::getNumber));
         this.numbers = numbers;
     }
 
@@ -31,17 +33,11 @@ public class Lotto {
         return new Lotto(lotto.numbers);
     }
 
-    public static Lotto from(List<LottoNumber> lottoNumbers) {
-        checkLottoSize(lottoNumbers.size());
-        return new Lotto(lottoNumbers);
+    public static Lotto from(List<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 
-    public static Lotto from(String stringLottoNumbers) {
-        String[] split = stringLottoNumbers.split(", ");
-        return from(LottoNumber.from(split));
-    }
-
-    private static void checkLottoSize(int size) {
+    private void checkLottoSize(int size) {
         if (size != SELECT_SIZE) {
             throw new CustomException(LottoErrorCode.LOTTO_SIZE_BAD_REQUEST);
         }

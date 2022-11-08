@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class LottoNumberRange {
@@ -20,15 +19,13 @@ public class LottoNumberRange {
 
     public static Lotto createLotto() {
         List<LottoNumber> lottoNumbersRange = getLottoNumbersRangeCopy();
-        List<LottoNumber> lottoNumbers = shuffleAndSort(lottoNumbersRange);
+        List<LottoNumber> lottoNumbers = shuffle(lottoNumbersRange);
         return Lotto.from(lottoNumbers);
     }
 
-    private static List<LottoNumber> shuffleAndSort(List<LottoNumber> lottoNumbersRange) {
+    private static List<LottoNumber> shuffle(List<LottoNumber> lottoNumbersRange) {
         Collections.shuffle(lottoNumbersRange);
-        List<LottoNumber> lottoNumbers = lottoNumbersRange.subList(0, Lotto.SELECT_SIZE);
-        lottoNumbers.sort(Comparator.comparing(LottoNumber::getNumber));
-        return lottoNumbers;
+        return lottoNumbersRange.subList(0, Lotto.SELECT_SIZE);
     }
 
     private static List<LottoNumber> getLottoNumbersRangeCopy() {

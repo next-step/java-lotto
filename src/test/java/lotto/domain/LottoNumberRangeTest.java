@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -18,5 +18,4 @@ public class LottoNumberRangeTest {
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
         Assertions.assertThat(lottoNumbers).hasSize(Lotto.SELECT_SIZE);
     }
-
 }
