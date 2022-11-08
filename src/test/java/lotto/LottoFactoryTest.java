@@ -35,4 +35,8 @@ public class LottoFactoryTest {
         Assertions.assertThat(lotto.getSize()).isEqualTo(6);
     }
 
+    public void createTestLotto() {
+
+    }
+
 }
