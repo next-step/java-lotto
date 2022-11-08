@@ -5,11 +5,12 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, BigDecimal.valueOf(2000000000)),
-    SECOND(5, BigDecimal.valueOf(1500000)),
-    THIRD(4, BigDecimal.valueOf(50000)),
-    FORTH(3, BigDecimal.valueOf(5000)),
-    FIFTH(2, BigDecimal.valueOf(0)),
-    SIXTH(1, BigDecimal.valueOf(0)),
+    SECOND(5, BigDecimal.valueOf(30000000)),
+    THIRD(5, BigDecimal.valueOf(1500000)),
+    FORTH(4, BigDecimal.valueOf(50000)),
+    FIFTH(3, BigDecimal.valueOf(5000)),
+    SIXTH(2, BigDecimal.valueOf(0)),
+    SEVENTH(1, BigDecimal.valueOf(0)),
     ZERO(0, BigDecimal.valueOf(0));
 
     private final int count;
@@ -20,6 +21,10 @@ public enum Rank {
         this.amount = amount;
     }
 
+    public static Rank getResultRank(Lotto lotto) {
+        return lotto.getRank();
+    }
+
     public int getCount() {
         return count;
     }
@@ -28,10 +33,18 @@ public enum Rank {
         return amount;
     }
 
-    public static Rank getRank(int count) {
+    public static Rank getRank(int count, boolean matchBonus) {
+        if (isSecond(count, !matchBonus)) {
+            return Rank.THIRD;
+        }
+
         return Arrays.stream(values())
                 .filter(cnt -> cnt.getCount() == count)
-                .findFirst()
+                .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("숫자가 틀립니다."));
+    }
+
+    private static boolean isSecond(int count, boolean matchBonus) {
+        return count == 5 && matchBonus;
     }
 }
