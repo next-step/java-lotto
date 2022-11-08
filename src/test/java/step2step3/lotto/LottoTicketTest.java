@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoTicketTest {
 
@@ -58,4 +59,12 @@ class LottoTicketTest {
                 .hasMessage("로또 번호는 6개이어야 합니다.");
     }
 
+    @Test
+    void 보너스_숫자의_포함_여부를_판별할_수_있다() {
+        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
+
+        LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
+
+        assertTrue(lottoTicket.hasBonusNumber(6));
+    }
 }
