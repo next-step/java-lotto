@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    private OutputView() {
+    }
+
     public static void printAmountOfTickets(Amount amountOfManualTickets, Amount amountOfAutoTickets) {
         System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.%n", amountOfManualTickets.getAmount(), amountOfAutoTickets.getAmount());
     }
