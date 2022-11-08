@@ -28,7 +28,7 @@ public class LottoChecker {
 		for (int cnt : hitCntMap.keySet()) {
 			prizeMoney += Awards.findAward(cnt).getAward() * hitCntMap.get(cnt);
 		}
-		double rate = (double) prizeMoney / money.getMoney();
-		return rate;
+
+		return (double) prizeMoney / money.getMoney();
 	}
 }
