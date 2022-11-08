@@ -5,8 +5,7 @@ import lotto.exception.LotteryGameException;
 import lotto.strategy.AutoGenerateStrategy;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -24,8 +23,7 @@ public class AmountTest {
     }
 
     @ParameterizedTest
-    @EmptySource
-    @NullSource
+    @NullAndEmptySource
     void null_or_empty(String amount) {
         assertThatThrownBy(() -> new Amount(amount))
                 .isInstanceOf(LotteryGameException.class)
