@@ -1,9 +1,7 @@
 package lotto.strategy;
 
-import lotto.domain.LottoBall;
 import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +27,7 @@ public class AutoNumberList implements NumberList {
     }
 
     private static List<Integer> getNumberList() {
-        List<Integer> pickNumber = IntStream.range(LottoBall.getStartNumber(), LottoBall.getLastNumber())
+        List<Integer> pickNumber = IntStream.range(LottoNumber.getStartNumber(), LottoNumber.getLastNumber())
                 .boxed()
                 .collect(Collectors.toList());
 
