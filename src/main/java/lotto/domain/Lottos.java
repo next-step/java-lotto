@@ -25,6 +25,18 @@ public class Lottos {
         }
     }
 
+    public static boolean getRank(List<Lotto> lottoList) {
+        for (int i = 0; i < lottoList.size(); i++) {
+            if (Rank.getResultRank(lottoList.get(i)).equals(Rank.SECOND)) {
+                return true;
+            }
+            if (Rank.getResultRank(lottoList.get(i)).equals(Rank.THIRD)) {
+                return false;
+            }
+        }
+        return false;
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
