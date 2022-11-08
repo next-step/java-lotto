@@ -61,4 +61,8 @@ public class LottoTicket {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    public boolean hasBonusNumber(int number) {
+        return numbers.contains(number);
+    }
 }
