@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -18,15 +18,17 @@ public class LottoNumbers {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static LottoNumbers random() {
-        return new LottoNumbers(randomLottoNumbers());
-    }
-
     public static LottoNumbers of(int... numbers) {
         return new LottoNumbers(toLottoNumbers(numbers));
     }
 
-    public static LottoNumbers of(List<LottoNumber> numbers) {
+    public static LottoNumbers of(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::of).collect(Collectors.toList());
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers ofNumbers(List<LottoNumber> numbers) {
         return new LottoNumbers(numbers);
     }
 
@@ -51,11 +53,6 @@ public class LottoNumbers {
         return Objects.hash(numbers);
     }
 
-    private static List<LottoNumber> randomLottoNumbers() {
-        List<LottoNumber> candidates = new ArrayList<>(LottoNumber.selectableNumbers());
-        Collections.shuffle(candidates);
-        return candidates.subList(0, LOTTO_NUMBER_COUNT);
-    }
 
     private static List<LottoNumber> toLottoNumbers(int... numbers) {
         return Arrays.stream(numbers)

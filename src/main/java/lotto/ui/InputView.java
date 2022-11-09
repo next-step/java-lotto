@@ -11,7 +11,9 @@ public class InputView {
     private static final String QUERY_PURCHASE_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String QUERY_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String QUERY_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String WINNING_NUMBERS_SEPARATOR = ", ";
+    private static final String QUERY_MANUAL_PURCHASE_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String QUERY_MANUAL_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String LOTTO_NUMBERS_SEPERATOR = ", ";
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {
@@ -23,11 +25,22 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<LottoNumber> queryWinningNumbers() {
+    public static int queryManualPurchaseCount() {
+        System.out.println(QUERY_MANUAL_PURCHASE_COUNT_MESSAGE);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public static void printQueryManualLottoNumbersMessage() {
+        System.out.println(QUERY_MANUAL_LOTTO_NUMBERS_MESSAGE);
+    }
+
+    public static void printQueryWinningNumbersMessage() {
         System.out.println(QUERY_WINNING_NUMBERS_MESSAGE);
-        return Arrays.stream(scanner.nextLine().split(WINNING_NUMBERS_SEPARATOR))
+    }
+
+    public static List<Integer> queryLottoNumbers() {
+        return Arrays.stream(scanner.nextLine().split(LOTTO_NUMBERS_SEPERATOR))
                 .map(Integer::parseInt)
-                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

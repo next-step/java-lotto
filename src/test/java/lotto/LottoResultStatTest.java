@@ -18,8 +18,7 @@ public class LottoResultStatTest {
                 LottoResult.SECOND,
                 LottoResult.NONE
         );
-        LottoPrice price = new LottoPrice(1);
         LottoResultStat stat = new LottoResultStat(results);
-        assertThat(stat.getProfitMargin(price)).isEqualTo(338592500, withPrecision(0.000001));
+        assertThat(stat.getProfitMargin(1)).isEqualTo(338592500, withPrecision(0.000001));
     }
 }
