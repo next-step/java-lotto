@@ -33,7 +33,7 @@ public class Result {
 
     private void result(Lotto lotto, BonusLotto bonusLotto) {
         int count = checkRank(lotto, bonusLotto);
-        Operator rank = Operator.find(count, lotto.checkBonus(bonusLotto.getBonus()));
+        Operator rank = Operator.find(count, bonusLotto.checkBonus(lotto));
         if (rank == null) {
             return;
         }

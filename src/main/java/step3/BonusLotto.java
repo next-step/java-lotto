@@ -16,7 +16,7 @@ public class BonusLotto {
         return lotto;
     }
 
-    public int getBonus() {
-        return bonus;
+    public boolean checkBonus(Lotto lotto) {
+        return lotto.checkBonus(bonus);
     }
 }
