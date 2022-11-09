@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class WinningNumber {
@@ -30,13 +31,9 @@ public class WinningNumber {
     }
 
     public int getMatchingCount(MatchNumber matchNumber) {
-        int count = 0;
-        for (Integer integer : list) {
-            if (matchNumber.isMatch(integer)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) list.stream()
+                .filter(matchNumber::isMatch)
+                .count();
     }
 
     private void validation(List<String> winningNumbers) {
