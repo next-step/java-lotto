@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
@@ -13,9 +11,18 @@ public class LottoResult {
    private Lottos lottos;
    private WinningNumbers winningNumbers;
 
+
    public LottoResult(Lottos lottos, WinningNumbers winningNumbers) {
       this.lottos = lottos;
       this.winningNumbers = winningNumbers;
+   }
+
+   public double lottoYieldCalculate(int money){
+      long sum = rewardMap.keySet()
+                 .stream()
+                 .mapToLong(Reward::getRewordMoney)
+                 .sum();
+      return (sum  / (double)money);
    }
 
    public Map<Reward, Integer> matchResult(){
@@ -27,15 +34,16 @@ public class LottoResult {
 
    private List<Reward> lottosMatch(){
       return lottos.getLottos().stream()
-              .map(lottoTicket -> Reward.rewardMatchCount(lottoMatchCount(lottoTicket)))
+              .map(lottoTicket -> Reward.rewardMatchCount(lottoNumberMatchCount(lottoTicket)))
               .collect(Collectors.toList());
    }
 
-   private int lottoMatchCount(LottoTicket lottoTicket){
+   private int lottoNumberMatchCount(LottoTicket lottoTicket){
       return  (int) lottoTicket.getTicket().stream()
               .filter(i -> winningNumbers.getWinningNumbers().contains(i))
               .count();
    }
+
 }
 
 

@@ -34,7 +34,7 @@ public class ResultView {
                         , reward.getRewordMoney(), rewardMap.getOrDefault(reward, 0)));
     }
 
-    public static void lottoYieldCalculate(int yield){
+    public static void lottoYield(double yield){
         System.out.printf("총 수익률은 %.2f 입니다.", yield);
     }
 }

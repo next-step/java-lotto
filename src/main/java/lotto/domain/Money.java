@@ -1,19 +1,20 @@
 package lotto.domain;
 
 public class Money {
-    private static final int lottoPrice = 1000;
 
-    int money;
+    private static final String NUMBER_REGEX= "[0-9]";
+
+    private int money;
 
     public Money(int money) {
        validationNegative(money);
        validationMoney(money);
        validationThousand(money);
-       this.money = money / lottoPrice;
+       this.money = money;
     }
 
     public void validationThousand(int money){
-        if(money % lottoPrice != 0){
+        if(money % 1000 != 0){
             throw new IllegalArgumentException("1000원 단위로 입력해주세요.");
         }
     }
