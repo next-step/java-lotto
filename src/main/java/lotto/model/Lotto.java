@@ -10,23 +10,11 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public int findWinner(List<String> winningNumber) {
-        int matchingCount = 0;
-
-        for (LottoNumber lottoNum : lotto) {
-            matchingCount = counting(matchingCount, lottoNum, winningNumber);
-        }
-
-        return matchingCount;
-    }
-
-    private int counting(int matchingCount, LottoNumber lottoNum, List<String> winningNum) {
-        for (String winNums : winningNum) {
-            if (lottoNum.isWinningNumber(winNums)) {
-                matchingCount++;
-            }
-        }
-        return matchingCount;
+    public int countWinner(List<String> winningNumber) {
+        return (int) lotto.stream()
+                .flatMap(lottoNumber -> winningNumber.stream()
+                        .filter(lottoNumber::isWinningNumber))
+                .count();
     }
 
     public static Lotto toLottoNumber(List<Integer> lotto) {
