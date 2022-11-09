@@ -3,12 +3,12 @@ package lotto;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoTicket {
+public class LottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> numbers;
 
-    private LottoTicket(List<LottoNumber> numbers) {
+    private LottoNumbers(List<LottoNumber> numbers) {
         if (new HashSet<>(numbers).size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("겹치지 않는 로또 숫자가 총 6개여야 합니다.");
         }
@@ -18,16 +18,16 @@ public class LottoTicket {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static LottoTicket random() {
-        return new LottoTicket(randomLottoNumbers());
+    public static LottoNumbers random() {
+        return new LottoNumbers(randomLottoNumbers());
     }
 
-    public static LottoTicket of(int... numbers) {
-        return new LottoTicket(toLottoNumbers(numbers));
+    public static LottoNumbers of(int... numbers) {
+        return new LottoNumbers(toLottoNumbers(numbers));
     }
 
-    public static LottoTicket of(List<LottoNumber> numbers) {
-        return new LottoTicket(numbers);
+    public static LottoNumbers of(List<LottoNumber> numbers) {
+        return new LottoNumbers(numbers);
     }
 
     public boolean hasNumber(LottoNumber number) {
@@ -42,7 +42,7 @@ public class LottoTicket {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoTicket that = (LottoTicket) o;
+        LottoNumbers that = (LottoNumbers) o;
         return Objects.equals(numbers, that.numbers);
     }
 
@@ -63,7 +63,7 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public int getMatchCount(LottoTicket ticket) {
+    public int getMatchCount(LottoNumbers ticket) {
         return (int) numbers.stream()
                 .filter(ticket::hasNumber)
                 .count();

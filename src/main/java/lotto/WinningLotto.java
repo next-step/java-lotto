@@ -1,16 +1,10 @@
 package lotto;
 
-import java.util.List;
-
 public class WinningLotto {
-    private final LottoTicket winningTicket;
+    private final LottoNumbers winningTicket;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        this(LottoTicket.of(winningNumbers), bonusNumber);
-    }
-
-    public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
+    public WinningLotto(LottoNumbers winningTicket, LottoNumber bonusNumber) {
         if (winningTicket.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼이 당첨 번호와 겹치면 안됩니다.");
         }
@@ -18,15 +12,15 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoResult match(LottoTicket ticket) {
+    public LottoResult match(LottoNumbers ticket) {
         return LottoResult.of(getMatchCount(ticket), hasBonusNumber(ticket));
     }
 
-    private boolean hasBonusNumber(LottoTicket ticket) {
+    private boolean hasBonusNumber(LottoNumbers ticket) {
         return ticket.hasNumber(bonusNumber);
     }
 
-    private int getMatchCount(LottoTicket ticket) {
+    private int getMatchCount(LottoNumbers ticket) {
         return winningTicket.getMatchCount(ticket);
     }
 }

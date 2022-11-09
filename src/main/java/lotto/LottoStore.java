@@ -14,12 +14,12 @@ public class LottoStore {
         this.price = lottoPrice;
     }
 
-    public List<LottoTicket> purchase(int purchasePrice) {
+    public Lotto purchase(int purchasePrice) {
         int count = price.getPurchaseCount(purchasePrice);
-        List<LottoTicket> tickets = new ArrayList<>();
+        List<LottoNumbers> numbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            tickets.add(LottoTicket.random());
+            numbers.add(LottoNumbers.random());
         }
-        return tickets;
+        return new Lotto(numbers);
     }
 }

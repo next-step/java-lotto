@@ -11,15 +11,14 @@ public class Main {
     public static void main(String[] args) {
         LottoStore lottoStore = new LottoStore(LOTTO_PRICE);
         int purchasePrice = InputView.queryPurchasePrice();
-        List<LottoTicket> lottoTickets = lottoStore.purchase(purchasePrice);
-        LottoRound lottoRound = new LottoRound(lottoTickets);
-        ResultView.printLottoTickets(lottoTickets);
+        Lotto lotto = lottoStore.purchase(purchasePrice);
+        ResultView.printLotto(lotto);
 
-        List<LottoNumber> winningNumbers = InputView.queryWinningNumbers();
+        LottoNumbers winningNumbers = LottoNumbers.of(InputView.queryWinningNumbers());
         LottoNumber bonusNumber = InputView.queryBonusNumber();
         WinningLotto winingLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        List<LottoResult> results = lottoRound.finishRound(winingLotto);
+        List<LottoResult> results = lotto.match(winingLotto);
         LottoResultStat resultStat = new LottoResultStat(results);
         double profitMargin = resultStat.getProfitMargin(LOTTO_PRICE);
         ResultView.printLottoResults(resultStat);

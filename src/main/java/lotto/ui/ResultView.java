@@ -1,9 +1,6 @@
 package lotto.ui;
 
-import lotto.LottoNumber;
-import lotto.LottoResult;
-import lotto.LottoResultStat;
-import lotto.LottoTicket;
+import lotto.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,9 +18,9 @@ public class ResultView {
 
     }
 
-    public static void printLottoTickets(List<LottoTicket> tickets) {
-        for (LottoTicket ticket : tickets) {
-            printLottoTicket(ticket);
+    public static void printLotto(Lotto lotto) {
+        for (LottoNumbers ticket : lotto.getLottoNumbers()) {
+            printLottoNumbers(ticket);
         }
     }
 
@@ -34,8 +31,8 @@ public class ResultView {
         }
     }
 
-    private static void printLottoTicket(LottoTicket ticket) {
-        System.out.println(ticket.getNumbers().stream()
+    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
+        System.out.println(lottoNumbers.getNumbers().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList()));
     }
