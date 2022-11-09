@@ -21,11 +21,15 @@ public enum Rank {
     }
 
     public static Rank rank(long numberOfMatchingNumbers) {
-        return EnumSet.allOf(Rank.class)
+        Rank rankExcludingSecond = EnumSet.allOf(Rank.class)
                 .stream()
                 .filter(rank -> rank.numberOfMatchingNumbers == numberOfMatchingNumbers)
                 .findFirst()
                 .orElse(Rank.NOTHING);
+
+        return rankExcludingSecond == SECOND
+                ? THIRD
+                : rankExcludingSecond;
     }
 
     public long prizeAmount() {
