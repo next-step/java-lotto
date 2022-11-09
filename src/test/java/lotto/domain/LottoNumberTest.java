@@ -12,8 +12,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 class LottoNumberTest {
 
     private static final String EXCEPTION_MESSAGE_PREFIX = "[ERROR]";
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    private static final int MIN = LottoNumber.MIN;
+    private static final int MAX = LottoNumber.MAX;
 
     @ParameterizedTest
     @ValueSource(ints = {-10, -5, -1, 0, 46, 47, 50, 100})

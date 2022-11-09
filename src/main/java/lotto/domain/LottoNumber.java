@@ -49,7 +49,7 @@ public final class LottoNumber {
         if (LottoNumberCache.contains(value)) {
             return LottoNumberCache.get(value);
         }
-        return new LottoNumber(value);
+        throw new LottoException(String.format("value should be in range [%d..%d]", MIN, MAX));
     }
 
     public int intValue() {
