@@ -12,21 +12,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LotteryRankTest {
 
     @Test
-    void getRank() {
-        assertThat(LotteryRank.FIFTH.getMatchingCount()).isEqualTo(3);
-        assertThat(LotteryRank.FIRST.getMatchingCount()).isEqualTo(6);
+    void rank() {
+        assertThat(LotteryRank.FIFTH.matchingCount()).isEqualTo(3);
+        assertThat(LotteryRank.FIRST.matchingCount()).isEqualTo(6);
     }
 
     @Test
-    void getPrize() {
-        assertThat(LotteryRank.FIFTH.getPrize()).isEqualTo(5000);
-        assertThat(LotteryRank.FIRST.getPrize()).isEqualTo(2000000000);
+    void prize() {
+        assertThat(LotteryRank.FIFTH.prize()).isEqualTo(5000);
+        assertThat(LotteryRank.FIRST.prize()).isEqualTo(2000000000);
     }
 
     @ParameterizedTest
     @MethodSource("등수_판단_Provider")
     void 등수_판단(int matchingCount, boolean isBonusMatched, LotteryRank expectedRank) {
-        assertThat(LotteryRank.valueOf(matchingCount, isBonusMatched)).isEqualTo(expectedRank);
+        assertThat(LotteryRank.rank(matchingCount, isBonusMatched)).isEqualTo(expectedRank);
     }
 
     static Stream<Arguments> 등수_판단_Provider() {

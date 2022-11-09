@@ -11,10 +11,10 @@ public class LotteryCompany {
 
     private static final List<LotteryNumber> LOTTERY_NUMBER_CANDIDATES = IntStream
             .rangeClosed(1, LotteryNumber.LOTTERY_NUM_MAX)
-            .mapToObj(LotteryNumber::new)
+            .mapToObj(LotteryNumber::lotteryNumber)
             .collect(Collectors.toList());
 
-    public static Lottery generateRandomLotteryNumbers() {
+    public static Lottery randomLottery() {
         Collections.shuffle(LOTTERY_NUMBER_CANDIDATES);
         return new Lottery(LOTTERY_NUMBER_CANDIDATES.subList(0, Lottery.LOTTERY_NUM_COUNT)
                 .stream()
@@ -22,7 +22,12 @@ public class LotteryCompany {
                 .collect(Collectors.toList()));
     }
 
-    public static int getAvailablePurchaseLotteryCount(int cashAmount) {
-        return cashAmount / LOTTERY_PRICE;
+    public static int availablePurchaseAmount(int totalPurchasePrice) {
+        int availablePurchaseAmount = totalPurchasePrice / LOTTERY_PRICE;
+        if (availablePurchaseAmount <= 0) {
+            throw new IllegalArgumentException("입력한 구입 금액으로 로또를 구입할 수 없습니다.");
+        }
+        return availablePurchaseAmount;
     }
+
 }

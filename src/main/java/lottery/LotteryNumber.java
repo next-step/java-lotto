@@ -1,23 +1,36 @@
 package lottery;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LotteryNumber implements Comparable<LotteryNumber>{
 
     public static final int LOTTERY_NUM_MIN = 1;
     public static final int LOTTERY_NUM_MAX = 45;
-    public static final String LOTTERY_NUM_RANGE_ERR_MSG = "로또 번호는 1과 45 사이의 정수여야 합니다.";
+    public static Map<Integer, LotteryNumber> lotteryNumbers = new HashMap<>();
 
     private final int lotteryNumber;
 
-    public LotteryNumber(int lotteryNumber) {
-        validate(lotteryNumber);
-        this.lotteryNumber = lotteryNumber;
+    static {
+        for (int i = LOTTERY_NUM_MIN; i <= LOTTERY_NUM_MAX; i++) {
+            lotteryNumbers.put(i, new LotteryNumber(i));
+        }
     }
 
-    private void validate(int lotteryNumber) {
-        if (lotteryNumber < LOTTERY_NUM_MIN || lotteryNumber > LOTTERY_NUM_MAX) {
-            throw new IllegalArgumentException(LOTTERY_NUM_RANGE_ERR_MSG);
+    private LotteryNumber(int number) {
+        this.lotteryNumber = number;
+    }
+
+    public static LotteryNumber lotteryNumber(int number) {
+        LotteryNumber lotteryNumber = lotteryNumbers.get(number);
+        validate(lotteryNumber);
+        return lotteryNumber;
+    }
+
+    private static void validate(LotteryNumber lotteryNumber) {
+        if (lotteryNumber == null) {
+            throw new IllegalArgumentException("로또 번호는 1과 45 사이의 정수여야 합니다.");
         }
     }
 

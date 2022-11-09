@@ -17,17 +17,17 @@ public class WinningLotteryTest {
     @Test
     void create_보너스볼_중복() {
         assertThatThrownBy(() -> new WinningLottery(
-                createLottery(1, 2, 3, 4, 5, 6).getLotteryNumbers(),
-                new LotteryNumber(1)
+                createLottery(1, 2, 3, 4, 5, 6).lotteryNumbers(),
+                LotteryNumber.lotteryNumber(1)
         )).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @MethodSource("lotteryRankProvider")
-    void createLotteryResult(LotteryRank lotteryRank, int expected) {
+    void 로또_결과_생성(LotteryRank lotteryRank, int expected) {
         WinningLottery winningLottery = new WinningLottery(
-                createLottery(1, 2, 3, 4, 5, 6).getLotteryNumbers(),
-                new LotteryNumber(45)
+                createLottery(1, 2, 3, 4, 5, 6).lotteryNumbers(),
+                LotteryNumber.lotteryNumber(45)
         );
         List<Lottery> lotteries = List.of(
                 createLottery(1, 2, 3, 14, 15, 16),
@@ -35,9 +35,9 @@ public class WinningLotteryTest {
                 createLottery(1, 2, 3, 4, 15, 16),
                 createLottery(1, 2, 3, 4, 5, 16)
         );
-        LotteryResult lotteryResult = winningLottery.createLotteryResult(lotteries);
+        LotteryResult lotteryResult = winningLottery.result(lotteries);
 
-        assertThat(lotteryResult.getWinningCountOfRank(lotteryRank)).isEqualTo(expected);
+        assertThat(lotteryResult.winningCounts(lotteryRank)).isEqualTo(expected);
     }
 
     static Stream<Arguments> lotteryRankProvider() {

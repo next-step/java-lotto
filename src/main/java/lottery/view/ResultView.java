@@ -1,6 +1,7 @@
 package lottery.view;
 
 import lottery.Lottery;
+import lottery.LotteryNumber;
 import lottery.LotteryRank;
 import lottery.LotteryResult;
 
@@ -11,8 +12,8 @@ import java.util.stream.Stream;
 
 public class ResultView {
 
-    public static void printPurchasedLotteryInfos(List<Lottery> lotteries) {
-        printPurchasedLotteryAmount(lotteries.size());
+    public static void printLotteriesInfo(List<Lottery> lotteries, int manuallyPurchasedAmount) {
+        printPurchasedLotteryAmount(lotteries.size() - manuallyPurchasedAmount, manuallyPurchasedAmount);
         printPurchasedLotteryNumbers(lotteries);
     }
 
@@ -23,19 +24,22 @@ public class ResultView {
         System.out.println("--------");
 
         for (LotteryRank lotteryRank : getLotteryRanksToPrint()) {
-            System.out.println(generateResultMessage(lotteryRank, lotteryResult.getWinningCountOfRank(lotteryRank)));
+            System.out.println(generateResultMessage(lotteryRank, lotteryResult.winningCounts(lotteryRank)));
         }
 
-        System.out.printf("총 수익률은 %.2f 입니다.", lotteryResult.getReturnRate());
+        System.out.printf("총 수익률은 %.2f 입니다.", lotteryResult.returnRate());
     }
 
-    private static void printPurchasedLotteryAmount(int purchasedLotteryAmount) {
-        System.out.println(purchasedLotteryAmount + "개를 구매했습니다.");
+    private static void printPurchasedLotteryAmount(int randomLotteryAmount, int manualLotteryAmount) {
+        System.out.println("수동으로 " + manualLotteryAmount + "장, 자동으로 " + randomLotteryAmount + "개를 구매했습니다.");
     }
 
     private static void printPurchasedLotteryNumbers(List<Lottery> lotteries) {
         for (Lottery lottery : lotteries) {
-            System.out.println(lottery.getLotteryNumbers());
+            List<LotteryNumber> lotteryNumbers = lottery.lotteryNumbers().stream()
+                    .sorted()
+                    .collect(Collectors.toList());
+            System.out.println(lotteryNumbers);
         }
         System.out.println();
     }
@@ -48,8 +52,8 @@ public class ResultView {
     }
 
     private static String generateResultMessage(LotteryRank lotteryRank, int winningCountOfRank) {
-        int matchingCount = lotteryRank.getMatchingCount();
-        int prizeOfRank = lotteryRank.getPrize();
+        int matchingCount = lotteryRank.matchingCount();
+        int prizeOfRank = lotteryRank.prize();
         String bonusMessage = "";
 
         if (lotteryRank.equals(LotteryRank.SECOND)) {

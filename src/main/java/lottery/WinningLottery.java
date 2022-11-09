@@ -22,18 +22,18 @@ public class WinningLottery {
         }
     }
 
-    public LotteryResult createLotteryResult(List<Lottery> lotteries) {
+    public LotteryResult result(List<Lottery> lotteries) {
         return new LotteryResult(winningCounts(lotteries), LotteryCompany.LOTTERY_PRICE);
     }
 
     private EnumMap<LotteryRank, Integer> winningCounts(List<Lottery> lotteries) {
         return new EnumMap<>(lotteries.stream()
-                .map(this::getLotteryRank)
+                .map(this::lotteryRank)
                 .collect(Collectors.toMap(Function.identity(), value -> 1, (existing, replacement) -> existing + 1)));
     }
 
-    private LotteryRank getLotteryRank(Lottery lottery) {
-        return LotteryRank.valueOf(winningLottery.contains(lottery), winningLottery.contains(bonusLotteryNumber));
+    private LotteryRank lotteryRank(Lottery lottery) {
+        return LotteryRank.rank(winningLottery.contains(lottery), winningLottery.contains(bonusLotteryNumber));
     }
 
 }

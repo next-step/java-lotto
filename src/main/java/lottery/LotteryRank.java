@@ -19,22 +19,22 @@ public enum LotteryRank {
         this.prize = prize;
     }
 
-    public int getMatchingCount() {
+    public int matchingCount() {
         return matchingCount;
     }
 
-    public int getPrize() {
+    public int prize() {
         return prize;
     }
 
-    public static LotteryRank valueOf(int matchingCount, boolean isBonusMatched) {
+    public static LotteryRank rank(int matchingCount, boolean isBonusMatched) {
         return Arrays.stream(values())
-                .filter(lotteryRank -> lotteryRank.isValueOf(matchingCount, isBonusMatched))
+                .filter(lotteryRank -> lotteryRank.match(matchingCount, isBonusMatched))
                 .findFirst()
                 .orElse(NONE);
     }
 
-    private boolean isValueOf(int matchingCount, boolean isBonusMatched) {
+    private boolean match(int matchingCount, boolean isBonusMatched) {
         if (this.matchingCount != matchingCount) {
             return false;
         }

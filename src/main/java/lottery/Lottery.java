@@ -1,27 +1,18 @@
 package lottery;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lottery {
 
     static final int LOTTERY_NUM_COUNT = 6;
 
-    private final List<LotteryNumber> lotteryNumbers;
+    private final Set<LotteryNumber> lotteryNumbers;
 
     public Lottery(List<LotteryNumber> lotteryNumbers) {
-        validate(lotteryNumbers);
-        this.lotteryNumbers = lotteryNumbers;
-    }
-
-    private void validate(List<LotteryNumber> lotteryNumbers) {
-        if (lotteryNumbers.size() != LOTTERY_NUM_COUNT) {
-            throw new IllegalArgumentException("로또는 6개 숫자로 구성되어야 합니다.");
-        }
-        if (new HashSet<>(lotteryNumbers).size() != LOTTERY_NUM_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
+        this.lotteryNumbers = new HashSet<>(lotteryNumbers);
+        validate(this.lotteryNumbers);
     }
 
     public int contains(Lottery lottery) {
@@ -35,7 +26,13 @@ public class Lottery {
         return this.lotteryNumbers.contains(lotteryNumber);
     }
 
-    public List<LotteryNumber> getLotteryNumbers() {
-        return Collections.unmodifiableList(this.lotteryNumbers);
+    public List<LotteryNumber> lotteryNumbers() {
+        return List.copyOf(lotteryNumbers);
+    }
+
+    private void validate(Set<LotteryNumber> lotteryNumbers) {
+        if (lotteryNumbers.size() != LOTTERY_NUM_COUNT) {
+            throw new IllegalArgumentException("로또는 6개 숫자로 구성되어야 합니다.");
+        }
     }
 }

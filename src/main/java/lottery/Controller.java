@@ -1,28 +1,24 @@
 package lottery;
 
-import java.util.List;
+import lottery.view.InputView;
+import lottery.view.ResultView;
 
-import static lottery.LotteryCompany.getAvailablePurchaseLotteryCount;
-import static lottery.view.InputView.*;
-import static lottery.view.ResultView.printPurchasedLotteryInfos;
-import static lottery.view.ResultView.printResult;
+import java.util.List;
 
 public class Controller {
 
     public static void main(String[] args) {
         Customer customer = new Customer();
 
-        int availablePurchaseLotteryCount = getAvailablePurchaseLotteryCount(getLotteryPurchasePrices());
-        for (int i = 0; i < availablePurchaseLotteryCount; i++) {
-            customer.purchaseRandomLottery();
-        }
+        int availablePurchaseAmount = LotteryCompany.availablePurchaseAmount(InputView.getTotalPurchasePrice());
+        List<Lottery> manualLotteries = InputView.getManualLotteries(InputView.getManualLotteryAmount());
+        customer.purchaseLotteries(availablePurchaseAmount, manualLotteries);
 
-        List<Lottery> lotteries = customer.getLotteries();
-        printPurchasedLotteryInfos(lotteries);
+        List<Lottery> lotteries = customer.lotteries();
+        ResultView.printLotteriesInfo(lotteries, manualLotteries.size());
 
-        WinningLottery winningLottery = getWinningLottery();
-        LotteryResult lotteryResult = winningLottery.createLotteryResult(lotteries);
-        printResult(lotteryResult);
+        WinningLottery winningLottery = InputView.getWinningLottery();
+        ResultView.printResult(winningLottery.result(lotteries));
     }
 
 }
