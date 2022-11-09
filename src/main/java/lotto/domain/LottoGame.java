@@ -10,7 +10,7 @@ public class LottoGame {
         List<LottoTicket> tickets = new ArrayList<>();
 
         for (int i = 0; i < numberOfTickets(moneyToBuyTicket); i++) {
-            tickets.add(new LottoTicket());
+            tickets.add(LottoTicket.create());
         }
 
         return tickets;
