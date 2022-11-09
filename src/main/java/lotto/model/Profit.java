@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import static lotto.model.Rank.*;
 
@@ -30,9 +31,22 @@ public class Profit {
     }
 
     private int getAllMatchPrice(List<Integer> matchingNumbers) {
-        return THREE.getAllMatchPrice(matchingNumbers.get(0))
-                + FOUR.getAllMatchPrice(matchingNumbers.get(1))
-                + FIVE.getAllMatchPrice(matchingNumbers.get(2))
-                + SIX.getAllMatchPrice(matchingNumbers.get(3));
+        return THREE.calculatePrice(matchingNumbers.get(0))
+                + FOUR.calculatePrice(matchingNumbers.get(1))
+                + FIVE.calculatePrice(matchingNumbers.get(2))
+                + SIX.calculatePrice(matchingNumbers.get(3));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profit profit = (Profit) o;
+        return lottoQuantity == profit.lottoQuantity;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoQuantity);
     }
 }
