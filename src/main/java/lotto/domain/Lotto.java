@@ -1,14 +1,22 @@
 package lotto.domain;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class Lotto
-{
+import static java.util.stream.Collectors.toList;
 
-    private static final int LOTTO_COUNT = 6;
+public class Lotto {
+
+    public static final int LOTTO_COUNT = 6;
     private final Set<LottoNumber> item;
+
+    public static final List<Integer> NUMBER_LIST = IntStream
+        .rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+        .boxed()
+        .collect(toList());
 
     private Lotto(Set<LottoNumber> item) {
         this.item = item;

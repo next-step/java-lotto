@@ -16,6 +16,7 @@ public class LottoWinners {
     }
 
     public static LottoWinners of(List<Lotto> lottoList, Lotto weekendLottoNumber, LottoNumber lottoNumber) {
+        weekendLottoNumber.validBonusNumber(lottoNumber);
         return new LottoWinners(lottoList
             .stream()
             .map(lotto -> match(lotto, weekendLottoNumber, lottoNumber))

@@ -6,11 +6,14 @@ import java.util.Map;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoPlace;
-import lotto.domain.LottoWinners;
 
 public class OutputView {
 
     private OutputView() {
+    }
+
+    public static void printPriceCount(int manualCount, int autoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d를 구매했습니다.\n", manualCount, autoCount);
     }
 
     public static void printLottoList(List<Lotto> lottoList) {
@@ -27,4 +30,6 @@ public class OutputView {
     public static void printYield(double yield) {
         System.out.printf("총 수익률은 %.2f입니다.", yield);
     }
+
+
 }
