@@ -30,20 +30,20 @@ class LottoCollectionTest {
     @Test
     @DisplayName("구매한 로또개수 사이즈를 반환한다")
     void test() {
-        assertThat(collection.checkWinningNumber(numbers).size()).isEqualTo(3);
+        assertThat(collection.findWinner(numbers).size()).isEqualTo(3);
     }
 
     @Test
     @DisplayName("당첨번호와 일치하는 숫자의 개수를 출력한다")
     void test2() {
-        assertThat(collection.checkWinningNumber(numbers)).containsExactly(2,2,0);
+        assertThat(collection.findWinner(numbers)).containsExactly(2,2,0);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3,1", "4,1", "5,0", "6,0"})
+    @CsvSource(value = {"THREE,1", "FOUR,1", "FIVE,0", "SIX,0"})
     @DisplayName("일치하는 번호개수를 카운팅한다")
-    void test3(int element, int expected) {
+    void test3(Rank element, int expected) {
         WinningNumber winningNumber = new WinningNumber(collection, Arrays.asList("3", "5", "10", "11", "13", "18"));
-        assertThat(winningNumber.getMatchingCount(integer -> integer == element)).isEqualTo(expected);
+        assertThat(winningNumber.getMatchingCount(element::event)).isEqualTo(expected);
     }
 }

@@ -10,11 +10,12 @@ public class LottoCollection {
         this.lottos = lottos;
     }
 
-    public List<Integer> checkWinningNumber(List<String> winningNumber) {
+    public List<Integer> findWinner(List<String> winningNumber) {
         List<Integer> inventory = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            inventory.add(lotto.findWinner(winningNumber));
+            inventory.add(lotto.countWinner(winningNumber));
         }
+
         return inventory;
     }
 

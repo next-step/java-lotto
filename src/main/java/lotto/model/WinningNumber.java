@@ -1,37 +1,34 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class WinningNumber {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
     private static final int WINNING_NUMBER_QUANTITY = 6;
-    private static final int FIRST_PLACE = 6;
-    private static final int SECOND_PLACE = 5;
-    private static final int THIRD_PLACE = 4;
-    private static final int FOURTH_PLACE = 3;
-    private final List<Integer> list;
+    private final Map<Rank, Integer> lottoMatch = new EnumMap<>(Rank.class);
 
-    public WinningNumber(LottoCollection collection, List<String> winningNumbers) {
+    public WinningNumber(LottoCollection lottoCollection, List<String> winningNumbers) {
         validation(winningNumbers);
-        this.list = collection.checkWinningNumber(winningNumbers);
+        List<Integer> winnerCollection = lottoCollection.findWinner(winningNumbers);
+
+        for (int i = 0; i < winnerCollection.size(); i++) {
+            lottoMatch.put(Rank.values()[i], winnerCollection.get(i));
+        }
     }
 
-    public List<Integer> getWinningNumberCount() {
-        List<Integer> matchingNumbers = new ArrayList<>();
+    public List<Integer> countWinning() {
+        List<Integer> matchingCount = new ArrayList<>();
 
-        matchingNumbers.add(getMatchingCount(integer -> integer == FOURTH_PLACE));
-        matchingNumbers.add(getMatchingCount(integer -> integer == THIRD_PLACE));
-        matchingNumbers.add(getMatchingCount(integer -> integer == SECOND_PLACE));
-        matchingNumbers.add(getMatchingCount(integer -> integer == FIRST_PLACE));
+        for (Rank rank : Rank.values()) {
+            matchingCount.add(getMatchingCount(rank::event));
+        }
 
-        return matchingNumbers;
+        return matchingCount;
     }
 
     public int getMatchingCount(MatchNumber matchNumber) {
-        return (int) list.stream()
+        return (int) lottoMatch.values().stream()
                 .filter(matchNumber::isMatch)
                 .count();
     }

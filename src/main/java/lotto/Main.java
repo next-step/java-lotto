@@ -20,7 +20,7 @@ public class Main {
         printLottoNumbers(collection);
 
         WinningNumber winningNumber = new WinningNumber(collection,inputWinningNumber());
-        List<Integer> winningNumberCount = winningNumber.getWinningNumberCount();
+        List<Integer> winningNumberCount = winningNumber.countWinning();
 
         Profit profit = new Profit(quantity);
         printResult(winningNumberCount, profit.calculate(winningNumberCount));
