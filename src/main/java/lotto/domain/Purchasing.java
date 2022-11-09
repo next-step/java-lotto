@@ -21,13 +21,13 @@ public class Purchasing {
 
     public Map<WinningType, Integer> getWinningResult(Lotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.matchCnt(winningLotto))
+                .map(lotto -> lotto.matchCount(winningLotto))
                 .collect(Collectors.toList())
                 .stream()
-                .collect(Collectors.toMap(matchCnt -> WinningType.of(matchCnt), value -> 1, Integer::sum));
+                .collect(Collectors.toMap(matchCount -> WinningType.of(matchCount), value -> 1, Integer::sum));
     }
 
-    public int getLottoCnt() {
+    public int getLottoCount() {
         return lottos.size();
     }
 

@@ -13,14 +13,14 @@ public class ManualNumberStrategy implements LottoNumberStrategy {
 
     private static final int START = 1;
     private static final int END = 45;
-    private static final int CNT = 6;
+    private static final int COUNT = 6;
     private static final String SEPARATOR = ",";
     
     private final List<Integer> numbers;
 
     public ManualNumberStrategy(String input) {
         checkNull(input);
-        List<Integer> inputNumbers = inputToNumbers(input);
+        List<Integer> inputNumbers = inputToLottoNumbers(input);
         checkNumbers(inputNumbers);
         numbers = new ArrayList<>(inputNumbers);
     }
@@ -30,7 +30,7 @@ public class ManualNumberStrategy implements LottoNumberStrategy {
         return numbers;
     }
 
-    private List<Integer> inputToNumbers(String input) {
+    private List<Integer> inputToLottoNumbers(String input) {
         return Arrays.stream(input.split(SEPARATOR))
                 .map(strNumber -> {
                     checkNotPositive(strNumber.trim());
@@ -49,13 +49,13 @@ public class ManualNumberStrategy implements LottoNumberStrategy {
         if (!StringUtils.isNumeric(input)) {
             throw new NotPositiveException();
         }
-        if (Integer.parseInt(input) < 0) {
+        if (Integer.parseInt(input) < START) {
             throw new NotPositiveException();
         }
     }
 
     private void checkNumbers(List<Integer> inputNumbers) {
-        if (inputNumbers.size() != CNT) {
+        if (inputNumbers.size() != COUNT) {
             throw new LottoNumberException();
         }
         inputNumbers.forEach(number -> {
@@ -63,7 +63,7 @@ public class ManualNumberStrategy implements LottoNumberStrategy {
                 throw new LottoNumberException();
             }
         });
-        if (inputNumbers.stream().distinct().count() != CNT) {
+        if (inputNumbers.stream().distinct().count() != COUNT) {
             throw new LottoNumberException();
         }
     }

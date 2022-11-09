@@ -10,23 +10,23 @@ public enum WinningType {
     SECOND_PLACE(5, 1_500_000),
     FIRST_PLACE(6, 2_000_000_000);
 
-    private final long matchCnt;
+    private final long matchCount;
     private final int winningAmount;
 
-    WinningType(long matchCnt, int winningAmount) {
-        this.matchCnt = matchCnt;
+    WinningType(long matchCount, int winningAmount) {
+        this.matchCount = matchCount;
         this.winningAmount = winningAmount;
     }
 
-    public static WinningType of(long lottoMatchCnt) {
+    public static WinningType of(long lottoMatchCount) {
         return Arrays.stream(values())
-                .filter(winningType -> winningType.matchCnt == lottoMatchCnt)
+                .filter(winningType -> winningType.matchCount == lottoMatchCount)
                 .findFirst()
                 .orElse(NOT_WINNING);
     }
 
-    public long getMatchCnt() {
-        return matchCnt;
+    public long getMatchCount() {
+        return matchCount;
     }
 
     public int getWinningAmount() {

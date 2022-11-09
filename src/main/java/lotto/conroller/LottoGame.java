@@ -1,7 +1,6 @@
 package lotto.conroller;
 
 import lotto.domain.*;
-import lotto.strategy.ManualNumberStrategy;
 import lotto.view.ResultView;
 import lotto.view.UserInput;
 
@@ -10,20 +9,19 @@ import java.util.Map;
 public class LottoGame {
 
     public void runLottoGame() {
-        Money money = new Money(UserInput.inputMoney());
+        Money money = UserInput.inputMoney();
         collectStatistics(money, buyLotto(money), getWinningLotto());
     }
 
     private Purchasing buyLotto(Money money) {
         Purchasing purchasing = new Purchasing(money);
-        ResultView.printLottoCnt(purchasing.getLottoCnt());
+        ResultView.printLottoCount(purchasing.getLottoCount());
         ResultView.printLottos(purchasing.getLottos());
         return purchasing;
     }
 
     private Lotto getWinningLotto() {
-        String inputWinningLotto = UserInput.inputWinningLotto();
-        return new Lotto(new ManualNumberStrategy(inputWinningLotto));
+        return new Lotto(UserInput.inputWinningLotto());
     }
 
     private void collectStatistics(Money money, Purchasing purchasing, Lotto winningLotto) {

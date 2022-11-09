@@ -14,11 +14,11 @@ public class Lotto {
         numbers = new ArrayList<>(numberStrategy.getNumbers());
     }
 
-    public long matchCnt(Lotto winningLotto) {
-        return winningLotto.winningCnt(numbers);
+    public long matchCount(Lotto winningLotto) {
+        return winningLotto.winningCount(numbers);
     }
 
-    public long winningCnt(List<Integer> lottoNumbers) {
+    public long winningCount(List<Integer> lottoNumbers) {
         return numbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();

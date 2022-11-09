@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Money {
 
-    private static int money;
+    private final int money;
 
     public Money(String input) {
         checkNull(input);

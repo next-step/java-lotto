@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void printLottoCnt(int cnt) {
-        System.out.println(cnt + "개를 구매했습니다.");
+    public static void printLottoCount(int count) {
+        System.out.println(count + "개를 구매했습니다.");
     }
 
     public static void printLottos(List<Lotto> lottos) {
@@ -23,10 +23,10 @@ public class ResultView {
     }
 
     public static void printStatistics(Map<WinningType, Integer> statistics) {
-        statistics.forEach((winningType, cnt)
+        statistics.forEach((winningType, count)
                 -> {
             if (winningType != WinningType.NOT_WINNING) {
-                System.out.println(winningType.getMatchCnt() + "개 일치 (" + winningType.getWinningAmount() + "원)- " + cnt + "개");
+                System.out.println(winningType.getMatchCount() + "개 일치 (" + winningType.getWinningAmount() + "원)- " + count + "개");
             }
         });
     }

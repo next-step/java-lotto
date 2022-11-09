@@ -30,8 +30,8 @@ class LottoTest {
         Lotto lotto3 = new Lotto(() -> Arrays.asList(4,5,6,7,8,9));
         Lotto winningLotto = new Lotto(() -> Arrays.asList(4,5,6,7,8,9));
 
-        assertThat(lotto.matchCnt(winningLotto)).isEqualTo(0);
-        assertThat(lotto2.matchCnt(winningLotto)).isEqualTo(3);
-        assertThat(lotto3.matchCnt(winningLotto)).isEqualTo(6);
+        assertThat(lotto.matchCount(winningLotto)).isEqualTo(0);
+        assertThat(lotto2.matchCount(winningLotto)).isEqualTo(3);
+        assertThat(lotto3.matchCount(winningLotto)).isEqualTo(6);
     }
 }
