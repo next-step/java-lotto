@@ -22,7 +22,8 @@ public final class LottoResultStatistics {
         return getFirstRankPrizeMoney().multiply(getFirstRankCount())
             .plus(getSecondRankPrizeMoney().multiply(getSecondRankCount()))
             .plus(getThirdRankPrizeMoney().multiply(getThirdRankCount()))
-            .plus(getFourthRankPrizeMoney().multiply(getFourthRankCount()));
+            .plus(getFourthRankPrizeMoney().multiply(getFourthRankCount()))
+            .plus(getFifthRankPrizeMoney().multiply(getFifthRankCount()));
     }
 
     public LottoNumberMatchCount getFirstRankLottoNumberMatchCount() {
@@ -71,6 +72,18 @@ public final class LottoResultStatistics {
 
     public Money getFourthRankPrizeMoney() {
         return LottoResult.FOURTH.getPrizeMoney();
+    }
+
+    public LottoNumberMatchCount getFifthRankLottoNumberMatchCount() {
+        return LottoResult.FIFTH.getLottoNumberMatchCount();
+    }
+
+    public int getFifthRankCount() {
+        return getCount(LottoResult.FIFTH);
+    }
+
+    public Money getFifthRankPrizeMoney() {
+        return LottoResult.FIFTH.getPrizeMoney();
     }
 
     private int getCount(final LottoResult result) {
