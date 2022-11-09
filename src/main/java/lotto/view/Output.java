@@ -76,8 +76,12 @@ public class Output {
 
     private static boolean matchNumber(List<Lotto> lottoList, Integer number) {
         for (int i = 0; i < lottoList.size(); i++) {
-            for (int j = 0; j < lottoList.get(i).getNumberList().size(); j++) {
-                if (lottoList.get(i).getNumberList().get(j).getNumber() == number) {
+
+            List<LottoNumber> lottolist = lottoList.get(i).getNumberList();
+            for (int j = 0; j < lottolist.size(); j++) {
+
+                int matchNumber = lottolist.get(j).getNumber();
+                if (matchNumber == number) {
                     return true;
                 }
             }
