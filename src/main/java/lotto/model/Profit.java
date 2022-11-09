@@ -2,12 +2,10 @@ package lotto.model;
 
 import java.util.List;
 
+import static lotto.model.Rank.*;
+
 public class Profit {
     public static final int LOTTO_PRICE = 1000;
-    private static final int SAME_THREE_NUMBER_PRICE = 5000;
-    private static final int SAME_FOUR_NUMBER_PRICE = 50000;
-    private static final int SAME_FIVE_NUMBER_PRICE = 1500000;
-    private static final int SAME_SIX_NUMBER_PRICE = 2000000000;
     private final int lottoQuantity;
 
     public Profit(int lottoQuantity) {
@@ -32,9 +30,9 @@ public class Profit {
     }
 
     private int getAllMatchPrice(List<Integer> matchingNumbers) {
-        return matchingNumbers.get(0) * SAME_THREE_NUMBER_PRICE
-                + matchingNumbers.get(1) * SAME_FOUR_NUMBER_PRICE
-                + matchingNumbers.get(2) * SAME_FIVE_NUMBER_PRICE
-                + matchingNumbers.get(3) * SAME_SIX_NUMBER_PRICE;
+        return THREE.getAllMatchPrice(matchingNumbers.get(0))
+                + FOUR.getAllMatchPrice(matchingNumbers.get(1))
+                + FIVE.getAllMatchPrice(matchingNumbers.get(2))
+                + SIX.getAllMatchPrice(matchingNumbers.get(3));
     }
 }
