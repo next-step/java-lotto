@@ -1,4 +1,4 @@
-package dto.string_calculator;
+package domain.string_calculator;
 
 public class TotalNumber {
     private long total;
