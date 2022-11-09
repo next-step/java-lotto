@@ -1,17 +1,14 @@
 package ui;
 
-import domain.lottery.LotteryWinningService;
-import domain.ticket.TicketCountService;
-import domain.ticket.TicketNumberService;
+import domain.lottery.RewardLotteryTickets;
+import service.LotteryService;
 import ui.common.InputView;
 import ui.common.Result;
-import dto.lottery.LotteryTicket;
-import dto.lottery.LotteryTickets;
-import dto.lottery.WinnerLotteryTicket;
+import domain.lottery.LotteryTicket;
+import domain.lottery.LotteryTickets;
+import domain.lottery.WinnerLotteryTicket;
 import util.Calculator;
 import util.Converter;
-
-import java.util.List;
 
 import static constant.LotteryRules.DEFAULT_LOTTERY_TICKET_PRICE;
 
@@ -19,26 +16,24 @@ public class AutoResultView implements Result {
     private final String DELIMITER = ", ";
     private LotteryTickets lotteryTickets;
     private WinnerLotteryTicket winnerLotteryTicket;
+    private RewardLotteryTickets rewardLotteryTickets;
 
     @Override
     public void printAll() {
-        LotteryWinningService lotteryWinningService = new LotteryWinningService();
-        TicketNumberService ticketNumberService = new TicketNumberService();
-        TicketCountService ticketCountService = new TicketCountService();
+        LotteryService lotteryService = new LotteryService();
 
-        printTicketNumbers(ticketCountService, ticketNumberService);
-        printLotteryResult(lotteryWinningService, ticketNumberService);
+        printTicketNumbers();
+        printLotteryResult(lotteryService);
     }
 
     @Override
-    public void printTicketNumbers(TicketCountService ticketCountService, TicketNumberService ticketNumberService) {
+    public void printTicketNumbers() {
         System.out.println("구입금액을 입력해 주세요.");
 
-        long countOfLotteryTickets = ticketCountService.countOfLotteryTickets(InputView.inputInteger());
-        System.out.println(countOfLotteryTickets + "개를 구매했습니다.");
+        long amount = InputView.inputInteger();
 
-        List<LotteryTicket> lotteryTicketList = ticketNumberService.generateLotteryTicketNumbers(countOfLotteryTickets);
-        lotteryTickets = new LotteryTickets(lotteryTicketList);
+        lotteryTickets = new LotteryTickets(amount);
+        System.out.println(lotteryTickets.getLotteryTickets().size() + "개를 구매했습니다.");
 
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             System.out.println(lotteryTicket.getTicketNumbers());
@@ -51,19 +46,20 @@ public class AutoResultView implements Result {
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusTicketNumber = InputView.inputInteger();
         winnerLotteryTicket = new WinnerLotteryTicket(winnerTicket, bonusTicketNumber);
+        rewardLotteryTickets = new RewardLotteryTickets(lotteryTickets, winnerLotteryTicket);
     }
 
     @Override
-    public void printLotteryResult(LotteryWinningService lotteryWinningService, TicketNumberService ticketNumberService) {
+    public void printLotteryResult(LotteryService lotteryService) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        System.out.println("3개 일치 (5000원)- " + lotteryWinningService.countOfLotteryWinners(3, lotteryTickets.getLotteryTickets(), winnerLotteryTicket, ticketNumberService) + "개");
-        System.out.println("4개 일치 (50000원)- " + lotteryWinningService.countOfLotteryWinners(4, lotteryTickets.getLotteryTickets(), winnerLotteryTicket, ticketNumberService) + "개");
-        System.out.println("5개 일치 (1500000원)- " + lotteryWinningService.countOfLotteryWinners(5, lotteryTickets.getLotteryTickets(), winnerLotteryTicket, ticketNumberService) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + lotteryWinningService.countOfLotteryWinners(5.5, lotteryTickets.getLotteryTickets(), winnerLotteryTicket, ticketNumberService) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + lotteryWinningService.countOfLotteryWinners(6, lotteryTickets.getLotteryTickets(), winnerLotteryTicket, ticketNumberService) + "개");
-        System.out.println("총 수익률은 " + Calculator.rateOfProfit((long) lotteryTickets.getLotteryTickets().size() * DEFAULT_LOTTERY_TICKET_PRICE, lotteryWinningService.findTotalRewards(lotteryTickets, winnerLotteryTicket, ticketNumberService)) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("3개 일치 (5000원)- " + lotteryService.countOfLotteryWinners(3, rewardLotteryTickets) + "개");
+        System.out.println("4개 일치 (50000원)- " + lotteryService.countOfLotteryWinners(4, rewardLotteryTickets) + "개");
+        System.out.println("5개 일치 (1500000원)- " + lotteryService.countOfLotteryWinners(5, rewardLotteryTickets) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + lotteryService.countOfLotteryWinners(7, rewardLotteryTickets) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + lotteryService.countOfLotteryWinners(6, rewardLotteryTickets) + "개");
+        System.out.println("총 수익률은 " + Calculator.rateOfProfit((long) lotteryTickets.getLotteryTickets().size() * DEFAULT_LOTTERY_TICKET_PRICE, lotteryService.findTotalRewards(new RewardLotteryTickets(lotteryTickets, winnerLotteryTicket))) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

@@ -1,13 +1,11 @@
 package ui.common;
 
-import domain.lottery.LotteryWinningService;
-import domain.ticket.TicketCountService;
-import domain.ticket.TicketNumberService;
+import service.LotteryService;
 
 public interface Result {
     void printAll();
 
-    void printTicketNumbers(TicketCountService ticketCountService, TicketNumberService ticketNumberService);
+    void printTicketNumbers();
 
-    void printLotteryResult(LotteryWinningService lotteryWinningService, TicketNumberService ticketNumberService);
+    void printLotteryResult(LotteryService lotteryService);
 }

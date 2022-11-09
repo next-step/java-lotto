@@ -1,5 +1,5 @@
-import dto.string_calculator.*;
-import dto.string_calculator.Number;
+import domain.string_calculator.*;
+import domain.string_calculator.Number;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
