@@ -38,20 +38,26 @@ public class LottoGame {
     }
 
     public void winningStatistics(LottoTickets lottoTickets) throws IOException {
-        InfusedNumbersGenerator infusedNumbersGenerator = new InfusedNumbersGenerator(consoleInputView.winningNumbers());
-        LottoTicket winningLottoTicket = LottoTicket.from(infusedNumbersGenerator);
+        LottoTicket lottoTicket = lottoTicket();
+        int bonusNumber = consoleInputView.bonusNumber();
 
-        printMatchIndicator(lottoTickets, winningLottoTicket);
-        printYield(lottoTickets, winningLottoTicket);
+        RankJudgmentInformation rankJudgmentInformation = new RankJudgmentInformation(bonusNumber, lottoTicket);
+        printMatchIndicator(lottoTickets, rankJudgmentInformation);
+        printYield(lottoTickets, rankJudgmentInformation);
     }
 
-    private void printMatchIndicator(LottoTickets lottoTickets, LottoTicket winningLottoTicket) {
-        MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(winningLottoTicket);
+    private LottoTicket lottoTicket() throws IOException {
+        InfusedNumbersGenerator infusedNumbersGenerator = new InfusedNumbersGenerator(consoleInputView.winningNumbers());
+        return LottoTicket.from(infusedNumbersGenerator);
+    }
+
+    private void printMatchIndicator(LottoTickets lottoTickets, RankJudgmentInformation rankJudgmentInformation) {
+        MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(rankJudgmentInformation);
         consoleOutputView.printMatchIndicator(matchIndicatorCalculator.matchIndicators());
     }
 
-    private void printYield(LottoTickets lottoTickets, LottoTicket winningLottoTicket) {
-        YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(winningLottoTicket);
+    private void printYield(LottoTickets lottoTickets, RankJudgmentInformation rankJudgmentInformation) {
+        YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(rankJudgmentInformation);
         consoleOutputView.printYield(yieldCalculator.yield());
     }
 

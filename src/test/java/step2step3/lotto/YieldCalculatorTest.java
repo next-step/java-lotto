@@ -12,7 +12,7 @@ class YieldCalculatorTest {
     void 수익률을_계산할_수_있다() {
         YieldCalculator yieldCalculator = new YieldCalculator(1000, List.of(Rank.FOURTH));
 
-        assertThat(yieldCalculator.yield()).isEqualTo(5.0);
+        assertThat(yieldCalculator.yield()).isEqualTo(50.0);
     }
 
 }

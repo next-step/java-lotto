@@ -33,7 +33,7 @@ public class MatchIndicatorCalculator {
     }
 
     private TreeMap<Rank, Long> sortedRanks(Map<Rank, Long> ranks) {
-        TreeMap<Rank, Long> sortedRanks = new TreeMap<>(Comparator.comparing(Rank::numberOfMatchingNumbers));
+        TreeMap<Rank, Long> sortedRanks = new TreeMap<>(Comparator.comparing(Rank::prizeAmount));
         sortedRanks.putAll(ranks);
         return sortedRanks;
     }
