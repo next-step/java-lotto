@@ -15,6 +15,7 @@ public class LottoApp {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         PurchaseMoney purchaseMoney = inputView.inputPurchaseMoney();
+        int manualLottoCount = inputView.inputManualLottoCount();
 
         LottoShop lottoShop = new LottoShop();
         Lottos lottos = lottoShop.purchase(purchaseMoney);
