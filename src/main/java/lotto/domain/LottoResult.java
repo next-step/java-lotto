@@ -36,10 +36,29 @@ public enum LottoResult {
     ) {
         return Arrays.stream(values())
             .filter(result ->
-                result.lottoNumberMatchCount.equals(lottoNumberMatchCount)
-                    && result.matchBonusBall == matchBonusBall)
+                result.isSameLottoNumberMatchCount(lottoNumberMatchCount)
+                    && result.isMatchedBonusBall(matchBonusBall))
             .findFirst()
             .orElse(LottoResult.NOTHING);
+    }
+
+    public boolean isSameLottoNumberMatchCount(final LottoNumberMatchCount other) {
+        return this.lottoNumberMatchCount.equals(other);
+    }
+
+    public boolean isMatchedBonusBall(final boolean matchBonusBall) {
+        if (canSkipBonusBallMatchResult()) {
+            return true;
+        }
+        return this.matchBonusBall == matchBonusBall;
+    }
+
+    private boolean canSkipBonusBallMatchResult() {
+        // 정의된 로또등수의 보너스볼 포함여부가 false일경우, 보너스 볼 일치 여부는 판단하지 않는다
+        if (this.matchBonusBall == false) {
+            return true;
+        }
+        return false;
     }
 
     public Money getPrizeMoney() {
