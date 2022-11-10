@@ -9,10 +9,6 @@ public class WinningLottoInformation {
         this.winningLottoTicket = winningLottoTicket;
     }
 
-    public LottoTicket winningLottoTicket() {
-        return winningLottoTicket;
-    }
-
     public Rank matchedRank(LottoTicket lottoTicket) {
         Rank rank = winningLottoTicket.rank(lottoTicket);
 
