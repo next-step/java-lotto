@@ -1,9 +1,9 @@
 package step2step3.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoTickets {
 
@@ -38,31 +38,17 @@ public class LottoTickets {
     }
 
     public YieldCalculator yieldCalculator(RankJudgmentInformation rankJudgmentInformation) {
-        return new YieldCalculator(lottoPrice, ranks(rankJudgmentInformation));
+        return new YieldCalculator(lottoPrice, machtedRanks(rankJudgmentInformation));
     }
 
-    private List<Rank> ranks(RankJudgmentInformation rankJudgmentInformation) {
-        List<Rank> ranks = new ArrayList<>();
-        ranks.addAll(ranksExcludingSecond(rankJudgmentInformation.winningLottoTicket()));
-        ranks.addAll(secondRanks(rankJudgmentInformation));
-        return ranks;
-    }
-
-    private List<Rank> ranksExcludingSecond(LottoTicket winningLottoTicket) {
+    private List<Rank> machtedRanks(RankJudgmentInformation rankJudgmentInformation) {
         return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.rank(winningLottoTicket))
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    private List<Rank> secondRanks(RankJudgmentInformation rankJudgmentInformation) {
-        return lottoTickets.stream()
-                .filter(rankJudgmentInformation::isSecond)
-                .map(lottoTicket -> Rank.SECOND)
-                .collect(Collectors.toList());
+                .map(rankJudgmentInformation::matchedRank)
+                .collect(toList());
     }
 
     public MatchIndicatorCalculator matchIndicatorCalculator(RankJudgmentInformation rankJudgmentInformation) {
-        return new MatchIndicatorCalculator(ranks(rankJudgmentInformation));
+        return new MatchIndicatorCalculator(machtedRanks(rankJudgmentInformation));
     }
 }
 
