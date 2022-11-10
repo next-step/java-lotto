@@ -1,36 +1,13 @@
 package lotto.domain;
 
 import lotto.exception.DuplicateLottoNumberException;
-import lotto.exception.NotPositiveException;
-import org.apache.commons.lang3.StringUtils;
 
 public class BonusBall {
-    int lottoNumber;
+    LottoNumber lottoNumber;
 
     public BonusBall(String input, Lotto winningLotto) {
-        checkNull(input);
-        lottoNumber = inputToBonusBall(input);
+        lottoNumber = new LottoNumber(input);
         checkDuplicate(winningLotto);
-    }
-
-    private int inputToBonusBall(String input) {
-        checkNotPositive(input);
-        return Integer.parseInt(input);
-    }
-
-    private void checkNull(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new NotPositiveException();
-        }
-    }
-
-    private void checkNotPositive(String input) {
-        if (!StringUtils.isNumeric(input)) {
-            throw new NotPositiveException();
-        }
-        if (Integer.parseInt(input) < 1) {
-            throw new NotPositiveException();
-        }
     }
 
     private void checkDuplicate(Lotto winningLotto) {
@@ -38,7 +15,4 @@ public class BonusBall {
             throw new DuplicateLottoNumberException();
         }
     }
-
-
-
 }

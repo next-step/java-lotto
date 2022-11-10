@@ -11,11 +11,11 @@ public class LottoNumbers {
     private LottoNumbers() {
     }
 
-    public static List<Integer> getLottoNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+    public static List<LottoNumber> getLottoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = START; i < END; i++) {
-            numbers.add(i);
+            lottoNumbers.add(new LottoNumber(i));
         }
-        return numbers;
+        return lottoNumbers;
     }
 }

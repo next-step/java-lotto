@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningType;
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,7 +17,7 @@ public class ResultView {
 
     public static void printLottos(List<Lotto> lottos) {
         lottos.forEach(lotto -> {
-            List<Integer> lottoNumbers = lotto.getNumbers();
+            List<LottoNumber> lottoNumbers = lotto.getNumbers();
             Collections.sort(lottoNumbers);
             System.out.println("[" + StringUtils.join(lottoNumbers, ", ") + "]");
         });

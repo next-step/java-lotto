@@ -1,29 +1,23 @@
 package lotto.domain;
 
 import lotto.exception.NotPositiveException;
-import org.apache.commons.lang3.StringUtils;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Money {
 
+    private static final Pattern POSITIVE_PATTERN = Pattern.compile("^[0-9]*$");
     private final int money;
 
     public Money(String input) {
-        checkNull(input);
-        checkNotPositive(input);
+        checkPositive(input);
         money = Integer.parseInt(input);
     }
 
-    private void checkNull(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new NotPositiveException();
-        }
-    }
-
-    private static void checkNotPositive(String input) {
-        if (!StringUtils.isNumeric(input)) {
-            throw new NotPositiveException();
-        }
-        if (Integer.parseInt(input) < 0) {
+    private void checkPositive(String input) {
+        Matcher matcher = POSITIVE_PATTERN.matcher(input);
+        if (!matcher.find()) {
             throw new NotPositiveException();
         }
     }
