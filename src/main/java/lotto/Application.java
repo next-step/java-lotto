@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -22,16 +23,19 @@ import lotto.view.ResultView;
 public class Application {
 
     private static final Money DEFAULT_LOTTO_FEE = Money.wons(1_000);
-    private static final LottoNumbersSupplier lottoNumbersSupplier = new UniqueLottoNumbersSupplier();
+    private static final LottoNumbersSupplier autoLottoNumbersSupplier = new UniqueLottoNumbersSupplier();
 
     public static void main(final String[] args) {
         final LottoCustomer customer = new LottoCustomer(getValidLottoPurchaseMoney());
         final int maxCount = customer.getPurchasableCount(DEFAULT_LOTTO_FEE);
+        final int manualCount = getValidManualLottoCount(maxCount);
+        final List<LottoTicket> manualTickets = getValidManualLottoTickets(manualCount);
+        final List<LottoTicket> autoTickets = createAutoLottoTickets(maxCount - manualCount);
 
-        final LottoStore store = new LottoStore(createLottoTickets(maxCount));
-        store.sellAllTo(customer);
+        final LottoStore lottoStore = new LottoStore(mergeTickets(manualTickets, autoTickets));
+        lottoStore.sellAllTo(customer);
 
-        ResultView.printPurchasedCount(customer.getPurchasedCount());
+        ResultView.printPurchasedCount(manualTickets.size(), autoTickets.size());
         ResultView.printPurchaseLottoNumbers(customer.getPurchasedLottoNumbers());
         ResultView.printResult(createResultCalculator(customer.getPurchasedLottoTickets()));
     }
@@ -52,16 +56,55 @@ public class Application {
         return parseMoney(InputView.getLottoPurchaseMoney());
     }
 
-    private static List<LottoTicket> createLottoTickets(final int count) {
-        return mapToTickets(createUniqueLottoNumbers(count));
+    private static int getValidManualLottoCount(final int maxCount) {
+        return getValueUntilValid(() -> getManualLottoCount(maxCount));
     }
 
-    private static List<LottoNumbers> createUniqueLottoNumbers(final int count) {
+    private static int getManualLottoCount(final int maxCount) {
+        final int manualLottoCount = getManualLottoCountFromInput();
+        if (manualLottoCount > maxCount) {
+            throw new LottoException("해당 개수만큼 로또 구입이 불가능합니다");
+        }
+        return manualLottoCount;
+    }
+
+    private static int getManualLottoCountFromInput() {
+        return parseInt(InputView.getManualLottoCount());
+    }
+
+    private static List<LottoTicket> getValidManualLottoTickets(final int count) {
+        return mapToTickets(getValidManualLottoNumbers(count));
+    }
+
+    private static List<LottoNumbers> getValidManualLottoNumbers(final int count) {
+        return getValueUntilValid(() -> getManualLottoNumbersFromInput(count));
+    }
+
+    private static List<LottoNumbers> getManualLottoNumbersFromInput(final int count) {
+        return InputView.getManualLottoNumbers(count).stream()
+            .map(Application::mapToLottoNumbers)
+            .collect(Collectors.toList());
+    }
+
+    private static List<LottoTicket> createAutoLottoTickets(final int count) {
+        return mapToTickets(createAutoLottoNumbers(count));
+    }
+
+    private static List<LottoNumbers> createAutoLottoNumbers(final int count) {
         final List<LottoNumbers> result = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
-            result.add(lottoNumbersSupplier.get());
+            result.add(autoLottoNumbersSupplier.get());
         }
         return result;
+    }
+
+    private static List<LottoTicket> mergeTickets(
+        final List<LottoTicket> manualTickets,
+        final List<LottoTicket> autoTickets
+    ) {
+        final List<LottoTicket> merged = new ArrayList<>(manualTickets);
+        merged.addAll(autoTickets);
+        return Collections.unmodifiableList(merged);
     }
 
     private static <T> T getValueUntilValid(final Supplier<T> supplier) {

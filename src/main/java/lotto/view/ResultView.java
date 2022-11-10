@@ -18,7 +18,7 @@ public final class ResultView {
     private static final String LOTTO_RESULT_STATS_BODY_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String LOTTO_RESULT_STATS_BONUS_BODY_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String PROFIT_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
-    private static final String PURCHASED_COUNT_MESSAGE_FORMAT = "%d개를 구매했습니다.";
+    private static final String PURCHASED_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String PURCHASED_LOTTO_NUMBERS_MESSAGE_FORMAT = "[%s]";
 
     private ResultView() {
@@ -36,8 +36,8 @@ public final class ResultView {
         print(exception.getMessage());
     }
 
-    public static void printPurchasedCount(final int purchasedCount) {
-        print(String.format(PURCHASED_COUNT_MESSAGE_FORMAT, purchasedCount));
+    public static void printPurchasedCount(final int manualLottoCount, final int autoLottoCount) {
+        print(String.format(PURCHASED_COUNT_FORMAT, manualLottoCount, autoLottoCount));
     }
 
     public static void printPurchaseLottoNumbers(final List<LottoNumbers> lottoNumbers) {
