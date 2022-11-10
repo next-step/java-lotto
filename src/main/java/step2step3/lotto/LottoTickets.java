@@ -38,17 +38,17 @@ public class LottoTickets {
     }
 
     public YieldCalculator yieldCalculator(WinningLottoInformation winningLottoInformation) {
-        return new YieldCalculator(lottoPrice, machtedRanks(winningLottoInformation));
+        return new YieldCalculator(lottoPrice, matchedRanks(winningLottoInformation));
     }
 
-    private List<Rank> machtedRanks(WinningLottoInformation winningLottoInformation) {
+    private List<Rank> matchedRanks(WinningLottoInformation winningLottoInformation) {
         return lottoTickets.stream()
                 .map(winningLottoInformation::matchedRank)
                 .collect(toList());
     }
 
     public MatchIndicatorCalculator matchIndicatorCalculator(WinningLottoInformation winningLottoInformation) {
-        return new MatchIndicatorCalculator(machtedRanks(winningLottoInformation));
+        return new MatchIndicatorCalculator(matchedRanks(winningLottoInformation));
     }
 }
 
