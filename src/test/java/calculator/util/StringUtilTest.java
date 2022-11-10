@@ -1,29 +1,55 @@
 package calculator.util;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringUtilTest {
-
+    private static final StringUtil stringUtil = new StringUtil();
     @Test
-    public void checkNullTest(){
+    public void isNullTest(){
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new StringUtil().checkNullOrEmpty(null);
+            stringUtil.isNullOrEmpty(null);
         });
     }
 
     @ParameterizedTest
+    @DisplayName("isEmptyTest")
     @ValueSource(strings={""})
-    public void checkEmptyTest(String input){
+    public void isEmptyTest(String input){
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new StringUtil().checkNullOrEmpty(input);
+            stringUtil.isNullOrEmpty(input);
         });
     }
 
+    @ParameterizedTest
+    @DisplayName("isRigthStringTest")
+    @ValueSource(strings={"1 2 3 + - / *"})
+    public void isRigthStringTest(String string){
+        assertTrue(stringUtil.isRightString(string));
+    }
 
+    @ParameterizedTest
+    @DisplayName("isWrongStringTest")
+    @ValueSource(strings={"a b","& % ^"})
+    public void isWrongStringTest(String string){
+        assertThatIllegalArgumentException().isThrownBy(()->{
+            stringUtil.isRightString(string);
+        });
+        //.isInstanceOf(IllegalArgumentException.class).withMessage("올바르지 않은 입력값 입니다.");
+    }
 
+    @Test
+    public void splitStringTest(){
+        String s="1 + 2 - 3";
+        List<String> expectedList =List.of("1","+","2","-","3");
+        assertThat(stringUtil.splitString(s)).isEqualTo(expectedList);
+    }
 }
