@@ -22,14 +22,24 @@ class LottoTest {
     }
 
     @Test
-    void 당첨번호_개수() {
-        Lotto lotto = new Lotto(new ManualNumberStrategy("40,41,42,43,44,45"));
-        Lotto lotto2 = new Lotto(new ManualNumberStrategy("1,2,3,4,5,6"));
-        Lotto lotto3 = new Lotto(new ManualNumberStrategy("4,5,6,7,8,9"));
-        Lotto winningLotto = new Lotto(new ManualNumberStrategy("4,5,6,7,8,9"));
+    void 꽝_5등() {
+        Lotto lotto = new Lotto(new ManualNumberStrategy("1,2,42,43,44,45"));
+        Lotto lotto2 = new Lotto(new ManualNumberStrategy("1,2,3,43,44,45"));
+        Lotto winningLotto = new Lotto(new ManualNumberStrategy("1,2,3,4,5,6"));
+        BonusBall bonusBall = new BonusBall("7", winningLotto);
 
-        assertThat(lotto.matchCount(winningLotto)).isEqualTo(0);
-        assertThat(lotto2.matchCount(winningLotto)).isEqualTo(3);
-        assertThat(lotto3.matchCount(winningLotto)).isEqualTo(6);
+        assertThat(lotto.matchWinningLotto(winningLotto, bonusBall)).isEqualTo(WinningType.NOT_WINNING);
+        assertThat(lotto2.matchWinningLotto(winningLotto, bonusBall)).isEqualTo(WinningType.FIVE_PLACE);
+    }
+
+    @Test
+    void 당첨_2등_3등() {
+        Lotto lotto = new Lotto(new ManualNumberStrategy("1,2,3,4,5,10"));
+        Lotto lotto2 = new Lotto(new ManualNumberStrategy("1,2,3,4,5,7"));
+        Lotto winningLotto = new Lotto(new ManualNumberStrategy("1,2,3,4,5,6"));
+        BonusBall bonusBall = new BonusBall("7", winningLotto);
+
+        assertThat(lotto.matchWinningLotto(winningLotto, bonusBall)).isEqualTo(WinningType.THIRD_PLACE);
+        assertThat(lotto2.matchWinningLotto(winningLotto, bonusBall)).isEqualTo(WinningType.SECOND_PLACE);
     }
 }

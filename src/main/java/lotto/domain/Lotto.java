@@ -14,14 +14,22 @@ public class Lotto {
         lottoNumbers = new ArrayList<>(numberStrategy.getLottoNumbers());
     }
 
+    public WinningType matchWinningLotto(Lotto winningLotto, BonusBall bonusBall) {
+        return WinningType.of(matchCount(winningLotto), matchBonus(bonusBall));
+    }
+
     public long matchCount(Lotto winningLotto) {
         return winningLotto.winningCount(lottoNumbers);
     }
 
-    public long winningCount(List<LottoNumber> lottoNumbers) {
+    private long winningCount(List<LottoNumber> lottoNumbers) {
         return this.lottoNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
+    }
+
+    private boolean matchBonus(BonusBall bonusBall) {
+        return lottoNumbers.contains(bonusBall.getLottoNumber());
     }
 
     public boolean containLottoNumber(LottoNumber lottoNumber) {

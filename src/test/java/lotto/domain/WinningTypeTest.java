@@ -14,21 +14,22 @@ class WinningTypeTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2})
     void 숫자일치_3개_미만(int matchCount) {
-        assertThat(WinningType.of(matchCount)).isEqualTo(WinningType.NOT_WINNING);
+        assertThat(WinningType.of(matchCount, false)).isEqualTo(WinningType.NOT_WINNING);
     }
 
     @ParameterizedTest
     @MethodSource("provideIntsWinningType")
-    void 숫자일치_3개_이상(int matchCount, WinningType winningType) {
-        assertThat(WinningType.of(matchCount)).isEqualTo(winningType);
+    void 숫자일치_3개_이상(int matchCount, boolean matchBonus, WinningType winningType) {
+        assertThat(WinningType.of(matchCount, matchBonus)).isEqualTo(winningType);
     }
 
     private static Stream<Arguments> provideIntsWinningType() {
         return Stream.of(
-                Arguments.of(3, WinningType.FOURTH_PLACE),
-                Arguments.of(4, WinningType.THIRD_PLACE),
-                Arguments.of(5, WinningType.SECOND_PLACE),
-                Arguments.of(6, WinningType.FIRST_PLACE)
+                Arguments.of(3, false, WinningType.FIVE_PLACE),
+                Arguments.of(4, false, WinningType.FOURTH_PLACE),
+                Arguments.of(5, false, WinningType.THIRD_PLACE),
+                Arguments.of(5, true, WinningType.SECOND_PLACE),
+                Arguments.of(6, false, WinningType.FIRST_PLACE)
         );
     }
 }

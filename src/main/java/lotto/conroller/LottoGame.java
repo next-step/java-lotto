@@ -10,7 +10,7 @@ public class LottoGame {
 
     public void runLottoGame() {
         Money money = UserInput.inputMoney();
-        collectStatistics(money, buyLotto(money), getWinningLotto());
+        collectStatistics(money, getWinningResult(buyLotto(money)));
     }
 
     private Purchasing buyLotto(Money money) {
@@ -20,12 +20,14 @@ public class LottoGame {
         return purchasing;
     }
 
-    private Lotto getWinningLotto() {
-        return new Lotto(UserInput.inputWinningLotto());
+    private Map<WinningType, Integer> getWinningResult(Purchasing purchasing) {
+        Lotto winningLotto = new Lotto(UserInput.inputWinningLotto());
+        BonusBall bonusBall = UserInput.inputBonusBall(winningLotto);
+        return purchasing.getWinningResult(winningLotto, bonusBall);
     }
 
-    private void collectStatistics(Money money, Purchasing purchasing, Lotto winningLotto) {
-        Statistics statistics = new Statistics(purchasing.getWinningResult(winningLotto));
+    private void collectStatistics(Money money, Map<WinningType, Integer> winningResult) {
+        Statistics statistics = new Statistics(winningResult);
         Map<WinningType, Integer> statisticsResult = statistics.getStatistics();
         ResultView.printResultMessage();
         ResultView.printStatistics(statisticsResult);

@@ -19,12 +19,10 @@ public class Purchasing {
         }
     }
 
-    public Map<WinningType, Integer> getWinningResult(Lotto winningLotto) {
+    public Map<WinningType, Integer> getWinningResult(Lotto winningLotto, BonusBall bonusBall) {
         return lottos.stream()
-                .map(lotto -> lotto.matchCount(winningLotto))
-                .collect(Collectors.toList())
-                .stream()
-                .collect(Collectors.toMap(matchCount -> WinningType.of(matchCount), value -> 1, Integer::sum));
+                .map(lotto -> lotto.matchWinningLotto(winningLotto, bonusBall))
+                .collect(Collectors.toMap(winningType -> winningType, value -> 1, Integer::sum));
     }
 
     public int getLottoCount() {
