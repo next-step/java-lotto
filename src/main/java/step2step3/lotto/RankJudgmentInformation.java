@@ -9,15 +9,19 @@ public class RankJudgmentInformation {
         this.winningLottoTicket = winningLottoTicket;
     }
 
-    public boolean isSecond(LottoTicket lottoTicket) {
-        if (!lottoTicket.hasBonusNumber(bonusNumber)) {
-            return false;
-        }
-
-        return lottoTicket.rank(winningLottoTicket) == Rank.THIRD;
-    }
-
     public LottoTicket winningLottoTicket() {
         return winningLottoTicket;
+    }
+
+    public Rank matchedRank(LottoTicket lottoTicket) {
+        Rank rank = winningLottoTicket.rank(lottoTicket);
+
+        return isSecond(lottoTicket, rank)
+                ? Rank.SECOND
+                : rank;
+    }
+
+    private boolean isSecond(LottoTicket lottoTicket, Rank rank) {
+        return lottoTicket.hasBonusNumber(bonusNumber) && rank == Rank.THIRD;
     }
 }
