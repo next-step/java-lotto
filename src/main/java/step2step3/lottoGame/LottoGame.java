@@ -41,9 +41,9 @@ public class LottoGame {
         LottoTicket lottoTicket = lottoTicket();
         int bonusNumber = consoleInputView.bonusNumber();
 
-        RankJudgmentInformation rankJudgmentInformation = new RankJudgmentInformation(bonusNumber, lottoTicket);
-        printMatchIndicator(lottoTickets, rankJudgmentInformation);
-        printYield(lottoTickets, rankJudgmentInformation);
+        WinningLottoInformation winningLottoInformation = new WinningLottoInformation(bonusNumber, lottoTicket);
+        printMatchIndicator(lottoTickets, winningLottoInformation);
+        printYield(lottoTickets, winningLottoInformation);
     }
 
     private LottoTicket lottoTicket() throws IOException {
@@ -51,13 +51,13 @@ public class LottoGame {
         return LottoTicket.from(infusedNumbersGenerator);
     }
 
-    private void printMatchIndicator(LottoTickets lottoTickets, RankJudgmentInformation rankJudgmentInformation) {
-        MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(rankJudgmentInformation);
+    private void printMatchIndicator(LottoTickets lottoTickets, WinningLottoInformation winningLottoInformation) {
+        MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(winningLottoInformation);
         consoleOutputView.printMatchIndicator(matchIndicatorCalculator.matchIndicators());
     }
 
-    private void printYield(LottoTickets lottoTickets, RankJudgmentInformation rankJudgmentInformation) {
-        YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(rankJudgmentInformation);
+    private void printYield(LottoTickets lottoTickets, WinningLottoInformation winningLottoInformation) {
+        YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(winningLottoInformation);
         consoleOutputView.printYield(yieldCalculator.yield());
     }
 

@@ -37,18 +37,18 @@ public class LottoTickets {
         return Objects.hash(lottoTickets);
     }
 
-    public YieldCalculator yieldCalculator(RankJudgmentInformation rankJudgmentInformation) {
-        return new YieldCalculator(lottoPrice, machtedRanks(rankJudgmentInformation));
+    public YieldCalculator yieldCalculator(WinningLottoInformation winningLottoInformation) {
+        return new YieldCalculator(lottoPrice, machtedRanks(winningLottoInformation));
     }
 
-    private List<Rank> machtedRanks(RankJudgmentInformation rankJudgmentInformation) {
+    private List<Rank> machtedRanks(WinningLottoInformation winningLottoInformation) {
         return lottoTickets.stream()
-                .map(rankJudgmentInformation::matchedRank)
+                .map(winningLottoInformation::matchedRank)
                 .collect(toList());
     }
 
-    public MatchIndicatorCalculator matchIndicatorCalculator(RankJudgmentInformation rankJudgmentInformation) {
-        return new MatchIndicatorCalculator(machtedRanks(rankJudgmentInformation));
+    public MatchIndicatorCalculator matchIndicatorCalculator(WinningLottoInformation winningLottoInformation) {
+        return new MatchIndicatorCalculator(machtedRanks(winningLottoInformation));
     }
 }
 

@@ -9,17 +9,17 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RankJudgmentInformationTest {
+class WinningLottoInformationTest {
 
     @MethodSource
     @ParameterizedTest
     void 순위를_반환한다(Set<Integer> lottoNumbers, Rank rank) {
         LottoTicket lottoTicket = LottoTicket.from(new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6)));
 
-        RankJudgmentInformation rankJudgmentInformation = new RankJudgmentInformation(7, lottoTicket);
+        WinningLottoInformation winningLottoInformation = new WinningLottoInformation(7, lottoTicket);
 
         NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(lottoNumbers);
-        assertThat(rankJudgmentInformation.matchedRank(LottoTicket.from(numbersGenerator))).isEqualTo(rank);
+        assertThat(winningLottoInformation.matchedRank(LottoTicket.from(numbersGenerator))).isEqualTo(rank);
     }
 
     private static Stream<Arguments> 순위를_반환한다() {
