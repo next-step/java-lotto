@@ -80,7 +80,15 @@ public class Application {
     }
 
     private static WiningLotto getValidWiningLotto() {
-        return new WiningLotto(getValidWiningLottoNumbers());
+        return new WiningLotto(getValidWiningLottoNumbers(), getValidBonusLottoNumber());
+    }
+
+    private static LottoNumber getValidBonusLottoNumber() {
+        return getValueUntilValid(Application::getBonusLottoNumberFromInput);
+    }
+
+    private static LottoNumber getBonusLottoNumberFromInput() {
+        return mapToLottoNumber(InputView.getBonusLottoNumber());
     }
 
     private static LottoNumbers getValidWiningLottoNumbers() {
@@ -89,6 +97,10 @@ public class Application {
 
     private static LottoNumbers getWiningLottoNumbersFromInput() {
         return mapToLottoNumbers(InputView.getWiningLottoNumbers());
+    }
+
+    private static LottoNumber mapToLottoNumber(final String lottoNumber) {
+        return LottoNumber.valueOf(parseInt(lottoNumber));
     }
 
     private static LottoNumbers mapToLottoNumbers(final String[] lottoNumbers) {

@@ -8,6 +8,7 @@ public final class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String MONEY_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINING_LOTTO_NUMBERS_REQUEST_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_LOTTO_NUMBER_REQUEST_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String LOTTO_NUMBER_DELIMITER = ",";
 
     private InputView() {
@@ -21,6 +22,11 @@ public final class InputView {
     public static String[] getWiningLottoNumbers() {
         print(WINING_LOTTO_NUMBERS_REQUEST_MESSAGE);
         return parseLottoNumbers(getUserInput());
+    }
+
+    public static String getBonusLottoNumber() {
+        print(BONUS_LOTTO_NUMBER_REQUEST_MESSAGE);
+        return getUserInput();
     }
 
     private static void print(final String message) {

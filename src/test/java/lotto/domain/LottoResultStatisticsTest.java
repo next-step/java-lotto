@@ -21,16 +21,16 @@ class LottoResultStatisticsTest {
             Arrays.asList(
                 LottoResult.FIRST,
                 LottoResult.FIRST,
-                LottoResult.SECOND,
-                LottoResult.SECOND,
-                LottoResult.SECOND,
                 LottoResult.THIRD,
                 LottoResult.THIRD,
                 LottoResult.THIRD,
                 LottoResult.FOURTH,
                 LottoResult.FOURTH,
                 LottoResult.FOURTH,
-                LottoResult.FOURTH
+                LottoResult.FIFTH,
+                LottoResult.FIFTH,
+                LottoResult.FIFTH,
+                LottoResult.FIFTH
             ));
     }
 
@@ -41,9 +41,9 @@ class LottoResultStatisticsTest {
         stats = new LottoResultStatistics(lottoResults);
         assertAll(
             () -> assertThat(stats.getFirstRankCount()).isZero(),
-            () -> assertThat(stats.getSecondRankCount()).isZero(),
             () -> assertThat(stats.getThirdRankCount()).isZero(),
-            () -> assertThat(stats.getFourthRankCount()).isZero()
+            () -> assertThat(stats.getFourthRankCount()).isZero(),
+            () -> assertThat(stats.getFifthRankCount()).isZero()
         );
     }
 
@@ -55,12 +55,12 @@ class LottoResultStatisticsTest {
         assertAll(
             () -> assertThat(stats.getFirstRankPrizeMoney())
                 .isEqualTo(LottoResult.FIRST.getPrizeMoney()),
-            () -> assertThat(stats.getSecondRankPrizeMoney())
-                .isEqualTo(LottoResult.SECOND.getPrizeMoney()),
             () -> assertThat(stats.getThirdRankPrizeMoney())
                 .isEqualTo(LottoResult.THIRD.getPrizeMoney()),
             () -> assertThat(stats.getFourthRankPrizeMoney())
-                .isEqualTo(LottoResult.FOURTH.getPrizeMoney())
+                .isEqualTo(LottoResult.FOURTH.getPrizeMoney()),
+            () -> assertThat(stats.getFifthRankPrizeMoney())
+                .isEqualTo(LottoResult.FIFTH.getPrizeMoney())
         );
     }
 
@@ -72,11 +72,11 @@ class LottoResultStatisticsTest {
         assertAll(
             () -> assertThat(stats.getFirstRankLottoNumberMatchCount())
                 .isEqualTo(LottoNumberMatchCount.ALL),
-            () -> assertThat(stats.getSecondRankLottoNumberMatchCount())
-                .isEqualTo(LottoNumberMatchCount.FIVE),
             () -> assertThat(stats.getThirdRankLottoNumberMatchCount())
-                .isEqualTo(LottoNumberMatchCount.FOUR),
+                .isEqualTo(LottoNumberMatchCount.FIVE),
             () -> assertThat(stats.getFourthRankLottoNumberMatchCount())
+                .isEqualTo(LottoNumberMatchCount.FOUR),
+            () -> assertThat(stats.getFifthRankLottoNumberMatchCount())
                 .isEqualTo(LottoNumberMatchCount.THREE)
         );
     }
@@ -86,9 +86,9 @@ class LottoResultStatisticsTest {
     void getRankCount() {
         assertAll(
             () -> assertThat(stats.getFirstRankCount()).isEqualTo(2),
-            () -> assertThat(stats.getSecondRankCount()).isEqualTo(3),
             () -> assertThat(stats.getThirdRankCount()).isEqualTo(3),
-            () -> assertThat(stats.getFourthRankCount()).isEqualTo(4)
+            () -> assertThat(stats.getFourthRankCount()).isEqualTo(3),
+            () -> assertThat(stats.getFifthRankCount()).isEqualTo(4)
         );
     }
 
@@ -98,12 +98,12 @@ class LottoResultStatisticsTest {
         assertAll(
             () -> assertThat(stats.getFirstRankPrizeMoney())
                 .isEqualTo(LottoResult.FIRST.getPrizeMoney()),
-            () -> assertThat(stats.getSecondRankPrizeMoney())
-                .isEqualTo(LottoResult.SECOND.getPrizeMoney()),
             () -> assertThat(stats.getThirdRankPrizeMoney())
                 .isEqualTo(LottoResult.THIRD.getPrizeMoney()),
             () -> assertThat(stats.getFourthRankPrizeMoney())
-                .isEqualTo(LottoResult.FOURTH.getPrizeMoney())
+                .isEqualTo(LottoResult.FOURTH.getPrizeMoney()),
+            () -> assertThat(stats.getFifthRankPrizeMoney())
+                .isEqualTo(LottoResult.FIFTH.getPrizeMoney())
         );
     }
 
@@ -113,11 +113,11 @@ class LottoResultStatisticsTest {
         assertAll(
             () -> assertThat(stats.getFirstRankLottoNumberMatchCount())
                 .isEqualTo(LottoNumberMatchCount.ALL),
-            () -> assertThat(stats.getSecondRankLottoNumberMatchCount())
-                .isEqualTo(LottoNumberMatchCount.FIVE),
             () -> assertThat(stats.getThirdRankLottoNumberMatchCount())
-                .isEqualTo(LottoNumberMatchCount.FOUR),
+                .isEqualTo(LottoNumberMatchCount.FIVE),
             () -> assertThat(stats.getFourthRankLottoNumberMatchCount())
+                .isEqualTo(LottoNumberMatchCount.FOUR),
+            () -> assertThat(stats.getFifthRankLottoNumberMatchCount())
                 .isEqualTo(LottoNumberMatchCount.THREE)
         );
     }

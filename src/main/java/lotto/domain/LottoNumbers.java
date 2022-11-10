@@ -25,7 +25,7 @@ public final class LottoNumbers {
 
     public LottoNumberMatchCount matchTo(final LottoNumbers other) {
         final int matchedCount = (int) numbers.stream()
-            .filter(other.numbers::contains)
+            .filter(other::contains)
             .count();
         return LottoNumberMatchCount.valueOf(matchedCount);
     }
