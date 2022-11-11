@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,8 +32,8 @@ public class Lottos {
 
     public List<LottoRank> lottoRanks(WinningNumbers winningLottoNumbers) {
         return lottos.stream()
-                .map(lotto -> lotto.countMatchNumber(winningLottoNumbers))
-                .map(LottoRank::countOfMatchNumber)
+                .map(lotto -> LottoRank.countOfMatchNumber(lotto.countMatchNumber(winningLottoNumbers),
+                        lotto.matchBonusNumber(winningLottoNumbers)))
                 .collect(Collectors.toList());
     }
 

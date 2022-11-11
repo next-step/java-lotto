@@ -18,6 +18,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean matchBonusNumber(WinningNumbers winningNumbers) {
+        return numbers.contains(winningNumbers.getBonusNumber());
+    }
+
     public List<Integer> getLotto() {
         return numbers;
     }

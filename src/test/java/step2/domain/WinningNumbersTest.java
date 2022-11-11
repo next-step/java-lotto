@@ -12,13 +12,13 @@ class WinningNumbersTest {
 
     @Test
     void successTest() {
-        assertThat(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)).getWinningNumbers())
+        assertThat(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7).getWinningNumbers())
                 .containsAll(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void failTest() {
-        assertThatThrownBy(() -> new WinningNumbers(InputView.createWinningNumbers("1+1")))
+        assertThatThrownBy(() -> new WinningNumbers(InputView.createWinningNumbers("1+1"), 7))
                 .isInstanceOf(NumberFormatException.class);
     }
 

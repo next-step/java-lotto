@@ -9,6 +9,7 @@ public enum LottoRank {
     WINNING_THREE_NUMBER(3, 5000),
     WINNING_FOUR_NUMBER(4, 50000),
     WINNING_FIVE_NUMBER(5, 1500000),
+    WINNING_FIVE_BONUS_NUMBER(5, 30000000),
     WINNING_SIX_NUMBER(6, 2000000000);
 
     private final int countOfMatchNumber;
@@ -19,7 +20,10 @@ public enum LottoRank {
         this.countOfMatchNumber = countOfMatchNumber;
     }
 
-    public static LottoRank countOfMatchNumber(Integer countOfMatchNumber) {
+    public static LottoRank countOfMatchNumber(int countOfMatchNumber, boolean bonusNumber) {
+        if (countOfMatchNumber == 5 && bonusNumber) {
+            return WINNING_FIVE_BONUS_NUMBER;
+        }
         return Arrays.stream(values())
                 .filter(LottoRank -> LottoRank.countOfMatchNumber == countOfMatchNumber)
                 .findAny()
