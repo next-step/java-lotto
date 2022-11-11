@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -30,22 +31,28 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static void printQueryManualLottoNumbersMessage() {
+    public static List<List<Integer>> queryManualLottoNumbers(int count) {
         System.out.println(QUERY_MANUAL_LOTTO_NUMBERS_MESSAGE);
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            result.add(queryLottoNumbers());
+        }
+        return result;
     }
 
-    public static void printQueryWinningNumbersMessage() {
+    public static List<Integer> queryWinningNumbers() {
         System.out.println(QUERY_WINNING_NUMBERS_MESSAGE);
+        return queryLottoNumbers();
     }
 
-    public static List<Integer> queryLottoNumbers() {
+    private static List<Integer> queryLottoNumbers() {
         return Arrays.stream(scanner.nextLine().split(LOTTO_NUMBERS_SEPERATOR))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public static LottoNumber queryBonusNumber() {
+    public static Integer queryBonusNumber() {
         System.out.println(QUERY_BONUS_NUMBER_MESSAGE);
-        return LottoNumber.of(Integer.parseInt(scanner.nextLine()));
+        return Integer.parseInt(scanner.nextLine());
     }
 }

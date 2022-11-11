@@ -4,6 +4,7 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     private static final int LOTTO_PRICE = 1000;
@@ -24,18 +25,20 @@ public class Main {
     }
 
     private static Lotto getLotto(int autoCount, int manualCount) {
-        InputView.printQueryManualLottoNumbersMessage();
-        Lotto lotto = LottoStore.purchase(manualCount, autoCount,
-                () -> LottoNumbers.of(InputView.queryLottoNumbers()));
+        List<LottoNumbers> lottoNumbers = InputView.queryManualLottoNumbers(manualCount).stream()
+                .map(LottoNumbers::of)
+                .collect(Collectors.toList());
+        lottoNumbers.addAll(LottoStore.purchaseAuto(autoCount));
+        Lotto lotto = new Lotto(lottoNumbers);
+
         ResultView.printPurchaseCount(manualCount, autoCount);
         ResultView.printLotto(lotto);
         return lotto;
     }
 
     private static WinningLotto getWinningLotto() {
-        InputView.printQueryWinningNumbersMessage();
-        LottoNumbers winningNumbers = LottoNumbers.of(InputView.queryLottoNumbers());
-        LottoNumber bonusNumber = InputView.queryBonusNumber();
+        LottoNumbers winningNumbers = LottoNumbers.of(InputView.queryWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.queryBonusNumber());
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
