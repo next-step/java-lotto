@@ -54,15 +54,6 @@ public class Output {
 
         match(6, Rank.FIRST.getAmount(), matchList[6]);
 
-        // for 문을 살릴 수 있는 방법을 찾는 중
-//        for (int i = 3; i <= 6; i++) {
-//            match(i, Rank.getRank(i, hasBonusNumber).getAmount(), matchList[i]);
-//            if (i == 5) {
-//                match(i, Rank.THIRD.getAmount(), matchList[i]);
-//                matchBonusBall(i, Rank.SECOND.getAmount(), matchList[i]);
-//            }
-//        }
-
         return lottoList;
     }
 
