@@ -65,7 +65,9 @@ public class Lottos {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Lottos lottos = (Lottos) o;
         return Objects.equals(amount, lottos.amount) && Objects.equals(lottoLists, lottos.lottoLists);
     }
