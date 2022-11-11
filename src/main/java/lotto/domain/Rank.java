@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, BigDecimal.valueOf(2000000000)),
-    SECOND(5, BigDecimal.valueOf(30000000)),
-    THIRD(5, BigDecimal.valueOf(1500000)),
-    FORTH(4, BigDecimal.valueOf(50000)),
-    FIFTH(3, BigDecimal.valueOf(5000)),
+    FIRST(6, BigDecimal.valueOf(2_000_000_000)),
+    SECOND(5, BigDecimal.valueOf(30_000_000)),
+    THIRD(5, BigDecimal.valueOf(1_500_000)),
+    FORTH(4, BigDecimal.valueOf(50_000)),
+    FIFTH(3, BigDecimal.valueOf(5_000)),
     SIXTH(2, BigDecimal.valueOf(0)),
     SEVENTH(1, BigDecimal.valueOf(0)),
     ZERO(0, BigDecimal.valueOf(0));
@@ -40,7 +40,7 @@ public enum Rank {
 
         return Arrays.stream(values())
                 .filter(cnt -> cnt.getCount() == count)
-                .findAny()
+                .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("숫자가 틀립니다."));
     }
 
