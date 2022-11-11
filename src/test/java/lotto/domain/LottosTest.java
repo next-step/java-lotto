@@ -1,9 +1,13 @@
 package lotto.domain;
 
 import lotto.strategy.AutoNumberList;
+import lotto.view.Output;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -12,6 +16,8 @@ class LottosTest {
 
     private static final BigDecimal SMALL_THING = BigDecimal.valueOf(100);
     private static final BigDecimal BIG_THING = BigDecimal.valueOf(2000);
+    private static List<Lotto> lottoList;
+    private static List<Integer> winnerNumberList = List.of(1, 2, 3, 4, 5, 6);
 
     @Test
     void generate_Number_of_tickets() {
@@ -46,9 +52,28 @@ class LottosTest {
     }
 
     @Test
-    void test() {
-        if (true) {
-            System.out.println("true!");
-        }
+    void test_getRank_SECOND() {
+        lottoList = Arrays.asList(
+                new Lotto(givenNumbers(1, 2, 3, 4, 5, 45))
+        );
+
+        List<Lotto> matchLottoList = Output.getRank(lottoList, winnerNumberList, 45);
+        assertThat(Lottos.getRank(lottoList)).isEqualTo(true);
+    }
+
+    @Test
+    void test_getRank_THIRD() {
+        lottoList = Arrays.asList(
+                new Lotto(givenNumbers(1, 2, 3, 4, 5, 44))
+        );
+
+        List<Lotto> matchLottoList = Output.getRank(lottoList, winnerNumberList, 45);
+        assertThat(Lottos.getRank(lottoList)).isEqualTo(false);
+    }
+
+    private static List<LottoNumber> givenNumbers(int... numbers) {
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }

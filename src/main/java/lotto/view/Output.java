@@ -43,12 +43,12 @@ public class Output {
 
         // Rank.SECOND.getCount == 5, Rank.THIRD.getCount == 5
         if (Lottos.getRank(lottoList)) {
-            match(Rank.SECOND.getCount(), Rank.THIRD.getAmount(), 0);
+            match(Rank.THIRD.getCount(), Rank.THIRD.getAmount(), 0);
             matchBonusBall(Rank.SECOND.getCount(), Rank.SECOND.getAmount(), matchList[Rank.SECOND.getCount()]);
         }
 
         if (!Lottos.getRank(lottoList)) {
-            match(Rank.SECOND.getCount(), Rank.THIRD.getAmount(), matchList[Rank.SECOND.getCount()]);
+            match(Rank.THIRD.getCount(), Rank.THIRD.getAmount(), matchList[Rank.THIRD.getCount()]);
             matchBonusBall(Rank.SECOND.getCount(), Rank.SECOND.getAmount(), 0);
         }
 
