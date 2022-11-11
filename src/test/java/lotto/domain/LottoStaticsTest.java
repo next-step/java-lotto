@@ -40,7 +40,7 @@ class LottoStaticsTest {
                 new Lotto(givenNumbers(7, 8, 9, 10, 11, 12))
         );
 
-        List<Lotto> matchLottoList = Output.getRank(lottoList, winnerNumberList, 12);
+        Output.getRank(lottoList, winnerNumberList, 12);
         assertThat(LottoStatics.calculate(lottoList)).isEqualTo(BigDecimal.valueOf(2900.08));
     }
 

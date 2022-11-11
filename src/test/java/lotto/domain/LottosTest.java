@@ -57,7 +57,7 @@ class LottosTest {
                 new Lotto(givenNumbers(1, 2, 3, 4, 5, 45))
         );
 
-        List<Lotto> matchLottoList = Output.getRank(lottoList, winnerNumberList, 45);
+        Output.getRank(lottoList, winnerNumberList, 45);
         assertThat(Lottos.getRank(lottoList)).isEqualTo(true);
     }
 
@@ -67,7 +67,7 @@ class LottosTest {
                 new Lotto(givenNumbers(1, 2, 3, 4, 5, 44))
         );
 
-        List<Lotto> matchLottoList = Output.getRank(lottoList, winnerNumberList, 45);
+        Output.getRank(lottoList, winnerNumberList, 45);
         assertThat(Lottos.getRank(lottoList)).isEqualTo(false);
     }
 
