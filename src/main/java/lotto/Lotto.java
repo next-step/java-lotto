@@ -1,11 +1,16 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
     private final List<LottoNumbers> lottoNumbers;
+
+    public Lotto(List<LottoNumbers> manualNumbers, List<LottoNumbers> autoNumbers) {
+        this(Stream.concat(manualNumbers.stream(), autoNumbers.stream())
+                .collect(Collectors.toList()));
+    }
 
     public Lotto(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;

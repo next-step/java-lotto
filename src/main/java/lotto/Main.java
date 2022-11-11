@@ -7,31 +7,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
-    private static final int LOTTO_PRICE = 1000;
 
     public static void main(String[] args) {
         int purchasePrice = InputView.queryPurchasePrice();
-        if (purchasePrice <= LOTTO_PRICE) {
-            throw new IllegalArgumentException("구입 금액이 너무 작습니다.");
-        }
-        int autoCount = purchasePrice / LOTTO_PRICE;
         int manualCount = InputView.queryManualPurchaseCount();
 
-        Lotto lotto = getLotto(autoCount, manualCount);
+        Lotto lotto = getLotto(purchasePrice, manualCount);
         WinningLotto winingLotto = getWinningLotto();
 
         List<LottoResult> results = lotto.match(winingLotto);
         showResult(results);
     }
 
-    private static Lotto getLotto(int autoCount, int manualCount) {
-        List<LottoNumbers> lottoNumbers = InputView.queryManualLottoNumbers(manualCount).stream()
+    private static Lotto getLotto(int purchasePrice, int manualCount) {
+        List<LottoNumbers> autoNumbers = LottoStore.purchaseAuto(purchasePrice, manualCount);
+        List<LottoNumbers> manualNumbers = InputView.queryManualLottoNumbers(manualCount).stream()
                 .map(LottoNumbers::of)
                 .collect(Collectors.toList());
-        lottoNumbers.addAll(LottoStore.purchaseAuto(autoCount));
-        Lotto lotto = new Lotto(lottoNumbers);
 
-        ResultView.printPurchaseCount(manualCount, autoCount);
+        ResultView.printPurchaseCount(manualCount, autoNumbers.size());
+        Lotto lotto = new Lotto(manualNumbers, autoNumbers);
         ResultView.printLotto(lotto);
         return lotto;
     }
@@ -44,7 +39,7 @@ public class Main {
 
     private static void showResult(List<LottoResult> results) {
         LottoResultStat resultStat = new LottoResultStat(results);
-        double profitMargin = resultStat.getProfitMargin(LOTTO_PRICE);
+        double profitMargin = resultStat.getProfitMargin(LottoStore.LOTTO_PRICE);
         ResultView.printLottoResults(resultStat);
         ResultView.printProfitMargin(profitMargin);
     }
