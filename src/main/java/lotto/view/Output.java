@@ -28,7 +28,6 @@ public class Output {
     public static List<Lotto> getRank(List<Lotto> lottoList, List<Integer> winnerNumberList, Integer bonusBallNumber) {
 
         boolean hasBonusNumber = matchNumber(lottoList, bonusBallNumber);
-        Integer bonusBall = getTrueOrFalse(hasBonusNumber);
 
         int[] matchList = new int[6 + 1];
         for (Lotto lotto : lottoList) {
@@ -39,20 +38,21 @@ public class Output {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        match(3, Rank.FIFTH.getAmount(), matchList[3]);
-        match(4, Rank.FORTH.getAmount(), matchList[4]);
+        match(Rank.FIFTH.getCount(), Rank.FIFTH.getAmount(), matchList[Rank.FIFTH.getCount()]);
+        match(Rank.FORTH.getCount(), Rank.FORTH.getAmount(), matchList[Rank.FORTH.getCount()]);
 
+        // Rank.SECOND.getCount == 5, Rank.THIRD.getCount == 5
         if (Lottos.getRank(lottoList)) {
-            match(5, Rank.THIRD.getAmount(), 0);
-            matchBonusBall(5, Rank.SECOND.getAmount(), matchList[5]);
+            match(Rank.SECOND.getCount(), Rank.THIRD.getAmount(), 0);
+            matchBonusBall(Rank.SECOND.getCount(), Rank.SECOND.getAmount(), matchList[Rank.SECOND.getCount()]);
         }
 
         if (!Lottos.getRank(lottoList)) {
-            match(5, Rank.THIRD.getAmount(), matchList[5]);
-            matchBonusBall(5, Rank.SECOND.getAmount(), 0);
+            match(Rank.SECOND.getCount(), Rank.THIRD.getAmount(), matchList[Rank.SECOND.getCount()]);
+            matchBonusBall(Rank.SECOND.getCount(), Rank.SECOND.getAmount(), 0);
         }
 
-        match(6, Rank.FIRST.getAmount(), matchList[6]);
+        match(Rank.FIRST.getCount(), Rank.FIRST.getAmount(), matchList[Rank.FIRST.getCount()]);
 
         return lottoList;
     }
