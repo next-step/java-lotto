@@ -20,7 +20,7 @@ public class LottoStatics {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private static BigDecimal divideOfListCount(BigDecimal sum, int count) {
+    private static BigDecimal divideOfListCount(BigDecimal sum, long count) {
         return sum.divide(BigDecimal.valueOf(UNIT_OF_ACCOUNT * PERCENT * count), 2, RoundingMode.HALF_EVEN);
     }
 
