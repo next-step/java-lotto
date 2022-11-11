@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.util.RandomUtils;
 
 public final class UniqueLottoNumbersSupplier implements LottoNumbersSupplier {
 
