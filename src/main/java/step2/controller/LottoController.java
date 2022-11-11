@@ -16,7 +16,7 @@ public class LottoController {
         Lottos lottos = new Lottos(purchasePrice);
         purchaseOutput(lottos);
 
-        List<LottoRank> lottoRanks = lottos.lottoRanks(new WinningNumbers(InputView.winningNumbers()));
+        List<LottoRank> lottoRanks = lottos.lottoRanks(new WinningNumbers(InputView.winningNumbers(), InputView.bonusNumber()));
         rewardOutput(lottoRanks);
 
         yieldOutput(lottoRanks, purchasePrice);

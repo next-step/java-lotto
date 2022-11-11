@@ -12,6 +12,7 @@ public class OutputView {
     private static final String LOTTO_COUNT_OUTPUT_MESSAGE = "개를 구매했습니다.";
     private static final String LOTTO_REWARD_PREFACE = "\n당첨 통계\n---------";
     private static final String WIN_NUMBER_MESSAGE_FORMAT = "%d개 일치 (%d원) - %d개";
+    private static final String WIN_BONUS_NUMBER_MESSAGE_FORMAT = "%d개 보너스 볼 일치 (%d원) - %d개";
     private static final String YIELD_MESSAGE = "총 수익률은 %s 입니다. (기준 : 1)";
 
     private OutputView() {}
@@ -35,7 +36,10 @@ public class OutputView {
     private static String getWinNumberFormat(List<LottoRank> lottoRanks) {
         String result = "";
         for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank != LottoRank.MISS) {
+            if (lottoRank == LottoRank.WINNING_FIVE_BONUS_NUMBER) {
+                result += String.format(WIN_BONUS_NUMBER_MESSAGE_FORMAT, lottoRank.getCountOfMatchNumber(), lottoRank.getReward(), lottoRank.getCountOfLottoRanks(lottoRanks)) + "\n";
+            }
+            if (lottoRank != LottoRank.MISS && lottoRank != LottoRank.WINNING_FIVE_BONUS_NUMBER) {
                 result += String.format(WIN_NUMBER_MESSAGE_FORMAT, lottoRank.getCountOfMatchNumber(), lottoRank.getReward(), lottoRank.getCountOfLottoRanks(lottoRanks)) + "\n";
             }
         }
