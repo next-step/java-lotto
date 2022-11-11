@@ -13,6 +13,8 @@ public enum Rank {
     SEVENTH(1, BigDecimal.valueOf(0)),
     ZERO(0, BigDecimal.valueOf(0));
 
+    private static final int SECOND_NUMBER = 5;
+
     private final int count;
     private final BigDecimal amount;
 
@@ -45,6 +47,6 @@ public enum Rank {
     }
 
     private static boolean isSecond(int count, boolean matchBonus) {
-        return count == 5 && matchBonus;
+        return count == SECOND_NUMBER && matchBonus;
     }
 }
