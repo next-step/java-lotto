@@ -8,23 +8,27 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(LottoNumberStrategy numberStrategy) {
-        numbers = new ArrayList<>(numberStrategy.getNumbers());
+        lottoNumbers = new ArrayList<>(numberStrategy.getLottoNumbers());
     }
 
-    public long matchCnt(Lotto winningLotto) {
-        return winningLotto.winningCnt(numbers);
+    public WinningType matchWinningLotto(WinningLotto winningLotto) {
+        return WinningType.of(winningLotto.matchCount(lottoNumbers), winningLotto.matchBonus(lottoNumbers));
     }
 
-    public long winningCnt(List<Integer> lottoNumbers) {
-        return numbers.stream()
+    public long winningCount(List<LottoNumber> lottoNumbers) {
+        return this.lottoNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }
 
-    public List<Integer> getNumbers() {
-        return new ArrayList<>(numbers);
+    public boolean containLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(lottoNumbers);
     }
 }

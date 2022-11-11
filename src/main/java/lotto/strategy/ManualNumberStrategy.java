@@ -1,8 +1,7 @@
 package lotto.strategy;
 
-import lotto.exception.LottoNumberException;
-import lotto.exception.NotPositiveException;
-import org.apache.commons.lang3.StringUtils;
+import lotto.domain.LottoNumber;
+import lotto.exception.LottoException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,61 +9,34 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManualNumberStrategy implements LottoNumberStrategy {
-
-    private static final int START = 1;
-    private static final int END = 45;
-    private static final int CNT = 6;
     private static final String SEPARATOR = ",";
-    
-    private final List<Integer> numbers;
+    private static final int COUNT = 6;
+
+    private final List<LottoNumber> lottoNumbers;
 
     public ManualNumberStrategy(String input) {
-        checkNull(input);
-        List<Integer> inputNumbers = inputToNumbers(input);
+        List<LottoNumber> inputNumbers = inputToLottoNumbers(input);
         checkNumbers(inputNumbers);
-        numbers = new ArrayList<>(inputNumbers);
+        lottoNumbers = new ArrayList<>(inputNumbers);
     }
 
     @Override
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
-    private List<Integer> inputToNumbers(String input) {
+    private List<LottoNumber> inputToLottoNumbers(String input) {
         return Arrays.stream(input.split(SEPARATOR))
-                .map(strNumber -> {
-                    checkNotPositive(strNumber.trim());
-                    return Integer.parseInt(strNumber.trim());
-                })
+                .map(strNumber -> LottoNumber.of(strNumber))
                 .collect(Collectors.toList());
     }
 
-    private void checkNull(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new NotPositiveException();
+    private void checkNumbers(List<LottoNumber> inputNumbers) {
+        if (inputNumbers.size() != COUNT) {
+            throw new LottoException();
         }
-    }
-
-    private void checkNotPositive(String input) {
-        if (!StringUtils.isNumeric(input)) {
-            throw new NotPositiveException();
-        }
-        if (Integer.parseInt(input) < 0) {
-            throw new NotPositiveException();
-        }
-    }
-
-    private void checkNumbers(List<Integer> inputNumbers) {
-        if (inputNumbers.size() != CNT) {
-            throw new LottoNumberException();
-        }
-        inputNumbers.forEach(number -> {
-            if (number < START || number > END) {
-                throw new LottoNumberException();
-            }
-        });
-        if (inputNumbers.stream().distinct().count() != CNT) {
-            throw new LottoNumberException();
+        if (inputNumbers.stream().distinct().count() != COUNT) {
+            throw new LottoException();
         }
     }
 }
