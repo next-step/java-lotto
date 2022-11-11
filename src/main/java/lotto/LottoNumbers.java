@@ -60,9 +60,9 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public int getMatchCount(LottoNumbers ticket) {
-        return (int) numbers.stream()
-                .filter(ticket::hasNumber)
+    public int getMatchCount(LottoNumbers numbers) {
+        return (int) this.numbers.stream()
+                .filter(numbers::hasNumber)
                 .count();
     }
 }

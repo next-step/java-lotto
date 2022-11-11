@@ -17,8 +17,8 @@ public class Lotto {
 
     public List<LottoResult> match(WinningLotto winingLotto) {
         List<LottoResult> result = new ArrayList<>();
-        for (LottoNumbers ticket : lottoNumbers) {
-            result.add(winingLotto.match(ticket));
+        for (LottoNumbers numbers : lottoNumbers) {
+            result.add(winingLotto.match(numbers));
         }
         return result;
     }

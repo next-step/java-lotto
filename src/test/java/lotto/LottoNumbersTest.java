@@ -29,15 +29,15 @@ public class LottoNumbersTest {
 
     @Test
     void test_has_number() {
-        LottoNumbers ticket = LottoNumbers.of(1, 2, 3, 4, 5, 6);
-        assertThat(ticket.hasNumber(LottoNumber.of(1))).isTrue();
-        assertThat(ticket.hasNumber(LottoNumber.of(7))).isFalse();
+        LottoNumbers numbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
+        assertThat(numbers.hasNumber(LottoNumber.of(1))).isTrue();
+        assertThat(numbers.hasNumber(LottoNumber.of(7))).isFalse();
     }
 
     @Test
     void test_get_match_count() {
-        LottoNumbers ticket1 = LottoNumbers.of(1, 2, 3, 4, 5, 6);
-        LottoNumbers ticket2 = LottoNumbers.of(3, 4, 5, 6, 7, 8);
-        assertThat(ticket1.getMatchCount(ticket2)).isEqualTo(4);
+        LottoNumbers numbers1 = LottoNumbers.of(1, 2, 3, 4, 5, 6);
+        LottoNumbers numbers2 = LottoNumbers.of(3, 4, 5, 6, 7, 8);
+        assertThat(numbers1.getMatchCount(numbers2)).isEqualTo(4);
     }
 }

@@ -22,8 +22,8 @@ public class WinningLottoTest {
 
     @Test
     void test_match() {
-        LottoNumbers ticket = LottoNumbers.of(1, 2, 3, 4, 5, 7);
-        assertThat(new WinningLotto(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumber.of(7)).match(ticket))
+        LottoNumbers numbers = LottoNumbers.of(1, 2, 3, 4, 5, 7);
+        assertThat(new WinningLotto(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumber.of(7)).match(numbers))
                 .isEqualTo(LottoResult.SECOND);
     }
 }

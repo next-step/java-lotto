@@ -23,10 +23,10 @@ public class LottoResultStat {
         for (LottoResult result : LottoResult.values()) {
             sum += result.getPrize() * getWinnerCount(result);
         }
-        return sum / ((long) lottoPrice * totalTicketCount());
+        return sum / ((long) lottoPrice * totalCount());
     }
 
-    private int totalTicketCount() {
+    private int totalCount() {
         int count = 0;
         for (LottoResult key : resultMap.keySet()) {
             count += resultMap.get(key);

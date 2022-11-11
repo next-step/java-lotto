@@ -24,8 +24,8 @@ public class ResultView {
     }
 
     public static void printLotto(Lotto lotto) {
-        for (LottoNumbers ticket : lotto.getLottoNumbers()) {
-            printLottoNumbers(ticket);
+        for (LottoNumbers numbers : lotto.getLottoNumbers()) {
+            printLottoNumbers(numbers);
         }
     }
 
