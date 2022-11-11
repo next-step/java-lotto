@@ -1,7 +1,6 @@
 package lotto.view;
 
-import lotto.domain.BonusBall;
-import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.strategy.ManualNumberStrategy;
 import org.apache.commons.lang3.StringUtils;
@@ -26,9 +25,9 @@ public class UserInput {
         return new ManualNumberStrategy(checkNull(SCANNER.nextLine()));
     }
 
-    public static BonusBall inputBonusBall(Lotto winningLotto) {
+    public static LottoNumber inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new BonusBall(checkNull(SCANNER.nextLine()), winningLotto);
+        return LottoNumber.of(checkNull(SCANNER.nextLine()));
     }
 
     private static String checkNull(String input) {

@@ -12,13 +12,13 @@ class LottoNumberTest {
     @ValueSource(strings = {"-1", "0", "ㄱ"})
     void 양수가_아닌_값(String input) {
         assertThatExceptionOfType(LottoNumberException.class)
-                .isThrownBy(() -> new LottoNumber(input));
+                .isThrownBy(() -> LottoNumber.of(input));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"-1", "0", "46"})
     void 번호_범위(String input) {
         assertThatExceptionOfType(LottoNumberException.class)
-                .isThrownBy(() -> new LottoNumber(input));
+                .isThrownBy(() -> LottoNumber.of(input));
     }
 }

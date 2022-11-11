@@ -1,7 +1,7 @@
 package lotto.strategy;
 
 import lotto.domain.LottoNumber;
-import lotto.exception.LottoNumbersException;
+import lotto.exception.LottoException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,16 +27,16 @@ public class ManualNumberStrategy implements LottoNumberStrategy {
 
     private List<LottoNumber> inputToLottoNumbers(String input) {
         return Arrays.stream(input.split(SEPARATOR))
-                .map(strNumber -> new LottoNumber(strNumber))
+                .map(strNumber -> LottoNumber.of(strNumber))
                 .collect(Collectors.toList());
     }
 
     private void checkNumbers(List<LottoNumber> inputNumbers) {
         if (inputNumbers.size() != COUNT) {
-            throw new LottoNumbersException();
+            throw new LottoException();
         }
         if (inputNumbers.stream().distinct().count() != COUNT) {
-            throw new LottoNumbersException();
+            throw new LottoException();
         }
     }
 }

@@ -22,8 +22,8 @@ public class LottoGame {
 
     private Map<WinningType, Integer> getWinningResult(Purchasing purchasing) {
         Lotto winningLotto = new Lotto(UserInput.inputWinningLotto());
-        BonusBall bonusBall = UserInput.inputBonusBall(winningLotto);
-        return purchasing.getWinningResult(winningLotto, bonusBall);
+        LottoNumber bonusBall = UserInput.inputBonusBall();
+        return purchasing.getWinningResult(new WinningLotto(winningLotto, bonusBall));
     }
 
     private void collectStatistics(Money money, Map<WinningType, Integer> winningResult) {

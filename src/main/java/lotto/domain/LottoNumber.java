@@ -1,32 +1,43 @@
 package lotto.domain;
 
 import lotto.exception.LottoNumberException;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final String NUMBER_RANGE = "^[1-9]{1}$|[1-3]{1}[0-9]{1}$|^4{1}[0-5]{1}$";
-    private static final Pattern RANGE_PATTERN = Pattern.compile(NUMBER_RANGE);
+    private static final int START = 1;
+    private static final int END = 45;
+    private final static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     private final int number;
 
-    public LottoNumber(String input) {
-        checkRange(input);
-        number = Integer.parseInt(input);
+    static {
+        for (int i = START; i <= END; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void checkRange(String input) {
-        Matcher matcher = RANGE_PATTERN.matcher(input);
-        if (!matcher.find()) {
+    public static LottoNumber of(String input) {
+        if (!StringUtils.isNumeric(input)) {
             throw new LottoNumberException();
         }
+        return of(Integer.parseInt(input));
+    }
+
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (!lottoNumbers.containsKey(number)) {
+            throw new LottoNumberException();
+        }
+        return lottoNumber;
     }
 
     public int getNumber() {

@@ -21,7 +21,7 @@ class StatisticsTest {
     @Test
     void 당첨_수익률() {
         Map<WinningType, Integer> winningResult = new HashMap<>();
-        winningResult.put(WinningType.FOURTH_PLACE, 1);
+        winningResult.put(WinningType.FIVE_PLACE, 1);
         Money money = new Money("5000");
 
         Statistics statistics = new Statistics(winningResult);
