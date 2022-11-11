@@ -1,3 +1,5 @@
+import domain.string_calculator.Number;
+import domain.string_calculator.TotalNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

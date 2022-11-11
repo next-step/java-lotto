@@ -1,3 +1,5 @@
+package domain.string_calculator;
+
 import java.util.List;
 
 public class Numbers {

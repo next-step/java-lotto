@@ -1,6 +1,6 @@
 package util;
 
-import vo.LotteryTicket;
+import domain.lottery.LotteryTicket;
 
 import java.util.ArrayList;
 import java.util.List;

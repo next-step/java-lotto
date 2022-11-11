@@ -1,3 +1,5 @@
+package domain.string_calculator;
+
 public class Operation {
     private final String operation;
 

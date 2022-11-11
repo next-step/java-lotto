@@ -1,3 +1,5 @@
+import domain.string_calculator.*;
+import domain.string_calculator.Number;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

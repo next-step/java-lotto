@@ -1,4 +1,4 @@
-package vo;
+package domain.lottery;
 
 import java.util.List;
 

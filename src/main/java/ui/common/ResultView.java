@@ -1,4 +1,4 @@
-package ui;
+package ui.common;
 
 public final class ResultView {
     private ResultView() {
