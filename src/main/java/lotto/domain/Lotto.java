@@ -23,7 +23,7 @@ public class Lotto {
         return rank;
     }
 
-    public <E> BigDecimal getAmount() {
+    public BigDecimal getAmount() {
         return rank.getAmount();
     }
 
