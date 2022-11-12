@@ -9,12 +9,16 @@ public class LottoTicketsFactory {
     private static final int LOTTO_PRICE = 1000;
 
     private final int purchaseAmount;
-    private final NumbersGenerator numbersGenerator;
+    private final LottoNumberStorage lottoNumberStorage;
 
     public LottoTicketsFactory(int purchaseAmount, NumbersGenerator numbersGenerator) {
+        this(purchaseAmount, new LottoNumberStorage(numbersGenerator));
+    }
+
+    public LottoTicketsFactory(int purchaseAmount, LottoNumberStorage lottoNumberStorage) {
         verifyPurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
-        this.numbersGenerator = numbersGenerator;
+        this.lottoNumberStorage = lottoNumberStorage;
     }
 
     private void verifyPurchaseAmount(int purchaseAmount) {
@@ -30,8 +34,8 @@ public class LottoTicketsFactory {
 
     private List<LottoTicket> numberAsLottoTickets(int numberOfTickets) {
         return IntStream.range(0, numberOfTickets)
-                .mapToObj(numberOfTicket -> LottoTicket.from(numbersGenerator))
+                .mapToObj(numberOfTicket -> LottoTicket.from(lottoNumberStorage))
+                .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
-
 }
