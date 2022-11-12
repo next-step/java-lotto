@@ -9,14 +9,20 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class LottoNumberStorage {
 
-    private final NumbersGenerator numbersGenerator;
     private final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
-    public LottoNumberStorage(NumbersGenerator numbersGenerator) {
-        this.numbersGenerator = numbersGenerator;
+    private LottoNumberStorage() {
     }
 
-    public List<LottoNumber> lottoNumbers() {
+    public static LottoNumberStorage lottoNumberStorage() {
+        return LottoNumberStorageFactory.LOTTO_NUMBER_STORAGE;
+    }
+
+    private static class LottoNumberStorageFactory {
+        private static final LottoNumberStorage LOTTO_NUMBER_STORAGE = new LottoNumberStorage();
+    }
+
+    public List<LottoNumber> lottoNumbers(NumbersGenerator numbersGenerator) {
         Set<Integer> numbers = numbersGenerator.numbers();
 
         return numbers.stream()
@@ -34,5 +40,4 @@ public class LottoNumberStorage {
         lottoNumbers.put(number, lottoNumber);
         return lottoNumber;
     }
-
 }

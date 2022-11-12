@@ -1,6 +1,5 @@
 package step2step3.lotto;
 
-import step2step3.lotto.lottoNumber.LottoNumberStorage;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
 import step2step3.lotto.lottoTicket.LottoTicket;
 
@@ -13,16 +12,12 @@ public class LottoTicketsFactory {
     private static final int LOTTO_PRICE = 1000;
 
     private final int purchaseAmount;
-    private final LottoNumberStorage lottoNumberStorage;
+    private final NumbersGenerator numbersGenerator;
 
     public LottoTicketsFactory(int purchaseAmount, NumbersGenerator numbersGenerator) {
-        this(purchaseAmount, new LottoNumberStorage(numbersGenerator));
-    }
-
-    public LottoTicketsFactory(int purchaseAmount, LottoNumberStorage lottoNumberStorage) {
         verifyPurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
-        this.lottoNumberStorage = lottoNumberStorage;
+        this.numbersGenerator = numbersGenerator;
     }
 
     private void verifyPurchaseAmount(int purchaseAmount) {
@@ -38,7 +33,7 @@ public class LottoTicketsFactory {
 
     private List<LottoTicket> numberAsLottoTickets(int numberOfTickets) {
         return IntStream.range(0, numberOfTickets)
-                .mapToObj(numberOfTicket -> LottoTicket.from(lottoNumberStorage))
+                .mapToObj(numberOfTicket -> LottoTicket.from(numbersGenerator))
                 .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
