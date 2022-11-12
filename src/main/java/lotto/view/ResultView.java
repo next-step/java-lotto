@@ -4,6 +4,7 @@ import lotto.domain.AccordanceCount;
 import lotto.domain.Lottos;
 
 import java.text.MessageFormat;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -18,7 +19,9 @@ public class ResultView {
 
     private void printEachLotto(Lottos lottos) {
         lottos.getLottos()
-                .forEach(lotto -> System.out.println("[" + lotto + "]"));
+                .forEach(lotto -> System.out.println( "[" + lotto.getNumbers().stream()
+                        .map(String::valueOf)
+                        .collect(Collectors.joining(", ")) + "]" ));
     }
 
     public void printWinningStatistics(AccordanceCount accordanceCount) {
