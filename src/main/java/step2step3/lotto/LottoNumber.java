@@ -30,7 +30,6 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
-
     public boolean isSameNumber(int number) {
         return this.number == number;
     }
