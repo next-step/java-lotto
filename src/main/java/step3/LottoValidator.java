@@ -15,13 +15,19 @@ public class LottoValidator {
 
     public static void validateLottoRange(Set<Integer> lotto) {
         for (Integer number : lotto) {
-            checkRange(number);
+            checkLottoRange(number);
         }
     }
 
-    private static void checkRange(Integer number) {
+    public static void checkLottoRange(Integer number) {
         if (number < LOTTO_START || number > LOTTO_END) {
             throw new IllegalArgumentException(LOTTO_START + " ~ " + LOTTO_END + " 사이의 수만 입력해주세요");
+        }
+    }
+
+    public static void isExistBonus(Lotto lotto, int bonus) {
+        if (lotto.checkBonus(bonus)) {
+            throw new IllegalArgumentException("보너스 번호는 지난 주 당첨 번호와 중복될 수 없습니다.");
         }
     }
 }
