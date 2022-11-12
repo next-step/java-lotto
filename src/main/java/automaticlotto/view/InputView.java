@@ -2,7 +2,11 @@ package automaticlotto.view;
 
 import automaticlotto.automaticexception.ExceptionCommand;
 import automaticlotto.automaticexception.InputValueException;
+import automaticlotto.domain.Lotto;
+import automaticlotto.domain.LottoNumber;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static automaticlotto.automaticexception.ExceptionCommand.PRICE_EXCEPTION_MESSAGE;
@@ -29,12 +33,16 @@ public class InputView {
         }
     }
 
-    public static String[] splitWinningNumbers() {
+    public static Lotto splitWinningNumbers() {
         String winningNumber = enterWinningNumber();
         winningNumber = winningNumber.trim();
         String[] winningNumbers = winningNumber.split(",");
-        validateNumberWinningNumbers(winningNumbers.length);
-        return winningNumbers;
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String number : winningNumbers) {
+            LottoNumber lottoNumber = new LottoNumber(Integer.parseInt(number));
+            lottoNumbers.add(lottoNumber);
+        }
+        return new Lotto(lottoNumbers);
     }
 
     private static String enterWinningNumber() {
@@ -47,12 +55,6 @@ public class InputView {
     private static void validateWinningNumber(String winningNumber) {
         if (winningNumber == null || winningNumber.isBlank()) {
             throw new InputValueException(ExceptionCommand.NULL_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private static void validateNumberWinningNumbers(int winningNumberCount) {
-        if (winningNumberCount != 6) {
-            throw new InputValueException(ExceptionCommand.NUMBER_WINNING_NUMBERS_EXCEPTION_MESSAGE);
         }
     }
 }
