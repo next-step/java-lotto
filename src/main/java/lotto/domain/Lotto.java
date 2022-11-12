@@ -29,12 +29,4 @@ public class Lotto {
                 .filter(this.numbers::contains)
                 .count();
     }
-
-    @Override
-    public String toString() {
-        return this.getNumbers()
-                .stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-    }
 }
