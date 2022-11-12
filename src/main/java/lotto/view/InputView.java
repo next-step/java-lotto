@@ -28,6 +28,11 @@ public class InputView {
         return new Lotto(parseLotto(split));
     }
 
+    public static LottoNumber inputBonusLotto() {
+        System.out.println("보너스 볼을 입력해주세요");
+        return LottoNumber.getCachedNumber(SCANNER.nextInt());
+    }
+
     private static Set<LottoNumber> parseLotto(final String[] split) {
         return Arrays.stream(split)
                 .map(parsing())

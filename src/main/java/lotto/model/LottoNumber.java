@@ -19,6 +19,7 @@ public class LottoNumber {
         return getNumber.cache;
     }
 
+
     private static class getNumber {
         private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
@@ -31,6 +32,10 @@ public class LottoNumber {
 
     boolean isWinningNumber(LottoNumber winNums) {
         return winNums.number == this.number;
+    }
+
+    boolean isMatchBonusNum(LottoNumber bonusLotto) {
+        return bonusLotto.number == this.number;
     }
 
     public int getNumber() {
