@@ -20,7 +20,6 @@ public class LottoTicket {
         LottoNumberStorage lottoNumberStorage = LottoNumberStorage.lottoNumberStorage();
         List<LottoNumber> lottoNumbers = lottoNumberStorage.lottoNumbers(numbersGenerator);
         verifyNumbers(lottoNumbers);
-        Collections.sort(lottoNumbers);
         return new LottoTicket(lottoNumbers);
     }
 
