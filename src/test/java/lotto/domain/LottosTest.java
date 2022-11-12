@@ -36,5 +36,4 @@ class LottosTest {
 
         assertThat(result).contains(6L, 3L, 3L);
     }
-
 }

@@ -64,5 +64,4 @@ class LottoTest {
 
         assertThat(result).isEqualTo(3);
     }
-
 }

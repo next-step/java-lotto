@@ -16,6 +16,4 @@ class NumberTest {
 
         assertThat(number.isInteger(str)).isTrue();
     }
-
-
 }

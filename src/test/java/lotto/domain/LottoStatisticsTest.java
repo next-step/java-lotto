@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoStatisticsTest {
 
     private Lottos lottos;
+    private WinningNumbers winningNumbers;
 
     @BeforeEach
     void setUp() {
@@ -21,15 +22,15 @@ class LottoStatisticsTest {
                 new Lotto(List.of(1, 2, 4, 9, 10, 40)),
                 new Lotto(List.of(1, 2, 3, 12, 17, 30))
         ));
+        winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("당첨 번호와 3~6개 일치하는 로또의 개수 구하기")
     @Test
     void collectAccordanceCountTest() {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winningNumbers);
 
-        AccordanceCount result = lottoStatistics.collectAccordanceCount(lottos, winningNumbers);
+        AccordanceCount result = lottoStatistics.collectAccordanceCount();
 
         assertThat(result.getCountsByWinningAccordanceInSequence()).hasSize(4);
     }
@@ -38,7 +39,7 @@ class LottoStatisticsTest {
     @Test
     void calculateProfitRatioTest() {
         PurchaseMoney purchaseMoney = new PurchaseMoney(50000);
-        LottoStatistics lottoStatistics = new LottoStatistics();
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winningNumbers);
         AccordanceCount accordanceCount = new AccordanceCount(
                 Map.of(
                     WinningAccordance.THREE,
@@ -55,5 +56,4 @@ class LottoStatisticsTest {
 
         assertThat(result).isEqualTo(1.3);
     }
-
 }

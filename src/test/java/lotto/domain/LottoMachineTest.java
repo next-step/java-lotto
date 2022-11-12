@@ -9,13 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
-    private LottoMachine lottoMachine;
-
-    @BeforeEach
-    void setUp() {
-        lottoMachine = new LottoMachine();
-    }
-
     @DisplayName("구입 금액에 해당하는만큼 로또 구매")
     @ParameterizedTest
     @CsvSource(value = {
@@ -25,11 +18,10 @@ class LottoMachineTest {
             "1999=1"
     }, delimiter = '=')
     void purchaseCountTest(int input, int expected) {
-        PurchaseMoney purchaseMoney = new PurchaseMoney(input);
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseMoney(input));
 
-        Lottos lottos = lottoMachine.purchase(purchaseMoney);
+        Lottos lottos = lottoMachine.purchase();
 
         assertThat(lottos.getCount()).isEqualTo(expected);
     }
-
 }

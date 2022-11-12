@@ -25,5 +25,4 @@ class AccordanceCountTest {
 
         assertThat(result).isEqualTo(65000L);
     }
-
 }
