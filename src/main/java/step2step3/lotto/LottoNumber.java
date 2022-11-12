@@ -29,4 +29,9 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+
+    public boolean isSameNumber(int number) {
+        return this.number == number;
+    }
 }
