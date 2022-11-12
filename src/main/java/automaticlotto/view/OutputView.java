@@ -6,6 +6,8 @@ import automaticlotto.domain.Lottos;
 
 import java.util.List;
 
+import static automaticlotto.domain.LottoWinning.revenueRate;
+
 public class OutputView {
 
     private static final int LOTTO_PRICE = 1000;
@@ -44,4 +46,15 @@ public class OutputView {
         return randomLottoNumber;
     }
 
+    public static void showWinningNumber(List<Integer> lottoResult) {
+        System.out.println(RESULT_TITLE);
+        for (int i = 0; i < LOTTO_RESULT_SAME.length; i++) {
+            System.out.println(LOTTO_RESULT_SAME[i] + lottoResult.get(i + 3) + "개");
+        }
+    }
+
+    public static void showWinningTotalRate(int purchaseAmount, int totalReward) {
+        String lottoResult = revenueRate(purchaseAmount, totalReward);
+        System.out.printf(TOTAL_REWARD, lottoResult, lottoResult.compareTo("1") > 0 ? "이득" : "손해");
+    }
 }
