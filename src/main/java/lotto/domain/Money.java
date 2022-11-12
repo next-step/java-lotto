@@ -2,8 +2,6 @@ package lotto.domain;
 
 public class Money {
 
-    private static final String NUMBER_REGEX= "[0-9]";
-
     private int money;
 
     public Money(int money) {
