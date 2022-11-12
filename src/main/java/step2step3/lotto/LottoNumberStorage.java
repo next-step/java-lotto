@@ -31,7 +31,7 @@ public class LottoNumberStorage {
         }
 
         LottoNumber lottoNumber = new LottoNumber(number);
-        lottoNumbers.put(number, new LottoNumber(number));
+        lottoNumbers.put(number, lottoNumber);
         return lottoNumber;
     }
 
