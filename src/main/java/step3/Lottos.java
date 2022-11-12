@@ -7,6 +7,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lotto) {
+        LottoValidator.validateLottosSize(lotto.size());
         this.lottos = lotto;
     }
 
