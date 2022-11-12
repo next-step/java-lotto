@@ -1,13 +1,10 @@
 package step2step3.lotto.lottoTicket;
 
 import step2step3.lotto.lottoNumber.LottoNumber;
+import step2step3.lotto.lottoNumber.LottoNumberStorage;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class LottoTicket {
 
@@ -20,27 +17,21 @@ public class LottoTicket {
     }
 
     public static LottoTicket from(NumbersGenerator numbersGenerator) {
-        Set<Integer> numbers = numbersGenerator.numbers();
-        verifyNumbers(numbers);
-        return new LottoTicket(lottoNumbers(numbers));
+        LottoNumberStorage lottoNumberStorage = LottoNumberStorage.lottoNumberStorage();
+        List<LottoNumber> lottoNumbers = lottoNumberStorage.lottoNumbers(numbersGenerator);
+        verifyNumbers(lottoNumbers);
+        return new LottoTicket(lottoNumbers);
     }
 
-    private static List<LottoNumber> lottoNumbers(Set<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .sorted()
-                .collect(Collectors.toList());
-    }
+    private static void verifyNumbers(List<LottoNumber> numbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>(numbers);
 
-    private static void verifyNumbers(Set<Integer> numbers) {
-        if (numbers.size() != NUMBER_OF_LOTTO) {
+        if (lottoNumbers.size() != NUMBER_OF_LOTTO) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
-
     }
 
     public void printNumbers(OutputDevice outputDevice) {
-        Collections.sort(numbers);
         outputDevice.printNumbers(numbers);
     }
 
