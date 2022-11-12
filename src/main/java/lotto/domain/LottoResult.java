@@ -1,8 +1,5 @@
 package lotto.domain;
-
-import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoResult {
 
@@ -26,24 +23,11 @@ public class LottoResult {
    }
 
    public Map<Reward, Integer> matchResult(){
-      for (Reward reward : lottosMatch()){
+      for (Reward reward : lottos.lottosMatch(winningNumbers)){
          rewardMap.put(reward, rewardMap.getOrDefault(reward, 0) + 1);
       }
       return rewardMap;
    }
-
-   private List<Reward> lottosMatch(){
-      return lottos.getLottos().stream()
-              .map(lottoTicket -> Reward.rewardMatchCount(lottoNumberMatchCount(lottoTicket)))
-              .collect(Collectors.toList());
-   }
-
-   private int lottoNumberMatchCount(LottoTicket lottoTicket){
-      return  (int) lottoTicket.getTicket().stream()
-              .filter(i -> winningNumbers.getWinningNumbers().contains(i))
-              .count();
-   }
-
 }
 
 

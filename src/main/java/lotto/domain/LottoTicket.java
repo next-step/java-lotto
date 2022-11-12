@@ -32,6 +32,12 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers.subList(0,6));
     }
 
+    public int lottoNumberMatchCount(WinningNumbers winningNumbers){
+        return (int) this.lottoTicket.stream()
+                .filter(i -> winningNumbers.getWinningNumbers().contains(i))
+                .count();
+    }
+
     public List<Integer> getTicket() {
         return lottoTicket;
     }

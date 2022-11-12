@@ -28,6 +28,12 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
+    public List<Reward> lottosMatch(WinningNumbers winningNumbers){
+        return lottos.stream()
+                .map(lottoTicket -> Reward.rewardMatchCount(lottoTicket.lottoNumberMatchCount(winningNumbers)))
+                .collect(Collectors.toList());
+    }
+
     public List<LottoTicket> getLottos() {
         return lottos;
     }
