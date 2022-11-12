@@ -1,10 +1,12 @@
 package step2step3.lotto.lottoTicket;
 
 import step2step3.lotto.lottoNumber.LottoNumber;
-import step2step3.lotto.lottoNumber.LottoNumberStorage;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -15,18 +17,6 @@ public class LottoTicket {
 
     private LottoTicket(List<LottoNumber> numbers) {
         this.numbers = numbers;
-    }
-
-    public static LottoTicket from(LottoNumberStorage lottoNumberStorage) {
-        List<LottoNumber> lottoNumbers = lottoNumberStorage.lottoNumbers();
-        verifyLottoNumbers(lottoNumbers);
-        return new LottoTicket(lottoNumbers);
-    }
-
-    private static void verifyLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != NUMBER_OF_LOTTO) {
-            throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
-        }
     }
 
     public static LottoTicket from(NumbersGenerator numbersGenerator) {
