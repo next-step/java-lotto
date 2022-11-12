@@ -12,7 +12,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void verifyNumber(int number) {
-        if (number < 1 || 45 < number) {
+        final int lottoNumberMin = 1;
+        final int lottoNumberMax = 45;
+
+        if (number < lottoNumberMin || lottoNumberMax < number) {
             throw new IllegalArgumentException("숫자는 1이상 46이하이어야 합니다.");
         }
     }
