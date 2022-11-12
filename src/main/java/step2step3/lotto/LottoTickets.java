@@ -29,12 +29,12 @@ public class LottoTickets {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTickets that = (LottoTickets) o;
-        return Objects.equals(lottoTickets, that.lottoTickets);
+        return lottoPrice == that.lottoPrice && Objects.equals(lottoTickets, that.lottoTickets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoTickets);
+        return Objects.hash(lottoTickets, lottoPrice);
     }
 
     public YieldCalculator yieldCalculator(WinningLottoInformation winningLottoInformation) {
