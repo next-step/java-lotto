@@ -2,7 +2,7 @@ package step2step3.lotto;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
@@ -32,5 +32,10 @@ public class LottoNumber {
 
     public boolean isSameNumber(int number) {
         return this.number == number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return number - lottoNumber.number;
     }
 }
