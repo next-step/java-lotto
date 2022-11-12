@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.LottoCollection;
-import lotto.model.LottoGenerator;
-import lotto.model.Profit;
-import lotto.model.MatchingCollection;
+import lotto.model.*;
 
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
@@ -16,9 +13,11 @@ public class Main {
         LottoCollection buyLotto = new LottoCollection(new LottoGenerator().addLotto(quantity));
         printLottoNumbers(buyLotto);
 
-        MatchingCollection match = buyLotto.match(inputWinningLotto());
+        MatchingCollection collection = new MatchingCollection();
+        collection.putMatchingCount(buyLotto.collectRanks(inputWinningLotto()));
+        buyLotto.findSecond(collection, inputBonusLotto());
 
         Profit profit = new Profit(quantity);
-        printResult(match, profit.calculate(match));
+        printResult(collection, profit.calculate(collection));
     }
 }

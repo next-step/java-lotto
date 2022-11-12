@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LottoCollection {
@@ -13,31 +12,18 @@ public class LottoCollection {
         this.lottos = lottos;
     }
 
-    public MatchingCollection match(Lotto winningLotto) {
-        EnumMap<Rank, Integer> enumMap = new EnumMap<>(Rank.class);
+    public List<Rank> collectRanks(Lotto winningLotto) {
+        return lottos.stream()
+                .map(lotto -> lotto.countRank(winningLotto))
+                .collect(Collectors.toList());
+    }
 
-        List<Rank> ranks = collectRanks(winningLotto);
-        for (Rank rank : ranks) {
-            enumMap.put(rank, (int) ranks.stream()
-                    .filter(countingMatch(rank))
-                    .count());
-        }
-
-        return new MatchingCollection(enumMap);
+    public void findSecond(MatchingCollection matchingCollection, LottoNumber bonusLotto) {
+        matchingCollection.findSecondRank(this.lottos, bonusLotto);
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
-    }
-
-    private Predicate<Rank> countingMatch(Rank rank) {
-        return collectedRank -> rank.count() == collectedRank.count();
-    }
-
-    private List<Rank> collectRanks(Lotto winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.countRank(winningLotto))
-                .collect(Collectors.toList());
     }
 
     private void validation(List<Lotto> lottos) {

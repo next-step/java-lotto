@@ -25,14 +25,14 @@ public class Lotto {
         return getLottoNumbers(testLotto);
     }
 
-    public Set<LottoNumber> getLotto() {
-        return Collections.unmodifiableSet(lotto);
-    }
-
     private static Set<LottoNumber> getLottoNumbers(List<Integer> testLotto) {
         return testLotto.stream()
                 .map(Integer -> LottoNumber.cache().get(Integer))
                 .collect(Collectors.toSet());
+    }
+
+    public Set<LottoNumber> getLotto() {
+        return Collections.unmodifiableSet(lotto);
     }
 
     private void validation(Set<LottoNumber> lotto) {
@@ -46,5 +46,10 @@ public class Lotto {
                 .flatMap(lottoNumber -> winningLotto.lotto.stream()
                         .filter(lottoNumber1 -> lottoNumber1.isWinningNumber(lottoNumber)))
                 .count();
+    }
+
+    boolean isSecondRank(LottoNumber bonusLotto) {
+        return lotto.stream()
+                .anyMatch(lottoNumber ->  lottoNumber.isMatchBonusNum(bonusLotto));
     }
 }
