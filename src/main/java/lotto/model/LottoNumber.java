@@ -2,16 +2,16 @@ package lotto.model;
 
 import java.util.*;
 
-import static lotto.model.WinningNumber.LOTTO_END_NUMBER;
 
 public class LottoNumber {
+    public static final int LOTTO_END_NUMBER = 45;
     private final int number;
 
     private LottoNumber(int number) {
         this.number = number;
     }
 
-    public static LottoNumber number(int number) {
+    public static LottoNumber getCachedNumber(int number) {
         return getNumber.cache.get(number);
     }
 
@@ -29,8 +29,8 @@ public class LottoNumber {
         }
     }
 
-    boolean isWinningNumber(String winNums) {
-        return Integer.parseInt(winNums) == this.number;
+    boolean isWinningNumber(LottoNumber winNums) {
+        return winNums.number == this.number;
     }
 
     public int getNumber() {
