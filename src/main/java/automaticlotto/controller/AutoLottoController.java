@@ -1,5 +1,6 @@
 package automaticlotto.controller;
 
+import automaticlotto.domain.Lotto;
 import automaticlotto.domain.Lottos;
 import automaticlotto.view.InputView;
 import automaticlotto.view.OutputView;
@@ -13,7 +14,7 @@ public class AutoLottoController {
         int buyLottoNumbers = OutputView.showLottoNumber(purchaseAmount);
         Lottos lottos = createLottos(buyLottoNumbers);
         showBuyingLottos(lottos);
-
+        Lotto winningLotto = InputView.splitWinningNumbers();
     }
 
 }
