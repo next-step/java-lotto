@@ -9,7 +9,7 @@ public class LottoValidator {
 
     public static void validateLottoSize(int size) {
         if (size != LOTTO_SIZE) {
-            throw new IllegalArgumentException("숫자 " + LOTTO_SIZE + "개를 입력해주세요.");
+            throw new IllegalArgumentException("중복되지 않는 숫자 " + LOTTO_SIZE + "개를 입력해주세요.");
         }
     }
 

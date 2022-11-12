@@ -11,7 +11,7 @@ public class Print {
 
     public static void result(List<Lotto> result) {
         for (Lotto lotto : result) {
-            System.out.println(lotto.getLotto());
+            System.out.println(lotto);
         }
     }
 

@@ -24,4 +24,9 @@ public class Lotto {
     public boolean isExist(Integer lottoNumber) {
         return lotto.contains(lottoNumber);
     }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
+    }
 }
