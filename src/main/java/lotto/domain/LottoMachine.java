@@ -11,7 +11,13 @@ public class LottoMachine {
     private static final int PRICE_PER_LOTTO = 1000;
     private static final NumberGenerator numberGenerator = new LottoNumberGenerator();
 
-    public Lottos purchase(PurchaseMoney purchaseMoney) {
+    private final PurchaseMoney purchaseMoney;
+
+    public LottoMachine(PurchaseMoney purchaseMoney) {
+        this.purchaseMoney = purchaseMoney;
+    }
+
+    public Lottos purchase() {
         int lottoCount = getPossiblePurchaseLottoCount(purchaseMoney);
 
         return IntStream.range(START_COUNT, lottoCount)

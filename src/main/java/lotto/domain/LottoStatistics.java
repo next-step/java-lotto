@@ -9,7 +9,15 @@ public class LottoStatistics {
     private static final long INITIAL_COUNT = 0L;
     private static final long PLUS_COUNT = 1L;
 
-    public AccordanceCount collectAccordanceCount(Lottos lottos, WinningNumbers winningNumbers) {
+    private final Lottos lottos;
+    private final WinningNumbers winningNumbers;
+
+    public LottoStatistics(Lottos lottos, WinningNumbers winningNumbers) {
+        this.lottos = lottos;
+        this.winningNumbers = winningNumbers;
+    }
+
+    public AccordanceCount collectAccordanceCount() {
         List<Long> accordanceCounts = lottos.getAccordanceCounts(winningNumbers);
         Map<WinningAccordance, Long> countsByWinningAccordance = collectEachAccordanceCount(accordanceCounts);
 
