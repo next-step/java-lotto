@@ -1,26 +1,28 @@
 package step2step3.lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
     private static final int NUMBER_OF_LOTTO = 6;
 
-    private final Set<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    private LottoTicket(Set<Integer> numbers) {
+    private LottoTicket(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
     public static LottoTicket from(NumbersGenerator numbersGenerator) {
         Set<Integer> numbers = numbersGenerator.numbers();
         verifyNumbers(numbers);
+        return new LottoTicket(lottoNumbers(numbers));
+    }
 
-        return new LottoTicket(numbers);
+    private static List<LottoNumber> lottoNumbers(Set<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private static void verifyNumbers(Set<Integer> numbers) {
@@ -31,9 +33,8 @@ public class LottoTicket {
     }
 
     public void printNumbers(OutputDevice outputDevice) {
-        List<Integer> copiedNumbers = new ArrayList<>(numbers);
-        Collections.sort(copiedNumbers);
-        outputDevice.printNumbers(copiedNumbers);
+        Collections.sort(numbers);
+        outputDevice.printNumbers(numbers);
     }
 
     public Rank rank(LottoTicket winningLottoTicket) {
@@ -58,6 +59,7 @@ public class LottoTicket {
     }
 
     public boolean hasBonusNumber(int number) {
-        return numbers.contains(number);
+        return numbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.isSameNumber(number));
     }
 }
