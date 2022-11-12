@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.EnumMap;
 
-import static lotto.model.Rank.FOUR;
-import static lotto.model.Rank.MISS;
+import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ProfitTest {
@@ -26,7 +25,8 @@ class ProfitTest {
         winningMatch.put(MISS, 2);
         winningMatch.put(FOUR, 0);
 
-       assertThat(profit.calculate(matchingCollection())).isEqualTo(BigDecimal.ZERO);
+       assertThat(profit.calculate(new MatchingCollection(winningMatch)))
+               .isEqualTo(BigDecimal.ZERO);
     }
 
     @Test
@@ -35,20 +35,18 @@ class ProfitTest {
         winningMatch.put(MISS, 2);
         winningMatch.put(FOUR, 1);
 
-        assertThat(profit.calculate(matchingCollection()))
+        assertThat(profit.calculate(new MatchingCollection(winningMatch)))
                 .isEqualTo(profit.calculateRevenue(BigDecimal.valueOf(FOUR.getPrice())));
     }
 
     @Test
-    @DisplayName("일치한 로또가격이 없으면 수익률이 0이다 ")
-    void profit2() {
+    @DisplayName("수익률이 0이아니면 수익률을 반환한다 : 2등포함")
+    void profit_bonus() {
         winningMatch.put(MISS, 2);
         winningMatch.put(FOUR, 1);
-        System.out.println("테스트1 =" + matchingCollection().calculateBenefit());
-        System.out.println("테스트2= " + profit.calculateRevenue(matchingCollection().calculateBenefit()));
-    }
+        winningMatch.put(TWO, 1);
 
-    private MatchingCollection matchingCollection() {
-        return new MatchingCollection(winningMatch);
+        assertThat(profit.calculate(new MatchingCollection(winningMatch)))
+                .isEqualTo(profit.calculateRevenue(BigDecimal.valueOf(FOUR.getPrice() + TWO.getPrice())));
     }
 }
