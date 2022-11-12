@@ -15,4 +15,16 @@ public class LottoWinning {
         return lottoResult;
     }
 
+    public int rankLottoWinner(List<Integer> lottoResult) {
+        int totalMoney = 0;
+        for (int i = 3; i < lottoResult.size(); i++) {
+            LottoRanking lottoRanking = lottoResult.get(i) > 0 ? LottoRanking.findLottoRanking(i) : LottoRanking.findLottoRanking(0);
+            totalMoney += lottoRanking.getCompensation() * lottoResult.get(i);
+        }
+        return totalMoney;
+    }
+
+    public static String revenueRate(int purchaseAmount, int totalReward) {
+        return String.format("%.2f", (double) totalReward / purchaseAmount);
+    }
 }
