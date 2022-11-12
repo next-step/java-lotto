@@ -34,7 +34,6 @@ public class LottoTicketsFactory {
     private List<LottoTicket> numberAsLottoTickets(int numberOfTickets) {
         return IntStream.range(0, numberOfTickets)
                 .mapToObj(numberOfTicket -> LottoTicket.from(numbersGenerator))
-                .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
 }
