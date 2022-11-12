@@ -1,7 +1,9 @@
 package lotto.model;
 
+import java.util.Arrays;
 
 public enum Rank {
+    MISS(0, 0),
     THREE(3, 5_000),
     FOUR(4,50_000),
     FIVE(5,1_500_000),
@@ -15,11 +17,22 @@ public enum Rank {
         this.price = price;
     }
 
-    public int calculatePrice(int matchingNumbers) {
-        return this.price * matchingNumbers;
+    public int calculatePrice(int value) {
+        return this.price * value;
     }
 
-    public boolean event(int input) {
-        return input == this.order;
+    public static Rank findRank(int count) {
+        return Arrays.stream(Rank.values())
+                .filter(value -> count == value.count())
+                .findFirst()
+                .orElse(MISS);
+    }
+
+    public int count() {
+        return this.order;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
