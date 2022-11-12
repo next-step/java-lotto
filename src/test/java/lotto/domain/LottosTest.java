@@ -39,4 +39,24 @@ class LottosTest {
             new Accordance(3, false)
         );
     }
+
+    @DisplayName("수동 구매 로또, 자동 구매 로또를 합친 로또 생성")
+    @Test
+    void combineLottosTest() {
+        Lottos manualLottos = new Lottos(List.of(
+            new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+            new Lotto(List.of(1, 2, 3, 4, 5, 7)),
+            new Lotto(List.of(1, 2, 3, 4, 5, 8))
+        ));
+        Lottos autoLottos = new Lottos(List.of(
+            new Lotto(List.of(3, 4, 5, 6, 7, 8)),
+            new Lotto(List.of(3, 4, 5, 6, 7, 9)),
+            new Lotto(List.of(3, 4, 5, 6, 7, 10)),
+            new Lotto(List.of(3, 4, 5, 6, 7, 11))
+        ));
+
+        Lottos result = Lottos.combine(manualLottos, autoLottos);
+
+        assertThat(result.getCount()).isEqualTo(7);
+    }
 }

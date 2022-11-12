@@ -3,6 +3,7 @@ package lotto.domain;
 import static java.util.stream.Collectors.*;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -10,6 +11,14 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos combine(Lottos lottos, Lottos others) {
+        return Stream.concat(
+                lottos.getLottos().stream(),
+                others.getLottos().stream()
+            )
+            .collect(collectingAndThen(toList(), Lottos::new));
     }
 
     public List<Accordance> getAccordances(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
