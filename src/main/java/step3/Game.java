@@ -25,7 +25,7 @@ public class Game {
         Print.howManyBuyLotto(manualLotto.size(), autoLotto.size(), combineLotto);
 
         Print.winningNumber();
-        Lotto winLotto = new Lotto(InputView.inputWinningNumber());
+        Lotto winLotto = lotto.makeWinningLotto(InputView.inputWinningNumber());
         Print.bonusBall();
         int bonus = Integer.parseInt(InputView.input());
         BonusLotto bonusLotto = new BonusLotto(winLotto, bonus);
