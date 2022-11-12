@@ -1,26 +1,25 @@
 package automaticlotto.controller;
 
 import automaticlotto.domain.Lotto;
+import automaticlotto.domain.LottoWinning;
+import automaticlotto.domain.Lottos;
 import automaticlotto.view.InputView;
 import automaticlotto.view.OutputView;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static automaticlotto.domain.Lottos.createLottos;
+import static automaticlotto.view.OutputView.showBuyingLottos;
 
 public class AutoLottoController {
-
-    private static final Lotto lotto = new Lotto();
-
     public void startLotto() {
         int purchaseAmount = InputView.enterPurchaseAmount();
         int buyLottoNumbers = OutputView.showLottoNumber(purchaseAmount);
-        List<List<String>> buyLotto = new ArrayList<>();
-        for (int i = 0; i < buyLottoNumbers; i++) {
-            buyLotto.add(lotto.getWinningLotto());
-        }
-        OutputView.showBuyingLotto(buyLotto);
-        String[] winningNumber = InputView.splitWinningNumbers();
-        OutputView.winningStatistics(winningNumber, buyLotto, purchaseAmount);
+        Lottos lottos = createLottos(buyLottoNumbers);
+        showBuyingLottos(lottos);
+
     }
 
 }
