@@ -26,7 +26,7 @@ public class WinningNumbers {
 
     public void validationBlank(String winningNumbers){
         if(winningNumbers.isBlank()){
-            throw new IllegalArgumentException("빈값이 들어왔습니다.");
+            throw new NullPointerException("빈값이 들어왔습니다.");
         }
     }
 

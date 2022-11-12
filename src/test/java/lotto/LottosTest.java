@@ -40,7 +40,7 @@ public class LottosTest {
     public void lottosMakeNullPointException(){
         assertThatThrownBy(() -> new Lottos(new ArrayList<>()))
                 .isInstanceOf(NullPointerException.class)
-                .hasMessageContaining("로또가 생성 되지 않았습니다.");
+                .hasMessageContaining("로또가 없습니다.");
     }
 
 }

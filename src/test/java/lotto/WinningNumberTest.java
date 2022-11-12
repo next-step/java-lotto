@@ -34,7 +34,7 @@ public class WinningNumberTest {
     @Test
     @DisplayName("빈값 테스트")
     public void winningNumbersNullPointException(){
-        assertThatThrownBy(() -> new Lottos(new ArrayList<>()))
+        assertThatThrownBy(() -> new WinningNumbers(""))
                 .isInstanceOf(NullPointerException.class)
                 .hasMessageContaining("빈값이 들어왔습니다.");
     }
