@@ -19,15 +19,6 @@ class LottoTicketTest {
     }
 
     @Test
-    void 로또_번호가_1이상_46이하가_아닐_경우_예외가_발생한다() {
-        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(0, 1, 2, 3, 4, 5));
-
-        assertThatThrownBy(() -> LottoTicket.from(numbersGenerator))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1 이상 45이하 이어야 합니다.");
-    }
-
-    @Test
     void 로또_번호를_출력할_수_있다() {
         NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
 

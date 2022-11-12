@@ -28,11 +28,6 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
 
-        boolean isValidNumber = numbers.stream().anyMatch(number -> number < 1 ||  45 < number);
-        if (isValidNumber) {
-            throw new IllegalArgumentException("로또 번호는 1 이상 45이하 이어야 합니다.");
-        }
-
     }
 
     public void printNumbers(OutputDevice outputDevice) {
