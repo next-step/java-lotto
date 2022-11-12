@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,7 @@ class LottoShopTest {
     void purchaseCountTest(int input, int expected) {
         PurchaseMoney purchaseMoney = new PurchaseMoney(input);
 
-        Lottos lottos = lottoShop.purchase(purchaseMoney);
+        Lottos lottos = lottoShop.purchase(purchaseMoney, List.of());
 
         assertThat(lottos.getCount()).isEqualTo(expected);
     }

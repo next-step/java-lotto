@@ -1,7 +1,9 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.AccordanceCount;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
@@ -16,9 +18,10 @@ public class LottoApp {
         InputView inputView = new InputView();
         PurchaseMoney purchaseMoney = inputView.inputPurchaseMoney();
         int manualLottoCount = inputView.inputManualLottoCount();
+        List<LottoNumbers> manualLottoNumbers = inputView.inputManualLottoNumbers(manualLottoCount);
 
         LottoShop lottoShop = new LottoShop();
-        Lottos lottos = lottoShop.purchase(purchaseMoney);
+        Lottos lottos = lottoShop.purchase(purchaseMoney, manualLottoNumbers);
 
         ResultView resultView = new ResultView();
         resultView.printLottos(lottos);
