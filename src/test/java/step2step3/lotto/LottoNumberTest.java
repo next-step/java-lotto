@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoNumberTest {
     @Test
@@ -22,5 +23,12 @@ class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자는 1이상 46이하이어야 합니다.");
+    }
+
+    @Test
+    void 로또_숫자가_같으면_참을_반환한다() {
+        LottoNumber lottoNumber = new LottoNumber(5);
+
+        assertTrue(lottoNumber.isSameNumber(5));
     }
 }
