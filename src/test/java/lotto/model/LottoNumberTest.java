@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.*;
 
-import static lotto.model.WinningNumber.LOTTO_END_NUMBER;
+import static lotto.model.LottoNumber.LOTTO_END_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -16,7 +16,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("하나의 인스턴스만 보장한다")
     void create() {
-        assertSame(LottoNumber.number(3), LottoNumber.number(3));
+        assertSame(LottoNumber.getCachedNumber(3), LottoNumber.getCachedNumber(3));
     }
 
     @Test

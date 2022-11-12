@@ -4,46 +4,68 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import java.util.Arrays;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static lotto.model.Lotto.toLottoNumber;
+import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoCollectionTest {
 
-    private LottoCollection collection;
-    private List<String> numbers;
+    private LottoCollection buyLottos;
+    private final EnumMap<Rank, Integer> winningMatch = new EnumMap<>(Rank.class);
+    private Lotto buyLotto1;
 
     @BeforeEach
     void setup() {
-        Lotto lotto1 = toLottoNumber(List.of(3, 5, 10, 12, 16, 33));
-        Lotto lotto2 = toLottoNumber(List.of(4, 6, 10, 11, 13, 18));
-        Lotto lotto3 = toLottoNumber(List.of(7, 8, 14, 18, 19, 35));
-        List<Lotto> lottos = List.of(lotto1, lotto2, lotto3);
-
-        collection = new LottoCollection(lottos);
-        numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        buyLotto1 = toLottoNumber(List.of(3, 5, 10, 12, 16, 33));
+        Lotto buyLotto2 = toLottoNumber(List.of(4, 6, 10, 11, 13, 18));
+        Lotto buyLotto3 = toLottoNumber(List.of(7, 8, 14, 18, 19, 35));
+        buyLottos = new LottoCollection(List.of(buyLotto1, buyLotto2, buyLotto3));
     }
 
     @Test
-    @DisplayName("구매한 로또개수 사이즈를 반환한다")
-    void test() {
-        assertThat(collection.findWinner(numbers).size()).isEqualTo(3);
-    }
+    @DisplayName("로또 구매개수가 0개면 예외를 던진다")
+    void quantity() {
+        List<Lotto> emptyList =new ArrayList<>();
 
-    @Test
-    @DisplayName("당첨번호와 일치하는 숫자의 개수를 출력한다")
-    void test2() {
-        assertThat(collection.findWinner(numbers)).containsExactly(2,2,0);
+        assertThatThrownBy(() -> {
+            new LottoCollection(emptyList);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"THREE,1", "FOUR,1", "FIVE,0", "SIX,0"})
-    @DisplayName("일치하는 번호개수를 카운팅한다")
-    void test3(Rank element, int expected) {
-        WinningNumber winningNumber = new WinningNumber(collection, Arrays.asList("3", "5", "10", "11", "13", "18"));
-        assertThat(winningNumber.getMatchingCount(element::event)).isEqualTo(expected);
+    @MethodSource("rankTest")
+    @DisplayName("당첨번호의 등수를 반환한다")
+    void winningRank(List<Integer> element, Rank expected) {
+        Lotto winningLotto = toLottoNumber(element);
+        assertThat(buyLotto1.countRank(winningLotto)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("당첨번호의 등수, 개수를 담은 EnumMap을 반환한다")
+    void rank() {
+        Lotto winningLotto = toLottoNumber(List.of(3, 5, 10, 12, 18, 36));
+        winningMatch.put(MISS, 2);
+        winningMatch.put(FOUR, 1);
+
+        assertThat(buyLottos.match(winningLotto)).isEqualTo(new MatchingCollection(winningMatch));
+    }
+
+    private static Stream<Arguments> rankTest() {
+        return Stream.of(
+                Arguments.of(List.of(3, 5, 10, 12, 16, 33), SIX),
+                Arguments.of(List.of(3, 5, 10, 12, 16, 36), FIVE),
+                Arguments.of(List.of(3, 5, 10, 12, 18, 36), FOUR),
+                Arguments.of(List.of(3, 5, 10, 11, 18, 36), THREE),
+                Arguments.of(List.of(3, 5, 7, 13, 18, 36), MISS)
+        );
     }
 }
