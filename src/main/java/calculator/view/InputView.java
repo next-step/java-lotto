@@ -11,18 +11,16 @@ public class InputView {
 
     public InputView() {
     }
-    public List<String> getInputString(){
+
+    public List<String> getInputString() {
         String inputString = SCANNER.nextLine();
-        if(!isRightInput(inputString)){
+        if (!isRightInput(inputString)) {
             throw new IllegalArgumentException("올바르지 않은 입력값입니다.");
         }
         return STRING_UTIL.splitString(inputString);
     }
 
-    private boolean isRightInput(String inputString){
-        if(STRING_UTIL.isNullOrEmpty(inputString)||!STRING_UTIL.isRightString(inputString)){
-            return false;
-        }
-        return true;
+    private boolean isRightInput(String inputString) {
+        return !STRING_UTIL.isNullOrEmpty(inputString) && STRING_UTIL.isRightString(inputString);
     }
 }

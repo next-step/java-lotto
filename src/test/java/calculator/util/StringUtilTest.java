@@ -13,8 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringUtilTest {
     private static final StringUtil stringUtil = new StringUtil();
+
     @Test
-    public void isNullTest(){
+    public void isNullTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             stringUtil.isNullOrEmpty(null);
         });
@@ -22,34 +23,40 @@ public class StringUtilTest {
 
     @ParameterizedTest
     @DisplayName("isEmptyTest")
-    @ValueSource(strings={""})
-    public void isEmptyTest(String input){
+    @ValueSource(strings = {""})
+    public void isEmptyTest(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             stringUtil.isNullOrEmpty(input);
         });
     }
 
+    @Test
+    @DisplayName("RigthInputTest")
+    public void rightInputTest() {
+        assertThat(stringUtil.isNullOrEmpty(" ")).isFalse();
+    }
+
+
     @ParameterizedTest
     @DisplayName("isRigthStringTest")
-    @ValueSource(strings={"1 2 3 + - / *"})
-    public void isRigthStringTest(String string){
+    @ValueSource(strings = {"1 2 3 + - / *"})
+    public void isRigthStringTest(String string) {
         assertTrue(stringUtil.isRightString(string));
     }
 
     @ParameterizedTest
     @DisplayName("isWrongStringTest")
-    @ValueSource(strings={"a b","& % ^"})
-    public void isWrongStringTest(String string){
-        assertThatIllegalArgumentException().isThrownBy(()->{
+    @ValueSource(strings = {"a b", "& % ^"})
+    public void isWrongStringTest(String string) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             stringUtil.isRightString(string);
         });
-        //.isInstanceOf(IllegalArgumentException.class).withMessage("올바르지 않은 입력값 입니다.");
     }
 
     @Test
-    public void splitStringTest(){
-        String s="1 + 2 - 3";
-        List<String> expectedList =List.of("1","+","2","-","3");
+    public void splitStringTest() {
+        String s = "1 + 2 - 3";
+        List<String> expectedList = List.of("1", "+", "2", "-", "3");
         assertThat(stringUtil.splitString(s)).isEqualTo(expectedList);
     }
 }
