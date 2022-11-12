@@ -12,8 +12,8 @@ public class ResultView {
     private static final String BUY_LOTTO_MESSAGE = "개를 구매했습니다.";
     private static final String WINNING_STATS_MESSAGE = "당첨 통계";
 
-    public static void lottoCountMessage(int value){
-        System.out.println(value + BUY_LOTTO_MESSAGE);
+    public static void lottoCountMessage(LottosDto lottosDto){
+        System.out.println(lottosDto.getLottosDtoSize() + BUY_LOTTO_MESSAGE);
     }
 
     public static void lottoTickets(LottosDto lottosDto){

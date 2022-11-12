@@ -13,9 +13,9 @@ import static lotto.view.ResultView.lottoCountMessage;
 public class LottoController {
 
     public void lottoStart(int money){
-        lottoCountMessage(money);
         Lottos lottos = Lottos.lottosMake(money);
         LottosDto lottosDto = new LottosDto(lottos);
+        lottoCountMessage(lottosDto);
         lottoTickets(lottosDto);
         WinningNumbers winningNumbers =  new WinningNumbers(inputLuckyNumber());
         winningStatics();
