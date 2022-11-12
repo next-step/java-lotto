@@ -1,14 +1,12 @@
 package lotto.ui;
 
-import lotto.LottoNumber;
-import lotto.LottoResult;
-import lotto.LottoResultStat;
-import lotto.LottoTicket;
+import lotto.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
+    private static final String PURCHASE_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_WINNER_STAT_BANNER = "당첨 통계\n---------";
     private static final String LOTTO_WINNER_STAT_FORMAT = "%d개 일치%s (%d원) - %d개\n";
     private static final String LOTTO_WINNER_BONUS = ", 보너스 볼 일치";
@@ -21,9 +19,13 @@ public class ResultView {
 
     }
 
-    public static void printLottoTickets(List<LottoTicket> tickets) {
-        for (LottoTicket ticket : tickets) {
-            printLottoTicket(ticket);
+    public static void printPurchaseCount(int manualCount, int autoCount) {
+        System.out.printf(PURCHASE_COUNT_FORMAT, manualCount, autoCount);
+    }
+
+    public static void printLotto(Lotto lotto) {
+        for (LottoNumbers numbers : lotto.getLottoNumbers()) {
+            printLottoNumbers(numbers);
         }
     }
 
@@ -34,8 +36,8 @@ public class ResultView {
         }
     }
 
-    private static void printLottoTicket(LottoTicket ticket) {
-        System.out.println(ticket.getNumbers().stream()
+    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
+        System.out.println(lottoNumbers.getNumbers().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList()));
     }
