@@ -1,12 +1,21 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private final int MIN_NUMBER = 1;
-    private final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private final int number;
+    private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
+
+    static {
+        IntStream.range(MIN_NUMBER, MAX_NUMBER + 1)
+                .mapToObj(idx -> lottoNumberMap.put(idx, new LottoNumber(idx)));
+    }
 
     public LottoNumber(int number) {
         validateNumber(number);
@@ -19,6 +28,14 @@ public class LottoNumber {
         }
     }
 
+    public static int getStartNumber() {
+        return MIN_NUMBER;
+    }
+
+    public static int getLastNumber() {
+        return MAX_NUMBER;
+    }
+
     public int getNumber() {
         return number;
     }
@@ -26,7 +43,9 @@ public class LottoNumber {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumber that = (LottoNumber) o;
         return MIN_NUMBER == that.MIN_NUMBER && MAX_NUMBER == that.MAX_NUMBER && number == that.number;
     }

@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class Lottos {
 
+    private static final BigDecimal DEFAULT_AMOUNT = BigDecimal.valueOf(1000);
     private final BigDecimal amount;
     private List<Lotto> lottoLists;
 
@@ -19,10 +20,21 @@ public class Lottos {
     }
 
     private static void validateAmount(BigDecimal amount) {
-        BigDecimal baseAmount = new BigDecimal(1000);
-        if (amount.compareTo(baseAmount) == -1) {
+        if (amount.compareTo(DEFAULT_AMOUNT) == -1) {
             throw new IllegalArgumentException("천 원 이상 내세요.");
         }
+    }
+
+    public static boolean getRank(List<Lotto> lottoList) {
+        for (int i = 0; i < lottoList.size(); i++) {
+            if (Rank.getResultRank(lottoList.get(i)).equals(Rank.SECOND)) {
+                return true;
+            }
+            if (Rank.getResultRank(lottoList.get(i)).equals(Rank.THIRD)) {
+                return false;
+            }
+        }
+        return false;
     }
 
     public BigDecimal getAmount() {
@@ -53,7 +65,9 @@ public class Lottos {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Lottos lottos = (Lottos) o;
         return Objects.equals(amount, lottos.amount) && Objects.equals(lottoLists, lottos.lottoLists);
     }
