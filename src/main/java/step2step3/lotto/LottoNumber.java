@@ -7,7 +7,14 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
+        extracted(number);
         this.number = number;
+    }
+
+    private void extracted(int number) {
+        if (number < 1 || 45 < number) {
+            throw new IllegalArgumentException("숫자는 1이상 46이하이어야 합니다.");
+        }
     }
 
     @Override
