@@ -1,9 +1,11 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static lotto.model.Profit.LOTTO_PRICE;
 
@@ -18,11 +20,21 @@ public class InputView {
         return SCANNER.nextInt() / LOTTO_PRICE;
     }
 
-    public static List<String> inputWinningNumber() {
+    public static Lotto inputWinningLotto() {
         System.out.println("지난주 당첨 번호를 입력해주세요");
         SCANNER.nextLine();
-
         String[] split = SCANNER.nextLine().split(",");
-        return new ArrayList<>(Arrays.asList(split));
+
+        return new Lotto(parseLotto(split));
+    }
+
+    private static Set<LottoNumber> parseLotto(final String[] split) {
+        return Arrays.stream(split)
+                .map(parsing())
+                .collect(Collectors.toSet());
+    }
+
+    private static Function<String, LottoNumber> parsing() {
+        return string -> LottoNumber.getCachedNumber(Integer.parseInt(string));
     }
 }

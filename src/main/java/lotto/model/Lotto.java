@@ -1,31 +1,50 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static lotto.model.LottoGenerator.LOTTO_MAX_LENGTH;
 
 public class Lotto {
-    private final List<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto;
 
-    public Lotto(List<LottoNumber> lotto) {
+    public Lotto(Set<LottoNumber> lotto) {
+        validation(lotto);
         this.lotto = lotto;
     }
 
-    public int countWinner(List<String> winningNumber) {
-        return (int) lotto.stream()
-                .flatMap(lottoNumber -> winningNumber.stream()
-                        .filter(lottoNumber::isWinningNumber))
-                .count();
+    public Rank countRank(Lotto winningLotto) {
+        return Rank.findRank(count(winningLotto));
     }
 
-    public static Lotto toLottoNumber(List<Integer> lotto) {
-        List<LottoNumber> list = new ArrayList<>();
-        for (Integer integer : lotto) {
-            list.add(LottoNumber.cache().get(integer));
+    public static Lotto toLottoNumber(List<Integer> testLotto) {
+        return new Lotto(getLottoNumbers(testLotto));
+    }
+
+    public static Set<LottoNumber> toLottoSet(List<Integer> testLotto) {
+        return getLottoNumbers(testLotto);
+    }
+
+    public Set<LottoNumber> getLotto() {
+        return Collections.unmodifiableSet(lotto);
+    }
+
+    private static Set<LottoNumber> getLottoNumbers(List<Integer> testLotto) {
+        return testLotto.stream()
+                .map(Integer -> LottoNumber.cache().get(Integer))
+                .collect(Collectors.toSet());
+    }
+
+    private void validation(Set<LottoNumber> lotto) {
+        if (lotto.size() != LOTTO_MAX_LENGTH) {
+            throw new IllegalArgumentException("로또의 개수를 확인해주세요");
         }
-        return new Lotto(list);
     }
 
-    public List<LottoNumber> getLotto() {
-        return lotto;
+    private int count(Lotto winningLotto) {
+        return (int) lotto.stream()
+                .flatMap(lottoNumber -> winningLotto.lotto.stream()
+                        .filter(lottoNumber1 -> lottoNumber1.isWinningNumber(lottoNumber)))
+                .count();
     }
 }
