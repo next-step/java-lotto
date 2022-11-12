@@ -3,7 +3,10 @@ package automaticlotto.domain;
 import automaticlotto.automaticexception.ExceptionCommand;
 import automaticlotto.automaticexception.InputValueException;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -22,6 +25,18 @@ public class Lotto {
         if (lottoNumbers.size() != lottoNumbers.stream().map(LottoNumber::getLottoNumber).distinct().count()) {
             throw new InputValueException(ExceptionCommand.LOTTO_NUMBER_OVERLAP_EXCEPTION_MESSAGE);
         }
+    }
+
+    public static List<LottoNumber> createLotto() {
+        List<LottoNumber> randomLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+            randomLottoNumbers.add(new LottoNumber((int) (Math.random() * 45 + 1)));
+        }
+        return randomLottoNumbers;
+    }
+
+    public static List<LottoNumber> sortLotto(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream().sorted(Comparator.comparing(LottoNumber::getLottoNumber)).collect(Collectors.toList());
     }
 
     public List<LottoNumber> getLottoNumbers() {
