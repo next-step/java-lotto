@@ -1,4 +1,4 @@
-package step2step3.lotto;
+package step2step3.lotto.lottoTicket;
 
 public class WinningLottoInformation {
     private final int bonusNumber;

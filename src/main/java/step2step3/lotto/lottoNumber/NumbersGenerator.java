@@ -1,4 +1,4 @@
-package step2step3.lotto;
+package step2step3.lotto.lottoNumber;
 
 import java.util.Set;
 

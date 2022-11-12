@@ -1,5 +1,7 @@
 package step2step3.lotto;
 
+import step2step3.lotto.lottoTicket.Rank;
+
 import java.util.List;
 import java.util.Objects;
 

@@ -3,6 +3,10 @@ package step2step3.lottoGame;
 import step2step3.io.ConsoleInputView;
 import step2step3.io.ConsoleOutputView;
 import step2step3.lotto.*;
+import step2step3.lotto.lottoNumber.NumbersGenerator;
+import step2step3.lotto.lottoTicket.LottoTicket;
+import step2step3.lotto.lottoTicket.OutputDevice;
+import step2step3.lotto.lottoTicket.WinningLottoInformation;
 import step2step3.randomNumbers.InfusedNumbersGenerator;
 
 import java.io.IOException;

@@ -1,8 +1,12 @@
-package step2step3.lotto;
+package step2step3.lotto.lottoTicket;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import step2step3.lotto.lottoNumber.NumbersGenerator;
+import step2step3.lotto.lottoTicket.LottoTicket;
+import step2step3.lotto.lottoTicket.Rank;
+import step2step3.lotto.lottoTicket.WinningLottoInformation;
 
 import java.util.Set;
 import java.util.stream.Stream;

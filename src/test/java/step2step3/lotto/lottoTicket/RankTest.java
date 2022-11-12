@@ -1,6 +1,7 @@
-package step2step3.lotto;
+package step2step3.lotto.lottoTicket;
 
 import org.junit.jupiter.api.Test;
+import step2step3.lotto.lottoTicket.Rank;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;

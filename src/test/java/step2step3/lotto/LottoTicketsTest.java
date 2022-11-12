@@ -1,6 +1,10 @@
 package step2step3.lotto;
 
 import org.junit.jupiter.api.Test;
+import step2step3.lotto.lottoNumber.NumbersGenerator;
+import step2step3.lotto.lottoTicket.LottoTicket;
+import step2step3.lotto.lottoTicket.Rank;
+import step2step3.lotto.lottoTicket.WinningLottoInformation;
 
 import java.util.List;
 import java.util.Set;

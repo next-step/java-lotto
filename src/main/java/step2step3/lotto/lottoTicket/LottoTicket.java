@@ -1,4 +1,8 @@
-package step2step3.lotto;
+package step2step3.lotto.lottoTicket;
+
+import step2step3.lotto.lottoNumber.LottoNumber;
+import step2step3.lotto.lottoNumber.LottoNumberStorage;
+import step2step3.lotto.lottoNumber.NumbersGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;

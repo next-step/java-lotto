@@ -1,5 +1,10 @@
 package step2step3.lotto;
 
+import step2step3.lotto.lottoTicket.LottoTicket;
+import step2step3.lotto.lottoTicket.OutputDevice;
+import step2step3.lotto.lottoTicket.Rank;
+import step2step3.lotto.lottoTicket.WinningLottoInformation;
+
 import java.util.List;
 import java.util.Objects;
 

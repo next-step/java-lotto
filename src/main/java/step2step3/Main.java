@@ -5,8 +5,8 @@ import step2step3.io.ConsoleOutputDevice;
 import step2step3.io.ConsoleOutputView;
 import step2step3.lottoGame.LottoGame;
 import step2step3.lotto.LottoTickets;
-import step2step3.lotto.NumbersGenerator;
-import step2step3.lotto.OutputDevice;
+import step2step3.lotto.lottoNumber.NumbersGenerator;
+import step2step3.lotto.lottoTicket.OutputDevice;
 import step2step3.randomNumbers.RandomNumbersGenerator;
 
 import java.io.IOException;
