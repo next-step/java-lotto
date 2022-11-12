@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Set;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,16 +19,15 @@ class LottoTest {
         Set<Integer> set = Set.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(set);
 
-        assertThat(lotto.getLotto()).isEqualTo(set);
+        assertThat(lotto.toString()).isEqualTo(set.toString());
     }
 
     @Test
     @DisplayName("매개변수 String[], 당첨 번호 로또 생성")
     void createWinLotto() {
-        String[] winLotto = {"1", "2", "3", "4", "5", "6"};
-        Lotto lotto = new Lotto(winLotto);
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.getLotto()).isEqualTo(Set.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.toString()).isEqualTo(Set.of(1, 2, 3, 4, 5, 6).toString());
     }
 
     @Test
@@ -38,15 +39,6 @@ class LottoTest {
         assertThat(lotto.isExist(6)).isTrue();
     }
 
-    @Test
-    @DisplayName("매개변수 String[], 당첨 번호 중복 체크")
-    void validCreateWinLotto() {
-        String[] winLotto = {"1", "2", "3", "4", "6", "6"};
-
-        assertThatThrownBy(() -> new Lotto(winLotto))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @ParameterizedTest
     @DisplayName("로또 생성 시 번호 범위 또는 중복 번호 예외 체크")
     @CsvSource(value = {
@@ -54,7 +46,8 @@ class LottoTest {
             "1, 2, 3, 4, 5, 101"
     })
     void checkRangeAndSameBall(String input) {
-        assertThatThrownBy(() -> new Lotto(input.split(", ")))
+        assertThatThrownBy(
+                () -> new Lotto(Stream.of(input.split(", ")).map(Integer::parseInt).collect(Collectors.toSet())))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
