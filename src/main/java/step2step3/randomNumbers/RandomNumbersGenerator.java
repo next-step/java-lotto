@@ -10,8 +10,11 @@ public class RandomNumbersGenerator implements NumbersGenerator {
 
     @Override
     public Set<Integer> numbers() {
+        final int randomNumberMin = 1;
+        final int randomNumberMax = 45;
+
         return ThreadLocalRandom.current()
-                .ints(1, 46)
+                .ints(randomNumberMin, randomNumberMax + 1)
                 .distinct()
                 .limit(6)
                 .boxed()
