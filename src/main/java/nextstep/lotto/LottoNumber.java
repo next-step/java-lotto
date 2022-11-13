@@ -1,5 +1,9 @@
 package nextstep.lotto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
 	private static final LottoNumber[] NUMBERS;
@@ -14,8 +18,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 	private final int number;
 
+	public static LottoNumber lottoNumber(final int number) {
+		if(number < MIN || number > MAX) {
+			throw new IllegalArgumentException("로또 번호는 1-45만 가능합니다.");
+		}
+		return NUMBERS[number-1];
+	}
 	private LottoNumber(int number) {
 		this.number = number;
+	}
+
+	public static List<LottoNumber> lottoNumbers() {
+		return Arrays.asList(NUMBERS);
 	}
 
 	@Override
@@ -31,13 +45,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	@Override
 	public int hashCode() {
 		return number;
-	}
-
-	public static LottoNumber lottoNumber(final int number) {
-		if(number < MIN || number > MAX) {
-			throw new IllegalArgumentException("로또 번호는 1-45만 가능합니다.");
-		}
-		return NUMBERS[number-1];
 	}
 
 	@Override
