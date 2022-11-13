@@ -42,7 +42,7 @@ class LottoCollectionTest {
     @DisplayName("당첨번호의 등수를 등급으로 반환한다")
     void countRank(List<Integer> element, Rank expected) {
         Lotto winningLotto = toLottoNumber(element);
-        assertThat(buyLotto1.countRank(winningLotto)).isEqualTo(expected);
+        assertThat(buyLotto1.matchingRank(winningLotto)).isEqualTo(expected);
     }
 
     @ParameterizedTest

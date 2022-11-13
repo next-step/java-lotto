@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.*;
 
-public class LottoGenerator {
+public class LottoFactory {
     public static final int LOTTO_MAX_LENGTH = 6;
     private static final int LOTTO_INIT_LENGTH = 0;
 

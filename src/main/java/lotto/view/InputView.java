@@ -15,12 +15,12 @@ public class InputView {
     private InputView() {
     }
 
-    public static int inputQuantity() {
+    public static int quantity() {
         System.out.println("구매금액을 입력해 주세요");
         return SCANNER.nextInt() / LOTTO_PRICE;
     }
 
-    public static Lotto inputWinningLotto() {
+    public static Lotto winningLotto() {
         System.out.println("지난주 당첨 번호를 입력해주세요");
         SCANNER.nextLine();
         String[] split = SCANNER.nextLine().split(",");
@@ -28,9 +28,9 @@ public class InputView {
         return new Lotto(parseLotto(split));
     }
 
-    public static LottoNumber inputBonusLotto() {
+    public static LottoNumber bonusLotto() {
         System.out.println("보너스 볼을 입력해주세요");
-        return LottoNumber.getCachedNumber(SCANNER.nextInt());
+        return LottoNumber.cacheLottoNumber(SCANNER.nextInt());
     }
 
     private static Set<LottoNumber> parseLotto(final String[] split) {
@@ -40,6 +40,6 @@ public class InputView {
     }
 
     private static Function<String, LottoNumber> parsing() {
-        return string -> LottoNumber.getCachedNumber(Integer.parseInt(string));
+        return string -> LottoNumber.cacheLottoNumber(Integer.parseInt(string));
     }
 }

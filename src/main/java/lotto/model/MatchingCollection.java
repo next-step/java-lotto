@@ -16,7 +16,7 @@ public class MatchingCollection {
         this.matchCollection = matchCollection;
     }
 
-    public BigDecimal calculateBenefit() {
+    public BigDecimal benefit() {
         return BigDecimal.valueOf(matchCollection.keySet().stream()
                 .mapToDouble(rank -> rank.calculatePrice(matchCollection.get(rank)))
                 .sum());

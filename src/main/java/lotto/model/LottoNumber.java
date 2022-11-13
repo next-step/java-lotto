@@ -11,16 +11,15 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber getCachedNumber(int number) {
-        return getNumber.cache.get(number);
+    public static LottoNumber cacheLottoNumber(int number) {
+        return CacheLotto.cache.get(number);
     }
 
     public static Map<Integer, LottoNumber> cache() {
-        return getNumber.cache;
+        return CacheLotto.cache;
     }
 
-
-    private static class getNumber {
+    private static class CacheLotto {
         private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
         static {

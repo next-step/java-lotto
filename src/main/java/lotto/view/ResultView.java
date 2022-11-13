@@ -13,7 +13,7 @@ public class ResultView {
 
     public static void printLottoNumbers(LottoCollection buyLotto) {
         for (Lotto lotto : buyLotto.getLottos()) {
-            System.out.println(getLottoList(lotto));
+            System.out.println(lottoNumbers(lotto));
         }
     }
 
@@ -34,7 +34,7 @@ public class ResultView {
         System.out.println("총 수익률은 " + totalProfit + "입니다.");
     }
 
-    private static List<Integer> getLottoList(Lotto lotto) {
+    private static List<Integer> lottoNumbers(Lotto lotto) {
         return lotto.getLotto().stream()
                 .map(LottoNumber::getNumber)
                 .sorted()

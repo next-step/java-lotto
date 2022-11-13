@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoGeneratorTest {
+class LottoFactoryTest {
 
-    private LottoGenerator generator;
+    private LottoFactory generator;
 
     @BeforeEach
     void setup() {
-        generator = new LottoGenerator();
+        generator = new LottoFactory();
     }
 
     @Test

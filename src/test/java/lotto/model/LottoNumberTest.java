@@ -15,7 +15,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("하나의 인스턴스만 보장한다")
     void create() {
-        assertSame(LottoNumber.getCachedNumber(3), LottoNumber.getCachedNumber(3));
+        assertSame(LottoNumber.cacheLottoNumber(3), LottoNumber.cacheLottoNumber(3));
     }
 
     @Test

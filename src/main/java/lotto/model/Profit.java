@@ -15,7 +15,7 @@ public class Profit {
     }
 
     public BigDecimal calculate(MatchingCollection matchingCollection) {
-        BigDecimal sum = matchingCollection.calculateBenefit();
+        BigDecimal sum = matchingCollection.benefit();
 
         if (isZeroMoney(sum)) {
             return BigDecimal.ZERO;

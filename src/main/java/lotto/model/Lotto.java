@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.model.LottoGenerator.LOTTO_MAX_LENGTH;
+import static lotto.model.LottoFactory.LOTTO_MAX_LENGTH;
 
 public class Lotto {
     private final Set<LottoNumber> lotto;
@@ -13,19 +13,19 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public Rank countRank(Lotto winningLotto) {
-        return Rank.findRank(count(winningLotto));
+    public Rank matchingRank(Lotto winningLotto) {
+        return Rank.findRank(counting(winningLotto));
     }
 
     public static Lotto toLottoNumber(List<Integer> testLotto) {
-        return new Lotto(getLottoNumbers(testLotto));
+        return new Lotto(lottoNumbers(testLotto));
     }
 
     public static Set<LottoNumber> toLottoSet(List<Integer> testLotto) {
-        return getLottoNumbers(testLotto);
+        return lottoNumbers(testLotto);
     }
 
-    private static Set<LottoNumber> getLottoNumbers(List<Integer> testLotto) {
+    private static Set<LottoNumber> lottoNumbers(List<Integer> testLotto) {
         return testLotto.stream()
                 .map(Integer -> LottoNumber.cache().get(Integer))
                 .collect(Collectors.toSet());
@@ -41,7 +41,7 @@ public class Lotto {
         }
     }
 
-    private int count(Lotto winningLotto) {
+    private int counting(Lotto winningLotto) {
         return (int) lotto.stream()
                 .flatMap(lottoNumber -> winningLotto.lotto.stream()
                         .filter(lottoNumber1 -> lottoNumber1.isWinningNumber(lottoNumber)))
