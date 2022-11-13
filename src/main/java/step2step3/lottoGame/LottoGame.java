@@ -2,10 +2,12 @@ package step2step3.lottoGame;
 
 import step2step3.io.ConsoleInputView;
 import step2step3.io.ConsoleOutputView;
-import step2step3.lotto.*;
+import step2step3.lotto.LottoTickets;
+import step2step3.lotto.LottoTicketsFactory;
+import step2step3.lotto.MatchIndicatorCalculator;
+import step2step3.lotto.YieldCalculator;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
 import step2step3.lotto.lottoTicket.LottoTicket;
-import step2step3.lotto.lottoTicket.OutputDevice;
 import step2step3.lotto.lottoTicket.WinningLotto;
 import step2step3.randomNumbers.InfusedNumbersGenerator;
 
@@ -13,14 +15,11 @@ import java.io.IOException;
 
 public class LottoGame {
 
-    private final OutputDevice outputDevice;
-
     private final ConsoleOutputView consoleOutputView;
     private final ConsoleInputView consoleInputView;
     private final NumbersGenerator numbersGenerator;
 
-    public LottoGame(OutputDevice outputDevice, ConsoleOutputView consoleOutputView, ConsoleInputView consoleInputView, NumbersGenerator numbersGenerator) {
-        this.outputDevice = outputDevice;
+    public LottoGame(ConsoleOutputView consoleOutputView, ConsoleInputView consoleInputView, NumbersGenerator numbersGenerator) {
         this.consoleOutputView = consoleOutputView;
         this.consoleInputView = consoleInputView;
         this.numbersGenerator = numbersGenerator;
@@ -38,7 +37,7 @@ public class LottoGame {
     }
 
     public void printLottoTicketsNumbers(LottoTickets lottoTickets) {
-        lottoTickets.printNumbers(outputDevice);
+        consoleOutputView.printLottoTickets(lottoTickets);
     }
 
     public void winningStatistics(LottoTickets lottoTickets) throws IOException {

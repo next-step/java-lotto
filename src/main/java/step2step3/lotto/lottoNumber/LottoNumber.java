@@ -46,4 +46,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public String toString() {
         return String.valueOf(number);
     }
+
+    public int number() {
+        return number;
+    }
 }

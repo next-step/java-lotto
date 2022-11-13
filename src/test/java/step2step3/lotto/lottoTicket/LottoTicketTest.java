@@ -20,17 +20,6 @@ class LottoTicketTest {
     }
 
     @Test
-    void 로또_번호를_출력할_수_있다() {
-        NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
-
-        LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
-
-        OutputDevice outputDevice = new OutputDevice.Fake();
-        assertThatCode(() -> lottoTicket.printNumbers(outputDevice))
-                .doesNotThrowAnyException();
-    }
-
-    @Test
     void 등수를_구할_수_있다() {
         NumbersGenerator numbersGenerator = new NumbersGenerator.Fake(Set.of(1, 2, 3, 4, 5, 6));
 

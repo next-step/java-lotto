@@ -1,7 +1,6 @@
 package step2step3.lotto;
 
 import step2step3.lotto.lottoTicket.LottoTicket;
-import step2step3.lotto.lottoTicket.OutputDevice;
 import step2step3.lotto.lottoTicket.Rank;
 import step2step3.lotto.lottoTicket.WinningLotto;
 
@@ -25,8 +24,8 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public void printNumbers(OutputDevice outputDevice) {
-        lottoTickets.forEach(lottoTicket -> lottoTicket.printNumbers(outputDevice));
+    public List<LottoTicket> lottoTickets() {
+        return List.copyOf(lottoTickets);
     }
 
     @Override

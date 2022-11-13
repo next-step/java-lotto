@@ -1,12 +1,10 @@
 package step2step3;
 
 import step2step3.io.ConsoleInputView;
-import step2step3.io.ConsoleOutputDevice;
 import step2step3.io.ConsoleOutputView;
-import step2step3.lottoGame.LottoGame;
 import step2step3.lotto.LottoTickets;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
-import step2step3.lotto.lottoTicket.OutputDevice;
+import step2step3.lottoGame.LottoGame;
 import step2step3.randomNumbers.RandomNumbersGenerator;
 
 import java.io.IOException;
@@ -17,9 +15,8 @@ public class Main {
         ConsoleInputView consoleInputView = new ConsoleInputView();
         ConsoleOutputView outputView = new ConsoleOutputView();
         NumbersGenerator numbersGenerator = new RandomNumbersGenerator();
-        OutputDevice outputDevice = new ConsoleOutputDevice();
 
-        LottoGame lottoGame = new LottoGame(outputDevice, outputView, consoleInputView, numbersGenerator);
+        LottoGame lottoGame = new LottoGame(outputView, consoleInputView, numbersGenerator);
         LottoTickets lottoTickets = lottoGame.purchasedLotteries();
 
         lottoGame.printLottoTicketsNumbers(lottoTickets);

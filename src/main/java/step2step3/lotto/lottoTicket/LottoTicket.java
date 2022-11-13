@@ -31,8 +31,8 @@ public class LottoTicket {
         }
     }
 
-    public void printNumbers(OutputDevice outputDevice) {
-        outputDevice.printNumbers(numbers);
+    public List<LottoNumber> numbers() {
+        return List.copyOf(numbers);
     }
 
     public Rank rank(LottoTicket winningLottoTicket, boolean isMatchBonus) {
