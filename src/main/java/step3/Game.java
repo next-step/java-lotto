@@ -29,11 +29,11 @@ public class Game {
         Set<Integer> winningNumber = InputView.inputWinningNumber();
         Print.bonusBall();
         int bonus = Integer.parseInt(InputView.input());
-        WinningLotto bonusLotto = new WinningLotto(winningNumber, bonus);
+        WinningLotto winningLotto = lotto.makeWinningLotto(winningNumber, bonus);
 
         Lottos lottos = new Lottos(combineLotto);
 
-        Print.rateOfWin(input, new Result(lottos).results(bonusLotto));
+        Print.rateOfWin(input, new Result(lottos).results(winningLotto));
     }
 
     private static List<Lotto> makeManualLotto(int input) {
