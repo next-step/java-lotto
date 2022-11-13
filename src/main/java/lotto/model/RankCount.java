@@ -5,37 +5,37 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class MatchingRank {
-    private final Map<Rank, Integer> matchCollection;
+public class RankCount {
+    private final Map<Rank, Integer> rankCount;
 
-    public MatchingRank(Map<Rank, Integer> matchCollection) {
-        this.matchCollection = matchCollection;
+    public RankCount(Map<Rank, Integer> rankCount) {
+        this.rankCount = rankCount;
     }
 
     public BigDecimal benefit() {
-        return BigDecimal.valueOf(matchCollection.keySet().stream()
-                .mapToDouble(rank -> rank.calculatePrice(matchCollection.get(rank)))
+        return BigDecimal.valueOf(rankCount.keySet().stream()
+                .mapToDouble(rank -> rank.calculatePrice(rankCount.get(rank)))
                 .sum());
     }
 
     public void findSecondRank(List<Lotto> lottos, LottoNumber bonusLotto) {
-        matchCollection.keySet().stream()
+        rankCount.keySet().stream()
                 .filter(rank -> isThreeRank(lottos, bonusLotto, rank))
-                .map(rank -> matchCollection.replace(Rank.THREE, matchCollection.get(Rank.THREE) - 1))
-                .map(rank -> matchCollection.put(Rank.TWO, matchCollection.getOrDefault(Rank.TWO, 0) + 1))
+                .map(rank -> rankCount.replace(Rank.THREE, rankCount.get(Rank.THREE) - 1))
+                .map(rank -> rankCount.put(Rank.TWO, rankCount.getOrDefault(Rank.TWO, 0) + 1))
                 .collect(Collectors.toSet());
     }
 
     public void putMatchingCount() {
-        for (Rank rank : matchCollection.keySet()) {
-            matchCollection.put(rank, (int) matchCollection.keySet().stream()
+        for (Rank rank : rankCount.keySet()) {
+            rankCount.put(rank, (int) rankCount.keySet().stream()
                     .filter(countingMatch(rank))
                     .count());
         }
     }
 
-    public Map<Rank, Integer> getMatchCollection() {
-        return Collections.unmodifiableMap(matchCollection);
+    public Map<Rank, Integer> getRankCount() {
+        return Collections.unmodifiableMap(rankCount);
     }
 
     private boolean isThreeRank(List<Lotto> lottos, LottoNumber bonusLotto, Rank rank) {
@@ -55,12 +55,12 @@ public class MatchingRank {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MatchingRank that = (MatchingRank) o;
-        return matchCollection.equals(that.matchCollection);
+        RankCount that = (RankCount) o;
+        return rankCount.equals(that.rankCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchCollection);
+        return Objects.hash(rankCount);
     }
 }

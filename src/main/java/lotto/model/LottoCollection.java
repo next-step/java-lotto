@@ -12,16 +12,16 @@ public class LottoCollection {
         this.lottos = lottos;
     }
 
-    public MatchingRank collectRanks(Lotto winningLotto) {
+    public RankCount collectRanks(Lotto winningLotto) {
         Map<Rank, Integer> collect = lottos.stream()
                 .map(it -> it.matchingRank(winningLotto))
                 .collect(Collectors.groupingBy(it -> it, Collectors.reducing(0, e -> 1, Integer::sum)));
 
-        return new MatchingRank(collect);
+        return new RankCount(collect);
     }
 
-    public void findSecond(MatchingRank matchingRank, LottoNumber bonusLotto) {
-        matchingRank.findSecondRank(this.lottos, bonusLotto);
+    public void findSecond(RankCount rankCount, LottoNumber bonusLotto) {
+        rankCount.findSecondRank(this.lottos, bonusLotto);
     }
 
     public List<Lotto> getLottos() {

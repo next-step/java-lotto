@@ -14,8 +14,8 @@ public class Profit {
         this.lottoQuantity = lottoQuantity;
     }
 
-    public BigDecimal calculate(MatchingRank matchingRank) {
-        BigDecimal sum = matchingRank.benefit();
+    public BigDecimal calculate(RankCount rankCount) {
+        BigDecimal sum = rankCount.benefit();
 
         if (isZeroMoney(sum)) {
             return BigDecimal.ZERO;

@@ -13,12 +13,12 @@ public class Main {
         LottoCollection buyLotto = new LottoCollection(new LottoFactory().addLotto(quantity));
         printLottoNumbers(buyLotto);
 
-        MatchingRank matchingRank = buyLotto.collectRanks(winningLotto());
-        matchingRank.putMatchingCount();
+        RankCount rankCount = buyLotto.collectRanks(winningLotto());
+        rankCount.putMatchingCount();
 
-        buyLotto.findSecond(matchingRank, bonusLotto());
+        buyLotto.findSecond(rankCount, bonusLotto());
 
         Profit profit = new Profit(quantity);
-        printResult(matchingRank, profit.calculate(matchingRank));
+        printResult(rankCount, profit.calculate(rankCount));
     }
 }

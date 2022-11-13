@@ -28,7 +28,7 @@ class ProfitTest {
         winningMatch.put(MISS, 2);
         winningMatch.put(FOUR, 0);
 
-       assertThat(profit.calculate(new MatchingRank(winningMatch)))
+       assertThat(profit.calculate(new RankCount(winningMatch)))
                .isEqualTo(BigDecimal.ZERO);
     }
 
@@ -38,7 +38,7 @@ class ProfitTest {
         winningMatch.put(MISS, 2);
         winningMatch.put(FOUR, 1);
 
-        assertThat(profit.calculate(new MatchingRank(winningMatch)))
+        assertThat(profit.calculate(new RankCount(winningMatch)))
                 .isEqualTo(BigDecimal.valueOf(FOUR.getPrice())
                         .divide(BigDecimal.valueOf((long) 10 * LOTTO_PRICE),
                                 SCALE, HALF_EVEN));
@@ -51,7 +51,7 @@ class ProfitTest {
         winningMatch.put(FOUR, 1);
         winningMatch.put(TWO, 1);
 
-        assertThat(profit.calculate(new MatchingRank(winningMatch)))
+        assertThat(profit.calculate(new RankCount(winningMatch)))
                 .isEqualTo(BigDecimal.valueOf(FOUR.getPrice() + TWO.getPrice())
                         .divide(BigDecimal.valueOf((long) 10 * LOTTO_PRICE),
                         SCALE, HALF_EVEN));

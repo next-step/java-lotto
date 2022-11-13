@@ -54,7 +54,7 @@ class LottoCollectionTest {
         map.put(expected, 1);
         map.put(expected2, 2);
 
-        assertThat(buyLottos.collectRanks(winningLotto)).isEqualTo(new MatchingRank(map));
+        assertThat(buyLottos.collectRanks(winningLotto)).isEqualTo(new RankCount(map));
     }
 
     private static Stream<Arguments> rankTest() {
