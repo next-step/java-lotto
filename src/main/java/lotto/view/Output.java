@@ -8,14 +8,15 @@ import java.util.List;
 
 public class Output {
 
-    private static final String OUTPUT_UNIT_MESSAGE = "개를 구매했습니다.";
+    private static final String OUTPUT_UNIT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    public static List<Lotto> print(BigDecimal amount) {
+    public static List<Lotto> print(List<Lotto> manualLottoNumberList, int manualLottoCount, BigDecimal amount) {
         Lottos lottos = new Lottos(amount);
-        int NumberOfTickets = lottos.getNumberOfTickets(amount);
-        System.out.println(NumberOfTickets + OUTPUT_UNIT_MESSAGE);
+        int numberOfTickets = lottos.getNumberOfTickets(amount);
+        int autoTickets = numberOfTickets - manualLottoCount;
+        System.out.println(String.format(OUTPUT_UNIT_MESSAGE, manualLottoCount, autoTickets));
 
-        Lottos numberList = lottos.buyLottos(NumberOfTickets, new AutoNumberList());
+        Lottos numberList = lottos.buyLottos(manualLottoNumberList, autoTickets, new AutoNumberList());
         List<Lotto> lottoList = numberList.getLottoList();
         for (Lotto lotto : lottoList) {
             System.out.println(lotto.getNumberList());

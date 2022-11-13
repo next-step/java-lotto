@@ -8,7 +8,10 @@ import java.util.List;
 public class LottoApplication {
     public static void main(String[] args) {
         BigDecimal amount = Input.inputAmount();
-        List<Lotto> numberList = Output.print(amount);
+        int manualLottoCount = Input.inputManualLottoCount();
+        List<Lotto> manualLottoNumberList = Input.inputManualNumberList(manualLottoCount);
+
+        List<Lotto> numberList = Output.print(manualLottoNumberList, manualLottoCount, amount);
         List<Integer> winnerNumberList = Input.inputWinnerNumberList();
         Integer bonusBallNumber = Input.inputBonusBallNumber();
 
