@@ -11,8 +11,8 @@ public class Lottos {
         this.lottos = lotto;
     }
 
-    public int results(Lotto lotto, BonusLotto bonusLotto) {
-        return bonusLotto.getLotto().count(lotto);
+    public int results(Lotto lotto, WinningLotto bonusLotto) {
+        return bonusLotto.count(lotto);
     }
 
     public List<Lotto> getLottos() {

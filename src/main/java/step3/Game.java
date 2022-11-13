@@ -3,6 +3,7 @@ package step3;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,10 +26,10 @@ public class Game {
         Print.howManyBuyLotto(manualLotto.size(), autoLotto.size(), combineLotto);
 
         Print.winningNumber();
-        Lotto winLotto = lotto.makeWinningLotto(InputView.inputWinningNumber());
+        Set<Integer> winningNumber = InputView.inputWinningNumber();
         Print.bonusBall();
         int bonus = Integer.parseInt(InputView.input());
-        BonusLotto bonusLotto = new BonusLotto(winLotto, bonus);
+        WinningLotto bonusLotto = new WinningLotto(winningNumber, bonus);
 
         Lottos lottos = new Lottos(combineLotto);
 

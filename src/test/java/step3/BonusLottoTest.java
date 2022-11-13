@@ -14,9 +14,7 @@ class BonusLottoTest {
     @Test
     @DisplayName("보너스 번호 중복시 예외")
     void alreadyLottoContainsBonus() {
-
-        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        assertThatThrownBy(() -> new BonusLotto(lotto, 6))
+        assertThatThrownBy(() -> new WinningLotto(Set.of(1, 2, 3, 4, 5, 6), 6))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -24,9 +22,7 @@ class BonusLottoTest {
     @DisplayName("보너스 번호가 로또 범위를 벗어났을 때 예외")
     @ValueSource(ints = {0, 46})
     void validateBonus(int bonus) {
-
-        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        assertThatThrownBy(() -> new BonusLotto(lotto, bonus))
+        assertThatThrownBy(() -> new WinningLotto(Set.of(1, 2, 3, 4, 5, 6), bonus))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -36,8 +32,7 @@ class BonusLottoTest {
         Lotto test1 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         Lotto test2 = new Lotto(Set.of(7, 8, 9, 10, 11, 12));
 
-        Lotto answer = new Lotto(Set.of(13, 14, 15, 16, 17, 18));
-        BonusLotto bonusLotto = new BonusLotto(answer, 6);
+        WinningLotto bonusLotto = new WinningLotto(Set.of(13, 14, 15, 16, 17, 18), 6);
 
         assertThat(bonusLotto.checkBonus(test1)).isTrue();
         assertThat(bonusLotto.checkBonus(test2)).isFalse();

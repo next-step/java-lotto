@@ -17,10 +17,9 @@ public class LottosTest {
         Lotto ex2 = new Lotto(Set.of(1, 2, 3, 4, 5, 9));
         Lotto exBonus = new Lotto(Set.of(1, 2, 3, 4, 5, 7));
 
-        Lotto winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         int bonus = 7;
 
-        BonusLotto bonusLotto = new BonusLotto(winningLotto, bonus);
+        WinningLotto bonusLotto = new WinningLotto(Set.of(1, 2, 3, 4, 5, 6), bonus);
 
         Lottos lottos = new Lottos(Arrays.asList(ex1, ex2, exBonus));
 

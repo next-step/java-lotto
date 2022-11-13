@@ -3,7 +3,7 @@ package step3;
 import java.util.Set;
 
 public class Lotto {
-    private Set<Integer> lotto;
+    protected Set<Integer> lotto;
 
     public Lotto(Set<Integer> lotto) {
         LottoValidator.validateLottoSize(lotto.size());

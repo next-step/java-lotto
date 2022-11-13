@@ -24,14 +24,14 @@ public class Result {
         return lottos.getLottos();
     }
 
-    public Map<Operator, Integer> results(BonusLotto bonusLotto) {
+    public Map<Operator, Integer> results(WinningLotto bonusLotto) {
         for (Lotto lotto : lottoList()) {
             result(lotto, bonusLotto);
         }
         return map;
     }
 
-    private void result(Lotto lotto, BonusLotto bonusLotto) {
+    private void result(Lotto lotto, WinningLotto bonusLotto) {
         int count = checkRank(lotto, bonusLotto);
         Operator rank = Operator.find(count, bonusLotto.checkBonus(lotto));
         if (rank == null) {
@@ -40,7 +40,7 @@ public class Result {
         map.put(rank, map.get(rank) + 1);
     }
 
-    private int checkRank(Lotto lotto, BonusLotto bonusLotto) {
+    private int checkRank(Lotto lotto, WinningLotto bonusLotto) {
         return this.lottos.results(lotto, bonusLotto);
     }
 }
