@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.EnumMap;
 
+import static java.math.RoundingMode.HALF_EVEN;
+import static lotto.model.Profit.LOTTO_PRICE;
+import static lotto.model.Profit.SCALE;
 import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,7 +39,9 @@ class ProfitTest {
         winningMatch.put(FOUR, 1);
 
         assertThat(profit.calculate(new MatchingCollection(winningMatch)))
-                .isEqualTo(profit.calculateRevenue(BigDecimal.valueOf(FOUR.getPrice())));
+                .isEqualTo(BigDecimal.valueOf(FOUR.getPrice())
+                        .divide(BigDecimal.valueOf((long) 10 * LOTTO_PRICE),
+                                SCALE, HALF_EVEN));
     }
 
     @Test
@@ -47,6 +52,8 @@ class ProfitTest {
         winningMatch.put(TWO, 1);
 
         assertThat(profit.calculate(new MatchingCollection(winningMatch)))
-                .isEqualTo(profit.calculateRevenue(BigDecimal.valueOf(FOUR.getPrice() + TWO.getPrice())));
+                .isEqualTo(BigDecimal.valueOf(FOUR.getPrice() + TWO.getPrice())
+                        .divide(BigDecimal.valueOf((long) 10 * LOTTO_PRICE),
+                        SCALE, HALF_EVEN));
     }
 }

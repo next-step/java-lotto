@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Profit {
     public static final int LOTTO_PRICE = 1_000;
     private static final RoundingMode HALF_EVEN = RoundingMode.HALF_EVEN;
-    private static final int SCALE = 2;
+    public static final int SCALE = 2;
     private final int lottoQuantity;
 
     public Profit(int lottoQuantity) {
@@ -24,7 +24,7 @@ public class Profit {
         return calculateRevenue(sum);
     }
 
-    public BigDecimal calculateRevenue(BigDecimal sum) {
+    private BigDecimal calculateRevenue(BigDecimal sum) {
         return sum.divide(BigDecimal.valueOf((long) lottoQuantity * LOTTO_PRICE),
                 SCALE, HALF_EVEN);
     }
