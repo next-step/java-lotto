@@ -3,6 +3,15 @@ package stringcalculator;
 public class Calculator {
     private String[] splitInputValues;
 
+    public int calculatorSystem(String inputValue) {
+        splitInputValues = splitInput(inputValue);
+        if (splitInputValues.length == 1) {
+            return Integer.parseInt(splitInputValues[0]);
+        }
+        validateEquation();
+        return calculatorSystem();
+    }
+
     private String[] splitInput(String inputValue) {
         validateNullValue(inputValue);
         return inputValue.split(" ");
@@ -10,12 +19,6 @@ public class Calculator {
 
     private void validateNullValue(String splitValue) {
         if (splitValue == null || splitValue.isBlank()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void validateOperate(String operator) {
-        if (!(operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/"))) {
             throw new IllegalArgumentException();
         }
     }
@@ -32,8 +35,14 @@ public class Calculator {
         return selectOperate(operator, frontNumber, backNumber);
     }
 
+    private void validateOperate(String operator) {
+        if (!(operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/"))) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     private int selectOperate(String operator, int frontNumber, int backNumber) {
-        Operate operate = Operate.findOperator(operator);
+        Operator operate = Operator.findOperator(operator);
         return operate.calculateNumbers(frontNumber, backNumber);
     }
 
@@ -49,12 +58,4 @@ public class Calculator {
         return calculateInput;
     }
 
-    public int finalCalculate(String inputValue) {
-        splitInputValues = splitInput(inputValue);
-        if (splitInputValues.length == 1) {
-            return Integer.parseInt(splitInputValues[0]);
-        }
-        validateEquation();
-        return calculatorSystem();
-    }
 }
