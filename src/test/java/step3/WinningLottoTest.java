@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class BonusLottoTest {
+class WinningLottoTest {
 
     @Test
     @DisplayName("보너스 번호 중복시 예외")
