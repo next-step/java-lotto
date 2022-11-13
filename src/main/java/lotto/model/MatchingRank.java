@@ -5,14 +5,10 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class MatchingCollection {
+public class MatchingRank {
     private final Map<Rank, Integer> matchCollection;
 
-    public MatchingCollection() {
-        this(new EnumMap<>(Rank.class));
-    }
-
-    public MatchingCollection(Map<Rank, Integer> matchCollection) {
+    public MatchingRank(Map<Rank, Integer> matchCollection) {
         this.matchCollection = matchCollection;
     }
 
@@ -30,9 +26,9 @@ public class MatchingCollection {
                 .collect(Collectors.toSet());
     }
 
-    public void putMatchingCount(List<Rank> ranks) {
-        for (Rank rank : ranks) {
-            matchCollection.put(rank, (int) ranks.stream()
+    public void putMatchingCount() {
+        for (Rank rank : matchCollection.keySet()) {
+            matchCollection.put(rank, (int) matchCollection.keySet().stream()
                     .filter(countingMatch(rank))
                     .count());
         }
@@ -59,7 +55,7 @@ public class MatchingCollection {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MatchingCollection that = (MatchingCollection) o;
+        MatchingRank that = (MatchingRank) o;
         return matchCollection.equals(that.matchCollection);
     }
 

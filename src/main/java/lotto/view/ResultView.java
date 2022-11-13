@@ -21,7 +21,7 @@ public class ResultView {
         System.out.println(quantity + "개를 구매했습니다.");
     }
 
-    public static void printResult(MatchingCollection map, BigDecimal totalProfit) {
+    public static void printResult(MatchingRank map, BigDecimal totalProfit) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
