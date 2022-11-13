@@ -9,7 +9,6 @@ class RankTest {
 
     @Test
     void 일치하는_개수를_통해_등급을_구할_수_있다() {
-        Rank rank = Rank.rank(5, false);
         assertThat(Rank.rank(6, false)).isEqualTo(Rank.FIRST);
     }
 
