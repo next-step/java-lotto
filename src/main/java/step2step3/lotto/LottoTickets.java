@@ -3,7 +3,7 @@ package step2step3.lotto;
 import step2step3.lotto.lottoTicket.LottoTicket;
 import step2step3.lotto.lottoTicket.OutputDevice;
 import step2step3.lotto.lottoTicket.Rank;
-import step2step3.lotto.lottoTicket.WinningLottoInformation;
+import step2step3.lotto.lottoTicket.WinningLotto;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,18 +42,18 @@ public class LottoTickets {
         return Objects.hash(lottoTickets, lottoPrice);
     }
 
-    public YieldCalculator yieldCalculator(WinningLottoInformation winningLottoInformation) {
-        return new YieldCalculator(lottoPrice, matchedRanks(winningLottoInformation));
+    public YieldCalculator yieldCalculator(WinningLotto winningLotto) {
+        return new YieldCalculator(lottoPrice, matchedRanks(winningLotto));
     }
 
-    private List<Rank> matchedRanks(WinningLottoInformation winningLottoInformation) {
+    private List<Rank> matchedRanks(WinningLotto winningLotto) {
         return lottoTickets.stream()
-                .map(winningLottoInformation::matchedRank)
+                .map(winningLotto::matchedRank)
                 .collect(toList());
     }
 
-    public MatchIndicatorCalculator matchIndicatorCalculator(WinningLottoInformation winningLottoInformation) {
-        return new MatchIndicatorCalculator(matchedRanks(winningLottoInformation));
+    public MatchIndicatorCalculator matchIndicatorCalculator(WinningLotto winningLotto) {
+        return new MatchIndicatorCalculator(matchedRanks(winningLotto));
     }
 }
 

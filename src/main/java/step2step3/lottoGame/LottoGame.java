@@ -6,7 +6,7 @@ import step2step3.lotto.*;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
 import step2step3.lotto.lottoTicket.LottoTicket;
 import step2step3.lotto.lottoTicket.OutputDevice;
-import step2step3.lotto.lottoTicket.WinningLottoInformation;
+import step2step3.lotto.lottoTicket.WinningLotto;
 import step2step3.randomNumbers.InfusedNumbersGenerator;
 
 import java.io.IOException;
@@ -45,9 +45,9 @@ public class LottoGame {
         LottoTicket lottoTicket = lottoTicket();
         int bonusNumber = consoleInputView.bonusNumber();
 
-        WinningLottoInformation winningLottoInformation = new WinningLottoInformation(bonusNumber, lottoTicket);
-        printMatchIndicator(lottoTickets, winningLottoInformation);
-        printYield(lottoTickets, winningLottoInformation);
+        WinningLotto winningLotto = new WinningLotto(bonusNumber, lottoTicket);
+        printMatchIndicator(lottoTickets, winningLotto);
+        printYield(lottoTickets, winningLotto);
     }
 
     private LottoTicket lottoTicket() throws IOException {
@@ -55,13 +55,13 @@ public class LottoGame {
         return LottoTicket.from(infusedNumbersGenerator);
     }
 
-    private void printMatchIndicator(LottoTickets lottoTickets, WinningLottoInformation winningLottoInformation) {
-        MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(winningLottoInformation);
+    private void printMatchIndicator(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        MatchIndicatorCalculator matchIndicatorCalculator = lottoTickets.matchIndicatorCalculator(winningLotto);
         consoleOutputView.printMatchIndicator(matchIndicatorCalculator.matchIndicators());
     }
 
-    private void printYield(LottoTickets lottoTickets, WinningLottoInformation winningLottoInformation) {
-        YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(winningLottoInformation);
+    private void printYield(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        YieldCalculator yieldCalculator = lottoTickets.yieldCalculator(winningLotto);
         consoleOutputView.printYield(yieldCalculator.yield());
     }
 

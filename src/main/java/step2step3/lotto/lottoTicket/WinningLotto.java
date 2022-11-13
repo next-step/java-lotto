@@ -1,10 +1,10 @@
 package step2step3.lotto.lottoTicket;
 
-public class WinningLottoInformation {
+public class WinningLotto {
     private final int bonusNumber;
     private final LottoTicket winningLottoTicket;
 
-    public WinningLottoInformation(int bonusNumber, LottoTicket winningLottoTicket) {
+    public WinningLotto(int bonusNumber, LottoTicket winningLottoTicket) {
         this.bonusNumber = bonusNumber;
         this.winningLottoTicket = winningLottoTicket;
     }

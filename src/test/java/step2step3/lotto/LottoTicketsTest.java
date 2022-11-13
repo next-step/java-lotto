@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
 import step2step3.lotto.lottoTicket.LottoTicket;
 import step2step3.lotto.lottoTicket.Rank;
-import step2step3.lotto.lottoTicket.WinningLottoInformation;
+import step2step3.lotto.lottoTicket.WinningLotto;
 
 import java.util.List;
 import java.util.Set;
@@ -35,8 +35,8 @@ class LottoTicketsTest {
 
         LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
 
-        WinningLottoInformation winningLottoInformation = new WinningLottoInformation(1, LottoTicket.from(numbersGenerator));
-        assertThat(lottoTickets.yieldCalculator(winningLottoInformation)).isEqualTo(new YieldCalculator(lottoPrice, List.of(Rank.FIRST)));
+        WinningLotto winningLotto = new WinningLotto(1, LottoTicket.from(numbersGenerator));
+        assertThat(lottoTickets.yieldCalculator(winningLotto)).isEqualTo(new YieldCalculator(lottoPrice, List.of(Rank.FIRST)));
     }
 
     @Test
@@ -49,7 +49,7 @@ class LottoTicketsTest {
 
         LottoTickets lottoTickets = new LottoTicketsFactory(totalPrice, numbersGenerator).lottoTickets();
 
-        WinningLottoInformation winningLottoInformation = new WinningLottoInformation(1, LottoTicket.from(numbersGenerator));
-        assertThat(lottoTickets.matchIndicatorCalculator(winningLottoInformation)).isEqualTo(new MatchIndicatorCalculator(List.of(Rank.FIRST)));
+        WinningLotto winningLotto = new WinningLotto(1, LottoTicket.from(numbersGenerator));
+        assertThat(lottoTickets.matchIndicatorCalculator(winningLotto)).isEqualTo(new MatchIndicatorCalculator(List.of(Rank.FIRST)));
     }
 }
