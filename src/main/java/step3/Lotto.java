@@ -14,10 +14,6 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public boolean checkBonus(int bonus) {
-        return lotto.contains(bonus);
-    }
-
     public int count(Lotto other) {
         return (int) other.lotto.stream()
                 .filter(this::isExist)
@@ -37,7 +33,7 @@ public class Lotto {
         }
     }
 
-    private void checkLottoRange(Integer integer) {
+    protected void checkLottoRange(Integer integer) {
         if (integer < 1 || integer > 45) {
             throw new IllegalArgumentException(LOTTO_START + " ~ " + LOTTO_END + " 사이의 수만 입력해주세요");
         }
