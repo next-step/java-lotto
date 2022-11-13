@@ -2,7 +2,7 @@ package calculator.view;
 
 import java.util.Scanner;
 
-public class InputView {
+public class CalculatorInputView {
 
     public static final String QUESTION_START = "연산식을 입력하세요";
 
