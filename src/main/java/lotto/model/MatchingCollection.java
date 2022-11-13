@@ -42,19 +42,6 @@ public class MatchingCollection {
         return Collections.unmodifiableMap(matchCollection);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MatchingCollection that = (MatchingCollection) o;
-        return matchCollection.equals(that.matchCollection);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(matchCollection);
-    }
-
     private boolean isThreeRank(List<Lotto> lottos, LottoNumber bonusLotto, Rank rank) {
         return rank == Rank.THREE && isExistThree(lottos, bonusLotto);
     }
@@ -66,5 +53,18 @@ public class MatchingCollection {
 
     private Predicate<Rank> countingMatch(Rank rank) {
         return rank::isMatchOrder;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchingCollection that = (MatchingCollection) o;
+        return matchCollection.equals(that.matchCollection);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matchCollection);
     }
 }
