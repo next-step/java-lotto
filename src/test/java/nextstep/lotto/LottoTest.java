@@ -1,9 +1,11 @@
 package nextstep.lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.Set;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +24,24 @@ class LottoTest {
   public void spec02() {
     assertThatNoException().isThrownBy(() ->
       new Lotto(1, 2, 3, 4, 5, 6)
+    );
+  }
+
+  @DisplayName("로또 숫자가 몇개나 일치하는지 알 수 있다.")
+  @Test
+  public void spec03() {
+    final Lotto base = new Lotto(1, 2, 3, 4, 5, 6);
+    final Lotto match3 = new Lotto(1, 2, 3, 10, 15, 25);
+    final Lotto match4 = new Lotto(1, 2, 3, 4, 15, 25);
+    final Lotto match5 = new Lotto(1, 2, 3, 4, 5, 25);
+    final Lotto match6 = new Lotto(1, 2, 3, 4, 5, 6);
+    final Lotto matchNothing = new Lotto(40, 41, 42, 43, 44, 45);
+    Assertions.assertAll(
+      () -> assertThat(base.match(match3)).isEqualTo(3),
+      () -> assertThat(base.match(match4)).isEqualTo(4),
+      () -> assertThat(base.match(match5)).isEqualTo(5),
+      () -> assertThat(base.match(match6)).isEqualTo(6),
+      () -> assertThat(base.match(matchNothing)).isEqualTo(0)
     );
   }
 }
