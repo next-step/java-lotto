@@ -24,7 +24,6 @@ public class LottoWinningStats {
     }
 
     private void calculateWinningStats(LottoBundle lottoBundle, List<Integer> winningNumbers) {
-        // 로또 객체를 기반으로 당첨 통계 계산
         for (int i=0 ; i<lottoBundle.getBundleSize() ; i++) {
             Lotto lotto = lottoBundle.getLottoByIndex(i);
             winningStats.add(i, lotto.countSameNumbers(winningNumbers));

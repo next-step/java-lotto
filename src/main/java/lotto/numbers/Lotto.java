@@ -9,6 +9,7 @@ public class Lotto {
     public static final int TOTAL_NUMBERS_SIZE = 6;
 
     private final List<Integer> numbers;
+
     public Lotto() {
         this.numbers = new ArrayList<>(TOTAL_NUMBERS_SIZE);
         this.numbers.addAll(getNumbers(AllNumbers.getNumbers()));

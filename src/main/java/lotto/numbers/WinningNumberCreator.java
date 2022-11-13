@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningNumbers {
+public class WinningNumberCreator {
     public static List<Integer> getNumbers(String inputNumbers) {
         validateString(inputNumbers);
         List<Integer> winningNumbers = mapToWinningNumbers(inputNumbers);

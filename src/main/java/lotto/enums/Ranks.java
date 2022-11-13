@@ -11,8 +11,8 @@ public enum Ranks {
     FIRST(6, BigDecimal.valueOf(2000000000));
 
 
-    int countsOfSameNumbers;
-    BigDecimal rewards;
+    private final int countsOfSameNumbers;
+    private final BigDecimal rewards;
 
     Ranks(int countsOfSameNumbers, BigDecimal rewards) {
         this.countsOfSameNumbers = countsOfSameNumbers;

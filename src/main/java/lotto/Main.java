@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.numbers.LottoBundle;
-import lotto.numbers.WinningNumbers;
+import lotto.numbers.WinningNumberCreator;
 import lotto.views.InputView;
 import lotto.views.OutputView;
 
@@ -12,7 +12,7 @@ public class Main {
         OutputView.printNumbers(lottoBundle);
 
         String inputNumbers = InputView.inputLastWinningNumbers();
-        LottoWinningStats lottoWinningStats = new LottoWinningStats(lottoBundle, WinningNumbers.getNumbers(inputNumbers));
+        LottoWinningStats lottoWinningStats = new LottoWinningStats(lottoBundle, WinningNumberCreator.getNumbers(inputNumbers));
         OutputView.printWinningStatsResult(lottoWinningStats, purchaseAmount);
     }
 }

@@ -9,20 +9,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.numbers.WinningNumbers;
-
-public class WinningNumbersTest {
+public class WinningNumberCreatorTest {
     @ParameterizedTest
     @MethodSource("winningNumbersSuccessParam")
     public void getNumbers(String inputNumbers) {
-        List<Integer> numbers = WinningNumbers.getNumbers(inputNumbers);
+        List<Integer> numbers = WinningNumberCreator.getNumbers(inputNumbers);
     }
 
     @ParameterizedTest
     @MethodSource("winningNumbersFailedParam")
     public void getNumbersFailed(String inputNumbers, String errorMessage) {
         assertThatThrownBy(() -> {
-            List<Integer> numbers = WinningNumbers.getNumbers(inputNumbers);
+            List<Integer> numbers = WinningNumberCreator.getNumbers(inputNumbers);
         }).isInstanceOf(RuntimeException.class).hasMessage(errorMessage);
     }
 
