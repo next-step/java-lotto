@@ -13,13 +13,13 @@ public class LottoTicket {
     private final List<LottoNumber> numbers;
 
     private LottoTicket(List<LottoNumber> numbers) {
+        verifyNumbers(numbers);
         this.numbers = numbers;
     }
 
     public static LottoTicket from(NumbersGenerator numbersGenerator) {
         LottoNumberStorage lottoNumberStorage = LottoNumberStorage.lottoNumberStorage();
         List<LottoNumber> lottoNumbers = lottoNumberStorage.lottoNumbers(numbersGenerator);
-        verifyNumbers(lottoNumbers);
         return new LottoTicket(lottoNumbers);
     }
 
