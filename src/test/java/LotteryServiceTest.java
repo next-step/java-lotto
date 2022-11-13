@@ -1,11 +1,8 @@
-import domain.lottery.RewardLotteryTickets;
-import service.LotteryService;
-import domain.lottery.LotteryTicket;
-import domain.lottery.LotteryTickets;
-import domain.lottery.WinnerLotteryTicket;
+import domain.lottery.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import service.LotteryService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +22,22 @@ public class LotteryServiceTest {
     public void init() {
         lotteryService = new LotteryService();
 
-        firstPrizeLotteryTickets = new LotteryTickets(List.of(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        secondPrizeLotteryTickets = new LotteryTickets(List.of(new LotteryTicket(Arrays.asList(2, 3, 4, 6, 1, 10))));
-        secondPrizeWithBonusNumberLotteryTickets = new LotteryTickets(List.of(new LotteryTicket(Arrays.asList(2, 3, 4, 6, 5, 7))));
-        noPrizeLotteryTickets = new LotteryTickets(List.of(new LotteryTicket(Arrays.asList(11, 21, 31, 41, 15, 16))));
-        LotteryTicket winnerTicketNumbers = new LotteryTicket(List.of(1, 2, 3, 4, 5, 6));
-        winnerTicket = new WinnerLotteryTicket(winnerTicketNumbers, 7);
+        firstPrizeLotteryTickets = new LotteryTickets(List.of(LotteryTicket.of(Arrays.asList(
+                LotteryNumber.of(1), LotteryNumber.of(2), LotteryNumber.of(3),
+                LotteryNumber.of(4), LotteryNumber.of(5), LotteryNumber.of(6)))));
+        secondPrizeLotteryTickets = new LotteryTickets(List.of(LotteryTicket.of(Arrays.asList(
+                LotteryNumber.of(2), LotteryNumber.of(3), LotteryNumber.of(4),
+                LotteryNumber.of(6), LotteryNumber.of(1), LotteryNumber.of(10)))));
+        secondPrizeWithBonusNumberLotteryTickets = new LotteryTickets(List.of(LotteryTicket.of(Arrays.asList(
+                LotteryNumber.of(2), LotteryNumber.of(3), LotteryNumber.of(4),
+                LotteryNumber.of(6), LotteryNumber.of(5), LotteryNumber.of(7)))));
+        noPrizeLotteryTickets = new LotteryTickets(List.of(LotteryTicket.of(Arrays.asList(
+                LotteryNumber.of(11), LotteryNumber.of(21), LotteryNumber.of(31),
+                LotteryNumber.of(41), LotteryNumber.of(15), LotteryNumber.of(16)))));
+        LotteryTicket winnerTicketNumbers = LotteryTicket.of(Arrays.asList(
+                LotteryNumber.of(1), LotteryNumber.of(2), LotteryNumber.of(3),
+                LotteryNumber.of(4), LotteryNumber.of(5), LotteryNumber.of(6)));
+        winnerTicket = new WinnerLotteryTicket(winnerTicketNumbers, LotteryNumber.of(7));
     }
 
     @Test
