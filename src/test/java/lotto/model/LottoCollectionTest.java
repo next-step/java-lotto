@@ -48,18 +48,20 @@ class LottoCollectionTest {
     @ParameterizedTest
     @MethodSource("rankTest")
     @DisplayName("당첨번호의 등수를 리스트로 반환한다")
-    void collectRank(List<Integer> element, Rank expected, Rank expected2, Rank expected3) {
+    void collectRank(List<Integer> element, Rank expected, Rank expected2) {
         Lotto winningLotto = toLottoNumber(element);
-        assertThat(buyLottos.collectRanks(winningLotto)).containsExactly(expected, expected2, expected3);
+        EnumMap<Rank, Integer> map = new EnumMap<>(Rank.class);
+        map.put(expected, 1);
+        map.put(expected2, 2);
+
+        assertThat(buyLottos.collectRanks(winningLotto)).isEqualTo(new MatchingRank(map));
     }
 
     private static Stream<Arguments> rankTest() {
         return Stream.of(
                 Arguments.of(List.of(3, 5, 10, 12, 16, 33), ONE, MISS, MISS),
                 Arguments.of(List.of(3, 5, 10, 12, 16, 36), THREE, MISS, MISS),
-                Arguments.of(List.of(3, 5, 10, 12, 18, 36), FOUR, MISS, MISS),
-                Arguments.of(List.of(3, 5, 10, 11, 18, 36), FIVE, FIVE, MISS),
-                Arguments.of(List.of(3, 5, 7, 13, 18, 36), MISS, MISS, MISS)
+                Arguments.of(List.of(3, 5, 10, 12, 18, 36), FOUR, MISS, MISS)
         );
     }
 
