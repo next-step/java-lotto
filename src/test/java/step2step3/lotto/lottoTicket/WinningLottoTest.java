@@ -27,7 +27,10 @@ class WinningLottoTest {
         return Stream.of(
                 Arguments.of(Set.of(1, 2, 3, 4, 5, 6), Rank.FIRST),
                 Arguments.of(Set.of(1, 2, 3, 4, 5, 7), Rank.SECOND),
-                Arguments.of(Set.of(1, 2, 3, 4, 5, 8), Rank.THIRD)
+                Arguments.of(Set.of(1, 2, 3, 4, 5, 8), Rank.THIRD),
+                Arguments.of(Set.of(1, 2, 3, 4, 8, 9), Rank.FOURTH),
+                Arguments.of(Set.of(1, 2, 3, 8, 9, 10), Rank.FIFTH),
+                Arguments.of(Set.of(1, 2, 8, 9, 10, 11), Rank.NOTHING)
         );
     }
 }
