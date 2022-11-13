@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static lotto.model.LottoFactory.LOTTO_MAX_LENGTH;
 
@@ -15,20 +14,6 @@ public class Lotto {
 
     public Rank matchingRank(Lotto winningLotto) {
         return Rank.findRank(counting(winningLotto));
-    }
-
-    public static Lotto toLottoNumber(List<Integer> testLotto) {
-        return new Lotto(lottoNumbers(testLotto));
-    }
-
-    public static Set<LottoNumber> toLottoSet(List<Integer> testLotto) {
-        return lottoNumbers(testLotto);
-    }
-
-    private static Set<LottoNumber> lottoNumbers(List<Integer> testLotto) {
-        return testLotto.stream()
-                .map(Integer -> LottoNumber.cache().get(Integer))
-                .collect(Collectors.toSet());
     }
 
     public Set<LottoNumber> getLotto() {

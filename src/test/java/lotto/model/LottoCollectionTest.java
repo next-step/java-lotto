@@ -7,9 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static lotto.model.Lotto.toLottoNumber;
 import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -61,5 +61,15 @@ class LottoCollectionTest {
                 Arguments.of(List.of(3, 5, 10, 11, 18, 36), FIVE, FIVE, MISS),
                 Arguments.of(List.of(3, 5, 7, 13, 18, 36), MISS, MISS, MISS)
         );
+    }
+
+    private Lotto toLottoNumber(List<Integer> testLotto) {
+        return new Lotto(lottoNumbers(testLotto));
+    }
+
+    public static Set<LottoNumber> lottoNumbers(List<Integer> testLotto) {
+        return testLotto.stream()
+                .map(Integer -> LottoNumber.cache().get(Integer))
+                .collect(Collectors.toSet());
     }
 }
