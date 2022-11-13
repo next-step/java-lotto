@@ -1,7 +1,6 @@
 package lotto.enums;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 public enum Ranks {
     FIFTH(3, BigDecimal.valueOf(5000)),
@@ -17,10 +16,6 @@ public enum Ranks {
     Ranks(int countsOfSameNumbers, BigDecimal rewards) {
         this.countsOfSameNumbers = countsOfSameNumbers;
         this.rewards = rewards;
-    }
-
-    public static Long totalWinningCount() {
-        return Arrays.stream(values()).count();
     }
 
     public int getCountsOfSameNumbers() {
