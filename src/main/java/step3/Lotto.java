@@ -20,7 +20,7 @@ public class Lotto {
                 .count();
     }
 
-    public boolean isExist(Integer lottoNumber) {
+    protected boolean isExist(Integer lottoNumber) {
         return lotto.contains(lottoNumber);
     }
 
