@@ -42,15 +42,15 @@ public class LottoGame {
     }
 
     public void winningStatistics(LottoTickets lottoTickets) throws IOException {
-        LottoTicket lottoTicket = lottoTicket();
+        LottoTicket winningLottoTicket = winningLottoTicket();
         int bonusNumber = consoleInputView.bonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(bonusNumber, lottoTicket);
+        WinningLotto winningLotto = new WinningLotto(bonusNumber, winningLottoTicket);
         printMatchIndicator(lottoTickets, winningLotto);
         printYield(lottoTickets, winningLotto);
     }
 
-    private LottoTicket lottoTicket() throws IOException {
+    private LottoTicket winningLottoTicket() throws IOException {
         InfusedNumbersGenerator infusedNumbersGenerator = new InfusedNumbersGenerator(consoleInputView.winningNumbers());
         return LottoTicket.from(infusedNumbersGenerator);
     }
