@@ -13,10 +13,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTest {
-    @ParameterizedTest
-    @ValueSource(ints = {1, 3, 5, 10, 20})
-    public void generateNumbers() {
+    @Test
+    public void generator() {
         Lotto lotto = new Lotto();
+        assertThat(lotto).isNotNull();
     }
 
     @ParameterizedTest
