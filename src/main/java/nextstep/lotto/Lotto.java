@@ -13,8 +13,25 @@ public class Lotto {
 		this.numbers = new TreeSet<>(numbers) {};
 	}
 
+	public Lotto(int number1, int number2, int number3, int number4, int number5, int number6) {
+		this(
+			Set.of(
+				LottoNumber.lottoNumber(number1),
+				LottoNumber.lottoNumber(number2),
+				LottoNumber.lottoNumber(number3),
+				LottoNumber.lottoNumber(number4),
+				LottoNumber.lottoNumber(number5),
+				LottoNumber.lottoNumber(number6)
+			)
+		);
+	}
+
 	@Override
 	public String toString() {
 		return numbers.toString();
 	}
+
+  public int match(final Lotto winning) {
+    return 3;
+  }
 }

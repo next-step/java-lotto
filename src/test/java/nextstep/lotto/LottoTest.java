@@ -21,14 +21,7 @@ class LottoTest {
   @Test
   public void spec02() {
     assertThatNoException().isThrownBy(() ->
-      new Lotto(
-        Set.of(LottoNumber.lottoNumber(1),
-          LottoNumber.lottoNumber(2),
-          LottoNumber.lottoNumber(3),
-          LottoNumber.lottoNumber(4),
-          LottoNumber.lottoNumber(5),
-          LottoNumber.lottoNumber(6))
-      )
+      new Lotto(1, 2, 3, 4, 5, 6)
     );
   }
 }
