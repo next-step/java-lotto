@@ -7,7 +7,7 @@ public class Lotto {
     private static final int LOTTO_END = 45;
     private static final int LOTTO_SIZE = 6;
 
-    protected Set<Integer> lotto;
+    private final Set<Integer> lotto;
 
     public Lotto(Set<Integer> lotto) {
         validate(lotto);
