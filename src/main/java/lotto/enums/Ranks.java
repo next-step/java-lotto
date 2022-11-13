@@ -1,7 +1,6 @@
 package lotto.enums;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 public enum Ranks {
     MISS(0, BigDecimal.ZERO, false),

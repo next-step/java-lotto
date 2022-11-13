@@ -11,8 +11,16 @@ public class InputView {
         System.out.println("구입 금액을 입력해주세요.");
         int purchaseAmount = SCANNER.nextInt();
         SCANNER.nextLine();
+
+        validateInputAmount(purchaseAmount);
         System.out.println((purchaseAmount / LottoWinningStats.PRICE) + "개를 구매했습니다.");
         return purchaseAmount;
+    }
+
+    private static void validateInputAmount(int purchaseAmount) {
+        if(purchaseAmount < LottoWinningStats.PRICE) {
+            throw new IllegalArgumentException("로또 최소 구입 금액보다 작습니다.");
+        }
     }
 
     public static String inputLastWinningNumbers() {

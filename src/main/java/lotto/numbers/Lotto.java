@@ -1,9 +1,11 @@
 package lotto.numbers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.enums.Ranks;
 
@@ -24,8 +26,8 @@ public class Lotto {
     }
 
     private Ranks getRanks(List<Integer> numbers, int bonusNumber) {
-        for (Ranks rank : Ranks.values()) {
-            if(rank.isWin(numbers.size()) && rank.isCheckBonusNumber() && numbers.contains(bonusNumber)) {
+        for (Ranks rank : Arrays.stream(Ranks.values()).sorted(Comparator.reverseOrder()).collect(Collectors.toList())) {
+            if(rank.isWin(numbers.size()) && rank.isCheckBonusNumber() && this.numbers.contains(bonusNumber)) {
                 return rank;
             }
             if(rank.isWin(numbers.size()) && !rank.isCheckBonusNumber()) {
