@@ -26,10 +26,6 @@ public enum Ranks {
         return this.countsOfSameNumbers == countsOfSameNumbers;
     }
 
-    public static Ranks getRanks(int count) {
-        return Arrays.stream(Ranks.values()).filter(rank -> rank.isWin(count)).findFirst().orElse(Ranks.MISS);
-    }
-
     public int getCountsOfSameNumbers() {
         return this.countsOfSameNumbers;
     }

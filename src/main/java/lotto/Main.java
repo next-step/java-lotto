@@ -12,9 +12,9 @@ public class Main {
         OutputView.printNumbers(lottoBundle);
 
         String inputNumbers = InputView.inputLastWinningNumbers();
-        int bonusNumber = InputView.inputbonusBall();
+        int bonusNumber = InputView.inputBonusBall();
 
-        LottoWinningStats lottoWinningStats = new LottoWinningStats(lottoBundle, WinningNumberCreator.getNumbers(inputNumbers));
+        LottoWinningStats lottoWinningStats = new LottoWinningStats(lottoBundle, WinningNumberCreator.getNumbers(inputNumbers), bonusNumber);
         OutputView.printWinningStatsResult(lottoWinningStats, purchaseAmount);
     }
 }

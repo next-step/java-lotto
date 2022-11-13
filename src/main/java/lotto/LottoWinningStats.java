@@ -8,11 +8,10 @@ import lotto.numbers.LottoBundle;
 
 public class LottoWinningStats {
     public static final int PRICE = 1000;
-//    private final int bonusNumber;
     private final Map<Ranks, Integer> rankingMap;
 
-    public LottoWinningStats(LottoBundle lottoBundle, List<Integer> winningNumbers) {
-        this.rankingMap = lottoBundle.getRanks(winningNumbers);
+    public LottoWinningStats(LottoBundle lottoBundle, List<Integer> winningNumbers, int bonusNumber) {
+        this.rankingMap = lottoBundle.getRanks(winningNumbers, bonusNumber);
     }
 
     public Map<Ranks, Integer> getRanks() {

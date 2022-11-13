@@ -17,10 +17,22 @@ public class Lotto {
         this.numbers.addAll(getRandomNumbers(AllNumbers.getNumbers()));
     }
 
-    public Ranks getRankOfNumbers(List<Integer> winningNumbers) {
+    public Ranks getRankOfNumbers(List<Integer> winningNumbers, int bonusNumber) {
         List<Integer> numbersCopy = new ArrayList<>(List.copyOf(numbers));
         numbersCopy.retainAll(winningNumbers);
-        return Ranks.getRanks(numbersCopy.size());
+        return getRanks(numbersCopy, bonusNumber);
+    }
+
+    private Ranks getRanks(List<Integer> numbers, int bonusNumber) {
+        for (Ranks rank : Ranks.values()) {
+            if(rank.isWin(numbers.size()) && rank.isCheckBonusNumber() && numbers.contains(bonusNumber)) {
+                return rank;
+            }
+            if(rank.isWin(numbers.size()) && !rank.isCheckBonusNumber()) {
+                return rank;
+            }
+        }
+        return Ranks.MISS;
     }
 
     public String toString() {
