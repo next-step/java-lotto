@@ -1,21 +1,16 @@
-package StringCalculator.View;
+package stringcalculator.view;
 
-import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class InputView {
-    static String INPUT_PATTERN = "^[ 0-9+/*-]+$";
+    static final Pattern INPUT_PATTERN = Pattern.compile("^[ 0-9+/*-]+$");
 
-    public static String input() {
-        Scanner scanner = new Scanner(System.in);
-        return validate(scanner.next());
-    }
-
-    public static String validate(String inputString) {
+    public static String validate(final String inputString) {
         if (inputString == null) {
             throw new IllegalArgumentException("null은 입력 불가");
         } else if (inputString.isBlank()) {
             throw new IllegalArgumentException("공백은 입력 불가");
-        } else if (!inputString.matches(INPUT_PATTERN)) {
+        } else if (!INPUT_PATTERN.matcher(inputString).find()) {
             throw new IllegalArgumentException("숫자와 연산자 (+, -, /, *) 외 입력 불가");
         }
         return inputString;
