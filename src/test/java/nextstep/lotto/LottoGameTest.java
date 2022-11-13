@@ -1,12 +1,14 @@
 package nextstep.lotto;
 
-import static nextstep.lotto.LottoResult.FIRST_PLACE;
-import static nextstep.lotto.LottoResult.FOURTH_PLACE;
-import static nextstep.lotto.LottoResult.LOSE;
-import static nextstep.lotto.LottoResult.SECOND_PLACE;
-import static nextstep.lotto.LottoResult.THIRD_PLACE;
+import static nextstep.lotto.domain.LottoResult.FIRST_PLACE;
+import static nextstep.lotto.domain.LottoResult.FOURTH_PLACE;
+import static nextstep.lotto.domain.LottoResult.LOSE;
+import static nextstep.lotto.domain.LottoResult.SECOND_PLACE;
+import static nextstep.lotto.domain.LottoResult.THIRD_PLACE;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import nextstep.lotto.domain.Lotto;
+import nextstep.lotto.domain.LottoGame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

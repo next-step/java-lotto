@@ -1,4 +1,4 @@
-package nextstep.lotto;
+package nextstep.lotto.domain;
 
 import java.util.Arrays;
 
@@ -21,6 +21,9 @@ public enum LottoResult {
 
   public int price() {
     return price;
+  }
+  public int matchCount() {
+    return matchCount;
   }
 
   public static LottoResult lottoResult(final int matchCount) {

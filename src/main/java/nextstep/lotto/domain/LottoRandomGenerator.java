@@ -1,4 +1,4 @@
-package nextstep.lotto;
+package nextstep.lotto.domain;
 
 import java.util.Collections;
 import java.util.HashSet;

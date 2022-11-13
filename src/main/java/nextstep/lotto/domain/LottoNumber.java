@@ -1,6 +1,5 @@
-package nextstep.lotto;
+package nextstep.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +22,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 			throw new IllegalArgumentException("로또 번호는 1-45만 가능합니다.");
 		}
 		return NUMBERS[number-1];
+	}
+
+	public static LottoNumber lottoNumber(final String number) {
+		return lottoNumber(Integer.parseInt(number));
 	}
 	private LottoNumber(int number) {
 		this.number = number;

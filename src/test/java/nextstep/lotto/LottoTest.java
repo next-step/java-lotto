@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.Set;
+import nextstep.lotto.domain.Lotto;
+import nextstep.lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,5 +45,12 @@ class LottoTest {
       () -> assertThat(base.match(match6)).isEqualTo(6),
       () -> assertThat(base.match(matchNothing)).isEqualTo(0)
     );
+  }
+
+  @DisplayName("문자열로 로또를 생성할 수 있다.")
+  @Test
+  public void spec04() {
+    assertThat(new Lotto("1, 2, 3, 4, 5, 6"))
+      .isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
   }
 }

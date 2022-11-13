@@ -1,12 +1,13 @@
 package nextstep.lotto;
 
-import static nextstep.lotto.LottoNumber.lottoNumber;
+import static nextstep.lotto.domain.LottoNumber.lottoNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import nextstep.lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
