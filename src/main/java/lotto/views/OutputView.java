@@ -1,7 +1,6 @@
 package lotto.views;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import lotto.LottoWinningStats;
@@ -26,18 +25,5 @@ public class OutputView {
             int count = rankingMap.getOrDefault(rank,0);
             System.out.println(rank.getCountsOfSameNumbers() + "개 일치 (" + rank.getRewards() + ")원-" + count + "개");
         });
-    }
-
-    private static void printEachNumber(List<Integer> targetNumbers) {
-        for (int j = 0; j < targetNumbers.size(); j++) {
-            System.out.print(targetNumbers.get(j));
-            printComma(j, targetNumbers.size() - 1);
-        }
-    }
-
-    private static void printComma(int index, int endIndex) {
-        if (index < endIndex) {
-            System.out.print(", ");
-        }
     }
 }
