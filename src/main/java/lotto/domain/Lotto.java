@@ -8,6 +8,7 @@ public class Lotto {
     private static final String DELIMITER_COMMA = ", ";
 
     private final LottoNumbers numbers;
+    private boolean isManual = false;
 
     public Lotto(LottoNumbers numbers) {
         this.numbers = numbers;
@@ -17,8 +18,17 @@ public class Lotto {
         this(LottoNumbers.of(numbers));
     }
 
+    public Lotto(LottoNumbers numbers, boolean isManual) {
+        this(numbers);
+        this.isManual = isManual;
+    }
+
     public static Lotto createFrom(NumberGenerator numberGenerator) {
         return new Lotto(numberGenerator.generate());
+    }
+
+    public static Lotto createManual(LottoNumbers numbers) {
+        return new Lotto(numbers, true);
     }
 
     public List<LottoNumber> getNumbers() {
@@ -41,5 +51,9 @@ public class Lotto {
         return getNumbers().stream()
             .map(LottoNumber::toString)
             .collect(Collectors.joining(DELIMITER_COMMA));
+    }
+
+    public boolean isManual() {
+        return isManual;
     }
 }

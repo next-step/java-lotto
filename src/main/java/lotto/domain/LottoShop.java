@@ -26,7 +26,7 @@ public class LottoShop {
 
     private Lottos purchaseManualLotto(List<LottoNumbers> manualLottoNumbers) {
         return manualLottoNumbers.stream()
-            .map(Lotto::new)
+            .map(Lotto::createManual)
             .collect(collectingAndThen(toList(), Lottos::new));
     }
 

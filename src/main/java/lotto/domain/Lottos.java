@@ -30,6 +30,18 @@ public class Lottos {
             .collect(toList());
     }
 
+    public long countManualLottos() {
+        return lottos.stream()
+            .filter(Lotto::isManual)
+            .count();
+    }
+
+    public long countAutoLottos() {
+        return lottos.stream()
+            .filter(lotto -> !lotto.isManual())
+            .count();
+    }
+
     public int getCount() {
         return lottos.size();
     }

@@ -24,8 +24,7 @@ public class LottoApp {
         Lottos lottos = lottoShop.purchase(purchaseMoney, manualLottoNumbers);
 
         ResultView resultView = new ResultView();
-        resultView.printPurchaseQuantity(lottos, manualLottoCount);
-        resultView.printEachLotto(lottos);
+        resultView.printLottos(lottos);
 
         WinningNumbers winningNumbers = inputView.inputLastWeekWinningNumbers();
         LottoNumber bonusNumber = inputView.inputBonusNumber();

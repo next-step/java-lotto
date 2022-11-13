@@ -6,11 +6,16 @@ import lotto.domain.Lottos;
 
 public class ResultView {
 
-    public void printPurchaseQuantity(Lottos lottos, int manualLottoCount) {
-        System.out.println(System.lineSeparator() + MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualLottoCount, lottos.getCount() - manualLottoCount));
+    public void printLottos(Lottos lottos) {
+        printPurchaseQuantity(lottos);
+        printEachLotto(lottos);
     }
 
-    public void printEachLotto(Lottos lottos) {
+    private void printPurchaseQuantity(Lottos lottos) {
+        System.out.println(System.lineSeparator() + MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", lottos.countManualLottos(), lottos.countAutoLottos()));
+    }
+
+    private void printEachLotto(Lottos lottos) {
         lottos.getLottos()
             .forEach(lotto -> System.out.println("[" + lotto + "]"));
     }

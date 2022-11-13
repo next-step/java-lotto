@@ -75,4 +75,12 @@ class LottoTest {
 
         assertThat(result).isEqualTo(3);
     }
+
+    @DisplayName("수동 로또 생성")
+    @Test
+    void createManual() {
+        Lotto manual = Lotto.createManual(LottoNumbers.of(List.of(1, 3, 5, 7, 9, 11)));
+
+        assertThat(manual.isManual()).isTrue();
+    }
 }
