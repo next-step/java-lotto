@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import lotto.enums.Ranks;
+
 public class Lotto {
     public static final int TOTAL_NUMBERS_SIZE = 6;
 
@@ -15,10 +17,10 @@ public class Lotto {
         this.numbers.addAll(getRandomNumbers(AllNumbers.getNumbers()));
     }
 
-    public int countSameNumbers(List<Integer> winningNumbers) {
-       List<Integer> numbersCopy = new ArrayList<>(List.copyOf(numbers));
-       numbersCopy.retainAll(winningNumbers);
-       return numbersCopy.size();
+    public Ranks getRankOfNumbers(List<Integer> winningNumbers) {
+        List<Integer> numbersCopy = new ArrayList<>(List.copyOf(numbers));
+        numbersCopy.retainAll(winningNumbers);
+        return Ranks.getRanks(numbersCopy.size());
     }
 
     public String toString() {

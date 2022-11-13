@@ -12,6 +12,8 @@ public class Main {
         OutputView.printNumbers(lottoBundle);
 
         String inputNumbers = InputView.inputLastWinningNumbers();
+        int bonusNumber = InputView.inputbonusBall();
+
         LottoWinningStats lottoWinningStats = new LottoWinningStats(lottoBundle, WinningNumberCreator.getNumbers(inputNumbers));
         OutputView.printWinningStatsResult(lottoWinningStats, purchaseAmount);
     }

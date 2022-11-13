@@ -23,7 +23,19 @@ public class OutputView {
         System.out.println("---------");
         Arrays.stream(Ranks.values()).forEach(rank -> {
             int count = rankingMap.getOrDefault(rank,0);
-            System.out.println(rank.getCountsOfSameNumbers() + "개 일치 (" + rank.getRewards() + ")원-" + count + "개");
+            printEachStatsByRank(count, rank);
         });
+    }
+
+    private static void printEachStatsByRank(int count, Ranks rank) {
+        if(rank == Ranks.MISS) {
+            return;
+        }
+        if(rank == Ranks.SECOND) {
+            System.out.println(rank.getCountsOfSameNumbers() + "개 일치, 보너스볼 일치(" + rank.getRewards() + ")원-" + count + "개");
+            return;
+        }
+        System.out.println(rank.getCountsOfSameNumbers() + "개 일치 (" + rank.getRewards() + ")원-" + count + "개");
+
     }
 }

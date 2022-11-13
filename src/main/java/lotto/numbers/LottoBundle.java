@@ -1,7 +1,11 @@
 package lotto.numbers;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import lotto.enums.Ranks;
 
 public class LottoBundle {
     private final List<Lotto> lottoBundle;
@@ -11,9 +15,14 @@ public class LottoBundle {
         generateNumbers(purchaseCount);
     }
 
-    public Lotto getLottoByIndex(int index) {
-        validateIndex(index);
-        return lottoBundle.get(index);
+    public Map<Ranks, Integer> getRanks(List<Integer> winningNumbers) {
+        Map<Ranks, Integer> rankingMap = new LinkedHashMap<>();
+        for(Lotto lotto : lottoBundle) {
+            Ranks rank = lotto.getRankOfNumbers(winningNumbers);
+            int count = rankingMap.getOrDefault(rank, 0);
+            rankingMap.put(rank, count + 1);
+        }
+        return rankingMap;
     }
 
     public int getBundleSize() {
@@ -32,12 +41,6 @@ public class LottoBundle {
     private void generateNumbers(int purchaseCount) {
         for (int i = 0 ; i < purchaseCount ; i++) {
             lottoBundle.add(new Lotto());
-        }
-    }
-
-    private void validateIndex(int index) {
-        if(index < 0 || index >= lottoBundle.size()) {
-            throw new IllegalArgumentException("잘못된 인덱스 번호입니다.");
         }
     }
 }
