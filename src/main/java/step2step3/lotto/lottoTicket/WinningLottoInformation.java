@@ -10,14 +10,10 @@ public class WinningLottoInformation {
     }
 
     public Rank matchedRank(LottoTicket lottoTicket) {
-        Rank rank = winningLottoTicket.rank(lottoTicket);
-
-        return isSecond(lottoTicket, rank)
-                ? Rank.SECOND
-                : rank;
+        return winningLottoTicket.rank(lottoTicket, isMatchBonus(lottoTicket));
     }
 
-    private boolean isSecond(LottoTicket lottoTicket, Rank rank) {
-        return lottoTicket.hasBonusNumber(bonusNumber) && rank == Rank.THIRD;
+    private boolean isMatchBonus(LottoTicket lottoTicket) {
+        return lottoTicket.hasBonusNumber(bonusNumber);
     }
 }

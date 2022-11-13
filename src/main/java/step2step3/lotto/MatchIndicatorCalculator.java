@@ -53,4 +53,7 @@ public class MatchIndicatorCalculator {
         return Objects.hash(rankingAggregation);
     }
 
+    public List<Rank> rankingAggregation() {
+        return rankingAggregation;
+    }
 }

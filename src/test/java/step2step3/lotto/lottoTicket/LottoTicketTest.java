@@ -2,9 +2,6 @@ package step2step3.lotto.lottoTicket;
 
 import org.junit.jupiter.api.Test;
 import step2step3.lotto.lottoNumber.NumbersGenerator;
-import step2step3.lotto.lottoTicket.LottoTicket;
-import step2step3.lotto.lottoTicket.OutputDevice;
-import step2step3.lotto.lottoTicket.Rank;
 
 import java.util.Set;
 
@@ -39,7 +36,7 @@ class LottoTicketTest {
 
         LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
 
-        assertThat(lottoTicket.rank(LottoTicket.from(numbersGenerator))).isEqualTo(Rank.FIRST);
+        assertThat(lottoTicket.rank(LottoTicket.from(numbersGenerator), false)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -49,7 +46,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = LottoTicket.from(numbersGenerator);
 
         NumbersGenerator winningNumbers = new NumbersGenerator.Fake(Set.of(1));
-        assertThatThrownBy(() -> lottoTicket.rank(LottoTicket.from(winningNumbers)))
+        assertThatThrownBy(() -> lottoTicket.rank(LottoTicket.from(winningNumbers), true))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개이어야 합니다.");
     }

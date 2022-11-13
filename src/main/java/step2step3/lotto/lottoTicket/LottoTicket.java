@@ -35,12 +35,12 @@ public class LottoTicket {
         outputDevice.printNumbers(numbers);
     }
 
-    public Rank rank(LottoTicket winningLottoTicket) {
-        long numberOfMatchingNumbers = numbers.stream()
+    public Rank rank(LottoTicket winningLottoTicket, boolean isMatchBonus) {
+        long matchCount = numbers.stream()
                 .filter(winningLottoTicket.numbers::contains)
                 .count();
 
-        return Rank.rank(numberOfMatchingNumbers);
+        return Rank.rank(matchCount, isMatchBonus);
     }
 
     @Override

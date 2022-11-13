@@ -52,5 +52,4 @@ class LottoTicketsTest {
         WinningLottoInformation winningLottoInformation = new WinningLottoInformation(1, LottoTicket.from(numbersGenerator));
         assertThat(lottoTickets.matchIndicatorCalculator(winningLottoInformation)).isEqualTo(new MatchIndicatorCalculator(List.of(Rank.FIRST)));
     }
-
 }
