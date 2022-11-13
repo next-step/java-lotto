@@ -12,7 +12,7 @@ public class Lotto {
 
     public Lotto() {
         this.numbers = new ArrayList<>(TOTAL_NUMBERS_SIZE);
-        this.numbers.addAll(getNumbers(AllNumbers.getNumbers()));
+        this.numbers.addAll(getRandomNumbers(AllNumbers.getNumbers()));
     }
 
     public int countSameNumbers(List<Integer> winningNumbers) {
@@ -32,7 +32,7 @@ public class Lotto {
         return result.toString();
     }
 
-    private List<Integer> getNumbers(List<Integer> allNumbers) {
+    private List<Integer> getRandomNumbers(List<Integer> allNumbers) {
         Collections.shuffle(allNumbers);
         List<Integer> newNumbers = new ArrayList<>(List.copyOf(allNumbers.subList(0, TOTAL_NUMBERS_SIZE)));
         newNumbers.sort(Comparator.naturalOrder());
