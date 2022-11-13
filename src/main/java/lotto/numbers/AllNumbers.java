@@ -10,7 +10,7 @@ public class AllNumbers {
     private static List<Integer> allNumbers;
 
     public static List<Integer> getNumbers() {
-        if(allNumbers == null || allNumbers.isEmpty()) {
+        if (allNumbers == null || allNumbers.isEmpty()) {
             allNumbers = IntStream.range(1, LAST_NUMBER + 1).boxed().collect(Collectors.toList());
         }
         return allNumbers;

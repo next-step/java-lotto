@@ -17,7 +17,7 @@ public class LottoBundle {
 
     public Map<Ranks, Integer> getRanks(List<Integer> winningNumbers, int bonusNumber) {
         Map<Ranks, Integer> rankingMap = new LinkedHashMap<>();
-        for(Lotto lotto : lottoBundle) {
+        for (Lotto lotto : lottoBundle) {
             Ranks rank = lotto.getRankOfNumbers(winningNumbers, bonusNumber);
             int count = rankingMap.getOrDefault(rank, 0);
             rankingMap.put(rank, count + 1);

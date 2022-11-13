@@ -28,10 +28,10 @@ public class OutputView {
     }
 
     private static void printEachStatsByRank(int count, Ranks rank) {
-        if(rank == Ranks.MISS) {
+        if (rank == Ranks.MISS) {
             return;
         }
-        if(rank == Ranks.SECOND) {
+        if (rank == Ranks.SECOND) {
             System.out.println(rank.getCountsOfSameNumbers() + "개 일치, 보너스볼 일치(" + rank.getRewards() + ")원-" + count + "개");
             return;
         }

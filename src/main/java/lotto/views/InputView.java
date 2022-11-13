@@ -18,7 +18,7 @@ public class InputView {
     }
 
     private static void validateInputAmount(int purchaseAmount) {
-        if(purchaseAmount < LottoWinningStats.PRICE) {
+        if (purchaseAmount < LottoWinningStats.PRICE) {
             throw new IllegalArgumentException("로또 최소 구입 금액보다 작습니다.");
         }
     }

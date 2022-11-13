@@ -27,10 +27,10 @@ public class Lotto {
 
     private Ranks getRanks(List<Integer> numbers, int bonusNumber) {
         for (Ranks rank : Arrays.stream(Ranks.values()).sorted(Comparator.reverseOrder()).collect(Collectors.toList())) {
-            if(rank.isWin(numbers.size()) && rank.isCheckBonusNumber() && this.numbers.contains(bonusNumber)) {
+            if (rank.isWin(numbers.size()) && rank.isCheckBonusNumber() && this.numbers.contains(bonusNumber)) {
                 return rank;
             }
-            if(rank.isWin(numbers.size()) && !rank.isCheckBonusNumber()) {
+            if (rank.isWin(numbers.size()) && !rank.isCheckBonusNumber()) {
                 return rank;
             }
         }
