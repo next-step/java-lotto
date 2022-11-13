@@ -30,7 +30,7 @@ public class LottoBundle {
     }
 
     private void generateNumbers(int purchaseCount) {
-        for (int i=0 ; i<purchaseCount ; i++) {
+        for (int i = 0 ; i < purchaseCount ; i++) {
             lottoBundle.add(new Lotto());
         }
     }

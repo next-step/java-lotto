@@ -24,7 +24,7 @@ public class LottoWinningStats {
     }
 
     private void calculateWinningStats(LottoBundle lottoBundle, List<Integer> winningNumbers) {
-        for (int i=0 ; i<lottoBundle.getBundleSize() ; i++) {
+        for (int i = 0 ; i < lottoBundle.getBundleSize() ; i++) {
             Lotto lotto = lottoBundle.getLottoByIndex(i);
             winningStats.add(i, lotto.countSameNumbers(winningNumbers));
         }
