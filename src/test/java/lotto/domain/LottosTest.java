@@ -5,6 +5,7 @@ import lotto.view.Output;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,8 @@ class LottosTest {
         BigDecimal amount = BigDecimal.valueOf(14000);
 
         Lottos lottos = new Lottos(amount);
-        lottos.buyLottos(lottos.getNumberOfTickets(amount), new AutoNumberList());
+        List<Lotto> lottoList = new ArrayList<>();
+        lottos.buyLottos(lottoList, lottos.getNumberOfTickets(amount), new AutoNumberList());
 
         assertThat(lottos.getLottoList()).hasSize(14);
     }
