@@ -57,14 +57,6 @@ public class Output {
         return lottoList;
     }
 
-    private static Integer getTrueOrFalse(boolean hasBonusNumber) {
-        Integer bonusBall = 0;
-        if (!hasBonusNumber) {
-            bonusBall = 1;
-        }
-        return bonusBall;
-    }
-
     private static boolean matchNumber(List<Lotto> lottoList, Integer number) {
         for (int i = 0; i < lottoList.size(); i++) {
 
