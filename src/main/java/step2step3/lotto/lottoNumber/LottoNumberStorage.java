@@ -24,11 +24,18 @@ public class LottoNumberStorage {
 
     public List<LottoNumber> lottoNumbers(NumbersGenerator numbersGenerator) {
         Set<Integer> numbers = numbersGenerator.numbers();
+        verifyNumbersSize(numbers);
 
         return numbers.stream()
                 .map(this::lottoNumber)
                 .sorted()
                 .collect(toUnmodifiableList());
+    }
+
+    private static void verifyNumbersSize(Set<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
+        }
     }
 
     private LottoNumber lottoNumber(int number) {
