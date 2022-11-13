@@ -6,26 +6,20 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private Map<Integer, Integer> lottoResult = new HashMap<>();
+    private Map<Rank, Integer> lottoResult;
 
-
-    public LottoResult(List<Lotto> lottos, WinningNumber winningNumber) {
-
-        for (int i= 3; i<=6 ;i++){
-            lottoResult.put(i,0);
-        }
-
-        for (Lotto lotto : lottos) {
-            int count = winningNumber.countWinning(lotto.getLotto());
-
-            if (3<=count && count<=6) {
-                lottoResult.put(count, lottoResult.get(count)+1);
-            }
-        }
+    public LottoResult(Lottos lottos, WinningLotto winningLotto) {
+        this.lottoResult = lottos.findLottoResult(winningLotto);
     }
 
-    public Map<Integer, Integer> getLottoResult() {
+    public Map<Rank, Integer> getLottoResult() {
         return lottoResult;
     }
 
+    @Override
+    public String toString() {
+        return "LottoResult{" +
+                "lottoResult=" + lottoResult +
+                '}';
+    }
 }
