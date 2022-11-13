@@ -13,10 +13,14 @@ public enum LottoResult {
 
   private final int matchCount;
 
-  private LottoResult(final int grade, final int price, final int matchCount) {
+  LottoResult(final int grade, final int price, final int matchCount) {
     this.grade = grade;
     this.price = price;
     this.matchCount = matchCount;
+  }
+
+  public int price() {
+    return price;
   }
 
   public static LottoResult lottoResult(final int matchCount) {
