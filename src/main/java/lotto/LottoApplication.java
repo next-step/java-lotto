@@ -1,25 +1,27 @@
 package lotto;
 
-import java.util.Scanner;
-
 import lotto.dto.LottoResultAggregation;
+import lotto.model.BonusNumber;
 import lotto.model.LottoMatchResults;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoReward;
 import lotto.model.WinningNumber;
+import lotto.view.input.BonusNumberInputView;
+import lotto.view.input.ConsoleUserInterface;
+import lotto.view.input.PaymentAmountInputView;
+import lotto.view.input.UserInterface;
+import lotto.view.input.WinningNumberInputView;
 import lotto.view.response.BuyResultResponseView;
 import lotto.view.response.GeneratedLottoResponseView;
 import lotto.view.response.LottoResultAggregationResponseView;
 import lotto.view.response.LottoYieldResponseView;
 import lotto.view.response.MatchResultTitleResponseView;
-import lotto.view.input.PaymentAmountInputView;
-import lotto.view.input.WinningNumberInputView;
 
 public class LottoApplication {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final UserInterface userInterface = new ConsoleUserInterface();
 
     public static void main(String[] args) {
-        int paymentAmount = PaymentAmountInputView.getPaymentAmount(scanner);
+        int paymentAmount = new PaymentAmountInputView(userInterface).getPaymentAmount();
         int lottoQuantity = LottoVendingMachine.calculate(paymentAmount);
         BuyResultResponseView.show(lottoQuantity);
 
@@ -28,10 +30,11 @@ public class LottoApplication {
 
         GeneratedLottoResponseView.show(lottoNumbers.getLottoNumbers());
 
-        WinningNumber winningNumber = WinningNumberInputView.getWinningNumber(scanner);
+        WinningNumber winningNumber = new WinningNumberInputView(userInterface).getWinningNumber();
+        BonusNumber bonusNumber = new BonusNumberInputView(userInterface).getBonusNumber();
 
         MatchResultTitleResponseView.show();
-        LottoMatchResults lottoMatchResults = new LottoMatchResults(lottoNumbers.guess(winningNumber));
+        LottoMatchResults lottoMatchResults = new LottoMatchResults(lottoNumbers.guess(winningNumber, bonusNumber));
         LottoResultAggregation lottoResultAggregation = new LottoResultAggregation(lottoMatchResults.rewardableAggregate());
 
         showLottoResultAggregation(lottoResultAggregation);
@@ -40,11 +43,11 @@ public class LottoApplication {
 
     private static void showLottoResultAggregation(LottoResultAggregation lottoResultAggregation) {
         for (LottoReward lottoReward : LottoReward.getValuesOrderByMatchResult()) {
-            System.out.println(new LottoResultAggregationResponseView(lottoReward, lottoResultAggregation.rewardMatchCount(lottoReward)).toView());
+            System.out.println(new LottoResultAggregationResponseView(lottoReward.getMatchCount(), lottoReward.getRewardAmount(), lottoReward == LottoReward.SECOND_PLACE, lottoResultAggregation.rewardMatchCount(lottoReward)).toView());
         }
     }
 
     private static void showLottoYield(int paymentAmount, int rewardAmount) {
-        System.out.println(new LottoYieldResponseView(new LottoYield(paymentAmount, rewardAmount)).toMessage());
+        System.out.println(new LottoYieldResponseView().toMessage(new LottoYield(paymentAmount, rewardAmount)));
     }
 }

@@ -15,7 +15,7 @@ public class LottoVendingMachine {
     public static LottoNumbers buy(int quantity) {
         return new LottoNumbers(IntStream.range(0, quantity)
                                          .boxed()
-                                         .map(notUsed -> new Lotto(LottoNumberGenerator.generate()))
+                                         .map(notUsed -> new Lottos(LottoNumberGenerator.generate()))
                                          .collect(Collectors.toUnmodifiableList()));
     }
 }

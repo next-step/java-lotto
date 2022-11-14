@@ -3,12 +3,14 @@ package lotto.view.input;
 import java.util.Scanner;
 
 public class PaymentAmountInputView {
+    private final UserInterface userInterface;
 
-    public static int getPaymentAmount(Scanner scanner) {
-        System.out.println("구입금액을 입력해주세요.");
+    public PaymentAmountInputView(UserInterface userInterface) {
+        this.userInterface = userInterface;
+    }
 
-        int paymentAmount = scanner.nextInt();
-        scanner.nextLine();
-        return paymentAmount;
+    public int getPaymentAmount() {
+        userInterface.show("구입금액을 입력해주세요.");
+        return userInterface.getInt();
     }
 }
