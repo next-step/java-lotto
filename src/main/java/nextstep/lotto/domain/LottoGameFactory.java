@@ -13,11 +13,7 @@ public class LottoGameFactory {
     this.lottoGenerator = lottoGenerator;
   }
 
-  public Lotto random() {
-    return lottoGenerator.get();
-  }
-
-  public List<Lotto> random(int cost) {
+  public List<Lotto> createAuto(int cost) {
     final int gameCount = cost / GAME_COST;
     final ArrayList<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < gameCount; i++) {

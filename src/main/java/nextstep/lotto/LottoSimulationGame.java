@@ -23,7 +23,7 @@ public class LottoSimulationGame {
 
   public void run() {
     final int cost = inputView.inputCost();
-    final List<Lotto> lottos = this.lottoGameFactory.random(cost);
+    final List<Lotto> lottos = this.lottoGameFactory.createAuto(cost);
     resultView.writeLottos(lottos);
 
     final String winningNumbers = inputView.inputWinningNumbers();

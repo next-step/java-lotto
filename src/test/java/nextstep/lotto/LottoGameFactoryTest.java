@@ -21,7 +21,7 @@ class LottoGameFactoryTest {
 
     final LottoGameFactory lottoGameFactory = new LottoGameFactory(sampleLottoGenerator);
 
-    assertThat(lottoGameFactory.random()).isEqualTo(sample);
+    assertThat(lottoGameFactory.createAuto(1000)).containsExactly(sample);
   }
 
   @DisplayName("LottoRandomGenerator 는 로또를 생성할 수 있다.")
