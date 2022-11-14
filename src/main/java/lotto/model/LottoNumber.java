@@ -29,12 +29,8 @@ public class LottoNumber {
         }
     }
 
-    boolean isWinningNumber(LottoNumber winNums) {
+    boolean isMatchNumber(LottoNumber winNums) {
         return winNums.number == this.number;
-    }
-
-    boolean isMatchBonusNum(LottoNumber bonusLotto) {
-        return bonusLotto.number == this.number;
     }
 
     public int getNumber() {

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static lotto.model.LottoCollectionTest.lottoNumbers;
+import static lotto.model.LottosTest.lottoNumbers;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {

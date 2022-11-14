@@ -10,15 +10,13 @@ public class Main {
         int quantity = quantity();
         printQuantity(quantity);
 
-        LottoCollection buyLotto = new LottoCollection(new LottoFactory().addLotto(quantity));
-        printLottoNumbers(buyLotto);
+        Lottos buyLotto = new Lottos(new LottoFactory().addLotto(quantity));
+        printBuyLottos(buyLotto);
 
-        RankCount rankCount = buyLotto.collectRanks(winningLotto());
-        rankCount.putMatchingCount();
-
-        buyLotto.findSecond(rankCount, bonusLotto());
+        RankGroup rankGroup = buyLotto.collectRanks(winningLotto());
+        rankGroup.putMatchingCount();
 
         Profit profit = new Profit(quantity);
-        printResult(rankCount, profit.calculate(rankCount));
+        printResult(rankGroup, profit.calculate(rankGroup));
     }
 }

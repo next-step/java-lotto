@@ -11,7 +11,7 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoNumbers(LottoCollection buyLotto) {
+    public static void printBuyLottos(Lottos buyLotto) {
         for (Lotto lotto : buyLotto.getLottos()) {
             System.out.println(lottoNumbers(lotto));
         }
@@ -21,7 +21,7 @@ public class ResultView {
         System.out.println(quantity + "개를 구매했습니다.");
     }
 
-    public static void printResult(RankCount map, BigDecimal totalProfit) {
+    public static void printResult(RankGroup map, BigDecimal totalProfit) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 

@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
+import lotto.model.WinningLotto;
 
 import java.util.*;
 import java.util.function.Function;
@@ -20,15 +21,15 @@ public class InputView {
         return SCANNER.nextInt() / LOTTO_PRICE;
     }
 
-    public static Lotto winningLotto() {
+    public static WinningLotto winningLotto() {
         System.out.println("지난주 당첨 번호를 입력해주세요");
         SCANNER.nextLine();
         String[] split = SCANNER.nextLine().split(",");
 
-        return new Lotto(parseLotto(split));
+        return new WinningLotto(new Lotto(parseLotto(split)), bonusLotto());
     }
 
-    public static LottoNumber bonusLotto() {
+    private static LottoNumber bonusLotto() {
         System.out.println("보너스 볼을 입력해주세요");
         return LottoNumber.cacheLottoNumber(SCANNER.nextInt());
     }

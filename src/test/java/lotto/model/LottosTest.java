@@ -14,9 +14,9 @@ import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoCollectionTest {
+class LottosTest {
 
-    private LottoCollection buyLottos;
+    private Lottos buyLottos;
     private Lotto buyLotto1;
 
     @BeforeEach
@@ -24,7 +24,8 @@ class LottoCollectionTest {
         buyLotto1 = toLottoNumber(List.of(3, 5, 10, 12, 16, 33));
         Lotto buyLotto2 = toLottoNumber(List.of(4, 6, 10, 11, 13, 18));
         Lotto buyLotto3 = toLottoNumber(List.of(7, 8, 14, 18, 19, 35));
-        buyLottos = new LottoCollection(List.of(buyLotto1, buyLotto2, buyLotto3));
+        buyLottos = new Lottos(List.of(buyLotto1, buyLotto2, buyLotto3));
+
     }
 
     @Test
@@ -33,7 +34,7 @@ class LottoCollectionTest {
         List<Lotto> emptyList =new ArrayList<>();
 
         assertThatThrownBy(() -> {
-            new LottoCollection(emptyList);
+            new Lottos(emptyList);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -41,20 +42,25 @@ class LottoCollectionTest {
     @MethodSource("rankTest")
     @DisplayName("당첨번호의 등수를 등급으로 반환한다")
     void countRank(List<Integer> element, Rank expected) {
-        Lotto winningLotto = toLottoNumber(element);
-        assertThat(buyLotto1.matchingRank(winningLotto)).isEqualTo(expected);
+        WinningLotto winningLotto = new WinningLotto(toLottoNumber((element)),
+                LottoNumber.cacheLottoNumber(45));
+
+        assertThat(buyLotto1.rank(winningLotto)).isEqualTo(expected);
     }
 
     @ParameterizedTest
     @MethodSource("rankTest")
     @DisplayName("당첨번호의 등수를 리스트로 반환한다")
     void collectRank(List<Integer> element, Rank expected, Rank expected2) {
-        Lotto winningLotto = toLottoNumber(element);
+        WinningLotto winningLotto = new WinningLotto(toLottoNumber((element)),
+                LottoNumber.cacheLottoNumber(45));
+
+
         EnumMap<Rank, Integer> map = new EnumMap<>(Rank.class);
         map.put(expected, 1);
         map.put(expected2, 2);
 
-        assertThat(buyLottos.collectRanks(winningLotto)).isEqualTo(new RankCount(map));
+        assertThat(buyLottos.collectRanks(winningLotto)).isEqualTo(new RankGroup(map));
     }
 
     private static Stream<Arguments> rankTest() {
