@@ -1,20 +1,22 @@
 package lotto.view.response;
 
-import lotto.model.LottoReward;
-
 public class LottoResultAggregationResponseView {
     private static final String FORMAT = "%s개 일치 (%d원) - %d개";
     private static final String SECOND_PLACE_FORMAT = "%s개 일치, 보너스 볼 일치 (%d원) - %d개";
-    private final LottoReward lottoReward;
+    private final int lottoRewardMatchCount;
+    private final int lottoRewardAmount;
     private final int matchCount;
+    private final boolean bonusBallMatched;
 
-    public LottoResultAggregationResponseView(LottoReward lottoReward, int matchCount) {
-        this.lottoReward = lottoReward;
+    public LottoResultAggregationResponseView(int lottoRewardMatchCount, int lottoRewardAmount, boolean bonusBallMatched, int matchCount) {
+        this.lottoRewardMatchCount = lottoRewardMatchCount;
+        this.lottoRewardAmount = lottoRewardAmount;
+        this.bonusBallMatched = bonusBallMatched;
         this.matchCount = matchCount;
     }
 
     private String getFormat() {
-        if (this.lottoReward == LottoReward.SECOND_PLACE) {
+        if (bonusBallMatched) {
             return SECOND_PLACE_FORMAT;
         }
 
@@ -23,8 +25,8 @@ public class LottoResultAggregationResponseView {
 
     public String toView() {
         return String.format(getFormat(),
-                this.lottoReward.getMatchCount(),
-                this.lottoReward.getRewardAmount(),
+                this.lottoRewardMatchCount,
+                lottoRewardAmount,
                 this.matchCount);
     }
 }
