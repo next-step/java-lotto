@@ -17,6 +17,8 @@ public class LottoGame {
   }
 
   public List<LottoResult> match(final List<Lotto> lottos) {
-    return lottos.stream().map(this::match).collect(Collectors.toList());
+    return lottos.stream()
+      .map(this::match)
+      .collect(Collectors.toList());
   }
 }
