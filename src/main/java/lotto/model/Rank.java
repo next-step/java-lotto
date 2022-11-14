@@ -3,11 +3,12 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum Rank {
+    CHECKBONUS(Integer.MAX_VALUE, 0),
     MISS(0, 0),
     FIVE(3, 5_000),
     FOUR(4, 50_000),
     THREE(5, 1_500_000),
-    TWO(Constants.BONUS, 30_000_000),
+    TWO(5, 30_000_000),
     ONE(6, 2_000_000_000);
 
     private final int order;
@@ -23,10 +24,16 @@ public enum Rank {
     }
 
     public static Rank findRank(int count) {
-        return Arrays.stream(Rank.values())
+        Rank rank = Arrays.stream(Rank.values())
                 .filter(value -> count == value.order)
                 .findFirst()
                 .orElse(MISS);
+
+        if (rank.order == TWO.order) {
+            return CHECKBONUS;
+        }
+
+        return rank;
     }
 
     public int getPrice() {
@@ -35,9 +42,5 @@ public enum Rank {
 
     boolean isMatchOrder(Rank collectedRank) {
         return this.order == collectedRank.order;
-    }
-
-    private static class Constants {
-        public static final int BONUS = 7;
     }
 }
