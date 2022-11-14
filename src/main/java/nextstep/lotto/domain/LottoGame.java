@@ -11,13 +11,14 @@ public class LottoGame {
     this.winning = new WinningLottoNumbers(winningNumbers);
   }
 
-  public LottoResult match(final Lotto lotto) {
-    return winning.match(lotto);
-  }
-
   public List<LottoResult> match(final List<Lotto> lottos) {
     return lottos.stream()
       .map(this::match)
       .collect(Collectors.toList());
   }
+
+  private LottoResult match(final Lotto lotto) {
+    return winning.match(lotto);
+  }
+
 }
