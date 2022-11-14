@@ -43,7 +43,7 @@ public class LottoApplication {
 
     private static void showLottoResultAggregation(LottoResultAggregation lottoResultAggregation) {
         for (LottoReward lottoReward : LottoReward.getValuesOrderByMatchResult()) {
-            System.out.println(new LottoResultAggregationResponseView(lottoReward, lottoResultAggregation.rewardMatchCount(lottoReward)).toView());
+            System.out.println(new LottoResultAggregationResponseView(lottoReward.getMatchCount(), lottoReward.getRewardAmount(), lottoReward == LottoReward.SECOND_PLACE, lottoResultAggregation.rewardMatchCount(lottoReward)).toView());
         }
     }
 
