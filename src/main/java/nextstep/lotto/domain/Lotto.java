@@ -1,30 +1,14 @@
 package nextstep.lotto.domain;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
   private final Set<LottoNumber> numbers;
 
   public Lotto(final Set<LottoNumber> numbers) {
-    this.numbers = initNumbers(numbers);
-  }
-
-  public Lotto(final String winningNumbers) {
-    if(winningNumbers == null || winningNumbers.isBlank()) {
-      throw new IllegalArgumentException("로또 번호는 공백일 수 없습니다.");
-    }
-
-    final String[] split = winningNumbers.split(",");
-    final Set<LottoNumber> numbers = Arrays.stream(split)
-      .map(String::trim)
-      .map(LottoNumber::lottoNumber)
-      .collect(Collectors.toSet());
-
     this.numbers = initNumbers(numbers);
   }
 

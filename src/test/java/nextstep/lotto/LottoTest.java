@@ -47,11 +47,4 @@ class LottoTest {
       () -> assertThat(base.match(matchNothing)).isEqualTo(0)
     );
   }
-
-  @DisplayName("문자열로 로또를 생성할 수 있다.")
-  @Test
-  public void spec04() {
-    assertThat(new Lotto("1, 2, 3, 4, 5, 6"))
-      .isEqualTo(createLotto(1, 2, 3, 4, 5, 6));
-  }
 }

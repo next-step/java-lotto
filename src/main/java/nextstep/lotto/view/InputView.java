@@ -1,5 +1,10 @@
 package nextstep.lotto.view;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+import nextstep.lotto.domain.LottoNumber;
+
 public class InputView {
 
   private final InputSupplier inputSupplier;
@@ -16,8 +21,20 @@ public class InputView {
     return Integer.parseInt(read);
   }
 
-  public String inputWinningNumbers() {
+  public Set<LottoNumber> inputWinningNumbers() {
     outputConsumer.write("지난 주 당첨 번호를 입력해 주세요.");
-    return inputSupplier.read();
+    return parseLottoNumbers(inputSupplier.read());
+  }
+  private Set<LottoNumber> parseLottoNumbers(final String winningNumbers) {
+
+    if (winningNumbers == null || winningNumbers.isBlank()) {
+      throw new IllegalArgumentException("로또 번호는 공백일 수 없습니다.");
+    }
+
+    final String[] split = winningNumbers.split(",");
+    return Arrays.stream(split)
+      .map(String::trim)
+      .map(LottoNumber::lottoNumber)
+      .collect(Collectors.toSet());
   }
 }

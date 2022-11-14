@@ -1,9 +1,11 @@
 package nextstep.lotto;
 
 import java.util.List;
+import java.util.Set;
 import nextstep.lotto.domain.Lotto;
 import nextstep.lotto.domain.LottoGame;
 import nextstep.lotto.domain.LottoGameFactory;
+import nextstep.lotto.domain.LottoNumber;
 import nextstep.lotto.domain.LottoRandomGenerator;
 import nextstep.lotto.domain.LottoSummary;
 import nextstep.lotto.view.InputView;
@@ -26,7 +28,7 @@ public class LottoSimulationGame {
     final List<Lotto> lottos = this.lottoGameFactory.createAuto(cost);
     resultView.writeLottos(lottos);
 
-    final String winningNumbers = inputView.inputWinningNumbers();
+    final Set<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
 
     final LottoGame lottoGame = new LottoGame(winningNumbers);
     final LottoSummary lottoSummary = new LottoSummary(1000,lottoGame.match(lottos));

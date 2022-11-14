@@ -1,17 +1,14 @@
 package nextstep.lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoGame {
   private final Lotto winning;
 
-  public LottoGame(final Lotto winning) {
-    this.winning = winning;
-  }
-
-  public LottoGame(final String winning) {
-    this.winning = new Lotto(winning);
+  public LottoGame(final Set<LottoNumber> winningNumbers) {
+    this.winning = new Lotto(winningNumbers);
   }
 
   public LottoResult match(final Lotto lotto) {
