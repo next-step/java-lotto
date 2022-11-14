@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.*;
 
 import static lotto.model.LottoFactory.LOTTO_MAX_LENGTH;
+import static lotto.model.Rank.*;
 
 public class Lotto {
     private final Set<LottoNumber> lotto;
@@ -12,8 +13,30 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public Rank matchingRank(Lotto winningLotto) {
-        return Rank.findRank(counting(winningLotto));
+    public Rank rank(WinningLotto winningLotto) {
+        Rank rank = findRank(counting(winningLotto));
+
+        if (rank == CHECKBONUS) {
+            return checkBonusRank(winningLotto);
+        }
+        return rank;
+    }
+
+    public boolean isMatch(LottoNumber buyLottoNumber) {
+        return lotto.stream()
+                .anyMatch(winningNum -> winningNum.isMatchNumber(buyLottoNumber));
+    }
+
+    private Rank checkBonusRank(WinningLotto winningLotto) {
+        if (isBonus(winningLotto)) {
+            return TWO;
+        }
+        return THREE;
+    }
+
+    private boolean isBonus(WinningLotto winningLotto) {
+        return lotto.stream()
+                .anyMatch(winningLotto::isMatchBonus);
     }
 
     public Set<LottoNumber> getLotto() {
@@ -26,15 +49,9 @@ public class Lotto {
         }
     }
 
-    private int counting(Lotto winningLotto) {
+    private int counting(WinningLotto winningLotto) {
         return (int) lotto.stream()
-                .flatMap(lottoNumber -> winningLotto.lotto.stream()
-                        .filter(lottoNumber1 -> lottoNumber1.isWinningNumber(lottoNumber)))
+                .filter(winningLotto::isMatch)
                 .count();
-    }
-
-    boolean isSecondRank(LottoNumber bonusLotto) {
-        return lotto.stream()
-                .anyMatch(lottoNumber ->  lottoNumber.isMatchBonusNum(bonusLotto));
     }
 }
