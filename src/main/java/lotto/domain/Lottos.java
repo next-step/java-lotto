@@ -3,6 +3,7 @@ package lotto.domain;
 import static java.util.stream.Collectors.*;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -12,6 +13,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos combine(Lottos lottos, Lottos others) {
+        return Stream.concat(
+                lottos.getLottos().stream(),
+                others.getLottos().stream()
+            )
+            .collect(collectingAndThen(toList(), Lottos::new));
+    }
+
     public List<Accordance> getAccordances(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         return lottos.stream()
             .map(lotto -> new Accordance(
@@ -19,6 +28,18 @@ public class Lottos {
                 lotto.containsBonusNumber(bonusNumber)
             ))
             .collect(toList());
+    }
+
+    public long countManualLottos() {
+        return lottos.stream()
+            .filter(Lotto::isManual)
+            .count();
+    }
+
+    public long countAutoLottos() {
+        return lottos.stream()
+            .filter(lotto -> !lotto.isManual())
+            .count();
     }
 
     public int getCount() {

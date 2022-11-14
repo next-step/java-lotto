@@ -12,7 +12,7 @@ public class ResultView {
     }
 
     private void printPurchaseQuantity(Lottos lottos) {
-        System.out.println(MessageFormat.format("{0}개를 구매했습니다.", lottos.getCount()));
+        System.out.println(System.lineSeparator() + MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", lottos.countManualLottos(), lottos.countAutoLottos()));
     }
 
     private void printEachLotto(Lottos lottos) {
