@@ -11,6 +11,7 @@ public class WinnerLotto {
 	private final static int LOTTO_END_NUM = 45;
 	private final static int CHK_DUPLICATE_NUM = 6;
 
+
 	private static Set<Integer> winningNumber;
 	private static int bonusNumber;
 
@@ -33,6 +34,7 @@ public class WinnerLotto {
 				.forEach(number -> {
 					throw new IllegalArgumentException("지난주 당첨 번호가 잘못 입력되었습니다.");
 				});
+
 
 		if (winningNumber.size() != CHK_DUPLICATE_NUM) {
 			throw new IllegalArgumentException("지난 주 당첨 번호에 중복된 번호가 들어있습니다.");
