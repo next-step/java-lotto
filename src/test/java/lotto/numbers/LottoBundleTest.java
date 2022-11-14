@@ -2,12 +2,16 @@ package lotto.numbers;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import lotto.enums.Ranks;
 
 public class LottoBundleTest {
 
@@ -19,39 +23,20 @@ public class LottoBundleTest {
     }
 
     @ParameterizedTest
-    @MethodSource("getLottoByIndexSuccessParam")
-    public void getLottoByIndexSuccess(int purchaseCount, int index) {
-        LottoBundle lottoBundle = new LottoBundle(purchaseCount);
-        assertThat(lottoBundle.getLottoByIndex(index)).isNotNull();
-        assertThat(lottoBundle.getLottoByIndex(index)).isInstanceOf(Lotto.class);
+    @MethodSource("getRanksParam")
+    public void getRanks(List<Integer> numbers, int bonusNumber) {
+        LottoBundle lottoBundle = new LottoBundle(10);
+        Map<Ranks, Integer> rankingMap = lottoBundle.getRanks(numbers, bonusNumber);
+        assertThat(rankingMap.size()).isGreaterThan(0);
     }
 
-    @ParameterizedTest
-    @MethodSource("getLottoByIndexFailedParam")
-    public void getLottoByIndexFailed(int purchaseCount, int index) {
-        assertThatThrownBy(() -> {
-            LottoBundle lottoBundle = new LottoBundle(purchaseCount);
-            lottoBundle.getLottoByIndex(index);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("잘못된 인덱스 번호입니다.");
-    }
-
-    public static Stream<Arguments> getLottoByIndexSuccessParam() {
+    public static Stream<Arguments> getRanksParam() {
         return Stream.of(
-                Arguments.of(1, 0),
-                Arguments.of(5, 3),
-                Arguments.of(7, 6),
-                Arguments.of(10, 3),
-                Arguments.of(16, 11)
-        );
-    }
-
-    public static Stream<Arguments> getLottoByIndexFailedParam() {
-        return Stream.of(
-                Arguments.of(1, -1),
-                Arguments.of(5, 5),
-                Arguments.of(7, 8),
-                Arguments.of(10, -4),
-                Arguments.of(16, 16)
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 7),
+                Arguments.of(List.of(13, 26, 28, 33, 39, 44), 43),
+                Arguments.of(List.of(2, 23, 34, 35, 41, 45), 7),
+                Arguments.of(List.of(3, 38, 40, 41, 42, 43), 17),
+                Arguments.of(List.of(4, 9, 16, 19, 26, 33), 40)
         );
     }
 }

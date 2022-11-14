@@ -19,6 +19,7 @@ public class LottoWinningStatsTest {
     public void generator(List<Integer> winningNumbers, LottoBundle lottoBundle, int bonusNumber) {
         LottoWinningStats lottoWinningStats = new LottoWinningStats(lottoBundle, winningNumbers, bonusNumber);
         assertThat(lottoWinningStats).isNotNull();
+        assertThat(lottoWinningStats.getRanks().isEmpty()).isFalse();
     }
 
     @ParameterizedTest
