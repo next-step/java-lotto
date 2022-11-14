@@ -4,10 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
 import java.util.*;
 
-import static lotto.model.WinningNumber.LOTTO_END_NUMBER;
+import static lotto.model.LottoNumber.LOTTO_END_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -16,7 +15,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("하나의 인스턴스만 보장한다")
     void create() {
-        assertSame(LottoNumber.number(3), LottoNumber.number(3));
+        assertSame(LottoNumber.cacheLottoNumber(3), LottoNumber.cacheLottoNumber(3));
     }
 
     @Test

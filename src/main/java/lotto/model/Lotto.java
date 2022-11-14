@@ -1,31 +1,57 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import static lotto.model.LottoFactory.LOTTO_MAX_LENGTH;
+import static lotto.model.Rank.*;
 
 public class Lotto {
-    private final List<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto;
 
-    public Lotto(List<LottoNumber> lotto) {
+    public Lotto(Set<LottoNumber> lotto) {
+        validation(lotto);
         this.lotto = lotto;
     }
 
-    public int countWinner(List<String> winningNumber) {
-        return (int) lotto.stream()
-                .flatMap(lottoNumber -> winningNumber.stream()
-                        .filter(lottoNumber::isWinningNumber))
-                .count();
-    }
+    public Rank rank(WinningLotto winningLotto) {
+        Rank rank = findRank(counting(winningLotto));
 
-    public static Lotto toLottoNumber(List<Integer> lotto) {
-        List<LottoNumber> list = new ArrayList<>();
-        for (Integer integer : lotto) {
-            list.add(LottoNumber.cache().get(integer));
+        if (rank == CHECKBONUS) {
+            return checkBonusRank(winningLotto);
         }
-        return new Lotto(list);
+        return rank;
     }
 
-    public List<LottoNumber> getLotto() {
-        return lotto;
+    public boolean isMatch(LottoNumber buyLottoNumber) {
+        return lotto.stream()
+                .anyMatch(winningNum -> winningNum.isMatchNumber(buyLottoNumber));
+    }
+
+    private Rank checkBonusRank(WinningLotto winningLotto) {
+        if (isBonus(winningLotto)) {
+            return TWO;
+        }
+        return THREE;
+    }
+
+    private boolean isBonus(WinningLotto winningLotto) {
+        return lotto.stream()
+                .anyMatch(winningLotto::isMatchBonus);
+    }
+
+    public Set<LottoNumber> getLotto() {
+        return Collections.unmodifiableSet(lotto);
+    }
+
+    private void validation(Set<LottoNumber> lotto) {
+        if (lotto.size() != LOTTO_MAX_LENGTH) {
+            throw new IllegalArgumentException("로또의 개수를 확인해주세요");
+        }
+    }
+
+    private int counting(WinningLotto winningLotto) {
+        return (int) lotto.stream()
+                .filter(winningLotto::isMatch)
+                .count();
     }
 }

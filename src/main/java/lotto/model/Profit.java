@@ -1,40 +1,36 @@
 package lotto.model;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
-import static lotto.model.Rank.*;
-
 public class Profit {
-    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1_000;
+    private static final RoundingMode HALF_EVEN = RoundingMode.HALF_EVEN;
+    public static final int SCALE = 2;
     private final int lottoQuantity;
 
     public Profit(int lottoQuantity) {
         this.lottoQuantity = lottoQuantity;
     }
 
-    public double calculate(List<Integer> matchingNumbers) {
-        double sum = getAllMatchPrice(matchingNumbers);
+    public BigDecimal calculate(RankGroup rankGroup) {
+        BigDecimal sum = rankGroup.benefit();
 
-        if (isNothingMatch(sum)) {
-            return 0;
+        if (isZeroMoney(sum)) {
+            return BigDecimal.ZERO;
         }
-        return profit(sum);
+
+        return calculateRevenue(sum);
     }
 
-    private double profit(double sum) {
-        return sum / (lottoQuantity * LOTTO_PRICE);
+    private BigDecimal calculateRevenue(BigDecimal sum) {
+        return sum.divide(BigDecimal.valueOf((long) lottoQuantity * LOTTO_PRICE),
+                SCALE, HALF_EVEN);
     }
 
-    private boolean isNothingMatch(double sum) {
-        return sum == 0;
-    }
-
-    private int getAllMatchPrice(List<Integer> matchingNumbers) {
-        return THREE.calculatePrice(matchingNumbers.get(0))
-                + FOUR.calculatePrice(matchingNumbers.get(1))
-                + FIVE.calculatePrice(matchingNumbers.get(2))
-                + SIX.calculatePrice(matchingNumbers.get(3));
+    private boolean isZeroMoney(BigDecimal sum) {
+        return sum.equals(BigDecimal.valueOf(0.0));
     }
 
     @Override

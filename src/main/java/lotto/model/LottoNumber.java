@@ -2,24 +2,24 @@ package lotto.model;
 
 import java.util.*;
 
-import static lotto.model.WinningNumber.LOTTO_END_NUMBER;
 
 public class LottoNumber {
+    public static final int LOTTO_END_NUMBER = 45;
     private final int number;
 
     private LottoNumber(int number) {
         this.number = number;
     }
 
-    public static LottoNumber number(int number) {
-        return getNumber.cache.get(number);
+    public static LottoNumber cacheLottoNumber(int number) {
+        return CacheLotto.cache.get(number);
     }
 
     public static Map<Integer, LottoNumber> cache() {
-        return getNumber.cache;
+        return CacheLotto.cache;
     }
 
-    private static class getNumber {
+    private static class CacheLotto {
         private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
         static {
@@ -29,8 +29,8 @@ public class LottoNumber {
         }
     }
 
-    boolean isWinningNumber(String winNums) {
-        return Integer.parseInt(winNums) == this.number;
+    boolean isMatchNumber(LottoNumber winNums) {
+        return winNums.number == this.number;
     }
 
     public int getNumber() {
