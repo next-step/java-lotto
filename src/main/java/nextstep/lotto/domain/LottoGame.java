@@ -5,15 +5,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoGame {
-  private final Lotto winning;
+  private final WinningLottoNumbers winning;
 
   public LottoGame(final Set<LottoNumber> winningNumbers) {
-    this.winning = new Lotto(winningNumbers);
+    this.winning = new WinningLottoNumbers(winningNumbers);
   }
 
   public LottoResult match(final Lotto lotto) {
-    final int matchCount = lotto.match(winning);
-    return LottoResult.lottoResult(matchCount);
+    return winning.match(lotto);
   }
 
   public List<LottoResult> match(final List<Lotto> lottos) {
