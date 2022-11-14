@@ -1,5 +1,6 @@
 package nextstep.lotto;
 
+import static nextstep.lotto.LottoFactory.createLotto;
 import static nextstep.lotto.domain.LottoResult.FIRST_PLACE;
 import static nextstep.lotto.domain.LottoResult.FOURTH_PLACE;
 import static nextstep.lotto.domain.LottoResult.LOSE;
@@ -18,12 +19,12 @@ class LottoGameTest {
   @DisplayName("당첨 번호와 비교해서 등수를 결정한다.")
   @Test
   public void spec01() {
-    final Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
-    final Lotto firstLotto = new Lotto(1, 2, 3, 4, 5, 6);
-    final Lotto secondLotto = new Lotto(1, 2, 3, 4, 5, 7);
-    final Lotto thirdLotto = new Lotto(1, 2, 3, 4, 7, 8);
-    final Lotto fourthLotto = new Lotto(1, 2, 3, 7, 8, 9);
-    final Lotto loseLotto = new Lotto(7, 8, 9, 10, 11, 12);
+    final Lotto winning = createLotto(1, 2, 3, 4, 5, 6);
+    final Lotto firstLotto = createLotto(1, 2, 3, 4, 5, 6);
+    final Lotto secondLotto = createLotto(1, 2, 3, 4, 5, 7);
+    final Lotto thirdLotto = createLotto(1, 2, 3, 4, 7, 8);
+    final Lotto fourthLotto = createLotto(1, 2, 3, 7, 8, 9);
+    final Lotto loseLotto = createLotto(7, 8, 9, 10, 11, 12);
 
     final LottoGame lottoGame = new LottoGame(winning);
     Assertions.assertAll(

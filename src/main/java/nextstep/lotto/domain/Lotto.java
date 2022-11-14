@@ -1,7 +1,5 @@
 package nextstep.lotto.domain;
 
-import static nextstep.lotto.domain.LottoNumber.lottoNumber;
-
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
@@ -14,19 +12,6 @@ public class Lotto {
 
   public Lotto(final Set<LottoNumber> numbers) {
     this.numbers = initNumbers(numbers);
-  }
-
-  public Lotto(int number1, int number2, int number3, int number4, int number5, int number6) {
-    this(
-      Set.of(
-        lottoNumber(number1),
-        lottoNumber(number2),
-        lottoNumber(number3),
-        lottoNumber(number4),
-        lottoNumber(number5),
-        lottoNumber(number6)
-      )
-    );
   }
 
   public Lotto(final String winningNumbers) {
