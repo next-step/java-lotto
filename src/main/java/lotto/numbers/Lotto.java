@@ -20,9 +20,32 @@ public class Lotto {
     }
 
     public Ranks getRankOfNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        validateNumbers(winningNumbers, bonusNumber);
         List<Integer> numbersCopy = new ArrayList<>(List.copyOf(numbers));
         numbersCopy.retainAll(winningNumbers);
         return getRanks(numbersCopy, bonusNumber);
+    }
+
+    private void validateNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        if(winningNumbers.isEmpty() || winningNumbers.size() != Lotto.TOTAL_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("당첨번호는 6자리여야 합니다.");
+        }
+
+        List<Integer> filteringNumbers = winningNumbers.stream()
+                                                       .filter(number -> number > 0 && number <= AllNumbers.LAST_NUMBER)
+                                                       .collect(Collectors.toList());
+
+        if(filteringNumbers.size() != winningNumbers.size()) {
+            throw new IllegalArgumentException("각 당첨번호의 범위는 1에서 45사이의 숫자입니다.");
+        }
+
+        if(bonusNumber <= 0 || bonusNumber > AllNumbers.LAST_NUMBER) {
+            throw new IllegalArgumentException("보너스 번호의 범위는 1에서 45사이의 숫자입니다.");
+        }
+
+        if(winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호 이외의 숫자여야 합니다.");
+        }
     }
 
     private Ranks getRanks(List<Integer> numbers, int bonusNumber) {
