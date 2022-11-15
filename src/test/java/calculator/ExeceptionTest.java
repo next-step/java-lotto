@@ -23,7 +23,7 @@ public class ExeceptionTest {
     @ValueSource(strings = {"1 . 2"})
     @DisplayName("올바른 기호가 아닐 시 에러발생")
     void signValueChk(String data){
-        assertThatThrownBy(() -> new CalculatorDatas(data).startCalculate())
+        assertThatThrownBy(() -> new Calculator(data).startCalculate())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("올바른 기호가 아닙니다.");
     }
