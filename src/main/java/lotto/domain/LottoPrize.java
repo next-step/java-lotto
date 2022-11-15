@@ -12,7 +12,7 @@ public enum LottoPrize {
 
     private final int reward;
     private final int commonNumberCount;
-    private boolean matchBonus;
+    private final boolean matchBonus;
 
     LottoPrize(final int reward, final int commonNumberCount, final boolean matchBonus) {
         this.reward = reward;

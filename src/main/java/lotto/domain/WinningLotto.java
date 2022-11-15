@@ -21,6 +21,18 @@ public class WinningLotto {
         this(LottoTicket.createFromIntegerList(ticketNumbers), new LottoNumber(bonus));
     }
 
+    public List<LottoPrize> prizes(final List<LottoTicket> tickets) {
+        return tickets.stream()
+                .map(this::prize)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+    }
+
+    private Optional<LottoPrize> prize(final LottoTicket ticket) {
+        return LottoPrize.find(ticket.getTheNumberOfCommonNumbers(this.ticket), ticket.hasNumber(this.bonusNumber));
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -36,17 +48,5 @@ public class WinningLotto {
     @Override
     public int hashCode() {
         return Objects.hash(ticket, bonusNumber);
-    }
-
-    public List<LottoPrize> prizes(final List<LottoTicket> tickets) {
-        return tickets.stream()
-                .map(this::prize)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
-    }
-
-    private Optional<LottoPrize> prize(final LottoTicket ticket) {
-        return LottoPrize.find(ticket.getTheNumberOfCommonNumbers(this.ticket), ticket.hasNumber(this.bonusNumber));
     }
 }

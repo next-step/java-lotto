@@ -1,6 +1,9 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoPrize;
+import lotto.domain.LottoTicket;
+import lotto.domain.WinningLotto;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
@@ -18,9 +21,7 @@ public class LottoGameApplication {
             return;
         }
 
-        LottoTicket lastWeekWinnerTicket = LottoTicket.createFromIntegerList(LottoInputView.getLastWeekWinnerNumber());
-        LottoNumber lastWeekBonusNumber = new LottoNumber(LottoInputView.getLastWeekBonusNumber());
-        WinningLotto lastWeekWinningLotto = new WinningLotto(lastWeekWinnerTicket, lastWeekBonusNumber);
+        WinningLotto lastWeekWinningLotto = new WinningLotto(LottoInputView.getLastWeekWinnerNumber(), LottoInputView.getLastWeekBonusNumber());
 
         List<LottoPrize> prizes = lastWeekWinningLotto.prizes(tickets);
 

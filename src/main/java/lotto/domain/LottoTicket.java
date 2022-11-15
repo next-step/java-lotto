@@ -56,7 +56,7 @@ public class LottoTicket {
     }
 
     public boolean hasNumber(final LottoNumber bonus) {
-        return numbers.stream().anyMatch(n -> n.equals(bonus));
+        return numbers.contains(bonus);
     }
 
     public List<LottoNumber> getNumbers() {
