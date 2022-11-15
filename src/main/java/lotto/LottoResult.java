@@ -1,9 +1,13 @@
-package lotto.domain;
+package lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Reward;
+import lotto.domain.WinningNumbers;
+
 import java.util.*;
 
 public class LottoResult {
 
-   private static final Map<Reward, Integer> rewardMap = new HashMap<>();
+   private static final Map<Reward, Integer> rewardMap = new EnumMap<>(Reward.class);
 
    private Lottos lottos;
    private WinningNumbers winningNumbers;

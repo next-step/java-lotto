@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 public class Lottos {
 
     private static final int lottoPrice = 1000;
+    private static final String LOTTO_NULLPOINT_EXCEPTION = "로또가 없습니다.";
 
     private List<LottoTicket> lottos;
 
@@ -17,7 +18,7 @@ public class Lottos {
 
     private void validationLottoNullCheck (List<LottoTicket> lottos){
         if(lottos.isEmpty()){
-            throw new NullPointerException("로또가 없습니다.");
+            throw new NullPointerException(LOTTO_NULLPOINT_EXCEPTION);
         }
     }
 

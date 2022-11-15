@@ -10,6 +10,7 @@ public class LottoTicket {
 
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+    private static final String LOTTO_TICKET_NULLPOINT_EXCEPTION = "로또가 생성 되지 않았습니다.";
 
     List<Integer> lottoTicket;
 
@@ -20,7 +21,7 @@ public class LottoTicket {
 
     private void validationNullCheck (List<Integer> lottoTicket){
         if(lottoTicket.isEmpty()){
-            throw new NullPointerException("로또가 생성 되지 않았습니다.");
+            throw new NullPointerException(LOTTO_TICKET_NULLPOINT_EXCEPTION);
         }
     }
 

@@ -1,6 +1,7 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Lottos;
+import lotto.domain.WinningNumbers;
 import lotto.dto.LottosDto;
 
 import static lotto.view.InputView.inputLuckyNumber;
@@ -17,8 +18,10 @@ public class LottoController {
         LottosDto lottosDto = new LottosDto(lottos);
         lottoCountMessage(lottosDto);
         lottoTickets(lottosDto);
+
         WinningNumbers winningNumbers =  new WinningNumbers(inputLuckyNumber());
         winningStatics();
+
         LottoResult lottoResult = new LottoResult(lottos,winningNumbers);
         winningResult(lottoResult.matchResult());
         lottoYield(lottoResult.lottoYieldCalculate(money));
