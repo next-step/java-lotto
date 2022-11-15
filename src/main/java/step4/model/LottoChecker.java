@@ -15,7 +15,7 @@ public class LottoChecker {
 	}
 
 	public int match(Lotto lotto) {
-		return Awards.rank(lotto.match(winnerLotto), lotto.checkBonus(winnerLotto));
+		return Awards.rankOf(lotto.match(winnerLotto), lotto.checkBonus(winnerLotto));
 	}
 
 	public Map<Integer, Integer> checkHitCnt(LottoList lottoList){

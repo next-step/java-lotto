@@ -24,7 +24,7 @@ public class LottoController {
 		LottoList lottoList = new LottoList(money, lottoGenerator, manualLottoNum);
 		OutputView.printLottoNumbers(lottoList);
 
-		WinnerLotto winnerLotto = new WinnerLotto(InputView.inputLaskWeekWinnerNumber(), InputView.inputBonusBall());
+		WinnerLotto winnerLotto = new WinnerLotto(InputView.inputLastWeekWinnerNumber(), InputView.inputBonusBall());
 		LottoChecker lottoChecker = new LottoChecker(winnerLotto);
 		Map<Integer, Integer> hitMap = lottoChecker.checkHitCnt(lottoList);
 		OutputView.printHitStatistics(hitMap, RateChecker.getEarningRate(hitMap, money));

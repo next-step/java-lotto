@@ -1,6 +1,5 @@
 package step4.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -26,7 +25,7 @@ public class InputView {
 		return IntStream.range(0, manualLottoCnt).mapToObj(i -> scanner.nextLine()).collect(Collectors.toList());
 	}
 
-	public static String inputLaskWeekWinnerNumber(){
+	public static String inputLastWeekWinnerNumber(){
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		return scanner.nextLine();
 	}

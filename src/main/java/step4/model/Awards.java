@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Awards {
-	DEFAULT(0, 0),
-	SIX(6, 2000000000),
-	FIVE_BONUS(5, 30000000),
-	FIVE(5, 150000),
-	FOUR(4, 50000),
-	THREE(3, 5000);
+	DEFAULT(0, 0, 0),
+	SIX(6, 2000000000, 1),
+	FIVE_BONUS(5, 30000000, 2),
+	FIVE(5, 150000, 3),
+	FOUR(4, 50000, 4),
+	THREE(3, 5000, 5);
 
 	private static final List<Awards> awards;
 
@@ -20,35 +20,39 @@ public enum Awards {
 
 	private final int hitCnt;
 	private final int award;
+	private final int rank;
 
-	Awards(int hitCnt, int award) {
+	Awards(final int hitCnt, final int award, final int rank) {
 		this.hitCnt = hitCnt;
 		this.award = award;
+		this.rank = rank;
 	}
 
-	public static int rank(final int matchCnt, final boolean matchBonus) {
-		if (matchCnt == 6) return SIX.ordinal();
-		if (matchCnt == 5 && matchBonus) return FIVE_BONUS.ordinal();
-		if (matchCnt == 5) return FIVE.ordinal();
-		if (matchCnt == 4) return FOUR.ordinal();
-		if (matchCnt == 3) return THREE.ordinal();
+	public static int rankOf(final int matchCnt, final boolean matchBonus) {
+		if (matchCnt == 5 && matchBonus) return FIVE_BONUS.rank;
+		if (matchCnt == 5) return FIVE.rank;
 
-		return DEFAULT.ordinal();
+		Awards awards = Arrays.stream(Awards.values())
+				.filter(award -> award.hitCnt == matchCnt)
+				.findFirst()
+				.orElse(DEFAULT);
+
+		return awards.rank;
 	}
 
-	public static boolean isBonus(int i){
-		return FIVE_BONUS.ordinal() == i;
+	public static boolean isBonus(final int i) {
+		return FIVE_BONUS.rank == i;
 	}
 
-	public static int getPrize(int awardRank, int awardCnt) {
+	public static int getPrize(final int awardRank, final int awardCnt) {
 		return awards.get(awardRank).award * awardCnt;
 	}
 
-	public static int getHitCnt(int rank) {
+	public static int getHitCnt(final int rank) {
 		return awards.get(rank).hitCnt;
 	}
 
-	public static int getAward(int rank) {
+	public static int getAward(final int rank) {
 		return awards.get(rank).award;
 	}
 }

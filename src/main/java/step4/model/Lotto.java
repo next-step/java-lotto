@@ -2,6 +2,7 @@ package step4.model;
 
 import step4.util.LottoGenerator;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -11,7 +12,7 @@ public class Lotto {
 		this.numberList = lottoGenerator.generating();
 	}
 
-	public Lotto(List<Integer> list){
+	public Lotto(final List<Integer> list){
 		this.numberList = list;
 	}
 
@@ -42,6 +43,6 @@ public class Lotto {
 	}
 
 	public List<Integer> getNumberList() {
-		return numberList;
+		return Collections.unmodifiableList(numberList);
 	}
 }
