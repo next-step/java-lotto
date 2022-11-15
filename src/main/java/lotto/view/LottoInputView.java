@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -18,18 +19,18 @@ public class LottoInputView {
         return getIntInput();
     }
 
+    public static List<List<Integer>> getLottoTicketNumbers(int numberOfTickets) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> tickets = new ArrayList<>();
+        for (int i = 0; i < numberOfTickets; i++) {
+            tickets.add(getCommaSeperatedIntegerInput());
+        }
+        return tickets;
+    }
+
     public static List<Integer> getLastWeekWinnerNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
-        String inputString = scanner.nextLine();
-        try {
-            return Arrays.stream(inputString.split(","))
-                    .map(String::trim)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자만 입력해주세요");
-        }
+        return getCommaSeperatedIntegerInput();
     }
 
     public static int getLastWeekBonusNumber() {
@@ -44,4 +45,17 @@ public class LottoInputView {
             throw new IllegalArgumentException("숫자로 입력해주세요");
         }
     }
+
+    private static List<Integer> getCommaSeperatedIntegerInput() {
+        String inputString = scanner.nextLine();
+        try {
+            return Arrays.stream(inputString.split(","))
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자만 입력해주세요");
+        }
+    }
+
 }
