@@ -13,7 +13,7 @@ public class LottoTicket {
         validateCountOfNumbers(numbers);
         validateDuplicateNumbers(numbers);
 
-        this.numbers = numbers;
+        this.numbers = numbers.stream().sorted().collect(Collectors.toList());
     }
 
     public static LottoTicket create() {
@@ -32,9 +32,7 @@ public class LottoTicket {
         List<LottoNumber> shuffledList = LottoNumber.all();
         Collections.shuffle(shuffledList);
 
-        return shuffledList.subList(0, 6).stream()
-                .sorted()
-                .collect(Collectors.toList());
+        return shuffledList.subList(0, 6).stream().collect(Collectors.toList());
     }
 
     private void validateCountOfNumbers(final List<LottoNumber> numbers) {

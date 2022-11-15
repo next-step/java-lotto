@@ -2,18 +2,33 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoGame {
     private static final int TICKET_PRICE = 1000;
 
     public static List<LottoTicket> buy(final int moneyToBuyTicket) {
-        List<LottoTicket> tickets = new ArrayList<>();
+        return buy(moneyToBuyTicket, new ArrayList<>());
+    }
 
-        for (int i = 0; i < numberOfTickets(moneyToBuyTicket); i++) {
-            tickets.add(LottoTicket.create());
-        }
+    public static List<LottoTicket> buy(final int moneyToBuyTicket, List<List<Integer>> numbersForManualTicket) {
+        int numberOfManualTickets = numbersForManualTicket.size();
+        int numberOfAutoTickets = numberOfTickets(moneyToBuyTicket) - numberOfManualTickets;
 
-        return tickets;
+        return Stream.concat(buyManualTickets(numbersForManualTicket), buyAutoTickets(numberOfAutoTickets))
+                .collect(Collectors.toList());
+    }
+
+    private static Stream<LottoTicket> buyManualTickets(List<List<Integer>> numbersForManualTicket) {
+        return numbersForManualTicket.stream()
+                .map(LottoTicket::createFromIntegerList);
+    }
+
+    private static Stream<LottoTicket> buyAutoTickets(int numberOfTickets) {
+        return IntStream.range(0, numberOfTickets)
+                .mapToObj(i -> LottoTicket.create());
     }
 
     private static int numberOfTickets(final int moneyToBuyTicket) {

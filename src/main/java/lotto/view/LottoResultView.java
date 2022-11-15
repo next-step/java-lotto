@@ -15,8 +15,9 @@ public class LottoResultView {
     public static final String RESULT_OUTPUT_COMMENT = "당첨 통계\n---------";
     public static final String BONUS_MATCH_COMMENT = ", 보너스 볼 일치";
 
-    public static void printTickets(List<LottoTicket> ticketList) {
-        System.out.println(ticketList.size() + "개를 구매했습니다.");
+    public static void printTickets(List<LottoTicket> ticketList, int numberOfManualTickets) {
+        int numberOfAutoTickets = ticketList.size() - numberOfManualTickets;
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", numberOfManualTickets, numberOfAutoTickets));
         ticketList.stream()
                 .map(LottoTicket::getNumbers)
                 .map(numbers -> numbers.stream().map(Object::toString).collect(Collectors.joining(", ", "[", "]")))
