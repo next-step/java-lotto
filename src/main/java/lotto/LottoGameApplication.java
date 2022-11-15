@@ -7,15 +7,19 @@ import lotto.domain.WinningLotto;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGameApplication {
 
     public static void main(String[] args) {
         try {
+            List<List<Integer>> numbersForManualTicket = new ArrayList<>();
             int moneyForTicket = LottoInputView.getMoneyForTicket();
             int numberOfManualTickets = LottoInputView.getNumberOfManualTicket();
-            List<List<Integer>> numbersForManualTicket = LottoInputView.getLottoTicketNumbers(numberOfManualTickets);
+            if (numberOfManualTickets > 0) {
+                numbersForManualTicket = LottoInputView.getLottoTicketNumbers(numberOfManualTickets);
+            }
             List<LottoTicket> tickets = LottoGame.buy(moneyForTicket, numbersForManualTicket);
 
             LottoResultView.printTickets(tickets, numberOfManualTickets);
