@@ -1,30 +1,30 @@
 package step3;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class OperatorTest {
 
-	@Test
-	@DisplayName("몇등인지 확인")
-	void find() {
-		Operator one = Operator.find(1, false);
-		Operator two = Operator.find(2, false);
-		Operator three = Operator.find(3, false);
-		Operator four = Operator.find(4, false);
-		Operator five = Operator.find(5, false);
-		Operator bonus = Operator.find(5, true);
-		Operator six = Operator.find(6, false);
-
-		assertThat(one).isEqualTo(Operator.NOT_RANK);
-		assertThat(two).isEqualTo(Operator.NOT_RANK);
-		assertThat(three).isEqualTo(Operator.THREE);
-		assertThat(four).isEqualTo(Operator.FOUR);
-		assertThat(five).isEqualTo(Operator.FIVE);
-		assertThat(bonus).isEqualTo(Operator.FIVE_BONUS);
-		assertThat(six).isEqualTo(Operator.SIX);
-	}
+    @ParameterizedTest
+    @DisplayName("몇 등인지 확인")
+    @CsvSource(value = {
+            "1:true:NOT_RANK",
+            "1:false:NOT_RANK",
+            "2:ture:NOT_RANK",
+            "2:false:NOT_RANK",
+            "3:true:THREE",
+            "3:false:THREE",
+            "4:true:FOUR",
+            "4:false:FOUR",
+            "5:false:FIVE",
+            "5:true:FIVE_BONUS",
+            "6:false:SIX",
+            "6:true:SIX"
+    }, delimiter = ':')
+    void find(int count, boolean bonus, Operator operator) {
+        assertThat(Operator.find(count, bonus)).isEqualTo(operator);
+    }
 }

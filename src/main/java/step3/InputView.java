@@ -1,23 +1,32 @@
 package step3;
 
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
-	private static final int LOTTO_LENGTH = 6;
-	private static final Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
-	public static String input() {
-		return sc.nextLine();
-	}
+    public static String input() {
+        return sc.nextLine();
+    }
 
-	public static String[] inputWinningNumber() {
-		return validLottoNumbers(sc.nextLine().split(", "));
-	}
+    public static Set<Integer> inputWinningNumber() {
+        return changeIntegerList(sc.nextLine());
+    }
 
-	private static String[] validLottoNumbers(String[] split) {
-		if (split.length != LOTTO_LENGTH) {
-			throw new IllegalArgumentException("6개의 숫자를 입력해주세요");
-		}
-		return split;
-	}
+    private static Set<Integer> changeIntegerList(String input) {
+        return Stream.of(input.split(", "))
+                .map(InputView::changeInteger)
+                .collect(Collectors.toSet());
+    }
+
+    private static Integer changeInteger(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자와 콤마만 입력 가능합니다.");
+        }
+    }
 }
