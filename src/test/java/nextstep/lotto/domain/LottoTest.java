@@ -45,4 +45,11 @@ class LottoTest {
       () -> assertThat(base.match(matchNothing)).isEqualTo(0)
     );
   }
+
+  @DisplayName("로또 숫자가 포한된지 확인할 수 있다.")
+  @Test
+  public void spec04() {
+    final Lotto lotto = createLotto(1, 2, 3, 4, 5, 6);
+    assertThat(lotto.contains(LottoNumber.lottoNumber(1))).isTrue();
+  }
 }

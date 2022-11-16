@@ -16,6 +16,9 @@ public class WinningLottoNumbers {
 
   public LottoResult match(final Lotto lotto) {
     final int matchCount = winning.match(lotto);
-    return LottoResult.lottoResult(matchCount);
+    final boolean matchBonus = lotto.contains(bonusNumber);
+    return LottoResult.lottoResult(matchCount, matchBonus);
   }
+
+
 }
