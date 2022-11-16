@@ -18,8 +18,8 @@ class LottoSummaryTest {
       LottoResult.FOURTH_PLACE, LottoResult.LOSE, LottoResult.LOSE, LottoResult.LOSE, LottoResult.LOSE)
     );
     Assertions.assertAll(
-      () -> assertThat(lottoSummary1.rateOfReturn()).isEqualTo(new BigDecimal("5.00")),
-      () -> assertThat(lottoSummary2.rateOfReturn()).isEqualTo(new BigDecimal("1.00"))
+      () -> assertThat(lottoSummary1.rateOfReturn()).isEqualTo(new BigDecimal("50.00")),
+      () -> assertThat(lottoSummary2.rateOfReturn()).isEqualTo(new BigDecimal("10.00"))
     );
   }
 
