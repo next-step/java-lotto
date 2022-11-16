@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 public class LottoGame {
   private final WinningLottoNumbers winning;
 
-  public LottoGame(final Set<LottoNumber> winningNumbers) {
-    this.winning = new WinningLottoNumbers(winningNumbers);
+  public LottoGame(final Set<LottoNumber> winningNumbers, final LottoNumber bonusNumber) {
+    this.winning = new WinningLottoNumbers(winningNumbers, bonusNumber);
   }
 
   public List<LottoResult> match(final List<Lotto> lottos) {

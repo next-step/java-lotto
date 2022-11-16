@@ -7,9 +7,10 @@ import java.util.function.Supplier;
 
 public class LottoRandomGenerator implements Supplier<Lotto> {
 
+  private final List<LottoNumber> lottoNumbers = LottoNumber.lottoNumbers();
+
   @Override
   public Lotto get() {
-    final List<LottoNumber> lottoNumbers = LottoNumber.lottoNumbers();
     Collections.shuffle(lottoNumbers);
     return new Lotto(new HashSet<>(lottoNumbers.subList(0, 6)));
   }

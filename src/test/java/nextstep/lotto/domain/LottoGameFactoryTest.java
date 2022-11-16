@@ -1,13 +1,10 @@
-package nextstep.lotto;
+package nextstep.lotto.domain;
 
-import static nextstep.lotto.LottoFactory.createLotto;
+import static nextstep.lotto.domain.LottoFactory.createLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.function.Supplier;
-import nextstep.lotto.domain.Lotto;
-import nextstep.lotto.domain.LottoGameFactory;
-import nextstep.lotto.domain.LottoRandomGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

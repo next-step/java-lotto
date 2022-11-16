@@ -30,6 +30,9 @@ public class Lotto {
     return retains.size();
   }
 
+  public boolean contains(final LottoNumber lottoNumber) {
+    return this.numbers.contains(lottoNumber);
+  }
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -2,6 +2,7 @@ package nextstep.lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,9 @@ public class LottoSummary {
   }
 
   public List<LottoWinCount> winResults() {
-    return countMap.entrySet().stream()
-      .filter(entry -> entry.getKey() != LottoResult.LOSE)
-      .map(entry -> new LottoWinCount(entry.getKey(), entry.getValue()))
-      .sorted(Comparator.comparingInt(o -> o.result().price()))
+    return Arrays.stream(LottoResult.values()).sorted(Comparator.reverseOrder())
+      .filter(result -> result != LottoResult.LOSE)
+      .map(result -> new LottoWinCount(result, countMap.getOrDefault(result, 0L)))
       .collect(Collectors.toList());
   }
 

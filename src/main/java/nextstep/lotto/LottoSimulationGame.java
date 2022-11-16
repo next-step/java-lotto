@@ -29,8 +29,9 @@ public class LottoSimulationGame {
     resultView.writeLottos(lottos);
 
     final Set<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
+    final LottoNumber bonusNumber = inputView.inputBonusNumber();
 
-    final LottoGame lottoGame = new LottoGame(winningNumbers);
+    final LottoGame lottoGame =  new LottoGame(winningNumbers, bonusNumber);
     final LottoSummary lottoSummary = new LottoSummary(1000,lottoGame.match(lottos));
     resultView.writeSummary(lottoSummary);
   }

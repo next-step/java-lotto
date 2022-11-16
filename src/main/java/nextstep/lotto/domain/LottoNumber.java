@@ -32,7 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static List<LottoNumber> lottoNumbers() {
-		return Arrays.asList(NUMBERS);
+		return Arrays.asList(NUMBERS.clone());
 	}
 
 	@Override
