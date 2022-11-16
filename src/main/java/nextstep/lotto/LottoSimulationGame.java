@@ -30,7 +30,7 @@ public class LottoSimulationGame {
 
     final Set<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
 
-    final LottoGame lottoGame = new LottoGame(winningNumbers);
+    final LottoGame lottoGame =  new LottoGame(winningNumbers, LottoNumber.lottoNumber(10));
     final LottoSummary lottoSummary = new LottoSummary(1000,lottoGame.match(lottos));
     resultView.writeSummary(lottoSummary);
   }

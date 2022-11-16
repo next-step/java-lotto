@@ -1,20 +1,18 @@
-package nextstep.lotto;
+package nextstep.lotto.domain;
 
-import static nextstep.lotto.LottoFactory.createLotto;
+import static nextstep.lotto.domain.LottoFactory.createLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.Set;
-import nextstep.lotto.domain.Lotto;
-import nextstep.lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
-  @DisplayName("6개의 서로 다른 숫자가 아니면 로또는 생성할 수 없ㅅ다.")
+  @DisplayName("6개의 서로 다른 숫자가 아니면 로또는 생성할 수 없다.")
   @Test
   public void spec01() {
     assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Set.of()));

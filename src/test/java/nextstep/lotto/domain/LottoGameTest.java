@@ -1,6 +1,6 @@
-package nextstep.lotto;
+package nextstep.lotto.domain;
 
-import static nextstep.lotto.LottoFactory.createLotto;
+import static nextstep.lotto.domain.LottoFactory.createLotto;
 import static nextstep.lotto.domain.LottoNumber.lottoNumber;
 import static nextstep.lotto.domain.LottoResult.FIRST_PLACE;
 import static nextstep.lotto.domain.LottoResult.FOURTH_PLACE;
@@ -11,9 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.Set;
-import nextstep.lotto.domain.Lotto;
-import nextstep.lotto.domain.LottoGame;
-import nextstep.lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +26,7 @@ class LottoGameTest {
     final Lotto fourthLotto = createLotto(1, 2, 3, 7, 8, 9);
     final Lotto loseLotto = createLotto(7, 8, 9, 10, 11, 12);
 
-    final LottoGame lottoGame = new LottoGame(winningNumbers);
+    final LottoGame lottoGame = new LottoGame(winningNumbers, LottoNumber.lottoNumber(10));
     assertThat(
       lottoGame.match(
         List.of(firstLotto, secondLotto, thirdLotto, fourthLotto, loseLotto))

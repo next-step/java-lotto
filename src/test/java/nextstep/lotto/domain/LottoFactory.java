@@ -1,9 +1,8 @@
-package nextstep.lotto;
+package nextstep.lotto.domain;
 
 import static nextstep.lotto.domain.LottoNumber.lottoNumber;
 
 import java.util.Set;
-import nextstep.lotto.domain.Lotto;
 
 public class LottoFactory {
 

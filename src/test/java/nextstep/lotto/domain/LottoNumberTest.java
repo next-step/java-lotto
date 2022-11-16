@@ -1,4 +1,4 @@
-package nextstep.lotto;
+package nextstep.lotto.domain;
 
 import static nextstep.lotto.domain.LottoNumber.lottoNumber;
 import static org.assertj.core.api.Assertions.assertThat;
