@@ -1,16 +1,16 @@
-package step3.model;
+package step4.model;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinnerLotto {
 	private final static String DELIMITER = ",";
+	private final static String SPACE = " ";
+	private final static String NON_SPACE = "";
 	private final static int LOTTO_START_NUM = 1;
 	private final static int LOTTO_END_NUM = 45;
 	private final static int CHK_DUPLICATE_NUM = 6;
-
 
 	private static Set<Integer> winningNumber;
 	private static int bonusNumber;
@@ -23,7 +23,7 @@ public class WinnerLotto {
 	}
 
 	private Set<Integer> splitWinningNumber(String winningNumber) {
-		return Arrays.stream(winningNumber.replaceAll(" ", "").split(DELIMITER))
+		return Arrays.stream(winningNumber.replaceAll(SPACE, NON_SPACE).split(DELIMITER))
 				.map(Integer::parseInt)
 				.collect(Collectors.toSet());
 	}
@@ -34,7 +34,6 @@ public class WinnerLotto {
 				.forEach(number -> {
 					throw new IllegalArgumentException("지난주 당첨 번호가 잘못 입력되었습니다.");
 				});
-
 
 		if (winningNumber.size() != CHK_DUPLICATE_NUM) {
 			throw new IllegalArgumentException("지난 주 당첨 번호에 중복된 번호가 들어있습니다.");
