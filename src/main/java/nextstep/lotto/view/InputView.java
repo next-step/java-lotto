@@ -25,6 +25,11 @@ public class InputView {
     outputConsumer.write("지난 주 당첨 번호를 입력해 주세요.");
     return parseLottoNumbers(inputSupplier.read());
   }
+
+  public LottoNumber inputBonusNumber() {
+    outputConsumer.write("보너스 볼을 입력해 주세요.");
+    return LottoNumber.lottoNumber(Integer.parseInt(inputSupplier.read()));
+  }
   private Set<LottoNumber> parseLottoNumbers(final String winningNumbers) {
 
     if (winningNumbers == null || winningNumbers.isBlank()) {
@@ -32,9 +37,11 @@ public class InputView {
     }
 
     final String[] split = winningNumbers.split(",");
-    return Arrays.stream(split)
+    final Set<LottoNumber> collect = Arrays.stream(split)
       .map(String::trim)
       .map(LottoNumber::lottoNumber)
       .collect(Collectors.toSet());
+
+    return collect;
   }
 }

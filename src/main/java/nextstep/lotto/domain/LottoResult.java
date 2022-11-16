@@ -32,6 +32,10 @@ public enum LottoResult {
     return matchCount;
   }
 
+  public boolean matchBonus() {
+    return matchBonus.contains(true) && !matchBonus.contains(false);
+  }
+
   public static LottoResult lottoResult(final int matchCount, final boolean matchBonus) {
     return Arrays.stream(values())
       .filter(grade -> grade.matchCount == matchCount && grade.matchBonus.contains(matchBonus))

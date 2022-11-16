@@ -52,4 +52,15 @@ class LottoTest {
     final Lotto lotto = createLotto(1, 2, 3, 4, 5, 6);
     assertThat(lotto.contains(LottoNumber.lottoNumber(1))).isTrue();
   }
+
+  @DisplayName("로또 숫자가 몇개나 일치하는지 알 수 있다.aaa")
+  @Test
+  public void spec05() {
+    final Lotto base = createLotto(1, 2, 3, 4, 5, 6);
+    final Lotto matchNothing = createLotto(40, 41, 42, 43, 44, 45);
+    assertThat(base.match(matchNothing)).isEqualTo(0);
+    assertThat(base.match(matchNothing)).isEqualTo(0);
+    assertThat(base.match(matchNothing)).isEqualTo(0);
+    assertThat(base.match(matchNothing)).isEqualTo(0);
+  }
 }
