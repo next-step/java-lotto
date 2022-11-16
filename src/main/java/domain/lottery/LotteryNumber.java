@@ -3,8 +3,8 @@ package domain.lottery;
 import java.util.Objects;
 
 public class LotteryNumber {
-    private final int MIN_NUMBER = 1;
-    private final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private final int number;
 
     private LotteryNumber(int number) {
@@ -17,6 +17,10 @@ public class LotteryNumber {
 
     public static LotteryNumber of(int number) {
         return new LotteryNumber(number);
+    }
+
+    public int number() {
+        return number;
     }
 
     @Override

@@ -1,20 +1,22 @@
 package domain.lottery;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LotteryTicket {
     private final List<LotteryNumber> ticketNumbers;
-    private final Set<LotteryNumber> SIEVE = new HashSet<>();
+
+    private static final int COUNT_OF_LOTTERY_NUMBERS = 6;
 
     private LotteryTicket(List<LotteryNumber> ticketNumbers) {
         this.ticketNumbers = ticketNumbers;
 
-        SIEVE.addAll(ticketNumbers);
+        ticketNumbers = ticketNumbers.stream().distinct().collect(Collectors.toList());
 
-        if (SIEVE.size() != ticketNumbers.size()) throw new IllegalArgumentException("복권번호가 중복됩니다.");
+        if (ticketNumbers.size() < COUNT_OF_LOTTERY_NUMBERS) {
+            throw new IllegalArgumentException("복권번호가 중복됩니다.");
+        }
     }
 
     public static LotteryTicket of(List<LotteryNumber> ticketNumbers) {
