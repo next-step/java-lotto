@@ -1,23 +1,21 @@
 package nextstep.lotto.domain;
 
 import java.util.Arrays;
-import java.util.Set;
 
 public enum LottoResult {
-  FIRST_PLACE(1, 2000000000, 6, Set.of(true, false)),
-  SECOND_PLACE(2, 30000000, 5, Set.of(true)),
-  THIRD_PLACE(3, 1500000, 5, Set.of(false)),
-  FOURTH_PLACE(4, 50000, 4, Set.of(true, false)),
-  FIFTH_PLACE(5, 5000, 3, Set.of(true, false)),
-  LOSE(-1, 0, 0, Set.of(true, false));
+  FIRST_PLACE(1, 2000000000, 6, false),
+  SECOND_PLACE(2, 30000000, 5, true),
+  THIRD_PLACE(3, 1500000, 5, false),
+  FOURTH_PLACE(4, 50000, 4, false),
+  FIFTH_PLACE(5, 5000, 3, false),
+  LOSE(-1, 0, 0, false);
   private final int grade;
   private final int price;
 
   private final int matchCount;
-  private final Set<Boolean> matchBonus;
+  private final boolean matchBonus;
 
-  LottoResult(final int grade, final int price, final int matchCount,
-    final Set<Boolean> matchBonus) {
+  LottoResult(final int grade, final int price, final int matchCount, final boolean matchBonus) {
     this.grade = grade;
     this.price = price;
     this.matchCount = matchCount;
@@ -33,14 +31,21 @@ public enum LottoResult {
   }
 
   public boolean matchBonus() {
-    return matchBonus.contains(true) && !matchBonus.contains(false);
+    return matchBonus;
   }
 
-  public static LottoResult lottoResult(final int matchCount, final boolean matchBonus) {
+  public static LottoResult lottoResult(final int matchCount, final boolean bonus) {
     return Arrays.stream(values())
-      .filter(grade -> grade.matchCount == matchCount && grade.matchBonus.contains(matchBonus))
+      .filter(grade -> grade.matchCount == matchCount && grade.checkBonus(bonus))
       .findFirst()
       .orElse(LOSE);
+  }
+
+  private boolean checkBonus(final boolean bonus) {
+    if(this.matchBonus) {
+      return bonus;
+    }
+    return true;
   }
 
   @Override
