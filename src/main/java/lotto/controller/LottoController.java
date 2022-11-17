@@ -11,6 +11,13 @@ import java.util.Map;
 
 public class LottoController {
 
+    public void start() {
+        LottoStore lottoStore = createLotto();
+        printLotto(lottoStore.getLotto());
+        WinningLotto winningLotto = registerWinningLotto();
+        resultLotto(winningLotto, lottoStore);
+    }
+
     public LottoStore createLotto() {
         int amount = LottoInputView.inputAmount();
         List<String> manualLottoList = LottoInputView.inputManualLotto();
