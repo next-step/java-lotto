@@ -47,7 +47,7 @@ public class LottoNumber {
             return false;
         }
         LottoNumber that = (LottoNumber) o;
-        return MIN_NUMBER == that.MIN_NUMBER && MAX_NUMBER == that.MAX_NUMBER && number == that.number;
+        return number == that.number;
     }
 
     @Override
