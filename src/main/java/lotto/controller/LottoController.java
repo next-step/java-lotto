@@ -1,4 +1,4 @@
-package lotto;
+package lotto.controller;
 
 import lotto.domain.*;
 import lotto.domain.enums.MatchNumberAndPrize;

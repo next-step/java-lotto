@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.LottoController;
 import lotto.domain.LottoStore;
 import lotto.service.WinningLotto;
 
