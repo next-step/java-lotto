@@ -1,6 +1,7 @@
 package lotto.enums;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public enum Ranks {
     MISS(0, BigDecimal.ZERO, false),
@@ -21,10 +22,6 @@ public enum Ranks {
         this.checkBonusNumber = checkBonusNumber;
     }
 
-    public boolean isWin(int countsOfSameNumbers) {
-        return this.countsOfSameNumbers == countsOfSameNumbers;
-    }
-
     public int getCountsOfSameNumbers() {
         return this.countsOfSameNumbers;
     }
@@ -33,5 +30,12 @@ public enum Ranks {
         return this.rewards;
     }
 
-    public boolean isCheckBonusNumber() { return this.checkBonusNumber; }
+    public static Ranks getRank(int countsOfSameNumbers, boolean containBonusNumber) {
+        return Arrays.stream(Ranks.values()).filter(rank -> {
+            if(containBonusNumber) {
+                return rank.countsOfSameNumbers == countsOfSameNumbers && rank.checkBonusNumber;
+            }
+            return rank.countsOfSameNumbers == countsOfSameNumbers;
+        }).findFirst().orElse(Ranks.MISS);
+    }
 }

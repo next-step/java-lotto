@@ -22,9 +22,9 @@ public class Lotto {
 
     public Ranks getRankOfNumbers(List<Integer> winningNumbers, int bonusNumber) {
         validateNumbers(winningNumbers, bonusNumber);
-        List<Integer> numbersCopy = new ArrayList<>(List.copyOf(numbers));
-        numbersCopy.retainAll(winningNumbers);
-        return getRanks(numbersCopy, bonusNumber);
+        List<Integer> pickedNumbers = new ArrayList<>(List.copyOf(numbers));
+        pickedNumbers.retainAll(winningNumbers);
+        return getRanks(pickedNumbers, bonusNumber);
     }
 
     private void validateNumbers(List<Integer> winningNumbers, int bonusNumber) {
@@ -49,16 +49,11 @@ public class Lotto {
         }
     }
 
-    private Ranks getRanks(List<Integer> numbers, int bonusNumber) {
-        for (Ranks rank : Arrays.stream(Ranks.values()).sorted(Comparator.reverseOrder()).collect(Collectors.toList())) {
-            if (rank.isWin(numbers.size()) && rank.isCheckBonusNumber() && this.numbers.contains(bonusNumber)) {
-                return rank;
-            }
-            if (rank.isWin(numbers.size()) && !rank.isCheckBonusNumber()) {
-                return rank;
-            }
+    private Ranks getRanks(List<Integer> pickedNumbers, int bonusNumber) {
+        if(this.numbers.contains(bonusNumber)) {
+            return Ranks.getRank(pickedNumbers.size(), true);
         }
-        return Ranks.MISS;
+        return Ranks.getRank(pickedNumbers.size(), false);
     }
 
     public String toString() {
