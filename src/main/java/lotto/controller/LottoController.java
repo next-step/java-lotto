@@ -22,7 +22,9 @@ public class LottoController {
         int amount = LottoInputView.inputAmount();
         int manualLottoCount = LottoInputView.inputManualLottoCount();
         List<String> manualLottoList = LottoInputView.inputManualLotto(manualLottoCount);
-        return new LottoStore(amount, manualLottoList);
+        LottoStore lottoStore = new LottoStore(amount, manualLottoList);
+        LottoResultView.printLottoCount(lottoStore.getLottoSize()-manualLottoCount, manualLottoCount);
+        return lottoStore;
     }
 
     public void printLotto(List<Lotto> lotto) {
