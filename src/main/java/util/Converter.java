@@ -1,17 +1,18 @@
 package util;
 
+import domain.lottery.LotteryNumber;
 import domain.lottery.LotteryTicket;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Converter {
     public static LotteryTicket convertStringToLotteryTicket(String[] numbers) {
-        List<Integer> lotteryTicketNumbers = new ArrayList<>();
+
+        LotteryTicket lotteryTicket = LotteryTicket.of(new ArrayList<>());
         for (String number : numbers) {
-            lotteryTicketNumbers.add(Integer.parseInt(number));
+            lotteryTicket.add(LotteryNumber.of(Integer.parseInt(number)));
         }
 
-        return new LotteryTicket(lotteryTicketNumbers);
+        return lotteryTicket;
     }
 }

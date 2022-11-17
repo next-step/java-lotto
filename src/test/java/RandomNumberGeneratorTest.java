@@ -9,6 +9,6 @@ public class RandomNumberGeneratorTest {
     @Test
     @Order(1)
     public void 랜덤복권번호생성_성공() {
-        assertThat(RandomNumberGenerator.generateNumbers()).filteredOn(number -> number >= 1 && number <= 45).hasSize(6);
+        assertThat(RandomNumberGenerator.generateNumbers()).hasSize(6);
     }
 }

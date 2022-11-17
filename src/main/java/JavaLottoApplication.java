@@ -1,8 +1,8 @@
-import ui.AutoResultView;
+import ui.ManualResultView;
 import ui.common.ResultView;
 
 public class JavaLottoApplication {
     public static void main(String... args) {
-        ResultView.lottoResult(new AutoResultView());
+        ResultView.lottoResult(new ManualResultView());
     }
 }

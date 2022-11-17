@@ -9,7 +9,7 @@ import util.Converter;
 
 import static constant.LotteryRules.DEFAULT_LOTTERY_TICKET_PRICE;
 
-public class AutoResultView implements Result {
+public class ManualResultView implements Result {
     private final String DELIMITER = ", ";
     private LotteryTickets lotteryTickets;
     private WinnerLotteryTicket winnerLotteryTicket;
@@ -28,10 +28,22 @@ public class AutoResultView implements Result {
         System.out.println("구입금액을 입력해 주세요.");
 
         long amount = InputView.inputInteger();
+        int totalNumberOfLotteryTickets = (int) Calculator.divide(amount, DEFAULT_LOTTERY_TICKET_PRICE);
 
-        lotteryTickets = new LotteryTickets(amount);
-        System.out.println(lotteryTickets.getLotteryTickets().size() + "개를 구매했습니다.");
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int numberOfManualLotteryTickets = InputView.inputInteger();
 
+        lotteryTickets = new LotteryTickets(totalNumberOfLotteryTickets - numberOfManualLotteryTickets);
+
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int count = 1; count <= numberOfManualLotteryTickets; count++) {
+            lotteryTickets.add(Converter.convertStringToLotteryTicket(InputView.inputString().split(DELIMITER)));
+        }
+
+        System.out.println();
+        System.out.println("수동으로 " + numberOfManualLotteryTickets + "장, 자동으로 " + (totalNumberOfLotteryTickets - numberOfManualLotteryTickets) + "개를 구매했습니다.");
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             System.out.println(lotteryTicket.getTicketNumbers());
         }
