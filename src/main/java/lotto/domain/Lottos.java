@@ -25,11 +25,11 @@ public class Lottos {
     }
 
     public static boolean getRank(List<Lotto> lottoList) {
-        for (int i = 0; i < lottoList.size(); i++) {
-            if (Rank.getResultRank(lottoList.get(i)).equals(Rank.SECOND)) {
+        for (Lotto lotto : lottoList) {
+            if (Rank.getResultRank(lotto).equals(Rank.SECOND)) {
                 return true;
             }
-            if (Rank.getResultRank(lottoList.get(i)).equals(Rank.THIRD)) {
+            if (Rank.getResultRank(lotto).equals(Rank.THIRD)) {
                 return false;
             }
         }
