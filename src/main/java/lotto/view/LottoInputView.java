@@ -35,22 +35,22 @@ public class LottoInputView {
         return result;
     }
 
-    public static List<String> inputManualLotto() {
+    public static int inputManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int count = SCANNER.nextInt();
         SCANNER.nextLine();
+        return count;
+    }
 
+    public static List<String> inputManualLotto(int count) {
         List<String> result = new ArrayList<>();
-
-        if (count < 0) {
+        if (count <= 0) {
             return result;
         }
-
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < count; i++) {
             result.add(SCANNER.nextLine());
         }
-
         return result;
     }
 }

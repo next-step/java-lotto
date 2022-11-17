@@ -20,7 +20,8 @@ public class LottoController {
 
     public LottoStore createLotto() {
         int amount = LottoInputView.inputAmount();
-        List<String> manualLottoList = LottoInputView.inputManualLotto();
+        int manualLottoCount = LottoInputView.inputManualLottoCount();
+        List<String> manualLottoList = LottoInputView.inputManualLotto(manualLottoCount);
         return new LottoStore(amount, manualLottoList);
     }
 
