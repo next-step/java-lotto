@@ -11,6 +11,7 @@ import lotto.enums.Ranks;
 
 public class Lotto {
     public static final int TOTAL_NUMBERS_SIZE = 6;
+    public static final int PRICE = 1000;
 
     private final List<Integer> numbers;
 

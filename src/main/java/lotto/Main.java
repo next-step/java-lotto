@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.numbers.Lotto;
 import lotto.numbers.LottoBundle;
 import lotto.numbers.WinningNumberCreator;
 import lotto.views.InputView;
@@ -8,7 +9,7 @@ import lotto.views.OutputView;
 public class Main {
     public static void main(String[] args) {
         int purchaseAmount = InputView.inputAmount();
-        LottoBundle lottoBundle = new LottoBundle(purchaseAmount / LottoWinningStats.PRICE);
+        LottoBundle lottoBundle = new LottoBundle(purchaseAmount / Lotto.PRICE);
         OutputView.printNumbers(lottoBundle);
 
         String inputNumbers = InputView.inputLastWinningNumbers();

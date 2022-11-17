@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.enums.Ranks;
+import lotto.numbers.Lotto;
 import lotto.numbers.LottoBundle;
 
 public class LottoWinningStatsTest {
@@ -35,7 +36,7 @@ public class LottoWinningStatsTest {
     @MethodSource("lottoWinningStatsParams")
     public void getYield(List<Integer> winningNumbers, LottoBundle lottoBundle, int bonusNumber) {
         LottoWinningStats lottoWinningStats = new LottoWinningStats(lottoBundle, winningNumbers, bonusNumber);
-        double yield = lottoWinningStats.getYield(lottoBundle.getBundleSize() * LottoWinningStats.PRICE);
+        double yield = lottoWinningStats.getYield(lottoBundle.getBundleSize() * Lotto.PRICE);
 
         assertThat(yield).isNotNaN();
     }

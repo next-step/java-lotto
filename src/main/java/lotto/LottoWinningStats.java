@@ -7,7 +7,6 @@ import lotto.enums.Ranks;
 import lotto.numbers.LottoBundle;
 
 public class LottoWinningStats {
-    public static final int PRICE = 1000;
     private final Map<Ranks, Integer> rankingMap;
 
     public LottoWinningStats(LottoBundle lottoBundle, List<Integer> winningNumbers, int bonusNumber) {
