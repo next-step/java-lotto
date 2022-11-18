@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class LottoNumber {
@@ -17,6 +18,20 @@ public class LottoNumber {
 
     public static Map<Integer, LottoNumber> cache() {
         return CacheLotto.cache;
+    }
+
+    public static Set<LottoNumber> toLottoNumberSet(List<Integer> testLotto) {
+        return testLotto.stream()
+                .map(Integer -> cache().get(Integer))
+                .collect(Collectors.toSet());
+    }
+
+    public static boolean isContain(int element) {
+        return cache().containsKey(element);
+    }
+
+    public static Set<Integer> elements() {
+        return cache().keySet();
     }
 
     private static class CacheLotto {
