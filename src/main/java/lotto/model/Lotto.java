@@ -26,12 +26,6 @@ public class Lotto {
                 .anyMatch(winningNum -> winningNum.isMatchNumber(buyLottoNumber));
     }
 
-    private Set<LottoNumber> lottoNumbers(List<Integer> testLotto) {
-        return testLotto.stream()
-                .map(Integer -> LottoNumber.cache().get(Integer))
-                .collect(Collectors.toSet());
-    }
-
     public Set<LottoNumber> getLotto() {
         return Collections.unmodifiableSet(lotto);
     }
