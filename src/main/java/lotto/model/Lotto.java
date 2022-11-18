@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static lotto.model.LottoFactory.LOTTO_MAX_LENGTH;
 import static lotto.model.Rank.*;
@@ -13,13 +14,11 @@ public class Lotto {
         this.lotto = lotto;
     }
 
+
+
     public Rank rank(WinningLotto winningLotto) {
         Rank rank = findRank(counting(winningLotto));
-
-        if (rank == CHECKBONUS) {
-            return checkBonusRank(winningLotto);
-        }
-        return rank;
+        return rank.checkBonus(winningLotto, lotto);
     }
 
     public boolean isMatch(LottoNumber buyLottoNumber) {
@@ -27,16 +26,10 @@ public class Lotto {
                 .anyMatch(winningNum -> winningNum.isMatchNumber(buyLottoNumber));
     }
 
-    private Rank checkBonusRank(WinningLotto winningLotto) {
-        if (isBonus(winningLotto)) {
-            return TWO;
-        }
-        return THREE;
-    }
-
-    private boolean isBonus(WinningLotto winningLotto) {
-        return lotto.stream()
-                .anyMatch(winningLotto::isMatchBonus);
+    private Set<LottoNumber> lottoNumbers(List<Integer> testLotto) {
+        return testLotto.stream()
+                .map(Integer -> LottoNumber.cache().get(Integer))
+                .collect(Collectors.toSet());
     }
 
     public Set<LottoNumber> getLotto() {
