@@ -34,14 +34,14 @@ public class Input {
     public static List<Lotto> inputManualNumberList(int cnt) {
         System.out.println();
         System.out.println(INPUT_MANUAL_NUMBERS);
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < cnt; i++) {
             String str = sc3.nextLine();
-            lottoList.add(new Lotto(getLottoNumbers(str)));
+            lottos.add(new Lotto(getLottoNumbers(str)));
             System.out.println();
         }
 
-        return lottoList;
+        return lottos;
     }
 
     private static List<LottoNumber> getLottoNumbers(String str) {

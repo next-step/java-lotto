@@ -9,13 +9,13 @@ public class LottoApplication {
     public static void main(String[] args) {
         BigDecimal amount = Input.inputAmount();
         int manualLottoCount = Input.inputManualLottoCount();
-        List<Lotto> manualLottoNumberList = Input.inputManualNumberList(manualLottoCount);
+        List<Lotto> manualLottoNumbers = Input.inputManualNumberList(manualLottoCount);
 
-        List<Lotto> numberList = Output.print(manualLottoNumberList, manualLottoCount, amount);
-        List<Integer> winnerNumberList = Input.inputWinnerNumberList();
+        List<Lotto> numbers = Output.print(manualLottoNumbers, manualLottoCount, amount);
+        List<Integer> winnerNumbers = Input.inputWinnerNumberList();
         Integer bonusBallNumber = Input.inputBonusBallNumber();
 
-        List<Lotto> lottoList = Output.getRank(numberList, winnerNumberList, bonusBallNumber);
+        List<Lotto> lottoList = Output.getRank(numbers, winnerNumbers, bonusBallNumber);
         Output.getResult(lottoList);
     }
 }
