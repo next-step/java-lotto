@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.strategy.ManualNumberList;
+import lotto.strategy.NumberList;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -16,7 +18,6 @@ public class Input {
     private static final String INPUT_BONUS_BALL_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final Scanner sc1 = new Scanner(System.in);
     private static final Scanner sc2 = new Scanner(System.in);
-    private static final Scanner sc3 = new Scanner(System.in);
     private static final Scanner sc4 = new Scanner(System.in);
     private static final Scanner sc5 = new Scanner(System.in);
 
@@ -31,25 +32,16 @@ public class Input {
         return sc2.nextInt();
     }
 
-    public static List<Lotto> inputManualNumberList(int cnt) {
+    public static List<Lotto> inputManualNumberList(int cnt, NumberList numberList) {
         System.out.println();
         System.out.println(INPUT_MANUAL_NUMBERS);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < cnt; i++) {
-            String str = sc3.nextLine();
-            lottos.add(new Lotto(getLottoNumbers(str)));
+            lottos.add(new Lotto(numberList.makeNumberList()));
             System.out.println();
         }
 
         return lottos;
-    }
-
-    private static List<LottoNumber> getLottoNumbers(String str) {
-        return Arrays.stream(str.split(", "))
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     public static List<Integer> inputWinnerNumberList() {

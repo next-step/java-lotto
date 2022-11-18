@@ -1,4 +1,5 @@
 import lotto.domain.Lotto;
+import lotto.strategy.ManualNumberList;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -9,7 +10,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         BigDecimal amount = Input.inputAmount();
         int manualLottoCount = Input.inputManualLottoCount();
-        List<Lotto> manualLottoNumbers = Input.inputManualNumberList(manualLottoCount);
+        List<Lotto> manualLottoNumbers = Input.inputManualNumberList(manualLottoCount, new ManualNumberList());
 
         List<Lotto> numbers = Output.print(manualLottoNumbers, manualLottoCount, amount);
         List<Integer> winnerNumbers = Input.inputWinnerNumberList();
