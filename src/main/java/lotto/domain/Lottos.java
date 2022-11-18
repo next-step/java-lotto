@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -27,14 +27,16 @@ public class Lottos {
 		return purchasedLottos.size();
 	}
 
-	public Map<Integer, Integer> getMatchingCountsMap(Lotto winningLotto) {
-		Map<Integer, Integer> matchingCountsMap = new HashMap<>();
+	public Map<Reward, Integer> getRewardStatistic(WinningLotto winningLotto) {
+		Map<Reward, Integer> rewardStatistic = new EnumMap<>(Reward.class);
 		for (Lotto lotto : purchasedLottos) {
-			matchingCountsMap.put(
-				lotto.getMatchingCount(winningLotto.getNumbers()),
-				matchingCountsMap.getOrDefault(lotto.getMatchingCount(winningLotto.getNumbers()), 0) + 1
+			Reward reward = Reward.getRewardByMatchCount(lotto.getMatchingCount(winningLotto.getNumbers()),
+				lotto.hasBonusNumber(winningLotto.getBonusNumber()));
+			rewardStatistic.put(
+				reward,
+				rewardStatistic.getOrDefault(reward, 0) + 1
 			);
 		}
-		return matchingCountsMap;
+		return rewardStatistic;
 	}
 }

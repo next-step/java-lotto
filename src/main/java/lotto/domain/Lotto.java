@@ -13,7 +13,7 @@ public class Lotto implements LottoGenerate {
 	public static final int PRICE = 1000;
 	public static final int LOTTO_NUMBER_QUANTITY = 6;
 
-	private final List<Integer> numbers;
+	protected final List<Integer> numbers;
 
 	public Lotto() {
 		this.numbers = generate();
@@ -55,6 +55,10 @@ public class Lotto implements LottoGenerate {
 		return (int)IntStream.range(0, winningNumbers.size())
 			.filter(i -> numbers.contains(winningNumbers.get(i)))
 			.count();
+	}
+
+	public boolean hasBonusNumber(int bonusNumber) {
+		return numbers.contains(bonusNumber);
 	}
 
 	@Override

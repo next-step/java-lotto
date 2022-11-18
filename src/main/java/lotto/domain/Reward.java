@@ -2,35 +2,36 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-import lotto.exception.ErrorMessage;
-import lotto.exception.InvalidMatchCountException;
-
 public enum Reward {
-	THREE_MATCH_REWARD(3, 5_000),
-	FOUR_MATCH_REWARD(4, 50_000),
-	FIVE_MATCH_REWARD(5, 1_500_000),
-	SIX_MATCH_REWARD(6, 2_000_000_000);
+    FIRST(6, 2_000_000_000, BonusRequiredType.NO_MATTER),
+    SECOND(5, 30_000_000, BonusRequiredType.REQUIRED),
+    THIRD(5, 1_500_000, BonusRequiredType.NOT_REQUIRED),
+    FOURTH(4, 50_000, BonusRequiredType.NO_MATTER),
+    FIFTH(3, 5_000, BonusRequiredType.NO_MATTER),
+    MISS(0, 0, BonusRequiredType.NO_MATTER);
 
-	int matchCount;
-	int money;
+    int matchCount;
+    int money;
+    BonusRequiredType bonusRequiredType;
 
-	Reward(int matchCount, int money) {
-		this.matchCount = matchCount;
-		this.money = money;
-	}
+    Reward(int matchCount, int money, BonusRequiredType bonusRequiredType) {
+        this.matchCount = matchCount;
+        this.money = money;
+        this.bonusRequiredType = bonusRequiredType;
+    }
 
-	public static Reward getRewardByMatchCount(int matchCount) {
-		return Arrays.stream(values())
-			.filter(reward -> reward.getMatchCount() == (matchCount))
-			.findFirst()
-			.orElseThrow(() -> new InvalidMatchCountException(ErrorMessage.INVALID_MATCH_COUNT));
-	}
+    public static Reward getRewardByMatchCount(int matchCount, boolean hasBonusNumber) {
+        return Arrays.stream(values())
+            .filter(reward -> reward.matchCount == (matchCount) && reward.bonusRequiredType.evaluate(hasBonusNumber))
+            .findFirst()
+            .orElse(MISS);
+    }
 
-	public int getMatchCount() {
-		return matchCount;
-	}
+    public int getMatchCount() {
+        return matchCount;
+    }
 
-	public int getMoney() {
-		return money;
-	}
+    public int getMoney() {
+        return money;
+    }
 }

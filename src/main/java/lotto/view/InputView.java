@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class InputView {
 	private static final String ASK_MONEY_QUESTION = "구입금액을 입력해 주세요.";
 	private static final String ASK_WINNING_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
+	private static final String ASK_BONUS_NUMBER_QUESTION = "보너스 번호를 입력해 주세요.";
 	private static final String LINE_BREAK = "\n";
 	private static final String COMMA_DELIMITER = ",";
 
@@ -45,6 +46,17 @@ public class InputView {
 		return splitedInput.stream()
 			.map(s -> Integer.parseInt(s.trim()))
 			.collect(Collectors.toList());
+	}
+
+	public int askBonusNumber() {
+		print(ASK_BONUS_NUMBER_QUESTION);
+		print(LINE_BREAK);
+
+		try {
+			return Integer.parseInt(scanner.nextLine());
+		} catch (InputMismatchException exception) {
+			throw new InputMismatchException("숫자를 입력해주세요.");
+		}
 	}
 
 	private List<String> splitInput(String input) {
