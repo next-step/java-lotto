@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.model.LottoNumber.toLottoNumberSet;
 import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -72,12 +73,6 @@ class LottosTest {
     }
 
     private Lotto toLottoNumber(List<Integer> testLotto) {
-        return new Lotto(lottoNumbers(testLotto));
-    }
-
-    public static Set<LottoNumber> lottoNumbers(List<Integer> testLotto) {
-        return testLotto.stream()
-                .map(Integer -> LottoNumber.cache().get(Integer))
-                .collect(Collectors.toSet());
+        return new Lotto(toLottoNumberSet(testLotto));
     }
 }
