@@ -16,14 +16,6 @@ public class RankGroup {
                 .sum());
     }
 
-    public void putMatchingCount() {
-        for (Rank rank : rankCount.keySet()) {
-            rankCount.put(rank, (int) rankCount.keySet().stream()
-                    .filter(rank::isMatchOrder)
-                    .count());
-        }
-    }
-
     public Map<Rank, Integer> getRankCount() {
         return Collections.unmodifiableMap(rankCount);
     }

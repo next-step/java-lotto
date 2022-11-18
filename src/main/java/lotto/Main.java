@@ -14,7 +14,6 @@ public class Main {
         printBuyLottos(buyLotto);
 
         RankGroup rankGroup = buyLotto.collectRanks(winningLotto());
-        rankGroup.putMatchingCount();
 
         Profit profit = new Profit(quantity);
         printResult(rankGroup, profit.calculate(rankGroup));

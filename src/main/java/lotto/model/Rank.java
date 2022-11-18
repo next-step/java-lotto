@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Set;
 
 public enum Rank {
     CHECKBONUS(Integer.MAX_VALUE, 0),
@@ -36,11 +37,26 @@ public enum Rank {
         return rank;
     }
 
-    public int getPrice() {
-        return price;
+    public Rank checkBonus(WinningLotto winningLotto, Set<LottoNumber> lotto) {
+        if (this == CHECKBONUS) {
+            return checkBonusRank(winningLotto, lotto);
+        }
+        return this;
     }
 
-    boolean isMatchOrder(Rank collectedRank) {
-        return this.order == collectedRank.order;
+    private Rank checkBonusRank(WinningLotto winningLotto, Set<LottoNumber> lotto) {
+        if (isBonus(winningLotto, lotto)) {
+            return TWO;
+        }
+        return THREE;
+    }
+
+    private boolean isBonus(WinningLotto winningLotto, Set<LottoNumber> lotto) {
+        return lotto.stream()
+                .anyMatch(winningLotto::isMatchBonus);
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
