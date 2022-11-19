@@ -2,13 +2,8 @@ package lotto;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumbers;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +16,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 1장 생성 테스트")
     public void lottoMake(){
-        LottoTicket lottoTicket = LottoTicket.lottoMake();
+        LottoTicket lottoTicket = LottoTicket.valueOf();
         assertThat(lottoTicket.getTicket()).hasSize(6);
     }
 
