@@ -16,6 +16,14 @@ public class LottoNumber {
         return CacheLotto.cache.get(number);
     }
 
+    public static Set<LottoNumber> lottoNumberSet(int... number) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (int num : number) {
+            lottoNumbers.add(cacheLottoNumber(num));
+        }
+        return lottoNumbers;
+    }
+
     public static Map<Integer, LottoNumber> cache() {
         return CacheLotto.cache;
     }

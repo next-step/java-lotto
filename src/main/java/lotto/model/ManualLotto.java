@@ -12,6 +12,10 @@ public class ManualLotto {
         this.manualQuantity = manual;
     }
 
+    public ManualLotto(int manual) {
+        this(manual, 3);
+    }
+
     private void validation(int manual, int quantity) {
         if (manual > quantity) {
             throw new IllegalArgumentException("구매금액을 초과했습니다");
