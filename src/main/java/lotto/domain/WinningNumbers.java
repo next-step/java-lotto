@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
-    private static final String separator = ",";
+    private static final String SEPARATOR = ",";
+    private static final String NULL_EXCEPTION_MESSGAE = "빈값이 들어왔습니다.";
+    private static final String WINNING_NUMBER_EXCEPTION_MESSAGE = "당첨 번호는 6개만 입력해주세요.";
 
     List<Integer> winningNumbers;
 
@@ -17,7 +19,7 @@ public class WinningNumbers {
     }
 
     public List<Integer> winningNumbersMake(String winningNumbers){
-        List<Integer> numbers = Arrays.asList(winningNumbers.split(separator)).stream()
+        List<Integer> numbers = Arrays.asList(winningNumbers.split(SEPARATOR)).stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         validationNumbersSizeCheck(numbers);
@@ -26,19 +28,17 @@ public class WinningNumbers {
 
     public void validationBlank(String winningNumbers){
         if(winningNumbers.isBlank()){
-            throw new NullPointerException("빈값이 들어왔습니다.");
+            throw new NullPointerException(NULL_EXCEPTION_MESSGAE);
         }
     }
 
     public void validationNumbersSizeCheck(List<Integer> winningNumbers){
         if(winningNumbers.size() > 6){
-            throw new IllegalArgumentException("당첨 번호는 6개만 입력해주세요.");
+            throw new IllegalArgumentException(WINNING_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
     public List<Integer> getWinningNumbers() {
         return winningNumbers;
     }
-
-
 }
