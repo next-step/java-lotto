@@ -1,10 +1,6 @@
 package lotto.view;
 
-import lotto.model.*;
-
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -22,34 +18,24 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<Lotto> manualNumber(ManualLotto manualLotto) {
+    public static Map<Integer, List<String>> manualNumber(int quantity) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         SCANNER.nextLine();
-        List<Lotto> list = new ArrayList<>();
-        for (int i = 0; i < manualLotto.getManualQuantity(); i++) {
-            list.add(new Lotto(numberToSet(SCANNER.nextLine().split(","))));
+        Map<Integer, List<String>> map = new HashMap<>();
+        for (int i = 0; i < quantity; i++) {
+            String[] split = SCANNER.nextLine().split(",");
+            map.put(i, Arrays.asList(split));
         }
-        return list;
+        return map;
     }
 
-    public static WinningLotto winningLotto() {
+    public static Set<String> winningLotto() {
         System.out.println("지난주 당첨 번호를 입력해주세요");
-        String[] split = SCANNER.nextLine().split(",");
-        return new WinningLotto(new Lotto(numberToSet(split)), bonusLotto());
+        return new HashSet<>(Arrays.asList(SCANNER.nextLine().split(",")));
     }
 
-    private static LottoNumber bonusLotto() {
+    public static int bonusLotto() {
         System.out.println("보너스 볼을 입력해주세요");
-        return LottoNumber.cacheLottoNumber(SCANNER.nextInt());
-    }
-
-    private static Set<LottoNumber> numberToSet(final String[] split) {
-        return Arrays.stream(split)
-                .map(parsing())
-                .collect(Collectors.toSet());
-    }
-
-    private static Function<String, LottoNumber> parsing() {
-        return string -> LottoNumber.cacheLottoNumber(Integer.parseInt(string));
+        return SCANNER.nextInt();
     }
 }

@@ -23,6 +23,12 @@ public class LottoNumber {
         }
     }
 
+    public static Set<LottoNumber> winningToSet(Set<String> winningLottos) {
+        return winningLottos.stream()
+                .map(string -> cacheLottoNumber(Integer.parseInt(string)))
+                .collect(Collectors.toSet());
+    }
+
     public static Map<Integer, LottoNumber> cache() {
         return CacheLotto.cache;
     }
