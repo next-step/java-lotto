@@ -8,7 +8,7 @@ import static lotto.view.ResultView.*;
 public class Main {
     public static void main(String[] args) {
         int autoQuantity = quantity();
-        int manualQuantity = manual();
+        ManualLotto manualQuantity = manual(autoQuantity);
 
         Lottos buyLotto = new Lottos(new LottoFactory().addLotto(autoQuantity, manualNumber(manualQuantity)));
         printQuantity(autoQuantity, manualQuantity);

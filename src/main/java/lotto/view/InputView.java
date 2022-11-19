@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
+import lotto.model.ManualLotto;
 import lotto.model.WinningLotto;
 
 import java.util.*;
@@ -21,20 +22,15 @@ public class InputView {
         return SCANNER.nextInt() / LOTTO_PRICE;
     }
 
-    public static int manual() {
+    public static ManualLotto manual(int autoQuantity) {
         System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
-        return SCANNER.nextInt();
+        return new ManualLotto(SCANNER.nextInt(), autoQuantity);
     }
 
-    public static List<Lotto> manualNumber(int quantity) {
+    public static List<Lotto> manualNumber(ManualLotto manualLotto) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         SCANNER.nextLine();
-
-        List<Lotto> list = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            list.add(new Lotto(numberToSet(SCANNER.nextLine().split(","))));
-        }
-        return list;
+        return manualLotto.make(numberToSet(SCANNER.nextLine().split(",")));
     }
 
     public static WinningLotto winningLotto() {
