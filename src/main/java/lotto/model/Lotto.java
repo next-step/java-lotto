@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static lotto.model.LottoFactory.LOTTO_MAX_LENGTH;
 import static lotto.model.Rank.*;
@@ -13,8 +12,6 @@ public class Lotto {
         validation(lotto);
         this.lotto = lotto;
     }
-
-
 
     public Rank rank(WinningLotto winningLotto) {
         Rank rank = findRank(counting(winningLotto));

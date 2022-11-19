@@ -21,12 +21,26 @@ public class InputView {
         return SCANNER.nextInt() / LOTTO_PRICE;
     }
 
+    public static int manual() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+        return SCANNER.nextInt();
+    }
+
+    public static List<Lotto> manualNumber(int quantity) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        SCANNER.nextLine();
+
+        List<Lotto> list = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            list.add(new Lotto(numberToSet(SCANNER.nextLine().split(","))));
+        }
+        return list;
+    }
+
     public static WinningLotto winningLotto() {
         System.out.println("지난주 당첨 번호를 입력해주세요");
-        SCANNER.nextLine();
         String[] split = SCANNER.nextLine().split(",");
-
-        return new WinningLotto(new Lotto(parseLotto(split)), bonusLotto());
+        return new WinningLotto(new Lotto(numberToSet(split)), bonusLotto());
     }
 
     private static LottoNumber bonusLotto() {
@@ -34,7 +48,7 @@ public class InputView {
         return LottoNumber.cacheLottoNumber(SCANNER.nextInt());
     }
 
-    private static Set<LottoNumber> parseLotto(final String[] split) {
+    private static Set<LottoNumber> numberToSet(final String[] split) {
         return Arrays.stream(split)
                 .map(parsing())
                 .collect(Collectors.toSet());

@@ -7,15 +7,16 @@ import static lotto.view.ResultView.*;
 
 public class Main {
     public static void main(String[] args) {
-        int quantity = quantity();
-        printQuantity(quantity);
+        int autoQuantity = quantity();
+        int manualQuantity = manual();
 
-        Lottos buyLotto = new Lottos(new LottoFactory().addLotto(quantity));
+        Lottos buyLotto = new Lottos(new LottoFactory().addLotto(autoQuantity, manualNumber(manualQuantity)));
+        printQuantity(autoQuantity, manualQuantity);
         printBuyLottos(buyLotto);
 
         RankGroup rankGroup = buyLotto.collectRanks(winningLotto());
 
-        Profit profit = new Profit(quantity);
+        Profit profit = new Profit(autoQuantity);
         printResult(rankGroup, profit.calculate(rankGroup));
     }
 }
