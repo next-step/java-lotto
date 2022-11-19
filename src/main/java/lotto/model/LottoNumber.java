@@ -13,15 +13,14 @@ public class LottoNumber {
     }
 
     public static LottoNumber cacheLottoNumber(int number) {
+        validation(number);
         return CacheLotto.cache.get(number);
     }
 
-    public static Set<LottoNumber> lottoNumberSet(int... number) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int num : number) {
-            lottoNumbers.add(cacheLottoNumber(num));
+    private static void validation(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("보너스 볼은 1~45 사이의 숫자입니다");
         }
-        return lottoNumbers;
     }
 
     public static Map<Integer, LottoNumber> cache() {

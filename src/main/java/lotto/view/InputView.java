@@ -1,15 +1,10 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
-import lotto.model.ManualLotto;
-import lotto.model.WinningLotto;
+import lotto.model.*;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static lotto.model.Profit.LOTTO_PRICE;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -17,20 +12,24 @@ public class InputView {
     private InputView() {
     }
 
-    public static int quantity() {
+    public static int buyPrice() {
         System.out.println("구매금액을 입력해 주세요");
-        return SCANNER.nextInt() / LOTTO_PRICE;
+        return SCANNER.nextInt();
     }
 
-    public static ManualLotto manual(int autoQuantity) {
+    public static int manual() {
         System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
-        return new ManualLotto(SCANNER.nextInt(), autoQuantity);
+        return SCANNER.nextInt();
     }
 
     public static List<Lotto> manualNumber(ManualLotto manualLotto) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         SCANNER.nextLine();
-        return manualLotto.make(numberToSet(SCANNER.nextLine().split(",")));
+        List<Lotto> list = new ArrayList<>();
+        for (int i = 0; i < manualLotto.getManualQuantity(); i++) {
+            list.add(new Lotto(numberToSet(SCANNER.nextLine().split(","))));
+        }
+        return list;
     }
 
     public static WinningLotto winningLotto() {
