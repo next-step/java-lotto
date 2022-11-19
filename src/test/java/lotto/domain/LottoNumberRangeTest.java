@@ -1,8 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberRange;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,5 +15,4 @@ public class LottoNumberRangeTest {
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
         Assertions.assertThat(lottoNumbers).hasSize(Lotto.SELECT_SIZE);
     }
-
 }

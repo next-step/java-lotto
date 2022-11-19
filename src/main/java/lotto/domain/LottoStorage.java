@@ -7,16 +7,8 @@ public class LottoStorage {
 
     private final List<Lotto> lottoList;
 
-    private LottoStorage(int count) {
-        this.lottoList = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            Lotto lotto = LottoNumberRange.createLotto();
-            lottoList.add(lotto);
-        }
-    }
-
-    public static LottoStorage create(int count) {
-        return new LottoStorage(count);
+    public LottoStorage(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
     public List<Lotto> copy() {

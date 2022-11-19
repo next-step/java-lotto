@@ -3,16 +3,10 @@ package lotto.domain;
 import exception.CustomException;
 import lotto.exception.LottoErrorCode;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
 
-    public static final int MINIMUM_VALUE = 1;
-    public static final int MAXIMUM_VALUE = 45;
-    private static final List<LottoNumber> LOTTO_NUMBERS_RANGE;
-    
     private final Integer number;
 
     private LottoNumber(String value) {
@@ -33,16 +27,8 @@ public class LottoNumber {
     }
 
     private boolean isValidLottoNumber(Integer number) {
-        return number >= MINIMUM_VALUE && number <= MAXIMUM_VALUE;
-    }
-
-    public static List<LottoNumber> from(String[] stringLottoNumbers) {
-        List<LottoNumber> result = new ArrayList<>();
-        for (String number : stringLottoNumbers) {
-            LottoNumber lottoNumber = new LottoNumber(number);
-            result.add(lottoNumber);
-        }
-        return result;
+        return number >= LottoNumberRange.MINIMUM_VALUE
+                && number <= LottoNumberRange.MAXIMUM_VALUE;
     }
 
     public static LottoNumber from(int number) {
@@ -53,19 +39,8 @@ public class LottoNumber {
         return new LottoNumber(lottoNumber.number);
     }
 
-    static {
-        LOTTO_NUMBERS_RANGE = new ArrayList<>();
-        for (int i = MINIMUM_VALUE; i <= MAXIMUM_VALUE; i++) {
-            LOTTO_NUMBERS_RANGE.add(new LottoNumber(i));
-        }
-    }
-
-    public static List<LottoNumber> getLottoNumbersRange() {
-        List<LottoNumber> result = new ArrayList<>();
-        for (LottoNumber lottoNumber : LOTTO_NUMBERS_RANGE) {
-            result.add(new LottoNumber(lottoNumber.number));
-        }
-        return result;
+    public static LottoNumber from(String lottoNumber) {
+        return new LottoNumber(lottoNumber);
     }
 
     public Integer getNumber() {

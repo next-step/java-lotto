@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.enums;
 
 import lotto.domain.enums.MatchNumberAndPrize;
 import org.junit.jupiter.api.DisplayName;

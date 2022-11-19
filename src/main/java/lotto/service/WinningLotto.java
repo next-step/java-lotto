@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoStatisticalService {
+public class WinningLotto {
 
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public LottoStatisticalService(Lotto winningLotto, LottoNumber bonusNumber) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
@@ -35,9 +35,5 @@ public class LottoStatisticalService {
             result.put(matchNumberAndPrize, 0);
         }
         return result;
-    }
-
-    public float calculateYield(int paymentAmount, Long winningAmount) {
-        return (float) winningAmount / paymentAmount;
     }
 }

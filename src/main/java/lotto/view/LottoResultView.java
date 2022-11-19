@@ -11,8 +11,8 @@ public class LottoResultView {
 
     }
 
-    public static void printLottoCount(int count) {
-        System.out.printf("%d개를 구매했습니다.\n", count);
+    public static void printLottoCount(int autoCount, int manualCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, autoCount);
     }
 
     public static void printLotto(List<Lotto> lottoList) {
@@ -26,10 +26,7 @@ public class LottoResultView {
         System.out.println("---------");
         for (MatchNumberAndPrize matchNumberAndPrize : MatchNumberAndPrize.values()) {
             if (matchNumberAndPrize == MatchNumberAndPrize.NON) continue;
-            System.out.printf("%d개 일치 (%d원)- %d개\n",
-                    matchNumberAndPrize.getMatchNumber(),
-                    matchNumberAndPrize.getPrize(),
-                    winningAmountIntegerMap.get(matchNumberAndPrize));
+            matchNumberAndPrize.print(winningAmountIntegerMap.get(matchNumberAndPrize));
         }
     }
 

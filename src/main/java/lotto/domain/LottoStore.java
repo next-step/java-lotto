@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import calculator.Operation;
-import lotto.domain.Lotto;
-import lotto.domain.LottoStorage;
+import exception.CustomException;
+import lotto.exception.LottoErrorCode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
@@ -11,17 +11,55 @@ public class LottoStore {
     public static final int LOTTO_PRICE = 1000;
 
     private final LottoStorage lottoStorage;
+    private final int lottoSize;
+    private final int purchaseAmount;
 
-    public LottoStore(int purchaseAmount) {
-        int count = calculate(purchaseAmount);
-        this.lottoStorage = LottoStorage.create(count);
+    public LottoStore(int purchaseAmount, List<String> manualLottoList) {
+        this.purchaseAmount = purchaseAmount;
+        this.lottoSize = purchaseAmount / LOTTO_PRICE;
+
+        validateAvailableForPurchase(manualLottoList.size());
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.addAll(createManualLotto(manualLottoList));
+        lottoList.addAll(createAutoLotto(calculateAutoLottoSize(manualLottoList.size())));
+        this.lottoStorage = new LottoStorage(lottoList);
     }
 
-    private int calculate(int purchaseAmount) {
-        return Operation.DIVIDE.apply(purchaseAmount, LOTTO_PRICE);
+    private void validateAvailableForPurchase(int manualLottoSize) {
+        if (lottoSize < manualLottoSize) {
+            throw new CustomException(LottoErrorCode.LOTTO_MANUAL_NUMBER_OUT_OF_LANGE);
+        }
+    }
+
+    private List<Lotto> createManualLotto(List<String> manualLottoList) {
+        List<Lotto> result = new ArrayList<>();
+        for (String manualLotto : manualLottoList) {
+            result.add(StringLottoNumbers.toLotto(manualLotto));
+        }
+        return result;
+    }
+
+    private List<Lotto> createAutoLotto(int autoLottoSize) {
+        List<Lotto> result = new ArrayList<>();
+        for (int i = 0; i < autoLottoSize; i++) {
+            result.add(LottoNumberRange.createLotto());
+        }
+        return result;
+    }
+
+    private int calculateAutoLottoSize(int manualLottoSize) {
+        return lottoSize - manualLottoSize;
     }
 
     public List<Lotto> getLotto() {
         return lottoStorage.copy();
+    }
+
+    public float calculateYield(Long winningAmountSum) {
+        return (float) winningAmountSum / purchaseAmount;
+    }
+
+    public int getLottoSize() {
+        return lottoSize;
     }
 }
