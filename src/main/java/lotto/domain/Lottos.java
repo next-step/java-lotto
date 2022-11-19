@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,7 +12,7 @@ public class Lottos {
 
     private List<LottoTicket> lottos;
 
-    public Lottos(List<LottoTicket> lottos) {
+    public Lottos(List<LottoTicket>lottos) {
         validationLottoNullCheck(lottos);
         this.lottos = lottos;
     }
@@ -23,10 +24,14 @@ public class Lottos {
     }
 
     public static Lottos lottosMake(int money){
-        int lottoCount = money / lottoPrice;
-        return new Lottos(IntStream.range(0, lottoCount)
-                .mapToObj(i -> LottoTicket.lottoMake())
+        return new Lottos(IntStream.range(0, getLottoCount(money))
+                .mapToObj(i -> LottoTicket.valueOf())
                 .collect(Collectors.toList()));
+    }
+
+    private static int getLottoCount(int money) {
+        int lottoCount = money / lottoPrice;
+        return lottoCount;
     }
 
     public List<Reward> lottosMatch(WinningNumbers winningNumbers){
