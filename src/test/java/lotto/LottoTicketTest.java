@@ -14,13 +14,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTicketTest {
 
     @Test
-    @DisplayName("로또 1장 생성 테스트")
-    public void lottoMake(){
-        LottoTicket lottoTicket = LottoTicket.valueOf();
-        assertThat(lottoTicket.getTicket()).hasSize(6);
-    }
-
-    @Test
     @DisplayName("당첨번호 맞힌 개수 테스트")
     public void lottoNumberMatchCount(){
         LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,5,6));
