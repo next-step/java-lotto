@@ -31,10 +31,6 @@ public class LottoTicket {
                 .count();
     }
 
-    public List<Integer> getTicket() {
-        return Collections.unmodifiableList(lottoTicket);
-    }
-
     @Override
     public String toString() {
         return lottoTicket.toString();
