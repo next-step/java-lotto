@@ -24,7 +24,3 @@ public class CalculatorDatas {
         return this.calculratorDatas;
     }
 }
-
-
-
-
