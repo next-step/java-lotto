@@ -1,18 +1,14 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static lotto.domain.LottoNumber.getLottoNumbers;
 
 public class LottoTicket {
-
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
     private static final String LOTTO_TICKET_NULLPOINT_EXCEPTION = "로또가 생성 되지 않았습니다.";
 
-    List<Integer> lottoTicket;
+    private final List<Integer> lottoTicket;
 
     public LottoTicket(List<Integer> lottoTicket){
         validationNullCheck(lottoTicket);
@@ -25,22 +21,18 @@ public class LottoTicket {
         }
     }
 
-    public static LottoTicket lottoMake(){
-        List<Integer> lottoNumbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
-                .boxed()
-                .collect(Collectors.toList());
-        Collections.shuffle(lottoNumbers);
-        return new LottoTicket(lottoNumbers.subList(0,6));
+    public static LottoTicket valueOf(){
+        return new LottoTicket(getLottoNumbers());
     }
 
     public int lottoNumberMatchCount(WinningNumbers winningNumbers){
-        return (int) this.lottoTicket.stream()
+        return (int) lottoTicket.stream()
                 .filter(i -> winningNumbers.getWinningNumbers().contains(i))
                 .count();
     }
 
     public List<Integer> getTicket() {
-        return lottoTicket;
+        return Collections.unmodifiableList(lottoTicket);
     }
 
     @Override
