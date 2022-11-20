@@ -18,7 +18,7 @@ public class Main {
         printQuantity(lottoFactory, autoQuantity);
         printBuyLottos(buyLotto);
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningToSet(winningLotto())), LottoNumber.cacheLottoNumber(bonusLotto()));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningToSet(winningLotto())), LottoNumber.lottoNumber(bonusLotto()));
         RankGroup rankGroup = buyLotto.collectRanks(winningLotto);
 
         Profit profit = new Profit(price.totalQuantity());

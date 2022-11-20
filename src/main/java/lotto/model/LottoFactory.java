@@ -33,7 +33,7 @@ public class LottoFactory {
 
     private Set<LottoNumber> createManualLotto(final Map<Integer, List<String>> manualLotto, int count) {
         return manualLotto.get(count).stream()
-                .map(manualLottoNumber -> LottoNumber.cacheLottoNumber(Integer.parseInt(manualLottoNumber)))
+                .map(manualLottoNumber -> LottoNumber.lottoNumber(Integer.parseInt(manualLottoNumber)))
                 .collect(Collectors.toSet());
     }
 

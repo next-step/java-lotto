@@ -12,20 +12,20 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber cacheLottoNumber(int number) {
+    public static LottoNumber lottoNumber(int number) {
         validation(number);
         return CacheLotto.cache.get(number);
     }
 
     private static void validation(int number) {
-        if (number < 0) {
+        if (number > LOTTO_END_NUMBER || number <= 0) {
             throw new IllegalArgumentException("보너스 볼은 1~45 사이의 숫자입니다");
         }
     }
 
     public static Set<LottoNumber> winningToSet(Set<String> winningLottos) {
         return winningLottos.stream()
-                .map(string -> cacheLottoNumber(Integer.parseInt(string)))
+                .map(string -> lottoNumber(Integer.parseInt(string)))
                 .collect(Collectors.toSet());
     }
 
@@ -37,14 +37,6 @@ public class LottoNumber {
         return testLotto.stream()
                 .map(Integer -> cache().get(Integer))
                 .collect(Collectors.toSet());
-    }
-
-    public static boolean isContain(int element) {
-        return cache().containsKey(element);
-    }
-
-    public static Set<Integer> elements() {
-        return cache().keySet();
     }
 
     private static class CacheLotto {
