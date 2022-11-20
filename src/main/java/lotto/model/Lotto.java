@@ -14,8 +14,12 @@ public class Lotto {
     }
 
     public Rank rank(WinningLotto winningLotto) {
-        Rank rank = findRank(counting(winningLotto));
-        return rank.checkBonus(winningLotto, lotto);
+        return findRank(counting(winningLotto), isBonus(winningLotto, lotto));
+    }
+
+    private boolean isBonus(WinningLotto winningLotto, Set<LottoNumber> lotto) {
+        return lotto.stream()
+                .anyMatch(winningLotto::isMatchBonus);
     }
 
     public boolean isMatch(LottoNumber buyLottoNumber) {
