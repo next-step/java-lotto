@@ -24,19 +24,19 @@ public class WinningNumbers {
     }
 
     private static void validateListNumbers(List<Integer> numbers) {
-        if(numbers == null || numbers.isEmpty()) {
+        if (numbers == null || numbers.isEmpty()) {
             throw new IllegalArgumentException("올바르지 않은 당첨번호 형식입니다.");
         }
-        if(numbers.size() != 6) {
+        if (numbers.size() != 6) {
             throw new IllegalArgumentException("당첨번호는 6자리여야 합니다.");
         }
-        if(!AllNumbers.getNumbers().containsAll(numbers)) {
+        if (!AllNumbers.getNumbers().containsAll(numbers)) {
             throw new IllegalArgumentException("당첨번호의 범위는 1~45 범위의 숫자여야 합니다.");
         }
     }
 
     private static void validateString(String inputNumbers) {
-        if(inputNumbers == null || inputNumbers.isBlank()) {
+        if (inputNumbers == null || inputNumbers.isBlank()) {
             throw new IllegalArgumentException("당첨 번호를 입력해주세요.");
         }
     }

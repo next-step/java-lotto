@@ -1,21 +1,15 @@
 package lotto.views;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import lotto.LottoWinningStats;
 import lotto.enums.Ranks;
-import lotto.numbers.Lotto;
+import lotto.numbers.LottoBundle;
 
 public class OutputView {
-    public static void printNumbers(Lotto lotto) {
-        for (List<Integer> targetNumbers : lotto.getNumbers()) {
-            System.out.print("[");
-            printEachNumber(targetNumbers);
-            System.out.println("]");
-        }
-        System.out.println();
+    public static void printNumbers(LottoBundle lottoBundle) {
+        System.out.println(lottoBundle.toString());
     }
 
     public static void printWinningStatsResult(LottoWinningStats lottoWinningStats, int purchaseAmount) {
@@ -29,20 +23,19 @@ public class OutputView {
         System.out.println("---------");
         Arrays.stream(Ranks.values()).forEach(rank -> {
             int count = rankingMap.getOrDefault(rank,0);
-            System.out.println(rank.getCountsOfSameNumbers() + "개 일치 (" + rank.getRewards() + ")원-" + count + "개");
+            printEachStatsByRank(count, rank);
         });
     }
 
-    private static void printEachNumber(List<Integer> targetNumbers) {
-        for (int j = 0; j < targetNumbers.size(); j++) {
-            System.out.print(targetNumbers.get(j));
-            printComma(j, targetNumbers.size() - 1);
+    private static void printEachStatsByRank(int count, Ranks rank) {
+        if (rank == Ranks.MISS) {
+            return;
         }
-    }
+        if (rank == Ranks.SECOND) {
+            System.out.println(rank.getCountsOfSameNumbers() + "개 일치, 보너스볼 일치(" + rank.getRewards() + ")원-" + count + "개");
+            return;
+        }
+        System.out.println(rank.getCountsOfSameNumbers() + "개 일치 (" + rank.getRewards() + ")원-" + count + "개");
 
-    private static void printComma(int index, int endIndex) {
-        if (index < endIndex) {
-            System.out.print(", ");
-        }
     }
 }

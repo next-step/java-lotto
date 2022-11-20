@@ -2,7 +2,7 @@ package lotto.views;
 
 import java.util.Scanner;
 
-import lotto.LottoWinningStats;
+import lotto.numbers.Lotto;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -11,8 +11,16 @@ public class InputView {
         System.out.println("구입 금액을 입력해주세요.");
         int purchaseAmount = SCANNER.nextInt();
         SCANNER.nextLine();
-        System.out.println((purchaseAmount / LottoWinningStats.PRICE) + "개를 구매했습니다.");
+
+        validateInputAmount(purchaseAmount);
+        System.out.println((purchaseAmount / Lotto.PRICE) + "개를 구매했습니다.");
         return purchaseAmount;
+    }
+
+    private static void validateInputAmount(int purchaseAmount) {
+        if (purchaseAmount < Lotto.PRICE) {
+            throw new IllegalArgumentException("로또 최소 구입 금액보다 작습니다.");
+        }
     }
 
     public static String inputLastWinningNumbers() {
@@ -20,7 +28,7 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static int inputbonusBall() {
+    public static int inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return SCANNER.nextInt();
     }
