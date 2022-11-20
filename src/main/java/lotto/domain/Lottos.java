@@ -4,7 +4,6 @@ import lotto.strategy.NumberList;
 import lotto.utils.Tickets;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,11 +25,11 @@ public class Lottos {
     }
 
     public static boolean getRank(List<Lotto> lottoList) {
-        for (int i = 0; i < lottoList.size(); i++) {
-            if (Rank.getResultRank(lottoList.get(i)).equals(Rank.SECOND)) {
+        for (Lotto lotto : lottoList) {
+            if (Rank.getResultRank(lotto).equals(Rank.SECOND)) {
                 return true;
             }
-            if (Rank.getResultRank(lottoList.get(i)).equals(Rank.THIRD)) {
+            if (Rank.getResultRank(lotto).equals(Rank.THIRD)) {
                 return false;
             }
         }
@@ -49,9 +48,7 @@ public class Lottos {
         return Tickets.getNumberOfTickets(amount);
     }
 
-    public Lottos buyLottos(int tryNum, NumberList numberList) {
-        List<Lotto> lottoList = new ArrayList<>();
-
+    public Lottos buyLottos(List<Lotto> lottoList, int tryNum, NumberList numberList) {
         for (int i = 0; i < tryNum; i++) {
             lottoList.add(
                     new Lotto(numberList.makeNumberList())

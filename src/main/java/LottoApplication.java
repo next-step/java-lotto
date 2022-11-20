@@ -1,4 +1,5 @@
 import lotto.domain.Lotto;
+import lotto.strategy.ManualNumberList;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -8,11 +9,14 @@ import java.util.List;
 public class LottoApplication {
     public static void main(String[] args) {
         BigDecimal amount = Input.inputAmount();
-        List<Lotto> numberList = Output.print(amount);
-        List<Integer> winnerNumberList = Input.inputWinnerNumberList();
+        int manualLottoCount = Input.inputManualLottoCount();
+        List<Lotto> manualLottoNumbers = Input.inputManualNumberList(manualLottoCount, new ManualNumberList());
+
+        List<Lotto> numbers = Output.print(manualLottoNumbers, manualLottoCount, amount);
+        List<Integer> winnerNumbers = Input.inputWinnerNumberList();
         Integer bonusBallNumber = Input.inputBonusBallNumber();
 
-        List<Lotto> lottoList = Output.getRank(numberList, winnerNumberList, bonusBallNumber);
+        List<Lotto> lottoList = Output.getRank(numbers, winnerNumbers, bonusBallNumber);
         Output.getResult(lottoList);
     }
 }

@@ -9,8 +9,6 @@ public enum Rank {
     THIRD(5, BigDecimal.valueOf(1_500_000)),
     FORTH(4, BigDecimal.valueOf(50_000)),
     FIFTH(3, BigDecimal.valueOf(5_000)),
-    SIXTH(2, BigDecimal.valueOf(0)),
-    SEVENTH(1, BigDecimal.valueOf(0)),
     ZERO(0, BigDecimal.valueOf(0));
 
     private static final int SECOND_NUMBER = 5;
@@ -43,7 +41,7 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(cnt -> cnt.getCount() == count)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("숫자가 틀립니다."));
+                .orElse(ZERO);
     }
 
     private static boolean isSecond(int count, boolean matchBonus) {
