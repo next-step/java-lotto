@@ -20,19 +20,7 @@ public class CalculatorDatas {
         }
     }
 
-    public int startCalculate(){
-        int number = Integer.parseInt(calculratorDatas.get(0));
-        for(int i = 2; i < calculratorDatas.size(); i+=2){
-            int nextNumber = Integer.parseInt(calculratorDatas.get(i));
-            String sign = calculratorDatas.get(i - 1);
-            number = Operator.calculate(sign, number, nextNumber);
-        }
-
-        return number;
+    public List<String> getCalculratorDatas(){
+        return this.calculratorDatas;
     }
-
 }
-
-
-
-
