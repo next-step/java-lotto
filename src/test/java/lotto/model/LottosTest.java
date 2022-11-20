@@ -43,7 +43,7 @@ class LottosTest {
     @DisplayName("당첨번호의 등수를 등급으로 반환한다")
     void countRank(List<Integer> element, Rank expected) {
         WinningLotto winningLotto = new WinningLotto(toLottoNumber((element)),
-                LottoNumber.cacheLottoNumber(45));
+                LottoNumber.lottoNumber(45));
 
         assertThat(buyLotto1.rank(winningLotto)).isEqualTo(expected);
     }
@@ -53,7 +53,7 @@ class LottosTest {
     @DisplayName("당첨번호의 등수를 리스트로 반환한다")
     void collectRank(List<Integer> element, Rank expected, Rank expected2) {
         WinningLotto winningLotto = new WinningLotto(toLottoNumber((element)),
-                LottoNumber.cacheLottoNumber(45));
+                LottoNumber.lottoNumber(45));
 
 
         EnumMap<Rank, Integer> map = new EnumMap<>(Rank.class);

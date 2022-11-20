@@ -24,7 +24,7 @@ class PriceTest {
     @Test
     @DisplayName("입력 개수는 음수가 될수없다")
     void valid3() {
-        assertThatThrownBy(() -> new Price().manualValidation(-1))
+        assertThatThrownBy(() -> new Price(3000).manualValidation(-1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
