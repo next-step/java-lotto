@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private static final int lottoPrice = 1000;
     private static final String LOTTO_NULLPOINT_EXCEPTION = "로또가 없습니다.";
 
     private List<LottoTicket> lottos;
@@ -23,16 +22,12 @@ public class Lottos {
         }
     }
 
-    public static Lottos lottosMake(int money){
-        return new Lottos(IntStream.range(0, getLottoCount(money))
+    public static Lottos lottosMake(Money money){
+        return new Lottos(IntStream.range(0, money.lottoCount())
                 .mapToObj(i -> LottoTicket.valueOf())
                 .collect(Collectors.toList()));
     }
 
-    private static int getLottoCount(int money) {
-        int lottoCount = money / lottoPrice;
-        return lottoCount;
-    }
 
     public List<Reward> lottosMatch(WinningNumbers winningNumbers){
         return lottos.stream()

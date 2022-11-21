@@ -17,7 +17,7 @@ public class LottoTicketTest {
     @DisplayName("당첨번호 맞힌 개수 테스트")
     public void lottoNumberMatchCount(){
         LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,5,6));
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6));
 
         assertThat(lottoTicket.lottoNumberMatchCount(winningNumbers)).isEqualTo(6);
     }

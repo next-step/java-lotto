@@ -22,7 +22,7 @@ public class LottosTest {
     @ValueSource(ints ={5000})
     @DisplayName("로또 생성 테스트")
     public void lottosMake(int value){
-        Lottos lottos = Lottos.lottosMake(value);
+        Lottos lottos = Lottos.lottosMake(new Money(value));
         assertThat(lottos.getLottos()).hasSize(5);
     }
 
@@ -30,7 +30,7 @@ public class LottosTest {
     @DisplayName("로또 등수 테스트")
     public void lottosMatch(){
         Lottos lottos = new Lottos(List.of(new LottoTicket(List.of(1,2,3,4,5,6))));
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6));
 
         assertThat(lottos.lottosMatch(winningNumbers).get(0).getRewordMoney()).isEqualTo(2000000000);
     }

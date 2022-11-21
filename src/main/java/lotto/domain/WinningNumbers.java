@@ -11,23 +11,22 @@ public class WinningNumbers {
     private static final String NULL_EXCEPTION_MESSGAE = "빈값이 들어왔습니다.";
     private static final String WINNING_NUMBER_EXCEPTION_MESSAGE = "당첨 번호는 6개만 입력해주세요.";
 
-    List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
-    public WinningNumbers(String winningNumbers) {
+    public WinningNumbers(List<Integer> winningNumbers) {
         validationBlank(winningNumbers);
-        this.winningNumbers = winningNumbersMake(winningNumbers);
+        validationNumbersSizeCheck(winningNumbers);
+        this.winningNumbers = winningNumbers;
     }
 
-    public List<Integer> winningNumbersMake(String winningNumbers){
-        List<Integer> numbers = Arrays.asList(winningNumbers.split(SEPARATOR)).stream()
+    public static WinningNumbers winningNumbersMake(String winningNumbers){
+        return new WinningNumbers(Arrays.asList(winningNumbers.split(SEPARATOR)).stream()
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
-        validationNumbersSizeCheck(numbers);
-        return numbers;
+                .collect(Collectors.toList()));
     }
 
-    public void validationBlank(String winningNumbers){
-        if(winningNumbers.isBlank()){
+    public void validationBlank(List<Integer> winningNumbers){
+        if(winningNumbers.isEmpty()){
             throw new NullPointerException(NULL_EXCEPTION_MESSGAE);
         }
     }

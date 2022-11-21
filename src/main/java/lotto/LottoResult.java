@@ -1,5 +1,6 @@
 package lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Reward;
 import lotto.domain.WinningNumbers;
 
@@ -18,12 +19,12 @@ public class LottoResult {
       this.winningNumbers = winningNumbers;
    }
 
-   public double lottoYieldCalculate(int money){
+   public double lottoYieldCalculate(Money money){
       long sum = rewardMap.keySet()
-                 .stream()
-                 .mapToLong(Reward::getRewordMoney)
-                 .sum();
-      return (sum  / (double)money);
+              .stream()
+              .mapToLong(Reward::getRewordMoney)
+              .sum();
+      return (sum  / (double)money.getMoney());
    }
 
    public Map<Reward, Integer> matchResult(){
