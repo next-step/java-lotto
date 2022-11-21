@@ -25,7 +25,7 @@ public class WinningNumbers {
     public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         validationBlank(winningNumbers);
         validationNumbersSizeCheck(winningNumbers);
-        validationBonusNumberCheck(bonusNumber);
+        validationBonusNumberCheck(winningNumbers,bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -49,7 +49,7 @@ public class WinningNumbers {
         }
     }
 
-    private void validationBonusNumberCheck(int bonusNumber){
+    private void validationBonusNumberCheck(List<Integer> winningNumbers, int bonusNumber){
         if(winningNumbers.contains(bonusNumber)){
             throw new IllegalArgumentException(BONUSNUMBER_EXCEPTION);
         }
