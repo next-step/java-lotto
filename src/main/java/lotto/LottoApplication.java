@@ -5,8 +5,7 @@ import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 import lotto.dto.LottosDto;
 
-import static lotto.view.InputView.inputBuyMoney;
-import static lotto.view.InputView.inputLuckyNumber;
+import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
 public class LottoApplication {
@@ -18,10 +17,9 @@ public class LottoApplication {
         lottoCountMessage(lottosDto);
         lottoTickets(lottosDto);
 
-        WinningNumbers winningNumbers =  WinningNumbers.winningNumbersMake(inputLuckyNumber());
-        winningStatics();
-
+        WinningNumbers winningNumbers =  WinningNumbers.winningNumbersMake(inputLuckyNumber(),bonusNumber());
         LottoResult lottoResult = new LottoResult(lottos,winningNumbers);
+        winningStatics();
         winningResult(lottoResult.matchResult());
         lottoYield(lottoResult.lottoYieldCalculate(money));
     }

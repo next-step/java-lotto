@@ -3,6 +3,7 @@ import java.util.Arrays;
 
 public enum Reward {
     FIRST(6,2000000000),
+    SECOND_BONUS(5,3000000),
     SECOND(5,1500000),
     THIRD(4,50000),
     FOURTH(3,5000),
@@ -16,7 +17,10 @@ public enum Reward {
         this.rewordMoney = rewordMoney;
     }
 
-    public static Reward rewardMatchCount(int count) {
+    public static Reward rewardMatchCount(int count, boolean bonusWinning) {
+        if(bonusWinning){
+            return SECOND_BONUS;
+        }
         return Arrays.stream(values())
                 .filter(reward -> reward.numberMatch == count)
                 .findFirst()

@@ -32,6 +32,7 @@ public class WinningNumberTest {
                 .hasMessageContaining("당첨 번호는 6개만 입력해주세요.");
     }
 
+
     @Test
     @DisplayName("빈값 테스트")
     public void winningNumbersNullPointException(){

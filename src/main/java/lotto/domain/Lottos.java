@@ -31,9 +31,11 @@ public class Lottos {
 
     public List<Reward> lottosMatch(WinningNumbers winningNumbers){
         return lottos.stream()
-                .map(lottoTicket -> Reward.rewardMatchCount(lottoTicket.lottoNumberMatchCount(winningNumbers)))
+                .map(lottoTicket -> Reward.rewardMatchCount(lottoTicket.lottoNumberMatchCount(winningNumbers)
+                        , lottoTicket.bonusNumberMatch(winningNumbers)))
                 .collect(Collectors.toList());
     }
+
 
     public List<LottoTicket> getLottos() {
         return lottos;

@@ -31,6 +31,7 @@ public class LottoResult {
       for (Reward reward : lottos.lottosMatch(winningNumbers)){
          rewardMap.put(reward, rewardMap.getOrDefault(reward, 0) + 1);
       }
+
       return rewardMap;
    }
 }
