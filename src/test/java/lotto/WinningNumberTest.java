@@ -32,6 +32,13 @@ public class WinningNumberTest {
                 .hasMessageContaining("당첨 번호는 6개만 입력해주세요.");
     }
 
+    @Test
+    @DisplayName("보너스 번호가 당첨번호와 일치할 때")
+    public void bonusNumberExceptionCheck(){
+        assertThatThrownBy(() -> new WinningNumbers(List.of(3,5,6,7,8,9),9))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("이미 당첨번호에 포함 되어 있습니다.");
+    }
 
     @Test
     @DisplayName("빈값 테스트")

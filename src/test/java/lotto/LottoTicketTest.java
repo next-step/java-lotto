@@ -23,6 +23,14 @@ public class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("보너스 볼 당첨 테스트")
+    public void lottoBonusWinning(){
+        LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,8,9));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6),9);
+        assertThat(lottoTicket.bonusNumberMatch(winningNumbers)).isTrue();
+    }
+
+    @Test
     @DisplayName("빈값 테스트")
     public void lottoMakeNullPointException(){
         assertThatThrownBy(() -> new LottoTicket(new ArrayList<>()))
