@@ -1,8 +1,8 @@
 package lotto.model;
 
-import static lotto.model.Profit.LOTTO_PRICE;
 
 public class Price {
+    public static final int LOTTO_PRICE = 1_000;
     private final int price;
 
     public Price(int price) {
@@ -10,12 +10,8 @@ public class Price {
         this.price = price;
     }
 
-    public Price() {
-        this(3000);
-    }
-
     private void validation(int price) {
-        if (price < LOTTO_PRICE) {
+        if (0 < price && price < LOTTO_PRICE || price < 0) {
             throw new IllegalArgumentException("구매금액은 최소 1000원이상입니다");
         }
 
@@ -39,5 +35,13 @@ public class Price {
 
     public int totalQuantity() {
         return this.price / LOTTO_PRICE;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int total(int value) {
+        return value * this.price;
     }
 }

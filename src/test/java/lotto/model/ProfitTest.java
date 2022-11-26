@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.EnumMap;
 
 import static java.math.RoundingMode.HALF_EVEN;
-import static lotto.model.Profit.LOTTO_PRICE;
+import static lotto.model.Price.LOTTO_PRICE;
 import static lotto.model.Profit.SCALE;
 import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
