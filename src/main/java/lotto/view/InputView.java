@@ -27,9 +27,9 @@ public class InputView {
         return quantity.manualFactory(SCANNER);
     }
 
-    public static Set<String> winningLotto() {
+    public static List<String> winningLotto() {
         System.out.println("지난주 당첨 번호를 입력해주세요");
-        return new HashSet<>(Arrays.asList(SCANNER.nextLine().split(",")));
+        return new ArrayList<>(Arrays.asList(SCANNER.nextLine().split(",")));
     }
 
     public static int bonusLotto() {

@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.model.*;
 
-import static lotto.model.LottoNumber.winningToSet;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
@@ -18,7 +17,7 @@ public class Main {
         printQuantity(manualQuantity, autoQuantity);
         printBuyLottos(buyLotto);
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningToSet(winningLotto())), LottoNumber.lottoNumber(bonusLotto()));
+        WinningLotto winningLotto = new WinningLotto(new LottoFactory(winningLotto()).stringToLotto(), LottoNumber.lottoNumber(bonusLotto()));
         RankGroup rankGroup = buyLotto.collectRanks(winningLotto);
 
         Profit profit = new Profit(price.totalQuantity());

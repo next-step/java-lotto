@@ -23,11 +23,11 @@ public enum Rank {
     }
 
     public static Rank findRank(int count, boolean isBonus) {
-        if (count == 5 && isBonus) {
+        if (count == TWO.order && isBonus) {
             return TWO;
         }
 
-        if (count == 5 && !isBonus) {
+        if (count == THREE.order && !isBonus) {
             return THREE;
         }
 

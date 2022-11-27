@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class LottoNumber {
@@ -23,20 +22,8 @@ public class LottoNumber {
         }
     }
 
-    public static Set<LottoNumber> winningToSet(Set<String> winningLottos) {
-        return winningLottos.stream()
-                .map(string -> lottoNumber(Integer.parseInt(string)))
-                .collect(Collectors.toSet());
-    }
-
     public static Map<Integer, LottoNumber> cache() {
         return CacheLotto.cache;
-    }
-
-    public static Set<LottoNumber> toLottoNumberSet(List<Integer> testLotto) {
-        return testLotto.stream()
-                .map(Integer -> cache().get(Integer))
-                .collect(Collectors.toSet());
     }
 
     private static class CacheLotto {
