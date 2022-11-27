@@ -9,13 +9,13 @@ import static lotto.view.ResultView.*;
 public class Main {
     public static void main(String[] args) {
         Price price = new Price(buyPrice());
-        int manualQuantity = manual();
+        ManualQuantity manualQuantity = new ManualQuantity(manual(), price);
 
-        LottoFactory lottoFactory = new LottoFactory(manualQuantity, price);
-        int autoQuantity = lottoFactory.rest(price);
+        LottosFactory lottosFactory = new LottosFactory(manualNumber(manualQuantity));
+        int autoQuantity = manualQuantity.restQuantity(price);
 
-        Lottos buyLotto = new Lottos(lottoFactory.addLotto(autoQuantity, manualNumber(manualQuantity)));
-        printQuantity(lottoFactory, autoQuantity);
+        Lottos buyLotto = lottosFactory.allLottos(autoQuantity);
+        printQuantity(manualQuantity, autoQuantity);
         printBuyLottos(buyLotto);
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningToSet(winningLotto())), LottoNumber.lottoNumber(bonusLotto()));

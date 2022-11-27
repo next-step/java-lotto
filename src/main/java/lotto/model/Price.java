@@ -20,28 +20,17 @@ public class Price {
         }
     }
 
-    public void manualValidation(int manualQuantity) {
-        if (manualQuantity < 0) {
-            throw new IllegalArgumentException("입력 개수를 확인해주세요");
-        }
-        if (manualQuantity * LOTTO_PRICE > this.price) {
-            throw new IllegalArgumentException("구매금액을 초과했습니다");
-        }
-    }
-
-    public int restPrice(int manualQuantity) {
-        return this.price - manualQuantity * LOTTO_PRICE;
-    }
-
     public int totalQuantity() {
         return this.price / LOTTO_PRICE;
     }
 
-    public int getPrice() {
-        return price;
+    public int autoQuantity(int manualQuantity) {
+        return (this.price - manualQuantity * LOTTO_PRICE) / LOTTO_PRICE;
     }
 
-    public int total(int value) {
-        return value * this.price;
+    void totalMoneyValidation(int manualQuantity) {
+        if (manualQuantity * LOTTO_PRICE > price) {
+            throw new IllegalArgumentException("구매금액을 초과했습니다");
+        }
     }
 }

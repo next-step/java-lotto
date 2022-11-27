@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.LottoFactory;
+import lotto.model.ManualQuantity;
 
 import java.util.*;
 
@@ -20,15 +21,10 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<LottoFactory> manualNumber(int quantity) {
+    public static List<LottoFactory> manualNumber(ManualQuantity quantity) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         SCANNER.nextLine();
-        List<LottoFactory> factories = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            String[] split = SCANNER.nextLine().split(",");
-            factories.add(new LottoFactory(new ArrayList<>(Arrays.asList(split))));
-        }
-        return factories;
+        return quantity.manualFactory(SCANNER);
     }
 
     public static Set<String> winningLotto() {
