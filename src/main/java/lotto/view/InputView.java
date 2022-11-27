@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.model.LottoFactory;
+
 import java.util.*;
 
 public class InputView {
@@ -18,15 +20,15 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static Map<Integer, List<String>> manualNumber(int quantity) {
+    public static List<LottoFactory> manualNumber(int quantity) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         SCANNER.nextLine();
-        Map<Integer, List<String>> map = new HashMap<>();
+        List<LottoFactory> factories = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             String[] split = SCANNER.nextLine().split(",");
-            map.put(i, Arrays.asList(split));
+            factories.add(new LottoFactory(new ArrayList<>(Arrays.asList(split))));
         }
-        return map;
+        return factories;
     }
 
     public static Set<String> winningLotto() {
