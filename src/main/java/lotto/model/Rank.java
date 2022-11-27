@@ -10,11 +10,11 @@ public enum Rank {
     TWO(5, new Money(30_000_000)),
     ONE(6, new Money(2_000_000_000));
 
-    private final int order;
+    private final int ranking;
     private final Money money;
 
-    Rank(int order, Money money) {
-        this.order = order;
+    Rank(int ranking, Money money) {
+        this.ranking = ranking;
         this.money = money;
     }
 
@@ -23,16 +23,16 @@ public enum Rank {
     }
 
     public static Rank findRank(int count, boolean isBonus) {
-        if (count == TWO.order && isBonus) {
+        if (count == TWO.ranking && isBonus) {
             return TWO;
         }
 
-        if (count == THREE.order && !isBonus) {
+        if (count == THREE.ranking && !isBonus) {
             return THREE;
         }
 
         return Arrays.stream(Rank.values())
-                .filter(value -> count == value.order)
+                .filter(value -> count == value.ranking)
                 .findFirst()
                 .orElse(MISS);
     }
