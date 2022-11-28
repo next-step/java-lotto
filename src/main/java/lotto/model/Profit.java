@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
+import static lotto.model.Price.LOTTO_PRICE;
+
 public class Profit {
-    public static final int LOTTO_PRICE = 1_000;
     private static final RoundingMode HALF_EVEN = RoundingMode.HALF_EVEN;
     public static final int SCALE = 2;
     private final int lottoQuantity;

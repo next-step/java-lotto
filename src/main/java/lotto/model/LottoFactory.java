@@ -1,24 +1,18 @@
 package lotto.model;
 
-import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoFactory {
-    public static final int LOTTO_MAX_LENGTH = 6;
-    private static final int LOTTO_INIT_LENGTH = 0;
+    private final List<String> numbers;
 
-    public List<Lotto> addLotto(int quantity) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto(createLotto()));
-        }
-
-        return lottos;
+    public LottoFactory(List<String> lottoNumbers) {
+        this.numbers = lottoNumbers;
     }
 
-    private Set<LottoNumber> createLotto() {
-        List<LottoNumber> list = new ArrayList<>(LottoNumber.cache().values());
-        Collections.shuffle(list);
-        return new HashSet<>(list.subList(LOTTO_INIT_LENGTH, LOTTO_MAX_LENGTH));
+    public Lotto stringToLotto() {
+        return new Lotto(numbers.stream()
+                .map(number -> LottoNumber.lottoNumber(Integer.parseInt(number)))
+                .collect(Collectors.toSet()));
     }
 }

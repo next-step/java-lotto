@@ -12,6 +12,12 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    private void validation(List<Lotto> lottos) {
+        if (lottos.size() < MIN_LOTTO) {
+            throw new IllegalArgumentException("구매 로또가 없습니다");
+        }
+    }
+
     public RankGroup collectRanks(WinningLotto winningLotto) {
         EnumMap<Rank, Integer> collect = lottos.stream()
                 .map(lotto -> lotto.rank(winningLotto))
@@ -26,9 +32,16 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    private void validation(List<Lotto> lottos) {
-        if (lottos.size() < MIN_LOTTO) {
-            throw new IllegalArgumentException("구매 로또가 없습니다");
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }

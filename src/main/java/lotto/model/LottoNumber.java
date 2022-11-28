@@ -11,8 +11,15 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber cacheLottoNumber(int number) {
+    public static LottoNumber lottoNumber(int number) {
+        validation(number);
         return CacheLotto.cache.get(number);
+    }
+
+    private static void validation(int number) {
+        if (number > LOTTO_END_NUMBER || number <= 0) {
+            throw new IllegalArgumentException("보너스 볼은 1~45 사이의 숫자입니다");
+        }
     }
 
     public static Map<Integer, LottoNumber> cache() {

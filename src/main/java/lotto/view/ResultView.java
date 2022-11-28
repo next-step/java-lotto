@@ -17,8 +17,8 @@ public class ResultView {
         }
     }
 
-    public static void printQuantity(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
+    public static void printQuantity(ManualQuantity quantity, int autoQuantity) {
+        System.out.println("수동으로 " + quantity.getManualQuantity() + "장, 자동으로" + autoQuantity + "개를 구매했습니다.");
     }
 
     public static void printResult(RankGroup map, BigDecimal totalProfit) {
