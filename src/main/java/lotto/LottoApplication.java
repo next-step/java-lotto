@@ -17,8 +17,8 @@ public class LottoApplication {
         lottoCountMessage(lottosDto);
         lottoTickets(lottosDto);
 
-        WinningNumbers winningNumbers =  WinningNumbers.winningNumbersMake(inputLuckyNumber(),bonusNumber());
-        LottoResult lottoResult = new LottoResult(lottos,winningNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(inputLuckyNumber(), bonusNumber());
+        LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
         winningStatics();
         winningResult(lottoResult.matchResult());
         lottoYield(lottoResult.lottoYieldCalculate(money));
