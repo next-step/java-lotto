@@ -24,7 +24,7 @@ public class LottoResult {
               .stream()
               .mapToLong(Reward::getRewordMoney)
               .sum();
-      return (sum  / (double)money.getMoney());
+      return money.yieldCalculate(sum);
    }
 
    public Map<Reward, Integer> matchResult(){

@@ -16,6 +16,10 @@ public class Money {
         this.money = money;
     }
 
+    public double yieldCalculate(long sum){
+        return sum / (double)money;
+    }
+
     public void validationThousand(int money){
         if(money % LOTTO_PRICE != 0){
             throw new IllegalArgumentException(THOUSAND_OF_WON_EXCEPTION);

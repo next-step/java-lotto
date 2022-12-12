@@ -4,7 +4,6 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +21,7 @@ public class LottosTest {
     @ValueSource(ints ={5000})
     @DisplayName("로또 생성 테스트")
     public void lottosMake(int value){
-        Lottos lottos = Lottos.lottosMake(new Money(value));
+        Lottos lottos = new Lottos(new Money(value));
         assertThat(lottos.getLottos()).hasSize(5);
     }
 
@@ -30,7 +29,7 @@ public class LottosTest {
     @DisplayName("로또 등수 테스트")
     public void lottosMatch(){
         Lottos lottos = new Lottos(List.of(new LottoTicket(List.of(1,2,3,4,5,6))));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 18);
 
         assertThat(lottos.lottosMatch(winningNumbers).get(0).getRewordMoney()).isEqualTo(2000000000);
     }

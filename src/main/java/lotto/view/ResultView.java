@@ -1,11 +1,13 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Reward;
 import lotto.dto.LottosDto;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -22,7 +24,7 @@ public class ResultView {
 
     public static void lottoTickets(LottosDto lottosDto){
         for (LottoTicket lottoTicket:  lottosDto.getLottosDto()){
-            System.out.println(lottoTicket.toString());
+            System.out.println(lottoTicket.getLottoTicket());
         }
     }
 
@@ -46,6 +48,7 @@ public class ResultView {
         }
         return RESULT_BONUS_MESSAGE;
     }
+
 
 
     public static void lottoYield(double yield){

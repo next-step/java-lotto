@@ -1,9 +1,17 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
 
+    private static final String SEPARATOR = ",";
     private static final String BUY_MONEY_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String LUCKY_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String LUCKY_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해주세요.";
@@ -11,13 +19,15 @@ public class InputView {
 
     public static int inputBuyMoney(){
         System.out.println(BUY_MONEY_INPUT_MESSAGE);
-        return sc.nextInt();
+        return Integer.parseInt(sc.nextLine());
     }
 
-    public static String inputLuckyNumber(){
+    public static List<Integer> inputLuckyNumber(){
         System.out.println(LUCKY_NUMBER_MESSAGE);
-        sc.nextLine();
-        return sc.nextLine();
+        return Arrays.stream(sc.nextLine().split(SEPARATOR))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public static int bonusNumber(){

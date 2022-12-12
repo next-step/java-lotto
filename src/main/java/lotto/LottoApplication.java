@@ -11,7 +11,7 @@ import static lotto.view.ResultView.*;
 public class LottoApplication {
     public static void main(String[] args) {
         Money money = new Money(inputBuyMoney());
-        Lottos lottos = Lottos.lottosMake(money);
+        Lottos lottos = new Lottos(money);
 
         LottosDto lottosDto = new LottosDto(lottos);
         lottoCountMessage(lottosDto);

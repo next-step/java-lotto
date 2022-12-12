@@ -1,11 +1,10 @@
 package lotto;
 
-import lotto.domain.Lottos;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +14,58 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningNumberTest {
 
-
-    @ParameterizedTest
-    @ValueSource(ints = {3,5,6,7,8,9})
-    @DisplayName("당첨번호 매치 테스트")
-    public void winningNumbersMatch(int value){
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(3,5,6,7,8,9));
-        assertThat(winningNumbers.getWinningNumbers()).contains(value);
+    @Test
+    @DisplayName("보너스 번호 매치 테스트")
+    public void bonusNumberMatch(){
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(3,5,7,9,6,10),11);
+        assertThat(winningNumbers.bonusNumberMatch(
+                List.of(
+                        LottoNumber.of(3)
+                        ,LottoNumber.of(5)
+                        , LottoNumber.of(7)
+                        , LottoNumber.of(9)
+                        , LottoNumber.of(13)
+                        , LottoNumber.of(11)
+                )
+            )
+        ).isTrue();
     }
 
     @Test
-    @DisplayName("당첨번호가 6개 이상이 들어올 경우 테스트")
+    @DisplayName("보너스 번호 매치 실패 테스트")
+    public void bonusNumberFailMatch(){
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(3,5,7,9,6,10),12);
+        assertThat(winningNumbers.bonusNumberMatch(
+                        List.of(
+                                LottoNumber.of(3)
+                                ,LottoNumber.of(5)
+                                , LottoNumber.of(7)
+                                , LottoNumber.of(9)
+                                , LottoNumber.of(13)
+                                , LottoNumber.of(11)
+                        )
+                )
+        ).isFalse();
+    }
+    @Test
+    @DisplayName("당첨번호 당첨 갯수 테스트")
+    public void winningNumbersMatch(){
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(3,5,7,9,18,17),15);
+        assertThat(winningNumbers.lottoMatchCount(
+                List.of(
+                      LottoNumber.of(11)
+                    , LottoNumber.of(2)
+                    , LottoNumber.of(3)
+                    , LottoNumber.of(5)
+                    , LottoNumber.of(7)
+                    , LottoNumber.of(9)
+        ))).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("당첨번호가 6개가 초과하여 들어올 경우 테스트")
     public void winningNumbersSizeException(){
-        assertThatThrownBy(() -> new WinningNumbers(List.of(3,5,6,7,8,9,10)))
+        assertThatThrownBy(() -> new WinningNumbers(List.of(3,5,6,7,8,9,10),15))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("당첨 번호는 6개만 입력해주세요.");
     }
@@ -43,7 +81,7 @@ public class WinningNumberTest {
     @Test
     @DisplayName("빈값 테스트")
     public void winningNumbersNullPointException(){
-        assertThatThrownBy(() -> new WinningNumbers(new ArrayList<>()))
+        assertThatThrownBy(() -> new WinningNumbers(List.of(),10))
                 .isInstanceOf(NullPointerException.class)
                 .hasMessageContaining("빈값이 들어왔습니다.");
     }

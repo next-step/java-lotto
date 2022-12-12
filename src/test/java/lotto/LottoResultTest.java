@@ -21,10 +21,10 @@ public class LottoResultTest {
                         , new LottoTicket(List.of(1, 15, 16, 17, 19, 20))
                         , new LottoTicket(List.of(1, 3, 5, 7, 9, 10))
                 ));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 3, 5, 7, 9, 10));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 3, 5, 7, 9, 10),12);
         LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
         lottoResult.matchResult();
-        Assertions.assertThat(lottoResult.lottoYieldCalculate(new Money(5000))).isEqualTo(400010);
+        Assertions.assertThat(lottoResult.lottoYieldCalculate(new Money(5000))).isEqualTo(400600);
     }
 
     @Test
