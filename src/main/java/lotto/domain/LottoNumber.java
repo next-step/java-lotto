@@ -11,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int START = 1;
     private static final int END = 45;
-    private final static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     private final int number;
 
@@ -33,11 +33,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int number) {
-        LottoNumber lottoNumber = lottoNumbers.get(number);
         if (!lottoNumbers.containsKey(number)) {
             throw new LottoNumberException();
         }
-        return lottoNumber;
+        return lottoNumbers.get(number);
     }
 
     public int getNumber() {

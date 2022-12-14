@@ -32,9 +32,6 @@ public class ManualNumberStrategy implements LottoNumberStrategy {
     }
 
     private void checkNumbers(List<LottoNumber> inputNumbers) {
-        if (inputNumbers.size() != COUNT) {
-            throw new LottoException();
-        }
         if (inputNumbers.stream().distinct().count() != COUNT) {
             throw new LottoException();
         }

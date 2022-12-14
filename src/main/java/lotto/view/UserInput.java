@@ -3,8 +3,8 @@ package lotto.view;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.strategy.ManualNumberStrategy;
-import org.apache.commons.lang3.StringUtils;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class UserInput {
@@ -16,24 +16,21 @@ public class UserInput {
 
     public static Money inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new Money(checkNull(SCANNER.nextLine()));
+        return new Money(optionalOf(SCANNER.nextLine()));
     }
 
     public static ManualNumberStrategy inputWinningLotto() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new ManualNumberStrategy(checkNull(SCANNER.nextLine()));
+        return new ManualNumberStrategy(optionalOf(SCANNER.nextLine()));
     }
 
     public static LottoNumber inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return LottoNumber.of(checkNull(SCANNER.nextLine()));
+        return LottoNumber.of(optionalOf(SCANNER.nextLine()));
     }
 
-    private static String checkNull(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new NullPointerException("빈값은 허용되지 않습니다. 값을 입력해주세요.");
-        }
-        return input;
+    private static String optionalOf(String input) {
+        return Optional.of(input).orElseThrow(() -> new IllegalArgumentException("빈값은 허용되지 않습니다. 값을 입력해주세요."));
     }
 }
