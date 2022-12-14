@@ -10,11 +10,27 @@ import java.util.stream.Collectors;
 public class Purchasing {
 
     private static final int LOTTO_PRICE = 1000;
-    private final List<Lotto> lottos;
+
+    private static List<Lotto> lottos;
+    private static int manualCount;
+    private static int randomCount;
 
     public Purchasing(Money money) {
         lottos = new ArrayList<>();
-        for (int i = 0; i < money.divideMoney(LOTTO_PRICE); i++) {
+        manualCount = 0;
+        randomCount = money.divideMoney(LOTTO_PRICE);
+        addRandomLotto(randomCount);
+    }
+
+    public Purchasing(Money money, List<Lotto> manualLottos) {
+        lottos = new ArrayList<>(manualLottos);
+        manualCount = manualLottos.size();
+        randomCount = money.divideMoney(LOTTO_PRICE) - manualCount;
+        addRandomLotto(randomCount);
+    }
+
+    private void addRandomLotto(int randomCount) {
+        for (int i = 0; i < randomCount; i++) {
             lottos.add(new Lotto(new RandomNumberStrategy()));
         }
     }
@@ -31,5 +47,13 @@ public class Purchasing {
 
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
+    }
+
+    public static int getManualCount() {
+        return manualCount;
+    }
+
+    public static int getRandomCount() {
+        return randomCount;
     }
 }
