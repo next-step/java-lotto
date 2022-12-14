@@ -9,6 +9,13 @@ import static org.assertj.core.api.Assertions.*;
 public class MoneyTest {
 
     @Test
+    @DisplayName("구매 로또 개수 테스트")
+    public void buyLottoCount(){
+        Money money = new Money(5000);
+        assertThat(money.lottoCount()).isEqualTo(5);
+    }
+
+    @Test
     @DisplayName("음수 테스트")
     public void negativeException(){
         assertThatThrownBy(() -> new Money(-1))

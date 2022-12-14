@@ -7,14 +7,17 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private static final int lottoPrice = 1000;
     private static final String LOTTO_NULLPOINT_EXCEPTION = "로또가 없습니다.";
 
-    private List<LottoTicket> lottos;
+    private final List<LottoTicket> lottos;
 
     public Lottos(List<LottoTicket>lottos) {
         validationLottoNullCheck(lottos);
         this.lottos = lottos;
+    }
+
+    public Lottos(Money money){
+        this.lottos = lottosMake(money);
     }
 
     private void validationLottoNullCheck (List<LottoTicket> lottos){
@@ -23,20 +26,16 @@ public class Lottos {
         }
     }
 
-    public static Lottos lottosMake(int money){
-        return new Lottos(IntStream.range(0, getLottoCount(money))
-                .mapToObj(i -> LottoTicket.valueOf())
-                .collect(Collectors.toList()));
+    private List<LottoTicket> lottosMake(Money money){
+        return IntStream.range(0, money.lottoCount())
+                .mapToObj(i -> new LottoTicket())
+                .collect(Collectors.toList());
     }
 
-    private static int getLottoCount(int money) {
-        int lottoCount = money / lottoPrice;
-        return lottoCount;
-    }
 
     public List<Reward> lottosMatch(WinningNumbers winningNumbers){
         return lottos.stream()
-                .map(lottoTicket -> Reward.rewardMatchCount(lottoTicket.lottoNumberMatchCount(winningNumbers)))
+                .map(lottoTicket -> lottoTicket.lottoNumberMatch(winningNumbers))
                 .collect(Collectors.toList());
     }
 

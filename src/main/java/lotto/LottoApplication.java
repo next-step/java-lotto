@@ -1,14 +1,26 @@
 package lotto;
 
+import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningNumbers;
+import lotto.dto.LottosDto;
 
-import static lotto.view.InputView.inputBuyMoney;
+import static lotto.view.InputView.*;
+import static lotto.view.ResultView.*;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int money = new Money(inputBuyMoney()).getMoney();
+        Money money = new Money(inputBuyMoney());
+        Lottos lottos = new Lottos(money);
 
-        LottoController lottoController = new LottoController();
-        lottoController.lottoStart(money);
+        LottosDto lottosDto = new LottosDto(lottos);
+        lottoCountMessage(lottosDto);
+        lottoTickets(lottosDto);
+
+        WinningNumbers winningNumbers = new WinningNumbers(inputLuckyNumber(), bonusNumber());
+        LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
+        winningStatics();
+        winningResult(lottoResult.matchResult());
+        lottoYield(lottoResult.lottoYieldCalculate(money));
     }
 }

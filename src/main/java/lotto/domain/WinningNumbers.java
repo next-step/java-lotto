@@ -1,44 +1,85 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.lang.Integer.parseInt;
 
 public class WinningNumbers {
 
-    private static final String SEPARATOR = ",";
     private static final String NULL_EXCEPTION_MESSGAE = "빈값이 들어왔습니다.";
     private static final String WINNING_NUMBER_EXCEPTION_MESSAGE = "당첨 번호는 6개만 입력해주세요.";
+    private static final String BONUSNUMBER_EXCEPTION = "이미 당첨번호에 포함 되어 있습니다.";
+    private static final int BONUS_MATCH_COUNT = 4;
 
-    List<Integer> winningNumbers;
+    private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(String winningNumbers) {
-        validationBlank(winningNumbers);
-        this.winningNumbers = winningNumbersMake(winningNumbers);
+
+    public WinningNumbers(List<Integer> winningNumbers, int bonusNumber){
+        validationListBlank(winningNumbers);
+        validationNumbersSizeCheck(winningNumbers);
+        this.winningNumbers = valueOf(winningNumbers);
+        validationBonusNumberCheck(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
-    public List<Integer> winningNumbersMake(String winningNumbers){
-        List<Integer> numbers = Arrays.asList(winningNumbers.split(SEPARATOR)).stream()
-                .map(Integer::parseInt)
+    private List<LottoNumber> valueOf(List<Integer> winningNumbers){
+        return winningNumbers.stream()
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
-        validationNumbersSizeCheck(numbers);
-        return numbers;
     }
 
-    public void validationBlank(String winningNumbers){
-        if(winningNumbers.isBlank()){
+    public boolean bonusNumberMatch(List<LottoNumber> lottoTicket){
+        int count = lottoMatchCount(lottoTicket);
+        if(count == BONUS_MATCH_COUNT){
+            return lottoTicket.contains(bonusNumber);
+        }
+        return false;
+    }
+
+    public int lottoMatchCount(List<LottoNumber> lottoTicket){
+        return (int) lottoTicket.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    public Reward winningLottoMatch(List<LottoNumber> lottoTicket){
+        return Reward.rewardMatchCount(lottoMatchCount(lottoTicket), bonusNumberMatch(lottoTicket));
+    }
+
+    private void validationListBlank(List<Integer> winningNumbers){
+        if(winningNumbers.isEmpty()){
             throw new NullPointerException(NULL_EXCEPTION_MESSGAE);
         }
     }
 
-    public void validationNumbersSizeCheck(List<Integer> winningNumbers){
+    private void validationNumbersSizeCheck(List<Integer> winningNumbers){
         if(winningNumbers.size() > 6){
             throw new IllegalArgumentException(WINNING_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    private void validationBonusNumberCheck(int bonusNumber){
+        if(winningNumbers.contains(LottoNumber.of(bonusNumber))){
+            throw new IllegalArgumentException(BONUSNUMBER_EXCEPTION);
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningNumbers that = (WinningNumbers) o;
+        return Objects.equals(winningNumbers, that.winningNumbers) && Objects.equals(bonusNumber, that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningNumbers, bonusNumber);
     }
 }
