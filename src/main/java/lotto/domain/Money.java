@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class Money {
 
     private static final Pattern POSITIVE_PATTERN = Pattern.compile("^[0-9]*$");
+
     private final int money;
 
     public Money(String input) {
