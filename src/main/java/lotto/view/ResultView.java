@@ -11,8 +11,8 @@ import java.util.StringJoiner;
 
 public class ResultView {
 
-    public static void printLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printLottoCount(int manualCount, int randomCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + randomCount + "개를 구매했습니다.");
     }
 
     public static void printLottos(List<Lotto> lottos) {

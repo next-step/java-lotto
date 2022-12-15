@@ -13,20 +13,11 @@ public class Purchasing {
 
     private static List<Lotto> lottos;
     private static int manualCount;
-    private static int randomCount;
-
-    public Purchasing(Money money) {
-        lottos = new ArrayList<>();
-        manualCount = 0;
-        randomCount = money.divideMoney(LOTTO_PRICE);
-        addRandomLotto(randomCount);
-    }
 
     public Purchasing(Money money, List<Lotto> manualLottos) {
         lottos = new ArrayList<>(manualLottos);
         manualCount = manualLottos.size();
-        randomCount = money.divideMoney(LOTTO_PRICE) - manualCount;
-        addRandomLotto(randomCount);
+        addRandomLotto( money.divideMoney(LOTTO_PRICE) - manualCount);
     }
 
     private void addRandomLotto(int randomCount) {
@@ -41,10 +32,6 @@ public class Purchasing {
                 .collect(Collectors.toMap(winningType -> winningType, value -> 1, Integer::sum));
     }
 
-    public int getLottoCount() {
-        return lottos.size();
-    }
-
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
     }
@@ -54,6 +41,6 @@ public class Purchasing {
     }
 
     public static int getRandomCount() {
-        return randomCount;
+        return lottos.size() - manualCount;
     }
 }

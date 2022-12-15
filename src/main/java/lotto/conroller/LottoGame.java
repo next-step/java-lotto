@@ -4,18 +4,21 @@ import lotto.domain.*;
 import lotto.view.ResultView;
 import lotto.view.UserInput;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
 
     public void runLottoGame() {
         Money money = UserInput.inputMoney();
+
         collectStatistics(money, getWinningResult(buyLotto(money)));
     }
 
     private Purchasing buyLotto(Money money) {
-        Purchasing purchasing = new Purchasing(money);
-        ResultView.printLottoCount(purchasing.getLottoCount());
+        List<Lotto> manualLottos = UserInput.inputManualLottos(UserInput.inputManualCount());
+        Purchasing purchasing = new Purchasing(money, manualLottos);
+        ResultView.printLottoCount(purchasing.getManualCount(), purchasing.getRandomCount());
         ResultView.printLottos(purchasing.getLottos());
         return purchasing;
     }

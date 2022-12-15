@@ -17,7 +17,7 @@ class PurchasingTest {
     @ParameterizedTest
     @ValueSource(strings = {"1000", "1001", "1999"})
     void 금액_로또_개수(String number) {
-        assertThat(new Purchasing(new Money(number)).getLottoCount()).isEqualTo(1);
+        assertThat(new Purchasing(new Money(number), new ArrayList<>()).getRandomCount()).isEqualTo(1);
     }
 
     @ParameterizedTest
