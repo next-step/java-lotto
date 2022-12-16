@@ -30,6 +30,7 @@ public class InputView {
     }
 
     public static List<Integer> inputLottoNumber(){
+        System.out.println(LOTTO_NUMBER_MESSAGE);
         return null;
     }
 
