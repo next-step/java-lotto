@@ -18,7 +18,7 @@ public class LottoNumber {
         }
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validate(number);
         this.number = number;
     }
