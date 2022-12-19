@@ -1,5 +1,6 @@
 package step2.view;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -9,7 +10,7 @@ public class InputView {
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         String inputMoney = scanner.nextLine();
-        if (InputException.isInputMoneyPossible(inputMoney)) {
+        if (!InputException.isInputMoneyPossible(inputMoney)) {
             scanner = new Scanner(System.in);
             return inputMoney();
         }
@@ -20,16 +21,16 @@ public class InputView {
         return number;
     }
 
-    public static String[] inputWinningLotto() {
+    public static Integer[] inputWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String input = scanner.nextLine();
-        String[] winningLotto = input.split(",");
+        String[] winningLotto = input.split(", ");
 
-        if (InputException.isInputLottoPossible(winningLotto)) {
+        if (!InputException.isInputLottoPossible(winningLotto)) {
             scanner = new Scanner(System.in);
             return inputWinningLotto();
         }
-        return winningLotto;
+        return Arrays.stream(winningLotto).map(Integer::parseInt).toArray(Integer[]::new);
     }
 }
