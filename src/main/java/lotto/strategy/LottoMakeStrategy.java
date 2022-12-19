@@ -1,5 +1,9 @@
 package lotto.strategy;
 
-public interface LottoMakeStrategy {
+import lotto.domain.LottoNumber;
 
+import java.util.List;
+
+public interface LottoMakeStrategy {
+    public List<LottoNumber> valueOf();
 }
