@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
     private static final String MISS_LOTTONUMBER_MATCH = "잘못된 로또 번호입니다.";
     private static final Map<Integer,LottoNumber> lottoNumbers =  new HashMap<>();
     private final int number;
@@ -34,13 +34,6 @@ public class LottoNumber {
         }
     }
 
-    public static List<Integer> numbers() {
-        List<Integer> numbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                                .boxed()
-                                .collect(Collectors.toList());
-        Collections.shuffle(numbers);
-        return numbers.subList(0,6);
-    }
 
     @Override
     public String toString() {

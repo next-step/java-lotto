@@ -1,13 +1,13 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -29,10 +29,13 @@ public class InputView {
         return Integer.parseInt(sc.nextLine());
     }
 
-    public static List<Integer> inputLottoNumber(){
+    public static List<String> inputLottoNumber(int manualCount){
         System.out.println(LOTTO_NUMBER_MESSAGE);
-        return null;
+        return IntStream.range(0, manualCount)
+                .mapToObj(i -> sc.nextLine())
+                .collect(Collectors.toList());
     }
+
 
     public static List<Integer> inputLuckyNumber(){
         System.out.println(LUCKY_NUMBER_MESSAGE);

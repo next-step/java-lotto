@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.strategy.LottoMakeStrategy;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -7,8 +9,8 @@ import java.util.stream.Collectors;
 public class LottoTicket {
     private final List<LottoNumber> lottoTicket;
 
-    public LottoTicket(){
-        this.lottoTicket = lottoNumbersMake();
+    public LottoTicket(LottoMakeStrategy lottoMakeStrategy){
+        this.lottoTicket = lottoMakeStrategy.valueOf();
     }
 
     public LottoTicket(List<Integer> numbers){
@@ -21,11 +23,6 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> lottoNumbersMake(){
-        return LottoNumber.numbers().stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-    }
 
     public Reward lottoNumberMatch(WinningNumbers winningNumbers){
         return winningNumbers.winningLottoMatch(lottoTicket);
