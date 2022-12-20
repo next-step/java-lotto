@@ -1,4 +1,4 @@
-package domain;
+package step1.domain;
 
 public class Calculator {
 

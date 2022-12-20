@@ -1,7 +1,7 @@
-package view;
+package step1.view;
 
-import exception.SplitException;
-import exception.ValueException;
+import step1.exception.SplitException;
+import step1.exception.ValueException;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package exception;
+package step1.exception;
 
 public class SplitException {
 

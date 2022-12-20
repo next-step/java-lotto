@@ -1,4 +1,6 @@
-import domain.Calculator;
+package step1;
+
+import step1.domain.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package exception;
+package step1.exception;
 
 import java.util.Map;
 import java.util.stream.IntStream;
