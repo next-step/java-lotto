@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoResultTest {
 
     @Test
-    @DisplayName("구매한 로또가 2등인지 확인 테스트")
-    public void scoreTest() {
+    @DisplayName("구매한 로또가 등수 확인 테스트")
+    public void gradeTest() {
         Lotto lottoOne = new Lotto("1, 2, 3, 4, 5, 7");
         Lotto lottoTwo = new Lotto(4, 6, 23, 33, 19, 37);
         Lotto lottoThree = new Lotto("23, 24, 26, 33, 44, 11");
@@ -39,8 +39,9 @@ public class LottoResultTest {
 
         LottoGame winningLotto = new LottoGame(buyLottos, winLotto);
 
+        // 5등 2개
         LottoResult result = winningLotto.match();
 
-        assertThat(result.getRevenue()).isEqualTo(500);
+        assertThat(result.getRevenue()).isEqualTo(3.33);
     }
 }
