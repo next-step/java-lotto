@@ -22,5 +22,4 @@ public class LottoGame {
         lottoResult.calculateRevenue(buyLottos.buyCount());
         return lottoResult;
     }
-
 }

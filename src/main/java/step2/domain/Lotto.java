@@ -21,7 +21,6 @@ public class Lotto {
         }
     }
 
-
     public int matchCount(Lotto lotto) {
         int count = 0;
         Map<Integer, Boolean> map = lotto.getLottoNumbers();
