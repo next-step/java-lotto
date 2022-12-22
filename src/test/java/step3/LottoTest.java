@@ -21,4 +21,14 @@ public class LottoTest {
         assertThat(matchCount).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("보너스 번호 match 테스트")
+    public void bonusMatchTest() {
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 16", 6);
+
+        boolean matchBonus = lotto.matchBonus(winningLotto);
+
+        assertThat(matchBonus).isTrue();
+    }
 }
