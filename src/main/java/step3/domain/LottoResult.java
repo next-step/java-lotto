@@ -39,8 +39,6 @@ public class LottoResult {
     }
 
     public double getRevenue() {
-        return revenue;
+        return Math.round(revenue * 100) / 100.0;
     }
-
-
 }
