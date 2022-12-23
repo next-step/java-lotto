@@ -4,6 +4,8 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
+import lotto.strategy.LottoAutoStrategy;
+import lotto.strategy.LottoMakeStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,10 +21,20 @@ public class LottosTest {
 
     @ParameterizedTest
     @ValueSource(ints ={5000})
-    @DisplayName("로또 생성 테스트")
-    public void lottosMake(int value){
-        Lottos lottos = new Lottos(new Money(value));
+    @DisplayName("로또 자동생성 테스트")
+    public void lottosAutoMake(int value){
+        LottoMakeStrategy lottoMakeStrategy = new LottoAutoStrategy();
+        Lottos lottos = new Lottos();
+        lottos.autoLottos(new Money(value), 0, lottoMakeStrategy);
         assertThat(lottos.getLottos()).hasSize(5);
+    }
+
+    @Test
+    @DisplayName("로또 수동생성 테스트")
+    public void lottosManualMake(){
+        Lottos lottos = new Lottos();
+        lottos.manualLottos(List.of("1,2,3,4,5,6"));
+        assertThat(lottos.getLottos()).hasSize(1);
     }
 
     @Test
