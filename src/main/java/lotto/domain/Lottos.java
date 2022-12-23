@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.strategy.LottoAutoStrategy;
 import lotto.strategy.LottoMakeStrategy;
 
 import java.util.ArrayList;
@@ -20,8 +19,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Lottos(Money money, List<String> manualLottoCount, LottoMakeStrategy lottoMakeStrategy){
-        this.lottos = lottosMake(money, manualLottoCount, lottoMakeStrategy);
+    public Lottos(){
+        this.lottos = new ArrayList<>();
     }
 
     private void validationLottoNullCheck (List<LottoTicket> lottos){
@@ -30,26 +29,21 @@ public class Lottos {
         }
     }
 
-    private List<LottoTicket> lottosMake(Money money, List<String> manualLottoCount, LottoMakeStrategy lottoMakeStrategy){
-        List<LottoTicket> lottos = autoLottos(money, manualLottoCount.size(), lottoMakeStrategy);
-        lottos.addAll(manualLottos(manualLottoCount));
-        return lottos;
+    public void autoLottos(Money money, int manualLottoCount, LottoMakeStrategy lottoMakeStrategy){
+        IntStream.range(0, money.lottoCount() - manualLottoCount)
+                .mapToObj(i -> new LottoTicket(lottoMakeStrategy))
+                .forEach(lottos::add);
     }
 
-    private List<LottoTicket> autoLottos(Money money, int manualLottoCount, LottoMakeStrategy lottoMakeStrategy){
-        return IntStream.range(0, money.lottoCount() - manualLottoCount)
-                .mapToObj(i -> new LottoTicket(lottoMakeStrategy))
-                .collect(Collectors.toList());
-    }
-    private List<LottoTicket> manualLottos(final List<String> manualLottos){
-        return manualLottos.stream()
+    public void manualLottos(List<String> manualLotto){
+        manualLotto.stream()
                 .map(i -> Arrays.stream(i.split(","))
                         .map(String::trim)
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
                 )
                 .map(LottoTicket::new)
-                .collect(Collectors.toList());
+                .forEach(lottos::add);
     }
 
     public List<Reward> lottosMatch(WinningNumbers winningNumbers){

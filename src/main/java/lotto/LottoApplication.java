@@ -21,8 +21,9 @@ public class LottoApplication {
         List<String> manualLottos = inputLottoNumber(manualLottoCount);
 
         lottoKindsCount(money.lottoCount(), manualLottoCount);
-        LottoMakeStrategy lottoMakeStrategy = new LottoAutoStrategy();
-        Lottos lottos = new Lottos(money, manualLottos, lottoMakeStrategy);
+        Lottos lottos = new Lottos();
+        lottos.autoLottos(money, manualLottos.size(), new LottoAutoStrategy());
+        lottos.manualLottos(manualLottos);
 
         LottosDto lottosDto = new LottosDto(lottos);
         lottoCountMessage(lottosDto);
