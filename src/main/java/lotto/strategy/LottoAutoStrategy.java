@@ -21,6 +21,6 @@ public class LottoAutoStrategy implements LottoMakeStrategy{
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numbers);
-        return numbers.subList(0,6);
+        return numbers.subList(0, 6);
     }
 }
