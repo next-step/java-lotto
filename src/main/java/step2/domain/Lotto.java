@@ -1,27 +1,48 @@
 package step2.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45);
-
+    private List<Integer> numbers = new ArrayList<>();
     private Map<Integer, Boolean> lottoNumbers = new HashMap<>();
 
     public Lotto() {
-        Collections.shuffle(numbers);
+        setUpNumber();
         for (int i = 0; i < 6; i++) {
             lottoNumbers.put(numbers.get(i), true);
         }
     }
 
-    public Lotto(Integer[] input) {
+    public Lotto(List<Integer> input) {
         for (int i = 0; i < 6; i++) {
-            lottoNumbers.put(input[i], true);
+            lottoNumbers.put(input.get(i), true);
         }
     }
 
-    public int matchCount(Lotto lotto) {
+    public Lotto(String[] input) {
+        this(Arrays.stream(input).map(Integer::parseInt).collect(Collectors.toList()));
+    }
+
+    public Lotto(String input) {
+        this(input.split(", "));
+    }
+
+    public Lotto(int one, int two, int three, int four, int five, int six) {
+        this(Arrays.asList(one, two, three, four, five, six));
+    }
+
+
+    private void setUpNumber() {
+        for (int i = 1; i < 46; i++) {
+            numbers.add(i);
+        }
+        Collections.shuffle(numbers);
+    }
+
+
+    public int matchCount(WinningLotto lotto) {
         int count = 0;
         Map<Integer, Boolean> map = lotto.getLottoNumbers();
 
@@ -29,6 +50,11 @@ public class Lotto {
             count += isContainKey(key);
         }
         return count;
+    }
+
+    public boolean matchBonus(WinningLotto lotto) {
+        int bonusNumber = lotto.getBonusNumber();
+        return matchCount(lotto) == 5 && isContainKey(bonusNumber) == 1;
     }
 
     private int isContainKey(Integer key) {
