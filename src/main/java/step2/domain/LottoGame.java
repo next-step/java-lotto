@@ -1,10 +1,9 @@
-package step3.domain;
+package step2.domain;
 
 public class LottoGame {
 
     private Lottos buyLottos;
     private WinningLotto winningLotto;
-    private LottoResult lottoResult = new LottoResult();
 
 
     public LottoGame(Lottos buylottos, WinningLotto winningLotto) {
@@ -13,6 +12,8 @@ public class LottoGame {
     }
 
     public LottoResult match() {
+        LottoResult lottoResult = new LottoResult();
+
         for (Lotto lotto : buyLottos.getLottoList()) {
             int matchCount = lotto.matchCount(winningLotto);
             boolean matchBonus = lotto.matchBonus(winningLotto);
