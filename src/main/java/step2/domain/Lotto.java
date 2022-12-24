@@ -63,12 +63,7 @@ public class Lotto {
         }
         return 0;
     }
-
-
-    public Map<Integer, Boolean> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
+    
     @Override
     public String toString() {
         return "" + lottoNumbers.keySet() + "";
