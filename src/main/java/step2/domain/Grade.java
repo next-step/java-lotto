@@ -1,4 +1,4 @@
-package step3.domain;
+package step2.domain;
 
 
 public enum Grade {
@@ -27,15 +27,14 @@ public enum Grade {
     }
 
     public static Grade valueOf(int countOfMatch, boolean matchBonus) {
-
         Grade[] grades = values();
 
-        if (countOfMatch == 6) return grades[0];
-        if (countOfMatch == 5 && matchBonus) return SECOND;
-        if (countOfMatch == 5) return THIRD;
-        if (countOfMatch == 4) return FOURTH;
-        if (countOfMatch == 3) return FIFTH;
-
+        if (countOfMatch == 6 || (countOfMatch == 5 && matchBonus)) {
+            return grades[FIRST.getCountOfMatch() - countOfMatch];
+        }
+        if (countOfMatch > 2) {
+            return grades[FIRST.getCountOfMatch() - countOfMatch + 1];
+        }
         return MISS;
     }
 }
