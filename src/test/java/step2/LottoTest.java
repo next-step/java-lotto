@@ -3,20 +3,32 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
+import step2.domain.WinningLotto;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
     @Test
-    @DisplayName("두개 로또 번호 비교해서 몇개 일치하는지 테스트")
+    @DisplayName("로또 당첨 번호 비교해서 몇개 일치하는지 테스트")
     public void matchCountTest() {
-        Lotto lotto1 = new Lotto(new Integer[]{1, 2, 3, 4, 5, 6});
-        Lotto lotto2 = new Lotto(new Integer[]{4, 5, 6, 7, 8, 9});
+        Lotto lotto1 = new Lotto(1, 2, 3, 4, 5, 6);
 
-        int matchCount = lotto1.matchCount(lotto2);
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 16", 7);
 
-        assertThat(matchCount).isEqualTo(3);
+        int matchCount = lotto1.matchCount(winningLotto);
+
+        assertThat(matchCount).isEqualTo(5);
     }
 
+    @Test
+    @DisplayName("보너스 번호 match 테스트")
+    public void bonusMatchTest() {
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 16", 6);
+
+        boolean matchBonus = lotto.matchBonus(winningLotto);
+
+        assertThat(matchBonus).isTrue();
+    }
 }
