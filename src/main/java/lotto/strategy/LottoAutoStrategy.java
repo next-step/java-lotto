@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoAutoStrategy implements LottoMakeStrategy{
+public class LottoAutoStrategy implements LottoMakeStrategy {
 
     public List<LottoNumber> valueOf(){
         return numbers().stream()

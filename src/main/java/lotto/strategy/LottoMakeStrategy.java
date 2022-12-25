@@ -5,5 +5,5 @@ import lotto.domain.LottoNumber;
 import java.util.List;
 
 public interface LottoMakeStrategy {
-    public List<LottoNumber> valueOf();
+    List<LottoNumber> valueOf();
 }

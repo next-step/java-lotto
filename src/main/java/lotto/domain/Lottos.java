@@ -40,6 +40,7 @@ public class Lottos {
                 .map(i -> Arrays.stream(i.split(","))
                         .map(String::trim)
                         .map(Integer::parseInt)
+                        .map(LottoNumber::of)
                         .collect(Collectors.toList())
                 )
                 .map(LottoTicket::new)

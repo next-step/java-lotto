@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import lotto.strategy.LottoAutoStrategy;
 import lotto.strategy.LottoMakeStrategy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -10,26 +12,25 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 
     private static final int LOTTO_NUMBER_FIX_SIZE = 6;
-    private static final String LOTTO_TICKET_NULLPOINT_EXCEPTION = "로또가 생성 되지 않았습니다.";
+    private static final String LOTTO_NUMBER_FIX_MESSAGE = "로또 개수가 맞지않습니다";
     private final List<LottoNumber> lottoTicket;
 
-    public LottoTicket(){
-        this(new ArrayList<>());
+    public LottoTicket(List<LottoNumber> lottoNumbers){
+        validationLottoTicketSizeCheck(lottoNumbers);
+        this.lottoTicket = lottoNumbers;
     }
 
-    public LottoTicket(LottoMakeStrategy lottoMakeStrategy){
-        this.lottoTicket = lottoMakeStrategy.valueOf();
+    public LottoTicket(LottoMakeStrategy lottoMakeStrategy) {
+        this(lottoMakeStrategy.valueOf());
     }
 
-    public LottoTicket(List<Integer> numbers){
-        validationNullCheck(numbers);
-        validationLottoTicketSizeCheck(numbers);
-        this.lottoTicket = valueOf(numbers);
+    public LottoTicket(int... numbers){
+        this(toLottoTickets(numbers));
     }
 
-    public static List<LottoNumber> valueOf(List<Integer> numbers){
-        return numbers.stream()
-                .map(LottoNumber::of)
+    public static List<LottoNumber> toLottoTickets(int... numbers){
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
@@ -37,15 +38,9 @@ public class LottoTicket {
         return winningNumbers.winningLottoMatch(lottoTicket);
     }
 
-    public void validationLottoTicketSizeCheck(List<Integer> numbers){
+    private void validationLottoTicketSizeCheck(List<LottoNumber> numbers){
         if(numbers.size() != LOTTO_NUMBER_FIX_SIZE){
-            throw new IllegalArgumentException("로또 개수가 맞지않습니다");
-        }
-    }
-
-    private void validationNullCheck (List<Integer> lottoTicket){
-        if(lottoTicket.isEmpty()){
-            throw new NullPointerException(LOTTO_TICKET_NULLPOINT_EXCEPTION);
+            throw new IllegalArgumentException(LOTTO_NUMBER_FIX_MESSAGE);
         }
     }
 
