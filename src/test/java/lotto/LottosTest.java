@@ -40,7 +40,7 @@ public class LottosTest {
     @Test
     @DisplayName("로또 등수 테스트")
     public void lottosMatch(){
-        Lottos lottos = new Lottos(List.of(new LottoTicket(List.of(1,2,3,4,5,6))));
+        Lottos lottos = new Lottos(List.of(new LottoTicket(1,2,3,4,5,6)));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 18);
 
         assertThat(lottos.lottosMatch(winningNumbers).get(0).getRewordMoney()).isEqualTo(2000000000);
