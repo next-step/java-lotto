@@ -1,7 +1,9 @@
 package step2.view;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 
 public class InputView {
@@ -21,16 +23,28 @@ public class InputView {
         return number;
     }
 
-    public static Integer[] inputWinningLotto() {
+    public static List<Integer> inputWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String input = scanner.nextLine();
         String[] winningLotto = input.split(", ");
 
-        if (!InputException.isInputLottoPossible(winningLotto)) {
+        if (!InputException.isInputLottoPossible(winningLotto) || !InputException.isInputLottoRangePossible(winningLotto)) {
             scanner = new Scanner(System.in);
             return inputWinningLotto();
         }
-        return Arrays.stream(winningLotto).map(Integer::parseInt).toArray(Integer[]::new);
+        return Arrays.stream(winningLotto).map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        String bonusNumber = scanner.nextLine();
+
+        if (!InputException.isInputBonusPossible(bonusNumber)) {
+            scanner = new Scanner(System.in);
+            return inputBonusNumber();
+        }
+        return Integer.parseInt(bonusNumber);
     }
 }

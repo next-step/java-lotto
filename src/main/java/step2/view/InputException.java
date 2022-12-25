@@ -26,6 +26,46 @@ public class InputException {
         return 0;
     }
 
+
+    public static boolean isInputBonusPossible(String input) {
+        if (isAlpha(input) != 0) {
+            System.out.println("숫자값만 입력해주세요.");
+            return false;
+        }
+
+        if (numberRange(input) != 0) {
+            System.out.println("1~46 범위 값만 입력해주세요.");
+            return false;
+        }
+        return true;
+    }
+
+
+    public static boolean isInputLottoRangePossible(String[] input) {
+        int errResult = checkArrNumberRange(input);
+        if (errResult != 0) {
+            System.out.println("1 ~ 45 범위 숫자만 입력해주세요.");
+            return false;
+        }
+        return true;
+    }
+
+    private static int checkArrNumberRange(String[] input) {
+        int errNum = 0;
+        for (String str : input) {
+            errNum += numberRange(str);
+        }
+        return errNum;
+    }
+
+    public static int numberRange(String number) {
+        int inputNumber = Integer.parseInt(number);
+        if (inputNumber <= 0 || inputNumber >= 46) {
+            return 1;
+        }
+        return 0;
+    }
+
     public static boolean isInputLottoPossible(String[] strArr) {
         int errResult = checkStrArr(strArr);
 
@@ -37,10 +77,10 @@ public class InputException {
     }
 
     private static int checkStrArr(String[] input) {
-        int errNum = 0;
+        int errAlpha = 0;
         for (String str : input) {
-            errNum += isAlpha(str);
+            errAlpha += isAlpha(str);
         }
-        return errNum;
+        return errAlpha;
     }
 }
