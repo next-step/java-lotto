@@ -11,6 +11,7 @@ public class LottoTicket {
 
     private static final int LOTTO_NUMBER_FIX_SIZE = 6;
     private static final String LOTTO_NUMBER_FIX_MESSAGE = "로또 개수가 맞지않습니다";
+
     private final Set<LottoNumber> lottoTicket;
 
     public LottoTicket(List<LottoNumber> lottoNumbers){

@@ -10,6 +10,7 @@ public class LottoNumber {
     public static final int MAX_LOTTO_NUMBER = 45;
     private static final String MISS_LOTTONUMBER_MATCH = "잘못된 로또 번호입니다.";
     private static final Map<Integer,LottoNumber> lottoNumbers =  new HashMap<>();
+
     private final int number;
 
     static {
