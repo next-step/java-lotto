@@ -14,12 +14,18 @@ public class ResultView {
     private static final String BUY_LOTTO_MESSAGE = "개를 구매했습니다.";
     private static final String WINNING_STATS_MESSAGE = "당첨 통계";
     private static final String RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+
+    private static final String LOTTO_KINDS_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
     private static final String RESULT_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
     private static final String YIELD_MESSAGE = "총 수익률은 %.2f 입니다.";
     private static final String SIGN = "----------------";
 
     public static void lottoCountMessage(LottosDto lottosDto){
         System.out.println(lottosDto.getLottosDtoSize() + BUY_LOTTO_MESSAGE);
+    }
+
+    public static void lottoKindsCount(int totalLottoCount, int manualLottoCount){
+        System.out.printf(LOTTO_KINDS_MESSAGE, manualLottoCount, (totalLottoCount - manualLottoCount));
     }
 
     public static void lottoTickets(LottosDto lottosDto){

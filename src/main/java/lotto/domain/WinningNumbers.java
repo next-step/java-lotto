@@ -5,6 +5,7 @@ import org.w3c.dom.ls.LSOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
@@ -16,7 +17,7 @@ public class WinningNumbers {
     private static final String BONUSNUMBER_EXCEPTION = "이미 당첨번호에 포함 되어 있습니다.";
     private static final int BONUS_MATCH_COUNT = 4;
 
-    private final List<LottoNumber> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
 
@@ -28,13 +29,13 @@ public class WinningNumbers {
         this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
-    private List<LottoNumber> valueOf(List<Integer> winningNumbers){
+    private Set<LottoNumber> valueOf(List<Integer> winningNumbers){
         return winningNumbers.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    public boolean bonusNumberMatch(List<LottoNumber> lottoTicket){
+    public boolean bonusNumberMatch(Set<LottoNumber> lottoTicket){
         int count = lottoMatchCount(lottoTicket);
         if(count == BONUS_MATCH_COUNT){
             return lottoTicket.contains(bonusNumber);
@@ -42,13 +43,13 @@ public class WinningNumbers {
         return false;
     }
 
-    public int lottoMatchCount(List<LottoNumber> lottoTicket){
+    public int lottoMatchCount(Set<LottoNumber> lottoTicket){
         return (int) lottoTicket.stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
 
-    public Reward winningLottoMatch(List<LottoNumber> lottoTicket){
+    public Reward winningLottoMatch(Set<LottoNumber> lottoTicket){
         return Reward.rewardMatchCount(lottoMatchCount(lottoTicket), bonusNumberMatch(lottoTicket));
     }
 

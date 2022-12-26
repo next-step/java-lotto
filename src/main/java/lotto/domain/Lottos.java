@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import lotto.strategy.LottoMakeStrategy;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,8 +19,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Lottos(Money money){
-        this.lottos = lottosMake(money);
+    public Lottos(){
+        this.lottos = new ArrayList<>();
     }
 
     private void validationLottoNullCheck (List<LottoTicket> lottos){
@@ -26,12 +29,23 @@ public class Lottos {
         }
     }
 
-    private List<LottoTicket> lottosMake(Money money){
-        return IntStream.range(0, money.lottoCount())
-                .mapToObj(i -> new LottoTicket())
-                .collect(Collectors.toList());
+    public void autoLottos(Money money, int manualLottoCount, LottoMakeStrategy lottoMakeStrategy){
+        IntStream.range(0, money.lottoCount() - manualLottoCount)
+                .mapToObj(i -> new LottoTicket(lottoMakeStrategy))
+                .forEach(lottos::add);
     }
 
+    public void manualLottos(List<String> manualLotto){
+        manualLotto.stream()
+                .map(i -> Arrays.stream(i.split(","))
+                        .map(String::trim)
+                        .map(Integer::parseInt)
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toList())
+                )
+                .map(LottoTicket::new)
+                .forEach(lottos::add);
+    }
 
     public List<Reward> lottosMatch(WinningNumbers winningNumbers){
         return lottos.stream()

@@ -17,49 +17,24 @@ public class WinningNumberTest {
     @Test
     @DisplayName("보너스 번호 매치 테스트")
     public void bonusNumberMatch(){
+        List<LottoNumber> lottoNumbers = LottoTicket.toLottoTickets(3,5,7,9,13,11);
         WinningNumbers winningNumbers = new WinningNumbers(List.of(3,5,7,9,6,10),11);
-        assertThat(winningNumbers.bonusNumberMatch(
-                List.of(
-                        LottoNumber.of(3)
-                        ,LottoNumber.of(5)
-                        , LottoNumber.of(7)
-                        , LottoNumber.of(9)
-                        , LottoNumber.of(13)
-                        , LottoNumber.of(11)
-                )
-            )
-        ).isTrue();
+        assertThat(winningNumbers.bonusNumberMatch(lottoNumbers)).isTrue();
     }
 
     @Test
     @DisplayName("보너스 번호 매치 실패 테스트")
     public void bonusNumberFailMatch(){
+        List<LottoNumber> lottoNumbers = LottoTicket.toLottoTickets(3,5,7,9,13,11);
         WinningNumbers winningNumbers = new WinningNumbers(List.of(3,5,7,9,6,10),12);
-        assertThat(winningNumbers.bonusNumberMatch(
-                        List.of(
-                                LottoNumber.of(3)
-                                ,LottoNumber.of(5)
-                                , LottoNumber.of(7)
-                                , LottoNumber.of(9)
-                                , LottoNumber.of(13)
-                                , LottoNumber.of(11)
-                        )
-                )
-        ).isFalse();
+        assertThat(winningNumbers.bonusNumberMatch(lottoNumbers)).isFalse();
     }
     @Test
     @DisplayName("당첨번호 당첨 갯수 테스트")
     public void winningNumbersMatch(){
+        List<LottoNumber> lottoNumbers = LottoTicket.toLottoTickets(3,5,7,9,13,11);
         WinningNumbers winningNumbers = new WinningNumbers(List.of(3,5,7,9,18,17),15);
-        assertThat(winningNumbers.lottoMatchCount(
-                List.of(
-                      LottoNumber.of(11)
-                    , LottoNumber.of(2)
-                    , LottoNumber.of(3)
-                    , LottoNumber.of(5)
-                    , LottoNumber.of(7)
-                    , LottoNumber.of(9)
-        ))).isEqualTo(4);
+        assertThat(winningNumbers.lottoMatchCount(lottoNumbers)).isEqualTo(4);
     }
 
     @Test
