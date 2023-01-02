@@ -8,6 +8,11 @@ import java.util.List;
 
 public class ResultView {
 
+    public static void printBuyCount(int manualCount, int autoCount){
+        System.out.println();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, autoCount);
+    }
+
     public static void printBuyLottos(Lottos lottos) {
         List<Lotto> lottoList = lottos.getLottoList();
         for (Lotto lotto : lottoList) {
