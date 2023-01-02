@@ -8,14 +8,14 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
 
-    private Map<Integer, Boolean> lottoNumbers = new HashMap<>();
-    private int bonusNumber = 0;
+    private Map<LottoNumber, Boolean> lottoNumbers = new HashMap<>();
+    private LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> input, int bonusNumber) {
         for (Integer num : input) {
-            lottoNumbers.put(num, true);
+            lottoNumbers.put(LottoNumber.of(num), true);
         }
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public WinningLotto(String[] input, int bonusNumber) {
@@ -26,11 +26,11 @@ public class WinningLotto {
         this(input.split(", "), bonusNumber);
     }
 
-    public Map<Integer, Boolean> getLottoNumbers() {
+    public Map<LottoNumber, Boolean> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 }
