@@ -1,9 +1,6 @@
 package step2.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -59,14 +56,12 @@ public class InputView {
         return Arrays.stream(lotto).map(Integer::parseInt).collect(Collectors.toList());
     }
 
-    public static int inputBonusNumber() {
+    public static int inputBonusNumber(List<Integer> winningLotto) {
         System.out.println("보너스 볼을 입력해 주세요.");
-
         String bonusNumber = scanner.nextLine();
-
-        if (!InputException.isInputBonusPossible(bonusNumber)) {
+        if (!InputException.isInputBonusPossible(winningLotto, bonusNumber)) {
             scanner = new Scanner(System.in);
-            return inputBonusNumber();
+            return inputBonusNumber(winningLotto);
         }
         return Integer.parseInt(bonusNumber);
     }
