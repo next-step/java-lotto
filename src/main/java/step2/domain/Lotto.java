@@ -58,6 +58,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "" + lottoNumbers.keySet() + "";
+        List<LottoNumber> keySet = new ArrayList<>(lottoNumbers.keySet());
+        Collections.sort(keySet);
+        return "" + keySet.toString() + "";
     }
 }
