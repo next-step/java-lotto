@@ -1,4 +1,4 @@
-package step2.domain;
+package lottoGame.domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,15 +11,19 @@ public class WinningLotto {
     private Map<LottoNumber, Boolean> lottoNumbers = new HashMap<>();
     private LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> input, int bonusNumber) {
+    public WinningLotto(List<Integer> input, LottoNumber bonusNumber) {
         for (Integer num : input) {
             lottoNumbers.put(LottoNumber.of(num), true);
         }
-        this.bonusNumber = LottoNumber.of(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
+
+    public WinningLotto(List<Integer> input, int bonusNumber) {
+        this(input, LottoNumber.of(bonusNumber));
     }
 
     public WinningLotto(String[] input, int bonusNumber) {
-        this(Arrays.stream(input).map(Integer::parseInt).collect(Collectors.toList()), bonusNumber);
+        this(Arrays.stream(input).map(Integer::parseInt).collect(Collectors.toList()), LottoNumber.of(bonusNumber));
     }
 
     public WinningLotto(String input, int bonusNumber) {
