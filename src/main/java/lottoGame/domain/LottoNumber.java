@@ -1,4 +1,4 @@
-package step2.domain;
+package lottoGame.domain;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,18 +10,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
+    private int number;
+
     static {
         IntStream.range(MIN_NUMBER, MAX_NUMBER).forEach(x -> lottoNumbers.put(x, new LottoNumber(x)));
     }
 
-    public static LottoNumber of(int number) {
-        return lottoNumbers.get(number);
-    }
-
-    private int number;
-
     private LottoNumber(int number) {
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        if (number > 45 || number < 1) {
+            throw new IllegalArgumentException("1~45 범위 값만 가능합니다.");
+        }
+        return lottoNumbers.get(number);
     }
 
     public static Map<Integer, LottoNumber> getLottoNumbers() {

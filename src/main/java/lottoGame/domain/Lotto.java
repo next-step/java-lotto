@@ -1,19 +1,16 @@
-package step2.domain;
+package lottoGame.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-
-    private static List<LottoNumber> totalNumbers = new ArrayList<>(LottoNumber.getLottoNumbers().values());
-
     private Map<LottoNumber, Boolean> lottoNumbers = new HashMap<>();
 
     // 자동
     public Lotto() {
-        Collections.shuffle(totalNumbers);
-        IntStream.range(0, 6).forEach(i -> lottoNumbers.put(totalNumbers.get(i), true));
+        List<LottoNumber> shuffledNumbers = LottoShuffle.shuffle();
+        IntStream.range(0, 6).forEach(i -> lottoNumbers.put(shuffledNumbers.get(i), true));
     }
 
     // 수동
