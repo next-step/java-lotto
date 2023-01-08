@@ -1,4 +1,4 @@
-package step2.view;
+package lottoGame.view;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -91,9 +91,9 @@ public class InputException {
         return errAlpha;
     }
 
-    public static boolean isInputCountPossible(String inputCount, int money) {
-        if (Integer.parseInt(inputCount) > money / 1000) {
-            System.out.println(money);
+    public static boolean isInputCountPossible(String inputCount) {
+        if (isAlpha(inputCount) == 1) {
+            System.out.println("숫자값만 입력해주세요.");
             return false;
         }
         return true;

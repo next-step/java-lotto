@@ -1,4 +1,4 @@
-package step2.view;
+package lottoGame.view;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,13 +18,13 @@ public class InputView {
         return money;
     }
 
-    public static int inputManualBuyCount(int money) {
+    public static int inputManualBuyCount() {
         System.out.println();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         String inputCount = scanner.nextLine();
-        if (!InputException.isInputCountPossible(inputCount, money)) {
+        if (!InputException.isInputCountPossible(inputCount)) {
             scanner = new Scanner(System.in);
-            return inputManualBuyCount(money);
+            return inputManualBuyCount();
         }
         int count = Integer.parseInt(inputCount);
         return count;
