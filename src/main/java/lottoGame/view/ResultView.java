@@ -1,12 +1,18 @@
-package step2.view;
+package lottoGame.view;
 
-import step2.domain.Lotto;
-import step2.domain.Lottos;
-import step2.domain.LottoResult;
+import lottoGame.domain.Lotto;
+import lottoGame.domain.Lottos;
+import lottoGame.domain.LottoResult;
+import lottoGame.domain.Money;
 
 import java.util.List;
 
 public class ResultView {
+
+    public static void printBuyCount(Money money){
+        System.out.println();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", money.getManualLottoCount(), money.getAutoLottoCount());
+    }
 
     public static void printBuyLottos(Lottos lottos) {
         List<Lotto> lottoList = lottos.getLottoList();

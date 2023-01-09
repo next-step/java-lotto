@@ -1,24 +1,21 @@
-package step2.domain;
+package lottoGame.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
+    private Map<LottoNumber, Boolean> lottoNumbers = new HashMap<>();
 
-    private List<Integer> numbers = new ArrayList<>();
-    private Map<Integer, Boolean> lottoNumbers = new HashMap<>();
-
+    // 자동
     public Lotto() {
-        setUpNumber();
-        for (int i = 0; i < 6; i++) {
-            lottoNumbers.put(numbers.get(i), true);
-        }
+        List<LottoNumber> shuffledNumbers = LottoShuffle.shuffle();
+        IntStream.range(0, 6).forEach(i -> lottoNumbers.put(shuffledNumbers.get(i), true));
     }
 
+    // 수동
     public Lotto(List<Integer> input) {
-        for (int i = 0; i < 6; i++) {
-            lottoNumbers.put(input.get(i), true);
-        }
+        IntStream.range(0, 6).forEach(i -> lottoNumbers.put(LottoNumber.of(input.get(i)), true));
     }
 
     public Lotto(String[] input) {
@@ -34,30 +31,22 @@ public class Lotto {
     }
 
 
-    private void setUpNumber() {
-        for (int i = 1; i < 46; i++) {
-            numbers.add(i);
-        }
-        Collections.shuffle(numbers);
-    }
-
-
     public int matchCount(WinningLotto lotto) {
         int count = 0;
-        Map<Integer, Boolean> map = lotto.getLottoNumbers();
+        Map<LottoNumber, Boolean> map = lotto.getLottoNumbers();
 
-        for (Integer key : map.keySet()) {
+        for (LottoNumber key : map.keySet()) {
             count += isContainKey(key);
         }
         return count;
     }
 
     public boolean matchBonus(WinningLotto lotto) {
-        int bonusNumber = lotto.getBonusNumber();
+        LottoNumber bonusNumber = lotto.getBonusNumber();
         return matchCount(lotto) == 5 && isContainKey(bonusNumber) == 1;
     }
 
-    private int isContainKey(Integer key) {
+    private int isContainKey(LottoNumber key) {
         if (lottoNumbers.containsKey(key)) {
             return 1;
         }
@@ -66,6 +55,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "" + lottoNumbers.keySet() + "";
+        List<LottoNumber> keySet = new ArrayList<>(lottoNumbers.keySet());
+        Collections.sort(keySet);
+        return "" + keySet.toString() + "";
     }
 }

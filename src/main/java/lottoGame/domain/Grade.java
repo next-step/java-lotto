@@ -1,4 +1,4 @@
-package step2.domain;
+package lottoGame.domain;
 
 
 public enum Grade {

@@ -1,8 +1,10 @@
-package step2.view;
+package lottoGame.view;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class InputException {
-
-
     public static boolean isInputMoneyPossible(String input) {
         if (isAlpha(input) == 1) {
             System.out.println("숫자값만 입력해주세요.");
@@ -20,26 +22,28 @@ public class InputException {
     }
 
     private static int isAlpha(String input) {
-        if (input.matches("[a-zA-Z]+")) {
+        if (input.isEmpty() || input.matches("[a-zA-Z]+")) {
             return 1;
         }
         return 0;
     }
 
 
-    public static boolean isInputBonusPossible(String input) {
-        if (isAlpha(input) != 0) {
+    public static boolean isInputBonusPossible(List<Integer> winningLotto, String bonusNumber) {
+        if (isAlpha(bonusNumber) != 0) {
             System.out.println("숫자값만 입력해주세요.");
             return false;
         }
-
-        if (numberRange(input) != 0) {
+        if (numberRange(bonusNumber) != 0) {
             System.out.println("1~46 범위 값만 입력해주세요.");
+            return false;
+        }
+        if (winningLotto.contains(Integer.parseInt(bonusNumber))){
+            System.out.println("당첨 로또와 중복되지 않는 숫자를 입력해세요");
             return false;
         }
         return true;
     }
-
 
     public static boolean isInputLottoRangePossible(String[] input) {
         int errResult = checkArrNumberRange(input);
@@ -67,8 +71,11 @@ public class InputException {
     }
 
     public static boolean isInputLottoPossible(String[] strArr) {
+        if (new HashSet<>(Arrays.asList(strArr)).size() != 6) {
+            System.out.println("6개의 숫자값을 입력해주세요.");
+            return false;
+        }
         int errResult = checkStrArr(strArr);
-
         if (errResult != 0) {
             System.out.println("숫자값만 입력해주세요.");
             return false;
@@ -82,5 +89,13 @@ public class InputException {
             errAlpha += isAlpha(str);
         }
         return errAlpha;
+    }
+
+    public static boolean isInputCountPossible(String inputCount) {
+        if (isAlpha(inputCount) == 1) {
+            System.out.println("숫자값만 입력해주세요.");
+            return false;
+        }
+        return true;
     }
 }
