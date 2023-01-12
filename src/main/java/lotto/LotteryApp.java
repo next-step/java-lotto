@@ -27,7 +27,7 @@ public class LotteryApp {
 
 			final int manualLottoCount = inputView.askManualLottoCount();
 
-			final List<Integer> inputManualLottoNumbers = inputView.askManualLottoNumbers();
+			final List<List<Integer>> inputManualLottoNumbers = inputView.askManualLottoNumbers(manualLottoCount);
 
 			final Lottos lottos = lotteryMachine.issue(money, manualLottoCount);
 			final PurchaseCountDto purchaseCountDto = PurchaseCountDto.of(lottos.getCount());
