@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.LotteryMachine;
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Reward;
@@ -28,8 +27,7 @@ public class LotteryApp {
 
 			final int manualLottoCount = inputView.askManualLottoCount();
 
-			final List<List<Integer>> manualLottoNumbers = inputView.askManualLottoNumbers(Lotto.LOTTO_NUMBER_QUANTITY,
-				manualLottoCount);
+			final List<Integer> inputManualLottoNumbers = inputView.askManualLottoNumbers();
 
 			final Lottos lottos = lotteryMachine.issue(money, manualLottoCount);
 			final PurchaseCountDto purchaseCountDto = PurchaseCountDto.of(lottos.getCount());

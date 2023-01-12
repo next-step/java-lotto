@@ -7,7 +7,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class InputView {
 	private static final String ASK_MONEY_QUESTION = "구입금액을 입력해 주세요.";
@@ -73,19 +72,15 @@ public class InputView {
 		}
 	}
 
-	public List<List<Integer>> askManualLottoNumbers(int lottoNumberQuantity, int manualLottoCount) {
+	public List<Integer> askManualLottoNumbers() {
 		print(ASK_MANUAL_LOTTO_NUMBERS_QUESTION);
 		print(LINE_BREAK);
 
 		final String input = scanner.nextLine();
 		final List<String> splitedInput = splitInput(input);
 
-		final List<Integer> numbers = splitedInput.stream()
+		return splitedInput.stream()
 			.map(s -> Integer.parseInt(s.trim()))
-			.collect(Collectors.toList());
-
-		return IntStream.range(0, manualLottoCount)
-			.mapToObj(index -> numbers.subList(index * lottoNumberQuantity, index * (lottoNumberQuantity + 1)))
 			.collect(Collectors.toList());
 	}
 
