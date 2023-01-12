@@ -11,7 +11,7 @@ public class ListOfLottoNumbers {
 		this.listOfNumbers = listOfNumbers;
 	}
 
-	public static ListOfLottoNumbers of(List<List<Integer>> listOfNumbers) {
+	public static ListOfLottoNumbers of(List<List<LottoNum>> listOfNumbers) {
 		return new ListOfLottoNumbers(
 			listOfNumbers.stream()
 				.map(LottoNumbers::of)

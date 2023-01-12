@@ -6,9 +6,9 @@ import lotto.exception.DuplicateBonusNumberException;
 import lotto.exception.ErrorMessage;
 
 public class WinningLotto extends Lotto {
-	private final int bonusNumber;
+	private final LottoNum bonusNumber;
 
-	public WinningLotto(List<Integer> numbers, int bonusNumber) {
+	public WinningLotto(List<LottoNum> numbers, LottoNum bonusNumber) {
 		super(numbers);
 		if (!isValidBonusNumber(bonusNumber)) {
 			throw new DuplicateBonusNumberException(ErrorMessage.BONUS_NUMBER_MUST_NOT_BE_DUPLICATED);
@@ -16,11 +16,11 @@ public class WinningLotto extends Lotto {
 		this.bonusNumber = bonusNumber;
 	}
 
-	private boolean isValidBonusNumber(int bonusNumber) {
+	private boolean isValidBonusNumber(LottoNum bonusNumber) {
 		return !numbers.contains(bonusNumber);
 	}
 
-	public int getBonusNumber() {
+	public LottoNum getBonusNumber() {
 		return bonusNumber;
 	}
 }

@@ -3,6 +3,8 @@ package lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lotto.domain.ListOfLottoNumbers;
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 
@@ -36,7 +39,12 @@ class LotteryMachineTest {
 		LotteryMachine lotteryMachine = new LotteryMachine();
 		Money money = new Money(10_000);
 		ListOfLottoNumbers listOfLottoNumbers = ListOfLottoNumbers.of(
-			List.of(List.of(1, 2, 3, 4, 5, 6), List.of(10, 15, 20, 25, 30, 35))
+			List.of(Stream.of(1, 2, 3, 4, 5, 6)
+					.map(LottoNum::of)
+					.collect(Collectors.toList()),
+				Stream.of(10, 15, 20, 25, 30, 35)
+					.map(LottoNum::of)
+					.collect(Collectors.toList()))
 		);
 
 		Lottos lottos = lotteryMachine.issue(money, listOfLottoNumbers);
