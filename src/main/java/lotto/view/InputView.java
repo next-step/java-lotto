@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
 	private static final String ASK_MONEY_QUESTION = "구입금액을 입력해 주세요.";
+	private static final String ASK_MANUAL_LOTTO_COUNT_QUESTION = "수동으로 구매할 로또 수를 입력해 주세요.";
 	private static final String ASK_WINNING_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String ASK_BONUS_NUMBER_QUESTION = "보너스 번호를 입력해 주세요.";
 	private static final String LINE_BREAK = "\n";
@@ -50,6 +51,17 @@ public class InputView {
 
 	public int askBonusNumber() {
 		print(ASK_BONUS_NUMBER_QUESTION);
+		print(LINE_BREAK);
+
+		try {
+			return Integer.parseInt(scanner.nextLine());
+		} catch (InputMismatchException exception) {
+			throw new InputMismatchException("숫자를 입력해주세요.");
+		}
+	}
+
+	public int askManualLottoCount() {
+		print(ASK_MANUAL_LOTTO_COUNT_QUESTION);
 		print(LINE_BREAK);
 
 		try {
