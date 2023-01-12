@@ -40,7 +40,7 @@ class LotteryMachineTest {
 		);
 
 		Lottos lottos = lotteryMachine.issue(money, listOfLottoNumbers);
-		int expected = money.getValue() / Lotto.PRICE - listOfLottoNumbers.getListOfNumbers().size();
+		int expected = money.getValue() / Lotto.PRICE;
 
 		assertThat(lottos.getCount()).isEqualTo(expected);
 	}

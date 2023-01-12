@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,13 @@ public class Lottos {
 
 	public static Lottos of(List<Lotto> lottos) {
 		return new Lottos(lottos);
+	}
+
+	public static Lottos of(List<Lotto>... lottos) {
+		return new Lottos(Arrays.stream(lottos)
+			.flatMap(Collection::stream)
+			.collect(Collectors.toList())
+		);
 	}
 
 	public List<String> lottoStrings() {

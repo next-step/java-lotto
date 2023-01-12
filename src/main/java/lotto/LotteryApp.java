@@ -3,6 +3,7 @@ package lotto;
 import java.util.List;
 import java.util.Map;
 
+import lotto.domain.ListOfLottoNumbers;
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -29,7 +30,9 @@ public class LotteryApp {
 
 			final List<List<Integer>> inputManualLottoNumbers = inputView.askManualLottoNumbers(manualLottoCount);
 
-			final Lottos lottos = lotteryMachine.issue(money, manualLottoCount);
+			final ListOfLottoNumbers manualLottoNumbers = ListOfLottoNumbers.of(inputManualLottoNumbers);
+
+			final Lottos lottos = lotteryMachine.issue(money, manualLottoNumbers);
 			final PurchaseCountDto purchaseCountDto = PurchaseCountDto.of(lottos.getCount());
 			resultView.printPurchaseCount(purchaseCountDto);
 
