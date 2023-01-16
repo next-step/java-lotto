@@ -2,12 +2,19 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.ListOfLottoNumbers;
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 
@@ -26,4 +33,23 @@ class LotteryMachineTest {
 		assertThat(lottos.getCount()).isEqualTo(expected);
 	}
 
+	@DisplayName("구매 금액 n*1000원과 수동 로또 숫자가 주어지면 n개의 로또 객체를 발행해야 한다.")
+	@Test
+	void Should_Issue_Auto_Lotto_Substracted_Manual_Lotto_Count_When_Receive_Money_And_Manual_Lotto_Numbers() {
+		LotteryMachine lotteryMachine = new LotteryMachine();
+		Money money = new Money(10_000);
+		ListOfLottoNumbers listOfLottoNumbers = ListOfLottoNumbers.of(
+			List.of(Stream.of(1, 2, 3, 4, 5, 6)
+					.map(LottoNum::of)
+					.collect(Collectors.toList()),
+				Stream.of(10, 15, 20, 25, 30, 35)
+					.map(LottoNum::of)
+					.collect(Collectors.toList()))
+		);
+
+		Lottos lottos = lotteryMachine.issue(money, listOfLottoNumbers);
+		int expected = money.getValue() / Lotto.PRICE;
+
+		assertThat(lottos.getCount()).isEqualTo(expected);
+	}
 }

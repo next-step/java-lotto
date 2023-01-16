@@ -13,13 +13,13 @@ public class Lotto implements LottoGenerate {
 	public static final int PRICE = 1000;
 	public static final int LOTTO_NUMBER_QUANTITY = 6;
 
-	protected final List<Integer> numbers;
+	protected final List<LottoNum> numbers;
 
 	public Lotto() {
 		this.numbers = generate();
 	}
 
-	public Lotto(List<Integer> numbers) {
+	public Lotto(List<LottoNum> numbers) {
 		if (!isValidNumbersSize(numbers)) {
 			throw new InvalidLottoNumberQuantityException(ErrorMessage.LOTTO_NUMBERS_QUANTITY_MUST_BE_SIX);
 		}
@@ -29,17 +29,18 @@ public class Lotto implements LottoGenerate {
 		this.numbers = numbers;
 	}
 
-	private boolean isValidNumbersSize(List<Integer> numbers) {
+	private boolean isValidNumbersSize(List<LottoNum> numbers) {
 		return numbers.size() == LOTTO_NUMBER_QUANTITY;
 	}
 
-	private boolean isValidDistinctNumbers(List<Integer> numbers) {
+	private boolean isValidDistinctNumbers(List<LottoNum> numbers) {
 		return numbers.size() == numbers.stream().distinct().count();
 	}
 
-	public List<Integer> generate() {
-		final List<Integer> candidates = IntStream.rangeClosed(1, 45)
+	public List<LottoNum> generate() {
+		final List<LottoNum> candidates = IntStream.rangeClosed(1, 45)
 			.boxed()
+			.map(LottoNum::of)
 			.collect(Collectors.toList());
 
 		Collections.shuffle(candidates);
@@ -47,23 +48,23 @@ public class Lotto implements LottoGenerate {
 		return candidates.subList(0, LOTTO_NUMBER_QUANTITY);
 	}
 
-	public List<Integer> getNumbers() {
+	public List<LottoNum> getNumbers() {
 		return numbers;
 	}
 
-	public int getMatchingCount(List<Integer> winningNumbers) {
+	public int getMatchingCount(List<LottoNum> winningNumbers) {
 		return (int)IntStream.range(0, winningNumbers.size())
 			.filter(i -> numbers.contains(winningNumbers.get(i)))
 			.count();
 	}
 
-	public boolean hasBonusNumber(int bonusNumber) {
+	public boolean hasBonusNumber(LottoNum bonusNumber) {
 		return numbers.contains(bonusNumber);
 	}
 
 	@Override
 	public String toString() {
-		List<Integer> sortedNumbers = numbers.stream().sorted().collect(Collectors.toList());
+		List<Integer> sortedNumbers = numbers.stream().map(LottoNum::getValue).sorted().collect(Collectors.toList());
 		return sortedNumbers.toString();
 	}
 }
