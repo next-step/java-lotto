@@ -1,50 +1,39 @@
 package calculator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class OperandTest {
+
+
     @Test
-    void parsingTest1() {
-
-        String origin = "1;2;3";
-        String seperator = ";";
-
-        List<Operand> operands = Operand.parseOperand(origin, seperator);
-
-        for (Operand o : operands) {
-            System.out.println(o.getOperand());
-        }
-
+    void negativeValueCheckTest() {
+        String[] str = {"1", "-1", "923"};
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(
+            () -> Operand.parseOperand(str));
     }
 
     @Test
-    void parsingTest2() {
+    void normalParsingOperationTest() {
+        String str = "1,2,3";
 
-        String origin = "//[\\n1[2[3";
-        String seperator = "[";
+        List<Operand> operandList = new ArrayList<>();
+        operandList.add(new Operand(1));
+        operandList.add(new Operand(2));
+        operandList.add(new Operand(3));
 
-        List<Operand> operands = Operand.parseOperand(origin, seperator);
+        Operands operands = new Operands(Operand.parseOperand(str.split(",")));
 
-        for (Operand o : operands) {
-            System.out.println(o.getOperand());
-        }
-
-    }
-
-    @Test
-    void parsingTest3() {
-
-        String origin = "//*\\n1*2*3";
-        String seperator = "\\*";
-
-        List<Operand> operands = Operand.parseOperand(origin, seperator);
-
-        for (Operand o : operands) {
-            System.out.println(o.getOperand());
-        }
+        assertThat(operands.operandList.get(0).getOperand()).isEqualTo(
+            operandList.get(0).getOperand());
+        assertThat(operands.operandList.get(1).getOperand()).isEqualTo(
+            operandList.get(1).getOperand());
+        assertThat(operands.operandList.get(2).getOperand()).isEqualTo(
+            operandList.get(2).getOperand());
 
     }
 }
