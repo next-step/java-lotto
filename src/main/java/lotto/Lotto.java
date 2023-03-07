@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.*;
 import java.util.concurrent.Flow;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
@@ -36,8 +38,21 @@ public class Lotto {
         String test2 =test.replace(" ","");
         System.out.println(test2);
         String[] test3 = test2.split(",");
+        List<Integer> test4= Arrays.stream(test3).map(Integer::parseInt).collect(Collectors.toList());
         System.out.println("보너스 볼을 입력해 주세요..");
         int bonusBall = 7;
+        System.out.println(bonusBall);
+        System.out.println("당첨 통계");
+        Map<LottoType ,Long> ga = lottoObjects.stream().map(object ->{
+            return object.contains(test4,bonusBall);})
+                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                .entrySet()
+                .stream().collect( Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        System.out.println(ga.toString());
+
+
+
     }
 
     public static   void arrayList(List<LottoObject> list){
