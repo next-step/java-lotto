@@ -5,7 +5,6 @@ import lotto.domain.enums.LottoRank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -45,10 +44,6 @@ public class LottoTicket {
 
         boolean hasBonus = hasBonusNumber(bonusNumber);
         return LottoRank.findRank(totalCount, hasBonus);
-    }
-
-    public int getHitBonusCount(int number) {
-        return checkHit(number);
     }
 
     private int checkHit(int number) {

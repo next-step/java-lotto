@@ -1,9 +1,13 @@
 package lotto.domain;
 
+import lotto.domain.enums.LottoRank;
+import lotto.ui.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,18 +36,40 @@ class LottoTicketsTest {
         tickets.add(new LottoTicket(List.of(13, 14, 18, 21, 23, 35)));
         tickets.add(new LottoTicket(List.of(17, 21, 29, 37, 42, 45)));
         tickets.add(new LottoTicket(List.of(3, 8, 27, 30, 35, 44)));
+        tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 33)));
         lottoTickets = new LottoTickets(tickets);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,7,33"})
+    void 지난주_당첨번호와_보너스_번호를_입력받는다(String numbers) {
+
+        //given
+        List<Integer> lottoNumbers = new ArrayList<>();
+        String[] numberArrays = numbers.split(",");
+
+        //when
+        for (String number : numberArrays) {
+            lottoNumbers.add(Integer.parseInt(number));
+        }
+
+        //then
+        assertThat(lottoNumbers).containsExactly(1, 2, 3, 4, 7,33);
+        assertThat(lottoNumbers).hasSize(6);
+     }
 
     @Test
     void 당첨통계를_구한다() {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 37);
+        int bonusNumber = 37;
 
         // when
-        lottoTickets.findWinningStatistics(numbers, bonusNumber);
+        LottoResult result = lottoTickets.findWinningStatistics(numbers, bonusNumber);
 
         //then
+        assertThat(result.findHitCount(LottoRank.THREE_HIT)).isEqualTo(1);
+        assertThat(result.findHitCount(LottoRank.FIVE_HIT)).isEqualTo(1);
+        assertThat(result.findHitCount(LottoRank.FIVE_HIT_WITH_BONUS)).isEqualTo(0);
     }
 }

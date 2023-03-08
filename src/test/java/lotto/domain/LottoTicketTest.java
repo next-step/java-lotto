@@ -23,19 +23,6 @@ class LottoTicketTest {
     }
 
     @Test
-    void 로또순위를_조회한다() {
-        // given
-        int hit = 3;
-        boolean isHitBonus = false;
-
-        //when
-        LottoRank rank = LottoRank.findRank(hit, isHitBonus);
-
-        //then
-        assertThat(rank).isEqualTo(LottoRank.THREE_HIT);
-    }
-
-    @Test
     void 당첨번호_개수를_구한다() {
         //given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);

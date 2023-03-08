@@ -1,14 +1,20 @@
 package lotto.domain;
 
 import lotto.domain.enums.LottoRank;
+import lotto.ui.LottoResult;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoTickets {
+
+    private static final int LOTTO_PRICE = 1000;
 
     private final List<LottoTicket> tickets;
 
@@ -30,7 +36,7 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public void findWinningStatistics(List<Integer> numbers, int bonusNumber) {
+    public LottoResult findWinningStatistics(List<Integer> numbers, int bonusNumber) {
 
         Map<LottoRank, Integer> ranks = new HashMap<>();
 
@@ -39,15 +45,25 @@ public class LottoTickets {
             ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
         });
 
+        ranks.remove(null);
+
+        printWinningStatistics(ranks);
+
+        return new LottoResult(ranks);
+    }
+
+    private void printWinningStatistics(Map<LottoRank, Integer> ranks) {
         StringBuilder sb = new StringBuilder();
 
         Arrays.stream(LottoRank.values())
-                        .forEach(rank -> {
-                            String result = createResult(ranks, rank);
-                            sb.append(result).append("\n");
-                        });
+                .forEach(rank -> {
+                    String result = createResult(ranks, rank);
+                    sb.append(result).append("\n");
+                });
 
-        System.out.println(sb.toString());
+        BigDecimal totalRate = calcTotalRate(ranks);
+        sb.append("총 수익률은 ").append(calcTotalRate(ranks)).append("% 입니다.").append("\n");
+        System.out.println(sb);
     }
 
     private String createResult(Map<LottoRank, Integer> ranks, LottoRank rank) {
@@ -57,5 +73,21 @@ public class LottoTickets {
             count = integer;
         }
         return String.format("%s- %d개", rank, count);
+    }
+
+    public BigDecimal calcTotalRate(Map<LottoRank, Integer> ranks) {
+        BigDecimal buyingPrice = new BigDecimal(size() * LOTTO_PRICE);
+        int sum = 0;
+
+        Set<LottoRank> lottoRanks = ranks.keySet();
+
+        for (LottoRank lottoRank : lottoRanks) {
+            int hitCount = ranks.get(lottoRank);
+            int rewarding = lottoRank.getRewarding();
+            sum += rewarding * hitCount;
+        }
+
+        BigDecimal totalRewarding = new BigDecimal(sum);
+        return totalRewarding.divide(buyingPrice, 2, RoundingMode.DOWN);
     }
 }
