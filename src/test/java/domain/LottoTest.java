@@ -8,14 +8,19 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.hamcrest.CoreMatchers.is;
 
 import domain.Lotto;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class LottoTest {
     // 구입금액을 입력해 주세요.
     // 14000
@@ -96,17 +101,43 @@ public class LottoTest {
         assertThat(number.getLottoNumber(), is(1));
     }
 
-    @DisplayName("숫자 0 입력시 lottoNumber 오류 확인")
+    @DisplayName("숫자 0,-1 입력시 lottoNumber 오류 확인")
     @ParameterizedTest
     @ValueSource(ints = { 0, -1 })
     void lottoNumberZeroTest(int input) {
-        // assertThat(new LottoNumber(input), is);
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumber(input));
 
     }
 
-    @Test
-    void test123() {
+    @DisplayName("45 이상 숫자 입력시 lottoNumber 오류 확인")
+    @ParameterizedTest
+    @ValueSource(ints = { 0, -1 })
+    void lottoNumberOver45Test(int input) {
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumber(input));
+    }
 
+    @DisplayName("LottoReward Enum 테스트")
+    @Test
+    void lottoEnumTest() {
+        LottoReward reward3 = LottoReward.valueOf("THREE");
+        assertThat(reward3.getRewardCount(), is("3개 일치"));
+        assertThat(reward3.getRewardAmount(), is("5000원"));
+
+        LottoReward reward4 = LottoReward.valueOf("FOUR");
+        assertThat(reward4.getRewardCount(), is("4개 일치"));
+        assertThat(reward4.getRewardAmount(), is("50000원"));
+
+        LottoReward reward5 = LottoReward.valueOf("FIVE");
+        assertThat(reward5.getRewardCount(), is("5개 일치"));
+        assertThat(reward5.getRewardAmount(), is("1500000원"));
+
+        LottoReward reward5WithBonus = LottoReward.valueOf("FIVE_WITH_BONUS");
+        assertThat(reward5WithBonus.getRewardCount(), is("5개 일치, 보너스 볼 일치"));
+        assertThat(reward5WithBonus.getRewardAmount(), is("30000000원"));
+
+        LottoReward reward6 = LottoReward.valueOf("SIX");
+        assertThat(reward6.getRewardCount(), is("6개 일치"));
+        assertThat(reward6.getRewardAmount(), is("2000000000원"));
     }
 
 }
