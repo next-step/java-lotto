@@ -2,16 +2,10 @@ package domain;
 
 public class LottoRank {
     LottoRankAmount lottoRankAmount;
-    LottoBonusState lottoBonusState;
 
     public LottoRank(int matchCount, boolean withBonusYn) {
-        // if (matchCount <= 2)
-        // lottoRankAmount = LottoRankAmount.SIXTH;
-        // if (matchCount == 3)
-        // lottoRankAmount = LottoRankAmount.FIFTH;
-        // if ()
-        this.lottoBonusState = getLottoBonusState(matchCount, withBonusYn);
-        this.lottoRankAmount = getLottoRankAmount(matchCount, this.lottoBonusState);
+        LottoBonusState bonusState = getLottoBonusState(matchCount, withBonusYn);
+        this.lottoRankAmount = getLottoRankAmount(matchCount, bonusState);
     }
 
     private LottoRankAmount getLottoRankAmount(int matchCount, LottoBonusState lottoBonusState) {
@@ -19,10 +13,18 @@ public class LottoRank {
             return LottoRankAmount.FIFTH;
 
         if (matchCount == 4)
+            return LottoRankAmount.FOURTH;
+
+        if (matchCount == 5 && lottoBonusState == LottoBonusState.NO)
             return LottoRankAmount.THIRD;
 
-        return LottoRankAmount.SIXTH;
+        if (matchCount == 5 && lottoBonusState == LottoBonusState.YES)
+            return LottoRankAmount.SECOND;
 
+        if (matchCount == 6)
+            return LottoRankAmount.FIRST;
+
+        return LottoRankAmount.SIXTH;
     }
 
     LottoBonusState getLottoBonusState(int matchCount, boolean withBonusYn) {

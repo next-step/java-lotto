@@ -2,6 +2,8 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.hamcrest.CoreMatchers.is;
 
 import domain.Lotto;
+import view.InputView;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class LottoTest {
@@ -60,20 +63,32 @@ public class LottoTest {
     void getLottoNumber() {
         lottoList = new ArrayList<Lotto>();
 
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("8, 21, 23, 41, 42, 43")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("3, 5, 11, 16, 32, 38")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("7, 11, 16, 35, 36, 44")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("1, 8, 11, 31, 41, 42")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("13, 14, 16, 38, 42, 45")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("7, 11, 30, 40, 42, 43")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("2, 13, 22, 32, 38, 45")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("23, 25, 33, 36, 39, 41")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("1, 3, 5, 14, 22, 45")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("5, 9, 38, 41, 43, 44")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("2, 8, 9, 18, 19, 21")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("13, 14, 18, 21, 23, 35")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("17, 21, 29, 37, 42, 45")));
-        lottoList.add(new Lotto(LottoUtil.stringSplitToList("3, 8, 27, 30, 35, 44")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("8, 21, 23, 41, 42,
+        // 43")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("3, 5, 11, 16, 32,
+        // 38")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("7, 11, 16, 35, 36,
+        // 44")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("1, 8, 11, 31, 41,
+        // 42")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("13, 14, 16, 38, 42,
+        // 45")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("7, 11, 30, 40, 42,
+        // 43")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("2, 13, 22, 32, 38,
+        // 45")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("23, 25, 33, 36, 39,
+        // 41")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("1, 3, 5, 14, 22, 45")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("5, 9, 38, 41, 43,
+        // 44")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("2, 8, 9, 18, 19, 21")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("13, 14, 18, 21, 23,
+        // 35")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("17, 21, 29, 37, 42,
+        // 45")));
+        // lottoList.add(new Lotto(LottoUtil.stringSplitToList("3, 8, 27, 30, 35,
+        // 44")));
 
         // [8, 21, 23, 41, 42, 43]
         // [3, 5, 11, 16, 32, 38]
@@ -116,28 +131,64 @@ public class LottoTest {
         assertThrows(IllegalArgumentException.class, () -> new LottoNumber(input));
     }
 
-    @DisplayName("LottoReward Enum 테스트")
     @Test
-    void lottoEnumTest() {
-        LottoReward reward3 = LottoReward.valueOf("THREE");
-        assertThat(reward3.getRewardCount(), is("3개 일치"));
-        assertThat(reward3.getRewardAmount(), is("5000원"));
+    void test123() {
+        int num[] = { 1, 2, 3, 4 };
+        Collections.shuffle(Arrays.asList(num));
 
-        LottoReward reward4 = LottoReward.valueOf("FOUR");
-        assertThat(reward4.getRewardCount(), is("4개 일치"));
-        assertThat(reward4.getRewardAmount(), is("50000원"));
+        System.out.println(Arrays.toString(num));
+        Collections.shuffle(Arrays.asList(num));
 
-        LottoReward reward5 = LottoReward.valueOf("FIVE");
-        assertThat(reward5.getRewardCount(), is("5개 일치"));
-        assertThat(reward5.getRewardAmount(), is("1500000원"));
+        System.out.println(Arrays.toString(num));
+    }
 
-        LottoReward reward5WithBonus = LottoReward.valueOf("FIVE_WITH_BONUS");
-        assertThat(reward5WithBonus.getRewardCount(), is("5개 일치, 보너스 볼 일치"));
-        assertThat(reward5WithBonus.getRewardAmount(), is("30000000원"));
+    @Test
+    void setLottoNumberTest() {
+        // var lotto = new Lotto();
+        // lotto.setLottoNumber();
+        // lotto.getLottoNumber().forEach(System.out::println);
 
-        LottoReward reward6 = LottoReward.valueOf("SIX");
-        assertThat(reward6.getRewardCount(), is("6개 일치"));
-        assertThat(reward6.getRewardAmount(), is("2000000000원"));
+        LottoNumberList lottoNumberList = new LottoNumberList();
+        List<LottoNumber> lottoNumber = LottoNumberList.getLottoNumberList();
+        Collections.shuffle(lottoNumber);
+        // lottoNumber.subList(0, 6).stream()
+        // .sorted().toList();
+        lottoNumber.subList(0, 6).forEach(it -> System.out.println(it.getLottoNumber()));
+
+        System.out.println("=====================================");
+
+        List<LottoNumber> newNumber = lottoNumber.subList(0, 6);
+        // Collections.sort(newNumber, new Comparator<LottoNumber>() {
+        // @Override
+        // public int compare(LottoNumber o1, LottoNumber o2) {
+        // return o1.getLottoNumber() - o2.getLottoNumber();
+        // }
+        // });
+        Collections.sort(lottoNumber.subList(0, 6), (o1, o2) -> o1.number - o2.number);
+        newNumber.forEach(it -> System.out.println(it.getLottoNumber()));
+    }
+
+    @DisplayName("로또 출력 테스트")
+    @Test
+    void printLottoTest() {
+        Lotto lotto = new Lotto();
+        InputView.printLotto(lotto);
+
+        lotto = new Lotto();
+        InputView.printLotto(lotto);
+
+        lotto = new Lotto();
+        InputView.printLotto(lotto);
+
+        lotto = new Lotto();
+        InputView.printLotto(lotto);
+
+        lotto = new Lotto();
+        InputView.printLotto(lotto);
+
+        lotto = new Lotto();
+        InputView.printLotto(lotto);
+
     }
 
 }
