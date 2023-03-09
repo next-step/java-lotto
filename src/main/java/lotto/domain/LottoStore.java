@@ -5,11 +5,11 @@ public class LottoStore {
     private static final int LOTTO_PRICE = 1000;
 
     public LottoTickets buyLotto(int price) {
-        int ticketCount = calLottoTicketCount(price);
+        int ticketCount = calculateLottoTicketCount(price);
         return LottoTickets.of(ticketCount);
     }
 
-    protected int calLottoTicketCount(int price) {
+    protected int calculateLottoTicketCount(int price) {
         checkPrice(price);
         return price / LOTTO_PRICE;
     }

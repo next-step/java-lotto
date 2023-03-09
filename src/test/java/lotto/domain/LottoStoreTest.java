@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -12,32 +13,41 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoStoreTest {
 
-    @ParameterizedTest
-    @CsvSource(value = {"14000:14", "5300:5", "1000:1"}, delimiter = ':')
-    void 구매금액만큼_로또개수를_검증한다(int price, int expected) {
-        // happy case
-        LottoStore store = new LottoStore() {
+    private LottoStore store;
+
+    @BeforeEach
+    public void setUp() {
+        store = new LottoStore() {
             @Override
-            protected int calLottoTicketCount(int price) {
-                return super.calLottoTicketCount(price);
+            protected int calculateLottoTicketCount(int price) {
+                return super.calculateLottoTicketCount(price);
             }
         };
+    }
 
-        int actual = store.calLottoTicketCount(price);
+    @ParameterizedTest
+    @CsvSource(value = {"14000:14", "5300:5"}, delimiter = ':')
+    void 구매금액만큼_로또개수를_검증한다(int price, int expected) {
+        // when
+        int actual = store.calculateLottoTicketCount(price);
 
+        // then
         assertThat(actual).isEqualTo(expected);
+    }
 
+    @ParameterizedTest
+    @CsvSource(value = {"900:1"}, delimiter = ':')
+    void 구매금액이_부족하면_예외가_발생한다(int price, int expected) {
         // sad case
-        assertThatThrownBy(() -> store.calLottoTicketCount(900))
+        assertThatThrownBy(() -> store.calculateLottoTicketCount(900))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 로또_티켓을_구매한다() {
-
         // given
         int price = 14000;
-        LottoStore store = new LottoStore();
+
 
         // when
         LottoTickets tickets = store.buyLotto(price);

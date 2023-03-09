@@ -65,7 +65,9 @@ class LottoTicketsTest {
         int bonusNumber = 37;
 
         // when
-        LottoResult result = lottoTickets.findWinningStatistics(numbers, bonusNumber);
+        LottoResult result = lottoTickets.createLottoResult(numbers, bonusNumber);
+
+        result.printWinningStatistics();
 
         //then
         assertThat(result.findHitCount(LottoRank.THREE_HIT)).isEqualTo(1);

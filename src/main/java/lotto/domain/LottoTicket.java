@@ -16,7 +16,6 @@ public class LottoTicket {
 
     public static LottoTicket create() {
         List<Integer> ticket = createLottoTicket();
-        System.out.println("로또 티켓 생성: " + ticket);
         return new LottoTicket(ticket);
     }
 
