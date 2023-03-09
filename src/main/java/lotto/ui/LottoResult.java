@@ -37,12 +37,7 @@ public class LottoResult {
     }
 
     private String createResult(Map<LottoRank, Integer> ranks, LottoRank rank) {
-        Integer integer = ranks.get(rank);
-        int count = 0;
-        if (integer != null) {
-            count = integer;
-        }
-        return String.format("%s- %d개", rank, count);
+        return String.format("%s- %d개", rank, ranks.getOrDefault(rank, 0));
     }
 
     public BigDecimal calculateTotalRate(Map<LottoRank, Integer> ranks) {
