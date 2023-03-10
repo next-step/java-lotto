@@ -9,7 +9,7 @@ import pluscalculator.domain.PlusCalculator;
 
 public class PlusCalculatorTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
     @CsvSource({"'11,55,44', 110",
             "'1,2,3', 6"})
     @DisplayName("쉼표를 포함한 문자열을 분리해서 계산한다.")
@@ -21,7 +21,7 @@ public class PlusCalculatorTest {
         Assertions.assertThat(sum).isEqualTo(expectValue);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
     @CsvSource({"'11:55:44', 110",
             "'1:2:3', 6"})
     @DisplayName("콜론을 포함한 문자열을 분리해서 계산한다.")
@@ -32,4 +32,17 @@ public class PlusCalculatorTest {
 
         Assertions.assertThat(sum).isEqualTo(expectValue);
     }
+
+    @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
+    @CsvSource({"'11,55:44', 110",
+            "'1:2,3', 6"})
+    @DisplayName("쉼표와 콜론을 포함한 문자열을 분리해서 계산한다.")
+    void colonCommaSplit(String plusExpression, int expectValue) {
+
+        Numbers numbers = PlusCalculator.extractNumbers(plusExpression);
+        int sum = numbers.plusAll();
+
+        Assertions.assertThat(sum).isEqualTo(expectValue);
+    }
+
 }
