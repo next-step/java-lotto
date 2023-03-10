@@ -24,8 +24,8 @@ public class LottoGenerator {
      */
     public Lotto generate() {
         Collections.shuffle(numbers);
-        List<Integer> generatedLotto = numbers.subList(0, 7);
-        System.out.println(generatedLotto);
+        List<Integer> generatedLotto = numbers.subList(0, 6);
+        //System.out.println(generatedLotto); // 뷰 클래스로 분리. toString() 으로 로또 받아서 변환 후 출력.
         return new Lotto(generatedLotto);
     }
 }

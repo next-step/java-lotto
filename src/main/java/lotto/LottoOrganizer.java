@@ -129,12 +129,15 @@ public class LottoOrganizer {
      * @param wallet 사용자 지갑
      * @param budget 금액
      */
-    public void printCustomerLottoResult(Wallet wallet, int budget) {
+    public void printCustomerLottoResult(Wallet wallet, int budget) { // 지갑에 최초 예산 금액 저장하기.
         System.out.println("");
         System.out.println("당첨 통계");
         System.out.println("---------");
+        // 총 상금 -> 뷰 클래스 분리
+        int income = view.getTotalPrize(Wallet wallet, budget);
         int income = wallet.getLottos().stream().map(i -> i.getThisLottoGrade().prize)
             .mapToInt(i -> i).sum();
+        // 등수 몇개 맞았는지
         Arrays.stream(LottoGrade.values()).sorted().filter(i -> !i.equals(LottoGrade.NO_GRADE))
             .forEach(lottoGrade -> {
                 lottoGrade.printLottoValue();
@@ -143,6 +146,7 @@ public class LottoOrganizer {
                     + "개");
                 System.out.println("");
             });
+        // 수익률
         System.out.println(
             "총 수익률은 " + new DecimalFormat("#.##").format(Long.valueOf(income / budget))
                 + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");

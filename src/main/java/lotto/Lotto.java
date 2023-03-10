@@ -37,4 +37,6 @@ public class Lotto {
     public LottoGrade getThisLottoGrade() {
         return grade;
     }
+
+    // toString() 추가
 }
