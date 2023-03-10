@@ -20,4 +20,16 @@ public class PlusCalculatorTest {
 
         Assertions.assertThat(sum).isEqualTo(expectValue);
     }
+
+    @ParameterizedTest
+    @CsvSource({"'11:55:44', 110",
+            "'1:2:3', 6"})
+    @DisplayName("콜론을 포함한 문자열을 분리해서 계산한다.")
+    void colonSplit(String plusExpression, int expectValue) {
+
+        Numbers numbers = PlusCalculator.extractNumbers(plusExpression);
+        int sum = numbers.plusAll();
+
+        Assertions.assertThat(sum).isEqualTo(expectValue);
+    }
 }
