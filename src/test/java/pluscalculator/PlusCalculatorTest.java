@@ -14,11 +14,7 @@ public class PlusCalculatorTest {
             "'1,2,3', 6"})
     @DisplayName("쉼표를 포함한 문자열을 분리해서 계산한다.")
     void commaSplit(String plusExpression, int expectValue) {
-
-        Numbers numbers = PlusCalculator.extractNumbers(plusExpression);
-        int sum = numbers.plusAll();
-
-        Assertions.assertThat(sum).isEqualTo(expectValue);
+        Assertions.assertThat(PlusCalculator.plusCalculate(plusExpression)).isEqualTo(expectValue);
     }
 
     @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
@@ -26,11 +22,7 @@ public class PlusCalculatorTest {
             "'1:2:3', 6"})
     @DisplayName("콜론을 포함한 문자열을 분리해서 계산한다.")
     void colonSplit(String plusExpression, int expectValue) {
-
-        Numbers numbers = PlusCalculator.extractNumbers(plusExpression);
-        int sum = numbers.plusAll();
-
-        Assertions.assertThat(sum).isEqualTo(expectValue);
+        Assertions.assertThat(PlusCalculator.plusCalculate(plusExpression)).isEqualTo(expectValue);
     }
 
     @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
