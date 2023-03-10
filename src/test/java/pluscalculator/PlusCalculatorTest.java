@@ -4,30 +4,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import pluscalculator.domain.Numbers;
+import pluscalculator.domain.PlusCalculator;
 
 public class PlusCalculatorTest {
-    static class PlusCalculator {
-        public static Numbers extractNumbers(final String plusExpression) {
-            String[] splitNumbers = plusExpression.split(",");
-            return new Numbers(Arrays.stream(splitNumbers).map(Integer::parseInt).collect(Collectors.toList()));
-        }
-    }
-
-    static class Numbers {
-        private final List<Integer> numbers;
-
-        public Numbers(List<Integer> numbers) {
-            this.numbers = numbers;
-        }
-
-        public int plusAll() {
-            return numbers.stream().reduce(0, Integer::sum);
-        }
-    }
 
     @ParameterizedTest
     @CsvSource({"'11,55,44', 110",
