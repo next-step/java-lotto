@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private List<Integer> ticket;
+    private final List<Integer> ticket;
 
     protected LottoTicket(List<Integer> ticket) {
         this.ticket = ticket;
@@ -17,6 +17,10 @@ public class LottoTicket {
     public static LottoTicket create() {
         List<Integer> ticket = createLottoTicket();
         return new LottoTicket(ticket);
+    }
+
+    public static LottoTicket of(final List<Integer> numbers) {
+        return new LottoTicket(numbers);
     }
 
     private static List<Integer> createLottoTicket() {
@@ -34,7 +38,7 @@ public class LottoTicket {
         return ticket.size();
     }
 
-    public LottoRank getHitCount(List<Integer> numbers, int bonusNumber) {
+    public LottoRank getHitCount(final List<Integer> numbers, final int bonusNumber) {
         int totalCount = 0;
 
         for (int number : numbers) {
@@ -45,15 +49,15 @@ public class LottoTicket {
         return LottoRank.findRank(totalCount, hasBonus);
     }
 
-    private int checkHit(int number) {
+    private int checkHit(final int number) {
         return isContain(number) ? 1 : 0;
     }
 
-    public boolean hasBonusNumber(int number) {
+    public boolean hasBonusNumber(final int number) {
         return isContain(number);
     }
 
-    private boolean isContain(int number) {
+    private boolean isContain(final int number) {
         return this.ticket.contains(number);
     }
 }

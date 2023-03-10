@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.ui.LottoRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -17,42 +18,32 @@ class LottoStoreTest {
 
     @BeforeEach
     public void setUp() {
-        store = new LottoStore() {
-            @Override
-            protected int calculateLottoTicketCount(int price) {
-                return super.calculateLottoTicketCount(price);
-            }
-        };
+        store = new LottoStore();
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"14000:14", "5300:5"}, delimiter = ':')
-    void 구매금액만큼_로또개수를_검증한다(int price, int expected) {
+    @CsvSource(value = {"14000:14:auto", "5300:5:auto"}, delimiter = ':')
+    void 로또개수를_구한다(int price, int lottoNumber, String type) {
+        // given
+        LottoRequest request = new LottoRequest(price, type);
+
         // when
-        int actual = store.calculateLottoTicketCount(price);
+        LottoTickets tickets = store.buyLotto(request);
 
         // then
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"900:1"}, delimiter = ':')
-    void 구매금액이_부족하면_예외가_발생한다(int price, int expected) {
-        // sad case
-        assertThatThrownBy(() -> store.calculateLottoTicketCount(900))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(tickets.size()).isEqualTo(lottoNumber);
     }
 
     @Test
-    void 로또_티켓을_구매한다() {
+    void 구매금액이_부족하면_예외가_발생한다() {
+
         // given
-        int price = 14000;
+        int price = 900;
+        String type = "auto";
+        LottoRequest request = new LottoRequest(price, type);
 
-
-        // when
-        LottoTickets tickets = store.buyLotto(price);
-
-        // then
-        assertThat(tickets.size()).isEqualTo(14);
+        // sad case
+        assertThatThrownBy(() -> store.buyLotto(request))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
