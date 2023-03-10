@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import pluscalculator.domain.Numbers;
 import pluscalculator.domain.PlusCalculator;
 
@@ -30,11 +32,15 @@ public class PlusCalculatorTest {
             "'1:2,3', 6"})
     @DisplayName("쉼표와 콜론을 포함한 문자열을 분리해서 계산한다.")
     void colonCommaSplit(String plusExpression, int expectValue) {
+        Assertions.assertThat(PlusCalculator.plusCalculate(plusExpression)).isEqualTo(expectValue);
+    }
 
-        Numbers numbers = PlusCalculator.extractNumbers(plusExpression);
-        int sum = numbers.plusAll();
-
-        Assertions.assertThat(sum).isEqualTo(expectValue);
+    @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
+    @ValueSource(strings = {" " })
+    @NullSource
+    @DisplayName("빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다.")
+    void nullValue(String plusExpression) {
+        Assertions.assertThat(PlusCalculator.plusCalculate(plusExpression)).isZero();
     }
 
 }

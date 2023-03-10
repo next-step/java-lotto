@@ -13,6 +13,11 @@ public class PlusCalculator {
     }
 
     private static Numbers extractNumbers(final String plusExpression) {
+
+        if (plusExpression == null || plusExpression.isBlank()) {
+            return new Numbers();
+        }
+
         String[] splitNumbers = separatorPattern.split(plusExpression);
         return new Numbers(Arrays.stream(splitNumbers).map(Integer::parseInt).collect(Collectors.toList()));
     }
