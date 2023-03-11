@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Numbers {
-    private static Integer DEFAULT_VALUE = 0;
-    private static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
+    private static Double DEFAULT_VALUE = 0.0;
+    private static Pattern NUMBER_PATTERN = Pattern.compile("[(0-9|.)]+");
 
-    private final List<Integer> numbers;
+    private final List<Double> numbers;
 
     public Numbers() {
         numbers = List.of(DEFAULT_VALUE);
@@ -19,10 +19,10 @@ public class Numbers {
             throw new RuntimeException();
         }
 
-        this.numbers = numbers.stream().map(Integer::parseInt).collect(Collectors.toList());
+        this.numbers = numbers.stream().map(Double::parseDouble).collect(Collectors.toList());
     }
 
-    public int plusAll() {
-        return numbers.stream().reduce(0, Integer::sum);
+    public double plusAll() {
+        return numbers.stream().reduce(0.0, Double::sum);
     }
 }

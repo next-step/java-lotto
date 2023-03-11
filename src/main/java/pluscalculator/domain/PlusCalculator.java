@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class PlusCalculator {
    static Separators DEFAULT_SEPARATORS = new Separators(Set.of(",", ":"));
-    public static int plusCalculate(final String plusExpression) {
+    public static double plusCalculate(final String plusExpression) {
         Numbers numbers = extractNumbers(plusExpression);
         return numbers.plusAll();
     }

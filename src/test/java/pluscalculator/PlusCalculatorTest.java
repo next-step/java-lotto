@@ -64,4 +64,12 @@ public class PlusCalculatorTest {
     void minusContainException(String plusExpression) {
         Assertions.assertThatThrownBy(() -> PlusCalculator.plusCalculate(plusExpression)).isInstanceOf(RuntimeException.class);
     }
+
+    @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
+    @CsvSource({"'//;\n11.0;55.0;44.0', 110.0",
+            "'//!\n11.5,55.5,44.0', 111"})
+    @DisplayName("문자열에서 소수점은 허용한다.")
+    void decimalPoint(String plusExpression, double expectValue) {
+        Assertions.assertThat(PlusCalculator.plusCalculate(plusExpression)).isEqualTo(expectValue);
+    }
 }
