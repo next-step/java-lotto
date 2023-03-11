@@ -1,9 +1,6 @@
 package pluscalculator.domain;
 
-import java.util.Arrays;
 import java.util.Set;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class PlusCalculator {
    static Separators DEFAULT_SEPARATORS = new Separators(Set.of(",", ":"));
@@ -11,13 +8,12 @@ public class PlusCalculator {
         Numbers numbers = extractNumbers(plusExpression);
         return numbers.plusAll();
     }
-
-    private static Pattern getSeparatorPattern(String plusExpression) {
-        if (plusExpression.contains("//")&&plusExpression.contains("\n")) {
+    private static Separators getSeparators(final String plusExpression) {
+        if (plusExpression.contains("//") && plusExpression.contains("\n")) {
             String customSeparator = plusExpression.replaceAll("[(\n)].*", "").replaceAll("[//$]", "");
-            return DEFAULT_SEPARATORS.add(customSeparator).toRegexPattern();
+            return DEFAULT_SEPARATORS.add(customSeparator);
         }
-        return DEFAULT_SEPARATORS.toRegexPattern();
+        return DEFAULT_SEPARATORS;
     }
 
     private static Numbers extractNumbers( final String plusExpression) {
@@ -25,12 +21,11 @@ public class PlusCalculator {
             return new Numbers();
         }
 
-        Pattern separatorPattern = getSeparatorPattern(plusExpression);
-        String[] splitNumbers = separatorPattern.split(cleaningExpression(plusExpression));
-        return new Numbers(Arrays.stream(splitNumbers).map(Integer::parseInt).collect(Collectors.toList()));
+        Separators separators = getSeparators(plusExpression);
+        return separators.getSplitResult(cleaningCustomSeparatorsExpression(plusExpression));
     }
 
-    private static String cleaningExpression(String plusExpression) {
+    private static String cleaningCustomSeparatorsExpression(final String plusExpression) {
         return plusExpression.replaceAll("^[//].*[$\n]", "");
     }
 

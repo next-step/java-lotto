@@ -50,4 +50,12 @@ public class PlusCalculatorTest {
 
         Assertions.assertThat(PlusCalculator.plusCalculate(plusExpression)).isEqualTo(expectValue);
     }
+
+    @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
+    @CsvSource({"'//;\n11!55!44', 110",
+            "'//!\n11*55*44', 110"})
+    @DisplayName("구분자를 제외하고 숫자이외의 값이 있으면 RuntimeException 예외를 throw 한다.")
+    void withoutSplit(String plusExpression, int expectValue) {
+        Assertions.assertThatThrownBy(() -> PlusCalculator.plusCalculate(plusExpression)).isInstanceOf(RuntimeException.class);
+    }
 }
