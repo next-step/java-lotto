@@ -29,7 +29,7 @@ public class TextCalculatorTest {
 
     @DisplayName(value = "쉼표 또는 콜론을 구분자로 숫자가 들어온 경우 해당 숫자의 합을 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2","1:2"})
+    @ValueSource(strings = {"1,2", "1:2"})
     void manyNumber(final String text) {
         assertThat(calculator.add(text)).isSameAs(3);
     }
@@ -39,5 +39,13 @@ public class TextCalculatorTest {
     @ValueSource(strings = {"//#\n1#2", "//@\n1@2"})
     void manyNumberUseSomeSeperator(final String text) {
         assertThat(calculator.add(text)).isSameAs(3);
+    }
+
+    @DisplayName(value = "문자열 계산기에 숫자이외의 값이나 음수가 들어온 경우 RuntimeException 예외를 throw 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "ㄱㅈㅇ"})
+    void TestRuntimeExcpetion(final String text) {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> calculator.add(text));
     }
 }

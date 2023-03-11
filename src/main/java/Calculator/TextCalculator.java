@@ -23,6 +23,9 @@ public class TextCalculator {
     private int sum(String[] numbers) {
         int sumNumber = 0;
         for (int i = 0; i < numbers.length; i++) {
+            if(Integer.parseInt(numbers[i]) < 0){
+                throw new RuntimeException();
+            }
             sumNumber += Integer.parseInt(numbers[i]);
         }
         return sumNumber;
