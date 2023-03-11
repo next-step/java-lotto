@@ -11,6 +11,6 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return lottoBalls.stream().map(LottoBall::getNumber).collect(Collectors.toList());
+        return lottoBalls.stream().map(LottoBall::getNumber).sorted().collect(Collectors.toList());
     }
 }

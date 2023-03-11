@@ -31,5 +31,11 @@ public class LottoTest {
         Assertions.assertThat(lotto.getNumbers()).hasSize(6);
     }
 
+    @DisplayName("추출된 숫자를 정렬한다.")
+    @Test
+    void getSortedRandomNumber() {
+        Lotto lotto = new Lotto();
+        Assertions.assertThat(lotto.getNumbers()).isSorted();
+    }
 
 }

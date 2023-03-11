@@ -17,6 +17,7 @@ public enum LottoBall {
     LottoBall_41(41), LottoBall_42(42), LottoBall_43(43), LottoBall_44(44), LottoBall_45(45);
 
     private final int number;
+
     LottoBall(int number) {
         this.number = number;
     }
