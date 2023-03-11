@@ -11,7 +11,13 @@ public class TextCalculator {
     }
 
     private String[] getNumbers(String text) {
-        return text.split(",|\\|");
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
+        } else {
+            return text.split(",|:");
+        }
     }
 
     private int sum(String[] numbers) {
@@ -21,4 +27,5 @@ public class TextCalculator {
         }
         return sumNumber;
     }
+
 }

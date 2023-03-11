@@ -29,8 +29,15 @@ public class TextCalculatorTest {
 
     @DisplayName(value = "쉼표 또는 콜론을 구분자로 숫자가 들어온 경우 해당 숫자의 합을 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2","1|2"})
+    @ValueSource(strings = {"1,2","1:2"})
     void manyNumber(final String text) {
+        assertThat(calculator.add(text)).isSameAs(3);
+    }
+
+    @DisplayName(value = "//와 \\n 사이에 위치하는 문자가 들어온 경우 해당 문자를 커스텀 구분자로 사용한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//#\n1#2", "//@\n1@2"})
+    void manyNumberUseSomeSeperator(final String text) {
         assertThat(calculator.add(text)).isSameAs(3);
     }
 }
