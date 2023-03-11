@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.enums.LottoRank;
+import lotto.ui.LottoHitInfo;
 import lotto.ui.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -61,11 +62,13 @@ class LottoTicketsTest {
     @Test
     void 당첨통계를_구한다() {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 37);
+        String hitNumbers = "1,2,3,4,5,37";
         int bonusNumber = 37;
 
+        LottoHitInfo hitInfo = new LottoHitInfo(hitNumbers, bonusNumber);
+
         // when
-        LottoResult result = lottoTickets.createLottoResult(numbers, bonusNumber);
+        LottoResult result = lottoTickets.createLottoResult(hitInfo);
 
         result.printWinningStatistics();
 

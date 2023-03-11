@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.enums.LottoRank;
+import lotto.ui.LottoHitInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,15 +39,18 @@ public class LottoTicket {
         return ticket.size();
     }
 
-    public LottoRank getHitCount(final List<Integer> numbers, final int bonusNumber) {
+    public LottoRank getHitCount(final LottoHitInfo hitInfo) {
+        List<Integer> hitNumbers = hitInfo.getHitNumbers();
+        int bonusNumber = hitInfo.getBonusNumber();
+
         int totalCount = 0;
 
-        for (int number : numbers) {
+        for (int number : hitNumbers) {
             totalCount += checkHit(number);
         }
 
         if (totalCount < 6) {
-            boolean isHitBonus = checkBonusNumber(bonusNumber);
+            boolean isHitBonus = hasBonusNumber(bonusNumber);
             return LottoRank.findRank(totalCount, isHitBonus);
         }
 
@@ -57,11 +61,15 @@ public class LottoTicket {
         return isContain(number) ? 1 : 0;
     }
 
-    public boolean checkBonusNumber(final int number) {
+    public boolean hasBonusNumber(final int number) {
         return isContain(number);
     }
 
     private boolean isContain(final int number) {
         return this.ticket.contains(number);
+    }
+
+    public void printLottoNumbers() {
+        System.out.println(this.ticket);
     }
 }

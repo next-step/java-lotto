@@ -1,29 +1,23 @@
 package lotto.ui;
 
-import lotto.domain.enums.LottoType;
+import java.util.Scanner;
 
 public class LottoRequest {
-    private final int price;
-    private final String type;
+    private final int money;
 
-    public LottoRequest(int price, String type) {
-        this.price = price;
-        this.type = type;
+    public LottoRequest(int money) {
+        this.money = money;
     }
 
-    public int getPrice() {
-        return price;
+    public static LottoRequest inputBuyingPrice() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("구매금액을 입력해 주세요.");
+        int money = sc.nextInt();
+        sc.nextLine();
+        return new LottoRequest(money);
     }
 
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public String toString() {
-        return "LottoRequest{" +
-                "price=" + price +
-                ", type='" + type + '\'' +
-                '}';
+    public int getMoney() {
+        return money;
     }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.enums.LottoRank;
+import lotto.ui.LottoHitInfo;
 import lotto.ui.LottoResult;
 
 import java.util.ArrayList;
@@ -44,12 +45,12 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public LottoResult createLottoResult(List<Integer> numbers, int bonusNumber) {
+    public LottoResult createLottoResult(final LottoHitInfo hitInfo) {
 
         Map<LottoRank, Integer> ranks = new HashMap<>();
 
         tickets.forEach(ticket -> {
-            LottoRank rank = ticket.getHitCount(numbers, bonusNumber);
+            LottoRank rank = ticket.getHitCount(hitInfo);
             checkNull(ranks, rank);
         });
 
@@ -60,5 +61,19 @@ public class LottoTickets {
         if (rank != null) {
             ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
         }
+    }
+
+    public static LottoTickets createManualLottoTickets(final List<List<Integer>> numbers) {
+        List<LottoTicket> manualLottoTickets = new ArrayList<LottoTicket>();
+
+        for (List<Integer> number : numbers) {
+            LottoTicket manualLottoTicket = LottoTicket.of(number);
+            manualLottoTickets.add(manualLottoTicket);
+        }
+        return LottoTickets.of(manualLottoTickets);
+    }
+
+    public void printLottoTickets() {
+        this.tickets.forEach(LottoTicket::printLottoNumbers);
     }
 }
