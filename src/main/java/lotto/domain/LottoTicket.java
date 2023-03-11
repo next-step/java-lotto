@@ -9,7 +9,9 @@ import java.util.List;
 
 public class LottoTicket {
 
+
     private final List<Integer> ticket;
+
 
     protected LottoTicket(List<Integer> ticket) {
         this.ticket = ticket;
@@ -19,6 +21,7 @@ public class LottoTicket {
         List<Integer> ticket = createLottoTicket();
         return new LottoTicket(ticket);
     }
+
 
     public static LottoTicket of(final List<Integer> numbers) {
         return new LottoTicket(numbers);
@@ -56,6 +59,7 @@ public class LottoTicket {
 
         return LottoRank.findRank(totalCount, false);
     }
+
 
     private int checkHit(final int number) {
         return isContain(number) ? 1 : 0;
