@@ -1,7 +1,18 @@
 package lotto.domain;
 
 public enum WinningGrade {
-    FIRST_PRIZE, SECOND_PRIZE, THIRD_PRIZE, FORTH_PRIZE, FIFTY_PRIZE, ETC;
+    FIRST_PRIZE(2000000000),
+    SECOND_PRIZE(30000000),
+    THIRD_PRIZE(1500000),
+    FORTH_PRIZE(50000),
+    FIFTY_PRIZE(5000),
+    ETC(0);
+
+    private final int prizeMoney;
+
+    WinningGrade(int prizeMoney) {
+        this.prizeMoney = prizeMoney;
+    }
 
     public static WinningGrade checkWinningGrade(int matchWinningCount, boolean matchBonus) {
         if (matchWinningCount == 6) {
@@ -25,5 +36,9 @@ public enum WinningGrade {
         }
 
         return ETC;
+    }
+
+    public Integer getPrizeMoney() {
+        return this.prizeMoney;
     }
 }

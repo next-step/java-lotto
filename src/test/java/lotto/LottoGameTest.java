@@ -49,6 +49,22 @@ public class LottoGameTest {
     @DisplayName("총 수익률을 구한다.")
     @Test
     void getTotalRateOfReturn() {
+        List<Lotto> lottos = List.of(
+                new Lotto(Set.of(1, 2, 3, 7, 8, 9)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
+                new Lotto(Set.of(1, 2, 8, 9, 10, 11))
+        );
+        WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
+
+        LottoGame lottoGame = new LottoGame(lottos);
+        Assertions.assertThat(lottoGame.getTotalRateOfReturn(winningNumbers)).isEqualTo(0.5);
 
     }
 

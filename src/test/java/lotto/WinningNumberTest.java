@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.LottoGame;
 import lotto.domain.WinningNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

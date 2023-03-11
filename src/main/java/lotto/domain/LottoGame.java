@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class LottoGame {
-    private static final int PRICE = 1000;
+    public static final int PRICE = 1000;
 
     private final List<Lotto> lottos;
     private final int count;
@@ -47,5 +47,10 @@ public class LottoGame {
                 .forEach(this.lotteryStatistics::add);
 
         return this.lotteryStatistics;
+    }
+
+    public double getTotalRateOfReturn(WinningNumbers winningNumbers) {
+        LotteryStatistics statistics = getStatistics(winningNumbers);
+        return statistics.getTotalRateOfReturn();
     }
 }
