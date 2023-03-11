@@ -14,7 +14,7 @@ public class Lottos {
         this.lottoCount = buyAmt.divide(LOTTO_AMT).intValue();
         this.lottos = new ArrayList<Lotto>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(Lotto.createLotto());
+            lottos.add(Lotto.createAutoLotto());
         }
         return lottos;
     }
