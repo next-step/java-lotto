@@ -4,7 +4,16 @@ import java.util.List;
 
 public class Operands {
 
-    List<Operand> operandList; // 연산자 객체 리스트
+    private List<Operand> operandList; // 연산자 객체 리스트
+
+    /**
+     * 연산자 리스트 가져오는 함수
+     *
+     * @return operandList
+     */
+    public List<Operand> getOperandList() {
+        return operandList;
+    }
 
     /**
      * 연산자 리스트 생성자

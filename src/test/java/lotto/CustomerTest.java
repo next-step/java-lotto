@@ -32,6 +32,6 @@ class CustomerTest {
         assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> {
                 customer.purchase(budget);
-            }).withMessageContaining("%s","로또를 구입할 금액이 부족합니다.");
+            }).withMessageContaining("로또를 구입할 금액이 부족합니다.");
     }
 }

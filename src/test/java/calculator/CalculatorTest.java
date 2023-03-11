@@ -18,7 +18,7 @@ class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"", " "})
-    void blankAndNullCheckTest(String str) {
+    void isBlankAndNull(String str) {
         assertThat(Calculator.plus(str)).isEqualTo(0);
     }
 

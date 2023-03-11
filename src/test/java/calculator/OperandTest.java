@@ -28,12 +28,12 @@ class OperandTest {
 
         Operands operands = new Operands(Operand.parseOperand(str.split(",")));
 
-        assertThat(operands.operandList.get(0).getOperand()).isEqualTo(
-            operandList.get(0).getOperand());
-        assertThat(operands.operandList.get(1).getOperand()).isEqualTo(
-            operandList.get(1).getOperand());
-        assertThat(operands.operandList.get(2).getOperand()).isEqualTo(
-            operandList.get(2).getOperand());
+        assertThat(
+            operands.getOperandList().get(0).equals(operandList.get(0))).isTrue();
+        assertThat(
+            operands.getOperandList().get(1).equals(operandList.get(1))).isTrue();
+        assertThat(
+            operands.getOperandList().get(2).equals(operandList.get(2))).isTrue();
 
     }
 }

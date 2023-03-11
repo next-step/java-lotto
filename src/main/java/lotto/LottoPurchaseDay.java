@@ -44,6 +44,6 @@ public class LottoPurchaseDay {
         // 시스템 UI 출력 구간
 
         lottoOrganizer.allCheckInWallet(customer.getWallet(), winnerNumber, bonusBall);
-        lottoOrganizer.printCustomerLottoResult(customer.getWallet(), budget);
+        TextView.printCustomerLottoResult(customer.getWallet(), budget);
     }
 }

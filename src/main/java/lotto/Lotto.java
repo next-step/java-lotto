@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import lotto.LottoOrganizer.LottoGrade;
 
 public class Lotto {
 
@@ -35,8 +33,6 @@ public class Lotto {
      * @return
      */
     public LottoGrade getThisLottoGrade() {
-        return grade;
+        return this.grade;
     }
-
-    // toString() 추가
 }
