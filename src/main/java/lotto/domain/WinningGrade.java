@@ -1,17 +1,19 @@
 package lotto.domain;
 
 public enum WinningGrade {
-    FIRST_PRIZE(2000000000),
-    SECOND_PRIZE(30000000),
-    THIRD_PRIZE(1500000),
-    FORTH_PRIZE(50000),
-    FIFTY_PRIZE(5000),
-    ETC(0);
+    FIRST_PRIZE(2000000000, "6개 일치"),
+    SECOND_PRIZE(30000000, "5개 일치, 보너스 볼 일치"),
+    THIRD_PRIZE(1500000, "5개 일치"),
+    FORTH_PRIZE(50000, "4개 일치"),
+    FIFTY_PRIZE(5000, "3개 일치 (5000원)"),
+    ETC(0, "");
 
     private final int prizeMoney;
+    private final String description;
 
-    WinningGrade(int prizeMoney) {
+    WinningGrade(int prizeMoney, String description) {
         this.prizeMoney = prizeMoney;
+        this.description = description;
     }
 
     public static WinningGrade checkWinningGrade(int matchWinningCount, boolean matchBonus) {
@@ -40,5 +42,9 @@ public enum WinningGrade {
 
     public Integer getPrizeMoney() {
         return this.prizeMoney;
+    }
+
+    public String getDescriptionForPrint() {
+        return this.description + "(" + this.getPrizeMoney() + "원)";
     }
 }
