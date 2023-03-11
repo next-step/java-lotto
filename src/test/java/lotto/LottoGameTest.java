@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.WinningStatistics;
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.LotteryNumbers;
+import lotto.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,9 +14,9 @@ public class LottoGameTest {
     @DisplayName("입력 받은 금액의 최대 구매금액을 구한다.")
     @Test
     void getLottoGame() {
-        LottoGame lottoGame = new LottoGame(3500);
-        int lottosPrice = lottoGame.getBuyPrice();
-        Assertions.assertThat(lottosPrice).isEqualTo(3000);
+        LottoGame lottoGame = new LottoGame(new Money(3500));
+        Money lottosPrice = lottoGame.getBuyPrice();
+        Assertions.assertThat(lottosPrice.toInteger()).isEqualTo(3000);
     }
 
     @DisplayName("로또 당첨번호 등수별 통계를 구한다.")

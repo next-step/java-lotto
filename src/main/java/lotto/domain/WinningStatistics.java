@@ -43,7 +43,7 @@ public class WinningStatistics {
                 .reduce(0, Integer::sum);
 
         Integer count = lotteryStatistics.keySet().stream().map(lotteryStatistics::get).reduce(0, Integer::sum);
-        return (double) returnSum / (PRICE * count);
+        return (double) returnSum / (PRICE.multiply(count).toInteger());
 
     }
 

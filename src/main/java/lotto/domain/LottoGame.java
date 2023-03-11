@@ -5,30 +5,26 @@ import java.util.HashSet;
 import java.util.List;
 
 public class LottoGame {
-    public static final int PRICE = 1000;
+    public static final Money PRICE = new Money(1000);
+
 
     private final List<Lotto> lottos;
-    private final int count;
-    private final WinningStatistics winningStatistics;
+    private final IssueRequest issueRequest;
 
-    public LottoGame(int lottoPay) {
-        this.count = lottoPay / PRICE;
-        this.winningStatistics = new WinningStatistics();
+    public LottoGame(Money lottoPay) {
+        this.issueRequest = new IssueRequest(lottoPay.division(PRICE).toInteger());
         this.lottos = new ArrayList<>();
+        issueRequest.issue(lottos);
 
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
     }
 
     public LottoGame(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.winningStatistics = new WinningStatistics();
-        this.count = lottos.size() * PRICE;
+        this.issueRequest = new IssueRequest(lottos.size());
     }
 
-    public int getBuyPrice() {
-        return count * PRICE;
+    public Money getBuyPrice() {
+        return issueRequest.getPrice();
     }
 
     public String getAllLottoNumbersForPrint() {
@@ -38,15 +34,15 @@ public class LottoGame {
     }
 
     public WinningStatistics getStatistics(LotteryNumbers lotteryNumbers) {
-
+        WinningStatistics winningStatistics = new WinningStatistics();
         lottos.stream()
                 .map(lotto -> {
                     HashSet<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
                     return lotteryNumbers.getWinningGrade(lottoNumbers);
                 })
-                .forEach(this.winningStatistics::add);
+                .forEach(winningStatistics::add);
 
-        return this.winningStatistics;
+        return winningStatistics;
     }
 
     public double getTotalRateOfReturn(LotteryNumbers lotteryNumbers) {
@@ -55,6 +51,6 @@ public class LottoGame {
     }
 
     public String getBuyCountForPrint() {
-        return Integer.toString(count);
+        return issueRequest.getBuyCountForPrint();
     }
 }

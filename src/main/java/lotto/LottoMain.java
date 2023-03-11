@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Money;
 import lotto.domain.WinningStatistics;
 import lotto.domain.LottoGame;
 import lotto.domain.LotteryNumbers;
@@ -10,7 +11,7 @@ import lotto.view.ResultView;
 public class LottoMain {
     public static void main(String[] args) {
 
-        int buyMoney = InputView.inputBuyPrice();
+        Money buyMoney = InputView.inputBuyPrice();
         LottoGame lottoGame = new LottoGame(buyMoney);
         ResultView.printBuyCountForPrint(lottoGame);
 

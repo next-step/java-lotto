@@ -5,7 +5,7 @@ import lotto.domain.WinningStatistics;
 
 public class ResultView {
     public static void printBuyCountForPrint(LottoGame lottoGame) {
-        System.out.println(lottoGame.getBuyCountForPrint() + "를 구매했습니다.");
+        System.out.println(lottoGame.getBuyCountForPrint());
         System.out.println(lottoGame.getAllLottoNumbersForPrint());
     }
 

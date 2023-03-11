@@ -1,16 +1,18 @@
 package lotto.view;
 
+import lotto.domain.Money;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
-    public static int inputBuyPrice() {
+    public static Money inputBuyPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
 
-        return Integer.parseInt(scanner.nextLine());
+        return new Money(Integer.parseInt(scanner.nextLine()));
     }
 
     public static Set<Integer> inputLastWeekWinningNumber() {
