@@ -13,4 +13,13 @@ public class LottoGameTest {
         int lottosPrice = lottoGame.getBuyPrice();
         Assertions.assertThat(lottosPrice).isEqualTo(3000);
     }
+
+    @DisplayName("로또 당첨번호들을 반환한다.")
+    @Test
+    void getLottosNumbers() {
+        LottoGame lottoGame = new LottoGame(14000);
+
+        lottoGame.getAllLottoNumbers();
+    }
+
 }

@@ -16,7 +16,11 @@ public class Lotto {
         this.lottoBalls = lottoBalls.stream().map(LottoBall::getLottoBall).collect(Collectors.toSet());
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> getLottoNumbers() {
         return lottoBalls.stream().map(LottoBall::getNumber).sorted().collect(Collectors.toList());
+    }
+
+    public String getLottoNumbersForPrint() {
+        return "[" + lottoBalls.stream().map(LottoBall::toString).collect(Collectors.joining(", ")) + "]";
     }
 }

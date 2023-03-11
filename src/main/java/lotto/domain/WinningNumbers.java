@@ -7,7 +7,7 @@ public class WinningNumbers {
     private final Set<LottoBall> winningNumbers;
     private final LottoBall bonusNumber;
 
-    public WinningNumbers(Set<Integer> winningNumbers, int bonusNumber) {
+    public WinningNumbers(final Set<Integer> winningNumbers, final int bonusNumber) {
         this.winningNumbers = winningNumbers.stream().map(LottoBall::getLottoBall).collect(Collectors.toSet());
         this.bonusNumber = LottoBall.getLottoBall(bonusNumber);
     }
@@ -18,7 +18,9 @@ public class WinningNumbers {
         return compareLottoNumber.size();
     }
 
-    public boolean isMatchBonus(final int lottoBallsNumber) {
-        return bonusNumber == LottoBall.getLottoBall(lottoBallsNumber);
+    public boolean isMatchBonus(final Set<Integer> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber.getNumber());
+    }
+
     }
 }

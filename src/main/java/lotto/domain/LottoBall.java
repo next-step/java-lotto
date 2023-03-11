@@ -36,4 +36,8 @@ public enum LottoBall {
         return this.number;
     }
 
+    @Override
+    public String toString() {
+        return Integer.toString(number);
+    }
 }

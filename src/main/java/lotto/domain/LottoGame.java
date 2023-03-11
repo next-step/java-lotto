@@ -20,4 +20,10 @@ public class LottoGame {
     public int getBuyPrice() {
         return count * PRICE;
     }
+
+    public String getAllLottoNumbers() {
+        StringBuilder allLottoNumbers = new StringBuilder();
+        lottos.forEach(lotto -> allLottoNumbers.append(lotto.getLottoNumbersForPrint()).append("\n"));
+        return allLottoNumbers.toString();
+    }
 }
