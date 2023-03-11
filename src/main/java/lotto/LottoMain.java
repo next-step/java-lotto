@@ -19,8 +19,4 @@ public class LottoMain {
         WinningStatistics statistics = lottoGame.getStatistics(lotteryNumbers);
         ResultView.printLottoResult(statistics);
     }
-
-
-
-
 }

@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 
 public class LottoGame {
-    public static final Money PRICE = new Money(1000);
+    public static final Money LOTTO_PRICE = new Money(1000);
 
 
     private final List<Lotto> lottos;
     private final IssueRequest issueRequest;
 
     public LottoGame(Money lottoPay) {
-        this.issueRequest = new IssueRequest(lottoPay.division(PRICE).toInteger());
+        this.issueRequest = new IssueRequest(lottoPay.division(LOTTO_PRICE).toInteger());
         this.lottos = new ArrayList<>();
         issueRequest.issue(lottos);
 
@@ -43,11 +43,6 @@ public class LottoGame {
                 .forEach(winningStatistics::add);
 
         return winningStatistics;
-    }
-
-    public double getTotalRateOfReturn(LotteryNumbers lotteryNumbers) {
-        WinningStatistics statistics = getStatistics(lotteryNumbers);
-        return statistics.getTotalRateOfReturn();
     }
 
     public String getBuyCountForPrint() {

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoGame.PRICE;
+import static lotto.domain.LottoGame.LOTTO_PRICE;
 
 public class WinningStatistics {
     private final Map<WinningGrade, Integer> lotteryStatistics;
@@ -37,14 +37,15 @@ public class WinningStatistics {
         return lotteryStatistics.toString();
     }
 
-    public double getTotalRateOfReturn() {
-        Integer returnSum = lotteryStatistics.keySet().stream()
+    public String getTotalRateOfReturnForPrint() {
+        Integer totalSum = lotteryStatistics.keySet().stream()
                 .map(key -> lotteryStatistics.get(key) * key.getPrizeMoney())
                 .reduce(0, Integer::sum);
 
-        Integer count = lotteryStatistics.keySet().stream().map(lotteryStatistics::get).reduce(0, Integer::sum);
-        return (double) returnSum / (PRICE.multiply(count).toInteger());
+        Integer totalCount = lotteryStatistics.keySet().stream().map(lotteryStatistics::get).reduce(0, Integer::sum);
 
+        double returnRete = (double) totalSum / (LOTTO_PRICE.multiply(totalCount).toInteger());
+        return Double.toString(Math.round(returnRete * 1000) / 1000.0);
     }
 
     public String printInformation() {

@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-import static lotto.domain.LottoGame.PRICE;
+import static lotto.domain.LottoGame.LOTTO_PRICE;
 
 public class IssueRequest {
     private int count;
@@ -18,7 +18,7 @@ public class IssueRequest {
     }
 
     public Money getPrice() {
-        return PRICE.multiply(this.count);
+        return LOTTO_PRICE.multiply(this.count);
     }
 
     public String getBuyCountForPrint() {

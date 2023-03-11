@@ -61,7 +61,7 @@ public class LottoGameTest {
         LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
 
         LottoGame lottoGame = new LottoGame(lottos);
-        Assertions.assertThat(lottoGame.getTotalRateOfReturn(lotteryNumbers)).isEqualTo(0.5);
+        Assertions.assertThat(lottoGame.getStatistics(lotteryNumbers).getTotalRateOfReturnForPrint()).isEqualTo("0.5");
 
     }
 

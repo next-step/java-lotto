@@ -13,6 +13,6 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계\n---------");
         System.out.println(statistics.printInformation());
-        System.out.println("총 수익률은 " + statistics.getTotalRateOfReturn() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("총 수익률은 " + statistics.getTotalRateOfReturnForPrint() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

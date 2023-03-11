@@ -5,7 +5,7 @@ public enum WinningGrade {
     SECOND_PRIZE(new Grade(2), new WinningGradeDescription("5개 일치, 보너스 볼 일치", new Money(30000000))),
     THIRD_PRIZE(new Grade(3), new WinningGradeDescription("5개 일치", new Money(1500000))),
     FORTH_PRIZE(new Grade(4), new WinningGradeDescription("4개 일치", new Money(50000))),
-    FIFTY_PRIZE(new Grade(5), new WinningGradeDescription("3개 일치 (5000원)", new Money(5000))),
+    FIFTY_PRIZE(new Grade(5), new WinningGradeDescription("3개 일치", new Money(5000))),
     ETC(new Grade(0), new WinningGradeDescription()),;
 
     private final Grade prizeGrade;
@@ -45,6 +45,6 @@ public enum WinningGrade {
     }
 
     public String getDescriptionForPrint() {
-        return this.winningGradeDescription + "(" + this.getPrizeMoney() + "원)";
+        return this.winningGradeDescription + " (" + this.getPrizeMoney() + "원)";
     }
 }
