@@ -8,6 +8,7 @@ public class Lottos {
     private List<Lotto> lottos;
     private int lottoCount = 0;
     private final BigDecimal LOTTO_AMT = new BigDecimal(1000);
+    private Lotto winLotto;
 
     public List<Lotto> buyLottos(java.math.BigDecimal buyAmt) {
         this.lottoCount = buyAmt.divide(LOTTO_AMT).intValue();
@@ -20,5 +21,9 @@ public class Lottos {
 
     public int getLottoCount() {
         return lottoCount;
+    }
+
+    public void setWinLotto(List<Integer> winLottoNumber){
+        this.winLotto = new Lotto(winLottoNumber);
     }
 }

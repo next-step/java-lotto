@@ -7,6 +7,9 @@ import java.util.List;
 public class Lotto {
 
     private final List<Integer> lottoNumbers;
+    private LottoRank rank;
+    private int hitCnt = 0;
+    private boolean isBonusHit = false;
 
     protected Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -32,4 +35,10 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
+    public void setRank(LottoRank rank) {
+        this.rank = rank;
+    }
+    public LottoRank getRank() {
+        return rank;
+    }
 }
