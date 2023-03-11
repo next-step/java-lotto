@@ -42,4 +42,12 @@ public class PlusCalculatorTest {
         Assertions.assertThat(PlusCalculator.plusCalculate(plusExpression)).isZero();
     }
 
+    @ParameterizedTest(name = "{displayName} [{index}]: ''{argumentsWithNames}''")
+    @CsvSource({"'//;\n11;55;44', 110",
+            "'//!\n11!55!44', 110"})
+    @DisplayName("커스텀 구분자를 지정할 수 있다. (\"//\"와 \"\\n\" 사이에 값을 구분자로 지정한다.)")
+    void customSplit(String plusExpression, int expectValue) {
+
+        Assertions.assertThat(PlusCalculator.plusCalculate(plusExpression)).isEqualTo(expectValue);
+    }
 }
