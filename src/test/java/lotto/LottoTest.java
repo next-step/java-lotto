@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class LottoTest {
+
     @DisplayName("로또 추첨번호는 1 ~ 45 이다.")
     @Test
     void lottoBallRange() {

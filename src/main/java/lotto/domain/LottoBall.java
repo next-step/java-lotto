@@ -28,6 +28,10 @@ public enum LottoBall {
         return convertToList.subList(0, 6);
     }
 
+    public static LottoBall getLottoBall(int number) {
+        return Arrays.stream(LottoBall.values()).filter(lottoBall -> lottoBall.getNumber() == number).findFirst().orElseThrow();
+    }
+
     public int getNumber() {
         return this.number;
     }
