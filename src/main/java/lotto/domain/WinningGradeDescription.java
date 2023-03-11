@@ -16,4 +16,9 @@ public class WinningGradeDescription {
     public Integer getIntegerPrizeMoney() {
         return prize.toInteger();
     }
+
+    @Override
+    public String toString() {
+        return this.descrption;
+    }
 }
