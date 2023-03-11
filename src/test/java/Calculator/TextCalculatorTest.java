@@ -26,5 +26,11 @@ public class TextCalculatorTest {
     void oneNumber(final String text) {
         assertThat(calculator.add(text)).isSameAs(Integer.parseInt(text));
     }
-    
+
+    @DisplayName(value = "쉼표 또는 콜론을 구분자로 숫자가 들어온 경우 해당 숫자의 합을 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2","1|2"})
+    void manyNumber(final String text) {
+        assertThat(calculator.add(text)).isSameAs(3);
+    }
 }
