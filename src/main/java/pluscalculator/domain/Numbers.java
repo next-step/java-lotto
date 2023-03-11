@@ -15,11 +15,14 @@ public class Numbers {
     }
 
     public Numbers(List<String> numbers) {
+        validateOnlyNumber(numbers);
+        this.numbers = numbers.stream().map(Double::parseDouble).collect(Collectors.toList());
+    }
+
+    private void validateOnlyNumber(List<String> numbers) {
         if (numbers.stream().anyMatch(number -> !NUMBER_PATTERN.matcher(number).matches())) {
             throw new RuntimeException();
         }
-
-        this.numbers = numbers.stream().map(Double::parseDouble).collect(Collectors.toList());
     }
 
     public double plusAll() {
