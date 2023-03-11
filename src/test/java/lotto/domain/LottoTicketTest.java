@@ -45,7 +45,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(numbers);
 
         //when
-        boolean actual = lottoTicket.hasBonusNumber(3);
+        boolean actual = lottoTicket.checkBonusNumber(3);
 
         //then
         assertThat(actual).isEqualTo(expected);

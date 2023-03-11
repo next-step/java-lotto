@@ -36,7 +36,7 @@ class LottoTicketsTest {
         tickets.add(new LottoTicket(List.of(13, 14, 18, 21, 23, 35)));
         tickets.add(new LottoTicket(List.of(17, 21, 29, 37, 42, 45)));
         tickets.add(new LottoTicket(List.of(3, 8, 27, 30, 35, 44)));
-        tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 33)));
+        tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 37)));
         lottoTickets = new LottoTickets(tickets);
     }
 
@@ -71,7 +71,8 @@ class LottoTicketsTest {
 
         //then
         assertThat(result.findHitCount(LottoRank.THREE_HIT)).isEqualTo(1);
-        assertThat(result.findHitCount(LottoRank.FIVE_HIT)).isEqualTo(1);
+        assertThat(result.findHitCount(LottoRank.FIVE_HIT)).isEqualTo(0);
         assertThat(result.findHitCount(LottoRank.FIVE_HIT_WITH_BONUS)).isEqualTo(0);
+        assertThat(result.findHitCount(LottoRank.SIX_HIT)).isEqualTo(1);
     }
 }

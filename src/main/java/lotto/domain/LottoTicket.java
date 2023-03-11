@@ -45,15 +45,19 @@ public class LottoTicket {
             totalCount += checkHit(number);
         }
 
-        boolean hasBonus = hasBonusNumber(bonusNumber);
-        return LottoRank.findRank(totalCount, hasBonus);
+        if (totalCount < 6) {
+            boolean isHitBonus = checkBonusNumber(bonusNumber);
+            return LottoRank.findRank(totalCount, isHitBonus);
+        }
+
+        return LottoRank.findRank(totalCount, false);
     }
 
     private int checkHit(final int number) {
         return isContain(number) ? 1 : 0;
     }
 
-    public boolean hasBonusNumber(final int number) {
+    public boolean checkBonusNumber(final int number) {
         return isContain(number);
     }
 
