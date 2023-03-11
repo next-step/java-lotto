@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class LottoGame {
@@ -8,13 +9,22 @@ public class LottoGame {
 
     private final List<Lotto> lottos;
     private final int count;
+    private final LotteryStatistics lotteryStatistics;
 
     public LottoGame(int lottoPay) {
-        count = lottoPay / PRICE;
-        lottos = new ArrayList<>();
+        this.count = lottoPay / PRICE;
+        this.lotteryStatistics = new LotteryStatistics();
+        this.lottos = new ArrayList<>();
+
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }
+    }
+
+    public LottoGame(List<Lotto> lottos) {
+        this.lottos = lottos;
+        this.lotteryStatistics = new LotteryStatistics();
+        this.count = lottos.size() * PRICE;
     }
 
     public int getBuyPrice() {
@@ -25,5 +35,17 @@ public class LottoGame {
         StringBuilder allLottoNumbers = new StringBuilder();
         lottos.forEach(lotto -> allLottoNumbers.append(lotto.getLottoNumbersForPrint()).append("\n"));
         return allLottoNumbers.toString();
+    }
+
+    public LotteryStatistics getStatistics(WinningNumbers winningNumbers) {
+
+        lottos.stream()
+                .map(lotto -> {
+                    HashSet<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
+                    return winningNumbers.getWinningGrade(lottoNumbers);
+                })
+                .forEach(this.lotteryStatistics::add);
+
+        return this.lotteryStatistics;
     }
 }

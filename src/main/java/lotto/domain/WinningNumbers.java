@@ -22,5 +22,8 @@ public class WinningNumbers {
         return lottoNumbers.contains(bonusNumber.getNumber());
     }
 
+
+    public WinningGrade getWinningGrade(final Set<Integer> lottoNumbers) {
+        return WinningGrade.checkWinningGrade(matchWinningCount(lottoNumbers), isMatchBonus(lottoNumbers));
     }
 }
