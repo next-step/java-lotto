@@ -1,9 +1,9 @@
 package lotto;
 
-import lotto.domain.LotteryStatistics;
+import lotto.domain.WinningStatistics;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
-import lotto.domain.WinningNumbers;
+import lotto.domain.LotteryNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,8 +35,8 @@ public class LottoGameTest {
         );
 
         LottoGame lottoGame = new LottoGame(lottos);
-        WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
-        LotteryStatistics statistics = lottoGame.getStatistics(winningNumbers);
+        LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
+        WinningStatistics statistics = lottoGame.getStatistics(lotteryNumbers);
 
         Assertions.assertThat(statistics.getWinningNumbers(FIRST_PRIZE)).isEqualTo(1);
         Assertions.assertThat(statistics.getWinningNumbers(SECOND_PRIZE)).isEqualTo(1);
@@ -61,10 +61,10 @@ public class LottoGameTest {
                 new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
                 new Lotto(Set.of(1, 2, 8, 9, 10, 11))
         );
-        WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
+        LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
 
         LottoGame lottoGame = new LottoGame(lottos);
-        Assertions.assertThat(lottoGame.getTotalRateOfReturn(winningNumbers)).isEqualTo(0.5);
+        Assertions.assertThat(lottoGame.getTotalRateOfReturn(lotteryNumbers)).isEqualTo(0.5);
 
     }
 

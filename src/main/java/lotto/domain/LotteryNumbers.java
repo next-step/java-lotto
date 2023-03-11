@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinningNumbers {
+public class LotteryNumbers {
     private final Set<LottoBall> winningNumbers;
     private final LottoBall bonusNumber;
 
-    public WinningNumbers(final Set<Integer> winningNumbers, final int bonusNumber) {
+    public LotteryNumbers(final Set<Integer> winningNumbers, final int bonusNumber) {
         this.winningNumbers = winningNumbers.stream().map(LottoBall::getLottoBall).collect(Collectors.toSet());
         this.bonusNumber = LottoBall.getLottoBall(bonusNumber);
     }

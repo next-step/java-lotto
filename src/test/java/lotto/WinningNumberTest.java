@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.WinningNumbers;
+import lotto.domain.LotteryNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,8 +16,8 @@ public class WinningNumberTest {
     @DisplayName("당첨번호와 추출한 숫자 중 일치하는 갯수를 구한다.")
     @Test
     void matchWinningNumber() {
-        WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
-        int matchCount = winningNumbers.matchWinningCount(Set.of(1, 2, 3, 4, 5, 6));
+        LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
+        int matchCount = lotteryNumbers.matchWinningCount(Set.of(1, 2, 3, 4, 5, 6));
         Assertions.assertThat(matchCount).isEqualTo(6);
     }
 
@@ -26,8 +26,8 @@ public class WinningNumberTest {
     @MethodSource("generateArgumentsSet")
     void isMatchBonusNumber(Set<Integer> numbers, boolean expectResult) {
 
-        WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
-        Assertions.assertThat(winningNumbers.isMatchBonus(numbers)).isEqualTo(expectResult);
+        LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
+        Assertions.assertThat(lotteryNumbers.isMatchBonus(numbers)).isEqualTo(expectResult);
     }
 
     private static Stream<Arguments> generateArgumentsSet() {

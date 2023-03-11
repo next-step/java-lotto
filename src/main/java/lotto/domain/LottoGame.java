@@ -9,11 +9,11 @@ public class LottoGame {
 
     private final List<Lotto> lottos;
     private final int count;
-    private final LotteryStatistics lotteryStatistics;
+    private final WinningStatistics winningStatistics;
 
     public LottoGame(int lottoPay) {
         this.count = lottoPay / PRICE;
-        this.lotteryStatistics = new LotteryStatistics();
+        this.winningStatistics = new WinningStatistics();
         this.lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
@@ -23,7 +23,7 @@ public class LottoGame {
 
     public LottoGame(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.lotteryStatistics = new LotteryStatistics();
+        this.winningStatistics = new WinningStatistics();
         this.count = lottos.size() * PRICE;
     }
 
@@ -31,26 +31,30 @@ public class LottoGame {
         return count * PRICE;
     }
 
-    public String getAllLottoNumbers() {
+    public String getAllLottoNumbersForPrint() {
         StringBuilder allLottoNumbers = new StringBuilder();
         lottos.forEach(lotto -> allLottoNumbers.append(lotto.getLottoNumbersForPrint()).append("\n"));
         return allLottoNumbers.toString();
     }
 
-    public LotteryStatistics getStatistics(WinningNumbers winningNumbers) {
+    public WinningStatistics getStatistics(LotteryNumbers lotteryNumbers) {
 
         lottos.stream()
                 .map(lotto -> {
                     HashSet<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
-                    return winningNumbers.getWinningGrade(lottoNumbers);
+                    return lotteryNumbers.getWinningGrade(lottoNumbers);
                 })
-                .forEach(this.lotteryStatistics::add);
+                .forEach(this.winningStatistics::add);
 
-        return this.lotteryStatistics;
+        return this.winningStatistics;
     }
 
-    public double getTotalRateOfReturn(WinningNumbers winningNumbers) {
-        LotteryStatistics statistics = getStatistics(winningNumbers);
+    public double getTotalRateOfReturn(LotteryNumbers lotteryNumbers) {
+        WinningStatistics statistics = getStatistics(lotteryNumbers);
         return statistics.getTotalRateOfReturn();
+    }
+
+    public String getBuyCountForPrint() {
+        return Integer.toString(count);
     }
 }
