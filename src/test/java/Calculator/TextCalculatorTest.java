@@ -19,4 +19,12 @@ public class TextCalculatorTest {
     void emptyOrNull(final String text) {
         assertThat(calculator.add(text)).isZero();
     }
+
+    @DisplayName(value = "숫자 하나만 들어올 경우 해당 숫자를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1"})
+    void oneNumber(final String text) {
+        assertThat(calculator.add(text)).isSameAs(Integer.parseInt(text));
+    }
+    
 }
