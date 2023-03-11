@@ -36,4 +36,8 @@ public enum LottoRank {
     public String getDescription() {
         return description;
     }
+
+    public int getHitCount() {
+        return hitCount;
+    }
 }

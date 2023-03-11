@@ -1,10 +1,13 @@
 package Lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lotto {
 
@@ -28,20 +31,18 @@ public class Lotto {
     }
 
     public static List<Integer> makeLottoNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-
-        for (int i = 0; i < 45; i++) {
-            numbers.add(i);
-        }
-
+        IntStream intStream = IntStream.rangeClosed(1,45);
+        Stream<Integer> stream = intStream.boxed();
+        List<Integer> numbers = stream.collect(Collectors.toList());
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
+        List<Integer> pickNumbers = numbers.subList(0, 6);
+        Collections.sort(pickNumbers);
+        return pickNumbers;
     }
 
     public List<Integer> getLottoNumbers() {
         return this.lottoNumbers;
     }
-
 
     public void setIsBonusHit(int bonusHit) {
         this.isBonusHit = lottoNumbers.contains(bonusHit);
@@ -51,8 +52,8 @@ public class Lotto {
         return isBonusHit;
     }
 
-    public void setRank(LottoRank rank) {
-        this.rank = rank;
+    public void setRank() {
+        this.rank = LottoRank.findRank(this.hitCount, this.isBonusHit);
     }
 
     public LottoRank getRank() {
