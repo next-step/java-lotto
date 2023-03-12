@@ -15,10 +15,6 @@ public class Money {
         this.wonValue = wonValue;
     }
 
-    public Money() {
-        this(0);
-    }
-
     public Money multiply(int multiplyNumber) {
         return new Money(wonValue.multiply(BigDecimal.valueOf(multiplyNumber)));
     }
