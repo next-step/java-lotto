@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 public class LottoTest {
 
@@ -31,6 +32,16 @@ public class LottoTest {
         Lotto lotto = new Lotto();
         Assertions.assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
+
+    @DisplayName("6개의 랜덤 숫자가 중복되지 않는다.")
+    @Test
+    void getRandomDuplicationNumber() {
+        Lotto lotto = new Lotto();
+        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+
+        Assertions.assertThat(new HashSet<>(lottoNumbers)).hasSize(6);
+    }
+
 
     @DisplayName("추출된 숫자를 정렬한다.")
     @Test
