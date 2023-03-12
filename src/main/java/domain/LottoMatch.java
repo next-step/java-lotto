@@ -14,8 +14,8 @@ public class LottoMatch {
     }
 
     long checkMatchCount(Lotto lotto, Lotto firstLotto) {
-        return lotto.getLottoNumber().stream()
-                .filter(it -> firstLotto.getLottoNumber().contains(it))
+        return lotto.getLottoNumbers().getNumbers().stream()
+                .filter(it -> firstLotto.getLottoNumbers().getNumbers().contains(it))
                 .count();
     }
 

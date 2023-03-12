@@ -2,6 +2,9 @@ package domain;
 
 import java.util.Arrays;
 
+import domain.type.LottoBonusState;
+import domain.type.LottoRankAmount;
+
 public enum LottoReward {
 
     // THREE("3개 일치", "5000원"),

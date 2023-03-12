@@ -1,37 +1,41 @@
 package domain;
 
+import java.util.Arrays;
+
+import domain.type.LottoBonusState;
+import domain.type.LottoMatchCount;
+import domain.type.LottoRankAmount;
+
 public class LottoRank {
-    LottoRankAmount lottoRankAmount;
 
-    public LottoRank(int matchCount, boolean withBonusYn) {
-        LottoBonusState bonusState = getLottoBonusState(matchCount, withBonusYn);
-        this.lottoRankAmount = getLottoRankAmount(matchCount, bonusState);
+    public static LottoRankAmount getRank(int matchCount, boolean withBonusYn) {
+        return getLottoRankAmount(getLottoMatchCount(matchCount), getLottoBonusState(matchCount, withBonusYn));
     }
 
-    private LottoRankAmount getLottoRankAmount(int matchCount, LottoBonusState lottoBonusState) {
-        if (matchCount == 3)
-            return LottoRankAmount.FIFTH;
+    private static LottoRankAmount getLottoRankAmount(LottoMatchCount matchCount, LottoBonusState lottoBonusState) {
 
-        if (matchCount == 4)
-            return LottoRankAmount.FOURTH;
-
-        if (matchCount == 5 && lottoBonusState == LottoBonusState.NO)
-            return LottoRankAmount.THIRD;
-
-        if (matchCount == 5 && lottoBonusState == LottoBonusState.YES)
-            return LottoRankAmount.SECOND;
-
-        if (matchCount == 6)
-            return LottoRankAmount.FIRST;
-
-        return LottoRankAmount.SIXTH;
+        return Arrays.stream(LottoRankAmount.values())
+                .filter(it -> it.getMatchCount().equals(matchCount))
+                .filter(it -> it.getBonusState().equals(lottoBonusState))
+                .findFirst()
+                .get();
     }
 
-    LottoBonusState getLottoBonusState(int matchCount, boolean withBonusYn) {
+    private static LottoMatchCount getLottoMatchCount(int matchCount) {
+        return Arrays.stream(LottoMatchCount.values())
+                .filter(it -> it.getMatchCount() == matchCount)
+                .findFirst()
+                .orElse(LottoMatchCount.ETC);
+    }
+
+    private static LottoBonusState getLottoBonusState(int matchCount, boolean withBonusYn) {
         if (matchCount == 5 && withBonusYn == true)
+            return LottoBonusState.YES;
+
+        if (matchCount == 5 && withBonusYn == false)
             return LottoBonusState.NO;
 
-        return LottoBonusState.YES;
+        return LottoBonusState.ANY;
     }
 
 }

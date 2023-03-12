@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Lotto;
-import domain.LottoList;
+import domain.Lottos;
 import domain.LottoPrice;
 import view.InputView;
 
@@ -14,8 +14,8 @@ public class LottoService {
         int lottoCount = money / LottoPrice.PRICE.getPrice();
         InputView.printBuyCount(lottoCount);
 
-        LottoList lottoList = new LottoList(makeLottoList(lottoCount));
-        InputView.printLottoList(lottoList.getLottoList());
+        Lottos lottoList = new Lottos(makeLottoList(lottoCount));
+        InputView.printLottoList(lottoList.getLottos());
 
     }
 

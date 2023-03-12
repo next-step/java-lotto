@@ -3,7 +3,7 @@ package domain;
 import java.util.Comparator;
 
 public class LottoNumber {
-    int number;
+    private int number;
 
     public LottoNumber(int input) {
         try {
@@ -31,4 +31,5 @@ public class LottoNumber {
     public String toString() {
         return String.valueOf(number);
     }
+
 }

@@ -148,8 +148,8 @@ public class LottoTest {
         // lotto.setLottoNumber();
         // lotto.getLottoNumber().forEach(System.out::println);
 
-        LottoNumberList lottoNumberList = new LottoNumberList();
-        List<LottoNumber> lottoNumber = LottoNumberList.getLottoNumberList();
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        List<LottoNumber> lottoNumber = lottoNumbers.getNumbers();
         Collections.shuffle(lottoNumber);
         // lottoNumber.subList(0, 6).stream()
         // .sorted().toList();
@@ -164,7 +164,7 @@ public class LottoTest {
         // return o1.getLottoNumber() - o2.getLottoNumber();
         // }
         // });
-        Collections.sort(lottoNumber.subList(0, 6), (o1, o2) -> o1.number - o2.number);
+        Collections.sort(lottoNumber.subList(0, 6), (o1, o2) -> o1.getLottoNumber() - o2.getLottoNumber());
         newNumber.forEach(it -> System.out.println(it.getLottoNumber()));
     }
 

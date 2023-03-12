@@ -1,6 +1,6 @@
 package service;
 
-import domain.FirstLotto;
+import domain.FirstPlaceLotto;
 import domain.LottoUtil;
 import view.InputView;
 
@@ -14,7 +14,7 @@ public class LottoMain {
         String firstLottoInput = InputView.scanFirstLotto();
         String bonusNumberInput = InputView.scanBonusLottoNumer();
 
-        FirstLotto firstLotto = new FirstLotto(firstLottoInput, bonusNumberInput);
+        FirstPlaceLotto firstLotto = new FirstPlaceLotto(firstLottoInput, bonusNumberInput);
 
     }
 

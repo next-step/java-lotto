@@ -5,17 +5,24 @@ import java.util.List;
 
 import view.InputView;
 
-public class FirstLotto extends Lotto {
-    private List<LottoNumber> lottoNumber;
+public class FirstPlaceLotto extends Lotto {
+    private LottoNumbers lottoNumber;
     private LottoNumber bonusLottoNumber;
 
     void makeFirstLotto(List<String> input, String bonusLottoNumber) {
-        validate(input);
-        this.lottoNumber = makeLottoNumber(input);
+        this.lottoNumber = new LottoNumbers(input);
         this.bonusLottoNumber = new LottoNumber(LottoUtil.stringToInteger(bonusLottoNumber));
     }
 
-    public FirstLotto(String input, String bonusLottoNumber) {
+    public FirstPlaceLotto(String input, String bonusLottoNumber) {
         makeFirstLotto(LottoUtil.stringSplitToList(input), bonusLottoNumber);
+    }
+
+    public LottoNumbers getLottoNumbers() {
+        return this.lottoNumber;
+    }
+
+    public LottoNumber getBonusLottoNumber() {
+        return this.bonusLottoNumber;
     }
 }

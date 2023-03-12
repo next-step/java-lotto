@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthScrollBarUI;
 
-import domain.FirstLotto;
+import domain.FirstPlaceLotto;
 import domain.Lotto;
-import domain.LottoList;
+import domain.Lottos;
 
 public class InputView {
     public static void printInputView() {
@@ -45,10 +45,10 @@ public class InputView {
     }
 
     public static void printLotto(Lotto lotto) {
-        System.out.println(lotto.getLottoNumber().toString());
+        System.out.println(lotto.getLottoNumbers().toString());
     }
 
-    public static void printLotto(FirstLotto lotto) {
-        System.out.println(lotto.getLottoNumber().toString());
+    public static void printLotto(FirstPlaceLotto lotto) {
+        System.out.println(lotto.getLottoNumbers().toString());
     }
 }

@@ -1,8 +1,9 @@
-package domain;
+package domain.type;
 
 public enum LottoBonusState {
     YES(true),
-    NO(false);
+    NO(false),
+    ANY(false);
 
     private boolean bonusYn;
 

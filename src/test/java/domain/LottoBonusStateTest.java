@@ -3,6 +3,8 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.type.LottoBonusState;
+
 public class LottoBonusStateTest {
     @DisplayName("LottoBonusState Enum test")
     @Test
