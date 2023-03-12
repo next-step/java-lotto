@@ -34,32 +34,28 @@ public class LottoResult {
             boolean bonusYN = false;
 
             count = lottoNumberList.get(i).getLottoNumber()
-                    .stream().filter(x ->resultLottoNumber.getLottoNumber().contains(x))
+                    .stream().filter(e -> resultLottoNumber.getLottoNumber().contains(e))
                     .collect(Collectors.toList()).size();
 
-            if(lottoResultSet.get(count) == null){
-                lottoResultSet.put(count, 0);
-            }
-
-            if(count == 5){
+            if (count == 5) {
                 bonusYN = lottoNumberList.get(i).getLottoNumber().contains(bonusNumber);
-                if(bonusYN){
+                if (bonusYN) {
                     count = 7;
                 }
             }
-            lottoResultSet.put(count, lottoResultSet.get(count) + 1);
+            lottoResultSet.put(count, isnullCheck(lottoResultSet.get(count)) + 1);
         }
         new LottoMessage(resultLottoNumber).getLottoRankMessage(lottoResultSet);
     }
 
-    public void LottoResultReturns(){
+    public void LottoResultReturns() {
         double result = 0;
 
-        for(LottoRank lottoRank : LottoRank.values()){
+        for (LottoRank lottoRank : LottoRank.values()) {
             result += LottoRank.lottoRankValue(lottoRank.getKeyNumber()) * isnullCheck(lottoResultSet.get((lottoRank.getKeyNumber())));
         }
+        result = Math.round(result / (double) purchasesNumber * 100) / 100.0;
 
-        result = Math.round(result / (double) purchasesNumber * 100)/100.0;
         new LottoMessage(resultLottoNumber).getLottoResultMessage(String.valueOf(result));
     }
 }
