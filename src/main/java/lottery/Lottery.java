@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottery {
-    private static final int LOTTO_LIMIT = 45;
-    private static final int LOTTO_TICKET_LENGTH = 6;
-    private final int[] lotteryRange = IntStream.rangeClosed(1, LOTTO_LIMIT)
+    private static final int LOTTERY_LIMIT = 45;
+    private static final int LOTTERY_TICKET_LENGTH = 6;
+    private final int[] lotteryRange = IntStream.rangeClosed(1, LOTTERY_LIMIT)
                                                 .toArray();
     private final List<Integer> lotteryNumbers;
     public Lottery() {
@@ -26,7 +26,7 @@ public class Lottery {
                         .boxed()
                         .collect(Collectors.toList());
         Collections.shuffle(Arrays.asList(shuffleNumber));
-        return shuffleNumber.subList(0, LOTTO_TICKET_LENGTH);
+        return shuffleNumber.subList(0, LOTTERY_TICKET_LENGTH);
     }
 
     public List<Integer> getLotteryNumbers() {
