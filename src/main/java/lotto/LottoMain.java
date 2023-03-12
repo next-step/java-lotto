@@ -11,8 +11,8 @@ import lotto.view.ResultView;
 public class LottoMain {
     public static void main(String[] args) {
 
-        Money buyMoney = InputView.inputBuyPrice();
-        LottoGame lottoGame = new LottoGame(buyMoney);
+        int buyMoney = InputView.inputBuyPrice();
+        LottoGame lottoGame = new LottoGame(new Money(buyMoney));
         ResultView.printBuyCountForPrint(lottoGame);
 
         LotteryNumbers lotteryNumbers = new LotteryNumbers(InputView.inputLastWeekWinningNumber(), InputView.inputLastWeekBonusNumber());
