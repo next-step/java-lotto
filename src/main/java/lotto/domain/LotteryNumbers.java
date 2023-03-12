@@ -1,18 +1,17 @@
 package lotto.domain;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LotteryNumbers {
-    private final Set<LottoBall> winningNumbers;
+    private final Lotto winningNumbers;
     private final LottoBall bonusNumber;
 
     public LotteryNumbers(final Set<Integer> winningNumbers, final int bonusNumber) {
-        this.winningNumbers = winningNumbers.stream().map(LottoBall::getLottoBall).collect(Collectors.toSet());
+        this.winningNumbers = new Lotto(winningNumbers);
         this.bonusNumber = LottoBall.getLottoBall(bonusNumber);
     }
 
-    public Set<LottoBall> getWinningNumbers() {
+    public Lotto getWinningNumbers() {
         return winningNumbers;
     }
 

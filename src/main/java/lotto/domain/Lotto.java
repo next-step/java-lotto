@@ -20,8 +20,8 @@ public class Lotto {
         return this.lottoBalls.stream().map(LottoBall::getNumber).sorted().collect(Collectors.toList());
     }
 
-    public int matchWinningCount(Set<LottoBall> winningNumbers) {
-        Set<LottoBall> matchCheckSet = new HashSet<>(winningNumbers);
+    public int matchWinningCount(Lotto winningNumbers) {
+        Set<LottoBall> matchCheckSet = new HashSet<>(winningNumbers.lottoBalls);
         matchCheckSet.retainAll(this.lottoBalls);
         return matchCheckSet.size();
     }
