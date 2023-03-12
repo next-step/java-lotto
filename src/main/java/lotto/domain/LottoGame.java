@@ -27,10 +27,10 @@ public class LottoGame {
         return issueRequest.getPrice();
     }
 
-    public String getAllLottoNumbersForPrint() {
-        StringBuilder allLottoNumbers = new StringBuilder();
-        lottos.forEach(lotto -> allLottoNumbers.append(lotto.getLottoNumbersForPrint()).append("\n"));
-        return allLottoNumbers.toString();
+    public List<List<Integer>> getAllLottoNumbers() {
+        List<List<Integer>> allLottoNumbers = new ArrayList<>();
+        lottos.forEach(lotto -> allLottoNumbers.add(lotto.getLottoNumbers()));
+        return allLottoNumbers;
     }
 
     public WinningStatistics getStatistics(LotteryNumbers lotteryNumbers) {

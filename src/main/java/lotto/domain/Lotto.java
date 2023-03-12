@@ -19,8 +19,4 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return lottoBalls.stream().map(LottoBall::getNumber).sorted().collect(Collectors.toList());
     }
-
-    public String getLottoNumbersForPrint() {
-        return "[" + lottoBalls.stream().map(LottoBall::toString).collect(Collectors.joining(", ")) + "]";
-    }
 }
