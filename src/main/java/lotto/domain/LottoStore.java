@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.ui.LottoRequest;
-
 import java.util.List;
 
 public class LottoStore {

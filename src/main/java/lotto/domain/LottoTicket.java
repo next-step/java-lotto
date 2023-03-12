@@ -2,16 +2,13 @@ package lotto.domain;
 
 import lotto.domain.enums.LottoRank;
 import lotto.ui.LottoHitInfo;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
 
-
     private final List<Integer> ticket;
-
 
     protected LottoTicket(List<Integer> ticket) {
         this.ticket = ticket;

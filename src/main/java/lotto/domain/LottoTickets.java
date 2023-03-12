@@ -3,12 +3,10 @@ package lotto.domain;
 import lotto.domain.enums.LottoRank;
 import lotto.ui.LottoHitInfo;
 import lotto.ui.LottoResult;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 public class LottoTickets {
 

@@ -57,7 +57,7 @@ class LottoTicketsTest {
         //then
         assertThat(lottoNumbers).containsExactly(1, 2, 3, 4, 7,33);
         assertThat(lottoNumbers).hasSize(6);
-     }
+    }
 
     @Test
     void 당첨통계를_구한다() {
