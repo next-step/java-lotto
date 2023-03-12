@@ -25,8 +25,8 @@ public class Lotto {
         return new LottoTicket(lotto.toString());
     }
     public List<Integer> getLottoTicket2() {
-        List<Integer> shuffleNumber =  Arrays.stream(lottoNumbers).boxed().collect(Collectors.toList());
-        Collections.shuffle(Arrays.asList(shuffleNumber));
+        List<Integer> shuffleNumber = Arrays.stream(lottoNumbers).boxed().collect(Collectors.toList());
+        Collections.shuffle(shuffleNumber);
         return shuffleNumber.subList(LOTTO_TICKET_MIN, LOTTO_TICKET_LENGTH);
     }
 

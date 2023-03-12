@@ -1,6 +1,7 @@
 package lottoTest;
 
 import lotto.Lotto;
+import lotto.LottoGame;
 import lotto.LottoTicket;
 import lotto.Store;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.*;
 import java.util.stream.IntStream;
-
 
 
 public class lottoTest {
@@ -61,4 +61,12 @@ public class lottoTest {
         assertThat(set.size()).isEqualTo(numbers.length);
     }
 
+    @DisplayName("lotto GameTest")
+    @Test
+    void testLottoGame() {
+        LottoGame lottoGame = new LottoGame(5000);
+        ArrayList<LottoTicket> tickets = lottoGame.getTickets();
+        assertThat(tickets.size()).isEqualTo(5);
+        lottoGame.checkWin("5, 4, 3, 2, 1", "8");
+    }
 }
