@@ -9,24 +9,28 @@ import java.util.stream.IntStream;
 public class Lottery {
     private static final int LOTTO_LIMIT = 45;
     private static final int LOTTO_TICKET_LENGTH = 6;
-    private final int[] lottoNumbers;
+    private final int[] lotteryRange = IntStream.rangeClosed(1, LOTTO_LIMIT)
+                                                .toArray();
+    private final List<Integer> lotteryNumbers;
     public Lottery() {
-        lottoNumbers =
-                IntStream.rangeClosed(1, LOTTO_LIMIT)
-                        .toArray();
+        lotteryNumbers = publishLottery();
     }
 
-    public int[] getLottoNumber() {
-        return lottoNumbers;
+    public int[] getLotteryRange() {
+        return lotteryRange;
     }
 
-    public List<Integer> publishLottery() {
+    private List<Integer> publishLottery() {
         List<Integer> shuffleNumber =
-                Arrays.stream(lottoNumbers)
+                Arrays.stream(lotteryRange)
                         .boxed()
                         .collect(Collectors.toList());
         Collections.shuffle(Arrays.asList(shuffleNumber));
         return shuffleNumber.subList(0, LOTTO_TICKET_LENGTH);
+    }
+
+    public List<Integer> getLotteryNumbers() {
+        return lotteryNumbers;
     }
 }
 

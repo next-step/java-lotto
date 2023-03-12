@@ -1,5 +1,6 @@
 package lottery;
 
+import casino.Casino;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,15 +15,23 @@ public class LotteryTest {
     void numbers() {
         Lottery lottery = new Lottery();
         int[] sample = IntStream.rangeClosed(1, 45).toArray();
-        assertThat(lottery.getLottoNumber()).isEqualTo(sample);
+        assertThat(lottery.getLotteryRange()).isEqualTo(sample);
     }
 
     @DisplayName("발급된 로또 번호는 1~45 사이의 값 중 6개 이다.")
     @Test
-    void getTicket2() {
+    void publicTicket() {
         Lottery lottery = new Lottery();
-        List<Integer> lottoNumber = lottery.publishLottery();
+        List<Integer> lottoNumber = lottery.getLotteryNumbers();
         assertThat(lottoNumber.size()).isEqualTo(6);
         lottoNumber.forEach(i -> assertThat(i).isBetween(1, 45));
+    }
+
+    @DisplayName("카지노에서 로또를 살 수 있다.")
+    @Test
+    void buyLottery() {
+        Casino casino = new Casino();
+        Lottery lottery = casino.buyLottery();
+        assertThat(lottery).isInstanceOfAny(Lottery.class);
     }
 }
