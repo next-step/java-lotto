@@ -8,7 +8,7 @@ public class Money {
     private BigDecimal wonValue;
 
     public Money(int wonValue) {
-        this.wonValue = BigDecimal.valueOf(wonValue);
+        this(BigDecimal.valueOf(wonValue));
     }
 
     public Money(BigDecimal wonValue) {
