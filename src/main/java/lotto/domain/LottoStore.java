@@ -1,44 +1,44 @@
 package lotto.domain;
 
-import lotto.ui.LottoRequest;
+import lotto.ui.LottoBuyingRequest;
+
 import java.util.List;
 
 public class LottoStore {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
-    public LottoTickets buyLotto(final LottoRequest request) {
-        int money = request.getMoney();
-        int totalLottoCount = calculateLottoCount(money);
-        LottoInput input = LottoInput.inputLottoCount();
-        checkBuyableManualLotto(totalLottoCount, input);
-
-        List<List<Integer>> inputManualLottoNumbers = input.inputLottoNumbers();
-        LottoTickets lottoTickets = LottoTickets.createManualLottoTickets(inputManualLottoNumbers);
-        int autoLottoCount = totalLottoCount - lottoTickets.size();
-
-        if (autoLottoCount > 0) {
-            LottoTickets autoLottoTickets = LottoTickets.of(autoLottoCount);
-            lottoTickets.addLottoTickets(autoLottoTickets);
-        }
-
-        input.printTotalLottoCount(inputManualLottoNumbers.size(), autoLottoCount);
-        lottoTickets.printLottoTickets();
-        return lottoTickets;
+    public LottoTicketList buyLotto(final LottoBuyingRequest request) {
+        int buyingPrice = request.getBuyingPrice();
+        int totalLottoCount = calculateLottoCount(buyingPrice);
+        checkBuyableManualLotto(totalLottoCount, request);
+        List<String> manualLottoNumbers = request.getManualLottoNumbers();
+        LottoTicketList manualLottoTicketList = LottoTicketList.createManualLottoTicketList(manualLottoNumbers);
+        checkBuyableAutoLottoTicket(totalLottoCount, manualLottoTicketList);
+        return manualLottoTicketList;
     }
 
-    private void checkBuyableManualLotto(int totalLottoCount, LottoInput input) {
-        int manualLottoNumber = input.getNumberOfLotto();
-        int remainingLottoCount = totalLottoCount - manualLottoNumber;
+    private void checkBuyableAutoLottoTicket(int totalLottoCount, LottoTicketList manualLottoTicketList) {
+        int numberOfAutoLottoTicket = totalLottoCount - manualLottoTicketList.size();
+
+        if (numberOfAutoLottoTicket > 0) {
+            LottoTicketList autoLottoTicketList = LottoTicketList.createAutoLottoTicketList(numberOfAutoLottoTicket);
+            manualLottoTicketList.addLottoTicketList(autoLottoTicketList);
+        }
+    }
+
+    private void checkBuyableManualLotto(int totalLottoCount, LottoBuyingRequest request) {
+        int numberOfManualLotto = request.getNumberOfManualLotto();
+        int remainingLottoCount = totalLottoCount - numberOfManualLotto;
 
         if (remainingLottoCount < 0) {
-            throw new IllegalArgumentException("수동으로 구매할 로또 수가 전체 구매가능한 로또 수를 초과하였습니다. manualNumber: " + manualLottoNumber);
+            throw new IllegalArgumentException("수동으로 구매할 로또 수가 전체 구매가능한 로또 수를 초과하였습니다. manualNumber: " + numberOfManualLotto);
         }
     }
 
-    protected int calculateLottoCount(final int money) {
-        checkMoney(money);
-        return money / LOTTO_PRICE;
+    protected int calculateLottoCount(final int buyingPrice) {
+        checkMoney(buyingPrice);
+        return buyingPrice / LOTTO_PRICE;
     }
 
     protected void checkMoney(int money) {
