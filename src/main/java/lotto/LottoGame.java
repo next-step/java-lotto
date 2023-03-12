@@ -20,14 +20,17 @@ public class LottoGame {
     }
 
     private void check(LottoTicket ticket, String winNumber, String bonusNumber) {
-
-        String[] lottoNumber = ticket.getLottoNumber().split(",");
-        String[] winNumbers = winNumber.split(",");
+        String newTicketNumber = ticket.getLottoNumber().replaceAll("[\\[\\]@$^ ]", "");
+        String newWinNumber = winNumber.replaceAll(" ", "");
+        int[] lottoNumber = Arrays.stream(newTicketNumber.split(",")).mapToInt(Integer::parseInt).toArray();
+        int[] winNumbers = Arrays.stream(newWinNumber.split(",")).mapToInt(Integer::parseInt).toArray();
 
         int winCount = 0;
-        for (int ii = 0; ii < winNumbers.length; ii++)
-            if (Arrays.asList(lottoNumber).contains(winNumbers[ii]))
+        for (int number: winNumbers) {
+            if (Arrays.stream(lottoNumber).anyMatch(i -> i == number))
                 winCount++;
+        }
+
         winCount -= LOTTO_LEVEL_COUNT;
         if (winCount < LOTTO_LEVEL_LOSE) {
             ticket.setWinLevel(LOTTO_LEVEL_LOSE);
@@ -43,7 +46,7 @@ public class LottoGame {
             ticket.setWinLevel(LOTTO_LEVEL_1);
             return;
         }
-        if (Arrays.asList(lottoNumber).contains(bonusNumber))
+        if (Arrays.stream(lottoNumber).anyMatch(i -> i == Integer.parseInt(bonusNumber)))
             winLevel--;
         ticket.setWinLevel(winLevel);
         return;
