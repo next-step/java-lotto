@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Numbers {
-    private static Double DEFAULT_VALUE = 0.0;
-    private static Pattern NUMBER_PATTERN = Pattern.compile("[(0-9|.)]+");
+    private static final double DEFAULT_VALUE = 0.0;
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("[(0-9|.)]+");
 
     private final List<Double> numbers;
 
