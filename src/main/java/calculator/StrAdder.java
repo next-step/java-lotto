@@ -19,8 +19,8 @@ public class StrAdder {
             return new String[]{"0"};
         }
 
-        if(isCustomSeparatorUsed(numbers)){
-            separator = parseCustomSeparator(numbers);
+        if(isCustomUse(numbers)){
+            separator = parseCustom(numbers);
             numbers = numbers.substring(4);  //숫자시작(4)
         }
 
@@ -28,12 +28,12 @@ public class StrAdder {
         return factors;
     }
 
-    //matcher() 사용으로 커스텀구분자 확인
-    boolean isCustomSeparatorUsed(String numbers){
-        return customSeparator.matcher(numbers).find();
+    //커스컴 구분자 사용하는지 여부 matcher() 사용으로 커스텀구분자 확인
+    boolean isCustomUse(String numbers){
+        return customSeparator.matcher(numbers).find(); // 상수값으로 체크
     }
 
-    String parseCustomSeparator(String numbers){
+    String parseCustom(String numbers){
         return String.valueOf(numbers.charAt(2));
     }
 
