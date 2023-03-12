@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class LottoGame {
@@ -32,15 +31,7 @@ public class LottoGame {
     }
 
     public WinningStatistics getStatistics(LotteryNumbers lotteryNumbers) {
-        WinningStatistics winningStatistics = new WinningStatistics();
-        lottos.stream()
-                .map(lotto -> {
-                    HashSet<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
-                    return lotteryNumbers.getWinningGrade(lottoNumbers);
-                })
-                .forEach(winningStatistics::add);
-
-        return winningStatistics;
+        return new WinningStatistics(lotteryNumbers, lottos);
     }
 
     public String getBuyCountForPrint() {

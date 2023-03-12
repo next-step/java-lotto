@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoGame.LOTTO_PRICE;
@@ -10,22 +8,26 @@ import static lotto.domain.LottoGame.LOTTO_PRICE;
 public class WinningStatistics {
     private final Map<WinningGrade, Integer> lotteryStatistics;
 
-    public WinningStatistics() {
-        this.lotteryStatistics = new HashMap<>(
-                Map.of(
-                        WinningGrade.FIRST_PRIZE, 0,
-                        WinningGrade.SECOND_PRIZE, 0,
-                        WinningGrade.THIRD_PRIZE, 0,
-                        WinningGrade.FORTH_PRIZE, 0,
-                        WinningGrade.FIFTY_PRIZE, 0,
-                        WinningGrade.ETC, 0
-                )
-        );
+    public WinningStatistics(LotteryNumbers lotteryNumbers, List<Lotto> lottos) {
+        Map<WinningGrade, Integer> lotteryStatistics = initStatistics();
+        lottos.stream().map(lotto -> {
+                    Set<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
+                    return lotteryNumbers.getWinningGrade(lottoNumbers);
+                })
+                .forEach(winningGrade ->{
+                    Integer value = lotteryStatistics.get(winningGrade);
+                    lotteryStatistics.put(winningGrade, ++value);
+                });
+
+        this.lotteryStatistics = Collections.unmodifiableMap(lotteryStatistics);
     }
 
-    public void add(WinningGrade winningGrade) {
-        Integer count = lotteryStatistics.getOrDefault(winningGrade, 0);
-        lotteryStatistics.put(winningGrade, ++count);
+    private Map<WinningGrade, Integer> initStatistics() {
+        Map<WinningGrade, Integer> lotteryStatistics = new HashMap<>();
+        for (WinningGrade grade : WinningGrade.values()) {
+            lotteryStatistics.put(grade, 0);
+        }
+        return lotteryStatistics;
     }
 
     public int getWinningNumbers(WinningGrade winningGrade) {
