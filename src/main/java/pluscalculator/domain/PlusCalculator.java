@@ -9,7 +9,7 @@ public class PlusCalculator {
         return numbers.plusAll();
     }
 
-    private static Numbers extractNumbers( final String plusExpression) {
+    private static Numbers extractNumbers(final String plusExpression) {
         if (plusExpression == null || plusExpression.isBlank()) {
             return new Numbers();
         }
