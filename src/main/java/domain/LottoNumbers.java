@@ -27,4 +27,5 @@ public class LottoNumbers {
     public String toString() {
         return numbers.toString();
     }
+
 }

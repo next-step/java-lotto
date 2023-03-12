@@ -23,11 +23,8 @@ public class LottoNumberGenerator {
     public static List<LottoNumber> generateLottoNumbers(List<String> input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for (int i = 1; i <= 45; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-
-        Collections.shuffle(lottoNumbers);
+        input.stream().forEach(number -> lottoNumbers.add(new LottoNumber(Integer.parseInt(number))));
+        lottoNumbers.sort(new LottoNumberComparator());
 
         return lottoNumbers.subList(0, 6);
     }

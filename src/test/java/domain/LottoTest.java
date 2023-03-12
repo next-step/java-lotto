@@ -144,10 +144,6 @@ public class LottoTest {
 
     @Test
     void setLottoNumberTest() {
-        // var lotto = new Lotto();
-        // lotto.setLottoNumber();
-        // lotto.getLottoNumber().forEach(System.out::println);
-
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<LottoNumber> lottoNumber = lottoNumbers.getNumbers();
         Collections.shuffle(lottoNumber);
@@ -158,12 +154,6 @@ public class LottoTest {
         System.out.println("=====================================");
 
         List<LottoNumber> newNumber = lottoNumber.subList(0, 6);
-        // Collections.sort(newNumber, new Comparator<LottoNumber>() {
-        // @Override
-        // public int compare(LottoNumber o1, LottoNumber o2) {
-        // return o1.getLottoNumber() - o2.getLottoNumber();
-        // }
-        // });
         Collections.sort(lottoNumber.subList(0, 6), (o1, o2) -> o1.getNumber() - o2.getNumber());
         newNumber.forEach(it -> System.out.println(it.getNumber()));
     }
@@ -189,6 +179,14 @@ public class LottoTest {
         lotto = new Lotto();
         InputView.printLotto(lotto);
 
+    }
+
+    @Test
+    void calculateLottoRankTest() {
+        FirstPlaceLotto firstPlaceLotto = new FirstPlaceLotto("1,2,3,4,5,6", "7");
+        Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        lotto.calculateLottoRank(firstPlaceLotto);
+        System.out.println(lotto.getLottoRankAmount());
     }
 
 }

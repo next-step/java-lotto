@@ -15,6 +15,10 @@ public class Lotto {
         this.lottoNumber = new LottoNumbers();
     }
 
+    public Lotto(List<String> input) {
+        this.lottoNumber = new LottoNumbers(input);
+    }
+
     public LottoRankAmount getLottoRankAmount() {
         return lottoRankAmount;
     }

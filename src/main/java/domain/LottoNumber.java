@@ -32,4 +32,12 @@ public class LottoNumber {
         return String.valueOf(number);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        LottoNumber lottoNumber = (LottoNumber) object;
+        if (this.getNumber() == lottoNumber.getNumber()) {
+            return true;
+        }
+        return false;
+    }
 }

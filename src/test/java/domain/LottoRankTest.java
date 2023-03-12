@@ -6,7 +6,23 @@ import domain.type.LottoRankAmount;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.util.Arrays;
+
 public class LottoRankTest {
+
+    @Test
+    void matchCountTest() {
+        FirstPlaceLotto firstPlaceLotto = new FirstPlaceLotto("1,2,3,4,5,6", "7");
+        Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        lotto.calculateLottoRank(firstPlaceLotto);
+
+        System.out.println(lotto.getLottoNumbers());
+        System.out.println(firstPlaceLotto.getLottoNumbers());
+        System.out.println(firstPlaceLotto.getBonusLottoNumber());
+        System.out.println(LottoRank.matchCount(lotto, firstPlaceLotto));
+
+        assertThat(LottoRank.matchCount(lotto, firstPlaceLotto), is(6));
+    }
 
     @Test
     void firstRankTest() {
