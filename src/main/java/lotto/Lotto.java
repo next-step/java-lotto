@@ -20,9 +20,15 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public LottoTicket getLottoTicket3() {
+        List<Integer> lotto = getLottoTicket2();
+        return new LottoTicket(lotto.toString());
+    }
     public List<Integer> getLottoTicket2() {
         List<Integer> shuffleNumber =  Arrays.stream(lottoNumbers).boxed().collect(Collectors.toList());
         Collections.shuffle(Arrays.asList(shuffleNumber));
         return shuffleNumber.subList(LOTTO_TICKET_MIN, LOTTO_TICKET_LENGTH);
     }
+
+
 }
