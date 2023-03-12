@@ -1,6 +1,6 @@
-package TestCalculator;
+package testCalculator;
 
-import Calculator.StringCalculator;
+import calculator.StringCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-class calculatorTest {
+class CalculatorTest {
     private StringCalculator calculator;
 
     @BeforeEach
