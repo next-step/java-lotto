@@ -1,4 +1,4 @@
-package domain;
+package domain.type;
 
 public enum LottoPrice {
     PRICE(1000);

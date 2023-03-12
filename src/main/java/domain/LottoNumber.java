@@ -15,7 +15,7 @@ public class LottoNumber {
         number = input;
     }
 
-    public int getLottoNumber() {
+    public int getNumber() {
         return number;
     }
 

@@ -23,4 +23,8 @@ public class Lotto {
         return this.lottoNumber;
     }
 
+    public void calculateLottoRank(FirstPlaceLotto firstPlaceLotto) {
+        lottoRankAmount = LottoRank.getRank(this, firstPlaceLotto);
+    }
+
 }

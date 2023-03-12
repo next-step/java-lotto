@@ -113,7 +113,7 @@ public class LottoTest {
         var integer = Integer.valueOf(input);
 
         var number = new LottoNumber(integer);
-        assertThat(number.getLottoNumber(), is(1));
+        assertThat(number.getNumber(), is(1));
     }
 
     @DisplayName("숫자 0,-1 입력시 lottoNumber 오류 확인")
@@ -153,7 +153,7 @@ public class LottoTest {
         Collections.shuffle(lottoNumber);
         // lottoNumber.subList(0, 6).stream()
         // .sorted().toList();
-        lottoNumber.subList(0, 6).forEach(it -> System.out.println(it.getLottoNumber()));
+        lottoNumber.subList(0, 6).forEach(it -> System.out.println(it.getNumber()));
 
         System.out.println("=====================================");
 
@@ -164,8 +164,8 @@ public class LottoTest {
         // return o1.getLottoNumber() - o2.getLottoNumber();
         // }
         // });
-        Collections.sort(lottoNumber.subList(0, 6), (o1, o2) -> o1.getLottoNumber() - o2.getLottoNumber());
-        newNumber.forEach(it -> System.out.println(it.getLottoNumber()));
+        Collections.sort(lottoNumber.subList(0, 6), (o1, o2) -> o1.getNumber() - o2.getNumber());
+        newNumber.forEach(it -> System.out.println(it.getNumber()));
     }
 
     @DisplayName("로또 출력 테스트")

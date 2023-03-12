@@ -14,8 +14,11 @@ public class LottoMain {
         String firstLottoInput = InputView.scanFirstLotto();
         String bonusNumberInput = InputView.scanBonusLottoNumer();
 
-        FirstPlaceLotto firstLotto = new FirstPlaceLotto(firstLottoInput, bonusNumberInput);
+        lottoService.setFirstPlaceLotto(firstLottoInput, bonusNumberInput);
 
+        lottoService.calculateLottoRank();
+
+        lottoService.printLottoResult();
     }
 
 }

@@ -7,6 +7,7 @@ public class LottoMatch {
     public LottoMatch(Lotto lotto, Lotto firstLotto) {
         this.matchCount = checkMatchCount(lotto, firstLotto);
         this.withBonusYn = checkWithBonusYn(lotto, firstLotto);
+
     }
 
     private boolean checkWithBonusYn(Lotto lotto, Lotto firstLotto) {
