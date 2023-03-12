@@ -2,6 +2,7 @@ package lottoTest;
 
 import lotto.Lotto;
 import lotto.LottoTicket;
+import lotto.Store;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,22 +14,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import java.util.*;
 import java.util.stream.IntStream;
 
-
-class Store {
-    private static final int LOTTO_PRICE = 1000;
-
-    Store() {
-    }
-
-    public ArrayList<LottoTicket> buyLotto2 (int money) {
-        ArrayList<LottoTicket> lottoTickets = new ArrayList<LottoTicket>();
-        Lotto lotto = new Lotto();
-
-        for (int ii = 0; ii < (money/LOTTO_PRICE); ii++)
-            lottoTickets.add(lotto.getLottoTicket3());
-        return lottoTickets;
-    }
-}
 
 
 public class lottoTest {
