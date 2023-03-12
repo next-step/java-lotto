@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
+    private static final String REGULAR_EXPRESSION = "\"//(.)\\n(.*)\"";
     public int add(final String text) {
 
         if (text == null || text.isEmpty()) { return 0; }
@@ -14,7 +15,7 @@ public class StringCalculator {
     }
 
     private String[] getNumbers(String text) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher matcher = Pattern.compile(REGULAR_EXPRESSION).matcher(text);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
@@ -25,15 +26,17 @@ public class StringCalculator {
 
     private int sum(String[] numbers) {
         return Arrays.stream(numbers)
-                .map(this::parsePositiveNumber)
-                .reduce(0, Integer::sum);
+                .mapToInt(this::parsePositiveNumber)
+                .sum();
     }
 
     private int parsePositiveNumber(String text) {
-        if (Integer.parseInt(text) >= 0) {
-            return Integer.parseInt(text);
+        int value = Integer.parseInt(text);
+
+        if (value >= 0) {
+            return value;
         } else {
-            throw new RuntimeException();
+            throw new RuntimeException("양수만 입력 가능");
         }
     }
 }

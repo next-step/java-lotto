@@ -7,10 +7,10 @@ import java.util.List;
 
 public class ResultView {
 
-    public void PurchaseHistory(long purchaseCount, Lotto lotto) {
+    public void purchaseHistory(long purchaseCount, Lotto lotto) {
 
         System.out.println(purchaseCount + "개를 구매했습니다.");
-        lotto.printToLotto();
+        lotto.printToLottoNumber();
     }
 
     public void printToWinningStatistics(Lotto lotto) {

@@ -24,16 +24,8 @@ public class LottoNumber {
     public Level getLevel() { return level; }
 
     public String printNumber() {
-        String stringNumbers = "";
 
-        for (Integer number : numbers) {
-            stringNumbers += number.toString();
-
-            if (numbers.lastIndexOf(number) != numbers.size() - 1) {
-                stringNumbers += ", ";
-            }
-        }
-        return "[" + stringNumbers + "]";
+        return numbers.toString();
     }
     public long getWinningAmount() {
         return level.getAmount();

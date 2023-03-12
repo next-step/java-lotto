@@ -13,20 +13,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
-    public void printToLotto() {
-        lottoNumbers.stream()
-                .forEach(it -> System.out.println(it.printNumber()));
+    public void printToLottoNumber() {
+        lottoNumbers.forEach(it -> System.out.println(it.printNumber()));
     }
 
     public void confirmWinningNumber(List<Integer> winningNumbers,
                                      int bonusNumber) {
         // 일반 볼 당첨 확인
-        lottoNumbers.stream()
-                .forEach(it -> it.setLevel(Level.valueOf(getHitCount(it, winningNumbers, bonusNumber))));
+        lottoNumbers.forEach(it -> it.setLevel(Level.hitCount(getHitCount(it, winningNumbers, bonusNumber))));
 
         // 보너스 볼 당첨 확인
         lottoNumbers.stream()

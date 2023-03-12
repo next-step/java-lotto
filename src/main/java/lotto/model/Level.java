@@ -28,7 +28,7 @@ public enum Level {
         return amount;
     }
 
-    public static Level valueOf(long value) {
+    public static Level hitCount(long value) {
         return Arrays.stream(Level.values())
                 .filter(it -> it.value == value)
                 .findFirst()
