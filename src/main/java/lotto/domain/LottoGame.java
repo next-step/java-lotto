@@ -27,10 +27,8 @@ public class LottoGame {
         return issueRequest.getPrice();
     }
 
-    public List<List<Integer>> getAllLottoNumbers() {
-        List<List<Integer>> allLottoNumbers = new ArrayList<>();
-        lottos.forEach(lotto -> allLottoNumbers.add(lotto.getLottoNumbers()));
-        return allLottoNumbers;
+    public List<Lotto> getAllLottoNumbersForPrint() {
+        return this.lottos;
     }
 
     public WinningStatistics getStatistics(LotteryNumbers lotteryNumbers) {

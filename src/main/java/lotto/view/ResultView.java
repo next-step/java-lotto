@@ -1,15 +1,15 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.WinningStatistics;
 
-import java.util.List;
 
 public class ResultView {
     public static void printBuyCountForPrint(LottoGame lottoGame) {
         System.out.println(lottoGame.getBuyCountForPrint());
-        for (List<Integer> allLottoNumber : lottoGame.getAllLottoNumbers()) {
-            System.out.println(allLottoNumber);
+        for (Lotto allLottoNumber : lottoGame.getAllLottoNumbersForPrint()) {
+            System.out.println(allLottoNumber.getLottoNumbers());
         }
         System.out.println();
     }
