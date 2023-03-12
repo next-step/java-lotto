@@ -10,14 +10,10 @@ public class WinningStatistics {
 
     public WinningStatistics(LotteryNumbers lotteryNumbers, List<Lotto> lottos) {
         Map<WinningGrade, Integer> lotteryStatistics = initStatistics();
-        lottos.stream().map(lotto -> {
-                    Set<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
-                    return lotteryNumbers.getWinningGrade(lottoNumbers);
-                })
-                .forEach(winningGrade ->{
-                    Integer value = lotteryStatistics.get(winningGrade);
-                    lotteryStatistics.put(winningGrade, ++value);
-                });
+        lottos.forEach(lotto -> {
+            WinningGrade winningGrade = lotteryNumbers.getWinningGrade(lotto);
+            lotteryStatistics.put(winningGrade, lotteryStatistics.get(winningGrade) + 1);
+        });
 
         this.lotteryStatistics = Collections.unmodifiableMap(lotteryStatistics);
     }

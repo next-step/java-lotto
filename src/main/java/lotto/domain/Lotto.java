@@ -17,6 +17,16 @@ public class Lotto {
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoBalls.stream().map(LottoBall::getNumber).sorted().collect(Collectors.toList());
+        return this.lottoBalls.stream().map(LottoBall::getNumber).sorted().collect(Collectors.toList());
+    }
+
+    public int matchWinningCount(Set<LottoBall> winningNumbers) {
+        Set<LottoBall> matchCheckSet = new HashSet<>(winningNumbers);
+        matchCheckSet.retainAll(this.lottoBalls);
+        return matchCheckSet.size();
+    }
+
+    public boolean isMatchBonus(LottoBall bonusNumber) {
+        return this.lottoBalls.stream().anyMatch(lottoBall -> lottoBall.isSameBall(bonusNumber));
     }
 }

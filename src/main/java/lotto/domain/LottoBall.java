@@ -36,6 +36,10 @@ public enum LottoBall {
         return this.number;
     }
 
+    public boolean isSameBall(LottoBall lottoBall) {
+        return this.getNumber() == lottoBall.getNumber();
+    }
+
     @Override
     public String toString() {
         return Integer.toString(number);

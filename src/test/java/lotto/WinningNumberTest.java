@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LotteryNumbers;
+import lotto.domain.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,8 @@ public class WinningNumberTest {
     @Test
     void matchWinningNumber() {
         LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
-        int matchCount = lotteryNumbers.matchWinningCount(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        int matchCount = lotto.matchWinningCount(lotteryNumbers.getWinningNumbers());
         Assertions.assertThat(matchCount).isEqualTo(6);
     }
 
@@ -25,9 +27,9 @@ public class WinningNumberTest {
     @ParameterizedTest
     @MethodSource("generateArgumentsSet")
     void isMatchBonusNumber(Set<Integer> numbers, boolean expectResult) {
-
         LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
-        Assertions.assertThat(lotteryNumbers.isMatchBonus(numbers)).isEqualTo(expectResult);
+        Lotto lotto = new Lotto(numbers);
+        Assertions.assertThat(lotto.isMatchBonus(lotteryNumbers.getBonusNumber())).isEqualTo(expectResult);
     }
 
     private static Stream<Arguments> generateArgumentsSet() {

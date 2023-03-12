@@ -12,18 +12,16 @@ public class LotteryNumbers {
         this.bonusNumber = LottoBall.getLottoBall(bonusNumber);
     }
 
-    public int matchWinningCount(final Set<Integer> lottoNumbers) {
-        Set<LottoBall> compareLottoNumber = lottoNumbers.stream().map(LottoBall::getLottoBall).collect(Collectors.toSet());
-        compareLottoNumber.retainAll(winningNumbers);
-        return compareLottoNumber.size();
+    public Set<LottoBall> getWinningNumbers() {
+        return winningNumbers;
     }
 
-    public boolean isMatchBonus(final Set<Integer> lottoNumbers) {
-        return lottoNumbers.contains(bonusNumber.getNumber());
+    public LottoBall getBonusNumber() {
+        return bonusNumber;
     }
 
-
-    public WinningGrade getWinningGrade(final Set<Integer> lottoNumbers) {
-        return WinningGrade.checkWinningGrade(matchWinningCount(lottoNumbers), isMatchBonus(lottoNumbers));
+    public WinningGrade getWinningGrade(final Lotto lotto) {
+        return WinningGrade.checkWinningGrade(lotto.matchWinningCount(this.winningNumbers), lotto.isMatchBonus(this.bonusNumber));
     }
+
 }
