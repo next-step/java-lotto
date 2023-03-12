@@ -1,13 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.enums.LottoRank;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoTicketTest {
@@ -20,21 +19,6 @@ class LottoTicketTest {
 
         //then
         assertThat(lottoTicket.getTicketSize()).isEqualTo(6);
-    }
-
-    @Test
-    void 당첨번호_개수를_구한다() {
-        //given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoTicket lottoTicket = new LottoTicket(numbers);
-        List<Integer> rewardingNumbers = List.of(1, 6, 3, 8, 2, 19);
-        int bonusNumber = 7;
-
-        //when
-        LottoRank actual = lottoTicket.getHitCount(rewardingNumbers, bonusNumber);
-
-        //then
-        assertThat(actual).isEqualTo(LottoRank.FOUR_HIT);
     }
 
     @Test

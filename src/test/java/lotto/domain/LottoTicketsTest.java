@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.enums.LottoRank;
+import lotto.ui.LottoHitInfo;
 import lotto.ui.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -36,7 +37,7 @@ class LottoTicketsTest {
         tickets.add(new LottoTicket(List.of(13, 14, 18, 21, 23, 35)));
         tickets.add(new LottoTicket(List.of(17, 21, 29, 37, 42, 45)));
         tickets.add(new LottoTicket(List.of(3, 8, 27, 30, 35, 44)));
-        tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 33)));
+        tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 37)));
         lottoTickets = new LottoTickets(tickets);
     }
 
@@ -61,17 +62,20 @@ class LottoTicketsTest {
     @Test
     void 당첨통계를_구한다() {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 37);
+        String hitNumbers = "1,2,3,4,5,37";
         int bonusNumber = 37;
 
+        LottoHitInfo hitInfo = new LottoHitInfo(hitNumbers, bonusNumber);
+
         // when
-        LottoResult result = lottoTickets.createLottoResult(numbers, bonusNumber);
+        LottoResult result = lottoTickets.createLottoResult(hitInfo);
 
         result.printWinningStatistics();
 
         //then
         assertThat(result.findHitCount(LottoRank.THREE_HIT)).isEqualTo(1);
-        assertThat(result.findHitCount(LottoRank.FIVE_HIT)).isEqualTo(1);
+        assertThat(result.findHitCount(LottoRank.FIVE_HIT)).isEqualTo(0);
         assertThat(result.findHitCount(LottoRank.FIVE_HIT_WITH_BONUS)).isEqualTo(0);
+        assertThat(result.findHitCount(LottoRank.SIX_HIT)).isEqualTo(1);
     }
 }

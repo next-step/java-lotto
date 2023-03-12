@@ -7,7 +7,7 @@ public enum LottoRank {
     FOUR_HIT(4, 50000,"(50000원)", false),
     FIVE_HIT(5, 1500000,"(1500000원)", false),
     FIVE_HIT_WITH_BONUS(5, 30000000,"보너스 볼 일치(30000000원)", true),
-    SIX_HIT(6, 2000000000,"(2000000000원)", true);
+    SIX_HIT(6, 2000000000,"(2000000000원)", false);
 
     private final int hit;
     private final int rewarding;
