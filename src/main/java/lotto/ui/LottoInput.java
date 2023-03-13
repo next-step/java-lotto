@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;

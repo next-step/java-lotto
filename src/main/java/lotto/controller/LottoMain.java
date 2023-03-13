@@ -1,19 +1,20 @@
 package lotto.controller;
 
-import lotto.domain.LottoTickets;
+import lotto.domain.LottoTicketList;
 import lotto.service.LottoService;
 import lotto.ui.LottoHitInfo;
-import lotto.ui.LottoRequest;
+import lotto.ui.LottoBuyingRequest;
 import lotto.ui.LottoResult;
 
 public class LottoMain {
 
     public static void main(String[] args) {
-        LottoRequest request = LottoRequest.inputBuyingPrice();
+        LottoBuyingRequest request = LottoBuyingRequest.create();
         LottoService lottoService = new LottoService();
-        LottoTickets lottoTickets = lottoService.buyLotto(request);
+        LottoTicketList lottoTicketList = lottoService.buyLotto(request);
         LottoHitInfo lottoHitInfo = LottoHitInfo.inputHitInfo();
-        LottoResult lottoResult = lottoTickets.createLottoResult(lottoHitInfo);
+        LottoResult lottoResult = LottoResult.from(lottoTicketList, lottoHitInfo);
+        lottoResult.printLottoNumbers();
         lottoResult.printWinningStatistics();
     }
 }

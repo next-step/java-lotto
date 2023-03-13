@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,9 +10,9 @@ import java.util.stream.Collectors;
 public class LottoHitInfo {
 
     private final String hitNumbers;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public LottoHitInfo(String hitNumbers, int bonusNumber) {
+    public LottoHitInfo(String hitNumbers, LottoNumber bonusNumber) {
         this.hitNumbers = hitNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -24,16 +26,17 @@ public class LottoHitInfo {
         int bonusNumber = sc.nextInt();
         sc.nextLine();
 
-        return new LottoHitInfo(hitNumbers, bonusNumber);
+        return new LottoHitInfo(hitNumbers, new LottoNumber(bonusNumber));
     }
 
-    public List<Integer> getHitNumbers() {
+    public List<LottoNumber> getHitNumbers() {
         return Arrays.stream(hitNumbers.split(","))
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 }
