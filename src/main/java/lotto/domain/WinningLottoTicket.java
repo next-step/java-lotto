@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLottoTicket {
     private final LottoTicket winningLottoNumber;
@@ -19,20 +20,27 @@ public class WinningLottoTicket {
     }
 
     public LottoRank getWinnerLotto(LottoTicket lottoNumbers) {
-        int condition = (int) lottoNumbers.getLottoNumbers().stream()
+        int matchCount = (int) lottoNumbers.getLottoNumbers().stream()
                 .filter(lottoNumber -> {
-                    return this.winningLottoNumber.getLottoNumbers().contains(lottoNumber);
+                    return winningLottoNumber.contains(lottoNumber);
                 })
                 .count();
 
-        int bounsCondition = 0;
+        int bounsMatchCount = 0;
 
         if (lottoNumbers.contains(bounsNumber)) {
-            bounsCondition = 1;
+            bounsMatchCount = 1;
         }
 
-        return LottoRank.getRankCondition(condition, bounsCondition);
+        return LottoRank.getRankCondition(matchCount, bounsMatchCount);
     }
+
+    public List<LottoRank> getWinnerLottos(List<LottoTicket> lottoTickets){
+        return lottoTickets.stream()
+                .map(lottoTicket -> getWinnerLotto(lottoTicket))
+                .collect(Collectors.toList());
+    }
+
 
     public List<Integer> getWinningLottoNumbers() {
         return winningLottoNumber.getLottoNumbers();
@@ -40,6 +48,10 @@ public class WinningLottoTicket {
 
     public int getBounsNumber() {
         return this.bounsNumber;
+    }
+
+    public boolean contains(int lottoNumber){
+        return winningLottoNumber.contains(lottoNumber);
     }
 
 

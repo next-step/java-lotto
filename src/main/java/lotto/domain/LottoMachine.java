@@ -10,7 +10,7 @@ public class LottoMachine {
 
     private final static int LOTTO_PRICE = 1000;
 
-    private WinningLottoTicket winningLottoNumbers;
+    private WinningLottoTicket winningLottoNumber;
 
     public LottoMachine(int buyLottoPrice) {
         this(buyLottoPrice, buyRandomLotto(buyLottoPrice));
@@ -48,11 +48,21 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-    public void saveWinningNumber(LottoTicket winningLottoNumbers, int bounsNumber) {
-        this.winningLottoNumbers = new WinningLottoTicket(winningLottoNumbers, bounsNumber);
+    public void saveWinningNumber(WinningLottoTicket winningLottoTicket) {
+        this.winningLottoNumber = winningLottoTicket;
     }
 
-    public WinningLottoTicket getWinningLottoNumbers() {
-        return this.winningLottoNumbers;
+    public WinningLottoTicket getWinningLottoNumber() {
+        return this.winningLottoNumber;
+    }
+
+    public long getamountStatistics() {
+        if(winningLottoNumber == null){
+            new IllegalStateException("당첨번호가 없음");
+        }
+
+        return winningLottoNumber.getWinnerLottos(lottoTickets).stream()
+                .mapToInt(value -> value.winningAmount)
+                .sum();
     }
 }

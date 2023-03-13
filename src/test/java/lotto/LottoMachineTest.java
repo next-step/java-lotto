@@ -1,11 +1,14 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningLottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,27 +49,74 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(1000);
 
         int testBounsNumber = 7;
-        lottoMachine.saveWinningNumber(new LottoTicket("1,2,3,4,5,6"), testBounsNumber);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), testBounsNumber);
 
-        WinningLottoTicket winningLottoTicket = lottoMachine.getWinningLottoNumbers();
+        lottoMachine.saveWinningNumber(winningLottoTicket);
 
-        assertThat(winningLottoTicket.getWinningLottoNumbers())
+        WinningLottoTicket actualWinnerNumber = lottoMachine.getWinningLottoNumber();
+
+        assertThat(actualWinnerNumber.getWinningLottoNumbers())
                 .hasSize(6)
                 .contains(1, 2, 3, 4, 5, 6);
 
-        assertThat(winningLottoTicket.getBounsNumber()).isEqualTo(testBounsNumber);
+        assertThat(actualWinnerNumber.getBounsNumber()).isEqualTo(testBounsNumber);
     }
 
     @Test
     @DisplayName("당첨통계를 낼 수 있다. 금액편")
     void statisticsAmount() {
+        
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
+        int rottoPrice = 1000;
+
+        lottoTickets.add(new LottoTicket("1,2,7,8,9,10")); // 미당첨
+        lottoTickets.add(new LottoTicket("10,11,12,13,14,15")); // 미당첨
+        lottoTickets.add(new LottoTicket("1,2,3,7,8,9")); // 5등  5000월
+        lottoTickets.add(new LottoTicket("1,2,3,4,8,9")); // 4등  50000
+        lottoTickets.add(new LottoTicket("1,2,3,4,5,9")); // 3등  1500000
+        lottoTickets.add(new LottoTicket("1,2,3,4,5,7")); // 2등  30000000
+        lottoTickets.add(new LottoTicket("1,2,3,4,5,6")); // 1등  2000000000
+
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
+
+        // 모든 등수
+        long estimatedAmount = Arrays.stream(LottoRank.values())
+                .mapToInt(value -> value.winningAmount)
+                .sum();
+
+        LottoMachine lottoMachine = new LottoMachine(rottoPrice * lottoTickets.size(), lottoTickets);
+
+        lottoMachine.saveWinningNumber(winningLottoTicket);
+
+        assertThat(lottoMachine.getamountStatistics());
     }
 
     @Test
     @DisplayName("당첨통계를 낼 수 있다. 수익률편")
     void aggregationOfReturns() {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
+        int rottoPrice = 1000;
+
+        lottoTickets.add(new LottoTicket("1,2,7,8,9,10")); // 미당첨
+        lottoTickets.add(new LottoTicket("10,11,12,13,14,15")); // 미당첨
+        lottoTickets.add(new LottoTicket("1,2,3,7,8,9")); // 5등  5000월
+        lottoTickets.add(new LottoTicket("1,2,3,4,8,9")); // 4등  50000
+        lottoTickets.add(new LottoTicket("1,2,3,4,5,9")); // 3등  1500000
+        lottoTickets.add(new LottoTicket("1,2,3,4,5,7")); // 2등  30000000
+        lottoTickets.add(new LottoTicket("1,2,3,4,5,6")); // 1등  2000000000
+
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
+
+        // 모든 등수
+        long estimatedAmount = Arrays.stream(LottoRank.values())
+                .mapToInt(value -> value.winningAmount)
+                .sum();
+
+        LottoMachine lottoMachine = new LottoMachine(rottoPrice * lottoTickets.size(), lottoTickets);
+
+        //assertThat()
     }
 
 }
