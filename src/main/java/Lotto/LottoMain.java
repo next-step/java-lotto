@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoMain {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         InputView inputView = new InputView();
         Lottos lottos = new Lottos();
         lottos.buyLottos(inputView.inputBuyingPrice());

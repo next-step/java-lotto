@@ -19,7 +19,7 @@ public class Lotto {
 
     protected Lotto(List<Integer> lottoNumbers) {
         for (Integer lottoNubmer : lottoNumbers) {
-            if(lottoNubmer < 1 || lottoNubmer > 45){
+            if (lottoNubmer < 1 || lottoNubmer > 45) {
                 throw new IllegalArgumentException("로또 번호는 1부터 45 까지 입니다");
             }
         }
@@ -36,7 +36,7 @@ public class Lotto {
     }
 
     public static List<Integer> makeLottoNumbers() {
-        List<Integer> lottoNumber = IntStream.rangeClosed(1,45).boxed()
+        List<Integer> lottoNumber = IntStream.rangeClosed(1, 45).boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(lottoNumber);
         List<Integer> pickNumbers = lottoNumber.subList(0, 6);

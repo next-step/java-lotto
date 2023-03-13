@@ -45,23 +45,25 @@ public class Lottos {
         return lottoCount;
     }
 
-    public void setWinLotto(List<Integer> winLottoNumber){
+    public void setWinLotto(List<Integer> winLottoNumber) {
 
         this.winLotto = new Lotto(winLottoNumber);
     }
+
     public void setBonusNumber(int bonusNumber) {
         this.bonusNumber = bonusNumber;
     }
 
-    public void executeLotto(){
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.get(i).executeLotto(winLotto, bonusNumber);
-            if(null != lottos.get(i).getRank()) {
-                this.sumWinAmount = sumWinAmount.add(lottos.get(i).getRank().getRewardAmount());
+    public void executeLotto() {
+        for (Lotto lotto : lottos) {
+            lotto.executeLotto(winLotto, bonusNumber);
+            if (null != lotto.getRank()) {
+                this.sumWinAmount = sumWinAmount.add(lotto.getRank().getRewardAmount());
             }
         }
         setRate();
     }
+
     public List<Lotto> getLottos() {
         return lottos;
     }

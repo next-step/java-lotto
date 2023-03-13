@@ -29,8 +29,8 @@ public class LottoTest {
     @DisplayName(value = "일치하는 갯수 및 보너스숫자 여부에 따라 당첨금액을 반환한다.")
     @Test
     void getRankInformation() {
-        Integer[] arr = { 1,2,3,4,5,6 };
-        Integer[] arr2 = { 1,2,3,7,8,9 };
+        Integer[] arr = {1, 2, 3, 4, 5, 6};
+        Integer[] arr2 = {1, 2, 3, 7, 8, 9};
         Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
         Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
         lotto.executeLotto(winLotto, 7);
@@ -41,8 +41,8 @@ public class LottoTest {
     @DisplayName(value = "로또 세트에 당첨 번호를 입력하면 각 세트별 일치하는 숫자의 갯수를 반환한다.")
     @Test
     void setHitCount() {
-        Integer[] arr = { 1,2,3,4,5,6 };
-        Integer[] arr2 = { 1,2,3,7,8,9 };
+        Integer[] arr = {1, 2, 3, 4, 5, 6};
+        Integer[] arr2 = {1, 2, 3, 7, 8, 9};
         Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
         Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
         lotto.executeLotto(winLotto, 7);
@@ -52,8 +52,8 @@ public class LottoTest {
     @DisplayName(value = "로또 세트에 보너스 숫자가 포함되어 있으면 true를 반환한다.")
     @Test
     void setWinInformation() {
-        Integer[] arr = { 1,2,3,4,5,9 };
-        Integer[] arr2 = { 1,2,3,4,5,6 };
+        Integer[] arr = {1, 2, 3, 4, 5, 9};
+        Integer[] arr2 = {1, 2, 3, 4, 5, 6};
         Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
         Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
         lotto.executeLotto(winLotto, 9);
