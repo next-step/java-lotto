@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private int buyLottoPrice;
+    private final int buyLottoPrice;
 
     private final List<LottoTicket> lottoTickets;
 
@@ -57,12 +59,26 @@ public class LottoMachine {
     }
 
     public long getamountStatistics() {
-        if(winningLottoNumber == null){
-            new IllegalStateException("당첨번호가 없음");
-        }
+        vaildStatistics();
 
         return winningLottoNumber.getWinnerLottos(lottoTickets).stream()
                 .mapToInt(value -> value.winningAmount)
                 .sum();
+    }
+
+    private void vaildStatistics() {
+        if(winningLottoNumber == null){
+            throw new IllegalStateException("당첨번호가 없음");
+        }
+    }
+
+    public String getAggregationOfReturns() {
+        vaildStatistics();
+
+        BigDecimal totolAmount = new BigDecimal(getamountStatistics());
+
+        BigDecimal buyLottoPrice = new BigDecimal(this.buyLottoPrice);
+
+        return totolAmount.divide(buyLottoPrice, 3, RoundingMode.HALF_UP).toString();
     }
 }

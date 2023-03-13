@@ -7,6 +7,8 @@ import lotto.domain.WinningLottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -110,13 +112,22 @@ public class LottoMachineTest {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
 
         // 모든 등수
-        long estimatedAmount = Arrays.stream(LottoRank.values())
+        BigDecimal estimatedAmount = new BigDecimal(Arrays.stream(LottoRank.values())
                 .mapToInt(value -> value.winningAmount)
-                .sum();
+                .sum());
 
         LottoMachine lottoMachine = new LottoMachine(rottoPrice * lottoTickets.size(), lottoTickets);
 
-        //assertThat()
+        lottoMachine.saveWinningNumber(winningLottoTicket);
+
+        BigDecimal divisor = new BigDecimal(rottoPrice * lottoTickets.size());
+
+        assertThat(lottoMachine.getAggregationOfReturns())
+                .isEqualTo(estimatedAmount.divide(divisor, 3, RoundingMode.HALF_UP).toString());
+
     }
+
+    
+
 
 }
