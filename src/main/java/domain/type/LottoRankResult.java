@@ -1,6 +1,6 @@
 package domain.type;
 
-public enum LottoRankAmount {
+public enum LottoRankResult {
     FIRST(1, LottoMatchCount.SIX, LottoBonusState.ANY, LottoRewardAmount.FIRST_REWARD),
     SECOND(2, LottoMatchCount.FIVE, LottoBonusState.YES, LottoRewardAmount.SECOND_REWARD),
     THIRD(3, LottoMatchCount.FIVE, LottoBonusState.NO, LottoRewardAmount.THIRD_REWARD),
@@ -13,7 +13,7 @@ public enum LottoRankAmount {
     private LottoBonusState bonusState;
     private LottoRewardAmount amout;
 
-    private LottoRankAmount(int rank, LottoMatchCount matchCount, LottoBonusState state, LottoRewardAmount amount) {
+    private LottoRankResult(int rank, LottoMatchCount matchCount, LottoBonusState state, LottoRewardAmount amount) {
         this.rank = rank;
         this.matchCount = matchCount;
         this.bonusState = state;

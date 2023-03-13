@@ -2,7 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
-import domain.type.LottoRankAmount;
+import domain.type.LottoRankResult;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -19,44 +19,44 @@ public class LottoRankTest {
         System.out.println(lotto.getLottoNumbers());
         System.out.println(firstPlaceLotto.getLottoNumbers());
         System.out.println(firstPlaceLotto.getBonusLottoNumber());
-        System.out.println(LottoRank.matchCount(lotto, firstPlaceLotto));
+        System.out.println(lotto.matchCount(firstPlaceLotto));
 
-        assertThat(LottoRank.matchCount(lotto, firstPlaceLotto), is(6));
+        assertThat(lotto.matchCount(firstPlaceLotto), is(6));
     }
 
     @Test
     void firstRankTest() {
-        LottoRankAmount rank = LottoRank.getRank(6, false);
-        assertThat(rank, is(LottoRankAmount.FIRST));
+        LottoRankResult rank = LottoRank.getRank(6, false);
+        assertThat(rank, is(LottoRankResult.FIRST));
     }
 
     @Test
     void secondRankTest() {
-        LottoRankAmount rank = LottoRank.getRank(5, true);
-        assertThat(rank, is(LottoRankAmount.SECOND));
+        LottoRankResult rank = LottoRank.getRank(5, true);
+        assertThat(rank, is(LottoRankResult.SECOND));
     }
 
     @Test
     void thirdRankTest() {
-        LottoRankAmount rank = LottoRank.getRank(5, false);
-        assertThat(rank, is(LottoRankAmount.THIRD));
+        LottoRankResult rank = LottoRank.getRank(5, false);
+        assertThat(rank, is(LottoRankResult.THIRD));
     }
 
     @Test
     void fourthRankTest() {
-        LottoRankAmount rank = LottoRank.getRank(4, false);
-        assertThat(rank, is(LottoRankAmount.FOURTH));
+        LottoRankResult rank = LottoRank.getRank(4, false);
+        assertThat(rank, is(LottoRankResult.FOURTH));
     }
 
     @Test
     void fifthRankTest() {
-        LottoRankAmount rank = LottoRank.getRank(3, false);
-        assertThat(rank, is(LottoRankAmount.FIFTH));
+        LottoRankResult rank = LottoRank.getRank(3, false);
+        assertThat(rank, is(LottoRankResult.FIFTH));
     }
 
     @Test
     void etcRankTest1() {
-        LottoRankAmount rank = LottoRank.getRank(2, false);
-        assertThat(rank, is(LottoRankAmount.ETC));
+        LottoRankResult rank = LottoRank.getRank(2, false);
+        assertThat(rank, is(LottoRankResult.ETC));
     }
 }

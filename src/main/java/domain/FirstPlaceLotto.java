@@ -1,25 +1,18 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import view.InputView;
-
 public class FirstPlaceLotto extends Lotto {
-    private LottoNumbers lottoNumber;
     private LottoNumber bonusLottoNumber;
 
-    void makeFirstLotto(List<String> input, String bonusLottoNumber) {
-        this.lottoNumber = new LottoNumbers(input);
-        this.bonusLottoNumber = new LottoNumber(LottoUtil.stringToInteger(bonusLottoNumber));
-    }
-
     public FirstPlaceLotto(String input, String bonusLottoNumber) {
-        makeFirstLotto(LottoUtil.stringSplitToList(input), bonusLottoNumber);
+        super(input);
+        validate(input, bonusLottoNumber);
+        this.bonusLottoNumber = new LottoNumber(bonusLottoNumber);
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return this.lottoNumber;
+    private void validate(String input, String bonusLottoNumber) {
+        if (LottoUtil.stringSplitToList(input).contains(bonusLottoNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 로또번호에 존재하지 않는 값이여야 합니다.");
+        }
     }
 
     public LottoNumber getBonusLottoNumber() {

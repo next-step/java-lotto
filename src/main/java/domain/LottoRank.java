@@ -4,34 +4,21 @@ import java.util.Arrays;
 
 import domain.type.LottoBonusState;
 import domain.type.LottoMatchCount;
-import domain.type.LottoRankAmount;
+import domain.type.LottoRankResult;
 
 public class LottoRank {
 
-    public static LottoRankAmount getRank(Lotto lotto, FirstPlaceLotto firstPlaceLotto) {
-
-        return getRank(matchCount(lotto, firstPlaceLotto), withBonusYn(lotto, firstPlaceLotto));
+    public static LottoRankResult getRank(Lotto lotto, FirstPlaceLotto firstPlaceLotto) {
+        return getRank(lotto.matchCount(firstPlaceLotto), lotto.isHaveBonusNumer(firstPlaceLotto));
     }
 
-    protected static int matchCount(Lotto lotto, FirstPlaceLotto firstPlaceLotto) {
-        return (int) lotto.getLottoNumbers().getNumbers().stream()
-                .filter(it -> firstPlaceLotto.getLottoNumbers().getNumbers().contains(it))
-                .count();
-    }
-
-    protected static boolean withBonusYn(Lotto lotto, FirstPlaceLotto firstPlaceLotto) {
-        return lotto.getLottoNumbers().getNumbers().stream()
-                .filter(it -> firstPlaceLotto.getBonusLottoNumber() == it)
-                .count() == 1;
-    }
-
-    protected static LottoRankAmount getRank(int matchCount, boolean withBonusYn) {
+    protected static LottoRankResult getRank(int matchCount, boolean withBonusYn) {
         return getLottoRankAmount(getLottoMatchCount(matchCount), getLottoBonusState(matchCount, withBonusYn));
     }
 
-    protected static LottoRankAmount getLottoRankAmount(LottoMatchCount matchCount, LottoBonusState lottoBonusState) {
+    protected static LottoRankResult getLottoRankAmount(LottoMatchCount matchCount, LottoBonusState lottoBonusState) {
 
-        return Arrays.stream(LottoRankAmount.values())
+        return Arrays.stream(LottoRankResult.values())
                 .filter(it -> it.getMatchCount().equals(matchCount))
                 .filter(it -> it.getBonusState().equals(lottoBonusState))
                 .findFirst()

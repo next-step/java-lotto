@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import domain.type.LottoPrice;
-import domain.type.LottoRankAmount;
+import domain.type.LottoRankResult;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -23,7 +23,7 @@ public class Lottos {
         }
     }
 
-    public int getLottoRankCount(LottoRankAmount lottoRankAmount) {
+    public int getLottoRankCount(LottoRankResult lottoRankAmount) {
         return lottos.stream()
                 .filter(lotto -> lotto.getLottoRankAmount() == lottoRankAmount)
                 .toArray().length;
@@ -36,4 +36,5 @@ public class Lottos {
     public int size() {
         return lottos.size();
     }
+
 }

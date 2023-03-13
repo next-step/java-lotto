@@ -1,24 +1,25 @@
 package domain;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.math.RoundingMode;
 import java.util.List;
 
-import domain.type.LottoBonusState;
 import domain.type.LottoPrice;
-import domain.type.LottoRankAmount;
+import domain.type.LottoRankResult;
 
 public class LottoProfit {
     public static BigDecimal getProfitRate(Lottos lottos) {
-        List<LottoRankAmount> ranks = new ArrayList<>();
-        lottos.getLottos().forEach(it -> ranks.add(it.getLottoRankAmount()));
+        List<LottoRankResult> ranks = lottos.getLottos().stream().map(it -> it.getLottoRankAmount()).toList();
 
-        return getProfitSum(ranks).divide(new BigDecimal(lottos.size() * LottoPrice.PRICE.getPrice()));
+        return getProfitSum(ranks).divide(buyAmount(lottos), 2, RoundingMode.DOWN);
     }
 
-    public static BigDecimal getProfitSum(List<LottoRankAmount> ranks) {
-        List<Integer> amounts = new ArrayList<>();
-        ranks.forEach(it -> amounts.add(it.getAmount().getReward()));
+    public static BigDecimal buyAmount(Lottos lotto) {
+        return new BigDecimal(lotto.size() * LottoPrice.PRICE.getPrice());
+    }
+
+    public static BigDecimal getProfitSum(List<LottoRankResult> ranks) {
+        List<Integer> amounts = ranks.stream().map(it -> it.getAmount().getReward()).toList();
 
         return getProfitAmountSum(amounts);
     }

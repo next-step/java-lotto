@@ -1,16 +1,12 @@
 package domain;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import domain.type.LottoRankAmount;
+import domain.type.LottoRankResult;
 
 public class Lotto {
     private LottoNumbers lottoNumber;
-    private LottoRankAmount lottoRankAmount;
+    private LottoRankResult lottoRankAmount;
 
     public Lotto() {
         this.lottoNumber = new LottoNumbers();
@@ -20,7 +16,11 @@ public class Lotto {
         this.lottoNumber = new LottoNumbers(input);
     }
 
-    public LottoRankAmount getLottoRankAmount() {
+    public Lotto(String input) {
+        this.lottoNumber = new LottoNumbers(input);
+    }
+
+    public LottoRankResult getLottoRankAmount() {
         return lottoRankAmount;
     }
 
@@ -30,6 +30,18 @@ public class Lotto {
 
     public void calculateLottoRank(FirstPlaceLotto firstPlaceLotto) {
         lottoRankAmount = LottoRank.getRank(this, firstPlaceLotto);
+    }
+
+    public int matchCount(Lotto lotto) {
+        return (int) lottoNumber.getNumbers().stream()
+                .filter(it -> lotto.getLottoNumbers().getNumbers().contains(it))
+                .count();
+    }
+
+    public boolean isHaveBonusNumer(FirstPlaceLotto firstPlaceLotto) {
+        return lottoNumber.getNumbers().stream()
+                .filter(it -> it.equals(firstPlaceLotto.getBonusLottoNumber()))
+                .count() > 0;
     }
 
 }
