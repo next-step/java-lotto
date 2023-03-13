@@ -27,7 +27,7 @@ public class WinningLottoTicket {
 
         int bounsCondition = 0;
 
-        if (lottoNumbers.getLottoNumbers().contains(bounsNumber)) {
+        if (lottoNumbers.contains(bounsNumber)) {
             bounsCondition = 1;
         }
 

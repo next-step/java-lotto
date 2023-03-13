@@ -13,15 +13,23 @@ public class LottoMachine {
     private WinningLottoTicket winningLottoNumbers;
 
     public LottoMachine(int buyLottoPrice) {
-        vaildPrice(buyLottoPrice);
-        this.buyLottoPrice = buyLottoPrice;
-        this.lottoTickets = buyRandomLotto(buyLottoPrice);
+        this(buyLottoPrice, buyRandomLotto(buyLottoPrice));
     }
 
-    public void vaildPrice(int buyLottoPrice) {
+    public LottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets){
+        this.lottoTickets = lottoTickets;
+        this.buyLottoPrice = buyLottoPrice;
+        vaildLottoMachine(buyLottoPrice, lottoTickets);
+    }
+
+    public void vaildLottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
         if (buyLottoPrice < LOTTO_PRICE
                 || buyLottoPrice % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구매 금액 에러");
+        }
+
+        if (lottoTickets.size() != buyLottoPrice / LOTTO_PRICE) {
+            throw new IllegalArgumentException("수동 로또 갯수 에러");
         }
 
     }
@@ -30,7 +38,7 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-    private List<LottoTicket> buyRandomLotto(int buyLottoPrice) {
+    private static List<LottoTicket> buyRandomLotto(int buyLottoPrice) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < buyLottoPrice / LOTTO_PRICE; i++) {

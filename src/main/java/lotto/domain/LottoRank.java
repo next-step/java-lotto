@@ -16,7 +16,7 @@ public enum LottoRank {
     public final int condition; // 맞은 번호 갯수
     public final int bounsCondition;
     public final int winningAmount; // 당첨금액
-    public final String name;
+    public final String rank;
 
     private static final Map<Integer, LottoRank> CONDITION_MAP = new HashMap<>();
 
@@ -27,11 +27,11 @@ public enum LottoRank {
                 .forEach(lottoRank -> CONDITION_MAP.put(lottoRank.condition, lottoRank));
     }
 
-    LottoRank(int condition, int bounsCondition, int winningAmount, String name) {
+    LottoRank(int condition, int bounsCondition, int winningAmount, String rank) {
         this.condition = condition;
         this.bounsCondition = bounsCondition;
         this.winningAmount = winningAmount;
-        this.name = name;
+        this.rank = rank;
     }
 
     public static LottoRank getRankCondition(int condition, int bounsCondition) {

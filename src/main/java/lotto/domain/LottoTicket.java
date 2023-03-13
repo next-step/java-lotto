@@ -74,5 +74,7 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-
+    public boolean contains(int number) {
+        return lottoNumbers.contains(number);
+    }
 }
