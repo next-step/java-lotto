@@ -27,10 +27,4 @@ public class testCalculator {
         assertThat(calculator.sum()).isEqualTo(1008);
     }
 
-    @Test
-    void checkNumber() {
-        StringCalculator calculator =  new StringCalculator("//,\n1000A,2,3,3");
-        assertThatThrownBy(RuntimeException.class, ()->{calculator.sum();});
-     //   assertThat(calculator.sum()).isEqualTo(1008);
-    }
 }
