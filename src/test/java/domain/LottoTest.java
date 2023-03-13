@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -189,4 +190,9 @@ public class LottoTest {
         System.out.println(lotto.getLottoRankAmount());
     }
 
+    @Test
+    void intStreamRangeTest() {
+        IntStream.range(0, 10)
+                .forEach(it -> System.out.println(it));
+    }
 }

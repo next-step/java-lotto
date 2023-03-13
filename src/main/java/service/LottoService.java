@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import domain.FirstPlaceLotto;
 import domain.Lotto;
@@ -29,9 +30,9 @@ public class LottoService {
 
     List<Lotto> makeLottoList(int lottoCount) {
         List<Lotto> lottoList = new ArrayList<Lotto>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoList.add(i, new Lotto());
-        }
+
+        IntStream.range(0, lottoCount)
+                .forEach(it -> lottoList.add(it, new Lotto()));
 
         return lottoList;
     }
