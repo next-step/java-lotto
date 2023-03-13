@@ -23,7 +23,6 @@ public class LottoTest {
         Lottos lottos = new Lottos();
         lottos.buyLottos(new BigDecimal("100000"));
         assertThat(lottos.getLottoCount()).isSameAs(100);
-        //System.out.println(lotto.getLottoNumbers().toString());
     }
 
     @DisplayName(value = "일치하는 갯수 및 보너스숫자 여부에 따라 당첨금액을 반환한다.")
