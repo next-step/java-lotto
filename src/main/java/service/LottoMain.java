@@ -1,6 +1,5 @@
 package service;
 
-import domain.FirstPlaceLotto;
 import domain.LottoUtil;
 import view.InputView;
 
