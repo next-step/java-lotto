@@ -18,6 +18,11 @@ public class Lotto {
     private boolean isBonusHit = false;
 
     protected Lotto(List<Integer> lottoNumbers) {
+        for (Integer lottoNubmer : lottoNumbers) {
+            if(lottoNubmer < 1 || lottoNubmer > 45){
+                throw new IllegalArgumentException("로또 번호는 1부터 45 까지 입니다");
+            }
+        }
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -31,11 +36,10 @@ public class Lotto {
     }
 
     public static List<Integer> makeLottoNumbers() {
-        IntStream intStream = IntStream.rangeClosed(1,45);
-        Stream<Integer> stream = intStream.boxed();
-        List<Integer> numbers = stream.collect(Collectors.toList());
-        Collections.shuffle(numbers);
-        List<Integer> pickNumbers = numbers.subList(0, 6);
+        List<Integer> lottoNumber = IntStream.rangeClosed(1,45).boxed()
+                .collect(Collectors.toList());
+        Collections.shuffle(lottoNumber);
+        List<Integer> pickNumbers = lottoNumber.subList(0, 6);
         Collections.sort(pickNumbers);
         return pickNumbers;
     }
@@ -44,8 +48,13 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public void setIsBonusHit(int bonusHit) {
-        this.isBonusHit = lottoNumbers.contains(bonusHit);
+    public void executeLotto(Lotto winLotto, int bonusNumber) {
+        this.hitCount = winLotto.getLottoNumbers().stream()
+                .filter(winLottoNumbers -> lottoNumbers.stream().anyMatch(Predicate.isEqual(winLottoNumbers)))
+                .collect(Collectors.toList())
+                .size();
+        this.isBonusHit = lottoNumbers.contains(bonusNumber);
+        this.rank = LottoRank.findRank(this.hitCount, this.isBonusHit);
     }
 
     public boolean getIsBonusHit() {
@@ -53,19 +62,13 @@ public class Lotto {
     }
 
     public void setRank() {
-        this.rank = LottoRank.findRank(this.hitCount, this.isBonusHit);
+
     }
 
     public LottoRank getRank() {
         return rank;
     }
 
-    public void setHitCount(Lotto winLotto) {
-        List<Integer> hitList = winLotto.getLottoNumbers().stream()
-                .filter(o -> lottoNumbers.stream().anyMatch(Predicate.isEqual(o)))
-                .collect(Collectors.toList());
-        this.hitCount = hitList.size();
-    }
 
     public int getHitCount() {
         return hitCount;

@@ -8,7 +8,7 @@ public class Lottos {
 
     private List<Lotto> lottos;
     private int lottoCount = 0;
-    private final BigDecimal LOTTO_AMT = new BigDecimal(1000);
+    private final BigDecimal LOTTO_AMOUNT = new BigDecimal(1000);
 
     public BigDecimal getBuyAmount() {
         return buyAmount;
@@ -32,10 +32,10 @@ public class Lottos {
     private double rate = 0;
 
     public List<Lotto> buyLottos(java.math.BigDecimal buyAmt) {
-        this.lottoCount = buyAmt.divide(LOTTO_AMT).intValue();
+        this.lottoCount = buyAmt.divide(LOTTO_AMOUNT).intValue();
         this.lottos = new ArrayList<Lotto>();
         this.buyAmount = buyAmt;
-        for (int i = 0; i < lottoCount; i++) {
+        for (Lotto lotto : lottos) {
             lottos.add(Lotto.createAutoLotto());
         }
         return lottos;
@@ -46,6 +46,7 @@ public class Lottos {
     }
 
     public void setWinLotto(List<Integer> winLottoNumber){
+
         this.winLotto = new Lotto(winLottoNumber);
     }
     public void setBonusNumber(int bonusNumber) {
@@ -54,9 +55,7 @@ public class Lottos {
 
     public void executeLotto(){
         for (int i = 0; i < lottoCount; i++) {
-            lottos.get(i).setHitCount(winLotto);
-            lottos.get(i).setIsBonusHit(bonusNumber);
-            lottos.get(i).setRank();
+            lottos.get(i).executeLotto(winLotto, bonusNumber);
             if(null != lottos.get(i).getRank()) {
                 this.sumWinAmount = sumWinAmount.add(lottos.get(i).getRank().getRewardAmount());
             }

@@ -15,7 +15,6 @@ public class LottoTest {
     void getLottoNumbers() {
         Lotto lotto = Lotto.createAutoLotto();
         assertThat(lotto.getLottoNumbers().size()).isSameAs(6);
-        //System.out.println(lotto.getLottoNumbers().toString());
     }
 
     @DisplayName(value = "구매 금액을 입력하면 해당 금액에 해당하는 장수의 로또 숫자를 반환한다.")
@@ -34,8 +33,7 @@ public class LottoTest {
         Integer[] arr2 = { 1,2,3,7,8,9 };
         Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
         Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
-        lotto.setHitCount(winLotto);
-        lotto.setIsBonusHit(7);
+        lotto.executeLotto(winLotto, 7);
         lotto.setRank();
         assertThat(lotto.getRank().getRewardAmount()).isEqualTo(new BigDecimal("5000"));
     }
@@ -47,16 +45,18 @@ public class LottoTest {
         Integer[] arr2 = { 1,2,3,7,8,9 };
         Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
         Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
-        lotto.setHitCount(winLotto);
+        lotto.executeLotto(winLotto, 7);
         assertThat(lotto.getHitCount()).isEqualTo(3);
     }
 
     @DisplayName(value = "로또 세트에 보너스 숫자가 포함되어 있으면 true를 반환한다.")
     @Test
     void setWinInformation() {
-        Integer[] arr = { 1,2,3,4,5,6 };
+        Integer[] arr = { 1,2,3,4,5,9 };
+        Integer[] arr2 = { 1,2,3,4,5,6 };
         Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
-        lotto.setIsBonusHit(3);
+        Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
+        lotto.executeLotto(winLotto, 9);
         assertThat(lotto.getIsBonusHit()).isEqualTo(true);
     }
 }
