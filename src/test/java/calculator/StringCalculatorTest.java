@@ -14,7 +14,7 @@ public class StringCalculatorTest {
 
     @DisplayName("계산할 문자열을 가질 수 있다.")
     @Test
-    public void save(){
+    public void save() {
         //given
         String calculatorSumString = "1:2:3";
 
@@ -27,7 +27,7 @@ public class StringCalculatorTest {
 
     @DisplayName("구분자로 나눠 계산할 숫자 리스트로 리턴해준다.")
     @Test
-    public void split(){
+    public void split() {
         //given
         String calculatorSumString = "1:2:3";
 
@@ -38,12 +38,12 @@ public class StringCalculatorTest {
         // then
         assertThat(list)
                 .hasSize(3)
-                .containsExactlyInAnyOrder(1,2,3);
+                .containsExactlyInAnyOrder(1, 2, 3);
     }
 
     @DisplayName("커스텀 구분자를 가질 수 있다.")
     @Test
-    public void saveCustom(){
+    public void saveCustom() {
         //given
         String customDelimeter = "//;\n";
 
@@ -58,7 +58,7 @@ public class StringCalculatorTest {
     @DisplayName("구분자로 나눠 계산할 숫자 리스트로 리턴해준다.")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3", "1:2,3"})
-    public void split2(final String testString ){
+    public void split2(final String testString) {
         //given
         String calculatorSumString = testString;
 
@@ -69,13 +69,13 @@ public class StringCalculatorTest {
         // then
         assertThat(list)
                 .hasSize(3)
-                .containsExactlyInAnyOrder(1,2,3);
+                .containsExactlyInAnyOrder(1, 2, 3);
     }
 
     @DisplayName("정의되지않은 구분자가 들어오면 에러가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1;2;3", "1:2,-3"})
-    public void errorThrow(String testValue){
+    public void errorThrow(String testValue) {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
@@ -107,7 +107,6 @@ public class StringCalculatorTest {
         // then
         assertThat(sumResult).isEqualTo(0);
     }
-
 
 
 }

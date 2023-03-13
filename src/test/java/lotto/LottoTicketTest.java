@@ -1,9 +1,7 @@
 package lotto;
 
-import calculator.StringCalculator;
 import lotto.domain.LottoTicket;
-import lotto.domain.WinningLotto;
-import org.assertj.core.api.Assertions;
+import lotto.domain.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,7 +28,7 @@ public class LottoTicketTest {
 
         assertThat(lottoNumber)
                 .hasSize(6)
-                .containsExactlyInAnyOrder(1,2,3,4,5,6);
+                .containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6);
     }
 
 
@@ -87,24 +85,5 @@ public class LottoTicketTest {
                 .hasSize(6);
     }
 
-
-    @ParameterizedTest
-    @CsvSource(value = {
-              "'1,2,3,4,5,6','1,2,3,8,9,10',7,5등"
-            , "'1,2,3,4,5,6','1,2,3,5,8,9',7,4등"
-            , "'1,2,3,4,5,6','1,2,3,4,5,9',7,3등"
-            , "'1,2,3,4,5,6','1,2,3,4,5,9',6,2등"
-            , "'1,2,3,4,5,6','1,2,3,4,5,6',7,1등"
-    })
-    void winningLottoTest(String buyLottoNumbers, String winningLottoNumber, int bounsNumber ,String name){
-
-        LottoTicket lottoTicket = new LottoTicket(buyLottoNumbers);
-
-        LottoTicket winningNumber = new LottoTicket(winningLottoNumber);
-
-        WinningLotto winningLotto = lottoTicket.getWinnerLotto(winningNumber, bounsNumber);
-
-        assertThat(winningLotto.name).isEqualTo(name);
-    }
 
 }

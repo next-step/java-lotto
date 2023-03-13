@@ -14,10 +14,9 @@ public class MatcherTest {
 
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher("//;\n");
 
-        if(m.find()){
+        if (m.find()) {
             Assertions.assertEquals(m.group(1), ";");
         }
-
 
 
     }

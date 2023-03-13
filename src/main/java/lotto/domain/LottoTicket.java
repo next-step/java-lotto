@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,24 +12,24 @@ public class LottoTicket {
     private static final int LOTTO_LENGTH = 6;
 
     // 자동생성
-    public LottoTicket(){
+    public LottoTicket() {
         this(getRandomLottoNum());
     }
-    
+
     // 문자열 생성
-    public LottoTicket(String numbers){
+    public LottoTicket(String numbers) {
         this(initStringNumToList(numbers));
     }
-    
+
     // 수동생성
-    public LottoTicket(List<Integer> lottoNumbers){
+    public LottoTicket(List<Integer> lottoNumbers) {
         vaildLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     // 정합성 체크
     private void vaildLottoNumbers(List<Integer> lottoNumbers) {
-        if(lottoNumbers.size() != LOTTO_LENGTH){
+        if (lottoNumbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException("로또 번호 길이 틀림");
         }
 
@@ -38,19 +37,19 @@ public class LottoTicket {
 
         lottoNumbers.stream()
                 .forEach(num -> {
-                    if( num <  MIN_LOTTO_NUM || MAX_LOTTO_NUM < num ){
+                    if (num < MIN_LOTTO_NUM || MAX_LOTTO_NUM < num) {
                         throw new IllegalArgumentException("로또 번호 에러");
                     }
                     checkDuplicateNumber.add(num);
-        });
-        
-        if(checkDuplicateNumber.size() != LOTTO_LENGTH){
+                });
+
+        if (checkDuplicateNumber.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException("로또 번호 중복");
         }
     }
 
     // 랜덤번호뽑기
-    public static List<Integer> getRandomLottoNum(){
+    public static List<Integer> getRandomLottoNum() {
         List<Integer> lottoNumbers = IntStream.range(MIN_LOTTO_NUM, MAX_LOTTO_NUM)
                 .boxed().collect(Collectors.toList());
 
@@ -61,7 +60,7 @@ public class LottoTicket {
         return lottoNumbers.subList(startIndex, LOTTO_LENGTH);
     }
 
-    public static List<Integer> initStringNumToList(String lottoNumbers){
+    public static List<Integer> initStringNumToList(String lottoNumbers) {
         lottoNumbers = lottoNumbers.replace(" ", "");
 
         List<Integer> numbers = Arrays.stream(lottoNumbers.split(","))
@@ -75,20 +74,5 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-
-    public WinningLotto getWinnerLotto(LottoTicket winningNumbers, int bounsNum){
-
-        int condition = (int) this.lottoNumbers.stream()
-                .filter( lottoNumbers -> winningNumbers.getLottoNumbers().stream().anyMatch(Predicate.isEqual(lottoNumbers)))
-                .count();
-
-        int bounsCondition = 0;
-
-        if(lottoNumbers.contains(bounsNum)){
-            bounsCondition = 1;
-        }
-
-        return WinningLotto.getWinnerCondition(condition, bounsCondition);
-    }
 
 }
