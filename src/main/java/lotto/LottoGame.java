@@ -6,11 +6,11 @@ import java.util.Arrays;
 public class LottoGame {
     private static Store lottoStore;
     private static ArrayList<LottoTicket> tickets;
-    private static final int LOTTO_LEVEL_1=1;
-    private static final int LOTTO_LEVEL_2=2;
-    private static final int LOTTO_LEVEL_3=3;
-    private static final int LOTTO_LEVEL_4=4;
-    private static final int LOTTO_LEVEL_5=5;
+    public static final int LOTTO_LEVEL_1=1;
+    public static final int LOTTO_LEVEL_2=2;
+    public static final int LOTTO_LEVEL_3=3;
+    public static final int LOTTO_LEVEL_4=4;
+    public static final int LOTTO_LEVEL_5=5;
     private static final int LOTTO_LEVEL_COUNT=3;
     private static final int LOTTO_LEVEL_LOSE=0;
 
@@ -53,8 +53,8 @@ public class LottoGame {
     }
 
     public void checkWin(String winNumber, String bonusNumber) {
-        for (int ii = 0; ii < tickets.size(); ii++)
-            check(tickets.get(ii), winNumber, bonusNumber);
+        for (LottoTicket newTicket : tickets)
+            check(newTicket, winNumber, bonusNumber);
     }
 
     public  ArrayList<LottoTicket> getTickets() {
