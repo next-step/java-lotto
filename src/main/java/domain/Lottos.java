@@ -1,5 +1,6 @@
 package domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import domain.type.LottoPrice;
@@ -28,12 +29,11 @@ public class Lottos {
                 .toArray().length;
     }
 
-    public int getProfitRate() {
-        int totalProfit = 0;
-        for (Lotto lotto : lottos) {
-            totalProfit += lotto.getLottoRankAmount().getAmount().getReward();
-        }
+    public BigDecimal getProfitRate() {
+        return LottoProfit.getProfitRate(this);
+    }
 
-        return totalProfit / lottos.size() * LottoPrice.PRICE.getPrice();
+    public int size() {
+        return lottos.size();
     }
 }
