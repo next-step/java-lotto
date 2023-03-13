@@ -30,7 +30,7 @@ public class LottoTicket {
     private static List<LottoNumber> createAutoLottoTicket() {
         List<Integer> numbers = new ArrayList<Integer>();
 
-        for (int i = 0; i < 45; i++) {
+        for (int i = 1; i <= 45; i++) {
             numbers.add(i);
         }
 
@@ -76,12 +76,12 @@ public class LottoTicket {
     private boolean isContain(final LottoNumber number) {
         return this.lottoNumbers
                 .stream()
-                .anyMatch(lottoNumber -> lottoNumber.isEqualTo(number));
+                .anyMatch(lottoNumber -> lottoNumber.match(number));
     }
 
     private static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() > 6) {
-            throw new IllegalArgumentException("로또숫자는 6개 이상 찍을 수 없습니다.");
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또숫자는 6개여야 합니다. 현재 SIZE: " + lottoNumbers.size());
         }
     }
 

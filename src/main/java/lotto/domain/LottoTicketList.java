@@ -36,6 +36,7 @@ public class LottoTicketList {
         for (String number : manualLottoNumbers) {
            List<LottoNumber> lottoNumbers = Arrays.stream(number.split(","))
                    .map(Integer::parseInt)
+                   .distinct()
                    .map(LottoNumber::new)
                    .collect(Collectors.toList());
 
