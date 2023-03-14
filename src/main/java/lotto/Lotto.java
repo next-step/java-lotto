@@ -64,7 +64,10 @@ public class Lotto {
         if (matchingCount == 4) {
             return 4;
         }
-        return -1;
+        if (matchingCount ==3) {
+            return 5;
+        }
+        return 6;
     }
 
     public int getMatchingCount() {

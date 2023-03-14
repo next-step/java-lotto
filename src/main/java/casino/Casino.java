@@ -25,7 +25,7 @@ public class Casino {
         return lottoTickets;
     }
 
-    public void lotteryStart(HashSet<Integer> numbers, Lotto lottoTicket, int bonusNumber) {
-        lottoTicket.match(numbers, bonusNumber);
+    public int lotteryStart(HashSet<Integer> numbers, Lotto lottoTicket, int bonusNumber) {
+        return lottoTicket.match(numbers, bonusNumber);
     }
 }
