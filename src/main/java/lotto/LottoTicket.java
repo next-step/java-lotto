@@ -1,14 +1,13 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoObject {
+public class LottoTicket {
     private List<Integer> lottoNumbers;
 
-    public LottoObject() {
+    public LottoTicket() {
         this.lottoNumbers = new ArrayList<>();
     }
 
@@ -25,15 +24,15 @@ public class LottoObject {
     public LottoType contains(List<Integer> abd, int bonusNumber) {
         int answer = 0;
         int bonusAnswer = 0;
-        for(Integer value : abd ){
-            if(lottoNumbers.contains(value)){
+        for (Integer value : abd) {
+            if (lottoNumbers.contains(value)) {
                 answer++;
             }
         }
 
-        if(lottoNumbers.contains(bonusNumber)){
+        if (lottoNumbers.contains(bonusNumber)) {
             bonusAnswer++;
         }
-        return LottoType.of(answer,bonusAnswer);
+        return LottoType.of(answer, bonusAnswer);
     }
 }

@@ -3,22 +3,21 @@ package calculator;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class StringCalculator {
 
-    private StringObject separation(String text){
-        StringObject textObj = new StringObject(text);
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(textObj.getText());
+    private TextStorage separation(String text){
+        TextStorage storage = new TextStorage(text);
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(storage.getText());
         if(m.find()){
-            textObj = new StringObject(m.group(2),m.group(1));
+            storage = new TextStorage(m.group(2),m.group(1));
         }
-        return textObj;
+        return storage;
     }
     public  int add(String text){
-        StringObject textObj = separation(text);
+        TextStorage storage = separation(text);
 
-        String[] tokens= textObj.getText().split(textObj.getSeparator());
+        String[] tokens= storage.getText().split(storage.getSeparator());
 
         if(Arrays.stream(tokens).map(Integer::parseInt).anyMatch(integer -> integer < 0)) {  // 하나라도 -1 이하면
             throw new RuntimeException();
