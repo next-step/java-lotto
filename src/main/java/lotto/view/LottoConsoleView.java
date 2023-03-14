@@ -1,6 +1,7 @@
 package lotto.view;
 
-import java.util.Arrays;
+import lotto.domain.LottoRank;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,10 +13,10 @@ public class LottoConsoleView {
         this.scanner = new Scanner(System.in);
     }
 
-    public String inputLottoPurchasePrice() {
+    public int inputLottoPrice() {
         System.out.println("구입금액을 입력해 주세요.");
 
-        return scanner.nextLine().replace(" ", "");
+        return Integer.parseInt(scanner.nextLine().replace(" ", ""));
     }
 
     public void buyResult(int lottos) {
@@ -28,10 +29,10 @@ public class LottoConsoleView {
         return scanner.nextLine().replace(" ", "");
     }
 
-    public String inputBonusNumber() {
+    public int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
 
-        return scanner.nextLine().replace(" ", "");
+        return Integer.parseInt(scanner.nextLine().replace(" ", ""));
     }
 
 
@@ -39,10 +40,28 @@ public class LottoConsoleView {
         System.out.println(list);
     }
 
-    public static void main(String[] args) {
-        LottoConsoleView view = new LottoConsoleView();
 
-        view.showLottoNumber(Arrays.asList(1, 2, 3));
+    public void showLottoCount(int lottoCount) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
     }
 
+    public void showBeforeStatistics() {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+    }
+
+    public void showMatch(LottoRank rank, int rottoRankMatchCount) {
+
+        if(rank == LottoRank.TWO_PLACE){
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.condition, rank.winningAmount, rottoRankMatchCount));
+        }
+
+        System.out.println(String.format("%d개 일치 (%d원)- %d개", rank.condition, rank.winningAmount, rottoRankMatchCount));
+
+    }
+
+    public void showTotol(String aggregationOfReturns) {
+        System.out.println(String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", aggregationOfReturns));
+    }
 }

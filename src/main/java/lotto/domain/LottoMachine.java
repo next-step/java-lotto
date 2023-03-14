@@ -52,6 +52,11 @@ public class LottoMachine {
 
     public void saveWinningNumber(WinningLottoTicket winningLottoTicket) {
         this.winningLottoNumber = winningLottoTicket;
+        
+        // 각 당첨등수 셋팅
+        lottoTickets.stream()
+                .forEach(value -> value.setLottoRank(winningLottoTicket.getWinnerLotto(value)));
+
     }
 
     public WinningLottoTicket getWinningLottoNumber() {
@@ -61,8 +66,9 @@ public class LottoMachine {
     public long getamountStatistics() {
         vaildStatistics();
 
-        return winningLottoNumber.getWinnerLottos(lottoTickets).stream()
-                .mapToInt(value -> value.winningAmount)
+        return lottoTickets.stream()
+                .map(LottoTicket::getLottoRank)
+                .mapToInt(v -> v.winningAmount)
                 .sum();
     }
 
@@ -80,5 +86,15 @@ public class LottoMachine {
         BigDecimal buyLottoPrice = new BigDecimal(this.buyLottoPrice);
 
         return totolAmount.divide(buyLottoPrice, 3, RoundingMode.HALF_UP).toString();
+    }
+
+    public int lottoCount() {
+        return lottoTickets.size();
+    }
+
+    public int rottoRankMatchCount(LottoRank lottoRank) {
+        return (int) lottoTickets.stream()
+                .filter(lottoTicket -> lottoTicket.getLottoRank() == lottoRank)
+                .count();
     }
 }

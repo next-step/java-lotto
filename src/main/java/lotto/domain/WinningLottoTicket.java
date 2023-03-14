@@ -35,13 +35,6 @@ public class WinningLottoTicket {
         return LottoRank.getRankCondition(matchCount, bounsMatchCount);
     }
 
-    public List<LottoRank> getWinnerLottos(List<LottoTicket> lottoTickets){
-        return lottoTickets.stream()
-                .map(lottoTicket -> getWinnerLotto(lottoTicket))
-                .collect(Collectors.toList());
-    }
-
-
     public List<Integer> getWinningLottoNumbers() {
         return winningLottoNumber.getLottoNumbers();
     }

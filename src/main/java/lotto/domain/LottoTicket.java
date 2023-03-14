@@ -11,6 +11,8 @@ public class LottoTicket {
     private static final int MAX_LOTTO_NUM = 45;
     private static final int LOTTO_LENGTH = 6;
 
+    private LottoRank lottoRank;
+
     // 자동생성
     public LottoTicket() {
         this(getRandomLottoNum());
@@ -76,5 +78,13 @@ public class LottoTicket {
 
     public boolean contains(int number) {
         return lottoNumbers.contains(number);
+    }
+
+    public LottoRank getLottoRank() {
+        return lottoRank;
+    }
+
+    public void setLottoRank(LottoRank lottoRank) {
+        this.lottoRank = lottoRank;
     }
 }
