@@ -11,15 +11,16 @@ public class TextStorage {
     private static final String DEFAULT_SEPARATOR = ",|:";
 
 
-    public TextStorage(String text, String separator){
-        if(StringUtils.isBlank(text)){
+    public TextStorage(String text, String separator) {
+        if (StringUtils.isBlank(text)) {
             text = "0";
         }
-        this.separator =  separator;
+        this.separator = separator;
         this.text = text;
     }
-    public TextStorage(String text){
-        this(  Optional.ofNullable(text).orElse("0") , DEFAULT_SEPARATOR);
+
+    public TextStorage(String text) {
+        this(Optional.ofNullable(text).orElse("0"), DEFAULT_SEPARATOR);
     }
 
     public String getText() {
