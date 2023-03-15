@@ -1,9 +1,9 @@
 package domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
-import domain.type.LottoPrice;
 import domain.type.LottoRankResult;
 
 public class Lottos {

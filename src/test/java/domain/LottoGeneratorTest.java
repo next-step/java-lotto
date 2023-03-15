@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 public class LottoGeneratorTest {
     @Test
     void generateLottoNumbersTDD() {
-        LottoNumberGenerator lottoGenerator = new LottoNumberGenerator();
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (int i = 1; i <= 45; i++) {

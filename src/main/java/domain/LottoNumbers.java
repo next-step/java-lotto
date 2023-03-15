@@ -14,6 +14,12 @@ public class LottoNumbers {
         this.numbers = LottoNumberGenerator.generateLottoNumbers(input);
     }
 
+    public void createAutoLottoNumbers() {
+    }
+
+    public void createManualLottoNumbers() {
+    }
+
     public LottoNumbers(String strInput) {
         List<String> input = LottoUtil.stringSplitToList(strInput);
         validate(input);

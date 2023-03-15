@@ -9,7 +9,7 @@ import domain.type.LottoRankResult;
 public class LottoRank {
 
     public static LottoRankResult getRank(Lotto lotto, FirstPlaceLotto firstPlaceLotto) {
-        return getRank(lotto.matchCount(firstPlaceLotto), lotto.isHaveBonusNumer(firstPlaceLotto));
+        return getRank(lotto.matchCount(firstPlaceLotto), lotto.hasBonusNumer(firstPlaceLotto));
     }
 
     protected static LottoRankResult getRank(int matchCount, boolean withBonusYn) {

@@ -3,11 +3,15 @@ package domain;
 import java.util.List;
 
 public class LottoUtil {
+
+    private LottoUtil(){    
+        throw new AssertionError();
+    };
+    
     public static Integer stringToInteger(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
             throw e;
         }
     }
@@ -16,7 +20,6 @@ public class LottoUtil {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
             throw e;
         }
     }

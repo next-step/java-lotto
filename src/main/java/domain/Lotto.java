@@ -38,7 +38,7 @@ public class Lotto {
                 .count();
     }
 
-    public boolean isHaveBonusNumer(FirstPlaceLotto firstPlaceLotto) {
+    public boolean hasBonusNumer(FirstPlaceLotto firstPlaceLotto) {
         return lottoNumber.getNumbers().stream()
                 .filter(it -> it.equals(firstPlaceLotto.getBonusLottoNumber()))
                 .count() > 0;

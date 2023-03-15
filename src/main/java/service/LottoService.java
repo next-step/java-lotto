@@ -37,6 +37,7 @@ public class LottoService {
         return lottoList;
     }
 
+
     public void calculateLottoRank() {
         lottos.calculateLottoRank(firstPlaceLotto);
     }
