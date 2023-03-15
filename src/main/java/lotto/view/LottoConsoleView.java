@@ -53,7 +53,7 @@ public class LottoConsoleView {
 
     public void showMatch(LottoRank rank, int rottoRankMatchCount) {
 
-        if(rank == LottoRank.TWO_PLACE){
+        if (rank == LottoRank.TWO_PLACE) {
             System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.condition, rank.winningAmount, rottoRankMatchCount));
         }
 

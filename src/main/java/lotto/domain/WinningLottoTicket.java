@@ -43,7 +43,7 @@ public class WinningLottoTicket {
         return this.bounsNumber;
     }
 
-    public boolean contains(int lottoNumber){
+    public boolean contains(int lottoNumber) {
         return winningLottoNumber.contains(lottoNumber);
     }
 

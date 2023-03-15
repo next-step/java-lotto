@@ -49,7 +49,8 @@ public class StringCalculatorTest {
 
         // when
         StringCalculator stringCaclulator = new StringCalculator(customDelimeter);
-        String delimeter = stringCaclulator.initDelimeter(customDelimeter);
+
+        String delimeter = stringCaclulator.getDelimeter();
 
         // then
         assertThat(delimeter).isEqualTo(";");

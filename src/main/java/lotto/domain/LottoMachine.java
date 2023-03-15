@@ -18,7 +18,7 @@ public class LottoMachine {
         this(buyLottoPrice, buyRandomLotto(buyLottoPrice));
     }
 
-    public LottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets){
+    public LottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
         this.buyLottoPrice = buyLottoPrice;
         vaildLottoMachine(buyLottoPrice, lottoTickets);
@@ -52,7 +52,7 @@ public class LottoMachine {
 
     public void saveWinningNumber(WinningLottoTicket winningLottoTicket) {
         this.winningLottoNumber = winningLottoTicket;
-        
+
         // 각 당첨등수 셋팅
         lottoTickets.stream()
                 .forEach(value -> value.setLottoRank(winningLottoTicket.getWinnerLotto(value)));
@@ -73,7 +73,7 @@ public class LottoMachine {
     }
 
     private void vaildStatistics() {
-        if(winningLottoNumber == null){
+        if (winningLottoNumber == null) {
             throw new IllegalStateException("당첨번호가 없음");
         }
     }
@@ -92,7 +92,7 @@ public class LottoMachine {
         return lottoTickets.size();
     }
 
-    public int rottoRankMatchCount(LottoRank lottoRank) {
+    public int lottoRankMatchCount(LottoRank lottoRank) {
         return (int) lottoTickets.stream()
                 .filter(lottoTicket -> lottoTicket.getLottoRank() == lottoRank)
                 .count();

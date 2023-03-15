@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
-import lotto.domain.WinningLottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -182,10 +178,10 @@ public class LottoMachineTest {
 
         lottoMachine.saveWinningNumber(winningLottoTicket);
 
-        assertThat(lottoMachine.rottoRankMatchCount(LottoRank.FIVE_PLACE)).isEqualTo(1);
-        assertThat(lottoMachine.rottoRankMatchCount(LottoRank.FOUR_PLACE)).isEqualTo(1);
-        assertThat(lottoMachine.rottoRankMatchCount(LottoRank.THREE_PLACE)).isEqualTo(1);
-        assertThat(lottoMachine.rottoRankMatchCount(LottoRank.TWO_PLACE)).isEqualTo(1);
-        assertThat(lottoMachine.rottoRankMatchCount(LottoRank.ONE_PLACE)).isEqualTo(1);
+        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.FIVE_PLACE)).isEqualTo(1);
+        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.FOUR_PLACE)).isEqualTo(1);
+        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.THREE_PLACE)).isEqualTo(1);
+        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.TWO_PLACE)).isEqualTo(1);
+        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.ONE_PLACE)).isEqualTo(1);
     }
 }

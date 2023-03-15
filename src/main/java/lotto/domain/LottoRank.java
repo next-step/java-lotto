@@ -36,8 +36,9 @@ public enum LottoRank {
 
     public static LottoRank getRankCondition(int condition, int bounsCondition) {
 
-        if (condition == 5 && bounsCondition == 1)
+        if (condition == 5 && bounsCondition == 1) {
             return TWO_PLACE;
+        }
 
         return CONDITION_MAP.getOrDefault(condition, NOTTING_PLACE);
     }

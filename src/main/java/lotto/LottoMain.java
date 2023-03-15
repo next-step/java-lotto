@@ -6,8 +6,9 @@ import lotto.domain.LottoTicket;
 import lotto.domain.WinningLottoTicket;
 import lotto.view.LottoConsoleView;
 
-public class LottoMain {
+import java.util.Arrays;
 
+public class LottoMain {
 
     public static void main(String[] args) {
 
@@ -16,7 +17,6 @@ public class LottoMain {
         int buyPrice = lottoConsoleView.inputLottoPrice();
 
         LottoMachine lottoMachine = new LottoMachine(buyPrice);
-
 
         int lottoCount = lottoMachine.lottoCount();
 
@@ -27,23 +27,28 @@ public class LottoMain {
 
         System.out.println();
 
+        winnerLottoConsoleview(lottoConsoleView, lottoMachine);
+
+        statisticsConsoleview(lottoConsoleView, lottoMachine);
+    }
+
+    private static void winnerLottoConsoleview(LottoConsoleView lottoConsoleView, LottoMachine lottoMachine) {
         String winningNumber = lottoConsoleView.inputWinningNumber();
         int bonusNumber = lottoConsoleView.inputBonusNumber();
 
         lottoMachine.saveWinningNumber(new WinningLottoTicket(new LottoTicket(winningNumber), bonusNumber));
+    }
 
+    private static void statisticsConsoleview(LottoConsoleView lottoConsoleView, LottoMachine lottoMachine) {
         lottoConsoleView.showBeforeStatistics();
 
-        for(LottoRank rank : LottoRank.values()){
-            if(rank == LottoRank.NOTTING_PLACE){
-                continue;
-            }
-
-            lottoConsoleView.showMatch(rank, lottoMachine.rottoRankMatchCount(rank));
-        }
+        Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> lottoRank != LottoRank.NOTTING_PLACE)
+                .forEach(
+                        lottoRank -> lottoConsoleView.showMatch(lottoRank, lottoMachine.lottoRankMatchCount(lottoRank))
+                );
 
         lottoConsoleView.showTotol(lottoMachine.getAggregationOfReturns());
-
     }
 
 }
