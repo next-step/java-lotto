@@ -58,13 +58,13 @@ public class StringPlusCalculatorTest {
 
 //        Pattern pattern = Pattern.compile("//(.*)\n(.*)");
         Pattern pattern = Pattern.compile("//(.*)\n(.*)");
-        Matcher matcher= pattern.matcher(str);
+        Matcher matcher = pattern.matcher(str);
 
         System.out.println(matcher.find());
         System.out.println(matcher.groupCount());
         System.out.println("======================");
-        for(int i=0; i<matcher.groupCount(); i++) {
-            System.out.println("group["+(i+1)+"]="+matcher.group(i+1));
+        for (int i = 0; i < matcher.groupCount(); i++) {
+            System.out.println("group[" + (i + 1) + "]=" + matcher.group(i + 1));
         }
         System.out.println("======================");
     }
@@ -84,16 +84,16 @@ public class StringPlusCalculatorTest {
 
     @DisplayName("0을 포함한 자연수 이외의 값이 있는경우 RuntimeException 예외를 throw")
     @ParameterizedTest
-    @ValueSource(strings = {"1","2","3","4","123","0","2384"})
+    @ValueSource(strings = {"1", "2", "3", "4", "123", "0", "2384"})
     void validNumber(String stringNumber) {
         number.validNumber(stringNumber);
     }
 
     @DisplayName("0을 포함한 자연수 이외의 값이 있는경우 RuntimeException 예외를 throw")
     @ParameterizedTest
-    @ValueSource(strings = {"-1","er","a3","-dsf","-df123","-0","2a384"})
+    @ValueSource(strings = {"-1", "er", "a3", "-dsf", "-df123", "-0", "2a384"})
     void validNumber2(String stringNumber) {
-        assertThrowsExactly(RuntimeException.class, ()->number.validNumber(stringNumber));
+        assertThrowsExactly(RuntimeException.class, () -> number.validNumber(stringNumber));
     }
 
 

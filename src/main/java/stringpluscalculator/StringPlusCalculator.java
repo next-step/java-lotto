@@ -1,5 +1,6 @@
 package stringpluscalculator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -29,15 +30,15 @@ public class StringPlusCalculator {
     }
 
     protected int addByDelimiter(String str) {
-        if(checkCustomDelimiter(str)){
+        if (checkCustomDelimiter(str)) {
             return addByCustomDelimiter(str);
         }
         return addByCommaOrColon(str);
     }
 
     private int addStringNumbers(String[] split) {
-        List<Number> numberList = null;
-        for(String string : split) numberList.add(new Number(string));
+        List<Number> numberList = new ArrayList<>();
+        for (String string : split) numberList.add(new Number(string));
         return Stream.of(split).mapToInt(Integer::parseInt).sum();
     }
 }
