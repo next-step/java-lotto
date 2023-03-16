@@ -5,7 +5,7 @@ import static java.lang.Integer.parseInt;
 public class Calculator {
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n";
-    private static final RuntimeException exception = new RuntimeException("잘못된 입력 값 입니다");
+    private static final RuntimeException WRONG_INPUT_EXCEPTION = new RuntimeException("잘못된 입력 값 입니다");
 
     public String[] parse(String input) {
         return input.split(DEFAULT_DELIMITER+"|"+CUSTOM_DELIMITER_REGEX);
@@ -31,10 +31,10 @@ public class Calculator {
         try {
             convert = parseInt(input);
         } catch (NumberFormatException e) {
-            throw exception;
+            throw WRONG_INPUT_EXCEPTION;
         }
         if ( convert <= 0 ) {
-            throw exception;
+            throw WRONG_INPUT_EXCEPTION;
         }
         return convert;
     }

@@ -1,5 +1,7 @@
 import casino.Casino;
 import lotto.Lotto;
+import lotto.LottoFactory;
+import lotto.WinningLotto;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,13 +17,13 @@ public class main {
         List<Lotto> lottoTickets = casino.buyLottery(amount);
         System.out.println(lottoTickets.size()+"개를 구입 했습니다.");
         lottoTickets.forEach(i ->
-                System.out.println(i.getLotteryNumbers()));
+                System.out.println(i.getLottoNumbers()));
 
         Scanner in2 = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력하세요.");
         String inputString = in2.nextLine();
 
-        HashSet<Integer> winningNumber = new HashSet<>();
+        List<Integer> winningNumber = new ArrayList<>();
         StringTokenizer stringTokenizer = new StringTokenizer(inputString, ",");
         while (stringTokenizer.hasMoreTokens()) {
             winningNumber.add(Integer.valueOf(stringTokenizer.nextToken()));
@@ -30,10 +32,11 @@ public class main {
 
         System.out.println("보너스 볼을 입력하세요.");
         int bonus = in2.nextInt();
+        WinningLotto winningLotto = LottoFactory.manualWinningLotto(winningNumber, bonus);
 
         for(Lotto lotto : lottoTickets) {
             int result =
-                    casino.lotteryStart(winningNumber, lotto, bonus);
+                    casino.match(lotto, winningLotto);
             winners[result-1] ++;
         }
 
