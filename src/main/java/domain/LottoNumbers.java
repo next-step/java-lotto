@@ -5,19 +5,21 @@ import java.util.List;
 public class LottoNumbers {
     public final List<LottoNumber> numbers;
 
-    public LottoNumbers() {
+    private LottoNumbers() {
         this.numbers = LottoNumberGenerator.generateLottoNumbers();
     }
 
-    public LottoNumbers(List<String> input) {
+    private LottoNumbers(List<String> input) {
         validate(input);
         this.numbers = LottoNumberGenerator.generateLottoNumbers(input);
     }
 
-    public void createAutoLottoNumbers() {
+    public static LottoNumbers createAutoLottoNumbers() {
+        return new LottoNumbers();
     }
 
-    public void createManualLottoNumbers() {
+    public static LottoNumbers createManualLottoNumbers(List<String> input) {
+        return new LottoNumbers(input);
     }
 
     public LottoNumbers(String strInput) {

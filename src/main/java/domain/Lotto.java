@@ -9,11 +9,11 @@ public class Lotto {
     private LottoRankResult lottoRankAmount;
 
     public Lotto() {
-        this.lottoNumber = new LottoNumbers();
+        this.lottoNumber = LottoNumbers.createAutoLottoNumbers();
     }
 
     public Lotto(List<String> input) {
-        this.lottoNumber = new LottoNumbers(input);
+        this.lottoNumber = LottoNumbers.createManualLottoNumbers(input);
     }
 
     public Lotto(String input) {

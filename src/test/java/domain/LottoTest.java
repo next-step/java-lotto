@@ -145,7 +145,7 @@ public class LottoTest {
 
     @Test
     void setLottoNumberTest() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumbers lottoNumbers = LottoNumbers.createAutoLottoNumbers();
         List<LottoNumber> lottoNumber = lottoNumbers.getNumbers();
         Collections.shuffle(lottoNumber);
         // lottoNumber.subList(0, 6).stream()
