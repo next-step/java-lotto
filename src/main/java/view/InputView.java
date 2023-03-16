@@ -38,17 +38,4 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static void printLottoList(List<Lotto> lottoList) {
-        lottoList.forEach(lotto -> {
-            printLotto(lotto);
-        });
-    }
-
-    public static void printLotto(Lotto lotto) {
-        System.out.println(lotto.getLottoNumbers().toString());
-    }
-
-    public static void printLotto(FirstPlaceLotto lotto) {
-        System.out.println(lotto.getLottoNumbers().toString());
-    }
 }

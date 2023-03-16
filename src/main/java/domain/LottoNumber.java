@@ -1,13 +1,22 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final int MIN_NUMBER = 1;
-    private final int MAX_NUMBER = 45;
-    private int number;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+    private final int number;
+    private static final List<LottoNumber> CACHE = new ArrayList<>();
 
-    public LottoNumber(int input) {
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            CACHE.add(new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int input) {
         try {
             validate(input);
         } catch (Exception e) {
@@ -17,7 +26,7 @@ public class LottoNumber {
         number = input;
     }
 
-    public LottoNumber(String strInput) {
+    private LottoNumber(String strInput) {
         int input = LottoUtil.stringToInt(strInput);
         try {
             validate(input);
@@ -28,11 +37,25 @@ public class LottoNumber {
         number = input;
     }
 
+    public static LottoNumber valueOf(int i) {
+        validate(i);
+        LottoNumber lottoNumber = CACHE.get(i - 1);
+        if (Objects.isNull(lottoNumber)) {
+            lottoNumber = new LottoNumber(i);
+        }
+        return lottoNumber;
+    }
+
+    public static LottoNumber valueOf(String input) {
+        int i = LottoUtil.stringToInt(input);
+        return valueOf(i);
+    }
+
     public int getNumber() {
         return number;
     }
 
-    void validate(int input) {
+    private static void validate(int input) {
         if (input < MIN_NUMBER)
             throw new IllegalArgumentException(String.format("Lotto 숫자는 %d보다 커야 합니다.", MIN_NUMBER));
 

@@ -6,7 +6,7 @@ public class FirstPlaceLotto extends Lotto {
     public FirstPlaceLotto(String input, String bonusLottoNumber) {
         super(input);
         validate(input, bonusLottoNumber);
-        this.bonusLottoNumber = new LottoNumber(bonusLottoNumber);
+        this.bonusLottoNumber = LottoNumber.valueOf(bonusLottoNumber);
     }
 
     private void validate(String input, String bonusLottoNumber) {

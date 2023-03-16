@@ -3,13 +3,9 @@ package domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -21,8 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.hamcrest.CoreMatchers.is;
 
-import domain.Lotto;
-import view.InputView;
+import view.ResultView;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class LottoTest {
@@ -113,7 +108,7 @@ public class LottoTest {
     void lottoNumberTest(int input) {
         var integer = Integer.valueOf(input);
 
-        var number = new LottoNumber(integer);
+        var number = LottoNumber.valueOf(integer);
         assertThat(number.getNumber(), is(1));
     }
 
@@ -121,7 +116,7 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = { 0, -1 })
     void lottoNumberZeroTest(int input) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumber(input));
+        assertThrows(IllegalArgumentException.class, () -> LottoNumber.valueOf(input));
 
     }
 
@@ -129,7 +124,7 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = { 0, -1 })
     void lottoNumberOver45Test(int input) {
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumber(input));
+        assertThrows(IllegalArgumentException.class, () -> LottoNumber.valueOf(input));
     }
 
     @Test
@@ -163,22 +158,22 @@ public class LottoTest {
     @Test
     void printLottoTest() {
         Lotto lotto = new Lotto();
-        InputView.printLotto(lotto);
+        ResultView.printLotto(lotto);
 
         lotto = new Lotto();
-        InputView.printLotto(lotto);
+        ResultView.printLotto(lotto);
 
         lotto = new Lotto();
-        InputView.printLotto(lotto);
+        ResultView.printLotto(lotto);
 
         lotto = new Lotto();
-        InputView.printLotto(lotto);
+        ResultView.printLotto(lotto);
 
         lotto = new Lotto();
-        InputView.printLotto(lotto);
+        ResultView.printLotto(lotto);
 
         lotto = new Lotto();
-        InputView.printLotto(lotto);
+        ResultView.printLotto(lotto);
 
     }
 

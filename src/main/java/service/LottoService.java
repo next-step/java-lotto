@@ -20,7 +20,7 @@ public class LottoService {
         InputView.printBuyCount(lottoCount);
 
         lottos = new Lottos(makeLottoList(lottoCount));
-        InputView.printLottoList(lottos.getLottos());
+        ResultView.printLottoList(lottos.getLottos());
 
     }
 
@@ -36,7 +36,6 @@ public class LottoService {
 
         return lottoList;
     }
-
 
     public void calculateLottoRank() {
         lottos.calculateLottoRank(firstPlaceLotto);
