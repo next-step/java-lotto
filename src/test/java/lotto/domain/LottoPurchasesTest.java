@@ -20,7 +20,7 @@ class LottoPurchasesTest {
     @ParameterizedTest
     void 로또_금액을_확인(int ints) {
         final LottoPurchases lottoPurchases = new LottoPurchases(ints);
-        assertThatExceptionOfType(IllegalAccessError.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lottoPurchases.getLottoMachineCount());
     }
 }
