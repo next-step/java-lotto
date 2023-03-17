@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class LottoResult {
 
     private Map<Integer, Integer> lottoResultSet = new HashMap<>();
-    private LottoMessage lottoMessage = new LottoMessage();
     private List<LottoNumbers> lottoNumberList;
     private WinLottoNumber winLottoNumber;
     private int purchasesNumber;
@@ -23,24 +22,12 @@ public class LottoResult {
         lottoResultReturns();
     }
 
-    public void lottoResultsStatistics() {
+    private void lottoResultsStatistics() {
         for (int i = 0; i < lottoNumberList.size(); i++) {
-            int count = 0;
-            boolean bonusYN = false;
-
-            count = lottoNumberList.get(i).getLottoNumber()
-                    .stream().filter(e -> winLottoNumber.getBeforeLottoNumber().getLottoNumber().contains(e))
-                    .collect(Collectors.toList()).size();
-
-            if (count == 5) {
-                bonusYN = lottoNumberList.get(i).getLottoNumber().contains(winLottoNumber.getBonusNumber());
-                if (bonusYN) {
-                    count = 7;
-                }
-            }
-            lottoResultSet.put(count, (lottoResultSet.containsKey(lottoResultSet.get(count)) ? lottoResultSet.get(count) : 0) + 1);
+            int resultCount = winLottoNumber.matchingLottoNumber(lottoNumberList.get(i));
+            lottoResultSet.put(resultCount, (lottoResultSet.containsKey(lottoResultSet.get(resultCount)) ? lottoResultSet.get(resultCount) : 0) + 1);
         }
-        lottoMessage.getLottoRankMessage(lottoResultSet);
+        LottoMessage.getLottoRankMessage(lottoResultSet);
     }
 
     private void lottoResultReturns() {
@@ -51,6 +38,6 @@ public class LottoResult {
         }
         result = Math.round(result / (double) purchasesNumber * 100) / 100.0;
 
-        lottoMessage.getLottoResultMessage(String.valueOf(result));
+        LottoMessage.getLottoResultMessage(String.valueOf(result));
     }
 }

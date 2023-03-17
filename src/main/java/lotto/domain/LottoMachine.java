@@ -11,20 +11,19 @@ public class LottoMachine {
     private static final int LOTTO_NUMBER_MINIMUM = 1;
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
     private static List<LottoNumbers> purchasesLottoList = new ArrayList<>();
-    private static LottoMessage lottoMessage = new LottoMessage();
     private static LottoNumbers lottoNumberSet;
 
     public LottoMachine(int number) {
-        lottoShuffle(number);
+        lottoListSet(number);
     }
 
-    private void lottoShuffle(int number) {
+    private void lottoListSet(int number) {
         for (int i = 0; i < number; i++) {
-            purchasesLottoList.add(i, lottoNumberSetting());
+            purchasesLottoList.add(i, lottoShuffle());
         }
     }
 
-    private LottoNumbers lottoNumberSetting() {
+    private LottoNumbers lottoShuffle() {
         final List<Integer> lottoNumberList = new ArrayList<>();
 
         if (lottoNumberList.isEmpty()) {
@@ -34,7 +33,7 @@ public class LottoMachine {
         }
         Collections.shuffle(lottoNumberList);
         lottoNumberSet = new LottoNumbers(lottoNumberList.subList(0, 6));
-        lottoMessage.getLottoMessage(String.valueOf(lottoNumberSet.getLottoNumber()));
+        LottoMessage.getLottoMessage(String.valueOf(lottoNumberSet.getLottoNumber()));
         return lottoNumberSet;
     }
 

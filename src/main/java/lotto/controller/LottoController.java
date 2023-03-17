@@ -1,18 +1,19 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.view.LottoBonusBall;
-import lotto.view.LottoQuestion;
-import lotto.view.LottoWinNumber;
+import lotto.view.LottoBonusRequest;
+import lotto.view.LottoPurchaseRequest;
+import lotto.view.WinLottoRequest;
 
 public class LottoController {
     public static void main(String[] args) {
 
-        LottoQuestion lottoQuestion = LottoQuestion.inputLottoPrice();
-        LottoMachine lottoMachine = new LottoMachine(lottoQuestion.getPrice());
-        LottoWinNumber lottoWinNumber = LottoWinNumber.lottoWinNumber();
-        LottoBonusBall lottoBonusBall = LottoBonusBall.lottoBonusBall();
-        WinLottoNumber winLottoNumber = new WinLottoNumber(lottoWinNumber.getLottoNumber(), lottoBonusBall.getBonusBall());
-        new LottoResult(lottoMachine.getPurchasesLottoList(), lottoQuestion.getPrice(), winLottoNumber);
+        LottoPurchaseRequest lottoPurchaseRequest = LottoPurchaseRequest.inputLottoPrice();
+        LottoPurchases lottoPurchases = new LottoPurchases(lottoPurchaseRequest.getLottoPriceCount());
+        LottoMachine lottoMachine = new LottoMachine(lottoPurchases.getLottoMachineCount());
+        WinLottoRequest winLottoRequest = WinLottoRequest.lottoWinNumber();
+        LottoBonusRequest lottoBonusRequest = LottoBonusRequest.lottoBonusBall();
+        WinLottoNumber winLottoNumber = new WinLottoNumber(winLottoRequest.getLottoNumber(), lottoBonusRequest.getBonusBall());
+        new LottoResult(lottoMachine.getPurchasesLottoList(), lottoPurchaseRequest.getLottoPriceCount(), winLottoNumber);
     }
 }

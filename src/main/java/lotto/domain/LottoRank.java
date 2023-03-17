@@ -14,7 +14,6 @@ public enum LottoRank {
     private final int reward;
     private final int keyNumber;
     private final boolean bonus;
-    private static HashMap<Integer, LottoRank> lottoRankMap = new HashMap<>();
 
     LottoRank(int matchingCount, int reward, boolean bonus, int keyNumber) {
         this.matchingCount = matchingCount;
@@ -40,6 +39,8 @@ public enum LottoRank {
     }
 
     public static int lottoRankValue(int checkData) {
+        HashMap<Integer, LottoRank> lottoRankMap = new HashMap<>();
+
         Arrays.stream(values()).forEach(e -> lottoRankMap.put(e.getKeyNumber(), e));
         return lottoRankMap.get(checkData).getReward();
     }
