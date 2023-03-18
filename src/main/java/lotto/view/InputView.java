@@ -2,15 +2,13 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class InputView {
     public static int inputBuyPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
 
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextInt();
     }
 
     public static int[] inputLastWeekWinningNumber() {

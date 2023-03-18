@@ -7,9 +7,9 @@ import lotto.domain.WinningStatistics;
 
 public class ResultView {
     public static void printBuyCountForPrint(LottoGame lottoGame) {
-        System.out.println(lottoGame.getBuyCountForPrint());
-        for (Lotto allLottoNumber : lottoGame.getAllLottoNumbersForPrint()) {
-            System.out.println(allLottoNumber);
+        System.out.println(lottoGame.getBuyCount() + "개를 구매했습니다.");
+        for (Lotto lotto : lottoGame.getAllLottos()) {
+            System.out.println(lotto);
         }
         System.out.println();
     }

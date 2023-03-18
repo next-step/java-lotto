@@ -42,6 +42,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.stream().sorted().collect(Collectors.toList()).toString();
+        return lottoNumbers.stream().map(lottoNumber -> Integer.parseInt(lottoNumber.toString())).sorted().collect(Collectors.toList()).toString();
     }
 }

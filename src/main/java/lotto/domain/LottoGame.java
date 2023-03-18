@@ -19,7 +19,7 @@ public class LottoGame {
         }
     }
 
-    public List<Lotto> getAllLottoNumbersForPrint() {
+    public List<Lotto> getAllLottos() {
         return this.lottos;
     }
 
@@ -31,12 +31,7 @@ public class LottoGame {
         return LOTTO_PRICE.multiply(this.lottos.size());
     }
 
-    public boolean getBuyCountForPrint() {
-        return false;
+    public int getBuyCount() {
+        return lottos.size();
     }
-
-
-//    public String getBuyCountForPrint() {
-//        return issueRequest.getBuyCountForPrint();
-//    }
 }
