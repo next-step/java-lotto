@@ -6,7 +6,6 @@ import domain.type.LottoRankResult;
 
 public class Lotto {
     private LottoNumbers lottoNumber;
-    // private LottoRankResult lottoRankAmount;
 
     public Lotto() {
         this.lottoNumber = LottoNumbers.createAutoLottoNumbers();
@@ -20,16 +19,11 @@ public class Lotto {
         this.lottoNumber = new LottoNumbers(input);
     }
 
-    // public LottoRankResult getLottoRankResult(FirstPlaceLotto firstPlaceLotto) {
-    // return LottoRank.getRank(this, firstPlaceLotto);
-    // }
-
     public LottoNumbers getLottoNumbers() {
         return this.lottoNumber;
     }
 
     public LottoRankResult calculateLottoRank(FirstPlaceLotto firstPlaceLotto) {
-        // lottoRankAmount = LottoRank.getRank(this, firstPlaceLotto);
         return LottoRank.getRank(this, firstPlaceLotto);
     }
 
