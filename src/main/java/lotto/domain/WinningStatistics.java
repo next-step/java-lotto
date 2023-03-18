@@ -8,10 +8,10 @@ import static lotto.domain.LottoGame.LOTTO_PRICE;
 public class WinningStatistics {
     private final Map<WinningGrade, Integer> lotteryStatistics;
 
-    public WinningStatistics(LotteryNumbers lotteryNumbers, List<Lotto> lottos) {
+    public WinningStatistics(WinningNumbers winningNumbers, List<Lotto> lottos) {
         Map<WinningGrade, Integer> lotteryStatistics = initStatistics();
         lottos.forEach(lotto -> {
-            WinningGrade winningGrade = lotteryNumbers.getWinningGrade(lotto);
+            WinningGrade winningGrade = winningNumbers.getWinningGrade(lotto);
             lotteryStatistics.put(winningGrade, lotteryStatistics.get(winningGrade) + 1);
         });
 

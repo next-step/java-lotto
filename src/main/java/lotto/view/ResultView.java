@@ -9,7 +9,7 @@ public class ResultView {
     public static void printBuyCountForPrint(LottoGame lottoGame) {
         System.out.println(lottoGame.getBuyCountForPrint());
         for (Lotto allLottoNumber : lottoGame.getAllLottoNumbersForPrint()) {
-            System.out.println(allLottoNumber.getLottoNumbers());
+            System.out.println(allLottoNumber);
         }
         System.out.println();
     }

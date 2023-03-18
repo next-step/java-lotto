@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 
 import static lotto.domain.WinningGrade.*;
 
@@ -23,17 +22,17 @@ public class LottoGameTest {
     @Test
     void getStatistics() {
         List<Lotto> lottos = List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 8)),
-                new Lotto(Set.of(1, 2, 3, 4, 8, 9)),
-                new Lotto(Set.of(1, 2, 3, 7, 8, 9)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11))
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(1, 2, 3, 4, 5, 7),
+                new Lotto(1, 2, 3, 4, 5, 8),
+                new Lotto(1, 2, 3, 4, 8, 9),
+                new Lotto(1, 2, 3, 7, 8, 9),
+                new Lotto(1, 2, 8, 9, 10, 11)
         );
 
         LottoGame lottoGame = new LottoGame(lottos);
-        LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
-        WinningStatistics statistics = lottoGame.getStatistics(lotteryNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
+        WinningStatistics statistics = lottoGame.getStatistics(winningNumbers);
 
         Assertions.assertThat(statistics.getWinningNumbers(FIRST_PRIZE)).isEqualTo(1);
         Assertions.assertThat(statistics.getWinningNumbers(SECOND_PRIZE)).isEqualTo(1);
@@ -47,21 +46,21 @@ public class LottoGameTest {
     @Test
     void getTotalRateOfReturn() {
         List<Lotto> lottos = List.of(
-                new Lotto(Set.of(1, 2, 3, 7, 8, 9)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11)),
-                new Lotto(Set.of(1, 2, 8, 9, 10, 11))
+                new Lotto(1, 2, 3, 7, 8, 9),
+                new Lotto(1, 2, 8, 9, 10, 11),
+                new Lotto(1, 2, 8, 9, 10, 11),
+                new Lotto(1, 2, 8, 9, 10, 11),
+                new Lotto(1, 2, 8, 9, 10, 11),
+                new Lotto(1, 2, 8, 9, 10, 11),
+                new Lotto(1, 2, 8, 9, 10, 11),
+                new Lotto(1, 2, 8, 9, 10, 11),
+                new Lotto(1, 2, 8, 9, 10, 11),
+                new Lotto(1, 2, 8, 9, 10, 11)
         );
-        LotteryNumbers lotteryNumbers = new LotteryNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(7,1, 2, 3, 4, 5, 6);
 
         LottoGame lottoGame = new LottoGame(lottos);
-        Assertions.assertThat(lottoGame.getStatistics(lotteryNumbers).getTotalRateOfReturnForPrint()).isEqualTo("0.5");
+        Assertions.assertThat(lottoGame.getStatistics(winningNumbers).getTotalRateOfReturnForPrint()).isEqualTo("0.5");
 
     }
 

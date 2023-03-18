@@ -1,53 +1,30 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoBall;
+import lotto.domain.LottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 
 public class LottoTest {
 
     @DisplayName("로또 추첨번호는 1 ~ 45 이다.")
     @Test
     void lottoBallRange() {
-        HashSet<Integer> checkSet = new HashSet<>();
-        Arrays.stream(LottoBall.values()).forEach(lottoBall -> checkSet.add(lottoBall.getNumber()));
-        Integer maxValue = Collections.max(checkSet);
-        Integer minValue = Collections.min(checkSet);
-
-        Assertions.assertThat(checkSet).hasSize(45);
-        Assertions.assertThat(minValue).isEqualTo(1);
-        Assertions.assertThat(maxValue).isEqualTo(45);
+        Assertions.assertThatThrownBy(() -> LottoNumber.from(0)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> LottoNumber.from(46)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("6개의 랜덤 숫자를 추출한다.")
     @Test
     void getRandomNumber() {
-        Lotto lotto = new Lotto();
-        Assertions.assertThat(lotto.getLottoNumbers()).hasSize(6);
+        Lotto lotto = Lotto.lottery();
+        Assertions.assertThat(lotto.getLottoNumbersCount()).isEqualTo(6);
     }
 
     @DisplayName("6개의 랜덤 숫자가 중복되지 않는다.")
     @Test
     void getRandomDuplicationNumber() {
-        Lotto lotto = new Lotto();
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
-
-        Assertions.assertThat(new HashSet<>(lottoNumbers)).hasSize(6);
+        Assertions.assertThatThrownBy(() -> new Lotto(1, 1, 1, 1, 1, 1)).isInstanceOf(IllegalArgumentException.class);
     }
-
-
-    @DisplayName("추출된 숫자를 정렬한다.")
-    @Test
-    void getSortedRandomNumber() {
-        Lotto lotto = new Lotto();
-        Assertions.assertThat(lotto.getLottoNumbers()).isSorted();
-    }
-
 }

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Grade {
-    private int value;
+    private final int value;
 
     public Grade(int value) {
         this.value = value;
@@ -11,9 +11,4 @@ public class Grade {
     public String toString() {
         return Integer.toString(this.value);
     }
-
-    public Integer getIntegerGrade() {
-        return this.value;
-    }
-
 }

@@ -1,40 +1,42 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoGame {
     public static final Money LOTTO_PRICE = new Money(1000);
 
-
     private final List<Lotto> lottos;
-    private final IssueRequest issueRequest;
-
-    public LottoGame(Money lottoPay) {
-        this.issueRequest = new IssueRequest(lottoPay.division(LOTTO_PRICE).toInteger());
-        this.lottos = new ArrayList<>();
-        issueRequest.issue(lottos);
-
-    }
 
     public LottoGame(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.issueRequest = new IssueRequest(lottos.size());
     }
 
-    public Money getBuyPrice() {
-        return issueRequest.getPrice();
+    public LottoGame(Money lottoPay) {
+        int count = lottoPay.division(LOTTO_PRICE).toInteger();
+        this.lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            this.lottos.add(Lotto.lottery());
+        }
     }
 
     public List<Lotto> getAllLottoNumbersForPrint() {
         return this.lottos;
     }
 
-    public WinningStatistics getStatistics(LotteryNumbers lotteryNumbers) {
-        return new WinningStatistics(lotteryNumbers, lottos);
+    public WinningStatistics getStatistics(WinningNumbers winningNumbers) {
+        return new WinningStatistics(winningNumbers, lottos);
     }
 
-    public String getBuyCountForPrint() {
-        return issueRequest.getBuyCountForPrint();
+    public Money getBuyPrice() {
+        return LOTTO_PRICE.multiply(this.lottos.size());
     }
+
+    public boolean getBuyCountForPrint() {
+        return false;
+    }
+
+
+//    public String getBuyCountForPrint() {
+//        return issueRequest.getBuyCountForPrint();
+//    }
 }

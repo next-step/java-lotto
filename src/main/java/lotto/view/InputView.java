@@ -1,11 +1,9 @@
 package lotto.view;
 
-import lotto.domain.Money;
-
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     public static int inputBuyPrice() {
@@ -15,12 +13,12 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static Set<Integer> inputLastWeekWinningNumber() {
+    public static int[] inputLastWeekWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String inputWinningNumbers = scanner.nextLine();
         String[] splitWinningNumbers = inputWinningNumbers.replaceAll(" ", "").split(",");
-        return Arrays.stream(splitWinningNumbers).map(Integer::parseInt).collect(Collectors.toSet());
+        return Arrays.stream(splitWinningNumbers).mapToInt(Integer::parseInt).toArray();
     }
 
     public static int inputLastWeekBonusNumber() {
