@@ -3,12 +3,15 @@ package lotto.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoPromoterTest {
@@ -112,11 +115,19 @@ class LottoPromoterTest {
     }
 
     @DisplayName("로또 구매 테스트")
-    @Test
-    void buyLottosTest() {
-        int money = 2200;
-        List<Lotto> actuals = promoter.buyLottos(money);
-        assertThat(actuals.size()).isEqualTo(2);
+    @ParameterizedTest
+    @ValueSource(ints = {22, 10, 0})
+    void buyLottosTest(int lottoCount) {
+        List<Lotto> actuals = promoter.buyLottos(lottoCount);
+        assertThat(actuals.size()).isEqualTo(lottoCount);
+    }
+    @DisplayName("로또 구매 가능 금액 미달 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {-22, -1})
+    void buyLottosFailTest(int lottoCount) {
+        assertThrows(IllegalArgumentException.class, () -> {
+            promoter.buyLottos(lottoCount);
+        });
     }
     
     @DisplayName("로또 목록 등수 확인 테스트")

@@ -22,8 +22,12 @@ public class LottoView {
 
     public List<Integer> insertWinningLottoNumbers() {
         System.out.println("로또 당첨 번호를 입력하세요.");
+        return insertLottoNumbers();
+    }
+
+    public List<Integer> insertLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
-        while(numbers.size() < Lotto.LOTTO_BALL_COUNT){
+        while(numbers.size() < Lotto.LOTTO_BALL_COUNT) {
             numbers.add(this.scanner.nextInt());
         }
         return numbers;
@@ -31,6 +35,11 @@ public class LottoView {
 
     public int insertBonusBallNumbers() {
         System.out.println("보너스 번호를 입력하세요.");
+        return this.scanner.nextInt();
+    }
+
+    public int insertManualLottoCount() {
+        System.out.println("수동으로 구매할 로또의 갯수를 입력하세요.");
         return this.scanner.nextInt();
     }
 
@@ -63,5 +72,19 @@ public class LottoView {
 
     public void printTotalEarningRate(double earningRate) {
         System.out.println(String.format("총 수익률은 %.2f입니다.", earningRate));
+    }
+
+    public void printManualLottoMessage() {
+        System.out.println("수동으로 구매할 번호를 입력하세요.");
+    }
+
+    public void printTotalLottoCount(int manualCount, int autoCount) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", manualCount, autoCount));
+    }
+
+    public void printMoneyCheckMessage(int lottoCount, int manualCount) {
+        if(lottoCount < manualCount) {
+            throw new IllegalArgumentException("로또 구매 가능 금액이 부족합니다.");
+        }
     }
 }

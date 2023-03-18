@@ -5,19 +5,30 @@ import lotto.domain.LottoBall;
 import lotto.domain.LottoGrades;
 import lotto.domain.LottoPromoter;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class LottoGame {
+public class ManualLottoGame {
+
+    private static final LottoPromoter promoter = new LottoPromoter();
+
+    private static final LottoView view = new LottoView();
 
     public static void main(String[] args) {
-        LottoView view = new LottoView();
         int money = view.insertMoney();
 
-        LottoPromoter promoter = new LottoPromoter();
+        int manualCount = view.insertManualLottoCount();
         int lottoCount = promoter.getLottoCount(money);
-        List<Lotto> lottos = promoter.buyLottos(lottoCount);
+        view.printMoneyCheckMessage(lottoCount, manualCount);
+
+        List<Lotto> lottos = getManualLottos(manualCount);
+
+        int autoCount = lottoCount - manualCount;
+        view.printTotalLottoCount(manualCount, autoCount);
+
+        lottos.addAll(promoter.buyLottos(autoCount));
         view.printLottos(lottos);
 
         List<Integer> numbers = view.insertWinningLottoNumbers();
@@ -37,4 +48,14 @@ public class LottoGame {
 
     }
 
+    private static List<Lotto> getManualLottos(int manualCount) {
+        view.printManualLottoMessage();
+
+        List<Lotto> lottos = new ArrayList<>();
+        for(int i = 0; i <manualCount; i++) {
+            List<Integer> numbers = view.insertLottoNumbers();
+            lottos.add(promoter.createLotto(numbers));
+        }
+        return lottos;
+    }
 }
