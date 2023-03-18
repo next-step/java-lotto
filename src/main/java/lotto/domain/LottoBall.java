@@ -1,12 +1,12 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoBall {
+public class LottoBall implements Comparable<LottoBall> {
 
-	private static final int LOTTO_MAX_NUMBER = 45;
+	protected static final int LOTTO_MAX_NUMBER = 45;
 
-	private static final int LOTTO_MIN_NUMBER = 1;
+	protected static final int LOTTO_MIN_NUMBER = 1;
 	
 	// 로또 단일 번호
 	private int ball;
@@ -42,5 +42,10 @@ public class LottoBall {
 	@Override
 	public int hashCode() {
 		return Objects.hash(ball);
+	}
+
+	@Override
+	public int compareTo(LottoBall o) {
+		return Integer.compare(this.ball, o.getBall());
 	}
 }
