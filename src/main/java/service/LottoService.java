@@ -24,6 +24,14 @@ public class LottoService {
 
     }
 
+    public LottoService(int money, int manualLottoCount) {
+        int autoLottoCount = money / LottoPrice.PRICE.getPrice() - manualLottoCount;
+        InputView.printBuyManualAndAutoCount(manualLottoCount, autoLottoCount);
+
+        lottos = new Lottos(makeLottoList(lottoCount));
+        ResultView.printLottoList(lottos.getLottos());
+    }
+
     public void setFirstPlaceLotto(String input, String bonusLottoNumber) {
         firstPlaceLotto = new FirstPlaceLotto(input, bonusLottoNumber);
     }
@@ -37,11 +45,7 @@ public class LottoService {
         return lottoList;
     }
 
-    public void calculateLottoRank() {
-        lottos.calculateLottoRank(firstPlaceLotto);
-    }
-
     public void printLottoResult() {
-        ResultView.printLottoResult(lottos);
+        ResultView.printLottoResult(lottos, firstPlaceLotto);
     }
 }

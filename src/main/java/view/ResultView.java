@@ -1,22 +1,35 @@
 package view;
 
 import java.util.List;
+import java.util.Map;
 
 import domain.FirstPlaceLotto;
 import domain.Lotto;
+import domain.LottoProfit;
+import domain.LottoRank;
 import domain.Lottos;
 import domain.type.LottoRankResult;
 
 public class ResultView {
-    public static void printLottoResult(Lottos lottos) {
+    public static void printBuyManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printLottoResult(Lottos lottos, FirstPlaceLotto firstPlaceLotto) {
+        Map<LottoRankResult, Integer> map = lottos.getLottoRankCount(firstPlaceLotto);
+
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + lottos.getLottoRankCount(LottoRankResult.FIFTH) + "개");
-        System.out.println("4개 일치 (50000원)- " + lottos.getLottoRankCount(LottoRankResult.FOURTH) + "개");
-        System.out.println("5개 일치 (1500000원)- " + lottos.getLottoRankCount(LottoRankResult.THIRD) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + lottos.getLottoRankCount(LottoRankResult.SECOND) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + lottos.getLottoRankCount(LottoRankResult.FIRST) + "개");
-        System.out.println("총 수익률은 " + lottos.getProfitRate() + "입니다.");
+        System.out.println("3개 일치 (5000원)- " + map.get(LottoRankResult.FIFTH) + "개");
+        System.out
+                .println("4개 일치 (50000원)- " + map.get(LottoRankResult.FOURTH) + "개");
+        System.out
+                .println("5개 일치 (1500000원)- " + map.get(LottoRankResult.THIRD) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- "
+                + map.get(LottoRankResult.SECOND) + "개");
+        System.out.println(
+                "6개 일치 (2000000000원)- " + map.get(LottoRankResult.FIRST) + "개");
+        System.out.println("총 수익률은 " + LottoProfit.getProfitRate(lottos, firstPlaceLotto) + "입니다.");
     }
 
     public static void printLottoList(List<Lotto> lottoList) {
