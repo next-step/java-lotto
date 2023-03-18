@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
-    private String lottoType = "";
     private final List<Integer> lottoNumbers;
     private LottoRank rank;
     private int hitCount = 0;

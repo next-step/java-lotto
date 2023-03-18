@@ -9,12 +9,11 @@ public class LottoMain {
         InputView inputView = new InputView();
         Lottos lottos = new Lottos();
         lottos.buyLottos(inputView.inputBuyingPrice());
-        ResultBuyView resultBuyView = new ResultBuyView();
-        resultBuyView.printLottos(lottos);
+        ResultView resultView = new ResultView(lottos);
+        resultView.printLottos(lottos);
         lottos.setWinLotto(inputView.inputHitNumber());
         lottos.setBonusNumber(inputView.inputBonusNumber());
         lottos.executeLotto();
-        ResultView resultView = new ResultView(lottos);
         resultView.printWinResult();
     }
 }
