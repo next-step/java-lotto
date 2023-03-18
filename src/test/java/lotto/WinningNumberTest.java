@@ -33,6 +33,13 @@ public class WinningNumberTest {
         Assertions.assertThat(winningNumbers.isMatchBonus(lotto)).isEqualTo(expectResult);
     }
 
+    @DisplayName("보너스번호는 당첨번호와 중복될 수 없다.")
+    @Test
+    void isContainWinningNumber() {
+        Assertions.assertThatThrownBy(() -> new WinningNumbers(6, 1, 2, 3, 4, 5, 6))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     private static Stream<Arguments> generateArgumentsSet() {
         return Stream.of(
                 Arguments.arguments(false, List.of(1, 2, 3, 4, 5, 6)),
