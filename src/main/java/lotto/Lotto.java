@@ -1,6 +1,8 @@
 package lotto;
 
 import exception.LottoException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,6 +16,14 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public String printLottoNumber() {
+        List<Integer> lottoNumberList = new ArrayList<>();
+        lottoNumbers.forEach(i ->
+                        lottoNumberList.add(i.getNumber())
+                );
+        return lottoNumberList.toString();
     }
 }
 

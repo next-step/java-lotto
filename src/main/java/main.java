@@ -17,7 +17,8 @@ public class main {
         List<Lotto> lottoTickets = casino.buyLottery(amount);
         System.out.println(lottoTickets.size()+"개를 구입 했습니다.");
         lottoTickets.forEach(i ->
-                System.out.println(i.getLottoNumbers()));
+                    System.out.println(i.printLottoNumber())
+                );
 
         Scanner in2 = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력하세요.");

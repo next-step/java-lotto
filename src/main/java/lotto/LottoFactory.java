@@ -17,7 +17,7 @@ public class LottoFactory {
                 .forEach(i -> lottoNumbers.add(LottoNumber.of(i)));
     }
 
-    public static Lotto auto() {
+    public Lotto auto() {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.subList(0, LOTTO_SIZE));
     }
