@@ -64,10 +64,4 @@ public class LottoGameTest {
 
     }
 
-    @Test
-    @DisplayName("VO객체 선언에 대한 테스트")
-    void test() {
-        Assertions.assertThat(new Money(10)).isEqualTo(new Money(10));
-    }
-
 }
