@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.RandomNumberFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class LottoTest {
     @DisplayName("6개의 랜덤 숫자를 추출한다.")
     @Test
     void getRandomNumber() {
-        Lotto lotto = Lotto.lottery();
+        Lotto lotto = new Lotto(RandomNumberFactory.get());
         Assertions.assertThat(lotto.getLottoNumbersCount()).isEqualTo(6);
     }
 

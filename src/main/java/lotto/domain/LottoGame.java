@@ -15,7 +15,7 @@ public class LottoGame {
         int count = lottoPay.division(LOTTO_PRICE).toInteger();
         this.lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            this.lottos.add(Lotto.lottery());
+            this.lottos.add(new Lotto(RandomNumberFactory.get()));
         }
     }
 
