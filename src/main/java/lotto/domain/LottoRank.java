@@ -1,7 +1,11 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum LottoRank {
     FOUR(3, 5000, false, 3),
@@ -38,10 +42,16 @@ public enum LottoRank {
         return this.bonus;
     }
 
-    public static int lottoRankValue(int checkData) {
-        HashMap<Integer, LottoRank> lottoRankMap = new HashMap<>();
+    public static LottoRank getLottoRank(int matchingCount, Boolean bonus) {
+        if (bonus == LottoRank.TWO_BONUS.getBonus()) {
+            return LottoRank.TWO;
+        }
 
-        Arrays.stream(values()).forEach(e -> lottoRankMap.put(e.getKeyNumber(), e));
-        return lottoRankMap.get(checkData).getReward();
+        for (LottoRank rank : LottoRank.values()) {
+            if (rank.getMatchingCount() == matchingCount) {
+                return rank;
+            }
+        }
+        return null;
     }
 }

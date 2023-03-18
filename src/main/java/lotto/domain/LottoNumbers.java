@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.view.LottoMessage;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 

@@ -1,28 +1,29 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchases;
 
 import java.util.Scanner;
 
 public class LottoBonusRequest {
-    private final int bonusBall;
+    private final LottoNumber bonusBall;
 
-    public LottoBonusRequest(int bonusBall) {
+    public LottoBonusRequest(LottoNumber bonusBall) {
         this.bonusBall = bonusBall;
     }
 
     public static LottoBonusRequest lottoBonusBall() {
-        int inputBonusBall = bonusBallRequest();
+        LottoNumber inputBonusBall = bonusBallRequest();
         return new LottoBonusRequest(inputBonusBall);
     }
 
-    private static int bonusBallRequest() {
+    private static LottoNumber bonusBallRequest() {
         Scanner sc = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
-        return sc.nextInt();
+        return new LottoNumber(sc.nextInt());
     }
 
-    public int getBonusBall() {
+    public LottoNumber getBonusBall() {
         return bonusBall;
     }
 }

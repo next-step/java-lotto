@@ -5,38 +5,33 @@ import java.util.stream.Collectors;
 public class WinLottoNumber {
 
     private static LottoNumbers beforeLottoNumber;
-    private static int bonusNumber;
+    private static LottoNumber bonusNumber;
 
-    public WinLottoNumber(LottoNumbers lottoNumber, int bonusNumber) {
+    public WinLottoNumber(LottoNumbers lottoNumber, LottoNumber bonusNumber) {
         this.beforeLottoNumber = lottoNumber;
         this.bonusNumber = bonusNumber;
         winLottoNumberCheck();
     }
 
     public void winLottoNumberCheck() {
-        if (beforeLottoNumber.getLottoNumber().contains(bonusNumber)) {
+        if (beforeLottoNumber.getLottoNumber().contains(bonusNumber.getNumber())) {
             throw new IllegalArgumentException("보너스볼 중복 숫자 발생");
-        }
-
-        if (bonusNumber > 45 || bonusNumber < 1) {
-            throw new IllegalArgumentException("유효하지 않은 보너스볼 숫자");
         }
     }
 
-    public int matchingLottoNumber(LottoNumbers lottoNumbers) {
-        int resultCount = 0;
+    public LottoRank matchingLottoNumber(LottoNumbers lottoNumbers) {
+        int matchingCount = 0;
         boolean bonusYN = false;
+        LottoRank lottoRank;
 
-        resultCount = lottoNumbers.getLottoNumber()
+        matchingCount = lottoNumbers.getLottoNumber()
                 .stream().filter(e -> beforeLottoNumber.getLottoNumber().contains(e))
                 .collect(Collectors.toList()).size();
 
-        if (resultCount == 5) {
-            bonusYN = lottoNumbers.getLottoNumber().contains(bonusNumber);
-            if (bonusYN) {
-                resultCount = 7;
-            }
+        if (matchingCount == 5) {
+            bonusYN = lottoNumbers.getLottoNumber().contains(bonusNumber.getNumber());
         }
-        return resultCount;
+        lottoRank = LottoRank.getLottoRank(matchingCount, bonusYN);
+        return lottoRank;
     }
 }
