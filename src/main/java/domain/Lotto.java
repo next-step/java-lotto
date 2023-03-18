@@ -7,6 +7,8 @@ import domain.type.LottoRankResult;
 public class Lotto {
     private LottoNumbers lottoNumber;
 
+    private LottoRankResult lottoRankAmount;
+
     public Lotto() {
         this.lottoNumber = LottoNumbers.createAutoLottoNumbers();
     }

@@ -8,6 +8,7 @@ import domain.type.LottoPrice;
 import domain.type.LottoRankResult;
 
 public class LottoProfit {
+
     public static BigDecimal getProfitRate(Lottos lottos, FirstPlaceLotto firstPlaceLotto) {
         List<LottoRankResult> ranks = lottos.getLottos().stream().map(it -> it.calculateLottoRank(firstPlaceLotto))
                 .toList();

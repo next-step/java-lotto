@@ -4,6 +4,7 @@ import domain.LottoUtil;
 import view.InputView;
 import view.ResultView;
 
+
 public class LottoMain {
     public static void main(String[] args) {
         InputView.printInputView();

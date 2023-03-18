@@ -183,6 +183,7 @@ public class LottoTest {
     void calculateLottoRankTest() {
         FirstPlaceLotto firstPlaceLotto = new FirstPlaceLotto("1,2,3,4,5,6", "7");
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+
         assertThat(lotto.calculateLottoRank(firstPlaceLotto), is(LottoRankResult.FIRST));
     }
 
