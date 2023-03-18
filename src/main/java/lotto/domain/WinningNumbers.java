@@ -14,10 +14,6 @@ public class WinningNumbers {
         return WinningGrade.checkWinningGrade(lotto.matchCount(this.winningNumbers), lotto.isContains(this.bonusNumber));
     }
 
-//    public Lotto1 getWinningNumbers() {
-//
-//    }
-
     public int matchWinningCount(Lotto lotto) {
         return this.winningNumbers.matchCount(lotto);
     }

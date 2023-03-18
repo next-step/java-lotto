@@ -27,4 +27,11 @@ public class LottoTest {
     void getRandomDuplicationNumber() {
         Assertions.assertThatThrownBy(() -> new Lotto(1, 1, 1, 1, 1, 1)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("로또는 6개의 번호 구성되어야 한다.")
+    @Test
+    void getRandomNumber1() {
+        Assertions.assertThatThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 6, 7)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> new Lotto(1, 2, 3, 4, 5)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
