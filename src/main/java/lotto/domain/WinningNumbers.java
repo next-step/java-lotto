@@ -20,7 +20,7 @@ public class WinningNumbers {
     }
 
     public WinningGrade getWinningGrade(final Lotto lotto) {
-        return WinningGrade.checkWinningGrade(lotto.matchCount(this.winningNumbers), lotto.isContains(this.bonusNumber));
+        return WinningGrade.from(lotto.matchCount(this.winningNumbers), lotto.isContains(this.bonusNumber));
     }
 
     public int matchWinningCount(Lotto lotto) {

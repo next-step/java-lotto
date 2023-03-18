@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static lotto.domain.LottoGame.LOTTO_PRICE;
 
@@ -46,12 +45,8 @@ public class WinningStatistics {
         return Double.toString(Math.round(returnRete * 1000) / 1000.0);
     }
 
-    public String printInformation() {
-        return lotteryStatistics.keySet().stream()
-                .filter(key -> key != WinningGrade.ETC)
-                .sorted(Comparator.comparing(WinningGrade::getPrizeMoney))
-                .map(key -> key.getDescriptionForPrint() + "- " + lotteryStatistics.get(key) + "개")
-                .collect(Collectors.joining("\n"));
+    public int statisticsCount(WinningGrade grade) {
+        return lotteryStatistics.get(grade);
     }
 
 }

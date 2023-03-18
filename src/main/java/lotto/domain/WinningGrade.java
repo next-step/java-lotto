@@ -1,50 +1,61 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 public enum WinningGrade {
-    FIRST_PRIZE(new Grade(1), new WinningGradeDescription("6개 일치", new Money(2000000000))),
-    SECOND_PRIZE(new Grade(2), new WinningGradeDescription("5개 일치, 보너스 볼 일치", new Money(30000000))),
-    THIRD_PRIZE(new Grade(3), new WinningGradeDescription("5개 일치", new Money(1500000))),
-    FORTH_PRIZE(new Grade(4), new WinningGradeDescription("4개 일치", new Money(50000))),
-    FIFTY_PRIZE(new Grade(5), new WinningGradeDescription("3개 일치", new Money(5000))),
-    ETC(new Grade(0), new WinningGradeDescription()),;
+    FIRST_PRIZE(1, 6, false, false, new Money(2000000000)),
+    SECOND_PRIZE(2, 5, true, true, new Money(30000000)),
+    THIRD_PRIZE(3, 5, true, false, new Money(1500000)),
+    FORTH_PRIZE(4, 4, false, false, new Money(50000)),
+    FIFTY_PRIZE(5, 3, false, false, new Money(5000)),
+    ETC(0, 0, false, false, Money.ZERO),
+    ;
 
-    private final Grade prizeGrade;
-    private final WinningGradeDescription winningGradeDescription;
+    private final int grade;
+    private final int matchCount;
+    private final boolean isNeedBonusMatch;
+    private final boolean isBonusMatch;
+    private final Money winningMoney;
 
-    WinningGrade(Grade prizeGrade, WinningGradeDescription winningGradeDescription) {
-        this.prizeGrade = prizeGrade;
-        this.winningGradeDescription = winningGradeDescription;
+    WinningGrade(int grade, int matchCount, boolean isNeedBonusMatch, boolean isBonusMatch, Money winningMoney) {
+        this.grade = grade;
+        this.matchCount = matchCount;
+        this.isNeedBonusMatch = isNeedBonusMatch;
+        this.isBonusMatch = isBonusMatch;
+        this.winningMoney = winningMoney;
     }
 
-    public static WinningGrade checkWinningGrade(int matchWinningCount, boolean matchBonus) {
-        if (matchWinningCount == 6) {
-            return FIRST_PRIZE;
+    public static WinningGrade from(int matchCount, boolean contains) {
+        List<WinningGrade> matchGrades = Arrays.stream(WinningGrade.values())
+                .filter(winningGrade -> winningGrade.matchCount == matchCount)
+                .collect(Collectors.toList());
+
+        if (matchGrades.size() == 1) {
+            return matchGrades.stream().findFirst().get();
         }
 
-        if (matchWinningCount == 5 && matchBonus) {
-            return SECOND_PRIZE;
-        }
-
-        if (matchWinningCount == 5) {
-            return THIRD_PRIZE;
-        }
-
-        if (matchWinningCount == 4) {
-            return FORTH_PRIZE;
-        }
-
-        if (matchWinningCount == 3) {
-            return FIFTY_PRIZE;
-        }
-
-        return ETC;
+        Optional<WinningGrade> result = matchGrades.stream().filter(winningGrade -> winningGrade.isNeedBonusMatch)
+                .filter(winningGrade -> winningGrade.isBonusMatch == contains)
+                .findFirst();
+        return result.orElse(WinningGrade.ETC);
     }
 
     public Integer getPrizeMoney() {
-        return this.winningGradeDescription.getIntegerPrizeMoney();
+        return this.winningMoney.toInteger();
     }
 
-    public String getDescriptionForPrint() {
-        return this.winningGradeDescription + " (" + this.getPrizeMoney() + "원)";
+    public boolean isBonusMatch() {
+        return isBonusMatch;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isNeedBonusMatch() {
+        return isNeedBonusMatch;
     }
 }
