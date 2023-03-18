@@ -28,6 +28,11 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public static String scanManualLotto() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
     public static String scanFirstLotto() {
         System.out.println("");
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");

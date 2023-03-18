@@ -25,11 +25,23 @@ public class LottoService {
     }
 
     public LottoService(int money, int manualLottoCount) {
-        int autoLottoCount = money / LottoPrice.PRICE.getPrice() - manualLottoCount;
-        InputView.printBuyManualAndAutoCount(manualLottoCount, autoLottoCount);
+        List<Lotto> newLottos = new ArrayList<>();
 
-        lottos = new Lottos(makeLottoList(lottoCount));
-        ResultView.printLottoList(lottos.getLottos());
+        ResultView.printManualLottoInput();
+
+        int autoLottoCount = money / LottoPrice.PRICE.getPrice() - manualLottoCount;
+
+        IntStream.range(0, manualLottoCount).forEach(it -> {
+            String stringLotto = InputView.scanManualLotto();
+            newLottos.add(new Lotto(stringLotto));
+        });
+
+        newLottos.addAll(makeLottoList(autoLottoCount));
+
+        ResultView.printBuyManualAndAutoCount(manualLottoCount, autoLottoCount);
+        ResultView.printLottoList(newLottos);
+
+        this.lottos = new Lottos(newLottos);
     }
 
     public void setFirstPlaceLotto(String input, String bonusLottoNumber) {

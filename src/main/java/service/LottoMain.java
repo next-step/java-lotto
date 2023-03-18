@@ -1,7 +1,5 @@
 package service;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import domain.LottoUtil;
 import view.InputView;
 import view.ResultView;

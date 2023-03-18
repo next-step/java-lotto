@@ -19,12 +19,6 @@ public class Lottos {
         return lottos;
     }
 
-    // public void calculateLottoRank(FirstPlaceLotto firstPlaceLotto) {
-    // for (Lotto lotto : lottos) {
-    // lotto.calculateLottoRank(firstPlaceLotto);
-    // }
-    // }
-
     public Map<LottoRankResult, Integer> getLottoRankCount(FirstPlaceLotto firstPlaceLotto) {
         Map<LottoRankResult, Integer> map = new HashMap<>();
         List.of(LottoRankResult.values()).stream()
