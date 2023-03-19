@@ -18,6 +18,10 @@ public class InputView {
     }
 
     public static List<Set<Integer>> issueManualLottos(int manualQuantity) {
+        if (manualQuantity < 0) {
+            return List.of();
+        }
+
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         List<Set<Integer>> manualLottos = new ArrayList<>();
