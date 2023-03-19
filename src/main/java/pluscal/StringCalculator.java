@@ -32,14 +32,14 @@ public class StringCalculator {
 
     public String[] seperate(String text) {
 
-        String[] tokens = text.split(",|:");
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-
         if (m.find()) {
             String customDelimiter = m.group(1);
-            tokens = m.group(2).split(customDelimiter);
+            String[] tokens = m.group(2).split(customDelimiter);
+            return tokens;
         }
 
+        String[] tokens = text.split(",|:");
         return tokens;
     }
 
