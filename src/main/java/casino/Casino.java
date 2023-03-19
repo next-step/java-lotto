@@ -8,8 +8,11 @@ import java.util.List;
 
 public class Casino {
     private static final int LOTTERY_UNIT = 1000;
+    private final LottoFactory lottoFactory;
 
-    public Casino() {}
+    public Casino() {
+        lottoFactory = new LottoFactory();
+    }
 
     public List<Lotto> buyLottery(int money) {
         if (money < LOTTERY_UNIT) {

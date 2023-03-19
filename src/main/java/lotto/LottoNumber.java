@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+    public static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
 
     static {
         IntStream.range(LottoConfiguration.LOTTO_RANGE_MIN, LottoConfiguration.LOTTO_RANGE_MAX)

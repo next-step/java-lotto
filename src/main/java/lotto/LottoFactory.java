@@ -17,9 +17,13 @@ public class LottoFactory {
                 .forEach(i -> lottoNumbers.add(LottoNumber.of(i)));
     }
 
-    public Lotto auto() {
+    public static Lotto auto() {
         Collections.shuffle(lottoNumbers);
-        return new Lotto(lottoNumbers.subList(0, LOTTO_SIZE));
+        return new Lotto(lottoNumbers
+                .stream()
+                .limit(LOTTO_SIZE)
+                .collect(Collectors.toList())
+                );
     }
     public static Lotto manualLotto(List<Integer> numbers) {
         List<LottoNumber> manualNumbers = new ArrayList<>();
