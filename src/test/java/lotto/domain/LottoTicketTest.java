@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -24,10 +25,11 @@ public class LottoTicketTest {
 
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
-        List<Integer> lottoNumber = lottoTicket.getLottoNumbers();
+        Set<LottoNumber> lottoNumber = lottoTicket.getLottoNumbers();
 
         assertThat(lottoNumber)
                 .hasSize(6)
+                .map(LottoNumber::getLottoNumber)
                 .containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6);
     }
 
@@ -42,22 +44,8 @@ public class LottoTicketTest {
                     // when
                     LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
-                }).withMessageContaining("로또 번호 길이 틀림");
+                }).withMessageContaining("로또 정합성 에러");
 
-    }
-
-
-    @DisplayName("로또 번호 정합성 체크")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,46", "0,1,2,3,4,5"})
-    void vaildLottoNumbers(String lottoNumbers) {
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    // when
-                    LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
-                }).withMessageContaining("로또 번호 에러");
     }
 
     @DisplayName("로또 번호 중복 체크")
@@ -70,7 +58,7 @@ public class LottoTicketTest {
                     // when
                     LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
-                }).withMessageContaining("로또 번호 중복");
+                }).withMessageContaining("정합성 에러");
     }
 
     @DisplayName("랜덤으로 번호 뽑을 수 있다.")
@@ -79,7 +67,7 @@ public class LottoTicketTest {
 
         LottoTicket lottoTicket = new LottoTicket();
 
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
+        Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         assertThat(lottoNumbers)
                 .hasSize(6);

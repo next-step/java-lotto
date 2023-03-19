@@ -26,10 +26,10 @@ public class LottoMachineTest {
 
     @Test
     @DisplayName("구입한 갯수를 알 수 있다.")
-    void lottoCount(){
+    void lottoCount() {
         LottoMachine lottoMachine = new LottoMachine(10000);
 
-        assertThat(lottoMachine.lottoCount()).isEqualTo(10);
+        assertThat(lottoMachine.lottoTotalCount()).isEqualTo(10);
     }
 
     @Test
@@ -63,15 +63,16 @@ public class LottoMachineTest {
 
         assertThat(actualWinnerNumber.getWinningLottoNumbers())
                 .hasSize(6)
+                .map(LottoNumber::getLottoNumber)
                 .contains(1, 2, 3, 4, 5, 6);
 
-        assertThat(actualWinnerNumber.getBounsNumber()).isEqualTo(testBounsNumber);
+        assertThat(actualWinnerNumber.getBounsNumber()).isEqualTo(new LottoNumber(7));
     }
 
     @Test
     @DisplayName("당첨통계를 낼 수 있다. 금액편")
     void statisticsAmount() {
-        
+
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         int rottoPrice = 1000;
@@ -154,8 +155,8 @@ public class LottoMachineTest {
                 }).withMessageContaining("당첨번호");
 
     }
-    
-    
+
+
     @Test
     @DisplayName("로또 당참된 갯수 리턴 확인")
     public void lottoRankMatchTest() {
@@ -183,5 +184,35 @@ public class LottoMachineTest {
         assertThat(lottoMachine.lottoRankMatchCount(LottoRank.THREE_PLACE)).isEqualTo(1);
         assertThat(lottoMachine.lottoRankMatchCount(LottoRank.TWO_PLACE)).isEqualTo(1);
         assertThat(lottoMachine.lottoRankMatchCount(LottoRank.ONE_PLACE)).isEqualTo(1);
+    }
+
+    @DisplayName("수동 로또 정합성 체크")
+    @Test
+    void vaildManualPurchaseLotto() {
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+
+                    List<String> lottos = List.of("1,2,3,4,5,6", "4,5,6,7,8,9");
+
+                    LottoMachine lottoMachine = new LottoMachine(5000, lottos, 3);
+
+                }).withMessageContaining("수동 로또 갯수 에러");
+    }
+
+    @DisplayName("수동로또 구매 테스트")
+    @Test
+    void manualPurchaseLottos() {
+
+        List<String> lottos = List.of("1,2,3,4,5,6", "4,5,6,7,8,9");
+
+        LottoMachine lottoMachine = new LottoMachine(5000, lottos, 2);
+
+        int manualPurchaseLottsCount = lottoMachine.getManualPurchaseCount();
+        List<LottoTicket> lottoTickets = lottoMachine.getLottoTickets();
+
+        assertThat(manualPurchaseLottsCount).isEqualTo(2);
+        assertThat(lottoTickets).hasSize(5);
+
     }
 }
