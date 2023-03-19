@@ -7,3 +7,6 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 단위 테스트 목록
+* [x] 금액에 맞추어 로또를 구매해야 한다.
