@@ -4,24 +4,54 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private final int buyLottoPrice;
-
-    private final List<LottoTicket> lottoTickets;
 
     private final static int LOTTO_PRICE = 1000;
+    private final static int DEFAULT_MANUAL_PURCHASE_COUNT = 0;
+    private final int buyLottoPrice;
+    private final List<LottoTicket> lottoTickets;
+
+    private final int manualPurchaseCount;
 
     private WinningLottoTicket winningLottoNumber;
 
     public LottoMachine(int buyLottoPrice) {
-        this(buyLottoPrice, buyRandomLotto(buyLottoPrice));
+        this(buyLottoPrice, DEFAULT_MANUAL_PURCHASE_COUNT, buyRandomLotto(buyLottoPrice));
+    }
+
+    public LottoMachine(int buyLottoPrice, List<String> manualPurchaseLottoNumbers, int manualPurchaseCount) {
+        this(buyLottoPrice, manualPurchaseCount, initManualPurchaseTickets(buyLottoPrice, manualPurchaseCount, manualPurchaseLottoNumbers));
+    }
+
+    private static List<LottoTicket> initManualPurchaseTickets(int buyLottoPrice, int manualPurchaseCount, List<String> manualPurchaseLottoNumbers) {
+        int buyAutoLottoPrice = buyLottoPrice - (LOTTO_PRICE * manualPurchaseCount);
+
+        List<LottoTicket> autoLottoTickets = buyRandomLotto(buyAutoLottoPrice);
+
+        if (manualPurchaseCount != manualPurchaseLottoNumbers.size()) {
+            throw new IllegalArgumentException("수동 로또 갯수 에러");
+        }
+
+        List<LottoTicket> manualPurchaseTickets = manualPurchaseLottoNumbers.stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+
+        manualPurchaseTickets.addAll(autoLottoTickets);
+
+        return manualPurchaseTickets;
+    }
+
+    public LottoMachine(int buyLottoPrice, int manualPurchaseCount, List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+        this.buyLottoPrice = buyLottoPrice;
+        this.manualPurchaseCount = manualPurchaseCount;
+        vaildLottoMachine(buyLottoPrice, lottoTickets);
     }
 
     public LottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
-        this.buyLottoPrice = buyLottoPrice;
-        vaildLottoMachine(buyLottoPrice, lottoTickets);
+        this(buyLottoPrice, DEFAULT_MANUAL_PURCHASE_COUNT, lottoTickets);
     }
 
     public void vaildLottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
@@ -31,7 +61,7 @@ public class LottoMachine {
         }
 
         if (lottoTickets.size() != buyLottoPrice / LOTTO_PRICE) {
-            throw new IllegalArgumentException("수동 로또 갯수 에러");
+            throw new IllegalArgumentException("로또 갯수 에러");
         }
 
     }
@@ -88,7 +118,7 @@ public class LottoMachine {
         return totolAmount.divide(buyLottoPrice, 3, RoundingMode.HALF_UP).toString();
     }
 
-    public int lottoCount() {
+    public int lottoTotalCount() {
         return lottoTickets.size();
     }
 
@@ -96,5 +126,9 @@ public class LottoMachine {
         return (int) lottoTickets.stream()
                 .filter(lottoTicket -> lottoTicket.getLottoRank() == lottoRank)
                 .count();
+    }
+
+    public int getManualPurchaseCount() {
+        return manualPurchaseCount;
     }
 }
