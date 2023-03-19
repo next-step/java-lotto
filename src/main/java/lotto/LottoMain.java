@@ -7,12 +7,19 @@ import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+import java.util.Set;
+
 
 public class LottoMain {
     public static void main(String[] args) {
 
         int buyMoney = InputView.inputBuyPrice();
-        LottoGame lottoGame = new LottoGame(new Money(buyMoney));
+        int manualQuantity = InputView.issueManualLottos();
+        List<Set<Integer>> lottos = InputView.issueManualLottos(manualQuantity);
+
+        LottoGame lottoGame = new LottoGame(new Money(buyMoney), lottos);
+
         ResultView.printBuyCountForPrint(lottoGame);
 
         int[] winningNumbers1 = InputView.inputLastWeekWinningNumber();

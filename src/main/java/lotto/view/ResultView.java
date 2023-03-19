@@ -7,13 +7,19 @@ import lotto.domain.WinningStatistics;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
 public class ResultView {
     public static void printBuyCountForPrint(LottoGame lottoGame) {
-        System.out.println(lottoGame.getBuyCount() + "개를 구매했습니다.");
-        for (Lotto lotto : lottoGame.getAllLottos()) {
+        List<Lotto> allAutomaticLottos = lottoGame.getAllAutomaticLottos();
+        List<Lotto> allManualLottos = lottoGame.getAllManualLottos();
+        System.out.println("수동으로 " + allManualLottos.size() + "장 " + allAutomaticLottos.size() + "개를 구매했습니다.");
+        for (Lotto lotto : allManualLottos) {
+            System.out.println(lotto);
+        }
+        for (Lotto lotto : allAutomaticLottos) {
             System.out.println(lotto);
         }
         System.out.println();

@@ -5,7 +5,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static lotto.domain.WinningGrade.*;
 
@@ -57,11 +59,18 @@ public class LottoGameTest {
                 new Lotto(1, 2, 8, 9, 10, 11),
                 new Lotto(1, 2, 8, 9, 10, 11)
         );
-        WinningNumbers winningNumbers = new WinningNumbers(7,1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
 
         LottoGame lottoGame = new LottoGame(lottos);
         Assertions.assertThat(lottoGame.getStatistics(winningNumbers).getTotalRateOfReturnForPrint()).isEqualTo("0.5");
 
     }
 
+    @DisplayName("수동으로 발급할 수 있다.")
+    @Test
+    void issueManualQuantity() {
+        LottoGame lottoGame = new LottoGame(new Money(10000), List.of(Set.of(1, 2, 3, 7, 8, 9)));
+        Assertions.assertThat(lottoGame.getAllManualLottos()).hasSize(1);
+        Assertions.assertThat(lottoGame.getAllManualLottos()).containsExactly(new Lotto(1, 2, 3, 7, 8, 9));
+    }
 }
