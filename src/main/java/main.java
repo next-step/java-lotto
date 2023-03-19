@@ -1,10 +1,12 @@
+import Order.LottoOrder;
 import casino.Casino;
 import lotto.Lotto;
 import lotto.LottoFactory;
 import lotto.WinningLotto;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static util.StringConverter.StringToIntegerList;
 
 public class main {
     public static void main(String[] args) {
@@ -13,8 +15,21 @@ public class main {
         System.out.println("구입 금액을 입력하세요.");
         int amount = in.nextInt();
 
-        Casino casino = new Casino();
-        List<Lotto> lottoTickets = casino.buyLottery(amount);
+        System.out.println("수동으로 구매할 로또 수를 입력하세요.");
+        int manualAmount = in.nextInt();
+
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        System.out.println("수동으로 구매할 로또 번호를 입력하세요.");
+        in.nextLine(); // Dummy data
+        for(int i=0; i < manualAmount; i++) {
+            manualNumbers.add(
+                    StringToIntegerList(in.nextLine())
+            );
+        }
+        System.out.println(manualNumbers);
+
+        LottoOrder lottoOrder = new LottoOrder(amount, manualAmount);
+        List<Lotto> lottoTickets = Casino.buyLotteryWithManual(lottoOrder, manualNumbers);
         System.out.println(lottoTickets.size()+"개를 구입 했습니다.");
         lottoTickets.forEach(i ->
                     System.out.println(i.printLottoNumber())
@@ -24,11 +39,7 @@ public class main {
         System.out.println("지난 주 당첨 번호를 입력하세요.");
         String inputString = in2.nextLine();
 
-        List<Integer> winningNumber = new ArrayList<>();
-        StringTokenizer stringTokenizer = new StringTokenizer(inputString, ",");
-        while (stringTokenizer.hasMoreTokens()) {
-            winningNumber.add(Integer.valueOf(stringTokenizer.nextToken()));
-        }
+        List<Integer> winningNumber = StringToIntegerList(inputString);
         System.out.println(winningNumber);
 
         System.out.println("보너스 볼을 입력하세요.");
@@ -37,7 +48,7 @@ public class main {
 
         for(Lotto lotto : lottoTickets) {
             int result =
-                    casino.match(lotto, winningLotto);
+                    Casino.match(lotto, winningLotto);
             winners[result-1] ++;
         }
 

@@ -3,6 +3,7 @@ package lotto;
 import exception.LottoException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -23,6 +24,7 @@ public class Lotto {
         lottoNumbers.forEach(i ->
                         lottoNumberList.add(i.getNumber())
                 );
+        Collections.sort(lottoNumberList);
         return lottoNumberList.toString();
     }
 }
