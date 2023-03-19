@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import domain.type.LottoRankResult;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.hamcrest.CoreMatchers.is;
@@ -181,8 +183,8 @@ public class LottoTest {
     void calculateLottoRankTest() {
         FirstPlaceLotto firstPlaceLotto = new FirstPlaceLotto("1,2,3,4,5,6", "7");
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        lotto.calculateLottoRank(firstPlaceLotto);
-        System.out.println(lotto.getLottoRankAmount());
+
+        assertThat(lotto.calculateLottoRank(firstPlaceLotto), is(LottoRankResult.FIRST));
     }
 
     @Test

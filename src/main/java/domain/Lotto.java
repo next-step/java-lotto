@@ -6,6 +6,7 @@ import domain.type.LottoRankResult;
 
 public class Lotto {
     private LottoNumbers lottoNumber;
+
     private LottoRankResult lottoRankAmount;
 
     public Lotto() {
@@ -20,16 +21,12 @@ public class Lotto {
         this.lottoNumber = new LottoNumbers(input);
     }
 
-    public LottoRankResult getLottoRankAmount() {
-        return lottoRankAmount;
-    }
-
     public LottoNumbers getLottoNumbers() {
         return this.lottoNumber;
     }
 
-    public void calculateLottoRank(FirstPlaceLotto firstPlaceLotto) {
-        lottoRankAmount = LottoRank.getRank(this, firstPlaceLotto);
+    public LottoRankResult calculateLottoRank(FirstPlaceLotto firstPlaceLotto) {
+        return LottoRank.getRank(this, firstPlaceLotto);
     }
 
     public int matchCount(Lotto lotto) {

@@ -14,11 +14,21 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
+    public static int scanManualLottoCount() {
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine().toString());
+    }
+
     public static void printBuyCount(int count) {
         System.out.println(count + "개를 구입했습니다.");
     }
 
     public static String scanMoney() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    public static String scanManualLotto() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
