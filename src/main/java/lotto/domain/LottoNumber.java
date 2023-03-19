@@ -1,24 +1,38 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
+
 public class LottoNumber {
+
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+
+    private static final Map<Integer,LottoNumber> NUMBERS = new HashMap<>();
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    private LottoNumber(int lottoNumber) {
         vaildate(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
-    private void vaildate(int lottoNumber) {
-        int minNumber = 1;
-        int maxNumber = 45;
+    static {
+        IntStream.range(MIN_NUMBER, MAX_NUMBER)
+                .forEach(num -> {
+                    NUMBERS.put(num,new LottoNumber(num));
+                });
+    }
 
-        if (lottoNumber < minNumber || maxNumber < lottoNumber) {
+    private static void vaildate(int lottoNumber) {
+        if (lottoNumber < MIN_NUMBER || MAX_NUMBER < lottoNumber) {
             throw new IllegalArgumentException("숫자 범위 벗어남");
         }
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    public static LottoNumber getLottoNumber(int lottoNumber) {
+        vaildate(lottoNumber);
+        return NUMBERS.get(lottoNumber);
     }
 
     @Override

@@ -23,6 +23,19 @@ public class LottoMain {
         showStatistics(lottoConsoleView, lottoMachine);
     }
 
+    private static LottoMachine buyLottos(LottoConsoleView lottoConsoleView) {
+
+        int buyPrice = lottoConsoleView.inputBuyLottoPrice();
+
+        int manualPurchaseCount = lottoConsoleView.inputManualPurchaseLotto();
+
+        List<String> manualPurchaseLottoTickets = lottoConsoleView.inputManualPurchaseLottos(manualPurchaseCount);
+
+        LottoMachine lottoMachine = new LottoMachine(buyPrice, manualPurchaseLottoTickets, manualPurchaseCount);
+
+        return lottoMachine;
+    }
+
     private static void showPurchaseResult(LottoMachine lottoMachine, LottoConsoleView lottoConsoleView) {
 
         int manualPurchaseCount = lottoMachine.getManualPurchaseCount();
@@ -32,19 +45,6 @@ public class LottoMain {
                 .forEach(lottoTicket -> lottoConsoleView.showLottoNumber(lottoTicket.getLottoNumbers()));
 
         System.out.println();
-    }
-
-    private static LottoMachine buyLottos(LottoConsoleView lottoConsoleView) {
-
-        int buyPrice = lottoConsoleView.inputBuyLottoInfo("구입금액을 입력해 주세요.");
-
-        int manualPurchaseCount = lottoConsoleView.inputBuyLottoInfo("수동으로 구매할 로또 수를 입력해 주세요.");
-
-        List<String> manualPurchaseLottoTickets = lottoConsoleView.inputManualPurchaseLottos(manualPurchaseCount);
-
-        LottoMachine lottoMachine = new LottoMachine(buyPrice, manualPurchaseLottoTickets, manualPurchaseCount);
-
-        return lottoMachine;
     }
 
 

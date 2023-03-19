@@ -8,6 +8,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -63,10 +64,10 @@ public class LottoMachineTest {
 
         assertThat(actualWinnerNumber.getWinningLottoNumbers())
                 .hasSize(6)
-                .map(LottoNumber::getLottoNumber)
+                .map()
                 .contains(1, 2, 3, 4, 5, 6);
 
-        assertThat(actualWinnerNumber.getBounsNumber()).isEqualTo(new LottoNumber(7));
+        assertThat(actualWinnerNumber.getBounsNumber()).isEqualTo(LottoNumber.getLottoNumber(7));
     }
 
     @Test

@@ -46,7 +46,7 @@ public class LottoTicket {
 
         int startIndex = 0;
         return lottoNumbers.subList(startIndex, LOTTO_LENGTH)
-                .stream().map(LottoNumber::new)
+                .stream().map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toSet());
     }
 
@@ -54,7 +54,7 @@ public class LottoTicket {
         lottoNumbers = lottoNumbers.replace(" ", "");
 
         Set<LottoNumber> numbers = Arrays.stream(lottoNumbers.split(","))
-                .map(Integer::parseInt).map(LottoNumber::new)
+                .map(Integer::parseInt).map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toSet());
 
         return numbers;

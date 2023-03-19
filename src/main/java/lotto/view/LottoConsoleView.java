@@ -16,8 +16,14 @@ public class LottoConsoleView {
         this.scanner = new Scanner(System.in);
     }
 
-    public int inputBuyLottoInfo(String content) {
-        System.out.println(content);
+    public int inputBuyLottoPrice() {
+        System.out.println("구입금액을 입력해 주세요.");
+
+        return Integer.parseInt(getTrimString());
+    }
+
+    public int inputManualPurchaseLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
         return Integer.parseInt(getTrimString());
     }

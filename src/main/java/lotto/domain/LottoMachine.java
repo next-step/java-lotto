@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    private final static int LOTTO_PRICE = 1000;
-    private final static int DEFAULT_MANUAL_PURCHASE_COUNT = 0;
+    private static final int LOTTO_PRICE = 1000;
+    private static final int DEFAULT_MANUAL_PURCHASE_COUNT = 0;
     private final int buyLottoPrice;
     private final List<LottoTicket> lottoTickets;
 
@@ -43,15 +43,16 @@ public class LottoMachine {
         return manualPurchaseTickets;
     }
 
+
+    public LottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
+        this(buyLottoPrice, DEFAULT_MANUAL_PURCHASE_COUNT, lottoTickets);
+    }
+
     public LottoMachine(int buyLottoPrice, int manualPurchaseCount, List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
         this.buyLottoPrice = buyLottoPrice;
         this.manualPurchaseCount = manualPurchaseCount;
         vaildLottoMachine(buyLottoPrice, lottoTickets);
-    }
-
-    public LottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
-        this(buyLottoPrice, DEFAULT_MANUAL_PURCHASE_COUNT, lottoTickets);
     }
 
     public void vaildLottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
@@ -63,12 +64,8 @@ public class LottoMachine {
         if (lottoTickets.size() != buyLottoPrice / LOTTO_PRICE) {
             throw new IllegalArgumentException("로또 갯수 에러");
         }
-
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
-    }
 
     private static List<LottoTicket> buyRandomLotto(int buyLottoPrice) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -93,15 +90,6 @@ public class LottoMachine {
         return this.winningLottoNumber;
     }
 
-    public long getamountStatistics() {
-        vaildStatistics();
-
-        return lottoTickets.stream()
-                .map(LottoTicket::getLottoRank)
-                .mapToInt(v -> v.winningAmount)
-                .sum();
-    }
-
     private void vaildStatistics() {
         if (winningLottoNumber == null) {
             throw new IllegalStateException("당첨번호가 없음");
@@ -118,6 +106,15 @@ public class LottoMachine {
         return totolAmount.divide(buyLottoPrice, 3, RoundingMode.HALF_UP).toString();
     }
 
+    public long getamountStatistics() {
+        vaildStatistics();
+
+        return lottoTickets.stream()
+                .map(LottoTicket::getLottoRank)
+                .mapToInt(v -> v.winningAmount)
+                .sum();
+    }
+
     public int lottoTotalCount() {
         return lottoTickets.size();
     }
@@ -130,5 +127,9 @@ public class LottoMachine {
 
     public int getManualPurchaseCount() {
         return manualPurchaseCount;
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }

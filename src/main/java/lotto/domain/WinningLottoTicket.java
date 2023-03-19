@@ -9,7 +9,7 @@ public class WinningLottoTicket {
     private final LottoNumber bounsNumber;
 
     public WinningLottoTicket(LottoTicket winningLottoNumber, int bounsNumber) {
-        LottoNumber bounsLottoNumber = new LottoNumber(bounsNumber);
+        LottoNumber bounsLottoNumber = LottoNumber.getLottoNumber(bounsNumber);
         vaildBounsNumber(winningLottoNumber, bounsLottoNumber);
         this.winningLottoNumber = winningLottoNumber;
         this.bounsNumber = bounsLottoNumber;
