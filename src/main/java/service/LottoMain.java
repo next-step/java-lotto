@@ -4,7 +4,6 @@ import domain.LottoUtil;
 import view.InputView;
 import view.ResultView;
 
-
 public class LottoMain {
     public static void main(String[] args) {
         InputView.printInputView();
@@ -13,10 +12,6 @@ public class LottoMain {
         ResultView.printBuyManualLotto();
         int manualLottoCount = InputView.scanManualLottoCount();
 
-        /* 자동로또 */
-        // LottoService lottoService = new LottoService(LottoUtil.stringToInt(money));
-
-        /* 수동로또 */
         LottoService lottoService = new LottoService(LottoUtil.stringToInt(money), manualLottoCount);
 
         String firstLottoInput = InputView.scanFirstLotto();
