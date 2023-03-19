@@ -73,4 +73,10 @@ public class LottoGameTest {
         Assertions.assertThat(lottoGame.getAllManualLottos()).hasSize(1);
         Assertions.assertThat(lottoGame.getAllManualLottos()).containsExactly(new Lotto(1, 2, 3, 7, 8, 9));
     }
+
+    @DisplayName("수동 발급 수는 전체 발급 수보다 적어야 한다.")
+    @Test
+    void checkManualQuantity() {
+        Assertions.assertThatThrownBy(() -> new LottoGame(new Money(1000), List.of(Set.of(1, 2, 3, 7, 8, 9), Set.of(1, 2, 3, 7, 8, 9)))).isInstanceOf(IllegalArgumentException.class);
+    }
 }

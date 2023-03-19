@@ -23,6 +23,9 @@ public class Money {
     public Money division(Money divisionNumber) {
         return new Money(this.wonValue.divide(divisionNumber.wonValue));
     }
+    public Money minus(Money money) {
+        return new Money(this.wonValue.subtract(money.wonValue));
+    }
 
     public Integer toInteger() {
         return wonValue.intValue();

@@ -27,6 +27,11 @@ public class LottoGame {
         int allLottoQuantity = lottoPay.division(LOTTO_PRICE).toInteger();
         int automaticIssueQuantity = allLottoQuantity - manualLottos.size();
 
+        Money manualLottosPrice = LOTTO_PRICE.multiply(manualLottos.size());
+        if (lottoPay.minus(manualLottosPrice).toInteger() < 0) {
+            throw new IllegalArgumentException("사용한 금액보다 많은 로또를 발급할 수 없습니다.");
+        }
+
         this.automaticLottos = new ArrayList<>();
         for (int i = 0; i < automaticIssueQuantity; i++) {
             this.automaticLottos.add(new Lotto(RandomNumberFactory.get()));
