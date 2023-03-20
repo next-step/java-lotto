@@ -23,6 +23,7 @@ public class Lotto {
 
         //2.로또티켓생성
         List<List<Integer>> lottoNumberList = getLottoNumberList(lottoCount);
+        lottoNumberList.forEach(System.out::println);
 
         //3.로또 당첨번호 생성
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
@@ -30,7 +31,6 @@ public class Lotto {
         String input = sc.nextLine();
         String[] numberArr = makeNumberList(input);
         List<Integer> winnerNumbers = getWinnerNumbers(numberArr);
-        lottoNumberList.forEach(System.out::println);
 
         //4.보너스 번호 생성
         int bonusNumber = setBonusNumber();
