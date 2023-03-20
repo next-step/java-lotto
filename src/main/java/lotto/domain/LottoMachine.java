@@ -9,11 +9,11 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private static List<LottoNumbers> purchasesLottoList = new ArrayList<>();
-    private static LottoNumbers lottoNumberSet;
+    private List<LottoNumbers> purchasesLottoList = new ArrayList<>();
+    private LottoNumbers lottoNumberSet;
 
-    public LottoMachine(LottoPurchases lottoPurchases) {
-        lottoPassivitySet(lottoPurchases);
+    public LottoMachine(LottoPurchases lottoPurchases, List<LottoNumbers> PassivityLottoNumber) {
+        lottoPassivitySet(PassivityLottoNumber);
         lottoListSet(lottoPurchases);
     }
 
@@ -36,15 +36,10 @@ public class LottoMachine {
         return purchasesLottoList;
     }
 
-    public void lottoPassivitySet(LottoPurchases lottoPurchases) {
-        if (lottoPurchases.getPassivityCount() > 0) {
-            PassivityLottoNumberRequest passivityLottoNumberRequest = PassivityLottoNumberRequest.inputLottoPrice(lottoPurchases.getPassivityCount());
-            LottoMessage.getLottoDivisionMessage(lottoPurchases);
-
-            for (int i = 0; i < lottoPurchases.getPassivityCount(); i++) {
-                purchasesLottoList.add(passivityLottoNumberRequest.getLottoNumbersList().get(i));
-                LottoMessage.getLottoMessage(String.valueOf(passivityLottoNumberRequest.getLottoNumbersList().get(i).getLottoNumber()));
-            }
+    private void lottoPassivitySet(List<LottoNumbers> PassivityLottoNumber) {
+        for (int i = 0; i < PassivityLottoNumber.size(); i++) {
+            purchasesLottoList.add(PassivityLottoNumber.get(i));
+            LottoMessage.getLottoMessage(String.valueOf(PassivityLottoNumber.get(i).getLottoNumber()));
         }
     }
 }

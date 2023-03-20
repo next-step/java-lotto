@@ -44,7 +44,7 @@ public class PassivityLottoNumberRequest {
         return new LottoNumbers(lottoNumberList);
     }
 
-    public List<LottoNumbers> getLottoNumbersList() {
+    public List<LottoNumbers> getPassivityLottoNumberList() {
         return lottoNumbersList;
     }
 }

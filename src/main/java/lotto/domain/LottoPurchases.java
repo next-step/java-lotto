@@ -3,9 +3,9 @@ package lotto.domain;
 public class LottoPurchases {
 
     private static final int LOTTO_BUY_AMOUNT = 1000;
-    private static int lottoMachineCount = 0;
-    private static int passivityCount = 0;
-    private static int automaticCount = 0;
+    private int lottoMachineCount = 0;
+    private int passivityCount = 0;
+    private int automaticCount = 0;
 
     public LottoPurchases(int money, int passivityCount) {
         this.lottoMachineCount = lottoPurchasesCountCalculate(money);

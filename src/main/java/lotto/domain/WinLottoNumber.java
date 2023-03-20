@@ -4,8 +4,8 @@ import java.util.stream.Collectors;
 
 public class WinLottoNumber {
 
-    private static LottoNumbers beforeLottoNumber;
-    private static LottoNumber bonusNumber;
+    private LottoNumbers beforeLottoNumber;
+    private LottoNumber bonusNumber;
 
     public WinLottoNumber(LottoNumbers lottoNumber, LottoNumber bonusNumber) {
         this.beforeLottoNumber = lottoNumber;

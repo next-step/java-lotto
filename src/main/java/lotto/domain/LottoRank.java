@@ -12,7 +12,8 @@ public enum LottoRank {
     TRHEE(4, 50000, false, 4),
     TWO(5, 1500000, false, 5),
     TWO_BONUS(5, 30000000, true, 7),
-    ONE(6, 2000000000, false, 6);
+    ONE(6, 2000000000, false, 6),
+    MISS(0, 0, false, 0);
 
     private final int matchingCount;
     private final int reward;
@@ -52,6 +53,6 @@ public enum LottoRank {
                 return rank;
             }
         }
-        return null;
+        return MISS;
     }
 }
