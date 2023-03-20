@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +14,8 @@ public class LottoMachine {
     private final int manualPurchaseCount;
 
     private WinningLottoTicket winningLottoNumber;
+
+    private LottoStatistic lottoStatistic;
 
     public LottoMachine(int buyLottoPrice) {
         this(buyLottoPrice, DEFAULT_MANUAL_PURCHASE_COUNT, buyRandomLotto(buyLottoPrice));
@@ -77,52 +77,19 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-    public void saveWinningNumber(WinningLottoTicket winningLottoTicket) {
+    public LottoStatistic initLottoStatistic(WinningLottoTicket winningLottoTicket) {
         this.winningLottoNumber = winningLottoTicket;
+        this.lottoStatistic = new LottoStatistic(lottoTickets, winningLottoTicket, this.buyLottoPrice);
 
-        // 각 당첨등수 셋팅
-        lottoTickets.stream()
-                .forEach(value -> value.setLottoRank(winningLottoTicket.getWinnerLotto(value)));
-
+        return lottoStatistic;
     }
 
     public WinningLottoTicket getWinningLottoNumber() {
         return this.winningLottoNumber;
     }
 
-    private void vaildStatistics() {
-        if (winningLottoNumber == null) {
-            throw new IllegalStateException("당첨번호가 없음");
-        }
-    }
-
-    public String getAggregationOfReturns() {
-        vaildStatistics();
-
-        BigDecimal totolAmount = new BigDecimal(getamountStatistics());
-
-        BigDecimal buyLottoPrice = new BigDecimal(this.buyLottoPrice);
-
-        return totolAmount.divide(buyLottoPrice, 3, RoundingMode.HALF_UP).toString();
-    }
-
-    public long getamountStatistics() {
-        vaildStatistics();
-
-        return lottoTickets.stream()
-                .map(LottoTicket::getLottoRank)
-                .mapToInt(v -> v.winningAmount)
-                .sum();
-    }
-
     public int lottoTotalCount() {
         return lottoTickets.size();
-    }
-
-    public int lottoRankMatchCount(LottoRank lottoRank) {
-        return (int) lottoTickets.stream()
-                .filter(lottoTicket -> lottoTicket.getLottoRank() == lottoRank)
-                .count();
     }
 
     public int getManualPurchaseCount() {
@@ -132,4 +99,5 @@ public class LottoMachine {
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
 }

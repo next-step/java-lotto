@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
     private static final Map<Integer,LottoNumber> NUMBERS = new HashMap<>();
     private final int lottoNumber;
@@ -19,9 +19,7 @@ public class LottoNumber {
 
     static {
         IntStream.range(MIN_NUMBER, MAX_NUMBER)
-                .forEach(num -> {
-                    NUMBERS.put(num,new LottoNumber(num));
-                });
+                .forEach(num -> NUMBERS.put(num,new LottoNumber(num)));
     }
 
     private static void vaildate(int lottoNumber) {
