@@ -24,7 +24,7 @@ public class LottoMain {
 
         int buyPrice = lottoConsoleView.inputBuyLottoPrice();
 
-        int manualPurchaseCount = lottoConsoleView.inputManualPurchaseLotto();
+        int manualPurchaseCount = lottoConsoleView.inputManualPurchaseLotto(buyPrice, LottoMachine.LOTTO_PRICE);
 
         List<String> manualPurchaseLottoTickets = lottoConsoleView.inputManualPurchaseLottos(manualPurchaseCount);
 

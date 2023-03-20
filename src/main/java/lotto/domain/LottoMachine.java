@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final int DEFAULT_MANUAL_PURCHASE_COUNT = 0;
     private final int buyLottoPrice;
     private final List<LottoTicket> lottoTickets;

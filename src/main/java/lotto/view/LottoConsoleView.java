@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,16 @@ public class LottoConsoleView {
         return Integer.parseInt(getTrimString());
     }
 
-    public int inputManualPurchaseLotto() {
+    public int inputManualPurchaseLotto(int buyLottoPrice, int lottoPrice) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
-        return Integer.parseInt(getTrimString());
+        int manualPurchaseCount = Integer.parseInt(getTrimString());
+
+        if(lottoPrice * manualPurchaseCount > buyLottoPrice){
+            throw new IllegalArgumentException("구매금액을 초과하였습니다.");
+        }
+
+        return manualPurchaseCount;
     }
 
     public void buyResult(int lottos) {
