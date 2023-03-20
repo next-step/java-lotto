@@ -1,15 +1,13 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningLottoTicket {
     private final LottoTicket winningLottoNumber;
     private final LottoNumber bounsNumber;
 
     public WinningLottoTicket(LottoTicket winningLottoNumber, int bounsNumber) {
-        LottoNumber bounsLottoNumber = new LottoNumber(bounsNumber);
+        LottoNumber bounsLottoNumber = LottoNumber.getLottoNumber(bounsNumber);
         vaildBounsNumber(winningLottoNumber, bounsLottoNumber);
         this.winningLottoNumber = winningLottoNumber;
         this.bounsNumber = bounsLottoNumber;
@@ -23,9 +21,7 @@ public class WinningLottoTicket {
 
     public LottoRank getWinnerLotto(LottoTicket lottoNumbers) {
         int matchCount = (int) lottoNumbers.getLottoNumbers().stream()
-                .filter(lottoNumber -> {
-                    return winningLottoNumber.contains(lottoNumber);
-                })
+                .filter(lottoNumber -> winningLottoNumber.contains(lottoNumber))
                 .count();
 
         int bounsMatchCount = 0;
@@ -43,10 +39,6 @@ public class WinningLottoTicket {
 
     public LottoNumber getBounsNumber() {
         return this.bounsNumber;
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return winningLottoNumber.contains(lottoNumber);
     }
 
 

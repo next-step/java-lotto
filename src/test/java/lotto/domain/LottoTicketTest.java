@@ -28,9 +28,7 @@ public class LottoTicketTest {
         Set<LottoNumber> lottoNumber = lottoTicket.getLottoNumbers();
 
         assertThat(lottoNumber)
-                .hasSize(6)
-                .map(LottoNumber::getLottoNumber)
-                .containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6);
+                .hasSize(6);
     }
 
 

@@ -9,17 +9,18 @@ import java.util.stream.Collectors;
 public class StringCalculator {
 
 
-    private static final String default_delimeter = ",|:";
     private final String calculatorSumString;
+    private static final String default_delimeter = ",|:";
     private final String delimeter;
 
 
     public StringCalculator(String calculatorSumString) {
 
+        //널값
         if (calculatorSumString == null || calculatorSumString.equals("")) {
             calculatorSumString = "0";
         }
-
+        //delimeter 구분
         delimeter = initDelimeter(calculatorSumString);
 
         if (!default_delimeter.equals(delimeter)) {
@@ -31,16 +32,16 @@ public class StringCalculator {
         this.calculatorSumString = calculatorSumString;
     }
 
-    private String initDelimeter(String calculatorSumString) {
-        String delimeter = StringCalculator.default_delimeter;
+    public String initDelimeter(String calculatorSumString) {
+        String defaultDelimeter = StringCalculator.default_delimeter;
 
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(calculatorSumString);
 
         if (m.find()) {
-            delimeter = m.group(1);
+            defaultDelimeter = m.group(1);
         }
 
-        return delimeter;
+        return defaultDelimeter;
     }
 
     public void vaildCheck(String calculatorSumString, String delimeter) {
