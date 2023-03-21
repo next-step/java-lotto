@@ -7,7 +7,6 @@ public class LottoTicket {
 
     public LottoTicket(ArrayList<Integer> lottoNumbers) {
         this.numbers = lottoNumbers;
-        System.out.println(lottoNumbers.toString());
     }
 
     public ArrayList<Integer> getNumbers(){

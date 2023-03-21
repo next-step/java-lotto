@@ -1,6 +1,12 @@
 package lotto.domain.enums;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.WinningNumber;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum LottoRank {
 
@@ -26,7 +32,28 @@ public enum LottoRank {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount && rank.isMatchBonus == isMatchBonus)
                 .findFirst()
-                .orElse(null);
+                .orElse(MISS);
+    }
+
+    public static Map<LottoRank, Integer> getResult(WinningNumber winNum, ArrayList<LottoTicket> ticket){
+
+        Map<LottoRank, Integer> result = new HashMap<>();
+
+        for (LottoRank lottorank : LottoRank.values()) {
+            result.put(lottorank, 0);
+        }
+
+        for(LottoTicket lottoTicket : ticket) {
+            int matchCnt = (int) lottoTicket.getNumbers().stream()
+                    .filter(target -> winNum.getWinningNums().contains(target))
+                    .count();
+            boolean isBonusMatch = lottoTicket.getNumbers().contains(winNum.getBonusNums());
+
+            LottoRank rankValue = LottoRank.findRank(matchCnt, isBonusMatch);
+            result.put(rankValue, result.getOrDefault(rankValue, 0) + 1);
+        }
+
+        return result;
     }
 
     public int getReward() {
