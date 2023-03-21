@@ -1,6 +1,7 @@
 package lotto;
 
 import configuration.LottoConfiguration;
+import exception.LottoException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
+        LottoException.validateLottoNumber(number);
         return lottoNumberCache.get(number);
     }
 
