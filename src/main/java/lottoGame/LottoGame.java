@@ -33,9 +33,7 @@ public class LottoGame {
         this.bonusNumber = 0;
     }
 
-    public void buyLotto(String inputMoney) {
-
-        int money = Integer.parseInt(inputMoney);
+    public int buyLotto(int money) {
         buyCount = validInputAmt(money);
 
         // 구매 매수만큼 로또번호를 생성한다
@@ -44,7 +42,7 @@ public class LottoGame {
             lottoTickets.add(lotto);
         }
 
-        InputView.printTicket(lottoTickets);
+        return buyCount;
     }
 
     private int validInputAmt(int buyAmt) {
@@ -55,21 +53,14 @@ public class LottoGame {
         return buyAmount;
     }
 
-    public int matchingLotto(List<Integer> userLotto, Set<Integer> winningNumbers, int bonusNumber) {
+    public Rank matchingLotto(List<Integer> userLotto, Set<Integer> winningNumbers,
+        int bonusNumber) {
+
+        int matchCount = match(userLotto, winningNumbers);
+        boolean matchBonus = userLotto.contains(bonusNumber);
 
         // winningLotto 와 맞는 번호를 찾는다.
-        int matchCount = match(userLotto, winningNumbers);
-        if (matchCount == 6) {
-            return 1;
-        }
-        boolean matchBonus = userLotto.contains(bonusNumber);
-        if (matchCount == 5 && matchBonus) {
-            return 2;
-        }
-        if (matchCount > 2) {
-            return 6 - matchCount + 2;
-        }
-        return 0;
+        return Rank.getRank(matchCount, matchBonus);
     }
 
     private int match(List<Integer> buyLotto, Set<Integer> winningLotto) {
@@ -78,15 +69,9 @@ public class LottoGame {
             .count();
     }
 
-    public void inputWinningNumbers(String input) {
-        List<String> numberList = List.of(input.split(","));
-
-        int inputNumber = 0;
-        for (String n : numberList) {
-            inputNumber = Integer.parseInt(n);
-            validInputLottoNumber(inputNumber);
-            winningNumbers.add(inputNumber);
-        }
+    public void inputWinningNumbers(Set<Integer> inputWinningNumber) {
+        winningNumbers.clear();
+        winningNumbers.addAll(inputWinningNumber);
 
         if (winningNumbers.size() != Lotto.LOTTO_NUMBERS) {
             throw new RuntimeException("입력된 숫자는 중복 없는 6자리 숫자여야 합니다.");
@@ -94,42 +79,41 @@ public class LottoGame {
     }
 
     private void validInputLottoNumber(int number) {
-        if(number < Lotto.LOTTO_MIN_NUMBER_RANGE || number > Lotto.LOTTO_MAX_NUMBER_RANGE) {
+        if (number < Lotto.LOTTO_MIN_NUMBER_RANGE || number > Lotto.LOTTO_MAX_NUMBER_RANGE) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이의 숫자여야 합니다.");
         }
     }
 
-    public void inputBonusNumber(String inputNumber) {
-        bonusNumber = Integer.parseInt(inputNumber);
+    public void inputBonusNumber(int inputNumber) {
+        bonusNumber = inputNumber;
     }
 
     public void run() {
         for (Lotto lotto : lottoTickets) {
             List<Integer> userLotto = new ArrayList<>(lotto.getLottoNumber());
-            int result = matchingLotto(userLotto, winningNumbers, bonusNumber);
-
-            machingResult(result);
+            Rank rank = matchingLotto(userLotto, winningNumbers, bonusNumber);
+            matchingResult(rank);
         }
     }
 
-    private void machingResult(int result) {
-        if (result == 1) {
+    private void matchingResult(Rank rank) {
+        if (rank == Rank.FIRST) {
             firstMatchingLottoCount++;
             return;
         }
-        if (result == 2) {
+        if (rank == Rank.SECOND) {
             secondMatchingLottoCount++;
             return;
         }
-        if (result == 3) {
+        if (rank == Rank.THIRD) {
             thirdMatchingLottoCount++;
             return;
         }
-        if (result == 4) {
+        if (rank == Rank.FOURTH) {
             fourthMatchingLottoCount++;
             return;
         }
-        if (result == 5) {
+        if (rank == Rank.FIFTH) {
             fifthMatchingLottoCount++;
             return;
         }
@@ -156,30 +140,38 @@ public class LottoGame {
     }
 
     public float getRate() {
-        return (float) (5000 * fifthMatchingLottoCount
-            + 50000 * fourthMatchingLottoCount
-            + 1500000 * thirdMatchingLottoCount
-            + 30000000 * secondMatchingLottoCount
-            + 2000000000 * firstMatchingLottoCount) / (buyCount * 1000);
+        return (float) (
+            Rank.getPrize(Rank.FIFTH, fifthMatchingLottoCount)
+                + Rank.getPrize(Rank.FOURTH, fourthMatchingLottoCount)
+                + Rank.getPrize(Rank.THIRD, thirdMatchingLottoCount)
+                + Rank.getPrize(Rank.SECOND, secondMatchingLottoCount)
+                + Rank.getPrize(Rank.FIRST, firstMatchingLottoCount))
+            / (buyCount * 1000);
     }
 
     public String getResult() {
         int result =
-            5000 * fifthMatchingLottoCount
-                + 50000 * fourthMatchingLottoCount
-                + 1500000 * thirdMatchingLottoCount
-                + 30000000 * secondMatchingLottoCount
-                + 2000000000 * firstMatchingLottoCount;
+            Rank.getPrize(Rank.FIFTH, fifthMatchingLottoCount)
+                + Rank.getPrize(Rank.FOURTH, fourthMatchingLottoCount)
+                + Rank.getPrize(Rank.THIRD, thirdMatchingLottoCount)
+                + Rank.getPrize(Rank.SECOND, secondMatchingLottoCount)
+                + Rank.getPrize(Rank.FIRST, firstMatchingLottoCount);
         if (result > buyCount * 1000) {
             return "이익";
         }
 
         return "손해";
     }
+
     public Lotto getLottoList(int i) {
         return lottoTickets.get(i);
     }
+
     public int getLottoListCount() {
         return lottoTickets.size();
+    }
+
+    public List<Lotto> getLottoTicket() {
+        return lottoTickets;
     }
 }
