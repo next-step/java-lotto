@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class StringCalculator {
 
     public int add(String inputString) {
-        if (ifNullReturnZero(inputString)) {
+        if (isNullReturnZero(inputString)) {
             return 0;
         }
 
@@ -23,7 +23,7 @@ public class StringCalculator {
         }
     }
 
-    private boolean ifNullReturnZero(String inputString) {
+    private boolean isNullReturnZero(String inputString) {
         if (inputString == null || inputString.isEmpty()) {
             return true;
         }
