@@ -37,6 +37,7 @@ public class LottoFactory {
         numbers.forEach( i -> {
             manualNumbers.add(LottoNumber.of(i));
         });
-        return new WinningLotto(manualNumbers, bonusNumber);
+        Lotto manualLotto = new Lotto(manualNumbers);
+        return new WinningLotto(manualLotto, bonusNumber);
     }
 }

@@ -11,8 +11,8 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        LottoException.validate(numbers);
         this.lottoNumbers = numbers;
+        LottoException.validate(this);
     }
 
     public List<LottoNumber> getLottoNumbers() {

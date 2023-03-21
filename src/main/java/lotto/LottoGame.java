@@ -8,7 +8,7 @@ public class LottoGame {
                 .getLottoNumbers()
                 .stream()
                 .filter(it ->
-                        winningLotto.getWinningNumber().contains(it))
+                        winningLotto.getWinningNumber().getLottoNumbers().contains(it))
                 .count();
         boolean bonusMatch = userLotto
                 .getLottoNumbers()

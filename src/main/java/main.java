@@ -7,43 +7,25 @@ import lotto.WinningLotto;
 import java.util.*;
 
 import static util.StringConverter.StringToIntegerList;
+import view.InputView;
+import view.ResultView;
 
 public class main {
     public static void main(String[] args) {
         int[] winners = new int[6];
-        Scanner in = new Scanner(System.in);
-        System.out.println("구입 금액을 입력하세요.");
-        int amount = in.nextInt();
 
-        System.out.println("수동으로 구매할 로또 수를 입력하세요.");
-        int manualAmount = in.nextInt();
-
-        List<List<Integer>> manualNumbers = new ArrayList<>();
-        System.out.println("수동으로 구매할 로또 번호를 입력하세요.");
-        in.nextLine(); // Dummy data
-        for(int i=0; i < manualAmount; i++) {
-            manualNumbers.add(
-                    StringToIntegerList(in.nextLine())
-            );
-        }
-        System.out.println(manualNumbers);
+        int amount = InputView.getAmount();
+        int manualAmount = InputView.getManualAmount();
+        List<List<Integer>> manualNumbers = InputView.getManualLottoNumber(manualAmount);
 
         LottoOrder lottoOrder = new LottoOrder(amount, manualAmount);
         List<Lotto> lottoTickets = Casino.buyLotteryWithManual(lottoOrder, manualNumbers);
-        System.out.println(lottoTickets.size()+"개를 구입 했습니다.");
-        lottoTickets.forEach(i ->
-                    System.out.println(i.printLottoNumber())
-                );
+        ResultView.printLottoNumber(lottoTickets);
 
-        Scanner in2 = new Scanner(System.in);
-        System.out.println("지난 주 당첨 번호를 입력하세요.");
-        String inputString = in2.nextLine();
-
+        String inputString = InputView.getWinningNumber();
         List<Integer> winningNumber = StringToIntegerList(inputString);
-        System.out.println(winningNumber);
 
-        System.out.println("보너스 볼을 입력하세요.");
-        int bonus = in2.nextInt();
+        int bonus = InputView.getBonusNumber();
         WinningLotto winningLotto = LottoFactory.manualWinningLotto(winningNumber, bonus);
 
         for(Lotto lotto : lottoTickets) {
@@ -52,19 +34,7 @@ public class main {
             winners[result-1] ++;
         }
 
-        System.out.println("3개 일치 (5000원) - "+winners[4]+"개");
-        System.out.println("4개 일치 (50000원) - "+winners[3]+"개");
-        System.out.println("5개 일치 (1500000원) - "+winners[2]+"개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - "+winners[1]+"개");
-        System.out.println("6개 일치 (2000000000원) - "+winners[0]+"개");
-
-        float winningPrice =
-                ((float) (winners[0]*2000000000 +
-                winners[1]*30000000 +
-                winners[2]*1500000 +
-                winners[3]*50000 +
-                winners[4]*5000)/amount-1)*100;
-
-        System.out.println("총 수익율은 "+winningPrice+"%입니다");
+        ResultView.printWinningResult(winners);
+        ResultView.printProfit(winners, amount);
     }
 }
