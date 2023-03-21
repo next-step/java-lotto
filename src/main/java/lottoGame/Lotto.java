@@ -15,10 +15,7 @@ public class Lotto {
     private List<Integer> lottoNumbers;
 
     public Lotto() {
-        newLotto();
-    }
-    public void newLotto() {
-        lottoNumbers = getNewLottoNumber();
+        lottoNumbers = getLottoNumber();
     }
     private List<Integer> getNewLottoNumber() {
         List<Integer> lottoNumbers = new ArrayList<Integer>();
