@@ -1,30 +1,33 @@
 package lottoGame;
 
-import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String... arg) {
         LottoGame lottoGame = new LottoGame();
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
 
-        System.out.println("구입금액을 입력해 주세요.");
+        int inputMoney = inputView.getInputMoney();
 
-        Scanner sc = new Scanner(System.in);
-        String inputMoney = sc.next();
         lottoGame.buyLotto(inputMoney);
 
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        String winningNumbers = sc.next();
+        resultView.printTicket(lottoGame.getLottoTicket());
+
+
+
+        Set<Integer> winningNumbers = inputView.getWinningNumbers();
+
         lottoGame.inputWinningNumbers(winningNumbers);
 
-        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = inputView.getBonusNumber();
 
-        String bonusNumber = sc.next();
         lottoGame.inputBonusNumber(bonusNumber);
 
         lottoGame.run();
 
-        ResultView.showResult(lottoGame);
+        resultView.showResult(lottoGame);
     }
 }
