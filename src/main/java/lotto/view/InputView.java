@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputView {
+
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int DEFAULT_DIGIT = 6;
     ArrayList<Integer> winningNumbers = new ArrayList<>();
 
     public int inputMoney() {
@@ -26,9 +30,9 @@ public class InputView {
         String inputValue = scanner.nextLine();
         String[] splitValue = inputValue.split(",");
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < DEFAULT_DIGIT; i++) {
             int value = Integer.parseInt(splitValue[i]);
-            if(value < 1 || value > 45)
+            if(value < MINIMUM_NUMBER || value > MAXIMUM_NUMBER)
                 throw new IllegalArgumentException("1~45 사이의 번호가 아닙니다.");
 
             if(winningNumbers.contains(value))
