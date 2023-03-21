@@ -1,10 +1,9 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class PassivityLottoNumberRequest {
     private final List<LottoNumbers> lottoNumbersList;
@@ -36,12 +35,12 @@ public class PassivityLottoNumberRequest {
     }
 
     private static LottoNumbers lottoNumbers(String inputLottoNumber) {
-        final List<Integer> lottoNumberList = new ArrayList<>();
+        Set<LottoNumber> numberList = new HashSet<>();
 
         for (String number : inputLottoNumber.split(",")) {
-            lottoNumberList.add(Integer.valueOf(number));
+            numberList.add(new LottoNumber(Integer.parseInt(number)));
         }
-        return new LottoNumbers(lottoNumberList);
+        return new LottoNumbers(numberList);
     }
 
     public List<LottoNumbers> getPassivityLottoNumberList() {

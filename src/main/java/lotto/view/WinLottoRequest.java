@@ -1,10 +1,9 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class WinLottoRequest {
 
@@ -28,11 +27,11 @@ public class WinLottoRequest {
     }
 
     private static LottoNumbers numberSet(String previousWeekNumber) {
-        List<Integer> numberList = new ArrayList<>();
+        Set<LottoNumber> numberList = new HashSet<>();
         String[] numberSplit = previousWeekNumber.split(",");
 
         for (String number : numberSplit) {
-            numberList.add(Integer.parseInt(number));
+            numberList.add(new LottoNumber(Integer.parseInt(number)));
         }
 
         return new LottoNumbers(numberList);

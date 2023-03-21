@@ -2,33 +2,42 @@ package lotto.domain;
 
 import lotto.view.LottoMessage;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoNumbers {
-    private List<Integer> lottoNumberList;
+    private static int LOTTO_NUMBER_MAX = 6;
+    private Set<LottoNumber> lottoNumberList;
 
-    public LottoNumbers(List<Integer> lottoNumberList) {
+    public LottoNumbers(Set<LottoNumber> lottoNumberList) {
         this.lottoNumberList = lottoNumberList;
         numberListCheck(lottoNumberList);
     }
 
-    public List<Integer> getLottoNumber() {
+    public Set<LottoNumber> getLottoNumber() {
         return lottoNumberList;
     }
 
-    private void numberListCheck(List<Integer> lottoNmberList) {
-        if (lottoNmberList.size() != lottoNmberList.stream().distinct().count()) {
-            throw new IllegalArgumentException("중복 숫자 발생");
+    private void numberListCheck(Set<LottoNumber> lottoNumberList) {
+        final Set<Integer> InputLottoNumbers = new HashSet<>();
+        for (LottoNumber lottoNumber : lottoNumberList) {
+            InputLottoNumbers.add(lottoNumber.getNumber());
         }
+        lottoNumberCheck(InputLottoNumbers);
+    }
 
-        if (lottoNmberList.size() > 6) {
-            throw new IllegalArgumentException("로또는 6자리 이다");
+    private void lottoNumberCheck(Set<Integer> checkLottoNumber) {
+        if (checkLottoNumber.size() != LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException("로또 번호 중복 발생");
         }
+    }
 
-        for (int lottoNumber : lottoNumberList) {
-            new LottoNumber(lottoNumber);
+    public void bonusNumberCheck(LottoNumber bonusNumber) {
+        for(LottoNumber lottoNumber : lottoNumberList){
+            if(lottoNumber.getNumber() == bonusNumber.getNumber()){
+                throw new IllegalArgumentException("보너스 번호 중복 발생");
+            }
         }
     }
 }

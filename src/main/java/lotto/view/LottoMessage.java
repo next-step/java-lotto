@@ -1,22 +1,33 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchases;
 import lotto.domain.LottoRank;
 
 import java.util.Map;
+import java.util.Set;
+
+import static lotto.domain.LottoRank.MISS;
 
 public class LottoMessage {
 
-    public static void getLottoMessage(String lottoNumber) {
-        System.out.println(lottoNumber);
+    public static void getLottoMessage(Set<LottoNumber> lottoNumberSet) {
+        for(LottoNumber number : lottoNumberSet)
+        {
+            System.out.print(number.getNumber() + " ");
+        }
+        System.out.println();
     }
 
     public static void getLottoRankMessage(Map<LottoRank, Integer> lottoList) {
         System.out.println("당첨 통계\n" + "---------");
         for (LottoRank lottoRank : LottoRank.values()) {
-            System.out.println(lottoRank.getMatchingCount() + "개 일치" + (lottoRank.getBonus() ? ", 보너스 볼 일치" : "")
-                    + " (" + lottoRank.getReward() + "원)- " + (lottoList.containsKey(lottoRank)
-                    ? lottoList.get(lottoRank) : "0") + "개");
+            if(lottoRank != MISS)
+            {
+                System.out.println(lottoRank.getMatchingCount() + "개 일치" + (lottoRank.getBonus() ? ", 보너스 볼 일치" : "")
+                        + " (" + lottoRank.getReward() + "원)- " + (lottoList.containsKey(lottoRank)
+                        ? lottoList.get(lottoRank) : "0") + "개");
+            }
         }
     }
 

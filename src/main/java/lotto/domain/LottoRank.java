@@ -8,23 +8,21 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    FOUR(3, 5000, false, 3),
-    TRHEE(4, 50000, false, 4),
-    TWO(5, 1500000, false, 5),
-    TWO_BONUS(5, 30000000, true, 7),
-    ONE(6, 2000000000, false, 6),
-    MISS(0, 0, false, 0);
+    MISS(0, 0, false),
+    FOUR(3, 5000, false),
+    TRHEE(4, 50000, false),
+    TWO(5, 1500000, false),
+    TWO_BONUS(5, 30000000, true),
+    ONE(6, 2000000000, false);
 
     private final int matchingCount;
     private final int reward;
-    private final int keyNumber;
     private final boolean bonus;
 
-    LottoRank(int matchingCount, int reward, boolean bonus, int keyNumber) {
+    LottoRank(int matchingCount, int reward, boolean bonus) {
         this.matchingCount = matchingCount;
         this.reward = reward;
         this.bonus = bonus;
-        this.keyNumber = keyNumber;
     }
 
     public int getMatchingCount() {
@@ -33,10 +31,6 @@ public enum LottoRank {
 
     public int getReward() {
         return this.reward;
-    }
-
-    public int getKeyNumber() {
-        return this.keyNumber;
     }
 
     public Boolean getBonus() {

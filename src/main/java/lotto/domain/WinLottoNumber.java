@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinLottoNumber {
@@ -10,28 +13,40 @@ public class WinLottoNumber {
     public WinLottoNumber(LottoNumbers lottoNumber, LottoNumber bonusNumber) {
         this.beforeLottoNumber = lottoNumber;
         this.bonusNumber = bonusNumber;
-        winLottoNumberCheck();
-    }
-
-    public void winLottoNumberCheck() {
-        if (beforeLottoNumber.getLottoNumber().contains(bonusNumber.getNumber())) {
-            throw new IllegalArgumentException("보너스볼 중복 숫자 발생");
-        }
+        beforeLottoNumber.bonusNumberCheck(bonusNumber);
     }
 
     public LottoRank matchingLottoNumber(LottoNumbers lottoNumbers) {
         int matchingCount = 0;
         boolean bonusYN = false;
-        LottoRank lottoRank;
 
-        matchingCount = lottoNumbers.getLottoNumber()
-                .stream().filter(e -> beforeLottoNumber.getLottoNumber().contains(e))
-                .collect(Collectors.toList()).size();
+        for (LottoNumber resultNumber : lottoNumbers.getLottoNumber()) {
+            matchingCount += getMatchingLottoCount(resultNumber);
+        }
 
         if (matchingCount == 5) {
-            bonusYN = lottoNumbers.getLottoNumber().contains(bonusNumber.getNumber());
+            bonusYN = getMatchingBonus(lottoNumbers.getLottoNumber());
         }
-        lottoRank = LottoRank.getLottoRank(matchingCount, bonusYN);
-        return lottoRank;
+
+        return LottoRank.getLottoRank(matchingCount, bonusYN);
+    }
+
+    private int getMatchingLottoCount(LottoNumber lottoNumber) {
+        int result = 0;
+        for (LottoNumber number : beforeLottoNumber.getLottoNumber()) {
+            if (lottoNumber.getNumber() == number.getNumber()) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    private Boolean getMatchingBonus(Set<LottoNumber> lottoNumberSet) {
+        for (LottoNumber number : lottoNumberSet) {
+            if (number.getNumber() == bonusNumber.getNumber()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -3,9 +3,7 @@ package lotto.domain;
 import lotto.view.LottoMessage;
 import lotto.view.PassivityLottoNumberRequest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoMachine {
 
@@ -25,10 +23,14 @@ public class LottoMachine {
 
     public LottoNumbers lottoShuffle() {
         final List<Integer> lottoNumberList = LottoNumber.getLottoNumberList();
+        final Set<LottoNumber> inputLottoNumbers = new HashSet<>();
 
-        Collections.shuffle(lottoNumberList);
-        lottoNumberSet = new LottoNumbers(lottoNumberList.subList(0, 6));
-        LottoMessage.getLottoMessage(String.valueOf(lottoNumberSet.getLottoNumber()));
+        Collections.shuffle(LottoNumber.getLottoNumberList());
+        for (Integer ln : lottoNumberList.subList(0, 6)) {
+            inputLottoNumbers.add(new LottoNumber(ln));
+        }
+        lottoNumberSet = new LottoNumbers(inputLottoNumbers);
+        LottoMessage.getLottoMessage(inputLottoNumbers);
         return lottoNumberSet;
     }
 
@@ -39,7 +41,7 @@ public class LottoMachine {
     private void lottoPassivitySet(List<LottoNumbers> PassivityLottoNumber) {
         for (int i = 0; i < PassivityLottoNumber.size(); i++) {
             purchasesLottoList.add(PassivityLottoNumber.get(i));
-            LottoMessage.getLottoMessage(String.valueOf(PassivityLottoNumber.get(i).getLottoNumber()));
+            LottoMessage.getLottoMessage(PassivityLottoNumber.get(i).getLottoNumber());
         }
     }
 }
