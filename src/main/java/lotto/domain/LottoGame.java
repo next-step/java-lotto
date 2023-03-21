@@ -36,7 +36,9 @@ public class LottoGame {
         for (int i = 0; i < automaticIssueQuantity; i++) {
             this.automaticLottos.add(new Lotto(RandomNumberFactory.get()));
         }
-        this.manualLottos = manualLottos.stream().map(lotto -> new Lotto(lotto.stream().mapToInt(i -> i).toArray())).collect(Collectors.toList());;
+        this.manualLottos = manualLottos.stream()
+                .map(lotto -> new Lotto(lotto.stream().mapToInt(i -> i).toArray()))
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getAllManualLottos() {
