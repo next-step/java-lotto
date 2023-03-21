@@ -6,7 +6,12 @@ public class LottoNumber {
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
 
-    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
+    static {
+        if (!isInitLottoNumbersMap()) {
+            initializeLottoNumbers();
+        }
+    }
     private final int number;
 
     private LottoNumber(int number) {
@@ -17,19 +22,16 @@ public class LottoNumber {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 숫자의 범위를 벗어났습니다.");
         }
-        if (!isInitLottoNumbersMap()) {
-            initializeLottoNumbers();
-        }
-        return lottoNumbers.get(number);
+        return LOTTO_NUMBERS.get(number);
     }
 
     private static boolean isInitLottoNumbersMap() {
-        return lottoNumbers.size() == (LOTTO_MAX_NUMBER - LOTTO_MIN_NUMBER + 1);
+        return LOTTO_NUMBERS.size() == (LOTTO_MAX_NUMBER - LOTTO_MIN_NUMBER + 1);
     }
 
     private static void initializeLottoNumbers() {
         for (int number = LOTTO_MIN_NUMBER; number <= LOTTO_MAX_NUMBER; number++) {
-            lottoNumbers.put(number, new LottoNumber(number));
+            LOTTO_NUMBERS.put(number, new LottoNumber(number));
         }
     }
 
