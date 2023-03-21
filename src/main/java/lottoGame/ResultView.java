@@ -3,7 +3,13 @@ package lottoGame;
 import java.util.List;
 
 public class ResultView {
-    public static void showResult(LottoGame lottoGame) {
+    public void printTicket(List<Lotto> lottoTickets) {
+        for (Lotto lotto : lottoTickets) {
+            System.out.println(lotto);
+        }
+    }
+
+    public void showResult(LottoGame lottoGame) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원)- " + lottoGame.getFifthGrade() + "개");
