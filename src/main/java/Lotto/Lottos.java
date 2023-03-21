@@ -32,14 +32,13 @@ public class Lottos {
 
     private double rate = 0;
 
-    public List<Lotto> buyLottos(java.math.BigDecimal buyAmt) {
-        InputView inputView = new InputView();
+    public List<Lotto> buyLottos(BigDecimal buyAmt, int manualLottoCount) {
         this.lottoCount = buyAmt.divide(LOTTO_AMOUNT).intValue();
         this.lottos = new ArrayList<Lotto>();
         this.buyAmount = buyAmt;
-        this.manuelLottoCount = inputView.inputManualLottoCount();
+        this.manuelLottoCount = manualLottoCount;
         for (int i = 0; i < manuelLottoCount; i++) {
-            lottos.add(Lotto.createManualLotto(inputView.inputManualLottoNumber()));
+            lottos.add(Lotto.createManualLotto());
         }
         for (int i = 0; i < (lottoCount - manuelLottoCount); i++) {
             lottos.add(Lotto.createAutoLotto());

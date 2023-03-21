@@ -8,7 +8,7 @@ public class LottoMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         Lottos lottos = new Lottos();
-        lottos.buyLottos(inputView.inputBuyingPrice());
+        lottos.buyLottos(inputView.inputBuyingPrice(), inputView.inputManualLottoCount());
         ResultView resultView = new ResultView(lottos);
         resultView.printLottos(lottos);
         lottos.setWinLotto(inputView.inputHitNumber());

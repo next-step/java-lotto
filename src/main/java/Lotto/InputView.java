@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private Scanner sc;
+    private String SPLIT_CHAR = ",";
 
     public BigDecimal inputBuyingPrice() {
         sc = new Scanner(System.in);
@@ -26,7 +27,8 @@ public class InputView {
         sc = new Scanner(System.in);
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         String manuelLottoNumbers = sc.nextLine();
-        return Arrays.stream(manuelLottoNumbers.split(","))
+        return Arrays.stream(manuelLottoNumbers.split(SPLIT_CHAR))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
