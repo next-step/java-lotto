@@ -5,7 +5,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +16,7 @@ public class LottoGameTest {
     void getLottoGame() {
         LottoGame lottoGame = new LottoGame(new Money(3500));
         Money lottosPrice = lottoGame.getBuyPrice();
-        Assertions.assertThat(lottosPrice.toInteger()).isEqualTo(3000);
+        Assertions.assertThat(lottosPrice.toLong()).isEqualTo(3000);
     }
 
     @DisplayName("로또 당첨번호 등수별 통계를 구한다.")
@@ -62,7 +61,7 @@ public class LottoGameTest {
         WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
 
         LottoGame lottoGame = new LottoGame(lottos);
-        Assertions.assertThat(lottoGame.getStatistics(winningNumbers).getTotalRateOfReturnForPrint()).isEqualTo("0.5");
+        Assertions.assertThat(lottoGame.getStatistics(winningNumbers).getTotalRateOfReturn()).isEqualTo(0.5);
 
     }
 

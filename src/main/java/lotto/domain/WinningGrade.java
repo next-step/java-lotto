@@ -43,8 +43,8 @@ public enum WinningGrade {
         return result.orElse(WinningGrade.ETC);
     }
 
-    public Integer getPrizeMoney() {
-        return this.winningMoney.toInteger();
+    public Long getPrizeMoney() {
+        return this.winningMoney.toLong();
     }
 
     public boolean isBonusMatch() {

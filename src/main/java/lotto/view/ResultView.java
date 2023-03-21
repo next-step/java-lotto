@@ -17,10 +17,10 @@ public class ResultView {
         List<Lotto> allManualLottos = lottoGame.getAllManualLottos();
         System.out.println("수동으로 " + allManualLottos.size() + "장 " + allAutomaticLottos.size() + "개를 구매했습니다.");
         for (Lotto lotto : allManualLottos) {
-            System.out.println(lotto);
+            System.out.println(lotto.getLottoNumbers());
         }
         for (Lotto lotto : allAutomaticLottos) {
-            System.out.println(lotto);
+            System.out.println(lotto.getLottoNumbers());
         }
         System.out.println();
     }
@@ -29,7 +29,7 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계\n---------");
         System.out.println(printInformation(statistics));
-        System.out.println("총 수익률은 " + statistics.getTotalRateOfReturnForPrint() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("총 수익률은 " + statistics.getTotalRateOfReturn() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
     public static String printInformation(WinningStatistics statistics) {

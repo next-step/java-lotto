@@ -35,6 +35,10 @@ public class LottoNumber {
         }
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,6 +54,8 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return Integer.toString(number);
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
     }
 }

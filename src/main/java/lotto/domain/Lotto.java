@@ -29,9 +29,15 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.stream().map(LottoNumber::getNumber).sorted().collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
-        return lottoNumbers.stream().map(lottoNumber -> Integer.parseInt(lottoNumber.toString())).sorted().collect(Collectors.toList()).toString();
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 
     @Override

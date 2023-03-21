@@ -27,8 +27,8 @@ public class Money {
         return new Money(this.wonValue.subtract(money.wonValue));
     }
 
-    public Integer toInteger() {
-        return wonValue.intValue();
+    public Long toLong() {
+        return wonValue.longValue();
     }
 
     @Override

@@ -24,11 +24,11 @@ public class LottoGame {
     }
 
     public LottoGame(Money lottoPay, List<Set<Integer>> manualLottos) {
-        int allLottoQuantity = lottoPay.division(LOTTO_PRICE).toInteger();
-        int automaticIssueQuantity = allLottoQuantity - manualLottos.size();
+        long allLottoQuantity = lottoPay.division(LOTTO_PRICE).toLong();
+        long automaticIssueQuantity = allLottoQuantity - manualLottos.size();
 
         Money manualLottosPrice = LOTTO_PRICE.multiply(manualLottos.size());
-        if (lottoPay.minus(manualLottosPrice).toInteger() < 0) {
+        if (lottoPay.minus(manualLottosPrice).toLong() < 0) {
             throw new IllegalArgumentException("사용한 금액보다 많은 로또를 발급할 수 없습니다.");
         }
 
