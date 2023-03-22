@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class LottoTicket {
 
     private final Set<LottoNumber> lottoNumbers;
-    private static final int LOTTO_NUMBER_LENGTH = 6;
+    private static final int LOTTO_TICKET_SIZE = 6;
 
     private LottoRank lottoRank;
 
@@ -28,21 +28,21 @@ public class LottoTicket {
     }
 
     private void vaildLottoNumbers(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
+        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("로또 정합성 에러");
         }
     }
 
     private static Set<LottoNumber> getRandomLottoNum() {
-        List<Integer> lottoNumbers = IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-                .boxed().collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = LottoNumber.getAllLottoNumbers();
 
         Collections.shuffle(lottoNumbers);
 
         int startIndex = 0;
-        return lottoNumbers.subList(startIndex, LOTTO_NUMBER_LENGTH)
-                .stream().map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toSet());
+
+        return lottoNumbers.subList(startIndex, LOTTO_TICKET_SIZE).stream()
+                .sorted(Comparator.comparingInt(LottoNumber::getLottoNumber))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     private static Set<LottoNumber> initStringNumToSet(String lottoNumbers) {
@@ -50,7 +50,8 @@ public class LottoTicket {
 
         Set<LottoNumber> numbers = Arrays.stream(lottoNumbers.split(","))
                 .map(Integer::parseInt).map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toSet());
+                .sorted()
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         return numbers;
     }

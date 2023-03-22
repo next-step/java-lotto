@@ -28,7 +28,7 @@ public class LottoConsoleView {
 
         int manualPurchaseCount = Integer.parseInt(getTrimString());
 
-        if(lottoPrice * manualPurchaseCount > buyLottoPrice){
+        if (lottoPrice * manualPurchaseCount > buyLottoPrice) {
             throw new IllegalArgumentException("구매금액을 초과하였습니다.");
         }
 

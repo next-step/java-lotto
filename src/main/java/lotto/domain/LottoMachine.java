@@ -15,14 +15,24 @@ public class LottoMachine {
 
     private WinningLottoTicket winningLottoNumber;
 
-    private LottoStatistic lottoStatistic;
-
     public LottoMachine(int buyLottoPrice) {
         this(buyLottoPrice, DEFAULT_MANUAL_PURCHASE_COUNT, buyRandomLotto(buyLottoPrice));
     }
 
     public LottoMachine(int buyLottoPrice, List<String> manualPurchaseLottoNumbers, int manualPurchaseCount) {
         this(buyLottoPrice, manualPurchaseCount, initManualPurchaseTickets(buyLottoPrice, manualPurchaseCount, manualPurchaseLottoNumbers));
+    }
+
+
+    public LottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
+        this(buyLottoPrice, DEFAULT_MANUAL_PURCHASE_COUNT, lottoTickets);
+    }
+
+    public LottoMachine(int buyLottoPrice, int manualPurchaseCount, List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+        this.buyLottoPrice = buyLottoPrice;
+        this.manualPurchaseCount = manualPurchaseCount;
+        vaildLottoMachine(buyLottoPrice, lottoTickets);
     }
 
     private static List<LottoTicket> initManualPurchaseTickets(int buyLottoPrice, int manualPurchaseCount, List<String> manualPurchaseLottoNumbers) {
@@ -41,18 +51,6 @@ public class LottoMachine {
         manualPurchaseTickets.addAll(autoLottoTickets);
 
         return manualPurchaseTickets;
-    }
-
-
-    public LottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
-        this(buyLottoPrice, DEFAULT_MANUAL_PURCHASE_COUNT, lottoTickets);
-    }
-
-    public LottoMachine(int buyLottoPrice, int manualPurchaseCount, List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
-        this.buyLottoPrice = buyLottoPrice;
-        this.manualPurchaseCount = manualPurchaseCount;
-        vaildLottoMachine(buyLottoPrice, lottoTickets);
     }
 
     public void vaildLottoMachine(int buyLottoPrice, List<LottoTicket> lottoTickets) {
@@ -79,9 +77,8 @@ public class LottoMachine {
 
     public LottoStatistic initLottoStatistic(WinningLottoTicket winningLottoTicket) {
         this.winningLottoNumber = winningLottoTicket;
-        this.lottoStatistic = new LottoStatistic(lottoTickets, winningLottoTicket, this.buyLottoPrice);
 
-        return lottoStatistic;
+        return new LottoStatistic(lottoTickets, winningLottoTicket, this.buyLottoPrice);
     }
 
     public WinningLottoTicket getWinningLottoNumber() {

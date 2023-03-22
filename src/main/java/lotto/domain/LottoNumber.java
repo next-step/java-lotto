@@ -1,10 +1,13 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
@@ -18,7 +21,7 @@ public class LottoNumber {
     }
 
     static {
-        IntStream.range(MIN_NUMBER, MAX_NUMBER)
+        IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
                 .forEach(num -> NUMBERS.put(num,new LottoNumber(num)));
     }
 
@@ -28,9 +31,19 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber getLottoNumber(int lottoNumber) {
+    public static LottoNumber getLottoNumber(Integer lottoNumber) {
         vaildate(lottoNumber);
         return NUMBERS.get(lottoNumber);
+    }
+
+    public static List<LottoNumber> getAllLottoNumbers(){
+        return NUMBERS.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
@@ -51,5 +64,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return Integer.toString(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return Integer.compare(this.lottoNumber, lottoNumber.getLottoNumber());
     }
 }

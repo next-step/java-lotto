@@ -15,9 +15,9 @@ public class LottoMain {
 
         showPurchaseResult(lottoMachine, lottoConsoleView);
 
-        LottoStatistic lottoStatistic = inputWinnerLottoNumber(lottoConsoleView, lottoMachine);
+        WinningLottoTicket winningLottoTicket = inputWinnerLottoNumber(lottoConsoleView);
 
-        showStatistics(lottoConsoleView, lottoStatistic);
+        showStatistics(lottoConsoleView, lottoMachine.initLottoStatistic(winningLottoTicket));
     }
 
     private static LottoMachine buyLottos(LottoConsoleView lottoConsoleView) {
@@ -43,12 +43,13 @@ public class LottoMain {
     }
 
 
-    private static LottoStatistic inputWinnerLottoNumber(LottoConsoleView lottoConsoleView, LottoMachine lottoMachine) {
+    private static WinningLottoTicket inputWinnerLottoNumber(LottoConsoleView lottoConsoleView) {
         String winningNumber = lottoConsoleView.inputWinningNumber();
         int bonusNumber = lottoConsoleView.inputBonusNumber();
 
-        return lottoMachine.initLottoStatistic(new WinningLottoTicket(new LottoTicket(winningNumber), bonusNumber));
+        return new WinningLottoTicket(new LottoTicket(winningNumber), bonusNumber);
     }
+
 
     private static void showStatistics(LottoConsoleView lottoConsoleView, LottoStatistic lottoStatistic) {
         lottoConsoleView.showBeforeStatistics();

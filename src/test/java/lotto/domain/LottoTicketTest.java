@@ -8,8 +8,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -69,6 +72,32 @@ public class LottoTicketTest {
 
         assertThat(lottoNumbers)
                 .hasSize(6);
+    }
+
+    @DisplayName("번호를 뽑으면 정렬이 되어있다.")
+    @Test
+    public void sortedLottoNumbers(){
+
+        LottoTicket autoLottoTicket = new LottoTicket();
+        LottoTicket manualLotto = new LottoTicket("5,4,3,2,1,9");
+
+
+        List<LottoNumber> autoLottoSortNumbers = autoLottoTicket.getLottoNumbers().stream()
+                .sorted(Comparator.comparingInt(LottoNumber::getLottoNumber))
+                .collect(Collectors.toList());
+
+        assertThat(autoLottoTicket.getLottoNumbers().stream().collect(Collectors.toList()))
+                .containsExactly(autoLottoSortNumbers.toArray(new LottoNumber[autoLottoSortNumbers.size()]));
+
+        List<LottoNumber> manualLottoSortNumbers = manualLotto.getLottoNumbers()
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
+
+        assertThat(manualLotto.getLottoNumbers().stream().collect(Collectors.toList()))
+                .containsExactly(manualLottoSortNumbers.toArray(new LottoNumber[manualLottoSortNumbers.size()]));
+
+
     }
 
 

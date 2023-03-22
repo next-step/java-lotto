@@ -10,7 +10,7 @@ public class StringCalculator {
 
 
     private final String calculatorSumString;
-    private static final String default_delimeter = ",|:";
+    private static final String DEFAULT_DELIMITER = ",|:";
     private final String delimeter;
 
 
@@ -23,7 +23,7 @@ public class StringCalculator {
         //delimeter 구분
         delimeter = initDelimeter(calculatorSumString);
 
-        if (!default_delimeter.equals(delimeter)) {
+        if (!DEFAULT_DELIMITER.equals(delimeter)) {
             calculatorSumString = calculatorSumString.substring(calculatorSumString.indexOf("\n") + 1);
         }
 
@@ -32,16 +32,16 @@ public class StringCalculator {
         this.calculatorSumString = calculatorSumString;
     }
 
-    public String initDelimeter(String calculatorSumString) {
-        String defaultDelimeter = StringCalculator.default_delimeter;
+    private String initDelimeter(String calculatorSumString) {
+        String delimeter  = StringCalculator.DEFAULT_DELIMITER;
 
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(calculatorSumString);
 
         if (m.find()) {
-            defaultDelimeter = m.group(1);
+            delimeter  = m.group(1);
         }
 
-        return defaultDelimeter;
+        return delimeter ;
     }
 
     public void vaildCheck(String calculatorSumString, String delimeter) {
