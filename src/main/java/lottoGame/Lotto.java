@@ -15,7 +15,7 @@ public class Lotto {
     private List<Integer> lottoNumbers;
 
     public Lotto() {
-        lottoNumbers = getLottoNumber();
+        lottoNumbers = getNewLottoNumber();
     }
     private List<Integer> getNewLottoNumber() {
         List<Integer> lottoNumbers = new ArrayList<Integer>();
