@@ -86,8 +86,6 @@ public class LottoGameTest {
             for (int number : lottoNumbers) {
                 assertThat(number).isBetween(1, 45);
             }
-
-            System.out.println(lottoNumbers);
         }
     }
 
