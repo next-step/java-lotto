@@ -53,6 +53,13 @@ public class CalculatorTest {
         assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> calculator.add(input));
     }
+    @DisplayName("숫자칸에 문자는 사용할 수 없다. ")
+    @ParameterizedTest
+    @ValueSource(strings = {"a,2:3"})
+    void inputNumberCheckTest(final String input) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> calculator.add(input));
+    }
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
