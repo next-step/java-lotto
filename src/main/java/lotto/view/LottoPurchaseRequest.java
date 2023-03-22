@@ -6,15 +6,18 @@ import java.util.Scanner;
 
 public class LottoPurchaseRequest {
 
-    private final int lottoPriceCount;
+    private final int lottoPrice;
+    private final int passivityPurchasesCount;
 
-    public LottoPurchaseRequest(int lottoPriceCount) {
-        this.lottoPriceCount = lottoPriceCount;
+    public LottoPurchaseRequest(int lottoPrice, int passivityPurchasesCount) {
+        this.lottoPrice = lottoPrice;
+        this.passivityPurchasesCount = passivityPurchasesCount;
     }
 
     public static LottoPurchaseRequest inputLottoPrice() {
         int lottoPrice = lottoBuyPrice();
-        return new LottoPurchaseRequest(lottoPrice);
+        int passivityPurchases = passivityPurchases();
+        return new LottoPurchaseRequest(lottoPrice, passivityPurchases);
     }
 
     private static int lottoBuyPrice() {
@@ -23,7 +26,17 @@ public class LottoPurchaseRequest {
         return sc.nextInt();
     }
 
+    private static int passivityPurchases() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return sc.nextInt();
+    }
+
     public int getLottoPriceCount() {
-        return lottoPriceCount;
+        return lottoPrice;
+    }
+
+    public int getPassivityPurchasesCount() {
+        return passivityPurchasesCount;
     }
 }

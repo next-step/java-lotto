@@ -3,25 +3,24 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 class LottoNumbersTest {
 
     @Test
-    void 로또_번호_중복이_없음() {
-        List<Integer> lottoNum = Arrays.asList(1, 2, 3, 6, 4, 6);
-        assertThatExceptionOfType(IllegalAccessError.class)
-                .isThrownBy(() -> new LottoNumbers(lottoNum));
-    }
+    void 로또_번호_중복_발생_확인() {
 
-    @Test
-    void 로또_번호는_6자리() {
-        List<Integer> lottoNum = Arrays.asList(1, 2, 3, 6, 42, 5, 6);
-        assertThatExceptionOfType(IllegalAccessError.class)
-                .isThrownBy(() -> new LottoNumbers(lottoNum));
+        Set<LottoNumber> lottoNumber = new HashSet<>();
+        for(int i : Arrays.asList(11, 13, 15, 26, 42, 13))
+        {
+            lottoNumber.add(new LottoNumber(i));
+        }
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoNumbers(lottoNumber));
     }
-
 }

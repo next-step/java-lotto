@@ -1,42 +1,52 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinLottoNumber {
 
-    private static LottoNumbers beforeLottoNumber;
-    private static int bonusNumber;
+    private LottoNumbers beforeLottoNumber;
+    private LottoNumber bonusNumber;
 
-    public WinLottoNumber(LottoNumbers lottoNumber, int bonusNumber) {
+    public WinLottoNumber(LottoNumbers lottoNumber, LottoNumber bonusNumber) {
         this.beforeLottoNumber = lottoNumber;
         this.bonusNumber = bonusNumber;
-        winLottoNumberCheck();
+        beforeLottoNumber.bonusNumberCheck(bonusNumber);
     }
 
-    public void winLottoNumberCheck() {
-        if (beforeLottoNumber.getLottoNumber().contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스볼 중복 숫자 발생");
-        }
-
-        if (bonusNumber > 45 || bonusNumber < 1) {
-            throw new IllegalArgumentException("유효하지 않은 보너스볼 숫자");
-        }
-    }
-
-    public int matchingLottoNumber(LottoNumbers lottoNumbers) {
-        int resultCount = 0;
+    public LottoRank matchingLottoNumber(LottoNumbers lottoNumbers) {
+        int matchingCount = 0;
         boolean bonusYN = false;
 
-        resultCount = lottoNumbers.getLottoNumber()
-                .stream().filter(e -> beforeLottoNumber.getLottoNumber().contains(e))
-                .collect(Collectors.toList()).size();
+        for (LottoNumber resultNumber : lottoNumbers.getLottoNumber()) {
+            matchingCount += getMatchingLottoCount(resultNumber);
+        }
 
-        if (resultCount == 5) {
-            bonusYN = lottoNumbers.getLottoNumber().contains(bonusNumber);
-            if (bonusYN) {
-                resultCount = 7;
+        if (matchingCount == 5) {
+            bonusYN = getMatchingBonus(lottoNumbers.getLottoNumber());
+        }
+
+        return LottoRank.getLottoRank(matchingCount, bonusYN);
+    }
+
+    private int getMatchingLottoCount(LottoNumber lottoNumber) {
+        int result = 0;
+        for (LottoNumber number : beforeLottoNumber.getLottoNumber()) {
+            if (lottoNumber.getNumber() == number.getNumber()) {
+                result++;
             }
         }
-        return resultCount;
+        return result;
+    }
+
+    private Boolean getMatchingBonus(Set<LottoNumber> lottoNumberSet) {
+        for (LottoNumber number : lottoNumberSet) {
+            if (number.getNumber() == bonusNumber.getNumber()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

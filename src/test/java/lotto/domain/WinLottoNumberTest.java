@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -11,18 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class WinLottoNumberTest {
 
     @Test
-    void 당첨_번호와_보너스번호_중복확인() {
-        LottoNumbers lottoNumber = new LottoNumbers(Arrays.asList(1, 3, 5, 7, 9, 11));
-        int bonusNumber = 5;
-        assertThat(new WinLottoNumber(lottoNumber, bonusNumber));
-    }
+    void 당첨_번호와_보너스번호_중복이_불가하다() {
 
-    @Test
-    void 당첨_결과를_정상_확인() {
-        LottoNumbers resultLottoNumber = new LottoNumbers(Arrays.asList(1, 3, 5, 7, 9, 11));
-        LottoNumbers requestLottoNumber = new LottoNumbers(Arrays.asList(1, 3, 5, 2, 4, 6));
-        int bounusNumber = 13;
-        WinLottoNumber winLottoNumber = new WinLottoNumber(resultLottoNumber, bounusNumber);
-        assertThat(winLottoNumber.matchingLottoNumber(requestLottoNumber)).isEqualTo(3);
+        Set<LottoNumber> lottoNumber = new HashSet<>();
+        for(int i : Arrays.asList(1, 3, 5, 7, 9, 11))
+        {
+            lottoNumber.add(new LottoNumber(i));
+        }
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new WinLottoNumber(new LottoNumbers(lottoNumber), new LottoNumber(5)));
     }
 }

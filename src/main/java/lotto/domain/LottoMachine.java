@@ -1,43 +1,47 @@
 package lotto.domain;
 
 import lotto.view.LottoMessage;
+import lotto.view.PassivityLottoNumberRequest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoMachine {
 
-    private static final int LOTTO_NUMBER_MINIMUM = 1;
-    private static final int LOTTO_NUMBER_MAXIMUM = 45;
-    private static List<LottoNumbers> purchasesLottoList = new ArrayList<>();
-    private static LottoNumbers lottoNumberSet;
+    private List<LottoNumbers> purchasesLottoList = new ArrayList<>();
+    private LottoNumbers lottoNumberSet;
 
-    public LottoMachine(int number) {
-        lottoListSet(number);
+    public LottoMachine(LottoPurchases lottoPurchases, List<LottoNumbers> PassivityLottoNumber) {
+        lottoPassivitySet(PassivityLottoNumber);
+        lottoListSet(lottoPurchases);
     }
 
-    private void lottoListSet(int number) {
-        for (int i = 0; i < number; i++) {
-            purchasesLottoList.add(i, lottoShuffle());
+    private void lottoListSet(LottoPurchases lottoPurchases) {
+        for (int i = 0; i < lottoPurchases.getAutomaticCount(); i++) {
+            purchasesLottoList.add(lottoShuffle());
         }
     }
 
-    private LottoNumbers lottoShuffle() {
-        final List<Integer> lottoNumberList = new ArrayList<>();
+    public LottoNumbers lottoShuffle() {
+        final List<Integer> lottoNumberList = LottoNumber.getLottoNumberList();
+        final Set<LottoNumber> inputLottoNumbers = new HashSet<>();
 
-        if (lottoNumberList.isEmpty()) {
-            for (int i = LOTTO_NUMBER_MINIMUM; i <= LOTTO_NUMBER_MAXIMUM; i++) {
-                lottoNumberList.add(i);
-            }
+        Collections.shuffle(LottoNumber.getLottoNumberList());
+        for (Integer ln : lottoNumberList.subList(0, 6)) {
+            inputLottoNumbers.add(new LottoNumber(ln));
         }
-        Collections.shuffle(lottoNumberList);
-        lottoNumberSet = new LottoNumbers(lottoNumberList.subList(0, 6));
-        LottoMessage.getLottoMessage(String.valueOf(lottoNumberSet.getLottoNumber()));
+        lottoNumberSet = new LottoNumbers(inputLottoNumbers);
+        LottoMessage.getLottoMessage(inputLottoNumbers);
         return lottoNumberSet;
     }
 
     public List<LottoNumbers> getPurchasesLottoList() {
         return purchasesLottoList;
+    }
+
+    private void lottoPassivitySet(List<LottoNumbers> PassivityLottoNumber) {
+        for (int i = 0; i < PassivityLottoNumber.size(); i++) {
+            purchasesLottoList.add(PassivityLottoNumber.get(i));
+            LottoMessage.getLottoMessage(PassivityLottoNumber.get(i).getLottoNumber());
+        }
     }
 }
