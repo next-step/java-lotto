@@ -41,9 +41,14 @@ public class StringCalculator {
     }
 
     private boolean negativeInputNumberCheck(String[] inputString){
-        return Arrays.stream(inputString)
-            .mapToInt(Integer::parseInt)
-            .noneMatch(i -> i<0);
+        try {
+            boolean nonNegative = Arrays.stream(inputString)
+                .mapToInt(Integer::parseInt)
+                .noneMatch(i -> i < 0);
+            return nonNegative;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("문자는 입력할 수 없습니다.", e);
+        }
     }
 
     private String[] findNewDelimiter(String inputString) {
