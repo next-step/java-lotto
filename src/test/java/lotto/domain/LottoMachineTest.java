@@ -3,10 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,10 +22,10 @@ public class LottoMachineTest {
 
     @Test
     @DisplayName("구입한 갯수를 알 수 있다.")
-    void lottoCount(){
+    void lottoCount() {
         LottoMachine lottoMachine = new LottoMachine(10000);
 
-        assertThat(lottoMachine.lottoCount()).isEqualTo(10);
+        assertThat(lottoMachine.lottoTotalCount()).isEqualTo(10);
     }
 
     @Test
@@ -57,131 +53,50 @@ public class LottoMachineTest {
         int testBounsNumber = 7;
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), testBounsNumber);
 
-        lottoMachine.saveWinningNumber(winningLottoTicket);
+        lottoMachine.initLottoStatistic(winningLottoTicket);
 
         WinningLottoTicket actualWinnerNumber = lottoMachine.getWinningLottoNumber();
 
         assertThat(actualWinnerNumber.getWinningLottoNumbers())
                 .hasSize(6)
-                .contains(1, 2, 3, 4, 5, 6);
+                .contains(LottoNumber.getLottoNumber(1)
+                        , LottoNumber.getLottoNumber(2)
+                        , LottoNumber.getLottoNumber(3)
+                        , LottoNumber.getLottoNumber(4)
+                        , LottoNumber.getLottoNumber(5)
+                        , LottoNumber.getLottoNumber(6)
+                );
 
-        assertThat(actualWinnerNumber.getBounsNumber()).isEqualTo(testBounsNumber);
+        assertThat(actualWinnerNumber.getBounsNumber()).isEqualTo(LottoNumber.getLottoNumber(7));
     }
 
+    @DisplayName("수동 로또 정합성 체크")
     @Test
-    @DisplayName("당첨통계를 낼 수 있다. 금액편")
-    void statisticsAmount() {
-        
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    void vaildManualPurchaseLotto() {
 
-        int rottoPrice = 1000;
-
-        lottoTickets.add(new LottoTicket("1,2,7,8,9,10")); // 미당첨
-        lottoTickets.add(new LottoTicket("10,11,12,13,14,15")); // 미당첨
-        lottoTickets.add(new LottoTicket("1,2,3,7,8,9")); // 5등  5000월
-        lottoTickets.add(new LottoTicket("1,2,3,4,8,9")); // 4등  50000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,9")); // 3등  1500000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,7")); // 2등  30000000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,6")); // 1등  2000000000
-
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
-
-        // 모든 등수
-        long estimatedAmount = Arrays.stream(LottoRank.values())
-                .mapToInt(value -> value.winningAmount)
-                .sum();
-
-        LottoMachine lottoMachine = new LottoMachine(rottoPrice * lottoTickets.size(), lottoTickets);
-
-        lottoMachine.saveWinningNumber(winningLottoTicket);
-
-        assertThat(lottoMachine.getamountStatistics());
-    }
-
-    @Test
-    @DisplayName("당첨통계를 낼 수 있다. 수익률편")
-    void aggregationOfReturns() {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        int rottoPrice = 1000;
-
-        lottoTickets.add(new LottoTicket("1,2,7,8,9,10")); // 미당첨
-        lottoTickets.add(new LottoTicket("10,11,12,13,14,15")); // 미당첨
-        lottoTickets.add(new LottoTicket("1,2,3,7,8,9")); // 5등  5000월
-        lottoTickets.add(new LottoTicket("1,2,3,4,8,9")); // 4등  50000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,9")); // 3등  1500000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,7")); // 2등  30000000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,6")); // 1등  2000000000
-
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
-
-        // 모든 등수
-        BigDecimal estimatedAmount = new BigDecimal(Arrays.stream(LottoRank.values())
-                .mapToInt(value -> value.winningAmount)
-                .sum());
-
-        LottoMachine lottoMachine = new LottoMachine(rottoPrice * lottoTickets.size(), lottoTickets);
-
-        lottoMachine.saveWinningNumber(winningLottoTicket);
-
-        BigDecimal divisor = new BigDecimal(rottoPrice * lottoTickets.size());
-
-        assertThat(lottoMachine.getAggregationOfReturns())
-                .isEqualTo(estimatedAmount.divide(divisor, 3, RoundingMode.HALF_UP).toString());
-    }
-
-    @Test
-    @DisplayName("당첨번호가 없다면 통계 에러")
-    void vaildStatistics() {
-
-        assertThatExceptionOfType(IllegalStateException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    // when
-                    LottoMachine lottoMachine = new LottoMachine(5000);
 
+                    List<String> lottos = List.of("1,2,3,4,5,6", "4,5,6,7,8,9");
 
-                    lottoMachine.getamountStatistics();
+                    LottoMachine lottoMachine = new LottoMachine(5000, lottos, 3);
 
-                }).withMessageContaining("당첨번호");
-
-        assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> {
-                    // when
-                    LottoMachine lottoMachine = new LottoMachine(5000);
-
-                    lottoMachine.getAggregationOfReturns();
-
-                }).withMessageContaining("당첨번호");
-
+                }).withMessageContaining("수동 로또 갯수 에러");
     }
-    
-    
+
+    @DisplayName("수동로또 구매 테스트")
     @Test
-    @DisplayName("로또 당참된 갯수 리턴 확인")
-    public void lottoRankMatchTest() {
+    void manualPurchaseLottos() {
 
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+        List<String> lottos = List.of("1,2,3,4,5,6", "4,5,6,7,8,9");
 
-        int rottoPrice = 1000;
+        LottoMachine lottoMachine = new LottoMachine(5000, lottos, 2);
 
-        lottoTickets.add(new LottoTicket("1,2,7,8,9,10")); // 미당첨
-        lottoTickets.add(new LottoTicket("10,11,12,13,14,15")); // 미당첨
-        lottoTickets.add(new LottoTicket("1,2,3,7,8,9")); // 5등  5000월
-        lottoTickets.add(new LottoTicket("1,2,3,4,8,9")); // 4등  50000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,9")); // 3등  1500000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,7")); // 2등  30000000
-        lottoTickets.add(new LottoTicket("1,2,3,4,5,6")); // 1등  2000000000
+        int manualPurchaseLottsCount = lottoMachine.getManualPurchaseCount();
+        List<LottoTicket> lottoTickets = lottoMachine.getLottoTickets();
 
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
+        assertThat(manualPurchaseLottsCount).isEqualTo(2);
+        assertThat(lottoTickets).hasSize(5);
 
-        LottoMachine lottoMachine = new LottoMachine(rottoPrice * lottoTickets.size(), lottoTickets);
-
-        lottoMachine.saveWinningNumber(winningLottoTicket);
-
-        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.FIVE_PLACE)).isEqualTo(1);
-        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.FOUR_PLACE)).isEqualTo(1);
-        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.THREE_PLACE)).isEqualTo(1);
-        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.TWO_PLACE)).isEqualTo(1);
-        assertThat(lottoMachine.lottoRankMatchCount(LottoRank.ONE_PLACE)).isEqualTo(1);
     }
 }

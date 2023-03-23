@@ -36,6 +36,6 @@ public class WinnerLottoTicketTest {
                     WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 6);
 
                 }).withMessageContaining("보너스 번호 중복");
-        
+
     }
 }

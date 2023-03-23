@@ -1,19 +1,19 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class WinningLottoTicket {
     private final LottoTicket winningLottoNumber;
-    private final int bounsNumber;
+    private final LottoNumber bounsNumber;
 
     public WinningLottoTicket(LottoTicket winningLottoNumber, int bounsNumber) {
-        vaildBounsNumber(winningLottoNumber, bounsNumber);
+        LottoNumber bounsLottoNumber = LottoNumber.getLottoNumber(bounsNumber);
+        vaildBounsNumber(winningLottoNumber, bounsLottoNumber);
         this.winningLottoNumber = winningLottoNumber;
-        this.bounsNumber = bounsNumber;
+        this.bounsNumber = bounsLottoNumber;
     }
 
-    private void vaildBounsNumber(LottoTicket lottoTicket, int bounsNumber) {
+    private void vaildBounsNumber(LottoTicket lottoTicket, LottoNumber bounsNumber) {
         if (lottoTicket.getLottoNumbers().contains(bounsNumber)) {
             throw new IllegalArgumentException("보너스 번호 중복 에러");
         }
@@ -21,9 +21,7 @@ public class WinningLottoTicket {
 
     public LottoRank getWinnerLotto(LottoTicket lottoNumbers) {
         int matchCount = (int) lottoNumbers.getLottoNumbers().stream()
-                .filter(lottoNumber -> {
-                    return winningLottoNumber.contains(lottoNumber);
-                })
+                .filter(lottoNumber -> winningLottoNumber.contains(lottoNumber))
                 .count();
 
         int bounsMatchCount = 0;
@@ -35,16 +33,12 @@ public class WinningLottoTicket {
         return LottoRank.getRankCondition(matchCount, bounsMatchCount);
     }
 
-    public List<Integer> getWinningLottoNumbers() {
+    public Set<LottoNumber> getWinningLottoNumbers() {
         return winningLottoNumber.getLottoNumbers();
     }
 
-    public int getBounsNumber() {
+    public LottoNumber getBounsNumber() {
         return this.bounsNumber;
-    }
-
-    public boolean contains(int lottoNumber) {
-        return winningLottoNumber.contains(lottoNumber);
     }
 
 
