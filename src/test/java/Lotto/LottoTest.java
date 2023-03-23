@@ -20,8 +20,10 @@ public class LottoTest {
     @DisplayName(value = "구매 금액을 입력하면 해당 금액에 해당하는 장수의 로또 숫자를 반환한다.")
     @Test
     void getLottoCount() {
+        LottoForm lottoForm = new LottoForm(new BigDecimal("100000"), 0);
+
         Lottos lottos = new Lottos();
-        //lottos.buyLottos(new BigDecimal("100000"), 0);
+        lottos.buyLottos(lottoForm);
         assertThat(lottos.getLottoCount()).isSameAs(100);
     }
 
