@@ -1,7 +1,7 @@
 package lotto.model;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 public class LottoNumber {
 
     final private List<Integer> numbers;
@@ -24,16 +24,15 @@ public class LottoNumber {
     public Level getLevel() { return level; }
 
     public String printNumber() {
-        String stringNumbers = "";
 
-        for (Integer number : numbers) {
-            stringNumbers += number.toString();
-
-            if (numbers.lastIndexOf(number) != numbers.size() - 1) {
-                stringNumbers += ", ";
-            }
-        }
-        return "[" + stringNumbers + "]";
+        return new StringBuilder("[")
+                .append(numbers.stream()
+                        .sorted()
+                        .mapToInt(i->i.intValue())
+                        .mapToObj(String::valueOf)
+                        .collect(Collectors.joining(", ")))
+                .append("]")
+                .toString();
     }
     public long getWinningAmount() {
         return level.getAmount();

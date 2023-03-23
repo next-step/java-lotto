@@ -19,7 +19,7 @@ public class calculatorTest {
     @Test
     void splitTest(){
         final Calculator calulator =  new Calculator("1,2:3");
-        String[] Text = calculator.splitFuntion();
+        String[] Text = calculator.separatorFuntion();
     }
 
     @DisplayName("빈 문자열 또는 null을 입력할 경우 0을 반환한다.")

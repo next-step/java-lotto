@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Level {
     FIRST(6, 2000000000),
@@ -25,9 +26,9 @@ public enum Level {
     }
 
     public static Level valueOf(long value) {
+
         return Arrays.stream(Level.values())
                 .filter(it -> it.value == value)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("not found"));
+                .findFirst().get();
     }
 }

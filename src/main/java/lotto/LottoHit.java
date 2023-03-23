@@ -21,15 +21,16 @@ public class LottoHit {
         LottoFunction();
     }
 
-    public static void LottoFunction()
+    public static long LottoFunction()
     {
         InputView  inputView  = new InputView();
         ResultView resultView = new ResultView();
         LottoHit lottoHit     = new LottoHit();
 
+
         long purchaseAmount = inputView.PurchaseAmount();
 
-        Lotto lotto = new Lotto(purchaseAmount, lottoHit.getLotto(lottoHit.getPurchaseCount(purchaseAmount)));
+        Lotto lotto = new Lotto(purchaseAmount,  lottoHit.getLotto(lottoHit.getPurchaseCount(purchaseAmount)));
 
         resultView.PurchaseHistory(lottoHit.getPurchaseCount(purchaseAmount), lotto);
 
@@ -41,6 +42,7 @@ public class LottoHit {
         lotto.confirmWinningNumber(winningNumbers, bonusNumber);
 
         resultView.printToWinningStatistics(lotto);
+        return purchaseAmount;
     }
     public List<Integer> convertWinningNumbers(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(","))
@@ -49,12 +51,12 @@ public class LottoHit {
                 .collect(Collectors.toList());
     }
 
-    public long getPurchaseCount(long amount) {
+    public static long getPurchaseCount(long amount) {
         return amount / UNITAMOUNT;
     }
 
     // 구매한 수만큼 로또 생성
-    public List<LottoNumber> getLotto(long purchaseCount) {
+    public static List<LottoNumber> getLotto(long purchaseCount) {
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         LongStream.rangeClosed(1, purchaseCount)
@@ -63,10 +65,10 @@ public class LottoHit {
         return lottoNumbers;
     }
 
-    public LottoNumber createLottoNumber() {
+    public static LottoNumber createLottoNumber() {
         List<Integer> numbers = new ArrayList<>();
         IntStream.rangeClosed(1, 45)
-                 .forEach(numbers::add);
+                .forEach(numbers::add);
 
         Collections.shuffle(numbers);
         List<Integer> lottoNumbers = numbers.subList(0, 6);

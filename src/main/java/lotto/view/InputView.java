@@ -2,18 +2,17 @@ package lotto.view;
 
 import java.util.Scanner;
 
+
 public class InputView {
 
-    public long PurchaseAmount() {
+    public static long PurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("로또를 구입할 금액을 주세요");
+        System.out.println("로또를 구입할 금액을 주세요.");
         return scanner.nextLong();
     }
 
     public String InputWinningNumber() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("당첨번호를 입력해주세요. 숫자 6개([Number,Number,Number,Number,Number,Number]");
         return scanner.nextLine();
     }
