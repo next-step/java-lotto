@@ -21,7 +21,7 @@ public class LottoTest {
     @Test
     void getLottoCount() {
         Lottos lottos = new Lottos();
-        lottos.buyLottos(new BigDecimal("100000"), 0);
+        //lottos.buyLottos(new BigDecimal("100000"), 0);
         assertThat(lottos.getLottoCount()).isSameAs(100);
     }
 

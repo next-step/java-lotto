@@ -2,11 +2,18 @@ package Lotto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.*;
 
 public class Lottos {
 
     private List<Lotto> lottos;
+    private String SPLIT_CHAR = ",";
+
     private int lottoCount = 0;
     private int manuelLottoCount = 0;
     private final BigDecimal LOTTO_AMOUNT = new BigDecimal(1000);
@@ -32,14 +39,22 @@ public class Lottos {
 
     private double rate = 0;
 
-    public List<Lotto> buyLottos(BigDecimal buyAmt, int manualLottoCount) {
-        this.lottoCount = buyAmt.divide(LOTTO_AMOUNT).intValue();
+    public List<Lotto> buyLottos(LottoForm lottoForm) {
+        this.lottoCount = lottoForm.getBuyPrice().divide(LOTTO_AMOUNT).intValue();
         this.lottos = new ArrayList<Lotto>();
-        this.buyAmount = buyAmt;
-        this.manuelLottoCount = manualLottoCount;
-        for (int i = 0; i < manuelLottoCount; i++) {
-            lottos.add(Lotto.createManualLotto());
-        }
+        this.buyAmount = lottoForm.getBuyPrice();
+        this.manuelLottoCount = lottoForm.getManualLottoCount();
+
+        List<Lotto> lottoList = lottoForm.getManualLottosNumber().stream()
+                .map(it -> Arrays.stream(it.split(SPLIT_CHAR))
+                        .map(String::trim)
+                        .map(Integer::parseInt)
+                        .collect(toList())
+                )
+                .map(it -> Lotto.createManualLotto(it))
+                .collect(toList());
+        lottos.addAll(lottoList);
+
         for (int i = 0; i < (lottoCount - manuelLottoCount); i++) {
             lottos.add(Lotto.createAutoLotto());
         }

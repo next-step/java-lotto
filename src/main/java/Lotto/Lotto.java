@@ -30,9 +30,8 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto createManualLotto() {
-        InputView inputView = new InputView();
-        return new Lotto(inputView.inputManualLottoNumber());
+    public static Lotto createManualLotto(List<Integer> manualLottoNumber) {
+        return new Lotto(manualLottoNumber);
     }
 
     public static Lotto setLotto(List<Integer> lottoNumber){
