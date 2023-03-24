@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum LottoRank {
-
     FIRST(6, false, 2000000000), //1등
     SECOND(5, true, 30000000), //2등
     THIRD(5, false, 1500000),    //3등
@@ -36,7 +35,6 @@ public enum LottoRank {
     }
 
     public static Map<LottoRank, Integer> getResult(WinningNumber winNum, ArrayList<LottoTicket> ticket){
-
         Map<LottoRank, Integer> result = new HashMap<>();
 
         for (LottoRank lottorank : LottoRank.values()) {
