@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static lotto.domain.enums.LottoRank.*;
 
-public class resultView {
+public class ResultView {
 
     public void printResult(Map<LottoRank, Integer> result, double totalRate){
 
