@@ -59,7 +59,7 @@ public class LottoView {
         System.out.println(message);
     }
 
-    public void printLottos(List<Lotto> lottos) {
+    void printLottos(List<Lotto> lottos) {
         System.out.printf("%d개를 구매했습니다.%n", lottos.stream().count());
         lottos.stream().forEach(lotto -> {
             this.printLotto(lotto);

@@ -118,7 +118,7 @@ class LottoPromoterTest {
     @ParameterizedTest
     @ValueSource(ints = {22, 10, 0})
     void buyLottosTest(int lottoCount) {
-        List<Lotto> actuals = promoter.buyLottos(lottoCount);
+        List<Lotto> actuals = promoter.getLottos(lottoCount);
         assertThat(actuals.size()).isEqualTo(lottoCount);
     }
     @DisplayName("로또 구매 가능 금액 미달 테스트")

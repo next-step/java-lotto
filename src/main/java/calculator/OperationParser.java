@@ -7,10 +7,12 @@ public class OperationParser {
 
     private static final String DEFAULT_DELIMITER = ",|:";
 
+    private static final Pattern operationPattern = Pattern.compile("//(.)\n(.*)");
+
     public static String parseDelimiter(String text) {
         validate(text);
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = operationPattern.matcher(text);
         if (m.find()) {
             return m.group(1);
         }

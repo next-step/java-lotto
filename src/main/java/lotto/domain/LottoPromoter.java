@@ -2,9 +2,6 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoPromoter {
     
@@ -54,7 +51,7 @@ public class LottoPromoter {
         return new Lotto(winningBalls);
     }
 
-    public List<Lotto> buyLottos(int lottoCount) {
+    public List<Lotto> getLottos(int lottoCount) {
         if(lottoCount < 0) {
             throw new IllegalArgumentException("로또 구입 금액이 부족합니다.");
         }
@@ -64,6 +61,11 @@ public class LottoPromoter {
             lottos.add(this.buyLotto());
         }
         return lottos;
+    }
+
+    public List<Lotto> buyLottos(int money) {
+        int lottoCount = this.getLottoCount(money);
+        return this.getLottos(lottoCount);
     }
 
     public int getLottoCount(int money) {

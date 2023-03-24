@@ -16,12 +16,10 @@ public class LottoGame {
         int money = view.insertMoney();
 
         LottoPromoter promoter = new LottoPromoter();
-        int lottoCount = promoter.getLottoCount(money);
-        List<Lotto> lottos = promoter.buyLottos(lottoCount);
+        List<Lotto> lottos = promoter.buyLottos(money);
         view.printLottos(lottos);
 
-        List<Integer> numbers = view.insertWinningLottoNumbers();
-        Lotto winningLotto = promoter.createLotto(numbers);
+        Lotto winningLotto = promoter.createLotto(view.insertWinningLottoNumbers());
 
         int bonusNumber = view.insertBonusBallNumbers();
         LottoBall bonusBall = new LottoBall(bonusNumber);

@@ -28,7 +28,7 @@ public class ManualLottoGame {
         int autoCount = lottoCount - manualCount;
         view.printTotalLottoCount(manualCount, autoCount);
 
-        lottos.addAll(promoter.buyLottos(autoCount));
+        lottos.addAll(promoter.getLottos(autoCount));
         view.printLottos(lottos);
 
         List<Integer> numbers = view.insertWinningLottoNumbers();
