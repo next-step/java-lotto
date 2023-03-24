@@ -5,12 +5,12 @@ import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumber;
 import lotto.domain.enums.LottoRank;
 import lotto.view.InputView;
-import lotto.view.resultView;
+import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-class LottoMain {
+public class lottoGenerator {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
@@ -25,7 +25,7 @@ class LottoMain {
         Map<LottoRank, Integer> result = LottoRank.getResult(winningNumber, ticket);
         double totalRate = lottoGame.calculateRate(result);
 
-        resultView resultView = new resultView();
+        ResultView resultView = new ResultView();
         resultView.printResult(result, totalRate);
     }
 }

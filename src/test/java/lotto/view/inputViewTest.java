@@ -23,7 +23,7 @@ public class inputViewTest {
     }
 
     @ParameterizedTest
-    @DisplayName("로또금액 입력")
+    @DisplayName("구입금액을 입력해 주세요.")
     @ValueSource(strings = {"16000"})
     void lottoInputTest(String input){
         InputStream in = getInput(input);
@@ -33,7 +33,7 @@ public class inputViewTest {
     }
 
     @ParameterizedTest
-    @DisplayName("당첨 보너스 번호")
+    @DisplayName("보너스 볼을 입력해 주세요.")
     @ValueSource(strings = {"1"})
     public void inputBonusNum(String input){
         InputStream in = getInput(input);
