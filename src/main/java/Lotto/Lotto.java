@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
-    private String lottoType = "";
     private final List<Integer> lottoNumbers;
     private LottoRank rank;
     private int hitCount = 0;
@@ -31,8 +30,13 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto createManualLotto(List<Integer> manualLottoNumbers) {
-        return new Lotto(manualLottoNumbers);
+    public static Lotto createManualLotto(List<Integer> manualLottoNumber) {
+        return new Lotto(manualLottoNumber);
+    }
+
+    public static Lotto setLotto(List<Integer> lottoNumber){
+        Lotto lotto = new Lotto(lottoNumber);
+        return lotto;
     }
 
     public static List<Integer> makeLottoNumbers() {

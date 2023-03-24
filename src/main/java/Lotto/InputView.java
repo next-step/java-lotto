@@ -16,6 +16,19 @@ public class InputView {
         return sc.nextBigDecimal();
     }
 
+    public int inputManualLottoCount() {
+        sc = new Scanner(System.in);
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return sc.nextInt();
+    }
+
+    public String inputManualLottoNumber() {
+        sc = new Scanner(System.in);
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return sc.nextLine();
+//        return ;
+    }
+
     public List<Integer> inputHitNumber() {
         sc = new Scanner(System.in);
         System.out.println("지난주 당첨번호를 입력하세요.");

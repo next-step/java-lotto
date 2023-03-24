@@ -20,8 +20,10 @@ public class LottoTest {
     @DisplayName(value = "구매 금액을 입력하면 해당 금액에 해당하는 장수의 로또 숫자를 반환한다.")
     @Test
     void getLottoCount() {
+        LottoForm lottoForm = new LottoForm(new BigDecimal("100000"), 0);
+
         Lottos lottos = new Lottos();
-        lottos.buyLottos(new BigDecimal("100000"));
+        lottos.buyLottos(lottoForm);
         assertThat(lottos.getLottoCount()).isSameAs(100);
     }
 
@@ -30,8 +32,8 @@ public class LottoTest {
     void getRankInformation() {
         Integer[] arr = {1, 2, 3, 4, 5, 6};
         Integer[] arr2 = {1, 2, 3, 7, 8, 9};
-        Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
-        Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
+        Lotto lotto = Lotto.setLotto(Arrays.asList(arr));
+        Lotto winLotto = Lotto.setLotto(Arrays.asList(arr2));
         lotto.executeLotto(winLotto, 7);
         lotto.setRank();
         assertThat(lotto.getRank().getRewardAmount()).isEqualTo(new BigDecimal("5000"));
@@ -42,8 +44,8 @@ public class LottoTest {
     void setHitCount() {
         Integer[] arr = {1, 2, 3, 4, 5, 6};
         Integer[] arr2 = {1, 2, 3, 7, 8, 9};
-        Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
-        Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
+        Lotto lotto = Lotto.setLotto(Arrays.asList(arr));
+        Lotto winLotto = Lotto.setLotto(Arrays.asList(arr2));
         lotto.executeLotto(winLotto, 7);
         assertThat(lotto.getHitCount()).isEqualTo(3);
     }
@@ -53,8 +55,8 @@ public class LottoTest {
     void setWinInformation() {
         Integer[] arr = {1, 2, 3, 4, 5, 9};
         Integer[] arr2 = {1, 2, 3, 4, 5, 6};
-        Lotto lotto = Lotto.createManualLotto(Arrays.asList(arr));
-        Lotto winLotto = Lotto.createManualLotto(Arrays.asList(arr2));
+        Lotto lotto = Lotto.setLotto(Arrays.asList(arr));
+        Lotto winLotto = Lotto.setLotto(Arrays.asList(arr2));
         lotto.executeLotto(winLotto, 9);
         assertThat(lotto.getIsBonusHit()).isEqualTo(true);
     }

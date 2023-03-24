@@ -8,13 +8,21 @@ public class LottoMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         Lottos lottos = new Lottos();
-        lottos.buyLottos(inputView.inputBuyingPrice());
-        ResultBuyView resultBuyView = new ResultBuyView();
-        resultBuyView.printLottos(lottos);
+        lottos.buyLottos(writeLottoForm());
+        ResultView resultView = new ResultView(lottos);
+        resultView.printLottos(lottos);
         lottos.setWinLotto(inputView.inputHitNumber());
         lottos.setBonusNumber(inputView.inputBonusNumber());
         lottos.executeLotto();
-        ResultView resultView = new ResultView(lottos);
         resultView.printWinResult();
+    }
+
+    private static LottoForm writeLottoForm(){
+        InputView inputView = new InputView();
+        LottoForm lottoForm = new LottoForm(inputView.inputBuyingPrice(), inputView.inputManualLottoCount());
+        for (int i = 0; i < lottoForm.getManualLottoCount(); i++) {
+            lottoForm.addManualLottoNumber(inputView.inputManualLottoNumber());
+        }
+        return lottoForm;
     }
 }
