@@ -1,7 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.TotalEqualNumbers;
 import lotto.service.BuyLotto;
-import lotto.domain.EqualNumbers;
 import lotto.domain.Lotto;
 import lotto.domain.WinOfLotto;
 import lotto.view.LottoInput;
@@ -13,7 +13,7 @@ public class LottoPlay {
     public static void main(String[] args) {
         LottoInput lottoInput = new LottoInput();
         LottoOutput lottoOutput = new LottoOutput();
-        BuyLotto buyLotto = lottoInput.getBuyAmt();
+        BuyLotto buyLotto = lottoInput.getbuyAmount();
 
         for (int i = 0; i < buyLotto.getCount(); i++) {
             Set<Integer> generateNumbers = generateLottoNumbers();
@@ -24,12 +24,10 @@ public class LottoPlay {
 
         WinOfLotto winOfLotto = lottoInput.getWinOfLottoNumbers();
 
-        EqualNumbers equalNumbers = new EqualNumbers(buyLotto, winOfLotto);
+        TotalEqualNumbers totalEqualNumbers = new TotalEqualNumbers(buyLotto, winOfLotto);
 
-        System.out.println(equalNumbers.getEqual3());
-
-        lottoOutput.displayWinOfResult(equalNumbers);
-        lottoOutput.displayPriceEarningsRatio(equalNumbers, buyLotto);
+        lottoOutput.displayWinOfResult(totalEqualNumbers);
+        lottoOutput.displayPriceEarningsRatio(totalEqualNumbers, buyLotto);
     }
 
     private static Set<Integer> generateLottoNumbers() {

@@ -1,16 +1,16 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Lottos {
-    private List<Lotto> lottos = new ArrayList<>();
+    private Set<Lotto> lottos = new HashSet<>();
 
     public void putLottos(Lotto lotto) {
         lottos.add(lotto);
     }
 
-    public List<Lotto> getLottos() {
+    public Set<Lotto> getLottos() {
         return this.lottos;
     }
 }

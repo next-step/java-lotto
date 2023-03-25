@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.Money;
 import lotto.service.BuyLotto;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
@@ -19,7 +20,7 @@ class LottoInfoTest {
         Set<Integer> lottoNumber1 = new HashSet<>();
         Set<Integer> lottoNumber2 = new HashSet<>();
 
-        BuyLotto buyLottos = new BuyLotto(2000);
+        BuyLotto buyLottos = new BuyLotto(new Money(2000));
 
         lottoNumber1.add(3);
         lottoNumber1.add(16);

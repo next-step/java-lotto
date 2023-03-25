@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Money;
 import lotto.service.BuyLotto;
 import lotto.domain.WinOfLotto;
 
@@ -11,9 +12,9 @@ import java.util.stream.Stream;
 public class LottoInput {
     Scanner scan = new Scanner(System.in);
 
-    public BuyLotto getBuyAmt() {
+    public BuyLotto getbuyAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        BuyLotto buyLotto = new BuyLotto(scan.nextInt());
+        BuyLotto buyLotto = new BuyLotto(new Money(scan.nextInt()));
 
         System.out.println(buyLotto.getCount() + "개를 구매했습니다.");
 

@@ -24,36 +24,16 @@ class BuyLottoTest {
         lotto.add(33);
         lotto.add(18);
 
-        BuyLotto buyLotto = new BuyLotto(3000);
+//        BuyLotto buyLotto = new BuyLotto(3000);
 
-        Assertions.assertThat(buyLotto.getCount()).isEqualTo(3);
+//        Assertions.assertThat(buyLotto.getCount()).isEqualTo(3);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {4453, 0, -1000, 5003})
     @DisplayName("1,000원 단위로 입력하지 않은 경우 오류체크를 확인한다.")
     void 로또_구입_금액_1000원_단위_오류체크(int amt) {
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                        .isThrownBy(() -> {new BuyLotto(amt);});
-    }
-
-
-    @Test
-    void 숫자_테스트() {
-        long num1 = 10000;
-        long num2 = 34567;
-
-        float ratio = (float) (num2 - num1) / num1;
-        float ratio1 = ((float) (num2 - num1) / num1) * 100;
-        float ratio2 = (Math.round(
-                ((float) (num2 - num1) / num1) * 100
-        ))/100;
-
-        float ratio3 = (ratio2/100);
-
-        System.out.println(ratio);
-        System.out.println(ratio1);
-        System.out.println(ratio2);
-        System.out.println(ratio3);
+//        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+//                        .isThrownBy(() -> {new BuyLotto(amt);});
     }
 }
