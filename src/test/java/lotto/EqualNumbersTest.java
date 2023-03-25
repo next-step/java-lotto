@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.service.BuyLotto;
+import lotto.domain.BuyLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import lotto.service.BuyLotto;
-
 import java.util.Iterator;
 
 public class TotalEqualNumbers {
-
     private int equalsNumberCount3;
     private int equalsNumberCount4;
     private int equalsNumberCount5;

@@ -2,14 +2,12 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Money;
-import lotto.service.BuyLotto;
+import lotto.domain.BuyLotto;
 import lotto.view.LottoOutput;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoOutputTest {
 

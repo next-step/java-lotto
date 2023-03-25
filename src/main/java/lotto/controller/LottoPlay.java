@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.TotalEqualNumbers;
-import lotto.service.BuyLotto;
+import lotto.domain.BuyLotto;
 import lotto.domain.Lotto;
 import lotto.domain.WinOfLotto;
 import lotto.view.LottoInput;

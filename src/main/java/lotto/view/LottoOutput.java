@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.TotalEqualNumbers;
-import lotto.service.BuyLotto;
+import lotto.domain.BuyLotto;
 
 public class LottoOutput {
     public void displayBuyLottoNumbers(BuyLotto buyLotto) {

@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Money;
-import lotto.service.BuyLotto;
+import lotto.domain.BuyLotto;
 import lotto.domain.WinOfLotto;
 
 import java.util.Scanner;

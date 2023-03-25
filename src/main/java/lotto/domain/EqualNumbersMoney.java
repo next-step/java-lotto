@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public enum EqualNumbersMoney {
-
     EQUALS_3(5000),
     EQUALS_4(50000),
     EQUALS_5(1500000),
