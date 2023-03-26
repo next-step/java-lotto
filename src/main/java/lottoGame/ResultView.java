@@ -3,8 +3,11 @@ package lottoGame;
 import java.util.List;
 
 public class ResultView {
-    public void printTicket(List<Lotto> lottoTickets) {
-        for (Lotto lotto : lottoTickets) {
+    public void printTicket(LottoGame lottoGame) {
+
+
+        System.out.println("수동으로 " + lottoGame.getManualLottoCount() + "장, 자동으로 " + lottoGame.getAutoLottoCount() + "개를 구매했습니다.");
+        for (Lotto lotto : lottoGame.getLottoTicket()) {
             System.out.println(lotto);
         }
     }
