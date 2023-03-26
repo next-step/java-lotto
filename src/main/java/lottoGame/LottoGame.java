@@ -1,20 +1,18 @@
 package lottoGame;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lottoGame.Lotto.TYPE;
 
 public class LottoGame {
 
     private final int LOTTO_ONE_GAME_AMT = 1000;
-    private final int FIRST_GRADE = 1;
-    private final int SECOND_GRADE = 2;
-    private final int THIRD_GRADE = 3;
-    private final int FOURTH_GRADE = 4;
-    private final int FIFTH_GRADE = 5;
     private List<Lotto> lottoTickets;
+
+    private int manualLottoCount;
+
     private Set<Integer> winningNumbers;
     private int firstMatchingLottoCount = 0;
     private int secondMatchingLottoCount = 0;
@@ -24,7 +22,6 @@ public class LottoGame {
 
     private int bonusNumber;
 
-
     private int buyCount;
 
     public LottoGame() {
@@ -33,16 +30,33 @@ public class LottoGame {
         this.bonusNumber = 0;
     }
 
-    public int buyLotto(int money) {
-        buyCount = validInputAmt(money);
+    public int buyLotto(int money, List<Lotto> manualLotto) {
+        this.manualLottoCount = 0;
+        if (manualLotto != null) {
+            this.manualLottoCount = manualLotto.size();
+            lottoTickets.addAll(manualLotto);
+        }
+        int recalculateMoney = substractManualLottoAmt(money, manualLottoCount);
+        if (recalculateMoney > 0) {
+            buyCount = validInputAmt(recalculateMoney);
 
-        // 구매 매수만큼 로또번호를 생성한다
-        for (int i = 0; i < buyCount; i++) {
-            Lotto lotto = new Lotto();
-            lottoTickets.add(lotto);
+            // 구매 매수만큼 로또번호를 생성한다
+            for (int i = 0; i < buyCount; i++) {
+                Lotto lotto = new Lotto(TYPE.AUTO, null);
+                lottoTickets.add(lotto);
+            }
         }
 
         return buyCount;
+    }
+
+
+    private int substractManualLottoAmt(int money, int inputManualLottoCount) {
+        money = money - inputManualLottoCount * LOTTO_ONE_GAME_AMT;
+        if (money < 0) {
+            money = 0;
+        }
+        return money;
     }
 
     private int validInputAmt(int buyAmt) {
@@ -73,18 +87,23 @@ public class LottoGame {
         winningNumbers.clear();
         winningNumbers.addAll(inputWinningNumber);
 
+        for (Integer inputNumber : inputWinningNumber) {
+            checkLottoNumberRange(inputNumber);
+        }
+
         if (winningNumbers.size() != Lotto.LOTTO_NUMBERS) {
             throw new RuntimeException("입력된 숫자는 중복 없는 6자리 숫자여야 합니다.");
         }
     }
 
-    private void validInputLottoNumber(int number) {
-        if (number < Lotto.LOTTO_MIN_NUMBER_RANGE || number > Lotto.LOTTO_MAX_NUMBER_RANGE) {
-            throw new IllegalArgumentException("로또 번호는 1~45 사이의 숫자여야 합니다.");
-        }
-    }
-
     public void inputBonusNumber(int inputNumber) {
+
+        if (winningNumbers.contains(inputNumber) == true) {
+            throw new RuntimeException("보너스 번호는 당첨 번호에 없는 숫자여야 합니다.");
+        }
+
+        checkLottoNumberRange(inputNumber);
+
         bonusNumber = inputNumber;
     }
 
@@ -146,7 +165,7 @@ public class LottoGame {
                 + Rank.getPrize(Rank.THIRD, thirdMatchingLottoCount)
                 + Rank.getPrize(Rank.SECOND, secondMatchingLottoCount)
                 + Rank.getPrize(Rank.FIRST, firstMatchingLottoCount))
-            / (buyCount * 1000);
+            / (lottoTickets.size() * 1000);
     }
 
     public String getResult() {
@@ -156,7 +175,7 @@ public class LottoGame {
                 + Rank.getPrize(Rank.THIRD, thirdMatchingLottoCount)
                 + Rank.getPrize(Rank.SECOND, secondMatchingLottoCount)
                 + Rank.getPrize(Rank.FIRST, firstMatchingLottoCount);
-        if (result > buyCount * 1000) {
+        if (result > lottoTickets.size() * 1000) {
             return "이익";
         }
 
@@ -173,5 +192,20 @@ public class LottoGame {
 
     public List<Lotto> getLottoTicket() {
         return lottoTickets;
+    }
+
+    public int getManualLottoCount() {
+        return this.manualLottoCount;
+    }
+
+    public int getAutoLottoCount() {
+        return lottoTickets.size() - this.manualLottoCount;
+    }
+
+    private void checkLottoNumberRange(int number) {
+        if (number < Lotto.LOTTO_MIN_NUMBER_RANGE
+            || number > Lotto.LOTTO_MAX_NUMBER_RANGE) {
+            throw new IllegalArgumentException("로또 번호는 1~45 사이의 숫자여야 합니다.");
+        }
     }
 }
