@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.enums.LottoRank;
+import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -15,8 +16,8 @@ public class LottoGame {
     private static final int DEFAULT_DIGIT = 6;
     private static final int DEFAULT_PURCHASE = 1000;
 
-    final int gameCount;
-    final int purchasePrice;
+    private int gameCount;
+    private int purchasePrice;
 
     public LottoGame(int money) {
         gameCount = (int)Math.floor(money/DEFAULT_PURCHASE);    //게임회차
@@ -37,7 +38,6 @@ public class LottoGame {
         for (int i = 0; i < gameCount; i++) {
             tickets.add(new LottoTicket(getLottoNumber()));
         }
-
         return tickets;
     }
 
@@ -50,7 +50,10 @@ public class LottoGame {
                 .boxed()
                 .collect(toList());
 
-        System.out.println(lottoNumbers.toString());
+        /*ResultView에게 출력역할 위임*/
+        ResultView resultView2 = new ResultView();
+        resultView2.printTicket(lottoNumbers);
+
         return lottoNumbers;
     }
 

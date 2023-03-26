@@ -1,15 +1,18 @@
 package lotto.view;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.enums.LottoRank;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static lotto.domain.enums.LottoRank.*;
 
 public class ResultView {
+
+    public void printTicket(ArrayList<Integer> lottoNumbers2)
+    {
+       System.out.println(lottoNumbers2.toString());
+    }
 
     public void printResult(Map<LottoRank, Integer> result, double totalRate){
 
