@@ -4,7 +4,11 @@ import lotto.domain.enums.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.domain.enums.LottoRank.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import static lotto.domain.enums.LottoRank.FIRST;
+import static lotto.domain.enums.LottoRank.SECOND;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankingEnumTest {
@@ -18,11 +22,19 @@ public class RankingEnumTest {
     }
 
     @Test
-    @DisplayName(value = "전체출력")
-    void print() {
-        for (LottoRank rankingtest : LottoRank.values()) {
-            System.out.println(rankingtest.toString());
-        }
+    @DisplayName("수익률 테스트")
+    public void calculateRate(){
+
+        Map<LottoRank, Integer> result = new HashMap<>();
+        result.put(LottoRank.FIRST, 1);
+        result.put(LottoRank.SECOND, 0);
+        result.put(LottoRank.THIRD, 0);
+        result.put(LottoRank.FOURTH, 0);
+        result.put(LottoRank.FIFTH, 0);
+        result.put(LottoRank.MISS, 0);
+
+        // 실제 구입금액 10,000원 대비 일등 당첨액 2000,000,000
+        assertThat(LottoRank.calculateRate(result, 10000)).isEqualTo(2000000000/10000);
     }
 
 }

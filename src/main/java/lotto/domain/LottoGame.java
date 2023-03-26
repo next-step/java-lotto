@@ -1,64 +1,51 @@
 package lotto.domain;
 
-import lotto.domain.enums.LottoRank;
+import lotto.view.InputView;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.stream.Collectors.toList;
 
 public class LottoGame {
 
+    private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final int DEFAULT_DIGIT = 6;
-    private static final int DEFAULT_PURCHASE = 1000;
 
-    final int gameCount;
-    final int purchasePrice;
+    final int autoCount;
+    private final List<LottoTicket> lottoNumbers;
 
-    public LottoGame(int money) {
-        gameCount = (int)Math.floor(money/DEFAULT_PURCHASE);    //게임회차
-        purchasePrice = gameCount * DEFAULT_PURCHASE; //실제 구입금액
+    public LottoGame(InputView inputView) {
+        this.autoCount = inputView.getAutoCount();
+        this.lottoNumbers = inputView.getManualLotto();
+        this.lottoNumbers.addAll(autoLotto());
     }
 
-    public int getGameCount(){
-        return gameCount;
+    public List<LottoTicket> getLottoNumbers(){
+        return  lottoNumbers;
     }
 
-    public int getPurchasePrice(){
-        return purchasePrice;
-    }
+    public List<LottoTicket> autoLotto(){
 
-    public ArrayList<LottoTicket> buyLotto(){
-
-        ArrayList<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < gameCount; i++) {
-          tickets.add(new LottoTicket(getLottoNumber()));
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < autoCount; i++) {
+            tickets.add(new LottoTicket(getRandomLottoNum()));
         }
 
         return tickets;
     }
 
-    public ArrayList<Integer> getLottoNumber(){
-        ArrayList<Integer> lottoNumbers = (ArrayList<Integer>) new Random()
-                .ints(1, (MAXIMUM_NUMBER + 1))
+    public List<Integer> getRandomLottoNum(){
+
+        return new Random()
+                .ints(MINIMUM_NUMBER, (MAXIMUM_NUMBER + 1))
                 .distinct()
                 .limit(DEFAULT_DIGIT)
                 .sorted()
                 .boxed()
                 .collect(toList());
-
-        System.out.println(lottoNumbers.toString());
-        return lottoNumbers;
     }
 
-    public double calculateRate(Map<LottoRank, Integer> result){
-        AtomicInteger sum = new AtomicInteger();
-        result.forEach((key, value)->{
-            sum.set(sum.get() + key.getReward() * value);
-        });
-        return (double)(sum.get()) / purchasePrice;
-    }
 }

@@ -3,10 +3,11 @@ package lotto.domain.enums;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumber;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public enum LottoRank {
 
@@ -35,7 +36,7 @@ public enum LottoRank {
                 .orElse(MISS);
     }
 
-    public static Map<LottoRank, Integer> getResult(WinningNumber winNum, ArrayList<LottoTicket> ticket){
+    public static Map<LottoRank, Integer> getResult(WinningNumber winNum, List<LottoTicket> ticket){
 
         Map<LottoRank, Integer> result = new HashMap<>();
 
@@ -54,6 +55,14 @@ public enum LottoRank {
         }
 
         return result;
+    }
+
+    public static double calculateRate(Map<LottoRank, Integer> result, int purchasePrice){
+        AtomicInteger sum = new AtomicInteger();
+        result.forEach((key, value)->{
+            sum.set(sum.get() + key.getReward() * value);
+        });
+        return (double)(sum.get()) / purchasePrice;
     }
 
     public int getReward() {
@@ -77,7 +86,3 @@ public enum LottoRank {
     }
 
 }
-
-
-
-
