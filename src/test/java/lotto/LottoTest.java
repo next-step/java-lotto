@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.model.Lotto2;
+import lotto.model.LottoNumber2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,6 +19,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoTest {
 
     private static final int LOTTO_AMOUNT = 1000;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
 
     @DisplayName(value = "구매금액에 해당하는 로또 발급")
     @ParameterizedTest
@@ -40,6 +44,34 @@ public class LottoTest {
         Collections.sort(lottoNumbers);
 
         assertThat(lottoNumbers.size()).isSameAs(6);
+    }
+
+    @DisplayName(value = "로또 번호 생성")
+    @Test
+    void createLottoNumbers2() {
+        List<LottoNumber2> numbers = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+                .boxed()
+                .map(it -> new LottoNumber2(it))
+                .collect(Collectors.toList());
+
+        Collections.shuffle(numbers);
+        List<LottoNumber2> lotto = numbers.subList(0, 6);
+        Collections.sort(lotto, (a, b) -> a.getValue() - b.getValue());
+
+        assertThat(lotto.size()).isSameAs(6);
+    }
+
+    @DisplayName(value = "수동 로또 번호 생성")
+    @Test
+    void createManualLottoNumber2() {
+        String manualLotto = "1, 3, 5, 6, 7, 8";
+
+        List<LottoNumber2> numbers = Arrays.stream(manualLotto.split(","))
+                .map(String::trim)
+                .map(it -> new LottoNumber2(it))
+                .collect(Collectors.toList());
+
+        assertThat(numbers.size()).isSameAs(6);
     }
 
     @DisplayName(value = "당첨번호 확인")
@@ -66,6 +98,10 @@ public class LottoTest {
         int[] values = Arrays.stream(input.split(", "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
+
+        for (int value : values) {
+            System.out.println(value);
+        }
 
         List<Integer> results = Arrays.stream(input.split(", "))
                 .mapToInt(Integer::parseInt)

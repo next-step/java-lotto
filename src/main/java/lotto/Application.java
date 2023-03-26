@@ -5,9 +5,8 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Scanner;
 
-public class Main {
+public class Application {
 
     public static void main(String[] args) {
 

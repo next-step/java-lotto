@@ -1,0 +1,109 @@
+public class LottoNumber {
+    private final int value;
+
+    public LottoNumber(int value) {
+        if (value < 1 || value > 45) throw new exception;
+        this.value = value;
+    }
+
+    // equals & hashCode : 다른 객체의 값 비교 -> isEqualTo 가능
+
+}
+
+
+public class LottoGame {
+    // public static int match(List<Integer> userLotto, List<Integer> winningLotto, int bonusNumber) {
+    public int match(List<Integer> userLotto, List<Integer> winningLotto, int bonusNumber) {
+        // 로또 번호는 1부터 45
+        // 로또는 6개의 중복되지 않는 번호
+        // 당첨번호는 6개의 중복되지 않는 번호
+        // 보너스 번호는 당첨 번호와 동일해서는 안된다.
+
+        int matchCount = match(userLotto, winningLotto);
+        int matchCount = (int) userLotto.stream().filter(it -> winningLotto.contains(it)).count();
+        boolean matchBonus = userLotto.contains(bonusNumber);
+        if (matchCount == 6) {
+            return 1;
+        }
+        //boolean matchBonus = userLotto.contains(bonusNumber);
+        if (matchCount == 5 && matchBonus) {
+            return 2;
+        }
+        if (matchCount > 2) {
+            return 6 - matchCount + 2;
+        }
+        return 0;
+    }
+
+    public int match2(List<LottoNumber> userLotto, List<LottoNumber> winningLotto, LottoNumber bonusNumber) {
+    }
+
+    private static int match() {}
+
+    private static int rank(int matchCount, boolean matchBonus) {}
+
+    // createLotto(1, 2, 3, 4, 5, 6);
+    private List<Lotto> createLotto(final int... numbers) {
+        return Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toList());
+    }
+}
+
+// 일급컬렉션
+public class Lotto {
+    private Set<LottoNumber> numbers;
+
+    public Lotto(List<LottoNumber) numbers) {
+        if (numbers.stream().distinct().collect.size() > 6) throw new
+
+        this.numbers = new HashSet<>(numbers);
+    }
+
+    // 생성자 체인
+    public Lotto(final Set<LottoNumber> numbers) {
+    }
+
+    public boolean contains(final LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public int match(final Lotto lotto) {
+        return (int) numbers.stream()
+            .filter(it -> lotto.contains(it))
+            .count();
+    }
+}
+
+public class WinningLotto {
+    private Lotto lotto;
+    private LottoNumber bonusNumber;
+    public WinningLotto( Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.contains(bonusNumber) throw new;
+    }
+
+    public int match(final Lotto lotto) {
+
+    }
+}
+
+
+@Test
+void first() {
+    // public static int
+    final var actual = LottoGame.match(List.of(1, 3, 4, 5,), List.of(1, 3, 4, 5 ), 6);
+
+    // public static
+    final var actual = new LottoGame().match(List.of(1, 3, 4, 5,), List.of(1, 3, 4, 5 ), 6);
+}
+
+
+// private method Test
+public class Rank() {
+
+    public static int of(int count, int bonusNUmber) {
+
+    }
+}
+
+abstract class, interface 에 대한 구현일때만 상속 사용
+
+
