@@ -34,15 +34,15 @@ public class WinningStatistics {
         return lotteryStatistics.toString();
     }
 
-    public String getTotalRateOfReturnForPrint() {
-        Integer totalSum = lotteryStatistics.keySet().stream()
+    public Double getTotalRateOfReturn() {
+        Long totalSum = lotteryStatistics.keySet().stream()
                 .map(key -> lotteryStatistics.get(key) * key.getPrizeMoney())
-                .reduce(0, Integer::sum);
+                .reduce(0L, Long::sum);
 
         Integer totalCount = lotteryStatistics.keySet().stream().map(lotteryStatistics::get).reduce(0, Integer::sum);
 
-        double returnRete = (double) totalSum / (LOTTO_PRICE.multiply(totalCount).toInteger());
-        return Double.toString(Math.round(returnRete * 1000) / 1000.0);
+        double returnRete = (double) totalSum / (LOTTO_PRICE.multiply(totalCount).toLong());
+        return Math.round(returnRete * 1000) / 1000.0;
     }
 
     public int statisticsCount(WinningGrade grade) {

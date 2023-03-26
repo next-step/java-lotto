@@ -4,34 +4,33 @@ import java.util.*;
 
 public class LottoGame {
     public static final Money LOTTO_PRICE = new Money(1000);
-
-    private final List<Lotto> lottos;
-
-    public LottoGame(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
+    private final long allLottoQuantity;
+    private int generatedQuantity = 0;
 
     public LottoGame(Money lottoPay) {
-        int count = lottoPay.division(LOTTO_PRICE).toInteger();
-        this.lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            this.lottos.add(new Lotto(RandomNumberFactory.get()));
+        this.allLottoQuantity = lottoPay.division(LOTTO_PRICE).toLong();
+    }
+
+    public List<Lotto> generateLotto(LottoGenerator lottoGenerator) {
+        List<Lotto> generateLottos = lottoGenerator.generate();
+        if (getAvailableQuantity() - generateLottos.size() < 0) {
+            throw new IllegalArgumentException("사용한 금액보다 많은 로또를 발급할 수 없습니다.");
         }
-    }
-
-    public List<Lotto> getAllLottos() {
-        return this.lottos;
-    }
-
-    public WinningStatistics getStatistics(WinningNumbers winningNumbers) {
-        return new WinningStatistics(winningNumbers, lottos);
+        this.generatedQuantity += generateLottos.size();
+        return generateLottos;
     }
 
     public Money getBuyPrice() {
-        return LOTTO_PRICE.multiply(this.lottos.size());
+        return LOTTO_PRICE.multiply(this.allLottoQuantity);
     }
 
-    public int getBuyCount() {
-        return lottos.size();
+    public long getAvailableQuantity() {
+        return this.allLottoQuantity - generatedQuantity;
+    }
+
+    public void validAvailableGenerate(int quantity) {
+        if (this.allLottoQuantity - quantity < 0) {
+            throw new IllegalArgumentException("사용한 금액보다 많은 로또를 발급할 수 없습니다.");
+        }
     }
 }

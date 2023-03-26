@@ -28,6 +28,6 @@ public class MoneyTest {
     @Test
     @DisplayName("Money Integer로 변환")
     void toIntegerTest() {
-        Assertions.assertThat(new Money(100).toInteger()).isEqualTo(100);
+        Assertions.assertThat(new Money(100).toLong()).isEqualTo(100);
     }
 }

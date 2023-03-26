@@ -29,10 +29,27 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.stream().map(lottoNumber -> Integer.parseInt(lottoNumber.toString())).sorted().collect(Collectors.toList()).toString();
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.stream().map(LottoNumber::getNumber).sorted().collect(Collectors.toList());
     }
 
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }

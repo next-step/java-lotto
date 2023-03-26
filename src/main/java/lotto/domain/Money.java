@@ -16,16 +16,19 @@ public class Money {
         this.wonValue = wonValue;
     }
 
-    public Money multiply(int multiplyNumber) {
+    public Money multiply(long multiplyNumber) {
         return new Money(wonValue.multiply(BigDecimal.valueOf(multiplyNumber)));
     }
 
     public Money division(Money divisionNumber) {
         return new Money(this.wonValue.divide(divisionNumber.wonValue));
     }
+    public Money minus(Money money) {
+        return new Money(this.wonValue.subtract(money.wonValue));
+    }
 
-    public Integer toInteger() {
-        return wonValue.intValue();
+    public Long toLong() {
+        return wonValue.longValue();
     }
 
     @Override
