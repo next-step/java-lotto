@@ -1,5 +1,6 @@
 package lotto.model;
 
+
 import java.util.Objects;
 
 public class LottoNumber {
