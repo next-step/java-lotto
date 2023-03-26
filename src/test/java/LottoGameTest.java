@@ -90,6 +90,13 @@ public class LottoGameTest {
             }
         }
     }
+    @DisplayName("수동로또 번호 6개를 반환한다.")
+    @Test
+    void getManualLottoNumber() {
+        Lotto lotto = new Lotto(TYPE.MANUAL, "1,2,3,4,5,6");
+
+        assertThat(lotto.getLottoNumber().toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 
     @DisplayName("입력값 테스트.")
     @Test
