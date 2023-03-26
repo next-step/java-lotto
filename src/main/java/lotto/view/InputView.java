@@ -40,6 +40,7 @@ public class InputView {
     }
 
     public int inputBonusNumber() {
+
         return inputUtil.inputToInt("보너스 볼을 입력해 주세요.");
     }
 }
