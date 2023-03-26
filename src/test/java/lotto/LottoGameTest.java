@@ -22,18 +22,18 @@ public class LottoGameTest {
     @DisplayName("로또 당첨번호 등수별 통계를 구한다.")
     @Test
     void getStatistics() {
-        List<Lotto> lottos = List.of(
+        LottoGame lottoGame = new LottoGame(new Money(6000));
+        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 2, 3, 4, 5, 7),
                 new Lotto(1, 2, 3, 4, 5, 8),
                 new Lotto(1, 2, 3, 4, 8, 9),
                 new Lotto(1, 2, 3, 7, 8, 9),
-                new Lotto(1, 2, 8, 9, 10, 11)
-        );
+                new Lotto(1, 2, 8, 9, 10, 11)));
 
-        LottoGame lottoGame = new LottoGame(lottos);
         WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
-        WinningStatistics statistics = lottoGame.getStatistics(winningNumbers);
+
+        WinningStatistics statistics = new WinningStatistics(winningNumbers, lottos);
 
         Assertions.assertThat(statistics.getWinningNumbers(FIRST_PRIZE)).isEqualTo(1);
         Assertions.assertThat(statistics.getWinningNumbers(SECOND_PRIZE)).isEqualTo(1);
@@ -46,7 +46,8 @@ public class LottoGameTest {
     @DisplayName("총 수익률을 구한다.")
     @Test
     void getTotalRateOfReturn() {
-        List<Lotto> lottos = List.of(
+        LottoGame lottoGame = new LottoGame(new Money(10000));
+        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(
                 new Lotto(1, 2, 3, 7, 8, 9),
                 new Lotto(1, 2, 8, 9, 10, 11),
                 new Lotto(1, 2, 8, 9, 10, 11),
@@ -57,25 +58,33 @@ public class LottoGameTest {
                 new Lotto(1, 2, 8, 9, 10, 11),
                 new Lotto(1, 2, 8, 9, 10, 11),
                 new Lotto(1, 2, 8, 9, 10, 11)
-        );
+        ));
         WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
 
-        LottoGame lottoGame = new LottoGame(lottos);
-        Assertions.assertThat(lottoGame.getStatistics(winningNumbers).getTotalRateOfReturn()).isEqualTo(0.5);
+        WinningStatistics winningStatistics = new WinningStatistics(winningNumbers, lottos);
+        Assertions.assertThat(winningStatistics.getTotalRateOfReturn()).isEqualTo(0.5);
 
     }
 
     @DisplayName("수동으로 발급할 수 있다.")
     @Test
     void issueManualQuantity() {
-        LottoGame lottoGame = new LottoGame(new Money(10000), List.of(Set.of(1, 2, 3, 7, 8, 9)));
-        Assertions.assertThat(lottoGame.getAllManualLottos()).hasSize(1);
-        Assertions.assertThat(lottoGame.getAllManualLottos()).containsExactly(new Lotto(1, 2, 3, 7, 8, 9));
+        LottoGame lottoGame = new LottoGame(new Money(10000));
+        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(List.of(Set.of(1, 2, 3, 7, 8, 9))));
+
+        Assertions.assertThat(lottos).hasSize(1);
+        Assertions.assertThat(lottos).containsExactly(new Lotto(1, 2, 3, 7, 8, 9));
     }
 
     @DisplayName("수동 발급 수는 전체 발급 수보다 적어야 한다.")
     @Test
     void checkManualQuantity() {
-        Assertions.assertThatThrownBy(() -> new LottoGame(new Money(1000), List.of(Set.of(1, 2, 3, 7, 8, 9), Set.of(1, 2, 3, 7, 8, 9)))).isInstanceOf(IllegalArgumentException.class);
+        LottoGame lottoGame = new LottoGame(new Money(1000));
+        Assertions.assertThatThrownBy(() -> lottoGame.generateLotto(
+                new ManualLottoGenerator(List.of(
+                        Set.of(1, 2, 3, 7, 8, 9),
+                        Set.of(1, 2, 3, 7, 8, 9))))
+        ).isInstanceOf(IllegalArgumentException.class);
+
     }
 }

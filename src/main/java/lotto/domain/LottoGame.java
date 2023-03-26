@@ -1,63 +1,36 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoGame {
     public static final Money LOTTO_PRICE = new Money(1000);
-
-    private final List<Lotto> automaticLottos;
-    private final List<Lotto> manualLottos;
-
-    public LottoGame(List<Lotto> automaticLottos) {
-        this(automaticLottos, List.of());
-    }
+    private final long allLottoQuantity;
+    private int generatedQuantity = 0;
 
     public LottoGame(Money lottoPay) {
-        this(lottoPay, List.of());
+        this.allLottoQuantity = lottoPay.division(LOTTO_PRICE).toLong();
     }
 
-    public LottoGame(List<Lotto> automaticLottos, List<Lotto> manualLottos) {
-        this.automaticLottos = automaticLottos;
-        this.manualLottos = manualLottos;
-    }
-
-    public LottoGame(Money lottoPay, List<Set<Integer>> manualLottos) {
-        long allLottoQuantity = lottoPay.division(LOTTO_PRICE).toLong();
-        long automaticIssueQuantity = allLottoQuantity - manualLottos.size();
-
-        Money manualLottosPrice = LOTTO_PRICE.multiply(manualLottos.size());
-        if (lottoPay.minus(manualLottosPrice).toLong() < 0) {
+    public List<Lotto> generateLotto(LottoGenerator lottoGenerator) {
+        List<Lotto> generateLottos = lottoGenerator.generate();
+        if (getAvailableQuantity() - generateLottos.size() < 0) {
             throw new IllegalArgumentException("사용한 금액보다 많은 로또를 발급할 수 없습니다.");
         }
-
-        this.automaticLottos = new ArrayList<>();
-        for (int i = 0; i < automaticIssueQuantity; i++) {
-            this.automaticLottos.add(new Lotto(RandomNumberFactory.get()));
-        }
-        this.manualLottos = manualLottos.stream()
-                .map(lotto -> new Lotto(lotto.stream().mapToInt(i -> i).toArray()))
-                .collect(Collectors.toList());
-    }
-
-    public List<Lotto> getAllManualLottos() {
-        return this.manualLottos;
-    }
-
-    public List<Lotto> getAllAutomaticLottos() {
-        return this.automaticLottos;
-    }
-
-    public WinningStatistics getStatistics(WinningNumbers winningNumbers) {
-        return new WinningStatistics(winningNumbers, getAllLottos());
-    }
-
-    private List<Lotto> getAllLottos() {
-        return Stream.concat(manualLottos.stream(), automaticLottos.stream()).collect(Collectors.toList());
+        this.generatedQuantity += generateLottos.size();
+        return generateLottos;
     }
 
     public Money getBuyPrice() {
-        return LOTTO_PRICE.multiply(getAllLottos().size());
+        return LOTTO_PRICE.multiply(this.allLottoQuantity);
+    }
+
+    public long getAvailableQuantity() {
+        return this.allLottoQuantity - generatedQuantity;
+    }
+
+    public void validAvailableGenerate(int quantity) {
+        if (this.allLottoQuantity - quantity < 0) {
+            throw new IllegalArgumentException("사용한 금액보다 많은 로또를 발급할 수 없습니다.");
+        }
     }
 }

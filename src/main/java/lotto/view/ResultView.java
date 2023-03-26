@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.WinningGrade;
-import lotto.domain.WinningStatistics;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -12,9 +9,7 @@ import java.util.stream.Collectors;
 
 
 public class ResultView {
-    public static void printBuyCountForPrint(LottoGame lottoGame) {
-        List<Lotto> allAutomaticLottos = lottoGame.getAllAutomaticLottos();
-        List<Lotto> allManualLottos = lottoGame.getAllManualLottos();
+    public static void printBuyCountForPrint(List<Lotto> allAutomaticLottos, List<Lotto> allManualLottos) {
         System.out.println("수동으로 " + allManualLottos.size() + "장 " + allAutomaticLottos.size() + "개를 구매했습니다.");
         for (Lotto lotto : allManualLottos) {
             System.out.println(lotto.getLottoNumbers());

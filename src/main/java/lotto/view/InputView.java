@@ -28,7 +28,9 @@ public class InputView {
 
         for (int i = 0; i < manualQuantity; i++) {
             String inputNumbers = scanner.nextLine();
-            Set<Integer> lotto = Arrays.stream(inputNumbers.replaceAll(" ", "").split(",")).map(Integer::valueOf).collect(Collectors.toSet());
+            Set<Integer> lotto = Arrays.stream(inputNumbers.replaceAll(" ", "").split(","))
+                    .map(Integer::valueOf).collect(Collectors.toSet());
+
             manualLottos.add(lotto);
         }
         return manualLottos;
