@@ -45,8 +45,6 @@ public class Application {
         // 지난 주 당첨 번호 입력
         String stringWinningNumbers = inputView.inputWinningNumber();
         Lotto winningNumber = lottoGame.createManualLotto(stringWinningNumbers);
-
-        // 보너스 볼 입력
         int bonusNumber = inputView.inputBonusNumber();
 
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
