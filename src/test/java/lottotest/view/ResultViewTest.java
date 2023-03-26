@@ -37,7 +37,7 @@ public class ResultViewTest {
         //당첨번호
         List<Integer> winningNums = new ArrayList<>(List.of(1,2,3,4,5,6));
         int bonusNum = 7;
-        WinningNumber winningNumber = new WinningNumber(bonusNum, winningNums);
+        WinningNumber winningNumber = new WinningNumber(winningNums, bonusNum);
 
         //로또번호
         ArrayList<LottoTicket> tickets = new ArrayList<>();

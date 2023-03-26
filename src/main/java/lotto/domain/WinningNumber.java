@@ -8,15 +8,15 @@ public class WinningNumber {
     public List<Integer> winningNums;
     public int bonusNum;
 
-    public WinningNumber(int bonusNumber, List<Integer> winningNumbers){
+    public WinningNumber(List<Integer> winningNumbers, int bonusNumber){
         checkWinningNumbers(bonusNumber, winningNumbers);
         this.winningNums = winningNumbers;
         this.bonusNum = bonusNumber;
     }
 
     public WinningNumber(InputView inputView) {
-        int bonusNumber = inputView.inputBonusNum();
         List<Integer> winningNumbers = inputView.inputWinningNum();
+        int bonusNumber = inputView.inputBonusNum();
         checkWinningNumbers(bonusNumber, winningNumbers);
         this.winningNums = winningNumbers;
         this.bonusNum = bonusNumber;
