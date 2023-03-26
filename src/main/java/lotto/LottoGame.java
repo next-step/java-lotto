@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.model.Lotto2;
-import lotto.model.LottoNumber2;
+import lotto.model.Lotto;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,20 +19,20 @@ public class LottoGame {
         return (int) (amount / LOTTO_AMOUNT) - manualPurchaseCount;
     }
 
-    public Lotto2 createManualLotto(String numbers) {
-        return new Lotto2(Arrays.stream(numbers.split(","))
+    public Lotto createManualLotto(String numbers) {
+        return new Lotto(Arrays.stream(numbers.split(","))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .toArray());
     }
 
-    public Lotto2 createAutoLotto() {
+    public Lotto createAutoLotto() {
         List<Integer> numbers = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
 
         Collections.shuffle(numbers);
-        return new Lotto2(numbers.subList(0 ,6).stream()
+        return new Lotto(numbers.subList(0 ,6).stream()
                 .mapToInt(Integer::intValue).toArray());
     }
 }
