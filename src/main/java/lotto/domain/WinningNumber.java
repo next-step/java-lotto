@@ -5,6 +5,9 @@ import lotto.view.InputView;
 import java.util.List;
 
 public class WinningNumber {
+
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
     public List<Integer> winningNums;
     public int bonusNum;
 
@@ -40,7 +43,7 @@ public class WinningNumber {
         if(inputWinningNums.contains(inputBonus)) {
             throw new IllegalArgumentException("당첨번호와 중복된 번호를 사용할 수 없습니다");
         }
-        if(inputBonus > 45 || inputBonus < 1){
+        if(inputBonus > MAXIMUM_NUMBER || inputBonus < MINIMUM_NUMBER){
             throw new IllegalArgumentException("1~45 사이의 번호가 아닙니다.");
         }
     }

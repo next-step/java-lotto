@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class InputView {
 
+    private static final int DEFAULT_PRICE = 1000;
+
     int purchasePrice;
     public int gameCount;
     int manualCount;
@@ -44,9 +46,9 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
 
         int money = Integer.parseInt(scanner.nextLine());
-        this.gameCount = money/1000;
+        this.gameCount = money/DEFAULT_PRICE;
+        this.purchasePrice =  gameCount * DEFAULT_PRICE; //실제 구매금액 (1000원미만 버림)
 
-        this.purchasePrice =  gameCount * 1000;
     }
 
     public void inputManualCnt() {
