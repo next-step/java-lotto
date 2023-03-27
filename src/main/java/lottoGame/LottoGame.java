@@ -8,7 +8,7 @@ import lottoGame.Lotto.TYPE;
 
 public class LottoGame {
 
-    private final int LOTTO_ONE_GAME_AMT = 1000;
+    private static final int LOTTO_ONE_GAME_AMT = 1000;
     private List<Lotto> lottoTickets;
 
     private int manualLottoCount;
