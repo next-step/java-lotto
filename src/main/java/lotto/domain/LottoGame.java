@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.view.InputView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,9 +15,9 @@ public class LottoGame {
     final int autoCount;
     private final List<LottoTicket> lottoNumbers;
 
-    public LottoGame(InputView inputView) {
-        this.autoCount = inputView.getAutoCount();
-        this.lottoNumbers = inputView.getManualLotto();
+    public LottoGame(int autoCount, List<LottoTicket> manualLotto) {
+        this.autoCount = autoCount;
+        this.lottoNumbers = manualLotto;
         this.lottoNumbers.addAll(autoLotto());
     }
 

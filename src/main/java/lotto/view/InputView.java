@@ -11,47 +11,15 @@ public class InputView {
 
     private static final int DEFAULT_PRICE = 1000;
 
-    int purchasePrice;
-    public int gameCount;
-    int manualCount;
-    int autoCount;
-
-    List<LottoTicket> manualLotto;
-
-    public void excuteInput(){
-        inputMoney();
-        inputManualCnt();
-        inputManualNums(manualCount);
-    }
-
-    public int getAutoCount(){
-        return autoCount;
-    }
-
-    public int getManualCount(){
-        return manualCount;
-    }
-
-    public int getPurchasePrice(){
-        return purchasePrice;
-    }
-
-    public List<LottoTicket> getManualLotto(){
-        return manualLotto;
-    }
-
-    public void inputMoney() {
-
+    public int inputMoney() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
 
         int money = Integer.parseInt(scanner.nextLine());
-        this.gameCount = money/DEFAULT_PRICE;
-        this.purchasePrice =  gameCount * DEFAULT_PRICE; //실제 구매금액 (1000원미만 버림)
-
+        return money/DEFAULT_PRICE;
     }
 
-    public void inputManualCnt() {
+    public int inputManualCnt(int gameCount) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
@@ -61,12 +29,10 @@ public class InputView {
         if(manualCount > gameCount) {
             throw new IllegalArgumentException("구매할 수 있는 범위를 넘었습니다.");
         }
-
-        this.manualCount = manualCount;
-        this.autoCount = gameCount - manualCount;
+        return manualCount;
     }
 
-    public void inputManualNums(int manualCount) {
+    public List<LottoTicket> inputManualNums(int manualCount) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
@@ -82,7 +48,7 @@ public class InputView {
             manualLotto.add(new LottoTicket(tickets));
         }
 
-        this.manualLotto = manualLotto;
+        return manualLotto;
     }
 
     public List<Integer> inputWinningNum() {

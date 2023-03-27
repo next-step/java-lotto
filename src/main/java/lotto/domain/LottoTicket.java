@@ -27,8 +27,8 @@ public class LottoTicket {
 
     //1~45 사이 수인지 체크
     public static void isValidNumber(List<Integer> targetNumber){
-        boolean isValid = targetNumber.stream().allMatch(i -> i >= MINIMUM_NUMBER && i <= MAXIMUM_NUMBER);
-        if(isValid == false) {
+        boolean isValid = targetNumber.stream().anyMatch(i -> i < MINIMUM_NUMBER || i > MAXIMUM_NUMBER);
+        if(isValid == true) {
             throw new IllegalArgumentException("1~45 사이의 번호가 아닙니다.");
         }
     }
@@ -53,8 +53,7 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append(String.format(lottoNumbers.toString()));
-        return output.toString();
+        String str = lottoNumbers.toString();
+        return str;
     }
 }

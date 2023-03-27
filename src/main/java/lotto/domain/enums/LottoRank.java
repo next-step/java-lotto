@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public enum LottoRank {
 
@@ -19,7 +19,6 @@ public enum LottoRank {
     MISS(0, false, 0); //꽝
 
     private final int matchCount;
-
     private final boolean isMatchBonus;
     private final int reward;
 
@@ -57,12 +56,14 @@ public enum LottoRank {
         return result;
     }
 
-    public static double calculateRate(Map<LottoRank, Integer> result, int purchasePrice){
-        AtomicInteger sum = new AtomicInteger();
+    public static double calculateRate(Map<LottoRank, Integer> result, int gameCnt){
+
+        AtomicLong sum = new AtomicLong();
         result.forEach((key, value)->{
-            sum.set(sum.get() + key.getReward() * value);
+            sum.set(sum.get() + Long.valueOf(key.getReward()) * Long.valueOf(value));
         });
-        return (double)(sum.get()) / purchasePrice;
+
+        return (double)(sum.get()) / ( gameCnt * 1000 );
     }
 
     public int getReward() {

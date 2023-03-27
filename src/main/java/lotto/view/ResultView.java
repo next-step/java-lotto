@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoGame;
+import lotto.domain.LottoTicket;
 import lotto.domain.enums.LottoRank;
 
 import java.util.ArrayList;
@@ -12,22 +12,17 @@ import static lotto.domain.enums.LottoRank.MISS;
 
 public class ResultView {
 
-    public void printLotto(InputView inputView, LottoGame lottoGame)
+    public void printLotto(int manualCnt, int autoCnt, List<LottoTicket> lottoTickets)
     {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n수동으로 "+ inputView.getManualCount()+"장,");
-        sb.append("자동으로 "+ inputView.getAutoCount()+"장을 구매했습니다.");
-        System.out.println(sb);
-        lottoGame.getLottoNumbers().stream().forEach(System.out::println);
+        System.out.println("\n수동으로 "+ manualCnt+"장, 자동으로 "+ autoCnt+"장을 구매했습니다.");
+        lottoTickets.stream().forEach(System.out::println);
         System.out.println();
     }
 
     public void printResult(Map<LottoRank, Integer> result, double totalRate){
 
         String str ="";
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n당첨 통계\n---------");
-        System.out.println(sb);
+        System.out.println("\n당첨 통계\n---------");
 
         List<LottoRank> keyList = new ArrayList<>(result.keySet());
         Collections.sort(keyList, Collections.reverseOrder());

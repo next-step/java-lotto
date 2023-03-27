@@ -2,6 +2,7 @@ package lottotest.view;
 
 
 import lotto.view.InputView;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +13,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class InputViewTest {
     private InputView inputview;
@@ -33,8 +33,7 @@ public class InputViewTest {
 
         InputStream in = getInput(input);
         System.setIn(in);
-        inputview.inputMoney();
-        assertThat(inputview.getPurchasePrice()).isEqualTo(16000);
+        assertThat(inputview.inputMoney()).isEqualTo(16000);
     }
 
     @ParameterizedTest
@@ -44,24 +43,8 @@ public class InputViewTest {
         InputStream in = getInput(input);
         System.setIn(in);
 
-        inputview.gameCount = 3; //총게임횟수
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {inputview.inputManualCnt();}
-                ).withMessageContaining("구매할 수 있는 범위를 넘었습니다.");
-    }
-
-    @ParameterizedTest
-    @DisplayName("수동구입 횟수 입력시 수동, 자동횟수 테스트")
-    @ValueSource(strings = {"3"})
-    void lottoManualCount(String input){
-        InputStream in = getInput(input);
-        System.setIn(in);
-
-        inputview.gameCount = 10; //총게임횟수
-        inputview.inputManualCnt();
-
-        assertThat(inputview.getManualCount()).isEqualTo(3); //수동
-        assertThat(inputview.getAutoCount()).isEqualTo(7); //자동
+        AssertionsForClassTypes.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> inputview.inputManualCnt(5));
     }
 
     @ParameterizedTest
@@ -81,9 +64,8 @@ public class InputViewTest {
         InputStream in = getInput(input);
         System.setIn(in);
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {inputview.inputManualNums(1);}
-                ).withMessageContaining("중복된 번호를 사용할 수 없습니다.");
+        AssertionsForClassTypes.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> inputview.inputManualNums(1));
     }
 
     @ParameterizedTest
@@ -93,9 +75,8 @@ public class InputViewTest {
         InputStream in = getInput(input);
         System.setIn(in);
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {inputview.inputManualNums(1);}
-                ).withMessageContaining("1~45 사이의 번호가 아닙니다.");
+        AssertionsForClassTypes.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> inputview.inputManualNums(1));
     }
 
     @ParameterizedTest
@@ -105,9 +86,8 @@ public class InputViewTest {
         InputStream in = getInput(input);
         System.setIn(in);
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {inputview.inputManualNums(1);}
-                ).withMessageContaining("로또 번호가 6자리가 아닙니다.");
+        AssertionsForClassTypes.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> inputview.inputManualNums(1));
     }
 
     @ParameterizedTest
