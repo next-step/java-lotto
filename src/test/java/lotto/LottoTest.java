@@ -1,5 +1,7 @@
 package lotto;
 
+
+import lotto.model.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,6 +19,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoTest {
 
     private static final int LOTTO_AMOUNT = 1000;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
 
     @DisplayName(value = "구매금액에 해당하는 로또 발급")
     @ParameterizedTest
@@ -42,6 +46,34 @@ public class LottoTest {
         assertThat(lottoNumbers.size()).isSameAs(6);
     }
 
+    @DisplayName(value = "로또 번호 생성")
+    @Test
+    void createLottoNumbers2() {
+        List<LottoNumber> numbers = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+                .boxed()
+                .map(it -> new LottoNumber(it))
+                .collect(Collectors.toList());
+
+        Collections.shuffle(numbers);
+        List<LottoNumber> lotto = numbers.subList(0, 6);
+        Collections.sort(lotto, (a, b) -> a.getValue() - b.getValue());
+
+        assertThat(lotto.size()).isSameAs(6);
+    }
+
+    @DisplayName(value = "수동 로또 번호 생성")
+    @Test
+    void createManualLottoNumber2() {
+        String manualLotto = "1, 3, 5, 6, 7, 8";
+
+        List<LottoNumber> numbers = Arrays.stream(manualLotto.split(","))
+                .map(String::trim)
+                .map(it -> new LottoNumber(it))
+                .collect(Collectors.toList());
+
+        assertThat(numbers.size()).isSameAs(6);
+    }
+
     @DisplayName(value = "당첨번호 확인")
     @ParameterizedTest
     @ValueSource(ints = {3})
@@ -58,25 +90,5 @@ public class LottoTest {
                 .filter(it -> winningNumbers.contains(it))
                 .count();
         assertThat(count2).isSameAs(3L);
-    }
-
-    @Test
-    void temp() {
-        String input = "1, 2, 3, 4, 5, 6";
-        int[] values = Arrays.stream(input.split(", "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-
-        List<Integer> results = Arrays.stream(input.split(", "))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
-
-//        List<Integer> results = Arrays.stream(values).boxed()
-//                .collect(Collectors.toList());
-
-        for (Integer result : results) {
-            System.out.println(result);
-        }
     }
 }
