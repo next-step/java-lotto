@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 
 
 public class ResultView {
-    public static void printBuyCountForPrint(List<Lotto> allAutomaticLottos, List<Lotto> allManualLottos) {
-        System.out.println("수동으로 " + allManualLottos.size() + "장 " + allAutomaticLottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : allManualLottos) {
+    public static void printBuyCountForPrint(Lottos allAutomaticLottos, Lottos allManualLottos) {
+        System.out.println("수동으로 " + allManualLottos.getElements().size() + "장 " + allAutomaticLottos.getElements().size() + "개를 구매했습니다.");
+        for (Lotto lotto : allManualLottos.getElements()) {
             System.out.println(lotto.getLottoNumbers());
         }
-        for (Lotto lotto : allAutomaticLottos) {
+        for (Lotto lotto : allAutomaticLottos.getElements()) {
             System.out.println(lotto.getLottoNumbers());
         }
         System.out.println();

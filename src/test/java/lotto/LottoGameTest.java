@@ -23,7 +23,7 @@ public class LottoGameTest {
     @Test
     void getStatistics() {
         LottoGame lottoGame = new LottoGame(new Money(6000));
-        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(
+        Lottos lottos = lottoGame.generateLotto(new ManualLottoGenerator(
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 2, 3, 4, 5, 7),
                 new Lotto(1, 2, 3, 4, 5, 8),
@@ -47,7 +47,7 @@ public class LottoGameTest {
     @Test
     void getTotalRateOfReturn() {
         LottoGame lottoGame = new LottoGame(new Money(10000));
-        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(
+        Lottos lottos = lottoGame.generateLotto(new ManualLottoGenerator(
                 new Lotto(1, 2, 3, 7, 8, 9),
                 new Lotto(1, 2, 8, 9, 10, 11),
                 new Lotto(1, 2, 8, 9, 10, 11),
@@ -70,10 +70,10 @@ public class LottoGameTest {
     @Test
     void issueManualQuantity() {
         LottoGame lottoGame = new LottoGame(new Money(10000));
-        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(List.of(Set.of(1, 2, 3, 7, 8, 9))));
+        Lottos lottos = lottoGame.generateLotto(new ManualLottoGenerator(List.of(Set.of(1, 2, 3, 7, 8, 9))));
 
-        Assertions.assertThat(lottos).hasSize(1);
-        Assertions.assertThat(lottos).containsExactly(new Lotto(1, 2, 3, 7, 8, 9));
+        Assertions.assertThat(lottos.getElements()).hasSize(1);
+        Assertions.assertThat(lottos.getElements()).containsExactly(new Lotto(1, 2, 3, 7, 8, 9));
     }
 
     @DisplayName("수동 발급 수는 전체 발급 수보다 적어야 한다.")

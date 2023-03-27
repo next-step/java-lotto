@@ -19,19 +19,23 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<Lotto> generate() {
+    public Lottos generate() {
 
-        ArrayList<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < automaticIssueQuantity; i++) {
             lottos.add(getRandomLotto());
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private Lotto getRandomLotto() {
-        List<Integer> lottoNumberList = Arrays.stream(IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).toArray()).boxed().collect(Collectors.toList());
+
+        List<Integer> lottoNumberList = Arrays.stream(IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).toArray())
+                .boxed()
+                .collect(Collectors.toList());
+
         Collections.shuffle(lottoNumberList);
         int[] numbers = lottoNumberList.subList(0, LOTTO_NUMBER_COUNT).stream().mapToInt(i -> i).toArray();
         return new Lotto(numbers);

@@ -11,8 +11,8 @@ public class LottoGame {
         this.allLottoQuantity = lottoPay.division(LOTTO_PRICE).toLong();
     }
 
-    public List<Lotto> generateLotto(LottoGenerator lottoGenerator) {
-        List<Lotto> generateLottos = lottoGenerator.generate();
+    public Lottos generateLotto(LottoGenerator lottoGenerator) {
+        Lottos generateLottos = lottoGenerator.generate();
         if (getAvailableQuantity() - generateLottos.size() < 0) {
             throw new IllegalArgumentException("사용한 금액보다 많은 로또를 발급할 수 없습니다.");
         }

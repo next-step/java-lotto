@@ -6,19 +6,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ManualLottoGenerator implements LottoGenerator {
-    private final List<Lotto> manualLottos;
+    private final Lottos manualLottos;
     public ManualLottoGenerator(List<Set<Integer>> manualLottos) {
-        this.manualLottos = manualLottos.stream()
+        this.manualLottos = new Lottos(manualLottos.stream()
                 .map(lotto -> new Lotto(lotto.stream().mapToInt(i -> i).toArray()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public ManualLottoGenerator(Lotto... lottos) {
-        this.manualLottos = Arrays.stream(lottos).collect(Collectors.toList());
+        this.manualLottos =  new Lottos(Arrays.stream(lottos).collect(Collectors.toList()));
     }
 
     @Override
-    public List<Lotto> generate() {
+    public Lottos generate() {
         return manualLottos;
     }
 }

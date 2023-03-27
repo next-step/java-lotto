@@ -6,9 +6,6 @@ import lotto.view.ResultView;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -21,16 +18,14 @@ public class LottoMain {
 
         List<Set<Integer>> lottos = InputView.issueManualLottos(manualQuantity);
 
-        List<Lotto> allManualLottos = lottoGame.generateLotto(new ManualLottoGenerator(lottos));
-        List<Lotto> allAutomaticLottos = lottoGame.generateLotto(new RandomLottoGenerator(lottoGame.getAvailableQuantity()));
+        Lottos allManualLottos = lottoGame.generateLotto(new ManualLottoGenerator(lottos));
+        Lottos allAutomaticLottos = lottoGame.generateLotto(new RandomLottoGenerator(lottoGame.getAvailableQuantity()));
 
         ResultView.printBuyCountForPrint(allAutomaticLottos, allManualLottos);
 
-        int[] winningNumbers1 = InputView.inputLastWeekWinningNumber();
         int bonusNumber = InputView.inputLastWeekBonusNumber();
-        WinningNumbers winningNumbers = new WinningNumbers(bonusNumber, winningNumbers1);
-        WinningStatistics statistics = new WinningStatistics(winningNumbers, Stream.concat(allManualLottos.stream(), allAutomaticLottos.stream())
-                .collect(Collectors.toList()));
+        WinningNumbers winningNumbers = new WinningNumbers(bonusNumber, InputView.inputLastWeekWinningNumber());
+        WinningStatistics statistics = new WinningStatistics(winningNumbers, Lottos.concat(allManualLottos, allAutomaticLottos));
 
         ResultView.printLottoResult(statistics);
     }
