@@ -12,7 +12,7 @@ class LottoTicketTest {
         LottoTicketMaker lottoTicketMaker = new LottoTicketMaker();
         LottoTicket lottoTicket = lottoTicketMaker.issue();
 
-        assertTrue(lottoTicket.getLotto().size() == 6);
+        assertTrue(lottoTicket.lotto.size() == 6);
     }
 
 }
