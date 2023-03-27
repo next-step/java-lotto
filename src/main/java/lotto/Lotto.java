@@ -38,11 +38,6 @@ public class Lotto {
         //5.당첨확인
         winnerCheck(lottoNumberList, winnerNumbers, bonusNumber);
 
-        //6.당첨출력
-        System.out.println("\n당첨 통계");
-        System.out.println("-----------");
-        Long totalPrize = getTotalPrize();
-        System.out.println("총 수익률은 " + getEarningsRate(totalPrize) + "입니다.(기준이 1이기 때문에 1이상은 이익, 1이하는 손실임)");
     }
 
     private String[] makeNumberList(String input) {
@@ -65,14 +60,16 @@ public class Lotto {
     }
 
     public int getLottoCount(int purchaseAmount) {
-        if (purchaseAmount < 1000) throw new IllegalStateException("금액부족!!로또는 1장당 1000원입니다.");
+        if (purchaseAmount < 1000) {
+            throw new IllegalStateException("금액부족!!로또는 1장당 1000원입니다.");
+        }
         return purchaseAmount / LOTTO_PRICE;
     }
 
     private int setBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
+        return new WinnerNumber(sc.nextInt()).getBounsNumber();
     }
 
     public List<Integer> getWinnerNumbers(String[] numberArr) {
@@ -90,6 +87,7 @@ public class Lotto {
         switch (count) {
             case 6:
                 Winner.FIRST.setWinnerCount();
+                break;
             case 5:
                 if (lottoNumber.contains(bonusNumber)) Winner.SECOND.setWinnerCount();
                 else Winner.THIRD.setWinnerCount();
@@ -103,6 +101,13 @@ public class Lotto {
             default:
                 break;
         }
+    }
+
+    public void printResult() {
+        System.out.println("\n당첨 통계");
+        System.out.println("-----------");
+        Long totalPrize = getTotalPrize();
+        System.out.println("총 수익률은 " + getEarningsRate(totalPrize) + "입니다.(기준이 1이기 때문에 1이상은 이익, 1이하는 손실임)");
     }
 
     private Long getTotalPrize() {

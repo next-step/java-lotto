@@ -7,15 +7,19 @@ public class WinnerNumber {
 
     private List<Integer> winnerNumberList;
 
-    private String[] numberArr;
-
     private static final int LOTTO_NUMBERS_SIZE = 6;
+
+    private int bounsNumber;
 
     public WinnerNumber(String[] numberArr) {
         winnerNumberList = getWinnerNumbers(numberArr);
         validateSize(winnerNumberList);
         validateDuplicate(winnerNumberList);
         validateNumberRange(winnerNumberList);
+    }
+
+    public WinnerNumber(int bounsNumber) {
+        setBounsNumber(bounsNumber);
     }
 
     public List<Integer> getWinnerNumberList() {
@@ -44,6 +48,14 @@ public class WinnerNumber {
         winnerNumberList.stream()
                 .filter(winnerNumber -> (winnerNumber<0 || winnerNumber>45))
                 .forEach( winnerNumber -> { throw new IllegalArgumentException("로또 숫자는 0~45 사이의 숫자만 가능합니다.");});
+    }
+
+    private void setBounsNumber(int bounsNumber){
+        this.bounsNumber=bounsNumber;
+    }
+
+    public int getBounsNumber(){
+        return bounsNumber;
     }
 
 }

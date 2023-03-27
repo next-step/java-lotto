@@ -73,7 +73,6 @@ class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(()->lotto.getWinnerNumbers(numberArr));
     }
-
     @DisplayName("5등 확인")
     @Test
     public void 당첨5등확인(){
