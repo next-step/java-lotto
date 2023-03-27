@@ -25,7 +25,7 @@ public class ResultView {
         System.out.println("4개 일치 (50000원)- " + userLotto.matchCount(winningLotto, Level.THIRD) + "개");
         System.out.println("3개 일치 (30000000)- " + userLotto.matchCount(winningLotto, Level.SECOND) + "개");
         System.out.println("3개 일치 (2000000000)- " + userLotto.matchCount(winningLotto, Level.FIRST) + "개");
-        System.out.println("총 수익률은 " + userLotto.getTotAteOfReturn(winningLotto, purchaseAmount)
+        System.out.println("총 수익률은 " + userLotto.getTotalRateOfReturn(winningLotto, purchaseAmount)
         + "입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

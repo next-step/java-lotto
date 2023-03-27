@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_SIX_HIT = 6;
+    private static final int LOTTO_FIVE_HIT = 5;
+    private static final int LOTTO_TWO_HIT = 2;
 
     private List<LottoNumber> lottoNumbers;
 
@@ -45,16 +48,16 @@ public class Lotto {
                 .filter(it -> winningLotto.getLotto().getLottoNumbers().contains(it))
                 .count();
 
-        if (hitCount == 6) {
+        if (hitCount == LOTTO_SIX_HIT) {
             return 1;
         }
 
         boolean hitBonus = lottoNumbers.contains(winningLotto.getBonusNumber());
-        if (hitCount == 5 && hitBonus) {
+        if (hitCount == LOTTO_FIVE_HIT && hitBonus) {
             return 2;
         }
 
-        if (hitCount > 2) {
+        if (hitCount > LOTTO_TWO_HIT) {
             return 6 - hitCount + 2;
         }
 

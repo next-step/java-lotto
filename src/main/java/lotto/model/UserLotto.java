@@ -17,7 +17,7 @@ public class UserLotto {
                 .count();
     }
 
-    public double getTotAteOfReturn(WinningLotto winningLotto, long purchaseAmount) {
+    public double getTotalRateOfReturn(WinningLotto winningLotto, long purchaseAmount) {
         long totalWinningAmount = Arrays.stream(Level.values())
                 .map(it -> matchCount(winningLotto, it) * it.getAmount())
                 .reduce(0L, Long::sum);
