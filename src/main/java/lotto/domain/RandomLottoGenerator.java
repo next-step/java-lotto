@@ -31,10 +31,7 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     private Lotto getRandomLotto() {
-
-        List<Integer> lottoNumberList = Arrays.stream(IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).toArray())
-                .boxed()
-                .collect(Collectors.toList());
+        List<Integer> lottoNumberList = new ArrayList<>(LottoNumber.all());
 
         Collections.shuffle(lottoNumberList);
         int[] numbers = lottoNumberList.subList(0, LOTTO_NUMBER_COUNT).stream().mapToInt(i -> i).toArray();

@@ -35,6 +35,10 @@ public class LottoNumber {
         }
     }
 
+    public static Set<Integer> all() {
+        return LOTTO_NUMBERS.keySet();
+    }
+
     public int getNumber() {
         return this.number;
     }
