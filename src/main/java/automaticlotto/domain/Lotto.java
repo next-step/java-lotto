@@ -36,7 +36,9 @@ public class Lotto {
     }
 
     public static List<LottoNumber> sortLotto(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream().sorted(Comparator.comparing(LottoNumber::getLottoNumber)).collect(Collectors.toList());
+        return lottoNumbers.stream()
+                .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
+                .collect(Collectors.toList());
     }
 
     public List<LottoNumber> getLottoNumbers() {

@@ -23,10 +23,8 @@ public class Lottos {
 
     public static Lottos createLottos(int buyLottoNumbers) {
         List<Lotto> lottos = new ArrayList<>();
-        Lotto lotto;
         for (int i = 0; i < buyLottoNumbers; i++) {
-            lotto = new Lotto(Lotto.sortLotto(Lotto.createLotto()));
-            lottos.add(lotto);
+            lottos.add(new Lotto(Lotto.sortLotto(Lotto.createLotto())));
         }
         return new Lottos(lottos);
     }
