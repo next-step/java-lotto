@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
 import lotto.domain.enums.LottoRank;
 
 import java.util.*;

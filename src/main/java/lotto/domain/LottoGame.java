@@ -1,19 +1,14 @@
 package lotto.domain;
 
+import lotto.domain.LottoNumbers.LottoNumbers;
 import lotto.domain.enums.LottoRank;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static java.util.stream.Collectors.toList;
-
 public class LottoGame {
-
-    private static final int MAXIMUM_NUMBER = 45;
-    private static final int DEFAULT_DIGIT = 6;
     private static final int DEFAULT_PURCHASE = 1000;
 
     private int gameCount;
@@ -41,20 +36,16 @@ public class LottoGame {
         return tickets;
     }
 
-    public ArrayList<Integer> getLottoNumber(){
-        ArrayList<Integer> lottoNumbers = (ArrayList<Integer>) new Random()
-                .ints(1, (MAXIMUM_NUMBER + 1))
-                .distinct()
-                .limit(DEFAULT_DIGIT)
-                .sorted()
-                .boxed()
-                .collect(toList());
+
+    public ArrayList<Integer> getLottoNumber() {
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        ArrayList<Integer> buyLottoNumber = lottoNumbers.LottoNumbers();
 
         /*ResultView에게 출력역할 위임*/
         ResultView resultView2 = new ResultView();
-        resultView2.printTicket(lottoNumbers);
+        resultView2.printTicket(buyLottoNumber);
 
-        return lottoNumbers;
+        return buyLottoNumber;
     }
 
     public double calculateRate(Map<LottoRank, Integer> result){
