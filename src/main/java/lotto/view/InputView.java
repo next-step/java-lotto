@@ -3,7 +3,10 @@ package lotto.view;
 import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
+
+import static java.util.stream.Collectors.toList;
 
 public class InputView {
     private static final int MAXIMUM_NUMBER = 45;
@@ -40,20 +43,29 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
+        ArrayList<Integer> lottoNumbers = null;
         for (int j = 0; j < manualGameCount; j++) {
-        String inputValue = scanner.nextLine();
-        String[] splitValue = inputValue.split(",");
+            String inputValue = scanner.nextLine();
+            String[] splitValue = inputValue.split(",");
 
-        ArrayList<LottoTicket> tickets = new ArrayList<>();
+
             for (int i = 0; i < DEFAULT_DIGIT; i++) {
                 int value = Integer.parseInt(splitValue[i]);
                 if (value < MINIMUM_NUMBER || value > MAXIMUM_NUMBER)
                     throw new IllegalArgumentException("로또번호 : 1 ~ 45");
 
-                manualNumbers.add(j,value);
+                /*   tickets.add(value);*/
+                lottoNumbers = (ArrayList<Integer>) new Random()
+                        .ints(1, (MAXIMUM_NUMBER + 1))
+                        .distinct()
+                        .limit(DEFAULT_DIGIT)
+                        .sorted()
+                        .boxed()
+                        .collect(toList());
             }
+
         }
-        return manualNumbers;
+        return lottoNumbers;
     }
 
 
