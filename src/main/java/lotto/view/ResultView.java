@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.enums.LottoRank;
 
 import java.util.*;
@@ -12,6 +13,15 @@ public class ResultView {
     {
        System.out.println(lottoNumbers2.toString());
     }
+    public void printTicket2(ArrayList<Integer> lottoNumbers2, int manual, int auto)
+    {
+        System.out.println(lottoNumbers2.toString());
+    }
+
+    public void printBuyTicket(int manual, int auto){
+        System.out.println( String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",  manual, auto) );
+    }
+
 
     public void printResult(Map<LottoRank, Integer> result, double totalRate){
 
@@ -32,9 +42,7 @@ public class ResultView {
     }
 
 
-    public void printBuyTicket(int manual, int auto){
-        System.out.println( String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",  manual, auto) );
-    }
+
 
 
 

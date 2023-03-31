@@ -6,6 +6,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -46,22 +47,18 @@ public class LottoGame {
     }
 
     //수동구매
-    public ArrayList<LottoTicket> buyLotto2(){
+    public ArrayList<LottoTicket> buyLotto2(int manual, int auto){
         ArrayList<LottoTicket> tickets = new ArrayList<>();
 
         for (int i = 0; i < gameCount2; i++) {
-            tickets.add(new LottoTicket(getLottoNumber()));
+            tickets.add(new LottoTicket(getLottoNumber2(manual,auto)));
         }
-        return tickets;
-        /*
-        InputView inputView = new InputView();
-        inputView.inputManualNum(gameCount2);
 
         return tickets;
-        */
     }
 
 
+    //자동로또
     public ArrayList<Integer> getLottoNumber() {
         LottoNumbers lottoNumbers = new LottoNumbers();
         ArrayList<Integer> buyLottoNumber = lottoNumbers.LottoNumbers();
@@ -73,14 +70,19 @@ public class LottoGame {
         return buyLottoNumber;
     }
 
-    public ArrayList<Integer> getLottoNumber2() {
+    //수동로또
+    public ArrayList<Integer> getLottoNumber2(int manual, int auto) {
         LottoNumbers lottoNumbers = new LottoNumbers();
-        ArrayList<Integer> buyLottoNumber = lottoNumbers.LottoNumbers();
+        /*ArrayList<Integer> buyLottoNumber = lottoNumbers.LottoNumbers();*/
+
+        InputView inputView = new InputView();
+        ArrayList<Integer> buyLottoNumber = new ArrayList<Integer>((inputView.inputManualNum()));
 
         /*ResultView에게 출력역할 위임*/
+        /*
         ResultView resultView2 = new ResultView();
-        resultView2.printTicket(buyLottoNumber);
-
+        resultView2.printTicket2(buyLottoNumber, manual, auto);
+        */
         return buyLottoNumber;
     }
 

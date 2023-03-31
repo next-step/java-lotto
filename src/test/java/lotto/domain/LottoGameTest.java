@@ -1,4 +1,4 @@
-package lottotest.domain;
+package lotto.domain;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoTicket;
@@ -25,21 +25,21 @@ public class LottoGameTest {
     @Test
     @DisplayName("로또게임 횟수 구하기")
     public void getGameCount(){
-        lottogame = new LottoGame(10000); //10000원 10게임을 사는지 확인
+        lottogame = new LottoGame(10000,2000); //10000원 10게임을 사는지 확인
         assertThat(lottogame.getGameCount()).isEqualTo(10);
     }
 
     @Test
     @DisplayName("실제 구입금액 확인")
     public void getPurchaseAmount(){
-        lottogame = new LottoGame(50600); //50600원에서 실제 50000원만 사는지 확인
+        lottogame = new LottoGame(50600,2000); //50600원에서 실제 50000원만 사는지 확인
         assertThat(lottogame.getPurchasePrice()).isEqualTo(50000);
     }
 
     @Test
     @DisplayName("로또 n회 사기")
     public void buyLotto(){
-        lottogame = new LottoGame(20000); // 20000원어치 20개구매
+        lottogame = new LottoGame(20000,2000); // 20000원어치 20개구매
         assertThat(lottogame.buyLotto().size()).isEqualTo(20);
     }
 
@@ -83,7 +83,7 @@ public class LottoGameTest {
     @Test
     @DisplayName("수익률 테스트")
     public void calculateRate(){
-        lottogame = new LottoGame(10000);
+        lottogame = new LottoGame(10000, 2000);
 
         Map<LottoRank, Integer> result = new HashMap<>();
         result.put(LottoRank.FIRST, 1);
@@ -101,7 +101,7 @@ public class LottoGameTest {
     @DisplayName("로또 최종결과 출력")
     public void printResult(){
 
-        lottogame = new LottoGame(10000);
+        lottogame = new LottoGame(10000,2000);
         resultview = new ResultView();
 
         Map<LottoRank, Integer> result = new HashMap<>();
