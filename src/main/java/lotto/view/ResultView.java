@@ -31,4 +31,14 @@ public class ResultView {
         System.out.println( String.format("총 수익률은 %.2f입니다.%s", totalRate, str));
     }
 
+
+    public void printBuyTicket(int manual, int auto){
+        System.out.println( String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",  manual, auto) );
+    }
+
+
+
+
+
+
 }
