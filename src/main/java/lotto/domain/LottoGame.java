@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.LottoNumbers.LottoNumbers;
 import lotto.domain.enums.LottoRank;
+import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
@@ -11,33 +12,52 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class LottoGame {
     private static final int DEFAULT_PURCHASE = 1000;
 
-    private int gameCount;
-    private int purchasePrice;
+    private int gameCountAuto;
+    private int gameCountManual;
+    private int purchasePriceAuto;
+    private int purchasePriceManual;
 
-    public LottoGame(int money) {
-        gameCount = (int)Math.floor(money/DEFAULT_PURCHASE);    //게임회차
-        purchasePrice = gameCount * DEFAULT_PURCHASE; //실제 구입금액
+
+    public LottoGame(int money, int manual) {
+        gameCountAuto = (int)Math.floor(money/DEFAULT_PURCHASE);    //게임회차
+        purchasePriceAuto = gameCountAuto * DEFAULT_PURCHASE; //실제 구입금액
+
+        gameCountManual = (int)Math.floor(manual/DEFAULT_PURCHASE);    //게임회차
+        purchasePriceManual = gameCountManual * DEFAULT_PURCHASE; //실제 구입금액
     }
 
+
     public int getGameCount(){
-        return gameCount;
+        return gameCountAuto;
     }
 
     public int getPurchasePrice(){
-        return purchasePrice;
+        return purchasePriceAuto;
     }
 
-    public ArrayList<LottoTicket> buyLotto(){
-
+    //자동구매
+    public ArrayList<LottoTicket> buyLottoAuto(){
         ArrayList<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < gameCount; i++) {
-            tickets.add(new LottoTicket(getLottoNumber()));
+        for (int i = 0; i < gameCountAuto; i++) {
+            tickets.add(new LottoTicket(getLottoNumberAuto()));
         }
         return tickets;
     }
 
+    //수동구매
+    public ArrayList<LottoTicket> buyLottoManual(int manual, int auto){
+        ArrayList<LottoTicket> tickets = new ArrayList<>();
 
-    public ArrayList<Integer> getLottoNumber() {
+        for (int i = 0; i < gameCountManual; i++) {
+            tickets.add(new LottoTicket(getLottoNumberManual(manual,auto)));
+        }
+
+        return tickets;
+    }
+
+
+    //자동로또
+    public ArrayList<Integer> getLottoNumberAuto() {
         LottoNumbers lottoNumbers = new LottoNumbers();
         ArrayList<Integer> buyLottoNumber = lottoNumbers.LottoNumbers();
 
@@ -48,11 +68,28 @@ public class LottoGame {
         return buyLottoNumber;
     }
 
+    //수동로또
+    public ArrayList<Integer> getLottoNumberManual(int manual, int auto) {
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        /*ArrayList<Integer> buyLottoNumber = lottoNumbers.LottoNumbers();*/
+
+        InputView inputView = new InputView();
+        ArrayList<Integer> buyLottoNumber = new ArrayList<Integer>((inputView.inputManualNum()));
+
+        /*ResultView에게 출력역할 위임*/
+        /*
+        ResultView resultView2 = new ResultView();
+        resultView2.printTicket2(buyLottoNumber, manual, auto);
+        */
+        return buyLottoNumber;
+    }
+
+
     public double calculateRate(Map<LottoRank, Integer> result){
         AtomicInteger sum = new AtomicInteger();
         result.forEach((key, value)->{
             sum.set(sum.get() + key.getReward() * value);
         });
-        return (double)(sum.get()) / purchasePrice;
+        return (double)(sum.get()) / purchasePriceAuto;
     }
 }
