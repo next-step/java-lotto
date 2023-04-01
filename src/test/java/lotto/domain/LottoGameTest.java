@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoTicket;
-import lotto.domain.WinningNumber;
 import lotto.domain.enums.LottoRank;
 import lotto.view.ResultView;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +37,7 @@ public class LottoGameTest {
     @DisplayName("로또 n회 사기")
     public void buyLotto(){
         lottogame = new LottoGame(20000,2000); // 20000원어치 20개구매
-        assertThat(lottogame.buyLotto().size()).isEqualTo(20);
+        assertThat(lottogame.buyLottoAuto().size()).isEqualTo(20);
     }
 
     @Test

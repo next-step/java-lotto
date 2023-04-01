@@ -23,7 +23,7 @@ public class lottoGenerator {
 
         /*수동구매*/
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        ArrayList<LottoTicket> ticket2 = lottoGame.buyLotto2(buyManualPrice/DEFAULT_PURCHASE, buyPrice/DEFAULT_PURCHASE);
+        ArrayList<LottoTicket> ticketManual = lottoGame.buyLottoManual(buyManualPrice/DEFAULT_PURCHASE, buyPrice/DEFAULT_PURCHASE);
 
 
         ResultView resultView2 = new ResultView();
@@ -31,10 +31,10 @@ public class lottoGenerator {
 
 
         /*자동구매*/
-        ArrayList<LottoTicket> ticket = lottoGame.buyLotto();
+        ArrayList<LottoTicket> ticket = lottoGame.buyLottoAuto();
 
 
-        ticket.addAll(ticket2);
+        ticket.addAll(ticketManual);
 
         ArrayList<Integer> winningNums = inputView.inputWinningNum();
         int bonusNum = inputView.inputBonusNum();

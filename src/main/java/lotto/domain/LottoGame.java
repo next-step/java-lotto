@@ -6,51 +6,49 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class LottoGame {
     private static final int DEFAULT_PURCHASE = 1000;
 
-    private int gameCount;
-    private int gameCount2;
-    private int purchasePrice;
-    private int purchasePrice2;
+    private int gameCountAuto;
+    private int gameCountManual;
+    private int purchasePriceAuto;
+    private int purchasePriceManual;
 
 
     public LottoGame(int money, int manual) {
-        gameCount = (int)Math.floor(money/DEFAULT_PURCHASE);    //게임회차
-        purchasePrice = gameCount * DEFAULT_PURCHASE; //실제 구입금액
+        gameCountAuto = (int)Math.floor(money/DEFAULT_PURCHASE);    //게임회차
+        purchasePriceAuto = gameCountAuto * DEFAULT_PURCHASE; //실제 구입금액
 
-        gameCount2 = (int)Math.floor(manual/DEFAULT_PURCHASE);    //게임회차
-        purchasePrice2 = gameCount2 * DEFAULT_PURCHASE; //실제 구입금액
+        gameCountManual = (int)Math.floor(manual/DEFAULT_PURCHASE);    //게임회차
+        purchasePriceManual = gameCountManual * DEFAULT_PURCHASE; //실제 구입금액
     }
 
 
     public int getGameCount(){
-        return gameCount;
+        return gameCountAuto;
     }
 
     public int getPurchasePrice(){
-        return purchasePrice;
+        return purchasePriceAuto;
     }
 
     //자동구매
-    public ArrayList<LottoTicket> buyLotto(){
+    public ArrayList<LottoTicket> buyLottoAuto(){
         ArrayList<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < gameCount; i++) {
+        for (int i = 0; i < gameCountAuto; i++) {
             tickets.add(new LottoTicket(getLottoNumber()));
         }
         return tickets;
     }
 
     //수동구매
-    public ArrayList<LottoTicket> buyLotto2(int manual, int auto){
+    public ArrayList<LottoTicket> buyLottoManual(int manual, int auto){
         ArrayList<LottoTicket> tickets = new ArrayList<>();
 
-        for (int i = 0; i < gameCount2; i++) {
+        for (int i = 0; i < gameCountManual; i++) {
             tickets.add(new LottoTicket(getLottoNumber2(manual,auto)));
         }
 
@@ -92,6 +90,6 @@ public class LottoGame {
         result.forEach((key, value)->{
             sum.set(sum.get() + key.getReward() * value);
         });
-        return (double)(sum.get()) / purchasePrice;
+        return (double)(sum.get()) / purchasePriceAuto;
     }
 }
