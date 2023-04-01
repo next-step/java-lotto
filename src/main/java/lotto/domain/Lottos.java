@@ -4,13 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Lottos {
-    private Set<Lotto> lottos = new HashSet<>();
+    private final Set<Lotto> lottos = new HashSet<>();
 
     public void putLottos(Lotto lotto) {
         lottos.add(lotto);
     }
 
-    public Set<Lotto> getLottos() {
+    public final Set<Lotto> getLottos() {
         return this.lottos;
     }
 }

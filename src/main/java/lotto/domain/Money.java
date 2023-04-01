@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Money {
-    private int buyAmount;
+    private final int buyAmount;
     private final int BUY_AMOUNT_UNIT = 1000;
     private final String BUY_AMOUNT_UNIT_CHECK_TEXT = "금액은 " + BUY_AMOUNT_UNIT + "원 단위로 입력하십시오.";
 

@@ -25,7 +25,7 @@ public class Lotto {
             throw new IllegalArgumentException(LOTTO_LIMIT_NUMBER_COUNT_TEXT);
         }
 
-        numbers.stream().filter(number -> number.intValue() >= MIN_NUMBER && number.intValue() <= MAX_NUMBER)
+        numbers.stream().filter(number -> number >= MIN_NUMBER && number <= MAX_NUMBER)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(LOTTO_LIMIT_NUMBER_TEXT));
     }

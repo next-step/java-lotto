@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Money;
-import lotto.domain.BuyLotto;
-import lotto.domain.WinOfLotto;
+import lotto.domain.*;
 
 import java.util.Scanner;
 import java.util.Set;
@@ -12,13 +10,33 @@ import java.util.stream.Stream;
 public class LottoInput {
     Scanner scan = new Scanner(System.in);
 
-    public BuyLotto getbuyAmount() {
+    public BuyLotto getBuyInfo() {
+        return new BuyLotto(new Money(getBuyAmount()), new Count((getBuyPassiveCount())));
+    }
+
+    private int getBuyAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        BuyLotto buyLotto = new BuyLotto(new Money(scan.nextInt()));
+        return scan.nextInt();
+    }
 
-        System.out.println(buyLotto.getCount() + "개를 구매했습니다.");
+    private int getBuyPassiveCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scan.nextInt();
+    }
 
-        return buyLotto;
+    public void getPassiveNumbers(BuyLotto buyLotto) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        for (int i = 0; i < buyLotto.getPassiveCount().getCount(); i++) {
+            String passiveNumbersText = scan.next();
+            Set<Integer> passiveNumbers = Stream.of(passiveNumbersText.split(",")).collect(Collectors.toSet())
+                    .stream().map(Integer::parseInt)
+                    .collect(Collectors.toSet());
+
+            Lotto lotto = new Lotto(passiveNumbers);
+
+            buyLotto.putLottos(lotto);
+        }
     }
 
     public WinOfLotto getWinOfLottoNumbers() {
