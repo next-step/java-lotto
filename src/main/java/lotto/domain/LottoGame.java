@@ -39,7 +39,7 @@ public class LottoGame {
     public ArrayList<LottoTicket> buyLottoAuto(){
         ArrayList<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < gameCountAuto; i++) {
-            tickets.add(new LottoTicket(getLottoNumber()));
+            tickets.add(new LottoTicket(getLottoNumberAuto()));
         }
         return tickets;
     }
@@ -49,7 +49,7 @@ public class LottoGame {
         ArrayList<LottoTicket> tickets = new ArrayList<>();
 
         for (int i = 0; i < gameCountManual; i++) {
-            tickets.add(new LottoTicket(getLottoNumber2(manual,auto)));
+            tickets.add(new LottoTicket(getLottoNumberManual(manual,auto)));
         }
 
         return tickets;
@@ -57,7 +57,7 @@ public class LottoGame {
 
 
     //자동로또
-    public ArrayList<Integer> getLottoNumber() {
+    public ArrayList<Integer> getLottoNumberAuto() {
         LottoNumbers lottoNumbers = new LottoNumbers();
         ArrayList<Integer> buyLottoNumber = lottoNumbers.LottoNumbers();
 
@@ -69,7 +69,7 @@ public class LottoGame {
     }
 
     //수동로또
-    public ArrayList<Integer> getLottoNumber2(int manual, int auto) {
+    public ArrayList<Integer> getLottoNumberManual(int manual, int auto) {
         LottoNumbers lottoNumbers = new LottoNumbers();
         /*ArrayList<Integer> buyLottoNumber = lottoNumbers.LottoNumbers();*/
 
