@@ -36,13 +36,14 @@ public class LottoPlay {
 
     private static Set<Integer> generateLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
+        final int START_COUNT = 0;
 
-        for (int i = 1; i <= 45; i++) {
+        for (int i = 1; i <= Lotto.MAX_NUMBER; i++) {
             numbers.add(i);
         }
 
         Collections.shuffle(numbers);
-        numbers = numbers.subList(0, 6);
+        numbers = numbers.subList(START_COUNT, Lotto.LIMIT_NUMBER_COUNT);
 
         return new HashSet<>(numbers);
     }

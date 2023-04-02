@@ -6,9 +6,9 @@ import java.util.TreeSet;
 public class Lotto {
     private final String LOTTO_LIMIT_NUMBER_TEXT = "로또 숫자는 1 ~ 45 사이입니다.";
     private final String LOTTO_LIMIT_NUMBER_COUNT_TEXT = "6개의 로또 숫자를 입력 하십시오.";
-    private final int MIN_NUMBER = 1;
-    private final int MAX_NUMBER = 45;
-    private final int LIMIT_NUMBER_COUNT = 6;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
+    public static final int LIMIT_NUMBER_COUNT = 6;
     private final Set<Integer> numbers;
 
     public Lotto(Set<Integer> numbers) {

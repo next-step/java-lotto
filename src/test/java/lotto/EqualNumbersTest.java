@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.BuyLotto;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -9,10 +10,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class EqualNumbersTest {
     @Test
     void 로또_번호_맞추기() {
-
         Set<Integer> lottoNumbers = new HashSet<>();
 
         lottoNumbers.add(3);
@@ -26,8 +28,6 @@ class EqualNumbersTest {
 
         BuyLotto buyLotto = new BuyLotto(new Money(1000));
         buyLotto.putLottos(lotto);
-
-        Set<Integer> winLotto = new HashSet<>();
 
         String winOfLottoNumbersText = "15,2,3,18,44,33";
 
@@ -43,11 +43,10 @@ class EqualNumbersTest {
 
         TotalEqualNumbers totalEqualNumbers = new TotalEqualNumbers(buyLotto, winOfLotto);
 
-        System.out.println(totalEqualNumbers.getEqualsNumberCount3());
-        System.out.println(totalEqualNumbers.getEqualsNumberCount4());
-        System.out.println(totalEqualNumbers.getEqualsNumberCount5());
-        System.out.println(totalEqualNumbers.getEqualsNumberCountBonus5());
-        System.out.println(totalEqualNumbers.getEqualsNumberCount6());
+        assertThat(EqualNumbersMoney.EQUALS_3.toString()).isEqualTo("3개 일치 (5000원) - 0개");
+        assertThat(EqualNumbersMoney.EQUALS_4.toString()).isEqualTo("4개 일치 (50000원) - 0개");
+        assertThat(EqualNumbersMoney.EQUALS_5.toString()).isEqualTo("5개 일치 (1500000원) - 0개");
+        assertThat(EqualNumbersMoney.EQUALS_5_BONUS.toString()).isEqualTo("5개 일치 (3000000원) - 1개");
+        assertThat(EqualNumbersMoney.EQUALS_6.toString()).isEqualTo("6개 일치 (20000000원) - 0개");
     }
-
 }

@@ -32,6 +32,6 @@ public enum EqualNumbersMoney {
     }
 
     public String toString() {
-        return this.equalNumbers + "개 일치 (" + this.winOfMoney + "원) - " + this.equalCount + "개";
+        return this.equalNumbers + "개 일치 (" + (int)this.winOfMoney + "원) - " + this.equalCount + "개";
     }
 }
