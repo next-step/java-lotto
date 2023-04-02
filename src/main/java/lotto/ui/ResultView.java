@@ -1,5 +1,9 @@
 package lotto.ui;
 
+import lotto.constant.LottoRank;
+
+import java.util.EnumMap;
+
 public class ResultView {
     public void exec() {
 
@@ -14,5 +18,11 @@ public class ResultView {
         System.out.printf("Your rate of return : %f\n", rateReturn);
         String gameResult = "";
         System.out.printf("The standard is 1. you %s\n", gameResult);
+    }
+
+    public void printResult(EnumMap<LottoRank, Integer> gameResult) {
+        for (LottoRank lottoRank : gameResult.keySet()) {
+            System.out.println(lottoRank.toString(gameResult.get(lottoRank)));
+        }
     }
 }

@@ -27,4 +27,12 @@ public class LottoTicketMaker {
         Collections.shuffle(numList);
         return new LottoTicket(numList.subList(0, 6));
     }
+
+    public static List<LottoTicket> issueLottoList(int count) {
+        List<LottoTicket> lottoTicketList = new ArrayList<>();
+        for (int i = 0; i < count; ++i) {
+            lottoTicketList.add(LottoTicketMaker.issue());
+        }
+        return lottoTicketList;
+    }
 }

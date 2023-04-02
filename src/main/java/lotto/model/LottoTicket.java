@@ -10,4 +10,5 @@ public class LottoTicket {
     public LottoTicket(List<Integer> nums) {
         lotto = new ArrayList<>(nums);
     }
+    
 }

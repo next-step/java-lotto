@@ -34,4 +34,11 @@ class LottoTicketMakerTest {
         LottoTicket lottoTicketC = LottoTicketMaker.issue();
         assertThat(lottoTicketB.lotto.containsAll(lottoTicketC.lotto)).isFalse();
     }
+
+    @Test
+    void issueLottoList() {
+        List<LottoTicket> lottoTicketList = LottoTicketMaker.issueLottoList(5);
+        assertThat(lottoTicketList.size()).isEqualTo(5);
+        assertThat(lottoTicketList.get(0).lotto.containsAll(lottoTicketList.get(4).lotto)).isFalse();
+    }
 }
