@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class LottoWinningTest {
     void discriminateLottoNumberTest() {
         Lotto lotto;
         Lotto winningLotto;
-        List<Integer> lottoResult = Arrays.asList("0", "0", "0", "0", "0", "0", "0").stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+        List<Integer> lottoResult = new ArrayList<>(Collections.nCopies(7, 0));
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         List<LottoNumber> winningLottoNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
