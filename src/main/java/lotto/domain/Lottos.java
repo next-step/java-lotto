@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> elements;
@@ -39,4 +38,15 @@ public class Lottos {
         return lotteryStatistics;
     }
 
+    public void add(Lotto lotto) {
+        elements.add(lotto);
+    }
+
+    public Lottos getManualLottos() {
+        return new Lottos(this.elements.stream().filter(lotto -> lotto.getLottoType() == LottoType.MANUAL).collect(Collectors.toList()));
+    }
+
+    public Lottos getAutomaticLottos() {
+        return new Lottos(this.elements.stream().filter(lotto -> lotto.getLottoType() == LottoType.AUTOMATIC).collect(Collectors.toList()));
+    }
 }
