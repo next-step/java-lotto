@@ -7,8 +7,8 @@ import static lotto.domain.LottoGame.LOTTO_PRICE;
 public class WinningStatistics {
     private final Map<WinningGrade, Integer> lotteryStatistics;
 
-    public WinningStatistics(WinningNumbers winningNumbers, Lottos lottos) {
-        this.lotteryStatistics = lottos.getWinningStatics(winningNumbers);
+    public WinningStatistics(Map<WinningGrade, Integer> lotteryStatistics) {
+        this.lotteryStatistics = lotteryStatistics;
     }
 
     public int getWinningNumbers(WinningGrade winningGrade) {

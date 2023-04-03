@@ -25,7 +25,7 @@ public class LottoMain {
 
         int bonusNumber = InputView.inputLastWeekBonusNumber();
         WinningNumbers winningNumbers = new WinningNumbers(bonusNumber, InputView.inputLastWeekWinningNumber());
-        WinningStatistics statistics = new WinningStatistics(winningNumbers, Lottos.concat(allManualLottos, allAutomaticLottos));
+        WinningStatistics statistics = Lottos.concat(allManualLottos, allAutomaticLottos).getWinningStatics(winningNumbers);
 
         ResultView.printLottoResult(statistics);
     }

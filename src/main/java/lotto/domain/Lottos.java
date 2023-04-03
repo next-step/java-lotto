@@ -26,14 +26,15 @@ public class Lottos {
         return new Lottos(Stream.concat(targetA.elements.stream(), targetB.elements.stream()).collect(Collectors.toList()));
     }
 
-    public Map<WinningGrade, Integer> getWinningStatics(WinningNumbers winningNumbers) {
+    public WinningStatistics getWinningStatics(WinningNumbers winningNumbers) {
         Map<WinningGrade, Integer> lotteryStatistics = initStatistics();
         this.elements.forEach(lotto -> {
             WinningGrade winningGrade = winningNumbers.getWinningGrade(lotto);
             lotteryStatistics.put(winningGrade, lotteryStatistics.get(winningGrade) + 1);
         });
 
-        return Collections.unmodifiableMap(lotteryStatistics);
+        return new WinningStatistics(Collections.unmodifiableMap(lotteryStatistics));
+
     }
 
     private Map<WinningGrade, Integer> initStatistics() {
