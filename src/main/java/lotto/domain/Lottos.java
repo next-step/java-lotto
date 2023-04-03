@@ -22,19 +22,13 @@ public class Lottos {
         return this.elements.size();
     }
 
-    public static Lottos concat(Lottos targetA, Lottos targetB) {
-        return new Lottos(Stream.concat(targetA.elements.stream(), targetB.elements.stream()).collect(Collectors.toList()));
-    }
-
     public WinningStatistics getWinningStatics(WinningNumbers winningNumbers) {
         Map<WinningGrade, Integer> lotteryStatistics = initStatistics();
-        this.elements.forEach(lotto -> {
-            WinningGrade winningGrade = winningNumbers.getWinningGrade(lotto);
-            lotteryStatistics.put(winningGrade, lotteryStatistics.get(winningGrade) + 1);
-        });
+
+        this.elements.stream().map(winningNumbers::getWinningGrade)
+                .forEach(winningGrade -> lotteryStatistics.put(winningGrade, lotteryStatistics.get(winningGrade) + 1));
 
         return new WinningStatistics(Collections.unmodifiableMap(lotteryStatistics));
-
     }
 
     private Map<WinningGrade, Integer> initStatistics() {
