@@ -35,8 +35,10 @@ public class LottoNumber {
         }
     }
 
-    public static Set<Integer> all() {
-        return LOTTO_NUMBERS.keySet();
+    public static Lotto getRandomLotto(int quantity) {
+        List<Integer> lottoNumberList = new ArrayList<>(LOTTO_NUMBERS.keySet());
+        Collections.shuffle(new ArrayList<>(LOTTO_NUMBERS.keySet()));
+        return new Lotto(lottoNumberList.subList(0, quantity).stream().mapToInt(i -> i).toArray());
     }
 
     public int getNumber() {
