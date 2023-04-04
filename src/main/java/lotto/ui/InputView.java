@@ -1,23 +1,26 @@
 package lotto.ui;
 
+import lotto.model.WinningInfo;
+
 import java.util.Scanner;
 
 public class InputView {
-    public void exec() {
-        Scanner scanner = new Scanner(System.in);
+
+    private Scanner scanner = new Scanner(System.in);
+
+    public int receiveInputMoney() {
         System.out.println("How much will you pay?");
         int money = scanner.nextInt();
+        scanner.nextLine();
+        return money;
+    }
 
-        // TODO : get lottoCount with money
-        int lottoCount = 0;
-        System.out.printf("You got %d lottos\n", lottoCount);
-        // TODO : print lotto with numbers
-
+    public WinningInfo receiveInputWinningInfo() {
         System.out.println("Input winning numbers of last week");
-        String strWinningNumbers = scanner.next();
-        // TODO : parse strWinningNumbers
+        String strWinningNumbers = scanner.nextLine();
 
         System.out.println("Input bonus ball number");
         int bonusNumber = scanner.nextInt();
+        return new WinningInfo(strWinningNumbers, bonusNumber);
     }
 }

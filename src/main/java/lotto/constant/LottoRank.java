@@ -29,10 +29,10 @@ public enum LottoRank {
     }
 
     public String toString(int count) {
-        String strFormat = "%d개 일치 (%d원)- %d개";
+        String strFormat = "%d match (%d won) count : %d";
         if (this == SECOND) {
-            strFormat = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
+            strFormat = "%d match, bonus ball match(%d won) count : %d";
         }
-        return String.format(strFormat, this.matchBonus, this.prize, count);
+        return String.format(strFormat, this.matchCount, this.prize, count);
     }
 }

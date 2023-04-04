@@ -1,28 +1,31 @@
 package lotto.ui;
 
 import lotto.constant.LottoRank;
+import lotto.model.LottoTicket;
 
 import java.util.EnumMap;
+import java.util.List;
 
 public class ResultView {
-    public void exec() {
 
-        // TODO : get winning lottos with numbers
+    public static void printLottos(int lottoCount, List<LottoTicket> lottoTicketList) {
 
-        System.out.println("Winning statistics\n=========\n");
-
-        // TODO : print winning statistics
-
-        // TODO : get rateReturn, gameResult
-        double rateReturn = 0;
-        System.out.printf("Your rate of return : %f\n", rateReturn);
-        String gameResult = "";
-        System.out.printf("The standard is 1. you %s\n", gameResult);
+        System.out.printf("You got %d lottos\n", lottoCount);
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            System.out.println(lottoTicket.toString());
+        }
     }
 
-    public void printResult(EnumMap<LottoRank, Integer> gameResult) {
+    public static void printResult(EnumMap<LottoRank, Integer> gameResult, double rateReturn) {
+        System.out.println("Winning statistics\n=========\n");
         for (LottoRank lottoRank : gameResult.keySet()) {
             System.out.println(lottoRank.toString(gameResult.get(lottoRank)));
         }
+        System.out.printf("Your rate of return : %f\n", rateReturn);
+        String result = "LOST";
+        if (rateReturn >= 1) {
+            result = "WIN";
+        }
+        System.out.printf("The standard is 1. you %s\n", result);
     }
 }

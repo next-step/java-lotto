@@ -3,6 +3,8 @@ package lotto;
 import lotto.constant.LottoRank;
 import lotto.model.LottoTicket;
 import lotto.model.WinningInfo;
+import lotto.ui.InputView;
+import lotto.ui.ResultView;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -11,11 +13,18 @@ public class LottoGame {
 
     private static int LOTTO_PRICE = 1000;
 
-    public String commentResult(double rateReturn) {
-        if (rateReturn >= 1) {
-            return "이득";
-        }
-        return "손해";
+    public void exec() {
+        InputView inputView = new InputView();
+        int money = inputView.receiveInputMoney();
+        WinningInfo winningInfo = inputView.receiveInputWinningInfo();
+
+        int lottoCount = getLottoCount(money);
+        List<LottoTicket> lottoTicketList = LottoTicketMaker.issueLottoList(lottoCount);
+        ResultView.printLottos(lottoCount, lottoTicketList);
+
+        EnumMap<LottoRank, Integer> result = scratchLottoList(winningInfo, lottoTicketList);
+        double rateReturn = getRateReturn(result, money);
+        ResultView.printResult(result, rateReturn);
     }
 
     public double getRateReturn(EnumMap<LottoRank, Integer> gameResult, double cost) {
@@ -64,7 +73,7 @@ public class LottoGame {
         return LottoRank.LOSE;
     }
 
-    public int getLottoCount(int money) {
+    public static int getLottoCount(int money) {
         return money / LOTTO_PRICE;
     }
 
