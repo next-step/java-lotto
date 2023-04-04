@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 
 import static lotto.domain.WinningGrade.*;
 
@@ -23,17 +22,20 @@ public class LottoGameTest {
     @Test
     void getStatistics() {
         LottoGame lottoGame = new LottoGame(new Money(6000));
-        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(
-                new Lotto(1, 2, 3, 4, 5, 6),
-                new Lotto(1, 2, 3, 4, 5, 7),
-                new Lotto(1, 2, 3, 4, 5, 8),
-                new Lotto(1, 2, 3, 4, 8, 9),
-                new Lotto(1, 2, 3, 7, 8, 9),
-                new Lotto(1, 2, 8, 9, 10, 11)));
+
+        Lottos lottos = new Lottos(
+                List.of(new Lotto(1, 2, 3, 4, 5, 6),
+                        new Lotto(1, 2, 3, 4, 5, 7),
+                        new Lotto(1, 2, 3, 4, 5, 8),
+                        new Lotto(1, 2, 3, 4, 8, 9),
+                        new Lotto(1, 2, 3, 7, 8, 9),
+                        new Lotto(1, 2, 8, 9, 10, 11)));
+
+        lottos.getElements().forEach(lotto -> lottoGame.issueLotto(new ManualLottoGenerator(lotto)));
+
 
         WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
-
-        WinningStatistics statistics = new WinningStatistics(winningNumbers, lottos);
+        WinningStatistics statistics = lottos.getWinningStatics(winningNumbers);
 
         Assertions.assertThat(statistics.getWinningNumbers(FIRST_PRIZE)).isEqualTo(1);
         Assertions.assertThat(statistics.getWinningNumbers(SECOND_PRIZE)).isEqualTo(1);
@@ -47,21 +49,23 @@ public class LottoGameTest {
     @Test
     void getTotalRateOfReturn() {
         LottoGame lottoGame = new LottoGame(new Money(10000));
-        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(
-                new Lotto(1, 2, 3, 7, 8, 9),
-                new Lotto(1, 2, 8, 9, 10, 11),
-                new Lotto(1, 2, 8, 9, 10, 11),
-                new Lotto(1, 2, 8, 9, 10, 11),
-                new Lotto(1, 2, 8, 9, 10, 11),
-                new Lotto(1, 2, 8, 9, 10, 11),
-                new Lotto(1, 2, 8, 9, 10, 11),
-                new Lotto(1, 2, 8, 9, 10, 11),
-                new Lotto(1, 2, 8, 9, 10, 11),
-                new Lotto(1, 2, 8, 9, 10, 11)
-        ));
-        WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
 
-        WinningStatistics winningStatistics = new WinningStatistics(winningNumbers, lottos);
+        Lottos lottos = new Lottos(
+                List.of(new Lotto(1, 2, 3, 7, 8, 9),
+                        new Lotto(1, 2, 8, 9, 10, 11),
+                        new Lotto(1, 2, 8, 9, 10, 11),
+                        new Lotto(1, 2, 8, 9, 10, 11),
+                        new Lotto(1, 2, 8, 9, 10, 11),
+                        new Lotto(1, 2, 8, 9, 10, 11),
+                        new Lotto(1, 2, 8, 9, 10, 11),
+                        new Lotto(1, 2, 8, 9, 10, 11),
+                        new Lotto(1, 2, 8, 9, 10, 11),
+                        new Lotto(1, 2, 8, 9, 10, 11)));
+
+        lottos.getElements().forEach(lotto -> lottoGame.issueLotto(new ManualLottoGenerator(lotto)));
+
+        WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
+        WinningStatistics winningStatistics = lottos.getWinningStatics(winningNumbers);
         Assertions.assertThat(winningStatistics.getTotalRateOfReturn()).isEqualTo(0.5);
 
     }
@@ -70,21 +74,26 @@ public class LottoGameTest {
     @Test
     void issueManualQuantity() {
         LottoGame lottoGame = new LottoGame(new Money(10000));
-        List<Lotto> lottos = lottoGame.generateLotto(new ManualLottoGenerator(List.of(Set.of(1, 2, 3, 7, 8, 9))));
+        Lottos lottos = new Lottos(
+                List.of(new Lotto(1, 2, 3, 7, 8, 9)));
 
-        Assertions.assertThat(lottos).hasSize(1);
-        Assertions.assertThat(lottos).containsExactly(new Lotto(1, 2, 3, 7, 8, 9));
+        lottos.getElements().forEach(lotto -> lottoGame.issueLotto(new ManualLottoGenerator(lotto)));
+
+        Assertions.assertThat(lottos.getElements()).hasSize(1);
+        Assertions.assertThat(lottos.getElements()).containsExactly(new Lotto(1, 2, 3, 7, 8, 9));
     }
 
     @DisplayName("수동 발급 수는 전체 발급 수보다 적어야 한다.")
     @Test
     void checkManualQuantity() {
         LottoGame lottoGame = new LottoGame(new Money(1000));
-        Assertions.assertThatThrownBy(() -> lottoGame.generateLotto(
-                new ManualLottoGenerator(List.of(
-                        Set.of(1, 2, 3, 7, 8, 9),
-                        Set.of(1, 2, 3, 7, 8, 9))))
-        ).isInstanceOf(IllegalArgumentException.class);
 
+        Lottos lottos = new Lottos(
+                List.of(new Lotto(1, 2, 3, 7, 8, 9),
+                        new Lotto(1, 2, 3, 7, 8, 9)));
+
+        Assertions.assertThatThrownBy(() -> lottos.getElements()
+                        .forEach(lotto -> lottoGame.issueLotto(new ManualLottoGenerator(lotto))))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -4,17 +4,19 @@ import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
 public class ResultView {
-    public static void printBuyCountForPrint(List<Lotto> allAutomaticLottos, List<Lotto> allManualLottos) {
-        System.out.println("수동으로 " + allManualLottos.size() + "장 " + allAutomaticLottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : allManualLottos) {
+    public static void printBuyCountForPrint(LottoGame lottoGame) {
+        Lottos manualLottos = lottoGame.getLottos().getManualLottos();
+        Lottos automaticLottos = lottoGame.getLottos().getAutomaticLottos();
+
+        System.out.println("수동으로 " + manualLottos.getElements().size() + "장 " + automaticLottos.getElements().size() + "개를 구매했습니다.");
+        for (Lotto lotto : manualLottos.getElements()) {
             System.out.println(lotto.getLottoNumbers());
         }
-        for (Lotto lotto : allAutomaticLottos) {
+        for (Lotto lotto : automaticLottos.getElements()) {
             System.out.println(lotto.getLottoNumbers());
         }
         System.out.println();
@@ -45,7 +47,6 @@ public class ResultView {
     public static String matchCountPrint(WinningGrade winningGrade) {
         return winningGrade.getMatchCount() + "개 일치";
     }
-
 
 
 

@@ -1,7 +1,9 @@
 package lotto.view;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import lotto.domain.*;
+
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class InputView {
     public static int inputBuyPrice() {
@@ -11,31 +13,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static int issueManualLottos() {
+    public static int issueLottos() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-
-    public static List<Set<Integer>> issueManualLottos(int manualQuantity) {
-        if (manualQuantity < 0) {
-            return List.of();
-        }
-
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        List<Set<Integer>> manualLottos = new ArrayList<>();
-
-        for (int i = 0; i < manualQuantity; i++) {
-            String inputNumbers = scanner.nextLine();
-            Set<Integer> lotto = Arrays.stream(inputNumbers.replaceAll(" ", "").split(","))
-                    .map(Integer::valueOf).collect(Collectors.toSet());
-
-            manualLottos.add(lotto);
-        }
-        return manualLottos;
-    }
-
 
     public static int[] inputLastWeekWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
@@ -51,4 +33,29 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
+    public static void issueLottos(LottoGame lottoGame, int manualQuantity) {
+        if (manualQuantity == 0) {
+            return;
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < manualQuantity; i++) {
+            String inputNumbers = scanner.nextLine();
+            int[] numbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(","))
+                    .map(Integer::valueOf)
+                    .mapToInt(a -> a).toArray();
+
+            lottoGame.issueLotto(new ManualLottoGenerator(new Lotto(LottoType.MANUAL, numbers)));
+        }
+
+        issueRandomLottos(lottoGame);
+    }
+
+    private static void issueRandomLottos(LottoGame lottoGame) {
+        long availableQuantity = lottoGame.getAvailableQuantity();
+        for (long i = 0; i < availableQuantity; i++) {
+            lottoGame.issueLotto(new RandomLottoGenerator());
+        }
+    }
 }

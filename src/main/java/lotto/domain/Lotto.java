@@ -7,8 +7,14 @@ public class Lotto {
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private final Set<LottoNumber> lottoNumbers;
+    private final LottoType lottoType;
 
     public Lotto(int ... numbers) {
+        this(LottoType.MANUAL, numbers);
+    }
+
+    public Lotto(LottoType lottoType, int... numbers) {
+        this.lottoType = lottoType;
         this.lottoNumbers = Arrays.stream(numbers).mapToObj(LottoNumber::from).collect(Collectors.toSet());
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 숫자의 갯수는 " + LOTTO_NUMBER_COUNT + "개입니다.");
@@ -31,6 +37,10 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream().map(LottoNumber::getNumber).sorted().collect(Collectors.toList());
+    }
+
+    public LottoType getLottoType() {
+        return lottoType;
     }
 
     @Override
