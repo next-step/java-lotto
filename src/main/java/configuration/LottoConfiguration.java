@@ -8,5 +8,4 @@ public class LottoConfiguration {
     public static final int SECOND_OR_THIRD_MATCHING_COUNT = 5;
     public static final int FORTH_MATCHING_COUNT = 4;
     public static final int FIFTH_MATCHING_COUNT = 3;
-
 }

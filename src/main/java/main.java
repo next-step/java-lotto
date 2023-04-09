@@ -16,7 +16,6 @@ public class main {
     public static void main(String[] args) {
         Winners winners = new Winners();
 
-
         int amount = InputView.getAmount();
         int manualAmount = InputView.getManualAmount();
         List<List<Integer>> manualNumbers = InputView.getManualLottoNumber(manualAmount);
