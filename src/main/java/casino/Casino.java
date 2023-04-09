@@ -1,7 +1,8 @@
 package casino;
 
-import Order.LottoOrder;
+import order.LottoOrder;
 import configuration.LottoConfiguration;
+import configuration.WinnerType;
 import exception.CasinoException;
 import lotto.*;
 
@@ -49,7 +50,7 @@ public class Casino {
     }
 
 
-    public static int match(Lotto userLotto, WinningLotto winningLotto) {
+    public static WinnerType match(Lotto userLotto, WinningLotto winningLotto) {
         return LottoGame.match(userLotto, winningLotto);
     }
 }

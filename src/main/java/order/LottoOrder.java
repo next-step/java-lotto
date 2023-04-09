@@ -1,10 +1,11 @@
-package Order;
+package order;
 
-public class LottoOrder extends Order{
+public class LottoOrder {
     private final int manualTicketCounts;
-    public LottoOrder(int money, int manualTicketCounts) {
-        super(money);
+    private final Money money;
+    public LottoOrder(Money money, int manualTicketCounts) {
         validate(manualTicketCounts);
+        this.money = money;
         this.manualTicketCounts = manualTicketCounts;
     }
 
@@ -16,5 +17,9 @@ public class LottoOrder extends Order{
 
     public int getManualTicketCounts() {
         return manualTicketCounts;
+    }
+
+    public int getMoney() {
+        return money.getMoney();
     }
 }

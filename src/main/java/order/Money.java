@@ -1,8 +1,8 @@
-package Order;
+package order;
 
-public class Order {
+public class Money {
     private final int money;
-    public Order(int money) {
+    public Money(int money) {
         validate(money);
         this.money = money;
     }

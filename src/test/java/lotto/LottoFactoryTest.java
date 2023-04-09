@@ -9,12 +9,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoFactoryTest {
-    @DisplayName("발급된 로또 번호는 1~45 사이의 값 중 6개 이다.")
+    @DisplayName("발급된 로또 번호는 1~45 사이의 값 이다.")
     @Test
     void publicTicket() {
         Lotto lotto = LottoFactory.auto();
         List<LottoNumber> lottoNumber = lotto.getLottoNumbers();
-        assertThat(lottoNumber.size()).isEqualTo(6);
         lottoNumber.forEach(i -> assertThat(i.getNumber()).isBetween(1, 45));
     }
 

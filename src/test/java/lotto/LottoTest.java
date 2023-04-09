@@ -1,16 +1,10 @@
 package lotto;
 
-import Order.LottoOrder;
-import casino.Casino;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -34,7 +28,7 @@ public class LottoTest {
     @Test
     void getLotto2() {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(List.of(
+            new Lotto(List.of(
                     LottoNumber.of(1),
                     LottoNumber.of(2),
                     LottoNumber.of(3),
@@ -49,29 +43,29 @@ public class LottoTest {
     @Test
     void getLotto3() {
         assertThatThrownBy(() -> {
-                    Lotto lotto = new Lotto(List.of(
-                            LottoNumber.of(1),
-                            LottoNumber.of(2),
-                            LottoNumber.of(3),
-                            LottoNumber.of(4),
-                            LottoNumber.of(5),
-                            LottoNumber.of(6),
-                            LottoNumber.of(7)));
+                    new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6),
+                        LottoNumber.of(7)));
                 }
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또 번호는 1~45사이의 숫자다.")
+    @DisplayName("로또 번호 범위에서 벗어나면 예외가 발생한다")
     @Test
     void getLotto4() {
         assertThatThrownBy(() -> {
-                    Lotto lotto = new Lotto(List.of(
-                            LottoNumber.of(1),
-                            LottoNumber.of(2),
-                            LottoNumber.of(3),
-                            LottoNumber.of(4),
-                            LottoNumber.of(5),
-                            LottoNumber.of(46)));
+                    new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(46)));
                 }
         ).isInstanceOf(IllegalArgumentException.class);
     }

@@ -27,6 +27,18 @@ public class Lotto {
         Collections.sort(lottoNumberList);
         return lottoNumberList.toString();
     }
+
+    public boolean hasDuplication() {
+        return lottoNumbers.stream().distinct().count() != lottoNumbers.size();
+    }
+
+    public int getSize() {
+        return lottoNumbers.size();
+    }
+
+    public boolean hasNumber(int number) {
+        return lottoNumbers.contains(LottoNumber.of(number));
+    }
 }
 
 

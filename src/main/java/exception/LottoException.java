@@ -2,16 +2,13 @@ package exception;
 
 import configuration.LottoConfiguration;
 import lotto.Lotto;
-import lotto.LottoNumber;
-
-import java.util.List;
 
 public class LottoException {
     public static void validate(Lotto numbers) {
-        if (numbers.getLottoNumbers().size() != numbers.getLottoNumbers().stream().distinct().count()) {
+        if (numbers.hasDuplication()) {
             throw new IllegalArgumentException("중복된 숫자가 있습니다.");
         }
-        if (numbers.getLottoNumbers().size() > 6) {
+        if (numbers.getSize() > 6) {
             throw new IllegalArgumentException("숫자가 6개보다 많습니다");
         }
     }
@@ -23,7 +20,7 @@ public class LottoException {
         }
     }
     public static void validateBonusNumber(Lotto numbers, int bonusNumber) {
-        if (numbers.getLottoNumbers().contains(LottoNumber.of(bonusNumber))) {
+        if (numbers.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호가 이미 있습니다");
         }
     }
