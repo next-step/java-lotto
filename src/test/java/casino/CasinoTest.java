@@ -1,7 +1,8 @@
 package casino;
 
-import Order.LottoOrder;
+import order.LottoOrder;
 import lotto.Lotto;
+import order.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -50,7 +51,7 @@ public class CasinoTest {
         int money = 14000;
         int manualLottoCount = 1;
         List<List<Integer>> userManualLottoNumber = List.of(List.of(1, 2, 3, 4, 5, 7));
-        LottoOrder lottoOrder = new LottoOrder(money,manualLottoCount);
+        LottoOrder lottoOrder = new LottoOrder(new Money(money),manualLottoCount);
         List<Lotto> userLotto = Casino.buyLotteryWithManual(lottoOrder, userManualLottoNumber);
         userLotto.forEach(i ->
                 System.out.println(i.printLottoNumber())

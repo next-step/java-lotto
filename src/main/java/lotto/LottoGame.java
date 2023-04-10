@@ -1,9 +1,13 @@
 package lotto;
 
-import java.util.HashSet;
+import configuration.WinnerType;
+
+import static configuration.LottoConfiguration.*;
 
 public class LottoGame {
-    public static int match(Lotto userLotto, WinningLotto winningLotto) {
+    private static WinnerType winnerType;
+
+    public static WinnerType match(Lotto userLotto, WinningLotto winningLotto) {
         int matchingCount = (int) userLotto
                 .getLottoNumbers()
                 .stream()
@@ -15,22 +19,23 @@ public class LottoGame {
                 .contains(winningLotto.getBonusNumber());
         return LottoGame.winningCheck(matchingCount, bonusMatch);
     }
-    public static int winningCheck(int matchingCount, boolean bonusMatch) {
-        if (matchingCount == 6) {
-            return 1;
+
+    public static WinnerType winningCheck(int matchingCount, boolean bonusMatch) {
+        if (matchingCount == FIRST_MATCHING_COUNT) {
+            return winnerType.FIRST;
         }
-        if (matchingCount == 5 && bonusMatch) {
-            return 2;
+        if (matchingCount == SECOND_OR_THIRD_MATCHING_COUNT && bonusMatch) {
+            return winnerType.SECOND;
         }
-        if (matchingCount == 5 ) {
-            return 3;
+        if (matchingCount == SECOND_OR_THIRD_MATCHING_COUNT) {
+            return winnerType.THIRD;
         }
-        if (matchingCount == 4) {
-            return 4;
+        if (matchingCount == FORTH_MATCHING_COUNT) {
+            return winnerType.FORTH;
         }
-        if (matchingCount ==3) {
-            return 5;
+        if (matchingCount == FIFTH_MATCHING_COUNT) {
+            return winnerType.FIFTH;
         }
-        return 6;
+        return winnerType.NONE;
     }
 }
