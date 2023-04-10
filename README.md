@@ -5,5 +5,15 @@
 * 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
 * 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
 
+## 2단계 로또(자동)
+* InputView ResultView class 구현
+* Lotto class 구현 
+  * 로또 구매액을 확인해서 로또 구매 갯수 만큼 로또 번호를 생성한다
+  * 당첨번호를 받아서 당첨된 로또 등급대로 갯수를 저장한다
+* class 분리
+* tc 작성
+* readme 
+
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
