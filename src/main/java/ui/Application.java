@@ -20,5 +20,9 @@ public class Application {
         for (int i = 0; i < lottoNumbers.size(); i++) {
             System.out.println(lottoNumbers.get(i));
         }
+
+        inputView.saveWinningNumber();
+        lotto.calculateWinningResult(inputView.getWinningNumbers());
+        ResultView.printResult(lotto.getWinningResult());
     }
 }
