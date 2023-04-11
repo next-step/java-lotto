@@ -1,7 +1,6 @@
 package ui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +9,7 @@ public class InputView {
     public static final int INITIAL_VALUE =0;
     private final Scanner scanner = new Scanner(System.in);
     private int amount = INITIAL_VALUE;
-    private int count = INITIAL_VALUE;
+    int count = INITIAL_VALUE;
     private List<Integer> winningNumbers = null;
 
     public void saveAmount(){
