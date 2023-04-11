@@ -72,4 +72,16 @@ public class Lotto {
     }
 
 
+    public Double calculateRateOfReturn(int amount) {
+        Double sum = 0.0;
+        Double total = 0.0;
+        for (int i = WinningPrice.getLastEqualCount(); i <= WinningPrice.getFirstEqualCount(); i++) {
+            int count = winningResult.get(i);
+            sum += count * WinningPrice.of(i).getPrice();
+        }
+
+        total = sum / amount / 100;
+        return total;
+    }
+
 }

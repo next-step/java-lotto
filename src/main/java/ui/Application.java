@@ -24,5 +24,7 @@ public class Application {
         inputView.saveWinningNumber();
         lotto.calculateWinningResult(inputView.getWinningNumbers());
         ResultView.printResult(lotto.getWinningResult());
+
+        ResultView.printRatioOfReturn(lotto.calculateRateOfReturn(inputView.amount));
     }
 }

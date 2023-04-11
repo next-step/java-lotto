@@ -13,5 +13,11 @@ public class ResultView {
             int count = winningResult.get(equalCount);
             System.out.println(equalCount + "개 일치 (" + WinningPrice.of(equalCount).getPrice() + "원)- " + count);
         }
+
     }
+
+    public static void printRatioOfReturn(Double ratioOfReturn) {
+        System.out.println(String.format("총 수익률은 %.2f입니다.", ratioOfReturn));
+    }
+
 }

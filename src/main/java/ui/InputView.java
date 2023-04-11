@@ -8,7 +8,7 @@ public class InputView {
 
     public static final int INITIAL_VALUE = 0;
     private final Scanner scanner = new Scanner(System.in);
-    private int amount = INITIAL_VALUE;
+    int amount = INITIAL_VALUE;
     int count = INITIAL_VALUE;
 
     private List<Integer> winningNumbers = null;
