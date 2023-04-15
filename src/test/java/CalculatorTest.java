@@ -44,4 +44,19 @@ public class CalculatorTest {
         //then
         assertThat(result).isEqualTo(40);
     }
+
+    @Test
+    @DisplayName("나눗셈_테스트")
+    public void 나눗셈_테스트(){
+        //given
+        int a = 10;
+        int b = 2;
+        //when
+        int result = Calculator.division(a,b);
+        //then
+        assertThat(result).isEqualTo(5);
+    }
+
+
+
 }
