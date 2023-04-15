@@ -32,4 +32,16 @@ public class CalculatorTest {
         //then
         assertThat(result).isEqualTo(-6);
     }
+
+    @Test
+    @DisplayName("곱셈_테스트")
+    public void 곱셈_테스트(){
+        //given
+        int a = 4;
+        int b = 10;
+        //when
+        int result = Calculator.multiplication(a,b);
+        //then
+        assertThat(result).isEqualTo(40);
+    }
 }
