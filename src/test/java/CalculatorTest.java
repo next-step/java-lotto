@@ -1,10 +1,22 @@
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
+
+    @ParameterizedTest
+    @ValueSource(strings = {"2 + 3 * 4 / 2!", "2 + 3 * 4 ^ 2"})
+    @DisplayName("입력받은_문자열_예외처리_테스트")
+    public void 입력받은_문자열_예외처리_테스트(String formula){
+        assertThatThrownBy(()->{
+            Calculator.calculate(formula);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자와 사칙연산 기호만이 입력 되어야 합니다.");
+    }
 
     @Test
     @DisplayName("덧셈_테스트")
