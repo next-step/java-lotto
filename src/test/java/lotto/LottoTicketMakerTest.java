@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketMakerTest {
 
-
-
     @Test
     void createNumList() {
         List<Integer> numList = LottoTicketMaker.createNumList();

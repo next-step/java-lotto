@@ -8,9 +8,14 @@ import java.util.List;
 
 public class LottoTicketMaker {
 
-    private static List<Integer> numList;
     private static int MIN_NUM = 1;
     private static int MAX_NUM = 45;
+    private static List<Integer> numList = createNumList();
+
+
+    private LottoTicketMaker() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static List<Integer> createNumList() {
         List<Integer> list = new ArrayList<>();
@@ -21,9 +26,6 @@ public class LottoTicketMaker {
     }
 
     public static LottoTicket issue() {
-        if (numList == null) {
-            numList = createNumList();
-        }
         Collections.shuffle(numList);
         return new LottoTicket(numList.subList(0, 6));
     }
@@ -31,7 +33,7 @@ public class LottoTicketMaker {
     public static List<LottoTicket> issueLottoList(int count) {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         for (int i = 0; i < count; ++i) {
-            lottoTicketList.add(LottoTicketMaker.issue());
+            lottoTicketList.add(issue());
         }
         return lottoTicketList;
     }

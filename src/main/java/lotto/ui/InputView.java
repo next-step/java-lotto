@@ -6,20 +6,22 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private Scanner scanner = new Scanner(System.in);
+    private InputView() {}
 
-    public int receiveInputMoney() {
-        System.out.println("How much will you pay?");
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static int receiveInputMoney() {
+        System.out.println("구입금액을 입력해 주세요.");
         int money = scanner.nextInt();
         scanner.nextLine();
         return money;
     }
 
-    public WinningInfo receiveInputWinningInfo() {
-        System.out.println("Input winning numbers of last week");
+    public static WinningInfo receiveInputWinningInfo() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String strWinningNumbers = scanner.nextLine();
 
-        System.out.println("Input bonus ball number");
+        System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = scanner.nextInt();
         return new WinningInfo(strWinningNumbers, bonusNumber);
     }

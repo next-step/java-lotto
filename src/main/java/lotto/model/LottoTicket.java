@@ -16,4 +16,15 @@ public class LottoTicket {
     public String toString() {
         return this.lotto.stream().map(n -> String.valueOf(n)).collect(Collectors.joining(",", "[", "]"));
     }
+
+    public int getMatchCount(List<Integer> winningLottos) {
+        return (int) this.lotto.stream()
+                .distinct()
+                .filter(winningLottos::contains)
+                .count();
+    }
+
+    public boolean containsBonusBall(int bonusNumber) {
+        return this.lotto.contains(bonusNumber);
+    }
 }
