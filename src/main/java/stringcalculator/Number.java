@@ -73,7 +73,14 @@ public class Number {
     }
 
     private int division(Number number) {
+        if (isDivisible(number)) {
+            throw new InvalidParameterException("나누어 떨어지지 않는 수로는 나눌수 없습니다.");
+        }
         return this.value / number.value();
+    }
+
+    private boolean isDivisible(Number number) {
+        return this.value % number.value() != 0;
     }
 
     private boolean isMultiplication(Operation operation) {
