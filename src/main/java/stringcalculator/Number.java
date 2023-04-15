@@ -2,8 +2,11 @@ package stringcalculator;
 
 import java.security.InvalidParameterException;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Number {
+
+    public static final Pattern VALID_NUMBER = Pattern.compile("\\d");
 
     public static Operation ADDITION = new Operation("+");
     public static Operation SUBTRACTION = new Operation("-");
@@ -13,7 +16,7 @@ public class Number {
     private int value;
 
     public Number(String value) {
-        if (isEmpty(value)) {
+        if (isValid(value)) {
             throw new InvalidParameterException("빈 숫자는 입력할 수 없습니다.");
         }
         this.value = toInt(value);
@@ -27,7 +30,7 @@ public class Number {
         return Integer.parseInt(number);
     }
 
-    private boolean isEmpty(String number) {
+    private boolean isValid(String number) {
         return number == null || number.isBlank();
     }
 
@@ -46,6 +49,10 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public Number clone() {
+        return new Number(value);
     }
 
     public int value() {
