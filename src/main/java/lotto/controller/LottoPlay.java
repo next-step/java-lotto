@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.TotalEqualNumbers;
-import lotto.domain.BuyLotto;
-import lotto.domain.Lotto;
-import lotto.domain.WinOfLotto;
+import lotto.domain.*;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
@@ -15,7 +12,7 @@ public class LottoPlay {
         LottoOutput lottoOutput = new LottoOutput();
 
         BuyLotto buyLotto = lottoInput.getBuyInfo();    // 구입금액 입력
-        lottoInput.getPassiveNumbers(buyLotto);         // 수동으로 번호 입력
+        lottoInput.enterPassiveNumbers(buyLotto);       // 수동으로 번호 입력
         lottoOutput.displayCount(buyLotto);             // 수동, 자동 개수 출력
 
         // 나머지 금액 자동으로 번호 생성
@@ -28,7 +25,8 @@ public class LottoPlay {
 
         WinOfLotto winOfLotto = lottoInput.getWinOfLottoNumbers();  // 지난 주 당첨 번호 입력
 
-        new TotalEqualNumbers(buyLotto, winOfLotto);                // 당첨 번호와 구매한 번호들 비교
+        TotalEqualNumbers totalEqualNumbers = new TotalEqualNumbers();
+        totalEqualNumbers.matchNumbers(buyLotto, winOfLotto);       // 당첨 번호와 구매한 번호들 비교
 
         lottoOutput.displayWinOfResult();                           // 당첨 결과 출력
         lottoOutput.displayPriceEarningsRatio(buyLotto);            // 수익률 출력

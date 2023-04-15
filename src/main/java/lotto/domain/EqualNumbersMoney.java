@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.text.DecimalFormat;
+
 public enum EqualNumbersMoney {
     EQUALS(0, 0),
     EQUALS_3(3, 5000),
@@ -8,14 +10,18 @@ public enum EqualNumbersMoney {
     EQUALS_5_BONUS(5, 3000000),
     EQUALS_6(6, 20000000);
 
-    private int equalNumbers;
-    private final float winOfMoney;
+    private final int equalNumbers;
+    private final long winOfMoney;
     private int equalCount;
-    private static float winAmountTotal;
+    private long winAmountTotal;
 
-    EqualNumbersMoney(int equalNumbers, float winOfMoney) {
+    EqualNumbersMoney(int equalNumbers, long winOfMoney) {
         this.equalNumbers = equalNumbers;
         this.winOfMoney = winOfMoney;
+    }
+
+    public float getWinAmountTotal() {
+        return winAmountTotal;
     }
 
     public void setEqualCount() {
@@ -27,11 +33,8 @@ public enum EqualNumbersMoney {
         winAmountTotal += winOfMoney;
     }
 
-    public float getWinAmountTotal() {
-        return winAmountTotal;
-    }
-
     public String toString() {
-        return this.equalNumbers + "개 일치 (" + (int)this.winOfMoney + "원) - " + this.equalCount + "개";
+        DecimalFormat df = new DecimalFormat("#,###");
+        return this.equalNumbers + "개 일치 (" + df.format(this.winOfMoney) + "원) - " + this.equalCount + "개";
     }
 }

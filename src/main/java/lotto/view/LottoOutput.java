@@ -25,7 +25,7 @@ public class LottoOutput {
     }
 
     public void displayPriceEarningsRatio(BuyLotto buyLotto) {
-        float priceEarninsRatio = ((EqualNumbersMoney.EQUALS.getWinAmountTotal() - buyLotto.getbuyAmount()) / buyLotto.getbuyAmount()) * 100;
+        float priceEarninsRatio = ((EqualNumbersMoney.EQUALS.getWinAmountTotal() - buyLotto.getbuyAmount()) / (float) buyLotto.getbuyAmount()) * 100;
 
         System.out.println("총 수익률은 " + priceEarninsRatio + "% 입니다.");
     }

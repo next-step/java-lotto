@@ -24,19 +24,21 @@ public class LottoInput {
         return scan.nextInt();
     }
 
-    public void getPassiveNumbers(BuyLotto buyLotto) {
+    public void enterPassiveNumbers(BuyLotto buyLotto) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         for (int i = 0; i < buyLotto.getPassiveCount().getCount(); i++) {
             String passiveNumbersText = scan.next();
-            Set<Integer> passiveNumbers = Stream.of(passiveNumbersText.split(",")).collect(Collectors.toSet())
-                    .stream().map(Integer::parseInt)
-                    .collect(Collectors.toSet());
-
+            Set<Integer> passiveNumbers = splitText(passiveNumbersText);
             Lotto lotto = new Lotto(passiveNumbers);
-
             buyLotto.putLottos(lotto);
         }
+    }
+
+    private Set<Integer> splitText(String text) {
+        return Stream.of(text.split(",")).collect(Collectors.toSet())
+                .stream().map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 
     public WinOfLotto getWinOfLottoNumbers() {

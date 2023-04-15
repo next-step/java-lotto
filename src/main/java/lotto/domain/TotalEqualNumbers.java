@@ -1,14 +1,9 @@
 package lotto.domain;
 
-import java.util.Iterator;
-
 public class TotalEqualNumbers {
-    public TotalEqualNumbers(BuyLotto buyLotto, WinOfLotto winOfLotto) {
-        Iterator<Lotto> iterator = buyLotto.getLottos().getLottos().iterator();
+    public void matchNumbers(BuyLotto buyLotto, WinOfLotto winOfLotto) {
 
-        while (iterator.hasNext()) {
-            Lotto lotto = iterator.next();
-
+        for (Lotto lotto : buyLotto.getLottos().getLottos()) {
             EqualNumbers equalNumbers = new EqualNumbers(lotto, winOfLotto);
 
             setTotalEqualNumber(equalNumbers);
