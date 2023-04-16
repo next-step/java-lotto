@@ -26,8 +26,8 @@ public class FormulaTest {
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("0"), new Number("1"),
                 new Number("2"), new Number("0")),
-            () -> assertThat(formula.operations()).containsExactly(new Operation("-"),
-                new Operation("+"), new Operation("/"))
+            () -> assertThat(formula.operations()).containsExactly(new Operator("-"),
+                new Operator("+"), new Operator("/"))
         );
     }
 
@@ -38,8 +38,8 @@ public class FormulaTest {
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("0"), new Number("1"),
                 new Number("2")),
-            () -> assertThat(formula.operations()).containsExactly(new Operation("-"),
-                new Operation("+"))
+            () -> assertThat(formula.operations()).containsExactly(new Operator("-"),
+                new Operator("+"))
         );
     }
 
@@ -49,7 +49,7 @@ public class FormulaTest {
         formula.split();
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("1"), new Number("2")),
-            () -> assertThat(formula.operations()).containsExactly(new Operation("+"))
+            () -> assertThat(formula.operations()).containsExactly(new Operator("+"))
         );
     }
 

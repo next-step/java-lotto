@@ -14,21 +14,21 @@ public class NumberTest {
     @Test
     void 나눗셈_큰수로나눔() {
         assertThatExceptionOfType(InvalidParameterException.class)
-            .isThrownBy(() -> new Number("4").calculation(new Operation("/"), new Number("5")))
+            .isThrownBy(() -> new Number("4").calculation(new Operator("/"), new Number("5")))
             .withMessageMatching("나누어 떨어지지 않는 수로는 나눌수 없습니다.");
     }
 
     @Test
     void 나눗셈_나누어떨어지지않음() {
         assertThatExceptionOfType(InvalidParameterException.class)
-            .isThrownBy(() -> new Number("4").calculation(new Operation("/"), new Number("3")))
+            .isThrownBy(() -> new Number("4").calculation(new Operator("/"), new Number("3")))
             .withMessageMatching("나누어 떨어지지 않는 수로는 나눌수 없습니다.");
     }
 
     @Test
     void 나눗셈_제로() {
         assertThatExceptionOfType(ArithmeticException.class)
-            .isThrownBy(() -> new Number("1").calculation(new Operation("/"), new Number("0")))
+            .isThrownBy(() -> new Number("1").calculation(new Operator("/"), new Number("0")))
             .withMessageMatching("/ by zero");
     }
 
@@ -36,16 +36,16 @@ public class NumberTest {
     void 나눗셈() {
         assertAll(
             () -> assertThat(
-                new Number("1").calculation(new Operation("/"), new Number("1"))).isEqualTo(
+                new Number("1").calculation(new Operator("/"), new Number("1"))).isEqualTo(
                 new Number("1")),
             () -> assertThat(
-                new Number("0").calculation(new Operation("/"), new Number("1"))).isEqualTo(
+                new Number("0").calculation(new Operator("/"), new Number("1"))).isEqualTo(
                 new Number("0")),
             () -> assertThat(
-                new Number("-1").calculation(new Operation("/"), new Number("1"))).isEqualTo(
+                new Number("-1").calculation(new Operator("/"), new Number("1"))).isEqualTo(
                 new Number("-1")),
             () -> assertThat(
-                new Number("-1").calculation(new Operation("/"), new Number("-1"))).isEqualTo(
+                new Number("-1").calculation(new Operator("/"), new Number("-1"))).isEqualTo(
                 new Number("1"))
         );
     }
@@ -54,19 +54,19 @@ public class NumberTest {
     void 곱셈() {
         assertAll(
             () -> assertThat(
-                new Number("1").calculation(new Operation("*"), new Number("1"))).isEqualTo(
+                new Number("1").calculation(new Operator("*"), new Number("1"))).isEqualTo(
                 new Number("1")),
             () -> assertThat(
-                new Number("0").calculation(new Operation("*"), new Number("1"))).isEqualTo(
+                new Number("0").calculation(new Operator("*"), new Number("1"))).isEqualTo(
                 new Number("0")),
             () -> assertThat(
-                new Number("1").calculation(new Operation("*"), new Number("0"))).isEqualTo(
+                new Number("1").calculation(new Operator("*"), new Number("0"))).isEqualTo(
                 new Number("0")),
             () -> assertThat(
-                new Number("-1").calculation(new Operation("*"), new Number("1"))).isEqualTo(
+                new Number("-1").calculation(new Operator("*"), new Number("1"))).isEqualTo(
                 new Number("-1")),
             () -> assertThat(
-                new Number("-1").calculation(new Operation("*"), new Number("-1"))).isEqualTo(
+                new Number("-1").calculation(new Operator("*"), new Number("-1"))).isEqualTo(
                 new Number("1"))
         );
     }
@@ -75,10 +75,10 @@ public class NumberTest {
     void 뺄셈() {
         assertAll(
             () -> assertThat(
-                new Number("1").calculation(new Operation("-"), new Number("1"))).isEqualTo(
+                new Number("1").calculation(new Operator("-"), new Number("1"))).isEqualTo(
                 new Number("0")),
             () -> assertThat(
-                new Number("1").calculation(new Operation("-"), new Number("2"))).isEqualTo(
+                new Number("1").calculation(new Operator("-"), new Number("2"))).isEqualTo(
                 new Number("-1"))
         );
     }
@@ -87,16 +87,16 @@ public class NumberTest {
     void 덧셈() {
         assertAll(
             () -> assertThat(
-                new Number("1").calculation(new Operation("+"), new Number("1"))).isEqualTo(
+                new Number("1").calculation(new Operator("+"), new Number("1"))).isEqualTo(
                 new Number("2")),
             () -> assertThat(
-                new Number("-1").calculation(new Operation("+"), new Number("1"))).isEqualTo(
+                new Number("-1").calculation(new Operator("+"), new Number("1"))).isEqualTo(
                 new Number("0")),
             () -> assertThat(
-                new Number("-1").calculation(new Operation("+"), new Number("-1"))).isEqualTo(
+                new Number("-1").calculation(new Operator("+"), new Number("-1"))).isEqualTo(
                 new Number("-2")),
             () -> assertThat(
-                new Number("1").calculation(new Operation("+"), new Number("-2"))).isEqualTo(
+                new Number("1").calculation(new Operator("+"), new Number("-2"))).isEqualTo(
                 new Number("-1"))
         );
     }
