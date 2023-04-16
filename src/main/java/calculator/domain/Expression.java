@@ -1,6 +1,9 @@
 package calculator.domain;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Expression {
@@ -73,5 +76,19 @@ public class Expression {
 
     public int getSize() {
         return expressionList.size();
+    }
+
+    public Queue<String> getOperators() {
+        return IntStream.range(0, expressionList.size())
+                .filter(i -> i % 2 == 1)
+                .mapToObj(expressionList::get)
+                .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<Integer> getOperands() {
+        return IntStream.range(0, expressionList.size())
+                .filter(i -> i % 2 == 0)
+                .mapToObj(i -> Integer.parseInt(expressionList.get(i)))
+                .collect(Collectors.toList());
     }
 }

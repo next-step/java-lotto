@@ -2,8 +2,13 @@ package calculator.domain;
 
 import calculator.view.InputView;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -63,6 +68,26 @@ class ExpressionTest {
         assertThatThrownBy(() -> Expression.createExpression(splitString))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("올바른 계산식을 입력해주세요.");
+    }
+
+    @Test
+    @DisplayName("숫자 리스트만 분리")
+    void operandsTest() {
+        String[] splitString = "1 + 2 + 3".split(InputView.DELIMITER);
+
+        Expression expression = Expression.createExpression(splitString);
+
+        assertThat(expression.getOperands()).isEqualTo(List.of(1, 2, 3));
+    }
+
+    @Test
+    @DisplayName("계산식 리스트만 분리")
+    void operatorsTest() {
+        String[] splitString = "1 + 2 * 3 / 4".split(InputView.DELIMITER);
+
+        Expression expression = Expression.createExpression(splitString);
+
+        assertThat(expression.getOperators()).isEqualTo(new LinkedList<>(List.of("+", "*", "/")));
     }
 
 }
