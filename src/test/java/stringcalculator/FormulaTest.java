@@ -8,13 +8,14 @@ import java.security.InvalidParameterException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import stringcalculator.Formula.SplitFormula;
 
 public class FormulaTest {
 
     @Test
     void 계산() {
         Formula formula = new Formula("1 + 2");
-        formula.split();
+        SplitFormula.split(formula);
         formula.calculate();
         assertThat(formula.result()).isEqualTo(new Number("3"));
     }
@@ -22,7 +23,7 @@ public class FormulaTest {
     @Test
     void 연산_숫자_연산_분리() {
         Formula formula = new Formula("- 1 + 2 /");
-        formula.split();
+        SplitFormula.split(formula);
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("0"), new Number("1"),
                 new Number("2"), new Number("0")),
@@ -34,7 +35,7 @@ public class FormulaTest {
     @Test
     void 연산_숫자_분리() {
         Formula formula = new Formula("- 1 + 2");
-        formula.split();
+        SplitFormula.split(formula);
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("0"), new Number("1"),
                 new Number("2")),
@@ -46,7 +47,7 @@ public class FormulaTest {
     @Test
     void 숫자_연산_분리() {
         Formula formula = new Formula("1 + 2");
-        formula.split();
+        SplitFormula.split(formula);
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("1"), new Number("2")),
             () -> assertThat(formula.operations()).containsExactly(new Operator("+"))

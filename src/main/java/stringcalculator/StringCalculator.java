@@ -2,6 +2,7 @@ package stringcalculator;
 
 import java.io.InputStream;
 import java.util.Scanner;
+import stringcalculator.Formula.SplitFormula;
 
 public class StringCalculator {
 
@@ -9,9 +10,25 @@ public class StringCalculator {
     private static Scanner scanner = new Scanner(DEFAULT_INPUT_STREAM);
 
     public static int result(Formula formula) {
-        formula.split();
+        return toInt(formulaResult(calculation(splitFormula(formula))));
+    }
+
+    private static Formula calculation(Formula formula) {
         formula.calculate();
-        return formula.result().value();
+        return formula;
+    }
+
+    private static Formula splitFormula(Formula formula) {
+        SplitFormula.split(formula);
+        return formula;
+    }
+
+    private static int toInt(Number result) {
+        return result.value();
+    }
+
+    private static Number formulaResult(Formula formula) {
+        return formula.result();
     }
 
     public static String formula() {

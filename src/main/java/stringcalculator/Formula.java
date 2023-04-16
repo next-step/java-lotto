@@ -4,13 +4,78 @@ import java.security.InvalidParameterException;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Formula {
 
-    public static final Pattern VALID_OPERATIONS = Pattern.compile("^(\\+|-|\\*|\\/)$");
-    public static final Pattern VALID_NUMBER = Pattern.compile("\\d");
-    public static final String DELIMITER = " ";
+    public static class SplitFormula {
+
+        public static final Pattern VALID_OPERATIONS = Pattern.compile("^(\\+|-|\\*|\\/)$");
+        public static final Pattern VALID_NUMBER = Pattern.compile("\\d");
+        public static final String DELIMITER = " ";
+
+        public static void split(Formula formula) {
+            String[] splitStrings = SplitFormula.splitStrings(formula.formula);
+            findPrefixZero(splitStrings, formula.numbers);
+            findOperations(splitStrings, formula.operators);
+            findNumbers(splitStrings, formula.numbers);
+            findSuffixZero(splitStrings, formula.numbers);
+        }
+
+        private static String[] splitStrings(String formula) {
+            return formula.split(DELIMITER);
+        }
+
+        private static void findOperations(String[] splitStrings, Operators operators) {
+            for (String splitString : splitStrings) {
+                offerOperation(splitString, operators);
+            }
+        }
+
+        private static void findSuffixZero(String[] splitStrings, Numbers numbers) {
+            if (isOperation(splitStrings[splitStrings.length - 1])) {
+                numbers.offer(new Number("0"));
+            }
+        }
+
+        private static void findNumbers(String[] splitStrings, Numbers numbers) {
+            for (String splitString : splitStrings) {
+                offerNumber(splitString, numbers);
+            }
+        }
+
+        private static void findPrefixZero(String[] splitStrings, Numbers numbers) {
+            if (isOperation(splitStrings[0])) {
+                numbers.offer(new Number("0"));
+            }
+        }
+
+        private static void offerNumber(String input, Numbers numbers) {
+            if (isNumber(input)) {
+                numbers.offer(new Number(input));
+            }
+        }
+
+        private static boolean isNumber(String input) {
+            return VALID_NUMBER.matcher(input).find();
+        }
+
+        private static void offerOperation(String input, Operators operators) {
+            if (isOperation(input)) {
+                operators.offer(new Operator(input));
+            }
+        }
+
+        private static boolean isOperation(String input) {
+            return operationMatcher(input).find();
+        }
+
+        private static Matcher operationMatcher(String input) {
+            return VALID_OPERATIONS.matcher(input);
+        }
+
+    }
 
     private final String formula;
     private final Numbers numbers;
@@ -34,62 +99,6 @@ public class Formula {
         return formula == null || formula.isBlank();
     }
 
-    public void split() {
-        String[] splitStrings = splitStrings();
-        findPrefixZero(splitStrings);
-        findOperations(splitStrings);
-        findNumbers(splitStrings);
-        findSuffixZero(splitStrings);
-    }
-
-    private String[] splitStrings() {
-        return this.formula.split(DELIMITER);
-    }
-
-    private void findOperations(String[] splitStrings) {
-        for (String splitString : splitStrings) {
-            offerOperation(splitString);
-        }
-    }
-
-    private void findSuffixZero(String[] splitStrings) {
-        if (isOperation(splitStrings[splitStrings.length - 1])) {
-            numbers.offer(new Number("0"));
-        }
-    }
-
-    private void findNumbers(String[] splitStrings) {
-        for (String splitString : splitStrings) {
-            offerNumber(splitString);
-        }
-    }
-
-    private void findPrefixZero(String[] splitStrings) {
-        if (isOperation(splitStrings[0])) {
-            numbers.offer(new Number("0"));
-        }
-    }
-
-    private void offerNumber(String input) {
-        if (isNumber(input)) {
-            numbers.offer(new Number(input));
-        }
-    }
-
-    private boolean isNumber(String input) {
-        return VALID_NUMBER.matcher(input).find();
-    }
-
-    private void offerOperation(String input) {
-        if (isOperation(input)) {
-            operators.offer(new Operator(input));
-        }
-    }
-
-    private boolean isOperation(String input) {
-        return VALID_OPERATIONS.matcher(input).find();
-    }
-
     public Queue<Number> numbers() {
         return numbers.clone();
     }
@@ -107,7 +116,11 @@ public class Formula {
     }
 
     private Number calculation(Number number) {
-        return number.calculation(operators.next(), numbers.next());
+        return nextOperator().calculation(number, numbers.next());
+    }
+
+    private Operator nextOperator() {
+        return operators.next();
     }
 
     private boolean hasNextNumber() {

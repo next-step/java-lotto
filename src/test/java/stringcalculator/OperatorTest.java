@@ -2,6 +2,7 @@ package stringcalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.security.InvalidParameterException;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,102 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class OperatorTest {
+
+    @Test
+    void 나눗셈_큰수로나눔() {
+        assertThatExceptionOfType(InvalidParameterException.class)
+            .isThrownBy(() -> new Operator("/").calculation(new Number("4"), new Number("5")))
+            .withMessageContaining("나누어 떨어지지 않는 수로는 나눌수 없습니다.");
+    }
+
+    @Test
+    void 나눗셈_나누어떨어지지않음() {
+        assertThatExceptionOfType(InvalidParameterException.class)
+            .isThrownBy(() -> new Operator("/").calculation(new Number("4"), new Number("3")))
+            .withMessageContaining("나누어 떨어지지 않는 수로는 나눌수 없습니다.");
+    }
+
+    @Test
+    void 나눗셈_제로() {
+        assertThatExceptionOfType(ArithmeticException.class)
+            .isThrownBy(() -> new Operator("/").calculation(new Number("4"), new Number("0")))
+            .withMessageMatching("/ by zero");
+    }
+
+    @Test
+    void 나눗셈() {
+        assertAll(
+            () -> assertThat(
+                new Operator("/").calculation(new Number("1"), new Number("1"))).isEqualTo(
+                new Number("1")),
+            () -> assertThat(
+                new Operator("/").calculation(new Number("1"), new Number("-1"))).isEqualTo(
+                new Number("-1")),
+            () -> assertThat(
+                new Operator("/").calculation(new Number("0"), new Number("1"))).isEqualTo(
+                new Number("0")),
+            () -> assertThat(
+                new Operator("/").calculation(new Number("-1"), new Number("1"))).isEqualTo(
+                new Number("-1")),
+            () -> assertThat(
+                new Operator("/").calculation(new Number("-1"), new Number("-1"))).isEqualTo(
+                new Number("1"))
+        );
+    }
+
+    @Test
+    void 곱셈() {
+        assertAll(
+            () -> assertThat(
+                new Operator("*").calculation(new Number("1"), new Number("1"))).isEqualTo(
+                new Number("1")),
+            () -> assertThat(
+                new Operator("*").calculation(new Number("0"), new Number("1"))).isEqualTo(
+                new Number("0")),
+            () -> assertThat(
+                new Operator("*").calculation(new Number("1"), new Number("0"))).isEqualTo(
+                new Number("0")),
+            () -> assertThat(
+                new Operator("*").calculation(new Number("-1"), new Number("1"))).isEqualTo(
+                new Number("-1")),
+            () -> assertThat(
+                new Operator("*").calculation(new Number("1"), new Number("-1"))).isEqualTo(
+                new Number("-1")),
+            () -> assertThat(
+                new Operator("*").calculation(new Number("-1"), new Number("-1"))).isEqualTo(
+                new Number("1"))
+        );
+    }
+
+    @Test
+    void 뺄셈() {
+        assertAll(
+            () -> assertThat(
+                new Operator("-").calculation(new Number("1"), new Number("1"))).isEqualTo(
+                new Number("0")),
+            () -> assertThat(
+                new Operator("-").calculation(new Number("1"), new Number("2"))).isEqualTo(
+                new Number("-1"))
+        );
+    }
+
+    @Test
+    void 덧셈() {
+        assertAll(
+            () -> assertThat(
+                new Operator("+").calculation(new Number("1"), new Number("1"))).isEqualTo(
+                new Number("2")),
+            () -> assertThat(
+                new Operator("+").calculation(new Number("-1"), new Number("1"))).isEqualTo(
+                new Number("0")),
+            () -> assertThat(
+                new Operator("+").calculation(new Number("-1"), new Number("-1"))).isEqualTo(
+                new Number("-2")),
+            () -> assertThat(
+                new Operator("+").calculation(new Number("1"), new Number("-2"))).isEqualTo(
+                new Number("-1"))
+        );
+    }
 
     @ParameterizedTest
     @ValueSource(strings = {"++", "--", "**", "//", "+-", "-*", "*/", "+-*/", "1", "a", "ㄱ"})
