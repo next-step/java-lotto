@@ -32,7 +32,7 @@ public class App {
 
         lottoOutput.printWinningList(results); // 당첨 통계  ui 메소드
 
-        BigDecimal rate = lotto.rateResult(results); // 수익률  계산 메소드
+        BigDecimal rate = lotto.rateResult(results, lottoInput.getAmount()); // 수익률  계산 메소드
 
         lottoOutput.printRate(rate);  // 수익률  ui 메소드
 

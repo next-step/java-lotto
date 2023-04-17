@@ -55,7 +55,8 @@ public class LottoTest {
         lottoOutput.printWinningList(results);
     }
 
-    @Test // 수익률 구하는  메소드 테스트
+    @Test
+        // 수익률 구하는  메소드 테스트
     void rateResultTest() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         LottoOutput lottoOutput = new LottoOutput();
@@ -70,7 +71,7 @@ public class LottoTest {
         winningNumbers.add(35);
         Map<LottoType, Long> results = lotto.winningStatistics(manyTickets, winningNumbers, 3);// 당첨 통계 메소드
 
-        BigDecimal rate = lotto.rateResult(results);
+        BigDecimal rate = lotto.rateResult(results, 1000);
 
         lottoOutput.printRate(rate);
     }

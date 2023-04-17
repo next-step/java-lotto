@@ -19,7 +19,7 @@ public class Lotto {
     }
 
     // 구입 한 로또 리스트
-    public ManyTickets purChase(List<LottoTicket> pasiveTickets,int number) {
+    public ManyTickets purChase(List<LottoTicket> pasiveTickets, int number) {
         List<LottoTicket> lottoObjects = IntStream.range(0, number)
                 .mapToObj(i -> {
                     Collections.shuffle(lottoLimiteds);
@@ -45,9 +45,9 @@ public class Lotto {
 
 
     //   수익률 구하는 메소드
-    public BigDecimal rateResult(Map<LottoType, Long> winningStatistics) {
+    public BigDecimal rateResult(Map<LottoType, Long> winningStatistics, int amount) {
         return BigDecimal.valueOf(totalWinnings(winningStatistics))
-                .divide(BigDecimal.valueOf(1000), 2, RoundingMode.DOWN);
+                .divide(BigDecimal.valueOf(amount), 2, RoundingMode.DOWN);
     }
 
     // 총 당첨금 을 구하는 메소드
