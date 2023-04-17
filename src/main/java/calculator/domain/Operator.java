@@ -28,11 +28,11 @@ public enum Operator {
         this.calculation = calculation;
     }
 
-    public static int calculate(String operator, int operand1, int operand2) {
-        return getOperator(operator).calculation.apply(operand1, operand2);
+    public static int calculate(Operator operator, int operand1, int operand2) {
+        return operator.calculation.apply(operand1, operand2);
     }
 
-    private static Operator getOperator(String operator) {
+    public static Operator getOperator(String operator) {
         return Arrays.stream(values())
                 .filter(o -> o.operator.equals(operator))
                 .findFirst()

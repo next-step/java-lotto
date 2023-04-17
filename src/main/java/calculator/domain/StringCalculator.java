@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 
 public class StringCalculator {
@@ -12,11 +13,11 @@ public class StringCalculator {
     }
 
     public int calculate() {
-        Queue<String> operators = expression.getOperators();
+        Queue<Operator> operators = expression.getOperators();
         List<Integer> operands = expression.getOperands();
 
         return operands.stream()
-                .reduce((acc, curr) -> Operator.calculate(operators.poll(), acc, curr))
+                .reduce((acc, curr) -> Operator.calculate(Objects.requireNonNull(operators.poll()), acc, curr))
                 .get();
     }
 

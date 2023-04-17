@@ -82,10 +82,10 @@ public class Expression {
         return expressionList.size();
     }
 
-    public Queue<String> getOperators() {
+    public Queue<Operator> getOperators() {
         return IntStream.range(ZERO, expressionList.size())
                 .filter(i -> i % EVEN_CONDITION == ODD_RESULT)
-                .mapToObj(expressionList::get)
+                .mapToObj(i -> Operator.getOperator(expressionList.get(i)))
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 

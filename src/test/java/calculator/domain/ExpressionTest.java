@@ -86,7 +86,10 @@ class ExpressionTest {
 
         Expression expression = Expression.createExpression(splitString);
 
-        assertThat(expression.getOperators()).isEqualTo(new LinkedList<>(List.of("+", "*", "/")));
+        System.out.println(Operator.getOperator("+"));
+
+        assertThat(expression.getOperators())
+                .isEqualTo(new LinkedList<>(List.of(Operator.PLUS, Operator.MULTIPLE, Operator.DIVIDE)));
     }
 
 }
