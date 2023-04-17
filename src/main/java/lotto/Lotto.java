@@ -43,44 +43,6 @@ public class Lotto {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-//    public BigDecimal lotto(int amount,int manualTicket,  String winngingText, int bonusNumber ) {
-//        System.out.println("구입금액을 입력해 주세요");
-//        System.out.println(amount);
-//
-//        System.out.println("수동으로 구매할 로또 수를 입력해 주세요");
-//        System.out.println(manualTicket);
-//
-//        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-//
-//        int number = amount / LOTTO_PRICE; // 반복 갯수
-//        int manualTicketNumber  = number - manualTicket;
-//        System.out.println("수동으로 "+manualTicket+"장, 자동으로 "+manualTicketNumber+"개를 구매했습니다.");
-//
-//        ManyTickets manyLottoTickets = purChase(number); // 구입 한 로또 리스트
-//        //manyLottoTickets.getManyTickets().
-//        printTickets(manyLottoTickets); // UI.메소드
-//
-//        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-//
-//        List<Integer> winningNumbers = winningNumber(winngingText);  // 지난주 당첨 번호 리스트
-//
-//        System.out.println("보너스 볼을 입력해 주세요..");
-//
-//        System.out.println(bonusNumber);
-//
-//        System.out.println("당첨 통계");
-//
-//        Map<LottoType, Long> results = winningStatistics(manyLottoTickets, winningNumbers, bonusNumber);// 당첨 통계 메소드
-//
-//        printWinningList(results); // 당첨 통계  ui 메소드
-//
-//        BigDecimal rate = rateResult(results, amount); // 수익률  계산 메소드
-//
-//        System.out.println("총 수익률은 " + rate + "입니다.");
-//
-//        return rate;
-//    }
-
 
     //   수익률 구하는 메소드
     public BigDecimal rateResult(Map<LottoType, Long> winningStatistics) {
