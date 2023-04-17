@@ -33,8 +33,4 @@ public class Calculator {
 
         return result;
     }
-
-    private static void calculateIntegerNumber() {
-
-    }
 }
