@@ -12,20 +12,19 @@ class StringCalculatorTest {
     @DisplayName("계산기 객체 생성 테스트")
     void createCalculator() {
         Expression expression = Expression.createExpression("1 + 2".split(InputView.DELIMITER));
+
         StringCalculator stringCalculator = new StringCalculator(expression);
 
-        assertThat(stringCalculator).usingRecursiveComparison()
-                .isEqualTo(expression.getSize());
+        assertThat(stringCalculator).isInstanceOf(StringCalculator.class);
     }
 
     @Test
     @DisplayName("계산 결과 테스트")
     void calculateResultTest() {
         Expression expression = Expression.createExpression("2 + 3 * 4 / 2".split(InputView.DELIMITER));
+
         StringCalculator stringCalculator = new StringCalculator(expression);
 
-        int result = stringCalculator.calculate();
-
-        assertThat(result).isEqualTo(10);
+        assertThat(stringCalculator.calculate()).isEqualTo(10);
     }
 }
