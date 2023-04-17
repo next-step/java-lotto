@@ -2,7 +2,11 @@ package study;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import static java.lang.System.*;
+import static java.lang.System.in;
 
 public class StringCalculator {
 
@@ -13,42 +17,52 @@ public class StringCalculator {
     public static final String DIVIDE = "/";
     public static final String MINUS = "-";
 
+    private static final Scanner scanner = new Scanner(in);
+
+    public static void main(String[] args) {
+        out.println("계산하고자 하는 문자열을 입력하세요");
+        String input = scanner.nextLine();
+        int calc = calc(input);
+        out.println("input : " + input);
+        out.println("output : " + calc);
+    }
+
     public static int calc(String input) {
-        int result = 0;
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException();
-        }
+        illegalArgumentCondition(input);
 
         List<Integer> integers = extractNumbers(input);
         List<String> operators = extractOperators(input);
-        if (integers.isEmpty()) {
-            return result;
-        }
 
-        result = integers.get(0);
+        return combineNumbersWithOperators(integers, operators);
+    }
+
+    private static int combineNumbersWithOperators(List<Integer> integers, List<String> operators) {
+        int result = getTargetNumber(integers, 0);
         for (int i = 1; i < integers.size(); i++) {
-            String op = operators.get(i - 1).trim();
-            int nextNumber = integers.get(i);
-
-            result = operate(result, op, nextNumber);
+            result = operate(result, getOperators(operators, i - 1), getTargetNumber(integers, i));
         }
-
         return result;
     }
 
+    private static String getOperators(List<String> operators, int i) {
+        return operators.get(i).trim();
+    }
+
+    private static int getTargetNumber(List<Integer> integers, int i) {
+        return integers.get(i);
+    }
+
+    private static void illegalArgumentCondition(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public static int operate(int num1, String op, int num2) {
-        if (op.equals(PLUS)) {
-            return num1 + num2;
-        }
-        if (op.equals(MINUS)) {
-            return num1 - num2;
-        }
-        if (op.equals(TIMES)) {
-            return num1 * num2;
-        }
-        if (op.equals(DIVIDE)) {
-            return num1 / num2;
-        }
+        if (op.equals(PLUS)) return num1 + num2;
+        if (op.equals(MINUS)) return num1 - num2;
+        if (op.equals(TIMES)) return num1 * num2;
+        if (op.equals(DIVIDE)) return num1 / num2;
         throw new IllegalArgumentException();
     }
 
