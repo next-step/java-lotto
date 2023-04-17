@@ -19,9 +19,27 @@ public class Expression {
         this.expressionList = expressionList;
     }
 
+    public static Expression createExpression(String[] inputString) {
+        return new Expression(List.of(inputString));
+    }
+
     private void validationCheck(List<String> expressionList) {
         validateSize(expressionList);
         validateElement(expressionList);
+    }
+
+    private void validateSize(List<String> expressionList) {
+        if (isEven(expressionList.size()) || hasOnlyOneSize(expressionList)) {
+            throw new IllegalArgumentException("계산식을 정확히 입력해주세요.");
+        }
+    }
+
+    private boolean isEven(int number) {
+        return number % EVEN_CONDITION == ZERO;
+    }
+
+    private boolean hasOnlyOneSize(List<String> expressionList) {
+        return expressionList.size() == ODD_RESULT;
     }
 
     private void validateElement(List<String> expressionList) {
@@ -38,6 +56,12 @@ public class Expression {
         }
     }
 
+    private void checkOperators(int index, String operator) {
+        if (isOdd(index) && !hasOperators(operator)) {
+            throw new IllegalArgumentException("올바른 계산식을 입력해주세요.");
+        }
+    }
+
     private void validateNumberFormat(String numberFormat) {
         try {
             Integer.parseInt(numberFormat);
@@ -46,36 +70,12 @@ public class Expression {
         }
     }
 
-    private void checkOperators(int index, String operator) {
-        if (isOdd(index) && !hasOperators(operator)) {
-            throw new IllegalArgumentException("올바른 계산식을 입력해주세요.");
-        }
-    }
-
-    private boolean hasOperators(String operator) {
-        return List.of(OPERATORS).contains(operator);
-    }
-
-    private void validateSize(List<String> expressionList) {
-        if (isEven(expressionList.size()) || hasOnlyOneSize(expressionList)) {
-            throw new IllegalArgumentException("계산식을 정확히 입력해주세요.");
-        }
-    }
-
-    private boolean isEven(int number) {
-        return number % EVEN_CONDITION == ZERO;
-    }
-
     private boolean isOdd(int number) {
         return number % EVEN_CONDITION == ODD_RESULT;
     }
 
-    private boolean hasOnlyOneSize(List<String> expressionList) {
-        return expressionList.size() == ODD_RESULT;
-    }
-
-    public static Expression createExpression(String[] inputString) {
-        return new Expression(List.of(inputString));
+    private boolean hasOperators(String operator) {
+        return List.of(OPERATORS).contains(operator);
     }
 
     public int getSize() {
