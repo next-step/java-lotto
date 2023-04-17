@@ -8,6 +8,10 @@ public class StringCalculator {
 
     public static final String OPERATOR_REGEX = " \\+ | \\- | \\* | \\/ ";
     public static final String NUMBER_REGEX = "[0-9]+";
+    public static final String PLUS = " + ";
+    public static final String TIMES = " * ";
+    public static final String DIVIDE = " / ";
+    public static final String MINUS = " - ";
 
     public static int calc(String input) {
         int result = 0;
@@ -24,18 +28,26 @@ public class StringCalculator {
             String op = operators.get(i - 1);
             int nextNumber = integers.get(i);
 
-            if (op.equals(" + ")) {
-                result += nextNumber;
-            } else if (op.equals(" - ")) {
-                result -= nextNumber;
-            } else if (op.equals(" * ")) {
-                result *= nextNumber;
-            } else if (op.equals(" / ")) {
-                result /= nextNumber;
-            }
+            result = operate(result, op, nextNumber);
         }
 
         return result;
+    }
+
+    public static int operate(int num1, String op, int num2) {
+        if (op.equals(PLUS)) {
+            return num1 + num2;
+        }
+        if (op.equals(MINUS)) {
+            return num1 - num2;
+        }
+        if (op.equals(TIMES)) {
+            return num1 * num2;
+        }
+        if (op.equals(DIVIDE)) {
+            return num1 / num2;
+        }
+        throw new IllegalArgumentException();
     }
 
     public static List<String> extractOperators(String input) {
