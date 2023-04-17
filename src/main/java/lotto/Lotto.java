@@ -2,11 +2,13 @@ package lotto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
 
 public class Lotto {
     private static final int LOTTO_PRICE = 1000;
@@ -19,6 +21,7 @@ public class Lotto {
     }
 
     // 구입 한 로또 리스트
+
     public ManyTickets purChase(List<LottoTicket> pasiveTickets, int number) {
         List<LottoTicket> lottoObjects = IntStream.range(0, number)
                 .mapToObj(i -> {
@@ -38,11 +41,11 @@ public class Lotto {
 
 
     // 당첨 통계 결과 map으로 추출
+
     public Map<LottoType, Long> winningStatistics(ManyTickets tickets, List<Integer> winningNumbers, int bonusNumber) {
         return tickets.getManyTickets().stream().map(object -> object.contains(winningNumbers, bonusNumber))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
-
 
     //   수익률 구하는 메소드
     public BigDecimal rateResult(Map<LottoType, Long> winningStatistics, int amount) {

@@ -1,4 +1,5 @@
 import lotto.Lotto;
+
 import lotto.LottoTicket;
 import lotto.LottoType;
 import lotto.ManyTickets;
