@@ -12,8 +12,10 @@ public enum Operator {
         return operand1 / operand2;
     });
 
+    public static final int ZERO = 0;
+
     private static void isDividedByZero(Integer operand2) {
-        if (operand2 == 0) {
+        if (operand2 == ZERO) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
     }

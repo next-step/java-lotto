@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Expression {
+    public static int ZERO = 0;
+    public static int ODD_RESULT = 1;
+    public static int EVEN_CONDITION = 2;
+    public static String[] OPERATORS = {"+", "-", "*", "/"};
 
     private final List<String> expressionList;
 
@@ -21,7 +25,7 @@ public class Expression {
     }
 
     private void validateElement(List<String> expressionList) {
-        IntStream.range(0, expressionList.size())
+        IntStream.range(ZERO, expressionList.size())
                 .forEach(index -> {
                     checkNumberFormat(index, expressionList.get(index));
                     checkOperators(index, expressionList.get(index));
@@ -49,7 +53,7 @@ public class Expression {
     }
 
     private boolean hasOperators(String operator) {
-        return List.of("+", "-", "*", "/").contains(operator);
+        return List.of(OPERATORS).contains(operator);
     }
 
     private void validateSize(List<String> expressionList) {
@@ -59,15 +63,15 @@ public class Expression {
     }
 
     private boolean isEven(int number) {
-        return number % 2 == 0;
+        return number % EVEN_CONDITION == ZERO;
     }
 
     private boolean isOdd(int number) {
-        return number % 2 == 1;
+        return number % EVEN_CONDITION == ODD_RESULT;
     }
 
     private boolean hasOnlyOneSize(List<String> expressionList) {
-        return expressionList.size() == 1;
+        return expressionList.size() == ODD_RESULT;
     }
 
     public static Expression createExpression(String[] inputString) {
@@ -79,15 +83,15 @@ public class Expression {
     }
 
     public Queue<String> getOperators() {
-        return IntStream.range(0, expressionList.size())
-                .filter(i -> i % 2 == 1)
+        return IntStream.range(ZERO, expressionList.size())
+                .filter(i -> i % EVEN_CONDITION == ODD_RESULT)
                 .mapToObj(expressionList::get)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
     public List<Integer> getOperands() {
-        return IntStream.range(0, expressionList.size())
-                .filter(i -> i % 2 == 0)
+        return IntStream.range(ZERO, expressionList.size())
+                .filter(i -> i % EVEN_CONDITION == ZERO)
                 .mapToObj(i -> Integer.parseInt(expressionList.get(i)))
                 .collect(Collectors.toList());
     }
