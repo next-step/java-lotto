@@ -8,24 +8,26 @@ public class StringCalculator {
 
     public static final String OPERATOR_REGEX = " \\+ | \\- | \\* | \\/ ";
     public static final String NUMBER_REGEX = "[0-9]+";
-    public static final String PLUS = " + ";
-    public static final String TIMES = " * ";
-    public static final String DIVIDE = " / ";
-    public static final String MINUS = " - ";
+    public static final String PLUS = "+";
+    public static final String TIMES = "*";
+    public static final String DIVIDE = "/";
+    public static final String MINUS = "-";
 
     public static int calc(String input) {
         int result = 0;
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException();
+        }
 
         List<Integer> integers = extractNumbers(input);
         List<String> operators = extractOperators(input);
-
         if (integers.isEmpty()) {
             return result;
         }
 
         result = integers.get(0);
         for (int i = 1; i < integers.size(); i++) {
-            String op = operators.get(i - 1);
+            String op = operators.get(i - 1).trim();
             int nextNumber = integers.get(i);
 
             result = operate(result, op, nextNumber);
