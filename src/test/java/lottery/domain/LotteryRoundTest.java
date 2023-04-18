@@ -15,9 +15,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryRoundTest {
-    private List<Integer> roundInts;
     private LotteryTicket roundTicket;
-    private LotteryRound lotteryRound;
 
     public static LotteryTicket issueTicket(List<Integer> lotteryInts) {
         return new ManualTicketIssueStrategy(lotteryInts).issue();
@@ -37,7 +35,7 @@ class LotteryRoundTest {
 
     @BeforeEach
     void setUp() {
-        roundInts = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> roundInts = List.of(1, 2, 3, 4, 5, 6);
         roundTicket = issueTicket(roundInts);
     }
 
@@ -57,7 +55,6 @@ class LotteryRoundTest {
     void getRoundResult(List<Integer> lotteryInts, int matchingCount, int prizeMoney, double profitRate) {
         // given
         LotteryRound lotteryRound = new LotteryRound(roundTicket);
-        int money = 1000;
         LotteryTicket ticket = issueTicket(lotteryInts);
 
         // when
@@ -67,11 +64,10 @@ class LotteryRoundTest {
         assertThat(lotteryPrize).isNotNull();
         assertThat(lotteryPrize.calculateMatchingCount()).isEqualTo(matchingCount);
         assertThat(lotteryPrize.calculatePrizeMoney()).isEqualTo(prizeMoney);
-        assertThat(lotteryPrize.calculateProfitRate(List.of(lotteryPrize))).isEqualTo(profitRate);
+        assertThat(LotteryPrize.calculateProfitRate(List.of(lotteryPrize))).isEqualTo(profitRate);
     }
 
     @Test
-    @MethodSource
     @DisplayName("로또 회차에 당첨 번호 리스트 넣으면 당첨 결과 리스트 생성")
     void getRoudResults() {
         // given
