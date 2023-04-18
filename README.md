@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## Step1 구현할 기능
+* 문자열이 null or empty일 경우 예외
+* 문자열을 공백 기준으로 split
+* 수 2개 사칙연산
+* 수 여러 개 사칙연산
+* 유효하지 않는 사칙연산 기호에 대한 예외
