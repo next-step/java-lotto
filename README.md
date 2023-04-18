@@ -4,8 +4,9 @@
 ## Step1 - 문자열 계산기
 ### 2차 피드백 구현 내용
 - [X] 상수 정의 방식 변경
-- [ ] @EnumSource 활용
-- [ ] calculate 메서드 구현 방식 변경
+- [X] @EnumSource 활용 X
+  - 현재 테스트 케이스에서는 다소 사용하기 어려운 부분이 있어서 향후 사용 예정
+- [X] calculate 메서드 구현 방식 변경
 
 ---
 ### 1차 피드백 구현 내용
@@ -32,3 +33,12 @@
   - [X] 덧셈 기능
   - [X] 나눗셈 기능
 - [X] 결과 출력
+
+---
+
+## 학습 내용 정리
+
+---
+### @EnumSource 
+- Enum에 정의된 상수들을 테스트하기 위한 어노테이션
+- [참고 링크](https://www.baeldung.com/parameterized-tests-junit-5#3-enum)

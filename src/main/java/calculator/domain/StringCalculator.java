@@ -17,7 +17,7 @@ public class StringCalculator {
         List<Integer> operands = expression.getOperands();
 
         return operands.stream()
-                .reduce((acc, curr) -> Operator.calculate(Objects.requireNonNull(operators.poll()), acc, curr))
+                .reduce((acc, curr) -> Objects.requireNonNull(operators.poll()).calculate(acc, curr))
                 .get();
     }
 
