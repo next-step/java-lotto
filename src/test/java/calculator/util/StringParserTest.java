@@ -9,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class StringUtilsTest {
+class StringParserTest {
 
     @Test
     @DisplayName("문자열 공백 분리 테스트")
@@ -19,7 +19,7 @@ class StringUtilsTest {
         List<String> expected = Arrays.asList("1", "+", "2", "/", "7");
 
         // when
-        List<String> actual = StringUtils.split(input);
+        List<String> actual = StringSplitter.splitWithWhiteSpace(input);
 
         // then
         assertThat(actual).containsExactlyElementsOf(expected);
@@ -33,7 +33,7 @@ class StringUtilsTest {
         int expected = 1;
 
         // when
-        int actual = StringUtils.parse(input);
+        int actual = StringParser.parseInputToInt(input);
 
         // then
         assertThat(actual).isEqualTo(expected);
@@ -47,9 +47,9 @@ class StringUtilsTest {
         String input2 = "1.3";
 
         // then
-        assertThatThrownBy(() -> StringUtils.parse(input1))
+        assertThatThrownBy(() -> StringParser.parseInputToInt(input1))
                 .isInstanceOf(NumberFormatException.class);
-        assertThatThrownBy(() -> StringUtils.parse(input2))
+        assertThatThrownBy(() -> StringParser.parseInputToInt(input2))
                 .isInstanceOf(NumberFormatException.class);
     }
 
@@ -61,8 +61,8 @@ class StringUtilsTest {
         String input2 = null;
 
         // when
-        boolean actual1 = StringUtils.isBlank(input1);
-        boolean actual2 = StringUtils.isBlank(input2);
+        boolean actual1 = StringParser.isBlank(input1);
+        boolean actual2 = StringParser.isBlank(input2);
 
         // then
         assertThat(actual1).isTrue();
@@ -76,7 +76,7 @@ class StringUtilsTest {
         String input = "";
 
         // then
-        assertThatThrownBy(() -> StringUtils.parse(input))
+        assertThatThrownBy(() -> StringParser.parseInputToInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력값이 비어있습니다.");
     }

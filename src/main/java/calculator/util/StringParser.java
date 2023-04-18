@@ -1,17 +1,10 @@
 package calculator.util;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class StringUtils {
-    private StringUtils() {
+public class StringParser {
+    private StringParser() {
     }
 
-    public static List<String> split(String input) {
-        return Arrays.asList(input.split(" "));
-    }
-
-    public static int parse(String input) {
+    public static int parseInputToInt(String input) {
         if (isBlank(input)) {
             throw new IllegalArgumentException("입력값이 비어있습니다.");
         }
@@ -22,9 +15,9 @@ public class StringUtils {
         return input == null || input.isEmpty();
     }
 
-    private static int parseInt(String input) {
+    private static int parseInt(String stringInt) {
         try {
-            return Integer.parseInt(input);
+            return Integer.parseInt(stringInt);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("정수만 입력 가능합니다.");
         }
