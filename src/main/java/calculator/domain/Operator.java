@@ -10,7 +10,7 @@ public enum Operator {
   MULTIPLICATION("*", (operand1, operand2) -> operand1 * operand2),
   DIVISION("/", (operand1, operand2) -> {
     validateDivision(operand2);
-    return operand1 + operand2;
+    return operand1 / operand2;
   });
 
   private static final String ILLEGAL_OPERATOR_MESSAGE = "연산자 기호를 입력해주세요.";
@@ -31,10 +31,14 @@ public enum Operator {
     this.calculation = calculation;
   }
 
-  public static BinaryOperator<Integer> toCalculation(String operator) {
+  public int applyCalculation(int operand1, int operand2) {
+    return calculation.apply(operand1, operand2);
+  }
+
+  public static Operator valueOfOperator(String operator) {
     validateContainsKey(operator);
 
-    return BY_OPERATOR.get(operator).calculation;
+    return BY_OPERATOR.get(operator);
   }
 
   private static void validateDivision(int operand2) {
