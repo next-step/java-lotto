@@ -16,13 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LotteryVendingMachineTest {
-    private List<Integer> manualInts;
     private List<LotteryNumber> manualNumbers;
     private TicketIssueStrategy manualTicketIssueStrategy;
 
     @BeforeEach
     void setUp() {
-        manualInts = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> manualInts = Arrays.asList(1, 2, 3, 4, 5, 6);
         manualNumbers = manualInts.stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList());
@@ -102,13 +101,15 @@ class LotteryVendingMachineTest {
         // given
         LotteryVendingMachine lotteryVendingMachine = new LotteryVendingMachine(manualTicketIssueStrategy);
         int money = 1000;
-        lotteryVendingMachine.insertMoney(1000);
+        lotteryVendingMachine.insertMoney(money);
 
         // when
         LotteryTicket lotteryTicket = lotteryVendingMachine.sellTicket();
 
         // then
         assertThat(lotteryVendingMachine.getBalance()).isEqualTo(0);
+        assertThat(lotteryTicket).isNotNull();
+        assertThat(lotteryTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @Test
@@ -116,11 +117,11 @@ class LotteryVendingMachineTest {
     void sellException() {
         LotteryVendingMachine lotteryVendingMachine = new LotteryVendingMachine(manualTicketIssueStrategy);
         int money = 1000;
-        lotteryVendingMachine.insertMoney(1000);
+        lotteryVendingMachine.insertMoney(money);
 
         // when
-        LotteryTicket lotteryTicket1 = lotteryVendingMachine.sellTicket();
-        assertThatThrownBy(() -> lotteryVendingMachine.sellTicket())
+        lotteryVendingMachine.sellTicket();
+        assertThatThrownBy(lotteryVendingMachine::sellTicket)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("잔액이 부족합니다.");
     }
