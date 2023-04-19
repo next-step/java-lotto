@@ -4,7 +4,8 @@ import java.util.Objects;
 
 public class OperatorGroupOffset {
     private static final int INITIALIZE_NUMBER = 0;
-    private final int offset;
+    private static final int INCREASE_NUMBER = 1;
+    private int offset;
 
     public OperatorGroupOffset(int offset) {
         this.offset = offset;
@@ -14,6 +15,11 @@ public class OperatorGroupOffset {
         return new OperatorGroupOffset(INITIALIZE_NUMBER);
     }
 
+
+    public OperatorGroupOffset increase() {
+        this.offset += INCREASE_NUMBER;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -27,4 +33,5 @@ public class OperatorGroupOffset {
     public int hashCode() {
         return Objects.hash(offset);
     }
+
 }
