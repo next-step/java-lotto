@@ -12,14 +12,14 @@ public class StringSeparatorTest {
 
     @ParameterizedTest(name = "NULL 또는 공백 인 경우")
     @NullAndEmptySource
-    void isNullOrEmptyTest_빈_공백_NULL(String input) {
+    void validateNullOrEmptyTest_빈_공백_NULL(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> stringSeparator.separateByDelimiter(input))
                 .withMessage("NULL 또는 공백은 입력할 수 없습니다.");
     }
 
     @ParameterizedTest(name = "0으로 나누는 경우")
     @ValueSource(strings = {"1 / 0", "1 * 2 / 0"})
-    void isDividedZeroTest(String input) {
+    void validateDividedZeroTest(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> stringSeparator.separateByDelimiter(input))
                 .withMessage("0으로 나눌 수 없습니다.");
     }

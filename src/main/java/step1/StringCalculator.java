@@ -12,6 +12,10 @@ public class StringCalculator {
 
     public int calculate(String input) {
         List<String> numbersAndOperators = stringSeparator.separateByDelimiter(input);
+
+        for (String numberOrOperator : numbersAndOperators) {
+
+        }
         return 1;
     }
 }
