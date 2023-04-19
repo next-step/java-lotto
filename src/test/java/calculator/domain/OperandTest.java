@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import calculator.domain.Operand;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,7 +14,7 @@ public class OperandTest {
   public void number_숫자(String input, int expected) {
     Operand operand = new Operand(input);
 
-    assertThat(operand.number()).isEqualTo(expected);
+    assertThat(operand.operand()).isEqualTo(expected);
   }
 
   @ParameterizedTest(name = "숫자 이외의 값 또는 음수를 전달하는 경우 IllegalArgumentException throw 테스트")
