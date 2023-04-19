@@ -5,7 +5,7 @@ public class Calculator {
         return new Calculator(operator);
     }
 
-    public Calculator(Operator operator) {
+    private Calculator(Operator operator) {
         this.operator = operator;
     }
 

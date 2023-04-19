@@ -38,17 +38,7 @@ public class StringCalculator {
     }
 
     private static Operator selectOperator(String operator) {
-        switch (operator) {
-            case "+":
-                return new PlusOperator();
-            case "-":
-                return new MinusOperator();
-            case "/":
-                return new DevideOperator();
-            case "*":
-                return new MultipleOperator();
-            default:
-                throw new IllegalArgumentException("유효한 사칙연산 기호를 입력해주세요.");
-        }
+        OperatorFactory operatorFactory = OperatorFactory.createFactory();
+        return operatorFactory.selectOperator(operator);
     }
 }
