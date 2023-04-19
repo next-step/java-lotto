@@ -11,6 +11,14 @@ public class StringCalculator {
         return calculateToken(token);
     }
 
+    private static boolean isNullOrEmpty(String text) {
+        return text == null || text.isEmpty();
+    }
+
+    private static String[] splitedToken(String text) {
+        return text.split(" ");
+    }
+
     private static int calculateToken(String... token) {
         for (int i = 0; i < token.length - 1; i += 2) {
             String[] part = {token[i], token[i + 1], token[i + 2]};
@@ -25,35 +33,27 @@ public class StringCalculator {
         String operator = token[1];
         int secondNumber = Integer.parseInt(token[2]);
 
-        Calculator calculator = new Calculator(selectCommand(operator));
+        Calculator calculator = Calculator.from(selectOperator(operator));
         return calculator.calculate(firstNumber, secondNumber);
     }
 
-    private static Command selectCommand(String operator) {
+    private static Operator selectOperator(String operator) {
         if (operator.equals("+")) {
-            return new PlusCommand();
+            return new PlusOperator();
         }
 
         if (operator.equals("-")) {
-            return new MinusCommand();
+            return new MinusOperator();
         }
 
         if (operator.equals("/")) {
-            return new DevideCommand();
+            return new DevideOperator();
         }
 
         if (operator.equals("*")) {
-            return new MultipleCommand();
+            return new MultipleOperator();
         }
 
         throw new IllegalArgumentException("유효한 사칙연산 기호를 입력해주세요.");
-    }
-
-    private static boolean isNullOrEmpty(String text) {
-        return text == null || text.isEmpty();
-    }
-
-    private static String[] splitedToken(String text) {
-        return text.split(" ");
     }
 }

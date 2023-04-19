@@ -1,11 +1,15 @@
 public class Calculator {
-    private final Command command;
+    private final Operator operator;
 
-    public Calculator(Command command) {
-        this.command = command;
+    public static Calculator from(Operator operator) {
+        return new Calculator(operator);
+    }
+
+    public Calculator(Operator operator) {
+        this.operator = operator;
     }
 
     public int calculate(int a, int b) {
-        return command.calculate(a, b);
+        return operator.calculate(a, b);
     }
 }
