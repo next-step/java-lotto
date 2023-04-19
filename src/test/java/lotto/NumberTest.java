@@ -1,0 +1,31 @@
+package lotto;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+public class NumberTest {
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 46, 47, 100})
+    void 숫자범위(int number) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Number(number))
+            .withMessageMatching("숫자는 1 ~ 45 사이의 값만 가질수 있습니다. : " + number);
+    }
+
+    @Test
+    void 숫자생성() {
+        assertAll(
+            () -> {
+                for (int i = 1; i <= 45; i++) {
+                    assertThat(new Number(i)).isEqualTo(new Number(i));
+                }}
+        );
+    }
+
+}
