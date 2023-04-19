@@ -15,7 +15,7 @@ class StringCalculatorTest {
                 .withMessage("문자열을 입력해주세요.");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}을 계산하면 {1}(이)가 나온다.")
     @CsvSource(value = {"1 + 2:3", "4 - 2:2", "9 / 3:3", "2 * 4:8"}, delimiter = ':')
     void 수_2개_사칙연산이_가능하다(String input, int expect) {
 
@@ -26,7 +26,7 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(expect);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}을 계산하면 {1}(이)가 나온다.")
     @CsvSource(value = {"2 + 4 * 3 / 6:3", "6 - 4 * 5 / 2:5"}, delimiter = ':')
     void 수_여러_개_사칙연산이_가능하다(String input, int expect) {
 
