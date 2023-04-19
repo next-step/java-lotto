@@ -1,10 +1,15 @@
 package step1;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.in;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class StringSeparatorTest {
 
@@ -22,5 +27,20 @@ public class StringSeparatorTest {
     void validateDividedZeroTest(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> stringSeparator.separateByDelimiter(input))
                 .withMessage("0으로 나눌 수 없습니다.");
+    }
+
+    @ParameterizedTest(name = "문자열을 Iterator로 분리하는 경우")
+    @MethodSource("provideInputString")
+    void separateByDelimiterTest(String input, List<String> expected) {
+        List<String> separatedInput = stringSeparator.separateByDelimiter(input);
+        assertThat(separatedInput).containsAnyElementsOf(expected);
+    }
+
+    static Stream<Arguments> provideInputString() {
+        return Stream.of(
+                arguments(("1 + 2 + 3"), List.of("1","+","2","+","3")),
+                arguments(("1 - 2 - 3"), List.of("1","-","2","-","3")),
+                arguments(("1 / 2 / 3"), List.of("1","/","2","/","3"))
+        );
     }
 }
