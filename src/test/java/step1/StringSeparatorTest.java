@@ -1,14 +1,16 @@
 package step1;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.*;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.in;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class StringSeparatorTest {
@@ -38,9 +40,9 @@ public class StringSeparatorTest {
 
     static Stream<Arguments> provideInputString() {
         return Stream.of(
-                arguments(("1 + 2 + 3"), List.of("1","+","2","+","3")),
-                arguments(("1 - 2 - 3"), List.of("1","-","2","-","3")),
-                arguments(("1 / 2 / 3"), List.of("1","/","2","/","3"))
+                arguments(("1 + 2 + 3"), List.of("1", "+", "2", "+", "3")),
+                arguments(("1 - 2 - 3"), List.of("1", "-", "2", "-", "3")),
+                arguments(("1 / 2 / 3"), List.of("1", "/", "2", "/", "3"))
         );
     }
 }
