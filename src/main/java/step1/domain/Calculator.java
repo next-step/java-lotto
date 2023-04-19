@@ -1,3 +1,5 @@
+package step1.domain;
+
 public class Calculator {
     private final Operator operator;
 

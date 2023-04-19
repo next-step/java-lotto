@@ -1,3 +1,10 @@
+package step1.domain;
+
+import step1.infrastructure.DivideOperator;
+import step1.infrastructure.MinusOperator;
+import step1.infrastructure.MultipleOperator;
+import step1.infrastructure.PlusOperator;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +21,7 @@ public class OperatorFactory {
 
         factory.put("+", new PlusOperator());
         factory.put("-", new MinusOperator());
-        factory.put("/", new DevideOperator());
+        factory.put("/", new DivideOperator());
         factory.put("*", new MultipleOperator());
 
         return new OperatorFactory(factory);

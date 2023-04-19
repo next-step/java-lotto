@@ -1,3 +1,9 @@
+package step1;
+
+import step1.domain.Calculator;
+import step1.domain.Operator;
+import step1.domain.OperatorFactory;
+
 public class StringCalculator {
 
     public static int calculator(String text) {
