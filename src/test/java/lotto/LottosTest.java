@@ -16,7 +16,7 @@ public class LottosTest {
         for (int i = 0; i < Integer.parseInt(input) / Lottos.LOTTO_AMOUNT; i++) {
             result.add(Lotto.purchase());
         }
-        assertThat(new Lottos(result, Integer.parseInt(input)).count()).isEqualTo(Integer.parseInt(expected));
+        assertThat(new Lottos(result).count()).isEqualTo(Integer.parseInt(expected));
     }
 
 }

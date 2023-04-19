@@ -32,7 +32,7 @@ public class InputViewTest {
         for (int i=0; i<14; i++) {
             lottos.add(new Lotto(numbers));
         }
-        InputView.printPurchaseComplete(new Lottos(lottos, lottos.size()));
+        InputView.printPurchaseComplete(new Lottos(lottos));
         assertThat(outputStream.toString()).containsPattern("(\\[[\\d]{1,2}(, [\\d]{1,2}){5}\\]\n){14}");
     }
 
@@ -43,7 +43,7 @@ public class InputViewTest {
         for (int i=0; i<14; i++) {
             lottos.add(new Lotto(numbers));
         }
-        InputView.printPurchaseComplete(new Lottos(lottos, lottos.size()));
+        InputView.printPurchaseComplete(new Lottos(lottos));
         assertThat(outputStream.toString()).containsPattern("14개를 구매했습니다.");
     }
 

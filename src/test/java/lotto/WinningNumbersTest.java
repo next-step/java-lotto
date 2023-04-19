@@ -34,7 +34,7 @@ public class WinningNumbersTest {
 
         List<Number> winning = List.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
         WinningNumbers winningNumbers = new WinningNumbers(winning);
-        Map<String, Integer> result = winningNumbers.winningResult(new Lottos(lottos, 6000));
+        Map<String, Integer> result = winningNumbers.winningResult(new Lottos(lottos));
 
         assertAll(
             () -> assertThat(result.get("FIRST_GRADE")).isEqualTo(2),

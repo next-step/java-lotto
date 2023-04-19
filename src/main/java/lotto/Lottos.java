@@ -8,11 +8,9 @@ public class Lottos {
     public static final int LOTTO_AMOUNT = 1_000;
 
     private final List<Lotto> lottos;
-    private final int amount;
 
-    public Lottos(List<Lotto> lottos, int amount) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.amount = amount;
     }
 
     public static List<Lotto> lottoList(int count) {

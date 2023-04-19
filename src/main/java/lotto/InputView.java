@@ -8,7 +8,11 @@ public class InputView {
 
     public static int askAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new Scanner(System.in).nextInt();
+        int amount = new Scanner(System.in).nextInt();
+        if (amount < Lottos.LOTTO_AMOUNT) {
+            throw new IllegalArgumentException("로또 금액보다 적은 금액이 입력됐습니다. : " + amount + " < " + Lottos.LOTTO_AMOUNT);
+        }
+        return amount;
     }
 
     public static List<Number> askWinningNumbers() {
