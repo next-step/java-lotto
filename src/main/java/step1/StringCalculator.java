@@ -1,6 +1,6 @@
 package step1;
 
-import java.util.List;
+import java.util.Iterator;
 
 public class StringCalculator {
 
@@ -11,11 +11,15 @@ public class StringCalculator {
     }
 
     public int calculate(String input) {
-        List<String> numbersAndOperators = stringSeparator.separateByDelimiter(input);
+        Iterator<String> numbersAndOperators = stringSeparator.separateByDelimiter(input);
 
-        for (String numberOrOperator : numbersAndOperators) {
+        int prevNum = Integer.parseInt(numbersAndOperators.next());
+        while (numbersAndOperators.hasNext()) {
+            String operator = numbersAndOperators.next();
+            int nextNum = Integer.parseInt(numbersAndOperators.next());
 
+            prevNum = BasicOperators.operate(prevNum, nextNum, operator);
         }
-        return 1;
+        return prevNum;
     }
 }

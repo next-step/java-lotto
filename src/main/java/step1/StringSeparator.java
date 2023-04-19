@@ -1,6 +1,7 @@
 package step1;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class StringSeparator {
 
@@ -8,12 +9,12 @@ public class StringSeparator {
 
     private static final String INPUT_DELIMITER = " ";
 
-    public List<String> separateByDelimiter(String input) {
+    public Iterator<String> separateByDelimiter(String input) {
         validateNullOrEmpty(input);
         validateDividedZero(input);
 
         String[] separatedInput = input.split(INPUT_DELIMITER);
-        return List.of(separatedInput);
+        return Arrays.stream(separatedInput).iterator();
     }
 
     private void validateNullOrEmpty(String input) {
