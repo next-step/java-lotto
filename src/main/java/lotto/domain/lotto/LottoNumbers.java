@@ -1,6 +1,9 @@
 package lotto.domain.lotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoNumbers {
     private static final List<Integer> LOTTO_NUMBER_LIST = Arrays.asList(

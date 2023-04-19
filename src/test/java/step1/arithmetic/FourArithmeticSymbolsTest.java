@@ -10,15 +10,15 @@ public class FourArithmeticSymbolsTest {
 
     @Test
     @DisplayName("symbol 을 이용해 필요한 이넘타입을 찾는지 확인")
-    void findBy(){
+    void findBy() {
         assertAll(
-                ()->assertThat(FourArithmeticSymbols.findBy("+"))
+                () -> assertThat(FourArithmeticSymbols.findBy("+"))
                         .isEqualTo(FourArithmeticSymbols.PLUS),
-                ()->assertThat(FourArithmeticSymbols.findBy("-"))
+                () -> assertThat(FourArithmeticSymbols.findBy("-"))
                         .isEqualTo(FourArithmeticSymbols.MINUS),
-                ()->assertThat(FourArithmeticSymbols.findBy("*"))
+                () -> assertThat(FourArithmeticSymbols.findBy("*"))
                         .isEqualTo(FourArithmeticSymbols.MULTIPLICATION),
-                ()->assertThat(FourArithmeticSymbols.findBy("/"))
+                () -> assertThat(FourArithmeticSymbols.findBy("/"))
                         .isEqualTo(FourArithmeticSymbols.DIVISION)
         );
     }
