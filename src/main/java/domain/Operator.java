@@ -5,11 +5,8 @@ import java.util.function.BiFunction;
 
 public enum Operator {
     PLUS("+", (num1, num2) -> Integer.valueOf(num1 + num2)),
-
     MINUS("-", (num1, num2) -> Integer.valueOf(num1 - num2)),
-
     MULTIPLY("*", (num1, num2) -> Integer.valueOf(num1 * num2)),
-
     DIVIDE("/", (num1, num2) -> Integer.valueOf(num1 / num2));
 
     private final String operator;
