@@ -1,6 +1,10 @@
 package stringcalculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,9 +31,21 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void 나눗셈의_결과가_정수로_떨어지지_않으면_IllegalArgumentException이_발생한다() {
+    void 나눗셈의_결과가_정수로_떨어지지_않으면_IllegalArgumentException을_던진다() {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> StringCalculator.quotient(3, 2))
             .withMessage("나눗셈의 결과가 정수로 떨어지지 않습니다.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("blankOrNullStrings")
+    void 입력한값이_null이거나_공백문자일경우_IllegalArgumentException을_던진다(String input) {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> StringCalculator.calculate(input))
+            .withMessage("잘못된 입력입니다.");
+    }
+
+    private static Stream<String> blankOrNullStrings() {
+        return Stream.of("", null);
     }
 }
