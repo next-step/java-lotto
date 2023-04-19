@@ -17,6 +17,11 @@ public class StringCalculatorTest {
     }
 
     @Test
+    void 곱셈() {
+        assertThat(StringCalculator.product(4, 2)).isEqualTo(8);
+    }
+
+    @Test
     void 나눗셈() {
         assertThat(StringCalculator.quotient(4, 2)).isEqualTo(2);
     }
