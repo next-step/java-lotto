@@ -28,4 +28,36 @@
     - [ ] 입력 값이 null이거나 빈 공백 문자일 경우
     - [ ] 사칙연산 기호가 아닌 경우
     - [ ] 연산자 자리에 피연산자가 들어가는 경우 
-    - [ ] 피연산자 자리에 연산자가 들어가는 경ㅇ
+    - [ ] 피연산자 자리에 연산자가 들어가는 경우
+
+## 구현 객체 및 책임
+
+
+### domain 패키지
+- OperatorGroup
+  - InputView 로 부터 전달받은 컬렉션에서 연산자를 추출한다
+  - StringCalculator 로 부터 연산자 요청이 오면 OperatorOffset 로 부터  Offset 위치에 해당하는 Operator를 반환한다.
+- OperatorGroupOffset
+  - Operator가 어디까지 연산자를 제공했는지 offset 위치를 기록한다
+- Operand
+  - InputView 로 부터 전달받은 컬렉션에서 피연산자를 추출한다
+  - 피연산자가 정수가 아니면 예외를 던진다.
+- Operator
+  - 연산자 목록 관리 및 연산자 별로 수식을 관리한다
+  - OperatorGroup로 부터 연산자를 가져오는 요청이 올 경우 관리하느 연산자가 아니면 예외를 던진다
+## service 패키지
+- StringCalculator
+  - OperatorGroup과 Operand를 전달 받아 연산한다
+### view 패키지
+- InputView
+   - 사용자로 부터 값을 입력 받는다
+   - 사용자로 부터 전달 받은 값을 리스트 불변 컬렉션으로 반환한다.
+   - 입력 받은 값이 null or 공백 예외를 체크한다
+
+- OutPutView
+  - StringCalculator의 결과 값을 출력한다
+  
+### common.error 패키지
+- ErrorMessage
+  - 각종 예외를 관리한다
+
