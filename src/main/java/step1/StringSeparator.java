@@ -14,7 +14,8 @@ public class StringSeparator {
         validateDividedZero(input);
 
         String[] separatedInput = input.split(INPUT_DELIMITER);
-        return Arrays.stream(separatedInput).iterator();
+        return Arrays.stream(separatedInput)
+                .iterator();
     }
 
     private void validateNullOrEmpty(String input) {
