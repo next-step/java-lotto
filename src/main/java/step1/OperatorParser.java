@@ -5,23 +5,28 @@ import java.util.List;
 import java.util.Map;
 
 public class OperatorParser {
-    private static final Map<Character, Boolean> OPERATORS = Map.of(
-            '+', true,
-            '-', true,
-            '*', true,
-            '/', true
+    private static final Map<String, Boolean> SYMBOLS = Map.of(
+            Operator.PLUS.getSymbol(), true,
+            Operator.MINUS.getSymbol(), true,
+            Operator.MULTIPLY.getSymbol(), true,
+            Operator.DIVIDE.getSymbol(), true
     );
-    public List<String> parse(String input) {
-        List<String> operators = new ArrayList<>();
+    public List<Operator> parse(String input) {
+        List<Operator> operators = new ArrayList<>();
         for (int i = 0; i < input.length(); i++) {
-            if (isOperator(input.charAt(i))) {
-                operators.add(String.valueOf(input.charAt(i)));
-            }
+            addOperator(input, operators, i);
         }
         return operators;
     }
 
-    private boolean isOperator(char ch) {
-        return OPERATORS.getOrDefault(ch, false);
+    private void addOperator(String input, List<Operator> operators, int i) {
+        final String symbol = String.valueOf(input.charAt(i));
+        if (isOperator(symbol)) {
+            operators.add(Operator.valueOf(symbol));
+        }
+    }
+
+    private boolean isOperator(String symbol) {
+        return SYMBOLS.getOrDefault(symbol, false);
     }
 }

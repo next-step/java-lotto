@@ -19,7 +19,7 @@ public class InputView {
         return numberParser.parse(input);
     }
 
-    public List<String> getOperators() {
+    public List<Operator> getOperators() {
         return operatorParser.parse(input);
     }
 

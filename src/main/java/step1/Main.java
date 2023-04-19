@@ -10,7 +10,7 @@ public class Main {
 
         inputView.request();
         final List<Integer> numbers = inputView.getNumbers();
-        final List<String> operators = inputView.getOperators();
+        final List<Operator> operators = inputView.getOperators();
 
         final int result = new StringSequenceCalculator(numbers, operators).calculate();
 

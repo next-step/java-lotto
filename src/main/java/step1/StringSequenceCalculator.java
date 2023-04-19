@@ -1,26 +1,18 @@
 package step1;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
 
 public class StringSequenceCalculator {
-    private static final Map<String, BiFunction<Integer, Integer, Integer>> OPERATORS = Map.of(
-            "+", Integer::sum,
-            "-", (num1, num2) -> num1 - num2,
-            "*", (num1, num2) -> num1 * num2,
-            "/", (num1, num2) -> num1 / num2
-    );
     private final List<Integer> numbers;
-    private final List<String> operators;
+    private final List<Operator> operators;
 
-    public StringSequenceCalculator(List<Integer> numbers, List<String> operators) {
+    public StringSequenceCalculator(List<Integer> numbers, List<Operator> operators) {
         validate(numbers, operators);
         this.numbers = numbers;
         this.operators = operators;
     }
 
-    private void validate(List<Integer> numbers, List<String> operators) {
+    private void validate(List<Integer> numbers, List<Operator> operators) {
         if (numbers.isEmpty()) {
             throw new IllegalArgumentException("숫자가 없습니다.");
         }
@@ -37,7 +29,7 @@ public class StringSequenceCalculator {
         return result;
     }
 
-    private int calculate(int num1, int num2, String operator) {
-        return OPERATORS.get(operator).apply(num1, num2);
+    private int calculate(int num1, int num2, Operator operator) {
+        return operator.calculate(num1, num2);
     }
 }
