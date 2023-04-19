@@ -15,63 +15,63 @@ public class Formula {
         public static final Pattern VALID_NUMBER = Pattern.compile("\\d");
         public static final String DELIMITER = " ";
 
-        public static void split(Formula formula) {
-            String[] splitStrings = SplitFormula.splitStrings(formula.formula);
+        public void split(Formula formula) {
+            String[] splitStrings = splitStrings(formula.formula);
             findPrefixZero(splitStrings, formula.numbers);
             findOperations(splitStrings, formula.operators);
             findNumbers(splitStrings, formula.numbers);
             findSuffixZero(splitStrings, formula.numbers);
         }
 
-        private static String[] splitStrings(String formula) {
+        private String[] splitStrings(String formula) {
             return formula.split(DELIMITER);
         }
 
-        private static void findOperations(String[] splitStrings, Operators operators) {
+        private void findOperations(String[] splitStrings, Operators operators) {
             for (String splitString : splitStrings) {
                 offerOperation(splitString, operators);
             }
         }
 
-        private static void findSuffixZero(String[] splitStrings, Numbers numbers) {
+        private void findSuffixZero(String[] splitStrings, Numbers numbers) {
             if (isOperation(splitStrings[splitStrings.length - 1])) {
                 numbers.offer(new Number("0"));
             }
         }
 
-        private static void findNumbers(String[] splitStrings, Numbers numbers) {
+        private void findNumbers(String[] splitStrings, Numbers numbers) {
             for (String splitString : splitStrings) {
                 offerNumber(splitString, numbers);
             }
         }
 
-        private static void findPrefixZero(String[] splitStrings, Numbers numbers) {
+        private void findPrefixZero(String[] splitStrings, Numbers numbers) {
             if (isOperation(splitStrings[0])) {
                 numbers.offer(new Number("0"));
             }
         }
 
-        private static void offerNumber(String input, Numbers numbers) {
+        private void offerNumber(String input, Numbers numbers) {
             if (isNumber(input)) {
                 numbers.offer(new Number(input));
             }
         }
 
-        private static boolean isNumber(String input) {
+        private boolean isNumber(String input) {
             return VALID_NUMBER.matcher(input).find();
         }
 
-        private static void offerOperation(String input, Operators operators) {
+        private void offerOperation(String input, Operators operators) {
             if (isOperation(input)) {
                 operators.offer(new Operator(input));
             }
         }
 
-        private static boolean isOperation(String input) {
+        private boolean isOperation(String input) {
             return operationMatcher(input).find();
         }
 
-        private static Matcher operationMatcher(String input) {
+        private Matcher operationMatcher(String input) {
             return VALID_OPERATIONS.matcher(input);
         }
 
