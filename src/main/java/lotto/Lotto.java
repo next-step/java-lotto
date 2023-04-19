@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final List<Number> LOTTO_NUMBER_LIST = IntStream.rangeClosed(1, 45)
+    public static final List<Number> LOTTO_NUMBER_LIST = IntStream.rangeClosed(Number.MIN_NUMBER, Number.MAX_NUMBER)
         .boxed()
         .map(Number::new)
         .collect(Collectors.toList());
