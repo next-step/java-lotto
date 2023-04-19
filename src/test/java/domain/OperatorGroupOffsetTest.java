@@ -14,7 +14,6 @@ class OperatorGroupOffsetTest {
     void initialize(){
 
         assertThat(OperatorGroupOffset.initialize()).isEqualTo(new OperatorGroupOffset(0));
-
     }
 
 }
