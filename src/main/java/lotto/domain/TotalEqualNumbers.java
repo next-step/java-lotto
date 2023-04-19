@@ -3,9 +3,8 @@ package lotto.domain;
 public class TotalEqualNumbers {
     public void matchNumbers(BuyLotto buyLotto, WinOfLotto winOfLotto) {
 
-        for (Lotto lotto : buyLotto.getLottos().getLottos()) {
+        for (Lotto lotto : buyLotto.getLottoNumbers()) {
             EqualNumbers equalNumbers = new EqualNumbers(lotto, winOfLotto);
-
             setTotalEqualNumber(equalNumbers);
         }
     }

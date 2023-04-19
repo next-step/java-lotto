@@ -10,4 +10,8 @@ public class Count {
     public int getCount() {
         return this.count;
     }
+
+    public Count minus(Count count) {
+        return new Count(this.count - count.count);
+    }
 }

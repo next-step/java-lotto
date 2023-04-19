@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Set;
+
 public class BuyLotto {
     private final int buyAmount;
     private Count passiveCount;
@@ -20,7 +22,7 @@ public class BuyLotto {
     }
 
     private Count getPassiveCountCalc() {
-        return new Count(this.count.getCount() - this.passiveCount.getCount());
+        return this.count.minus(this.passiveCount);
     }
 
     public int getbuyAmount() {
@@ -49,5 +51,9 @@ public class BuyLotto {
 
     public Count getAutoCount() {
         return this.autoCount;
+    }
+
+    public Set<Lotto> getLottoNumbers() {
+        return lottos.getLottos();
     }
 }
