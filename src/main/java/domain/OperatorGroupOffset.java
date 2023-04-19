@@ -7,12 +7,16 @@ public class OperatorGroupOffset {
     private static final int INCREASE_NUMBER = 1;
     private int offset;
 
-    public OperatorGroupOffset(int offset) {
+    private OperatorGroupOffset(int offset) {
         this.offset = offset;
     }
 
     public static OperatorGroupOffset initialize() {
-        return new OperatorGroupOffset(INITIALIZE_NUMBER);
+        return of(INITIALIZE_NUMBER);
+    }
+
+    public static OperatorGroupOffset of(int offset){
+        return new OperatorGroupOffset(offset);
     }
 
 
