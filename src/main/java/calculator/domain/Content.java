@@ -6,14 +6,20 @@ public class Content {
     private final Integer number;
     private final String operation;
 
-    public Content(Integer number) {
-        this.number = number;
-        this.operation = null;
-    }
+    public Content(String str) {
+        if (isNumber(str)) {
+            this.operation = null;
+            this.number = Integer.parseInt(str);
+            return;
+        }
 
-    public Content(String operation) {
-        this.operation = operation;
-        this.number = null;
+        if (isOperation(str)) {
+            this.operation = str;
+            this.number = null;
+            return;
+        }
+
+        throw new IllegalArgumentException("숫자 또는 사칙연산 기호가 아닙니다.");
     }
 
     public int getNumber() {
@@ -40,5 +46,18 @@ public class Content {
         int result = number != null ? number.hashCode() : 0;
         result = 31 * result + (operation != null ? operation.hashCode() : 0);
         return result;
+    }
+
+    private boolean isNumber(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isOperation(String str) {
+        return "+".equals(str) || "-".equals(str) || "*".equals(str) || "/".equals(str);
     }
 }

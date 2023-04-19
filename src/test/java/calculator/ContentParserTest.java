@@ -17,13 +17,13 @@ public class ContentParserTest {
     public void parse() {
         ContentParser contentParser = new ContentParser("2 + 3 * 4 / 2");
         List<Content> list = new ArrayList<>();
-        list.add(new Content(2));
+        list.add(new Content("2"));
         list.add(new Content("+"));
-        list.add(new Content(3));
+        list.add(new Content("3"));
         list.add(new Content("*"));
-        list.add(new Content(4));
+        list.add(new Content("4"));
         list.add(new Content("/"));
-        list.add(new Content(2));
+        list.add(new Content("2"));
 
         assertThat(contentParser.parse()).containsAll(list);
     }
