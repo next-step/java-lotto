@@ -38,22 +38,17 @@ public class StringCalculator {
     }
 
     private static Operator selectOperator(String operator) {
-        if (operator.equals("+")) {
-            return new PlusOperator();
+        switch (operator) {
+            case "+":
+                return new PlusOperator();
+            case "-":
+                return new MinusOperator();
+            case "/":
+                return new DevideOperator();
+            case "*":
+                return new MultipleOperator();
+            default:
+                throw new IllegalArgumentException("유효한 사칙연산 기호를 입력해주세요.");
         }
-
-        if (operator.equals("-")) {
-            return new MinusOperator();
-        }
-
-        if (operator.equals("/")) {
-            return new DevideOperator();
-        }
-
-        if (operator.equals("*")) {
-            return new MultipleOperator();
-        }
-
-        throw new IllegalArgumentException("유효한 사칙연산 기호를 입력해주세요.");
     }
 }
