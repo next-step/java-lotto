@@ -26,6 +26,17 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(expect);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"2 + 4 * 3 / 6:3", "6 - 4 * 5 / 2:5"}, delimiter = ':')
+    void 수_여러_개_사칙연산이_가능하다(String input, int expect) {
+
+        // when
+        int result = StringCalculator.calculator(input);
+
+        // then
+        assertThat(result).isEqualTo(expect);
+    }
+
     @Test
     void 유효하지_않는_기호일_경우_예외가_발생한다() {
 

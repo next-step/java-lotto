@@ -7,10 +7,20 @@ public class StringCalculator {
         }
 
         String[] token = splitedToken(text);
-        return calcuateToken(token);
+
+        return calculateToken(token);
     }
 
-    private static int calcuateToken(String... token) {
+    private static int calculateToken(String... token) {
+        for (int i = 0; i < token.length - 1; i += 2) {
+            String[] part = {token[i], token[i + 1], token[i + 2]};
+            token[i + 2] = String.valueOf(calcuatePartOfToken(part));
+        }
+
+        return Integer.parseInt(token[token.length - 1]);
+    }
+
+    private static int calcuatePartOfToken(String... token) {
         int firstNumber = Integer.parseInt(token[0]);
         String operator = token[1];
         int secondNumber = Integer.parseInt(token[2]);
