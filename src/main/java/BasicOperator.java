@@ -43,8 +43,8 @@ public enum BasicOperator implements Operator {
         throw new IllegalArgumentException("연산자를 찾을 수 없습니다.");
     }
 
-    private static void validateOperand(int operand){
-        if(operand == 0)
+    private static void validateOperand(int operand) {
+        if (operand == 0)
             throw new IllegalArgumentException("나눗셈 할때 피연산자가 0이면 안됩니다.");
     }
 
