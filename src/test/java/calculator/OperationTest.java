@@ -51,4 +51,22 @@ class OperationTest {
         assertThat(actual).isSameAs(expected);
     }
 
+    @CsvSource(value = {
+            "3,2,1",
+            "6,3,2",
+            "0,2,0",
+            "9,2,4",
+            "-1,5,0",
+            "-10,2,-5",
+            "15,-2,-7",
+            "-30,-3,10",
+    })
+    @DisplayName("입력값을 기준으로 나눗셈 연산 후 결과 값을 반환한다.")
+    @ParameterizedTest(name = "{0} / {1} = {2}")
+    void test04(int a, int b, int expected) {
+        Operation operation = Operation.findType(DIV);
+        int actual = operation.calculate(a, b);
+        assertThat(actual).isSameAs(expected);
+    }
+
 }

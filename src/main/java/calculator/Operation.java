@@ -9,7 +9,8 @@ import static java.util.stream.Collectors.toUnmodifiableMap;
 public enum Operation {
     ADD(Operator.ADD, Integer::sum),
     SUB(Operator.SUB, (a, b) -> a - b),
-    MUL(Operator.MUL, (a, b) -> a * b);
+    MUL(Operator.MUL, (a, b) -> a * b),
+    DIV(Operator.DIV, (a, b) -> a / b);
 
     private static final Map<Operator, Operation> VALUE_MAP
             = Arrays.stream(Operation.values())
