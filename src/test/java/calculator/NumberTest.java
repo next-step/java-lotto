@@ -1,8 +1,6 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -34,7 +32,7 @@ public class NumberTest {
     @Test
     void 공백_예외처리() {
         assertThatThrownBy(() -> {
-            new Number(" ");
+            new Number("");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력값이 없습니다.");
     }

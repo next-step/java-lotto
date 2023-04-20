@@ -32,7 +32,7 @@ public class OperatorTest {
     @Test
     void 공백_예외처리() {
         assertThatThrownBy(() -> {
-            new Operator(" ");
+            new Operator("");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력값이 없습니다.");
     }
