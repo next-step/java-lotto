@@ -30,4 +30,19 @@ public class StringCalculatorTest {
 		Number result = stringCalculator.multiply();
 		assertThat(result).isEqualTo(new Number(15));
 	}
+
+	@DisplayName("나눗셈")
+	@Test
+	void test4() {
+		StringCalculator stringCalculator = new StringCalculator("9", "2");
+		Number result = stringCalculator.divide();
+		assertThat(result).isEqualTo(new Number(4));
+	}
+
+	@DisplayName("나눗셈 예외 케이스 - 나누려는 숫자가 0인 경우")
+	@Test
+	void test5() {
+		StringCalculator stringCalculator = new StringCalculator("9", "0");
+		assertThatThrownBy(stringCalculator::divide).isInstanceOf(IllegalArgumentException.class);
+	}
 }

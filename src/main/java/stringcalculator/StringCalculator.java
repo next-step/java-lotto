@@ -29,4 +29,11 @@ public class StringCalculator {
 	public Number multiply() {
 		return new Number(a.getNumber() * b.getNumber());
 	}
+
+	public Number divide() {
+		if (b.equals(new Number(0))) {
+			throw new IllegalArgumentException("나누려는 숫자는 0일 수 없습니다.");
+		}
+		return new Number(a.getNumber() / b.getNumber());
+	}
 }
