@@ -33,12 +33,12 @@ class OperatorTest {
 
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "요청 연산자 : {0}")
     @CsvSource(value = {"1,2", "2,5", "-1,3"})
     @DisplayName("더하기 기능 테스트")
-    void plusTest(int operand1, int operand2) {
-        assertThat(Operator.calculate(Operator.ADDITION, operand1, operand2))
-                .isEqualTo(operand1 + operand2);
+    void plusTest(int leftOperand, int rightOperand) {
+        assertThat(Operator.calculate(Operator.ADDITION, leftOperand, rightOperand))
+                .isEqualTo(leftOperand + rightOperand);
     }
 
 
