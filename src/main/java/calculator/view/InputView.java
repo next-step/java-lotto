@@ -6,7 +6,7 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public String getStringInput() {
+    public String input() {
         return scanner.nextLine();
     }
 

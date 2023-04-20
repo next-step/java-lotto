@@ -2,7 +2,7 @@ package calculator.view;
 
 public class ResultView {
 
-    public void printResult(int result) {
+    public static void printResult(int result) {
         System.out.println(result);
     }
 
