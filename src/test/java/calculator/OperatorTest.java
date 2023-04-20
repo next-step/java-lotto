@@ -20,4 +20,20 @@ public class OperatorTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("사칙연산 기호가 아닙니다.");
     }
+
+    @Test
+    void null_예외처리() {
+        assertThatThrownBy(() -> {
+            new Operator(null);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력값이 없습니다.");
+    }
+
+    @Test
+    void 공백_예외처리() {
+        assertThatThrownBy(() -> {
+            new Operator(" ");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력값이 없습니다.");
+    }
 }
