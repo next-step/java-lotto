@@ -34,6 +34,11 @@ public enum Operator {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NO_SUCH_OPERATOR.getErrorMessage()));
     }
 
+    public static int calculate(Operator operator, int operand1, int operand2) {
+
+        return 0;
+    }
+
     private String getSeparator() {
         return separator;
     }
