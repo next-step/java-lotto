@@ -1,6 +1,7 @@
 package domain;
 
-import java.util.Arrays;
+import common.error.ErrorMessage;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -29,7 +30,8 @@ public enum Operand {
     }
 
     public static Operand lookUp(String separator) {
-        return Optional.ofNullable(separators.get(separator)).get();
+        return Optional.ofNullable(separators.get(separator))
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NO_SUCH_OPERATOR.getErrorMessage()));
     }
 
     public String getSeparator() {
