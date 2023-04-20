@@ -10,7 +10,7 @@ class LottosTest {
     @Test
     @DisplayName("Lotto 발급 테스트")
     void lottosTest() {
-        Lottos lottos = Lottos.initLottos(5);
+        Lottos lottos = Lottos.initLottos(Money.initMoney(5000));
 
         assertThat(lottos.getLottoQuantity())
                 .isEqualTo(5);

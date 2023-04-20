@@ -13,8 +13,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos initLottos(int quantity) {
-        List<Lotto> lottos = IntStream.range(ZERO, quantity)
+    public static Lottos initLottos(Money amount) {
+        List<Lotto> lottos = IntStream.range(ZERO, amount.getLottoQuantity())
                 .mapToObj(i -> Lotto.initLotto())
                 .collect(Collectors.toList());
 
