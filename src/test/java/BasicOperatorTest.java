@@ -68,4 +68,12 @@ class BasicOperatorTest {
             BasicOperator.find(operator);
         });
     }
+
+    @ParameterizedTest(name = "[{index}] 연산자 {0} 존재유무")
+    @CsvSource(value = {"+:true", "^:false"}, delimiter = ':')
+    @DisplayName("연산자_찾기_테스트")
+    public void 연산자_찾기_테스트(String operator, boolean result){
+        assertThat(BasicOperator.hasOperator(operator)).isEqualTo(result);
+    }
+
 }

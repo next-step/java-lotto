@@ -1,51 +1,38 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Calculator {
 
-    private static final String FORMULA_REGEX = "^[0-9+\\-*/\\s]+$\n";
-    private List<BasicOperator> operations = new ArrayList<>();
-    private List<Integer> numbers = new ArrayList<>();
+    private static final String FORMULA_REGEX = "^[0-9+\\-*/\\s]*$";
+    private static List<BasicOperator> operations = new ArrayList<>();
+    private static List<Integer> numbers = new ArrayList<>();
+    private static int calculationResult;
 
-
-    public static int add(int x, int y) {
-        return x+y;
-    }
-
-    public static int subtraction(int x, int y) {
-        return x-y;
-    }
-
-    public static int multiplication(int x, int y) {
-        return x*y;
-    }
-
-    public static int division(int x, int y) {
-        return x/y;
-    }
 
     public static int calculate(String formula) {
         validateFormula(formula);
         String[] nums = formula.split(" ");
 
-        int result = 0;
+        operations = Arrays.stream(nums)
+                .filter(BasicOperator::hasOperator)
+                .map(BasicOperator::find)
+                .collect(Collectors.toList());
 
-        for (int i = 0; i < nums.length; i++) {
+        numbers = Arrays.stream(nums)
+                .filter(str -> !BasicOperator.hasOperator(str))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        
+        calculationResult = numbers.get(0);
 
-
-            if(nums[i].equals("+")){
-
-            }else if(nums[i].equals("-")){
-
-            }else if(nums[i].equals("*")){
-
-            }else if(nums[i].equals("/")){
-
-            }
-
+        for(int i=1; i<numbers.size(); i++){
+            BasicOperator operator = operations.get(i-1);
+            int number = numbers.get(i);
+            calculationResult = operator.apply(calculationResult, number);
         }
-
-        return result;
+        return calculationResult;
     }
 
     private static void validateFormula(String formula){
