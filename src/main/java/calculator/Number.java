@@ -2,13 +2,13 @@ package calculator;
 
 public class Number {
 
-    private final int num;
+    private final int number;
 
     public Number(String input) {
         if(isNotNumeric(input)) {
             throw new NumberFormatException("숫자가 아닙니다.");
         }
-        this.num = parseInt(input);
+        this.number = parseInt(input);
     }
 
     int parseInt(String input) {
@@ -16,7 +16,7 @@ public class Number {
     }
 
     public int intValue() {
-        return num;
+        return number;
     }
 
     boolean isNotNumeric(String s) {
