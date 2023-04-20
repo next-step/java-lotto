@@ -32,7 +32,6 @@
 
 ## 구현 객체 및 책임
 
-
 ### domain 패키지
 - OperatorGroup
   - InputView 로 부터 전달받은 컬렉션에서 연산자를 추출한다
@@ -46,6 +45,14 @@
   - 연산자 목록 관리 및 연산자 별로 수식을 관리한다
   - 연산 요청이 오면 계산한다
   - OperatorGroup로 부터 연산자를 가져오는 요청이 올 경우 관리하는 연산자가 아니면 예외를 던진다
+
+### domain.extractor 패키지
+- Extractor
+  - 피연산자,연산자 분리 인터페이
+- OperatorExtractor
+  - 연산자를 추출한다
+- OperandExtractor
+  - 피연산자를 추출한다
 ## service 패키지
 - StringCalculator
   - OperatorGroup과 Operand를 전달 받아 Operator의 메소드를 호출하여 연산한다
