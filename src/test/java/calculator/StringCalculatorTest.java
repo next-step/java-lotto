@@ -19,4 +19,19 @@ public class StringCalculatorTest {
         assertThat(stringCalculator.plus(1, 2)).isEqualTo(3);
     }
 
+    @Test
+    void 뺄셈() {
+        assertThat(stringCalculator.minus(2, 1)).isEqualTo(1);
+    }
+
+    @Test
+    void 곱셈() {
+        assertThat(stringCalculator.multiply(2, 1)).isEqualTo(2);
+    }
+
+    @Test
+    void 나눗셈() {
+        assertThat(stringCalculator.divide(2, 1)).isEqualTo(2);
+    }
+
 }
