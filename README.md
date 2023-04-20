@@ -44,10 +44,11 @@
   - 피연산자가 정수가 아니면 예외를 던진다.
 - Operator
   - 연산자 목록 관리 및 연산자 별로 수식을 관리한다
-  - OperatorGroup로 부터 연산자를 가져오는 요청이 올 경우 관리하느 연산자가 아니면 예외를 던진다
+  - 연산 요청이 오면 계산한다
+  - OperatorGroup로 부터 연산자를 가져오는 요청이 올 경우 관리하는 연산자가 아니면 예외를 던진다
 ## service 패키지
 - StringCalculator
-  - OperatorGroup과 Operand를 전달 받아 연산한다
+  - OperatorGroup과 Operand를 전달 받아 Operator의 메소드를 호출하여 연산한다
 ### view 패키지
 - InputView
    - 사용자로 부터 값을 입력 받는다
