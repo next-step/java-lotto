@@ -46,7 +46,7 @@ class OperatorTest {
     @DisplayName("뺄셈 기능 테스트")
     void subtractionTest(int leftOperand, int rightOperand) {
         assertThat(Operator.calculate(Operator.SUBTRACTION, leftOperand, rightOperand))
-                .isEqualTo(leftOperand + rightOperand);
+                .isEqualTo(leftOperand - rightOperand);
     }
 
     @ParameterizedTest(name = "leftOperand : {0} , rightOperand {1}")
@@ -54,7 +54,7 @@ class OperatorTest {
     @DisplayName("곱셈 기능 테스트")
     void multiplicationTest(int leftOperand, int rightOperand) {
         assertThat(Operator.calculate(Operator.MULTIPLICATION, leftOperand, rightOperand))
-                .isEqualTo(leftOperand + rightOperand);
+                .isEqualTo(leftOperand * rightOperand);
     }
 
     @ParameterizedTest(name = "leftOperand : {0} , rightOperand {1}")
@@ -62,7 +62,7 @@ class OperatorTest {
     @DisplayName("나눗셈 기능 테스트")
     void divisionTest(int leftOperand, int rightOperand) {
         assertThat(Operator.calculate(Operator.DIVISION, leftOperand, rightOperand))
-                .isEqualTo(leftOperand + rightOperand);
+                .isEqualTo(leftOperand / rightOperand);
     }
 
 

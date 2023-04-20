@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 public enum Operator {
 
     ADDITION("+", Integer::sum),
-    SUBTRACTION("-", null),
-    MULTIPLICATION("*", null),
-    DIVISION("/", null);
+    SUBTRACTION("-", (leftOperand, rightOperand) -> leftOperand - rightOperand),
+    MULTIPLICATION("*", (leftOperand, rightOperand) -> leftOperand * rightOperand),
+    DIVISION("/", (leftOperand, rightOperand) -> leftOperand / rightOperand);
 
     private static final Map<String, Operator> separators;
 
