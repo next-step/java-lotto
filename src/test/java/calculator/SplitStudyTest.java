@@ -9,7 +9,7 @@ public class SplitStudyTest {
     @Test
     void split_학습테스트() {
         //given
-        String s = "1  + 2 * 3 / 4";
+        String s = "1   + 2 * 3 / 4";
 
         //when
         String[] arr = s.split(" ");
@@ -17,6 +17,6 @@ public class SplitStudyTest {
         //then
         assertThat(arr[0]).isEqualTo("1");
         assertThat(arr[1]).isEqualTo("");
-        assertThat(arr[arr.length - 1]).isEqualTo("4");
+        assertThat(arr[3]).isEqualTo("+");
     }
 }
