@@ -25,6 +25,10 @@ public enum Operator {
         return VALUE_MAP.get(operator);
     }
 
+    public Operation toOperation() {
+        return Operation.findType(this);
+    }
+
     public String getValue() {
         return value;
     }
