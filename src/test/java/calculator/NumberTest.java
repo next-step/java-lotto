@@ -8,7 +8,7 @@ public class NumberTest {
 
     @Test
     void Number_생성() {
-        int num = new Number("1");
+        int num = new Number("1").intValue();
         assertThat(num).isEqualTo(1);
     }
 }
