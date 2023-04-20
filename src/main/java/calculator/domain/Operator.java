@@ -2,6 +2,11 @@ package calculator.domain;
 
 public class Operator {
 
+    public static final String PLUS = "+";
+    public static final String MINUS = "-";
+    public static final String MULTIPLY = "*";
+    public static final String DIVIDE = "/";
+
     private final String operator;
 
     public Operator(String input) {
@@ -23,6 +28,23 @@ public class Operator {
     }
 
     boolean isNotOperator(String operator) {
-        return !(operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/"));
+        return !(operator.equals(PLUS) || operator.equals(MINUS) || operator.equals(MULTIPLY) || operator.equals(DIVIDE));
     }
+
+    public boolean isPlus() {
+        return operator.equals(PLUS);
+    }
+
+    public boolean isMinus() {
+        return operator.equals(MINUS);
+    }
+
+    public boolean isMultiply() {
+        return operator.equals(MULTIPLY);
+    }
+
+    public boolean isDivide() {
+        return operator.equals(DIVIDE);
+    }
+
 }

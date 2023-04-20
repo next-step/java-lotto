@@ -2,7 +2,7 @@ package calculator.domain;
 
 public class Number {
 
-    private final int number;
+    private int number;
 
     public Number(String input) {
         if(isNullOrEmpty(input)) {
@@ -16,6 +16,26 @@ public class Number {
 
     public int intValue() {
         return number;
+    }
+
+    public int plus(Number number) {
+        this.number += number.intValue();
+        return this.number;
+    }
+
+    public int minus(Number number) {
+        this.number -= number.intValue();
+        return this.number;
+    }
+
+    public int multiply(Number number) {
+        this.number *= number.intValue();
+        return this.number;
+    }
+
+    public int divide(Number number) {
+        this.number /= number.intValue();
+        return this.number;
     }
 
     boolean isNullOrEmpty(String input) {
