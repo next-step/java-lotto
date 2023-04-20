@@ -17,7 +17,7 @@ public class NumberTest {
     void 숫자가_아닌경우_예외처리() {
         assertThatThrownBy(() -> {
             new Number("/");
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(NumberFormatException.class)
                         .hasMessage("숫자가 아닙니다.");
     }
 }
