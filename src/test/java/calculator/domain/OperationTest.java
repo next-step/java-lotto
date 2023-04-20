@@ -1,10 +1,10 @@
-package calculator;
+package calculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static calculator.Operator.*;
+import static calculator.domain.Operator.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OperationTest {

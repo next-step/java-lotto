@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public final class Calculator {
 
@@ -31,5 +31,5 @@ public final class Calculator {
         Operator operator = Operator.findOperator(operatorAsString);
         return operator.toOperation();
     }
-    
+
 }
