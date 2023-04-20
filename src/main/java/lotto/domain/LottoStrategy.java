@@ -4,5 +4,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface LottoStrategy {
-  List<LottoNumber> buy();
+  List<LottoNumber> issue();
 }

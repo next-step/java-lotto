@@ -20,7 +20,7 @@ public class RandomLottoStrategy implements LottoStrategy {
   }
 
   @Override
-  public List<LottoNumber> buy() {
+  public List<LottoNumber> issue() {
     Collections.shuffle(lottoNumbers);
 
     List<LottoNumber> randomLottoNumbers = new ArrayList<>();

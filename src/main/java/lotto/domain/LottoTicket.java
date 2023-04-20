@@ -9,7 +9,7 @@ public class LottoTicket {
   private final List<LottoNumber> lottoTicket;
 
   public LottoTicket(LottoStrategy lottoStrategy) {
-    this.lottoTicket = validatedLottoTicket(lottoStrategy.buy());
+    this.lottoTicket = validatedLottoTicket(lottoStrategy.issue());
   }
 
   public int matchLottoCount(LottoTicket lottoNumbers) {

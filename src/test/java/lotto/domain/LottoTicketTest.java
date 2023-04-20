@@ -42,7 +42,7 @@ public class LottoTicketTest {
   }
 
   @Test()
-  @DisplayName("로또 번호 개수가 아닌 로또 티켓 생성하는 경우 IllegalArgumentException throw")
+  @DisplayName("로또 번호 6개가 아닌 로또 티켓 생성하는 경우 IllegalArgumentException throw")
   public void create_개수가_맞지_않는_로또() {
     assertThatThrownBy(() -> new LottoTicket(() -> List.of(
             new LottoNumber(1),
