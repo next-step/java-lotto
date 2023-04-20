@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MoneyTest {
 
@@ -24,6 +26,15 @@ class MoneyTest {
 
         assertThat(money.getLottoQuantity())
                 .isEqualTo(quantity);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1})
+    @DisplayName("0보다 작은 값을 보낼 때 에러 반환")
+    void nullOrEmptyTest(int input) {
+        assertThatThrownBy(() -> Money.initMoney(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("0보다 큰 수를 입력해주세요.");
     }
 
 }
