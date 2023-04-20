@@ -7,7 +7,8 @@ import java.util.function.ToIntBiFunction;
 import static java.util.stream.Collectors.toUnmodifiableMap;
 
 public enum Operation {
-    ADD(Operator.ADD, Integer::sum);
+    ADD(Operator.ADD, Integer::sum),
+    SUB(Operator.SUB, (a, b) -> a - b);
 
     private static final Map<Operator, Operation> VALUE_MAP
             = Arrays.stream(Operation.values())
