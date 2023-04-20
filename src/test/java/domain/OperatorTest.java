@@ -17,9 +17,9 @@ class OperatorTest {
     @ParameterizedTest(name = "요청 연산자 : {0}, 반환 연산자 : {1}")
     @MethodSource("separatorAndConstantPair")
     @DisplayName("연산자 조회 테스트")
-    void lookUp(String separator, Operand operand) {
+    void lookUp(String separator, Operator operator) {
 
-        assertThat(Operator.lookUp(separator)).isEqualTo(operand);
+        assertThat(Operator.lookUp(separator)).isEqualTo(operator);
     }
 
     @ParameterizedTest(name = "요청 연산자 : {0}")
