@@ -15,9 +15,13 @@ public enum Operator {
     ADDITION("+", Integer::sum),
     SUBTRACTION("-", (leftOperand, rightOperand) -> leftOperand - rightOperand),
     MULTIPLICATION("*", (leftOperand, rightOperand) -> leftOperand * rightOperand),
-    DIVISION("/", (leftOperand, rightOperand) -> leftOperand / rightOperand);
+    DIVISION("/", (leftOperand, rightOperand) -> {
+        validDenominator(rightOperand);
+        return leftOperand / rightOperand;
+    });
 
     private static final Map<String, Operator> separators;
+    private static final int ZERO = 0;
 
     static {
         separators = Collections.unmodifiableMap(Stream.of(values())
@@ -39,6 +43,12 @@ public enum Operator {
 
     public static int calculate(Operator operator, int leftOperand, int rightOperand) {
         return operator.calculation.apply(leftOperand, rightOperand);
+    }
+
+    private static void validDenominator(int rightOperand) {
+        if (rightOperand == ZERO) {
+            throw new IllegalArgumentException(ErrorMessage.NO_DIVIDE_DENOMINATOR_ZERO.getErrorMessage());
+        }
     }
 
     private String getSeparator() {
