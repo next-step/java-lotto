@@ -25,4 +25,8 @@ public class StringCalculator {
 	public Number subtract() {
 		return new Number(a.getNumber() - b.getNumber());
 	}
+
+	public Number multiply() {
+		return new Number(a.getNumber() * b.getNumber());
+	}
 }

@@ -22,4 +22,12 @@ public class StringCalculatorTest {
 		Number result = stringCalculator.subtract();
 		assertThat(result).isEqualTo(new Number(8));
 	}
+
+	@DisplayName("곱셈")
+	@Test
+	void test3() {
+		StringCalculator stringCalculator = new StringCalculator("5", "3");
+		Number result = stringCalculator.multiply();
+		assertThat(result).isEqualTo(new Number(15));
+	}
 }
