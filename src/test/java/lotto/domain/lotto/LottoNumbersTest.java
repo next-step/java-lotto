@@ -14,6 +14,8 @@ public class LottoNumbersTest {
 
         assertThat(lottoNumbers)
                 .extracting("lottoNumbers")
-                .isNotNull();
+                .isNotNull()
+                .asList()
+                .hasSize(6);
     }
 }
