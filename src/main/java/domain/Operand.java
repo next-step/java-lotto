@@ -11,30 +11,4 @@ import java.util.stream.Stream;
 
 public enum Operand {
 
-    ADDITION("+"),
-    SUBTRACTION("-"),
-    MULTIPLICATION("*"),
-    DIVISION("/");
-
-    private final String separator;
-
-    private static final Map<String, Operand> separators;
-
-    static {
-        separators = Collections.unmodifiableMap(Stream.of(values())
-                .collect(Collectors.toMap(Operand::getSeparator, Function.identity())));
-    }
-
-    Operand(String separator) {
-        this.separator = separator;
-    }
-
-    public static Operand lookUp(String separator) {
-        return Optional.ofNullable(separators.get(separator))
-                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NO_SUCH_OPERATOR.getErrorMessage()));
-    }
-
-    public String getSeparator() {
-        return separator;
-    }
 }
