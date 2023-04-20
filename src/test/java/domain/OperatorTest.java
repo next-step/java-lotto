@@ -4,6 +4,7 @@ import common.error.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -31,6 +32,16 @@ class OperatorTest {
                 .withMessage(ErrorMessage.NO_SUCH_OPERATOR.getErrorMessage());
 
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2", "2,5", "-1,3"})
+    @DisplayName("더하기 기능 테스트")
+    void plusTest(int operand1, int operand2) {
+        assertThat(Operator.calculate(Operator.ADDITION, operand1, operand2))
+                .isEqualTo(operand1 + operand2);
+    }
+
+
 
     static Stream<Arguments> separatorAndConstantPair() {
         return Stream.of(
