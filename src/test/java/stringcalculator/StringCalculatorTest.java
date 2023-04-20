@@ -10,8 +10,8 @@ public class StringCalculatorTest {
 	@DisplayName("덧셈")
 	@Test
 	void test1() {
-		StringCalculator stringCalculator = new StringCalculator();
-		int result = stringCalculator.add(1, 2);
-		assertThat(result).isEqualTo(3);
+		StringCalculator stringCalculator = new StringCalculator("1", "2");
+		Number result = stringCalculator.add();
+		assertThat(result).isEqualTo(new Number(3));
 	}
 }
