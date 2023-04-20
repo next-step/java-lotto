@@ -36,8 +36,32 @@ class OperatorTest {
     @ParameterizedTest(name = "leftOperand : {0} , rightOperand {1}")
     @CsvSource(value = {"1,2", "2,5", "-1,3"})
     @DisplayName("더하기 기능 테스트")
-    void plusTest(int leftOperand, int rightOperand) {
+    void additionTest(int leftOperand, int rightOperand) {
         assertThat(Operator.calculate(Operator.ADDITION, leftOperand, rightOperand))
+                .isEqualTo(leftOperand + rightOperand);
+    }
+
+    @ParameterizedTest(name = "leftOperand : {0} , rightOperand {1}")
+    @CsvSource(value = {"1,2", "2,5", "-1,3"})
+    @DisplayName("뺄셈 기능 테스트")
+    void subtractionTest(int leftOperand, int rightOperand) {
+        assertThat(Operator.calculate(Operator.SUBTRACTION, leftOperand, rightOperand))
+                .isEqualTo(leftOperand + rightOperand);
+    }
+
+    @ParameterizedTest(name = "leftOperand : {0} , rightOperand {1}")
+    @CsvSource(value = {"1,2", "2,5", "-1,3"})
+    @DisplayName("곱셈 기능 테스트")
+    void multiplicationTest(int leftOperand, int rightOperand) {
+        assertThat(Operator.calculate(Operator.MULTIPLICATION, leftOperand, rightOperand))
+                .isEqualTo(leftOperand + rightOperand);
+    }
+
+    @ParameterizedTest(name = "leftOperand : {0} , rightOperand {1}")
+    @CsvSource(value = {"1,2", "2,5", "-1,3"})
+    @DisplayName("나눗셈 기능 테스트")
+    void divisionTest(int leftOperand, int rightOperand) {
+        assertThat(Operator.calculate(Operator.DIVISION, leftOperand, rightOperand))
                 .isEqualTo(leftOperand + rightOperand);
     }
 
