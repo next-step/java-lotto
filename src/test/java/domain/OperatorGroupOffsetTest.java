@@ -18,7 +18,7 @@ class OperatorGroupOffsetTest {
     @DisplayName("연산자 그룹 offset은 offset증가하는 메소드 호출시 offset이 증가한다")
     void increase() {
 
-        assertThat(OperatorGroupOffset.initialize().increase()).isEqualTo(new OperatorGroupOffset(1));
+        assertThat(OperatorGroupOffset.initialize().increase()).isEqualTo(1);
     }
 
 }
