@@ -1,19 +1,19 @@
 package calculator;
 
 public class StringCalculator {
-    public int plus(int numBefore, int numAfter) {
+    public static int plus(int numBefore, int numAfter) {
         return numBefore + numAfter;
     }
 
-    public int minus(int numBefore, int numAfter) {
+    public static int minus(int numBefore, int numAfter) {
         return numBefore - numAfter;
     }
 
-    public int multiply(int numBefore, int numAfter) {
+    public static int multiply(int numBefore, int numAfter) {
         return numBefore * numAfter;
     }
 
-    public int divide(int numBefore, int numAfter) {
+    public static int divide(int numBefore, int numAfter) {
         return numBefore / numAfter;
     }
 }
