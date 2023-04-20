@@ -1,8 +1,9 @@
 package lottery.domain;
 
-import lottery.domain.issue.ManualTicketIssueStrategy;
-import lottery.domain.issue.RandomTicketIssueStrategy;
-import lottery.domain.issue.TicketIssueStrategy;
+import lottery.Constant;
+import lottery.strategy.ManualTicketIssueStrategy;
+import lottery.strategy.RandomTicketIssueStrategy;
+import lottery.strategy.TicketIssueStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lottery.domain.LotteryNumber.getAllLotteryNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -42,7 +42,7 @@ class LotteryVendingMachineTest {
     @DisplayName("밴딩 머신에서 자동 로또번호 티켓 발급 생성 확인")
     void issueRandom() {
         // given
-        TicketIssueStrategy ticketIssueStrategy = new RandomTicketIssueStrategy(getAllLotteryNumbers());
+        TicketIssueStrategy ticketIssueStrategy = new RandomTicketIssueStrategy();
         LotteryVendingMachine lotteryVendingMachine = new LotteryVendingMachine(ticketIssueStrategy);
 
         // when
@@ -50,7 +50,7 @@ class LotteryVendingMachineTest {
 
         // then
         assertThat(lotteryTicket).isNotNull();
-        assertThat(lotteryTicket.numberCount()).isEqualTo(LotteryTicket.LOTTERY_TICKET_SIZE);
+        assertThat(lotteryTicket.numberCount()).isEqualTo(Constant.LOTTERY_TICKET_SIZE);
     }
 
     @Test
@@ -64,7 +64,7 @@ class LotteryVendingMachineTest {
 
         // then
         assertThat(lotteryTicket).isNotNull();
-        assertThat(lotteryTicket.numberCount()).isEqualTo(LotteryTicket.LOTTERY_TICKET_SIZE);
+        assertThat(lotteryTicket.numberCount()).isEqualTo(Constant.LOTTERY_TICKET_SIZE);
         assertThat(lotteryTicket).isEqualTo(new LotteryTicket(manualNumbers));
     }
 
@@ -109,7 +109,7 @@ class LotteryVendingMachineTest {
         // then
         assertThat(lotteryVendingMachine.getBalance()).isEqualTo(0);
         assertThat(lotteryTicket).isNotNull();
-        assertThat(lotteryTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(lotteryTicket.toString()).isEqualTo("1, 2, 3, 4, 5, 6");
     }
 
     @Test

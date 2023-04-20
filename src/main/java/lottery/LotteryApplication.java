@@ -1,14 +1,15 @@
 package lottery;
 
 import lottery.controller.LotteryController;
-
-import java.util.Scanner;
+import lottery.domain.LotteryVendingMachine;
+import lottery.strategy.RandomTicketIssueStrategy;
+import lottery.strategy.TicketIssueStrategy;
 
 public class LotteryApplication {
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        LotteryController lotteryController = new LotteryController(scanner);
-        lotteryController.run();
+        TicketIssueStrategy ticketIssueStrategy = new RandomTicketIssueStrategy();
+        LotteryVendingMachine vendingMachine = new LotteryVendingMachine(ticketIssueStrategy);
+        LotteryController lotteryController = new LotteryController(vendingMachine);
+        lotteryController.sell();
     }
 }

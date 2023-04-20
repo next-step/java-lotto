@@ -1,6 +1,6 @@
 package lottery.domain;
 
-import lottery.domain.issue.ManualTicketIssueStrategy;
+import lottery.strategy.ManualTicketIssueStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -7,15 +7,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class OutputView {
+    private OutputView() {
+    }
+
     public static void printPurchaseCount(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
     public static void printPurchaseTickets(List<LotteryTicket> tickets) {
         for (LotteryTicket ticket : tickets) {
-            System.out.println(ticket);
+            System.out.println(addBrackets(ticket.toString()));
         }
         System.out.println();
+    }
+
+    private static String addBrackets(String string) {
+        return "[" + string + "]";
     }
 
     public static void printResultStatistics(List<LotteryPrize> lotteryPrizes) {

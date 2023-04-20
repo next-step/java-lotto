@@ -1,11 +1,11 @@
 package lottery.domain;
 
-import lottery.domain.issue.RandomTicketIssueStrategy;
-import lottery.domain.issue.TicketIssueStrategy;
+import lottery.Constant;
+import lottery.strategy.RandomTicketIssueStrategy;
+import lottery.strategy.TicketIssueStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lottery.domain.LotteryNumber.getAllLotteryNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RandomTicketIssueStrategyTest {
@@ -14,13 +14,13 @@ class RandomTicketIssueStrategyTest {
     @DisplayName("랜덤 티켓 발급")
     void issue() {
         // given
-        TicketIssueStrategy ticketIssueStrategy = new RandomTicketIssueStrategy(getAllLotteryNumbers());
+        TicketIssueStrategy ticketIssueStrategy = new RandomTicketIssueStrategy();
 
         // when
         LotteryTicket lotteryTicket = ticketIssueStrategy.issue();
 
         // then
         assertThat(lotteryTicket).isNotNull();
-        assertThat(lotteryTicket.numberCount()).isEqualTo(LotteryTicket.LOTTERY_TICKET_SIZE);
+        assertThat(lotteryTicket.numberCount()).isEqualTo(Constant.LOTTERY_TICKET_SIZE);
     }
 }

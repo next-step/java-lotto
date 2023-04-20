@@ -31,6 +31,6 @@ class LotteryNumberTest {
         // when
         assertThatThrownBy(() -> new LotteryNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1~45 사이의 숫자만 가능합니다.");
+                .hasMessage("로또 번호는 1~45 사이의 숫자만 가능합니다. 입력한 값:" + number);
     }
 }

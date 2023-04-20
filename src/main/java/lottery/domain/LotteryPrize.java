@@ -3,12 +3,14 @@ package lottery.domain;
 import java.util.Arrays;
 import java.util.List;
 
+import static lottery.Constant.LOTTERY_TICKET_PRICE;
+
 public enum LotteryPrize {
     NONE(0, 0),
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
-    FIRST(6, 2000000000),
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000),
     ;
 
     private final int matchingCount;
@@ -30,7 +32,7 @@ public enum LotteryPrize {
         int totalPrizeMoney = lotteryPrizes.stream()
                 .mapToInt(LotteryPrize::calculatePrizeMoney)
                 .sum();
-        return totalPrizeMoney / (1000.0 * lotteryPrizes.size());
+        return (double) totalPrizeMoney / (LOTTERY_TICKET_PRICE * lotteryPrizes.size());
     }
 
     public int calculateMatchingCount() {

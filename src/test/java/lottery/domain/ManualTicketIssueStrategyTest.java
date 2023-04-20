@@ -1,7 +1,8 @@
 package lottery.domain;
 
-import lottery.domain.issue.ManualTicketIssueStrategy;
-import lottery.domain.issue.TicketIssueStrategy;
+import lottery.Constant;
+import lottery.strategy.ManualTicketIssueStrategy;
+import lottery.strategy.TicketIssueStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +29,7 @@ class ManualTicketIssueStrategyTest {
 
         // then
         assertThat(lotteryTicket).isNotNull();
-        assertThat(lotteryTicket.numberCount()).isEqualTo(LotteryTicket.LOTTERY_TICKET_SIZE);
+        assertThat(lotteryTicket.numberCount()).isEqualTo(Constant.LOTTERY_TICKET_SIZE);
         assertThat(lotteryTicket).isEqualTo(new LotteryTicket(manualLotteryNumbers));
     }
-
 }

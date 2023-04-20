@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LotteryTicket {
-    public static final int LOTTERY_TICKET_SIZE = 6;
+import static lottery.Constant.LOTTERY_TICKET_SIZE;
 
+public class LotteryTicket {
     private final List<LotteryNumber> ticketNumbers;
 
     public LotteryTicket(List<LotteryNumber> ticketNumbers) {
@@ -16,12 +16,29 @@ public class LotteryTicket {
         }
     }
 
+    public static LotteryTicket of(List<Integer> numbers) {
+        List<LotteryNumber> lotteryNumbers = numbers.stream()
+                .map(LotteryNumber::new)
+                .collect(Collectors.toList());
+        return new LotteryTicket(lotteryNumbers);
+    }
+
     public int numberCount() {
         return ticketNumbers.size();
     }
 
     private boolean isValidSize() {
         return ticketNumbers.size() == LOTTERY_TICKET_SIZE;
+    }
+
+    public int match(LotteryTicket ticket) {
+        return (int) ticketNumbers.stream()
+                .filter(ticket::contains)
+                .count();
+    }
+
+    private boolean contains(LotteryNumber number) {
+        return ticketNumbers.contains(number);
     }
 
     @Override
@@ -37,28 +54,11 @@ public class LotteryTicket {
         return Objects.hash(ticketNumbers);
     }
 
-    public int match(LotteryTicket ticket) {
-        return ticketNumbers.stream()
-                .filter(ticket::contains)
-                .mapToInt(number -> 1)
-                .sum();
-    }
-
-    private boolean contains(LotteryNumber number) {
-        return ticketNumbers.contains(number);
-    }
-
     @Override
     public String toString() {
-        return addBrackets(
-                ticketNumbers.stream()
-                        .map(LotteryNumber::getNumber)
-                        .map(String::valueOf)
-                        .collect(Collectors.joining(", "))
-        );
-    }
-
-    private String addBrackets(String str) {
-        return "[" + str + "]";
+        return ticketNumbers.stream()
+                .map(LotteryNumber::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
     }
 }

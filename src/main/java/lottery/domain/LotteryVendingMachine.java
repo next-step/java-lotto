@@ -1,13 +1,14 @@
 package lottery.domain;
 
-import lottery.domain.issue.TicketIssueStrategy;
+import lottery.strategy.TicketIssueStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lottery.Constant.LOTTERY_TICKET_PRICE;
+
 public class LotteryVendingMachine {
-    private static final int LOTTERY_TICKET_PRICE = 1000;
     private static final int BALANCE_ZERO = 0;
 
     private final List<LotteryTicket> soldLotteryTickets;
@@ -22,7 +23,7 @@ public class LotteryVendingMachine {
 
     public void insertMoney(int money) {
         if (money % LOTTERY_TICKET_PRICE != 0) {
-            throw new IllegalArgumentException("금액은 1000원 단위로 입력해주세요.");
+            throw new IllegalArgumentException("금액은 " + LOTTERY_TICKET_PRICE + "원 단위로 입력해주세요.");
         }
         this.balance += money;
     }

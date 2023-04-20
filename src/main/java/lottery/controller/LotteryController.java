@@ -1,53 +1,36 @@
 package lottery.controller;
 
-import lottery.domain.*;
-import lottery.domain.issue.RandomTicketIssueStrategy;
-import lottery.domain.issue.TicketIssueStrategy;
+import lottery.domain.LotteryPrize;
+import lottery.domain.LotteryRound;
+import lottery.domain.LotteryTicket;
+import lottery.domain.LotteryVendingMachine;
 import lottery.view.InputView;
 import lottery.view.OutputView;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-
-import static lottery.domain.LotteryNumber.getAllLotteryNumbers;
 
 public class LotteryController {
-    private final Scanner scanner;
+    private final LotteryVendingMachine vendingMachine;
 
-    public LotteryController(Scanner scanner) {
-        this.scanner = scanner;
+    public LotteryController(LotteryVendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
     }
 
-    public void run() {
+    public void sell() {
+        Scanner scanner = new Scanner(System.in);
         int purchaseMoney = InputView.readPurchaseMoney(scanner);
-        LotteryVendingMachine vendingMachine = initVendingMachine();
-        List<LotteryTicket> tickets = buy(purchaseMoney, vendingMachine);
-        result(tickets);
-    }
 
-    private LotteryVendingMachine initVendingMachine() {
-        TicketIssueStrategy issueStrategy = new RandomTicketIssueStrategy(getAllLotteryNumbers());
-        return new LotteryVendingMachine(issueStrategy);
-    }
-
-    private List<LotteryTicket> buy(int purchaseMoney, LotteryVendingMachine vendingMachine) {
         vendingMachine.insertMoney(purchaseMoney);
         List<LotteryTicket> tickets = vendingMachine.sellAvailableTickets();
         OutputView.printPurchaseCount(tickets.size());
         OutputView.printPurchaseTickets(tickets);
-        return tickets;
-    }
 
-    private void result(List<LotteryTicket> tickets) {
         List<Integer> prizeTicketInts = InputView.readPrizeTicketNumbers(scanner);
-        List<LotteryNumber> prizeTicketNumbers = prizeTicketInts.stream()
-                .map(LotteryNumber::new)
-                .collect(Collectors.toList());
-
-        LotteryRound lotteryRound = new LotteryRound(new LotteryTicket(prizeTicketNumbers));
+        LotteryTicket prizeTicketNumbers = LotteryTicket.of(prizeTicketInts);
+        LotteryRound lotteryRound = new LotteryRound(prizeTicketNumbers);
         List<LotteryPrize> lotteryPrizes = lotteryRound.matches(tickets);
-
+        
         OutputView.printResultStatistics(lotteryPrizes);
     }
 }
