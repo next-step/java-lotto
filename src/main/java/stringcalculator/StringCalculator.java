@@ -21,4 +21,8 @@ public class StringCalculator {
 	public Number add() {
 		return new Number(a.getNumber() + b.getNumber());
 	}
+
+	public Number subtract() {
+		return new Number(a.getNumber() - b.getNumber());
+	}
 }

@@ -14,4 +14,12 @@ public class StringCalculatorTest {
 		Number result = stringCalculator.add();
 		assertThat(result).isEqualTo(new Number(3));
 	}
+
+	@DisplayName("뺄셈")
+	@Test
+	void test2() {
+		StringCalculator stringCalculator = new StringCalculator("9", "1");
+		Number result = stringCalculator.subtract();
+		assertThat(result).isEqualTo(new Number(8));
+	}
 }
