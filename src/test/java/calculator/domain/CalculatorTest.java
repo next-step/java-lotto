@@ -17,7 +17,7 @@ class CalculatorTest {
     @DisplayName("문자열 입력값을 계산하여 결과를 반환한다.")
     @ParameterizedTest(name = "{0} = {1}")
     void test01(String input, int expected) {
-        int actual = Calculator.calculate(input);
+        int actual = Calculator.calculate(new CalculatorItems(input));
         assertThat(actual).isSameAs(expected);
     }
 }
