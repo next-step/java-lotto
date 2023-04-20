@@ -75,8 +75,6 @@ class OperatorTest {
 
     }
 
-
-
     static Stream<Arguments> separatorAndConstantPair() {
         return Stream.of(
                 Arguments.arguments("+", Operator.ADDITION),
