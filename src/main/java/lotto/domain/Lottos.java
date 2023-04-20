@@ -21,6 +21,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public Lotto getLotto(int index) {
+        return lottos.get(index);
+    }
+
     public int getLottoQuantity() {
         return lottos.size();
     }

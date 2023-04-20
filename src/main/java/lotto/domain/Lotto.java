@@ -1,32 +1,30 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
 
-    public static int LOTTO_LOWER_BOUND = 1;
-    public static int LOTTO_UPPER_BOUND = 46;
-    public static int LOTTO_FROM_INDEX = 0;
-    public static int LOTTO_LENGTH = 6;
-    public static List<Integer> LOTTO_NUMBERS = IntStream.range(LOTTO_LOWER_BOUND, LOTTO_UPPER_BOUND)
+    public static final int LOTTO_LOWER_BOUND = 1;
+    public static final int LOTTO_UPPER_BOUND = 46;
+    public static final int LOTTO_FROM_INDEX = 0;
+    public static final int LOTTO_LENGTH = 6;
+    public static final List<Integer> LOTTO_NUMBERS = IntStream.range(LOTTO_LOWER_BOUND, LOTTO_UPPER_BOUND)
             .boxed()
             .collect(Collectors.toList());
 
     private List<Integer> lottoTicket;
 
-    Lotto(List<Integer> lottoTicket) {
+    public Lotto(List<Integer> lottoTicket) {
         Collections.sort(lottoTicket);
         this.lottoTicket = lottoTicket;
     }
 
     public static Lotto initLotto() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return new Lotto(LOTTO_NUMBERS.subList(LOTTO_FROM_INDEX, LOTTO_LENGTH));
+        List<Integer> lottoNumbers = new ArrayList<>(LOTTO_NUMBERS);
+        Collections.shuffle(lottoNumbers);
+        return new Lotto(lottoNumbers.subList(LOTTO_FROM_INDEX, LOTTO_LENGTH));
     }
 
     public static Lotto initWinningLotto(List<String> winningNumbers) {

@@ -33,14 +33,12 @@ class LottoTest {
     @Test
     @DisplayName("Lotto 셔플 테스트")
     void lottoShuffleTest() {
-        List<Integer> lottoNumbers1 = new ArrayList<>(List.of(11, 5, 3, 4, 2, 9));
-        List<Integer> lottoNumbers2 = new ArrayList<>(List.of(11, 5, 3, 4, 2, 9));
+        Lotto lotto1 = Lotto.initLotto();
+        Lotto lotto2 = Lotto.initLotto();
 
-        Collections.shuffle(lottoNumbers1);
-
-        assertThat(new Lotto(lottoNumbers1))
+        assertThat(lotto1)
                 .usingRecursiveComparison()
-                .isEqualTo(new Lotto(lottoNumbers2));
+                .isNotEqualTo(lotto2);
     }
 
     @Test
