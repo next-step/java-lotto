@@ -1,6 +1,5 @@
 package domain;
 
-import calculator.domain.OperatorGroupOffset;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +15,10 @@ class OperatorGroupOffsetTest {
     }
 
     @Test
-    @DisplayName("연산자 그룹 offset은 offset증가하는 메소드 호출시 offset이 증가한다")
+    @DisplayName("연산자 그룹 offset은 offset증가하는 메소드 호출시 offset이 증가한")
     void increase() {
 
-        assertThat(OperatorGroupOffset.initialize().increaseAndGet()).isEqualTo(0);
+        assertThat(OperatorGroupOffset.initialize().increase()).isEqualTo(new OperatorGroupOffset(1));
     }
 
 }
