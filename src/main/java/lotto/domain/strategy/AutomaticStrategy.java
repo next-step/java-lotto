@@ -14,7 +14,7 @@ public class AutomaticStrategy extends LottoStrategy {
         final List<Integer> copy = new ArrayList<>(LOTTO_NUMBER_LIST);
         Collections.shuffle(copy);
 
-        final List<Integer> result = copy.subList(0, 6);
+        final List<Integer> result = copy.subList(0, LOTTO_NUMBER_SIZE);
         Collections.sort(result);
 
         for (Integer number : result) {

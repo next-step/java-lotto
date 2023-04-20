@@ -10,8 +10,10 @@ import java.util.List;
  */
 public class TestStrategy extends LottoStrategy {
 
+    public final List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+
     @Override
     public List<LottoNumber> lottoNumbers() {
-        return Arrays.asList(new LottoNumber[6]);
+        return this.lottoNumbers;
     }
 }

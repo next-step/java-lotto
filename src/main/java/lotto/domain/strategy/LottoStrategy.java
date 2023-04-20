@@ -12,5 +12,7 @@ public abstract class LottoStrategy {
             36, 37, 38, 39, 40, 41, 42, 43, 44, 45
     );
 
+    protected static final int LOTTO_NUMBER_SIZE = 6;
+
     public abstract List<LottoNumber> lottoNumbers();
 }

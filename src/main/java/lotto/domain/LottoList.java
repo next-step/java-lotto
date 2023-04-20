@@ -17,4 +17,12 @@ public class LottoList {
 
         this.lottoList = lottoList;
     }
+
+//    public WinningStatDto checkRating(Lotto winningLotto) {
+//        final WinningStatDto winningStatDto = new WinningStatDto(0, 0, 0, 0);
+//
+//        for (Lotto lotto : this.lottoList) {
+//
+//        }
+//    }
 }

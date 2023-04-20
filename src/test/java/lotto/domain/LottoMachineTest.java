@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import lotto.WinningStatDto;
 import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.strategy.TestStrategy;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,13 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
     final LottoStrategy testStrategy = new TestStrategy();
+    LottoMachine lottoMachine;
 
-    @Test
-    @DisplayName("생성 테스트")
-    void create() {
-        final LottoMachine lottoMachine = new LottoMachine(10000, testStrategy);
-        assertThat(lottoMachine)
-                .isEqualTo(new LottoMachine(10000, testStrategy));
+    @BeforeEach
+    void setUp() {
+        this.lottoMachine = new LottoMachine(10000, testStrategy);
     }
 
     @Test
@@ -25,5 +25,24 @@ public class LottoMachineTest {
 
         assertThat(lottoMachine.countNumberOfLottoTickets())
                 .isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("당첨 번호 입력 테스트")
+    void conclusionWinningNumbers() {
+        this.lottoMachine.conclusionWinningNumbers("1,2,3,4,5,6");
+        assertThat(this.lottoMachine)
+                .extracting("winningLotto")
+                .isNotNull();
+    }
+
+    @Test
+    @DisplayName("당첨 통계 확인")
+    void winnerStat() {
+        this.lottoMachine.conclusionWinningNumbers("1,2,3,4,5,6");
+        assertThat(this.lottoMachine.winningStat())
+                .isInstanceOf(WinningStatDto.class)
+                .extracting("firstCount")
+                .isEqualTo(1);
     }
 }
