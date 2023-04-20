@@ -4,12 +4,15 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Calculator {
+    public static final String DEFAULT_DELIMITER = " ";
+    public static final int DEFAULT_INDEX = 2;
+
     public int calculate(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("입력 값이 null 이거나 빈 공백 일 수 없습니다.");
         }
 
-        String[] values = input.split(" ");
+        String[] values = input.split(DEFAULT_DELIMITER);
         Queue<Integer> numbers = this.numbers(values);
         Queue<ArithmeticSymbol> symbols = this.symbols(values);
 
@@ -34,7 +37,7 @@ public class Calculator {
     }
 
     private void addSymbol(String[] values, Queue<ArithmeticSymbol> symbols, int index) {
-        if (index % 2 != 0) {
+        if (index % DEFAULT_INDEX != 0) {
             symbols.offer(ArithmeticSymbol.find(values[index]));
         }
     }
@@ -48,7 +51,7 @@ public class Calculator {
     }
 
     private void addNumber(Queue<Integer> numbers, String value, int index) {
-        if (index % 2 == 0) {
+        if (index % DEFAULT_INDEX == 0) {
             numbers.add(Integer.parseInt(value));
         }
     }
