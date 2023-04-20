@@ -15,9 +15,9 @@ public class OperatorGroupOffset {
         return new OperatorGroupOffset(INITIALIZE_NUMBER);
     }
 
-    public OperatorGroupOffset increase() {
-        this.offset += INCREASE_NUMBER;
-        return this;
+    public int increase() {
+        offset += INCREASE_NUMBER;
+        return offset;
     }
 
     @Override
