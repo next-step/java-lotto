@@ -25,7 +25,7 @@ class OperatorTest {
 
     @ParameterizedTest(name = "요청 연산자 : {0}")
     @ValueSource(strings = {"~", "$", "&", "@", "^"})
-    @DisplayName("등록되지 않은 연산자 조회 테스트")
+    @DisplayName("등록되지 않은 연산자 조회시 예외를 던지는 테스트")
     void noSuchLookUp(String separator) {
 
         assertThatIllegalArgumentException().isThrownBy(() -> Operator.lookUp(separator))
@@ -63,6 +63,16 @@ class OperatorTest {
     void divisionTest(int leftOperand, int rightOperand) {
         assertThat(Operator.calculate(Operator.DIVISION, leftOperand, rightOperand))
                 .isEqualTo(leftOperand / rightOperand);
+    }
+
+    @ParameterizedTest(name = "leftOperand : {0} , rightOperand {1}")
+    @CsvSource(value = {"1,0", "2,0", "1,0"})
+    @DisplayName("분모를 0으로 나눌시 예외를 던지는 테스트")
+    void denominatorTest(int leftOperand, int rightOperand) {
+
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.calculate(Operator.DIVISION, leftOperand, rightOperand))
+                .withMessage(ErrorMessage.NO_DIVIDE_DENOMINATOR_ZERO.getErrorMessage());
+
     }
 
 
