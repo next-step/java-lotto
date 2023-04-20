@@ -16,5 +16,6 @@ public class Main {
         OutputView.printLottos(lottos);
 
         Lotto winningLotto = InputView.inputWinningNumbers();
+//        lottos.findStatistics();
     }
 }

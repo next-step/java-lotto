@@ -4,6 +4,7 @@ import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
@@ -99,6 +100,27 @@ class LottoTest {
         assertThatThrownBy(() -> Lotto.initWinningLotto(wrongNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("같은 번호가 있습니다!");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1,2,3,4,5,6:6"
+            , "1,2,3,4,5,7:5"
+            , "1,2,3,4,8,7:4"
+            , "1,2,3,9,8,7:3"
+            , "1,2,10,9,8,7:2"
+            , "1,11,10,9,8,7:1"
+            , "12,11,10,9,8,7:0"
+    }, delimiter = ':')
+    @DisplayName("Lotto 당첨 통계")
+    void findStatisticsAll(String input, int result) {
+        List<Integer> lottoNumber = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(lottoNumber);
+
+        List<String> lotto = List.of(input.split(InputView.DELIMITER));
+
+        assertThat(Lotto.initWinningLotto(lotto).findSameNumber(winningLotto))
+                .isEqualTo(result);
     }
 
 }

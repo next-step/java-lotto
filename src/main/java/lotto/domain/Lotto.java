@@ -67,6 +67,16 @@ public class Lotto {
         return lottoTicket.size();
     }
 
+    public boolean hasNumber(int number) {
+        return lottoTicket.contains(number);
+    }
+
+    public int findSameNumber(Lotto winningLotto) {
+        return (int) lottoTicket.stream()
+                .filter(winningLotto::hasNumber)
+                .count();
+    }
+
     @Override
     public String toString() {
         return "" + lottoTicket;
