@@ -33,7 +33,7 @@ class OperatorTest {
 
     }
 
-    @ParameterizedTest(name = "요청 연산자 : {0}")
+    @ParameterizedTest(name = "leftOperand : {0} , rightOperand {1}")
     @CsvSource(value = {"1,2", "2,5", "-1,3"})
     @DisplayName("더하기 기능 테스트")
     void plusTest(int leftOperand, int rightOperand) {
