@@ -1,4 +1,4 @@
-package calculator;
+package calculator.utils;
 
 public class StringCalculator {
     public static int plus(int numBefore, int numAfter) {
