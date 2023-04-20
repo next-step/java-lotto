@@ -12,14 +12,14 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class OperandTest {
+class OperatorTest {
 
     @ParameterizedTest(name = "요청 연산자 : {0}, 반환 연산자 : {1}")
     @MethodSource("separatorAndConstantPair")
     @DisplayName("연산자 조회 테스트")
     void lookUp(String separator, Operand operand) {
 
-        assertThat(Operand.lookUp(separator)).isEqualTo(operand);
+        assertThat(Operator.lookUp(separator)).isEqualTo(operand);
     }
 
     @ParameterizedTest(name = "요청 연산자 : {0}")
@@ -27,17 +27,17 @@ class OperandTest {
     @DisplayName("등록되지 않은 연산자 조회 테스트")
     void noSuchLookUp(String separator) {
 
-        assertThatIllegalArgumentException().isThrownBy(() -> Operand.lookUp(separator))
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.lookUp(separator))
                 .withMessage(ErrorMessage.NO_SUCH_OPERATOR.getErrorMessage());
 
     }
 
     static Stream<Arguments> separatorAndConstantPair() {
         return Stream.of(
-                Arguments.arguments("+", Operand.ADDITION),
-                Arguments.arguments("-", Operand.SUBTRACTION),
-                Arguments.arguments("*", Operand.MULTIPLICATION),
-                Arguments.arguments("/", Operand.DIVISION)
+                Arguments.arguments("+", Operator.ADDITION),
+                Arguments.arguments("-", Operator.SUBTRACTION),
+                Arguments.arguments("*", Operator.MULTIPLICATION),
+                Arguments.arguments("/", Operator.DIVISION)
         );
     }
 
