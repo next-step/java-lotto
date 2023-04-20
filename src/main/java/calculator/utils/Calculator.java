@@ -1,6 +1,6 @@
 package calculator.utils;
 
-public class StringCalculator {
+public class Calculator {
     public static int plus(int numBefore, int numAfter) {
         return numBefore + numAfter;
     }
