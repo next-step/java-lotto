@@ -4,6 +4,11 @@ import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.Data;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -91,6 +96,24 @@ class LottoTest {
                 .isThrownBy(() -> {
                     new Lotto(lottoList);
                 });
+    }
+
+    @Test
+    void test() {
+        DecimalFormat df = new DecimalFormat("#,###");
+
+        System.out.println(df.format(1000000000));
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+
+        Calendar calendar = Calendar.getInstance();
+
+
+        Date day = calendar.getTime();
+
+        System.out.println(sdf.format(day));
+
     }
 
 }

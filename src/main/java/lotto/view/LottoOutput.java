@@ -1,26 +1,31 @@
 package lotto.view;
 
-import lotto.domain.TotalEqualNumbers;
-import lotto.service.BuyLotto;
+import lotto.domain.EqualNumbersMoney;
+import lotto.domain.BuyLotto;
 
 public class LottoOutput {
     public void displayBuyLottoNumbers(BuyLotto buyLotto) {
-        buyLotto.getLottos().getLottos().stream()
+        buyLotto.getLottos().getLottos()
                 .forEach(numbers -> System.out.println(numbers.getNumbers()));
     }
 
-    public void displayWinOfResult(TotalEqualNumbers totalEqualNumbers) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-        System.out.println("3개 일치 (5,000원) - " + totalEqualNumbers.getEqualsNumberCount3() + "개");
-        System.out.println("4개 일치 (50,000원) - " + totalEqualNumbers.getEqualsNumberCount4() + "개");
-        System.out.println("5개 일치 (1,500,000원) - " + totalEqualNumbers.getEqualsNumberCount5() + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(30,000,000원) - " + totalEqualNumbers.getEqualsNumberCountBonus5() + "개");
-        System.out.println("6개 일치 (2,000,000,000원) - " + totalEqualNumbers.getEqualsNumberCount6() + "개");
+    public void displayCount(BuyLotto buyLotto) {
+        System.out.println("수동으로 " + buyLotto.getPassiveCount().getCount() + "개, "
+                + "자동으로 " + buyLotto.getAutoCount().getCount() + "개를 구매했습니다.");
     }
 
-    public void displayPriceEarningsRatio(TotalEqualNumbers totalEqualNumbers, BuyLotto buyLotto) {
-        float priceEarninsRatio = ((totalEqualNumbers.getTotalWinAmout() - buyLotto.getbuyAmount()) / buyLotto.getbuyAmount()) * 100;
+    public void displayWinOfResult() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        System.out.println(EqualNumbersMoney.EQUALS_3);
+        System.out.println(EqualNumbersMoney.EQUALS_4);
+        System.out.println(EqualNumbersMoney.EQUALS_5);
+        System.out.println(EqualNumbersMoney.EQUALS_5_BONUS);
+        System.out.println(EqualNumbersMoney.EQUALS_6);
+    }
+
+    public void displayPriceEarningsRatio(BuyLotto buyLotto) {
+        float priceEarninsRatio = ((EqualNumbersMoney.EQUALS.getWinAmountTotal() - buyLotto.getbuyAmount()) / (float) buyLotto.getbuyAmount()) * 100;
 
         System.out.println("총 수익률은 " + priceEarninsRatio + "% 입니다.");
     }
