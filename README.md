@@ -21,7 +21,7 @@
   - [x] 나눗셈에 대한 몫은 정수로 떨어지는 값으로 한정한다.
   - [x] 0으로 나눌 시 IllegalArgumentException 예외를 던진다.
 - [x] 결과 값을 출력한다.
-- [ ] main 메서드 추가
+- [x] main 메서드 추가
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
