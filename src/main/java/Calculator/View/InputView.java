@@ -37,19 +37,11 @@ public class InputView {
     }
 
     public static boolean isValidAlgebra(String[] parsedAlgebra) {
-        try {
-            return isPermitted(parsedAlgebra);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
-    private static boolean isPermitted(String[] parsedAlgebra) {
         boolean isPassed = true;
         for (String parsed : parsedAlgebra) {
             isPassed = isPassed && (CheckInput.isNumeric(parsed) || CheckInput.isOperator(parsed));
         }
+        
         return isPassed;
     }
 }
