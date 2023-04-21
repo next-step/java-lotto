@@ -4,10 +4,12 @@ public class StringCalculator {
 
 	private final Number a;
 	private final Number b;
+	private final Operator operator;
 
-	public StringCalculator(String a, String b) {
+	public StringCalculator(String a, String b, String operator) {
 		this.a = new Number(toInt(a));
 		this.b = new Number(toInt(b));
+		this.operator = new Operator(operator);
 	}
 
 	private int toInt(String input) {
@@ -16,6 +18,23 @@ public class StringCalculator {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("숫자는 정수만 입력 가능합니다.");
 		}
+	}
+
+	private String toString(int result) {
+		return String.valueOf(result);
+	}
+
+	public String calculate() {
+		if (this.operator.isPlus()) {
+			return this.toString(this.add().getNumber());
+		}
+		if (this.operator.isMinus()) {
+			return this.toString(this.subtract().getNumber());
+		}
+		if (this.operator.isMultiply()) {
+			return this.toString(this.multiply().getNumber());
+		}
+		return this.toString(this.divide().getNumber());
 	}
 
 	public Number add() {
