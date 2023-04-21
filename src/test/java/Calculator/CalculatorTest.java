@@ -1,6 +1,5 @@
 package Calculator;
 
-import Calculator.View.InputView;
 import Calculator.Model.Calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestCalculator {
+public class CalculatorTest {
     Calculator calculator;
 
     @BeforeEach

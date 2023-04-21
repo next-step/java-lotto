@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestCalculatorInputView {
+public class InputViewTest {
     @Test
     @DisplayName("유효하지 않은 방정식일 때 return false")
     public void isValidAlgebra_not_valid() {

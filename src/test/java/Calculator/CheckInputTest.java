@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class TestUtilCheckInput {
+public class CheckInputTest {
     @Test
     @DisplayName("숫자체크 함수에서 숫자가 아닌 문자가 입력되었을 때 return false")
     public void isNumeric_text() {
