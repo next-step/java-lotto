@@ -2,14 +2,14 @@ package lotto;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         this.number = validRange(number);
     }
 
@@ -21,7 +21,7 @@ public class Number {
     }
 
     private boolean isInvalidRange(int number) {
-        return MIN_NUMBER > number || number > MAX_NUMBER;
+        return number < MIN_NUMBER || MAX_NUMBER < number;
     }
 
     public int value() {
@@ -36,8 +36,8 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number number1 = (Number) o;
-        return number == number1.number;
+        LottoNumber lottoNumber1 = (LottoNumber) o;
+        return number == lottoNumber1.number;
     }
 
     @Override
@@ -49,4 +49,15 @@ public class Number {
     public String toString() {
         return "" + number;
     }
+
+    public static int compare(LottoNumber a, LottoNumber b) {
+        if (a.value() > b.value()) {
+            return 1;
+        }
+        if (a.value() < b.value()) {
+            return -1;
+        }
+        return 0;
+    }
+
 }

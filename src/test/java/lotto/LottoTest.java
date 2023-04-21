@@ -14,23 +14,23 @@ public class LottoTest {
 
     @Test
     void 로또생성숫자범위() {
-        List<Number> next = Lotto.purchase().numbers();
+        List<LottoNumber> next = Lotto.purchase().numbers();
         assertAll(() -> {
-            for (Number number : next) {
-                assertThat(Number.MIN_NUMBER <= number.value()
-                    && number.value() <= Number.MAX_NUMBER).isTrue();
+            for (LottoNumber lottoNumber : next) {
+                assertThat(LottoNumber.MIN_NUMBER <= lottoNumber.value()
+                    && lottoNumber.value() <= LottoNumber.MAX_NUMBER).isTrue();
             }
         });
     }
 
     @Test
     void 구매정렬() {
-        List<Number> next = Lotto.purchase().numbers();
-        Iterator<Number> iterator = next.iterator();
+        List<LottoNumber> next = Lotto.purchase().numbers();
+        Iterator<LottoNumber> iterator = next.iterator();
         assertAll(() -> {
-                Number prev = null;
+                LottoNumber prev = null;
                 while (iterator.hasNext()) {
-                    Number current = iterator.next();
+                    LottoNumber current = iterator.next();
                     if (prev == null) {
                         prev = current;
                         continue;
@@ -44,20 +44,20 @@ public class LottoTest {
 
     @Test
     void 랜덤생성정렬() {
-        List<Number> number1 = new ArrayList<>() {{
-            add(new Number(1));
-            add(new Number(6));
-            add(new Number(5));
-            add(new Number(4));
-            add(new Number(20));
-            add(new Number(10));
+        List<LottoNumber> lottoNumber1 = new ArrayList<>() {{
+            add(new LottoNumber(1));
+            add(new LottoNumber(6));
+            add(new LottoNumber(5));
+            add(new LottoNumber(4));
+            add(new LottoNumber(20));
+            add(new LottoNumber(10));
         }};
-        List<Number> next = Lotto.nextRandom(number1).numbers();
-        Iterator<Number> iterator = next.iterator();
+        List<LottoNumber> next = Lotto.nextRandom(lottoNumber1).numbers();
+        Iterator<LottoNumber> iterator = next.iterator();
         assertAll(() -> {
-                Number prev = null;
+                LottoNumber prev = null;
                 while (iterator.hasNext()) {
-                    Number current = iterator.next();
+                    LottoNumber current = iterator.next();
                     if (prev == null) {
                         prev = current;
                         continue;
@@ -74,26 +74,29 @@ public class LottoTest {
         assertAll(
             () -> assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(
-                    List.of(new Number(1), new Number(2), new Number(3), new Number(4),
-                        new Number(5))))
+                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5))))
                 .withMessageMatching("로또는 6개의 중복되지않은 숫자로만 구성 가능합니다 : 5"),
             () -> assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(
-                    List.of(new Number(1), new Number(2), new Number(3), new Number(4),
-                        new Number(5), new Number(6), new Number(7))))
+                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6), new LottoNumber(7))))
                 .withMessageMatching("로또는 6개의 중복되지않은 숫자로만 구성 가능합니다 : 7")
         );
     }
 
     @Test
     void 중복제거() {
-        List<Number> numbers1 = List.of(1, 1, 2, 2, 3, 3, 4, 4, 5, 6).stream().map(Number::new)
+        List<LottoNumber> numbers1 = List.of(1, 1, 2, 2, 3, 3, 4, 4, 5, 6).stream().map(
+                LottoNumber::new)
             .collect(
                 Collectors.toList());
-        List<Number> numbers2 = List.of(1, 1, 2, 2, 2, 3, 4, 5, 5, 6).stream().map(Number::new)
+        List<LottoNumber> numbers2 = List.of(1, 1, 2, 2, 2, 3, 4, 5, 5, 6).stream().map(
+                LottoNumber::new)
             .collect(
                 Collectors.toList());
-        List<Number> numbers3 = List.of(1, 2, 3, 3, 3, 3, 4, 4, 5, 6).stream().map(Number::new)
+        List<LottoNumber> numbers3 = List.of(1, 2, 3, 3, 3, 3, 4, 4, 5, 6).stream().map(
+                LottoNumber::new)
             .collect(
                 Collectors.toList());
         assertAll(
@@ -104,36 +107,36 @@ public class LottoTest {
 
     @Test
     void 랜덤생성() {
-        List<Number> number1 = new ArrayList<>() {{
-            add(new Number(1));
-            add(new Number(2));
-            add(new Number(3));
-            add(new Number(4));
-            add(new Number(5));
-            add(new Number(6));
+        List<LottoNumber> lottoNumber1 = new ArrayList<>() {{
+            add(new LottoNumber(1));
+            add(new LottoNumber(2));
+            add(new LottoNumber(3));
+            add(new LottoNumber(4));
+            add(new LottoNumber(5));
+            add(new LottoNumber(6));
         }};
-        List<Number> number2 = new ArrayList<>() {{
-            add(new Number(11));
-            add(new Number(12));
-            add(new Number(13));
-            add(new Number(14));
-            add(new Number(15));
-            add(new Number(16));
-            add(new Number(17));
+        List<LottoNumber> lottoNumber2 = new ArrayList<>() {{
+            add(new LottoNumber(11));
+            add(new LottoNumber(12));
+            add(new LottoNumber(13));
+            add(new LottoNumber(14));
+            add(new LottoNumber(15));
+            add(new LottoNumber(16));
+            add(new LottoNumber(17));
         }};
         assertAll(
-            () -> assertThat(Lotto.nextRandom(number1).numbers()).isNotEqualTo(
-                Lotto.nextRandom(number2).numbers()),
-            () -> assertThat(Lotto.nextRandom(number1).numbers()).hasSize(6),
-            () -> assertThat(Lotto.nextRandom(number2).numbers()).hasSize(6)
+            () -> assertThat(Lotto.nextRandom(lottoNumber1).numbers()).isNotEqualTo(
+                Lotto.nextRandom(lottoNumber2).numbers()),
+            () -> assertThat(Lotto.nextRandom(lottoNumber1).numbers()).hasSize(6),
+            () -> assertThat(Lotto.nextRandom(lottoNumber2).numbers()).hasSize(6)
         );
     }
 
     @Test
     void 로또생성() {
-        List<Number> numbers1 = List.of(1, 2, 3, 4, 5, 6).stream().map(Number::new)
+        List<LottoNumber> numbers1 = List.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new)
             .collect(Collectors.toList());
-        List<Number> numbers2 = List.of(1, 2, 3, 4, 5, 6).stream().map(Number::new)
+        List<LottoNumber> numbers2 = List.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new)
             .collect(Collectors.toList());
         assertThat(new Lotto(numbers1)).isEqualTo(new Lotto(numbers2));
     }

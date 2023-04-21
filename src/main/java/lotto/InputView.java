@@ -15,15 +15,15 @@ public class InputView {
         return amount;
     }
 
-    public static List<Number> askWinningNumbers() {
+    public static List<LottoNumber> askWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String line = new Scanner(System.in).nextLine();
         String[] numbers = line.split(",");
-        List<Number> winningNumbers = new ArrayList<>();
+        List<LottoNumber> winningLottoNumbers = new ArrayList<>();
         for (String number : numbers) {
-            winningNumbers.add(new Number(Integer.parseInt(number.trim())));
+            winningLottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
         }
-        return winningNumbers;
+        return winningLottoNumbers;
     }
 
     public static void printPurchaseComplete(Lottos lottos) {

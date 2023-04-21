@@ -11,64 +11,55 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final List<Number> LOTTO_NUMBER_LIST = IntStream.rangeClosed(Number.MIN_NUMBER, Number.MAX_NUMBER)
+    public static final List<LottoNumber> LOTTO_LOTTO_NUMBER_LIST = IntStream.rangeClosed(
+            LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
         .boxed()
-        .map(Number::new)
+        .map(LottoNumber::new)
         .collect(Collectors.toList());
 
-    private final List<Number> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Number> numbers) {
-        this.numbers = sorted(validList(unDuplicate(numbers)));
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = sorted(validList(unDuplicate(lottoNumbers)));
     }
 
-    private List<Number> unDuplicate(List<Number> numbers) {
-        Set<Number> set = Set.copyOf(numbers);
-        List<Number> ret = new ArrayList<>();
-        for (Number number : set) {
-            ret.add(number);
+    private List<LottoNumber> unDuplicate(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> set = Set.copyOf(lottoNumbers);
+        List<LottoNumber> ret = new ArrayList<>();
+        for (LottoNumber lottoNumber : set) {
+            ret.add(lottoNumber);
         }
         return ret;
     }
 
-    public static Lotto nextRandom(List<Number> numbers) {
-        return new Lotto(sorted(subList(shuffled(numbers))));
+    public static Lotto nextRandom(List<LottoNumber> lottoNumbers) {
+        return new Lotto(sorted(subList(shuffled(lottoNumbers))));
     }
 
-    private static List<Number> subList(List<Number> numbers) {
-        return numbers.subList(0, LOTTO_NUMBER_COUNT);
+    private static List<LottoNumber> subList(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.subList(0, LOTTO_NUMBER_COUNT);
     }
 
-    private static List<Number> shuffled(List<Number> numbers) {
-        Collections.shuffle(numbers);
-        return numbers;
+    private static List<LottoNumber> shuffled(List<LottoNumber> lottoNumbers) {
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers;
     }
 
-    private static List<Number> sorted(List<Number> result) {
-        Collections.sort(result, Lotto::compare);
+    private static List<LottoNumber> sorted(List<LottoNumber> result) {
+        Collections.sort(result, LottoNumber::compare);
         return result;
     }
 
-    private static int compare(Number a, Number b) {
-        if (a.value() > b.value()) {
-            return 1;
-        }
-        if (a.value() < b.value()) {
-            return -1;
-        }
-        return 0;
-    }
-
     public static Lotto purchase() {
-        return nextRandom(LOTTO_NUMBER_LIST);
+        return nextRandom(LOTTO_LOTTO_NUMBER_LIST);
     }
 
-    private List<Number> validList(List<Number> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+    private List<LottoNumber> validList(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(
-                "로또는 " + LOTTO_NUMBER_COUNT + "개의 중복되지않은 숫자로만 구성 가능합니다 : " + numbers.size());
+                "로또는 " + LOTTO_NUMBER_COUNT + "개의 중복되지않은 숫자로만 구성 가능합니다 : " + lottoNumbers.size());
         }
-        return numbers;
+        return lottoNumbers;
     }
 
     @Override
@@ -80,16 +71,16 @@ public class Lotto {
             return false;
         }
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 
-    public List<Number> numbers() {
-        return new ArrayList<>(numbers);
+    public List<LottoNumber> numbers() {
+        return new ArrayList<>(lottoNumbers);
     }
 
 }

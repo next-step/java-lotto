@@ -27,10 +27,10 @@ public class InputViewTest {
 
     @Test
     void 구매로또출력() {
-        List<Number> numbers = List.of(new Number(1),new Number(2),new Number(3),new Number(4),new Number(5),new Number(6));
+        List<LottoNumber> lottoNumbers = List.of(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
         List<Lotto> lottos = new ArrayList<>();
         for (int i=0; i<14; i++) {
-            lottos.add(new Lotto(numbers));
+            lottos.add(new Lotto(lottoNumbers));
         }
         InputView.printPurchaseComplete(new Lottos(lottos));
         assertThat(outputStream.toString()).containsPattern("(\\[[\\d]{1,2}(, [\\d]{1,2}){5}\\]\n){14}");
@@ -38,10 +38,10 @@ public class InputViewTest {
 
     @Test
     void 구매완료() {
-        List<Number> numbers = List.of(new Number(1),new Number(2),new Number(3),new Number(4),new Number(5),new Number(6));
+        List<LottoNumber> lottoNumbers = List.of(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
         List<Lotto> lottos = new ArrayList<>();
         for (int i=0; i<14; i++) {
-            lottos.add(new Lotto(numbers));
+            lottos.add(new Lotto(lottoNumbers));
         }
         InputView.printPurchaseComplete(new Lottos(lottos));
         assertThat(outputStream.toString()).containsPattern("14개를 구매했습니다.");
@@ -52,7 +52,7 @@ public class InputViewTest {
         inputStream = new ByteArrayInputStream("1, 2, 3, 4, 5, 6".getBytes(StandardCharsets.UTF_8));
         System.setIn(inputStream);
         assertAll(
-            () -> assertThat(InputView.askWinningNumbers()).isEqualTo(List.of(new Number(1),new Number(2),new Number(3),new Number(4),new Number(5),new Number(6))),
+            () -> assertThat(InputView.askWinningNumbers()).isEqualTo(List.of(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6))),
             () -> assertThat(outputStream.toString()).containsPattern("지난 주 당첨 번호를 입력해 주세요.")
         );
     }

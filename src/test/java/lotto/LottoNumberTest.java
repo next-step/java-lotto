@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class NumberTest {
+public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46, 47, 100})
     void 숫자범위(int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Number(number))
+            .isThrownBy(() -> new LottoNumber(number))
             .withMessageMatching("숫자는 1 ~ 45 사이의 값만 가질수 있습니다. : " + number);
     }
 
@@ -23,7 +23,7 @@ public class NumberTest {
         assertAll(
             () -> {
                 for (int i = 1; i <= 45; i++) {
-                    assertThat(new Number(i)).isEqualTo(new Number(i));
+                    assertThat(new LottoNumber(i)).isEqualTo(new LottoNumber(i));
                 }}
         );
     }

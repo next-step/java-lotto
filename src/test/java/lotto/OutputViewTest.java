@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Map;
+import lotto.WinningNumbers.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,11 +23,11 @@ public class OutputViewTest {
 
     @Test
     void 당첨통계() {
-        Map<String, Integer> map = Map.of(
-            WinningNumbers.FIRST_GRADE, 0,
-            WinningNumbers.SECOND_GRADE, 1,
-            WinningNumbers.THIRD_GRADE, 1,
-            WinningNumbers.FOURTH_GRADE, 0
+        Map<Rank, Integer> map = Map.of(
+            Rank.FIRST_GRADE, 0,
+            Rank.SECOND_GRADE, 1,
+            Rank.THIRD_GRADE, 1,
+            Rank.FOURTH_GRADE, 0
         );
         OutputView.printRanking(map, 14000);
         assertAll(
