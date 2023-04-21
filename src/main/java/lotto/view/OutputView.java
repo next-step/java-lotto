@@ -10,6 +10,7 @@ public class OutputView {
     public static final int ZERO = 0;
     public static final int MINIMUM_PRIZE = 3;
     public static final int MAXIMUM_PRIZE = 6;
+    public static final double PROFIT_CONDITION = 1.0;
 
     public static void printLottoQuantity(Money money) {
         System.out.println(money.getLottoQuantity() + "개를 구매했습니다.");
@@ -39,13 +40,27 @@ public class OutputView {
     private static void printProfit(Winners resultMap, Money lottoAmount) {
         double profit = resultMap.getProfit(lottoAmount);
         System.out.print("총 수익률은 " + profit + "입니다.");
-        if (profit > 1.0) {
+
+        printRealProfit(profit);
+        printStandardProfit(profit);
+        printLoseProfit(profit);
+    }
+
+    private static void printRealProfit(double profit) {
+        if (profit > PROFIT_CONDITION) {
             System.out.println("(축하드립니다~ 개이득!)");
-        } else if (profit == 1.0) {
+        }
+    }
+
+    private static void printStandardProfit(double profit) {
+        if (profit == PROFIT_CONDITION) {
             System.out.println("(본전이네요.)");
-        } else {
+        }
+    }
+
+    private static void printLoseProfit(double profit) {
+        if (profit < PROFIT_CONDITION) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
-        System.out.println();
     }
 }
