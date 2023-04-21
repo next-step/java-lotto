@@ -1,6 +1,7 @@
 package Calculator.View;
 
 import java.util.Scanner;
+
 import Util.CheckInput;
 
 public class InputView {
@@ -36,20 +37,19 @@ public class InputView {
     }
 
     public static boolean isValidAlgebra(String[] parsedAlgebra) {
-        boolean isPassed = true;
-
-
         try {
-            for (String parsed: parsedAlgebra){
-                isPassed = isPassed && (CheckInput.isNumeric(parsed) || CheckInput.isOperator(parsed));
-            }
+            return isPermitted(parsedAlgebra);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return false;
         }
-
-        return isPassed;
     }
 
-
+    private static boolean isPermitted(String[] parsedAlgebra) {
+        boolean isPassed = true;
+        for (String parsed : parsedAlgebra) {
+            isPassed = isPassed && (CheckInput.isNumeric(parsed) || CheckInput.isOperator(parsed));
+        }
+        return isPassed;
+    }
 }
