@@ -13,7 +13,7 @@ public class InputView {
         String algebra = SCANNER.nextLine();
 
         try {
-            return getParsedAlgebra(algebra,DELIMITER);
+            return getParsedAlgebra(algebra);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getAlgebra();
@@ -21,12 +21,12 @@ public class InputView {
 
     }
 
-    private static String[] getParsedAlgebra(String algebra, String Delimiter) {
+    private static String[] getParsedAlgebra(String algebra) {
         if (algebra == null || algebra.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
 
-        String[] parsedAlgebra = algebra.split(Delimiter);
+        String[] parsedAlgebra = algebra.split(DELIMITER);
 
         if (!isValidAlgebra(parsedAlgebra)) {
             throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
