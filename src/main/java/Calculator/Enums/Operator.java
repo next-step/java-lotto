@@ -2,7 +2,7 @@ package Calculator.Enums;
 
 import java.util.function.BiFunction;
 
-public enum OperatorEnum {
+public enum Operator {
     PLUS("+", (a, b) -> a + b),
     MINUS("-", (a, b) -> a - b),
     MULTIPLE("*", (a, b) -> a * b),
@@ -11,12 +11,12 @@ public enum OperatorEnum {
     private String symbol;
     private BiFunction<Integer, Integer, Integer> function;
 
-    OperatorEnum(String symbol, BiFunction<Integer, Integer, Integer> function) {
+    Operator(String symbol, BiFunction<Integer, Integer, Integer> function) {
         this.symbol = symbol;
         this.function = function;
     }
 
-    public static int execute(Integer numBefore, String operator, Integer numAfter) {
+    public static int execute(int numBefore, String operator, int numAfter) {
         int result = numBefore;
 
         switch (operator) {

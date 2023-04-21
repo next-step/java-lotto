@@ -1,4 +1,4 @@
-package Calculator;
+package Calculator.Model;
 
 import Calculator.Model.Calculator;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,56 +18,60 @@ public class CalculatorTest {
     @Test
     @DisplayName("execute 덧셈 정상 확인")
     public void execute_add() {
-        String expected = "3";
-        calculator.execute("2", "+", "1");
-        String actual = calculator.currentResult();
+        int expected = 3;
+
+        calculator.execute(2, "+", 1);
+        int actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("execute 뺄셈 정상 확인")
     public void execute_subtract() {
-        String expected = "1";
-        calculator.execute("2", "-", "1");
-        String actual = calculator.currentResult();
+        int expected = 1;
+
+        calculator.execute(2, "-", 1);
+        int actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("execute 곱셈 정상 확인")
     public void execute_multiple() {
-        String expected = "6";
-        calculator.execute("3", "*", "2");
-        String actual = calculator.currentResult();
+        int expected = 6;
+
+        calculator.execute(3, "*", 2);
+        int actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("execute 나눗셈 정상 확인")
     public void execute_divide() {
-        String expected = "2";
-        calculator.execute("10", "/", "5");
-        String actual = calculator.currentResult();
+        int expected = 2;
+
+        calculator.execute(10, "/", 5);
+        int actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("type 숫자 입력")
     public void type_number() {
-        String expected = "5";
+        int expected = 5;
 
         calculator.type("5");
-        String actual = calculator.currentResult();
+        int actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("type 숫자 입력2")
     public void type_numbertest() {
-        String expected = "10";
+        int expected = 10;
 
         calculator.type("10");
-        String actual = calculator.currentResult();
+        int actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -77,7 +81,7 @@ public class CalculatorTest {
         String expected = "-";
 
         calculator.type("-");
-        String actual = calculator.currentOpretor();
+        String actual = calculator.currentOperator();
         assertThat(actual).isEqualTo(expected);
     }
 }
