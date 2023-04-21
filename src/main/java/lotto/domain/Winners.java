@@ -27,7 +27,7 @@ public class Winners {
         int sum = winnersCount.keySet()
                 .stream()
                 .mapToInt(Statistics::getPrize)
-                .reduce(0, Integer::sum);
+                .reduce(DEFAULT_VALUE, Integer::sum);
 
         DecimalFormat form = new DecimalFormat("#.##");
         form.setRoundingMode(RoundingMode.DOWN);
