@@ -4,6 +4,8 @@ import java.util.Map;
 
 public class OutputView {
 
+    private OutputView() {}
+
     public static final Map<String, Long> WINNING_PRIZE = Map.of(
         WinningNumbers.FIRST_GRADE, 2_000_000_000L,
         WinningNumbers.SECOND_GRADE, 1_500_000L,
