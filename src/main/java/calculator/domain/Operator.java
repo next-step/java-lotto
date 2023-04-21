@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    ADD("+", CalculationLogic::add),
-    SUBTRACT("-", CalculationLogic::subtract),
-    MULTIPLY("*", CalculationLogic::multiply),
-    DIVIDE("/", CalculationLogic::divide);
+    ADD("+", (a, b) -> a + b),
+    SUBTRACT("-", (a, b) -> a - b),
+    MULTIPLY("*", (a, b) -> a * b),
+    DIVIDE("/", (a, b) -> a / b);
 
     private final String operator;
     private final BiFunction<Integer, Integer, Integer> operation;

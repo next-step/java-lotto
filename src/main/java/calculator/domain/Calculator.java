@@ -1,10 +1,12 @@
 package calculator.domain;
 
-import calculator.util.StringUtils;
+import calculator.util.StringParser;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+
+import static calculator.util.StringSplitter.splitWithWhiteSpace;
 
 public class Calculator {
     private final Stack<Operator> operators;
@@ -15,14 +17,15 @@ public class Calculator {
         operands = new Stack<>();
     }
 
-    private static boolean validateInput(List<String> inputList) {
-        return inputList.size() % 2 == 1;
+    private static boolean isOddLength(int inputSize) {
+        return inputSize % 2 == 1;
     }
 
+
     public void insert(String input) {
-        List<String> inputList = StringUtils.split(input);
+        List<String> inputList = splitWithWhiteSpace(input);
         Collections.reverse(inputList);
-        if (!validateInput(inputList)) {
+        if (!isOddLength(inputList.size())) {
             throw new IllegalArgumentException("입력값과 연산자의 수가 맞지 않습니다.");
         }
         inputList.forEach(this::pushInput);
@@ -37,7 +40,7 @@ public class Calculator {
     }
 
     private int parseOperand(String input) {
-        return StringUtils.parse(input);
+        return StringParser.parseInputToInt(input);
     }
 
     private Operator parseOperator(String input) {
