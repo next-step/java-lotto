@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 public class Lottos {
     public static final int ZERO = 0;
-    public static final int ADD_COUNT = 1;
 
     private final List<Lotto> lottos;
 
