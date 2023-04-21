@@ -2,6 +2,7 @@ package calculator.domain;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,10 +20,11 @@ public class ClientInputTest {
         assertThat(clientInput).isNotNull();
     }
 
-    @ParameterizedTest(name = "[{index}] 빈값 입력시에도 정상 객체를 생성한다. value [{0}]")
+    @ParameterizedTest(name = "[{index}] 빈값 입력시 익셉션이 발생한다.")
     @NullAndEmptySource
     void clientInputEmptyTest(String emptyValue) {
-        ClientInput clientInput = new ClientInput(emptyValue);
-        assertThat(clientInput).isNotNull();
+        assertThatThrownBy(() -> new ClientInput(emptyValue))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("값이 입력되지 않았습니다.");
     }
 }
