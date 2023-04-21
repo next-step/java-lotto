@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
@@ -46,5 +47,9 @@ public enum LottoRank {
 
   public static int prizeMoney(LottoRank lottoRank) {
     return lottoRank.prizeMoney;
+  }
+
+  public boolean equalsMatchedCount(int matchedCount) {
+    return this.matchedCount == matchedCount;
   }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
@@ -10,6 +11,10 @@ public class LottoTicket {
 
   public LottoTicket(LottoStrategy lottoStrategy) {
     this.lottoTicket = validatedLottoTicket(lottoStrategy.issue());
+  }
+
+  public List<LottoNumber> lottoTicketNumbers() {
+    return Collections.unmodifiableList(lottoTicket);
   }
 
   public int matchLottoCount(LottoTicket lottoNumbers) {

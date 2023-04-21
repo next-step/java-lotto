@@ -19,10 +19,6 @@ public class LottoTickets {
   }
 
   public void addLottoTicket(LottoStrategy lottoStrategy) {
-    addTicket(lottoStrategy);
-  }
-
-  private void addTicket(LottoStrategy lottoStrategy) {
     lottoTickets.add(new LottoTicket(lottoStrategy));
   }
 }
