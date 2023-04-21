@@ -5,8 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
@@ -18,60 +16,70 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("callCalculator 덧셈 정상 확인")
-    public void callCalculator_add() {
-        String expected = "1";
-        String actual = calculator.callCalculator("0", "+", "1");
+    @DisplayName("execute 덧셈 정상 확인")
+    public void execute_add() {
+        String expected = "3";
+        calculator.execute("2", "+", "1");
+        String actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("callCalculator 뺄셈 정상 확인")
-    public void callCalculator_subtract() {
+    @DisplayName("execute 뺄셈 정상 확인")
+    public void execute_subtract() {
         String expected = "1";
-        String actual = calculator.callCalculator("2", "-", "1");
+        calculator.execute("2", "-", "1");
+        String actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("callCalculator 곱셈 정상 확인")
-    public void callCalculator_multiple() {
+    @DisplayName("execute 곱셈 정상 확인")
+    public void execute_multiple() {
         String expected = "6";
-        String actual = calculator.callCalculator("3", "*", "2");
+        calculator.execute("3", "*", "2");
+        String actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("callCalculator 나눗셈 정상 확인")
-    public void callCalculator_divide() {
+    @DisplayName("execute 나눗셈 정상 확인")
+    public void execute_divide() {
         String expected = "2";
-        String actual = calculator.callCalculator("10", "/", "5");
+        calculator.execute("10", "/", "5");
+        String actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("calculator 숫자 입력")
-    public void calculator_number() {
+    @DisplayName("type 숫자 입력")
+    public void type_number() {
         String expected = "2";
 
-        ArrayList<String> input = new ArrayList<>();
-        input.add("10");
-        input.add("/");
-        input.add("5");
-        ArrayList<String> actual = calculator.calculate(input);
-        assertThat(calculator.getCurrentResult(actual)).isEqualTo(expected);
+        calculator.type("10");
+        calculator.type("/");
+        calculator.type("5");
+        String actual = calculator.currentResult();
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("calculator Operator 입력")
-    public void calculator_oprator() {
+    @DisplayName("type 숫자 입력2")
+    public void type_numbertest() {
+        String expected = "10";
+
+        calculator.type("10");
+        String actual = calculator.currentResult();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("type Operator 입력")
+    public void type_oprator() {
         String expected = "-";
 
-        ArrayList<String> input = new ArrayList<>();
-        input.add("10");
-        input.add("/");
-        input.add("-");
-        ArrayList<String> actual = calculator.calculate(input);
-        assertThat(calculator.getCurrentOpretor(actual)).isEqualTo(expected);
+        calculator.type("-");
+        String actual = calculator.currentOpretor();
+        assertThat(actual).isEqualTo(expected);
     }
 }
