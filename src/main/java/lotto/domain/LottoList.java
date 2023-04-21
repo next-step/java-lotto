@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.rating.WinningRatingType;
 import lotto.domain.strategy.LottoStrategy;
+import lotto.dto.LottoNumbersDto;
 import lotto.dto.WinningStatDto;
 
 import java.util.ArrayList;
@@ -29,5 +30,15 @@ public class LottoList {
         }
 
         return winningStatDto;
+    }
+
+    public LottoNumbersDto lottoNumbersDto() {
+        final LottoNumbersDto lottoNumbersDto = new LottoNumbersDto();
+
+        for (Lotto lotto : this.lottoList) {
+            lottoNumbersDto.setLottoNumber(lotto.getIntegerLottoNumbers());
+        }
+
+        return lottoNumbersDto;
     }
 }

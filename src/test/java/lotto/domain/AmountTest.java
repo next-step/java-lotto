@@ -31,4 +31,13 @@ public class AmountTest {
         assertThat(amount.calculateUnitCount(1000))
                 .isEqualTo(10);
     }
+
+    @Test
+    @DisplayName("수익률 계산, 소수점 둘째자리까지 출력")
+    void calculateRateOfReturn() {
+        final Amount amount = new Amount(14000);
+
+        assertThat(amount.calculateRateOfReturn(5000))
+                .isEqualTo(0.35f);
+    }
 }

@@ -62,6 +62,16 @@ public class LottoNumbers {
         }
     }
 
+    List<Integer> getIntegerLottoNumbers() {
+        final List<Integer> integersLottoNumbers = new ArrayList<>();
+
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            integersLottoNumbers.add(lottoNumber.getLottoNumber());
+        }
+
+        return integersLottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

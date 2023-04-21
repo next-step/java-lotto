@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
+import lotto.dto.LottoNumbersDto;
 import lotto.dto.WinningStatDto;
 
 public class LottoMachine {
@@ -18,11 +19,18 @@ public class LottoMachine {
         return this.amount.calculateUnitCount(LOTTO_PRICE);
     }
 
+    public LottoNumbersDto lottoNumbersDto() {
+        return this.lottoList.lottoNumbersDto();
+    }
+
     public void conclusionWinningNumbers(String winningNumbers) {
         this.winningLotto = Lotto.winningLotto(winningNumbers);
     }
 
     public WinningStatDto winningStat() {
-        return this.lottoList.rating(winningLotto);
+        final WinningStatDto winningStatDto = this.lottoList.rating(winningLotto);
+        winningStatDto.setRateOfReturn(this.amount);
+
+        return winningStatDto;
     }
 }

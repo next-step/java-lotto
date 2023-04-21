@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.domain.Amount;
 import lotto.domain.rating.WinningRatingType;
 
 public class WinningStatDto {
@@ -7,6 +8,8 @@ public class WinningStatDto {
     private int secondCount;
     private int thirdCount;
     private int fourthCount;
+    private int totalReward;
+    private float rateOfReturn;
 
     public WinningStatDto(int firstCount, int secondCount, int thirdCount, int fourthCount) {
         this.firstCount = firstCount;
@@ -28,6 +31,12 @@ public class WinningStatDto {
         } else if (WinningRatingType.FOURTH == type) {
             this.fourthCount++;
         }
+
+        this.totalReward += type.getReward();
+    }
+
+    public void setRateOfReturn(Amount amount) {
+        this.rateOfReturn = amount.calculateRateOfReturn(this.totalReward);
     }
 
     public int getFirstCount() {
@@ -44,5 +53,9 @@ public class WinningStatDto {
 
     public int getFourthCount() {
         return fourthCount;
+    }
+
+    public float getRateOfReturn() {
+        return rateOfReturn;
     }
 }

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
@@ -22,6 +23,10 @@ public class Lotto {
 
     public int statCount(Lotto lotto) {
         return this.lottoNumbers.statCount(lotto.lottoNumbers);
+    }
+
+    List<Integer> getIntegerLottoNumbers() {
+        return this.lottoNumbers.getIntegerLottoNumbers();
     }
 
     @Override
