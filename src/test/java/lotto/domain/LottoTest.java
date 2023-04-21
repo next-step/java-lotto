@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    final LottoStrategy lottoStrategy = new TestStrategy();
+    final LottoStrategy testStrategy = new TestStrategy();
 
     @Test
     @DisplayName("객체 생성 테스트")
     void create() {
-        assertThat(new Lotto(lottoStrategy))
+        assertThat(new Lotto(testStrategy))
                 .extracting("lottoNumbers")
                 .isNotNull();
     }
@@ -28,4 +28,13 @@ public class LottoTest {
                 .isEqualTo(Lotto.winningLotto("1,2,3,4,5,6"));
     }
 
+    @Test
+    @DisplayName("몇 개 맞은 로또인지 확인")
+    void statCount() {
+        final Lotto target = new Lotto(testStrategy);
+        final Lotto winning = Lotto.winningLotto("1,2,3,4,5,6");
+
+        assertThat(target.statCount(winning))
+                .isEqualTo(6);
+    }
 }

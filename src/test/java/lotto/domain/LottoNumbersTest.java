@@ -5,6 +5,8 @@ import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.strategy.TestStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -59,5 +61,14 @@ public class LottoNumbersTest {
 
         assertThatThrownBy(() -> LottoNumbers.winningNumbers(args))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest(name = "로또 번호가 몇 개 맞는지 통계확인 테스트")
+    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4", "1,2,3,7,8,9:3", "1,2,7,8,9,11:2", "1,7,8,9,10,11:1", "7,8,9,10,11,12:0"}, delimiter = ':')
+    void statCount(String target, int result) {
+        final LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+
+        assertThat(lottoNumbers.statCount(new LottoNumbers(target)))
+                .isEqualTo(result);
     }
 }

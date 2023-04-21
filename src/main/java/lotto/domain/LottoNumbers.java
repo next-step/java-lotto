@@ -14,7 +14,7 @@ public class LottoNumbers {
         this.lottoNumbers = lottoStrategy.lottoNumbers();
     }
 
-    private LottoNumbers(String numbers) {
+    public LottoNumbers(String numbers) {
         if (numbers == null) {
             throw new IllegalArgumentException("빈 값은 올 수 없습니다.");
         }
@@ -38,6 +38,16 @@ public class LottoNumbers {
         }
 
         return lottoNumbers;
+    }
+
+    /**
+     * 로또가 몇 개 맞았는지 확인
+     */
+    public int statCount(LottoNumbers lottoNumbers) {
+        final List<LottoNumber> target = new ArrayList<>(this.lottoNumbers);
+        target.retainAll(lottoNumbers.lottoNumbers);
+
+        return target.size();
     }
 
     private void checkIsDigit(String number) {

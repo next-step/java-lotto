@@ -15,10 +15,13 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public
 
     public static Lotto winningLotto(String numbers) {
         return new Lotto(LottoNumbers.winningNumbers(numbers));
+    }
+
+    public int statCount(Lotto lotto) {
+        return this.lottoNumbers.statCount(lotto.lottoNumbers);
     }
 
     @Override

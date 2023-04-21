@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
+import lotto.dto.WinningStatDto;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
@@ -21,6 +22,7 @@ public class LottoMachine {
         this.winningLotto = Lotto.winningLotto(winningNumbers);
     }
 
-//    public WinningStatDto winningStat() {
-//    }
+    public WinningStatDto winningStat() {
+        return this.lottoList.rating(winningLotto);
+    }
 }
