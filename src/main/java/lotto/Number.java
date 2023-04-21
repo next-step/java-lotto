@@ -14,14 +14,14 @@ public class Number {
     }
 
     private int validRange(int number) {
-        if (isValidRange(number)) {
+        if (isInvalidRange(number)) {
             throw new IllegalArgumentException("숫자는 1 ~ 45 사이의 값만 가질수 있습니다. : " + number);
         }
         return number;
     }
 
-    private boolean isValidRange(int number) {
-        return !(MIN_NUMBER <= number && number <= MAX_NUMBER);
+    private boolean isInvalidRange(int number) {
+        return MIN_NUMBER > number || number > MAX_NUMBER;
     }
 
     public int value() {
