@@ -4,11 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.security.PublicKey;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -26,7 +23,7 @@ public class StringCalculatorTest {
         String input = "1+2";
         int answer = 3;
         //when
-        int result = stringCalculator.run(input);
+        int result = stringCalculator.calculate(input);
         //then
         assertThat(result).isEqualTo(answer);
     }
@@ -38,7 +35,7 @@ public class StringCalculatorTest {
         String input = "25-3";
         int answer = 22;
         //when
-        int result = stringCalculator.run(input);
+        int result = stringCalculator.calculate(input);
         //then
         assertThat(result).isEqualTo(answer);
     }
@@ -50,7 +47,7 @@ public class StringCalculatorTest {
         String input = "7*14";
         int answer = 98;
         //when
-        int result = stringCalculator.run(input);
+        int result = stringCalculator.calculate(input);
         //then
         assertThat(result).isEqualTo(answer);
     }
@@ -62,7 +59,7 @@ public class StringCalculatorTest {
         String input = "100 / 25";
         int answer = 4;
         //when
-        int result = stringCalculator.run(input);
+        int result = stringCalculator.calculate(input);
         //then
         assertThat(result).isEqualTo(answer);
     }
@@ -75,7 +72,7 @@ public class StringCalculatorTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            stringCalculator.run(input);
+            stringCalculator.calculate(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -88,7 +85,7 @@ public class StringCalculatorTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            stringCalculator.run(input);
+            stringCalculator.calculate(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -99,7 +96,7 @@ public class StringCalculatorTest {
         String input = "100 / 25 + 4 x 3";
         int answer = 4;
         //when
-        int result = stringCalculator.run(input);
+        int result = stringCalculator.calculate(input);
         //then
         assertThat(result).isEqualTo(answer);
     }
@@ -111,7 +108,7 @@ public class StringCalculatorTest {
         String input = "2 + 3 * 4 / 2";
         int answer = 10;
         //when
-        int result = stringCalculator.run(input);
+        int result = stringCalculator.calculate(input);
         //then
         assertThat(result).isEqualTo(answer);
     }
