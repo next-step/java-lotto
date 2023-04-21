@@ -1,5 +1,6 @@
 package Calculator.Model;
 
+import Calculator.Enums.*;
 import Util.CheckInput;
 
 public class Calculator {
@@ -18,35 +19,19 @@ public class Calculator {
     }
 
     public void type(String element) {
-        String current = currentResult();
-        String operator = currentOpretor();
-
         if (CheckInput.isNumeric(element)) {
-            execute(current, operator, element);
-        }else if (CheckInput.isOperator(element)) {
-            changeOperator(element);
+            execute(currentResult(), currentOpretor(), element);
+            return;
         }
+
+        changeOperator(element);
     }
 
     public void execute(String numberStringBeforeArgument, String operator, String numberStringAfterArgument) {
         int numBefore = Integer.parseInt(numberStringBeforeArgument);
         int numAfter = Integer.parseInt(numberStringAfterArgument);
 
-        int result = numBefore;
-        switch (operator) {
-            case "+":
-                result = (numBefore + numAfter);
-                break;
-            case "-":
-                result = (numBefore - numAfter);
-                break;
-            case "*":
-                result = (numBefore * numAfter);
-                break;
-            case "/":
-                result = (numBefore / numAfter);
-                break;
-        }
+        int result = Operator.execute(numBefore, operator, numAfter);
 
         results[INDEX_CALCULATE_CURRENT_ELEMENT] = String.valueOf(result);
     }
@@ -63,3 +48,4 @@ public class Calculator {
         return results[INDEX_CALCULATE_OPERATOR];
     }
 }
+

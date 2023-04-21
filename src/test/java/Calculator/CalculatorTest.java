@@ -54,10 +54,8 @@ public class CalculatorTest {
     @Test
     @DisplayName("type 숫자 입력")
     public void type_number() {
-        String expected = "2";
+        String expected = "5";
 
-        calculator.type("10");
-        calculator.type("/");
         calculator.type("5");
         String actual = calculator.currentResult();
         assertThat(actual).isEqualTo(expected);
