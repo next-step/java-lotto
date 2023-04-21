@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -33,10 +30,12 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Integer, Integer> findStatistics(Lotto winningLotto) {
-        return lottos.stream()
-                .mapToInt(lotto -> lotto.findSameNumber(winningLotto))
-                .boxed()
-                .collect(Collectors.toMap(Function.identity(), v -> ADD_COUNT, Integer::sum));
+    public Winners findStatistics(Lotto winningLotto) {
+        Winners winners = new Winners();
+        lottos.stream()
+                .mapToInt(lotto -> lotto.findMatchingBall(winningLotto))
+                .forEach(winners::addWinner);
+
+        return winners;
     }
 }

@@ -119,7 +119,7 @@ class LottoTest {
 
         List<String> lotto = List.of(input.split(InputView.DELIMITER));
 
-        assertThat(Lotto.initWinningLotto(lotto).findSameNumber(winningLotto))
+        assertThat(Lotto.initWinningLotto(lotto).findMatchingBall(winningLotto))
                 .isEqualTo(result);
     }
 

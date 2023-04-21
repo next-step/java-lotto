@@ -71,7 +71,7 @@ public class Lotto {
         return lottoTicket.contains(number);
     }
 
-    public int findSameNumber(Lotto winningLotto) {
+    public int findMatchingBall(Lotto winningLotto) {
         return (int) lottoTicket.stream()
                 .filter(winningLotto::hasNumber)
                 .count();
