@@ -1,7 +1,7 @@
 package Calculator.Model;
 
 import Calculator.Enums.*;
-import Util.CheckInput;
+import Calculator.View.InputView;
 
 public class Calculator {
     private static final Integer INDEX_CALCULATE_CURRENT_ELEMENT = 0;
@@ -19,7 +19,7 @@ public class Calculator {
     }
 
     public void type(String element) {
-        if (CheckInput.isNumeric(element)) {
+        if (InputView.isNumeric(element)) {
             execute(currentResult(), currentOpretor(), element);
             return;
         }
@@ -31,7 +31,7 @@ public class Calculator {
         int numBefore = Integer.parseInt(numberStringBeforeArgument);
         int numAfter = Integer.parseInt(numberStringAfterArgument);
 
-        int result = Operator.execute(numBefore, operator, numAfter);
+        int result = OperatorEnum.execute(numBefore, operator, numAfter);
 
         results[INDEX_CALCULATE_CURRENT_ELEMENT] = String.valueOf(result);
     }

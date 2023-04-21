@@ -1,8 +1,7 @@
 package Calculator.View;
 
+import java.util.Arrays;
 import java.util.Scanner;
-
-import Util.CheckInput;
 
 public class InputView {
     private static final String DELIMITER = " ";
@@ -39,9 +38,23 @@ public class InputView {
     public static boolean isValidAlgebra(String[] parsedAlgebra) {
         boolean isPassed = true;
         for (String parsed : parsedAlgebra) {
-            isPassed = isPassed && (CheckInput.isNumeric(parsed) || CheckInput.isOperator(parsed));
+            isPassed = isPassed && (isNumeric(parsed) || isOperator(parsed));
         }
-        
+
         return isPassed;
+    }
+
+    private static final String[] OPERATORS = {"+", "-", "*", "/"};
+    public static boolean isOperator(String input) {
+        return Arrays.asList(OPERATORS).contains(input);
+    }
+
+    public static boolean isNumeric(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 }
