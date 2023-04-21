@@ -43,6 +43,6 @@ public class StringCalculatorTest {
 	@Test
 	void test5() {
 		StringCalculator stringCalculator = new StringCalculator("9", "0", "/");
-		assertThatThrownBy(stringCalculator::divide).isInstanceOf(IllegalArgumentException.class);
+		assertThatIllegalArgumentException().isThrownBy(stringCalculator::divide);
 	}
 }
