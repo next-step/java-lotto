@@ -1,38 +1,48 @@
 package Calculator.Model;
 
-import Calculator.Enums.*;
-import Calculator.View.InputView;
+import Calculator.Enums.Operator;
 
 public class Calculator {
     private static final String INITIAL_NUMBER = "0";
     private static final String INITIAL_OPERATOR = "+";
 
     private final Number result;
+    private final Symbol symbol;
     private final Number newNumber;
-
-    private String operator;
 
     public Calculator() {
         result = new Number(INITIAL_NUMBER);
-        operator = INITIAL_OPERATOR;
+        symbol = new Symbol(INITIAL_OPERATOR);
         newNumber = new Number(INITIAL_NUMBER);
     }
 
 
     public void type(String element) {
-        if (InputView.isOperator(element)) {
-            this.operator = element;
-            return;
+        if (!newSymbol(element) && !newNumber(element)) {
+            throw new IllegalArgumentException("숫자나 연산자가 아닙니다.");
         }
 
+        execute(result.currentNumber(), symbol.currentSymbol(), newNumber.currentNumber());
+    }
+
+    private boolean newNumber(String element) {
         try {
             newNumber.changeNumber(Integer.parseInt(element));
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
+            return false;
         }
 
-        execute(result.currentNumber(), operator, newNumber.currentNumber());
+        return true;
+    }
+
+    private boolean newSymbol(String element) {
+        try {
+            symbol.changeSymbol(element);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        return true;
     }
 
     public void execute(int numberBeforeOperator, String operator, int numberAfterOperator) {
@@ -41,7 +51,7 @@ public class Calculator {
     }
 
     public String currentOperator() {
-        return operator;
+        return symbol.currentSymbol();
     }
 
     public int currentResult() {

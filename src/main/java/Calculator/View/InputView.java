@@ -1,9 +1,6 @@
 package Calculator.View;
 
-import java.util.Arrays;
 import java.util.Scanner;
-
-import Calculator.Model.Number;
 
 public class InputView {
     private static final String DELIMITER = " ";
@@ -28,28 +25,6 @@ public class InputView {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
 
-        String[] parsedAlgebra = algebra.split(DELIMITER);
-
-//        if (!isValidAlgebra(parsedAlgebra)) {
-//            throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
-//        }
-
-        return parsedAlgebra;
+        return algebra.split(DELIMITER);
     }
-
-//    public static boolean isValidAlgebra(String[] parsedAlgebra) {
-//        boolean isPassed = true;
-//        for (String parsed : parsedAlgebra) {
-//            isPassed = isPassed && (Number.isNumeric(parsed) || isOperator(parsed));
-//        }
-//
-//        return isPassed;
-//    }
-
-    private static final String[] OPERATORS = {"+", "-", "*", "/"};
-    public static boolean isOperator(String input) {
-        return Arrays.asList(OPERATORS).contains(input);
-    }
-
-
 }

@@ -66,17 +66,7 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("type 숫자 입력2")
-    public void type_numbertest() {
-        int expected = 10;
-
-        calculator.type("10");
-        int actual = calculator.currentResult();
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    @DisplayName("type Operator 입력")
+    @DisplayName("type  입력")
     public void type_oprator() {
         String expected = "-";
 
