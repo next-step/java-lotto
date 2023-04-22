@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.Arrays;
+
 public class ClientResponse {
 
     private final String clientInput;
@@ -29,6 +31,20 @@ public class ClientResponse {
         return evenIndexedElements();
     }
 
+    public String[] getSymbols() {
+        return oddIndexedElements();
+    }
+
+    public String[] oddIndexedElements() {
+        String[] numbers = new String[roundedDownNumber(splitInputSize())];
+
+        for (int index = 0; index < numbers.length; index++) {
+            numbers[index] = splitInput()[index * 2 + 1];
+        }
+
+        return numbers;
+    }
+
     private String[] evenIndexedElements() {
         String[] numbers = new String[roundedUpNumber(splitInputSize())];
 
@@ -48,7 +64,7 @@ public class ClientResponse {
     }
 
     private String[] splitInput() {
-        if (isNotCachedYet()) {
+        if (notCachedYet()) {
             this.cachedSplitInput = this.clientInput.split(SEPARATOR);
             return this.cachedSplitInput;
         }
@@ -56,14 +72,22 @@ public class ClientResponse {
     }
 
     private int splitInputSize() {
-        if (isNotCachedYet()) {
+        if (notCachedYet()) {
             this.cachedSplitInput = splitInput();
             return cachedSplitInput.length;
         }
         return this.cachedSplitInput.length;
     }
 
-    private boolean isNotCachedYet() {
+    private boolean notCachedYet() {
         return this.cachedSplitInput == null;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientResponse{" +
+                "clientInput='" + clientInput + '\'' +
+                ", cachedSplitInput=" + Arrays.toString(cachedSplitInput) +
+                '}';
     }
 }

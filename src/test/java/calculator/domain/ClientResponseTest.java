@@ -12,7 +12,9 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class ClientResponseTest {
 
-    private static final String CLIENT_TEST_DATA = "1 + 2 * 3 / 4";
+    private static final String CLIENT_TEST_DATA = "1 + 2 * 3 / 4 - 5";
+
+    private static final String SINGLE_NUMBER_INPUT = "1";
 
     private static final int MINIMUM_EVEN_NUMBER = 2;
 
@@ -58,13 +60,27 @@ public class ClientResponseTest {
     @DisplayName("사용자 입력값에서 숫자만 포함한 배열을 리턴한다.")
     void numberReturnTest() {
         ClientResponse clientResponse = new ClientResponse(CLIENT_TEST_DATA);
-        assertThat(clientResponse.getNumbers()).containsExactly("1","2","3","4");
+        assertThat(clientResponse.getNumbers()).containsExactly("1","2","3","4","5");
     }
 
     @Test
     @DisplayName("사용자 입력값에 단일 숫자 입력 했을 경우 단일 숫자 배열을 리턴한다.")
     void singleNumberReturnTest() {
-        ClientResponse clientResponse = new ClientResponse("1");
-        assertThat(clientResponse.getNumbers()).containsExactly("1");
+        ClientResponse clientResponse = new ClientResponse(SINGLE_NUMBER_INPUT);
+        assertThat(clientResponse.getNumbers()).containsExactly(SINGLE_NUMBER_INPUT);
+    }
+
+    @Test
+    @DisplayName("사용자 입력값에서 연산기호만 포함한 배열을 리턴한다")
+    void returnSymbolsTest() {
+        ClientResponse clientResponse = new ClientResponse(CLIENT_TEST_DATA);
+        assertThat(clientResponse.getSymbols()).containsExactly("+","*","/","-");
+    }
+
+    @Test
+    @DisplayName("사용자 입력값에서 연산기호만 포함한 배열을 리턴한다")
+    void returnSingleSymbolsTest() {
+        ClientResponse clientResponse = new ClientResponse(SINGLE_NUMBER_INPUT);
+        assertThat(clientResponse.getSymbols()).isEmpty();
     }
 }
