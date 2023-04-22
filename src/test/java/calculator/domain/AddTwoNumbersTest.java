@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class AddTwoNumbersTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "두 수의 합을 반환한다 {0} + {1} = {2} ")
     @CsvSource(value = {"1:2:3", "5:8:13"}, delimiter = ':')
     void addNumbersTest(int num1, int num2, int expected) {
         assertThat(new AddTwoNumbers(num1,num2).calculateTwoNumbers()).isEqualTo(expected);
