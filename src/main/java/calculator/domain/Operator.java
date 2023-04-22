@@ -1,11 +1,8 @@
 package calculator.domain;
 
-public class Operator {
+import static calculator.domain.OperatorType.*;
 
-    public static final String PLUS = "+";
-    public static final String MINUS = "-";
-    public static final String MULTIPLY = "*";
-    public static final String DIVIDE = "/";
+public class Operator {
 
     private final String operator;
 
@@ -28,23 +25,43 @@ public class Operator {
     }
 
     boolean isNotOperator(String operator) {
-        return !(operator.equals(PLUS) || operator.equals(MINUS) || operator.equals(MULTIPLY) || operator.equals(DIVIDE));
+        return !(operator.equals(PLUS.getCharacter())
+                || operator.equals(MINUS.getCharacter())
+                || operator.equals(MULTIPLY.getCharacter())
+                || operator.equals(DIVIDE.getCharacter()));
     }
 
     public boolean isPlus() {
-        return operator.equals(PLUS);
+        return operator.equals(PLUS.getCharacter());
     }
 
     public boolean isMinus() {
-        return operator.equals(MINUS);
+        return operator.equals(MINUS.getCharacter());
     }
 
     public boolean isMultiply() {
-        return operator.equals(MULTIPLY);
+        return operator.equals(MULTIPLY.getCharacter());
     }
 
     public boolean isDivide() {
-        return operator.equals(DIVIDE);
+        return operator.equals(DIVIDE.getCharacter());
     }
 
+}
+
+enum OperatorType {
+    PLUS("+"),
+    MINUS("-"),
+    MULTIPLY("*"),
+    DIVIDE("/");
+
+    final private String character;
+
+    OperatorType(String character) {
+        this.character = character;
+    }
+
+    public String getCharacter() {
+        return character;
+    }
 }
