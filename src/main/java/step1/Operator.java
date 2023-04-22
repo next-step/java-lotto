@@ -23,7 +23,7 @@ public class Operator {
         return operators.containsKey(token);
     }
 
-    int calculate(int leftValue, int rightValue) {
+    public int calculate(int leftValue, int rightValue) {
         return operator.apply(leftValue, rightValue);
     }
 }
