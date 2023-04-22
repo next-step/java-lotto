@@ -20,16 +20,20 @@ public class Calculator {
 
         for (String param : formulaParser.getFormula()) {
             // 숫자인 경우
-            if (REG_EXP.matcher(param).find()) {
+            if (isNumber(param)) {
                 result = currentOperator.calculate(result, stringToInt(param));
             }
             // 연산자인 경우
-            if (!REG_EXP.matcher(param).find()) {
+            if (!isNumber(param)) {
                 currentOperator = Operator.getSymbol(param);
             }
         }
 
         return result;
+    }
+
+    private static boolean isNumber(final String param) {
+        return REG_EXP.matcher(param).find();
     }
 
     private static int stringToInt(final String param) {
