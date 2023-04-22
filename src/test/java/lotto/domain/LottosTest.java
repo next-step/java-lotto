@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottosTest {
 
@@ -35,17 +36,16 @@ class LottosTest {
 
         Winners winners = lottos.findStatistics(winningLotto);
 
-        assertThat(winners.getWinnersCount(6))
-                .isEqualTo(1);
-
-        assertThat(winners.getWinnersCount(5))
-                .isEqualTo(2);
-
-        assertThat(winners.getWinnersCount(4))
-                .isEqualTo(1);
-
-        assertThat(winners.getWinnersCount(3))
-                .isEqualTo(1);
+        assertAll(
+                () -> assertThat(winners.getWinnersCount(6))
+                        .isEqualTo(1),
+                () -> assertThat(winners.getWinnersCount(5))
+                        .isEqualTo(2),
+                () -> assertThat(winners.getWinnersCount(4))
+                        .isEqualTo(1),
+                () -> assertThat(winners.getWinnersCount(3))
+                        .isEqualTo(1)
+        );
     }
 
 }
