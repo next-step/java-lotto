@@ -11,7 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.NullSource;
 
 public class NumbersTest {
 
@@ -48,7 +47,7 @@ public class NumbersTest {
     }
 
     @Test
-    @DisplayName("숫자 타입에 문자열 인입후 해당 자료구조를 Queue 로 리턴한다")
+    @DisplayName("숫자 타입 인입 후 해당 자료구조를 Queue 로 리턴한다")
     void getNumbersQueueTest() {
         Queue<Integer> expected = new LinkedList<>(Arrays.asList(1, 2, 3, 4));
         assertThat(numbers.numbers()).isEqualTo(expected);
