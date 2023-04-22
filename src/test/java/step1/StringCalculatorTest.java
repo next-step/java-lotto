@@ -94,11 +94,11 @@ public class StringCalculatorTest {
     public void invalidOperator() {
         //given
         String input = "100 / 25 + 4 x 3";
-        int answer = 4;
         //when
-        int result = stringCalculator.calculate(input);
         //then
-        assertThat(result).isEqualTo(answer);
+        assertThatThrownBy(() -> {
+            stringCalculator.calculate(input);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("문자열을 \"2 + 3 * 4 / 2\" 입력시 10을 반환한다")
