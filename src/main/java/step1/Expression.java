@@ -14,13 +14,16 @@ public class Expression {
 
     public static List<Node> extractNodes(List<String> inputList) {
         List<Node> nodeList = new ArrayList<>();
-        for (int i = 0; i < inputList.size(); i++) {
-            String current = inputList.get(i);
-            if (i % 2 == 0) {
-                nodeList.add(new Node(current));
-            }
+        for (String inputString : inputList) {
+            extractNode(nodeList, inputString);
         }
         return nodeList;
+    }
+
+    private static void extractNode(List<Node> nodeList, String token) {
+        if(Node.isNode(token)) {
+            nodeList.add(new Node(token));
+        }
     }
 
     public static List<Operator> extractOperators(List<String> inputList) {

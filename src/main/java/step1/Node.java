@@ -7,6 +7,15 @@ public class Node {
         value = Integer.parseInt(current);
     }
 
+    public static boolean isNode(String token) {
+        try {
+            Integer.parseInt(token);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     public int getValue() {
         return value;
     }
