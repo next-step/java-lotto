@@ -1,5 +1,6 @@
 package step1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
@@ -9,6 +10,28 @@ public class Expression {
     public Expression(List<Node> nodeList, List<Operator> operatorList) {
         this.nodeList = nodeList;
         this.operatorList = operatorList;
+    }
+
+    public static List<Node> extractNodeList(String[] inputArray) {
+        List<Node> nodeList = new ArrayList<>();
+        for( int i=0 ; i<inputArray.length ; i++ ) {
+            String current = inputArray[i];
+            if(i%2 == 0) {
+                nodeList.add(new Node(current));
+            }
+        }
+        return nodeList;
+    }
+
+    public static List<Operator> extractOperatorList(String[] inputArray) {
+        List<Operator> operatorList = new ArrayList<>();
+        for( int i=0 ; i<inputArray.length ; i++ ) {
+            String current = inputArray[i];
+            if(i%2 == 1) {
+                operatorList.add(new Operator(current));
+            }
+        }
+        return operatorList;
     }
 
     public int execute() {
