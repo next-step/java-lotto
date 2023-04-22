@@ -1,9 +1,7 @@
 package domain.extractor;
 
-import calculator.domain.extractor.Extractor;
-import calculator.domain.extractor.OperandExtractor;
-import calculator.error.ErrorMessage;
-import calculator.domain.Operator;
+import common.error.ErrorMessage;
+import domain.Operator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
