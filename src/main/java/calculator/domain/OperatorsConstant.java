@@ -25,6 +25,10 @@ public enum OperatorsConstant {
         this.symbol = symbol;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
     public static boolean isProperSymbol(String symbol) {
         return OPERATORS_BY_SYMBOL.containsKey(symbol);
     }
