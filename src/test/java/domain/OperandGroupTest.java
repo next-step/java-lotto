@@ -1,7 +1,9 @@
 package domain;
 
-import domain.extractor.Extractor;
-import domain.extractor.OperandExtractor;
+import calculator.domain.OperandGroup;
+import calculator.domain.OperandGroupOffset;
+import calculator.domain.extractor.Extractor;
+import calculator.domain.extractor.OperandExtractor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;

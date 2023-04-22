@@ -1,5 +1,6 @@
 package domain;
 
+import calculator.domain.OperatorGroupOffset;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

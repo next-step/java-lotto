@@ -1,6 +1,7 @@
 package domain;
 
-import common.error.ErrorMessage;
+import calculator.domain.Operator;
+import calculator.error.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

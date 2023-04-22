@@ -1,6 +1,6 @@
-package domain.extractor;
+package calculator.domain.extractor;
 
-import common.error.ErrorMessage;
+import calculator.error.ErrorMessage;
 
 import java.util.List;
 import java.util.stream.Collectors;

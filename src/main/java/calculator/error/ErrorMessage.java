@@ -1,4 +1,4 @@
-package common.error;
+package calculator.error;
 
 public enum ErrorMessage {
 
