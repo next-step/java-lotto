@@ -1,32 +1,39 @@
 package calculator;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Calculator {
-    public int add(String expression) {
-        validateNull(expression);
-        validateBlank(expression);
-        String[] split = expression.split(" ");
-//        validateInput(split);
-        return Arrays.stream(split)
-                .filter(i -> !i.equals("+"))
-                .mapToInt(Integer::parseInt)
-                .sum();
+    private final Expression expression;
+
+    public Calculator(String expression) {
+        this.expression = new Expression(expression);
     }
 
-    /*private void validateInput(String[] split) {
-        for (String input : split) {
-            if (input.getClass().getName())
-        }
-    }*/
+    public int add() {
+        List<String> element = expression.parseToList();
 
-    public int substract(String expression) {
-        validateNull(expression);
-        validateBlank(expression);
-        String[] split = expression.split(" ");
+        int beforeOperation = 0;
+        boolean addition = false;
+        for (String s : element) {
+            if (addition) {
+                beforeOperation = beforeOperation + Integer.parseInt(s);
+                addition = false;
+                continue;
+            }
+            if (s.equals("+")) {
+                addition = true;
+                continue;
+            }
+            beforeOperation = Integer.parseInt(s);
+        }
+        return beforeOperation;
+    }
+
+    public int substract() {
+        List<String> element = expression.parseToList();
         int beforeOperation = 0;
         boolean substraction = false;
-        for (String s : split) {
+        for (String s : element) {
             if (substraction) {
                 beforeOperation = beforeOperation - Integer.parseInt(s);
                 substraction = false;
@@ -41,13 +48,11 @@ public class Calculator {
         return beforeOperation;
     }
 
-    public int multiply(String expression) {
-        validateNull(expression);
-        validateBlank(expression);
-        String[] split = expression.split(" ");
+    public int multiply() {
+        List<String> element = expression.parseToList();
         int beforeOperation = 0;
         boolean multiplication = false;
-        for (String s : split) {
+        for (String s : element) {
             if (multiplication) {
                 beforeOperation *= Integer.parseInt(s);
                 multiplication = false;
@@ -62,13 +67,11 @@ public class Calculator {
         return beforeOperation;
     }
 
-    public int divide(String expression) {
-        validateNull(expression);
-        validateBlank(expression);
-        String[] split = expression.split(" ");
+    public int divide() {
+        List<String> element = expression.parseToList();
         int beforeOperation = 0;
         boolean division = false;
-        for (String s : split) {
+        for (String s : element) {
             if (division) {
                 double floatNum = (double) beforeOperation / Integer.parseInt(s);
                 beforeOperation = beforeOperation / Integer.parseInt(s);
@@ -87,14 +90,14 @@ public class Calculator {
         return beforeOperation;
     }
 
-    public int calculate(String expression) {
-        String[] split = expression.split(" ");
+    public int calculate() {
+        List<String> element = expression.parseToList();
         int beforeOperation = 0;
         boolean division = false;
         boolean multiplication = false;
         boolean addition = false;
         boolean substraction = false;
-        for (String s : split) {
+        for (String s : element) {
             if (addition) {
                 beforeOperation = beforeOperation + Integer.parseInt(s);
                 addition = false;
@@ -140,15 +143,5 @@ public class Calculator {
         return beforeOperation;
     }
 
-    private void validateNull(String expression) {
-        if (expression == null) {
-            throw new IllegalArgumentException("입력값이 null입니다.");
-        }
-    }
 
-    private void validateBlank(String expression) {
-        if (expression.isBlank()) {
-            throw new IllegalArgumentException("입력값이 공백입니다.");
-        }
-    }
 }
