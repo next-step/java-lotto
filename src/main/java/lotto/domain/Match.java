@@ -35,29 +35,7 @@ public class Match {
     }
 
     public void winningTicket(Ticket winningTicket) {
-        winners = new Winners(
-                aggregateFirst(winningTicket),
-                -1,
-                aggregateThird(winningTicket),
-                aggregateforth(winningTicket),
-                aggregateFitft(winningTicket)
-        );
-    }
-
-    private int aggregateThird(Ticket winningTicket) {
-        throw new RuntimeException();
-    }
-
-    private int aggregateforth(Ticket winningTicket) {
-        throw new RuntimeException();
-    }
-
-    private int aggregateFitft(Ticket winningTicket) {
-        throw new RuntimeException();
-    }
-
-    private int aggregateFirst(Ticket winningTicket) {
-        throw new RuntimeException();
+        winners = new Winners(tickets,winningTicket);
     }
 
     public List<Integer> winnerStatus() {

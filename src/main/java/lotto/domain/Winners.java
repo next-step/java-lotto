@@ -8,12 +8,30 @@ public class Winners {
     private final int countThird;
     private final int countFirst;
 
-    public Winners(int countFirst, int toBeDiscussion, int countThird, int countforth, int countFitft) {
-        this.countFirst = countFirst;
-        this.countThird = countThird;
-        this.countforth = countforth;
-        this.countFitft = countFitft;
+
+    public Winners(List<Ticket> tickets, Ticket winningTicket) {
+        this.countFirst = aggregateFirst(tickets,winningTicket);
+        this.countThird = aggregateThird(tickets,winningTicket);
+        this.countforth = aggregateforth(tickets,winningTicket);
+        this.countFitft = aggregateFitft(tickets,winningTicket);
     }
+
+    private int aggregateThird(List<Ticket> tickets,Ticket winningTicket) {
+        throw new RuntimeException();
+    }
+
+    private int aggregateforth(List<Ticket> tickets,Ticket winningTicket) {
+        throw new RuntimeException();
+    }
+
+    private int aggregateFitft(List<Ticket> tickets,Ticket winningTicket) {
+        throw new RuntimeException();
+    }
+
+    private int aggregateFirst(List<Ticket> tickets,Ticket winningTicket) {
+        throw new RuntimeException();
+    }
+
 
     public List<Integer> winnerCount() {
         return List.of(countFirst, countThird, countforth, countFitft);
