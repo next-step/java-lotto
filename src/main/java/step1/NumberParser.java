@@ -10,7 +10,15 @@ public class NumberParser {
         for (char ch : chars) {
             addNumbers(numbers, ch);
         }
+
+        validate(numbers);
         return numbers;
+    }
+
+    private void validate(List<Integer> numbers) {
+        if (numbers.isEmpty()) {
+            throw new IllegalArgumentException("숫자가 없습니다.");
+        }
     }
 
     private void addNumbers(List<Integer> numbers, char ch) {

@@ -14,22 +14,15 @@ class StringSequenceCalculatorTest {
         final String input = token.split("=")[0];
         final Integer expected = Integer.parseInt(token.split("=")[1]);
 
-        final int calculate = new StringSequenceCalculator(
-                new NumberParser().parse(input),
-                new OperatorParser().parse(input)
-        ).calculate();
+        final int calculate = new StringSequenceCalculator().calculate(input);
 
         assertThat(calculate).isEqualTo(expected);
     }
 
-
     @ParameterizedTest(name = "숫자와 연산자가 존재해지 않으면 예외가 발생한다. {0}")
     @ValueSource(strings = {"12", "+-/", "", " "})
     void numbersIsNotEmptyTest(String input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new StringSequenceCalculator(
-                new NumberParser().parse(input),
-                new OperatorParser().parse(input)
-        ).calculate());
+        assertThatIllegalArgumentException().isThrownBy(() -> new StringSequenceCalculator().calculate(input));
     }
 
 }

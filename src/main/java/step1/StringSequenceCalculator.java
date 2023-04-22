@@ -3,25 +3,18 @@ package step1;
 import java.util.List;
 
 public class StringSequenceCalculator {
-    private final List<Integer> numbers;
-    private final List<Operator> operators;
+    private final NumberParser numberParser;
+    private final OperatorParser operatorParser;
 
-    public StringSequenceCalculator(List<Integer> numbers, List<Operator> operators) {
-        validate(numbers, operators);
-        this.numbers = numbers;
-        this.operators = operators;
+    public StringSequenceCalculator() {
+        this.numberParser = new NumberParser();
+        this.operatorParser = new OperatorParser();
     }
 
-    private void validate(List<Integer> numbers, List<Operator> operators) {
-        if (numbers.isEmpty()) {
-            throw new IllegalArgumentException("숫자가 없습니다.");
-        }
-        if (operators.isEmpty()) {
-            throw new IllegalArgumentException("연산자가 없습니다.");
-        }
-    }
+    public int calculate(String input) {
+        final List<Integer> numbers = numberParser.parse(input);
+        final List<Operator> operators = operatorParser.parse(input);
 
-    public int calculate() {
         int result = numbers.get(0);
         for (int i = 0; i < operators.size(); i++) {
             result = calculate(result, numbers.get(i + 1), operators.get(i));

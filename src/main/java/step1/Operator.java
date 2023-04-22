@@ -1,6 +1,7 @@
 package step1;
 
-import java.util.function.BiFunction;
+import java.util.Map;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
     PLUS("+", Integer::sum),
@@ -8,12 +9,26 @@ public enum Operator {
     MULTIPLY("*", (num1, num2) -> num1 * num2),
     DIVIDE("/", (num1, num2) -> num1 / num2);
 
+    private static final Map<String, Operator> SYMBOLS = Map.of(
+            Operator.PLUS.getSymbol(), Operator.PLUS,
+            Operator.MINUS.getSymbol(), Operator.MINUS,
+            Operator.MULTIPLY.getSymbol(), Operator.MULTIPLY,
+            Operator.DIVIDE.getSymbol(), Operator.DIVIDE
+    );
     private final String symbol;
-    private final BiFunction<Integer, Integer, Integer> operator;
+    private final BinaryOperator<Integer> operator;
 
-    Operator(String symbol, BiFunction<Integer, Integer, Integer> operator) {
+    Operator(String symbol, BinaryOperator<Integer> operator) {
         this.symbol = symbol;
         this.operator = operator;
+    }
+
+    public static Operator fromSymbol(String symbol) {
+        return SYMBOLS.get(symbol);
+    }
+
+    public static boolean isOperator(String symbol) {
+        return SYMBOLS.getOrDefault(symbol, null) != null;
     }
 
     public String getSymbol() {

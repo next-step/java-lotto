@@ -1,18 +1,12 @@
 package step1;
 
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
-        final NumberParser numberParser = new NumberParser();
-        final OperatorParser operatorParser = new OperatorParser();
-        final InputView inputView = new InputView(numberParser, operatorParser);
+        final InputView inputView = new InputView();
 
-        inputView.request();
-        final List<Integer> numbers = inputView.getNumbers();
-        final List<Operator> operators = inputView.getOperators();
+        final String input = inputView.request();
 
-        final int result = new StringSequenceCalculator(numbers, operators).calculate();
+        final int result = new StringSequenceCalculator().calculate(input);
 
         final ResultView resultView = new ResultView();
         resultView.print(result);
