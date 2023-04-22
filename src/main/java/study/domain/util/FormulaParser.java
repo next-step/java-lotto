@@ -10,14 +10,14 @@ public class FormulaParser {
     private List<String> formula;
 
     public FormulaParser(String input) {
-        this.formula = split(input);
+        this.formula = customSplit(input);
     }
 
     public List<String> getFormula() {
         return formula;
     }
 
-    private List<String> split(String input) {
+    private List<String> customSplit(String input) {
         if (validator(input)) {
             throw new IllegalArgumentException("입력값이 null 이거나 빈 공백 문자입니다.");
         }
