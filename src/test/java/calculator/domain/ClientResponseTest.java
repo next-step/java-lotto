@@ -43,13 +43,13 @@ public class ClientResponseTest {
     }
 
     @ParameterizedTest(name = "홀수를 2로 나눈 값을 반 내림 하여 반환한다. ex) {0} / 2 -> {1}")
-    @CsvSource(value = {"7:3", "9:4"}, delimiter = ':')
+    @CsvSource(value = {"7:3", "1:0"}, delimiter = ':')
     void oddNumberReturnTest(int numerator, int expect) {
         assertThat(numerator / MINIMUM_EVEN_NUMBER).isEqualTo(expect);
     }
 
     @ParameterizedTest(name = "홀수를 2로 나눈 값을 반 올림 하여 반환한다. ex) {0} / 2 -> {1}")
-    @CsvSource(value = {"7:4", "9:5"}, delimiter = ':')
+    @CsvSource(value = {"7:4", "1:1"}, delimiter = ':')
     void evenNumberReturnTest(int numerator, int expect) {
         assertThat((numerator / MINIMUM_EVEN_NUMBER) + TO_ROUND).isEqualTo(expect);
     }
