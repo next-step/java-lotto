@@ -14,13 +14,12 @@ public class CalculatorApplication {
     public static void progressCalculate() {
         ClientResponse clientResponse = clientResponse();
 
-        printResult(startCalculate(
+        printResult(calculate(
                 new Numbers(clientResponse.getNumbers()).numbers(),
                 new Operators(clientResponse.getSymbols()).operators()));
     }
 
-    public static Integer startCalculate(Queue<Integer> numbers, Queue<String> operators) {
-
+    public static Integer calculate(Queue<Integer> numbers, Queue<String> operators) {
         int result = 0;
 
         return 0;
