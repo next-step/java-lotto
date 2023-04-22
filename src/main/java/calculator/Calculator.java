@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class Calculator {
     public int add(String expression) {
+        validateNull(expression);
+        validateBlank(expression);
         String[] split = expression.split(" ");
         return Arrays.stream(split)
                 .filter(i -> !i.equals("+"))
@@ -12,6 +14,8 @@ public class Calculator {
     }
 
     public int substract(String expression) {
+        validateNull(expression);
+        validateBlank(expression);
         String[] split = expression.split(" ");
         int beforeOperation = 0;
         boolean substraction = false;
@@ -31,6 +35,8 @@ public class Calculator {
     }
 
     public int multiply(String expression) {
+        validateNull(expression);
+        validateBlank(expression);
         String[] split = expression.split(" ");
         int beforeOperation = 0;
         boolean multiplication = false;
@@ -50,6 +56,8 @@ public class Calculator {
     }
 
     public int divide(String expression) {
+        validateNull(expression);
+        validateBlank(expression);
         String[] split = expression.split(" ");
         int beforeOperation = 0;
         boolean division = false;
@@ -70,5 +78,17 @@ public class Calculator {
             beforeOperation = Integer.parseInt(s);
         }
         return beforeOperation;
+    }
+
+    private void validateNull(String expression) {
+        if (expression == null) {
+            throw new IllegalArgumentException("입력값이 null입니다.");
+        }
+    }
+
+    private void validateBlank(String expression) {
+        if (expression.isBlank()) {
+            throw new IllegalArgumentException("입력값이 공백입니다.");
+        }
     }
 }

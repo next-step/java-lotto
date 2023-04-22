@@ -2,8 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
 
@@ -49,6 +48,36 @@ public class CalculatorTest {
         String expression = "10 / 3";
 
         assertThatExceptionOfType(ArithmeticException.class)
+                .isThrownBy(() -> calculator.divide(expression));
+    }
+
+    @Test
+    void 입력값이_null일때_예외처리() {
+        Calculator calculator = new Calculator();
+        String expression = null;
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.add(expression));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.substract(expression));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.multiply(expression));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.divide(expression));
+    }
+
+    @Test
+    void 입력값이_blank일때_예외처리() {
+        Calculator calculator = new Calculator();
+        String expression = "     ";
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.add(expression));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.substract(expression));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.multiply(expression));
+        assertThatIllegalArgumentException()
                 .isThrownBy(() -> calculator.divide(expression));
     }
 }
