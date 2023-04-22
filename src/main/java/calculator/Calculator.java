@@ -7,11 +7,18 @@ public class Calculator {
         validateNull(expression);
         validateBlank(expression);
         String[] split = expression.split(" ");
+//        validateInput(split);
         return Arrays.stream(split)
                 .filter(i -> !i.equals("+"))
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
+
+    /*private void validateInput(String[] split) {
+        for (String input : split) {
+            if (input.getClass().getName())
+        }
+    }*/
 
     public int substract(String expression) {
         validateNull(expression);
@@ -69,6 +76,59 @@ public class Calculator {
                     throw new ArithmeticException("나누어 떨어지지 않는 값을 입력하셨습니다.");
                 }
                 division = false;
+                continue;
+            }
+            if (s.equals("/")) {
+                division = true;
+                continue;
+            }
+            beforeOperation = Integer.parseInt(s);
+        }
+        return beforeOperation;
+    }
+
+    public int calculate(String expression) {
+        String[] split = expression.split(" ");
+        int beforeOperation = 0;
+        boolean division = false;
+        boolean multiplication = false;
+        boolean addition = false;
+        boolean substraction = false;
+        for (String s : split) {
+            if (addition) {
+                beforeOperation = beforeOperation + Integer.parseInt(s);
+                addition = false;
+                continue;
+            }
+            if (substraction) {
+                beforeOperation = beforeOperation - Integer.parseInt(s);
+                substraction = false;
+                continue;
+            }
+            if (multiplication) {
+                beforeOperation *= Integer.parseInt(s);
+                multiplication = false;
+                continue;
+            }
+            if (division) {
+                double floatNum = (double) beforeOperation / Integer.parseInt(s);
+                beforeOperation = beforeOperation / Integer.parseInt(s);
+                if (floatNum != beforeOperation) {
+                    throw new ArithmeticException("나누어 떨어지지 않는 값을 입력하셨습니다.");
+                }
+                division = false;
+                continue;
+            }
+            if (s.equals("+")) {
+                addition = true;
+                continue;
+            }
+            if (s.equals("-")) {
+                substraction = true;
+                continue;
+            }
+            if (s.equals("*")) {
+                multiplication = true;
                 continue;
             }
             if (s.equals("/")) {
