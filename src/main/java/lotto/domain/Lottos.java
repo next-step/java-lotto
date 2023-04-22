@@ -21,10 +21,6 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Lotto getLotto(int index) {
-        return lottos.get(index);
-    }
-
     public int getLottoQuantity() {
         return lottos.size();
     }
@@ -36,5 +32,10 @@ public class Lottos {
                 .forEach(winners::addWinner);
 
         return winners;
+    }
+
+    @Override
+    public String toString() {
+        return "" + lottos;
     }
 }

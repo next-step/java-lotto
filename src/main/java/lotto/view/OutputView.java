@@ -6,10 +6,9 @@ import lotto.domain.Winners;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.stream.IntStream;
 
 public class OutputView {
-    public static final int ZERO = 0;
+    public static final int SUBSTRING_INDEX = 1;
     public static final int MINIMUM_PRIZE = 3;
     public static final int MAXIMUM_PRIZE = 6;
     public static final double PROFIT_CONDITION = 1.0;
@@ -19,9 +18,12 @@ public class OutputView {
     }
 
     public static void printLottos(Lottos lottos) {
-        IntStream.range(ZERO, lottos.getLottoQuantity())
-                .mapToObj(lottos::getLotto)
-                .forEach(System.out::println);
+        String viewLottos = lottos.toString()
+                .substring(SUBSTRING_INDEX, lottos.toString().length() - SUBSTRING_INDEX)
+                .replace("\\+s[", "[")
+                .replace("], ", "]\n");
+
+        System.out.println(viewLottos);
         System.out.println();
     }
 

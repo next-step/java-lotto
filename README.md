@@ -11,7 +11,7 @@
 - [X] 테스트 케이스에서 assertAll 활용
 - [X] 주 생성자에서 유효성 검증
 - [X] 소수점 계산 View로 책임 이동
-- [ ] Lotto 리스트로 뷰 출력
+- [X] Lotto 리스트로 뷰 출력
 - [ ] 셔플 테스트 수정
 - [ ] CustomException 활용
 - [ ] 당첨 번호 자료구조로 EnumMap 활용
