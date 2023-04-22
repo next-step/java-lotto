@@ -41,6 +41,8 @@
 - Operand
   - InputView 로 부터 전달받은 컬렉션에서 피연산자를 추출한다
   - 피연산자가 정수가 아니면 예외를 던진다.
+- OperandGroupOffset
+  - Operand가 어디까지 연산자를 제공했는지 offset 위치를 기록한다
 - Operator
   - 연산자 목록 관리 및 연산자 별로 수식을 관리한다
   - 연산 요청이 오면 계산한다
