@@ -3,7 +3,7 @@ package domain;
 import java.util.Objects;
 
 public class OperatorGroupOffset {
-    private static final int INITIALIZE_NUMBER = 0;
+    private static final int INITIALIZE_NUMBER = -1;
     private static final int INCREASE_NUMBER = 1;
     private int offset;
 
@@ -15,7 +15,7 @@ public class OperatorGroupOffset {
         return new OperatorGroupOffset(INITIALIZE_NUMBER);
     }
 
-    public int increase() {
+    public int increaseAndGet() {
         offset += INCREASE_NUMBER;
         return offset;
     }
