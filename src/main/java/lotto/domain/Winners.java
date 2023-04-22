@@ -8,15 +8,26 @@ public class Winners {
     private final int countThird;
     private final int countFirst;
 
+    private final int income;
+
 
     public Winners(List<Ticket> tickets, Ticket winningTicket) {
         this.countFirst = aggregateFirst(tickets,winningTicket);
         this.countThird = aggregateThird(tickets,winningTicket);
         this.countforth = aggregateforth(tickets,winningTicket);
         this.countFitft = aggregateFitft(tickets,winningTicket);
+        this.income = aggregateIncome();
     }
 
-    private int aggregateThird(List<Ticket> tickets,Ticket winningTicket) {
+    private int aggregateIncome() {
+        throw new RuntimeException();
+    }
+
+    public int getIncome() {
+        return income;
+    }
+
+    private int aggregateThird(List<Ticket> tickets, Ticket winningTicket) {
         throw new RuntimeException();
     }
 
