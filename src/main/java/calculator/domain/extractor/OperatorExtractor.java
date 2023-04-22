@@ -1,6 +1,6 @@
-package domain.extractor;
+package calculator.domain.extractor;
 
-import domain.Operator;
+import calculator.domain.Operator;
 
 import java.util.List;
 import java.util.stream.Collectors;

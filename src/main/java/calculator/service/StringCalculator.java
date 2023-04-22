@@ -1,8 +1,8 @@
-package service;
+package calculator.service;
 
-import domain.OperandGroup;
-import domain.Operator;
-import domain.OperatorGroup;
+import calculator.domain.OperandGroup;
+import calculator.domain.Operator;
+import calculator.domain.OperatorGroup;
 
 public class StringCalculator {
     private final OperatorGroup operatorGroup;

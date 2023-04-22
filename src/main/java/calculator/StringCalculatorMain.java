@@ -1,12 +1,14 @@
-import domain.OperandGroup;
-import domain.OperandGroupOffset;
-import domain.OperatorGroup;
-import domain.OperatorGroupOffset;
-import domain.extractor.OperandExtractor;
-import domain.extractor.OperatorExtractor;
-import service.StringCalculator;
-import view.InputView;
-import view.OutputView;
+package calculator;
+
+import calculator.domain.OperandGroup;
+import calculator.domain.OperandGroupOffset;
+import calculator.domain.OperatorGroup;
+import calculator.domain.OperatorGroupOffset;
+import calculator.domain.extractor.OperandExtractor;
+import calculator.domain.extractor.OperatorExtractor;
+import calculator.service.StringCalculator;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 import java.util.List;
 

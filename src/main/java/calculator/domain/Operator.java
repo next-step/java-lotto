@@ -1,6 +1,6 @@
-package domain;
+package calculator.domain;
 
-import common.error.ErrorMessage;
+import calculator.error.ErrorMessage;
 
 import java.util.Collections;
 import java.util.Map;

@@ -1,6 +1,6 @@
-package view;
+package calculator.view;
 
-import common.error.ErrorMessage;
+import calculator.error.ErrorMessage;
 
 import java.util.List;
 import java.util.Scanner;

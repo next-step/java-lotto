@@ -1,4 +1,4 @@
-package domain.extractor;
+package calculator.domain.extractor;
 
 import java.util.List;
 
