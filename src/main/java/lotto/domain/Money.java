@@ -7,13 +7,13 @@ public class Money {
     private final Integer amount;
 
     private Money(Integer amount) {
+        if (isNegativeNumberOrZero(amount)) {
+            throw new IllegalArgumentException("1000원 이상 입력해주세요.");
+        }
         this.amount = amount;
     }
 
     public static Money initMoney(int amount) {
-        if (isNegativeNumberOrZero(amount)) {
-            throw new IllegalArgumentException("1000원 이상 입력해주세요.");
-        }
         return new Money(amount);
     }
 
