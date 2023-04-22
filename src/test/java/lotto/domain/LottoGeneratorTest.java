@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.List;
 
+import static java.util.Comparator.naturalOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGeneratorTest {
@@ -16,6 +17,14 @@ class LottoGeneratorTest {
         LottoGenerator lottoGenerator = new LottoGenerator();
         List<Integer> lotto = lottoGenerator.generate();
         assertThat(lotto).hasSize(new HashSet<>(lotto).size());
+    }
+
+    @Test
+    @DisplayName("로또 번호는 오름차순으로 정렬한 리스트를 갖습니다.")
+    void test02() {
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        List<Integer> lotto = lottoGenerator.generate();
+        assertThat(lotto).isSortedAccordingTo(naturalOrder());
     }
 
 }

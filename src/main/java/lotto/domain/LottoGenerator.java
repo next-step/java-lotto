@@ -1,12 +1,19 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
     private final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
     public List<Integer> generate() {
+        List<Integer> lotto = createLottoNumbers();
+        Collections.sort(lotto);
+        return lotto;
+    }
+
+    private List<Integer> createLottoNumbers() {
         List<Integer> lotto = new ArrayList<>(6);
         while (lotto.size() < 6) {
             addLottoNumber(lotto);
