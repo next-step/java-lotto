@@ -2,59 +2,39 @@ package lottery.domain;
 
 import lottery.strategy.TicketIssueStrategy;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import static lottery.Constant.LOTTERY_TICKET_PRICE;
+import static lottery.domain.LotteryTicket.LOTTERY_TICKET_PRICE;
 
 public class LotteryVendingMachine {
-    private static final int BALANCE_ZERO = 0;
-
-    private final List<LotteryTicket> soldLotteryTickets;
-    private final TicketIssueStrategy issueStrategy;
-    private int balance;
-
-    public LotteryVendingMachine(TicketIssueStrategy issueStrategy) {
-        this.balance = BALANCE_ZERO;
-        this.soldLotteryTickets = new ArrayList<>();
-        this.issueStrategy = issueStrategy;
+    public LotteryVendingMachine() {
     }
 
-    public void insertMoney(int money) {
-        if (money % LOTTERY_TICKET_PRICE != 0) {
-            throw new IllegalArgumentException("금액은 " + LOTTERY_TICKET_PRICE + "원 단위로 입력해주세요.");
-        }
-        this.balance += money;
-    }
-
-    public LotteryTicket sellTicket() {
-        if (balance < LOTTERY_TICKET_PRICE) {
-            throw new IllegalStateException("잔액이 부족합니다.");
-        }
-        this.balance -= LOTTERY_TICKET_PRICE;
-        this.soldLotteryTickets.add(issueTicket());
-
-        return this.soldLotteryTickets.get(this.soldLotteryTickets.size() - 1);
-    }
-
-    public LotteryTicket issueTicket() {
+    public LotteryTicket issueTicket(TicketIssueStrategy issueStrategy) {
         return issueStrategy.issue();
     }
 
-    public int getBalance() {
-        return balance;
+    public List<LotteryTicket> sellTickets(int money, TicketIssueStrategy issueStrategy) {
+        int ticketCount = calculateNumberOfTickets(money);
+        return issueTickets(ticketCount, issueStrategy);
     }
 
-    public int soldCount() {
-        return soldLotteryTickets.size();
-    }
-
-    public List<LotteryTicket> sellAvailableTickets() {
-        List<LotteryTicket> sellTickets = new ArrayList<>();
-        while (balance >= LOTTERY_TICKET_PRICE) {
-            sellTickets.add(sellTicket());
+    public int calculateNumberOfTickets(int money) {
+        if (!isValidMoney(money)) {
+            throw new IllegalArgumentException("금액은 " + LOTTERY_TICKET_PRICE + "원 단위로 입력해주세요.");
         }
-        return Collections.unmodifiableList(sellTickets);
+        return money / LOTTERY_TICKET_PRICE;
+    }
+
+    private boolean isValidMoney(int money) {
+        return money % LOTTERY_TICKET_PRICE == 0;
+    }
+
+    private List<LotteryTicket> issueTickets(int ticketCount, TicketIssueStrategy issueStrategy) {
+        return IntStream.range(0, ticketCount)
+                .mapToObj(i -> issueTicket(issueStrategy))
+                .collect(Collectors.toList());
     }
 }

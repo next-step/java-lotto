@@ -1,9 +1,7 @@
 package lottery.controller;
 
-import lottery.domain.LotteryPrize;
-import lottery.domain.LotteryRound;
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryVendingMachine;
+import lottery.domain.*;
+import lottery.strategy.TicketIssueStrategy;
 import lottery.view.InputView;
 import lottery.view.OutputView;
 
@@ -17,20 +15,21 @@ public class LotteryController {
         this.vendingMachine = vendingMachine;
     }
 
-    public void sell() {
+    public void sell(TicketIssueStrategy issueStrategy) {
         Scanner scanner = new Scanner(System.in);
         int purchaseMoney = InputView.readPurchaseMoney(scanner);
 
-        vendingMachine.insertMoney(purchaseMoney);
-        List<LotteryTicket> tickets = vendingMachine.sellAvailableTickets();
+        List<LotteryTicket> tickets = vendingMachine.sellTickets(purchaseMoney, issueStrategy);
         OutputView.printPurchaseCount(tickets.size());
         OutputView.printPurchaseTickets(tickets);
 
         List<Integer> prizeTicketInts = InputView.readPrizeTicketNumbers(scanner);
-        LotteryTicket prizeTicketNumbers = LotteryTicket.of(prizeTicketInts);
-        LotteryRound lotteryRound = new LotteryRound(prizeTicketNumbers);
+        LotteryNumber bonusNumber = LotteryNumber.valueOf(InputView.readBonusNumber(scanner));
+
+        LotteryTicket prizeTicketNumbers = LotteryTicket.valueOf(prizeTicketInts);
+        LotteryRound lotteryRound = new LotteryRound(prizeTicketNumbers, bonusNumber);
         List<LotteryPrize> lotteryPrizes = lotteryRound.matches(tickets);
-        
+
         OutputView.printResultStatistics(lotteryPrizes);
     }
 }

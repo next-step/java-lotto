@@ -2,10 +2,10 @@ package lottery.domain;
 
 import java.util.Objects;
 
-import static lottery.Constant.LOTTERY_MAX_NUMBER;
-import static lottery.Constant.LOTTERY_MIN_NUMBER;
-
 public class LotteryNumber {
+    public static final int LOTTERY_MIN_NUMBER = 1;
+    public static final int LOTTERY_MAX_NUMBER = 45;
+
     private final int number;
 
     public LotteryNumber(int number) {
@@ -17,6 +17,10 @@ public class LotteryNumber {
 
     private static boolean isInRange(int number) {
         return number >= LOTTERY_MIN_NUMBER && number <= LOTTERY_MAX_NUMBER;
+    }
+
+    public static LotteryNumber valueOf(int number) {
+        return new LotteryNumber(number);
     }
 
     public int getNumber() {
