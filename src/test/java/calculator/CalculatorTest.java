@@ -3,6 +3,7 @@ package calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class CalculatorTest {
 
@@ -40,5 +41,14 @@ public class CalculatorTest {
         int result = calculator.divide(expression);
 
         assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    void 나눗셈_예외_처리() {
+        Calculator calculator = new Calculator();
+        String expression = "10 / 3";
+
+        assertThatExceptionOfType(ArithmeticException.class)
+                .isThrownBy(() -> calculator.divide(expression));
     }
 }
