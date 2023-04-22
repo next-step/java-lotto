@@ -4,6 +4,8 @@ import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Winners;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.stream.IntStream;
 
 public class OutputView {
@@ -39,7 +41,11 @@ public class OutputView {
 
     private static void printProfit(Winners resultMap, Money lottoAmount) {
         double profit = resultMap.getProfit(lottoAmount);
-        System.out.print("총 수익률은 " + profit + "입니다.");
+
+        DecimalFormat form = new DecimalFormat("#.##");
+        form.setRoundingMode(RoundingMode.DOWN);
+
+        System.out.print("총 수익률은 " + form.format(profit) + "입니다.");
 
         printRealProfit(profit);
         printStandardProfit(profit);

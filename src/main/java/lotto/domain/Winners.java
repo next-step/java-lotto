@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,10 +27,7 @@ public class Winners {
                 .mapToInt(Statistics::getPrize)
                 .reduce(DEFAULT_VALUE, Integer::sum);
 
-        DecimalFormat form = new DecimalFormat("#.##");
-        form.setRoundingMode(RoundingMode.DOWN);
-
-        return Double.parseDouble(form.format((double) sum / amount.getAmount()));
+        return (double) sum / amount.getAmount();
     }
 
 }

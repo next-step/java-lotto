@@ -58,7 +58,7 @@ class WinnersTest {
         winners.addWinner(matchingBall);
 
         assertThat(winners.getProfit(amount))
-                .isEqualTo(0.35);
+                .isEqualTo((double) 5000 / 14000);
     }
 
     @Test
