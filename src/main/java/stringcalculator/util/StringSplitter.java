@@ -5,6 +5,9 @@ import java.util.List;
 
 public class StringSplitter {
 
+    private StringSplitter() {
+    }
+
     private static final String DELIMITER = " ";
 
     public static List<String> split(String input) {

@@ -2,6 +2,9 @@ package stringcalculator.util;
 
 public class StringParser {
 
+    private StringParser() {
+    }
+
     public static int parseInt(String input) {
         try {
             return Integer.parseInt(input);

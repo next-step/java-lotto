@@ -13,7 +13,7 @@ public class StringCalculator {
         List<String> tokens = split(input);
 
         int sizeOfTokens = tokens.size();
-        accumulatedNumber = Integer.parseInt(tokens.get(0));
+        accumulatedNumber = StringParser.parseInt(tokens.get(0));
         for (int i = 2; i < sizeOfTokens; i += 2) {
             calculateOneStage(tokens, i);
         }
