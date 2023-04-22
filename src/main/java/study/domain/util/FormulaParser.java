@@ -1,0 +1,30 @@
+package study.domain.util;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class FormulaParser {
+
+    private static final String DELIMITER = " ";
+
+    private List<String> formula;
+
+    public FormulaParser(String input) {
+        this.formula = split(input);
+    }
+
+    public List<String> getFormula() {
+        return formula;
+    }
+
+    private List<String> split(String input) {
+        if (validator(input)) {
+            throw new IllegalArgumentException("입력값이 null 이거나 빈 공백 문자입니다.");
+        }
+        return Arrays.asList(input.split(DELIMITER));
+    }
+
+    private boolean validator(String input) {
+        return input == null || input.isEmpty() || input.startsWith(DELIMITER);
+    }
+}
