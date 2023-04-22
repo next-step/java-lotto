@@ -7,12 +7,12 @@ public class Expression {
     private final List<Node> nodes;
     private final List<Operator> operators;
 
-    public Expression(List<Node> nodes, List<Operator> operators) {
-        this.nodes = nodes;
-        this.operators = operators;
+    public Expression(List<String> inputArray) {
+        this.nodes = extractNodes(inputArray);
+        this.operators = extractOperators(inputArray);
     }
 
-    public static List<Node> extractNodes(List<String> inputList) {
+    private List<Node> extractNodes(List<String> inputList) {
         List<Node> nodes = new ArrayList<>();
         for (String inputString : inputList) {
             extractNode(nodes, inputString);
@@ -20,13 +20,13 @@ public class Expression {
         return nodes;
     }
 
-    private static void extractNode(List<Node> nodes, String token) {
-        if(Node.nodeConvertible(token)) {
+    private void extractNode(List<Node> nodes, String token) {
+        if (Node.nodeConvertible(token)) {
             nodes.add(new Node(token));
         }
     }
 
-    public static List<Operator> extractOperators(List<String> inputs) {
+    private List<Operator> extractOperators(List<String> inputs) {
         List<Operator> operators = new ArrayList<>();
         for (String inputString : inputs) {
             extractOperator(operators, inputString);
