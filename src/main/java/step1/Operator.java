@@ -4,14 +4,14 @@ import java.util.function.BiFunction;
 
 public class Operator {
 
-    private final BiFunction<Integer,Integer, Integer> operator;
+    private final BiFunction<Integer, Integer, Integer> operator;
 
     public Operator(String current) {
-        if(current.equals("+")) {
+        if (current.equals("+")) {
             this.operator = (i1, i2) -> i1 + i2;
             return;
         }
-        if(current.equals("-")) {
+        if (current.equals("-")) {
             this.operator = (i1, i2) -> i1 - i2;
             return;
         }
