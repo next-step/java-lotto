@@ -4,46 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
-    private final List<Node> nodeList;
-    private final List<Operator> operatorList;
+    private final List<Node> nodes;
+    private final List<Operator> operators;
 
-    public Expression(List<Node> nodeList, List<Operator> operatorList) {
-        this.nodeList = nodeList;
-        this.operatorList = operatorList;
+    public Expression(List<Node> nodes, List<Operator> operators) {
+        this.nodes = nodes;
+        this.operators = operators;
     }
 
     public static List<Node> extractNodes(List<String> inputList) {
-        List<Node> nodeList = new ArrayList<>();
+        List<Node> nodes = new ArrayList<>();
         for (String inputString : inputList) {
-            extractNode(nodeList, inputString);
+            extractNode(nodes, inputString);
         }
-        return nodeList;
+        return nodes;
     }
 
-    private static void extractNode(List<Node> nodeList, String token) {
+    private static void extractNode(List<Node> nodes, String token) {
         if(Node.isNode(token)) {
-            nodeList.add(new Node(token));
+            nodes.add(new Node(token));
         }
     }
 
-    public static List<Operator> extractOperators(List<String> inputList) {
-        List<Operator> operatorList = new ArrayList<>();
-        for (String inputString : inputList) {
-            extractOperator(operatorList, inputString);
+    public static List<Operator> extractOperators(List<String> inputs) {
+        List<Operator> operators = new ArrayList<>();
+        for (String inputString : inputs) {
+            extractOperator(operators, inputString);
         }
-        return operatorList;
+        return operators;
     }
 
-    private static void extractOperator(List<Operator> operatorList, String token) {
+    private static void extractOperator(List<Operator> operators, String token) {
         if (Operator.isOperator(token)) {
-            operatorList.add(new Operator(token));
+            operators.add(new Operator(token));
         }
     }
 
     public int execute() {
-        int sum = nodeList.get(0).getValue();
-        for (int i = 0; i < operatorList.size(); i++) {
-            sum = operatorList.get(i).calculate(sum, nodeList.get(i + 1).getValue());
+        int sum = nodes.get(0).getValue();
+        for (int i = 0; i < operators.size(); i++) {
+            sum = operators.get(i).calculate(sum, nodes.get(i + 1).getValue());
         }
         return sum;
     }
