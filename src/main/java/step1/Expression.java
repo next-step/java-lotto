@@ -14,9 +14,9 @@ public class Expression {
 
     public static List<Node> extractNodes(List<String> inputList) {
         List<Node> nodeList = new ArrayList<>();
-        for( int i=0 ; i<inputList.size() ; i++ ) {
+        for (int i = 0; i < inputList.size(); i++) {
             String current = inputList.get(i);
-            if(i%2 == 0) {
+            if (i % 2 == 0) {
                 nodeList.add(new Node(current));
             }
         }
@@ -25,9 +25,9 @@ public class Expression {
 
     public static List<Operator> extractOperators(List<String> inputList) {
         List<Operator> operatorList = new ArrayList<>();
-        for( int i=0 ; i<inputList.size() ; i++ ) {
+        for (int i = 0; i < inputList.size(); i++) {
             String current = inputList.get(i);
-            if(i%2 == 1) {
+            if (i % 2 == 1) {
                 operatorList.add(new Operator(current));
             }
         }
@@ -36,7 +36,7 @@ public class Expression {
 
     public int execute() {
         int sum = nodeList.get(0).getValue();
-        for (int i =0 ; i<operatorList.size() ; i++) {
+        for (int i = 0; i < operatorList.size(); i++) {
             sum = operatorList.get(i).calculate(sum, nodeList.get(i + 1).getValue());
         }
         return sum;
