@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutomaticStrategy extends LottoStrategy {
+public class AutomaticStrategy implements LottoStrategy {
     @Override
     public List<LottoNumber> lottoNumbers() {
         final List<LottoNumber> lottoNumbers = new ArrayList<>();

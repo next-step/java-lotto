@@ -1,35 +1,26 @@
 package lotto.domain;
 
-import lotto.domain.strategy.LottoStrategy;
 import lotto.dto.LottoNumbersDto;
 import lotto.dto.WinningStatDto;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
-    private final Amount amount;
-    private final LottoList lottoList;
-    private Lotto winningLotto;
 
-    public LottoMachine(int amount, LottoStrategy lottoStrategy) {
-        this.amount = new Amount(amount);
-        this.lottoList = new LottoList(this.amount.calculateUnitCount(LOTTO_PRICE), lottoStrategy);
+    public int calculateUnitCount(Amount amount) {
+        return amount.calculateUnitCount(LOTTO_PRICE);
     }
 
-    public int countNumberOfLottoTickets() {
-        return this.amount.calculateUnitCount(LOTTO_PRICE);
+    public LottoNumbersDto lottoNumbersDto(Lottos lottos) {
+        return lottos.lottoNumbersDto();
     }
 
-    public LottoNumbersDto lottoNumbersDto() {
-        return this.lottoList.lottoNumbersDto();
+    public Lotto winningLotto(String winningNumbers) {
+        return Lotto.winningLotto(winningNumbers);
     }
 
-    public void conclusionWinningNumbers(String winningNumbers) {
-        this.winningLotto = Lotto.winningLotto(winningNumbers);
-    }
-
-    public WinningStatDto winningStat() {
-        final WinningStatDto winningStatDto = this.lottoList.rating(winningLotto);
-        winningStatDto.setRateOfReturn(this.amount);
+    public WinningStatDto winningStat(Lottos lottos, Lotto winningLotto, Amount amount) {
+        final WinningStatDto winningStatDto = lottos.rating(winningLotto);
+        winningStatDto.setRateOfReturn(amount);
 
         return winningStatDto;
     }

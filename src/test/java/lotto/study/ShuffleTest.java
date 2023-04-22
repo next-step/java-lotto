@@ -20,4 +20,11 @@ public class ShuffleTest {
         System.out.println(target);
         System.out.println(copy);
     }
+
+    @Test
+    void name() {
+        String target = "3,6, 16, 18, 20, 23";
+
+        System.out.println(Arrays.toString(target.replaceAll(" ", "").split(",")));
+    }
 }

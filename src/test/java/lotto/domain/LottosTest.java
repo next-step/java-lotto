@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoListTest {
+public class LottosTest {
     final LottoStrategy testStrategy = new TestStrategy();
 
     @Test
@@ -16,7 +16,7 @@ public class LottoListTest {
     void create() {
         final int unitCount = 6;
 
-        assertThat(new LottoList(unitCount, testStrategy))
+        assertThat(new Lottos(unitCount, testStrategy))
                 .extracting("lottoList")
                 .asList()
                 .hasSize(unitCount);
@@ -28,7 +28,7 @@ public class LottoListTest {
         final int unitCount = 6;
         final Lotto winningLotto = new Lotto(testStrategy);
 
-        assertThat(new LottoList(unitCount, testStrategy).rating(winningLotto))
+        assertThat(new Lottos(unitCount, testStrategy).rating(winningLotto))
                 .isInstanceOf(WinningStatDto.class)
                 .extracting("firstCount")
                 .isEqualTo(unitCount);
