@@ -17,18 +17,6 @@ public class Operator {
 		this.operator = operator;
 	}
 
-	public boolean isPlus() {
-		return this.operator.equals("+");
-	}
-
-	public boolean isMinus() {
-		return this.operator.equals("-");
-	}
-
-	public boolean isMultiply() {
-		return this.operator.equals("*");
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

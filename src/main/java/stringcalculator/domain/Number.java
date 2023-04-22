@@ -1,31 +1,42 @@
 package stringcalculator.domain;
 
-import java.util.Objects;
-
 public class Number {
 
 	private final int number;
 
-	public Number(int number) {
-		this.number = number;
+	public Number(String number) {
+		this.number = this.toInt(number);
 	}
 
-	public int getNumber() {
-		return number;
+	public String add(String number) {
+		return toString(this.number + toInt(number));
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Number number1 = (Number)o;
-		return number == number1.number;
+	public String subtract(String number) {
+		return toString(this.number - toInt(number));
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(number);
+	public String multiply(String number) {
+		return toString(this.number * toInt(number));
+	}
+
+	public String divide(String number) {
+		if (number.equals("0")) {
+			throw new IllegalArgumentException("나누려는 숫자는 0일 수 없습니다.");
+		}
+
+		return toString(this.number / toInt(number));
+	}
+
+	private int toInt(String number) {
+		try {
+			return Integer.parseInt(number);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("숫자는 정수만 입력 가능합니다.");
+		}
+	}
+
+	private String toString(int number) {
+		return String.valueOf(number);
 	}
 }
