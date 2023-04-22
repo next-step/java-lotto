@@ -28,13 +28,16 @@ public class Expression {
 
     public static List<Operator> extractOperators(List<String> inputList) {
         List<Operator> operatorList = new ArrayList<>();
-        for (int i = 0; i < inputList.size(); i++) {
-            String current = inputList.get(i);
-            if (i % 2 == 1) {
-                operatorList.add(new Operator(current));
-            }
+        for (String inputString : inputList) {
+            extractOperator(operatorList, inputString);
         }
         return operatorList;
+    }
+
+    private static void extractOperator(List<Operator> operatorList, String token) {
+        if (Operator.isOperator(token)) {
+            operatorList.add(new Operator(token));
+        }
     }
 
     public int execute() {
