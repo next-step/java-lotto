@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class OperandExtractorTest {
+class OperandGroupExtractorTest {
     private Extractor<?> extractor;
 
     @BeforeEach
@@ -41,7 +41,7 @@ class OperandExtractorTest {
 
     @ParameterizedTest(name = "input : {0} ")
     @MethodSource("getFailPairValue")
-    @DisplayName("연산자를 추출 실패하는 테스트")
+    @DisplayName("피연산자를 추출 실패하는 테스트")
     void extractFail(List<String> input) {
         assertThatIllegalArgumentException().isThrownBy(() -> extractor.extract(input))
                 .withMessage(ErrorMessage.NO_SUCH_OPERAND.getErrorMessage());
