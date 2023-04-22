@@ -19,8 +19,10 @@ public enum Statistics {
     }
 
     public static int getPrize(int matchingBall) {
-        return Arrays.stream(values()).filter(s -> s.matchingBall == matchingBall)
-                .findFirst().map(s -> s.prize)
+        return Arrays.stream(values())
+                .filter(s -> s.matchingBall == matchingBall)
+                .findFirst()
+                .map(s -> s.prize)
                 .orElse(ZERO);
     }
 }
