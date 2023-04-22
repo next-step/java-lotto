@@ -40,14 +40,16 @@ public class Calculator {
 
   private static List<String> validateOperators(List<String> operators) {
     return operators.stream()
-            .peek(Calculator::validateOperator)
+            .map(Calculator::validateOperator)
             .collect(Collectors.toList());
   }
 
-  private static void validateOperator(String operator) {
+  private static String validateOperator(String operator) {
     if (!matchOperator(operator)) {
       throw new IllegalArgumentException(ILLEGAL_OPERATOR_MESSAGE);
     }
+
+    return operator;
   }
 
   private static boolean matchOperator(String operator) {
@@ -58,7 +60,7 @@ public class Calculator {
 
   public int calculate() {
     return operands.operands().stream()
-            .map(Operand::number)
+            .map(Operand::operand)
             .reduce((total, cur) -> operators.next().applyCalculation(total, cur))
             .get();
   }
