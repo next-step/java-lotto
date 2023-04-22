@@ -5,10 +5,10 @@ public class Number {
     private int number;
 
     public Number(String input) {
-        if(isNullOrEmpty(input)) {
+        if (isNullOrEmpty(input)) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
-        if(isNotNumeric(input)) {
+        if (isNotNumeric(input)) {
             throw new NumberFormatException("숫자가 아닙니다.");
         }
         this.number = parseInt(input);

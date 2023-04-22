@@ -52,10 +52,12 @@ public class NumberTest {
     void 뺄셈() {
         assertThat(number1.minus(number2)).isEqualTo(2);
     }
+
     @Test
     void 곱셈() {
         assertThat(number1.multiply(number2)).isEqualTo(8);
     }
+
     @Test
     void 나눗셈() {
         assertThat(number1.divide(number2)).isEqualTo(2);

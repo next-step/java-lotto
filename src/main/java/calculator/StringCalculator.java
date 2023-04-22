@@ -21,14 +21,14 @@ public class StringCalculator {
         List<Number> numbers = new ArrayList<>();
         List<Operator> operators = new ArrayList<>();
 
-        for(int i = BEGIN_INDEX; i < arr.length; i++) {
+        for (int i = BEGIN_INDEX; i < arr.length; i++) {
             makeNumber(arr, numbers, i);
             makeOperator(arr, operators, i);
         }
 
         initResult(numbers.get(BEGIN_INDEX));
 
-        for(int i = BEGIN_INDEX; i < operators.size(); i++) {
+        for (int i = BEGIN_INDEX; i < operators.size(); i++) {
             calculate(numbers, operators, i);
         }
     }
@@ -49,37 +49,37 @@ public class StringCalculator {
     }
 
     private void plus(List<Number> numbers, List<Operator> operators, int i) {
-        if(operators.get(i).isPlus()) {
+        if (operators.get(i).isPlus()) {
             result.plus(numbers.get(i + INCREMENT_NEXT_INDEX));
         }
     }
 
     private void minus(List<Number> numbers, List<Operator> operators, int i) {
-        if(operators.get(i).isMinus()) {
+        if (operators.get(i).isMinus()) {
             result.minus(numbers.get(i + INCREMENT_NEXT_INDEX));
         }
     }
 
     private void multiply(List<Number> numbers, List<Operator> operators, int i) {
-        if(operators.get(i).isMultiply()) {
+        if (operators.get(i).isMultiply()) {
             result.multiply(numbers.get(i + INCREMENT_NEXT_INDEX));
         }
     }
 
     private void divide(List<Number> numbers, List<Operator> operators, int i) {
-        if(operators.get(i).isDivide()) {
+        if (operators.get(i).isDivide()) {
             result.divide(numbers.get(i + INCREMENT_NEXT_INDEX));
         }
     }
 
     private static void makeNumber(String[] arr, List<Number> numbers, int i) {
-        if(isEven(i)) {
+        if (isEven(i)) {
             numbers.add(new Number(arr[i]));
         }
     }
 
     private static void makeOperator(String[] arr, List<Operator> operators, int i) {
-        if(isOdd(i)) {
+        if (isOdd(i)) {
             operators.add(new Operator(arr[i]));
         }
     }
