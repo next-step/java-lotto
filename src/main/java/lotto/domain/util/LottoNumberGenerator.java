@@ -1,13 +1,17 @@
-package lotto.domain;
+package lotto.domain.util;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class LottoNumberGenerator {
+public final class LottoNumberGenerator {
+
     private static final int RANDOM_NUMBER_MINIMUM = 1;
     private static final int RANDOM_NUMBER_MAXIMUM = 45;
 
-    // TODO: 추후 객체생성이 불필요하면 클래스 메서드로 변경
-    public int generate() {
+    private LottoNumberGenerator() {
+        throw new IllegalCallerException("잘못된 객체 생성 입니다.");
+    }
+
+    public static int generate() {
         return ThreadLocalRandom
                 .current()
                 .nextInt(RANDOM_NUMBER_MINIMUM, RANDOM_NUMBER_MAXIMUM + 1);

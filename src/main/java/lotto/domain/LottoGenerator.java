@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import lotto.domain.util.LottoNumberGenerator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
-    private final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-
+    
     public List<Integer> generate() {
         List<Integer> lotto = createLottoNumbers();
         Collections.sort(lotto);
@@ -22,7 +23,7 @@ public class LottoGenerator {
     }
 
     private void addLottoNumber(List<Integer> lotto) {
-        int generatedNumber = lottoNumberGenerator.generate();
+        int generatedNumber = LottoNumberGenerator.generate();
         if (!lotto.contains(generatedNumber)) {
             lotto.add(generatedNumber);
         }
