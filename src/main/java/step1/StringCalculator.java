@@ -3,6 +3,9 @@ package step1;
 import java.util.ArrayList;
 import java.util.List;
 
+import static step1.Expression.extractNodeList;
+import static step1.Expression.extractOperatorList;
+
 public class StringCalculator {
 
     public int calculate(String input) {
@@ -10,16 +13,11 @@ public class StringCalculator {
             throw new IllegalArgumentException();
         }
         String[] inputArray = tokenize(input);
-        List<Node> nodeList = Expression.extractNodeList(inputArray);
-        List<Operator> operatorList = Expression.extractOperatorList(inputArray);
-
-        Expression expression = new Expression(nodeList, operatorList);
+        Expression expression = new Expression(extractNodeList(inputArray), extractOperatorList(inputArray));
         return expression.execute();
-
     }
 
     private static String[] tokenize(String input) {
-        String[] inputArray = input.split(" ");
-        return inputArray;
+        return input.split(" ");
     }
 }
