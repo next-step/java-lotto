@@ -20,7 +20,7 @@ public class StringCalculatorTest {
     @Test
     public void plus() {
         //given
-        String input = "1+2";
+        String input = "1 + 2";
         int answer = 3;
         //when
         int result = stringCalculator.calculate(input);
@@ -32,7 +32,7 @@ public class StringCalculatorTest {
     @Test
     public void minus() {
         //given
-        String input = "25-3";
+        String input = "25 - 3";
         int answer = 22;
         //when
         int result = stringCalculator.calculate(input);
@@ -44,7 +44,7 @@ public class StringCalculatorTest {
     @Test
     public void multiply() {
         //given
-        String input = "7*14";
+        String input = "7 * 14";
         int answer = 98;
         //when
         int result = stringCalculator.calculate(input);
