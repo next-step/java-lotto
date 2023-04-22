@@ -2,7 +2,6 @@ package domain;
 
 import domain.extractor.Extractor;
 import domain.extractor.OperatorExtractor;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
@@ -20,7 +19,7 @@ class OperatorGroupTest {
 
     @RepeatedTest(value = 3)
     @DisplayName("연산자 제공 테스트")
-    void operatorProvideTest(@NotNull RepetitionInfo repetitionInfo) {
+    void operatorProvideTest(RepetitionInfo repetitionInfo) {
 
         Operator operator = getOperator(repetitionInfo);
 
