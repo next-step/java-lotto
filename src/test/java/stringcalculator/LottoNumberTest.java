@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class NumberTest {
+public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"a", "1a", "10 ", " a", "ㄱ", "일"})

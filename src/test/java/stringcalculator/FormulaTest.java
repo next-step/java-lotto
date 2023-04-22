@@ -15,7 +15,7 @@ public class FormulaTest {
     @Test
     void 계산() {
         Formula formula = new Formula("1 + 2");
-        SplitFormula.split(formula);
+        new SplitFormula().split(formula);
         formula.calculate();
         assertThat(formula.result()).isEqualTo(new Number("3"));
     }
@@ -23,7 +23,7 @@ public class FormulaTest {
     @Test
     void 연산_숫자_연산_분리() {
         Formula formula = new Formula("- 1 + 2 /");
-        SplitFormula.split(formula);
+        new SplitFormula().split(formula);
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("0"), new Number("1"),
                 new Number("2"), new Number("0")),
@@ -35,7 +35,7 @@ public class FormulaTest {
     @Test
     void 연산_숫자_분리() {
         Formula formula = new Formula("- 1 + 2");
-        SplitFormula.split(formula);
+        new SplitFormula().split(formula);
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("0"), new Number("1"),
                 new Number("2")),
@@ -47,7 +47,7 @@ public class FormulaTest {
     @Test
     void 숫자_연산_분리() {
         Formula formula = new Formula("1 + 2");
-        SplitFormula.split(formula);
+        new SplitFormula().split(formula);
         assertAll(
             () -> assertThat(formula.numbers()).containsExactly(new Number("1"), new Number("2")),
             () -> assertThat(formula.operations()).containsExactly(new Operator("+"))

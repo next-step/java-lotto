@@ -19,7 +19,7 @@ public class StringCalculator {
     }
 
     private static Formula splitFormula(Formula formula) {
-        SplitFormula.split(formula);
+        new SplitFormula().split(formula);
         return formula;
     }
 
