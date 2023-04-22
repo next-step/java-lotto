@@ -34,10 +34,15 @@ public class Expression {
         return operators;
     }
 
-    private static void extractOperator(List<Operator> operators, String token) {
+    private void extractOperator(List<Operator> operators, String token) {
+        if(Node.nodeConvertible(token)) {
+            return;
+        }
         if (Operator.operatorConvertible(token)) {
             operators.add(new Operator(token));
+            return;
         }
+        throw new IllegalArgumentException();
     }
 
     public int execute() {
