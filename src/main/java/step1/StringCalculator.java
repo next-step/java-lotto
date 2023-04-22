@@ -12,12 +12,12 @@ public class StringCalculator {
         if(input==null || input.isBlank() ) {
             throw new IllegalArgumentException();
         }
-        String[] inputArray = tokenize(input);
+        List<String> inputArray = tokenize(input);
         Expression expression = new Expression(extractNodeList(inputArray), extractOperatorList(inputArray));
         return expression.execute();
     }
 
-    private static String[] tokenize(String input) {
-        return input.split(" ");
+    private static List<String> tokenize(String input) {
+        return List.of(input.split(" "));
     }
 }
