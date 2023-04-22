@@ -1,7 +1,7 @@
-package state;
+package calculator.state;
 
 
-import operation.Operations;
+import calculator.operation.Operations;
 
 public class InOperationState implements State {
 

@@ -1,4 +1,4 @@
-package operation;
+package calculator.operation;
 
 import java.util.Map;
 
@@ -29,7 +29,7 @@ public enum Operations {
         if (symbol2Operations.containsKey(symbol)) {
             return symbol2Operations.get(symbol);
         }
-        throw new IllegalArgumentException("invalid operation:" + symbol);
+        throw new IllegalArgumentException("invalid calculator.operation:" + symbol);
     }
 
     @Override
