@@ -12,7 +12,7 @@ public class Expression {
         this.operatorList = operatorList;
     }
 
-    public static List<Node> extractNodeList(List<String> inputList) {
+    public static List<Node> extractNodes(List<String> inputList) {
         List<Node> nodeList = new ArrayList<>();
         for( int i=0 ; i<inputList.size() ; i++ ) {
             String current = inputList.get(i);
@@ -23,7 +23,7 @@ public class Expression {
         return nodeList;
     }
 
-    public static List<Operator> extractOperatorList(List<String> inputList) {
+    public static List<Operator> extractOperators(List<String> inputList) {
         List<Operator> operatorList = new ArrayList<>();
         for( int i=0 ; i<inputList.size() ; i++ ) {
             String current = inputList.get(i);
