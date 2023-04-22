@@ -18,7 +18,8 @@ public enum Operator {
     DIVISION("/", (leftOperand, rightOperand) -> {
         validDenominator(rightOperand);
         return leftOperand / rightOperand;
-    });
+    }),
+    SELF_MULTIPLICATION("", (leftOperand, rightOperand) -> leftOperand);
 
     private static final Map<String, Operator> separators;
     private static final int ZERO = 0;
