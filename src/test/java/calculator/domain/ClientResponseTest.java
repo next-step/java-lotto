@@ -53,4 +53,18 @@ public class ClientResponseTest {
     void evenNumberReturnTest(int numerator, int expect) {
         assertThat((numerator / MINIMUM_EVEN_NUMBER) + TO_ROUND).isEqualTo(expect);
     }
+
+    @Test
+    @DisplayName("사용자 입력값에서 숫자만 포함한 배열을 리턴한다.")
+    void numberReturnTest() {
+        ClientResponse clientResponse = new ClientResponse(CLIENT_TEST_DATA);
+        assertThat(clientResponse.getNumbers()).containsExactly("1","2","3","4");
+    }
+
+    @Test
+    @DisplayName("사용자 입력값에 단일 숫자 입력 했을 경우 단일 숫자 배열을 리턴한다.")
+    void singleNumberReturnTest() {
+        ClientResponse clientResponse = new ClientResponse("1");
+        assertThat(clientResponse.getNumbers()).containsExactly("1");
+    }
 }
