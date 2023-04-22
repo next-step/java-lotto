@@ -19,7 +19,7 @@ public class Operator {
         operator = operators.get(token);
     }
 
-    public static boolean isOperator(String token) {
+    public static boolean operatorConvertible(String token) {
         return operators.containsKey(token);
     }
 

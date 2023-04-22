@@ -21,7 +21,7 @@ public class Expression {
     }
 
     private static void extractNode(List<Node> nodes, String token) {
-        if(Node.isNode(token)) {
+        if(Node.nodeConvertible(token)) {
             nodes.add(new Node(token));
         }
     }
@@ -35,7 +35,7 @@ public class Expression {
     }
 
     private static void extractOperator(List<Operator> operators, String token) {
-        if (Operator.isOperator(token)) {
+        if (Operator.operatorConvertible(token)) {
             operators.add(new Operator(token));
         }
     }

@@ -7,7 +7,7 @@ public class Node {
         value = Integer.parseInt(current);
     }
 
-    public static boolean isNode(String token) {
+    public static boolean nodeConvertible(String token) {
         try {
             Integer.parseInt(token);
             return true;
