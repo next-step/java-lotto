@@ -1,22 +1,24 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lottos {
     public static final int ZERO = 0;
 
     private final List<Lotto> lottos;
 
-    Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
     public static Lottos initLottos(Money amount) {
-        List<Lotto> lottos = IntStream.range(ZERO, amount.getLottoQuantity())
-                .mapToObj(i -> Lotto.initLotto())
-                .collect(Collectors.toList());
+        List<Lotto> lottos = new ArrayList<>();
+        int bound = amount.getLottoQuantity();
+        for (int i = ZERO; i < bound; i++) {
+            Lotto lotto = Lotto.initLotto();
+            lottos.add(lotto);
+        }
 
         return new Lottos(lottos);
     }

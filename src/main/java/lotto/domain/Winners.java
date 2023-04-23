@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,7 +8,9 @@ public class Winners {
     public static final int DEFAULT_VALUE = 0;
     public static final int ADD_COUNT = 1;
 
+    // EnumMap 사용 고려 - key로 Statistics 사용
     private final Map<Integer, Integer> winnersCount = new HashMap<>();
+    private Map<Statistics, Integer> winners = new EnumMap<>(Statistics.class);
 
     public void addWinner(int matchingBall) {
         winnersCount.merge(matchingBall, ADD_COUNT, Integer::sum);
