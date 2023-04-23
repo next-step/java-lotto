@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.List;
 
 public class Winners {
-    private final int countFitft;
-    private final int countforth;
+    private final int countFifth;
+    private final int countFourth;
     private final int countThird;
     private final int countFirst;
 
@@ -14,8 +14,8 @@ public class Winners {
     public Winners(List<Ticket> tickets, Ticket winningTicket) {
         this.countFirst = aggregateFirst(tickets,winningTicket);
         this.countThird = aggregateThird(tickets,winningTicket);
-        this.countforth = aggregateforth(tickets,winningTicket);
-        this.countFitft = aggregateFitft(tickets,winningTicket);
+        this.countFourth = aggregateFourth(tickets,winningTicket);
+        this.countFifth = aggregateFifth(tickets,winningTicket);
         this.income = aggregateIncome();
     }
 
@@ -31,11 +31,11 @@ public class Winners {
         throw new RuntimeException();
     }
 
-    private int aggregateforth(List<Ticket> tickets,Ticket winningTicket) {
+    private int aggregateFourth(List<Ticket> tickets, Ticket winningTicket) {
         throw new RuntimeException();
     }
 
-    private int aggregateFitft(List<Ticket> tickets,Ticket winningTicket) {
+    private int aggregateFifth(List<Ticket> tickets, Ticket winningTicket) {
         throw new RuntimeException();
     }
 
@@ -43,8 +43,24 @@ public class Winners {
         throw new RuntimeException();
     }
 
-
-    public List<Integer> winnerCount() {
-        return List.of(countFirst, countThird, countforth, countFitft);
+    public int getCountFifth() {
+        return countFifth;
     }
+
+    public int getCountFourth() {
+        return countFourth;
+    }
+
+    public int getCountThird() {
+        return countThird;
+    }
+
+    public int getCountFirst() {
+        return countFirst;
+    }
+
+
+    //public List<Integer> winnerCount() {
+//        return List.of(countFirst, countThird, countFourth, countFifth);
+//    }
 }
