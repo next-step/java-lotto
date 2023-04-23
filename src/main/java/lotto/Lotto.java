@@ -14,18 +14,15 @@ public class Lotto {
         InputPresent inputPresent = new InputPresent();
         OutputPresent outputPresent = new OutputPresent();
         Match match = new Match();
-        //Analyst analyst = new Analyst();
+
         int count = inputPresent.purchaseCount();
-
-
         match.purchase(count);
         outputPresent.presentTickets(match.renderingTickets());
+
         Ticket winningTicket = inputPresent.winningNumber();
         match.winningTicket(winningTicket);
+
         outputPresent.presentWinner(new WinnerPresentVO(match.getWinners()));
         outputPresent.presentIncome(new IncomePresentVO(match.getWinners()));
     }
-
-
-
 }
