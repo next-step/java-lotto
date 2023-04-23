@@ -11,11 +11,13 @@ public class LottoResult {
     }
 
     public int countMatchingNumbers(List<Integer> winNumbers) {
-        return Math.toIntExact(
-                winNumbers.stream()
-                        .filter(lottoResult::contains)
-                        .count()
-        );
+        int matchingCount = 0;
+        for (Integer winNum : winNumbers) {
+            if (lottoResult.contains(winNum)) {
+                matchingCount++;
+            }
+        }
+        return matchingCount;
     }
 
     @Override

@@ -46,7 +46,7 @@ public enum LottoRank {
         }
     }
 
-    public static double calculatorRateOfReturn(int numOfLottoTicket) {
+    public static double calculateRateOfReturn(int numOfLottoTicket) {
         return (((MATCH_THREE.numOfWinner * MATCH_THREE.prizeAmount)
                 + (MATCH_FOUR.numOfWinner * MATCH_FOUR.prizeAmount)
                 + (MATCH_FIVE.numOfWinner * MATCH_FIVE.prizeAmount)

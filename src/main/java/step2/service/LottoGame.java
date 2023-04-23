@@ -10,7 +10,7 @@ public class LottoGame {
 
     private final int numOfLottoTicket;
 
-    private final  LottoNumberGenerator lottoNumberGenerator;
+    private final LottoNumberGenerator lottoNumberGenerator;
 
     public LottoGame(int numOfLottoTicket) {
         this.numOfLottoTicket = numOfLottoTicket;

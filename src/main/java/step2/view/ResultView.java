@@ -30,7 +30,7 @@ public class ResultView {
         System.out.println("5개 일치 (1500000원)- " + LottoRank.MATCH_FIVE.numOfWinner() + "개");
         System.out.println("6개 일치 (2000000000원)- " + LottoRank.MATCH_SIX.numOfWinner() + "개");
 
-        double rateOfReturn = LottoRank.calculatorRateOfReturn(numOfLottoTicket);
+        double rateOfReturn = LottoRank.calculateRateOfReturn(numOfLottoTicket);
         System.out.println("총 수익률은 " + rateOfReturn + "입니다.");
     }
 }
