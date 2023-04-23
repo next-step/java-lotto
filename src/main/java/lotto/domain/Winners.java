@@ -20,7 +20,10 @@ public class Winners {
     }
 
     private int aggregateIncome() {
-        throw new RuntimeException();
+        return Prize.FIRST.prizeCalculate(this.countFirst) +
+                Prize.THIRD.prizeCalculate(this.countFirst) +
+                Prize.FOURTH.prizeCalculate(this.countFirst) +
+                Prize.FIFTH.prizeCalculate(this.countFirst);
     }
 
     public int getIncome() {
