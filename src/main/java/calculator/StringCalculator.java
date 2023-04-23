@@ -17,7 +17,14 @@ public class StringCalculator {
     private Number result;
 
     public StringCalculator(String input) {
+        this.result = makeResult(input);
+    }
 
+    public int result() {
+        return result.intValue();
+    }
+
+    private Number makeResult(String input) {
         String[] arr = input.split(SEPARATOR);
 
         List<Number> numbers = makeNumbers(arr);
@@ -26,10 +33,8 @@ public class StringCalculator {
         initResult(numbers.get(BEGIN_INDEX));
 
         calculate(numbers, operators);
-    }
 
-    public int result() {
-        return result.intValue();
+        return result;
     }
 
     private List<Number> makeNumbers(String[] arr) {
