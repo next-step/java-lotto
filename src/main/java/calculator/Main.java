@@ -11,7 +11,7 @@ public class Main {
         String input = inputView.input();
 
         StringCalculator stringCalculator = new StringCalculator(input);
-        Number number = stringCalculator.calculateInOrderOf(input);
+        Number number = stringCalculator.calculate(input);
 
         ResultView.printResult(number.intValue());
     }

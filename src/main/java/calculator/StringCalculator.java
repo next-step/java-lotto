@@ -20,7 +20,7 @@ public class StringCalculator {
         this.number = initNumber(input);
     }
 
-    public Number calculateInOrderOf(String input) {
+    public Number calculate(String input) {
         String[] arr = makeArr(input);
 
         List<Number> numbers = makeNumbers(arr);
