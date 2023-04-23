@@ -1,9 +1,6 @@
 package calculator.domain;
 
-import static calculator.domain.OperatorsConstant.DIVIDE;
-import static calculator.domain.OperatorsConstant.MINUS;
-import static calculator.domain.OperatorsConstant.MULTIPLY;
-import static calculator.domain.OperatorsConstant.PLUS;
+import static calculator.domain.OperatorsConstant.*;
 
 import java.util.HashMap;
 import java.util.Map;
