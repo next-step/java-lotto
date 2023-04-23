@@ -36,7 +36,7 @@ public class Ticket {
     }
 
     public String rendering() {
-        return "["+ String.join(", ", this.numbers.stream().map(number -> Integer.toString(number)).collect(Collectors.toList())) + "]";
+        return "["+ this.numbers.stream().map(number -> Integer.toString(number)).sorted().collect(Collectors.joining(", ")) + "]";
     }
 
     public int overlapNumberCount(Ticket otherTicket) {
