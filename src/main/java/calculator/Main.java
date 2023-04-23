@@ -7,8 +7,7 @@ import calculator.view.ResultView;
 public class Main {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        String input = inputView.input();
+        String input = new InputView().input();
 
         StringCalculator stringCalculator = new StringCalculator(input);
         Number number = stringCalculator.calculate(input);
