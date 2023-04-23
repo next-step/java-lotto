@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
-    public static int LOTTO_PRICE = 1000;
+    public static long LOTTO_PRICE = 1_000;
     private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(int price) {
@@ -14,12 +15,19 @@ public class Lottos {
         }
 
         for (int i = 0; i < price / LOTTO_PRICE; i++) {
-            lottos.add(new Lotto());
+            this.lottos.add(new Lotto());
         }
     }
 
+    public Lottos(Lotto... lottos) {
+        Collections.addAll(this.lottos, lottos);
+    }
 
     public List<Lotto> lottos() {
         return this.lottos;
+    }
+
+    public long lottoPurchaseAmount() {
+        return LOTTO_PRICE * this.lottos.size();
     }
 }

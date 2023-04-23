@@ -29,6 +29,10 @@ public enum WinType {
         return matchedQuantity;
     }
 
+    public long getWinnings() {
+        return winnings;
+    }
+
     public static WinType find(long matchedQuantity) {
         if (WIN_TYPE_MAP.containsKey(matchedQuantity)) {
             return WIN_TYPE_MAP.get(matchedQuantity);
