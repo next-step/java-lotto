@@ -9,6 +9,8 @@ import lotto.utils.RandomUtils;
 
 public class LottoMachine {
 
+	private static final int BREAK_EVEN_POINT = 1;
+
 	private final List<Lotto> lottos;
 
 	public LottoMachine() {
@@ -61,6 +63,6 @@ public class LottoMachine {
 	}
 
 	public boolean isBenefit(double totalProfit) {
-		return totalProfit > 1;
+		return totalProfit > LottoMachine.BREAK_EVEN_POINT;
 	}
 }
