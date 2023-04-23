@@ -8,4 +8,9 @@ public class InputView {
         System.out.println("구입 금액을 입력해 주세요.");
         return sc.nextInt();
     }
+
+    public static String getLastWeekWinningNumber() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return sc.nextLine();
+    }
 }
