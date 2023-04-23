@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.TicketNumbersCountException;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,8 +14,19 @@ public class Ticket {
         this.numbers = numbers;
     }
 
-    public Ticket(String string) {
+    public Ticket(String stringNumbers) {
+        Set<Integer> numbers = parseToNumbers(stringNumbers);
+        validate(numbers);
+        this.numbers = numbers;
+    }
 
+    private Set<Integer> parseToNumbers(String stringNumbers) {
+        Set<Integer> numbers = new HashSet<>();
+        String[] splitNumbers = stringNumbers.split(", ");
+        for(String number: splitNumbers) {
+            numbers.add(Integer.parseInt(number));
+        }
+        return numbers;
     }
 
     private void validate(Set<Integer> numbers) {
