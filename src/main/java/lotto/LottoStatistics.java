@@ -17,8 +17,12 @@ public class LottoStatistics {
 
   public void increment(int matchCount) {
     if (matchCount >= 3) {
-      statistics.put(matchCount, statistics.get(matchCount + 1));
+      statistics.put(matchCount, statistics.get(matchCount) + 1);
     }
+  }
+
+  public Map<Integer, Integer> getStatistics() {
+    return statistics;
   }
 
   @Override
