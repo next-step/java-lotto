@@ -38,8 +38,12 @@ public class Match {
         winners = new Winners(tickets,winningTicket);
     }
 
-    public List<Integer> winnerStatus() {
-        return winners.winnerCount();
+
+    public Winners getWinners() {
+        if(winners == null) {
+            throw new RuntimeException("위너가 계산되지 읺았거나, 당첨번호가 입력되지 않았습니다");
+        }
+        return winners;
     }
 
     public double returnRate() {

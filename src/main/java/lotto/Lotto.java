@@ -4,8 +4,8 @@ import lotto.domain.Match;
 import lotto.domain.Ticket;
 import lotto.present.InputPresent;
 import lotto.present.OutputPresent;
-
-import java.util.Random;
+import lotto.present.vo.IncomePresentVO;
+import lotto.present.vo.WinnerPresentVO;
 
 public class Lotto {
 
@@ -22,8 +22,8 @@ public class Lotto {
         outputPresent.presentTickets(match.renderingTickets());
         Ticket winningTicket = inputPresent.winningNumber();
         match.winningTicket(winningTicket);
-        outputPresent.presentWinner(match.winnerStatus());
-        outputPresent.presentReturnRate(match.returnRate());
+        outputPresent.presentWinner(new WinnerPresentVO(match.getWinners()));
+        outputPresent.presentIncome(new IncomePresentVO(match.getWinners()));
     }
 
 

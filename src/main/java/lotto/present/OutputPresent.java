@@ -1,5 +1,8 @@
 package lotto.present;
 
+import lotto.present.vo.IncomePresentVO;
+import lotto.present.vo.WinnerPresentVO;
+
 import java.util.List;
 
 public class OutputPresent {
@@ -18,11 +21,11 @@ public class OutputPresent {
         }
     }
 
-    public void presentWinner(List<Integer> winnerStatus) {
+    public void presentWinner(WinnerPresentVO winnerPresentVO) {
 
     }
 
-    public void presentReturnRate(double returnRate) {
+    public void presentIncome(IncomePresentVO incomePresentVO) {
 
     }
 }
