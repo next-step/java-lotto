@@ -1,27 +1,24 @@
 package step2;
 
+import step2.domain.LottoGame;
+import step2.domain.LottoResult;
+import step2.view.InputView;
+import step2.view.PrintView;
+
 import java.util.List;
-import java.util.Map;
 
 public class Lotto {
 
     public static void main(String[] args) {
 
         int purchaseAmount = InputView.purchaseAmount();
+        LottoGame lottoGame = LottoGame.readyGame(purchaseAmount);
 
-        NumberGenerateStrategy strategy = new RandomStrategy();
-        NumberFactory numberFactory = new NumberFactory(strategy);
-        List<List<Integer>> purchaseNumber = numberFactory.createNumber(purchaseAmount);
-
+        List<List<Integer>> purchaseNumber = lottoGame.generateNumber();
         PrintView.purchaseNumber(purchaseNumber);
 
         List<Integer> winningNumber = InputView.winningNumber();
-
-        LottoResult lottoResult = LottoResult.makeResult();
-        Map<Integer, Integer> numberOfMatches = lottoResult.countNumber(purchaseNumber, winningNumber);
-        float rate = Rate.calculateRate(numberOfMatches, purchaseAmount);
-
-        PrintView.numberOfMatches(numberOfMatches);
-        PrintView.winningRate(rate);
+        LottoResult result  = lottoGame.countNumber(purchaseNumber, winningNumber);
+        PrintView.lottoResult(result);
     }
 }
