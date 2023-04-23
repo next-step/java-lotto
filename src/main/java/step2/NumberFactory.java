@@ -19,7 +19,7 @@ public class NumberFactory {
 
         for (int i = 0; i < amount; i++) {
             List<Integer> generate = strategy.generate();
-            numbers.add(generate);
+            numbers.add(new ArrayList<>(generate));
         }
 
         return numbers;
