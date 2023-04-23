@@ -24,7 +24,7 @@ public class WinStatistics {
     }
 
     public BigDecimal rateOfReturn() {
-        BigDecimal lottoPurchaseAmount = new BigDecimal(this.lottos.lottoPurchaseAmount());
+        BigDecimal lottoPurchaseAmount = new BigDecimal(this.lottos.purchaseAmount());
         return new BigDecimal(totalWinningAmount()).divide(lottoPurchaseAmount, 2, RoundingMode.DOWN);
     }
 

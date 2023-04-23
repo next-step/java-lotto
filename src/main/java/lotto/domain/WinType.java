@@ -38,6 +38,6 @@ public enum WinType {
             return WIN_TYPE_MAP.get(matchedQuantity);
         }
 
-        throw new IllegalArgumentException("WinType 을 찾을 수 없습니다. matchedQuantity: " + matchedQuantity);
+        return FAIL;
     }
 }

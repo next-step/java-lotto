@@ -18,6 +18,10 @@ public class Number implements Comparable<Number> {
         return number < MIN_NUMBER || number > MAX_NUMBER;
     }
 
+    public int number() {
+        return number;
+    }
+
     @Override
     public int compareTo(Number o) {
         return this.number - o.number;

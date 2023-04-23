@@ -9,7 +9,7 @@ public class Lottos {
     public static long LOTTO_PRICE = 1_000;
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int price) {
+    public Lottos(long price) {
         if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException("로또는 " + LOTTO_PRICE + "의 금액부터 구매가 가능합니다. 주문금액: " + price);
         }
@@ -27,7 +27,11 @@ public class Lottos {
         return this.lottos;
     }
 
-    public long lottoPurchaseAmount() {
-        return LOTTO_PRICE * this.lottos.size();
+    public long purchaseAmount() {
+        return LOTTO_PRICE * purchaseQuantity();
+    }
+
+    public int purchaseQuantity() {
+        return this.lottos.size();
     }
 }
