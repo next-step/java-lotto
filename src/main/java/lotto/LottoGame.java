@@ -1,34 +1,32 @@
 package lotto;
 
+import lotto.policy.LottoNumberGeneratePolicy;
+
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGame {
-    private static final List<Integer> lottoNumbers = IntStream.rangeClosed(1, 45)
-            .boxed()
-            .collect(Collectors.toList());
-    private final List<List<Integer>> lotteryTickets = new ArrayList<>();
+  private final LottoNumberGeneratePolicy numberGeneratePolicy;
+  private final LottoTickets lottoTickets;
 
-    public LottoGame(int purchaseAmount) {
-        int numberOfLotto = getNumberOfLotto(purchaseAmount);
-        for (int i = 0; i < numberOfLotto; i++) {
-            lotteryTickets.add(generateNumber());
-        }
-    }
+  public LottoGame(int purchaseAmount, LottoNumberGeneratePolicy numberGeneratePolicy) {
+    this.numberGeneratePolicy = numberGeneratePolicy;
+    this.lottoTickets = new LottoTickets(generateTickets(getTicketCount(purchaseAmount)));
+  }
 
-    private static int getNumberOfLotto(int purchaseAmount) {
-        return purchaseAmount / 1000;
-    }
+  private static int getTicketCount(int purchaseAmount) {
+    return purchaseAmount / 1000;
+  }
 
-    private static List<Integer> generateNumber() {
-        Collections.shuffle(lottoNumbers);
-        List<Integer> generatedNumbers = new ArrayList<>(lottoNumbers.subList(0, 6));
-        Collections.sort(generatedNumbers);
-        return generatedNumbers;
+  private List<LottoTicket> generateTickets(int ticketCount) {
+    List<LottoTicket> generatedTickets = new ArrayList<>();
+    for (int i = 0; i < ticketCount; i++) {
+      List<Integer> numbers = numberGeneratePolicy.generateNumbers();
+      generatedTickets.add(new LottoTicket(numbers));
     }
+    return generatedTickets;
+  }
 
-    public List<List<Integer>> getLotteryTickets() {
-        return lotteryTickets;
-    }
+  public LottoTickets getLottoTickets() {
+    return lottoTickets;
+  }
 }
