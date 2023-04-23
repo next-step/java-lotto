@@ -15,14 +15,14 @@ public class LottoMachineTest {
 	@DisplayName("구매한 만큼의 로또를 생성한다.")
 	@Test
 	void test1() {
-		assertThat(new LottoMachine(14000).lottosSize()).isEqualTo(14);
+		assertThat(new LottoMachine(14000).purchasedLottosSize()).isEqualTo(14);
 	}
 
 	@DisplayName("구매한 만큼의 로또를 생성한다. - 예외 케이스")
 	@ValueSource(ints = {800, 1400})
 	@ParameterizedTest
-	void test2(int buyAmount) {
-		assertThatIllegalArgumentException().isThrownBy(() -> new LottoMachine(buyAmount));
+	void test2(int purchaseAmount) {
+		assertThatIllegalArgumentException().isThrownBy(() -> new LottoMachine(purchaseAmount));
 	}
 
 	@DisplayName("총 수익을 계산한다.")
