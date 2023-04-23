@@ -28,19 +28,43 @@ public class Winners {
     }
 
     private int aggregateThird(List<Ticket> tickets, Ticket winningTicket) {
-        throw new RuntimeException();
+        int count = 0;
+        for (Ticket ticket : tickets) {
+            if (Prize.THIRD.isRight(ticket.overlapNumberCount(winningTicket))) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private int aggregateFourth(List<Ticket> tickets, Ticket winningTicket) {
-        throw new RuntimeException();
+        int count = 0;
+        for (Ticket ticket : tickets) {
+            if (Prize.FOURTH.isRight(ticket.overlapNumberCount(winningTicket))) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private int aggregateFifth(List<Ticket> tickets, Ticket winningTicket) {
-        throw new RuntimeException();
+        int count = 0;
+        for (Ticket ticket : tickets) {
+            if (Prize.FIFTH.isRight(ticket.overlapNumberCount(winningTicket))) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private int aggregateFirst(List<Ticket> tickets,Ticket winningTicket) {
-        throw new RuntimeException();
+        int count = 0;
+        for (Ticket ticket : tickets) {
+            if (Prize.FIRST.isRight(ticket.overlapNumberCount(winningTicket))) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public int getCountFifth() {
