@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final List<Number> LOTTO_NUMBERS = IntStream.range(Number.MIN_NUMBER, Number.MAX_NUMBER)
-                                                               .mapToObj(Number::new).collect(Collectors.toList());
     public static final int LOTTO_SIZE = 6;
 
     private final List<Number> numbers;
 
     public Lotto() {
+        List<Number> LOTTO_NUMBERS = IntStream.rangeClosed(Number.MIN_NUMBER, Number.MAX_NUMBER)
+                                              .mapToObj(Number::new).collect(Collectors.toList());
         Collections.shuffle(LOTTO_NUMBERS);
         List<Number> numbers = LOTTO_NUMBERS.subList(0, LOTTO_SIZE);
         Collections.sort(numbers);
@@ -29,5 +29,12 @@ public class Lotto {
 
     public List<Number> numbers() {
         return numbers;
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
