@@ -53,7 +53,7 @@ public class WinnersTest {
         //when
         int countFirst = winnersFixture.getCountFirst();
         //then
-        assertEquals(countFirst, answer);
+        assertEquals(answer, countFirst);
     }
 
     @DisplayName("3등 당첨통계가 계산된다(5개 번호 일치)")
@@ -64,7 +64,7 @@ public class WinnersTest {
         //when
         int countFirst = winnersFixture.getCountThird();
         //then
-        assertEquals(countFirst, answer);
+        assertEquals(answer, countFirst);
     }
     @DisplayName("4등 당첨통계가 계산된다(4개 번호 일치)")
     @Test
@@ -74,7 +74,7 @@ public class WinnersTest {
         //when
         int countFirst = winnersFixture.getCountFourth();
         //then
-        assertEquals(countFirst, answer);
+        assertEquals(answer, countFirst);
     }
     @DisplayName("5등 당첨통계가 계산된다(3개 번호 일치)")
     @Test
@@ -84,7 +84,7 @@ public class WinnersTest {
         //when
         int countFirst = winnersFixture.getCountFifth();
         //then
-        assertEquals(countFirst, answer);
+        assertEquals(answer, countFirst);
     }
     @DisplayName("당첨금액을 계산한다")
     @Test
@@ -94,7 +94,7 @@ public class WinnersTest {
         //when
         int income = winnersFixture.getIncome();
         //then
-        assertEquals(income, answer);
+        assertEquals(answer, income);
     }
 
     @DisplayName("투자금 대비 당첨금액의 비율을 사이의 소수점 둘째자리까지 표시한다")
