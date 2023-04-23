@@ -1,13 +1,10 @@
 package lotto;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class LottoTest {
 
@@ -20,7 +17,6 @@ public class LottoTest {
         System.setIn(new ByteArrayInputStream(inputString.getBytes()));
     }
 
-
     @DisplayName("로또앱을 실행하는 동작테스트를 자동화한다")
     @Test
     public void lottoApplicationContextTest() {
@@ -29,7 +25,6 @@ public class LottoTest {
                 "1000000"+System.lineSeparator()+
                 "1, 2, 3, 4, 5, 6"
         );
-        //consoleInput();
         //when
         Lotto.main(new String[]{});
         //then
