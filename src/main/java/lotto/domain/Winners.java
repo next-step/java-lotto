@@ -59,8 +59,7 @@ public class Winners {
         return countFirst;
     }
 
-
-    //public List<Integer> winnerCount() {
-//        return List.of(countFirst, countThird, countFourth, countFifth);
-//    }
+    public double returnRatio() {
+        throw new RuntimeException("투자금대비 당첨금 비율");
+    }
 }
