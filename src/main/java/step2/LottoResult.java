@@ -14,10 +14,10 @@ public class LottoResult {
 
     public static LottoResult makeResult() {
         Map<Integer, Integer> numberOfMatches = new HashMap<>();
-        numberOfMatches.put(3, 0);
-        numberOfMatches.put(4, 0);
-        numberOfMatches.put(5, 0);
-        numberOfMatches.put(6, 0);
+
+        for (int i = 0; i < 7; i++) {
+            numberOfMatches.put(i, 0);
+        }
 
         return new LottoResult(numberOfMatches);
     }
