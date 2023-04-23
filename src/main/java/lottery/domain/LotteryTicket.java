@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static lottery.Constant.LOTTERY_TICKET_SIZE;
-
 public class LotteryTicket {
+    public static final int LOTTERY_TICKET_SIZE = 6;
+    public static final int LOTTERY_TICKET_PRICE = 1_000;
+
     private final List<LotteryNumber> ticketNumbers;
 
     public LotteryTicket(List<LotteryNumber> ticketNumbers) {
@@ -16,7 +17,7 @@ public class LotteryTicket {
         }
     }
 
-    public static LotteryTicket of(List<Integer> numbers) {
+    public static LotteryTicket valueOf(List<Integer> numbers) {
         List<LotteryNumber> lotteryNumbers = numbers.stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList());
@@ -37,14 +38,18 @@ public class LotteryTicket {
                 .count();
     }
 
-    private boolean contains(LotteryNumber number) {
+    protected boolean contains(LotteryNumber number) {
         return ticketNumbers.contains(number);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LotteryTicket that = (LotteryTicket) o;
         return Objects.equals(ticketNumbers, that.ticketNumbers);
     }

@@ -6,18 +6,18 @@ import lottery.domain.LotteryTicket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import static lottery.Constant.*;
+import static lottery.domain.LotteryNumber.LOTTERY_MAX_NUMBER;
+import static lottery.domain.LotteryNumber.LOTTERY_MIN_NUMBER;
+import static lottery.domain.LotteryTicket.LOTTERY_TICKET_SIZE;
 
 public class RandomTicketIssueStrategy implements TicketIssueStrategy {
-    private static final List<LotteryNumber> allLotteryNumbers;
-
-    static {
-        allLotteryNumbers = new ArrayList<>();
-        for (int i = LOTTERY_MIN_NUMBER; i < LOTTERY_MAX_NUMBER; i++) {
-            allLotteryNumbers.add(new LotteryNumber(i));
-        }
-    }
+    private static final List<LotteryNumber> allLotteryNumbers =
+            IntStream.range(LOTTERY_MIN_NUMBER, LOTTERY_MAX_NUMBER + 1)
+                    .mapToObj(LotteryNumber::new)
+                    .collect(Collectors.toList());
 
     private static List<LotteryNumber> selectLotteryNumbers() {
         List<LotteryNumber> lotteryNumbers = new ArrayList<>();

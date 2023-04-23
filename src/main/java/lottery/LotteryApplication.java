@@ -8,8 +8,8 @@ import lottery.strategy.TicketIssueStrategy;
 public class LotteryApplication {
     public static void main(String[] args) {
         TicketIssueStrategy ticketIssueStrategy = new RandomTicketIssueStrategy();
-        LotteryVendingMachine vendingMachine = new LotteryVendingMachine(ticketIssueStrategy);
+        LotteryVendingMachine vendingMachine = new LotteryVendingMachine();
         LotteryController lotteryController = new LotteryController(vendingMachine);
-        lotteryController.sell();
+        lotteryController.sell(ticketIssueStrategy);
     }
 }

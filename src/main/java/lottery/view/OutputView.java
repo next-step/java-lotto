@@ -41,14 +41,17 @@ public class OutputView {
         for (LotteryPrize prize : LotteryPrize.values()) {
             printRank(prize, Collections.frequency(lotteryPrizes, prize));
         }
+        System.out.println();
     }
 
     private static void printRank(LotteryPrize prize, int count) {
         if (prize == LotteryPrize.NONE) {
             return;
         }
-        System.out.println(prize.calculateMatchingCount()
-                + "개 일치 (" + prize.calculatePrizeMoney()
-                + "원) - " + count + "개");
+        System.out.print(prize.calculateMatchingCount() + "개 일치");
+        if (prize.IsBonusMatched()) {
+            System.out.print(", 보너스 볼 일치");
+        }
+        System.out.println(" (" + prize.calculatePrizeMoney() + "원) - " + count + "개");
     }
 }
