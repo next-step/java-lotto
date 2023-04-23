@@ -4,8 +4,7 @@ import step2.service.LottoGame;
 import step2.view.InputView;
 import step2.view.ResultView;
 import step2.vo.LottoResults;
-
-import java.util.List;
+import step2.vo.WinnerInfo;
 
 public class Main {
 
@@ -16,13 +15,12 @@ public class Main {
         LottoGame lottoGame = new LottoGame(numOfLottoTicket);
         LottoResults lottoResults = lottoGame.executeGame();
 
-        ResultView resultView = new ResultView(numOfLottoTicket, lottoResults);
+        ResultView resultView = new ResultView(lottoResults);
         resultView.showLottoGameResults();
 
-        List<Integer> winNumbers = inputView.getWinNumbers();
-        List<Integer> numOfWinner = lottoResults.countNumOfWinner(winNumbers);
-        LottoRank.electWinner(numOfWinner);
+        WinnerInfo winnerInfo = new WinnerInfo(lottoResults.countNumOfWinner(inputView.getWinNumbers()));
 
-        resultView.showLottoWinners();
+        resultView.showLottoWinners(winnerInfo);
+        resultView.showRateOfReturn(winnerInfo.calculateRateOfReturn(numOfLottoTicket));
     }
 }
