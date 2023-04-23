@@ -11,11 +11,13 @@ public class LottoTickets {
         this.tickets = tickets;
     }
 
-    public LottoStatistics calculateLottoStatistics(Set<Integer> winningNumbers) {
+    public void calculateLottoStatistics(Set<Integer> winningNumbers) {
         for (LottoTicket ticket : tickets) {
             lottoStatistics.increment(ticket.matchCount(winningNumbers));
         }
+    }
 
+    public LottoStatistics getLottoStatistics() {
         return lottoStatistics;
     }
 

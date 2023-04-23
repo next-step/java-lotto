@@ -8,9 +8,13 @@ public class OutputView {
     for (LottoTicket lotteryTicket : lotteryTickets.getTickets()) {
       System.out.println(lotteryTicket.getNumbers());
     }
+    System.out.println();
   }
 
   public static void printLottoStatistics(LottoStatistics lottoStatistics) {
+    System.out.println();
+    System.out.println("당첨 통계");
+    System.out.println("--------------");
     lottoStatistics.getStatistics().entrySet().stream()
                    .sorted(Map.Entry.comparingByKey())
                    .forEach(entry ->
@@ -22,5 +26,10 @@ public class OutputView {
                            entry.getValue() + "개"
                        )
                    );
+  }
+
+  public static void printRateOfReturn(int purchaseAmount, LottoGame lottoGame) {
+    float rateOfReturn = LottoPrize.getRateOfReturn(purchaseAmount, lottoGame.getLottoTickets().getLottoStatistics());
+    System.out.println("총 수익률은 " + rateOfReturn + "입니다.");
   }
 }

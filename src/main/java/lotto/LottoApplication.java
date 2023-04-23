@@ -14,7 +14,8 @@ public class LottoApplication {
                                       .mapToInt(Integer::parseInt)
                                       .boxed()
                                       .collect(Collectors.toSet());
-        System.out.println(winners);
-        OutputView.printLottoStatistics(lottoGame.getLottoTickets().calculateLottoStatistics(winners));
+        lottoGame.getLottoTickets().calculateLottoStatistics(winners);
+        OutputView.printLottoStatistics(lottoGame.getLottoTickets().getLottoStatistics());
+        OutputView.printRateOfReturn(purchaseAmount, lottoGame);
     }
 }
