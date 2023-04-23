@@ -31,20 +31,4 @@ public class Operator {
                 || input.equals(DIVIDE.getCharacter()));
     }
 
-    public boolean isPlus() {
-        return operatorType.equals(PLUS);
-    }
-
-    public boolean isMinus() {
-        return operatorType.equals(MINUS);
-    }
-
-    public boolean isMultiply() {
-        return operatorType.equals(MULTIPLY);
-    }
-
-    public boolean isDivide() {
-        return operatorType.equals(DIVIDE);
-    }
-
 }
