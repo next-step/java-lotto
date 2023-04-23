@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Calculator {
     private final Expression expression;
-    private static int result;
+    private int result;
 
     public Calculator(String expression) {
         this.expression = new Expression(expression);
@@ -67,16 +67,26 @@ public class Calculator {
 
     private void divideIfStatusIsOn(String element) {
         if (Division.status) {
-            validateIfResultisInteger(element);
+            validateIfResultIsInt(element);
             Division.status = false;
         }
     }
 
-    private void validateIfResultisInteger(String element) {
-        double floatNum = (double) result / Integer.parseInt(element);
-        result /= Integer.parseInt(element);
+    private void validateIfResultIsInt(String element) {
+        int num = Integer.parseInt(element);
+        validateIfElementIsZero(num);
+        double floatNum = (double) result / num;
+        result /= num;
         if (floatNum != result) {
+            Division.status = false;
             throw new ArithmeticException("나누어 떨어지지 않는 값을 입력하셨습니다.");
+        }
+    }
+
+    private void validateIfElementIsZero(int num) {
+        if (num == 0) {
+            Division.status = false;
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
     }
 
