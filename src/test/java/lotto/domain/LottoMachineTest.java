@@ -2,6 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,5 +23,21 @@ public class LottoMachineTest {
 	@ParameterizedTest
 	void test2(int buyAmount) {
 		assertThatIllegalArgumentException().isThrownBy(() -> new LottoMachine(buyAmount));
+	}
+
+	@DisplayName("총 수익을 계산한다.")
+	@Test
+	void test3() {
+		List<Lotto> lottos = Arrays.asList(new Lotto(3), new Lotto(6));
+		LottoMachine lottoMachine = new LottoMachine(lottos);
+		int totalProfit = lottoMachine.totalProfit();
+		assertThat(totalProfit).isEqualTo(2000005000);
+	}
+
+	@DisplayName("총 수익률을 계산한다.")
+	@Test
+	void test4() {
+		LottoMachine lottoMachine = new LottoMachine(14000);
+		assertThat(lottoMachine.totalProfitRate(5000, 14000)).isEqualTo(0.35);
 	}
 }

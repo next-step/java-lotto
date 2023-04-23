@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,10 @@ public class LottoMachine {
 		}
 	}
 
+	public LottoMachine(List<Lotto> lottos) {
+		this.lottos = lottos;
+	}
+
 	public void selectLottoNumbers() {
 		for (Lotto lotto : this.lottos) {
 			this.fillEachLotto(lotto);
@@ -36,5 +42,17 @@ public class LottoMachine {
 
 	public int lottosSize() {
 		return this.lottos.size();
+	}
+
+	public int totalProfit() {
+		int totalProfit = 0;
+		for (Lotto lotto : this.lottos) {
+			totalProfit += PrizeType.of(lotto.getWinCount()).prizeMoney;
+		}
+		return totalProfit;
+	}
+
+	public double totalProfitRate(int totalProfit, int buyAmount) {
+		return new BigDecimal((double) totalProfit / buyAmount).setScale(2, RoundingMode.DOWN).doubleValue();
 	}
 }

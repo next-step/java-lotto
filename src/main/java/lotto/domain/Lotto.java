@@ -15,6 +15,11 @@ public class Lotto {
 		this.selectedNumbers = new ArrayList<>();
 	}
 
+	public Lotto(int winCount) {
+		this();
+		this.winCount = winCount;
+	}
+
 	public void selectLottoNumbers(int lottoNumber) {
 		if (this.selectedNumbers.contains(lottoNumber) == false) {
 			this.selectedNumbers.add(lottoNumber);
@@ -29,6 +34,10 @@ public class Lotto {
 		for (Integer winNumber : winNumbers) {
 			this.plusWinCount(winNumber);
 		}
+		return this.winCount;
+	}
+
+	public int getWinCount() {
 		return this.winCount;
 	}
 
