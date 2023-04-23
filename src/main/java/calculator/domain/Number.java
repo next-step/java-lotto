@@ -14,28 +14,12 @@ public class Number {
         this.number = parseInt(input);
     }
 
+    public Number(int number) {
+        this.number = number;
+    }
+
     public int intValue() {
         return number;
-    }
-
-    public int plus(Number number) {
-        this.number += number.intValue();
-        return this.number;
-    }
-
-    public int minus(Number number) {
-        this.number -= number.intValue();
-        return this.number;
-    }
-
-    public int multiply(Number number) {
-        this.number *= number.intValue();
-        return this.number;
-    }
-
-    public int divide(Number number) {
-        this.number /= number.intValue();
-        return this.number;
     }
 
     boolean isNullOrEmpty(String input) {
