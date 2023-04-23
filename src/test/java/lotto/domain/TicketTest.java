@@ -3,8 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,7 +13,7 @@ public class TicketTest {
     @Test
     public void ticketValidate() {
         //given
-        List<Integer> input = List.of(1, 2, 3, 4, 5, 6);
+        Set<Integer> input = Set.of(1, 2, 3, 4, 5, 6);
         String answer = "[1, 2, 3, 4, 5, 6]";
         //when
         Ticket ticket = new Ticket(input);
@@ -26,7 +25,7 @@ public class TicketTest {
     @Test
     public void ticketFailUnder() {
         //given
-        List<Integer> input = List.of(1, 2, 3, 4, 5);
+        Set<Integer> input = Set.of(1, 2, 3, 4, 5);
         //when
         //then
         assertThatThrownBy(() -> {
@@ -38,7 +37,7 @@ public class TicketTest {
     @Test
     public void ticketFailOver() {
         //given
-        List<Integer> input = List.of(1, 2, 3, 4, 5, 6, 7);
+        Set<Integer> input = Set.of(1, 2, 3, 4, 5, 6, 7);
         //when
         //then
         assertThatThrownBy(() -> {

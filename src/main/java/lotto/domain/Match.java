@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class Match {
     private final Random RANDOM = new Random();
@@ -14,13 +16,14 @@ public class Match {
     }
 
     public void purchase(int count) {
-        for(int i = 0; i< count; i++) {
+        for (int i = 0; i < count; i++) {
             addTicket(new Ticket(issuance()));
         }
     }
-    private List<Integer> issuance() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i=0 ; i<6 ; i++) {
+
+    private Set<Integer> issuance() {
+        Set<Integer> numbers = new HashSet<>();
+        for (int i = 0; i < 6; i++) {
             numbers.add(RANDOM.nextInt(46));
         }
         return numbers;

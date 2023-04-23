@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,24 +17,24 @@ public class WinnersTest {
 
     @BeforeEach
     public void beforeEach() {
-        winTicketFixture = new Ticket(List.of(1, 2, 4, 8, 16, 32));
+        winTicketFixture = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
 
-        Ticket first = new Ticket(List.of(1, 2, 4, 8, 16, 32));
+        Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
 
-        Ticket thirdA = new Ticket(List.of(1, 2, 3, 4, 8, 16));
-        Ticket thirdB = new Ticket(List.of(1, 2, 3, 4, 8, 16));
-        Ticket thirdC = new Ticket(List.of(1, 2, 3, 4, 8, 16));
+        Ticket thirdA = new Ticket(Set.of(1, 2, 3, 4, 8, 16));
+        Ticket thirdB = new Ticket(Set.of(1, 2, 3, 4, 8, 16));
+        Ticket thirdC = new Ticket(Set.of(1, 2, 3, 4, 8, 16));
 
-        Ticket fourthA = new Ticket(List.of(1, 2, 3, 4, 5, 8));
-        Ticket fourthB = new Ticket(List.of(1, 2, 3, 4, 5, 8));
-        Ticket fourthC = new Ticket(List.of(1, 2, 3, 4, 5, 8));
-        Ticket fourthD = new Ticket(List.of(1, 2, 3, 4, 5, 8));
+        Ticket fourthA = new Ticket(Set.of(1, 2, 3, 4, 5, 8));
+        Ticket fourthB = new Ticket(Set.of(1, 2, 3, 4, 5, 8));
+        Ticket fourthC = new Ticket(Set.of(1, 2, 3, 4, 5, 8));
+        Ticket fourthD = new Ticket(Set.of(1, 2, 3, 4, 5, 8));
 
-        Ticket fifthA = new Ticket(List.of(1, 2, 3, 4, 5, 6));
-        Ticket fifthB = new Ticket(List.of(1, 2, 3, 4, 5, 6));
-        Ticket fifthC = new Ticket(List.of(1, 2, 3, 4, 5, 6));
-        Ticket fifthD = new Ticket(List.of(1, 2, 3, 4, 5, 6));
-        Ticket fifthE = new Ticket(List.of(1, 2, 3, 4, 5, 6));
+        Ticket fifthA = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket fifthB = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket fifthC = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket fifthD = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket fifthE = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
 
         purchaseTicketsFixture = List.of(
                 first,

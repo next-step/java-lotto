@@ -2,16 +2,17 @@ package lotto.domain;
 
 import lotto.exception.TicketNumbersCountException;
 
-import java.util.List;
+import java.util.Set;
 
 public class Ticket {
-    private final List<Integer> numbers;
-    public Ticket(List<Integer> numbers) {
+    private final Set<Integer> numbers;
+
+    public Ticket(Set<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> purchaseGame) {
+    private void validate(Set<Integer> purchaseGame) {
         throw new TicketNumbersCountException();
     }
 
