@@ -59,6 +59,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @DisplayName("0으로 나누거나 나눈 값이 정수가 아닐경우 예외 발생")
     @ValueSource(strings = {"1 / 0", "11 / 2", "3 / 2", "-4 / 3"})
     void when_PrecedingValueIsNotInt_ThrowException(String expression) {
 
