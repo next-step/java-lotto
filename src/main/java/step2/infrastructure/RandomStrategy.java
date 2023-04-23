@@ -1,4 +1,6 @@
-package step2;
+package step2.infrastructure;
+
+import step2.domain.NumberGenerateStrategy;
 
 import java.util.*;
 import java.util.stream.IntStream;

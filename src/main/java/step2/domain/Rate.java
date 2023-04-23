@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.Map;
 
@@ -16,10 +16,6 @@ public class Rate {
         return roundOffRate(rate);
     }
 
-    private static float roundOffRate(float rate) {
-        return (float) Math.floor(rate * 100) / 100;
-    }
-
     private static int calculateMoney(int match, int count) {
         if (match == 3) {
             return count * 5000;
@@ -35,5 +31,9 @@ public class Rate {
         }
 
         return 0;
+    }
+
+    private static float roundOffRate(float rate) {
+        return (float) Math.floor(rate * 100) / 100;
     }
 }

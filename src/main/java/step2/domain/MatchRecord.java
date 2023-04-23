@@ -1,25 +1,25 @@
-package step2;
+package step2.domain;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoResult {
+public class MatchRecord {
 
     private final Map<Integer, Integer> numberOfMatches;
 
-    private LottoResult(Map<Integer, Integer> numberOfMatches) {
+    private MatchRecord(Map<Integer, Integer> numberOfMatches) {
         this.numberOfMatches = numberOfMatches;
     }
 
-    public static LottoResult makeResult() {
+    public static MatchRecord createRecord() {
         Map<Integer, Integer> numberOfMatches = new HashMap<>();
 
         for (int i = 0; i < 7; i++) {
             numberOfMatches.put(i, 0);
         }
 
-        return new LottoResult(numberOfMatches);
+        return new MatchRecord(numberOfMatches);
     }
 
     public Map<Integer, Integer> countNumber(List<List<Integer>> numbers, List<Integer> winningNumbers) {
