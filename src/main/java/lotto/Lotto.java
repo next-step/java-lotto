@@ -7,6 +7,8 @@ import lotto.present.OutputPresent;
 import lotto.present.vo.IncomePresentVO;
 import lotto.present.vo.WinnerPresentVO;
 
+import java.util.List;
+
 public class Lotto {
 
 
@@ -20,6 +22,7 @@ public class Lotto {
         outputPresent.presentTickets(match.renderingTickets());
 
         Ticket winningTicket = inputPresent.winningNumber();
+        outputPresent.presentTickets(List.of(winningTicket.rendering()));
         match.winningTicket(winningTicket);
 
         outputPresent.presentWinner(new WinnerPresentVO(match.getWinners()));
