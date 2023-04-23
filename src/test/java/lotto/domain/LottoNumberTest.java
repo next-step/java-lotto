@@ -16,7 +16,7 @@ class LottoNumberTest {
     void lottoNumberRangeTest(int input) {
         assertThatThrownBy(() -> new LottoNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 숫자 범위가 아닙니다.");
+                .hasMessage(input + "번은 로또 숫자 범위가 아닙니다. (1 - 45 사이만 입력해주세요.)");
     }
 
     @ParameterizedTest
@@ -37,7 +37,7 @@ class LottoNumberTest {
     void notNumberErrorTest() {
         assertThatThrownBy(() -> LottoNumber.createManualLottoNumber("a"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자만 입력해주세요!");
+                .hasMessage("a는 숫자가 아닙니다. 숫자만 입력해주세요!");
     }
 
 }

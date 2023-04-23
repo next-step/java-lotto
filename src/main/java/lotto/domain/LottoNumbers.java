@@ -1,13 +1,18 @@
 package lotto.domain;
 
+import lotto.exception.SameNumberException;
+
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     public static final int LOTTO_LENGTH = 6;
+    public static final int MAXIMUM_VALUE = 1;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -37,24 +42,35 @@ public class LottoNumbers {
                 .map(LottoNumber::createManualLottoNumber)
                 .collect(Collectors.toCollection(TreeSet::new));
 
-        checkSameNumber(manualNumbers.size(), lottoNumbers.size());
+        checkSameNumber(manualNumbers, lottoNumbers);
 
         return new LottoNumbers(lottoNumbers);
     }
 
-    private static void checkSameNumber(int manualSize, int lottoSize) {
-        if (manualSize != lottoSize) {
-            throw new IllegalArgumentException("같은 숫자를 입력했습니다.");
+    private static void checkSameNumber(List<String> manualNumbers, Set<LottoNumber> lottoNumbers) {
+        if (manualNumbers.size() != lottoNumbers.size()) {
+            List<String> sameNumber = findSameNumber(manualNumbers);
+            throw new SameNumberException(sameNumber);
         }
     }
 
-    public int findSameNumbers(LottoNumbers winningNumbers) {
+    private static List<String> findSameNumber(List<String> manualNumbers) {
+        Map<String, Long> countMap = manualNumbers.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        return countMap.entrySet().stream()
+                .filter(e -> e.getValue() > MAXIMUM_VALUE)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    public int findMatchingNumbers(LottoNumbers winningNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(winningNumbers::hasSameNumber)
+                .filter(winningNumbers::hasMatchingNumber)
                 .count();
     }
 
-    private boolean hasSameNumber(LottoNumber winningNumber) {
+    private boolean hasMatchingNumber(LottoNumber winningNumber) {
         return lottoNumbers.contains(winningNumber);
     }
 

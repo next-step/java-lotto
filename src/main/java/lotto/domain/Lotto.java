@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.List;
 
 public class Lotto {
 
@@ -21,7 +21,7 @@ public class Lotto {
     }
 
     public int findMatchingBall(Lotto winningLotto) {
-        return lottoNumbers.findSameNumbers(winningLotto.getLottoNumbers());
+        return lottoNumbers.findMatchingNumbers(winningLotto.getLottoNumbers());
     }
 
     public LottoNumbers getLottoNumbers() {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.SameNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -68,11 +69,11 @@ class LottoNumbersTest {
     @Test
     @DisplayName("LottoNumbers 같은 숫자 입력시 에러 리턴 테스트")
     void lottoNumbersSameNumberErrorTest() {
-        List<String> winningNumbers = List.of("1", "2", "3", "4", "5", "5");
+        List<String> winningNumbers = List.of("1", "2", "3", "3", "5", "5");
 
         assertThatThrownBy(() -> LottoNumbers.initManualLottoNumbers(winningNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("같은 숫자를 입력했습니다.");
+                .isInstanceOf(SameNumberException.class)
+                .hasMessage("같은 숫자를 입력했습니다 - 같은 숫자 : 3, 5");
     }
 
     @Test
@@ -84,7 +85,7 @@ class LottoNumbersTest {
         List<String> stringLottoNumbers = List.of("1", "2", "3", "11", "12", "13");
         LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(stringLottoNumbers);
 
-        assertThat(lottoNumbers.findSameNumbers(winingLotto))
+        assertThat(lottoNumbers.findMatchingNumbers(winingLotto))
                 .isEqualTo(3);
     }
 
