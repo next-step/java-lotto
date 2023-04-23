@@ -10,21 +10,28 @@ public class Application {
 
         final String input = getString();
 
-        final int calculate = getCalculate(input);
+        final int result = getCalcResult(input);
 
-        System.out.println("계산 결과 = " + calculate);
+        System.out.println("계산 결과 = " + result);
     }
 
-    private static int getCalculate(final String input) {
+    /**
+     * 계산기를 이용하여 계산을 수행한다.
+     * @param input
+     * @return 계산 결과
+     */
+    private static int getCalcResult(final String input) {
         final Calculator calculator = new Calculator(new FormulaParser(input));
-        final int calculate = calculator.calculate();
-
-        return calculate;
+        return calculator.calculate();
     }
 
+    /**
+     * 사용자로부터 문자열을 입력받는다.
+     * @return 사용자가 입력한 문자열
+     */
     private static String getString() {
         Scanner scanner = new Scanner(System.in);
-        final String input = scanner.nextLine();
-        return input;
+        return scanner.nextLine();
     }
+
 }

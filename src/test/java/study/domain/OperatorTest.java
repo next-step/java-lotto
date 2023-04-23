@@ -55,10 +55,10 @@ class OperatorTest {
     void getSymbolTest() {
         // When & Then
         assertAll(
-                () -> assertEquals(Operator.PLUS, operator.getSymbol("+")),
-                () -> assertEquals(Operator.MINUS, operator.getSymbol("-")),
-                () -> assertEquals(Operator.MULTIPLY, operator.getSymbol("*")),
-                () -> assertEquals(Operator.DIVIDE, operator.getSymbol("/"))
+                () -> assertEquals(Operator.PLUS, Operator.getSymbol("+")),
+                () -> assertEquals(Operator.MINUS, Operator.getSymbol("-")),
+                () -> assertEquals(Operator.MULTIPLY, Operator.getSymbol("*")),
+                () -> assertEquals(Operator.DIVIDE, Operator.getSymbol("/"))
         );
     }
 

@@ -5,8 +5,12 @@ import study.domain.util.FormulaParser;
 import java.util.regex.Pattern;
 
 public class Calculator {
+
     private static final Pattern REG_EXP = Pattern.compile("^\\d+$");
+
     private final FormulaParser formulaParser;
+
+    private Operator currentOperator;
 
     public Calculator(final FormulaParser formulaParser) {
         this.formulaParser = formulaParser;
@@ -15,7 +19,7 @@ public class Calculator {
     public int calculate() {
         int result = 0;
 
-        // 첫번째 연산자는 초기화 ( 사실 아무값이나 상관없음 )
+        // 첫번째 연산자는 초기화 ( )
         Operator currentOperator = Operator.PLUS;
 
         for (String param : formulaParser.getFormula()) {
@@ -39,4 +43,5 @@ public class Calculator {
     private static int stringToInt(final String param) {
         return Integer.parseInt(param);
     }
+
 }

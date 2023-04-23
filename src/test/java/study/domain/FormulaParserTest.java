@@ -24,4 +24,5 @@ class FormulaParserTest {
         // Then
         assertThat(formula).contains("2", "+", "3");
     }
+
 }

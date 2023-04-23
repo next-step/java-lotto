@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 
 public enum Operator {
+
     PLUS("+", (first, second) -> first + second),
     MINUS("-", (first, second) -> first - second),
     MULTIPLY("*", (first, second) -> first * second),
@@ -14,6 +15,7 @@ public enum Operator {
     });
 
     private String symbol;
+
     private BiFunction<Integer, Integer, Integer> operation;
 
     Operator(final String symbol, final BiFunction<Integer, Integer, Integer> operation) {
@@ -48,4 +50,5 @@ public enum Operator {
     public int calculate(final int first, final int second) {
         return operation.apply(first, second);
     }
+
 }

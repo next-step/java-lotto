@@ -27,4 +27,5 @@ public class FormulaParser {
     private boolean validator(String input) {
         return input == null || input.isEmpty() || input.startsWith(DELIMITER);
     }
+
 }
