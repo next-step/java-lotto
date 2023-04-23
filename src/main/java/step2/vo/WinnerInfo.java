@@ -36,25 +36,25 @@ public class WinnerInfo {
     }
 
     private void countMatchedWinners(Integer matchingCount) {
-        if (matchingCount == MATCH_THREE.countOfMatch()) {
+        if (LottoRank.isMatchingThree(matchingCount)) {
             winnerResults.compute(MATCH_THREE, (k, v) -> v + 1);
         }
-        if (matchingCount == MATCH_FOUR.countOfMatch()) {
+        if (LottoRank.isMatchingFour(matchingCount)) {
             winnerResults.compute(MATCH_FOUR, (k, v) -> v + 1);
         }
-        if (matchingCount == MATCH_FIVE.countOfMatch()) {
+        if (LottoRank.isMatchingFive(matchingCount)) {
             winnerResults.compute(MATCH_FIVE, (k, v) -> v + 1);
         }
-        if (matchingCount == MATCH_SIX.countOfMatch()) {
+        if (LottoRank.isMatchingSix(matchingCount)) {
             winnerResults.compute(MATCH_SIX, (k, v) -> v + 1);
         }
     }
 
     public double calculateRateOfReturn(int numOfLottoTicket) {
-        return (((winnerResults.get(MATCH_THREE) * MATCH_THREE.prizeAmount())
-                + (winnerResults.get(MATCH_FOUR) * MATCH_FOUR.prizeAmount())
-                + (winnerResults.get(MATCH_FIVE) * MATCH_FIVE.prizeAmount())
-                + (winnerResults.get(MATCH_SIX) * MATCH_SIX.prizeAmount()))
-                / (numOfLottoTicket * LOTTO_PER_PRICE));
+        return (LottoRank.getMatchThreePrizeAmount(winnerResults.get(MATCH_THREE))
+                + LottoRank.getMatchFourPrizeAmount(winnerResults.get(MATCH_FOUR))
+                + LottoRank.getMatchFivePrizeAmount(winnerResults.get(MATCH_FIVE))
+                + LottoRank.getMatchSixPrizeAmount(winnerResults.get(MATCH_SIX)))
+                / (numOfLottoTicket * LOTTO_PER_PRICE);
     }
 }

@@ -16,11 +16,35 @@ public enum LottoRank {
         this.prizeAmount = prizeAmount;
     }
 
-    public int countOfMatch() {
-        return countOfMatch;
+    public static boolean isMatchingThree(Integer matchingCount) {
+        return matchingCount == MATCH_THREE.countOfMatch;
     }
 
-    public long prizeAmount() {
-        return prizeAmount;
+    public static boolean isMatchingFour(Integer matchingCount) {
+        return matchingCount == MATCH_FOUR.countOfMatch;
+    }
+
+    public static boolean isMatchingFive(Integer matchingCount) {
+        return matchingCount == MATCH_FIVE.countOfMatch;
+    }
+
+    public static boolean isMatchingSix(Integer matchingCount) {
+        return matchingCount == MATCH_SIX.countOfMatch;
+    }
+
+    public static long getMatchThreePrizeAmount(Integer numOfWinner) {
+        return numOfWinner * MATCH_THREE.prizeAmount;
+    }
+
+    public static long getMatchFourPrizeAmount(Integer numOfWinner) {
+        return numOfWinner * MATCH_FOUR.prizeAmount;
+    }
+
+    public static long getMatchFivePrizeAmount(Integer numOfWinner) {
+        return numOfWinner * MATCH_FIVE.prizeAmount;
+    }
+
+    public static long getMatchSixPrizeAmount(Integer numOfWinner) {
+        return numOfWinner * MATCH_SIX.prizeAmount;
     }
 }
