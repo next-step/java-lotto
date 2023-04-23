@@ -8,12 +8,14 @@ public class WinningStatistics {
 
     private final Map<LottoReward, Integer> accumulatedCountByLottoReward = new EnumMap<>(LottoReward.class);
     private final List<Integer> winningNumbers;
+    private final List<List<Integer>> purchasedLottoTickets;
 
-    public WinningStatistics(List<Integer> winningNumbers) {
+    public WinningStatistics(List<Integer> winningNumbers, List<List<Integer>> purchasedLottoTickets) {
         this.winningNumbers = winningNumbers;
+        this.purchasedLottoTickets = purchasedLottoTickets;
     }
 
-    public void calculate(List<List<Integer>> purchasedLottoTickets) {
+    public void calculate() {
         for (List<Integer> lottoTicket : purchasedLottoTickets) {
             long matchedCount = getMatchedCount(lottoTicket);
             accumulateCount(matchedCount);
@@ -41,5 +43,15 @@ public class WinningStatistics {
 
     public Map<LottoReward, Integer> getDetail() {
         return accumulatedCountByLottoReward;
+    }
+
+    public double getIncomeRate() {
+        long purchasedAmount = purchasedLottoTickets.size() * 1_000L;
+        long rewardAmount = accumulatedCountByLottoReward.entrySet()
+                .stream()
+                .mapToLong(e -> e.getKey().getReward() * e.getValue())
+                .sum();
+        double incomeRate = (double) rewardAmount / purchasedAmount;
+        return Double.parseDouble(String.format("%.2f", incomeRate));
     }
 }
