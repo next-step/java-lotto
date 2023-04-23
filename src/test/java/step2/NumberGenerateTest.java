@@ -1,7 +1,9 @@
+package step2;
+
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
-import step2.NumberGenerateStrategy;
-import step2.RandomStrategy;
+import step2.domain.NumberGenerateStrategy;
+import step2.infrastructure.RandomStrategy;
 
 import java.util.List;
 

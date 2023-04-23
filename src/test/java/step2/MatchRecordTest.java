@@ -1,3 +1,5 @@
+package step2;
+
 import org.junit.jupiter.api.Test;
 import step2.domain.MatchRecord;
 

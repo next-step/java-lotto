@@ -1,6 +1,8 @@
+package step2;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step2.NumberFactory;
+import step2.domain.NumberFactory;
 
 import java.util.Arrays;
 import java.util.List;

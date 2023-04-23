@@ -1,13 +1,14 @@
-import org.assertj.core.api.Assertions;
+package step2;
+
 import org.junit.jupiter.api.Test;
-import step2.Rate;
+import step2.domain.Rate;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class RateOfReturnTest {
+public class RateTest {
 
     @Test
     void 수익률_계산() {
