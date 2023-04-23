@@ -10,7 +10,8 @@ public enum WinType {
     SECOND(99, 0),
     THIRD(5, 1500000),
     FOURTH(4, 50000),
-    FIFTH(3, 5000);
+    FIFTH(3, 5000),
+    FAIL(0, 0);
 
     private final long matchedQuantity;
     private final long winnings;
