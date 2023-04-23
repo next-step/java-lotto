@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class Expression {
 
     public static final String CRITERIA = " ";
+    public static final String REGEX = "^(-?\\d+|[+\\-*/])$";
     private final String value;
 
     public Expression(String value) {
@@ -15,8 +16,23 @@ public class Expression {
     }
 
     public List<String> parseToList() {
-        return Arrays.stream(value.split(CRITERIA))
+        List<String> elements = Arrays.stream(value.split(CRITERIA))
                 .collect(Collectors.toList());
+
+        validateElements(elements);
+        return elements;
+    }
+
+    private void validateElements(List<String> elements) {
+        for (String element : elements) {
+            validateEachElement(element);
+        }
+    }
+
+    private void validateEachElement(String element) {
+        if (!element.matches(REGEX)) {
+            throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
+        }
     }
 
     private void validateExpression(String value) {

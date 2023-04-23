@@ -8,10 +8,10 @@ public class CalculatorTest {
 
     @Test
     void when_expressionContainsEveryArithmeticExpression() {
-        String expression = "1 + 3 / 2 * 10 - 2 + 1 + 1";
+        String expression = "1 + 3 / 2 * 10 - 2 + 1 + -9";
         Calculator calculator = new Calculator(expression);
         int result = calculator.calculate();
 
-        assertThat(result).isEqualTo(20);
+        assertThat(result).isEqualTo(10);
     }
 }
