@@ -63,11 +63,9 @@ public class LottoGameTest {
     winNumbers.add(4);
     winNumbers.add(5);
     winNumbers.add(6);
-    Map<Integer, Integer> expectedStatistics = new HashMap<>();
-    expectedStatistics.put(3, 1);
-    expectedStatistics.put(4, 0);
-    expectedStatistics.put(5, 0);
-    expectedStatistics.put(6, 1);
+    LottoStatistics expectedStatistics = new LottoStatistics();
+    expectedStatistics.increment(3);
+    expectedStatistics.increment(6);
 
     assertThat(lottoTickets.calculateLottoStatistics(winNumbers))
         .isEqualTo(expectedStatistics);
