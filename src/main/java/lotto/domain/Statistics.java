@@ -9,8 +9,6 @@ public enum Statistics {
     FOURTH(3, 5_000),
     MISS(0, 0);
 
-    public static final int ZERO = 0;
-
     private final int matchingBall;
     private final int prize;
 
