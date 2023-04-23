@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.constant;
 
 import static java.util.Arrays.stream;
 

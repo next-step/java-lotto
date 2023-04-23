@@ -1,9 +1,9 @@
 package calculator.domain;
 
-import static calculator.domain.OperatorsConstant.DIVIDE;
-import static calculator.domain.OperatorsConstant.MINUS;
-import static calculator.domain.OperatorsConstant.MULTIPLY;
-import static calculator.domain.OperatorsConstant.PLUS;
+import static calculator.domain.constant.OperatorsConstant.DIVIDE;
+import static calculator.domain.constant.OperatorsConstant.MINUS;
+import static calculator.domain.constant.OperatorsConstant.MULTIPLY;
+import static calculator.domain.constant.OperatorsConstant.PLUS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;

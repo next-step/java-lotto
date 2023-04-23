@@ -2,6 +2,7 @@ package calculator.domain;
 
 import static java.util.Arrays.stream;
 
+import calculator.domain.constant.OperatorsConstant;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
