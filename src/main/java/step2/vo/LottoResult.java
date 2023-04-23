@@ -13,9 +13,14 @@ public class LottoResult {
     public int countMatchingNumbers(List<Integer> winNumbers) {
         int matchingCount = 0;
         for (Integer winNum : winNumbers) {
-            if (lottoResult.contains(winNum)) {
-                matchingCount++;
-            }
+            matchingCount = countMatchNumber(matchingCount, winNum);
+        }
+        return matchingCount;
+    }
+
+    private int countMatchNumber(int matchingCount, Integer winNum) {
+        if (lottoResult.contains(winNum)) {
+            matchingCount++;
         }
         return matchingCount;
     }
