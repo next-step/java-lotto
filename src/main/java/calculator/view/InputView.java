@@ -7,11 +7,8 @@ public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
     public String input() {
-        return scanner.nextLine();
-    }
-
-    public void closeScanner() {
+        String input = scanner.nextLine();
         scanner.close();
+        return input;
     }
-
 }

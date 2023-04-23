@@ -9,7 +9,5 @@ public class Main {
         InputView inputView = new InputView();
 
         ResultView.printResult(new StringCalculator(inputView.input()).result());
-
-        inputView.closeScanner();
     }
 }
