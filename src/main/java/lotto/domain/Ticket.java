@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.TicketNumbersCountException;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Ticket {
     private final Set<Integer> numbers;
@@ -10,6 +11,10 @@ public class Ticket {
     public Ticket(Set<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
+    }
+
+    public Ticket(String string) {
+
     }
 
     private void validate(Set<Integer> numbers) {
