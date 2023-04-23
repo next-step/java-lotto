@@ -19,6 +19,6 @@ public class Ticket {
     }
 
     public String rendering() {
-        throw new RuntimeException("문자열 출력되도록 구현해야함 구분자는 [, ] 로 ");
+        return "["+ String.join(", ", this.numbers.stream().map(number -> Integer.toString(number)).collect(Collectors.toList())) + "]";
     }
 }
