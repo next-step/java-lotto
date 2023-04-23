@@ -12,8 +12,10 @@ public class Ticket {
         this.numbers = numbers;
     }
 
-    private void validate(Set<Integer> purchaseGame) {
-        throw new TicketNumbersCountException();
+    private void validate(Set<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new TicketNumbersCountException();
+        }
     }
 
     public String rendering() {
