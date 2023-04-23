@@ -20,7 +20,8 @@ public class Main {
         resultView.showLottoGameResults();
 
         List<Integer> winNumbers = inputView.getWinNumbers();
-        LottoRank.electWinner(winNumbers, lottoResults);
+        List<Integer> numOfWinner = lottoResults.countNumOfWinner(winNumbers);
+        LottoRank.electWinner(numOfWinner);
 
         resultView.showLottoWinners();
     }

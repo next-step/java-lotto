@@ -1,7 +1,5 @@
 package step2;
 
-import step2.vo.LottoResults;
-
 import java.util.List;
 
 public enum LottoRank {
@@ -27,8 +25,7 @@ public enum LottoRank {
         this.numOfWinner = INIT_WINNER;
     }
 
-    public static void electWinner(List<Integer> winNumbers, LottoResults lottoResults) {
-        List<Integer> numOfWinner = lottoResults.countNumOfWinner(winNumbers);
+    public static void electWinner(List<Integer> numOfWinner) {
         for (Integer countWinner : numOfWinner) {
             addCountOfMatch(countWinner);
         }
@@ -57,11 +54,6 @@ public enum LottoRank {
                 / numOfLottoTicket) * LOTTO_PER_PRICE;
     }
 
-    /**
-     * * ResultView 의존성을 끊어내기 위한 Getter. 이 외 사용금지.
-     *
-     * @return 각 등 수에 맞는 우승자 수.
-     */
     public int numOfWinner() {
         return this.numOfWinner;
     }
