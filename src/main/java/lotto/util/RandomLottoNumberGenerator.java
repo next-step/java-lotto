@@ -18,5 +18,4 @@ public class RandomLottoNumberGenerator {
 
         return numbers.subList(0, 6);
     }
-
 }

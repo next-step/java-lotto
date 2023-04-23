@@ -35,5 +35,4 @@ public class LottoTicket {
     public long findRankCount(int matchCount) {
         return rankCounts.getOrDefault(Rank.valueOf(matchCount), 0L);
     }
-
 }

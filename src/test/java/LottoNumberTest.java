@@ -75,6 +75,4 @@ public class LottoNumberTest {
 
         Assertions.assertThat(matchCount).isEqualTo(rank.getCountOfMatch());
     }
-
-
 }
