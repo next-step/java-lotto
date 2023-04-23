@@ -24,4 +24,10 @@ class OperatorTest {
     void divide() {
         assertThat(Operator.of("/")).isEqualTo(Operator.DIVIDE);
     }
+
+    @Test
+    void exception() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.of("a"))
+                .withMessageContaining("사칙 연산 기호");
+    }
 }
