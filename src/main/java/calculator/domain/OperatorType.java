@@ -17,7 +17,7 @@ public enum OperatorType {
         this.expression = expression;
     }
 
-    public String getCharacter() {
+    public String character() {
         return character;
     }
 

@@ -1,6 +1,8 @@
 package calculator.domain;
 
-import static calculator.domain.OperatorType.*;
+import java.util.Arrays;
+
+import static calculator.domain.OperatorType.values;
 
 public class Operator {
 
@@ -25,10 +27,7 @@ public class Operator {
     }
 
     boolean isNotOperator(String input) {
-        return !(input.equals(PLUS.getCharacter())
-                || input.equals(MINUS.getCharacter())
-                || input.equals(MULTIPLY.getCharacter())
-                || input.equals(DIVIDE.getCharacter()));
+        return Arrays.stream(values())
+                .noneMatch(value -> value.character().equals(input));
     }
-
 }
