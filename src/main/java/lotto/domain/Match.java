@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.WinnerUndefinedException;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -49,15 +51,10 @@ public class Match {
         winners = new Winners(tickets,winningTicket);
     }
 
-
     public Winners getWinners() {
         if(winners == null) {
-            throw new RuntimeException("위너가 계산되지 읺았거나, 당첨번호가 입력되지 않았습니다");
+            throw new WinnerUndefinedException();
         }
         return winners;
-    }
-
-    public double returnRate() {
-        throw new RuntimeException();
     }
 }
