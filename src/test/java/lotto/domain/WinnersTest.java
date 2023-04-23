@@ -21,20 +21,20 @@ public class WinnersTest {
 
         Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
 
-        Ticket thirdA = new Ticket(Set.of(1, 2, 3, 4, 8, 16));
-        Ticket thirdB = new Ticket(Set.of(1, 2, 3, 4, 8, 16));
-        Ticket thirdC = new Ticket(Set.of(1, 2, 3, 4, 8, 16));
+        Ticket thirdA = new Ticket(Set.of(1, 2, 4, 8, 16,40));
+        Ticket thirdB = new Ticket(Set.of(1, 2, 4, 8, 16,41));
+        Ticket thirdC = new Ticket(Set.of(1, 2, 4, 8, 16,42));
 
-        Ticket fourthA = new Ticket(Set.of(1, 2, 3, 4, 5, 8));
-        Ticket fourthB = new Ticket(Set.of(1, 2, 3, 4, 5, 8));
-        Ticket fourthC = new Ticket(Set.of(1, 2, 3, 4, 5, 8));
-        Ticket fourthD = new Ticket(Set.of(1, 2, 3, 4, 5, 8));
+        Ticket fourthA = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthB = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthC = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthD = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
 
-        Ticket fifthA = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
-        Ticket fifthB = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
-        Ticket fifthC = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
-        Ticket fifthD = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
-        Ticket fifthE = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket fifthA = new Ticket(Set.of(1, 2, 4, 15, 26, 37));
+        Ticket fifthB = new Ticket(Set.of(1, 2, 4, 25, 26, 17));
+        Ticket fifthC = new Ticket(Set.of(1, 2, 4, 35, 36, 37));
+        Ticket fifthD = new Ticket(Set.of(1, 2, 4, 25, 36, 27));
+        Ticket fifthE = new Ticket(Set.of(1, 2, 4, 35, 26, 17));
 
         purchaseTicketsFixture = List.of(
                 first,
@@ -90,7 +90,10 @@ public class WinnersTest {
     @Test
     public void income() {
         //given
-        int answer = -1;
+        int answer = Prize.FIRST.prizeCalculate(1) +
+                Prize.THIRD.prizeCalculate(3) +
+                Prize.FOURTH.prizeCalculate(4) +
+                Prize.FIFTH.prizeCalculate(5);
         //when
         int income = winnersFixture.getIncome();
         //then
