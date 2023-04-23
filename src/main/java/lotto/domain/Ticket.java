@@ -41,8 +41,7 @@ public class Ticket {
 
     public int overlapNumberCount(Ticket otherTicket) {
         Set<Integer> copyThisNumbers = new HashSet<>(this.numbers);
-        //otherTicket.numbers.containsAll(this.numbers)
-        copyThisNumbers.containsAll(otherTicket.numbers);
+        copyThisNumbers.addAll(otherTicket.numbers);
         return 12 - copyThisNumbers.size();
     }
 }
