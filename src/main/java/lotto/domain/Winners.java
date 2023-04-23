@@ -7,16 +7,21 @@ public class Winners {
     private final int countFourth;
     private final int countThird;
     private final int countFirst;
-
     private final int income;
+    private final double profitRatio;
 
 
     public Winners(List<Ticket> tickets, Ticket winningTicket) {
-        this.countFirst = aggregateFirst(tickets,winningTicket);
-        this.countThird = aggregateThird(tickets,winningTicket);
-        this.countFourth = aggregateFourth(tickets,winningTicket);
-        this.countFifth = aggregateFifth(tickets,winningTicket);
+        this.countFirst = aggregateFirst(tickets, winningTicket);
+        this.countThird = aggregateThird(tickets, winningTicket);
+        this.countFourth = aggregateFourth(tickets, winningTicket);
+        this.countFifth = aggregateFifth(tickets, winningTicket);
         this.income = aggregateIncome();
+        this.profitRatio = aggregateProfitRatio(tickets.size(), this.income);
+    }
+
+    private double aggregateProfitRatio(int ticketCount, int income) {
+        return (double) income / (double) (ticketCount * 1000);
     }
 
     private int aggregateIncome() {
@@ -86,7 +91,7 @@ public class Winners {
         return countFirst;
     }
 
-    public double returnRatio() {
-        throw new RuntimeException("투자금대비 당첨금 비율");
+    public double getProfitRatio() {
+        return profitRatio;
     }
 }
