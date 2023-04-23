@@ -1,7 +1,9 @@
 package step2;
 
+import step2.service.LottoGame;
 import step2.view.InputView;
 import step2.view.ResultView;
+import step2.vo.LottoResults;
 
 import java.util.List;
 

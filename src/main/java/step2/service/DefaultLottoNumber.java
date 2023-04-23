@@ -1,10 +1,10 @@
-package step2;
+package step2.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DefaultLottoNumber {
+public class DefaultLottoNumber implements LottoNumber {
 
     private static final int LOTTO_END_NUMBER = 45;
 
@@ -17,15 +17,16 @@ public class DefaultLottoNumber {
         }
     }
 
-    public void mixLottoNumbers() {
-        Collections.shuffle(defaultLottoNumbers);
-    }
-
     public List<Integer> extractLottoNumbers() {
+        mixLottoNumbers();
         List<Integer> extractedNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             extractedNumbers.add(defaultLottoNumbers.get(i));
         }
-        return extractedNumbers;
+        return Collections.unmodifiableList(extractedNumbers);
+    }
+
+    private void mixLottoNumbers() {
+        Collections.shuffle(defaultLottoNumbers);
     }
 }

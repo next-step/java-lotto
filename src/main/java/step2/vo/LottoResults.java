@@ -1,4 +1,4 @@
-package step2;
+package step2.vo;
 
 import java.util.List;
 import java.util.stream.Collectors;

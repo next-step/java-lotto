@@ -1,8 +1,8 @@
 package step2.view;
 
 import step2.LottoRank;
-import step2.LottoResult;
-import step2.LottoResults;
+import step2.vo.LottoResult;
+import step2.vo.LottoResults;
 
 public class ResultView {
 

@@ -1,5 +1,7 @@
 package step2;
 
+import step2.vo.LottoResults;
+
 import java.util.List;
 
 public enum LottoRank {
