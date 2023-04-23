@@ -15,7 +15,7 @@ public class InputPresent {
 
     public int purchaseCount() {
         System.out.println(PURCHASE_AMOUNT);
-        int count = scanner.nextInt() / 1000;
+        int count = Integer.parseInt( scanner.nextLine()) / 1000;
         System.out.printf(PURCHASE_CONFIRM, count);
         System.out.print(System.lineSeparator());
         return count;
