@@ -21,7 +21,7 @@ public class OutputPresent {
         }
     }
 
-    public void presentWinner(WinnerPresentVO winnerPresentVO) {
+    public void presentWinners(WinnerPresentVO winnerPresentVO) {
 
     }
 

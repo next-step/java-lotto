@@ -25,7 +25,7 @@ public class Lotto {
         outputPresent.presentTickets(List.of(winningTicket.rendering()));
         match.winningTicket(winningTicket);
 
-        outputPresent.presentWinner(new WinnerPresentVO(match.getWinners()));
+        outputPresent.presentWinners(new WinnerPresentVO(match.getWinners()));
         outputPresent.presentIncome(new IncomePresentVO(match.getWinners()));
     }
 }
