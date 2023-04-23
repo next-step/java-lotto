@@ -7,6 +7,9 @@ import java.util.Queue;
 
 public class CalculatorApplication {
 
+    private static final NumberCalculatorFactory NUMBER_CALCULATOR_FACTORY
+            = new NumberCalculatorFactory();
+
     public static void main(String[] args) {
         progressCalculate();
     }
@@ -20,10 +23,24 @@ public class CalculatorApplication {
     }
 
     public static Integer calculate(Queue<Integer> numbers, Queue<String> operators) {
-        int result = 0;
+        if(isSingle(numbers)) {
+            return numbers.poll();
+        }
 
-        return 0;
+        int result = NUMBER_CALCULATOR_FACTORY
+                .getHandlerBySymbol(operators.poll())
+                .calculateTwoNumbers(numbers.poll(),numbers.poll());
+
+        while (!numbers.isEmpty()) {
+            result = NUMBER_CALCULATOR_FACTORY
+                    .getHandlerBySymbol(operators.poll())
+                    .calculateTwoNumbers(result,numbers.poll());
+        }
+
+        return result;
     }
 
-
+    private static boolean isSingle(Queue<Integer> numbers) {
+        return numbers.size() == 1;
+    }
 }
