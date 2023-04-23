@@ -23,10 +23,14 @@ public class Match {
 
     private Set<Integer> issuance() {
         Set<Integer> numbers = new HashSet<>();
-        for (int i = 0; i < 6; i++) {
-            numbers.add(RANDOM.nextInt(46));
+        while (numbers.size()<6) {
+            numbers.add(numberAutoIssue());
         }
         return numbers;
+    }
+
+    private int numberAutoIssue() {
+        return RANDOM.nextInt(46) + 1;
     }
 
     private void addTicket(Ticket ticket) {
