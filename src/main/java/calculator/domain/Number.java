@@ -2,7 +2,7 @@ package calculator.domain;
 
 public class Number {
 
-    private int number;
+    private final int number;
 
     public Number(String input) {
         if (isNullOrEmpty(input)) {

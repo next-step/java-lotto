@@ -10,7 +10,7 @@ public enum OperatorType {
     DIVIDE("/", (num1, num2) -> num1 / num2);
 
     private final String character;
-    private Comparator<Integer> expression;
+    private final Comparator<Integer> expression;
 
     OperatorType(String character, Comparator<Integer> expression) {
         this.character = character;
