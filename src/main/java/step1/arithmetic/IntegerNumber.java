@@ -7,7 +7,7 @@ public class IntegerNumber {
         this.number = number;
     }
 
-    public int result(){
+    public int result() {
         return this.number;
     }
 }
