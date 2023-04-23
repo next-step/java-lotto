@@ -10,11 +10,11 @@ public enum PrizeType {
 	SIX(6, 2000000000);
 
 	public final WinCount winCount;
-	public final int prizeMoney;
+	public final PrizeMoney prizeMoney;
 
 	PrizeType(int winCount, int prizeMoney) {
 		this.winCount = new WinCount(winCount);
-		this.prizeMoney = prizeMoney;
+		this.prizeMoney = new PrizeMoney(prizeMoney);
 	}
 
 	public static PrizeType of(WinCount winCount) {

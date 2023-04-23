@@ -52,7 +52,7 @@ public class LottoMachine {
 	public int totalProfit() {
 		int totalProfit = 0;
 		for (Lotto lotto : this.purchasedLottos.getLottos()) {
-			totalProfit += PrizeType.of(lotto.getWinCount()).prizeMoney;
+			totalProfit += PrizeType.of(lotto.getWinCount()).prizeMoney.getPrizeMoney();
 		}
 		return totalProfit;
 	}
