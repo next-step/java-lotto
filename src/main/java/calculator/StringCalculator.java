@@ -12,29 +12,31 @@ public class StringCalculator {
     private static final String SEPARATOR = " ";
     private static final int BEGIN_INDEX = 0;
     private static final int INCREMENT_NEXT_INDEX = 1;
-    public static final int INCREMENT_COUNT = 2;
+    private static final int INCREMENT_COUNT = 2;
 
-    private Number result;
+    private Number number;
 
     public StringCalculator(String input) {
-        this.result = makeResult(input);
+        this.number = initNumber(input);
     }
 
-    public int result() {
-        return result.intValue();
-    }
-
-    private Number makeResult(String input) {
-        String[] arr = input.split(SEPARATOR);
+    public Number calculateInOrderOf(String input) {
+        String[] arr = makeArr(input);
 
         List<Number> numbers = makeNumbers(arr);
         List<Operator> operators = makeOperators(arr);
 
-        initResult(numbers.get(BEGIN_INDEX));
+        calculateInOrder(numbers, operators);
 
-        calculate(numbers, operators);
+        return number;
+    }
 
-        return result;
+    private Number initNumber(String input) {
+        return new Number(makeArr(input)[BEGIN_INDEX]);
+    }
+
+    private String[] makeArr(String input) {
+        return input.split(SEPARATOR);
     }
 
     private List<Number> makeNumbers(String[] arr) {
@@ -53,15 +55,11 @@ public class StringCalculator {
         return operators;
     }
 
-    private void initResult(Number number) {
-        result = number;
-    }
-
-    private void calculate(List<Number> numbers, List<Operator> operators) {
+    private void calculateInOrder(List<Number> numbers, List<Operator> operators) {
         for (int i = BEGIN_INDEX; i < operators.size(); i++) {
             OperatorType operator = operators.get(i).value();
-            int calculatedResult = operator.calculate(result, numbers.get(i + INCREMENT_NEXT_INDEX));
-            result = new Number(calculatedResult);
+            int calculatedResult = operator.calculate(number, numbers.get(i + INCREMENT_NEXT_INDEX));
+            number = new Number(calculatedResult);
         }
     }
 }
