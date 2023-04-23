@@ -9,15 +9,16 @@ public class Lotto {
 	public static final int LOTTO_PRICE = 1000;
 
 	private final List<Integer> selectedNumbers;
-	private int winCount;
+	private final WinCount winCount;
 
 	public Lotto() {
 		this.selectedNumbers = new ArrayList<>();
+		this.winCount = new WinCount(0);
 	}
 
 	public Lotto(int winCount) {
-		this();
-		this.winCount = winCount;
+		this.selectedNumbers = new ArrayList<>();
+		this.winCount = new WinCount(winCount);
 	}
 
 	public void selectLottoNumbers(int lottoNumber) {
@@ -30,20 +31,20 @@ public class Lotto {
 		return this.selectedNumbers.size();
 	}
 
-	public int winCount(List<Integer> winNumbers) {
+	public WinCount winCount(List<Integer> winNumbers) {
 		for (Integer winNumber : winNumbers) {
 			this.plusWinCount(winNumber);
 		}
 		return this.winCount;
 	}
 
-	public int getWinCount() {
+	public WinCount getWinCount() {
 		return this.winCount;
 	}
 
 	private void plusWinCount(Integer winNumber) {
 		if (selectedNumbers.contains(winNumber)) {
-			winCount++;
+			this.winCount.plus();
 		}
 	}
 }
