@@ -21,9 +21,9 @@ public class Winners {
 
     private int aggregateIncome() {
         return Prize.FIRST.prizeCalculate(this.countFirst) +
-                Prize.THIRD.prizeCalculate(this.countFirst) +
-                Prize.FOURTH.prizeCalculate(this.countFirst) +
-                Prize.FIFTH.prizeCalculate(this.countFirst);
+                Prize.THIRD.prizeCalculate(this.countThird) +
+                Prize.FOURTH.prizeCalculate(this.countFourth) +
+                Prize.FIFTH.prizeCalculate(this.countFifth);
     }
 
     public int getIncome() {
