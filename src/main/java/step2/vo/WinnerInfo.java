@@ -55,6 +55,6 @@ public class WinnerInfo {
                 + (winnerResults.get(MATCH_FOUR) * MATCH_FOUR.prizeAmount())
                 + (winnerResults.get(MATCH_FIVE) * MATCH_FIVE.prizeAmount())
                 + (winnerResults.get(MATCH_SIX) * MATCH_SIX.prizeAmount()))
-                / numOfLottoTicket) * LOTTO_PER_PRICE;
+                / (numOfLottoTicket * LOTTO_PER_PRICE));
     }
 }
