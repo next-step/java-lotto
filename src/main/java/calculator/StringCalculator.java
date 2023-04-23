@@ -9,9 +9,9 @@ import java.util.List;
 
 public class StringCalculator {
 
-    public static final String SEPARATOR = " ";
-    public static final int BEGIN_INDEX = 0;
-    public static final int INCREMENT_NEXT_INDEX = 1;
+    private static final String SEPARATOR = " ";
+    private static final int BEGIN_INDEX = 0;
+    private static final int INCREMENT_NEXT_INDEX = 1;
 
     private Number result;
 
