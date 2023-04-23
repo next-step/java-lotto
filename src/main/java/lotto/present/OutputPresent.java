@@ -22,10 +22,15 @@ public class OutputPresent {
     }
 
     public void presentWinners(WinnerPresentVO winnerPresentVO) {
-
+        System.out.println(STATISTICS_HEAD);
+        System.out.printf(PRIZE_5TH + System.lineSeparator(), winnerPresentVO.getCountFifth());
+        System.out.printf(PRIZE_4TH + System.lineSeparator(), winnerPresentVO.getCountFourth());
+        System.out.printf(PRIZE_3RD + System.lineSeparator(), winnerPresentVO.getCountThird());
+        System.out.printf(PRIZE_1ST + System.lineSeparator(), winnerPresentVO.getCountFirst());
     }
 
     public void presentIncome(IncomePresentVO incomePresentVO) {
-
+        System.out.printf(RETURN_RATE, incomePresentVO.getProfitRatio());
+        System.out.print(incomePresentVO.getBreakEvenMessage());
     }
 }
