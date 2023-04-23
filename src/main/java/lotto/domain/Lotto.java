@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -8,16 +7,16 @@ public class Lotto {
 	public static final int LOTTO_SIZE = 6;
 	public static final int LOTTO_PRICE = 1000;
 
-	private final List<Integer> selectedNumbers;
+	private final SelectedNumbers selectedNumbers;
 	private final WinCount winCount;
 
 	public Lotto() {
-		this.selectedNumbers = new ArrayList<>();
+		this.selectedNumbers = new SelectedNumbers();
 		this.winCount = new WinCount(0);
 	}
 
 	public Lotto(int winCount) {
-		this.selectedNumbers = new ArrayList<>();
+		this.selectedNumbers = new SelectedNumbers();
 		this.winCount = new WinCount(winCount);
 	}
 
