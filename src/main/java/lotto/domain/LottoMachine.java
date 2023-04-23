@@ -9,9 +9,14 @@ public class LottoMachine {
 
 	private final List<Lotto> lottos;
 
-	public LottoMachine(int buyCount) {
-		this.lottos = new ArrayList<>();
+	public LottoMachine(int buyAmount) {
+		if (buyAmount < Lotto.LOTTO_PRICE || buyAmount % Lotto.LOTTO_PRICE != 0) {
+			throw new IllegalArgumentException("구입 금액이 올바르지 않습니다.");
+		}
 
+		int buyCount = buyAmount / Lotto.LOTTO_PRICE;
+
+		this.lottos = new ArrayList<>();
 		for (int i = 0; i < buyCount; i++) {
 			this.lottos.add(new Lotto());
 		}
