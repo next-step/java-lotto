@@ -1,147 +1,106 @@
 package calculator;
 
+import calculator.operations.Addition;
+import calculator.operations.Division;
+import calculator.operations.Multiplication;
+import calculator.operations.Subtraction;
+
 import java.util.List;
 
 public class Calculator {
     private final Expression expression;
+    private static int result;
 
     public Calculator(String expression) {
         this.expression = new Expression(expression);
     }
 
-    public int add() {
-        List<String> element = expression.parseToList();
-
-        int beforeOperation = 0;
-        boolean addition = false;
-        for (String s : element) {
-            if (addition) {
-                beforeOperation = beforeOperation + Integer.parseInt(s);
-                addition = false;
-                continue;
-            }
-            if (s.equals("+")) {
-                addition = true;
-                continue;
-            }
-            beforeOperation = Integer.parseInt(s);
-        }
-        return beforeOperation;
-    }
-
-    public int substract() {
-        List<String> element = expression.parseToList();
-        int beforeOperation = 0;
-        boolean substraction = false;
-        for (String s : element) {
-            if (substraction) {
-                beforeOperation = beforeOperation - Integer.parseInt(s);
-                substraction = false;
-                continue;
-            }
-            if (s.equals("-")) {
-                substraction = true;
-                continue;
-            }
-            beforeOperation = Integer.parseInt(s);
-        }
-        return beforeOperation;
-    }
-
-    public int multiply() {
-        List<String> element = expression.parseToList();
-        int beforeOperation = 0;
-        boolean multiplication = false;
-        for (String s : element) {
-            if (multiplication) {
-                beforeOperation *= Integer.parseInt(s);
-                multiplication = false;
-                continue;
-            }
-            if (s.equals("*")) {
-                multiplication = true;
-                continue;
-            }
-            beforeOperation = Integer.parseInt(s);
-        }
-        return beforeOperation;
-    }
-
-    public int divide() {
-        List<String> element = expression.parseToList();
-        int beforeOperation = 0;
-        boolean division = false;
-        for (String s : element) {
-            if (division) {
-                double floatNum = (double) beforeOperation / Integer.parseInt(s);
-                beforeOperation = beforeOperation / Integer.parseInt(s);
-                if (floatNum != beforeOperation) {
-                    throw new ArithmeticException("나누어 떨어지지 않는 값을 입력하셨습니다.");
-                }
-                division = false;
-                continue;
-            }
-            if (s.equals("/")) {
-                division = true;
-                continue;
-            }
-            beforeOperation = Integer.parseInt(s);
-        }
-        return beforeOperation;
-    }
-
     public int calculate() {
-        List<String> element = expression.parseToList();
-        int beforeOperation = 0;
-        boolean division = false;
-        boolean multiplication = false;
-        boolean addition = false;
-        boolean substraction = false;
-        for (String s : element) {
-            if (addition) {
-                beforeOperation = beforeOperation + Integer.parseInt(s);
-                addition = false;
-                continue;
-            }
-            if (substraction) {
-                beforeOperation = beforeOperation - Integer.parseInt(s);
-                substraction = false;
-                continue;
-            }
-            if (multiplication) {
-                beforeOperation *= Integer.parseInt(s);
-                multiplication = false;
-                continue;
-            }
-            if (division) {
-                double floatNum = (double) beforeOperation / Integer.parseInt(s);
-                beforeOperation = beforeOperation / Integer.parseInt(s);
-                if (floatNum != beforeOperation) {
-                    throw new ArithmeticException("나누어 떨어지지 않는 값을 입력하셨습니다.");
-                }
-                division = false;
-                continue;
-            }
-            if (s.equals("+")) {
-                addition = true;
-                continue;
-            }
-            if (s.equals("-")) {
-                substraction = true;
-                continue;
-            }
-            if (s.equals("*")) {
-                multiplication = true;
-                continue;
-            }
-            if (s.equals("/")) {
-                division = true;
-                continue;
-            }
-            beforeOperation = Integer.parseInt(s);
+        List<String> elements = expression.parseToList();
+        initializeResult(elements);
+
+        for (String element : elements) {
+            checkStatusAndCalculate(element);
+            checkOperationStatus(element);
         }
-        return beforeOperation;
+        return result;
     }
 
+    private void initializeResult(List<String> elements) {
+        result = Integer.parseInt(elements.remove(0));
+    }
 
+    private void checkStatusAndCalculate(String element) {
+        addIfStatusIsOn(element);
+        subtractIfStatusIsOn(element);
+        multiplyIfStatusIsOn(element);
+        divideIfStatusIsOn(element);
+    }
+
+    private void checkOperationStatus(String element) {
+        checkIfAddition(element);
+        checkIfSubtraction(element);
+        checkIfMultiplication(element);
+        checkIfDivision(element);
+    }
+
+    private void addIfStatusIsOn(String element) {
+        if (Addition.status) {
+            result += Integer.parseInt(element);
+            Addition.status = false;
+        }
+    }
+
+    private void subtractIfStatusIsOn(String element) {
+        if (Subtraction.status) {
+            result -= Integer.parseInt(element);
+            Subtraction.status = false;
+        }
+    }
+
+    private void multiplyIfStatusIsOn(String element) {
+        if (Multiplication.status) {
+            result *= Integer.parseInt(element);
+            Multiplication.status = false;
+        }
+    }
+
+    private void divideIfStatusIsOn(String element) {
+        if (Division.status) {
+            validateIfResultisInteger(element);
+            Division.status = false;
+        }
+    }
+
+    private void validateIfResultisInteger(String element) {
+        double floatNum = (double) result / Integer.parseInt(element);
+        result /= Integer.parseInt(element);
+        if (floatNum != result) {
+            throw new ArithmeticException("나누어 떨어지지 않는 값을 입력하셨습니다.");
+        }
+    }
+
+    private void checkIfAddition(String element) {
+        if (element.equals(Addition.symbol)) {
+            Addition.status = true;
+        }
+    }
+
+    private void checkIfSubtraction(String element) {
+        if (element.equals(Subtraction.symbol)) {
+            Subtraction.status = true;
+        }
+    }
+
+    private void checkIfMultiplication(String element) {
+        if (element.equals(Multiplication.symbol)) {
+            Multiplication.status = true;
+        }
+    }
+
+    private void checkIfDivision(String element) {
+        if (element.equals(Division.symbol)) {
+            Division.status = true;
+        }
+    }
 }
