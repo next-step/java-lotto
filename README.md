@@ -7,3 +7,13 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+## 구현할 기능 목록
+- 숫자/연산자 분리 기능 
+- 계산기 기능
+- 덧셈 기능 
+- 뺄셈 기능 
+- 나눗셈 기능 
+- 곱셈 기능 
+ 
