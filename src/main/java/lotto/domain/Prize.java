@@ -14,4 +14,12 @@ public enum Prize {
         this.matchCount = matchCount;
         this.prizeAmount = prizeAmount;
     }
+
+    public boolean isRight(int overlapNumberCount) {
+        return this.matchCount == overlapNumberCount;
+    }
+
+    public int prizeCalculate(int count) {
+        return this.prizeAmount * count;
+    }
 }
