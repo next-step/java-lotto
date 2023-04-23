@@ -23,7 +23,7 @@ public class LottoGame {
 
     private static List<Integer> generateNumber() {
         Collections.shuffle(lottoNumbers);
-        List<Integer> generatedNumbers = lottoNumbers.subList(0, 6);
+        List<Integer> generatedNumbers = new ArrayList<>(lottoNumbers.subList(0, 6));
         Collections.sort(generatedNumbers);
         return generatedNumbers;
     }
