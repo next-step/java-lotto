@@ -47,58 +47,71 @@ class WinnersTest {
                 .isEqualTo(prize);
     }
 
-//    @Test
-//    @DisplayName("수익률 테스트 - 하나도 안맞음")
-//    void getProfitZeroTest() {
-//        Money amount = Money.initMoney(14000);
-//        Winners winners = new Winners();
-//        int matchingBall = 2;
-//
-//        winners.addWinner(matchingBall);
-//
-//        assertThat(winners.getProfit(amount))
-//                .isEqualTo(0.0);
-//    }
-//
-//    @Test
-//    @DisplayName("수익률 테스트 - 손해")
-//    void getProfitLoseTest() {
-//        Money amount = Money.initMoney(14000);
-//        Winners winners = new Winners();
-//        int matchingBall = 3;
-//
-//        winners.addWinner(matchingBall);
-//        winners.addWinner(matchingBall);
-//        winners.addWinner(matchingBall);
-//
-//        assertThat(winners.getProfit(amount))
-//                .isEqualTo((double) 5000 / 14000);
-//    }
-//
-//    @Test
-//    @DisplayName("수익률 테스트 - 본전치기")
-//    void getProfitStandardTest() {
-//        Money amount = Money.initMoney(5000);
-//        Winners winners = new Winners();
-//        int matchingBall = 3;
-//
-//        winners.addWinner(matchingBall);
-//
-//        assertThat(winners.getProfit(amount))
-//                .isEqualTo(1.0);
-//    }
-//
-//    @Test
-//    @DisplayName("수익률 테스트 - 수익")
-//    void getRealProfitTest() {
-//        Money amount = Money.initMoney(5000);
-//        Winners winners = new Winners();
-//        int matchingBall = 4;
-//
-//        winners.addWinner(matchingBall);
-//
-//        assertThat(winners.getProfit(amount))
-//                .isGreaterThan(1.0);
-//    }
+    @Test
+    @DisplayName("수익률 테스트 - 하나도 안맞음")
+    void getProfitZeroTest() {
+        Money amount = Money.initMoney(14000);
+        Winners winners = new Winners();
+        int matchingBall = 2;
+
+        winners.addWinner(matchingBall);
+
+        assertThat(winners.getProfit(amount))
+                .isEqualTo(0.0);
+    }
+
+    @Test
+    @DisplayName("수익률 테스트 - 손해")
+    void getProfitLoseTest() {
+        Money amount = Money.initMoney(14000);
+        Winners winners = new Winners();
+        int matchingBall = 3;
+
+        winners.addWinner(matchingBall);
+
+        assertThat(winners.getProfit(amount))
+                .isEqualTo((double) 5000 / 14000);
+    }
+
+    @Test
+    @DisplayName("수익률 테스트 2장 - 손해")
+    void getProfitDoubleLoseTest() {
+        Money amount = Money.initMoney(14000);
+        Winners winners = new Winners();
+        int matchingBall = 3;
+
+        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall);
+
+        assertThat(winners.getProfit(amount))
+                .isEqualTo((double) 10000 / 14000);
+    }
+
+    @Test
+    @DisplayName("수익률 테스트 - 본전치기")
+    void getProfitStandardTest() {
+        Money amount = Money.initMoney(5000);
+        Winners winners = new Winners();
+        int matchingBall = 3;
+
+        winners.addWinner(matchingBall);
+
+        assertThat(winners.getProfit(amount))
+                .isEqualTo(1.0);
+    }
+
+    @Test
+    @DisplayName("수익률 테스트 - 수익")
+    void getRealProfitTest() {
+        Money amount = Money.initMoney(5000);
+        Winners winners = new Winners();
+        int matchingBall = 4;
+
+        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall);
+
+        assertThat(winners.getProfit(amount))
+                .isGreaterThan((double) 10000 / 5000);
+    }
 
 }

@@ -21,13 +21,13 @@ public class Winners {
         return Statistics.initStatistics(matchingBall).getPrize();
     }
 
-//    public double getProfit(Money amount) {
-//        int sum = winnersCount.keySet()
-//                .stream()
-//                .mapToInt(Statistics::getPrize)
-//                .reduce(DEFAULT_VALUE, Integer::sum);
-//
-//        return (double) sum / amount.getAmount();
-//    }
+    public double getProfit(Money amount) {
+        int sum = winnersCount.keySet()
+                .stream()
+                .mapToInt(statistics -> statistics.getPrize() * winnersCount.getOrDefault(statistics, DEFAULT_VALUE))
+                .reduce(DEFAULT_VALUE, Integer::sum);
+
+        return (double) sum / amount.getAmount();
+    }
 
 }
