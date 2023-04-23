@@ -31,7 +31,11 @@ public class Match {
     }
 
     public List<String> renderingTickets() {
-        return null;
+        List<String> presentTickets = new ArrayList<>();
+        for(Ticket ticket : tickets) {
+            presentTickets.add(ticket.rendering());
+        }
+        return presentTickets;
     }
 
     public void winningTicket(Ticket winningTicket) {
