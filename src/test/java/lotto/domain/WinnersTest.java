@@ -61,7 +61,7 @@ public class WinnersTest {
         //given
         int answer = 3;
         //when
-        int countFirst = winnersFixture.getCountFirst();
+        int countFirst = winnersFixture.getCountThird();
         //then
         assertEquals(countFirst, answer);
     }
@@ -71,7 +71,7 @@ public class WinnersTest {
         //given
         int answer = 4;
         //when
-        int countFirst = winnersFixture.getCountFirst();
+        int countFirst = winnersFixture.getCountFourth();
         //then
         assertEquals(countFirst, answer);
     }
@@ -81,7 +81,7 @@ public class WinnersTest {
         //given
         int answer = 5;
         //when
-        int countFirst = winnersFixture.getCountFirst();
+        int countFirst = winnersFixture.getCountFifth();
         //then
         assertEquals(countFirst, answer);
     }
