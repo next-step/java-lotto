@@ -38,4 +38,11 @@ public class Ticket {
     public String rendering() {
         return "["+ String.join(", ", this.numbers.stream().map(number -> Integer.toString(number)).collect(Collectors.toList())) + "]";
     }
+
+    public int overlapNumberCount(Ticket otherTicket) {
+        Set<Integer> copyThisNumbers = new HashSet<>(this.numbers);
+        //otherTicket.numbers.containsAll(this.numbers)
+        copyThisNumbers.containsAll(otherTicket.numbers);
+        return 12 - copyThisNumbers.size();
+    }
 }
