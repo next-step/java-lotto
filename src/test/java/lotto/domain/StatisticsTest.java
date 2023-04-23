@@ -9,10 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class StatisticsTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"6,2000000000", "5,1500000", "4,50000", "3,5000"})
+    @CsvSource(value = {"6,2000000000", "5,1500000", "4,50000", "3,5000", "2,0", "1,0", "0,0"})
     @DisplayName("금액 테스트")
     void prizeTest(int matchingBall, int prize) {
-        assertThat(Statistics.getPrize(matchingBall))
+        Statistics statistics = Statistics.initStatistics(matchingBall);
+        assertThat(statistics.getPrize())
                 .isEqualTo(prize);
     }
 

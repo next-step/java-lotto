@@ -32,7 +32,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("===============");
         printStatistics(resultMap);
-        printProfit(resultMap, lottoAmount);
+//        printProfit(resultMap, lottoAmount);
     }
 
     private static void printStatistics(Winners resultMap) {
@@ -41,34 +41,34 @@ public class OutputView {
         }
     }
 
-    private static void printProfit(Winners resultMap, Money lottoAmount) {
-        double profit = resultMap.getProfit(lottoAmount);
-
-        DecimalFormat form = new DecimalFormat("#.##");
-        form.setRoundingMode(RoundingMode.DOWN);
-
-        System.out.print("총 수익률은 " + form.format(profit) + "입니다.");
-
-        printRealProfit(profit);
-        printStandardProfit(profit);
-        printLoseProfit(profit);
-    }
-
-    private static void printRealProfit(double profit) {
-        if (profit > PROFIT_CONDITION) {
-            System.out.println("(축하드립니다~ 개이득!)");
-        }
-    }
-
-    private static void printStandardProfit(double profit) {
-        if (profit == PROFIT_CONDITION) {
-            System.out.println("(본전이네요.)");
-        }
-    }
-
-    private static void printLoseProfit(double profit) {
-        if (profit < PROFIT_CONDITION) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
-        }
-    }
+//    private static void printProfit(Winners resultMap, Money lottoAmount) {
+//        double profit = resultMap.getProfit(lottoAmount);
+//
+//        DecimalFormat form = new DecimalFormat("#.##");
+//        form.setRoundingMode(RoundingMode.DOWN);
+//
+//        System.out.print("총 수익률은 " + form.format(profit) + "입니다.");
+//
+//        printRealProfit(profit);
+//        printStandardProfit(profit);
+//        printLoseProfit(profit);
+//    }
+//
+//    private static void printRealProfit(double profit) {
+//        if (profit > PROFIT_CONDITION) {
+//            System.out.println("(축하드립니다~ 개이득!)");
+//        }
+//    }
+//
+//    private static void printStandardProfit(double profit) {
+//        if (profit == PROFIT_CONDITION) {
+//            System.out.println("(본전이네요.)");
+//        }
+//    }
+//
+//    private static void printLoseProfit(double profit) {
+//        if (profit < PROFIT_CONDITION) {
+//            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+//        }
+//    }
 }

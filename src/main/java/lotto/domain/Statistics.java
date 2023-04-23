@@ -6,7 +6,8 @@ public enum Statistics {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
-    FOURTH(3, 5_000);
+    FOURTH(3, 5_000),
+    MISS(0, 0);
 
     public static final int ZERO = 0;
 
@@ -18,11 +19,14 @@ public enum Statistics {
         this.prize = prize;
     }
 
-    public static int getPrize(int matchingBall) {
+    public static Statistics initStatistics(int matchingBall) {
         return Arrays.stream(values())
                 .filter(s -> s.matchingBall == matchingBall)
                 .findFirst()
-                .map(s -> s.prize)
-                .orElse(ZERO);
+                .orElse(MISS);
+    }
+
+    public int getPrize() {
+        return prize;
     }
 }
