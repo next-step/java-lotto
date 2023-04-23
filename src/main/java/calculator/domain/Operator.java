@@ -4,7 +4,7 @@ import static calculator.domain.OperatorType.*;
 
 public class Operator {
 
-    private final String operator;
+    private final OperatorType operatorType;
 
     public Operator(String input) {
         if (isNullOrEmpty(input)) {
@@ -13,55 +13,38 @@ public class Operator {
         if (isNotOperator(input)) {
             throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
         }
-        this.operator = input;
+        this.operatorType = OperatorType.of(input);
     }
 
-    public String value() {
-        return operator;
+    public OperatorType value() {
+        return this.operatorType;
     }
 
     boolean isNullOrEmpty(String input) {
         return input == null || input.isEmpty();
     }
 
-    boolean isNotOperator(String operator) {
-        return !(operator.equals(PLUS.getCharacter())
-                || operator.equals(MINUS.getCharacter())
-                || operator.equals(MULTIPLY.getCharacter())
-                || operator.equals(DIVIDE.getCharacter()));
+    boolean isNotOperator(String input) {
+        return !(input.equals(PLUS.getCharacter())
+                || input.equals(MINUS.getCharacter())
+                || input.equals(MULTIPLY.getCharacter())
+                || input.equals(DIVIDE.getCharacter()));
     }
 
     public boolean isPlus() {
-        return operator.equals(PLUS.getCharacter());
+        return operatorType.equals(PLUS);
     }
 
     public boolean isMinus() {
-        return operator.equals(MINUS.getCharacter());
+        return operatorType.equals(MINUS);
     }
 
     public boolean isMultiply() {
-        return operator.equals(MULTIPLY.getCharacter());
+        return operatorType.equals(MULTIPLY);
     }
 
     public boolean isDivide() {
-        return operator.equals(DIVIDE.getCharacter());
+        return operatorType.equals(DIVIDE);
     }
 
-}
-
-enum OperatorType {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
-
-    final private String character;
-
-    OperatorType(String character) {
-        this.character = character;
-    }
-
-    public String getCharacter() {
-        return character;
-    }
 }
