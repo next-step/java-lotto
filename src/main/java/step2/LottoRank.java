@@ -33,16 +33,16 @@ public enum LottoRank {
     }
 
     private static void addCountOfMatch(Integer countWinner) {
-        if (countWinner == 3) {
+        if (countWinner == MATCH_THREE.countOfMatch) {
             MATCH_THREE.numOfWinner++;
         }
-        if (countWinner == 4) {
+        if (countWinner == MATCH_FOUR.countOfMatch) {
             MATCH_FOUR.numOfWinner++;
         }
-        if (countWinner == 5) {
+        if (countWinner == MATCH_FIVE.countOfMatch) {
             MATCH_FIVE.numOfWinner++;
         }
-        if (countWinner == 6) {
+        if (countWinner == MATCH_SIX.countOfMatch) {
             MATCH_SIX.numOfWinner++;
         }
     }

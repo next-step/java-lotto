@@ -1,6 +1,7 @@
 package step2.view;
 
 import step2.LottoRank;
+import step2.LottoResult;
 import step2.LottoResults;
 
 public class ResultView {
@@ -15,7 +16,9 @@ public class ResultView {
     }
 
     public void showLottoGameResults() {
-        System.out.println(lottoResults.toString());
+        for (LottoResult lottoResult : lottoResults.getLottoResults()) {
+            System.out.println(lottoResult.toString());
+        }
         System.out.println();
     }
 
