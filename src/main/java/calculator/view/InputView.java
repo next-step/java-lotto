@@ -9,7 +9,7 @@ public class InputView {
 
     public static ClientResponse clientResponse() {
         printSource(GUID_MESSAGE);
-        return new ClientResponse(new Scanner(System.in).next());
+        return new ClientResponse(new Scanner(System.in).nextLine());
     }
 
     private static void printSource(String source) {
