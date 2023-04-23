@@ -15,8 +15,8 @@ public class OutputPresent {
     public OutputPresent() {
     }
 
-    public void presentTickets(List<String> randeringTickets) {
-        for(String renderedTicket : randeringTickets) {
+    public void presentTickets(List<String> renderingTickets) {
+        for(String renderedTicket : renderingTickets) {
             System.out.println(renderedTicket);
         }
     }
