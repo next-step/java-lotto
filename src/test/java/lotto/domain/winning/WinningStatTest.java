@@ -18,7 +18,7 @@ public class WinningStatTest {
         final Lotto fourth = new Lotto(new LottoNumbers("1,2,3,7,8,9"));
         final Amount amount = new Amount(14000);
         final LottoNumber bonusBall = new LottoNumber(5);
-        winningStat.judgeWinning(winning, fourth, bonusBall);
+        winningStat.judgeWinning(winning, new WinningBall(fourth, bonusBall));
 
         assertThat(winningStat.rateOfReturn(amount))
                 .isEqualTo(0.35F);

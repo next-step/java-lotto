@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.strategy.TestStrategy;
+import lotto.domain.winning.WinningBall;
 import lotto.domain.winning.WinningStat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,8 +28,8 @@ public class LottosTest {
     void rating() {
         final int unitCount = 6;
         final Lotto winningLotto = Lotto.winningLotto("1,2,3,4,5,6");
-        final LottoNumber bonusBall = new LottoNumber(5);
-        assertThat(new Lottos(unitCount, testStrategy).rating(winningLotto, bonusBall))
+        final LottoNumber bonusBall = new LottoNumber(8);
+        assertThat(new Lottos(unitCount, testStrategy).rating(new WinningBall(winningLotto, bonusBall)))
                 .isInstanceOf(WinningStat.class);
     }
 }

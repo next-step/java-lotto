@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
+import lotto.domain.winning.WinningBall;
 import lotto.domain.winning.WinningStat;
 import lotto.dto.LottoNumbersDto;
 
@@ -30,7 +31,7 @@ public class LottoMachine {
         return new LottoNumber(bonusBallNumber);
     }
 
-    public WinningStat winningStat(Lottos lottos, Lotto winningLotto, LottoNumber bonusBall) {
-        return lottos.rating(winningLotto, bonusBall);
+    public WinningStat winningStat(Lottos lottos, WinningBall winningBall) {
+        return lottos.rating(winningBall);
     }
 }

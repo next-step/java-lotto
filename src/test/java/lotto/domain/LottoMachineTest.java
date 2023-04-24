@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.strategy.TestStrategy;
+import lotto.domain.winning.WinningBall;
 import lotto.domain.winning.WinningStat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -50,11 +51,11 @@ public class LottoMachineTest {
     @DisplayName("당첨 통계 확인")
     void winnerStat() {
         final Lottos lottos = new Lottos(10, testStrategy);
-        final LottoNumber bonusBall = new LottoNumber(5);
+        final LottoNumber bonusBall = new LottoNumber(8);
 
         final Lotto winningLotto = this.lottoMachine.winningLotto("1,2,3,4,5,6");
 
-        assertThat(this.lottoMachine.winningStat(lottos, winningLotto, bonusBall))
+        assertThat(this.lottoMachine.winningStat(lottos, new WinningBall(winningLotto, bonusBall)))
                 .isInstanceOf(WinningStat.class);
     }
 }
