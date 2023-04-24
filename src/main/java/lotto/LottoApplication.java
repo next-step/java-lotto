@@ -26,7 +26,7 @@ public class LottoApplication {
 
     private static void run() {
         int amount = InputView.askAmount();
-        Lottos lottos = new Lottos(Lottos.lottoList( amount / Lottos.LOTTO_AMOUNT));
+        Lottos lottos = Lottos.of(amount);
         InputView.printPurchaseComplete(lottos);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers());

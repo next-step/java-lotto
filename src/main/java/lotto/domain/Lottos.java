@@ -13,12 +13,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static List<Lotto> lottoList(int count) {
+    public static Lottos of(int amount) {
         List<Lotto> lottos = new ArrayList<>();
+        int count = amount / LOTTO_AMOUNT;
         for (int i = 0; i < count; i++) {
             lottos.add(Lotto.purchase());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public int count() {
