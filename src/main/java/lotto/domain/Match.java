@@ -31,7 +31,7 @@ public class Match {
         return numbers;
     }
 
-    private int numberAutoIssue() {
+    private int issueAutoNumber() {
         return RANDOM.nextInt(46) + 1;
     }
 
