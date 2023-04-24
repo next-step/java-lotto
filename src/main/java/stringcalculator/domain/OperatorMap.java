@@ -2,11 +2,11 @@ package stringcalculator.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import stringcalculator.domain.operator.AddOperator;
 import stringcalculator.domain.operator.DivideOperator;
-import stringcalculator.domain.operator.SubtractOperator;
 import stringcalculator.domain.operator.MultiplyOperator;
 import stringcalculator.domain.operator.Operator;
-import stringcalculator.domain.operator.AddOperator;
+import stringcalculator.domain.operator.SubtractOperator;
 
 public class OperatorMap {
 

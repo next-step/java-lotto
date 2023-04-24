@@ -7,11 +7,11 @@ public class StringCalculator {
   private Input input;
   private OperatorMap operatorMap;
 
-  public StringCalculator(String input) {
+  public StringCalculator(final String input) {
     this(new Input(input), new OperatorMap());
   }
 
-  private StringCalculator(Input input, OperatorMap operatorMap) {
+  private StringCalculator(final Input input, final OperatorMap operatorMap) {
     this.input = input;
     this.operatorMap = operatorMap;
   }
