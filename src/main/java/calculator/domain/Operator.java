@@ -2,7 +2,7 @@ package calculator.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.ToIntBiFunction;
+import java.util.function.IntBinaryOperator;
 
 public enum Operator {
     ADD("+", (num1, num2) -> num1 + num2),
@@ -13,7 +13,7 @@ public enum Operator {
     private static final Map<String, Operator> OPERATORS = new HashMap<>();
 
     private String operator;
-    private ToIntBiFunction<Integer, Integer> expression;
+    private IntBinaryOperator expression;
 
     static {
         for (Operator operator : values()) {
@@ -21,7 +21,7 @@ public enum Operator {
         }
     }
 
-    Operator(String operator, ToIntBiFunction<Integer, Integer> expression) {
+    Operator(String operator, IntBinaryOperator expression) {
         this.operator = operator;
         this.expression = expression;
     }
