@@ -18,14 +18,10 @@ public class Lotto {
         OutputPresent outputPresent = new OutputPresent();
         Issuer issuer = new Issuer();
 
-        int count = inputPresent.purchaseCount();
-        issuer.purchaseTickets(count);
+        issuer.purchaseTickets(inputPresent.purchaseCount());
         outputPresent.presentTickets(issuer.purchasedTickets());
 
-        Ticket winningTicket = inputPresent.winningNumbers();
-        outputPresent.presentTickets(List.of(winningTicket));
-        Winners winners = issuer.makeWinners(winningTicket);
-
+        Winners winners = issuer.makeWinners(inputPresent.winningNumbers());
         outputPresent.presentWinners(new WinnerPresentDTO(winners));
         outputPresent.presentIncome(new IncomePresentDTO(winners));
     }
