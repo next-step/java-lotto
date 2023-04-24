@@ -12,21 +12,32 @@ public class Number {
         throw new IllegalArgumentException("숫자가 아닙니다.");
     }
 
-    public boolean isNumeric(String input) {
+    public static boolean isNumeric(String input) {
         try {
             Integer.parseInt(input);
             return true;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    public int currentNumber() {
+    public int value() {
         return number;
     }
 
-    public void changeNumber(int number) {
-        this.number = number;
+    public Number plus(Number number) {
+        return new Number(String.valueOf(this.number + number.value()));
     }
 
+    public Number minus(Number number) {
+        return new Number(String.valueOf(this.number - number.value()));
+    }
+
+    public Number multiple(Number number) {
+        return new Number(String.valueOf(this.number * number.value()));
+    }
+
+    public Number divide(Number number) {
+        return new Number(String.valueOf(this.number / number.value()));
+    }
 }

@@ -2,60 +2,36 @@ package calculator.Model;
 
 import calculator.Enums.Operator;
 
-public class Calculator {
-    private static final String INITIAL_NUMBER = "0";
-    private static final String INITIAL_OPERATOR = "+";
+import java.util.ArrayList;
+import java.util.List;
 
-    private final Number result;
-    private final Symbol symbol;
-    private final Number newNumber;
+public class Calculator {
+    private static final int INITIAL_NUMBER = 0;
+
+    private final List<Number> numbers;
+    private final List<Operator> operators;
 
     public Calculator() {
-        result = new Number(INITIAL_NUMBER);
-        symbol = new Symbol(INITIAL_OPERATOR);
-        newNumber = new Number(INITIAL_NUMBER);
+        numbers = new ArrayList<>();
+        operators = new ArrayList<>();
     }
 
+    public Calculator(CalculatorElements calculatorElements) {
+        numbers = calculatorElements.numbers();
+        operators = calculatorElements.operators();
+    }
 
-    public void type(String element) {
-        if (!newSymbol(element) && !newNumber(element)) {
-            throw new IllegalArgumentException("숫자나 연산자가 아닙니다.");
+    public int execute() {
+        Number result = numbers.get(INITIAL_NUMBER);
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            result = calculate(result, operators.get(i), numbers.get(i + 1));
         }
 
-        execute(result.currentNumber(), symbol.currentSymbol(), newNumber.currentNumber());
+        return result.value();
     }
 
-    private boolean newNumber(String element) {
-        try {
-            newNumber.changeNumber(Integer.parseInt(element));
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean newSymbol(String element) {
-        try {
-            symbol.changeSymbol(element);
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public void execute(int numberBeforeOperator, String operator, int numberAfterOperator) {
-        int currentNumber = Operator.execute(numberBeforeOperator, operator, numberAfterOperator);
-        result.changeNumber(currentNumber);
-    }
-
-    public String currentOperator() {
-        return symbol.currentSymbol();
-    }
-
-    public int currentResult() {
-        return result.currentNumber();
+    public Number calculate(Number numberBeforeOperator, Operator operator, Number numberAfterOperator) {
+        return operator.execute(numberBeforeOperator, numberAfterOperator);
     }
 }
 
