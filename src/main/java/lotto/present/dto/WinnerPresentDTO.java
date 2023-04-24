@@ -1,4 +1,4 @@
-package lotto.present.vo;
+package lotto.present.dto;
 
 import lotto.domain.Winners;
 

@@ -5,8 +5,8 @@ import lotto.domain.Ticket;
 import lotto.domain.Winners;
 import lotto.present.InputPresent;
 import lotto.present.OutputPresent;
-import lotto.present.vo.IncomePresentDTO;
-import lotto.present.vo.WinnerPresentDTO;
+import lotto.present.dto.IncomePresentDTO;
+import lotto.present.dto.WinnerPresentDTO;
 
 import java.util.List;
 

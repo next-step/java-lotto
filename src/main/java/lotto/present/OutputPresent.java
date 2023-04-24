@@ -1,8 +1,8 @@
 package lotto.present;
 
 import lotto.domain.Ticket;
-import lotto.present.vo.IncomePresentDTO;
-import lotto.present.vo.WinnerPresentDTO;
+import lotto.present.dto.IncomePresentDTO;
+import lotto.present.dto.WinnerPresentDTO;
 
 import java.util.List;
 
