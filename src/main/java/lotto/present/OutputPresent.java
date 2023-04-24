@@ -33,7 +33,7 @@ public class OutputPresent {
 
     public void presentTickets(List<Ticket> tickets) {
         for(Ticket ticket : tickets) {
-            System.out.println(ticket.rendering());
+            System.out.println(ticket.toString());
         }
     }
 }

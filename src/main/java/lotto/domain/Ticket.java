@@ -35,25 +35,18 @@ public class Ticket {
         }
     }
 
-//    public String rendering() {
-//        return this.numbers
-//                .stream()
-//                .map(number -> Integer.toString(number))
-//                .sorted()
-//                .collect(Collectors.joining(", ", "[", "]"));
-//    }
-    public String rendering() {
-        String[] stringNumbers = new String[this.numbers.size()];
-        int index = 0;
-        for(Integer number : numbers) {
-            stringNumbers[index++] = number.toString();
-        }
-        return "[".concat(String.join(", ", stringNumbers)).concat("]");
-    }
-
     public int overlapNumberCount(Ticket otherTicket) {
         Set<Integer> copyThisNumbers = new HashSet<>(this.numbers);
         copyThisNumbers.addAll(otherTicket.numbers);
         return 12 - copyThisNumbers.size();
+    }
+
+    @Override
+    public String toString() {
+        return this.numbers
+                .stream()
+                .map(number -> Integer.toString(number))
+                .sorted()
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

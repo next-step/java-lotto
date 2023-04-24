@@ -18,7 +18,7 @@ public class TicketTest {
         //when
         Ticket ticket = new Ticket(input);
         //then
-        assertThat(ticket.rendering()).isEqualTo(answer);
+        assertThat(ticket.toString()).isEqualTo(answer);
     }
 
     @DisplayName("응모권마다 지정된 숫자의 수가 6개 미만인 경우 실패한다")
