@@ -6,14 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WinnerInfo {
-
+public class CountOfWinners {
 
     private static final int INIT_WINNER_COUNT = 0;
 
     private final Map<LottoRank, Integer> winnerResults;
 
-    public WinnerInfo(List<Integer> matchingCounts) {
+    public CountOfWinners(List<Integer> matchingCounts) {
         winnerResults = new HashMap<>();
 
         for (LottoRank lottoRank : LottoRank.values()) {
@@ -26,8 +25,7 @@ public class WinnerInfo {
     }
 
     private void countMatchedWinners(Integer matchingCount) {
-        LottoRank lottoRank = LottoRank.getLottoNumber(matchingCount);
-        winnerResults.compute(lottoRank, (k, v) -> v + 1);
+        LottoRank.getLottoNumber(matchingCount, winnerResults);
     }
 
     public double calculateRateOfReturn(int numOfLottoTicket) {

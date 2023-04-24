@@ -26,20 +26,19 @@ public enum LottoRank {
         this.prizeAmount = prizeAmount;
     }
 
-    public static LottoRank getLottoNumber(Integer matchingCount) {
+    public static void getLottoNumber(Integer matchingCount, Map<LottoRank, Integer> winnerResults) {
         if (MATCH_THREE.matchable.isMatch(matchingCount)) {
-            return MATCH_THREE;
+            winnerResults.compute(MATCH_THREE, (k, v) -> v + 1);
         }
         if (MATCH_FOUR.matchable.isMatch(matchingCount)) {
-            return MATCH_FOUR;
+            winnerResults.compute(MATCH_FOUR, (k, v) -> v + 1);
         }
         if (MATCH_FIVE.matchable.isMatch(matchingCount)) {
-            return MATCH_FIVE;
+            winnerResults.compute(MATCH_FIVE, (k, v) -> v + 1);
         }
         if (MATCH_SIX.matchable.isMatch(matchingCount)) {
-            return MATCH_SIX;
+            winnerResults.compute(MATCH_SIX, (k, v) -> v + 1);
         }
-        throw new IllegalArgumentException("맞춘 로또 번호 갯수는 당첨 범위가 아닙니다.");
     }
 
     public static double calculateRateOfReturn(int numOfLottoTicket, Map<LottoRank, Integer> winnerResults) {

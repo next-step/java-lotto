@@ -4,7 +4,7 @@ import step2.service.LottoGame;
 import step2.view.InputView;
 import step2.view.ResultView;
 import step2.vo.LottoResults;
-import step2.vo.WinnerInfo;
+import step2.vo.CountOfWinners;
 
 public class Main {
 
@@ -18,9 +18,9 @@ public class Main {
         ResultView resultView = new ResultView(lottoResults);
         resultView.showLottoGameResults();
 
-        WinnerInfo winnerInfo = new WinnerInfo(lottoResults.countNumOfWinner(inputView.getWinNumbers()));
+        CountOfWinners countOfWinners = new CountOfWinners(lottoResults.countNumOfWinner(inputView.getWinNumbers()));
 
-        resultView.showLottoWinners(winnerInfo);
-        resultView.showRateOfReturn(winnerInfo.calculateRateOfReturn(numOfLottoTicket));
+        resultView.showLottoWinners(countOfWinners);
+        resultView.showRateOfReturn(countOfWinners.calculateRateOfReturn(numOfLottoTicket));
     }
 }

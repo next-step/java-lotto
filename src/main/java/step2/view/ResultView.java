@@ -3,7 +3,7 @@ package step2.view;
 import step2.service.LottoRank;
 import step2.vo.LottoResult;
 import step2.vo.LottoResults;
-import step2.vo.WinnerInfo;
+import step2.vo.CountOfWinners;
 
 import java.util.Map;
 
@@ -22,8 +22,8 @@ public class ResultView {
         System.out.println();
     }
 
-    public void showLottoWinners(WinnerInfo winnerInfo) {
-        Map<LottoRank, Integer> winnerResults = winnerInfo.getWinnerResults();
+    public void showLottoWinners(CountOfWinners countOfWinners) {
+        Map<LottoRank, Integer> winnerResults = countOfWinners.getWinnerResults();
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원)- " + winnerResults.get(LottoRank.MATCH_THREE) + "개");
