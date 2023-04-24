@@ -1,6 +1,10 @@
 package lotto.domain.rating;
 
+import lotto.domain.winning.WinningCount;
+
 import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum WinningRatingType {
     FIRST(6, 2000000000),
@@ -17,6 +21,10 @@ public enum WinningRatingType {
         this.reward = reward;
     }
 
+    public int getReward() {
+        return reward;
+    }
+
     public static WinningRatingType findBy(int count) {
         return Arrays.stream(values())
                 .filter(value -> value.count == count)
@@ -24,7 +32,11 @@ public enum WinningRatingType {
                 .orElseGet(() -> WinningRatingType.LOST);
     }
 
-    public int getReward() {
-        return this.reward;
+    public static Map<WinningRatingType, WinningCount> toWinningCount() {
+        return Arrays.stream(values())
+                .collect(Collectors.toMap(
+                        typeKey -> typeKey,
+                        value -> new WinningCount()
+                ));
     }
 }

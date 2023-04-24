@@ -57,7 +57,6 @@ public class LottoNumbers {
     }
 
     private void checkSize(List<LottoNumber> lottoNumbers) {
-        System.out.println(lottoNumbers);
         if (lottoNumbers == null || lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6자리입니다.");
         }

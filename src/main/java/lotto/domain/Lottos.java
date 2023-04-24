@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.rating.WinningRatingType;
 import lotto.domain.strategy.LottoStrategy;
+import lotto.domain.winning.WinningStat;
 import lotto.dto.LottoNumbersDto;
-import lotto.dto.WinningStatDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +20,14 @@ public class Lottos {
         this.lottos = lottoList;
     }
 
-    public WinningStatDto rating(Lotto winningLotto) {
-        final WinningStatDto winningStatDto = new WinningStatDto(0, 0, 0, 0);
+    public WinningStat rating(Lotto winningLotto) {
+        final WinningStat winningStat = new WinningStat();
 
         for (Lotto lotto : this.lottos) {
-            final WinningRatingType type = WinningRatingType.findBy(lotto.statCount(winningLotto));
-            winningStatDto.includeStatCount(type);
+            winningStat.judgeWinning(winningLotto, lotto);
         }
 
-        return winningStatDto;
+        return winningStat;
     }
 
     public LottoNumbersDto lottoNumbersDto() {
