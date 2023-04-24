@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +15,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class NumbersTest {
 
-    private static final String [] NUMBERS = {"1","2","3","4"};
+    private static final List<Integer> NUMBERS = Arrays.asList(1,2,3,4);
 
 
     private Numbers numbers;
@@ -32,15 +33,7 @@ public class NumbersTest {
 
     @ParameterizedTest(name = "숫자 배열의 값이 비어있는 경우 예외가 발생한다.")
     @NullAndEmptySource
-    void createObjExceptionTest(String [] emptySource) {
-        assertThatThrownBy(() -> new Numbers(emptySource))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("연산 가능한 숫자가 없습니다.");
-    }
-
-    @ParameterizedTest(name = "숫자 배열의 값이 비어있는 경우 예외가 발생한다.")
-    @NullAndEmptySource
-    void createObjExceptionTest(int [] emptySource) {
+    void createObjExceptionTest(List<Integer> emptySource) {
         assertThatThrownBy(() -> new Numbers(emptySource))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("연산 가능한 숫자가 없습니다.");

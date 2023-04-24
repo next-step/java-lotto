@@ -1,6 +1,10 @@
 package calculator.domain;
 
+import static java.lang.Integer.parseInt;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ClientResponse {
 
@@ -27,7 +31,7 @@ public class ClientResponse {
         return source == null || source.isEmpty();
     }
 
-    public String[] getNumbers() {
+    public List<Integer> getNumbers() {
         return evenIndexedElements();
     }
 
@@ -45,11 +49,11 @@ public class ClientResponse {
         return numbers;
     }
 
-    private String[] evenIndexedElements() {
-        String[] numbers = new String[roundedUpNumber(splitInputSize())];
+    private List<Integer> evenIndexedElements() {
+        List<Integer> numbers = new ArrayList<>();
 
-        for (int index = 0; index < numbers.length; index++) {
-            numbers[index] = splitInput()[index * 2];
+        for (int index = 0; index < roundedUpNumber(splitInputSize()); index++) {
+            numbers.add(parseInt(splitInput()[index * 2]));
         }
 
         return numbers;
