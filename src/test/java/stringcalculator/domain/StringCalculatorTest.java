@@ -41,7 +41,7 @@ public class StringCalculatorTest {
 
   @DisplayName("사칙연산을 정상적으로 수행한다.")
   @ParameterizedTest
-  @CsvSource({"1 + 1,2", "2 - 1,1", "2 * 2,4", "4 / 3,1", "3 / 5,0"})
+  @CsvSource({"1 + 1,2", "2 - 1,1", "2 * 2,4", "4 / 3,1", "3 / 5 + 100,100", "1 + 1 + 1,3"})
   public void calculate_Result(String input, int result) {
     StringCalculator calculator = new StringCalculator(input);
 
