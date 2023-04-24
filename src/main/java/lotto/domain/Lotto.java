@@ -12,10 +12,9 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(lottoStrategy);
     }
 
-    private Lotto(LottoNumbers lottoNumbers) {
+    public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
-
 
     public static Lotto winningLotto(String numbers) {
         return new Lotto(LottoNumbers.winningNumbers(numbers));
@@ -23,6 +22,10 @@ public class Lotto {
 
     public int statCount(Lotto lotto) {
         return this.lottoNumbers.statCount(lotto.lottoNumbers);
+    }
+
+    public boolean isBonusBall(LottoNumber bonusBall) {
+        return this.lottoNumbers.isBonusBall(bonusBall);
     }
 
     List<Integer> getIntegerLottoNumbers() {

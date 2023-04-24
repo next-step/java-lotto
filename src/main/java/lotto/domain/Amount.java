@@ -21,8 +21,8 @@ public class Amount {
         return this.amount / unitAmount;
     }
 
-    public float calculateRateOfReturn(int totalReward) {
-        return (float) (Math.floor(((float) totalReward / this.amount * 100)) / 100.0);
+    public int getAmount() {
+        return amount;
     }
 
     @Override

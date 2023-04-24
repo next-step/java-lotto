@@ -2,7 +2,8 @@ package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.strategy.TestStrategy;
-import lotto.dto.WinningStatDto;
+import lotto.domain.winning.WinningBall;
+import lotto.domain.winning.WinningStat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class LottoMachineTest {
 
     @Test
     @DisplayName("주어진 금액으로 몇 장의 로또인지 확인")
-    void numberOfLottoTickets() {
+    void calculateUnitCount() {
         final LottoMachine lottoMachine = new LottoMachine();
         final Amount amount = new Amount(10001);
 
@@ -29,25 +30,28 @@ public class LottoMachineTest {
     }
 
     @Test
+    @DisplayName("돈을 받으면 로또뭉치를 반환")
+    void makeLottos() {
+        final Amount amount = new Amount(10000);
+
+        assertThat(lottoMachine.makeLottos(amount, testStrategy))
+                .isInstanceOf(Lottos.class);
+    }
+
+    @Test
     @DisplayName("당첨 번호 입력 테스트")
     void conclusionWinningNumbers() {
-        final Lotto winningLotto = new Lotto(testStrategy);
 
-        assertThat(this.lottoMachine.winningLotto("1,2,3,4,5,6"))
-                .isEqualTo(winningLotto);
+        assertThat(this.lottoMachine.winningBall("1,2,3,4,5,6", 7))
+                .isInstanceOf(WinningBall.class);
     }
 
     @Test
     @DisplayName("당첨 통계 확인")
     void winnerStat() {
         final Lottos lottos = new Lottos(10, testStrategy);
-        final Amount amount = new Amount(10000);
 
-        final Lotto winningLotto = this.lottoMachine.winningLotto("1,2,3,4,5,6");
-
-        assertThat(this.lottoMachine.winningStat(lottos, winningLotto, amount))
-                .isInstanceOf(WinningStatDto.class)
-                .extracting("firstCount")
-                .isEqualTo(10);
+        assertThat(this.lottoMachine.winningStat(lottos, lottoMachine.winningBall("1,2,3,4,5,6", 10)))
+                .isInstanceOf(WinningStat.class);
     }
 }
