@@ -37,15 +37,15 @@ class LottosTest {
         Winners winners = lottos.findStatistics(winningLotto, bonusNumber);
 
         assertAll(
-                () -> assertThat(winners.getWinnersCount(6, false))
+                () -> assertThat(winners.getWinnersMatchingCount(6, false))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersCount(5, true))
+                () -> assertThat(winners.getWinnersMatchingCount(5, true))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersCount(5, true))
+                () -> assertThat(winners.getWinnersMatchingCount(5, true))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersCount(4, true))
+                () -> assertThat(winners.getWinnersMatchingCount(4, true))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersCount(3, true))
+                () -> assertThat(winners.getWinnersMatchingCount(3, true))
                         .isEqualTo(1)
         );
     }

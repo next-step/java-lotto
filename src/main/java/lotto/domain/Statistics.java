@@ -51,6 +51,10 @@ public enum Statistics {
         return prize * count;
     }
 
+    public int getMatchingBall() {
+        return matchingBall;
+    }
+
     public int getPrize() {
         return prize;
     }

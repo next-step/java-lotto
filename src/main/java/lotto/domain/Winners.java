@@ -13,8 +13,8 @@ public class Winners {
         winnersCount.merge(Statistics.initStatistics(matchingBall, hasBonusNumber), ADD_COUNT, Integer::sum);
     }
 
-    public int getWinnersCount(int matchingBall, boolean hasBonusNumber) {
-        return winnersCount.getOrDefault(Statistics.initStatistics(matchingBall, hasBonusNumber), DEFAULT_VALUE);
+    public int getWinnersMatchingCount(Statistics statistics) {
+        return winnersCount.getOrDefault(statistics, DEFAULT_VALUE);
     }
 
     public int getPrize(int matchingBall, boolean hasBonusNumber) {

@@ -19,7 +19,7 @@ class WinnersTest {
         winners.addWinner(matchingBall, false);
         winners.addWinner(matchingBall, false);
 
-        assertThat(winners.getWinnersCount(matchingBall, false))
+        assertThat(winners.getWinnersMatchingCount(matchingBall, false))
                 .isEqualTo(3);
     }
 
@@ -33,7 +33,7 @@ class WinnersTest {
         winners.addWinner(matchingBall, false);
         winners.addWinner(matchingBall, false);
 
-        assertThat(winners.getWinnersCount(matchingBall, false))
+        assertThat(winners.getWinnersMatchingCount(matchingBall, false))
                 .isEqualTo(3);
     }
 
