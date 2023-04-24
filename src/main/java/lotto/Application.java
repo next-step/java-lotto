@@ -14,5 +14,7 @@ public class Application {
         LottoGenerator generator = new LottoGenerator();
         List<Lotto> lottos = generator.generate(price);
 
+        Printable lottosOutput = new LottosOutput(lottos);
+        lottosOutput.print();
     }
 }
