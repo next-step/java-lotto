@@ -22,6 +22,6 @@ public class IssuerTest {
         //when
         issuerFixture.purchaseTickets(input);
         //then
-        assertThat(issuerFixture.renderingTickets()).hasSize(input);
+        assertThat(issuerFixture.purchasedTickets()).hasSize(input);
     }
 }

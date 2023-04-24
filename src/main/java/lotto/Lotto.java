@@ -20,10 +20,10 @@ public class Lotto {
 
         int count = inputPresent.purchaseCount();
         issuer.purchaseTickets(count);
-        outputPresent.presentTickets(issuer.renderingTickets());
+        outputPresent.presentTickets(issuer.purchasedTickets());
 
         Ticket winningTicket = inputPresent.winningNumbers();
-        outputPresent.presentTickets(List.of(winningTicket.rendering()));
+        outputPresent.presentTickets(List.of(winningTicket));
         Winners winners = issuer.makeWinners(winningTicket);
 
         outputPresent.presentWinners(new WinnerPresentVO(winners));

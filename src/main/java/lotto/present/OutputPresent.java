@@ -1,5 +1,6 @@
 package lotto.present;
 
+import lotto.domain.Ticket;
 import lotto.present.vo.IncomePresentVO;
 import lotto.present.vo.WinnerPresentVO;
 
@@ -15,11 +16,7 @@ public class OutputPresent {
     public OutputPresent() {
     }
 
-    public void presentTickets(List<String> renderingTickets) {
-        for(String renderedTicket : renderingTickets) {
-            System.out.println(renderedTicket);
-        }
-    }
+
 
     public void presentWinners(WinnerPresentVO winnerPresentVO) {
         System.out.println(STATISTICS_HEAD);
@@ -32,5 +29,11 @@ public class OutputPresent {
     public void presentIncome(IncomePresentVO incomePresentVO) {
         System.out.printf(RETURN_RATE, incomePresentVO.getProfitRatio());
         System.out.print(incomePresentVO.getBreakEvenMessage());
+    }
+
+    public void presentTickets(List<Ticket> tickets) {
+        for(Ticket ticket : tickets) {
+            System.out.println(ticket.rendering());
+        }
     }
 }
