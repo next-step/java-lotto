@@ -24,6 +24,10 @@ public class Lotto {
         return lottoNumbers.findMatchingNumbers(winningLotto.getLottoNumbers());
     }
 
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.hasLottoNumber(bonusNumber);
+    }
+
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
     }

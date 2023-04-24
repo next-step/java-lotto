@@ -78,6 +78,11 @@ public class LottoNumbers {
         return lottoNumbers.contains(winningNumber);
     }
 
+    public boolean hasLottoNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.isSameNumber(bonusNumber));
+    }
+
     public int getLottoNumberSize() {
         return lottoNumbers.size();
     }

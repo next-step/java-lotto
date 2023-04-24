@@ -34,6 +34,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
+    public boolean isSameNumber(LottoNumber bonusNumber) {
+        return lottoNumber == bonusNumber.getLottoNumber();
+    }
+
     public int getLottoNumber() {
         return lottoNumber;
     }

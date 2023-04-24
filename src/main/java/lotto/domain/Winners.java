@@ -9,22 +9,22 @@ public class Winners {
 
     private final Map<Statistics, Integer> winnersCount = new EnumMap<>(Statistics.class);
 
-    public void addWinner(int matchingBall) {
-        winnersCount.merge(Statistics.initStatistics(matchingBall), ADD_COUNT, Integer::sum);
+    public void addWinner(int matchingBall, boolean hasBonusNumber) {
+        winnersCount.merge(Statistics.initStatistics(matchingBall, hasBonusNumber), ADD_COUNT, Integer::sum);
     }
 
-    public int getWinnersCount(int matchingBall) {
-        return winnersCount.getOrDefault(Statistics.initStatistics(matchingBall), DEFAULT_VALUE);
+    public int getWinnersCount(int matchingBall, boolean hasBonusNumber) {
+        return winnersCount.getOrDefault(Statistics.initStatistics(matchingBall, hasBonusNumber), DEFAULT_VALUE);
     }
 
-    public int getPrize(int matchingBall) {
-        return Statistics.initStatistics(matchingBall).getPrize();
+    public int getPrize(int matchingBall, boolean hasBonusNumber) {
+        return Statistics.initStatistics(matchingBall, hasBonusNumber).getPrize();
     }
 
     public double getProfit(Money amount) {
         int sum = winnersCount.keySet()
                 .stream()
-                .mapToInt(statistics -> statistics.getPrize() * winnersCount.getOrDefault(statistics, DEFAULT_VALUE))
+                .mapToInt(statistics -> statistics.getTotalPrize(winnersCount.getOrDefault(statistics, DEFAULT_VALUE)))
                 .reduce(DEFAULT_VALUE, Integer::sum);
 
         return (double) sum / amount.getAmount();

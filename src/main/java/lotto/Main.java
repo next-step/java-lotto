@@ -16,7 +16,7 @@ public class Main {
         Lotto winningLotto = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = InputView.inputBonusNumber();
 
-        Winners winners = lottos.findStatistics(winningLotto);
+        Winners winners = lottos.findStatistics(winningLotto, bonusNumber);
         OutputView.printResult(winners, lottoAmount);
     }
 }

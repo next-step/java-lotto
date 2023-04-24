@@ -26,22 +26,26 @@ class LottosTest {
 
         Lotto lotto_1 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
         Lotto lotto_2 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "7"));
-        Lotto lotto_3 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "8", "7"));
+        Lotto lotto_3 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "9"));
         Lotto lotto_4 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "8", "7"));
         Lotto lotto_5 = Lotto.initWinningLotto(List.of("1", "2", "3", "9", "8", "7"));
 
         Lottos lottos = new Lottos(List.of(lotto_1, lotto_2, lotto_3, lotto_4, lotto_5));
 
-        Winners winners = lottos.findStatistics(winningLotto);
+        LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
+
+        Winners winners = lottos.findStatistics(winningLotto, bonusNumber);
 
         assertAll(
-                () -> assertThat(winners.getWinnersCount(6))
+                () -> assertThat(winners.getWinnersCount(6, false))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersCount(5))
+                () -> assertThat(winners.getWinnersCount(5, true))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersCount(4))
-                        .isEqualTo(2),
-                () -> assertThat(winners.getWinnersCount(3))
+                () -> assertThat(winners.getWinnersCount(5, true))
+                        .isEqualTo(1),
+                () -> assertThat(winners.getWinnersCount(4, true))
+                        .isEqualTo(1),
+                () -> assertThat(winners.getWinnersCount(3, true))
                         .isEqualTo(1)
         );
     }

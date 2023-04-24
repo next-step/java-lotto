@@ -15,11 +15,11 @@ class WinnersTest {
         Winners winners = new Winners();
         int matchingBall = 6;
 
-        winners.addWinner(matchingBall);
-        winners.addWinner(matchingBall);
-        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall, false);
+        winners.addWinner(matchingBall, false);
+        winners.addWinner(matchingBall, false);
 
-        assertThat(winners.getWinnersCount(matchingBall))
+        assertThat(winners.getWinnersCount(matchingBall, false))
                 .isEqualTo(3);
     }
 
@@ -29,11 +29,11 @@ class WinnersTest {
         Winners winners = new Winners();
         int matchingBall = 2;
 
-        winners.addWinner(matchingBall);
-        winners.addWinner(matchingBall);
-        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall, false);
+        winners.addWinner(matchingBall, false);
+        winners.addWinner(matchingBall, false);
 
-        assertThat(winners.getWinnersCount(matchingBall))
+        assertThat(winners.getWinnersCount(matchingBall, false))
                 .isEqualTo(3);
     }
 
@@ -43,8 +43,17 @@ class WinnersTest {
     void getPrizeTest(int matchingBall, int prize) {
         Winners winners = new Winners();
 
-        assertThat(winners.getPrize(matchingBall))
+        assertThat(winners.getPrize(matchingBall, false))
                 .isEqualTo(prize);
+    }
+
+    @Test
+    @DisplayName("2등 테스트")
+    void secondPrizeTest() {
+        Winners winners = new Winners();
+
+        assertThat(winners.getPrize(5, true))
+                .isEqualTo(30_000_000);
     }
 
     @Test
@@ -54,7 +63,7 @@ class WinnersTest {
         Winners winners = new Winners();
         int matchingBall = 2;
 
-        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall, false);
 
         assertThat(winners.getProfit(amount))
                 .isEqualTo(0.0);
@@ -67,7 +76,7 @@ class WinnersTest {
         Winners winners = new Winners();
         int matchingBall = 3;
 
-        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall, false);
 
         assertThat(winners.getProfit(amount))
                 .isEqualTo((double) 5000 / 14000);
@@ -80,8 +89,8 @@ class WinnersTest {
         Winners winners = new Winners();
         int matchingBall = 3;
 
-        winners.addWinner(matchingBall);
-        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall, false);
+        winners.addWinner(matchingBall, false);
 
         assertThat(winners.getProfit(amount))
                 .isEqualTo((double) 10000 / 14000);
@@ -94,7 +103,7 @@ class WinnersTest {
         Winners winners = new Winners();
         int matchingBall = 3;
 
-        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall, false);
 
         assertThat(winners.getProfit(amount))
                 .isEqualTo(1.0);
@@ -107,8 +116,8 @@ class WinnersTest {
         Winners winners = new Winners();
         int matchingBall = 4;
 
-        winners.addWinner(matchingBall);
-        winners.addWinner(matchingBall);
+        winners.addWinner(matchingBall, false);
+        winners.addWinner(matchingBall, false);
 
         assertThat(winners.getProfit(amount))
                 .isGreaterThan((double) 10000 / 5000);

@@ -40,4 +40,14 @@ class LottoNumberTest {
                 .hasMessage("a는 숫자가 아닙니다. 숫자만 입력해주세요!");
     }
 
+    @Test
+    @DisplayName("LottoNumber 같음 테스트")
+    void sameLottoNumberTest() {
+        LottoNumber manualLottoNumber = LottoNumber.createManualLottoNumber("3");
+        LottoNumber bonusLottoNumber = LottoNumber.createManualLottoNumber("3");
+
+        assertThat(manualLottoNumber.isSameNumber(bonusLottoNumber))
+                .isTrue();
+    }
+
 }

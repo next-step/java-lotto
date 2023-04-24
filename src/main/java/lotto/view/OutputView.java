@@ -37,7 +37,7 @@ public class OutputView {
 
     private static void printStatistics(Winners resultMap) {
         for (int i = MINIMUM_PRIZE; i <= MAXIMUM_PRIZE; i++) {
-            System.out.println(i + "개 일치 (" + resultMap.getPrize(i) + ")- " + resultMap.getWinnersCount(i) + "개");
+//            System.out.println(i + "개 일치 (" + resultMap.getPrize(i) + ")- " + resultMap.getWinnersCount(i) + "개");
         }
     }
 
