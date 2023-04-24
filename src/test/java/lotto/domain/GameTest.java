@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class MatchTest {
-    private Match matchFixture;
+public class GameTest {
+    private Game gameFixture;
     @BeforeEach
     public void beforeEach() {
-        matchFixture = new Match();
+        gameFixture = new Game();
     }
 
     @DisplayName("발급수량만큼 응모권이 발행된다")
@@ -20,8 +20,8 @@ public class MatchTest {
         //given
         int input = 77;
         //when
-        matchFixture.purchase(input);
+        gameFixture.purchaseTickets(input);
         //then
-        assertThat(matchFixture.renderingTickets()).hasSize(input);
+        assertThat(gameFixture.renderingTickets()).hasSize(input);
     }
 }

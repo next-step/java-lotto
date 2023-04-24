@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class Match {
+public class Game {
     private final Random RANDOM = new Random();
     private final List<Ticket> tickets;
 
-    public Match() {
+    public Game() {
         this.tickets = new ArrayList<>();
     }
 
-    public void purchase(int count) {
+    public void purchaseTickets(int count) {
         for (int i = 0; i < count; i++) {
             addTicket(new Ticket(issueNumbers()));
         }
