@@ -1,15 +1,15 @@
 package step2.vo;
 
-import step2.LottoRank;
+import step2.service.LottoRank;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static step2.LottoRank.MATCH_FIVE;
-import static step2.LottoRank.MATCH_FOUR;
-import static step2.LottoRank.MATCH_SIX;
-import static step2.LottoRank.MATCH_THREE;
+import static step2.service.LottoRank.MATCH_FIVE;
+import static step2.service.LottoRank.MATCH_FOUR;
+import static step2.service.LottoRank.MATCH_SIX;
+import static step2.service.LottoRank.MATCH_THREE;
 
 public class WinnerInfo {
 

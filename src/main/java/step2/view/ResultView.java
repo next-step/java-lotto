@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.LottoRank;
+import step2.service.LottoRank;
 import step2.vo.LottoResult;
 import step2.vo.LottoResults;
 import step2.vo.WinnerInfo;
