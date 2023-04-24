@@ -8,8 +8,8 @@ public class Lotto {
 	public static final int LOTTO_PRICE = 1000;
 
 	private final SelectedNumbers selectedNumbers;
-	private final WinCount winCount;
 
+	private final WinCount winCount;
 	public Lotto() {
 		this.selectedNumbers = new SelectedNumbers();
 		this.winCount = new WinCount(0);
@@ -45,5 +45,9 @@ public class Lotto {
 		if (selectedNumbers.contains(winNumber)) {
 			this.winCount.plus();
 		}
+	}
+
+	public SelectedNumbers getSelectedNumbers() {
+		return selectedNumbers;
 	}
 }

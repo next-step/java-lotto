@@ -22,4 +22,9 @@ public class SelectedNumbers {
 	public int size() {
 		return this.selectedNumbers.size();
 	}
+
+	@Override
+	public String toString() {
+		return selectedNumbers.toString();
+	}
 }

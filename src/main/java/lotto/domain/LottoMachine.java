@@ -33,10 +33,11 @@ public class LottoMachine {
 		this.purchasedLottos = new PurchasedLottos(purchasedLottos);
 	}
 
-	public void selectLottoNumbers() {
+	public PurchasedLottos selectLottoNumbers() {
 		for (Lotto lotto : this.purchasedLottos.getLottos()) {
 			this.fillEachLotto(lotto);
 		}
+		return this.purchasedLottos;
 	}
 
 	private void fillEachLotto(Lotto lotto) {
