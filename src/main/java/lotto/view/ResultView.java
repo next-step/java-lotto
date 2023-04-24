@@ -4,6 +4,8 @@ import java.util.List;
 
 public class ResultView {
 
+    private static final int PROFIT_BASIS = 1;
+
     public static void printPurchasePriceInputCommand() {
         System.out.println("구입금액을 입력해 주세요.");
     }
@@ -20,4 +22,18 @@ public class ResultView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
+
+    public static void printWinningStatics(MatchType matchType, int profitRate) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+
+        for (MatchType mc : matchType.values()) {
+            System.out.println(mc.phrase() + "- " + mc.count() + "개");
+        }
+
+        System.out.print("총 수익률은 " + profitRate + "입니다.");
+        if (profitRate < PROFIT_BASIS) {
+            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+    }
 }
