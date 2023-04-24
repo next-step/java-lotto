@@ -27,13 +27,9 @@ public class RandomTicketIssueStrategy implements TicketIssueStrategy {
         return lotteryNumbers;
     }
 
-    private static void shuffle() {
-        Collections.shuffle(allLotteryNumbers);
-    }
-
     @Override
     public LotteryTicket issue() {
-        shuffle();
+        Collections.shuffle(allLotteryNumbers);
         return new LotteryTicket(selectLotteryNumbers());
     }
 }

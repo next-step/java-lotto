@@ -10,8 +10,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printPurchaseCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printPurchaseCount(int manualCount, int randomCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + randomCount + "장을 구매했습니다.");
     }
 
     public static void printPurchaseTickets(List<LotteryTicket> tickets) {

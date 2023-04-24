@@ -26,7 +26,6 @@ public enum LotteryPrize {
     }
 
     public static LotteryPrize valueOf(int matchingCount, boolean isBonusMatched) {
-
         return Arrays.stream(values())
                 .filter(prize -> prize.matchingCount == matchingCount)
                 .filter(prize -> !isBonusPrize(matchingCount) || prize.isBonusMatched == isBonusMatched)
