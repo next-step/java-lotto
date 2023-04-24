@@ -1,9 +1,13 @@
 package lotto;
 
 import java.util.Map;
-import lotto.WinningNumbers.Rank;
+import lotto.domain.Lottos;
+import lotto.domain.WinningNumbers;
+import lotto.domain.WinningNumbers.Rank;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
-public class LottoMain {
+public class LottoApplication {
 
     public static void main(String[] args) {
         while (!isEnd()) {

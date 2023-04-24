@@ -1,8 +1,11 @@
-package lotto;
+package lotto.view;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 public class InputView {
 

@@ -1,10 +1,9 @@
-package lotto;
+package lotto.view;
 
-import static lotto.WinningPercent.winningPercent;
+import static lotto.domain.WinningPercent.winningPercent;
 
-import java.util.EnumMap;
 import java.util.Map;
-import lotto.WinningNumbers.Rank;
+import lotto.domain.WinningNumbers.Rank;
 
 public class OutputView {
 

@@ -1,10 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.EnumMap;
 import java.util.Map;
-import lotto.WinningNumbers.Rank;
+import lotto.domain.WinningNumbers.Rank;
+import lotto.domain.WinningPercent;
 import org.junit.jupiter.api.Test;
 
 public class WinningPercentTest {

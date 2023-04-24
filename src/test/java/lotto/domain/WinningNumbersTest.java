@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -7,7 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import lotto.WinningNumbers.Rank;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.WinningNumbers;
+import lotto.domain.WinningNumbers.Rank;
 import org.junit.jupiter.api.Test;
 
 public class WinningNumbersTest {

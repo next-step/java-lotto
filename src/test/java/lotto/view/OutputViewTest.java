@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -7,7 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Map;
-import lotto.WinningNumbers.Rank;
+import lotto.domain.WinningNumbers.Rank;
+import lotto.view.OutputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
