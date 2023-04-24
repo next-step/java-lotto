@@ -43,8 +43,8 @@ public class Operation {
         private final String operation;
         private final IntBinaryOperator expression;
 
-        OperationEnum(String symbol, IntBinaryOperator expression) {
-            this.operation = symbol;
+        OperationEnum(String operation, IntBinaryOperator expression) {
+            this.operation = operation;
             this.expression = expression;
         }
 
