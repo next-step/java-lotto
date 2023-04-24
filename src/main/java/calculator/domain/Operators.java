@@ -3,7 +3,6 @@ package calculator.domain;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.stream.Collectors;
 
 public class Operators {
     private final Queue<Operator> operators;

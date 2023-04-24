@@ -1,9 +1,7 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.ToIntBiFunction;
 
 public enum Operator {

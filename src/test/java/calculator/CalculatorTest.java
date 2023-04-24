@@ -18,7 +18,7 @@ public class CalculatorTest {
     @DisplayName("반복 연산 테스트")
     @Test
     void calculate2() {
-        Calculator calculator = Calculator.of(List.of("1", "+", "2", "-", "1"));
-        assertThat(calculator.calculate()).isEqualTo(2);
+        Calculator calculator = Calculator.of(List.of("3", "+", "4", "-", "1", "/", "2", "*", "3"));
+        assertThat(calculator.calculate()).isEqualTo(9);
     }
 }
