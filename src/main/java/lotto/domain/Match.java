@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.WinnerUndefinedException;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.Set;
 public class Match {
     private final Random RANDOM = new Random();
     private final List<Ticket> tickets;
-    private Winners winners = null;
 
     public Match() {
         this.tickets = new ArrayList<>();
@@ -26,12 +23,12 @@ public class Match {
     private Set<Integer> issuance() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size()<6) {
-            numbers.add(numberAutoIssue());
+            numbers.add(issueNumber());
         }
         return numbers;
     }
 
-    private int issueAutoNumber() {
+    private int issueNumber() {
         return RANDOM.nextInt(46) + 1;
     }
 
@@ -47,14 +44,7 @@ public class Match {
         return presentTickets;
     }
 
-    public void winningTicket(Ticket winningTicket) {
-        winners = new Winners(tickets,winningTicket);
-    }
-
-    public Winners getWinners() {
-        if(winners == null) {
-            throw new WinnerUndefinedException();
-        }
-        return winners;
+    public Winners makeWinners(Ticket winningTicket) {
+        return new Winners(tickets,winningTicket);
     }
 }
