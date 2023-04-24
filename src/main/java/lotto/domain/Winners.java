@@ -41,7 +41,7 @@ public class Winners {
     private int aggregateThird(List<Ticket> tickets, Ticket winningTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
-            if (Prize.THIRD.isRight(ticket.overlapNumberCount(winningTicket))) {
+            if (Prize.THIRD.isMatch(ticket.overlapNumberCount(winningTicket))) {
                 count++;
             }
         }
@@ -51,7 +51,7 @@ public class Winners {
     private int aggregateFourth(List<Ticket> tickets, Ticket winningTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
-            if (Prize.FOURTH.isRight(ticket.overlapNumberCount(winningTicket))) {
+            if (Prize.FOURTH.isMatch(ticket.overlapNumberCount(winningTicket))) {
                 count++;
             }
         }
@@ -61,7 +61,7 @@ public class Winners {
     private int aggregateFifth(List<Ticket> tickets, Ticket winningTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
-            if (Prize.FIFTH.isRight(ticket.overlapNumberCount(winningTicket))) {
+            if (Prize.FIFTH.isMatch(ticket.overlapNumberCount(winningTicket))) {
                 count++;
             }
         }
@@ -71,7 +71,7 @@ public class Winners {
     private int aggregateFirst(List<Ticket> tickets,Ticket winningTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
-            if (Prize.FIRST.isRight(ticket.overlapNumberCount(winningTicket))) {
+            if (Prize.FIRST.isMatch(ticket.overlapNumberCount(winningTicket))) {
                 count++;
             }
         }
