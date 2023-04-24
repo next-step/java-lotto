@@ -26,7 +26,11 @@ public class LottoMachine {
         return Lotto.winningLotto(winningNumbers);
     }
 
-    public WinningStat winningStat(Lottos lottos, Lotto winningLotto) {
-        return lottos.rating(winningLotto);
+    public LottoNumber bonusBall(int bonusBallNumber) {
+        return new LottoNumber(bonusBallNumber);
+    }
+
+    public WinningStat winningStat(Lottos lottos, Lotto winningLotto, LottoNumber bonusBall) {
+        return lottos.rating(winningLotto, bonusBall);
     }
 }

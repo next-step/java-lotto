@@ -20,11 +20,11 @@ public class Lottos {
         this.lottos = lottoList;
     }
 
-    public WinningStat rating(Lotto winningLotto) {
+    public WinningStat rating(Lotto winningLotto, LottoNumber bonusBall) {
         final WinningStat winningStat = new WinningStat();
 
         for (Lotto lotto : this.lottos) {
-            winningStat.judgeWinning(winningLotto, lotto);
+            winningStat.judgeWinning(winningLotto, lotto, bonusBall);
         }
 
         return winningStat;

@@ -27,8 +27,8 @@ public class LottosTest {
     void rating() {
         final int unitCount = 6;
         final Lotto winningLotto = Lotto.winningLotto("1,2,3,4,5,6");
-
-        assertThat(new Lottos(unitCount, testStrategy).rating(winningLotto))
+        final LottoNumber bonusBall = new LottoNumber(5);
+        assertThat(new Lottos(unitCount, testStrategy).rating(winningLotto, bonusBall))
                 .isInstanceOf(WinningStat.class);
     }
 }

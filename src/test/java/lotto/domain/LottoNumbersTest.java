@@ -71,4 +71,15 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.statCount(new LottoNumbers(target)))
                 .isEqualTo(result);
     }
+
+
+    @ParameterizedTest(name = "보너스볼 식별 테스트")
+    @CsvSource(value = {"5,true", "10,false"})
+    void isBonusBall(int value, boolean result) {
+        final LottoNumber bonusBall = new LottoNumber(value);
+        final LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+
+        assertThat(lottoNumbers.isBonusBall(bonusBall))
+                .isEqualTo(result);
+    }
 }

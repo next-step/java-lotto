@@ -2,6 +2,7 @@ package lotto.domain.winning;
 
 import lotto.domain.Amount;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.rating.WinningRatingType;
 
 import java.util.Map;
@@ -15,8 +16,8 @@ public class WinningStat {
         this.reward = new Reward();
     }
 
-    public void judgeWinning(Lotto winningLotto, Lotto lotto) {
-        final WinningRatingType winningRatingType = WinningRatingType.findBy(lotto.statCount(winningLotto));
+    public void judgeWinning(Lotto winningLotto, Lotto lotto, LottoNumber bonusBall) {
+        final WinningRatingType winningRatingType = WinningRatingType.findBy(lotto.statCount(winningLotto), lotto.isBonusBall(bonusBall));
 
         this.count(winningRatingType);
         this.plusReward(winningRatingType);

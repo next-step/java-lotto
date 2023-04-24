@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Amount;
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.domain.strategy.AutomaticStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,11 +16,10 @@ public class LottoGame {
         OutputView.printLottoCount(lottoMachine.calculateUnitCount(amount));
         OutputView.printLottoNumber(lottoMachine.lottoNumbersDto(lottos));
 
-        final String winningNumbers = InputView.winningNumbers();
-        final Lotto winningLotto = lottoMachine.winningLotto(winningNumbers);
+        final Lotto winningLotto = lottoMachine.winningLotto(InputView.winningNumbers());
 
-        final int bonusBallNumber = InputView.bonusBall();
+        final LottoNumber bonusBall = lottoMachine.bonusBall(InputView.bonusBall());
 
-        OutputView.printWinningStat(lottoMachine.winningStat(lottos, winningLotto), amount);
+        OutputView.printWinningStat(lottoMachine.winningStat(lottos, winningLotto, bonusBall), amount);
     }
 }

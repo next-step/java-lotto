@@ -50,11 +50,11 @@ public class LottoMachineTest {
     @DisplayName("당첨 통계 확인")
     void winnerStat() {
         final Lottos lottos = new Lottos(10, testStrategy);
-        final Amount amount = new Amount(10000);
+        final LottoNumber bonusBall = new LottoNumber(5);
 
         final Lotto winningLotto = this.lottoMachine.winningLotto("1,2,3,4,5,6");
 
-        assertThat(this.lottoMachine.winningStat(lottos, winningLotto))
+        assertThat(this.lottoMachine.winningStat(lottos, winningLotto, bonusBall))
                 .isInstanceOf(WinningStat.class);
     }
 }

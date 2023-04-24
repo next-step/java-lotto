@@ -24,6 +24,10 @@ public class Lotto {
         return this.lottoNumbers.statCount(lotto.lottoNumbers);
     }
 
+    public boolean isBonusBall(LottoNumber bonusBall) {
+        return this.lottoNumbers.isBonusBall(bonusBall);
+    }
+
     List<Integer> getIntegerLottoNumbers() {
         return this.lottoNumbers.getIntegerLottoNumbers();
     }

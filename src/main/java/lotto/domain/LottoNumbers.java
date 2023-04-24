@@ -50,6 +50,10 @@ public class LottoNumbers {
         return target.size();
     }
 
+    public boolean isBonusBall(LottoNumber bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
+    }
+
     private void checkIsDigit(String number) {
         if (!Character.isDigit(number.charAt(0))) {
             throw new IllegalArgumentException("로또 번호는 숫자만 가능합니다.");
