@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class Game {
+public class Issuer {
     private final Random RANDOM = new Random();
     private final List<Ticket> tickets;
 
-    public Game() {
+    public Issuer() {
         this.tickets = new ArrayList<>();
     }
 
