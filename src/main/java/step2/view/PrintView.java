@@ -1,10 +1,12 @@
 package step2.view;
 
 import step2.domain.LottoResult;
+import step2.domain.WinningMoney;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class PrintView {
 
@@ -24,10 +26,11 @@ public class PrintView {
     }
 
     public static void numberOfMatches(Map<Integer, Integer> numberOfMatches) {
-        System.out.println("3개 일치 (5000원): " + numberOfMatches.get(3));
-        System.out.println("4개 일치 (50000원): " + numberOfMatches.get(4));
-        System.out.println("5개 일치 (1500000원): " + numberOfMatches.get(5));
-        System.out.println("6개 일치 (2000000000원): " + numberOfMatches.get(6));
+        IntStream.rangeClosed(3, 6).forEach(i -> {
+            Integer money = WinningMoney.winningMoney(i);
+            Integer count = numberOfMatches.get(i);
+            System.out.println(i + "개 일치 (" + money + "원):" + count);
+        });
     }
 
     public static void winningRate(float rate) {
