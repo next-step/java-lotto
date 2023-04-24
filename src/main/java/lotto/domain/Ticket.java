@@ -23,7 +23,7 @@ public class Ticket {
     private Set<Integer> parseToNumbers(String stringNumbers) {
         Set<Integer> numbers = new HashSet<>();
         String[] splitNumbers = stringNumbers.split(", ");
-        for(String number: splitNumbers) {
+        for (String number : splitNumbers) {
             numbers.add(Integer.parseInt(number));
         }
         return numbers;

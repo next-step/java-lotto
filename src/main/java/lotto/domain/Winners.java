@@ -68,7 +68,7 @@ public class Winners {
         return count;
     }
 
-    private int aggregateFirst(List<Ticket> tickets,Ticket winningTicket) {
+    private int aggregateFirst(List<Ticket> tickets, Ticket winningTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
             if (Prize.FIRST.isMatch(ticket.overlapNumberCount(winningTicket))) {

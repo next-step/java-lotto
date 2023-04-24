@@ -22,7 +22,7 @@ public class Issuer {
 
     private Set<Integer> issueNumbers() {
         Set<Integer> numbers = new HashSet<>();
-        while (numbers.size()<6) {
+        while (numbers.size() < 6) {
             numbers.add(issueNumber());
         }
         return numbers;
@@ -33,7 +33,7 @@ public class Issuer {
     }
 
     public Winners makeWinners(Ticket winningTicket) {
-        return new Winners(tickets,winningTicket);
+        return new Winners(tickets, winningTicket);
     }
 
     public List<Ticket> purchasedTickets() {

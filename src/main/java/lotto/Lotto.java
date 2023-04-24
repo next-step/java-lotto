@@ -1,14 +1,11 @@
 package lotto;
 
 import lotto.domain.Issuer;
-import lotto.domain.Ticket;
 import lotto.domain.Winners;
 import lotto.present.InputPresent;
 import lotto.present.OutputPresent;
 import lotto.present.dto.IncomePresentDTO;
 import lotto.present.dto.WinnerPresentDTO;
-
-import java.util.List;
 
 public class Lotto {
 

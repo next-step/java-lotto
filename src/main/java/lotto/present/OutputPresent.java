@@ -13,9 +13,9 @@ public class OutputPresent {
     private static final String PRIZE_3RD = "5개 일치 (1500000원)- %s개";
     private static final String PRIZE_1ST = "6개 일치 (2000000000원)- %s개";
     private static final String RETURN_RATE = "총 수익률은 %f2입니다";
+
     public OutputPresent() {
     }
-
 
 
     public void presentWinners(WinnerPresentDTO winnerPresentDTO) {
@@ -32,7 +32,7 @@ public class OutputPresent {
     }
 
     public void presentTickets(List<Ticket> tickets) {
-        for(Ticket ticket : tickets) {
+        for (Ticket ticket : tickets) {
             System.out.println(ticket.toString());
         }
     }

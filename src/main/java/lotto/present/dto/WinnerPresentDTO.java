@@ -7,6 +7,7 @@ public class WinnerPresentDTO {
     private final int countFourth;
     private final int countThird;
     private final int countFirst;
+
     public WinnerPresentDTO(Winners winners) {
         this.countFifth = winners.getCountFifth();
         this.countFourth = winners.getCountFourth();
