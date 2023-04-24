@@ -2,10 +2,10 @@ package lotto.present.vo;
 
 import lotto.domain.Winners;
 
-public class IncomePresentVO {
+public class IncomePresentDTO {
     private final double profitRatio;
     private final String breakEvenMessage;
-    public IncomePresentVO(Winners winners) {
+    public IncomePresentDTO(Winners winners) {
         this.profitRatio = winners.getProfitRatio();
         this.breakEvenMessage = winners.breakEvenMessage();
     }

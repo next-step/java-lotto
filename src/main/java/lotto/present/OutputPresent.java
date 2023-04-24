@@ -1,8 +1,8 @@
 package lotto.present;
 
 import lotto.domain.Ticket;
-import lotto.present.vo.IncomePresentVO;
-import lotto.present.vo.WinnerPresentVO;
+import lotto.present.vo.IncomePresentDTO;
+import lotto.present.vo.WinnerPresentDTO;
 
 import java.util.List;
 
@@ -18,17 +18,17 @@ public class OutputPresent {
 
 
 
-    public void presentWinners(WinnerPresentVO winnerPresentVO) {
+    public void presentWinners(WinnerPresentDTO winnerPresentDTO) {
         System.out.println(STATISTICS_HEAD);
-        System.out.printf(PRIZE_5TH + System.lineSeparator(), winnerPresentVO.getCountFifth());
-        System.out.printf(PRIZE_4TH + System.lineSeparator(), winnerPresentVO.getCountFourth());
-        System.out.printf(PRIZE_3RD + System.lineSeparator(), winnerPresentVO.getCountThird());
-        System.out.printf(PRIZE_1ST + System.lineSeparator(), winnerPresentVO.getCountFirst());
+        System.out.printf(PRIZE_5TH + System.lineSeparator(), winnerPresentDTO.getCountFifth());
+        System.out.printf(PRIZE_4TH + System.lineSeparator(), winnerPresentDTO.getCountFourth());
+        System.out.printf(PRIZE_3RD + System.lineSeparator(), winnerPresentDTO.getCountThird());
+        System.out.printf(PRIZE_1ST + System.lineSeparator(), winnerPresentDTO.getCountFirst());
     }
 
-    public void presentIncome(IncomePresentVO incomePresentVO) {
-        System.out.printf(RETURN_RATE, incomePresentVO.getProfitRatio());
-        System.out.print(incomePresentVO.getBreakEvenMessage());
+    public void presentIncome(IncomePresentDTO incomePresentDTO) {
+        System.out.printf(RETURN_RATE, incomePresentDTO.getProfitRatio());
+        System.out.print(incomePresentDTO.getBreakEvenMessage());
     }
 
     public void presentTickets(List<Ticket> tickets) {

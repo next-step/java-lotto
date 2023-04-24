@@ -2,14 +2,12 @@ package lotto.present.vo;
 
 import lotto.domain.Winners;
 
-import java.util.List;
-
-public class WinnerPresentVO {
+public class WinnerPresentDTO {
     private final int countFifth;
     private final int countFourth;
     private final int countThird;
     private final int countFirst;
-    public WinnerPresentVO(Winners winners) {
+    public WinnerPresentDTO(Winners winners) {
         this.countFifth = winners.getCountFifth();
         this.countFourth = winners.getCountFourth();
         this.countThird = winners.getCountThird();

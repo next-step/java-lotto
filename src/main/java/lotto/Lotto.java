@@ -5,8 +5,8 @@ import lotto.domain.Ticket;
 import lotto.domain.Winners;
 import lotto.present.InputPresent;
 import lotto.present.OutputPresent;
-import lotto.present.vo.IncomePresentVO;
-import lotto.present.vo.WinnerPresentVO;
+import lotto.present.vo.IncomePresentDTO;
+import lotto.present.vo.WinnerPresentDTO;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class Lotto {
         outputPresent.presentTickets(List.of(winningTicket));
         Winners winners = issuer.makeWinners(winningTicket);
 
-        outputPresent.presentWinners(new WinnerPresentVO(winners));
-        outputPresent.presentIncome(new IncomePresentVO(winners));
+        outputPresent.presentWinners(new WinnerPresentDTO(winners));
+        outputPresent.presentIncome(new IncomePresentDTO(winners));
     }
 }
