@@ -1,7 +1,5 @@
 package step1;
 
-import java.util.List;
-
 public class StringSequenceCalculator {
     private final NumberParser numberParser;
     private final OperatorParser operatorParser;
@@ -11,13 +9,13 @@ public class StringSequenceCalculator {
         this.operatorParser = new OperatorParser();
     }
 
-    public int calculate(String input) {
-        final List<Integer> numbers = numberParser.parse(input);
-        final List<Operator> operators = operatorParser.parse(input);
+    public int calculate(Expression expression) {
+        final Numbers numbers = numberParser.parse(expression);
+        final Operators operators = operatorParser.parse(expression);
 
-        int result = numbers.get(0);
-        for (int i = 0; i < operators.size(); i++) {
-            result = calculate(result, numbers.get(i + 1), operators.get(i));
+        int result = numbers.getFirstNumber();
+        for (int i = 0; i < operators.length(); i++) {
+            result = calculate(result, numbers.getFromIndex(i + 1), operators.getFromIndex(i));
         }
         return result;
     }
