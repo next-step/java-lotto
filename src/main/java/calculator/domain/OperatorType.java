@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.function.BiFunction;
 
 public enum OperatorType {
     PLUS("+", (num1, num2) -> num1 + num2),
@@ -10,9 +10,9 @@ public enum OperatorType {
     DIVIDE("/", (num1, num2) -> num1 / num2);
 
     private final String character;
-    private final Comparator<Integer> expression;
+    private final BiFunction<Integer, Integer, Integer> expression;
 
-    OperatorType(String character, Comparator<Integer> expression) {
+    OperatorType(String character, BiFunction<Integer, Integer, Integer> expression) {
         this.character = character;
         this.expression = expression;
     }
@@ -29,6 +29,6 @@ public enum OperatorType {
     }
 
     public int calculate(Number num1, Number num2) {
-        return expression.compare(num1.intValue(), num2.intValue());
+        return expression.apply(num1.intValue(), num2.intValue());
     }
 }
