@@ -14,32 +14,20 @@ public class StringCalculator {
     private static final int INCREMENT_NEXT_INDEX = 1;
     private static final int INCREMENT_COUNT = 2;
 
-    private Number number;
-
-    public StringCalculator(String input) {
-        this.number = initNumber(input);
-    }
-
-    public Number calculate(String input) {
+    public static Number calculate(String input) {
         String[] arr = makeArr(input);
 
         List<Number> numbers = makeNumbers(arr);
         List<Operator> operators = makeOperators(arr);
 
-        calculateInOrder(numbers, operators);
-
-        return number;
+        return calculateInOrder(numbers, operators);
     }
 
-    private Number initNumber(String input) {
-        return new Number(makeArr(input)[BEGIN_INDEX]);
-    }
-
-    private String[] makeArr(String input) {
+    private static String[] makeArr(String input) {
         return input.split(SEPARATOR);
     }
 
-    private List<Number> makeNumbers(String[] arr) {
+    private static List<Number> makeNumbers(String[] arr) {
         List<Number> numbers = new ArrayList<>();
         for (int i = BEGIN_INDEX; i < arr.length; i += INCREMENT_COUNT) {
             numbers.add(new Number(arr[i]));
@@ -47,7 +35,7 @@ public class StringCalculator {
         return numbers;
     }
 
-    private List<Operator> makeOperators(String[] arr) {
+    private static List<Operator> makeOperators(String[] arr) {
         List<Operator> operators = new ArrayList<>();
         for (int i = BEGIN_INDEX + INCREMENT_NEXT_INDEX; i < arr.length; i += INCREMENT_COUNT) {
             operators.add(new Operator(arr[i]));
@@ -55,11 +43,15 @@ public class StringCalculator {
         return operators;
     }
 
-    private void calculateInOrder(List<Number> numbers, List<Operator> operators) {
+    private static Number calculateInOrder(List<Number> numbers, List<Operator> operators) {
+        Number number = numbers.get(BEGIN_INDEX);
+
         for (int i = BEGIN_INDEX; i < operators.size(); i++) {
             OperatorType operator = operators.get(i).value();
             int calculatedResult = operator.calculate(number, numbers.get(i + INCREMENT_NEXT_INDEX));
             number = new Number(calculatedResult);
         }
+
+        return number;
     }
 }
