@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    public static final int LOTTO_LENGTH = 6;
-    public static final int MAXIMUM_VALUE = 1;
+    private static final int LOTTO_LENGTH = 6;
+    private static final int MAXIMUM_VALUE = 1;
 
     private final Set<LottoNumber> lottoNumbers;
 

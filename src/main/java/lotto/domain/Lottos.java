@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    public static final int ZERO = 0;
+    private static final int ZERO = 0;
 
     private final List<Lotto> lottos;
 

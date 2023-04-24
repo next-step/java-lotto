@@ -4,8 +4,8 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class Winners {
-    public static final int DEFAULT_VALUE = 0;
-    public static final int ADD_COUNT = 1;
+    private static final int DEFAULT_VALUE = 0;
+    private static final int ADD_COUNT = 1;
 
     private final Map<Statistics, Integer> winnersCount = new EnumMap<>(Statistics.class);
 

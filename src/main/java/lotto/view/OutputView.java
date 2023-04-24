@@ -8,10 +8,10 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class OutputView {
-    public static final int SUBSTRING_INDEX = 1;
-    public static final int MINIMUM_PRIZE = 3;
-    public static final int MAXIMUM_PRIZE = 6;
-    public static final double PROFIT_CONDITION = 1.0;
+    private static final int SUBSTRING_INDEX = 1;
+    private static final int MINIMUM_PRIZE = 3;
+    private static final int MAXIMUM_PRIZE = 6;
+    private static final double PROFIT_CONDITION = 1.0;
 
     public static void printLottoQuantity(Money money) {
         System.out.println(money.getLottoQuantity() + "개를 구매했습니다.");

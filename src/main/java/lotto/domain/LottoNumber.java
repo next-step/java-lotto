@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final Random RANDOM = new Random();
-    public static final int LOTTO_LOWER_BOUND = 1;
-    public static final int LOTTO_UPPER_BOUND = 45;
+    private static final Random RANDOM = new Random();
+    private static final int LOTTO_LOWER_BOUND = 1;
+    private static final int LOTTO_UPPER_BOUND = 45;
 
     private final int lottoNumber;
 
