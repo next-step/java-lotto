@@ -25,7 +25,7 @@ public class NumberGenerateTest {
     }
 
     @Test
-    void 로또_번호는_1에서_45_사이로_정렬되어있다() {
+    void 로또_번호는_1에서_45_사이의_수다() {
 
         // given
         NumberGenerateStrategy strategy = new RandomStrategy();
@@ -34,10 +34,6 @@ public class NumberGenerateTest {
         List<Integer> result = strategy.generate();
 
         // then
-        SoftAssertions.assertSoftly(softAssertions -> {
-            softAssertions.assertThat(result).isSorted();
-            softAssertions.assertThat(result.get(0)).isGreaterThanOrEqualTo(1);
-            softAssertions.assertThat(result.get(5)).isLessThanOrEqualTo(45);
-        });
+        assertThat(result).allSatisfy(number -> assertThat(number).isBetween(1, 45));
     }
 }

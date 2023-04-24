@@ -2,6 +2,7 @@ package step2.view;
 
 import step2.domain.LottoResult;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,10 @@ public class PrintView {
 
     public static void purchaseNumber(List<List<Integer>> purchaseNumber) {
         System.out.println(purchaseNumber.size() + "를 구매하셨습니다.");
-        purchaseNumber.forEach(System.out::println);
+        purchaseNumber.forEach(list -> {
+            Collections.sort(list);
+            System.out.println(list);
+        });
     }
 
     public static void lottoResult(LottoResult result) {

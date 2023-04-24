@@ -16,8 +16,6 @@ public class RandomStrategy implements NumberGenerateStrategy {
     @Override
     public List<Integer> generate() {
         Collections.shuffle(numberList);
-        List<Integer> lottoNumber = numberList.subList(0, 6);
-        Collections.sort(lottoNumber);
-        return lottoNumber;
+        return numberList.subList(0, 6);
     }
 }
