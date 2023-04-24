@@ -19,7 +19,7 @@ public class LottoGame {
         OutputView.printLottoCount(lottoMachine.calculateUnitCount(amount));
         OutputView.printLottoNumber(lottoMachine.lottoNumbersDto(lottos));
 
-        final WinningBall winningBall = new WinningBall(lottoMachine.winningLotto(InputView.winningNumbers()), lottoMachine.bonusBall(InputView.bonusBall()));
+        final WinningBall winningBall = lottoMachine.winningBall(InputView.winningNumbers(), InputView.bonusBall());
         OutputView.printWinningStat(lottoMachine.winningStat(lottos, winningBall), amount);
     }
 }

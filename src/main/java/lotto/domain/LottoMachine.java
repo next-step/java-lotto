@@ -23,11 +23,15 @@ public class LottoMachine {
         return lottos.lottoNumbersDto();
     }
 
-    public Lotto winningLotto(String winningNumbers) {
+    public WinningBall winningBall(String winningNumbers, int bonusBallNumber) {
+        return new WinningBall(this.winningLotto(winningNumbers), this.bonusBall(bonusBallNumber));
+    }
+
+    private Lotto winningLotto(String winningNumbers) {
         return Lotto.winningLotto(winningNumbers);
     }
 
-    public LottoNumber bonusBall(int bonusBallNumber) {
+    private LottoNumber bonusBall(int bonusBallNumber) {
         return new LottoNumber(bonusBallNumber);
     }
 

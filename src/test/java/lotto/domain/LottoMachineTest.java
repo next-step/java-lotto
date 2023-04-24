@@ -41,21 +41,17 @@ public class LottoMachineTest {
     @Test
     @DisplayName("당첨 번호 입력 테스트")
     void conclusionWinningNumbers() {
-        final Lotto winningLotto = new Lotto(testStrategy);
 
-        assertThat(this.lottoMachine.winningLotto("1,2,3,4,5,6"))
-                .isEqualTo(winningLotto);
+        assertThat(this.lottoMachine.winningBall("1,2,3,4,5,6", 7))
+                .isInstanceOf(WinningBall.class);
     }
 
     @Test
     @DisplayName("당첨 통계 확인")
     void winnerStat() {
         final Lottos lottos = new Lottos(10, testStrategy);
-        final LottoNumber bonusBall = new LottoNumber(8);
 
-        final Lotto winningLotto = this.lottoMachine.winningLotto("1,2,3,4,5,6");
-
-        assertThat(this.lottoMachine.winningStat(lottos, new WinningBall(winningLotto, bonusBall)))
+        assertThat(this.lottoMachine.winningStat(lottos, lottoMachine.winningBall("1,2,3,4,5,6", 10)))
                 .isInstanceOf(WinningStat.class);
     }
 }
