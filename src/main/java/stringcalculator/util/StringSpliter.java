@@ -1,4 +1,4 @@
-package stringcalculator;
+package stringcalculator.util;
 
 public class StringSpliter {
 
