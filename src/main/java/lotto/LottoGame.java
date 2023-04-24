@@ -22,6 +22,8 @@ public class LottoGame {
         final String winningNumbers = InputView.winningNumbers();
         final Lotto winningLotto = lottoMachine.winningLotto(winningNumbers);
 
+        final int bonusBallNumber = InputView.bonusBall();
+
         OutputView.printWinningStat(lottoMachine.winningStat(lottos, winningLotto), amount);
     }
 }
