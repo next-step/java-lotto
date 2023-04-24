@@ -16,7 +16,7 @@ public class InputView {
         return Money.initMoney(scanner.nextInt());
     }
 
-    public static Lotto inputWinningNumbers() throws SameNumberException  {
+    public static Lotto inputWinningNumbers() {
         scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 압력해주세요.");
         return Lotto.initWinningLotto(List.of(scanner.nextLine().split(DELIMITER)));
