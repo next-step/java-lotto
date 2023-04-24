@@ -16,11 +16,11 @@ public class Match {
 
     public void purchase(int count) {
         for (int i = 0; i < count; i++) {
-            addTicket(new Ticket(issuance()));
+            addTicket(new Ticket(issueNumbers()));
         }
     }
 
-    private Set<Integer> issuance() {
+    private Set<Integer> issueNumbers() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size()<6) {
             numbers.add(issueNumber());
