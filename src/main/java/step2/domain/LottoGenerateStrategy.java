@@ -3,6 +3,6 @@ package step2.domain;
 import java.util.List;
 
 @FunctionalInterface
-public interface NumberGenerateStrategy {
+public interface LottoGenerateStrategy {
     List<Integer> generate();
 }

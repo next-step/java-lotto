@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class LottoGame {
 
+    private final int LOTTO_PRICE = 1000;
     private final int purchaseAmount;
 
     private LottoGame(int purchaseAmount) {
@@ -30,7 +31,7 @@ public class LottoGame {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    public LottoResult countNumber(List<List<Integer>> numbers, List<Integer> winningNumbers) {
+    public LottoResult lottoResult(List<List<Integer>> numbers, List<Integer> winningNumbers) {
         MatchRecord matchRecord = MatchRecord.createRecord();
         Map<Integer, Integer> numberOfMatches = matchRecord.countNumber(numbers, winningNumbers);
         float rate = Rate.calculateRate(numberOfMatches, purchaseAmount);

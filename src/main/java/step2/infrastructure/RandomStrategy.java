@@ -1,11 +1,11 @@
 package step2.infrastructure;
 
-import step2.domain.NumberGenerateStrategy;
+import step2.domain.LottoGenerateStrategy;
 
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class RandomStrategy implements NumberGenerateStrategy {
+public class RandomStrategy implements LottoGenerateStrategy {
     private final List<Integer> numberList = new ArrayList<>();
 
     public RandomStrategy() {

@@ -3,14 +3,12 @@ package step2.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NumberFactory {
+public class LottoFactory {
 
-    private final int LOTTO_PRICE = 1000;
-
-    private final NumberGenerateStrategy strategy;
+    private final LottoGenerateStrategy strategy;
     private final List<List<Integer>> numbers = new ArrayList<>();
 
-    public NumberFactory(NumberGenerateStrategy strategy) {
+    public LottoFactory(LottoGenerateStrategy strategy) {
         this.strategy = strategy;
     }
 

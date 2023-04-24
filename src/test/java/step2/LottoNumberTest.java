@@ -2,7 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step2.domain.NumberFactory;
+import step2.domain.LottoFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,12 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoNumberTest {
 
     List<Integer> numberList;
-    NumberFactory factory;
+    LottoFactory factory;
 
     @BeforeEach
     void init() {
         numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
-        factory = new NumberFactory(() -> numberList);
+        factory = new LottoFactory(() -> numberList);
     }
 
     @Test
@@ -26,10 +26,10 @@ public class LottoNumberTest {
         // given
         int price = 14000;
         List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
-        NumberFactory factory = new NumberFactory(() -> numberList);
+        LottoFactory factory = new LottoFactory(() -> numberList);
 
         // when
-        List<List<Integer>> result = factory.createNumber(price);
+        List<List<Integer>> result = factory.generateLotto(price);
 
         // then
         assertThat(result).hasSize(14);
@@ -41,10 +41,10 @@ public class LottoNumberTest {
         // given
         int price = 1000;
         List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
-        NumberFactory factory = new NumberFactory(() -> numberList);
+        LottoFactory factory = new LottoFactory(() -> numberList);
 
         // when
-        List<List<Integer>> result = factory.createNumber(price);
+        List<List<Integer>> result = factory.generateLotto(price);
 
         // then
         assertThat(result).contains(numberList);

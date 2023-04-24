@@ -1,8 +1,7 @@
 package step2;
 
-import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
-import step2.domain.NumberGenerateStrategy;
+import step2.domain.LottoGenerateStrategy;
 import step2.infrastructure.RandomStrategy;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class NumberGenerateTest {
     void 로또_번호는_6개가_생성된다() {
 
         // given
-        NumberGenerateStrategy strategy = new RandomStrategy();
+        LottoGenerateStrategy strategy = new RandomStrategy();
 
         // when
         List<Integer> result = strategy.generate();
@@ -28,7 +27,7 @@ public class NumberGenerateTest {
     void 로또_번호는_1에서_45_사이의_수다() {
 
         // given
-        NumberGenerateStrategy strategy = new RandomStrategy();
+        LottoGenerateStrategy strategy = new RandomStrategy();
 
         // when
         List<Integer> result = strategy.generate();
