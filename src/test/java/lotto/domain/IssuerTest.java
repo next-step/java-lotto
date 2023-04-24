@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class IssuerTest {
@@ -23,5 +24,17 @@ public class IssuerTest {
         issuerFixture.purchaseTickets(input);
         //then
         assertThat(issuerFixture.purchasedTickets()).hasSize(input);
+    }
+
+
+    @DisplayName("Winners 클래스를 생성한다")
+    @Test
+    public void winnerGen() {
+        //given
+        //when
+        issuerFixture.purchaseTickets(10);
+        Winners winners = issuerFixture.makeWinners(new Ticket("1, 2, 3, 4, 5, 6"));
+        //then
+        assertNotNull(winners);
     }
 }
