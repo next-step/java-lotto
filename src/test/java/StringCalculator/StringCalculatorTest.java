@@ -3,6 +3,7 @@ package StringCalculator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static StringCalculator.StringCalculator.calculate;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,16 +18,10 @@ public class StringCalculatorTest {
         assertThat(calculate(input)).isEqualTo(expected);
     }
 
-    @Test
-    void 입력값이null이거나_빈공백문자일경우_IllegalArgumentException() {
-        assertAll(
-                () -> {
-                    assertThatIllegalArgumentException().isThrownBy(() -> calculate(""));
-                },
-                () -> {
-                    assertThatIllegalArgumentException().isThrownBy(() -> calculate(null));
-                }
-        );
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 입력값이null이거나_빈공백문자일경우_IllegalArgumentException(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> calculate(input));
     }
 
     @Test
