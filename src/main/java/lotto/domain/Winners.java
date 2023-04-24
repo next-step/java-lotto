@@ -28,10 +28,10 @@ public class Winners {
     }
 
     private int aggregateIncome() {
-        return Prize.FIRST.calculate(this.countFirst) +
-                Prize.THIRD.calculate(this.countThird) +
-                Prize.FOURTH.calculate(this.countFourth) +
-                Prize.FIFTH.calculate(this.countFifth);
+        return Prize.FIRST.calculatePrize(this.countFirst) +
+                Prize.THIRD.calculatePrize(this.countThird) +
+                Prize.FOURTH.calculatePrize(this.countFourth) +
+                Prize.FIFTH.calculatePrize(this.countFifth);
     }
 
     public int getIncome() {
