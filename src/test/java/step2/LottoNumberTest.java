@@ -36,7 +36,7 @@ public class LottoNumberTest {
     }
 
     @Test
-    void 구매_번호_리스트는_랜덤으로_생성된다() {
+    void 구매_번호_리스트는_외부_전략대로_생성된다() {
 
         // given
         int price = 1000;
