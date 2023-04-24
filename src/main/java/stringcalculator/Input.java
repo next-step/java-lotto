@@ -11,4 +11,8 @@ public class Input {
 
     this.input = input;
   }
+
+  public String[] inputSplit() {
+    return StringSpliter.split(this.input);
+  }
 }
