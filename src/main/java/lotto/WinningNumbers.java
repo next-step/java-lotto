@@ -71,11 +71,15 @@ public class WinningNumbers {
     }
 
     private List<LottoNumber> validCountNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != WINNING_NUMBERS_COUNT) {
+        if (isValidCount(lottoNumbers)) {
             throw new IllegalArgumentException(
-                "당첨번호는 6개의 중복되지 않는 숫자로 이루어져야 합니다. : " + lottoNumbers.size());
+                "당첨번호의 개수가 다릅니다 : " + lottoNumbers.size());
         }
         return lottoNumbers;
+    }
+
+    private boolean isValidCount(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.size() != WINNING_NUMBERS_COUNT;
     }
 
     public List<LottoNumber> numbers() {

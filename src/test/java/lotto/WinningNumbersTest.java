@@ -17,7 +17,7 @@ public class WinningNumbersTest {
         List<LottoNumber> lottoNumbers = List.of(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1));
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new WinningNumbers(lottoNumbers))
-            .withMessageMatching("당첨번호는 6개의 중복되지 않는 숫자로 이루어져야 합니다. : 1");
+            .withMessageMatching("당첨번호의 개수가 다릅니다 : 1");
     }
 
     @Test
@@ -51,7 +51,7 @@ public class WinningNumbersTest {
     void 당첨번호입력개수부족() {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new WinningNumbers(List.of(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3), new LottoNumber(4))))
-            .withMessageMatching("당첨번호는 6개의 중복되지 않는 숫자로 이루어져야 합니다. : " + 4);
+            .withMessageMatching("당첨번호의 개수가 다릅니다 : " + 4);
     }
 
     @Test
