@@ -2,5 +2,5 @@ package calculator.domain;
 
 public interface TwoNumbersCalculator {
 
-    int calculateTwoNumbers(Integer number1, Integer number2);
+    int calculateTwoNumbers(int number1, int number2);
 }
