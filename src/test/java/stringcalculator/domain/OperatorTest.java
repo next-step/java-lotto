@@ -1,9 +1,13 @@
-package stringcalculator.domain.operator;
+package stringcalculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import stringcalculator.domain.operatorImpl.AddOperator;
+import stringcalculator.domain.operatorImpl.DivideOperator;
+import stringcalculator.domain.operatorImpl.MultiplyOperator;
+import stringcalculator.domain.operatorImpl.SubtractOperator;
 
 public class OperatorTest {
 
