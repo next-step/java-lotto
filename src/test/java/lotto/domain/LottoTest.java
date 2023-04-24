@@ -10,24 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoTest {
 
     @Test
-    @DisplayName("Lotto 발급")
-    void publishLottoTest() {
-        Lotto lotto = Lotto.initLotto();
-        assertThat(lotto.getLottoSize())
-                .isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("Lotto 수동 입력 테스트")
-    void manualLottoTest() {
-        List<String> stringLottos = List.of("1", "2", "3", "4", "5", "6");
-        Lotto lotto = Lotto.initWinningLotto(stringLottos);
-
-        assertThat(lotto.getLottoSize())
-                .isEqualTo(6);
-    }
-
-    @Test
     @DisplayName("통계 테스트")
     void findStatisticsTest() {
         Lotto winningLotto = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
@@ -49,7 +31,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("보너스 숫자 마포함 테스트")
+    @DisplayName("보너스 숫자 미포함 테스트")
     void hasNoBonusNumberTest() {
         Lotto lotto = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");

@@ -17,10 +17,6 @@ public class Winners {
         return winnersCount.getOrDefault(statistics, DEFAULT_VALUE);
     }
 
-    public int getPrize(int matchingBall, boolean hasBonusNumber) {
-        return Statistics.initStatistics(matchingBall, hasBonusNumber).getPrize();
-    }
-
     public double getProfit(Money amount) {
         int sum = winnersCount.keySet()
                 .stream()

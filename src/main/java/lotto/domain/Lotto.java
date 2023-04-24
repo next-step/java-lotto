@@ -28,12 +28,8 @@ public class Lotto {
         return lottoNumbers.hasLottoNumber(bonusNumber);
     }
 
-    public LottoNumbers getLottoNumbers() {
+    private LottoNumbers getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    public int getLottoSize() {
-        return lottoNumbers.getLottoNumberSize();
     }
 
     @Override

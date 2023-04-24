@@ -10,12 +10,9 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
     private static final int SUBSTRING_INDEX = 1;
-    private static final int MINIMUM_PRIZE = 3;
-    private static final int MAXIMUM_PRIZE = 6;
     private static final double PROFIT_CONDITION = 1.0;
 
     public static void printLottoQuantity(Money money) {

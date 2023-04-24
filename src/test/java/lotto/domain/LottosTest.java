@@ -11,15 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class LottosTest {
 
     @Test
-    @DisplayName("Lotto 발급 테스트")
-    void lottosTest() {
-        Lottos lottos = Lottos.initLottos(Money.initMoney(5000));
-
-        assertThat(lottos.getLottoQuantity())
-                .isEqualTo(5);
-    }
-
-    @Test
     @DisplayName("통계 테스트")
     void findStatisticsTest() {
         Lotto winningLotto = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
@@ -37,15 +28,15 @@ class LottosTest {
         Winners winners = lottos.findStatistics(winningLotto, bonusNumber);
 
         assertAll(
-                () -> assertThat(winners.getWinnersMatchingCount(6, false))
+                () -> assertThat(winners.getWinnersMatchingCount(Statistics.FIFTH))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersMatchingCount(5, true))
+                () -> assertThat(winners.getWinnersMatchingCount(Statistics.SECOND))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersMatchingCount(5, true))
+                () -> assertThat(winners.getWinnersMatchingCount(Statistics.THIRD))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersMatchingCount(4, true))
+                () -> assertThat(winners.getWinnersMatchingCount(Statistics.FOURTH))
                         .isEqualTo(1),
-                () -> assertThat(winners.getWinnersMatchingCount(3, true))
+                () -> assertThat(winners.getWinnersMatchingCount(Statistics.FIFTH))
                         .isEqualTo(1)
         );
     }

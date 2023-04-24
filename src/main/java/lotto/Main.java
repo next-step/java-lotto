@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.exception.SameNumberException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

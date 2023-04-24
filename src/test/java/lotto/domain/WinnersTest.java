@@ -2,8 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +17,7 @@ class WinnersTest {
         winners.addWinner(matchingBall, false);
         winners.addWinner(matchingBall, false);
 
-        assertThat(winners.getWinnersMatchingCount(matchingBall, false))
+        assertThat(winners.getWinnersMatchingCount(Statistics.FIRST))
                 .isEqualTo(3);
     }
 
@@ -33,27 +31,8 @@ class WinnersTest {
         winners.addWinner(matchingBall, false);
         winners.addWinner(matchingBall, false);
 
-        assertThat(winners.getWinnersMatchingCount(matchingBall, false))
+        assertThat(winners.getWinnersMatchingCount(Statistics.MISS))
                 .isEqualTo(3);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"6,2000000000", "5,1500000", "4,50000", "3,5000"})
-    @DisplayName("상금 테스트")
-    void getPrizeTest(int matchingBall, int prize) {
-        Winners winners = new Winners();
-
-        assertThat(winners.getPrize(matchingBall, false))
-                .isEqualTo(prize);
-    }
-
-    @Test
-    @DisplayName("2등 테스트")
-    void secondPrizeTest() {
-        Winners winners = new Winners();
-
-        assertThat(winners.getPrize(5, true))
-                .isEqualTo(30_000_000);
     }
 
     @Test

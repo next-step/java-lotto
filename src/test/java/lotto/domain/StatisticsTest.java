@@ -25,6 +25,5 @@ class StatisticsTest {
         assertThat(statistics.getPrize())
                 .isEqualTo(30_000_000);
     }
-
-
+    
 }
