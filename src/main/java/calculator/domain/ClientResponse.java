@@ -42,7 +42,7 @@ public class ClientResponse {
     public List<String> oddIndexedElements() {
         List<String> operators = new ArrayList<>();
 
-        for (int index = 0; index < roundedDownNumber(splitInputSize()); index++) {
+        for (int index = 0; index < oddIndexMax(splitInputSize()); index++) {
             operators.add(splitInput()[index * 2 + 1]);
         }
 
@@ -52,18 +52,18 @@ public class ClientResponse {
     private List<Integer> evenIndexedElements() {
         List<Integer> numbers = new ArrayList<>();
 
-        for (int index = 0; index < roundedUpNumber(splitInputSize()); index++) {
+        for (int index = 0; index < evenIndexMax(splitInputSize()); index++) {
             numbers.add(parseInt(splitInput()[index * 2]));
         }
 
         return numbers;
     }
 
-    private int roundedDownNumber(int number) {
+    private int oddIndexMax(int number) {
         return number / MINIMUM_EVEN_NUMBER;
     }
 
-    private int roundedUpNumber(int number) {
+    private int evenIndexMax(int number) {
         return (number / MINIMUM_EVEN_NUMBER) + TO_ROUND_UP;
     }
 
