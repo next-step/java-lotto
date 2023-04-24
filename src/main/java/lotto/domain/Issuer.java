@@ -32,15 +32,11 @@ public class Issuer {
         return RANDOM.nextInt(46) + 1;
     }
 
-    public List<String> renderingTickets() {
-        List<String> presentTickets = new ArrayList<>();
-        for(Ticket ticket : tickets) {
-            presentTickets.add(ticket.rendering());
-        }
-        return presentTickets;
-    }
-
     public Winners makeWinners(Ticket winningTicket) {
         return new Winners(tickets,winningTicket);
+    }
+
+    public List<Ticket> purchasedTickets() {
+        return tickets;
     }
 }
