@@ -26,12 +26,9 @@ public class Lotto {
     }
 
     public Integer getScore(Lotto result) {
-        Integer score = 0;
-        for (Integer number : result.getNumbers()) {
-            if (this.numbers.contains(number)) {
-                score++;
-            }
-        }
-        return score;
+        return Math.toIntExact(result.getNumbers()
+                .stream()
+                .filter(this.numbers::contains)
+                .count());
     }
 }
