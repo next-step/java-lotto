@@ -18,7 +18,7 @@ public enum Prize {
         return this.matchCount == overlapNumberCount;
     }
 
-    public int prizeCalculate(int count) {
+    public int calculate(int count) {
         return this.prizeAmount * count;
     }
 }
