@@ -5,9 +5,8 @@ import step1.domain.Expression;
 import step1.utils.CalculatorScanner;
 
 public class CalculatorController {
-    public void run(){
+    public int run() {
         Expression expression = CalculatorScanner.getInput();
-        int result = Calculator.calculate(expression);
-        System.out.println(result);
+        return Calculator.calculate(expression);
     }
 }
