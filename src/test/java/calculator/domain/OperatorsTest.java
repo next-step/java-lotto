@@ -3,8 +3,10 @@ package calculator.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,11 +14,11 @@ import org.junit.jupiter.api.Test;
 
 public class OperatorsTest {
 
-    private static final String [] OPERATORS = {"+","-","*","/"};
+    private static final List<String> OPERATORS = Arrays.asList("+","-","*","/");
 
-    private static final String [] INVALID_OPERATORS = {"#","?"};
+    private static final List<String> INVALID_OPERATORS = Arrays.asList("#","?");
 
-    private static final String [] EMPTY_ARRAY = {};
+    private static final List<String> EMPTY_ARRAY = new ArrayList<>();
 
     private Operators operators;
 
@@ -50,7 +52,7 @@ public class OperatorsTest {
     @Test
     @DisplayName("연산기호 인입 후 자료값을 Queue 로 리턴한다.")
     void getOperatorsTest() {
-        Queue<String> operators = new LinkedList<>(Arrays.asList(OPERATORS));
+        Queue<String> operators = new LinkedList<>(OPERATORS);
         assertThat(this.operators.operators()).isEqualTo(operators);
     }
 }

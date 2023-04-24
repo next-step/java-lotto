@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Numbers {
 
     private static final String EMPTY_MSG = "연산 가능한 숫자가 없습니다.";
-    
+
     private final List<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {

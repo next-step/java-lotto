@@ -8,10 +8,6 @@ import java.util.List;
 
 public class ClientResponse {
 
-    private final String clientInput;
-
-    private String[] cachedSplitInput;
-
     private static final int MINIMUM_EVEN_NUMBER = 2;
 
     private static final String EMPTY_MESSAGE = "값이 입력되지 않았습니다.";
@@ -19,6 +15,10 @@ public class ClientResponse {
     private static final String SEPARATOR = " ";
 
     private static final int TO_ROUND_UP = 1;
+
+    private final String clientInput;
+
+    private String[] cachedSplitInput;
 
     public ClientResponse(String clientInput) {
         if (emptyTxt(clientInput)) {
@@ -35,18 +35,18 @@ public class ClientResponse {
         return evenIndexedElements();
     }
 
-    public String[] getSymbols() {
+    public List<String> getSymbols() {
         return oddIndexedElements();
     }
 
-    public String[] oddIndexedElements() {
-        String[] numbers = new String[roundedDownNumber(splitInputSize())];
+    public List<String> oddIndexedElements() {
+        List<String> operators = new ArrayList<>();
 
-        for (int index = 0; index < numbers.length; index++) {
-            numbers[index] = splitInput()[index * 2 + 1];
+        for (int index = 0; index < roundedDownNumber(splitInputSize()); index++) {
+            operators.add(splitInput()[index * 2 + 1]);
         }
 
-        return numbers;
+        return operators;
     }
 
     private List<Integer> evenIndexedElements() {
