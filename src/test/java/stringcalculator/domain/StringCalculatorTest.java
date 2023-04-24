@@ -39,6 +39,15 @@ public class StringCalculatorTest {
     assertThatThrownBy(() -> calculator.calculate()).isInstanceOf(IllegalArgumentException.class);
   }
 
+  @DisplayName("사칙연산으로 끝나는 식은 IllegalArgumentException을 던진다.")
+  @ParameterizedTest
+  @ValueSource(strings = {"1 +", "1 -", "1 *"})
+  public void calculate_throwException_EndOperator(String input) {
+    StringCalculator calculator = new StringCalculator(input);
+
+    assertThatThrownBy(() -> calculator.calculate()).isInstanceOf(IllegalArgumentException.class);
+  }
+
   @DisplayName("사칙연산을 정상적으로 수행한다.")
   @ParameterizedTest
   @CsvSource({"1 + 1,2", "2 - 1,1", "2 * 2,4", "4 / 3,1", "3 / 5 + 100,100", "1 + 1 + 1,3"})
