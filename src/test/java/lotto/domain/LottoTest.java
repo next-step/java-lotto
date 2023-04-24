@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -54,7 +52,7 @@ public class LottoTest {
             add(new LottoNumber(20));
             add(new LottoNumber(10));
         }};
-        List<LottoNumber> next = Lotto.nextRandom(lottoNumber1).numbers();
+        List<LottoNumber> next = Lotto.newInstance(lottoNumber1).numbers();
         Iterator<LottoNumber> iterator = next.iterator();
         assertAll(() -> {
                 LottoNumber prev = null;
@@ -127,10 +125,10 @@ public class LottoTest {
             add(new LottoNumber(17));
         }};
         assertAll(
-            () -> assertThat(Lotto.nextRandom(lottoNumber1).numbers()).isNotEqualTo(
-                Lotto.nextRandom(lottoNumber2).numbers()),
-            () -> assertThat(Lotto.nextRandom(lottoNumber1).numbers()).hasSize(6),
-            () -> assertThat(Lotto.nextRandom(lottoNumber2).numbers()).hasSize(6)
+            () -> assertThat(Lotto.newInstance(lottoNumber1).numbers()).isNotEqualTo(
+                Lotto.newInstance(lottoNumber2).numbers()),
+            () -> assertThat(Lotto.newInstance(lottoNumber1).numbers()).hasSize(6),
+            () -> assertThat(Lotto.newInstance(lottoNumber2).numbers()).hasSize(6)
         );
     }
 
