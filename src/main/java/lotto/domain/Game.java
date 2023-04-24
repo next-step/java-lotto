@@ -16,7 +16,7 @@ public class Game {
 
     public void purchaseTickets(int count) {
         for (int i = 0; i < count; i++) {
-            addTicket(new Ticket(issueNumbers()));
+            tickets.add(new Ticket(issueNumbers()));
         }
     }
 
@@ -30,10 +30,6 @@ public class Game {
 
     private int issueNumber() {
         return RANDOM.nextInt(46) + 1;
-    }
-
-    private void addTicket(Ticket ticket) {
-        tickets.add(ticket);
     }
 
     public List<String> renderingTickets() {
