@@ -19,10 +19,6 @@ public class WinnerInfo {
 
     private final Map<LottoRank, Integer> winnerResults;
 
-    public Map<LottoRank, Integer> getWinnerResults() {
-        return winnerResults;
-    }
-
     public WinnerInfo(List<Integer> matchingCounts) {
         winnerResults = new HashMap<>();
 
@@ -56,5 +52,9 @@ public class WinnerInfo {
                 + LottoRank.getMatchFivePrizeAmount(winnerResults.get(MATCH_FIVE))
                 + LottoRank.getMatchSixPrizeAmount(winnerResults.get(MATCH_SIX)))
                 / (numOfLottoTicket * LOTTO_PER_PRICE);
+    }
+
+    public Map<LottoRank, Integer> getWinnerResults() {
+        return winnerResults;
     }
 }
