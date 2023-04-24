@@ -21,7 +21,7 @@ public class InputPresent {
         return count;
     }
 
-    public Ticket winningNumber() {
+    public Ticket winningNumbers() {
         System.out.println(WINNING_NUMBER);
         String s = scanner.nextLine();
         return new Ticket(s);

@@ -22,7 +22,7 @@ public class Lotto {
         match.purchase(count);
         outputPresent.presentTickets(match.renderingTickets());
 
-        Ticket winningTicket = inputPresent.winningNumber();
+        Ticket winningTicket = inputPresent.winningNumbers();
         outputPresent.presentTickets(List.of(winningTicket.rendering()));
         Winners winners = match.makeWinners(winningTicket);
 
