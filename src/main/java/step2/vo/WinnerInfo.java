@@ -6,14 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static step2.service.LottoRank.MATCH_FIVE;
-import static step2.service.LottoRank.MATCH_FOUR;
-import static step2.service.LottoRank.MATCH_SIX;
-import static step2.service.LottoRank.MATCH_THREE;
-
 public class WinnerInfo {
 
-    private static final int LOTTO_PER_PRICE = 1000;
 
     private static final int INIT_WINNER_COUNT = 0;
 
@@ -32,26 +26,12 @@ public class WinnerInfo {
     }
 
     private void countMatchedWinners(Integer matchingCount) {
-        if (LottoRank.isMatchingThree(matchingCount)) {
-            winnerResults.compute(MATCH_THREE, (k, v) -> v + 1);
-        }
-        if (LottoRank.isMatchingFour(matchingCount)) {
-            winnerResults.compute(MATCH_FOUR, (k, v) -> v + 1);
-        }
-        if (LottoRank.isMatchingFive(matchingCount)) {
-            winnerResults.compute(MATCH_FIVE, (k, v) -> v + 1);
-        }
-        if (LottoRank.isMatchingSix(matchingCount)) {
-            winnerResults.compute(MATCH_SIX, (k, v) -> v + 1);
-        }
+        LottoRank lottoRank = LottoRank.getLottoNumber(matchingCount);
+        winnerResults.compute(lottoRank, (k, v) -> v + 1);
     }
 
     public double calculateRateOfReturn(int numOfLottoTicket) {
-        return (LottoRank.getMatchThreePrizeAmount(winnerResults.get(MATCH_THREE))
-                + LottoRank.getMatchFourPrizeAmount(winnerResults.get(MATCH_FOUR))
-                + LottoRank.getMatchFivePrizeAmount(winnerResults.get(MATCH_FIVE))
-                + LottoRank.getMatchSixPrizeAmount(winnerResults.get(MATCH_SIX)))
-                / (numOfLottoTicket * LOTTO_PER_PRICE);
+        return LottoRank.calculateRateOfReturn(numOfLottoTicket, winnerResults);
     }
 
     public Map<LottoRank, Integer> getWinnerResults() {
