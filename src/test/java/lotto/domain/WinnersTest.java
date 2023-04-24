@@ -21,9 +21,9 @@ public class WinnersTest {
 
         Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
 
-        Ticket thirdA = new Ticket(Set.of(1, 2, 4, 8, 16,40));
-        Ticket thirdB = new Ticket(Set.of(1, 2, 4, 8, 16,41));
-        Ticket thirdC = new Ticket(Set.of(1, 2, 4, 8, 16,42));
+        Ticket thirdA = new Ticket(Set.of(1, 2, 4, 8, 16, 40));
+        Ticket thirdB = new Ticket(Set.of(1, 2, 4, 8, 16, 41));
+        Ticket thirdC = new Ticket(Set.of(1, 2, 4, 8, 16, 42));
 
         Ticket fourthA = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
         Ticket fourthB = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
@@ -66,6 +66,7 @@ public class WinnersTest {
         //then
         assertEquals(answer, countFirst);
     }
+
     @DisplayName("4등 당첨통계가 계산된다(4개 번호 일치)")
     @Test
     public void forth() {
@@ -76,6 +77,7 @@ public class WinnersTest {
         //then
         assertEquals(answer, countFirst);
     }
+
     @DisplayName("5등 당첨통계가 계산된다(3개 번호 일치)")
     @Test
     public void fifth() {
@@ -86,6 +88,7 @@ public class WinnersTest {
         //then
         assertEquals(answer, countFirst);
     }
+
     @DisplayName("당첨금액을 계산한다")
     @Test
     public void income() {
