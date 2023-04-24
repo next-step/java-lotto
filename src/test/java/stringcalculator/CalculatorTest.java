@@ -26,4 +26,13 @@ public class CalculatorTest {
     assertThatThrownBy(() -> calculator.calculate()).isInstanceOf(IllegalArgumentException.class);
   }
 
+  @DisplayName("사칙연산이 와야할 순서에 사칙연산이 아닌 문자를 만나면 IllegalArgumentException을 던진다")
+  @ParameterizedTest
+  @ValueSource(strings = {"1 1 1", "1 ? 1", "1 ^ 1"})
+  public void calculate_throwException_outOfOrderOperator(String input) {
+    Calculator calculator = new Calculator(input);
+
+    assertThatThrownBy(() -> calculator.calculate()).isInstanceOf(IllegalArgumentException.class);
+  }
+
 }

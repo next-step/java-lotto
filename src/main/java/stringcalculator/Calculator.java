@@ -3,6 +3,7 @@ package stringcalculator;
 public class Calculator {
 
   private static final String NUMBER_REGEX = "-?\\d+";
+  private static final String OPERATOR_REGEX = "[+\\-*/]";
 
   private Input input;
 
@@ -19,7 +20,7 @@ public class Calculator {
 
     int number = getNumber(inputArr[0]);
     for (int i = 1; i < inputArr.length; i = i + 2) {
-      String operator = inputArr[i];
+      String operator = getOperator(inputArr[i]);
       int nextNumber = getNumber(inputArr[i + 1]);
     }
 
@@ -31,5 +32,12 @@ public class Calculator {
       throw new IllegalArgumentException("유효하지 않은 입력입니다.");
     }
     return Integer.parseInt(input);
+  }
+
+  private String getOperator(String input) {
+    if (!input.matches(OPERATOR_REGEX)) {
+      throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+    }
+    return input;
   }
 }
