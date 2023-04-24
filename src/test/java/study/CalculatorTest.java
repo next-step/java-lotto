@@ -14,4 +14,12 @@ public class CalculatorTest {
 
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("뺄셈 테스트")
+    void minus_test() {
+        int result = Calculator.minus(2, 1);
+
+        assertThat(result).isEqualTo(1);
+    }
 }
