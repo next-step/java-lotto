@@ -1,9 +1,6 @@
 package calculator.domain;
 
-import static java.util.Arrays.stream;
-
 import calculator.domain.constant.OperatorsConstant;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -14,12 +11,15 @@ public class Operators {
     private static final String INVALID_OPERATOR = "올바른 연산기호가 아닙니다.";
     private final List<String> operators;
 
-
     public Operators(List<String> operators) {
         if(isNull(operators) || hasInvalidElement(operators)) {
             throw new IllegalArgumentException(INVALID_OPERATOR);
         }
         this.operators = operators;
+    }
+
+    private boolean isNull(List<String> operators) {
+        return operators == null;
     }
 
     private boolean hasInvalidElement(List<String> operators) {
@@ -28,10 +28,6 @@ public class Operators {
         }
         return operators.stream()
                 .noneMatch(OperatorsConstant::isProperSymbol);
-    }
-
-    private boolean isNull(List<String> operators) {
-        return operators == null;
     }
 
     public Queue<String> operators() {
