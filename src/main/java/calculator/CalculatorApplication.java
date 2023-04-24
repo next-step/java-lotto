@@ -10,5 +10,6 @@ public class CalculatorApplication {
         List<String> operators = InputView.inputOperators();
 
         Calculator calculator = Calculator.of(operators);
+        System.out.println(calculator.calculate());
     }
 }
