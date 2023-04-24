@@ -13,6 +13,7 @@ public enum LottoRank {
   FOURTH(3, 5_000),
   NOTMATCHED(0, 0);
 
+  private static final int NOT_MATCHED_COUNT = 0;
   private static final int UNDER_RANK = 2;
   private static final Map<Integer, LottoRank> BY_MATCHEDCOUNT = new HashMap<>();
 
@@ -39,7 +40,7 @@ public enum LottoRank {
 
   public static LottoRank valueOfMatchedCount(int count) {
     if (count <= UNDER_RANK) {
-      return BY_MATCHEDCOUNT.get(0);
+      return BY_MATCHEDCOUNT.get(NOT_MATCHED_COUNT);
     }
 
     return BY_MATCHEDCOUNT.get(count);

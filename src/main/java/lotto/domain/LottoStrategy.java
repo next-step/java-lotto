@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.TreeSet;
 
 @FunctionalInterface
 public interface LottoStrategy {
-  List<LottoNumber> issue();
+  LottoTicket issue();
 }

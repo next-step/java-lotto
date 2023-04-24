@@ -8,9 +8,9 @@ public class LottoGame {
   private final LottoTickets soldLottoTickets;
   private final LottoTicket winningLottoTicket;
 
-  public LottoGame(LottoTickets lottoTickets, LottoStrategy lottoStrategy) {
+  public LottoGame(LottoTickets lottoTickets, LottoTicket winningLottoTicket) {
     this.soldLottoTickets = lottoTickets;
-    this.winningLottoTicket = new LottoTicket(lottoStrategy);
+    this.winningLottoTicket = winningLottoTicket;
   }
 
   public LottoResult play() {

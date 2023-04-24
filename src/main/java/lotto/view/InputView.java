@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoResult.PER_TICKET;
+import static lotto.domain.Price.buyTickets;
 
 public class InputView {
-
 
   private static final Scanner scanner = new Scanner(System.in);
   private static final String DELIMITER = ",";
@@ -18,7 +17,7 @@ public class InputView {
 
   public static int inputTryCount() {
     System.out.println("구입금액을 입력해주세요. 100단위 이하는 생략됩니다.");
-    int tryNumber = scanner.nextInt() / PER_TICKET;
+    int tryNumber = buyTickets(scanner.nextInt());
     System.out.println(tryNumber + "개를 구매하셨습니다.");
 
     return tryNumber;

@@ -2,19 +2,31 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoTicket {
 
   public static final int TICKET_NUMBER_COUNT = 6;
   private static final String ILLEGAL_COUNT_MESSAGE = "로또 번호는 6개 입력하셔야 합니다.";
-  private final List<LottoNumber> lottoTicket;
+  private final Set<LottoNumber> lottoTicket;
 
-  public LottoTicket(LottoStrategy lottoStrategy) {
-    this.lottoTicket = validatedLottoTicket(lottoStrategy.issue());
+  public LottoTicket() {
+    lottoTicket = new TreeSet<>();
   }
 
-  public List<LottoNumber> lottoTicketNumbers() {
-    return Collections.unmodifiableList(lottoTicket);
+  public LottoTicket(List<LottoNumber> lottoNumbers) {
+    validateLottoTicket(lottoNumbers);
+
+    lottoTicket = new TreeSet<>(lottoNumbers);
+  }
+
+  public Set<LottoNumber> lottoTicketNumbers() {
+    return Collections.unmodifiableSet(lottoTicket);
+  }
+
+  public void addLottoNumber(LottoNumber lottoNumber) {
+    lottoTicket.add(lottoNumber);
   }
 
   public int matchLottoCount(LottoTicket lottoNumbers) {
@@ -27,11 +39,10 @@ public class LottoTicket {
     return lottoTicket.contains(lottoNumber);
   }
 
-  private List<LottoNumber> validatedLottoTicket(List<LottoNumber> lottoTicket) {
+  private void validateLottoTicket(List<LottoNumber> lottoTicket) {
     if (!equalsLottoNumbers(lottoTicket)) {
       throw new IllegalArgumentException(ILLEGAL_COUNT_MESSAGE);
     }
-    return lottoTicket;
   }
 
   private boolean equalsLottoNumbers(List<LottoNumber> lottoTicket) {

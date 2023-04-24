@@ -14,11 +14,11 @@ public class LottoTickets {
 
   public List<Integer> matchesLottoTickets(LottoTicket winningLottoNumbers) {
     return lottoTickets.stream()
-            .map(t -> t.matchLottoCount(winningLottoNumbers))
+            .map(lottoTicket -> lottoTicket.matchLottoCount(winningLottoNumbers))
             .collect(Collectors.toList());
   }
 
-  public void addLottoTicket(LottoStrategy lottoStrategy) {
-    lottoTickets.add(new LottoTicket(lottoStrategy));
+  public void addLottoTicket(LottoTicket lottoTicket) {
+    lottoTickets.add(lottoTicket);
   }
 }

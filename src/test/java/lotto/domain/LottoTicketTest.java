@@ -15,7 +15,7 @@ public class LottoTicketTest {
 
   @BeforeEach
   public void setUp() {
-    winningLottoTicket = new LottoTicket(() -> List.of(
+    winningLottoTicket = new LottoTicket(List.of(
             new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(5),
@@ -28,7 +28,7 @@ public class LottoTicketTest {
   @Test
   @DisplayName("로또 티켓 생성하여 당첨 번호와 매치되는 개수 반환 테스트")
   public void match_로또_번호() {
-    LottoTicket lottoTicket = new LottoTicket(() -> List.of(
+    LottoTicket lottoTicket = new LottoTicket(List.of(
             new LottoNumber(1),
             new LottoNumber(3),
             new LottoNumber(5),
@@ -44,7 +44,7 @@ public class LottoTicketTest {
   @Test()
   @DisplayName("로또 번호 6개가 아닌 로또 티켓 생성하는 경우 IllegalArgumentException throw")
   public void create_개수가_맞지_않는_로또() {
-    assertThatThrownBy(() -> new LottoTicket(() -> List.of(
+    assertThatThrownBy(() -> new LottoTicket(List.of(
             new LottoNumber(1),
             new LottoNumber(3),
             new LottoNumber(5),

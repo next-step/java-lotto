@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
   public static final int LOTTO_MINIMUM_NUMBER = 1;
   public static final int LOTTO_MAXIMUM_NUMBER = 45;
@@ -40,5 +40,10 @@ public class LottoNumber {
   @Override
   public int hashCode() {
     return number;
+  }
+
+  @Override
+  public int compareTo(LottoNumber otherLottoNumber) {
+    return Integer.compare(number, otherLottoNumber.number);
   }
 }

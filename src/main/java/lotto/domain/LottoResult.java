@@ -4,9 +4,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.Price.inputMoney;
+
 public class LottoResult {
 
-  public static final int PER_TICKET = 1000;
   private final List<LottoRank> lottoRecord;
 
   public LottoResult(List<LottoRank> lottoResults) {
@@ -14,7 +15,7 @@ public class LottoResult {
   }
 
   public double lottoRateOfReturn() {
-    return lottoRecord.stream().mapToDouble(LottoRank::prizeMoney).sum() / inputMoney();
+    return lottoRecord.stream().mapToDouble(LottoRank::prizeMoney).sum() / inputMoney(lottoRecord);
   }
 
   public Map<Integer, Integer> numbersPerRank() {
@@ -29,11 +30,7 @@ public class LottoResult {
 
   private int matchedCountOfRank(int matchedCount) {
     return (int) lottoRecord.stream()
-            .filter(v -> v.equalsMatchedCount(matchedCount))
+            .filter(lottoRank -> lottoRank.equalsMatchedCount(matchedCount))
             .count();
-  }
-
-  private int inputMoney() {
-    return lottoRecord.size() * PER_TICKET;
   }
 }
