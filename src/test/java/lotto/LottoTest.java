@@ -22,7 +22,7 @@ public class LottoTest {
     public void lottoApplicationContextTest() {
         //given
         consoleInput(
-                "1000000"+System.lineSeparator()+
+                "99000"+System.lineSeparator()+
                 "1, 2, 3, 4, 5, 6"
         );
         //when
