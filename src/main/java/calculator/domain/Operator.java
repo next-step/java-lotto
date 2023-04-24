@@ -28,8 +28,8 @@ public enum Operator {
         this.calculation = calculation;
     }
 
-    public static int calculate(Operator operator, int operand1, int operand2) {
-        return operator.calculation.apply(operand1, operand2);
+    public int calculate(int operand1, int operand2) {
+        return calculation.apply(operand1, operand2);
     }
 
     public static Operator getOperator(String operator) {

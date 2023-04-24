@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Expression {
-    public static int ZERO = 0;
-    public static int ODD_RESULT = 1;
-    public static int EVEN_CONDITION = 2;
-    public static String[] OPERATORS = {"+", "-", "*", "/"};
+    public static final int ZERO = 0;
+    public static final int ODD_RESULT = 1;
+    public static final int EVEN_CONDITION = 2;
+    public static final List<String> OPERATORS = List.of("+", "-", "*", "/");
 
     private final List<String> expressionList;
 
@@ -75,7 +75,7 @@ public class Expression {
     }
 
     private boolean hasOperators(String operator) {
-        return List.of(OPERATORS).contains(operator);
+        return OPERATORS.contains(operator);
     }
 
     public int getSize() {
