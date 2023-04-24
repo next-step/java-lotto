@@ -14,9 +14,7 @@ public class NumberFactory {
         this.strategy = strategy;
     }
 
-    public List<List<Integer>> createNumber(int price) {
-        int amount = price / LOTTO_PRICE;
-
+    public List<List<Integer>> generateLotto(int amount) {
         for (int i = 0; i < amount; i++) {
             List<Integer> generate = strategy.generate();
             numbers.add(new ArrayList<>(generate));

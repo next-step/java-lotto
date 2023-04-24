@@ -1,5 +1,9 @@
-package step2.domain;
+package step2.service;
 
+import step2.domain.LottoFactory;
+import step2.domain.LottoResult;
+import step2.domain.MatchRecord;
+import step2.domain.Rate;
 import step2.infrastructure.RandomStrategy;
 
 import java.util.List;
@@ -18,8 +22,12 @@ public class LottoGame {
     }
 
     public List<List<Integer>> generateLotto() {
-        NumberFactory factory = new NumberFactory(new RandomStrategy());
-        return factory.createNumber(purchaseAmount);
+        LottoFactory factory = new LottoFactory(new RandomStrategy());
+        return factory.generateLotto(numberOfPurchases());
+    }
+
+    private int numberOfPurchases() {
+        return purchaseAmount / LOTTO_PRICE;
     }
 
     public LottoResult countNumber(List<List<Integer>> numbers, List<Integer> winningNumbers) {
