@@ -59,9 +59,13 @@ public class LottoNumbers {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return countMap.entrySet().stream()
-                .filter(e -> e.getValue() > MAXIMUM_VALUE)
+                .filter(LottoNumbers::hasSameNumber)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
+    }
+
+    private static boolean hasSameNumber(Map.Entry<String, Long> key) {
+        return key.getValue() > MAXIMUM_VALUE;
     }
 
     public int findMatchingNumbers(LottoNumbers winningNumbers) {

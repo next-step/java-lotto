@@ -4,7 +4,7 @@
 ## Step3 - 로또(2등)
 ### Step2 2차 피드백 수정
 - [X] 사용하지 않는 상수 private 변경
-- [ ] LottoNumbers 메서드 추출
+- [X] LottoNumbers 메서드 추출
 - [ ] 로또 1장도 구매 가능하도록 수정
 - [ ] 메서드에 불필요한 throws 삭제
 
