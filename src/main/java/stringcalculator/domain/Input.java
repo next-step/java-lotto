@@ -1,4 +1,6 @@
-package stringcalculator;
+package stringcalculator.domain;
+
+import stringcalculator.util.StringSpliter;
 
 public class Input {
 
@@ -12,7 +14,7 @@ public class Input {
     this.input = input;
   }
 
-  public String[] inputSplit() {
+  public String[] split() {
     return StringSpliter.split(this.input);
   }
 }
