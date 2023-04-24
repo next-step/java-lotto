@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Number;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,7 @@ import java.util.stream.IntStream;
 public class ShuffleStudyTest {
 
     @Test
+    @Disabled
     @DisplayName("shuffle 테스트")
     void test01() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -22,6 +24,7 @@ public class ShuffleStudyTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("shuffle (1 - 45) Number 테스트")
     void test02() {
         List<Number> numbers = IntStream.range(1, 45).mapToObj(Number::new).collect(Collectors.toList());

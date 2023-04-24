@@ -9,7 +9,7 @@ public class Number implements Comparable<Number> {
 
     public Number(int number) {
         if (this.validate(number)) {
-            throw new IllegalArgumentException("숫자는 1~15사이만 가능합니다.");
+            throw new IllegalArgumentException("숫자는 1~45사이만 가능합니다.");
         }
         this.number = number;
     }

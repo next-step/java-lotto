@@ -39,4 +39,8 @@ public class Lotto {
                 "numbers=" + numbers +
                 '}';
     }
+
+    public long match(List<Number> winNumbers) {
+        return this.numbers.stream().filter(winNumbers::contains).count();
+    }
 }

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinStatistics {
@@ -15,12 +14,7 @@ public class WinStatistics {
     }
 
     public List<WinType> winStatistics() {
-        List<WinType> winTypes = new ArrayList<>();
-        for (Lotto lotto : lottos.lottos()) {
-            winTypes.add(winNumbers.confirmWin(lotto));
-        }
-
-        return winTypes;
+        return lottos.confirmWins(winNumbers);
     }
 
     public BigDecimal rateOfReturn() {

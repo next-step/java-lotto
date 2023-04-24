@@ -12,7 +12,7 @@ public class WinNumbers {
     }
 
     public WinType confirmWin(Lotto lotto) {
-        long count = lotto.numbers().stream().filter(numbers::contains).count();
+        long count = lotto.match(this.numbers);
         return WinType.find(count);
     }
 }

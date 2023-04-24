@@ -34,4 +34,13 @@ public class Lottos {
     public int purchaseQuantity() {
         return this.lottos.size();
     }
+
+    public List<WinType> confirmWins(WinNumbers winNumbers) {
+        List<WinType> winTypes = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            winTypes.add(winNumbers.confirmWin(lotto));
+        }
+
+        return winTypes;
+    }
 }

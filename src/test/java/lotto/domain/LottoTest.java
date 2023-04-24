@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -40,9 +42,21 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("로또의 개수가 얼마나 맞는지 카운트 확인")
+    void test05() {
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+
+        assertThat(lotto.match(getWinNumbers(1, 2, 3, 4, 44, 45))).isEqualTo(4);
+    }
+
     private Number[] getNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
         return new Number[]{new Number(number1), new Number(number2), new Number(number3), new Number(number4),
                 new Number(number5), new Number(number6)};
     }
 
+    private static List<Number> getWinNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
+        return List.of(new Number(number1), new Number(number2), new Number(number3),
+                       new Number(number4), new Number(number5), new Number(number6));
+    }
 }
