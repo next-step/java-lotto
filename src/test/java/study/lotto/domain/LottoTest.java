@@ -30,6 +30,14 @@ class LottoTest {
         assertThat(lotto.getScore(new Lotto(resultNumbers))).isEqualTo(score);
     }
 
+    @DisplayName("숫자_지정하여_로또_구매")
+    @ParameterizedTest
+    @MethodSource("generateLottoAndResult")
+    void 로도_수동구매(List<Integer> numbers, List<Integer> resultNumbers, Integer score) {
+        Lotto lotto = Lotto.generate(numbers);
+        assertThat(lotto.getNumbers()).isEqualTo(numbers);
+    }
+
     @DisplayName("자동구매하면_6개의_숫자가_중복없이_오름순")
     @Test
     void 로또_자동구매() {
