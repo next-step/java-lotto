@@ -17,7 +17,7 @@ public class LottoGame {
         return new LottoGame(purchaseAmount);
     }
 
-    public List<List<Integer>> generateNumber() {
+    public List<List<Integer>> generateLotto() {
         NumberFactory factory = new NumberFactory(new RandomStrategy());
         return factory.createNumber(purchaseAmount);
     }

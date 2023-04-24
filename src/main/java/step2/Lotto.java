@@ -14,7 +14,7 @@ public class Lotto {
         int purchaseAmount = InputView.purchaseAmount();
         LottoGame lottoGame = LottoGame.readyGame(purchaseAmount);
 
-        List<List<Integer>> purchaseNumber = lottoGame.generateNumber();
+        List<List<Integer>> purchaseNumber = lottoGame.generateLotto();
         PrintView.purchaseNumber(purchaseNumber);
 
         List<Integer> winningNumber = InputView.winningNumber();
