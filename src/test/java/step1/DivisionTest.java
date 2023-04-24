@@ -18,7 +18,7 @@ class DivisionTest {
         division = new Division();
     }
 
-    @ParameterizedTest(name = "x : {0} , y {1}")
+    @ParameterizedTest(name = "x : {0} , y : {1}")
     @CsvSource(value = {"4,2", "6,3", "10,5"})
     void 나눗셈(int x, int y) {
         assertThat(division.apply(x, y)).isEqualTo(x / y);
