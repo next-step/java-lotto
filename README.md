@@ -25,8 +25,8 @@
 
 ## 2단계 - 로또
 ### 체크리스트
-- [ ] 구입 금액을 입력 받는다.
-  - [ ] 숫자가 아닌 다른 문자 입력 시 IllegalArgumentException 예외를 던진다.
+- [x] 구입 금액을 입력 받는다.
+  - [x] 숫자가 아닌 다른 문자 입력 시 IllegalArgumentException 예외를 던진다.
 - [x] 로또를 몇개 구매했는지 계산한다.
   - [x] 1000원 보다 적은 금액 입력 시 IllegalArgumentException 예외를 던진다.
   - [x] 1000으로 나눠 떨어지지 않는 수를 입력 시 IllegalArgumentException 예외를 던진다.
