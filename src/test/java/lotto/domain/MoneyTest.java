@@ -37,4 +37,13 @@ class MoneyTest {
                 .hasMessage("1000원 이상 입력해주세요.");
     }
 
+    @Test
+    @DisplayName("Lotto 한장 구매 테스트")
+    void lottoOnlyOneTest() {
+        Money money = Money.initMoney(1000);
+
+        assertThat(money.getLottoQuantity())
+                .isEqualTo(1);
+    }
+
 }

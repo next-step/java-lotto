@@ -18,7 +18,7 @@ public class Money {
     }
 
     private static boolean isNegativeNumberOrZero(int amount) {
-        return amount <= LOTTO_UNIT_PRICE;
+        return amount < LOTTO_UNIT_PRICE;
     }
 
     public int getLottoQuantity() {
