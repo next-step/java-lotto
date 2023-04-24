@@ -15,7 +15,7 @@ public class LottoNumber {
 
     private int validRange(int number) {
         if (isInvalidRange(number)) {
-            throw new IllegalArgumentException("숫자는 1 ~ 45 사이의 값만 가질수 있습니다. : " + number);
+            throw new IllegalArgumentException("숫자 범위를 벗어났습니다 : " + number);
         }
         return number;
     }

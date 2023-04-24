@@ -15,7 +15,7 @@ public class LottoNumberTest {
     void 숫자범위(int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new LottoNumber(number))
-            .withMessageMatching("숫자는 1 ~ 45 사이의 값만 가질수 있습니다. : " + number);
+            .withMessageMatching("숫자 범위를 벗어났습니다 : " + number);
     }
 
     @Test
