@@ -11,5 +11,8 @@ public class Application {
         LottoAnswerInput lottoAnswer = new LottoAnswerInput(new LottoAnswerView());
 
         int price = lottoPrice.getValue();
+        LottoGenerator generator = new LottoGenerator();
+        List<Lotto> lottos = generator.generate(price);
+
     }
 }
