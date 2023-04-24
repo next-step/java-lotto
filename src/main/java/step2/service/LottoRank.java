@@ -31,13 +31,13 @@ public enum LottoRank {
             return MATCH_THREE;
         }
         if (MATCH_FOUR.matchable.isMatch(matchingCount)) {
-            return MATCH_THREE;
+            return MATCH_FOUR;
         }
         if (MATCH_FIVE.matchable.isMatch(matchingCount)) {
-            return MATCH_THREE;
+            return MATCH_FIVE;
         }
         if (MATCH_SIX.matchable.isMatch(matchingCount)) {
-            return MATCH_THREE;
+            return MATCH_SIX;
         }
         throw new IllegalArgumentException("맞춘 로또 번호 갯수는 당첨 범위가 아닙니다.");
     }
