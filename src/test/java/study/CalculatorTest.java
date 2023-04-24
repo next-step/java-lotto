@@ -30,4 +30,12 @@ public class CalculatorTest {
 
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("나눗셈 테스트")
+    void divide_test() {
+        int result = Calculator.divide(6, 3);
+
+        assertThat(result).isEqualTo(2);
+    }
 }
