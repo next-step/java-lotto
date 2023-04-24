@@ -24,6 +24,10 @@ public final class StringUtils {
     return matcher.matches();
   }
 
+  public static boolean isNotDigit(String input) {
+    return !isDigit(input);
+  }
+
   public static boolean isArithmeticOperator(String input) {
     if (isBlank(input)) {
       return false;
