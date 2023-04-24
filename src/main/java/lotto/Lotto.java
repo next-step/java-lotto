@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Match;
 import lotto.domain.Ticket;
+import lotto.domain.Winners;
 import lotto.present.InputPresent;
 import lotto.present.OutputPresent;
 import lotto.present.vo.IncomePresentVO;
@@ -23,9 +24,9 @@ public class Lotto {
 
         Ticket winningTicket = inputPresent.winningNumber();
         outputPresent.presentTickets(List.of(winningTicket.rendering()));
-        match.winningTicket(winningTicket);
+        Winners winners = match.makeWinners(winningTicket);
 
-        outputPresent.presentWinners(new WinnerPresentVO(match.getWinners()));
-        outputPresent.presentIncome(new IncomePresentVO(match.getWinners()));
+        outputPresent.presentWinners(new WinnerPresentVO(winners));
+        outputPresent.presentIncome(new IncomePresentVO(winners));
     }
 }
