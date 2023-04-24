@@ -1,6 +1,5 @@
-package Calculator.Model;
+package calculator.Model;
 
-import Calculator.View.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
-package Calculator.Model;
+package calculator.Model;
 
-import Calculator.Enums.Operator;
+import calculator.Enums.Operator;
 
 public class Calculator {
     private static final String INITIAL_NUMBER = "0";

@@ -1,4 +1,4 @@
-package Calculator.Enums;
+package calculator.Enums;
 
 import java.util.function.BiFunction;
 

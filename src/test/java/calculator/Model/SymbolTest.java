@@ -1,4 +1,4 @@
-package Calculator.Model;
+package calculator.Model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

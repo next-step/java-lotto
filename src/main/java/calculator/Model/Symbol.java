@@ -1,4 +1,4 @@
-package Calculator.Model;
+package calculator.Model;
 
 import java.util.Arrays;
 

@@ -1,7 +1,7 @@
-package Calculator;
+package calculator;
 
-import Calculator.View.*;
-import Calculator.Model.*;
+import calculator.View.*;
+import calculator.Model.*;
 
 
 public class CalculatorController {

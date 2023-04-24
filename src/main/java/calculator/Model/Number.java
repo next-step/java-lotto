@@ -1,4 +1,4 @@
-package Calculator.Model;
+package calculator.Model;
 
 public class Number {
     private int number;
