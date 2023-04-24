@@ -22,4 +22,12 @@ public class CalculatorTest {
 
         assertThat(result).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("곱셈 테스트")
+    void multiply_test() {
+        int result = Calculator.multiply(2, 3);
+
+        assertThat(result).isEqualTo(6);
+    }
 }
