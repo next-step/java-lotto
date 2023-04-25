@@ -5,11 +5,13 @@ import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
 
@@ -35,5 +37,13 @@ public class LottoTest {
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
     void 수익_계산(int matchCount, long reward) {
         assertThat(Lotto.reward(matchCount)).isEqualTo(reward);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 7})
+    void 번호_일치_개수_예외(int matchCount) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Lotto.reward(matchCount))
+                .withMessageContaining("당첨에 해당하는 번호 일치 개수가 아닙니다.");
     }
 }
