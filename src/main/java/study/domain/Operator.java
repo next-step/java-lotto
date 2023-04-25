@@ -14,6 +14,8 @@ public enum Operator {
         return first / second;
     });
 
+    private static final String INVALID_OPERATOR = "사칙연산 기호가 아닙니다.";
+
     private String symbol;
 
     private BiFunction<Integer, Integer, Integer> operation;
@@ -36,7 +38,7 @@ public enum Operator {
 
     public static Operator getSymbol(final String param) {
         if (SYMBOL_MAP.containsKey(param) == false) {
-            throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+            throw new IllegalArgumentException(INVALID_OPERATOR);
         }
         return SYMBOL_MAP.get(param);
     }

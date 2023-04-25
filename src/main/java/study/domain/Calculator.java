@@ -8,6 +8,8 @@ public class Calculator {
 
     private static final Pattern REG_EXP = Pattern.compile("^\\d+$");
 
+    private static final String INVALID_FORMULA = "입력수식이 잘못되었습니다.";
+
     private final FormulaParser formulaParser;
 
     private Operator currentOperator;
@@ -42,7 +44,7 @@ public class Calculator {
 
     private static void validFormula(final int validCount) {
         if(validCount >= 2 || validCount < 0) {
-            throw new IllegalArgumentException("입력값이 잘못되었습니다.");
+            throw new IllegalArgumentException(INVALID_FORMULA);
         }
     }
 
