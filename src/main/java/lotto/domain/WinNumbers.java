@@ -13,7 +13,8 @@ public class WinNumbers {
     }
 
     public WinType confirmWin(Lotto lotto) {
-        long count = lotto.match(this.numbers);
-        return WinType.find(count);
+        long count = lotto.matchNumber(this.numbers);
+        long bonusCount = lotto.matchBonusNumber(this.bonusNumber);
+        return WinType.find(count, bonusCount);
     }
 }

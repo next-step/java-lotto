@@ -48,8 +48,18 @@ class WinNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와, 로또가 6개 일치 하면 1등")
+    @DisplayName("당첨 번호와, 로또가 5개 일치 하고 보너스 번호가 있으면 2등")
     void test05() {
+        WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), 45);
+
+        WinType wintype = winNumbers.confirmWin(new Lotto(1, 2, 3, 4, 5, 45));
+
+        assertThat(wintype).isEqualTo(WinType.SECOND);
+    }
+
+    @Test
+    @DisplayName("당첨 번호와, 로또가 6개 일치 하면 1등")
+    void test06() {
         WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), 45);
 
         WinType wintype = winNumbers.confirmWin(new Lotto(1, 2, 3, 4, 5, 6));
