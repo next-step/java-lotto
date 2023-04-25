@@ -24,7 +24,7 @@ public class Lottos {
     }
 
     public List<Lotto> lottos() {
-        return this.lottos;
+        return Collections.unmodifiableList(this.lottos);
     }
 
     public long purchaseAmount() {
