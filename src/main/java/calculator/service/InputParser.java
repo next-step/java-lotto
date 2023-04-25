@@ -25,13 +25,18 @@ public class InputParser {
 			throw new IllegalArgumentException("Invalid input format");
 		}
 
-		for (int i = 0; i < tokens.length; i++) {
-			if (i % 2 == 0) {
-				validateNumber(tokens[i]);
-			} else {
-				validateOperator(tokens[i]);
-			}
+		for (int index = 0; index < tokens.length; index++) {
+			validate(tokens[index], index);
 		}
+	}
+
+	private void validate(String token, int index) {
+		if (index % 2 == 0) {
+			validateNumber(token);
+			return;
+		}
+
+		validateOperator(token);
 	}
 
 	private void validateNumber(String token) {
