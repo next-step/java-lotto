@@ -47,4 +47,10 @@ public class LottoTest {
                 .isThrownBy(() -> Lotto.reward(matchCount))
                 .withMessageContaining("당첨에 해당하는 번호 일치 개수가 아닙니다.");
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"14000:14", "1000:1", "0:0"}, delimiter = ':')
+    void 구입_매수_계산(long price, long lottoCount) {
+        assertThat(Lotto.lottoCount(price)).isEqualTo(lottoCount);
+    }
 }

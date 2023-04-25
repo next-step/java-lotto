@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final int LOTTO_PRICE = 1000;
+
     public static int matchCount(LottoNumbers myLottoNumbers, LottoNumbers winningLottoNumbers) {
         List<LottoNumber> matchNumbers = myLottoNumbers.value().stream()
                 .filter(m -> winningLottoNumbers.value().stream()
@@ -15,5 +17,9 @@ public class Lotto {
 
     public static long reward(int matchCount) {
         return MatchType.of(matchCount).reward();
+    }
+
+    public static long lottoCount(long price) {
+        return price / LOTTO_PRICE;
     }
 }
