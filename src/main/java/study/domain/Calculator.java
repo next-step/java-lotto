@@ -19,7 +19,7 @@ public class Calculator {
     public int calculate() {
         int result = 0;
 
-        // 첫번째 연산자는 초기화 ( )
+        // 첫번째 연산자는 초기화 ( 초기할당 )
         Operator currentOperator = Operator.PLUS;
 
         for (String param : formulaParser.getFormula()) {

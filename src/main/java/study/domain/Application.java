@@ -10,7 +10,7 @@ public class Application {
 
         final String input = getString();
 
-        final int result = getCalcResult(input);
+        final int result = calcResult(input);
 
         System.out.println("계산 결과 = " + result);
     }
@@ -20,7 +20,7 @@ public class Application {
      * @param input
      * @return 계산 결과
      */
-    private static int getCalcResult(final String input) {
+    private static int calcResult(final String input) {
         final Calculator calculator = new Calculator(new FormulaParser(input));
         return calculator.calculate();
     }

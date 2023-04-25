@@ -8,18 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OperatorTest {
 
-    Operator operator;
-
-    @BeforeEach
-    void setup() {
-        operator = Operator.PLUS;
-    }
-
     @Test
     @DisplayName("덧셈 테스트")
     void addTest() {
         // When & Then
-        assertEquals(3, operator.calculate(1, 2));
+        assertEquals(3, Operator.PLUS.calculate(1, 2));
     }
 
     @Test
@@ -66,6 +59,6 @@ class OperatorTest {
     @DisplayName("사칙연산 기호 예외 테스트")
     void getSymbolExceptionTest() {
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> operator.getSymbol("%"));
+        assertThrows(IllegalArgumentException.class, () -> Operator.getSymbol("%"));
     }
 }
