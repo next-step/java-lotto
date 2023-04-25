@@ -2,12 +2,10 @@ package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
+    private final static int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -62,9 +60,9 @@ public class LottoNumbers {
     }
 
     private void checkSize(List<LottoNumber> lottoNumbers) {
-        final HashSet<LottoNumber> set = new HashSet<>(lottoNumbers);
+        final Set<LottoNumber> set = new HashSet<>(lottoNumbers);
         System.out.println(set);
-        if (set.size() != 6) {
+        if (set.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6자리입니다.");
         }
     }
