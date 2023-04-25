@@ -1,8 +1,8 @@
 package lotto.Model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class Game {
@@ -32,4 +32,25 @@ public class Game {
     public List<Ticket> allTickets() {
         return tickets;
     }
+
+    public HashMap<Integer,Integer> calculateResult(List<Integer> winnerNumber) {
+        HashMap<Integer,Integer> result = new HashMap<>();
+        for (Ticket ticket : tickets) {
+            Profit profit = new Profit(countMatches(ticket, winnerNumber));
+            result.put(profit.value(), result.getOrDefault(profit.value(), 0) + 1);
+        }
+
+        return result;
+    }
+
+    private int countMatches(Ticket ticket, List<Integer> winnerNumber) {
+        int count = 0;
+        for (Integer number : ticket.numbers()) {
+            if (winnerNumber.contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }
