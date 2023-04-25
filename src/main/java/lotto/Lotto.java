@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.MatchType;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -14,5 +15,9 @@ public class Lotto {
                 .filter(m -> winningLottoNumbers.value().stream()
                         .anyMatch(Predicate.isEqual(m))).collect(Collectors.toList());
         return matchNumbers.size();
+    }
+
+    public static long reward(int matchCount) {
+        return MatchType.of(matchCount).reward();
     }
 }

@@ -3,6 +3,8 @@ package lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,5 +29,11 @@ public class LottoTest {
 
         //then
         assertThat(result).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
+    void 수익_계산(int matchCount, long reward) {
+        assertThat(Lotto.reward(matchCount)).isEqualTo(reward);
     }
 }
