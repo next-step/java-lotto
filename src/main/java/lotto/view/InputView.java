@@ -11,7 +11,7 @@ public class InputView {
 
     public static int askAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        int amount = new Scanner(System.in).nextInt();
+        int amount = inputInt();
         if (amount < Lottos.LOTTO_AMOUNT) {
             throw new IllegalArgumentException("로또 금액보다 적은 금액이 입력됐습니다. : " + amount + " < " + Lottos.LOTTO_AMOUNT);
         }
@@ -37,6 +37,15 @@ public class InputView {
             result += "\n";
         }
         System.out.println(result);
+    }
+
+    public static int askBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return inputInt();
+    }
+
+    private static int inputInt() {
+        return new Scanner(System.in).nextInt();
     }
 
 }

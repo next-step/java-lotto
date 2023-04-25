@@ -29,6 +29,16 @@ public class InputViewTest {
     }
 
     @Test
+    void 보너스번호입력() {
+        inputStream = new ByteArrayInputStream("7".getBytes(StandardCharsets.UTF_8));
+        System.setIn(inputStream);
+        assertAll(
+            () -> assertThat(InputView.askBonusNumber()).isEqualTo(7),
+            () -> assertThat(outputStream.toString()).containsPattern("보너스 볼을 입력해 주세요.")
+        );
+    }
+
+    @Test
     void 구매로또출력() {
         List<LottoNumber> lottoNumbers = List.of(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
         List<Lotto> lottos = new ArrayList<>();
