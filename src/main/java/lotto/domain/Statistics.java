@@ -25,11 +25,8 @@ public enum Statistics {
             return Statistics.SECOND;
         }
 
-        if (isThirdPrize(matchingBall, isBonus)) {
-            return Statistics.THIRD;
-        }
-
         return Arrays.stream(values())
+                .filter(s -> s!= SECOND)
                 .filter(s -> hasMatchingBall(matchingBall, s))
                 .findFirst()
                 .orElse(MISS);
@@ -41,10 +38,6 @@ public enum Statistics {
 
     private static boolean isSecondPrize(int matchingBall, boolean isBonus) {
         return matchingBall == SECOND_OR_THIRD_NUMBER && isBonus;
-    }
-
-    private static boolean isThirdPrize(int matchingBall, boolean isBonus) {
-        return matchingBall == SECOND_OR_THIRD_NUMBER && !isBonus;
     }
 
     public int getTotalPrize(int count) {

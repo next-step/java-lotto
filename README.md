@@ -4,6 +4,7 @@
 ## Step3 - 로또(2등)
 ### Step3 1차 피드백 수정
 - [X] WinningLotto 객체 추가
+- [X] Statistics 객체 생성 시 3등을 구하는 로직을 제거
 
 ### Step2 2차 피드백 수정
 - [X] 사용하지 않는 상수 private 변경
