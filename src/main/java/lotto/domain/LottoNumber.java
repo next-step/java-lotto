@@ -1,5 +1,6 @@
 package lotto.domain;
 
+
 public class LottoNumber implements Comparable<LottoNumber>{
     private static final int LOTTO_NUMBER_MINIMUM = 1;
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
