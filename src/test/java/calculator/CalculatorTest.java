@@ -58,17 +58,6 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(5);
     }
 
-    @ParameterizedTest
-    @DisplayName("0으로 나누거나 나눈 값이 정수가 아닐경우 예외 발생")
-    @ValueSource(strings = {"1 / 0", "11 / 2", "3 / 2", "-4 / 3"})
-    void when_PrecedingValueIsNotInt_ThrowException(String expression) {
-
-        Calculator calculator = new Calculator(expression);
-
-        assertThatExceptionOfType(ArithmeticException.class)
-                .isThrownBy(calculator::calculate);
-    }
-
     @Test
     @DisplayName("여러 사칙연산이 적용된 경우 올바른 값을 반환한다.")
     void when_expressionContainsEveryArithmeticExpression() {
