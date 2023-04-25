@@ -1,14 +1,15 @@
-package lotto.view;
+package lotto.view.result;
 
-import lotto.model.Lotto;
+import lotto.model.dto.LottoDto;
+import lotto.view.View;
 
 import java.util.List;
 
-public class LottosResultView implements View {
+public class LottosView implements View {
 
-    private final List<Lotto> lottos;
+    private final List<LottoDto> lottos;
 
-    public LottosResultView(List<Lotto> lottos) {
+    public LottosView(List<LottoDto> lottos) {
         this.lottos = lottos;
     }
 

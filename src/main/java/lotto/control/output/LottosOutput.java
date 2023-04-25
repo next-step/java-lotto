@@ -1,8 +1,8 @@
 package lotto.control.output;
 
 import lotto.model.Lotto;
-import lotto.view.LottosResultView;
 import lotto.view.View;
+import lotto.view.result.LottosView;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class LottosOutput implements Printable {
 
     @Override
     public void print() {
-        View view = new LottosResultView(lottos);
+        View view = new LottosView(lottos);
         view.render();
     }
 }
