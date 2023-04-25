@@ -14,10 +14,10 @@ public class Calculator {
         initializeResult();
 
         for (int index = 1; index < expression.size(); index += 2) {
-            checkOperation(PLUS, index);
-            checkOperation(MINUS, index);
-            checkOperation(MULTIPLY, index);
-            checkOperation(DIVIDE, index);
+            checkOperationAndApply(PLUS, index);
+            checkOperationAndApply(MINUS, index);
+            checkOperationAndApply(MULTIPLY, index);
+            checkOperationAndApply(DIVIDE, index);
         }
         return result.get();
     }
@@ -26,7 +26,7 @@ public class Calculator {
         result = new Result(Integer.parseInt(expression.firstValue()));
     }
 
-    private void checkOperation(Operations operation, int index) {
+    private void checkOperationAndApply(Operations operation, int index) {
         if (operation.equals(expression.get(index))) {
             result.apply(operation, numOfNextIndex(index));
         }
