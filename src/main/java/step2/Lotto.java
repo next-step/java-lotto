@@ -1,5 +1,6 @@
 package step2;
 
+import step2.domain.Number;
 import step2.service.LottoGame;
 import step2.domain.LottoResult;
 import step2.view.InputView;
@@ -18,7 +19,10 @@ public class Lotto {
         PrintView.purchaseNumber(purchaseNumber);
 
         List<Integer> winningNumber = InputView.winningNumber();
-        LottoResult result  = lottoGame.lottoResult(purchaseNumber, winningNumber);
+        int bonusNumber = InputView.bonusNumber();
+
+        Number lottoNumber = new Number(winningNumber, bonusNumber);
+        LottoResult result  = lottoGame.lottoResult(purchaseNumber, lottoNumber);
         PrintView.lottoResult(result);
     }
 }

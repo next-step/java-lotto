@@ -4,10 +4,10 @@ import java.util.Map;
 
 public class Rate {
 
-    public static float calculateRate(Map<Integer, Integer> numberOfMatches, int price) {
+    public static float calculateRate(Map<Match, Integer> numberOfMatches, int price) {
         float totalMoney = 0;
 
-        for (Integer match : numberOfMatches.keySet()) {
+        for (Match match : numberOfMatches.keySet()) {
             int count = numberOfMatches.get(match);
             totalMoney += calculateMoney(match, count);
         }
@@ -16,8 +16,8 @@ public class Rate {
         return roundOffRate(rate);
     }
 
-    private static int calculateMoney(int match, int count) {
-        return count * WinningMoney.winningMoney(match);
+    private static int calculateMoney(Match match, int count) {
+        return count * WinningMoney.winningMoney(match.getMatch());
     }
 
     private static float roundOffRate(float rate) {

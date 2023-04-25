@@ -1,9 +1,7 @@
 package step2.service;
 
-import step2.domain.LottoFactory;
-import step2.domain.LottoResult;
-import step2.domain.MatchRecord;
-import step2.domain.Rate;
+import step2.domain.*;
+import step2.domain.Number;
 import step2.infrastructure.RandomStrategy;
 
 import java.util.List;
@@ -31,9 +29,9 @@ public class LottoGame {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    public LottoResult lottoResult(List<List<Integer>> numbers, List<Integer> winningNumbers) {
+    public LottoResult lottoResult(List<List<Integer>> purchaseNumbers, Number lottoNumber) {
         MatchRecord matchRecord = MatchRecord.createRecord();
-        Map<Integer, Integer> numberOfMatches = matchRecord.countNumber(numbers, winningNumbers);
+        Map<Match, Integer> numberOfMatches = matchRecord.countNumber(purchaseNumbers, lottoNumber);
         float rate = Rate.calculateRate(numberOfMatches, purchaseAmount);
 
         return LottoResult.makeResult(numberOfMatches, rate);

@@ -6,30 +6,42 @@ import java.util.Map;
 
 public class MatchRecord {
 
-    private final Map<Integer, Integer> numberOfMatches;
+    private final Map<Match, Integer> numberOfMatches;
 
-    private MatchRecord(Map<Integer, Integer> numberOfMatches) {
+    private MatchRecord(Map<Match, Integer> numberOfMatches) {
         this.numberOfMatches = numberOfMatches;
     }
 
     public static MatchRecord createRecord() {
-        Map<Integer, Integer> numberOfMatches = new HashMap<>();
+        Map<Match, Integer> numberOfMatches = new HashMap<>();
 
         for (int i = 0; i < 7; i++) {
-            numberOfMatches.put(i, 0);
+            numberOfMatches.put(new Match(i, false), 0);
         }
+
+        numberOfMatches.put(new Match(5, true), 0);
 
         return new MatchRecord(numberOfMatches);
     }
 
-    public Map<Integer, Integer> countNumber(List<List<Integer>> numbers, List<Integer> winningNumbers) {
-        for (List<Integer> number : numbers) {
-            int count = count(number, winningNumbers);
-            Integer value = numberOfMatches.get(count);
-            numberOfMatches.put(count, ++value);
+    public Map<Match, Integer> countNumber(List<List<Integer>> purchaseNumbers, Number number) {
+        for (List<Integer> purchaseNumber : purchaseNumbers) {
+            int count = count(purchaseNumber, number.winningNumbers());
+            boolean isBonus = isBonus(count, purchaseNumber, number.bonusNumber());
+            Match match = new Match(count, isBonus);
+            Integer value = numberOfMatches.get(match);
+            numberOfMatches.put(match, ++value);
         }
 
         return numberOfMatches;
+    }
+
+    private boolean isBonus(int count, List<Integer> number, int bonusNumber) {
+        if (count != 5) {
+            return false;
+        }
+
+        return number.contains(bonusNumber);
     }
 
     private int count(List<Integer> number, List<Integer> winningNumbers) {
