@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Amount;
+import lotto.domain.Lottos;
 import lotto.domain.rating.WinningRatingType;
 import lotto.domain.winning.WinningStat;
 
@@ -14,8 +15,8 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printLottoNumber(List<List<Integer>> LottoNumberList) {
-        for (List<Integer> lottoNumber : LottoNumberList) {
+    public static void printLottoNumber(Lottos lottos) {
+        for (List<Integer> lottoNumber : lottos.lottoNumberList()) {
             System.out.println(lottoNumber);
         }
     }
