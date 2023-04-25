@@ -1,4 +1,7 @@
-package step1;
+package step1.calculator.util;
+
+import step1.calculator.domain.Expression;
+import step1.calculator.domain.UserInput;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,9 +19,10 @@ public class ExpressionParser {
         return Expression.from(getOperands(splitInput), getOperators(splitInput));
     }
 
-    private static List<String> getOperands(String[] splitInput) {
+    private static List<Integer> getOperands(String[] splitInput) {
         return Arrays.stream(splitInput)
                 .filter(ExpressionParser::isOperand)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 

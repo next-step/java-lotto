@@ -1,4 +1,6 @@
-package step1;
+package step1.calculator.view;
+
+import step1.calculator.domain.UserInput;
 
 import java.util.Scanner;
 

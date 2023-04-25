@@ -1,4 +1,4 @@
-package step1;
+package step1.calculator.domain;
 
 public class UserInput {
 
