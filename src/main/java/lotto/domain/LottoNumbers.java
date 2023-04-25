@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.strategy.LottoStrategy;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(String numbers) {
-        if (numbers == null) {
+        if (numbers == null || numbers.isBlank()) {
             throw new IllegalArgumentException("빈 값은 올 수 없습니다.");
         }
 
@@ -61,7 +62,9 @@ public class LottoNumbers {
     }
 
     private void checkSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.size() != 6) {
+        final HashSet<LottoNumber> set = new HashSet<>(lottoNumbers);
+        System.out.println(set);
+        if (set.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6자리입니다.");
         }
     }
