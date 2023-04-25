@@ -53,4 +53,24 @@ public class LottoTest {
     void 구입_매수_계산(long price, long lottoCount) {
         assertThat(Lotto.lottoCount(price)).isEqualTo(lottoCount);
     }
+
+    @Test
+    void 총_수익률_계산() {
+        //given
+        List<LottoNumber> myLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        LottoNumbers myLottoNumbers1 = new LottoNumbers(myLottoNumberList);
+        LottoNumbers myLottoNumbers2 = new LottoNumbers(myLottoNumberList);
+        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers1, myLottoNumbers2);
+
+        List<LottoNumber> winningLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(43), new LottoNumber(44), new LottoNumber(45));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(winningLottoNumberList);
+
+        //when
+        double totalProfit = Lotto.totalProfit(lottoNumbersList, winningLottoNumbers);
+
+        //then
+        assertThat(totalProfit).isEqualTo(5);
+    }
 }

@@ -1,8 +1,11 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,11 +15,16 @@ public class Main {
         long purchasePrice = Long.parseLong(inputView.nextLine());
         long lottoCount = Lotto.lottoCount(purchasePrice);
         ResultView.printLottoCount(lottoCount);
-        ResultView.printAllLottoNumbers(Lotto.generateAllLottoNumbers(lottoCount));
+
+        List<LottoNumbers> lottoNumbersList = Lotto.generateAllLottoNumbers(lottoCount);
+        ResultView.printAllLottoNumbers(lottoNumbersList);
 
         ResultView.printWinningLottoNumberInputCommand();
-        String winningLottoNumberStr = inputView.nextLine();
+        LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.nextLine());
 
+        System.out.println("winningLottoNumbers.value() = " + winningLottoNumbers.value());
+
+        double totalProfit = Lotto.totalProfit(lottoNumbersList, winningLottoNumbers);
 
         inputView.close();
     }
