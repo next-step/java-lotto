@@ -1,27 +1,35 @@
 package lotto;
 
-import java.util.HashMap;
-import java.util.Map;
+public enum LottoPrize {
+  MATCH_3(3, 5_000),
+  MATCH_4(4, 50_000),
+  MATCH_5(5, 1_500_000),
+  MATCH_6(6, 2_000_000_000),
+  ;
 
-public class LottoPrize {
-  private static final Map<Integer, Integer> prize;
+  private final int matchCount;
+  private final int prize;
 
-  static {
-    prize = new HashMap<>();
-    prize.put(3, 5000);
-    prize.put(4, 50000);
-    prize.put(5, 1500000);
-    prize.put(6, 2000000000);
+  LottoPrize(int matchCount, int prize) {
+    this.matchCount = matchCount;
+    this.prize = prize;
   }
 
-  public static int getPrize(int matchCount) {
-    return prize.get(matchCount);
+  public int getPrize() {
+    return prize;
   }
 
-  public static float getRateOfReturn(int purchaseAmount, LottoStatistics statistics) {
-    long totalPrize = statistics.getStatistics().entrySet().stream()
-                         .mapToLong(entry -> (long) prize.get(entry.getKey()) * entry.getValue())
-                         .sum();
-    return (float) Math.round(((float) totalPrize / purchaseAmount) * 100) / 100;
+  public static int getPrizeByMatchCount(int matchCount) {
+    LottoPrize prize = findByMatchCount(matchCount);
+    return prize != null ? prize.prize : 0;
+  }
+
+  public static LottoPrize findByMatchCount(int matchCount) {
+    for (LottoPrize prize : LottoPrize.values()) {
+      if (matchCount == prize.matchCount) {
+        return prize;
+      }
+    }
+    return null;
   }
 }

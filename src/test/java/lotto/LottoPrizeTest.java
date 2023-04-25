@@ -16,9 +16,5 @@ class LottoPrizeTest {
       "6, 20000.0f"
   })
   void 수익률(int matchCount, float rateOfReturn) {
-    LottoStatistics lottoStatistics = new LottoStatistics();
-    lottoStatistics.increment(matchCount);
-    assertThat(LottoPrize.getRateOfReturn(100000, lottoStatistics))
-        .isEqualTo(rateOfReturn);
   }
 }

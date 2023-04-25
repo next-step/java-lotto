@@ -1,12 +1,15 @@
 package lotto;
 
+import lotto.dto.LottoTicketsDto;
+
+import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-  public static void printLottoTickets(LottoTickets lotteryTickets) {
-    System.out.println(lotteryTickets.size() + "개를 구매했습니다.");
-    for (LottoTicket lotteryTicket : lotteryTickets.getTickets()) {
-      System.out.println(lotteryTicket.getNumbers());
+  public static void printLottoTickets(LottoTicketsDto lotteryTicketsDto) {
+    System.out.println(lotteryTicketsDto.getLottoTickets().size() + "개를 구매했습니다.");
+    for (List<Integer> lotteryTicket : lotteryTicketsDto.getLottoTickets()) {
+      System.out.println(lotteryTicket);
     }
     System.out.println();
   }
@@ -21,7 +24,7 @@ public class OutputView {
                        System.out.println(
                            entry.getKey() +
                            "개 일치 (" +
-                           LottoPrize.getPrize(entry.getKey()) +
+                           LottoPrize.findByMatchCount(entry.getKey()) +
                            "원)- " +
                            entry.getValue() + "개"
                        )
@@ -29,7 +32,7 @@ public class OutputView {
   }
 
   public static void printRateOfReturn(int purchaseAmount, LottoGame lottoGame) {
-    float rateOfReturn = LottoPrize.getRateOfReturn(purchaseAmount, lottoGame.getLottoTickets().getLottoStatistics());
+    float rateOfReturn =
     System.out.println("총 수익률은 " + rateOfReturn + "입니다.");
   }
 }
