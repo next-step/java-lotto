@@ -4,6 +4,7 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.MatchType;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -33,12 +34,12 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printWinningStatics(List<Integer> matchCounts, int profitRate) {
+    public static void printWinningStatics(Map<Integer, Integer> matchCounts, int profitRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (MatchType mc : MatchType.values()) {
-            System.out.println(mc.phrase() + "- " + matchCounts.get(mc.matchCountIdx()) + "개");
+            System.out.println(mc.phrase() + "- " + matchCounts.get(mc.matchCount()) + "개");
         }
 
         System.out.print("총 수익률은 " + profitRate + "입니다.");

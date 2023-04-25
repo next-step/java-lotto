@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -72,5 +73,25 @@ public class LottoTest {
 
         //then
         assertThat(totalProfit).isEqualTo(5);
+    }
+
+    @Test
+    void 일치_수별_횟수_세기() {
+        //given
+        List<LottoNumber> myLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        LottoNumbers myLottoNumbers1 = new LottoNumbers(myLottoNumberList);
+        LottoNumbers myLottoNumbers2 = new LottoNumbers(myLottoNumberList);
+        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers1, myLottoNumbers2);
+
+        List<LottoNumber> winningLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(43), new LottoNumber(44), new LottoNumber(45));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(winningLottoNumberList);
+
+        //when
+        Map<Integer, Integer> map = Lotto.matchCounts(lottoNumbersList, winningLottoNumbers);
+
+        //then
+        assertThat(map.get(3)).isEqualTo(2);
     }
 }

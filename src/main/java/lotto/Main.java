@@ -6,6 +6,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,8 +23,7 @@ public class Main {
         ResultView.printWinningLottoNumberInputCommand();
         LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.nextLine());
 
-        System.out.println("winningLottoNumbers.value() = " + winningLottoNumbers.value());
-
+        Map<Integer, Integer> matchCounts = Lotto.matchCounts(lottoNumbersList, winningLottoNumbers);
         double totalProfit = Lotto.totalProfit(lottoNumbersList, winningLottoNumbers);
 
         inputView.close();
