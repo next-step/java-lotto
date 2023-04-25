@@ -16,8 +16,8 @@ public class ResultView {
         System.out.println(purchaseCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoNum(List<Integer> lottoNum) {
-        System.out.println(lottoNum);
+    public static void printLottoNumber(List<Integer> lottoNumber) {
+        System.out.println(lottoNumber);
     }
 
     public static void printWinningNumInputCommand() {
