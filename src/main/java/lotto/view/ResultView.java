@@ -34,7 +34,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printWinningStatics(Map<Integer, Integer> matchCounts, int profitRate) {
+    public static void printWinningStatics(Map<Integer, Integer> matchCounts, double totalProfitRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -42,8 +42,8 @@ public class ResultView {
             System.out.println(mc.phrase() + "- " + matchCounts.get(mc.matchCount()) + "개");
         }
 
-        System.out.print("총 수익률은 " + profitRate + "입니다.");
-        if (profitRate < PROFIT_BASIS) {
+        System.out.print("총 수익률은 " + totalProfitRate + "입니다.");
+        if (totalProfitRate < PROFIT_BASIS) {
             System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }

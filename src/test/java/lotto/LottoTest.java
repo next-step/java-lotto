@@ -69,7 +69,7 @@ public class LottoTest {
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningLottoNumberList);
 
         //when
-        double totalProfit = Lotto.totalProfit(lottoNumbersList, winningLottoNumbers);
+        double totalProfit = Lotto.totalProfitRate(lottoNumbersList, winningLottoNumbers);
 
         //then
         assertThat(totalProfit).isEqualTo(5);

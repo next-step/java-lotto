@@ -51,7 +51,7 @@ public class Lotto {
         return new LottoNumbers(numbers);
     }
 
-    public static double totalProfit(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
+    public static double totalProfitRate(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
         long purchasePrice = lottoNumbersList.size() * LOTTO_PRICE;
         long totalReward = 0l;
 

@@ -24,7 +24,8 @@ public class Main {
         LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.nextLine());
 
         Map<Integer, Integer> matchCounts = Lotto.matchCounts(lottoNumbersList, winningLottoNumbers);
-        double totalProfit = Lotto.totalProfit(lottoNumbersList, winningLottoNumbers);
+        double totalProfitRate = Lotto.totalProfitRate(lottoNumbersList, winningLottoNumbers);
+
 
         inputView.close();
     }
