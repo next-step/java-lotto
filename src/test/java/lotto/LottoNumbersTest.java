@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -42,20 +41,51 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers1).isEqualTo(lottoNumbers2);
     }
 
-    @ParameterizedTest(name = "{0}으로 구성된 LottoNumbers는 {1}개의 숫자를 맞춘다.")
+    @ParameterizedTest(name = "{0},{1}로 구성된 LottoNumbers는 {2}개의 숫자이고, {3}은 보너스에 대한 비교입니다.")
     @CsvSource(
             value = {
-                    "1,2,3,4,5,6:6",
-                    "1,2,3,4,5,7:5",
-                    "7,8,1,2,3,4:4",
-                    "9,2,3,4,8,7:3",
-                    "10,2,13,14,15,6:2"
+                    "1,2,3,4,5,6:7:6:false",
+                    "1,2,3,4,5,7:7:5:true",
+                    "1,2,3,4,5,9:7:5:false",
+                    "7,8,1,2,3,4:7:4:true",
+                    "9,2,3,4,8,7:7:3:true",
+                    "10,2,13,14,15,6:7:2:false"
             },
             delimiter = ':'
     )
-    public void match(String inputs, int expected) {
-        LottoNumbers lottoNumbers = new LottoNumbers(
+    public void match(
+            String inputs,
+            int bonusNumber,
+            int count,
+            boolean bonus
+    ) {
+        WinnerNumbers winnerNumbers = new WinnerNumbers(
                 Set.of(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6)
+                ),
+                new BonusNumber(bonusNumber)
+        );
+
+        Set<LottoNumber> set = new HashSet<>();
+        for (String s : inputs.split(",")) {
+            set.add(new LottoNumber(Integer.parseInt(s)));
+        }
+        LottoNumbers lottoNumbers = new LottoNumbers(set);
+
+        MatchResult match = lottoNumbers.match(winnerNumbers);
+        assertThat(match.getCount()).isEqualTo(count);
+        assertThat(match.getIsBonus()).isEqualTo(bonus);
+    }
+
+    @Test
+    public void contains() {
+        Set<LottoNumber> set1 = new HashSet<>(
+                List.of(
                         new LottoNumber(1),
                         new LottoNumber(2),
                         new LottoNumber(3),
@@ -64,12 +94,8 @@ public class LottoNumbersTest {
                         new LottoNumber(6)
                 )
         );
-
-        Set<LottoNumber> set = new HashSet<>();
-        for (String s : inputs.split(",")) {
-            set.add(new LottoNumber(Integer.parseInt(s)));
-        }
-
-        assertThat(lottoNumbers.match(new LottoNumbers(set))).isEqualTo(expected);
+        LottoNumbers lottoNumbers1 = new LottoNumbers(set1);
+        assertThat(lottoNumbers1.contains(new LottoNumber(1))).isTrue();
+        assertThat(lottoNumbers1.contains(new LottoNumber(11))).isFalse();
     }
 }

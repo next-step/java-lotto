@@ -15,6 +15,6 @@ public class LottoNumberTest {
     @Test
     public void equal() {
         LottoNumber lottoNumber = new LottoNumber(1);
-        assertThat(lottoNumber.isEqual(1)).isTrue();
+        assertThat(lottoNumber.isEqual(new LottoNumber(1))).isTrue();
     }
 }

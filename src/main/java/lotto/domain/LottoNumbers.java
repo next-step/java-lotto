@@ -11,17 +11,19 @@ public class LottoNumbers {
         }
         this.lottoNumbers = lottoNumbers;
     }
-
     public int size() {
         return lottoNumbers.size();
     }
 
-    public int match(LottoNumbers lottoNumbers) {
+    public MatchResult match(WinnerNumbers winnerNumbers) {
         int count = 0;
-        for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {
+        boolean bonus;
+
+        for (LottoNumber lottoNumber : winnerNumbers.getLottoNumbers()) {
             count = addCount(count, lottoNumber);
         }
-        return count;
+        bonus = winnerNumbers.isMatchBonus(this);
+        return new MatchResult(count, bonus);
     }
 
     private int addCount(int count, LottoNumber lottoNumber) {
@@ -31,20 +33,8 @@ public class LottoNumbers {
         return count;
     }
 
-    public static int getPrize(int match) {
-        if (match == 3) {
-            return 5000;
-        }
-        if (match == 4) {
-            return 50000;
-        }
-        if (match == 5) {
-            return 1500000;
-        }
-        if (match == 6) {
-            return 2000000000;
-        }
-        return 0;
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

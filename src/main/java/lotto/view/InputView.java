@@ -1,7 +1,8 @@
 package lotto.view;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.WinnerNumbers;
 
 import java.util.HashSet;
 import java.util.Scanner;
@@ -16,15 +17,18 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static final LottoNumbers inputLottoNumbers() {
+    public static final WinnerNumbers inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] split = new Scanner(System.in).nextLine().split(",");
+        String[] split = SCANNER.next().split(",");
 
         Set<LottoNumber> set = new HashSet<>();
         for (String s : split) {
             set.add(new LottoNumber(Integer.parseInt(s)));
         }
 
-        return new LottoNumbers(set);
+        System.out.println("보너스 볼을 입력해주세요.");
+        int bonusNumber = SCANNER.nextInt();
+
+        return new WinnerNumbers(set, new BonusNumber(bonusNumber));
     }
 }
