@@ -7,10 +7,17 @@ public class Winners {
     private static final int DEFAULT_VALUE = 0;
     private static final int ADD_COUNT = 1;
 
-    private final Map<Statistics, Integer> winnersCount = new EnumMap<>(Statistics.class);
+    private Map<Statistics, Integer> winnersCount = new EnumMap<>(Statistics.class);
 
-    public void addWinner(int matchingBall, boolean hasBonusNumber) {
-        winnersCount.merge(Statistics.initStatistics(matchingBall, hasBonusNumber), ADD_COUNT, Integer::sum);
+    public Winners(Map<Statistics, Integer> winnersCount) {
+        this.winnersCount = winnersCount;
+    }
+
+    public Winners() {
+    }
+
+    public void addWinner(Statistics statistics) {
+        winnersCount.merge(statistics, ADD_COUNT, Integer::sum);
     }
 
     public int getWinnersMatchingCount(Statistics statistics) {
@@ -26,4 +33,8 @@ public class Winners {
         return (double) sum / amount.getAmount();
     }
 
+    @Override
+    public String toString() {
+        return "" + winnersCount;
+    }
 }

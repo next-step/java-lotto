@@ -2,6 +2,9 @@
 
 ---
 ## Step3 - 로또(2등)
+### Step3 1차 피드백 수정
+- [X] WinningLotto 객체 추가
+
 ### Step2 2차 피드백 수정
 - [X] 사용하지 않는 상수 private 변경
 - [X] LottoNumbers 메서드 추출

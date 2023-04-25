@@ -23,10 +23,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Winners findStatistics(Lotto winningLotto, LottoNumber bonusNumber) {
+    public Winners findStatistics(WinningLotto winningLotto) {
         Winners winners = new Winners();
         lottos.forEach(lotto -> {
-            winners.addWinner(lotto.findMatchingBall(winningLotto), lotto.hasBonusNumber(bonusNumber));
+            winners.addWinner(winningLotto.matchingLotto(lotto));
         });
 
         return winners;
