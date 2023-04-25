@@ -12,7 +12,7 @@ public class WinningPercent {
         this.winningPercent = winningPercent;
     }
 
-    public static WinningPercent winningPercent(Map<Rank, Integer> result, int amount) {
+    public static WinningPercent of(Map<Rank, Integer> result, int amount) {
         double winningPercent = 0.0d;
         for (Rank rank : result.keySet()) {
             winningPercent += amountSumPerRank(rankCount(result, rank), rankAmount(rank));

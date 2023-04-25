@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.WinningNumbers.Rank;
-import lotto.domain.WinningPercent;
 import org.junit.jupiter.api.Test;
 
 public class WinningPercentTest {
@@ -30,7 +29,7 @@ public class WinningPercentTest {
         }
         winningPercent /= amount;
 
-        assertThat(WinningPercent.winningPercent(result, amount)).isEqualTo(new WinningPercent(winningPercent));
+        assertThat(WinningPercent.of(result, amount)).isEqualTo(new WinningPercent(winningPercent));
     }
 
     @Test

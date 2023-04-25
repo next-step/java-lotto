@@ -1,9 +1,8 @@
 package lotto.view;
 
-import static lotto.domain.WinningPercent.winningPercent;
-
 import java.util.Map;
 import lotto.domain.WinningNumbers.Rank;
+import lotto.domain.WinningPercent;
 
 public class OutputView {
 
@@ -27,7 +26,15 @@ public class OutputView {
     }
 
     private static double calculatedWinningPercent(Map<Rank, Integer> result, int amount) {
-        return winningPercent(result, amount).value();
+        return value(winningPercentOf(result, amount));
+    }
+
+    private static double value(WinningPercent winningPercent) {
+        return winningPercent.value();
+    }
+
+    private static WinningPercent winningPercentOf(Map<Rank, Integer> result, int amount) {
+        return WinningPercent.of(result, amount);
     }
 
 }

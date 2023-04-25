@@ -5,43 +5,85 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class WinningNumbers {
 
-    public enum Rank {
-        FOURTH_GRADE(3, 5_000),
-        THIRD_GRADE(4, 50_000),
-        SECOND_GRADE(5, 1_500_000),
-        FIRST_GRADE(6, 2_000_000_000);
+    public static class Match {
 
-        private int matchCount;
+        private final int matchCount;
+        private final boolean bonusMatch;
+
+        private Match(int matchCount, boolean bonusMatch) {
+            this.matchCount = matchCount;
+            this.bonusMatch = bonusMatch;
+        }
+
+        public static Match of(int matchCount, boolean bonusMatch) {
+            return new Match(matchCount, bonusMatch);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Match match = (Match) o;
+            return matchCount == match.matchCount && bonusMatch == match.bonusMatch;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(matchCount, bonusMatch);
+        }
+
+    }
+
+    public enum Rank {
+        FOURTH_GRADE(Match.of(3, false), 5_000),
+        THIRD_GRADE(Match.of(4, false), 50_000),
+        SECOND_GRADE(Match.of(5, false), 1_500_000),
+        BONUS_GRADE(Match.of(5, true), 30_000_000),
+        FIRST_GRADE(Match.of(6, false), 2_000_000_000);
+
+        private Match match;
         private int amount;
 
-        Rank(int matchCount, int amount) {
-            this.matchCount = matchCount;
+        Rank(Match match, int amount) {
+            this.match = match;
             this.amount = amount;
         }
 
         public int matchCount() {
-            return matchCount;
+            return match.matchCount;
         }
 
         public int amount() {
             return amount;
         }
 
+        public boolean isMatchCount(int count) {
+            return match.bonusMatch && match.matchCount == count;
+        }
+
     }
 
     public static final int WINNING_NUMBERS_COUNT = 6;
-    public static final Map<Integer, Rank> RANK_BY_MATCH_COUNT = Map.of(
-        Rank.FIRST_GRADE.matchCount, Rank.FIRST_GRADE,
-        Rank.SECOND_GRADE.matchCount, Rank.SECOND_GRADE,
-        Rank.THIRD_GRADE.matchCount, Rank.THIRD_GRADE,
-        Rank.FOURTH_GRADE.matchCount, Rank.FOURTH_GRADE
+    public static final Map<Match, Rank> RANK_BY_MATCH = Map.of(
+        Rank.FIRST_GRADE.match, Rank.FIRST_GRADE,
+        Rank.BONUS_GRADE.match, Rank.BONUS_GRADE,
+        Rank.SECOND_GRADE.match, Rank.SECOND_GRADE,
+        Rank.THIRD_GRADE.match, Rank.THIRD_GRADE,
+        Rank.FOURTH_GRADE.match, Rank.FOURTH_GRADE
     );
+
     public static final Map<Rank, Integer> DEFAULT_RANKING_COUNTS = new EnumMap<>(Rank.class) {{
         put(Rank.FIRST_GRADE, 0);
+        put(Rank.BONUS_GRADE, 0);
         put(Rank.SECOND_GRADE, 0);
         put(Rank.THIRD_GRADE, 0);
         put(Rank.FOURTH_GRADE, 0);
@@ -119,22 +161,46 @@ public class WinningNumbers {
     }
 
     private void matchLotto(Map<Rank, Integer> result, Lotto lotto) {
+        updateRanking(result, matchOf(getWinningCount(lotto), lotto));
+    }
+
+    private Match matchOf(int winningCount, Lotto lotto) {
+        return Match.of(winningCount, isBonusMatch(winningCount, lotto));
+    }
+
+    private boolean isBonusMatch(int winningCount, Lotto lotto) {
+        return isBonusMatchCount(winningCount) && isContainBonus(lotto);
+    }
+
+    private boolean isContainBonus(Lotto lotto) {
+        return lotto.numbers().contains(bonus);
+    }
+
+    private boolean isBonusMatchCount(int winningCount) {
+        boolean result = false;
+        for (Rank rank : Rank.values()) {
+            result = (result || rank.isMatchCount(winningCount));
+        }
+        return result;
+    }
+
+    private int getWinningCount(Lotto lotto) {
         int winningCount = 0;
         for (LottoNumber lottoNumber : lotto.numbers()) {
             winningCount += match(lottoNumber);
         }
-        updateRanking(result, winningCount);
+        return winningCount;
     }
 
-    private void updateRanking(Map<Rank, Integer> result, int winningCount) {
-        if (isWinning(winningCount)) {
-            Rank rank = RANK_BY_MATCH_COUNT.get(winningCount);
+    private void updateRanking(Map<Rank, Integer> result, Match match) {
+        if (isWinning(match)) {
+            Rank rank = RANK_BY_MATCH.get(match);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
     }
 
-    private boolean isWinning(int winningCount) {
-        return RANK_BY_MATCH_COUNT.containsKey(winningCount);
+    private boolean isWinning(Match match) {
+        return RANK_BY_MATCH.containsKey(match);
     }
 
     private int match(LottoNumber lottoNumber) {
