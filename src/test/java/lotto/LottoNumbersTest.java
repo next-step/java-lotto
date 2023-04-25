@@ -15,9 +15,9 @@ public class LottoNumbersTest {
     @Test
     void LottoNumbers_생성() {
         //given
-        LottoNumbers lottoNumbers = new LottoNumbers(
-                Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
 
         //when
         List<LottoNumber> value = lottoNumbers.value();
