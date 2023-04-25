@@ -4,13 +4,13 @@ import java.util.List;
 
 public class LottoNumbers {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> value() {
+    public List<LottoNumber> value() {
         return this.numbers;
     }
 }

@@ -15,7 +15,7 @@ public class LottoGeneratorTest {
 
         //when
         //then
-        assertThat(lottoNumbers.value().stream().allMatch(v -> v >= 1 && v <= 45)).isTrue();
+        assertThat(lottoNumbers.value().stream().allMatch(v -> v.value() >= 1 && v.value() <= 45)).isTrue();
     }
 
     @Test
