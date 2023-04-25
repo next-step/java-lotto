@@ -29,11 +29,8 @@ class CalculatorTest {
         final String formula = "2 + 3 * 4 / / 2";
         final Calculator calculator = new Calculator(new FormulaParser(formula));
 
-        // When
-        final int result = calculator.calculate();
-
-        // Then
-        assertNotEquals(11, result);
+        // When & Then
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate());
     }
 
 }
