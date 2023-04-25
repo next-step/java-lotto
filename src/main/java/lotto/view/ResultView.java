@@ -21,6 +21,7 @@ public class ResultView {
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
             System.out.println(lottoNumbers);
         }
+        printNewLine();
     }
 
     public static void printWinningLottoNumberInputCommand() {

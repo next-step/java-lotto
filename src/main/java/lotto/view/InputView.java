@@ -4,15 +4,13 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public String LineInput() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            return scanner.nextLine();
-        }
+    private final Scanner scanner = new Scanner(System.in);
+
+    public String nextLine() {
+        return scanner.nextLine();
     }
 
-    public long LongInput() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            return scanner.nextLong();
-        }
+    public void close() {
+        scanner.close();
     }
 }
