@@ -41,7 +41,7 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers1).isEqualTo(lottoNumbers2);
     }
 
-    @ParameterizedTest(name = "{0},{1}로 구성된 LottoNumbers는 {2}개의 숫자이고, {3}은 보너스에 대한 비교입니다.")
+    @ParameterizedTest(name = "{0},{1}로 구성된 WinnerNumbers에 매칭 결과는, count = {2}, bonus  = {3}입니다.")
     @CsvSource(
             value = {
                     "1,2,3,4,5,6:7:6:false",
