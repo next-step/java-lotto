@@ -1,8 +1,4 @@
-package lotto;
-
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.MatchType;
+package lotto.domain;
 
 import java.util.List;
 import java.util.function.Predicate;
