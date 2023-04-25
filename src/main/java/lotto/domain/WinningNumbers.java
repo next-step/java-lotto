@@ -44,10 +44,10 @@ public class WinningNumbers {
     }
 
     public enum Rank {
-        FOURTH_GRADE(Match.of(3, false), 5_000),
-        THIRD_GRADE(Match.of(4, false), 50_000),
-        SECOND_GRADE(Match.of(5, false), 1_500_000),
-        BONUS_GRADE(Match.of(5, true), 30_000_000),
+        FIFTH_GRADE(Match.of(3, false), 5_000),
+        FOURTH_GRADE(Match.of(4, false), 50_000),
+        THIRD_GRADE(Match.of(5, false), 1_500_000),
+        SECOND_GRADE(Match.of(5, true), 30_000_000),
         FIRST_GRADE(Match.of(6, false), 2_000_000_000);
 
         private Match match;
@@ -70,23 +70,27 @@ public class WinningNumbers {
             return match.bonusMatch && match.matchCount == count;
         }
 
+        public boolean isBonusRank() {
+            return match.bonusMatch;
+        }
+
     }
 
     public static final int WINNING_NUMBERS_COUNT = 6;
     public static final Map<Match, Rank> RANK_BY_MATCH = Map.of(
         Rank.FIRST_GRADE.match, Rank.FIRST_GRADE,
-        Rank.BONUS_GRADE.match, Rank.BONUS_GRADE,
         Rank.SECOND_GRADE.match, Rank.SECOND_GRADE,
         Rank.THIRD_GRADE.match, Rank.THIRD_GRADE,
-        Rank.FOURTH_GRADE.match, Rank.FOURTH_GRADE
+        Rank.FOURTH_GRADE.match, Rank.FOURTH_GRADE,
+        Rank.FIFTH_GRADE.match, Rank.FIFTH_GRADE
     );
 
     public static final Map<Rank, Integer> DEFAULT_RANKING_COUNTS = new EnumMap<>(Rank.class) {{
         put(Rank.FIRST_GRADE, 0);
-        put(Rank.BONUS_GRADE, 0);
         put(Rank.SECOND_GRADE, 0);
         put(Rank.THIRD_GRADE, 0);
         put(Rank.FOURTH_GRADE, 0);
+        put(Rank.FIFTH_GRADE, 0);
     }};
 
     private final List<LottoNumber> lottoNumbers;

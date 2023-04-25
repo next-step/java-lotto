@@ -39,9 +39,13 @@ public class InputView {
         System.out.println(result);
     }
 
-    public static int askBonusNumber() {
+    public static LottoNumber askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return inputInt();
+        return bonusNumber(inputInt());
+    }
+
+    private static LottoNumber bonusNumber(int number) {
+        return new LottoNumber(number);
     }
 
     private static int inputInt() {

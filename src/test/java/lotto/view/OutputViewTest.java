@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Map;
 import lotto.domain.WinningNumbers.Rank;
-import lotto.view.OutputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,9 +25,10 @@ public class OutputViewTest {
     void 당첨통계() {
         Map<Rank, Integer> map = Map.of(
             Rank.FIRST_GRADE, 0,
-            Rank.SECOND_GRADE, 1,
             Rank.THIRD_GRADE, 1,
-            Rank.FOURTH_GRADE, 0
+            Rank.FOURTH_GRADE, 1,
+            Rank.FIFTH_GRADE, 0,
+            Rank.SECOND_GRADE, 1
         );
         OutputView.printRanking(map, 14000);
         assertAll(
@@ -40,6 +40,8 @@ public class OutputViewTest {
                 "4개 일치 \\(" + 50_000 + "원\\)- ([\\d]+)개"),
             () -> assertThat(outputStream.toString()).containsPattern(
                 "5개 일치 \\(" + 1_500_000 + "원\\)- ([\\d]+)개"),
+            () -> assertThat(outputStream.toString()).containsPattern(
+                "5개 일치, 보너스 볼 일치 \\(" + 30_000_000 + "원\\)- ([\\d]+)개"),
             () -> assertThat(outputStream.toString()).containsPattern(
                 "6개 일치 \\(" + 2_000_000_000 + "원\\)- ([\\d]+)개"),
             () -> assertThat(outputStream.toString()).containsPattern("총 수익률은 [\\d]+.[\\d]+입니다.")

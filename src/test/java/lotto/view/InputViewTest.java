@@ -33,7 +33,7 @@ public class InputViewTest {
         inputStream = new ByteArrayInputStream("7".getBytes(StandardCharsets.UTF_8));
         System.setIn(inputStream);
         assertAll(
-            () -> assertThat(InputView.askBonusNumber()).isEqualTo(7),
+            () -> assertThat(InputView.askBonusNumber()).isEqualTo(new LottoNumber(7)),
             () -> assertThat(outputStream.toString()).containsPattern("보너스 볼을 입력해 주세요.")
         );
     }

@@ -26,14 +26,14 @@ public class WinningNumbersTest {
         Map<Rank, Integer> result = winningNumbers.winningResult(new Lottos(lottos));
 
         assertAll(
-            () -> assertThat(result.keySet()).containsExactly(Rank.FOURTH_GRADE, Rank.THIRD_GRADE,
-                Rank.SECOND_GRADE, Rank.BONUS_GRADE, Rank.FIRST_GRADE),
+            () -> assertThat(result.keySet()).containsExactly(Rank.FIFTH_GRADE, Rank.FOURTH_GRADE,
+                Rank.THIRD_GRADE, Rank.SECOND_GRADE, Rank.FIRST_GRADE),
             () -> assertThat(result.values()).containsExactly(0, 0, 3, 0, 0),
             () -> assertThat(result.get(Rank.FIRST_GRADE)).isEqualTo(0),
-            () -> assertThat(result.get(Rank.BONUS_GRADE)).isEqualTo(0),
-            () -> assertThat(result.get(Rank.SECOND_GRADE)).isEqualTo(3),
-            () -> assertThat(result.get(Rank.THIRD_GRADE)).isEqualTo(0),
-            () -> assertThat(result.get(Rank.FOURTH_GRADE)).isEqualTo(0)
+            () -> assertThat(result.get(Rank.SECOND_GRADE)).isEqualTo(0),
+            () -> assertThat(result.get(Rank.THIRD_GRADE)).isEqualTo(3),
+            () -> assertThat(result.get(Rank.FOURTH_GRADE)).isEqualTo(0),
+            () -> assertThat(result.get(Rank.FIFTH_GRADE)).isEqualTo(0)
         );
     }
 
@@ -51,14 +51,14 @@ public class WinningNumbersTest {
         Map<Rank, Integer> result = winningNumbers.winningResult(new Lottos(lottos));
 
         assertAll(
-            () -> assertThat(result.keySet()).containsExactly(Rank.FOURTH_GRADE, Rank.THIRD_GRADE,
-                Rank.SECOND_GRADE, Rank.BONUS_GRADE, Rank.FIRST_GRADE),
+            () -> assertThat(result.keySet()).containsExactly(Rank.FIFTH_GRADE, Rank.FOURTH_GRADE,
+                Rank.THIRD_GRADE, Rank.SECOND_GRADE, Rank.FIRST_GRADE),
             () -> assertThat(result.values()).containsExactly(0, 0, 0, 3, 0),
             () -> assertThat(result.get(Rank.FIRST_GRADE)).isEqualTo(0),
-            () -> assertThat(result.get(Rank.BONUS_GRADE)).isEqualTo(3),
-            () -> assertThat(result.get(Rank.SECOND_GRADE)).isEqualTo(0),
+            () -> assertThat(result.get(Rank.SECOND_GRADE)).isEqualTo(3),
             () -> assertThat(result.get(Rank.THIRD_GRADE)).isEqualTo(0),
-            () -> assertThat(result.get(Rank.FOURTH_GRADE)).isEqualTo(0)
+            () -> assertThat(result.get(Rank.FOURTH_GRADE)).isEqualTo(0),
+            () -> assertThat(result.get(Rank.FIFTH_GRADE)).isEqualTo(0)
         );
     }
 
@@ -113,14 +113,14 @@ public class WinningNumbersTest {
         Map<Rank, Integer> result = winningNumbers.winningResult(new Lottos(lottos));
 
         assertAll(
-            () -> assertThat(result.keySet()).containsExactly(Rank.FOURTH_GRADE, Rank.THIRD_GRADE,
-                Rank.SECOND_GRADE, Rank.BONUS_GRADE, Rank.FIRST_GRADE),
+            () -> assertThat(result.keySet()).containsExactly(Rank.FIFTH_GRADE, Rank.FOURTH_GRADE,
+                Rank.THIRD_GRADE, Rank.SECOND_GRADE, Rank.FIRST_GRADE),
             () -> assertThat(result.values()).containsExactly(0, 1, 0, 3, 2),
             () -> assertThat(result.get(Rank.FIRST_GRADE)).isEqualTo(2),
-            () -> assertThat(result.get(Rank.BONUS_GRADE)).isEqualTo(3),
-            () -> assertThat(result.get(Rank.SECOND_GRADE)).isEqualTo(0),
-            () -> assertThat(result.get(Rank.THIRD_GRADE)).isEqualTo(1),
-            () -> assertThat(result.get(Rank.FOURTH_GRADE)).isEqualTo(0)
+            () -> assertThat(result.get(Rank.SECOND_GRADE)).isEqualTo(3),
+            () -> assertThat(result.get(Rank.THIRD_GRADE)).isEqualTo(0),
+            () -> assertThat(result.get(Rank.FOURTH_GRADE)).isEqualTo(1),
+            () -> assertThat(result.get(Rank.FIFTH_GRADE)).isEqualTo(0)
         );
     }
 
