@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -34,10 +35,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public boolean isSameNumber(LottoNumber bonusNumber) {
-        return lottoNumber == bonusNumber.getLottoNumber();
-    }
-
     public int getLottoNumber() {
         return lottoNumber;
     }
@@ -50,5 +47,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public String toString() {
         return "" + lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

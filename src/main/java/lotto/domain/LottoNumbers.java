@@ -80,7 +80,7 @@ public class LottoNumbers {
 
     public boolean hasLottoNumber(LottoNumber bonusNumber) {
         return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.isSameNumber(bonusNumber));
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 
     public int getLottoNumberSize() {

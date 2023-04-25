@@ -46,8 +46,8 @@ class LottoNumberTest {
         LottoNumber manualLottoNumber = LottoNumber.createManualLottoNumber("3");
         LottoNumber bonusLottoNumber = LottoNumber.createManualLottoNumber("3");
 
-        assertThat(manualLottoNumber.isSameNumber(bonusLottoNumber))
-                .isTrue();
+        assertThat(manualLottoNumber)
+                .isEqualTo(bonusLottoNumber);
     }
 
 }
