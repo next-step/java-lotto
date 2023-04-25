@@ -39,7 +39,7 @@ public class Expression {
         return value[index];
     }
 
-    public String[] parsedNumber(String value) {
+    private String[] parsedNumber(String value) {
         String[] paredNumber = value.split(CRITERIA);
         validateNumbers(paredNumber);
         return paredNumber;

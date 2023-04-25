@@ -32,9 +32,7 @@ class ExpressionTest {
     @ValueSource(strings = {"1 ++ 3 / 2", "-2 & 3", "-2 // 3", "-2 -- -3"})
     void when_ExpressionContainsWrongOperations_ThrowException(String expression) {
 
-        Expression expression1 = new Expression(expression);
-
         assertThatIllegalArgumentException()
-                .isThrownBy(expression1::parseToList);
+                .isThrownBy(() -> new Expression(expression));
     }
 }
