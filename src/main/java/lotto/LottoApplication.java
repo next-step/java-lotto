@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Map;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.WinningNumbers;
 import lotto.domain.WinningNumbers.Rank;
@@ -29,7 +30,7 @@ public class LottoApplication {
         Lottos lottos = Lottos.of(amount);
         InputView.printPurchaseComplete(lottos);
 
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers());
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers(), new LottoNumber(7));
         Map<Rank, Integer> result = winningNumbers.winningResult(lottos);
 
         OutputView.printRanking(result, amount);

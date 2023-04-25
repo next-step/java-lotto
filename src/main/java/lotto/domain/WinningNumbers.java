@@ -48,9 +48,29 @@ public class WinningNumbers {
     }};
 
     private final List<LottoNumber> lottoNumbers;
+    private final LottoNumber bonus;
 
-    public WinningNumbers(List<LottoNumber> lottoNumbers) {
+    public WinningNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonus) {
         this.lottoNumbers = validCountNumbers(unDuplicated(lottoNumbers));
+        this.bonus = validBonus(bonus);
+    }
+
+    private LottoNumber validBonus(LottoNumber bonus) {
+        if (isEmptyBonus(bonus)) {
+            throw new IllegalArgumentException("보너스번호는 필수입니다");
+        }
+        if (isContainBonus(bonus)) {
+            throw new IllegalArgumentException("당첨 번호와 보너스 번호가 중복됩니다 : " + bonus.value());
+        }
+        return bonus;
+    }
+
+    private boolean isContainBonus(LottoNumber bonus) {
+        return lottoNumbers.contains(bonus);
+    }
+
+    private boolean isEmptyBonus(LottoNumber bonus) {
+        return bonus == null;
     }
 
     private List<LottoNumber> unDuplicated(List<LottoNumber> lottoNumbers) {
@@ -122,6 +142,10 @@ public class WinningNumbers {
             return 1;
         }
         return 0;
+    }
+
+    public LottoNumber bonus() {
+        return new LottoNumber(bonus.value());
     }
 
 }
