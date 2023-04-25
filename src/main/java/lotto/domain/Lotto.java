@@ -43,4 +43,8 @@ public class Lotto {
     public long match(List<Number> winNumbers) {
         return this.numbers.stream().filter(winNumbers::contains).count();
     }
+
+    public boolean hasBonusNumber(Number bonusNumber) {
+        return this.numbers.contains(bonusNumber);
+    }
 }
