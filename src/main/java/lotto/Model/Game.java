@@ -33,11 +33,15 @@ public class Game {
         return tickets;
     }
 
-    public HashMap<Integer,Integer> calculateResult(List<Integer> winnerNumber) {
-        HashMap<Integer,Integer> result = new HashMap<>();
+    public HashMap<Integer, Integer> calculateResult(List<Integer> winnerNumber) {
+        HashMap<Integer, Integer> result = new HashMap<>() {{
+            for (int i = 3; i <= 6; i++) put(i, 0);
+
+        }};
+
         for (Ticket ticket : tickets) {
-            Profit profit = new Profit(countMatches(ticket, winnerNumber));
-            result.put(profit.value(), result.getOrDefault(profit.value(), 0) + 1);
+            int count = countMatches(ticket, winnerNumber);
+            result.put(count, result.getOrDefault(count, 0) + 1);
         }
 
         return result;
