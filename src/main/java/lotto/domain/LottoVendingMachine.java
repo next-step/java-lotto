@@ -18,8 +18,8 @@ public class LottoVendingMachine {
     return lottoTickets;
   }
 
-  public static LottoGame startGame(LottoTickets lottoTickets, List<Integer> winningLottoNumbers) {
-    return new LottoGame(lottoTickets, new LottoTicket(toLottoNumbers(winningLottoNumbers)));
+  public static LottoGame startGame(LottoTickets lottoTickets, List<Integer> winningLottoNumbers, int bonusNumber) {
+    return new LottoGame(lottoTickets, new LottoTicket(toLottoNumbers(winningLottoNumbers)), new LottoNumber(bonusNumber));
   }
 
   public static LottoResult lottoResult(LottoGame lottoGame) {

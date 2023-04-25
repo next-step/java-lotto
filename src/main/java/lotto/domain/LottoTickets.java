@@ -6,7 +6,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-  private final List<LottoTicket> lottoTickets = new ArrayList<>();
+  private final List<LottoTicket> lottoTickets;
+
+  public LottoTickets() {
+    this.lottoTickets = new ArrayList<>();
+  }
+
+  public LottoTickets(List<LottoTicket> lottoTickets) {
+    this.lottoTickets = lottoTickets;
+  }
 
   public List<LottoTicket> unmodifiedLottoTickets() {
     return Collections.unmodifiableList(lottoTickets);

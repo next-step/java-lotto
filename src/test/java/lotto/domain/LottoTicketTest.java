@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class LottoTicketTest {
             .isEqualTo(4);
   }
 
-  @Test()
+  @Test
   @DisplayName("로또 번호 6개가 아닌 로또 티켓 생성하는 경우 IllegalArgumentException throw")
   public void create_개수가_맞지_않는_로또() {
     assertThatThrownBy(() -> new LottoTicket(List.of(
@@ -53,5 +55,11 @@ public class LottoTicketTest {
     )))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("로또 번호는 6개 입력하셔야 합니다.");
+  }
+
+  @ParameterizedTest(name = "로또 번호 가지고 있는지 확인 테스트")
+  @CsvSource(value = { "1:true", "3:false" }, delimiter = ':')
+  public void match_로또_번호(int input, boolean expected) {
+    assertThat(winningLottoTicket.containsLottoNumbers(new LottoNumber(input))).isEqualTo(expected);
   }
 }

@@ -11,10 +11,6 @@ public class LottoTicket {
   private static final String ILLEGAL_COUNT_MESSAGE = "로또 번호는 6개 입력하셔야 합니다.";
   private final Set<LottoNumber> lottoTicket;
 
-  public LottoTicket() {
-    lottoTicket = new TreeSet<>();
-  }
-
   public LottoTicket(List<LottoNumber> lottoNumbers) {
     validateLottoTicket(lottoNumbers);
 
@@ -25,17 +21,13 @@ public class LottoTicket {
     return Collections.unmodifiableSet(lottoTicket);
   }
 
-  public void addLottoNumber(LottoNumber lottoNumber) {
-    lottoTicket.add(lottoNumber);
-  }
-
   public int matchLottoCount(LottoTicket lottoNumbers) {
     return (int) lottoTicket.stream()
             .filter(lottoNumbers::containsLottoNumbers)
             .count();
   }
 
-  private boolean containsLottoNumbers(LottoNumber lottoNumber) {
+  public boolean containsLottoNumbers(LottoNumber lottoNumber) {
     return lottoTicket.contains(lottoNumber);
   }
 
