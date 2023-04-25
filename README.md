@@ -40,6 +40,7 @@
   - [x] 숫자가 아닌 다른 문자 입력 시 IllegalArgumentException 예외를 던진다.
   - [x] 6개의 숫자를 입력하지 않을 경우 IllegalArgumentException 예외를 던진다.
   - [x] 1~45까지 숫자가 아닌 경우 IllegalArgumentException 예외를 던진다.
+- [ ] 당첨 통계를 구한다.
 - [ ] 당첨 통계 문자열을 출력한다.
   - [ ] `당첨 통계` 문자열을 출력한다.
 - [ ] 구분선 문자열을 출력한다.
