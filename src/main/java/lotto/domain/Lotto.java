@@ -45,6 +45,6 @@ public class Lotto {
     }
 
     public long matchBonusNumber(Number bonusNumber) {
-        return this.numbers.stream().filter(n -> n == bonusNumber).count();
+        return Collections.frequency(numbers, bonusNumber);
     }
 }
