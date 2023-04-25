@@ -10,9 +10,9 @@ public class InputView {
         }
     }
 
-    public int IntInput() {
+    public long LongInput() {
         try (Scanner scanner = new Scanner(System.in)) {
-            return scanner.nextInt();
+            return scanner.nextLong();
         }
     }
 }

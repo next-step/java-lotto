@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.MatchType;
 
 import java.util.List;
@@ -12,18 +13,24 @@ public class ResultView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printPurchaseCount(int purchaseCount) {
-        System.out.println(purchaseCount + "개를 구매했습니다.");
+    public static void printLottoCount(long lottoCount) {
+        System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoNumber(List<Integer> lottoNumber) {
-        System.out.println(lottoNumber);
+    public static void printAllLottoNumbers(List<LottoNumbers> lottoNumbersList) {
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+            System.out.println(lottoNumbers);
+        }
     }
 
-    public static void printWinningNumInputCommand() {
+    public static void printWinningLottoNumberInputCommand() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
+
+    public static void printNewLine() {
+        System.out.println();
+    }
 
     public static void printWinningStatics(List<Integer> matchCounts, int profitRate) {
         System.out.println("당첨 통계");
