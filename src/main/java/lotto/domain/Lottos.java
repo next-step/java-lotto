@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.winning.WinningBall;
 import lotto.domain.winning.WinningStat;
-import lotto.dto.LottoNumbersDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +30,13 @@ public class Lottos {
         return winningStat;
     }
 
-    public LottoNumbersDto lottoNumbersDto() {
-        final LottoNumbersDto lottoNumbersDto = new LottoNumbersDto();
+    public List<List<Integer>> lottoNumberList() {
+        final List<List<Integer>> lottoNumberList = new ArrayList<>();
 
         for (Lotto lotto : this.lottos) {
-            lottoNumbersDto.setLottoNumber(lotto.getIntegerLottoNumbers());
+            lottoNumberList.add(lotto.getIntegerLottoNumbers());
         }
 
-        return lottoNumbersDto;
+        return lottoNumberList;
     }
 }

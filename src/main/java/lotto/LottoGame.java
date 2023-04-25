@@ -17,7 +17,7 @@ public class LottoGame {
         final Lottos lottos = lottoMachine.makeLottos(amount, new AutomaticStrategy());
 
         OutputView.printLottoCount(lottoMachine.calculateUnitCount(amount));
-        OutputView.printLottoNumber(lottoMachine.lottoNumbersDto(lottos));
+        OutputView.printLottoNumber(lottoMachine.lottoNumberList(lottos));
 
         final WinningBall winningBall = lottoMachine.winningBall(InputView.winningNumbers(), InputView.bonusBall());
         OutputView.printWinningStat(lottoMachine.winningStat(lottos, winningBall), amount);

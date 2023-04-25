@@ -3,7 +3,8 @@ package lotto.domain;
 import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.winning.WinningBall;
 import lotto.domain.winning.WinningStat;
-import lotto.dto.LottoNumbersDto;
+
+import java.util.List;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
@@ -19,8 +20,8 @@ public class LottoMachine {
         return new Lottos(this.calculateUnitCount(amount), lottoStrategy);
     }
 
-    public LottoNumbersDto lottoNumbersDto(Lottos lottos) {
-        return lottos.lottoNumbersDto();
+    public List<List<Integer>> lottoNumberList(Lottos lottos) {
+        return lottos.lottoNumberList();
     }
 
     public WinningBall winningBall(String winningNumbers, int bonusBallNumber) {
