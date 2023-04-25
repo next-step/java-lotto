@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.MatchType;
+
 import java.util.List;
 
 public class ResultView {
@@ -23,12 +25,12 @@ public class ResultView {
     }
 
 
-    public static void printWinningStatics(MatchType matchType, int profitRate) {
+    public static void printWinningStatics(List<Integer> matchCounts, int profitRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (MatchType mc : matchType.values()) {
-            System.out.println(mc.phrase() + "- " + mc.count() + "개");
+        for (MatchType mc : MatchType.values()) {
+            System.out.println(mc.phrase() + "- " + matchCounts.get(mc.matchCountIdx()) + "개");
         }
 
         System.out.print("총 수익률은 " + profitRate + "입니다.");
