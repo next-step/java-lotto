@@ -47,7 +47,7 @@ public class LottoTest {
     void test05() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        assertThat(lotto.match(getWinNumbers(1, 2, 3, 4, 44, 45))).isEqualTo(4);
+        assertThat(lotto.matchNumber(getWinNumbers(1, 2, 3, 4, 44, 45))).isEqualTo(4);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class LottoTest {
     void test06() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        assertThat(lotto.hasBonusNumber(new Number(6))).isTrue();
+        assertThat(lotto.matchBonusNumber(new Number(6))).isEqualTo(1);
     }
 
     private Number[] getNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
