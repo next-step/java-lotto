@@ -1,8 +1,8 @@
 package lotto;
 
+import lotto.domain.LottoNumbers;
+import lotto.utils.LottoGenerator;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -11,24 +11,20 @@ public class LottoGeneratorTest {
     @Test
     void 로또번호_생성_범위_테스트() {
         //given
-        Lotto lotto = LottoGenerator.generateLotto();
+        LottoNumbers lottoNumbers = LottoGenerator.generateLottoNumbers();
 
         //when
-        List<Integer> lottoNumbers = lotto.numbers;
-
         //then
-        assertThat(lottoNumbers.stream().allMatch(v -> v >= 1 && v <= 45)).isTrue();
+        assertThat(lottoNumbers.value().stream().allMatch(v -> v >= 1 && v <= 45)).isTrue();
     }
 
     @Test
     void 로또번호_생성_개수_테스트() {
         //given
-        Lotto lotto = LottoGenerator.generateLotto();
+        LottoNumbers lottoNumbers = LottoGenerator.generateLottoNumbers();
 
         //when
-        List<Integer> lottoNumbers = lotto.numbers;
-
         //then
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lottoNumbers.value().size()).isEqualTo(6);
     }
 }
