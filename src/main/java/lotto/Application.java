@@ -22,5 +22,7 @@ public class Application {
         LottoPlaceCounter counter = new LottoPlaceCounter(answer);
         counter.countAll(lottos);
 
+        LottoRewardStatistics statistics = new LottoRewardStatistics(counter);
+
     }
 }
