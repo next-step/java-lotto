@@ -3,6 +3,8 @@ package lotto;
 import lotto.Model.Game;
 import lotto.View.*;
 
+import java.util.List;
+
 public class LottoController {
     public void start() {
         int countOfTicket = InputView.payment();
@@ -11,7 +13,8 @@ public class LottoController {
         Game game = new Game(countOfTicket);
         ResultView.printTickets(game.allTickets());
 
-        // getWinningNumbers();
+        List<Integer> winnerNumber = InputView.winnerNumber();
+        System.out.println(winnerNumber);
         // calculateResult();
     }
 }

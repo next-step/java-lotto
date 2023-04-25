@@ -10,5 +10,6 @@ public class ResultView {
         for (Ticket ticket : ticketList) {
             System.out.println(ticket.numbers());
         }
+        System.out.println();
     }
 }
