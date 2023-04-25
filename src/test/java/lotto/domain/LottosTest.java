@@ -35,9 +35,9 @@ class LottosTest {
     @Test
     @DisplayName("당첨 번호 확인을 한다.")
     void test04() {
-        Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 4, 5, 45));
+        Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 4, 5, 11));
 
-        List<WinType> winTypes = lottos.confirmWins(new WinNumbers(1, 2, 3, 4, 5, 6));
+        List<WinType> winTypes = lottos.confirmWins(new WinNumbers(List.of(1, 2, 3, 4, 5, 6), 45));
 
         assertThat(winTypes).containsExactly(WinType.FIRST, WinType.THIRD);
     }

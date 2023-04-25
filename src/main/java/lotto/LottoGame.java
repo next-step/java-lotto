@@ -12,7 +12,7 @@ public class LottoGame {
         Lottos lottos = new Lottos(InputView.purchaseAmount());
         OutputView.purchaseHistory(lottos);
 
-        WinNumbers winNumbers = new WinNumbers(InputView.lastWeekWinningNumbers());
+        WinNumbers winNumbers = new WinNumbers(InputView.lastWeekWinningNumbers(), InputView.bonusBall());
 
         WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
 

@@ -12,9 +12,9 @@ public class WinStatisticsTest {
     @Test
     @DisplayName("당첨번호와, 로또들을 비교하여 3개~6개 일치하는 수량을 가지고 있는다.")
     void test01() {
-        Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 4, 5, 45),
-                                   new Lotto(40, 41, 42, 43, 44, 45));
-        WinNumbers winNumbers = new WinNumbers(1, 2, 3, 4, 5, 6);
+        Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 4, 5, 11),
+                                   new Lotto(11, 12, 13, 14, 15, 16));
+        WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), 45);
         WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
 
         List<WinType> winTypes = winStatistics.winStatistics();
@@ -25,9 +25,9 @@ public class WinStatisticsTest {
     @Test
     @DisplayName("수익률을 계산한다.")
     void test02() {
-        Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(40, 41, 42, 43, 44, 45),
-                                   new Lotto(40, 41, 42, 43, 44, 45));
-        WinNumbers winNumbers = new WinNumbers(1, 2, 3, 4, 5, 6);
+        Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(11, 12, 13, 14, 15, 16),
+                                   new Lotto(11, 12, 13, 14, 15, 16));
+        WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), 45);
         WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
 
         BigDecimal rateOfReturn = winStatistics.rateOfReturn();
