@@ -16,5 +16,11 @@ public class Application {
 
         Printable lottosOutput = new LottosOutput(lottos);
         lottosOutput.print();
+
+        Lotto answer = lottoAnswer.getValue();
+
+        LottoPlaceCounter counter = new LottoPlaceCounter(answer);
+        counter.countAll(lottos);
+
     }
 }

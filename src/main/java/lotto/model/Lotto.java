@@ -31,7 +31,7 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         Objects.requireNonNull(numbers);
         if (numbers.size() != COUNT) {
-            throw new IllegalArgumentException("lotto numbers are not " + COUNT);
+            throw new IllegalArgumentException("the count of lotto numbers are not " + COUNT);
         }
 
         long distinct = numbers.stream().distinct().count();
