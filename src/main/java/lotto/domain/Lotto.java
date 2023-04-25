@@ -59,11 +59,10 @@ public class Lotto {
             if (isNotMatchCount(winningLottoNumbers, lottoNumbers)) {
                 continue;
             }
-            System.out.println("matchCount(lottoNumbers, winningLottoNumbers) = " + matchCount(lottoNumbers, winningLottoNumbers));
 
             totalReward += MatchType.of(matchCount(lottoNumbers, winningLottoNumbers)).reward();
         }
-        return totalReward / purchasePrice;
+        return totalReward / (double) purchasePrice;
     }
 
     private static boolean isNotMatchCount(LottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {

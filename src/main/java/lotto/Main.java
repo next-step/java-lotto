@@ -26,6 +26,7 @@ public class Main {
         Map<Integer, Integer> matchCounts = Lotto.matchCounts(lottoNumbersList, winningLottoNumbers);
         double totalProfitRate = Lotto.totalProfitRate(lottoNumbersList, winningLottoNumbers);
 
+        ResultView.printWinningStatics(matchCounts, totalProfitRate);
 
         inputView.close();
     }

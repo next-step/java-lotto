@@ -9,6 +9,7 @@ import java.util.Map;
 public class ResultView {
 
     private static final int PROFIT_BASIS = 1;
+    private static final int INIT_VALUE = 0;
 
     public static void printPurchasePriceInputCommand() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -29,22 +30,28 @@ public class ResultView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-
-    public static void printNewLine() {
-        System.out.println();
-    }
-
     public static void printWinningStatics(Map<Integer, Integer> matchCounts, double totalProfitRate) {
+        printNewLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (MatchType mc : MatchType.values()) {
-            System.out.println(mc.phrase() + "- " + matchCounts.get(mc.matchCount()) + "개");
+            String phrase = mc.phrase();
+            Integer matchCount = matchCounts.get(mc.matchCount());
+
+            if (matchCount == null) {
+                matchCount = INIT_VALUE;
+            }
+            System.out.println(phrase + "- " + matchCount + "개");
         }
 
-        System.out.print("총 수익률은 " + totalProfitRate + "입니다.");
+        System.out.print("총 수익률은 " + String.format("%.2f", totalProfitRate) + "입니다.");
         if (totalProfitRate < PROFIT_BASIS) {
             System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
+    }
+
+    public static void printNewLine() {
+        System.out.println();
     }
 }
