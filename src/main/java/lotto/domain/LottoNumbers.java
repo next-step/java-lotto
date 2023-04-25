@@ -61,7 +61,7 @@ public class LottoNumbers {
 
     private void checkSize(List<LottoNumber> lottoNumbers) {
         final Set<LottoNumber> set = new HashSet<>(lottoNumbers);
-        System.out.println(set);
+
         if (set.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6자리입니다.");
         }
