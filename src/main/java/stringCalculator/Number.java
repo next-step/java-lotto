@@ -2,7 +2,12 @@ package stringCalculator;
 
 public class Number {
   final int value;
-  Number(String value) {
-    this.value = Integer.parseInt(value);
+
+  public Number(int value) {
+    this.value = value;
   }
+  public Number(String value) {
+    this(Integer.parseInt(value));
+  }
+
 }
