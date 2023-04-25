@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class LottoStatistics {
   private final Map<Integer, Integer> statistics;
+  private final float rateOfReturn;
 
   public LottoStatistics(LottoTickets lottoTickets, LottoTicket winningNumbers) {
     statistics = new HashMap<>();
@@ -14,6 +15,7 @@ public class LottoStatistics {
     statistics.put(5, 0);
     statistics.put(6, 0);
     calculate(lottoTickets, winningNumbers);
+    rateOfReturn = calculateRateOfReturn(lottoTickets);
   }
 
   private void calculate(LottoTickets lottoTickets, LottoTicket winningNumbers) {
@@ -33,11 +35,15 @@ public class LottoStatistics {
     return statistics;
   }
 
-  public float getRateOfReturn(PurchaseAmount purchaseAmount) {
+  public float getRateOfReturn() {
+    return rateOfReturn;
+  }
+
+  private float calculateRateOfReturn(LottoTickets lottoTickets) {
     int totalPrize = statistics.entrySet().stream()
                         .mapToInt(entry -> LottoPrize.getPrizeByMatchCount(entry.getKey()) * entry.getValue())
                         .sum();
-    return purchaseAmount.calculateRateOfReturn(totalPrize);
+    return (float) totalPrize / lottoTickets.getTotalAmount();
   }
 
   @Override

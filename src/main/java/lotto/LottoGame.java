@@ -26,4 +26,8 @@ public class LottoGame {
   public LottoTicketsDto getLottoTickets() {
     return new LottoTicketsDto(lottoTickets);
   }
+
+  public LottoStatistics getLottoStatistics(LottoTicket winningNumbers) {
+    return new LottoStatistics(lottoTickets, winningNumbers);
+  }
 }

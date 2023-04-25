@@ -12,4 +12,8 @@ public class LottoTickets {
     public List<LottoTicket> getTickets() {
         return tickets;
     }
+
+    public int getTotalAmount() {
+        return LottoTicket.PRICE * tickets.size();
+    }
 }

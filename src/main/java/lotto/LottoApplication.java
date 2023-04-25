@@ -9,9 +9,6 @@ public class LottoApplication {
     OutputView.printLottoTickets(lottoGame.getLottoTickets());
     LottoTicket winningNumbers = new LottoTicket(InputView.getLastWeekWinningNumbers());
 
-    new LottoStatistics(lottoGame, winningNumbers);
-
-    OutputView.printLottoStatistics(lottoGame.getStatistics(winningNumbers));
-    OutputView.printRateOfReturn(purchaseAmount, lottoGame);
+    OutputView.printLottoStatistics(lottoGame.getLottoStatistics(winningNumbers));
   }
 }

@@ -24,15 +24,11 @@ public class OutputView {
                        System.out.println(
                            entry.getKey() +
                            "개 일치 (" +
-                           LottoPrize.findByMatchCount(entry.getKey()) +
+                           LottoPrize.findByMatchCount(entry.getKey()).getPrize() +
                            "원)- " +
                            entry.getValue() + "개"
                        )
                    );
-  }
-
-  public static void printRateOfReturn(int purchaseAmount, LottoGame lottoGame) {
-    float rateOfReturn =
-    System.out.println("총 수익률은 " + rateOfReturn + "입니다.");
+    System.out.println("총 수익률은 " + lottoStatistics.getRateOfReturn());
   }
 }
