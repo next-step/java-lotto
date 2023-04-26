@@ -41,4 +41,14 @@ class LottosTest {
 
         assertThat(winTypes).containsExactly(WinType.FIRST, WinType.THIRD);
     }
+
+    @Test
+    @DisplayName("수동 번호로 로또를 생성한다.")
+    void test05() {
+        List<Lotto> numbers = List.of(new Lotto(1, 2, 3, 4, 5, 6));
+        Lottos lottos = new Lottos(2000, numbers);
+
+        assertThat(lottos.lottos()).hasSize(2);
+        assertThat(lottos.lottos()).contains(new Lotto(1, 2, 3, 4, 5, 6));
+    }
 }

@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-
     public static long LOTTO_PRICE = 1_000;
     private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> manualLottos = new ArrayList<>();
 
     public Lottos(long price) {
         if (price < LOTTO_PRICE) {
@@ -19,12 +19,24 @@ public class Lottos {
         }
     }
 
+    public Lottos(long price, List<Lotto> manualNumbers) {
+        long autoPrice = price - (manualNumbers.size() * LOTTO_PRICE);
+        this.manualLottos.addAll(manualNumbers);
+
+        for (int i = 0; i < autoPrice / LOTTO_PRICE; i++) {
+            this.lottos.add(new Lotto());
+        }
+    }
+
     public Lottos(Lotto... lottos) {
         Collections.addAll(this.lottos, lottos);
     }
 
     public List<Lotto> lottos() {
-        return Collections.unmodifiableList(this.lottos);
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(Collections.unmodifiableList(this.lottos));
+        lottos.addAll(Collections.unmodifiableList(this.manualLottos));
+        return lottos;
     }
 
     public long purchaseAmount() {
