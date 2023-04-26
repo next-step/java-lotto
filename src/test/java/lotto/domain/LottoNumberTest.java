@@ -12,7 +12,7 @@ class LottoNumberTest {
 
     @Test
     @DisplayName("로또 번호 생성 테스트(객체 동등성 테스트)")
-    void createLottoNumber(){
+    void manualProvideLottoNumber(){
         assertThat(LottoNumber.provideLottoNumber(1)).isEqualTo(new LottoNumber(1));
     }
 
@@ -23,7 +23,16 @@ class LottoNumberTest {
 
         LottoNumber lottoNumber = LottoNumber.provideLottoNumber(number);
 
-        assertThat(lottoNumber.isCorrectRange(lottoNumber)).isTrue();
+        assertThat(LottoNumber.isCorrectRange(lottoNumber)).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또 번호 생성 테스트(숫자 범위 1~45)")
+    void autoProvideLottoNumber(){
+        LottoNumber lottoNumber = LottoNumber.provideLottoNumber();
+
+
+        assertThat(LottoNumber.isCorrectRange(lottoNumber)).isTrue();
     }
 
 
