@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.control.input.LottoAnswerInput;
+import lotto.control.input.LottoBonusInput;
 import lotto.control.input.LottoPriceInput;
 import lotto.control.output.LottoStatisticsOutput;
 import lotto.control.output.LottosOutput;
@@ -13,6 +14,7 @@ import lotto.model.dto.LottoDto;
 import lotto.model.dto.LottoPlaceCounterDto;
 import lotto.model.dto.LottoStatisticsDto;
 import lotto.view.input.LottoAnswerView;
+import lotto.view.input.LottoBonusView;
 import lotto.view.input.LottoPriceView;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class Application {
     public static void main(String[] args) {
         LottoPriceInput lottoPrice = new LottoPriceInput(new LottoPriceView());
         LottoAnswerInput lottoAnswer = new LottoAnswerInput(new LottoAnswerView());
+        LottoBonusInput lottoBonus = new LottoBonusInput(new LottoBonusView());
 
         int price = lottoPrice.getValue();
 
@@ -36,6 +39,8 @@ public class Application {
 
         Printable lottosOutput = new LottosOutput(lottoDtos);
         lottosOutput.print();
+        
+        int bonus = lottoBonus.getValue();
 
         Lotto answer = lottoAnswer.getValue();
 
