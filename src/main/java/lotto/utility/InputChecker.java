@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputChecker {
-    private static final String REGULAR_NUMBER = "^[0-9]$";
+    private static final String REGULAR_NUMBER = "^[0-9]{1,}$";
     private static final String REGULAR_OPERATORS = "^[+|\\-|*|/]$";
     private static final Pattern NUMBER_PATTERN_COMPILE = Pattern.compile(REGULAR_NUMBER);
     private static final Pattern OPERATOR_PATTERN_COMPILE = Pattern.compile(REGULAR_OPERATORS);
