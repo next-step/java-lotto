@@ -39,8 +39,8 @@ public class Application {
 
         Printable lottosOutput = new LottosOutput(lottoDtos);
         lottosOutput.print();
-        
-        int bonus = lottoBonus.getValue();
+
+        Number bonus = lottoBonus.getValue();
 
         Lotto answer = lottoAnswer.getValue();
 
