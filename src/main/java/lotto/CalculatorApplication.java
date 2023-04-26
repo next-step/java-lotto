@@ -17,9 +17,9 @@ public class CalculatorApplication {
 
         inputChecker.validFormula(formulaList);
 
-        Calculator calculator = new Calculator(formulaList);
+        Calculator calculator = new Calculator();
 
-        calculator.calculateFormula();
+        calculator.calculateFormula(formulaList);
 
         System.out.println(calculator.showResult());
     }

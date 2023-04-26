@@ -20,9 +20,9 @@ public class CalculatorTest {
         String testInput = " 44 + 55 - 2 / 5 ";
         InputChecker inputChecker = new InputChecker();
         List<String> formulaList = inputChecker.formulaToStrList(testInput);
-        Calculator calculator = new Calculator(formulaList);
+        Calculator calculator = new Calculator();
 
-        List<String> result = calculator.makeNumberList();
+        List<String> result = calculator.makeNumberList(formulaList);
 
         assertThat(result.size()).isEqualTo(4);
         assertThat(result.get(0)).isEqualTo("44");
@@ -37,9 +37,9 @@ public class CalculatorTest {
         String testInput = " 44 + 55 - 2 / 5 ";
         InputChecker inputChecker = new InputChecker();
         List<String> formulaList = inputChecker.formulaToStrList(testInput);
-        Calculator calculator = new Calculator(formulaList);
+        Calculator calculator = new Calculator();
 
-        List<String> result = calculator.makeOperatorList();
+        List<String> result = calculator.makeOperatorList(formulaList);
 
         assertThat(result.size()).isEqualTo(3);
         assertThat(result.get(0)).isEqualTo("+");
@@ -53,9 +53,9 @@ public class CalculatorTest {
         String testInput = " 44 + 55 - 2 / 5 ";
         InputChecker inputChecker = new InputChecker();
         List<String> formulaList = inputChecker.formulaToStrList(testInput);
-        Calculator calculator = new Calculator(formulaList);
+        Calculator calculator = new Calculator();
 
-        List<String> operatorList = calculator.makeOperatorList();
+        List<String> operatorList = calculator.makeOperatorList(formulaList);
         Queue<String> result = new LinkedList<>(operatorList);
 
         assertThat(result.size()).isEqualTo(3);
@@ -70,7 +70,7 @@ public class CalculatorTest {
         String testInput = " 44 + 55 - 9 / 5 ";
         InputChecker inputChecker = new InputChecker();
         List<String> formulaList = inputChecker.formulaToStrList(testInput);
-        Calculator calculator = new Calculator(formulaList);
+        Calculator calculator = new Calculator();
 
         String result = calculator.calculate("4", "5", "+");
         String result2 = calculator.calculate("4", "5", "-");
@@ -84,17 +84,38 @@ public class CalculatorTest {
     }
 
     @Test
+    @DisplayName("수식 문자열 계산2")
+    public void calculateFormulaTest2() {
+        String testInput = " 44 + 55 - 9 / 5 ";
+        InputChecker inputChecker = new InputChecker();
+        List<String> formulaList = inputChecker.formulaToStrList(testInput);
+        Calculator calculator = new Calculator();
+
+        List<String> numberList = calculator.makeNumberList(formulaList);
+        List<String> operatorList = calculator.makeOperatorList(formulaList);
+        Queue<String> operatorQueue = new LinkedList<>(operatorList);
+
+        String result = numberList.stream()
+                .reduce((x, y) -> calculator.calculate(x, y, operatorQueue.remove()))
+                .get();
+
+        assertThat(result).isEqualTo(18);
+    }
+
+    @Test
     @DisplayName("수식 문자열 계산")
     public void calculateFormulaTest() {
         String testInput = " 44 + 55 - 9 / 5 ";
         InputChecker inputChecker = new InputChecker();
         List<String> formulaList = inputChecker.formulaToStrList(testInput);
-        Calculator calculator = new Calculator(formulaList);
+        Calculator calculator = new Calculator();
 
-        calculator.calculateFormula();
+        calculator.calculateFormula(formulaList);
 
         String result = calculator.showResult();
 
         assertThat(result).isEqualTo(18);
     }
+
+
 }

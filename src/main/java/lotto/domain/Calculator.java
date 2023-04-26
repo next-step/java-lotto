@@ -10,25 +10,23 @@ import java.util.stream.IntStream;
 
 public class Calculator {
     private static NumberFormat numberFormat = NumberFormat.getInstance();
-    private final List<String> formulaList;
     private String result;
 
-    public Calculator(List<String> formulaList) {
-        this.formulaList = new ArrayList<>(formulaList);
+    public Calculator() {
         this.result = "0";
     }
 
-    public List<String> makeNumberList() {
-        return IntStream.range(0, this.formulaList.size())
+    public List<String> makeNumberList(List<String> formulaList) {
+        return IntStream.range(0, formulaList.size())
                 .filter(index -> index % 2 == 0)
-                .mapToObj(index -> this.formulaList.get(index))
+                .mapToObj(formulaList::get)
                 .collect(Collectors.toList());
     }
 
-    public List<String> makeOperatorList() {
-        return IntStream.range(0, this.formulaList.size())
+    public List<String> makeOperatorList(List<String> formulaList) {
+        return IntStream.range(0, formulaList.size())
                 .filter(index -> index % 2 == 1)
-                .mapToObj(this.formulaList::get)
+                .mapToObj(formulaList::get)
                 .collect(Collectors.toList());
     }
 
@@ -63,9 +61,9 @@ public class Calculator {
         return numberFormat.format(doubleNumber1 / doubleNumber2);
     }
 
-    public void calculateFormula() {
-        List<String> numberList = makeNumberList();
-        List<String> operatorList = makeOperatorList();
+    public void calculateFormula(List<String> formulaList) {
+        List<String> numberList = makeNumberList(formulaList);
+        List<String> operatorList = makeOperatorList(formulaList);
         Queue<String> operatorQueue = new LinkedList<>(operatorList);
 
         this.result = numberList.stream()
