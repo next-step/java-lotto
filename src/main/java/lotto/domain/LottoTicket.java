@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -22,6 +19,13 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
+    }
+
+    public long matchesLottoNumberCount(List<Integer> winningNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .filter(winningNumbers::contains)
+                .count();
     }
 
     public int size() {

@@ -32,4 +32,13 @@ public class LottoTicketTest {
                 .isThrownBy(() -> LottoTicket.of(List.of(1, 1, 2, 3, 4, 5)))
                 .withMessageMatching("로또 번호는 중복이 허용되지 않습니다.");
     }
+
+    @DisplayName("발급받은 로또번호 중 일치여부를 판단해 일치하는 개수를 판단한다")
+    @Test
+    void matchesLottoTicket() {
+        LottoTicket lottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 45));
+        List<Integer> winningLottoTicket = List.of(1, 2, 3, 4, 5, 6);
+        long winningCount = lottoTicket.matchesLottoNumberCount(winningLottoTicket);
+        assertThat(winningCount).isEqualTo(5);
+    }
 }
