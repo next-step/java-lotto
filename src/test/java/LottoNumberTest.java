@@ -1,6 +1,9 @@
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
@@ -9,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -74,5 +78,28 @@ public class LottoNumberTest {
         Rank rank = Rank.valueOf(matchCount);
 
         Assertions.assertThat(matchCount).isEqualTo(rank.getCountOfMatch());
+    }
+
+    @Test
+    @DisplayName("당첨 번호가 0~6개 안의 숫자에서 확인되는 지 확인할 수 있다.")
+    void checkMatchingNumbers_test() {
+        LottoNumber lottoNumber = new LottoNumber();
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        int matchCount = lottoNumber.countMatchingNumbers(winningNumbers);
+        Assertions.assertThat(matchCount).isBetween(0, 6);
+    }
+
+    @Test
+    @DisplayName("수익률 계산이 동작하는지 확인할 수 있다.")
+    void calculateReturnRate_test() {
+        int purchaseAmount = 10_000;
+        LottoTicket lottoTicket = new LottoTicket(10); // 10장의 로또 티켓 생성
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        LottoResult lottoResult = lottoTicket.calculateResult(winningNumbers);
+        double returnRate = OutputView.calculateReturnRate(purchaseAmount, lottoResult);
+
+        Assertions.assertThat(returnRate).isGreaterThanOrEqualTo(0);
     }
 }
