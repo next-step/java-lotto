@@ -1,5 +1,7 @@
-import state.InitialState;
-import state.State;
+package calculator;
+
+import calculator.state.InitialState;
+import calculator.state.State;
 
 import java.util.List;
 

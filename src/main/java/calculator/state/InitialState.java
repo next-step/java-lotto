@@ -1,4 +1,4 @@
-package state;
+package calculator.state;
 
 public class InitialState implements State {
     @Override
