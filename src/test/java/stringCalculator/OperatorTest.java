@@ -36,6 +36,16 @@ public class OperatorTest {
   }
 
   @Test
+  @DisplayName("나눗셈 연산하면 나머지는 버린다")
+  void divisionRemainderRoundDownTest() {
+    Operator operator = Operator.from("/");
+    assertThat(
+        operator.calculate(new Number(8), new Number(3))
+    ).isEqualTo(new Number(2));
+
+  }
+
+  @Test
   @DisplayName("지정된 연산자 외 다른 토큰이 들어가면 예외가 발생한다")
   void notOperatorTest() {
     assertThatThrownBy(() -> Operator.from("!"))
