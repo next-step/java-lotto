@@ -34,4 +34,32 @@ public class StringOperatorTest {
 
         assertThat(stringOperator).isEqualTo(StringOperator.MUL);
     }
+
+    @Test
+    void 두_수를_더한다() {
+        int result = StringOperator.ADD.calc(1,2);
+
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    void 두_수를_뺄셈한다() {
+        int result = StringOperator.SUB.calc(3,1);
+
+        assertThat(result).isEqualTo(2);
+    }
+
+    @Test
+    void 두_수를_곱셈한다() {
+        int result = StringOperator.MUL.calc(5,3);
+
+        assertThat(result).isEqualTo(15);
+    }
+
+    @Test
+    void 두_수를_나눗셈한다() {
+        int result = StringOperator.DIV.calc(6,3);
+
+        assertThat(result).isEqualTo(2);
+    }
 }
