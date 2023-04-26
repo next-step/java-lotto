@@ -17,13 +17,14 @@ public class InputChecker {
     }
 
     public void validFormula(List<String> formulaList) {
-        throwRuntimeException(isNumberLastListValue(formulaList));
+        isThrowRuntimeException(isNumberLastListValue(formulaList));
 
         int index = 0;
         for(String str : formulaList) {
-            throwRuntimeException(validFormulaIndex(index, str));
+            isThrowRuntimeException(validFormulaIndex(index, str));
             index ++;
         }
+
     }
 
     public boolean validFormulaIndex(int index, String str) {
@@ -37,7 +38,7 @@ public class InputChecker {
         return NUMBER_PATTERN_COMPILE.asMatchPredicate().test(formulaList.get(formulaList.size()-1));
     }
 
-    public void throwRuntimeException(boolean flag) {
+    public void isThrowRuntimeException(boolean flag) {
         if(!flag) {
             throw new RuntimeException("연속으로 숫자 혹은 사칙연산자가 입력되었습니다.");
         }
