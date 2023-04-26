@@ -19,12 +19,15 @@ public class Numbers {
   }
 
   private void validateNumber(List<String> numbers) {
-    numbers.stream()
-        .filter(number -> !number.matches(NUMBER_REGEX))
-        .findAny()
-        .ifPresent(number -> {
-          throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다.\"");
-        });
+    for(String number : numbers){
+      checkNumericValue(number);
+    }
+  }
+
+  private void checkNumericValue(String number) {
+    if(!number.matches(NUMBER_REGEX)){
+      throw new IllegalArgumentException("숫자가 아닌 값이 있습니다.");
+    }
   }
 
   private Queue<Integer> parseInt(List<String> numbers) {
