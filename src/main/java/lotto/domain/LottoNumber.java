@@ -1,19 +1,19 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber {
     private static final int BEGIN_OF_LOTTO_NUMBER = 1;
     private static final int END_OF_LOTTO_NUMBER = 45;
-    private static final int ZERO = 0;
     private static final Map<Integer, LottoNumber> lottoNumberRepository;
     private final int lottoNumber;
 
     static {
-        lottoNumberRepository = IntStream.rangeClosed(BEGIN_OF_LOTTO_NUMBER, END_OF_LOTTO_NUMBER)
+        lottoNumberRepository = IntStream.range(BEGIN_OF_LOTTO_NUMBER, END_OF_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
     }
@@ -22,25 +22,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber provideLottoNumber(int requestNumber) {
-
-        LottoNumber lottoNumber = lottoNumberRepository.get(requestNumber);
-
-        if (Objects.isNull(lottoNumber)) {
-            throw new IllegalArgumentException("로또 번호 범위가 아니에요 :(");
-        }
-
-        return lottoNumber;
+    public static LottoNumber createLottoNumber(int lottoNumber){
+        return new LottoNumber(lottoNumber);
     }
 
-    public static LottoNumber provideLottoNumber() {
-        List<Integer> numberList = extractNumber();
-        Collections.shuffle(numberList);
-        return provideLottoNumber(numberList.get(ZERO));
-    }
-
-    private static List<Integer> extractNumber() {
-        return new ArrayList<>(lottoNumberRepository.keySet());
+    public static LottoNumber createLottoNumber() {
+        return null;
     }
 
     @Override
@@ -54,15 +41,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
-    }
-
-    @Override
-    public int compareTo(LottoNumber o) {
-        return this.lottoNumber - o.lottoNumber;
-    }
-
-    @Override
-    public String toString() {
-        return lottoNumber + "";
     }
 }
