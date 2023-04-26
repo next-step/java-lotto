@@ -12,7 +12,7 @@ public class LottoAnswerInput extends InputControl<Lotto> {
     private static final String LOTTO_DELIMITER = ",";
 
     public LottoAnswerInput(View view) {
-        this.view = view;
+        super(view);
     }
 
     @Override
