@@ -51,6 +51,10 @@ public class Lotto {
         return matches.size();
     }
 
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
     @Override
     public String toString() {
         return numbers.toString();

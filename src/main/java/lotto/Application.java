@@ -6,10 +6,8 @@ import lotto.control.input.LottoPriceInput;
 import lotto.control.output.LottoStatisticsOutput;
 import lotto.control.output.LottosOutput;
 import lotto.control.output.Printable;
-import lotto.model.Lotto;
-import lotto.model.LottoGenerator;
-import lotto.model.LottoPlaceCounter;
-import lotto.model.LottoRewardStatistics;
+import lotto.model.Number;
+import lotto.model.*;
 import lotto.model.dto.LottoDto;
 import lotto.model.dto.LottoPlaceCounterDto;
 import lotto.model.dto.LottoStatisticsDto;
@@ -44,7 +42,7 @@ public class Application {
 
         Lotto answer = lottoAnswer.getValue();
 
-        LottoPlaceCounter counter = new LottoPlaceCounter(answer);
+        LottoPlaceCounter counter = new LottoPlaceCounter(answer, bonus);
         counter.countAll(lottos);
 
         LottoRewardStatistics statistics = new LottoRewardStatistics(counter);
