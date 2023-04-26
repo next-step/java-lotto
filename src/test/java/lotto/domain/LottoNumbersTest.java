@@ -89,4 +89,28 @@ class LottoNumbersTest {
                 .isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("보너스 번호 확인 테스트")
+    void hasBonusNumberTest() {
+        List<String> stringLottoNumbers = List.of("1", "2", "3", "4", "5", "6");
+        LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(stringLottoNumbers);
+
+        LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("6");
+
+        assertThat(lottoNumbers.hasLottoNumber(bonusNumber))
+                .isTrue();
+    }
+
+    @Test
+    @DisplayName("보너스 번호 불일치 테스트")
+    void hasNoBonusNumberTest() {
+        List<String> stringLottoNumbers = List.of("1", "2", "3", "4", "5", "6");
+        LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(stringLottoNumbers);
+
+        LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
+
+        assertThat(lottoNumbers.hasLottoNumber(bonusNumber))
+                .isFalse();
+    }
+
 }

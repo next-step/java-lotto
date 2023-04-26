@@ -2,16 +2,18 @@ package lotto.view;
 
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.Statistics;
 import lotto.domain.Winners;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class OutputView {
-    public static final int SUBSTRING_INDEX = 1;
-    public static final int MINIMUM_PRIZE = 3;
-    public static final int MAXIMUM_PRIZE = 6;
-    public static final double PROFIT_CONDITION = 1.0;
+    private static final int SUBSTRING_INDEX = 1;
+    private static final double PROFIT_CONDITION = 1.0;
 
     public static void printLottoQuantity(Money money) {
         System.out.println(money.getLottoQuantity() + "개를 구매했습니다.");
@@ -36,8 +38,19 @@ public class OutputView {
     }
 
     private static void printStatistics(Winners resultMap) {
-        for (int i = MINIMUM_PRIZE; i <= MAXIMUM_PRIZE; i++) {
-            System.out.println(i + "개 일치 (" + resultMap.getPrize(i) + ")- " + resultMap.getWinnersCount(i) + "개");
+        List<Statistics> statistics = Arrays.asList(Statistics.values());
+        Collections.reverse(statistics);
+
+        for (Statistics statistic : statistics) {
+            String matchingNumber = statistic.getMatchingBall() + "개 일치";
+            String prize = "(" + statistic.getPrize() + "원)- ";
+            String resultCount = resultMap.getWinnersMatchingCount(statistic) + "개";
+
+            if (statistic == Statistics.SECOND) {
+                System.out.println(matchingNumber + ", 보너스 볼 일치" + prize + resultCount);
+            } else if (statistic != Statistics.MISS){
+                System.out.println(matchingNumber + prize + resultCount);
+            }
         }
     }
 

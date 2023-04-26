@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
-    public static final int ZERO = 0;
+    private static final int ZERO = 0;
 
     private final List<Lotto> lottos;
 
@@ -13,25 +14,20 @@ public class Lottos {
     }
 
     public static Lottos initLottos(Money amount) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottos;
         int bound = amount.getLottoQuantity();
-        for (int i = ZERO; i < bound; i++) {
-            Lotto lotto = Lotto.initLotto();
-            lottos.add(lotto);
-        }
+        lottos = IntStream.range(ZERO, bound)
+                .mapToObj(i -> Lotto.initLotto())
+                .collect(Collectors.toList());
 
         return new Lottos(lottos);
     }
 
-    public int getLottoQuantity() {
-        return lottos.size();
-    }
-
-    public Winners findStatistics(Lotto winningLotto) {
+    public Winners findStatistics(WinningLotto winningLotto) {
         Winners winners = new Winners();
-        lottos.stream()
-                .mapToInt(lotto -> lotto.findMatchingBall(winningLotto))
-                .forEach(winners::addWinner);
+        lottos.forEach(lotto -> {
+            winners.addWinner(winningLotto.matchingLotto(lotto));
+        });
 
         return winners;
     }

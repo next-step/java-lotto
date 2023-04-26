@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.Winners;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,7 +13,10 @@ public class Main {
         Lottos lottos = Lottos.initLottos(lottoAmount);
         OutputView.printLottos(lottos);
 
-        Lotto winningLotto = InputView.inputWinningNumbers();
+        Lotto previousWinningLotto = InputView.inputWinningNumbers();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
+        WinningLotto winningLotto = WinningLotto.initWinningLotto(previousWinningLotto, bonusNumber);
+
         Winners winners = lottos.findStatistics(winningLotto);
         OutputView.printResult(winners, lottoAmount);
     }

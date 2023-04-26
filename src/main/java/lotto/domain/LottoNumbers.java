@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    public static final int LOTTO_LENGTH = 6;
-    public static final int MAXIMUM_VALUE = 1;
+    private static final int LOTTO_LENGTH = 6;
+    private static final int MAXIMUM_VALUE = 1;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -59,9 +59,13 @@ public class LottoNumbers {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return countMap.entrySet().stream()
-                .filter(e -> e.getValue() > MAXIMUM_VALUE)
+                .filter(LottoNumbers::hasSameNumber)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
+    }
+
+    private static boolean hasSameNumber(Map.Entry<String, Long> key) {
+        return key.getValue() > MAXIMUM_VALUE;
     }
 
     public int findMatchingNumbers(LottoNumbers winningNumbers) {
@@ -72,6 +76,11 @@ public class LottoNumbers {
 
     private boolean hasMatchingNumber(LottoNumber winningNumber) {
         return lottoNumbers.contains(winningNumber);
+    }
+
+    public boolean hasLottoNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 
     public int getLottoNumberSize() {

@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class Money {
 
-    public static final Integer LOTTO_UNIT_PRICE = 1_000;
+    private static final Integer LOTTO_UNIT_PRICE = 1_000;
 
     private final Integer amount;
 
@@ -18,7 +18,7 @@ public class Money {
     }
 
     private static boolean isNegativeNumberOrZero(int amount) {
-        return amount <= LOTTO_UNIT_PRICE;
+        return amount < LOTTO_UNIT_PRICE;
     }
 
     public int getLottoQuantity() {

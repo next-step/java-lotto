@@ -24,12 +24,12 @@ public class Lotto {
         return lottoNumbers.findMatchingNumbers(winningLotto.getLottoNumbers());
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.hasLottoNumber(bonusNumber);
     }
 
-    public int getLottoSize() {
-        return lottoNumbers.getLottoNumberSize();
+    private LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
