@@ -12,20 +12,17 @@ public class Main {
     public static void main(String[] args) {
         InputView inputView = new InputView();
 
-        ResultView.printPurchasePriceInputCommand();
-        long purchasePrice = Long.parseLong(inputView.nextLine());
+        long purchasePrice = inputView.inputPurchasePrice();
         long lottoCount = Lotto.lottoCount(purchasePrice);
         ResultView.printLottoCount(lottoCount);
 
         List<LottoNumbers> lottoNumbersList = Lotto.generateAllLottoNumbers(lottoCount);
         ResultView.printAllLottoNumbers(lottoNumbersList);
 
-        ResultView.printWinningLottoNumberInputCommand();
-        LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.nextLine());
+        LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.inputWinningLottoNumbers());
 
         Map<Integer, Integer> matchCounts = Lotto.matchCounts(lottoNumbersList, winningLottoNumbers);
         double totalProfitRate = Lotto.totalProfitRate(lottoNumbersList, winningLottoNumbers);
-
         ResultView.printWinningStatics(matchCounts, totalProfitRate);
 
         inputView.close();
