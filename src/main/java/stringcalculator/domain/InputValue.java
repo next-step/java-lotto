@@ -1,7 +1,5 @@
 package stringcalculator.domain;
 
-import stringcalculator.util.StringSpliter;
-
 public class InputValue {
 
   private String inputValue;
@@ -13,7 +11,7 @@ public class InputValue {
   }
 
   public String[] split() {
-    String[] splitArr = StringSpliter.split(inputValue);
+    String[] splitArr = inputValue.split(" ");
 
     for (String split : splitArr) {
       isNullOrBlank(split);

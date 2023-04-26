@@ -1,12 +1,14 @@
 package stringcalculator;
 
+import stringcalculator.domain.InputValue;
 import stringcalculator.service.CalculateService;
-import stringcalculator.service.InputService;
+import stringcalculator.ui.InputView;
 
 public class Application {
 
   public static void main(String[] args) {
-    int result = new CalculateService().calculate(new InputService().input());
+    InputValue input = InputView.input();
+    int result = new CalculateService().calculate(input);
 
     System.out.println("결과 : " + result);
   }
