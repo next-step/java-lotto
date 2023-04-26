@@ -22,10 +22,11 @@ public class LottoApplication {
         // 로또 정답 입력
         List<Integer> lastWeekNumbers = InputView.inputLastWeekAnswer();
         Lotto lottoAnswer = Lotto.generate(lastWeekNumbers);
+        Bonus bonus = new Bonus(InputView.inputBonusNumber());
 
+        // 결과 계산
         for (Lotto lotto : lottoBundle.getLottos()) {
-            Integer score = lotto.getScore(lottoAnswer);
-            ScoreType scoreType = ScoreType.of(score); // 어떤 스코어 타입인지...
+            ScoreType scoreType = lotto.getScoreType(lottoAnswer, bonus); // 어떤 스코어 타입인지...
             scoreBoard.addScore(scoreType); // 스코어 타입에 기록...
         }
 

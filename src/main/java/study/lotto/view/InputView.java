@@ -13,6 +13,7 @@ public class InputView {
     private static final Scanner scanner = new Scanner(in);
     private static final String ASKING_MONEY = "구입금액을 입력해 주세요.";
     private static final String ASKING_LAST_WEEK_ANSWER = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String ASKING_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
 
     public static Integer inputMoney() {
@@ -28,5 +29,10 @@ public class InputView {
         return Arrays.stream(next.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public static int inputBonusNumber() {
+        out.println(ASKING_BONUS_NUMBER);
+        return scanner.nextInt();
     }
 }

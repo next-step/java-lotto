@@ -25,10 +25,20 @@ public class Lotto {
         return numbers;
     }
 
-    public Integer getScore(Lotto result) {
-        return Math.toIntExact(result.getNumbers()
+    public Integer getScore(Lotto lottoAnswer) {
+        return Math.toIntExact(lottoAnswer.getNumbers()
                 .stream()
                 .filter(this.numbers::contains)
                 .count());
+    }
+
+    // 보너스 볼이 포함되었을 때
+    public ScoreType getScoreType(Lotto lottoAnswer, Bonus bonus) {
+        Integer count = getScore(lottoAnswer);
+        boolean isBonusContained = this.numbers.contains(bonus.getNumber());
+        if (count.equals(5) && isBonusContained) {
+            return ScoreType.BONUS;
+        }
+        return ScoreType.of(count, false);
     }
 }

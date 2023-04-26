@@ -66,4 +66,18 @@ class ScoreBoardTest {
                         FIVE.getReward());
     }
 
+
+    @Test
+    void 보너스_볼이_추가된다() {
+        ScoreBoard board = new ScoreBoard(1000);
+        Map<ScoreType, Integer> scoreMap = board.getScoreMap();
+        assertThat(scoreMap).containsEntry(ZERO, 0);
+        assertThat(scoreMap).containsEntry(ONE, 0);
+        assertThat(scoreMap).containsEntry(TWO, 0);
+        assertThat(scoreMap).containsEntry(THREE, 0);
+        assertThat(scoreMap).containsEntry(FOUR, 0);
+        assertThat(scoreMap).containsEntry(FIVE, 0);
+        assertThat(scoreMap).containsEntry(BONUS, 0);
+        assertThat(scoreMap).containsEntry(SIX, 0);
+    }
 }

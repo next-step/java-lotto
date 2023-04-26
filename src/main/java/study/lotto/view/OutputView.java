@@ -51,9 +51,15 @@ public class OutputView {
                 .stream()
                 .filter(entry -> entry.getKey().canDisplay())
                 .sorted(Comparator.comparing(entry -> entry.getKey().getScore()))
+                .sorted(Comparator.comparing(entry -> entry.getKey().getReward()))
                 .collect(Collectors.toList());
+
         for (Map.Entry<ScoreType, Integer> entry : entryList) {
-            System.out.println(entry.getKey().getScore() + "개 일치 (" + entry.getKey().getReward() + ")- " + entry.getValue() + "개");
+            if (entry.getKey() == ScoreType.BONUS) {
+                System.out.println(entry.getKey().getScore() + "개 일치, 보너스 볼 일치 (" + entry.getKey().getReward() + ")- " + entry.getValue() + "개");
+            } else {
+                System.out.println(entry.getKey().getScore() + "개 일치 (" + entry.getKey().getReward() + ")- " + entry.getValue() + "개");
+            }
         }
     }
 
