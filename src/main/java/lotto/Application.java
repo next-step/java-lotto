@@ -38,9 +38,8 @@ public class Application {
         Printable lottosOutput = new LottosOutput(lottoDtos);
         lottosOutput.print();
 
-        Number bonus = lottoBonus.getValue();
-
         Lotto answer = lottoAnswer.getValue();
+        Number bonus = lottoBonus.getValue();
 
         LottoPlaceCounter counter = new LottoPlaceCounter(answer, bonus);
         counter.countAll(lottos);
