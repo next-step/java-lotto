@@ -11,7 +11,7 @@ public class OperatorTest {
   @Test
   @DisplayName("덧셈 연산 수행에 성공한다")
   void plusTest() {
-    Operator operator = new Operator("+");
+    Operator operator = Operator.from("+");
     assertThat(
         operator.calculate(new Number(1), new Number(2))
     ).isEqualTo(new Number(3));
@@ -20,7 +20,7 @@ public class OperatorTest {
   @Test
   @DisplayName("곱셈 연산 수행에 성공한다")
   void multiplicationTest() {
-    Operator operator = new Operator("*");
+    Operator operator = Operator.from("*");
     assertThat(
         operator.calculate(new Number(2), new Number(3))
     ).isEqualTo(new Number(6));
@@ -29,7 +29,7 @@ public class OperatorTest {
   @Test
   @DisplayName("나눗셈 연산 수행에 성공한다")
   void divisionTest() {
-    Operator operator = new Operator("/");
+    Operator operator = Operator.from("/");
     assertThat(
         operator.calculate(new Number(6), new Number(3))
     ).isEqualTo(new Number(2));
@@ -38,6 +38,8 @@ public class OperatorTest {
   @Test
   @DisplayName("지정된 연산자 외 다른 토큰이 들어가면 예외가 발생한다")
   void notOperatorTest() {
-    assertThatThrownBy(() -> new Operator("!"));
+    assertThatThrownBy(() -> Operator.from("!"))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("지원하지 않는 연산자입니다.");
   }
 }
