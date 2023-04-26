@@ -20,11 +20,11 @@ public class Numbers {
 
   private void validateNumber(List<String> numbers) {
     for(String number : numbers){
-      checkNumericValue(number);
+      checkNumberValue(number);
     }
   }
 
-  private void checkNumericValue(String number) {
+  private void checkNumberValue(String number) {
     if(!number.matches(NUMBER_REGEX)){
       throw new IllegalArgumentException("숫자가 아닌 값이 있습니다.");
     }

@@ -13,9 +13,9 @@ public class Calculator {
 
 
   public int calculate() {
-    int result = 0;
+    int result = numbers.nextValue();
     while (!operators.isEmpty()) {
-      result = Operations.calculate(numbers.nextValue(), numbers.nextValue(), operators.nextOperator());
+      result = Operations.calculate(result, numbers.nextValue(), operators.nextOperator());
     }
     return result;
   }
