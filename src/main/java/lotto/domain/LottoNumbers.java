@@ -1,16 +1,15 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toUnmodifiableList;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_NUMBERS_MAX_COUNT = 6;
+    public static final int LOTTO_NUMBERS_MAX_COUNT = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -51,18 +50,6 @@ public class LottoNumbers {
         if (numbers.size() != LOTTO_NUMBERS_MAX_COUNT) {
             throw new IllegalArgumentException("로또 숫자입력이 올바르지 않습니다.(유효한 개수: 6개)");
         }
-    }
-
-    public static LottoNumbers generate() {
-        List<Integer> rangedNumbers = IntStream.rangeClosed(
-                        LottoNumber.LOTTO_NUMBER_MINIMUM,
-                        LottoNumber.LOTTO_NUMBER_MAXIMUM)
-                .boxed()
-                .collect(toList());
-        Collections.shuffle(rangedNumbers);
-        List<Integer> subNumbers = rangedNumbers.subList(0, LOTTO_NUMBERS_MAX_COUNT);
-        Collections.sort(subNumbers);
-        return LottoNumbers.ofTypeIntegerList(subNumbers);
     }
 
     public long countToMatchedWinnerNumbers(LottoNumbers winnerNumbers) {
