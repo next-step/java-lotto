@@ -24,6 +24,19 @@ class LotteryNumberTest {
         assertThat(lotteryNumber).isEqualTo(new LotteryNumber(number));
     }
 
+    @Test
+    @DisplayName("번호 getter")
+    void getter() {
+        // given
+        int number = 3;
+
+        // when
+        LotteryNumber lotteryNumber = new LotteryNumber(number);
+
+        // then
+        assertThat(lotteryNumber.getNumber()).isEqualTo(number);
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {-3, 0, 46})
     @DisplayName("로또 번호를 생성할 때 1~45 사이의 숫자가 아니면 예외를 발생시킨다")

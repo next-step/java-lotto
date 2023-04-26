@@ -12,7 +12,7 @@ public class ManualTicketIssueStrategy implements TicketIssueStrategy {
     private final List<Integer> manualNumbers;
 
     public ManualTicketIssueStrategy(List<Integer> manualNumbers) {
-        this.manualNumbers = manualNumbers;
+        this.manualNumbers = List.copyOf(manualNumbers);
     }
 
     @Override

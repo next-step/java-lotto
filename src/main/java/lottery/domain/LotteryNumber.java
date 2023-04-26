@@ -19,10 +19,6 @@ public class LotteryNumber {
         return number >= LOTTERY_MIN_NUMBER && number <= LOTTERY_MAX_NUMBER;
     }
 
-    public static LotteryNumber valueOf(int number) {
-        return new LotteryNumber(number);
-    }
-
     public int getNumber() {
         return number;
     }

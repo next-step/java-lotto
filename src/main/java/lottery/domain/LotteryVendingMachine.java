@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static lottery.domain.LotteryTicket.LOTTERY_TICKET_PRICE;
+import static lottery.domain.LotteryTicket.isValidMoney;
 
 public class LotteryVendingMachine {
     public LotteryVendingMachine() {
     }
+
 
     public LotteryTicket issueTicket(TicketIssueStrategy issueStrategy) {
         return issueStrategy.issue();
@@ -26,10 +28,6 @@ public class LotteryVendingMachine {
             throw new IllegalArgumentException("금액은 " + LOTTERY_TICKET_PRICE + "원 단위로 입력해주세요.");
         }
         return money / LOTTERY_TICKET_PRICE;
-    }
-
-    private boolean isValidMoney(int money) {
-        return money % LOTTERY_TICKET_PRICE == 0;
     }
 
     private List<LotteryTicket> issueTickets(int ticketCount, TicketIssueStrategy issueStrategy) {

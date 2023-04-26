@@ -29,6 +29,22 @@ class LotteryTicketTest {
     }
 
     @Test
+    @DisplayName("valueOf로 생성")
+    void valueOf() {
+        // given
+        List<Integer> lotteryRawNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<LotteryNumber> lotteryNumbers = lotteryRawNumbers.stream()
+                .map(LotteryNumber::new)
+                .collect(Collectors.toList());
+
+        // when
+        LotteryTicket lotteryTicket = LotteryTicket.valueOf(lotteryRawNumbers);
+
+        // then
+        assertThat(lotteryTicket).isEqualTo(new LotteryTicket(lotteryNumbers));
+    }
+
+    @Test
     @DisplayName("로또 티켓이 로또 번호를 6개 가지고 있는지 확인")
     void checkSize() {
         // given
