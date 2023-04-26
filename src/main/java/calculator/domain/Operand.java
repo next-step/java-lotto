@@ -11,4 +11,8 @@ public class Operand implements ExpressionElement{
     public Operand(String value) {
         this.value = Integer.parseInt(value);
     }
+
+    public int value() {
+        return this.value;
+    }
 }
