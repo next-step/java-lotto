@@ -15,6 +15,7 @@ public class regExTest {
     @DisplayName("입력받은 문자열 앞뒤 공백 제거 후 빈 공백으로 split 하여 짝수 index -> 숫자, 홀수 index -> 연산자 되도록 구분")
     public void formulaToStrListTest() {
         String testInput = " 44 + 55 - 2 / 5 ";
+
         InputChecker inputChecker = new InputChecker();
 
         List<String> result = inputChecker.formulaToStrList(testInput);
@@ -29,6 +30,17 @@ public class regExTest {
         assertThat(result.get(1)).isEqualTo("+");
         assertThat(result.get(3)).isEqualTo("-");
         assertThat(result.get(5)).isEqualTo("/");
+    }
+
+    @Test
+    @DisplayName("입력받은 문자열이 빈 공백일 때 확인")
+    public void formulaToStrListTest2() {
+        String test = "";
+        InputChecker inputChecker = new InputChecker();
+
+        List<String> result2 = inputChecker.formulaToStrList(test);
+
+        assertThat(result2.get(0)).isEqualTo("");
     }
 
 
@@ -61,15 +73,19 @@ public class regExTest {
     public void isNumberLastListValueTest() {
         String testInput = " 44 + 55 - 2 / 5 ";
         String testInput2 = " 44 + 55 - 2 / ";
+        String testInput3 = "";
         InputChecker inputChecker = new InputChecker();
 
         List<String> testInputList = inputChecker.formulaToStrList(testInput);
         List<String> testInputList2 = inputChecker.formulaToStrList(testInput2);
+        List<String> testInputList3 = inputChecker.formulaToStrList(testInput3);
         boolean result = inputChecker.isNumberLastListValue(testInputList);
         boolean result2 = inputChecker.isNumberLastListValue(testInputList2);
+        boolean result3 = inputChecker.isNumberLastListValue(testInputList3);
 
         assertThat(result).isTrue();
         assertThat(result2).isFalse();
+        assertThat(result3).isFalse();
     }
 
     @Test

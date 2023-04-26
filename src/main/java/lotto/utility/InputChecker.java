@@ -2,7 +2,6 @@ package lotto.utility;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputChecker {
@@ -17,11 +16,11 @@ public class InputChecker {
     }
 
     public void validFormula(List<String> formulaList) {
-        isThrowRuntimeException(isNumberLastListValue(formulaList));
+        isThrowIllegalArgumentException(isNumberLastListValue(formulaList));
 
         int index = 0;
         for(String str : formulaList) {
-            isThrowRuntimeException(validFormulaIndex(index, str));
+            isThrowIllegalArgumentException(validFormulaIndex(index, str));
             index ++;
         }
 
@@ -38,9 +37,9 @@ public class InputChecker {
         return NUMBER_PATTERN_COMPILE.asMatchPredicate().test(formulaList.get(formulaList.size()-1));
     }
 
-    public void isThrowRuntimeException(boolean flag) {
+    public void isThrowIllegalArgumentException(boolean flag) {
         if(!flag) {
-            throw new RuntimeException("연속으로 숫자 혹은 사칙연산자가 입력되었습니다.");
+            throw new IllegalArgumentException ("연속으로 숫자 혹은 사칙연산자가 입력되었습니다.");
         }
     }
 
