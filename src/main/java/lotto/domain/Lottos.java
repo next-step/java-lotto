@@ -40,16 +40,20 @@ public class Lottos {
     }
 
     public long purchaseAmount() {
-        return LOTTO_PRICE * purchaseQuantity();
+        return LOTTO_PRICE * lottos().size();
     }
 
     public int purchaseQuantity() {
         return this.lottos.size();
     }
 
+    public int manualPurchaseQuantity() {
+        return this.manualLottos.size();
+    }
+
     public List<WinType> confirmWins(WinNumbers winNumbers) {
         List<WinType> winTypes = new ArrayList<>();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos()) {
             winTypes.add(winNumbers.confirmWin(lotto));
         }
 

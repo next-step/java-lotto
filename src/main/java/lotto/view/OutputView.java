@@ -12,7 +12,10 @@ public class OutputView {
     public static final String PRINT_DELIMITER = ", ";
 
     public static void purchaseHistory(Lottos lottos) {
-        System.out.println(lottos.purchaseQuantity() + "개를 구매했습니다.");
+        String purchaseMessage = String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                                               lottos.manualPurchaseQuantity(),
+                                               lottos.purchaseQuantity());
+        System.out.println(purchaseMessage);
 
         for (Lotto lotto : lottos.lottos()) {
             String printNumbers = lotto.numbers().stream().map(n -> String.valueOf(n.number()))
