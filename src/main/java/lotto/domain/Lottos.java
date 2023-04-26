@@ -34,8 +34,8 @@ public class Lottos {
 
     public List<Lotto> lottos() {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(Collections.unmodifiableList(this.lottos));
         lottos.addAll(Collections.unmodifiableList(this.manualLottos));
+        lottos.addAll(Collections.unmodifiableList(this.lottos));
         return lottos;
     }
 
