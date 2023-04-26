@@ -13,7 +13,8 @@ public class LottoApplication {
 
         LottoGenerator lottoGenerator = new LottoGenerator();
         List<LottoTicket> lottoTickets = lottoGenerator.generate(lottoCount);
-
         ResultView.showLottoTickets(lottoTickets);
+
+        List<Integer> winningNumbers = InputView.getWinningNumbers();
     }
 }
