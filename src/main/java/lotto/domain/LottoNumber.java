@@ -16,7 +16,7 @@ public class LottoNumber {
     private final int lottoNumber;
 
     static {
-        lottoNumberRepository = IntStream.range(BEGIN_OF_LOTTO_NUMBER, END_OF_LOTTO_NUMBER)
+        lottoNumberRepository = IntStream.rangeClosed(BEGIN_OF_LOTTO_NUMBER, END_OF_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
 
@@ -33,16 +33,22 @@ public class LottoNumber {
 
     public static LottoNumber provideLottoNumber() {
 
-       // lottoNumberRepository
+        // lottoNumberRepository
         return null;
     }
 
-//    public boolean isCorrectRange(LottoNumber lottoNumber){
-//
-//
-//        if(lottoNumber < )
-//
-//    }
+    public boolean isCorrectRange(LottoNumber lottoNumber) {
+
+        LottoNumber beginOfLottoNumber = provideLottoNumber(BEGIN_OF_LOTTO_NUMBER);
+
+        if (lottoNumber.hashCode() < beginOfLottoNumber.hashCode()) {
+            return false;
+        }
+
+        LottoNumber endOfLottoNumber = provideLottoNumber(END_OF_LOTTO_NUMBER);
+
+        return lottoNumber.hashCode() <= endOfLottoNumber.hashCode();
+    }
 
     @Override
     public boolean equals(Object o) {
