@@ -10,18 +10,27 @@ public class Calculator {
         Operand tempOperand = null;
         Operator tempOperator = null;
         for (int i = 0; i < expression.size(); i++) {
+            ExpressionElement expressionElement = expression.get(i);
             if (i == 0) {
-                tempOperand = (Operand) expression.get(i);
+                tempOperand = convertToOperand(expressionElement);
                 continue;
             }
             if (i % 2 == 1) {
-                tempOperator = (Operator) expression.get(i);
+                tempOperator = convertToOperator(expressionElement);
                 continue;
             }
-            int result = calculateOperand(tempOperand, tempOperator, (Operand) expression.get(i));
+            int result = calculateOperand(tempOperand, tempOperator, convertToOperand(expressionElement));
             tempOperand = new Operand(result);
         }
         return new Number(tempOperand.value());
+    }
+
+    private static Operand convertToOperand(ExpressionElement expressionElement) {
+        return (Operand) expressionElement;
+    }
+
+    private static Operator convertToOperator(ExpressionElement expressionElement) {
+        return (Operator) expressionElement;
     }
 
     private static int calculateOperand(Operand frontOperand, Operator operator, Operand backOperand) {
