@@ -28,10 +28,12 @@ public class LottoMachineTest {
 	@DisplayName("총 수익을 계산한다.")
 	@Test
 	void test3() {
-		List<Lotto> lottos = Arrays.asList(new Lotto(3), new Lotto(6));
-		LottoMachine lottoMachine = new LottoMachine(lottos);
-		int totalProfit = lottoMachine.totalProfit();
-		assertThat(totalProfit).isEqualTo(2000005000);
+		List<PrizeSituation> prizeSituations = Arrays.asList(
+			new PrizeSituation(PrizeType.SIX, 2),
+			new PrizeSituation(PrizeType.THREE, 1)
+		);
+		LottoMachine lottoMachine = new LottoMachine();
+		assertThat(lottoMachine.totalProfit(prizeSituations)).isEqualTo(4000005000L);
 	}
 
 	@DisplayName("총 수익률을 계산한다.")

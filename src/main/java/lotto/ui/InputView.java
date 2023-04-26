@@ -10,11 +10,11 @@ public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static int inputPurchaseAmount() {
+	public static long inputPurchaseAmount() {
 		System.out.println("구입금액을 입력해 주세요.");
-		int purchaseAmount;
+		long purchaseAmount;
 		try {
-			purchaseAmount = scanner.nextInt();
+			purchaseAmount = scanner.nextLong();
 			scanner.nextLine();
 		} catch (Exception e) {
 			throw new IllegalArgumentException("구입금액은 숫자만 입력 가능합니다.");

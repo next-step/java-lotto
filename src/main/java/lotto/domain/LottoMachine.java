@@ -19,15 +19,15 @@ public class LottoMachine {
 		this.purchasedLottos = new PurchasedLottos();
 	}
 
-	public LottoMachine(int purchaseAmount) {
+	public LottoMachine(long purchaseAmount) {
 		this();
 
 		if (purchaseAmount < Lotto.LOTTO_PRICE || purchaseAmount % Lotto.LOTTO_PRICE != 0) {
 			throw new IllegalArgumentException("구입 금액이 올바르지 않습니다.");
 		}
 
-		int purchaseCount = purchaseAmount / Lotto.LOTTO_PRICE;
-		for (int i = 0; i < purchaseCount; i++) {
+		long purchaseCount = purchaseAmount / Lotto.LOTTO_PRICE;
+		for (long i = 0; i < purchaseCount; i++) {
 			this.purchasedLottos.add(new Lotto());
 		}
 	}
@@ -91,19 +91,21 @@ public class LottoMachine {
 		return prizeSituations.stream().sorted().collect(Collectors.toList());
 	}
 
-	public int totalProfit() {
-		int totalProfit = 0;
-		for (Lotto lotto : this.purchasedLottos.getLottos()) {
-			totalProfit += PrizeType.of(lotto.getScore()).prizeMoney.getPrizeMoney();
+	public long totalProfit(List<PrizeSituation> prizeSituations) {
+		long totalProfit = 0;
+		for (PrizeSituation prizeSituation : prizeSituations) {
+			long prizeMoney = prizeSituation.getPrizeType().prizeMoney.getPrizeMoney();
+			int prizeCount = prizeSituation.getPrizeCount();
+			totalProfit += (prizeMoney * prizeCount);
 		}
 		return totalProfit;
 	}
 
-	public double totalProfitRate(int totalProfit, int purchaseAmount) {
+	public double totalProfitRate(long totalProfit, long purchaseAmount) {
 		return new BigDecimal((double) totalProfit / purchaseAmount).setScale(2, RoundingMode.DOWN).doubleValue();
 	}
 
-	public boolean isBenefit(double totalProfit) {
-		return totalProfit > LottoMachine.BREAK_EVEN_POINT;
+	public boolean isBenefit(double totalProfitRate) {
+		return totalProfitRate > LottoMachine.BREAK_EVEN_POINT;
 	}
 }
