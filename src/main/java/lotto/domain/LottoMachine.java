@@ -2,7 +2,10 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import lotto.utils.RandomUtils;
 
@@ -48,6 +51,40 @@ public class LottoMachine {
 
 	public int purchasedLottosSize() {
 		return this.purchasedLottos.size();
+	}
+
+	public void calculateWinCount(List<Integer> winNumbers) {
+		for (Lotto lotto : this.purchasedLottos.getLottos()) {
+			lotto.winCount(winNumbers);
+		}
+	}
+
+	public List<WinStatistics> countWinLotto() {
+		return this.winStatisticsList(this.countWinLottos(this.purchasedLottos.getLottos()));
+	}
+
+	public List<WinStatistics> sortInOrderScore(List<WinStatistics> winStatisticsList) {
+		return winStatisticsList.stream().sorted().collect(Collectors.toList());
+	}
+
+	public List<WinStatistics> winStatisticsList(Map<WinCount, Integer> winCountMap) {
+		return winCountMap.entrySet().stream()
+			.map(entry -> new WinStatistics(PrizeType.of(entry.getKey()), entry.getValue()))
+			.collect(Collectors.toList());
+	}
+
+	public Map<WinCount, Integer> countWinLottos(List<Lotto> lottos) {
+		Map<WinCount, Integer> winLottosCountingMap = new HashMap<>();
+		for (PrizeType prizeType : PrizeType.values()) {
+			winLottosCountingMap.put(prizeType.winCount, 0);
+		}
+		for (Lotto lotto : lottos) {
+			WinCount winCount = lotto.getWinCount();
+			if (winLottosCountingMap.containsKey(winCount)) {
+				winLottosCountingMap.put(winCount, (winLottosCountingMap.get(winCount) + 1));
+			}
+		}
+		return winLottosCountingMap;
 	}
 
 	public int totalProfit() {

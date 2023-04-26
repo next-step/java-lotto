@@ -14,6 +14,10 @@ public class WinCount {
 		this.winCount++;
 	}
 
+	public int getWinCount() {
+		return winCount;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
