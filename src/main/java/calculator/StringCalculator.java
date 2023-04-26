@@ -1,7 +1,13 @@
 package calculator;
 
+import java.util.Objects;
+
 class StringCalculator {
     public int calc(String input) {
+        if(Objects.isNull(input) || input.isBlank()) {
+            throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
+        }
+
         String[] parsed = input.split(" ");
         int result = Integer.parseInt(parsed[0]);
 

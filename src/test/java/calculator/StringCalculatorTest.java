@@ -2,8 +2,10 @@ package calculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -44,5 +46,12 @@ public class StringCalculatorTest {
         int result = stringCalculator.calc(input);
 
         assertThat(result).isEqualTo(5);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 입력값이_null_및_빈공백_문자(String input) {
+        assertThatThrownBy(() -> stringCalculator.calc(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

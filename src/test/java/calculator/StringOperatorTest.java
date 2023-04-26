@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringOperatorTest {
 
@@ -35,6 +36,11 @@ public class StringOperatorTest {
         assertThat(stringOperator).isEqualTo(StringOperator.MUL);
     }
 
+    @Test
+    void 사칙연산_기호가_아님(){
+        assertThatThrownBy(() -> StringOperator.of("&"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
     @Test
     void 두_수를_더한다() {
         int result = StringOperator.ADD.calc(1,2);
