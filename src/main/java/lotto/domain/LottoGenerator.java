@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,8 +27,8 @@ public class LottoGenerator {
     }
 
     private LottoTicket generateLottoNumbers() {
-        Collections.shuffle(lottoNumbers);
-        List<LottoNumber> randomLottoNumbers = lottoNumbers.subList(0, LOTTO_TICKET_SIZE);
+        Collections.shuffle(lottoNumbers, new Random(System.currentTimeMillis()));
+        List<LottoNumber> randomLottoNumbers = new ArrayList<>(lottoNumbers.subList(0, LOTTO_TICKET_SIZE));
         return new LottoTicket(randomLottoNumbers);
     }
 }
