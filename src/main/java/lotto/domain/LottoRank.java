@@ -1,26 +1,19 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
   FIRST(6, 2_000_000_000),
-  SECOND(5, 1_500_000),
-  THIRD(4, 50_000),
-  FOURTH(3, 5_000),
+  SECOND(5, 30_000_000),
+  THIRD(5, 1_500_000),
+  FOURTH(4, 50_000),
+  FIFTH(3, 5_000),
   NOTMATCHED(0, 0);
 
-  private static final int UNDER_RANK = 2;
-  private static final Map<Integer, LottoRank> BY_MATCHEDCOUNT = new HashMap<>();
-
-  static {
-    for (LottoRank lottoRank : values()) {
-      BY_MATCHEDCOUNT.put(lottoRank.matchedCount, lottoRank);
-    }
-  }
+  private static final int NOT_MATCHED_COUNT = 0;
+  private static final int SECOND_OR_THIRD_COUNT = 5;
 
   private final int matchedCount;
   private final int prizeMoney;
@@ -30,26 +23,45 @@ public enum LottoRank {
     this.prizeMoney = prizeMoney;
   }
 
-  public static List<Integer> lottoMatchedNumberList() {
-    return BY_MATCHEDCOUNT.keySet().stream()
-            .filter(v -> v != 0)
+  public static List<LottoRank> lottoMatchedNumberList() {
+    return Arrays.stream(values())
+            .filter(lottoRank -> lottoRank.matchedCount != NOT_MATCHED_COUNT)
             .sorted()
             .collect(Collectors.toList());
   }
 
-  public static LottoRank valueOfMatchedCount(int count) {
-    if (count <= UNDER_RANK) {
-      return BY_MATCHEDCOUNT.get(0);
+  public static LottoRank valueOfMatchedCount(int count, boolean matchBonus) {
+    if (isSecondRank(count, matchBonus)) {
+      return SECOND;
     }
 
-    return BY_MATCHEDCOUNT.get(count);
+    if (isThirdRank(count, matchBonus)) {
+      return THIRD;
+    }
+
+    return Arrays.stream(values())
+            .filter(lottoRank -> lottoRank.matchedCount == count)
+            .findFirst()
+            .orElse(NOTMATCHED);
+  }
+
+  private static boolean isSecondRank(int count, boolean matchBonus) {
+    return matchBonus && count == SECOND_OR_THIRD_COUNT;
+  }
+
+  private static boolean isThirdRank(int count, boolean matchBonus) {
+    return !matchBonus && count == SECOND_OR_THIRD_COUNT;
   }
 
   public static int prizeMoney(LottoRank lottoRank) {
     return lottoRank.prizeMoney;
   }
 
-  public boolean equalsMatchedCount(int matchedCount) {
-    return this.matchedCount == matchedCount;
+  public int matchedCount() {
+    return matchedCount;
+  }
+
+  public boolean equalsPrizeMoney(LottoRank otherLottoRank) {
+    return this.prizeMoney == otherLottoRank.prizeMoney;
   }
 }

@@ -6,7 +6,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-  private final List<LottoTicket> lottoTickets = new ArrayList<>();
+  private final List<LottoTicket> lottoTickets;
+
+  public LottoTickets() {
+    this.lottoTickets = new ArrayList<>();
+  }
+
+  public LottoTickets(List<LottoTicket> lottoTickets) {
+    this.lottoTickets = lottoTickets;
+  }
 
   public List<LottoTicket> unmodifiedLottoTickets() {
     return Collections.unmodifiableList(lottoTickets);
@@ -14,11 +22,11 @@ public class LottoTickets {
 
   public List<Integer> matchesLottoTickets(LottoTicket winningLottoNumbers) {
     return lottoTickets.stream()
-            .map(t -> t.matchLottoCount(winningLottoNumbers))
+            .map(lottoTicket -> lottoTicket.matchLottoCount(winningLottoNumbers))
             .collect(Collectors.toList());
   }
 
-  public void addLottoTicket(LottoStrategy lottoStrategy) {
-    lottoTickets.add(new LottoTicket(lottoStrategy));
+  public void addLottoTicket(LottoTicket lottoTicket) {
+    lottoTickets.add(lottoTicket);
   }
 }

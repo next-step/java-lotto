@@ -21,8 +21,8 @@ public class ResultView {
     System.out.println("당첨 통계");
     System.out.println("---------");
 
-    lottoResult.numbersPerRank().forEach((rankNumber, matchedNumber) -> {
-      System.out.println(rankNumber + "개 일치 (" + LottoRank.prizeMoney(LottoRank.valueOfMatchedCount(rankNumber)) + ")- " + matchedNumber + "개");
+    lottoResult.numbersPerRank().forEach((lottoRank, matchedNumber) -> {
+      System.out.println(lottoRank.matchedCount() + "개 일치 (" + LottoRank.prizeMoney(lottoRank) + "원)- " + matchedNumber + "개");
     });
 
     System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", lottoResult.lottoRateOfReturn(), isProfitable(lottoResult));

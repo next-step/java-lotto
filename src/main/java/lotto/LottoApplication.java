@@ -16,7 +16,8 @@ public class LottoApplication {
     ResultView.showLottoTickets(soldLottoTicket);
 
     List<Integer> winningLottoNumbers = InputView.inputWinningTicketNumbers();
-    LottoGame lottoGame = LottoVendingMachine.startGame(soldLottoTicket, winningLottoNumbers);
+    int bonusNumber = InputView.inputBonusNumber();
+    LottoGame lottoGame = LottoVendingMachine.startGame(soldLottoTicket, winningLottoNumbers, bonusNumber);
 
     ResultView.showLottoResult(LottoVendingMachine.lottoResult(lottoGame));
   }

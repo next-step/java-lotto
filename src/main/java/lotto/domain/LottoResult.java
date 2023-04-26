@@ -4,36 +4,33 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.Price.inputMoney;
+
 public class LottoResult {
 
-  public static final int PER_TICKET = 1000;
   private final List<LottoRank> lottoRecord;
 
-  public LottoResult(List<LottoRank> lottoResults) {
-    this.lottoRecord = lottoResults;
+  public LottoResult(List<LottoRank> lottoRecord) {
+    this.lottoRecord = lottoRecord;
   }
 
   public double lottoRateOfReturn() {
-    return lottoRecord.stream().mapToDouble(LottoRank::prizeMoney).sum() / inputMoney();
+    return lottoRecord.stream().mapToDouble(LottoRank::prizeMoney).sum() / inputMoney(lottoRecord);
   }
 
-  public Map<Integer, Integer> numbersPerRank() {
-    Map<Integer, Integer> numbersPerRankMap = new LinkedHashMap<>();
+  public Map<LottoRank, Integer> numbersPerRank() {
+    Map<LottoRank, Integer> numbersPerRankMap = new LinkedHashMap<>();
 
-    for (int matchedCount : LottoRank.lottoMatchedNumberList()) {
-      numbersPerRankMap.put(matchedCount, matchedCountOfRank(matchedCount));
+    for (LottoRank lottoRank : LottoRank.lottoMatchedNumberList()) {
+      numbersPerRankMap.put(lottoRank, matchedCountOfRank(lottoRank));
     }
 
     return numbersPerRankMap;
   }
 
-  private int matchedCountOfRank(int matchedCount) {
+  private int matchedCountOfRank(LottoRank lottoRankOfList) {
     return (int) lottoRecord.stream()
-            .filter(v -> v.equalsMatchedCount(matchedCount))
+            .filter(lottoRank -> lottoRank.equalsPrizeMoney(lottoRankOfList))
             .count();
-  }
-
-  private int inputMoney() {
-    return lottoRecord.size() * PER_TICKET;
   }
 }
