@@ -1,5 +1,15 @@
+import java.nio.file.Path;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
+
+    public final String PATTERN = "[^0-9+*/\\-/\\s]";
+    public final Pattern VALIDATE_REGEXR = Pattern.compile(PATTERN);
+
     public int calculate(String input) {
+
+        validateData(input);
+
         int result = 0;
         result = plus(input, result);
         result = minus(input, result);
@@ -7,6 +17,13 @@ public class StringCalculator {
         result = divide(input, result);
 
         return result;
+    }
+
+    private void validateData(String input) {
+        if(input == null  ||
+           input.isEmpty()||
+           VALIDATE_REGEXR.matcher(input).find()) throw new IllegalArgumentException();
+
     }
 
     private int divide(String input, int result) {
