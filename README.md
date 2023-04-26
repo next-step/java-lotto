@@ -7,3 +7,13 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 요구사항
+* [x] 사용자에게 문자열 (사칙연산식) 을 입력받는다.
+  * 숫자와 사칙연산 사이에는 반드시 빈 공백 문자열이 있다. 
+* [x] 사칙연산의 계산 우선순위는, 일반적인 우선순위가 아닌 입력 순서에 따른 순서로 결정한다.
+  * 수학에서는 곱셈, 나눗셈이 덧셈, 뺄셈보다 우선순위가 있지만 이를 무시한다.
+* [x] 입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException 을 throw 한다.
+* [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException 을 throw 한다.
+* [x] 문자열을 숫자와 연산자로 분리할 때 String 클래스의 split(" ") 메소드를 활용한다.
+* [x] 반복적인 패턴을 찾아 반복문으로 구현한다.
