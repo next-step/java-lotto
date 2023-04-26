@@ -25,4 +25,17 @@ public class StringCalculatorTest {
     public void minusTest() {
         assertThat(StringCalculator.calculate("1 - 2")).isEqualTo(-1);
     }
+
+    @DisplayName("곱셈 테스트")
+    @Test
+    public void multiplyTest() {
+        assertThat(StringCalculator.calculate("5 * 2")).isEqualTo(10);
+    }
+
+    @DisplayName("나눗셈 테스트")
+    @Test
+    public void divideTest() {
+        assertThat(StringCalculator.calculate("10 / 3")).isEqualTo(3);
+    }
+
 }

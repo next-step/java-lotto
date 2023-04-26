@@ -1,33 +1,13 @@
 package step1;
 
-import step1.operation.MinusOperation;
-import step1.operation.Operation;
-import step1.operation.PlusOperation;
-
-import java.util.Map;
 
 public class StringCalculator {
-
-    private static final Map<String, Operation> operations =
-            Map.of("+", new PlusOperation(),
-                    "-", new MinusOperation());
     private static final String DELIMITER = " ";
 
     public static Integer calculate(String input) {
         validateNullOrBlank(input);
-        String[] split = split(input);
-        Integer sum = null;
-        Operation operation = null;
-        for (String string : split) {
-            if (sum == null) {
-                sum = Integer.parseInt(string);
-            } else if (operations.containsKey(string)) {
-                operation = operations.get(string);
-            } else {
-                sum = operation.operate(sum, Integer.parseInt(string));
-            }
-        }
-        return sum;
+        String[] numbersAndSigns = splitInput(input);
+        return operate(toNumbers(numbersAndSigns), toOperations(numbersAndSigns));
     }
 
     private static void validateNullOrBlank(String input) {
@@ -36,8 +16,31 @@ public class StringCalculator {
         }
     }
 
-    private static String[] split(String input) {
+    private static String[] splitInput(String input) {
         return input.split(DELIMITER);
     }
 
+    private static Numbers toNumbers(String[] numbersAndSigns) {
+        Numbers numbers = new Numbers();
+        for (int i = 0; i < numbersAndSigns.length; i = i + 2) {
+            numbers.add(Numbers.toNumber(numbersAndSigns[i]));
+        }
+        return numbers;
+    }
+
+    private static Operations toOperations(String[] numbersAndSigns) {
+        Operations operations = new Operations();
+        for (int i = 1; i < numbersAndSigns.length; i = i + 2) {
+            operations.add(Operation.toOperation(numbersAndSigns[i]));
+        }
+        return operations;
+    }
+
+    private static int operate(Numbers numbers, Operations operations) {
+        int answer = 0;
+        while (!operations.isEmpty()) {
+            answer = operations.pop().operate(answer, numbers.pop());
+        }
+        return answer;
+    }
 }

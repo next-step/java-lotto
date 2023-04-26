@@ -1,17 +1,12 @@
 package step1;
 
-import step1.operation.Operation;
-import step1.operation.PlusOperation;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 public class Operations {
-
     private final Deque<Operation> operations = new ArrayDeque<>();
 
     public Operations() {
-        operations.add(new PlusOperation());
+        operations.add(Operation.PLUS);
     }
 
     public Operation pop() {
@@ -22,5 +17,7 @@ public class Operations {
         operations.add(operation);
     }
 
-
+    public boolean isEmpty() {
+        return operations.isEmpty();
+    }
 }
