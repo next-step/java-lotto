@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 
-public class regExTest {
+public class InputCheckerTest {
 
     @Test
     @DisplayName("입력받은 문자열 앞뒤 공백 제거 후 빈 공백으로 split 하여 짝수 index -> 숫자, 홀수 index -> 연산자 되도록 구분")

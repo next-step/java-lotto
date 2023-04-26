@@ -5,7 +5,7 @@ import lotto.view.InputView;
 
 import java.util.List;
 
-public class LottoGame {
+public class CalculatorApplication {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
