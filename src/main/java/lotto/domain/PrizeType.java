@@ -12,7 +12,7 @@ public enum PrizeType {
 	public final Score score;
 	public final PrizeMoney prizeMoney;
 
-	PrizeType(int score, int prizeMoney) {
+	PrizeType(int score, long prizeMoney) {
 		this.score = new Score(score);
 		this.prizeMoney = new PrizeMoney(prizeMoney);
 	}

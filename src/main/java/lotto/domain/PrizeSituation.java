@@ -1,28 +1,28 @@
 package lotto.domain;
 
-public class PrizeMoneyBoard implements Comparable<PrizeMoneyBoard> {
+public class PrizeSituation implements Comparable<PrizeSituation> {
 
 	private final PrizeType prizeType;
-	private final int count;
+	private final int prizeCount;
 
-	public PrizeMoneyBoard(PrizeType prizeType, int count) {
+	public PrizeSituation(PrizeType prizeType, int count) {
 		if (prizeType.score.getScore() < 3) {
 			throw new IllegalArgumentException("상금 로또가 아닙니다.");
 		}
 		this.prizeType = prizeType;
-		this.count = count;
+		this.prizeCount = count;
 	}
 
 	public PrizeType getPrizeType() {
 		return prizeType;
 	}
 
-	public int getCount() {
-		return count;
+	public int getPrizeCount() {
+		return prizeCount;
 	}
 
 	@Override
-	public int compareTo(PrizeMoneyBoard o) {
+	public int compareTo(PrizeSituation o) {
 		return this.prizeType.score.getScore() - o.prizeType.score.getScore();
 	}
 }

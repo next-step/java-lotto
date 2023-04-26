@@ -59,32 +59,36 @@ public class LottoMachine {
 		}
 	}
 
-	public List<PrizeMoneyBoard> makePrizeMoneyBoard() {
-		return this.prizeMoneyBoard(this.scoreBoard(this.purchasedLottos.getLottos()));
+	public List<PrizeSituation> makePrizeSituations() {
+		return this.toPrizeSituations(this.makeScoreBoard(this.purchasedLottos.getLottos()));
 	}
 
-	public List<PrizeMoneyBoard> prizeMoneyBoard(Map<Score, Integer> scoreMap) {
-		return scoreMap.entrySet().stream()
-			.map(entry -> new PrizeMoneyBoard(PrizeType.of(entry.getKey()), entry.getValue()))
+	public List<PrizeSituation> toPrizeSituations(Map<Score, Integer> scoreBoard) {
+		return scoreBoard.entrySet().stream()
+			.map(entry -> new PrizeSituation(PrizeType.of(entry.getKey()), entry.getValue()))
 			.collect(Collectors.toList());
 	}
 
-	public Map<Score, Integer> scoreBoard(List<Lotto> lottos) {
+	public Map<Score, Integer> makeScoreBoard(List<Lotto> lottos) {
 		Map<Score, Integer> scoreBoard = new HashMap<>();
 		for (PrizeType prizeType : PrizeType.values()) {
 			scoreBoard.put(prizeType.score, 0);
 		}
 		for (Lotto lotto : lottos) {
-			Score score = lotto.getScore();
-			if (scoreBoard.containsKey(score)) {
-				scoreBoard.put(score, (scoreBoard.get(score) + 1));
-			}
+			fillScoreBoard(scoreBoard, lotto);
 		}
 		return scoreBoard;
 	}
 
-	public List<PrizeMoneyBoard> sortInOrderScore(List<PrizeMoneyBoard> prizeMoneyBoardList) {
-		return prizeMoneyBoardList.stream().sorted().collect(Collectors.toList());
+	private void fillScoreBoard(Map<Score, Integer> scoreBoard, Lotto lotto) {
+		Score score = lotto.getScore();
+		if (scoreBoard.containsKey(score)) {
+			scoreBoard.put(score, (scoreBoard.get(score) + 1));
+		}
+	}
+
+	public List<PrizeSituation> sortInOrderScore(List<PrizeSituation> prizeSituations) {
+		return prizeSituations.stream().sorted().collect(Collectors.toList());
 	}
 
 	public int totalProfit() {
