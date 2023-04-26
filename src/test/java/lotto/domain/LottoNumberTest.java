@@ -10,8 +10,9 @@ class LottoNumberTest {
 
     @Test
     @DisplayName("로또 번호 생성 테스트(객체 동등성 테스트)")
-    void getLottNumber(){
-
+    void createLottoNumber(){
         assertThat(LottoNumber.createLottoNumber(1)).isEqualTo(new LottoNumber(1));
     }
+
+
 }
