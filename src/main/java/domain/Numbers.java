@@ -15,9 +15,7 @@ public class Numbers {
   }
 
   public Numbers(String ...numbers) {
-    List<String> nums = List.of(numbers);
-    validateNumber(nums);
-    this.numbers = parseInt(nums);
+    this(List.of(numbers));
   }
 
   private void validateNumber(List<String> numbers) {
