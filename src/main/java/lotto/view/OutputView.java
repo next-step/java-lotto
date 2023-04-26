@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 
@@ -21,23 +22,23 @@ public class OutputView {
         lottoTicket.getLottoNumbers().forEach(System.out::println);
     }
 
-    public static void printWinningStatistics(int purchaseAmount, LottoTicket lottoTicket) {
+    public static void printWinningStatistics(int purchaseAmount, LottoResult lottoResult) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (Integer key : MATCH_MESSAGES.keySet()) {
-            System.out.println(MATCH_MESSAGES.get(key) + lottoTicket.findRankCount(key) + "개");
+            System.out.println(MATCH_MESSAGES.get(key) + lottoResult.findRankCount(key) + "개");
         }
 
-        System.out.println("총 수익률은 " + calculateReturnRate(purchaseAmount, lottoTicket) + "입니다.");
+        System.out.println("총 수익률은 " + calculateReturnRate(purchaseAmount, lottoResult) + "입니다.");
     }
 
-    public static Double calculateReturnRate(int purchaseAmount, LottoTicket lottoTicket) {
+    public static Double calculateReturnRate(int purchaseAmount, LottoResult lottoResult) {
         double profits = 0;
 
         for (Integer key : MATCH_MESSAGES.keySet()) {
-            profits += lottoTicket.findRankCount(key) * Rank.valueOf(key).getWinningMoney();
+            profits += lottoResult.findRankCount(key) * Rank.valueOf(key).getWinningMoney();
         }
 
         return profits / purchaseAmount;

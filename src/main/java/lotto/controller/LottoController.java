@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -15,8 +16,8 @@ public class LottoController {
         String inputWinningNumbers = InputView.inputAndValidateWinningNumbers();
         List<Integer> winningNumbers = InputView.extractNumbers(inputWinningNumbers);
 
-        lottoTicket.setRankCounts(winningNumbers);
+        LottoResult lottoResult = lottoTicket.calculateResult(winningNumbers);
 
-        OutputView.printWinningStatistics(purchaseAmount, lottoTicket);
+        OutputView.printWinningStatistics(purchaseAmount, lottoResult);
     }
 }

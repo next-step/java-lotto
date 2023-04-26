@@ -25,14 +25,7 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public void setRankCounts(List<Integer> winningNumbers) {
-        rankCounts = lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.countMatchingNumbers(winningNumbers))
-                .map(Rank::valueOf)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-    }
-
-    public long findRankCount(int matchCount) {
-        return rankCounts.getOrDefault(Rank.valueOf(matchCount), 0L);
+    public LottoResult calculateResult(List<Integer> winningNumbers) {
+        return new LottoResult(lottoNumbers, winningNumbers);
     }
 }
