@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 public class RandomLottoNumberGenerator {
     public static final int LOTTERY_MIN_NUMBER = 1;
     public static final int LOTTERY_MAX_NUMBER = 45;
+    public static final int LOTTO_NUMBER_COUNT = 6;
 
     public static List<Integer> generate() {
         List<Integer> numbers = IntStream.rangeClosed(LOTTERY_MIN_NUMBER, LOTTERY_MAX_NUMBER)
@@ -16,6 +17,6 @@ public class RandomLottoNumberGenerator {
 
         Collections.shuffle(numbers);
 
-        return numbers.subList(0, 6);
+        return numbers.subList(0, LOTTO_NUMBER_COUNT);
     }
 }
