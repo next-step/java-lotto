@@ -11,10 +11,10 @@ public class LotteryTicket {
     private final List<LotteryNumber> ticketNumbers;
 
     public LotteryTicket(List<LotteryNumber> ticketNumbers) {
-        this.ticketNumbers = ticketNumbers;
-        if (!isValidSize()) {
+        if (!isValidSize(ticketNumbers.size())) {
             throw new IllegalArgumentException("로또 티켓은 6개의 로또 번호를 가지고 있어야 합니다.");
         }
+        this.ticketNumbers = ticketNumbers;
     }
 
     public static LotteryTicket valueOf(List<Integer> numbers) {
@@ -24,12 +24,16 @@ public class LotteryTicket {
         return new LotteryTicket(lotteryNumbers);
     }
 
-    public int numberCount() {
-        return ticketNumbers.size();
+    public static boolean isValidSize(int size) {
+        return size == LOTTERY_TICKET_SIZE;
     }
 
-    private boolean isValidSize() {
-        return ticketNumbers.size() == LOTTERY_TICKET_SIZE;
+    public static boolean isValidMoney(int money) {
+        return money % LOTTERY_TICKET_PRICE == 0;
+    }
+
+    public int numberCount() {
+        return ticketNumbers.size();
     }
 
     public int match(LotteryTicket ticket) {

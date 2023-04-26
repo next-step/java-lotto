@@ -3,7 +3,6 @@ package lottery.controller;
 import lottery.domain.*;
 import lottery.strategy.ManualTicketIssueStrategy;
 import lottery.strategy.RandomTicketIssueStrategy;
-import lottery.strategy.TicketIssueStrategy;
 import lottery.view.InputView;
 import lottery.view.OutputView;
 
@@ -25,24 +24,23 @@ public class LotteryController {
         int manualNumberOfTicket = InputView.readManualNumberOfTicket(scanner);
         List<LotteryTicket> manualTickets = sellManualTickets(scanner, manualNumberOfTicket);
         purchaseMoney -= manualNumberOfTicket * LotteryTicket.LOTTERY_TICKET_PRICE;
-
-        TicketIssueStrategy randomIssueStrategy = new RandomTicketIssueStrategy();
-        List<LotteryTicket> randomTickets = vendingMachine.sellTickets(purchaseMoney, randomIssueStrategy);
+        List<LotteryTicket> randomTickets = vendingMachine.sellTickets(purchaseMoney, new RandomTicketIssueStrategy());
 
         OutputView.printPurchaseCount(manualTickets.size(), randomTickets.size());
-        List<LotteryTicket> allTickets = getAllTickets(manualTickets, randomTickets);
-
+        List<LotteryTicket> allTickets = mergeTickets(manualTickets, randomTickets);
         OutputView.printPurchaseTickets(allTickets);
 
-        List<Integer> prizeTicketInts = InputView.readPrizeTicketNumbers(scanner);
-        LotteryNumber bonusNumber = new LotteryNumber(InputView.readBonusNumber(scanner));
-
-        LotteryTicket prizeTicketNumbers = LotteryTicket.valueOf(prizeTicketInts);
-        LotteryRound lotteryRound = new LotteryRound(prizeTicketNumbers, bonusNumber);
+        LotteryRound lotteryRound = selectPrizeOfRound(scanner);
         List<LotteryPrize> lotteryPrizes = lotteryRound.matches(allTickets);
-
         OutputView.printResultStatistics(lotteryPrizes);
+
         scanner.close();
+    }
+
+    private LotteryRound selectPrizeOfRound(Scanner scanner) {
+        LotteryTicket prizeTicketNumbers = LotteryTicket.valueOf(InputView.readPrizeTicketNumbers(scanner));
+        LotteryNumber bonusNumber = new LotteryNumber(InputView.readBonusNumber(scanner));
+        return new LotteryRound(prizeTicketNumbers, bonusNumber);
     }
 
     private List<LotteryTicket> sellManualTickets(Scanner scanner, int manualNumberOfTicket) {
@@ -58,7 +56,7 @@ public class LotteryController {
         return manualTickets;
     }
 
-    private List<LotteryTicket> getAllTickets(List<LotteryTicket> manualTickets, List<LotteryTicket> RandomTickets) {
+    private List<LotteryTicket> mergeTickets(List<LotteryTicket> manualTickets, List<LotteryTicket> RandomTickets) {
         return new ArrayList<>() {{
             addAll(manualTickets);
             addAll(RandomTickets);
