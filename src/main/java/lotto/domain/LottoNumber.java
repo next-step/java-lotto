@@ -27,18 +27,22 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber createLottoNumber(int lottoNumber) {
+    public static LottoNumber provideLottoNumber(int lottoNumber) {
         return lottoNumberRepository.get(lottoNumber);
     }
 
-    public static LottoNumber createLottoNumber() {
+    public static LottoNumber provideLottoNumber() {
 
        // lottoNumberRepository
         return null;
     }
 
-
-
+//    public boolean isCorrectRange(LottoNumber lottoNumber){
+//
+//
+//        if(lottoNumber < )
+//
+//    }
 
     @Override
     public boolean equals(Object o) {
