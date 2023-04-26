@@ -27,4 +27,9 @@ public class KLottoGenerator implements LottoGenerator {
     public String getName(){
         return name;
     }
+
+    @Override
+    public int getPrice() {
+        return LOTTO_PRICE;
+    }
 }

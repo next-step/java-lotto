@@ -4,4 +4,5 @@ public interface LottoGenerator {
     List<Integer> generate();
     String getName();
 
+    int getPrice();
 }
