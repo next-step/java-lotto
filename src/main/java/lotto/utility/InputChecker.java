@@ -17,21 +17,30 @@ public class InputChecker {
     }
 
     public void validFormula(List<String> formulaList) {
+        throwRuntimeException(isNumberLastListValue(formulaList));
 
         int index = 0;
         for(String str : formulaList) {
-            if(ValidFormulaIndex(index, str)) {
-                throw new RuntimeException("연속으로 숫자 혹은 사칙연산자가 입력되었습니다.");
-            };
+            throwRuntimeException(validFormulaIndex(index, str));
             index ++;
         }
     }
 
-    public boolean ValidFormulaIndex(int index, String str) {
+    public boolean validFormulaIndex(int index, String str) {
         if(index%2 == 0) {
             return NUMBER_PATTERN_COMPILE.asMatchPredicate().test(str);
         }
         return OPERATOR_PATTERN_COMPILE.asMatchPredicate().test(str);
+    }
+
+    public boolean isNumberLastListValue(List<String> formulaList) {
+        return NUMBER_PATTERN_COMPILE.asMatchPredicate().test(formulaList.get(formulaList.size()-1));
+    }
+
+    public void throwRuntimeException(boolean flag) {
+        if(flag) {
+            throw new RuntimeException("연속으로 숫자 혹은 사칙연산자가 입력되었습니다.");
+        }
     }
 
 }

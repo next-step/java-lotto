@@ -11,7 +11,7 @@ public class regExTest {
 
     @Test
     @DisplayName("입력받은 문자열 앞뒤 공백 제거 후 빈 공백으로 split 하여 짝수 index -> 숫자, 홀수 index -> 연산자 되도록 구분")
-    public void formulaToStrList() {
+    public void formulaToStrListTest() {
         String testInput = " 44 + 55 - 2 / 5 ";
         InputChecker inputChecker = new InputChecker();
 
@@ -35,13 +35,13 @@ public class regExTest {
     public void ValidFormulaIndexTest() {
         InputChecker inputChecker = new InputChecker();
 
-        boolean result = inputChecker.ValidFormulaIndex(0, "5");    // 숫자 index: 숫자
-        boolean result2 = inputChecker.ValidFormulaIndex(2, "55");    // 숫자 index: 2자리 이상
-        boolean result3 = inputChecker.ValidFormulaIndex(0, "");    // 숫자 index: 미입력
-        boolean result4 = inputChecker.ValidFormulaIndex(2, "-");    // 숫자 index: 숫자 외 입력
-        boolean result5 = inputChecker.ValidFormulaIndex(1, "-");   // 연산자 index: 연산자
-        boolean result6 = inputChecker.ValidFormulaIndex(1, "+-");   // 연산자 index: 연산자 여러개
-        boolean result7 = inputChecker.ValidFormulaIndex(3, "123");   // 연산자 index: 연산자 외 입력
+        boolean result = inputChecker.validFormulaIndex(0, "5");    // 숫자 index: 숫자
+        boolean result2 = inputChecker.validFormulaIndex(2, "55");    // 숫자 index: 2자리 이상
+        boolean result3 = inputChecker.validFormulaIndex(0, "");    // 숫자 index: 미입력
+        boolean result4 = inputChecker.validFormulaIndex(2, "-");    // 숫자 index: 숫자 외 입력
+        boolean result5 = inputChecker.validFormulaIndex(1, "-");   // 연산자 index: 연산자
+        boolean result6 = inputChecker.validFormulaIndex(1, "+-");   // 연산자 index: 연산자 여러개
+        boolean result7 = inputChecker.validFormulaIndex(3, "123");   // 연산자 index: 연산자 외 입력
 
         assertThat(result).isTrue();
         assertThat(result2).isTrue();
@@ -51,5 +51,22 @@ public class regExTest {
         assertThat(result6).isFalse();
         assertThat(result7).isFalse();
 
+    }
+
+
+    @Test
+    @DisplayName("입력받은 문자열을 빈 공백으로 split할 경우 마지막 index의 value가 숫자면 True")
+    public void isNumberLastListValueTest() {
+        String testInput = " 44 + 55 - 2 / 5 ";
+        String testInput2 = " 44 + 55 - 2 / ";
+        InputChecker inputChecker = new InputChecker();
+
+        List<String> testInputList = inputChecker.formulaToStrList(testInput);
+        List<String> testInputList2 = inputChecker.formulaToStrList(testInput2);
+        boolean result = inputChecker.isNumberLastListValue(testInputList);
+        boolean result2 = inputChecker.isNumberLastListValue(testInputList2);
+
+        assertThat(result).isTrue();
+        assertThat(result2).isFalse();
     }
 }
