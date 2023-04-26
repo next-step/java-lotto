@@ -11,7 +11,7 @@ public class Numbers {
 
   public Numbers(List<String> numbers) {
     validateNumber(numbers);
-    this.numbers = parseInt(numbers);
+    this.numbers = convertToIntegerQueue(numbers);
   }
 
   public Numbers(String ...numbers) {
@@ -30,7 +30,7 @@ public class Numbers {
     }
   }
 
-  private Queue<Integer> parseInt(List<String> numbers) {
+  private Queue<Integer> convertToIntegerQueue(List<String> numbers) {
     Queue<Integer> parsedNumbers = new LinkedList<>();
     numbers.forEach(number -> parsedNumbers.add(Integer.parseInt(number)));
     return parsedNumbers;
