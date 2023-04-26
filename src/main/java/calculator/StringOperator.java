@@ -1,14 +1,20 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.function.BinaryOperator;
 
 enum StringOperator {
-    ADD("+"), SUB("-"), DIV("/"), MUL("*");
+    ADD("+", (target, source) -> target + source),
+    SUB("-", (target, source) -> target - source),
+    DIV("/", (target, source) -> target / source),
+    MUL("*", (target, source) -> target * source);
 
     final private String operator;
+    final private BinaryOperator<Integer> binaryOperator;
 
-    StringOperator(String operator) {
+    StringOperator(String operator, BinaryOperator<Integer> binaryOperator) {
         this.operator = operator;
+        this.binaryOperator = binaryOperator;
     }
 
     public static StringOperator of(String operator) {
@@ -20,5 +26,9 @@ enum StringOperator {
 
     private boolean is(String operator) {
         return this.operator.equals(operator);
+    }
+
+    public Integer calc(int target, int source) {
+        return this.binaryOperator.apply(target, source);
     }
 }
