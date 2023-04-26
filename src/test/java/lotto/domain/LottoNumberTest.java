@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoNumberTest {
 
     @Test
-    @DisplayName("로또 번호 획득 테스트")
+    @DisplayName("로또 번호 생성 테스트(객체 동등성 테스트)")
     void getLottNumber(){
-         
+
         assertThat(LottoNumber.createLottoNumber(1)).isEqualTo(new LottoNumber(1));
     }
 }
