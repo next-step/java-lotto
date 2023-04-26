@@ -2,6 +2,7 @@ package calculator.domain;
 
 import calculator.Calculator;
 
+import java.util.List;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -22,11 +23,10 @@ public enum Operator {
     }
 
     static public Operator of(String symbol) {
-        for (Operator operator : Operator.values()) {
-            if (operator.symbol.equals(symbol)) {
-                return operator;
-            }
-        }
-        throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+        return List.of(Operator.values())
+                .stream()
+                .filter(operator -> operator.symbol.equals(symbol))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다."));
     }
 }

@@ -58,6 +58,12 @@ public class Content {
     }
 
     private boolean isOperation(String str) {
-        return "+".equals(str) || "-".equals(str) || "*".equals(str) || "/".equals(str);
+        try {
+            Operator.of(str);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 }
