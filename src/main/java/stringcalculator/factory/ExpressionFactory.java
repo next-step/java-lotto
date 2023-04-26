@@ -4,7 +4,10 @@ import stringcalculator.domain.Expression;
 
 public class ExpressionFactory {
 
-  public Expression create(final String[] expression) {
+  private ExpressionFactory() {
+  }
+
+  public static Expression create(final String[] expression) {
     return new Expression(expression);
   }
 }

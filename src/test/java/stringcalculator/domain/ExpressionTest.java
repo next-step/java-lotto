@@ -7,11 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringcalculator.factory.OperatorFactory;
 
 public class ExpressionTest {
-
-  OperatorFactory operatorFactory = new OperatorFactory();
 
   @DisplayName("연산자로 끝나는 연산식의 길이는 짝수이므로 길이가 짝수면 Exception을 던진다.")
   @ParameterizedTest
@@ -29,7 +26,7 @@ public class ExpressionTest {
   public void calculate_throwException_outOfOrderNumber(String input) {
     String[] expession = new InputValue(input).split();
 
-    assertThatThrownBy(() -> new Expression(expession).calculate(operatorFactory))
+    assertThatThrownBy(() -> new Expression(expession).calculate())
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -39,7 +36,7 @@ public class ExpressionTest {
   public void calculate_throwException_outOfOrderOperator(String input) {
     String[] expession = new InputValue(input).split();
 
-    assertThatThrownBy(() -> new Expression(expession).calculate(operatorFactory))
+    assertThatThrownBy(() -> new Expression(expession).calculate())
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -49,6 +46,6 @@ public class ExpressionTest {
   public void calculate_Result(String input, int result) {
     String[] expession = new InputValue(input).split();
 
-    assertThat(new Expression(expession).calculate(operatorFactory)).isEqualTo(result);
+    assertThat(new Expression(expession).calculate()).isEqualTo(result);
   }
 }

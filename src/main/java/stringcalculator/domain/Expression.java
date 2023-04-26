@@ -1,7 +1,6 @@
 package stringcalculator.domain;
 
 import stringcalculator.factory.OperatorFactory;
-import stringcalculator.util.IntConverter;
 
 public class Expression {
 
@@ -15,12 +14,12 @@ public class Expression {
     this.expression = expression;
   }
 
-  public int calculate(OperatorFactory operatorFactory) {
-    int result = IntConverter.convert(expression[0]);
+  public int calculate() {
+    int result = Integer.parseInt(expression[0]);
 
     for (int i = 1; i < expression.length; i = i + 2) {
-      Operator operator = operatorFactory.create((expression[i]));
-      result = operator.operate(result, IntConverter.convert(expression[i + 1]));
+      Operator operator = OperatorFactory.create(expression[i]);
+      result = operator.operate(result, Integer.parseInt(expression[i + 1]));
     }
 
     return result;
