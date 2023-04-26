@@ -6,21 +6,20 @@ import java.util.List;
 public class LottoGame {
 
   private final LottoTickets soldLottoTickets;
-  private final LottoTicket winningLottoTicket;
-  private final LottoNumber bonusNumber;
+
+  private final WinningTicket winningTicket;
 
   public LottoGame(LottoTickets lottoTickets, LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
     this.soldLottoTickets = lottoTickets;
-    this.winningLottoTicket = winningLottoTicket;
-    this.bonusNumber = bonusNumber;
+    this.winningTicket = new WinningTicket(winningLottoTicket, bonusNumber);
   }
 
   public LottoResult play() {
     List<LottoRank> lottoRanks = new ArrayList<>();
 
     for (LottoTicket lottoTicket : soldLottoTickets.unmodifiedLottoTickets()) {
-      int matchedCount = lottoTicket.matchLottoCount(winningLottoTicket);
-      boolean hasBonusNumber = lottoTicket.containsLottoNumbers(bonusNumber);
+      int matchedCount = winningTicket.matchLottoCount(lottoTicket);
+      boolean hasBonusNumber = winningTicket.containsBonusNumber(lottoTicket);
 
       lottoRanks.add(LottoRank.valueOfMatchedCount(matchedCount, hasBonusNumber));
     }
