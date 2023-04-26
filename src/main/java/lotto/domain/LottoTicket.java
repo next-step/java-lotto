@@ -1,15 +1,11 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
-    private Map<Rank, Long> rankCounts = new HashMap<>();
 
     public LottoTicket(int lottoCount) {
         this.lottoNumbers = createLotto(lottoCount);
