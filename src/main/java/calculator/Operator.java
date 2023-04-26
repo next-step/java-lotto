@@ -12,12 +12,16 @@ public enum Operator {
         }
     };
 
-    private static final Map<String, Operator> operatorSignMap = Arrays.stream(Operator.values())
-            .collect(Collectors.toMap(operator -> operator.sign, operator -> operator));
+    private static final Map<String, Operator> operatorSignMap = getOperatorSignMap();
     private final String sign;
 
     Operator(String sign) {
         this.sign = sign;
+    }
+
+    private static Map<String, Operator> getOperatorSignMap() {
+        return Arrays.stream(Operator.values())
+                .collect(Collectors.toMap(operator -> operator.sign, operator -> operator));
     }
 
     public static Operator fromSign(String sign) {

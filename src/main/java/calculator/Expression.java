@@ -10,13 +10,21 @@ public class Expression {
     public Expression(String stringExpression) {
         operands = new ArrayList<>();
         operators = new ArrayList<>();
-        var split = stringExpression.split(" ");
-        for (int i = 0; i < split.length; ++i) {
-            if (i % 2 == 0) {
-                operands.add(Integer.parseInt(split[i]));
-            } else {
-                operators.add(Operator.fromSign(split[i]));
-            }
+        var tokens = stringExpression.split(" ");
+        for (var token : tokens) {
+            addToken(token);
         }
+    }
+
+    private void addToken(String token) {
+        if (isNumeric(token)) {
+            operands.add(Integer.parseInt(token));
+            return;
+        }
+        operators.add(Operator.fromSign(token));
+    }
+
+    private Boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");
     }
 }
