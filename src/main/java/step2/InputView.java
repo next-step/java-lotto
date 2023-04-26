@@ -1,7 +1,20 @@
 package step2;
 
+import java.util.Scanner;
+
 public class InputView {
     private static final int LOTTO_PRICE = 1000;
+
+    public LottoBuyRequest buyLotto() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("구입금액을 입력해 주세요.");
+        int amount = scanner.nextInt();
+        int lottoCount = getLottoCnt(amount);
+        System.out.println(lottoCount + "를 구매하였습니다.");
+        return new LottoBuyRequest(amount, lottoCount);
+    }
 
     public int getLottoCnt(int amount) {
         amountValidate(amount);
