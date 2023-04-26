@@ -1,14 +1,23 @@
 package lotto.view;
 
-import lotto.domain.LottoReward;
-import lotto.domain.WinningStatistics;
+import lotto.domain.*;
 
+import java.util.List;
 import java.util.Map;
 
 public final class ResultView {
 
     private ResultView() {
         throw new IllegalCallerException("잘못된 객체생성 입니다.");
+    }
+
+    public static void showAvailableLottoCount(PurchasedAmount purchasedAmount) {
+        System.out.printf("%d개를 구매했습니다.\n", purchasedAmount.getAvailableLottoCount());
+    }
+
+    public static void showIssuedLottoTickets(LottoTickets lottoTickets) {
+        List<LottoNumbers> tickets = lottoTickets.getTickets();
+        tickets.forEach(System.out::println);
     }
 
     public static void showResult(WinningStatistics winningStatistics) {

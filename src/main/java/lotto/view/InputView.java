@@ -1,10 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTickets;
-import lotto.domain.PurchasedAmount;
-
-import java.util.List;
 import java.util.Scanner;
 
 public final class InputView {
@@ -24,15 +19,6 @@ public final class InputView {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return SCANNER.nextLine();
-    }
-
-    public static void showAvailableLottoCount(PurchasedAmount purchasedAmount) {
-        System.out.printf("%d를 구매했습니다.\n", purchasedAmount.getAvailableLottoCount());
-    }
-
-    public static void showIssuedLottoTickets(LottoTickets lottoTickets) {
-        List<LottoNumbers> tickets = lottoTickets.getTickets();
-        tickets.forEach(System.out::println);
     }
 
 }

@@ -12,10 +12,10 @@ public class LottoApplication {
     public static void main(String[] args) {
 
         PurchasedAmount purchasedAmount = new PurchasedAmount(InputView.showPaymentConsole());
-        InputView.showAvailableLottoCount(purchasedAmount);
+        ResultView.showAvailableLottoCount(purchasedAmount);
 
         LottoTickets lottoTickets = LottoTickets.issue(purchasedAmount);
-        InputView.showIssuedLottoTickets(lottoTickets);
+        ResultView.showIssuedLottoTickets(lottoTickets);
 
         LottoWinningNumber lottoWinningNumber = LottoWinningNumber.create(InputView.showLastWeekWinningNumbersConsole());
 
@@ -24,5 +24,5 @@ public class LottoApplication {
 
         ResultView.showResult(winningStatistics);
     }
-    
+
 }
