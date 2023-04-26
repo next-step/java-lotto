@@ -21,5 +21,11 @@ public class ResultView {
 	public static void printPrizeSituations(List<PrizeSituation> prizeSituations) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
+		for (PrizeSituation prizeSituation : prizeSituations) {
+			int score = prizeSituation.getPrizeType().score.getScore();
+			long prizeMoney = prizeSituation.getPrizeType().prizeMoney.getPrizeMoney();
+			int prizeCount = prizeSituation.getPrizeCount();
+			System.out.printf("%d개 일치 (%d원)- %d개%n", score, prizeMoney, prizeCount);
+		}
 	}
 }
