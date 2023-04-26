@@ -10,15 +10,7 @@ public class Parser {
 
   private Parser() {}
 
-  private static class LazyHolder {
-    private static final Parser INSTANCE = new Parser();
-  }
-
-  public static Parser getInstance() {
-    return LazyHolder.INSTANCE;
-  }
-
-  public Expression parse(String input) {
+  public static Expression parse(String input) {
     List<String> elements = Arrays.asList(input.split(" "));
     Queue<Operator> operators = new LinkedList<>();
     Queue<Number> numbers = new LinkedList<>();
@@ -34,7 +26,7 @@ public class Parser {
     return new Expression(operators, numbers);
   }
 
-  private void put(Queue<Operator> operators, Queue<Number> numbers, String element, int index) {
+  private static void put(Queue<Operator> operators, Queue<Number> numbers, String element, int index) {
     if (isEven(index)) {
       numbers.add(new Number(element));
       return;
@@ -43,7 +35,7 @@ public class Parser {
     operators.add(Operator.from(element));
   }
 
-  private boolean isEven(int target) {
+  private static boolean isEven(int target) {
     return target % 2 == 0;
   }
 }
