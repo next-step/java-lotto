@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -10,29 +12,33 @@ public class LottoNumber {
     private static final int BEGIN_OF_LOTTO_NUMBER = 1;
     private static final int END_OF_LOTTO_NUMBER = 45;
     private static final Map<Integer, LottoNumber> lottoNumberRepository;
+    private static final List<Integer> repositoryKeySet;
     private final int lottoNumber;
 
     static {
         lottoNumberRepository = IntStream.range(BEGIN_OF_LOTTO_NUMBER, END_OF_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
+
+        repositoryKeySet = new ArrayList<>(lottoNumberRepository.keySet());
     }
 
     public LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber createLottoNumber(int lottoNumber){
+    public static LottoNumber createLottoNumber(int lottoNumber) {
         return lottoNumberRepository.get(lottoNumber);
     }
 
     public static LottoNumber createLottoNumber() {
 
-        lottoNumberRepository.entrySet();
+       // lottoNumberRepository
         return null;
     }
 
-//    private LottoNumber extract
+
+
 
     @Override
     public boolean equals(Object o) {
