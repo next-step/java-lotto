@@ -1,25 +1,26 @@
 package calculator;
 
-public class StringCalculator {
+class StringCalculator {
     public int calc(String input) {
         String[] parsed = input.split(" ");
 
         int result = Integer.parseInt(parsed[0]);
 
         for (int i = 1; i < parsed.length; i += 2) {
-            String operation = parsed[i];
+            StringOperator operator = StringOperator.of(parsed[i]);
             int target = Integer.parseInt(parsed[i + 1]);
-            switch (operation) {
-                case "+":
+
+            switch (operator) {
+                case ADD:
                     result += target;
                     break;
-                case "-":
+                case SUB:
                     result -= target;
                     break;
-                case "/":
+                case DIV:
                     result /= target;
                     break;
-                case "*":
+                case MUL:
                     result *= target;
                     break;
                 default:
