@@ -11,18 +11,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankTest {
-
-  private static Stream<Arguments> provide_일치하는_개수에_따른_상금_반환() {
-    return Stream.of(
-            Arguments.arguments(6, false, 2_000_000_000),
-            Arguments.arguments(5, true, 30_000_000),
-            Arguments.arguments(5, false, 1_500_000),
-            Arguments.arguments(4, false, 50_000),
-            Arguments.arguments(3, false, 5_000),
-            Arguments.arguments(2, true, 0)
-    );
-  }
-
   @Test
   @DisplayName("로또 일치 개수 리스트 반환 테스트")
   public void create_로또_일치_개수_리스트() {
@@ -43,5 +31,16 @@ public class LottoRankTest {
     LottoRank lottoRank = LottoRank.valueOfMatchedCount(5, true);
 
     assertThat(LottoRank.prizeMoney(lottoRank)).isEqualTo(30_000_000);
+  }
+
+  private static Stream<Arguments> provide_일치하는_개수에_따른_상금_반환() {
+    return Stream.of(
+            Arguments.arguments(6, false, 2_000_000_000),
+            Arguments.arguments(5, true, 30_000_000),
+            Arguments.arguments(5, false, 1_500_000),
+            Arguments.arguments(4, false, 50_000),
+            Arguments.arguments(3, false, 5_000),
+            Arguments.arguments(2, true, 0)
+    );
   }
 }
