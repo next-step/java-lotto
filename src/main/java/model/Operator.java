@@ -1,8 +1,6 @@
 package model;
 
-public class Operator {
+public interface Operator {
 
-    private String function;
-
-
+    int getResult(int v1, int v2);
 }

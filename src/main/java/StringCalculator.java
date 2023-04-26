@@ -1,3 +1,5 @@
+import model.OperatorFactory;
+
 import java.nio.file.Path;
 import java.util.regex.Pattern;
 
@@ -34,18 +36,7 @@ public class StringCalculator {
 
 
             if(f != 0 && s != 0 && operator != null){
-                if(operator.equals("*"))
-                    f = multiple(f, s);
-
-                if(operator.equals("-"))
-                    f = minus(f,s);
-
-                if(operator.equals("/"))
-                    f = divide(f,s);
-
-                if(operator.equals("+"))
-                    f = plus(f,s);
-
+                f = OperatorFactory.getOperator(operator).getResult(f,s);
                 s=0;
                 operator=null;
             }
