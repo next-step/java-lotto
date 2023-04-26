@@ -23,12 +23,16 @@ public class LottoNumber {
     }
 
     public static LottoNumber createLottoNumber(int lottoNumber){
-        return new LottoNumber(lottoNumber);
+        return lottoNumberRepository.get(lottoNumber);
     }
 
     public static LottoNumber createLottoNumber() {
+
+        lottoNumberRepository.entrySet();
         return null;
     }
+
+//    private LottoNumber extract
 
     @Override
     public boolean equals(Object o) {
