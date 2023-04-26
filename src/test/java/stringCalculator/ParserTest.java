@@ -22,7 +22,7 @@ class ParserTest {
   @DisplayName("숫자와 연산자가 번갈아 등장하지 않으면 예외가 발생한다")
   void alternateTest() {
     Parser parser = Parser.getInstance();
-    assertThatThrownBy(() -> parser.parse("1 + d + 2 * 3 / 2 +"))
+    assertThatThrownBy(() -> parser.parse("1 + + 2 * 3 / 2 +"))
         .isInstanceOf(NumberFormatException.class);
   }
 }
