@@ -5,6 +5,8 @@ import lotto.utility.InputChecker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -20,13 +22,13 @@ public class CalculatorTest {
         List<String> formulaList = inputChecker.formulaToStrList(testInput);
         Calculator calculator = new Calculator(formulaList);
 
-        List<Double> result = calculator.makeNumberList();
+        List<String> result = calculator.makeNumberList();
 
         assertThat(result.size()).isEqualTo(4);
-        assertThat(result.get(0)).isEqualTo(44);
-        assertThat(result.get(1)).isEqualTo(55);
-        assertThat(result.get(2)).isEqualTo(2);
-        assertThat(result.get(3)).isEqualTo(5);
+        assertThat(result.get(0)).isEqualTo("44");
+        assertThat(result.get(1)).isEqualTo("55");
+        assertThat(result.get(2)).isEqualTo("2");
+        assertThat(result.get(3)).isEqualTo("5");
     }
 
     @Test
@@ -70,15 +72,15 @@ public class CalculatorTest {
         List<String> formulaList = inputChecker.formulaToStrList(testInput);
         Calculator calculator = new Calculator(formulaList);
 
-        Double result = calculator.calculate(4.0, 5.0, "+");
-        Double result2 = calculator.calculate(4.0, 5.0, "-");
-        Double result3 = calculator.calculate(4.0, 5.0, "*");
-        Double result4 = calculator.calculate(3.0, 2.0, "/");
+        String result = calculator.calculate("4", "5", "+");
+        String result2 = calculator.calculate("4", "5", "-");
+        String result3 = calculator.calculate("4", "5", "*");
+        String result4 = calculator.calculate("3", "2", "/");
 
-        assertThat(result).isEqualTo(9);
-        assertThat(result2).isEqualTo(-1);
-        assertThat(result3).isEqualTo(20);
-        assertThat(result4).isEqualTo(1.5);
+        assertThat(result).isEqualTo("9");
+        assertThat(result2).isEqualTo("-1");
+        assertThat(result3).isEqualTo("20");
+        assertThat(result4).isEqualTo("1.5");
     }
 
     @Test
@@ -91,9 +93,8 @@ public class CalculatorTest {
 
         calculator.calculateFormula();
 
-        Double result = calculator.showResult();
+        String result = calculator.showResult();
 
         assertThat(result).isEqualTo(18);
     }
-
 }

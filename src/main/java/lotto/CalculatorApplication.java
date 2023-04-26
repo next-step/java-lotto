@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Calculator;
 import lotto.utility.InputChecker;
 import lotto.view.InputView;
 
@@ -15,5 +16,11 @@ public class CalculatorApplication {
         List<String> formulaList = inputChecker.formulaToStrList(formula);
 
         inputChecker.validFormula(formulaList);
+
+        Calculator calculator = new Calculator(formulaList);
+
+        calculator.calculateFormula();
+
+        System.out.println(calculator.showResult());
     }
 }
