@@ -14,8 +14,7 @@ public class Operators {
   }
 
   public Operators(String ...operators) {
-    this.operators = new LinkedList<>();
-    this.operators.addAll(Arrays.asList(operators));
+    this(new LinkedList<>(Arrays.asList(operators)));
   }
 
   public String poll() {
