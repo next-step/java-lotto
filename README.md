@@ -39,5 +39,11 @@
 * 자바 코드 컨벤션을 지키면서 프로그래밍한다.
 * else 예약어를 쓰지 않는다.
 
+
+## [step3]
+### 기능 요구사항
+* 2등을 추가한다
+  * 로또 번호를 하나 더 추가한다 (2등용) 
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
