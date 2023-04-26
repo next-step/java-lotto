@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ public interface InputViewV2 {
 
     List<Integer> lastWeekWinningNumbers();
 
-    Number bonusBall();
+    LottoNumber bonusBall();
 }

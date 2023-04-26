@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class RetryInputView implements InputViewV2 {
     }
 
     @Override
-    public Number bonusBall() {
+    public LottoNumber bonusBall() {
         try {
             return inputViewV2.bonusBall();
         } catch (Exception e) {

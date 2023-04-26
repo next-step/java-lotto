@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,9 +27,9 @@ public class ShuffleStudyTest {
     @Disabled
     @DisplayName("shuffle (1 - 45) Number 테스트")
     void test02() {
-        List<Number> numbers = IntStream.range(1, 45).mapToObj(Number::new).collect(Collectors.toList());
-        Collections.shuffle(numbers);
+        List<LottoNumber> lottoNumbers = IntStream.range(1, 45).mapToObj(LottoNumber::new).collect(Collectors.toList());
+        Collections.shuffle(lottoNumbers);
 
-        System.out.println(numbers);
+        System.out.println(lottoNumbers);
     }
 }

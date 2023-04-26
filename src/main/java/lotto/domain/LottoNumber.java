@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Number implements Comparable<Number> {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         if (this.validate(number)) {
             throw new IllegalArgumentException("숫자는 1~45사이만 가능합니다.");
         }
@@ -23,7 +23,7 @@ public class Number implements Comparable<Number> {
     }
 
     @Override
-    public int compareTo(Number o) {
+    public int compareTo(LottoNumber o) {
         return this.number - o.number;
     }
 
@@ -31,8 +31,8 @@ public class Number implements Comparable<Number> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Number number1 = (Number) o;
-        return number == number1.number;
+        LottoNumber lottoNumber1 = (LottoNumber) o;
+        return number == lottoNumber1.number;
     }
 
     @Override

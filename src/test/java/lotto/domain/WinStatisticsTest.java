@@ -14,7 +14,7 @@ public class WinStatisticsTest {
     void test01() {
         Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 4, 5, 11),
                                    new Lotto(11, 12, 13, 14, 15, 16));
-        WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new Number(45));
+        WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45));
         WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
 
         List<WinType> winTypes = winStatistics.winStatistics();
@@ -27,7 +27,7 @@ public class WinStatisticsTest {
     void test02() {
         Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(11, 12, 13, 14, 15, 16),
                                    new Lotto(11, 12, 13, 14, 15, 16));
-        WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new Number(45));
+        WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45));
         WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
 
         BigDecimal rateOfReturn = winStatistics.rateOfReturn();

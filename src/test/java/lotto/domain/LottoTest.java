@@ -55,16 +55,16 @@ public class LottoTest {
     void test06() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        assertThat(lotto.matchBonusNumber(new Number(6))).isEqualTo(1);
+        assertThat(lotto.matchBonusNumber(new LottoNumber(6))).isEqualTo(1);
     }
 
-    private Number[] getNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return new Number[]{new Number(number1), new Number(number2), new Number(number3), new Number(number4),
-                new Number(number5), new Number(number6)};
+    private LottoNumber[] getNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
+        return new LottoNumber[]{new LottoNumber(number1), new LottoNumber(number2), new LottoNumber(number3), new LottoNumber(number4),
+                new LottoNumber(number5), new LottoNumber(number6)};
     }
 
-    private static List<Number> getWinNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return List.of(new Number(number1), new Number(number2), new Number(number3),
-                       new Number(number4), new Number(number5), new Number(number6));
+    private static List<LottoNumber> getWinNumbers(int number1, int number2, int number3, int number4, int number5, int number6) {
+        return List.of(new LottoNumber(number1), new LottoNumber(number2), new LottoNumber(number3),
+                       new LottoNumber(number4), new LottoNumber(number5), new LottoNumber(number6));
     }
 }

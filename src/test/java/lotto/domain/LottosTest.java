@@ -37,7 +37,7 @@ class LottosTest {
     void test04() {
         Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 4, 5, 11));
 
-        List<WinType> winTypes = lottos.confirmWins(new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new Number(45)));
+        List<WinType> winTypes = lottos.confirmWins(new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45)));
 
         assertThat(winTypes).containsExactly(WinType.FIRST, WinType.THIRD);
     }

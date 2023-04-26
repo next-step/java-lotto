@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,9 +61,9 @@ public class DefaultInputViewV2 implements InputViewV2 {
     }
 
     @Override
-    public Number bonusBall() {
+    public LottoNumber bonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new Number(scanner.nextInt());
+        return new LottoNumber(scanner.nextInt());
     }
 
     private List<Integer> convertNumbers(String strNumbers) {
