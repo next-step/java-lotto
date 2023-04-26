@@ -12,10 +12,6 @@ public class LottoTickets {
     this.lottoTickets = new ArrayList<>();
   }
 
-  public LottoTickets(List<LottoTicket> lottoTickets) {
-    this.lottoTickets = lottoTickets;
-  }
-
   public List<LottoTicket> unmodifiedLottoTickets() {
     return Collections.unmodifiableList(lottoTickets);
   }
