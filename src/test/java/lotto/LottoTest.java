@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.data.Lotto;
+import lotto.data.LottoWinningPrice;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -28,17 +29,17 @@ public class LottoTest {
 
     @Test
     void 당첨번호와_몇개일치() {
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         assertThat(matchWinningNumbers(winningNumbers, new Lotto(List.of(1, 2, 8, 9, 10, 11)))).isEqualTo(2);
     }
 
     @Test
     void 로또리스트의_당첨개수() {
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(List.of(2, 3, 7, 8, 9, 10)));
 
-        assertThat(getWinningNumberList(winningNumbers, lottoList).get(2)).isEqualTo(1);
+        assertThat(getWinningNumberList(winningNumbers, lottoList).get(LottoWinningPrice.MATCHED_2)).isEqualTo(1);
     }
 
     @Test
@@ -52,6 +53,11 @@ public class LottoTest {
         int returnValue = 140000;
         int purchaseAmout = 14000;
         assertThat(getRateOfReturn(returnValue, purchaseAmout)).isEqualTo("10.00");
+    }
+
+    @Test
+    void enum테스트() {
+        assertThat(LottoWinningPrice.getLottoNumberByNumber(5).getWinningPrice()).isEqualTo(1500000);
     }
 
 }

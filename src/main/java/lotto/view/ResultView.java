@@ -1,12 +1,12 @@
 package lotto.view;
 
 import lotto.data.Lotto;
-import lotto.data.LottoNumber;
+import lotto.data.LottoWinningPrice;
 
 import java.util.List;
 import java.util.Map;
 
-import static lotto.data.LottoNumber.getLottoNumberByNumber;
+import static lotto.data.LottoWinningPrice.getLottoNumberByNumber;
 
 public class ResultView {
 
@@ -25,18 +25,18 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void viewWinningNumberList(Map<Integer, Integer> winningNumberList) {
+    public static void viewWinningNumberList(Map<LottoWinningPrice, Integer> winningNumberList) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Integer matchedWinningNumbers : winningNumberList.keySet()) {
-            viewWinningNumber(matchedWinningNumbers, winningNumberList.get(matchedWinningNumbers));
+        for (LottoWinningPrice lottoWinningPrice : winningNumberList.keySet()) {
+            viewWinningNumber(lottoWinningPrice.getMatchedNumber(), winningNumberList.get(lottoWinningPrice.getMatchedNumber()));
         }
     }
 
     private static void viewWinningNumber(int matchedWinningNumbers, int matchedWinningNumberCount) {
-        LottoNumber lottoNumber = getLottoNumberByNumber(matchedWinningNumbers);
-        if (lottoNumber.getWinningPrice() > 0) {
-            System.out.println(lottoNumber.getMatchedNumber() + "개 일치 (" + lottoNumber.getWinningPrice() + "원)- "
+        LottoWinningPrice lottoWinningPrice = getLottoNumberByNumber(matchedWinningNumbers);
+        if (lottoWinningPrice.getWinningPrice() > 0) {
+            System.out.println(lottoWinningPrice.getMatchedNumber() + "개 일치 (" + lottoWinningPrice.getWinningPrice() + "원)- "
                     + matchedWinningNumberCount + "개");
         }
     }

@@ -19,7 +19,7 @@ public class LottoApplication {
         List<Lotto> lottoList = getLottoList(amount);
         viewLottoList(lottoList);
 
-        List<Integer> winningNumbers = getWinningNumbers();
+        Lotto winningNumbers = getWinningNumbers();
         viewWinningNumberList(getWinningNumberList(winningNumbers, lottoList));
         viewRateOfReturn(getRateOfReturn(getAllReturnAmount(winningNumbers, lottoList), purchaseAmount));
     }

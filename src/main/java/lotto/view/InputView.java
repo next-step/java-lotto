@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.data.Lotto;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +24,7 @@ public class InputView {
         return price;
     }
 
-    public static List<Integer> getWinningNumbers() {
+    public static Lotto getWinningNumbers() {
         System.out.println(QUESTION_WINNING_NUMBERS);
         String price = scanner.next();
         System.out.println();
@@ -35,6 +37,6 @@ public class InputView {
 
         checkWinningNumbers(winningNumbers);
 
-        return winningNumbers;
+        return new Lotto(winningNumbers);
     }
 }
