@@ -20,10 +20,10 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoTicket> generate(int count) {
-        return IntStream.range(0, count)
+    public LottoTickets generate(int count) {
+        return new LottoTickets(IntStream.range(0, count)
                 .mapToObj(i -> generateLottoNumbers())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     private LottoTicket generateLottoNumbers() {

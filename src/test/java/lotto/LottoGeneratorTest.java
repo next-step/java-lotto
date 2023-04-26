@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ public class LottoGeneratorTest {
     @Test
     void generate() {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<LottoTicket> lottoTickets = lottoGenerator.generate(3);
-        assertThat(lottoTickets).hasSize(3);
+        LottoTickets lottoTickets = lottoGenerator.generate(3);
+        assertThat(lottoTickets.size()).isEqualTo(3);
     }
 }
