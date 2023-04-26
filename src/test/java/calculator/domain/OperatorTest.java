@@ -17,7 +17,7 @@ class OperatorTest {
         assertThat(Operator.find("+")).isEqualTo(Operator.PLUS);
         assertThat(Operator.find("-")).isEqualTo(Operator.MINUS);
         assertThat(Operator.find("*")).isEqualTo(Operator.MULTIPLY);
-        assertThat(Operator.find("/")).isEqualTo(Operator.DIVISION);
+        assertThat(Operator.find("/")).isEqualTo(Operator.DIVIDE);
     }
 
     @ParameterizedTest
