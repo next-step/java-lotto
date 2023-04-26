@@ -5,17 +5,17 @@ import java.util.Map;
 public class WinningStatistics {
 
     private final Map<LottoReward, Integer> accumulatedCountByLottoReward = LottoReward.makeCountMap();
-    private final LottoWinningNumber lottoWinningNumber;
+    private final LottoNumbers winningNumber;
     private final LottoTickets lottoTickets;
 
-    public WinningStatistics(LottoWinningNumber lottoWinningNumber, LottoTickets lottoTickets) {
-        this.lottoWinningNumber = lottoWinningNumber;
+    public WinningStatistics(LottoNumbers winningNumbers, LottoTickets lottoTickets) {
+        this.winningNumber = winningNumbers;
         this.lottoTickets = lottoTickets;
     }
 
     public void calculate() {
         for (LottoNumbers lottoNumbers : lottoTickets.getTickets()) {
-            long matchedCount = lottoNumbers.matchCount(lottoWinningNumber);
+            long matchedCount = lottoNumbers.countToMatchedWinnerNumbers(winningNumber);
             accumulateCount(matchedCount);
         }
         accumulatedCountByLottoReward.remove(LottoReward.NONE);
