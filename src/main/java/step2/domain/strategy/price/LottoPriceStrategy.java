@@ -1,6 +1,6 @@
-package step2.domain.strategy;
+package step2.domain.strategy.price;
 
-public class LottoStrategy implements Strategy{
+public class LottoPriceStrategy implements Strategy {
     private static int LottoPurchase = 1000;
 
     @Override

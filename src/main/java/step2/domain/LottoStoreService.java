@@ -1,17 +1,14 @@
 package step2.domain;
 
-import step2.domain.strategy.Strategy;
+import step2.domain.strategy.price.Strategy;
 
 public class LottoStoreService {
-
-    public LottoStoreService() {
-    }
 
     public static LottoStoreService createLottoStoreService() {
         return new LottoStoreService();
     }
 
-    public int getLotto(Strategy strategy, int purchaseAmount) {
+    public int getLottoCount(Strategy strategy, int purchaseAmount) {
         return strategy.buyLotto(purchaseAmount);
     }
 }
