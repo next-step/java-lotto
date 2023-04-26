@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,14 +16,14 @@ class LottoNumberTest {
         assertThat(LottoNumber.provideLottoNumber(1)).isEqualTo(new LottoNumber(1));
     }
 
-    @Test
-    @DisplayName("로또 번호 자동 생성 테스트(번호 범위 1~45)")
-    void autoCreateLottoNumber(){
+    @ParameterizedTest
+    @ValueSource(ints = {1,3,4,5,6,7,43})
+    @DisplayName("로또 번호 범위 테스트")
+    void autoCreateLottoNumber(int number){
 
-        LottoNumber beginOfLottoNumber = new LottoNumber(1);
-        LottoNumber endOfLottoNumber = new LottoNumber(45);
+        LottoNumber lottoNumber = LottoNumber.provideLottoNumber(number);
 
-        assertThat(LottoNumber.provideLottoNumber())
+        assertThat(lottoNumber.isCorrectRange(lottoNumber)).isTrue();
     }
 
 
