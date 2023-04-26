@@ -41,7 +41,7 @@ public class Numbers {
     return numbers.isEmpty();
   }
 
-  public Integer poll() {
+  public Integer nextValue() {
     return numbers.poll();
   }
 }

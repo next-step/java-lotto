@@ -17,7 +17,11 @@ public class Operators {
     this(new LinkedList<>(Arrays.asList(operators)));
   }
 
-  public String poll() {
+  public String nextOperator() {
     return operators.poll();
+  }
+
+  public boolean isEmpty() {
+    return operators.isEmpty();
   }
 }
