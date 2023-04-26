@@ -36,7 +36,7 @@ public class LottoTest {
 		for (Integer number : Arrays.asList(1, 3, 5, 14, 22, 45)) {
 			lotto.selectLottoNumbers(number);
 		}
-		assertThat(lotto.winCount(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(new WinCount(3));
+		assertThat(lotto.calculateScore(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(new Score(3));
 	}
 }
 

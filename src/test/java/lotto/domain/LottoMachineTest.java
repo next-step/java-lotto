@@ -15,7 +15,7 @@ public class LottoMachineTest {
 	@DisplayName("구매한 만큼의 로또를 생성한다.")
 	@Test
 	void test1() {
-		assertThat(new LottoMachine(14000).purchasedLottosSize()).isEqualTo(14);
+		assertThat(new LottoMachine(14000).purchasedCount()).isEqualTo(14);
 	}
 
 	@DisplayName("구매한 만큼의 로또를 생성한다. - 예외 케이스")

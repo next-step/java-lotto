@@ -8,16 +8,16 @@ public class Lotto {
 	public static final int LOTTO_PRICE = 1000;
 
 	private final SelectedNumbers selectedNumbers;
+	private final Score score;
 
-	private final WinCount winCount;
 	public Lotto() {
 		this.selectedNumbers = new SelectedNumbers();
-		this.winCount = new WinCount(0);
+		this.score = new Score(0);
 	}
 
-	public Lotto(int winCount) {
+	public Lotto(int score) {
 		this.selectedNumbers = new SelectedNumbers();
-		this.winCount = new WinCount(winCount);
+		this.score = new Score(score);
 	}
 
 	public void selectLottoNumbers(int lottoNumber) {
@@ -30,20 +30,20 @@ public class Lotto {
 		return this.selectedNumbers.size();
 	}
 
-	public WinCount winCount(List<Integer> winNumbers) {
+	public Score calculateScore(List<Integer> winNumbers) {
 		for (Integer winNumber : winNumbers) {
-			this.plusWinCount(winNumber);
+			this.plusScore(winNumber);
 		}
-		return this.winCount;
+		return this.score;
 	}
 
-	public WinCount getWinCount() {
-		return this.winCount;
+	public Score getScore() {
+		return this.score;
 	}
 
-	private void plusWinCount(Integer winNumber) {
+	private void plusScore(Integer winNumber) {
 		if (selectedNumbers.contains(winNumber)) {
-			this.winCount.plus();
+			this.score.plus();
 		}
 	}
 

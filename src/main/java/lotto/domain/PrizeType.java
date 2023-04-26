@@ -9,17 +9,17 @@ public enum PrizeType {
 	FIVE(5, 1500000),
 	SIX(6, 2000000000);
 
-	public final WinCount winCount;
+	public final Score score;
 	public final PrizeMoney prizeMoney;
 
-	PrizeType(int winCount, int prizeMoney) {
-		this.winCount = new WinCount(winCount);
+	PrizeType(int score, int prizeMoney) {
+		this.score = new Score(score);
 		this.prizeMoney = new PrizeMoney(prizeMoney);
 	}
 
-	public static PrizeType of(WinCount winCount) {
+	public static PrizeType of(Score score) {
 		return Arrays.stream(values())
-			.filter(e -> e.winCount.equals(winCount))
+			.filter(e -> e.score.equals(score))
 			.findAny()
 			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상금 타입입니다."));
 	}

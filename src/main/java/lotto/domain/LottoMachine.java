@@ -49,48 +49,48 @@ public class LottoMachine {
 		}
 	}
 
-	public int purchasedLottosSize() {
+	public int purchasedCount() {
 		return this.purchasedLottos.size();
 	}
 
-	public void calculateWinCount(List<Integer> winNumbers) {
+	public void calculateScore(List<Integer> winNumbers) {
 		for (Lotto lotto : this.purchasedLottos.getLottos()) {
-			lotto.winCount(winNumbers);
+			lotto.calculateScore(winNumbers);
 		}
 	}
 
-	public List<WinStatistics> countWinLotto() {
-		return this.winStatisticsList(this.countWinLottos(this.purchasedLottos.getLottos()));
+	public List<PrizeMoneyBoard> makePrizeMoneyBoard() {
+		return this.prizeMoneyBoard(this.scoreBoard(this.purchasedLottos.getLottos()));
 	}
 
-	public List<WinStatistics> sortInOrderScore(List<WinStatistics> winStatisticsList) {
-		return winStatisticsList.stream().sorted().collect(Collectors.toList());
-	}
-
-	public List<WinStatistics> winStatisticsList(Map<WinCount, Integer> winCountMap) {
-		return winCountMap.entrySet().stream()
-			.map(entry -> new WinStatistics(PrizeType.of(entry.getKey()), entry.getValue()))
+	public List<PrizeMoneyBoard> prizeMoneyBoard(Map<Score, Integer> scoreMap) {
+		return scoreMap.entrySet().stream()
+			.map(entry -> new PrizeMoneyBoard(PrizeType.of(entry.getKey()), entry.getValue()))
 			.collect(Collectors.toList());
 	}
 
-	public Map<WinCount, Integer> countWinLottos(List<Lotto> lottos) {
-		Map<WinCount, Integer> winLottosCountingMap = new HashMap<>();
+	public Map<Score, Integer> scoreBoard(List<Lotto> lottos) {
+		Map<Score, Integer> scoreBoard = new HashMap<>();
 		for (PrizeType prizeType : PrizeType.values()) {
-			winLottosCountingMap.put(prizeType.winCount, 0);
+			scoreBoard.put(prizeType.score, 0);
 		}
 		for (Lotto lotto : lottos) {
-			WinCount winCount = lotto.getWinCount();
-			if (winLottosCountingMap.containsKey(winCount)) {
-				winLottosCountingMap.put(winCount, (winLottosCountingMap.get(winCount) + 1));
+			Score score = lotto.getScore();
+			if (scoreBoard.containsKey(score)) {
+				scoreBoard.put(score, (scoreBoard.get(score) + 1));
 			}
 		}
-		return winLottosCountingMap;
+		return scoreBoard;
+	}
+
+	public List<PrizeMoneyBoard> sortInOrderScore(List<PrizeMoneyBoard> prizeMoneyBoardList) {
+		return prizeMoneyBoardList.stream().sorted().collect(Collectors.toList());
 	}
 
 	public int totalProfit() {
 		int totalProfit = 0;
 		for (Lotto lotto : this.purchasedLottos.getLottos()) {
-			totalProfit += PrizeType.of(lotto.getWinCount()).prizeMoney.getPrizeMoney();
+			totalProfit += PrizeType.of(lotto.getScore()).prizeMoney.getPrizeMoney();
 		}
 		return totalProfit;
 	}
