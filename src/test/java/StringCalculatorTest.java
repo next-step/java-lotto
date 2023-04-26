@@ -58,7 +58,8 @@ public class StringCalculatorTest {
         assertThatThrownBy( () ->{
             calculator.calculate("");
         })
-        .isInstanceOf(IllegalArgumentException.class);
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("입력값은 null 또는 빈공백 값이 될수 없습니다. 확인해주세요.");
     }
 
     @Test
@@ -67,6 +68,7 @@ public class StringCalculatorTest {
         assertThatThrownBy( () ->{
             calculator.calculate("3 = 1");
         })
-        .isInstanceOf(IllegalArgumentException.class);
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("숫자, 공백, 사측연산 기호 외의 문자가 포함되어있습니다.");
     }
 }
