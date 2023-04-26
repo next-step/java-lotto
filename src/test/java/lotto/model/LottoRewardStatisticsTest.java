@@ -28,7 +28,7 @@ class LottoRewardStatisticsTest {
 
         LottoRewardStatistics statistics = new LottoRewardStatistics(counter);
         int spent = counter.total() * Lotto.PRICE;
-        int reward = statistics.winnerRewards();
+        long reward = statistics.winnerRewards();
         float expected = reward / (float) spent;
 
 
