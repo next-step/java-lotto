@@ -38,7 +38,7 @@ public class InputChecker {
     }
 
     public void throwRuntimeException(boolean flag) {
-        if(flag) {
+        if(!flag) {
             throw new RuntimeException("연속으로 숫자 혹은 사칙연산자가 입력되었습니다.");
         }
     }
