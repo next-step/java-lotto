@@ -28,6 +28,7 @@ public class OutputView {
         System.out.println("3개 일치 (5000원)- " + winTypes.stream().filter(w -> w == WinType.FIFTH).count() + "개");
         System.out.println("4개 일치 (50000원)- " + winTypes.stream().filter(w -> w == WinType.FOURTH).count() + "개");
         System.out.println("5개 일치 (1500000원)- " + winTypes.stream().filter(w -> w == WinType.THIRD).count() + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + winTypes.stream().filter(w -> w == WinType.SECOND).count() + "개");
         System.out.println("6개 일치 (2000000000원)- " + winTypes.stream().filter(w -> w == WinType.FIRST).count() + "개");
 
         System.out.println("총 수익률은 " + winStatistics.rateOfReturn() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");

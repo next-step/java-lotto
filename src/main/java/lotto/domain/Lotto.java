@@ -8,8 +8,6 @@ import java.util.stream.IntStream;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
-    public static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(Number.MIN_NUMBER, Number.MAX_NUMBER)
-                                                               .boxed().collect(Collectors.toList());
 
     private final List<Number> numbers;
 
@@ -18,8 +16,10 @@ public class Lotto {
     }
 
     private List<Number> getNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return LOTTO_NUMBERS.subList(0, LOTTO_SIZE).stream().map(Number::new).sorted().collect(Collectors.toList());
+        List<Integer> lottoNumbers = IntStream.rangeClosed(Number.MIN_NUMBER, Number.MAX_NUMBER)
+                                              .boxed().collect(Collectors.toList());
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.subList(0, LOTTO_SIZE).stream().map(Number::new).sorted().collect(Collectors.toList());
     }
 
     public Lotto(int... numbers) {
@@ -40,7 +40,11 @@ public class Lotto {
                 '}';
     }
 
-    public long match(List<Number> winNumbers) {
+    public long matchNumber(List<Number> winNumbers) {
         return this.numbers.stream().filter(winNumbers::contains).count();
+    }
+
+    public long matchBonusNumber(Number bonusNumber) {
+        return Collections.frequency(numbers, bonusNumber);
     }
 }
