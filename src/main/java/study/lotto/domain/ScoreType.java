@@ -2,11 +2,11 @@ package study.lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoScoreType {
-    SIX(6, 2000000000, true),
-    FIVE(5, 1500000, true),
-    FOUR(4, 50000, true),
-    THREE(3, 5000, true),
+public enum ScoreType {
+    SIX(6, 2_000_000_000, true),
+    FIVE(5, 1_500_000, true),
+    FOUR(4, 50_000, true),
+    THREE(3, 5_000, true),
     TWO(2, 0, false),
     ONE(1, 0, false),
     ZERO(0, 0, false),
@@ -18,17 +18,17 @@ public enum LottoScoreType {
 
 
 
-    LottoScoreType(Integer score, Integer reward, Boolean display) {
+    ScoreType(Integer score, Integer reward, Boolean display) {
         this.score = score;
         this.reward = reward;
         this.display = display;
     }
 
-    public static LottoScoreType of(Integer score) {
+    public static ScoreType of(Integer score) {
         return Arrays.stream(values())
                 .filter(lottoScore -> lottoScore.score.equals(score))
                 .findFirst()
-                .orElseThrow(() -> new EnumConstantNotPresentException(LottoScoreType.class, score.toString()));
+                .orElseThrow(() -> new EnumConstantNotPresentException(ScoreType.class, score.toString()));
     }
 
     public boolean canDisplay() {
