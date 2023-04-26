@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -24,17 +21,20 @@ public class Lotto {
     }
 
     public Lotto(int... numbers) {
-        if (numbers.length != LOTTO_SIZE) {
-            throw new IllegalArgumentException("숫자는 6개만 입력 가능합니다.");
-        }
-        this.numbers = Arrays.stream(numbers).mapToObj(Number::new).sorted().collect(Collectors.toList());
+        List<Integer> intNumbers = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+        validate(intNumbers);
+        this.numbers = intNumbers.stream().map(Number::new).sorted().collect(Collectors.toList());
     }
 
     public Lotto(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("숫자는 6개만 입력 가능합니다.");
-        }
+        validate(numbers);
         this.numbers = numbers.stream().map(Number::new).sorted().collect(Collectors.toList());
+    }
+
+    private void validate(List<Integer> numbers) {
+        if (new HashSet<>(numbers).size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또는 중복된 숫자 없이 6개가 필요합니다.");
+        }
     }
 
     public List<Number> numbers() {

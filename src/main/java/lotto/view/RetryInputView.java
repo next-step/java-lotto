@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Number;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class RetryInputView implements InputViewV2 {
         try {
             return inputViewV2.purchaseAmount();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return purchaseAmount();
         }
     }
@@ -25,6 +27,7 @@ public class RetryInputView implements InputViewV2 {
         try {
             return inputViewV2.manualQuantity(purchaseAmount);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return manualQuantity(purchaseAmount);
         }
     }
@@ -34,6 +37,7 @@ public class RetryInputView implements InputViewV2 {
         try {
             return inputViewV2.manualNumbers(manualQuantity);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return manualNumbers(manualQuantity);
         }
     }
@@ -43,15 +47,17 @@ public class RetryInputView implements InputViewV2 {
         try {
             return inputViewV2.lastWeekWinningNumbers();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return lastWeekWinningNumbers();
         }
     }
 
     @Override
-    public int bonusBall() {
+    public Number bonusBall() {
         try {
             return inputViewV2.bonusBall();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return bonusBall();
         }
     }
