@@ -19,6 +19,7 @@ public class InputChecker {
         isThrowIllegalArgumentException(isNumberLastListValue(formulaList));
 
         int index = 0;
+
         for(String str : formulaList) {
             isThrowIllegalArgumentException(validFormulaIndex(index, str));
             index ++;

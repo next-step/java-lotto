@@ -3,6 +3,8 @@ package lotto;
 import lotto.utility.InputChecker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -32,7 +34,8 @@ public class regExTest {
         assertThat(result.get(5)).isEqualTo("/");
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"", "  "})
     @DisplayName("입력받은 문자열이 빈 공백일 때 확인")
     public void formulaToStrListTest2() {
         String test = "";
