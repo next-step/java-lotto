@@ -68,21 +68,13 @@ public class Statics {
     private int aggregateFourth(List<Ticket> tickets, Ticket winTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
-            if (Prize.FOURTH.isMatch(ticket.overlapNumberCount(winTicket))) {
-                count++;
-            }
+            count = count + (Prize.FOURTH.isMatch(ticket.overlapNumberCount(winTicket)) ? 1 : 0);
         }
         return count;
     }
 
-    private int aggregateFifth(List<Ticket> tickets, Ticket winningTicket) {
-        int count = 0;
-        for (Ticket ticket : tickets) {
-            if (Prize.FIFTH.isMatch(ticket.overlapNumberCount(winningTicket))) {
-                count++;
-            }
-        }
-        return count;
+    private int aggregateFifth(List<Ticket> challengeTickets, Ticket winningTicket) {
+        return winningTicket.countWinner(challengeTickets,Prize.FIFTH);
     }
 
     private int aggregateFirst(List<Ticket> tickets, Ticket winningTicket) {
