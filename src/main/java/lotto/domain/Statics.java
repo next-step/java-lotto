@@ -13,12 +13,11 @@ public class Statics {
     private final int income;
     private final double profitRatio;
 
-
-    public Statics(List<Ticket> tickets, Ticket winningTicket) {
-        this.countFirst = aggregateFirst(tickets, winningTicket);
-        this.countThird = aggregateThird(tickets, winningTicket);
-        this.countFourth = aggregateFourth(tickets, winningTicket);
-        this.countFifth = aggregateFifth(tickets, winningTicket);
+    public Statics(List<Ticket> tickets, WinnerTicket winnerTicket) {
+        this.countFirst = aggregateFirst(tickets, winnerTicket.ticketOnly());
+        this.countThird = aggregateThird(tickets, winnerTicket.ticketOnly());
+        this.countFourth = aggregateFourth(tickets, winnerTicket.ticketOnly());
+        this.countFifth = aggregateFifth(tickets, winnerTicket.ticketOnly());
         this.income = aggregateIncome();
         this.profitRatio = aggregateProfitRatio(tickets.size(), this.income);
     }

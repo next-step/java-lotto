@@ -41,6 +41,11 @@ public class Ticket {
         return 12 - copyThisNumbers.size();
     }
 
+    public WinnerTicket winnerTicket(int bonusNumber) {
+        Set<Integer> copyNumbers = new HashSet<>(this.numbers);
+        return new WinnerTicket(copyNumbers, bonusNumber);
+    }
+
     @Override
     public String toString() {
         return this.numbers

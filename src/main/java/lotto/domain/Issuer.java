@@ -32,8 +32,8 @@ public class Issuer {
         return RANDOM.nextInt(46) + 1;
     }
 
-    public Statics makeWinners(Ticket winningTicket) {
-        return new Statics(tickets, winningTicket);
+    public Statics makeWinners(WinnerTicket winnerTicket) {
+        return new Statics(tickets, winnerTicket);
     }
 
     public List<Ticket> purchasedTickets() {

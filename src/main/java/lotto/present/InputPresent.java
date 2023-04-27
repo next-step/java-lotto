@@ -27,4 +27,8 @@ public class InputPresent {
         String s = scanner.nextLine();
         return new Ticket(s);
     }
+
+    public int bonusNumber() {
+        throw new RuntimeException();
+    }
 }
