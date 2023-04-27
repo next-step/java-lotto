@@ -9,13 +9,15 @@ public class Statics {
     private final int countFifth;
     private final int countFourth;
     private final int countThird;
+    private final int countSecond;
     private final int countFirst;
     private final int income;
     private final double profitRatio;
 
     public Statics(List<Ticket> tickets, WinnerTicket winnerTicket) {
         this.countFirst = aggregateFirst(tickets, winnerTicket.ticketOnly());
-        this.countThird = aggregateThird(tickets, winnerTicket.ticketOnly());
+        this.countSecond = aggregateSecond(tickets, winnerTicket);
+        this.countThird = aggregateThird(tickets, winnerTicket);
         this.countFourth = aggregateFourth(tickets, winnerTicket.ticketOnly());
         this.countFifth = aggregateFifth(tickets, winnerTicket.ticketOnly());
         this.income = aggregateIncome();
@@ -28,6 +30,7 @@ public class Statics {
 
     private int aggregateIncome() {
         return Prize.FIRST.calculatePrize(this.countFirst) +
+                Prize.SECOND.calculatePrize(this.countSecond) +
                 Prize.THIRD.calculatePrize(this.countThird) +
                 Prize.FOURTH.calculatePrize(this.countFourth) +
                 Prize.FIFTH.calculatePrize(this.countFifth);
@@ -37,20 +40,35 @@ public class Statics {
         return income;
     }
 
-    private int aggregateThird(List<Ticket> tickets, Ticket winningTicket) {
+    private int aggregateSecond(List<Ticket> tickets, WinnerTicket winnerTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
-            if (Prize.THIRD.isMatch(ticket.overlapNumberCount(winningTicket))) {
-                count++;
+            if (Prize.THIRD.isMatch(ticket.overlapNumberCount(winnerTicket.ticketOnly()))) {
+                if (winnerTicket.includeBonus(ticket)) {
+                    count++;
+                }
+
             }
         }
         return count;
     }
 
-    private int aggregateFourth(List<Ticket> tickets, Ticket winningTicket) {
+    private int aggregateThird(List<Ticket> tickets, WinnerTicket winnerTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
-            if (Prize.FOURTH.isMatch(ticket.overlapNumberCount(winningTicket))) {
+            if (Prize.THIRD.isMatch(ticket.overlapNumberCount(winnerTicket.ticketOnly()))) {
+                if(!winnerTicket.includeBonus(ticket)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private int aggregateFourth(List<Ticket> tickets, Ticket winTicket) {
+        int count = 0;
+        for (Ticket ticket : tickets) {
+            if (Prize.FOURTH.isMatch(ticket.overlapNumberCount(winTicket))) {
                 count++;
             }
         }
@@ -102,6 +120,6 @@ public class Statics {
     }
 
     public int getCountSecond() {
-        throw new RuntimeException();
+        return this.countSecond;
     }
 }
