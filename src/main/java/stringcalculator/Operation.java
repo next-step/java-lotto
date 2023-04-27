@@ -32,7 +32,7 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(operation -> symbol.equals(operation.symbol))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException(symbol+"에 해당하는 사칙연산이 현재 없습니다."));
     }
 
     public Double calculate(double number1, double number2) {

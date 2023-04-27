@@ -31,7 +31,7 @@ public class StringCalculator {
 
     private void separateInput(String[] strings, int i) {
         if (i % 2 == 1) {
-            validateOperation(strings[i]);
+            validateSymbol(strings[i]);
             operators.add(strings[i]);
             return;
         }
@@ -39,8 +39,8 @@ public class StringCalculator {
         numbers.add(Double.valueOf(strings[i]));
     }
 
-    private void validateOperation(String operation) {
-        if (!operation.matches(OPERATION_REGEX)){
+    private void validateSymbol(String symbol) {
+        if (!symbol.matches(OPERATION_REGEX)){
             throw new IllegalArgumentException("사칙연산 기호 외의 값을 입력하였습니다.");
         }
     }
@@ -67,9 +67,6 @@ public class StringCalculator {
 
     private void calculateEach(String symbol, Double number) {
         Operation operation = Operation.find(symbol);
-        if(operation == null){
-            throw new IllegalArgumentException();
-        }
         result = operation.calculate(result,number);
     }
 
