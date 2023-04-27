@@ -13,11 +13,11 @@ public class StringCalculator {
         this.inputs = Arrays.asList(text.split(" "));
     }
 
-    private Boolean isNullOrEmpty(String text) {
+    private boolean isNullOrEmpty(String text) {
         return text == null || text.isEmpty();
     }
 
-    public Integer calculate() {
+    public int calculate() {
         Value result = new Value(Integer.parseInt(inputs.get(0)));
         for (int i = 1; i < inputs.size() - 2; i += 2) {
             result = new Value(calculateNext(i, result));
@@ -25,7 +25,7 @@ public class StringCalculator {
         return calculateNext(inputs.size() - 2, result);
     }
 
-    private Integer calculateNext(Integer index, Value value) {
+    private int calculateNext(int index, Value value) {
         if (inputs.get(index).equals("+")) {
             return value.add(Integer.parseInt(inputs.get(index + 1)));
         }

@@ -1,25 +1,25 @@
 package StringCalculator;
 
 public class Value {
-    private final Integer value;
+    private final int value;
 
-    public Value(Integer integer) {
+    public Value(int integer) {
         this.value = integer;
     }
 
-    public Integer add(Integer integer) {
+    public int add(int integer) {
         return this.value + integer;
     }
 
-    public Integer subtract(Integer integer) {
+    public int subtract(int integer) {
         return this.value - integer;
     }
 
-    public Integer multiply(Integer integer) {
+    public int multiply(int integer) {
         return this.value * integer;
     }
 
-    public Integer divide(Integer integer) {
+    public int divide(int integer) {
         return this.value / integer;
     }
 }
