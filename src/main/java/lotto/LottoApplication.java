@@ -10,7 +10,7 @@ public class LottoApplication {
         PurchasedAmount purchasedAmount = getPurchasedAmount();
         LottoTickets lottoTickets = issueLottoTickets(purchasedAmount);
         WinnerNumbers winnerNumbers = getWinnerNumbers();
-        showCalculatedWinningStatistics(lottoTickets, winnerNumbers);
+        showCalculatedWinnerStatistics(lottoTickets, winnerNumbers);
     }
 
     private static PurchasedAmount getPurchasedAmount() {
@@ -26,20 +26,20 @@ public class LottoApplication {
     }
 
     private static WinnerNumbers getWinnerNumbers() {
-        LottoNumbers winnerNumbers = getWinningNumbers();
+        LottoNumbers winnerLottoNumbers = getWinnerLottoNumbers();
         LottoNumber bonusBall = getBonusBall();
-        return new WinnerNumbers(winnerNumbers, bonusBall);
+        return new WinnerNumbers(winnerLottoNumbers, bonusBall);
     }
 
-    private static LottoNumbers getWinningNumbers() {
-        return LottoNumbers.ofTypeIntegerList(InputView.showLastWeekWinningNumbersConsole());
+    private static LottoNumbers getWinnerLottoNumbers() {
+        return LottoNumbers.ofTypeIntegerList(InputView.showLastWeekWinnerNumbersConsole());
     }
 
     private static LottoNumber getBonusBall() {
         return new LottoNumber(InputView.showBonusBallConsole());
     }
 
-    private static void showCalculatedWinningStatistics(LottoTickets lottoTickets, WinnerNumbers winnerNumbers) {
+    private static void showCalculatedWinnerStatistics(LottoTickets lottoTickets, WinnerNumbers winnerNumbers) {
         WinnerStatistics winnerStatistics = winnerNumbers.getWinnerStatistics(lottoTickets);
         ResultView.showResult(winnerStatistics);
     }

@@ -14,7 +14,7 @@ class WinnerStatisticsTest {
     @DisplayName("지난주 당첨번호와 구입한 로또를 비교하여 3개이상 일치하는 경우만 기록합니다.")
     void test01() {
         LottoNumber bonusBall = new LottoNumber(30);
-        LottoNumbers lastWeekWinningNumber = LottoNumbers.ofTypeIntegers(1, 2, 3, 4, 5, 6);
+        LottoNumbers lastWeekWinnerNumber = LottoNumbers.ofTypeIntegers(1, 2, 3, 4, 5, 6);
         LottoTickets purchasedLottoTickets = new LottoTickets(List.of(
                 LottoNumbers.ofTypeIntegers(1, 2, 10, 11, 12, 13),
                 LottoNumbers.ofTypeIntegers(1, 2, 3, 10, 11, 12),
@@ -24,7 +24,7 @@ class WinnerStatisticsTest {
                 LottoNumbers.ofTypeIntegers(1, 2, 3, 4, 5, 6)
         ));
 
-        WinnerNumbers winnerNumbers = new WinnerNumbers(lastWeekWinningNumber, bonusBall);
+        WinnerNumbers winnerNumbers = new WinnerNumbers(lastWeekWinnerNumber, bonusBall);
         WinnerStatistics winnerStatistics = winnerNumbers.getWinnerStatistics(purchasedLottoTickets);
 
         assertAll(
@@ -41,7 +41,7 @@ class WinnerStatisticsTest {
     @DisplayName("지난주 당첨번호와 구입한 로또를 비교하여 소득률을 구합니다.")
     void test02() {
         LottoNumber bonusBall = new LottoNumber(43);
-        LottoNumbers lastWeekWinningNumber = LottoNumbers.ofTypeIntegers(1, 2, 3, 4, 5, 6);
+        LottoNumbers lastWeekWinnerNumber = LottoNumbers.ofTypeIntegers(1, 2, 3, 4, 5, 6);
         LottoTickets purchasedLottoTickets = new LottoTickets(List.of(
                 LottoNumbers.ofTypeIntegers(1, 2, 3, 10, 22, 45),
                 LottoNumbers.ofTypeIntegers(5, 19, 23, 34, 36, 45),
@@ -49,7 +49,7 @@ class WinnerStatisticsTest {
                 LottoNumbers.ofTypeIntegers(15, 16, 28, 29, 35, 38)
         ));
 
-        WinnerNumbers winnerNumbers = new WinnerNumbers(lastWeekWinningNumber, bonusBall);
+        WinnerNumbers winnerNumbers = new WinnerNumbers(lastWeekWinnerNumber, bonusBall);
         WinnerStatistics winnerStatistics = winnerNumbers.getWinnerStatistics(purchasedLottoTickets);
         double actual = winnerStatistics.getIncomeRate();
 
