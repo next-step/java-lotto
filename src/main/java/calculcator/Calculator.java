@@ -23,24 +23,11 @@ public class Calculator {
     }
 
     private static Integer calculate(String[] tokens) {
-        int result = Integer.parseInt(tokens[0]);
-        Operator operator = null;
-        for (int i = 1; i < tokens.length; i++) {
-            if (isOdd(i)) {
-                operator = OperatorFactory.create(tokens[i]);
-            }
-            if (isEven(i)){
-                result = operator.apply(result, Integer.parseInt(tokens[i]));
-            }
+        Number result = new Number(Integer.parseInt(tokens[0]));
+        for (int i = 1; i < tokens.length; i+=2) {
+            Operator operator = OperatorFactory.create(tokens[i]);
+            result = result.calculate(operator, Integer.parseInt(tokens[i + 1]));
         }
-        return result;
-    }
-
-    private static boolean isOdd(int i) {
-        return i % 2 == 1;
-    }
-
-    private static boolean isEven(int i) {
-        return i % 2 == 0;
+        return result.getNumber();
     }
 }
