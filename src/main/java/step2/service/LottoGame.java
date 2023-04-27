@@ -9,19 +9,20 @@ public class LottoGame {
 
     private final int numOfLottoTicket;
 
-    private final LottoNumberGenerator lottoNumberGenerator;
+    private final BasicLottoNumbers basicLottoNumbers;
 
     public LottoGame(int numOfLottoTicket) {
         this.numOfLottoTicket = numOfLottoTicket;
-        this.lottoNumberGenerator = new LottoNumberGenerator();
+        this.basicLottoNumbers = new BasicLottoNumbers();
     }
 
     public LottoResults executeGame() {
         List<Lotto> lottoResults = new ArrayList<>();
 
         for (int genNum = 0; genNum < numOfLottoTicket; genNum++) {
-            lottoResults.add(lottoNumberGenerator.generateLottoNumbers());
+            lottoResults.add(basicLottoNumbers.pickSixNumbers());
         }
+
         return new LottoResults(lottoResults);
     }
 }
