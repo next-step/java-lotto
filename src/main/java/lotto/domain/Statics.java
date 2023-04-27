@@ -41,41 +41,23 @@ public class Statics {
     }
 
     private int aggregateSecond(List<Ticket> tickets, WinnerTicket winnerTicket) {
-        int count = 0;
-        for (Ticket ticket : tickets) {
-            if (Prize.SECOND.isMatch(ticket.overlapNumberCount(winnerTicket.ticketOnly()))) {
-                if (winnerTicket.includeBonus(ticket)) {
-                    count++;
-                }
-
-            }
-        }
-        return count;
+        return winnerTicket.countWinner(tickets,Prize.SECOND);
     }
 
     private int aggregateThird(List<Ticket> tickets, WinnerTicket winnerTicket) {
-        int count = 0;
-        for (Ticket ticket : tickets) {
-            if (Prize.THIRD.isMatch(ticket.overlapNumberCount(winnerTicket.ticketOnly()))) {
-                if(!winnerTicket.includeBonus(ticket)) {
-                    count++;
-                }
-            }
-        }
-        return count;
+        return winnerTicket.countWinner(tickets,Prize.THIRD);
     }
 
     private int aggregateFourth(List<Ticket> challengerTickets, Ticket winnerTicket) {
         return winnerTicket.countWinner(challengerTickets,Prize.FOURTH);
-
     }
 
-    private int aggregateFifth(List<Ticket> challengeTickets, Ticket winnerTicket) {
-        return winnerTicket.countWinner(challengeTickets,Prize.FIFTH);
+    private int aggregateFifth(List<Ticket> challengerTickets, Ticket winnerTicket) {
+        return winnerTicket.countWinner(challengerTickets,Prize.FIFTH);
     }
 
-    private int aggregateFirst(List<Ticket> challengeTickets, Ticket winnerTicket) {
-        return winnerTicket.countWinner(challengeTickets, Prize.FIRST);
+    private int aggregateFirst(List<Ticket> challengerTickets, Ticket winnerTicket) {
+        return winnerTicket.countWinner(challengerTickets, Prize.FIRST);
     }
 
     public int getCountFifth() {
