@@ -14,6 +14,7 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.(1000원 단위)");
 
         int money = SCANNER.nextInt();
+        SCANNER.nextLine();
         int lottoCount = money / LOTTO_PRICE;
 
         System.out.println(lottoCount + "개를 구매했습니다.");

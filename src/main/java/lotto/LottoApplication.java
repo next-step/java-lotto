@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoGenerator;
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,8 +19,12 @@ public class LottoApplication {
 
         List<Integer> winningNumbers = InputView.getWinningNumbers();
 
-        List<Long> winningCounts = lottoTickets.getLottoTickets().stream()
+        List<Integer> winningCounts = lottoTickets.getLottoTickets().stream()
                 .map(lottoTicket -> lottoTicket.matchesLottoNumberCount(winningNumbers))
                 .collect(Collectors.toList());
+
+        LottoResult lottoResult = new LottoResult(winningCounts);
+
+        ResultView.showLottoWinningResult(lottoResult);
     }
 }
