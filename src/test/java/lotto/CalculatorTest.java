@@ -84,25 +84,6 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("수식 문자열 계산2")
-    public void calculateFormulaTest2() {
-        String testInput = " 44 + 55 - 9 / 5 ";
-        InputChecker inputChecker = new InputChecker();
-        List<String> formulaList = inputChecker.formulaToStrList(testInput);
-        Calculator calculator = new Calculator();
-
-        List<String> numberList = calculator.makeNumberList(formulaList);
-        List<String> operatorList = calculator.makeOperatorList(formulaList);
-        Queue<String> operatorQueue = new LinkedList<>(operatorList);
-
-        String result = numberList.stream()
-                .reduce((x, y) -> calculator.calculate(x, y, operatorQueue.remove()))
-                .get();
-
-        assertThat(result).isEqualTo(18);
-    }
-
-    @Test
     @DisplayName("수식 문자열 계산")
     public void calculateFormulaTest() {
         String testInput = " 44 + 55 - 9 / 5 ";
@@ -114,7 +95,7 @@ public class CalculatorTest {
 
         String result = calculator.showResult();
 
-        assertThat(result).isEqualTo(18);
+        assertThat(result).isEqualTo("18");
     }
 
 

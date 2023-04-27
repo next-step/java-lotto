@@ -35,29 +35,18 @@ public class Calculator {
         Double doubleNumber2 = Double.parseDouble(number2);
         numberFormat.setGroupingUsed(false);
 
-        System.out.println("---------------------");
-        System.out.println("number1 : " + number1);
-        System.out.println("number2 : " + number2);
-        System.out.println("doubleNumber1 : " + doubleNumber1);
-        System.out.println("doubleNumber2 : " + doubleNumber2);
-        System.out.println("operator : " + operator);
-
-        if(operator == "+") {
-            System.out.println("result : " + numberFormat.format(doubleNumber1 + doubleNumber2));
+        if(operator.equals("+")) {
             return numberFormat.format(doubleNumber1 + doubleNumber2);
         }
 
-        if(operator == "-") {
-            System.out.println("result : " + numberFormat.format(doubleNumber1 - doubleNumber2));
+        if(operator.equals("-")) {
             return numberFormat.format(doubleNumber1 - doubleNumber2);
         }
 
-        if(operator == "*") {
-            System.out.println("result : " + numberFormat.format(doubleNumber1 * doubleNumber2));
+        if(operator.equals("*")) {
             return numberFormat.format(doubleNumber1 * doubleNumber2);
         }
 
-        System.out.println("result : " + numberFormat.format(doubleNumber1 / doubleNumber2));
         return numberFormat.format(doubleNumber1 / doubleNumber2);
     }
 
