@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class InputChecker {
-    private static final String REGULAR_NUMBER = "^[0-9]{1,}$";
-    private static final String REGULAR_OPERATORS = "^[+|\\-|*|/]$";
-    private static final Pattern NUMBER_PATTERN_COMPILE = Pattern.compile(REGULAR_NUMBER);
-    private static final Pattern OPERATOR_PATTERN_COMPILE = Pattern.compile(REGULAR_OPERATORS);
+    private static final Pattern NUMBER_PATTERN_COMPILE = Pattern.compile("^[0-9]{1,}$");
+    private static final Pattern OPERATOR_PATTERN_COMPILE = Pattern.compile("^[+|\\\\-|*|/]$\"");
 
     public List<String> formulaToStrList(String formula) {
 
