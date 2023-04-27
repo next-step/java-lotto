@@ -11,11 +11,15 @@ public class Lottery {
     public static final int MAX_LOTTERY_NUM = 45;
     public static final int LOTTERY_SIZE = 6;
 
-    static final List<Integer> numbers = IntStream
+    private static final List<Integer> numbers = IntStream
             .rangeClosed(MIN_LOTTERY_NUM, MAX_LOTTERY_NUM)
             .boxed()
             .collect(Collectors.toList());
     private final List<Integer> lotteryNumber;
+
+    public Lottery(List<Integer> lotteryNumber) {
+        this.lotteryNumber = List.copyOf(lotteryNumber);
+    }
 
     public Lottery() {
         Collections.shuffle(numbers);
@@ -28,5 +32,15 @@ public class Lottery {
 
     public List<Integer> getLotteryNumber() {
         return lotteryNumber;
+    }
+
+    public int matchingCount(List<Integer> winningNumbers) {
+        int result = 0;
+        for (Integer winningNumber : winningNumbers) {
+            if (lotteryNumber.contains(winningNumber)) {
+                result++;
+            }
+        }
+        return result;
     }
 }
