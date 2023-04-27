@@ -40,7 +40,6 @@ public class InputView {
     }
 
     public static Lotto inputWinningNumbers() {
-        SCANNER.nextLine();
         System.out.println("지난 주 당첨 번호를 압력해주세요.");
         return Lotto.createManualLotto(getManualLottoNumbers());
     }

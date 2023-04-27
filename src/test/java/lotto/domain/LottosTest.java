@@ -12,13 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottosTest {
 
     @Test
-    @DisplayName("로또 생성 테스트")
-    void initLottoTest() {
-        assertThat(Lottos.init(Money.from(14000)))
-                .isInstanceOf(Lottos.class);
-    }
-
-    @Test
     @DisplayName("통계 테스트")
     void findStatisticsTest() {
         Lotto winning = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "6"));

@@ -14,9 +14,9 @@ public class OutputView {
 
 
     public static void printLottoQuantity(Amount manualAmount, Amount autoAmount) {
+        System.out.println();
         System.out.println("수동으로 " + manualAmount.getAmount() + "장, 자동으로 "
                 + autoAmount.getAmount() + "개를 구매했습니다.");
-        System.out.println();
     }
 
     public static void printLottos(Lottos lottos) {

@@ -17,10 +17,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public static Lottos init(Money amount) {
+    public static Lottos createAutoLottos(Amount autoAmount) {
         List<Lotto> lottos;
-        int bound = amount.getLottoQuantity();
-        lottos = IntStream.range(ZERO, bound)
+
+        lottos = IntStream.range(ZERO, autoAmount.getAmount())
                 .mapToObj(i -> Lotto.createAutoLotto())
                 .collect(Collectors.toList());
 
