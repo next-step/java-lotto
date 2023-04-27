@@ -27,6 +27,12 @@ public final class InputView {
         return toNumbers(removeWhiteSpace(SCANNER.nextLine()));
     }
 
+    public static int showBonusBallConsole() {
+        System.out.println();
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
     private static String removeWhiteSpace(String winningNumberAsString) {
         return winningNumberAsString.replace(CHAR_WHITE_SPACE, "");
     }
