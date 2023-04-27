@@ -4,14 +4,12 @@ import java.util.List;
 
 public class LottoNumber {
 
+    public static final int LOTTO_SIZE = 6;
+
     private final List<Integer> lottoNumber;
 
     public LottoNumber(NumberCreationStrategy strategy) {
-        this.lottoNumber = createLottoNumber(strategy);
-    }
-
-    private List<Integer> createLottoNumber(NumberCreationStrategy strategy) {
-        return strategy.createNumber();
+        this(strategy.createNumber());
     }
 
     public LottoNumber(List<Integer> lottoNumber) {
@@ -20,7 +18,7 @@ public class LottoNumber {
     }
 
     private void validateLottoNumberLength(List<Integer> lottoNumber) {
-        if (lottoNumber.size() != 6) {
+        if (lottoNumber.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6자리입니다.");
         }
     }
