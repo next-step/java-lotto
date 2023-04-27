@@ -25,18 +25,18 @@ public class InputChecker {
 
     }
 
-    public boolean validFormulaIndex(int index, String str) {
+    private boolean validFormulaIndex(int index, String str) {
         if(index%2 == 0) {
             return NUMBER_PATTERN_COMPILE.asMatchPredicate().test(str);
         }
         return OPERATOR_PATTERN_COMPILE.asMatchPredicate().test(str);
     }
 
-    public boolean isNumberLastListValue(List<String> formulaList) {
+    private boolean isNumberLastListValue(List<String> formulaList) {
         return NUMBER_PATTERN_COMPILE.asMatchPredicate().test(formulaList.get(formulaList.size()-1));
     }
 
-    public void isThrowIllegalArgumentException(boolean flag) {
+    private void isThrowIllegalArgumentException(boolean flag) {
         if(!flag) {
             throw new IllegalArgumentException ("연속으로 숫자 혹은 사칙연산자가 입력되었습니다.");
         }
