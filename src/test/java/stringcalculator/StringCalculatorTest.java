@@ -1,52 +1,42 @@
 package stringcalculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class StringCalculatorTest {
-    @Test
-    void 빈값입력시예외처리() {
-        String input1 = null;
-        String input2 = "";
-        String input3 = " ";
-        assertAll(
-                () -> assertThatThrownBy(() -> new StringCalculator(input1)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new StringCalculator(input2)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new StringCalculator(input3)).isInstanceOf(IllegalArgumentException.class)
-        );
 
+    @NullAndEmptySource
+    @ValueSource(strings = {" "})
+    @ParameterizedTest(name = "입력값이 \"{0}\" 이면 예외를 던진다.")
+    void 빈값입력시예외처리(String input) {
+        assertThatThrownBy(() -> new StringCalculator(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 숫자와사칙연산구분하여담기() {
+    @CsvSource(value = {"0:+","1:*","2:/"}, delimiter = ':')
+    @ParameterizedTest(name = "계산식 : '2 + 3 * 4 / 2' 에서 {0}번째 연산기호 : {1}")
+    void 사칙연산구분하여담기(int index, String expectedSymbol) {
         StringCalculator stringCalculator = new StringCalculator("2 + 3 * 4 / 2");
-        assertAll(
-                () -> assertThat(stringCalculator.getOperator(0)).isEqualTo("+"),
-                () -> assertThat(stringCalculator.getOperator(1)).isEqualTo("*"),
-                () -> assertThat(stringCalculator.getOperator(2)).isEqualTo("/"),
-                () -> assertThat(stringCalculator.getNumber(0)).isEqualTo(2),
-                () -> assertThat(stringCalculator.getNumber(1)).isEqualTo(3),
-                () -> assertThat(stringCalculator.getNumber(2)).isEqualTo(4),
-                () -> assertThat(stringCalculator.getNumber(3)).isEqualTo(2)
-        );
+        assertThat(stringCalculator.getOperator(index)).isEqualTo(expectedSymbol);
     }
 
-    @Test
-    void 더하기테스트() {
-        StringCalculator stringCalculator = new StringCalculator("3 + 7");
-        assertAll(
-                () -> assertThat(stringCalculator.calculate()).isEqualTo(10)
-        );
-    }
-
-    @Test
-    void 계산기테스트() {
+    @CsvSource(value = {"0:2", "1:3", "2:4", "3:2"}, delimiter = ':')
+    @ParameterizedTest(name = "계산식 : '2 + 3 * 4 / 2' 에서 {0}번째 숫자 : {1}")
+    void 숫자담기(int index, int expectedNumber) {
         StringCalculator stringCalculator = new StringCalculator("2 + 3 * 4 / 2");
-        assertAll(
-                () -> assertThat(stringCalculator.calculate()).isEqualTo(10)
-        );
+        assertThat(stringCalculator.getNumber(index)).isEqualTo(expectedNumber);
+    }
+
+    @CsvSource(value = {"2 + 3 * 4 / 2:10", "3 * 3 - 1 / 4:2", "2 / 2 + 8 * 3:27"}, delimiter = ':')
+    @ParameterizedTest(name = "{0} = {1}")
+    void 계산기테스트(String input, double expectedResult) {
+        StringCalculator stringCalculator = new StringCalculator(input);
+        assertThat(stringCalculator.calculate()).isEqualTo(expectedResult);
     }
 }
