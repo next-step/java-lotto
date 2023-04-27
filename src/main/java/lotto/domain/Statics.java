@@ -43,7 +43,7 @@ public class Statics {
     private int aggregateSecond(List<Ticket> tickets, WinnerTicket winnerTicket) {
         int count = 0;
         for (Ticket ticket : tickets) {
-            if (Prize.THIRD.isMatch(ticket.overlapNumberCount(winnerTicket.ticketOnly()))) {
+            if (Prize.SECOND.isMatch(ticket.overlapNumberCount(winnerTicket.ticketOnly()))) {
                 if (winnerTicket.includeBonus(ticket)) {
                     count++;
                 }
