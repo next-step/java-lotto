@@ -1,12 +1,8 @@
 package lotto.domain;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Calculator {
     private static NumberFormat numberFormat = NumberFormat.getInstance();
@@ -14,20 +10,6 @@ public class Calculator {
 
     public Calculator() {
         this.result = "0";
-    }
-
-    public List<String> makeNumberList(List<String> formulaList) {
-        return IntStream.range(0, formulaList.size())
-                .filter(index -> index % 2 == 0)
-                .mapToObj(formulaList::get)
-                .collect(Collectors.toList());
-    }
-
-    public List<String> makeOperatorList(List<String> formulaList) {
-        return IntStream.range(0, formulaList.size())
-                .filter(index -> index % 2 == 1)
-                .mapToObj(formulaList::get)
-                .collect(Collectors.toList());
     }
 
     public String calculate(String number1, String number2, String operator) {
@@ -50,15 +32,10 @@ public class Calculator {
         return numberFormat.format(doubleNumber1 / doubleNumber2);
     }
 
-    public void calculateFormula(List<String> formulaList) {
-        List<String> numberList = makeNumberList(formulaList);
-        List<String> operatorList = makeOperatorList(formulaList);
-        Queue<String> operatorQueue = new LinkedList<>(operatorList);
-
+    public void calculateFormula(List<String> numberList, Queue<String> operatorQueue) {
         this.result = numberList.stream()
                 .reduce((x, y) -> calculate(x, y, operatorQueue.remove()))
                 .get();
-
     }
 
     public String showResult() {

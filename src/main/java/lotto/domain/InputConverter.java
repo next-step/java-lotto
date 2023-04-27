@@ -1,10 +1,10 @@
-package lotto.utility;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class InputChecker {
+public class InputConverter {
     private static final Pattern NUMBER_PATTERN_COMPILE = Pattern.compile("^[0-9]{1,}$");
 
     public List<String> formulaToStrList(String formula) {

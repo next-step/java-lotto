@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.NumberGroup;
-import lotto.utility.InputChecker;
+import lotto.domain.InputConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +16,8 @@ public class NumberGroupTest {
   public void createNumberGroupObject() {
     String testInput = " 44 + 55 - 2 / 5 ";
 
-    InputChecker inputChecker = new InputChecker();
-    List<String> formulaList = inputChecker.formulaToStrList(testInput);
+    InputConverter inputConverter = new InputConverter();
+    List<String> formulaList = inputConverter.formulaToStrList(testInput);
 
     NumberGroup numberGroup = new NumberGroup(formulaList);
     List<String> result = numberGroup.numberList();
@@ -34,8 +34,8 @@ public class NumberGroupTest {
   public void createNumberGroupObject_ThrowIllegalArgumentException() {
     String testInput = " adfad - 5 ";
 
-    InputChecker inputChecker = new InputChecker();
-    List<String> formulaList = inputChecker.formulaToStrList(testInput);
+    InputConverter inputConverter = new InputConverter();
+    List<String> formulaList = inputConverter.formulaToStrList(testInput);
 
     assertThatThrownBy(() -> new NumberGroup(formulaList))
         .isInstanceOf(IllegalArgumentException.class);

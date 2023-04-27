@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.utility.InputChecker;
+import lotto.domain.InputConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,16 +11,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 
-public class InputCheckerTest {
+public class InputConverterTest {
 
     @Test
     @DisplayName("입력받은 문자열 앞뒤 공백 제거 후 빈 공백으로 split 리스트 반환")
     public void formulaToStrListTest() {
         String testInput = " 44 + 55 - 2 / 5 ";
 
-        InputChecker inputChecker = new InputChecker();
+        InputConverter inputConverter = new InputConverter();
 
-        List<String> result = inputChecker.formulaToStrList(testInput);
+        List<String> result = inputConverter.formulaToStrList(testInput);
 
         assertThat(result.size()).isEqualTo(7);
 
@@ -40,9 +40,9 @@ public class InputCheckerTest {
     @ValueSource(strings = {"", "  "})
     @DisplayName("입력받은 문자열이 빈 공백일 때 IllegalArgumentException 예외발생")
     public void formulaToStrListTest2(String test) {
-        InputChecker inputChecker = new InputChecker();
+        InputConverter inputConverter = new InputConverter();
 
-        assertThatThrownBy(() -> inputChecker.formulaToStrList(test))
+        assertThatThrownBy(() -> inputConverter.formulaToStrList(test))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -50,9 +50,9 @@ public class InputCheckerTest {
     @ValueSource(strings = {"5 - 5 -", "5 - 5 -5", "5 - 5 tt"})
     @DisplayName("입력받은 문자열의 마지막이 숫자가 아닐 경우 IllegalArgumentException 예외발생")
     public void formulaToStrListTest3(String test) {
-        InputChecker inputChecker = new InputChecker();
+        InputConverter inputConverter = new InputConverter();
 
-        assertThatThrownBy(() -> inputChecker.formulaToStrList(test))
+        assertThatThrownBy(() -> inputConverter.formulaToStrList(test))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

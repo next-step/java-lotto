@@ -1,8 +1,7 @@
 package lotto;
 
-import lotto.domain.NumberGroup;
 import lotto.domain.OperatorGroup;
-import lotto.utility.InputChecker;
+import lotto.domain.InputConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +17,8 @@ public class OperatorGroupTest {
   public void createOperatorGroupObject() {
     String testInput = " 44 + 55 - 2 / 5 ";
 
-    InputChecker inputChecker = new InputChecker();
-    List<String> formulaList = inputChecker.formulaToStrList(testInput);
+    InputConverter inputConverter = new InputConverter();
+    List<String> formulaList = inputConverter.formulaToStrList(testInput);
 
     OperatorGroup operatorGroup = new OperatorGroup(formulaList);
     List<String> result = operatorGroup.operatorList();
@@ -35,8 +34,8 @@ public class OperatorGroupTest {
   public void createOperatorGroupObject_ThrowIllegalArgumentException() {
     String testInput = " 5 5 5 ";
 
-    InputChecker inputChecker = new InputChecker();
-    List<String> formulaList = inputChecker.formulaToStrList(testInput);
+    InputConverter inputConverter = new InputConverter();
+    List<String> formulaList = inputConverter.formulaToStrList(testInput);
 
     assertThatThrownBy(() -> new OperatorGroup(formulaList))
         .isInstanceOf(IllegalArgumentException.class);
@@ -47,8 +46,8 @@ public class OperatorGroupTest {
   public void createOperatorQueue() {
     String testInput = " 5 - 5 + 2";
 
-    InputChecker inputChecker = new InputChecker();
-    List<String> formulaList = inputChecker.formulaToStrList(testInput);
+    InputConverter inputConverter = new InputConverter();
+    List<String> formulaList = inputConverter.formulaToStrList(testInput);
 
     OperatorGroup operatorGroup = new OperatorGroup(formulaList);
     Queue<String > result = operatorGroup.operatorQueue();
