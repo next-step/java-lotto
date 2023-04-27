@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class InputChecker {
     private static final Pattern NUMBER_PATTERN_COMPILE = Pattern.compile("^[0-9]{1,}$");
-    private static final Pattern OPERATOR_PATTERN_COMPILE = Pattern.compile("^[+|\\\\-|*|/]$\"");
+    private static final Pattern OPERATOR_PATTERN_COMPILE = Pattern.compile("^[+|\\-|*|/]$");
 
     public List<String> formulaToStrList(String formula) {
 
@@ -14,15 +14,11 @@ public class InputChecker {
     }
 
     public void validFormula(List<String> formulaList) {
-        isThrowIllegalArgumentException(isNumberLastListValue(formulaList));
+        this.isThrowIllegalArgumentException(this.isNumberLastListValue(formulaList));
 
-        int index = 0;
-
-        for(String str : formulaList) {
-            isThrowIllegalArgumentException(validFormulaIndex(index, str));
-            index ++;
+        for(int i = 0; i<formulaList.size(); i++) {
+            this.isThrowIllegalArgumentException(this.validFormulaIndex(i, formulaList.get(i)));
         }
-
     }
 
     private boolean validFormulaIndex(int index, String str) {
