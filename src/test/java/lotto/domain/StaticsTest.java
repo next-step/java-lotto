@@ -18,8 +18,11 @@ public class StaticsTest {
     @BeforeEach
     public void beforeEach() {
         Ticket winner = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
+        WinnerTicket winnerTicket = winner.winnerTicket(33);
 
         Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
+        Ticket secondA = new Ticket(Set.of(1, 2, 4, 8, 16, 33));
+        Ticket secondB = new Ticket(Set.of(1, 2, 4, 8, 32, 33));
 
         Ticket thirdA = new Ticket(Set.of(1, 2, 4, 8, 16, 40));
         Ticket thirdB = new Ticket(Set.of(1, 2, 4, 8, 16, 41));
@@ -42,7 +45,7 @@ public class StaticsTest {
                 fourthA, fourthB, fourthC, fourthD,
                 fifthA, fifthB, fifthC, fifthD, fifthE
         );
-        staticsFixture = new Statics(purchaseTicketsFixture, winner);
+        staticsFixture = new Statics(purchaseTicketsFixture, winnerTicket);
     }
 
     @DisplayName("1등 담첨통계가 계산된다(6개 번호 일치)")
