@@ -42,7 +42,7 @@ public class LottoTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "로또 번호와 승자 번호 동일한 숫자갯수 확인하는 테스트")
     @MethodSource("provideLottoNumbersAndWinNumbers")
     void countWinNumTest(List<LottoNumber> lottoNumbers, List<Integer> winNumbers, int expected) {
         Lotto lotto = new Lotto(lottoNumbers);
