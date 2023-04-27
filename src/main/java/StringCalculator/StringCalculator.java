@@ -13,6 +13,10 @@ public class StringCalculator {
         this.inputs = Arrays.asList(text.split(" "));
     }
 
+    private Boolean isNullOrEmpty(String text) {
+        return text == null || text.isEmpty();
+    }
+
     public Integer calculate() {
         Value result = new Value(Integer.parseInt(inputs.get(0)));
         for (int i = 1; i < inputs.size() - 2; i += 2) {
@@ -35,9 +39,5 @@ public class StringCalculator {
             return value.divide(Integer.parseInt(inputs.get(index + 1)));
         }
         throw new IllegalArgumentException("사칙연산 기호가 아닙니다");
-    }
-
-    private Boolean isNullOrEmpty(String text) {
-        return text == null || text.isEmpty();
     }
 }
