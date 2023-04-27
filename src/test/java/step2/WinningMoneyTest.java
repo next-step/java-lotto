@@ -4,7 +4,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.Match;
+import step2.domain.MatchFactory;
 import step2.domain.WinningMoney;
+
+import static step2.domain.MatchFactory.*;
 
 public class WinningMoneyTest {
 
@@ -14,7 +17,7 @@ public class WinningMoneyTest {
     void 일치하는_수의_개수와_보너스_볼의_일치_여부에_따른_상금이_반환된다(int count, boolean isBonus, int result) {
 
         // given
-        Match match = new Match(count, isBonus);
+        Match match = match(count, isBonus);
 
         // when
         Integer winningMoney = WinningMoney.winningMoney(match);

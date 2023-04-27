@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static step2.domain.MatchFactory.*;
+
 public class MatchRecord {
 
     private final Map<Match, Integer> numberOfMatches;
@@ -16,19 +18,20 @@ public class MatchRecord {
         Map<Match, Integer> numberOfMatches = new HashMap<>();
 
         for (int i = 0; i < 7; i++) {
-            numberOfMatches.put(new Match(i, false), 0);
+            numberOfMatches.put(match(i, false), 0);
         }
 
-        numberOfMatches.put(new Match(5, true), 0);
+        numberOfMatches.put(match(5, true), 0);
 
         return new MatchRecord(numberOfMatches);
     }
 
     public Map<Match, Integer> countNumber(List<List<Integer>> purchaseNumbers, Number number) {
         for (List<Integer> purchaseNumber : purchaseNumbers) {
-            int count = count(purchaseNumber, number.winningNumbers());
-            boolean isBonus = isBonus(count, purchaseNumber, number.bonusNumber());
-            Match match = new Match(count, isBonus);
+            int count = countWithPurchaseNumber(purchaseNumber, number.winningNumbers());
+            boolean isBonus = isContainBonusNumber(count, purchaseNumber, number.bonusNumber());
+            Match match = match(count, isBonus);
+
             Integer value = numberOfMatches.get(match);
             numberOfMatches.put(match, ++value);
         }
@@ -36,28 +39,28 @@ public class MatchRecord {
         return numberOfMatches;
     }
 
-    private boolean isBonus(int count, List<Integer> number, int bonusNumber) {
+    private int countWithPurchaseNumber(List<Integer> number, List<Integer> winningNumbers) {
+        int count = 0;
+
+        for (Integer winningNumber : winningNumbers) {
+            count = count(number, count, winningNumber);
+        }
+
+        return count;
+    }
+
+    private int count(List<Integer> number, int count, Integer winningNumber) {
+        if (number.contains(winningNumber)) {
+            count++;
+        }
+        return count;
+    }
+
+    private boolean isContainBonusNumber(int count, List<Integer> number, int bonusNumber) {
         if (count != 5) {
             return false;
         }
 
         return number.contains(bonusNumber);
-    }
-
-    private int count(List<Integer> number, List<Integer> winningNumbers) {
-        int count = 0;
-
-        for (Integer winningNumber : winningNumbers) {
-            count = matchNumber(number, count, winningNumber);
-        }
-
-        return count;
-    }
-
-    private int matchNumber(List<Integer> number, int count, Integer winningNumber) {
-        if (number.contains(winningNumber)) {
-            count++;
-        }
-        return count;
     }
 }

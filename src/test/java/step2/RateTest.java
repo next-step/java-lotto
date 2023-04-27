@@ -2,12 +2,14 @@ package step2;
 
 import org.junit.jupiter.api.Test;
 import step2.domain.Match;
+import step2.domain.MatchFactory;
 import step2.domain.Rate;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
+import static step2.domain.MatchFactory.*;
 
 public class RateTest {
 
@@ -19,10 +21,10 @@ public class RateTest {
 
         Map<Match, Integer> numberOfMatches = new HashMap<>();
 
-        numberOfMatches.put(new Match(3, false), 1);
-        numberOfMatches.put(new Match(4, false), 0);
-        numberOfMatches.put(new Match(5, false), 0);
-        numberOfMatches.put(new Match(6, false), 0);
+        numberOfMatches.put(match(3, false), 1);
+        numberOfMatches.put(match(4, false), 0);
+        numberOfMatches.put(match(5, false), 0);
+        numberOfMatches.put(match(6, false), 0);
 
         // when
         float result = Rate.calculateRate(numberOfMatches, price);

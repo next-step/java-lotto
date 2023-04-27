@@ -20,8 +20,8 @@ public class Lotto {
 
         List<Integer> winningNumber = InputView.winningNumber();
         int bonusNumber = InputView.bonusNumber();
-
         Number lottoNumber = new Number(winningNumber, bonusNumber);
+
         LottoResult result  = lottoGame.lottoResult(purchaseNumber, lottoNumber);
         PrintView.lottoResult(result);
     }
