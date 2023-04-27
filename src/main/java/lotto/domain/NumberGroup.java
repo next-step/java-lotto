@@ -16,10 +16,14 @@ public class NumberGroup {
 
   private List<String> makeNumberList(List<String> formulaList) {
     return IntStream.range(0, formulaList.size())
-        .filter(index -> index % 2 == 0)
+        .filter(this::isEvenIndex)
         .mapToObj(formulaList::get)
-        .map((strNumber) -> this.isThrowIllegalArgumentException(strNumber))
+        .map(this::isThrowIllegalArgumentException)
         .collect(Collectors.toList());
+  }
+
+  private Boolean isEvenIndex(int index) {
+    return index % 2 == 0;
   }
 
   private String isThrowIllegalArgumentException(String strNumber) {
