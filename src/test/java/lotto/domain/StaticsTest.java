@@ -112,12 +112,12 @@ public class StaticsTest {
         int actual = staticsFixture.getIncome();
         //then
         assertAll("당첨금액 = Prize.FIRST.prizeCalculate(1) + Prize.SECOND.prizeCalculate(2) + Prize.THIRD.prizeCalculate(3) + Prize.FOURTH.prizeCalculate(4) + Prize.FIFTH.prizeCalculate(5)",
-                () -> assertEquals(expected, actual),
-                () -> assertEquals(2_000_000_000, Prize.FIRST.calculatePrize(1)),
-                () -> assertEquals(30_000_000 * 2, Prize.SECOND.calculatePrize(2)),
-                () -> assertEquals(1_500_000 * 3, Prize.THIRD.calculatePrize(3)),
-                () -> assertEquals(50_000 * 4, Prize.FOURTH.calculatePrize(4)),
-                () -> assertEquals(5_000 * 5, Prize.FIFTH.calculatePrize(5))
+                () -> assertEquals(2_000_000_000, Prize.FIRST.calculatePrize(staticsFixture.getCountFirst())),
+                () -> assertEquals(30_000_000 * 2, Prize.SECOND.calculatePrize(staticsFixture.getCountSecond())),
+                () -> assertEquals(1_500_000 * 3, Prize.THIRD.calculatePrize(staticsFixture.getCountThird())),
+                () -> assertEquals(50_000 * 4, Prize.FOURTH.calculatePrize(staticsFixture.getCountFourth())),
+                () -> assertEquals(5_000 * 5, Prize.FIFTH.calculatePrize(staticsFixture.getCountFifth())),
+                () -> assertEquals(expected, actual)
         );
     }
 
