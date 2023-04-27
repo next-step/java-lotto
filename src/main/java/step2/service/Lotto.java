@@ -16,10 +16,15 @@ public class Lotto {
     public Integer countWinNum(List<Integer> winNumbers) {
         Integer countWinNumber = 0;
         for (Integer winNum : winNumbers) {
-            for (LottoNumber lottoNumber : lottoNumbers) {
-                if (lottoNumber.equalsWinNum(winNum)) {
-                    countWinNumber++;
-                }
+            countWinNumber = countMatchingNumbers(countWinNumber, winNum);
+        }
+        return countWinNumber;
+    }
+
+    private Integer countMatchingNumbers(Integer countWinNumber, Integer winNum) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (lottoNumber.equalsWinNum(winNum)) {
+                countWinNumber++;
             }
         }
         return countWinNumber;
