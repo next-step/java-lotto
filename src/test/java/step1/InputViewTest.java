@@ -18,16 +18,14 @@ public class InputViewTest {
     @Test
     void 공백_검증() {
         InputView inputView = new InputView();
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            inputView.emptyValidate("");
-        });
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                inputView.emptyValidate("")).withMessage("식을 입력하세요.");
     }
 
     @Test
     void 연산자_검증() {
         InputView inputView = new InputView();
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            inputView.operatorValidate("$");
-        });
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                inputView.operatorValidate("$")).withMessage("형식에 맞춰 식을 입력하세요.");
     }
 }

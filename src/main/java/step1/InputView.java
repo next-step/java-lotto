@@ -28,14 +28,14 @@ public class InputView {
 
     public void emptyValidate(String input) {
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("식을 입력하세요.");
         }
     }
 
     public void operatorValidate(String s) {
         List<String> operationList = Arrays.asList(operations);
         if (!operationList.contains(s) && !s.matches(regExp)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("형식에 맞춰 식을 입력하세요.");
         }
     }
 }
