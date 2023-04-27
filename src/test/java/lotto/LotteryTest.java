@@ -1,46 +1,24 @@
 package lotto;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import java.util.List;
 
 public class LotteryTest {
 
     @Test
-    @DisplayName("입력받은 구매 금액을 로또 가격으로 나눈 금액 만큼 로또를 생성한다.")
-    void generate_lottery() {
-        // given
-        Price price = new Price(14000);
+    @DisplayName("6개의 값이 일치하면 6개일치한 값이 1 증가한다.")
+    void when_ThreeNumbersAreMatched() {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Lottery lottery = new Lottery(List.of(1, 2, 3, 4, 5, 6));
 
-        // when
-        Store store = new Store(price);
+        Lotteries lotteries = new Lotteries(lottery, winningNumbers);
+        List<Integer> integers = lotteries.calculateResult();
 
-        // then
-        int lotteryCount = store.getLotteryCount();
-        assertThat(lotteryCount).isEqualTo(14);
+        Assertions.assertThat(integers.get(3)).isEqualTo(1);
     }
 
-    @Test
-    @DisplayName("입력 금액이 로또 금액에 떨어지지 않으면 예외를 발생한다.")
-    void when_DoesNotDividedByLotteryPrice_ThrowsException() {
-        // given
-        Price price = new Price(11111);
 
-        // when, then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Store(price));
-    }
-
-    @Test
-    @DisplayName("입력 금액이 로또 금액보다 작으면 예외를 발생시킨다.")
-    void when_InputIsLessThanLotteryPrice_ThrowsException() {
-        // given
-        Price price = new Price(0);
-
-        // when, then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Store(price));
-    }
 }
