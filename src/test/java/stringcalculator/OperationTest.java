@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OperationTest {
@@ -22,5 +23,10 @@ class OperationTest {
     void 계산하기(String symbol, Double expectedResult) {
         Operation operation = Operation.find(symbol);
         assertThat(operation.calculate(6, 4)).isEqualTo(expectedResult);
+    }
+
+    @Test
+    void 나누기0예외처리() {
+        assertThatThrownBy(() -> Operation.DIVIDE.calculate(3,0)).isInstanceOf(IllegalArgumentException.class);
     }
 }
