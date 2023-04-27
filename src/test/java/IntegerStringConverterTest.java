@@ -1,8 +1,8 @@
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ArithmeticStringConverterTest {
-    private final StringConverter<Integer> arithmeticStringConverter = new ArithmeticStringConverter();
+public class IntegerStringConverterTest {
+    private final StringConverter<Integer> arithmeticStringConverter = new IntegerStringConverter();
 
     @Test
     void 정수가_아닌_숫자의_문자열인경우_예외를_던진다() {
