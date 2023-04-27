@@ -19,7 +19,7 @@ public class OutputView {
     lottoStatistics.getStatistics().entrySet().stream()
                    .sorted(Map.Entry.comparingByKey())
                    .filter(entry -> entry.getKey().getMatchNumbersCount() >= 3)
-                   .forEach(entry -> System.out.println(entry.getKey().getMatchNumbersCount() + "개 일치 (" + entry.getKey().getPrize() + ")- " + entry.getValue() + "개"));
+                   .forEach(entry -> System.out.println(entry.getKey().getMatchNumbersCount() + "개 일치 (" + entry.getKey().getPrize().getAmount() + ")- " + entry.getValue() + "개"));
     System.out.println("총 수익률은 " + lottoStatistics.getRateOfReturn() + "입니다.");
   }
 }
