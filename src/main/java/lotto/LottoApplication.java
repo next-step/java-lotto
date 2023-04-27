@@ -11,8 +11,12 @@ import java.util.List;
 public class LottoApplication {
 
   public static void main(String[] args) {
-    int tryRandomCount = InputView.inputTryCount();
-    LottoTickets soldLottoTicket = LottoVendingMachine.issueLottoTickets(tryRandomCount);
+    int tryTotalCount = InputView.inputTryCount();
+    int tryDirectInputCount = InputView.inputDirectTryCount(tryTotalCount);
+
+    List<List<Integer>> directInputLottoNumbers = InputView.inputDirectLottoNumbers(tryDirectInputCount, tryTotalCount);
+
+    LottoTickets soldLottoTicket = LottoVendingMachine.issueLottoTickets(tryTotalCount, directInputLottoNumbers);
     ResultView.showLottoTickets(soldLottoTicket);
 
     List<Integer> winningLottoNumbers = InputView.inputWinningTicketNumbers();

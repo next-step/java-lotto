@@ -8,10 +8,15 @@ public class LottoVendingMachine {
   private LottoVendingMachine() {
   }
 
-  public static LottoTickets issueLottoTickets(int tryRandomCount) {
+  public static LottoTickets issueLottoTickets(int tryTotalCount, List<List<Integer>> directInputLottoNumbers) {
+    int directInputCount = tryDirectInputCount(directInputLottoNumbers);
     LottoTickets lottoTickets = new LottoTickets();
 
-    for (int i = 0; i < tryRandomCount; i++) {
+    for (List<Integer> directInputLottoNumber : directInputLottoNumbers) {
+      lottoTickets.addLottoTicket(new LottoTicket(toLottoNumbers(directInputLottoNumber)));
+    }
+
+    for (int i = 0; i < tryTotalCount - directInputCount; i++) {
       lottoTickets.addLottoTicket(new RandomLottoStrategy().issue());
     }
 
@@ -30,5 +35,9 @@ public class LottoVendingMachine {
     return lottoNumbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
+  }
+
+  private static int tryDirectInputCount(List<List<Integer>> directInputLottoNumbers) {
+    return directInputLottoNumbers.size();
   }
 }
