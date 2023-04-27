@@ -15,7 +15,6 @@ public class StaticsTest {
 
     private Statics staticsFixture;
 
-
     @BeforeEach
     public void beforeEach() {
         Ticket winner = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
@@ -130,7 +129,7 @@ public class StaticsTest {
         //when
         int ratioX1000 = (int) (staticsFixture.getProfitRatio() * 1000);
         //then
-        assertThat(ratioX1000).isEqualTo(answerX1000).as("double 형식은 값비교가 힘들어서 1000을 곱한다음 int 형식으로 캐스팅하여 검증했습니다");
-        assertThat(ratioX1000).isEqualTo(answerX1000).as("투자금 13게임[13000₩], 수익금[2004725000₩], 투자대비 수익비율 [154209.615385]");
+        assertThat(ratioX1000).as("double 형식은 값비교가 힘들어서 1000을 곱한다음 int 형식으로 캐스팅하여 검증했습니다").isEqualTo(answerX1000);
+        assertThat(ratioX1000).as("투자금 13게임[13000₩], 수익금[2004725000₩], 투자대비 수익비율 [154209.615385]").isEqualTo(answerX1000);
     }
 }
