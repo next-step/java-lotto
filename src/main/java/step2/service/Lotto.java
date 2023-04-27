@@ -13,7 +13,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Integer containWinNum(List<Integer> winNumbers) {
+    public Integer countWinNum(List<Integer> winNumbers) {
         Integer countWinNumber = 0;
         for (Integer winNum : winNumbers) {
             for (LottoNumber lottoNumber : lottoNumbers) {
