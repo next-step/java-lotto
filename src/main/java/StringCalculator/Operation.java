@@ -1,10 +1,28 @@
 package StringCalculator;
 
+import java.util.Arrays;
+
 public enum Operation {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+    PLUS("+") {
+        int apply(int x, int y) {
+            return x + y;
+        }
+    },
+    MINUS("-") {
+        int apply(int x, int y) {
+            return x - y;
+        }
+    },
+    MULTIPLY("*") {
+        int apply(int x, int y) {
+            return x * y;
+        }
+    },
+    DIVIDE("/") {
+        int apply(int x, int y) {
+            return x / y;
+        }
+    };
 
     private final String value;
 
@@ -16,35 +34,12 @@ public enum Operation {
         return value;
     }
 
-    public static int operating(int value1, String operation, int value2) {
-        if (Operation.PLUS.getValue().equals(operation))
-            return plus(value1, value2);
+    abstract int apply(int x, int y);
 
-        if (Operation.MINUS.getValue().equals(operation))
-            return minus(value1, value2);
-
-        if (Operation.MULTIPLY.getValue().equals(operation))
-            return multiply(value1, value2);
-
-        if (Operation.DIVIDE.getValue().equals(operation))
-            return divide(value1, value2);
-
-        throw new IllegalArgumentException();
-    }
-
-    private static int plus(int value1, int value2) {
-        return value1 + value2;
-    }
-
-    private static int minus(int value1, int value2) {
-        return value1 - value2;
-    }
-
-    private static int multiply(int value1, int value2) {
-        return value1 * value2;
-    }
-
-    private static int divide(int value1, int value2) {
-        return value1 / value2;
+    public static Operation getInstanceByValue(String value) {
+        return Arrays.stream(Operation.values())
+                .filter(operation -> operation.getValue().equals(value))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException());
     }
 }
