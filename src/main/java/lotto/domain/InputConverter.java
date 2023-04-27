@@ -14,7 +14,7 @@ public class InputConverter {
         return formulaList;
     }
 
-    private boolean isLastWordNumber(List<String> formulaList) {
+    private Boolean isLastWordNumber(List<String> formulaList) {
         return NUMBER_PATTERN_COMPILE.asMatchPredicate().test(formulaList.get(formulaList.size()-1));
     }
 
