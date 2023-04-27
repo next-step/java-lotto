@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 import stringcalculator.domain.Experssion;
@@ -49,9 +50,18 @@ public class ExperssionTest {
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력된 피연산자가 숫자가 아닙니다");
     }
 
+    @DisplayName("사칙연산")
+    @ParameterizedTest(name = "{displayName} [{index}] {0} = {1}")
+    @CsvSource(value = {"1 + 2,3", "2 - 1,1", "2 * 3,6", "6 / 2,3"})
+    void 사칙연산(String expression, String expected) {
+        Experssion experssion = new Experssion(expression);
+
+        Assertions.assertThat(experssion.reduce()).isEqualTo(Integer.parseInt(expected));
+    }
+
     @Test
-    @DisplayName("사칙연산자계산")
-    void 사칙연산자계산() {
+    @DisplayName("복합연산")
+    void 복합연산() {
         Experssion experssion = new Experssion("3 + 4 - 2 * 6 / 5");
 
         Assertions.assertThat(experssion.reduce()).isEqualTo(6);
