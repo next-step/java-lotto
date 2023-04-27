@@ -2,12 +2,10 @@ package step2.view;
 
 import step2.domain.LottoResult;
 import step2.domain.Match;
-import step2.domain.WinningMoney;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 import static step2.domain.MatchFactory.match;
 

@@ -2,14 +2,13 @@ package step2;
 
 import org.junit.jupiter.api.Test;
 import step2.domain.Match;
-import step2.domain.MatchFactory;
 import step2.domain.Rate;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.*;
-import static step2.domain.MatchFactory.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static step2.domain.MatchFactory.match;
 
 public class RateTest {
 

@@ -4,10 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.Match;
-import step2.domain.MatchFactory;
 import step2.domain.WinningMoney;
 
-import static step2.domain.MatchFactory.*;
+import static step2.domain.MatchFactory.match;
 
 public class WinningMoneyTest {
 
