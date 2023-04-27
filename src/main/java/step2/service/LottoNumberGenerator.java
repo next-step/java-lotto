@@ -23,7 +23,6 @@ public class LottoNumberGenerator {
     }
 
     public Lotto generateLottoNumbers() {
-        lottoNumbers.shuffleNumbers();
         return new Lotto(new LottoNumbers(lottoNumbers.pickSixNumbers()));
     }
 }
