@@ -16,6 +16,7 @@ public class Main {
         LottoResults lottoResults = lottoGame.executeGame();
 
         ResultView resultView = new ResultView(lottoResults);
+        resultView.showNumOfTickets(numOfLottoTicket);
         resultView.showLottoGameResults();
 
         CountOfWinners countOfWinners = new CountOfWinners(lottoResults.countNumOfWinner(inputView.getWinNumbers()));

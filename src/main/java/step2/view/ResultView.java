@@ -15,6 +15,10 @@ public class ResultView {
         this.lottoResults = lottoResults;
     }
 
+    public void showNumOfTickets(int numOfLotto) {
+        System.out.println(numOfLotto + "개를 구매했습니다");
+    }
+
     public void showLottoGameResults() {
         for (Lotto lotto : lottoResults.getLottoResults()) {
             System.out.println(lotto.lottoNumbers());

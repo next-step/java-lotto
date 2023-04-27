@@ -19,8 +19,6 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         int purchaseAmount = scanner.nextInt();
         validateAmountUnit(purchaseAmount);
-        int numOfLotto = purchaseAmount / PRICE_PER_LOTTO;
-        System.out.println(numOfLotto + "개를 구매했습니다");
         return purchaseAmount / PRICE_PER_LOTTO;
     }
 
