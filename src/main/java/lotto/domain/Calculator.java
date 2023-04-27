@@ -12,7 +12,7 @@ public class Calculator {
         this.result = "0";
     }
 
-    public String calculate(String number1, String number2, String operator) {
+    private String calculate(String number1, String number2, String operator) {
         Double doubleNumber1 = Double.parseDouble(number1);
         Double doubleNumber2 = Double.parseDouble(number2);
         numberFormat.setGroupingUsed(false);
@@ -34,7 +34,7 @@ public class Calculator {
 
     public void calculateFormula(List<String> numberList, Queue<String> operatorQueue) {
         this.result = numberList.stream()
-                .reduce((x, y) -> calculate(x, y, operatorQueue.remove()))
+                .reduce((x, y) -> this.calculate(x, y, operatorQueue.remove()))
                 .get();
     }
 
