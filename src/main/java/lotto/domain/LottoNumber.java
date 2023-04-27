@@ -22,8 +22,15 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber provideLottoNumber(int lottoNumber) {
-        return lottoNumberRepository.get(lottoNumber);
+    public static LottoNumber provideLottoNumber(int requestNumber) {
+
+        LottoNumber lottoNumber = lottoNumberRepository.get(requestNumber);
+
+        if (!isCorrectRange(lottoNumber)) {
+            throw new IllegalArgumentException("로또 번호 범위가 아니에요 :(");
+        }
+
+        return lottoNumber;
     }
 
     public static LottoNumber provideLottoNumber() {
@@ -38,13 +45,17 @@ public class LottoNumber {
 
     public static boolean isCorrectRange(LottoNumber lottoNumber) {
 
-        LottoNumber beginOfLottoNumber = provideLottoNumber(BEGIN_OF_LOTTO_NUMBER);
+        LottoNumber beginOfLottoNumber = lottoNumberRepository.get(BEGIN_OF_LOTTO_NUMBER);
+
+        if (Objects.isNull(lottoNumber)) {
+            return Boolean.FALSE;
+        }
 
         if (lottoNumber.hashCode() < beginOfLottoNumber.hashCode()) {
             return Boolean.FALSE;
         }
 
-        LottoNumber endOfLottoNumber = provideLottoNumber(END_OF_LOTTO_NUMBER);
+        LottoNumber endOfLottoNumber = lottoNumberRepository.get(END_OF_LOTTO_NUMBER);
 
         return lottoNumber.hashCode() <= endOfLottoNumber.hashCode();
     }
