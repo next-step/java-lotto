@@ -11,17 +11,17 @@ import java.util.stream.Collectors;
 public class LottoGame {
   private final LottoTickets lottoTickets;
 
-  public LottoGame(PurchaseAmount purchaseAmount) {
+  public LottoGame(Money purchaseAmount) {
     this(purchaseAmount, new DefaultRandomStrategy());
   }
 
-  public LottoGame(PurchaseAmount purchaseAmount, RandomStrategy randomStrategy) {
+  public LottoGame(Money purchaseAmount, RandomStrategy randomStrategy) {
     this.lottoTickets = new LottoTickets(issueLottoTickets(purchaseAmount, randomStrategy));
   }
 
-  private static List<LottoTicket> issueLottoTickets(PurchaseAmount purchaseAmount, RandomStrategy randomStrategy) {
+  private static List<LottoTicket> issueLottoTickets(Money purchaseAmount, RandomStrategy randomStrategy) {
     List<LottoTicket> lottoTicket = new ArrayList<>();
-    for (int i = 0; i < purchaseAmount.getTicketCount(); i++) {
+    for (int i = 0; i < purchaseAmount.getPurchasableTicketCount(); i++) {
       lottoTicket.add(new LottoTicket(new LottoNumbers(randomStrategy.getRandomNumbers()
                                                                      .stream()
                                                                      .map(LottoNumber::new)

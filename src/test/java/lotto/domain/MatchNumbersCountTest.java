@@ -33,7 +33,7 @@ class MatchNumbersCountTest {
 
   @ParameterizedTest
   @MethodSource("providePrizeArguments")
-  void 상금을_반환한다(MatchNumbersCount matchNumbersCount, int expectedPrize) {
+  void 상금을_반환한다(MatchNumbersCount matchNumbersCount, Money expectedPrize) {
     assertThat(matchNumbersCount.getPrize())
         .isEqualTo(expectedPrize);
   }
@@ -41,13 +41,13 @@ class MatchNumbersCountTest {
   private static Stream<Arguments> providePrizeArguments() {
     return Stream.of(
         Arguments.of(
-            MATCH_0, 0,
-            MATCH_1, 0,
-            MATCH_2, 0,
-            MATCH_3, 5_000,
-            MATCH_4, 50_000,
-            MATCH_5, 1_500_000,
-            MATCH_6, 2_000_000_000
+            MATCH_0, new Money(0),
+            MATCH_1, new Money(0),
+            MATCH_2, new Money(0),
+            MATCH_3, new Money(5_000),
+            MATCH_4, new Money(50_000),
+            MATCH_5, new Money(1_500_000),
+            MATCH_6, new Money(2_000_000_000)
         )
     );
   }

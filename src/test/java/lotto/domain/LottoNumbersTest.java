@@ -45,4 +45,16 @@ class LottoNumbersTest {
       assertThat(lottoNumbers.getNumbers().get(i)).isLessThan(lottoNumbers.getNumbers().get(i + 1));
     }
   }
+
+  @Test
+  void 일치하는_숫자의_갯수를_반환한다() {
+    LottoNumbers lottoNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
+                                                       .map(LottoNumber::new)
+                                                       .collect(Collectors.toList()));
+    LottoNumbers winningNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
+                                                        .map(LottoNumber::new)
+                                                        .collect(Collectors.toList()));
+    assertThat(lottoNumbers.matchCount(winningNumbers))
+        .isEqualTo(6);
+  }
 }

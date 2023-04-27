@@ -43,7 +43,7 @@ public class LottoStatistics {
 
   private long getTotalPrize() {
     return statistics.entrySet().stream()
-                     .mapToLong(entry -> (long) entry.getKey().getPrize() * entry.getValue())
+                     .mapToLong(entry -> (long) entry.getKey().getPrize().getAmount() * entry.getValue())
                      .sum();
   }
 

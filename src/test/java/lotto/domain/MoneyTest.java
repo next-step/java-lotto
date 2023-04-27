@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PurchaseAmountTest {
+class MoneyTest {
   @Test
   void 티켓갯수() {
-    PurchaseAmount purchaseAmount = new PurchaseAmount(100000);
-    assertThat(purchaseAmount.getTicketCount()).isEqualTo(100);
+    Money purchaseAmount = new Money(100000);
+    assertThat(purchaseAmount.getPurchasableTicketCount()).isEqualTo(100);
   }
 }
