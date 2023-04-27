@@ -40,7 +40,7 @@ public class StaticsTest {
         Ticket fifthE = new Ticket(Set.of(1, 2, 4, 35, 26, 17));
 
         List<Ticket> purchaseTicketsFixture = List.of(
-                first,
+                first, secondA, secondB,
                 thirdA, thirdB, thirdC,
                 fourthA, fourthB, fourthC, fourthD,
                 fifthA, fifthB, fifthC, fifthD, fifthE
@@ -74,7 +74,7 @@ public class StaticsTest {
     @Test
     public void second() {
         //given
-        int expect = 3;
+        int expect = 2;
         //when
         int actual = staticsFixture.getCountSecond();
         //then
@@ -107,18 +107,18 @@ public class StaticsTest {
     @Test
     public void income() {
         //given
-        int answer = 2_004_725_000;
+        int answer = 2_064_725_000;
         //when
         int income = staticsFixture.getIncome();
         //then
-        assertThat(income).isEqualTo(answer).as("당첨금액 계산식 = Prize.FIRST.prizeCalculate(1) + Prize.THIRD.prizeCalculate(3) + Prize.FOURTH.prizeCalculate(4) + Prize.FIFTH.prizeCalculate(5)");
+        assertThat(income).isEqualTo(answer).as("당첨금액 계산식 = Prize.FIRST.prizeCalculate(1) + Prize.SECOND.prizeCalculate(2) + Prize.THIRD.prizeCalculate(3) + Prize.FOURTH.prizeCalculate(4) + Prize.FIFTH.prizeCalculate(5)");
     }
 
     @DisplayName("투자금 대비 당첨금액의 비율을 사이의 소수점 둘째자리까지 표시한다")
     @Test
     public void returnRatio() {
         //given
-        int answerX1000 = 154209615;
+        int answerX1000 = 137648333;
         //when
         int ratioX1000 = (int) (staticsFixture.getProfitRatio() * 1000);
         //then
