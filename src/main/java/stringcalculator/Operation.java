@@ -1,5 +1,6 @@
 package stringcalculator;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.DoubleBinaryOperator;
 
@@ -17,7 +18,14 @@ public enum Operation {
         this.biFunction = biFunction;
     }
 
-    public Double calculate(Double number1, Double number2) {
+    public static Operation find(String symbol) {
+        return Arrays.stream(Operation.values())
+                .filter(operation -> symbol.equals(operation.symbol))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Double calculate(double number1, double number2) {
         return this.biFunction.apply(number1,number2);
     }
 }

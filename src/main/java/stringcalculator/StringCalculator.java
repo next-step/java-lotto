@@ -7,12 +7,12 @@ public class StringCalculator {
 
     private final List<Double> numbers = new ArrayList<>();
     private final List<String> operatorList = new ArrayList<>();
-    private Double result;
+    private double result;
 
     public StringCalculator(String input) {
         validateInput(input);
         String[] strings = splitInput(input);
-        result = Double.valueOf(strings[0]);
+        result = Double.parseDouble(strings[0]);
         for (int i = 0; i < strings.length; i++) {
             separateInput(strings, i);
         }
@@ -52,11 +52,14 @@ public class StringCalculator {
     }
 
     public void calculateEach(String symbol, Double number) {
-        switch (symbol){
-            case "+" : result = Operation.PLUS.calculate(result,number); break;
-            case "-" : result = Operation.MINUS.calculate(result,number); break;
-            case "*" : result = Operation.MULTIPLY.calculate(result,number); break;
-            case "/" : result = Operation.DIVIDE.calculate(result,number); break;
+        Operation operation = Operation.find(symbol);
+        if(operation == null){
+            throw new IllegalArgumentException();
         }
+        result = operation.calculate(result,number);
+    }
+
+    public Double getResult() {
+        return result;
     }
 }
