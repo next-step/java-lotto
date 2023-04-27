@@ -1,9 +1,9 @@
 package step2.view;
 
+import step2.service.Lotto;
 import step2.service.LottoRank;
-import step2.vo.LottoResult;
-import step2.vo.LottoResults;
 import step2.vo.CountOfWinners;
+import step2.vo.LottoResults;
 
 import java.util.Map;
 
@@ -16,8 +16,8 @@ public class ResultView {
     }
 
     public void showLottoGameResults() {
-        for (LottoResult lottoResult : lottoResults.getLottoResults()) {
-            System.out.println(lottoResult.lottoNumbers());
+        for (Lotto lotto : lottoResults.getLottoResults()) {
+            System.out.println(lotto.lottoNumbers());
         }
         System.out.println();
     }

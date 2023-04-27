@@ -13,9 +13,16 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public boolean containWinNum(int winNum) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.equalsWinNum(winNum));
+    public Integer containWinNum(List<Integer> winNumbers) {
+        Integer countWinNumber = 0;
+        for (Integer winNum : winNumbers) {
+            for (LottoNumber lottoNumber : lottoNumbers) {
+                if (lottoNumber.equalsWinNum(winNum)) {
+                    countWinNumber++;
+                }
+            }
+        }
+        return countWinNumber;
     }
 
     public List<Integer> lottoNumbers() {
