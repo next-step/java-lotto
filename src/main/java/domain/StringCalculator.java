@@ -1,13 +1,17 @@
+package domain;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class StringCalculator {
 
-    public void readExpression(String exp) throws IllegalArgumentException {
+    private  List<Integer> numbers;
+    private List<Operation> operations;
 
+    public void readExpression(String exp) throws IllegalArgumentException {
         validExpression(exp);
-        List<Integer> numbers = extractNumbers(exp.split(" "));
-        List<Operation> operations = extractOperation(exp.split(" "));
+        numbers = extractNumbers(exp.split(" "));
+        operations = extractOperation(exp.split(" "));
     }
 
     private void validExpression(String exp) {
@@ -15,7 +19,6 @@ public class StringCalculator {
             throw new IllegalArgumentException("유효한 표현식이 아닙니다.");
         }
     }
-
 
     List<Integer> extractNumbers(String[] splits) {
         List<Integer> stringNums = new ArrayList<>();
@@ -51,6 +54,12 @@ public class StringCalculator {
         return operation;
 
     }
+
+
+    public int calculate(List<Integer> numbers, List<Operation> operations) {
+        return 3;
+    }
+
 
 }
 

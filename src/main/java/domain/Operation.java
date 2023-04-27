@@ -1,3 +1,5 @@
+package domain;
+
 import java.security.InvalidParameterException;
 
 public enum Operation {

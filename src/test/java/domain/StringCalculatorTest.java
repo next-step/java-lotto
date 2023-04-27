@@ -1,7 +1,17 @@
+package domain;
+
+import domain.Operation;
+import domain.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -31,4 +41,17 @@ class StringCalculatorTest {
         assertThat(stringCalculator.extractOperation(exp.split(" "))).contains(Operation.toOperation(operation));
     }
 
+    @DisplayName("수식 연산")
+    @ParameterizedTest
+    @MethodSource("sampleParams")
+    public void 수식_연산(List<Integer> numbers, List<Operation> operations, int result) throws Exception {
+        assertThat(stringCalculator.calculate(numbers, operations)).isEqualTo(result);
+    }
+
+    static Stream<Arguments> sampleParams() throws Throwable {
+        return Stream.of(
+                Arguments.of(Arrays.asList("1", "2"), Arrays.asList("+"), 3),
+                Arguments.of(Arrays.asList("3", "6"), Arrays.asList("+"), 9)
+        );
+    }
 }
