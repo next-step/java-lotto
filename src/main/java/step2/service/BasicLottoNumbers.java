@@ -22,10 +22,10 @@ public class BasicLottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto pickSixNumbers() {
+    public List<LottoNumber> pickSixNumbers() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> pickedNumbers = new ArrayList<>(lottoNumbers.subList(0, 6));
         Collections.sort(pickedNumbers);
-        return new Lotto(pickedNumbers);
+        return pickedNumbers;
     }
 }

@@ -1,7 +1,5 @@
 package step2.service;
 
-import step2.vo.LottoResults;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +14,13 @@ public class LottoGame {
         this.basicLottoNumbers = new BasicLottoNumbers();
     }
 
-    public LottoResults executeGame() {
+    public List<Lotto> executeGame() {
         List<Lotto> lottoResults = new ArrayList<>();
 
         for (int genNum = 0; genNum < numOfLottoTicket; genNum++) {
-            lottoResults.add(basicLottoNumbers.pickSixNumbers());
+            lottoResults.add(new Lotto(basicLottoNumbers.pickSixNumbers()));
         }
 
-        return new LottoResults(lottoResults);
+        return lottoResults;
     }
 }
