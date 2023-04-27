@@ -21,8 +21,8 @@ public class LottoTicket {
                 .collect(Collectors.toList()));
     }
 
-    public long matchesLottoNumberCount(List<Integer> winningNumbers) {
-        return lottoNumbers.stream()
+    public int matchesLottoNumberCount(List<Integer> winningNumbers) {
+        return (int) lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
                 .filter(winningNumbers::contains)
                 .count();

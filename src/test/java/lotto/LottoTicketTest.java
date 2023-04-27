@@ -38,7 +38,7 @@ public class LottoTicketTest {
     void matchesLottoTicket() {
         LottoTicket lottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 45));
         List<Integer> winningLottoTicket = List.of(1, 2, 3, 4, 5, 6);
-        long winningCount = lottoTicket.matchesLottoNumberCount(winningLottoTicket);
+        int winningCount = lottoTicket.matchesLottoNumberCount(winningLottoTicket);
         assertThat(winningCount).isEqualTo(5);
     }
 }

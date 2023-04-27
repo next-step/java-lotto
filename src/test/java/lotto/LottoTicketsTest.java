@@ -18,8 +18,8 @@ public class LottoTicketsTest {
         LottoTicket secondRankLottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 45));
 
         LottoTickets lottoTickets = new LottoTickets(List.of(allMatcheslottoTicket, secondRankLottoTicket));
-        List<Long> matchesCounts = lottoTickets.matchesLottoTicketCount(winningNumbers);
+        List<Integer> matchesCounts = lottoTickets.matchesLottoTicketCount(winningNumbers);
 
-        assertEquals(List.of(6L, 5L), matchesCounts);
+        assertEquals(List.of(6, 5), matchesCounts);
     }
 }

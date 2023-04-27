@@ -11,7 +11,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<Long> matchesLottoTicketCount(List<Integer> winningNumbers) {
+    public List<Integer> matchesLottoTicketCount(List<Integer> winningNumbers) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.matchesLottoNumberCount(winningNumbers))
                 .collect(Collectors.toList());
