@@ -12,9 +12,9 @@ public class LottoTicket {
   private final Set<LottoNumber> lottoTicket;
 
   public LottoTicket(List<LottoNumber> lottoNumbers) {
-    validateLottoTicket(lottoNumbers);
-
     lottoTicket = new TreeSet<>(lottoNumbers);
+
+    validateLottoTicket(lottoTicket);
   }
 
   public Set<LottoNumber> lottoTicketNumbers() {
@@ -31,13 +31,13 @@ public class LottoTicket {
     return lottoTicket.contains(lottoNumber);
   }
 
-  private void validateLottoTicket(List<LottoNumber> lottoTicket) {
+  private void validateLottoTicket(Set<LottoNumber> lottoTicket) {
     if (!equalsLottoNumbers(lottoTicket)) {
       throw new IllegalArgumentException(ILLEGAL_COUNT_MESSAGE);
     }
   }
 
-  private boolean equalsLottoNumbers(List<LottoNumber> lottoTicket) {
+  private boolean equalsLottoNumbers(Set<LottoNumber> lottoTicket) {
     return lottoTicket.size() == TICKET_NUMBER_COUNT;
   }
 }

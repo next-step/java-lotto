@@ -57,6 +57,21 @@ public class LottoTicketTest {
             .hasMessage("로또 번호는 6개 입력하셔야 합니다.");
   }
 
+  @Test
+  @DisplayName("사용자가 같은 번호 입력하는 경우 IllegalArgumentException throw")
+  public void create_같은_번호_가진_로또_입력() {
+    assertThatThrownBy(() -> new LottoTicket(List.of(
+            new LottoNumber(1),
+            new LottoNumber(3),
+            new LottoNumber(5),
+            new LottoNumber(7),
+            new LottoNumber(7),
+            new LottoNumber(10)
+    )))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또 번호는 6개 입력하셔야 합니다.");
+  }
+
   @ParameterizedTest(name = "로또 번호 가지고 있는지 확인 테스트")
   @CsvSource(value = { "1:true", "3:false" }, delimiter = ':')
   public void match_로또_번호(int input, boolean expected) {
