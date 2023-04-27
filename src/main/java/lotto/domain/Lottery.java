@@ -30,18 +30,9 @@ public class Lottery {
 
     }
 
-    public List<Integer> getLotteryNumber() {
-        return lotteryNumber;
-    }
-
-    public int matchingCount(List<Integer> winningNumbers) {
-        int result = 0;
-        for (Integer winningNumber : winningNumbers) {
-            if (lotteryNumber.contains(winningNumber)) {
-                result++;
-            }
-        }
-        return result;
+    public int matchedCount(List<Integer> winningNumbers) {
+        return (int)lotteryNumber.stream()
+                .filter(winningNumbers::contains).count();
     }
 
     @Override

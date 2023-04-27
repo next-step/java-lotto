@@ -1,7 +1,8 @@
 package lotto.view;
 
-import lotto.Lottery;
+import lotto.domain.Lottery;
 
+import java.util.Collections;
 import java.util.List;
 
 public class OutputView {
@@ -25,14 +26,23 @@ public class OutputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printLotteryResult() {
+    public static void printLotteryResult(List<Integer> lotteryResult) {
+        int threeMatchedCount = getFrequency(lotteryResult, 3);
+        int fourMatchedCount = getFrequency(lotteryResult, 4);
+        int fiveMatchedCount = getFrequency(lotteryResult, 5);
+        int sixMatchedCount = getFrequency(lotteryResult, 6);
+
         System.out.println();
         System.out.printf("당첨 통계\n" +
                 "---------\n" +
                 "3개 일치 (5000원)- %d개\n" +
                 "4개 일치 (50000원)- %d개\n" +
                 "5개 일치 (1500000원)- %d개\n" +
-                "6개 일치 (2000000000원)- %d개%n", 1, 2, 3, 4);
+                "6개 일치 (2000000000원)- %d개%n", threeMatchedCount, fourMatchedCount, fiveMatchedCount, sixMatchedCount);
+    }
+
+    private static int getFrequency(List<Integer> lotteryResult, int matchingNumber) {
+        return Collections.frequency(lotteryResult, matchingNumber);
     }
 
     public static void printRateOfReturn(double ratio) {
