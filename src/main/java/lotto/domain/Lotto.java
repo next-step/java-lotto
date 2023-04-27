@@ -4,8 +4,10 @@ import java.util.List;
 
 public class Lotto {
 
-	public static final int LOTTO_SIZE = 6;
-	public static final int LOTTO_PRICE = 1000;
+	public static final int SIZE = 6;
+	public static final int PRICE = 1000;
+	public static final int MINIMUM_BOUND = 1;
+	public static final int MAXIMUM_BOUND = 45;
 
 	private final SelectedNumbers selectedNumbers;
 	private final Score score;

@@ -38,8 +38,8 @@ public class InputView {
 	}
 
 	private static void checkSize(int length) {
-		if (length != Lotto.LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또의 크기인 6만큼만 입력 가능합니다.");
+		if (length != Lotto.SIZE) {
+			throw new IllegalArgumentException(String.format("로또의 크기인 %d만큼 입력 가능합니다.", Lotto.SIZE));
 		}
 	}
 
@@ -58,8 +58,8 @@ public class InputView {
 	}
 
 	private static int checkRange(int winNumber) {
-		if (winNumber < 1 || winNumber > 45) {
-			throw new IllegalArgumentException("당첨 넘버는 1~45까지의 숫자만 입력 가능합니다.");
+		if (winNumber < Lotto.MINIMUM_BOUND || winNumber > Lotto.MAXIMUM_BOUND) {
+			throw new IllegalArgumentException(String.format("당첨 넘버는 %d~%d까지의 숫자만 입력 가능합니다.", Lotto.MINIMUM_BOUND, Lotto.MAXIMUM_BOUND));
 		}
 		return winNumber;
 	}

@@ -22,11 +22,11 @@ public class LottoMachine {
 	public LottoMachine(long purchaseAmount) {
 		this();
 
-		if (purchaseAmount < Lotto.LOTTO_PRICE || purchaseAmount % Lotto.LOTTO_PRICE != 0) {
+		if (purchaseAmount < Lotto.PRICE || purchaseAmount % Lotto.PRICE != 0) {
 			throw new IllegalArgumentException("구입 금액이 올바르지 않습니다.");
 		}
 
-		long purchaseCount = purchaseAmount / Lotto.LOTTO_PRICE;
+		long purchaseCount = purchaseAmount / Lotto.PRICE;
 		for (long i = 0; i < purchaseCount; i++) {
 			this.purchasedLottos.add(new Lotto());
 		}
@@ -44,7 +44,7 @@ public class LottoMachine {
 	}
 
 	private void fillEachLotto(Lotto lotto) {
-		while (lotto.selectedNumbersSize() < Lotto.LOTTO_SIZE) {
+		while (lotto.selectedNumbersSize() < Lotto.SIZE) {
 			lotto.selectLottoNumbers(RandomUtils.randomInt());
 		}
 	}
@@ -63,7 +63,7 @@ public class LottoMachine {
 		return this.toPrizeSituations(this.makeScoreBoard(this.purchasedLottos.getLottos()));
 	}
 
-	public List<PrizeSituation> toPrizeSituations(Map<Score, Integer> scoreBoard) {
+	private List<PrizeSituation> toPrizeSituations(Map<Score, Integer> scoreBoard) {
 		return scoreBoard.entrySet().stream()
 			.map(entry -> new PrizeSituation(PrizeType.of(entry.getKey()), entry.getValue()))
 			.collect(Collectors.toList());
