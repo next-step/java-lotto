@@ -1,10 +1,11 @@
 package stringcalculator.domain;
 
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 public class Experssion {
     public static final String SPACE = " ";
+    public static final String OPERAND_REGEX = "\\d+";
+    public static final String OPERATOR_REGEX = "[+\\-*/]";
     private ArrayList<Integer> operands = new ArrayList<>();
     private ArrayList<String> operators = new ArrayList<>();
 
@@ -37,13 +38,13 @@ public class Experssion {
     }
 
     private void validateOperand(String term) {
-        if (!term.matches("\\d+")) {
+        if (!term.matches(OPERAND_REGEX)) {
             throw new IllegalArgumentException("입력된 피연산자가 숫자가 아닙니다.");
         }
     }
 
     private void validateOperator(String term) {
-        if (!term.matches("[+\\-*/]")) {
+        if (!term.matches(OPERATOR_REGEX)) {
             throw new IllegalArgumentException("입력된 연산자가 사칙연산자가 아닙니다.");
         }
     }
