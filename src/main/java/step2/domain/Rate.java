@@ -17,7 +17,7 @@ public class Rate {
     }
 
     private static int calculateMoney(Match match, int count) {
-        return count * WinningMoney.winningMoney(match.getMatch());
+        return count * WinningMoney.winningMoney(match);
     }
 
     private static float roundOffRate(float rate) {

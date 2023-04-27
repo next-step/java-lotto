@@ -4,20 +4,21 @@ import java.util.Arrays;
 
 public enum WinningMoney {
 
-    THREE_MONEY(3, 5000),
-    FOUR_MONEY(4, 50000),
-    FIVE_MONEY(5, 1500000),
-    SIX_MONEY(6, 2000000000);
+    THREE_MONEY(new Match(3, false), 5000),
+    FOUR_MONEY(new Match(4, false), 50000),
+    FIVE_MONEY(new Match(5, false), 1500000),
+    FIVE_BONUS_MONEY(new Match(5, true), 30000000),
+    SIX_MONEY(new Match(6, false), 2000000000);
 
-    private final int match;
+    private final Match match;
     private final int money;
 
-    WinningMoney(int match, int money) {
+    WinningMoney(Match  match, int money) {
         this.match = match;
         this.money = money;
     }
 
-    public static Integer winningMoney(int match) {
+    public static Integer winningMoney(Match match) {
         return Arrays.stream(WinningMoney.values())
                 .filter(winningMoney -> winningMoney.isEqualMatch(match))
                 .findAny()
@@ -25,7 +26,7 @@ public enum WinningMoney {
                 .orElse(0);
     }
 
-    private boolean isEqualMatch(int match) {
-        return this.match == match;
+    private boolean isEqualMatch(Match match) {
+        return this.match.equals(match);
     }
 }
