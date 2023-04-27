@@ -26,17 +26,10 @@ public class StringCalculator {
     }
 
     private int calculateNext(int index, Value value) {
-        if (inputs.get(index).equals("+")) {
-            return value.add(Integer.parseInt(inputs.get(index + 1)));
-        }
-        if (inputs.get(index).equals("-")) {
-            return value.subtract(Integer.parseInt(inputs.get(index + 1)));
-        }
-        if (inputs.get(index).equals("*")) {
-            return value.multiply(Integer.parseInt(inputs.get(index + 1)));
-        }
-        if (inputs.get(index).equals("/")) {
-            return value.divide(Integer.parseInt(inputs.get(index + 1)));
+        FourArithmeticOperator operator = FourArithmeticOperator.fromSymbol(inputs.get(index));
+        if (operator != null) {
+            int operand = Integer.parseInt(inputs.get(index + 1));
+            return operator.operate(value, operand);
         }
         throw new IllegalArgumentException("사칙연산 기호가 아닙니다");
     }
