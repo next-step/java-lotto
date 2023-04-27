@@ -1,22 +1,26 @@
 package step2.service;
 
-import step2.vo.LottoNumbers;
+import step2.vo.LottoNumber;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private LottoNumbers lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(LottoNumbers lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public boolean containWinNum(int winNum) {
-        return lottoNumbers.containWinNum(winNum);
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equalsWinNum(winNum));
     }
 
     public List<Integer> lottoNumbers() {
-        return lottoNumbers.lottoNumbers();
+        return lottoNumbers.stream()
+                .map(LottoNumber::lottoNumber)
+                .collect(Collectors.toList());
     }
 }

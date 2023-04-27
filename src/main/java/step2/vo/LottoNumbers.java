@@ -1,9 +1,10 @@
 package step2.vo;
 
+import step2.service.Lotto;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -13,21 +14,10 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> pickSixNumbers() {
+    public Lotto pickSixNumbers() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> pickedNumbers = new ArrayList<>(lottoNumbers.subList(0, 6));
         Collections.sort(pickedNumbers);
-        return pickedNumbers;
-    }
-
-    public boolean containWinNum(int winNum) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.equalsWinNum(winNum));
-    }
-
-    public List<Integer> lottoNumbers() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::lottoNumber)
-                .collect(Collectors.toList());
+        return new Lotto(pickedNumbers);
     }
 }
