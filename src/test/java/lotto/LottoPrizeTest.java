@@ -11,6 +11,7 @@ public class LottoPrizeTest {
     @ParameterizedTest
     @CsvSource(value = {"6, 2_000_000_000", "5, 1_500_000", "4, 50_000", "3, 5_000"})
     void lottoPrize(int rankCount, int winningMoney) {
-        assertThat(LottoPrize.getWinningMoney(rankCount)).isEqualTo(winningMoney);
+        LottoPrize lottoPrize = LottoPrize.getWinningPrize(rankCount);
+        assertThat(lottoPrize.money()).isEqualTo(winningMoney);
     }
 }
