@@ -20,6 +20,10 @@ public class Lotto {
         return new Lotto(LottoNumbers.winningNumbers(numbers));
     }
 
+    public static Lotto manualLotto(String numbers) {
+        return winningLotto(numbers);
+    }
+
     public int statCount(Lotto lotto) {
         return this.lottoNumbers.statCount(lotto.lottoNumbers);
     }

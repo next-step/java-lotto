@@ -10,7 +10,11 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(LottoStrategy lottoStrategy) {
-        this.lottoNumbers = lottoStrategy.lottoNumbers();
+        this.lottoNumbers = lottoStrategy.makeLottos();
+    }
+
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoNumbers(String numbers) {
