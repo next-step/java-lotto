@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.Lottery;
-import lotto.Store;
+import lotto.domain.Lottery;
+import lotto.domain.Store;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,14 +20,14 @@ public class LotteryController {
 
         OutputView.printWinningNumberInputMessage();
         List<Integer> lastWeekWinningNumbers = InputView.getLastWeekWinningNumbers();
-        double rateOfReturn = 0.35;
-        OutputView.printLotteryResult();
+
+        List<Integer> lotteryResult = store.getLotteryResult(lastWeekWinningNumbers);
+        double rateOfReturn = store.getRateOfReturn(lotteryResult);
+        OutputView.printLotteryResult(lotteryResult);
         OutputView.printRateOfReturn(rateOfReturn);
-
-
     }
 
-    private static int getPurchaseAmount() {
+    private int getPurchaseAmount() {
         OutputView.printPurchaseAmountInputMessage();
         return InputView.getPurchaseAmount();
     }

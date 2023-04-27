@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Store {
 
     /**
@@ -32,5 +35,18 @@ public class Store {
 
     public Lotteries getLotteries() {
         return lotteries;
+    }
+
+    public List<Integer> getLotteryResult(List<Integer> lastWeekWinningNumbers) {
+        return lotteries.calculateResult(lastWeekWinningNumbers);
+    }
+
+    public double getRateOfReturn(List<Integer> lotteryResult) {
+        int totalPrice = lotteries.size() * LOTTERY_PRICE;
+        int winningPrice = Collections.frequency(lotteryResult, 3) * 5_000 +
+                Collections.frequency(lotteryResult, 4) * 50_000 +
+                Collections.frequency(lotteryResult, 5) * 1_500_000 +
+                Collections.frequency(lotteryResult, 6) * 2_000_000_000;
+        return (double) winningPrice / totalPrice;
     }
 }
