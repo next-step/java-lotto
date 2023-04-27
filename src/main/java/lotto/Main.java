@@ -14,14 +14,14 @@ public class Main {
         Lottos manualLottos = InputView.inputManualLottos(manualAmount);
         OutputView.printLottoQuantity(manualAmount, autoAmount);
 
-        Lottos autoLottos = Lottos.createAutoLottos(autoAmount);
-        OutputView.printLottos(autoLottos);
+        Lottos wholeLottos = manualLottos.createAutoLottos(autoAmount);
+        OutputView.printLottos(wholeLottos);
 
         Lotto previousWinningLotto = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = InputView.inputBonusNumber();
         WinningLotto winningLotto = WinningLotto.init(previousWinningLotto, bonusNumber);
 
-        Winners winners = autoLottos.findStatistics(winningLotto);
+        Winners winners = wholeLottos.findStatistics(winningLotto);
         OutputView.printResult(winners, lottoAmount);
     }
 }

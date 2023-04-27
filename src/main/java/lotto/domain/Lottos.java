@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
     private static final int ZERO = 0;
@@ -17,14 +18,15 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public static Lottos createAutoLottos(Amount autoAmount) {
-        List<Lotto> lottos;
-
-        lottos = IntStream.range(ZERO, autoAmount.getAmount())
+    public Lottos createAutoLottos(Amount autoAmount) {
+        List<Lotto> autoLottos = IntStream.range(ZERO, autoAmount.getAmount())
                 .mapToObj(i -> Lotto.createAutoLotto())
                 .collect(Collectors.toList());
 
-        return new Lottos(lottos);
+        List<Lotto> wholeLottos = Stream.concat(lottos.stream(), autoLottos.stream())
+                .collect(Collectors.toList());
+
+        return new Lottos(wholeLottos);
     }
 
     public Winners findStatistics(WinningLotto winningLotto) {
