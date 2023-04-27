@@ -54,4 +54,8 @@ public class Ticket {
                 .sorted()
                 .collect(Collectors.joining(", ", "[", "]"));
     }
+
+    public Boolean includeNumber(Integer bonusNumber) {
+        return this.numbers.contains(bonusNumber);
+    }
 }

@@ -14,4 +14,8 @@ public class WinnerTicket {
     public Ticket ticketOnly() {
         return new Ticket(numbers);
     }
+
+    public Boolean includeBonus(Ticket ticket) {
+        return ticket.includeNumber(this.bonusNumber);
+    }
 }
