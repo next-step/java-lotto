@@ -19,6 +19,12 @@ public class StringCalculatorTest {
         assertThatThrownBy(() -> new StringCalculator(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ValueSource(strings = {"This is wrong input","2 * 3 ^ 100"})
+    @ParameterizedTest
+    void 허용하지않은값예외처리(String input) {
+        assertThatThrownBy(() -> new StringCalculator(input)).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @CsvSource(value = {"0:+","1:*","2:/"}, delimiter = ':')
     @ParameterizedTest(name = "계산식 : '2 + 3 * 4 / 2' 에서 {0}번째 연산기호 : {1}")
     void 사칙연산구분하여담기(int index, String expectedSymbol) {
