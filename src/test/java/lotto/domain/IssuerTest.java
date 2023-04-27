@@ -33,7 +33,7 @@ public class IssuerTest {
         //given
         //when
         issuerFixture.purchaseTickets(10);
-        Statics statics = issuerFixture.makeWinners(new Ticket("1, 2, 3, 4, 5, 6"));
+        Statics statics = issuerFixture.makeWinners(new Ticket("1, 2, 3, 4, 5, 6").winnerTicket(7));
         //then
         assertNotNull(statics);
     }
