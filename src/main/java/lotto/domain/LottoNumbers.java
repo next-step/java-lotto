@@ -28,8 +28,8 @@ public class LottoNumbers {
         return numbers;
     }
 
-    public Map<Integer, Integer> calculateSameNumberCounts(LottoNumber lottoNumber) {
-        Map<Integer, Integer> counts = new HashMap<>();
+    public Map<LottoRank, Integer> calculateSameNumberCounts(LottoNumber lottoNumber) {
+        Map<LottoRank, Integer> counts = new HashMap<>();
         for (LottoNumber number : lottoNumbers) {
             calculateOneStage(lottoNumber, counts, number);
         }
@@ -37,14 +37,14 @@ public class LottoNumbers {
     }
 
     private void calculateOneStage(LottoNumber lottoNumber,
-                                   Map<Integer, Integer> counts,
+                                   Map<LottoRank, Integer> counts,
                                    LottoNumber number) {
-        int count = number.calculateSameNumberCount(lottoNumber);
-        if (counts.containsKey(count)) {
-            counts.put(count, counts.get(count) + 1);
+        LottoRank lottoRank = LottoRank.of(number.calculateSameNumberCount(lottoNumber));
+        if (counts.containsKey(lottoRank)) {
+            counts.put(lottoRank, counts.get(lottoRank) + 1);
             return;
         }
-        counts.put(count, 1);
+        counts.put(lottoRank, 1);
     }
 
     public List<LottoNumber> getLottoNumbers() {

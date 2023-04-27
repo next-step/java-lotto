@@ -43,10 +43,10 @@ class LottoNumbersTest {
         LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        Map<Integer, Integer> sameNumberCounts
+        Map<LottoRank, Integer> sameNumberCounts
                 = lottoNumbers.calculateSameNumberCounts(winningNumber);
 
         //then
-        assertThat(sameNumberCounts).containsKeys(3, 6).containsValues(1, 2);
+        assertThat(sameNumberCounts).containsKeys(LottoRank.FOURTH, LottoRank.FIRST).containsValues(1, 2);
     }
 }

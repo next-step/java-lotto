@@ -1,20 +1,15 @@
 package lotto.domain;
 
-import lotto.dto.LottoStaticsDto;
+import lotto.dto.LottoStatisticsDto;
 
 import java.util.List;
 
 public class Lotto {
 
     public static final int LOTTO_PRICE = 1000;
-    private LottoNumbers lottoNumbers;
-    private LottoNumber winningNumber;
-    private int lottoCount;
-    private NumberCreationStrategy strategy;
 
-    public Lotto(NumberCreationStrategy strategy) {
-        this.strategy = strategy;
-    }
+    private LottoNumbers lottoNumbers;
+    private int lottoCount;
 
     public void createLottoNumbers(int purchaseAmount) {
         lottoCount = purchaseAmount / LOTTO_PRICE;
@@ -22,19 +17,15 @@ public class Lotto {
     }
 
     private void createLottoNumbers() {
-        lottoNumbers = new LottoNumbers(lottoCount, strategy);
+        lottoNumbers = new LottoNumbers(lottoCount, new RandomNumberCreation());
     }
 
-    public void createWinningNumber(List<Integer> winningNumber) {
-        this.winningNumber = new LottoNumber(winningNumber);
-    }
-
-    public LottoStaticsDto calculateLottoStatics() {
-        LottoStatics lottoStatics = new LottoStatics();
-        return new LottoStaticsDto(
-                lottoStatics.calculateMatchingCounts(lottoNumbers, winningNumber),
-                lottoStatics.calculateMatchingPrices(),
-                lottoStatics.calculateGrossRateOfEarnings(lottoCount * LOTTO_PRICE)
+    public LottoStatisticsDto calculateLottoStatistics(WinningNumber winningNumber) {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        return new LottoStatisticsDto(
+                lottoStatistics.calculateMatchingCounts(lottoNumbers, winningNumber),
+                lottoStatistics.calculateMatchingPrices(),
+                lottoStatistics.calculateGrossRateOfEarnings(lottoCount * LOTTO_PRICE)
                 );
     }
 

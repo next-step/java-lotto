@@ -10,13 +10,13 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoStaticsTest {
+class LottoStatisticsTest {
 
-    private LottoStatics lottoStatics;
+    private LottoStatistics lottoStatistics;
 
     @BeforeEach
     void init() {
-        lottoStatics = new LottoStatics();
+        lottoStatistics = new LottoStatistics();
     }
 
     @Test
@@ -28,14 +28,18 @@ class LottoStaticsTest {
         lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
         LottoNumbers lottoNumbers
                 = new LottoNumbers(lottoNumberList, new RandomNumberCreation());
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        Map<Integer, Integer> matchingCounts
-                = lottoStatics.calculateMatchingCounts(lottoNumbers, winningNumber);
+        Map<LottoRank, Integer> matchingCounts
+                = lottoStatistics.calculateMatchingCounts(lottoNumbers, winningNumber);
 
         //then
-        assertThat(matchingCounts).containsKeys(3, 4, 5, 6).containsValues(0, 1, 2);
+        assertThat(matchingCounts).containsKeys(
+                LottoRank.FOURTH,
+                LottoRank.THIRD,
+                LottoRank.SECOND,
+                LottoRank.FIRST).containsValues(0, 1, 2);
     }
 
     @Test
@@ -47,11 +51,11 @@ class LottoStaticsTest {
         lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
         LottoNumbers lottoNumbers
                 = new LottoNumbers(lottoNumberList, new RandomNumberCreation());
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 20, 21, 22));
-        lottoStatics.calculateMatchingCounts(lottoNumbers, winningNumber);
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 20, 21, 22));
+        lottoStatistics.calculateMatchingCounts(lottoNumbers, winningNumber);
 
         //when
-        double rate = lottoStatics.calculateGrossRateOfEarnings(3000);
+        double rate = lottoStatistics.calculateGrossRateOfEarnings(3000);
 
         //then
         assertThat(rate).isEqualTo((double) 15000 / 3000);

@@ -15,7 +15,7 @@ class LottoTest {
 
     @BeforeEach
     void init() {
-        lotto = new Lotto(new RandomNumberCreation());
+        lotto = new Lotto();
     }
 
     @Test
@@ -31,25 +31,14 @@ class LottoTest {
     }
 
     @Test
-    void createWinningNumber() throws Exception {
-        //given
-        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-
-        //when
-
-        //then
-        assertDoesNotThrow(() -> lotto.createWinningNumber(winningNumber));
-    }
-
-    @Test
-    void calculateLottoStatics() throws Exception {
+    void calculateLottoStatistics() throws Exception {
         //given
         lotto.createLottoNumbers(14000);
-        lotto.createWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
 
         //then
-        assertDoesNotThrow(() -> lotto.calculateLottoStatics());
+        assertDoesNotThrow(() -> lotto.calculateLottoStatistics(winningNumber));
     }
 }

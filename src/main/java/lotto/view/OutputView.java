@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.dto.LottoNumbersDto;
-import lotto.dto.LottoStaticsDto;
+import lotto.dto.LottoStatisticsDto;
 
 import java.util.List;
 import java.util.Map;
@@ -24,29 +24,30 @@ public class OutputView {
     }
 
     private static void outputLottoNumber(List<Integer> lottoNumber) {
-        System.out.print("[");
-        int sizeOfLottoNumber = lottoNumber.size();
-        for (int i = 0; i < sizeOfLottoNumber - 1; i++) {
-            System.out.print(lottoNumber.get(i) + ", ");
-        }
-        System.out.println(lottoNumber.get(sizeOfLottoNumber - 1) + "]");
+        System.out.println(lottoNumber);
     }
 
-    public static void outputLottoStatistics(LottoStaticsDto dto) {
+    public static void outputLottoStatistics(LottoStatisticsDto dto) {
         Map<Integer, Integer> matchingCounts = dto.getMatchingCounts();
         Map<Integer, Integer> matchingPrices = dto.getMatchingPrices();
-        System.out.println();
-        System.out.println("당첨 통계");
+        System.out.println("\n" + "당첨 통계");
         System.out.println("---------");
+
         for (int key : matchingCounts.keySet()) {
-            System.out.println(key +"개 일치 (" +
-                    matchingPrices.get(key) +
-                    "원)- " +
-                    matchingCounts.get(key) +
-                    "개");
+            System.out.printf("%d" + "개 일치 (" + "%d" + "원)- " + "%d" + "개" + "\n",
+                    key, matchingPrices.get(key), matchingCounts.get(key));
         }
 
+        outputGrossRateOfEarnings(dto);
+    }
+
+    private static void outputGrossRateOfEarnings(LottoStatisticsDto dto) {
+        double grossRateOfEarnings = dto.getGrossRateOfEarnings();
+        if (grossRateOfEarnings >= 1) {
+            System.out.printf("총 수익률은 " + "%.2f" + "입니다.", grossRateOfEarnings);
+            return;
+        }
         System.out.printf("총 수익률은 " + "%.2f" +
-                "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", dto.getGrossRateOfEarnings());
+                "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", grossRateOfEarnings);
     }
 }
