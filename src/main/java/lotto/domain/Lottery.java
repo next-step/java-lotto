@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,5 +42,10 @@ public class Lottery {
             }
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return lotteryNumber.toString();
     }
 }
