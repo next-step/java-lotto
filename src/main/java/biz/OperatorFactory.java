@@ -1,4 +1,6 @@
-package model;
+package biz;
+
+import biz.function.*;
 
 import java.util.HashMap;
 import java.util.Map;

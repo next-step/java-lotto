@@ -71,4 +71,10 @@ public class StringCalculatorTest {
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("숫자, 공백, 사측연산 기호 외의 문자가 포함되어있습니다.");
     }
+
+    @Test
+    @DisplayName("복수개의 연산자가 존재할 경우 결과값 확인")
+    void when_multiple_operation_value(){
+        assertThat(calculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+    }
 }

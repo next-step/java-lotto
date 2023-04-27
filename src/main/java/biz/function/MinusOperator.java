@@ -1,4 +1,4 @@
-package model;
+package biz.function;
 
 public class MinusOperator implements Operator{
     @Override
