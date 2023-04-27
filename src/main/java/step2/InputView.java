@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class InputView {
     private static final int LOTTO_PRICE = 1000;
 
-    public LottoBuyRequest buyLotto() {
+    public LottoTicketBuyRequest buyLotto() {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -13,7 +13,7 @@ public class InputView {
         int amount = scanner.nextInt();
         int lottoCount = getLottoCnt(amount);
         System.out.println(lottoCount + "를 구매하였습니다.");
-        return new LottoBuyRequest(amount, lottoCount);
+        return new LottoTicketBuyRequest(amount, lottoCount);
     }
 
     public int getLottoCnt(int amount) {
