@@ -1,7 +1,7 @@
 package lotto.Model;
 
 public class Count {
-    private static final int AMOUNT_OF_TICKET = 1000;
+    private static final int AMOUNT_OF_TICKET = 1_000;
 
     private final int countOfTicket;
 

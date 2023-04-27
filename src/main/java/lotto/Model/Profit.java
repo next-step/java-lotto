@@ -7,10 +7,10 @@ public class Profit {
     private final int profit;
 
     private static final HashMap<Integer, Integer> profitTable = new HashMap<>() {{
-        put(3, 5000);
-        put(4, 50000);
-        put(5, 1500000);
-        put(6, 2000000000);
+        put(3, 5_000);
+        put(4, 50_000);
+        put(5, 1_500_000);
+        put(6, 2_000_000_000);
     }};
 
     public Profit(int matches) {

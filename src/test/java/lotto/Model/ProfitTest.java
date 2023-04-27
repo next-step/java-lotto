@@ -20,9 +20,9 @@ class ProfitTest {
     }
 
     @Test
-    @DisplayName("3개는 profit  5000원")
+    @DisplayName("3개는 profit  5_000원")
     public void profit_3() {
-        int expected = 5000;
+        int expected = 5_000;
 
         int input = 3;
         Profit profit = new Profit(input);
@@ -32,11 +32,11 @@ class ProfitTest {
     }
 
     @Test
-    @DisplayName("4개는 profit 50000원")
+    @DisplayName("4개는 profit 50_000원")
     public void profit_4() {
-        int expected = 5000;
+        int expected = 50_000;
 
-        int input = 3;
+        int input = 4;
         Profit profit = new Profit(input);
         int actual = profit.value();
 
@@ -44,11 +44,11 @@ class ProfitTest {
     }
 
     @Test
-    @DisplayName("5개는 profit 1500000원")
+    @DisplayName("5개는 profit 1_500_000원")
     public void profit_5() {
-        int expected = 5000;
+        int expected = 1_500_000;
 
-        int input = 3;
+        int input = 5;
         Profit profit = new Profit(input);
         int actual = profit.value();
 
@@ -56,11 +56,11 @@ class ProfitTest {
     }
 
     @Test
-    @DisplayName("6개는 profit 2000000000원")
+    @DisplayName("6개는 profit 2_000_000_000원")
     public void profit_6() {
-        int expected = 5000;
+        int expected = 2_000_000_000;
 
-        int input = 3;
+        int input = 6;
         Profit profit = new Profit(input);
         int actual = profit.value();
 
