@@ -70,7 +70,7 @@ public class StaticsTest {
         assertEquals(answer, countFirst);
     }
 
-    @DisplayName("3등 당첨통계가 계산된다(5개 번호 일치)")
+    @DisplayName("2등 당첨통계가 계산된다(5개 + 보너스 번호 일치)")
     @Test
     public void second() {
         //given
