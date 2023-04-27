@@ -22,12 +22,12 @@ public class LottoResult {
 
     private void calculateResult(LottoTickets tickets, LottoWinner lottoWinner) {
         for (Lotto ticket : tickets.getLottoTickets()) {
-            int count = countWinnerMatching(ticket, lottoWinner);
+            int count = countMatchedWinnerLotto(ticket, lottoWinner);
             resultMap.put(count, resultMap.getOrDefault(count, 0) + 1);
         }
     }
 
-    private int countWinnerMatching(Lotto ticket, LottoWinner lottoWinner) {
+    private int countMatchedWinnerLotto(Lotto ticket, LottoWinner lottoWinner) {
         int count = 0;
         for (LottoNumber number : ticket.getNumbers()) {
             count += isWinnerNumber(number, lottoWinner);
