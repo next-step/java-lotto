@@ -74,14 +74,8 @@ public class Statics {
         return winnerTicket.countWinner(challengeTickets,Prize.FIFTH);
     }
 
-    private int aggregateFirst(List<Ticket> tickets, Ticket winningTicket) {
-        int count = 0;
-        for (Ticket ticket : tickets) {
-            if (Prize.FIRST.isMatch(ticket.overlapNumberCount(winningTicket))) {
-                count++;
-            }
-        }
-        return count;
+    private int aggregateFirst(List<Ticket> challengeTickets, Ticket winnerTicket) {
+        return winnerTicket.countWinner(challengeTickets, Prize.FIRST);
     }
 
     public int getCountFifth() {
