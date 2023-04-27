@@ -25,7 +25,11 @@ public class CountOfWinners {
     }
 
     private void countMatchedWinners(Integer matchingCount) {
-        LottoRank.getLottoNumber(matchingCount, winnerResults);
+        LottoRank lottoNumber = LottoRank.getLottoNumber(matchingCount);
+        if (LottoRank.isRemain(lottoNumber)) {
+            return;
+        }
+        winnerResults.compute(lottoNumber, (k,v) -> v + 1);
     }
 
     public double calculateRateOfReturn(int numOfLottoTicket) {
