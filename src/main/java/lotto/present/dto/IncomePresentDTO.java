@@ -1,14 +1,14 @@
 package lotto.present.dto;
 
-import lotto.domain.Winners;
+import lotto.domain.Statics;
 
 public class IncomePresentDTO {
     private final double profitRatio;
     private final String breakEvenMessage;
 
-    public IncomePresentDTO(Winners winners) {
-        this.profitRatio = winners.getProfitRatio();
-        this.breakEvenMessage = winners.breakEvenMessage();
+    public IncomePresentDTO(Statics statics) {
+        this.profitRatio = statics.getProfitRatio();
+        this.breakEvenMessage = statics.breakEvenMessage();
     }
 
     public double getProfitRatio() {

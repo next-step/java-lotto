@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-public class Winners {
+public class Statics {
     private static final String PROFIT_MESSAGE = "(손익분기점이 1이기 때문에 결과적으로 이득이라는 의미임)";
     private static final String LOSS_MESSAGE = "(손익분기점이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -14,7 +14,7 @@ public class Winners {
     private final double profitRatio;
 
 
-    public Winners(List<Ticket> tickets, Ticket winningTicket) {
+    public Statics(List<Ticket> tickets, Ticket winningTicket) {
         this.countFirst = aggregateFirst(tickets, winningTicket);
         this.countThird = aggregateThird(tickets, winningTicket);
         this.countFourth = aggregateFourth(tickets, winningTicket);
@@ -100,5 +100,9 @@ public class Winners {
 
     public String breakEvenMessage() {
         return this.profitRatio >= 1 ? PROFIT_MESSAGE : LOSS_MESSAGE;
+    }
+
+    public int getCountSecond() {
+        throw new RuntimeException();
     }
 }

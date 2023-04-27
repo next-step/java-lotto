@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.Issuer;
-import lotto.domain.Winners;
+import lotto.domain.Statics;
 import lotto.present.InputPresent;
 import lotto.present.OutputPresent;
 import lotto.present.dto.IncomePresentDTO;
@@ -18,8 +18,8 @@ public class Lotto {
         issuer.purchaseTickets(inputPresent.purchaseCount());
         outputPresent.presentTickets(issuer.purchasedTickets());
 
-        Winners winners = issuer.makeWinners(inputPresent.winningNumbers());
-        outputPresent.presentWinners(new WinnerPresentDTO(winners));
-        outputPresent.presentIncome(new IncomePresentDTO(winners));
+        Statics statics = issuer.makeWinners(inputPresent.winningNumbers());
+        outputPresent.presentWinners(new WinnerPresentDTO(statics));
+        outputPresent.presentIncome(new IncomePresentDTO(statics));
     }
 }
