@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StaticsTest {
@@ -107,11 +108,18 @@ public class StaticsTest {
     @Test
     public void income() {
         //given
-        int answer = 2_064_725_000;
+        int expected = 2_064_725_000;
         //when
-        int income = staticsFixture.getIncome();
+        int actual = staticsFixture.getIncome();
         //then
-        assertThat(income).isEqualTo(answer).as("당첨금액 계산식 = Prize.FIRST.prizeCalculate(1) + Prize.SECOND.prizeCalculate(2) + Prize.THIRD.prizeCalculate(3) + Prize.FOURTH.prizeCalculate(4) + Prize.FIFTH.prizeCalculate(5)");
+        assertAll("당첨금액 = Prize.FIRST.prizeCalculate(1) + Prize.SECOND.prizeCalculate(2) + Prize.THIRD.prizeCalculate(3) + Prize.FOURTH.prizeCalculate(4) + Prize.FIFTH.prizeCalculate(5)",
+                () -> assertEquals(expected, actual),
+                () -> assertEquals(2_000_000_000, Prize.FIRST.calculatePrize(1)),
+                () -> assertEquals(30_000_000 * 2, Prize.SECOND.calculatePrize(2)),
+                () -> assertEquals(1_500_000 * 3, Prize.THIRD.calculatePrize(3)),
+                () -> assertEquals(50_000 * 4, Prize.FOURTH.calculatePrize(4)),
+                () -> assertEquals(5_000 * 5, Prize.FIFTH.calculatePrize(5))
+        );
     }
 
     @DisplayName("투자금 대비 당첨금액의 비율을 사이의 소수점 둘째자리까지 표시한다")
