@@ -1,39 +1,36 @@
 package lotto.model;
 
-import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static lotto.model.Place.NONE;
-import static lotto.model.Place.THIRD;
+import java.util.Collections;
+import java.util.List;
+
+import static lotto.model.Place.*;
 import static lotto.model.sample.LottoSample.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRewardStatisticsTest {
 
+    private List<Lotto> getCountOfLottos(Place place, int count) {
+        return Collections.nCopies(count, place2Lotto.get(place));
+    }
+
     @ParameterizedTest
-    @ValueSource(ints = {1, 5, 10, 100})
+    @CsvSource(value = {"5=1.00", "10=0.50", "100=0.05"}, delimiter = '=')
     @DisplayName("수익률을 올바르게 계산해야 한다")
-    public void profit(int noneCounts) {
+    public void profit(int totalLottos, float expected) {
         LottoPlaceCounter counter = new LottoPlaceCounter(CRITERIA, BONUS);
-        Lotto third = lottos.get(THIRD);
-        Lotto none = lottos.get(NONE);
 
-        counter.count(third);
-
-        for (int count = 0; count < noneCounts; count++) {
-            counter.count(none);
-        }
+        List<Lotto> noneLottos = getCountOfLottos(NONE, totalLottos - 1);
+        counter.countAll(noneLottos);
+        counter.count(place2Lotto.get(FIFTH));
 
         LottoRewardStatistics statistics = new LottoRewardStatistics(counter);
-        int spent = counter.total() * Lotto.PRICE;
-        long reward = statistics.winnerRewards();
-        float expected = reward / (float) spent;
 
-
-        float profit = statistics.profit();
-        assertThat(profit).isEqualTo(expected);
+        assertThat(statistics.profit()).isEqualTo(expected);
 
     }
 
@@ -42,13 +39,13 @@ class LottoRewardStatisticsTest {
     public void winnerRewards() {
         LottoPlaceCounter counter = new LottoPlaceCounter(CRITERIA, BONUS);
 
-        for (Place place : Place.winners()) {
-            Lotto winLotto = lottos.get(place);
+        for (Place place : winners()) {
+            Lotto winLotto = place2Lotto.get(place);
             counter.count(winLotto);
         }
 
         LottoRewardStatistics statistics = new LottoRewardStatistics(counter);
-        int sum = Place.winners().stream()
+        int sum = winners().stream()
                 .mapToInt(Place::reward)
                 .sum();
 

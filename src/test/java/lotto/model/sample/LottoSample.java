@@ -11,7 +11,7 @@ import static lotto.model.Place.*;
 public class LottoSample {
     public static final Number BONUS = Number.of(45);
     public static final Lotto CRITERIA = Lotto.of(1, 2, 3, 4, 5, 6);
-    public static final Map<Place, Lotto> lottos = Map.of(
+    public static final Map<Place, Lotto> place2Lotto = Map.of(
             FIRST, Lotto.of(1, 2, 3, 4, 5, 6),
             SECOND, Lotto.of(1, 2, 3, 4, 5, BONUS.value()),
             THIRD, Lotto.of(1, 2, 3, 4, 5, 7),

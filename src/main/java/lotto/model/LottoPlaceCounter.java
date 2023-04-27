@@ -26,7 +26,7 @@ public class LottoPlaceCounter {
         int matches = matchCriteria.matches(lotto);
         boolean matchBonus = lotto.contains(bonus);
 
-        Place place = Place.of(matches, matchBonus);
+        Place place = Place.find(matches, matchBonus);
         counter.put(place, counter.get(place) + 1);
     }
 

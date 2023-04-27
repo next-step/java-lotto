@@ -27,7 +27,7 @@ public enum Place {
         this.reward = reward;
     }
 
-    public static Place of(int matches, boolean matchBonus) {
+    public static Place find(int matches, boolean matchBonus) {
         if (matches == SECOND.matches() && matchBonus) {
             return SECOND;
         }

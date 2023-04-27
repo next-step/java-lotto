@@ -16,7 +16,7 @@ class LottoPlaceCounterTest {
     @DisplayName("모든 순위의 카운팅이 제대로 되어야 한다")
     public void countExceptSecond(Place place) {
         LottoPlaceCounter counter = new LottoPlaceCounter(CRITERIA, BONUS);
-        Lotto lotto = lottos.get(place);
+        Lotto lotto = place2Lotto.get(place);
         counter.count(lotto);
 
         assertThat(counter.get(place)).isEqualTo(1);
@@ -27,12 +27,22 @@ class LottoPlaceCounterTest {
     public void total() {
         LottoPlaceCounter counter = new LottoPlaceCounter(CRITERIA, BONUS);
 
+        for (Place place : Place.values()) {
+            counter.count(place2Lotto.get(place));
+        }
+
+        int total = Place.values().length;
+        assertThat(counter.total()).isEqualTo(total);
+    }
+
+    @Test
+    @DisplayName("처음엔 모든 등수의 값이 0이어야 한다")
+    public void init() {
+        LottoPlaceCounter counter = new LottoPlaceCounter(CRITERIA, BONUS);
+
+        for (Place place : Place.values()) {
+            assertThat(counter.get(place)).isZero();
+        }
         assertThat(counter.total()).isZero();
-        Lotto sample = lottos.get(Place.FIRST);
-
-        counter.count(sample);
-        counter.count(sample);
-
-        assertThat(counter.total()).isEqualTo(2);
     }
 }
