@@ -1,13 +1,15 @@
 package step2.vo;
 
+import step2.service.Lotto;
+
 import java.util.List;
 
 public class LottoResult {
 
-    private final List<Integer> lottoResult;
+    private final Lotto lotto;
 
-    public LottoResult(List<Integer> lottoResult) {
-        this.lottoResult = lottoResult;
+    public LottoResult(Lotto lotto) {
+        this.lotto = lotto;
     }
 
     public int countMatchingNumbers(List<Integer> winNumbers) {
@@ -18,15 +20,14 @@ public class LottoResult {
         return matchingCount;
     }
 
-    private int countMatchNumber(int matchingCount, Integer winNum) {
-        if (lottoResult.contains(winNum)) {
+    private int countMatchNumber(int matchingCount, int winNum) {
+        if (lotto.containWinNum(winNum)) {
             matchingCount++;
         }
         return matchingCount;
     }
 
-    @Override
-    public String toString() {
-        return lottoResult.toString();
+    public String toStringLottoNumbers() {
+        return this.lotto.toStringLottoNumbers();
     }
 }
