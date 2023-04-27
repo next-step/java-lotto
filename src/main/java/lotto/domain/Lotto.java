@@ -10,8 +10,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto initLotto() {
-        LottoNumbers lottoNumbers = LottoNumbers.initShuffledLottoNumbers();
+    public static Lotto init() {
+        LottoNumbers lottoNumbers = LottoNumbers.init();
         return new Lotto(lottoNumbers);
     }
 

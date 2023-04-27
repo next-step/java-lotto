@@ -16,7 +16,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("LottoNumbers 사이즈 테스트")
     void lottoNumbersRangeTest() {
-        LottoNumbers lottoNumbers = LottoNumbers.initShuffledLottoNumbers();
+        LottoNumbers lottoNumbers = LottoNumbers.init();
 
         assertThat(lottoNumbers.getLottoNumberSize())
                 .isEqualTo(6);

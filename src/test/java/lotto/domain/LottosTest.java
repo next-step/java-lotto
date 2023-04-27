@@ -14,7 +14,7 @@ class LottosTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void initLottoTest() {
-        assertThat(Lottos.initLottos(Money.initMoney(14000)))
+        assertThat(Lottos.init(Money.init(14000)))
                 .isInstanceOf(Lottos.class);
     }
 
@@ -32,7 +32,7 @@ class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto_1, lotto_2, lotto_3, lotto_4, lotto_5));
 
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
-        WinningLotto winningLotto = WinningLotto.initWinningLotto(winning, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.init(winning, bonusNumber);
 
         Map<Statistics, Integer>  winnersCount = new EnumMap<>(Statistics.class);
         winnersCount.put(Statistics.FIRST, 1);

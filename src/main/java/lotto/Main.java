@@ -10,12 +10,12 @@ public class Main {
         Money lottoAmount = InputView.inputPrice();
         OutputView.printLottoQuantity(lottoAmount);
 
-        Lottos lottos = Lottos.initLottos(lottoAmount);
+        Lottos lottos = Lottos.init(lottoAmount);
         OutputView.printLottos(lottos);
 
         Lotto previousWinningLotto = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = InputView.inputBonusNumber();
-        WinningLotto winningLotto = WinningLotto.initWinningLotto(previousWinningLotto, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.init(previousWinningLotto, bonusNumber);
 
         Winners winners = lottos.findStatistics(winningLotto);
         OutputView.printResult(winners, lottoAmount);

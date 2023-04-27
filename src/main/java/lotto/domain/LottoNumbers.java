@@ -27,7 +27,7 @@ public class LottoNumbers {
         }
     }
 
-    public static LottoNumbers initShuffledLottoNumbers() {
+    public static LottoNumbers init() {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
         while (lottoNumbers.size() < LOTTO_LENGTH) {
             LottoNumber lottoNumber = LottoNumber.createLottoNumber();

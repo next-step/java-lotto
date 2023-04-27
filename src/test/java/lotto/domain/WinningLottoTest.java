@@ -17,7 +17,7 @@ public class WinningLottoTest {
         Lotto winning = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("1");
 
-        assertThatThrownBy(() -> WinningLotto.initWinningLotto(winning, bonusNumber))
+        assertThatThrownBy(() -> WinningLotto.init(winning, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이미 당첨번호에 있습니다.");
     }
@@ -28,7 +28,7 @@ public class WinningLottoTest {
         Lotto winning = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
 
-        WinningLotto winningLotto = WinningLotto.initWinningLotto(winning, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.init(winning, bonusNumber);
 
         assertThat(winningLotto)
                 .isInstanceOf(WinningLotto.class);
@@ -48,7 +48,7 @@ public class WinningLottoTest {
 
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
 
-        WinningLotto winningLotto = WinningLotto.initWinningLotto(winning, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.init(winning, bonusNumber);
 
         assertAll(
                 () -> assertThat(winningLotto.matchingLotto(lotto_1))

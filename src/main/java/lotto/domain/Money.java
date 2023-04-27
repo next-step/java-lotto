@@ -13,7 +13,7 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money initMoney(int amount) {
+    public static Money init(int amount) {
         return new Money(amount);
     }
 

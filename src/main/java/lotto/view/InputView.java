@@ -13,7 +13,7 @@ public class InputView {
 
     public static Money inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Money.initMoney(SCANNER.nextInt());
+        return Money.init(SCANNER.nextInt());
     }
 
     public static Lotto inputWinningNumbers() {
