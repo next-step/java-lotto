@@ -22,7 +22,10 @@ public class LottoGame {
   private static List<LottoTicket> issueLottoTickets(PurchaseAmount purchaseAmount, RandomStrategy randomStrategy) {
     List<LottoTicket> lottoTicket = new ArrayList<>();
     for (int i = 0; i < purchaseAmount.getTicketCount(); i++) {
-      lottoTicket.add(new LottoTicket(new LottoNumbers(randomStrategy.getRandomNumbers())));
+      lottoTicket.add(new LottoTicket(new LottoNumbers(randomStrategy.getRandomNumbers()
+                                                                     .stream()
+                                                                     .map(LottoNumber::new)
+                                                                     .collect(Collectors.toList()))));
     }
     return lottoTicket;
   }
@@ -34,7 +37,11 @@ public class LottoGame {
   public LottoTicketsDto getLottoTickets() {
     List<List<Integer>> ticketNumbers = lottoTickets.getLottoTickets().stream()
                                                     .map(LottoTicket::getLottoNumbers)
-                                                    .map(LottoNumbers::getNumbers)
+                                                    .map(lottoNumbers -> lottoNumbers.getNumbers()
+                                                                                     .stream()
+                                                                                     .map(LottoNumber::getNumber)
+                                                                                     .collect(Collectors.toList())
+                                                    )
                                                     .collect(Collectors.toList());
     return new LottoTicketsDto(ticketNumbers);
   }

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchaseAmount;
 
@@ -18,9 +19,8 @@ public class InputView {
   public static LottoNumbers getLastWeekWinningNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     return new LottoNumbers(Arrays.stream(sc.nextLine().split(", "))
-                                                       .mapToInt(Integer::parseInt)
-                                                       .boxed()
-                                                       .collect(Collectors.toList())
+                                  .map(LottoNumber::new)
+                                  .collect(Collectors.toList())
     );
   }
 }
