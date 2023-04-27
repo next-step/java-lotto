@@ -55,7 +55,4 @@ class ExpressionParserTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid calculation expression");
     }
-
-
-
 }

@@ -5,9 +5,15 @@ import java.util.List;
 
 public class ExpressionParser {
 
-    public static final String DELIMITER = " ";
+    private static final String DELIMITER = " ";
+
     private final Operands operands;
     private final Operators operators;
+
+    public ExpressionParser(Operands operands, Operators operators) {
+        this.operands = operands;
+        this.operators = operators;
+    }
 
     public static ExpressionParser of(String calculationExpression) {
         List<String> expression = splitWithBlack(calculationExpression);
@@ -17,11 +23,17 @@ public class ExpressionParser {
         return new ExpressionParser(operands, operators);
     }
 
-    public ExpressionParser(Operands operands, Operators operators) {
-        this.operands = operands;
-        this.operators = operators;
+    public static List<String> splitWithBlack(String calculationExpression) {
+        validateMessage(calculationExpression);
+        String[] splitedString = calculationExpression.split(DELIMITER);
+        return Arrays.asList(splitedString);
     }
 
+    private static void validateMessage(String calculationExpression) {
+        if (calculationExpression == null || calculationExpression.isEmpty()) {
+            throw new IllegalArgumentException("No calculation expression has been entered");
+        }
+    }
 
     private static void validateCalculationExpression(Operands operands, Operators operators) {
         if (operands.isInValid() || operators.isInValid() || operators.hasInValidSizeWithOperands(operands)) {
@@ -37,15 +49,4 @@ public class ExpressionParser {
         return new Operators(operators);
     }
 
-    public static List<String> splitWithBlack(String calculationExpression) {
-        validateMessage(calculationExpression);
-        String[] splitedString = calculationExpression.split(DELIMITER);
-        return Arrays.asList(splitedString);
-    }
-
-    private static void validateMessage(String calculationExpression) {
-        if (calculationExpression == null || calculationExpression.isEmpty()) {
-            throw new IllegalArgumentException("No calculation expression has been entered");
-        }
-    }
 }
