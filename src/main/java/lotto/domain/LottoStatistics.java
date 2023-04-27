@@ -19,13 +19,9 @@ public class LottoStatistics {
 
   private static Map<MatchNumbersCount, Integer> getStatistics(List<LottoTicket> lottoTickets, LottoNumbers winningNumbers) {
     Map<MatchNumbersCount, Integer> statistics = new HashMap<>();
-    statistics.put(MATCH_0, 0);
-    statistics.put(MATCH_1, 0);
-    statistics.put(MATCH_2, 0);
-    statistics.put(MATCH_3, 0);
-    statistics.put(MATCH_4, 0);
-    statistics.put(MATCH_5, 0);
-    statistics.put(MATCH_6, 0);
+    for (MatchNumbersCount value : values()) {
+      statistics.put(value, 0);
+    }
     for (LottoTicket lottoTicket : lottoTickets) {
       statistics.put(
           lottoTicket.matchCount(winningNumbers),
