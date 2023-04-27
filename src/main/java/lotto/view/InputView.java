@@ -8,12 +8,13 @@ import java.util.stream.Collectors;
 public class InputView {
 
     public static final String WINNING_NUMBER_DELIMITER = ",";
-    private static Scanner scanner = new Scanner(System.in);
-    public static int getPurchageAmount() {
+    private static final Scanner scanner = new Scanner(System.in);
+    public static int getPurchaseAmount() {
         return scanner.nextInt();
     }
 
-    public static List<Integer> getLasWeekWinningNumbers() {
+    public static List<Integer> getLastWeekWinningNumbers() {
+        scanner.next();
         String winningNumbers = scanner.nextLine();
         String[] split = winningNumbers.split(WINNING_NUMBER_DELIMITER);
 
@@ -23,5 +24,4 @@ public class InputView {
                 .boxed()
                 .collect(Collectors.toList());
     }
-
 }

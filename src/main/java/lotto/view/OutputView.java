@@ -18,6 +18,7 @@ public class OutputView {
         for (Lottery lottery : lotteries) {
             System.out.println(lottery);
         }
+        System.out.println();
     }
 
     public static void printWinningNumberInputMessage() {
@@ -25,6 +26,7 @@ public class OutputView {
     }
 
     public static void printLotteryResult() {
+        System.out.println();
         System.out.printf("당첨 통계\n" +
                 "---------\n" +
                 "3개 일치 (5000원)- %d개\n" +
