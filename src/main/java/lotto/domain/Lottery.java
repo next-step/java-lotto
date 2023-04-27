@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottery {
-
     public static final int MIN_LOTTERY_NUM = 1;
     public static final int MAX_LOTTERY_NUM = 45;
     public static final int LOTTERY_SIZE = 6;

@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotteries {
-    /**
-     * Lottery를 가지고 있는 일급 컬렉션
-     */
     private final List<Lottery> lotteries;
 
     public Lotteries(final int lotteryCount) {

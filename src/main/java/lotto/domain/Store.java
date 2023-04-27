@@ -5,11 +5,6 @@ import java.util.List;
 
 public class Store {
 
-    /**
-     * 로또 발급을 담당한다.
-     * - store에는 로또 리스트들이 존재한다.
-     * -
-     */
     public static final int LOTTERY_PRICE = 1000;
     private final Lotteries lotteries;
 

@@ -1,9 +1,6 @@
 package lotto.domain;
 
 public class Price {
-    /**
-     * 가격을 입력받는 값 객체
-     */
     private final int value;
 
     public Price(int value) {
