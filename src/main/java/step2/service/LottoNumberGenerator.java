@@ -1,7 +1,5 @@
 package step2.service;
 
-import step2.vo.BasicLottoNumbers;
-
 public class LottoNumberGenerator {
 
     private final BasicLottoNumbers basicLottoNumbers;

@@ -1,6 +1,6 @@
-package step2.vo;
+package step2.service;
 
-import step2.service.Lotto;
+import step2.vo.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
