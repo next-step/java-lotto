@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class OperatorGroupTest {
   @Test
   @DisplayName("연산자 객체 형성")
-  public void createCalculatorNumbersObject() {
+  public void createOperatorGroupObject() {
     String testInput = " 44 + 55 - 2 / 5 ";
 
     InputChecker inputChecker = new InputChecker();
@@ -31,7 +32,7 @@ public class OperatorGroupTest {
 
   @Test
   @DisplayName("연산자 객체 형성 시 IllegalArgumentException 발생")
-  public void createCalculatorNumbersObject_ThrowIllegalArgumentException() {
+  public void createOperatorGroupObject_ThrowIllegalArgumentException() {
     String testInput = " 5 5 5 ";
 
     InputChecker inputChecker = new InputChecker();
@@ -39,5 +40,21 @@ public class OperatorGroupTest {
 
     assertThatThrownBy(() -> new OperatorGroup(formulaList))
         .isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  @DisplayName("연산자 Queue 생성 - remove()로 FIFO 확인")
+  public void createOperatorQueue() {
+    String testInput = " 5 - 5 + 2";
+
+    InputChecker inputChecker = new InputChecker();
+    List<String> formulaList = inputChecker.formulaToStrList(testInput);
+
+    OperatorGroup operatorGroup = new OperatorGroup(formulaList);
+    Queue<String > result = operatorGroup.operatorQueue();
+
+    assertThat(result.size()).isEqualTo(2);
+    assertThat(result.remove()).isEqualTo("-");
+    assertThat(result.remove()).isEqualTo("+");
   }
 }

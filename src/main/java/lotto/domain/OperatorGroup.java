@@ -1,14 +1,16 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class OperatorGroup {
   private static final Pattern OPERATOR_PATTERN_COMPILE = Pattern.compile("^[+|\\-|*|/]$");
-  private List<String> operatorList;
+  private final List<String> operatorList;
 
   public OperatorGroup(List<String> formulaList) {
     this.operatorList = this.makeOperatorList(formulaList);
@@ -40,5 +42,9 @@ public class OperatorGroup {
 
   public List<String> operatorList() {
     return new ArrayList<>(this.operatorList);
+  }
+
+  public Queue<String> operatorQueue() {
+    return new LinkedList<>(this.operatorList);
   }
 }

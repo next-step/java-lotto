@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.domain.Calculator;
+import lotto.domain.NumberGroup;
+import lotto.domain.OperatorGroup;
 import lotto.utility.InputChecker;
 import lotto.view.InputView;
 
@@ -15,12 +17,15 @@ public class CalculatorApplication {
         String formula = inputView.askFormula();
         List<String> formulaList = inputChecker.formulaToStrList(formula);
 
-        inputChecker.validFormula(formulaList);
+        NumberGroup numberGroup = new NumberGroup(formulaList);
+        OperatorGroup operatorGroup = new OperatorGroup(formulaList);
 
-        Calculator calculator = new Calculator();
+//        inputChecker.validFormula(formulaList);
 
-        calculator.calculateFormula(formulaList);
+//        Calculator calculator = new Calculator();
 
-        System.out.println(calculator.showResult());
+//        calculator.calculateFormula(formulaList);
+
+//        System.out.println(calculator.showResult());
     }
 }

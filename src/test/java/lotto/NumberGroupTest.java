@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class NumberGroupTest {
   @Test
   @DisplayName("숫자 객체 형성")
-  public void createCalculatorNumbersObject() {
+  public void createNumberGroupObject() {
     String testInput = " 44 + 55 - 2 / 5 ";
 
     InputChecker inputChecker = new InputChecker();
@@ -31,7 +31,7 @@ public class NumberGroupTest {
 
   @Test
   @DisplayName("숫자 객체 형성 시 IllegalArgumentException 발생")
-  public void createCalculatorNumbersObject_ThrowIllegalArgumentException() {
+  public void createNumberGroupObject_ThrowIllegalArgumentException() {
     String testInput = " adfad - 5 ";
 
     InputChecker inputChecker = new InputChecker();
