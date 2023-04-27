@@ -1,6 +1,7 @@
 package domain;
 
 import java.security.InvalidParameterException;
+import java.util.function.BiFunction;
 
 public enum Operation {
     PLUS("+"),

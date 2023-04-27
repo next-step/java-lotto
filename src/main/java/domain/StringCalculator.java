@@ -5,13 +5,13 @@ import java.util.List;
 
 public class StringCalculator {
 
-    private  List<Integer> numbers;
-    private List<Operation> operations;
+    private Numbers numbers;
+    private Operations operations;
 
     public void readExpression(String exp) throws IllegalArgumentException {
         validExpression(exp);
-        numbers = extractNumbers(exp.split(" "));
-        operations = extractOperation(exp.split(" "));
+        numbers = new Numbers(extractNumbers(exp.split(" ")));
+        operations = new Operations(extractOperation(exp.split(" ")));
     }
 
     private void validExpression(String exp) {
@@ -56,8 +56,23 @@ public class StringCalculator {
     }
 
 
-    public int calculate(List<Integer> numbers, List<Operation> operations) {
-        return 3;
+    public int calculate(Numbers numbers, Operation operation) {
+        List<Integer> nextNumbers = numbers.getNextNumbers();
+
+        if (Operation.PLUS.equals(operation)) {
+            return Calculator.plus(nextNumbers.get(0), nextNumbers.get(1));
+        }
+        if (Operation.SUBTRACT.equals(operation)) {
+            return Calculator.subtract(nextNumbers.get(0), nextNumbers.get(1));
+        }
+        if (Operation.DIVIDE.equals(operation)) {
+            return Calculator.divide(nextNumbers.get(0), nextNumbers.get(1));
+        }
+        if (Operation.MULTIPLY.equals(operation)) {
+            return Calculator.multiply(nextNumbers.get(0), nextNumbers.get(1));
+        }
+
+        throw new IllegalArgumentException("유효한 연산자가 아닙니다.");
     }
 
 

@@ -1,7 +1,5 @@
 package domain;
 
-import domain.Operation;
-import domain.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -44,14 +42,14 @@ class StringCalculatorTest {
     @DisplayName("수식 연산")
     @ParameterizedTest
     @MethodSource("sampleParams")
-    public void 수식_연산(List<Integer> numbers, List<Operation> operations, int result) throws Exception {
-        assertThat(stringCalculator.calculate(numbers, operations)).isEqualTo(result);
+    public void 수식_연산(List<Integer> numbers, String operations, int result) throws Exception {
+        assertThat(stringCalculator.calculate(new Numbers(numbers), Operation.toOperation(operations))).isEqualTo(result);
     }
 
     static Stream<Arguments> sampleParams() throws Throwable {
         return Stream.of(
-                Arguments.of(Arrays.asList("1", "2"), Arrays.asList("+"), 3),
-                Arguments.of(Arrays.asList("3", "6"), Arrays.asList("+"), 9)
+                Arguments.of(Arrays.asList(1, 2), "+", 3),
+                Arguments.of(Arrays.asList(3, 6), "+", 9)
         );
     }
 }
