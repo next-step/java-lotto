@@ -10,6 +10,24 @@ public enum Operator {
         public Integer perform(Integer left, Integer right) {
             return left + right;
         }
+    },
+    SUBTRACT("-") {
+        @Override
+        public Integer perform(Integer left, Integer right) {
+            return left - right;
+        }
+    },
+    MULTIPLY("*") {
+        @Override
+        public Integer perform(Integer left, Integer right) {
+            return left * right;
+        }
+    },
+    DIVIDE("/") {
+        @Override
+        public Integer perform(Integer left, Integer right) {
+            return left / right;
+        }
     };
 
     private static final Map<String, Operator> operatorSignMap = getOperatorSignMap();

@@ -4,16 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
-    public List<Integer> operands;
-    public List<Operator> operators;
+    private List<Integer> operands;
+    private List<Operator> operators;
 
-    public Expression(String stringExpression) {
-        operands = new ArrayList<>();
-        operators = new ArrayList<>();
+    public static Expression fromString(String stringExpression) {
+        Expression expression = new Expression();
+        expression.operands = new ArrayList<>();
+        expression.operators = new ArrayList<>();
         var tokens = stringExpression.split(" ");
         for (var token : tokens) {
-            addToken(token);
+            expression.addToken(token);
         }
+        return expression;
+    }
+
+    public List<Integer> getOperands() {
+        return operands;
+    }
+
+    public List<Operator> getOperators() {
+        return operators;
     }
 
     private void addToken(String token) {

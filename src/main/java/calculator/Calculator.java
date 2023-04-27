@@ -1,12 +1,11 @@
 package calculator;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class Calculator {
-    public Integer performSequentialArithmetics(List<Integer> operands, List<Operator> operators) {
-        var operandQueue = new LinkedList<>(operands);
-        var operatorQueue = new LinkedList<>(operators);
+    public Integer evaluate(Expression expression) {
+        var operandQueue = new LinkedList<>(expression.getOperands());
+        var operatorQueue = new LinkedList<>(expression.getOperators());
 
         var accumulator = operandQueue.pop();
         while (!operandQueue.isEmpty()) {
