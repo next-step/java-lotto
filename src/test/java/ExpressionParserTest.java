@@ -14,7 +14,7 @@ public class ExpressionParserTest{
 
         @Test
         void 공백_을_2개_가진_문자열을_3개_로_쪼갠다() {
-            String strWithTwoSpaces = "a b c";
+            String strWithTwoSpaces = "1 2 3";
 
             List<String> parts = parser.parse(strWithTwoSpaces);
 
@@ -30,5 +30,13 @@ public class ExpressionParserTest{
             Assertions.assertThat(parts).isEmpty();
         }
 
+    }
+
+    @Test
+    void 정수와_사칙연산자와_공백_외의_글자가_포함된_경우_예외를_던진다() {
+        String invalidExpression = "1 + 2 + a";
+
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> parser.parse(invalidExpression));
     }
 }
