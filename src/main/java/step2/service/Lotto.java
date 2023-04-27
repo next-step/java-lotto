@@ -7,10 +7,19 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final int DEFAULT_LOTTO_SIZE = 6;
+
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        validateSixSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validateSixSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != DEFAULT_LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호 갯수가 6개가 아닙니다.");
+        }
     }
 
     public Integer countWinNum(List<Integer> winNumbers) {
