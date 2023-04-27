@@ -8,6 +8,7 @@ public class Expression {
     private List<Operator> operators;
 
     public static Expression fromString(String stringExpression) {
+        checkNotNullOrEmpty(stringExpression);
         Expression expression = new Expression();
         expression.operands = new ArrayList<>();
         expression.operators = new ArrayList<>();
@@ -16,6 +17,12 @@ public class Expression {
             expression.addToken(token);
         }
         return expression;
+    }
+
+    private static void checkNotNullOrEmpty(String str) {
+        if (str == null || str.isEmpty()) {
+            throw new IllegalArgumentException("Empty expression");
+        }
     }
 
     public List<Integer> getOperands() {

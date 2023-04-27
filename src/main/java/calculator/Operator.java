@@ -37,13 +37,20 @@ public enum Operator {
         this.sign = sign;
     }
 
+    public static Operator fromSign(String sign) {
+        checkSignIsDefined(sign);
+        return operatorSignMap.get(sign);
+    }
+
     private static Map<String, Operator> getOperatorSignMap() {
         return Arrays.stream(Operator.values())
                 .collect(Collectors.toMap(operator -> operator.sign, operator -> operator));
     }
 
-    public static Operator fromSign(String sign) {
-        return operatorSignMap.get(sign);
+    private static void checkSignIsDefined(String sign) {
+        if (!operatorSignMap.containsKey(sign)) {
+            throw new IllegalArgumentException("Undefined operator sign");
+        }
     }
 
     public abstract Integer perform(Integer left, Integer right);
