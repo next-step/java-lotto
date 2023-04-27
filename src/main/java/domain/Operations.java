@@ -12,6 +12,11 @@ public class Operations {
         this.operations = new LinkedList<>(operations);
     }
 
+    public boolean hasNext() {
+        return !operations.isEmpty();
+    }
+
+
     public Operation next() {
         if (operations.isEmpty()) {
             return null;

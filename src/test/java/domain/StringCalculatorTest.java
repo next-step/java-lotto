@@ -43,7 +43,7 @@ class StringCalculatorTest {
     @ParameterizedTest
     @MethodSource("sampleParams")
     public void 수식_연산(List<Integer> numbers, String operations, int result) throws Exception {
-        assertThat(stringCalculator.calculate(new Numbers(numbers), Operation.toOperation(operations))).isEqualTo(result);
+        assertThat(stringCalculator.calculate(numbers, Operation.toOperation(operations))).isEqualTo(result);
     }
 
     static Stream<Arguments> sampleParams() throws Throwable {
@@ -51,5 +51,21 @@ class StringCalculatorTest {
                 Arguments.of(Arrays.asList(1, 2), "+", 3),
                 Arguments.of(Arrays.asList(3, 6), "+", 9)
         );
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1 + 2 + 3:6", "12 + 22 - 3:31", "6 * 2 - 7:5", "8 / 4 - 1:1", "8 / 4 - 4:-2"}, delimiter = ':')
+    public void 둘_이상의_연산자_계산_테스트(String exp, int result) throws Exception {
+        stringCalculator = new StringCalculator();
+        stringCalculator.readExpression(exp);
+        assertThat(stringCalculator.calculate()).isEqualTo(result);
+
+    }
+
+    @DisplayName("유효한 연산자가 아닐 경우, IllegalArgumentException")
+    @ParameterizedTest
+    @CsvSource(value = {"1 + 2 & 3", "12 ; 22 - 3", "6 * 2 ) 7", "8 / 4 $ 1"}, delimiter = ':')
+    public void 유효한_연산자_테스트(String exp) throws Exception {
+        assertThatIllegalArgumentException().isThrownBy(() -> stringCalculator.readExpression(exp));
     }
 }

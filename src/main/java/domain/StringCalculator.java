@@ -55,21 +55,28 @@ public class StringCalculator {
 
     }
 
+    public int calculate() {
+        int result = 0;
+        while(operations.hasNext()) {
+            result = calculate(numbers.getNextNumbers(), operations.next());
+            numbers.add(result);
+        }
+        return result;
+    }
 
-    public int calculate(Numbers numbers, Operation operation) {
-        List<Integer> nextNumbers = numbers.getNextNumbers();
+    public int calculate(List<Integer> numbers, Operation operation) {
 
         if (Operation.PLUS.equals(operation)) {
-            return Calculator.plus(nextNumbers.get(0), nextNumbers.get(1));
+            return Calculator.plus(numbers.get(0), numbers.get(1));
         }
         if (Operation.SUBTRACT.equals(operation)) {
-            return Calculator.subtract(nextNumbers.get(0), nextNumbers.get(1));
+            return Calculator.subtract(numbers.get(0), numbers.get(1));
         }
         if (Operation.DIVIDE.equals(operation)) {
-            return Calculator.divide(nextNumbers.get(0), nextNumbers.get(1));
+            return Calculator.divide(numbers.get(0), numbers.get(1));
         }
         if (Operation.MULTIPLY.equals(operation)) {
-            return Calculator.multiply(nextNumbers.get(0), nextNumbers.get(1));
+            return Calculator.multiply(numbers.get(0), numbers.get(1));
         }
 
         throw new IllegalArgumentException("유효한 연산자가 아닙니다.");

@@ -32,8 +32,8 @@ public class Numbers {
         return returnNumbers;
     }
 
-    public boolean add(int element) {
-        return numbers.add(element);
+    public void add(int element) {
+        numbers.addFirst(element);
     }
 
     public boolean isEmpty() {
