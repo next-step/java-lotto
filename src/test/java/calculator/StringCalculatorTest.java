@@ -19,7 +19,7 @@ public class StringCalculatorTest {
     @Test
     void 다섯가지_수를_더한다() {
         String input = "1 + 2 + 3 + 4 + 5";
-        int result = stringCalculator.calc(input);
+        int result = stringCalculator.calc(new InputString(input));
 
         assertThat(result).isEqualTo(15);
     }
@@ -27,7 +27,7 @@ public class StringCalculatorTest {
     @Test
     void 다섯가지_수를_뺄셈한다() {
         String input = "10 - 3 - 2 - 1 - 0";
-        int result = stringCalculator.calc(input);
+        int result = stringCalculator.calc(new InputString(input));
 
         assertThat(result).isEqualTo(4);
     }
@@ -35,7 +35,7 @@ public class StringCalculatorTest {
     @Test
     void 다섯가지_수를_곱셈한다() {
         String input = "1 * 2 * 3 * 4 * 5";
-        int result = stringCalculator.calc(input);
+        int result = stringCalculator.calc(new InputString(input));
 
         assertThat(result).isEqualTo(120);
     }
@@ -43,7 +43,7 @@ public class StringCalculatorTest {
     @Test
     void 다섯가지_수를_나눗셈한다() {
         String input = "500 / 2 / 5 / 5 / 2";
-        int result = stringCalculator.calc(input);
+        int result = stringCalculator.calc(new InputString(input));
 
         assertThat(result).isEqualTo(5);
     }
@@ -51,7 +51,7 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void 입력값이_null_및_빈공백_문자(String input) {
-        assertThatThrownBy(() -> stringCalculator.calc(input))
+        assertThatThrownBy(() -> stringCalculator.calc(new InputString(input)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
