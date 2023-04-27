@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     FAIL(0, 0);
 
     private final int matchCount;
@@ -29,10 +29,7 @@ public enum LottoRank {
     }
 
     public boolean isMiss() {
-        if (matchCount == 0) {
-            return true;
-        }
-        return false;
+        return matchCount == 0;
     }
 
     public int getPrizeMoney() {
