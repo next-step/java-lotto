@@ -39,7 +39,7 @@ public class LottoMachine {
         return new LottoNumber(bonusBallNumber);
     }
 
-    public WinningStat winningStat(Lottos lottos, WinningBall winningBall) {
-        return lottos.rating(winningBall);
+    public WinningStat winningStat(LottoBundle lottoBundle, WinningBall winningBall) {
+        return lottoBundle.rating(winningBall);
     }
 }

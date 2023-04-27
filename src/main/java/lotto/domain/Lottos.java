@@ -34,14 +34,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public WinningStat rating(WinningBall winningBall) {
-        final WinningStat winningStat = new WinningStat();
-
+    public void rating(WinningStat winningStat, WinningBall winningBall) {
         for (Lotto lotto : this.lottos) {
             winningStat.judgeWinning(lotto, winningBall);
         }
-
-        return winningStat;
     }
 
     public List<List<Integer>> lottoNumberList() {
