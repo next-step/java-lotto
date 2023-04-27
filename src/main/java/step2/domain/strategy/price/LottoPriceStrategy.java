@@ -5,6 +5,6 @@ public class LottoPriceStrategy implements Strategy {
 
     @Override
     public int buyLotto(int purchaseAmount) {
-        return purchaseAmount/LottoPurchase;
+        return purchaseAmount / LottoPurchase;
     }
 }

@@ -1,6 +1,7 @@
 package step2.domain.strategy.lotto;
 
 import step2.domain.model.Lotto.LottoNumber;
+import step2.domain.model.Lotto.LottoNumbers;
 
 import java.util.*;
 
@@ -13,19 +14,20 @@ public class LottoPolicyStrategy implements Strategy {
     private static final String TRIM = " ";
 
     @Override
-    public List<LottoNumber> createLottoNumber() {
+    public LottoNumbers createLottoNumbers() {
         Map<Integer, Integer> lottoNumberMap = new HashMap<>();
         List<LottoNumber> numbers = new ArrayList<>();
 
         while (numbers.size() < LOTTO_NUMBER_COUNT) {
-            int random = RANDOM.nextInt(LOTTO_RANDOM_RANGE_END)+LOTTO_RANDOM_RANGE_START;
+            int random = RANDOM.nextInt(LOTTO_RANDOM_RANGE_END) + LOTTO_RANDOM_RANGE_START;
             if (isContainsNumber(lottoNumberMap, random)) {
                 continue;
             }
             lottoNumberMap.put(random, lottoNumberMap.getOrDefault(random, 0) + 1);
-            numbers.add(LottoNumber.createLottoNumber(random));
+            numbers.add(LottoNumber.from(random));
         }
-        return numbers;
+
+        return new LottoNumbers(numbers);
     }
 
     private boolean isContainsNumber(Map<Integer, Integer> lottoNumberMap, int randomNumber) {
@@ -33,26 +35,27 @@ public class LottoPolicyStrategy implements Strategy {
     }
 
     @Override
-    public List<LottoNumber> createWinningLotto(String lastWinningNumbers) {
+    public LottoNumbers createWinningLottoNumber(String lastWinningNumbers) {
         List<LottoNumber> numbers = new ArrayList<>();
         String[] numbersArr = lastWinningNumbers.replaceAll(TRIM, "")
                 .split(DELIMITER);
 
         for (String number : numbersArr) {
             try {
-                numbers.add(LottoNumber.createLottoNumber(Integer.parseInt(number)));
+                numbers.add(LottoNumber.from(Integer.parseInt(number)));
             } catch (NumberFormatException numberFormatException) {
                 throw new NumberFormatException("숫자이외의 값이 입력 되었습니다.");
             }
         }
 
         isSizeNotEqualToLottoNumberCount(numbers.size());
-        return numbers;
+
+        return new LottoNumbers(numbers);
     }
 
     private void isSizeNotEqualToLottoNumberCount(int size) {
         if (size != LOTTO_NUMBER_COUNT) {
-            throw new IllegalStateException("잘못된 형식의 문장입니다.");
+            throw new IllegalStateException(String.format("지정된 로또의 갯수가 아닙니다. 로또의 갯수는 %d", LOTTO_NUMBER_COUNT));
         }
     }
 }

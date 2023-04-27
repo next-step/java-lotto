@@ -1,10 +1,9 @@
 package step2.domain.strategy.lotto;
 
-import step2.domain.model.Lotto.LottoNumber;
-
-import java.util.List;
+import step2.domain.model.Lotto.LottoNumbers;
 
 public interface Strategy {
-    List<LottoNumber> createLottoNumber();
-    List<LottoNumber> createWinningLotto(String lastWinningNumbers);
+    LottoNumbers createLottoNumbers();
+
+    LottoNumbers createWinningLottoNumber(String lastWinningNumbers);
 }

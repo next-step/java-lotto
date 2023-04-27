@@ -7,7 +7,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber createLottoNumber(int number) {
+    public static LottoNumber from(int number) {
         return new LottoNumber(number);
     }
 

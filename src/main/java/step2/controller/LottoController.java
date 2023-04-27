@@ -9,22 +9,16 @@ import step2.view.OutputView;
 
 public class LottoController {
     public static void main(String[] args) {
-
         int purchaseAmount = InputView.askPurchaseAmount();
-
-        int lottoCount = LottoStoreService.createLottoStoreService()
-                .getLottoCount(new LottoPriceStrategy(), purchaseAmount);
-
+        int lottoCount = LottoStoreService.getLottoCount(new LottoPriceStrategy(), purchaseAmount);
         OutputView.outPut(lottoCount);
 
         InputView.newLineRemove();
 
-        String lastWinningNumbers = InputView.askLastWeekWinningNumbers();
-
-        LottoService lottoService = LottoService.createLottoService(lottoCount, lastWinningNumbers);
+        LottoService lottoService = LottoService.of(lottoCount, InputView.askLastWeekWinningNumbers());
         lottoService.calculatorLottoWinningCount();
 
-        ProfitCalculatorService from = ProfitCalculatorService.from(lottoService.getLottos(), purchaseAmount);
+        ProfitCalculatorService from = ProfitCalculatorService.of(lottoService.getLottos(), purchaseAmount);
         OutputView.outPutProfit(from.getProfit(), from.getWinningCount());
     }
 }

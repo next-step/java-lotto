@@ -5,7 +5,6 @@ import step2.domain.model.Lotto.Lottos;
 import step2.domain.model.WinningAmountByRank;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ProfitCalculatorService {
@@ -24,14 +23,16 @@ public class ProfitCalculatorService {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public static ProfitCalculatorService from(Lottos lottos, int purchaseAmount) {
+    public static ProfitCalculatorService of(Lottos lottos, int purchaseAmount) {
+        if (purchaseAmount < 0) {
+            throw new IllegalArgumentException("잘못된 급액 입니다.");
+        }
         return new ProfitCalculatorService(lottos, purchaseAmount);
     }
 
     public double getProfit() {
         double winningAmount = 0;
-        List<Lotto> lottos1 = lottos.getLottos();
-        for (Lotto lotto : lottos1) {
+        for (Lotto lotto : lottos.getLottos()) {
             WinningAmountByRank from = WinningAmountByRank.from(lotto.getWinningCount());
             winningCount.put(from.getKey(), winningCount.getOrDefault(from.getKey(), 0) + 1);
             winningAmount += from.getAmount();

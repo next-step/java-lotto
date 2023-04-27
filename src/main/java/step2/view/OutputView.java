@@ -1,12 +1,10 @@
 package step2.view;
 
 import step2.domain.model.WinningAmountByRank;
-import step2.domain.model.Lotto.Lottos;
 
 import java.util.Map;
 
 public class OutputView {
-
     private OutputView() {
         // 생성자 내부 호출 -> 명시적 Exception
         throw new AssertionError();
