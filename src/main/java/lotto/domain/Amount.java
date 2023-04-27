@@ -31,4 +31,8 @@ public class Amount {
             throw new IllegalArgumentException("구입 금액보다 많습니다.");
         }
     }
+
+    public Integer getAmount() {
+        return amount;
+    }
 }

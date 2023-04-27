@@ -13,6 +13,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos createManualLottos(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
     public static Lottos init(Money amount) {
         List<Lotto> lottos;
         int bound = amount.getLottoQuantity();

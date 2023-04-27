@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.Statistics;
-import lotto.domain.Winners;
+import lotto.domain.*;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -15,8 +12,11 @@ public class OutputView {
     private static final int SUBSTRING_INDEX = 1;
     private static final double PROFIT_CONDITION = 1.0;
 
-    public static void printLottoQuantity(Money money) {
-        System.out.println(money.getLottoQuantity() + "개를 구매했습니다.");
+
+    public static void printLottoQuantity(Amount manualAmount, Amount autoAmount) {
+        System.out.println("수동으로 " + manualAmount.getAmount() + "장, 자동으로 "
+                + autoAmount.getAmount() + "개를 구매했습니다.");
+        System.out.println();
     }
 
     public static void printLottos(Lottos lottos) {
