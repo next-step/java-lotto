@@ -24,12 +24,12 @@ public class LottoNumberTest {
     void 구입_금액만큼_구매_번호_리스트가_생성된다() {
 
         // given
-        int price = 14000;
+        int amount = 14;
         List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoFactory factory = new LottoFactory(() -> numberList);
 
         // when
-        List<List<Integer>> result = factory.generateLotto(price);
+        List<List<Integer>> result = factory.generateLotto(amount);
 
         // then
         assertThat(result).hasSize(14);
