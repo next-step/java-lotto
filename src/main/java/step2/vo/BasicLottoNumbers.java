@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumbers {
+public class BasicLottoNumbers {
 
     private static final int LOTTO_START_NUMBER = 1;
 
@@ -14,7 +14,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers() {
+    public BasicLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int num = LOTTO_START_NUMBER; num <= LOTTO_END_NUMBER; num++) {
             lottoNumbers.add(new LottoNumber(num));

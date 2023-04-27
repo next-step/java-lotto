@@ -1,16 +1,16 @@
 package step2.service;
 
-import step2.vo.LottoNumbers;
+import step2.vo.BasicLottoNumbers;
 
 public class LottoNumberGenerator {
 
-    private final LottoNumbers lottoNumbers;
+    private final BasicLottoNumbers basicLottoNumbers;
 
     public LottoNumberGenerator() {
-        this.lottoNumbers = new LottoNumbers();
+        this.basicLottoNumbers = new BasicLottoNumbers();
     }
 
     public Lotto generateLottoNumbers() {
-        return lottoNumbers.pickSixNumbers();
+        return basicLottoNumbers.pickSixNumbers();
     }
 }
