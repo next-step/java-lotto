@@ -13,40 +13,40 @@ public class StringCalculatorTest {
         String input2 = "";
         String input3 = " ";
         assertAll(
-                () -> assertThatThrownBy(() -> new StringCalculater(input1)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new StringCalculater(input2)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new StringCalculater(input3)).isInstanceOf(IllegalArgumentException.class)
+                () -> assertThatThrownBy(() -> new StringCalculator(input1)).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> new StringCalculator(input2)).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> new StringCalculator(input3)).isInstanceOf(IllegalArgumentException.class)
         );
 
     }
 
     @Test
     void 숫자와사칙연산구분하여담기() {
-        StringCalculater stringCalculater = new StringCalculater("2 + 3 * 4 / 2");
+        StringCalculator stringCalculator = new StringCalculator("2 + 3 * 4 / 2");
         assertAll(
-                () -> assertThat(stringCalculater.getOperator(0)).isEqualTo("+"),
-                () -> assertThat(stringCalculater.getOperator(1)).isEqualTo("*"),
-                () -> assertThat(stringCalculater.getOperator(2)).isEqualTo("/"),
-                () -> assertThat(stringCalculater.getNumber(0)).isEqualTo(2),
-                () -> assertThat(stringCalculater.getNumber(1)).isEqualTo(3),
-                () -> assertThat(stringCalculater.getNumber(2)).isEqualTo(4),
-                () -> assertThat(stringCalculater.getNumber(3)).isEqualTo(2)
+                () -> assertThat(stringCalculator.getOperator(0)).isEqualTo("+"),
+                () -> assertThat(stringCalculator.getOperator(1)).isEqualTo("*"),
+                () -> assertThat(stringCalculator.getOperator(2)).isEqualTo("/"),
+                () -> assertThat(stringCalculator.getNumber(0)).isEqualTo(2),
+                () -> assertThat(stringCalculator.getNumber(1)).isEqualTo(3),
+                () -> assertThat(stringCalculator.getNumber(2)).isEqualTo(4),
+                () -> assertThat(stringCalculator.getNumber(3)).isEqualTo(2)
         );
     }
 
     @Test
     void 더하기테스트() {
-        StringCalculater stringCalculater = new StringCalculater("3 + 7");
+        StringCalculator stringCalculator = new StringCalculator("3 + 7");
         assertAll(
-                () -> assertThat(stringCalculater.calculate()).isEqualTo(10)
+                () -> assertThat(stringCalculator.calculate()).isEqualTo(10)
         );
     }
 
     @Test
     void 계산기테스트() {
-        StringCalculater stringCalculater = new StringCalculater("2 + 3 * 4 / 2");
+        StringCalculator stringCalculator = new StringCalculator("2 + 3 * 4 / 2");
         assertAll(
-                () -> assertThat(stringCalculater.calculate()).isEqualTo(10)
+                () -> assertThat(stringCalculator.calculate()).isEqualTo(10)
         );
     }
 }
