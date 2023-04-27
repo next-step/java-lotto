@@ -25,7 +25,7 @@ class WinnersTest {
     @Test
     @DisplayName("수익률 테스트 - 하나도 안맞음")
     void getProfitZeroTest() {
-        Money amount = Money.init(14000);
+        Money amount = Money.from(14000);
         winnersCount.put(Statistics.MISS, 14);
         Winners winners = new Winners(winnersCount);
 
@@ -36,7 +36,7 @@ class WinnersTest {
     @Test
     @DisplayName("수익률 테스트 - 손해")
     void getProfitLoseTest() {
-        Money amount = Money.init(14000);
+        Money amount = Money.from(14000);
         winnersCount.put(Statistics.FIFTH, 1);
         Winners winners = new Winners(winnersCount);
 
@@ -47,7 +47,7 @@ class WinnersTest {
     @Test
     @DisplayName("수익률 테스트 2장 - 손해")
     void getProfitDoubleLoseTest() {
-        Money amount = Money.init(14000);
+        Money amount = Money.from(14000);
         winnersCount.put(Statistics.FIFTH, 2);
         Winners winners = new Winners(winnersCount);
 
@@ -58,7 +58,7 @@ class WinnersTest {
     @Test
     @DisplayName("수익률 테스트 - 본전치기")
     void getProfitStandardTest() {
-        Money amount = Money.init(5000);
+        Money amount = Money.from(5000);
         winnersCount.put(Statistics.FIFTH, 1);
         Winners winners = new Winners(winnersCount);
 
@@ -69,7 +69,7 @@ class WinnersTest {
     @Test
     @DisplayName("수익률 테스트 - 수익")
     void getRealProfitTest() {
-        Money amount = Money.init(5000);
+        Money amount = Money.from(5000);
         winnersCount.put(Statistics.FIFTH, 2);
         Winners winners = new Winners(winnersCount);
 

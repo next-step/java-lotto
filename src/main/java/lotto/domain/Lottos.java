@@ -17,7 +17,7 @@ public class Lottos {
         List<Lotto> lottos;
         int bound = amount.getLottoQuantity();
         lottos = IntStream.range(ZERO, bound)
-                .mapToObj(i -> Lotto.init())
+                .mapToObj(i -> Lotto.createAutoLotto())
                 .collect(Collectors.toList());
 
         return new Lottos(lottos);

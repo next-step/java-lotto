@@ -14,20 +14,20 @@ class LottosTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void initLottoTest() {
-        assertThat(Lottos.init(Money.init(14000)))
+        assertThat(Lottos.init(Money.from(14000)))
                 .isInstanceOf(Lottos.class);
     }
 
     @Test
     @DisplayName("통계 테스트")
     void findStatisticsTest() {
-        Lotto winning = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
+        Lotto winning = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "6"));
 
-        Lotto lotto_1 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
-        Lotto lotto_2 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "7"));
-        Lotto lotto_3 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "9"));
-        Lotto lotto_4 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "8", "7"));
-        Lotto lotto_5 = Lotto.initWinningLotto(List.of("1", "2", "3", "9", "8", "7"));
+        Lotto lotto_1 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "6"));
+        Lotto lotto_2 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "7"));
+        Lotto lotto_3 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "9"));
+        Lotto lotto_4 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "8", "7"));
+        Lotto lotto_5 = Lotto.createManualLotto(List.of("1", "2", "3", "9", "8", "7"));
 
         Lottos lottos = new Lottos(List.of(lotto_1, lotto_2, lotto_3, lotto_4, lotto_5));
 

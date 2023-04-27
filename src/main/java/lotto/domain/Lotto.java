@@ -10,12 +10,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto init() {
+    public static Lotto createAutoLotto() {
         LottoNumbers lottoNumbers = LottoNumbers.init();
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto initWinningLotto(List<String> manualNumbers) {
+    public static Lotto createManualLotto(List<String> manualNumbers) {
         LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(manualNumbers);
         return new Lotto(lottoNumbers);
     }

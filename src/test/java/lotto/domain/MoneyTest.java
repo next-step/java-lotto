@@ -14,7 +14,7 @@ class MoneyTest {
     @Test
     @DisplayName("Money type 생성 테스트")
     void initMoneyTest() {
-        assertThat(Money.init(3000))
+        assertThat(Money.from(3000))
                 .isInstanceOf(Money.class);
     }
 
@@ -22,7 +22,7 @@ class MoneyTest {
     @CsvSource(value = {"3000,3", "4999,4", "1001,1", "5001,5"})
     @DisplayName("로또 발행 개수")
     void lottoQuantityTest(int amount, int quantity) {
-        Money money = Money.init(amount);
+        Money money = Money.from(amount);
 
         assertThat(money.getLottoQuantity())
                 .isEqualTo(quantity);
@@ -32,7 +32,7 @@ class MoneyTest {
     @ValueSource(ints = {0, -1, 999})
     @DisplayName("1000보다 작은 값을 보낼 때 에러 반환")
     void nullOrEmptyTest(int input) {
-        assertThatThrownBy(() -> Money.init(input))
+        assertThatThrownBy(() -> Money.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("1000원 이상 입력해주세요.");
     }
@@ -40,10 +40,38 @@ class MoneyTest {
     @Test
     @DisplayName("Lotto 한장 구매 테스트")
     void lottoOnlyOneTest() {
-        Money money = Money.init(1000);
+        Money money = Money.from(1000);
 
         assertThat(money.getLottoQuantity())
                 .isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("Lotto 구매 개수 초과 테스트")
+    void isOverTotalQuantityTest() {
+        Money money = Money.from(5000);
+
+        assertThat(money.isOverTotalQuantity(6))
+                .isTrue();
+    }
+
+    @Test
+    @DisplayName("Lotto 구매 개수 가능 테스트")
+    void isNotOverTotalQuantityTest() {
+        Money money = Money.from(5000);
+
+        assertThat(money.isOverTotalQuantity(5))
+                .isFalse();
+    }
+
+    @Test
+    @DisplayName("Lotto 개수 계산 테스트")
+    void getAutoLottosTest() {
+        Money money = Money.from(5000);
+
+        assertThat(money.getAutoLottoAmount(3))
+                .isEqualTo(2);
+
     }
 
 }

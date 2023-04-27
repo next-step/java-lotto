@@ -8,7 +8,10 @@ public class Main {
 
     public static void main(String[] args) {
         Money lottoAmount = InputView.inputPrice();
-        OutputView.printLottoQuantity(lottoAmount);
+//        OutputView.printLottoQuantity(lottoAmount);
+
+        Amount manualAmount = InputView.inputManualAmount();
+        Amount autoAmount = manualAmount.calculateAutoLottos(lottoAmount);
 
         Lottos lottos = Lottos.init(lottoAmount);
         OutputView.printLottos(lottos);

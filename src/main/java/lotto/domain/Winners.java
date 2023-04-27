@@ -30,7 +30,7 @@ public class Winners {
                 .mapToInt(statistics -> statistics.getTotalPrize(winnersCount.getOrDefault(statistics, DEFAULT_VALUE)))
                 .reduce(DEFAULT_VALUE, Integer::sum);
 
-        return (double) sum / amount.getAmount();
+        return (double) sum / amount.getPrice();
     }
 
     @Override

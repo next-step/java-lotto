@@ -14,7 +14,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 번호가 보너스 번호 포함 테스트")
     void containBonusLottoTest() {
-        Lotto winning = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
+        Lotto winning = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "6"));
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("1");
 
         assertThatThrownBy(() -> WinningLotto.init(winning, bonusNumber))
@@ -25,7 +25,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 번호에 보너스 번호가 없을때 테스트")
     void noContainBonusLottoTest() {
-        Lotto winning = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
+        Lotto winning = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "6"));
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
 
         WinningLotto winningLotto = WinningLotto.init(winning, bonusNumber);
@@ -38,13 +38,13 @@ public class WinningLottoTest {
     @DisplayName("로또 매칭 테스트")
     void matchLottoTest() {
         List<String> manualNumbers = List.of("1", "2", "3", "4", "5", "6");
-        Lotto winning = Lotto.initWinningLotto(manualNumbers);
+        Lotto winning = Lotto.createManualLotto(manualNumbers);
 
-        Lotto lotto_1 = Lotto.initWinningLotto(manualNumbers);
-        Lotto lotto_2 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "7"));
-        Lotto lotto_3 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "8"));
-        Lotto lotto_4 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "9", "8"));
-        Lotto lotto_5 = Lotto.initWinningLotto(List.of("1", "2", "3", "10", "9", "8"));
+        Lotto lotto_1 = Lotto.createManualLotto(manualNumbers);
+        Lotto lotto_2 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "7"));
+        Lotto lotto_3 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "8"));
+        Lotto lotto_4 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "9", "8"));
+        Lotto lotto_5 = Lotto.createManualLotto(List.of("1", "2", "3", "10", "9", "8"));
 
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
 
