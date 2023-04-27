@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.List;
-import java.util.Map;
 
 public final class ResultView {
 
@@ -20,15 +19,14 @@ public final class ResultView {
         tickets.forEach(System.out::println);
     }
 
-    public static void showResult(WinningStatistics winningStatistics) {
+    public static void showResult(WinnerStatistics winnerStatistics) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Map<LottoReward, Integer> detail = winningStatistics.getDetail();
-        LottoReward.getRewardValues()
-                .forEach(reward -> showRewards(reward, detail.get(reward)));
-        showIncomeRate(winningStatistics.getIncomeRate());
+        LottoRank.getRankValues()
+                .forEach(rank -> showRewards(rank, winnerStatistics.getCountByRank(rank)));
+        showIncomeRate(winnerStatistics.getIncomeRate());
     }
 
     private static void showIncomeRate(double incomeRate) {
@@ -39,10 +37,20 @@ public final class ResultView {
         System.out.println(sb);
     }
 
-    private static void showRewards(LottoReward lottoReward, Integer count) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n",
-                lottoReward.getMatchedCount(),
-                lottoReward.getReward(),
+    private static void showRewards(LottoRank lottoRank, Integer count) {
+        System.out.println(toResultMessage(lottoRank, count));
+    }
+
+    private static String toResultMessage(LottoRank lottoRank, Integer count) {
+        if (lottoRank.isSecond()) {
+            return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개",
+                    lottoRank.getMatchedCount(),
+                    lottoRank.getReward(),
+                    count);
+        }
+        return String.format("%d개 일치 (%d원)- %d개",
+                lottoRank.getMatchedCount(),
+                lottoRank.getReward(),
                 count);
     }
 
