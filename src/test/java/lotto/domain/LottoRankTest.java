@@ -22,7 +22,7 @@ public class LottoRankTest {
   public void 일치하는_개수에_따른_상금_반환(int input, boolean matchBonus, int expected) {
     LottoRank lottoRank = LottoRank.valueOfMatchedCount(input, matchBonus);
 
-    assertThat(LottoRank.prizeMoney(lottoRank)).isEqualTo(expected);
+    assertThat(lottoRank.prizeMoney()).isEqualTo(expected);
   }
 
   @Test
@@ -30,7 +30,7 @@ public class LottoRankTest {
   public void create_2등() {
     LottoRank lottoRank = LottoRank.valueOfMatchedCount(5, true);
 
-    assertThat(LottoRank.prizeMoney(lottoRank)).isEqualTo(30_000_000);
+    assertThat(lottoRank.prizeMoney()).isEqualTo(30_000_000);
   }
 
   private static Stream<Arguments> provide_일치하는_개수에_따른_상금_반환() {

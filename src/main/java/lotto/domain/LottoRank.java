@@ -53,8 +53,8 @@ public enum LottoRank {
     return !matchBonus && count == SECOND_OR_THIRD_COUNT;
   }
 
-  public static int prizeMoney(LottoRank lottoRank) {
-    return lottoRank.prizeMoney;
+  public int prizeMoney() {
+    return prizeMoney;
   }
 
   public int matchedCount() {

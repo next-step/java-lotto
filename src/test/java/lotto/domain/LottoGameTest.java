@@ -30,7 +30,7 @@ public class LottoGameTest {
   @Test
   @DisplayName("수익률 테스트")
   public void 수익률() {
-    assertThat(lottoResult.lottoRateOfReturn()).isEqualTo(2.5);
+    assertThat(lottoResult.calculateRateOfReturn()).isEqualTo(2.5);
   }
 
   @Test
