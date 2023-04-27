@@ -32,4 +32,18 @@ class StoreTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Store(price));
     }
+
+    @Test
+    void generate_Lotteries() {
+        // given
+        Price price = new Price(14000);
+        Store store = new Store(price);
+
+        // when
+        store.generateLottery();
+
+        // assert
+        assertThat(store.getLotteries().size()).isEqualTo(14);
+
+    }
 }
