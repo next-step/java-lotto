@@ -16,7 +16,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("LottoNumbers 사이즈 테스트")
     void lottoNumbersRangeTest() {
-        LottoNumbers lottoNumbers = LottoNumbers.init();
+        LottoNumbers lottoNumbers = LottoNumbers.createAutoLottoNumbers();
 
         assertThat(lottoNumbers.getLottoNumberSize())
                 .isEqualTo(6);
@@ -25,11 +25,11 @@ class LottoNumbersTest {
     @Test
     @DisplayName("LottoNumbers 길이 에러 리턴 테스트")
     void lottoNumbersSizeErrorTest() {
-        LottoNumber lottoNumber_1 = LottoNumber.createLottoNumber();
-        LottoNumber lottoNumber_2 = LottoNumber.createLottoNumber();
-        LottoNumber lottoNumber_3 = LottoNumber.createLottoNumber();
-        LottoNumber lottoNumber_4 = LottoNumber.createLottoNumber();
-        LottoNumber lottoNumber_5 = LottoNumber.createLottoNumber();
+        LottoNumber lottoNumber_1 = LottoNumber.createAutoLottoNumber();
+        LottoNumber lottoNumber_2 = LottoNumber.createAutoLottoNumber();
+        LottoNumber lottoNumber_3 = LottoNumber.createAutoLottoNumber();
+        LottoNumber lottoNumber_4 = LottoNumber.createAutoLottoNumber();
+        LottoNumber lottoNumber_5 = LottoNumber.createAutoLottoNumber();
 
         List<LottoNumber> LottoNumbersList = List.of(
                 lottoNumber_1,
@@ -48,7 +48,7 @@ class LottoNumbersTest {
     @DisplayName("LottoNumbers 수동 입력")
     void initManualLottoNnumbers() {
         List<String> winningNumbers = List.of("1", "2", "3", "4", "5", "6");
-        LottoNumbers manualLottoNumbers = LottoNumbers.initManualLottoNumbers(winningNumbers);
+        LottoNumbers manualLottoNumbers = LottoNumbers.createManualLottoNumbers(winningNumbers);
 
         List<LottoNumber> LottoNumbersList = List.of(
                 new LottoNumber(1),
@@ -71,7 +71,7 @@ class LottoNumbersTest {
     void lottoNumbersSameNumberErrorTest() {
         List<String> winningNumbers = List.of("1", "2", "3", "3", "5", "5");
 
-        assertThatThrownBy(() -> LottoNumbers.initManualLottoNumbers(winningNumbers))
+        assertThatThrownBy(() -> LottoNumbers.createManualLottoNumbers(winningNumbers))
                 .isInstanceOf(SameNumberException.class)
                 .hasMessage("같은 숫자를 입력했습니다 - 같은 숫자 : 3, 5");
     }
@@ -80,10 +80,10 @@ class LottoNumbersTest {
     @DisplayName("당첨 번호 확인 테스트")
     void findMatchingNumbers() {
         List<String> winningNumbers = List.of("1", "2", "3", "4", "5", "6");
-        LottoNumbers winingLotto = LottoNumbers.initManualLottoNumbers(winningNumbers);
+        LottoNumbers winingLotto = LottoNumbers.createManualLottoNumbers(winningNumbers);
 
         List<String> stringLottoNumbers = List.of("1", "2", "3", "11", "12", "13");
-        LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(stringLottoNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.createManualLottoNumbers(stringLottoNumbers);
 
         assertThat(lottoNumbers.findMatchingNumbers(winingLotto))
                 .isEqualTo(3);
@@ -93,7 +93,7 @@ class LottoNumbersTest {
     @DisplayName("보너스 번호 확인 테스트")
     void hasBonusNumberTest() {
         List<String> stringLottoNumbers = List.of("1", "2", "3", "4", "5", "6");
-        LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(stringLottoNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.createManualLottoNumbers(stringLottoNumbers);
 
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("6");
 
@@ -105,7 +105,7 @@ class LottoNumbersTest {
     @DisplayName("보너스 번호 불일치 테스트")
     void hasNoBonusNumberTest() {
         List<String> stringLottoNumbers = List.of("1", "2", "3", "4", "5", "6");
-        LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(stringLottoNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.createManualLottoNumbers(stringLottoNumbers);
 
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
 

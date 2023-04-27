@@ -11,12 +11,12 @@ public class Lotto {
     }
 
     public static Lotto createAutoLotto() {
-        LottoNumbers lottoNumbers = LottoNumbers.init();
+        LottoNumbers lottoNumbers = LottoNumbers.createAutoLottoNumbers();
         return new Lotto(lottoNumbers);
     }
 
     public static Lotto createManualLotto(List<String> manualNumbers) {
-        LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(manualNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.createManualLottoNumbers(manualNumbers);
         return new Lotto(lottoNumbers);
     }
 
