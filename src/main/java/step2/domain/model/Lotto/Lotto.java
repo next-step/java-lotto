@@ -1,6 +1,6 @@
-package step2.domain.model;
+package step2.domain.model.Lotto;
 
-import step2.domain.strategy.lotto.Strategy;
+import step2.domain.strategy.lotto.LottoPolicyStrategy;
 
 import java.util.List;
 import java.util.Map;
@@ -15,12 +15,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto createLotto(Strategy strategy) {
-        return new Lotto(LottoNumbers.createLottoNumbers(strategy));
+    public static Lotto createLotto() {
+        return new Lotto(LottoNumbers.createLottoNumbers(new LottoPolicyStrategy()));
     }
 
-    public static Lotto createWinnerLotto(Strategy strategy, String lastWinningNumbers) {
-        return new Lotto(LottoNumbers.createWinnerLottoNumbers(strategy, lastWinningNumbers));
+    public static Lotto createWinnerLotto(String lastWinningNumbers) {
+        return new Lotto(LottoNumbers.createWinnerLottoNumbers(new LottoPolicyStrategy(), lastWinningNumbers));
     }
 
     public List<LottoNumber> getNumbers() {
@@ -37,6 +37,10 @@ public class Lotto {
                 winningCount++;
             }
         }
+    }
+
+    public int getWinningCount() {
+        return winningCount;
     }
 
     @Override

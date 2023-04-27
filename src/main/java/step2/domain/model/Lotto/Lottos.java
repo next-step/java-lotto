@@ -1,6 +1,5 @@
-package step2.domain.model;
+package step2.domain.model.Lotto;
 
-import step2.domain.strategy.lotto.Strategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +8,9 @@ import java.util.stream.Collectors;
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(Strategy strategy, int lottoCount) {
+    public Lottos(int lottoCount) {
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(Lotto.createLotto(strategy)); //
+            lottos.add(Lotto.createLotto()); //
         }
     }
 

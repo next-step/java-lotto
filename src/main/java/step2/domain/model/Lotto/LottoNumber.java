@@ -1,4 +1,4 @@
-package step2.domain.model;
+package step2.domain.model.Lotto;
 
 public class LottoNumber {
     private int number;

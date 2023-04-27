@@ -1,4 +1,4 @@
-package step2.domain.model;
+package step2.domain.model.Lotto;
 
 import step2.domain.strategy.lotto.Strategy;
 
