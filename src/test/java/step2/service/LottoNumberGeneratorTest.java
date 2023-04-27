@@ -12,8 +12,8 @@ public class LottoNumberGeneratorTest {
 //
 //    @RepeatedTest(value = 10, name = "로또 번호 발생 시 결과 6개인지 확인하는 테스트")
 //    void testGenerateLottoNumbers_6개_결과_확인() {
-//        List<Integer> result = lottoNumberGenerator.generateLottoNumbers();
-//        assertThat(result).hasSize(6);
+//        Lotto result = lottoNumberGenerator.generateLottoNumbers();
+//        assertThat(result)(6);
 //    }
 //
 //    @RepeatedTest(value = 10, name = "로또 번호 발생 시 정렬이 잘 돼 있는지 확인하는 테스트")

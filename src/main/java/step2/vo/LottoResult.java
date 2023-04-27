@@ -27,7 +27,7 @@ public class LottoResult {
         return matchingCount;
     }
 
-    public String toStringLottoNumbers() {
-        return this.lotto.toStringLottoNumbers();
+    public List<Integer> lottoNumbers() {
+        return lotto.lottoNumbers();
     }
 }

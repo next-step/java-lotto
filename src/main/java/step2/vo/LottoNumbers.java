@@ -7,12 +7,6 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private static final String NUMBER_DELIMITER = ", ";
-
-    private static final String RESULT_PREFIX = "[";
-
-    private static final String RESULT_SUFFIX = "]";
-
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -31,9 +25,9 @@ public class LottoNumbers {
                 .anyMatch(lottoNumber -> lottoNumber.equalsWinNum(winNum));
     }
 
-    public String toStringLottoNumbers() {
+    public List<Integer> lottoNumbers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::toStringNumber)
-                .collect(Collectors.joining(NUMBER_DELIMITER, RESULT_PREFIX, RESULT_SUFFIX));
+                .map(LottoNumber::lottoNumber)
+                .collect(Collectors.toList());
     }
 }

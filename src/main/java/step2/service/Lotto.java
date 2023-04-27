@@ -2,6 +2,8 @@ package step2.service;
 
 import step2.vo.LottoNumbers;
 
+import java.util.List;
+
 public class Lotto {
 
     private LottoNumbers lottoNumbers;
@@ -14,7 +16,7 @@ public class Lotto {
         return lottoNumbers.containWinNum(winNum);
     }
 
-    public String toStringLottoNumbers() {
-        return this.lottoNumbers.toStringLottoNumbers();
+    public List<Integer> lottoNumbers() {
+        return lottoNumbers.lottoNumbers();
     }
 }

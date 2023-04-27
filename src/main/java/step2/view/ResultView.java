@@ -17,7 +17,7 @@ public class ResultView {
 
     public void showLottoGameResults() {
         for (LottoResult lottoResult : lottoResults.getLottoResults()) {
-            System.out.println(lottoResult.toStringLottoNumbers());
+            System.out.println(lottoResult.lottoNumbers());
         }
         System.out.println();
     }

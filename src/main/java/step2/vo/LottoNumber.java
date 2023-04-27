@@ -20,11 +20,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public boolean equalsWinNum(int winNum) {
-        return this.lottoNumber == winNum;
+        return lottoNumber == winNum;
     }
 
-    public String toStringNumber() {
-        return String.valueOf(this.lottoNumber);
+    public int lottoNumber() {
+        return lottoNumber;
     }
 
     @Override
