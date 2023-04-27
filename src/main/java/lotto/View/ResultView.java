@@ -43,14 +43,13 @@ public class ResultView {
     private static void printPerformance(double profitRate) {
         System.out.print("(기준이 1이기 때문에 결과적으로 ");
 
+        String profitResult = "이익";
         if (profitRate < 1) {
-            System.out.print("손해");
+            profitResult = "손해";
         } else if (profitRate == 1) {
-            System.out.print("본전");
-        } else {
-            System.out.print("이익");
+            profitResult = "본전";
         }
 
-        System.out.println("라는 의미임)");
+        System.out.println(profitResult+"라는 의미임)");
     }
 }
