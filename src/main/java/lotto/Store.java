@@ -10,8 +10,8 @@ public class Store {
     public static final int LOTTERY_PRICE = 1000;
     private final Lotteries lotteries;
 
-    public Store(Price price) {
-        int lotteryCount = calculateLotteryCount(price);
+    public Store(int price) {
+        int lotteryCount = calculateLotteryCount(new Price(price));
         this.lotteries = new Lotteries(lotteryCount);
     }
 
