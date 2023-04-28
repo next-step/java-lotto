@@ -5,8 +5,12 @@ import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -45,14 +49,23 @@ public class LottoTicketTest {
     }
 
     @DisplayName("당첨번호와 보너스번호에 따른 등수를 구한다")
-    @Test
-    void prize() {
-        LottoTicket secondRankLottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 45));
+    @ParameterizedTest
+    @MethodSource("lottoRank")
+    void prize(List<Integer> winningLottoTicket, LottoTicket lottoTicket, LottoNumber bonusNumber, LottoPrize expectedLottoPrize) {
+        LottoPrize lottoPrize = lottoTicket.getWinningPrize(winningLottoTicket, bonusNumber);
+        assertThat(lottoPrize).isEqualTo(expectedLottoPrize);
+    }
+
+    static Stream<Arguments> lottoRank() {
         List<Integer> winningLottoTicket = List.of(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(45);
-
-        LottoPrize lottoPrize = secondRankLottoTicket.getWinningPrize(winningLottoTicket, bonusNumber);
-
-        assertThat(lottoPrize).isEqualTo(LottoPrize.RANK2);
+        return Stream.of(
+                Arguments.of(winningLottoTicket, LottoTicket.of(List.of(1, 2, 3, 4, 5, 6)), bonusNumber, LottoPrize.RANK1),
+                Arguments.of(winningLottoTicket, LottoTicket.of(List.of(1, 2, 3, 4, 5, 45)), bonusNumber, LottoPrize.RANK2),
+                Arguments.of(winningLottoTicket, LottoTicket.of(List.of(1, 2, 3, 4, 5, 7)), bonusNumber, LottoPrize.RANK3),
+                Arguments.of(winningLottoTicket, LottoTicket.of(List.of(1, 2, 3, 4, 7, 8)), bonusNumber, LottoPrize.RANK4),
+                Arguments.of(winningLottoTicket, LottoTicket.of(List.of(1, 2, 3, 7, 8, 9)), bonusNumber, LottoPrize.RANK5),
+                Arguments.of(winningLottoTicket, LottoTicket.of(List.of(1, 2, 7, 8, 9, 10)), bonusNumber, LottoPrize.LOST)
+        );
     }
 }
