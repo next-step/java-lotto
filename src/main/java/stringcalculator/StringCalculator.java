@@ -4,7 +4,7 @@ import java.util.List;
 
 public class StringCalculator {
     private final List<Double> numbers;
-    private final List<String> operators;
+    private final List<Operation> operators;
     private double result;
 
     public StringCalculator(String input) {
@@ -21,8 +21,7 @@ public class StringCalculator {
         return result;
     }
 
-    private void calculateEach(String symbol, Double number) {
-        Operation operation = Operation.find(symbol);
+    private void calculateEach(Operation operation, Double number) {
         result = operation.calculate(result, number);
     }
 

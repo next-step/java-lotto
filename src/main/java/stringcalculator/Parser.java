@@ -7,7 +7,7 @@ public class Parser {
     private final String NUMBER_REGEX = "^[0-9]*$";
     private final String OPERATION_REGEX = "^[+\\-*/]+$";
     private final List<Double> numbers = new ArrayList<>();
-    private final List<String> operators = new ArrayList<>();
+    private final List<Operation> operators = new ArrayList<>();
 
     public Parser(String input) {
         validateNotBlank(input);
@@ -30,7 +30,7 @@ public class Parser {
     private void separateInput(String[] strings, int i) {
         if (i % 2 == 1) {
             validateSymbol(strings[i]);
-            operators.add(strings[i]);
+            operators.add(Operation.find(strings[i]));
             return;
         }
         validateNumber(strings[i]);
@@ -53,7 +53,7 @@ public class Parser {
         return numbers;
     }
 
-    public List<String> operators() {
+    public List<Operation> operators() {
         return operators;
     }
 }

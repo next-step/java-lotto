@@ -14,7 +14,10 @@ class ParserTest {
     @Test
     void 사칙연산담기() {
         String[] symbols = {"+", "*", "/"};
-        List<String> expectedSymbols = new ArrayList<>(Arrays.asList(symbols));
+        List<Operation> expectedSymbols = new ArrayList<>();
+        for (String symbol : symbols) {
+            expectedSymbols.add(Operation.find(symbol));
+        }
 
         assertThat(parser.operators()).isEqualTo(expectedSymbols);
     }
