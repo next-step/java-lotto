@@ -24,8 +24,4 @@ public enum Prize {
     public int calculatePrize(int count) {
         return this.prizeAmount * count;
     }
-
-    public boolean needBonusNumberMatch() {
-        return bonusNumberMatch;
-    }
 }
