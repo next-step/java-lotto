@@ -66,12 +66,12 @@ public class LottoMachineTest {
 			new Lotto(3), new Lotto(3)
 		);
 		LottoMachine lottoMachine = new LottoMachine();
-		Map<Score, Integer> scoreBoard = lottoMachine.makeScoreBoard(lottos);
+		ScoreBoard scoreBoard = lottoMachine.makeScoreBoard(lottos);
 
-		assertThat(scoreBoard.get(new Score(0))).isNull();
-		assertThat(scoreBoard.get(new Score(2))).isNull();
-		assertThat(scoreBoard.get(new Score(3))).isEqualTo(2);
-		assertThat(scoreBoard.get(new Score(6))).isEqualTo(0);
+		assertThat(scoreBoard.winCount(new Score(0))).isNull();
+		assertThat(scoreBoard.winCount(new Score(2))).isNull();
+		assertThat(scoreBoard.winCount(new Score(3))).isEqualTo(2);
+		assertThat(scoreBoard.winCount(new Score(6))).isEqualTo(0);
 	}
 
 	@DisplayName("상금 현황 목록을 작성한다.")

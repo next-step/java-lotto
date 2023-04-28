@@ -2,9 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
@@ -46,28 +44,15 @@ public class LottoMachine {
 		return this.toPrizeSituations(this.makeScoreBoard(this.purchasedLottos.getLottos()));
 	}
 
-	private List<PrizeSituation> toPrizeSituations(Map<Score, Integer> scoreBoard) {
-		return scoreBoard.entrySet().stream()
-			.map(entry -> new PrizeSituation(PrizeType.of(entry.getKey()), entry.getValue()))
-			.collect(Collectors.toList());
+	private List<PrizeSituation> toPrizeSituations(ScoreBoard scoreBoard) {
+		return scoreBoard.makePrizeSituations();
 	}
 
-	public Map<Score, Integer> makeScoreBoard(List<Lotto> lottos) {
-		Map<Score, Integer> scoreBoard = new HashMap<>();
-		for (PrizeType prizeType : PrizeType.values()) {
-			scoreBoard.put(prizeType.score, 0);
-		}
-		for (Lotto lotto : lottos) {
-			fillScoreBoard(scoreBoard, lotto);
-		}
+	public ScoreBoard makeScoreBoard(List<Lotto> lottos) {
+		ScoreBoard scoreBoard = new ScoreBoard();
+		scoreBoard.fillScoreBoard(lottos);
+
 		return scoreBoard;
-	}
-
-	private void fillScoreBoard(Map<Score, Integer> scoreBoard, Lotto lotto) {
-		Score score = lotto.getScore();
-		if (scoreBoard.containsKey(score)) {
-			scoreBoard.put(score, (scoreBoard.get(score) + 1));
-		}
 	}
 
 	public List<PrizeSituation> sortInOrderScore(List<PrizeSituation> prizeSituations) {
