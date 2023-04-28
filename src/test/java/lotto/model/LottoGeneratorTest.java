@@ -5,8 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -18,7 +16,7 @@ class LottoGeneratorTest {
     @DisplayName("금액에 따라 적절한 로또 개수를 발급한다")
     @CsvSource(value = {"1000=1", "10000=10"}, delimiter = '=')
     public void count(int price, int expected) {
-        List<Lotto> lottos = generator.generate(price);
+        Lottos lottos = generator.generate(price);
         assertThat(lottos).hasSize(expected);
     }
 

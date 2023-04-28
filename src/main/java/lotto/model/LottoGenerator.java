@@ -18,15 +18,17 @@ public class LottoGenerator {
         this.random = random;
     }
 
-    public List<Lotto> generate(int price) {
+    public Lottos generate(int price) {
         int count = price / Lotto.PRICE;
         if (count <= 0) {
             throw new IllegalArgumentException("cannot buy any lotto. required >= " + Lotto.PRICE);
         }
 
-        return Stream.generate(this::generate)
+        List<Lotto> lottos = Stream.generate(this::generate)
                 .limit(count)
                 .collect(toList());
+
+        return Lottos.of(lottos);
     }
 
     private Lotto generate() {
