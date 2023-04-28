@@ -1,8 +1,8 @@
-package stringcalculator.factory;
+package study.stringcalculator.factory;
 
 import java.util.HashMap;
 import java.util.Map;
-import stringcalculator.domain.Operator;
+import study.stringcalculator.domain.Operator;
 
 public class OperatorFactory {
 

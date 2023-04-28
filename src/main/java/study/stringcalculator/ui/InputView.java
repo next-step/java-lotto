@@ -1,7 +1,7 @@
-package stringcalculator.ui;
+package study.stringcalculator.ui;
 
 import java.util.Scanner;
-import stringcalculator.domain.InputValue;
+import study.stringcalculator.domain.InputValue;
 
 public class InputView {
 

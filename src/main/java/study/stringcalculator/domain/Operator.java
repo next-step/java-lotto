@@ -1,4 +1,4 @@
-package stringcalculator.domain;
+package study.stringcalculator.domain;
 
 public enum Operator {
 

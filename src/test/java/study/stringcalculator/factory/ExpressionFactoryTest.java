@@ -1,11 +1,11 @@
-package stringcalculator.factory;
-
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+package study.stringcalculator.factory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringcalculator.domain.InputValue;
+import study.stringcalculator.domain.InputValue;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ExpressionFactoryTest {
 

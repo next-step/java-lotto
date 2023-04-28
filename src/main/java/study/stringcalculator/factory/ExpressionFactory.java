@@ -1,6 +1,6 @@
-package stringcalculator.factory;
+package study.stringcalculator.factory;
 
-import stringcalculator.domain.Expression;
+import study.stringcalculator.domain.Expression;
 
 public class ExpressionFactory {
 

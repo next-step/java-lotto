@@ -1,7 +1,7 @@
-package stringcalculator.service;
+package study.stringcalculator.service;
 
-import stringcalculator.domain.InputValue;
-import stringcalculator.factory.ExpressionFactory;
+import study.stringcalculator.domain.InputValue;
+import study.stringcalculator.factory.ExpressionFactory;
 
 public class CalculateService {
 
