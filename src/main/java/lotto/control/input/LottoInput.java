@@ -8,10 +8,13 @@ import java.util.List;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
-public class LottoAnswerInput extends InputControl<Lotto> {
+public class LottoInput extends InputControl<Lotto> {
     private static final String LOTTO_DELIMITER = ",";
 
-    public LottoAnswerInput(View view) {
+    public LottoInput() {
+    }
+
+    public LottoInput(View view) {
         super(view);
     }
 
