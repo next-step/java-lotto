@@ -21,7 +21,7 @@ public enum Operator {
     return Stream.of(values())
         .filter(op -> op.operator.equals(operator))
         .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("지원하지 않는 연산자입니다."));
+        .orElseThrow(() -> new IllegalArgumentException(String.format("지원하지 않는 연산자입니다. 입력받은 값 : %s", operator)));
   }
 
   public Number calculate(Number number1, Number number2) {

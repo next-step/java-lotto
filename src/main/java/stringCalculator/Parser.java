@@ -17,7 +17,7 @@ public class Parser {
     List<Number> numbers = new ArrayList<>();
 
     if (isEven(elements.size())) {
-      throw new IllegalArgumentException("연산자는 항상 피연산자 사이에 들어가야 합니다");
+      throw new IllegalArgumentException(String.format("연산자는 항상 피연산자 사이에 들어가야 합니다. 입력받은 값 : %s", input));
     }
 
     for (int i = 0; i < elements.size(); i++) {
