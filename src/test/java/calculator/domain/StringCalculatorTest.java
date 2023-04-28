@@ -1,5 +1,6 @@
-package calculator;
+package calculator.domain;
 
+import calculator.domain.StringCalculator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +33,26 @@ public class StringCalculatorTest {
             assertThatThrownBy(() -> {
                 new StringCalculator(input);
             }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력값이 빈칸입니다.");
+        }
+
+        @Test
+        @DisplayName("숫자가 없을 경우")
+        void checkNum() {
+            String input = "+ - *";
+
+            assertThatThrownBy(() -> {
+                new StringCalculator(input);
+            }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력 형식에 맞지 않습니다.");
+        }
+
+        @Test
+        @DisplayName("기호가 없을 경우")
+        void checkOperation() {
+            String input = "3 4 12";
+
+            assertThatThrownBy(() -> {
+                new StringCalculator(input);
+            }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력 형식에 맞지 않습니다.");
         }
     }
 }
