@@ -51,7 +51,7 @@ public class Lotto {
         return totalReward / (double) purchasePrice;
     }
 
-    public static LottoRewards matchCounts(Set<LottoNumbers> lottoNumbersSet, LottoNumbers winningLottoNumbers) {
+    public static LottoRewards reward(Set<LottoNumbers> lottoNumbersSet, LottoNumbers winningLottoNumbers) {
         LottoRewards lottoRewards = new LottoRewards();
 
         for (LottoNumbers lottoNumbers : lottoNumbersSet) {
