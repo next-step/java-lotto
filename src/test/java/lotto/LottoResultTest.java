@@ -26,8 +26,8 @@ public class LottoResultTest {
     @Test
     void rate() {
         LottoResult lottoResult = new LottoResult(List.of(3));
-        int purchaseAmount = 14000;
-        double rate = lottoResult.calculateRate(purchaseAmount);
+        int purchaseCount = 14;
+        double rate = lottoResult.calculateRate(purchaseCount);
 
         assertThat(rate).isEqualTo((double) 5000 / 14000);
     }

@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
+    private static final int LOTTO_PRICE = 1000;
+
     private final Map<LottoPrize, Integer> matchesResult = LottoPrize.makeLottoResult();
 
     public LottoResult(List<Integer> matchesCounts) {
@@ -20,14 +23,14 @@ public class LottoResult {
         }
     }
 
-    public double calculateRate(int purchaseAmount) {
+    public double calculateRate(int purchaseCount) {
         long totalPrize = matchesResult.entrySet()
                 .stream()
                 .filter(o -> o.getValue() > 0)
                 .mapToLong(o -> (long) o.getKey().money() * o.getValue())
                 .sum();
 
-        return  (double) totalPrize / purchaseAmount;
+        return  (double) totalPrize / (purchaseCount * LOTTO_PRICE);
     }
 
     public long calculateTotalPrize() {
@@ -39,6 +42,6 @@ public class LottoResult {
     }
 
     public Map<LottoPrize, Integer> getMatchesResult() {
-        return matchesResult;
+        return Collections.unmodifiableMap(matchesResult);
     }
 }

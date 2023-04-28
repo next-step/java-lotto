@@ -24,5 +24,6 @@ public class LottoApplication {
         LottoResult lottoResult = lottoGame.getLottoResult();
 
         ResultView.showLottoWinningResult(lottoResult);
+        ResultView.showLottoWinningRate(lottoResult, lottoCount);
     }
 }

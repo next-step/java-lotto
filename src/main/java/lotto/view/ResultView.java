@@ -1,15 +1,15 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String LOTTO_RANK_MESSAGE = "%d개 일치 (%d원) - %d개\n";
-    private static final String LOTTO_WINNING_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
+    private static final String LOTTO_WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
 
     public static void showLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets().forEach(ResultView::printLottoTicket);
@@ -24,8 +24,12 @@ public class ResultView {
         });
     }
 
-    public static void showLottoWinningRate(LottoResult lottoResult) {
-        //총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
+    public static void showLottoWinningRate(LottoResult lottoResult, int purchaseCount) {
+        double winningRate = lottoResult.calculateRate(purchaseCount);
+        System.out.printf(LOTTO_WINNING_RATE_MESSAGE, winningRate);
+        if(winningRate < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
     }
 
     private static void printLottoTicket(LottoTicket lottoTicket) {
