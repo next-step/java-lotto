@@ -2,6 +2,14 @@
 
 ---
 ## Step4 - 로또(수동)
+### Step4 1차 피드백 수정
+- [ ] wrapper 타입 대신 원시 타입으로 수정
+- [ ] isGreaterThanZero 생성자에서 검증
+- [ ] concat 대신 list의 addAll 메서드 사용
+- [ ] Output View에서 String.format을 활용
+- [ ] MoneyTest에서 ParameterizedTest 활용
+- [ ] 수동으로 구매한 로또 메서드는 도메인에서 계산하도록 수정
+
 ### Step3 2차 피드백 수정
 - [X] 정적 팩토리 메서드명 init으로 변경
 
