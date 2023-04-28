@@ -40,7 +40,6 @@ public class LottoTest {
 
     @Test
     void 로또_번호와_당첨_번호_일치_개수_계산() {
-        System.out.println("myLottoNumbers = " + myLottoNumbers);
         assertThat(Lotto.matchCount(myLottoNumbers, winningLottoNumbers))
                 .isEqualTo(3);
     }
@@ -73,7 +72,7 @@ public class LottoTest {
         lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
 
         //when
-        double totalProfit = Lotto.totalProfitRate2(lottoNumbersSet, winningLottoNumbers);
+        double totalProfit = Lotto.totalProfitRate(lottoNumbersSet, winningLottoNumbers);
 
         //then
         assertThat(totalProfit).isEqualTo(5);

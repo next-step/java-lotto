@@ -28,12 +28,12 @@ public class Lotto {
         return price / LOTTO_PRICE;
     }
 
-    public static List<LottoNumbers> generateAllLottoNumbers(long lottoCount) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+    public static Set<LottoNumbers> generateAllLottoNumbers(long lottoCount) {
+        Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
         for (int i = BEGIN_INDEX; i < lottoCount; i++) {
-            lottoNumbersList.add(new LottoNumbers());
+            lottoNumbersSet.add(new LottoNumbers());
         }
-        return lottoNumbersList;
+        return lottoNumbersSet;
     }
 
     public static LottoNumbers winningLottoNumbers(String input) {
@@ -46,21 +46,7 @@ public class Lotto {
         return new LottoNumbers(numbers);
     }
 
-    public static double totalProfitRate(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
-        long purchasePrice = lottoNumbersList.size() * LOTTO_PRICE;
-        long totalReward = 0l;
-
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            if (isNotMatchCount(winningLottoNumbers, lottoNumbers)) {
-                continue;
-            }
-
-            totalReward += MatchType.of(matchCount(lottoNumbers, winningLottoNumbers)).reward();
-        }
-        return totalReward / (double) purchasePrice;
-    }
-
-    public static double totalProfitRate2(Set<LottoNumbers> lottoNumbersSet, LottoNumbers winningLottoNumbers) {
+    public static double totalProfitRate(Set<LottoNumbers> lottoNumbersSet, LottoNumbers winningLottoNumbers) {
         long purchasePrice = lottoNumbersSet.size() * LOTTO_PRICE;
         long totalReward = 0l;
 
@@ -78,24 +64,6 @@ public class Lotto {
         return matchCount(lottoNumbers, winningLottoNumbers) < MATCH_COUNT_MIN || matchCount(lottoNumbers, winningLottoNumbers) > MATCH_COUNT_MAX;
     }
 
-    public static Map<Integer, Integer> matchCounts(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
-        Map<Integer, Integer> matchCounts = new HashMap<>();
-
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            if (isNotMatchCount(winningLottoNumbers, lottoNumbers)) {
-                continue;
-            }
-
-            if (!matchCounts.containsKey(matchCount(lottoNumbers, winningLottoNumbers))) {
-                matchCounts.put(matchCount(lottoNumbers, winningLottoNumbers), BEGIN_MATCH_COUNT);
-                continue;
-            }
-            int matchCount = matchCounts.get(matchCount(lottoNumbers, winningLottoNumbers));
-            matchCounts.put(matchCount(lottoNumbers, winningLottoNumbers), matchCount + 1);
-        }
-
-        return matchCounts;
-    }
 
     public static Map<Integer, Integer> matchCounts(Set<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
         Map<Integer, Integer> matchCounts = new HashMap<>();

@@ -3,8 +3,8 @@ package lotto.view;
 import lotto.domain.LottoNumbers;
 import lotto.domain.MatchType;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ResultView {
 
@@ -19,8 +19,8 @@ public class ResultView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void printAllLottoNumbers(List<LottoNumbers> lottoNumbersList) {
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+    public static void printAllLottoNumbers(Set<LottoNumbers> lottoNumbersSet) {
+        for (LottoNumbers lottoNumbers : lottoNumbersSet) {
             System.out.println(lottoNumbers);
         }
         printNewLine();
