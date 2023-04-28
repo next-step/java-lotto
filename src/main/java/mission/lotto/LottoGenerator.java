@@ -1,3 +1,5 @@
+package mission.lotto;
+
 import java.util.List;
 
 public interface LottoGenerator {

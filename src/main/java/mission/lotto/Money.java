@@ -1,3 +1,5 @@
+package mission.lotto;
+
 public class Money {
 
     private int money;

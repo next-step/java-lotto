@@ -1,3 +1,4 @@
+import mission.calculator.BasicOperator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-@DisplayName("Enum BasicOperator 테스트")
+@DisplayName("Enum calculator.BasicOperator 테스트")
 class BasicOperatorTest {
 
     @ParameterizedTest(name = "[{index}] 더하기 테스트 {0} + {1}")
@@ -30,7 +31,7 @@ class BasicOperatorTest {
     @ParameterizedTest(name = "[{index}] 곱하기 테스트 {0} * {1}")
     @CsvSource(value = {"5:2:10", "4:5:20"}, delimiter = ':')
     public void 곱하기_테스트(int x, int y, int result){
-        BasicOperator operation = BasicOperator.MUTIPLY;
+        BasicOperator operation = BasicOperator.MULTIPLY;
         assertThat(result).isEqualTo(operation.apply(x,y));
     }
 

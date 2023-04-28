@@ -1,12 +1,16 @@
-import java.util.ArrayList;
+package mission.lotto;
+
 import java.util.List;
+import java.util.Map;
 
 public class Customer {
     private Money money;
-    private List<Lotto> lottos = new ArrayList<>();
+    private Lottos lottos;
+    private RankLottos rankLottos;
 
     public Customer(int money){
         this.money = new Money(money);
+        this.lottos = new Lottos();
     }
 
     public int getMoney(){
@@ -14,7 +18,11 @@ public class Customer {
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return this.lottos.getLottos();
+    }
+
+    public Map<KLottoRank, Integer> getRankLottos(){
+        return this.rankLottos.getRank();
     }
 
     public void buyLotto(LottoGenerator lottoGenerator) {
@@ -22,4 +30,10 @@ public class Customer {
             lottos.add(new Lotto(lottoGenerator));
         }
     }
+
+    public void checkLottoWin(List<Integer> list) {
+        rankLottos = lottos.checkWin(list);
+    }
+
+
 }
