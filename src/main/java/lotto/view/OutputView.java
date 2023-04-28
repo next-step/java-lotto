@@ -15,8 +15,8 @@ public class OutputView {
 
     public static void printLottoQuantity(Amount manualAmount, Amount autoAmount) {
         System.out.println();
-        System.out.println("수동으로 " + manualAmount.getAmount() + "장, 자동으로 "
-                + autoAmount.getAmount() + "개를 구매했습니다.");
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                manualAmount.getAmount(), autoAmount.getAmount());
     }
 
     public static void printLottos(Lottos lottos) {
@@ -60,7 +60,7 @@ public class OutputView {
         DecimalFormat form = new DecimalFormat("#.##");
         form.setRoundingMode(RoundingMode.DOWN);
 
-        System.out.print("총 수익률은 " + form.format(profit) + "입니다.");
+        System.out.printf("총 수익률은 %s입니다.",  form.format(profit));
 
         printRealProfit(profit);
         printStandardProfit(profit);
