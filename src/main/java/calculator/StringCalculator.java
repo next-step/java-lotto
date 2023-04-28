@@ -20,9 +20,11 @@ public class StringCalculator {
         return Arrays.asList(input.split(SPLIT_REG_EXP));
     }
 
-    public boolean isOnlyNumAndOperator(String input) {
+    public void isOnlyNumAndOperator(String input) {
         Matcher matcher = NUMBER_CHECK_PATTERN.matcher(input);
-        return !matcher.find();
+        if(matcher.find()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public int calculate(String input) {

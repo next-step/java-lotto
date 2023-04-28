@@ -29,8 +29,7 @@ public class StringCalculatorTest {
 
     @Test
     public void isOnlyNumAndOperator() {
-        assertThat(stringCalculator.isOnlyNumAndOperator("1 + 2 / 3")).isTrue();
-        assertThat(stringCalculator.isOnlyNumAndOperator("1 + 2 ) 3")).isFalse();
+        assertThatIllegalArgumentException().isThrownBy(() -> stringCalculator.isOnlyNumAndOperator("1 + 2 ) 3"));
     }
 
     @Test
