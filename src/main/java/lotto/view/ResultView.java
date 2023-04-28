@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.MatchType;
+import lotto.domain.RankType;
 
 import java.util.Map;
 import java.util.Set;
@@ -35,7 +35,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (MatchType mc : MatchType.values()) {
+        for (RankType mc : RankType.values()) {
             String phrase = mc.phrase();
             Integer matchCount = matchCounts.get(mc.matchCount());
 

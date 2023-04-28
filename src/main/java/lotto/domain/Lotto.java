@@ -13,7 +13,7 @@ public class Lotto {
     private static final int BEGIN_MATCH_COUNT = 1;
 
     public static long reward(int matchCount) {
-        return MatchType.of(matchCount).reward();
+        return RankType.of(matchCount).reward();
     }
 
     public static long lottoCount(long price) {
@@ -47,7 +47,7 @@ public class Lotto {
                 continue;
             }
 
-            totalReward += MatchType.of(lottoNumbers.matchCount(winningLottoNumbers)).reward();
+            totalReward += RankType.of(lottoNumbers.matchCount(winningLottoNumbers)).reward();
         }
         return totalReward / (double) purchasePrice;
     }
