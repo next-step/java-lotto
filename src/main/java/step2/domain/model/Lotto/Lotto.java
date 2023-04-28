@@ -27,7 +27,7 @@ public class Lotto {
         return numbers.getLottoNumbers();
     }
 
-    public void calculatorLottoWinningCount(Lotto winningLotto) {
+    public void calculatorLottoWinning(Lotto winningLotto) {
         Map<Integer, Integer> lottoWinningNumbers = convertLottoNumbersToMap(winningLotto);
 
         for (LottoNumber lottoNumber : numbers.getLottoNumbers()) {

@@ -34,7 +34,7 @@ class LottoTest {
         lottoNumbers2.add(new LottoNumber(7));
         this.randomLotto = new Lotto(new LottoNumbers(lottoNumbers2));
 
-        randomLotto.calculatorLottoWinningCount(winningLotto);
+        randomLotto.calculatorLottoWinning(winningLotto);
 
         assertThat(randomLotto.getWinningCount()).isEqualTo(5);
     }

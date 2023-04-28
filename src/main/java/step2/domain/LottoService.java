@@ -19,9 +19,9 @@ public class LottoService {
         return Lotto.fromWinningLotto(new LottoPolicyStrategy(), lastWinningNumbers);
     }
 
-    public void calculatorLottoWinningCount(Lotto winningLotto) {
+    public void calculatorLottoWinning(Lotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
-            lotto.calculatorLottoWinningCount(winningLotto);
+            lotto.calculatorLottoWinning(winningLotto);
         }
     }
 

@@ -20,7 +20,7 @@ public class LottoController {
         InputView.newLineRemove();
 
         Lotto winningLotto = LottoService.createWinningLotto(InputView.askLastWeekWinningNumbers());
-        lottoService.calculatorLottoWinningCount(winningLotto);
+        lottoService.calculatorLottoWinning(winningLotto);
 
         ProfitCalculatorService from = ProfitCalculatorService.of(lottoService.getLottos(), purchaseAmount);
         OutputView.outPutProfit(from.getProfit(), from.getWinningResult());
