@@ -36,6 +36,6 @@ public class WinnerTicket {
     }
 
     private boolean matchCount(Ticket ticket) {
-        return Prize.THIRD.isMatch(ticket.overlapNumberCount(this.ticketOnly()));
+        return Prize.THIRD.isMatch(ticket.countMatchNumbers(this.ticketOnly()));
     }
 }

@@ -36,9 +36,13 @@ public class Ticket {
         }
     }
 
-    public int overlapNumberCount(Ticket otherTicket) {
+    public int countMatchNumbers(Ticket otherTicket) {
         Set<Integer> copyThisNumbers = new HashSet<>(this.numbers);
         copyThisNumbers.addAll(otherTicket.numbers);
+        return overlapCount(copyThisNumbers);
+    }
+
+    private static int overlapCount(Set<Integer> copyThisNumbers) {
         return 12 - copyThisNumbers.size();
     }
 
