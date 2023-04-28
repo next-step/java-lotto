@@ -3,36 +3,46 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
 
+    LottoNumbers myLottoNumbers, winningLottoNumbers;
+
+    @BeforeEach
+    void setUp() {
+        myLottoNumbers = new LottoNumbers(
+                Stream.of(
+                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                ).collect(Collectors.toSet()));
+
+        winningLottoNumbers = new LottoNumbers(
+                Stream.of(
+                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)
+                ).collect(Collectors.toSet()));
+    }
+
     @Test
     void 로또_번호와_당첨_번호_일치_개수_계산() {
-        //given
-        List<LottoNumber> myLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        LottoNumbers myLottoNumbers = new LottoNumbers(myLottoNumberList);
-
-        List<LottoNumber> winningLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        LottoNumbers winningLottoNumbers = new LottoNumbers(winningLottoNumberList);
-
-        //when
-        int result = Lotto.matchCount(myLottoNumbers, winningLottoNumbers);
-
-        //then
-        assertThat(result).isEqualTo(6);
+        System.out.println("myLottoNumbers = " + myLottoNumbers);
+        assertThat(Lotto.matchCount(myLottoNumbers, winningLottoNumbers))
+                .isEqualTo(3);
     }
 
     @ParameterizedTest
@@ -58,18 +68,12 @@ public class LottoTest {
     @Test
     void 총_수익률_계산() {
         //given
-        List<LottoNumber> myLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        LottoNumbers myLottoNumbers1 = new LottoNumbers(myLottoNumberList);
-        LottoNumbers myLottoNumbers2 = new LottoNumbers(myLottoNumberList);
-        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers1, myLottoNumbers2);
-
-        List<LottoNumber> winningLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(43), new LottoNumber(44), new LottoNumber(45));
-        LottoNumbers winningLottoNumbers = new LottoNumbers(winningLottoNumberList);
+        Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
+        lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
+        lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
 
         //when
-        double totalProfit = Lotto.totalProfitRate(lottoNumbersList, winningLottoNumbers);
+        double totalProfit = Lotto.totalProfitRate2(lottoNumbersSet, winningLottoNumbers);
 
         //then
         assertThat(totalProfit).isEqualTo(5);
@@ -78,20 +82,15 @@ public class LottoTest {
     @Test
     void 일치_수별_횟수_세기() {
         //given
-        List<LottoNumber> myLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        LottoNumbers myLottoNumbers1 = new LottoNumbers(myLottoNumberList);
-        LottoNumbers myLottoNumbers2 = new LottoNumbers(myLottoNumberList);
-        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers1, myLottoNumbers2);
-
-        List<LottoNumber> winningLottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(43), new LottoNumber(44), new LottoNumber(45));
-        LottoNumbers winningLottoNumbers = new LottoNumbers(winningLottoNumberList);
+        Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
+        lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
+        lottoNumbersSet.addAll(Collections.singleton(winningLottoNumbers));
 
         //when
-        Map<Integer, Integer> map = Lotto.matchCounts(lottoNumbersList, winningLottoNumbers);
+        Map<Integer, Integer> map = Lotto.matchCounts(lottoNumbersSet, winningLottoNumbers);
 
         //then
-        assertThat(map.get(3)).isEqualTo(2);
+        assertThat(map.get(3)).isEqualTo(1);
+        assertThat(map.get(6)).isEqualTo(1);
     }
 }
