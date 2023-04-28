@@ -42,11 +42,11 @@ public enum Operator {
     }
 
     private static void validateDivision(int num1, int num2) {
-        if(num2 == 0) {
+        if (num2 == 0) {
             throw new IllegalArgumentException("The divisor cannot be zero");
         }
 
-        if(num1 % num2 != 0) {
+        if (num1 % num2 != 0) {
             throw new IllegalArgumentException("The first number must be divisible by the second number");
         }
     }
