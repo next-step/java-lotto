@@ -8,7 +8,7 @@ public class OperationStrategyAdd implements OperationStrategy {
 
     @Override
     public String toString() {
-        return "+";
+        return Operation.ADD;
     }
 
     @Override

@@ -8,7 +8,7 @@ public class OperationStrategySubtract implements OperationStrategy {
 
     @Override
     public String toString() {
-        return "-";
+        return Operation.SUBTRACT;
     }
 
     @Override

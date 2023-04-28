@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
-
     @Test
     @DisplayName("계산")
     void calculate() {

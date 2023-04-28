@@ -1,10 +1,10 @@
 package calculator.domain;
 
 public class Operation {
-    private static final String ADD = "+";
-    private static final String SUBTRACT = "-";
-    private static final String MULTIPLY = "*";
-    private static final String DIVIDE = "/";
+    public static final String ADD = "+";
+    public static final String SUBTRACT = "-";
+    public static final String MULTIPLY = "*";
+    public static final String DIVIDE = "/";
 
     public static OperationStrategy getOperationStrategy(String operation) {
         if (operation.equals(ADD)) {

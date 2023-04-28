@@ -8,7 +8,7 @@ public class OperationStrategyMultiply implements OperationStrategy {
 
     @Override
     public String toString() {
-        return "*";
+        return Operation.MULTIPLY;
     }
 
     @Override

@@ -8,7 +8,7 @@ public class OperationStrategyDivide implements OperationStrategy {
 
     @Override
     public String toString() {
-        return "/";
+        return Operation.DIVIDE;
     }
 
     @Override

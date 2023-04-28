@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class StringCalculator {
@@ -29,6 +28,4 @@ public class StringCalculator {
 
         return sum;
     }
-
-
 }
