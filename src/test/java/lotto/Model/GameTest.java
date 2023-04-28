@@ -24,7 +24,8 @@ class GameTest {
     @DisplayName("addTicket 정상 확인")
     public void addTicket_count() {
         List<Integer> inputNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket inputTicket = new Ticket(inputNumber);
+        TicketNumber inputTicketNumber = new TicketNumber(inputNumber);
+        Ticket inputTicket = new Ticket(inputTicketNumber);
 
         List<Ticket> expected = List.of(inputTicket);
 

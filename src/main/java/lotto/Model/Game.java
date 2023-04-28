@@ -19,13 +19,7 @@ public class Game {
     }
 
     private Ticket randomTicket() {
-        List<Integer> numList = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) numList.add(i);
-        Collections.shuffle(numList);
-
-        List<Integer> ticketNumber = numList.subList(0, 6);
-        Collections.sort(ticketNumber);
-
+        TicketNumber ticketNumber = new TicketNumber();
         return new Ticket(ticketNumber);
     }
 
@@ -49,7 +43,8 @@ public class Game {
 
     private int countMatches(Ticket ticket, List<Integer> winnerNumber) {
         int count = 0;
-        for (Integer number : ticket.numbers()) {
+        TicketNumber ticketNumber = ticket.numbers();
+        for (Integer number : ticketNumber.numbers()) {
             if (winnerNumber.contains(number)) {
                 count++;
             }

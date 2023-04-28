@@ -1,5 +1,7 @@
 package lotto.Model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TicketNumber {
@@ -8,6 +10,10 @@ public class TicketNumber {
     private static final int MAX_NUMBER = 45;
 
     private final List<Integer> numbers;
+
+    public TicketNumber() {
+        numbers = randomTicketNumber();
+    }
 
     public TicketNumber(List<Integer> numbers) {
         if (numbers.size() != TICKET_SIZE) {
@@ -33,5 +39,17 @@ public class TicketNumber {
 
     public List<Integer> numbers() {
         return numbers;
+    }
+
+    private List<Integer> randomTicketNumber() {
+        List<Integer> numList = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            numList.add(i);
+        }
+        Collections.shuffle(numList);
+
+        List<Integer> ticketNumber = numList.subList(0, 6);
+        Collections.sort(ticketNumber);
+        return ticketNumber;
     }
 }
