@@ -39,9 +39,7 @@ public class LottoMachine {
 	}
 
 	public void calculateScore(List<Integer> winNumbers) {
-		for (Lotto lotto : this.purchasedLottos.getLottos()) {
-			lotto.calculateScore(winNumbers);
-		}
+		this.purchasedLottos.calculateScore(winNumbers);
 	}
 
 	public List<PrizeSituation> makePrizeSituations() {

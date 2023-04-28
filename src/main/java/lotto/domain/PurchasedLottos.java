@@ -19,11 +19,17 @@ public class PurchasedLottos {
 		this.purchasedLottos.add(lotto);
 	}
 
+	public void calculateScore(List<Integer> winNumbers) {
+		for (Lotto lotto : this.purchasedLottos) {
+			lotto.calculateScore(winNumbers);
+		}
+	}
+
 	public int size() {
 		return this.purchasedLottos.size();
 	}
 
 	public List<Lotto> getLottos() {
-		return purchasedLottos;
+		return this.purchasedLottos;
 	}
 }
