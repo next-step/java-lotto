@@ -2,10 +2,13 @@ package calculator.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Expression {
     private static final String INPUT_FORMAT = "^[0-9]+([-|+|*|/]{1}[0-9]*)+[0-9]+$";
-    public static final String SPACE = " ";
+    private static final String NUMBERS_REGEX = "[0-9]+";
+    private static final String OPERATIONS_REGEX = "[-|+|*|/]{1}";
+    private static final String SPACE = " ";
     private static final String BLANK = "";
 
     private final String expression;
@@ -27,8 +30,30 @@ public class Expression {
         return input;
     }
 
-    public List<String> getElements() {
-        return split();
+    public List<Integer> getNumbers() {
+        List<String> elements = split();
+
+        return elements.stream()
+                .filter(element -> isNumber(element))
+                .mapToInt(element -> Integer.parseInt(element))
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    private boolean isNumber(String element) {
+        return element.matches(NUMBERS_REGEX);
+    }
+
+    public List<String> getOperations() {
+        List<String> elements = split();
+
+        return elements.stream()
+                .filter(element -> isOperation(element))
+                .collect(Collectors.toList());
+    }
+
+    private boolean isOperation(String element) {
+        return element.matches(OPERATIONS_REGEX);
     }
 
     private List<String> split() {
