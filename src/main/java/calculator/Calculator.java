@@ -23,24 +23,21 @@ public class Calculator {
     String[] inputArray = input.split(" ");
 
     for (int i = 1; i < inputArray.length - 1; i += 2) {
-      String number = inputArray[i - 1];
-      String arithmeticMark = inputArray[i];
-      String nextNumber = inputArray[i + 1];
-
-      validNumber(number);
-      validArithmeticMark(arithmeticMark);
-      validNumber(nextNumber);
+      int number = validNumber(inputArray[i - 1]);
+      String arithmeticMark = validArithmeticMark(inputArray[i]);
+      int nextNumber = validNumber(inputArray[i + 1]);
     }
 
   }
 
-  private void validNumber(String number) {
-    Integer.parseInt(number);
+  private int validNumber(String number) {
+    return Integer.parseInt(number);
   }
 
-  private void validArithmeticMark(String arithmeticMark) {
+  private String validArithmeticMark(String arithmeticMark) {
     if (!fourArithmetic.contains(arithmeticMark)) {
       throw new IllegalArgumentException();
     }
+    return arithmeticMark;
   }
 }
