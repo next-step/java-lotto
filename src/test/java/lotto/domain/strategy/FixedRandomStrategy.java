@@ -1,11 +1,10 @@
 package lotto.domain.strategy;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class TestRandomStrategy implements RandomStrategy {
+public class FixedRandomStrategy implements RandomStrategy {
 
   private int count = 1;
 

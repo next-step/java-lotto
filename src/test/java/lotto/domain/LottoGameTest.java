@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.strategy.TestRandomStrategy;
+import lotto.domain.strategy.FixedRandomStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class LottoGameTest {
 
   @BeforeEach
   void setUp() {
-    lottoGame = new LottoGame(new Money(14000), new TestRandomStrategy());
+    lottoGame = new LottoGame(new Money(14000), new FixedRandomStrategy());
     winningNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
                                             .map(LottoNumber::new)
                                             .collect(Collectors.toList()));
