@@ -26,4 +26,10 @@ public class StringCalculatorTest {
         assertThat(stringCalculator.split("1 + 2 / 3").size()).isEqualTo(5);
         assertThat(stringCalculator.split("1 + 2").size()).isEqualTo(3);
     }
+
+    @Test
+    public void isOnlyNumAndOperator() {
+        assertThat(stringCalculator.isOnlyNumAndOperator("1 + 2 / 3")).isTrue();
+        assertThat(stringCalculator.isOnlyNumAndOperator("1 + 2 ) 3")).isFalse();
+    }
 }
