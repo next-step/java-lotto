@@ -22,9 +22,25 @@ public class Calculator {
 
     String[] inputArray = input.split(" ");
 
-    if (fourArithmetic.contains(inputArray[0]) || fourArithmetic.contains(inputArray[inputArray.length - 1])) {
-      throw new IllegalArgumentException();
+    for (int i = 1; i < inputArray.length - 1; i += 2) {
+      String number = inputArray[i - 1];
+      String arithmeticMark = inputArray[i];
+      String nextNumber = inputArray[i + 1];
+
+      validNumber(number);
+      validArithmeticMark(arithmeticMark);
+      validNumber(nextNumber);
     }
 
+  }
+
+  private void validNumber(String number) {
+    Integer.parseInt(number);
+  }
+
+  private void validArithmeticMark(String arithmeticMark) {
+    if (!fourArithmetic.contains(arithmeticMark)) {
+      throw new IllegalArgumentException();
+    }
   }
 }

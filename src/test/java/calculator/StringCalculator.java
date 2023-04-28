@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import calculator.Calculator;
@@ -10,10 +11,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringCalculator {
 
+  @Test
+  void 숫자와사칙연산사이에는반드시빈공백문자열이있어야한다() {
+    String input = "1 + 2 * 3- 1";
+    assertThatExceptionOfType(NumberFormatException.class).isThrownBy(() -> {
+      new Calculator().validInput(input);
+    });
+  }
+
   @ParameterizedTest
-  @ValueSource(strings = {"+ 1", "1 +"})
+  @ValueSource(strings = {"+ 1 +", "1 + +"})
   void 첫문자와끝문자는숫자여야한다_사칙연산이아니어야한다(String input) {
-    assertThatIllegalArgumentException().isThrownBy(() -> {
+    assertThatExceptionOfType(NumberFormatException.class).isThrownBy(() -> {
       new Calculator().validInput(input);
     });
   }
