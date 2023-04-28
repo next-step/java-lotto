@@ -30,7 +30,7 @@ public enum LottoPrize {
     }
 
     public static LottoPrize getWinningPrize(int matchCount) {
-        if(!BY_LOTTO_PRIZE.containsKey(matchCount)) {
+        if (!BY_LOTTO_PRIZE.containsKey(matchCount)) {
             return LottoPrize.LOST;
         }
         return BY_LOTTO_PRIZE.get(matchCount);

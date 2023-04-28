@@ -1,7 +1,7 @@
 package lotto.domain;
 
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_NUMBER_MINIMUM = 1;
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
 
@@ -17,7 +17,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     private void validateLottoNumber(int lottoNumber) {
-        if(lottoNumber < LOTTO_NUMBER_MINIMUM || lottoNumber > LOTTO_NUMBER_MAXIMUM) {
+        if (lottoNumber < LOTTO_NUMBER_MINIMUM || lottoNumber > LOTTO_NUMBER_MAXIMUM) {
             throw new IllegalArgumentException("로또 번호는 1-45 사이의 숫자만 허용됩니다.");
         }
     }

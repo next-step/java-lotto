@@ -30,7 +30,7 @@ public class LottoResult {
                 .mapToLong(o -> (long) o.getKey().money() * o.getValue())
                 .sum();
 
-        return  (double) totalPrize / (purchaseCount * LOTTO_PRICE);
+        return (double) totalPrize / (purchaseCount * LOTTO_PRICE);
     }
 
     public long calculateTotalPrize() {

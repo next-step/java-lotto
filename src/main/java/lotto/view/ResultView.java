@@ -27,7 +27,7 @@ public class ResultView {
     public static void showLottoWinningRate(LottoResult lottoResult, int purchaseCount) {
         double winningRate = lottoResult.calculateRate(purchaseCount);
         System.out.printf(LOTTO_WINNING_RATE_MESSAGE, winningRate);
-        if(winningRate < 1) {
+        if (winningRate < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
