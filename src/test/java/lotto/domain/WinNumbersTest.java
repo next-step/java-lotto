@@ -22,7 +22,7 @@ class WinNumbersTest {
     void test02() {
         WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45));
 
-        WinType wintype = winNumbers.confirmWin(new Lotto(1, 2, 3, 40, 41, 42));
+        WinType wintype = winNumbers.confirmWin(getLotto(LottoType.AUTO, 1, 2, 3, 40, 41, 42));
 
         assertThat(wintype).isEqualTo(WinType.FIFTH);
     }
@@ -32,7 +32,7 @@ class WinNumbersTest {
     void test03() {
         WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45));
 
-        WinType wintype = winNumbers.confirmWin(new Lotto(1, 2, 3, 4, 41, 42));
+        WinType wintype = winNumbers.confirmWin(getLotto(LottoType.AUTO, 1, 2, 3, 4, 41, 42));
 
         assertThat(wintype).isEqualTo(WinType.FOURTH);
     }
@@ -42,7 +42,7 @@ class WinNumbersTest {
     void test04() {
         WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45));
 
-        WinType wintype = winNumbers.confirmWin(new Lotto(1, 2, 3, 4, 5, 42));
+        WinType wintype = winNumbers.confirmWin(getLotto(LottoType.AUTO, 1, 2, 3, 4, 5, 42));
 
         assertThat(wintype).isEqualTo(WinType.THIRD);
     }
@@ -52,7 +52,7 @@ class WinNumbersTest {
     void test05() {
         WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45));
 
-        WinType wintype = winNumbers.confirmWin(new Lotto(1, 2, 3, 4, 5, 45));
+        WinType wintype = winNumbers.confirmWin(getLotto(LottoType.AUTO, 1, 2, 3, 4, 5, 45));
 
         assertThat(wintype).isEqualTo(WinType.SECOND);
     }
@@ -62,8 +62,12 @@ class WinNumbersTest {
     void test06() {
         WinNumbers winNumbers = new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45));
 
-        WinType wintype = winNumbers.confirmWin(new Lotto(1, 2, 3, 4, 5, 6));
+        WinType wintype = winNumbers.confirmWin(getLotto(LottoType.AUTO, 1, 2, 3, 4, 5, 6));
 
         assertThat(wintype).isEqualTo(WinType.FIRST);
+    }
+
+    private Lotto getLotto(LottoType lottoType, int num1, int num2, int num3, int num4, int num5, int num6) {
+        return new Lotto(lottoType, num1, num2, num3, num4, num5, num6);
     }
 }

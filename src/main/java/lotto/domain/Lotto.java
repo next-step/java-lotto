@@ -8,6 +8,7 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
+    private LottoType lottoType;
 
     public Lotto() {
         this.lottoNumbers = this.getNumbers();
@@ -20,12 +21,17 @@ public class Lotto {
         return lottoNumbers.subList(0, LOTTO_SIZE).stream().map(LottoNumber::new).sorted().collect(Collectors.toList());
     }
 
-    public Lotto(int... numbers) {
-        this(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
+    public Lotto(LottoType lottoType, int... numbers) {
+        this(lottoType, Arrays.stream(numbers).boxed().collect(Collectors.toList()));
     }
 
-    public Lotto(List<Integer> numbers) {
+    public boolean isManuallyPurchasedLotto() {
+        return this.lottoType.isManuallyPurchasedLotto();
+    }
+
+    public Lotto(LottoType lottoType, List<Integer> numbers) {
         validate(numbers);
+        this.lottoType = lottoType;
         this.lottoNumbers = numbers.stream().map(LottoNumber::new).sorted().collect(Collectors.toList());
     }
 

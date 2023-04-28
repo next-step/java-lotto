@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoType;
 import lotto.domain.Lottos;
 import lotto.domain.LottoNumber;
 
@@ -46,7 +47,7 @@ public class DefaultInputView implements InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < manualQuantity; i++) {
             String strNumbers = scanner.nextLine();
-            lottos.add(new Lotto(convertNumbers(strNumbers)));
+            lottos.add(new Lotto(LottoType.AUTO, convertNumbers(strNumbers)));
         }
 
         return lottos;

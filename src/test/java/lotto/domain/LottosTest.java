@@ -35,7 +35,8 @@ class LottosTest {
     @Test
     @DisplayName("당첨 번호 확인을 한다.")
     void test04() {
-        Lottos lottos = new Lottos(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 4, 5, 11));
+        Lottos lottos = new Lottos(new Lotto(LottoType.AUTO, 1, 2, 3, 4, 5, 6),
+                                   new Lotto(LottoType.AUTO, 1, 2, 3, 4, 5, 11));
 
         List<WinType> winTypes = lottos.confirmWins(new WinNumbers(List.of(1, 2, 3, 4, 5, 6), new LottoNumber(45)));
 
@@ -45,10 +46,10 @@ class LottosTest {
     @Test
     @DisplayName("수동 번호로 로또를 생성한다.")
     void test05() {
-        List<Lotto> numbers = List.of(new Lotto(1, 2, 3, 4, 5, 6));
+        List<Lotto> numbers = List.of(new Lotto(LottoType.AUTO, 1, 2, 3, 4, 5, 6));
         Lottos lottos = new Lottos(2000, numbers);
 
         assertThat(lottos.lottos()).hasSize(2);
-        assertThat(lottos.lottos()).contains(new Lotto(1, 2, 3, 4, 5, 6));
+        assertThat(lottos.lottos()).contains(new Lotto(LottoType.AUTO, 1, 2, 3, 4, 5, 6));
     }
 }
