@@ -10,11 +10,11 @@ public class Game {
 
     public Game(int countOfTicket) {
         for (int i = 0; i < countOfTicket; i++) {
-            add(randomTicket());
+            addTicket(randomTicket());
         }
     }
 
-    private void add(Ticket ticket) {
+    public void addTicket(Ticket ticket) {
         tickets.add(ticket);
     }
 
