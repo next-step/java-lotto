@@ -5,29 +5,59 @@ import java.util.List;
 
 public class Calculator {
 
+  private static final String ADDITION = "+";
+  private static final String SUBTRACTION = "-";
+  private static final String MULTIPLICATION = "*";
+  private static final String DIVISION = "/";
+
   List<String> fourArithmetic;
 
   public Calculator() {
     fourArithmetic = new LinkedList<>();
-    fourArithmetic.add("+");
-    fourArithmetic.add("-");
-    fourArithmetic.add("*");
-    fourArithmetic.add("/");
+    fourArithmetic.add(ADDITION);
+    fourArithmetic.add(SUBTRACTION);
+    fourArithmetic.add(MULTIPLICATION);
+    fourArithmetic.add(DIVISION);
   }
 
-  public void validInput(String input) {
+  public String validInput(String input) {
     if (input == null || input.isBlank()) {
       throw new IllegalArgumentException();
     }
+    return input;
+  }
 
-    String[] inputArray = input.split(" ");
+  public int calculation(String input) {
+    String[] inputArray = split(validInput(input));
 
+    int number = validNumber(inputArray[0]);
     for (int i = 1; i < inputArray.length - 1; i += 2) {
-      int number = validNumber(inputArray[i - 1]);
       String arithmeticMark = validArithmeticMark(inputArray[i]);
       int nextNumber = validNumber(inputArray[i + 1]);
+      number = calculation(number, arithmeticMark, nextNumber);
     }
 
+    return number;
+  }
+
+  private int calculation(int number, String arithmeticMark, int nextNumber) {
+    if (arithmeticMark.equals(ADDITION)) {
+      return number + nextNumber;
+    }
+
+    if (arithmeticMark.equals(SUBTRACTION)) {
+      return number - nextNumber;
+    }
+
+    if (arithmeticMark.equals(MULTIPLICATION)) {
+      return number * nextNumber;
+    }
+
+    if (arithmeticMark.equals(DIVISION)) {
+      return number / nextNumber;
+    }
+
+    throw new IllegalArgumentException();
   }
 
   private int validNumber(String number) {
@@ -39,5 +69,9 @@ public class Calculator {
       throw new IllegalArgumentException();
     }
     return arithmeticMark;
+  }
+
+  private String[] split(String input) {
+    return input.split(" ");
   }
 }
