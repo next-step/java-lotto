@@ -1,31 +1,26 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.function.BiFunction;
+
 public enum Operation {
-    ADDITION,
-    SUBTRACTION,
-    MULTIPLICATION,
-    DIVISION;
+    ADDITION("+", Integer::sum),
+    SUBTRACTION("-", (a, b) -> a - b),
+    MULTIPLICATION("*", (a, b) -> a * b),
+    DIVISION("/", (a, b) -> a / b);
 
-    public static Operation fromString(String input) {
-        verifyNotEmpty(input);
+    private final String symbol;
+    private final BiFunction<Integer, Integer, Integer> operation;
 
-        switch (input) {
-            case "+":
-                return ADDITION;
-            case "-":
-                return SUBTRACTION;
-            case "*":
-                return MULTIPLICATION;
-            case "/":
-                return DIVISION;
-            default:
-                throw new IllegalArgumentException("Invalid operator: " + input);
-        }
+    Operation(final String symbol, final BiFunction<Integer, Integer, Integer> operation) {
+        this.symbol = symbol;
+        this.operation = operation;
     }
 
-    private static void verifyNotEmpty(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("Invalid operator: " + input);
-        }
+    public static Operation fromString(String input) {
+        return Arrays.stream(Operation.values())
+                .filter(operation -> operation.symbol.equals(input))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid operator: " + input));
     }
 }

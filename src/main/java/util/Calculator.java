@@ -25,7 +25,7 @@ public class Calculator {
         List<Number> numbers = findNumbers(expressions);
         List<Operation> operations = findOperations(expressions);
 
-        int result = numbers.get(0).copyValue();
+        int result = numbers.get(0).value();
         for (int i = 0; i < operations.size(); i++) {
             result = operate(new CalculateRequest(new Number(result), numbers.get(i + 1), operations.get(i)));
         }
@@ -34,8 +34,8 @@ public class Calculator {
     }
 
     private static int operate(CalculateRequest request) {
-        final int a = request.getNumber1().copyValue();
-        final int b = request.getNumber2().copyValue();
+        final int a = request.getNumber1().value();
+        final int b = request.getNumber2().value();
         final Operation operation = request.getOperation();
 
         switch (operation) {

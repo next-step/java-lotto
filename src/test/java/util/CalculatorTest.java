@@ -2,76 +2,63 @@ package util;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class CalculatorTest {
 
-    @Test
-    @DisplayName("1 + 2 = 3")
-    void addTest() {
-        int result = Calculator.calculate("1 + 2");
-        assertThat(result).isEqualTo(3);
-    }
-
-    @Test
-    @DisplayName("1 - 2 = -1")
-    void subtractTest() {
-        int result = Calculator.calculate("1 - 2");
-        assertThat(result).isEqualTo(-1);
-    }
-
-    @Test
-    @DisplayName("1 * 2 = 2")
-    void multiplyTest() {
-        int result = Calculator.calculate("1 * 2");
-        assertThat(result).isEqualTo(2);
-    }
-
-    @Test
-    @DisplayName("3 / 2 = 1")
-    void divideTest() {
-        int result = Calculator.calculate("3 / 2");
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("2 + 3 * 4 / 2 = 10")
-    void complexTest() {
-        int result = Calculator.calculate("2 + 3 * 4 / 2");
-        assertThat(result).isEqualTo(10);
-    }
-
-    @Test
-    @DisplayName("parse error: 1 + 2 +")
-    void parseErrorTest() {
+    @ParameterizedTest
+    @DisplayName("parse error: null, empty")
+    @MethodSource("nullEmptyParams")
+    void parseErrorTest(final String input) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> Calculator.calculate("1 + 2 +"))
-            .withMessage("Invalid expression: 1 + 2 +");
+            .isThrownBy(() -> Calculator.calculate(input));
     }
 
-    @Test
-    @DisplayName("parse error: empty input")
-    void emptyInputTest() {
+    @ParameterizedTest
+    @DisplayName("parse error: invalid input")
+    @MethodSource("invalidInputParams")
+    void parseErrorTest2(final String input) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> Calculator.calculate(""))
-            .withMessage("Input cannot be empty");
-    }
-    @Test
-    @DisplayName("parse error: null input")
-    void nullInputTest() {
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> Calculator.calculate(null))
-            .withMessage("Input cannot be empty");
+            .isThrownBy(() -> Calculator.calculate(input))
+            .withMessage("Invalid expression: " + input);
     }
 
-    @Test
-    @DisplayName("parse error: 1 + 2 +3")
-    void parseErrorTest2() {
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> Calculator.calculate("1 + 2 +3"))
-            .withMessage("Invalid expression: 1 + 2 +3");
+    @ParameterizedTest
+    @DisplayName("add, subtract, multiply, divide")
+    @MethodSource("operationParams")
+    void parseSuccessTest(final String input, final int expected) {
+        Assertions.assertThat(Calculator.calculate(input))
+            .isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> nullEmptyParams() {
+        return Stream.of(
+                Arguments.of((Object) null),
+                Arguments.of("")
+        );
+    }
+
+    private static Stream<Arguments> invalidInputParams() {
+        return Stream.of(
+                Arguments.of("1 +"),
+                Arguments.of("1 + 2 +"),
+                Arguments.of("1 + 2 + 3 -")
+        );
+    }
+
+    private static Stream<Arguments> operationParams() {
+        return Stream.of(
+                Arguments.of("1 + 2", 3),
+                Arguments.of("1 - 2", -1),
+                Arguments.of("1 * 2", 2),
+                Arguments.of("3 / 2", 1),
+                Arguments.of("2 + 3 * 4 / 2", 10)
+        );
     }
 }

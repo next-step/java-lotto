@@ -1,7 +1,7 @@
 package domain;
 
 public class Number {
-    private int value;
+    private final int value;
 
     public Number(String value) {
         try {
@@ -15,7 +15,7 @@ public class Number {
         this.value = value;
     }
 
-    public int copyValue() {
+    public int value() {
         return value;
     }
 }
