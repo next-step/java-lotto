@@ -40,8 +40,8 @@ public class Statics {
         return income;
     }
 
-    private int aggregate(List<Ticket> tickets, WinnerTicket winnerTicket, Prize prize) {
-        return winnerTicket.countWinner(tickets, prize);
+    private int aggregate(List<Ticket> challengerTickets, WinnerTicket winnerTicket, Prize prize) {
+        return winnerTicket.countWinner(challengerTickets, prize);
     }
 
     private int aggregate(List<Ticket> challengerTickets, Ticket winnerTicket, Prize prize) {

@@ -29,10 +29,7 @@ public class WinnerTicket {
     }
 
     private boolean checkBonusCondition(Ticket ticket,Prize prize) {
-        if (prize == Prize.SECOND) {
-            return this.includeBonus(ticket);
-        }
-        return !this.includeBonus(ticket);
+        return prize == Prize.SECOND ?   this.includeBonus(ticket) : !this.includeBonus(ticket);
     }
 
     private boolean matchCount(Ticket ticket) {
