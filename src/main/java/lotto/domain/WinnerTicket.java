@@ -29,29 +29,13 @@ public class WinnerTicket {
     }
 
     private boolean checkBonusCondition(Ticket ticket,Prize prize) {
-        if(prize == Prize.THIRD)  {
-            return true;
+        if (prize == Prize.SECOND) {
+            return this.includeBonus(ticket);
         }
-        return this.includeBonus(ticket) && prize.needBonusNumberMatch();
+        return !this.includeBonus(ticket);
     }
 
     private boolean matchCount(Ticket ticket) {
         return Prize.THIRD.isMatch(ticket.overlapNumberCount(this.ticketOnly()));
-    }
-
-    public int countSecondWinner(List<Ticket> challengeTickets) {
-        int count = 0;
-        for(Ticket ticket : challengeTickets) {
-            count = count + ((Prize.THIRD.isMatch(ticket.overlapNumberCount(this.ticketOnly())) && this.includeBonus(ticket) ) ? 1 : 0);
-        }
-        return count;
-    }
-
-    public int countThirdWinner(List<Ticket> challengeTickets) {
-        int count = 0;
-        for(Ticket ticket : challengeTickets) {
-            count = count + ((Prize.THIRD.isMatch(ticket.overlapNumberCount(this.ticketOnly())) && !this.includeBonus(ticket) ) ? 1 : 0);
-        }
-        return count;
     }
 }

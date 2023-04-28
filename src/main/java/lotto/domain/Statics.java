@@ -41,12 +41,11 @@ public class Statics {
     }
 
     private int aggregateSecond(List<Ticket> tickets, WinnerTicket winnerTicket) {
-        return winnerTicket.countSecondWinner(tickets);
+        return winnerTicket.countWinner(tickets,Prize.SECOND);
     }
 
     private int aggregateThird(List<Ticket> tickets, WinnerTicket winnerTicket) {
-        return winnerTicket.countThirdWinner(tickets);
-        //return winnerTicket.countWinner(tickets,Prize.THIRD);
+        return winnerTicket.countWinner(tickets,Prize.THIRD);
     }
 
     private int aggregateFourth(List<Ticket> challengerTickets, Ticket winnerTicket) {
