@@ -5,7 +5,7 @@
 ### Step4 1차 피드백 수정
 - [X] wrapper 타입 대신 원시 타입으로 수정
 - [X] isGreaterThanZero 생성자에서 검증
-- [ ] concat 대신 list의 addAll 메서드 사용
+- [X] concat 대신 list의 addAll 메서드 사용
 - [ ] Output View에서 String.format을 활용
 - [ ] MoneyTest에서 ParameterizedTest 활용
 - [ ] 수동으로 구매한 로또 메서드는 도메인에서 계산하도록 수정

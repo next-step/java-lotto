@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Lottos {
     private static final int ZERO = 0;
@@ -20,19 +19,14 @@ public class Lottos {
 
     public Lottos createAutoLottos(Amount autoAmount) {
         List<Lotto> autoLottos = makeAutoLottos(autoAmount);
-        List<Lotto> wholeLottos = concatLottos(autoLottos);
+        lottos.addAll(autoLottos);
 
-        return new Lottos(wholeLottos);
+        return new Lottos(lottos);
     }
 
     private List<Lotto> makeAutoLottos(Amount autoAmount) {
         return IntStream.range(ZERO, autoAmount.getAmount())
                 .mapToObj(i -> Lotto.createAutoLotto())
-                .collect(Collectors.toList());
-    }
-
-    private List<Lotto> concatLottos(List<Lotto> autoLottos) {
-        return Stream.concat(lottos.stream(), autoLottos.stream())
                 .collect(Collectors.toList());
     }
 
