@@ -6,7 +6,7 @@ public class Profit {
     private static final int DEFAULT_PROFIT = 0;
     private final int profit;
 
-    private static final HashMap<Integer, Integer> profitTable = new HashMap<>() {{
+    private static final HashMap<Integer, Integer> PROFIT_TABLE = new HashMap<>() {{
         put(3, 5_000);
         put(4, 50_000);
         put(5, 1_500_000);
@@ -14,7 +14,7 @@ public class Profit {
     }};
 
     public Profit(int matches) {
-        profit = profitTable.getOrDefault(matches, DEFAULT_PROFIT);
+        profit = PROFIT_TABLE.getOrDefault(matches, DEFAULT_PROFIT);
     }
 
     public int value() {
