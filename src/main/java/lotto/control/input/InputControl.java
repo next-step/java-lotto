@@ -7,7 +7,15 @@ import java.util.Scanner;
 
 public abstract class InputControl<T> {
     protected static final Scanner scanner = new Scanner(System.in);
-    protected View view = new DummyView();
+    protected final View view;
+
+    public InputControl() {
+        this.view = new DummyView();
+    }
+
+    public InputControl(View view) {
+        this.view = view;
+    }
 
     public T getValue() {
         view.render();

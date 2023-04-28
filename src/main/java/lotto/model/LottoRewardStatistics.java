@@ -12,15 +12,15 @@ public class LottoRewardStatistics {
 
 
     public float profit() {
-        int rewards = winnerRewards();
+        long rewards = winnerRewards();
         int spent = counter.total() * Lotto.PRICE;
 
         return rewards / (float) spent;
     }
 
-    public int winnerRewards() {
+    public long winnerRewards() {
         return Place.winners().stream()
-                .mapToInt(this::reward)
+                .mapToLong(this::reward)
                 .sum();
     }
 

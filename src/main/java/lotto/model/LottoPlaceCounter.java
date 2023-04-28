@@ -7,10 +7,12 @@ import java.util.Set;
 
 public class LottoPlaceCounter {
     private final Lotto matchCriteria;
+    private final Number bonus;
     private final Map<Place, Integer> counter = new HashMap<>();
 
-    public LottoPlaceCounter(Lotto matchCriteria) {
+    public LottoPlaceCounter(Lotto matchCriteria, Number bonus) {
         this.matchCriteria = matchCriteria;
+        this.bonus = bonus;
         init();
     }
 
@@ -22,8 +24,9 @@ public class LottoPlaceCounter {
 
     public void count(Lotto lotto) {
         int matches = matchCriteria.matches(lotto);
-        Place place = Place.of(matches);
+        boolean matchBonus = lotto.contains(bonus);
 
+        Place place = Place.find(matches, matchBonus);
         counter.put(place, counter.get(place) + 1);
     }
 

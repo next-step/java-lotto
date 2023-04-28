@@ -3,6 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -11,6 +12,18 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1:true", "2:true", "3:true", "4:true", "5:true", "6:true",
+            "7:false"
+    }, delimiter = ':')
+    @DisplayName("로또가 해당 숫자를 포함하는 지 확인할 수 있다")
+    public void contains(int input, boolean expected) {
+        Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
+        Number number = Number.of(input);
+
+        assertThat(lotto.contains(number)).isEqualTo(expected);
+    }
 
     @Test
     @DisplayName("로또 번호는 전부 다 달라야 한다")

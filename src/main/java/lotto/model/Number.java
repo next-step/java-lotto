@@ -17,10 +17,18 @@ public class Number implements Comparable<Number> {
         this.value = value;
     }
 
+    public static Number of(int value) {
+        return new Number(value);
+    }
+
     public static List<Integer> all() {
         return IntStream.rangeClosed(START, END)
                 .boxed()
                 .collect(toList());
+    }
+
+    public int value() {
+        return value;
     }
 
     @Override

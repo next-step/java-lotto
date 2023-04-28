@@ -5,7 +5,7 @@ import lotto.view.View;
 public class LottoPriceInput extends InputControl<Integer> {
 
     public LottoPriceInput(View view) {
-        this.view = view;
+        super(view);
     }
 
     @Override
