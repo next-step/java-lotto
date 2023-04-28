@@ -21,6 +21,10 @@ public class Ticket {
         this.numbers = numbers;
     }
 
+    private static int overlapCount(Set<Integer> copyThisNumbers) {
+        return 12 - copyThisNumbers.size();
+    }
+
     private Set<Integer> parseToNumbers(String stringNumbers) {
         Set<Integer> numbers = new HashSet<>();
         for (String number : stringNumbers.split(", ")) {
@@ -39,10 +43,6 @@ public class Ticket {
         Set<Integer> copyThisNumbers = new HashSet<>(this.numbers);
         copyThisNumbers.addAll(otherTicket.numbers);
         return overlapCount(copyThisNumbers);
-    }
-
-    private static int overlapCount(Set<Integer> copyThisNumbers) {
-        return 12 - copyThisNumbers.size();
     }
 
     public WinnerTicket winnerTicket(int bonusNumber) {
@@ -64,7 +64,7 @@ public class Ticket {
 
     public int countWinner(List<Ticket> challengeTickets, Prize prize) {
         int count = 0;
-        for(Ticket ticket : challengeTickets) {
+        for (Ticket ticket : challengeTickets) {
             count = count + (prize.isMatch(this.countMatchNumbers(ticket)) ? 1 : 0);
         }
         return count;

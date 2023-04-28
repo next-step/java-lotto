@@ -10,7 +10,6 @@ public class WinnerPresentDTO {
     private final int countFirst;
 
 
-
     public WinnerPresentDTO(Statics statics) {
         this.countFifth = statics.getCountFifth();
         this.countFourth = statics.getCountFourth();

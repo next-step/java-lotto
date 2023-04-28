@@ -22,13 +22,13 @@ public class WinnerTicket {
 
     public int countWinner(List<Ticket> challengeTickets, Prize prize) {
         int count = 0;
-        for(Ticket ticket : challengeTickets) {
-            count = count + ( matchCount(ticket) && (checkBonusCondition(ticket,prize))  ? 1 : 0);
+        for (Ticket ticket : challengeTickets) {
+            count = count + (matchCount(ticket) && (checkBonusCondition(ticket, prize)) ? 1 : 0);
         }
         return count;
     }
 
-    private boolean checkBonusCondition(Ticket ticket,Prize prize) {
+    private boolean checkBonusCondition(Ticket ticket, Prize prize) {
         return (prize == Prize.SECOND) ? this.includeBonus(ticket) : !this.includeBonus(ticket);
     }
 
