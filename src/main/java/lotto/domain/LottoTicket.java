@@ -30,7 +30,7 @@ public class LottoTicket {
 
     public int matchesLottoNumberCount(List<Integer> winningNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.matchesWinningNumbers(winningNumbers))
+                .filter(lottoNumber -> lottoNumber.matchesNumbers(winningNumbers))
                 .count();
     }
 
