@@ -8,15 +8,15 @@ import java.util.List;
 public class LottoGame {
 
     public static void main(String[] args) {
-        InputViewV2 inputViewV2 = new RetryInputView(new DefaultInputViewV2());
-        long purchaseAmount = inputViewV2.purchaseAmount();
-        int manualQuantity = inputViewV2.manualQuantity(purchaseAmount);
+        InputView inputView = new RetryInputView(new DefaultInputView());
+        long purchaseAmount = inputView.purchaseAmount();
+        int manualQuantity = inputView.manualQuantity(purchaseAmount);
 
-        List<Lotto> manualNumbers = inputViewV2.manualNumbers(manualQuantity);
+        List<Lotto> manualNumbers = inputView.manualNumbers(manualQuantity);
         Lottos lottos = new Lottos(purchaseAmount, manualNumbers);
         OutputView.purchaseHistory(lottos);
 
-        WinNumbers winNumbers = new WinNumbers(inputViewV2.lastWeekWinningNumbers(), inputViewV2.bonusBall());
+        WinNumbers winNumbers = new WinNumbers(inputView.lastWeekWinningNumbers(), inputView.bonusBall());
 
         WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
 

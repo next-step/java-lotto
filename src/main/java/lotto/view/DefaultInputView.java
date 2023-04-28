@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class DefaultInputViewV2 implements InputViewV2 {
+public class DefaultInputView implements InputView {
     private final Scanner scanner = new Scanner(System.in);
     public final String SPLIT_REGEX = ",";
 

@@ -5,17 +5,17 @@ import lotto.domain.LottoNumber;
 
 import java.util.List;
 
-public class RetryInputView implements InputViewV2 {
-    private final InputViewV2 inputViewV2;
+public class RetryInputView implements InputView {
+    private final InputView inputView;
 
-    public RetryInputView(InputViewV2 inputViewV2) {
-        this.inputViewV2 = inputViewV2;
+    public RetryInputView(InputView inputView) {
+        this.inputView = inputView;
     }
 
     @Override
     public long purchaseAmount() {
         try {
-            return inputViewV2.purchaseAmount();
+            return inputView.purchaseAmount();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return purchaseAmount();
@@ -25,7 +25,7 @@ public class RetryInputView implements InputViewV2 {
     @Override
     public int manualQuantity(long purchaseAmount) {
         try {
-            return inputViewV2.manualQuantity(purchaseAmount);
+            return inputView.manualQuantity(purchaseAmount);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return manualQuantity(purchaseAmount);
@@ -35,7 +35,7 @@ public class RetryInputView implements InputViewV2 {
     @Override
     public List<Lotto> manualNumbers(int manualQuantity) {
         try {
-            return inputViewV2.manualNumbers(manualQuantity);
+            return inputView.manualNumbers(manualQuantity);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return manualNumbers(manualQuantity);
@@ -45,7 +45,7 @@ public class RetryInputView implements InputViewV2 {
     @Override
     public List<Integer> lastWeekWinningNumbers() {
         try {
-            return inputViewV2.lastWeekWinningNumbers();
+            return inputView.lastWeekWinningNumbers();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return lastWeekWinningNumbers();
@@ -55,7 +55,7 @@ public class RetryInputView implements InputViewV2 {
     @Override
     public LottoNumber bonusBall() {
         try {
-            return inputViewV2.bonusBall();
+            return inputView.bonusBall();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return bonusBall();

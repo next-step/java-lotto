@@ -21,9 +21,7 @@ public class Lotto {
     }
 
     public Lotto(int... numbers) {
-        List<Integer> intNumbers = Arrays.stream(numbers).boxed().collect(Collectors.toList());
-        validate(intNumbers);
-        this.lottoNumbers = intNumbers.stream().map(LottoNumber::new).sorted().collect(Collectors.toList());
+        this(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
     }
 
     public Lotto(List<Integer> numbers) {
