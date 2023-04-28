@@ -28,7 +28,7 @@ public class NumbersTest {
     @Test
     @DisplayName("숫자타입의 문자열 인입시 객체를 정상 생성한다.")
     void createObjTest() {
-        assertThat(numbers).isNotNull();
+        assertThat(new Numbers(NUMBERS)).isNotNull();
     }
 
     @ParameterizedTest(name = "숫자 배열의 값이 비어있는 경우 예외가 발생한다.")
