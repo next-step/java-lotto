@@ -1,11 +1,14 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.service.LottoService;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoApplication {
     public static void main(String[] args) {
         InputView inputView = InputView.buy();
-        Lotto lotto = new Lotto(inputView.getMoney());
+        LottoService lottoService = new LottoService(inputView.getMoney());
+        lottoService.generate();
+        ResultView.showLottos(lottoService.getLottos());
     }
 }

@@ -1,12 +1,13 @@
 package lotto.view;
 
-import lotto.domain.LottoInfo;
+import lotto.domain.Lotto;
+
+import java.util.List;
 
 public class ResultView {
-    public void getAllAvailableNumbers() {
-        System.out.println("선택 가능한 로또 번호는 다음과 같습니다.");
-        for (int number : LottoInfo.NUMBER_RANGE) {
-            System.out.printf("%d ", number);
+    public static void showLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto);
         }
     }
 }

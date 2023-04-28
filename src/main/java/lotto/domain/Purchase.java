@@ -7,7 +7,7 @@ public class Purchase {
     public Purchase(int inputMoney) {
         validateMoney(inputMoney);
         this.money = inputMoney;
-        this.count = inputMoney / LottoInfo.PRICE;
+        this.count = inputMoney / LottoRule.PRICE;
     }
 
     private void validateMoney(int inputMoney) {
@@ -16,11 +16,11 @@ public class Purchase {
         }
     }
 
-    public int getAmount() {
+    public int money() {
         return money;
     }
 
-    public int getCount() {
+    public int count() {
         return count;
     }
 }

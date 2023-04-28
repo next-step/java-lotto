@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoInfo;
+import lotto.domain.LottoRule;
 
 import java.util.Scanner;
 
@@ -9,7 +9,7 @@ public class InputView {
     private final int money;
 
     public InputView(int money) {
-        System.out.println(money / LottoInfo.PRICE + "개를 구매했습니다.");
+        System.out.println(money / LottoRule.PRICE + "개를 구매했습니다.");
         this.money = money;
     }
 

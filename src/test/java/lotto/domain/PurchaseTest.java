@@ -13,7 +13,7 @@ class PurchaseTest {
     @ValueSource(ints = {1000, 5000, 18000, 330000})
     void 구입금액입력(int inputMoney) {
         Purchase purchase = new Purchase(inputMoney);
-        assertThat(purchase.getAmount()).isEqualTo(inputMoney);
+        assertThat(purchase.money()).isEqualTo(inputMoney);
     }
 
     @ParameterizedTest(name = "[{index}] {0}원 투입")
@@ -26,6 +26,6 @@ class PurchaseTest {
     @CsvSource(value = {"0:0", "1000:1", "15000:15", "21000:21"}, delimiter = ':')
     void 로또구매개수(int inputMoney, int expectedCount) {
         Purchase purchase = new Purchase(inputMoney);
-        assertThat(purchase.getCount()).isEqualTo(expectedCount);
+        assertThat(purchase.count()).isEqualTo(expectedCount);
     }
 }
