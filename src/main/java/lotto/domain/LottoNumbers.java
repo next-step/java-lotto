@@ -3,14 +3,17 @@ package lotto.domain;
 import lotto.utils.LottoMachine;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int BEGIN_INDEX = 0;
 
-    private Set<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public LottoNumbers() {
         this(generatedLottoNumbers());
@@ -31,6 +34,13 @@ public class LottoNumbers {
             numbers.add(new LottoNumber(LottoMachine.drawnNumber()));
         }
         return numbers;
+    }
+
+    public int countNumberOfMatch(LottoNumbers numbers) {
+        List<LottoNumber> matchNumbers = this.numbers.stream()
+                .filter(m -> numbers.value().stream()
+                        .anyMatch(Predicate.isEqual(m))).collect(Collectors.toList());
+        return matchNumbers.size();
     }
 
     public Set<LottoNumber> value() {

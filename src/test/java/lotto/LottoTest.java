@@ -37,13 +37,7 @@ public class LottoTest {
                         new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)
                 ).collect(Collectors.toSet()));
     }
-
-    @Test
-    void 로또_번호와_당첨_번호_일치_개수_계산() {
-        assertThat(Lotto.matchCount(myLottoNumbers, winningLottoNumbers))
-                .isEqualTo(3);
-    }
-
+    
     @ParameterizedTest
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
     void 수익_계산(int matchCount, long reward) {

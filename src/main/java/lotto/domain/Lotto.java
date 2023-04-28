@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class Lotto {
 
@@ -12,13 +13,6 @@ public class Lotto {
     private static final int MATCH_COUNT_MIN = 3;
     private static final int MATCH_COUNT_MAX = 6;
     private static final int BEGIN_MATCH_COUNT = 1;
-
-    public static int matchCount(LottoNumbers myLottoNumbers, LottoNumbers winningLottoNumbers) {
-        List<LottoNumber> matchNumbers = myLottoNumbers.value().stream()
-                .filter(m -> winningLottoNumbers.value().stream()
-                        .anyMatch(Predicate.isEqual(m))).collect(Collectors.toList());
-        return matchNumbers.size();
-    }
 
     public static long reward(int matchCount) {
         return MatchType.of(matchCount).reward();
@@ -51,34 +45,35 @@ public class Lotto {
         long totalReward = 0l;
 
         for (LottoNumbers lottoNumbers : lottoNumbersSet) {
-            if (isNotMatchCount(winningLottoNumbers, lottoNumbers)) {
+            if (isNotMatchCount(lottoNumbers, winningLottoNumbers)) {
                 continue;
             }
 
-            totalReward += MatchType.of(matchCount(lottoNumbers, winningLottoNumbers)).reward();
+            totalReward += MatchType.of(lottoNumbers.countNumberOfMatch(winningLottoNumbers)).reward();
         }
         return totalReward / (double) purchasePrice;
     }
 
-    private static boolean isNotMatchCount(LottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
-        return matchCount(lottoNumbers, winningLottoNumbers) < MATCH_COUNT_MIN || matchCount(lottoNumbers, winningLottoNumbers) > MATCH_COUNT_MAX;
+    private static boolean isNotMatchCount(LottoNumbers lottoNumbers, LottoNumbers winningLottoNumbers) {
+        return lottoNumbers.countNumberOfMatch(winningLottoNumbers) < MATCH_COUNT_MIN
+                || lottoNumbers.countNumberOfMatch(winningLottoNumbers) > MATCH_COUNT_MAX;
     }
-
 
     public static Map<Integer, Integer> matchCounts(Set<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
         Map<Integer, Integer> matchCounts = new HashMap<>();
 
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            if (isNotMatchCount(winningLottoNumbers, lottoNumbers)) {
+            if (isNotMatchCount(lottoNumbers, winningLottoNumbers)) {
                 continue;
             }
 
-            if (!matchCounts.containsKey(matchCount(lottoNumbers, winningLottoNumbers))) {
-                matchCounts.put(matchCount(lottoNumbers, winningLottoNumbers), BEGIN_MATCH_COUNT);
+            int matchCount = lottoNumbers.countNumberOfMatch(winningLottoNumbers);
+            if (!matchCounts.containsKey(matchCount)) {
+                matchCounts.put(matchCount, BEGIN_MATCH_COUNT);
                 continue;
             }
-            int matchCount = matchCounts.get(matchCount(lottoNumbers, winningLottoNumbers));
-            matchCounts.put(matchCount(lottoNumbers, winningLottoNumbers), matchCount + 1);
+            int countOfMatchCount = matchCounts.get(matchCount);
+            matchCounts.put(matchCount, countOfMatchCount + 1);
         }
 
         return matchCounts;
