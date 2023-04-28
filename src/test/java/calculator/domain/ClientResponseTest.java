@@ -16,10 +16,6 @@ public class ClientResponseTest {
 
     private static final String SINGLE_NUMBER_INPUT = "1";
 
-    private static final int MINIMUM_EVEN_NUMBER = 2;
-
-    private static final int TO_ROUND = 1;
-
     @Test
     @DisplayName("값을 입력했을 경우 객체를 생성한다.")
     void clientInputSuccessTest() {
@@ -33,27 +29,6 @@ public class ClientResponseTest {
         assertThatThrownBy(() -> new ClientResponse(emptyValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("값이 입력되지 않았습니다.");
-    }
-
-
-    @Test
-    @DisplayName("\"1 2\"을 ,로 split 했을 때 1과 2 를 분리한다")
-    void splitTestStep1() {
-        final String[] result = "1 2".split(" ");
-        assertThat(result).contains("1", "2");
-        assertThat(result).containsExactly("1", "2");
-    }
-
-    @ParameterizedTest(name = "홀수를 2로 나눈 값을 반 내림 하여 반환한다. ex) {0} / 2 -> {1}")
-    @CsvSource(value = {"7:3", "1:0"}, delimiter = ':')
-    void oddNumberReturnTest(int numerator, int expect) {
-        assertThat(numerator / MINIMUM_EVEN_NUMBER).isEqualTo(expect);
-    }
-
-    @ParameterizedTest(name = "홀수를 2로 나눈 값을 반 올림 하여 반환한다. ex) {0} / 2 -> {1}")
-    @CsvSource(value = {"7:4", "1:1"}, delimiter = ':')
-    void evenNumberReturnTest(int numerator, int expect) {
-        assertThat((numerator / MINIMUM_EVEN_NUMBER) + TO_ROUND).isEqualTo(expect);
     }
 
     @Test

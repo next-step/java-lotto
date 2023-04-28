@@ -18,8 +18,6 @@ public class OperatorsTest {
 
     private static final List<String> INVALID_OPERATORS = Arrays.asList("#","?");
 
-    private static final List<String> EMPTY_ARRAY = new ArrayList<>();
-
     private Operators operators;
 
     @BeforeEach
