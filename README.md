@@ -7,7 +7,7 @@
 - [X] isGreaterThanZero 생성자에서 검증
 - [X] concat 대신 list의 addAll 메서드 사용
 - [X] Output View에서 String.format을 활용
-- [ ] MoneyTest에서 ParameterizedTest 활용
+- [X] MoneyTest에서 ParameterizedTest 활용
 - [ ] 수동으로 구매한 로또 메서드는 도메인에서 계산하도록 수정
 
 ### Step3 2차 피드백 수정

@@ -46,31 +46,34 @@ class MoneyTest {
                 .isEqualTo(1);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {6, 7, 8})
     @DisplayName("Lotto 구매 개수 초과 테스트")
-    void isOverTotalQuantityTest() {
+    void isOverTotalQuantityTest(int amount) {
         Money money = Money.from(5000);
 
-        assertThat(money.isOverTotalQuantity(6))
+        assertThat(money.isOverTotalQuantity(amount))
                 .isTrue();
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {4, 5})
     @DisplayName("Lotto 구매 개수 가능 테스트")
-    void isNotOverTotalQuantityTest() {
+    void isNotOverTotalQuantityTest(int amount) {
         Money money = Money.from(5000);
 
-        assertThat(money.isOverTotalQuantity(5))
+        assertThat(money.isOverTotalQuantity(amount))
                 .isFalse();
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"0,5", "1,4", "2,3", "4,1", "5,0"})
     @DisplayName("Lotto 개수 계산 테스트")
-    void getAutoLottosTest() {
+    void getAutoLottosTest(int autoAmount, int manualAmount) {
         Money money = Money.from(5000);
 
-        assertThat(money.getAutoLottoAmount(3))
-                .isEqualTo(2);
+        assertThat(money.getAutoLottoAmount(manualAmount))
+                .isEqualTo(autoAmount);
 
     }
 
