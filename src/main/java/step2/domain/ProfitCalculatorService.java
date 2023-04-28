@@ -40,7 +40,7 @@ public class ProfitCalculatorService {
         return winningAmount / purchaseAmount;
     }
 
-    public Map<String, Integer> getWinningCount() {
+    public Map<String, Integer> getWinningResult() {
         return winningCount;
     }
 }

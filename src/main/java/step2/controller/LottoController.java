@@ -23,6 +23,6 @@ public class LottoController {
         lottoService.calculatorLottoWinningCount(winningLotto);
 
         ProfitCalculatorService from = ProfitCalculatorService.of(lottoService.getLottos(), purchaseAmount);
-        OutputView.outPutProfit(from.getProfit(), from.getWinningCount());
+        OutputView.outPutProfit(from.getProfit(), from.getWinningResult());
     }
 }
