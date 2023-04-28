@@ -8,9 +8,10 @@ import java.util.stream.Collectors;
 
 public enum LottoPrize {
     RANK1(6, 2_000_000_000),
-    RANK2(5, 1_500_000),
-    RANK3(4, 50_000),
-    RANK4(3, 5_000),
+    RANK2(5, 30_000_000),
+    RANK3(5, 1_500_000),
+    RANK4(4, 50_000),
+    RANK5(3, 5_000),
     LOST(0, 0);
 
     private static final Map<Integer, LottoPrize> BY_LOTTO_PRIZE = new HashMap<>();
@@ -32,6 +33,19 @@ public enum LottoPrize {
     public static LottoPrize getWinningPrize(int matchCount) {
         if (!BY_LOTTO_PRIZE.containsKey(matchCount)) {
             return LottoPrize.LOST;
+        }
+        return BY_LOTTO_PRIZE.get(matchCount);
+    }
+
+    public static LottoPrize getWinningPrize(int matchCount, boolean matchBonus) {
+        if (!BY_LOTTO_PRIZE.containsKey(matchCount)) {
+            return LottoPrize.LOST;
+        }
+        if (matchBonus && matchCount == 5) {
+            return LottoPrize.RANK2;
+        }
+        if (!matchBonus && matchCount == 5) {
+            return LottoPrize.RANK3;
         }
         return BY_LOTTO_PRIZE.get(matchCount);
     }
