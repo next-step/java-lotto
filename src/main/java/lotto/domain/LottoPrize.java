@@ -15,6 +15,7 @@ public enum LottoPrize {
     LOST(0, 0);
 
     private static final Map<Integer, LottoPrize> BY_LOTTO_PRIZE = new HashMap<>();
+    private static final int LOTTO_RANK2_OR_RANK3_COUNT = 5;
 
     static {
         for (LottoPrize rank : values()) {
@@ -41,10 +42,10 @@ public enum LottoPrize {
         if (!BY_LOTTO_PRIZE.containsKey(matchCount)) {
             return LottoPrize.LOST;
         }
-        if (matchBonus && matchCount == 5) {
+        if (isRank2(matchCount, matchBonus)) {
             return LottoPrize.RANK2;
         }
-        if (!matchBonus && matchCount == 5) {
+        if (isRank3(matchCount, matchBonus)) {
             return LottoPrize.RANK3;
         }
         return BY_LOTTO_PRIZE.get(matchCount);
@@ -62,5 +63,13 @@ public enum LottoPrize {
 
     public int rankCount() {
         return this.rankCount;
+    }
+
+    private static boolean isRank2(int matchCount, boolean matchBonus) {
+        return matchBonus && matchCount == LOTTO_RANK2_OR_RANK3_COUNT;
+    }
+
+    private static boolean isRank3(int matchCount, boolean matchBonus) {
+        return !matchBonus && matchCount == LOTTO_RANK2_OR_RANK3_COUNT;
     }
 }

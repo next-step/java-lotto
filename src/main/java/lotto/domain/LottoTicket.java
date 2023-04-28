@@ -21,10 +21,16 @@ public class LottoTicket {
                 .collect(Collectors.toList()));
     }
 
+    public LottoPrize getWinningPrize(List<Integer> winningNumbers, LottoNumber bonusNumber) {
+        int matchesCount = matchesLottoNumberCount(winningNumbers);
+        boolean matchesBonus = lottoNumbers.contains(bonusNumber);
+
+        return LottoPrize.getWinningPrize(matchesCount, matchesBonus);
+    }
+
     public int matchesLottoNumberCount(List<Integer> winningNumbers) {
         return (int) lottoNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .filter(winningNumbers::contains)
+                .filter(lottoNumber -> lottoNumber.matchesWinningNumbers(winningNumbers))
                 .count();
     }
 

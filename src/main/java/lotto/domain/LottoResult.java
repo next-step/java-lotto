@@ -9,11 +9,8 @@ public class LottoResult {
 
     private final Map<LottoPrize, Integer> matchesResult = LottoPrize.makeLottoResult();
 
-    public LottoResult(List<Integer> matchesCounts) {
-        for (Integer matchesCount : matchesCounts) {
-            LottoPrize lottoPrize = LottoPrize.getWinningPrize(matchesCount);
-            makeLottoResult(lottoPrize);
-        }
+    public LottoResult(List<LottoPrize> winningPrize) {
+        winningPrize.forEach(this::makeLottoResult);
     }
 
     private void makeLottoResult(LottoPrize lottoPrize) {

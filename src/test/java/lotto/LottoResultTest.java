@@ -14,7 +14,8 @@ public class LottoResultTest {
     @DisplayName("당첨개수에 따라 당첨 결과를 계산할 수 있다")
     @Test
     void result() {
-        LottoResult lottoResult = new LottoResult(List.of(6, 5, 4, 3));
+        List<LottoPrize> lottoPrizes = List.of(LottoPrize.RANK1, LottoPrize.RANK2, LottoPrize.RANK3, LottoPrize.RANK4, LottoPrize.RANK5);
+        LottoResult lottoResult = new LottoResult(lottoPrizes);
         Map<LottoPrize, Integer> matchesResult = lottoResult.getMatchesResult();
 
         matchesResult.forEach(((lottoPrize, integer) -> {
@@ -25,9 +26,9 @@ public class LottoResultTest {
     @DisplayName("로또 수익률을 계산할 수 있다")
     @Test
     void rate() {
-        LottoResult lottoResult = new LottoResult(List.of(3));
+        LottoResult rank5 = new LottoResult(List.of(LottoPrize.RANK5));
         int purchaseCount = 14;
-        double rate = lottoResult.calculateRate(purchaseCount);
+        double rate = rank5.calculateRate(purchaseCount);
 
         assertThat(rate).isEqualTo((double) 5000 / 14000);
     }
@@ -35,8 +36,8 @@ public class LottoResultTest {
     @DisplayName("로또 총 당첨금을 계산할 수 있다")
     @Test
     void totalPrize() {
-        LottoResult lottoResult = new LottoResult(List.of(3));
-        long totalPrize = lottoResult.calculateTotalPrize();
+        LottoResult rank5 = new LottoResult(List.of(LottoPrize.RANK5));
+        long totalPrize = rank5.calculateTotalPrize();
 
         assertThat(totalPrize).isEqualTo(5000);
     }

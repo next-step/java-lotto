@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String LOTTO_RANK_MESSAGE = "%d개 일치 (%d원) - %d개\n";
+    private static final String LOTTO_RANK2_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개\n";
     private static final String LOTTO_WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
 
     public static void showLottoTickets(LottoTickets lottoTickets) {
@@ -20,7 +21,7 @@ public class ResultView {
         System.out.println("---------");
 
         lottoPrizeResult.getMatchesResult().forEach((lottoPrize, count) -> {
-            System.out.printf(LOTTO_RANK_MESSAGE, lottoPrize.rankCount(), lottoPrize.money(), count);
+            System.out.printf(getLottoRankMessage(lottoPrize), lottoPrize.rankCount(), lottoPrize.money(), count);
         });
     }
 
@@ -30,6 +31,13 @@ public class ResultView {
         if (winningRate < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
+    }
+
+    private static String getLottoRankMessage(LottoPrize lottoPrize) {
+        if (lottoPrize == LottoPrize.RANK2) {
+            return LOTTO_RANK2_MESSAGE;
+        }
+        return LOTTO_RANK_MESSAGE;
     }
 
     private static void printLottoTicket(LottoTicket lottoTicket) {

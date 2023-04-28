@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,9 +38,21 @@ public class LottoTicketTest {
     @DisplayName("발급받은 로또번호 중 일치여부를 판단해 일치하는 개수를 판단한다")
     @Test
     void matchesLottoTicket() {
-        LottoTicket lottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 45));
+        LottoTicket secondRankLottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 45));
         List<Integer> winningLottoTicket = List.of(1, 2, 3, 4, 5, 6);
-        int winningCount = lottoTicket.matchesLottoNumberCount(winningLottoTicket);
+        int winningCount = secondRankLottoTicket.matchesLottoNumberCount(winningLottoTicket);
         assertThat(winningCount).isEqualTo(5);
+    }
+
+    @DisplayName("당첨번호와 보너스번호에 따른 등수를 구한다")
+    @Test
+    void prize() {
+        LottoTicket secondRankLottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 45));
+        List<Integer> winningLottoTicket = List.of(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(45);
+
+        LottoPrize lottoPrize = secondRankLottoTicket.getWinningPrize(winningLottoTicket, bonusNumber);
+
+        assertThat(lottoPrize).isEqualTo(LottoPrize.RANK2);
     }
 }
