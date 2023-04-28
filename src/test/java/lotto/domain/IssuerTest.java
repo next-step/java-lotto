@@ -21,19 +21,19 @@ public class IssuerTest {
         //given
         int input = 77;
         //when
-        issuerFixture.purchaseTickets(input);
+        issuerFixture.issueTickets(input);
         //then
-        assertThat(issuerFixture.purchasedTickets()).hasSize(input);
+        assertThat(issuerFixture.issuedTickets()).hasSize(input);
     }
 
 
     @DisplayName("Winners 클래스를 생성한다")
     @Test
-    public void winnerGen() {
+    public void makeWinner() {
         //given
         //when
-        issuerFixture.purchaseTickets(10);
-        Statics statics = issuerFixture.makeWinners(new Ticket("1, 2, 3, 4, 5, 6").winnerTicket(7));
+        issuerFixture.issueTickets(10);
+        Statics statics = issuerFixture.issuedTicketStatistics(new Ticket("1, 2, 3, 4, 5, 6").winnerTicket(7));
         //then
         assertNotNull(statics);
     }

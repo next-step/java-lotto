@@ -16,11 +16,11 @@ public class Lotto {
         OutputPresent outputPresent = new OutputPresent();
         Issuer issuer = new Issuer();
 
-        issuer.purchaseTickets(inputPresent.purchaseCount());
-        outputPresent.presentTickets(issuer.purchasedTickets());
+        issuer.issueTickets(inputPresent.purchaseCount());
+        outputPresent.presentTickets(issuer.issuedTickets());
 
         WinnerTicket winnerTicket = inputPresent.winningNumbers().winnerTicket(inputPresent.bonusNumber());
-        Statics statics = issuer.makeWinners(winnerTicket);
+        Statics statics = issuer.issuedTicketStatistics(winnerTicket);
         outputPresent.presentWinners(new WinnerPresentDTO(statics));
         outputPresent.presentIncome(new IncomePresentDTO(statics));
     }
