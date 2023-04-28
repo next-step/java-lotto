@@ -23,8 +23,7 @@ public class Ticket {
 
     private Set<Integer> parseToNumbers(String stringNumbers) {
         Set<Integer> numbers = new HashSet<>();
-        String[] splitNumbers = stringNumbers.split(", ");
-        for (String number : splitNumbers) {
+        for (String number : stringNumbers.split(", ")) {
             numbers.add(Integer.parseInt(number));
         }
         return numbers;
@@ -47,8 +46,7 @@ public class Ticket {
     }
 
     public WinnerTicket winnerTicket(int bonusNumber) {
-        Set<Integer> copyNumbers = new HashSet<>(this.numbers);
-        return new WinnerTicket(copyNumbers, bonusNumber);
+        return new WinnerTicket(new HashSet<>(this.numbers), bonusNumber);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class Ticket {
     public int countWinner(List<Ticket> challengeTickets, Prize prize) {
         int count = 0;
         for(Ticket ticket : challengeTickets) {
-            count = count + (prize.isMatch(this.overlapNumberCount(ticket)) ? 1 : 0);
+            count = count + (prize.isMatch(this.countMatchNumbers(ticket)) ? 1 : 0);
         }
         return count;
     }
