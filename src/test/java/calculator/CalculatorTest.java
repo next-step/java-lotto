@@ -32,13 +32,13 @@ public class CalculatorTest {
     @Test
     public void calculate() {
         List<Content> list = new ArrayList<>();
-        list.add(new Content(2));
+        list.add(new Content("2"));
         list.add(new Content("+"));
-        list.add(new Content(3));
+        list.add(new Content("3"));
         list.add(new Content("*"));
-        list.add(new Content(4));
+        list.add(new Content("4"));
         list.add(new Content("/"));
-        list.add(new Content(2));
+        list.add(new Content("2"));
 
         Calculator calculator = new Calculator(list);
         assertThat(calculator.calculate()).isEqualTo(10);
