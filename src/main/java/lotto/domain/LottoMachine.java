@@ -36,7 +36,7 @@ public class LottoMachine {
 		return this.purchasedLottos.size();
 	}
 
-	public void calculateScore(List<Integer> winNumbers) {
+	public void calculateScore(WinNumbers winNumbers) {
 		this.purchasedLottos.calculateScore(winNumbers);
 	}
 

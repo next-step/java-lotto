@@ -26,21 +26,12 @@ public class Lotto {
 		this.score = new Score(0);
 	}
 
-	public Score calculateScore(List<Integer> winNumbers) {
-		for (Integer winNumber : winNumbers) {
-			this.plusScore(winNumber);
-		}
-		return this.score;
+	public Score calculateScore(WinNumbers winNumbers) {
+		return winNumbers.plusScore(this.lottoNumbers, this.score);
 	}
 
 	public Score getScore() {
 		return this.score;
-	}
-
-	private void plusScore(Integer winNumber) {
-		if (lottoNumbers.contains(winNumber)) {
-			this.score.plus();
-		}
 	}
 
 	public LottoNumbers getLottoNumbers() {

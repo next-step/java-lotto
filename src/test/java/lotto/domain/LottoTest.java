@@ -13,7 +13,7 @@ public class LottoTest {
 	@Test
 	void test1() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 3, 5, 14, 22, 45));
-		assertThat(lotto.calculateScore(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(new Score(3));
+		assertThat(lotto.calculateScore(new WinNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(new Score(3));
 	}
 }
 

@@ -19,7 +19,7 @@ public class PurchasedLottos {
 		this.purchasedLottos.add(lotto);
 	}
 
-	public void calculateScore(List<Integer> winNumbers) {
+	public void calculateScore(WinNumbers winNumbers) {
 		for (Lotto lotto : this.purchasedLottos) {
 			lotto.calculateScore(winNumbers);
 		}
