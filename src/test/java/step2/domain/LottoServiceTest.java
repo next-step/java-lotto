@@ -12,24 +12,24 @@ class LottoServiceTest {
 
     @BeforeEach
     void setLottoService() {
-        this.lottoService = new LottoService(20, "1,2,3,4,5,6");
+        this.lottoService = new LottoService(20);
     }
 
     @Test
     void 지정된_로또_갯수이상일때() {
-        assertThatThrownBy(() -> LottoService.of(20, "1,2,3,4,5,6,7,8"))
+        assertThatThrownBy(() -> LottoService.createWinningLotto("1,2,3,4,5,6,7,8,9"))
                 .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
     void 지정된_로또_카운트가_음수일때() {
-        assertThatThrownBy(() -> LottoService.of(-1, "1,2,3,4,5,6"))
+        assertThatThrownBy(() -> LottoService.of(-1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 지정된_로또_번호가_이상할때() {
-        assertThatThrownBy(() -> LottoService.of(20, "1,2,3,4,5,6,ㄱ"))
+        assertThatThrownBy(() -> LottoService.createWinningLotto("1,2,3,4,5,6,ㄱ"))
                 .isInstanceOf(NumberFormatException.class);
     }
 }

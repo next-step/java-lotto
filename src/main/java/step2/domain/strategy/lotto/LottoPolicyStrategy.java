@@ -36,10 +36,19 @@ public class LottoPolicyStrategy implements Strategy {
 
     @Override
     public LottoNumbers createWinningLottoNumber(String lastWinningNumbers) {
-        List<LottoNumber> numbers = new ArrayList<>();
-        String[] numbersArr = lastWinningNumbers.replaceAll(TRIM, "")
-                .split(DELIMITER);
+        String[] numbersArr = convertLastWinningNumberToStringArr(lastWinningNumbers);
+        return new LottoNumbers(convertLastWinningNumberStringArrToListNumbers(numbersArr));
+    }
 
+    private String[] convertLastWinningNumberToStringArr(String lastWinningNumbers) {
+        checkInputLastWinningNumbers(lastWinningNumbers);
+
+        return lastWinningNumbers.replaceAll(TRIM, "")
+                .split(DELIMITER);
+    }
+
+    private List<LottoNumber> convertLastWinningNumberStringArrToListNumbers(String[] numbersArr) {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (String number : numbersArr) {
             try {
                 numbers.add(LottoNumber.from(Integer.parseInt(number)));
@@ -47,10 +56,14 @@ public class LottoPolicyStrategy implements Strategy {
                 throw new NumberFormatException("숫자이외의 값이 입력 되었습니다.");
             }
         }
-
         isSizeNotEqualToLottoNumberCount(numbers.size());
+        return numbers;
+    }
 
-        return new LottoNumbers(numbers);
+    private void checkInputLastWinningNumbers(String lastWinningNumbers) {
+        if (lastWinningNumbers.length() < 0) {
+            throw new IllegalStateException("입력값이 잘못되었습니다.");
+        }
     }
 
     private void isSizeNotEqualToLottoNumberCount(int size) {

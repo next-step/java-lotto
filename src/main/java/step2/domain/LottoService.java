@@ -6,20 +6,22 @@ import step2.domain.strategy.lotto.LottoPolicyStrategy;
 
 public class LottoService {
     private Lottos lottos;
-    private Lotto WinningLotto;
 
-    public LottoService(int lottoCount, String lastWinningNumbers) {
+    public LottoService(int lottoCount) {
         this.lottos = new Lottos(lottoCount);
-        this.WinningLotto = Lotto.fromWinningLotto(new LottoPolicyStrategy(), lastWinningNumbers);
     }
 
-    public static LottoService of(int lottoCount, String lastWinningNumbers) {
-        return new LottoService(lottoCount, lastWinningNumbers);
+    public static LottoService of(int lottoCount) {
+        return new LottoService(lottoCount);
     }
 
-    public void calculatorLottoWinningCount() {
+    public static Lotto createWinningLotto(String lastWinningNumbers) {
+        return Lotto.fromWinningLotto(new LottoPolicyStrategy(), lastWinningNumbers);
+    }
+
+    public void calculatorLottoWinningCount(Lotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
-            lotto.calculatorLottoWinningCount(WinningLotto);
+            lotto.calculatorLottoWinningCount(winningLotto);
         }
     }
 

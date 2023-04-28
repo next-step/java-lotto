@@ -3,6 +3,7 @@ package step2.controller;
 import step2.domain.LottoService;
 import step2.domain.LottoStoreService;
 import step2.domain.ProfitCalculatorService;
+import step2.domain.model.Lotto.Lotto;
 import step2.domain.strategy.price.LottoPriceStrategy;
 import step2.view.InputView;
 import step2.view.OutputView;
@@ -13,10 +14,13 @@ public class LottoController {
         int lottoCount = LottoStoreService.getLottoCount(new LottoPriceStrategy(), purchaseAmount);
         OutputView.outPut(lottoCount);
 
+        LottoService lottoService = LottoService.of(lottoCount);
+        OutputView.outPutLottos(lottoService.getLottos());
+
         InputView.newLineRemove();
 
-        LottoService lottoService = LottoService.of(lottoCount, InputView.askLastWeekWinningNumbers());
-        lottoService.calculatorLottoWinningCount();
+        Lotto winningLotto = LottoService.createWinningLotto(InputView.askLastWeekWinningNumbers());
+        lottoService.calculatorLottoWinningCount(winningLotto);
 
         ProfitCalculatorService from = ProfitCalculatorService.of(lottoService.getLottos(), purchaseAmount);
         OutputView.outPutProfit(from.getProfit(), from.getWinningCount());

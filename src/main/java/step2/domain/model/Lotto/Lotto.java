@@ -28,15 +28,19 @@ public class Lotto {
     }
 
     public void calculatorLottoWinningCount(Lotto winningLotto) {
-        Map<Integer, Integer> lottoWinningNumbers = winningLotto.getNumbers()
-                .stream()
-                .collect(Collectors.toMap(LottoNumber::getNumber, LottoNumber::getNumber));
+        Map<Integer, Integer> lottoWinningNumbers = convertLottoNumbersToMap(winningLotto);
 
         for (LottoNumber lottoNumber : numbers.getLottoNumbers()) {
             if (lottoWinningNumbers.containsKey(lottoNumber.getNumber())) {
                 winningCount++;
             }
         }
+    }
+
+    private Map<Integer, Integer> convertLottoNumbersToMap(Lotto winningLotto) {
+        return winningLotto.getNumbers()
+                .stream()
+                .collect(Collectors.toMap(LottoNumber::getNumber, LottoNumber::getNumber));
     }
 
     public int getWinningCount() {

@@ -1,5 +1,6 @@
 package step2.domain.model.Lotto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -8,6 +9,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        sort();
     }
 
     public static LottoNumbers from(List<LottoNumber> lottoNumbers) {
@@ -16,5 +18,9 @@ public class LottoNumbers {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public void sort() {
+        Collections.sort(lottoNumbers);
     }
 }
