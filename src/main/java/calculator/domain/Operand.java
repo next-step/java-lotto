@@ -27,11 +27,11 @@ public class Operand {
     }
 
     private static void validateOperand(String operand) {
-        if(operand == null || operand.isEmpty()) {
+        if (operand == null || operand.isEmpty()) {
             throw new IllegalArgumentException("Invalid operand: " + operand);
         }
         Matcher matcher = OPERAND_PATTERN.matcher(operand);
-        if(!matcher.find()) {
+        if (!matcher.find()) {
             throw new IllegalArgumentException("Invalid operand: " + operand);
         }
     }

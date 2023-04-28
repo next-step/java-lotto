@@ -32,7 +32,7 @@ public class Calculator {
     }
 
     private static List<String> validateOperator(List<String> input) {
-         return input.stream()
+        return input.stream()
                 .filter(s -> OPERATOR_PATTERN.matcher(s).matches())
                 .collect(Collectors.toList());
     }
@@ -44,7 +44,7 @@ public class Calculator {
     }
 
     private static void validateExpression(List<String> operators, List<String> operands) {
-        if(operators.isEmpty() || operands.isEmpty() || operators.size() != operands.size() - 1) {
+        if (operators.isEmpty() || operands.isEmpty() || operators.size() != operands.size() - 1) {
             throw new IllegalArgumentException("Invalid Expression.");
         }
     }
