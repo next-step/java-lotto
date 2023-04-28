@@ -16,7 +16,9 @@ public class LottoController {
         String inputWinningNumbers = InputView.inputAndValidateWinningNumbers();
         List<Integer> winningNumbers = InputView.extractNumbers(inputWinningNumbers);
 
-        LottoResult lottoResult = lottoTicket.calculateResult(winningNumbers);
+        int inputBonusNumbers = InputView.inputAndValidateBonusNumbers(winningNumbers);
+
+        LottoResult lottoResult = lottoTicket.calculateResult(winningNumbers, inputBonusNumbers);
 
         OutputView.printWinningStatistics(purchaseAmount, lottoResult);
     }
