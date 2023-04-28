@@ -24,7 +24,7 @@ public class LottoGame {
     for (int i = 0; i < purchaseAmount.getPurchasableTicketCount(); i++) {
       lottoTicket.add(new LottoTicket(new LottoNumbers(randomStrategy.getRandomNumbers()
                                                                      .stream()
-                                                                     .map(LottoNumber::new)
+                                                                     .map(LottoNumber::from)
                                                                      .collect(Collectors.toList()))));
     }
     return lottoTicket;
