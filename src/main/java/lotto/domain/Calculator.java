@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utility.CalculateType;
+
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Queue;
@@ -17,19 +19,7 @@ public class Calculator {
         Double doubleNumber2 = Double.parseDouble(number2);
         numberFormat.setGroupingUsed(false);
 
-        if(operator.equals("+")) {
-            return numberFormat.format(doubleNumber1 + doubleNumber2);
-        }
-
-        if(operator.equals("-")) {
-            return numberFormat.format(doubleNumber1 - doubleNumber2);
-        }
-
-        if(operator.equals("*")) {
-            return numberFormat.format(doubleNumber1 * doubleNumber2);
-        }
-
-        return numberFormat.format(doubleNumber1 / doubleNumber2);
+        return numberFormat.format(CalculateType.valueOfOperator(operator).compute(doubleNumber1, doubleNumber2));
     }
 
     public void calculateFormula(List<String> numberList, Queue<String> operatorQueue) {
