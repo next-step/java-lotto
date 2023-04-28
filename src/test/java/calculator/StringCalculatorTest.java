@@ -32,4 +32,11 @@ public class StringCalculatorTest {
         assertThat(stringCalculator.isOnlyNumAndOperator("1 + 2 / 3")).isTrue();
         assertThat(stringCalculator.isOnlyNumAndOperator("1 + 2 ) 3")).isFalse();
     }
+
+    @Test
+    public void calculateTest() {
+        assertThat(stringCalculator.calculate("1 + 2 / 3 * 5")).isEqualTo(5);
+        assertThat(stringCalculator.calculate("1 + 2 * 3 * 5")).isEqualTo(45);
+        assertThatIllegalArgumentException().isThrownBy(() -> stringCalculator.calculate("1 + 2 * 3 @ 5"));
+    }
 }
