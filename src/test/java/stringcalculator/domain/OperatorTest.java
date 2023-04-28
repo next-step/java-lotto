@@ -2,24 +2,38 @@ package stringcalculator.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class OperatorTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"+"})
-    void of_정상(String input) throws Exception {
+    @MethodSource("operatorProvider")
+    void of_정상(String stringInput, Operator enumInput) throws Exception {
         //given
 
         //when
-        Operator operator = Operator.of(input);
+        Operator operator = Operator.of(stringInput);
 
         //then
-        assertThat(operator).isEqualTo(Operator.ADDITION);
+        assertThat(operator).isEqualTo(enumInput);
+    }
+
+    static Stream<Arguments> operatorProvider() {
+        return Stream.of(
+                arguments("+", Operator.ADDITION),
+                arguments("-", Operator.SUBTRACTION),
+                arguments("*", Operator.MULTIPLICATION),
+                arguments("/", Operator.DIVISION)
+        );
     }
 
     @Test

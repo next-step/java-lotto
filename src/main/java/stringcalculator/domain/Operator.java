@@ -1,17 +1,20 @@
 package stringcalculator.domain;
 
 import java.util.Arrays;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
-    ADDITION("+"),
-    SUBTRACTION("-"),
-    MULTIPLICATION("*"),
-    DIVISION("/");
+    ADDITION("+", (o1, o2) -> o1 + o2),
+    SUBTRACTION("-", (o1, o2) -> o1 - o2),
+    MULTIPLICATION("*", (o1, o2) -> o1 * o2),
+    DIVISION("/", (o1, o2) -> o1 / o2);
 
     private final String operator;
+    private final BinaryOperator<Integer> binaryOperator;
 
-    Operator(String operator) {
+    Operator(String operator, BinaryOperator<Integer> binaryOperator) {
         this.operator = operator;
+        this.binaryOperator = binaryOperator;
     }
 
     public static Operator of(String operator) {
@@ -23,20 +26,10 @@ public enum Operator {
     }
 
     public int operate(int o1, int o2) {
-        if (operator.equals("+")) {
-            return o1 + o2;
+        if (operator.equals("/")) {
+            validateDividing(o1, o2);
         }
-
-        if (operator.equals("-")) {
-            return o1 - o2;
-        }
-
-        if (operator.equals("*")) {
-            return o1 * o2;
-        }
-
-        validateDividing(o1, o2);
-        return o1 / o2;
+        return binaryOperator.apply(o1, o2);
     }
 
     private void validateDividing(int o1, int o2) {
