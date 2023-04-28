@@ -12,6 +12,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class StringCalculatorTest {
 
   @Test
+  void 나눗셈의경우결과값을정수로떨어지는값으로한정한다() {
+    String input = "5 / 2";
+    assertThatIllegalArgumentException().isThrownBy(() -> {
+      new Calculator().calculation(input);
+    });
+  }
+
+  @Test
   void 사칙연산의계산우선순위가아닌입력값에따라계산순서가결정된다() {
     String input = "2 + 3 * 4 / 2";
     int result = new Calculator().calculation(input);

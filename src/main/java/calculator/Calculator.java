@@ -54,10 +54,17 @@ public class Calculator {
     }
 
     if (arithmeticMark.equals(DIVISION)) {
+      checkRemainderIsZero(number % nextNumber);
       return number / nextNumber;
     }
 
     throw new IllegalArgumentException();
+  }
+
+  private void checkRemainderIsZero(int remainder) {
+    if (remainder != 0) {
+      throw new IllegalArgumentException();
+    }
   }
 
   private int validNumber(String number) {
