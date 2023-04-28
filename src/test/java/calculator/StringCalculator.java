@@ -11,6 +11,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class StringCalculator {
 
   @ParameterizedTest
+  @ValueSource(strings = {"+ 1", "1 +"})
+  void 첫문자와끝문자는숫자여야한다_사칙연산이아니어야한다(String input) {
+    assertThatIllegalArgumentException().isThrownBy(() -> {
+      new Calculator().validInput(input);
+    });
+  }
+
+  @ParameterizedTest
   @ValueSource(strings = {"", "  ", })
   void 입력값이빈공백일경우IllegalArgumentException(String input) {
     assertThatIllegalArgumentException().isThrownBy(() -> {
