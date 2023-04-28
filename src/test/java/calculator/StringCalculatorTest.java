@@ -9,7 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class StringCalculator {
+public class StringCalculatorTest {
+
+  @Test
+  void 사칙연산기호가아닌경우IllegalArgumentException() {
+    String input = "1 ^ 1";
+    assertThatIllegalArgumentException().isThrownBy(() -> {
+      new Calculator().validInput(input);
+    });
+  }
 
   @Test
   void 숫자와사칙연산사이에는반드시빈공백문자열이있어야한다() {
