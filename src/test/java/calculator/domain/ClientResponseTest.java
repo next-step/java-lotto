@@ -78,7 +78,7 @@ public class ClientResponseTest {
     }
 
     @Test
-    @DisplayName("사용자 입력값에서 연산기호만 포함한 배열을 리턴한다")
+    @DisplayName("사용자 입력값에 단일 숫자만 입력된 경우 연산기호는 빈 배열을 리턴한다")
     void returnSingleSymbolsTest() {
         ClientResponse clientResponse = new ClientResponse(SINGLE_NUMBER_INPUT);
         assertThat(clientResponse.getSymbols()).isEmpty();
