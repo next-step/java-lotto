@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.LottoGenerator;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +34,7 @@ public class Lotto {
     public static List<LottoNumbers> generateAllLottoNumbers(long lottoCount) {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         for (int i = BEGIN_INDEX; i < lottoCount; i++) {
-            lottoNumbersList.add(LottoGenerator.generateLottoNumbers());
+            lottoNumbersList.add(new LottoNumbers());
         }
         return lottoNumbersList;
     }
