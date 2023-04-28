@@ -1,6 +1,7 @@
 package stringCalculator;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,8 +13,8 @@ public class Parser {
 
   public static Expression parse(String input) {
     List<String> elements = Arrays.asList(input.split(" "));
-    Queue<Operator> operators = new LinkedList<>();
-    Queue<Number> numbers = new LinkedList<>();
+    List<Operator> operators = new ArrayList<>();
+    List<Number> numbers = new ArrayList<>();
 
     if (isEven(elements.size())) {
       throw new IllegalArgumentException("연산자는 항상 피연산자 사이에 들어가야 합니다");
@@ -26,7 +27,7 @@ public class Parser {
     return new Expression(operators, numbers);
   }
 
-  private static void put(Queue<Operator> operators, Queue<Number> numbers, String element, int index) {
+  private static void put(List<Operator> operators, List<Number> numbers, String element, int index) {
     if (isEven(index)) {
       numbers.add(new Number(element));
       return;
