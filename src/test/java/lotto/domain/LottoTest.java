@@ -13,7 +13,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto 를 생성 - 1~45 숫자중에 6개를 랜덤 선택한다.")
     void test01() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(LottoType.MANUAL);
 
         assertThat(lotto.numbers()).hasSize(6);
     }
@@ -24,7 +24,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(LottoType.MANUAL, 1, 2, 3, 4, 5, 6);
 
         assertThat(lotto.numbers()).containsExactly(this.getNumbers(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.isManuallyPurchasedLotto()).isTrue();
+        assertThat(lotto.isManualPurchasedLotto()).isTrue();
     }
 
     @Test
@@ -33,7 +33,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(LottoType.AUTO, 6, 5, 4, 3, 2, 1);
 
         assertThat(lotto.numbers()).containsExactly(this.getNumbers(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.isManuallyPurchasedLotto()).isFalse();
+        assertThat(lotto.isManualPurchasedLotto()).isFalse();
     }
 
     @Test

@@ -10,8 +10,9 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
     private LottoType lottoType;
 
-    public Lotto() {
+    public Lotto(LottoType lottoType) {
         this.lottoNumbers = this.getNumbers();
+        this.lottoType = lottoType;
     }
 
     private List<LottoNumber> getNumbers() {
@@ -23,10 +24,6 @@ public class Lotto {
 
     public Lotto(LottoType lottoType, int... numbers) {
         this(lottoType, Arrays.stream(numbers).boxed().collect(Collectors.toList()));
-    }
-
-    public boolean isManuallyPurchasedLotto() {
-        return this.lottoType.isManuallyPurchasedLotto();
     }
 
     public Lotto(LottoType lottoType, List<Integer> numbers) {
@@ -51,6 +48,14 @@ public class Lotto {
 
     public long matchBonusNumber(LottoNumber bonusNumber) {
         return Collections.frequency(lottoNumbers, bonusNumber);
+    }
+
+    public boolean isAutomaticPurchasedLotto() {
+        return this.lottoType.isAutomaticPurchasedLotto();
+    }
+
+    public boolean isManualPurchasedLotto() {
+        return this.lottoType.isManualPurchasedLotto();
     }
 
     @Override

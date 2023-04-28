@@ -13,7 +13,7 @@ class LottosTest {
     @Test
     @DisplayName("Lottos 를 생성한다.")
     void test01() {
-        Lottos lottos = new Lottos(1000);
+        Lottos lottos = new Lottos(1000, LottoType.AUTO);
 
         assertThat(lottos).isNotNull();
     }
@@ -21,7 +21,7 @@ class LottosTest {
     @Test
     @DisplayName("구입금액으로 Lottos 를 생성한다.")
     void test02() {
-        Lottos lottos = new Lottos(10100);
+        Lottos lottos = new Lottos(10100, LottoType.AUTO);
 
         assertThat(lottos.lottos()).hasSize(10);
     }
@@ -29,7 +29,7 @@ class LottosTest {
     @Test
     @DisplayName("구입금액이 천원보다 적으면 에러를 발생한다.")
     void test03() {
-        assertThatThrownBy(() -> new Lottos(0)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lottos(0, LottoType.AUTO)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

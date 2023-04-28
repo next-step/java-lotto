@@ -10,7 +10,11 @@ public enum LottoType {
         this.name = name;
     }
 
-    public boolean isManuallyPurchasedLotto() {
+    public boolean isManualPurchasedLotto() {
         return this == LottoType.MANUAL;
+    }
+
+    public boolean isAutomaticPurchasedLotto() {
+        return this == LottoType.AUTO;
     }
 }

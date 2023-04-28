@@ -47,7 +47,7 @@ public class DefaultInputView implements InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < manualQuantity; i++) {
             String strNumbers = scanner.nextLine();
-            lottos.add(new Lotto(LottoType.AUTO, convertNumbers(strNumbers)));
+            lottos.add(new Lotto(LottoType.MANUAL, convertNumbers(strNumbers)));
         }
 
         return lottos;
