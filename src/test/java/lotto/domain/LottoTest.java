@@ -1,8 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,7 +34,7 @@ public class LottoTest {
                         new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)
                 ).collect(Collectors.toSet()));
     }
-    
+
     @ParameterizedTest
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
     void 수익_계산(int matchCount, long reward) {
