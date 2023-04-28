@@ -13,7 +13,7 @@ public class LottoUtils {
   public static LottoNumbers getLottoNumbers(int... numbers) {
     return new LottoNumbers(Arrays.stream(numbers)
                                   .boxed()
-                                  .map(LottoNumber::new)
+                                  .map(LottoNumber::from)
                                   .collect(Collectors.toList())
     );
   }

@@ -22,14 +22,14 @@ class LottoGameTest {
   void setUp() {
     lottoGame = new LottoGame(new Money(14000), new FixedRandomStrategy());
     winningNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
-                                            .map(LottoNumber::new)
+                                            .map(LottoNumber::from)
                                             .collect(Collectors.toList()));
-    bonusNumber = new LottoNumber(7);
+    bonusNumber = LottoNumber.from(7);
   }
 
   @Test
   void 보너스번호가_당첨번호와_중복되면_IllegalArgumentException이_발생한다() {
-    LottoNumber duplicateNumber = new LottoNumber(6);
+    LottoNumber duplicateNumber = LottoNumber.from(6);
     assertThatThrownBy(() -> lottoGame.getStatistics(winningNumbers, duplicateNumber))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("로또 번호는 중복될 수 없습니다.");
