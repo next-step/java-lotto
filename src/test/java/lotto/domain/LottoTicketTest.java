@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.LottoUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -16,9 +17,7 @@ class LottoTicketTest {
                                                                      .collect(Collectors.toList())));
     MatchNumbersCount matchNumbersCount =
         lottoTicket.matchCount(
-            new LottoNumbers(Stream.of(2, 3, 4, 5, 6, 7)
-                                   .map(LottoNumber::new)
-                                   .collect(Collectors.toList())),
+            LottoUtils.getLottoNumbers(2, 3, 4, 5, 6, 7),
             new LottoNumber(8)
         );
     assertThat(matchNumbersCount).isEqualTo(MatchNumbersCount.MATCH_5);
