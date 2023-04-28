@@ -58,4 +58,8 @@ public class OutputView {
     public static void displayRatio(BigDecimal ratio) {
         out.println("총 수익률은 " + ratio.toString() + "입니다.");
     }
+
+    public static void displayAutoAndManualCount(Integer autoCount, Integer manualCount) {
+        out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", autoCount, manualCount));
+    }
 }

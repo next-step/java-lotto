@@ -4,6 +4,7 @@ import study.lotto.domain.*;
 import study.lotto.view.InputView;
 import study.lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
@@ -11,10 +12,18 @@ public class LottoApplication {
     public static void main(String[] args) {
         // 금액 입력
         Integer money = InputView.inputMoney();
+        Integer manualCount = InputView.inputManualCount();
 
-        LottoBundle lottoBundle = LottoBundle.createByMoney(money);
+        List<Lotto> manualLottoList = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            Lotto lotto = new Lotto(InputView.inputManualLottoNumber());
+            manualLottoList.add(lotto);
+        }
+
+        LottoBundle lottoBundle = LottoBundle.createByMoney(money, manualLottoList);
         ScoreBoard scoreBoard = new ScoreBoard(money);
 
+        OutputView.displayAutoAndManualCount(money / LottoBundle.PRICE_PER_SHEET, manualCount);
         OutputView.displayLottoBundle(lottoBundle);
 
         // 로또 정답 입력

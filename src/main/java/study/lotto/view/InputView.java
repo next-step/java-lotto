@@ -1,5 +1,7 @@
 package study.lotto.view;
 
+import study.lotto.domain.Lotto;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,13 +16,15 @@ public class InputView {
     private static final String ASKING_MONEY = "구입금액을 입력해 주세요.";
     private static final String ASKING_LAST_WEEK_ANSWER = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String ASKING_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    public static final String ASKING_COUNT_FOR_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String ASKING_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     public static final int PRICE_PER_SHEET = 1000;
 
 
     public static Integer inputMoney() {
         out.println(ASKING_MONEY);
         int money = scanner.nextInt();
-        out.println(money/ PRICE_PER_SHEET + "개를 구매했습니다.");
+        out.println(money / PRICE_PER_SHEET + "개를 구매했습니다.");
         return money;
     }
 
@@ -35,5 +39,19 @@ public class InputView {
     public static int inputBonusNumber() {
         out.println(ASKING_BONUS_NUMBER);
         return scanner.nextInt();
+    }
+
+    public static Integer inputManualCount() {
+        out.println(ASKING_COUNT_FOR_MANUAL);
+        int manualCount = scanner.nextInt();
+        out.println(ASKING_MANUAL_NUMBERS);
+        return manualCount;
+    }
+
+    public static List<Integer> inputManualLottoNumber() {
+        String next = scanner.next();
+        return Arrays.stream(next.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }

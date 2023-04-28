@@ -16,14 +16,23 @@ public class LottoBundle {
         return lottos;
     }
 
-    public static LottoBundle createByMoney(Integer money) {
-        int trial = money / PRICE_PER_SHEET;
-
+    public static LottoBundle createByMoney(Integer money, List<Lotto> manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < trial; i++) {
+        int trial = money / PRICE_PER_SHEET;
+        int manualTrial = manualLottos.size();
+        if (manualTrial > trial) {
+            String message = "%d원으로는 %d장을 구매할 수 없습니다.";
+            throw new RuntimeException(String.format(message, money, manualTrial));
+        }
+        int autoTrial = trial - manualTrial;
+
+        for (int i = 0; i < autoTrial; i++) {
             Lotto lotto = Lotto.autoGenerate();
             lottos.add(lotto);
+        }
+        for (int i = 0; i < manualTrial; i++) {
+            lottos.add(manualLottos.get(i));
         }
 
         return new LottoBundle(lottos);
