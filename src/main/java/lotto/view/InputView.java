@@ -61,6 +61,21 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
+    public static int inputAndValidateBonusNumbers(List<Integer> winningNumbers) {
+        System.out.println("보너스 볼을 입력해 주세요. ex) 1");
+
+        int bonusNumber = SCANNER.nextInt();
+        validateBonusNumber(winningNumbers, bonusNumber);
+
+        return bonusNumber;
+    }
+
+    public static void validateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼이 당첨번호에 포함되어 있습니다.");
+        }
+    }
+
     private static boolean isSixNumber(String inputWinningNumbers) {
         String[] numbers = inputWinningNumbers.split(COMMA_SPACE);
 
