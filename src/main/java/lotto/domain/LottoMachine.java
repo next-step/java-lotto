@@ -18,7 +18,7 @@ public class LottoMachine {
     public LottoBundle makeLottos(Amount amount, List<String> manualNumbers) {
         checkLottoQuantity(amount.calculateUnitCount(LOTTO_PRICE), manualNumbers.size());
 
-        return new LottoBundle(manualNumbers, amount.calculateUnitCount(LOTTO_PRICE));
+        return new LottoBundle(manualNumbers, amount.calculateUnitCount(LOTTO_PRICE) - manualNumbers.size());
     }
 
     private void checkLottoQuantity(int totalCount, int manualCount) {

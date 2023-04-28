@@ -16,7 +16,7 @@ public class LottoGame {
 
         final LottoBundle lottoBundle = lottoMachine.makeLottos(amount, InputView.manualLotto());
 
-        OutputView.printLottoCount(lottoMachine.calculateUnitCount(amount));
+        OutputView.printLottoCount(lottoBundle);
         OutputView.printLottoNumber(lottoBundle);
 
         final WinningBall winningBall = lottoMachine.winningBall(InputView.winningNumbers(), InputView.bonusBall());

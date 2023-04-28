@@ -42,6 +42,16 @@ public class LottoMachineTest {
     }
 
     @Test
+    @DisplayName("수동로또 구입")
+    void makeLottosAutoWithManual() {
+        final Amount amount = new Amount(1000);
+
+        assertThat(lottoMachine.makeLottos(amount, List.of("1,2,3,4,5,6")))
+                .isInstanceOf(LottoBundle.class)
+                .isEqualTo(new LottoBundle(List.of("1,2,3,4,5,6"), 0));
+    }
+
+    @Test
     @DisplayName("입력받은 금액으로 살 수 있는 로또보다 더 많은 수동 로또를 살 경우 예외 발생")
     void makeLottosAlot() {
         final Amount amount = new Amount(1000);
