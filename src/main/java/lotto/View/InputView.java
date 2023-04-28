@@ -1,6 +1,7 @@
 package lotto.View;
 
 import lotto.Model.Count;
+import lotto.Model.TicketNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +32,14 @@ public class InputView {
             winnerNumber.add(Integer.parseInt(winner.trim()));
         }
 
-        if (winnerNumber.size() != 6) {
-            System.out.println("당첨 번호는 6개여야 합니다.");
+        TicketNumber winnerTicket;
+        try {
+            winnerTicket = new TicketNumber(winnerNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return winnerNumber();
         }
 
-        return winnerNumber;
+        return winnerTicket.numbers();
     }
 }

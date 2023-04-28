@@ -28,13 +28,13 @@ public class TicketNumber {
     }
 
     private boolean containNotValidNumber(List<Integer> numbers) {
-        for (Integer number : numbers) {
-            if (number < MIN_NUMBER || number > MAX_NUMBER) {
-                return true;
-            }
+        Collections.sort(numbers);
+
+        if (numbers.get(0) < MIN_NUMBER) {
+            return true;
         }
 
-        return false;
+        return numbers.get(numbers.size() - 1) > MAX_NUMBER;
     }
 
     public List<Integer> numbers() {

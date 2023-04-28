@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Game {
+    private static final int WINNER_MATCH_COUNT_MIN = 3;
+    private static final int WINNER_MATCH_COUNT_MAX = 6;
     private final List<Ticket> tickets = new ArrayList<>();
 
     public Game(int countOfTicket) {
@@ -28,10 +30,10 @@ public class Game {
     }
 
     public HashMap<Integer, Integer> calculateResult(List<Integer> winnerNumber) {
-        HashMap<Integer, Integer> result = new HashMap<>() {{
-            for (int i = 3; i <= 6; i++) put(i, 0);
-
-        }};
+        HashMap<Integer, Integer> result = new HashMap<>();
+        for (int i = WINNER_MATCH_COUNT_MIN; i <= WINNER_MATCH_COUNT_MAX; i++) {
+            result.put(i, 0);
+        }
 
         for (Ticket ticket : tickets) {
             int count = countMatches(ticket, winnerNumber);
@@ -45,11 +47,16 @@ public class Game {
         int count = 0;
         TicketNumber ticketNumber = ticket.numbers();
         for (Integer number : ticketNumber.numbers()) {
-            if (winnerNumber.contains(number)) {
-                count++;
-            }
+            count += addIfMatch(winnerNumber, number);
         }
         return count;
+    }
+
+    private int addIfMatch(List<Integer> numbers, int number){
+        if(numbers.contains(number)){
+            return 1;
+        }
+        return 0;
     }
 
 }
