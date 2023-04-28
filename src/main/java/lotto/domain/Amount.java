@@ -7,15 +7,15 @@ public class Amount {
     private final int amount;
 
     private Amount(int amount) {
+        isGreaterThanZero(amount);
         this.amount = amount;
     }
 
     public static Amount from(int amount) {
-        isGreaterThanZero(amount);
         return new Amount(amount);
     }
 
-    private static void isGreaterThanZero(int amount) {
+    private void isGreaterThanZero(int amount) {
         if (amount < MINIMUM_AMOUNT) {
             throw new IllegalArgumentException("0 이상 수를 입력해주세요");
         }
