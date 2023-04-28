@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +42,6 @@ public class LottoResult {
     }
 
     public Map<LottoPrize, Integer> getMatchesResult() {
-        return Collections.unmodifiableMap(matchesResult);
+        return new LinkedHashMap<>(matchesResult);
     }
 }
