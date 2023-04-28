@@ -2,11 +2,11 @@ package lotto.domain;
 
 public class Money {
 
-    private static final Integer LOTTO_UNIT_PRICE = 1_000;
+    private static final int LOTTO_UNIT_PRICE = 1_000;
 
-    private final Integer price;
+    private final int price;
 
-    private Money(Integer price) {
+    private Money(int price) {
         if (isNegativeNumberOrZero(price)) {
             throw new IllegalArgumentException("1000원 이상 입력해주세요.");
         }
@@ -29,11 +29,11 @@ public class Money {
         return price;
     }
 
-    public boolean isOverTotalQuantity(Integer amount) {
+    public boolean isOverTotalQuantity(int amount) {
         return amount > getLottoQuantity();
     }
 
-    public Integer getAutoLottoAmount(Integer amount) {
+    public int getAutoLottoAmount(int amount) {
         return getLottoQuantity() - amount;
     }
 }

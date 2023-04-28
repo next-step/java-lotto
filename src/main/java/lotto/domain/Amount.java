@@ -2,20 +2,20 @@ package lotto.domain;
 
 public class Amount {
 
-    private static final Integer MINIMUM_AMOUNT = 0;
+    private static final int MINIMUM_AMOUNT = 0;
 
-    private final Integer amount;
+    private final int amount;
 
-    private Amount(Integer amount) {
+    private Amount(int amount) {
         this.amount = amount;
     }
 
-    public static Amount from(Integer amount) {
+    public static Amount from(int amount) {
         isGreaterThanZero(amount);
         return new Amount(amount);
     }
 
-    private static void isGreaterThanZero(Integer amount) {
+    private static void isGreaterThanZero(int amount) {
         if (amount < MINIMUM_AMOUNT) {
             throw new IllegalArgumentException("0 이상 수를 입력해주세요");
         }
@@ -32,7 +32,7 @@ public class Amount {
         }
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 }
