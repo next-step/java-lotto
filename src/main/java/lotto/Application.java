@@ -28,7 +28,9 @@ public class Application {
         LottoGenerator generator = new LottoGenerator();
         Lottos autos = generator.generate(price - manuals.price());
 
-        Printable lottosOutput = new LottosOutput(lottoDtos);
+        LottosDto manualDtos = LottosDto.from(manuals);
+        LottosDto autoDtos = LottosDto.from(autos);
+        Printable lottosOutput = new LottosOutput(manualDtos, autoDtos);
         lottosOutput.print();
 
         LottoInput lottoAnswer = new LottoInput(new LottoAnswerView());
@@ -37,7 +39,8 @@ public class Application {
         Number bonus = lottoBonus.getValue();
 
         LottoPlaceCounter counter = new LottoPlaceCounter(answer, bonus);
-        counter.countAll(lottos);
+        counter.countAll(manuals);
+        counter.countAll(autos);
 
         LottoRewardStatistics statistics = new LottoRewardStatistics(counter);
 

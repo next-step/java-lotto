@@ -1,22 +1,21 @@
 package lotto.control.output;
 
-import lotto.model.dto.LottoDto;
+import lotto.model.dto.LottosDto;
 import lotto.view.View;
 import lotto.view.result.LottosView;
 
-import java.util.List;
-
 public class LottosOutput implements Printable {
+    private final LottosDto manuals;
+    private final LottosDto autos;
 
-    private final List<LottoDto> lottos;
-
-    public LottosOutput(List<LottoDto> lottos) {
-        this.lottos = lottos;
+    public LottosOutput(LottosDto manuals, LottosDto autos) {
+        this.manuals = manuals;
+        this.autos = autos;
     }
 
     @Override
     public void print() {
-        View view = new LottosView(lottos);
+        View view = new LottosView(manuals, autos);
         view.render();
     }
 }
