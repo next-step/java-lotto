@@ -15,7 +15,7 @@ public class IssuerTest {
         issuerFixture = new Issuer();
     }
 
-    @DisplayName("발급수량만큼 응모권이 발행된다")
+    @DisplayName("수량만큼 Ticket 이 발행된다")
     @Test
     public void issue() {
         //given
@@ -26,10 +26,9 @@ public class IssuerTest {
         assertThat(issuerFixture.issuedTickets()).hasSize(input);
     }
 
-
-    @DisplayName("Winners 클래스를 생성한다")
+    @DisplayName("Statics 클래스를 생성한다")
     @Test
-    public void makeWinner() {
+    public void makeStatics() {
         //given
         //when
         issuerFixture.issueTickets(10);
