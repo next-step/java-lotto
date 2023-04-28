@@ -9,8 +9,7 @@ import java.util.Set;
 
 public class ResultView {
 
-    private static final int PROFIT_BASIS = 1;
-    private static final int INIT_VALUE = 0;
+    private static final int BRAKE_EVEN_POINT = 1;
 
     public static void printPurchasePriceInputCommand() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -31,7 +30,7 @@ public class ResultView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printWinningStatics(LottoRewards lottoRewards, double totalProfitRate) {
+    public static void printWinningStatics(LottoRewards lottoRewards, long purchasePrice) {
         printNewLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -44,14 +43,19 @@ public class ResultView {
                 System.out.println(phrase + "- 0개");
                 continue;
             }
-
             System.out.println(phrase + "- " + lottoReward.count() + "개");
         }
 
+        double totalProfitRate = (double) lottoRewards.totalProfit() / purchasePrice;
         System.out.print("총 수익률은 " + String.format("%.2f", totalProfitRate) + "입니다.");
-        if (totalProfitRate < PROFIT_BASIS) {
-            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+
+        if (totalProfitRate < BRAKE_EVEN_POINT) {
+            printBrakeEvenPointMessage(totalProfitRate);
         }
+    }
+
+    private static void printBrakeEvenPointMessage(double totalProfitRate) {
+        System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
     private static void printNewLine() {

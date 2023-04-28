@@ -23,8 +23,7 @@ public class Main {
         LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.inputWinningLottoNumbers());
 
         LottoRewards lottoRewards = Lotto.reward(lottoNumbersSet, winningLottoNumbers);
-        double totalProfitRate = Lotto.totalProfitRate(lottoNumbersSet, winningLottoNumbers);
-        ResultView.printWinningStatics(lottoRewards, totalProfitRate);
+        ResultView.printWinningStatics(lottoRewards, purchasePrice);
 
         inputView.close();
     }

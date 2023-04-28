@@ -59,10 +59,14 @@ public class LottoRewards {
         return null;
     }
 
-    @Override
-    public String toString() {
-        return "LottoRewards{" +
-                "rewards=" + rewards +
-                '}';
+    public long totalProfit() {
+        long totalProfit = 0l;
+
+        for (LottoReward reward : rewards) {
+            totalProfit += reward.count() * reward.rewardType().reward();
+        }
+
+        return totalProfit;
     }
+
 }

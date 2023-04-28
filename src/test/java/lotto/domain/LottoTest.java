@@ -55,17 +55,17 @@ public class LottoTest {
     }
 
     @Test
-    void 총_수익률_계산() {
+    void 총_수익_계산() {
         //given
         Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
         lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
         lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
 
         //when
-        double totalProfit = Lotto.totalProfitRate(lottoNumbersSet, winningLottoNumbers);
+        LottoRewards reward = Lotto.reward(lottoNumbersSet, winningLottoNumbers);
 
         //then
-        assertThat(totalProfit).isEqualTo(5);
+        assertThat(reward.totalProfit()).isEqualTo(5000L);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class LottoTest {
         lottoNumbersSet.addAll(Collections.singleton(winningLottoNumbers));
 
         //when
-        LottoRewards lottoRewards = Lotto.matchCounts(lottoNumbersSet, winningLottoNumbers);
+        LottoRewards lottoRewards = Lotto.reward(lottoNumbersSet, winningLottoNumbers);
 
         //then
         assertThat(lottoRewards.get(RewardType.THREE).count()).isEqualTo(1);
