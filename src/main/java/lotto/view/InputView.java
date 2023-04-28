@@ -21,11 +21,4 @@ public class InputView {
     public int getMoney() {
         return this.money;
     }
-
-    public void getAllNumbers() {
-        System.out.println("로또 숫자는 다음과 같습니다.");
-        for (int number : LottoInfo.NUMBERS) {
-            System.out.printf("%d ", number);
-        }
-    }
 }

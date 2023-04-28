@@ -1,11 +1,13 @@
 package lotto.domain;
 
-public class Money {
+public class Purchase {
     private final int money;
+    private final int count;
 
-    public Money(int inputMoney) {
+    public Purchase(int inputMoney) {
         validateMoney(inputMoney);
         this.money = inputMoney;
+        this.count = inputMoney / LottoInfo.PRICE;
     }
 
     private void validateMoney(int inputMoney) {
@@ -16,5 +18,9 @@ public class Money {
 
     public int getAmount() {
         return money;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

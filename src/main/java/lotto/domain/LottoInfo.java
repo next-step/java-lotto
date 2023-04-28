@@ -5,11 +5,11 @@ import java.util.List;
 
 public class LottoInfo {
     public static final int PRICE = 1000;
-    public static final List<Integer> NUMBERS = new ArrayList<>();
+    public static final List<Integer> NUMBER_RANGE = new ArrayList<>();
 
     static {
         for (int i = 1; i <= 45; i++) {
-            NUMBERS.add(i);
+            NUMBER_RANGE.add(i);
         }
     }
 }
