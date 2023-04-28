@@ -10,8 +10,6 @@ public class Lotto {
     private static final int LOTTO_PRICE = 1000;
     private static final int BEGIN_INDEX = 0;
     private static final String SEPARATOR = ", ";
-    private static final int MATCH_COUNT_MIN = 3;
-    private static final int MATCH_COUNT_MAX = 6;
     private static final int BEGIN_MATCH_COUNT = 1;
 
     public static long reward(int matchCount) {
@@ -45,29 +43,24 @@ public class Lotto {
         long totalReward = 0l;
 
         for (LottoNumbers lottoNumbers : lottoNumbersSet) {
-            if (isNotMatchCount(lottoNumbers, winningLottoNumbers)) {
+            if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers)) {
                 continue;
             }
 
-            totalReward += MatchType.of(lottoNumbers.countNumberOfMatch(winningLottoNumbers)).reward();
+            totalReward += MatchType.of(lottoNumbers.matchCount(winningLottoNumbers)).reward();
         }
         return totalReward / (double) purchasePrice;
-    }
-
-    private static boolean isNotMatchCount(LottoNumbers lottoNumbers, LottoNumbers winningLottoNumbers) {
-        return lottoNumbers.countNumberOfMatch(winningLottoNumbers) < MATCH_COUNT_MIN
-                || lottoNumbers.countNumberOfMatch(winningLottoNumbers) > MATCH_COUNT_MAX;
     }
 
     public static Map<Integer, Integer> matchCounts(Set<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
         Map<Integer, Integer> matchCounts = new HashMap<>();
 
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            if (isNotMatchCount(lottoNumbers, winningLottoNumbers)) {
+            if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers)) {
                 continue;
             }
 
-            int matchCount = lottoNumbers.countNumberOfMatch(winningLottoNumbers);
+            int matchCount = lottoNumbers.matchCount(winningLottoNumbers);
             if (!matchCounts.containsKey(matchCount)) {
                 matchCounts.put(matchCount, BEGIN_MATCH_COUNT);
                 continue;

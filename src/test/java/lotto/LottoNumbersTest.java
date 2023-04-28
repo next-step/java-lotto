@@ -48,7 +48,7 @@ public class LottoNumbersTest {
 
     @Test
     void 로또_번호와_당첨_번호_일치_개수_계산() {
-        assertThat(myLottoNumbers.countNumberOfMatch(winningLottoNumbers))
+        assertThat(myLottoNumbers.matchCount(winningLottoNumbers))
                 .isEqualTo(3);
     }
 }

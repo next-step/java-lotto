@@ -12,6 +12,8 @@ public class LottoNumbers {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int BEGIN_INDEX = 0;
+    private static final int MATCH_COUNT_MIN = 3;
+    private static final int MATCH_COUNT_MAX = 6;
 
     private final Set<LottoNumber> numbers;
 
@@ -36,7 +38,11 @@ public class LottoNumbers {
         return numbers;
     }
 
-    public int countNumberOfMatch(LottoNumbers numbers) {
+    boolean isNotWinningMatchCountWith(LottoNumbers numbers) {
+        return matchCount(numbers) < MATCH_COUNT_MIN || matchCount(numbers) > MATCH_COUNT_MAX;
+    }
+
+    public int matchCount(LottoNumbers numbers) {
         List<LottoNumber> matchNumbers = this.numbers.stream()
                 .filter(m -> numbers.value().stream()
                         .anyMatch(Predicate.isEqual(m))).collect(Collectors.toList());
