@@ -51,7 +51,7 @@ public class ResultView {
         }
     }
 
-    public static void printNewLine() {
+    private static void printNewLine() {
         System.out.println();
     }
 }
