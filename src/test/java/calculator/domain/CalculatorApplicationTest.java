@@ -22,10 +22,34 @@ class CalculatorApplicationTest {
 
     @Test
     @DisplayName("더하기 연산 수행시 정상 결과값을 반환한다.")
-    void doubleNumberTest() {
+    void plusTest() {
         Queue<Integer> numbers = new LinkedList<>(Arrays.asList(10,20));
         Queue<String> operators = new LinkedList<>(Arrays.asList("+"));
         assertThat(calculate(numbers, operators)).isEqualTo(30);
+    }
+
+    @Test
+    @DisplayName("빼기 연산 수행시 정상 결과값을 반환한다.")
+    void minusTest() {
+        Queue<Integer> numbers = new LinkedList<>(Arrays.asList(10,20));
+        Queue<String> operators = new LinkedList<>(Arrays.asList("-"));
+        assertThat(calculate(numbers, operators)).isEqualTo(-10);
+    }
+
+    @Test
+    @DisplayName("나누기 연산 수행시 정상 결과값을 반환한다.")
+    void divideTest() {
+        Queue<Integer> numbers = new LinkedList<>(Arrays.asList(13,7));
+        Queue<String> operators = new LinkedList<>(Arrays.asList("/"));
+        assertThat(calculate(numbers, operators)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("곱하기 연산 수행시 정상 결과값을 반환한다.")
+    void multiplyTest() {
+        Queue<Integer> numbers = new LinkedList<>(Arrays.asList(13,7));
+        Queue<String> operators = new LinkedList<>(Arrays.asList("*"));
+        assertThat(calculate(numbers, operators)).isEqualTo(91);
     }
 
     @Test
