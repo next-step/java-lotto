@@ -9,27 +9,21 @@ public class Lotto {
 	public static final int MINIMUM_BOUND = 1;
 	public static final int MAXIMUM_BOUND = 45;
 
-	private final SelectedNumbers selectedNumbers;
+	private final LottoNumbers lottoNumbers;
 	private final Score score;
 
 	public Lotto() {
-		this.selectedNumbers = new SelectedNumbers();
-		this.score = new Score(0);
+		this(0);
 	}
 
 	public Lotto(int score) {
-		this.selectedNumbers = new SelectedNumbers();
+		this.lottoNumbers = new LottoNumbers();
 		this.score = new Score(score);
 	}
 
-	public void selectLottoNumbers(int lottoNumber) {
-		if (this.selectedNumbers.contains(lottoNumber) == false) {
-			this.selectedNumbers.add(lottoNumber);
-		}
-	}
-
-	public int selectedNumbersSize() {
-		return this.selectedNumbers.size();
+	public Lotto(List<Integer> lottoNumbers) {
+		this.lottoNumbers = new LottoNumbers(lottoNumbers);
+		this.score = new Score(0);
 	}
 
 	public Score calculateScore(List<Integer> winNumbers) {
@@ -44,12 +38,12 @@ public class Lotto {
 	}
 
 	private void plusScore(Integer winNumber) {
-		if (selectedNumbers.contains(winNumber)) {
+		if (lottoNumbers.contains(winNumber)) {
 			this.score.plus();
 		}
 	}
 
-	public SelectedNumbers getSelectedNumbers() {
-		return selectedNumbers;
+	public LottoNumbers getLottoNumbers() {
+		return this.lottoNumbers;
 	}
 }

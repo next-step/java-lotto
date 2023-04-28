@@ -13,7 +13,7 @@ public class LottoMain {
 		long purchaseAmount = InputView.inputPurchaseAmount();
 		LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
 		ResultView.printPurchasedCount(lottoMachine.purchasedCount());
-		ResultView.printCurrentSituation(lottoMachine.selectLottoNumbers());
+		ResultView.printCurrentSituation(lottoMachine.getPurchasedLottos());
 
 		lottoMachine.calculateScore(InputView.inputWinNumbers());
 		List<PrizeSituation> prizeSituations = lottoMachine.makePrizeSituations();

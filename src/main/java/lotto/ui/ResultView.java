@@ -14,7 +14,7 @@ public class ResultView {
 
 	public static void printCurrentSituation(PurchasedLottos purchasedLottos) {
 		for (Lotto lotto : purchasedLottos.getLottos()) {
-			System.out.println(lotto.getSelectedNumbers());
+			System.out.println(lotto.getLottoNumbers());
 		}
 	}
 

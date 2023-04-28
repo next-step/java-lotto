@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import lotto.utils.RandomUtils;
-
 public class LottoMachine {
 
 	private static final int BREAK_EVEN_POINT = 1;
@@ -34,19 +32,6 @@ public class LottoMachine {
 
 	public LottoMachine(List<Lotto> purchasedLottos) {
 		this.purchasedLottos = new PurchasedLottos(purchasedLottos);
-	}
-
-	public PurchasedLottos selectLottoNumbers() {
-		for (Lotto lotto : this.purchasedLottos.getLottos()) {
-			this.fillEachLotto(lotto);
-		}
-		return this.purchasedLottos;
-	}
-
-	private void fillEachLotto(Lotto lotto) {
-		while (lotto.selectedNumbersSize() < Lotto.SIZE) {
-			lotto.selectLottoNumbers(RandomUtils.randomInt());
-		}
 	}
 
 	public int purchasedCount() {
@@ -107,5 +92,9 @@ public class LottoMachine {
 
 	public boolean isBenefit(double totalProfitRate) {
 		return totalProfitRate > LottoMachine.BREAK_EVEN_POINT;
+	}
+
+	public PurchasedLottos getPurchasedLottos() {
+		return purchasedLottos;
 	}
 }
