@@ -37,10 +37,8 @@ public class LottoNumbers {
     return numbers.size() != new HashSet<>(numbers).size();
   }
 
-  public int matchCount(LottoNumbers winningNumbers) {
-    return (int) numbers.stream()
-                        .filter(winningNumbers::contains)
-                        .count();
+  public MatchNumbersCount matchCount(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    return MatchNumbersCount.of(this, winningNumbers, bonusNumber);
   }
 
   public boolean contains(LottoNumber lottoNumber) {

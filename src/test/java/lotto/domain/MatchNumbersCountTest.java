@@ -26,6 +26,7 @@ class MatchNumbersCountTest {
             MATCH_3, 3,
             MATCH_4, 4,
             MATCH_5, 5,
+            MATCH_5_AND_BONUS, 5,
             MATCH_6, 6
         )
     );
@@ -47,6 +48,7 @@ class MatchNumbersCountTest {
             MATCH_3, new Money(5_000),
             MATCH_4, new Money(50_000),
             MATCH_5, new Money(1_500_000),
+            MATCH_5_AND_BONUS, new Money(30_000_000),
             MATCH_6, new Money(2_000_000_000)
         )
     );

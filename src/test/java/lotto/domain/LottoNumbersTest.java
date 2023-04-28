@@ -54,7 +54,7 @@ class LottoNumbersTest {
     LottoNumbers winningNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
                                                         .map(LottoNumber::new)
                                                         .collect(Collectors.toList()));
-    assertThat(lottoNumbers.matchCount(winningNumbers))
+    assertThat(lottoNumbers.matchCount(winningNumbers, new LottoNumber(7)))
         .isEqualTo(6);
   }
 }

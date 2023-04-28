@@ -30,8 +30,11 @@ public class LottoGame {
     return lottoTicket;
   }
 
-  public LottoStatistics getStatistics(LottoNumbers winningNumbers) {
-    return lottoTickets.getStatistics(winningNumbers);
+  public LottoStatistics getStatistics(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    if (winningNumbers.contains(bonusNumber)) {
+      throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+    }
+    return new LottoStatistics(lottoTickets, winningNumbers, bonusNumber);
   }
 
   public LottoTicketsDto getLottoTickets() {
