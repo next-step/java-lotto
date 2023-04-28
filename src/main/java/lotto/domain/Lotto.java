@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class Lotto {
@@ -11,9 +9,10 @@ public class Lotto {
     private static final int BEGIN_INDEX = 0;
     private static final String SEPARATOR = ", ";
     private static final int BEGIN_MATCH_COUNT = 1;
+    private static final int INIT_COUNT = 1;
 
     public static long reward(int matchCount) {
-        return RankType.of(matchCount).reward();
+        return RewardType.of(matchCount).reward();
     }
 
     public static long lottoCount(long price) {
@@ -47,28 +46,29 @@ public class Lotto {
                 continue;
             }
 
-            totalReward += RankType.of(lottoNumbers.matchCount(winningLottoNumbers)).reward();
+            totalReward += RewardType.of(lottoNumbers.matchCount(winningLottoNumbers)).reward();
         }
         return totalReward / (double) purchasePrice;
     }
 
-    public static Map<Integer, Integer> matchCounts(Set<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
-        Map<Integer, Integer> matchCounts = new HashMap<>();
+    public static LottoRewards matchCounts(Set<LottoNumbers> lottoNumbersSet, LottoNumbers winningLottoNumbers) {
+        LottoRewards lottoRewards = new LottoRewards();
 
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+        for (LottoNumbers lottoNumbers : lottoNumbersSet) {
             if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers)) {
                 continue;
             }
 
             int matchCount = lottoNumbers.matchCount(winningLottoNumbers);
-            if (!matchCounts.containsKey(matchCount)) {
-                matchCounts.put(matchCount, BEGIN_MATCH_COUNT);
+            RewardType rewardType = RewardType.of(matchCount);
+
+            if (lottoRewards.isNotContainRewardType(rewardType)) {
+                lottoRewards.add(new LottoReward(rewardType, INIT_COUNT));
                 continue;
             }
-            int countOfMatchCount = matchCounts.get(matchCount);
-            matchCounts.put(matchCount, countOfMatchCount + 1);
+            lottoRewards.increaseCountOf(rewardType);
         }
 
-        return matchCounts;
+        return lottoRewards;
     }
 }

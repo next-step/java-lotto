@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -77,10 +76,10 @@ public class LottoTest {
         lottoNumbersSet.addAll(Collections.singleton(winningLottoNumbers));
 
         //when
-        Map<Integer, Integer> map = Lotto.matchCounts(lottoNumbersSet, winningLottoNumbers);
+        LottoRewards lottoRewards = Lotto.matchCounts(lottoNumbersSet, winningLottoNumbers);
 
         //then
-        assertThat(map.get(3)).isEqualTo(1);
-        assertThat(map.get(6)).isEqualTo(1);
+        assertThat(lottoRewards.get(RewardType.THREE).count()).isEqualTo(1);
+        assertThat(lottoRewards.get(RewardType.SIX).count()).isEqualTo(1);
     }
 }

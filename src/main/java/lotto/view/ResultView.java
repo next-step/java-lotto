@@ -1,9 +1,10 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.RankType;
+import lotto.domain.LottoReward;
+import lotto.domain.LottoRewards;
+import lotto.domain.RewardType;
 
-import java.util.Map;
 import java.util.Set;
 
 public class ResultView {
@@ -30,19 +31,21 @@ public class ResultView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printWinningStatics(Map<Integer, Integer> matchCounts, double totalProfitRate) {
+    public static void printWinningStatics(LottoRewards lottoRewards, double totalProfitRate) {
         printNewLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (RankType mc : RankType.values()) {
+        for (RewardType mc : RewardType.values()) {
             String phrase = mc.phrase();
-            Integer matchCount = matchCounts.get(mc.matchCount());
+            LottoReward lottoReward = lottoRewards.get(mc);
 
-            if (matchCount == null) {
-                matchCount = INIT_VALUE;
+            if (lottoReward == null) {
+                System.out.println(phrase + "- 0개");
+                continue;
             }
-            System.out.println(phrase + "- " + matchCount + "개");
+
+            System.out.println(phrase + "- " + lottoReward.count() + "개");
         }
 
         System.out.print("총 수익률은 " + String.format("%.2f", totalProfitRate) + "입니다.");
