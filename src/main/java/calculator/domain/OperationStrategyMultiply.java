@@ -10,4 +10,9 @@ public class OperationStrategyMultiply implements OperationStrategy {
     public String toString() {
         return "*";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return toString().equals(obj.toString());
+    }
 }
