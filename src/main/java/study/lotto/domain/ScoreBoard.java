@@ -2,8 +2,8 @@ package study.lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static study.lotto.domain.ScoreType.*;
 
@@ -50,4 +50,17 @@ public class ScoreBoard {
     public BigDecimal getRatioOfReturn() {
         return getTotalReward().divide(inputMoney, 4, RoundingMode.CEILING);
     }
+
+    public List<Map.Entry<ScoreType, Integer>> getScoreMapForDisplay() {
+        return new ArrayList<>(scoreMap.entrySet())
+                .stream()
+                .filter(entry -> entry.getKey().canDisplay())
+                .sorted(comparingByRank().reversed())
+                .collect(Collectors.toList());
+    }
+
+    private static Comparator<Map.Entry<ScoreType, Integer>> comparingByRank() {
+        return Comparator.comparing(entry -> entry.getKey().getRank());
+    }
+
 }

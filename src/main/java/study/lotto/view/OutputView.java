@@ -47,30 +47,12 @@ public class OutputView {
     }
 
     public static void displayLottoScore(ScoreBoard scoreBoard) {
-        Map<ScoreType, Integer> scoreMap = scoreBoard.getScoreMap();
-
-        // 정렬
-        List<Map.Entry<ScoreType, Integer>> entryList = new ArrayList<>(scoreMap.entrySet())
-                .stream()
-                .filter(entry -> entry.getKey().canDisplay())
-                .sorted(Comparator.comparing(entry -> entry.getKey().getScore()))
-                .sorted(Comparator.comparing(entry -> entry.getKey().getReward()))
-                .collect(Collectors.toList());
-
-        for (Map.Entry<ScoreType, Integer> entry : entryList) {
-            displayScoreAndCount(entry.getKey(), entry.getValue());
-        }
+        scoreBoard.getScoreMapForDisplay()
+                .forEach(entry -> displayScoreAndCount(entry.getKey(), entry.getValue()));
     }
 
-    public static final void displayScoreAndCount(ScoreType scoreType, Integer count) {
-        String result = "";
-        if (scoreType == BONUS) {
-            result = scoreType.getScore() + "개 일치, 보너스 볼 일치 (" + scoreType.getReward() + ")- " + count + "개";
-            out.println(result);
-            return;
-        }
-        result = scoreType.getScore() + "개 일치 (" + scoreType.getReward() + ")- " + count + "개";
-        out.println(result);
+    private static void displayScoreAndCount(ScoreType scoreType, Integer count) {
+        out.println(scoreType.getStatus() + "- " + count + "개");
     }
 
     public static void displayRatio(BigDecimal ratio) {

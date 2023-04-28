@@ -1,6 +1,8 @@
 package study.lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -37,35 +39,20 @@ class ScoreBoardTest {
         assertThat(a.intValue()).isEqualTo(3);
     }
 
-    @Test
-    void 상금_계산() {
+    @ParameterizedTest
+    @CsvSource(value = {
+            "ONE, TWO, 0",
+            "ONE, SIX, 2_000_000_000",
+            "ONE, BONUS, 30_000_000",
+            "BONUS, SIX, 2_030_000_000",
+    })
+    void 상금_계산(ScoreType type1, ScoreType type2, Integer totalReward) {
         ScoreBoard scoreBoard = new ScoreBoard(10000);
         Map<ScoreType, Integer> scoreMap = scoreBoard.getScoreMap();
-
-        scoreBoard.addScore(THREE);
-        assertThat(scoreMap).containsEntry(THREE, 1);
-
-        scoreBoard.addScore(FOUR);
-        assertThat(scoreMap).containsEntry(THREE, 1);
-        assertThat(scoreMap).containsEntry(FOUR, 1);
-
-        scoreBoard.addScore(FIVE);
-        assertThat(scoreMap).containsEntry(THREE, 1);
-        assertThat(scoreMap).containsEntry(FOUR, 1);
-        assertThat(scoreMap).containsEntry(FIVE, 1);
-
-        scoreBoard.addScore(THREE);
-        assertThat(scoreMap).containsEntry(THREE, 2);
-        assertThat(scoreMap).containsEntry(FOUR, 1);
-        assertThat(scoreMap).containsEntry(FIVE, 1);
-
-        assertThat(scoreBoard.getTotalReward().intValue())
-                .isEqualTo(THREE.getReward() +
-                        THREE.getReward() +
-                        FOUR.getReward() +
-                        FIVE.getReward());
+        scoreBoard.addScore(type1);
+        scoreBoard.addScore(type2);
+        assertThat(scoreBoard.getTotalReward().intValue()).isEqualTo(totalReward);
     }
-
 
     @Test
     void 보너스_볼이_추가된다() {

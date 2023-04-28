@@ -1,6 +1,5 @@
 package study.lotto;
 
-import study.lotto.controller.LottoBundleMaker;
 import study.lotto.domain.*;
 import study.lotto.view.InputView;
 import study.lotto.view.OutputView;
@@ -13,8 +12,7 @@ public class LottoApplication {
         // 금액 입력
         Integer money = InputView.inputMoney();
 
-        List<Lotto> lottoList = LottoBundleMaker.createLottoList(money);
-        LottoBundle lottoBundle = LottoBundleMaker.createLottoBundle(lottoList);
+        LottoBundle lottoBundle = LottoBundle.createByMoney(money);
         ScoreBoard scoreBoard = new ScoreBoard(money);
 
         OutputView.displayLottoBundle(lottoBundle);
