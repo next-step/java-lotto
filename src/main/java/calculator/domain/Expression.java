@@ -44,11 +44,12 @@ public class Expression {
         return element.matches(NUMBERS_REGEX);
     }
 
-    public List<String> getOperations() {
+    public List<OperationStrategy> getOperations() {
         List<String> elements = split();
 
         return elements.stream()
                 .filter(element -> isOperation(element))
+                .map(element -> Operation.getOperationStrategy(element))
                 .collect(Collectors.toList());
     }
 

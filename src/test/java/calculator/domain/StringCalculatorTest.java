@@ -13,6 +13,6 @@ public class StringCalculatorTest {
         String input = "2 + 3 * 4 / 2";
         StringCalculator calculator = new StringCalculator(input);
 
-        assertThat(calculator.calculate()).isEqualTo(10);
+        assertThat(calculator.getResult()).isEqualTo(10);
     }
 }

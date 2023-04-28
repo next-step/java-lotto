@@ -62,7 +62,8 @@ public class ExpressionTest {
         @DisplayName("기호 테스트")
         void splitOperations() {
             String input = "2 + 3 * 4 / 2";
-            List<String> expected = Arrays.asList("+", "*", "/");
+            List<OperationStrategy> expected = Arrays.asList(new OperationStrategyAdd(),
+                    new OperationStrategyMultiply(), new OperationStrategySubtract());
 
             Expression expression = new Expression(input);
             assertThat(expression.getOperations()).containsExactlyElementsOf(expected);
