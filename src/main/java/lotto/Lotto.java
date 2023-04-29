@@ -19,6 +19,13 @@ public class Lotto {
         return Arrays.stream(lottoNumber.split(SPLIT_REGEX)).map(Integer::parseInt).collect(Collectors.toList());
     }
 
+    public int findMatchCount(String firstLottoNumber) {
+        List<Integer> numbers = split(firstLottoNumber);
+        return (int) numbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

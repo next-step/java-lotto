@@ -17,4 +17,11 @@ public class LottoTest {
         List<Integer> list = Arrays.asList(1, 2, 3, 41, 42, 43);
         assertThat(lotto.equals(list)).isTrue();
     }
+
+    @Test
+    @DisplayName("맞는 숫자가 몇개있는지 판별하는 메소드 테스트")
+    public void checkTest() {
+        Lotto lotto = new Lotto("1, 2, 3, 41, 42, 43");
+        assertThat(lotto.findMatchCount("1, 2, 3, 4, 5, 6")).isEqualTo(3);
+    }
 }
