@@ -38,49 +38,24 @@ public class LotteryWin {
     private void check(List<Integer> numbers) {
         int matchedCount = getMatchedCount(numbers);
 
-        if (isThree(matchedCount)) {
+        if (matchedCount == FOURTH) {
+            results.add(matchedCount);
             return;
         }
 
-        if (isFour(matchedCount)) {
+        if (matchedCount == THIRD) {
+            results.add(matchedCount);
             return;
         }
 
-        if (isFive(matchedCount)) {
+        if (matchedCount == SECOND) {
+            results.add(matchedCount);
             return;
         }
 
-        isPerfectMatch(matchedCount);
-    }
-
-    private void isPerfectMatch(int matchedCount) {
         if (matchedCount == FIRST) {
             results.add(matchedCount);
         }
-    }
-
-    private boolean isFive(int matchedCount) {
-        if (matchedCount == SECOND) {
-            results.add(matchedCount);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isFour(int matchedCount) {
-        if (matchedCount == THIRD) {
-            results.add(matchedCount);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isThree(int matchedCount) {
-        if (matchedCount == FOURTH) {
-            results.add(matchedCount);
-            return true;
-        }
-        return false;
     }
 
     private int getMatchedCount(List<Integer> numbers) {
