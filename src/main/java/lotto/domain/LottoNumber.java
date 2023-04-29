@@ -26,11 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int getNumber() {
         return number;
     }
-
-    public boolean isEqual(LottoNumber lottoNumber) {
-        return this.number == lottoNumber.getNumber();
-    }
-
+    
     @Override
     public int compareTo(LottoNumber o) {
         return this.number - o.number;
