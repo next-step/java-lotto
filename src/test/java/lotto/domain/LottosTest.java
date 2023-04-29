@@ -1,5 +1,6 @@
-package lotto;
+package lotto.domain;
 
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class LottosTest {
 
     @Test
     void 로또_여러_개의_목록을_얻을_수_있다() {
-        assertThat(new Lottos(lottoList).getLottoList().containsAll(lottoList)).isTrue();
+        AssertionsForClassTypes.assertThat(new Lottos(lottoList).getLottoList().containsAll(lottoList)).isTrue();
     }
 
     @Test

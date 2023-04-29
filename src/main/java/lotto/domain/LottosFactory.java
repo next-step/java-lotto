@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +25,6 @@ public class LottosFactory {
                 .collect(Collectors.toList());
         Collections.shuffle(numbers);
 
-        return new Lotto(numbers.subList(0, Lotto.LOTTO_NUMBER_SIZE));
+        return Lotto.from(numbers.subList(0, Lotto.LOTTO_NUMBER_SIZE));
     }
 }

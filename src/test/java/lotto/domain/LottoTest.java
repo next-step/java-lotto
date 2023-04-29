@@ -1,5 +1,6 @@
-package lotto;
+package lotto.domain;
 
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,17 +16,24 @@ public class LottoTest {
     @Test
     void 배열로_로또_객체를_만들_수_있다() {
         int[] numbers = {1, 2, 3, 4, 5, 6};
-        assertThat(new Lotto(numbers).getLottoNumbers()).containsExactly(numbers);
+        AssertionsForClassTypes.assertThat(new Lotto(numbers).getLottoNumbers()).containsExactly(numbers);
     }
 
     @Test
     void List로_로또_객체를_만들_수_있다() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        assertThat(new Lotto(numbers).getLottoNumbers())
+        assertThat(Lotto.from(numbers).getLottoNumbers())
                 .containsExactly(numbers.stream()
                         .mapToInt(it -> it)
                         .toArray()
                 );
+    }
+
+    @Test
+    void String으로_로또_객체를_만들_수_있다() {
+        String numbers = "1, 2, 3, 4, 5, 6";
+        assertThat(Lotto.from(numbers).getLottoNumbers())
+                .containsExactly(1, 2, 3, 4, 5, 6);
     }
 
     @Test
@@ -51,6 +59,11 @@ public class LottoTest {
     void 로또에_중복된_숫자가_있으면_오류가_발생한다() {
         assertThatThrownBy(() -> new Lotto(new int[]{1, 2, 3, 4, 5, 5}))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 이상한_문자열로_로또를_만들면_예외가_발생한다() {
+        assertThatThrownBy(() -> Lotto.from("1, 2, 3, 4, 5, a")).isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> getInputFor_로또_숫자의_범위가_1에서_45_사이가_아니면_오류가_발생한다() {
