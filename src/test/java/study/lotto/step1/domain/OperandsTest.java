@@ -3,7 +3,7 @@ package study.lotto.step1.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -15,7 +15,7 @@ class OperandsTest {
         // given
         Operand firstOperand = new Operand("3");
         Operand secondOperand = new Operand("4");
-        Operands operands = new Operands(new ArrayDeque<>(List.of(firstOperand, secondOperand)));
+        Operands operands = new Operands(new ArrayList<>(List.of(firstOperand, secondOperand)));
 
         // when
         Operand removedOperand = operands.removeFirst();
@@ -30,7 +30,7 @@ class OperandsTest {
     void add_first() {
         // given
         Operand firstOperand = new Operand("3");
-        Operands operands = new Operands(new ArrayDeque<>(List.of(firstOperand)));
+        Operands operands = new Operands(new ArrayList<>(List.of(firstOperand)));
 
         // when
         Operand addedOperand = new Operand("4");
