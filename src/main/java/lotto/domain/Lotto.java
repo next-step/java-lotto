@@ -8,11 +8,12 @@ public class Lotto {
 
     private LottoNumbers lottoNumbers;
 
-    public Lotto(final List<Integer> list) {
+    public Lotto(List<Integer> list) {
         this.lottoNumbers = new LottoNumbers(new HashSet<>(list));
     }
 
     public Set<Integer> getLottoNumbers() {
         return lottoNumbers.getLottoNumbers();
     }
+
 }

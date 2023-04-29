@@ -27,4 +27,5 @@ class LottoTest {
     void lotto_number_must_not_be_duplicated() {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(Arrays.asList(1,2,3,4,5,5)));
     }
+
 }

@@ -2,24 +2,22 @@ package lotto.domain;
 
 import java.util.Set;
 
+import static lotto.constants.Constants.MAX_NUMBER;
+import static lotto.constants.Constants.MIN_NUMBER;
+import static lotto.constants.Constants.REQUIRED_LOTTO_NUMBERS;
+
 public class LottoNumbers {
-
-    private static final int REQUIRED_NUMBERS = 6;
-
-    private static final int MIN_NUMBER = 1;
-
-    private static final int MAX_NUMBER = 45;
 
     private Set<Integer> lottoNumbers;
 
-    public LottoNumbers(final Set<Integer> lottoNumbers) {
+    public LottoNumbers(Set<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         validate();
     }
 
     private void validate() {
-        if (this.lottoNumbers.size() != REQUIRED_NUMBERS) {
-            throw new IllegalArgumentException("로또 번호는 서로 다른 " + REQUIRED_NUMBERS + " 개의 번호로 구성되어야 합니다.");
+        if (this.lottoNumbers.size() != REQUIRED_LOTTO_NUMBERS) {
+            throw new IllegalArgumentException("로또 번호는 서로 다른 " + REQUIRED_LOTTO_NUMBERS + " 개의 번호로 구성되어야 합니다.");
         }
 
         for (int number : this.lottoNumbers) {
@@ -36,4 +34,5 @@ public class LottoNumbers {
     public Set<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
+
 }
