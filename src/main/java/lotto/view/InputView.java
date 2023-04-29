@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
     private static final String DELIMITER = ",";
 
     public static int calculateLottoCount() {
@@ -28,5 +28,11 @@ public class InputView {
         return Arrays.stream(winningNumbers.split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public static int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        return SCANNER.nextInt();
     }
 }

@@ -5,15 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
 
     private final Map<LottoPrize, Integer> matchesResult = LottoPrize.makeLottoResult();
 
-    public LottoResult(List<Integer> matchesCounts) {
-        for (Integer matchesCount : matchesCounts) {
-            LottoPrize lottoPrize = LottoPrize.getWinningPrize(matchesCount);
-            makeLottoResult(lottoPrize);
-        }
+    public LottoResult(List<LottoPrize> winningPrize) {
+        winningPrize.forEach(this::makeLottoResult);
     }
 
     private void makeLottoResult(LottoPrize lottoPrize) {

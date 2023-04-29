@@ -1,6 +1,8 @@
 package lotto.domain;
 
 
+import java.util.List;
+
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_NUMBER_MINIMUM = 1;
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
@@ -10,6 +12,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public LottoNumber(int lottoNumber) {
         validateLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    public boolean matchesNumbers(List<Integer> winningNumbers) {
+        return winningNumbers.contains(lottoNumber);
     }
 
     public int getLottoNumber() {

@@ -8,7 +8,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -19,8 +18,9 @@ public class LottoApplication {
         ResultView.showLottoTickets(lottoTickets);
 
         List<Integer> winningNumbers = InputView.getWinningNumbers();
+        int bonusNumber = InputView.getBonusNumber();
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbers);
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber);
         LottoResult lottoResult = lottoGame.getLottoResult();
 
         ResultView.showLottoWinningResult(lottoResult);
