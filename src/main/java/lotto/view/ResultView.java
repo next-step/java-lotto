@@ -9,5 +9,10 @@ public class ResultView {
         for (Lotto lotto : lottos) {
             System.out.println(lotto);
         }
+        System.out.println();
+    }
+
+    public static void showlastWinLottoInfo(Lotto lastWinLottoInfo) {
+        System.out.printf("지난 주 당첨 번호 : %s\n",lastWinLottoInfo);
     }
 }

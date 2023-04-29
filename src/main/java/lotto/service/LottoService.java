@@ -14,18 +14,18 @@ public class LottoService {
         purchase = new Purchase(inputMoney);
     }
 
-    public void generate() {
+    public void autoGenerate() {
         for (int i = 0; i < purchase.count(); i++) {
-            generateOne();
+            autoGenerateOne();
         }
     }
 
-    private void generateOne() {
-        Lotto generatedLotto = new Lotto();
+    private void autoGenerateOne() {
+        Lotto generatedLotto = Lotto.auto();
         lottos.add(generatedLotto);
     }
 
-    public List<Lotto> getLottos(){
+    public List<Lotto> lottos(){
         return lottos;
     }
 }
