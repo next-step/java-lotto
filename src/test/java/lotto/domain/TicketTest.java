@@ -7,6 +7,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class TicketTest {
     @DisplayName("응모권마다 6개의 번호를 지정에 성공한다")
@@ -67,12 +68,14 @@ public class TicketTest {
         Ticket ticketA = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
         Ticket ticketB = new Ticket(Set.of(1, 2, 3, 4, 35, 36));
         //then
-        assertThat(ticketA.countMatchNumbers(ticketB))
-                .as("일치하는 Number 수를 검증한다")
-                .isEqualTo(expect);
-        assertThat(ticketB.countMatchNumbers(ticketA))
-                .as("순서가 바뀌어도 일치한다")
-                .isEqualTo(expect);
+        assertAll("숫자 4개가 겹치는 두 티켓으로 검증한다",
+                () -> assertThat(ticketA.countMatchNumbers(ticketB))
+                        .as("일치하는 Number 수를 검증한다")
+                        .isEqualTo(expect),
+                () -> assertThat(ticketB.countMatchNumbers(ticketA))
+                        .as("순서가 바뀌어도 일치한다")
+                        .isEqualTo(expect)
+        );
     }
 
     @DisplayName("당첨권 생성 기능을 검증한다")
