@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AutomaticStrategy implements LottoStrategy {
     @Override
-    public List<LottoNumber> lottoNumbers() {
+    public List<LottoNumber> makeLottos() {
         final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         final List<Integer> copy = new ArrayList<>(LOTTO_NUMBER_LIST);
@@ -23,4 +23,5 @@ public class AutomaticStrategy implements LottoStrategy {
 
         return lottoNumbers;
     }
+
 }

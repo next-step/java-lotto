@@ -8,7 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoMachineTest {
     final LottoStrategy testStrategy = new TestStrategy();
@@ -34,8 +37,27 @@ public class LottoMachineTest {
     void makeLottos() {
         final Amount amount = new Amount(10000);
 
-        assertThat(lottoMachine.makeLottos(amount, testStrategy))
-                .isInstanceOf(Lottos.class);
+        assertThat(lottoMachine.makeLottos(amount, List.of()))
+                .isInstanceOf(LottoBundle.class);
+    }
+
+    @Test
+    @DisplayName("수동로또 구입")
+    void makeLottosAutoWithManual() {
+        final Amount amount = new Amount(1000);
+
+        assertThat(lottoMachine.makeLottos(amount, List.of("1,2,3,4,5,6")))
+                .isInstanceOf(LottoBundle.class)
+                .isEqualTo(new LottoBundle(List.of("1,2,3,4,5,6"), 0));
+    }
+
+    @Test
+    @DisplayName("입력받은 금액으로 살 수 있는 로또보다 더 많은 수동 로또를 살 경우 예외 발생")
+    void makeLottosAlot() {
+        final Amount amount = new Amount(1000);
+
+        assertThatThrownBy(() -> lottoMachine.makeLottos(amount, List.of("1,2,3,4,5,6", "10,11,12,13,14,15,16")))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -49,9 +71,9 @@ public class LottoMachineTest {
     @Test
     @DisplayName("당첨 통계 확인")
     void winnerStat() {
-        final Lottos lottos = new Lottos(10, testStrategy);
+        final LottoBundle lottoBundle = new LottoBundle(List.of(), 10);
 
-        assertThat(this.lottoMachine.winningStat(lottos, lottoMachine.winningBall("1,2,3,4,5,6", 10)))
+        assertThat(this.lottoMachine.winningStat(lottoBundle, lottoMachine.winningBall("1,2,3,4,5,6", 10)))
                 .isInstanceOf(WinningStat.class);
     }
 }

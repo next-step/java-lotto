@@ -3,13 +3,17 @@ package lotto.domain;
 import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.winning.WinningBall;
 import lotto.domain.winning.WinningStat;
-import lotto.dto.LottoNumbersDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Lottos {
     private final List<Lotto> lottos;
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
 
     public Lottos(int unitCount, LottoStrategy lottoStrategy) {
         final List<Lotto> lottoList = new ArrayList<>();
@@ -21,23 +25,46 @@ public class Lottos {
         this.lottos = lottoList;
     }
 
-    public WinningStat rating(WinningBall winningBall) {
-        final WinningStat winningStat = new WinningStat();
+    public static Lottos manualLottos(List<String> manualNumbers) {
+        final List<Lotto> lottos = new ArrayList<>();
 
+        for (String manualNumber : manualNumbers) {
+            lottos.add(Lotto.manualLotto(manualNumber));
+        }
+
+        return new Lottos(lottos);
+    }
+
+    public void rating(WinningStat winningStat, WinningBall winningBall) {
         for (Lotto lotto : this.lottos) {
             winningStat.judgeWinning(lotto, winningBall);
         }
-
-        return winningStat;
     }
 
-    public LottoNumbersDto lottoNumbersDto() {
-        final LottoNumbersDto lottoNumbersDto = new LottoNumbersDto();
+    public List<List<Integer>> lottoNumberList() {
+        final List<List<Integer>> lottoNumberList = new ArrayList<>();
 
         for (Lotto lotto : this.lottos) {
-            lottoNumbersDto.setLottoNumber(lotto.getIntegerLottoNumbers());
+            lottoNumberList.add(lotto.getIntegerLottoNumbers());
         }
 
-        return lottoNumbersDto;
+        return lottoNumberList;
+    }
+
+    public int size() {
+        return this.lottos.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }

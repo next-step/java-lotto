@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.rating.WinningRatingType;
 import lotto.domain.strategy.LottoStrategy;
 import lotto.domain.strategy.TestStrategy;
 import lotto.domain.winning.WinningBall;
@@ -29,7 +30,12 @@ public class LottosTest {
         final int unitCount = 6;
         final Lotto winningLotto = Lotto.winningLotto("1,2,3,4,5,6");
         final LottoNumber bonusBall = new LottoNumber(8);
-        assertThat(new Lottos(unitCount, testStrategy).rating(new WinningBall(winningLotto, bonusBall)))
-                .isInstanceOf(WinningStat.class);
+        final WinningStat winningStat = new WinningStat();
+
+        new Lottos(unitCount, testStrategy).rating(winningStat, new WinningBall(winningLotto, bonusBall));
+
+        assertThat(winningStat.getWinningCount(WinningRatingType.FIRST))
+                .isEqualTo(unitCount);
+
     }
 }

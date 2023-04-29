@@ -2,20 +2,23 @@ package lotto.domain;
 
 import lotto.domain.strategy.LottoStrategy;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
+    private final static int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(LottoStrategy lottoStrategy) {
-        this.lottoNumbers = lottoStrategy.lottoNumbers();
+        this.lottoNumbers = lottoStrategy.makeLottos();
+    }
+
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoNumbers(String numbers) {
-        if (numbers == null) {
+        if (numbers == null || numbers.isBlank()) {
             throw new IllegalArgumentException("빈 값은 올 수 없습니다.");
         }
 
@@ -61,7 +64,9 @@ public class LottoNumbers {
     }
 
     private void checkSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.size() != 6) {
+        final Set<LottoNumber> set = new HashSet<>(lottoNumbers);
+
+        if (set.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6자리입니다.");
         }
     }

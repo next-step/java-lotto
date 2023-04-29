@@ -20,7 +20,7 @@ public class AutomaticStrategyTest {
     void lottoNumbers() {
         final LottoStrategy lottoStrategy = new AutomaticStrategy();
 
-        assertThat(lottoStrategy.lottoNumbers())
+        assertThat(lottoStrategy.makeLottos())
                 .hasSize(6);
     }
 }

@@ -63,6 +63,24 @@ public class LottoNumbersTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("빈 값이 올 경우 exception 반환")
+    void checkBlank() {
+        final String args = "";
+
+        assertThatThrownBy(() -> LottoNumbers.winningNumbers(args))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("중복된 값이 들어와서 6자리가 안 될 경우 exception 반환")
+    void checkDuplicate() {
+        final String args = "1,1,1,2,3,4";
+
+        assertThatThrownBy(() -> LottoNumbers.winningNumbers(args))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest(name = "로또 번호가 몇 개 맞는지 통계확인 테스트")
     @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4", "1,2,3,7,8,9:3", "1,2,7,8,9,11:2", "1,7,8,9,10,11:1", "7,8,9,10,11,12:0"}, delimiter = ':')
     void statCount(String target, int result) {
