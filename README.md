@@ -7,3 +7,14 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+---
+
+# 1단계 - 문자열 계산기
+## 기능 목록
+- [x] 입력 값이 null이거나 빈 공백 문자일 경우, IllegalArgumentException throw
+- [x] 사칙연산 기호가 아닌 경우, IllegalArgumentException throw
+- [x] 피연산자를 시작으로 연산자와 피연산자가 번갈아 입력되어야 하고, 마지막은 피연산자로 끝나야 한다.
+- [x] 피연산자의 갯수는 연산자의 갯수보다 하나 많다.
+- [x] 나눗셈의 경우, 결과 값을 정수로 떨어지는 값으로 한정
+- [x] 사칙연산의 계산 우선순위가 아닌 입력 값에 따라 계산 순서가 결정
