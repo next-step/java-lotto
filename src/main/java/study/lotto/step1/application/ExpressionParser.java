@@ -1,4 +1,4 @@
-package study.lotto.step1.application.util;
+package study.lotto.step1.application;
 
 import study.lotto.step1.domain.Operand;
 import study.lotto.step1.domain.Operands;

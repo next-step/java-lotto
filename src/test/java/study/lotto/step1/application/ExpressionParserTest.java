@@ -1,8 +1,9 @@
-package study.lotto.step1.application.util;
+package study.lotto.step1.application;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.step1.application.ExpressionParser;
 import study.lotto.step1.domain.Operand;
 import study.lotto.step1.domain.Operands;
 import study.lotto.step1.domain.Operator;
