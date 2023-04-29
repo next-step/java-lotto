@@ -15,10 +15,10 @@ public class BaseKoreaLottoRaffleGenerator implements LottoRaffleGenerator {
   private static final int LOTTO_NUMBER_SIZE = 6;
 
   @Override
-  public Set<Integer> generateRaffleNumber () {
+  public List<Integer> generateRaffleNumber () {
     List<Integer> lottoNumbers = getAll645LottoNumbers();
     Collections.shuffle(lottoNumbers);
-    return new HashSet<>(lottoNumbers.subList(0, LOTTO_NUMBER_SIZE));
+    return lottoNumbers.subList(0, LOTTO_NUMBER_SIZE);
   }
 
   public List<Integer> getAll645LottoNumbers() {

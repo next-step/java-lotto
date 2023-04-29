@@ -1,12 +1,12 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import lotto.domain.game.LottoGame;
 import lotto.domain.game.LottoGameStatistics;
 import lotto.domain.game.LottoWinType;
 import lotto.domain.raffle.LottoRaffleGenerator;
+import lotto.domain.round.LottoRoundNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,10 +17,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class LottoGameTest {
 
   private LottoRaffleGenerator fixedRaffleGenerator;
-
+  private LottoRaffleGenerator duplicateFixedRaffleGenerator;
   @BeforeEach
   void setup() {
-    fixedRaffleGenerator = () -> Set.of(1, 2, 3, 40, 50, 60);
+    fixedRaffleGenerator = () -> List.of(1, 2, 3, 40, 50, 60);
+    duplicateFixedRaffleGenerator = () -> List.of(1, 1, 2, 3, 4, 5);
   }
 
   @Test
@@ -29,7 +30,7 @@ public class LottoGameTest {
 
     // given
     LottoGame game = new LottoGame(14000, fixedRaffleGenerator);
-    Set<Integer> 당첨번호 = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+    List<Integer> 당첨번호 = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     // when
     LottoGameStatistics statistics = game.play(당첨번호);
@@ -45,6 +46,17 @@ public class LottoGameTest {
 
     // when & then
     Assertions.assertThatThrownBy(() -> new LottoGame(given, fixedRaffleGenerator))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  @DisplayName("LottoGame | 중복여부가 금지된 경우에는 로또번호에 중복이 존재 할 수 없다.")
+  void 로또번호_중복_금지() {
+    // given
+    boolean 중복번호_금지_여부 = true;
+
+    // when && then
+    Assertions.assertThatThrownBy(() -> new LottoGame(14000, duplicateFixedRaffleGenerator, 중복번호_금지_여부))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }

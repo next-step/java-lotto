@@ -13,7 +13,6 @@ public class ResultView {
 
   public static void displayStatistics (LottoGameStatistics statistics) {
     Map<LottoWinType, List<LottoRoundResult>> winTypeMap = statistics.getWinTypeMap();
-
     System.out.println("\n당첨 통계\n---------");
     for (LottoWinType value : LottoWinType.values()) {
       List<LottoRoundResult> lottoRoundResults = winTypeMap.getOrDefault(value, Collections.emptyList());
@@ -27,7 +26,7 @@ public class ResultView {
     System.out.printf("%d개를 구매했습니다.\n", lottoRounds.size());
     System.out.println(
         lottoRounds.stream()
-            .map(LottoRound::getNumbers)
+            .map(LottoRound::getRoundNumbers)
             .map(Object::toString)
             .collect(Collectors.joining("\n"))
     );

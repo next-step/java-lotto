@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import java.util.Set;
 import lotto.domain.raffle.BaseKoreaLottoRaffleGenerator;
 import lotto.domain.raffle.LottoRaffleGenerator;
@@ -17,7 +18,7 @@ public class LottoRaffleGeneratorTest {
     LottoRaffleGenerator raffleGenerator = new BaseKoreaLottoRaffleGenerator();
 
     // when
-    Set<Integer> numbers = raffleGenerator.generateRaffleNumber();
+    List<Integer> numbers = raffleGenerator.generateRaffleNumber();
 
     // then
     Assertions.assertThat(numbers)

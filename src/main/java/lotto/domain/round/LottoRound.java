@@ -1,24 +1,25 @@
 package lotto.domain.round;
 
-import java.util.Set;
+import java.util.List;
 import lotto.domain.game.LottoWinType;
 
 public class LottoRound {
   private final int roundNo;
-  private final Set<Integer> numbers;
+  private final LottoRoundNumbers roundNumbers;
   private final LottoRoundJudge roundJudge;
 
-  public LottoRound (int roundNo, Set<Integer> numbers, LottoRoundJudge roundJudge) {
+  public LottoRound (int roundNo, List<Integer> numbers, LottoRoundJudge roundJudge, boolean distinctNumberOnly) {
     this.roundNo = roundNo;
-    this.numbers = numbers;
+    this.roundNumbers = new LottoRoundNumbers(numbers, distinctNumberOnly);
     this.roundJudge = roundJudge;
   }
 
-  public LottoRoundResult playRound (Set<Integer> winningNumbers) {
-    LottoWinType winType = roundJudge.judge(numbers, winningNumbers);
+  public LottoRoundResult playRound (List<Integer> winningNumbers) {
+    LottoWinType winType = roundJudge.judge(getRoundNumbers(), winningNumbers);
     return new LottoRoundResult(roundNo, winType);
   }
-  public Set<Integer> getNumbers() {
-    return numbers;
+
+  public List<Integer> getRoundNumbers() {
+    return roundNumbers.getNumbers();
   }
 }

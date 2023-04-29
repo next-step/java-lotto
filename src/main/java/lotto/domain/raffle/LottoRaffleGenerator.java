@@ -1,7 +1,7 @@
 package lotto.domain.raffle;
 
-import java.util.Set;
+import java.util.List;
 
 public interface LottoRaffleGenerator {
-  Set<Integer> generateRaffleNumber();
+  List<Integer> generateRaffleNumber();
 }
