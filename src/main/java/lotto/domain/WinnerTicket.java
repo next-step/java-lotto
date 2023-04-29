@@ -11,7 +11,7 @@ public class WinnerTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public Ticket ticketOnly() {
+    public Ticket ticket() {
         return this.ticket;
     }
 
