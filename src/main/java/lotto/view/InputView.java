@@ -32,6 +32,12 @@ public final class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
+    public static int showManualLottoCountConsole() {
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
     private static String removeWhiteSpace(String winnerNumberAsString) {
         return winnerNumberAsString.replace(CHAR_WHITE_SPACE, "");
     }
