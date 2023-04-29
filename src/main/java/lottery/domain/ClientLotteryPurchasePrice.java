@@ -1,14 +1,14 @@
-package lotto.domain;
+package lottery.domain;
 
-public class ClientLottoPurchasePrice {
+public class ClientLotteryPurchasePrice {
 
-    private static final int MIN_PURCHASABLE_PRICE = 1000;
+    private static final int LOTTERY_PRICE = 1000;
 
     private static final String INVALID_PRICE_MSG = "로또 최소 구매 금액은 1000원 이상입니다.";
 
     private final int purchasePrice;
 
-    public ClientLottoPurchasePrice(int purchasePrice) {
+    public ClientLotteryPurchasePrice(int purchasePrice) {
         if(invalidPrice(purchasePrice)) {
             throw new IllegalArgumentException(INVALID_PRICE_MSG);
         }
@@ -16,7 +16,7 @@ public class ClientLottoPurchasePrice {
     }
 
     private boolean invalidPrice(int purchasePrice) {
-        return purchasePrice < MIN_PURCHASABLE_PRICE;
+        return purchasePrice < LOTTERY_PRICE;
     }
 
 
