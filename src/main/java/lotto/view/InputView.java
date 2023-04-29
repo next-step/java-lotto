@@ -24,4 +24,8 @@ public class InputView {
                 .boxed()
                 .collect(Collectors.toList());
     }
+
+    public static int getBonusNum() {
+        return scanner.nextInt();
+    }
 }
