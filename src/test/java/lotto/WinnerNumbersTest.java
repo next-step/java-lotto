@@ -43,11 +43,11 @@ public class WinnerNumbersTest {
             String inputs,
             String expectedRank
     ) {
-        List<Integer> set = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         for (String s : inputs.split(",")) {
-            set.add(Integer.parseInt(s));
+            list.add(Integer.parseInt(s));
         }
-        LottoNumbers lottoNumbers = new LottoNumbers(set);
+        LottoNumbers lottoNumbers = new LottoNumbers(list);
 
         Rank rank = winnerNumbers.match(lottoNumbers);
         assertThat(rank).isEqualTo(Rank.from(expectedRank));

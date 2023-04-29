@@ -8,13 +8,13 @@ public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
-        }
-
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
+
+        if (this.lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
+        }
     }
 
     public int size() {
