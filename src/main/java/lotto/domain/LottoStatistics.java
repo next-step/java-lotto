@@ -9,6 +9,10 @@ public class LottoStatistics {
 
     private static final int NUMBER_OF_WINNING_LEVELS = 4;
 
+    private static final int MIN_MATCHES = 3;
+
+    private static final int MAX_MATCHES = 6;
+
     private final WinnerLotto winnerLotto;
 
     private final List<Lotto> lottos;
@@ -28,11 +32,13 @@ public class LottoStatistics {
      */
     private void updateMatchCounts() {
         for (Lotto lotto : lottos) {
-            int countOfMatch = lotto.countMatch(winnerLotto);
-            if (countOfMatch < 3 || countOfMatch > 6) {
+            int countOfMatch = lotto.countMatch(winnerLotto.getLottoNumbers());
+
+            if (countOfMatch < MIN_MATCHES || countOfMatch > MAX_MATCHES) {
                 continue;
             }
-            matchCounts[countOfMatch - 3]++;
+
+            matchCounts[countOfMatch - MIN_MATCHES]++;
         }
     }
 
@@ -51,7 +57,7 @@ public class LottoStatistics {
     private double calculateRevenue() {
         double revenue = 0;
         for (int i = 0; i < NUMBER_OF_WINNING_LEVELS; i++) {
-            int matches = i + 3;
+            int matches = i + MIN_MATCHES;
             LottoPrize prize = LottoPrize.valueOf(matches);
             revenue += prize.getPrizeMoney() * matchCounts[i];
         }
