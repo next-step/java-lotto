@@ -46,7 +46,7 @@ public class Ticket {
     }
 
     public WinnerTicket winnerTicket(int bonusNumber) {
-        return new WinnerTicket(new Ticket( new HashSet<>(this.numbers)), bonusNumber);
+        return new WinnerTicket(new Ticket(new HashSet<>(this.numbers)), bonusNumber);
     }
 
     @Override

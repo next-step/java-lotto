@@ -28,14 +28,14 @@ public class WinnerTicket {
     }
 
     private boolean isWinner(Ticket challengerTicket, Prize prize) {
-        return matchCount(challengerTicket,prize) && checkBonusCondition(challengerTicket, prize);
+        return matchCount(challengerTicket, prize) && checkBonusCondition(challengerTicket, prize);
     }
 
     private boolean checkBonusCondition(Ticket ticket, Prize prize) {
-        if(prize == Prize.SECOND) {
+        if (prize == Prize.SECOND) {
             return this.includeBonus(ticket);
         }
-        if(prize == Prize.THIRD) {
+        if (prize == Prize.THIRD) {
             return !this.includeBonus(ticket);
         }
         return true;
