@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoTest {
@@ -23,5 +24,13 @@ public class LottoTest {
     public void checkTest() {
         Lotto lotto = new Lotto("1, 2, 3, 41, 42, 43");
         assertThat(lotto.findMatchCount("1, 2, 3, 4, 5, 6")).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("lotto객체의 사이즈 확인")
+    public void lottoSizeCheck() {
+        assertThatIllegalStateException().isThrownBy(() ->
+            new Lotto("1, 2, 3, 41, 42")
+        );
     }
 }

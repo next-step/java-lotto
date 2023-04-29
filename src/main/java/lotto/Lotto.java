@@ -18,19 +18,20 @@ public class Lotto {
     }
 
     private List<Integer> split(String lottoNumber) {
-        return Arrays.stream(lottoNumber.split(SPLIT_REGEX)).map(Integer::parseInt).collect(Collectors.toList());
+        List<Integer> numbers = Arrays.stream(lottoNumber.split(SPLIT_REGEX)).map(Integer::parseInt).collect(Collectors.toList());
+        lottoSizeCheck(numbers);
+        return numbers;
     }
 
     public int findMatchCount(String firstLottoNumber) {
         List<Integer> numbers = split(firstLottoNumber);
-        lottoSizeCheck();
         return (int) numbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }
 
-    private void lottoSizeCheck() {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
+    private void lottoSizeCheck(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalStateException(LOTTO_SIZE_ERROR);
         }
     }
