@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import static lotto.constants.Constants.MAX_NUMBER;
 import static lotto.constants.Constants.MIN_NUMBER;
 import static lotto.constants.Constants.REQUIRED_LOTTO_NUMBERS;
+import static lotto.constants.Constants.ZERO;
 
 public class AutoLotto implements LottoStrategy {
 
@@ -24,7 +25,7 @@ public class AutoLotto implements LottoStrategy {
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numberList);
-        return numberList.subList(0, REQUIRED_LOTTO_NUMBERS);
+        return numberList.subList(ZERO, REQUIRED_LOTTO_NUMBERS);
     }
 
 }

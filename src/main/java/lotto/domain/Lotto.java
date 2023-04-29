@@ -1,18 +1,16 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Lotto {
 
     private LottoNumbers lottoNumbers;
 
     public Lotto(List<Integer> list) {
-        this.lottoNumbers = new LottoNumbers(new HashSet<>(list));
+        this.lottoNumbers = new LottoNumbers(list);
     }
 
-    public Set<Integer> getLottoNumbers() {
+    public List<Integer> getLottoNumbers() {
         return lottoNumbers.getLottoNumbers();
     }
 

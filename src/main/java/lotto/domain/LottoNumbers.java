@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Set;
+import java.util.List;
 
 import static lotto.constants.Constants.MAX_NUMBER;
 import static lotto.constants.Constants.MIN_NUMBER;
@@ -8,9 +8,9 @@ import static lotto.constants.Constants.REQUIRED_LOTTO_NUMBERS;
 
 public class LottoNumbers {
 
-    private Set<Integer> lottoNumbers;
+    private List<Integer> lottoNumbers;
 
-    public LottoNumbers(Set<Integer> lottoNumbers) {
+    public LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         validate();
     }
@@ -31,7 +31,7 @@ public class LottoNumbers {
         }
     }
 
-    public Set<Integer> getLottoNumbers() {
+    public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 

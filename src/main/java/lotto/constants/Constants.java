@@ -8,4 +8,6 @@ public class Constants {
 
     public static final int MAX_NUMBER = 45;
 
+    public static final int ZERO = 0;
+
 }
