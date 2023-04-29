@@ -59,17 +59,6 @@ public class StaticsTest {
         assertEquals(answer, countFirst);
     }
 
-    @DisplayName("3등 당첨통계가 계산된다(5개 번호 일치)")
-    @Test
-    public void third() {
-        //given
-        int answer = 3;
-        //when
-        int countFirst = staticsFixture.getCountThird();
-        //then
-        assertEquals(answer, countFirst);
-    }
-
     @DisplayName("2등 당첨통계가 계산된다(5개 + 보너스 번호 일치)")
     @Test
     public void second() {
@@ -79,6 +68,17 @@ public class StaticsTest {
         int actual = staticsFixture.getCountSecond();
         //then
         assertEquals(expect, actual);
+    }
+
+    @DisplayName("3등 당첨통계가 계산된다(5개 번호 일치)")
+    @Test
+    public void third() {
+        //given
+        int answer = 3;
+        //when
+        int countFirst = staticsFixture.getCountThird();
+        //then
+        assertEquals(answer, countFirst);
     }
 
     @DisplayName("4등 당첨통계가 계산된다(4개 번호 일치)")
