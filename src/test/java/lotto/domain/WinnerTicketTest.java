@@ -9,7 +9,6 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class WinnerTicketTest {
 
@@ -71,9 +70,19 @@ public class WinnerTicketTest {
     @Test
     public void countWinner() {
         //given
-
         //when
+        int actualFirst = winnerTicketFixture.countWinner(ticketsFixture, Prize.FIRST);
+        int actualSecond = winnerTicketFixture.countWinner(ticketsFixture, Prize.SECOND);
+        int actualThird = winnerTicketFixture.countWinner(ticketsFixture, Prize.THIRD);
+        int actualFourth = winnerTicketFixture.countWinner(ticketsFixture, Prize.FOURTH);
+        int actualFifth = winnerTicketFixture.countWinner(ticketsFixture, Prize.FIFTH);
         //then
-        fail();
+        assertAll("",
+                () -> assertThat(actualFirst).as("").isEqualTo(1),
+                () -> assertThat(actualSecond).as("").isEqualTo(2),
+                () -> assertThat(actualThird).as("").isEqualTo(3),
+                () -> assertThat(actualFourth).as("").isEqualTo(4),
+                () -> assertThat(actualFifth).as("").isEqualTo(5)
+        );
     }
 }
