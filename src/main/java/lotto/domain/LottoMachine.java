@@ -1,13 +1,9 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-
-	private static final int BREAK_EVEN_POINT = 1;
 
 	private final PurchasedLottos purchasedLottos;
 
@@ -47,24 +43,6 @@ public class LottoMachine {
 
 	public List<PrizeSituation> sortInOrderScore(List<PrizeSituation> prizeSituations) {
 		return prizeSituations.stream().sorted().collect(Collectors.toList());
-	}
-
-	public long totalProfit(List<PrizeSituation> prizeSituations) {
-		long totalProfit = 0;
-		for (PrizeSituation prizeSituation : prizeSituations) {
-			long prizeMoney = prizeSituation.getPrizeType().prizeMoney.getPrizeMoney();
-			int prizeCount = prizeSituation.getPrizeCount();
-			totalProfit += (prizeMoney * prizeCount);
-		}
-		return totalProfit;
-	}
-
-	public double totalProfitRate(long totalProfit, long purchaseAmount) {
-		return new BigDecimal((double) totalProfit / purchaseAmount).setScale(2, RoundingMode.DOWN).doubleValue();
-	}
-
-	public boolean isBenefit(double totalProfitRate) {
-		return totalProfitRate > LottoMachine.BREAK_EVEN_POINT;
 	}
 
 	public PurchasedLottos getPurchasedLottos() {
