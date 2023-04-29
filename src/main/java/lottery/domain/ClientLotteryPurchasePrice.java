@@ -19,5 +19,7 @@ public class ClientLotteryPurchasePrice {
         return purchasePrice < LOTTERY_PRICE;
     }
 
-
+    public int getLotteries() {
+        return this.purchasePrice / LOTTERY_PRICE;
+    }
 }

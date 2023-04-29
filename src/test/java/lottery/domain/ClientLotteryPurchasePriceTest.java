@@ -1,7 +1,9 @@
 package lottery.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,6 +33,7 @@ public class ClientLotteryPurchasePriceTest {
     @ParameterizedTest(name = "[{index}]금액에 따른 로또 갯수를 리턴한다 {1}")
     @CsvSource(value = {"14000:14","9999:9"},delimiter = ':')
     void returnLotteryPerPrice(int price, int expectedLottery) {
-
+        assertThat(new ClientLotteryPurchasePrice(price).getLotteries())
+                .isEqualTo(expectedLottery);
     }
 }
