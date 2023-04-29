@@ -31,6 +31,30 @@ public class LottoGame {
     this.lottoTickets = new LottoTickets(combinedTickets);
   }
 
+  public static class Builder {
+    private Money purchaseAmount;
+    private RandomStrategy randomStrategy = new DefaultRandomStrategy();
+    private List<LottoTicket> manualTickets = Collections.emptyList();
+
+    public Builder(Money purchaseAmount) {
+      this.purchaseAmount = purchaseAmount;
+    }
+
+    public Builder randomStrategy(RandomStrategy randomStrategy) {
+      this.randomStrategy = randomStrategy;
+      return this;
+    }
+
+    public Builder manualTickets(List<LottoTicket> manualTickets) {
+      this.manualTickets = manualTickets;
+      return this;
+    }
+
+    public LottoGame build() {
+      return new LottoGame(purchaseAmount, randomStrategy, manualTickets);
+    }
+  }
+
   private static List<LottoTicket> issueLottoTickets(Money purchaseAmount, RandomStrategy randomStrategy) {
     List<LottoTicket> lottoTicket = new ArrayList<>();
     for (int i = 0; i < purchaseAmount.getPurchasableTicketCount(); i++) {
