@@ -27,7 +27,7 @@ public class Lotteries {
 
     private void generateLottery(int lotteryCount) {
         for (int i = 0; i < lotteryCount; i++) {
-            lotteries.add(new Lottery());
+            lotteries.add(Lottery.createAutoLottery());
         }
     }
 
