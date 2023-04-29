@@ -45,4 +45,12 @@ public class Lotteries {
     public List<Lottery> getLotteries() {
         return Collections.unmodifiableList(lotteries);
     }
+
+    public List<Integer> calculateBonusNum(List<Integer> winningNumbers, int bonusNum) {
+        return lotteries.stream()
+                .filter(lottery -> lottery.matchWithBonusBall(bonusNum))
+                .map(lottery -> lottery.matchedCount(winningNumbers))
+                .filter(matchedCount -> matchedCount == 5)
+                .collect(Collectors.toList());
+    }
 }

@@ -32,6 +32,9 @@ class LotteriesTest {
 
     }
 
+    /**
+     * 아래 두개 테스트 어떻게 하지
+     */
     @Test
     @DisplayName("당첨 번호와 일치하는 로또를 계산한다")
     void when_input_is_given() {
@@ -42,4 +45,14 @@ class LotteriesTest {
         System.out.println(integers);
     }
 
+    @Test
+    @DisplayName("5개일치하는 로또들 중 보너스볼 일치여부를 포함한 결과를 계산해 반환한다.")
+    void calculate_matchesWithBonusNum() {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+
+        Lotteries lotteries = new Lotteries(100, winningNumbers);
+        int bonusNum = 10;
+        List<Integer> results = lotteries.calculateBonusNum(winningNumbers,10);
+
+    }
 }
