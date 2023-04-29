@@ -3,8 +3,10 @@ package lotto.domain;
 import lotto.domain.util.LottoNumberGenerator;
 import lotto.domain.util.NumberGeneratorStrategy;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toUnmodifiableList;
 
@@ -21,7 +23,7 @@ public class LottoTickets {
     }
 
     public static LottoTickets issue(PurchasedAmount purchasedAmount, NumberGeneratorStrategy numberGeneratorStrategy) {
-        int availableLottoCount = purchasedAmount.getAvailableLottoCount();
+        int availableLottoCount = purchasedAmount.getAvailableAutoLottoCount();
         List<LottoNumbers> issuedTickets = issueTickets(availableLottoCount, numberGeneratorStrategy);
         return new LottoTickets(issuedTickets);
     }
@@ -40,4 +42,10 @@ public class LottoTickets {
         return tickets.size();
     }
 
+    public LottoTickets merge(LottoTickets lottoTickets) {
+        List<LottoNumbers> mergedLottos = Stream.of(tickets, lottoTickets.getTickets())
+                .flatMap(Collection::stream)
+                .collect(toUnmodifiableList());
+        return new LottoTickets(mergedLottos);
+    }
 }
