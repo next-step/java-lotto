@@ -38,8 +38,7 @@ public class Lottery {
         return lotteryNumber.toString();
     }
 
-    public boolean matchWithBonusBall(List<Integer> winningNumbers, int bonusNumber) {
-
-        return false;
+    public boolean matchWithBonusBall(int bonusNumber) {
+        return this.lotteryNumber.contains(bonusNumber);
     }
 }

@@ -26,9 +26,8 @@ public class LotteryTest {
     void input_bonus_ball() {
         Lottery lottery = new Lottery(List.of(1, 2, 3, 4, 5, 6));
 
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 7);
         int bonusNumber = 6;
-        boolean matchResult = lottery.matchWithBonusBall(winningNumbers, bonusNumber);
+        boolean matchResult = lottery.matchWithBonusBall(bonusNumber);
 
         assertThat(matchResult).isTrue();
     }
