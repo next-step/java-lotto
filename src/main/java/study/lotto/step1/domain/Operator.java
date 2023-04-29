@@ -26,7 +26,7 @@ public enum Operator {
     public static Operator of(String sign) {
         return Arrays.stream(Operator.values())
                 .filter(operator -> operator.sign.equals(sign))
-                .findFirst()
+                .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다: " + sign));
     }
 
