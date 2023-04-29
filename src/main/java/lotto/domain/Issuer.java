@@ -8,15 +8,15 @@ import java.util.Set;
 
 public class Issuer {
     private final Random RANDOM = new Random();
-    private final List<UserTicket> userTickets;
+    private final List<Ticket> tickets;
 
     public Issuer() {
-        this.userTickets = new ArrayList<>();
+        this.tickets = new ArrayList<>();
     }
 
     public void issueTickets(int ticketCount) {
         for (int i = 0; i < ticketCount; i++) {
-            userTickets.add(new UserTicket(issueNumbers()));
+            tickets.add(new Ticket(issueNumbers()));
         }
     }
 
@@ -32,11 +32,11 @@ public class Issuer {
         return RANDOM.nextInt(46) + 1;
     }
 
-    public List<UserTicket> issuedTickets() {
-        return userTickets;
+    public List<Ticket> issuedTickets() {
+        return tickets;
     }
 
     public Statics issuedTicketStatistics(WinnerTicket winnerTicket) {
-        return new Statics(userTickets, winnerTicket);
+        return new Statics(tickets, winnerTicket);
     }
 }
