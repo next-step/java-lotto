@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.util.List;
 
@@ -24,16 +26,18 @@ public class InputConverterTest {
 
         assertThat(result.size()).isEqualTo(7);
 
-        // 짝수 index -> 숫자
-        assertThat(result.get(0)).isEqualTo("44");
-        assertThat(result.get(2)).isEqualTo("55");
-        assertThat(result.get(4)).isEqualTo("2");
-        assertThat(result.get(6)).isEqualTo("5");
+        assertAll("even index is number",
+            () -> assertEquals(result.get(0), "44"),
+            () -> assertEquals(result.get(2), "55"),
+            () -> assertEquals(result.get(4), "2"),
+            () -> assertEquals(result.get(6), "5")
+        );
 
-        // 홀수 index -> 연산자
-        assertThat(result.get(1)).isEqualTo("+");
-        assertThat(result.get(3)).isEqualTo("-");
-        assertThat(result.get(5)).isEqualTo("/");
+        assertAll("odd index is operator",
+            () -> assertEquals(result.get(1), "+"),
+            () -> assertEquals(result.get(3), "-"),
+            () -> assertEquals(result.get(5), "/")
+        );
     }
 
     @ParameterizedTest
