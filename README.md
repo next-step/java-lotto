@@ -13,6 +13,4 @@
 * LottoNumber : 로또 번호 도메인
 * LottoNumbers : 로또 번호 일급 컬렉션
 * WinnerNumbers : 당첨 로또 번호 일급 컬렉션
-* BonusNumber : 보너스 번호 도메인
-* MatchResult : count, bonus가 포함된 도메인
 * Rank : enum, 일치 개수와 보너스 일치 여부에 따른 상금, 등수를 가짐

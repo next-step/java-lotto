@@ -1,13 +1,23 @@
 package lotto.domain;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        Set<LottoNumber> set = new HashSet<>();
+        for (Integer lottoNumber : lottoNumbers) {
+            set.add(LottoNumber.valueOf(lottoNumber));
+        }
+        this.lottoNumbers = set;
+    }
+
     public LottoNumbers(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() > 6) {
-            throw new IllegalArgumentException("당첨 번호는 6개 이하입니다.");
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
         }
         this.lottoNumbers = lottoNumbers;
     }
@@ -15,26 +25,12 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
-    public MatchResult match(WinnerNumbers winnerNumbers) {
-        int count = 0;
-        boolean bonus;
-
-        for (LottoNumber lottoNumber : winnerNumbers.getLottoNumbers()) {
-            count = addCount(count, lottoNumber);
-        }
-        bonus = winnerNumbers.isMatchBonus(this);
-        return new MatchResult(count, bonus);
-    }
-
-    private int addCount(int count, LottoNumber lottoNumber) {
-        if (this.lottoNumbers.contains(lottoNumber)) {
-            count++;
-        }
-        return count;
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
