@@ -1,10 +1,24 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static Map<Integer, LottoNumber> cache = new HashMap<>();
+    static {
+        for (int i = 1; i <= 45; i++) {
+            cache.put(i, new LottoNumber(i));
+        }
+    }
+
     final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         this.number = number;
+    }
+
+    public static LottoNumber valueOf(int number) {
+        return cache.get(number);
     }
 
     public int getNumber() {
