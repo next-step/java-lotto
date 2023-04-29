@@ -19,8 +19,13 @@ public class InputView {
   public static LottoNumbers getLastWeekWinningNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     return new LottoNumbers(Arrays.stream(sc.nextLine().split(", "))
-                                  .map(LottoNumber::new)
+                                  .map(LottoNumber::from)
                                   .collect(Collectors.toList())
     );
+  }
+
+  public static LottoNumber getBonusNumber() {
+    System.out.println("보너스 볼을 입력해 주세요.");
+    return LottoNumber.from(sc.nextLine());
   }
 }

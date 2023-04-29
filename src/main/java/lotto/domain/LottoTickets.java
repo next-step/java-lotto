@@ -9,10 +9,6 @@ public class LottoTickets {
     this.lottoTickets = lottoTickets;
   }
 
-  public LottoStatistics getStatistics(LottoNumbers winningNumbers) {
-    return new LottoStatistics(lottoTickets, winningNumbers);
-  }
-
   public List<LottoTicket> getLottoTickets() {
     return lottoTickets;
   }

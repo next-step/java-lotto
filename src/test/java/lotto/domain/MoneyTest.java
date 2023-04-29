@@ -1,13 +1,28 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MoneyTest {
+  private Money money;
+
+  @BeforeEach
+  void setUp() {
+    money = new Money(100000);
+  }
+
   @Test
   void 티켓갯수() {
-    Money purchaseAmount = new Money(100000);
-    assertThat(purchaseAmount.getPurchasableTicketCount()).isEqualTo(100);
+    assertThat(money.getPurchasableTicketCount())
+        .isEqualTo(100);
+  }
+
+  @Test
+  void 금액을_반환한다() {
+    assertThat(money.getAmount())
+        .isEqualTo(100000);
   }
 }

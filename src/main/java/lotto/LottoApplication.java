@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoStatistics;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,7 +11,8 @@ public class LottoApplication {
     OutputView.printLottoTickets(lottoGame.getLottoTickets());
 
     LottoNumbers winningNumbers = InputView.getLastWeekWinningNumbers();
-    LottoStatistics statistics = lottoGame.getStatistics(winningNumbers);
+    LottoNumber bonusNumber = InputView.getBonusNumber();
+    LottoStatistics statistics = lottoGame.getStatistics(winningNumbers, bonusNumber);
     OutputView.printStatistics(statistics);
   }
 }
