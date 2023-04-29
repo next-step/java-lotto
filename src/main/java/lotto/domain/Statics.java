@@ -44,10 +44,6 @@ public class Statics {
         return winnerTicket.countWinner(challengerTickets, prize);
     }
 
-//    private int aggregate(List<Ticket> challengerTickets, Ticket winnerTicket, Prize prize) {
-//        return winnerTicket.countWinner(challengerTickets, prize);
-//    }
-
     public int getCountFifth() {
         return countFifth;
     }
