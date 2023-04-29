@@ -11,12 +11,16 @@ import lotto.view.ResultView;
 public class LottoApplication {
 
   public static void main (String[] args) throws IOException {
-    int lottoPrice = InputView.getLottoPrice();
+    InputView inputView = new InputView();
+
+    int lottoPrice = inputView.getLottoPrice();
     LottoGame lottoGame = new LottoGame(lottoPrice, new BaseKoreaLottoRaffleGenerator());
     ResultView.showLottoRounds(lottoGame.getLottoRounds());
 
-    List<Integer> lastWeekLottoNumbers = InputView.getLastWeekLottoNumbers();
+    List<Integer> lastWeekLottoNumbers = inputView.getLastWeekLottoNumbers();
     LottoGameStatistics statistics = lottoGame.play(lastWeekLottoNumbers);
     ResultView.displayStatistics(statistics);
+
+    inputView.tearDown();
   }
 }
