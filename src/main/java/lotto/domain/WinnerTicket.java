@@ -28,7 +28,7 @@ public class WinnerTicket {
     }
 
     private boolean isWinner(Ticket challengerTicket, Prize prize) {
-        return matchCount(challengerTicket,prize) && (checkBonusCondition(challengerTicket, prize));
+        return matchCount(challengerTicket,prize) && checkBonusCondition(challengerTicket, prize);
     }
 
     private boolean checkBonusCondition(Ticket ticket, Prize prize) {
