@@ -1,11 +1,12 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_SIZE = 6;
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    static final int LOTTO_NUMBER_SIZE = 6;
+    static final int MINIMUM_LOTTO_NUMBER = 1;
+    static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBERS_MESSAGE = "적절한 로또 입력이 아닙니다.";
 
     private final int[] lottoNumbers;
@@ -18,6 +19,13 @@ public class Lotto {
         this.lottoNumbers = Arrays.stream(lottoNumbers)
                 .sorted()
                 .toArray();
+    }
+
+    public Lotto(List<Integer> lottoNumberList) {
+        this(lottoNumberList.stream()
+                .mapToInt(it -> it)
+                .toArray()
+        );
     }
 
     public int[] getLottoNumbers() {

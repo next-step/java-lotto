@@ -5,12 +5,29 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
+    @Test
+    void 배열로_로또_객체를_만들_수_있다() {
+        int[] numbers = {1, 2, 3, 4, 5, 6};
+        assertThat(new Lotto(numbers).getLottoNumbers()).containsExactly(numbers);
+    }
+
+    @Test
+    void List로_로또_객체를_만들_수_있다() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        assertThat(new Lotto(numbers).getLottoNumbers())
+                .containsExactly(numbers.stream()
+                        .mapToInt(it -> it)
+                        .toArray()
+                );
+    }
+
     @Test
     void 로또_숫자의_개수가_6개가_아니면_오류가_발생한다() {
         assertThatThrownBy(() -> new Lotto(new int[]{}))
