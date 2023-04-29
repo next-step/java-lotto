@@ -1,53 +1,65 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.Set;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_NUMBER_MINIMUM = 1;
-    private static final int LOTTO_NUMBER_MAXIMUM = 45;
-    private static final int LOTTO_NUMBERS_MAX_COUNT = 6;
+    public static final int LOTTO_NUMBERS_MAX_COUNT = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoNumbers(Integer... numbers) {
-        this(List.of(numbers));
+    public static LottoNumbers ofTypeIntegers(Integer... numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
+                .map(LottoNumber::new)
+                .collect(toUnmodifiableList());
+        return new LottoNumbers(lottoNumbers);
     }
 
-    public LottoNumbers(List<Integer> numbers) {
-        validateNumbers(numbers);
+    public static LottoNumbers ofTypeIntegerList(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(toUnmodifiableList());
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    public LottoNumbers(List<LottoNumber> numbers) {
+        validate(numbers);
         this.numbers = numbers;
     }
 
-    private void validateNumbers(List<Integer> numbers) {
-        numbers.forEach(LottoNumbers::validateRange);
+    private void validate(List<LottoNumber> numbers) {
+        validateDuplicatedNumbers(numbers);
+        validateNumbersCount(numbers);
     }
 
-    private static void validateRange(Integer number) {
-        if (number < LOTTO_NUMBER_MINIMUM || number > LOTTO_NUMBER_MAXIMUM) {
-            String msg = String.format("로또 숫자의 범위는 %d ~ %d 입니다.", LOTTO_NUMBER_MINIMUM, LOTTO_NUMBER_MAXIMUM);
-            throw new IllegalArgumentException(msg);
+    private void validateDuplicatedNumbers(List<LottoNumber> numbers) {
+        Set<Integer> numberSet = numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(toUnmodifiableSet());
+        if (numbers.size() != numberSet.size()) {
+            throw new IllegalArgumentException("로또에 중복된 숫자가 포함되어있습니다.");
         }
     }
 
-    public static LottoNumbers generate() {
-        List<Integer> rangedNumbers = IntStream.range(LOTTO_NUMBER_MINIMUM, LOTTO_NUMBER_MAXIMUM + 1)
-                .boxed()
-                .collect(toList());
-        Collections.shuffle(rangedNumbers);
-        List<Integer> subNumbers = rangedNumbers.subList(0, LOTTO_NUMBERS_MAX_COUNT);
-        Collections.sort(subNumbers);
-        return new LottoNumbers(subNumbers);
+    private void validateNumbersCount(List<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_NUMBERS_MAX_COUNT) {
+            throw new IllegalArgumentException("로또 숫자입력이 올바르지 않습니다.(유효한 개수: 6개)");
+        }
     }
 
-    public long matchCount(LottoWinningNumber lottoWinningNumber) {
+    public long countToMatchedWinnerNumbers(LottoNumbers winnerNumbers) {
         return numbers.stream()
-                .filter(lottoWinningNumber::contains)
+                .filter(winnerNumbers::contains)
                 .count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override

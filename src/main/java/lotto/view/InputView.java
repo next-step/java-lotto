@@ -1,14 +1,15 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTickets;
-import lotto.domain.PurchasedAmount;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.util.stream.Collectors.toUnmodifiableList;
+
 public final class InputView {
 
+    private static final String NUMBER_DELIMITER = ",";
+    private static final String CHAR_WHITE_SPACE = " ";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
@@ -20,19 +21,29 @@ public final class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static String showLastWeekWinningNumbersConsole() {
+    public static List<Integer> showLastWeekWinnerNumbersConsole() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return SCANNER.nextLine();
+        return toNumbers(removeWhiteSpace(SCANNER.nextLine()));
     }
 
-    public static void showAvailableLottoCount(PurchasedAmount purchasedAmount) {
-        System.out.printf("%d를 구매했습니다.\n", purchasedAmount.getAvailableLottoCount());
+    public static int showBonusBallConsole() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static void showIssuedLottoTickets(LottoTickets lottoTickets) {
-        List<LottoNumbers> tickets = lottoTickets.getTickets();
-        tickets.forEach(System.out::println);
+    private static String removeWhiteSpace(String winnerNumberAsString) {
+        return winnerNumberAsString.replace(CHAR_WHITE_SPACE, "");
+    }
+
+    private static List<Integer> toNumbers(String refinedWinnerNumber) {
+        return Arrays.stream(splitDelimiter(refinedWinnerNumber))
+                .map(Integer::parseInt)
+                .collect(toUnmodifiableList());
+    }
+
+    private static String[] splitDelimiter(String refinedWinnerNumber) {
+        return refinedWinnerNumber.split(NUMBER_DELIMITER);
     }
 
 }

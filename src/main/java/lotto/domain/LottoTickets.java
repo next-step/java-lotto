@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.util.LottoNumberGenerator;
+import lotto.domain.util.NumberGeneratorStrategy;
+
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -14,14 +17,18 @@ public class LottoTickets {
     }
 
     public static LottoTickets issue(PurchasedAmount purchasedAmount) {
+        return issue(purchasedAmount, new LottoNumberGenerator());
+    }
+
+    public static LottoTickets issue(PurchasedAmount purchasedAmount, NumberGeneratorStrategy numberGeneratorStrategy) {
         int availableLottoCount = purchasedAmount.getAvailableLottoCount();
-        List<LottoNumbers> issuedTickets = issueTickets(availableLottoCount);
+        List<LottoNumbers> issuedTickets = issueTickets(availableLottoCount, numberGeneratorStrategy);
         return new LottoTickets(issuedTickets);
     }
 
-    private static List<LottoNumbers> issueTickets(int availableLottoCount) {
+    private static List<LottoNumbers> issueTickets(int availableLottoCount, NumberGeneratorStrategy numberGeneratorStrategy) {
         return IntStream.range(0, availableLottoCount)
-                .mapToObj(n -> LottoNumbers.generate())
+                .mapToObj(n -> numberGeneratorStrategy.generate())
                 .collect(toUnmodifiableList());
     }
 

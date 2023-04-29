@@ -1,28 +1,47 @@
 package lotto;
 
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinningNumber;
-import lotto.domain.PurchasedAmount;
-import lotto.domain.WinningStatistics;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-
-        PurchasedAmount purchasedAmount = new PurchasedAmount(InputView.showPaymentConsole());
-        InputView.showAvailableLottoCount(purchasedAmount);
-
-        LottoTickets lottoTickets = LottoTickets.issue(purchasedAmount);
-        InputView.showIssuedLottoTickets(lottoTickets);
-
-        LottoWinningNumber lottoWinningNumber = LottoWinningNumber.create(InputView.showLastWeekWinningNumbersConsole());
-
-        WinningStatistics winningStatistics = new WinningStatistics(lottoWinningNumber, lottoTickets);
-        winningStatistics.calculate();
-
-        ResultView.showResult(winningStatistics);
+        PurchasedAmount purchasedAmount = getPurchasedAmount();
+        LottoTickets lottoTickets = issueLottoTickets(purchasedAmount);
+        WinnerNumbers winnerNumbers = getWinnerNumbers();
+        showCalculatedWinnerStatistics(lottoTickets, winnerNumbers);
     }
-    
+
+    private static PurchasedAmount getPurchasedAmount() {
+        PurchasedAmount purchasedAmount = new PurchasedAmount(InputView.showPaymentConsole());
+        ResultView.showAvailableLottoCount(purchasedAmount);
+        return purchasedAmount;
+    }
+
+    private static LottoTickets issueLottoTickets(PurchasedAmount purchasedAmount) {
+        LottoTickets lottoTickets = LottoTickets.issue(purchasedAmount);
+        ResultView.showIssuedLottoTickets(lottoTickets);
+        return lottoTickets;
+    }
+
+    private static WinnerNumbers getWinnerNumbers() {
+        LottoNumbers winnerLottoNumbers = getWinnerLottoNumbers();
+        LottoNumber bonusBall = getBonusBall();
+        return new WinnerNumbers(winnerLottoNumbers, bonusBall);
+    }
+
+    private static LottoNumbers getWinnerLottoNumbers() {
+        return LottoNumbers.ofTypeIntegerList(InputView.showLastWeekWinnerNumbersConsole());
+    }
+
+    private static LottoNumber getBonusBall() {
+        return new LottoNumber(InputView.showBonusBallConsole());
+    }
+
+    private static void showCalculatedWinnerStatistics(LottoTickets lottoTickets, WinnerNumbers winnerNumbers) {
+        WinnerStatistics winnerStatistics = winnerNumbers.getWinnerStatistics(lottoTickets);
+        ResultView.showResult(winnerStatistics);
+    }
+
 }
