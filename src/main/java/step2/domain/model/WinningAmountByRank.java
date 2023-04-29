@@ -2,20 +2,23 @@ package step2.domain.model;
 
 import java.util.Arrays;
 
-import static step2.domain.ProfitCalculatorService.*;
-
 
 public enum WinningAmountByRank {
-    FIRST(FIRST_PLACE, 2000000000, "FIRST_PLACE"),
-    SECOND(SECOND_PLACE, 1500000, "SECOND_PLACE"),
-    THIRD(THIRD_PLACE, 50000, "THIRD_PLACE"),
-    FOURTH(FOURTH_PLACE, 5000, "FOURTH_PLACE"),
-    EMPTY(EMPTY_PLACE, 0, "EMPTY_PLACE");
+    FIRST(WinningAmountByRank.FIRST_PLACE, 2000000000, "FIRST_PLACE"),
+    SECOND(WinningAmountByRank.SECOND_PLACE, 1500000, "SECOND_PLACE"),
+    THIRD(WinningAmountByRank.THIRD_PLACE, 50000, "THIRD_PLACE"),
+    FOURTH(WinningAmountByRank.FOURTH_PLACE, 5000, "FOURTH_PLACE"),
+    EMPTY(WinningAmountByRank.EMPTY_PLACE, 0, "EMPTY_PLACE");
+
+    public static final int FIRST_PLACE = 6;
+    public static final int SECOND_PLACE = 5;
+    public static final int THIRD_PLACE = 4;
+    public static final int FOURTH_PLACE = 3;
+    public static final int EMPTY_PLACE = 0;
 
     private final int rank;
     private final int amount;
     private final String key;
-
     WinningAmountByRank(int rank, int amount, String key) {
         this.rank = rank;
         this.amount = amount;
