@@ -2,11 +2,13 @@ package lotto.view;
 
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumbers;
-import lotto.domain.MatchResult;
 import lotto.domain.WinnerNumbers;
 import lotto.domain.enums.Rank;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     private static final int LOTTO_AMOUNT = 1000;
@@ -31,15 +33,12 @@ public class ResultView {
         System.out.println("당첨 통계");
         Map<Rank, Integer> map = new HashMap<>();
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            MatchResult match = lottoNumber.match(winnerNumbers);
-            Rank rank = Rank.valueOf(match.getCount(), match.getIsBonus());
+            Rank rank = winnerNumbers.match(lottoNumber);
             map.put(rank, map.getOrDefault(rank, 0) + 1);
         }
 
         long purchaseAmount = lottoNumbers.size() * LOTTO_AMOUNT;
         long sum = 0;
-
-
         List<Rank> ranks = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
         for (Rank rank : ranks) {
             int prize = rank.getWinningMoney();
@@ -50,4 +49,6 @@ public class ResultView {
 
         System.out.println("총 수익률은 " + sum / purchaseAmount + "입니다.");
     }
+
+    private ResultView() {}
 }

@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.WinnerNumbers;
 
 import java.util.HashSet;
@@ -23,12 +23,15 @@ public class InputView {
 
         Set<LottoNumber> set = new HashSet<>();
         for (String s : split) {
-            set.add(new LottoNumber(Integer.parseInt(s)));
+            set.add(LottoNumber.valueOf(Integer.parseInt(s)));
         }
+        LottoNumbers lottoNumbers = new LottoNumbers(set);
 
         System.out.println("보너스 볼을 입력해주세요.");
         int bonusNumber = SCANNER.nextInt();
 
-        return new WinnerNumbers(set, new BonusNumber(bonusNumber));
+        return new WinnerNumbers(lottoNumbers, LottoNumber.valueOf(bonusNumber));
     }
+
+    private InputView() {}
 }
