@@ -4,11 +4,11 @@ import lotto.util.LottoValidationUtils;
 
 import java.util.List;
 
-public class LottoNumbers {
+public class WinnerLotto {
 
     private List<Integer> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public WinnerLotto(final List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         LottoValidationUtils.validateLottoNumbers(this.lottoNumbers);
     }
