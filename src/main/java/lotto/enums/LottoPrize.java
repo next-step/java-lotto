@@ -2,7 +2,6 @@ package lotto.enums;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.List;
 
 public enum LottoPrize {
     FIRST(6, 2_000_000_000),
