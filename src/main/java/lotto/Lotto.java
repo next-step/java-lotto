@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final String SPLIT_REGEX = ", ";
+    private static final int LOTTO_SIZE = 6;
+    private static final String LOTTO_SIZE_ERROR = "로또 숫자의 입력값은 6개로 이루어져야 합니다.";
     private final List<Integer> lottoNumbers = new ArrayList<>();
 
     public Lotto(String lottoNumber) {
@@ -21,9 +23,16 @@ public class Lotto {
 
     public int findMatchCount(String firstLottoNumber) {
         List<Integer> numbers = split(firstLottoNumber);
+        lottoSizeCheck();
         return (int) numbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
+    }
+
+    private void lottoSizeCheck() {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalStateException(LOTTO_SIZE_ERROR);
+        }
     }
 
     @Override
