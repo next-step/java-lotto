@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.domain.Lotto;
+import lotto.domain.MyLotto;
 import lotto.domain.Purchase;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LottoService {
     private final Purchase purchase;
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<MyLotto> myLottos = new ArrayList<>();
 
     public LottoService(int inputMoney) {
         purchase = new Purchase(inputMoney);
@@ -21,11 +21,11 @@ public class LottoService {
     }
 
     private void autoGenerateOne() {
-        Lotto generatedLotto = Lotto.auto();
-        lottos.add(generatedLotto);
+        MyLotto generatedMyLotto = MyLotto.auto();
+        myLottos.add(generatedMyLotto);
     }
 
-    public List<Lotto> lottos(){
-        return lottos;
+    public List<MyLotto> lottos(){
+        return myLottos;
     }
 }

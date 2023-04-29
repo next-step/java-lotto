@@ -6,22 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
-class LottoTest {
-
-    @Test
-    void 로또자동발급확인() {
-        Lotto lotto = Lotto.auto();
-        assertThat(lotto.numbers().size()).isEqualTo(6);
-        for(Integer number : lotto.numbers()){
-            assertThat(LottoRule.NUMBER_RANGE.contains(number)).isTrue();
-        }
-    }
+class WinLottoTest {
 
     @Test
-    void 로또정보수동입력() {
+    void 지난주당첨번호() {
         String inputNumbers = "1, 8, 11, 31, 41, 42";
-        Lotto lastWinLottoInfo = Lotto.manual(inputNumbers);
+        WinLotto winLotto = new WinLotto(inputNumbers);
 
         List<Integer> expectedNumbers = new ArrayList<>();
         expectedNumbers.add(1);
@@ -31,16 +23,16 @@ class LottoTest {
         expectedNumbers.add(41);
         expectedNumbers.add(42);
 
-        assertThat(lastWinLottoInfo.numbers()).isEqualTo(expectedNumbers);
+        assertThat(winLotto.numbers()).isEqualTo(expectedNumbers);
     }
 
     @Test
     void ToString() {
         String inputNumbers = "1, 8, 11, 31, 41, 42";
-        Lotto lastWinLottoInfo = Lotto.manual(inputNumbers);
+        WinLotto winLotto = new WinLotto(inputNumbers);
 
         String expectedToString = "[1, 8, 11, 31, 41, 42]";
 
-        assertThat(lastWinLottoInfo.toString()).isEqualTo(expectedToString);
+        assertThat(winLotto.toString()).isEqualTo(expectedToString);
     }
 }

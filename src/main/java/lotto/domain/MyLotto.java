@@ -4,22 +4,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Lotto {
+public class MyLotto {
     private final List<Integer> numbers;
+    private int matchCount;
 
-    public Lotto(List<Integer> numbers) {
+    public MyLotto(List<Integer> numbers) {
         this.numbers = numbers;
+        this.matchCount = 0;
     }
 
-    public static Lotto auto() {
+    public static MyLotto auto() {
         List<Integer> autoNumbers = new ArrayList<>(LottoRule.NUMBER_RANGE);
         Collections.shuffle(autoNumbers);
         autoNumbers = autoNumbers.subList(0, LottoRule.CHOICE_COUNT);
         Collections.sort(autoNumbers);
-        return new Lotto(autoNumbers);
+        return new MyLotto(autoNumbers);
     }
 
-    public static Lotto manual(String inputString) {
+    public static MyLotto manual(String inputString) {
         String[] pickedNumbers = inputString.split(LottoRule.SPLIT_DELIMITER);
         List<Integer> manualNumbers = new ArrayList<>();
         for (String pickNumber : pickedNumbers) {
@@ -27,7 +29,7 @@ public class Lotto {
             manualNumbers.add(Integer.valueOf(pickNumber));
         }
         Collections.sort(manualNumbers);
-        return new Lotto(manualNumbers);
+        return new MyLotto(manualNumbers);
     }
 
     @Override

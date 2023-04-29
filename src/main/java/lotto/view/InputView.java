@@ -22,7 +22,7 @@ public class InputView {
         return this.money;
     }
 
-    public String lastWeekWinNumbers() {
+    public String winLottoInfo() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         scanner = new Scanner(System.in);
         return scanner.nextLine();
