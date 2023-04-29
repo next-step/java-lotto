@@ -86,7 +86,7 @@ public class TicketTest {
         //when
         WinnerTicket winnerTicket = ticket.winnerTicket(1);
         //then
-        assertThat(winnerTicket.ticketOnly().toString())
+        assertThat(winnerTicket.ticket().toString())
                 .as("당첨권의 숫자와 Ticket 인스턴스의 숫자는 일치한다")
                 .isEqualTo(ticket.toString());
     }
