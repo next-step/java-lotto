@@ -38,10 +38,10 @@ class OperatorTest {
         Operand secondOperand = new Operand("20");
 
         // when
-        Operand added = Operator.ADD.calculate(firstOperand, secondOperand);
+        OperationResult added = Operator.ADD.calculate(firstOperand, secondOperand);
 
         // then
-        assertThat(added).isEqualTo(new Operand("30"));
+        assertThat(added).isEqualTo(new OperationResult("30"));
     }
 
     @Test
@@ -51,10 +51,10 @@ class OperatorTest {
         Operand secondOperand = new Operand("20");
 
         // when
-        Operand subtracted = Operator.SUBTRACT.calculate(firstOperand, secondOperand);
+        OperationResult subtracted = Operator.SUBTRACT.calculate(firstOperand, secondOperand);
 
         // then
-        assertThat(subtracted).isEqualTo(new Operand("10"));
+        assertThat(subtracted).isEqualTo(new OperationResult("10"));
     }
 
     @Test
@@ -64,10 +64,10 @@ class OperatorTest {
         Operand secondOperand = new Operand("20");
 
         // when
-        Operand multiplied = Operator.MULTIPLY.calculate(firstOperand, secondOperand);
+        OperationResult multiplied = Operator.MULTIPLY.calculate(firstOperand, secondOperand);
 
         // then
-        assertThat(multiplied).isEqualTo(new Operand("600"));
+        assertThat(multiplied).isEqualTo(new OperationResult("600"));
     }
 
     @Test
@@ -77,10 +77,10 @@ class OperatorTest {
         Operand secondOperand = new Operand("3");
 
         // when
-        Operand divided = Operator.DIVIDE.calculate(firstOperand, secondOperand);
+        OperationResult divided = Operator.DIVIDE.calculate(firstOperand, secondOperand);
 
         // then
-        assertThat(divided).isEqualTo(new Operand("2"));
+        assertThat(divided).isEqualTo(new OperationResult("2"));
     }
 
     @DisplayName("나눗셈 연산의 결과가 정수가 아닐 경우, IllegalArgumentException 예외 발생")

@@ -19,8 +19,8 @@ public enum Operator {
         this.calculation = calculation;
     }
 
-    public Operand calculate(Operand firstOperand, Operand secondOperand) {
-        return new Operand(calculation.apply(firstOperand, secondOperand));
+    public OperationResult calculate(Operand firstOperand, Operand secondOperand) {
+        return new OperationResult(calculation.apply(firstOperand, secondOperand));
     }
 
     public static Operator of(String sign) {
