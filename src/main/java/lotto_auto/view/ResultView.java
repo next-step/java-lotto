@@ -35,7 +35,7 @@ public class ResultView {
     }
 
 
-    public void printStatistics(LottoResult result) {
+    public void printStatistics(LottoResult result , LottoTickets lottoTickets) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -43,10 +43,10 @@ public class ResultView {
         System.out.printf("4개 일치 (50000원)- %d개%n", result.getCountOfMatch(4));
         System.out.printf("5개 일치 (1500000원)- %d개%n", result.getCountOfMatch(5));
         System.out.printf("6개 일치 (2000000000원)- %d개%n", result.getCountOfMatch(6));
-        printReturnStatus(result);
+        printReturnStatus(result, lottoTickets);
     }
 
-    public void printReturnStatus(LottoResult result) {
+    public void printReturnStatus(LottoResult result , LottoTickets lottoTickets) {
         if (result.getRevenueRate() < 1) {
             System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n", result.getRevenueRate());
             return;
