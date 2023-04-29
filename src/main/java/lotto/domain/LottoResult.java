@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
 
     private final Map<LottoPrize, Integer> matchesResult = LottoPrize.makeLottoResult();
 
