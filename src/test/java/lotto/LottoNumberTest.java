@@ -4,6 +4,7 @@ import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoNumberTest {
     @Test
@@ -20,7 +21,10 @@ public class LottoNumberTest {
 
     @Test
     void exception() {
-        assertThat(LottoNumber.valueOf(0)).isInstanceOf(IllegalArgumentException.class);
-        assertThat(LottoNumber.valueOf(46)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.valueOf(0))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> LottoNumber.valueOf(46))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
