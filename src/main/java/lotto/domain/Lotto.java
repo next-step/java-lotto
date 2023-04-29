@@ -52,9 +52,9 @@ public class Lotto {
         }
     }
 
-    public long countToMatchedWinnerNumbers(Lotto winnerNumbers) {
+    public long countToMatchedWinningNumbers(Lotto winningLotto) {
         return numbers.stream()
-                .filter(winnerNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
     }
 

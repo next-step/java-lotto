@@ -14,8 +14,8 @@ public class LottoApplication {
         LottoTickets maunualLottoTickets = getManualLottoTickets(purchasedAmount);
         LottoTickets autoLottoTickets = issueLottoTickets(purchasedAmount);
         LottoTickets mergedLottoTickets = mergeLottoTickets(maunualLottoTickets, autoLottoTickets);
-        WinnerNumbers winnerNumbers = getWinnerNumbers();
-        showCalculatedWinnerStatistics(mergedLottoTickets, winnerNumbers);
+        WinningLotto winningLotto = getWinningLotto();
+        showCalculatedWinningStatistics(mergedLottoTickets, winningLotto);
     }
 
     private static PurchasedAmount getPurchasedAmount() {
@@ -42,23 +42,23 @@ public class LottoApplication {
         return mergedLottoTickets;
     }
 
-    private static WinnerNumbers getWinnerNumbers() {
-        Lotto winnerLotto = getWinnerLotto();
+    private static WinningLotto getWinningLotto() {
+        Lotto lastWeekWinningLotto = getLastWeekWinningLotto();
         LottoNumber bonusBall = getBonusBall();
-        return new WinnerNumbers(winnerLotto, bonusBall);
+        return new WinningLotto(lastWeekWinningLotto, bonusBall);
     }
 
-    private static Lotto getWinnerLotto() {
-        return Lotto.ofTypeIntegerList(InputView.showLastWeekWinnerNumbersConsole());
+    private static Lotto getLastWeekWinningLotto() {
+        return Lotto.ofTypeIntegerList(InputView.showLastWeekWinningNumbersConsole());
     }
 
     private static LottoNumber getBonusBall() {
         return new LottoNumber(InputView.showBonusBallConsole());
     }
 
-    private static void showCalculatedWinnerStatistics(LottoTickets lottoTickets, WinnerNumbers winnerNumbers) {
-        WinnerStatistics winnerStatistics = winnerNumbers.getWinnerStatistics(lottoTickets);
-        ResultView.showResult(winnerStatistics);
+    private static void showCalculatedWinningStatistics(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        WinningStatistics winningStatistics = winningLotto.getWinningStatistics(lottoTickets);
+        ResultView.showResult(winningStatistics);
     }
 
 }

@@ -19,7 +19,7 @@ public final class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<Integer> showLastWeekWinnerNumbersConsole() {
+    public static List<Integer> showLastWeekWinningNumbersConsole() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return toNumbers(removeWhiteSpace(SCANNER.nextLine()));
     }
@@ -48,18 +48,18 @@ public final class InputView {
         return manualLottos;
     }
 
-    private static String removeWhiteSpace(String winnerNumberAsString) {
-        return winnerNumberAsString.replace(CHAR_WHITE_SPACE, "");
+    private static String removeWhiteSpace(String winningNumberAsString) {
+        return winningNumberAsString.replace(CHAR_WHITE_SPACE, "");
     }
 
-    private static List<Integer> toNumbers(String refinedWinnerNumber) {
-        return Arrays.stream(splitDelimiter(refinedWinnerNumber))
+    private static List<Integer> toNumbers(String refinedWinningNumber) {
+        return Arrays.stream(splitDelimiter(refinedWinningNumber))
                 .map(Integer::parseInt)
                 .collect(toUnmodifiableList());
     }
 
-    private static String[] splitDelimiter(String refinedWinnerNumber) {
-        return refinedWinnerNumber.split(NUMBER_DELIMITER);
+    private static String[] splitDelimiter(String refinedWinningNumber) {
+        return refinedWinningNumber.split(NUMBER_DELIMITER);
     }
 
 }

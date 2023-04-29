@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTickets;
-import lotto.domain.WinnerStatistics;
+import lotto.domain.WinningStatistics;
 
 import java.util.List;
 
@@ -24,13 +24,13 @@ public final class ResultView {
         tickets.forEach(System.out::println);
     }
 
-    public static void showResult(WinnerStatistics winnerStatistics) {
+    public static void showResult(WinningStatistics winningStatistics) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         LottoRank.getRankValues()
-                .forEach(rank -> showRewards(rank, winnerStatistics.getCountByRank(rank)));
-        showIncomeRate(winnerStatistics.getIncomeRate());
+                .forEach(rank -> showRewards(rank, winningStatistics.getCountByRank(rank)));
+        showIncomeRate(winningStatistics.getIncomeRate());
     }
 
     private static void showIncomeRate(double incomeRate) {
