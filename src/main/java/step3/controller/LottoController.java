@@ -18,11 +18,15 @@ public class LottoController {
         OutputView.outPutLottos(lottoService.getLottos());
 
         InputView.newLineRemove();
+        String lastWeekWinningNumbers = InputView.askLastWeekWinningNumbers();
 
-        Lotto winningLotto = LottoService.createWinningLotto(InputView.askLastWeekWinningNumbers());
-        lottoService.calculatorLottoWinning(winningLotto);
+        lottoService.hasBonusNumber(LottoService.createBonusNumber(InputView.askBonusNumber()));
 
-        ProfitCalculatorService from = ProfitCalculatorService.of(lottoService.getLottos(), purchaseAmount);
-        OutputView.outPutProfit(from.getProfit(), from.getWinningResult());
+        Lotto winningLotto = LottoService.createWinningLotto(lastWeekWinningNumbers);
+        lottoService.calculatorWinning(winningLotto);
+
+        ProfitCalculatorService profitCalculatorService = ProfitCalculatorService.of(lottoService.getLottos(), purchaseAmount);
+        profitCalculatorService.calculatorProfit();
+        OutputView.outPutProfit(profitCalculatorService.getProfit(), profitCalculatorService.getWinningResult());
     }
 }

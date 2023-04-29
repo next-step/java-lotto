@@ -1,6 +1,7 @@
 package step3.domain;
 
 import step3.domain.model.Lotto.Lotto;
+import step3.domain.model.Lotto.LottoNumber;
 import step3.domain.model.Lotto.Lottos;
 import step3.domain.strategy.lotto.LottoPolicyStrategy;
 
@@ -15,13 +16,23 @@ public class LottoService {
         return new LottoService(lottoCount);
     }
 
+    public static LottoNumber createBonusNumber(int bonusNumber) {
+        return LottoNumber.from(bonusNumber);
+    }
+
     public static Lotto createWinningLotto(String lastWinningNumbers) {
         return Lotto.fromWinningLotto(new LottoPolicyStrategy(), lastWinningNumbers);
     }
 
-    public void calculatorLottoWinning(Lotto winningLotto) {
+    public void calculatorWinning(Lotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
             lotto.calculatorLottoWinning(winningLotto);
+        }
+    }
+
+    public void hasBonusNumber(LottoNumber bonusNumber) {
+        for (Lotto lotto : lottos.getLottos()) {
+            lotto.hasBonusNumberLottos(bonusNumber);
         }
     }
 

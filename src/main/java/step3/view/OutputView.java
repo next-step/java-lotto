@@ -35,8 +35,12 @@ public class OutputView {
         System.out.println(String.format("%d개 일치 (%d원)- %d개", WinningAmountByRank.SECOND.getRank(),
                 WinningAmountByRank.SECOND.getAmount(), winningResult.getOrDefault(WinningAmountByRank.SECOND.getKey(), 0)));
 
+        System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", WinningAmountByRank.SECOND.getRank(),
+                WinningAmountByRank.BONUS.getAmount(), winningResult.getOrDefault(WinningAmountByRank.BONUS.getKey(), 0)));
+
         System.out.println(String.format("%d개 일치 (%d원)- %d개", WinningAmountByRank.FIRST.getRank(),
                 WinningAmountByRank.FIRST.getAmount(), winningResult.getOrDefault(WinningAmountByRank.FIRST.getKey(), 0)));
+
         System.out.println(String.format("수익률 %f.", Profit));
     }
 

@@ -15,6 +15,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return this.number == bonusNumber.getNumber();
+    }
 
     @Override
     public int compareTo(LottoNumber other) {

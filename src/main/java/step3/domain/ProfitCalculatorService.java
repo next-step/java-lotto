@@ -8,15 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProfitCalculatorService {
-    public static final int FIRST_PLACE = 6;
-    public static final int SECOND_PLACE = 5;
-    public static final int THIRD_PLACE = 4;
-    public static final int FOURTH_PLACE = 3;
-    public static final int EMPTY_PLACE = 0;
-
     private Lottos lottos;
     private int purchaseAmount;
-    private Map<String, Integer> winningCount = new HashMap<>();
+    private Map<String, Integer> winningResult = new HashMap<>();
+    private double profit;
 
     public ProfitCalculatorService(Lottos lottos, int purchaseAmount) {
         this.lottos = lottos;
@@ -30,17 +25,37 @@ public class ProfitCalculatorService {
         return new ProfitCalculatorService(lottos, purchaseAmount);
     }
 
-    public double getProfit() {
+    public void calculatorProfit() {
         double winningAmount = 0;
         for (Lotto lotto : lottos.getLottos()) {
-            WinningAmountByRank from = WinningAmountByRank.from(lotto.getWinningCount());
-            winningCount.put(from.getKey(), winningCount.getOrDefault(from.getKey(), 0) + 1);
+            int winningCount = getWinningResult(lotto);
+            WinningAmountByRank from = WinningAmountByRank.from(winningCount);
+            winningResult.put(from.getKey(), winningResult.getOrDefault(from.getKey(), 0) + 1);
             winningAmount += from.getAmount();
         }
-        return winningAmount / purchaseAmount;
+        profit = winningAmount / purchaseAmount;
+    }
+
+    public double getProfit() {
+        return profit;
     }
 
     public Map<String, Integer> getWinningResult() {
-        return winningCount;
+        return winningResult;
+    }
+
+    public int getWinningResult(Lotto lotto) {
+        if (isWinningRankSecond(lotto) & isLottoBonusNumber(lotto)) {
+            return WinningAmountByRank.BONUS_PLACE;
+        }
+        return lotto.getWinningResult();
+    }
+
+    private boolean isWinningRankSecond(Lotto lotto) {
+        return lotto.getWinningResult() == WinningAmountByRank.SECOND_PLACE;
+    }
+
+    private boolean isLottoBonusNumber(Lotto lotto) {
+        return lotto.getBonusNumberResult() == WinningAmountByRank.BONUS_PLACE;
     }
 }

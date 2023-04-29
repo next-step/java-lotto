@@ -1,5 +1,6 @@
 package step3.domain.model.Lotto;
 
+import step3.domain.model.WinningAmountByRank;
 import step3.domain.strategy.lotto.Strategy;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     private LottoNumbers numbers;
     private int winningCount = 0;
+    private int bonusNumberResult = 0;
 
     public Lotto(LottoNumbers numbers) {
         this.numbers = numbers;
@@ -43,7 +45,19 @@ public class Lotto {
                 .collect(Collectors.toMap(LottoNumber::getNumber, LottoNumber::getNumber));
     }
 
-    public int getWinningCount() {
+    public void hasBonusNumberLottos(LottoNumber bonusNumber) {
+        for (LottoNumber lottoNumber : numbers.getLottoNumbers()) {
+            if (lottoNumber.hasBonusNumber(bonusNumber)) {
+                this.bonusNumberResult = WinningAmountByRank.BONUS_PLACE;
+            }
+        }
+    }
+
+    public int getBonusNumberResult() {
+        return bonusNumberResult;
+    }
+
+    public int getWinningResult() {
         return winningCount;
     }
 }
