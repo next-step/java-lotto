@@ -1,11 +1,12 @@
 package study.lotto.step1.domain;
 
-import java.util.Deque;
+import java.util.List;
 
 public class Operators {
-    private final Deque<Operator> operators;
+    private static final int FIRST_INDEX = 0;
+    private final List<Operator> operators;
 
-    public Operators(Deque<Operator> operators) {
+    public Operators(List<Operator> operators) {
         this.operators = operators;
     }
 
@@ -14,6 +15,6 @@ public class Operators {
     }
 
     public Operator removeFirst() {
-        return operators.removeFirst();
+        return operators.remove(FIRST_INDEX);
     }
 }
