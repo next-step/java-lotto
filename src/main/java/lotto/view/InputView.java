@@ -1,8 +1,10 @@
 package lotto.view;
 
-import java.util.ArrayList;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -28,24 +30,26 @@ public class InputView {
     return validateDirectTryCount(scanner.nextInt(), tryTotalCount);
   }
 
-  public static List<List<Integer>> inputDirectLottoNumbers(int tryDirectInputCount, int tryTotalCount) {
+  public static LottoTickets inputDirectLottoNumbers(int tryDirectInputCount, int tryTotalCount) {
     System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-    List<List<Integer>> directLottoNumbers = new ArrayList<>();
+    LottoTickets directLottoTickets = new LottoTickets();
+
     for (int i = 0; i < tryDirectInputCount; i++) {
-      directLottoNumbers.add(inputLottoNumbers());
+      directLottoTickets.addLottoTicket(inputLottoTicket());
     }
+
 
     System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.", tryDirectInputCount, tryTotalCount - tryDirectInputCount);
     System.out.println();
 
-    return directLottoNumbers;
+    return directLottoTickets;
   }
 
-  public static List<Integer> inputWinningTicketNumbers() {
+  public static LottoTicket inputWinningTicketNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-    return inputLottoNumbers();
+    return inputLottoTicket();
   }
 
   public static int inputBonusNumber() {
@@ -54,10 +58,26 @@ public class InputView {
     return scanner.nextInt();
   }
 
-  private static List<Integer> inputLottoNumbers() {
-    return Arrays.stream(scanner.next().split(DELIMITER))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+  private static LottoTicket inputLottoTicket() {
+    boolean validInput = true;
+    LottoTicket lottoTicket = null;
+
+    while (validInput) {
+      try {
+        lottoTicket = new LottoTicket(Arrays.stream(scanner.next().split(DELIMITER))
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet()));
+        validInput = false;
+      } catch (NumberFormatException numberFormatException) {
+        System.out.println("숫자만 입력하셔야 합니다.");
+      } catch (IllegalArgumentException illegalArgumentException) {
+        System.out.println(illegalArgumentException.getMessage());
+      }
+    }
+
+
+    return lottoTicket;
   }
 
   private static int validateDirectTryCount(int directTryCount, int tryTotalCount) {

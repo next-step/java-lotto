@@ -24,11 +24,11 @@ public class LottoResult {
     return lottoRate;
   }
 
-  public double calculateRateOfReturn(List<LottoRank> lottoRecord) {
+  private double calculateRateOfReturn(List<LottoRank> lottoRecord) {
     return lottoRecord.stream().mapToDouble(LottoRank::prizeMoney).sum() / inputMoney(lottoRecord);
   }
 
-  public Map<LottoRank, Integer> numbersPerRank(List<LottoRank> lottoRecord) {
+  private Map<LottoRank, Integer> numbersPerRank(List<LottoRank> lottoRecord) {
     Map<LottoRank, Integer> numbersPerRankMap = new EnumMap<>(LottoRank.class);
 
     for (LottoRank lottoRank : LottoRank.lottoMatchedNumberList()) {

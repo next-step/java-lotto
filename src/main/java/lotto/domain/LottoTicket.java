@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,7 +10,7 @@ public class LottoTicket {
   private static final String ILLEGAL_COUNT_MESSAGE = "로또 번호는 6개 입력하셔야 합니다.";
   private final Set<LottoNumber> lottoTicket;
 
-  public LottoTicket(List<LottoNumber> lottoNumbers) {
+  public LottoTicket(Set<LottoNumber> lottoNumbers) {
     lottoTicket = new TreeSet<>(lottoNumbers);
 
     validateLottoTicket(lottoTicket);

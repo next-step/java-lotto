@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoVendingMachine;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,12 +12,12 @@ public class LottoApplication {
     int tryTotalCount = InputView.inputTryCount();
     int tryDirectInputCount = InputView.inputDirectTryCount(tryTotalCount);
 
-    List<List<Integer>> directInputLottoNumbers = InputView.inputDirectLottoNumbers(tryDirectInputCount, tryTotalCount);
+    LottoTickets directInputLottoTickets = InputView.inputDirectLottoNumbers(tryDirectInputCount, tryTotalCount);
 
-    LottoTickets soldLottoTicket = LottoVendingMachine.issueLottoTickets(tryTotalCount, directInputLottoNumbers);
+    LottoTickets soldLottoTicket = LottoVendingMachine.issueLottoTickets(tryTotalCount, directInputLottoTickets);
     ResultView.showLottoTickets(soldLottoTicket);
 
-    List<Integer> winningLottoNumbers = InputView.inputWinningTicketNumbers();
+    LottoTicket winningLottoNumbers = InputView.inputWinningTicketNumbers();
     int bonusNumber = InputView.inputBonusNumber();
     LottoGame lottoGame = LottoVendingMachine.startGame(soldLottoTicket, winningLottoNumbers, bonusNumber);
 

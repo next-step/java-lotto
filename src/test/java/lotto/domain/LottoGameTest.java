@@ -4,10 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoGameTest {
 
@@ -17,10 +17,10 @@ public class LottoGameTest {
   public void setUp() {
     LottoTickets lottoTickets = new LottoTickets();
 
-    lottoTickets.addLottoTicket(new LottoTicket(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
-    lottoTickets.addLottoTicket(new LottoTicket(List.of(new LottoNumber(14), new LottoNumber(15), new LottoNumber(16), new LottoNumber(17), new LottoNumber(18), new LottoNumber(19))));
+    lottoTickets.addLottoTicket(new LottoTicket(Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
+    lottoTickets.addLottoTicket(new LottoTicket(Set.of(new LottoNumber(14), new LottoNumber(15), new LottoNumber(16), new LottoNumber(17), new LottoNumber(18), new LottoNumber(19))));
 
-    LottoTicket winningLottoTicket = new LottoTicket(List.of(new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)));
+    LottoTicket winningLottoTicket = new LottoTicket(Set.of(new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)));
     LottoNumber bonusNumber = new LottoNumber(23);
 
     LottoGame lottoGame = new LottoGame(lottoTickets, winningLottoTicket, bonusNumber);
