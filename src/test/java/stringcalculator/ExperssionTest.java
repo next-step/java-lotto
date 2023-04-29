@@ -1,9 +1,7 @@
 package stringcalculator;
 
-import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -59,11 +57,12 @@ public class ExperssionTest {
         Assertions.assertThat(experssion.reduce()).isEqualTo(Integer.parseInt(expected));
     }
 
-    @Test
     @DisplayName("복합연산")
-    void 복합연산() {
-        Experssion experssion = new Experssion("3 + 4 - 2 * 6 / 5");
+    @ParameterizedTest(name = "{displayName} [{index}] {0} = {1}")
+    @CsvSource(value = {"3 + 4 - 2 * 6 / 5,6", "6 * 3 - 2 / 2,8", "2 + 18 - 5 * 2,30", "2 / 2 * 5 + 4,9"})
+    void 복합연산(String expression, String expected) {
+        Experssion experssion = new Experssion(expression);
 
-        Assertions.assertThat(experssion.reduce()).isEqualTo(6);
+        Assertions.assertThat(experssion.reduce()).isEqualTo(Integer.parseInt(expected));
     }
 }
