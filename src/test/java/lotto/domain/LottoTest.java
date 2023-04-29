@@ -33,4 +33,14 @@ class LottoTest {
 
         assertThat(lastWinLottoInfo.numbers()).isEqualTo(expectedNumbers);
     }
+
+    @Test
+    void ToString() {
+        String inputNumbers = "1, 8, 11, 31, 41, 42";
+        Lotto lastWinLottoInfo = Lotto.manual(inputNumbers);
+
+        String expectedToString = "[1, 8, 11, 31, 41, 42]";
+
+        assertThat(lastWinLottoInfo.toString()).isEqualTo(expectedToString);
+    }
 }
