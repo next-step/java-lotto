@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +20,7 @@ class LottoTicketTest {
     @DisplayName("로또 티켓 번호는 서로 다른 번호 6개로 생성하지 않으면 실패한다")
     @Test
     void createLottoTicket_fail() {
-        Set<LottoNumber> numbers = new HashSet<>(Arrays.asList(
+        Set<LottoNumber> numbers = new TreeSet<>(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -30,7 +31,7 @@ class LottoTicketTest {
 
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoTicket(numbers))
-                .withMessage("로또는 6개의 번호로 이루어져야합니다");
+                .withMessage("로또는 6개의 번호로 이루어져야 합니다");
     }
 
     @ParameterizedTest(name = "로또 티켓 번호는 서로 다른 번호 6개로 생성하면 성공한다")
@@ -40,7 +41,7 @@ class LottoTicketTest {
             "5, 10, 15, 20, 25, 30"
     })
     void createLottoTicket_Success(int num1, int num2, int num3, int num4, int num5, int num6) {
-        Set<LottoNumber> numbers = new HashSet<>();
+        Set<LottoNumber> numbers = new TreeSet<>();
         numbers.add(new LottoNumber(num1));
         numbers.add(new LottoNumber(num2));
         numbers.add(new LottoNumber(num3));
@@ -73,7 +74,7 @@ class LottoTicketTest {
     @ParameterizedTest(name = "로또 티켓에 포함되어 없는 번호를 전달하면 False 를 리턴한다")
     @ValueSource(ints = {3, 8, 15, 28, 33, 41})
     void whenDoseNotContainsLottoNumber_thenReturnFalse(int number){
-        Set<LottoNumber> numbers = new HashSet<>(Arrays.asList(
+        Set<LottoNumber> numbers = new TreeSet<>(Arrays.asList(
                 new LottoNumber(2),
                 new LottoNumber(5),
                 new LottoNumber(11),

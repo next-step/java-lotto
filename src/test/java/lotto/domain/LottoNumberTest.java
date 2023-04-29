@@ -24,3 +24,4 @@ class LottoNumberTest {
         Assertions.assertThat(number).isEqualTo(lottoNumber.findLottoNumber());
     }
 }
+

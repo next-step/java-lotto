@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
@@ -14,6 +15,11 @@ public class LottoNumber {
         if (number < 1 || number > 45) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이의 숫자여야 합니다");
         }
+    }
+
+    public boolean isMatchesWinningNumber(List<Integer> winningNumbers) {
+        return winningNumbers.stream()
+                .anyMatch(winningNumber -> number == winningNumber);
     }
 
     public int findLottoNumber() {
@@ -32,4 +38,11 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.number, o.number);
+    }
 }
+
+
