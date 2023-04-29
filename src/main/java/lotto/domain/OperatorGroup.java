@@ -13,7 +13,7 @@ public class OperatorGroup {
   private final List<String> operatorList;
 
   public OperatorGroup(List<String> formulaList) {
-    this.operatorList = this.makeOperatorList(formulaList);
+    this.operatorList = makeOperatorList(formulaList);
   }
 
   private List<String> makeOperatorList(List<String> formulaList) {
@@ -29,7 +29,7 @@ public class OperatorGroup {
   }
 
   private String isThrowIllegalArgumentException(String strOperator) {
-    if(!this.isOperator(strOperator)) {
+    if(!isOperator(strOperator)) {
       throw new IllegalArgumentException ("옳바른 입력형태가 아닙니다. (사칙 연산자외의 다른 문자가 입력.)");
     }
 

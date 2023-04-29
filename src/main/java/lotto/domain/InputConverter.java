@@ -9,7 +9,7 @@ public class InputConverter {
 
     public List<String> formulaToStrList(String formula) {
         List<String> formulaList = Arrays.asList(formula.trim().split(" "));
-        this.isThrowIllegalArgumentException(formulaList);
+        isThrowIllegalArgumentException(formulaList);
 
         return formulaList;
     }
@@ -19,7 +19,7 @@ public class InputConverter {
     }
 
     private void isThrowIllegalArgumentException(List<String> formulaList) {
-        if(!this.isLastWordNumber(formulaList)) {
+        if(!isLastWordNumber(formulaList)) {
             throw new IllegalArgumentException ("마지막 입력값이 숫자가 아닙니다.");
         }
     }

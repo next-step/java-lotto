@@ -19,7 +19,7 @@ public class Calculator {
 
     public Double calculateFormula(List<Double> numberList, Queue<String> operatorQueue) {
         return numberList.stream()
-            .reduce((x, y) -> this.calculate(x, y, operatorQueue.remove()))
+            .reduce((x, y) -> calculate(x, y, operatorQueue.remove()))
             .get();
     }
 
