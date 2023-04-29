@@ -44,4 +44,15 @@ public class TicketTest {
             Ticket ticket = new Ticket(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("문자열로 숫자를 입력받아 Ticket 을 생성한다")
+    @Test
+    public void constructorByString() {
+        //given
+        Ticket expect = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
+        //when
+        Ticket actual = new Ticket("1, 2, 3, 4, 5, 6");
+        //then
+        assertThat(actual.toString()).as("Set<Int> 생성자와 String 생성자가 입력이 같다면 출력도 같다").isEqualTo(expect.toString());
+    }
 }
