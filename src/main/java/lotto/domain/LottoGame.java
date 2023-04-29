@@ -5,6 +5,7 @@ import lotto.domain.strategy.DefaultRandomStrategy;
 import lotto.domain.strategy.RandomStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,11 +13,22 @@ public class LottoGame {
   private final LottoTickets lottoTickets;
 
   public LottoGame(Money purchaseAmount) {
-    this(purchaseAmount, new DefaultRandomStrategy());
+    this(purchaseAmount, new DefaultRandomStrategy(), Collections.emptyList());
   }
 
   public LottoGame(Money purchaseAmount, RandomStrategy randomStrategy) {
-    this.lottoTickets = new LottoTickets(issueLottoTickets(purchaseAmount, randomStrategy));
+    this(purchaseAmount, randomStrategy, Collections.emptyList());
+  }
+
+  public LottoGame(
+      Money purchaseAmount,
+      RandomStrategy randomStrategy,
+      List<LottoTicket> manualTickets
+  ) {
+    List<LottoTicket> combinedTickets = new ArrayList<>();
+    combinedTickets.addAll(manualTickets);
+    combinedTickets.addAll(issueLottoTickets(purchaseAmount, randomStrategy));
+    this.lottoTickets = new LottoTickets(combinedTickets);
   }
 
   private static List<LottoTicket> issueLottoTickets(Money purchaseAmount, RandomStrategy randomStrategy) {
