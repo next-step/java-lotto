@@ -1,18 +1,22 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.WinNumbers;
-import lotto.domain.WinStatistics;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.domain.*;
+import lotto.view.*;
+
+import java.util.List;
 
 public class LottoGame {
 
     public static void main(String[] args) {
-        Lottos lottos = new Lottos(InputView.purchaseAmount());
+        InputView inputView = new RetryInputView(new DefaultInputView());
+        long purchaseAmount = inputView.purchaseAmount();
+        int manualQuantity = inputView.manualQuantity(purchaseAmount);
+
+        List<Lotto> manualNumbers = inputView.manualNumbers(manualQuantity);
+        Lottos lottos = new Lottos(purchaseAmount, manualNumbers);
         OutputView.purchaseHistory(lottos);
 
-        WinNumbers winNumbers = new WinNumbers(InputView.lastWeekWinningNumbers(), InputView.bonusBall());
+        WinNumbers winNumbers = new WinNumbers(inputView.lastWeekWinningNumbers(), inputView.bonusBall());
 
         WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
 
