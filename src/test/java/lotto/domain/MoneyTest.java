@@ -25,4 +25,10 @@ class MoneyTest {
     assertThat(money.getAmount())
         .isEqualTo(100000);
   }
+
+  @Test
+  void minus() {
+    assertThat(money.minus(5000))
+        .isEqualTo(new Money(95000));
+  }
 }

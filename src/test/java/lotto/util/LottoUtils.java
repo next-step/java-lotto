@@ -6,6 +6,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoUtils {
@@ -23,5 +24,11 @@ public class LottoUtils {
                                   .map(LottoTicket::new)
                                   .collect(Collectors.toList())
     );
+  }
+
+  public static List<LottoTicket> getLottoTicketAsList(LottoNumbers... lottoNumbers) {
+    return Arrays.stream(lottoNumbers)
+                 .map(LottoTicket::new)
+                 .collect(Collectors.toList());
   }
 }

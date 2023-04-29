@@ -7,8 +7,14 @@ import lotto.domain.dto.LottoTicketsDto;
 import java.util.Map;
 
 public class OutputView {
-  public static void printLottoTickets(LottoTicketsDto lottoTicketsDto) {
-    System.out.println(lottoTicketsDto.lottoTickets.size() + "개를 구매했습니다.");
+  public static void printLottoTickets(LottoTicketsDto lottoTicketsDto, int manualLottoTicketsCount) {
+    System.out.println(
+        "\n수동으로 " +
+        manualLottoTicketsCount +
+        "장, 자동으로 " +
+        (lottoTicketsDto.lottoTickets.size() - manualLottoTicketsCount) +
+        "장을 구매했습니다."
+    );
     lottoTicketsDto.lottoTickets
         .forEach(System.out::println);
     System.out.println();

@@ -17,6 +17,10 @@ public class Money {
     return amount;
   }
 
+  public Money minus(int amount) {
+    return new Money(this.amount - amount);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoTicket.TICKET_PRICE;
+
 public class LottoGame {
   private final LottoTickets lottoTickets;
 
@@ -25,16 +27,21 @@ public class LottoGame {
       RandomStrategy randomStrategy,
       List<LottoTicket> manualTickets
   ) {
+    Money remainingAmount = purchaseAmount.minus(TICKET_PRICE * manualTickets.size());
     List<LottoTicket> combinedTickets = new ArrayList<>();
     combinedTickets.addAll(manualTickets);
-    combinedTickets.addAll(issueLottoTickets(purchaseAmount, randomStrategy));
+    combinedTickets.addAll(issueLottoTickets(remainingAmount, randomStrategy));
     this.lottoTickets = new LottoTickets(combinedTickets);
+  }
+
+  public static Builder builder(Money purchaseAmount) {
+    return new Builder(purchaseAmount);
   }
 
   public static class Builder {
     private Money purchaseAmount;
     private RandomStrategy randomStrategy = new DefaultRandomStrategy();
-    private List<LottoTicket> manualTickets = Collections.emptyList();
+    private List<LottoTicket> manualLottoTickets = Collections.emptyList();
 
     public Builder(Money purchaseAmount) {
       this.purchaseAmount = purchaseAmount;
@@ -46,12 +53,12 @@ public class LottoGame {
     }
 
     public Builder manualTickets(List<LottoTicket> manualTickets) {
-      this.manualTickets = manualTickets;
+      this.manualLottoTickets = manualTickets;
       return this;
     }
 
     public LottoGame build() {
-      return new LottoGame(purchaseAmount, randomStrategy, manualTickets);
+      return new LottoGame(purchaseAmount, randomStrategy, manualLottoTickets);
     }
   }
 

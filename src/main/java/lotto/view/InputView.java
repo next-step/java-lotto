@@ -21,7 +21,7 @@ public class InputView {
     int manualTicketCount = Integer.parseInt(sc.nextLine());
 
     System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-    List manualLottoTickets = new ArrayList();
+    List<LottoTicket> manualLottoTickets = new ArrayList<>();
     for (int i = 0; i < manualTicketCount; i++) {
       manualLottoTickets.add(new LottoTicket(Arrays.stream(sc.nextLine().split(", "))
                                                    .map(LottoNumber::from)
