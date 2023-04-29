@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryTest {
 
@@ -15,10 +16,20 @@ public class LotteryTest {
         Lottery lottery = new Lottery(List.of(1, 2, 3, 4, 5, 6));
 
         Lotteries lotteries = new Lotteries(lottery, winningNumbers);
-        List<Integer> integers = lotteries.calculateResult();
+        List<Integer> result = lotteries.calculateResult(winningNumbers);
 
-        Assertions.assertThat(integers.get(3)).isEqualTo(1);
+        assertThat(result).hasSize(1).contains(6);
     }
 
+    @DisplayName("2등을 추첨을 위해 보너스 볼(추가번호)을 하나 더 추첨한다.")
+    @Test
+    void input_bonus_ball() {
+        Lottery lottery = new Lottery(List.of(1, 2, 3, 4, 5, 6));
 
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 7);
+        int bonusNumber = 6;
+        boolean matchResult = lottery.matchWithBonusBall(winningNumbers, bonusNumber);
+
+        assertThat(matchResult).isTrue();
+    }
 }

@@ -38,7 +38,7 @@ class LotteriesTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
         Lotteries lotteries = new Lotteries(100, winningNumbers);
-        List<Integer> integers = lotteries.calculateResult();
+        List<Integer> integers = lotteries.calculateResult(winningNumbers);
         System.out.println(integers);
     }
 
