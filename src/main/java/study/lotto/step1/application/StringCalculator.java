@@ -8,8 +8,15 @@ public class StringCalculator {
     }
 
     public static String calculate(String expression) {
-        Operands operands = ExpressionParser.operands(expression);
-        Operators operators = ExpressionParser.operators(expression);
+        validateExpression(expression);
+
+        return calculate(
+                ExpressionParser.operands(expression),
+                ExpressionParser.operators(expression)
+        );
+    }
+
+    private static String calculate(Operands operands, Operators operators) {
         validateOperandsAndOperators(operands, operators);
 
         while(operators.hasNext()) {
@@ -18,6 +25,12 @@ public class StringCalculator {
         }
 
         return operands.removeFirst().plainString();
+    }
+
+    private static void validateExpression(String expression) {
+        if(expression == null || expression.isBlank()) {
+            throw new IllegalArgumentException("입력 값은 null이거나 공백일 수 없습니다: " + expression);
+        }
     }
 
     private static Operation operation(Operands operands, Operators operators) {
