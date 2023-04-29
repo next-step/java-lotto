@@ -25,8 +25,7 @@ public final class ResultView {
     }
 
     public static void showResult(WinnerStatistics winnerStatistics) {
-        System.out.println();
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         LottoRank.getRankValues()
