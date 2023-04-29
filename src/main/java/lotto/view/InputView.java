@@ -3,8 +3,10 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
+
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final int PRICE_OF_LOTTO_TICKET = 1000;
+
+    public static final int PRICE_OF_LOTTO_TICKET = 1000;
 
     private InputView() {
     }
