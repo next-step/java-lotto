@@ -12,27 +12,27 @@ public class WinnerTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public Ticket ticketOnly() {
-        return new Ticket(numbers);
+    public UserTicket ticketOnly() {
+        return new UserTicket(numbers);
     }
 
-    public Boolean includeBonus(Ticket ticket) {
-        return ticket.includeNumber(this.bonusNumber);
+    public Boolean includeBonus(UserTicket userTicket) {
+        return userTicket.includeNumber(this.bonusNumber);
     }
 
-    public int countWinner(List<Ticket> challengeTickets, Prize prize) {
+    public int countWinner(List<UserTicket> challengeUserTickets, Prize prize) {
         int count = 0;
-        for (Ticket ticket : challengeTickets) {
-            count = count + (matchCount(ticket) && (checkBonusCondition(ticket, prize)) ? 1 : 0);
+        for (UserTicket userTicket : challengeUserTickets) {
+            count = count + (matchCount(userTicket) && (checkBonusCondition(userTicket, prize)) ? 1 : 0);
         }
         return count;
     }
 
-    private boolean checkBonusCondition(Ticket ticket, Prize prize) {
-        return (prize == Prize.SECOND) ? this.includeBonus(ticket) : !this.includeBonus(ticket);
+    private boolean checkBonusCondition(UserTicket userTicket, Prize prize) {
+        return (prize == Prize.SECOND) ? this.includeBonus(userTicket) : !this.includeBonus(userTicket);
     }
 
-    private boolean matchCount(Ticket ticket) {
-        return Prize.THIRD.isMatch(ticket.countMatchNumbers(this.ticketOnly()));
+    private boolean matchCount(UserTicket userTicket) {
+        return Prize.THIRD.isMatch(userTicket.countMatchNumbers(this.ticketOnly()));
     }
 }

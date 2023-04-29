@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Ticket {
+public class UserTicket {
     private final Set<Integer> numbers;
 
-    public Ticket(Set<Integer> numbers) {
+    public UserTicket(Set<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    public Ticket(String stringNumbers) {
+    public UserTicket(String stringNumbers) {
         Set<Integer> numbers = parseToNumbers(stringNumbers);
         validate(numbers);
         this.numbers = numbers;
@@ -39,9 +39,9 @@ public class Ticket {
         }
     }
 
-    public int countMatchNumbers(Ticket otherTicket) {
+    public int countMatchNumbers(UserTicket otherUserTicket) {
         Set<Integer> copyThisNumbers = new HashSet<>(this.numbers);
-        copyThisNumbers.addAll(otherTicket.numbers);
+        copyThisNumbers.addAll(otherUserTicket.numbers);
         return overlapCount(copyThisNumbers);
     }
 
@@ -62,10 +62,10 @@ public class Ticket {
         return this.numbers.contains(bonusNumber);
     }
 
-    public int countWinner(List<Ticket> challengeTickets, Prize prize) {
+    public int countWinner(List<UserTicket> challengeUserTickets, Prize prize) {
         int count = 0;
-        for (Ticket ticket : challengeTickets) {
-            count = count + (prize.isMatch(this.countMatchNumbers(ticket)) ? 1 : 0);
+        for (UserTicket userTicket : challengeUserTickets) {
+            count = count + (prize.isMatch(this.countMatchNumbers(userTicket)) ? 1 : 0);
         }
         return count;
     }

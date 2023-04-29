@@ -14,14 +14,14 @@ public class Statics {
     private final int income;
     private final double profitRatio;
 
-    public Statics(List<Ticket> tickets, WinnerTicket winnerTicket) {
-        this.countFirst = aggregate(tickets, winnerTicket.ticketOnly(), Prize.FIRST);
-        this.countSecond = aggregate(tickets, winnerTicket, Prize.SECOND);
-        this.countThird = aggregate(tickets, winnerTicket, Prize.THIRD);
-        this.countFourth = aggregate(tickets, winnerTicket.ticketOnly(), Prize.FOURTH);
-        this.countFifth = aggregate(tickets, winnerTicket.ticketOnly(), Prize.FIFTH);
+    public Statics(List<UserTicket> userTickets, WinnerTicket winnerTicket) {
+        this.countFirst = aggregate(userTickets, winnerTicket.ticketOnly(), Prize.FIRST);
+        this.countSecond = aggregate(userTickets, winnerTicket, Prize.SECOND);
+        this.countThird = aggregate(userTickets, winnerTicket, Prize.THIRD);
+        this.countFourth = aggregate(userTickets, winnerTicket.ticketOnly(), Prize.FOURTH);
+        this.countFifth = aggregate(userTickets, winnerTicket.ticketOnly(), Prize.FIFTH);
         this.income = aggregateIncome();
-        this.profitRatio = aggregateProfitRatio(tickets.size(), this.income);
+        this.profitRatio = aggregateProfitRatio(userTickets.size(), this.income);
     }
 
     private double aggregateProfitRatio(int ticketCount, int income) {
@@ -40,12 +40,12 @@ public class Statics {
         return income;
     }
 
-    private int aggregate(List<Ticket> challengerTickets, WinnerTicket winnerTicket, Prize prize) {
-        return winnerTicket.countWinner(challengerTickets, prize);
+    private int aggregate(List<UserTicket> challengerUserTickets, WinnerTicket winnerTicket, Prize prize) {
+        return winnerTicket.countWinner(challengerUserTickets, prize);
     }
 
-    private int aggregate(List<Ticket> challengerTickets, Ticket winnerTicket, Prize prize) {
-        return winnerTicket.countWinner(challengerTickets, prize);
+    private int aggregate(List<UserTicket> challengerUserTickets, UserTicket winnerUserTicket, Prize prize) {
+        return winnerUserTicket.countWinner(challengerUserTickets, prize);
     }
 
     public int getCountFifth() {

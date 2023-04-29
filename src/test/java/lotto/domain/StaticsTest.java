@@ -17,29 +17,29 @@ public class StaticsTest {
 
     @BeforeEach
     public void beforeEach() {
-        Ticket winner = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
+        UserTicket winner = new UserTicket(Set.of(1, 2, 4, 8, 16, 32));
         WinnerTicket winnerTicket = winner.winnerTicket(33);
 
-        Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
-        Ticket secondA = new Ticket(Set.of(1, 2, 4, 8, 16, 33));
-        Ticket secondB = new Ticket(Set.of(1, 2, 4, 8, 32, 33));
+        UserTicket first = new UserTicket(Set.of(1, 2, 4, 8, 16, 32));
+        UserTicket secondA = new UserTicket(Set.of(1, 2, 4, 8, 16, 33));
+        UserTicket secondB = new UserTicket(Set.of(1, 2, 4, 8, 32, 33));
 
-        Ticket thirdA = new Ticket(Set.of(1, 2, 4, 8, 16, 40));
-        Ticket thirdB = new Ticket(Set.of(1, 2, 4, 8, 16, 41));
-        Ticket thirdC = new Ticket(Set.of(1, 2, 4, 8, 16, 42));
+        UserTicket thirdA = new UserTicket(Set.of(1, 2, 4, 8, 16, 40));
+        UserTicket thirdB = new UserTicket(Set.of(1, 2, 4, 8, 16, 41));
+        UserTicket thirdC = new UserTicket(Set.of(1, 2, 4, 8, 16, 42));
 
-        Ticket fourthA = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthB = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthC = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthD = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
+        UserTicket fourthA = new UserTicket(Set.of(1, 2, 33, 4, 35, 8));
+        UserTicket fourthB = new UserTicket(Set.of(1, 2, 33, 4, 35, 8));
+        UserTicket fourthC = new UserTicket(Set.of(1, 2, 33, 4, 35, 8));
+        UserTicket fourthD = new UserTicket(Set.of(1, 2, 33, 4, 35, 8));
 
-        Ticket fifthA = new Ticket(Set.of(1, 2, 4, 15, 26, 37));
-        Ticket fifthB = new Ticket(Set.of(1, 2, 4, 25, 26, 17));
-        Ticket fifthC = new Ticket(Set.of(1, 2, 4, 35, 36, 37));
-        Ticket fifthD = new Ticket(Set.of(1, 2, 4, 25, 36, 27));
-        Ticket fifthE = new Ticket(Set.of(1, 2, 4, 35, 26, 17));
+        UserTicket fifthA = new UserTicket(Set.of(1, 2, 4, 15, 26, 37));
+        UserTicket fifthB = new UserTicket(Set.of(1, 2, 4, 25, 26, 17));
+        UserTicket fifthC = new UserTicket(Set.of(1, 2, 4, 35, 36, 37));
+        UserTicket fifthD = new UserTicket(Set.of(1, 2, 4, 25, 36, 27));
+        UserTicket fifthE = new UserTicket(Set.of(1, 2, 4, 35, 26, 17));
 
-        List<Ticket> purchaseTicketsFixture = List.of(
+        List<UserTicket> purchaseTicketsFixture = List.of(
                 first, secondA, secondB,
                 thirdA, thirdB, thirdC,
                 fourthA, fourthB, fourthC, fourthD,

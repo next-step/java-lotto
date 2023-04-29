@@ -1,6 +1,6 @@
 package lotto.present;
 
-import lotto.domain.Ticket;
+import lotto.domain.UserTicket;
 
 import java.util.Scanner;
 
@@ -23,11 +23,11 @@ public class InputPresent {
         return count;
     }
 
-    public Ticket winningNumbers() {
+    public UserTicket winningNumbers() {
         System.out.println(WINNING_NUMBER);
         String s = scanner.nextLine();
         System.out.println(s);
-        return new Ticket(s);
+        return new UserTicket(s);
     }
 
     public int bonusNumber() {
