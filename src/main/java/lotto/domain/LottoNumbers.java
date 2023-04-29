@@ -1,26 +1,22 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        Set<LottoNumber> set = new HashSet<>();
-        for (Integer lottoNumber : lottoNumbers) {
-            set.add(LottoNumber.valueOf(lottoNumber));
-        }
-        this.lottoNumbers = set;
-    }
-
-    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toSet());
     }
+
     public int size() {
         return lottoNumbers.size();
     }
@@ -50,9 +46,7 @@ public class LottoNumbers {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            sb.append(lottoNumber.getNumber()).append(", ");
-        }
+        lottoNumbers.stream().sorted().forEach(lottoNumber -> sb.append(lottoNumber.getNumber()).append(", "));
         sb.delete(sb.length() - 2, sb.length());
         sb.append("]");
         return sb.toString();

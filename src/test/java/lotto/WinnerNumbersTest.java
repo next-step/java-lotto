@@ -8,34 +8,21 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WinnerNumbersTest {
     private WinnerNumbers winnerNumbers = new WinnerNumbers(
-            Set.of(
-                    LottoNumber.valueOf(1),
-                    LottoNumber.valueOf(2),
-                    LottoNumber.valueOf(3),
-                    LottoNumber.valueOf(4),
-                    LottoNumber.valueOf(5),
-                    LottoNumber.valueOf(6)
-            ),
+            List.of(1, 2, 3, 4, 5, 6),
             LottoNumber.valueOf(7)
     );
+
     @Test
     public void create() {
         WinnerNumbers create = new WinnerNumbers(
-                Set.of(
-                        LottoNumber.valueOf(1),
-                        LottoNumber.valueOf(2),
-                        LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4),
-                        LottoNumber.valueOf(5),
-                        LottoNumber.valueOf(6)
-                ),
+                List.of(1, 2, 3, 4, 5, 6),
                 LottoNumber.valueOf(7));
         assertThat(winnerNumbers).isEqualTo(create);
     }
@@ -56,9 +43,9 @@ public class WinnerNumbersTest {
             String inputs,
             String expectedRank
     ) {
-        Set<LottoNumber> set = new HashSet<>();
+        List<Integer> set = new ArrayList<>();
         for (String s : inputs.split(",")) {
-            set.add(LottoNumber.valueOf(Integer.parseInt(s)));
+            set.add(Integer.parseInt(s));
         }
         LottoNumbers lottoNumbers = new LottoNumbers(set);
 

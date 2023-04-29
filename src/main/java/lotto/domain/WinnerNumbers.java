@@ -2,14 +2,14 @@ package lotto.domain;
 
 import lotto.domain.enums.Rank;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinnerNumbers {
     private final LottoNumbers winnerNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinnerNumbers(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+    public WinnerNumbers(List<Integer> lottoNumbers, LottoNumber bonusNumber) {
         this.winnerNumbers = new LottoNumbers(lottoNumbers);
         this.bonusNumber = bonusNumber;
 
