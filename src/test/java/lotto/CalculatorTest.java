@@ -26,14 +26,13 @@ public class CalculatorTest {
         Queue<String > operatorQueue = operatorGroup.operatorQueue();
 
         NumberGroup numberGroup = new NumberGroup(formulaList);
-        List<String> numberList = numberGroup.numberList();
+        List<Double> numberList = numberGroup.numberList();
 
         Calculator calculator = new Calculator();
 
-        calculator.calculateFormula(numberList, operatorQueue);
-        String result = calculator.showResult();
+        Double result = calculator.calculateFormula(numberList, operatorQueue);
 
-        assertThat(result).isEqualTo("2");
+        assertThat(result).isEqualTo(2.0);
     }
 
 

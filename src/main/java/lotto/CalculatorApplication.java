@@ -22,8 +22,8 @@ public class CalculatorApplication {
 
         Calculator calculator = new Calculator();
 
-        calculator.calculateFormula(numberGroup.numberList(), operatorGroup.operatorQueue());
+        Double result = calculator.calculateFormula(numberGroup.numberList(), operatorGroup.operatorQueue());
 
-        System.out.println(calculator.showResult());
+        System.out.println(result);
     }
 }

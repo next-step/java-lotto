@@ -20,13 +20,13 @@ public class NumberGroupTest {
     List<String> formulaList = inputConverter.formulaToStrList(testInput);
 
     NumberGroup numberGroup = new NumberGroup(formulaList);
-    List<String> result = numberGroup.numberList();
+    List<Double> result = numberGroup.numberList();
 
     assertThat(result.size()).isEqualTo(4);
-    assertThat(result.get(0)).isEqualTo("44");
-    assertThat(result.get(1)).isEqualTo("55");
-    assertThat(result.get(2)).isEqualTo("2");
-    assertThat(result.get(3)).isEqualTo("5");
+    assertThat(result.get(0)).isEqualTo(44.0);
+    assertThat(result.get(1)).isEqualTo(55.0);
+    assertThat(result.get(2)).isEqualTo(2.0);
+    assertThat(result.get(3)).isEqualTo(5.0);
   }
 
   @Test
