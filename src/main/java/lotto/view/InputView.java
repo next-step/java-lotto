@@ -1,8 +1,6 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.util.stream.Collectors.toUnmodifiableList;
 
@@ -33,9 +31,22 @@ public final class InputView {
     }
 
     public static int showManualLottoCountConsole() {
-        System.out.println();
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static List<List<Integer>> showManualLottoConsole(int manualLottoCount) {
+        if (manualLottoCount <= 0) {
+            return Collections.emptyList();
+        }
+
+        List<List<Integer>> manualLottos = new ArrayList<>();
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottos.add(toNumbers(removeWhiteSpace(SCANNER.nextLine())));
+        }
+
+        return manualLottos;
     }
 
     private static String removeWhiteSpace(String winnerNumberAsString) {
