@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_MIN = 1;
+    public static final int LOTTO_MAX = 45;
     private static Map<Integer, LottoNumber> cache = new HashMap<>();
     static {
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LOTTO_MIN; i <= LOTTO_MAX; i++) {
             cache.put(i, new LottoNumber(i));
         }
     }

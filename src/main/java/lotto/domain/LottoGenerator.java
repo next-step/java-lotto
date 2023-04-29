@@ -19,7 +19,7 @@ public class LottoGenerator {
 
     private static List<LottoNumber> getLottoNumbers() {
         LOTTO_NUMBERS = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LottoNumber.LOTTO_MIN; i <= LottoNumber.LOTTO_MAX; i++) {
             LOTTO_NUMBERS.add(LottoNumber.valueOf(i));
         }
         return LOTTO_NUMBERS;
