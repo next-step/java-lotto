@@ -9,13 +9,10 @@ public class ScoreBoard {
 
 	private final Map<Score, Integer> scoreBoard = new HashMap<>();
 
-	public ScoreBoard() {
+	public ScoreBoard(List<Lotto> lottos) {
 		for (PrizeType prizeType : PrizeType.values()) {
 			this.scoreBoard.put(prizeType.score, 0);
 		}
-	}
-
-	public void fillScoreBoard(List<Lotto> lottos) {
 		for (Lotto lotto : lottos) {
 			Score score = lotto.getScore();
 			this.plusScore(score);

@@ -41,18 +41,8 @@ public class LottoMachine {
 	}
 
 	public List<PrizeSituation> makePrizeSituations() {
-		return this.toPrizeSituations(this.makeScoreBoard(this.purchasedLottos.getLottos()));
-	}
-
-	private List<PrizeSituation> toPrizeSituations(ScoreBoard scoreBoard) {
+		ScoreBoard scoreBoard = this.purchasedLottos.makeScoreBoard();
 		return scoreBoard.makePrizeSituations();
-	}
-
-	public ScoreBoard makeScoreBoard(List<Lotto> lottos) {
-		ScoreBoard scoreBoard = new ScoreBoard();
-		scoreBoard.fillScoreBoard(lottos);
-
-		return scoreBoard;
 	}
 
 	public List<PrizeSituation> sortInOrderScore(List<PrizeSituation> prizeSituations) {

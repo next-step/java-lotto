@@ -32,4 +32,8 @@ public class PurchasedLottos {
 	public List<Lotto> getLottos() {
 		return this.purchasedLottos;
 	}
+
+	public ScoreBoard makeScoreBoard() {
+		return new ScoreBoard(this.purchasedLottos);
+	}
 }
