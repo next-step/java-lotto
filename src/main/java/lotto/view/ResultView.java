@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinnerStatistics;
@@ -20,7 +20,7 @@ public final class ResultView {
     }
 
     public static void showIssuedLottoTickets(LottoTickets lottoTickets) {
-        List<LottoNumbers> tickets = lottoTickets.getTickets();
+        List<Lotto> tickets = lottoTickets.getTickets();
         tickets.forEach(System.out::println);
     }
 

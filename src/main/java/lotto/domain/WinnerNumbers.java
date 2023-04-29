@@ -2,16 +2,16 @@ package lotto.domain;
 
 public class WinnerNumbers {
 
-    private final LottoNumbers winnerLottoNumbers;
+    private final Lotto winnerLotto;
     private final LottoNumber bonusBall;
 
-    public WinnerNumbers(LottoNumbers winnerLottoNumbers, LottoNumber bonusBall) {
-        validate(winnerLottoNumbers, bonusBall);
-        this.winnerLottoNumbers = winnerLottoNumbers;
+    public WinnerNumbers(Lotto winnerLotto, LottoNumber bonusBall) {
+        validate(winnerLotto, bonusBall);
+        this.winnerLotto = winnerLotto;
         this.bonusBall = bonusBall;
     }
 
-    private void validate(LottoNumbers winnerNumbers, LottoNumber bonusBall) {
+    private void validate(Lotto winnerNumbers, LottoNumber bonusBall) {
         if (winnerNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스 숫자는 당첨된 6개의 로또번호에 포함될 수 없습니다.");
         }
@@ -19,9 +19,9 @@ public class WinnerNumbers {
 
     public WinnerStatistics getWinnerStatistics(LottoTickets purchasedLottoTickets) {
         WinnerStatistics statistics = new WinnerStatistics(purchasedLottoTickets.size());
-        for (LottoNumbers lottoNumbers : purchasedLottoTickets.getTickets()) {
-            long matchedWinnerCount = lottoNumbers.countToMatchedWinnerNumbers(winnerLottoNumbers);
-            boolean isMatchedBonusBall = lottoNumbers.contains(bonusBall);
+        for (Lotto lotto : purchasedLottoTickets.getTickets()) {
+            long matchedWinnerCount = lotto.countToMatchedWinnerNumbers(winnerLotto);
+            boolean isMatchedBonusBall = lotto.contains(bonusBall);
             statistics.addMatchedCount(toLottoRank(matchedWinnerCount, isMatchedBonusBall));
         }
         return statistics;

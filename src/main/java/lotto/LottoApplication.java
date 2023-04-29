@@ -25,8 +25,8 @@ public class LottoApplication {
     private static LottoTickets getManualLottoTickets(PurchasedAmount purchasedAmount) {
         List<List<Integer>> manualNumbersList
                 = InputView.showManualLottoConsole(purchasedAmount.getAvailableManualLottoCount());
-        List<LottoNumbers> manualLottos = manualNumbersList.stream()
-                .map(LottoNumbers::ofTypeIntegerList)
+        List<Lotto> manualLottos = manualNumbersList.stream()
+                .map(Lotto::ofTypeIntegerList)
                 .collect(Collectors.toUnmodifiableList());
         return new LottoTickets(manualLottos);
     }
@@ -43,13 +43,13 @@ public class LottoApplication {
     }
 
     private static WinnerNumbers getWinnerNumbers() {
-        LottoNumbers winnerLottoNumbers = getWinnerLottoNumbers();
+        Lotto winnerLotto = getWinnerLotto();
         LottoNumber bonusBall = getBonusBall();
-        return new WinnerNumbers(winnerLottoNumbers, bonusBall);
+        return new WinnerNumbers(winnerLotto, bonusBall);
     }
 
-    private static LottoNumbers getWinnerLottoNumbers() {
-        return LottoNumbers.ofTypeIntegerList(InputView.showLastWeekWinnerNumbersConsole());
+    private static Lotto getWinnerLotto() {
+        return Lotto.ofTypeIntegerList(InputView.showLastWeekWinnerNumbersConsole());
     }
 
     private static LottoNumber getBonusBall() {

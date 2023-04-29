@@ -12,9 +12,9 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class LottoTickets {
 
-    private final List<LottoNumbers> tickets;
+    private final List<Lotto> tickets;
 
-    public LottoTickets(List<LottoNumbers> tickets) {
+    public LottoTickets(List<Lotto> tickets) {
         this.tickets = tickets;
     }
 
@@ -24,17 +24,17 @@ public class LottoTickets {
 
     public static LottoTickets issue(PurchasedAmount purchasedAmount, NumberGeneratorStrategy numberGeneratorStrategy) {
         int availableLottoCount = purchasedAmount.getAvailableAutoLottoCount();
-        List<LottoNumbers> issuedTickets = issueTickets(availableLottoCount, numberGeneratorStrategy);
+        List<Lotto> issuedTickets = issueTickets(availableLottoCount, numberGeneratorStrategy);
         return new LottoTickets(issuedTickets);
     }
 
-    private static List<LottoNumbers> issueTickets(int availableLottoCount, NumberGeneratorStrategy numberGeneratorStrategy) {
+    private static List<Lotto> issueTickets(int availableLottoCount, NumberGeneratorStrategy numberGeneratorStrategy) {
         return IntStream.range(0, availableLottoCount)
                 .mapToObj(n -> numberGeneratorStrategy.generate())
                 .collect(toUnmodifiableList());
     }
 
-    public List<LottoNumbers> getTickets() {
+    public List<Lotto> getTickets() {
         return tickets;
     }
 
@@ -43,7 +43,7 @@ public class LottoTickets {
     }
 
     public LottoTickets merge(LottoTickets lottoTickets) {
-        List<LottoNumbers> mergedLottos = Stream.of(tickets, lottoTickets.getTickets())
+        List<Lotto> mergedLottos = Stream.of(tickets, lottoTickets.getTickets())
                 .flatMap(Collection::stream)
                 .collect(toUnmodifiableList());
         return new LottoTickets(mergedLottos);
