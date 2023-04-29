@@ -40,7 +40,6 @@ public class LottoGameTest {
   }
 
   @ValueSource(ints = {13333, 12001, 10001})
-  @DisplayName("LottoGame| 로또는_1000으로_나눠지지_않으면_게임을_할_수_없다")
   @ParameterizedTest(name = "1000으로 나눠지지 않는 값: {0}")
   void 로또는_1000으로_나눠지지_않으면_게임을_할_수_없다 (int given) {
 

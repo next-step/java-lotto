@@ -11,9 +11,9 @@ public class LottoGameStatistics {
   private final Map<LottoWinType, List<LottoRoundResult>> winTypeMap;
   private final BigDecimal totalRateOfReturn;
 
-  public LottoGameStatistics (int purchasePrice, List<LottoRoundResult> roundStatistics) {
+  public LottoGameStatistics (LottoPurchasePrice purchasePrice, List<LottoRoundResult> roundStatistics) {
     this.winTypeMap = initWinTypeMap(roundStatistics);
-    this.totalRateOfReturn = calculateTotalRateOfReturn(purchasePrice, roundStatistics);
+    this.totalRateOfReturn = calculateTotalRateOfReturn(purchasePrice.getPurchasePrice(), roundStatistics);
   }
 
   public Map<LottoWinType, List<LottoRoundResult>> getWinTypeMap() {
