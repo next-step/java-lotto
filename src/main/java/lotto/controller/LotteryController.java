@@ -21,9 +21,13 @@ public class LotteryController {
         OutputView.printWinningNumberInputMessage();
         List<Integer> lastWeekWinningNumbers = InputView.getLastWeekWinningNumbers();
 
+        OutputView.printBonusNumInputMessage();
+        int bonusNum = InputView.getBonusNum();
+
         List<Integer> lotteryResult = store.getLotteryResult(lastWeekWinningNumbers);
-        double rateOfReturn = store.getRateOfReturn(lotteryResult);
-        OutputView.printLotteryResult(lotteryResult);
+        List<Integer> bonusResult = store.getBonusResult(lastWeekWinningNumbers,bonusNum);
+        double rateOfReturn = store.getRateOfReturn(lotteryResult, bonusResult);
+        OutputView.printLotteryResult(lotteryResult, bonusResult);
         OutputView.printRateOfReturn(rateOfReturn);
     }
 

@@ -47,6 +47,9 @@ public class Lotteries {
     }
 
     public List<Integer> calculateBonusNum(List<Integer> winningNumbers, int bonusNum) {
+        if (winningNumbers.contains( bonusNum)){
+            throw new IllegalArgumentException("당첨 번호와 중복된 보너스 볼을 입력하셨습니다.");
+        }
         return lotteries.stream()
                 .filter(lottery -> lottery.matchWithBonusBall(bonusNum))
                 .map(lottery -> lottery.matchedCount(winningNumbers))
