@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 public class WinnerTicket {
-    private final Set<Integer> numbers;
+    private final Ticket ticket;
     private final Integer bonusNumber;
 
     public WinnerTicket(Set<Integer> numbers, Integer bonusNumber) {
