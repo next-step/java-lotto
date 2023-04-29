@@ -2,6 +2,7 @@ package lotto.ui;
 
 import java.util.List;
 
+import lotto.domain.BenefitResult;
 import lotto.domain.Lotto;
 import lotto.domain.PurchasedLottos;
 import lotto.domain.PrizeSituation;
@@ -29,7 +30,7 @@ public class ResultView {
 		}
 	}
 
-	public static void printTotalProfitRate(double totalProfitRate, boolean benefit) {
-		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", totalProfitRate, benefit ? "이익이" : "손해");
+	public static void printTotalProfitRate(BenefitResult benefitResult) {
+		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", benefitResult.getTotalProfitRate(), benefitResult.benefitResultString());
 	}
 }

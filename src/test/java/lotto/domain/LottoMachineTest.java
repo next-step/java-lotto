@@ -25,38 +25,6 @@ public class LottoMachineTest {
 		assertThatIllegalArgumentException().isThrownBy(() -> new LottoMachine(purchaseAmount));
 	}
 
-	@DisplayName("총 수익을 계산한다.")
-	@Test
-	void test3() {
-		List<PrizeSituation> prizeSituations = Arrays.asList(
-			new PrizeSituation(PrizeType.SIX, 2),
-			new PrizeSituation(PrizeType.THREE, 1)
-		);
-		LottoMachine lottoMachine = new LottoMachine();
-		assertThat(lottoMachine.totalProfit(prizeSituations)).isEqualTo(4000005000L);
-	}
-
-	@DisplayName("총 수익률을 계산한다.")
-	@Test
-	void test4() {
-		LottoMachine lottoMachine = new LottoMachine();
-		assertThat(lottoMachine.totalProfitRate(5000, 14000)).isEqualTo(0.35);
-	}
-
-	@DisplayName("손익 여부를 계산한다. - 이득인 케이스")
-	@Test
-	void test5() {
-		LottoMachine lottoMachine = new LottoMachine();
-		assertThat(lottoMachine.isBenefit(1.01)).isTrue();
-	}
-
-	@DisplayName("손익 여부를 계산한다. - 손해인 케이스")
-	@Test
-	void test6() {
-		LottoMachine lottoMachine = new LottoMachine();
-		assertThat(lottoMachine.isBenefit(0.99)).isFalse();
-	}
-
 	@DisplayName("상금 현황 목록을 작성한다.")
 	@Test
 	void test8() {

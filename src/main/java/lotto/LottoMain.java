@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 
+import lotto.domain.BenefitResult;
 import lotto.domain.LottoMachine;
 import lotto.domain.PrizeSituation;
 import lotto.domain.WinNumbers;
@@ -20,9 +21,7 @@ public class LottoMain {
 		List<PrizeSituation> prizeSituations = lottoMachine.makePrizeSituations();
 		ResultView.printPrizeSituations(lottoMachine.sortInOrderScore(prizeSituations));
 
-		long totalProfit = lottoMachine.totalProfit(prizeSituations);
-		double totalProfitRate = lottoMachine.totalProfitRate(totalProfit, purchaseAmount);
-		boolean benefit = lottoMachine.isBenefit(totalProfitRate);
-		ResultView.printTotalProfitRate(totalProfitRate, benefit);
+		BenefitResult benefitResult = new BenefitResult(prizeSituations, purchaseAmount);
+		ResultView.printTotalProfitRate(benefitResult);
 	}
 }
