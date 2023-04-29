@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Set;
 
 public class WinnerTicket {
-    private final Set<Integer> numbers;
+    private final Ticket ticket;
     private final Integer bonusNumber;
 
-    public WinnerTicket(Set<Integer> numbers, Integer bonusNumber) {
-        this.numbers = numbers;
+    public WinnerTicket(Ticket ticket, Integer bonusNumber) {
+        this.ticket = ticket;
         this.bonusNumber = bonusNumber;
     }
 
     public Ticket ticketOnly() {
-        return new Ticket(numbers);
+        return this.ticket;
     }
 
     public Boolean includeBonus(Ticket ticket) {
