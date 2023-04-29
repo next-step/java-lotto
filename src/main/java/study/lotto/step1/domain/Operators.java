@@ -19,6 +19,10 @@ public class Operators {
         return operators.remove(FIRST_INDEX);
     }
 
+    public int size() {
+        return operators.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
