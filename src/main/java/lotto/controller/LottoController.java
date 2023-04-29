@@ -8,7 +8,7 @@ public class LottoController {
 
     public void run() {
         int numberOfTickets = InputView.calculateNumberOfTicketsToBuy();
-        LottoTickets lottoTickets = new LottoGenerator().generateLottoTickets(numberOfTickets);
+        LottoTickets lottoTickets = LottoTickets.create(numberOfTickets);
         ResultView.printLottoTickets(lottoTickets);
 
         String winningNumbersString = InputView.inputWinningNumbers();
