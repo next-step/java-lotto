@@ -35,7 +35,7 @@ public class Expression {
     }
 
     private void extractOperator(List<Operator> operators, String token) {
-        if(Node.nodeConvertible(token)) {
+        if (Node.nodeConvertible(token)) {
             return;
         }
         if (Operator.operatorConvertible(token)) {

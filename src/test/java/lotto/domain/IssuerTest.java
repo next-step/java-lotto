@@ -15,26 +15,25 @@ public class IssuerTest {
         issuerFixture = new Issuer();
     }
 
-    @DisplayName("발급수량만큼 응모권이 발행된다")
+    @DisplayName("수량만큼 Ticket 이 발행된다")
     @Test
     public void issue() {
         //given
         int input = 77;
         //when
-        issuerFixture.purchaseTickets(input);
+        issuerFixture.issueTickets(input);
         //then
-        assertThat(issuerFixture.purchasedTickets()).hasSize(input);
+        assertThat(issuerFixture.issuedTickets()).hasSize(input);
     }
 
-
-    @DisplayName("Winners 클래스를 생성한다")
+    @DisplayName("Statics 클래스를 생성한다")
     @Test
-    public void winnerGen() {
+    public void makeStatics() {
         //given
         //when
-        issuerFixture.purchaseTickets(10);
-        Winners winners = issuerFixture.makeWinners(new Ticket("1, 2, 3, 4, 5, 6"));
+        issuerFixture.issueTickets(10);
+        Statics statics = issuerFixture.issuedTicketStatistics(new Ticket("1, 2, 3, 4, 5, 6").winnerTicket(7));
         //then
-        assertNotNull(winners);
+        assertNotNull(statics);
     }
 }

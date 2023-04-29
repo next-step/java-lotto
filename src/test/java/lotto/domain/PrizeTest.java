@@ -18,9 +18,21 @@ public class PrizeTest {
         assertTrue(match);
     }
 
-    @DisplayName("3등의 일치하는 번호의 갯수가 5개인지 검증한다")
+    @DisplayName("2등의 일치하는 번호의 갯수가 5개인지 검증한다")
     @Test
     public void matchSecond() {
+        //given
+        Prize first = Prize.SECOND;
+        int matchCount = 5;
+        //when
+        boolean match = first.isMatch(matchCount);
+        //then
+        assertTrue(match);
+    }
+
+    @DisplayName("3등의 일치하는 번호의 갯수가 5개인지 검증한다")
+    @Test
+    public void matchThird() {
         //given
         Prize first = Prize.THIRD;
         int matchCount = 5;

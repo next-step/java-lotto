@@ -23,10 +23,11 @@ public class LottoTest {
         //given
         consoleInput(
                 "99000" + System.lineSeparator() +
-                        "1, 2, 3, 4, 5, 6"
+                        "1, 2, 3, 4, 5, 6" + System.lineSeparator() +
+                        "7"
         );
         //when
-        Lotto.main(new String[]{});
         //then
+        Lotto.main(new String[]{});
     }
 }

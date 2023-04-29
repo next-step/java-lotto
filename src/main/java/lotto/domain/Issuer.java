@@ -14,8 +14,8 @@ public class Issuer {
         this.tickets = new ArrayList<>();
     }
 
-    public void purchaseTickets(int count) {
-        for (int i = 0; i < count; i++) {
+    public void issueTickets(int ticketCount) {
+        for (int i = 0; i < ticketCount; i++) {
             tickets.add(new Ticket(issueNumbers()));
         }
     }
@@ -32,11 +32,11 @@ public class Issuer {
         return RANDOM.nextInt(46) + 1;
     }
 
-    public Winners makeWinners(Ticket winningTicket) {
-        return new Winners(tickets, winningTicket);
+    public List<Ticket> issuedTickets() {
+        return tickets;
     }
 
-    public List<Ticket> purchasedTickets() {
-        return tickets;
+    public Statics issuedTicketStatistics(WinnerTicket winnerTicket) {
+        return new Statics(tickets, winnerTicket);
     }
 }

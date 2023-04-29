@@ -8,6 +8,7 @@ public class InputPresent {
     private static final String PURCHASE_AMOUNT = "구입금액을 입력해 주세요";
     private static final String PURCHASE_CONFIRM = "%s개를 구매했습니다";
     private static final String WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요";
+    private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요";
     private final Scanner scanner;
 
     public InputPresent() {
@@ -25,6 +26,14 @@ public class InputPresent {
     public Ticket winningNumbers() {
         System.out.println(WINNING_NUMBER);
         String s = scanner.nextLine();
+        System.out.println(s);
         return new Ticket(s);
+    }
+
+    public int bonusNumber() {
+        System.out.println(BONUS_NUMBER);
+        String s = scanner.nextLine();
+        System.out.println(s);
+        return Integer.parseInt(s);
     }
 }
