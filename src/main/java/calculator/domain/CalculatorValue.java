@@ -18,7 +18,7 @@ public class CalculatorValue {
   }
 
   private int extractValueIfValid(String originalValue) {
-    if (!StringUtils.isDigit(originalValue)) {
+    if (StringUtils.isNotDigit(originalValue)) {
       throw new IllegalArgumentException();
     }
     return Integer.parseInt(originalValue);

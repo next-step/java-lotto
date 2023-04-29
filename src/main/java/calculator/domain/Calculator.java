@@ -3,6 +3,8 @@ package calculator.domain;
 import calculator.domain.operator.CalculateOperateServiceLocator;
 import calculator.domain.operator.CalculatorOperateService;
 import java.util.ArrayDeque;
+import java.util.EmptyStackException;
+import util.CollectionUtils;
 
 public class Calculator {
 
@@ -16,6 +18,9 @@ public class Calculator {
 
   public int calculate(String expression) {
     ArrayDeque<String> expressionStack = expressionParser.parse(expression);
+    if (CollectionUtils.isEmpty(expressionStack)) {
+      throw new IllegalArgumentException();
+    }
 
     while(expressionStack.size() != 1) {
       final String left = expressionStack.pop();

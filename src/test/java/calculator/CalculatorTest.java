@@ -34,7 +34,7 @@ public class CalculatorTest {
   }
 
   @DisplayName("Calculator | null 이거나 empty string 인 식은 계산 할 수 없다.")
-  @ParameterizedTest
+  @ParameterizedTest(name = "입력값 : {0}")
   @ValueSource(strings = {" ", ""})
   @NullSource
   public void null_또는_empty_string은_계산_불가 (String given) {
@@ -69,7 +69,7 @@ public class CalculatorTest {
   }
 
   @DisplayName("Calculator | 잘못된 형식의 단항식들은 허용하지 않는다.")
-  @ParameterizedTest
+  @ParameterizedTest(name = "잘못된 단항식: {0}")
   @ValueSource(strings = {
       "1 % + 1",
       "1 1 +",
