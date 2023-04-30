@@ -1,14 +1,13 @@
 package lottery.domain;
 
 import static java.lang.String.valueOf;
+import static lottery.domain.constant.LotteryNumberRule.LOTTERY_NUMBERS_SIZE;
 
 import java.util.HashSet;
 import java.util.Set;
 import lottery.domain.numbergenerator.RandomNumberGenerator;
 
 public class SixLotteryNumbers {
-
-    private static final int LOTTERY_NUMBERS_SIZE = 6;
 
     private static final String INVALID_NUMBERS_MSG = "로또 번호는 총 6개의 숫자로 구성되어야합니다.";
 
@@ -37,7 +36,7 @@ public class SixLotteryNumbers {
     }
 
     private boolean notHasSixNumbers(Set<LotteryNumber> lotteryNumbers) {
-        return lotteryNumbers.size() != LOTTERY_NUMBERS_SIZE;
+        return lotteryNumbers.size() != LOTTERY_NUMBERS_SIZE.getRuleNumber();
     }
 
     public int size() {
