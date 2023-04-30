@@ -26,41 +26,12 @@ public class MatchRecord {
         return new MatchRecord(numberOfMatches);
     }
 
-    public Map<Match, Integer> countNumber(List<List<Integer>> purchaseNumbers, Number number) {
-        for (List<Integer> purchaseNumber : purchaseNumbers) {
-            int count = countWithPurchaseNumber(purchaseNumber, number.winningNumbers());
-            boolean isBonus = isContainBonusNumber(count, purchaseNumber, number.bonusNumber());
-            Match match = match(count, isBonus);
-
+    public Map<Match, Integer> countMatches(List<Match> matches) {
+        for (Match match : matches) {
             Integer value = numberOfMatches.get(match);
             numberOfMatches.put(match, ++value);
         }
 
         return numberOfMatches;
-    }
-
-    private int countWithPurchaseNumber(List<Integer> number, List<Integer> winningNumbers) {
-        int count = 0;
-
-        for (Integer winningNumber : winningNumbers) {
-            count = count(number, count, winningNumber);
-        }
-
-        return count;
-    }
-
-    private int count(List<Integer> number, int count, Integer winningNumber) {
-        if (number.contains(winningNumber)) {
-            count++;
-        }
-        return count;
-    }
-
-    private boolean isContainBonusNumber(int count, List<Integer> number, int bonusNumber) {
-        if (count != 5) {
-            return false;
-        }
-
-        return number.contains(bonusNumber);
     }
 }

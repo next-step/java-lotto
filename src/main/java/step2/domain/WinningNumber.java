@@ -2,12 +2,12 @@ package step2.domain;
 
 import java.util.List;
 
-public class Number {
+public class WinningNumber {
 
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
-    public Number(List<Integer> winningNumbers, int bonusNumber) {
+    public WinningNumber(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }

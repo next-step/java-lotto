@@ -3,7 +3,8 @@ package step2;
 import org.junit.jupiter.api.Test;
 import step2.domain.Match;
 import step2.domain.MatchRecord;
-import step2.domain.Number;
+import step2.domain.PurchaseNumbers;
+import step2.domain.WinningNumber;
 
 import java.util.List;
 import java.util.Map;
@@ -19,19 +20,21 @@ public class MatchRecordTest {
 
         // given
         MatchRecord matchRecord = MatchRecord.createRecord();
-        List<List<Integer>> purchaseNumbers = asList(
+        List<List<Integer>> numbers = asList(
                 asList(1, 2, 3, 4, 5, 6),
                 asList(2, 3 ,4, 5, 6, 7),
                 asList(4, 5, 6, 8, 11, 13),
                 asList(4, 5, 6, 8, 11, 12)
         );
 
+        PurchaseNumbers purchaseNumbers = PurchaseNumbers.generate(numbers);
         List<Integer> winningNumbers = asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
-        Number lottoNumber = new Number(winningNumbers, bonusNumber);
+        WinningNumber lottoNumber = new WinningNumber(winningNumbers, bonusNumber);
 
         // when
-        Map<Match, Integer> result = matchRecord.countNumber(purchaseNumbers, lottoNumber);
+        List<Match> matches = purchaseNumbers.countNumber(lottoNumber);
+        Map<Match, Integer> result = matchRecord.countMatches(matches);
 
         // then
         assertThat(result).containsEntry(match(3, false), 2);
