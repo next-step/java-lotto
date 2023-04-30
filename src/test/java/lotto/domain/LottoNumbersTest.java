@@ -41,12 +41,13 @@ class LottoNumbersTest {
     void calculateSameNumberCount() throws Exception {
         //given
         LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 9;
 
         //when
         Map<LottoRank, Integer> sameNumberCounts
-                = lottoNumbers.calculateSameNumberCounts(winningNumber);
+                = lottoNumbers.calculateSameNumberCounts(winningNumber, bonusNumber);
 
         //then
-        assertThat(sameNumberCounts).containsKeys(LottoRank.FOURTH, LottoRank.FIRST).containsValues(1, 2);
+        assertThat(sameNumberCounts).containsKeys(LottoRank.FIFTH, LottoRank.FIRST).containsValues(1, 2);
     }
 }

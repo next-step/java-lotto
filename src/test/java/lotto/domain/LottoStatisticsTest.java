@@ -28,7 +28,7 @@ class LottoStatisticsTest {
         lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
         LottoNumbers lottoNumbers
                 = new LottoNumbers(lottoNumberList, new RandomNumberCreation());
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         //when
         Map<LottoRank, Integer> matchingCounts
@@ -51,7 +51,7 @@ class LottoStatisticsTest {
         lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
         LottoNumbers lottoNumbers
                 = new LottoNumbers(lottoNumberList, new RandomNumberCreation());
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 20, 21, 22));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 20, 21, 22), 7);
         lottoStatistics.calculateMatchingCounts(lottoNumbers, winningNumber);
 
         //when

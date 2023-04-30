@@ -20,7 +20,7 @@ class WinningNumberTest {
 
         //then
         assertDoesNotThrow(() -> {
-            new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+            new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         });
     }
     
@@ -32,12 +32,12 @@ class WinningNumberTest {
         lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 10, 11, 12)));
         lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList, new RandomNumberCreation());
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         //when
         Map<LottoRank, Integer> result = winningNumber.countMatching(lottoNumbers);
 
         //then
-        assertThat(result).containsKeys(LottoRank.FOURTH, LottoRank.FIRST).containsValues(1, 2);
+        assertThat(result).containsKeys(LottoRank.FIFTH, LottoRank.FIRST).containsValues(1, 2);
     }
 }
