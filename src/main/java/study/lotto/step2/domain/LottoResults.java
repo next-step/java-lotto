@@ -10,6 +10,13 @@ public class LottoResults {
         this.lottoResults = lottoResults;
     }
 
+    public long winningAmount() {
+        return lottoResults.stream()
+                .mapToLong(LottoResult::payout)
+                .sum();
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
