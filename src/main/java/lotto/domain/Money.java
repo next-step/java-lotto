@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Money {
-    public static final Integer LOTTO_UNIT_PRICE = 1_000;
+    public static final Integer MINIMUM_PRICE = 1000;
 
     private final long amount;
 
@@ -11,13 +11,13 @@ public class Money {
 
     public static Money wons(long amount) {
         if (isNegativeNumberOrZero(amount)) {
-            throw new IllegalArgumentException("1000원 이상 입력해주세 :(");
+            throw new IllegalArgumentException("1000원 이상 입력해주세 :)");
         }
         return new Money(amount);
     }
 
     private static boolean isNegativeNumberOrZero(long amount) {
-        return amount <= LOTTO_UNIT_PRICE;
+        return amount < MINIMUM_PRICE;
     }
 
 
