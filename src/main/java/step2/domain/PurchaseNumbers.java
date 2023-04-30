@@ -23,7 +23,8 @@ public class PurchaseNumbers {
         for (List<Integer> number : numbers) {
             int count = countWithPurchaseNumber(number, winningNumber.winningNumbers());
             boolean isBonus = containBonusNumber(count, number, winningNumber.bonusNumber());
-            matches.add(match(count, isBonus));
+            Match match = notFiveMatchesBonusIsFalse(count, isBonus);
+            matches.add(match);
         }
 
         return matches;
@@ -47,11 +48,15 @@ public class PurchaseNumbers {
     }
 
     private boolean containBonusNumber(int count, List<Integer> number, int bonusNumber) {
+        return number.contains(bonusNumber);
+    }
+
+    private Match notFiveMatchesBonusIsFalse(int count, boolean isBonus) {
         if (count != 5) {
-            return false;
+            return match(count, false);
         }
 
-        return number.contains(bonusNumber);
+        return match(count, isBonus);
     }
 
     public List<List<Integer>> purchaseNumbers() {
