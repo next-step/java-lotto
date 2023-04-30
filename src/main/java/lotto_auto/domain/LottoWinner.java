@@ -2,8 +2,9 @@ package lotto_auto.domain;
 
 import lotto_auto.util.LottoValidate;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoWinner {
     private final Set<LottoNumber> winnerNumbers;
@@ -13,26 +14,14 @@ public class LottoWinner {
     }
 
     public Set<LottoNumber> parseLottoNumbers(String input) {
-        String[] splitNumbers = input.split(",");
-        Set<LottoNumber> winnerNumbers = new HashSet<>();
-
-        for (String number : splitNumbers) {
-            winnerNumbers.add(new LottoNumber(parseWinnerLottoNumber(number)));
-        }
-
-        return winnerNumbers;
+        return Arrays.stream(input.split(","))
+                .map(this::parseWinnerLottoNumber)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
-    private static Integer parseWinnerLottoNumber(String input) {
-        int number = 0;
-
-        try {
-            number = Integer.parseInt(input.trim());
-        } catch (Exception e) {
-            throw new IllegalArgumentException("올바르지 않은 당첨번호입니다");
-        }
-
-        return number;
+    private Integer parseWinnerLottoNumber(String input) {
+        return Integer.parseInt(input.trim());
     }
 
     public Set<LottoNumber> getWinnerNumbers() {
