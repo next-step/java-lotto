@@ -1,4 +1,4 @@
-package step1.view;
+package calculator.string.view;
 
 import java.util.Scanner;
 

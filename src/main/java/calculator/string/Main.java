@@ -1,10 +1,12 @@
-package step1;
+package calculator.string;
 
-import step1.domain.Calculate;
-import step1.domain.Number;
-import step1.service.CalculateService;
-import step1.view.InputView;
-import step1.view.OutputView;
+import calculator.string.domain.CalculatorSign;
+import calculator.string.domain.Number;
+import calculator.string.service.CalculateService;
+import calculator.string.view.InputView;
+import calculator.string.view.OutputView;
+
+import java.util.List;
 
 public class Main {
 
@@ -18,11 +20,11 @@ public class Main {
         // split 로 나누기
         String[] splitStrings = calculateService.split(inputValue);
         // Number 만 뻬서 보기
-        Number numbers = calculateService.sectionNumber(splitStrings);
+        List<Number> numbers = calculateService.sectionNumber(splitStrings);
         // 공식만 빼서 보기
-        Calculate calculates = calculateService.sectionCalculate(splitStrings);
+        List<CalculatorSign> calculatorSigns = calculateService.sectionCalculate(splitStrings);
         // 계산
-        int result = calculateService.calculate(numbers, calculates);
+        int result = calculateService.iterNumbersAndCalculatorSigns(numbers, calculatorSigns);
         // 프린트
         outputView.print(result);
     }
