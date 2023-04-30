@@ -6,22 +6,25 @@ import java.util.List;
 
 public class Operations {
 
-    private Deque<Operation> operations;
+    private Deque<Operator> operators;
 
-    public Operations(List<Operation> operations) {
-        this.operations = new LinkedList<>(operations);
+    public Operations(List<Operator> operators) {
+        this.operators = new LinkedList<>(operators);
     }
 
     public boolean hasNext() {
-        return !operations.isEmpty();
+        return !operators.isEmpty();
     }
 
-
-    public Operation next() {
-        if (operations.isEmpty()) {
+    public Operator next() {
+        if (operators.isEmpty()) {
             return null;
         }
-        return operations.pollFirst();
+        return operators.pollFirst();
+    }
+
+    public boolean isContain(Operator operator) {
+        return operators.contains(operator);
     }
 
 }

@@ -17,17 +17,17 @@ public class StreamTest {
         String[] splits = expression.split(" ");
 
 
-        List<Operation> collect = IntStream.iterate(0, i -> i + 1)
+        List<Operator> collect = IntStream.iterate(0, i -> i + 1)
                 .limit(splits.length)
                 .filter(i -> i % 2 != 0)
-                .mapToObj(i -> Operation.toOperation(splits[i]))
+                .mapToObj(i -> Operator.toOperation(splits[i]))
                 .collect(Collectors.toList());
 
         assertThat(collect)
-                .containsExactly(Operation.toOperation("+"),
-                        Operation.toOperation("+"),
-                        Operation.toOperation("-"),
-                        Operation.toOperation("/"));
+                .containsExactly(Operator.toOperation("+"),
+                        Operator.toOperation("+"),
+                        Operator.toOperation("-"),
+                        Operator.toOperation("/"));
     }
 
 

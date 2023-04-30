@@ -29,7 +29,6 @@ public class Numbers {
         for (int i = 0; i < returnListSize; i++) {
             returnNumbers.add(numbers.pollFirst());
         }
-
         return returnNumbers;
     }
 
@@ -45,5 +44,8 @@ public class Numbers {
         return numbers.size();
     }
 
+    public boolean isContain(Integer number) {
+        return numbers.contains(number);
+    }
 
 }
