@@ -6,11 +6,11 @@ import java.util.List;
 
 public class MyLotto {
     private final List<Integer> numbers;
-    private int matchCount;
+    private int winNumberCount;
 
     public MyLotto(List<Integer> numbers) {
         this.numbers = numbers;
-        this.matchCount = 0;
+        this.winNumberCount = 0;
     }
 
     public static MyLotto auto() {
@@ -39,5 +39,17 @@ public class MyLotto {
 
     public List<Integer> numbers() {
         return numbers;
+    }
+
+    public void checkWinNumber(WinLotto winLotto) {
+        for (int i = 0; i < LottoRule.CHOICE_COUNT; i++) {
+            if (numbers.contains(winLotto.number(i))) {
+                winNumberCount++;
+            }
+        }
+    }
+
+    public int winNumberCount() {
+        return winNumberCount;
     }
 }

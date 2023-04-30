@@ -1,9 +1,13 @@
 package lotto.service;
 
 import lotto.domain.MyLotto;
+import lotto.domain.WinLotto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +21,25 @@ class MyLottoServiceTest {
     }
 
     @Test
-    void 당첨확인() {
-        MyLotto myLotto = MyLotto.manual("7, 14, 21, 22, 44, 45");
+    void 당첨번호확인() {
+        List<MyLotto> myLottos = new ArrayList<>();
+        //3개 당첨
+        myLottos.add(MyLotto.manual("3, 6, 9, 31, 37, 40"));
+        myLottos.add(MyLotto.manual("3, 6, 9, 31, 37, 40"));
+        //4개 당첨
+        myLottos.add(MyLotto.manual("3, 6, 9, 30, 37, 40"));
+        myLottos.add(MyLotto.manual("3, 6, 9, 30, 37, 40"));
+        myLottos.add(MyLotto.manual("3, 6, 9, 30, 37, 40"));
+
+        LottoService lottoService = new LottoService(5000, myLottos);
+
+        WinLotto winLotto = new WinLotto("3, 6, 9, 30, 36, 39");
+
+        lottoService.checkWinLottos(winLotto);
+
+        assertThat(lottoService.getResult().getResult3matched()).isEqualTo(2);
+        assertThat(lottoService.getResult().getResult4matched()).isEqualTo(3);
+        assertThat(lottoService.getResult().getResult5matched()).isEqualTo(0);
+        assertThat(lottoService.getResult().getResult6matched()).isEqualTo(0);
     }
 }

@@ -1,17 +1,23 @@
 package lotto.service;
 
-import lotto.domain.MyLotto;
-import lotto.domain.Purchase;
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
     private final Purchase purchase;
-    private final List<MyLotto> myLottos = new ArrayList<>();
+    private final List<MyLotto> myLottos;
+    private final MyLottoResult myLottoResult = new MyLottoResult();
+
+
+    public LottoService(int inputMoney, List<MyLotto> myLottos) {
+        this.purchase = new Purchase(inputMoney);
+        this.myLottos = myLottos;
+    }
 
     public LottoService(int inputMoney) {
-        purchase = new Purchase(inputMoney);
+        this(inputMoney, new ArrayList<>());
     }
 
     public void autoGenerate() {
@@ -25,7 +31,23 @@ public class LottoService {
         myLottos.add(generatedMyLotto);
     }
 
-    public List<MyLotto> lottos(){
+    public List<MyLotto> lottos() {
         return myLottos;
+    }
+
+    public void checkWinLottos(WinLotto winLotto) {
+        for (MyLotto myLotto : myLottos) {
+            myLotto.checkWinNumber(winLotto);
+            myLottoResult.update(myLotto);
+        }
+        myLottoResult.sumPrizeAmount();
+    }
+
+    public int prizeAmount() {
+        return myLottoResult.prizeAmount();
+    }
+
+    public MyLottoResult getResult() {
+        return myLottoResult;
     }
 }

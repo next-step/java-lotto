@@ -22,9 +22,15 @@ class MyLottoTest {
     void ToString() {
         String inputNumbers = "1, 8, 11, 31, 41, 42";
         WinLotto winLotto = new WinLotto(inputNumbers);
-
         String expectedToString = "[1, 8, 11, 31, 41, 42]";
-
         assertThat(winLotto.toString()).isEqualTo(expectedToString);
+    }
+
+    @Test
+    void 당첨확인() {
+        MyLotto myLotto = MyLotto.manual("7, 14, 21, 22, 44, 45");
+        WinLotto winLotto = new WinLotto("1, 2, 7, 11, 40, 44");
+        myLotto.checkWinNumber(winLotto);
+        assertThat(myLotto.winNumberCount()).isEqualTo(2);
     }
 }

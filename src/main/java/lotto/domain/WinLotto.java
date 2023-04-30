@@ -24,4 +24,8 @@ public class WinLotto {
     public List<Integer> numbers() {
         return numbers;
     }
+
+    public Integer number(int i) {
+        return numbers.get(i);
+    }
 }
