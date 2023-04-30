@@ -27,7 +27,16 @@ public class Lotto {
 	}
 
 	public Score calculateScore(WinNumbers winNumbers) {
-		return winNumbers.plusScore(this.lottoNumbers, this.score);
+		for (Integer winNumber : winNumbers.getWinNumbers()) {
+			this.plusScore(winNumber);
+		}
+		return this.score;
+	}
+
+	private void plusScore(Integer winNumber) {
+		if (this.lottoNumbers.contains(winNumber)) {
+			this.score.plus();
+		}
 	}
 
 	public Score getScore() {

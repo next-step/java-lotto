@@ -46,6 +46,6 @@ public class LottoMachine {
 	}
 
 	public PurchasedLottos getPurchasedLottos() {
-		return purchasedLottos;
+		return this.purchasedLottos;
 	}
 }

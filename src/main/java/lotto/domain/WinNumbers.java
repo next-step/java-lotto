@@ -33,7 +33,7 @@ public class WinNumbers {
 		for (String winNumberString : split) {
 			int winNumber = this.toInt(winNumberString);
 			this.checkRange(winNumber);
-			winNumbers.add(winNumber);
+			this.winNumbers.add(winNumber);
 		}
 	}
 
@@ -57,16 +57,7 @@ public class WinNumbers {
 		}
 	}
 
-	public Score plusScore(LottoNumbers lottoNumbers, Score score) {
-		for (Integer winNumber : this.winNumbers) {
-			this.plus(lottoNumbers, score, winNumber);
-		}
-		return score;
-	}
-
-	private void plus(LottoNumbers lottoNumbers, Score score, Integer winNumber) {
-		if (lottoNumbers.contains(winNumber)) {
-			score.plus();
-		}
+	public Set<Integer> getWinNumbers() {
+		return this.winNumbers;
 	}
 }
