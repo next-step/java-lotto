@@ -8,6 +8,7 @@ import java.util.List;
 public class Numbers {
 
     private static final int DEFAULT_RETURN_NUMBER_COUNT = 2;
+
     private Deque<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {

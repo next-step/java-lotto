@@ -8,14 +8,14 @@ public class StringCalculator {
     private Numbers numbers;
     private Operations operations;
 
-    public void readExpression(String exp) throws IllegalArgumentException {
-        validExpression(exp);
-        numbers = new Numbers(extractNumbers(exp.split(" ")));
-        operations = new Operations(extractOperation(exp.split(" ")));
+    public void readExpression(String expression) throws IllegalArgumentException {
+        validExpression(expression);
+        numbers = new Numbers(extractNumbers(expression.split(" ")));
+        operations = new Operations(extractOperation(expression.split(" ")));
     }
 
-    private void validExpression(String exp) {
-        if (exp == null || exp.isBlank()) {
+    private void validExpression(String expression) {
+        if (expression == null || expression.isBlank()) {
             throw new IllegalArgumentException("유효한 표현식이 아닙니다.");
         }
     }
