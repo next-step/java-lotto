@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class ClientLotteryPurchasePriceTest {
+public class LotteryPurchasePriceTest {
 
     private static final int MIN_PURCHASABLE_PRICE = 1000;
 
@@ -18,13 +18,13 @@ public class ClientLotteryPurchasePriceTest {
     @Test
     @DisplayName("로또 구매 금액 입력시 1000원 이상 입력할 경우 객체 정상 생성")
     void clientLotteryPurchasePriceCreate() {
-        assertDoesNotThrow(() -> new ClientLotteryPurchasePrice(MIN_PURCHASABLE_PRICE));
+        assertDoesNotThrow(() -> new LotteryPurchasePrice(MIN_PURCHASABLE_PRICE));
     }
 
     @Test
     @DisplayName("로또 구매 금액 입력시 1000원 이하 입력할 경우 익셉션 발생")
     void clientLotteryPurchasePriceError() {
-        assertThatThrownBy(() -> new ClientLotteryPurchasePrice(LOWER_THAN_MIN_PURCHASABLE_PRICE))
+        assertThatThrownBy(() -> new LotteryPurchasePrice(LOWER_THAN_MIN_PURCHASABLE_PRICE))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 최소 구매 금액은 1000원 이상입니다.");
     }
@@ -32,7 +32,7 @@ public class ClientLotteryPurchasePriceTest {
     @ParameterizedTest(name = "[{index}]금액에 따른 로또 갯수를 리턴한다 {1}")
     @CsvSource(value = {"14000:14","9999:9"},delimiter = ':')
     void returnLotteryPerPrice(int price, int expectedLottery) {
-        assertThat(new ClientLotteryPurchasePrice(price).getLotteries())
+        assertThat(new LotteryPurchasePrice(price).getLotteries())
                 .isEqualTo(expectedLottery);
     }
 }
