@@ -1,6 +1,7 @@
 package lottery.domain;
 
 import static java.util.Arrays.asList;
+import static lottery.domain.constant.LotteryNumberRule.LOTTERY_NUMBERS_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -28,8 +29,6 @@ public class SixLotteryNumbersTest {
 
     private static final Set<LotteryNumber> NOT_COMPLETED_NUMBERS =
             new HashSet<>(List.of(new LotteryNumber(1)));
-
-    private static final int LOTTERY_NUMBERS_SIZE = 6;
 
     @Test
     @DisplayName("동일한 번호를 가진 LotteryNumber 2개 가 들어갈 경우 동일 객체로 판단 1개의 객체만 등록한다")
@@ -68,6 +67,6 @@ public class SixLotteryNumbersTest {
     @Test
     @DisplayName("기본생성자 객체 생성시 자동으로 6개의 로또 번호를 생성한다.")
     void autoGenerateTest() {
-        assertThat(new SixLotteryNumbers().size()).isEqualTo(LOTTERY_NUMBERS_SIZE);
+        assertThat(new SixLotteryNumbers().size()).isEqualTo(LOTTERY_NUMBERS_SIZE.getRuleNumber());
     }
 }

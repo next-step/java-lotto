@@ -3,19 +3,23 @@ package lottery.domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import java.util.stream.Stream;
+import lottery.domain.constant.LotteryNumberRule;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LotteryNumberTest {
 
-    private static final int MIN_LOTTERY_NUMBER = 1;
-
-    private static final int MAX_LOTTERY_NUMBER = 45;
-
     @ParameterizedTest(name = "로또 번호 범주 안에 들어가는 번호 입력시 정상 객체가 생성된다 init -> {0}")
-    @ValueSource(ints = {MIN_LOTTERY_NUMBER,MAX_LOTTERY_NUMBER})
+    @MethodSource("lotteryNumberProvider")
     void createObjectTest(int source) {
         assertDoesNotThrow(() -> new LotteryNumber(source));
+    }
+
+    static Stream<Integer> lotteryNumberProvider() {
+        return Stream.of(LotteryNumberRule.MIN_LOTTERY_NUMBER.getRuleNumber(),
+                LotteryNumberRule.MAX_LOTTERY_NUMBER.getRuleNumber());
     }
 
     @ParameterizedTest(name = "로또 번호 범주 밖 번호 입력시 익셉션이 발생한다 init -> {0}")
