@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Money {
+public class Money implements Comparable<Money> {
   private final int amount;
 
   public Money(int amount) {
@@ -18,6 +18,9 @@ public class Money {
   }
 
   public Money difference(Money other) {
+    if (this.compareTo(other) < 0) {
+      throw new IllegalArgumentException("현재 가진 돈보다 더 많은 돈을 사용할 수 없습니다.");
+    }
     return new Money(amount - other.getAmount());
   }
 
@@ -32,5 +35,10 @@ public class Money {
   @Override
   public int hashCode() {
     return Objects.hash(amount);
+  }
+
+  @Override
+  public int compareTo(Money o) {
+    return Integer.compare(getAmount(), o.getAmount());
   }
 }
