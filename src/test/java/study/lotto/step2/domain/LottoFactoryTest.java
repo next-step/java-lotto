@@ -17,7 +17,7 @@ class LottoFactoryTest {
     @DisplayName("1에서 6을 선택한 Lotto 객체 생성")
     void lotto() {
         // given
-        LottoFactory lottoFactory = new LottoFactory(SequenceNumberSelector());
+        LottoFactory lottoFactory = new LottoFactory(sequenceNumberSelector());
 
         // when
         Lotto lotto = lottoFactory.lotto();
@@ -26,7 +26,7 @@ class LottoFactoryTest {
         Assertions.assertThat(lotto).isEqualTo(new Lotto(sequenceNumber()));
     }
 
-    private AutoNumberSelector SequenceNumberSelector() {
+    private AutoNumberSelector sequenceNumberSelector() {
         return this::sequenceNumber;
     }
 
