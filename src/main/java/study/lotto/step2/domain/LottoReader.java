@@ -36,10 +36,12 @@ public class LottoReader {
         return LottoResult.of(numbersOfMatch(lotto.selectedNumbers()));
     }
 
-    public List<LottoResult> resultOf(List<Lotto> lottos) {
-        return lottos.stream()
+    public LottoResults resultOf(List<Lotto> lottos) {
+        return new LottoResults(
+                lottos.stream()
                 .map(this::resultOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+        );
     }
 
     private int numbersOfMatch(List<Integer> selectedNumbers) {

@@ -29,7 +29,7 @@ class LottoReaderTest {
     }
 
     @Test
-    @DisplayName("로또 리스트로부터 로또 결과 enum 리스트 반환")
+    @DisplayName("로또 리스트로부터 LottoResults 객체 반환")
     void LottoResult_list_from_Lotto_list() {
         // given
         LottoReader lottoReader = new LottoReader(List.of(1, 2, 3, 4, 5, 6));
@@ -39,12 +39,13 @@ class LottoReaderTest {
         List<Lotto> lottos = List.of(notMatchLotto, oneMatchLotto);
 
         // when
-        List<LottoResult> lottoResults = lottoReader.resultOf(lottos);
+        LottoResults lottoResults = lottoReader.resultOf(lottos);
 
         // then
-        List<LottoResult> expectedLottoResults = List.of(LottoResult.NOT_MATCH, LottoResult.MATCH_ONE_NUMBER);
+        LottoResults expectedLottoResults = new LottoResults(
+                List.of(LottoResult.NOT_MATCH, LottoResult.MATCH_ONE_NUMBER)
+        );
         assertThat(lottoResults).isEqualTo(expectedLottoResults);
-
     }
 
     @Test
