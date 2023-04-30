@@ -26,6 +26,14 @@ public enum LottoResult {
         return payout;
     }
 
+    public int numberOfMatches() {
+        return numberOfMatches;
+    }
+
+    public boolean isWinning() {
+        return isWinning;
+    }
+
     public static LottoResult of(int numberOfMatches) {
         return Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult.numberOfMatches == numberOfMatches)
