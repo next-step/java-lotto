@@ -1,6 +1,8 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
+import util.Converter;
 
 public class InputView {
 
@@ -11,9 +13,10 @@ public class InputView {
     return scanner.nextInt();
   }
 
-  public static String scanWinningNumbers() {
+  public static List<Integer> scanWinningNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    return scanner.next();
+    String winningNumbers = scanner.next();
+    return Converter.convertToLottoNumbers(winningNumbers);
   }
 
 }
