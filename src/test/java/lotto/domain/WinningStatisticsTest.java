@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.view.InputView.PRICE_OF_LOTTO_TICKET;
+import static lotto.domain.LottoTickets.PRICE_OF_LOTTO_TICKET;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("당첨 통계 테스트")

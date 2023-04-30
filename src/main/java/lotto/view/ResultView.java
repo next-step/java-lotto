@@ -11,6 +11,7 @@ public class ResultView {
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
+        System.out.println(lottoTickets.findLottoTicketCount() + "개를 구매했습니다.");
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
         for (LottoTicket lottoTicket : lottoTicketList) {
             printLottoTicket(lottoTicket);

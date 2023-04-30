@@ -9,16 +9,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 @DisplayName("로또 티켓 집합 클래스 테스트")
 class LottoTicketsTest {
 
-    @DisplayName("로또 티켓은 1장 이상 구입해야 한다")
+    @DisplayName("로또 티켓 구입은 1000원 보다 적으면 실패한다")
     @Test
     void lottoTicketsCreate_fail() {
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoTickets.create(0))
-                .withMessage("로또 티켓은 1장 이상 구입해야 합니다");
+                .isThrownBy(() -> LottoTickets.create(900))
+                .withMessage("티켓 구입 금액은 최소 1000원 이상 이여야 합니다");
     }
 
-    @ParameterizedTest(name = "1개 이상의 로또를 구입하면 로또 티켓 집합 객체가 생성된다")
-    @CsvSource(value = {"1:1", "9:9", "20:20"}, delimiter = ':')
+    @ParameterizedTest(name = "1000원 이상의 로또 티켓을 구입하면 성공한다")
+    @CsvSource(value = {"1000:1", "9000:9", "20000:20"}, delimiter = ':')
     void lottoTicketsCreate_success(int lottoTicketCount, int expected) {
         LottoTickets lottoTickets = LottoTickets.create(lottoTicketCount);
         int ticketCount = lottoTickets.findLottoTicketCount();

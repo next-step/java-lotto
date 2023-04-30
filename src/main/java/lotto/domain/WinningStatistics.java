@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static lotto.view.InputView.PRICE_OF_LOTTO_TICKET;
+import static lotto.domain.LottoTickets.PRICE_OF_LOTTO_TICKET;
 
 public class WinningStatistics {
 

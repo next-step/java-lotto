@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static lotto.domain.LottoTicket.LOTTO_TICKET_SIZE;
-import static lotto.domain.LottoTickets.MIN_LOTTO_TICKET_COUNT;
 
 public class LottoGenerator {
 
+    private static final int MIN_LOTTO_TICKET_COUNT = 1;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 

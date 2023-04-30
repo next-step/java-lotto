@@ -7,15 +7,15 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public void run() {
-        int numberOfTickets = InputView.calculateNumberOfTicketsToBuy();
-        LottoTickets lottoTickets = LottoTickets.create(numberOfTickets);
+        int purchaseAmount = InputView.inputPurchaseAmount();
+        LottoTickets lottoTickets = LottoTickets.create(purchaseAmount);
         ResultView.printLottoTickets(lottoTickets);
 
         String winningNumbersString = InputView.inputWinningNumbers();
 
         LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString);
         WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics();
-        double earningsRate = winningStatistics.calculateEarningsRate(numberOfTickets);
+        double earningsRate = winningStatistics.calculateEarningsRate(lottoTickets.findLottoTicketCount());
 
         ResultView.printLottoResult(winningStatistics, earningsRate);
     }

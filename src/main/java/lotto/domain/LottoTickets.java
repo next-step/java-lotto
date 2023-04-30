@@ -5,27 +5,34 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
-    public static final int MIN_LOTTO_TICKET_COUNT = 1;
+    public static final int PRICE_OF_LOTTO_TICKET = 1000;
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = tickets;
     }
 
-    public static LottoTickets create(int lottoTicketCount) {
-        validate(lottoTicketCount);
-        List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < lottoTicketCount; i++) {
-            tickets.add(new LottoGenerator().generateLottoNumbers());
-        }
+    public static LottoTickets create(int purchaseAmount) {
+        validate(purchaseAmount);
+        int numberOfTickets = Math.floorDiv(purchaseAmount, PRICE_OF_LOTTO_TICKET);
+        List<LottoTicket> tickets = generateLottoTickets(numberOfTickets);
         return new LottoTickets(tickets);
     }
 
-    private static void validate(int lottoTicketCount) {
-        if (lottoTicketCount < MIN_LOTTO_TICKET_COUNT) {
-            throw new IllegalArgumentException(String.format("로또 티켓은 %d장 이상 구입해야 합니다", MIN_LOTTO_TICKET_COUNT));
+    private static void validate(int purchaseAmount) {
+        if (purchaseAmount < PRICE_OF_LOTTO_TICKET) {
+            throw new IllegalArgumentException(String.format("티켓 구입 금액은 최소 %d원 이상 이여야 합니다", PRICE_OF_LOTTO_TICKET));
         }
     }
+
+    private static List<LottoTicket> generateLottoTickets(int numberOfTickets) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < numberOfTickets; i++) {
+            tickets.add(new LottoGenerator().generateLottoNumbers());
+        }
+        return tickets;
+    }
+
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(tickets);
