@@ -81,7 +81,7 @@ class LottoNumberGroupTest {
         List<Integer> requestLottoNumberGroup = List.of(1, 2, 3, 11, 12, 15);
         LottoNumberGroup request = lottoNumberGroup.initializedManualLottoNumber(requestLottoNumberGroup);
 
-        assertThat(request.countMatchingLottNumber(winingLotto)).isEqualTo(3);
+        assertThat(request.countMatchingLottoNumber(winingLotto)).isEqualTo(3);
 
     }
 
