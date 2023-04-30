@@ -10,6 +10,14 @@ public class Numbers {
         return Integer.parseInt(numberString);
     }
 
+    public static Numbers toNumbers(String[] numbersAndSigns) {
+        Numbers numbers = new Numbers();
+        for (int i = 0; i < numbersAndSigns.length; i = i + 2) {
+            numbers.add(toNumber(numbersAndSigns[i]));
+        }
+        return numbers;
+    }
+
     public Integer pop() {
         return numbers.pop();
     }
