@@ -52,4 +52,12 @@ public enum Prize {
     public int getPrizeMoney() {
         return prizeMoney;
     }
+
+    public int getMatchingCount() {
+        return matchingCount;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
 }
