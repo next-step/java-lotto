@@ -5,7 +5,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int BEGIN_OF_LOTTO_NUMBER = 1;
     private static final int END_OF_LOTTO_NUMBER = 45;
     private static final int ZERO = 0;
@@ -60,6 +60,10 @@ public class LottoNumber {
         return lottoNumber.hashCode() <= endOfLottoNumber.hashCode();
     }
 
+    public boolean isSameLottoNumber(LottoNumber leftOperand) {
+        return leftOperand == this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,5 +75,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
     }
 }
