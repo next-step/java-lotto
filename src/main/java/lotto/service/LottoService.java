@@ -2,56 +2,38 @@ package lotto.service;
 
 import lotto.domain.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoService {
     private final Purchase purchase;
-    private final List<MyLotto> myLottos;
-    private final MyLottoResult myLottoResult = new MyLottoResult();
+    private final MyLottos myLottos;
+    private final Result result;
 
-
-    public LottoService(int inputMoney, List<MyLotto> myLottos) {
+    public LottoService(int inputMoney, MyLottos myLottos) {
         this.purchase = new Purchase(inputMoney);
         this.myLottos = myLottos;
+        this.result = new Result();
     }
 
     public LottoService(int inputMoney) {
-        this(inputMoney, new ArrayList<>());
+        this(inputMoney, new MyLottos());
     }
 
     public void autoGenerate() {
-        for (int i = 0; i < purchase.count(); i++) {
-            autoGenerateOne();
-        }
+        myLottos.autoGenerate(purchase.count());
     }
 
-    private void autoGenerateOne() {
-        MyLotto generatedMyLotto = MyLotto.auto();
-        myLottos.add(generatedMyLotto);
-    }
-
-    public List<MyLotto> lottos() {
+    public MyLottos lottos() {
         return myLottos;
     }
 
-    public void checkMyLottosWin(WinLotto winLotto) {
-        for (MyLotto myLotto : myLottos) {
-            myLotto.checkMatchingNumbers(winLotto);
-            myLottoResult.update(myLotto);
-        }
-        myLottoResult.sumPrizeAmount();
+    public void checkWin(WinLotto winLotto) {
+        myLottos.checkWin(winLotto, result);
     }
 
-    private int prizeAmount() {
-        return myLottoResult.prizeAmount();
-    }
-
-    public MyLottoResult result() {
-        return myLottoResult;
+    public Result result() {
+        return result;
     }
 
     public double profit(){
-        return myLottoResult.profit(purchase.money());
+        return result.profit(purchase.money());
     }
 }

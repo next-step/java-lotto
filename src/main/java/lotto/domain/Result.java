@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class MyLottoResult {
+public class Result {
     private int result3matched;
     private int result4matched;
     private int result5matched;
