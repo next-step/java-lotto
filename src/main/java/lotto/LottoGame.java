@@ -3,6 +3,8 @@ package lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.ui.Printer;
+import lotto.ui.Reader;
 
 public class LottoGame {
 

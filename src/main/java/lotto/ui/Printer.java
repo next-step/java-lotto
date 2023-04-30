@@ -1,4 +1,4 @@
-package lotto;
+package lotto.ui;
 
 import lotto.domain.Money;
 
