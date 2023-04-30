@@ -12,6 +12,6 @@ class LottoMachineTest {
 
         //when
         //then
-        assertThat(lottoMachine.drawnNumber()).isBetween(1, 45);
+        assertThat(lottoMachine.drawnLottoNumbers().size()).isEqualTo(6);
     }
 }

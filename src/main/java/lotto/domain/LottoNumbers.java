@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final int BEGIN_INDEX = 0;
     private static final int MATCH_COUNT_MIN = 3;
     private static final int MATCH_COUNT_MAX = 6;
 
@@ -29,13 +28,8 @@ public class LottoNumbers {
     }
 
     private static Set<LottoNumber> generatedLottoNumbers() {
-        LottoMachine lottoMachine = new LottoMachine();
-
-        Set<LottoNumber> numbers = new HashSet<>();
-        for (int i = BEGIN_INDEX; i < LOTTO_NUMBERS_SIZE; i++) {
-            numbers.add(new LottoNumber(lottoMachine.drawnNumber()));
-        }
-        return numbers;
+        List<LottoNumber> drawnLottoNumbers = new LottoMachine().drawnLottoNumbers();
+        return new HashSet<>(drawnLottoNumbers);
     }
 
     boolean isNotWinningMatchCountWith(LottoNumbers numbers) {
