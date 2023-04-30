@@ -35,11 +35,22 @@ public class Score {
 	}
 
 	public boolean availableBonus() {
-		return this.score == BONUS_AVAILABLE_SCORE;
+		return this.score == Score.BONUS_AVAILABLE_SCORE;
+	}
+
+	public boolean isMatchBonus() {
+		return this.bonusScore > 0;
 	}
 
 	public int getScore() {
-		return score;
+		return this.score;
+	}
+
+	public String getBonusString() {
+		if (this.isMatchBonus()) {
+			return ", 보너스 볼 일치";
+		}
+		return " ";
 	}
 
 	@Override

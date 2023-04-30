@@ -6,6 +6,7 @@ import lotto.domain.BenefitResult;
 import lotto.domain.Lotto;
 import lotto.domain.PurchasedLottos;
 import lotto.domain.PrizeSituation;
+import lotto.domain.Score;
 
 public class ResultView {
 
@@ -23,10 +24,10 @@ public class ResultView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		for (PrizeSituation prizeSituation : prizeSituations) {
-			int score = prizeSituation.getPrizeType().score.getScore();
+			Score score = prizeSituation.getPrizeType().score;
 			long prizeMoney = prizeSituation.getPrizeType().prizeMoney.getPrizeMoney();
 			int prizeCount = prizeSituation.getPrizeCount();
-			System.out.printf("%d개 일치 (%d원)- %d개%n", score, prizeMoney, prizeCount);
+			System.out.printf("%d개 일치%s(%d원)- %d개%n", score.getScore(), score.getBonusString(), prizeMoney, prizeCount);
 		}
 	}
 
