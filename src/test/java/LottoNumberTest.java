@@ -38,6 +38,14 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
+    @DisplayName("로또 번호가 정해진 사이값의 숫자가 아니라면 예외를 던진다.")
+    @ValueSource(ints = {-1, 46})
+    void validateLottoNumber_test(int lottoNumber) {
+        assertThatThrownBy(() -> InputView.validateLottoNumberInRange(lottoNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("당첨 번호의 입력값이 null이거나 빈 공백인 경우 예외를 던진다.")
     void validateWinningNumbersNullAndEmpty_test(String input) {
@@ -76,7 +84,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {3, 4, 5, 6})
     @DisplayName("당첨 번호와 일치하는 숫자에 따라 순위를 매길 수 있다.")
     void setRank_test(int matchCount) {
-        Rank rank = Rank.valueOf(matchCount);
+        Rank rank = Rank.valueOf(matchCount, false);
 
         Assertions.assertThat(matchCount).isEqualTo(rank.getCountOfMatch());
     }
@@ -96,7 +104,7 @@ public class LottoNumberTest {
     @DisplayName("보너스 번호가 없을 때 수익률 계산이 동작하는지 확인할 수 있다.")
     void calculateReturnRate_test() {
         int purchaseAmount = 10_000;
-        LottoTicket lottoTicket = new LottoTicket(10); // 10장의 로또 티켓 생성
+        LottoTicket lottoTicket = new LottoTicket(10);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         LottoResult lottoResult = lottoTicket.calculateResult(winningNumbers);
@@ -119,7 +127,7 @@ public class LottoNumberTest {
     @DisplayName("보너스 번호가 있을 때 수익률 계산이 동작하는지 확인할 수 있다.")
     void calculateWithBonusNumberReturnRate_test() {
         int purchaseAmount = 10_000;
-        LottoTicket lottoTicket = new LottoTicket(10); // 10장의 로또 티켓 생성
+        LottoTicket lottoTicket = new LottoTicket(10);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
 
