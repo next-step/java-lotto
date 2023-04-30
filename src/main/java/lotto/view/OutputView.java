@@ -1,8 +1,11 @@
 package lotto.view;
 
+import lotto.domain.LottoRank;
 import lotto.dto.LottoNumbersDto;
 import lotto.dto.LottoStatisticsDto;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -28,17 +31,28 @@ public class OutputView {
     }
 
     public static void outputLottoStatistics(LottoStatisticsDto dto) {
-        Map<Integer, Integer> matchingCounts = dto.getMatchingCounts();
-        Map<Integer, Integer> matchingPrices = dto.getMatchingPrices();
+        Map<LottoRank, Integer> matchingCounts = dto.getMatchingCounts();
         System.out.println("\n" + "당첨 통계");
         System.out.println("---------");
 
-        for (int key : matchingCounts.keySet()) {
-            System.out.printf("%d" + "개 일치 (" + "%d" + "원)- " + "%d" + "개" + "\n",
-                    key, matchingPrices.get(key), matchingCounts.get(key));
+        List<LottoRank> ranks = new ArrayList<>(matchingCounts.keySet());
+        Collections.sort(ranks, Collections.reverseOrder());
+        for (LottoRank rank : ranks) {
+            outputStatisticsStage(matchingCounts, rank);
         }
 
         outputGrossRateOfEarnings(dto);
+    }
+
+    private static void outputStatisticsStage(Map<LottoRank, Integer> matchingCounts,
+                                              LottoRank rank) {
+        if (rank == LottoRank.SECOND) {
+            System.out.printf("%d" + "개 일치, 보너스 볼 일치 (" + "%d" + "원)- " + "%d" + "개" + "\n",
+                    rank.getMatchCount(), rank.getPrizeMoney(), matchingCounts.get(rank));
+            return;
+        }
+        System.out.printf("%d" + "개 일치 (" + "%d" + "원)- " + "%d" + "개" + "\n",
+                rank.getMatchCount(), rank.getPrizeMoney(), matchingCounts.get(rank));
     }
 
     private static void outputGrossRateOfEarnings(LottoStatisticsDto dto) {
