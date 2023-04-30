@@ -29,11 +29,11 @@ public class LottoNumbers {
     }
 
     private static Set<LottoNumber> generatedLottoNumbers() {
-        LottoMachine.initLottoNumbers();
+        LottoMachine lottoMachine = new LottoMachine();
 
         Set<LottoNumber> numbers = new HashSet<>();
         for (int i = BEGIN_INDEX; i < LOTTO_NUMBERS_SIZE; i++) {
-            numbers.add(new LottoNumber(LottoMachine.drawnNumber()));
+            numbers.add(new LottoNumber(lottoMachine.drawnNumber()));
         }
         return numbers;
     }

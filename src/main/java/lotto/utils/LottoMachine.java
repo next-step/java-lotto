@@ -11,9 +11,13 @@ public class LottoMachine {
     private static final int LOTTO_NUMBER_MAX = 45;
     private static final int DRAWN_NUMBER_INDEX = 0;
 
-    private static List<Integer> numbers;
+    private List<Integer> numbers;
 
-    public static int drawnNumber() {
+    public LottoMachine() {
+        this.numbers = initLottoNumbers();
+    }
+
+    public int drawnNumber() {
         Collections.shuffle(numbers);
 
         int drawnNumber = numbers.get(DRAWN_NUMBER_INDEX);
@@ -23,8 +27,8 @@ public class LottoMachine {
         return drawnNumber;
     }
 
-    public static void initLottoNumbers() {
-        numbers = IntStream.range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX + 1)
+    public List<Integer> initLottoNumbers() {
+        return IntStream.range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX + 1)
                 .boxed()
                 .collect(Collectors.toList());
     }

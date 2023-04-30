@@ -8,10 +8,10 @@ class LottoMachineTest {
     @Test
     void 초기화_테스트() {
         //given
-        LottoMachine.initLottoNumbers();
+        LottoMachine lottoMachine = new LottoMachine();
 
         //when
         //then
-        assertThat(LottoMachine.drawnNumber()).isBetween(1, 45);
+        assertThat(lottoMachine.drawnNumber()).isBetween(1, 45);
     }
 }
