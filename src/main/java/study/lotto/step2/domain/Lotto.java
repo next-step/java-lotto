@@ -1,5 +1,6 @@
 package study.lotto.step2.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class Lotto {
     }
 
     public List<Integer> selectedNumbers() {
-        return selectedNumbers;
+        return Collections.unmodifiableList(selectedNumbers);
     }
 
     private void validateSelectedNumbers(List<Integer> selectedNumbers) {
