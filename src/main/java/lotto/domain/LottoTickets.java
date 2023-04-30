@@ -11,6 +11,14 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
+    public static LottoTickets of(List<List<Integer>> lottoNumbers) {
+        List<LottoTicket> lottoTickets = lottoNumbers.stream()
+                .map(LottoTicket::of)
+                .collect(Collectors.toList());
+
+        return new LottoTickets(lottoTickets);
+    }
+
     public List<LottoPrize> getWinningPrizes(List<Integer> winningNumbers, LottoNumber bonusNumber) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.getWinningPrize(winningNumbers, bonusNumber))
