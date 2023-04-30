@@ -11,8 +11,7 @@ public class LottoGeneratorTest {
     @DisplayName("구입 금액에 해당하는 로또번호(자동)을 발급한다")
     @Test
     void generate() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoTickets lottoTickets = lottoGenerator.generate(3);
+        LottoTickets lottoTickets = LottoGenerator.generate(3);
         assertThat(lottoTickets.size()).isEqualTo(3);
     }
 }
