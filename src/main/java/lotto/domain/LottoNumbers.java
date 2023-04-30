@@ -28,8 +28,13 @@ public class LottoNumbers {
     }
 
     private static Set<LottoNumber> generatedLottoNumbers() {
-        List<LottoNumber> drawnLottoNumbers = new LottoMachine().drawnLottoNumbers();
-        return new HashSet<>(drawnLottoNumbers);
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        List<Integer> drawnLottoNumbers = new LottoMachine().drawnLottoNumbers();
+
+        for (int drawnLottoNumber : drawnLottoNumbers) {
+            lottoNumbers.add(new LottoNumber(drawnLottoNumber));
+        }
+        return lottoNumbers;
     }
 
     boolean isNotWinningMatchCountWith(LottoNumbers numbers) {
