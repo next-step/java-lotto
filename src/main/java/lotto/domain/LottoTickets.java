@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LottoTickets {
     public static final int PRICE_OF_LOTTO_TICKET = 1000;
+
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
@@ -31,6 +32,15 @@ public class LottoTickets {
             tickets.add(new LottoGenerator().generateLottoNumbers());
         }
         return tickets;
+    }
+
+    public WinningStatistics calculateLottoStatistics(WinningLotto winningLotto) {
+        WinningStatistics winningStatistics = new WinningStatistics();
+        for (LottoTicket lottoTicket : tickets) {
+            WinningRank rank = winningLotto.match(lottoTicket);
+            winningStatistics.addMatchedTicket(rank);
+        }
+        return winningStatistics;
     }
 
 

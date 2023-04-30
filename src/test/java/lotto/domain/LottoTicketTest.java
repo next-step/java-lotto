@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 @DisplayName("로또 티켓 테스트")
 class LottoTicketTest {
@@ -15,10 +16,16 @@ class LottoTicketTest {
     @DisplayName("로또 티켓 번호는 서로 다른 번호 6개로 생성하지 않으면 실패한다")
     @Test
     void createLottoTicket_fail() {
-        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 5);
+        Set<LottoNumber> numbers = new TreeSet<>();
+        numbers.add(new LottoNumber(1));
+        numbers.add(new LottoNumber(2));
+        numbers.add(new LottoNumber(3));
+        numbers.add(new LottoNumber(4));
+        numbers.add(new LottoNumber(5));
+        numbers.add(new LottoNumber(5));
 
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoTicket.from(numbers))
+                .isThrownBy(() -> new LottoTicket(numbers))
                 .withMessage("로또는 6개의 번호로 이루어져야 합니다");
     }
 

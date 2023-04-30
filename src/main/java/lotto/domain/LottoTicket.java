@@ -37,9 +37,15 @@ public class LottoTicket {
                 .filter(number -> number.isMatchesWinningNumber(winningNumbers))
                 .count();
     }
+    public int countMatchingNumbersWithWinningTicket(LottoTicket winningLottoTicket) {
+        return (int) numbers.stream()
+                .filter(winningLottoTicket::containsLottoNumber)
+                .count();
+    }
 
     public Set<LottoNumber> getLottoNumbers() {
         return new HashSet<>(numbers);
     }
+
 }
 

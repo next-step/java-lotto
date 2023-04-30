@@ -2,37 +2,25 @@ package lotto.domain;
 
 public class WinningLotto {
 
-    private final LottoTicket lottoTicket;
+    private final LottoTicket winningLottoTicket;
 
-    public WinningLotto(LottoTicket lottoTicket) {
-        this.lottoTicket = lottoTicket;
+    public WinningLotto(LottoTicket winningLottoTicket) {
+        this.winningLottoTicket = winningLottoTicket;
     }
 
-    public WinningRank match(LottoTicket ticket) {
-        int matchCount = countOfMatch(ticket);
+    public WinningRank match(LottoTicket lottoTicket) {
+        int matchCount = countOfMatch(lottoTicket);
         return WinningRank.valueOf(matchCount);
     }
 
-    public int countOfMatch(LottoTicket ticket) {
-        return (int) ticket.getLottoNumbers()
-                .stream()
-                .filter(lottoTicket::containsLottoNumber)
-                .count();
+    public int countOfMatch(LottoTicket lottoTicket) {
+        return lottoTicket.countMatchingNumbersWithWinningTicket(winningLottoTicket);
     }
 
     public LottoTicket findWinningLotto() {
-        return lottoTicket;
-    }
-
-    public WinningStatistics calculateLottoStatistics(LottoTickets lottoTickets) {
-        WinningStatistics winningStatistics = new WinningStatistics();
-
-        for (LottoTicket ticket : lottoTickets.getLottoTickets()) {
-            WinningRank rank = match(ticket);
-            winningStatistics.addMatchedTicket(rank);
-        }
-        return winningStatistics;
+        return winningLottoTicket;
     }
 }
+
 
 

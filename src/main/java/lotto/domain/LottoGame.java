@@ -11,6 +11,6 @@ public class LottoGame {
     }
 
     public WinningStatistics calculateWinningStatistics() {
-        return winningLotto.calculateLottoStatistics(lottoTickets);
+        return lottoTickets.calculateLottoStatistics(winningLotto);
     }
 }
