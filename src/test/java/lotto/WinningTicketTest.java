@@ -12,9 +12,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningTicketTest {
     List<LottoNumber> winningNumbers = new ArrayList<>();
+    LottoNumber bonusNumber = new LottoNumber(7);
+
     @BeforeEach
     void setUp() {
         winningNumbers = IntStream.rangeClosed(1, 6)
@@ -30,5 +33,27 @@ public class WinningTicketTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new WinningTicket(winningNumbers, duplicatedBonusNumber))
                 .withMessageMatching("보너스볼은 당첨번호와 중복될 수 없습니다.");
+    }
+
+    @DisplayName("당첨번호와 일치하는 번호의 수를 구할 수 있다.")
+    @Test
+    void matchesWinningNumbers() {
+        List<LottoNumber> allMatchesNumbers = IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
+        assertThat(winningTicket.calculateMatchesCount(allMatchesNumbers)).isEqualTo(6);
+    }
+
+    @DisplayName("보너스 번호와 로또 번호들의 일치여부를 구할 수 있다.")
+    @Test
+    void matchesBonus() {
+        List<LottoNumber> containsBonusNumber = IntStream.rangeClosed(2, 7)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
+        assertThat(winningTicket.matchesBonus(containsBonusNumber)).isTrue();
     }
 }
