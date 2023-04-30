@@ -29,6 +29,25 @@ class LottoReaderTest {
     }
 
     @Test
+    @DisplayName("로또 리스트로부터 로또 결과 enum 리스트 반환")
+    void LottoResult_list_from_Lotto_list() {
+        // given
+        LottoReader lottoReader = new LottoReader(List.of(1, 2, 3, 4, 5, 6));
+        Lotto notMatchLotto = new Lotto(List.of(11, 12, 13, 14, 15, 16));
+        Lotto oneMatchLotto = new Lotto(List.of(1, 12, 13, 14, 15, 16));
+
+        List<Lotto> lottos = List.of(notMatchLotto, oneMatchLotto);
+
+        // when
+        List<LottoResult> lottoResults = lottoReader.resultOf(lottos);
+
+        // then
+        List<LottoResult> expectedLottoResults = List.of(LottoResult.NOT_MATCH, LottoResult.MATCH_ONE_NUMBER);
+        assertThat(lottoResults).isEqualTo(expectedLottoResults);
+
+    }
+
+    @Test
     @DisplayName("로또 당첨 번호가 6개가 아닐 경우, IllegalArgumentException 예외 발생")
     void invalid_numbers_of_winning_then_throw_IllegalArgumentException() {
         // given

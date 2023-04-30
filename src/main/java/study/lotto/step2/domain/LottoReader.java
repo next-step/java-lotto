@@ -1,6 +1,7 @@
 package study.lotto.step2.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoReader {
     private static final int NUMBERS_OF_WINNING = 6;
@@ -33,6 +34,12 @@ public class LottoReader {
 
     public LottoResult resultOf(Lotto lotto) {
         return LottoResult.of(numbersOfMatch(lotto.selectedNumbers()));
+    }
+
+    public List<LottoResult> resultOf(List<Lotto> lottos) {
+        return lottos.stream()
+                .map(this::resultOf)
+                .collect(Collectors.toList());
     }
 
     private int numbersOfMatch(List<Integer> selectedNumbers) {
