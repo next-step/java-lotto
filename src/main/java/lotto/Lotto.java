@@ -1,15 +1,16 @@
 package lotto;
 
+import java.util.List;
+
 public class Lotto {
 
-  public static final int LOTTO_PRICE = 1000;
+  List<Integer> lotto;
 
-  public static int buy(int purchaseAmount) {
-    if (purchaseAmount < 1000) {
-      throw new IllegalArgumentException();
-    }
-    purchaseAmount /= LOTTO_PRICE;
+  public Lotto(List<Integer> integers) {
+    lotto = integers;
+  }
 
-    return purchaseAmount;
+  public List<Integer> getLotto() {
+    return lotto;
   }
 }

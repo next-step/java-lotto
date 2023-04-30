@@ -14,9 +14,9 @@ public class LottoNumberGenerator {
     }
   }
 
-  public List<Integer> create() {
+  public Lotto create() {
     Collections.shuffle(lottoNumber);
-    return lottoNumber.subList(0, 6);
+    return new Lotto(lottoNumber.subList(0, 6));
   }
 
 }
