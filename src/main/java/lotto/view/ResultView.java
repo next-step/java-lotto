@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+
     private ResultView() {
     }
 
@@ -29,7 +31,7 @@ public class ResultView {
     }
 
     public static void printLottoResult(WinningStatistics winningStatistics, double earningsRate) {
-        System.out.println("\n당첨 통계");
+        System.out.println(LINE_SEPARATOR + "당첨 통계");
         System.out.println("---------");
 
         for (WinningRank rank : WinningRank.validRanks()) {
