@@ -48,7 +48,7 @@ public class LottoMachineTest {
 			new PrizeSituation(PrizeType.FOUR, 0), new PrizeSituation(PrizeType.SIX, 1),
 			new PrizeSituation(PrizeType.FIVE, 0), new PrizeSituation(PrizeType.THREE, 2)
 		);
-		LottoMachine lottoMachine = new LottoMachine();
+		LottoMachine lottoMachine = new LottoMachine(1000);
 		List<PrizeSituation> sortedPrizeSituations = lottoMachine.sortInOrderScore(prizeSituations);
 		assertThat(sortedPrizeSituations).containsExactly(
 			new PrizeSituation(PrizeType.THREE, 2), new PrizeSituation(PrizeType.FOUR, 0),

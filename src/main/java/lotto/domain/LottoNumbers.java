@@ -24,6 +24,7 @@ public class LottoNumbers {
 		}
 	}
 
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public LottoNumbers(List<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
 	}

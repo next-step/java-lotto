@@ -7,13 +7,8 @@ public class LottoMachine {
 
 	private final PurchasedLottos purchasedLottos;
 
-	public LottoMachine() {
-		this.purchasedLottos = new PurchasedLottos();
-	}
-
 	public LottoMachine(long purchaseAmount) {
-		this();
-
+		this.purchasedLottos = new PurchasedLottos();
 		if (purchaseAmount < Lotto.PRICE || purchaseAmount % Lotto.PRICE != 0) {
 			throw new IllegalArgumentException("구입 금액이 올바르지 않습니다.");
 		}
@@ -24,6 +19,7 @@ public class LottoMachine {
 		}
 	}
 
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public LottoMachine(List<Lotto> purchasedLottos) {
 		this.purchasedLottos = new PurchasedLottos(purchasedLottos);
 	}

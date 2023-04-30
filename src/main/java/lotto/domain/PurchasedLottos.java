@@ -11,6 +11,7 @@ public class PurchasedLottos {
 		this.purchasedLottos = new ArrayList<>();
 	}
 
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public PurchasedLottos(List<Lotto> lottos) {
 		this.purchasedLottos = lottos;
 	}

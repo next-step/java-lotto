@@ -13,6 +13,14 @@ public class BenefitResult {
 	private final double totalProfitRate;
 	private final boolean benefit;
 
+	public BenefitResult(List<PrizeSituation> prizeSituations, long purchaseAmount) {
+		this.purchaseAmount = purchaseAmount;
+		this.totalProfit = this.totalProfit(prizeSituations);
+		this.totalProfitRate = this.totalProfitRate();
+		this.benefit = this.isBenefit();
+	}
+
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public BenefitResult(long purchaseAmount, long totalProfit) {
 		this.totalProfitRate = 0.0;
 		this.purchaseAmount = purchaseAmount;
@@ -20,17 +28,11 @@ public class BenefitResult {
 		this.benefit = this.isBenefit();
 	}
 
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public BenefitResult(double totalProfitRate) {
 		this.totalProfitRate = totalProfitRate;
 		this.purchaseAmount = 0;
 		this.totalProfit = 0;
-		this.benefit = this.isBenefit();
-	}
-
-	public BenefitResult(List<PrizeSituation> prizeSituations, long purchaseAmount) {
-		this.purchaseAmount = purchaseAmount;
-		this.totalProfit = this.totalProfit(prizeSituations);
-		this.totalProfitRate = this.totalProfitRate();
 		this.benefit = this.isBenefit();
 	}
 
