@@ -7,3 +7,13 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 요구사항
+- [x] 문자열 값에 따라 사칙연산을 수행할 수 있어야한다.
+- [x] 입력 문자열은 2 + 3 * 4 / 2 와 같다.
+* - [x] 숫자와 사칙연산 사이에는 반드시 빈 공백 문자열이 있어야한다.
+* - [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+* - [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+* - [x] 첫 문자와 끝 문자는 숫자여야한다. (사칙연산이 아니여야한다.)
+- [x] 나눗셈의 경우 결과 값을 정수로 떨어지는 값으로 한정한다.
+- [x] 사칙연산의 계산 우선순위가 아닌 입력 값에 따라 계산 순서가 결정된다
