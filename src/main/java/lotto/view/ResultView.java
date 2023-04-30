@@ -31,21 +31,31 @@ public class ResultView {
     }
 
     public static void printWinningStatics(LottoRewards lottoRewards, long purchasePrice) {
+        printAllLottoRewardCount(lottoRewards);
+        printTotalProfitRate(lottoRewards, purchasePrice);
+    }
+
+    private static void printAllLottoRewardCount(LottoRewards lottoRewards) {
         printNewLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
-
         for (RewardType mc : RewardType.values()) {
-            String phrase = mc.phrase();
-            LottoReward lottoReward = lottoRewards.get(mc);
-
-            if (lottoReward == null) {
-                System.out.println(phrase + "- 0개");
-                continue;
-            }
-            System.out.println(phrase + "- " + lottoReward.count() + "개");
+            printLottoRewardCount(lottoRewards, mc);
         }
+    }
 
+    private static void printLottoRewardCount(LottoRewards lottoRewards, RewardType mc) {
+        String phrase = mc.phrase();
+        LottoReward lottoReward = lottoRewards.get(mc);
+
+        if (lottoReward == null) {
+            System.out.println(phrase + "- 0개");
+            return;
+        }
+        System.out.println(phrase + "- " + lottoReward.count() + "개");
+    }
+
+    private static void printTotalProfitRate(LottoRewards lottoRewards, long purchasePrice) {
         double totalProfitRate = (double) lottoRewards.totalProfit() / purchasePrice;
         System.out.print("총 수익률은 " + String.format("%.2f", totalProfitRate) + "입니다.");
 

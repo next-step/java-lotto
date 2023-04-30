@@ -42,20 +42,24 @@ public class Lotto {
         LottoRewards lottoRewards = new LottoRewards();
 
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers)) {
-                continue;
-            }
-
-            int matchCount = lottoNumbers.matchCount(winningLottoNumbers);
-            RewardType rewardType = RewardType.of(matchCount);
-
-            if (lottoRewards.isNotContainRewardType(rewardType)) {
-                lottoRewards.add(new LottoReward(rewardType, INIT_COUNT));
-                continue;
-            }
-            lottoRewards.increaseCountOf(rewardType);
+            increaseLottoRewardCount(lottoRewards, lottoNumbers, winningLottoNumbers);
         }
 
         return lottoRewards;
+    }
+
+    private static void increaseLottoRewardCount(LottoRewards lottoRewards, LottoNumbers lottoNumbers, LottoNumbers winningLottoNumbers) {
+        if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers)) {
+            return;
+        }
+
+        int matchCount = lottoNumbers.matchCount(winningLottoNumbers);
+        RewardType rewardType = RewardType.of(matchCount);
+
+        if (lottoRewards.isNotContainRewardType(rewardType)) {
+            lottoRewards.add(new LottoReward(rewardType, INIT_COUNT));
+            return;
+        }
+        lottoRewards.increaseCountOf(rewardType);
     }
 }
