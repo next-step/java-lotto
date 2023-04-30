@@ -2,9 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MyLottoTest {
@@ -30,7 +27,7 @@ class MyLottoTest {
     void 당첨확인() {
         MyLotto myLotto = MyLotto.manual("7, 14, 21, 22, 44, 45");
         WinLotto winLotto = new WinLotto("1, 2, 7, 11, 40, 44");
-        myLotto.checkWinNumber(winLotto);
-        assertThat(myLotto.winNumberCount()).isEqualTo(2);
+        myLotto.checkMatchingNumbers(winLotto);
+        assertThat(myLotto.matchingCount()).isEqualTo(2);
     }
 }

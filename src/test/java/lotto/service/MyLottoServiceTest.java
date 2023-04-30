@@ -35,11 +35,11 @@ class MyLottoServiceTest {
 
         WinLotto winLotto = new WinLotto("3, 6, 9, 30, 36, 39");
 
-        lottoService.checkWinLottos(winLotto);
+        lottoService.checkMyLottosWin(winLotto);
 
-        assertThat(lottoService.getResult().getResult3matched()).isEqualTo(2);
-        assertThat(lottoService.getResult().getResult4matched()).isEqualTo(3);
-        assertThat(lottoService.getResult().getResult5matched()).isEqualTo(0);
-        assertThat(lottoService.getResult().getResult6matched()).isEqualTo(0);
+        assertThat(lottoService.result().getResult3matched()).isEqualTo(2);
+        assertThat(lottoService.result().getResult4matched()).isEqualTo(3);
+        assertThat(lottoService.result().getResult5matched()).isEqualTo(0);
+        assertThat(lottoService.result().getResult6matched()).isEqualTo(0);
     }
 }

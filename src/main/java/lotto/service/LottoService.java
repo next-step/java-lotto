@@ -35,19 +35,23 @@ public class LottoService {
         return myLottos;
     }
 
-    public void checkWinLottos(WinLotto winLotto) {
+    public void checkMyLottosWin(WinLotto winLotto) {
         for (MyLotto myLotto : myLottos) {
-            myLotto.checkWinNumber(winLotto);
+            myLotto.checkMatchingNumbers(winLotto);
             myLottoResult.update(myLotto);
         }
         myLottoResult.sumPrizeAmount();
     }
 
-    public int prizeAmount() {
+    private int prizeAmount() {
         return myLottoResult.prizeAmount();
     }
 
-    public MyLottoResult getResult() {
+    public MyLottoResult result() {
         return myLottoResult;
+    }
+
+    public double profit(){
+        return myLottoResult.profit(purchase.money());
     }
 }

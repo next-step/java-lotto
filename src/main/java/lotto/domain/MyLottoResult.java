@@ -9,13 +9,13 @@ public class MyLottoResult {
 
 
     public void update(MyLotto myLotto) {
-        if (myLotto.winNumberCount() == 3) {
+        if (myLotto.matchingCount() == 3) {
             result3matched++;
-        } else if (myLotto.winNumberCount() == 4) {
+        } else if (myLotto.matchingCount() == 4) {
             result4matched++;
-        } else if (myLotto.winNumberCount() == 5) {
+        } else if (myLotto.matchingCount() == 5) {
             result5matched++;
-        } else if (myLotto.winNumberCount() == 6) {
+        } else if (myLotto.matchingCount() == 6) {
             result6matched++;
         }
     }
@@ -45,5 +45,9 @@ public class MyLottoResult {
 
     public int getResult6matched() {
         return result6matched;
+    }
+
+    public double profit(int money){
+        return (prizeAmount+0.0)/money;
     }
 }

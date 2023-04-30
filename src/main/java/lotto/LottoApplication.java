@@ -17,7 +17,9 @@ public class LottoApplication {
         WinLotto winLotto = new WinLotto(inputView.winLottoInfo());
         ResultView.showWinLotto(winLotto);
         //당첨번호 조회 및 통계
-        lottoService.checkWinLottos(winLotto);
-        ResultView.showLottoResult(lottoService.getResult());
+        lottoService.checkMyLottosWin(winLotto);
+        ResultView.showLottoResult(lottoService.result());
+        //수익률
+        ResultView.showProfit(lottoService.profit());
     }
 }

@@ -27,4 +27,8 @@ public class ResultView {
         System.out.printf("5개 일치 (%d원) - %d개\n", LottoRule.MATCHED_5_NUMBERS_PRIZE, myLottoResult.getResult5matched());
         System.out.printf("6개 일치 (%d원) - %d개\n", LottoRule.MATCHED_6_NUMBERS_PRIZE, myLottoResult.getResult6matched());
     }
+
+    public static void showProfit(double profit) {
+        System.out.printf("총 수익률은 %.2f입니다.",profit);
+    }
 }
