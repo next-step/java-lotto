@@ -38,7 +38,7 @@ class LottoResultsTest {
         return Stream.of(
                 Arguments.of(new LottoResults(List.of(NOT_MATCH)), "0"),
                 Arguments.of(new LottoResults(List.of(NOT_MATCH, MATCH_THREE_NUMBERS)), "2.5"),
-                Arguments.of(new LottoResults(List.of(NOT_MATCH, MATCH_FIVE_NUMBERS, MATCH_SIX_NUMBERS)), "667166.67")
+                Arguments.of(new LottoResults(List.of(NOT_MATCH, MATCH_FIVE_NUMBERS, MATCH_SIX_NUMBERS)), "667166.66")
         );
     }
 

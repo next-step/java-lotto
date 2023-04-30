@@ -8,7 +8,7 @@ import java.util.Objects;
 public class LottoResults {
     private static final long LOTTO_PRICE = 1_000L;
     private static final int DIVIDE_SCALE = 2;
-    private static final RoundingMode DIVIDE_ROUNDING_MODE = RoundingMode.HALF_UP;
+    private static final RoundingMode DIVIDE_ROUNDING_MODE = RoundingMode.FLOOR;
     private final List<LottoResult> lottoResults;
 
     public LottoResults(List<LottoResult> lottoResults) {
