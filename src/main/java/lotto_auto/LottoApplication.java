@@ -1,6 +1,7 @@
 package lotto_auto;
 
 import lotto_auto.domain.LottoTickets;
+import lotto_auto.domain.LottoWinner;
 import lotto_auto.service.LottoResult;
 import lotto_auto.service.LottoService;
 import lotto_auto.view.InputView;
@@ -11,10 +12,12 @@ public class LottoApplication {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
         LottoService lottoService = new LottoService();
+        LottoResult lottoResult = new LottoResult();
 
-        LottoTickets lottoTickets = lottoService.generateTickets(lottoService.ticketCount(inputView.getPurchaseAmount()));
+        LottoTickets lottoTickets = lottoService.generateTickets(inputView.getPurchaseAmount());
         resultView.printLottoResult(lottoTickets);
-        LottoResult lottoResult = new LottoResult(lottoTickets, inputView.getWinningNumbers());
-        resultView.printStatistics(lottoResult);
+        LottoWinner lottoWinner = new LottoWinner(inputView.getWinningNumbers());
+        lottoResult.calculateResult(lottoTickets, lottoWinner);
+        resultView.printStatistics(lottoResult, lottoTickets);
     }
 }

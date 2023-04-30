@@ -9,18 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<Integer, Integer> resultMap;
-    private final int totalTicketCount;
-    private final LottoWinner lottoWinner;
+    private Map<Integer, Integer> resultMap = new HashMap<>();
+    private int totalTicketCount;
 
-    public LottoResult(LottoTickets tickets, String input) {
-        this.resultMap = new HashMap<>();
+
+    public void calculateResult(LottoTickets tickets, LottoWinner lottoWinner) {
         this.totalTicketCount = tickets.size();
-        this.lottoWinner = new LottoWinner(input);
-        calculateResult(tickets, lottoWinner);
-    }
-
-    private void calculateResult(LottoTickets tickets, LottoWinner lottoWinner) {
         for (Lotto ticket : tickets.getLottoTickets()) {
             int count = countMatchedWinnerLotto(ticket, lottoWinner);
             resultMap.put(count, resultMap.getOrDefault(count, 0) + 1);
@@ -36,7 +30,7 @@ public class LottoResult {
     }
 
     private int isWinnerNumber(LottoNumber number, LottoWinner lottoWinner) {
-        if (lottoWinner.getWinnerNumbers().contains(number.getNumber())) {
+        if (lottoWinner.getWinnerNumbers().contains(number)) {
             return 1;
         }
         return 0;

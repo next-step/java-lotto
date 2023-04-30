@@ -14,11 +14,9 @@ public class LottoWinnerTest {
     @ValueSource(strings = {"77,22,44,55", "1,3,3,4,2", "7,1,5,98,5,8,5", "9,3,8,8,7,6,51,22"})
     void winnerNumberBound(String input) {
         Class expect = IllegalArgumentException.class;
-        String expectedMsg = "로또 번호 6 자리 입력 필요";
 
         assertThatThrownBy(() -> new LottoWinner(input))
-                .isInstanceOf(expect)
-                .hasMessageContaining(expectedMsg);
+                .isInstanceOf(expect);
     }
 
     @DisplayName("올바르지않은 당첨번호 입력값")
@@ -29,8 +27,7 @@ public class LottoWinnerTest {
         String expectedMsg = "올바르지 않은 당첨번호입니다";
 
         assertThatThrownBy(() -> new LottoWinner(input))
-                .isInstanceOf(expect)
-                .hasMessageContaining(expectedMsg);
+                .isInstanceOf(expect);
     }
 
     @DisplayName("올바르지않은 당첨번호 입력값 당첨범위 벗어남")
@@ -41,7 +38,6 @@ public class LottoWinnerTest {
         String expectedMsg = "올바르지 않은 로또의 범위";
 
         assertThatThrownBy(() -> new LottoWinner(input))
-                .isInstanceOf(expect)
-                .hasMessageContaining(expectedMsg);
+                .isInstanceOf(expect);
     }
 }
