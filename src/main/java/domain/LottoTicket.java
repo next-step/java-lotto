@@ -11,4 +11,7 @@ public class LottoTicket {
     this.numbers = numbers;
   }
 
+  public List<Integer> numbers() {
+    return numbers;
+  }
 }
