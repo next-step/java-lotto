@@ -5,18 +5,61 @@ import lotto.domain.strategy.DefaultRandomStrategy;
 import lotto.domain.strategy.RandomStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static lotto.domain.LottoTicket.TICKET_PRICE;
 
 public class LottoGame {
   private final LottoTickets lottoTickets;
 
   public LottoGame(Money purchaseAmount) {
-    this(purchaseAmount, new DefaultRandomStrategy());
+    this(purchaseAmount, new DefaultRandomStrategy(), Collections.emptyList());
   }
 
   public LottoGame(Money purchaseAmount, RandomStrategy randomStrategy) {
-    this.lottoTickets = new LottoTickets(issueLottoTickets(purchaseAmount, randomStrategy));
+    this(purchaseAmount, randomStrategy, Collections.emptyList());
+  }
+
+  public LottoGame(
+      Money purchaseAmount,
+      RandomStrategy randomStrategy,
+      List<LottoTicket> manualTickets
+  ) {
+    Money remainingAmount = purchaseAmount.difference(new Money(TICKET_PRICE * manualTickets.size()));
+    List<LottoTicket> combinedTickets = new ArrayList<>();
+    combinedTickets.addAll(manualTickets);
+    combinedTickets.addAll(issueLottoTickets(remainingAmount, randomStrategy));
+    this.lottoTickets = new LottoTickets(combinedTickets);
+  }
+
+  public static Builder builder(Money purchaseAmount) {
+    return new Builder(purchaseAmount);
+  }
+
+  public static class Builder {
+    private Money purchaseAmount;
+    private RandomStrategy randomStrategy = new DefaultRandomStrategy();
+    private List<LottoTicket> manualLottoTickets = Collections.emptyList();
+
+    public Builder(Money purchaseAmount) {
+      this.purchaseAmount = purchaseAmount;
+    }
+
+    public Builder randomStrategy(RandomStrategy randomStrategy) {
+      this.randomStrategy = randomStrategy;
+      return this;
+    }
+
+    public Builder manualTickets(List<LottoTicket> manualTickets) {
+      this.manualLottoTickets = manualTickets;
+      return this;
+    }
+
+    public LottoGame build() {
+      return new LottoGame(purchaseAmount, randomStrategy, manualLottoTickets);
+    }
   }
 
   private static List<LottoTicket> issueLottoTickets(Money purchaseAmount, RandomStrategy randomStrategy) {

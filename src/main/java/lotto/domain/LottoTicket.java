@@ -1,10 +1,15 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
   public static final int TICKET_PRICE = 1_000;
   private final LottoNumbers lottoNumbers;
+
+  public LottoTicket(List<LottoNumber> lottoNumbers) {
+    this(new LottoNumbers(lottoNumbers));
+  }
 
   public LottoTicket(LottoNumbers lottoNumbers) {
     this.lottoNumbers = lottoNumbers;

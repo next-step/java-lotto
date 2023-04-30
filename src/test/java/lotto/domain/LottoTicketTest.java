@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.util.LottoUtils;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.strategy.FixedRandomStrategy;
+import lotto.util.LottoUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static lotto.domain.MatchNumbersCount.*;
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -53,5 +55,18 @@ class LottoGameTest {
     // then
     assertThat(lottoGame.getStatistics(winningNumbers, bonusNumber))
         .isEqualTo(lottoStatistics);
+  }
+
+  @Test
+  void builder() {
+    LottoGame lottoGameFromBuilder = LottoGame.builder(new Money(14000))
+                                    .randomStrategy(new FixedRandomStrategy())
+                                    .manualTickets(LottoUtils.getLottoTicketAsList(
+                                        LottoUtils.getLottoNumbers(2, 4, 6, 8, 10, 12),
+                                        LottoUtils.getLottoNumbers(3, 6, 9, 12, 15, 18)
+                                    ))
+                                    .build();
+    assertThat(lottoGameFromBuilder.getLottoTickets().lottoTickets)
+        .hasSize(14);
   }
 }
