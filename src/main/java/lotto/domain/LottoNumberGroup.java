@@ -92,5 +92,10 @@ public class LottoNumberGroup {
     public int hashCode() {
         return Objects.hash(lottoNumberGroup);
     }
+
+    @Override
+    public String toString() {
+        return lottoNumberGroup.toString();
+    }
 }
 
