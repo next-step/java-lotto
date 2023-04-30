@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoGame;
-import lotto.domain.Rounds;
+import lotto.domain.Lottos;
 import lotto.domain.WinnerLotto;
 import lotto.strategy.AutoLotto;
 import lotto.strategy.LottoStrategy;
@@ -16,17 +16,17 @@ public class Application {
         InputView inputView = new InputView();
         LottoGame lottoGame = new LottoGame(inputView.getLottoPrice());
 
-        Rounds rounds = autoLottoGameResult(lottoGame);
+        Lottos lottos = autoLottoGameResult(lottoGame);
 
-        ResultView.autoLottoPrint(rounds.getLottoList());
+        ResultView.autoLottoPrint(lottos.getLottoList());
 
         WinnerLotto winnerLotto = inputView.getLastWeekLottoNumbers();
 
-        ResultView.printLottoStatistics(rounds.getLottoList(), winnerLotto);
+        ResultView.printLottoStatistics(lottos.getLottoList(), winnerLotto);
 
     }
 
-    private static Rounds autoLottoGameResult(final LottoGame lottoGame) {
+    private static Lottos autoLottoGameResult(final LottoGame lottoGame) {
         LottoStrategy strategy = new AutoLotto();
         return lottoGame.automaticLottoDraw(strategy);
     }

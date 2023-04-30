@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-class RoundsTest {
+class LottosTest {
 
     private static final int COUNT = 5;
 
@@ -16,10 +16,10 @@ class RoundsTest {
         LottoStrategy strategy = new AutoLotto();
 
         // When
-        Rounds rounds = new Rounds(strategy, COUNT);
+        Lottos lottos = new Lottos(strategy, COUNT);
 
         // Then
-        assertThat(rounds.getLottoList().size()).isEqualTo(COUNT);
+        assertThat(lottos.getLottoList().size()).isEqualTo(COUNT);
     }
 
 }

@@ -2,6 +2,7 @@ package lotto.util;
 
 
 import java.util.List;
+import java.util.Set;
 
 import static lotto.constants.Constants.MAX_NUMBER;
 import static lotto.constants.Constants.MIN_NUMBER;
@@ -9,7 +10,7 @@ import static lotto.constants.Constants.REQUIRED_LOTTO_NUMBERS;
 
 public class LottoValidationUtils {
 
-    public static void validateLottoNumbers(List<Integer> numbers) {
+    public static void validateLottoNumbers(Set<Integer> numbers) {
         if (numbers.size() != REQUIRED_LOTTO_NUMBERS) {
             throw new IllegalArgumentException("로또 번호는 서로 다른 " + REQUIRED_LOTTO_NUMBERS + " 개의 번호로 구성되어야 합니다.");
         }

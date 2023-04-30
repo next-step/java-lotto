@@ -32,14 +32,18 @@ public class LottoStatistics {
      */
     private void updateMatchCounts() {
         for (Lotto lotto : lottos) {
-            int countOfMatch = lotto.countMatch(winnerLotto.getLottoNumbers());
-
-            if (countOfMatch < MIN_MATCHES || countOfMatch > MAX_MATCHES) {
-                continue;
-            }
-
-            matchCounts[countOfMatch - MIN_MATCHES]++;
+            editMatchCount(lotto);
         }
+    }
+
+    private void editMatchCount(final Lotto lotto) {
+        int countOfMatch = lotto.countMatch(winnerLotto.getLottoNumbers());
+
+        if (countOfMatch < MIN_MATCHES || countOfMatch > MAX_MATCHES) {
+            return;
+        }
+
+        matchCounts[countOfMatch - MIN_MATCHES]++;
     }
 
     /**

@@ -8,11 +8,11 @@ import java.util.stream.IntStream;
 
 import static lotto.constants.Constants.ZERO;
 
-public class Rounds {
+public class Lottos {
 
     private final List<Lotto> lottoList;
 
-    public Rounds(LottoStrategy lottoStrategy, int count) {
+    public Lottos(LottoStrategy lottoStrategy, int count) {
         lottoList = createLotto(lottoStrategy, count);
     }
 
