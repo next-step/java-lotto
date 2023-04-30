@@ -25,13 +25,16 @@ public class ResultView {
     System.out.println("당첨 통계");
     System.out.println("---------");
     for (Prize prize : Prize.values()) {
-      if (prize != Prize.MATCH_NOT_THING) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", prize.matchCount(), prize.prizeMoney(),
-            matchedCountMap.get(prize));
-      }
+      printMatchResult(matchedCountMap, prize);
     }
   }
 
+  private static void printMatchResult(Map<Prize, Integer> matchedCountMap, Prize prize) {
+    if (prize != Prize.MATCH_NOT_THING) {
+      System.out.printf("%d개 일치 (%d원)- %d개\n", prize.matchCount(), prize.prizeMoney(),
+          matchedCountMap.get(prize));
+    }
+  }
 
 
   public static void printProfit(int investMoney, int earnMoney) {
