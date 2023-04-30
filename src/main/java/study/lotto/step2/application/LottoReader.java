@@ -5,6 +5,7 @@ import study.lotto.step2.domain.LottoResult;
 import study.lotto.step2.domain.LottoResults;
 import study.lotto.step2.domain.SoldLottos;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +13,13 @@ public class LottoReader {
     private static final int NUMBERS_OF_WINNING = 6;
     private static final int MINIMUM_WINNING_NUMBER = 1;
     private static final int MAXIMUM_WINNING_NUMBER = 45;
+    private static final String INTEGER_REGEX = "^\\d+$";
+    public static final String COMMA = ",";
     private final List<Integer> winningNumbers;
+
+    public LottoReader(String winningNumbers) {
+        this(listOf(winningNumbers));
+    }
 
     public LottoReader(List<Integer> winningNumbers) {
         validateWinningNumbers(winningNumbers);
@@ -58,5 +65,23 @@ public class LottoReader {
                 .filter(winningNumbers::contains)
                 .mapToInt(selectNumber -> 1)
                 .sum();
+    }
+
+    private static List<Integer> listOf(String winningNumbers) {
+        validateIntegerCsv(winningNumbers);
+        return Arrays.stream(winningNumbers.split(COMMA))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private static void validateIntegerCsv(String winningNumbers) {
+        Arrays.stream(winningNumbers.split(COMMA))
+                .map(String::trim)
+                .filter(trimmedWinningNumber -> !trimmedWinningNumber.matches(INTEGER_REGEX))
+                .findAny()
+                .ifPresent(invalidWinningNumber -> {
+                    throw new IllegalArgumentException("당첨 번호는 정수형입니다: " + invalidWinningNumber);
+                });
     }
 }

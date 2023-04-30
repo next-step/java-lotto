@@ -35,17 +35,29 @@ class LottoReaderTest {
     }
 
     @Test
-    @DisplayName("로또 당첨 번호가 6개가 아닐 경우, IllegalArgumentException 예외 발생")
-    void invalid_numbers_of_winning_then_throw_IllegalArgumentException() {
+    @DisplayName("당첨 번호가 정수형이 아닐 경우, IllegalArgumentException 예외 발생")
+    void not_integer_winning_numbers_then_throw_IllegalArgumentException() {
         // given
-        List<Integer> illegalNumbersOfWinning = IntStream.rangeClosed(1, 7)
+        String notIntegerWinningNumber = "1, a, 2";
+
+        // when, then
+        assertThatThrownBy(() -> new LottoReader(notIntegerWinningNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("당첨 번호는 정수형입니다: a");
+    }
+
+    @Test
+    @DisplayName("로또 당첨 번호가 6개가 아닐 경우, IllegalArgumentException 예외 발생")
+    void not_six_winning_numbers_then_throw_IllegalArgumentException() {
+        // given
+        List<Integer> notSixWinningNumbers = IntStream.rangeClosed(1, 7)
                 .boxed()
                 .collect(Collectors.toList());
 
         // when, then
-        assertThatThrownBy(() -> new LottoReader(illegalNumbersOfWinning))
+        assertThatThrownBy(() -> new LottoReader(notSixWinningNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호 갯수는 6개입니다: " + illegalNumbersOfWinning.size());
+                .hasMessage("당첨 번호 갯수는 6개입니다: " + notSixWinningNumbers.size());
     }
 
     @Test
