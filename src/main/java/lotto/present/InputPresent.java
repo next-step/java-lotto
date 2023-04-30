@@ -2,11 +2,15 @@ package lotto.present;
 
 import lotto.domain.Ticket;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputPresent {
     private static final String PURCHASE_AMOUNT = "구입금액을 입력해 주세요";
-    private static final String PURCHASE_CONFIRM = "%s개를 구매했습니다";
+    private static final String PURCHASE_CONFIRM = "총 %s개를 구매합니다";
+    private static final String PURCHASE_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요";
+    private static final String MANUAL_NUMBERS = "수동으로 구매할 구매할 번호를 입력해 주세요";
     private static final String WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요";
     private final Scanner scanner;
@@ -36,4 +40,19 @@ public class InputPresent {
         System.out.println(s);
         return Integer.parseInt(s);
     }
+
+    public List<Ticket> manualPurchases() {
+        List<Ticket> tickets = new ArrayList<>();
+        System.out.printf(PURCHASE_MANUAL);
+        int iter = scanner.nextInt();
+        for(int i=0 ; i<iter ; i++) {
+            tickets.add(mannualPurchase(scanner.nextLine()));
+        }
+        return tickets;
+    }
+
+    private Ticket mannualPurchase(String nextLine) {
+        throw new RuntimeException("Not Yet Implemented");
+    }
+
 }
