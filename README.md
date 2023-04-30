@@ -82,3 +82,25 @@
 ### 비기능적 요구사항
 - 모든 기능을 TDD로 구현
   - 모든 기능은 단위 테스트가 존재한다
+
+
+
+
+## Step3
+
+```
+테스트하기위한 Ticket 클래스 기능 정리
+
+countMatchNumbers : 몇개 숫자가 일치하는지 알아내는 기능
+WinnerTicket() : 위너티켓을 생성해주는 기능
+countWinner(List<Ticket> challengeTickets, Prize prize) : 입력받은 리스트 티켓에, 입력받은 등수의 티켓이 몆장이 포함되어있는지 검증
+```
+
+### 학습해봐야할것
+- 이펙티브자바 13 상속보타 컴포지션
+- 일급 콜렉션 이란?
+
+
+### 수정해야할부분
+- Ticket#winnerTicket  : 단순히 Ticket이 WinnerTicket을 만들기 위한 역할로 알맞을지 고민해보시면 좋을 것 같아요~
+- Tickets 라는 일급 콜렉션을 만들기

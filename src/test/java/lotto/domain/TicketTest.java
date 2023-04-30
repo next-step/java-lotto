@@ -91,9 +91,3 @@ public class TicketTest {
                 .isEqualTo(ticket.toString());
     }
 }
-/*
-테스트하기위한 Ticket 클래스 기능 정리
-countMatchNumbers : 몇개 숫자가 일치하는지 알아내는 기능
-WinnerTicket() : 위너티켓을 생성해주는 기능
-countWinner(List<Ticket> challengeTickets, Prize prize) : 입력받은 리스트 티켓에, 입력받은 등수의 티켓이 몆장이 포함되어있는지 검증
- */
