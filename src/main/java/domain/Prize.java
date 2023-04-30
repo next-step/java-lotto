@@ -17,14 +17,17 @@ public enum Prize {
 
   public static Prize getPrizeForMatches(int matchedCount) {
     for (Prize prize : Prize.values()) {
-      if (prize.matchCount == matchedCount) {
-        return prize;
-      }
+      return prizeForMatches(matchedCount, prize);
     }
     return MATCH_NOT_THING;
   }
 
-
+  private static Prize prizeForMatches(int matchedCount, Prize prize) {
+    if (prize.matchCount == matchedCount) {
+      return prize;
+    }
+    return MATCH_NOT_THING;
+  }
 
 
   public int matchCount() {
