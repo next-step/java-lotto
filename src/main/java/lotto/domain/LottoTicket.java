@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int LOTTO_TICKET_SIZE = 6;
@@ -12,6 +13,13 @@ public class LottoTicket {
     public LottoTicket(Set<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = new TreeSet<>(numbers);
+    }
+
+    public static LottoTicket from(Set<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
+        return new LottoTicket(lottoNumbers);
     }
 
     private void validate(Set<LottoNumber> numbers) {
