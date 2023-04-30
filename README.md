@@ -61,7 +61,7 @@
   - [x] 보너스 점수는 최고점보다 낮을때만 추가한다.
 - [x] LottoMachine과 PurchasedLottos에서 보너스 넘버를 계산하는 메서드를 호출한다.
 - [x] PrizeType enum 클래스에 보너스 타입을 추가한다.
-- [ ] 2등인 경우 `보너스 볼 일치` 문자열을 추가해서 최종결과를 출력한다.
+- [x] 2등인 경우 `보너스 볼 일치` 문자열을 추가해서 최종결과를 출력한다.
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
