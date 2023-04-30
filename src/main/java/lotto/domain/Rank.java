@@ -8,7 +8,7 @@ public enum Rank {
     THIRD(5, false, 1_500_000),
     FOURTH(4, false, 50_000),
     FIFTH(3, false, 5_000),
-    NONE(0, false, 0);
+    MISS(0, false, 0);
 
     private final int countOfMatch;
     private final boolean matchBonus;
@@ -33,13 +33,10 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean bonusMatch) {
-        if (countOfMatch == SECOND.countOfMatch && bonusMatch) {
-            return SECOND;
-        }
         return Arrays.stream(values())
-                .filter(r -> r.countOfMatch == countOfMatch)
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch && rank.isMatchBonus() == bonusMatch)
                 .findFirst()
-                .orElse(NONE);
+                .orElse(MISS);
     }
 
 }
