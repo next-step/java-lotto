@@ -30,19 +30,18 @@ class LottoSellerTest {
     }
 
     @Test
-    @DisplayName("로또 판매")
+    @DisplayName("로또 판매 시, SoldLottos 객체 반환")
     void sell_lottos() {
         // given
         int amount = 4_999;
         LottoSeller lottoSeller = new LottoSeller(sequenceLottoFactory());
 
         // when
-        List<Lotto> soldLottos = lottoSeller.sell(amount);
+        SoldLottos soldLottos = lottoSeller.sell(amount);
 
         // then
-        assertThat(soldLottos).containsExactly(
-                sequenceLotto(), sequenceLotto(), sequenceLotto(), sequenceLotto()
-        );
+        assertThat(soldLottos)
+                .isEqualTo(new SoldLottos(List.of(sequenceLotto(), sequenceLotto(), sequenceLotto(), sequenceLotto())));
     }
 
     private Lotto sequenceLotto() {

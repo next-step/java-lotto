@@ -15,12 +15,12 @@ public class LottoSeller {
         this.lottoFactory = lottoFactory;
     }
 
-    public List<Lotto> sell(int amount) {
-        validateAmount(amount);
-        return lottos(numberOfLotto(amount));
+    public SoldLottos sell(int amount) {
+        return new SoldLottos(lottos(numberOfSelling(amount)));
     }
 
-    private static int numberOfLotto(int amount) {
+    private int numberOfSelling(int amount) {
+        validateAmount(amount);
         return amount / LOTTO_PRICE;
     }
 
