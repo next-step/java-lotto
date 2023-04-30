@@ -26,14 +26,6 @@ public class WinNumbersTest {
 			.withMessage(WinNumbers.TYPE_EXCEPTION_TEXT);
 	}
 
-	@DisplayName("당첨 넘버 예외 케이스 - 숫자 범위")
-	@Test
-	void test3() {
-		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new WinNumbers("1, 2, 3, 4, 5, 46"))
-			.withMessage(WinNumbers.RANGE_EXCEPTION_TEXT);
-	}
-
 	@DisplayName("당첨 넘버 예외 케이스 - 중복")
 	@Test
 	void test4() {

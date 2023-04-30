@@ -6,8 +6,6 @@ public class Lotto {
 
 	public static final int SIZE = 6;
 	public static final int PRICE = 1000;
-	public static final int MINIMUM_BOUND = 1;
-	public static final int MAXIMUM_BOUND = 45;
 
 	private final LottoNumbers lottoNumbers;
 	private final Score score;
@@ -21,19 +19,19 @@ public class Lotto {
 		this.score = new Score(score);
 	}
 
-	public Lotto(List<Integer> lottoNumbers) {
+	public Lotto(List<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = new LottoNumbers(lottoNumbers);
 		this.score = new Score(0);
 	}
 
 	public Score calculateScore(WinNumbers winNumbers) {
-		for (Integer winNumber : winNumbers.getWinNumbers()) {
+		for (LottoNumber winNumber : winNumbers.getWinNumbers()) {
 			this.plusScore(winNumber);
 		}
 		return this.score;
 	}
 
-	private void plusScore(Integer winNumber) {
+	private void plusScore(LottoNumber winNumber) {
 		if (this.lottoNumbers.contains(winNumber)) {
 			this.score.plus();
 		}
