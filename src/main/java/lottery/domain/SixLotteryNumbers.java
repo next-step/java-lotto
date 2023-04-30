@@ -1,5 +1,7 @@
 package lottery.domain;
 
+import static java.lang.String.valueOf;
+
 import java.util.HashSet;
 import java.util.Set;
 import lottery.domain.numbergenerator.RandomNumberGenerator;
@@ -42,4 +44,8 @@ public class SixLotteryNumbers {
         return lotteryNumbers.size();
     }
 
+    @Override
+    public String toString() {
+        return valueOf(lotteryNumbers);
+    }
 }
