@@ -13,6 +13,8 @@ public class InputView {
     private static final String NUMBER_SPACE_COMMA_REGEX = "^[\\d\\s,]+$";
     private static final String COMMA_SPACE = ",\\s*";
     private static final String NUMBER = "\\d+";
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     private InputView() {
     }
@@ -52,6 +54,8 @@ public class InputView {
         if (!isSixNumber(inputWinningNumbers)) {
             throw new IllegalArgumentException("당첨 번호의 갯수를 확인해 주세요.");
         }
+
+        extractNumbers(inputWinningNumbers).forEach(InputView::validateLottoNumberInRange);
     }
 
     public static List<Integer> extractNumbers(String splitExpression) {
@@ -71,8 +75,16 @@ public class InputView {
     }
 
     public static void validateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
+        validateLottoNumberInRange(bonusNumber);
+
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼이 당첨번호에 포함되어 있습니다.");
+        }
+    }
+
+    public static void validateLottoNumberInRange(int number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 " + MIN_LOTTO_NUMBER + "에서 " + MAX_LOTTO_NUMBER + " 사이의 숫자여야 합니다.");
         }
     }
 
