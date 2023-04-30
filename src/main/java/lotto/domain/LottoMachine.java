@@ -5,13 +5,7 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private final Lotto lotto;
-
-    public LottoMachine(Lotto lotto) {
-        this.lotto = lotto;
-    }
-
-    public List<Lotto> issueAutoForMoney(Money requestMoney) {
+    public static List<Lotto> issueAutoForMoney(Money requestMoney) {
         List<Lotto> lottoList = new ArrayList<>();
 
         while (requestMoney.isGreaterThanZero()) {
@@ -23,8 +17,8 @@ public class LottoMachine {
         return lottoList;
     }
 
-    private Money calculateCurrentMoney(Money money) {
-        return money.minus(lotto.getLottoFee());
+    private static Money calculateCurrentMoney(Money money) {
+        return money.minus(Lotto.getLottoFee());
     }
 
 }
