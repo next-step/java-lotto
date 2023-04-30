@@ -1,10 +1,11 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.domain.LottoVendingMachine;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoApplication {
 

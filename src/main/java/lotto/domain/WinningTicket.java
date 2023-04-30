@@ -21,7 +21,7 @@ public class WinningTicket {
 
   private LottoNumber validatedBonusNumber(LottoNumber bonusNumber) {
     if (hasBonusNumber(bonusNumber)) {
-      throw new IllegalArgumentException(ILLEGAL_BONUS_MESSAGE + bonusNumber);
+      throw new IllegalArgumentException(ILLEGAL_BONUS_MESSAGE + bonusNumber.number());
     }
 
     return bonusNumber;

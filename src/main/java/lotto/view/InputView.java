@@ -66,7 +66,7 @@ public class InputView {
       try {
         lottoTicket = new LottoTicket(Arrays.stream(scanner.next().split(DELIMITER))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
         validInput = false;
       } catch (NumberFormatException numberFormatException) {
@@ -75,7 +75,6 @@ public class InputView {
         System.out.println(illegalArgumentException.getMessage());
       }
     }
-
 
     return lottoTicket;
   }

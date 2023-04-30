@@ -17,26 +17,26 @@ public class WinningTicketTest {
   @BeforeEach
   public void setUp() {
     lottoTicket = new LottoTicket(Set.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)
     ));
 
     LottoTicket winningLottoTicket = new LottoTicket(Set.of(
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6),
-            new LottoNumber(7),
-            new LottoNumber(8)
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6),
+            LottoNumber.of(7),
+            LottoNumber.of(8)
     ));
 
     winningTicket = new WinningTicket(
             winningLottoTicket,
-            new LottoNumber(1)
+            LottoNumber.of(1)
     );
   }
 

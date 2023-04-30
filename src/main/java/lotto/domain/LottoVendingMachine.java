@@ -19,7 +19,7 @@ public class LottoVendingMachine {
   }
 
   public static LottoGame startGame(LottoTickets lottoTickets, LottoTicket winningLottoNumbers, int bonusNumber) {
-    return new LottoGame(lottoTickets, winningLottoNumbers, new LottoNumber(bonusNumber));
+    return new LottoGame(lottoTickets, winningLottoNumbers, LottoNumber.of(bonusNumber));
   }
 
   public static LottoResult lottoResult(LottoGame lottoGame) {

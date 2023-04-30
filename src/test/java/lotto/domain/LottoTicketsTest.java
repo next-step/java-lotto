@@ -16,12 +16,12 @@ public class LottoTicketsTest {
   @BeforeEach
   public void setUp() {
     winningLottoTicket = new LottoTicket(Set.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)));
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)));
   }
 
   @Test
@@ -42,26 +42,26 @@ public class LottoTicketsTest {
     LottoTickets lottoTickets = new LottoTickets();
 
     lottoTickets.addLottoTicket(new LottoTicket(Set.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6))));
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6))));
     lottoTickets.addLottoTicket(new LottoTicket(Set.of(
-            new LottoNumber(1),
-            new LottoNumber(9),
-            new LottoNumber(3),
-            new LottoNumber(34),
-            new LottoNumber(5),
-            new LottoNumber(6))));
+            LottoNumber.of(1),
+            LottoNumber.of(9),
+            LottoNumber.of(3),
+            LottoNumber.of(34),
+            LottoNumber.of(5),
+            LottoNumber.of(6))));
     lottoTickets.addLottoTicket(new LottoTicket(Set.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(12),
-            new LottoNumber(4),
-            new LottoNumber(27),
-            new LottoNumber(14))));
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(12),
+            LottoNumber.of(4),
+            LottoNumber.of(27),
+            LottoNumber.of(14))));
 
     assertAll(
             () -> assertThat(lottoTickets.matchesLottoTickets(winningLottoTicket).get(0)).isEqualTo(6),

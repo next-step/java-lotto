@@ -17,11 +17,11 @@ public class LottoGameTest {
   public void setUp() {
     LottoTickets lottoTickets = new LottoTickets();
 
-    lottoTickets.addLottoTicket(new LottoTicket(Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
-    lottoTickets.addLottoTicket(new LottoTicket(Set.of(new LottoNumber(14), new LottoNumber(15), new LottoNumber(16), new LottoNumber(17), new LottoNumber(18), new LottoNumber(19))));
+    lottoTickets.addLottoTicket(new LottoTicket(Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+    lottoTickets.addLottoTicket(new LottoTicket(Set.of(LottoNumber.of(14), LottoNumber.of(15), LottoNumber.of(16), LottoNumber.of(17), LottoNumber.of(18), LottoNumber.of(19))));
 
-    LottoTicket winningLottoTicket = new LottoTicket(Set.of(new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)));
-    LottoNumber bonusNumber = new LottoNumber(23);
+    LottoTicket winningLottoTicket = new LottoTicket(Set.of(LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6), LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9)));
+    LottoNumber bonusNumber = LottoNumber.of(23);
 
     LottoGame lottoGame = new LottoGame(lottoTickets, winningLottoTicket, bonusNumber);
     lottoResult = lottoGame.play();

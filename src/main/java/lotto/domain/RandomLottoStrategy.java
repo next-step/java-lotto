@@ -18,7 +18,7 @@ public class RandomLottoStrategy implements LottoStrategy {
 
   private static List<LottoNumber> createLottoNumbers() {
     return IntStream.rangeClosed(LOTTO_MINIMUM_NUMBER, LOTTO_MAXIMUM_NUMBER)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList());
   }
 
