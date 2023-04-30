@@ -2,6 +2,7 @@ package study.lotto.step2.application;
 
 import study.lotto.step2.domain.Lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,6 +21,10 @@ public class SoldLottos {
         });
 
         return selectedNumbers.toString();
+    }
+
+    public List<Lotto> lottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     private String selectedNumberOf(Lotto lotto) {

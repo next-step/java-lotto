@@ -18,6 +18,22 @@ public class LottoReader {
         this.winningNumbers = winningNumbers;
     }
 
+    public LottoResults resultOf(SoldLottos soldLottos) {
+        return resultOf(soldLottos.lottos());
+    }
+
+    private LottoResults resultOf(List<Lotto> lottos) {
+        return new LottoResults(
+                lottos.stream()
+                        .map(this::resultOf)
+                        .collect(Collectors.toList())
+        );
+    }
+
+    private LottoResult resultOf(Lotto lotto) {
+        return LottoResult.of(numbersOfMatch(lotto.selectedNumbers()));
+    }
+
     private void validateWinningNumbers(List<Integer> winningNumbers) {
         if(winningNumbers.size() != NUMBERS_OF_WINNING) {
             throw new IllegalArgumentException("당첨 번호 갯수는 " + NUMBERS_OF_WINNING + "개입니다: " + winningNumbers.size());
@@ -34,18 +50,6 @@ public class LottoReader {
 
     private boolean isOutOfRange(int selectedNumber) {
         return selectedNumber < MINIMUM_WINNING_NUMBER || MAXIMUM_WINNING_NUMBER < selectedNumber;
-    }
-
-    public LottoResult resultOf(Lotto lotto) {
-        return LottoResult.of(numbersOfMatch(lotto.selectedNumbers()));
-    }
-
-    public LottoResults resultOf(List<Lotto> lottos) {
-        return new LottoResults(
-                lottos.stream()
-                .map(this::resultOf)
-                .collect(Collectors.toList())
-        );
     }
 
     private int numbersOfMatch(List<Integer> selectedNumbers) {
