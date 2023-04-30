@@ -21,7 +21,7 @@ public class IssuerTest {
         //given
         int input = 77;
         //when
-        issuerFixture.issueTickets(input);
+        issuerFixture.automaticIssue(input);
         //then
         assertThat(issuerFixture.issuedTickets()).hasSize(input);
     }
@@ -31,7 +31,7 @@ public class IssuerTest {
     public void makeStatics() {
         //given
         //when
-        issuerFixture.issueTickets(10);
+        issuerFixture.automaticIssue(10);
         Statics statics = issuerFixture.issuedTicketStatistics(new Ticket("1, 2, 3, 4, 5, 6").winnerTicket(7));
         //then
         assertNotNull(statics);

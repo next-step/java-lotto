@@ -14,10 +14,14 @@ public class Issuer {
         this.tickets = new ArrayList<>();
     }
 
-    public void issueTickets(int ticketCount) {
+    public void automaticIssue(int ticketCount) {
         for (int i = 0; i < ticketCount; i++) {
             tickets.add(new Ticket(issueNumbers()));
         }
+    }
+
+    public void mannualIssue(List<Ticket> tickets) {
+        throw new RuntimeException("Not Yet Implemented");
     }
 
     private Set<Integer> issueNumbers() {
