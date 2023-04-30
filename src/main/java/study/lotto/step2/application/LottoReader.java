@@ -81,7 +81,7 @@ public class LottoReader {
                 .filter(trimmedWinningNumber -> !trimmedWinningNumber.matches(INTEGER_REGEX))
                 .findAny()
                 .ifPresent(invalidWinningNumber -> {
-                    throw new IllegalArgumentException("당첨 번호는 정수형입니다: " + invalidWinningNumber);
+                    throw new IllegalArgumentException("당첨 번호는 양의 정수입니다: " + invalidWinningNumber);
                 });
     }
 }

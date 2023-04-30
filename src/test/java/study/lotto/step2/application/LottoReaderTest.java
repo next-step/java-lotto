@@ -43,7 +43,7 @@ class LottoReaderTest {
         // when, then
         assertThatThrownBy(() -> new LottoReader(notIntegerWinningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호는 정수형입니다: a");
+                .hasMessage("당첨 번호는 양의 정수입니다: a");
     }
 
     @Test
