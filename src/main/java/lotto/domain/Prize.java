@@ -30,4 +30,12 @@ public enum Prize {
     public static int calculatePriceMoney(Prize prize, int count) {
         return prize.prizeMoney * count;
     }
+
+    public int getMatchingCount() {
+        return matchingCount;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
 }
