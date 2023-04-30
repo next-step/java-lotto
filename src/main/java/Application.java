@@ -1,4 +1,5 @@
 import domain.LottoMachine;
+import domain.Prize;
 import domain.RandomNumberGenerator;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,11 @@ public class Application {
 
     List<Integer> winningNumbers = InputView.scanWinningNumbers();
 
-    Map<Integer, Integer> matchedCountMap = StatisticalCalculator.calculate(lottoMachine.lottoTickets(),
+    Map<Prize, Integer> matchedCountMap = StatisticalCalculator.calculate(lottoMachine.lottoTickets(),
         winningNumbers);
+
+
+
     ResultView.printMatchedCount(matchedCountMap);
 
     int earnMoney = StatisticalCalculator.calculateEarnMoney(matchedCountMap);

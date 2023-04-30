@@ -8,9 +8,9 @@ public class LottoMachine {
   private final List<LottoTicket> lottoTickets;
   private final RandomNumberStrategy randomNumberStrategy;
 
-  public LottoMachine(RandomNumberStrategy randomNumberStrategy, int money) {
+  public LottoMachine(RandomNumberStrategy randomNumberStrategy, int investMoney) {
     this.randomNumberStrategy = randomNumberStrategy;
-    this.lottoTickets = makeLottoTickets(money);
+    this.lottoTickets = makeLottoTickets(investMoney);
   }
 
 

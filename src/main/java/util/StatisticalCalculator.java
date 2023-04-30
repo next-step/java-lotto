@@ -1,49 +1,38 @@
 package util;
 
 import domain.LottoTicket;
-import java.util.HashMap;
+import domain.Prize;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class StatisticalCalculator {
 
-  public static Map<Integer, Integer> calculate(List<LottoTicket> lottoTickets,
-      List<Integer> winningNumbers) {
-    int matched3Count = 0;
-    int matched4Count = 0;
-    int matched5Count = 0;
-    int matched6Count = 0;
+  public static Map<Prize, Integer> calculate(List<LottoTicket> lottoTickets, List<Integer> winningNumbers) {
+    Map<Prize, Integer> prizeCountMap = initializePrizeCountMap();
 
     for (LottoTicket lottoTicket : lottoTickets) {
       int matchedCount = lottoTicket.matchCount(winningNumbers);
-
-      if (matchedCount == 3) {
-        matched3Count++;
-      }
-      if (matchedCount == 4) {
-        matched4Count++;
-      }
-      if (matchedCount == 5) {
-        matched5Count++;
-      }
-      if (matchedCount == 6) {
-        matched6Count++;
-      }
+      Prize prize = Prize.getPrizeForMatches(matchedCount);
+      prizeCountMap.put(prize, prizeCountMap.get(prize) + 1);
     }
 
-    Map<Integer, Integer> matchedCountMap = new HashMap<>();
-    matchedCountMap.put(3, matched3Count);
-    matchedCountMap.put(4, matched4Count);
-    matchedCountMap.put(5, matched5Count);
-    matchedCountMap.put(6, matched6Count);
-
-    return matchedCountMap;
+    return prizeCountMap;
   }
 
-  public static int calculateEarnMoney(Map<Integer, Integer> matchedCountMap) {
+  private static Map<Prize, Integer> initializePrizeCountMap() {
+    Map<Prize, Integer> prizeCountMap = new EnumMap<>(Prize.class);
+    for (Prize prize : Prize.values()) {
+      prizeCountMap.put(prize, 0);
+    }
+    return prizeCountMap;
+  }
+
+
+  public static int calculateEarnMoney(Map<Prize, Integer> matchedCountMap) {
     int earnMoney = 0;
-    for (Integer key : matchedCountMap.keySet()) {
-      earnMoney += LottoTicket.calculatePrize(key) * matchedCountMap.get(key);
+    for (Prize prize : Prize.values()) {
+      earnMoney += prize.prizeMoney() * matchedCountMap.get(prize);
     }
     return earnMoney;
   }
