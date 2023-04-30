@@ -6,9 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -57,26 +56,26 @@ public class LottoTest {
     @Test
     void 총_수익_계산() {
         //given
-        Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
-        lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
-        lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(myLottoNumbers);
+        lottoNumbersList.add(myLottoNumbers);
 
         //when
-        LottoRewards reward = Lotto.reward(lottoNumbersSet, winningLottoNumbers);
+        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
-        assertThat(reward.totalProfit()).isEqualTo(5000L);
+        assertThat(reward.totalProfit()).isEqualTo(10000L);
     }
 
     @Test
     void 일치_수별_횟수_세기() {
         //given
-        Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
-        lottoNumbersSet.addAll(Collections.singleton(myLottoNumbers));
-        lottoNumbersSet.addAll(Collections.singleton(winningLottoNumbers));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(myLottoNumbers);
+        lottoNumbersList.add(winningLottoNumbers);
 
         //when
-        LottoRewards lottoRewards = Lotto.reward(lottoNumbersSet, winningLottoNumbers);
+        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
         assertThat(lottoRewards.get(RewardType.THREE).count()).isEqualTo(1);

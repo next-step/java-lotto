@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Lotto {
@@ -18,12 +20,12 @@ public class Lotto {
         return price / LOTTO_PRICE;
     }
 
-    public static Set<LottoNumbers> generateAllLottoNumbers(long lottoCount) {
-        Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
+    public static List<LottoNumbers> generateAllLottoNumbers(long lottoCount) {
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         for (int i = BEGIN_INDEX; i < lottoCount; i++) {
-            lottoNumbersSet.add(new LottoNumbers());
+            lottoNumbersList.add(new LottoNumbers());
         }
-        return lottoNumbersSet;
+        return lottoNumbersList;
     }
 
     public static LottoNumbers winningLottoNumbers(String input) {
@@ -36,10 +38,10 @@ public class Lotto {
         return new LottoNumbers(numbers);
     }
 
-    public static LottoRewards reward(Set<LottoNumbers> lottoNumbersSet, LottoNumbers winningLottoNumbers) {
+    public static LottoRewards reward(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
         LottoRewards lottoRewards = new LottoRewards();
 
-        for (LottoNumbers lottoNumbers : lottoNumbersSet) {
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
             if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers)) {
                 continue;
             }

@@ -5,7 +5,7 @@ import lotto.domain.LottoReward;
 import lotto.domain.LottoRewards;
 import lotto.domain.RewardType;
 
-import java.util.Set;
+import java.util.List;
 
 public class ResultView {
 
@@ -19,8 +19,8 @@ public class ResultView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void printAllLottoNumbers(Set<LottoNumbers> lottoNumbersSet) {
-        for (LottoNumbers lottoNumbers : lottoNumbersSet) {
+    public static void printAllLottoNumbers(List<LottoNumbers> lottoNumbersList) {
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
             System.out.println(lottoNumbers);
         }
         printNewLine();
