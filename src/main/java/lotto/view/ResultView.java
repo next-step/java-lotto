@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final double MINIMUM_EARNINGS_RATE_FOR_PROFIT = 1.0;
 
     private ResultView() {
     }
@@ -27,7 +28,7 @@ public class ResultView {
                 .map(String::valueOf)
                 .collect(Collectors.joining(","));
 
-        System.out.println("[" + lottoTicketNumbersWithComma + "]");
+        System.out.printf("[%s]%n", lottoTicketNumbersWithComma);
     }
 
     public static void printLottoResult(WinningStatistics winningStatistics, double earningsRate) {
@@ -37,11 +38,11 @@ public class ResultView {
         for (WinningRank rank : WinningRank.validRanks()) {
             int count = winningStatistics.getCount(rank);
             int prize = rank.getPrizeMoney();
-            System.out.println(rank.getMatchCount() + "개 일치 (" + prize + "원)- " + count + "개");
+            System.out.printf("%d개 일치 (%d원)- %d개%n", rank.getMatchCount(), prize, count);
         }
 
         System.out.printf("총 수익률은 %.2f입니다.", earningsRate);
-        if (earningsRate < 1) {
+        if (earningsRate < MINIMUM_EARNINGS_RATE_FOR_PROFIT) {
             System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
