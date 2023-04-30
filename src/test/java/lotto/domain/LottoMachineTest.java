@@ -11,7 +11,8 @@ class LottoMachineTest {
     @DisplayName("로또 발급 테스트")
     void issueAutoForMoney() {
 
+        LottoMachine lottoMachine = new LottoMachine(new Lotto(new LottoNumberGroup()));
 
-        assertThat(LottoMachine.issueAutoForMoney(Money.wons(2000))).hasSize(2);
+        assertThat(lottoMachine.issueAutoForMoney(Money.wons(2000))).hasSize(2);
     }
 }
