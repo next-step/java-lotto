@@ -19,7 +19,6 @@ public class LottoResults {
         return lottoResults.stream()
                 .mapToLong(LottoResult::payout)
                 .sum();
-
     }
 
     public String rateOfReturn() {
@@ -27,6 +26,13 @@ public class LottoResults {
                 .divide(purchaseAmount(), DIVIDE_SCALE, DIVIDE_ROUNDING_MODE)
                 .stripTrailingZeros()
                 .toPlainString();
+    }
+
+    public int countOf(LottoResult findLottoResult) {
+        return lottoResults.stream()
+                .filter(lottoResult -> lottoResult.equals(findLottoResult))
+                .mapToInt(lottoResult -> 1)
+                .sum();
     }
 
     private BigDecimal purchaseAmount() {
