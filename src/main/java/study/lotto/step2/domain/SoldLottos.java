@@ -25,6 +25,10 @@ public class SoldLottos {
         return Collections.unmodifiableList(lottos);
     }
 
+    public int numberOfPurchase() {
+        return lottos.size();
+    }
+
     private String selectedNumberOf(Lotto lotto) {
         return lotto.selectedNumbers().toString();
     }
