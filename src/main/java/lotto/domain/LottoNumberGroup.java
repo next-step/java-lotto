@@ -43,6 +43,10 @@ public class LottoNumberGroup {
         return new LottoNumberGroup(lottoNumberList);
     }
 
+    public int countMatchingLottoNumber(LottoNumberGroup lottoNumberGroup) {
+        return findMatchingLottoNumber(lottoNumberGroup).size();
+    }
+
     private void validateLottoNumberLength(List<Integer> lottoNumberList) {
 
         if (lottoNumberList.size() != LOTTO_NUMBER_GROUP_LENGTH) {
@@ -58,15 +62,13 @@ public class LottoNumberGroup {
         }
     }
 
-    public int countMatchingLottNumber(LottoNumberGroup winningLottoNumber) {
-        return findMatchingLottNumber(winningLottoNumber).size();
+    private List<LottoNumber> filterMatchingLottoNumber(List<LottoNumber> lottoNumberList) {
+        return lottoNumberList.stream().filter(this::isMatchingLottoNumber)
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<LottoNumber> findMatchingLottNumber(LottoNumberGroup winningLottoNumber) {
-
-        return lottoNumberGroup.stream()
-                .filter(winningLottoNumber::isMatchingLottoNumber)
-                .collect(Collectors.toUnmodifiableList());
+    private List<LottoNumber> findMatchingLottoNumber(LottoNumberGroup targetLottoNumberGroup) {
+        return targetLottoNumberGroup.filterMatchingLottoNumber(this.lottoNumberGroup);
     }
 
     private boolean isMatchingLottoNumber(LottoNumber lottoNumber) {
