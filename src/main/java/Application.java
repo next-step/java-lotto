@@ -22,8 +22,6 @@ public class Application {
     Map<Prize, Integer> matchedCountMap = StatisticalCalculator.calculate(lottoTickets,
         winningNumbers);
 
-
-
     ResultView.printMatchedCount(matchedCountMap);
 
     int earnMoney = StatisticalCalculator.calculateEarnMoney(matchedCountMap);

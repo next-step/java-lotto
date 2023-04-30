@@ -37,8 +37,12 @@ public class StatisticalCalculator {
   public static int calculateEarnMoney(Map<Prize, Integer> matchedCountMap) {
     int earnMoney = 0;
     for (Prize prize : Prize.values()) {
-      earnMoney += prize.prizeMoney() * matchedCountMap.get(prize);
+      earnMoney += addMoney(matchedCountMap, prize);
     }
     return earnMoney;
+  }
+
+  private static int addMoney(Map<Prize, Integer> matchedCountMap, Prize prize) {
+    return prize.prizeMoney() * matchedCountMap.get(prize);
   }
 }
