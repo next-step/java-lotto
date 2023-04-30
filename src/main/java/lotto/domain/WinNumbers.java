@@ -49,6 +49,10 @@ public class WinNumbers {
 		}
 	}
 
+	public boolean contains(LottoNumber bonusNumber) {
+		return this.winNumbers.contains(bonusNumber);
+	}
+
 	public Set<LottoNumber> getWinNumbers() {
 		return this.winNumbers;
 	}

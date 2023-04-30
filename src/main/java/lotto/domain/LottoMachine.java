@@ -32,7 +32,10 @@ public class LottoMachine {
 		this.purchasedLottos.calculateScore(winNumbers);
 	}
 
-	public void calculateBonusScore(LottoNumber bonusNumber) {
+	public void calculateBonusScore(LottoNumber bonusNumber, WinNumbers winNumbers) {
+		if (winNumbers.contains(bonusNumber)) {
+			throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+		}
 		this.purchasedLottos.calculateBonusScore(bonusNumber);
 	}
 

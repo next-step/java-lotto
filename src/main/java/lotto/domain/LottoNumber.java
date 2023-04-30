@@ -11,7 +11,7 @@ public class LottoNumber {
 
 	public LottoNumber(int lottoNumber) {
 		if (lottoNumber < LottoNumber.MINIMUM_BOUND || lottoNumber > LottoNumber.MAXIMUM_BOUND) {
-			throw new IllegalArgumentException(String.format("넘버는 %d~%d까지의 숫자만 입력 가능합니다.", LottoNumber.MINIMUM_BOUND, LottoNumber.MAXIMUM_BOUND));
+			throw new IllegalArgumentException(String.format("로또 넘버는 %d~%d까지의 숫자만 입력 가능합니다.", LottoNumber.MINIMUM_BOUND, LottoNumber.MAXIMUM_BOUND));
 		}
 		this.lottoNumber = lottoNumber;
 	}
