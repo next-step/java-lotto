@@ -11,13 +11,13 @@ public class Ticket {
     private final Set<Integer> numbers;
 
     public Ticket(Set<Integer> numbers) {
-        validate(numbers);
+        validate();
         this.numbers = numbers;
     }
 
     public Ticket(String stringNumbers) {
         Set<Integer> numbers = parseToNumbers(stringNumbers);
-        validate(numbers);
+        validate();
         this.numbers = numbers;
     }
 
@@ -33,8 +33,8 @@ public class Ticket {
         return numbers;
     }
 
-    private void validate(Set<Integer> numbers) {
-        if (numbers.size() != 6) {
+    private void validate() {
+        if (this.numbers.size() != 6) {
             throw new TicketNumbersCountException();
         }
     }
