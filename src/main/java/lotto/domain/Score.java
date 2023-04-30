@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Score {
 
+	private static final int MAX_SCORE = 6;
+
 	private int score;
 
 	public Score(int score) {
@@ -15,6 +17,10 @@ public class Score {
 
 	public void plus() {
 		this.score++;
+	}
+
+	public boolean lessThan() {
+		return this.score < Score.MAX_SCORE;
 	}
 
 	public int getScore() {
