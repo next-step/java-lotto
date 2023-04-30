@@ -1,5 +1,8 @@
 package step2.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MatchFactory {
 
     private static final Match NOT_MATCH = new Match(0, false);
@@ -9,29 +12,14 @@ public class MatchFactory {
     private static final Match FIVE_MATCH_WITH_BONUS = new Match(5, true);
     private static final Match SIX_MATCH = new Match(6, false);
 
+    private static final List<Match> factory = Arrays.asList(
+            THREE_MATCH, FOUR_MATCH, FIVE_MATCH, FIVE_MATCH_WITH_BONUS, SIX_MATCH
+    );
 
     public static Match match(int count, boolean isBonus) {
-
-        if (count == 3 && !isBonus) {
-            return THREE_MATCH;
-        }
-
-        if (count == 4 && !isBonus) {
-            return FOUR_MATCH;
-        }
-
-        if (count == 5 && !isBonus) {
-            return FIVE_MATCH;
-        }
-
-        if (count == 5 && isBonus) {
-            return FIVE_MATCH_WITH_BONUS;
-        }
-
-        if (count == 6 && !isBonus) {
-            return SIX_MATCH;
-        }
-
-        return NOT_MATCH;
+        return factory.stream()
+                .filter(match -> match.isEqual(count, isBonus))
+                .findAny()
+                .orElse(NOT_MATCH);
     }
 }

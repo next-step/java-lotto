@@ -10,12 +10,8 @@ public class Match {
         this.isBonus = isBonus;
     }
 
-    @Override
-    public String toString() {
-        return "Match{" +
-                "count=" + count +
-                ", isBonus=" + isBonus +
-                '}';
+    public boolean isEqual(int count, boolean isBonus) {
+        return this.count == count && this.isBonus == isBonus;
     }
 }
 
