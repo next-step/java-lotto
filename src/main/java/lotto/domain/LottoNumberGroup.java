@@ -1,16 +1,14 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumberGroup {
     private static final int LOTTO_NUMBER_GROUP_LENGTH = 6;
     private List<LottoNumber> lottoNumberGroup = new ArrayList<>();
 
-    public LottoNumberGroup() {}
+    public LottoNumberGroup() {
+    }
 
     public LottoNumberGroup(List<LottoNumber> lottoNumberGroup) {
         this.lottoNumberGroup = lottoNumberGroup;
@@ -32,14 +30,17 @@ public class LottoNumberGroup {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<LottoNumber> initializedManualLottoNumber(List<Integer> requestNumberList) {
+    public LottoNumberGroup initializedManualLottoNumber(List<Integer> requestNumberList) {
         validateLottoNumberLength(requestNumberList);
         validateSameNumber(requestNumberList);
 
-        return requestNumberList.stream()
+
+        List<LottoNumber> lottoNumberList = requestNumberList.stream()
                 .map(LottoNumber::provideLottoNumber)
                 .sorted(LottoNumber::compareTo)
                 .collect(Collectors.toUnmodifiableList());
+
+        return new LottoNumberGroup(lottoNumberList);
     }
 
     private void validateLottoNumberLength(List<Integer> lottoNumberList) {
@@ -75,6 +76,19 @@ public class LottoNumberGroup {
 
     public int getLottoNumberGroupSize() {
         return lottoNumberGroup.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumberGroup that = (LottoNumberGroup) o;
+        return lottoNumberGroup.equals(that.lottoNumberGroup);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumberGroup);
     }
 }
 
