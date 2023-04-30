@@ -44,4 +44,12 @@ public enum Prize {
     public String getDisplayPrompt() {
         return displayPrompt;
     }
+
+    public int getMatchingCount() {
+        return matchingCount;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
 }
