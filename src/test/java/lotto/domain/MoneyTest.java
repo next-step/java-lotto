@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MoneyTest {
@@ -28,7 +27,7 @@ class MoneyTest {
 
   @Test
   void minus() {
-    assertThat(money.minus(5000))
+    assertThat(money.difference(new Money(5000)))
         .isEqualTo(new Money(95000));
   }
 }

@@ -27,7 +27,7 @@ public class LottoGame {
       RandomStrategy randomStrategy,
       List<LottoTicket> manualTickets
   ) {
-    Money remainingAmount = purchaseAmount.minus(TICKET_PRICE * manualTickets.size());
+    Money remainingAmount = purchaseAmount.difference(new Money(TICKET_PRICE * manualTickets.size()));
     List<LottoTicket> combinedTickets = new ArrayList<>();
     combinedTickets.addAll(manualTickets);
     combinedTickets.addAll(issueLottoTickets(remainingAmount, randomStrategy));

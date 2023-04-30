@@ -17,8 +17,8 @@ public class Money {
     return amount;
   }
 
-  public Money minus(int amount) {
-    return new Money(this.amount - amount);
+  public Money difference(Money other) {
+    return new Money(amount - other.getAmount());
   }
 
   @Override
