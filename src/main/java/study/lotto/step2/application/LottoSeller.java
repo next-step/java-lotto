@@ -10,24 +10,40 @@ import java.util.stream.LongStream;
 
 public class LottoSeller {
     private static final long LOTTO_PRICE = 1_000L;
+    private static final String INTEGER_REGEX = "^\\d+$\n";
     private final LottoFactory lottoFactory;
 
     public LottoSeller(LottoFactory lottoFactory) {
         this.lottoFactory = lottoFactory;
     }
 
-    public SoldLottos sell(long amount) {
-        return new SoldLottos(lottos(numberOfSelling(amount)));
+    public SoldLottos sell(String purchaseAmount) {
+        validatePurchaseAmount(purchaseAmount);
+        return sell(Long.parseLong(purchaseAmount));
     }
 
-    private long numberOfSelling(long amount) {
-        validateAmount(amount);
-        return amount / LOTTO_PRICE;
+    public SoldLottos sell(long purchaseAmount) {
+        return new SoldLottos(lottos(numberOfSelling(purchaseAmount)));
     }
 
-    private void validateAmount(long amount) {
-        if(amount < LOTTO_PRICE) {
-            throw new IllegalArgumentException("최소 구입 금액은 " + LOTTO_PRICE + "원입니다: " + amount);
+    private long numberOfSelling(long purchaseAmount) {
+        validatePurchaseAmount(purchaseAmount);
+        return purchaseAmount / LOTTO_PRICE;
+    }
+
+    private void validatePurchaseAmount(String purchaseAmount) {
+        if(purchaseAmount == null || !isIntegerExpression(purchaseAmount)) {
+            throw new IllegalArgumentException("구입 금액은 양의 정수로 입력해야 합니다: " + purchaseAmount);
+        }
+    }
+
+    private boolean isIntegerExpression(String purchaseAmount) {
+        return purchaseAmount.matches(INTEGER_REGEX);
+    }
+
+    private void validatePurchaseAmount(long purchaseAmount) {
+        if(purchaseAmount < LOTTO_PRICE) {
+            throw new IllegalArgumentException("최소 구입 금액은 " + LOTTO_PRICE + "원입니다: " + purchaseAmount);
         }
     }
 
