@@ -1,4 +1,4 @@
-package biz.enums;
+package calculator.biz.enums;
 
 public enum OperatorEnum {
 

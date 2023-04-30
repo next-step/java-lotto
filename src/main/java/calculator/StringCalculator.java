@@ -1,4 +1,6 @@
-import biz.OperatorFactory;
+package calculator;
+
+import calculator.biz.OperatorFactory;
 
 import java.util.regex.Pattern;
 

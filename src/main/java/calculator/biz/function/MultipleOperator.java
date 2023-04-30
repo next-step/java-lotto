@@ -1,4 +1,4 @@
-package biz.function;
+package calculator.biz.function;
 
 public class MultipleOperator implements Operator{
     @Override

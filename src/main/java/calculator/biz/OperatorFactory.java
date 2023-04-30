@@ -1,7 +1,7 @@
-package biz;
+package calculator.biz;
 
-import biz.enums.OperatorEnum;
-import biz.function.*;
+import calculator.biz.enums.OperatorEnum;
+import calculator.biz.function.*;
 
 import java.util.HashMap;
 import java.util.Map;
