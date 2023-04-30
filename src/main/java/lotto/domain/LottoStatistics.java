@@ -75,28 +75,8 @@ public class LottoStatistics {
         return lottos.size() * PRICE_OF_LOTTO;
     }
 
-    /**
-     * 당첨 통계를 출력
-     */
-    public String getStatistics() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("당첨 통계\n------\n");
-
-        appendMatchCounts(sb);
-
-        double yield = calculateYield();
-        sb.append(String.format("총 수익률은 %.2f%s 입니다. ", yield, (yield > 1 ? "" : " (기준이 1이기 때문에 결과적으로 손해라는 의미임)")));
-        return sb.toString();
+    public int[] getMatchCounts() {
+        return matchCounts;
     }
 
-    /**
-     * 각 당첨 수준에 대한 수를 출력
-     */
-    private void appendMatchCounts(StringBuilder sb) {
-        for (int i = 0; i < NUMBER_OF_WINNING_LEVELS; i++) {
-            int matches = i + 3;
-            LottoPrize prize = LottoPrize.valueOf(matches);
-            sb.append(String.format("%d 개 일치 (%s) 원 - %d 개\n", matches, prize.getPrizeMoneyFormat(), matchCounts[i]));
-        }
-    }
 }
