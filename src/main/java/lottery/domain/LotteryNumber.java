@@ -1,5 +1,9 @@
 package lottery.domain;
 
+import static java.lang.String.valueOf;
+
+import java.util.Objects;
+
 public class LotteryNumber {
 
     private static final int MIN_LOTTERY_NUMBER = 1;
@@ -19,5 +23,27 @@ public class LotteryNumber {
 
     private boolean outOfRange(int lotteryNumber) {
         return lotteryNumber < MIN_LOTTERY_NUMBER || lotteryNumber > MAX_LOTTERY_NUMBER;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LotteryNumber that = (LotteryNumber) o;
+        return lotteryNumber == that.lotteryNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotteryNumber);
+    }
+
+    @Override
+    public String toString() {
+        return valueOf(this.lotteryNumber);
     }
 }
