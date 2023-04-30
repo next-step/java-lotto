@@ -2,15 +2,22 @@ package domain;
 
 import view.InputView;
 
+import java.util.List;
+
 public class StringCalculatorMain {
     public static void main(String[] args) {
 
-        InputView inputView = new InputView();
         StringCalculator stringCalculator = new StringCalculator();
 
-        stringCalculator.readExpression(inputView.readExpression());
-        int result = stringCalculator.calculate();
+        String expression = InputView.readExpression();
+        stringCalculator.validExpression(expression);
+        List<Integer> numbers = stringCalculator.extractNumbers(expression);
+        List<Operation> operations = stringCalculator.extractOperation(expression);
 
+
+        int result = stringCalculator.calculate();
         System.out.println(">>> " + result);
     }
+
+
 }
