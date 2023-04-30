@@ -77,4 +77,13 @@ public class StringCalculatorTest {
     void when_multiple_operation_value(){
         assertThat(calculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
     }
+
+
+    @Test
+    @DisplayName("String 입력시 Integer 타입로 변환")
+    void convert_to_integer_from_string(){
+        assertThat(calculator.parseToInt("5")).isEqualTo(5);
+        assertThat(calculator.parseToInt("4")).isEqualTo(4);
+        assertThat(calculator.parseToInt("1")).isEqualTo(1);
+    }
 }
