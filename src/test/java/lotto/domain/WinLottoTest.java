@@ -23,7 +23,9 @@ class WinLottoTest {
         expectedNumbers.add(41);
         expectedNumbers.add(42);
 
-        assertThat(winLotto.numbers()).isEqualTo(expectedNumbers);
+        Numbers numbers = new Numbers(expectedNumbers);
+
+        assertThat(winLotto.numbers()).isEqualTo(numbers);
     }
 
     @Test

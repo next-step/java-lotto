@@ -27,10 +27,6 @@ public class Result {
         prizeAmount += result6matched * LottoRule.MATCHED_6_NUMBERS_PRIZE;
     }
 
-    public int prizeAmount() {
-        return prizeAmount;
-    }
-
     public int getResult3matched() {
         return result3matched;
     }

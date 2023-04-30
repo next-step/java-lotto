@@ -9,9 +9,9 @@ class MyLottoTest {
     @Test
     void 로또자동발급확인() {
         MyLotto myLotto = MyLotto.auto();
-        assertThat(myLotto.numbers().size()).isEqualTo(6);
-        for(Integer number : myLotto.numbers()){
-            assertThat(LottoRule.NUMBER_RANGE.contains(number)).isTrue();
+        assertThat(myLotto.numbers().count()).isEqualTo(6);
+        for (int i = 0; i < myLotto.numbers().count(); i++) {
+            assertThat(LottoRule.NUMBER_RANGE.contains(myLotto.numbers().find(i))).isTrue();
         }
     }
 
