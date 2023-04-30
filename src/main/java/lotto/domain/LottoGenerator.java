@@ -12,6 +12,10 @@ public class LottoGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
+    private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
+
     public LottoGenerator() {
     }
 
@@ -29,18 +33,12 @@ public class LottoGenerator {
     }
 
     public LottoTicket generateLottoNumbers() {
-        Set<LottoNumber> numbers = new TreeSet<>();
-
-        while (numbers.size() < LOTTO_TICKET_SIZE) {
-            numbers.add(new LottoNumber(getRandomNumberInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)));
-        }
-
+        List<LottoNumber> shuffledPool = new ArrayList<>(LOTTO_NUMBER_POOL);
+        Collections.shuffle(shuffledPool);
+        Set<LottoNumber> numbers = new TreeSet<>(shuffledPool.subList(0, LOTTO_TICKET_SIZE));
         return new LottoTicket(numbers);
     }
-
-    private static int getRandomNumberInRange(int minNumber, int maxNumber) {
-        return (int) (Math.random() * ((maxNumber - minNumber) + 1)) + minNumber;
-    }
 }
+
 
 
