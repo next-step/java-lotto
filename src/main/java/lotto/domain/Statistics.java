@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.groupingBy;
 public class Statistics {
     private final WinnerLotto winnerLotto;
 
-
     public Statistics(WinnerLotto winnerLotto) {
         this.winnerLotto = winnerLotto;
     }
@@ -20,6 +19,7 @@ public class Statistics {
         return lottoList.stream()
                 .map(winnerLotto::findMatchingCount)
                 .map(Prize::valueOf)
+                .filter(prize -> Prize.OUT_OF_PLACE != prize)
                 .collect(groupingBy(Function.identity(), Collectors.counting()));
     }
 
