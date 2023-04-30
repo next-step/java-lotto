@@ -1,7 +1,7 @@
 package lotto.dto;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +18,11 @@ public class LottoNumbersDto {
         return lottoNumbers;
     }
 
-    public static LottoNumbersDto of(LottoNumbers lottoNumbers) {
-        List<LottoNumber> lottoNumberList = lottoNumbers.getLottoNumbers();
+    public static LottoNumbersDto of(LottoTickets lottoTickets) {
+        List<LottoTicket> lottoTicketList = lottoTickets.getLottoNumbers();
         List<List<Integer>> result = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumberList) {
-            result.add(lottoNumber.getLottoNumber());
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            result.add(lottoTicket.getLottoNumber());
         }
         return new LottoNumbersDto(result);
     }

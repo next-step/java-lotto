@@ -32,7 +32,7 @@ public class OutputView {
 
     public static void outputLottoStatistics(LottoStatisticsDto dto) {
         Map<LottoRank, Integer> matchingCounts = dto.getMatchingCounts();
-        System.out.println("\n" + "당첨 통계");
+        System.out.printf("%n당첨 통계%n");
         System.out.println("---------");
 
         List<LottoRank> ranks = new ArrayList<>(matchingCounts.keySet());
@@ -47,21 +47,21 @@ public class OutputView {
     private static void outputStatisticsStage(Map<LottoRank, Integer> matchingCounts,
                                               LottoRank rank) {
         if (rank == LottoRank.SECOND) {
-            System.out.printf("%d" + "개 일치, 보너스 볼 일치 (" + "%d" + "원)- " + "%d" + "개" + "\n",
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개%n",
                     rank.getMatchCount(), rank.getPrizeMoney(), matchingCounts.get(rank));
             return;
         }
-        System.out.printf("%d" + "개 일치 (" + "%d" + "원)- " + "%d" + "개" + "\n",
+        System.out.printf("%d개 일치 (%d원)- %d개%n",
                 rank.getMatchCount(), rank.getPrizeMoney(), matchingCounts.get(rank));
     }
 
     private static void outputGrossRateOfEarnings(LottoStatisticsDto dto) {
         double grossRateOfEarnings = dto.getGrossRateOfEarnings();
         if (grossRateOfEarnings >= 1) {
-            System.out.printf("총 수익률은 " + "%.2f" + "입니다.", grossRateOfEarnings);
+            System.out.printf("총 수익률은 %.2f입니다.", grossRateOfEarnings);
             return;
         }
-        System.out.printf("총 수익률은 " + "%.2f" +
-                "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", grossRateOfEarnings);
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+                , grossRateOfEarnings);
     }
 }

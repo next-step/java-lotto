@@ -7,9 +7,9 @@ public class LottoStatistics {
     private Map<LottoRank, Integer> matchingCounts;
     private Double grossRateOfEarnings;
 
-    public Map<LottoRank, Integer> calculateMatchingCounts(LottoNumbers lottoNumbers,
-                                                         WinningNumber winningNumber) {
-        Map<LottoRank, Integer> sameNumberCount = winningNumber.countMatching(lottoNumbers);
+    public Map<LottoRank, Integer> calculateMatchingCounts(LottoTickets lottoTickets,
+                                                           WinningTicket winningTicket) {
+        Map<LottoRank, Integer> sameNumberCount = winningTicket.countMatching(lottoTickets);
         List<LottoRank> keys = new ArrayList<>(sameNumberCount.keySet());
         for (LottoRank key : keys) {
             matchLottoRank(sameNumberCount, key);

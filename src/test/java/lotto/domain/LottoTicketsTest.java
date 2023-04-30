@@ -9,20 +9,19 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoNumbersTest {
+class LottoTicketsTest {
 
-    private LottoNumbers lottoNumbers;
+    private LottoTickets lottoTickets;
 
     @BeforeEach
     void init() {
-        List<LottoNumber> lottoNumberList = new ArrayList<>();
-        lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 10, 11, 12)));
-        lottoNumberList.add(new LottoNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        lottoNumbers = new LottoNumbers(lottoNumberList, new RandomNumberCreation());
+        List<LottoTicket> lottoTicketList = new ArrayList<>();
+        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 10, 11, 12)));
+        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        lottoTickets = new LottoTickets(lottoTicketList, new RandomNumberCreation());
     }
 
     @Test
@@ -33,19 +32,19 @@ class LottoNumbersTest {
 
         //then
         assertDoesNotThrow(() -> {
-            new LottoNumbers(3, new RandomNumberCreation());
+            new LottoTickets(3, new RandomNumberCreation());
         });
     }
 
     @Test
     void calculateSameNumberCount() throws Exception {
         //given
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket winningTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNumber = 9;
 
         //when
         Map<LottoRank, Integer> sameNumberCounts
-                = lottoNumbers.calculateSameNumberCounts(winningNumber, bonusNumber);
+                = lottoTickets.calculateSameNumberCounts(winningTicket, bonusNumber);
 
         //then
         assertThat(sameNumberCounts).containsKeys(LottoRank.FIFTH, LottoRank.FIRST).containsValues(1, 2);

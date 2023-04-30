@@ -1,8 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.RandomNumberCreation;
-import lotto.domain.WinningNumber;
+import lotto.domain.LottoManager;
+import lotto.domain.WinningTicket;
 import lotto.dto.LottoNumbersDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -10,15 +9,15 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public static void main(String[] args) {
-        Lotto lotto = new Lotto();
+        LottoManager lottoManager = new LottoManager();
         int purchaseAmount = InputView.inputPurchaseAmount();
         int bonusBallNumber = InputView.inputBonusBallNumber();
-        lotto.createLottoNumbers(purchaseAmount);
-        OutputView.outputLottoCount(lotto.getLottoCount());
-        OutputView.outputLottoNumbers(LottoNumbersDto.of(lotto.getLottoNumbers()));
+        lottoManager.createLottoNumbers(purchaseAmount);
+        OutputView.outputLottoCount(lottoManager.getLottoCount());
+        OutputView.outputLottoNumbers(LottoNumbersDto.of(lottoManager.getLottoNumbers()));
 
-        WinningNumber winningNumber
-                = new WinningNumber(InputView.inputLastWinningNumber(), bonusBallNumber);
-        OutputView.outputLottoStatistics(lotto.calculateLottoStatistics(winningNumber));
+        WinningTicket winningTicket
+                = new WinningTicket(InputView.inputLastWinningNumber(), bonusBallNumber);
+        OutputView.outputLottoStatistics(lottoManager.calculateLottoStatistics(winningTicket));
     }
 }
