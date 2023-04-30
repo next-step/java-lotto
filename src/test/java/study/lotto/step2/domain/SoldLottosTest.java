@@ -1,8 +1,9 @@
-package study.lotto.step2.application;
+package study.lotto.step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.step2.domain.Lotto;
+import study.lotto.step2.domain.SoldLottos;
 
 import java.util.List;
 

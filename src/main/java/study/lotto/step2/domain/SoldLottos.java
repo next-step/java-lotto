@@ -1,6 +1,4 @@
-package study.lotto.step2.application;
-
-import study.lotto.step2.domain.Lotto;
+package study.lotto.step2.domain;
 
 import java.util.Collections;
 import java.util.List;

@@ -2,6 +2,8 @@ package study.lotto.step2.application;
 
 import study.lotto.step2.domain.Lotto;
 import study.lotto.step2.domain.LottoResult;
+import study.lotto.step2.domain.LottoResults;
+import study.lotto.step2.domain.SoldLottos;
 
 import java.util.List;
 import java.util.stream.Collectors;
