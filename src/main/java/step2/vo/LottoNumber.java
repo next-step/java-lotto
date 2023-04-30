@@ -1,5 +1,7 @@
 package step2.vo;
 
+import java.util.Objects;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_START_NUMBER = 1;
@@ -19,10 +21,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public boolean equalsWinNum(int winNum) {
-        return lottoNumber == winNum;
-    }
-
     public int lottoNumber() {
         return lottoNumber;
     }
@@ -30,5 +28,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber o) {
         return lottoNumber - o.lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

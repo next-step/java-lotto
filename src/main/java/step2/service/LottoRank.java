@@ -12,8 +12,6 @@ public enum LottoRank {
     SECOND(5, nWinner -> nWinner * 1500000),
     FIRST(6, nWinner -> nWinner * 2000000000);
 
-    private static final int LOTTO_PER_PRICE = 1000;
-
     private final int countOfMatch;
 
     private final PrizeAmount prizeAmount;
@@ -24,27 +22,20 @@ public enum LottoRank {
     }
 
     public static LottoRank getLottoNumber(Integer matchingCount) {
-        if (FIRST.countOfMatch == matchingCount) {
-            return FIRST;
-        }
-        if (SECOND.countOfMatch == matchingCount) {
-            return SECOND;
-        }
-        if (THIRD.countOfMatch == matchingCount) {
-            return THIRD;
-        }
-        if (FOURTH.countOfMatch == matchingCount) {
-            return FOURTH;
+        for (LottoRank lottoRank : LottoRank.values()) {
+            if (lottoRank.countOfMatch == matchingCount) {
+                return lottoRank;
+            }
         }
         return REMAIN;
     }
 
     public static double calculateRateOfReturn(int numOfLottoTicket, Map<LottoRank, Integer> winnerResults) {
-        return (FOURTH.prizeAmount.getPrizeAmount(winnerResults.get(FOURTH))
-                + THIRD.prizeAmount.getPrizeAmount(winnerResults.get(THIRD))
-                + SECOND.prizeAmount.getPrizeAmount(winnerResults.get(SECOND))
-                + FIRST.prizeAmount.getPrizeAmount(winnerResults.get(FIRST)))
-                / (numOfLottoTicket * LOTTO_PER_PRICE);
+        int sumOfAllRanks = 0;
+        for (LottoRank lottoRank : LottoRank.values()) {
+            sumOfAllRanks += lottoRank.prizeAmount.getPrizeAmount(winnerResults.get(lottoRank));
+        }
+        return sumOfAllRanks / (numOfLottoTicket * Lotto.PRICE_PER_LOTTO);
     }
 
     public static boolean isRemain(LottoRank lottoNumber) {

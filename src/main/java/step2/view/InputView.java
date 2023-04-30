@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class InputView {
+import static step2.service.Lotto.PRICE_PER_LOTTO;
 
-    private static final int PRICE_PER_LOTTO = 1000;
+public class InputView {
 
     private final Scanner scanner;
 

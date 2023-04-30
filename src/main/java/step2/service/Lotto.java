@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public static final int PRICE_PER_LOTTO = 1000;
+
     private static final int DEFAULT_LOTTO_SIZE = 6;
 
     private List<LottoNumber> lottoNumbers;
@@ -32,7 +34,7 @@ public class Lotto {
 
     private Integer countMatchingNumbers(Integer countWinNumber, Integer winNum) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.equalsWinNum(winNum)) {
+            if (lottoNumber.equals(winNum)) {
                 countWinNumber++;
             }
         }
