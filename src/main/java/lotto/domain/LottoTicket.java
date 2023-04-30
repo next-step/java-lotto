@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,10 +10,10 @@ public class LottoTicket {
   private static final String ILLEGAL_COUNT_MESSAGE = "로또 번호는 6개 입력하셔야 합니다.";
   private final Set<LottoNumber> lottoTicket;
 
-  public LottoTicket(List<LottoNumber> lottoNumbers) {
-    validateLottoTicket(lottoNumbers);
-
+  public LottoTicket(Set<LottoNumber> lottoNumbers) {
     lottoTicket = new TreeSet<>(lottoNumbers);
+
+    validateLottoTicket(lottoTicket);
   }
 
   public Set<LottoNumber> lottoTicketNumbers() {
@@ -31,13 +30,13 @@ public class LottoTicket {
     return lottoTicket.contains(lottoNumber);
   }
 
-  private void validateLottoTicket(List<LottoNumber> lottoTicket) {
+  private void validateLottoTicket(Set<LottoNumber> lottoTicket) {
     if (!equalsLottoNumbers(lottoTicket)) {
       throw new IllegalArgumentException(ILLEGAL_COUNT_MESSAGE);
     }
   }
 
-  private boolean equalsLottoNumbers(List<LottoNumber> lottoTicket) {
+  private boolean equalsLottoNumbers(Set<LottoNumber> lottoTicket) {
     return lottoTicket.size() == TICKET_NUMBER_COUNT;
   }
 }

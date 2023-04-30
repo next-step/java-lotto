@@ -8,27 +8,25 @@ public class LottoVendingMachine {
   private LottoVendingMachine() {
   }
 
-  public static LottoTickets issueLottoTickets(int tryRandomCount) {
-    LottoTickets lottoTickets = new LottoTickets();
+  public static LottoTickets issueLottoTickets(int tryTotalCount, LottoTickets directInputLottoTickets) {
+    int directInputCount = tryDirectInputCount(directInputLottoTickets);
 
-    for (int i = 0; i < tryRandomCount; i++) {
-      lottoTickets.addLottoTicket(new RandomLottoStrategy().issue());
+    for (int i = 0; i < tryTotalCount - directInputCount; i++) {
+      directInputLottoTickets.addLottoTicket(new RandomLottoStrategy().issue());
     }
 
-    return lottoTickets;
+    return directInputLottoTickets;
   }
 
-  public static LottoGame startGame(LottoTickets lottoTickets, List<Integer> winningLottoNumbers, int bonusNumber) {
-    return new LottoGame(lottoTickets, new LottoTicket(toLottoNumbers(winningLottoNumbers)), new LottoNumber(bonusNumber));
+  public static LottoGame startGame(LottoTickets lottoTickets, LottoTicket winningLottoNumbers, int bonusNumber) {
+    return new LottoGame(lottoTickets, winningLottoNumbers, LottoNumber.of(bonusNumber));
   }
 
   public static LottoResult lottoResult(LottoGame lottoGame) {
     return lottoGame.play();
   }
 
-  private static List<LottoNumber> toLottoNumbers(List<Integer> lottoNumbers) {
-    return lottoNumbers.stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+  private static int tryDirectInputCount(LottoTickets directInputLottoNumbers) {
+    return directInputLottoNumbers.unmodifiedLottoTickets().size();
   }
 }

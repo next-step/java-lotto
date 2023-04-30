@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,13 +18,13 @@ public class RandomLottoStrategy implements LottoStrategy {
 
   private static List<LottoNumber> createLottoNumbers() {
     return IntStream.rangeClosed(LOTTO_MINIMUM_NUMBER, LOTTO_MAXIMUM_NUMBER)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList());
   }
 
   @Override
   public LottoTicket issue() {
-    List<LottoNumber> randomLottoNumbers = new ArrayList<>();
+    Set<LottoNumber> randomLottoNumbers = new TreeSet<>();
     Collections.shuffle(lottoNumbers);
 
     for (int i = 0; i < TICKET_NUMBER_COUNT; i++) {

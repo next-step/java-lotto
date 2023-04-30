@@ -10,7 +10,7 @@ public enum LottoRank {
   THIRD(5, 1_500_000),
   FOURTH(4, 50_000),
   FIFTH(3, 5_000),
-  NOTMATCHED(0, 0);
+  NOT_MATCHED(0, 0);
 
   private static final int NOT_MATCHED_COUNT = 0;
   private static final int SECOND_OR_THIRD_COUNT = 5;
@@ -42,7 +42,7 @@ public enum LottoRank {
     return Arrays.stream(values())
             .filter(lottoRank -> lottoRank.matchedCount == count)
             .findFirst()
-            .orElse(NOTMATCHED);
+            .orElse(NOT_MATCHED);
   }
 
   private static boolean isSecondRank(int count, boolean matchBonus) {
@@ -53,8 +53,8 @@ public enum LottoRank {
     return !matchBonus && count == SECOND_OR_THIRD_COUNT;
   }
 
-  public static int prizeMoney(LottoRank lottoRank) {
-    return lottoRank.prizeMoney;
+  public int prizeMoney() {
+    return prizeMoney;
   }
 
   public int matchedCount() {

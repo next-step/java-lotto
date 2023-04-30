@@ -1,6 +1,9 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.stream.Collectors;
 
@@ -22,7 +25,7 @@ public class ResultView {
     System.out.println("---------");
 
     lottoResult.numbersPerRank().forEach((lottoRank, matchedNumber) -> {
-      System.out.println(lottoRank.matchedCount() + "개 일치 (" + LottoRank.prizeMoney(lottoRank) + "원)- " + matchedNumber + "개");
+      System.out.println(lottoRank.matchedCount() + "개 일치 (" + lottoRank.prizeMoney() + "원)- " + matchedNumber + "개");
     });
 
     System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", lottoResult.lottoRateOfReturn(), isProfitable(lottoResult));

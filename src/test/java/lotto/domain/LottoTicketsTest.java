@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -15,13 +15,13 @@ public class LottoTicketsTest {
 
   @BeforeEach
   public void setUp() {
-    winningLottoTicket = new LottoTicket(List.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)));
+    winningLottoTicket = new LottoTicket(Set.of(
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)));
   }
 
   @Test
@@ -41,27 +41,27 @@ public class LottoTicketsTest {
   public void matchesLottoTickets_맞는_번호_개수() {
     LottoTickets lottoTickets = new LottoTickets();
 
-    lottoTickets.addLottoTicket(new LottoTicket(List.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6))));
-    lottoTickets.addLottoTicket(new LottoTicket(List.of(
-            new LottoNumber(1),
-            new LottoNumber(9),
-            new LottoNumber(3),
-            new LottoNumber(34),
-            new LottoNumber(5),
-            new LottoNumber(6))));
-    lottoTickets.addLottoTicket(new LottoTicket(List.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(12),
-            new LottoNumber(4),
-            new LottoNumber(27),
-            new LottoNumber(14))));
+    lottoTickets.addLottoTicket(new LottoTicket(Set.of(
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6))));
+    lottoTickets.addLottoTicket(new LottoTicket(Set.of(
+            LottoNumber.of(1),
+            LottoNumber.of(9),
+            LottoNumber.of(3),
+            LottoNumber.of(34),
+            LottoNumber.of(5),
+            LottoNumber.of(6))));
+    lottoTickets.addLottoTicket(new LottoTicket(Set.of(
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(12),
+            LottoNumber.of(4),
+            LottoNumber.of(27),
+            LottoNumber.of(14))));
 
     assertAll(
             () -> assertThat(lottoTickets.matchesLottoTickets(winningLottoTicket).get(0)).isEqualTo(6),
