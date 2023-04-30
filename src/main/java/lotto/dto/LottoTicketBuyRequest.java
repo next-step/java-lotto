@@ -1,4 +1,4 @@
-package step2;
+package lotto.dto;
 
 public class LottoTicketBuyRequest {
     private int amount;
@@ -9,10 +9,7 @@ public class LottoTicketBuyRequest {
         this.lottoCount = lottoCount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
+  
     public int getLottoCount() {
         return lottoCount;
     }

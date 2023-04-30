@@ -1,4 +1,4 @@
-package step1;
+package stringCalculator;
 
 public class CalculatorMain {
     public static void main(String[] args) {

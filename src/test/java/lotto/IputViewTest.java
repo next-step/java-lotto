@@ -1,5 +1,6 @@
-package step2;
+package lotto;
 
+import lotto.view.InputView;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

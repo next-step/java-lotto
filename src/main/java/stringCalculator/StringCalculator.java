@@ -1,4 +1,4 @@
-package step1;
+package stringCalculator;
 
 public class StringCalculator {
     private final Expression expression;

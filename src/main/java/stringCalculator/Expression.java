@@ -1,4 +1,4 @@
-package step1;
+package stringCalculator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,36 +19,18 @@ public class Expression {
     public int calculate() {
         int result = Integer.parseInt(numbers.get(0));
         for (int i = 0; i < operators.size(); i++) {
-            result = operate(result, i);
+            Operator operator = Operator.of(operators.get(i));
+            result = operator.calculate(result, Integer.parseInt(numbers.get(i + 1)));
         }
         return result;
     }
 
-    public int operate(int result, int i) {
-        String operator = operators.get(i);
-        int number = Integer.parseInt(numbers.get(i + 1));
-        if ("+".equals(operator)) {
-            return result + number;
-        }
-        if ("-".equals(operator)) {
-            return result - number;
-        }
-        if ("*".equals(operator)) {
-            return result * number;
-        }
-        if ("/".equals(operator)) {
-            return result / number;
-        }
-        return result;
-    }
 
     private void seperateNumberAndOperater(String exp) {
         if (exp.matches(REGEXP)) {
             this.numbers.add(exp);
             return;
         }
-        if (!exp.matches(REGEXP)) {
-            this.operators.add(exp);
-        }
+        this.operators.add(exp);
     }
 }

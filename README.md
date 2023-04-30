@@ -24,11 +24,41 @@
 로또 기능
 
 1. 금액 입력
+
+- InputView buyLotto()
+
 2. 입력된 금액으로 로또 구매 갯수 출력 v
+
+- ResultView printLottoTickets()
+
 3. 1 ~ 45 중 무작위로 로또 번호 생성 v
+
+- LottoService createTickets()
+
 4. 당첨번호 입력 v
+
+- InputView checkWinning()
+
 5. 당첨여부 구하기 v
+
+- LottoStatisService compareWithWinningNumbers()
+
 7. 구매로또번호 출력 V
+
+- ResultView printLottoTickets()
+
 8. 지난주 당첨 번호 입력
+
+- InputView checkWinning()
+
 9. 3개 이상 당첨된 로또 통계
+
+- LottoTickets tallyUp()
+
 10. 총 수익률 구하기
+
+-LottoTickets getTotalReturn()
+
+11. 당첨결과 출력
+
+-ResultView printWiningResult()
