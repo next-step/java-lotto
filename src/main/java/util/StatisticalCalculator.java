@@ -12,7 +12,7 @@ public class StatisticalCalculator {
     Map<Prize, Integer> prizeCountMap = initializePrizeCountMap();
 
     for (LottoTicket lottoTicket : lottoTickets) {
-      int matchedCount = lottoTicket.matchCount(winningNumbers);
+      int matchedCount = lottoTicket.getMatchCount(winningNumbers);
       Prize prize = Prize.getPrizeForMatches(matchedCount);
       prizeCountMap.put(prize, prizeCountMap.get(prize) + 1);
     }
