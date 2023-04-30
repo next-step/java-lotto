@@ -30,6 +30,10 @@ public class LottoNumber {
                 .count();
     }
 
+    public boolean hasBonusNumber(int number) {
+        return lottoNumber.contains(number);
+    }
+
     public List<Integer> getLottoNumber() {
         return lottoNumber;
     }

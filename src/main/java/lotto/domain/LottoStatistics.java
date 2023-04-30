@@ -50,12 +50,4 @@ public class LottoStatistics {
         grossRateOfEarnings = sumOfPrizeMoney / sumOfPurchaseAmount;
         return grossRateOfEarnings;
     }
-
-    public Map<LottoRank, Integer> calculateMatchingPrices() {
-        Map<LottoRank, Integer> matchingPrices = new HashMap<>();
-        for (LottoRank lottoRank : matchingCounts.keySet()) {
-            matchingPrices.put(lottoRank, lottoRank.getPrizeMoney());
-        }
-        return matchingPrices;
-    }
 }

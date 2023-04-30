@@ -24,7 +24,6 @@ public class Lotto {
         LottoStatistics lottoStatistics = new LottoStatistics();
         return new LottoStatisticsDto(
                 lottoStatistics.calculateMatchingCounts(lottoNumbers, winningNumber),
-                lottoStatistics.calculateMatchingPrices(),
                 lottoStatistics.calculateGrossRateOfEarnings(lottoCount * LOTTO_PRICE)
                 );
     }

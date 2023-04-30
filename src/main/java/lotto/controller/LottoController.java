@@ -12,13 +12,13 @@ public class LottoController {
     public static void main(String[] args) {
         Lotto lotto = new Lotto();
         int purchaseAmount = InputView.inputPurchaseAmount();
+        int bonusBallNumber = InputView.inputBonusBallNumber();
         lotto.createLottoNumbers(purchaseAmount);
         OutputView.outputLottoCount(lotto.getLottoCount());
         OutputView.outputLottoNumbers(LottoNumbersDto.of(lotto.getLottoNumbers()));
 
         WinningNumber winningNumber
-                = new WinningNumber(InputView.inputLastWinningNumber());
-
+                = new WinningNumber(InputView.inputLastWinningNumber(), bonusBallNumber);
         OutputView.outputLottoStatistics(lotto.calculateLottoStatistics(winningNumber));
     }
 }

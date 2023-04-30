@@ -19,7 +19,7 @@ class LottoRankTest {
         //given
 
         //when
-        LottoRank result = LottoRank.of(count);
+        LottoRank result = LottoRank.valueOf(count);
 
         //then
         assertThat(result).isEqualTo(rank);
@@ -40,7 +40,7 @@ class LottoRankTest {
     @Test
     void calculatePrizeMoney() throws Exception {
         //given
-        LottoRank rank = LottoRank.of(4);
+        LottoRank rank = LottoRank.valueOf(4);
         int prizeMoney = rank.getPrizeMoney();
 
         //when
@@ -54,7 +54,7 @@ class LottoRankTest {
     @CsvSource(value = {"0:true", "1:true", "4:false"}, delimiter = ':')
     void isMiss(int count, boolean expected) throws Exception {
         //given
-        LottoRank rank = LottoRank.of(count);
+        LottoRank rank = LottoRank.valueOf(count);
 
         //when
         boolean result = rank.isMiss();
