@@ -1,49 +1,55 @@
 package lotto.domain;
 
 public class Result {
-    private int result3matched;
-    private int result4matched;
-    private int result5matched;
-    private int result6matched;
+    private int matched3NumbersCount;
+    private int matched4NumbersCount;
+    private int matched5NumbersCount;
+    private int matched6NumbersCount;
     private int prizeAmount;
 
 
     public void update(MyLotto myLotto) {
         if (myLotto.matchingCount() == 3) {
-            result3matched++;
-        } else if (myLotto.matchingCount() == 4) {
-            result4matched++;
-        } else if (myLotto.matchingCount() == 5) {
-            result5matched++;
-        } else if (myLotto.matchingCount() == 6) {
-            result6matched++;
+            matched3NumbersCount++;
+            return;
+        }
+        if (myLotto.matchingCount() == 4) {
+            matched4NumbersCount++;
+            return;
+        }
+        if (myLotto.matchingCount() == 5) {
+            matched5NumbersCount++;
+            return;
+        }
+        if (myLotto.matchingCount() == 6) {
+            matched6NumbersCount++;
         }
     }
 
     public void sumPrizeAmount() {
-        prizeAmount += result3matched * LottoRule.MATCHED_3_NUMBERS_PRIZE;
-        prizeAmount += result4matched * LottoRule.MATCHED_4_NUMBERS_PRIZE;
-        prizeAmount += result5matched * LottoRule.MATCHED_5_NUMBERS_PRIZE;
-        prizeAmount += result6matched * LottoRule.MATCHED_6_NUMBERS_PRIZE;
+        prizeAmount += matched3NumbersCount * LottoRule.MATCHED_3_NUMBERS_PRIZE;
+        prizeAmount += matched4NumbersCount * LottoRule.MATCHED_4_NUMBERS_PRIZE;
+        prizeAmount += matched5NumbersCount * LottoRule.MATCHED_5_NUMBERS_PRIZE;
+        prizeAmount += matched6NumbersCount * LottoRule.MATCHED_6_NUMBERS_PRIZE;
     }
 
-    public int getResult3matched() {
-        return result3matched;
+    public int getMatched3NumbersCount() {
+        return matched3NumbersCount;
     }
 
-    public int getResult4matched() {
-        return result4matched;
+    public int getMatched4NumbersCount() {
+        return matched4NumbersCount;
     }
 
-    public int getResult5matched() {
-        return result5matched;
+    public int getMatched5NumbersCount() {
+        return matched5NumbersCount;
     }
 
-    public int getResult6matched() {
-        return result6matched;
+    public int getMatched6NumbersCount() {
+        return matched6NumbersCount;
     }
 
-    public double profit(int money){
-        return (prizeAmount+0.0)/money;
+    public double profit(int money) {
+        return (prizeAmount + 0.0) / money;
     }
 }

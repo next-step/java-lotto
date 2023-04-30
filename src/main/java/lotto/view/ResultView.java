@@ -2,8 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.List;
-
 public class ResultView {
     public static void showMyLottos(MyLottos myLottos) {
         for (int i = 0; i < myLottos.count(); i++) {
@@ -19,10 +17,10 @@ public class ResultView {
     public static void showLottoResult(Result result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (%d원) - %d개\n", LottoRule.MATCHED_3_NUMBERS_PRIZE, result.getResult3matched());
-        System.out.printf("4개 일치 (%d원) - %d개\n", LottoRule.MATCHED_4_NUMBERS_PRIZE, result.getResult4matched());
-        System.out.printf("5개 일치 (%d원) - %d개\n", LottoRule.MATCHED_5_NUMBERS_PRIZE, result.getResult5matched());
-        System.out.printf("6개 일치 (%d원) - %d개\n", LottoRule.MATCHED_6_NUMBERS_PRIZE, result.getResult6matched());
+        System.out.printf("3개 일치 (%d원) - %d개\n", LottoRule.MATCHED_3_NUMBERS_PRIZE, result.getMatched3NumbersCount());
+        System.out.printf("4개 일치 (%d원) - %d개\n", LottoRule.MATCHED_4_NUMBERS_PRIZE, result.getMatched4NumbersCount());
+        System.out.printf("5개 일치 (%d원) - %d개\n", LottoRule.MATCHED_5_NUMBERS_PRIZE, result.getMatched5NumbersCount());
+        System.out.printf("6개 일치 (%d원) - %d개\n", LottoRule.MATCHED_6_NUMBERS_PRIZE, result.getMatched6NumbersCount());
     }
 
     public static void showProfit(double profit) {

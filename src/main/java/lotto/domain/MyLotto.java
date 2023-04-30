@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class MyLotto {
     private final Numbers numbers;
     private int matchingCount;

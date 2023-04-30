@@ -40,9 +40,9 @@ class MyLottoServiceTest {
 
         lottoService.checkWin(winLotto);
 
-        assertThat(lottoService.result().getResult3matched()).isEqualTo(2);
-        assertThat(lottoService.result().getResult4matched()).isEqualTo(3);
-        assertThat(lottoService.result().getResult5matched()).isEqualTo(0);
-        assertThat(lottoService.result().getResult6matched()).isEqualTo(0);
+        assertThat(lottoService.result().getMatched3NumbersCount()).isEqualTo(2);
+        assertThat(lottoService.result().getMatched4NumbersCount()).isEqualTo(3);
+        assertThat(lottoService.result().getMatched5NumbersCount()).isEqualTo(0);
+        assertThat(lottoService.result().getMatched6NumbersCount()).isEqualTo(0);
     }
 }
