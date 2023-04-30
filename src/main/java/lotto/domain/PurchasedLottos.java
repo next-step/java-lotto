@@ -26,6 +26,12 @@ public class PurchasedLottos {
 		}
 	}
 
+	public void calculateBonusScore(LottoNumber bonusNumber) {
+		for (Lotto lotto : this.purchasedLottos) {
+			lotto.calculateBonusScore(bonusNumber);
+		}
+	}
+
 	public int size() {
 		return this.purchasedLottos.size();
 	}

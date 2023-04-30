@@ -32,6 +32,10 @@ public class LottoMachine {
 		this.purchasedLottos.calculateScore(winNumbers);
 	}
 
+	public void calculateBonusScore(LottoNumber bonusNumber) {
+		this.purchasedLottos.calculateBonusScore(bonusNumber);
+	}
+
 	public List<PrizeSituation> makePrizeSituations() {
 		ScoreBoard scoreBoard = this.purchasedLottos.makeScoreBoard();
 		return scoreBoard.makePrizeSituations();
