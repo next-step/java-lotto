@@ -20,17 +20,10 @@ public class InputView {
         return Amount.from(SCANNER.nextInt());
     }
 
-    public static Lottos inputManualLottos(Amount manualAmount) {
+    public static void inputManualLottos() {
         SCANNER.nextLine();
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
-        Lottos lottos = new Lottos();
-        for (int i = 0; i < manualAmount.getAmount(); i++) {
-            lottos.addLotto(Lotto.createManualLotto(getManualLottoNumbers()));
-        }
-
-        return lottos;
     }
 
     public static Lotto inputWinningNumbers() {
