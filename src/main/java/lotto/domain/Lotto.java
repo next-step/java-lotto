@@ -9,7 +9,6 @@ public class Lotto {
 
 	private final LottoNumbers lottoNumbers;
 	private final Score score;
-	private final Score bonusScore;
 
 	public Lotto() {
 		this(0);
@@ -19,21 +18,18 @@ public class Lotto {
 	public Lotto(int score) {
 		this.lottoNumbers = new LottoNumbers();
 		this.score = new Score(score);
-		this.bonusScore = new Score(0);
 	}
 
 	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = new LottoNumbers(lottoNumbers);
 		this.score = new Score(0);
-		this.bonusScore = new Score(0);
 	}
 
 	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public Lotto(List<LottoNumber> lottoNumbers, int score) {
 		this.lottoNumbers = new LottoNumbers(lottoNumbers);
 		this.score = new Score(score);
-		this.bonusScore = new Score(0);
 	}
 
 	public Score calculateScore(WinNumbers winNumbers) {
@@ -50,16 +46,16 @@ public class Lotto {
 	}
 
 	public Score calculateBonusScore(LottoNumber bonusNumber) {
-		if (this.score.lessThan()) {
+		if (this.score.availableBonus()) {
 			this.plusBonusScore(bonusNumber);
-			return this.bonusScore;
+			return this.score;
 		}
-		return this.bonusScore;
+		return this.score;
 	}
 
 	private void plusBonusScore(LottoNumber bonusNumber) {
 		if (this.lottoNumbers.contains(bonusNumber)) {
-			this.bonusScore.plus();
+			this.score.plusBonus();
 		}
 	}
 

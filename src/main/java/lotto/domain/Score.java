@@ -4,23 +4,38 @@ import java.util.Objects;
 
 public class Score {
 
-	private static final int MAX_SCORE = 6;
+	private static final int BONUS_AVAILABLE_SCORE = 5;
 
 	private int score;
+	private int bonusScore;
 
+	public Score(int score, int bonusScore) {
+		if (score < 0 || bonusScore < 0) {
+			throw new IllegalArgumentException("점수나 보너스 점수는 음수일 수 없습니다.");
+		}
+		this.score = score;
+		this.bonusScore = bonusScore;
+	}
+
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public Score(int score) {
 		if (score < 0) {
 			throw new IllegalArgumentException("점수는 음수일 수 없습니다.");
 		}
 		this.score = score;
+		this.bonusScore = 0;
 	}
 
 	public void plus() {
 		this.score++;
 	}
 
-	public boolean lessThan() {
-		return this.score < Score.MAX_SCORE;
+	public void plusBonus() {
+		this.bonusScore++;
+	}
+
+	public boolean availableBonus() {
+		return this.score == BONUS_AVAILABLE_SCORE;
 	}
 
 	public int getScore() {
@@ -34,11 +49,11 @@ public class Score {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Score score1 = (Score)o;
-		return score == score1.score;
+		return score == score1.score && bonusScore == score1.bonusScore;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(score);
+		return Objects.hash(score, bonusScore);
 	}
 }
