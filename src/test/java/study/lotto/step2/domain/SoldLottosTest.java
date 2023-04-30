@@ -2,8 +2,6 @@ package study.lotto.step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.step2.domain.Lotto;
-import study.lotto.step2.domain.SoldLottos;
 
 import java.util.List;
 
@@ -20,10 +18,10 @@ class SoldLottosTest {
         ));
         
         // when, then
-        String expectedSelectedNumbers = new StringBuilder()
-                .append("[1, 2, 3, 4, 5, 6]\n")
-                .append("[11, 12, 13, 14, 15, 16]\n")
-                .toString();
+        List<String> expectedSelectedNumbers = List.of(
+                "[1, 2, 3, 4, 5, 6]",
+                "[11, 12, 13, 14, 15, 16]"
+        );
 
         assertThat(soldLottos.selectedNumbers()).isEqualTo(expectedSelectedNumbers);
     }

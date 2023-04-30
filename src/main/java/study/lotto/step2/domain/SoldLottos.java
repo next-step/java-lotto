@@ -3,22 +3,19 @@ package study.lotto.step2.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class SoldLottos {
-    private static final String LINE_BREAK = "\n";
     private final List<Lotto> lottos;
 
     public SoldLottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public String selectedNumbers() {
-        StringBuilder selectedNumbers = new StringBuilder();
-        lottos.forEach(lotto -> {
-            selectedNumbers.append(selectedNumberOf(lotto)).append(LINE_BREAK);
-        });
-
-        return selectedNumbers.toString();
+    public List<String> selectedNumbers() {
+        return lottos.stream()
+                .map(this::selectedNumberOf)
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> lottos() {
