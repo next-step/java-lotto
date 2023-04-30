@@ -8,20 +8,23 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Ticket {
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Ticket(Set<Integer> numbers) {
+        this.numbers = parseToLottoNumbers(numbers);
         validate();
-        this.numbers = numbers;
     }
 
     public Ticket(String stringNumbers) {
-        Set<Integer> numbers = parseToNumbers(stringNumbers);
+        this.numbers = parseToLottoNumbers(parseToNumbers(stringNumbers));
         validate();
-        this.numbers = numbers;
     }
 
-    private static int overlapCount(Set<Integer> copyThisNumbers) {
+    private Set<LottoNumber> parseToLottoNumbers(Set<Integer> numbers) {
+        throw new RuntimeException("Not Yet Implemented");
+    }
+
+    private static int overlapCount(Set<LottoNumber> copyThisNumbers) {
         return 12 - copyThisNumbers.size();
     }
 
@@ -40,20 +43,20 @@ public class Ticket {
     }
 
     public int countMatchNumbers(Ticket otherTicket) {
-        Set<Integer> copyThisNumbers = new HashSet<>(this.numbers);
+        Set<LottoNumber> copyThisNumbers = new HashSet<>(this.numbers);
         copyThisNumbers.addAll(otherTicket.numbers);
         return overlapCount(copyThisNumbers);
     }
 
     public WinnerTicket winnerTicket(int bonusNumber) {
-        return new WinnerTicket(new Ticket(new HashSet<>(this.numbers)), bonusNumber);
+        return new WinnerTicket(this, bonusNumber);
     }
 
     @Override
     public String toString() {
         return this.numbers
                 .stream()
-                .map(number -> Integer.toString(number))
+                .map(number -> Integer.toString(number.getLottoNumber()))
                 .sorted()
                 .collect(Collectors.joining(", ", "[", "]"));
     }
