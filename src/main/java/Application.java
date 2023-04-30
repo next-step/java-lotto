@@ -1,4 +1,5 @@
 import domain.LottoMachine;
+import domain.LottoTicket;
 import domain.Prize;
 import domain.RandomNumberGenerator;
 import java.util.List;
@@ -11,13 +12,14 @@ public class Application {
 
   public static void main(String[] args) {
     int investMoney = InputView.scanMoney();
-    LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator(), investMoney);
+    LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
 
-    ResultView.printLottoTickets(lottoMachine.lottoTickets());
+    List<LottoTicket> lottoTickets = lottoMachine.makeLottoTickets(investMoney);
+    ResultView.printLottoTickets(lottoTickets);
 
     List<Integer> winningNumbers = InputView.scanWinningNumbers();
 
-    Map<Prize, Integer> matchedCountMap = StatisticalCalculator.calculate(lottoMachine.lottoTickets(),
+    Map<Prize, Integer> matchedCountMap = StatisticalCalculator.calculate(lottoTickets,
         winningNumbers);
 
 

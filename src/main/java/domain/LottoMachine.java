@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-
-  private final List<LottoTicket> lottoTickets;
   private final RandomNumberStrategy randomNumberStrategy;
 
-  public LottoMachine(RandomNumberStrategy randomNumberStrategy, int investMoney) {
+  public LottoMachine(RandomNumberStrategy randomNumberStrategy) {
     this.randomNumberStrategy = randomNumberStrategy;
-    this.lottoTickets = makeLottoTickets(investMoney);
   }
 
 
-  private List<LottoTicket> makeLottoTickets(int money) {
-    int numberOfTickets = money / LottoTicket.PRICE;
+  public List<LottoTicket> makeLottoTickets(int investMoney) {
+    int numberOfTickets = investMoney / LottoTicket.PRICE;
     List<LottoTicket> lottoTickets = new ArrayList<>();
     for (int i = 0; i < numberOfTickets; i++) {
       List<Integer> lottoNumbers = randomNumberStrategy.generate();
@@ -24,9 +21,6 @@ public class LottoMachine {
     return lottoTickets;
   }
 
-  public List<LottoTicket> lottoTickets() {
-    return lottoTickets;
-  }
 
 
 }
