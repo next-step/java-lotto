@@ -26,6 +26,11 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean hasNumber(int number) {
+        return Arrays.stream(lottoNumbers)
+                .anyMatch(it -> it == number);
+    }
+
     private boolean isValidLottoNumbers(int[] lottoNumbers) {
         if (lottoNumbers.length != LOTTO_NUMBER_SIZE) {
             return false;

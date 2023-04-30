@@ -4,6 +4,7 @@ import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
@@ -34,6 +35,13 @@ public class LottoTest {
         String numbers = "1, 2, 3, 4, 5, 6";
         assertThat(Lotto.from(numbers).getLottoNumbers())
                 .containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+    @ParameterizedTest(name = "{0}을 가지고 있는지에 대한 결과는 {1}이다.")
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:true", "5:true", "6:true", "7:false"}, delimiter = ':')
+    void 특정_숫자를_갖고_있는지_확인할_수_있다(int number, boolean expected) {
+        int[] numbers = {1, 2, 3, 4, 5, 6};
+        AssertionsForClassTypes.assertThat(new Lotto(numbers).hasNumber(number)).isEqualTo(expected);
     }
 
     @Test

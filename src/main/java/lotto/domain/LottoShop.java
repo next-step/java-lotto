@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class LottoShop {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final int MIN_MONEY_BOUND = 0;
     private static final String INVALID_LOTTO_MONEY_MESSAGE = "적절한 금액이 아닙니다.";
 

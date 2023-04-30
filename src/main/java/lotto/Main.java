@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 import lotto.view.InputView;
@@ -13,5 +14,7 @@ public class Main {
         ResultView.showLottos(lottos);
 
         Lotto lastWinningLotto = Lotto.from(InputView.getLastWinningLotto());
+        LottoResult lottoResult = new LottoResult(lottos, lastWinningLotto);
+        ResultView.showResult(lottoResult);
     }
 }
