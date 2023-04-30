@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import study.lotto.step2.domain.AutoNumberSelector;
 import study.lotto.step2.domain.Lotto;
 import study.lotto.step2.domain.LottoFactory;
-import study.lotto.step2.domain.SoldLottos;
+import study.lotto.step2.domain.Lottos;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,33 +48,33 @@ class LottoSellerTest {
     }
 
     @Test
-    @DisplayName("long 타입 입력으로 로또 판매. SoldLottos 객체 반환")
+    @DisplayName("long 타입 입력으로 로또 판매. Lottos 객체 반환")
     void long_type_sell_lottos() {
         // given
         long amount = 4_999;
         LottoSeller lottoSeller = new LottoSeller(sequenceLottoFactory());
 
         // when
-        SoldLottos soldLottos = lottoSeller.sell(amount);
+        Lottos lottos = lottoSeller.sell(amount);
 
         // then
-        assertThat(soldLottos)
-                .isEqualTo(new SoldLottos(List.of(sequenceLotto(), sequenceLotto(), sequenceLotto(), sequenceLotto())));
+        assertThat(lottos)
+                .isEqualTo(new Lottos(List.of(sequenceLotto(), sequenceLotto(), sequenceLotto(), sequenceLotto())));
     }
 
     @Test
-    @DisplayName("String 타입 입력으로 로또 판매. SoldLottos 객체 반환")
+    @DisplayName("String 타입 입력으로 로또 판매. lottos 객체 반환")
     void String_type_sell_lottos() {
         // given
         String amount = "4999";
         LottoSeller lottoSeller = new LottoSeller(sequenceLottoFactory());
 
         // when
-        SoldLottos soldLottos = lottoSeller.sell(amount);
+        Lottos lottos = lottoSeller.sell(amount);
 
         // then
-        assertThat(soldLottos)
-                .isEqualTo(new SoldLottos(List.of(sequenceLotto(), sequenceLotto(), sequenceLotto(), sequenceLotto())));
+        assertThat(lottos)
+                .isEqualTo(new Lottos(List.of(sequenceLotto(), sequenceLotto(), sequenceLotto(), sequenceLotto())));
     }
 
     private Lotto sequenceLotto() {

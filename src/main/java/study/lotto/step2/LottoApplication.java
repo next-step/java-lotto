@@ -4,17 +4,17 @@ import study.lotto.step2.application.LottoReader;
 import study.lotto.step2.application.LottoSeller;
 import study.lotto.step2.domain.*;
 import study.lotto.step2.presentation.LottoResultsStatistic;
-import study.lotto.step2.presentation.SoldLottosInformation;
+import study.lotto.step2.presentation.LottosInformation;
 
 import static study.lotto.step2.presentation.ConsoleInputUtil.*;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        SoldLottos soldLottos = lottoSeller().sell(askPurchaseAmount());
-        SoldLottosInformation soldLottosInformation = new SoldLottosInformation(soldLottos);
-        soldLottosInformation.printInformation();
+        Lottos lottos = lottoSeller().sell(askPurchaseAmount());
+        LottosInformation lottosInformation = new LottosInformation(lottos);
+        lottosInformation.printInformation();
 
-        LottoResults lottoResults = lottoReader().resultOf(soldLottos);
+        LottoResults lottoResults = lottoReader().resultOf(lottos);
         LottoResultsStatistic lottoResultsStatistic = new LottoResultsStatistic(lottoResults);
         lottoResultsStatistic.printWinningStatistic();
     }

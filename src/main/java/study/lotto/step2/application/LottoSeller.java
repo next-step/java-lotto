@@ -2,7 +2,7 @@ package study.lotto.step2.application;
 
 import study.lotto.step2.domain.Lotto;
 import study.lotto.step2.domain.LottoFactory;
-import study.lotto.step2.domain.SoldLottos;
+import study.lotto.step2.domain.Lottos;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,13 +17,13 @@ public class LottoSeller {
         this.lottoFactory = lottoFactory;
     }
 
-    public SoldLottos sell(String purchaseAmount) {
+    public Lottos sell(String purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
         return sell(Long.parseLong(purchaseAmount));
     }
 
-    public SoldLottos sell(long purchaseAmount) {
-        return new SoldLottos(lottos(numberOfSelling(purchaseAmount)));
+    public Lottos sell(long purchaseAmount) {
+        return new Lottos(lottos(numberOfSelling(purchaseAmount)));
     }
 
     private long numberOfSelling(long purchaseAmount) {

@@ -3,7 +3,7 @@ package study.lotto.step2.application;
 import study.lotto.step2.domain.Lotto;
 import study.lotto.step2.domain.LottoResult;
 import study.lotto.step2.domain.LottoResults;
-import study.lotto.step2.domain.SoldLottos;
+import study.lotto.step2.domain.Lottos;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +26,8 @@ public class LottoReader {
         this.winningNumbers = winningNumbers;
     }
 
-    public LottoResults resultOf(SoldLottos soldLottos) {
-        return resultOf(soldLottos.lottos());
+    public LottoResults resultOf(Lottos lottos) {
+        return resultOf(lottos.lottos());
     }
 
     private LottoResults resultOf(List<Lotto> lottos) {

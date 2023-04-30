@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class SoldLottos {
+public class Lottos {
     private final List<Lotto> lottos;
 
-    public SoldLottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
@@ -33,8 +33,8 @@ public class SoldLottos {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SoldLottos)) return false;
-        SoldLottos that = (SoldLottos) o;
+        if (!(o instanceof Lottos)) return false;
+        Lottos that = (Lottos) o;
         return Objects.equals(lottos, that.lottos);
     }
 

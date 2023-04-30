@@ -7,12 +7,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class SoldLottosTest {
+class LottosTest {
     @Test
     @DisplayName("판매한 로또들의 선택 번호 반환")
     void selected_numbers() {
         // given
-        SoldLottos soldLottos = new SoldLottos(List.of(
+        Lottos lottos = new Lottos(List.of(
                 new Lotto(List.of(1, 2, 3, 4, 5, 6)),
                 new Lotto(List.of(11, 12, 13, 14, 15, 16))
         ));
@@ -23,6 +23,6 @@ class SoldLottosTest {
                 "[11, 12, 13, 14, 15, 16]"
         );
 
-        assertThat(soldLottos.selectedNumbers()).isEqualTo(expectedSelectedNumbers);
+        assertThat(lottos.selectedNumbers()).isEqualTo(expectedSelectedNumbers);
     }
 }
