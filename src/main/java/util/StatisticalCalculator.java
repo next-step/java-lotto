@@ -8,16 +8,21 @@ import java.util.Map;
 
 public class StatisticalCalculator {
 
-  public static Map<Prize, Integer> calculate(List<LottoTicket> lottoTickets, List<Integer> winningNumbers) {
+  public static Map<Prize, Integer> calculate(List<LottoTicket> lottoTickets,
+      List<Integer> winningNumbers) {
     Map<Prize, Integer> prizeCountMap = initializePrizeCountMap();
 
     for (LottoTicket lottoTicket : lottoTickets) {
       int matchedCount = lottoTicket.getMatchCount(winningNumbers);
       Prize prize = Prize.getPrizeForMatches(matchedCount);
-      prizeCountMap.put(prize, prizeCountMap.get(prize) + 1);
+      updateMatchCount(prizeCountMap, prize);
     }
 
     return prizeCountMap;
+  }
+
+  private static void updateMatchCount(Map<Prize, Integer> prizeCountMap, Prize prize) {
+    prizeCountMap.put(prize, prizeCountMap.get(prize) + 1);
   }
 
   private static Map<Prize, Integer> initializePrizeCountMap() {
