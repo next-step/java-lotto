@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.step2.domain.Lotto;
 import study.lotto.step2.domain.LottoResult;
-import study.lotto.step2.domain.LottoResults;
 
 import java.util.List;
 import java.util.stream.Collectors;
