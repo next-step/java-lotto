@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoNumberTest {
 
     @Test
-    @DisplayName("로또 번호 생성 테스트(객체 동등성 테스트)")
+    @DisplayName("로또 번호 생성 테스트(객체 동등성,동일성 테스트)")
     void manualProvideLottoNumber() {
         assertThat(LottoNumber.provideLottoNumber(1)).isEqualTo(new LottoNumber(1));
     }

@@ -26,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
         LottoNumber lottoNumber = lottoNumberRepository.get(requestNumber);
 
-        if (!isCorrectRange(lottoNumber)) {
+        if (Objects.isNull(lottoNumber)) {
             throw new IllegalArgumentException("로또 번호 범위가 아니에요 :(");
         }
 
@@ -80,5 +80,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber o) {
         return this.lottoNumber - o.lottoNumber;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumber + "";
     }
 }
