@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.Money;
+
 public class Printer {
 
   private Printer() {};

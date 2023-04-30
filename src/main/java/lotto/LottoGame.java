@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoTickets;
+import lotto.domain.Money;
+
 public class LottoGame {
 
   private final LottoMachine lottoMachine = new LottoMachine();
