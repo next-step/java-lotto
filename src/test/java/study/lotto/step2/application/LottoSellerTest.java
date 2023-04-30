@@ -38,7 +38,7 @@ class LottoSellerTest {
     @DisplayName("로또 장당 금액(1,000)보다 작은 금액으로 판매 시, IllegalArgumentException 예외 발생")
     void invalid_sell_amount() {
         // given
-        int invalidAmount = 999;
+        long invalidAmount = 999;
         LottoSeller lottoSeller = new LottoSeller(sequenceLottoFactory());
 
         // when, then
@@ -48,10 +48,25 @@ class LottoSellerTest {
     }
 
     @Test
-    @DisplayName("로또 판매 시, SoldLottos 객체 반환")
-    void sell_lottos() {
+    @DisplayName("long 타입 입력으로 로또 판매. SoldLottos 객체 반환")
+    void long_type_sell_lottos() {
         // given
-        int amount = 4_999;
+        long amount = 4_999;
+        LottoSeller lottoSeller = new LottoSeller(sequenceLottoFactory());
+
+        // when
+        SoldLottos soldLottos = lottoSeller.sell(amount);
+
+        // then
+        assertThat(soldLottos)
+                .isEqualTo(new SoldLottos(List.of(sequenceLotto(), sequenceLotto(), sequenceLotto(), sequenceLotto())));
+    }
+
+    @Test
+    @DisplayName("String 타입 입력으로 로또 판매. SoldLottos 객체 반환")
+    void String_type_sell_lottos() {
+        // given
+        String amount = "4999";
         LottoSeller lottoSeller = new LottoSeller(sequenceLottoFactory());
 
         // when

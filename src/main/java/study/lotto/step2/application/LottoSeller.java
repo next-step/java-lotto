@@ -10,7 +10,7 @@ import java.util.stream.LongStream;
 
 public class LottoSeller {
     private static final long LOTTO_PRICE = 1_000L;
-    private static final String INTEGER_REGEX = "^\\d+$\n";
+    private static final String INTEGER_REGEX = "^\\d+$";
     private final LottoFactory lottoFactory;
 
     public LottoSeller(LottoFactory lottoFactory) {
