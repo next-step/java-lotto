@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 class LottoTest {
     @Test
     @DisplayName("선택한 로또 번호가 6개가 아닐 경우, IllegalArgumentException 예외 발생")
-    void invalid_number_of_select_then_throw_IllegalArgumentException() {
+    void invalid_numbers_of_select_then_throw_IllegalArgumentException() {
         // given
         List<Integer> illegalNumbersOfSelect = IntStream.rangeClosed(1, 7)
                 .boxed()
