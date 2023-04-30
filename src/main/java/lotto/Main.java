@@ -11,6 +11,7 @@ public class Main {
 
         Amount manualAmount = InputView.inputManualAmount();
         Amount autoAmount = manualAmount.calculateAutoLottos(lottoAmount);
+
         Lottos manualLottos = InputView.inputManualLottos(manualAmount);
         OutputView.printLottoQuantity(manualAmount, autoAmount);
 

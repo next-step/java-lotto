@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,16 +25,11 @@ public class InputView {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<Lotto> lottos = getLottos(manualAmount);
-
-        return Lottos.createManualLottos(lottos);
-    }
-
-    private static List<Lotto> getLottos(Amount manualAmount) {
-        List<Lotto> lottos = new ArrayList<>();
+        Lottos lottos = new Lottos();
         for (int i = 0; i < manualAmount.getAmount(); i++) {
-            lottos.add(Lotto.createManualLotto(getManualLottoNumbers()));
+            lottos.addLotto(Lotto.createManualLotto(getManualLottoNumbers()));
         }
+
         return lottos;
     }
 
@@ -44,7 +38,7 @@ public class InputView {
         return Lotto.createManualLotto(getManualLottoNumbers());
     }
 
-    private static List<String> getManualLottoNumbers() {
+    public static List<String> getManualLottoNumbers() {
         return List.of(SCANNER.nextLine().split(DELIMITER));
     }
 

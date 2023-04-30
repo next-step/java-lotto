@@ -30,6 +30,22 @@ class LottosTest {
     }
 
     @Test
+    @DisplayName("수동 로또 생성 테스트")
+    void manualLottosTest() {
+        assertThat(manualLottos)
+                .isInstanceOf(Lottos.class);
+    }
+
+    @Test
+    @DisplayName("자동 로또 생성 테스트")
+    void autoLottosTest() {
+        Lottos lottos = new Lottos();
+        assertThat(lottos.createAutoLottos(Amount.from(5)))
+                .isInstanceOf(Lottos.class);
+
+    }
+
+    @Test
     @DisplayName("통계 테스트")
     void findStatisticsTest() {
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");

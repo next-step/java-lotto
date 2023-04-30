@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -7,14 +8,18 @@ import java.util.stream.IntStream;
 public class Lottos {
     private static final int ZERO = 0;
 
-    private final List<Lotto> lottos;
+    private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public static Lottos createManualLottos(List<Lotto> lottos) {
-        return new Lottos(lottos);
+    public Lottos() {
+        this(new ArrayList<>());
+    }
+
+    public void addLotto(Lotto manualLotto) {
+        lottos.add(manualLotto);
     }
 
     public Lottos createAutoLottos(Amount autoAmount) {
