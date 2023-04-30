@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
-    public static final Integer LOTTO_UNIT_PRICE = 1000;
-    private static final Money lOTTO_FEE = Money.wons(LOTTO_UNIT_PRICE);
 
     private final LottoNumberGroup lottoNumberGroup;
 
@@ -24,16 +22,11 @@ public class Lotto {
         return lottoNumberGroup.countMatchingLottoNumber(winnerLottoGroup);
     }
 
-    public int getLottoSize() {
+    public int getLottoSize(){
         return lottoNumberGroup.getLottoNumberGroupSize();
     }
 
-    public static Money getLottoFee() {
-        return lOTTO_FEE;
-    }
-
-    @Override
-    public String toString() {
-        return lottoNumberGroup.toString();
+    public Money getLottoFee() {
+        return Money.wons(1000);
     }
 }
