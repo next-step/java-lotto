@@ -12,7 +12,9 @@ public class ResultView {
     private static final String LOTTO_RANK2_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개\n";
     private static final String LOTTO_WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
 
-    public static void showLottoTickets(LottoTickets lottoTickets) {
+    public static void showLottoTickets(LottoTickets manualLottoTickets, LottoTickets lottoTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoTickets.size(), lottoTickets.size());
+        lottoTickets.getLottoTickets().forEach(ResultView::printLottoTicket);
         lottoTickets.getLottoTickets().forEach(ResultView::printLottoTicket);
     }
 

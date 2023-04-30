@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoGenerator;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,12 +8,17 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int lottoCount = InputView.calculateLottoCount();
+        int totalLottoCount = InputView.calculateLottoCount();
+        int manualLottoCount = InputView.inputManualLottoCount(totalLottoCount);
+        int automaticLottoCount = totalLottoCount - manualLottoCount;
 
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoTickets lottoTickets = lottoGenerator.generate(lottoCount);
-        ResultView.showLottoTickets(lottoTickets);
+        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
+        LottoTickets manualLottoTickets = LottoTickets.of(manualLottoNumbers);
+        LottoTickets lottoTickets = LottoGenerator.generate(automaticLottoCount);
 
+        ResultView.showLottoTickets(manualLottoTickets, lottoTickets);
+
+        // TODO : WinningTickets
         List<Integer> winningNumbers = InputView.getWinningNumbers();
         int bonusNumber = InputView.getBonusNumber();
 
@@ -24,6 +26,6 @@ public class LottoApplication {
         LottoResult lottoResult = lottoGame.getLottoResult();
 
         ResultView.showLottoWinningResult(lottoResult);
-        ResultView.showLottoWinningRate(lottoResult, lottoCount);
+        ResultView.showLottoWinningRate(lottoResult, totalLottoCount);
     }
 }
