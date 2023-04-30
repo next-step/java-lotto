@@ -20,11 +20,19 @@ public class Money {
   }
 
   public static Money toLottoPurchasablePrice(Money userMoney) {
+    if (userMoney.value < LOTTO_PRICE) {
+      throw new IllegalArgumentException(String.format("최소 %d원을 입력해야 로또를 구입할 수 있습니다. 입력한 금액 : %s", LOTTO_PRICE, userMoney));
+    }
+
     return new Money(userMoney.value - (userMoney.value % LOTTO_PRICE));
   }
 
   public Money subtraction(Money target) {
     return new Money(this.value - target.value);
+  }
+
+  public int ticketPurchasableNumber() {
+    return this.value / LOTTO_PRICE;
   }
 
   @Override
