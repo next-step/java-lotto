@@ -20,10 +20,10 @@ class LottoResultTest {
         // when, then
         assertThatThrownBy(() -> LottoResult.of(invalidNumbersOfMatch))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 당첨 번호 갯수는 1 이상 6 이하의 정수: " + invalidNumbersOfMatch);
+                .hasMessage("로또 당첨 번호 갯수는 0 이상 6 이하의 정수: " + invalidNumbersOfMatch);
     }
 
-    @ParameterizedTest(name = "[{index}/6] {displayName}")
+    @ParameterizedTest(name = "[{index}/7] {displayName}")
     @MethodSource("numbersOfMatchAndLottoResult")
     @DisplayName("당첨 번호 갯수로 부터 LottoResult enum 반환")
     void lotto_result(int numbersOfMatch, LottoResult expectedLottoResult) {
@@ -32,6 +32,7 @@ class LottoResultTest {
 
     private static Stream<Arguments> numbersOfMatchAndLottoResult() {
         return Stream.of(
+                Arguments.of(0, LottoResult.NOT_MATCH),
                 Arguments.of(1, LottoResult.MATCH_ONE_NUMBER),
                 Arguments.of(2, LottoResult.MATCH_TWO_NUMBERS),
                 Arguments.of(3, LottoResult.MATCH_THREE_NUMBERS),

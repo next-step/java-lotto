@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public enum LottoResult {
 
+    NOT_MATCH(0, false, 0L),
     MATCH_ONE_NUMBER(1, false, 0L),
     MATCH_TWO_NUMBERS(2, false, 0L),
     MATCH_THREE_NUMBERS(3, true, 5_000L),
@@ -25,6 +26,6 @@ public enum LottoResult {
         return Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult.numberOfMatches == numberOfMatches)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("로또 당첨 번호 갯수는 1 이상 6 이하의 정수: " + numberOfMatches));
+                .orElseThrow(() -> new IllegalArgumentException("로또 당첨 번호 갯수는 0 이상 6 이하의 정수: " + numberOfMatches));
     }
 }
