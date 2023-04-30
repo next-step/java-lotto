@@ -2,6 +2,7 @@ package Calculator;
 
 public class Calculator {
     private String inputString;
+    private int result;
 
     public Calculator(String inputString) {
         if (inputString == null || inputString.trim().isEmpty()) {
@@ -11,22 +12,25 @@ public class Calculator {
         this.inputString = inputString;
     }
 
-    public int calculate() {
+    public int getResult() {
+        return result;
+    }
+
+    public void calculate() {
         String[] splitInputString = this.inputString.split(" ");
 
-        int result = Integer.parseInt(splitInputString[0]);
+        this.result = Integer.parseInt(splitInputString[0]);
 
         for (int i = 1; i < splitInputString.length; i += 2) {
 
-            int operand1 = result;
+            int operand1 = this.result;
             int operand2 = Integer.parseInt(splitInputString[i + 1]);
             String curOperator = splitInputString[i];
 
             Operator operator = new Operator(curOperator);
-            result += operator.calculateProcess(operand1, operand2);
+            this.result = operator.calculateProcess(operand1, operand2);
         }
 
-        return result;
     }
 
 }

@@ -15,15 +15,15 @@ class CalculatorTest {
     void allTest() {
         //given
         Calculator calculator = new Calculator("2 + 3 * 4 / 2");
-
+        calculator.calculate();
         //when
-        int actual = calculator.calculate();
+        int actual = calculator.getResult();
 
         //then
         int expected = 10;
         assertEquals(expected, actual);
     }
-    
+
     @ParameterizedTest(name = "\"{0}\" 입력 시 IllegalArgumentException throw")
     @NullAndEmptySource
     void inputIsNulloreEmpty(String inputString) {
