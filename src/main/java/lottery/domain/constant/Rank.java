@@ -5,6 +5,8 @@ public enum Rank {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
+
+    MISS(0, 0)
     ;
 
     private int countOfMatch;

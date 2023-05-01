@@ -35,14 +35,6 @@ public class WinningStatisticsTest {
     }
 
     @Test
-    @DisplayName("순위에 해당하는 모든 키값이 존재하지 않는 맵 일 경우 익셉션을 발생한다.")
-    void createObjErrorTest() {
-        assertThatThrownBy(() -> new WinningStatistics(emptyLotteries))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨을 판별 할 수 있는 키 정보가 없습니다.");
-    }
-
-    @Test
     @DisplayName("1등 부터 4등 에 당첨된 로또 갯수를 반환한다.")
     void numberOfRanksTest() {
         WinningStatistics winningStatistics = new WinningStatistics(lotteriesByRank);
