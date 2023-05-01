@@ -14,6 +14,9 @@ public class LotteriesTest {
 
     private static final Lotteries FIVE_LOTTERIES = new Lotteries(FIVE_PLAYS);
 
+    private static final LotteryDummyData LOTTERY_DUMMY_DATA = new LotteryDummyData();
+
+
     @ParameterizedTest(name = "로또 플레이 횟수 입력에 맞춰 로또를 생성한다.")
     @ValueSource(ints = {0,2})
     void lotteryCreateByPlaysTest(int plays) {
@@ -27,4 +30,5 @@ public class LotteriesTest {
                 .add(new SixLotteryNumbers()))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
+
 }
