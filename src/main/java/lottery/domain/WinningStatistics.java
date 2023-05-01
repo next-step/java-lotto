@@ -7,20 +7,17 @@ import lottery.domain.constant.Rank;
 
 public class WinningStatistics {
 
-    private static final String NOT_CONTAINS_ALL_KEYS = "당첨을 판별 할 수 있는 키 정보가 없습니다.";
 
     private final Map<Rank, Integer> lotteriesByRank;
 
     public WinningStatistics(Map<Rank, Integer> lotteriesByRank) {
-        if(notContainsAllEssentialKeys(lotteriesByRank)) {
-            throw new IllegalArgumentException(NOT_CONTAINS_ALL_KEYS);
-        }
+        fillEssentialKeys(lotteriesByRank);
         this.lotteriesByRank = lotteriesByRank;
     }
 
-    private boolean notContainsAllEssentialKeys(Map<Rank, Integer> lotteriesByRank) {
-        return !stream(Rank.values())
-                .allMatch(lotteriesByRank::containsKey);
+    private void fillEssentialKeys(Map<Rank, Integer> lotteriesByRank) {
+        stream(Rank.values())
+                .forEach(rank -> lotteriesByRank.putIfAbsent(rank, 0));
     }
 
     public int getWinningNumbers(Rank rank) {

@@ -2,7 +2,10 @@ package lottery.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.util.Map;
+import lottery.domain.constant.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,4 +34,18 @@ public class LotteriesTest {
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
+    @Test
+    @DisplayName("총 1등부터 4등까지 당첨이력이 있는 Map 객체를 반환한다.")
+    void dividedLotteriesByRankTest() {
+        Map<Rank, Integer> dividedLotteries = LOTTERY_DUMMY_DATA
+                .lotteriesDummyObj()
+                .getDividedLotteriesByRank();
+
+        assertAll(
+                () -> assertThat(dividedLotteries.get(Rank.FIRST)).isEqualTo(1),
+                () -> assertThat(dividedLotteries.get(Rank.SECOND)).isEqualTo(1),
+                () -> assertThat(dividedLotteries.get(Rank.THIRD)).isEqualTo(1),
+                () -> assertThat(dividedLotteries.get(Rank.FOURTH)).isEqualTo(1)
+        );
+    }
 }
