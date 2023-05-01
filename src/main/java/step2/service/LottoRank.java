@@ -23,6 +23,10 @@ public enum LottoRank {
     }
 
     public static LottoRank getLottoNumber(Integer matchingCount) {
+        if (matchingCount == THIRD.countOfMatch) {
+            return THIRD;
+        }
+
         for (LottoRank lottoRank : LottoRank.values()) {
             if (lottoRank.countOfMatch == matchingCount) {
                 return lottoRank;
