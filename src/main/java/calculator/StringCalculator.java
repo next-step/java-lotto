@@ -73,6 +73,10 @@ public class StringCalculator {
         }
     }
 
+    private static boolean isZero(String value) {
+        return ZERO == Integer.parseInt(value);
+    }
+
     public enum Operation {
         PLUS("+") {
             @Override
@@ -95,6 +99,9 @@ public class StringCalculator {
         DIVIDE("/") {
             @Override
             String operate(String x, String y) {
+                if (isZero(y)) {
+                    throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+                }
                 return new BigDecimal(x).divide(new BigDecimal(y), RoundingMode.FLOOR).toString();
             }
         };

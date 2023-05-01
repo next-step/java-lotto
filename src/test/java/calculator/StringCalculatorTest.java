@@ -72,4 +72,12 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.calculate("11 / 2")).isEqualTo("5");
     }
 
+    @DisplayName("나눗셈 사칙연산시 0으로 나누려는 경우 IllegalArgumentException 예외가 발생하는지 확인")
+    @Test
+    void divide_by_zero() {
+        assertThatThrownBy(() -> StringCalculator.calculate("4.7 / 0"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("0으로 나눌 수 없습니다.");
+    }
+
 }
