@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRewards;
 import lotto.view.InputView;
@@ -21,6 +22,7 @@ public class Main {
         ResultView.printAllLottoNumbers(lottoNumbersList);
 
         LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.inputWinningLottoNumbers());
+        LottoNumber bonusLottoNumber = Lotto.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLottoNumbers));
 
         LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers);
         ResultView.printWinningStatics(lottoRewards, purchasePrice);

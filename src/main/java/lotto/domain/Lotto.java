@@ -38,6 +38,10 @@ public class Lotto {
         return new LottoNumbers(numbers);
     }
 
+    public static LottoNumber bonusLottoNumber(int bonusLottoNumber) {
+        return new LottoNumber(bonusLottoNumber);
+    }
+
     public static LottoRewards reward(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
         LottoRewards lottoRewards = new LottoRewards();
 
