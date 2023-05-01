@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class OutputView {
 
+    private static final int EARNING_RATE_STANDARD = 1;
+
     private OutputView() {
     }
 
@@ -57,7 +59,7 @@ public class OutputView {
 
     private static void outputGrossRateOfEarnings(LottoStatisticsDto dto) {
         double grossRateOfEarnings = dto.getGrossRateOfEarnings();
-        if (grossRateOfEarnings >= 1) {
+        if (grossRateOfEarnings >= EARNING_RATE_STANDARD) {
             System.out.printf("총 수익률은 %.2f입니다.", grossRateOfEarnings);
             return;
         }
