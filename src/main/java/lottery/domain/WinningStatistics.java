@@ -4,7 +4,6 @@ import static java.util.Arrays.stream;
 import static lottery.domain.constant.LotteryNumberRule.LOTTERY_PRICE;
 
 import java.util.Map;
-import lottery.domain.constant.LotteryNumberRule;
 import lottery.domain.constant.Rank;
 
 public class WinningStatistics {
