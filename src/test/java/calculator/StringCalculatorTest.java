@@ -48,4 +48,10 @@ public class StringCalculatorTest {
                 .hasMessageContaining("사칙연산 기호 이외의 값은 입력할 수 없습니다.");
     }
 
+    @DisplayName("덧셈 사칙연산 기호가 포함 된 입력된 문자열이 덧셈 사칙연산 결과가 반환되는지 확인")
+    @Test
+    void plus() {
+        assertThat(StringCalculator.calculate("0.1 + 0.2")).isEqualTo("0.3");
+    }
+
 }

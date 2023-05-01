@@ -1,11 +1,13 @@
 package calculator;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
     private static final int ZERO = 0;
     public static final String DEFAULT_DELIMITER = " ";
-    private static final Pattern NUMERIC_REGEX_PATTERN = Pattern.compile("-?[0-9]+");
+    private static final Pattern NUMERIC_REGEX_PATTERN = Pattern.compile("^[+-]?\\d*(\\.?\\d*)$");
     private static final Pattern OPERATION_SYMBOL_REGEX_PATTERN = Pattern.compile("[+\\-*/]");
 
     public static String[] split(String textInput) {
@@ -17,6 +19,19 @@ public class StringCalculator {
         }
 
         return values;
+    }
+
+    public static String calculate(String textInput) {
+        String[] values = split(textInput);
+
+        String result = values[0];
+
+        for (int i = 1; i < values.length - 1; i += 2) {
+            String symbol = values[i];
+            result = Operation.findBySymbol(symbol).operate(result, values[i + 1]);
+        }
+
+        return result;
     }
 
     private static void isBlank(String textInput) {
@@ -57,4 +72,29 @@ public class StringCalculator {
         }
     }
 
+    public enum Operation {
+        PLUS("+") {
+            @Override
+            String operate(String x, String y) {
+                return new BigDecimal(x).add(new BigDecimal(y)).toString();
+            }
+        };
+
+        private final String symbol;
+
+        Operation(String symbol) {
+            this.symbol = symbol;
+        }
+
+        abstract String operate(String x, String y);
+
+        public static Operation findBySymbol(String symbol) {
+            return Arrays.stream(Operation.values())
+                    .filter(s -> s.symbol.equals(symbol))
+                    .findAny()
+                    .orElseThrow(() -> new IllegalArgumentException("입력한 사칙연산에 해당하는 code 가 없습니다."));
+        }
+    }
+
 }
+
