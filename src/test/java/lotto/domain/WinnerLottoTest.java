@@ -15,7 +15,7 @@ class WinnerLottoTest {
     @DisplayName("당첨 로또 발급  테스트")
     public void winnerLotto() {
         List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(new LottoNumberGroup(), givenLottoNumberList);
+        WinnerLotto winnerLotto = WinnerLotto.of(new LottoNumbers(), givenLottoNumberList);
 
         List<LottoNumber> result = new ArrayList<>();
 
@@ -26,7 +26,7 @@ class WinnerLottoTest {
 
         assertAll(
                 () -> assertThat(winnerLotto.winnerLottoSize()).isEqualTo(6),
-                () -> assertThat(winnerLotto).isEqualTo(new WinnerLotto(new LottoNumberGroup(result)))
+                () -> assertThat(winnerLotto).isEqualTo(new WinnerLotto(new LottoNumbers(result)))
         );
 
     }
@@ -36,10 +36,10 @@ class WinnerLottoTest {
     @DisplayName("담청 로또와 발급한 로또 일치 테스트 ")
     public void winnerLottoCount() {
         List<Integer> givenWinnerLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(new LottoNumberGroup(), givenWinnerLottoNumberList);
+        WinnerLotto winnerLotto = WinnerLotto.of(new LottoNumbers(), givenWinnerLottoNumberList);
 
         List<Integer> requestLottoNumberList = List.of(1, 2, 7, 8, 9, 10);
-        Lotto lotto = Lotto.of(new LottoNumberGroup(), requestLottoNumberList);
+        Lotto lotto = Lotto.of(new LottoNumbers(), requestLottoNumberList);
 
         assertThat(winnerLotto.findMatchingCount(lotto)).isEqualTo(2);
 

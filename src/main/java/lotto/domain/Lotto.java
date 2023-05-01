@@ -6,26 +6,26 @@ public class Lotto {
     public static final Integer LOTTO_UNIT_PRICE = 1000;
     private static final Money lOTTO_FEE = Money.wons(LOTTO_UNIT_PRICE);
 
-    private final LottoNumberGroup lottoNumberGroup;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(LottoNumberGroup lottoNumberGroup) {
-        this.lottoNumberGroup = lottoNumberGroup;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto from(LottoNumberGroup lottoNumberGroup) {
-        return new Lotto(lottoNumberGroup.aggregateNonDuplicateLottoNumber());
+    public static Lotto from(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers.aggregateNonDuplicateLottoNumber());
     }
 
-    public static Lotto of(LottoNumberGroup lottoNumberGroup, List<Integer> lottoNumberList) {
-        return new Lotto(lottoNumberGroup.initializedManualLottoNumber(lottoNumberList));
+    public static Lotto of(LottoNumbers lottoNumbers, List<Integer> lottoNumberList) {
+        return new Lotto(lottoNumbers.initializedManualLottoNumber(lottoNumberList));
     }
 
-    public int countMatching(LottoNumberGroup winnerLottoGroup) {
-        return lottoNumberGroup.countMatchingLottoNumber(winnerLottoGroup);
+    public int countMatching(LottoNumbers winnerLottoGroup) {
+        return lottoNumbers.countMatchingLottoNumber(winnerLottoGroup);
     }
 
     public int getLottoSize() {
-        return lottoNumberGroup.getLottoNumberGroupSize();
+        return lottoNumbers.getLottoNumberGroupSize();
     }
 
     public static Money getLottoFee() {
@@ -34,6 +34,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumberGroup.toString();
+        return lottoNumbers.toString();
     }
 }

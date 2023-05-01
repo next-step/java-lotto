@@ -10,7 +10,7 @@ public class LottoMachine {
 
         while (requestMoney.isGreaterThanZero()) {
             requestMoney = calculateCurrentMoney(requestMoney);
-            Lotto lotto = Lotto.from(new LottoNumberGroup());
+            Lotto lotto = Lotto.from(new LottoNumbers());
             lottoList.add(lotto);
         }
 

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumberGroup;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.WinnerLotto;
 
@@ -28,7 +28,7 @@ public class InputView {
         validEmptyString(inputWinnerLottoNumber);
         validNonNumeric(inputWinnerLottoNumber);
 
-        return WinnerLotto.of(new LottoNumberGroup(), toIntList(inputWinnerLottoNumber));
+        return WinnerLotto.of(new LottoNumbers(), toIntList(inputWinnerLottoNumber));
     }
 
     private static List<Integer> toIntList(String winnerLottoNumber) {
