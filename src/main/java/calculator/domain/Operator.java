@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator implements ExpressionElement {
@@ -16,23 +17,14 @@ public enum Operator implements ExpressionElement {
         this.expression = expression;
     }
 
-    public static Operator find(String operator) {
-        if (operator.equals(PLUS.symbol)) {
-            return PLUS;
-        }
-        if (operator.equals(MINUS.symbol)) {
-            return MINUS;
-        }
-        if (operator.equals(MULTIPLY.symbol)) {
-            return MULTIPLY;
-        }
-        if (operator.equals(DIVIDE.symbol)) {
-            return DIVIDE;
-        }
-        throw new IllegalArgumentException("해당 값과 일치하는 연산자를 찾을 수 없습니다.");
+    static Operator find(String symbol) {
+        return Arrays.stream(Operator.values())
+                .filter(operator -> operator.symbol.equals(symbol))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("해당 문자와 일치하는 연산자를 찾을 수 없습니다."));
     }
 
-    public Number calculate(Operand preOperand, Operand postOperand) {
+    Number calculate(Operand preOperand, Operand postOperand) {
         int preValue = preOperand.value();
         int postValue = postOperand.value();
         Integer result = expression.apply(preValue, postValue);
