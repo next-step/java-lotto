@@ -30,7 +30,14 @@ public class LottoTest {
     @DisplayName("lotto객체의 사이즈 확인")
     public void lottoSizeCheck() {
         assertThatIllegalStateException().isThrownBy(() ->
-            new Lotto("1, 2, 3, 41, 42")
+                new Lotto("1, 2, 3, 41, 42")
         );
+    }
+
+    @Test
+    @DisplayName("로또 수익률 계산")
+    public void returnRate() {
+        LottoTickets lottoTickets = new LottoTickets(List.of("1, 2, 3, 41, 42, 43"), "1, 2, 3, 4, 5, 6");
+        assertThat(lottoTickets.calculateReturn()).isEqualTo(5);
     }
 }
