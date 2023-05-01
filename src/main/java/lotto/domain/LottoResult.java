@@ -1,11 +1,12 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidLottoMatchingCountException;
+
 import java.util.Arrays;
 
 public class LottoResult {
     private static final int MINIMUM_COUNT_BOUND = 0;
     private static final int MINIMUM_WINNING_COUNT = 3;
-    private static final String INVALID_COUNT_ERROR_MESSAGE = "적절한 입력이 아닙니다.";
 
     private final Lottos lottos;
     private final Lotto winningLotto;
@@ -16,9 +17,7 @@ public class LottoResult {
     }
 
     public long getMatchingLottosCount(int sameNumberCount) {
-        if (!isValidCount(sameNumberCount)) {
-            throw new IllegalArgumentException(INVALID_COUNT_ERROR_MESSAGE);
-        }
+        checkCountRange(sameNumberCount);
 
         return lottos.getLottoList()
                 .stream()
@@ -27,9 +26,13 @@ public class LottoResult {
                 .count();
     }
 
-    private boolean isValidCount(int count) {
-        return count >= MINIMUM_COUNT_BOUND &&
-                count <= Lotto.LOTTO_NUMBER_SIZE;
+    private void checkCountRange(int count) {
+        if (count >= MINIMUM_COUNT_BOUND &&
+                count <= Lotto.LOTTO_NUMBER_SIZE) {
+            return;
+        }
+
+        throw new InvalidLottoMatchingCountException("입력한 갯수 : ", String.valueOf(count));
     }
 
     private long getMatchingLottoSameNumberCount(Lotto lotto) {

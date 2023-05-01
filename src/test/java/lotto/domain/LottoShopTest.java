@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidLottoMoneyException;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,6 +17,6 @@ public class LottoShopTest {
 
     @Test
     void 로또를_구매할_떄_0_미만의_돈을_입력하면_예외가_발생한다() {
-        assertThatThrownBy(() -> LottoShop.sellLotto(-2000)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoShop.sellLotto(-2000)).isInstanceOf(InvalidLottoMoneyException.class);
     }
 }

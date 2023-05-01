@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.exception.DuplicatedLottoNumberExcetion;
+import lotto.domain.exception.InvalidLottoNumberException;
+import lotto.domain.exception.InvalidLottoParsingNumberException;
+import lotto.domain.exception.InvalidLottoSizeException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,14 +13,11 @@ public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final String INVALID_LOTTO_NUMBERS_MESSAGE = "적절한 로또 입력이 아닙니다.";
 
     private final int[] lottoNumbers;
 
     public Lotto(int[] lottoNumbers) {
-        if (!isValidLottoNumbers(lottoNumbers)) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_MESSAGE);
-        }
+        checkLottoNumbers(lottoNumbers);
 
         this.lottoNumbers = Arrays.stream(lottoNumbers)
                 .sorted()
@@ -31,20 +33,27 @@ public class Lotto {
                 .anyMatch(it -> it == number);
     }
 
-    private boolean isValidLottoNumbers(int[] lottoNumbers) {
+    private void checkLottoNumbers(int[] lottoNumbers) {
         if (lottoNumbers.length != LOTTO_NUMBER_SIZE) {
-            return false;
+            throw new InvalidLottoSizeException(
+                    "입력한 갯수 : ",
+                    String.valueOf(lottoNumbers.length)
+            );
         }
 
         if (!isBetweenMinAndMax(lottoNumbers)) {
-            return false;
+            throw new InvalidLottoNumberException(
+                    "입력한 숫자 : ",
+                    Arrays.toString(lottoNumbers)
+            );
         }
 
         if (!hasUniqueNumbers(lottoNumbers)) {
-            return false;
+            throw new DuplicatedLottoNumberExcetion(
+                    "입력한 숫자 : ",
+                    Arrays.toString(lottoNumbers)
+            );
         }
-
-        return true;
     }
 
     private boolean isBetweenMinAndMax(int[] lottoNumbers) {
@@ -79,7 +88,7 @@ public class Lotto {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_MESSAGE);
+            throw new InvalidLottoParsingNumberException(exception, "입력한 문자열 : ", input);
         }
     }
 }

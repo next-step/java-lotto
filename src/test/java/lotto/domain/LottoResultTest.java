@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.exception.InvalidLottoMatchingCountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -35,6 +36,6 @@ public class LottoResultTest {
     @ParameterizedTest(name = "{0}은 잘못된 당첨 번호 갯수이므로 예외가 발생한다.")
     @ValueSource(ints = {-1, 7})
     void 잘못된_당첨_번호_갯수를_입력하면_예외가_발생한다(int input) {
-        assertThatThrownBy(() -> lottoResult.getMatchingLottosCount(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> lottoResult.getMatchingLottosCount(input)).isInstanceOf(InvalidLottoMatchingCountException.class);
     }
 }
