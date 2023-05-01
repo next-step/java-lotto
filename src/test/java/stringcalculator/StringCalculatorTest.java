@@ -66,4 +66,14 @@ public class StringCalculatorTest {
         Assertions.assertThat(result).isEqualTo(answer);
     }
 
+    @DisplayName("사칙 연산이 아닌 문자가 들어간 경우 에러를 발생한다.")
+    @Test
+    public void calculateString_ElseStringOperator_ThrowException() {
+        String input = "2 + 3 ( 4 / 2";
+
+        StringCalculator stringCalculator = new StringCalculator();
+        Assertions.assertThatThrownBy(() -> stringCalculator.calculateString(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
