@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.domain.exception.InvalidLottoMoneyException;
 
 public class LottoShop {
-    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1_000;
     private static final int MIN_MONEY_BOUND = 0;
 
     public static Lottos sellLotto(int money) {
