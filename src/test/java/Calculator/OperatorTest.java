@@ -1,5 +1,6 @@
 package Calculator;
 
+import Calculator.Operator.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +12,8 @@ public class OperatorTest {
     @DisplayName("덧셈")
     void plus() {
         //given //when
-        Operator operator = new Operator("+");
-        int actual = operator.add(3, 5);
+        Operator add = new Add();
+        int actual = add.operate(3, 5);
 
         //then
         int expected = 8;
@@ -23,8 +24,8 @@ public class OperatorTest {
     @DisplayName("뺄셈")
     void minus() {
         //given //when
-        Operator operator = new Operator("-");
-        int actual = operator.minus(3, 5);
+        Operator minus = new Minus();
+        int actual = minus.operate(3, 5);
 
         //then
         int expected = -2;
@@ -35,8 +36,8 @@ public class OperatorTest {
     @DisplayName("곱셈")
     void multiply() {
         //given //when
-        Operator operator = new Operator("*");
-        int actual = operator.multiply(3, 5);
+        Operator multiply = new Multiply();
+        int actual = multiply.operate(3, 5);
 
         //then
         int expected = 15;
@@ -47,27 +48,12 @@ public class OperatorTest {
     @DisplayName("나눗셈")
     void divide() {
         //given //when
-        Operator operator = new Operator("/");
-        int actual = operator.divide(4, 2);
+        Operator divide = new Divide();
+        int actual = divide.operate(4, 2);
 
         //then
         int expected = 2;
         assertEquals(expected, actual);
-    }
-
-    @Test
-    @DisplayName("사칙연산 기호가 아닌 경우 IllegalArgumentException throw")
-    void notOperator() {
-        //given
-        Operator operator = new Operator("$");
-
-        //when
-        Exception actual = assertThrows(IllegalArgumentException.class, () -> {
-            operator.calculateProcess(3, 5);
-        });
-
-        //then
-        assertEquals(operator.getOperator() + "는 사칙연산 기호가 아닙니다: ", actual.getMessage());
     }
 }
 

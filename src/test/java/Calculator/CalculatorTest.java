@@ -1,5 +1,7 @@
 package Calculator;
 
+import Calculator.Operator.Operator;
+import Calculator.Operator.OperatorProcess;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,4 +38,18 @@ class CalculatorTest {
         assertEquals("입력 값이 null이거나 빈 공백 문자입니다.", actual.getMessage());
     }
 
+    @Test
+    @DisplayName("사칙연산 기호가 아닌 경우 IllegalArgumentException throw")
+    void notOperator() {
+        //given
+        OperatorProcess operatorProcess = new OperatorProcess(3, 5,"$");
+
+        //when
+        Exception actual = assertThrows(IllegalArgumentException.class, () -> {
+            operatorProcess.calculateProcess();
+        });
+
+        //then
+        assertEquals("$는 사칙연산 기호가 아닙니다: ", actual.getMessage());
+    }
 }
