@@ -10,7 +10,7 @@ public class InputView {
   private InputView() {
   }
 
-  public static InputValue input() {
+  public static InputValue inputValue() {
     String input = sc.nextLine();
 
     return new InputValue(input);
