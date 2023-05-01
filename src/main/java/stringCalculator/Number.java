@@ -8,6 +8,7 @@ public class Number {
   public Number(int value) {
     this.value = value;
   }
+
   public Number(String value) {
     this(Integer.parseInt(value));
   }
