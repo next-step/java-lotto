@@ -46,7 +46,7 @@ public class OutputView {
 
     private static void outputStatisticsStage(Map<LottoRank, Integer> matchingCounts,
                                               LottoRank rank) {
-        if (rank == LottoRank.SECOND) {
+        if (rank.isSecond()) {
             System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개%n",
                     rank.getMatchCount(), rank.getPrizeMoney(), matchingCounts.get(rank));
             return;
