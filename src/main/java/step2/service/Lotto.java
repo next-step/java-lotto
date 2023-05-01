@@ -34,7 +34,7 @@ public class Lotto {
 
     private Integer countMatchingNumbers(Integer countWinNumber, Integer winNum) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.equals(winNum)) {
+            if (lottoNumber.equalsWinNum(winNum)) {
                 countWinNumber++;
             }
         }
