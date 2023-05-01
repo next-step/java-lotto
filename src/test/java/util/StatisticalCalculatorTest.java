@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import domain.LottoTicket;
 import domain.Prize;
-import domain.RandomNumberGenerator;
-import domain.RandomNumberStrategy;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -23,11 +21,11 @@ class StatisticalCalculatorTest {
 
     List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
-    Map<Prize, Integer> prizeCountMap = StatisticalCalculator.calculate(lottoTickets, winningNumbers);
+    Map<Prize, Long> prizeCountMap = StatisticalCalculator.calculate(lottoTickets, winningNumbers);
 
-    assertThat(prizeCountMap.get(Prize.MATCH_6_TIME)).isEqualTo(1);
-    assertThat(prizeCountMap.get(Prize.MATCH_5_TIME)).isEqualTo(1);
-    assertThat(prizeCountMap.get(Prize.MATCH_4_TIME)).isEqualTo(1);
+    assertThat(prizeCountMap.get(Prize.FIRST)).isEqualTo(1);
+    assertThat(prizeCountMap.get(Prize.SECOND)).isEqualTo(1);
+    assertThat(prizeCountMap.get(Prize.THIRD)).isEqualTo(1);
   }
 
   @Test
@@ -39,9 +37,9 @@ class StatisticalCalculatorTest {
 
     List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
-    Map<Prize, Integer> prizeCountMap = StatisticalCalculator.calculate(lottoTickets, winningNumbers);
+    Map<Prize, Long> prizeCountMap = StatisticalCalculator.calculate(lottoTickets, winningNumbers);
 
-    int earnMoney = StatisticalCalculator.calculateEarnMoney(prizeCountMap);
+    long earnMoney = StatisticalCalculator.calculateEarnMoney(prizeCountMap);
 
     assertThat(earnMoney).isEqualTo(55000);
   }

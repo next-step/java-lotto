@@ -14,7 +14,7 @@ class LottoTicketTest {
     List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 7, 8, 9);
 
     LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-    int matchCount = lottoTicket.getMatchCount(winningNumbers);
+    int matchCount = lottoTicket.findMatchingCount(winningNumbers);
 
     assertThat(matchCount).isEqualTo(3);
   }
@@ -25,7 +25,7 @@ class LottoTicketTest {
     List<Integer> winningNumbers = Arrays.asList(7, 8, 9, 10, 11, 12);
 
     LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-    int matchCount = lottoTicket.getMatchCount(winningNumbers);
+    int matchCount = lottoTicket.findMatchingCount(winningNumbers);
 
     assertThat(matchCount).isEqualTo(0);
   }

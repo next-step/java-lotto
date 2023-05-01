@@ -9,8 +9,7 @@ class LottoMachineTest {
 
   @Test
   public void 투자한_금액에_맞게_티켓을_만드는지_검증() {
-    RandomNumberStrategy randomNumberStrategy = new RandomNumberGenerator();
-    LottoMachine lottoMachine = new LottoMachine(randomNumberStrategy);
+    LottoMachine lottoMachine = new LottoMachine();
 
     int investMoney = 5000;
     List<LottoTicket> lottoTickets = lottoMachine.makeLottoTickets(investMoney);
@@ -20,8 +19,7 @@ class LottoMachineTest {
 
   @Test
   public void 만들어진_티켓목록들이_모두_6개숫자를_가지는지_검증() {
-    RandomNumberStrategy randomNumberStrategy = new RandomNumberGenerator();
-    LottoMachine lottoMachine = new LottoMachine(randomNumberStrategy);
+    LottoMachine lottoMachine = new LottoMachine();
 
     int investMoney = 2000;
     List<LottoTicket> lottoTickets = lottoMachine.makeLottoTickets(investMoney);
