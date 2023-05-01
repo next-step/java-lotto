@@ -9,7 +9,7 @@ public class RandomNumberGenerator {
 
   private static final Random RANDOM = new Random();
 
-  public List<Integer> generate() {
+  public static List<Integer> generate() {
     List<Integer> numbers = new ArrayList<>();
     while (numbers.size() < 6) {
       int number = RANDOM.nextInt(45) + 1;
