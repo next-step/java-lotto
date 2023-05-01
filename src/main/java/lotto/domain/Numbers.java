@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Numbers {
+
+    public static final String SPLIT_DELIMITER = ", ";
     private final String REGEX = "\\d+";
     private final List<Integer> numbers;
 
     public Numbers(String inputString) {
-        this(new ArrayList<>());
-        String[] strNumbers = inputString.split(LottoRule.SPLIT_DELIMITER);
+        numbers = new ArrayList<>();
+        String[] strNumbers = inputString.split(SPLIT_DELIMITER);
         for (String strNumber : strNumbers) {
             validateNumber(strNumber);
             numbers.add(Integer.valueOf(strNumber));
@@ -24,12 +26,13 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    public static Numbers auto() {
-        List<Integer> autoNumbers = new ArrayList<>(LottoRule.NUMBER_RANGE);
-        Collections.shuffle(autoNumbers);
-        autoNumbers = autoNumbers.subList(0, LottoRule.CHOICE_COUNT);
-        Collections.sort(autoNumbers);
-        return new Numbers(autoNumbers);
+    private void validateNumber(String strNumber) {
+        if (!strNumber.matches(REGEX)) {
+            throw new IllegalArgumentException("숫자로만 구성되어 있지 않은 값이 있습니다.");
+        }
+        if (!LottoRule.NUMBER_RANGE.contains(Integer.valueOf(strNumber))) {
+            throw new IllegalArgumentException("입력된 숫자 범위가 올바르지 않습니다.");
+        }
     }
 
     private void validateCount() {
@@ -38,13 +41,12 @@ public class Numbers {
         }
     }
 
-    private void validateNumber(String strNumber) {
-        if (!strNumber.matches(REGEX)) {
-            throw new IllegalArgumentException("숫자로만 구성되어 있지 않은 값이 있습니다.");
-        }
-        if (!LottoRule.NUMBER_RANGE.contains(Integer.valueOf(strNumber))) {
-            throw new IllegalArgumentException("입력된 숫자 범위가 올바르지 않습니다.");
-        }
+    public static Numbers auto() {
+        List<Integer> autoNumbers = new ArrayList<>(LottoRule.NUMBER_RANGE);
+        Collections.shuffle(autoNumbers);
+        autoNumbers = autoNumbers.subList(0, LottoRule.CHOICE_COUNT);
+        Collections.sort(autoNumbers);
+        return new Numbers(autoNumbers);
     }
 
     public Integer find(int index) {

@@ -34,8 +34,8 @@ public class MyLotto {
         }
     }
 
-    private void checkMatchingNumber(Integer number) {
-        if (numbers.contains(number)) {
+    private void checkMatchingNumber(Integer winNumber) {
+        if (numbers.contains(winNumber)) {
             matchingCount++;
         }
     }
