@@ -24,12 +24,25 @@ public class Lotto {
         }
     }
 
-    public Integer countWinNum(List<LottoNumber> winNumbers) {
+    public LottoRank countWinNum(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
         Integer countWinNumber = 0;
         for (LottoNumber winNum : winNumbers) {
             countWinNumber = countMatchingNumbers(countWinNumber, winNum);
         }
-        return countWinNumber;
+
+        if (isSeconds(countWinNumber, bonusNumber)) {
+            return LottoRank.SECOND;
+        }
+        return LottoRank.getLottoNumber(countWinNumber);
+    }
+
+    private boolean isSeconds(Integer countWinNumber, LottoNumber bonusNumber) {
+        if (LottoRank.isSeconds(countWinNumber)) {
+            return false;
+        }
+
+        return lottoNumbers.stream()
+                .anyMatch(bonusNumber::equals);
     }
 
     private Integer countMatchingNumbers(Integer countWinNumber, LottoNumber winNum) {

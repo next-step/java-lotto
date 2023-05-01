@@ -12,24 +12,17 @@ public class CountOfWinners {
 
     private final Map<LottoRank, Integer> winnerResults;
 
-    public CountOfWinners(List<Integer> matchingCounts) {
+    public CountOfWinners(List<LottoRank> matchingLottoRank) {
         winnerResults = new HashMap<>();
 
         for (LottoRank lottoRank : LottoRank.values()) {
             winnerResults.put(lottoRank, INIT_WINNER_COUNT);
         }
 
-        for (Integer matchingCount : matchingCounts) {
-            countMatchedWinners(matchingCount);
+        for (LottoRank lottoRank : matchingLottoRank) {
+            Integer prevValue = winnerResults.get(lottoRank);
+            winnerResults.put(lottoRank, ++prevValue);
         }
-    }
-
-    private void countMatchedWinners(Integer matchingCount) {
-        LottoRank lottoNumber = LottoRank.getLottoNumber(matchingCount);
-        if (LottoRank.isRemain(lottoNumber)) {
-            return;
-        }
-        winnerResults.compute(lottoNumber, (k,v) -> v + 1);
     }
 
     public double calculateRateOfReturn(int numOfLottoTicket) {

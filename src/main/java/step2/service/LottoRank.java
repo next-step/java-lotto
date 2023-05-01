@@ -39,11 +39,7 @@ public enum LottoRank {
         return sumOfAllRanks / (numOfLottoTicket * Lotto.PRICE_PER_LOTTO);
     }
 
-    public static boolean isRemain(LottoRank lottoNumber) {
-        return lottoNumber == REMAIN;
-    }
-
-    public static LottoRank getBonusLottoRank() {
-        return SECOND;
+    public static boolean isSeconds(Integer countWinNumber) {
+        return countWinNumber != SECOND.countOfMatch;
     }
 }
