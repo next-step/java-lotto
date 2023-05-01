@@ -14,6 +14,8 @@ public class OutputPresent {
     private static final String PRIZE_2ND = "5개 일치, 보너스 볼 일치(30,000,000원) - %s개";
     private static final String PRIZE_1ST = "6개 일치 (2,000,000,000원)- %s개";
     private static final String RETURN_RATE = "총 수익률은 %f2입니다";
+    private static final String CONFIRM_PURCHASE = "수동으로 %s장, 자동으로 %s장 을 구매했습니다";
+
 
     public OutputPresent() {
     }
@@ -34,6 +36,7 @@ public class OutputPresent {
     }
 
     public void presentTickets(List<Ticket> tickets) {
+        System.out.println(CONFIRM_PURCHASE);
         for (Ticket ticket : tickets) {
             System.out.println(ticket.toString());
         }

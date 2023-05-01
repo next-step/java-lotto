@@ -52,7 +52,21 @@ public class InputPresent {
     }
 
     private Ticket mannualPurchase(String nextLine) {
+        throw new RuntimeException("Not Yet Implemented : 문자열 한줄을 입력받아 티켓 하나를 발행하는 로직");
+    }
+
+    private List<Ticket> automaticIssue(int count) {
         throw new RuntimeException("Not Yet Implemented");
+    }
+
+    public List<Ticket> purchaseLotto() {
+        int i = this.purchaseCount();
+        //this.manualPurchases();
+        List<Ticket> tickets = this.manualPurchases();
+        //this.mannualIssue(tickets);
+        List<Ticket> tickets1 = this.automaticIssue(i - tickets.size());
+        tickets.addAll(tickets1);
+        return tickets;
     }
 
 }
