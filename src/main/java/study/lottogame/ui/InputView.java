@@ -16,7 +16,7 @@ public class InputView {
     return new Money(Integer.parseInt(input));
   }
 
-  public static Lottery inputWinningLottery() {
+  public static Lottery inputPrizeLottery() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     String[] splitArr = getInput().split(",");
     return LotteryFactory.create(splitArr);

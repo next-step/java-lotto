@@ -10,9 +10,9 @@ import study.lottogame.util.LottoNumbersGenerator;
 
 public class LotteriesTest {
 
-  @DisplayName("당첨 번호와 비교하여 각 로또의 순위를 결정하고, 각 순위에 해당하는 로또 개수를 세서 Map으로 반환한다.")
+  @DisplayName("당첨 번호와 비교하여 각 로또의 순위를 결정하여 게임 결과를 반환한다.")
   @Test
-  public void getWinningCountsByRank(){
+  public void calculateGameResult() {
     Lottery lottery1 = new Lottery(LottoNumbersGenerator
         .generate(new String[]{"1", "2", "3", "4", "5", "6"}));
     Lottery lottery2 = new Lottery(LottoNumbersGenerator
@@ -23,11 +23,15 @@ public class LotteriesTest {
     Lottery winningLottery = new Lottery(LottoNumbersGenerator
         .generate(new String[]{"1", "2", "3", "4", "5", "6"}));
 
-    Map<Rank, Integer> rankToLottoCountMap = lotteries
-        .getWinningCountsByRank(winningLottery);
+    GameResult gameResult = lotteries
+        .calculateGameResult(winningLottery);
 
-    assertThat(rankToLottoCountMap.get(Rank.MISS)).isEqualTo(1);
-    assertThat(rankToLottoCountMap.get(Rank.FOURTH)).isEqualTo(1);
-    assertThat(rankToLottoCountMap.get(Rank.FIRST)).isEqualTo(1);
+    Map<Rank, Integer> prizeStaticsMap = gameResult.getPrizeStaticsMap();
+    assertThat(prizeStaticsMap.get(Rank.MISS)).isEqualTo(1);
+    assertThat(prizeStaticsMap.get(Rank.FOURTH)).isEqualTo(1);
+    assertThat(prizeStaticsMap.get(Rank.FIRST)).isEqualTo(1);
+    assertThat(gameResult.getPrizeMoney())
+        .isEqualTo(new Money(Rank.FOURTH.getWinningMoney() + Rank.FIRST
+            .getWinningMoney()));
   }
 }

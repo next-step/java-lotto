@@ -12,14 +12,14 @@ public class Lotteries {
     this.lotteries = lotteries;
   }
 
-  public Map<Rank, Integer> getWinningCountsByRank(Lottery winningLottery) {
-    Map<Rank, Integer> winningCountsMap = new HashMap<>();
+  public GameResult calculateGameResult(Lottery prizeLottery) {
+    Map<Rank, Integer> prizeStaticsMap = new HashMap<>();
     for (Lottery lottery : lotteries) {
-      int countOfMatch = lottery.matchLottoNumber(winningLottery);
+      int countOfMatch = lottery.matchLottoNumber(prizeLottery);
       Rank rank = Rank.valueOf(countOfMatch);
-      winningCountsMap.put(rank, winningCountsMap.getOrDefault(rank, 0) + 1);
+      prizeStaticsMap.put(rank, prizeStaticsMap.getOrDefault(rank, 0) + 1);
     }
-    return winningCountsMap;
+    return new GameResult(prizeStaticsMap);
   }
 
   public List<Lottery> getLotteries() {
