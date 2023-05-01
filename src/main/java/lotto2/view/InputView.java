@@ -1,11 +1,12 @@
 package lotto2.view;
 
+import static lotto2.domain.LottoTicket.TICKET_PRICE;
+
 import java.util.Scanner;
 
 public class InputView {
 
   private static final Scanner SCANNER = new Scanner(System.in);
-  private static final int TICKET_PRICE = 1000;
 
   public static int scanMoney() {
     System.out.println("구입금액을 입력해 주세요.");
