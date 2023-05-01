@@ -7,13 +7,13 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoTicketsTest {
+public class LottoGamesTest {
 
     @Test
     @DisplayName("로또 수익률 계산")
     public void returnRate() {
-        LottoTickets lottoTickets = new LottoTickets(List.of("1, 2, 3, 41, 42, 43"), "1, 2, 3, 4, 5, 6");
-        assertThat(lottoTickets.calculateReturn()).isEqualTo(5);
+        LottoGames lottoGames = new LottoGames(List.of("1, 2, 3, 41, 42, 43"), "1, 2, 3, 4, 5, 6");
+        assertThat(lottoGames.calculateReturn()).isEqualTo(5);
     }
 
 
