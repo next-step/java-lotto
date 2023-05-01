@@ -20,7 +20,10 @@ class WinningTicketTest {
 
         //then
         assertDoesNotThrow(() -> {
-            new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+            new WinningTicket(
+                    Arrays.asList(1, 2, 3, 4, 5, 6),
+                    new LottoNumber(7)
+            );
         });
     }
     
@@ -32,7 +35,10 @@ class WinningTicketTest {
         lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 10, 11, 12)));
         lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)));
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, new RandomNumberCreation());
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningTicket winningTicket = new WinningTicket(
+                Arrays.asList(1, 2, 3, 4, 5, 6),
+                new LottoNumber(7)
+        );
 
         //when
         Map<LottoRank, Integer> result = winningTicket.countMatching(lottoTickets);

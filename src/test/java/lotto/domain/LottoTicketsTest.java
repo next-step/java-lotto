@@ -40,7 +40,7 @@ class LottoTicketsTest {
     void calculateSameNumberCount() throws Exception {
         //given
         LottoTicket winningTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int bonusNumber = 9;
+        LottoNumber bonusNumber = new LottoNumber(9);
 
         //when
         Map<LottoRank, Integer> sameNumberCounts
