@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoMatchingCountException;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -20,6 +21,11 @@ public class LottoPrizeTest {
         LottoPrize lottoPrize = LottoPrize.from(input);
         assertThat(lottoPrize.getMatchingCount()).isEqualTo(input);
         assertThat(lottoPrize.getPrize()).isEqualTo(prize);
+    }
+
+    @Test
+    void 당첨_횟수에_따른_총_상금을_알_수_있다() {
+        assertThat(LottoPrize.FOURTH.getTotalPrize(3)).isEqualTo(15_000);
     }
 
     @ParameterizedTest(name = "{0}은 적절한 로또 당첨 갯수가 아니므로 예외가 발생한다.")

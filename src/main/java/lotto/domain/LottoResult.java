@@ -49,7 +49,7 @@ public class LottoResult {
         long price = 0;
         for (int i = MINIMUM_WINNING_COUNT; i <= Lotto.LOTTO_NUMBER_SIZE; i++) {
             LottoPrize lottoPrize = LottoPrize.from(i);
-            price += lottoPrize.getPrize() * getMatchingLottosCount(lottoPrize);
+            price += lottoPrize.getTotalPrize(getMatchingLottosCount(lottoPrize));
         }
         return price / (double) (lottos.getLottoQuantity() * LottoShop.LOTTO_PRICE);
     }

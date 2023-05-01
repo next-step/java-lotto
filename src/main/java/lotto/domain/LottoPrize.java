@@ -27,6 +27,10 @@ public enum LottoPrize {
         return prize;
     }
 
+    public long getTotalPrize(long count) {
+        return prize * count;
+    }
+
     public static LottoPrize from(int matchingCount) {
         Optional<LottoPrize> lottoPrize = Arrays.stream(LottoPrize.values())
                 .filter(it -> it.matchingCount == matchingCount)
