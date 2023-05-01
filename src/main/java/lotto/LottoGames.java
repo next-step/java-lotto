@@ -6,34 +6,32 @@ import java.util.List;
 public class LottoGames {
 
     private static final int LOTTO_PRICE = 1000;
-    private final List<Lotto> lottoList = new ArrayList<>();
+    private final List<Lotto> lottoGameList = new ArrayList<>();
     private String firstLottoNumber;
-    private double lottoTotalPrice;
 
     public LottoGames(List<String> lottoNumberList, String firstLottoNumber) {
-        lottoNumberList.forEach(number -> lottoList.add(new Lotto(number)));
+        lottoNumberList.forEach(number -> lottoGameList.add(new Lotto(number)));
         this.firstLottoNumber = firstLottoNumber;
-        this.lottoTotalPrice = LOTTO_PRICE * lottoNumberList.size();
     }
 
     public LottoGames(int gameCount) {
         for (int i = 0; i < gameCount; i++) {
-            lottoList.add(new Lotto(LottoNumberGenerator.generateNumbers()));
+            lottoGameList.add(new Lotto(LottoNumberGenerator.generateNumbers()));
         }
     }
 
 //    public int size() {
-//        return this.lottoList.size();
+//        return this.lottoGameList.size();
 //    }
 
     private int sum() {
-        return lottoList.stream()
+        return lottoGameList.stream()
                 .mapToInt(lotto -> LottoPrize.findPrize(lotto.findMatchCount(firstLottoNumber)))
                 .sum();
     }
 
     public double calculateReturn() {
-        return sum() / lottoTotalPrice;
+        return sum() / (double)(LOTTO_PRICE * lottoGameList.size());
     }
 
 }
