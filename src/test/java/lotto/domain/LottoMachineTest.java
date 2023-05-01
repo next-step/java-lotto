@@ -57,11 +57,4 @@ public class LottoMachineTest {
 			new PrizeSituation(PrizeType.FIVE, 0), new PrizeSituation(PrizeType.SIX, 1)
 		);
 	}
-
-	@DisplayName("당첨 번호 목록에 보너스 번호가 포함되는 경우 - 예외 케이스")
-	@Test
-	void test10() {
-		LottoMachine lottoMachine = new LottoMachine(1000);
-		assertThatIllegalArgumentException().isThrownBy(() -> lottoMachine.calculateScore(new WinNumbers("1, 2, 3, 4, 5, 6"), new LottoNumber(1)));
-	}
 }

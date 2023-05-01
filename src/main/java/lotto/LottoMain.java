@@ -6,6 +6,7 @@ import lotto.domain.BenefitResult;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.PrizeSituation;
+import lotto.domain.WinLotto;
 import lotto.domain.WinNumbers;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -20,7 +21,10 @@ public class LottoMain {
 
 		WinNumbers winNumbers = new WinNumbers(InputView.inputWinNumbers());
 		LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
-		lottoMachine.calculateScore(winNumbers, bonusNumber);
+
+		WinLotto winLotto = new WinLotto(winNumbers, bonusNumber);
+		winLotto.calculateScore(lottoMachine.getPurchasedLottos());
+
 		List<PrizeSituation> prizeSituations = lottoMachine.makePrizeSituations();
 		ResultView.printPrizeSituations(lottoMachine.sortInOrderScore(prizeSituations));
 
