@@ -19,6 +19,7 @@ public enum WinningAmountByRank {
     private final int rank;
     private final int amount;
     private final String key;
+
     WinningAmountByRank(int rank, int amount, String key) {
         this.rank = rank;
         this.amount = amount;

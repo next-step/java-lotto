@@ -15,13 +15,9 @@ public class Lottos {
         }
     }
 
-    public static Lottos from(int lottoCount, int bonusNumber) {
+    public static Lottos from(int lottoCount) {
         if (lottoCount < 0) {
             throw new IllegalArgumentException("음수의 갯수는 잘못된 값입니다.");
-        }
-
-        if (bonusNumber < 0) {
-            throw new IllegalArgumentException(String.format("음슈의 보너스 번호는 잘못된 값입니다. 보너스 번호 %d", bonusNumber));
         }
         return new Lottos(lottoCount);
     }

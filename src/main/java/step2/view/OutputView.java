@@ -41,7 +41,7 @@ public class OutputView {
     }
 
     private static String convertLottoNumbersToString(Lotto lotto) {
-        return  lotto.getNumbers()
+        return lotto.getNumbers()
                 .stream()
                 .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                 .collect(Collectors.joining(", "));
