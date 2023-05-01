@@ -54,4 +54,10 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.calculate("0.1 + 0.2")).isEqualTo("0.3");
     }
 
+    @DisplayName("뺄셈 사칙연산 기호가 포함 된 입력된 문자열이 뺄셈 사칙연산 결과가 반환되는지 확인")
+    @Test
+    void minus() {
+        assertThat(StringCalculator.calculate("2.2 - 1")).isEqualTo("1.2");
+    }
+
 }
