@@ -8,8 +8,8 @@ public class LottoNumbers {
 
   public static final int LOTTO_NUMBER_COUNT_INBOUND = 0;
   public static final int LOTTO_NUMBER_COUNT_OUTBOUND = 6;
-  private static final int LOTTO_NUMBER_INBOUND = 1;
-  private static final int LOTTO_NUMBER_OUTBOUND = 45;
+  public static final int LOTTO_NUMBER_INBOUND = 1;
+  public static final int LOTTO_NUMBER_OUTBOUND = 45;
 
   private static final List<LottoNumber> numbers = new ArrayList<>();
 

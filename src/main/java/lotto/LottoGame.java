@@ -15,13 +15,14 @@ public class LottoGame {
   private final ResultView resultView = new ResultView();
 
   public void play() {
-    Printer.print("구입금액을 입력해 주세요.");
-    Money userMoney = Money.from(Reader.read());
+    Money userMoney = inputView.buy();
     Money lottoPurchasablePrice = Money.toLottoPurchasablePrice(userMoney);
     resultView.printChange(userMoney.subtraction(lottoPurchasablePrice));
     resultView.printPurchaseAmount(lottoPurchasablePrice.ticketPurchasableNumber());
 
     LottoTickets tickets = lottoMachine.buy(lottoPurchasablePrice);
     resultView.showTicketsInfo(tickets);
+
+    inputView.lastWeekNumbers();
   }
 }
