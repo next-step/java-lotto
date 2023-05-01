@@ -10,12 +10,12 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lotto> of(int money) {
+    public static PurchasedLotto of(int money) {
         validateInput(money);
         return getPurchasedLotto(money);
     }
 
-    private static List<Lotto> getPurchasedLotto(int money) {
+    private static PurchasedLotto getPurchasedLotto(int money) {
         List<Lotto> lottoStore = new ArrayList<>();
         int totalCount = money / PRICE;
 
@@ -23,7 +23,7 @@ public class LottoFactory {
             Lotto lotto = Lotto.issue();
             lottoStore.add(lotto);
         }
-        return lottoStore;
+        return new PurchasedLotto(lottoStore);
     }
 
     private static void validateInput(int money) {

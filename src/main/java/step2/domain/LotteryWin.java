@@ -1,68 +1,77 @@
 package step2.domain;
 
+import static step2.domain.Ranking.FIFTH;
+import static step2.domain.Ranking.FIRST;
+import static step2.domain.Ranking.FOURTH;
+import static step2.domain.Ranking.MISSING;
+import static step2.domain.Ranking.SECOND;
+import static step2.domain.Ranking.THIRD;
+
 import java.util.List;
-import java.util.Map;
 
 public class LotteryWin {
 
     private final WinningNumbers winningNumbers;
-    private final Results results;
-
-    private static final int FOURTH = 3;
-    private static final int THIRD = 4;
-    private static final int SECOND = 5;
-    private static final int FIRST = 6;
+    private final BonusNumber bonusNumber;
 
 
-    public LotteryWin(WinningNumbers winningNumbers) {
-        this.results = new Results();
+    public LotteryWin(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-
-    public void confirm(List<Lotto> numbers) {
-        for (Lotto number : numbers) {
-            check(number.getNumbers());
+    public void confirm(List<Lotto> lottoList) {
+        for (Lotto lotto : lottoList) {
+            check(lotto);
         }
-    }
-
-    public Map<Integer, Integer> getResult(){
-        return this.results.get();
-    }
-
-
-    public int getWinningAmount() {
-        return results.sum();
     }
 
     public String getRateOfReturn(int money, int winningMoney) {
         return String.format("%.2f", (double) winningMoney / (double) money);
     }
 
-    private void check(List<Integer> numbers) {
-        int matchedCount = getMatchedCount(numbers);
+    private void check(Lotto lotto) {
+        int matchedCount = getMatchedCount(lotto.getNumbers());
 
-        if (matchedCount == FOURTH) {
-            results.add(matchedCount);
+        if (matchedCount == FIFTH.getCountOfMatch()) {
+            lotto.rank(FIFTH);
             return;
         }
 
-        if (matchedCount == THIRD) {
-            results.add(matchedCount);
+        if (matchedCount == FOURTH.getCountOfMatch()) {
+            lotto.rank(FOURTH);
             return;
         }
 
-        if (matchedCount == SECOND) {
-            results.add(matchedCount);
+        if (isThird(lotto, matchedCount)) {
+            lotto.rank(THIRD);
             return;
         }
 
-        if (matchedCount == FIRST) {
-            results.add(matchedCount);
+        if (isSecond(lotto, matchedCount)) {
+            lotto.rank(SECOND);
+            return;
         }
+
+        if (matchedCount == FIRST.getCountOfMatch()) {
+            lotto.rank(FIRST);
+            return;
+        }
+
+        lotto.rank(MISSING);
     }
 
-    private int getMatchedCount(List<Integer> numbers) {
-        return (int) numbers.stream().filter(this.winningNumbers::confirm).count();
+    private boolean isThird(Lotto lotto, int matchedCount) {
+        return (matchedCount == THIRD.getCountOfMatch())
+            && !bonusNumber.isContained(lotto.getNumbers());
+    }
+
+    private boolean isSecond(Lotto lotto, int matchedCount) {
+        return (matchedCount == THIRD.getCountOfMatch())
+            && bonusNumber.isContained(lotto.getNumbers());
+    }
+
+    private int getMatchedCount(List<Integer> lotto) {
+        return (int) lotto.stream().filter(this.winningNumbers::confirm).count();
     }
 }
