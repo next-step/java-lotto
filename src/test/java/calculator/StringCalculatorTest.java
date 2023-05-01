@@ -24,4 +24,12 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.split("1 + 3")).containsExactly("1", "+", "3");
     }
 
+    @DisplayName("입력된 문자열을 빈공백 기준으로 분리 시, 배열의 사이즈가 짝수가 반환되는 경우 IllegalArgumentException 예외가 발생하는지 확인")
+    @Test
+    void split_array_size_even_number_illegal_argument_exception() {
+        assertThatThrownBy(() -> StringCalculator.split("1 + "))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("분리된 문자열 배열 size 는 짝수 일 수 없습니다.");
+    }
+
 }
