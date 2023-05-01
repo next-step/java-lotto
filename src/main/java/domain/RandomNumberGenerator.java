@@ -6,12 +6,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class RandomNumberGenerator implements RandomNumberStrategy {
+public class RandomNumberGenerator {
 
-  private static Random random = new Random();
+  private static final Random random = new Random();
 
-  @Override
-  public List<Integer> generate() {
+  public static List<Integer> generate() {
     List<Integer> numbers = new ArrayList<>();
     while (numbers.size() < 6) {
       int number = random.nextInt(45) + 1;
