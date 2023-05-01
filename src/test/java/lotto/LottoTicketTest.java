@@ -37,6 +37,18 @@ public class LottoTicketTest {
                 .withMessageMatching("로또 번호는 중복이 허용되지 않습니다.");
     }
 
+    @DisplayName("당첨번호 중 5자리가 같고 보너스번호를 포함하면 2등")
+    @Test
+    void rank2() {
+        List<Integer> winningLottoTicket = List.of(1, 2, 3, 4, 5, 6);
+        WinningTicket winningTicket = WinningTicket.of(winningLottoTicket, 45);
+
+        LottoTicket lottoTicket = LottoTicketFixture.of(1, 2, 3, 4, 5, 6);
+        LottoPrize actual = lottoTicket.calculatePrize(winningTicket);
+
+        assertThat(actual).isEqualTo(LottoPrize.RANK2);
+    }
+
     @DisplayName("당첨번호와 보너스번호에 따른 등수를 구한다")
     @ParameterizedTest
     @MethodSource("lottoRank")

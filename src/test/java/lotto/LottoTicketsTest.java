@@ -14,8 +14,8 @@ public class LottoTicketsTest {
     void prizes() {
         WinningTicket winningTicket = WinningTicket.of(List.of(1, 2, 3, 4, 5, 6), 45);
 
-        LottoTicket allMatcheslottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 6));
-        LottoTicket secondRankLottoTicket = LottoTicket.of(List.of(1, 2, 3, 4, 5, 45));
+        LottoTicket allMatcheslottoTicket = LottoTicketFixture.of(1, 2, 3, 4, 5, 6);
+        LottoTicket secondRankLottoTicket = LottoTicketFixture.of(1, 2, 3, 4, 5, 45);
 
         LottoTickets lottoTickets = new LottoTickets(List.of(allMatcheslottoTicket, secondRankLottoTicket));
         List<LottoPrize> winningPrizes = lottoTickets.calculatePrizes(winningTicket);
