@@ -3,25 +3,25 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumberGroup {
+public class LottoNumbers {
     private static final int LOTTO_NUMBER_GROUP_LENGTH = 6;
     private List<LottoNumber> lottoNumberGroup = new ArrayList<>();
 
-    public LottoNumberGroup() {
+    public LottoNumbers() {
     }
 
-    public LottoNumberGroup(List<LottoNumber> lottoNumberGroup) {
+    public LottoNumbers(List<LottoNumber> lottoNumberGroup) {
         this.lottoNumberGroup = lottoNumberGroup;
     }
 
-    public LottoNumberGroup aggregateNonDuplicateLottoNumber() {
+    public LottoNumbers aggregateNonDuplicateLottoNumber() {
         Set<LottoNumber> lottoNumberList = new HashSet<>();
 
         while (lottoNumberList.size() < LOTTO_NUMBER_GROUP_LENGTH) {
             lottoNumberList.add(LottoNumber.provideLottoNumber());
         }
 
-        return new LottoNumberGroup(toList(lottoNumberList));
+        return new LottoNumbers(toList(lottoNumberList));
     }
 
     private List<LottoNumber> toList(Set<LottoNumber> lottoNumberList) {
@@ -30,7 +30,7 @@ public class LottoNumberGroup {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public LottoNumberGroup initializedManualLottoNumber(List<Integer> requestNumberList) {
+    public LottoNumbers initializedManualLottoNumber(List<Integer> requestNumberList) {
         validateLottoNumberLength(requestNumberList);
         validateSameNumber(requestNumberList);
 
@@ -40,11 +40,11 @@ public class LottoNumberGroup {
                 .sorted(LottoNumber::compareTo)
                 .collect(Collectors.toUnmodifiableList());
 
-        return new LottoNumberGroup(lottoNumberList);
+        return new LottoNumbers(lottoNumberList);
     }
 
-    public int countMatchingLottoNumber(LottoNumberGroup lottoNumberGroup) {
-        return findMatchingLottoNumber(lottoNumberGroup).size();
+    public int countMatchingLottoNumber(LottoNumbers lottoNumbers) {
+        return findMatchingLottoNumber(lottoNumbers).size();
     }
 
     private void validateLottoNumberLength(List<Integer> lottoNumberList) {
@@ -67,8 +67,8 @@ public class LottoNumberGroup {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private List<LottoNumber> findMatchingLottoNumber(LottoNumberGroup targetLottoNumberGroup) {
-        return targetLottoNumberGroup.filterMatchingLottoNumber(this.lottoNumberGroup);
+    private List<LottoNumber> findMatchingLottoNumber(LottoNumbers targetLottoNumbers) {
+        return targetLottoNumbers.filterMatchingLottoNumber(this.lottoNumberGroup);
     }
 
     private boolean isMatchingLottoNumber(LottoNumber lottoNumber) {
@@ -84,7 +84,7 @@ public class LottoNumberGroup {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumberGroup that = (LottoNumberGroup) o;
+        LottoNumbers that = (LottoNumbers) o;
         return lottoNumberGroup.equals(that.lottoNumberGroup);
     }
 

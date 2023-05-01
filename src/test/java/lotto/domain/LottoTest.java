@@ -9,12 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
 
-    private final LottoNumberGroup lottoNumberGroup = new LottoNumberGroup();
+    private final LottoNumbers lottoNumbers = new LottoNumbers();
 
     @Test
     @DisplayName("Lotto 자동 발급 테스트")
     void autoLottoTest() {
-        Lotto lotto = Lotto.from(lottoNumberGroup);
+        Lotto lotto = Lotto.from(lottoNumbers);
         assertThat(lotto.getLottoSize()).isEqualTo(6);
     }
 
@@ -22,7 +22,7 @@ class LottoTest {
     @DisplayName("Lotto 수동 발급 테스트")
     void manualLottoTest() {
         List<Integer> requestLotto = List.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = Lotto.of(lottoNumberGroup, requestLotto);
+        Lotto lotto = Lotto.of(lottoNumbers, requestLotto);
 
         assertThat(lotto.getLottoSize()).isEqualTo(6);
     }
@@ -34,12 +34,12 @@ class LottoTest {
 
         List<Integer> givenWinnerLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
 
-        LottoNumberGroup winnerLottoNumberGroup = lottoNumberGroup.initializedManualLottoNumber(givenWinnerLottoNumberList);
+        LottoNumbers winnerLottoNumbers = lottoNumbers.initializedManualLottoNumber(givenWinnerLottoNumberList);
 
         List<Integer> requestLotto = List.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = Lotto.of(lottoNumberGroup, requestLotto);
+        Lotto lotto = Lotto.of(lottoNumbers, requestLotto);
 
-        assertThat(lotto.countMatching(winnerLottoNumberGroup)).isEqualTo(6);
+        assertThat(lotto.countMatching(winnerLottoNumbers)).isEqualTo(6);
     }
 
 }

@@ -5,22 +5,22 @@ import java.util.Objects;
 
 public class WinnerLotto {
 
-    private final LottoNumberGroup winnerLottoNumberGroup;
+    private final LottoNumbers winnerLottoNumbers;
 
-    public WinnerLotto(LottoNumberGroup lottoNumberGroup) {
-        this.winnerLottoNumberGroup = lottoNumberGroup;
+    public WinnerLotto(LottoNumbers lottoNumbers) {
+        this.winnerLottoNumbers = lottoNumbers;
     }
 
-    public static WinnerLotto of(LottoNumberGroup lottoNumberGroup, List<Integer> winnerLottoNumberList) {
-        return new WinnerLotto(lottoNumberGroup.initializedManualLottoNumber(winnerLottoNumberList));
+    public static WinnerLotto of(LottoNumbers lottoNumbers, List<Integer> winnerLottoNumberList) {
+        return new WinnerLotto(lottoNumbers.initializedManualLottoNumber(winnerLottoNumberList));
     }
 
     public int winnerLottoSize() {
-        return winnerLottoNumberGroup.getLottoNumberGroupSize();
+        return winnerLottoNumbers.getLottoNumberGroupSize();
     }
 
     public int findMatchingCount(Lotto lotto) {
-        return lotto.countMatching(this.winnerLottoNumberGroup);
+        return lotto.countMatching(this.winnerLottoNumbers);
     }
 
     @Override
@@ -28,11 +28,11 @@ public class WinnerLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinnerLotto that = (WinnerLotto) o;
-        return Objects.equals(winnerLottoNumberGroup, that.winnerLottoNumberGroup);
+        return Objects.equals(winnerLottoNumbers, that.winnerLottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winnerLottoNumberGroup);
+        return Objects.hash(winnerLottoNumbers);
     }
 }

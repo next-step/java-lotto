@@ -11,19 +11,19 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class StatisticsTest {
 
-    private final LottoNumberGroup lottoNumberGroup = new LottoNumberGroup();
+    private final LottoNumbers lottoNumbers = new LottoNumbers();
 
     @Test
     @DisplayName("당첨 통계 테스트")
     void statisticsWinner() {
 
         List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumberGroup, givenLottoNumberList);
+        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumbers, givenLottoNumberList);
 
         List<Lotto> lottoList = List.of(
-                Lotto.of(lottoNumberGroup, List.of(1, 2, 3, 4, 5, 6)),
-                Lotto.of(lottoNumberGroup, List.of(1, 2, 3, 4, 5, 6)),
-                Lotto.of(lottoNumberGroup, List.of(1, 2, 3, 4, 5, 6))
+                Lotto.of(lottoNumbers, List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.of(lottoNumbers, List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.of(lottoNumbers, List.of(1, 2, 3, 4, 5, 6))
         );
 
         Statistics statistics = new Statistics(winnerLotto, lottoList);
@@ -40,12 +40,12 @@ class StatisticsTest {
     @DisplayName("수익률 테스트 - 손해")
     void getProfitLoseTest() {
         List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumberGroup, givenLottoNumberList);
+        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumbers, givenLottoNumberList);
 
         List<Lotto> lottoList = List.of(
-                Lotto.of(lottoNumberGroup, List.of(8, 21, 23, 41, 42, 43)),
-                Lotto.of(lottoNumberGroup, List.of(1, 3, 5, 14, 22, 45)),
-                Lotto.of(lottoNumberGroup, List.of(5, 9, 38, 41, 43, 44))
+                Lotto.of(lottoNumbers, List.of(8, 21, 23, 41, 42, 43)),
+                Lotto.of(lottoNumbers, List.of(1, 3, 5, 14, 22, 45)),
+                Lotto.of(lottoNumbers, List.of(5, 9, 38, 41, 43, 44))
         );
 
         Statistics statistics = new Statistics(winnerLotto, lottoList);
@@ -60,12 +60,12 @@ class StatisticsTest {
     @DisplayName("수익률 테스트 - 본전")
     void getProfitPrincipalTest() {
         List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumberGroup, givenLottoNumberList);
+        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumbers, givenLottoNumberList);
 
         List<Lotto> lottoList = List.of(
-                Lotto.of(lottoNumberGroup, List.of(8, 21, 23, 41, 42, 43)),
-                Lotto.of(lottoNumberGroup, List.of(1, 3, 5, 14, 22, 45)),
-                Lotto.of(lottoNumberGroup, List.of(5, 9, 38, 41, 43, 44))
+                Lotto.of(lottoNumbers, List.of(8, 21, 23, 41, 42, 43)),
+                Lotto.of(lottoNumbers, List.of(1, 3, 5, 14, 22, 45)),
+                Lotto.of(lottoNumbers, List.of(5, 9, 38, 41, 43, 44))
         );
         Statistics statistics = new Statistics(winnerLotto, lottoList);
 
@@ -80,12 +80,12 @@ class StatisticsTest {
     @DisplayName("수익률 테스트 - 수익")
     void getProfitTest() {
         List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumberGroup, givenLottoNumberList);
+        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumbers, givenLottoNumberList);
 
         List<Lotto> lottoList = List.of(
-                Lotto.of(lottoNumberGroup, List.of(8, 21, 23, 41, 42, 43)),
-                Lotto.of(lottoNumberGroup, List.of(1, 2, 3, 4, 5, 6)),
-                Lotto.of(lottoNumberGroup, List.of(5, 9, 38, 41, 43, 44))
+                Lotto.of(lottoNumbers, List.of(8, 21, 23, 41, 42, 43)),
+                Lotto.of(lottoNumbers, List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.of(lottoNumbers, List.of(5, 9, 38, 41, 43, 44))
         );
 
         Statistics statistics = new Statistics(winnerLotto, lottoList);
