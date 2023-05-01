@@ -22,4 +22,3 @@ public class LottoMachine {
         return numbers.subList(BEGIN_INDEX, LOTTO_NUMBERS_SIZE);
     }
 }
-
