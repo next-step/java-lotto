@@ -21,7 +21,6 @@ public class OperatorProcess {
             if (result != null) return result;
         }
         throw new IllegalArgumentException(operator + "는 사칙연산 기호가 아닙니다: ");
-
     }
 
     private Integer getResult(Operator myOperator) {

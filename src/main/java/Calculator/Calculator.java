@@ -31,11 +31,6 @@ public class Calculator {
 
             OperatorProcess operatorProcess = new OperatorProcess(operand1,operand2,curOperator);
             this.result = operatorProcess.calculateProcess();
-
         }
-
     }
 }
-
-
-
