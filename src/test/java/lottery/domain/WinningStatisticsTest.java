@@ -17,8 +17,6 @@ public class WinningStatisticsTest {
 
     private final Map<Rank, Integer> lotteriesByRank = new HashMap<>();
 
-    private final Map<Rank, Integer> emptyLotteries = new HashMap<>();
-
     @BeforeEach
     void setUp() {
         lotteriesByRank.put(Rank.FIRST, 0);
@@ -26,7 +24,6 @@ public class WinningStatisticsTest {
         lotteriesByRank.put(Rank.THIRD, 2);
         lotteriesByRank.put(Rank.FOURTH, 5);
     }
-
 
     @Test
     @DisplayName("순위에 해당하는 모든 키값이 존재하는 맵 일 경우 객체를 생성한다.")

@@ -21,7 +21,7 @@ public class LotteriesTest {
 
 
     @ParameterizedTest(name = "로또 플레이 횟수 입력에 맞춰 로또를 생성한다.")
-    @ValueSource(ints = {0,2})
+    @ValueSource(ints = {0, 2})
     void lotteryCreateByPlaysTest(int plays) {
         assertThat(new Lotteries(plays).size()).isEqualTo(plays);
     }
@@ -39,7 +39,9 @@ public class LotteriesTest {
     void dividedLotteriesByRankTest() {
         Map<Rank, Integer> dividedLotteries = LOTTERY_DUMMY_DATA
                 .lotteriesDummyObj()
-                .getDividedLotteriesByRank();
+                .getDividedLotteriesByRank(LOTTERY_DUMMY_DATA
+                        .winningNumbersDummyObj()
+                        .getNumbers());
 
         assertAll(
                 () -> assertThat(dividedLotteries.get(Rank.FIRST)).isEqualTo(1),

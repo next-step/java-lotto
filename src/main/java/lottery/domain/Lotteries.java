@@ -3,9 +3,12 @@ package lottery.domain;
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.IntStream.range;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
+import lottery.domain.constant.Rank;
 
 public class Lotteries {
 
@@ -14,7 +17,6 @@ public class Lotteries {
     public Lotteries(int plays) {
         this(lotteriesByPlayNumbers(plays));
     }
-
 
     public Lotteries(List<SixLotteryNumbers> lotteries) {
         this.lotteries = lotteries;
@@ -40,4 +42,11 @@ public class Lotteries {
                 "lotteries=" + lotteries +
                 '}';
     }
+
+    public Map<Rank, Integer> getDividedLotteriesByRank(Set<LotteryNumber> winningNumbers) {
+        Map<Rank, Integer> dividedLotteriesByRank = new HashMap<>();
+
+        return dividedLotteriesByRank;
+    }
+
 }
