@@ -13,9 +13,7 @@ public class ExpressionFactoryTest {
   @ParameterizedTest
   @ValueSource(strings = {"1 +", "2 - 2 +"})
   public void create_throwsException_lengthEven(String input) {
-    String[] expression = new InputValue(input).split();
-
-    assertThatThrownBy(() -> ExpressionFactory.create(expression))
+    assertThatThrownBy(() -> ExpressionFactory.create(new InputValue(input)))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }
