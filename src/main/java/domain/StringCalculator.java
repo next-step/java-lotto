@@ -34,7 +34,10 @@ public class StringCalculator {
         int result = 0;
         while (operations.hasNext()) {
             Operator operator = operations.next();
-            result = operator.calculate(numbers.getNextNumbers());
+            Integer left = numbers.getNextNumber();
+            Integer right = numbers.getNextNumber();
+            result = operator.calculate(left, right);
+
             numbers.add(result);
         }
         return result;

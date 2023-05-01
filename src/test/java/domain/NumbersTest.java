@@ -19,7 +19,7 @@ class NumbersTest {
     @ParameterizedTest
     @MethodSource("createTestParams")
     public void Numbers_객체_생성(List<Integer> param) throws Exception {
-        assertThat(new Numbers(param).getNextNumbers(param.size())).containsExactly(param.get(0), param.get(1));
+        assertThat(new Numbers(param).getNumbers()).containsExactly(param.get(0), param.get(1));
     }
 
     static Stream<Arguments> createTestParams() throws Throwable {
