@@ -1,8 +1,19 @@
 package step2.view;
 
+import step2.domain.LottoResult;
+
 public class ResultView {
-    public static void printResult() {
+    public static void printStartOfResult() {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
+    }
+
+    public static void printEachResult(LottoResult result, int numberOfMatched) {
+        System.out.printf("%d개 일치 (%d원)- %d개%n", result.numbersToBeMatched, result.winningPrice, numberOfMatched);
+    }
+
+    public static void printRateOfReturn(double rateOfReturn) {
+        System.out.printf("총 수익률은 %.2f입니다.", rateOfReturn);
     }
 }

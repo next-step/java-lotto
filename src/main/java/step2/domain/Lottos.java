@@ -18,6 +18,10 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottoList) {
+        lottos.addAll(lottoList);
+    }
+
     public int getAmount() {
         return lottos.size();
     }

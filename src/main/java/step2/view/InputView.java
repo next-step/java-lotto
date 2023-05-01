@@ -9,17 +9,14 @@ public class InputView {
     private static final int LOWEST_PURCHASE_PRICE = 1000;
     private static final String DELIMITER = ", ";
     private static final int LOTTO_SIZE = 6;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     public static int getInputOfPurchasePrice() {
         System.out.println("구입금액을 입력해 주세요.");
         int purchasePrice = scanner.nextInt();
 
         validatePurchasePrice(purchasePrice);
-
-        int purchaseAmount = getPurchaseAmount(purchasePrice);
-        System.out.printf("%d개를 구매했습니다.%n", purchaseAmount);
-
-        return purchaseAmount;
+        return purchasePrice;
     }
 
     private static void validatePurchasePrice(int purchasePrice) {
@@ -27,6 +24,12 @@ public class InputView {
             throw new IllegalArgumentException(
                     String.format("최소 구입 금액은 %d원입니다.", LOWEST_PURCHASE_PRICE));
         }
+    }
+
+    public static int printPurchaseAmount(int purchasePrice) {
+        int purchaseAmount = getPurchaseAmount(purchasePrice);
+        System.out.printf("%d개를 구매했습니다.%n", purchaseAmount);
+        return purchaseAmount;
     }
 
     private static int getPurchaseAmount(int purchasePrice) {
@@ -57,8 +60,16 @@ public class InputView {
     private static List<Integer> toIntegerList(String[] inputSplit) {
         List<Integer> intList = new ArrayList<>();
         for (String numberString : inputSplit) {
-            intList.add(Integer.parseInt(numberString));
+            int number = Integer.parseInt(numberString);
+            validateEachNumber(number);
+            intList.add(number);
         }
         return intList;
+    }
+
+    private static void validateEachNumber(int number) {
+        if (number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 당첨 번호는 1 ~ 45 사이의 수입니다.");
+        }
     }
 }

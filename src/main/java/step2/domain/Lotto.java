@@ -10,10 +10,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     public int getResult(List<Integer> winningNumbers) {
         int numberOfMatched = 0;
         for (Integer winningNumber : winningNumbers) {
