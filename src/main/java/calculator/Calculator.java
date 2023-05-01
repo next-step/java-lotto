@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
+    private static final String separator = " ";
+
     private final List<Operator> operators;
     private final List<Operand> operands;
 
@@ -15,7 +17,7 @@ public class Calculator {
 
     public static Calculator create(String input) {
         validate(input);
-        List<String> tokens = Arrays.asList(input.split(" "));
+        List<String> tokens = Arrays.asList(input.split(separator));
         List<Operator> operators = new ArrayList<>();
         List<Operand> operands = new ArrayList<>();
         for (int i = 0; i < tokens.size(); i++) {
@@ -27,7 +29,7 @@ public class Calculator {
     }
 
     private static void validate(String input) {
-        if (input == null || input.equals("")) {
+        if (input.isEmpty()) {
             throw new IllegalArgumentException(String.format("String \"%s\" is empty", input));
         }
     }
