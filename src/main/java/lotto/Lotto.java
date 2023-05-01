@@ -27,10 +27,9 @@ public class Lotto {
         return numbers;
     }
 
-    public int findMatchCount(String firstLottoNumber) {
-        List<Integer> numbers = split(firstLottoNumber);
-        return (int) numbers.stream()
-                .filter(lottoNumbers::contains)
+    public int findMatchCount(Lotto firstLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(firstLotto.lottoNumbers::contains)
                 .count();
     }
 

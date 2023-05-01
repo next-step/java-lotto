@@ -23,7 +23,8 @@ public class LottoTest {
     @DisplayName("맞는 숫자가 몇개있는지 판별하는 메소드 테스트")
     public void checkTest() {
         Lotto lotto = new Lotto("1, 2, 3, 41, 42, 43");
-        assertThat(lotto.findMatchCount("1, 2, 3, 4, 5, 6")).isEqualTo(3);
+        Lotto FirstLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        assertThat(lotto.findMatchCount(FirstLotto)).isEqualTo(3);
     }
 
     @Test

@@ -7,11 +7,11 @@ public class LottoGames {
 
     private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> lottoGameList = new ArrayList<>();
-    private String firstLottoNumber;
+    private Lotto firstLotto;
 
     public LottoGames(List<String> lottoNumberList, String firstLottoNumber) {
         lottoNumberList.forEach(number -> lottoGameList.add(new Lotto(number)));
-        this.firstLottoNumber = firstLottoNumber;
+        this.firstLotto = new Lotto(firstLottoNumber);
     }
 
     public LottoGames(int gameCount) {
@@ -26,7 +26,7 @@ public class LottoGames {
 
     private int sum() {
         return lottoGameList.stream()
-                .mapToInt(lotto -> LottoPrize.findPrize(lotto.findMatchCount(firstLottoNumber)))
+                .mapToInt(lotto -> LottoPrize.findPrize(lotto.findMatchCount(firstLotto)))
                 .sum();
     }
 
