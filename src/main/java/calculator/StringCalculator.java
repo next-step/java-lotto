@@ -2,9 +2,11 @@ package calculator;
 
 public class StringCalculator {
 
+    public static final String DEFAULT_DELIMITER = " ";
+
     public static String[] split(String textInput) {
         isBlank(textInput);
-        return null;
+        return textInput.split(DEFAULT_DELIMITER);
     }
 
     private static void isBlank(String textInput) {
