@@ -7,7 +7,7 @@ public class InputView {
     }
 
     public void confirmComment(int money) {
-        int count = money/1000;
-        System.out.println(count+"개를 구매했습니다.\n");
+        int count = money / 1000;
+        System.out.println(count + "개를 구매했습니다.\n");
     }
 }
