@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.Lotto;
 import step2.domain.LottoFactory;
+import step2.domain.PurchasedLotto;
 
 class LottoTest {
 
@@ -32,9 +33,9 @@ class LottoTest {
     @ParameterizedTest(name = "입력 금액만큼 로또를 구매한다.")
     @ValueSource(ints = {10000, 1000, 12459})
     void test2(int input) throws Exception {
-        List<Lotto> lottoList = LottoFactory.of(input);
+        PurchasedLotto lottoList = LottoFactory.of(input);
 
-        assertThat(lottoList).hasSize(input / 1000);
+        assertThat(lottoList.get()).hasSize(input / 1000);
     }
 
     @ParameterizedTest(name = "입력 금액이 1000이하일 경우 예외를 던진다.")
