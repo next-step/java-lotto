@@ -19,6 +19,7 @@ public class OutputView {
   }
 
   public static void printLottoResults(Map<Prize, Long> lottoResults) {
+    System.out.println();
     System.out.println("당첨 통계");
     System.out.println("---------");
     for(Prize prize : Prize.values()) {
