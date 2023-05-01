@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static step2.service.LottoFixture.*;
 
 public class LottoTest {
 
@@ -23,22 +24,8 @@ public class LottoTest {
 
     static Stream<Arguments> provideNotSixSizeLotto() {
         return Stream.of(
-                Arguments.arguments(
-                        List.of(
-                                new LottoNumber(1),
-                                new LottoNumber(2),
-                                new LottoNumber(3),
-                                new LottoNumber(4),
-                                new LottoNumber(5)
-                        )
-                ),
-                Arguments.arguments(
-                        List.of(
-                                new LottoNumber(1),
-                                new LottoNumber(2),
-                                new LottoNumber(3)
-                        )
-                )
+                Arguments.arguments(lottoNumbers_3개_번호()),
+                Arguments.arguments(lottoNumbers_5개_번호())
         );
     }
 
@@ -57,72 +44,6 @@ public class LottoTest {
                 Arguments.arguments(createDefaultLottoNumber(), lottoNumbers_5개일치(), new LottoNumber(40), LottoRank.THIRD),
                 Arguments.arguments(createDefaultLottoNumber(), lottoNumbers_5개일치_보너스(), new LottoNumber(6), LottoRank.SECOND),
                 Arguments.arguments(createDefaultLottoNumber(), lottoNumbers_6개일치(), new LottoNumber(40), LottoRank.FIRST)
-        );
-    }
-
-    private static List<LottoNumber> lottoNumbers_3개일치() {
-        return List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(43),
-                new LottoNumber(44),
-                new LottoNumber(45)
-        );
-    }
-
-    private static List<LottoNumber> lottoNumbers_4개일치() {
-        return List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(44),
-                new LottoNumber(45)
-        );
-    }
-
-    private static List<LottoNumber> lottoNumbers_5개일치() {
-        return List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-    }
-
-    private static List<LottoNumber> lottoNumbers_5개일치_보너스() {
-        return List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-    }
-
-    private static List<LottoNumber> lottoNumbers_6개일치() {
-        return List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        );
-    }
-
-    private static List<LottoNumber> createDefaultLottoNumber() {
-        return List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
         );
     }
 }
