@@ -2,11 +2,11 @@ package step2.domain;
 
 import java.util.List;
 
-public class LottoNumber {
+public class PickedNumber {
 
     private final List<Integer> numbers;
 
-    public LottoNumber(List<Integer> numbers) {
+    public PickedNumber(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
