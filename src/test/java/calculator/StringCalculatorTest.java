@@ -80,4 +80,10 @@ public class StringCalculatorTest {
                 .hasMessageContaining("0으로 나눌 수 없습니다.");
     }
 
+    @DisplayName("입력된 순서대로 사칙연산이 되는지 확인")
+    @Test
+    void operate_multiple_values() {
+        assertThat(StringCalculator.calculate("1 + 5 * 3")).isEqualTo("18");
+    }
+
 }
