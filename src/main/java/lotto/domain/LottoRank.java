@@ -23,7 +23,7 @@ public enum LottoRank {
             return SECOND;
         }
 
-        if (count == 5 && !matchBonus) {
+        if (count == 5) {
             return THIRD;
         }
 
