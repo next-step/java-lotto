@@ -2,10 +2,6 @@ package calculator.view;
 
 import java.util.Scanner;
 
-/**
- * @author : 0giri
- * @since : 2023/04/27
- */
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 

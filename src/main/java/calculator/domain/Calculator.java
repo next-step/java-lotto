@@ -1,9 +1,5 @@
 package calculator.domain;
 
-/**
- * @author : 0giri
- * @since : 2023/04/25
- */
 public class Calculator {
 
     public static Number calculate(Expression expression) {

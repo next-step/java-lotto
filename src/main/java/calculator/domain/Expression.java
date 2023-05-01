@@ -3,10 +3,6 @@ package calculator.domain;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author : 0giri
- * @since : 2023/04/26
- */
 public class Expression {
 
     private final List<ExpressionElement> elements;

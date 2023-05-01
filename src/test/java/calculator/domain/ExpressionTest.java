@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-/**
- * @author : 0giri
- * @since : 2023/04/27
- */
 class ExpressionTest {
 
     @Test

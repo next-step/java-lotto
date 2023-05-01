@@ -7,10 +7,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-/**
- * @author : 0giri
- * @since : 2023/04/26
- */
 class OperatorTest {
 
     @Test

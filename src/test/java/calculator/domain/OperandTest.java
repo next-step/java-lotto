@@ -6,10 +6,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-/**
- * @author : 0giri
- * @since : 2023/04/26
- */
 public class OperandTest {
 
     @Test

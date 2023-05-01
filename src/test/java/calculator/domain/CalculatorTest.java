@@ -6,10 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * @author : 0giri
- * @since : 2023/04/25
- */
 public class CalculatorTest {
 
     @Test
