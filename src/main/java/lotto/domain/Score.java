@@ -46,13 +46,6 @@ public class Score {
 		return this.score;
 	}
 
-	public String getBonusString() {
-		if (this.isMatchBonus()) {
-			return ", 보너스 볼 일치";
-		}
-		return " ";
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

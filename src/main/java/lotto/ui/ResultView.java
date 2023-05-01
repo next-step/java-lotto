@@ -27,11 +27,11 @@ public class ResultView {
 			Score score = prizeSituation.getPrizeType().score;
 			long prizeMoney = prizeSituation.getPrizeType().prizeMoney.getPrizeMoney();
 			int prizeCount = prizeSituation.getPrizeCount();
-			System.out.printf("%d개 일치%s(%d원)- %d개%n", score.getScore(), score.getBonusString(), prizeMoney, prizeCount);
+			System.out.printf("%d개 일치%s(%d원)- %d개%n", score.getScore(), score.isMatchBonus() ? ", 보너스 볼 일치" : " ", prizeMoney, prizeCount);
 		}
 	}
 
 	public static void printTotalProfitRate(BenefitResult benefitResult) {
-		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", benefitResult.getTotalProfitRate(), benefitResult.benefitResultString());
+		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", benefitResult.getTotalProfitRate(), benefitResult.isBenefit() ? "이익이" : "손해");
 	}
 }

@@ -61,8 +61,4 @@ public class BenefitResult {
 	public double getTotalProfitRate() {
 		return this.totalProfitRate;
 	}
-
-	public String benefitResultString() {
-		return this.benefit ? "이익이" : "손해";
-	}
 }
