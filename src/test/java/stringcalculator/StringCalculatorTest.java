@@ -3,6 +3,8 @@ package stringcalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringCalculatorTest {
 
@@ -70,6 +72,36 @@ public class StringCalculatorTest {
     @Test
     public void calculateString_ElseStringOperator_ThrowException() {
         String input = "2 + 3 ( 4 / 2";
+
+        StringCalculator stringCalculator = new StringCalculator();
+        Assertions.assertThatThrownBy(() -> stringCalculator.calculateString(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("0으로 나누게 되는 경우 에러를 발생한다.")
+    @Test
+    public void calculateString_DivineByZero_ThrowException() {
+        String input = "2 / 0";
+
+        StringCalculator stringCalculator = new StringCalculator();
+        Assertions.assertThatThrownBy(() -> stringCalculator.calculateString(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력값이 null이면 에러를 발생한다.")
+    public void calculateString_InputIsNull_ThrowException() {
+        String input = null;
+
+        StringCalculator stringCalculator = new StringCalculator();
+        Assertions.assertThatThrownBy(() -> stringCalculator.calculateString(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력값이 공백이면 에러를 발생한다.")
+    public void calculateString_InputIsEmpty_ThrowException() {
+        String input = "";
 
         StringCalculator stringCalculator = new StringCalculator();
         Assertions.assertThatThrownBy(() -> stringCalculator.calculateString(input))
