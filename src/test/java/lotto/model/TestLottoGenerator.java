@@ -1,3 +1,5 @@
+package lotto.model;
+
 import mission.lotto.LottoGenerator;
 
 import java.util.ArrayList;

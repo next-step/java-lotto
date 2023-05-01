@@ -22,7 +22,7 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public RankLottos checkWin(List<Integer> list) {
+    public RankLotto checkWin(List<Integer> list) {
 
         Map<KLottoRank, Integer> winResult = lottos.stream()
                 .map(lotto -> {
@@ -32,7 +32,7 @@ public class Lottos {
                 .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(e -> 1)));
 
-        return new RankLottos(winResult);
+        return new RankLotto(winResult);
     }
 
 }

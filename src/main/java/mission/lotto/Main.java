@@ -8,15 +8,13 @@ import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int money = InputView.intputPay();
         Customer customer = new Customer(money);
         customer.buyLotto(new KLottoGenerator());
         OutputView.showLottos(customer.getLottos());
         List<Integer> lastNumbers = InputView.lastWinNumbers();
-        customer.checkLottoWin(lastNumbers);
-        Map<KLottoRank, Integer> lottoResult = customer.getRankLottos();
-
+        Map<KLottoRank, Integer> lottoResult = customer.checkLottoWin(lastNumbers);
         OutputView.LottoResult(lottoResult, money);
     }
 }

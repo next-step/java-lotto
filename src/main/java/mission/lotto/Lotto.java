@@ -6,21 +6,18 @@ public class Lotto {
 
     private List<Integer> numbers;
     private String name;
-
     private KLottoRank kLottoRank;
 
-
-    public Lotto(LottoGenerator lottoGenerator){
+    public Lotto(LottoGenerator lottoGenerator) {
         this.numbers = lottoGenerator.generate();
         this.name = lottoGenerator.getName();
     }
 
-
-    public List<Integer> getNumbers(){
+    public List<Integer> getNumbers() {
         return this.numbers;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
@@ -30,6 +27,7 @@ public class Lotto {
                 .filter(winNumbers::contains)
                 .count();
     }
+
     public KLottoRank checkRank(int matchCount) {
         return KLottoRank.find(matchCount);
     }
@@ -38,6 +36,4 @@ public class Lotto {
     public String toString() {
         return String.valueOf(numbers);
     }
-
-
 }

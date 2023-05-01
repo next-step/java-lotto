@@ -22,10 +22,12 @@ public class OutputView {
 
         for (KLottoRank value : KLottoRank.values()) {
             int count = lottoResult.getOrDefault(value, 0);
-            System.out.println(value.getCount() + "개 일치 (" + value.getPrize() + ")-" + count  + "개");
+            System.out.println(value.getCount() + "개 일치 (" + value.getPrize() + ")-" + count + "개");
             earnMoney += count * value.getPrize();
         }
 
-        System.out.println("총 수익률은 " + (double)earnMoney/money + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        double rateOfReturn = (double) earnMoney / money;
+
+        System.out.println("총 수익률은 " + rateOfReturn + "입니다." + (rateOfReturn < 1.0 ? "기준이 1이기 때문에 결과적으로 손해라는 의미임" : ""));
     }
 }

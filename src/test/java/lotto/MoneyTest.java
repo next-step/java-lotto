@@ -1,3 +1,5 @@
+package lotto;
+
 import mission.lotto.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

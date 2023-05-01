@@ -1,3 +1,6 @@
+package lotto;
+
+import lotto.model.TestLottoGenerator;
 import mission.lotto.Customer;
 import mission.lotto.KLottoGenerator;
 import mission.lotto.KLottoRank;
@@ -24,21 +27,21 @@ public class CustomerTest {
     @ParameterizedTest(name = "[{index}] {0}치 로또 구매")
     @CsvSource(value = {"0:0", "14000:14"}, delimiter = ':')
     @DisplayName("Customer_로또_구매")
-    public void Customer_로또_구매(int money, int count){
+    public void Customer_로또_구매(int money, int count) {
         Customer customer = new Customer(money);
 
         customer.buyLotto(new KLottoGenerator());
 
         assertThat(customer.getLottos()).hasSize(count);
     }
-    
+
     @Test
     @DisplayName("Customer_구매_로또_확인")
-    public void Customer_구매_로또_확인(){
+    public void Customer_구매_로또_확인() {
         Customer customer = new Customer(5000);
         customer.buyLotto(new TestLottoGenerator());
 
-        customer.checkLottoWin(Arrays.asList(1,2,3,4,5,7));
+        customer.checkLottoWin(Arrays.asList(1, 2, 3, 4, 5, 7));
         Assertions.assertThat(5).isEqualTo(customer.getRankLottos().get(KLottoRank.SECOND));
     }
 }

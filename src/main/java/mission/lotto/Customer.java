@@ -6,14 +6,14 @@ import java.util.Map;
 public class Customer {
     private Money money;
     private Lottos lottos;
-    private RankLottos rankLottos;
+    private RankLotto rankLotto;
 
-    public Customer(int money){
+    public Customer(int money) {
         this.money = new Money(money);
         this.lottos = new Lottos();
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return this.money.getMoney();
     }
 
@@ -21,19 +21,18 @@ public class Customer {
         return this.lottos.getLottos();
     }
 
-    public Map<KLottoRank, Integer> getRankLottos(){
-        return this.rankLottos.getRank();
+    private Map<KLottoRank, Integer> getRankLottos() {
+        return this.rankLotto.getRank();
     }
 
     public void buyLotto(LottoGenerator lottoGenerator) {
-        for(int i=0; i<money.getMoney()/lottoGenerator.getPrice(); i++) {
+        for (int i = 0; i < money.getMoney() / lottoGenerator.getPrice(); i++) {
             lottos.add(new Lotto(lottoGenerator));
         }
     }
 
-    public void checkLottoWin(List<Integer> list) {
-        rankLottos = lottos.checkWin(list);
+    public Map<KLottoRank, Integer> checkLottoWin(List<Integer> list) {
+        rankLotto = lottos.checkWin(list);
+        return getRankLottos();
     }
-
-
 }

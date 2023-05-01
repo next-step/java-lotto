@@ -12,19 +12,23 @@ public class InputView {
         return money;
     }
 
-    public static List<Integer> lastWinNumbers(){
+    public static List<Integer> lastWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         List<Integer> numbers = new ArrayList<>();
         int count = 0;
 
-        try (Scanner scanner = new Scanner(System.in).useDelimiter(",\\s*|\r?\n")){
-            while (count < 6 && scanner.hasNextInt()) {
-                int number = scanner.nextInt();
-                numbers.add(number);
-                count++;
-            }
+        try (Scanner scanner = new Scanner(System.in).useDelimiter(",\\s*|\r?\n")) {
+            inputLastNumbers(numbers, count, scanner);
         }
         return numbers;
+    }
+
+    private static void inputLastNumbers(List<Integer> numbers, int count, Scanner scanner) {
+        while (count < 6 && scanner.hasNextInt()) {
+            int number = scanner.nextInt();
+            numbers.add(number);
+            count++;
+        }
     }
 }
