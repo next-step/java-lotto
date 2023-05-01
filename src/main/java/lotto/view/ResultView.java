@@ -1,6 +1,9 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoTickets;
+import lotto.domain.WinningStatistics;
 
 import java.util.List;
 
@@ -10,23 +13,24 @@ public final class ResultView {
         throw new IllegalCallerException("잘못된 객체생성 입니다.");
     }
 
-    public static void showAvailableLottoCount(PurchasedAmount purchasedAmount) {
-        System.out.printf("%d개를 구매했습니다.\n", purchasedAmount.getAvailableLottoCount());
+    public static void showAvailableLottoCount(LottoTickets maunualLottoTickets, LottoTickets autoLottoTickets) {
+        System.out.printf("%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                maunualLottoTickets.size(),
+                autoLottoTickets.size());
     }
 
     public static void showIssuedLottoTickets(LottoTickets lottoTickets) {
-        List<LottoNumbers> tickets = lottoTickets.getTickets();
+        List<Lotto> tickets = lottoTickets.getTickets();
         tickets.forEach(System.out::println);
     }
 
-    public static void showResult(WinnerStatistics winnerStatistics) {
-        System.out.println();
-        System.out.println("당첨 통계");
+    public static void showResult(WinningStatistics winningStatistics) {
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         LottoRank.getRankValues()
-                .forEach(rank -> showRewards(rank, winnerStatistics.getCountByRank(rank)));
-        showIncomeRate(winnerStatistics.getIncomeRate());
+                .forEach(rank -> showRewards(rank, winningStatistics.getCountByRank(rank)));
+        showIncomeRate(winningStatistics.getIncomeRate());
     }
 
     private static void showIncomeRate(double incomeRate) {

@@ -1,9 +1,10 @@
 package lotto.domain.util;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
+@FunctionalInterface
 public interface NumberGeneratorStrategy {
 
-    LottoNumbers generate();
-    
+    Lotto generate();
+
 }

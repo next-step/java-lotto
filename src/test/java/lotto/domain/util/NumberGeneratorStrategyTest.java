@@ -1,7 +1,7 @@
 package lotto.domain.util;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,16 +19,16 @@ class NumberGeneratorStrategyTest {
     @Test
     @DisplayName("로또번호 6개를 무작위로 생성합니다.")
     void test01() {
-        LottoNumbers lottoNumbers = new LottoNumberGenerator().generate();
-        List<Integer> lottoNumberList = parseToLottoNumberAsList(lottoNumbers);
+        Lotto lotto = new LottoNumberGenerator().generate();
+        List<Integer> lottoNumberList = parseToLottoNumberAsList(lotto);
         Set<Integer> lottoAllNumberSet = generateLottoSet();
 
         assertThat(lottoNumberList).allMatch(lottoAllNumberSet::contains);
 
     }
 
-    private static List<Integer> parseToLottoNumberAsList(LottoNumbers lottoNumbers) {
-        String lottoNumbersAsString = lottoNumbers.toString();
+    private static List<Integer> parseToLottoNumberAsList(Lotto lotto) {
+        String lottoNumbersAsString = lotto.toString();
         lottoNumbersAsString = lottoNumbersAsString.substring(1, lottoNumbersAsString.length() - 1);
         lottoNumbersAsString = lottoNumbersAsString.replace(" ", "");
         return Arrays.stream(lottoNumbersAsString.split(","))

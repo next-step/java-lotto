@@ -3,20 +3,20 @@ package lotto.domain;
 import java.util.Map;
 import java.util.function.ToLongFunction;
 
-public class WinnerStatistics {
+public class WinningStatistics {
 
     private final Map<LottoRank, Integer> rankCountMap = LottoRank.makeRankMap();
     private final int purchasedTicketCount;
 
-    public WinnerStatistics(int purchasedTicketCount) {
+    public WinningStatistics(int purchasedTicketCount) {
         this.purchasedTicketCount = purchasedTicketCount;
     }
 
     public void addMatchedCount(LottoRank lottoRank) {
-        addCountByWinnerReward(lottoRank);
+        addCountByWinningReward(lottoRank);
     }
 
-    private void addCountByWinnerReward(LottoRank lottoRank) {
+    private void addCountByWinningReward(LottoRank lottoRank) {
         int currentCount = rankCountMap.getOrDefault(lottoRank, 0);
         rankCountMap.put(lottoRank, currentCount + 1);
     }

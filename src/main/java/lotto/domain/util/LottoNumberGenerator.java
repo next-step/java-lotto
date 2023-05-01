@@ -1,7 +1,7 @@
 package lotto.domain.util;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,14 +12,14 @@ import static java.util.stream.Collectors.toList;
 public class LottoNumberGenerator implements NumberGeneratorStrategy {
 
     @Override
-    public LottoNumbers generate() {
+    public Lotto generate() {
         List<Integer> candidateLottoNumbers = generateCandidateLottoNumbers();
         List<Integer> lottoNumbers = refineToLottoNumbers(candidateLottoNumbers);
-        return LottoNumbers.ofTypeIntegerList(lottoNumbers);
+        return Lotto.ofTypeIntegerList(lottoNumbers);
     }
 
     private List<Integer> refineToLottoNumbers(List<Integer> rangedNumbers) {
-        List<Integer> subNumbers = rangedNumbers.subList(0, LottoNumbers.LOTTO_NUMBERS_MAX_COUNT);
+        List<Integer> subNumbers = rangedNumbers.subList(0, Lotto.LOTTO_NUMBERS_MAX_COUNT);
         Collections.sort(subNumbers);
         return subNumbers;
     }

@@ -12,7 +12,10 @@ class PurchasedAmountTest {
     @Test
     @DisplayName("최소 구입금액 1000원 이상 입력시 정상수행됩니다.")
     void test01() {
-        assertThatNoException().isThrownBy(() -> new PurchasedAmount(2_000));
+        assertAll(
+                () -> assertThatNoException().isThrownBy(() -> new PurchasedAmount(1_000)),
+                () -> assertThatNoException().isThrownBy(() -> new PurchasedAmount(2_000))
+        );
     }
 
     @Test
@@ -25,5 +28,18 @@ class PurchasedAmountTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-    
+
+    @Test
+    @DisplayName("수동 로또 개수가 전체 구입가능한 금액을 넘을 경우 에러가 발생합니다.")
+    void test03() {
+        assertThatNoException().isThrownBy(() -> new PurchasedAmount(1_000, 1));
+    }
+
+    @Test
+    @DisplayName("수동 로또 개수가 전체 구입가능한 금액을 넘을 경우 에러가 발생합니다.")
+    void test04() {
+        assertThatThrownBy(() -> new PurchasedAmount(1_000, 2))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

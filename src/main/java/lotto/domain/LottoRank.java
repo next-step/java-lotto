@@ -81,7 +81,14 @@ public enum LottoRank {
 
         public MapKey(long matchedCount, boolean isMatchedBonusBall) {
             this.matchedCount = matchedCount;
-            this.isMatchedBonusBall = isMatchedBonusBall;
+            this.isMatchedBonusBall = isMatchedBonusBallByCount(matchedCount, isMatchedBonusBall);
+        }
+
+        private boolean isMatchedBonusBallByCount(long matchedCount, boolean isMatchedBonusBall) {
+            if (matchedCount == SECOND.getMatchedCount()) {
+                return isMatchedBonusBall;
+            }
+            return false;
         }
 
         @Override

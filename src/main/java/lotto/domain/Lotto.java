@@ -7,27 +7,27 @@ import java.util.Set;
 import static java.util.stream.Collectors.toUnmodifiableList;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 
-public class LottoNumbers {
+public class Lotto {
 
     public static final int LOTTO_NUMBERS_MAX_COUNT = 6;
 
     private final List<LottoNumber> numbers;
 
-    public static LottoNumbers ofTypeIntegers(Integer... numbers) {
+    public static Lotto ofTypeIntegers(Integer... numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
                 .map(LottoNumber::new)
                 .collect(toUnmodifiableList());
-        return new LottoNumbers(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
-    public static LottoNumbers ofTypeIntegerList(List<Integer> numbers) {
+    public static Lotto ofTypeIntegerList(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(toUnmodifiableList());
-        return new LottoNumbers(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
-    public LottoNumbers(List<LottoNumber> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
@@ -52,9 +52,9 @@ public class LottoNumbers {
         }
     }
 
-    public long countToMatchedWinnerNumbers(LottoNumbers winnerNumbers) {
+    public long countToMatchedWinningNumbers(Lotto winningLotto) {
         return numbers.stream()
-                .filter(winnerNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
     }
 
