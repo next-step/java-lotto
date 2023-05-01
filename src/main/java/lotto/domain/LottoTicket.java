@@ -24,13 +24,12 @@ public class LottoTicket {
     }
 
     public int calculateSameNumberCount(LottoTicket lottoTicket) {
-        List<Integer> lottoNumber = lottoTicket.getLottoNumber();
         return (int) this.lottoNumbers.stream()
-                .filter(lottoNumber::contains)
+                .filter(lottoTicket::hasNumber)
                 .count();
     }
 
-    public boolean hasBonusNumber(int number) {
+    public boolean hasNumber(int number) {
         return lottoNumbers.contains(number);
     }
 

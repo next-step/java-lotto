@@ -42,7 +42,7 @@ public class LottoTickets {
                                    int bonusNumber) {
         LottoRank lottoRank = LottoRank.valueOf(
                 ticket.calculateSameNumberCount(lottoTicket),
-                ticket.hasBonusNumber(bonusNumber));
+                ticket.hasNumber(bonusNumber));
         if (counts.containsKey(lottoRank)) {
             counts.put(lottoRank, counts.get(lottoRank) + 1);
             return;
