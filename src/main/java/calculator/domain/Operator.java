@@ -4,7 +4,7 @@ package calculator.domain;
  * @author : 0giri
  * @since : 2023/04/26
  */
-public enum Operator implements ExpressionElement{
+public enum Operator implements ExpressionElement {
     PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
 
     private final String operator;

@@ -12,10 +12,10 @@ import calculator.view.OutputView;
  * @since : 2023/04/26
  */
 public class Main {
-   public static void main(String[] args) {
-      String stringExpression = InputView.askExpression();
-      Expression expression = StringExpressionParser.parse(stringExpression);
-      Number result = Calculator.calculate(expression);
-      OutputView.printResult(result);
-   }
+    public static void main(String[] args) {
+        String stringExpression = InputView.askExpression();
+        Expression expression = StringExpressionParser.parse(stringExpression);
+        Number result = Calculator.calculate(expression);
+        OutputView.printResult(result);
+    }
 }
