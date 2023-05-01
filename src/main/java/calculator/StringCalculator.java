@@ -1,6 +1,7 @@
 package calculator;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -89,6 +90,12 @@ public class StringCalculator {
             @Override
             String operate(String x, String y) {
                 return new BigDecimal(x).multiply(new BigDecimal(y)).toString();
+            }
+        },
+        DIVIDE("/") {
+            @Override
+            String operate(String x, String y) {
+                return new BigDecimal(x).divide(new BigDecimal(y), RoundingMode.FLOOR).toString();
             }
         };
 

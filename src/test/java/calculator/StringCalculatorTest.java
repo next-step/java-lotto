@@ -66,4 +66,10 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.calculate("3.3 * 2")).isEqualTo("6.6");
     }
 
+    @DisplayName("나눗셈 사칙연산 기호가 포함 된 입력된 문자열이 나눗셈 사칙연산의 정수 결과값이 반환되는지 확인")
+    @Test
+    void divide() {
+        assertThat(StringCalculator.calculate("11 / 2")).isEqualTo("5");
+    }
+
 }
