@@ -1,19 +1,20 @@
 package view;
 
 import domain.LottoTicket;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import util.Converter;
+import java.util.stream.Collectors;
 
 public class InputView {
 
-  private static final Scanner scanner = new Scanner(System.in);
+  private static final Scanner SCANNER = new Scanner(System.in);
 
   public static int scanMoney() {
     System.out.println("구입금액을 입력해 주세요.");
-    int investMoney = scanner.nextInt();
-    validateInvestMoney(investMoney);
-    return investMoney;
+    String investMoney = SCANNER.nextLine();
+    validateInvestMoney(Integer.parseInt(investMoney));
+    return Integer.parseInt(investMoney);
   }
 
   private static void validateInvestMoney(int investMoney) {
@@ -36,8 +37,34 @@ public class InputView {
   public static List<Integer> scanWinningNumbers() {
     System.out.println();
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    String winningNumbers = scanner.next();
-    return Converter.convertToLottoNumbers(winningNumbers);
+    String winningNumbers = SCANNER.nextLine();
+    validateWinningNumbers(winningNumbers);
+    return convertToLottoNumbers(winningNumbers);
   }
+
+  private static void validateWinningNumbers(String winningNumbers) {
+    if (isBlank(winningNumbers)) {
+      throw new IllegalArgumentException("공백은 입력할 수 없습니다.");
+    }
+    if (!hasSixNumbers(winningNumbers)) {
+      throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
+    }
+  }
+
+  private static boolean hasSixNumbers(String winningNumbers) {
+    return winningNumbers.split(",\\s*").length == 6;
+  }
+
+  private static boolean isBlank(String winningNumbers) {
+    return winningNumbers == null || winningNumbers.isBlank();
+  }
+
+  private static List<Integer> convertToLottoNumbers(String winningNumbers) {
+    String[] numbers = winningNumbers.split(",\\s*");
+    return Arrays.stream(numbers)
+        .map(Integer::parseInt)
+        .collect(Collectors.toList());
+  }
+
 
 }
