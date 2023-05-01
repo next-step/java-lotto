@@ -6,10 +6,10 @@ import java.util.Map;
 public class WinningTicket {
 
     private LottoTicket winningNumber;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
 
-    public WinningTicket(List<Integer> winningNumber, int bonusNumber) {
+    public WinningTicket(List<Integer> winningNumber, LottoNumber bonusNumber) {
         this.winningNumber = new LottoTicket(winningNumber);
         this.bonusNumber = bonusNumber;
     }

@@ -7,10 +7,9 @@ import java.util.stream.IntStream;
 
 public class RandomNumberCreation implements NumberCreationStrategy {
 
-    private static final int LOTTO_FIRST_NUMBER = 1;
-    private static final int LOTTO_LAST_NUMBER = 45;
     private static final List<Integer> number =
-            IntStream.rangeClosed(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER)
+            IntStream.rangeClosed(LottoNumber.LOTTO_FIRST_NUMBER,
+                                    LottoNumber.LOTTO_LAST_NUMBER)
                     .boxed()
                     .collect(Collectors.toList());
 

@@ -1,12 +1,13 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
     public static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public LottoTicket(NumberCreationStrategy strategy) {
         this(strategy.createNumber());
@@ -14,7 +15,7 @@ public class LottoTicket {
 
     public LottoTicket(List<Integer> lottoNumbers) {
         validateLottoNumberLength(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = to(lottoNumbers);
     }
 
     private void validateLottoNumberLength(List<Integer> lottoNumbers) {
@@ -23,17 +24,23 @@ public class LottoTicket {
         }
     }
 
+    private List<LottoNumber> to(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
     public int calculateSameNumberCount(LottoTicket lottoTicket) {
         return (int) this.lottoNumbers.stream()
                 .filter(lottoTicket::hasNumber)
                 .count();
     }
 
-    public boolean hasNumber(int number) {
+    public boolean hasNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNumber> getLottoNumber() {
         return lottoNumbers;
     }
 }

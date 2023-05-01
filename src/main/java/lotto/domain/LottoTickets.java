@@ -28,7 +28,7 @@ public class LottoTickets {
         return numbers;
     }
 
-    public Map<LottoRank, Integer> calculateSameNumberCounts(LottoTicket lottoTicket, int bonusNumber) {
+    public Map<LottoRank, Integer> calculateSameNumberCounts(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         Map<LottoRank, Integer> counts = new HashMap<>();
         for (LottoTicket ticket : lottoTickets) {
             calculateOneStage(lottoTicket, counts, ticket, bonusNumber);
@@ -39,7 +39,7 @@ public class LottoTickets {
     private void calculateOneStage(LottoTicket lottoTicket,
                                    Map<LottoRank, Integer> counts,
                                    LottoTicket ticket,
-                                   int bonusNumber) {
+                                   LottoNumber bonusNumber) {
         LottoRank lottoRank = LottoRank.valueOf(
                 ticket.calculateSameNumberCount(lottoTicket),
                 ticket.hasNumber(bonusNumber));
