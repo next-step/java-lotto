@@ -1,16 +1,24 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
 
-  List<Integer> lotto;
+  private final List<Integer> lotto;
 
-  public Lotto(List<Integer> integers) {
-    lotto = integers;
+  public Lotto(List<Integer> lotto) {
+    this.lotto = lotto;
+    Collections.sort(this.lotto);
   }
 
   public List<Integer> getLotto() {
     return lotto;
   }
+
+  @Override
+  public String toString() {
+    return lotto.toString();
+  }
+
 }

@@ -17,10 +17,8 @@ public class Lottos {
     int purchaseNumber = purchaseAmount / LOTTO_PRICE;
 
     LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-    lottoNumberGenerator.init();
     for (int i = 0; i < purchaseNumber; i++) {
-      Lotto lotto = lottoNumberGenerator.create();
-      lottos.add(lotto);
+      lottos.add(new Lotto(lottoNumberGenerator.create()));
     }
 
     return this.lottos;

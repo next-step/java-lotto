@@ -17,9 +17,8 @@ public class LottoTest {
   @Test
   void 로또번호는1부터45사이의숫자여야한다_로또는1장당6개의번호를랜덤으로생성한다() {
     LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-    lottoNumberGenerator.init();
 
-    Lotto lottoNumber = lottoNumberGenerator.create();
+    Lotto lottoNumber = new Lotto(lottoNumberGenerator.create());
 
     assertThat(lottoNumber.getLotto()).hasSize(6);
     assertThat(lottoNumber.getLotto()).allMatch(number -> number < 46 && number > 0);
