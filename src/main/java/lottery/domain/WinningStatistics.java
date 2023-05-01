@@ -5,13 +5,13 @@ import static java.util.Arrays.stream;
 import java.util.Map;
 import lottery.domain.constant.Rank;
 
-public class WinningLotteries {
+public class WinningStatistics {
 
     private static final String NOT_CONTAINS_ALL_KEYS = "당첨을 판별 할 수 있는 키 정보가 없습니다.";
 
     private final Map<Rank, Integer> lotteriesByRank;
 
-    public WinningLotteries(Map<Rank, Integer> lotteriesByRank) {
+    public WinningStatistics(Map<Rank, Integer> lotteriesByRank) {
         if(notContainsAllEssentialKeys(lotteriesByRank)) {
             throw new IllegalArgumentException(NOT_CONTAINS_ALL_KEYS);
         }
