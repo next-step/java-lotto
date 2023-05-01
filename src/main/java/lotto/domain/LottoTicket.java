@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.strategy.LottoTicketCreateStrategy;
+import lotto.dto.CheckWinningRequest;
 import lotto.enums.Rank;
 
 import java.util.Collections;
@@ -38,12 +39,20 @@ public class LottoTicket {
         return (int) target.stream().filter(this.lottoNumbers::contains).count();
     }
 
-    public Rank getRank(List<Integer> winNumbers) {
-        return Rank.of(countSameNumber(winNumbers));
+    public boolean isContainNumber(int number) {
+        return lottoNumbers.contains(number);
+    }
+
+    public Rank getRank(CheckWinningRequest checkWinningRequest) {
+        return Rank.of(countSameNumber(checkWinningRequest.getWinningNumbers()), isBounusWin(checkWinningRequest));
     }
 
     public Set<Integer> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
+    }
+
+    public boolean isBounusWin(CheckWinningRequest checkWinningRequest) {
+        return countSameNumber(checkWinningRequest.getWinningNumbers()) == 5 && isContainNumber(checkWinningRequest.getBonusBall());
     }
 
     @Override

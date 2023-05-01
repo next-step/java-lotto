@@ -5,6 +5,7 @@ import java.util.Arrays;
 public enum Rank {
 
     FIRST_PLACE(6, 2000000000),
+    BONUS_PLACE(-1, 30000000),
     SECOND_PLACE(5, 1500000),
     THIRD_PLACE(4, 50000),
     FOURTH_PLACE(3, 5000),
@@ -19,14 +20,22 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank of(int winCount) {
+    public static Rank of(int winCount, boolean bonusWin) {
         if (winCount < MIN_WIN_COUNT) {
             return LOST;
         }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.winCount == winCount)
+                .map(rank -> upgrade(rank, bonusWin))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("당첨된 번호의 갯수가 범위에서 벗어낫습니다."));
+    }
+
+    public static Rank upgrade(Rank rank, boolean bonusWin) {
+        if (bonusWin) {
+            return BONUS_PLACE;
+        }
+        return rank;
     }
 
     public int getWinCount() {

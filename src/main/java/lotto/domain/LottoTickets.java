@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.CheckWinningRequest;
 import lotto.dto.WinningResult;
 import lotto.enums.Rank;
 
@@ -18,8 +19,8 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public double getTotalReturn(List<Integer> winLottoNumbers) {
-        double totalPrize = lottoTickets.stream().mapToInt(o -> o.getRank(winLottoNumbers).getPrize()).sum();
+    public double getTotalReturn(CheckWinningRequest checkWinningRequest) {
+        double totalPrize = lottoTickets.stream().mapToInt(o -> o.getRank(checkWinningRequest).getPrize()).sum();
         double purchaseAmount = lottoTickets.size() * TICKET_PRICE;
         return convertTotalReturnFormat(totalPrize / purchaseAmount);
     }
@@ -28,13 +29,13 @@ public class LottoTickets {
         return Math.floor(totalReturn * 100) / 100.0;
     }
 
-    public WinningResult tallyUp(List<Integer> winLottoNumbers) {
+    public WinningResult tallyUp(CheckWinningRequest checkWinningRequest) {
         Map<Rank, Integer> rankCount = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            Rank rank = lottoTicket.getRank(winLottoNumbers);
+            Rank rank = lottoTicket.getRank(checkWinningRequest);
             rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
         }
-        return new WinningResult(rankCount, getTotalReturn(winLottoNumbers));
+        return new WinningResult(rankCount, getTotalReturn(checkWinningRequest));
     }
 
     public List<LottoTicket> getLottoTickets() {
