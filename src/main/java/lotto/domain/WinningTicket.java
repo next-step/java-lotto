@@ -11,7 +11,14 @@ public class WinningTicket {
 
     public WinningTicket(List<Integer> winningNumber, LottoNumber bonusNumber) {
         this.winningNumber = new LottoTicket(winningNumber);
+        validateDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateDuplicateNumber(LottoNumber bonusNumber) {
+        if (winningNumber.hasNumber(bonusNumber)) {
+            throw new IllegalArgumentException("당첨 번호와 중복되는 번호입니다.");
+        }
     }
 
     public Map<LottoRank, Integer> countMatching(LottoTickets lottoTickets) {
