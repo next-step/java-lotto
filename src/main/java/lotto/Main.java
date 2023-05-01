@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoRewards;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -25,11 +22,15 @@ public class Main {
         LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.inputWinningLottoNumbers());
         LottoNumber bonusLottoNumber = Lotto.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLottoNumbers));
 
-        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
+        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers(winningLottoNumbers, bonusLottoNumber));
         double totalProfitRate = Lotto.totalProfitRate(lottoRewards, purchasePrice);
 
         ResultView.printWinningStatics(lottoRewards, totalProfitRate);
 
         inputView.close();
+    }
+
+    private static WinningLottoNumbers winningLottoNumbers(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
+        return new WinningLottoNumbers(winningLottoNumbers, bonusLottoNumber);
     }
 }

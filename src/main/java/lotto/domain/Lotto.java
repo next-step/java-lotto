@@ -42,25 +42,25 @@ public class Lotto {
         return new LottoNumber(bonusLottoNumber);
     }
 
-    public static LottoRewards reward(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
+    public static LottoRewards reward(List<LottoNumbers> lottoNumbersList, WinningLottoNumbers winningLottoNumbers) {
         LottoRewards lottoRewards = new LottoRewards();
 
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            increaseLottoRewardCount(lottoRewards, lottoNumbers, winningLottoNumbers, bonusLottoNumber);
+            increaseLottoRewardCount(lottoRewards, lottoNumbers, winningLottoNumbers);
         }
 
         return lottoRewards;
     }
 
-    private static void increaseLottoRewardCount(LottoRewards lottoRewards, LottoNumbers lottoNumbers, LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
-        if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers)) {
+    private static void increaseLottoRewardCount(LottoRewards lottoRewards, LottoNumbers lottoNumbers, WinningLottoNumbers winningLottoNumbers) {
+        if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers.numbers())) {
             return;
         }
 
-        int matchCount = winningLottoNumbers.matchCount(lottoNumbers);
+        int matchCount = lottoNumbers.matchCount(winningLottoNumbers.numbers());
         RewardType rewardType = RewardType.of(matchCount);
 
-        if (rewardType == RewardType.FIVE && winningLottoNumbers.isMatchWith(bonusLottoNumber)) {
+        if (rewardType == RewardType.FIVE && lottoNumbers.isMatchWith(winningLottoNumbers.bonusNumber())) {
             rewardType = RewardType.FIVE_AND_BONUS;
         }
 

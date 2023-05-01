@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,7 +16,9 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoTest {
 
-    LottoNumbers myLottoNumbers, winningLottoNumbers;
+    WinningLottoNumbers winningLottoNumbers;
+    LottoNumbers myLottoNumbers, winningLottoNumbersExcludingBonus;
+    LottoNumber bonusLottoNumber;
 
     @BeforeEach
     void setUp() {
@@ -26,11 +28,15 @@ public class LottoTest {
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
                 ).collect(Collectors.toSet()));
 
-        winningLottoNumbers = new LottoNumbers(
+        winningLottoNumbersExcludingBonus = new LottoNumbers(
                 Stream.of(
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)
                 ).collect(Collectors.toSet()));
+
+        bonusLottoNumber = new LottoNumber(6);
+
+        winningLottoNumbers = new WinningLottoNumbers(winningLottoNumbersExcludingBonus, bonusLottoNumber);
     }
 
     @ParameterizedTest
@@ -53,67 +59,53 @@ public class LottoTest {
         assertThat(Lotto.lottoCount(price)).isEqualTo(lottoCount);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"7:3000000", "45:60000000"}, delimiter = ':')
-    void 총_수익_계산(int bonusNumber, long totalProfit) {
+    @Test
+    void 총_수익_계산() {
         //given
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(myLottoNumbers);
-        lottoNumbersList.add(myLottoNumbers);
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers, myLottoNumbers);
 
         //when
-        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
+        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
-        assertThat(reward.totalProfit()).isEqualTo(totalProfit);
+        assertThat(reward.totalProfit()).isEqualTo(60000000L);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"7:1500", "45:30000"}, delimiter = ':')
-    void 총_수익률_계산(int bonusNumber, long totalProfitRate) {
+    @Test
+    void 총_수익률_계산() {
         //given
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(myLottoNumbers);
-        lottoNumbersList.add(myLottoNumbers);
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers, myLottoNumbers);
         long purchasePrice = 2000l;
 
         //when
-        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
+        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
-        assertThat(Lotto.totalProfitRate(reward, purchasePrice)).isEqualTo(totalProfitRate);
+        assertThat(Lotto.totalProfitRate(reward, purchasePrice)).isEqualTo(30000);
     }
 
     @Test
     void 일치_수별_횟수_세기() {
         //given
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(myLottoNumbers);
-        lottoNumbersList.add(winningLottoNumbers);
-        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers, winningLottoNumbersExcludingBonus);
 
         //when
-        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
+        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
-        assertThat(lottoRewards.get(RewardType.FIVE).count()).isEqualTo(1);
-        assertThat(lottoRewards.get(RewardType.SIX).count()).isEqualTo(1);
+        assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
+        assertThat(reward.get(RewardType.SIX).count()).isEqualTo(1);
     }
 
     @Test
     void 당첨번호_5개_일치_보너스번호_일치() {
         //given
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(myLottoNumbers);
-        lottoNumbersList.add(winningLottoNumbers);
-        LottoNumber bonusLottoNumber = new LottoNumber(45);
+        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers);
 
         //when
-        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
+        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
-        assertThat(lottoRewards.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
+        assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
     }
 }
