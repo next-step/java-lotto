@@ -13,7 +13,7 @@ public class PurchasedLotto {
     public int getSumOfWinningMoney() {
         int sum = 0;
         for (Lotto lotto : lottoList) {
-            sum += lotto.prizeMoney();
+            sum += lotto.getPrizedMoney();
         }
         return sum;
     }

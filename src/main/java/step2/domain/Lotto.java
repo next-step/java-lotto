@@ -29,7 +29,7 @@ public class Lotto {
         this.ranking = ranking;
     }
 
-    public int prizeMoney() {
+    public int getPrizedMoney() {
         return this.ranking.getWinningMoney();
     }
 

@@ -42,7 +42,7 @@ public class LottoMatchTest {
 
             lotteryWin.confirm(this.lottoList);
 
-            assertThat(lotto.prizeMoney()).isEqualTo(Ranking.FIFTH.getWinningMoney());
+            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FIFTH.getWinningMoney());
         }
 
         @DisplayName("당첨 번호와 4개가 일치하는 경우를 나타낼 수 있다.")
@@ -54,7 +54,7 @@ public class LottoMatchTest {
 
             lotteryWin.confirm(this.lottoList);
 
-            assertThat(lotto.prizeMoney()).isEqualTo(Ranking.FOURTH.getWinningMoney());
+            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FOURTH.getWinningMoney());
         }
 
         @DisplayName("당첨 번호와 5개가 일치하는 경우를 나타낼 수 있다.")
@@ -66,7 +66,7 @@ public class LottoMatchTest {
 
             lotteryWin.confirm(this.lottoList);
 
-            assertThat(lotto.prizeMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
+            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
         }
 
         @DisplayName("당첨 번호와 6개가 일치하는 경우를 나타낼 수 있다.")
@@ -78,7 +78,7 @@ public class LottoMatchTest {
 
             lotteryWin.confirm(this.lottoList);
 
-            assertThat(lotto.prizeMoney()).isEqualTo(Ranking.FIRST.getWinningMoney());
+            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FIRST.getWinningMoney());
         }
 
         @DisplayName("3등을 나타낼 수 있다.")
@@ -90,7 +90,7 @@ public class LottoMatchTest {
 
             lotteryWin.confirm(this.lottoList);
 
-            assertThat(lotto.prizeMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
+            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
         }
 
         @DisplayName("2등을 나타낼 수 있다.")
@@ -102,7 +102,7 @@ public class LottoMatchTest {
 
             lotteryWin.confirm(this.lottoList);
 
-            assertThat(lotto.prizeMoney()).isEqualTo(Ranking.SECOND.getWinningMoney());
+            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.SECOND.getWinningMoney());
         }
     }
 
