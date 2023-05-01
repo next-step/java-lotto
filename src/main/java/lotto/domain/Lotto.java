@@ -42,23 +42,27 @@ public class Lotto {
         return new LottoNumber(bonusLottoNumber);
     }
 
-    public static LottoRewards reward(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers) {
+    public static LottoRewards reward(List<LottoNumbers> lottoNumbersList, LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
         LottoRewards lottoRewards = new LottoRewards();
 
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            increaseLottoRewardCount(lottoRewards, lottoNumbers, winningLottoNumbers);
+            increaseLottoRewardCount(lottoRewards, lottoNumbers, winningLottoNumbers, bonusLottoNumber);
         }
 
         return lottoRewards;
     }
 
-    private static void increaseLottoRewardCount(LottoRewards lottoRewards, LottoNumbers lottoNumbers, LottoNumbers winningLottoNumbers) {
+    private static void increaseLottoRewardCount(LottoRewards lottoRewards, LottoNumbers lottoNumbers, LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
         if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers)) {
             return;
         }
 
-        int matchCount = lottoNumbers.matchCount(winningLottoNumbers);
+        int matchCount = winningLottoNumbers.matchCount(lottoNumbers);
         RewardType rewardType = RewardType.of(matchCount);
+
+        if (rewardType == RewardType.FIVE && winningLottoNumbers.isMatchWith(bonusLottoNumber)) {
+            rewardType = RewardType.FIVE_AND_BONUS;
+        }
 
         if (lottoRewards.isNotContainRewardType(rewardType)) {
             lottoRewards.add(new LottoReward(rewardType, INIT_COUNT));

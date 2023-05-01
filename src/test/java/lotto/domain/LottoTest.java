@@ -29,7 +29,7 @@ public class LottoTest {
         winningLottoNumbers = new LottoNumbers(
                 Stream.of(
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)
                 ).collect(Collectors.toSet()));
     }
 
@@ -59,12 +59,13 @@ public class LottoTest {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(myLottoNumbers);
         lottoNumbersList.add(myLottoNumbers);
+        LottoNumber bonusLottoNumber = new LottoNumber(7);
 
         //when
-        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
 
         //then
-        assertThat(reward.totalProfit()).isEqualTo(10000L);
+        assertThat(reward.totalProfit()).isEqualTo(3000000L);
     }
 
     @Test
@@ -73,12 +74,28 @@ public class LottoTest {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(myLottoNumbers);
         lottoNumbersList.add(winningLottoNumbers);
+        LottoNumber bonusLottoNumber = new LottoNumber(7);
 
         //when
-        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
 
         //then
-        assertThat(lottoRewards.get(RewardType.THREE).count()).isEqualTo(1);
+        assertThat(lottoRewards.get(RewardType.FIVE).count()).isEqualTo(1);
         assertThat(lottoRewards.get(RewardType.SIX).count()).isEqualTo(1);
+    }
+
+    @Test
+    void 당첨번호_5개_일치_보너스번호_일치() {
+        //given
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(myLottoNumbers);
+        lottoNumbersList.add(winningLottoNumbers);
+        LottoNumber bonusLottoNumber = new LottoNumber(45);
+
+        //when
+        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
+
+        //then
+        assertThat(lottoRewards.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
     }
 }

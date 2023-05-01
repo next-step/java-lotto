@@ -24,7 +24,7 @@ public class Main {
         LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.inputWinningLottoNumbers());
         LottoNumber bonusLottoNumber = Lotto.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLottoNumbers));
 
-        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
         ResultView.printWinningStatics(lottoRewards, purchasePrice);
 
         inputView.close();

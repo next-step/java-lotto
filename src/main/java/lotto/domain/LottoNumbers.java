@@ -43,9 +43,13 @@ public class LottoNumbers {
 
     public int matchCount(LottoNumbers numbers) {
         List<LottoNumber> matchNumbers = this.numbers.stream()
-                .filter(m -> numbers.value().stream()
-                        .anyMatch(Predicate.isEqual(m))).collect(Collectors.toList());
+                .filter(v -> numbers.value().stream()
+                        .anyMatch(Predicate.isEqual(v))).collect(Collectors.toList());
         return matchNumbers.size();
+    }
+
+    boolean isMatchWith(LottoNumber number) {
+        return numbers.stream().anyMatch(v -> v.value() == number.value());
     }
 
     public Set<LottoNumber> value() {
