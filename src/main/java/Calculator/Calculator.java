@@ -1,7 +1,9 @@
 package Calculator;
 
+import Calculator.Operator.*;
+
 public class Calculator {
-    private String inputString;
+    private final String inputString;
     private int result;
 
     public Calculator(String inputString) {
@@ -27,11 +29,13 @@ public class Calculator {
             int operand2 = Integer.parseInt(splitInputString[i + 1]);
             String curOperator = splitInputString[i];
 
-            Operator operator = new Operator(curOperator);
-            this.result = operator.calculateProcess(operand1, operand2);
+            OperatorProcess operatorProcess = new OperatorProcess(operand1,operand2,curOperator);
+            this.result = operatorProcess.calculateProcess();
+
         }
 
     }
-
 }
+
+
 
