@@ -3,6 +3,7 @@ package lottery.domain;
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.IntStream.range;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ public class Lotteries {
     public Lotteries(int plays) {
         this(lotteriesByPlayNumbers(plays));
     }
+
 
     public Lotteries(List<SixLotteryNumbers> lotteries) {
         this.lotteries = lotteries;
