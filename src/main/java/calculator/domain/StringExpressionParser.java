@@ -32,13 +32,10 @@ public class StringExpressionParser {
     private static Expression convertToExpression(String[] stringElements) {
         List<Operand> operands = new ArrayList<>();
         List<Operator> operators = new ArrayList<>();
-        Operand firstOperand = new Operand(stringElements[0]);
-        operands.add(firstOperand);
+        operands.add(new Operand(new Number(stringElements[0])));
         for (int i = 1; i < stringElements.length; i += 2) {
-            Operator operator = Operator.find(stringElements[i]);
-            operators.add(operator);
-            Operand operand = new Operand(stringElements[i + 1]);
-            operands.add(operand);
+            operators.add(Operator.find(stringElements[i]));
+            operands.add(new Operand(new Number(stringElements[i + 1])));
         }
         return new Expression(operands, operators);
     }

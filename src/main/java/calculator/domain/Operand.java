@@ -4,12 +4,11 @@ public class Operand implements ExpressionElement {
 
     private final Number number;
 
-    public Operand(String value) {
-        this.number = new Number(value);
-    }
-
-    public Operand(int value) {
-        this.number = new Number(value);
+    Operand(Number number) {
+        if (number == null) {
+            throw new IllegalArgumentException("null로는 Operand를 생성할 수 없습니다.");
+        }
+        this.number = number;
     }
 
     public int value() {

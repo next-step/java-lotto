@@ -32,7 +32,7 @@ public class Expression {
             Operator operator = operators.get(i / 2);
             Operand postOperand = operands.get((i + 1) / 2);
             Number result = operator.calculate(preOperand, postOperand);
-            preOperand = new Operand(result.value());
+            preOperand = new Operand(result);
         }
         return new Number(preOperand.value());
     }

@@ -19,12 +19,15 @@ class ExpressionTest {
     @Test
     void Operator_리스트가_null인_경우_IllegalArgumentException() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Expression(List.of(new Operand("3")), null));
+                .isThrownBy(() -> new Expression(List.of(new Operand(new Number(3))), null));
     }
 
     @Test
     void calculate() {
-        List<Operand> operands = List.of(new Operand("3"), new Operand("3"), new Operand("5"));
+        Operand operand1 = new Operand(new Number(3));
+        Operand operand2 = new Operand(new Number(3));
+        Operand operand3 = new Operand(new Number(5));
+        List<Operand> operands = List.of(operand1, operand2, operand3);
         List<Operator> operators = List.of(Operator.PLUS, Operator.MULTIPLY);
         Expression expression = new Expression(operands, operators);
         assertThat(expression.calculate()).isEqualTo(new Number(30));
