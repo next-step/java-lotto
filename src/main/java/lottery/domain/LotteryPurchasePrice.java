@@ -12,11 +12,7 @@ public class LotteryPurchasePrice {
         if(invalidPrice(purchasedPrice)) {
             throw new IllegalArgumentException(INVALID_PRICE_MSG);
         }
-        this.purchasedPrice = truncateThousands(purchasedPrice);
-    }
-
-    private int truncateThousands(int purchasePrice) {
-        return ( purchasePrice / 1000) * 1000;
+        this.purchasedPrice = purchasedPrice;
     }
 
     private boolean invalidPrice(int purchasePrice) {
@@ -27,8 +23,5 @@ public class LotteryPurchasePrice {
         return this.purchasedPrice / LOTTERY_PRICE.getRuleNumber();
     }
 
-    public int getPurchasedPrice() {
-        return this.purchasedPrice;
-    }
 
 }

@@ -1,7 +1,6 @@
 package lottery.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,6 +11,8 @@ import lottery.domain.constant.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class WinningStatisticsTest {
 
@@ -49,4 +50,12 @@ public class WinningStatisticsTest {
         assertThat(new WinningStatistics(lotteriesByRank).getTotalWinningPrice())
                 .isEqualTo(1_625_000);
     }
+
+    @ParameterizedTest(name = "로또 구매 금액 대비 수령금액 을 1을 기준으로 반환한다.")
+    @CsvSource(value = {"1625:1.0"},delimiter = ':')
+    void returnOnInvestmentTest(int lotteries, double expectedReturn) {
+        assertThat(new WinningStatistics(lotteriesByRank).returnOnInvestment(lotteries))
+                .isEqualTo(expectedReturn);
+    }
+
 }
