@@ -31,7 +31,6 @@ public class LotteriesTest {
     assertThat(prizeStaticsMap.get(Rank.FOURTH)).isEqualTo(1);
     assertThat(prizeStaticsMap.get(Rank.FIRST)).isEqualTo(1);
     assertThat(gameResult.getPrizeMoney())
-        .isEqualTo(new Money(Rank.FOURTH.getWinningMoney() + Rank.FIRST
-            .getWinningMoney()));
+        .isEqualTo(new Money(Rank.FOURTH.getWinningMoney() + Rank.FIRST.getWinningMoney()));
   }
 }
