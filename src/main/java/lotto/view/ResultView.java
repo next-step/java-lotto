@@ -7,6 +7,8 @@ import lotto.domain.RewardType;
 
 import java.util.List;
 
+import static lotto.domain.RewardType.FIVE_AND_BONUS;
+
 public class ResultView {
 
     private static final int BRAKE_EVEN_POINT = 1;
@@ -48,15 +50,28 @@ public class ResultView {
         }
     }
 
-    private static void printLottoRewardCount(LottoRewards lottoRewards, RewardType mc) {
-        String phrase = mc.phrase();
-        LottoReward lottoReward = lottoRewards.get(mc);
+    private static void printLottoRewardCount(LottoRewards lottoRewards, RewardType rewardType) {
+        LottoReward lottoReward = lottoRewards.get(rewardType);
+        String phrase = phrase(rewardType);
 
         if (lottoReward == null) {
             System.out.println(phrase + "- 0개");
             return;
         }
         System.out.println(phrase + "- " + lottoReward.count() + "개");
+    }
+
+    private static String phrase(RewardType rewardType) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(rewardType.matchCount()).append("개 일치");
+
+        if (rewardType == FIVE_AND_BONUS) {
+            sb.append(", 보너스 볼 일치");
+        }
+        sb.append(" (").append(rewardType.reward()).append("원)");
+
+        return sb.toString();
     }
 
     private static void printTotalProfitRate(double totalProfitRate) {
