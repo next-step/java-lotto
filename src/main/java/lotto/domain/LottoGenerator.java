@@ -14,7 +14,7 @@ public class LottoGenerator {
 
     private static final List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MINIMUM, LOTTO_NUMBER_MAXIMUM)
             .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
 
     private LottoGenerator() {
     }
@@ -24,8 +24,8 @@ public class LottoGenerator {
 
         List<List<LottoNumber>> autoLottoNumbers = generateAutoLottoNumbers(autoLottoCount);
         List<List<LottoNumber>> manualLottoNumbers = manualNumbers.stream()
-                        .map(LottoGenerator::toLottoNumbers)
-                        .collect(Collectors.toList());
+                .map(LottoGenerator::toLottoNumbers)
+                .collect(Collectors.toList());
 
         manualLottoNumbers.addAll(autoLottoNumbers);
         return LottoTickets.of(manualLottoNumbers);
@@ -46,20 +46,9 @@ public class LottoGenerator {
                 .mapToObj(i -> generateAutoLottoNumber())
                 .collect(Collectors.toList());
     }
+
     private static List<LottoNumber> generateAutoLottoNumber() {
         Collections.shuffle(lottoNumbers, new Random(System.currentTimeMillis()));
         return new ArrayList<>(lottoNumbers.subList(0, LOTTO_TICKET_SIZE));
-    }
-
-    public static LottoTickets generate(int count) {
-        return new LottoTickets(IntStream.range(0, count)
-                .mapToObj(i -> generateLottoTicket())
-                .collect(Collectors.toList()));
-    }
-
-    private static LottoTicket generateLottoTicket() {
-        Collections.shuffle(lottoNumbers, new Random(System.currentTimeMillis()));
-        List<LottoNumber> randomLottoNumbers = new ArrayList<>(lottoNumbers.subList(0, LOTTO_TICKET_SIZE));
-        return new LottoTicket(randomLottoNumbers);
     }
 }

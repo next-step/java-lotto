@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class WinningTicketTest {
     List<LottoNumber> winningNumbers = new ArrayList<>();
@@ -21,8 +21,8 @@ public class WinningTicketTest {
     @BeforeEach
     void setUp() {
         winningNumbers = IntStream.rangeClosed(1, 6)
-                        .mapToObj(LottoNumber::new)
-                        .collect(Collectors.toList());
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     @DisplayName("로또 당첨번호와 보너스볼은 중복될 수 없다.")
