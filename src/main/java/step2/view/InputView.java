@@ -1,5 +1,7 @@
 package step2.view;
 
+import step2.vo.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -28,12 +30,17 @@ public class InputView {
         }
     }
 
-    public List<Integer> getWinNumbers() {
+    public List<LottoNumber> getWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winNumbers = scanner.next();
-        System.out.println();
         return Arrays.stream(winNumbers.split(","))
-                .map(Integer::parseInt)
+                .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList());
+    }
+
+    public LottoNumber getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusNumber = scanner.next();
+        return new LottoNumber(Integer.parseInt(bonusNumber));
     }
 }

@@ -24,17 +24,17 @@ public class Lotto {
         }
     }
 
-    public Integer countWinNum(List<Integer> winNumbers) {
+    public Integer countWinNum(List<LottoNumber> winNumbers) {
         Integer countWinNumber = 0;
-        for (Integer winNum : winNumbers) {
+        for (LottoNumber winNum : winNumbers) {
             countWinNumber = countMatchingNumbers(countWinNumber, winNum);
         }
         return countWinNumber;
     }
 
-    private Integer countMatchingNumbers(Integer countWinNumber, Integer winNum) {
+    private Integer countMatchingNumbers(Integer countWinNumber, LottoNumber winNum) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.equalsWinNum(winNum)) {
+            if (winNum.equals(lottoNumber)) {
                 countWinNumber++;
             }
         }

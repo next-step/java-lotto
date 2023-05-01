@@ -7,9 +7,10 @@ import java.util.Map;
 public enum LottoRank {
 
     REMAIN(-1, nWinner -> 0),
-    FOURTH(3, nWinner -> nWinner * 5000),
-    THIRD(4, nWinner -> nWinner * 50000),
-    SECOND(5, nWinner -> nWinner * 1500000),
+    FIFTH(3, nWinner -> nWinner * 5000),
+    FOURTH(4, nWinner -> nWinner * 50000),
+    THIRD(5, nWinner -> nWinner * 1500000),
+    SECOND(5, nWinner -> nWinner * 30000000),
     FIRST(6, nWinner -> nWinner * 2000000000);
 
     private final int countOfMatch;
@@ -40,5 +41,9 @@ public enum LottoRank {
 
     public static boolean isRemain(LottoRank lottoNumber) {
         return lottoNumber == REMAIN;
+    }
+
+    public static LottoRank getBonusLottoRank() {
+        return SECOND;
     }
 }
