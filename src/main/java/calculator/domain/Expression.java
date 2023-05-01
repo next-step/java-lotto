@@ -5,24 +5,35 @@ import java.util.List;
 
 public class Expression {
 
-    private final List<ExpressionElement> elements;
+    private final List<Operand> operands;
+    private final List<Operator> operators;
 
-    public Expression(List<ExpressionElement> elements) {
-        if (isEmpty(elements)) {
-            throw new IllegalArgumentException("null 이거나 빈 리스트로 Expression 객체를 생성할 수 없습니다.");
+    public Expression(List<Operand> operands, List<Operator> operators) {
+        if (operands == null || operators == null ) {
+            throw new IllegalArgumentException("null로 Expression을 생성할 수 없습니다.");
         }
-        this.elements = Collections.unmodifiableList(elements);
+        if (operands.isEmpty()) {
+            throw new IllegalArgumentException("Operand는 최소 1개 존재해야 합니다.");
+        }
+        this.operands = Collections.unmodifiableList(operands);
+        this.operators = Collections.unmodifiableList(operators);
     }
 
-    private boolean isEmpty(List<ExpressionElement> elements) {
+    private boolean isEmptyList(List<?> elements) {
         return elements == null || elements.isEmpty();
     }
 
     public ExpressionElement get(int index) {
-        return elements.get(index);
+        if (index == 0) {
+            return operands.get(0);
+        }
+        if (index % 2 == 1) {
+            return operators.get(index / 2);
+        }
+        return operands.get(index / 2);
     }
 
     public int size() {
-        return elements.size();
+        return this.operands.size() + this.operators.size();
     }
 }
