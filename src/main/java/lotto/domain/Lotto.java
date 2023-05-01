@@ -48,7 +48,6 @@ public class Lotto {
 	public Score calculateBonusScore(LottoNumber bonusNumber) {
 		if (this.score.availableBonus()) {
 			this.plusBonusScore(bonusNumber);
-			return this.score;
 		}
 		return this.score;
 	}
