@@ -1,6 +1,6 @@
-package view;
+package lotto2.view;
 
-import domain.LottoTicket;
+import lotto2.domain.LottoTicket;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

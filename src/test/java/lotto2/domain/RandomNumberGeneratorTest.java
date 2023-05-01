@@ -1,11 +1,10 @@
-package domain;
+package lotto2.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 class RandomNumberGeneratorTest {

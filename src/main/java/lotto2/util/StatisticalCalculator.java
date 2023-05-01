@@ -1,7 +1,7 @@
-package util;
+package lotto2.util;
 
-import domain.LottoTicket;
-import domain.Prize;
+import lotto2.domain.LottoTicket;
+import lotto2.domain.Prize;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -1,9 +1,9 @@
-package util;
+package lotto2.util;
 
 import static org.assertj.core.api.Assertions.*;
 
-import domain.LottoTicket;
-import domain.Prize;
+import lotto2.domain.LottoTicket;
+import lotto2.domain.Prize;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;

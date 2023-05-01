@@ -1,11 +1,13 @@
-import domain.LottoMachine;
-import domain.LottoTicket;
-import domain.Prize;
+package lotto2;
+
+import lotto2.domain.LottoMachine;
+import lotto2.domain.LottoTicket;
+import lotto2.domain.Prize;
 import java.util.List;
 import java.util.Map;
-import util.StatisticalCalculator;
-import view.InputView;
-import view.ResultView;
+import lotto2.util.StatisticalCalculator;
+import lotto2.view.InputView;
+import lotto2.view.ResultView;
 
 public class Application {
 
