@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.strategy.LottoTicketCreateStrategy;
-import lotto.enums.RANK;
+import lotto.enums.Rank;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,19 +13,19 @@ public class LottoTicket {
 
     public LottoTicket(List<Integer> lottoNumbers) {
         validateTicketSize(lottoNumbers);
-        lottoNumbers.forEach(this::validateLottoNumberRange);
+        validateLottoNumberRange(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
-    public void validateTicketSize(List<Integer> lottoNumberList) {
+    public static void validateTicketSize(List<Integer> lottoNumberList) {
         if (lottoNumberList.size() != 6) {
             throw new IllegalArgumentException("로또번호는 6개를 입력하셔야합니다");
         }
     }
 
-    public void validateLottoNumberRange(int lottoNumber) {
-        if (lottoNumber < 1 || lottoNumber > 45) {
+    public static void validateLottoNumberRange(List<Integer> lottoNumbers) {
+        if (lottoNumbers.stream().anyMatch(o -> o < 1 || o > 45)) {
             throw new IllegalArgumentException("로또번호는 1~45 사이의 숫자로 입력해야합니다.");
         }
     }
@@ -38,8 +38,12 @@ public class LottoTicket {
         return (int) target.stream().filter(this.lottoNumbers::contains).count();
     }
 
-    public RANK getRank(List<Integer> winNumbers) {
-        return RANK.of(countSameNumber(winNumbers));
+    public Rank getRank(List<Integer> winNumbers) {
+        return Rank.of(countSameNumber(winNumbers));
+    }
+
+    public Set<Integer> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     @Override

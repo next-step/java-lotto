@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.enums.RANK;
+import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +44,7 @@ public class LottoTicketsTest {
 
     @Test
     void 전체_당첨결과_확인() {
-        assertThat(tickets.tallyUp(winningNumber).getRankCount().get(RANK.FOURTH_PLACE)).isEqualTo(1);
+        assertThat(tickets.tallyUp(winningNumber).getRankCount().get(Rank.FOURTH_PLACE)).isEqualTo(1);
         assertThat(tickets.tallyUp(winningNumber).getTotalReturn()).isEqualTo(0.35);
     }
 

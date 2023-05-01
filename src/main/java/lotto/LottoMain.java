@@ -1,10 +1,10 @@
 package lotto;
 
+import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.strategy.LottoTicketAutoCreateStrategy;
 import lotto.dto.CheckWinningRequest;
 import lotto.dto.LottoTicketBuyRequest;
-import lotto.dto.LottoTicketMachine;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

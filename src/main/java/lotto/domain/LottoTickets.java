@@ -1,8 +1,9 @@
 package lotto.domain;
 
 import lotto.dto.WinningResult;
-import lotto.enums.RANK;
+import lotto.enums.Rank;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,14 +29,17 @@ public class LottoTickets {
     }
 
     public WinningResult tallyUp(List<Integer> winLottoNumbers) {
-        Map<RANK, Integer> rankCount = new HashMap<>();
+        Map<Rank, Integer> rankCount = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            RANK rank = lottoTicket.getRank(winLottoNumbers);
+            Rank rank = lottoTicket.getRank(winLottoNumbers);
             rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
         }
         return new WinningResult(rankCount, getTotalReturn(winLottoNumbers));
     }
 
+    public List<LottoTicket> getLottoTickets() {
+        return Collections.unmodifiableList(lottoTickets);
+    }
 
     public String lottoTicketsToString() {
         return lottoTickets.stream().map(o -> o.toString()).collect(Collectors.joining("\n"));

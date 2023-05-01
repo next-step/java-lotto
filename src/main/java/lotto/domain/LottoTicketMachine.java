@@ -1,7 +1,5 @@
-package lotto.dto;
+package lotto.domain;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.strategy.LottoTicketCreateStrategy;
 
 import java.util.ArrayList;

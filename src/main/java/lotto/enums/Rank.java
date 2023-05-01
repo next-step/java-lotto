@@ -2,7 +2,7 @@ package lotto.enums;
 
 import java.util.Arrays;
 
-public enum RANK {
+public enum Rank {
 
     FIRST_PLACE(6, 2000000000),
     SECOND_PLACE(5, 1500000),
@@ -14,16 +14,16 @@ public enum RANK {
     private int winCount;
     private int prize;
 
-    RANK(int winCount, int prize) {
+    Rank(int winCount, int prize) {
         this.winCount = winCount;
         this.prize = prize;
     }
 
-    public static RANK of(int winCount) {
+    public static Rank of(int winCount) {
         if (winCount < MIN_WIN_COUNT) {
             return LOST;
         }
-        return Arrays.stream(RANK.values())
+        return Arrays.stream(Rank.values())
                 .filter(rank -> rank.winCount == winCount)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("당첨된 번호의 갯수가 범위에서 벗어낫습니다."));

@@ -1,20 +1,20 @@
 package lotto.dto;
 
-import lotto.enums.RANK;
+import lotto.enums.Rank;
 
 import java.util.Map;
 
 public class WinningResult {
-    Map<RANK, Integer> rankCount;
+    Map<Rank, Integer> rankCount;
     double totalReturn;
 
 
-    public WinningResult(Map<RANK, Integer> rankCount, double totalReturn) {
+    public WinningResult(Map<Rank, Integer> rankCount, double totalReturn) {
         this.rankCount = rankCount;
         this.totalReturn = totalReturn;
     }
 
-    public Map<RANK, Integer> getRankCount() {
+    public Map<Rank, Integer> getRankCount() {
         return rankCount;
     }
 

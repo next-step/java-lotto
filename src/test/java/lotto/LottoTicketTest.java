@@ -1,13 +1,14 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
-import lotto.enums.RANK;
+import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoTicketTest {
@@ -36,9 +37,33 @@ public class LottoTicketTest {
 
     @Test
     void 등수_확인() {
-        assertThat(firstPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(RANK.FIRST_PLACE);
-        assertThat(secondPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(RANK.SECOND_PLACE);
-        assertThat(thirdPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(RANK.THIRD_PLACE);
-        assertThat(fourthPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(RANK.FOURTH_PLACE);
+        assertThat(firstPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(Rank.FIRST_PLACE);
+        assertThat(secondPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(Rank.SECOND_PLACE);
+        assertThat(thirdPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(Rank.THIRD_PLACE);
+        assertThat(fourthPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(Rank.FOURTH_PLACE);
+    }
+
+    @Test
+    void 번호갯수_검증() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2);
+
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                LottoTicket.validateTicketSize(lottoNumbers)
+        ).withMessage("로또번호는 6개를 입력하셔야합니다");
+    }
+
+    @Test
+    void 번호_범위_검증() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 46);
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                LottoTicket.validateLottoNumberRange(lottoNumbers)
+        ).withMessage("로또번호는 1~45 사이의 숫자로 입력해야합니다.");
+    }
+
+    @Test
+    void 티켓_생성_테스트() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(LottoTicket.of(() -> Arrays.asList(1, 2, 3, 4, 5, 6)).getLottoNumbers().containsAll(numbers)).isTrue();
+
     }
 }

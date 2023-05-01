@@ -1,6 +1,7 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
+import stringCalculator.InputView;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
