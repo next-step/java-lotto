@@ -35,6 +35,10 @@ public class LotteryWin {
         return results.sum();
     }
 
+    public String getRateOfReturn(int money, int winningMoney) {
+        return String.format("%.2f", (double) winningMoney / (double) money);
+    }
+
     private void check(List<Integer> numbers) {
         int matchedCount = getMatchedCount(numbers);
 

@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import step2.domain.LotteryWin;
 import step2.domain.Lotto;
 import step2.domain.WinningNumbers;
-import step2.utils.Profit;
 
 public class LottoMatchTest {
 
@@ -88,11 +87,12 @@ public class LottoMatchTest {
         private LotteryWin lotteryWin;
 
         @BeforeEach
-        void setUpEach(){
+        void setUpEach() {
             lottoList = getLottoList();
             List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
             lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers));
         }
+
         @DisplayName("일치하는 경우를 모두 나타낼 수 있다.")
         @Test
         void test1() throws Exception {
@@ -109,10 +109,10 @@ public class LottoMatchTest {
         @DisplayName("수익률과 당첨 금액을 나타낼 수 있다.")
         @Test
         void test2() throws Exception {
-           lotteryWin.confirm(lottoList);
+            lotteryWin.confirm(lottoList);
             int winningAmount = lotteryWin.getWinningAmount();
 
-            String rateOfReturn = Profit.getRateOfReturn(5000, winningAmount);
+            String rateOfReturn = lotteryWin.getRateOfReturn(5000, winningAmount);
 
             assertThat(winningAmount).isEqualTo(2001555000);
             assertThat(rateOfReturn).isEqualTo("400311.00");

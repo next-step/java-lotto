@@ -1,7 +1,6 @@
 package step2.view;
 
 import java.util.Map;
-import step2.utils.Profit;
 
 public class ResultView {
 
@@ -20,7 +19,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public void printProfit(int money, int totalWinningAmount) {
-        System.out.printf("총 수익률은 %s 입니다.", Profit.getRateOfReturn(money, totalWinningAmount));
+    public void printProfit(String profitRate) {
+        System.out.printf("총 수익률은 %s 입니다.", profitRate).println();
     }
 }

@@ -18,7 +18,7 @@ public class LottoService {
         return lotteryWin.getResult();
     }
 
-    public int getWinningMoney() {
-        return lotteryWin.getWinningAmount();
+    public String getProfitRate(int money) {
+        return lotteryWin.getRateOfReturn(money, lotteryWin.getWinningAmount());
     }
 }

@@ -36,8 +36,8 @@ public class LottoGame {
         Map<Integer, Integer> match = lottoService.match(lottoList);
         resultView.printStatics(match);
 
-        int winningMoney = lottoService.getWinningMoney();
-        resultView.printProfit(money, winningMoney);
+        String profitRate = lottoService.getProfitRate(money);
+        resultView.printProfit(profitRate);
     }
 
     private static String getWinningNumbers(Scanner scanner, ResultView resultView) {
