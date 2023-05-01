@@ -34,12 +34,16 @@ public class Score {
 		this.bonusScore++;
 	}
 
-	public boolean availableBonus() {
+	public boolean isBonusPossible() {
 		return this.score == Score.BONUS_AVAILABLE_SCORE;
 	}
 
 	public boolean isMatchBonus() {
 		return this.bonusScore > 0;
+	}
+
+	public boolean isScoreEquals(int score) {
+		return this.score == score;
 	}
 
 	public int getScore() {

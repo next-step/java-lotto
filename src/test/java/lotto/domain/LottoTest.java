@@ -42,16 +42,4 @@ public class LottoTest {
 		Score bonusScore = lotto.calculateBonusScore(new LottoNumber(23));
 		assertThat(bonusScore).isEqualTo(new Score(5, 0));
 	}
-
-	@DisplayName("로또 넘버에 보너스 넘버를 계산할 필요가 없는 경우. - 5개 일치가 아닌 경우")
-	@ValueSource(ints = {0, 1, 2, 3, 4, 6})
-	@ParameterizedTest
-	void test4(int score) {
-		Lotto lotto = new Lotto(Arrays.asList(
-			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
-			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
-		), score);
-		Score bonusScore = lotto.calculateBonusScore(new LottoNumber(14));
-		assertThat(bonusScore).isEqualTo(new Score(score, 0));
-	}
 }

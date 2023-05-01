@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,16 +29,17 @@ public class LottoMachine {
 		return this.purchasedLottos.size();
 	}
 
-	public List<PrizeSituation> makePrizeSituations() {
-		ScoreBoard scoreBoard = this.purchasedLottos.makeScoreBoard();
-		return scoreBoard.makePrizeSituations();
-	}
-
-	public List<PrizeSituation> sortInOrderScore(List<PrizeSituation> prizeSituations) {
-		return prizeSituations.stream().sorted().collect(Collectors.toList());
+	public List<RankSituation> makeRankSituations() {
+		RankBoard rankBoard = this.purchasedLottos.makeRankBoard();
+		return rankBoard.makeRankSituations();
 	}
 
 	public PurchasedLottos getPurchasedLottos() {
 		return this.purchasedLottos;
+	}
+
+	public List<RankSituation> sortInOrderScore(List<RankSituation> rankSituations) {
+		return rankSituations.stream()
+			.sorted(Comparator.comparing(o -> o.getRank().getWinningMoney())).collect(Collectors.toList());
 	}
 }

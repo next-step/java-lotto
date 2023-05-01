@@ -12,12 +12,12 @@ public class BenefitResultTest {
 	@DisplayName("총 수익을 계산한다.")
 	@Test
 	void test1() {
-		List<PrizeSituation> prizeSituations = List.of(
-			new PrizeSituation(PrizeType.SIX, 2),
-			new PrizeSituation(PrizeType.THREE, 1)
+		List<RankSituation> rankSituations = List.of(
+			new RankSituation(Rank.FIRST, 2),
+			new RankSituation(Rank.FIFTH, 1)
 		);
 
-		BenefitResult benefitResult = new BenefitResult(prizeSituations, 14000);
+		BenefitResult benefitResult = new BenefitResult(rankSituations, 14000);
 		assertThat(benefitResult.getTotalProfit()).isEqualTo(4_000_005_000L);
 	}
 

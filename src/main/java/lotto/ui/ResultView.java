@@ -5,8 +5,8 @@ import java.util.List;
 import lotto.domain.BenefitResult;
 import lotto.domain.Lotto;
 import lotto.domain.PurchasedLottos;
-import lotto.domain.PrizeSituation;
-import lotto.domain.Score;
+import lotto.domain.Rank;
+import lotto.domain.RankSituation;
 
 public class ResultView {
 
@@ -20,14 +20,15 @@ public class ResultView {
 		}
 	}
 
-	public static void printPrizeSituations(List<PrizeSituation> prizeSituations) {
+	public static void printRankSituations(List<RankSituation> rankSituations) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		for (PrizeSituation prizeSituation : prizeSituations) {
-			Score score = prizeSituation.getPrizeType().score;
-			long prizeMoney = prizeSituation.getPrizeType().prizeMoney.getPrizeMoney();
-			int prizeCount = prizeSituation.getPrizeCount();
-			System.out.printf("%d개 일치%s(%d원)- %d개%n", score.getScore(), score.isMatchBonus() ? ", 보너스 볼 일치" : " ", prizeMoney, prizeCount);
+		for (RankSituation rankSituation : rankSituations) {
+			Rank rank = rankSituation.getRank();
+			int matchCount = rank.getMatchCount();
+			long winningMoney = rank.getWinningMoney();
+			int count = rankSituation.getCount();
+			System.out.printf("%d개 일치%s(%d원)- %d개%n", matchCount, rank == Rank.SECOND ? ", 보너스 볼 일치" : " ", winningMoney, count);
 		}
 	}
 

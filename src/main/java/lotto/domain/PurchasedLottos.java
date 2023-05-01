@@ -35,7 +35,7 @@ public class PurchasedLottos {
 		return this.purchasedLottos;
 	}
 
-	public ScoreBoard makeScoreBoard() {
-		return new ScoreBoard(this.purchasedLottos);
+	public RankBoard makeRankBoard() {
+		return new RankBoard(this.purchasedLottos);
 	}
 }

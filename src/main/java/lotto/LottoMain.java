@@ -5,7 +5,7 @@ import java.util.List;
 import lotto.domain.BenefitResult;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
-import lotto.domain.PrizeSituation;
+import lotto.domain.RankSituation;
 import lotto.domain.WinLotto;
 import lotto.domain.WinNumbers;
 import lotto.ui.InputView;
@@ -25,10 +25,10 @@ public class LottoMain {
 		WinLotto winLotto = new WinLotto(winNumbers, bonusNumber);
 		winLotto.calculateScore(lottoMachine.getPurchasedLottos());
 
-		List<PrizeSituation> prizeSituations = lottoMachine.makePrizeSituations();
-		ResultView.printPrizeSituations(lottoMachine.sortInOrderScore(prizeSituations));
+		List<RankSituation> rankSituations = lottoMachine.makeRankSituations();
+		ResultView.printRankSituations(lottoMachine.sortInOrderScore(rankSituations));
 
-		BenefitResult benefitResult = new BenefitResult(prizeSituations, purchaseAmount);
+		BenefitResult benefitResult = new BenefitResult(rankSituations, purchaseAmount);
 		ResultView.printTotalProfitRate(benefitResult);
 	}
 }
