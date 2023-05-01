@@ -1,7 +1,8 @@
 package step2.service;
 
+import java.util.List;
 import step2.domain.LotteryWin;
-import step2.domain.PurchasedLotto;
+import step2.domain.Lotto;
 
 public class LottoService {
 
@@ -11,8 +12,8 @@ public class LottoService {
         this.lotteryWin = lotteryWin;
     }
 
-    public void matchResult(PurchasedLotto lottoList) {
-        lotteryWin.confirm(lottoList.get());
+    public void matchResult(List<Lotto> lottoList) {
+        lotteryWin.confirm(lottoList);
     }
 
     public String getProfitRate(int money, int totalWinningMoney) {

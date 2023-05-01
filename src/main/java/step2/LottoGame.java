@@ -33,7 +33,7 @@ public class LottoGame {
             new LotteryWin(new WinningNumbers(winningNumbers), new BonusNumber(bonusNumber))
         );
 
-        lottoService.matchResult(purchasedLottoList);
+        lottoService.matchResult(purchasedLottoList.get());
         resultView.printStatics(purchasedLottoList);
 
 
