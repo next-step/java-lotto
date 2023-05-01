@@ -19,4 +19,8 @@ public class LottoTickets {
 
     return new LottoTickets(tickets);
   }
+
+  public List<LottoTicket> tickets() {
+    return this.tickets;
+  }
 }

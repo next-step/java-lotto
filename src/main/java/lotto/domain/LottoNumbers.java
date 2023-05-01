@@ -22,6 +22,11 @@ public class LottoNumbers {
   public synchronized static List<LottoNumber> pick(int number) {
     Collections.shuffle(numbers);
 
-    return numbers.subList(LOTTO_NUMBER_COUNT_INBOUND, number);
+    List<LottoNumber> picked = new ArrayList<>();
+    for (int i = 0; i < number; i++) {
+      picked.add(numbers.get(i));
+    }
+
+    return picked;
   }
 }

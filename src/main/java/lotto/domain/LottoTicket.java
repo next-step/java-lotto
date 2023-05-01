@@ -16,4 +16,8 @@ public class LottoTicket {
 
     return ticket;
   }
+
+  public List<LottoNumber> numbers() {
+    return this.numbers;
+  }
 }
