@@ -15,8 +15,8 @@ public class Calculator {
                 tempOperator = convertToOperator(expressionElement);
                 continue;
             }
-            int result = calculateOperand(tempOperand, tempOperator, convertToOperand(expressionElement));
-            tempOperand = new Operand(new Number(result));
+            Number result = calculate(tempOperand, tempOperator, convertToOperand(expressionElement));
+            tempOperand = new Operand(result);
         }
         return new Number(tempOperand.value());
     }
@@ -29,7 +29,7 @@ public class Calculator {
         return (Operator) expressionElement;
     }
 
-    private static int calculateOperand(Operand frontOperand, Operator operator, Operand backOperand) {
-        return frontOperand.calculate(operator, backOperand);
+    private static Number calculate(Operand preOperand, Operator operator, Operand postOperand) {
+        return operator.calculate(preOperand, postOperand);
     }
 }
