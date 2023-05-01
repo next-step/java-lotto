@@ -27,9 +27,6 @@ public class LottoResultCalculator {
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
   }
 
-  private static void addResult(Map<Prize, Long> result, int matchCount) {
-
-  }
 
 
 }
