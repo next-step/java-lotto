@@ -4,10 +4,14 @@ import java.util.Stack;
 
 public class Calculator {
     private static final Stack<String> stack = new Stack<>();
+    public static final String INPUT_SPLITTING_REGEX = " ";
+    public static final String ERROR_MESSAGE_ON_INVALID_INPUT = "입력값이 없습니다.";
+    public static final String NUMEIRC_REGEX = "\\d+";
+    public static final String OPERATOR_REGEX = "[+\\-*/]";
 
     public static int calculate(String input) {
         checkNotEmpty(input);
-        for (String token : input.split(" ")) {
+        for (String token : input.split(INPUT_SPLITTING_REGEX)) {
             handleNumberToken(token);
             handleOperatorToken(token);
         }
@@ -16,43 +20,37 @@ public class Calculator {
 
     private static void checkNotEmpty(String input) {
         if (input.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 없습니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE_ON_INVALID_INPUT);
         }
     }
 
 
-    public static String operate(String operator, int left, int right) {
-        int result = 0;
-        if (operator.equals("+")) {
-            result = left + right;
-        }
-        if (operator.equals("-")) {
-            result = left - right;
-        }
-        if (operator.equals("*")) {
-            result = left * right;
-        }
-        if (operator.equals("/")) {
-            result = left / right;
-        }
-        return String.valueOf(result);
+    public static int operate(String notation, int left, int right) {
+        Operator operator = Operator.fromNotation(notation);
+        return operator.action.apply(left, right);
     }
 
     private static void handleNumberToken(String token) {
-        if (token.matches("\\d+") && stack.isEmpty()) {
+        if (!token.matches(NUMEIRC_REGEX)) {
+            return;
+        }
+        if (stack.isEmpty()) {
             stack.push(token);
             return;
         }
-        if (token.matches("\\d+")) {
-            String operator = stack.pop();
-            int left = Integer.parseInt(stack.pop());
-            int right = Integer.parseInt(token);
-            stack.push(operate(operator, left, right));
-        }
+        pushToStackWithOperation(token);
+    }
+
+    private static void pushToStackWithOperation(String token) {
+        String operator = stack.pop();
+        int left = Integer.parseInt(stack.pop());
+        int right = Integer.parseInt(token);
+        int result = operate(operator, left, right);
+        stack.push(String.valueOf(result));
     }
 
     private static void handleOperatorToken(String token) {
-        if (token.matches("[+\\-*/]")) {
+        if (token.matches(OPERATOR_REGEX)) {
             stack.push(token);
         }
     }

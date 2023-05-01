@@ -44,6 +44,7 @@ public class CalculatorTest {
     public void emptyStringTest() {
         String input = "";
         assertThatThrownBy(() -> Calculator.calculate(input))
-                .isExactlyInstanceOf(IllegalArgumentException.class);
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력값이 없습니다.");
     }
 }
