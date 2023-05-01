@@ -18,6 +18,9 @@ public class WinningNumbersTest {
     @ValueSource(strings = {"1,2,2,4,5,6","1,2,3,4,5,6,7"})
     void objCreateExceptionTest(String source) {
         assertThatThrownBy(() -> new WinningNumbers(source))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호 수는 총 6개로 구성되어야합니다.");
     }
+
+    
 }
