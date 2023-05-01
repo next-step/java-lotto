@@ -19,7 +19,7 @@ public class LottoTicket {
 
     private void validateLottoNumberLength(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6자리입니다.");
+            throw new IllegalArgumentException(String.format("로또 번호는 %d자리 입니다.", LOTTO_SIZE));
         }
     }
 
