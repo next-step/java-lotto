@@ -28,7 +28,7 @@ public class LottoMatchTest {
         void setUpEach() {
             lottoList = new ArrayList<>();
             List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-            lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers), new BonusNumber(22));
+            lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers), 22);
         }
 
         @DisplayName("당첨 번호와 3개가 일치하는 경우를 나타낼 수 있다.")
@@ -117,7 +117,7 @@ public class LottoMatchTest {
         void setUpEach() {
             purchasedLotto = new PurchasedLotto(getLottoList());
             List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-            lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers), new BonusNumber(27));
+            lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers), 22);
         }
 
 
@@ -126,7 +126,7 @@ public class LottoMatchTest {
         void test1() throws Exception {
             lotteryWin.confirm(purchasedLotto.get());
 
-            assertThat(purchasedLotto.getSumOfWinningMoney()).isEqualTo(2003055000);
+            assertThat(purchasedLotto.getSumOfWinningMoney()).isEqualTo(2031555000);
         }
 
         @DisplayName("수익률을 나타낼 수 있다(보너스 숫자 포함).")
@@ -137,7 +137,7 @@ public class LottoMatchTest {
             String rateOfReturn =
                 lotteryWin.getRateOfReturn(5000, purchasedLotto.getSumOfWinningMoney());
 
-            assertThat(rateOfReturn).isEqualTo("400611.00");
+            assertThat(rateOfReturn).isEqualTo("406311.00");
         }
 
         private List<Lotto> getLottoList() {
