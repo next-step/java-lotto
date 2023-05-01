@@ -9,8 +9,8 @@ enum StringOperator {
     DIV("/", (target, source) -> target / source),
     MUL("*", (target, source) -> target * source);
 
-    final private String operator;
-    final private BinaryOperator<Integer> binaryOperator;
+    private final String operator;
+    private final BinaryOperator<Integer> binaryOperator;
 
     StringOperator(String operator, BinaryOperator<Integer> binaryOperator) {
         this.operator = operator;
@@ -21,7 +21,7 @@ enum StringOperator {
         return Arrays.stream(StringOperator.values())
                 .filter(stringOperator -> stringOperator.is(operator))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 연산자입니다."));
+                .orElseThrow(() -> new IllegalArgumentException(operator+"는 잘못된 연산자입니다."));
     }
 
     private boolean is(String operator) {
