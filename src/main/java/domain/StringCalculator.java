@@ -11,10 +11,10 @@ public class StringCalculator {
     }
 
     Numbers extractNumbers(String expression) {
-        ListFactory numberListFactory = new NumberListFactory();
+        CalculatorTokenFactory numberListFactory = new NumbersFactory();
         List<Integer> numbers = null;
         try {
-            numbers = numberListFactory.extractToList(splitByBlank(expression));
+            numbers = numberListFactory.extractList(splitByBlank(expression));
         } catch (Exception e) {
             throw new IllegalArgumentException("유효한 숫자가 아닙니다.");
         }
@@ -22,8 +22,8 @@ public class StringCalculator {
     }
 
     Operations extractOperation(String expression) {
-        ListFactory operationListFactory = new OperationListFactory();
-        return new Operations(operationListFactory.extractToList(splitByBlank(expression)));
+        CalculatorTokenFactory operationListFactory = new OperatorFactory();
+        return new Operations(operationListFactory.extractList(splitByBlank(expression)));
     }
 
     private String[] splitByBlank(String expression) {
