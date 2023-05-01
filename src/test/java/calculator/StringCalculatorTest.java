@@ -32,4 +32,12 @@ public class StringCalculatorTest {
                 .hasMessageContaining("분리된 문자열 배열 size 는 짝수 일 수 없습니다.");
     }
 
+    @DisplayName("입력된 문자열을 빈공백 기준으로 분리 시, 홀수번째 원소가 숫자가 아닌 경우 IllegalArgumentException 예외가 발생하는지 확인")
+    @Test
+    void split_array_element_odd_number_illegal_argument_exception() {
+        assertThatThrownBy(() -> StringCalculator.split("1 + ㄱ"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자 이외의 값은 입력할 수 없습니다.");
+    }
+
 }
