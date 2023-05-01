@@ -3,7 +3,7 @@ package calculator.domain;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
-public enum Operator implements ExpressionElement {
+public enum Operator {
     PLUS("+", (preValue, postValue) -> preValue + postValue),
     MINUS("-", (preValue, postValue) -> preValue - postValue),
     MULTIPLY("*", (preValue, postValue) -> preValue * postValue),

@@ -1,6 +1,6 @@
 package calculator.domain;
 
-public class Operand implements ExpressionElement {
+public class Operand {
 
     private final Number number;
 
