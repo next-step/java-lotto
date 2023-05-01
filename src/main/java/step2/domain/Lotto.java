@@ -24,12 +24,12 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return this.pickedNumbers.get();
     }
-    
+
     public void rank(Ranking ranking) {
         this.ranking = ranking;
     }
-    
-    public int prizeMoney(){
+
+    public int prizeMoney() {
         return this.ranking.getWinningMoney();
     }
 

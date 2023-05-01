@@ -14,7 +14,6 @@ public class LotteryWin {
     private final WinningNumbers winningNumbers;
     private final BonusNumber bonusNumber;
 
-
     public LotteryWin(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
