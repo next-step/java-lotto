@@ -1,5 +1,7 @@
 package Calculator.Operator;
 
+import java.util.ArrayList;
+
 public class OperatorProcess {
     private int operand1;
     private int operand2;
@@ -12,23 +14,30 @@ public class OperatorProcess {
     }
 
     public int calculateProcess() {
-        if (operator.equals("+")) {
-            Operator add = new Add();
-            return add.operate(operand1, operand2);
-        }
-        if (operator.equals("-")) {
-            Operator minus = new Minus();
-            return minus.operate(operand1, operand2);
-        }
-        if (operator.equals("*")) {
-            Operator multiply = new Multiply();
-            return multiply.operate(operand1, operand2);
-        }
-        if (operator.equals("/")) {
-            Operator divide = new Divide();
-            return divide.operate(operand1, operand2);
-        }
+        ArrayList<Operator> operators = addOperators();
 
+        for (Operator myOperator : operators) {
+            Integer result = getResult(myOperator);
+            if (result != null) return result;
+        }
         throw new IllegalArgumentException(operator + "는 사칙연산 기호가 아닙니다: ");
+
+    }
+
+    private Integer getResult(Operator myOperator) {
+        if (myOperator.supported(operator)) {
+            return myOperator.operate(operand1, operand2);
+        }
+        return null;
+    }
+
+    private static ArrayList<Operator> addOperators() {
+        ArrayList<Operator> operators = new ArrayList<>();
+
+        operators.add(new Add());
+        operators.add(new Minus());
+        operators.add(new Multiply());
+        operators.add(new Divide());
+        return operators;
     }
 }
