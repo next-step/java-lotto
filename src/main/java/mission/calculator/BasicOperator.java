@@ -1,3 +1,5 @@
+package mission.calculator;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
@@ -15,7 +17,7 @@ public enum BasicOperator implements Operator {
             return x - y;
         }
     },
-    MUTIPLY("*") {
+    MULTIPLY("*") {
         public int apply(int x, int y) {
             return x * y;
         }
