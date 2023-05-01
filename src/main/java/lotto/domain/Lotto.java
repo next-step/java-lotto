@@ -70,4 +70,8 @@ public class Lotto {
         }
         lottoRewards.increaseCountOf(rewardType);
     }
+
+    public static double totalProfitRate(LottoRewards lottoRewards, long purchasePrice) {
+        return (double) lottoRewards.totalProfit() / purchasePrice;
+    }
 }

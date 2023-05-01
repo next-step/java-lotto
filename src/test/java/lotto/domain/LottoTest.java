@@ -53,19 +53,37 @@ public class LottoTest {
         assertThat(Lotto.lottoCount(price)).isEqualTo(lottoCount);
     }
 
-    @Test
-    void 총_수익_계산() {
+    @ParameterizedTest
+    @CsvSource(value = {"7:3000000", "45:60000000"}, delimiter = ':')
+    void 총_수익_계산(int bonusNumber, long totalProfit) {
         //given
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(myLottoNumbers);
         lottoNumbersList.add(myLottoNumbers);
-        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
         //when
         LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
 
         //then
-        assertThat(reward.totalProfit()).isEqualTo(3000000L);
+        assertThat(reward.totalProfit()).isEqualTo(totalProfit);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"7:1500", "45:30000"}, delimiter = ':')
+    void 총_수익률_계산(int bonusNumber, long totalProfitRate) {
+        //given
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(myLottoNumbers);
+        lottoNumbersList.add(myLottoNumbers);
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        long purchasePrice = 2000l;
+
+        //when
+        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers, bonusLottoNumber);
+
+        //then
+        assertThat(Lotto.totalProfitRate(reward, purchasePrice)).isEqualTo(totalProfitRate);
     }
 
     @Test

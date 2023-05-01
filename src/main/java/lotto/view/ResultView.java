@@ -34,9 +34,9 @@ public class ResultView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printWinningStatics(LottoRewards lottoRewards, long purchasePrice) {
+    public static void printWinningStatics(LottoRewards lottoRewards, double totalProfitRate) {
         printAllLottoRewardCount(lottoRewards);
-        printTotalProfitRate(lottoRewards, purchasePrice);
+        printTotalProfitRate(totalProfitRate);
     }
 
     private static void printAllLottoRewardCount(LottoRewards lottoRewards) {
@@ -59,16 +59,15 @@ public class ResultView {
         System.out.println(phrase + "- " + lottoReward.count() + "개");
     }
 
-    private static void printTotalProfitRate(LottoRewards lottoRewards, long purchasePrice) {
-        double totalProfitRate = (double) lottoRewards.totalProfit() / purchasePrice;
+    private static void printTotalProfitRate(double totalProfitRate) {
         System.out.print("총 수익률은 " + String.format("%.2f", totalProfitRate) + "입니다.");
 
         if (totalProfitRate < BRAKE_EVEN_POINT) {
-            printBrakeEvenPointMessage(totalProfitRate);
+            printBrakeEvenPointMessage();
         }
     }
 
-    private static void printBrakeEvenPointMessage(double totalProfitRate) {
+    private static void printBrakeEvenPointMessage() {
         System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
