@@ -12,7 +12,6 @@ public class LottosTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 100})
     public void issueLottoTest(int purchaseAmount) {
-        assertThat(new Lottos(purchaseAmount, new NumberGenerator()).getAmount())
-                .isEqualTo(purchaseAmount);
+        assertThat(new Lottos(purchaseAmount, new SimpleNumberGenerator()).getAmount()).isEqualTo(purchaseAmount);
     }
 }
