@@ -34,7 +34,10 @@ public class Statistics {
     private int getSumProfit(Map<Prize, Long> winnerMap) {
         return winnerMap.entrySet()
                 .stream()
-                .mapToInt(prize -> Prize.calculatePriceMoney(prize.getKey(), Math.toIntExact(prize.getValue())))
+                .mapToInt(prize -> {
+                    Prize profitPrize = prize.getKey();
+                    return profitPrize.calculatePriceMoney(profitPrize, Math.toIntExact(prize.getValue()));
+                })
                 .sum();
     }
 }
