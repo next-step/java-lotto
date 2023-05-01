@@ -19,7 +19,12 @@ public class ResultView {
     }
 
     private static void showLotto(Lotto lotto) {
-        int[] lottoNumbers = lotto.getLottoNumbers();
+        int[] lottoNumbers = lotto.getLottoNumberSet()
+                .stream()
+                .mapToInt(it -> it)
+                .sorted()
+                .toArray();
+
         StringBuilder stringBuilder = new StringBuilder("[");
         for (int i = 0; i < Lotto.LOTTO_NUMBER_SIZE - 1; i++) {
             stringBuilder.append(lottoNumbers[i]);

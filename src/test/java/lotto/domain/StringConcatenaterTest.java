@@ -12,6 +12,6 @@ public class StringConcatenaterTest {
 
     @Test
     void 문자열을_문자열_배열과_합칠_수_있다() {
-        assertThat(StringConcatenater.concatStrings("a", new String[] {"b", "c"})).isEqualTo("abc");
+        assertThat(StringConcatenater.concatStrings("a", new String[]{"b", "c"})).isEqualTo("abc");
     }
 }

@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoMatchingCountException;
 
-import java.util.Arrays;
-
 public class LottoResult {
     private static final int MINIMUM_COUNT_BOUND = 0;
     private static final int MINIMUM_WINNING_COUNT = 3;
@@ -36,8 +34,9 @@ public class LottoResult {
     }
 
     private long getMatchingLottoSameNumberCount(Lotto lotto) {
-        return Arrays.stream(lotto.getLottoNumbers())
-                .takeWhile(winningLotto::hasNumber)
+        return lotto.getLottoNumberSet()
+                .stream()
+                .filter(winningLotto::hasNumber)
                 .count();
     }
 

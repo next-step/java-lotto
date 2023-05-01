@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.exception.DuplicatedLottoNumberExcetion;
 import lotto.domain.exception.InvalidLottoNumberException;
 import lotto.domain.exception.InvalidLottoParsingNumberException;
 import lotto.domain.exception.InvalidLottoSizeException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -14,73 +14,58 @@ public class Lotto {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
-    private final int[] lottoNumbers;
+    private final Set<Integer> lottoNumberSet;
 
-    public Lotto(int[] lottoNumbers) {
-        checkLottoNumbers(lottoNumbers);
+    public Lotto(Set<Integer> lottoNumberSet) {
+        checkLottoNumbers(lottoNumberSet);
 
-        this.lottoNumbers = Arrays.stream(lottoNumbers)
-                .sorted()
-                .toArray();
+        this.lottoNumberSet = lottoNumberSet;
     }
 
-    public int[] getLottoNumbers() {
-        return lottoNumbers;
+    public Set<Integer> getLottoNumberSet() {
+        return Set.copyOf(lottoNumberSet);
     }
 
     public boolean hasNumber(int number) {
-        return Arrays.stream(lottoNumbers)
-                .anyMatch(it -> it == number);
+        return lottoNumberSet.contains(number);
     }
 
-    private void checkLottoNumbers(int[] lottoNumbers) {
-        if (lottoNumbers.length != LOTTO_NUMBER_SIZE) {
+    private void checkLottoNumbers(Set<Integer> lottoNumberSet) {
+        if (lottoNumberSet.size() != LOTTO_NUMBER_SIZE) {
             throw new InvalidLottoSizeException(
                     "입력한 갯수 : ",
-                    String.valueOf(lottoNumbers.length)
+                    String.valueOf(lottoNumberSet.size())
             );
         }
 
-        if (!isBetweenMinAndMax(lottoNumbers)) {
+        if (!isBetweenMinAndMax(lottoNumberSet)) {
             throw new InvalidLottoNumberException(
                     "입력한 숫자 : ",
-                    Arrays.toString(lottoNumbers)
-            );
-        }
-
-        if (!hasUniqueNumbers(lottoNumbers)) {
-            throw new DuplicatedLottoNumberExcetion(
-                    "입력한 숫자 : ",
-                    Arrays.toString(lottoNumbers)
+                    lottoNumberSet.toString()
             );
         }
     }
 
-    private boolean isBetweenMinAndMax(int[] lottoNumbers) {
-        return Arrays.stream(lottoNumbers)
+    private boolean isBetweenMinAndMax(Set<Integer> lottoNumberSet) {
+        return lottoNumberSet.stream()
                 .noneMatch(it ->
                         it < MINIMUM_LOTTO_NUMBER ||
                                 it > MAXIMUM_LOTTO_NUMBER
                 );
     }
 
-    private boolean hasUniqueNumbers(int[] lottoNumbers) {
-        return Arrays.stream(lottoNumbers)
-                .distinct()
-                .count() == LOTTO_NUMBER_SIZE;
+    public static Lotto from(int[] lottoNumberArray) {
+        return new Lotto(Arrays.stream(lottoNumberArray).boxed().collect(Collectors.toSet()));
     }
 
     public static Lotto from(List<Integer> lottoNumberList) {
-        return new Lotto(lottoNumberList.stream()
-                .mapToInt(it -> it)
-                .toArray()
-        );
+        return new Lotto(Set.copyOf(lottoNumberList));
     }
 
     public static Lotto from(String lottoNumberString) {
-        return from(Arrays.stream(lottoNumberString.split(","))
+        return new Lotto(Arrays.stream(lottoNumberString.split(","))
                 .map(it -> toInt(it.trim()))
-                .collect(Collectors.toList())
+                .collect(Collectors.toSet())
         );
     }
 

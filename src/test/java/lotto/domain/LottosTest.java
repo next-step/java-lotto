@@ -9,8 +9,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottosTest {
     private static final List<Lotto> lottoList = List.of(
-            new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-            new Lotto(new int[]{1, 2, 3, 4, 5, 7})
+            Lotto.from(new int[]{1, 2, 3, 4, 5, 6}),
+            Lotto.from(new int[]{1, 2, 3, 4, 5, 7})
     );
 
     @Test
