@@ -27,7 +27,7 @@ public enum Prize {
                 .orElse(OUT_OF_PLACE);
     }
 
-    public static int calculatePriceMoney(Prize prize, int count) {
+    public int calculatePriceMoney(Prize prize, int count) {
         return prize.prizeMoney * count;
     }
 
