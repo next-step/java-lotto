@@ -1,7 +1,7 @@
 package step3.domain.model.Lotto;
 
 import step3.domain.model.WinningAmountByRank;
-import step3.domain.strategy.lotto.Strategy;
+import step3.domain.strategy.lotto.PolicyStrategy;
 
 import java.util.List;
 import java.util.Map;
@@ -17,11 +17,11 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto from(Strategy strategy) {
+    public static Lotto from(PolicyStrategy strategy) {
         return new Lotto(strategy.createLottoNumbers());
     }
 
-    public static Lotto fromWinningLotto(Strategy strategy, String lastWinningNumbers) {
+    public static Lotto fromWinningLotto(PolicyStrategy strategy, String lastWinningNumbers) {
         return new Lotto(strategy.createWinningLottoNumber(lastWinningNumbers));
     }
 

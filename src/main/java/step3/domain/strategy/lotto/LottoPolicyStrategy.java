@@ -5,7 +5,7 @@ import step3.domain.model.Lotto.LottoNumbers;
 
 import java.util.*;
 
-public class LottoPolicyStrategy implements Strategy {
+public class LottoPolicyStrategy implements PolicyStrategy {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int LOTTO_RANDOM_RANGE_START = 1;
     private static final int LOTTO_RANDOM_RANGE_END = 37;

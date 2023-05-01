@@ -2,7 +2,7 @@ package step3.domain.strategy.lotto;
 
 import step3.domain.model.Lotto.LottoNumbers;
 
-public interface Strategy {
+public interface PolicyStrategy {
     LottoNumbers createLottoNumbers();
 
     LottoNumbers createWinningLottoNumber(String lastWinningNumbers);
