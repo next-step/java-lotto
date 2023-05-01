@@ -14,6 +14,7 @@ public class LottoNumber {
         if(1<= lottoNumber && lottoNumber<=45) {
             return;
         }
+        System.out.println("출력"+ lottoNumber);
         throw new LottoNumberOutOfRangeException();
     }
 

@@ -19,8 +19,15 @@ public class Lotto {
         OutputPresent outputPresent = new OutputPresent();
         Issuer issuer = new Issuer();
 
-        issuer.issueTickets(inputPresent.purchaseLotto());
-        outputPresent.presentTickets(issuer.issuedTickets());
+        //구매수량
+        int i = inputPresent.purchaseCount();
+        //수동발행
+        List<Ticket> tickets = inputPresent.manualPurchases();
+        issuer.manualIssue(tickets);
+        issuer.automaticIssue(i - tickets.size());
+
+
+        outputPresent.presentTickets(tickets,issuer.issuedTickets());
 
         WinnerTicket winnerTicket = inputPresent.winningNumbers().winnerTicket(inputPresent.bonusNumber());
         Statics statics = issuer.issuedTicketStatistics(winnerTicket);

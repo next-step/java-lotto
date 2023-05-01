@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class InputPresent {
     private static final String PURCHASE_AMOUNT = "구입금액을 입력해 주세요";
     private static final String PURCHASE_CONFIRM = "총 %s개를 구매합니다";
-    private static final String PURCHASE_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요";
+    private static final String PURCHASE_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요%s";
     private static final String MANUAL_NUMBERS = "수동으로 구매할 구매할 번호를 입력해 주세요";
     private static final String WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요";
@@ -43,30 +43,18 @@ public class InputPresent {
 
     public List<Ticket> manualPurchases() {
         List<Ticket> tickets = new ArrayList<>();
-        System.out.printf(PURCHASE_MANUAL);
-        int iter = scanner.nextInt();
+        System.out.printf(PURCHASE_MANUAL,System.lineSeparator());
+        int iter = Integer.parseInt(scanner.nextLine());
         for(int i=0 ; i<iter ; i++) {
-            tickets.add(mannualPurchase(scanner.nextLine()));
+            tickets.add(manualPurchase(scanner.nextLine()));
         }
         return tickets;
     }
 
-    private Ticket mannualPurchase(String nextLine) {
-        throw new RuntimeException("Not Yet Implemented : 문자열 한줄을 입력받아 티켓 하나를 발행하는 로직");
-    }
+    private Ticket manualPurchase(String nextLine) {
 
-    private List<Ticket> automaticIssue(int count) {
-        throw new RuntimeException("Not Yet Implemented");
+        Ticket ticket = new Ticket(nextLine);
+        System.out.printf("수동구매 = %s%s", ticket, System.lineSeparator());
+        return ticket;
     }
-
-    public List<Ticket> purchaseLotto() {
-        int i = this.purchaseCount();
-        //this.manualPurchases();
-        List<Ticket> tickets = this.manualPurchases();
-        //this.mannualIssue(tickets);
-        List<Ticket> tickets1 = this.automaticIssue(i - tickets.size());
-        tickets.addAll(tickets1);
-        return tickets;
-    }
-
 }

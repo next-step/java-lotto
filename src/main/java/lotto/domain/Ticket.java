@@ -21,7 +21,11 @@ public class Ticket {
     }
 
     private Set<LottoNumber> parseToLottoNumbers(Set<Integer> numbers) {
-        throw new RuntimeException("Not Yet Implemented");
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for(Integer integer : numbers) {
+            lottoNumbers.add(new LottoNumber(integer));
+        }
+        return lottoNumbers;
     }
 
     private static int overlapCount(Set<LottoNumber> copyThisNumbers) {

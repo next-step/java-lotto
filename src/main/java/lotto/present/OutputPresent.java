@@ -35,9 +35,12 @@ public class OutputPresent {
         System.out.print(incomePresentDTO.getBreakEvenMessage());
     }
 
-    public void presentTickets(List<Ticket> tickets) {
+    public void presentTickets(List<Ticket> manualTickets,List<Ticket> autoTickets) {
         System.out.println(CONFIRM_PURCHASE);
-        for (Ticket ticket : tickets) {
+        for (Ticket ticket : manualTickets) {
+            System.out.println(ticket.toString());
+        }
+        for (Ticket ticket : autoTickets) {
             System.out.println(ticket.toString());
         }
     }

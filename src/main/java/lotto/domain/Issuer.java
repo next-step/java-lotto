@@ -36,7 +36,7 @@ public class Issuer {
     }
 
     private int issueNumber() {
-        return RANDOM.nextInt(46) + 1;
+        return RANDOM.nextInt(44) + 1;
     }
 
     public List<Ticket> issuedTickets() {
@@ -48,4 +48,7 @@ public class Issuer {
     }
 
 
+    public void manualIssue(List<Ticket> manualPurchases) {
+
+    }
 }
