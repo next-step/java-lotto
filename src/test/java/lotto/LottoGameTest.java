@@ -5,8 +5,8 @@ import java.util.List;
 import lotto.domain.game.LottoGame;
 import lotto.domain.game.LottoGameStatistics;
 import lotto.domain.game.LottoWinType;
+import lotto.domain.game.LottoWinningNumber;
 import lotto.domain.raffle.LottoRaffleGenerator;
-import lotto.domain.round.LottoRoundNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,14 +30,28 @@ public class LottoGameTest {
 
     // given
     LottoGame game = new LottoGame(14000, fixedRaffleGenerator);
-    List<Integer> 당첨번호 = Arrays.asList(1, 2, 3, 4, 5, 6);
+    LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
     // when
     LottoGameStatistics statistics = game.play(당첨번호);
 
     // then
     Assertions.assertThat(statistics.getWinTypeMap())
-        .containsKey(LottoWinType.RANK_4);
+        .containsKey(LottoWinType.RANK_5);
+  }
+
+  @Test
+  @DisplayName("LottoGame | 중복번호 허용이 안되면, 보너스 번호와 당첨번호 또한 중복 될 수 없다")
+  void 중복번호_허용_불가_시_보너스번호도_중복_불가 () {
+
+    // given
+    boolean 중복번호_허용_불가 = true;
+    LottoGame game = new LottoGame(14000, fixedRaffleGenerator, 중복번호_허용_불가);
+    LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 3);
+
+    // when & then
+    Assertions.assertThatThrownBy(() -> game.play(당첨번호))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 
   @ValueSource(ints = {13333, 12001, 10001})
