@@ -31,24 +31,13 @@ public enum LottoPrize {
         this.money = money;
     }
 
-    public static LottoPrize getWinningPrize(int matchCount) {
+    public static LottoPrize of(int matchCount, boolean matchBonus) {
         if (!BY_LOTTO_PRIZE.containsKey(matchCount)) {
             return LottoPrize.LOST;
         }
-        return BY_LOTTO_PRIZE.get(matchCount);
-    }
-
-    public static LottoPrize getWinningPrize(int matchCount, boolean matchBonus) {
-        if (!BY_LOTTO_PRIZE.containsKey(matchCount)) {
-            return LottoPrize.LOST;
-        }
-        if (isRank2(matchCount, matchBonus)) {
-            return LottoPrize.RANK2;
-        }
-        if (isRank3(matchCount, matchBonus)) {
-            return LottoPrize.RANK3;
-        }
-        return BY_LOTTO_PRIZE.get(matchCount);
+        return (matchCount == LOTTO_RANK2_OR_RANK3_COUNT)
+                ? (matchBonus) ? RANK2 : RANK3
+                : BY_LOTTO_PRIZE.get(matchCount);
     }
 
     public static Map<LottoPrize, Integer> makeLottoResult() {
@@ -63,13 +52,5 @@ public enum LottoPrize {
 
     public int rankCount() {
         return this.rankCount;
-    }
-
-    private static boolean isRank2(int matchCount, boolean matchBonus) {
-        return matchBonus && matchCount == LOTTO_RANK2_OR_RANK3_COUNT;
-    }
-
-    private static boolean isRank3(int matchCount, boolean matchBonus) {
-        return !matchBonus && matchCount == LOTTO_RANK2_OR_RANK3_COUNT;
     }
 }

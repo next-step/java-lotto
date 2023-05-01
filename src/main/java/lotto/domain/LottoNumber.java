@@ -14,8 +14,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    public boolean matchesNumbers(List<Integer> winningNumbers) {
-        return winningNumbers.contains(lottoNumber);
+    public boolean hasMatchesNumber(List<LottoNumber> winningNumbers) {
+        return winningNumbers.contains(this);
     }
 
     public int getLottoNumber() {

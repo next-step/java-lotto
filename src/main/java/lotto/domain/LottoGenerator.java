@@ -12,23 +12,43 @@ public class LottoGenerator {
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
     private static final int LOTTO_TICKET_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private static final List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MINIMUM, LOTTO_NUMBER_MAXIMUM)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
 
-    public LottoGenerator() {
-        this.lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MINIMUM, LOTTO_NUMBER_MAXIMUM)
-                .mapToObj(LottoNumber::new)
+    private LottoGenerator() {
+    }
+
+    public static LottoTickets issue(int totalLottoCount, List<List<Integer>> manualNumbers) {
+        int autoLottoCount = calculateAutoLottoCount(totalLottoCount, manualNumbers);
+
+        List<List<LottoNumber>> autoLottoNumbers = generateAutoLottoNumbers(autoLottoCount);
+        List<List<LottoNumber>> manualLottoNumbers = manualNumbers.stream()
+                .map(LottoGenerator::toLottoNumbers)
+                .collect(Collectors.toList());
+
+        manualLottoNumbers.addAll(autoLottoNumbers);
+        return LottoTickets.of(manualLottoNumbers);
+    }
+
+    private static int calculateAutoLottoCount(int totalLottoCount, List<List<Integer>> manualNumbers) {
+        return totalLottoCount - manualNumbers.size();
+    }
+
+    private static List<LottoNumber> toLottoNumbers(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public LottoTickets generate(int count) {
-        return new LottoTickets(IntStream.range(0, count)
-                .mapToObj(i -> generateLottoNumbers())
-                .collect(Collectors.toList()));
+    private static List<List<LottoNumber>> generateAutoLottoNumbers(int autoCount) {
+        return IntStream.range(0, autoCount)
+                .mapToObj(i -> generateAutoLottoNumber())
+                .collect(Collectors.toList());
     }
 
-    private LottoTicket generateLottoNumbers() {
+    private static List<LottoNumber> generateAutoLottoNumber() {
         Collections.shuffle(lottoNumbers, new Random(System.currentTimeMillis()));
-        List<LottoNumber> randomLottoNumbers = new ArrayList<>(lottoNumbers.subList(0, LOTTO_TICKET_SIZE));
-        return new LottoTicket(randomLottoNumbers);
+        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_TICKET_SIZE));
     }
 }
