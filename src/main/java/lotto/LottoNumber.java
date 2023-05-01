@@ -1,6 +1,6 @@
 package lotto;
 
-public class LottoNumber {
+class LottoNumber {
     private final int number;
 
     public LottoNumber(final int number) {
@@ -9,8 +9,19 @@ public class LottoNumber {
     }
 
     private void checkNumber(int number) {
-        if(number > 45 || number < 1) {
+        if (number > 45 || number < 1) {
             throw new IllegalArgumentException("유효한 숫자 범위는 1~45 입니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
+    }
+
+    public int compareTo(LottoNumber target) {
+        return number > target.number ? 1 : -1;
     }
 }
