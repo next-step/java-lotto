@@ -44,10 +44,10 @@ public class SixLotteryNumbersTest {
     @DisplayName("Set Collection 객체의 크기가 6이 된 후 그 값을 반환한다.")
     void returnFullLotteryNumbers() {
         Set<LotteryNumber> lotteryNumbers = new HashSet<>();
-        while (lotteryNumbers.size() != 6) {
+        while (lotteryNumbers.size() != LOTTERY_NUMBERS_SIZE.getRuleNumber()) {
             lotteryNumbers.add(new LotteryNumber(RANDOM_NUMBER_GENERATOR.generatedNumber()));
         }
-        assertThat(lotteryNumbers).hasSize(6);
+        assertThat(lotteryNumbers).hasSize(LOTTERY_NUMBERS_SIZE.getRuleNumber());
     }
 
     @Test
