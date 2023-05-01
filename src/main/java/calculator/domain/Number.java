@@ -18,4 +18,12 @@ public class Number {
     public int value() {
         return this.value;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Number number = (Number) o;
+        return this.value == number.value;
+    }
 }
