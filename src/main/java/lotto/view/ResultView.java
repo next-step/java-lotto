@@ -42,11 +42,12 @@ public class ResultView {
         stringBuilder.append("---------\n");
 
         for (int i = 3; i <= 6; i++) {
+            LottoPrize lottoPrize = LottoPrize.from(i);
             stringBuilder.append(i);
             stringBuilder.append("개 일치 (");
-            stringBuilder.append(LottoPrize.from(i).getPrize());
+            stringBuilder.append(lottoPrize.getPrize());
             stringBuilder.append("원)- ");
-            stringBuilder.append(lottoResult.getMatchingLottosCount(i));
+            stringBuilder.append(lottoResult.getMatchingLottosCount(lottoPrize));
             stringBuilder.append("개\n");
         }
 

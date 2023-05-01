@@ -16,9 +16,10 @@ public class LottoPrizeTest {
             "5:1_500_000",
             "6:2_000_000_000"
     }, delimiter = ':')
-    void 당첨_번호_갯수에_따라_당첨_금액을_알_수_있다(int input, long expected) {
+    void 당첨_번호_갯수에_따라_당첨_금액을_알_수_있다(int input, long prize) {
         LottoPrize lottoPrize = LottoPrize.from(input);
-        assertThat(lottoPrize.getPrize()).isEqualTo(expected);
+        assertThat(lottoPrize.getMatchingCount()).isEqualTo(input);
+        assertThat(lottoPrize.getPrize()).isEqualTo(prize);
     }
 
     @ParameterizedTest(name = "{0}은 적절한 로또 당첨 갯수가 아니므로 예외가 발생한다.")
