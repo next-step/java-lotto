@@ -1,7 +1,7 @@
 package lotto;
 
 class LottoNumber {
-    private final int number;
+    private final Integer number;
 
     public LottoNumber(final int number) {
         checkNumber(number);
@@ -21,7 +21,12 @@ class LottoNumber {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return number.equals(((LottoNumber) obj).number);
+    }
+
     public int compareTo(LottoNumber target) {
-        return number > target.number ? 1 : -1;
+        return number.compareTo(target.number);
     }
 }

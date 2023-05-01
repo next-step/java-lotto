@@ -32,4 +32,12 @@ public class LottoNumberTest {
         List<LottoNumber> lottoNumbers = lottoNumberGenerator.lotto();
         assertThat(lottoNumbers).hasSize(6);
     }
+
+    @Test
+    void 두_로또번호는_같은번호이다() {
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(1);
+
+        assertThat(lottoNumber1).isEqualTo(lottoNumber2);
+    }
 }
