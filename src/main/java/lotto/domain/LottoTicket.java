@@ -24,4 +24,8 @@ public class LottoTicket {
     public LottoResult calculateResult(List<Integer> winningNumbers) {
         return new LottoResult(lottoNumbers, winningNumbers);
     }
+
+    public LottoResult calculateResult(List<Integer> winningNumbers, int bonusNumber) {
+        return new LottoResult(lottoNumbers, winningNumbers, bonusNumber);
+    }
 }

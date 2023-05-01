@@ -16,12 +16,6 @@ public class LottoNumber {
         return numbers;
     }
 
-    public int countMatchingNumbers(List<Integer> winningNumbers) {
-        return (int) numbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
-    }
-
     private List<Integer> generateRandomSortedNumbers() {
         List<Integer> numbers = RandomLottoNumberGenerator.generate();
         Collections.sort(numbers);

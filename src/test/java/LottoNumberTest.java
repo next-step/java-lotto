@@ -1,3 +1,4 @@
+import lotto.domain.LottoMatchInfo;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
@@ -34,6 +35,14 @@ public class LottoNumberTest {
         LottoNumber lottoNumber2 = new LottoNumber();
 
         Assertions.assertThat(lottoNumber1).isNotEqualTo(lottoNumber2);
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호가 정해진 사이값의 숫자가 아니라면 예외를 던진다.")
+    @ValueSource(ints = {-1, 46})
+    void validateLottoNumber_test(int lottoNumber) {
+        assertThatThrownBy(() -> InputView.validateLottoNumberInRange(lottoNumber))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -75,7 +84,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {3, 4, 5, 6})
     @DisplayName("당첨 번호와 일치하는 숫자에 따라 순위를 매길 수 있다.")
     void setRank_test(int matchCount) {
-        Rank rank = Rank.valueOf(matchCount);
+        Rank rank = Rank.valueOf(matchCount, false);
 
         Assertions.assertThat(matchCount).isEqualTo(rank.getCountOfMatch());
     }
@@ -86,15 +95,16 @@ public class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber();
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        int matchCount = lottoNumber.countMatchingNumbers(winningNumbers);
-        Assertions.assertThat(matchCount).isBetween(0, 6);
+        LottoMatchInfo matchInfo = LottoMatchInfo.countMatchingNumbers(lottoNumber, winningNumbers);
+
+        Assertions.assertThat(matchInfo.getMatchCount()).isBetween(0, 6);
     }
 
     @Test
-    @DisplayName("수익률 계산이 동작하는지 확인할 수 있다.")
+    @DisplayName("보너스 번호가 없을 때 수익률 계산이 동작하는지 확인할 수 있다.")
     void calculateReturnRate_test() {
         int purchaseAmount = 10_000;
-        LottoTicket lottoTicket = new LottoTicket(10); // 10장의 로또 티켓 생성
+        LottoTicket lottoTicket = new LottoTicket(10);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         LottoResult lottoResult = lottoTicket.calculateResult(winningNumbers);
@@ -102,4 +112,42 @@ public class LottoNumberTest {
 
         Assertions.assertThat(returnRate).isGreaterThanOrEqualTo(0);
     }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨번호에 포함되어 있을 때 예외를 던진다.")
+    void validateBonusNumber_test() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 6;
+
+        assertThatThrownBy(() -> InputView.validateBonusNumber(winningNumbers, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 있을 때 수익률 계산이 동작하는지 확인할 수 있다.")
+    void calculateWithBonusNumberReturnRate_test() {
+        int purchaseAmount = 10_000;
+        LottoTicket lottoTicket = new LottoTicket(10);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+
+        LottoResult lottoResult = lottoTicket.calculateResult(winningNumbers, bonusNumber);
+        double returnRate = OutputView.calculateReturnRate(purchaseAmount, lottoResult);
+
+        Assertions.assertThat(returnRate).isGreaterThanOrEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("당첨 번호와 일치하는 숫자와 보너스 번호 일치 여부를 확인할 수 있다.")
+    void checkMatchingNumbersAndBonus_test() {
+        LottoNumber lottoNumber = new LottoNumber();
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+
+        LottoMatchInfo lottoMatchInfo = LottoMatchInfo.countMatchingNumbers(lottoNumber, winningNumbers, bonusNumber);
+
+        Assertions.assertThat(lottoMatchInfo.getMatchCount()).isBetween(0, 6);
+        Assertions.assertThat(lottoMatchInfo.isBonusMatch()).isIn(true, false);
+    }
+
 }
