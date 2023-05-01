@@ -7,3 +7,16 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 요구사항
+* 구입금액 입력받는 InputView
+* 구매한 로또들의 번호를 출력하는 OutputView
+  * 로또생성전략 LotteryStrategy
+    * 로또랜덤생성전략 RandomLotteryStrategy
+    * 로또순차생성전략(1,2,3, ...) SequentialLotteryStrategy
+  * 로또들을 구매하는 buyLotteries
+    * 로또를 구매하는 buyLottery
+* 당첨 로또 번호를 입력받는 InputView
+* 당첨 통계를 출력하는 OutputView
+  * n개 일치하는 로또의 수를 계산해주는 countWinLottery
+  * 수익률 계산해주는 calculateRateOfReturn
