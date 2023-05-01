@@ -2,14 +2,19 @@ package lotto.domain.round;
 
 import java.util.List;
 import lotto.domain.game.LottoWinType;
+import lotto.domain.game.LottoWinningNumber;
 
 public class LottoRoundJudge {
 
-  public LottoWinType judge (List<Integer> numbers, List<Integer> winningNumbers) {
+  public LottoWinType judge (LottoRoundNumbers roundNumbers, LottoWinningNumber winningNumber) {
+    final List<Integer> numbers = roundNumbers.getNumbers();
+
     final int matchingNumberCnt = (int) numbers.stream()
-        .filter(winningNumbers::contains)
+        .filter(winningNumber::containsWinningNumbers)
         .count();
 
-    return LottoWinType.findByMatchingNumberCnt(matchingNumberCnt);
+    final boolean isBonusNumberInclude = numbers.contains(winningNumber.getBonusNumber());
+
+    return LottoWinType.getWinTypeByMatchingCnt(matchingNumberCnt, isBonusNumberInclude);
   }
 }

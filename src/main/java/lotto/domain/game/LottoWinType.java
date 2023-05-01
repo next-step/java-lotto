@@ -1,33 +1,29 @@
 package lotto.domain.game;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 public enum LottoWinType {
 
-  RANK_4(3, 5_000),
-  RANK_3(4, 50_000),
-  RANK_2(5, 1_500_000),
+  RANK_5(3, 5_000),
+  RANK_4(4, 50_000),
+  RANK_3(5, 1_500_000, false),
+  RANK_2(5, 3_000_000, true),
   RANK_1(6, 2_000_000_000);
 
   private final int matchingNumberCnt;
+  private final boolean isBonusNumberRequired;
   private final int prize;
 
-  LottoWinType(int matchingNumberCnt, int prize) {
+  LottoWinType (int matchingNumberCnt, int prize) {
     this.matchingNumberCnt = matchingNumberCnt;
     this.prize = prize;
+    this.isBonusNumberRequired = false;
   }
 
-  private static final Map<Integer, LottoWinType> matchingCntMap = Collections.unmodifiableMap(
-      Stream.of(LottoWinType.values())
-          .collect(Collectors.toMap(LottoWinType::getMatchingNumberCnt, Function.identity()))
-  );
-
-  public static LottoWinType findByMatchingNumberCnt(int matchingNumberCnt) {
-    return matchingCntMap.get(matchingNumberCnt);
+  LottoWinType (int matchingNumberCnt, int prize, boolean isBonusNumberRequired) {
+    this.matchingNumberCnt = matchingNumberCnt;
+    this.prize = prize;
+    this.isBonusNumberRequired = isBonusNumberRequired;
   }
 
   public int getMatchingNumberCnt() {
@@ -36,5 +32,22 @@ public enum LottoWinType {
 
   public int getPrize() {
     return prize;
+  }
+
+  public static LottoWinType getWinTypeByMatchingCnt (int matchingNumberCnt, boolean isBonusNumberRequired) {
+    return Arrays.stream(values())
+        .filter(winType -> winType.isMatchCondition(matchingNumberCnt, isBonusNumberRequired))
+        .findFirst()
+        .orElse(null);
+  }
+
+  public boolean isBonusNumberRequired() {
+    return isBonusNumberRequired;
+  }
+
+  private boolean isMatchCondition(int matchingNumberCnt, boolean isBonusNumberRequired) {
+    boolean numberCntMatch = this.matchingNumberCnt == matchingNumberCnt;
+    boolean bonusNumberRequiredMatch = this.isBonusNumberRequired == isBonusNumberRequired;
+    return numberCntMatch && bonusNumberRequiredMatch;
   }
 }

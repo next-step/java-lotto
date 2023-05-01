@@ -29,6 +29,12 @@ public class InputView {
         .collect(Collectors.toList());
   }
 
+  public int getBonusNumber () throws IOException {
+    System.out.println("보너스 볼을 입력해 주세요.\n");
+    String lottoPrice = reader.readLine();
+    return Integer.parseInt(lottoPrice);
+  }
+
   public void tearDown() throws IOException {
     this.reader.close();
   }

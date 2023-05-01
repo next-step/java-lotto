@@ -14,12 +14,20 @@ public class ResultView {
   public static void displayStatistics (LottoGameStatistics statistics) {
     Map<LottoWinType, List<LottoRoundResult>> winTypeMap = statistics.getWinTypeMap();
     System.out.println("\n당첨 통계\n---------");
-    for (LottoWinType value : LottoWinType.values()) {
-      List<LottoRoundResult> lottoRoundResults = winTypeMap.getOrDefault(value, Collections.emptyList());
-      System.out.printf("%d개 일치 (%d원) - %d개\n", value.getMatchingNumberCnt(), value.getPrize(), lottoRoundResults.size());
+    for (LottoWinType winType : LottoWinType.values()) {
+      List<LottoRoundResult> lottoRoundResults = winTypeMap.getOrDefault(winType, Collections.emptyList());
+      System.out.printf(getDisplayMsgByWinType(winType), winType.getMatchingNumberCnt(), winType.getPrize(), lottoRoundResults.size());
     }
 
     System.out.printf("총 수익률은 %s", statistics.getTotalRateOfReturn());
+  }
+
+  private static String getDisplayMsgByWinType (LottoWinType winType) {
+    if (winType.isBonusNumberRequired()) {
+      return "%d개 일치, 보너스볼 일치 (%d원) - %d개\n";
+    }
+
+    return "%d개 일치 (%d원) - %d개\n";
   }
 
   public static void showLottoRounds (List<LottoRound> lottoRounds) {

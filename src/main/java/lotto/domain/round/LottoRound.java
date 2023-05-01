@@ -2,20 +2,21 @@ package lotto.domain.round;
 
 import java.util.List;
 import lotto.domain.game.LottoWinType;
+import lotto.domain.game.LottoWinningNumber;
 
 public class LottoRound {
   private final int roundNo;
   private final LottoRoundNumbers roundNumbers;
   private final LottoRoundJudge roundJudge;
 
-  public LottoRound (int roundNo, List<Integer> numbers, LottoRoundJudge roundJudge, boolean distinctNumberOnly) {
+  public LottoRound (int roundNo, LottoRoundNumbers roundNumbers, LottoRoundJudge roundJudge) {
     this.roundNo = roundNo;
-    this.roundNumbers = new LottoRoundNumbers(numbers, distinctNumberOnly);
+    this.roundNumbers = roundNumbers;
     this.roundJudge = roundJudge;
   }
 
-  public LottoRoundResult playRound (List<Integer> winningNumbers) {
-    LottoWinType winType = roundJudge.judge(getRoundNumbers(), winningNumbers);
+  public LottoRoundResult playRound (LottoWinningNumber winningNumber) {
+    LottoWinType winType = roundJudge.judge(roundNumbers, winningNumber);
     return new LottoRoundResult(roundNo, winType);
   }
 

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.raffle.LottoRaffleGenerator;
 import lotto.domain.round.LottoRoundJudge;
+import lotto.domain.round.LottoRoundNumbers;
 import lotto.domain.round.LottoRoundResult;
 import lotto.domain.round.LottoRound;
 
@@ -34,11 +35,23 @@ public class LottoGame {
     this.lottoRounds = initLottoRounds();
   }
 
-  public LottoGameStatistics play (final List<Integer> winningNumbers) {
+  public LottoGameStatistics play (final LottoWinningNumber winningNumber) {
+    throwIfAgainstDistinctPolicy(winningNumber);
     final List<LottoRoundResult> roundStatistics = lottoRounds.stream()
-        .map(purchaseLotto -> purchaseLotto.playRound(winningNumbers))
+        .map(purchaseLotto -> purchaseLotto.playRound(winningNumber))
         .collect(Collectors.toList());
+
     return new LottoGameStatistics(this.purchasePrice, roundStatistics);
+  }
+
+  private void throwIfAgainstDistinctPolicy(final LottoWinningNumber winningNumber) {
+    if (!distinctNumberOnly) {
+      return;
+    }
+
+    if (winningNumber.containsDuplicateNumber()) {
+      throw new IllegalArgumentException("당첨번호가 중복일 수 없습니다.");
+    }
   }
 
   public List<LottoRound> getLottoRounds () {
@@ -47,7 +60,7 @@ public class LottoGame {
 
   private List<LottoRound> initLottoRounds () {
     return IntStream.rangeClosed(1, this.purchasePrice.getGameCount())
-        .mapToObj(i -> new LottoRound(i, raffleGenerator.generateRaffleNumber(), roundJudge, distinctNumberOnly))
+        .mapToObj(i -> new LottoRound(i, new LottoRoundNumbers(raffleGenerator.generateRaffleNumber()), roundJudge))
         .collect(Collectors.toList());
   }
 }
