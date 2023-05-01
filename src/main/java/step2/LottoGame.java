@@ -30,7 +30,7 @@ public class LottoGame {
         int bonusNumber = getBonusNumber(scanner, resultView);
 
         LottoService lottoService = new LottoService(
-            new LotteryWin(new WinningNumbers(winningNumbers), new BonusNumber(bonusNumber))
+            new LotteryWin(new WinningNumbers(winningNumbers), bonusNumber)
         );
 
         lottoService.matchResult(purchasedLottoList.get());
