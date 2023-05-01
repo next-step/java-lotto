@@ -16,5 +16,13 @@ public class LottoTicket {
   }
 
 
-
+  public int matchCount(List<Integer> winningNumbers) {
+    int count = 0;
+    for (Integer number : numbers) {
+      if (winningNumbers.contains(number)) {
+        count++;
+      }
+    }
+    return count;
+  }
 }
