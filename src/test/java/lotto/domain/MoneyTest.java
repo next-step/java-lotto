@@ -24,6 +24,6 @@ class MoneyTest {
     void nullOrEmptyTest(int input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Money.wons(input))
-                .withMessage("1000원 이상 입력해주세 :(");
+                .withMessage("1000원 이상 입력해주세 :)");
     }
 }

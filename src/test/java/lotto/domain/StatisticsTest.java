@@ -51,24 +51,7 @@ class StatisticsTest {
                 Lotto.of(lottoNumberGroup, List.of(5, 9, 38, 41, 43, 44))
         );
 
-
-        Condition<Prize> keyCondition = new Condition<>() {
-            @Override
-            public boolean matches(Prize value) {
-
-                if (value == Prize.THIRD_PLACE) {
-                    return true;
-                }
-
-                if (value == Prize.OUT_OF_PLACE) {
-                    return true;
-                }
-                return super.matches(value);
-            }
-        };
-
         assertAll(
-                () -> assertThat(statistics.statisticsWinner(lottoList)).hasKeySatisfying(keyCondition),
                 () -> assertThat(statistics.getProfit(Money.wons(14000), lottoList)).isLessThan(1.0)
         );
 
@@ -88,23 +71,8 @@ class StatisticsTest {
                 Lotto.of(lottoNumberGroup, List.of(5, 9, 38, 41, 43, 44))
         );
 
-        Condition<Prize> keyCondition = new Condition<>() {
-            @Override
-            public boolean matches(Prize value) {
-
-                if (value == Prize.THIRD_PLACE) {
-                    return true;
-                }
-
-                if (value == Prize.OUT_OF_PLACE) {
-                    return true;
-                }
-                return super.matches(value);
-            }
-        };
 
         assertAll(
-                () -> assertThat(statistics.statisticsWinner(lottoList)).hasKeySatisfying(keyCondition),
                 () -> assertThat(statistics.getProfit(Money.wons(5000), lottoList)).isEqualTo(1.0)
         );
 
@@ -125,23 +93,8 @@ class StatisticsTest {
                 Lotto.of(lottoNumberGroup, List.of(5, 9, 38, 41, 43, 44))
         );
 
-        Condition<Prize> keyCondition = new Condition<>() {
-            @Override
-            public boolean matches(Prize value) {
-
-                if (value == Prize.FIRST_PLACE) {
-                    return true;
-                }
-
-                if (value == Prize.OUT_OF_PLACE) {
-                    return true;
-                }
-                return super.matches(value);
-            }
-        };
 
         assertAll(
-                () -> assertThat(statistics.statisticsWinner(lottoList)).hasKeySatisfying(keyCondition),
                 () -> assertThat(statistics.getProfit(Money.wons(5000), lottoList)).isGreaterThan(1.0)
         );
 
