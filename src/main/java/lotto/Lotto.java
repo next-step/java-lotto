@@ -17,6 +17,10 @@ public class Lotto {
         lottoNumbers.addAll(split(lottoNumber));
     }
 
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers.addAll(lottoNumbers);
+    }
+
     private List<Integer> split(String lottoNumber) {
         List<Integer> numbers = Arrays.stream(lottoNumber.split(SPLIT_REGEX)).map(Integer::parseInt).collect(Collectors.toList());
         lottoSizeCheck(numbers);
