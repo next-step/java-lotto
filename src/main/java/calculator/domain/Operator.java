@@ -25,8 +25,10 @@ public enum Operator {
     }
 
     Number calculate(Operand preOperand, Operand postOperand) {
-        int preValue = preOperand.value();
-        int postValue = postOperand.value();
+        Number preNumber = preOperand.number();
+        Number postNumber = postOperand.number();
+        int preValue = preNumber.value();
+        int postValue = postNumber.value();
         Integer result = expression.apply(preValue, postValue);
         return new Number(result);
     }

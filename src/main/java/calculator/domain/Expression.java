@@ -34,6 +34,6 @@ public class Expression {
             Number result = operator.calculate(preOperand, postOperand);
             preOperand = new Operand(result);
         }
-        return new Number(preOperand.value());
+        return preOperand.number();
     }
 }

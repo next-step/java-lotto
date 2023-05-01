@@ -11,7 +11,7 @@ public class Operand {
         this.number = number;
     }
 
-    public int value() {
-        return this.number.value();
+    public Number number() {
+        return this.number;
     }
 }
