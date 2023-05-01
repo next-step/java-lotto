@@ -6,6 +6,7 @@ public class StringCalculator {
     private static final int ZERO = 0;
     public static final String DEFAULT_DELIMITER = " ";
     private static final Pattern NUMERIC_REGEX_PATTERN = Pattern.compile("-?[0-9]+");
+    private static final Pattern OPERATION_SYMBOL_REGEX_PATTERN = Pattern.compile("[+\\-*/]");
 
     public static String[] split(String textInput) {
         isBlank(textInput);
@@ -37,6 +38,7 @@ public class StringCalculator {
 
     private static void isValidArrayElement(int index, String value) {
         if (isEvenNumber(index + 1)) {
+            isOperationSymbol(value);
             return;
         }
 
@@ -46,6 +48,12 @@ public class StringCalculator {
     private static void isNumber(String value) {
         if (!NUMERIC_REGEX_PATTERN.matcher(value).matches()) {
             throw new IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.");
+        }
+    }
+
+    private static void isOperationSymbol(String value) {
+        if (!OPERATION_SYMBOL_REGEX_PATTERN.matcher(value).matches()) {
+            throw new IllegalArgumentException("사칙연산 기호 이외의 값은 입력할 수 없습니다.");
         }
     }
 
