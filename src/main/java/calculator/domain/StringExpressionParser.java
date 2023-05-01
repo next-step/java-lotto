@@ -44,17 +44,12 @@ public class StringExpressionParser {
 
     private static void convertByIndex(List<ExpressionElement> expressionElements, String element, int index) {
         if (isEvenNumber(index)) {
-            Operand operand = convertToOperand(element);
+            Operand operand = new Operand(element);
             addOperand(expressionElements, operand);
             return;
         }
         Operator operator = convertToOperator(element);
         addOperator(expressionElements, operator);
-    }
-
-    private static Operand convertToOperand(String element) {
-        Number number = new Number(element);
-        return new Operand(number);
     }
 
     private static void addOperand(List<ExpressionElement> expressionElements, Operand operand) {
