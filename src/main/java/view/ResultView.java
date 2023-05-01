@@ -20,7 +20,7 @@ public class ResultView {
     System.out.println(String.join(", ", numbers.toString()));
   }
 
-  public static void printMatchedCount(Map<Prize, Integer> matchedCountMap) {
+  public static void printMatchedCount(Map<Prize, Long> matchedCountMap) {
     System.out.println();
     System.out.println("당첨 통계");
     System.out.println("---------");
@@ -29,15 +29,19 @@ public class ResultView {
     }
   }
 
-  private static void printMatchResult(Map<Prize, Integer> matchedCountMap, Prize prize) {
-    if (prize != Prize.MATCH_NOT_THING) {
+  private static void printMatchResult(Map<Prize, Long> matchedCountMap, Prize prize) {
+    if (prize != Prize.NONE) {
       System.out.printf("%d개 일치 (%d원)- %d개\n", prize.matchCount(), prize.prizeMoney(),
-          matchedCountMap.get(prize));
+          findMatchedCount(matchedCountMap, prize));
     }
   }
 
+  private static long findMatchedCount(Map<Prize, Long> matchedCountMap, Prize prize) {
+    return matchedCountMap.getOrDefault(prize, 0L);
+  }
 
-  public static void printProfit(int investMoney, int earnMoney) {
+
+  public static void printProfit(int investMoney, long earnMoney) {
     System.out.printf("총 수익률은 %.2f입니다.", (double) earnMoney / investMoney);
   }
 }

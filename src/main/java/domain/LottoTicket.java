@@ -17,19 +17,21 @@ public class LottoTicket {
   }
 
 
-  public int getMatchCount(List<Integer> winningNumbers) {
-    int matchedCount = 0;
-    for (Integer number : lottoNumbers) {
-      matchedCount = contains(winningNumbers, matchedCount, number);
+
+
+  public int findMatchingCount(List<Integer> winningNumbers) {
+    int matchingCount = 0;
+    for(Integer lottoNumber : lottoNumbers) {
+      matchingCount = countMatched(winningNumbers, matchingCount, lottoNumber);
     }
-    return matchedCount;
+    return matchingCount;
   }
 
-  private static int contains(List<Integer> winningNumbers, int matchedCount,
-      Integer number) {
-    if (winningNumbers.contains(number)) {
-      matchedCount++;
+  private static int countMatched(List<Integer> winningNumbers, int matchingCount,
+      Integer lottoNumber) {
+    if(winningNumbers.contains(lottoNumber)) {
+      matchingCount++;
     }
-    return matchedCount;
+    return matchingCount;
   }
 }
