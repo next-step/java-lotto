@@ -2,8 +2,12 @@ package lottery.domain.constant;
 
 import static java.util.Arrays.stream;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -38,6 +42,13 @@ public enum Rank {
 
     public int getWinningMoney() {
         return winningMoney;
+    }
+
+    public static List<Rank> sortRanksByCountOfMatch() {
+        return Arrays.stream(Rank.values())
+                .sorted(Comparator.comparingInt(Rank::getCountOfMatch))
+                .filter(rank -> rank != Rank.MISS)
+                .collect(Collectors.toList());
     }
 
     public static Rank getRankByCountOfMatch(int countOfMatch) {
