@@ -84,6 +84,12 @@ public class StringCalculator {
             String operate(String x, String y) {
                 return new BigDecimal(x).subtract(new BigDecimal(y)).toString();
             }
+        },
+        MULTIPLY("*") {
+            @Override
+            String operate(String x, String y) {
+                return new BigDecimal(x).multiply(new BigDecimal(y)).toString();
+            }
         };
 
         private final String symbol;

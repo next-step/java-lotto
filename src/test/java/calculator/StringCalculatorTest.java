@@ -60,4 +60,10 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.calculate("2.2 - 1")).isEqualTo("1.2");
     }
 
+    @DisplayName("곱셈 사칙연산 기호가 포함 된 입력된 문자열이 곱셈 사칙연산 결과가 반환되는지 확인")
+    @Test
+    void multiply() {
+        assertThat(StringCalculator.calculate("3.3 * 2")).isEqualTo("6.6");
+    }
+
 }
