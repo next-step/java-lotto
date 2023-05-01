@@ -14,9 +14,9 @@ public class LottoMain {
         OutputView.printLottoList(lottoList);
 
         WinnerLotto winnerLotto = InputView.inputWinningNumbers();
-        Statistics statistics = new Statistics(winnerLotto);
+        Statistics statistics = new Statistics(winnerLotto, lottoList);
 
-        OutputView.printStatisticsResult(statistics,lottoList);
-        OutputView.printProfit(statistics,lottoList,money);
-     }
+        OutputView.printStatisticsResult(statistics, lottoList);
+        OutputView.printProfit(statistics, lottoList, money);
+    }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -9,13 +10,16 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class Statistics {
     private final WinnerLotto winnerLotto;
+    private final List<Lotto> lottoList;
+    private Map<Prize, Long> statisticsWinnerMap;
 
-    public Statistics(WinnerLotto winnerLotto) {
+    public Statistics(WinnerLotto winnerLotto, List<Lotto> lottoList) {
         this.winnerLotto = winnerLotto;
+        this.lottoList = lottoList;
+        this.statisticsWinnerMap = doStatistic();
     }
 
-    public Map<Prize, Long> statisticsWinner(List<Lotto> lottoList) {
-
+    public Map<Prize, Long> doStatistic() {
         return lottoList.stream()
                 .map(winnerLotto::findMatchingCount)
                 .map(Prize::valueOf)
@@ -23,10 +27,13 @@ public class Statistics {
                 .collect(groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    public double getProfit(Money money, List<Lotto> lottoList) {
-        Map<Prize, Long> winnerMap = statisticsWinner(lottoList);
+    public Map<Prize, Long> statisticsWinner() {
+        return Collections.unmodifiableMap(statisticsWinnerMap);
+    }
 
-        int sum = getSumProfit(winnerMap);
+    public double getProfit(Money money) {
+
+        int sum = getSumProfit(statisticsWinnerMap);
 
         return Money.wons(sum).division(money);
     }
