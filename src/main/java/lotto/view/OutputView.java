@@ -24,16 +24,15 @@ public class OutputView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("===============");
-        printStatistics(statistics.statisticsWinner(lottoList));
+        printStatistics(statistics.statisticsWinner());
     }
 
     private static void printStatistics(Map<Prize, Long> statisticsMap) {
         statisticsMap.forEach((prize, result) -> System.out.println(prize.getMatchingCount() + "개 일치 (" + prize.getPrizeMoney() + "원)- " + result + "개"));
     }
 
-
     public static void printProfit(Statistics statistics, List<Lotto> lottoList, Money money) {
-        double profit = statistics.getProfit(money, lottoList);
+        double profit = statistics.getProfit(money);
 
         String profitFormat = String.format("%.2f", profit);
 
