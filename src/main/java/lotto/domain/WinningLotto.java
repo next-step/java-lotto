@@ -17,7 +17,7 @@ public class WinningLotto {
         }
     }
 
-    public static WinningLotto initWinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+    public static WinningLotto init(Lotto winningLotto, LottoNumber bonusNumber) {
         return new WinningLotto(winningLotto, bonusNumber);
     }
 
@@ -25,6 +25,6 @@ public class WinningLotto {
         int matchingBall = lotto.findMatchingBall(winningLotto);
         boolean hasBonusNumber = lotto.hasBonusNumber(bonusNumber);
 
-        return Statistics.initStatistics(matchingBall, hasBonusNumber);
+        return Statistics.init(matchingBall, hasBonusNumber);
     }
 }

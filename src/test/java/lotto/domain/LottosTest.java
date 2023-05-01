@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,28 +12,44 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
+    private Lottos manualLottos;
+    private Lotto winning;
+
     @Test
-    @DisplayName("로또 생성 테스트")
-    void initLottoTest() {
-        assertThat(Lottos.initLottos(Money.initMoney(14000)))
+    @BeforeEach
+    void setup() {
+        winning = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "6"));
+
+        Lotto lotto_1 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "6"));
+        Lotto lotto_2 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "7"));
+        Lotto lotto_3 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "5", "9"));
+        Lotto lotto_4 = Lotto.createManualLotto(List.of("1", "2", "3", "4", "8", "7"));
+        Lotto lotto_5 = Lotto.createManualLotto(List.of("1", "2", "3", "9", "8", "7"));
+
+        manualLottos = new Lottos(List.of(lotto_1, lotto_2, lotto_3, lotto_4, lotto_5));
+    }
+
+    @Test
+    @DisplayName("수동 로또 생성 테스트")
+    void manualLottosTest() {
+        assertThat(manualLottos)
                 .isInstanceOf(Lottos.class);
+    }
+
+    @Test
+    @DisplayName("자동 로또 생성 테스트")
+    void autoLottosTest() {
+        Lottos lottos = new Lottos();
+        assertThat(lottos.createAutoLottos(Amount.from(5)))
+                .isInstanceOf(Lottos.class);
+
     }
 
     @Test
     @DisplayName("통계 테스트")
     void findStatisticsTest() {
-        Lotto winning = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
-
-        Lotto lotto_1 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "6"));
-        Lotto lotto_2 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "7"));
-        Lotto lotto_3 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "5", "9"));
-        Lotto lotto_4 = Lotto.initWinningLotto(List.of("1", "2", "3", "4", "8", "7"));
-        Lotto lotto_5 = Lotto.initWinningLotto(List.of("1", "2", "3", "9", "8", "7"));
-
-        Lottos lottos = new Lottos(List.of(lotto_1, lotto_2, lotto_3, lotto_4, lotto_5));
-
         LottoNumber bonusNumber = LottoNumber.createManualLottoNumber("7");
-        WinningLotto winningLotto = WinningLotto.initWinningLotto(winning, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.init(winning, bonusNumber);
 
         Map<Statistics, Integer>  winnersCount = new EnumMap<>(Statistics.class);
         winnersCount.put(Statistics.FIRST, 1);
@@ -42,7 +59,7 @@ class LottosTest {
         winnersCount.put(Statistics.FIFTH, 1);
         Winners winners = new Winners(winnersCount);
 
-        assertThat(lottos.findStatistics(winningLotto))
+        assertThat(manualLottos.findStatistics(winningLotto))
                 .usingRecursiveComparison()
                 .isEqualTo(winners);
 

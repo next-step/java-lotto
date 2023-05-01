@@ -10,13 +10,13 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto initLotto() {
-        LottoNumbers lottoNumbers = LottoNumbers.initShuffledLottoNumbers();
+    public static Lotto createAutoLotto() {
+        LottoNumbers lottoNumbers = LottoNumbers.createAutoLottoNumbers();
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto initWinningLotto(List<String> manualNumbers) {
-        LottoNumbers lottoNumbers = LottoNumbers.initManualLottoNumbers(manualNumbers);
+    public static Lotto createManualLotto(List<String> manualNumbers) {
+        LottoNumbers lottoNumbers = LottoNumbers.createManualLottoNumbers(manualNumbers);
         return new Lotto(lottoNumbers);
     }
 

@@ -27,17 +27,17 @@ public class LottoNumbers {
         }
     }
 
-    public static LottoNumbers initShuffledLottoNumbers() {
+    public static LottoNumbers createAutoLottoNumbers() {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
         while (lottoNumbers.size() < LOTTO_LENGTH) {
-            LottoNumber lottoNumber = LottoNumber.createLottoNumber();
+            LottoNumber lottoNumber = LottoNumber.createAutoLottoNumber();
             lottoNumbers.add(lottoNumber);
         }
 
         return new LottoNumbers(lottoNumbers);
     }
 
-    public static LottoNumbers initManualLottoNumbers(List<String> manualNumbers) {
+    public static LottoNumbers createManualLottoNumbers(List<String> manualNumbers) {
         Set<LottoNumber> lottoNumbers = manualNumbers.stream()
                 .map(LottoNumber::createManualLottoNumber)
                 .collect(Collectors.toCollection(TreeSet::new));

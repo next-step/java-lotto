@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static LottoNumber createLottoNumber() {
+    public static LottoNumber createAutoLottoNumber() {
         return new LottoNumber(RANDOM.nextInt(LOTTO_UPPER_BOUND) + LOTTO_LOWER_BOUND);
     }
 

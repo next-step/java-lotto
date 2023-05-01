@@ -20,7 +20,7 @@ public enum Statistics {
         this.prize = prize;
     }
 
-    public static Statistics initStatistics(int matchingBall, boolean isBonus) {
+    public static Statistics init(int matchingBall, boolean isBonus) {
         if (isSecondPrize(matchingBall, isBonus)) {
             return Statistics.SECOND;
         }
