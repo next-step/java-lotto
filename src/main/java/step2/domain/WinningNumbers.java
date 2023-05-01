@@ -7,13 +7,11 @@ import step2.utils.Split;
 
 public class WinningNumbers {
 
-    private final List<Integer> numbers = new ArrayList<>();
+    private List<Integer> numbers = new ArrayList<>();
 
     public WinningNumbers(String winningNumber) {
         String[] winningNumbers = Split.getStrings(winningNumber);
-        for (String number : winningNumbers) {
-            this.numbers.add(Conversion.stringToInt(number));
-        }
+        this.numbers.addAll(Conversion.stringToInt(winningNumbers));
     }
 
     public WinningNumbers(List<Integer> winningNumbers) {
