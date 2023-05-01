@@ -39,7 +39,7 @@ public class LotteriesTest {
     void dividedLotteriesByRankTest() {
         Map<Rank, Integer> dividedLotteries = LOTTERY_DUMMY_DATA
                 .lotteriesDummyObj()
-                .getDividedLotteriesByRank(LOTTERY_DUMMY_DATA
+                .statisticsByRank(LOTTERY_DUMMY_DATA
                         .winningNumbersDummyObj()
                         .getNumbers());
 

@@ -80,6 +80,12 @@ public class Lottery {
         return unmodifiableSet(this.lotteryNumbers);
     }
 
+    public int intersectionSize(Set<LotteryNumber> weeklyWinningNumbers) {
+        return this.lotteryNumbers.stream()
+                .filter(weeklyWinningNumbers::contains)
+                .collect(Collectors.toSet()).size();
+    }
+
     @Override
     public String toString() {
         return valueOf(lotteryNumbers);

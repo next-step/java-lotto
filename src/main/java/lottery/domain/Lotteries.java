@@ -12,6 +12,8 @@ import lottery.domain.constant.Rank;
 
 public class Lotteries {
 
+    private static final int FIRST_WINNING_COUNT = 1;
+
     private final List<Lottery> lotteries;
 
     public Lotteries(int plays) {
@@ -36,17 +38,28 @@ public class Lotteries {
         return unmodifiableList(this.lotteries);
     }
 
+    public Map<Rank, Integer> statisticsByRank(Set<LotteryNumber> winningNumbers) {
+        Map<Rank, Integer> statisticsByRank = new HashMap<>();
+        for(Lottery lottery: this.lotteries) {
+            countUpByRank(statisticsByRank, lottery.intersectionSize(winningNumbers));
+        }
+        return statisticsByRank;
+    }
+
+    private void countUpByRank(Map<Rank, Integer> statisticsByRank, int intersectionSize) {
+        Rank rank = Rank.getRankByCountOfMatch(intersectionSize);
+        if(statisticsByRank.containsKey(rank)) {
+            statisticsByRank.put(rank, statisticsByRank.get(rank) + 1);
+            return;
+        }
+        statisticsByRank.put(rank, FIRST_WINNING_COUNT);
+    }
+
     @Override
     public String toString() {
         return "Lotteries{" +
                 "lotteries=" + lotteries +
                 '}';
-    }
-
-    public Map<Rank, Integer> getDividedLotteriesByRank(Set<LotteryNumber> winningNumbers) {
-        Map<Rank, Integer> dividedLotteriesByRank = new HashMap<>();
-
-        return dividedLotteriesByRank;
     }
 
 

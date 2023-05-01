@@ -69,4 +69,12 @@ public class LotteryTest {
     void autoGenerateTest() {
         assertThat(new Lottery().size()).isEqualTo(LOTTERY_NUMBERS_SIZE.getRuleNumber());
     }
+
+    @Test
+    @DisplayName("자동 발생한 숫자가 매주 당첨 번호와 최종 몇개가 일치하는지의 값을 반환한다.")
+    void intersectionSizeTest() {
+        Lottery lotterySixNumbers = new Lottery("1,2,3,7,8,9");
+        assertThat(new Lottery(LOTTERY_NUMBERS).intersectionSize(lotterySixNumbers.getNumbers()))
+                .isEqualTo(3);
+    }
 }

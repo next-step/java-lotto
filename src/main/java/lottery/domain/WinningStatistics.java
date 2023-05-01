@@ -7,7 +7,6 @@ import lottery.domain.constant.Rank;
 
 public class WinningStatistics {
 
-
     private final Map<Rank, Integer> lotteriesByRank;
 
     public WinningStatistics(Map<Rank, Integer> lotteriesByRank) {
@@ -29,4 +28,9 @@ public class WinningStatistics {
                 rank -> lotteriesByRank.get(rank) * rank.getWinningMoney())
                 .sum();
     }
+
+/*    public double returnOnInvestment(int lotteries) {
+
+    }*/
+
 }
