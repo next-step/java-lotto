@@ -7,7 +7,7 @@ public class Money {
   private static final int LOTTO_PRICE = 1000;
 
   private int value;
-  private Money(int value) {
+  public Money(int value) {
     this.value = value;
   }
 
@@ -55,5 +55,9 @@ public class Money {
   @Override
   public String toString() {
     return Integer.toString(this.value);
+  }
+
+  public double profit(Money other) {
+        return (double) other.value / this.value;
   }
 }

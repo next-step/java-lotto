@@ -1,11 +1,13 @@
 package lotto;
 
+import java.util.List;
+import java.util.Map;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.Winning;
 import lotto.ui.InputView;
-import lotto.ui.Printer;
-import lotto.ui.Reader;
 import lotto.ui.ResultView;
 
 public class LottoGame {
@@ -23,6 +25,10 @@ public class LottoGame {
     LottoTickets tickets = lottoMachine.buy(lottoPurchasablePrice);
     resultView.showTicketsInfo(tickets);
 
-    inputView.lastWeekNumbers();
+    List<LottoNumber> lastWeekNumbers = inputView.lastWeekNumbers();
+    Map<Winning, Integer> winnings = Winning.score(tickets, lastWeekNumbers);
+
+    double profit = Winning.profit(winnings, lottoPurchasablePrice);
+    resultView.printResult(winnings, profit);
   }
 }

@@ -11,7 +11,7 @@ public class LottoTicket {
   }
 
   public static LottoTicket bySize(int size) {
-    LottoTicket ticket = new LottoTicket(LottoNumbers.pick(size));
+    LottoTicket ticket = new LottoTicket(LottoNumbers.pickBySize(size));
     Collections.sort(ticket.numbers);
 
     return ticket;
@@ -19,5 +19,14 @@ public class LottoTicket {
 
   public List<LottoNumber> numbers() {
     return this.numbers;
+  }
+
+  public int sameCount(List<LottoNumber> lastWeekNumbers) {
+    int count = 0;
+    for (LottoNumber lastWeekNumber : lastWeekNumbers) {
+      count = numbers.contains(lastWeekNumber) ? count + 1 : count;
+    }
+
+    return count;
   }
 }

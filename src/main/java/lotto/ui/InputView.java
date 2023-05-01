@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import stringCalculator.Number;
 
@@ -18,7 +19,7 @@ public class InputView {
     Printer.print("지난 주 당첨 번호를 입력해 주세요.");
     return Arrays.stream(
             Reader.read().split(", "))
-        .map(LottoNumber::from)
+        .map(LottoNumbers::pick)
         .collect(Collectors.toList());
   }
 }
