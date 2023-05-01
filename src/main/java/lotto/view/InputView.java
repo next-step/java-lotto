@@ -17,11 +17,20 @@ public class InputView {
         return money / LOTTO_PRICE;
     }
 
-    public static int inputPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
-        return consoleIntInput();
+    public static List<List<Integer>> inputManualLottoNumbers(int totalLottoCount) {
+        int manualLottoCount = inputManualLottoCount(totalLottoCount);
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottoNumbers.add(inputLottoNumbers());
+        }
+
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, totalLottoCount - manualLottoCount);
+        return manualLottoNumbers;
     }
-    public static int inputManualLottoCount(int totalLottoCount) {
+
+    private static int inputManualLottoCount(int totalLottoCount) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualLottoCount = consoleIntInput();
 
@@ -30,16 +39,6 @@ public class InputView {
             manualLottoCount = consoleIntInput();
         }
         return manualLottoCount;
-    }
-
-    public static List<List<Integer>> inputManualLottoNumbers(int manualLottoCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
-        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
-            manualLottoNumbers.add(inputLottoNumbers());
-        }
-        return manualLottoNumbers;
     }
 
     public static List<Integer> getWinningNumbers() {

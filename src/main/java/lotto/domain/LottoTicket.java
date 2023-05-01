@@ -21,17 +21,11 @@ public class LottoTicket {
                 .collect(Collectors.toList()));
     }
 
-    public LottoPrize getWinningPrize(List<Integer> winningNumbers, LottoNumber bonusNumber) {
-        int matchesCount = matchesLottoNumberCount(winningNumbers);
-        boolean matchesBonus = lottoNumbers.contains(bonusNumber);
+    public LottoPrize calculatePrize(WinningTicket winningTicket) {
+        int matchesCount = winningTicket.calculateMatchesCount(lottoNumbers);
+        boolean matchesBonus = winningTicket.matchesBonus(lottoNumbers);
 
-        return LottoPrize.getWinningPrize(matchesCount, matchesBonus);
-    }
-
-    public int matchesLottoNumberCount(List<Integer> winningNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.matchesNumbers(winningNumbers))
-                .count();
+        return LottoPrize.of(matchesCount, matchesBonus);
     }
 
     public int size() {

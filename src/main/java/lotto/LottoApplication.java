@@ -8,24 +8,30 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int totalLottoCount = InputView.calculateLottoCount();
-        int manualLottoCount = InputView.inputManualLottoCount(totalLottoCount);
-        int automaticLottoCount = totalLottoCount - manualLottoCount;
+        LottoTickets lottoTickets = issueLottoTickets();
+        WinningTicket winningTicket = inputWinningTickets();
 
-        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
-        LottoTickets manualLottoTickets = LottoTickets.of(manualLottoNumbers);
-        LottoTickets lottoTickets = LottoGenerator.generate(automaticLottoCount);
-
-        ResultView.showLottoTickets(manualLottoTickets, lottoTickets);
-
-        // TODO : WinningTickets
-        List<Integer> winningNumbers = InputView.getWinningNumbers();
-        int bonusNumber = InputView.getBonusNumber();
-
-        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber);
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket);
         LottoResult lottoResult = lottoGame.getLottoResult();
 
         ResultView.showLottoWinningResult(lottoResult);
-        ResultView.showLottoWinningRate(lottoResult, totalLottoCount);
+        ResultView.showLottoWinningRate(lottoResult, lottoTickets);
+    }
+
+    private static LottoTickets issueLottoTickets() {
+        int totalLottoCount = InputView.calculateLottoCount();
+        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(totalLottoCount);
+
+        LottoTickets lottoTickets = LottoGenerator.issue(totalLottoCount, manualLottoNumbers);
+        ResultView.showLottoTickets(lottoTickets);
+
+        return lottoTickets;
+    }
+
+    private static WinningTicket inputWinningTickets() {
+        List<Integer> winningNumbers = InputView.getWinningNumbers();
+        int bonusNumber = InputView.getBonusNumber();
+
+        return WinningTicket.of(winningNumbers, bonusNumber);
     }
 }

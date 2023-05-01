@@ -19,13 +19,45 @@ public class LottoGenerator {
     private LottoGenerator() {
     }
 
+    public static LottoTickets issue(int totalLottoCount, List<List<Integer>> manualNumbers) {
+        int autoLottoCount = calculateAutoLottoCount(totalLottoCount, manualNumbers);
+
+        List<List<LottoNumber>> autoLottoNumbers = generateAutoLottoNumbers(autoLottoCount);
+        List<List<LottoNumber>> manualLottoNumbers = manualNumbers.stream()
+                        .map(LottoGenerator::toLottoNumbers)
+                        .collect(Collectors.toList());
+
+        manualLottoNumbers.addAll(autoLottoNumbers);
+        return LottoTickets.of(manualLottoNumbers);
+    }
+
+    private static int calculateAutoLottoCount(int totalLottoCount, List<List<Integer>> manualNumbers) {
+        return totalLottoCount - manualNumbers.size();
+    }
+
+    private static List<LottoNumber> toLottoNumbers(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    private static List<List<LottoNumber>> generateAutoLottoNumbers(int autoCount) {
+        return IntStream.range(0, autoCount)
+                .mapToObj(i -> generateAutoLottoNumber())
+                .collect(Collectors.toList());
+    }
+    private static List<LottoNumber> generateAutoLottoNumber() {
+        Collections.shuffle(lottoNumbers, new Random(System.currentTimeMillis()));
+        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_TICKET_SIZE));
+    }
+
     public static LottoTickets generate(int count) {
         return new LottoTickets(IntStream.range(0, count)
-                .mapToObj(i -> generateLottoNumbers())
+                .mapToObj(i -> generateLottoTicket())
                 .collect(Collectors.toList()));
     }
 
-    private static LottoTicket generateLottoNumbers() {
+    private static LottoTicket generateLottoTicket() {
         Collections.shuffle(lottoNumbers, new Random(System.currentTimeMillis()));
         List<LottoNumber> randomLottoNumbers = new ArrayList<>(lottoNumbers.subList(0, LOTTO_TICKET_SIZE));
         return new LottoTicket(randomLottoNumbers);

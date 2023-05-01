@@ -17,7 +17,7 @@ public class LottoPrizeTest {
     @ParameterizedTest
     @MethodSource("lottoNumbersAndRank")
     void lottoPrizeWithBonus(int rankCount, boolean matchBonus, int winningMoney) {
-        LottoPrize lottoPrize = LottoPrize.getWinningPrize(rankCount, matchBonus);
+        LottoPrize lottoPrize = LottoPrize.of(rankCount, matchBonus);
         assertThat(lottoPrize.money()).isEqualTo(winningMoney);
     }
 

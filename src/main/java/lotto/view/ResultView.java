@@ -12,9 +12,7 @@ public class ResultView {
     private static final String LOTTO_RANK2_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개\n";
     private static final String LOTTO_WINNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
 
-    public static void showLottoTickets(LottoTickets manualLottoTickets, LottoTickets lottoTickets) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoTickets.size(), lottoTickets.size());
-        lottoTickets.getLottoTickets().forEach(ResultView::printLottoTicket);
+    public static void showLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets().forEach(ResultView::printLottoTicket);
     }
 
@@ -27,8 +25,8 @@ public class ResultView {
         });
     }
 
-    public static void showLottoWinningRate(LottoResult lottoResult, int purchaseCount) {
-        double winningRate = lottoResult.calculateRate(purchaseCount);
+    public static void showLottoWinningRate(LottoResult lottoResult, LottoTickets lottoTickets) {
+        double winningRate = lottoResult.calculateRate(lottoTickets.size());
         System.out.printf(LOTTO_WINNING_RATE_MESSAGE, winningRate);
         if (winningRate < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
