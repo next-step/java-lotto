@@ -8,7 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   private int lottoNumber;
 
-  public LottoNumber(int lottoNumber) {
+  public LottoNumber(final int lottoNumber) {
     if (lottoNumber <= 0 || lottoNumber > MAX_LOTTO_NUMBER) {
       throw new IllegalArgumentException("유효한 입력이 아닙니다.");
     }

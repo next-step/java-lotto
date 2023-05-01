@@ -5,17 +5,18 @@ import java.util.List;
 
 public class Lottery {
 
+  public static final Money LOTTERY_PRICE = new Money(1000);
   public static final int LOTTO_NUMBER_COUNT = 6;
 
   private List<LottoNumber> lottoNumbers;
 
-  public Lottery(List<LottoNumber> lottoNumbers) {
+  public Lottery(final List<LottoNumber> lottoNumbers) {
     validateLottoNumbers(lottoNumbers);
 
     this.lottoNumbers = lottoNumbers;
   }
 
-  private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+  private void validateLottoNumbers(final List<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
       throw new IllegalArgumentException("유효하지 않은 입력입니다.");
     }

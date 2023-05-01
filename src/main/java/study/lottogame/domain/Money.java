@@ -6,7 +6,7 @@ public class Money {
 
   private int money;
 
-  public Money(int money) {
+  public Money(final int money) {
     if (money < 0) {
       throw new IllegalArgumentException("유효하지 않은 입력입니다");
     }

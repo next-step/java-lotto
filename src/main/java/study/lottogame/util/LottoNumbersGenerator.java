@@ -39,8 +39,7 @@ public class LottoNumbersGenerator {
     List<LottoNumber> lottoNumbers = new ArrayList<>();
     for (String number : numbers) {
       StringUtils.checkNullOrBlank(number);
-      int lottoNumber = Integer.parseInt(number.trim());
-      lottoNumbers.add(new LottoNumber(lottoNumber));
+      lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
     }
     Collections.sort(lottoNumbers);
     return lottoNumbers;

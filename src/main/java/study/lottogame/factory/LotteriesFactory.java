@@ -8,13 +8,11 @@ import study.lottogame.domain.Money;
 
 public class LotteriesFactory {
 
-  private static final int LotteryPrice = 1000;
-
   private LotteriesFactory() {
   }
 
   public static Lotteries create(Money money) {
-    int numberOfLottery = (int) money.getMoneyRate(new Money(LotteryPrice));
+    int numberOfLottery = (int) money.getMoneyRate(Lottery.LOTTERY_PRICE);
     return create(numberOfLottery);
   }
 
