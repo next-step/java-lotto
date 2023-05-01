@@ -4,11 +4,9 @@ import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottoList;
-    private final int lottoQuantity;
 
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
-        this.lottoQuantity = lottoList.size();
     }
 
     public List<Lotto> getLottoList() {
@@ -16,6 +14,6 @@ public class Lottos {
     }
 
     public int getLottoQuantity() {
-        return lottoQuantity;
+        return lottoList.size();
     }
 }
