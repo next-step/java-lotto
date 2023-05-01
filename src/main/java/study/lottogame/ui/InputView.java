@@ -1,10 +1,9 @@
 package study.lottogame.ui;
 
-import java.util.List;
 import java.util.Scanner;
-import study.lottogame.domain.LottoNumber;
+import study.lottogame.domain.Lottery;
 import study.lottogame.domain.Money;
-import study.lottogame.util.LottoNumbersGenerator;
+import study.lottogame.factory.LotteryFactory;
 import study.lottogame.util.StringUtils;
 
 public class InputView {
@@ -17,10 +16,10 @@ public class InputView {
     return new Money(Integer.parseInt(input));
   }
 
-  public static List<LottoNumber> inputWinningNumbers() {
+  public static Lottery inputWinningLottery() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    String input = getInput();
-    return LottoNumbersGenerator.generate(input.split(","));
+    String[] splitArr = getInput().split(",");
+    return LotteryFactory.create(splitArr);
   }
 
   private static String getInput() {

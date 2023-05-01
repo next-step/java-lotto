@@ -23,10 +23,7 @@ public class LotteryFactoryTest {
   @DisplayName("수동 로또를 생성한다.")
   @Test
   public void create_ManualNumber() {
-    List<LottoNumber> lottoNumbers = LottoNumbersGenerator
-        .generate(new String[]{"1", "2", "3", "4", "5", "6"});
-
-    Lottery lottery = LotteryFactory.create(lottoNumbers);
+    Lottery lottery = LotteryFactory.create(new String[]{"1", "2", "3", "4", "5", "6"});
 
     assertThat(lottery.getLottoNumbers()).hasSize(Lottery.LOTTO_NUMBER_COUNT);
     assertThat(lottery.getLottoNumbers())
@@ -37,28 +34,20 @@ public class LotteryFactoryTest {
   @DisplayName("6자리가 아닌 로또는 생성할 수 없다.")
   @Test
   public void create_throwException_sizeNotEqual6() {
-    List<LottoNumber> lottoNumbers1 = LottoNumbersGenerator
-        .generate(new String[]{"1", "2", "3", "4", "5"});
-    assertThatThrownBy(() -> LotteryFactory.create(lottoNumbers1))
+    assertThatThrownBy(() -> LotteryFactory.create(new String[]{"1", "2", "3", "4", "5"}))
         .isInstanceOf(IllegalArgumentException.class);
 
-    List<LottoNumber> lottoNumbers2 = LottoNumbersGenerator
-        .generate(new String[]{"1", "2", "3", "4", "5", "6", "7"});
-    assertThatThrownBy(() -> LotteryFactory.create(lottoNumbers2))
+    assertThatThrownBy(() -> LotteryFactory.create(new String[]{"1", "2", "3", "4", "5", "6", "7"}))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
   @DisplayName("중복되는 로또번호가 들어가는 로또는 생성할 수 없다.")
   @Test
   public void create_throwException_duplicatedNumber() {
-    List<LottoNumber> lottoNumbers1 = LottoNumbersGenerator
-        .generate(new String[]{"1", "1", "2", "3", "4", "5"});
-    assertThatThrownBy(() -> LotteryFactory.create(lottoNumbers1))
+    assertThatThrownBy(() -> LotteryFactory.create(new String[]{"1", "1", "2", "3", "4", "5"}))
         .isInstanceOf(IllegalArgumentException.class);
 
-    List<LottoNumber> lottoNumbers2 = LottoNumbersGenerator
-        .generate(new String[]{"1", "2", "3", "4", "10", "10"});
-    assertThatThrownBy(() -> LotteryFactory.create(lottoNumbers2))
+    assertThatThrownBy(() -> LotteryFactory.create(new String[]{"1", "2", "3", "4", "10", "10"}))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }

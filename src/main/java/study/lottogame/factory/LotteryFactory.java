@@ -1,8 +1,6 @@
 package study.lottogame.factory;
 
-import java.util.List;
 import study.lottogame.domain.Lottery;
-import study.lottogame.domain.LottoNumber;
 import study.lottogame.util.LottoNumbersGenerator;
 
 public class LotteryFactory {
@@ -14,7 +12,7 @@ public class LotteryFactory {
     return new Lottery(LottoNumbersGenerator.generate());
   }
 
-  public static Lottery create(List<LottoNumber> lottoNumbers) {
-    return new Lottery(lottoNumbers);
+  public static Lottery create(String[] numbers) {
+    return new Lottery(LottoNumbersGenerator.generate(numbers));
   }
 }
