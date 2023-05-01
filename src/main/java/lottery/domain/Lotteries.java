@@ -12,19 +12,19 @@ import lottery.domain.constant.Rank;
 
 public class Lotteries {
 
-    private final List<SixLotteryNumbers> lotteries;
+    private final List<Lottery> lotteries;
 
     public Lotteries(int plays) {
         this(lotteriesByPlayNumbers(plays));
     }
 
-    public Lotteries(List<SixLotteryNumbers> lotteries) {
+    public Lotteries(List<Lottery> lotteries) {
         this.lotteries = lotteries;
     }
 
-    private static List<SixLotteryNumbers> lotteriesByPlayNumbers(int plays) {
+    private static List<Lottery> lotteriesByPlayNumbers(int plays) {
         return range(0, plays)
-                .mapToObj(play -> new SixLotteryNumbers())
+                .mapToObj(play -> new Lottery())
                 .collect(Collectors.toList());
     }
 
@@ -32,7 +32,7 @@ public class Lotteries {
         return this.lotteries.size();
     }
 
-    public List<SixLotteryNumbers> immutableGetLotteries() {
+    public List<Lottery> immutableGetLotteries() {
         return unmodifiableList(this.lotteries);
     }
 
@@ -48,5 +48,6 @@ public class Lotteries {
 
         return dividedLotteriesByRank;
     }
+
 
 }

@@ -4,13 +4,13 @@ import java.util.Set;
 
 public class WinningNumbers {
 
-    private final SixLotteryNumbers winningNumbers;
+    private final Lottery winningNumbers;
 
     public WinningNumbers(String numberChunk) {
-        this(new SixLotteryNumbers(numberChunk));
+        this(new Lottery(numberChunk));
     }
 
-    public WinningNumbers(SixLotteryNumbers winningNumbers) {
+    public WinningNumbers(Lottery winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 

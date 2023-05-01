@@ -14,7 +14,7 @@ import lottery.domain.numbergenerator.RandomNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class SixLotteryNumbersTest {
+public class LotteryTest {
 
     private static final RandomNumberGenerator RANDOM_NUMBER_GENERATOR =
             new RandomNumberGenerator();
@@ -53,13 +53,13 @@ public class SixLotteryNumbersTest {
     @Test
     @DisplayName("로또 당첨 예상번 크기가 6인 경우 정상 객체가 생성된다")
     void objCreateSuccessTest() {
-        assertDoesNotThrow(() -> new SixLotteryNumbers(LOTTERY_NUMBERS));
+        assertDoesNotThrow(() -> new Lottery(LOTTERY_NUMBERS));
     }
 
     @Test
     @DisplayName("로또 당첨 예상번호 크기가 6이 아닐 경우 익셉션을 발생시킨다.")
     void objCreateErrorTest() {
-        assertThatThrownBy(() -> new SixLotteryNumbers(NOT_COMPLETED_NUMBERS))
+        assertThatThrownBy(() -> new Lottery(NOT_COMPLETED_NUMBERS))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 총 6개의 숫자로 구성되어야합니다.");
     }
@@ -67,6 +67,6 @@ public class SixLotteryNumbersTest {
     @Test
     @DisplayName("기본생성자 객체 생성시 자동으로 6개의 로또 번호를 생성한다.")
     void autoGenerateTest() {
-        assertThat(new SixLotteryNumbers().size()).isEqualTo(LOTTERY_NUMBERS_SIZE.getRuleNumber());
+        assertThat(new Lottery().size()).isEqualTo(LOTTERY_NUMBERS_SIZE.getRuleNumber());
     }
 }

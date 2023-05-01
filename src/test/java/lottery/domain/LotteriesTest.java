@@ -30,7 +30,7 @@ public class LotteriesTest {
     @DisplayName("1급 컬렉션에서 취급하는 불변값은 추가 삭제 수정을 할 수 없다.")
     void immutableListTest() {
         assertThatThrownBy(() -> FIVE_LOTTERIES.immutableGetLotteries()
-                .add(new SixLotteryNumbers()))
+                .add(new Lottery()))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
