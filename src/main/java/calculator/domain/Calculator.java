@@ -16,7 +16,7 @@ public class Calculator {
                 continue;
             }
             int result = calculateOperand(tempOperand, tempOperator, convertToOperand(expressionElement));
-            tempOperand = new Operand(result);
+            tempOperand = new Operand(new Number(result));
         }
         return new Number(tempOperand.value());
     }

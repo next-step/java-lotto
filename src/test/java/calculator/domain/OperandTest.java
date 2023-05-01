@@ -16,12 +16,12 @@ public class OperandTest {
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "a", "-"})
     void 숫자_형식_아니면_NumberFormatException(String value) {
-        assertThatThrownBy(() -> new Operand(value)).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> new Operand(new Number(value))).isInstanceOf(NumberFormatException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"3", "1234"})
     void 숫자_형식_성공(String value) {
-        assertThatNoException().isThrownBy(() -> new Operand(value));
+        assertThatNoException().isThrownBy(() -> new Operand(new Number(value)));
     }
 }

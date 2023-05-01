@@ -2,21 +2,17 @@ package calculator.domain;
 
 public class Operand implements ExpressionElement {
 
-    private final int value;
+    private final Number number;
 
-    public Operand(int value) {
-        this.value = value;
-    }
-
-    public Operand(String value) {
-        if (value == null) {
-            throw new IllegalArgumentException("null은 Operand가 될 수 없습니다.");
+    public Operand(Number number) {
+        if (number == null) {
+            throw new IllegalArgumentException("null 은 허용하지 않습니다.");
         }
-        this.value = Integer.parseInt(value);
+        this.number = number;
     }
 
     public int value() {
-        return this.value;
+        return this.number.value();
     }
 
     public int calculate(Operator operator, Operand other) {
@@ -36,18 +32,18 @@ public class Operand implements ExpressionElement {
     }
 
     private int plus(Operand other) {
-        return this.value + other.value;
+        return this.number.value() + other.number.value();
     }
 
     private int minus(Operand other) {
-        return this.value - other.value;
+        return this.number.value() - other.number.value();
     }
 
     private int multiply(Operand other) {
-        return this.value * other.value;
+        return this.number.value() * other.number.value();
     }
 
     private int divide(Operand other) {
-        return this.value / other.value;
+        return this.number.value() / other.number.value();
     }
 }

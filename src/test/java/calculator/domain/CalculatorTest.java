@@ -11,9 +11,9 @@ public class CalculatorTest {
     @Test
     void name() {
         List<ExpressionElement> elements = new ArrayList<>();
-        elements.add(new Operand("3"));
+        elements.add(new Operand(new Number("3")));
         elements.add(Operator.PLUS);
-        elements.add(new Operand("3"));
+        elements.add(new Operand(new Number("3")));
         Expression expression = new Expression(elements);
 
         Number result = Calculator.calculate(expression);

@@ -53,7 +53,8 @@ public class StringExpressionParser {
     }
 
     private static Operand convertToOperand(String element) {
-        return new Operand(element);
+        Number number = new Number(element);
+        return new Operand(number);
     }
 
     private static void addOperand(List<ExpressionElement> expressionElements, Operand operand) {
