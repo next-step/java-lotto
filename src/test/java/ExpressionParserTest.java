@@ -41,4 +41,20 @@ public class ExpressionParserTest {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> parser.parse(invalidExpression));
     }
+
+    @Test
+    void 사칙연산자_외의_연산자가_포함된_경우_예외를_던진다() {
+        String invalidExpression = "1 + 2 ^ 4";
+
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> parser.parse(invalidExpression));
+    }
+
+    @Test
+    void 숫자_연산자_숫자_패턴_이_아닌경우_예외를_던진다() {
+        String invalidExpression = "1 * 3 3";
+
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> parser.parse(invalidExpression));
+    }
 }
