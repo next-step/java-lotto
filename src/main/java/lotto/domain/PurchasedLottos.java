@@ -22,8 +22,7 @@ public class PurchasedLottos {
 
 	public void calculateScore(WinNumbers winNumbers, LottoNumber bonusNumber) {
 		for (Lotto lotto : this.purchasedLottos) {
-			lotto.calculateScore(winNumbers);
-			lotto.calculateBonusScore(bonusNumber);
+			lotto.calculateScore(winNumbers, bonusNumber);
 		}
 	}
 

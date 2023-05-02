@@ -26,12 +26,6 @@ public class Lotto {
 		this.score = new Score(0);
 	}
 
-	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
-	public Lotto(List<LottoNumber> lottoNumbers, int score) {
-		this.lottoNumbers = new LottoNumbers(lottoNumbers);
-		this.score = new Score(score);
-	}
-
 	public Score calculateScore(WinNumbers winNumbers) {
 		for (LottoNumber winNumber : winNumbers.getWinNumbers()) {
 			this.plusScore(winNumber);
@@ -45,7 +39,10 @@ public class Lotto {
 		}
 	}
 
-	public Score calculateBonusScore(LottoNumber bonusNumber) {
+	public Score calculateScore(WinNumbers winNumbers, LottoNumber bonusNumber) {
+		for (LottoNumber winNumber : winNumbers.getWinNumbers()) {
+			this.plusScore(winNumber);
+		}
 		this.plusBonusScore(bonusNumber);
 		return this.score;
 	}
@@ -57,7 +54,7 @@ public class Lotto {
 	}
 
 	public Rank rank() {
-		return Rank.of(score.getScore(), score.isMatchBonus());
+		return Rank.of(this.score.getScore(), this.score.isMatchBonus());
 	}
 
 	public LottoNumbers getLottoNumbers() {

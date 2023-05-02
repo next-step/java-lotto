@@ -6,8 +6,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTest {
 
@@ -27,9 +25,9 @@ public class LottoTest {
 		Lotto lotto = new Lotto(Arrays.asList(
 			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
 			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
-		), 5);
-		Score bonusScore = lotto.calculateBonusScore(new LottoNumber(14));
-		assertThat(bonusScore).isEqualTo(new Score(5, 1));
+		));
+		Score score = lotto.calculateScore(new WinNumbers("1, 3, 5, 22, 45, 40"), new LottoNumber(14));
+		assertThat(score).isEqualTo(new Score(5, 1));
 	}
 
 	@DisplayName("로또 넘버에 보너스 넘버가 없는 경우.")
@@ -38,8 +36,8 @@ public class LottoTest {
 		Lotto lotto = new Lotto(Arrays.asList(
 			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
 			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
-		), 5);
-		Score bonusScore = lotto.calculateBonusScore(new LottoNumber(23));
-		assertThat(bonusScore).isEqualTo(new Score(5, 0));
+		));
+		Score score = lotto.calculateScore(new WinNumbers("1, 3, 5, 22, 45, 40"), new LottoNumber(23));
+		assertThat(score).isEqualTo(new Score(5, 0));
 	}
 }
