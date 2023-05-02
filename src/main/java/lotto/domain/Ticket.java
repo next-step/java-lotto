@@ -52,7 +52,7 @@ public class Ticket {
         return overlapCount(copyThisNumbers);
     }
 
-    public WinnerTicket winnerTicket(int bonusNumber) {
+    public WinnerTicket winnerTicket(LottoNumber bonusNumber) {
         return new WinnerTicket(this, bonusNumber);
     }
 
@@ -65,8 +65,8 @@ public class Ticket {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public Boolean includeNumber(Integer bonusNumber) {
-        return this.numbers.contains(bonusNumber);
+    public Boolean includeNumber(LottoNumber bonusLottoNumber) {
+        return this.numbers.contains(bonusLottoNumber);
     }
 
     public int countWinner(List<Ticket> challengeTickets, Prize prize) {

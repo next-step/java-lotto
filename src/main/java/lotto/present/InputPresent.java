@@ -1,5 +1,6 @@
 package lotto.present;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 
 import java.util.ArrayList;
@@ -34,11 +35,11 @@ public class InputPresent {
         return new Ticket(s);
     }
 
-    public int bonusNumber() {
+    public LottoNumber bonusNumber() {
         System.out.println(BONUS_NUMBER);
         String s = scanner.nextLine();
         System.out.println(s);
-        return Integer.parseInt(s);
+        return new LottoNumber(Integer.parseInt(s));
     }
 
     public List<Ticket> manualPurchases() {
