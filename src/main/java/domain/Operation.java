@@ -17,6 +17,10 @@ public enum Operation {
         this.operation = operation;
     }
 
+    public int calculate(final int number1, final int number2) {
+        return operation.apply(number1, number2);
+    }
+
     public static Operation fromString(String input) {
         return Arrays.stream(Operation.values())
                 .filter(operation -> operation.symbol.equals(input))
