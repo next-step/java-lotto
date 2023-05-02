@@ -24,37 +24,19 @@ public class Lotto {
         }
     }
 
-    public LottoRank countWinNumber(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
-        Integer countWinNumber = 0;
-        for (LottoNumber winNumber : winNumbers) {
-            countWinNumber = countMatchingNumbers(countWinNumber, winNumber);
-        }
-
-        if (isSeconds(countWinNumber, bonusNumber)) {
-            return LottoRank.SECOND;
-        }
-        return LottoRank.getLottoNumber(countWinNumber);
-    }
-
-    private Integer countMatchingNumbers(Integer countWinNumber, LottoNumber winNumber) {
-        if (lottoNumbers.contains(winNumber)) {
-            countWinNumber++;
-        }
-        return countWinNumber;
-    }
-
-    private boolean isSeconds(Integer countWinNumber, LottoNumber bonusNumber) {
-        if (LottoRank.isSeconds(countWinNumber)) {
-            return false;
-        }
-
-        return lottoNumbers.stream()
-                .anyMatch(bonusNumber::equals);
-    }
-
     public List<Integer> lottoNumbers() {
         return lottoNumbers.stream()
                 .map(LottoNumber::lottoNumber)
                 .collect(Collectors.toList());
+    }
+
+    public boolean containWinNumber(LottoNumber winNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(winNumber::equals);
+    }
+
+    public boolean containBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(bonusNumber::equals);
     }
 }

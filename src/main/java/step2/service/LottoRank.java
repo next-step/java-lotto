@@ -23,7 +23,7 @@ public enum LottoRank {
         this.prizeAmount = prizeAmount;
     }
 
-    public static LottoRank getLottoNumber(Integer matchingCount) {
+    public static LottoRank getLottoNumber(long matchingCount) {
         if (matchingCount == THIRD.countOfMatch) {
             return THIRD;
         }
@@ -42,7 +42,7 @@ public enum LottoRank {
         return sumOfAllRanks / (numOfLottoTicket * Lotto.PRICE_PER_LOTTO);
     }
 
-    public static boolean isSeconds(Integer countWinNumber) {
-        return countWinNumber != SECOND.countOfMatch;
+    public static boolean isSecondsCount(long countWinNumber) {
+        return countWinNumber == SECOND.countOfMatch;
     }
 }
