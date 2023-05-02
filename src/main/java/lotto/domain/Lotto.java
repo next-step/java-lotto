@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final String SPLIT_REGEX = ", ";
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_PRICE = 1000;
     private static final String LOTTO_SIZE_ERROR = "로또 숫자의 입력값은 6개로 이루어져야 합니다.";
     private final List<Integer> lottoNumbers = new ArrayList<>();
 

@@ -6,16 +6,15 @@ import java.util.stream.IntStream;
 
 public class LottoGames {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_SIZE = 6;
     private final List<Lotto> lottoGameList = new ArrayList<>();
-    private final int[] lottoResult = new int[LOTTO_SIZE + 1];
+    private final int[] lottoResult = new int[Lotto.LOTTO_SIZE + 1];
 
     public LottoGames(List<String> lottoNumberList) {
         lottoNumberList.forEach(number -> lottoGameList.add(new Lotto(number)));
     }
 
     public LottoGames(int gameCount) {
+        gameCount /= Lotto.LOTTO_PRICE;
         for (int i = 0; i < gameCount; i++) {
             lottoGameList.add(new Lotto(LottoNumberGenerator.generateNumbers()));
         }
@@ -26,13 +25,13 @@ public class LottoGames {
     }
 
     private int sum() {
-        return IntStream.range(3, LOTTO_SIZE)
+        return IntStream.range(3, Lotto.LOTTO_SIZE + 1)
                 .map(index -> LottoPrize.findPrize(index) * lottoResult[index])
                 .sum();
     }
 
     public double calculateReturn() {
-        return sum() / (double)(LOTTO_PRICE * lottoGameList.size());
+        return sum() / (double)(Lotto.LOTTO_PRICE * lottoGameList.size());
     }
 
     public void calculatePrizeCount(Lotto firstLotto) {
