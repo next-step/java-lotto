@@ -6,12 +6,12 @@ import java.util.List;
 public class Tickets {
     private final List<Ticket> tickets;
 
-    public static Tickets emptyTickets() {
-        return new Tickets(new ArrayList<>());
-    }
-
     public Tickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public static Tickets emptyTickets() {
+        return new Tickets(new ArrayList<>());
     }
 
     public List<Ticket> getTickets() {

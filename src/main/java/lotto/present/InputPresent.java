@@ -4,8 +4,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import static lotto.domain.Tickets.emptyTickets;
@@ -54,7 +52,6 @@ public class InputPresent {
         }
         return tickets;
     }
-
 
 
     private Ticket manualPurchase(String nextLine) {
