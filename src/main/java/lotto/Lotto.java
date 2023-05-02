@@ -20,11 +20,11 @@ public class Lotto {
         Issuer issuer = new Issuer();
 
         //구매수량
-        int i = inputPresent.purchaseCount();
+        int totalPurchaseCount = inputPresent.purchaseCount();
         //수동발행
         List<Ticket> tickets = inputPresent.manualPurchases();
         issuer.manualIssue(tickets);
-        issuer.automaticIssue(i - tickets.size());
+        issuer.automaticIssue(totalPurchaseCount - tickets.size());
 
 
         outputPresent.presentTickets(tickets,issuer.issuedTickets());
