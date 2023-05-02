@@ -16,7 +16,7 @@ public class LottoTicket {
   }
 
 
-  public int matchCount(List<Integer> winningNumbers) {
+  public int matchCount(WinningNumbers winningNumbers) {
     int count = 0;
     for (Integer number : numbers) {
       if (winningNumbers.contains(number)) {
@@ -24,5 +24,9 @@ public class LottoTicket {
       }
     }
     return count;
+  }
+
+  public boolean contains(int bonusNumber) {
+    return numbers.contains(bonusNumber);
   }
 }

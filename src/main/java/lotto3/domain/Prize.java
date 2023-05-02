@@ -25,6 +25,13 @@ public enum Prize {
     return NONE;
   }
 
+  public static Prize valueOfMatchCountAndBonusNumber(int matchCount, boolean matchBonusNumber) {
+    if (matchCount == 4 && matchBonusNumber) {
+      return BONUS;
+    }
+    return valueOfMatchCount(matchCount);
+  }
+
   public int getMatchCount() {
     return matchCount;
   }

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto3.domain.WinningNumbers;
 
 public class InputView {
 
@@ -38,7 +39,7 @@ public class InputView {
     return investMoney.matches("^[0-9]*$");
   }
 
-  public static List<Integer> scanWinningNumbers() {
+  public static WinningNumbers scanWinningNumbers() {
     System.out.println();
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     String winningNumbers = SCANNER.nextLine();
@@ -61,9 +62,8 @@ public class InputView {
   }
 
   private static boolean isBetweenOneAndFortyFive(String winningNumbers) {
-    List<Integer> lottoNumbers = convertToLottoNumbers(winningNumbers);
-    return lottoNumbers.stream()
-        .allMatch(number -> number >= 1 && number <= 45);
+    WinningNumbers numbers = convertToLottoNumbers(winningNumbers);
+    return numbers.isBetweenOneAndFortyFive();
   }
 
   private static boolean hasSixNumbers(String winningNumbers) {
@@ -74,21 +74,22 @@ public class InputView {
     return winningNumbers == null || winningNumbers.isBlank();
   }
 
-  private static List<Integer> convertToLottoNumbers(String winningNumbers) {
-    String[] numbers = winningNumbers.split(",\\s*");
-    return Arrays.stream(numbers)
+  private static WinningNumbers convertToLottoNumbers(String winningNumbers) {
+    String[] splitNumbers = winningNumbers.split(",\\s*");
+    List<Integer> numbers = Arrays.stream(splitNumbers)
         .map(Integer::parseInt)
         .collect(Collectors.toList());
+    return new WinningNumbers(numbers);
   }
 
-  public static int scanBonusNumber() {
+  public static int scanBonusNumber(WinningNumbers winningNumbers) {
     System.out.println("보너스 볼을 입력해 주세요.");
     String bonusNumber = SCANNER.nextLine();
-    validateBonusNumber(bonusNumber);
+    validateBonusNumber(bonusNumber, winningNumbers);
     return Integer.parseInt(bonusNumber);
   }
 
-  private static void validateBonusNumber(String bonusNumber) {
+  private static void validateBonusNumber(String bonusNumber, WinningNumbers winningNumbers) {
     if (isBlank(bonusNumber)) {
       throw new IllegalArgumentException("보너스 볼을 입력해 주세요.");
     }
@@ -97,6 +98,9 @@ public class InputView {
     }
     if (!isBetweenOneAndFortyFive(bonusNumber)) {
       throw new IllegalArgumentException("보너스 볼은 1부터 45까지의 숫자만 가능합니다.");
+    }
+    if (winningNumbers.contains(Integer.parseInt(bonusNumber))) {
+      throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
     }
   }
 }

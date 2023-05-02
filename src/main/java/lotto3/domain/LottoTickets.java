@@ -22,7 +22,7 @@ public class LottoTickets {
     return tickets;
   }
 
-  public LottoResults calculateLotteryResults(List<Integer> winningNumbers) {
+  public LottoResults calculateLotteryResults(WinningNumbers winningNumbers) {
     List<Prize> prizes = new ArrayList<>();
     for (LottoTicket ticket : tickets) {
       int matchCount = ticket.matchCount(winningNumbers);
@@ -37,5 +37,17 @@ public class LottoTickets {
     Map<Prize, Long> results = prizes.stream()
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     return new LottoResults(results);
+  }
+
+  public LottoResults calculateLotteryResults(WinningNumbers winningNumbers, int bonusNumber) {
+    List<Prize> prizes = new ArrayList<>();
+    for (LottoTicket ticket : tickets) {
+      int matchCount = ticket.matchCount(winningNumbers);
+      boolean matchBonusNumber = ticket.contains(bonusNumber);
+      Prize prize = Prize.valueOfMatchCountAndBonusNumber(matchCount, matchBonusNumber);
+      prizes.add(prize);
+    }
+
+    return convertMapWithPrize(prizes);
   }
 }
