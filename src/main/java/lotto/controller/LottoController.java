@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoManager;
+import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningTicket;
 import lotto.dto.LottoNumbersDto;
@@ -12,16 +12,16 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        LottoManager lottoManager = new LottoManager();
+        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
         int purchaseAmount = InputView.inputPurchaseAmount();
-        lottoManager.createLottoNumbers(purchaseAmount);
-        OutputView.outputLottoCount(lottoManager.getLottoCount());
-        OutputView.outputLottoNumbers(LottoNumbersDto.of(lottoManager.getLottoNumbers()));
+        lottoTicketMachine.createLottoNumbers(purchaseAmount);
+        OutputView.outputLottoCount(lottoTicketMachine.getLottoCount());
+        OutputView.outputLottoNumbers(LottoNumbersDto.of(lottoTicketMachine.getLottoNumbers()));
 
         List<Integer> winningNumbers = InputView.inputLastWinningNumber();
         LottoNumber bonusBallNumber = new LottoNumber(InputView.inputBonusBallNumber());
         WinningTicket winningTicket
                 = new WinningTicket(winningNumbers, bonusBallNumber);
-        OutputView.outputLottoStatistics(lottoManager.calculateLottoStatistics(winningTicket));
+        OutputView.outputLottoStatistics(lottoTicketMachine.calculateLottoStatistics(winningTicket));
     }
 }

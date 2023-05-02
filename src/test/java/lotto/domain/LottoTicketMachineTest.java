@@ -8,13 +8,13 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoManagerTest {
+class LottoTicketMachineTest {
 
-    private LottoManager lottoManager;
+    private LottoTicketMachine lottoTicketMachine;
 
     @BeforeEach
     void init() {
-        lottoManager = new LottoManager();
+        lottoTicketMachine = new LottoTicketMachine();
     }
 
     @Test
@@ -23,16 +23,16 @@ class LottoManagerTest {
         int purchaseAmount = 14000;
 
         //when
-        lottoManager.createLottoNumbers(purchaseAmount);
+        lottoTicketMachine.createLottoNumbers(purchaseAmount);
 
         //then
-        assertThat(lottoManager.getLottoCount()).isEqualTo(14);
+        assertThat(lottoTicketMachine.getLottoCount()).isEqualTo(14);
     }
 
     @Test
     void calculateLottoStatistics() throws Exception {
         //given
-        lottoManager.createLottoNumbers(14000);
+        lottoTicketMachine.createLottoNumbers(14000);
         WinningTicket winningTicket = new WinningTicket(
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 new LottoNumber(7)
@@ -41,6 +41,6 @@ class LottoManagerTest {
         //when
 
         //then
-        assertDoesNotThrow(() -> lottoManager.calculateLottoStatistics(winningTicket));
+        assertDoesNotThrow(() -> lottoTicketMachine.calculateLottoStatistics(winningTicket));
     }
 }

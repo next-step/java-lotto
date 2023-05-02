@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.dto.LottoStatisticsDto;
 
-public class LottoManager {
+public class LottoTicketMachine {
 
     public static final int LOTTO_PRICE = 1000;
 
