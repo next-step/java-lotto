@@ -11,14 +11,27 @@ public class LottoNumber {
     }
 
     private void validate() {
-        if(1<= lottoNumber && lottoNumber<=45) {
+        if (1 <= lottoNumber && lottoNumber <= 45) {
             return;
         }
-        System.out.println("출력"+ lottoNumber);
+        System.out.println("출력" + lottoNumber);
         throw new LottoNumberOutOfRangeException();
     }
 
     public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        return this.hashCode() == ((LottoNumber) o).hashCode();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.lottoNumber;
     }
 }
