@@ -30,13 +30,8 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public boolean containWinNumber(LottoNumber winNumber) {
+    public boolean containLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.stream()
-                .anyMatch(winNumber::equals);
-    }
-
-    public boolean containBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(bonusNumber::equals);
+                .anyMatch(lottoNumber::equals);
     }
 }

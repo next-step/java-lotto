@@ -26,9 +26,9 @@ public class WinnerNumber {
 
     public LottoRank countWinNumber(Lotto lotto) {
         long countWinNumber = winNumbers.stream()
-                .filter(lotto::containWinNumber)
+                .filter(lotto::containLottoNumber)
                 .count();
 
-        return LottoRankFactory.getLottoRank(countWinNumber, lotto.containBonusNumber(bonusNumber));
+        return LottoRankFactory.getLottoRank(countWinNumber, lotto.containLottoNumber(bonusNumber));
     }
 }
