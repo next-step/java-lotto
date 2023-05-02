@@ -11,5 +11,5 @@
 - [x] 1등번호 Lotto 객체로 변경
 - [x] inputView 객체 
    - [x] null혹은 ""인지 검증 -> input 객체 책임
-- [ ] ResultView 객체 - 단위테스트 가능
-   - [ ] 몇개의 당첨이 있는지 출력
+- [x] ResultView 객체 - 단위테스트 가능
+   - [x] 몇개의 당첨이 있는지 출력

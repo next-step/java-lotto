@@ -41,7 +41,7 @@ public class LottoGames {
         lottoGameList.forEach(lotto -> lottoResult[lotto.findMatchCount(firstLotto)]++);
     }
 
-    protected int[] getLottoResult() {
+    public int[] getLottoResult() {
         return lottoResult;
     }
 }
