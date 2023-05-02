@@ -3,7 +3,7 @@ package step3.controller;
 import step3.domain.LottoService;
 import step3.domain.LottoStoreService;
 import step3.domain.ProfitCalculatorService;
-import step3.domain.model.Lotto.Lotto;
+import step3.domain.model.Lotto.Lottos;
 import step3.domain.strategy.price.LottoPriceStrategy;
 import step3.view.InputView;
 import step3.view.OutputView;
@@ -11,22 +11,25 @@ import step3.view.OutputView;
 public class LottoController {
     public static void main(String[] args) {
         int purchaseAmount = InputView.askPurchaseAmount();
-        int lottoCount = LottoStoreService.getLottoCount(new LottoPriceStrategy(), purchaseAmount);
-        OutputView.outPut(lottoCount);
+        int lottoCount = LottoStoreService.createLottoStoreService()
+                .getLottoCount(new LottoPriceStrategy(), purchaseAmount);
 
-        LottoService lottoService = LottoService.of(lottoCount);
-        OutputView.outPutLottos(lottoService.getLottos());
+        OutputView.outPut(lottoCount);
+        // 로또 서비스 생성
+        LottoService lottoService = LottoService.createLottoService();
+        // 로또 생성
+        Lottos lottos = lottoService.createLottos(lottoCount);
+        OutputView.outPutLottos(lottos);
 
         InputView.newLineRemove();
-        String lastWeekWinningNumbers = InputView.askLastWeekWinningNumbers();
 
-        lottoService.hasBonusNumber(LottoService.createBonusNumber(InputView.askBonusNumber()));
+        // 당첨 번호
+        lottoService.calculatorWinning(lottos, LottoService.createWinningLotto(InputView.askLastWeekWinningNumbers()));
+        // 보너스 번호
+        lottoService.calculatorBonusNumber(lottos, lottoService.createBonusNumber(InputView.askBonusNumber()));
 
-        Lotto winningLotto = LottoService.createWinningLotto(lastWeekWinningNumbers);
-        lottoService.calculatorWinning(winningLotto);
-
-        ProfitCalculatorService profitCalculatorService = ProfitCalculatorService.of(lottoService.getLottos(), purchaseAmount);
-        profitCalculatorService.calculatorProfit();
-        OutputView.outPutProfit(profitCalculatorService.getProfit(), profitCalculatorService.getWinningResult());
+        // 계산
+        ProfitCalculatorService profitCalculatorService = ProfitCalculatorService.createProfitCalculatorService();
+        OutputView.outPutProfit(profitCalculatorService.calculatorProfit(lottos, purchaseAmount), profitCalculatorService.getWinningLotto(lottos));
     }
 }

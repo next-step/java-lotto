@@ -45,10 +45,10 @@ public class Lotto {
                 .collect(Collectors.toMap(LottoNumber::getNumber, LottoNumber::getNumber));
     }
 
-    public void hasBonusNumberLottos(LottoNumber bonusNumber) {
+    public void calculatorBonusNumber(LottoNumber bonusNumber) {
         for (LottoNumber lottoNumber : numbers.getLottoNumbers()) {
             if (lottoNumber.hasBonusNumber(bonusNumber)) {
-                this.bonusNumberResult = WinningAmountByRank.BONUS_PLACE;
+                this.bonusNumberResult = WinningAmountByRank.BONUS.getRank();
             }
         }
     }

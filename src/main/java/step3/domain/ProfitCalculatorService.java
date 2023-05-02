@@ -6,56 +6,50 @@ import step3.domain.model.WinningAmountByRank;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ProfitCalculatorService {
-    private Lottos lottos;
-    private int purchaseAmount;
-    private Map<String, Integer> winningResult = new HashMap<>();
-    private double profit;
+    // singleton 적용
+    private static ProfitCalculatorService profitCalculatorService = null;
 
-    public ProfitCalculatorService(Lottos lottos, int purchaseAmount) {
-        this.lottos = lottos;
-        this.purchaseAmount = purchaseAmount;
-    }
-
-    public static ProfitCalculatorService of(Lottos lottos, int purchaseAmount) {
-        if (purchaseAmount < 0) {
-            throw new IllegalArgumentException("잘못된 급액 입니다.");
+    public static ProfitCalculatorService createProfitCalculatorService() {
+        if (Objects.isNull(profitCalculatorService)) {
+            return new ProfitCalculatorService();
         }
-        return new ProfitCalculatorService(lottos, purchaseAmount);
+        return profitCalculatorService;
     }
 
-    public void calculatorProfit() {
-        double winningAmount = 0;
+
+    public double calculatorProfit(Lottos lottos, int purchaseAmount) {
+        double sum = lottos.getLottos()
+                .stream()
+                .mapToInt(lotto -> WinningAmountByRank.from(getWinningResult(lotto)).getAmount()).sum();
+
+        return sum / purchaseAmount;
+    }
+
+    public Map<String, Integer> getWinningLotto(Lottos lottos) {
+        Map<String, Integer> winningResult = new HashMap<>();
         for (Lotto lotto : lottos.getLottos()) {
             int winningCount = getWinningResult(lotto);
             WinningAmountByRank from = WinningAmountByRank.from(winningCount);
             winningResult.put(from.getKey(), winningResult.getOrDefault(from.getKey(), 0) + 1);
-            winningAmount += from.getAmount();
         }
-        profit = winningAmount / purchaseAmount;
-    }
-
-    public double getProfit() {
-        return profit;
-    }
-
-    public Map<String, Integer> getWinningResult() {
         return winningResult;
     }
 
     public int getWinningResult(Lotto lotto) {
         if (isWinningRankSecond(lotto) & isLottoBonusNumber(lotto)) {
-            return WinningAmountByRank.BONUS_PLACE;
+            return WinningAmountByRank.BONUS.getRank();
         }
         return lotto.getWinningResult();
     }
 
     private boolean isWinningRankSecond(Lotto lotto) {
-        return lotto.getWinningResult() == WinningAmountByRank.SECOND_PLACE;
+        return lotto.getWinningResult() == WinningAmountByRank.SECOND.getRank();
     }
 
     private boolean isLottoBonusNumber(Lotto lotto) {
-        return lotto.getBonusNumberResult() == WinningAmountByRank.BONUS_PLACE;
+        return lotto.getBonusNumberResult() == WinningAmountByRank.BONUS.getRank();
     }
 }

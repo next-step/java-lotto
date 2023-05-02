@@ -4,19 +4,12 @@ import java.util.Arrays;
 
 
 public enum WinningAmountByRank {
-    FIRST(WinningAmountByRank.FIRST_PLACE, 2000000000, "FIRST_PLACE"),
-    BONUS(WinningAmountByRank.BONUS_PLACE, 30000000, "BONUS_PLACE"),
-    SECOND(WinningAmountByRank.SECOND_PLACE, 1500000, "SECOND_PLACE"),
-    THIRD(WinningAmountByRank.THIRD_PLACE, 50000, "THIRD_PLACE"),
-    FOURTH(WinningAmountByRank.FOURTH_PLACE, 5000, "FOURTH_PLACE"),
-    EMPTY(WinningAmountByRank.EMPTY_PLACE, 0, "EMPTY_PLACE");
-
-    public static final int FIRST_PLACE = 6;
-    public static final int SECOND_PLACE = 5;
-    public static final int THIRD_PLACE = 4;
-    public static final int FOURTH_PLACE = 3;
-    public static final int BONUS_PLACE = 72;
-    public static final int EMPTY_PLACE = 0;
+    FIRST(6, 2000000000, "FIRST_PLACE"),
+    BONUS(37, 30000000, "BONUS_PLACE"),
+    SECOND(5, 1500000, "SECOND_PLACE"),
+    THIRD(4, 50000, "THIRD_PLACE"),
+    FOURTH(3, 5000, "FOURTH_PLACE"),
+    EMPTY(0, 0, "EMPTY_PLACE");
 
     private final int rank;
     private final int amount;

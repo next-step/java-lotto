@@ -5,18 +5,24 @@ import step3.domain.model.Lotto.LottoNumber;
 import step3.domain.model.Lotto.Lottos;
 import step3.domain.strategy.lotto.LottoPolicyStrategy;
 
+import java.util.Objects;
+
 public class LottoService {
-    private Lottos lottos;
+    // singleton 적용
+    private static LottoService lottoService = null;
 
-    public LottoService(int lottoCount) {
-        this.lottos = new Lottos(lottoCount);
+    public static LottoService createLottoService() {
+        if (Objects.isNull(lottoService)) {
+            return new LottoService();
+        }
+        return lottoService;
     }
 
-    public static LottoService of(int lottoCount) {
-        return new LottoService(lottoCount);
+    public Lottos createLottos(int count) {
+        return Lottos.from(count);
     }
 
-    public static LottoNumber createBonusNumber(int bonusNumber) {
+    public LottoNumber createBonusNumber(int bonusNumber) {
         return LottoNumber.from(bonusNumber);
     }
 
@@ -24,19 +30,15 @@ public class LottoService {
         return Lotto.fromWinningLotto(new LottoPolicyStrategy(), lastWinningNumbers);
     }
 
-    public void calculatorWinning(Lotto winningLotto) {
+    public void calculatorWinning(Lottos lottos, Lotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
             lotto.calculatorLottoWinning(winningLotto);
         }
     }
 
-    public void hasBonusNumber(LottoNumber bonusNumber) {
+    public void calculatorBonusNumber(Lottos lottos, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos.getLottos()) {
-            lotto.hasBonusNumberLottos(bonusNumber);
+            lotto.calculatorBonusNumber(bonusNumber);
         }
-    }
-
-    public Lottos getLottos() {
-        return lottos;
     }
 }
