@@ -2,7 +2,9 @@ package lotto_second.util;
 
 import lotto_second.domain.LottoNumber;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoValidate {
     public static final int LOTTO_MIN_NUMBER = 1;
@@ -18,7 +20,7 @@ public class LottoValidate {
         return numbers;
     }
 
-    public static int ticketCount(String purchaseAmount) {
+    public static int maxTicketCount(String purchaseAmount) {
         int ticketCount = 0;
         try {
             ticketCount = Integer.parseInt(purchaseAmount) / LOTTO_PRICE;
@@ -31,6 +33,38 @@ public class LottoValidate {
         }
 
         return ticketCount;
+    }
+
+    public static int manualTicketCount(Integer maxTicketAmount, String manualPurchaseAmount) {
+        int manualTicketCount = 0;
+
+        try {
+            manualTicketCount = Integer.parseInt(manualPurchaseAmount);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("수동 로또 수 오류");
+        }
+
+        if (maxTicketAmount < manualTicketCount) {
+            throw new IllegalArgumentException("구입금액보다 큰 수동 로또 수 입력.");
+        }
+
+        return manualTicketCount;
+    }
+
+    public static int autoTicketCount(Integer maxTicketCount, Integer manualTicketCount) {
+        return maxTicketCount - manualTicketCount;
+    }
+
+    public static Set<LottoNumber> parseLottoNumbers(String input) {
+        return Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Integer parseLottoNumber(String input) {
+        return Integer.parseInt(input.trim());
     }
 
 }

@@ -9,9 +9,10 @@ import lotto_second.service.LottoResult;
 import java.util.List;
 
 public class ResultView {
-    public void printLottoResult(LottoTickets tickets) {
-        System.out.println(tickets.size() + "개를 구매했습니다.");
-        printLottoTickets(tickets);
+    public void printLottoResult(LottoTickets manualTickets, LottoTickets autoTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualTickets.size(), autoTickets.size());
+        printLottoTickets(manualTickets);
+        printLottoTickets(autoTickets);
     }
 
     public void printLottoTickets(LottoTickets tickets) {
