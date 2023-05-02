@@ -2,10 +2,10 @@ package lotto3.domain;
 
 public enum Prize {
   NONE(0, 0),
-  FOURTH(3, 5000),
-  THIRD(4, 50000),
-  SECOND(5, 1500000),
-  BONUS(5, 30000000),
+  FIFTH(3, 5000),
+  FOURTH(4, 50000),
+  THIRD(5, 1500000),
+  SECOND(5, 30000000),
   FIRST(6, 2000000000);
 
   private final int matchCount;
@@ -26,8 +26,8 @@ public enum Prize {
   }
 
   public static Prize valueOfMatchCountAndBonusNumber(int matchCount, boolean isMatchedBonusNumber) {
-    if (matchCount == 4 && isMatchedBonusNumber) {
-      return BONUS;
+    if (matchCount == 5 && isMatchedBonusNumber) {
+      return SECOND;
     }
     return valueOfMatchCount(matchCount);
   }

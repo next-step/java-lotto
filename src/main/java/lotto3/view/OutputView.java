@@ -33,7 +33,7 @@ public class OutputView {
       return;
     }
 
-    if (prize == Prize.BONUS) {
+    if (prize == Prize.SECOND) {
       System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", prize.getMatchCount(), prize.getPrizeMoney(), matchedCount);
       return;
     }
