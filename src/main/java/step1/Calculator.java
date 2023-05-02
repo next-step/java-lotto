@@ -1,48 +1,60 @@
 package step1;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 public class Calculator {
 
     private static final String BLACK_STRING = " ";
 
-    private final List<Integer> numbers = new ArrayList<>();
-    private final List<Operator> operators = new ArrayList<>();
+    private List<Integer> numbers = new ArrayList<>();
+    private List<BiFunction> operators = new ArrayList<>();
 
     public Calculator(String input) {
-        String[] inputArr = spiltInput(input);
+        initCalculator(input);
+    }
 
-        for (int i = 0; i < inputArr.length; i++) {
-            splitNumberOperator(inputArr, i);
+    private void initCalculator(String input) {
+        checkNullOrBlank(input);
+        String[] inputArr = spiltInput(input);
+        checkValidExpression(inputArr);
+
+        numbers = getNumbers(inputArr);
+        operators = getOperators(inputArr);
+    }
+
+    private void checkValidExpression(String[] inputArr) {
+        if (inputArr.length % 2 == 0) {
+            throw new IllegalArgumentException("식이 올바르지 않습니다");
         }
     }
 
-    private static String[] spiltInput(String input) {
+    private void checkNullOrBlank(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("null 이거나 빈 값입니다");
         }
-        String[] inputArr = input.split(BLACK_STRING);
-        if (!isValidExpression(inputArr)) {
-            throw new IllegalArgumentException("식이 올바르지 않습니다");
+    }
+
+    private List<BiFunction> getOperators(String[] inputArr) {
+        for (int i = 1; i < inputArr.length; i += 2) {
+            addOperator(inputArr[i]);
         }
-        return inputArr;
+        return operators;
     }
 
-    private static boolean isValidExpression(String[] inputArr) {
-        return inputArr.length % 2 != 0;
-    }
-
-    private void splitNumberOperator(String[] inputArr, int i) {
-        if (i % 2 == 0) {
+    private List<Integer> getNumbers(String[] inputArr) {
+        for (int i = 0; i < inputArr.length; i += 2) {
             addNumber(inputArr[i]);
-            return;
         }
-        addOperator(inputArr[i]);
+        return numbers;
+    }
+
+    private static String[] spiltInput(String input) {
+        return input.split(BLACK_STRING);
     }
 
     private void addOperator(String symbol) {
-        if (!OperatorEnum.isValidSymbol(symbol)) throw new IllegalArgumentException("사칙연산 기호가 아닙니다");
-        Operator operator = OperatorEnum.getOperator(symbol);
+        BiFunction operator = OperatorEnum.getOperator(symbol);
         operators.add(operator);
     }
 
@@ -54,11 +66,10 @@ public class Calculator {
         }
     }
 
-
     public int calculate() {
         int result = numbers.get(0);
         for (int i = 0; i < operators.size(); i++) {
-            result = operators.get(i).apply(result, numbers.get(i + 1));
+            result = (int) operators.get(i).apply(result, numbers.get(i + 1));
         }
         return result;
     }

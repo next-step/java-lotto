@@ -13,15 +13,23 @@ class CalculatorTest {
     @NullAndEmptySource
     void 입력값이_null이거나_공백문자일경우_IllegalArgumentException(String input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Calculator(input))
-                .withMessage("null 이거나 빈 값입니다");
+            .isThrownBy(() -> new Calculator(input))
+            .withMessage("null 이거나 빈 값입니다");
     }
 
-    @ParameterizedTest(name = "expression")
+    @ParameterizedTest
     @CsvSource(value = {"4 + 2 + "})
     void 연산식이_올바르지_않을경우(String input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Calculator(input))
-                .withMessage("식이 올바르지 않습니다");
+            .isThrownBy(() -> new Calculator(input))
+            .withMessage("식이 올바르지 않습니다");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"ㄱ + 2 + 3"})
+    void 숫자가_아닐_경우(String input) {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> new Calculator(input))
+            .withMessage("숫자가 아닙니다");
     }
 }

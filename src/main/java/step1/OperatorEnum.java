@@ -3,10 +3,8 @@ package step1;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,24 +12,19 @@ import java.util.stream.Stream;
 @Getter
 public enum OperatorEnum {
 
-    ADD("+", new Addition()),
-    SUB("-", new Subtraction()),
-    MUL("*", new Multiplication()),
-    DIV("/", new Division());
+    ADD("+", (num1, num2) -> num1 + num2),
+    SUB("-", (num1, num2) -> num1 - num2),
+    MUL("*", (num1, num2) -> num1 * num2),
+    DIV("/", (num1, num2) -> num1 / num2);
 
     private String symbol;
-    private Operator operator;
+    private BiFunction<Integer, Integer, Integer> operator;
 
-    private static final Map<String, Operator> OPERATOR_MAP = Collections.unmodifiableMap(
-            Stream.of(values()).collect(Collectors.toMap(OperatorEnum::getSymbol, OperatorEnum::getOperator)));
+    private static final Map<String, BiFunction> OPERATOR_MAP = Collections.unmodifiableMap(
+        Stream.of(values()).collect(Collectors.toMap(OperatorEnum::getSymbol, OperatorEnum::getOperator)));
 
-    private static final List<String> OPERATOR_SYMBOL_LIST = new ArrayList<>(OPERATOR_MAP.keySet());
-
-    public static Operator getOperator(String symbol) {
-        return OPERATOR_MAP.get(symbol);
-    }
-
-    public static boolean isValidSymbol(String symbol) {
-        return OPERATOR_SYMBOL_LIST.contains(symbol);
+    public static BiFunction getOperator(String symbol) {
+        Optional<BiFunction> op = Optional.ofNullable(OPERATOR_MAP.get(symbol));
+        return op.orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다"));
     }
 }
