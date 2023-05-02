@@ -17,9 +17,14 @@ public class LottoNumbers {
   public int countMatch(WinningNumbers winningNumbers) {
     int count = 0;
     for (Integer number : numbers) {
-      if (winningNumbers.contains(number)) {
-        count++;
-      }
+      count = findMatchCount(winningNumbers, count, number);
+    }
+    return count;
+  }
+
+  private static int findMatchCount(WinningNumbers winningNumbers, int count, Integer number) {
+    if (winningNumbers.contains(number)) {
+      count++;
     }
     return count;
   }
