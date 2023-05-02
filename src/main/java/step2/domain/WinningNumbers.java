@@ -7,7 +7,7 @@ import step2.utils.Split;
 
 public class WinningNumbers {
 
-    private List<Integer> numbers = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
 
     public WinningNumbers(String winningNumber) {
         String[] winningNumbers = Split.getStrings(winningNumber);
