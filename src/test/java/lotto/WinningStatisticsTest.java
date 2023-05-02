@@ -18,6 +18,11 @@ public class WinningStatisticsTest {
         assertThat(result).contains(1,2,3,4,5,6);
     }
 
+    @Test
+    @DisplayName("모든 로또 번호 확인")
+    public void compareWithLastNumber() {
+
+    }
 
 
 }

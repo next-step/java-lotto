@@ -21,7 +21,7 @@ public class LottoApplication {
 
         WinningStatistics winningStatistics = new WinningStatistics(inputView.askLastLottoNumber());
 
-        List<Integer> result = winningStatistics.compareWithLastNumber(lottoBundle);
+        List<Integer> result = winningStatistics.compareWithTargetNumber(lottoBundle);
         System.out.println(result);
 
     }

@@ -47,7 +47,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("checkLottoNumber")
+    @DisplayName("로또 번호 맞춘 개수 확인")
     public void checkLottoNumberTest() {
         Lotto lotto = new Lotto();
         List<Integer> targetNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
