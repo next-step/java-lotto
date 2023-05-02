@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.TicketNumbersCountException;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -67,13 +66,5 @@ public class Ticket {
 
     public Boolean includeNumber(LottoNumber bonusLottoNumber) {
         return this.numbers.contains(bonusLottoNumber);
-    }
-
-    public int countWinner(List<Ticket> challengeTickets, Prize prize) {
-        int count = 0;
-        for (Ticket ticket : challengeTickets) {
-            count = count + (prize.isMatch(this.countMatchNumbers(ticket)) ? 1 : 0);
-        }
-        return count;
     }
 }

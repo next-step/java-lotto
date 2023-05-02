@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static lotto.domain.Tickets.emptyTickets;
+
 public class InputPresent {
     private static final String PURCHASE_AMOUNT = "구입금액을 입력해 주세요";
     private static final String PURCHASE_CONFIRM = "총 %s개를 구매합니다";
@@ -44,14 +46,16 @@ public class InputPresent {
     }
 
     public Tickets manualPurchases() {
-        List<Ticket> tickets = new ArrayList<>();
+        Tickets tickets = emptyTickets();
         System.out.printf(PURCHASE_MANUAL, System.lineSeparator());
         int iter = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < iter; i++) {
             tickets.add(manualPurchase(scanner.nextLine()));
         }
-        return new Tickets(tickets);
+        return tickets;
     }
+
+
 
     private Ticket manualPurchase(String nextLine) {
 
