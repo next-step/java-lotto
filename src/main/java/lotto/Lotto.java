@@ -2,15 +2,12 @@ package lotto;
 
 import lotto.domain.Issuer;
 import lotto.domain.Statics;
-import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 import lotto.domain.WinnerTicket;
 import lotto.present.InputPresent;
 import lotto.present.OutputPresent;
 import lotto.present.dto.IncomePresentDTO;
 import lotto.present.dto.WinnerPresentDTO;
-
-import java.util.List;
 
 public class Lotto {
 
@@ -28,7 +25,7 @@ public class Lotto {
         issuer.automaticIssue(totalPurchaseCount - tickets.count());
 
 
-        outputPresent.presentTickets(tickets,issuer.issuedTickets());
+        outputPresent.presentTickets(tickets, issuer.issuedTickets());
 
         WinnerTicket winnerTicket = inputPresent.winningNumbers().winnerTicket(inputPresent.bonusNumber());
         Statics statics = issuer.issuedTicketStatistics(winnerTicket);

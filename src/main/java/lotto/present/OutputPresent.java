@@ -5,8 +5,6 @@ import lotto.domain.Tickets;
 import lotto.present.dto.IncomePresentDTO;
 import lotto.present.dto.WinnerPresentDTO;
 
-import java.util.List;
-
 public class OutputPresent {
     private static final String STATISTICS_HEAD = "당첨 통계" + System.lineSeparator() + "---------";
     private static final String PRIZE_5TH = "3개 일치 (5,000원)- %s개";

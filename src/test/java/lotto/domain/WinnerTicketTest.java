@@ -18,7 +18,7 @@ public class WinnerTicketTest {
     @BeforeEach
     public void beforeEach() {
         Ticket winner = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
-        winnerTicketFixture = winner.winnerTicket(new LottoNumber( 33));
+        winnerTicketFixture = winner.winnerTicket(new LottoNumber(33));
 
         Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
         Ticket secondA = new Ticket(Set.of(1, 2, 4, 8, 16, 33));

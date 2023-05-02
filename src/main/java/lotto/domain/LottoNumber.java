@@ -27,7 +27,7 @@ public class LottoNumber {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return this.hashCode() == ((LottoNumber) o).hashCode();
+        return this.hashCode() == o.hashCode();
     }
 
     @Override

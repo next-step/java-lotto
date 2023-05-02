@@ -20,16 +20,16 @@ public class Ticket {
         validate();
     }
 
+    private static int overlapCount(Set<LottoNumber> copyThisNumbers) {
+        return 12 - copyThisNumbers.size();
+    }
+
     private Set<LottoNumber> parseToLottoNumbers(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for(Integer integer : numbers) {
+        for (Integer integer : numbers) {
             lottoNumbers.add(new LottoNumber(integer));
         }
         return lottoNumbers;
-    }
-
-    private static int overlapCount(Set<LottoNumber> copyThisNumbers) {
-        return 12 - copyThisNumbers.size();
     }
 
     private Set<Integer> parseToNumbers(String stringNumbers) {

@@ -39,13 +39,13 @@ public class StaticsTest {
         Ticket fifthD = new Ticket(Set.of(1, 2, 4, 25, 36, 27));
         Ticket fifthE = new Ticket(Set.of(1, 2, 4, 35, 26, 17));
 
-        Tickets purchaseTicketsFixture = new Tickets( List.of(
+        Tickets purchaseTicketsFixture = new Tickets(List.of(
                 first, secondA, secondB,
                 thirdA, thirdB, thirdC,
                 fourthA, fourthB, fourthC, fourthD,
                 fifthA, fifthB, fifthC, fifthD, fifthE
         ));
-        staticsFixture = new Statics( purchaseTicketsFixture, winnerTicket);
+        staticsFixture = new Statics(purchaseTicketsFixture, winnerTicket);
     }
 
     @DisplayName("1등 담첨통계가 계산된다(6개 번호 일치)")

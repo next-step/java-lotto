@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class Statics {
     private static final String PROFIT_MESSAGE = "(손익분기점이 1이기 때문에 결과적으로 이득이라는 의미임)";
     private static final String LOSS_MESSAGE = "(손익분기점이 1이기 때문에 결과적으로 손해라는 의미임)";

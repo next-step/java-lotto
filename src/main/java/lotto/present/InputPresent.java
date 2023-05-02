@@ -45,9 +45,9 @@ public class InputPresent {
 
     public Tickets manualPurchases() {
         List<Ticket> tickets = new ArrayList<>();
-        System.out.printf(PURCHASE_MANUAL,System.lineSeparator());
+        System.out.printf(PURCHASE_MANUAL, System.lineSeparator());
         int iter = Integer.parseInt(scanner.nextLine());
-        for(int i=0 ; i<iter ; i++) {
+        for (int i = 0; i < iter; i++) {
             tickets.add(manualPurchase(scanner.nextLine()));
         }
         return new Tickets(tickets);

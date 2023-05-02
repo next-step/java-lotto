@@ -10,9 +10,6 @@ public class Issuer {
     private final Random RANDOM = new Random();
     private final Tickets tickets;
 
-    public void issueTickets(List<Ticket> purchaseLotto) {
-        throw new RuntimeException("Not Yet Implemented : 티켓 리스트를 입력받음");
-    }
     public Issuer() {
         this.tickets = new Tickets(new ArrayList<>());
     }
