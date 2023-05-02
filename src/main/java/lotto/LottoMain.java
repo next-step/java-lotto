@@ -5,6 +5,7 @@ import java.util.List;
 import lotto.domain.BenefitResult;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
+import lotto.domain.ManualLottos;
 import lotto.domain.RankSituation;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningNumbers;
@@ -15,8 +16,12 @@ public class LottoMain {
 
 	public static void main(String[] args) {
 		long purchaseAmount = InputView.inputPurchaseAmount();
-		LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
-		ResultView.printPurchasedCount(lottoMachine.purchasedCount());
+		long manalCount = InputView.inputManualCount();
+
+		ManualLottos manualLottos = new ManualLottos(InputView.inputManualLottos(manalCount));
+		LottoMachine lottoMachine = new LottoMachine(purchaseAmount, manualLottos);
+
+		ResultView.printPurchasedCount(manualLottos.size(), lottoMachine.getAutoCount());
 		ResultView.printCurrentSituation(lottoMachine.getPurchasedLottos());
 
 		WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinNumbers());
