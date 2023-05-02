@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringCalculatorTest {
 
@@ -22,4 +23,13 @@ public class StringCalculatorTest {
         int result = StringCalculator.calculate(tokens);
         assertThat(result).isEqualTo(10);
     }
+
+    @Test
+    void 잘못된_사칙연산() {
+        List<String> tokens = List.of("2", "--", "3", "*", "4", "/", "2");
+        assertThatThrownBy(() -> StringCalculator.calculate(tokens))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 입력입니다.");
+    }
+
 }

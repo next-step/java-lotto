@@ -30,7 +30,7 @@ public class StringCalculator {
                         result /= number;
                         break;
                     default:
-                        throw new RuntimeException("잘못된 입력입니다.");
+                        throw new IllegalArgumentException("잘못된 입력입니다.");
                 }
             } catch (NumberFormatException e) {
                 prev = token;

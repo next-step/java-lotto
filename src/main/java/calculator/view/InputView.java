@@ -8,6 +8,10 @@ public class InputView {
 
     public static String input() {
         System.out.println("계산할 문자열을 입력하세요.");
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        return input;
     }
 }
