@@ -1,7 +1,5 @@
 package study.stringcalculator.domain;
 
-import study.stringcalculator.factory.OperatorFactory;
-
 public class Expression {
 
   private String[] expression;
@@ -18,7 +16,7 @@ public class Expression {
     int result = Integer.parseInt(expression[0]);
 
     for (int i = 1; i < expression.length; i = i + 2) {
-      Operator operator = OperatorFactory.create(expression[i]);
+      Operator operator = Operator.getOperator(expression[i]);
       result = operator.operate(result, Integer.parseInt(expression[i + 1]));
     }
 

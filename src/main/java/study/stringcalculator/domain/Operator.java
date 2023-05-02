@@ -22,4 +22,19 @@ public enum Operator {
   public String getOperator() {
     return operator;
   }
+
+  public static Operator getOperator(String value) {
+    switch (value) {
+      case "+":
+        return Operator.ADD;
+      case "-":
+        return Operator.SUBTRACT;
+      case "*":
+        return Operator.MULTIPLY;
+      case "/":
+        return Operator.DIVIDE;
+      default:
+        throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+    }
+  }
 }
