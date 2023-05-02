@@ -1,41 +1,58 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StringCalculator {
-    public static List<String> devide(String input) {
-        return Arrays.stream(input.trim().split(" ")).collect(Collectors.toList());
-    }
+
+    private static final String ADDICTION = "+";
+    private static final String MULTIPLICATION = "*";
+    private static final String DIVISION = "/";
+    private static final String SUBTRACTION = "-";
 
     public static int calculate(List<String> tokens) {
-        int result = Integer.parseInt(tokens.get(0));
-        String prev = "";
-        tokens = tokens.subList(1, tokens.size());
-        for (String token: tokens) {
+        int result = getInitialNumber(tokens);
+        String operator = "";
+        for (String token: removeInitialNumber(tokens)) {
             try {
-                int number = Integer.parseInt(token);
-                switch (prev) {
-                    case "+":
-                        result += number;
-                        break;
-                    case "*":
-                        result *= number;
-                        break;
-                    case "-":
-                        result -= number;
-                        break;
-                    case "/":
-                        result /= number;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("잘못된 입력입니다.");
-                }
+                int number = convertToInt(token);
+                result = operate(result, operator, number);
             } catch (NumberFormatException e) {
-                prev = token;
+                operator = token;
             }
         }
         return result;
     }
+
+    private static int convertToInt(String token) {
+        return Integer.parseInt(token);
+    }
+
+    private static int getInitialNumber(List<String> tokens) {
+        return convertToInt(tokens.get(0));
+    }
+
+    private static List<String> removeInitialNumber(List<String> tokens) {
+        return tokens.subList(1, tokens.size());
+    }
+
+    private static int operate(int result, String operator, int number) {
+        switch (operator) {
+            case ADDICTION:
+                result += number;
+                break;
+            case MULTIPLICATION:
+                result *= number;
+                break;
+            case SUBTRACTION:
+                result -= number;
+                break;
+            case DIVISION:
+                result /= number;
+                break;
+            default:
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+        return result;
+    }
+
 }

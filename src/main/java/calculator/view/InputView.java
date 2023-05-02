@@ -10,7 +10,7 @@ public class InputView {
         System.out.println("계산할 문자열을 입력하세요.");
         String input = scanner.nextLine();
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
         return input;
     }
