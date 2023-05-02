@@ -2,6 +2,7 @@ package step2.service;
 
 import step2.functional.PrizeAmount;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoRank {
@@ -27,12 +28,10 @@ public enum LottoRank {
             return THIRD;
         }
 
-        for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.countOfMatch == matchingCount) {
-                return lottoRank;
-            }
-        }
-        return REMAIN;
+        return Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> lottoRank.countOfMatch == matchingCount)
+                .findFirst()
+                .orElse(REMAIN);
     }
 
     public static double calculateRateOfReturn(int numOfLottoTicket, Map<LottoRank, Integer> winnerResults) {

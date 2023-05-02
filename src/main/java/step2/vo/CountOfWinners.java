@@ -20,8 +20,7 @@ public class CountOfWinners {
         }
 
         for (LottoRank lottoRank : matchingLottoRank) {
-            Integer prevValue = winnerResults.get(lottoRank);
-            winnerResults.put(lottoRank, ++prevValue);
+            winnerResults.compute(lottoRank, (k, v) -> v + 1);
         }
     }
 

@@ -36,6 +36,13 @@ public class Lotto {
         return LottoRank.getLottoNumber(countWinNumber);
     }
 
+    private Integer countMatchingNumbers(Integer countWinNumber, LottoNumber winNum) {
+        if (lottoNumbers.contains(winNum)) {
+            countWinNumber++;
+        }
+        return countWinNumber;
+    }
+
     private boolean isSeconds(Integer countWinNumber, LottoNumber bonusNumber) {
         if (LottoRank.isSeconds(countWinNumber)) {
             return false;
@@ -43,15 +50,6 @@ public class Lotto {
 
         return lottoNumbers.stream()
                 .anyMatch(bonusNumber::equals);
-    }
-
-    private Integer countMatchingNumbers(Integer countWinNumber, LottoNumber winNum) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (winNum.equals(lottoNumber)) {
-                countWinNumber++;
-            }
-        }
-        return countWinNumber;
     }
 
     public List<Integer> lottoNumbers() {
