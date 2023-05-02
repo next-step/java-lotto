@@ -5,6 +5,7 @@ import lotto_second.domain.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     private Map<Rank, Integer> resultMap = new HashMap<>();
@@ -24,20 +25,24 @@ public class LottoResult {
 
     private Rank getRank(Lotto ticket, LottoWinner lottoWinner) {
         int countOfMatch = countMatchedWinnerLotto(ticket, lottoWinner);
-        boolean matchBonus = ticket.getNumbers().contains(lottoWinner.getBonusNumber());
-        return Rank.valueOf(countOfMatch, matchBonus);
+        boolean matchBonus = matchBonus(ticket, lottoWinner);
+        return Rank.findRank(countOfMatch, matchBonus);
+    }
+
+    private boolean matchBonus(Lotto ticket, LottoWinner lottoWinner) {
+        return ticket.contains(lottoWinner.getBonusNumber());
     }
 
 
     private int countMatchedWinnerLotto(Lotto ticket, LottoWinner lottoWinner) {
         int count = 0;
         for (LottoNumber number : ticket.getNumbers()) {
-            count += isWinnerNumber(number, lottoWinner);
+            count += winnerNumberCount(number, lottoWinner);
         }
         return count;
     }
 
-    private int isWinnerNumber(LottoNumber number, LottoWinner lottoWinner) {
+    private int winnerNumberCount(LottoNumber number, LottoWinner lottoWinner) {
         if (lottoWinner.getWinnerNumbers().contains(number)) {
             return 1;
         }
@@ -49,10 +54,18 @@ public class LottoResult {
     }
 
     public double getRevenueRate() {
-        int totalRevenue = resultMap.entrySet()
+
+        Map<Rank, Integer> rankCountMap = resultMap.entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey(),
+                        entry -> entry.getValue()
+                ));
+
+        int totalRevenue = rankCountMap.entrySet()
                 .stream()
                 .mapToInt(entry -> entry.getKey().getWinningMoney() * entry.getValue())
-                .sum();
+                .reduce(0, Integer::sum);
 
         return (double) totalRevenue / (totalTicketCount * 1000);
     }

@@ -14,9 +14,19 @@ public class LottoApplication {
         LottoService lottoService = new LottoService();
         LottoResult lottoResult = new LottoResult();
 
-        LottoTickets lottoTickets = lottoService.generateTickets(inputView.getPurchaseAmount());
+
+        String autoPurchaseAmount = inputView.getPurchaseAmount();
+        String manualPurchaseAmount = inputView.getManualPurchaseAmount();
+
+        LottoTickets lottoTickets = lottoService.generateTickets(autoPurchaseAmount);
         resultView.printLottoResult(lottoTickets);
-        LottoWinner lottoWinner = new LottoWinner(inputView.getWinningNumbers(), inputView.getBonusNumber());
+
+        String winningNumbers = inputView.getWinningNumbers();
+        String bonusNumber = inputView.getBonusNumber();
+
+        LottoWinner lottoWinner = new LottoWinner(winningNumbers, bonusNumber);
+        lottoWinner.numberDuplicateInspection();
+
         lottoResult.calculateResult(lottoTickets, lottoWinner);
         resultView.printStatistics(lottoResult);
     }
