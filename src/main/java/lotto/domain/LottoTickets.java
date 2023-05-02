@@ -31,21 +31,17 @@ public class LottoTickets {
     public Map<LottoRank, Integer> calculateSameNumberCounts(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         Map<LottoRank, Integer> counts = new HashMap<>();
         for (LottoTicket ticket : lottoTickets) {
-            calculateOneStage(lottoTicket, counts, ticket, bonusNumber);
+            LottoRank lottoRank = LottoRank.valueOf(
+                    ticket.calculateSameNumberCount(lottoTicket),
+                    ticket.hasNumber(bonusNumber));
+            calculateSameNumberCount(counts, lottoRank);
         }
         return counts;
     }
 
-    private void calculateOneStage(LottoTicket lottoTicket,
-                                   Map<LottoRank, Integer> counts,
-                                   LottoTicket ticket,
-                                   LottoNumber bonusNumber) {
-        LottoRank lottoRank = LottoRank.valueOf(
-                ticket.calculateSameNumberCount(lottoTicket),
-                ticket.hasNumber(bonusNumber));
+    private void calculateSameNumberCount(Map<LottoRank, Integer> counts, LottoRank lottoRank) {
         if (counts.containsKey(lottoRank)) {
             counts.put(lottoRank, counts.get(lottoRank) + 1);
-            return;
         }
         counts.put(lottoRank, 1);
     }
