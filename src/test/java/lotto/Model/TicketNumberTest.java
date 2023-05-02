@@ -50,9 +50,33 @@ class TicketNumberTest {
     @Test
     @DisplayName("ticketNumber 정상적으로 숫자 입력 시 return normal")
     public void ticketNumber_normal() {
-        List<Integer> actual = Arrays.asList(1, 2, 3, 4, 5, 6);
-        TicketNumber ticketNumber = new TicketNumber(actual);
-        List<Integer> expected = ticketNumber.numbers();
+        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
+        TicketNumber ticketNumber = new TicketNumber(expected);
+        List<Integer> actual = ticketNumber.numbers();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("ticketNumber 있는 숫자 입력 시 true")
+    public void ticketNumber_contain_true() {
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6);
+        TicketNumber ticketNumber = new TicketNumber(input);
+
+        boolean expected = true;
+        boolean actual = ticketNumber.contain(1);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("ticketNumber 없는 숫자 입력 시 false")
+    public void ticketNumber_contain_false() {
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6);
+        TicketNumber ticketNumber = new TicketNumber(input);
+
+        boolean expected = false;
+        boolean actual = ticketNumber.contain(10);
 
         assertThat(actual).isEqualTo(expected);
     }

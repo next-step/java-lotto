@@ -52,4 +52,8 @@ public class TicketNumber {
         Collections.sort(ticketNumber);
         return ticketNumber;
     }
+
+    public boolean contain(int number) {
+        return numbers.contains(number);
+    }
 }
