@@ -1,10 +1,8 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class ManualLottos {
 
@@ -17,16 +15,8 @@ public class ManualLottos {
 	public ManualLottos(List<String> inputs) {
 		this.manualLottos = new ArrayList<>();
 		for (String input : inputs) {
-			this.manualLottos.add(new Lotto(this.createLottoNumbers(input)));
+			this.manualLottos.add(new Lotto(LottoNumbers.create(input)));
 		}
-	}
-
-	public Set<LottoNumber> createLottoNumbers(String input) {
-		Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
-		for (String numberString : input.split(", ")) {
-			lottoNumbers.add(LottoNumber.of(numberString));
-		}
-		return lottoNumbers;
 	}
 
 	public long size() {

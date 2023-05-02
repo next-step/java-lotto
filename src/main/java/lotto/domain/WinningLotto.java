@@ -1,22 +1,11 @@
 package lotto.domain;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 public class WinningLotto {
 
 	private final Lotto winningLotto;
 
 	public WinningLotto(String input) {
-		this.winningLotto = new Lotto(this.createLottoNumbers(input));
-	}
-
-	public Set<LottoNumber> createLottoNumbers(String input) {
-		Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
-		for (String numberString : input.split(", ")) {
-			lottoNumbers.add(LottoNumber.of(numberString));
-		}
-		return lottoNumbers;
+		this.winningLotto = new Lotto(LottoNumbers.create(input));
 	}
 
 	public void calculateScore(PurchasedLottos purchasedLottos, LottoNumber bonusNumber) {

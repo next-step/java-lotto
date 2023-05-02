@@ -19,7 +19,7 @@ public class Lotto {
 
 	public Lotto(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != Lotto.SIZE) {
-			throw new IllegalArgumentException(String.format("로또 넘버의 크기는 %d입니다.", Lotto.SIZE));
+			throw new IllegalArgumentException(String.format("로또의 크기는 %d이고, 중복된 수가 있으면 안됩니다.", Lotto.SIZE));
 		}
 		this.lottoNumbers = new LottoNumbers(new ArrayList<>(lottoNumbers));
 		this.score = new Score(0);

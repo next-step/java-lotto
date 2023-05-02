@@ -16,7 +16,6 @@ public class LottoMain {
 	public static void main(String[] args) {
 		long purchaseAmount = InputView.inputPurchaseAmount();
 		long manalCount = InputView.inputManualCount();
-
 		ManualLottos manualLottos = new ManualLottos(InputView.inputManualLottos(manalCount));
 		LottoMachine lottoMachine = new LottoMachine(purchaseAmount, manualLottos);
 

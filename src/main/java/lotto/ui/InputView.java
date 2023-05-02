@@ -35,12 +35,15 @@ public class InputView {
 	}
 
 	public static List<String> inputManualLottos(long manualCount) {
-		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-		List<String> input = new ArrayList<>();
-		for (long l = 0; l < manualCount; l++) {
-			input.add(scanner.nextLine());
+		if (manualCount < 0) {
+			throw new IllegalArgumentException("수동으로 구매할 로또 수는 양수만 가능합니다.");
 		}
-		return input;
+		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+		List<String> inputs = new ArrayList<>();
+		for (long l = 0; l < manualCount; l++) {
+			inputs.add(scanner.nextLine());
+		}
+		return inputs;
 	}
 
 	public static String inputWinNumbers() {
