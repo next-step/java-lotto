@@ -1,6 +1,6 @@
-package lotto.domain;
+package calculator.domain;
 
-import lotto.utility.Operator;
+import calculator.utility.Operator;
 
 import java.util.List;
 import java.util.Queue;

@@ -1,9 +1,9 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Calculator;
-import lotto.domain.InputConverter;
-import lotto.domain.NumberGroup;
-import lotto.domain.OperatorGroup;
+import calculator.domain.Calculator;
+import calculator.domain.InputConverter;
+import calculator.domain.NumberGroup;
+import calculator.domain.OperatorGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

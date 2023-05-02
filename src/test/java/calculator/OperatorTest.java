@@ -1,6 +1,6 @@
-package lotto;
+package calculator;
 
-import lotto.utility.Operator;
+import calculator.utility.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
