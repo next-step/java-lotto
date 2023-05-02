@@ -8,6 +8,7 @@ public class LottoApplication {
 
         String budget = inputView.askBudget();
 
+
     }
 
 }
