@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningStatistics {
@@ -14,6 +12,18 @@ public class WinningStatistics {
 
     private List<Integer> convertNumberToList(String lastNumber) {
         return Arrays.stream(lastNumber.split(", ")).map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    public List<Integer> compareWithLastNumber(List<Lotto> lottoBundle) {
+        return lottoBundle.stream()
+                .map(lotto -> isContainsTarget(lotto.checkAllNumber()))
+                .collect(Collectors.toList());
+    }
+
+    private int  isContainsTarget(List<Integer> lotto) {
+        return (int) this.targetNumber.stream()
+                .filter(target -> lotto.contains(target))
+                .count();
     }
 
     public List<Integer> showTargetNumber() {
