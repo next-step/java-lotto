@@ -16,15 +16,15 @@ public class WinningStatistics {
 
     public List<Integer> compareWithLastNumber(List<Lotto> lottoBundle) {
         return lottoBundle.stream()
-                .map(lotto -> isContainsTarget(lotto.checkAllNumber()))
+                .map(lotto -> lotto.checkLottoNumber(this.targetNumber))
                 .collect(Collectors.toList());
     }
-
-    private int  isContainsTarget(List<Integer> lotto) {
-        return (int) this.targetNumber.stream()
-                .filter(target -> lotto.contains(target))
-                .count();
-    }
+//
+//    private int  isContainsTarget(List<Integer> lotto) {
+//        return (int) this.targetNumber.stream()
+//                .filter(target -> lotto.contains(target))
+//                .count();
+//    }
 
     public List<Integer> showTargetNumber() {
         return new ArrayList<>(this.targetNumber);

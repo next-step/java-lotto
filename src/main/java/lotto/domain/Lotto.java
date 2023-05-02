@@ -24,11 +24,15 @@ public class Lotto {
         return numberList;
     }
 
-    public List<Integer> checkNumber() {
+    public int checkLottoNumber(List<Integer> targetNumber) {
+        return (int) targetNumber.stream().filter(this.lottoNumber::contains).count();
+    }
+
+    public List<Integer> checkedNumber() {
         return new ArrayList<>(this.lottoNumber);
     }
 
-    public List<Integer> checkAllNumber() {
+    public List<Integer> totalNumber() {
         return this.allNumber;
     }
 }
