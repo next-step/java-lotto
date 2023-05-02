@@ -13,7 +13,7 @@ public class Lotto {
 
     private Lotto() {
         TotalNumbers totalNumbers = new TotalNumbers();
-        List<Integer> numbers = totalNumbers.getRandomNumber();
+        List<Integer> numbers = totalNumbers.getRandomLottoNumber();
         this.pickedNumbers = new PickedNumber(numbers);
     }
 
@@ -21,7 +21,7 @@ public class Lotto {
         return new Lotto();
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> getDetailNumbers() {
         return this.pickedNumbers.get();
     }
 
@@ -35,6 +35,18 @@ public class Lotto {
 
     public Ranking getRanking() {
         return ranking;
+    }
+
+    public int match(WinningNumbers winningNumbers) {
+        return this.pickedNumbers.match(winningNumbers);
+    }
+
+    public boolean contains(int number) {
+        return this.pickedNumbers.contains(number);
+    }
+
+    public boolean isSecond() {
+        return this.ranking == Ranking.SECOND;
     }
 }
 
