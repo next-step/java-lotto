@@ -6,8 +6,10 @@ import java.util.List;
 public class LottoGames {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_SIZE = 6;
     private final List<Lotto> lottoGameList = new ArrayList<>();
     private Lotto firstLotto;
+    private final int[] result = new int[LOTTO_SIZE];
 
     public LottoGames(List<String> lottoNumberList, String firstLottoNumber) {
         lottoNumberList.forEach(number -> lottoGameList.add(new Lotto(number)));
@@ -34,4 +36,11 @@ public class LottoGames {
         return sum() / (double)(LOTTO_PRICE * lottoGameList.size());
     }
 
+    public void calculatePrizeCount() {
+        lottoGameList.forEach(lotto -> result[lotto.findMatchCount(firstLotto)]++);
+    }
+
+    protected int[] getResult() {
+        return result;
+    }
 }
