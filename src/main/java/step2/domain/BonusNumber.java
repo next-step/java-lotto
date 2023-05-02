@@ -1,6 +1,5 @@
 package step2.domain;
 
-import java.util.List;
 import step2.utils.Validation;
 
 public class BonusNumber {
@@ -12,11 +11,7 @@ public class BonusNumber {
         this.number = bonusNumber;
     }
 
-    public Integer get() {
-        return this.number;
-    }
-
-    public boolean isContained(List<Integer> numbers) {
-        return numbers.contains(this.number);
+    public boolean isContained(Lotto lotto) {
+        return lotto.contains(this.number);
     }
 }
