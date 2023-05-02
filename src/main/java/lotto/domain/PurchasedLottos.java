@@ -20,6 +20,10 @@ public class PurchasedLottos {
 		this.purchasedLottos.add(lotto);
 	}
 
+	public void addManualLottos(ManualLottos manualLottos) {
+		this.purchasedLottos.addAll(manualLottos.getManualLottos());
+	}
+
 	public void calculateScore(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
 		for (Lotto lotto : this.purchasedLottos) {
 			lotto.calculateScore(winningNumbers, bonusNumber);

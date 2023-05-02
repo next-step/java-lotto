@@ -57,4 +57,14 @@ public class LottoMachineTest {
 			new RankSituation(Rank.THIRD, 0), new RankSituation(Rank.FIRST, 1)
 		);
 	}
+
+	@DisplayName("자동으로 생성할 로또 개수를 구한다.")
+	@Test
+	void test10() {
+		List<String> inputs = Arrays.asList(
+			"1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"
+		);
+		LottoMachine lottoMachine = new LottoMachine(14000, new ManualLottos(inputs));
+		assertThat(lottoMachine.getAutoCount()).isEqualTo(12);
+	}
 }

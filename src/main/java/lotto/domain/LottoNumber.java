@@ -23,9 +23,21 @@ public class LottoNumber {
 		this.lottoNumber = lottoNumber;
 	}
 
+	public static LottoNumber of(String numberString) {
+		return of(LottoNumber.toInt(numberString));
+	}
+
 	public static LottoNumber of(int lottoNumber) {
 		return Optional.ofNullable(LottoNumber.LOTTO_NUMBERS_POCKET.get(lottoNumber))
 			.orElseThrow(() -> new IllegalArgumentException("로또 넘버의 범위를 벗어났습니다."));
+	}
+
+	private static int toInt(String numbersString) {
+		try {
+			return Integer.parseInt(numbersString);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("로또 넘버는 숫자만 입력 가능합니다.");
+		}
 	}
 
 	@Override

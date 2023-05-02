@@ -7,15 +7,23 @@ import java.util.stream.Collectors;
 public class LottoMachine {
 
 	private final PurchasedLottos purchasedLottos;
+	private final long autoCount;
 
 	public LottoMachine(long purchaseAmount) {
-		this.purchasedLottos = new PurchasedLottos();
+		this(purchaseAmount, new ManualLottos());
+	}
+
+	public LottoMachine(long purchaseAmount, ManualLottos manualLottos) {
 		if (purchaseAmount < Lotto.PRICE) {
 			throw new IllegalArgumentException("구입 금액이 올바르지 않습니다.");
 		}
 
-		long purchaseCount = purchaseAmount / Lotto.PRICE;
-		for (long i = 0; i < purchaseCount; i++) {
+		this.purchasedLottos = new PurchasedLottos();
+		long totalCount = purchaseAmount / Lotto.PRICE;
+		this.autoCount = totalCount - manualLottos.size();
+
+		this.purchasedLottos.addManualLottos(manualLottos);
+		for (long l = 0; l < autoCount; l++) {
 			this.purchasedLottos.add(new Lotto());
 		}
 	}
@@ -23,6 +31,7 @@ public class LottoMachine {
 	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public LottoMachine(List<Lotto> purchasedLottos) {
 		this.purchasedLottos = new PurchasedLottos(purchasedLottos);
+		this.autoCount = 0;
 	}
 
 	public int purchasedCount() {
@@ -34,12 +43,16 @@ public class LottoMachine {
 		return rankBoard.makeRankSituations();
 	}
 
+	public List<RankSituation> sortInOrderScore(List<RankSituation> rankSituations) {
+		return rankSituations.stream()
+			.sorted(Comparator.comparing(o -> o.getRank().getWinningMoney())).collect(Collectors.toList());
+	}
+
 	public PurchasedLottos getPurchasedLottos() {
 		return this.purchasedLottos;
 	}
 
-	public List<RankSituation> sortInOrderScore(List<RankSituation> rankSituations) {
-		return rankSituations.stream()
-			.sorted(Comparator.comparing(o -> o.getRank().getWinningMoney())).collect(Collectors.toList());
+	public long getAutoCount() {
+		return this.autoCount;
 	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -29,6 +31,12 @@ public class LottoNumbers {
 		this.lottoNumbers = lottoNumbers;
 	}
 
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
+	public LottoNumbers(int... lottoNumbers) {
+		this.lottoNumbers = Arrays.stream(lottoNumbers)
+			.mapToObj(LottoNumber::of).collect(Collectors.toList());
+	}
+
 	public boolean contains(LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
@@ -36,5 +44,20 @@ public class LottoNumbers {
 	@Override
 	public String toString() {
 		return this.lottoNumbers.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoNumbers that = (LottoNumbers)o;
+		return Objects.equals(lottoNumbers, that.lottoNumbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumbers);
 	}
 }
