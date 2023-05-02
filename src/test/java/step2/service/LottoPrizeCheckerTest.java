@@ -54,5 +54,4 @@ class LottoPrizeCheckerTest {
 
         assertThat(ticket.getLottoPrize()).isEqualTo(LottoPrize.FOURTH);
     }
-
 }

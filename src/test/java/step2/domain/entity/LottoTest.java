@@ -22,8 +22,4 @@ class LottoTest {
                 () -> Lotto.winner("1, 2, 3, 4, 5")
         );
     }
-
-    public static Lotto createTestLotto(String number) {
-        return Lotto.winner(number);
-    }
 }

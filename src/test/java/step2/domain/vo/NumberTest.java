@@ -15,5 +15,4 @@ class NumberTest {
                 () -> new Number(number)
         );
     }
-
 }
