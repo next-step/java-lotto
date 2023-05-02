@@ -1,6 +1,6 @@
 package lotto3.util;
 
-import static lotto2.domain.LottoTicket.TICKET_PRICE;
+import static lotto3.domain.LottoTicket.TICKET_PRICE;
 
 import java.util.ArrayList;
 import java.util.List;
