@@ -51,10 +51,6 @@ public class Ticket {
         return overlapCount(copyThisNumbers);
     }
 
-    public WinnerTicket winnerTicket(LottoNumber bonusNumber) {
-        return new WinnerTicket(this, bonusNumber);
-    }
-
     @Override
     public String toString() {
         return this.numbers

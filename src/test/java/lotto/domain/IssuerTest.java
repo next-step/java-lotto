@@ -32,7 +32,7 @@ public class IssuerTest {
         //given
         //when
         issuerFixture.automaticIssue(10);
-        Statics statics = issuerFixture.issuedTicketStatistics(new Ticket("1, 2, 3, 4, 5, 6").winnerTicket(new LottoNumber(7)));
+        Statics statics = issuerFixture.issuedTicketStatistics(new WinnerTicket(new Ticket("1, 2, 3, 4, 5, 6"), new LottoNumber(7)));
         //then
         assertNotNull(statics);
     }

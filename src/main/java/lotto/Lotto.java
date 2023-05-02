@@ -27,7 +27,7 @@ public class Lotto {
 
         outputPresent.presentTickets(tickets, issuer.issuedTickets());
 
-        WinnerTicket winnerTicket = inputPresent.winningNumbers().winnerTicket(inputPresent.bonusNumber());
+        WinnerTicket winnerTicket = new WinnerTicket(inputPresent.winningNumbers(), inputPresent.bonusNumber());
         Statics statics = issuer.issuedTicketStatistics(winnerTicket);
         outputPresent.presentWinners(new WinnerPresentDTO(statics));
         outputPresent.presentIncome(new IncomePresentDTO(statics));

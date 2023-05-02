@@ -84,7 +84,7 @@ public class TicketTest {
         //given
         Ticket ticket = new Ticket(Set.of(2, 4, 6, 8, 16, 32));
         //when
-        WinnerTicket winnerTicket = ticket.winnerTicket(new LottoNumber(1));
+        WinnerTicket winnerTicket = new WinnerTicket(ticket, new LottoNumber(1));
         //then
         assertThat(winnerTicket.ticket().toString())
                 .as("당첨권의 숫자와 Ticket 인스턴스의 숫자는 일치한다")
