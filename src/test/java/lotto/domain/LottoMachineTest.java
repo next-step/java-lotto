@@ -19,7 +19,7 @@ public class LottoMachineTest {
 	}
 
 	@DisplayName("구매한 만큼의 로또를 생성한다. - 예외 케이스")
-	@ValueSource(longs = {800, 1400})
+	@ValueSource(longs = {800, 900})
 	@ParameterizedTest
 	void test2(long purchaseAmount) {
 		assertThatIllegalArgumentException().isThrownBy(() -> new LottoMachine(purchaseAmount));
