@@ -12,4 +12,8 @@ public class Tickets {
     public List<Ticket> getTickets() {
         return tickets;
     }
+
+    public int count() {
+        return tickets.size();
+    }
 }

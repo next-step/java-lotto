@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class WinnerTicketTest {
 
     private WinnerTicket winnerTicketFixture;
-    private List<Ticket> ticketsFixture;
+    private Tickets ticketsFixture;
 
     @BeforeEach
     public void beforeEach() {
@@ -38,13 +38,13 @@ public class WinnerTicketTest {
         Ticket fifthC = new Ticket(Set.of(1, 2, 4, 35, 36, 37));
         Ticket fifthD = new Ticket(Set.of(1, 2, 4, 25, 36, 27));
         Ticket fifthE = new Ticket(Set.of(1, 2, 4, 35, 26, 17));
-        ticketsFixture = List.of(
+        ticketsFixture = new Tickets(List.of(
                 first,
                 secondA, secondB,
                 thirdA, thirdB, thirdC,
                 fourthA, fourthB, fourthC, fourthD,
                 fifthA, fifthB, fifthC, fifthD, fifthE
-        );
+        ));
     }
 
     @DisplayName("보너스 숫자 여부를 판별한다")

@@ -39,16 +39,16 @@ public class Issuer {
         return RANDOM.nextInt(44) + 1;
     }
 
-    public List<Ticket> issuedTickets() {
-        return tickets;
+    public Tickets issuedTickets() {
+        return new Tickets(tickets);
     }
 
     public Statics issuedTicketStatistics(WinnerTicket winnerTicket) {
-        return new Statics(tickets, winnerTicket);
+        return new Statics(new Tickets( tickets), winnerTicket);
     }
 
 
-    public void manualIssue(List<Ticket> manualPurchases) {
+    public void manualIssue(Tickets manualPurchases) {
 
     }
 }

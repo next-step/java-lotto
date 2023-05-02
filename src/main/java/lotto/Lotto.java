@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Issuer;
 import lotto.domain.Statics;
 import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 import lotto.domain.WinnerTicket;
 import lotto.present.InputPresent;
 import lotto.present.OutputPresent;
@@ -22,9 +23,9 @@ public class Lotto {
         //구매수량
         int totalPurchaseCount = inputPresent.purchaseCount();
         //수동발행
-        List<Ticket> tickets = inputPresent.manualPurchases();
+        Tickets tickets = inputPresent.manualPurchases();
         issuer.manualIssue(tickets);
-        issuer.automaticIssue(totalPurchaseCount - tickets.size());
+        issuer.automaticIssue(totalPurchaseCount - tickets.count());
 
 
         outputPresent.presentTickets(tickets,issuer.issuedTickets());

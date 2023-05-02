@@ -2,6 +2,7 @@ package lotto.present;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +43,14 @@ public class InputPresent {
         return new LottoNumber(Integer.parseInt(s));
     }
 
-    public List<Ticket> manualPurchases() {
+    public Tickets manualPurchases() {
         List<Ticket> tickets = new ArrayList<>();
         System.out.printf(PURCHASE_MANUAL,System.lineSeparator());
         int iter = Integer.parseInt(scanner.nextLine());
         for(int i=0 ; i<iter ; i++) {
             tickets.add(manualPurchase(scanner.nextLine()));
         }
-        return tickets;
+        return new Tickets(tickets);
     }
 
     private Ticket manualPurchase(String nextLine) {

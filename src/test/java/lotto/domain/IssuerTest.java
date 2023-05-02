@@ -23,7 +23,7 @@ public class IssuerTest {
         //when
         issuerFixture.automaticIssue(input);
         //then
-        assertThat(issuerFixture.issuedTickets()).hasSize(input);
+        assertThat(issuerFixture.issuedTickets().getTickets()).hasSize(input);
     }
 
     @DisplayName("Statics 클래스를 생성한다")

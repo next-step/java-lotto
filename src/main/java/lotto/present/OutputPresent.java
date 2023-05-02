@@ -1,6 +1,7 @@
 package lotto.present;
 
 import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 import lotto.present.dto.IncomePresentDTO;
 import lotto.present.dto.WinnerPresentDTO;
 
@@ -35,12 +36,12 @@ public class OutputPresent {
         System.out.print(incomePresentDTO.getBreakEvenMessage());
     }
 
-    public void presentTickets(List<Ticket> manualTickets,List<Ticket> autoTickets) {
-        System.out.printf(CONFIRM_PURCHASE, manualTickets.size(), autoTickets.size(), System.lineSeparator());
-        for (Ticket ticket : manualTickets) {
+    public void presentTickets(Tickets manualTickets, Tickets autoTickets) {
+        System.out.printf(CONFIRM_PURCHASE, manualTickets.count(), autoTickets.count(), System.lineSeparator());
+        for (Ticket ticket : manualTickets.getTickets()) {
             System.out.println(ticket.toString());
         }
-        for (Ticket ticket : autoTickets) {
+        for (Ticket ticket : autoTickets.getTickets()) {
             System.out.println(ticket.toString());
         }
     }

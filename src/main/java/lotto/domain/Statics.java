@@ -14,14 +14,14 @@ public class Statics {
     private final int income;
     private final double profitRatio;
 
-    public Statics(List<Ticket> tickets, WinnerTicket winnerTicket) {
+    public Statics(Tickets tickets, WinnerTicket winnerTicket) {
         this.countFirst = aggregate(tickets, winnerTicket, Prize.FIRST);
         this.countSecond = aggregate(tickets, winnerTicket, Prize.SECOND);
         this.countThird = aggregate(tickets, winnerTicket, Prize.THIRD);
         this.countFourth = aggregate(tickets, winnerTicket, Prize.FOURTH);
         this.countFifth = aggregate(tickets, winnerTicket, Prize.FIFTH);
         this.income = aggregateIncome();
-        this.profitRatio = aggregateProfitRatio(tickets.size(), this.income);
+        this.profitRatio = aggregateProfitRatio(tickets.count(), this.income);
     }
 
     private double aggregateProfitRatio(int ticketCount, int income) {
@@ -40,7 +40,7 @@ public class Statics {
         return income;
     }
 
-    private int aggregate(List<Ticket> challengerTickets, WinnerTicket winnerTicket, Prize prize) {
+    private int aggregate(Tickets challengerTickets, WinnerTicket winnerTicket, Prize prize) {
         return winnerTicket.countWinner(challengerTickets, prize);
     }
 

@@ -19,9 +19,9 @@ public class WinnerTicket {
         return ticket.includeNumber(this.bonusNumber);
     }
 
-    public int countWinner(List<Ticket> challengeTickets, Prize prize) {
+    public int countWinner(Tickets challengeTickets, Prize prize) {
         int count = 0;
-        for (Ticket ticket : challengeTickets) {
+        for (Ticket ticket : challengeTickets.getTickets()) {
             count = count + (isWinner(ticket, prize) ? 1 : 0);
         }
         return count;
