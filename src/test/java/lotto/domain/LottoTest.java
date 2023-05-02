@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoTest {
 
@@ -28,5 +30,12 @@ public class LottoTest {
 		Lotto lotto = new Lotto(1, 3, 5, 14, 22, 45);
 		Score score = lotto.calculateScore(new Lotto(1, 3, 5, 22, 45, 40), LottoNumber.of(23));
 		assertThat(score).isEqualTo(new Score(5, 0));
+	}
+
+	@DisplayName("랭크를 추출한다.")
+	@CsvSource(value = {"6,0,FIRST", "5,1,SECOND", "5,0,THIRD", "4,0,FOURTH", "3,0,FIFTH", "2,0,MISS", "1,0,MISS", "0,0,MISS"}, delimiter = ',')
+	@ParameterizedTest
+	void test4(int score, int bonusScore, Rank rank) {
+		assertThat(new Lotto(new Score(score, bonusScore)).rank()).isEqualTo(rank);
 	}
 }

@@ -38,6 +38,12 @@ public class Lotto {
 	}
 
 	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
+	public Lotto(Score score) {
+		this.lottoNumbers = new LottoNumbers();
+		this.score = score;
+	}
+
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = new LottoNumbers(lottoNumbers);
 		this.score = new Score(0);

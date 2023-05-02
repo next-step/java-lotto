@@ -46,6 +46,16 @@ public class LottoNumbers {
 			.mapToObj(LottoNumber::of).collect(Collectors.toList());
 	}
 
+	public int matchCount(LottoNumbers winNumbers) {
+		int matchCount = 0;
+		for (LottoNumber lottoNumber : this.lottoNumbers) {
+			if (winNumbers.contains(lottoNumber)) {
+				matchCount++;
+			}
+		}
+		return matchCount;
+	}
+
 	public boolean contains(LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
@@ -68,15 +78,5 @@ public class LottoNumbers {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
-	}
-
-	public int matchCount(LottoNumbers winNumbers) {
-		int matchCount = 0;
-		for (LottoNumber lottoNumber : this.lottoNumbers) {
-			if (winNumbers.contains(lottoNumber)) {
-				matchCount++;
-			}
-		}
-		return matchCount;
 	}
 }
