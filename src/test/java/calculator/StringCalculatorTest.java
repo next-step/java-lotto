@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.StringCalculator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
