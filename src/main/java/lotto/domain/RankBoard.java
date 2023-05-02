@@ -32,7 +32,7 @@ public class RankBoard {
 			.collect(Collectors.toList());
 	}
 
-	public Integer winCount(Rank rank) {
+	public Integer winningCount(Rank rank) {
 		return this.rankBoard.get(rank);
 	}
 }

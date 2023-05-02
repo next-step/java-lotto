@@ -26,22 +26,22 @@ public class Lotto {
 		this.score = new Score(0);
 	}
 
-	public Score calculateScore(WinNumbers winNumbers) {
-		for (LottoNumber winNumber : winNumbers.getWinNumbers()) {
-			this.plusScore(winNumber);
+	public Score calculateScore(WinningNumbers winningNumbers) {
+		for (LottoNumber winningNumber : winningNumbers.getWinningNumbers()) {
+			this.plusScore(winningNumber);
 		}
 		return this.score;
 	}
 
-	private void plusScore(LottoNumber winNumber) {
-		if (this.lottoNumbers.contains(winNumber)) {
+	private void plusScore(LottoNumber winningNumber) {
+		if (this.lottoNumbers.contains(winningNumber)) {
 			this.score.plus();
 		}
 	}
 
-	public Score calculateScore(WinNumbers winNumbers, LottoNumber bonusNumber) {
-		for (LottoNumber winNumber : winNumbers.getWinNumbers()) {
-			this.plusScore(winNumber);
+	public Score calculateScore(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+		for (LottoNumber winningNumber : winningNumbers.getWinningNumbers()) {
+			this.plusScore(winningNumber);
 		}
 		this.plusBonusScore(bonusNumber);
 		return this.score;

@@ -20,9 +20,9 @@ public class PurchasedLottos {
 		this.purchasedLottos.add(lotto);
 	}
 
-	public void calculateScore(WinNumbers winNumbers, LottoNumber bonusNumber) {
+	public void calculateScore(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
 		for (Lotto lotto : this.purchasedLottos) {
-			lotto.calculateScore(winNumbers, bonusNumber);
+			lotto.calculateScore(winningNumbers, bonusNumber);
 		}
 	}
 

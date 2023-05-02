@@ -16,7 +16,7 @@ public class LottoTest {
 			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
 			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
 		));
-		assertThat(lotto.calculateScore(new WinNumbers("1, 2, 3, 4, 5, 6"))).isEqualTo(new Score(3));
+		assertThat(lotto.calculateScore(new WinningNumbers("1, 2, 3, 4, 5, 6"))).isEqualTo(new Score(3));
 	}
 
 	@DisplayName("로또 넘버에 보너스 넘버가 있는 경우.")
@@ -26,7 +26,7 @@ public class LottoTest {
 			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
 			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
 		));
-		Score score = lotto.calculateScore(new WinNumbers("1, 3, 5, 22, 45, 40"), new LottoNumber(14));
+		Score score = lotto.calculateScore(new WinningNumbers("1, 3, 5, 22, 45, 40"), new LottoNumber(14));
 		assertThat(score).isEqualTo(new Score(5, 1));
 	}
 
@@ -37,7 +37,7 @@ public class LottoTest {
 			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
 			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
 		));
-		Score score = lotto.calculateScore(new WinNumbers("1, 3, 5, 22, 45, 40"), new LottoNumber(23));
+		Score score = lotto.calculateScore(new WinningNumbers("1, 3, 5, 22, 45, 40"), new LottoNumber(23));
 		assertThat(score).isEqualTo(new Score(5, 0));
 	}
 }

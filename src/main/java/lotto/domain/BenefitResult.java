@@ -32,7 +32,7 @@ public class BenefitResult {
 		this.totalProfit = 0;
 	}
 
-	public long totalProfit(List<RankSituation> rankSituations) {
+	private long totalProfit(List<RankSituation> rankSituations) {
 		long totalProfit = 0;
 		for (RankSituation rankSituation : rankSituations) {
 			totalProfit += rankSituation.calculateProfit();
