@@ -20,7 +20,7 @@ public class LottoMain {
 		ResultView.printCurrentSituation(lottoMachine.getPurchasedLottos());
 
 		WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinNumbers());
-		LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+		LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
 
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 		winningLotto.calculateScore(lottoMachine.getPurchasedLottos());

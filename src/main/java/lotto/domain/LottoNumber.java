@@ -1,19 +1,31 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public class LottoNumber {
 
 	public static final int MINIMUM_BOUND = 1;
 	public static final int MAXIMUM_BOUND = 45;
+	private final static Map<Integer, LottoNumber> LOTTO_NUMBERS_POCKET = new HashMap<>();
 
 	private final int lottoNumber;
 
-	public LottoNumber(int lottoNumber) {
-		if (lottoNumber < LottoNumber.MINIMUM_BOUND || lottoNumber > LottoNumber.MAXIMUM_BOUND) {
-			throw new IllegalArgumentException(String.format("로또 넘버는 %d~%d까지의 숫자만 입력 가능합니다.", LottoNumber.MINIMUM_BOUND, LottoNumber.MAXIMUM_BOUND));
+	static {
+		for (int number = LottoNumber.MINIMUM_BOUND; number <= LottoNumber.MAXIMUM_BOUND; number++) {
+			LottoNumber.LOTTO_NUMBERS_POCKET.put(number, new LottoNumber(number));
 		}
+	}
+
+	private LottoNumber(int lottoNumber) {
 		this.lottoNumber = lottoNumber;
+	}
+
+	public static LottoNumber of(int lottoNumber) {
+		return Optional.ofNullable(LottoNumber.LOTTO_NUMBERS_POCKET.get(lottoNumber))
+			.orElseThrow(() -> new IllegalArgumentException("로또 넘버의 범위를 벗어났습니다."));
 	}
 
 	@Override

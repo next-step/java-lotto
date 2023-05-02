@@ -31,7 +31,7 @@ public class WinningNumbers {
 	private void addWinNumbers(String[] split) {
 		for (String winNumberString : split) {
 			int winNumber = this.toInt(winNumberString);
-			this.winningNumbers.add(new LottoNumber(winNumber));
+			this.winningNumbers.add(LottoNumber.of(winNumber));
 		}
 	}
 

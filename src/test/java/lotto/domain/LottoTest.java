@@ -13,8 +13,8 @@ public class LottoTest {
 	@Test
 	void test1() {
 		Lotto lotto = new Lotto(Arrays.asList(
-			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
-			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
+			LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(5),
+			LottoNumber.of(14), LottoNumber.of(22), LottoNumber.of(45)
 		));
 		assertThat(lotto.calculateScore(new WinningNumbers("1, 2, 3, 4, 5, 6"))).isEqualTo(new Score(3));
 	}
@@ -23,10 +23,10 @@ public class LottoTest {
 	@Test
 	void test2() {
 		Lotto lotto = new Lotto(Arrays.asList(
-			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
-			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
+			LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(5),
+			LottoNumber.of(14), LottoNumber.of(22), LottoNumber.of(45)
 		));
-		Score score = lotto.calculateScore(new WinningNumbers("1, 3, 5, 22, 45, 40"), new LottoNumber(14));
+		Score score = lotto.calculateScore(new WinningNumbers("1, 3, 5, 22, 45, 40"), LottoNumber.of(14));
 		assertThat(score).isEqualTo(new Score(5, 1));
 	}
 
@@ -34,10 +34,10 @@ public class LottoTest {
 	@Test
 	void test3() {
 		Lotto lotto = new Lotto(Arrays.asList(
-			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
-			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
+			LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(5),
+			LottoNumber.of(14), LottoNumber.of(22), LottoNumber.of(45)
 		));
-		Score score = lotto.calculateScore(new WinningNumbers("1, 3, 5, 22, 45, 40"), new LottoNumber(23));
+		Score score = lotto.calculateScore(new WinningNumbers("1, 3, 5, 22, 45, 40"), LottoNumber.of(23));
 		assertThat(score).isEqualTo(new Score(5, 0));
 	}
 }

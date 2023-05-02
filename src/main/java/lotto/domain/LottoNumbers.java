@@ -20,7 +20,7 @@ public class LottoNumbers {
 		List<Integer> autoLottoNumbers = LottoNumbers.NUMBERS.subList(0, Lotto.SIZE);
 		this.lottoNumbers = new ArrayList<>();
 		for (int lottoNumber : autoLottoNumbers) {
-			this.lottoNumbers.add(new LottoNumber(lottoNumber));
+			this.lottoNumbers.add(LottoNumber.of(lottoNumber));
 		}
 	}
 
