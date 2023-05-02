@@ -7,7 +7,7 @@ public class Tickets {
     private final List<Ticket> tickets;
 
     public Tickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>(tickets);
     }
 
     public static Tickets emptyTickets() {
