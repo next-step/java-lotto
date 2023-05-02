@@ -15,7 +15,7 @@ public class LottosTest {
 
         Lottos lottos = Lottos.of(lotto1, lotto2);
 
-        assertThat(lottos.price()).isEqualTo(2000);
+        assertThat(lottos.price()).isEqualTo(new Price(2000));
     }
 
 }

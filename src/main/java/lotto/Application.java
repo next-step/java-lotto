@@ -16,17 +16,22 @@ import lotto.view.input.*;
 public class Application {
 
     public static void main(String[] args) {
-        IntegerInput lottoPrice = new IntegerInput(new LottoPriceView());
-        IntegerInput manualCount = new IntegerInput(new LottoManualCountView());
+        IntegerInput lottoPriceInput = new IntegerInput(new LottoPriceView());
+        IntegerInput manualCountInput = new IntegerInput(new LottoManualCountView());
 
-        int price = lottoPrice.getValue();
-        int count = manualCount.getValue();
+        int price = lottoPriceInput.getValue();
+        Price totalPrice = new Price(price);
 
-        LottoInput manualLottos = new LottoInput(new LottoManualsView());
-        Lottos manuals = Lottos.of(manualLottos.getValues(count));
+        int count = manualCountInput.getValue();
+        Count manualCount = new Count(count);
+
+        LottoInput manualLottosInput = new LottoInput(new LottoManualsView());
+        Lottos manuals = Lottos.of(manualLottosInput.getValues(manualCount.value()));
 
         LottoGenerator generator = new LottoGenerator();
-        Lottos autos = generator.generate(price - manuals.price());
+        Price autoPrice = totalPrice.minus(manuals.price());
+        Count autolottoCount = Count.of(autoPrice);
+        Lottos autos = generator.generate(autolottoCount);
 
         LottosDto manualDtos = LottosDto.from(manuals);
         LottosDto autoDtos = LottosDto.from(autos);

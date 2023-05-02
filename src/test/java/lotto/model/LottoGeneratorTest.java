@@ -2,29 +2,33 @@ package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGeneratorTest {
 
     private final LottoGenerator generator = new LottoGenerator();
 
     @ParameterizedTest
-    @DisplayName("금액에 따라 적절한 로또 개수를 발급한다")
-    @CsvSource(value = {"1000=1", "10000=10"}, delimiter = '=')
-    public void count(int price, int expected) {
-        Lottos lottos = generator.generate(price);
-        assertThat(lottos).hasSize(expected);
+    @DisplayName("로또를 정확한 개수로 발급한다")
+    @ValueSource(ints = {1, 5})
+    public void count(int input) {
+        Count count = new Count(input);
+
+        Lottos lottos = generator.generate(count);
+
+        assertThat(lottos).hasSize(input);
     }
 
     @ParameterizedTest
-    @DisplayName("로또를 하나도 살 수 없다면 예외가 난다.")
-    @ValueSource(ints = {Lotto.PRICE - 1, 0, -1000})
-    public void cannotBuy(int price) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> generator.generate(price));
+    @NullSource
+    @DisplayName("Count가 `null`이면 예외 발생")
+    public void nullException(Count count) {
+        assertThatThrownBy(() -> {
+            generator.generate(count);
+        });
     }
 }

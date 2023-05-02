@@ -10,9 +10,6 @@ public class Lottos implements Iterable<Lotto> {
 
     private Lottos(List<Lotto> lottos) {
         Objects.requireNonNull(lottos);
-        if (lottos.isEmpty()) {
-            throw new IllegalArgumentException("there are no lottos");
-        }
         this.lottos = lottos;
     }
 
@@ -28,8 +25,8 @@ public class Lottos implements Iterable<Lotto> {
         return lottos.stream();
     }
 
-    public int price() {
-        return lottos.size() * Lotto.PRICE;
+    public Price price() {
+        return new Price(lottos.size() * Lotto.PRICE);
     }
 
     public int size() {
