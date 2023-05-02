@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import step2.domain.BonusNumber;
 import step2.domain.LotteryWin;
 import step2.domain.Lotto;
 import step2.domain.PurchasedLotto;
@@ -40,7 +39,7 @@ public class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(this.lottoList);
+            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
             assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FIFTH.getWinningMoney());
         }
@@ -52,7 +51,7 @@ public class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(this.lottoList);
+            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
             assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FOURTH.getWinningMoney());
         }
@@ -64,7 +63,7 @@ public class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(this.lottoList);
+            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
             assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
         }
@@ -76,7 +75,7 @@ public class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(this.lottoList);
+            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
             assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FIRST.getWinningMoney());
         }
@@ -88,7 +87,7 @@ public class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(this.lottoList);
+            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
             assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
         }
@@ -100,7 +99,7 @@ public class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(this.lottoList);
+            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
             assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.SECOND.getWinningMoney());
         }
@@ -121,21 +120,13 @@ public class LottoMatchTest {
         }
 
 
-        @DisplayName("당첨 금액을 나타낼 수 있다(보너스 숫자 포함).")
-        @Test
-        void test1() throws Exception {
-            lotteryWin.confirm(purchasedLotto.get());
-
-            assertThat(purchasedLotto.getSumOfWinningMoney()).isEqualTo(2031555000);
-        }
 
         @DisplayName("수익률을 나타낼 수 있다(보너스 숫자 포함).")
         @Test
         void test2() throws Exception {
-            lotteryWin.confirm(purchasedLotto.get());
+            lotteryWin.confirm(purchasedLotto);
 
-            String rateOfReturn =
-                lotteryWin.getRateOfReturn(5000, purchasedLotto.getSumOfWinningMoney());
+            String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
             assertThat(rateOfReturn).isEqualTo("406311.00");
         }

@@ -1,6 +1,7 @@
 package step2;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -10,27 +11,28 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.BonusNumber;
 import step2.domain.LotteryWin;
-import step2.domain.Lotto;
 import step2.domain.LottoFactory;
 import step2.domain.PurchasedLotto;
+import step2.domain.TotalNumbers;
 import step2.domain.WinningNumbers;
+import step2.exception.CustomNumberFormatException;
 
 class LottoTest {
 
     @DisplayName("로또 번호 6자리를 출력한다.")
     @Test
     void test1() throws Exception {
-        Lotto lotto = Lotto.issue();
+        TotalNumbers totalNumbers = new TotalNumbers();
 
-        assertThat(lotto.getNumbers()).hasSize(6);
+        assertThat(totalNumbers.getRandomLottoNumber()).hasSize(6);
     }
 
     @DisplayName("로또 번호가 오름차순으로 정렬된다.")
     @Test
     void test4() throws Exception {
-        Lotto lotto = Lotto.issue();
+        TotalNumbers totalNumbers = new TotalNumbers();
 
-        assertThat(lotto.getNumbers()).isSorted();
+        assertThat(totalNumbers.getRandomLottoNumber()).isSorted();
     }
 
     @ParameterizedTest(name = "입력 금액만큼 로또를 구매한다.")
@@ -56,9 +58,9 @@ class LottoTest {
     void test6() throws Exception {
         String str = "1,3,5,f,8";
 
-        assertThatThrownBy(() ->
-            new WinningNumbers(str)
-        ).isInstanceOf(IllegalArgumentException.class);
+        assertThatExceptionOfType(CustomNumberFormatException.class)
+            .isThrownBy(() -> new WinningNumbers(str))
+            .withMessageMatching("For input string: \\D+");
     }
 
     @DisplayName("당첨 숫자가 45를 넘어가는 숫자가 포함될 경우 예외를 던진다.")
@@ -68,7 +70,8 @@ class LottoTest {
 
         assertThatThrownBy(() ->
             new WinningNumbers(str)
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("유효하지 않은 숫자입니다.");
     }
 
     @DisplayName("당첨 숫자가 1이하의 숫자가 포함될 경우 예외를 던진다.")
@@ -78,7 +81,8 @@ class LottoTest {
 
         assertThatThrownBy(() ->
             new WinningNumbers(str)
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("유효하지 않은 숫자입니다.");
     }
 
     @ParameterizedTest(name = "보너스 숫자가 유효 범위가 아닐 경우 에외를 던진다.")
