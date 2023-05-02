@@ -24,10 +24,10 @@ public class Lotto {
         }
     }
 
-    public LottoRank countWinNum(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
+    public LottoRank countWinNumber(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
         Integer countWinNumber = 0;
-        for (LottoNumber winNum : winNumbers) {
-            countWinNumber = countMatchingNumbers(countWinNumber, winNum);
+        for (LottoNumber winNumber : winNumbers) {
+            countWinNumber = countMatchingNumbers(countWinNumber, winNumber);
         }
 
         if (isSeconds(countWinNumber, bonusNumber)) {
@@ -36,8 +36,8 @@ public class Lotto {
         return LottoRank.getLottoNumber(countWinNumber);
     }
 
-    private Integer countMatchingNumbers(Integer countWinNumber, LottoNumber winNum) {
-        if (lottoNumbers.contains(winNum)) {
+    private Integer countMatchingNumbers(Integer countWinNumber, LottoNumber winNumber) {
+        if (lottoNumbers.contains(winNumber)) {
             countWinNumber++;
         }
         return countWinNumber;

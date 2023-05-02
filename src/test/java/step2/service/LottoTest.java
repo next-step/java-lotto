@@ -33,7 +33,7 @@ public class LottoTest {
     @MethodSource("provideLottoNumbersAndWinNumbers")
     void countWinNumTest(List<LottoNumber> lottoNumbers, List<LottoNumber> winNumbers, LottoNumber bonusNumber, LottoRank expected) {
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoRank result = lotto.countWinNum(winNumbers, bonusNumber);
+        LottoRank result = lotto.countWinNumber(winNumbers, bonusNumber);
         assertThat(result).isEqualTo(expected);
     }
 

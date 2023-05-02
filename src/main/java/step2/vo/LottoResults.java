@@ -20,7 +20,7 @@ public class LottoResults {
 
     public List<LottoRank> countNumOfWinner(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
         return lottoResults.stream()
-                .map(lotto -> lotto.countWinNum(winNumbers, bonusNumber))
+                .map(lotto -> lotto.countWinNumber(winNumbers, bonusNumber))
                 .collect(Collectors.toList());
     }
 }
