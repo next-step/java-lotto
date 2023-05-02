@@ -23,7 +23,4 @@ public class WinningNumbers {
     return winningNumbers.contains(number);
   }
 
-  public void addBonusNumber(int bonusNumber) {
-    winningNumbers.add(bonusNumber);
-  }
 }
