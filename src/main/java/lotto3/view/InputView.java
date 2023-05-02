@@ -80,4 +80,23 @@ public class InputView {
         .map(Integer::parseInt)
         .collect(Collectors.toList());
   }
+
+  public static int scanBonusNumber() {
+    System.out.println("보너스 볼을 입력해 주세요.");
+    String bonusNumber = SCANNER.nextLine();
+    validateBonusNumber(bonusNumber);
+    return Integer.parseInt(bonusNumber);
+  }
+
+  private static void validateBonusNumber(String bonusNumber) {
+    if (isBlank(bonusNumber)) {
+      throw new IllegalArgumentException("보너스 볼을 입력해 주세요.");
+    }
+    if (!isNumber(bonusNumber)) {
+      throw new IllegalArgumentException("보너스 볼은 숫자만 입력 가능합니다.");
+    }
+    if (!isBetweenOneAndFortyFive(bonusNumber)) {
+      throw new IllegalArgumentException("보너스 볼은 1부터 45까지의 숫자만 가능합니다.");
+    }
+  }
 }
