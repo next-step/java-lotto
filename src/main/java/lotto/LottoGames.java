@@ -20,9 +20,9 @@ public class LottoGames {
         }
     }
 
-//    public int size() {
-//        return this.lottoGameList.size();
-//    }
+    protected int size() {
+        return this.lottoGameList.size();
+    }
 
     private int sum() {
         return lottoGameList.stream()
