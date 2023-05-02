@@ -8,13 +8,13 @@ import java.util.Set;
 
 public class Issuer {
     private final Random RANDOM = new Random();
-    private final List<Ticket> tickets;
+    private final Tickets tickets;
 
     public void issueTickets(List<Ticket> purchaseLotto) {
         throw new RuntimeException("Not Yet Implemented : 티켓 리스트를 입력받음");
     }
     public Issuer() {
-        this.tickets = new ArrayList<>();
+        this.tickets = new Tickets(new ArrayList<>());
     }
 
     public void automaticIssue(int ticketCount) {
@@ -23,9 +23,6 @@ public class Issuer {
         }
     }
 
-    public void mannualIssue(List<Ticket> tickets) {
-        throw new RuntimeException("Not Yet Implemented");
-    }
 
     private Set<Integer> issueNumbers() {
         Set<Integer> numbers = new HashSet<>();
@@ -40,15 +37,15 @@ public class Issuer {
     }
 
     public Tickets issuedTickets() {
-        return new Tickets(tickets);
+        return tickets;
     }
 
     public Statics issuedTicketStatistics(WinnerTicket winnerTicket) {
-        return new Statics(new Tickets( tickets), winnerTicket);
+        return new Statics(tickets, winnerTicket);
     }
 
 
     public void manualIssue(Tickets manualPurchases) {
-
+        tickets.add(manualPurchases);
     }
 }
