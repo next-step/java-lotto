@@ -1,8 +1,10 @@
 package lotto.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 
 public class RandomUtil {
@@ -16,6 +18,9 @@ public class RandomUtil {
         for (int i = 0; i < size; i++) {
             list.add(getRandomValue(range));
         }
+
+        Collections.shuffle(list);
+
         return list;
     }
 

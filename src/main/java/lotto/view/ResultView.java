@@ -11,23 +11,19 @@ public class ResultView {
     private static String STATISTIC_FORMAT = "%s개 일치 (%s원)- %s개";
     private static String PROFIT_FORMAT = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-
     public static void showWinningStatistics(Map<Ranking, List<Lotto>> results){
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Map.Entry<Ranking, List<Lotto>> entry:results.entrySet()) {
-            showStatistics(entry.getKey(), entry.getValue().size());
+            System.out.println(showStatistics(entry.getKey(), entry.getValue().size()));
         }
     }
 
-
-    public static void showStatistics(Ranking ranking, int count){
-        System.out.println(
-                String.format(STATISTIC_FORMAT,
+    public static String showStatistics(Ranking ranking, int count){
+        return String.format(STATISTIC_FORMAT,
                         ranking.getCount(),
                         ranking.getReword(),
-                        count)
-        );
+                        count);
     }
 
     public static void showProfit(Map<Ranking, List<Lotto>> results, int input){
