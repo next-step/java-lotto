@@ -43,8 +43,8 @@ public class LottoTickets {
     List<Prize> prizes = new ArrayList<>();
     for (LottoTicket ticket : tickets) {
       int matchCount = ticket.matchCount(winningNumbers);
-      boolean matchBonusNumber = ticket.contains(bonusNumber);
-      Prize prize = Prize.valueOfMatchCountAndBonusNumber(matchCount, matchBonusNumber);
+      boolean isMatchedBonusNumber = ticket.contains(bonusNumber);
+      Prize prize = Prize.valueOfMatchCountAndBonusNumber(matchCount, isMatchedBonusNumber);
       prizes.add(prize);
     }
 
