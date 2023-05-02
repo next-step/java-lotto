@@ -1,0 +1,89 @@
+package calculator;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
+public class StringCalculatorTest {
+    @DisplayName("유효하지 않은 값이 입력된 경우 IllegalArgumentException 예외가 발생하는지 확인")
+    @ParameterizedTest(name = "textInput : {0}")
+    @NullAndEmptySource
+    void pass_null_or_blank_value_illegal_argument_exception(String textInput) {
+        assertThatThrownBy(() -> StringCalculator.split(textInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력된 문자열이 null 또는 공백 일 수 없습니다.");
+    }
+
+    @DisplayName("공백을 포함한 입력된 문자열을 빈공백 기준으로 분리가 되는지 확인")
+    @Test
+    void split_success() {
+        assertThat(StringCalculator.split("1 + 3")).containsExactly("1", "+", "3");
+    }
+
+    @DisplayName("입력된 문자열을 빈공백 기준으로 분리 시, 배열의 사이즈가 짝수가 반환되는 경우 IllegalArgumentException 예외가 발생하는지 확인")
+    @Test
+    void split_array_size_even_number_illegal_argument_exception() {
+        assertThatThrownBy(() -> StringCalculator.split("1 + "))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("분리된 문자열 배열 size 는 짝수 일 수 없습니다.");
+    }
+
+    @DisplayName("입력된 문자열을 빈공백 기준으로 분리 시, 홀수번째 원소가 숫자가 아닌 경우 IllegalArgumentException 예외가 발생하는지 확인")
+    @Test
+    void split_array_element_odd_number_illegal_argument_exception() {
+        assertThatThrownBy(() -> StringCalculator.split("1 + ㄱ"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자 이외의 값은 입력할 수 없습니다.");
+    }
+
+    @DisplayName("입력된 문자열을 빈공백 기준으로 분리 시, 짝수번째 원소가 사칙연산 기호가 아닌 경우 IllegalArgumentException 예외가 발생하는지 확인")
+    @Test
+    void split_array_element_even_number_illegal_argument_exception() {
+        assertThatThrownBy(() -> StringCalculator.split("1 ㄱ 3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("사칙연산 기호 이외의 값은 입력할 수 없습니다.");
+    }
+
+    @DisplayName("덧셈 사칙연산 기호가 포함 된 입력된 문자열이 덧셈 사칙연산 결과가 반환되는지 확인")
+    @Test
+    void plus() {
+        assertThat(StringCalculator.calculate("0.1 + 0.2")).isEqualTo("0.3");
+    }
+
+    @DisplayName("뺄셈 사칙연산 기호가 포함 된 입력된 문자열이 뺄셈 사칙연산 결과가 반환되는지 확인")
+    @Test
+    void minus() {
+        assertThat(StringCalculator.calculate("2.2 - 1")).isEqualTo("1.2");
+    }
+
+    @DisplayName("곱셈 사칙연산 기호가 포함 된 입력된 문자열이 곱셈 사칙연산 결과가 반환되는지 확인")
+    @Test
+    void multiply() {
+        assertThat(StringCalculator.calculate("3.3 * 2")).isEqualTo("6.6");
+    }
+
+    @DisplayName("나눗셈 사칙연산 기호가 포함 된 입력된 문자열이 나눗셈 사칙연산의 정수 결과값이 반환되는지 확인")
+    @Test
+    void divide() {
+        assertThat(StringCalculator.calculate("11 / 2")).isEqualTo("5");
+    }
+
+    @DisplayName("나눗셈 사칙연산시 0으로 나누려는 경우 IllegalArgumentException 예외가 발생하는지 확인")
+    @Test
+    void divide_by_zero() {
+        assertThatThrownBy(() -> StringCalculator.calculate("4.7 / 0"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("0으로 나눌 수 없습니다.");
+    }
+
+    @DisplayName("입력된 순서대로 사칙연산이 되는지 확인")
+    @Test
+    void operate_multiple_values() {
+        assertThat(StringCalculator.calculate("1 + 5 * 3")).isEqualTo("18");
+    }
+
+}
