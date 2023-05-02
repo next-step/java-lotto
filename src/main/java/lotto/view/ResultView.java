@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoPrize;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 public class ResultView {
     public static void showLottos(Lottos lottos) {
@@ -21,7 +18,7 @@ public class ResultView {
     private static void showLotto(Lotto lotto) {
         int[] lottoNumbers = lotto.getLottoNumberSet()
                 .stream()
-                .mapToInt(it -> it)
+                .mapToInt(LottoNumber::getNumber)
                 .sorted()
                 .toArray();
 

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,14 +18,14 @@ public class LottosFactory {
     }
 
     private static Lotto makeRandomLotto() {
-        List<Integer> numbers = IntStream.rangeClosed(
-                        Lotto.MINIMUM_LOTTO_NUMBER,
-                        Lotto.MAXIMUM_LOTTO_NUMBER
+        List<LottoNumber> numbers = IntStream.rangeClosed(
+                        LottoNumber.MINIMUM_LOTTO_NUMBER,
+                        LottoNumber.MAXIMUM_LOTTO_NUMBER
                 )
-                .boxed()
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         Collections.shuffle(numbers);
 
-        return Lotto.from(numbers.subList(0, Lotto.LOTTO_NUMBER_SIZE));
+        return new Lotto(Set.copyOf(numbers.subList(0, Lotto.LOTTO_NUMBER_SIZE)));
     }
 }
