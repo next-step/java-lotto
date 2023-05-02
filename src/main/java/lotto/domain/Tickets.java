@@ -16,4 +16,12 @@ public class Tickets {
     public int count() {
         return tickets.size();
     }
+
+    public void add(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
+    public void add(Tickets tickets) {
+        this.tickets.addAll(tickets.getTickets());
+    }
 }
