@@ -47,6 +47,7 @@ public class InputPresent {
         Tickets tickets = emptyTickets();
         System.out.printf(PURCHASE_MANUAL, System.lineSeparator());
         int iter = Integer.parseInt(scanner.nextLine());
+        System.out.printf("수동으로 %d 개를 구매합니다%s", iter, System.lineSeparator());
         for (int i = 0; i < iter; i++) {
             tickets.add(manualPurchase(scanner.nextLine()));
         }
@@ -55,9 +56,9 @@ public class InputPresent {
 
 
     private Ticket manualPurchase(String nextLine) {
-
+        System.out.println(MANUAL_NUMBERS);
         Ticket ticket = new Ticket(nextLine);
-        System.out.printf("수동구매 = %s%s", ticket, System.lineSeparator());
+        System.out.printf("수동 구매 내역 확인 : %s%s", ticket, System.lineSeparator());
         return ticket;
     }
 }
