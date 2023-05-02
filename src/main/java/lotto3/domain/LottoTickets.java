@@ -7,6 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
+
   private final List<LottoTicket> tickets;
 
   public LottoTickets(List<LottoTicket> tickets) {
@@ -21,7 +22,7 @@ public class LottoTickets {
     return tickets;
   }
 
-  public Map<Prize, Long> calculateLotteryResults(List<Integer> winningNumbers) {
+  public LottoResults calculateLotteryResults(List<Integer> winningNumbers) {
     List<Prize> prizes = new ArrayList<>();
     for (LottoTicket ticket : tickets) {
       int matchCount = ticket.matchCount(winningNumbers);
@@ -32,8 +33,9 @@ public class LottoTickets {
     return convertMapWithPrize(prizes);
   }
 
-  private static Map<Prize, Long> convertMapWithPrize(List<Prize> prizes) {
-    return prizes.stream()
+  private static LottoResults convertMapWithPrize(List<Prize> prizes) {
+    Map<Prize, Long> results = prizes.stream()
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    return new LottoResults(results);
   }
 }

@@ -2,6 +2,7 @@ package lotto3.controller;
 
 import java.util.List;
 import java.util.Map;
+import lotto3.domain.LottoResults;
 import lotto3.domain.LottoTickets;
 import lotto3.domain.Prize;
 import lotto3.util.LottoFactory;
@@ -18,10 +19,10 @@ public class LottoController {
 
     List<Integer> winningNumbers = InputView.scanWinningNumbers();
 
-    Map<Prize, Long> lottoResults = tickets.calculateLotteryResults(winningNumbers);
+    LottoResults results = tickets.calculateLotteryResults(winningNumbers);
 
-    OutputView.printLottoResults(lottoResults);
-    OutputView.printProfitRate(lottoResults, investMoney);
+    OutputView.printLottoResults(results);
+    OutputView.printProfitRate(results.calculateProfitRate(investMoney));
   }
 
 }
