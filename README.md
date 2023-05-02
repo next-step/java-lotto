@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## step1 문자열 계산기
+- [x] 빈 문자열 예외처리
+- [x] 문자열 스플릿 처
+- [x] 연산자 및 숫자 틀린 입력위치 예외처리
+- [x] 연산자별 계산 메소드 구현
+- [x] 결과값 출력
