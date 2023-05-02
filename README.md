@@ -62,6 +62,15 @@
 - [x] LottoMachine과 PurchasedLottos에서 보너스 넘버를 계산하는 메서드를 호출한다.
 - [x] PrizeType enum 클래스에 보너스 타입을 추가한다.
 - [x] 2등인 경우 `보너스 볼 일치` 문자열을 추가해서 최종결과를 출력한다.
+- [ ] 수동으로 구매할 로또 수를 입력한다.
+  - [ ] 로또 유효성 검증을 통과하지 못할경우 IllegalArgumentException 예외를 던진다.
+- [ ] 수동으로 구매할 번호를 입력한다.
+  - [ ] 1~45까지의 수 6개를 수동으로 구매할 로또 수만큼 입력 받는다. 그외 케이스는 모두 IllegalArgumentException 예외를 던진다.
+- [ ] 자동으로 구매할 로또의 개수는 얼마인지 계산한다.
+- [ ] 수동으로 N장, 자동으로 N개를 구매했습니다. 문자열을 출력한다.
+  - [ ] 수동으로 구매한 로또를 먼저 출력한다.
+
+
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
