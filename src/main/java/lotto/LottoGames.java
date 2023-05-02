@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoGames {
 
@@ -9,7 +10,7 @@ public class LottoGames {
     private static final int LOTTO_SIZE = 6;
     private final List<Lotto> lottoGameList = new ArrayList<>();
     private Lotto firstLotto;
-    private final int[] result = new int[LOTTO_SIZE];
+    private final int[] lottoResult = new int[LOTTO_SIZE + 1];
 
     public LottoGames(List<String> lottoNumberList, String firstLottoNumber) {
         lottoNumberList.forEach(number -> lottoGameList.add(new Lotto(number)));
@@ -27,8 +28,8 @@ public class LottoGames {
     }
 
     private int sum() {
-        return lottoGameList.stream()
-                .mapToInt(lotto -> LottoPrize.findPrize(lotto.findMatchCount(firstLotto)))
+        return IntStream.range(3, LOTTO_SIZE)
+                .map(index -> LottoPrize.findPrize(index) * lottoResult[index])
                 .sum();
     }
 
@@ -37,10 +38,10 @@ public class LottoGames {
     }
 
     public void calculatePrizeCount() {
-        lottoGameList.forEach(lotto -> result[lotto.findMatchCount(firstLotto)]++);
+        lottoGameList.forEach(lotto -> lottoResult[lotto.findMatchCount(firstLotto)]++);
     }
 
-    protected int[] getResult() {
-        return result;
+    protected int[] getLottoResult() {
+        return lottoResult;
     }
 }
