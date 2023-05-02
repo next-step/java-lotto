@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.LottoGames;
-import lotto.LottoPrize;
+import lotto.domain.LottoGames;
+import lotto.domain.LottoPrize;
 
 import java.util.stream.IntStream;
 
