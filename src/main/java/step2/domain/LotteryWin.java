@@ -1,8 +1,5 @@
 package step2.domain;
 
-import static step2.domain.Ranking.SECOND;
-import static step2.domain.Ranking.THIRD;
-
 import java.util.List;
 
 public class LotteryWin {
@@ -17,19 +14,8 @@ public class LotteryWin {
     }
 
     public void confirm(PurchasedLotto lottoList) {
-        lottoList.matchRanking(this.winningNumbers);
-        List<Lotto> lottos = lottoList.findSecondCandidate();
-        for (Lotto lotto : lottos) {
-            applySecondOrThird(lotto);
-        }
-    }
-
-    private void applySecondOrThird(Lotto lotto) {
-        if (this.bonusNumber.isContained(lotto)) {
-            lotto.rank(SECOND);
-            return;
-        }
-        lotto.rank(THIRD);
+        lottoList.applyRanking(this.winningNumbers);
+        lottoList.matchSecondOrThird(bonusNumber);
     }
 
     private void validateDuplication(List<Integer> winningNumbers, int bonusNumber) {
