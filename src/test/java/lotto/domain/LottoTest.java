@@ -16,7 +16,7 @@ public class LottoTest {
 			LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(5),
 			LottoNumber.of(14), LottoNumber.of(22), LottoNumber.of(45)
 		));
-		assertThat(lotto.calculateScore(new WinningNumbers("1, 2, 3, 4, 5, 6"))).isEqualTo(new Score(3));
+		assertThat(lotto.calculateScore(new WinningNumbers("1, 2, 3, 4, 5, 6"), LottoNumber.of(7))).isEqualTo(new Score(3, 0));
 	}
 
 	@DisplayName("로또 넘버에 보너스 넘버가 있는 경우.")

@@ -26,10 +26,11 @@ public class Lotto {
 		this.score = new Score(0);
 	}
 
-	public Score calculateScore(WinningNumbers winningNumbers) {
+	public Score calculateScore(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
 		for (LottoNumber winningNumber : winningNumbers.getWinningNumbers()) {
 			this.plusScore(winningNumber);
 		}
+		this.plusBonusScore(bonusNumber);
 		return this.score;
 	}
 
@@ -37,14 +38,6 @@ public class Lotto {
 		if (this.lottoNumbers.contains(winningNumber)) {
 			this.score.plus();
 		}
-	}
-
-	public Score calculateScore(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-		for (LottoNumber winningNumber : winningNumbers.getWinningNumbers()) {
-			this.plusScore(winningNumber);
-		}
-		this.plusBonusScore(bonusNumber);
-		return this.score;
 	}
 
 	private void plusBonusScore(LottoNumber bonusNumber) {
