@@ -3,6 +3,8 @@ package lotto.biz;
 import lotto.model.Lotto;
 import lotto.model.LottoGames;
 import lotto.view.InputView;
+import lotto.view.ResultView;
+
 
 public class LottoService {
 
@@ -33,6 +35,9 @@ public class LottoService {
     }
 
     public void getWinningStatistics() {
+        games.aggregate();
 
+        ResultView.showWinningStatistics(games.getStatistic());
+        ResultView.showProfit(games.getStatistic(),games.getGameCount()*1000);
     }
 }

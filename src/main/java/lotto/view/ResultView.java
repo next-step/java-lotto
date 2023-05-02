@@ -1,30 +1,43 @@
 package lotto.view;
 
+import lotto.model.Lotto;
+import lotto.model.enums.Ranking;
+
+import java.util.List;
+import java.util.Map;
+
 public class ResultView {
 
     private static String STATISTIC_FORMAT = "%s개 일치 (%s원)- %s개";
+    private static String PROFIT_FORMAT = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void show4thStat(int count){
+
+    public static void showWinningStatistics(Map<Ranking, List<Lotto>> results){
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (Map.Entry<Ranking, List<Lotto>> entry:results.entrySet()) {
+            showStatistics(entry.getKey(), entry.getValue().size());
+        }
+    }
+
+
+    public static void showStatistics(Ranking ranking, int count){
         System.out.println(
-                String.format(STATISTIC_FORMAT,3,5000,count)
+                String.format(STATISTIC_FORMAT,
+                        ranking.getCount(),
+                        ranking.getReword(),
+                        count)
         );
     }
 
-    public static void show3thStat(int count){
+    public static void showProfit(Map<Ranking, List<Lotto>> results, int input){
+        int result = 0;
+        for (Map.Entry<Ranking, List<Lotto>> entry:results.entrySet()) {
+            result += entry.getKey().getReword() * entry.getValue().size();
+        }
         System.out.println(
-                String.format(STATISTIC_FORMAT,4,50000,count)
+                String.format(PROFIT_FORMAT, result/input)
         );
     }
 
-    public static void show2thStat(int count){
-        System.out.println(
-                String.format(STATISTIC_FORMAT,5,1500000,count)
-        );
-    }
-
-    public static void show1thStat(int count){
-        System.out.println(
-                String.format(STATISTIC_FORMAT,6,2000000000,count)
-        );
-    }
 }
