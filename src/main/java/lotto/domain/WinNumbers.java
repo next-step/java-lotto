@@ -7,10 +7,9 @@ public class WinNumbers {
 
 	public static String SIZE_EXCEPTION_TEXT = String.format("당첨 넘버의 크기는 %d입니다.", Lotto.SIZE);
 	public static String TYPE_EXCEPTION_TEXT = "당첨번호는 숫자만 입력 가능합니다.";
-	public static String RANGE_EXCEPTION_TEXT = String.format("당첨 넘버는 %d~%d까지의 숫자만 입력 가능합니다.", Lotto.MINIMUM_BOUND, Lotto.MAXIMUM_BOUND);
 	public static String DUPLICATE_EXCEPTION_TEXT = "당첨 넘버는 중복될 수 없습니다.";
 
-	private final Set<Integer> winNumbers = new HashSet<>();
+	private final Set<LottoNumber> winNumbers = new HashSet<>();
 
 	public WinNumbers(String input) {
 		String[] split = this.split(input);
@@ -32,8 +31,7 @@ public class WinNumbers {
 	private void addWinNumbers(String[] split) {
 		for (String winNumberString : split) {
 			int winNumber = this.toInt(winNumberString);
-			this.checkRange(winNumber);
-			winNumbers.add(winNumber);
+			this.winNumbers.add(new LottoNumber(winNumber));
 		}
 	}
 
@@ -45,28 +43,17 @@ public class WinNumbers {
 		}
 	}
 
-	private void checkRange(int winNumber) {
-		if (winNumber < Lotto.MINIMUM_BOUND || winNumber > Lotto.MAXIMUM_BOUND) {
-			throw new IllegalArgumentException(WinNumbers.RANGE_EXCEPTION_TEXT);
-		}
-	}
-
 	private void checkDuplicate(int splitLength) {
 		if (this.winNumbers.size() != splitLength) {
 			throw new IllegalArgumentException(WinNumbers.DUPLICATE_EXCEPTION_TEXT);
 		}
 	}
 
-	public Score plusScore(LottoNumbers lottoNumbers, Score score) {
-		for (Integer winNumber : this.winNumbers) {
-			this.plus(lottoNumbers, score, winNumber);
-		}
-		return score;
+	public boolean contains(LottoNumber bonusNumber) {
+		return this.winNumbers.contains(bonusNumber);
 	}
 
-	private void plus(LottoNumbers lottoNumbers, Score score, Integer winNumber) {
-		if (lottoNumbers.contains(winNumber)) {
-			score.plus();
-		}
+	public Set<LottoNumber> getWinNumbers() {
+		return this.winNumbers;
 	}
 }

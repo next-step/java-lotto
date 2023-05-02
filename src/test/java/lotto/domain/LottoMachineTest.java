@@ -34,25 +34,27 @@ public class LottoMachineTest {
 			new Lotto(6)
 		);
 		LottoMachine lottoMachine = new LottoMachine(lottos);
-		List<PrizeSituation> prizeSituations = lottoMachine.makePrizeSituations();
+		List<RankSituation> rankSituations = lottoMachine.makeRankSituations();
 
-		assertThat(prizeSituations).containsExactlyInAnyOrder(
-			new PrizeSituation(PrizeType.THREE, 2), new PrizeSituation(PrizeType.FOUR, 0),
-			new PrizeSituation(PrizeType.FIVE, 0), new PrizeSituation(PrizeType.SIX, 1));
+		assertThat(rankSituations).containsExactlyInAnyOrder(
+			new RankSituation(Rank.FIFTH, 2), new RankSituation(Rank.FOURTH, 0),
+			new RankSituation(Rank.THIRD, 0), new RankSituation(Rank.SECOND, 0),
+			new RankSituation(Rank.FIRST, 1)
+		);
 	}
 
-	@DisplayName("상금 현황 목록을 점수순으로 오름차순 정렬한다.")
+	@DisplayName("상금 현황 목록을 상금순으로 오름차순 정렬한다.")
 	@Test
 	void test9() {
-		List<PrizeSituation> prizeSituations = Arrays.asList(
-			new PrizeSituation(PrizeType.FOUR, 0), new PrizeSituation(PrizeType.SIX, 1),
-			new PrizeSituation(PrizeType.FIVE, 0), new PrizeSituation(PrizeType.THREE, 2)
+		List<RankSituation> rankSituations = Arrays.asList(
+			new RankSituation(Rank.FOURTH, 0), new RankSituation(Rank.FIRST, 1),
+			new RankSituation(Rank.THIRD, 0), new RankSituation(Rank.FIFTH, 2)
 		);
-		LottoMachine lottoMachine = new LottoMachine();
-		List<PrizeSituation> sortedPrizeSituations = lottoMachine.sortInOrderScore(prizeSituations);
-		assertThat(sortedPrizeSituations).containsExactly(
-			new PrizeSituation(PrizeType.THREE, 2), new PrizeSituation(PrizeType.FOUR, 0),
-			new PrizeSituation(PrizeType.FIVE, 0), new PrizeSituation(PrizeType.SIX, 1)
+		LottoMachine lottoMachine = new LottoMachine(1000);
+		List<RankSituation> sortedRankSituations = lottoMachine.sortInOrderScore(rankSituations);
+		assertThat(sortedRankSituations).containsExactly(
+			new RankSituation(Rank.FIFTH, 2), new RankSituation(Rank.FOURTH, 0),
+			new RankSituation(Rank.THIRD, 0), new RankSituation(Rank.FIRST, 1)
 		);
 	}
 }

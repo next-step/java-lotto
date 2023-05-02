@@ -11,35 +11,31 @@ public class BenefitResult {
 	private final long purchaseAmount;
 	private final long totalProfit;
 	private final double totalProfitRate;
-	private final boolean benefit;
 
+	public BenefitResult(List<RankSituation> rankSituations, long purchaseAmount) {
+		this.purchaseAmount = purchaseAmount;
+		this.totalProfit = this.totalProfit(rankSituations);
+		this.totalProfitRate = this.totalProfitRate();
+	}
+
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public BenefitResult(long purchaseAmount, long totalProfit) {
 		this.totalProfitRate = 0.0;
 		this.purchaseAmount = purchaseAmount;
 		this.totalProfit = totalProfit;
-		this.benefit = this.isBenefit();
 	}
 
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
 	public BenefitResult(double totalProfitRate) {
 		this.totalProfitRate = totalProfitRate;
 		this.purchaseAmount = 0;
 		this.totalProfit = 0;
-		this.benefit = this.isBenefit();
 	}
 
-	public BenefitResult(List<PrizeSituation> prizeSituations, long purchaseAmount) {
-		this.purchaseAmount = purchaseAmount;
-		this.totalProfit = this.totalProfit(prizeSituations);
-		this.totalProfitRate = this.totalProfitRate();
-		this.benefit = this.isBenefit();
-	}
-
-	public long totalProfit(List<PrizeSituation> prizeSituations) {
+	public long totalProfit(List<RankSituation> rankSituations) {
 		long totalProfit = 0;
-		for (PrizeSituation prizeSituation : prizeSituations) {
-			long prizeMoney = prizeSituation.getPrizeType().prizeMoney.getPrizeMoney();
-			int prizeCount = prizeSituation.getPrizeCount();
-			totalProfit += (prizeMoney * prizeCount);
+		for (RankSituation rankSituation : rankSituations) {
+			totalProfit += rankSituation.calculateProfit();
 		}
 		return totalProfit;
 	}
@@ -58,9 +54,5 @@ public class BenefitResult {
 
 	public double getTotalProfitRate() {
 		return this.totalProfitRate;
-	}
-
-	public String benefitResultString() {
-		return this.benefit ? "이익이" : "손해";
 	}
 }

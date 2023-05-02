@@ -13,18 +13,23 @@ public class LottoNumbers {
 		31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45
 	);
 
-	private final List<Integer> lottoNumbers;
+	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers() {
 		Collections.shuffle(LottoNumbers.NUMBERS);
-		this.lottoNumbers = new ArrayList<>(LottoNumbers.NUMBERS.subList(0, Lotto.SIZE));;
+		List<Integer> autoLottoNumbers = LottoNumbers.NUMBERS.subList(0, Lotto.SIZE);
+		this.lottoNumbers = new ArrayList<>();
+		for (int lottoNumber : autoLottoNumbers) {
+			this.lottoNumbers.add(new LottoNumber(lottoNumber));
+		}
 	}
 
-	public LottoNumbers(List<Integer> lottoNumbers) {
+	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
+	public LottoNumbers(List<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public boolean contains(int lottoNumber) {
+	public boolean contains(LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 

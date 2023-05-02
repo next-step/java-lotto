@@ -6,14 +6,40 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTest {
 
 	@DisplayName("당첨넘버와 선택한 로또 넘버 간 일치하는 넘버가 몇개인지 계산한다.")
 	@Test
 	void test1() {
-		Lotto lotto = new Lotto(Arrays.asList(1, 3, 5, 14, 22, 45));
+		Lotto lotto = new Lotto(Arrays.asList(
+			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
+			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
+		));
 		assertThat(lotto.calculateScore(new WinNumbers("1, 2, 3, 4, 5, 6"))).isEqualTo(new Score(3));
 	}
-}
 
+	@DisplayName("로또 넘버에 보너스 넘버가 있는 경우.")
+	@Test
+	void test2() {
+		Lotto lotto = new Lotto(Arrays.asList(
+			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
+			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
+		), 5);
+		Score bonusScore = lotto.calculateBonusScore(new LottoNumber(14));
+		assertThat(bonusScore).isEqualTo(new Score(5, 1));
+	}
+
+	@DisplayName("로또 넘버에 보너스 넘버가 없는 경우.")
+	@Test
+	void test3() {
+		Lotto lotto = new Lotto(Arrays.asList(
+			new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
+			new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)
+		), 5);
+		Score bonusScore = lotto.calculateBonusScore(new LottoNumber(23));
+		assertThat(bonusScore).isEqualTo(new Score(5, 0));
+	}
+}
