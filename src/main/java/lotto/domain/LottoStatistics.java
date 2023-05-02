@@ -13,13 +13,13 @@ public class LottoStatistics {
 
     private static final int MAX_MATCHES = 6;
 
-    private final WinnerLotto winnerLotto;
+    private final Lotto winnerLotto;
 
     private final List<Lotto> lottos;
 
     private final int[] matchCounts;
 
-    public LottoStatistics(WinnerLotto winnerLotto, List<Lotto> lottos) {
+    public LottoStatistics(Lotto winnerLotto, List<Lotto> lottos) {
         this.winnerLotto = winnerLotto;
         this.lottos = lottos;
         this.matchCounts = new int[NUMBER_OF_WINNING_LEVELS];

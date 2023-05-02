@@ -1,8 +1,8 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Lottos;
-import lotto.domain.WinnerLotto;
 import lotto.strategy.AutoLotto;
 import lotto.strategy.LottoStrategy;
 import lotto.view.InputView;
@@ -20,7 +20,7 @@ public class Application {
 
         ResultView.autoLottoPrint(lottos.getLottoList());
 
-        WinnerLotto winnerLotto = inputView.getLastWeekLottoNumbers();
+        Lotto winnerLotto = inputView.getLastWeekLottoNumbers();
 
         ResultView.printLottoStatistics(lottos.getLottoList(), winnerLotto);
 

@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
-import lotto.domain.WinnerLotto;
 import lotto.enums.LottoPrize;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    public static void printLottoStatistics(List<Lotto> lottos, WinnerLotto winnerLotto) {
+    public static void printLottoStatistics(List<Lotto> lottos, Lotto winnerLotto) {
         LottoStatistics lottoStatistics = new LottoStatistics(winnerLotto, lottos);
         String statisticsString = formatLottoStatistics(lottoStatistics);
         System.out.println(statisticsString);

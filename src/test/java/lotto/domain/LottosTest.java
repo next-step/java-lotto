@@ -19,7 +19,7 @@ class LottosTest {
         Lottos lottos = new Lottos(strategy, COUNT);
 
         // Then
-        assertThat(lottos.getLottoList().size()).isEqualTo(COUNT);
+        assertThat(lottos.getLottoList()).hasSize(COUNT);
     }
 
 }
