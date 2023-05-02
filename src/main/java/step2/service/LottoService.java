@@ -1,22 +1,19 @@
 package step2.service;
 
-import java.util.List;
 import step2.domain.LotteryWin;
-import step2.domain.Lotto;
+import step2.domain.PurchasedLotto;
 
 public class LottoService {
 
     private final LotteryWin lotteryWin;
+    public final PurchasedLotto purchasedLotto;
 
-    public LottoService(LotteryWin lotteryWin) {
+    public LottoService(LotteryWin lotteryWin, PurchasedLotto purchasedLottoList) {
         this.lotteryWin = lotteryWin;
+        this.purchasedLotto = purchasedLottoList;
     }
 
-    public void matchResult(List<Lotto> lottoList) {
-        lotteryWin.confirm(lottoList);
-    }
-
-    public String getProfitRate(int money, int totalWinningMoney) {
-        return lotteryWin.getRateOfReturn(money, totalWinningMoney);
+    public void matchResult() {
+        lotteryWin.confirm(purchasedLotto);
     }
 }

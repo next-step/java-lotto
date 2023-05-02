@@ -1,7 +1,6 @@
 package step2;
 
 import java.util.Scanner;
-import step2.domain.BonusNumber;
 import step2.domain.LotteryWin;
 import step2.domain.LottoFactory;
 import step2.domain.PurchasedLotto;
@@ -16,30 +15,29 @@ public class LottoGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         InputView inputView = new InputView();
-        LottoView lottoView = new LottoView();
-        ResultView resultView = new ResultView();
 
         int money = getMoney(scanner, inputView);
         inputView.confirmComment(money);
-
         PurchasedLotto purchasedLottoList = LottoFactory.of(money);
 
-        lottoView.printLotto(purchasedLottoList.get());
+        LottoView lottoView = new LottoView(purchasedLottoList);
+        ResultView resultView = new ResultView(purchasedLottoList);
+
+        lottoView.printLotto();
 
         String winningNumbers = getWinningNumbers(scanner, resultView);
         int bonusNumber = getBonusNumber(scanner, resultView);
 
-        LottoService lottoService = new LottoService(
-            new LotteryWin(new WinningNumbers(winningNumbers), bonusNumber)
-        );
+        LottoService lottoService =
+            new LottoService(
+                new LotteryWin(new WinningNumbers(winningNumbers), bonusNumber),
+                purchasedLottoList
+            );
 
-        lottoService.matchResult(purchasedLottoList.get());
-        resultView.printStatics(purchasedLottoList);
+        lottoService.matchResult();
 
-
-        String profitRate =
-            lottoService.getProfitRate(money, purchasedLottoList.getSumOfWinningMoney());
-        resultView.printProfit(profitRate);
+        resultView.printStatics();
+        resultView.printProfit(money);
     }
 
     private static int getBonusNumber(Scanner scanner, ResultView resultView) {
