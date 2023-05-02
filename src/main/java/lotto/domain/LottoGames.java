@@ -9,12 +9,10 @@ public class LottoGames {
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_SIZE = 6;
     private final List<Lotto> lottoGameList = new ArrayList<>();
-    private Lotto firstLotto;
     private final int[] lottoResult = new int[LOTTO_SIZE + 1];
 
-    public LottoGames(List<String> lottoNumberList, String firstLottoNumber) {
+    public LottoGames(List<String> lottoNumberList) {
         lottoNumberList.forEach(number -> lottoGameList.add(new Lotto(number)));
-        this.firstLotto = new Lotto(firstLottoNumber);
     }
 
     public LottoGames(int gameCount) {
@@ -37,7 +35,7 @@ public class LottoGames {
         return sum() / (double)(LOTTO_PRICE * lottoGameList.size());
     }
 
-    public void calculatePrizeCount() {
+    public void calculatePrizeCount(Lotto firstLotto) {
         lottoGameList.forEach(lotto -> lottoResult[lotto.findMatchCount(firstLotto)]++);
     }
 
