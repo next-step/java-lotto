@@ -1,4 +1,4 @@
-package step1;
+package stringCalculator;
 
 public class ResultView {
     public void print(int result) {

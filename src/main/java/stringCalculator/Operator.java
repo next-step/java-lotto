@@ -1,4 +1,4 @@
-package step1;
+package stringCalculator;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;

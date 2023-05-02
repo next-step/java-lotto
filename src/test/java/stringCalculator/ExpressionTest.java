@@ -1,7 +1,6 @@
-package step1;
+package stringCalculator;
 
 import org.junit.jupiter.api.Test;
-import stringCalculator.Expression;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,6 +11,4 @@ public class ExpressionTest {
     void 식계산() {
         assertThat(expression.calculate()).isEqualTo(9);
     }
-
-
 }

@@ -1,4 +1,4 @@
-package step1;
+package stringCalculator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,6 @@ public class Expression {
             this.numbers.add(exp);
             return;
         }
-
         this.operators.add(exp);
-
     }
 }

@@ -2,6 +2,7 @@ package step1;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import stringCalculator.Operator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
