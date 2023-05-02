@@ -1,16 +1,27 @@
-package lotto3.util;
+package lotto3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import lotto3.domain.LottoTicket;
-import lotto3.domain.Prize;
 
-public class LottoResultCalculator {
+public class LottoTickets {
+  private final List<LottoTicket> tickets;
 
-  public static Map<Prize, Long> calculate(List<LottoTicket> tickets, List<Integer> winningNumbers) {
+  public LottoTickets(List<LottoTicket> tickets) {
+    this.tickets = tickets;
+  }
+
+  public int size() {
+    return tickets.size();
+  }
+
+  public List<LottoTicket> tickets() {
+    return tickets;
+  }
+
+  public Map<Prize, Long> calculateLotteryResults(List<Integer> winningNumbers) {
     List<Prize> prizes = new ArrayList<>();
     for (LottoTicket ticket : tickets) {
       int matchCount = ticket.matchCount(winningNumbers);
@@ -25,7 +36,4 @@ public class LottoResultCalculator {
     return prizes.stream()
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
   }
-
-
-
 }

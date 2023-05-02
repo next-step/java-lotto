@@ -3,13 +3,14 @@ package lotto3.view;
 import java.util.List;
 import java.util.Map;
 import lotto3.domain.LottoTicket;
+import lotto3.domain.LottoTickets;
 import lotto3.domain.Prize;
 
 public class OutputView {
 
-  public static void printLottoTickets(List<LottoTicket> tickets) {
-    System.out.println(tickets.size() + "개를 구매했습니다.");
-    for (LottoTicket ticket : tickets) {
+  public static void printLottoTickets(LottoTickets lottoTickets) {
+    System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+    for (LottoTicket ticket : lottoTickets.tickets()) {
       printLottoTicket(ticket);
     }
   }
