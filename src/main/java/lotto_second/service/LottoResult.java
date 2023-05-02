@@ -35,19 +35,11 @@ public class LottoResult {
 
 
     private int countMatchedWinnerLotto(Lotto ticket, LottoWinner lottoWinner) {
-        int count = 0;
-        for (LottoNumber number : ticket.getNumbers()) {
-            count += winnerNumberCount(number, lottoWinner);
-        }
-        return count;
+        return (int) ticket.getNumbers().stream()
+                .filter(lottoWinner.getWinnerNumbers()::contains)
+                .count();
     }
 
-    private int winnerNumberCount(LottoNumber number, LottoWinner lottoWinner) {
-        if (lottoWinner.getWinnerNumbers().contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
 
     public int getCountOfMatch(Rank matchCount) {
         return resultMap.getOrDefault(matchCount, 0);
