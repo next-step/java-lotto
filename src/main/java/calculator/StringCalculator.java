@@ -1,18 +1,22 @@
 package calculator;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    public int calculation(String formula) {
-        checkEmptyString(formula);
+    public int calculate(String formula) {
+        StringException.checkEmptyString(formula);
+
         String[] arrFormula = splitFormula(formula);
+
+        StringException.checkNumber(arrFormula[0]);
+        int result = Integer.parseInt(arrFormula[0]);
+
         for (int i = 1; i < arrFormula.length; i += 2) {
-            //연산
-            String[] subFormula = {arrFormula[i - 1], arrFormula[i], arrFormula[i + 1]};
-            validateSubFormula(subFormula);
-            arrFormula[i + 1] = Integer.toString(operation(subFormula));
+            result = operate(result, arrFormula[i], Integer.parseInt(arrFormula[i + 1]));
         }
-        int result = Integer.parseInt(arrFormula[arrFormula.length - 1]);
+
         return result;
     }
 
@@ -20,47 +24,23 @@ public class StringCalculator {
         return formula.split(" ");
     }
 
-    private int operation(String[] arrFormula) {
-        int preNum = Integer.parseInt(arrFormula[0]);
-        int postNum = Integer.parseInt(arrFormula[2]);
-        String operator = arrFormula[1];
+    private int operate(int preNumber, String operator, int postNumber) {
+        StringException.checkOperator(operator);
 
-        if ("+".equals(operator)) {
-            return Operation.plus(preNum, postNum);
-        }
-        if ("-".equals(operator)) {
-            return Operation.minus(preNum, postNum);
-        }
-        if ("*".equals(operator)) {
-            return Operation.multiple(preNum, postNum);
-        }
-        if ("/".equals(operator)) {
-            return Operation.division(preNum, postNum);
-        }
-        return 0;
+        StringException.checkNumber(Integer.toString(preNumber));
+
+        StringException.checkNumber(Integer.toString(postNumber));
+
+        return separationOperator().get(operator).calculate(preNumber, postNumber);
     }
 
-    private void checkEmptyString(String formula) {
-        if (formula == null || formula.isBlank()) {
-            throw new IllegalArgumentException("연산식을 입력해 주시기 바랍니다.");
-        }
-    }
+    private Map<String, Operation> separationOperator() {
+        Map<String, Operation> operationMap = new HashMap<>();
+        operationMap.put("+", new Plus());
+        operationMap.put("-", new Minus());
+        operationMap.put("*", new Multiple());
+        operationMap.put("/", new Division());
 
-    private void validateSubFormula(String[] subFormula) {
-        checkOperator(subFormula[1]);
-        checkNumber(subFormula[0]);
-        checkNumber(subFormula[2]);
-    }
-
-    private void checkNumber(String number) {
-        if (!Pattern.matches("^[0-9]*$", number)) {
-            throw new IllegalArgumentException("숫자자리에 다른 문자가 입력되었습니다.");
-        }
-    }
-
-    private void checkOperator(String item) {
-        if (!(item.equals("+") || item.equals("-") || item.equals("*") || item.equals("/"))) {
-            throw new IllegalArgumentException("연산자 자리에 다른 문자가 입력되었습니다.");
-        }
+        return operationMap;
     }
 }

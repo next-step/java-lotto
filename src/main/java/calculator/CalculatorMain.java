@@ -8,7 +8,7 @@ public class CalculatorMain {
 
         StringCalculator stringCalculator = new StringCalculator();
 
-        int result = stringCalculator.calculation(scanner.nextLine());
+        int result = stringCalculator.calculate(scanner.nextLine());
         System.out.println(result);
     }
 }

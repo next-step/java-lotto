@@ -8,27 +8,32 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class OperationTest {
+    Operation operation;
     @Test
     @DisplayName("덧셈 테스트")
     void plusTest() {
-        assertThat(Operation.plus(1,2)).isEqualTo(3);
+        operation = new Plus();
+        assertThat(operation.calculate(1,2)).isEqualTo(3);
     }
 
     @Test
     @DisplayName("뺄셈 테스트")
     void minusTest() {
-        assertThat(Operation.minus(3,2)).isEqualTo(1);
+        operation = new Minus();
+        assertThat(operation.calculate(4,2)).isEqualTo(2);
     }
 
     @Test
     @DisplayName("곱셈 테스트")
     void multipleTest() {
-        assertThat(Operation.multiple(3,4)).isEqualTo(12);
+        operation = new Multiple();
+        assertThat(operation.calculate(4,3)).isEqualTo(12);
     }
 
     @Test
     @DisplayName("나눗셈 테스트")
     void divisionTest() {
-        assertThat(Operation.division(12,3)).isEqualTo(4);
+        operation = new Division();
+        assertThat(operation.calculate(12,3)).isEqualTo(4);
     }
 }
