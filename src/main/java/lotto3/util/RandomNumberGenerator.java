@@ -15,7 +15,6 @@ public class RandomNumberGenerator {
       int number = RANDOM.nextInt(45) + 1;
       addNum(numbers, number);
     }
-    Collections.shuffle(numbers);
     return numbers;
   }
   private static void addNum(List<Integer> numbers, int number) {
