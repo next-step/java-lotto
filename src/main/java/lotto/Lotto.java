@@ -17,4 +17,8 @@ public class Lotto {
                 .size();
         return LottoResult.of(matchedSize);
     }
+
+    public List<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
+    }
 }

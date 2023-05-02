@@ -1,6 +1,6 @@
 package lotto;
 
-class LottoNumber {
+public class LottoNumber {
     private final Integer number;
 
     public LottoNumber(final int number) {
@@ -19,6 +19,10 @@ class LottoNumber {
         return "LottoNumber{" +
                 "number=" + number +
                 '}';
+    }
+
+    public Integer intValue() {
+        return number;
     }
 
     @Override
