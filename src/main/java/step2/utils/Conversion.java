@@ -2,6 +2,7 @@ package step2.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import step2.exception.CustomNumberFormatException;
 
 public class Conversion {
 
@@ -26,8 +27,7 @@ public class Conversion {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(e.getMessage());
+            throw new CustomNumberFormatException(e.getMessage());
         }
     }
-
 }
