@@ -41,15 +41,20 @@ public class ResultView {
     }
 
     private static void printPerformance(double profitRate) {
-        System.out.print("(기준이 1이기 때문에 결과적으로 ");
-
-        String profitResult = "이익";
         if (profitRate < 1) {
-            profitResult = "손해";
-        } else if (profitRate == 1) {
-            profitResult = "본전";
+            printFinal("손해");
+            return;
         }
 
-        System.out.println(profitResult+"라는 의미임)");
+        if (profitRate > 1) {
+            printFinal("이익");
+            return;
+        }
+
+        printFinal("본전");
+    }
+
+    private static void printFinal(String profitResult) {
+        System.out.println("(기준이 1이기 때문에 결과적으로 "+profitResult+"라는 의미임)");
     }
 }
