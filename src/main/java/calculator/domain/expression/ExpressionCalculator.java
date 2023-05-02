@@ -12,6 +12,9 @@ public class ExpressionCalculator {
             new DivisionOperation()
     );
 
+    private ExpressionCalculator() {
+    }
+
     public static int calculateExpression(Operands operands, Operators operators) {
         int intermediateResult = operands.next().toInt();
 

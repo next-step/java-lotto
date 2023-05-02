@@ -14,14 +14,7 @@ public class Operand {
     }
 
     public Operand(int operand) {
-        isPositive(operand);
-        this.operand = operand;
-    }
-
-    private void isPositive(int operand) {
-        if (operand < 0) {
-            throw new IllegalArgumentException(NEGATIVE_NUMBERS_ERROR_MESSAGE);
-        }
+        this(String.valueOf(operand));
     }
 
     private void isPositiveNumber(String number) {
@@ -34,4 +27,3 @@ public class Operand {
         return operand;
     }
 }
-
