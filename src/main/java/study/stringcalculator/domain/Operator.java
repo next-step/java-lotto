@@ -10,7 +10,7 @@ public enum Operator {
   private final String operator;
   private final OperatorInterface operatorLambda;
 
-  Operator(String operator, OperatorInterface operatorLambda) {
+  private Operator(String operator, OperatorInterface operatorLambda) {
     this.operator = operator;
     this.operatorLambda = operatorLambda;
   }
@@ -23,18 +23,13 @@ public enum Operator {
     return operator;
   }
 
-  public static Operator getOperator(String value) {
-    switch (value) {
-      case "+":
-        return Operator.ADD;
-      case "-":
-        return Operator.SUBTRACT;
-      case "*":
-        return Operator.MULTIPLY;
-      case "/":
-        return Operator.DIVIDE;
-      default:
-        throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+  public static Operator convertOperator(String value) {
+    for (Operator operator : Operator.values()) {
+      if (operator.getOperator().equals(value)) {
+        return operator;
+      }
     }
+
+    throw new IllegalArgumentException("유효하지 않은 입력입니다.");
   }
 }

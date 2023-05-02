@@ -16,7 +16,7 @@ public class Expression {
     int result = Integer.parseInt(expression[0]);
 
     for (int i = 1; i < expression.length; i = i + 2) {
-      Operator operator = Operator.getOperator(expression[i]);
+      Operator operator = Operator.convertOperator(expression[i]);
       result = operator.operate(result, Integer.parseInt(expression[i + 1]));
     }
 
