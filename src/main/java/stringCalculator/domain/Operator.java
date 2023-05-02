@@ -18,7 +18,7 @@ public class Operator {
     }
 
     public int calculate(int prevOperand, int nextOperand) {
-        return this.calculatorStrategy.calculator(prevOperand, nextOperand);
+        return this.calculatorStrategy.applyAsInt(prevOperand, nextOperand);
     }
 
     private void isEmpty(String inputText) {

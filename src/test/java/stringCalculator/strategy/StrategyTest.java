@@ -15,7 +15,7 @@ public class StrategyTest {
 
         PlusStrategy plusStrategy = new PlusStrategy();
 
-        assertThat(plusStrategy.calculator(prevNum, nextNum)).isEqualTo(prevNum + nextNum);
+        assertThat(plusStrategy.applyAsInt(prevNum, nextNum)).isEqualTo(prevNum + nextNum);
     }
 
     @DisplayName("숫자 2개를 전달하면 빼기를 한다.")
@@ -25,7 +25,7 @@ public class StrategyTest {
 
         MinusStrategy strategy = new MinusStrategy();
 
-        assertThat(strategy.calculator(prevNum, nextNum)).isEqualTo(prevNum - nextNum);
+        assertThat(strategy.applyAsInt(prevNum, nextNum)).isEqualTo(prevNum - nextNum);
     }
 
     @DisplayName("숫자 2개를 전달하면 곱하기를 한다.")
@@ -35,7 +35,7 @@ public class StrategyTest {
 
         MultiplyStrategy strategy = new MultiplyStrategy();
 
-        assertThat(strategy.calculator(prevNum, nextNum)).isEqualTo(prevNum * nextNum);
+        assertThat(strategy.applyAsInt(prevNum, nextNum)).isEqualTo(prevNum * nextNum);
     }
 
     @DisplayName("숫자 2개를 전달하면 나누기를 한다.")
@@ -45,6 +45,6 @@ public class StrategyTest {
 
         DivideStrategy strategy = new DivideStrategy();
 
-        assertThat(strategy.calculator(prevNum, nextNum)).isEqualTo(prevNum / nextNum);
+        assertThat(strategy.applyAsInt(prevNum, nextNum)).isEqualTo(prevNum / nextNum);
     }
 }
