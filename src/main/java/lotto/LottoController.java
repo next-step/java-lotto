@@ -3,7 +3,6 @@ package lotto;
 import lotto.Model.Game;
 import lotto.View.*;
 
-import javax.xml.transform.Result;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,7 +15,9 @@ public class LottoController {
         ResultView.printTickets(game.allTickets());
 
         List<Integer> winnerNumber = InputView.winnerNumber();
-        HashMap<Integer, Integer> result = game.calculateResult(winnerNumber);
+        int bonusNumber = InputView.bonusNumber();
+        game.winners(winnerNumber, bonusNumber);
+        HashMap<Integer, Integer> result = game.calculateResult();
         ResultView.printResult(countOfTicket, result);
     }
 }

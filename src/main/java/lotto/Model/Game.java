@@ -1,19 +1,29 @@
 package lotto.Model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 public class Game {
     private static final int WINNER_MATCH_COUNT_MIN = 3;
     private static final int WINNER_MATCH_COUNT_MAX = 6;
+    private static final int BONUS_CANDIDATE_COUNT = 5;
+    private static final int BONUS_CATEGORY = 15;
+
     private final List<Ticket> tickets = new ArrayList<>();
+    private List<Integer> winnerNumber = new ArrayList<>();
+    ;
+    private int bonusNumber;
 
     public Game(int countOfTicket) {
         for (int i = 0; i < countOfTicket; i++) {
             addTicket(randomTicket());
         }
+    }
+
+    public void winners(List<Integer> winnerNumber, int bonusNumber) {
+        this.winnerNumber = winnerNumber;
+        this.bonusNumber = bonusNumber;
     }
 
     public void addTicket(Ticket ticket) {
@@ -29,34 +39,59 @@ public class Game {
         return tickets;
     }
 
-    public HashMap<Integer, Integer> calculateResult(List<Integer> winnerNumber) {
-        HashMap<Integer, Integer> result = new HashMap<>();
-        for (int i = WINNER_MATCH_COUNT_MIN; i <= WINNER_MATCH_COUNT_MAX; i++) {
-            result.put(i, 0);
-        }
+    public HashMap<Integer, Integer> calculateResult() {
+        HashMap<Integer, Integer> result = resultFormat();
 
         for (Ticket ticket : tickets) {
-            int count = countMatches(ticket, winnerNumber);
+            int count = countMatches(ticket);
             result.put(count, result.getOrDefault(count, 0) + 1);
+        }
+
+        for (int i = 0; i < WINNER_MATCH_COUNT_MIN; i++) {
+            result.remove(i);
         }
 
         return result;
     }
 
-    private int countMatches(Ticket ticket, List<Integer> winnerNumber) {
+    private HashMap<Integer, Integer> resultFormat() {
+        HashMap<Integer, Integer> result = new HashMap<>();
+        for (int i = WINNER_MATCH_COUNT_MIN; i <= WINNER_MATCH_COUNT_MAX; i++) {
+            result.put(i, 0);
+        }
+        result.put(BONUS_CATEGORY, 0);
+
+        return result;
+    }
+
+    private int countMatches(Ticket ticket) {
         int count = 0;
         TicketNumber ticketNumber = ticket.numbers();
         for (Integer number : ticketNumber.numbers()) {
             count += addIfMatch(winnerNumber, number);
+            count = ifMatchBonus(ticket, count);
         }
         return count;
     }
 
-    private int addIfMatch(List<Integer> numbers, int number){
-        if(numbers.contains(number)){
+    private int addIfMatch(List<Integer> numbers, int number) {
+        if (numbers.contains(number)) {
             return 1;
         }
         return 0;
+    }
+
+    private int ifMatchBonus(Ticket ticket, int count) {
+        if (BONUS_CANDIDATE_COUNT != count) {
+            return count;
+        }
+
+        TicketNumber ticketNumber = ticket.numbers();
+        if (ticketNumber.contain(bonusNumber)) {
+            return BONUS_CATEGORY;
+        }
+
+        return count;
     }
 
 }
