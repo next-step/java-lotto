@@ -24,7 +24,7 @@ public class LottoNumber {
 	}
 
 	public static LottoNumber of(String numberString) {
-		return of(LottoNumber.toInt(numberString));
+		return LottoNumber.of(LottoNumber.toInt(numberString));
 	}
 
 	public static LottoNumber of(int lottoNumber) {

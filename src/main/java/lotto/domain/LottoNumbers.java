@@ -60,4 +60,14 @@ public class LottoNumbers {
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
 	}
+
+	public int matchCount(LottoNumbers winNumbers) {
+		int matchCount = 0;
+		for (LottoNumber lottoNumber : this.lottoNumbers) {
+			if (winNumbers.contains(lottoNumber)) {
+				matchCount++;
+			}
+		}
+		return matchCount;
+	}
 }

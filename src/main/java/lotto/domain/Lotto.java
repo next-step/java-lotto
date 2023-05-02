@@ -11,7 +11,7 @@ public class Lotto {
 	public static final int PRICE = 1000;
 
 	private final LottoNumbers lottoNumbers;
-	private final Score score;
+	private Score score;
 
 	public Lotto() {
 		this(0);
@@ -43,24 +43,19 @@ public class Lotto {
 		this.score = new Score(0);
 	}
 
-	public Score calculateScore(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-		for (LottoNumber winningNumber : winningNumbers.getWinningNumbers()) {
-			this.plusScore(winningNumber);
-		}
-		this.plusBonusScore(bonusNumber);
+	public Score calculateScore(Lotto winningLotto, LottoNumber bonusNumber) {
+		int matchCount = this.lottoNumbers.matchCount(winningLotto.lottoNumbers);
+		int bonusCount = this.bonusCount(bonusNumber);
+		this.score = new Score(matchCount, bonusCount);
 		return this.score;
 	}
 
-	private void plusScore(LottoNumber winningNumber) {
-		if (this.lottoNumbers.contains(winningNumber)) {
-			this.score.plus();
-		}
-	}
-
-	private void plusBonusScore(LottoNumber bonusNumber) {
+	private int bonusCount(LottoNumber bonusNumber) {
+		int bonusCount = 0;
 		if (this.lottoNumbers.contains(bonusNumber)) {
-			this.score.plusBonus();
+			bonusCount = 1;
 		}
+		return bonusCount;
 	}
 
 	public Rank rank() {

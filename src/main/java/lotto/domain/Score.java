@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Score {
 
-	private int score;
-	private int bonusScore;
+	private final int score;
+	private final int bonusScore;
 
 	public Score(int score, int bonusScore) {
 		if (score < 0 || bonusScore < 0) {
@@ -22,14 +22,6 @@ public class Score {
 		}
 		this.score = score;
 		this.bonusScore = 0;
-	}
-
-	public void plus() {
-		this.score++;
-	}
-
-	public void plusBonus() {
-		this.bonusScore++;
 	}
 
 	public boolean isMatchBonus() {

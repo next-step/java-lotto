@@ -8,7 +8,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.ManualLottos;
 import lotto.domain.RankSituation;
 import lotto.domain.WinningLotto;
-import lotto.domain.WinningNumbers;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -24,11 +23,11 @@ public class LottoMain {
 		ResultView.printPurchasedCount(manualLottos.size(), lottoMachine.getAutoCount());
 		ResultView.printCurrentSituation(lottoMachine.getPurchasedLottos());
 
-		WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinNumbers());
+		String inputWinNumbers = InputView.inputWinNumbers();
+		WinningLotto winningLotto = new WinningLotto(inputWinNumbers);
 		LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
 
-		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-		winningLotto.calculateScore(lottoMachine.getPurchasedLottos());
+		winningLotto.calculateScore(lottoMachine.getPurchasedLottos(), bonusNumber);
 
 		List<RankSituation> rankSituations = lottoMachine.makeRankSituations();
 		ResultView.printRankSituations(lottoMachine.sortInOrderScore(rankSituations));

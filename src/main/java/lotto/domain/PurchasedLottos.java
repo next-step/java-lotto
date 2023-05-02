@@ -24,9 +24,9 @@ public class PurchasedLottos {
 		this.purchasedLottos.addAll(manualLottos.getManualLottos());
 	}
 
-	public void calculateScore(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+	public void calculateScore(Lotto winningLotto, LottoNumber bonusNumber) {
 		for (Lotto lotto : this.purchasedLottos) {
-			lotto.calculateScore(winningNumbers, bonusNumber);
+			lotto.calculateScore(winningLotto, bonusNumber);
 		}
 	}
 
