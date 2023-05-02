@@ -11,13 +11,17 @@ public class Lotto {
     private final List<Integer> lottoNumber;
 
     public Lotto() {
-        this.lottoNumber = new ArrayList<>(markedNumber(this.allNumber));
+        this.lottoNumber = new ArrayList<Integer>(markedNumber(this.allNumber));
     }
 
     private List<Integer> markedNumber(List<Integer> numberList) {
         Collections.shuffle(numberList);
+        return sortNumber(numberList.subList(0, 6));
+    }
+
+    private List<Integer> sortNumber(List<Integer> numberList) {
         Collections.sort(numberList);
-        return numberList.subList(0, 6);
+        return numberList;
     }
 
     public List<Integer> checkNumber() {
