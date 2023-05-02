@@ -2,11 +2,6 @@ package lotto.domain;
 
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
-
-import static lotto.constants.Constants.MAX_NUMBER;
-import static lotto.constants.Constants.MIN_NUMBER;
-import static lotto.constants.Constants.REQUIRED_LOTTO_NUMBERS;
 
 public class Lotto {
 

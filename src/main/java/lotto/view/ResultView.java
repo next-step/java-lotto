@@ -4,7 +4,6 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
 import lotto.enums.LottoPrize;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ResultView {
