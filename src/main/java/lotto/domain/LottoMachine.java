@@ -10,7 +10,7 @@ public class LottoMachine {
 
 	public LottoMachine(long purchaseAmount) {
 		this.purchasedLottos = new PurchasedLottos();
-		if (purchaseAmount < Lotto.PRICE || purchaseAmount % Lotto.PRICE != 0) {
+		if (purchaseAmount < Lotto.PRICE) {
 			throw new IllegalArgumentException("구입 금액이 올바르지 않습니다.");
 		}
 
