@@ -6,6 +6,7 @@ import step2.view.ResultView;
 import step2.vo.CountOfWinners;
 import step2.vo.LottoNumber;
 import step2.vo.LottoResults;
+import step2.vo.WinnerNumber;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Main {
 
         List<LottoNumber> winNumbers = inputView.getWinNumbers();
         LottoNumber bonusNumber = inputView.getBonusNumber();
-        CountOfWinners countOfWinners = new CountOfWinners(lottoResults.countNumOfWinner(winNumbers, bonusNumber));
+        CountOfWinners countOfWinners = new CountOfWinners(lottoResults.countNumOfWinner(new WinnerNumber(winNumbers, bonusNumber)));
 
         resultView.showLottoWinners(countOfWinners);
         resultView.showRateOfReturn(countOfWinners.calculateRateOfReturn(numOfLottoTicket));
