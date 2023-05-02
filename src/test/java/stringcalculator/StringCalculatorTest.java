@@ -6,25 +6,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringCalculatorTest {
 
-    private static final String ADDITION = "+";
-    private static final String SUBTRACTION = "-";
-    private static final String MULTIPLICATION = "*";
-    private static final String DIVISION = "/";
-    private final OperatorSet operatorSet = new OperatorSet(new HashSet<>(Arrays.asList(ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION)));
-
     StringCalculator stringCalculator;
 
     @BeforeEach
     void setUp() {
-        stringCalculator = new StringCalculator(operatorSet);
+        stringCalculator = new StringCalculator();
     }
 
     @ParameterizedTest
