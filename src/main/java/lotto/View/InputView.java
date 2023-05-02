@@ -1,5 +1,6 @@
 package lotto.View;
 
+import lotto.Model.BonusNumber;
 import lotto.Model.Count;
 import lotto.Model.TicketNumber;
 
@@ -41,5 +42,20 @@ public class InputView {
         }
 
         return winnerTicket.numbers();
+    }
+
+    public static int bonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String input = SCANNER.nextLine();
+
+        BonusNumber bonusNumber;
+        try {
+            bonusNumber = new BonusNumber(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return bonusNumber();
+        }
+
+        return bonusNumber.number();
     }
 }
