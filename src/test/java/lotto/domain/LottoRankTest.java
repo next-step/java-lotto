@@ -52,7 +52,7 @@ class LottoRankTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0:true", "1:true", "4:false"}, delimiter = ':')
+    @CsvSource(value = {"0:true", "2:true", "3:false"}, delimiter = ':')
     void isMiss(int count, boolean expected) throws Exception {
         //given
         LottoRank rank = LottoRank.valueOf(count, false);
