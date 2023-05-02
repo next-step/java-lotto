@@ -2,52 +2,40 @@ package lotto.enums;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoPrizeTest {
 
-    @Test
-    @DisplayName("로또 당첨 금액 테스트")
-    void lotto_prize_money_test() {
-
-        // When & Then
-        assertAll(
-                () -> assertEquals(2_000_000_000, LottoPrize.FIRST.getPrizeMoney()),
-                () -> assertEquals(1_500_000, LottoPrize.SECOND.getPrizeMoney()),
-                () -> assertEquals(50_000, LottoPrize.THIRD.getPrizeMoney()),
-                () -> assertEquals(5_000, LottoPrize.FOURTH.getPrizeMoney()),
-                () -> assertEquals(0, LottoPrize.NONE.getPrizeMoney())
-        );
+    @ParameterizedTest
+    @DisplayName("로또 등수와 상금 테스트")
+    @CsvSource({
+            "FIRST, 2000000000",
+            "SECOND, 1500000",
+            "THIRD, 50000",
+            "FOURTH, 5000",
+            "NONE, 0"
+    })
+    void lotto_prize_money_test(LottoPrize lottoPrize, int expectedPrize) {
+        assertEquals(expectedPrize, lottoPrize.getPrizeMoney());
     }
 
-
-    @Test
+    @ParameterizedTest
     @DisplayName("로또 당첨 금액 포맷 테스트")
-    void lotto_prize_money_format_test() {
-
+    @CsvSource(value = {"2,000,000,000: 6", "1,500,000: 5", "50,000: 4", "5,000: 3", "0: 0"}, delimiter = ':')
+    void lotto_prize_money_format_test(String value, int number) {
         // When & Then
-        assertAll(
-                () -> assertEquals("2,000,000,000", LottoPrize.FIRST.getPrizeMoneyFormat()),
-                () -> assertEquals("1,500,000", LottoPrize.SECOND.getPrizeMoneyFormat()),
-                () -> assertEquals("50,000", LottoPrize.THIRD.getPrizeMoneyFormat()),
-                () -> assertEquals("5,000", LottoPrize.FOURTH.getPrizeMoneyFormat()),
-                () -> assertEquals("0", LottoPrize.NONE.getPrizeMoneyFormat())
-        );
+        assertEquals(value, LottoPrize.valueOf(number).getPrizeMoneyFormat());
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("로또 당첨 순위 테스트")
-    void lotto_prize_money_rank_test() {
-
-        // When & Then
-        assertAll(
-                () -> assertEquals(LottoPrize.FIRST, LottoPrize.valueOf(6)),
-                () -> assertEquals(LottoPrize.SECOND, LottoPrize.valueOf(5)),
-                () -> assertEquals(LottoPrize.THIRD, LottoPrize.valueOf(4)),
-                () -> assertEquals(LottoPrize.FOURTH, LottoPrize.valueOf(3)),
-                () -> assertEquals(LottoPrize.NONE, LottoPrize.valueOf(0))
-        );
+    @CsvSource({"6, FIRST", "5, SECOND", "4, THIRD", "3, FOURTH", "0, NONE"})
+    void lotto_prize_money_rank_test(int value, LottoPrize expected) {
+        assertEquals(expected, LottoPrize.valueOf(value));
     }
 
 }

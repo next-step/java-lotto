@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
 import lotto.enums.LottoPrize;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ResultView {
@@ -26,7 +27,7 @@ public class ResultView {
         StringBuilder sb = new StringBuilder();
         sb.append("당첨 통계\n------\n");
 
-        int[] matchCounts = lottoStatistics.getMatchCounts();
+        final List<Integer> matchCounts = lottoStatistics.getMatchCounts();
         printMatchCount(sb, matchCounts);
 
         double yield = lottoStatistics.calculateYield();
@@ -34,11 +35,12 @@ public class ResultView {
         return sb.toString();
     }
 
-    private static void printMatchCount(final StringBuilder sb, final int[] matchCounts) {
-        for (int i = 0; i < matchCounts.length; i++) {
+    private static void printMatchCount(final StringBuilder sb, final List<Integer> matchCounts) {
+        for (int i = 0; i < matchCounts.size(); i++) {
             int matches = i + 3;
             LottoPrize prize = LottoPrize.valueOf(matches);
-            sb.append(String.format("%d 개 일치 (%s) 원 - %d 개\n", matches, prize.getPrizeMoneyFormat(), matchCounts[i]));
+            sb.append(String.format("%d 개 일치 (%s) 원 - %d 개\n", matches, prize.getPrizeMoneyFormat(), matchCounts.get(i)));
         }
     }
+
 }

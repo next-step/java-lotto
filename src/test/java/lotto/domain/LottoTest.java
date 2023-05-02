@@ -28,4 +28,12 @@ class LottoTest {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(Arrays.asList(1,2,3,4,5,5)));
     }
 
+    @Test
+    @DisplayName("CountMathTest")
+    void count_match_test() {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,7));
+        assertEquals(5, lotto.countMatch(winningLotto.getLottoNumbers()));
+    }
+
 }
