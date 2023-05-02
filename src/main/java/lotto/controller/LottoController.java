@@ -1,24 +1,27 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.RandomNumberCreation;
-import lotto.domain.WinningNumber;
+import lotto.domain.LottoTicketMachine;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningTicket;
 import lotto.dto.LottoNumbersDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
 
     public static void main(String[] args) {
-        Lotto lotto = new Lotto();
+        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
         int purchaseAmount = InputView.inputPurchaseAmount();
-        lotto.createLottoNumbers(purchaseAmount);
-        OutputView.outputLottoCount(lotto.getLottoCount());
-        OutputView.outputLottoNumbers(LottoNumbersDto.of(lotto.getLottoNumbers()));
+        lottoTicketMachine.createLottoNumbers(purchaseAmount);
+        OutputView.outputLottoCount(lottoTicketMachine.getLottoCount());
+        OutputView.outputLottoNumbers(LottoNumbersDto.of(lottoTicketMachine.getLottoNumbers()));
 
-        WinningNumber winningNumber
-                = new WinningNumber(InputView.inputLastWinningNumber());
-
-        OutputView.outputLottoStatistics(lotto.calculateLottoStatistics(winningNumber));
+        List<Integer> winningNumbers = InputView.inputLastWinningNumber();
+        LottoNumber bonusBallNumber = new LottoNumber(InputView.inputBonusBallNumber());
+        WinningTicket winningTicket
+                = new WinningTicket(winningNumbers, bonusBallNumber);
+        OutputView.outputLottoStatistics(lottoTicketMachine.calculateLottoStatistics(winningTicket));
     }
 }

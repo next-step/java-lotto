@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum LottoRank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     FAIL(0, 0);
 
     private final int matchCount;
@@ -17,7 +18,15 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank of(int count) {
+    public static LottoRank valueOf(int count, boolean matchBonus) {
+        if (count == 5 && matchBonus) {
+            return SECOND;
+        }
+
+        if (count == 5) {
+            return THIRD;
+        }
+
         return Arrays.stream(values())
                 .filter(e -> e.matchCount == count)
                 .findFirst()
@@ -30,6 +39,10 @@ public enum LottoRank {
 
     public boolean isMiss() {
         return matchCount == 0;
+    }
+
+    public boolean isSecond() {
+        return this == LottoRank.SECOND;
     }
 
     public int getPrizeMoney() {

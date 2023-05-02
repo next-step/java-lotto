@@ -1,36 +1,40 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
 
-    public static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_FIRST_NUMBER = 1;
+    public static final int LOTTO_LAST_NUMBER = 45;
 
-    private final List<Integer> lottoNumber;
+    private final int number;
 
-    public LottoNumber(NumberCreationStrategy strategy) {
-        this(strategy.createNumber());
+    public LottoNumber(int number) {
+        validateNumber(number);
+        this.number = number;
     }
 
-    public LottoNumber(List<Integer> lottoNumber) {
-        validateLottoNumberLength(lottoNumber);
-        this.lottoNumber = lottoNumber;
-    }
-
-    private void validateLottoNumberLength(List<Integer> lottoNumber) {
-        if (lottoNumber.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6자리입니다.");
+    private void validateNumber(int number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException(
+                    String.format("범위에 맞지 않는 수입니다. 입력한 수: %d", number));
         }
     }
 
-    public int calculateSameNumberCount(LottoNumber number) {
-        List<Integer> lottoNumber = number.getLottoNumber();
-        return (int) this.lottoNumber.stream()
-                .filter(lottoNumber::contains)
-                .count();
+    public int getNumber() {
+        return number;
     }
 
-    public List<Integer> getLottoNumber() {
-        return lottoNumber;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

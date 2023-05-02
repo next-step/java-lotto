@@ -15,11 +15,11 @@ class LottoRankTest {
 
     @ParameterizedTest
     @MethodSource("lottoRankProvider")
-    void of(int count, LottoRank rank) throws Exception {
+    void of(int count, LottoRank rank, boolean matchBonus) throws Exception {
         //given
 
         //when
-        LottoRank result = LottoRank.of(count);
+        LottoRank result = LottoRank.valueOf(count, matchBonus);
 
         //then
         assertThat(result).isEqualTo(rank);
@@ -27,20 +27,21 @@ class LottoRankTest {
 
     static Stream<Arguments> lottoRankProvider() {
         return Stream.of(
-                arguments(0, LottoRank.FAIL),
-                arguments(1, LottoRank.FAIL),
-                arguments(2, LottoRank.FAIL),
-                arguments(3, LottoRank.FOURTH),
-                arguments(4, LottoRank.THIRD),
-                arguments(5, LottoRank.SECOND),
-                arguments(6, LottoRank.FIRST)
+                arguments(0, LottoRank.FAIL, false),
+                arguments(1, LottoRank.FAIL, false),
+                arguments(2, LottoRank.FAIL, false),
+                arguments(3, LottoRank.FIFTH, false),
+                arguments(4, LottoRank.FOURTH, false),
+                arguments(5, LottoRank.THIRD, false),
+                arguments(5, LottoRank.SECOND, true),
+                arguments(6, LottoRank.FIRST, false)
         );
     }
 
     @Test
     void calculatePrizeMoney() throws Exception {
         //given
-        LottoRank rank = LottoRank.of(4);
+        LottoRank rank = LottoRank.valueOf(4, false);
         int prizeMoney = rank.getPrizeMoney();
 
         //when
@@ -51,10 +52,10 @@ class LottoRankTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0:true", "1:true", "4:false"}, delimiter = ':')
+    @CsvSource(value = {"0:true", "2:true", "3:false"}, delimiter = ':')
     void isMiss(int count, boolean expected) throws Exception {
         //given
-        LottoRank rank = LottoRank.of(count);
+        LottoRank rank = LottoRank.valueOf(count, false);
 
         //when
         boolean result = rank.isMiss();
