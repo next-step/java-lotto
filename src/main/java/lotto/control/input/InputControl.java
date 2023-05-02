@@ -27,8 +27,8 @@ public abstract class InputControl<T> {
     }
 
     public List<T> getValues(int count) {
-        if (count <= 0) {
-            throw new IllegalArgumentException("The input value must be greater than 0");
+        if (count < 0) {
+            throw new IllegalArgumentException("The input value must be >= 0");
         }
 
         view.render();
