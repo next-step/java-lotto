@@ -3,7 +3,7 @@ package step2.service;
 import step2.domain.entity.Lotto;
 import step2.domain.entity.LottoTicket;
 import step2.domain.vo.LottoPrize;
-import step2.domain.vo.Number;
+import step2.domain.vo.LottoNumber;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class LottoPrizeChecker {
         return sameNumberCount(winner.getLottoNumbers(), compare.getLottoNumbers());
     }
 
-    private static int sameNumberCount(List<Number> winners, List<Number> compares) {
+    private static int sameNumberCount(List<LottoNumber> winners, List<LottoNumber> compares) {
         return (int) winners.stream()
                 .filter(compares::contains)
                 .count();

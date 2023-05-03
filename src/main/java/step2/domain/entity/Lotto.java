@@ -1,6 +1,6 @@
 package step2.domain.entity;
 
-import step2.domain.vo.Number;
+import step2.domain.vo.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,15 +11,15 @@ public class Lotto {
     public static final int PRICE = 1000;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private List<Number> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Number> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto(int... numbers) {
         this.lottoNumbers = Arrays.stream(numbers)
-                .mapToObj(Number::new)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -35,13 +35,13 @@ public class Lotto {
         return number.split(",");
     }
 
-    private List<Number> toLottoNumbers(String[] numbers) {
+    private List<LottoNumber> toLottoNumbers(String[] numbers) {
         validateLottoNumbers(numbers);
 
         return Arrays.stream(numbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -51,7 +51,7 @@ public class Lotto {
         }
     }
 
-    public List<Number> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

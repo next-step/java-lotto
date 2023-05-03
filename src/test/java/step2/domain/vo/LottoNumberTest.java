@@ -5,14 +5,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class NumberTest {
+class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-5, 0, 46, 999})
     void 로또번호가_1부터_45사이의_숫자가_아닐경우_예외를_던진다(int number) {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new Number(number)
+                () -> new LottoNumber(number)
         );
     }
 }
