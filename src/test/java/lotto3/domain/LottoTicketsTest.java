@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class LottoTicketsTest {
 
   @Test
-  void 당첨번호와_보너스번호를_맞춘경우_검증() {
+  void 당첨번호와_보너스번호를_맞춘경우_올바른_LottoResults를_가지는지_검증() {
     LottoTickets lottoTickets = new LottoTickets(
         List.of(
             new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
