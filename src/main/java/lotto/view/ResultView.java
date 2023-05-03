@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoReward;
 import lotto.domain.LottoRewards;
 import lotto.domain.RewardType;
@@ -21,14 +21,14 @@ public class ResultView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void printAllLottoNumbers(List<LottoNumbers> lottoNumbersList) {
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            System.out.println(lottoNumbers);
+    public static void printLottos(List<Lotto> lottoList) {
+        for (Lotto lotto : lottoList) {
+            System.out.println(lotto);
         }
         printNewLine();
     }
 
-    public static void printWinningLottoNumbersInputCommand() {
+    public static void printWinningLottoInputCommand() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 

@@ -20,47 +20,47 @@ public class LottoGame {
         return price / LOTTO_PRICE;
     }
 
-    public static List<LottoNumbers> generateAllLottoNumbers(long lottoCount) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+    public static List<Lotto> generateLottos(long lottoCount) {
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = BEGIN_INDEX; i < lottoCount; i++) {
-            lottoNumbersList.add(new LottoNumbers());
+            lottoList.add(new Lotto());
         }
-        return lottoNumbersList;
+        return lottoList;
     }
 
-    public static LottoNumbers winningLottoNumbers(String input) {
+    public static Lotto winningLotto(String input) {
         String[] split = input.split(SEPARATOR);
         Set<LottoNumber> numbers = new HashSet<>();
 
         for (int i = BEGIN_INDEX; i < split.length; i++) {
             numbers.add(new LottoNumber(Integer.parseInt(split[i])));
         }
-        return new LottoNumbers(numbers);
+        return new Lotto(numbers);
     }
 
     public static LottoNumber bonusLottoNumber(int bonusLottoNumber) {
         return new LottoNumber(bonusLottoNumber);
     }
 
-    public static LottoRewards reward(List<LottoNumbers> lottoNumbersList, WinningLottoNumbers winningLottoNumbers) {
+    public static LottoRewards reward(List<Lotto> lottoList, WinningLotto winningLotto) {
         LottoRewards lottoRewards = new LottoRewards();
 
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            increaseLottoRewardCount(lottoRewards, lottoNumbers, winningLottoNumbers);
+        for (Lotto lotto : lottoList) {
+            increaseLottoRewardCount(lottoRewards, lotto, winningLotto);
         }
 
         return lottoRewards;
     }
 
-    private static void increaseLottoRewardCount(LottoRewards lottoRewards, LottoNumbers lottoNumbers, WinningLottoNumbers winningLottoNumbers) {
-        if (lottoNumbers.isNotWinningMatchCountWith(winningLottoNumbers.numbers())) {
+    private static void increaseLottoRewardCount(LottoRewards lottoRewards, Lotto lotto, WinningLotto winningLotto) {
+        if (lotto.isNotWinningMatchCountWith(winningLotto.numbers())) {
             return;
         }
 
-        int matchCount = lottoNumbers.matchCount(winningLottoNumbers.numbers());
+        int matchCount = lotto.matchCount(winningLotto.numbers());
         RewardType rewardType = RewardType.of(matchCount);
 
-        if (rewardType == RewardType.FIVE && lottoNumbers.isMatchWith(winningLottoNumbers.bonusNumber())) {
+        if (rewardType == RewardType.FIVE && lotto.isMatchWith(winningLotto.bonusNumber())) {
             rewardType = RewardType.FIVE_AND_BONUS;
         }
 

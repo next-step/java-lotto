@@ -16,19 +16,19 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoGameTest {
 
-    WinningLottoNumbers winningLottoNumbers;
-    LottoNumbers myLottoNumbers, winningLottoNumbersExcludingBonus;
+    WinningLotto winningLotto;
+    Lotto myLotto, winningLottoExcludingBonus;
     LottoNumber bonusLottoNumber;
 
     @BeforeEach
     void setUp() {
-        myLottoNumbers = new LottoNumbers(
+        myLotto = new Lotto(
                 Stream.of(
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
                 ).collect(Collectors.toSet()));
 
-        winningLottoNumbersExcludingBonus = new LottoNumbers(
+        winningLottoExcludingBonus = new Lotto(
                 Stream.of(
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)
@@ -36,7 +36,7 @@ public class LottoGameTest {
 
         bonusLottoNumber = new LottoNumber(6);
 
-        winningLottoNumbers = new WinningLottoNumbers(winningLottoNumbersExcludingBonus, bonusLottoNumber);
+        winningLotto = new WinningLotto(winningLottoExcludingBonus, bonusLottoNumber);
     }
 
     @ParameterizedTest
@@ -62,10 +62,10 @@ public class LottoGameTest {
     @Test
     void 총_수익_계산() {
         //given
-        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers, myLottoNumbers);
+        List<Lotto> lottoList = Arrays.asList(myLotto, myLotto);
 
         //when
-        LottoRewards reward = LottoGame.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = LottoGame.reward(lottoList, winningLotto);
 
         //then
         assertThat(reward.totalProfit()).isEqualTo(60000000L);
@@ -74,11 +74,11 @@ public class LottoGameTest {
     @Test
     void 총_수익률_계산() {
         //given
-        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers, myLottoNumbers);
+        List<Lotto> lottoList = Arrays.asList(myLotto, myLotto);
         long purchasePrice = 2000l;
 
         //when
-        LottoRewards reward = LottoGame.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = LottoGame.reward(lottoList, winningLotto);
 
         //then
         assertThat(LottoGame.totalProfitRate(reward, purchasePrice)).isEqualTo(30000);
@@ -87,10 +87,10 @@ public class LottoGameTest {
     @Test
     void 일치_수별_횟수_세기() {
         //given
-        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers, winningLottoNumbersExcludingBonus);
+        List<Lotto> lottoList = Arrays.asList(myLotto, winningLottoExcludingBonus);
 
         //when
-        LottoRewards reward = LottoGame.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = LottoGame.reward(lottoList, winningLotto);
 
         //then
         assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
@@ -100,10 +100,10 @@ public class LottoGameTest {
     @Test
     void 당첨번호_5개_일치_보너스번호_일치() {
         //given
-        List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers);
+        List<Lotto> lottoList = Arrays.asList(myLotto);
 
         //when
-        LottoRewards reward = LottoGame.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = LottoGame.reward(lottoList, winningLotto);
 
         //then
         assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);

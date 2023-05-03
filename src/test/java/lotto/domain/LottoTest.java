@@ -9,19 +9,19 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumbersTest {
+public class LottoTest {
 
-    LottoNumbers myLottoNumbers, winningLottoNumbers;
+    Lotto myLotto, winningLotto;
 
     @BeforeEach
     void setUp() {
-        myLottoNumbers = new LottoNumbers(
+        myLotto = new Lotto(
                 Stream.of(
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
                 ).collect(Collectors.toSet()));
 
-        winningLottoNumbers = new LottoNumbers(
+        winningLotto = new Lotto(
                 Stream.of(
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)
@@ -29,13 +29,13 @@ public class LottoNumbersTest {
     }
 
     @Test
-    void LottoNumbers_생성() {
-        assertThat(myLottoNumbers.value()).contains(new LottoNumber(1), new LottoNumber(6));
+    void Lotto_생성() {
+        assertThat(myLotto.value()).contains(new LottoNumber(1), new LottoNumber(6));
     }
 
     @Test
-    void LottoNumbers_생성_사이즈_예외() {
-        assertThatThrownBy(() -> new LottoNumbers(
+    void Lotto_생성_사이즈_예외() {
+        assertThatThrownBy(() -> new Lotto(
                 Stream.of(
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(5)
@@ -46,7 +46,7 @@ public class LottoNumbersTest {
 
     @Test
     void 로또_번호와_당첨_번호_일치_개수_계산() {
-        assertThat(myLottoNumbers.matchCount(winningLottoNumbers))
+        assertThat(myLotto.matchCount(winningLotto))
                 .isEqualTo(3);
     }
 }

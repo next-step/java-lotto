@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
 import java.util.Scanner;
 
@@ -23,18 +23,18 @@ public class InputView {
         return purchasePrice % LOTTO_PRICE != 0;
     }
 
-    public String inputWinningLottoNumbers() {
-        ResultView.printWinningLottoNumbersInputCommand();
+    public String inputWinningLotto() {
+        ResultView.printWinningLottoInputCommand();
 
         return nextLine();
     }
 
-    public int inputBonusLottoNumber(LottoNumbers winningLottoNumbers) {
+    public int inputBonusLottoNumber(Lotto winningLotto) {
         ResultView.printBonusLottoNumberInputCommand();
 
         int bonusLottoNumber = Integer.parseInt(nextLine());
 
-        if (winningLottoNumbers.value().stream().anyMatch(v -> v.value() == bonusLottoNumber)) {
+        if (winningLotto.value().stream().anyMatch(v -> v.value() == bonusLottoNumber)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 볼은 일치할 수 없습니다.");
         }
         return bonusLottoNumber;

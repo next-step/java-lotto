@@ -1,16 +1,16 @@
 package lotto.domain;
 
-public class WinningLottoNumbers {
+public class WinningLotto {
 
-    public WinningLottoNumbers(LottoNumbers numbers, LottoNumber bonusNumber) {
+    public WinningLotto(Lotto numbers, LottoNumber bonusNumber) {
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private final LottoNumbers numbers;
+    private final Lotto numbers;
     private final LottoNumber bonusNumber;
 
-    public LottoNumbers numbers() {
+    public Lotto numbers() {
         return numbers;
     }
 

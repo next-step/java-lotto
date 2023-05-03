@@ -12,6 +12,6 @@ class LottoMachineTest {
 
         //when
         //then
-        assertThat(lottoMachine.drawnLottoNumbers().size()).isEqualTo(6);
+        assertThat(lottoMachine.drawnLotto().size()).isEqualTo(6);
     }
 }

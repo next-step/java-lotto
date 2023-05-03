@@ -15,14 +15,14 @@ public class Main {
 
         ResultView.printLottoCount(lottoCount);
 
-        List<LottoNumbers> lottoNumbersList = LottoGame.generateAllLottoNumbers(lottoCount);
+        List<Lotto> lottoList = LottoGame.generateLottos(lottoCount);
 
-        ResultView.printAllLottoNumbers(lottoNumbersList);
+        ResultView.printLottos(lottoList);
 
-        LottoNumbers winningLottoNumbers = LottoGame.winningLottoNumbers(inputView.inputWinningLottoNumbers());
-        LottoNumber bonusLottoNumber = LottoGame.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLottoNumbers));
+        Lotto winningLotto = LottoGame.winningLotto(inputView.inputWinningLotto());
+        LottoNumber bonusLottoNumber = LottoGame.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLotto));
 
-        LottoRewards lottoRewards = LottoGame.reward(lottoNumbersList, winningLottoNumbers(winningLottoNumbers, bonusLottoNumber));
+        LottoRewards lottoRewards = LottoGame.reward(lottoList, winningLotto(winningLotto, bonusLottoNumber));
         double totalProfitRate = LottoGame.totalProfitRate(lottoRewards, purchasePrice);
 
         ResultView.printWinningStatics(lottoRewards, totalProfitRate);
@@ -30,7 +30,7 @@ public class Main {
         inputView.close();
     }
 
-    private static WinningLottoNumbers winningLottoNumbers(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
-        return new WinningLottoNumbers(winningLottoNumbers, bonusLottoNumber);
+    private static WinningLotto winningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        return new WinningLotto(winningLotto, bonusLottoNumber);
     }
 }
