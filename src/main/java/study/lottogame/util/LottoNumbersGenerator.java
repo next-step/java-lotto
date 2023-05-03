@@ -12,8 +12,8 @@ public class LottoNumbersGenerator {
 
   static {
     numbers = new ArrayList<>();
-    for (int i = 0; i < LottoNumber.MAX_LOTTO_NUMBER; i++) {
-      numbers.add(i + 1);
+    for (int i = LottoNumber.MIN_LOTTO_NUMBER; i <= LottoNumber.MAX_LOTTO_NUMBER; i++) {
+      numbers.add(i);
     }
   }
 
