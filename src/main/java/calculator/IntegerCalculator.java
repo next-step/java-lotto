@@ -3,32 +3,19 @@ package calculator;
 import calculator.converter.StringConverter;
 import calculator.parser.ExpressionParser;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
 
 public class IntegerCalculator {
     private final ExpressionParser parser;
     private final StringConverter<Integer> stringToIntegerConverter;
-    private final Map<String, BiFunction<Integer,Integer,Integer>> operators;
+    private final Operators operators;
 
     public IntegerCalculator(ExpressionParser parser,
-                             StringConverter<Integer> stringToIntegerConverter) {
+                             StringConverter<Integer> stringToIntegerConverter,
+                             Operators operators) {
         this.parser = parser;
         this.stringToIntegerConverter = stringToIntegerConverter;
-        this.operators = setOperators();
-    }
-
-    private Map<String, BiFunction<Integer, Integer,Integer>> setOperators() {
-        HashMap<String, BiFunction<Integer,Integer,Integer>> opMap = new HashMap<>();
-
-        opMap.put("+", Integer::sum);
-        opMap.put("-", (a,b) -> a - b);
-        opMap.put("*", (a,b) -> a * b);
-        opMap.put("/", (a,b) -> a / b);
-
-        return opMap;
+        this.operators = operators;
     }
 
     public int calculate(String expressionString) {
@@ -37,10 +24,19 @@ public class IntegerCalculator {
 
         for(int idx = 0 ; idx < parts.size() ;idx++) {
             if(idx  % 2 != 0) {
-                init = operators.get(parts.get(idx))
-                        .apply(init, stringToIntegerConverter.convert(parts.get(idx + 1)));
+                String operator = parts.get(idx);
+
+                checkArithmeticOperator(operator);
+                init = operators.operationOf(operator)
+                        .operate(init, stringToIntegerConverter.convert(parts.get(idx + 1)));
             }
         }
         return init;
+    }
+
+    private void checkArithmeticOperator(String operator) {
+        if(!operators.hasOperator(operator)) {
+            throw new IllegalArgumentException("사칙 연산자가 아닙니다.");
+        }
     }
 }

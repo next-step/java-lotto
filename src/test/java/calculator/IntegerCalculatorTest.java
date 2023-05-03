@@ -3,15 +3,30 @@ package calculator;
 import calculator.converter.IntegerStringConverter;
 import calculator.parser.ExpressionParser;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class IntegerCalculatorTest {
 
     private final String delimiter = " ";
-    private final IntegerCalculator calculator =
-            new IntegerCalculator(
-                    new ExpressionParser(delimiter),
-                    new IntegerStringConverter());
+    private IntegerCalculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        Map<String, Operator> operatorMap = new HashMap<>();
+        operatorMap.put("+", new Operator((a, b) -> a + b));
+        operatorMap.put("-", new Operator((a, b) -> a - b));
+        operatorMap.put("*", new Operator((a, b) -> a * b));
+        operatorMap.put("/", new Operator((a, b) -> a / b));
+
+        calculator = new IntegerCalculator(
+                new ExpressionParser(delimiter),
+                new IntegerStringConverter(),
+                new Operators(operatorMap));
+    }
 
     @Test
     void 사칙_연산자_외의_문자가_포함된_경우_예외를_발생시킨다() {
