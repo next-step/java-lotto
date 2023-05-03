@@ -11,6 +11,7 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private static final int MATCH_COUNT_MIN = 3;
     private static final int MATCH_COUNT_MAX = 6;
+    private static final int INIT_COUNT = 1;
 
     private final Set<LottoNumber> numbers;
 
@@ -25,18 +26,37 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    boolean isNotWinningMatchCountWith(Lotto numbers) {
+    public void increaseLottoRewardCount(LottoRewards lottoRewards, WinningLotto winningLotto) {
+        if (isNotWinningMatchCountWith(winningLotto.numbers())) {
+            return;
+        }
+
+        int matchCount = matchCount(winningLotto.numbers());
+        RewardType rewardType = RewardType.of(matchCount);
+
+        if (rewardType == RewardType.FIVE && isMatchWith(winningLotto.bonusNumber())) {
+            rewardType = RewardType.FIVE_AND_BONUS;
+        }
+
+        if (lottoRewards.isNotContainRewardType(rewardType)) {
+            lottoRewards.add(new LottoReward(rewardType, INIT_COUNT));
+            return;
+        }
+        lottoRewards.increaseCountOf(rewardType);
+    }
+
+    private boolean isNotWinningMatchCountWith(Lotto numbers) {
         return matchCount(numbers) < MATCH_COUNT_MIN || matchCount(numbers) > MATCH_COUNT_MAX;
     }
 
-    public int matchCount(Lotto numbers) {
+    int matchCount(Lotto numbers) {
         List<LottoNumber> matchNumbers = this.numbers.stream()
                 .filter(v -> numbers.value().stream()
                         .anyMatch(Predicate.isEqual(v))).collect(Collectors.toList());
         return matchNumbers.size();
     }
 
-    boolean isMatchWith(LottoNumber number) {
+    private boolean isMatchWith(LottoNumber number) {
         return numbers.stream().anyMatch(v -> v.value() == number.value());
     }
 
@@ -48,4 +68,5 @@ public class Lotto {
     public String toString() {
         return numbers.toString();
     }
+
 }
