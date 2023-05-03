@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.InputView;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,8 +13,7 @@ class WinLottoTest {
 
     @Test
     void 지난주당첨번호() {
-        String inputNumbers = "1, 8, 11, 31, 41, 42";
-        WinLotto winLotto = new WinLotto(inputNumbers);
+        WinLotto winLotto = new WinLotto(getNumbersForTest("1, 8, 11, 31, 41, 42"));
 
         List<Integer> expectedNumbers = new ArrayList<>();
         expectedNumbers.add(1);
@@ -30,11 +30,16 @@ class WinLottoTest {
 
     @Test
     void ToString() {
-        String inputNumbers = "1, 8, 11, 31, 41, 42";
-        WinLotto winLotto = new WinLotto(inputNumbers);
+        WinLotto winLotto = new WinLotto(getNumbersForTest("1, 8, 11, 31, 41, 42"));
 
         String expectedToString = "[1, 8, 11, 31, 41, 42]";
 
         assertThat(winLotto.toString()).isEqualTo(expectedToString);
+    }
+
+    private static Numbers getNumbersForTest(String input) {
+        List<Integer> inputNumbers = InputView.makeNumbers(input);
+        Numbers numbers = new Numbers(inputNumbers);
+        return numbers;
     }
 }

@@ -1,25 +1,32 @@
 package lotto;
 
+import lotto.domain.MyLottos;
 import lotto.domain.WinLotto;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoApplication {
     public static void main(String[] args) {
-        //로또 구매
-        InputView inputView = InputView.buy();
-        LottoService lottoService = new LottoService(inputView.money());
-        //로또 자동 생성
-        lottoService.autoGenerate();
-        ResultView.showMyLottos(lottoService.lottos());
+        LottoService lottoService = new LottoService();
+
+        //로또 구매 & 로또 자동 생성
+        int money = InputView.buy();
+        MyLottos myLottos = lottoService.autoGenerate(money);
+        ResultView.showMyLottos(myLottos);
+
         //지난주 당첨 번호
-        WinLotto winLotto = new WinLotto(inputView.winLottoInfo());
+        List<Integer> winLottoInfoNumbers = InputView.inputWinLottoNumbers();
+        WinLotto winLotto = lottoService.makeWinLotto(winLottoInfoNumbers);
         ResultView.showWinLotto(winLotto);
+
         //당첨번호 조회 및 통계
-        lottoService.checkWin(winLotto);
-        ResultView.showLottoResult(lottoService.result());
+        lottoService.checkWin(myLottos, winLotto);
+        ResultView.showLottoResult(myLottos.result());
+
         //수익률
-        ResultView.showProfit(lottoService.profit());
+        ResultView.showProfit(myLottos.profit());
     }
 }

@@ -3,13 +3,8 @@ package lotto.domain;
 public class WinLotto {
     private final Numbers numbers;
 
-    public WinLotto(String inputString) {
-        numbers = new Numbers(inputString);
-    }
-
-    @Override
-    public String toString() {
-        return numbers.toString();
+    public WinLotto(Numbers numbers) {
+        this.numbers = numbers;
     }
 
     public Numbers numbers() {
@@ -18,5 +13,10 @@ public class WinLotto {
 
     public Integer findNumber(int i) {
         return numbers.find(i);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

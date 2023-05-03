@@ -5,27 +5,28 @@ import java.util.List;
 
 public class MyLottos {
     private final List<MyLotto> myLottos;
+    private final Purchase purchase;
+    private final Result result;
 
-    public MyLottos(List<MyLotto> myLottos) {
+    public MyLottos(List<MyLotto> myLottos, Purchase purchase) {
         this.myLottos = myLottos;
+        this.purchase = purchase;
+        this.result = new Result(purchase);
     }
 
-    public MyLottos() {
-        this(new ArrayList<>());
-    }
-
-    public void autoGenerate(int count) {
-        for (int i = 0; i < count; i++) {
-            autoGenerateOne();
+    public static MyLottos autoGenerate(Purchase purchase) {
+        List<MyLotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchase.count(); i++) {
+            lottos.add(autoGenerateOne());
         }
+        return new MyLottos(lottos, purchase);
     }
 
-    private void autoGenerateOne() {
-        MyLotto generatedMyLotto = MyLotto.auto();
-        myLottos.add(generatedMyLotto);
+    private static MyLotto autoGenerateOne() {
+        return MyLotto.auto();
     }
 
-    public void checkWin(WinLotto winLotto, Result result) {
+    public void checkWin(WinLotto winLotto) {
         for (MyLotto myLotto : myLottos) {
             myLotto.checkMatchingNumbers(winLotto);
             result.update(myLotto);
@@ -40,4 +41,12 @@ public class MyLottos {
     public MyLotto find(int index) {
         return myLottos.get(index);
     }
+
+    public Result result() {
+        return result;
+    }
+    public double profit() {
+        return result.profit();
+    }
+
 }

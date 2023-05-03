@@ -1,11 +1,16 @@
 package lotto.domain;
 
 public class Result {
+    private Purchase purchase;
     private int matched3NumbersCount;
     private int matched4NumbersCount;
     private int matched5NumbersCount;
     private int matched6NumbersCount;
     private int prizeAmount;
+
+    public Result(Purchase purchase) {
+        this.purchase = purchase;
+    }
 
 
     public void update(MyLotto myLotto) {
@@ -49,7 +54,7 @@ public class Result {
         return matched6NumbersCount;
     }
 
-    public double profit(int money) {
-        return (prizeAmount + 0.0) / money;
+    public double profit() {
+        return (prizeAmount + 0.0) / (purchase.money());
     }
 }
