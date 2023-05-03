@@ -19,7 +19,7 @@ public class InputView {
 
     public static Lotto inputLastLottoNumbers() {
         SCANNER.nextLine();
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요.");
 
         final var number = SCANNER.nextLine();
 
