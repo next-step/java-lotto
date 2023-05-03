@@ -19,15 +19,18 @@ public class MyLotto {
     }
 
     public void checkMatchingNumbers(WinLotto winLotto) {
+        int result = 0;
         for (int i = 0; i < LottoRule.CHOICE_COUNT; i++) {
-            checkMatchingNumber(winLotto.findNumber(i));
+            result += checkMatchingNumber(winLotto.findNumber(i));
         }
+        matchingCount = result;
     }
 
-    private void checkMatchingNumber(Integer winNumber) {
+    private int checkMatchingNumber(Integer winNumber) {
         if (numbers.contains(winNumber)) {
-            matchingCount++;
+            return 1;
         }
+        return 0;
     }
 
     public int matchingCount() {
