@@ -24,7 +24,7 @@ public class WinningResult {
     }
 
     public void calculateWinningResult(Map<Integer, List<Integer>> lottoNumbers, List<Integer> winningNumbers) {
-        for (int i = 0; i < lottoNumbers.size(); i++) {
+        for (int i = 1; i <= lottoNumbers.size(); i++) {
             List<Integer> lottoNumber = lottoNumbers.get(i);
             int equalNumberCount = countEqualNumbers(lottoNumber, winningNumbers);
             saveWinningResult(equalNumberCount);
