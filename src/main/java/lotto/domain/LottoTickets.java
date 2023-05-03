@@ -1,14 +1,11 @@
 package lotto.domain;
 
+import lotto.domain.strategy.LottoTicketCreateStrategy;
 import lotto.dto.CheckWinningRequest;
 import lotto.dto.WinningResult;
 import lotto.enums.Rank;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class LottoTickets {
 
@@ -17,6 +14,14 @@ public class LottoTickets {
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public static LottoTickets of(int ticketCount, LottoTicketCreateStrategy createStrategy) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            lottoTickets.add(LottoTicket.of(createStrategy));
+        }
+        return new LottoTickets(lottoTickets);
     }
 
     public double getTotalReturn(CheckWinningRequest checkWinningRequest) {
@@ -42,7 +47,5 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public String lottoTicketsToString() {
-        return lottoTickets.stream().map(o -> o.toString()).collect(Collectors.joining("\n"));
-    }
+
 }
