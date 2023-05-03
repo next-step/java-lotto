@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.InputConverter;
 import lotto.domain.Lotto;
 import lotto.domain.Store;
 import lotto.domain.WinningStatistics;
@@ -19,7 +20,10 @@ public class LottoApplication {
         ResultView resultView = new ResultView();
         resultView.showMyLotto(lottoBundle);
 
-        WinningStatistics winningStatistics = new WinningStatistics(inputView.askLastLottoNumber());
+        String strList = inputView.askLastLottoNumber();
+
+        InputConverter inputConverter = new InputConverter();
+        WinningStatistics winningStatistics = new WinningStatistics(inputConverter.convertNumberToList(strList));
 
         List<Integer> result = winningStatistics.compareWithTargetNumber(lottoBundle);
         System.out.println(result);

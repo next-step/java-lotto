@@ -9,29 +9,17 @@ public class WinningStatistics {
 
     private final List<Integer> targetNumber;
 
-    public WinningStatistics(String targetNumber) {
-        this.targetNumber = convertNumberToList(targetNumber);
+    public WinningStatistics(List<Integer> targetNumber) {
+        this.targetNumber = targetNumber;
     }
 
-    private List<Integer> convertNumberToList(String targetNumber) {
-        List<Integer> numberList = Arrays.stream(targetNumber.split(", "))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
-//        isThrowIllegalArgumentException(numberList);
 
-        return numberList;
-    }
 
     public List<Integer> compareWithTargetNumber(List<Lotto> lottoBundle) {
         return lottoBundle.stream()
                 .map(lotto -> lotto.checkLottoNumber(this.targetNumber))
                 .collect(Collectors.toList());
     }
-
-    private boolean isNumber(String strNumber) {
-        return NUMBER_PATTERN_COMPILE.asMatchPredicate().test(strNumber);
-    }
-
 
     public List<Integer> showTargetNumber() {
         return new ArrayList<>(this.targetNumber);

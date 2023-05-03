@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputConverter {
-  private static final Pattern TARGET_NUMBER_PATTERN = Pattern.compile("^[1-9]$|^[1-4][0-5]$");
+  private static final Pattern TARGET_NUMBER_PATTERN = Pattern.compile("[1-9]|[1-3][0-9]|4[0-5]");
 
   public List<Integer> convertNumberToList(String targetNumber) {
     List<Integer> numberList = Arrays.stream(targetNumber.split(", "))
@@ -29,8 +29,9 @@ public class InputConverter {
   }
 
   private int isThrowIllegalArgumentException(String strNumber) {
+
       if(!isNumber(strNumber)){
-        throw new IllegalArgumentException("숫자 콤마 띄어쓰기로 입력해주세요");
+        throw new IllegalArgumentException("45이하의 숫자, 콤마, 띄어쓰기로 입력해주세요");
       }
       return Integer.parseInt(strNumber);
   }

@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.InputConverter;
 import lotto.domain.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,13 @@ public class WinningStatisticsTest {
     @Test
     @DisplayName("지난주 당첨번호 String -> List<Integer>로 변환")
     public void targetNumberCheck() {
-        WinningStatistics winningStatistics = new WinningStatistics("1, 2, 3, 4, 5, 6");
+        String strList = "1, 2, 3, 4, 5, 6";
+        InputConverter inputConverter = new InputConverter();
+
+        List<Integer> targetNumber = inputConverter.convertNumberToList(strList);
+
+        WinningStatistics winningStatistics = new WinningStatistics(targetNumber);
+
         List<Integer> result = winningStatistics.showTargetNumber();
 
         assertThat(result).contains(1,2,3,4,5,6);
