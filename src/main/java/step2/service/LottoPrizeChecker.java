@@ -3,27 +3,21 @@ package step2.service;
 import step2.domain.entity.Lotto;
 import step2.domain.entity.LottoTicket;
 import step2.domain.vo.LottoPrize;
-import step2.domain.vo.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoPrizeChecker {
 
-    public static void checker(List<LottoTicket> tickets, Lotto winner) {
+    public static List<LottoPrize> checker(List<LottoTicket> tickets, Lotto winner) {
+        List<LottoPrize> prizes = new ArrayList<>();
+
         for (LottoTicket ticket : tickets) {
-            final var count = sameNumberCount(ticket.getLotto(), winner);
+            final var count = winner.countSameNumber(ticket.getLotto());
             final var prize = LottoPrize.prize(count);
-            ticket.changeLottoPrizeStatus(prize);
+            prizes.add(prize);
         }
-    }
 
-    private static int sameNumberCount(Lotto winner, Lotto compare) {
-        return sameNumberCount(winner.getLottoNumbers(), compare.getLottoNumbers());
-    }
-
-    private static int sameNumberCount(List<LottoNumber> winners, List<LottoNumber> compares) {
-        return (int) winners.stream()
-                .filter(compares::contains)
-                .count();
+        return prizes;
     }
 }
