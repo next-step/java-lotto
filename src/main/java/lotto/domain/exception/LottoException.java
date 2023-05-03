@@ -1,6 +1,6 @@
 package lotto.domain.exception;
 
-import lotto.domain.StringConcatenater;
+import lotto.util.StringConcatenater;
 
 public class LottoException extends IllegalArgumentException {
     public LottoException(String message, String[] messages) {
