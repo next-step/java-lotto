@@ -57,7 +57,7 @@ public class Lotto {
     }
 
     private boolean isMatchWith(LottoNumber number) {
-        return numbers.stream().anyMatch(v -> v.value() == number.value());
+        return this.numbers.contains(number);
     }
 
     public Set<LottoNumber> value() {
