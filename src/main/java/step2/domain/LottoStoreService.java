@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.domain.strategy.price.Strategy;
+import step2.domain.strategy.price.PriceStrategy;
 
 public class LottoStoreService {
     private LottoStoreService() {
@@ -8,7 +8,7 @@ public class LottoStoreService {
         throw new AssertionError();
     }
 
-    public static int getLottoCount(Strategy strategy, int purchaseAmount) {
+    public static int getLottoCount(PriceStrategy strategy, int purchaseAmount) {
         return strategy.buyLotto(purchaseAmount);
     }
 }

@@ -1,4 +1,4 @@
-package step2.domain.strategy.price;
+package step3.domain.strategy.price;
 
 public class LottoPriceStrategy implements PriceStrategy {
     private static int LottoPurchase = 1000;

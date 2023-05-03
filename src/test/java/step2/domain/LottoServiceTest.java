@@ -32,4 +32,9 @@ class LottoServiceTest {
         assertThatThrownBy(() -> LottoService.createWinningLotto("1,2,3,4,5,6,ㄱ"))
                 .isInstanceOf(NumberFormatException.class);
     }
+
+    @Test
+    void 로또_보너스넘버_테스트() {
+
+    }
 }

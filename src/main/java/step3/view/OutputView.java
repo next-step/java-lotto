@@ -1,8 +1,8 @@
-package step2.view;
+package step3.view;
 
-import step2.domain.model.Lotto.Lotto;
-import step2.domain.model.Lotto.Lottos;
-import step2.domain.model.WinningAmountByRank;
+import step3.domain.model.Lotto.Lotto;
+import step3.domain.model.Lotto.Lottos;
+import step3.domain.model.WinningAmountByRank;
 
 import java.util.List;
 import java.util.Map;
@@ -35,13 +35,17 @@ public class OutputView {
         System.out.println(String.format("%d개 일치 (%d원)- %d개", WinningAmountByRank.SECOND.getRank(),
                 WinningAmountByRank.SECOND.getAmount(), winningResult.getOrDefault(WinningAmountByRank.SECOND.getKey(), 0)));
 
+        System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", WinningAmountByRank.SECOND.getRank(),
+                WinningAmountByRank.BONUS.getAmount(), winningResult.getOrDefault(WinningAmountByRank.BONUS.getKey(), 0)));
+
         System.out.println(String.format("%d개 일치 (%d원)- %d개", WinningAmountByRank.FIRST.getRank(),
                 WinningAmountByRank.FIRST.getAmount(), winningResult.getOrDefault(WinningAmountByRank.FIRST.getKey(), 0)));
+
         System.out.println(String.format("수익률 %f.", Profit));
     }
 
     private static String convertLottoNumbersToString(Lotto lotto) {
-        return lotto.getNumbers()
+        return  lotto.getNumbers()
                 .stream()
                 .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                 .collect(Collectors.joining(", "));
