@@ -7,13 +7,11 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BasicLottoNumbersTest {
-
-    private BasicLottoNumbers basicLottoNumbers = new BasicLottoNumbers();
+public class LottoNumberGeneratorTest {
 
     @RepeatedTest(value = 10, name = "LottoNumber 6개 발생시키는 테스트")
     void pickSixNumbersTest() {
-        Set<LottoNumber> lottoNumbers = basicLottoNumbers.pickSixNumbers();
+        Set<LottoNumber> lottoNumbers = LottoNumberGenerator.generateSixNumbers();
         assertThat(lottoNumbers).hasSize(6);
     }
 }
