@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER = 6;
+    public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     private List<Integer> numbers;
 
@@ -41,6 +42,12 @@ public class Lotto {
         return Arrays.stream(number).map(Integer::parseInt).collect(Collectors.toList());
     }
 
+    @Override
+    public String toString() {
+        return numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[","]"));
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

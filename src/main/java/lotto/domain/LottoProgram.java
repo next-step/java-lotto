@@ -26,6 +26,9 @@ public class LottoProgram {
         return cost / LOTTO_COST;
     }
 
+    public Lottos getLottos() {
+        return lottos;
+    }
     public int getNumberOfLotto() {
         return numberOfLotto;
     }
