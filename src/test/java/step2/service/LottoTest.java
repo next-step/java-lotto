@@ -5,7 +5,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import step2.vo.LottoNumber;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -16,7 +16,7 @@ public class LottoTest {
 
     @ParameterizedTest(name = "LottoNumber 6개 아닌 경우 테스트")
     @MethodSource("provideNotSixSizeLotto")
-    void validateSixSizeTest(List<LottoNumber> lottoNumbers) {
+    void validateSixSizeTest(Set<LottoNumber> lottoNumbers) {
         assertThatCode(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호 갯수가 6개가 아닙니다.");

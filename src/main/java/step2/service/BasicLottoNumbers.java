@@ -2,9 +2,7 @@ package step2.service;
 
 import step2.vo.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class BasicLottoNumbers {
 
@@ -22,10 +20,11 @@ public class BasicLottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> pickSixNumbers() {
+    public Set<LottoNumber> pickSixNumbers() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> pickedNumbers = new ArrayList<>(lottoNumbers.subList(0, 6));
         Collections.sort(pickedNumbers);
-        return pickedNumbers;
+        return new HashSet<>();
+//        return pickedNumbers;
     }
 }
