@@ -2,10 +2,10 @@ package calculator;
 
 import java.util.function.BiFunction;
 
-public class Operator {
+public class Operation {
     private final BiFunction<Integer, Integer, Integer> operation;
 
-    public Operator(BiFunction<Integer, Integer, Integer> operation) {
+    public Operation(BiFunction<Integer, Integer, Integer> operation) {
         this.operation = operation;
     }
 

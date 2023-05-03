@@ -17,16 +17,16 @@ public class IntegerCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        Map<String, Operator> operatorMap = new HashMap<>();
-        operatorMap.put("+", new Operator(Integer::sum));
-        operatorMap.put("-", new Operator((a, b) -> a - b));
-        operatorMap.put("*", new Operator((a, b) -> a * b));
-        operatorMap.put("/", new Operator((a, b) -> a / b));
+        Map<String, Operation> operatorMap = new HashMap<>();
+        operatorMap.put("+", new Operation(Integer::sum));
+        operatorMap.put("-", new Operation((a, b) -> a - b));
+        operatorMap.put("*", new Operation((a, b) -> a * b));
+        operatorMap.put("/", new Operation((a, b) -> a / b));
 
         calculator = new IntegerCalculator(
                 new ExpressionParser(new ArithmeticExpressionExpressionValidator(delimiter), delimiter),
                 new IntegerStringConverter(),
-                new Operators(operatorMap));
+                new Operations(operatorMap));
     }
 
     @Test

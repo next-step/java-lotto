@@ -2,18 +2,18 @@ package calculator;
 
 import java.util.Map;
 
-public class Operators {
-    private final Map<String, Operator> operators;
+public class Operations {
+    private final Map<String, Operation> operators;
 
-    public Operators(Map<String, Operator> operators) {
+    public Operations(Map<String, Operation> operators) {
         this.operators = operators;
     }
 
-    public Operator operationOf(String operator) {
+    public Operation operationOf(String operator) {
         return operators.get(operator);
     }
 
-    public void addOperator(String operator, Operator operation) {
+    public void addOperator(String operator, Operation operation) {
         operators.put(operator, operation);
     }
 

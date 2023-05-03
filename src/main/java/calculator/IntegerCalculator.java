@@ -8,14 +8,14 @@ import java.util.List;
 public class IntegerCalculator {
     private final ExpressionParser parser;
     private final StringConverter<Integer> stringToIntegerConverter;
-    private final Operators operators;
+    private final Operations operators;
 
     public IntegerCalculator(ExpressionParser parser,
                              StringConverter<Integer> stringToIntegerConverter,
-                             Operators operators) {
+                             Operations operations) {
         this.parser = parser;
         this.stringToIntegerConverter = stringToIntegerConverter;
-        this.operators = operators;
+        this.operators = operations;
     }
 
     public int calculate(String expressionString) {
