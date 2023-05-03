@@ -14,33 +14,29 @@ public class Lotteries {
 
     private static final int FIRST_WINNING_COUNT = 1;
 
-    private final List<Lottery> lotteries;
+    private final List<Lottery> values;
 
-    public Lotteries(int plays) {
-        this(lotteriesByPlayNumbers(plays));
+    public Lotteries(List<Lottery> values) {
+        this.values = values;
     }
-
-    public Lotteries(List<Lottery> lotteries) {
-        this.lotteries = lotteries;
-    }
-
-    private static List<Lottery> lotteriesByPlayNumbers(int plays) {
-        return range(0, plays)
+    public static Lotteries lotteriesByPlayNumbers(int plays) {
+        List<Lottery> collect = range(0, plays)
                 .mapToObj(play -> new Lottery())
                 .collect(Collectors.toList());
+        return new Lotteries(collect);
     }
 
     public int size() {
-        return this.lotteries.size();
+        return this.values.size();
     }
 
     public List<Lottery> immutableGetLotteries() {
-        return unmodifiableList(this.lotteries);
+        return unmodifiableList(this.values);
     }
 
     public Map<Rank, Integer> statisticsByRank(Set<LotteryNumber> winningNumbers) {
         Map<Rank, Integer> statisticsByRank = new HashMap<>();
-        for(Lottery lottery: this.lotteries) {
+        for(Lottery lottery: this.values) {
             countUpByRank(statisticsByRank, lottery.intersectionSize(winningNumbers));
         }
         return statisticsByRank;
@@ -58,7 +54,7 @@ public class Lotteries {
     @Override
     public String toString() {
         return "Lotteries{" +
-                "lotteries=" + lotteries +
+                "lotteries=" + values +
                 '}';
     }
 
