@@ -17,10 +17,18 @@ public class LottoTest {
 
     @Test
     @DisplayName("로또 번호 확인")
-    void element() {
+    void lessThanZero() {
         String number = "-1, 2, 3, 4, 5, 6";
         assertThatThrownBy(() -> {
             new Lotto(number);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("음수는 로또 번호가 될 수 없습니다.");
+    }
+    @Test
+    @DisplayName("로또 번호 확인")
+    void moreThan45() {
+        String number = "45, 47, 3, 4, 5, 6";
+        assertThatThrownBy(() -> {
+            new Lotto(number);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("로또 번호는 45를 넘어갈 수 없습니다.");
     }
 }

@@ -8,19 +8,22 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(int numberOfLotto, LottoCreatingStrategy lottoCreatingStrategy) {
-        this.lottos = create(numberOfLotto, lottoCreatingStrategy);
+        this.lottos = createLottos(numberOfLotto, lottoCreatingStrategy);
     }
 
-    private List<Lotto> create(int numberOfLotto, LottoCreatingStrategy lottoCreatingStrategy) {
+    private List<Lotto> createLottos(int numberOfLotto, LottoCreatingStrategy lottoCreatingStrategy) {
         List<Lotto> lottos = new ArrayList<>();
         for(int i = 0; i < numberOfLotto; i++ ){
-            lottos.add(lottoCreatingStrategy.create());
+            lottos.add(create(lottoCreatingStrategy));
         }
         return lottos;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(lottos.size());
+    private Lotto create(LottoCreatingStrategy lottoCreatingStrategy) {
+        return lottoCreatingStrategy.create();
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

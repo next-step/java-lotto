@@ -2,14 +2,20 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER = 6;
+    public static final int LOTTO_NUMBER = 6;
+    public static final int MAX_LOTTO_NUMBER = 45;
     private List<Integer> numbers;
 
     public Lotto(String numbers) {
         this.numbers = validate(split(numbers));
+    }
+
+    public Lotto(List<Integer> numbers) {
+        this.numbers = validate(numbers);
     }
 
     private List<Integer> validate(List<Integer> numbers) {
@@ -26,9 +32,25 @@ public class Lotto {
         if (number < 0) {
             throw new IllegalArgumentException("음수는 로또 번호가 될 수 없습니다.");
         }
+        if (number > 45) {
+            throw new IllegalArgumentException("로또 번호는 45를 넘어갈 수 없습니다.");
+        }
     }
     private List<Integer> split(String numbers) {
         String[] number = numbers.split(", ");
         return Arrays.stream(number).map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
