@@ -7,27 +7,27 @@ public enum Operator {
 
     ADDITION("+") {
         @Override
-        public int performOperation(Queue<String> queue, int answer) {
-            answer += IntConverter.convertStringToInt(queue.poll());
-            return answer;
+        public void performOperation(Queue<String> queue, Number number) {
+            Number fromQueue = Number.ofNumber(queue.poll());
+            number.add(fromQueue);
         }
     }, SUBTRACTION("-") {
         @Override
-        public int performOperation(Queue<String> queue, int answer) {
-            answer -= IntConverter.convertStringToInt(queue.poll());
-            return answer;
+        public void performOperation(Queue<String> queue, Number number) {
+            Number fromQueue = Number.ofNumber(queue.poll());
+            number.subtract(fromQueue);
         }
     }, MULTIPLICATION("*") {
         @Override
-        public int performOperation(Queue<String> queue, int answer) {
-            answer *= IntConverter.convertStringToInt(queue.poll());
-            return answer;
+        public void performOperation(Queue<String> queue, Number number) {
+            Number fromQueue = Number.ofNumber(queue.poll());
+            number.multiple(fromQueue);
         }
     }, DIVISION("/") {
         @Override
-        public int performOperation(Queue<String> queue, int answer) {
-            answer /= IntConverter.convertStringToInt(queue.poll());
-            return answer;
+        public void performOperation(Queue<String> queue, Number number) {
+            Number fromQueue = Number.ofNumber(queue.poll());
+            number.divide(fromQueue);
         }
     };
 
@@ -51,5 +51,5 @@ public enum Operator {
 
     }
 
-    public abstract int performOperation(Queue<String> queue, int answer);
+    public abstract void performOperation(Queue<String> queue, Number number);
 }

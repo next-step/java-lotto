@@ -4,8 +4,6 @@ import java.util.Objects;
 import java.util.Queue;
 
 public class Calculator {
-
-    private static final int ZERO = 0;
     private static final String DELIMITER = " ";
 
     private static void isValid(String inputVal) {
@@ -19,20 +17,17 @@ public class Calculator {
         isValid(input);
         Queue<String> queue = createQueue(input);
 
-        int answer = getInitialValue(queue);
+        Number number = getInitialNumber(queue);
         while (queue.size() > 0) {
-            answer = calculateByOperator(queue, answer);
+            calculateByOperator(queue, number);
         }
-        return answer;
+        return number.getAnswer();
     }
 
-    private static int getInitialValue(Queue<String> queue) {
-        int initialValue = ZERO;
+    private static Number getInitialNumber(Queue<String> queue) {
         String start = queue.poll();
-        if (IntConverter.isConvertibleToInt(start)) {
-            initialValue = IntConverter.convertStringToInt(start);
-        }
-        return initialValue;
+        Number number = Number.ofNumber(start);
+        return number;
     }
 
     private static Queue<String> createQueue(String input) {
@@ -42,16 +37,9 @@ public class Calculator {
         return queue;
     }
 
-    private static int calculateByOperator(Queue<String> queue, int answer) {
+    private static void calculateByOperator(Queue<String> queue, Number number) {
         String signature = queue.poll();
-        isOperator(signature);
         Operator operator = Operator.fromSignature(signature);
-        return operator.performOperation(queue, answer);
-    }
-
-    private static void isOperator(String signature) {
-        if (IntConverter.isConvertibleToInt(signature)) {
-            throw new IllegalArgumentException("값이 잘못 입력되었습니다.");
-        }
+        operator.performOperation(queue, number);
     }
 }

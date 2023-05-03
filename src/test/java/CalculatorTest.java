@@ -1,80 +1,44 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.in;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class CalculatorTest {
 
-    @DisplayName("'a + b'를 입력 시 계산값을 반환한다.")
-    @Test
-    void returnResult_whenAPlusB() {
-        //given
-        String aPlusB = "1 + 1";
-        int expectedResult = 2;
-//        Calculator calculator = Calculator.of(aPlusB);
+    @DisplayName("두 숫자와 사이에 연산자를 입력 시 계산값을 반환한다.")
+    @ParameterizedTest
+    @CsvSource({
+        "1 + 1, 2",
+        "13 - 34, -21",
+        "2 * 3, 6",
+        "3 / 2, 1"
+    })
+    void returnResult_whenInputTwoNumsAndOperator(String input, int expectResult) {
         //when
-        int result = Calculator.calculate(aPlusB);
-
+        int result = Calculator.calculate(input);
         //then
-        assertThat(result).isEqualTo(expectedResult);
+        assertThat(result).isEqualTo(expectResult);
     }
 
-    @DisplayName("'a - b'를 입력 시 계산값을 반환한다.")
-    @Test
-    void returnResult_whenAMinusB() {
-        //given
-        String aMinusB = "13 - 34";
-        int expectedResult = -21;
-//        Calculator calculator = Calculator.of(aMinusB);
+    @DisplayName("세 개 이상의 숫자와 연산자를 입력 시 계산값을 반환한다.")
+    @ParameterizedTest
+    @CsvSource({
+        "1 + 1 - 1, 1",
+        "4 / 2 * 2 + 3, 7",
+        "2 * 3 - 1 / 5 * 8, 8",
+    })
+    void returnResult_whenMultipleNumsAndOperators(String input, int expectResult) {
+
         //when
-        int result = Calculator.calculate(aMinusB);
+        int result = Calculator.calculate(input);
 
         //then
-        assertThat(result).isEqualTo(expectedResult);
-    }
-
-    @DisplayName("'a * b'를 입력 시 계산값을 반환한다.")
-    @Test
-    void returnResult_whenAPowerB() {
-        //given
-        String aPowerB = "2 * 3";
-        int expectedResult = 6;
-        //when
-        int result = Calculator.calculate(aPowerB);
-
-        //then
-        assertThat(result).isEqualTo(expectedResult);
-    }
-
-    @DisplayName("'a / b'를 입력 시 계산값을 반환한다.")
-    @Test
-    void returnResult_whenAMultipleB() {
-        //given
-        String aDivideB = "3 / 2";
-        int expectedResult = 1;
-        //when
-        int result = Calculator.calculate(aDivideB);
-
-        //then
-        assertThat(result).isEqualTo(expectedResult);
-    }
-
-    @DisplayName("둘 이상의 연산자를 입력 시 계산값을 반환한다.")
-    @Test
-    void returnResult_whenMultipleOperators() {
-        //given
-        String aDivideB = "4 / 2 * 2 + 3";
-        int expectedResult = 7;
-        //when
-        int result = Calculator.calculate(aDivideB);
-
-        //then
-        assertThat(result).isEqualTo(expectedResult);
+        assertThat(result).isEqualTo(expectResult);
     }
 
     @DisplayName("빈 값을 입력 시 예외처리한다.")
@@ -88,4 +52,14 @@ public class CalculatorTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("0으로 나눌 시 예외처리한다.")
+    @Test
+    void returnException_whenDivideByZero() {
+        //given
+        String input = "3 / 0";
+        //when
+        assertThatThrownBy(() -> {
+            int answer = Calculator.calculate(input);
+        }).isInstanceOf(ArithmeticException.class);
+    }
 }
