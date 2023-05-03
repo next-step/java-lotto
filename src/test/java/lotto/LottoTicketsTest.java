@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.strategy.LottoTicketAutoCreateStrategy;
 import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoTicketsTest {
     List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+    int bonusNumber = 7;
     List<LottoTicket> lottoTickets = new ArrayList<>();
     LottoTickets tickets;
 
@@ -38,14 +41,20 @@ public class LottoTicketsTest {
 
 
     @Test
+    void 자동생성된_로또_갯수_테스트() {
+        LottoTicketAutoCreateStrategy autoLotteryService = new LottoTicketAutoCreateStrategy();
+        assertThat(LottoTickets.of(6, autoLotteryService).getLottoTickets().size()).isEqualTo(6);
+    }
+
+    @Test
     void 총수익률_구하기_테스트() {
-        assertThat(Math.floor(tickets.getTotalReturn(winningNumber) * 100) / 100.0).isEqualTo(0.35);
+        assertThat(Math.floor(tickets.getTotalReturn(winningNumber, bonusNumber) * 100) / 100.0).isEqualTo(0.35);
     }
 
     @Test
     void 전체_당첨결과_확인() {
-        assertThat(tickets.tallyUp(winningNumber).getRankCount().get(Rank.FOURTH_PLACE)).isEqualTo(1);
-        assertThat(tickets.tallyUp(winningNumber).getTotalReturn()).isEqualTo(0.35);
+        assertThat(tickets.tallyUp(winningNumber, bonusNumber).getRankCount().get(Rank.FOURTH_PLACE)).isEqualTo(1);
+        assertThat(tickets.tallyUp(winningNumber, bonusNumber).getTotalReturn()).isEqualTo(0.35);
     }
 
 }

@@ -29,7 +29,9 @@ public class InputView {
         List<Integer> winningNumbers = Arrays.stream(inputNumbers.split(","))
                 .map(o -> Integer.parseInt(o.trim())).collect(Collectors.toList());
         checkWinningNumbersSize(winningNumbers);
-        return new CheckWinningRequest(winningNumbers);
+        System.out.println("보너스볼을 입력해주세요.");
+        int inputBonusNumber = scanner.nextInt();
+        return new CheckWinningRequest(winningNumbers, inputBonusNumber);
     }
 
     public void checkWinningNumbersSize(List<Integer> winningNumbers) {

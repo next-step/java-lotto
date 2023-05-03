@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.strategy.LottoTicketAutoCreateStrategy;
 import lotto.dto.CheckWinningRequest;
@@ -12,13 +11,10 @@ public class LottoMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
-        LottoTicketMachine lottoService = new LottoTicketMachine();
         LottoTicketBuyRequest request = inputView.buyLotto();
-        LottoTickets lottoTickets = lottoService.createTickets(request.getLottoCount(), new LottoTicketAutoCreateStrategy());
+        LottoTickets lottoTickets = LottoTickets.of(request.getLottoCount(), new LottoTicketAutoCreateStrategy());
         resultView.printLottoTickets(lottoTickets);
         CheckWinningRequest checkWinningRequest = inputView.checkWinning();
-        resultView.printWiningResult(lottoTickets.tallyUp(checkWinningRequest.getWinningNumbers()));
-
-
+        resultView.printWiningResult(lottoTickets.tallyUp(checkWinningRequest.getWinningNumbers(), checkWinningRequest.getBonusBall()));
     }
 }

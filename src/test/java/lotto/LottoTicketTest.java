@@ -13,18 +13,23 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoTicketTest {
     List<Integer> winningLottoNumbers;
+
+    int bonusNumber;
     LottoTicket firstPlaceTicket;
     LottoTicket secondPlaceTicket;
     LottoTicket thirdPlaceTicket;
     LottoTicket fourthPlaceTicket;
+    LottoTicket bonusPlaceTicket;
 
     @BeforeEach
     void setUp() {
+        bonusNumber = 7;
         winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         firstPlaceTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         secondPlaceTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 9));
         thirdPlaceTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 8, 9));
-        fourthPlaceTicket = new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9));
+        fourthPlaceTicket = new LottoTicket(Arrays.asList(1, 2, 3, 10, 8, 9));
+        bonusPlaceTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
     }
 
     @Test
@@ -37,10 +42,11 @@ public class LottoTicketTest {
 
     @Test
     void 등수_확인() {
-        assertThat(firstPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(Rank.FIRST_PLACE);
-        assertThat(secondPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(Rank.SECOND_PLACE);
-        assertThat(thirdPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(Rank.THIRD_PLACE);
-        assertThat(fourthPlaceTicket.getRank(winningLottoNumbers)).isEqualTo(Rank.FOURTH_PLACE);
+        assertThat(firstPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.FIRST_PLACE);
+        assertThat(secondPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.SECOND_PLACE);
+        assertThat(thirdPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.THIRD_PLACE);
+        assertThat(fourthPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.FOURTH_PLACE);
+        assertThat(bonusPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.BONUS_PLACE);
     }
 
     @Test
@@ -64,6 +70,11 @@ public class LottoTicketTest {
     void 티켓_생성_테스트() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThat(LottoTicket.of(() -> Arrays.asList(1, 2, 3, 4, 5, 6)).getLottoNumbers().containsAll(numbers)).isTrue();
-
     }
+
+    @Test
+    void 보너스_당첨_테스트() {
+        assertThat(bonusPlaceTicket.isBonusWin(winningLottoNumbers, bonusNumber)).isTrue();
+    }
+
 }

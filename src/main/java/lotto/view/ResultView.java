@@ -24,6 +24,7 @@ public class ResultView {
                 "\n 3개 일치 (5000원)- " + rankCount.getOrDefault(Rank.FOURTH_PLACE, 0) + "개 " +
                 "\n 4개 일치 (50000원)- " + rankCount.getOrDefault(Rank.THIRD_PLACE, 0) + "개" +
                 "\n 5개 일치 (1500000원)- " + rankCount.getOrDefault(Rank.SECOND_PLACE, 0) + "개" +
+                "\n 5개 일치, 보너스 볼 일치 (30000000)- " + rankCount.getOrDefault(Rank.BONUS_PLACE, 0) + "개" +
                 "\n 6개 일치 (2000000000원)- " + rankCount.getOrDefault(Rank.FIRST_PLACE, 0) + "개" +
                 "\n 총 수익률은 " + totalReturn + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     }
