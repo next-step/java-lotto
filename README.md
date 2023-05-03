@@ -14,7 +14,7 @@
   * 로또생성전략 LotteryStrategy
     * 로또랜덤생성전략 RandomLotteryStrategy
     * 로또순차생성전략(1,2,3, ...) SequentialLotteryStrategy
-  * 로또들을 구매하는 buyLotteries
+  * 로또들을 구매하는 Lotteries.buy
     * 로또를 구매하는 buyLottery
 * 당첨 로또 번호를 입력받는 InputView
 * 당첨 통계를 출력하는 OutputView
