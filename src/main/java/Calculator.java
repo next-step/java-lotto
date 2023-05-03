@@ -6,11 +6,12 @@ import java.util.Queue;
 public class Calculator {
 
     private static final int ZERO = 0;
+    private static final String DELIMITER = " ";
+
+    private static final String
 
     private static void isValid(String inputVal) {
-        if (Objects.isNull(inputVal)
-            || Objects.equals("", inputVal)
-            || Objects.equals(" ", inputVal)) {
+        if (inputVal.isBlank()) {
             throw new IllegalArgumentException("입력값이 잘못되었습니다.");
         }
     }
@@ -36,7 +37,7 @@ public class Calculator {
     }
 
     private static Queue<String> createQueue(String input) {
-        String[] result = input.split(" ");
+        String[] result = input.split(DELIMITER);
         Queue<String> queue = new LinkedList<>();
         Collections.addAll(queue, result);
         return queue;
