@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -42,17 +44,31 @@ public class Lotto {
         return Arrays.stream(number).map(Integer::parseInt).collect(Collectors.toList());
     }
 
+    public int matchesNumber(Lotto lotto) {
+        return numbers.stream()
+                .filter(number -> lotto.numbers
+                        .stream()
+                        .anyMatch(Predicate.isEqual(number)))
+                .collect(Collectors.toList())
+                .size();
+    }
+
     @Override
     public String toString() {
         return numbers.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", ", "[","]"));
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
+
+        Collections.sort(numbers);
+        Collections.sort(lotto.numbers);
+
         return Objects.equals(numbers, lotto.numbers);
     }
 

@@ -3,16 +3,9 @@ package lotto.domain;
 public class LottoMachine {
     private static final int LOTTO_COST = 1000;
     private int numberOfLotto;
-    private Lottos lottos;
 
-    public LottoMachine(int cost, LottoCreatingStrategy lottoCreatingStrategy) {
+    public LottoMachine(int cost) {
         this.numberOfLotto = numberOfLotto(validate(cost));
-        this.lottos = createLottos(lottoCreatingStrategy);
-    }
-
-    public LottoMachine(int numberOfLotto, Lottos lottos) {
-        this.numberOfLotto = numberOfLotto;
-        this.lottos = lottos;
     }
 
     private int validate(int cost) {
@@ -23,16 +16,16 @@ public class LottoMachine {
         return cost;
     }
 
+    public Lottos create(LottoCreatingStrategy lottoCreatingStrategy) {
+        return createLottos(lottoCreatingStrategy);
+    }
+
     private Lottos createLottos(LottoCreatingStrategy lottoCreatingStrategy) {
         return new Lottos(numberOfLotto, lottoCreatingStrategy);
     }
 
     private int numberOfLotto(int cost) {
         return cost / LOTTO_COST;
-    }
-
-    public Lottos getLottos() {
-        return lottos;
     }
 
     public int getNumberOfLotto() {

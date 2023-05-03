@@ -15,6 +15,7 @@ public class ResultView {
     }
 
     public static void printWinningNumber() {
+        System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 

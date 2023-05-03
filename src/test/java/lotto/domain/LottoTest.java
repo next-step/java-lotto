@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
@@ -30,5 +32,14 @@ public class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(number);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("로또 번호는 45를 넘어갈 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("일치 개수")
+    void match() {
+        Lotto lotto1 = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto lotto2 = new Lotto("22, 43, 15, 8, 9, 19");
+
+        assertThat(lotto1.matchesNumber(lotto2)).isEqualTo(0);
     }
 }
