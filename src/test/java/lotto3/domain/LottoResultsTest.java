@@ -24,14 +24,14 @@ class LottoResultsTest {
   }
 
   @Test
-  void 상금5등_담청_경우_수익률_계산_검증() {
+  void 천원으로_로또_구매하면_상금이_5000원인_5등에_당첨되는_검증() {
     Map<Prize, Long> prizeCounts = new HashMap<>();
     prizeCounts.put(Prize.FIFTH, 1L);
 
     LottoResults lottoResults = new LottoResults(prizeCounts);
 
-    int purchaseAmount = 1000;
-    double profitRate = lottoResults.calculateProfitRate(purchaseAmount);
+    Money investMoney = new Money(1000);
+    double profitRate = lottoResults.calculateProfitRate(investMoney);
 
     assertThat(profitRate).isEqualTo(5);
   }
