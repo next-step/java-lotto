@@ -13,7 +13,7 @@ public class PriceInputView {
         printSource(PRICE_INPUT_MSG);
         LotteryPurchasePrice lotteryPurchasePrice
                 = new LotteryPurchasePrice(new Scanner(System.in).nextInt());
-        printSource(lotteryPurchasePrice.getLotteries()+LOTTERIES_NUMBER_GUID);
+        printSource(lotteryPurchasePrice.numberOfPlays()+LOTTERIES_NUMBER_GUID);
         return lotteryPurchasePrice;
     }
 

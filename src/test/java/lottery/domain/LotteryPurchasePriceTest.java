@@ -31,7 +31,7 @@ public class LotteryPurchasePriceTest {
     @ParameterizedTest(name = "[{index}]금액에 따른 로또 갯수를 리턴한다 {1}")
     @CsvSource(value = {"14000:14","9999:9"},delimiter = ':')
     void returnLotteryPerPrice(int price, int expectedLottery) {
-        assertThat(new LotteryPurchasePrice(price).getLotteries())
+        assertThat(new LotteryPurchasePrice(price).numberOfPlays())
                 .isEqualTo(expectedLottery);
     }
 }

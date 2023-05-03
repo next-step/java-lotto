@@ -20,7 +20,7 @@ public class LotteryPurchasePrice {
         return purchasePrice < LOTTERY_PRICE.getRuleNumber();
     }
 
-    public int getLotteries() {
+    public int numberOfPlays() {
         return this.purchasedPrice / LOTTERY_PRICE.getRuleNumber();
     }
 
