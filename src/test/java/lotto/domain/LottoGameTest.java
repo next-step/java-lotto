@@ -17,7 +17,7 @@ class LottoGameTest {
 
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() ->
-                        new LottoGame(new LottoGenerator().generateLottoTickets(numberOfTickets), winningNumbersString))
+                        new LottoGame(LottoGenerator.generateLottoTickets(numberOfTickets), winningNumbersString))
                 .withMessage("로또 티켓은 1장 보다 적게 생성 할 수 없습니다");
     }
 
@@ -29,7 +29,7 @@ class LottoGameTest {
 
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() ->
-                        new LottoGame(new LottoGenerator().generateLottoTickets(numberOfTickets), winningNumbersString))
+                        new LottoGame(LottoGenerator.generateLottoTickets(numberOfTickets), winningNumbersString))
                 .withMessage("로또는 6개의 번호로 이루어져야 합니다");
     }
 
@@ -38,7 +38,7 @@ class LottoGameTest {
     @Test
     void createLottoGame() {
         int numberOfTickets = 5;
-        LottoTickets lottoTickets = new LottoGenerator().generateLottoTickets(numberOfTickets);
+        LottoTickets lottoTickets = LottoGenerator.generateLottoTickets(numberOfTickets);
         String winningNumbersString = "1, 2, 3, 4, 5, 6";
 
         LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString);
@@ -50,7 +50,7 @@ class LottoGameTest {
     @Test
     void calculateWinningStatistics() {
         int numberOfTickets = 5;
-        LottoTickets lottoTickets = new LottoGenerator().generateLottoTickets(numberOfTickets);
+        LottoTickets lottoTickets = LottoGenerator.generateLottoTickets(numberOfTickets);
         String winningNumbersString = "1, 2, 3, 4, 5, 6";
         LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString);
 

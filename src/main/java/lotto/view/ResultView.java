@@ -43,7 +43,7 @@ public class ResultView {
 
         System.out.printf("총 수익률은 %.2f입니다.", earningsRate);
         if (earningsRate < MINIMUM_EARNINGS_RATE_FOR_PROFIT) {
-            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            System.out.printf("(기준이%s이기 때문에 결과적으로 손해라는 의미임)", MINIMUM_EARNINGS_RATE_FOR_PROFIT);
         }
     }
 }
