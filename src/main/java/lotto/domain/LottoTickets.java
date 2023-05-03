@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.strategy.LottoTicketCreateStrategy;
+import lotto.domain.strategy.LottoTicketsCreateStrategy;
 import lotto.dto.CheckWinningRequest;
 import lotto.dto.WinningResult;
 import lotto.enums.Rank;
@@ -16,10 +16,10 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets of(int ticketCount, LottoTicketCreateStrategy createStrategy) {
+    public static LottoTickets of(LottoTicketsCreateStrategy createStrategy) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
-            lottoTickets.add(LottoTicket.of(createStrategy));
+        for (List<Integer> numbers : createStrategy.getLottoNumbers()) {
+            lottoTickets.add(new LottoTicket(numbers));
         }
         return new LottoTickets(lottoTickets);
     }
@@ -47,5 +47,8 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
+    public void addTickets(LottoTickets tickets) {
+        this.lottoTickets.addAll(tickets.lottoTickets);
+    }
 
 }

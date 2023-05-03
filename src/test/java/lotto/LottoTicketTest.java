@@ -68,11 +68,6 @@ public class LottoTicketTest {
         ).withMessage("로또번호는 1~45 사이의 숫자로 입력해야합니다.");
     }
 
-    @Test
-    void 티켓_생성_테스트() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThat(LottoTicket.of(() -> Arrays.asList(1, 2, 3, 4, 5, 6)).getLottoNumbers().containsAll(numbers)).isTrue();
-    }
 
     @Test
     void 보너스_당첨_테스트() {

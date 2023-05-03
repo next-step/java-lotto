@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.strategy.LottoTicketAutoCreateStrategy;
+import lotto.domain.strategy.LottoTicketsAutoCreateStrategy;
 import lotto.dto.CheckWinningRequest;
 import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,8 +43,8 @@ public class LottoTicketsTest {
 
     @Test
     void 자동생성된_로또_갯수_테스트() {
-        LottoTicketAutoCreateStrategy autoLotteryService = new LottoTicketAutoCreateStrategy();
-        assertThat(LottoTickets.of(6, autoLotteryService).getLottoTickets().size()).isEqualTo(6);
+        LottoTicketsAutoCreateStrategy autoLotteryService = new LottoTicketsAutoCreateStrategy(6);
+        assertThat(LottoTickets.of(autoLotteryService).getLottoTickets().size()).isEqualTo(6);
     }
 
     @Test
