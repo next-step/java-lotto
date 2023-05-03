@@ -16,4 +16,11 @@ public class LottoTest {
         List<Lotto> lottos = LottoStore.sell(money);
         assertThat(lottos).hasSize(14);
     }
+
+    @Test
+    void 금액이_나누어떨어지지_않으면_버림() {
+        int money = 14500;
+        List<Lotto> lottos = LottoStore.sell(money);
+        assertThat(lottos).hasSize(14);
+    }
 }
