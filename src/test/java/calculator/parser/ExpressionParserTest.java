@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 public class ExpressionParserTest {
 
     private final String whiteSpace = " ";
-    private final ExpressionParser parser = new ExpressionParser(whiteSpace);
+    private final ExpressionParser parser = new ExpressionParser(new ArithmeticExpressionExpressionValidator(whiteSpace), whiteSpace);
 
     @Nested
     class 공백_delimiter_로_주입받은_파서는 {
