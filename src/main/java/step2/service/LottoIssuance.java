@@ -27,7 +27,7 @@ public class LottoIssuance {
         }
     }
 
-    private LottoIssuance(){
+    private LottoIssuance() {
     }
 
     public static Lotto issue() {
