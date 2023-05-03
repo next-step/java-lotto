@@ -22,7 +22,7 @@ public class LottoResults {
   private long calculateTotalPrizeMoney(Map<Prize, Long> lottoResults) {
     long totalPrizeMoney = 0;
     for(Prize prize : Prize.values()) {
-      totalPrizeMoney += prize.getPrizeMoney() * lottoResults.getOrDefault(prize, 0L);
+      totalPrizeMoney += prize.getPrizeMoney() * getMatchedCount(prize);
     }
     return totalPrizeMoney;
   }

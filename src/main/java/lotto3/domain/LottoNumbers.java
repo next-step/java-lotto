@@ -15,21 +15,13 @@ public class LottoNumbers {
   }
 
   public int countMatch(WinningNumbers winningNumbers) {
-    int count = 0;
-    for (Integer number : numbers) {
-      count = findMatchCount(winningNumbers, count, number);
-    }
-    return count;
+    return (int) numbers.stream().
+        filter(winningNumbers::contains).
+        count();
   }
 
-  private static int findMatchCount(WinningNumbers winningNumbers, int count, Integer number) {
-    if (winningNumbers.contains(number)) {
-      count++;
-    }
-    return count;
-  }
 
-  public boolean contains(int bonusNumber) {
-    return numbers.contains(bonusNumber);
+  public boolean contains(BonusNumber bonusNumber) {
+    return bonusNumber.contains(numbers);
   }
 }

@@ -1,5 +1,7 @@
 package lotto3.domain;
 
+import java.util.Arrays;
+
 public enum Prize {
   NONE(0, 0),
   FIFTH(3, 5000),
@@ -16,20 +18,26 @@ public enum Prize {
     this.prizeMoney = prizeMoney;
   }
 
-  public static Prize valueOfMatchCount(int matchCount) {
-    for (Prize prize : values()) {
-      if (prize.matchCount == matchCount) {
-        return prize;
-      }
-    }
-    return NONE;
+  private static Prize valueOfMatchCount(int matchCount) {
+    return Arrays.stream(values())
+        .filter(prize -> isMatched(matchCount, prize))
+        .findFirst()
+        .orElse(NONE);
+  }
+
+  private static boolean isMatched(int matchCount, Prize prize) {
+    return prize.matchCount == matchCount;
   }
 
   public static Prize valueOfMatchCountAndBonusNumber(int matchCount, boolean isMatchedBonusNumber) {
-    if (matchCount == 5 && isMatchedBonusNumber) {
+    if (isMatchedWithBonusNumber(matchCount, isMatchedBonusNumber)) {
       return SECOND;
     }
     return valueOfMatchCount(matchCount);
+  }
+
+  private static boolean isMatchedWithBonusNumber(int matchCount, boolean isMatchedBonusNumber) {
+    return matchCount == 5 && isMatchedBonusNumber;
   }
 
   public int getMatchCount() {
@@ -39,4 +47,6 @@ public enum Prize {
   public int getPrizeMoney() {
     return prizeMoney;
   }
+
+
 }
