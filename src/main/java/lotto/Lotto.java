@@ -7,11 +7,11 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        lottoNumbers = LottoFactory.create();
+        lottoNumbers = LottoFactory.createRandom();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+    public Lotto(String numbers) {
+        lottoNumbers = LottoFactory.createManual(numbers);
     }
 
     @Override
@@ -26,5 +26,15 @@ public class Lotto {
         }
         sb.append("]");
         return sb.toString();
+    }
+
+    public int match(List<LottoNumber> winningNumbers) {
+        int result = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if(winningNumbers.contains(lottoNumber)){
+                result++;
+            }
+        }
+        return result;
     }
 }

@@ -1,17 +1,18 @@
 package lotto;
 
 import java.security.InvalidParameterException;
+import java.util.Objects;
 import java.util.Random;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public final class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final int MAX = 45;
+    public static final int MAX = 44;
     public static final int MIN = 1;
     private final int number;
 
     public LottoNumber() {
         Random random = new Random();
-        this.number = random.nextInt(MAX);
+        this.number = random.nextInt(MAX) + 1;
     }
 
     public LottoNumber(int number) {
@@ -33,5 +34,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoNumber)) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
