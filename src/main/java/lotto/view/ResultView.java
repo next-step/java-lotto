@@ -9,7 +9,7 @@ public class ResultView {
         System.out.println(lottoBundle.size() + "개를 구매하셨습니다.");
 
         for(Lotto lotto : lottoBundle) {
-            System.out.println(lotto.checkedNumber());
+            System.out.println(lotto.getCheckedNumbers());
         }
     }
 }

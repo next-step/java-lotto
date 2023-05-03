@@ -11,7 +11,7 @@ public class Lotto {
     private final List<Integer> lottoNumber;
 
     public Lotto() {
-        this.lottoNumber = new ArrayList<Integer>(markedNumber(this.allNumber));
+        this.lottoNumber = new ArrayList<>(markedNumber(this.allNumber));
     }
 
     private List<Integer> markedNumber(List<Integer> numberList) {
@@ -24,11 +24,12 @@ public class Lotto {
         return numberList;
     }
 
-    public int checkLottoNumber(List<Integer> targetNumber) {
+    // 당첨번호 확인
+    public int matchLottoNumber(List<Integer> targetNumber) {
         return (int) targetNumber.stream().filter(this.lottoNumber::contains).count();
     }
 
-    public List<Integer> checkedNumber() {
+    public List<Integer> getCheckedNumbers() {
         return new ArrayList<>(this.lottoNumber);
     }
 

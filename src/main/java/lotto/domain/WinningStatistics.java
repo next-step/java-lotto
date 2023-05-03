@@ -17,7 +17,7 @@ public class WinningStatistics {
 
     public List<Integer> compareWithTargetNumber(List<Lotto> lottoBundle) {
         return lottoBundle.stream()
-                .map(lotto -> lotto.checkLottoNumber(this.targetNumber))
+                .map(lotto -> lotto.matchLottoNumber(this.targetNumber))
                 .collect(Collectors.toList());
     }
 
