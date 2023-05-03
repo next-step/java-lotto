@@ -1,37 +1,20 @@
 package calculator.domain;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+") {
-        @Override
-        public int calculate(int operand1, int operand2) {
-            return operand1 + operand2;
-        }
-    },
-    MINUS("-") {
-        @Override
-        public int calculate(int operand1, int operand2) {
-            return operand1 - operand2;
-        }
-    },
-    MULTIPLY("*") {
-        @Override
-        public int calculate(int operand1, int operand2) {
-            return operand1 * operand2;
-        }
-    },
-    DIVIDE("/") {
-        @Override
-        public int calculate(int operand1, int operand2) {
-            return operand1 / operand2;
-        }
-    };
+    PLUS("+", (x, y) -> x + y),
+    MINUS("-", (x, y) -> x - y),
+    MULTIPLY("*", (x, y) -> x * y),
+    DIVIDE("/", (x, y) -> x / y);
 
     private final String value;
+    private final BiFunction<Integer, Integer, Integer> expression;
 
-    Operator(String value) {
+    Operator(String value, BiFunction<Integer, Integer, Integer> expression) {
         this.value = value;
+        this.expression = expression;
     }
 
     public static Operator of(String symbol) {
@@ -41,5 +24,7 @@ public enum Operator {
                 .orElseThrow();
     }
 
-    public abstract int calculate(int operand1, int operand2);
+    public int calculate(int num1, int num2) {
+        return expression.apply(num1, num2);
+    }
 }

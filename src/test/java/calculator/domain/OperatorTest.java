@@ -1,36 +1,42 @@
 package calculator.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OperatorTest {
 
-    @Test
-    void plusTest() {
+    @ParameterizedTest
+    @CsvSource(value = {"3,2,5", "2,4,6"})
+    void plusTest(int op1, int op2, int res) {
         Operator operator = Operator.of("+");
-        assertThat(operator.calculate(3, 2))
-                .isEqualTo(5);
+        assertThat(operator.calculate(op1, op2))
+                .isEqualTo(res);
     }
 
-    @Test
-    void minusTest() {
+    @ParameterizedTest
+    @CsvSource(value = {"3,2,1", "6,4,2"})
+    void minusTest(int op1, int op2, int res) {
         Operator operator = Operator.of("-");
-        assertThat(operator.calculate(3, 2))
-                .isEqualTo(1);
+        assertThat(operator.calculate(op1, op2))
+                .isEqualTo(res);
     }
 
-    @Test
-    void multiplyTest() {
+    @ParameterizedTest
+    @CsvSource(value = {"3,2,6", "2,4,8"})
+    void multiplyTest(int op1, int op2, int res) {
         Operator operator = Operator.of("*");
-        assertThat(operator.calculate(3, 2))
-                .isEqualTo(6);
+        assertThat(operator.calculate(op1, op2))
+                .isEqualTo(res);
     }
 
-    @Test
-    void divideTest() {
+    @ParameterizedTest
+    @CsvSource(value = {"8,2,4", "9,3,3"})
+    void divideTest(int op1, int op2, int res) {
         Operator operator = Operator.of("/");
-        assertThat(operator.calculate(6, 2))
-                .isEqualTo(3);
+        assertThat(operator.calculate(op1, op2))
+                .isEqualTo(res);
     }
 }
