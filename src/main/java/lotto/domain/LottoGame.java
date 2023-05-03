@@ -21,11 +21,11 @@ public class LottoGame {
     }
 
     public static List<Lotto> generateLottos(long lottoCount) {
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = BEGIN_INDEX; i < lottoCount; i++) {
-            lottoList.add(new Lotto());
+            lottos.add(new Lotto());
         }
-        return lottoList;
+        return lottos;
     }
 
     public static Lotto winningLotto(String input) {
@@ -42,10 +42,10 @@ public class LottoGame {
         return new LottoNumber(bonusLottoNumber);
     }
 
-    public static LottoRewards reward(List<Lotto> lottoList, WinningLotto winningLotto) {
+    public static LottoRewards reward(List<Lotto> lottos, WinningLotto winningLotto) {
         LottoRewards lottoRewards = new LottoRewards();
 
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottos) {
             increaseLottoRewardCount(lottoRewards, lotto, winningLotto);
         }
 

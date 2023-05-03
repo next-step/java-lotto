@@ -62,10 +62,10 @@ public class LottoGameTest {
     @Test
     void 총_수익_계산() {
         //given
-        List<Lotto> lottoList = Arrays.asList(myLotto, myLotto);
+        List<Lotto> lottos = Arrays.asList(myLotto, myLotto);
 
         //when
-        LottoRewards reward = LottoGame.reward(lottoList, winningLotto);
+        LottoRewards reward = LottoGame.reward(lottos, winningLotto);
 
         //then
         assertThat(reward.totalProfit()).isEqualTo(60000000L);
@@ -74,11 +74,11 @@ public class LottoGameTest {
     @Test
     void 총_수익률_계산() {
         //given
-        List<Lotto> lottoList = Arrays.asList(myLotto, myLotto);
+        List<Lotto> lottos = Arrays.asList(myLotto, myLotto);
         long purchasePrice = 2000l;
 
         //when
-        LottoRewards reward = LottoGame.reward(lottoList, winningLotto);
+        LottoRewards reward = LottoGame.reward(lottos, winningLotto);
 
         //then
         assertThat(LottoGame.totalProfitRate(reward, purchasePrice)).isEqualTo(30000);
@@ -87,10 +87,10 @@ public class LottoGameTest {
     @Test
     void 일치_수별_횟수_세기() {
         //given
-        List<Lotto> lottoList = Arrays.asList(myLotto, winningLottoExcludingBonus);
+        List<Lotto> lottos = Arrays.asList(myLotto, winningLottoExcludingBonus);
 
         //when
-        LottoRewards reward = LottoGame.reward(lottoList, winningLotto);
+        LottoRewards reward = LottoGame.reward(lottos, winningLotto);
 
         //then
         assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
@@ -100,10 +100,10 @@ public class LottoGameTest {
     @Test
     void 당첨번호_5개_일치_보너스번호_일치() {
         //given
-        List<Lotto> lottoList = Arrays.asList(myLotto);
+        List<Lotto> lottos = Arrays.asList(myLotto);
 
         //when
-        LottoRewards reward = LottoGame.reward(lottoList, winningLotto);
+        LottoRewards reward = LottoGame.reward(lottos, winningLotto);
 
         //then
         assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);

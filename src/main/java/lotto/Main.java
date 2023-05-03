@@ -15,14 +15,14 @@ public class Main {
 
         ResultView.printLottoCount(lottoCount);
 
-        List<Lotto> lottoList = LottoGame.generateLottos(lottoCount);
+        List<Lotto> lottos = LottoGame.generateLottos(lottoCount);
 
-        ResultView.printLottos(lottoList);
+        ResultView.printLottos(lottos);
 
         Lotto winningLotto = LottoGame.winningLotto(inputView.inputWinningLotto());
         LottoNumber bonusLottoNumber = LottoGame.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLotto));
 
-        LottoRewards lottoRewards = LottoGame.reward(lottoList, winningLotto(winningLotto, bonusLottoNumber));
+        LottoRewards lottoRewards = LottoGame.reward(lottos, winningLotto(winningLotto, bonusLottoNumber));
         double totalProfitRate = LottoGame.totalProfitRate(lottoRewards, purchasePrice);
 
         ResultView.printWinningStatics(lottoRewards, totalProfitRate);
