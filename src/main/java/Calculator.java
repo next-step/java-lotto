@@ -8,10 +8,9 @@ public class Calculator {
     private static final int ZERO = 0;
     private static final String DELIMITER = " ";
 
-    private static final String
-
     private static void isValid(String inputVal) {
-        if (inputVal.isBlank()) {
+        if (Objects.isNull(inputVal)
+            || inputVal.isBlank()) {
             throw new IllegalArgumentException("입력값이 잘못되었습니다.");
         }
     }
