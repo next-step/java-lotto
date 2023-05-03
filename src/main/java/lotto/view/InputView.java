@@ -13,12 +13,23 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final Pattern NON_NUMERIC_PATTERN = Pattern.compile(".*[ㄱ-ㅎㅏ-ㅣ가-힣|a-z|A-Z]+.*");
+    public static final Integer MINIMUM_PRICE = 1000;
+
     public static final Scanner scanner = new Scanner(System.in);
     public static final String DELIMITER = ",";
 
     public static Money inputPrice() {
         System.out.println("구입금액을 입력해 주세요 :)");
+        int price = scanner.nextInt();
+        validateNegativeNumberOrZero(price);
+
         return Money.wons(scanner.nextInt());
+    }
+
+    private static void validateNegativeNumberOrZero(long amount) {
+        if (amount < MINIMUM_PRICE) {
+            throw new IllegalArgumentException("1000원 이상 입력해주세 :)");
+        }
     }
 
     public static WinnerLotto inputWinningNumbers() {
@@ -36,7 +47,7 @@ public class InputView {
                 .map(lottoNumber -> {
                     try {
                         return Integer.parseInt(lottoNumber);
-                    }catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         throw new IllegalArgumentException("숫자만 입력 가능하세요 :(");
                     }
                 })
