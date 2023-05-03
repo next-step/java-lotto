@@ -1,10 +1,10 @@
 package study.lottogame.ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import study.lottogame.domain.GameResult;
 import study.lottogame.domain.Lotteries;
 import study.lottogame.domain.Lottery;
@@ -30,13 +30,15 @@ public class OutputView {
   }
 
   private static void printPrizeStatics(Map<Rank, Integer> prizeStaticsMap) {
-    for (Rank rank : Rank.values()) {
-      if (!rank.equals(Rank.MISS)) {
-        Integer lotteryCount = prizeStaticsMap.getOrDefault(rank, 0);
-        System.out.printf("%d개 일치 (%d원)- %d개 \n", rank.getCountOfMatch(), rank.getWinningMoney(),
-            lotteryCount);
-      }
-    }
+    Arrays.stream(Rank.values())
+        .filter(rank -> !rank.equals(Rank.MISS))
+        .forEach(rank -> printPrizeResult(prizeStaticsMap, rank));
+  }
+
+  private static void printPrizeResult(Map<Rank, Integer> prizeStaticsMap, Rank rank) {
+    Integer lotteryCount = prizeStaticsMap.getOrDefault(rank, 0);
+    System.out.printf("%d개 일치 (%d원)- %d개 \n", rank.getCountOfMatch(), rank.getWinningMoney(),
+        lotteryCount);
   }
 
   private static void printRateOfReturn(Money prizeMoney, Money inputMoney) {

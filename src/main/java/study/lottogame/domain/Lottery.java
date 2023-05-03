@@ -19,14 +19,10 @@ public class Lottery {
   }
 
   public int matchLottoNumber(Lottery otherLottery) {
-    int countOfMatch = 0;
     Set<LottoNumber> otherLottoNumbers = otherLottery.getLottoNumbers();
-    for (LottoNumber lottoNumber : lottoNumbers) {
-      if (otherLottoNumbers.contains(lottoNumber)) {
-        countOfMatch++;
-      }
-    }
-    return countOfMatch;
+    return (int) lottoNumbers.stream()
+        .filter(otherLottoNumbers::contains)
+        .count();
   }
 
   public Set<LottoNumber> getLottoNumbers() {

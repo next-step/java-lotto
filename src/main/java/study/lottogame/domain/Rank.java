@@ -1,5 +1,7 @@
 package study.lottogame.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
   MISS(0, 0),
   FOURTH(3, 5_000),
@@ -24,11 +26,9 @@ public enum Rank {
   }
 
   public static Rank valueOf(int countOfMatch) {
-    for (Rank rank : Rank.values()) {
-      if (rank.getCountOfMatch() == countOfMatch) {
-        return rank;
-      }
-    }
-    return Rank.MISS;
+    return Arrays.stream(Rank.values())
+        .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+        .findFirst()
+        .orElse(Rank.MISS);
   }
 }
