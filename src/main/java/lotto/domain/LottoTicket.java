@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.strategy.LottoTicketCreateStrategy;
 import lotto.dto.CheckWinningRequest;
 import lotto.enums.Rank;
 
@@ -32,10 +31,6 @@ public class LottoTicket {
         if (lottoNumbers.stream().anyMatch(o -> o < TICKET_MIN_NUMBER || o > TICKET_MAX_NUMBER)) {
             throw new IllegalArgumentException("로또번호는 " + TICKET_MIN_NUMBER + "~" + TICKET_MAX_NUMBER + " 사이의 숫자로 입력해야합니다.");
         }
-    }
-
-    public static LottoTicket of(LottoTicketCreateStrategy strategy) {
-        return new LottoTicket(strategy.getLottoNumbers());
     }
 
     public int countSameNumber(List<Integer> target) {
