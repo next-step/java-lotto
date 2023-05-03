@@ -15,8 +15,6 @@ public class LottoMain {
         LottoTickets lottoTickets = LottoTickets.of(request.getLottoCount(), new LottoTicketAutoCreateStrategy());
         resultView.printLottoTickets(lottoTickets);
         CheckWinningRequest checkWinningRequest = inputView.checkWinning();
-        resultView.printWiningResult(lottoTickets.tallyUp(checkWinningRequest));
-
-
+        resultView.printWiningResult(lottoTickets.tallyUp(checkWinningRequest.getWinningNumbers(), checkWinningRequest.getBonusBall()));
     }
 }
