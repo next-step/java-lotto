@@ -2,7 +2,6 @@ package step2.domain.entity;
 
 import step2.domain.vo.LottoPrize;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoTickets {
@@ -13,10 +12,6 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoTickets(LottoTicket... lottoTickets) {
-        this(Arrays.asList(lottoTickets));
-    }
-
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
@@ -25,20 +20,20 @@ public class LottoTickets {
         return this.lottoTickets.size();
     }
 
-    public int getLottoRankCount(LottoPrize prize) {
-        return (int) lottoTickets.stream()
-                .filter(lottoTicket -> lottoTicket.getLottoPrize().equals(prize))
+    public int getLottoRankCount(LottoPrize prize, List<LottoPrize> lottoPrizes) {
+        return (int) lottoPrizes.stream()
+                .filter(lottoPrize -> lottoPrize.equals(prize))
                 .count();
     }
 
-    public double getTotalRate() {
-        double rate = (double) getTotalAmount() / getTotalMoney();
+    public double getTotalRate(List<LottoPrize> lottoPrizes) {
+        double rate = (double) getTotalAmount(lottoPrizes) / getTotalMoney();
         return Math.floor(rate * 100.0) / 100.0;
     }
 
-    private long getTotalAmount() {
-        return lottoTickets.stream()
-                .mapToLong(ticket -> ticket.getLottoPrize().getPrize())
+    private long getTotalAmount(List<LottoPrize> lottoPrizes) {
+        return lottoPrizes.stream()
+                .mapToLong(LottoPrize::getPrize)
                 .sum();
     }
 
