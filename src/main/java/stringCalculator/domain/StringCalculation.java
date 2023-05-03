@@ -1,54 +1,38 @@
 package stringCalculator.domain;
 
-import java.util.List;
-
 public class StringCalculation {
-    public static int result = 0;
+    private Numbers numbers = new Numbers();
+    private Operators operators = new Operators();
+
+    private int result = 0;
 
     public StringCalculation(){
     }
 
-    public static void calculate(Numbers numbers, Operators operators) {
-        setFirstNumber(numbers.getFirstNumber());
-        List<Integer> numberList = numbers.getNumbers();
-        List<String> operatorList = operators.getOperators();
-
-        int temp = 1;
-        for (String operator : operatorList) {
-
-            if(operator.equals("+")) {
-                plus(numberList.get(temp));
-            }
-            if(operator.equals("-")) {
-                minus(numberList.get(temp));
-            }
-            if(operator.equals("/")) {
-                division(numberList.get(temp));
-            }
-            if(operator.equals("*")) {
-                multiplication(numberList.get(temp));
-            }
-            temp++;
+    public StringCalculation(String inputString, int index){
+        if (isNumbersPosition(index)) {
+            numbers = new Numbers(inputString);
+        } else if (!isNumbersPosition(index)) {
+            operators = new Operators(inputString);
         }
     }
 
-    public static void plus(int number) {
-        result = result + number;
+    public void calculate() {
+
+        int temp = 0;
+        setFirstNumber(numbers.getNumbers().get(temp));
+
+        for (String operator : operators.getOperators()) {
+            NumericalExpression numericalExpression = NumericalExpression.valueOfNumericalExpression(operator);
+            result = numericalExpression.calculate(result, numbers.getNumbers().get(temp + 1));
+            temp++;
+        }
+    }
+    private boolean isNumbersPosition(Integer i) {
+        return i % 2 != 0;
     }
 
-    public static void multiplication(int number) {
-        result = result * number;
-    }
-
-    public static void minus(int number) {
-        result = result - number;
-    }
-
-    public static void division(int number) {
-        result = result / number;
-    }
-
-    public static void setFirstNumber(Integer firstNumber) { result = firstNumber; }
+    private void setFirstNumber(Integer firstNumber) { result = firstNumber; }
 
     @Override
     public String toString() { return "result :" + result;}
