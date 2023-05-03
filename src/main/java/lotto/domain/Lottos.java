@@ -11,6 +11,10 @@ public class Lottos {
         this.lottos = createLottos(numberOfLotto, lottoCreatingStrategy);
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     private List<Lotto> createLottos(int numberOfLotto, LottoCreatingStrategy lottoCreatingStrategy) {
         List<Lotto> lottos = new ArrayList<>();
         for(int i = 0; i < numberOfLotto; i++ ){
