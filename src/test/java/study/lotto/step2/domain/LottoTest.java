@@ -3,7 +3,9 @@ package study.lotto.step2.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,29 +13,35 @@ import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
     @Test
-    @DisplayName("선택한 로또 번호가 6개가 아닐 경우, IllegalArgumentException 예외 발생")
-    void invalid_numbers_of_select_then_throw_IllegalArgumentException() {
+    @DisplayName("로또 번호가 6개가 아닐 경우, IllegalArgumentException 예외 발생")
+    void invalid_lotto_number_size_the_throw_IllegalArgumentException() {
         // given
-        List<Integer> illegalNumbersOfSelect = IntStream.rangeClosed(1, 7)
-                .boxed()
-                .collect(Collectors.toList());
+        Set<LottoNumber> illegalSizeLottoNumbers = sequenceLottoNumberSet(1, 7);
 
         // when, then
-        assertThatThrownBy(() -> new Lotto(illegalNumbersOfSelect))
+        assertThatThrownBy(() -> new Lotto(illegalSizeLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호 선택 갯수는 6개입니다: " + illegalNumbersOfSelect.size());
+                .hasMessage("로또 번호 선택 갯수는 6개입니다: " + illegalSizeLottoNumbers.size());
     }
 
     @Test
-    @DisplayName("범위(1 이상 45 이하의 정수)를 넘어서는 로또 번호 선택 시, IllegalArgumentException 예외 발생")
-    void select_out_of_range_number_then_throw_IllegalArgumentException() {
+    @DisplayName("선택한 로또 번호 오름차순 정렬 후 반환")
+    void numbers() {
         // given
-        int outOfRangeNumber = 46;
-        List<Integer> selectedNumbers = List.of(1, 2, 3, 4, 5, outOfRangeNumber);
+        Lotto lotto = new Lotto(sequenceLottoNumberSet(1, 6));
 
-        // when, then
-        assertThatThrownBy(() -> new Lotto(selectedNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1 이상 45 이하의 정수입니다: " + outOfRangeNumber);
+        // when
+        Set<Integer> lottoNumbers = lotto.numbers();
+
+        // then
+        Set<Integer> expectedLottoNumbers = Collections.unmodifiableSortedSet(new TreeSet<>(Set.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lottoNumbers).isEqualTo(expectedLottoNumbers);
+    }
+
+    private Set<LottoNumber> sequenceLottoNumberSet(int start, int end) {
+        return IntStream.rangeClosed(start, end)
+                .boxed()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 }

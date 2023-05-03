@@ -1,40 +1,30 @@
 package study.lotto.step2.domain;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int NUMBER_OF_SELECT = 6;
-    private static final int MINIMUM_SELECT_NUMBER = 1;
-    private static final int MAXIMUM_SELECT_NUMBER = 45;
-    private final List<Integer> selectedNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> selectedNumbers) {
-        validateSelectedNumbers(selectedNumbers);
-        this.selectedNumbers = selectedNumbers;
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> selectedNumbers() {
-        return Collections.unmodifiableList(selectedNumbers);
+    public Set<Integer> numbers() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::number)
+                .collect(Collectors.collectingAndThen(Collectors.toCollection(TreeSet::new), Collections::unmodifiableSet));
     }
 
-    private void validateSelectedNumbers(List<Integer> selectedNumbers) {
-        if(selectedNumbers.size() != NUMBER_OF_SELECT) {
-            throw new IllegalArgumentException("로또 번호 선택 갯수는 " + NUMBER_OF_SELECT + "개입니다: " + selectedNumbers.size());
+    private void validateLottoNumbers(Set<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != NUMBER_OF_SELECT) {
+            throw new IllegalArgumentException("로또 번호 선택 갯수는 " + NUMBER_OF_SELECT + "개입니다: " + lottoNumbers.size());
         }
-
-        selectedNumbers.stream()
-                .filter(this::isOutOfRange)
-                .findAny()
-                .ifPresent(outOfRangeNumber -> {
-                    throw new IllegalArgumentException("로또 번호는 " + MINIMUM_SELECT_NUMBER + " 이상 "
-                            + MAXIMUM_SELECT_NUMBER + " 이하의 정수입니다: " + outOfRangeNumber);
-                });
-    }
-
-    private boolean isOutOfRange(int selectedNumber) {
-        return selectedNumber < MINIMUM_SELECT_NUMBER || MAXIMUM_SELECT_NUMBER < selectedNumber;
     }
 
     @Override
@@ -42,11 +32,11 @@ public class Lotto {
         if (this == o) return true;
         if (!(o instanceof Lotto)) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(selectedNumbers, lotto.selectedNumbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(selectedNumbers);
+        return Objects.hash(lottoNumbers);
     }
 }
