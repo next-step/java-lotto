@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LottoFactory {
 
-    private static final List<Integer> NUMBERS = new ArrayList<>();
+    public static final List<Integer> NUMBERS = new ArrayList<>();
 
     static {
         for (int i = 1; i <= 45; i++) {
