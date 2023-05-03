@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class LottoStatics {
     private static final int REVENUE_START = 0;
     private static final int MAP_DEFAULT = 0;
+
     private int cost;
     private Map<Integer, Integer> statics;
     private LottoRewardStrategy lottoRewardStrategy;
