@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
+
     private final List<Lotto> lottos;
 
     public Lottos(int money, List<Lotto> manualLottos) {
