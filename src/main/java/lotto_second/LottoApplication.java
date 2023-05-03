@@ -19,10 +19,10 @@ public class LottoApplication {
         LottoResult lottoResult = new LottoResult();
 
 
-        String maxTicket = inputView.getPurchaseAmount();
+        String inputAmount = inputView.getPurchaseAmount();
         String manualTicket = inputView.getManualPurchaseAmount();
 
-        Integer maxTicketCount = LottoValidate.maxTicketCount(maxTicket);
+        Integer maxTicketCount = LottoValidate.maxTicketCount(inputAmount);
         Integer manualTicketCount = LottoValidate.manualTicketCount(maxTicketCount, manualTicket);
         Integer autoPurchaseCount = LottoValidate.autoTicketCount(maxTicketCount, manualTicketCount);
 
@@ -37,15 +37,14 @@ public class LottoApplication {
         String winningNumbers = inputView.getWinningNumbers();
         String bonusNumber = inputView.getBonusNumber();
 
+
         LottoWinner lottoWinner = new LottoWinner(winningNumbers, bonusNumber);
-        lottoWinner.numberDuplicateInspection();
 
         LottoTickets allLottoTickets = new LottoTickets(new ArrayList<>());
         allLottoTickets.add(manualLottoTickets);
         allLottoTickets.add(autoLottoTickets);
 
-
-        lottoResult.calculateResult(allLottoTickets, lottoWinner);
+        lottoResult = allLottoTickets.calculateResult(lottoWinner);
         resultView.printStatistics(lottoResult);
     }
 }

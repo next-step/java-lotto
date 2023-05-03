@@ -1,23 +1,22 @@
 package lotto_second.service;
 
-import lotto_second.domain.*;
+import lotto_second.domain.Lotto;
+import lotto_second.domain.LottoWinner;
+import lotto_second.domain.Rank;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoResult {
     private Map<Rank, Integer> resultMap = new HashMap<>();
     private int totalTicketCount;
 
 
-    public void calculateResult(LottoTickets tickets, LottoWinner lottoWinner) {
+    public void calculateResult(List<Lotto> tickets, LottoWinner lottoWinner) {
         this.totalTicketCount = tickets.size();
-        Set<LottoNumber> winnerNumbers = lottoWinner.getWinnerNumbers();
-        LottoNumber bonusNumber = lottoWinner.getBonusNumber();
 
-        for (Lotto ticket : tickets.getLottoTickets()) {
+        for (Lotto ticket : tickets) {
             Rank rank = getRank(ticket, lottoWinner);
             resultMap.put(rank, resultMap.getOrDefault(rank, 0) + 1);
         }
@@ -46,18 +45,14 @@ public class LottoResult {
     }
 
     public double getRevenueRate() {
-
-        Map<Rank, Integer> rankCountMap = resultMap.entrySet()
+        int totalRevenue = resultMap.entrySet()
                 .stream()
-                .collect(Collectors.toMap(
-                        entry -> entry.getKey(),
-                        entry -> entry.getValue()
-                ));
-
-        int totalRevenue = rankCountMap.entrySet()
-                .stream()
-                .mapToInt(entry -> entry.getKey().getWinningMoney() * entry.getValue())
-                .reduce(0, Integer::sum);
+                .mapToInt(entry -> {
+                    int winningMoney = entry.getKey().getWinningMoney();
+                    int count = entry.getValue();
+                    return winningMoney * count;
+                })
+                .sum();
 
         return (double) totalRevenue / (totalTicketCount * 1000);
     }

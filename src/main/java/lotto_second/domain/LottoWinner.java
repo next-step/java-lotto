@@ -10,7 +10,8 @@ public class LottoWinner {
 
     public LottoWinner(String input, String bonusNumber) {
         this.winnerNumbers = LottoValidate.validateLottoNumbers(LottoValidate.parseLottoNumbers(input));
-        this.bonusNumber = new LottoNumber(LottoValidate.parseLottoNumber(bonusNumber));
+        this.bonusNumber = new LottoNumber(parseLottoNumber(bonusNumber));
+        numberDuplicateInspection();
     }
 
     public void numberDuplicateInspection() {
@@ -18,6 +19,11 @@ public class LottoWinner {
             throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
         }
     }
+
+    public static Integer parseLottoNumber(String input) {
+        return Integer.parseInt(input.trim());
+    }
+
 
     public Set<LottoNumber> getWinnerNumbers() {
         return winnerNumbers;

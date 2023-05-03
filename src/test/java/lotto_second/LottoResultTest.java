@@ -26,8 +26,7 @@ public class LottoResultTest {
         String bonusNumber = "7";
 
         LottoWinner lottoWinner = new LottoWinner(winnerLottoInput, bonusNumber);
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateResult(tickets, lottoWinner);
+        LottoResult lottoResult = tickets.calculateResult(lottoWinner);
 
         assertThat(lottoResult.getCountOfMatch(input)).isEqualTo(expected);
     }
@@ -43,8 +42,8 @@ public class LottoResultTest {
         String bonusNumber = "7";
 
         LottoWinner lottoWinner = new LottoWinner(winnerLottoInput, bonusNumber);
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateResult(tickets, lottoWinner);
+        LottoResult lottoResult = tickets.calculateResult(lottoWinner);
+
         double expectedRevenueRate = (double) (1 * 2_000_000_000 + 1 * 30_000_000) / (2 * 1_000);
         assertThat(lottoResult.getRevenueRate()).isEqualTo(expectedRevenueRate);
     }
