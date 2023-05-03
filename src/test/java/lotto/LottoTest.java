@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTest {
 
     @Test
-    void 금액을_입력하면_로또갯수_출력() {
+    void 금액을_입력하면_로또리스트_생성() {
         int money = 14000;
         List<Lotto> lottos = LottoStore.sell(money);
         assertThat(lottos).hasSize(14);
@@ -22,5 +22,11 @@ public class LottoTest {
         int money = 14500;
         List<Lotto> lottos = LottoStore.sell(money);
         assertThat(lottos).hasSize(14);
+    }
+
+    @Test
+    void 로또_한장에는_여섯개의_랜덤숫자() {
+        Lotto lotto = new Lotto();
+        assertThat(lotto.getNumbers()).hasSize(6);
     }
 }
