@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class WinningStatistics {
     private static final Pattern NUMBER_PATTERN_COMPILE = Pattern.compile("^[0-9]+$");
@@ -13,12 +12,20 @@ public class WinningStatistics {
         this.targetNumber = targetNumber;
     }
 
+//    public Map<Integer, Long> convertMapType(List<Integer> lottoResult ) {
+//        return lottoResult.stream()
+//            .collect(Collectors.groupingBy( arg -> arg, HashMap::new, Collectors.counting()));
+//    }
 
+    public void compareWithTargetNumber(List<Lotto> lottoBundle) {
+        for(Lotto lotto : lottoBundle) {
+            lotto.matchLottoNumber(this.targetNumber);
+        }
 
-    public List<Integer> compareWithTargetNumber(List<Lotto> lottoBundle) {
-        return lottoBundle.stream()
-                .map(lotto -> lotto.matchLottoNumber(this.targetNumber))
-                .collect(Collectors.toList());
+//        lottoBundle.stream().map(lotto -> lotto.matchLottoNumber(this.targetNumber));
+//                                            .sorted()
+//                                            .collect(Collectors.toList());
+
     }
 
     public List<Integer> showTargetNumber() {

@@ -44,11 +44,10 @@ public class WinningStatisticsTest {
 
         WinningStatistics winningStatistics = new WinningStatistics(targetNumber);
 
-        List<Integer> result = winningStatistics.compareWithTargetNumber(lottoBundle);
+        winningStatistics.compareWithTargetNumber(lottoBundle);
 
-        assertThat(result.size()).isEqualTo(expect);
         for(int i = 0; i<expect; i++){
-            assertThat(result.get(i)).isLessThanOrEqualTo(6);
+            assertThat(lottoBundle.get(i).getMatchNumber()).isLessThanOrEqualTo(6);
         }
 
     }

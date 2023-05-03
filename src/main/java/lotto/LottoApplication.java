@@ -8,6 +8,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -25,8 +26,8 @@ public class LottoApplication {
         InputConverter inputConverter = new InputConverter();
         WinningStatistics winningStatistics = new WinningStatistics(inputConverter.convertNumberToList(strList));
 
-        List<Integer> result = winningStatistics.compareWithTargetNumber(lottoBundle);
-        System.out.println(result);
+        winningStatistics.compareWithTargetNumber(lottoBundle);
+        resultView.showStatistic(lottoBundle, store.PRICE);
 
     }
 

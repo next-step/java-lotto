@@ -8,7 +8,10 @@ import java.util.stream.IntStream;
 
 public class Lotto {
     private final List<Integer> allNumber = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+
     private final List<Integer> lottoNumber;
+
+    private int matchNumber = 0;
 
     public Lotto() {
         this.lottoNumber = new ArrayList<>(markedNumber(this.allNumber));
@@ -25,8 +28,8 @@ public class Lotto {
     }
 
     // 당첨번호 확인
-    public int matchLottoNumber(List<Integer> targetNumber) {
-        return (int) targetNumber.stream().filter(this.lottoNumber::contains).count();
+    public void matchLottoNumber(List<Integer> targetNumber) {
+        this.matchNumber = (int) targetNumber.stream().filter(this.lottoNumber::contains).count();
     }
 
     public List<Integer> getCheckedNumbers() {
@@ -35,5 +38,9 @@ public class Lotto {
 
     public List<Integer> totalNumber() {
         return this.allNumber;
+    }
+
+    public int getMatchNumber() {
+        return this.matchNumber;
     }
 }

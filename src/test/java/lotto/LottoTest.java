@@ -53,7 +53,8 @@ public class LottoTest {
         List<Integer> targetNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         List<Integer> lottoNumber = lotto.getCheckedNumbers();
-        int result = lotto.matchLottoNumber(targetNumber);
+        lotto.matchLottoNumber(targetNumber);
+        int result = lotto.getMatchNumber();
 
         int result2 = 0;
 

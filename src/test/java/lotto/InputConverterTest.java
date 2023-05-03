@@ -25,7 +25,7 @@ public class InputConverterTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"\"46, 2, 3, 4, 5, 6\"", "\"1, 2, 3, 4, 5, 6, 8\"", "\"0, 2, 3, 4, 5, 6\""})
+  @CsvSource(value = {"\"46, 2, 3, 4, 5, 6\"", "\"1, 2, 3, 4, 5, 6, 8\"", "\"0, 2, 3, 4, 5, 6\"", "\"2, 2, 3, 4, 5, 6\""})
   @DisplayName("입력받은 당첨번호 List<Integer> 형태로 전환 -> 예외 발생")
   public void checkConvertNumberToListThrowException(String str) {
     InputConverter inputConverter = new InputConverter();

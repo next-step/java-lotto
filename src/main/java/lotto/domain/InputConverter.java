@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -14,8 +16,16 @@ public class InputConverter {
           .collect(Collectors.toList());
 
     isSizeSix(numberList);
+    isDuplication(numberList);
 
     return numberList;
+  }
+
+  public void isDuplication(List<Integer> numberList) {
+    Set<Integer> numSet = new HashSet<>(numberList);
+    if(numSet.size()!= numberList.size()){
+      throw new IllegalArgumentException("로또 번호 중 중복된 숫자가 있습니다.");
+    }
   }
 
   public void isSizeSix(List<Integer> numberList) {
