@@ -3,7 +3,7 @@ package lotto;
 import java.security.InvalidParameterException;
 import java.util.Random;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MAX = 45;
     public static final int MIN = 1;
@@ -23,5 +23,15 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(this.number, other.number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

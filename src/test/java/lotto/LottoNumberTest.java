@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
     @Test
-    void 범위() {
+    void create() {
         assertThat(new LottoNumber(1).getNumber()).isEqualTo(1);
         assertThat(new LottoNumber(45).getNumber()).isEqualTo(45);
     }

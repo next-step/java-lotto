@@ -10,6 +10,7 @@ public class LottoFactory {
         for (int i = 0; i < LOTTO_SIZE; i++) {
             result.add(new LottoNumber());
         }
+        Collections.sort(result);
         return result;
     }
 
