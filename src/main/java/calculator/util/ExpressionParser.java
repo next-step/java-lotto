@@ -1,7 +1,7 @@
-package step1.calculator.util;
+package calculator.util;
 
-import step1.calculator.domain.Expression;
-import step1.calculator.domain.UserInput;
+import calculator.domain.Expression;
+import calculator.domain.UserInput;
 
 import java.util.Arrays;
 import java.util.List;

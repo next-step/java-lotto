@@ -1,4 +1,4 @@
-package step1.calculator.view;
+package calculator.view;
 
 public class ResultView {
 
