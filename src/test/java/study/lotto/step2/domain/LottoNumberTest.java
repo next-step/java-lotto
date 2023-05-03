@@ -13,7 +13,7 @@ class LottoNumberTest {
         int outOfRangeNumber = 46;
 
         // when, then
-        assertThatThrownBy(() -> new LottoNumber(outOfRangeNumber))
+        assertThatThrownBy(() -> LottoNumber.of(outOfRangeNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1 이상 45 이하의 정수입니다: " + outOfRangeNumber);
     }
