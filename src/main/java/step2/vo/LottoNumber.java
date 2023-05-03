@@ -38,9 +38,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static Set<LottoNumber> getSixLottoNumbers() {
         Collections.shuffle(DEFAULT_LOTTO_NUMBERS);
         List<Integer> pickedNumbers = DEFAULT_LOTTO_NUMBERS.subList(0, 6);
-        Collections.sort(pickedNumbers);
-
         return pickedNumbers.stream()
+                .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
     }

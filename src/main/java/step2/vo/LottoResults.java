@@ -4,7 +4,6 @@ import step2.service.Lotto;
 import step2.service.LottoRank;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoResults {
 

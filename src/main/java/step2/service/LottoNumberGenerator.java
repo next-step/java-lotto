@@ -2,7 +2,7 @@ package step2.service;
 
 import step2.vo.LottoNumber;
 
-import java.util.*;
+import java.util.Set;
 
 public class LottoNumberGenerator {
 
