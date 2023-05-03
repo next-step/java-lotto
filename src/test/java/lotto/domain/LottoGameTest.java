@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoTest {
+public class LottoGameTest {
 
     WinningLottoNumbers winningLottoNumbers;
     LottoNumbers myLottoNumbers, winningLottoNumbersExcludingBonus;
@@ -42,21 +42,21 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
     void 수익_계산(int matchCount, long reward) {
-        assertThat(Lotto.reward(matchCount)).isEqualTo(reward);
+        assertThat(LottoGame.reward(matchCount)).isEqualTo(reward);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 7})
     void 번호_일치_개수_예외(int matchCount) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.reward(matchCount))
+                .isThrownBy(() -> LottoGame.reward(matchCount))
                 .withMessageContaining("당첨에 해당하는 번호 일치 개수가 아닙니다.");
     }
 
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "1000:1", "0:0"}, delimiter = ':')
     void 구입_매수_계산(long price, long lottoCount) {
-        assertThat(Lotto.lottoCount(price)).isEqualTo(lottoCount);
+        assertThat(LottoGame.lottoCount(price)).isEqualTo(lottoCount);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class LottoTest {
         List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers, myLottoNumbers);
 
         //when
-        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = LottoGame.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
         assertThat(reward.totalProfit()).isEqualTo(60000000L);
@@ -78,10 +78,10 @@ public class LottoTest {
         long purchasePrice = 2000l;
 
         //when
-        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = LottoGame.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
-        assertThat(Lotto.totalProfitRate(reward, purchasePrice)).isEqualTo(30000);
+        assertThat(LottoGame.totalProfitRate(reward, purchasePrice)).isEqualTo(30000);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class LottoTest {
         List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers, winningLottoNumbersExcludingBonus);
 
         //when
-        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = LottoGame.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
         assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
@@ -103,7 +103,7 @@ public class LottoTest {
         List<LottoNumbers> lottoNumbersList = Arrays.asList(myLottoNumbers);
 
         //when
-        LottoRewards reward = Lotto.reward(lottoNumbersList, winningLottoNumbers);
+        LottoRewards reward = LottoGame.reward(lottoNumbersList, winningLottoNumbers);
 
         //then
         assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);

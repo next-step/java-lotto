@@ -11,19 +11,19 @@ public class Main {
         InputView inputView = new InputView();
 
         long purchasePrice = inputView.inputPurchasePrice();
-        long lottoCount = Lotto.lottoCount(purchasePrice);
+        long lottoCount = LottoGame.lottoCount(purchasePrice);
 
         ResultView.printLottoCount(lottoCount);
 
-        List<LottoNumbers> lottoNumbersList = Lotto.generateAllLottoNumbers(lottoCount);
+        List<LottoNumbers> lottoNumbersList = LottoGame.generateAllLottoNumbers(lottoCount);
 
         ResultView.printAllLottoNumbers(lottoNumbersList);
 
-        LottoNumbers winningLottoNumbers = Lotto.winningLottoNumbers(inputView.inputWinningLottoNumbers());
-        LottoNumber bonusLottoNumber = Lotto.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLottoNumbers));
+        LottoNumbers winningLottoNumbers = LottoGame.winningLottoNumbers(inputView.inputWinningLottoNumbers());
+        LottoNumber bonusLottoNumber = LottoGame.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLottoNumbers));
 
-        LottoRewards lottoRewards = Lotto.reward(lottoNumbersList, winningLottoNumbers(winningLottoNumbers, bonusLottoNumber));
-        double totalProfitRate = Lotto.totalProfitRate(lottoRewards, purchasePrice);
+        LottoRewards lottoRewards = LottoGame.reward(lottoNumbersList, winningLottoNumbers(winningLottoNumbers, bonusLottoNumber));
+        double totalProfitRate = LottoGame.totalProfitRate(lottoRewards, purchasePrice);
 
         ResultView.printWinningStatics(lottoRewards, totalProfitRate);
 

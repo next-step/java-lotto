@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Lotto {
+public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int BEGIN_INDEX = 0;
