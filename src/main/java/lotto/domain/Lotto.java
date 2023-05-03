@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class Lotto {
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
-    private static final int LOTTO_COUNT = 6;
+    private static final int LOTTO_SIZE = 6;
 
     private final Set<Integer> numbers;
 
@@ -19,8 +19,11 @@ public class Lotto {
     }
 
     public Lotto(Set<Integer> numbers) {
-        if (isValid(numbers)) {
+        if (isInvalidNumber(numbers)) {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 미만이어야 합니다.");
+        }
+        if (isInvalidSize(numbers)) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
         this.numbers = numbers;
     }
@@ -30,12 +33,16 @@ public class Lotto {
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(AllNumbers);
-        return new TreeSet<>(AllNumbers.subList(0, LOTTO_COUNT));
+        return new TreeSet<>(AllNumbers.subList(0, LOTTO_SIZE));
     }
 
-    private static boolean isValid(Set<Integer> numbers) {
+    private static boolean isInvalidNumber(Set<Integer> numbers) {
         return numbers.stream()
                 .anyMatch(num -> num < LOTTO_MINIMUM_NUMBER || num > LOTTO_MAXIMUM_NUMBER);
+    }
+
+    private static boolean isInvalidSize(Set<Integer> numbers) {
+        return numbers.size() != 6;
     }
 
     public Rank getRank(WinNumbers winNumbers) {
