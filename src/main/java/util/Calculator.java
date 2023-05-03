@@ -38,18 +38,7 @@ public class Calculator {
         final int b = request.getNumber2().value();
         final Operation operation = request.getOperation();
 
-        switch (operation) {
-            case ADDITION:
-                return a + b;
-            case SUBTRACTION:
-                return a - b;
-            case MULTIPLICATION:
-                return a * b;
-            case DIVISION:
-                return a / b;
-            default:
-                throw new IllegalArgumentException("Invalid operator: " + operation);
-        }
+        return operation.calculate(a, b);
     }
 
     private static String[] parse(String input) {
