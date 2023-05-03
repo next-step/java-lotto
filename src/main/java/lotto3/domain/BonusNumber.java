@@ -4,6 +4,8 @@ import java.util.List;
 
 public class BonusNumber {
 
+  private static final int BONUS_NUMBER_START = 1;
+  private static final int BONUS_NUMBER_END = 45;
   private final int bonusNumber;
 
   public BonusNumber(int bonusNumber) {
@@ -18,7 +20,7 @@ public class BonusNumber {
   }
 
   private boolean isBetweenOneAndFortyFive(int bonusNumber) {
-    return bonusNumber >= 1 && bonusNumber <= 45;
+    return bonusNumber >= BONUS_NUMBER_START && bonusNumber <= BONUS_NUMBER_END;
   }
 
   public void validateDuplicate(WinningNumbers winningNumbers) {
