@@ -1,15 +1,17 @@
 package calculator.view;
 
+import calculator.domain.Operand;
+import calculator.domain.Operator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class InputView {
     private final static String SEPARATOR = " ";
-    private final static List<String> OPERATOR = List.of("+", "-", "*", "/");
     private final String formula;
-    private final List<Double> operands = new ArrayList<>();
-    private final List<String> operators = new ArrayList<>();
+    private final List<Operand> operands = new ArrayList<>();
+    private final List<Operator> operators = new ArrayList<>();
 
     public InputView(String formula) {
         if (formula == null || formula.isBlank()) {
@@ -19,21 +21,14 @@ public class InputView {
         Arrays.stream(formula.split(SEPARATOR))
                 .forEach(s -> {
                     if (isOperand(s)) {
-                        operands.add(Double.parseDouble(s));
+                        operands.add(new Operand(Double.valueOf(s)));
                     } else {
-                        operators.add(s);
+                        operators.add(new Operator(s));
                     }
                 });
-
-        for (String o : operators) {
-            if (!isOperator(o)) throw new IllegalArgumentException("올바른 사칙연산이 아닙니다.");
-        }
         this.formula = formula;
     }
 
-    private boolean isOperator(String operator) {
-        return OPERATOR.contains(operator);
-    }
     private boolean isOperand(String operand) {
         try {
             Double.valueOf(operand);
@@ -43,15 +38,11 @@ public class InputView {
         }
     }
 
-    public List<Double> getOperands() {
+    public List<Operand> getOperands() {
         return operands;
     }
 
-    public String getFormula() {
-        return formula;
-    }
-
-    public List<String> getOperators() {
+    public List<Operator> getOperators() {
         return operators;
     }
 }

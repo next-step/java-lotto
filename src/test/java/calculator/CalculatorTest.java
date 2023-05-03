@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -10,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 public class CalculatorTest {
     @Test
     void create() {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculate(2.0, "+", 3.0)).isEqualTo(5);
+        Calculator calculator = new Calculator(2.0, "+", 3.0);
+        assertThat(calculator.calculate()).isEqualTo(5);
     }
 }
