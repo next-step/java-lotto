@@ -24,6 +24,12 @@ public class Lottery {
         return lottery;
     }
 
+    public static Lottery fromGiven(Set<Integer> numbers) {
+        Lottery lottery = new Lottery();
+        lottery.numbers.addAll(numbers);
+        return lottery;
+    }
+
     public Set<Integer> getNumbers() {
         return new HashSet<>(numbers);
     }
