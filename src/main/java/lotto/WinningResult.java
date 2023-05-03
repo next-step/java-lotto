@@ -1,46 +1,29 @@
 package lotto;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class Lotto {
-    private int count = 0;
-    private final List<Integer> numbers = new ArrayList<>();
-    private final Map<Integer, List<Integer>> lottoNumbers = new HashMap<>();
+public class WinningResult {
+
     private final Map<Integer, Integer> winningResult = new HashMap<>();
 
     public Map<Integer, Integer> getWinningResult() {
         return winningResult;
     }
 
-    public Lotto(int count) {
-        init(count);
+    public WinningResult() {
+        init();
     }
 
-    public Map<Integer, List<Integer>> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
-    private void init(int count) {
-        this.count = count;
-        for (int i = 1; i <= 45; i++) {
-            this.numbers.add(i);
-        }
+    private void init() {
         winningResult.put(3, 0);
         winningResult.put(4, 0);
         winningResult.put(5, 0);
         winningResult.put(6, 0);
-        generateLottoNumbers();
     }
 
-    private void generateLottoNumbers() {
-        for (int i = 0; i < count; i++) {
-            Collections.shuffle(numbers);
-            List<Integer> selectedNumbers = new ArrayList<>(numbers.subList(0, 6));
-            lottoNumbers.put(i, selectedNumbers);
-        }
-    }
-
-    public void calculateWinningResult(List<Integer> winningNumbers) {
+    public void calculateWinningResult(Map<Integer, List<Integer>> lottoNumbers, List<Integer> winningNumbers) {
         for (int i = 0; i < lottoNumbers.size(); i++) {
             List<Integer> lottoNumber = lottoNumbers.get(i);
             int equalNumberCount = countEqualNumbers(lottoNumber, winningNumbers);

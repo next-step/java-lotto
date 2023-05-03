@@ -31,9 +31,8 @@ public class InputView {
     public void saveWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
         String str = scanner.nextLine();
-        clearScannerBuffer();
         winningNumbers = new ArrayList<>(toInts(split(str)));
-
+        clearScannerBuffer();
     }
 
     private void clearScannerBuffer() {

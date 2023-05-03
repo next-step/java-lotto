@@ -1,6 +1,7 @@
 package ui;
 
-import lotto.Lotto;
+import lotto.LottoFactory;
+import lotto.WinningResult;
 
 import java.util.List;
 import java.util.Map;
@@ -8,23 +9,21 @@ import java.util.Map;
 public class Application {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        Lotto lotto = null;
+        WinningResult winningResult = new WinningResult();
 
         inputView.saveAmount();
         inputView.saveCount();
 
-        lotto = new Lotto(inputView.count);
-
-        Map<Integer, List<Integer>> lottoNumbers = lotto.getLottoNumbers();
+        Map<Integer, List<Integer>> lottoNumbers = LottoFactory.generateLottoNumbers(inputView.count);
 
         for (int i = 0; i < lottoNumbers.size(); i++) {
             System.out.println(lottoNumbers.get(i));
         }
 
         inputView.saveWinningNumber();
-        lotto.calculateWinningResult(inputView.getWinningNumbers());
-        ResultView.printResult(lotto.getWinningResult());
+        winningResult.calculateWinningResult(lottoNumbers, inputView.getWinningNumbers());
+        ResultView.printResult(winningResult.getWinningResult());
 
-        ResultView.printRatioOfReturn(lotto.calculateRateOfReturn(inputView.amount));
+        ResultView.printRatioOfReturn(winningResult.calculateRateOfReturn(inputView.amount));
     }
 }
