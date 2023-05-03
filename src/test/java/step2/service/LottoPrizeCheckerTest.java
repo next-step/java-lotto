@@ -1,57 +1,36 @@
 package step2.service;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import step2.domain.entity.Lotto;
 import step2.domain.entity.LottoTicket;
 import step2.domain.vo.LottoPrize;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoPrizeCheckerTest {
 
-    @Test
-    void 당첨번호와_로또번호가_6개_일치하면_1등당첨() {
-        final var lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        final var winner = new Lotto(1, 2, 3, 4, 5, 6);
+    @ParameterizedTest(name = "로또번호: {0}, 당첨번호: {1}, 결과: {2}")
+    @MethodSource("provideTestCase")
+    void 로또_당첨(Lotto lotto, Lotto winner, LottoPrize expected) {
         final var ticket = new LottoTicket(lotto);
 
-        LottoPrizeChecker.checker(List.of(ticket), winner);
+        List<LottoPrize> checker = LottoPrizeChecker.checker(List.of(ticket), winner);
+        final var actual = checker.get(0);
 
-        assertThat(ticket.getLottoPrize()).isEqualTo(LottoPrize.FIRST);
+        assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    void 당첨번호와_로또번호가_5개_일치하면_2등당첨() {
-        final var lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        final var winner = new Lotto(1, 2, 3, 4, 5, 7);
-        final var ticket = new LottoTicket(lotto);
-
-        LottoPrizeChecker.checker(List.of(ticket), winner);
-
-        assertThat(ticket.getLottoPrize()).isEqualTo(LottoPrize.SECOND);
-    }
-
-    @Test
-    void 당첨번호와_로또번호가_4개_일치하면_3등당첨() {
-        final var lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        final var winner = new Lotto(1, 2, 3, 4, 7, 8);
-        final var ticket = new LottoTicket(lotto);
-
-        LottoPrizeChecker.checker(List.of(ticket), winner);
-
-        assertThat(ticket.getLottoPrize()).isEqualTo(LottoPrize.THIRD);
-    }
-
-    @Test
-    void 당첨번호와_로또번호가_3개_일치하면_4등당첨() {
-        final var lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        final var winner = new Lotto(1, 2, 3, 7, 8, 9);
-        final var ticket = new LottoTicket(lotto);
-
-        LottoPrizeChecker.checker(List.of(ticket), winner);
-
-        assertThat(ticket.getLottoPrize()).isEqualTo(LottoPrize.FOURTH);
+    private static Stream<Arguments> provideTestCase() {
+        return Stream.of(
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.FIRST),
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 7), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.SECOND),
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 7, 8), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.THIRD),
+                Arguments.arguments(new Lotto(1, 2, 3, 7, 8, 9), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.FOURTH)
+        );
     }
 }
