@@ -6,6 +6,7 @@ import lotto.view.ResultView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -22,11 +23,13 @@ public class LottoMain {
             resultView.view(lottos);
         }
 
-        List<LottoNumber> result = inputView.result();
+        List<LottoNumber> winNumber = inputView.result();
 
-        lottos.forEach(lotto -> {
-            LottoMatcher result1 = lotto.result(result);
-            System.out.println(result1);
-        });
+        List<LottoMatcher> collect = lottos.stream()
+                .map(lotto -> lotto.match(winNumber))
+                .collect(Collectors.toList());
+
+        LottoResult lottoResult = new LottoResult(collect);
+        lottoResult.result();
     }
 }

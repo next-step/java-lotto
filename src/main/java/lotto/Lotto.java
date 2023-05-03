@@ -10,7 +10,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoMatcher result(List<LottoNumber> targetNumbers) {
+    public LottoMatcher match(List<LottoNumber> targetNumbers) {
         int matchedSize = lottoNumbers.stream()
                 .filter(lottoNumber -> targetNumbers.contains(lottoNumber))
                 .collect(Collectors.toList())
