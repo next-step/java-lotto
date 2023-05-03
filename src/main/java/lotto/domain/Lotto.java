@@ -19,6 +19,9 @@ public class Lotto {
     }
 
     public Lotto(Set<Integer> numbers) {
+        if (isValid(numbers)) {
+            throw new IllegalArgumentException("로또 번호는 1 이상 45 미만이어야 합니다.");
+        }
         this.numbers = numbers;
     }
 
@@ -28,6 +31,11 @@ public class Lotto {
                 .collect(Collectors.toList());
         Collections.shuffle(AllNumbers);
         return new TreeSet<>(AllNumbers.subList(0, LOTTO_COUNT));
+    }
+
+    private static boolean isValid(Set<Integer> numbers) {
+        return numbers.stream()
+                .anyMatch(num -> num < LOTTO_MINIMUM_NUMBER || num > LOTTO_MAXIMUM_NUMBER);
     }
 
     public Rank getRank(WinNumbers winNumbers) {
