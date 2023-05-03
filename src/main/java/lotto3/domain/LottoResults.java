@@ -14,9 +14,9 @@ public class LottoResults {
     return results.getOrDefault(prize, 0L);
   }
 
-  public double calculateProfitRate(int investMoney) {
+  public double calculateProfitRate(Money investMoney) {
     long totalPrizeMoney = calculateTotalPrizeMoney(results);
-    return (double) totalPrizeMoney / investMoney;
+    return investMoney.profitRate(totalPrizeMoney);
   }
 
   private long calculateTotalPrizeMoney(Map<Prize, Long> lottoResults) {

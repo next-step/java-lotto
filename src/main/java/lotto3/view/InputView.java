@@ -6,17 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto3.domain.Money;
 import lotto3.domain.WinningNumbers;
 
 public class InputView {
 
   private static final Scanner SCANNER = new Scanner(System.in);
 
-  public static int scanMoney() {
+  public static Money scanMoney() {
     System.out.println("구입금액을 입력해 주세요.");
     String investMoney = SCANNER.nextLine();
     validateMoney(investMoney);
-    return Integer.parseInt(investMoney);
+    return new Money(Integer.parseInt(investMoney));
   }
 
   private static void validateMoney(String investMoney) {
@@ -25,9 +26,6 @@ public class InputView {
     }
     if (!isNumber(investMoney)) {
       throw new IllegalArgumentException("구입금액은 숫자만 입력 가능합니다.");
-    }
-    if (!isThousands(investMoney)) {
-      throw new IllegalArgumentException("구입금액은 1000원 단위로 입력 가능합니다.");
     }
   }
 
