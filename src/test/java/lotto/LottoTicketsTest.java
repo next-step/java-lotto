@@ -49,15 +49,13 @@ public class LottoTicketsTest {
 
     @Test
     void 총수익률_구하기_테스트() {
-        CheckWinningRequest checkWinningRequest = new CheckWinningRequest(winningNumber, bonusNumber);
-        assertThat(Math.floor(tickets.getTotalReturn(checkWinningRequest) * 100) / 100.0).isEqualTo(0.35);
+        assertThat(Math.floor(tickets.getTotalReturn(winningNumber, bonusNumber) * 100) / 100.0).isEqualTo(0.35);
     }
 
     @Test
     void 전체_당첨결과_확인() {
-        CheckWinningRequest checkWinningRequest = new CheckWinningRequest(winningNumber, bonusNumber);
-        assertThat(tickets.tallyUp(checkWinningRequest).getRankCount().get(Rank.FOURTH_PLACE)).isEqualTo(1);
-        assertThat(tickets.tallyUp(checkWinningRequest).getTotalReturn()).isEqualTo(0.35);
+        assertThat(tickets.tallyUp(winningNumber, bonusNumber).getRankCount().get(Rank.FOURTH_PLACE)).isEqualTo(1);
+        assertThat(tickets.tallyUp(winningNumber, bonusNumber).getTotalReturn()).isEqualTo(0.35);
     }
 
 }

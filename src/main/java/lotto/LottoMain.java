@@ -1,8 +1,8 @@
 package lotto;
 
+import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
-import lotto.domain.strategy.LottoTicketsAutoCreateStrategy;
-import lotto.domain.strategy.LottoTicketsManualCreateStrategy;
+import lotto.domain.strategy.LottoTicketAutoCreateStrategy;
 import lotto.dto.CheckWinningRequest;
 import lotto.dto.LottoTicketBuyRequest;
 import lotto.view.InputView;
@@ -17,8 +17,6 @@ public class LottoMain {
         lottoTickets.addTickets(LottoTickets.of(new LottoTicketsManualCreateStrategy(request.getManualNumbers())));
         resultView.printLottoTickets(lottoTickets);
         CheckWinningRequest checkWinningRequest = inputView.checkWinning();
-        resultView.printWiningResult(lottoTickets.tallyUp(checkWinningRequest));
-
-
+        resultView.printWiningResult(lottoTickets.tallyUp(checkWinningRequest.getWinningNumbers(), checkWinningRequest.getBonusBall()));
     }
 }

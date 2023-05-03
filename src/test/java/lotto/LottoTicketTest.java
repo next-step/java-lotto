@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
-import lotto.dto.CheckWinningRequest;
 import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,12 +42,11 @@ public class LottoTicketTest {
 
     @Test
     void 등수_확인() {
-        CheckWinningRequest checkWinningRequest = new CheckWinningRequest(winningLottoNumbers, bonusNumber);
-        assertThat(firstPlaceTicket.getRank(checkWinningRequest)).isEqualTo(Rank.FIRST_PLACE);
-        assertThat(secondPlaceTicket.getRank(checkWinningRequest)).isEqualTo(Rank.SECOND_PLACE);
-        assertThat(thirdPlaceTicket.getRank(checkWinningRequest)).isEqualTo(Rank.THIRD_PLACE);
-        assertThat(fourthPlaceTicket.getRank(checkWinningRequest)).isEqualTo(Rank.FOURTH_PLACE);
-        assertThat(bonusPlaceTicket.getRank(checkWinningRequest)).isEqualTo(Rank.BONUS_PLACE);
+        assertThat(firstPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.FIRST_PLACE);
+        assertThat(secondPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.SECOND_PLACE);
+        assertThat(thirdPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.THIRD_PLACE);
+        assertThat(fourthPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.FOURTH_PLACE);
+        assertThat(bonusPlaceTicket.getRank(winningLottoNumbers, bonusNumber)).isEqualTo(Rank.BONUS_PLACE);
     }
 
     @Test
@@ -70,8 +68,14 @@ public class LottoTicketTest {
 
 
     @Test
+    void 티켓_생성_테스트() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(LottoTicket.of(() -> Arrays.asList(1, 2, 3, 4, 5, 6)).getLottoNumbers().containsAll(numbers)).isTrue();
+    }
+
+    @Test
     void 보너스_당첨_테스트() {
-        assertThat(bonusPlaceTicket.isBonusWin(new CheckWinningRequest(winningLottoNumbers, bonusNumber))).isTrue();
+        assertThat(bonusPlaceTicket.isBonusWin(winningLottoNumbers, bonusNumber)).isTrue();
     }
 
 }

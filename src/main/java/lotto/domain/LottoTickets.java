@@ -34,13 +34,13 @@ public class LottoTickets {
         return Math.floor(totalReturn * 100) / 100.0;
     }
 
-    public WinningResult tallyUp(CheckWinningRequest checkWinningRequest) {
+    public WinningResult tallyUp(List<Integer> winningNumbers, int bonusBall) {
         Map<Rank, Integer> rankCount = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            Rank rank = lottoTicket.getRank(checkWinningRequest);
+            Rank rank = lottoTicket.getRank(winningNumbers, bonusBall);
             rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
         }
-        return new WinningResult(rankCount, getTotalReturn(checkWinningRequest));
+        return new WinningResult(rankCount, getTotalReturn(winningNumbers, bonusBall));
     }
 
     public List<LottoTicket> getLottoTickets() {
