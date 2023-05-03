@@ -21,14 +21,6 @@ public class IntegerStringConverterTest {
         Assertions.assertThat(res).isEqualTo(-1);
     }
 
-//    @Test
-//    void 사칙연산자_가_아닌_경우_예외를_던진다() {
-//        String nonOperator = "?";
-//
-//        Assertions.assertThatIllegalArgumentException()
-//                .isThrownBy(() -> arithmeticStringConverter.convert(nonOperator));
-//    }
-
     @Test
     void 공백이_존재하는경우_예외를_던진다() {
         String strWithSpace = "12 1";
