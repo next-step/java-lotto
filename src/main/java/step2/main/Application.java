@@ -1,10 +1,13 @@
 package step2.main;
 
+import step2.domain.vo.LottoPrize;
 import step2.domain.vo.Money;
 import step2.service.LottoPrizeChecker;
 import step2.service.LottoTicketIssuance;
 import step2.view.InputView;
 import step2.view.OutputView;
+
+import java.util.List;
 
 public class Application {
 
@@ -16,10 +19,8 @@ public class Application {
         OutputView.printTickets(lottoTickets);
 
         final var lastLottoNumbers = InputView.inputLastLottoNumbers();
+        List<LottoPrize> lottoPrizes = LottoPrizeChecker.checker(lottoTickets.getLottoTickets(), lastLottoNumbers);
 
-        LottoPrizeChecker.checker(lottoTickets.getLottoTickets(), lastLottoNumbers);
-
-        OutputView.printWinnerStatistics(lottoTickets);
+        OutputView.printWinnerStatistics(lottoTickets, lottoPrizes);
     }
-
 }
