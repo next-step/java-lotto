@@ -1,3 +1,8 @@
+package calculator;
+
+import calculator.converter.StringConverter;
+import calculator.parser.ExpressionParser;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
