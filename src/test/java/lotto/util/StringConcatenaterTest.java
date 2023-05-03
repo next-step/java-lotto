@@ -1,6 +1,5 @@
-package lotto.domain;
+package lotto.util;
 
-import lotto.util.StringConcatenater;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

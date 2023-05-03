@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int MINIMUM_WINNING_COUNT = 3;
-
     private final Lottos lottos;
     private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
     private final Map<LottoPrize, Long> prizeCountMap;
 
-    public LottoResult(Lottos lottos, Lotto winningLotto) {
+    public LottoResult(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
         this.lottos = lottos;
         this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
         prizeCountMap = initializePrizeCountMap();
     }
 
@@ -29,13 +29,17 @@ public class LottoResult {
     private long calculateMatchingLottosCount(LottoPrize lottoPrize) {
         return lottos.getLottoList()
                 .stream()
-                .map(this::getMatchingLottoSameNumberCount)
-                .filter(it -> it == lottoPrize.getMatchingCount())
+                .map(it -> LottoPrize.from(
+                                getMatchingLottoSameNumberCount(it),
+                                it.hasNumber(bonusNumber)
+                        )
+                )
+                .filter(it -> it == lottoPrize)
                 .count();
     }
 
-    private long getMatchingLottoSameNumberCount(Lotto lotto) {
-        return lotto.getLottoNumberSet()
+    private int getMatchingLottoSameNumberCount(Lotto lotto) {
+        return (int) lotto.getLottoNumberSet()
                 .stream()
                 .filter(winningLotto::hasNumber)
                 .count();
@@ -46,11 +50,10 @@ public class LottoResult {
     }
 
     public double getProfitRate() {
-        long price = 0;
-        for (int i = MINIMUM_WINNING_COUNT; i <= Lotto.LOTTO_NUMBER_SIZE; i++) {
-            LottoPrize lottoPrize = LottoPrize.from(i);
-            price += lottoPrize.getTotalPrize(getMatchingLottosCount(lottoPrize));
-        }
-        return price / (double) (lottos.getLottoQuantity() * LottoShop.LOTTO_PRICE);
+        long totalPrize = Arrays.stream(LottoPrize.values())
+                .mapToLong(it -> it.getTotalPrize(getMatchingLottosCount(it)))
+                .sum();
+
+        return totalPrize / (double) (lottos.getLottoQuantity() * LottoShop.LOTTO_PRICE);
     }
 }

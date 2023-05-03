@@ -2,7 +2,13 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class ResultView {
+    private ResultView() {
+    }
+
     public static void showLottos(Lottos lottos) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(lottos.getLottoQuantity());
@@ -38,15 +44,9 @@ public class ResultView {
         stringBuilder.append("\n당첨 통계\n");
         stringBuilder.append("---------\n");
 
-        for (int i = 3; i <= 6; i++) {
-            LottoPrize lottoPrize = LottoPrize.from(i);
-            stringBuilder.append(i);
-            stringBuilder.append("개 일치 (");
-            stringBuilder.append(lottoPrize.getPrize());
-            stringBuilder.append("원)- ");
-            stringBuilder.append(lottoResult.getMatchingLottosCount(lottoPrize));
-            stringBuilder.append("개\n");
-        }
+        Arrays.stream(LottoPrize.values())
+                .sorted(Comparator.comparing(LottoPrize::getPrize))
+                .forEachOrdered(it -> stringBuilder.append(getMessageForPrize(lottoResult, it)));
 
         stringBuilder.append("총 수익률은 ");
         double profitRate = lottoResult.getProfitRate();
@@ -65,5 +65,30 @@ public class ResultView {
         }
 
         System.out.println(stringBuilder);
+    }
+
+    private static String getMessageForPrize(LottoResult lottoResult, LottoPrize lottoPrize) {
+        if (lottoPrize == LottoPrize.NONE) {
+            return "";
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(lottoPrize.getMatchingCount());
+        stringBuilder.append("개 일치");
+        stringBuilder.append(getMessageForBonus(lottoPrize));
+        stringBuilder.append(lottoPrize.getPrize());
+        stringBuilder.append("원)- ");
+        stringBuilder.append(lottoResult.getMatchingLottosCount(lottoPrize));
+        stringBuilder.append("개\n");
+
+        return stringBuilder.toString();
+    }
+
+    private static String getMessageForBonus(LottoPrize lottoPrize) {
+        if (lottoPrize == LottoPrize.SECOND) {
+            return ", 보너스 볼 일치(";
+        }
+
+        return " (";
     }
 }
