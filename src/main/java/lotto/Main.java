@@ -1,9 +1,7 @@
 package lotto;
 
-import lotto.domain.LottoCreatingRandomStrategy;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.*;
+
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,6 +20,9 @@ public class Main {
         String winningNumbers = InputView.inputWinningNumber();
 
         LottoResult result = new LottoResult(lottos);
-        result.checkWinningNumbers(winningNumbers);
+        LottoStatics statics = new LottoStatics(cost, result.checkWinningNumbers(winningNumbers), new LottoRewardStartAt3Strategy());
+
+        ResultView.printStatistics(statics.getStatics(), statics.getReward());
+        ResultView.printLottoRate(statics.getRate());
     }
 }

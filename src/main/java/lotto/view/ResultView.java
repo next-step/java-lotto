@@ -1,9 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoStatics;
 import lotto.domain.Lottos;
 
 import javax.xml.transform.Result;
+import java.util.Map;
 
 public class ResultView {
     public static void printCostOfLotto() {
@@ -27,8 +29,17 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public static void printStatistics() {
+    public static void printStatistics(Map<Integer, Integer> statics, Map<Integer, Integer> reward) {
         System.out.println("당첨 통계");
         System.out.println("---------");
+
+        for(int matchNumber: reward.keySet()) {
+            System.out.println(matchNumber + "개 일치 (" + reward.get(matchNumber) + "원)- " + statics.getOrDefault(matchNumber, 0) + "개");
+        }
     }
+
+    public static void printLottoRate(String rate) {
+        System.out.println("총 수익률은 " + rate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
+
 }
