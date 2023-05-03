@@ -21,10 +21,9 @@ public class LottoMain {
 		ResultView.printCurrentSituation(lottoMachine.getPurchasedLottos());
 
 		String inputWinNumbers = InputView.inputWinNumbers();
-		WinningLotto winningLotto = new WinningLotto(inputWinNumbers);
 		LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
-
-		winningLotto.calculateScore(lottoMachine.getPurchasedLottos(), bonusNumber);
+		WinningLotto winningLotto = new WinningLotto(inputWinNumbers, bonusNumber);
+		winningLotto.calculateScore(lottoMachine.getPurchasedLottos());
 
 		List<RankSituation> rankSituations = lottoMachine.makeRankSituations();
 		ResultView.printRankSituations(lottoMachine.sortInOrderScore(rankSituations));
