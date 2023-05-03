@@ -22,6 +22,10 @@ public enum WinningPrice {
         return price;
     }
 
+    public int getEqualCount() {
+        return equalCount;
+    }
+
     public static WinningPrice of(int equalCount) {
         return Arrays.stream(values()).filter(
                 s -> Objects.equals(s.equalCount, equalCount)
