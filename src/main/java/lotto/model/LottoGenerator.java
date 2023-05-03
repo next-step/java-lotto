@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -18,15 +19,14 @@ public class LottoGenerator {
         this.random = random;
     }
 
-    public List<Lotto> generate(int price) {
-        int count = price / Lotto.PRICE;
-        if (count <= 0) {
-            throw new IllegalArgumentException("cannot buy any lotto. required >= " + Lotto.PRICE);
-        }
-
-        return Stream.generate(this::generate)
-                .limit(count)
+    public Lottos generate(Count count) {
+        Objects.requireNonNull(count);
+        
+        List<Lotto> lottos = Stream.generate(this::generate)
+                .limit(count.value())
                 .collect(toList());
+
+        return Lottos.of(lottos);
     }
 
     private Lotto generate() {

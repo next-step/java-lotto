@@ -3,8 +3,8 @@ package lotto.control.input;
 import lotto.model.Number;
 import lotto.view.View;
 
-public class LottoBonusInput extends InputControl<Number> {
-    public LottoBonusInput(View view) {
+public class NumberInput extends InputControl<Number> {
+    public NumberInput(View view) {
         super(view);
     }
 
