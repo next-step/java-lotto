@@ -24,8 +24,7 @@ public class IntegerCalculatorTest {
         operatorMap.put("/", new Operation((a, b) -> a / b));
 
         calculator = new IntegerCalculator(
-                new ExpressionParser(new ArithmeticExpressionExpressionValidator(delimiter), delimiter),
-                new IntegerStringConverter(),
+                new ExpressionParser(new IntegerStringConverter(), new ArithmeticExpressionExpressionValidator(delimiter), delimiter),
                 new Operations(operatorMap));
     }
 

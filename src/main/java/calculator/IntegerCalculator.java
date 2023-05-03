@@ -1,37 +1,33 @@
 package calculator;
 
-import calculator.converter.StringConverter;
+import calculator.parser.Expression;
 import calculator.parser.ExpressionParser;
-
-import java.util.List;
 
 public class IntegerCalculator {
     private final ExpressionParser parser;
-    private final StringConverter<Integer> stringToIntegerConverter;
     private final Operations operators;
 
     public IntegerCalculator(ExpressionParser parser,
-                             StringConverter<Integer> stringToIntegerConverter,
                              Operations operations) {
         this.parser = parser;
-        this.stringToIntegerConverter = stringToIntegerConverter;
         this.operators = operations;
     }
 
     public int calculate(String expressionString) {
-        List<String> parts = parser.parse(expressionString);
-        Integer init = stringToIntegerConverter.convert(parts.get(0));
+        Expression expression = parser.parse(expressionString);
 
-        for(int idx = 0 ; idx < parts.size() ;idx++) {
-            if(idx  % 2 != 0) {
-                String operator = parts.get(idx);
+        Integer sum = expression.nextOperand();
 
-                checkArithmeticOperator(operator);
-                init = operators.operationOf(operator)
-                        .operate(init, stringToIntegerConverter.convert(parts.get(idx + 1)));
-            }
+        while(expression.hasOperator()) {
+            String operator = expression.nextOperator();
+            Integer number = expression.nextOperand();
+            checkArithmeticOperator(operator);
+
+            sum = operators.operationOf(operator)
+                    .operate(sum, number);
         }
-        return init;
+
+        return sum;
     }
 
     private void checkArithmeticOperator(String operator) {

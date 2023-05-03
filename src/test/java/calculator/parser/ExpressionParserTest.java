@@ -1,5 +1,6 @@
 package calculator.parser;
 
+import calculator.converter.IntegerStringConverter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -12,7 +13,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 public class ExpressionParserTest {
 
     private final String whiteSpace = " ";
-    private final ExpressionParser parser = new ExpressionParser(new ArithmeticExpressionExpressionValidator(whiteSpace), whiteSpace);
+    private final ExpressionParser parser = new ExpressionParser(new IntegerStringConverter(), new ArithmeticExpressionExpressionValidator(whiteSpace), whiteSpace);
 
     @Nested
     class 공백_delimiter_로_주입받은_파서는 {
@@ -21,7 +22,7 @@ public class ExpressionParserTest {
         void 공백_을_2개_가진_문자열을_3개_로_쪼갠다() {
             String strWithTwoSpaces = "8 / 3";
 
-            Assertions.assertThat(parser.parse(strWithTwoSpaces)).hasSize(3);
+            Assertions.assertThat(parser.parse(strWithTwoSpaces).hasSize(3)).isTrue();
         }
     }
 
