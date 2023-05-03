@@ -28,15 +28,6 @@ class WinLottoTest {
         assertThat(winLotto.numbers()).isEqualTo(numbers);
     }
 
-    @Test
-    void ToString() {
-        WinLotto winLotto = new WinLotto(getNumbersForTest("1, 8, 11, 31, 41, 42"));
-
-        String expectedToString = "[1, 8, 11, 31, 41, 42]";
-
-        assertThat(winLotto.toString()).isEqualTo(expectedToString);
-    }
-
     private static Numbers getNumbersForTest(String input) {
         List<Integer> inputNumbers = InputView.makeNumbers(input);
         Numbers numbers = new Numbers(inputNumbers);

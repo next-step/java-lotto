@@ -19,14 +19,6 @@ class MyLottoTest {
     }
 
     @Test
-    void ToString() {
-        String input = "1, 8, 11, 31, 41, 42";
-        MyLotto myLotto = new MyLotto(getNumbersForTest(input));
-        String expectedToString = "[1, 8, 11, 31, 41, 42]";
-        assertThat(myLotto.toString()).isEqualTo(expectedToString);
-    }
-
-    @Test
     void 당첨확인() {
         String input = "7, 14, 21, 22, 44, 45";
         MyLotto myLotto = new MyLotto(getNumbersForTest(input));

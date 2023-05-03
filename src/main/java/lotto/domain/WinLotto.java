@@ -14,9 +14,4 @@ public class WinLotto {
     public Integer findNumber(int i) {
         return numbers.find(i);
     }
-
-    @Override
-    public String toString() {
-        return numbers.toString();
-    }
 }

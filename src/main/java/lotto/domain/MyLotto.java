@@ -14,11 +14,6 @@ public class MyLotto {
         return new MyLotto(autoNumbers);
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
-    }
-
     public Numbers numbers() {
         return numbers;
     }
