@@ -76,7 +76,7 @@ public class LottoTicketTest {
 
     @Test
     void 보너스_당첨_테스트() {
-        assertThat(bonusPlaceTicket.isBounusWin(new CheckWinningRequest(winningLottoNumbers, bonusNumber))).isTrue();
+        assertThat(bonusPlaceTicket.isBonusWin(new CheckWinningRequest(winningLottoNumbers, bonusNumber))).isTrue();
     }
 
 }
