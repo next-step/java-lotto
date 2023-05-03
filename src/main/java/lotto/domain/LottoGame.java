@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,14 +17,6 @@ public class LottoGame {
 
     public static long lottoCount(long price) {
         return price / LOTTO_PRICE;
-    }
-
-    public static List<Lotto> generateLottos(long lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = BEGIN_INDEX; i < lottoCount; i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
     }
 
     public static Lotto winningLotto(String input) {

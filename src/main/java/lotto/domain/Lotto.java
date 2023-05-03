@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.LottoMachine;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,14 +8,14 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private static final int MATCH_COUNT_MIN = 3;
     private static final int MATCH_COUNT_MAX = 6;
 
     private final Set<LottoNumber> numbers;
 
-    public Lotto() {
-        this(generatedLotto());
+    public Lotto(List<LottoNumber> numbers) {
+        this(new HashSet<>(numbers));
     }
 
     public Lotto(Set<LottoNumber> numbers) {
@@ -25,16 +23,6 @@ public class Lotto {
             throw new RuntimeException("로또 번호의 개수는 6개여야 합니다.");
         }
         this.numbers = numbers;
-    }
-
-    private static Set<LottoNumber> generatedLotto() {
-        Set<LottoNumber> lotto = new HashSet<>();
-        List<Integer> drawnLotto = new LottoMachine().drawnLotto();
-
-        for (int drawnLottoNumber : drawnLotto) {
-            lotto.add(new LottoNumber(drawnLottoNumber));
-        }
-        return lotto;
     }
 
     boolean isNotWinningMatchCountWith(Lotto numbers) {

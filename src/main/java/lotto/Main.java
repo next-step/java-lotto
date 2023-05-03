@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.utils.LottoIssuer;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,7 +16,7 @@ public class Main {
 
         ResultView.printLottoCount(lottoCount);
 
-        List<Lotto> lottos = LottoGame.generateLottos(lottoCount);
+        List<Lotto> lottos = LottoIssuer.issueLottos(lottoCount);
 
         ResultView.printLottos(lottos);
 
