@@ -2,7 +2,6 @@ package lotto3.util;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto3.domain.LottoTicket;
 import lotto3.domain.LottoTickets;
 import lotto3.domain.Money;
 import org.junit.jupiter.api.Test;

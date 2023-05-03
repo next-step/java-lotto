@@ -1,8 +1,6 @@
 package lotto3.util;
 
-import static lotto3.domain.LottoTicket.TICKET_PRICE;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
