@@ -1,6 +1,6 @@
 package calculator.parser;
 
-import calculator.converter.StringConverter;
+import calculator.parser.converter.StringConverter;
 
 import java.util.Deque;
 import java.util.LinkedList;

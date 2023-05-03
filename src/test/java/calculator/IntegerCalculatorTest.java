@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.converter.IntegerStringConverter;
+import calculator.parser.converter.IntegerStringConverter;
 import calculator.parser.ArithmeticExpressionExpressionValidator;
 import calculator.parser.ExpressionParser;
 import org.assertj.core.api.Assertions;

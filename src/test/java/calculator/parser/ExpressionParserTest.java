@@ -1,6 +1,6 @@
 package calculator.parser;
 
-import calculator.converter.IntegerStringConverter;
+import calculator.parser.converter.IntegerStringConverter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
