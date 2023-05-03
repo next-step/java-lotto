@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.in;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,9 +16,9 @@ public class CalculatorTest {
         //given
         String aPlusB = "1 + 1";
         int expectedResult = 2;
-        Calculator calculator = Calculator.of(aPlusB);
+//        Calculator calculator = Calculator.of(aPlusB);
         //when
-        int result = calculator.calculate();
+        int result = Calculator.calculate(aPlusB);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -29,9 +30,9 @@ public class CalculatorTest {
         //given
         String aMinusB = "13 - 34";
         int expectedResult = -21;
-        Calculator calculator = Calculator.of(aMinusB);
+//        Calculator calculator = Calculator.of(aMinusB);
         //when
-        int result = calculator.calculate();
+        int result = Calculator.calculate(aMinusB);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -43,9 +44,8 @@ public class CalculatorTest {
         //given
         String aPowerB = "2 * 3";
         int expectedResult = 6;
-        Calculator calculator = Calculator.of(aPowerB);
         //when
-        int result = calculator.calculate();
+        int result = Calculator.calculate(aPowerB);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -57,9 +57,8 @@ public class CalculatorTest {
         //given
         String aDivideB = "3 / 2";
         int expectedResult = 1;
-        Calculator calculator = Calculator.of(aDivideB);
         //when
-        int result = calculator.calculate();
+        int result = Calculator.calculate(aDivideB);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -71,9 +70,8 @@ public class CalculatorTest {
         //given
         String aDivideB = "4 / 2 * 2 + 3";
         int expectedResult = 7;
-        Calculator calculator = Calculator.of(aDivideB);
         //when
-        int result = calculator.calculate();
+        int result = Calculator.calculate(aDivideB);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -86,7 +84,7 @@ public class CalculatorTest {
     void returnException_whenNullOrEmptyString(String input) {
         //given
         assertThatThrownBy(() -> {
-            Calculator calculator = Calculator.of(input);
+            Calculator.calculate(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

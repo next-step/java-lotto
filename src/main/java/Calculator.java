@@ -1,27 +1,11 @@
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 public class Calculator {
-    private final LinkedList<String> inputValue;
 
-    private IntConverter intConverter;
-
-    private int answer;
-
-    public Calculator(LinkedList<String> queue) {
-        this.inputValue = queue;
-        this.intConverter = new IntConverter();
-        this.answer = 0;
-    }
-
-    public static Calculator of(String inputVal) {
-        isValid(inputVal);
-        String[] result = inputVal.split(" ");
-        LinkedList<String> queue = new LinkedList<>();
-        Collections.addAll(queue, result);
-        return new Calculator(queue);
-    }
+    private static final int ZERO = 0;
 
     private static void isValid(String inputVal) {
         if (Objects.isNull(inputVal)
@@ -31,50 +15,43 @@ public class Calculator {
         }
     }
 
-    public int calculate() {
-        String start = inputValue.remove();
-        if (intConverter.isConvertibleToInt(start)) {
-            answer = intConverter.convertStringToInt(start);
-        }
-        while (inputValue.size() > 0) {
-            calculateByOperator();
+    public static int calculate(String input) {
+        isValid(input);
+        Queue<String> queue = createQueue(input);
+
+        int answer = getInitialValue(queue);
+        while (queue.size() > 0) {
+            answer = calculateByOperator(queue, answer);
         }
         return answer;
     }
 
-    private void calculateByOperator() {
-        String operator = inputValue.remove();
-        if (intConverter.isConvertibleToInt(operator)) {
+    private static int getInitialValue(Queue<String> queue) {
+        int initialValue = ZERO;
+        String start = queue.poll();
+        if (IntConverter.isConvertibleToInt(start)) {
+            initialValue = IntConverter.convertStringToInt(start);
+        }
+        return initialValue;
+    }
+
+    private static Queue<String> createQueue(String input) {
+        String[] result = input.split(" ");
+        Queue<String> queue = new LinkedList<>();
+        Collections.addAll(queue, result);
+        return queue;
+    }
+
+    private static int calculateByOperator(Queue<String> queue, int answer) {
+        String signature = queue.poll();
+        isOperator(signature);
+        Operator operator = Operator.fromSignature(signature);
+        return operator.performOperation(queue, answer);
+    }
+
+    private static void isOperator(String signature) {
+        if (IntConverter.isConvertibleToInt(signature)) {
             throw new IllegalArgumentException("값이 잘못 입력되었습니다.");
         }
-        performAddition(operator);
-        performSubtraction(operator);
-        performMultiplication(operator);
-        performDivision(operator);
     }
-
-    private void performAddition(String operator) {
-        if (Objects.equals(operator, "+")) {
-            answer += intConverter.convertStringToInt(inputValue.remove());
-        }
-    }
-
-    private void performSubtraction(String operator) {
-        if (Objects.equals(operator, "-")) {
-            answer -= intConverter.convertStringToInt(inputValue.remove());
-        }
-    }
-
-    private void performMultiplication(String operator) {
-        if (Objects.equals(operator, "*")) {
-            answer *= intConverter.convertStringToInt(inputValue.remove());
-        }
-    }
-
-    private void performDivision(String operator) {
-        if (Objects.equals(operator, "/")) {
-            answer /= intConverter.convertStringToInt(inputValue.remove());
-        }
-    }
-
 }
