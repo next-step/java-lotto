@@ -1,9 +1,14 @@
 package study.lottogame.ui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import study.lottogame.domain.GameResult;
 import study.lottogame.domain.Lotteries;
 import study.lottogame.domain.Lottery;
+import study.lottogame.domain.LottoNumber;
 import study.lottogame.domain.Money;
 import study.lottogame.domain.Rank;
 
@@ -12,7 +17,9 @@ public class OutputView {
   public static void printLotteries(Lotteries lotteries) {
     System.out.println(lotteries.getLotteries().size() + "개를 구매했습니다.");
     for (Lottery lottery : lotteries.getLotteries()) {
-      System.out.println(lottery.getLottoNumbers());
+      List<LottoNumber> lottoNumbers = new ArrayList<>(lottery.getLottoNumbers());
+      Collections.sort(lottoNumbers);
+      System.out.println(lottoNumbers);
     }
   }
 

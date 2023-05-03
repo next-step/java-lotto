@@ -27,7 +27,6 @@ public class LottoNumbersGenerator {
     for (int i = 0; i < Lottery.LOTTO_NUMBER_COUNT; i++) {
       lottoNumbers.add(new LottoNumber(numbers.get(i)));
     }
-    Collections.sort(lottoNumbers);
     return lottoNumbers;
   }
 
@@ -41,7 +40,6 @@ public class LottoNumbersGenerator {
       StringUtils.checkNullOrBlank(number);
       lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
     }
-    Collections.sort(lottoNumbers);
     return lottoNumbers;
   }
 }
