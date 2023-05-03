@@ -1,6 +1,7 @@
 package calculator.view;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -26,7 +27,7 @@ public class InputViewTest {
 
     @DisplayName("사칙연산 기호가 (+, -, /, *) 아닌 기호를 포함할 경우 IllegalArgumentException 예외 발생")
     @ParameterizedTest
-    @ValueSource(strings = {"2 + 3 * 4 / 2이", "2 ^ 3 * 4"})
+    @ValueSource(strings = {"2 C 3 - 4 / 2", "2 ^ 3 * 4"})
     void create_improperOperator(String input) {
         assertThatThrownBy(() -> {
             InputView inputView = new InputView(input);

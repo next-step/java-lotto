@@ -11,6 +11,6 @@ public class CalculatorTest {
     @Test
     void create() {
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculate(2L, "+", 3L)).isEqualTo(5);
+        assertThat(calculator.calculate(2.0, "+", 3.0)).isEqualTo(5);
     }
 }

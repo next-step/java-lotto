@@ -8,7 +8,7 @@ public class InputView {
     private final static String SEPARATOR = " ";
     private final static List<String> OPERATOR = List.of("+", "-", "*", "/");
     private final String formula;
-    private final List<Long> operands = new ArrayList<>();
+    private final List<Double> operands = new ArrayList<>();
     private final List<String> operators = new ArrayList<>();
 
     public InputView(String formula) {
@@ -18,30 +18,40 @@ public class InputView {
 
         Arrays.stream(formula.split(SEPARATOR))
                 .forEach(s -> {
-                    if (isOperator(s)) operators.add(s);
-                    if (isOperand(s)) operands.add(Long.parseLong(s));
+                    if (isOperand(s)) {
+                        operands.add(Double.parseDouble(s));
+                    } else {
+                        operators.add(s);
+                    }
                 });
 
-        operators.stream()
-                .filter(this::isOperand)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("올바른 사칙연산이 아닙니다."));
+        for (String o : operators) {
+            if (!isOperator(o)) throw new IllegalArgumentException("올바른 사칙연산이 아닙니다.");
+        }
         this.formula = formula;
     }
 
     private boolean isOperator(String operator) {
-        for(String o : OPERATOR){
-            if (o.equals(operator)) return true;
-        }
-        return false;
+        return OPERATOR.contains(operator);
     }
     private boolean isOperand(String operand) {
         try {
-            Long.parseLong(operand);
+            Double.valueOf(operand);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
+    public List<Double> getOperands() {
+        return operands;
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public List<String> getOperators() {
+        return operators;
+    }
 }
