@@ -16,7 +16,7 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("getResultParameters")
     public void getResultTest(List<Integer> purchasedNumbers, List<Integer> winningNumbers, int expected) {
-        assertThat(new Lotto(purchasedNumbers).getResult(winningNumbers)).isEqualTo(expected);
+        assertThat(new Lotto(purchasedNumbers).countMatched(winningNumbers)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> getResultParameters() {

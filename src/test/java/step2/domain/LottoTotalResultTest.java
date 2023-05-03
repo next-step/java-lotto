@@ -5,15 +5,15 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class ReturnTest {
+public class LottoTotalResultTest {
 
     @ParameterizedTest
     @EnumSource(LottoResult.class)
     public void getReturnTest(LottoResult lottoResult) {
         int purchasePrice = 10000;
-        Return returnCalculator = new Return(purchasePrice);
-        returnCalculator.plusResult(lottoResult, 1);
-        assertThat(returnCalculator.getRateOfReturn()).isEqualTo((double) lottoResult.winningPrice / purchasePrice);
+        LottosTotalResult lottosTotalResult = new LottosTotalResult();
+        lottosTotalResult.plusOne(lottoResult.numbersToBeMatched);
+        assertThat(lottosTotalResult.getRateOfReturn(purchasePrice)).isEqualTo((double) lottoResult.winningPrice / purchasePrice);
     }
 
 }

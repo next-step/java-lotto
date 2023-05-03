@@ -36,10 +36,6 @@ public class InputView {
         return purchasePrice / LOWEST_PURCHASE_PRICE;
     }
 
-    public static void printLottos(String lottosToString) {
-        System.out.println(lottosToString);
-    }
-
     public static List<Integer> getInputOfWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         scanner.nextLine(); // 입력 버퍼 비워주기

@@ -1,32 +1,29 @@
 package step2.domain;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public int getResult(List<Integer> winningNumbers) {
+    public int countMatched(List<Integer> winningNumbers) {
         int numberOfMatched = 0;
-        for (Integer winningNumber : winningNumbers) {
-            numberOfMatched += numbers.contains(winningNumber)? 1 : 0;
+        for (Integer winninNumber : winningNumbers) {
+            numberOfMatched += lottoNumbers.contains(new LottoNumber(winninNumber)) ? 1 : 0;
         }
         return numberOfMatched;
     }
 
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        for (int i = 0; i < numbers.size() - 1; i++) {
-            stringBuilder.append(numbers.get(i));
-            stringBuilder.append(", ");
-        }
-        stringBuilder.append(numbers.get(numbers.size() - 1));
-        stringBuilder.append("]");
-        return stringBuilder.toString();
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

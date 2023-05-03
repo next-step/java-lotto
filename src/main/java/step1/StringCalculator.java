@@ -7,7 +7,7 @@ public class StringCalculator {
     public static Integer calculate(String input) {
         validateNullOrBlank(input);
         String[] numbersAndSigns = splitInput(input);
-        return operate(Numbers.toNumbers(numbersAndSigns), Operations.toOperations(numbersAndSigns));
+        return operate(new Numbers(numbersAndSigns), new Operations(numbersAndSigns));
     }
 
     private static void validateNullOrBlank(String input) {
