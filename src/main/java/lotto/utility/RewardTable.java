@@ -23,7 +23,7 @@ public enum RewardTable {
         this.times = times;
     }
 
-    public int rewardByWinners(int times) {
+    public int calculateReward(int times) {
       return this.times.apply(times);
     }
 
