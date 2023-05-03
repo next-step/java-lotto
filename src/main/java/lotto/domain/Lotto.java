@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,12 +40,6 @@ public class Lotto {
 	public Lotto(Score score) {
 		this.lottoNumbers = new LottoNumbers();
 		this.score = score;
-	}
-
-	// TC 작성을 수월하게 하기 위한 생성자, 프로덕션 코드에서 사용금지.
-	public Lotto(List<LottoNumber> lottoNumbers) {
-		this.lottoNumbers = new LottoNumbers(lottoNumbers);
-		this.score = new Score(0);
 	}
 
 	public Score calculateScore(Lotto winningLotto, LottoNumber bonusNumber) {

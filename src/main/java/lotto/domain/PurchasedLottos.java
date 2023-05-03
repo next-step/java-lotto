@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PurchasedLottos {
 
@@ -20,10 +21,6 @@ public class PurchasedLottos {
 		this.purchasedLottos.add(lotto);
 	}
 
-	public void addManualLottos(ManualLottos manualLottos) {
-		this.purchasedLottos.addAll(manualLottos.getManualLottos());
-	}
-
 	public void calculateScore(Lotto winningLotto, LottoNumber bonusNumber) {
 		for (Lotto lotto : this.purchasedLottos) {
 			lotto.calculateScore(winningLotto, bonusNumber);
@@ -40,5 +37,20 @@ public class PurchasedLottos {
 
 	public RankBoard makeRankBoard() {
 		return new RankBoard(this.purchasedLottos);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		PurchasedLottos that = (PurchasedLottos)o;
+		return Objects.equals(purchasedLottos, that.purchasedLottos);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(purchasedLottos);
 	}
 }
