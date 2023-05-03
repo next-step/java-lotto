@@ -70,7 +70,7 @@ public class LottoTicketTest {
     @Test
     void 티켓_생성_테스트() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThat(LottoTicket.of(() -> Arrays.asList(1, 2, 3, 4, 5, 6)).getLottoNumbers().containsAll(numbers)).isTrue();
+        assertThat(new LottoTicket(numbers).getLottoNumbers().containsAll(numbers)).isTrue();
     }
 
     @Test

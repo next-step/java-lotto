@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.strategy.LottoTicketCreateStrategy;
+
 import lotto.enums.Rank;
 
 import java.util.Collections;

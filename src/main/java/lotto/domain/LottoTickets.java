@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.strategy.LottoTicketsCreateStrategy;
-import lotto.dto.CheckWinningRequest;
 import lotto.dto.WinningResult;
 import lotto.enums.Rank;
 
@@ -24,8 +23,8 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public double getTotalReturn(CheckWinningRequest checkWinningRequest) {
-        double totalPrize = lottoTickets.stream().mapToInt(o -> o.getRank(checkWinningRequest).getPrize()).sum();
+    public double getTotalReturn(List<Integer> winningNumbers, int bonusBall) {
+        double totalPrize = lottoTickets.stream().mapToInt(o -> o.getRank(winningNumbers, bonusBall).getPrize()).sum();
         double purchaseAmount = lottoTickets.size() * TICKET_PRICE;
         return convertTotalReturnFormat(totalPrize / purchaseAmount);
     }
