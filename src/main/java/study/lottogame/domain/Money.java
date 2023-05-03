@@ -14,6 +14,10 @@ public class Money {
     this.money = money;
   }
 
+  public static Money zero() {
+    return new Money(0);
+  }
+
   public Money addMoney(Money money) {
     return new Money(this.money + money.getMoney());
   }
@@ -22,6 +26,7 @@ public class Money {
     long percent = Math.round((this.money * 100.0) / money.getMoney());
     return percent / 100.0;
   }
+
 
   @Override
   public boolean equals(Object o) {
