@@ -1,12 +1,13 @@
 package lotto3.domain;
 
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResults {
 
-  private final Map<Prize, Long> results;
+  private final EnumMap<Prize, Long> results;
 
-  public LottoResults(Map<Prize, Long> results) {
+  public LottoResults(EnumMap<Prize, Long> results) {
     this.results = results;
   }
 

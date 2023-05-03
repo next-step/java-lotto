@@ -2,15 +2,14 @@ package lotto3.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 import org.junit.jupiter.api.Test;
 
 class LottoResultsTest {
 
   @Test
   void 로또결과에서_상금별_개수_검증() {
-    Map<Prize, Long> prizeCounts = new HashMap<>();
+    EnumMap<Prize, Long> prizeCounts = new EnumMap<>(Prize.class);
     prizeCounts.put(Prize.FIRST, 1L);
     prizeCounts.put(Prize.SECOND, 1L);
     prizeCounts.put(Prize.THIRD, 1L);
@@ -25,7 +24,7 @@ class LottoResultsTest {
 
   @Test
   void 천원으로_로또_구매해서_상금_5000원인_5등에_당첨되다면_수익율_계산_검증() {
-    Map<Prize, Long> prizeCounts = new HashMap<>();
+    EnumMap<Prize, Long> prizeCounts = new EnumMap<>(Prize.class);
     prizeCounts.put(Prize.FIFTH, 1L);
 
     LottoResults lottoResults = new LottoResults(prizeCounts);
@@ -39,7 +38,7 @@ class LottoResultsTest {
 
   @Test
   void 로또결과에서_1등당첨_없는_경우_결과_0개반환() {
-    Map<Prize, Long> prizeCounts = new HashMap<>();
+    EnumMap<Prize, Long> prizeCounts = new EnumMap<>(Prize.class);
     prizeCounts.put(Prize.SECOND, 1L);
     prizeCounts.put(Prize.THIRD, 1L);
 
