@@ -18,7 +18,7 @@ class LottoTicketsTest {
     );
 
     WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
-    int bonusNumber = 7;
+    BonusNumber bonusNumber = new BonusNumber(7);
 
     LottoResults lottoResults = lottoTickets.calculateLotteryResults(winningNumbers, bonusNumber);
 
