@@ -1,12 +1,13 @@
 package lotto;
 
 import lotto.data.Lotto;
+import lotto.data.LottoWinningPrice;
 
 import java.util.List;
+import java.util.Map;
 
-import static lotto.view.InputView.getPurchaseAmount;
-import static lotto.view.InputView.getWinningNumbers;
 import static lotto.service.LottoGame.*;
+import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
 public class LottoApplication {
@@ -20,7 +21,10 @@ public class LottoApplication {
         viewLottoList(lottoList);
 
         Lotto winningNumbers = getWinningNumbers();
-        viewWinningNumberList(getWinningNumberList(winningNumbers, lottoList));
-        viewRateOfReturn(getRateOfReturn(getAllReturnAmount(winningNumbers, lottoList), purchaseAmount));
+        int bonusNumber = getBonusNumber(winningNumbers);
+
+        Map<LottoWinningPrice, Integer> winningNumberList = getWinningNumberList(winningNumbers, bonusNumber, lottoList);
+        viewWinningNumberList(winningNumberList);
+        viewRateOfReturn(getRateOfReturn(getAllReturnAmount(winningNumberList), purchaseAmount));
     }
 }
