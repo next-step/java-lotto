@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
     @Test
@@ -18,6 +18,25 @@ public class LottoTest {
     public void Lotto_Count() {
         Lottos lottos = new Lottos(14000);
         assertThat(lottos.getLottoCount()).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("구입 금액은 로또 한 장 가격의 배수여야 한다")
+    public void Lotto_InvalidMoney() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lottos(14001));
+    }
+
+    @Test
+    @DisplayName("당첨 번호는 1이상 45미만이어야 한다")
+    public void Lotto_InvalidWinNumbers() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinNumbers(Set.of(1, 2, 3, 4, 5, 46)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinNumbers(Set.of(0, 1, 2, 3, 4, 5)));
+    }
+
+    @Test
+    @DisplayName("당첨 번호는 6개여야 한다")
+    public void Lotto_InvalidWinNumbersSize() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinNumbers(Set.of(1, 2, 3, 4, 5)));
     }
 
     @Test
