@@ -5,11 +5,10 @@ public class LottoFactory {
 
     public static final int LOTTO_SIZE = 6;
 
-    public static List<Integer> create(){
-        List<Integer> result = new ArrayList<>();
-        Random random = new Random();
+    public static List<LottoNumber> create(){
+        List<LottoNumber> result = new ArrayList<>();
         for (int i = 0; i < LOTTO_SIZE; i++) {
-            result.add(random.nextInt(45));
+            result.add(new LottoNumber());
         }
         return result;
     }

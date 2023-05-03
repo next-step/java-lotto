@@ -9,7 +9,7 @@ public class LottoTest {
     @Test
     void size() {
         Lotto lotto = new Lotto();
-        List<Integer> list = lotto.getLottoNumbers();
+        List<LottoNumber> list = lotto.getLottoNumbers();
         Assertions.assertThat(list.size()).isEqualTo(6);
     }
 }
