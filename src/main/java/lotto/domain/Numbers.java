@@ -32,6 +32,14 @@ public class Numbers {
         return numbers.get(index);
     }
 
+    public boolean contains(Integer number) {
+        return numbers.contains(number);
+    }
+
+    public int count() {
+        return numbers.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,13 +51,5 @@ public class Numbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public boolean contains(Integer number) {
-        return numbers.contains(number);
-    }
-
-    public int count() {
-        return numbers.size();
     }
 }
