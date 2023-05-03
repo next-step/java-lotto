@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 import lotto.domain.WinNumbers;
 
 public class Output {
@@ -19,10 +20,10 @@ public class Output {
     public void printStatistics(WinNumbers winNumbers) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + this.lottos.getFourthRankCount(winNumbers) + "개");
-        System.out.println("4개 일치 (50000원)- " + this.lottos.getThirdRankCount(winNumbers) + "개");
-        System.out.println("5개 일치 (150000원)- " + this.lottos.getSecondRankCount(winNumbers) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + this.lottos.getFirstRankCount(winNumbers) + "개");
+        System.out.println("3개 일치 (5000원)- " + this.lottos.getRankCount(winNumbers).get(Rank.FOURTH) + "개");
+        System.out.println("4개 일치 (50000원)- " + this.lottos.getRankCount(winNumbers).get(Rank.THIRD) + "개");
+        System.out.println("5개 일치 (150000원)- " + this.lottos.getRankCount(winNumbers).get(Rank.SECOND) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + this.lottos.getRankCount(winNumbers).get(Rank.FIRST) + "개");
         System.out.println("총 수익률은 " + this.lottos.getEarningRate(winNumbers) + "입니다.(기준이 1이기 때문에 결과적으로 " + getResult(winNumbers) + "(이)라는 의미임)");
         System.out.println();
     }

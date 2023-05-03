@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -27,28 +26,19 @@ public class Lottos {
         this(LOTTO_PRICE * manualLottos.size(), manualLottos);
     }
 
-    public long getFirstRankCount(WinNumbers winNumbers) {
-        return lottos.stream()
-                .filter(lotto -> lotto.getRank(winNumbers).isFirstRank())
-                .count();
+    public Map<Rank, Long> getRankCount(WinNumbers winNumbers) {
+        return EnumSet.allOf(Rank.class)
+                .stream()
+                .collect(rankCountMapCollector(winNumbers));
     }
 
-    public long getSecondRankCount(WinNumbers winNumbers) {
-        return lottos.stream()
-                .filter(lotto -> lotto.getRank(winNumbers).isSecondRank())
-                .count();
-    }
-
-    public long getThirdRankCount(WinNumbers winNumbers) {
-        return lottos.stream()
-                .filter(lotto -> lotto.getRank(winNumbers).isThirdRank())
-                .count();
-    }
-
-    public long getFourthRankCount(WinNumbers winNumbers) {
-        return lottos.stream()
-                .filter(lotto -> lotto.getRank(winNumbers).isFourthRank())
-                .count();
+    private Collector<Rank, ?, Map<Rank, Long>> rankCountMapCollector(WinNumbers winNumbers) {
+        return Collectors.toMap(
+                rank -> rank,
+                rank -> lottos.stream()
+                        .filter(lotto -> lotto.getRank(winNumbers).equals(rank))
+                        .count()
+        );
     }
 
     public int getLottoCount() {

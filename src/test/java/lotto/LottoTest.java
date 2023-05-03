@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 import lotto.domain.WinNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,10 +40,10 @@ public class LottoTest {
         Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 5, 7));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
         WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 4, 5, 6));
-        assertThat(lottos.getFirstRankCount(winNumbers)).isZero();
-        assertThat(lottos.getSecondRankCount(winNumbers)).isOne();
-        assertThat(lottos.getThirdRankCount(winNumbers)).isOne();
-        assertThat(lottos.getFourthRankCount(winNumbers)).isOne();
+        assertThat(lottos.getRankCount(winNumbers).get(Rank.FIRST)).isZero();
+        assertThat(lottos.getRankCount(winNumbers).get(Rank.SECOND)).isOne();
+        assertThat(lottos.getRankCount(winNumbers).get(Rank.THIRD)).isOne();
+        assertThat(lottos.getRankCount(winNumbers).get(Rank.FOURTH)).isOne();
     }
 
     @Test
