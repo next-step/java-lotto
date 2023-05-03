@@ -11,6 +11,11 @@ public class LottoRoundNumbers {
     this.numbers = numbers;
   }
 
+  public LottoRoundNumbers (List<Integer> numbers) {
+    throwIfNumbersNotValid(numbers, true);
+    this.numbers = numbers;
+  }
+
   private void throwIfNumbersNotValid(List<Integer> numbers, boolean distinctNumberOnly) {
     if (!distinctNumberOnly) {
       return;
