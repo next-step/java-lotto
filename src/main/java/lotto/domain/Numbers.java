@@ -6,33 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class Numbers {
-
-    public static final String SPLIT_DELIMITER = ", ";
-    private final String REGEX = "\\d+";
     private final List<Integer> numbers;
-
-    public Numbers(String inputString) {
-        numbers = new ArrayList<>();
-        String[] strNumbers = inputString.split(SPLIT_DELIMITER);
-        for (String strNumber : strNumbers) {
-            validateNumber(strNumber);
-            numbers.add(Integer.valueOf(strNumber));
-        }
-        validateCount();
-        Collections.sort(numbers);
-    }
 
     public Numbers(List<Integer> numbers) {
         this.numbers = numbers;
-    }
-
-    private void validateNumber(String strNumber) {
-        if (!strNumber.matches(REGEX)) {
-            throw new IllegalArgumentException("숫자로만 구성되어 있지 않은 값이 있습니다.");
-        }
-        if (!LottoRule.NUMBER_RANGE.contains(Integer.valueOf(strNumber))) {
-            throw new IllegalArgumentException("입력된 숫자 범위가 올바르지 않습니다.");
-        }
+        validateCount();
+        Collections.sort(this.numbers);
     }
 
     private void validateCount() {
