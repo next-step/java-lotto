@@ -3,7 +3,7 @@ package lotto;
 
 import java.util.Arrays;
 
-public enum LottoResult {
+public enum LottoMatcher {
     FIRST(6),
     SECOND(5),
     THIRD(4),
@@ -12,7 +12,7 @@ public enum LottoResult {
 
     private final int rank;
 
-    LottoResult(int rank) {
+    LottoMatcher(int rank) {
         this.rank = rank;
     }
 
@@ -20,10 +20,10 @@ public enum LottoResult {
         return this.rank == rank;
     }
 
-    public static LottoResult of(int rank) {
-        return Arrays.stream(LottoResult.values())
+    public static LottoMatcher of(int rank) {
+        return Arrays.stream(LottoMatcher.values())
                 .filter(lottoResult -> lottoResult.is(rank))
                 .findAny()
-                .orElse(LottoResult.NOTHING);
+                .orElse(LottoMatcher.NOTHING);
     }
 }

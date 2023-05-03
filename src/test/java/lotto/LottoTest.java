@@ -11,33 +11,33 @@ public class LottoTest {
     @Test
     void 로또결과_3개일치() {
         Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
-        LottoResult result = lotto.result(createLottoNumber(1, 2, 3, 7, 8, 9));
+        LottoMatcher result = lotto.result(createLottoNumber(1, 2, 3, 7, 8, 9));
 
-        assertThat(result).isEqualTo(LottoResult.FOURTH);
+        assertThat(result).isEqualTo(LottoMatcher.FOURTH);
     }
 
     @Test
     void 로또결과_4개일치() {
         Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
-        LottoResult result = lotto.result(createLottoNumber(1, 2, 3, 4, 8, 9));
+        LottoMatcher result = lotto.result(createLottoNumber(1, 2, 3, 4, 8, 9));
 
-        assertThat(result).isEqualTo(LottoResult.THIRD);
+        assertThat(result).isEqualTo(LottoMatcher.THIRD);
     }
 
     @Test
     void 로또결과_5개일치() {
         Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
-        LottoResult result = lotto.result(createLottoNumber(1, 2, 3, 4, 5, 9));
+        LottoMatcher result = lotto.result(createLottoNumber(1, 2, 3, 4, 5, 9));
 
-        assertThat(result).isEqualTo(LottoResult.SECOND);
+        assertThat(result).isEqualTo(LottoMatcher.SECOND);
     }
 
     @Test
     void 로또결과_6개일치() {
         Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
-        LottoResult result = lotto.result(createLottoNumber(1, 2, 3, 4, 5, 6));
+        LottoMatcher result = lotto.result(createLottoNumber(1, 2, 3, 4, 5, 6));
 
-        assertThat(result).isEqualTo(LottoResult.FIRST);
+        assertThat(result).isEqualTo(LottoMatcher.FIRST);
     }
 
     @Test
@@ -47,13 +47,13 @@ public class LottoTest {
         Lotto lotto_matched_0 = new Lotto(createLottoNumber(15, 14, 10, 11, 12, 13));
         List<LottoNumber> lottoNumber = createLottoNumber(1, 2, 3, 4, 5, 6);
 
-        LottoResult result_matched_2 = lotto_matched_2.result(lottoNumber);
-        LottoResult result_matched_1 = lotto_matched_1.result(lottoNumber);
-        LottoResult result_matched_0 = lotto_matched_0.result(lottoNumber);
+        LottoMatcher result_matched_2 = lotto_matched_2.result(lottoNumber);
+        LottoMatcher result_matched_1 = lotto_matched_1.result(lottoNumber);
+        LottoMatcher result_matched_0 = lotto_matched_0.result(lottoNumber);
 
-        assertThat(result_matched_2).isEqualTo(LottoResult.NOTHING);
-        assertThat(result_matched_1).isEqualTo(LottoResult.NOTHING);
-        assertThat(result_matched_0).isEqualTo(LottoResult.NOTHING);
+        assertThat(result_matched_2).isEqualTo(LottoMatcher.NOTHING);
+        assertThat(result_matched_1).isEqualTo(LottoMatcher.NOTHING);
+        assertThat(result_matched_0).isEqualTo(LottoMatcher.NOTHING);
     }
 
     private static List<LottoNumber> createLottoNumber(

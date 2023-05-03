@@ -10,12 +10,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoResult result(List<LottoNumber> targetNumbers) {
+    public LottoMatcher result(List<LottoNumber> targetNumbers) {
         int matchedSize = lottoNumbers.stream()
                 .filter(lottoNumber -> targetNumbers.contains(lottoNumber))
                 .collect(Collectors.toList())
                 .size();
-        return LottoResult.of(matchedSize);
+        return LottoMatcher.of(matchedSize);
     }
 
     public List<LottoNumber> lottoNumbers() {

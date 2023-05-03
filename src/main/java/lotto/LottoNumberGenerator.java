@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 public class LottoNumberGenerator {
     public static final int START_LOTTO_NUMBER = 1;
     public static final int END_LOTTO_NUMBER = 45;
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumberGenerator() {
         lottoNumbers = IntStream.range(START_LOTTO_NUMBER, END_LOTTO_NUMBER)

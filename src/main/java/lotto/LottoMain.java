@@ -3,6 +3,8 @@ package lotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoMain {
@@ -13,11 +15,18 @@ public class LottoMain {
 
         int lottoCount = inputView.price();
 
+        List<Lotto> lottos = new ArrayList<>();
+
         for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = new Lotto(lottoNumberGenerator.lotto());
-            resultView.view(lotto.lottoNumbers());
+            lottos.add(new Lotto(lottoNumberGenerator.lotto()));
+            resultView.view(lottos);
         }
 
-        inputView.result();
+        List<LottoNumber> result = inputView.result();
+
+        lottos.forEach(lotto -> {
+            LottoMatcher result1 = lotto.result(result);
+            System.out.println(result1);
+        });
     }
 }
