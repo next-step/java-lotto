@@ -16,8 +16,8 @@ public class InputView {
     }
 
     public int price(){
-        System.out.println("구입금액을 입력해 주세요.");
-        return buyLotto(scanner.nextInt());
+        System.out.println("구입금액을 입력해 주세요.");;
+        return buyLotto(Integer.parseInt(scanner.nextLine()));
     }
 
     private int buyLotto(int inputNumber) {
