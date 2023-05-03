@@ -2,56 +2,55 @@ package lotto.domain;
 
 public class Result {
     private Purchase purchase;
-    private int matched3NumbersCount;
-    private int matched4NumbersCount;
-    private int matched5NumbersCount;
-    private int matched6NumbersCount;
+    private int rankFirstCount;
+    private int rankSecondCount;
+    private int rankThirdCount;
+    private int rankFourthCount;
     private int prizeAmount;
 
     public Result(Purchase purchase) {
         this.purchase = purchase;
     }
 
-
     public void update(MyLotto myLotto) {
-        if (myLotto.matchingCount() == 3) {
-            matched3NumbersCount++;
+        if (myLotto.matchingCount() == LottoRule.MATCH_COUNT_FOR_RANK_FOURTH) {
+            rankFourthCount++;
             return;
         }
-        if (myLotto.matchingCount() == 4) {
-            matched4NumbersCount++;
+        if (myLotto.matchingCount() == LottoRule.MATCH_COUNT_FOR_RANK_THIRD) {
+            rankThirdCount++;
             return;
         }
-        if (myLotto.matchingCount() == 5) {
-            matched5NumbersCount++;
+        if (myLotto.matchingCount() == LottoRule.MATCH_COUNT_FOR_RANK_SECOND) {
+            rankSecondCount++;
             return;
         }
-        if (myLotto.matchingCount() == 6) {
-            matched6NumbersCount++;
+        if (myLotto.matchingCount() == LottoRule.MATCH_COUNT_FOR_RANK_FIRST) {
+            rankFirstCount++;
         }
     }
 
     public void sumPrizeAmount() {
-        prizeAmount += matched3NumbersCount * LottoRule.MATCHED_3_NUMBERS_PRIZE;
-        prizeAmount += matched4NumbersCount * LottoRule.MATCHED_4_NUMBERS_PRIZE;
-        prizeAmount += matched5NumbersCount * LottoRule.MATCHED_5_NUMBERS_PRIZE;
-        prizeAmount += matched6NumbersCount * LottoRule.MATCHED_6_NUMBERS_PRIZE;
+        prizeAmount += rankFourthCount * LottoRule.RANK_FOURTH_PRIZE;
+        prizeAmount += rankThirdCount * LottoRule.RANK_THIRD_PRIZE;
+        prizeAmount += rankSecondCount * LottoRule.RANK_SECOND_PRIZE;
+        prizeAmount += rankFirstCount * LottoRule.RANK_FIRST_PRIZE;
     }
 
-    public int getMatched3NumbersCount() {
-        return matched3NumbersCount;
+    public int rankFourthCount() {
+        return rankFourthCount;
     }
 
-    public int getMatched4NumbersCount() {
-        return matched4NumbersCount;
+    public int rankThirdCount() {
+        return rankThirdCount;
     }
 
-    public int getMatched5NumbersCount() {
-        return matched5NumbersCount;
+    public int rankSecondCount() {
+        return rankSecondCount;
     }
 
-    public int getMatched6NumbersCount() {
-        return matched6NumbersCount;
+    public int rankFirstCount() {
+        return rankFirstCount;
     }
 
     public double profit() {

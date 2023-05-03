@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class MyLottoServiceTest {
     @ParameterizedTest(name = "{0}원 구입 => {1}회 로또 생성 ")
@@ -39,12 +40,14 @@ class MyLottoServiceTest {
 
         WinLotto winLotto = new WinLotto(getNumbersForTest("3, 6, 9, 30, 36, 39"));
 
-        lottoService.checkWin(myLottos,winLotto);
+        lottoService.checkWin(myLottos, winLotto);
 
-        assertThat(myLottos.result().getMatched3NumbersCount()).isEqualTo(2);
-        assertThat(myLottos.result().getMatched4NumbersCount()).isEqualTo(3);
-        assertThat(myLottos.result().getMatched5NumbersCount()).isEqualTo(0);
-        assertThat(myLottos.result().getMatched6NumbersCount()).isEqualTo(0);
+        assertAll(
+                () -> assertThat(myLottos.result().rankFourthCount()).isEqualTo(2),
+                () -> assertThat(myLottos.result().rankThirdCount()).isEqualTo(3),
+                () -> assertThat(myLottos.result().rankSecondCount()).isEqualTo(0),
+                () -> assertThat(myLottos.result().rankFirstCount()).isEqualTo(0)
+        );
     }
 
     private static Numbers getNumbersForTest(String input) {
