@@ -16,6 +16,8 @@ public class LottoGame {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int WINNING_PRICE_ZERO = 0;
+    private static final int MATCHED_ZERO = 0;
+    private static final int MATCHED = 1;
 
     private LottoGame() {
         //
@@ -45,17 +47,25 @@ public class LottoGame {
     public static int matchWinningNumbers(Lotto winningNumbers, Lotto lotto) {
         int matched = 0;
         for (Integer winningNumber : winningNumbers.getNumbers()) {
-            matched = getMatched(lotto, matched, winningNumber);
+            matched += isMatched(lotto, winningNumber);
         }
 
         return matched;
     }
 
-    private static int getMatched(Lotto lotto, int matched, Integer winningNumber) {
-        if (lotto.getNumbers().contains(winningNumber)) {
-            matched++;
+    public static boolean matchBonusNumber(int bonusNumber, Lotto lotto) {
+        if (lotto.getNumbers().contains(bonusNumber)) {
+            return true;
         }
-        return matched;
+
+        return false;
+    }
+
+    private static int isMatched(Lotto lotto, Integer winningNumber) {
+        if (lotto.getNumbers().contains(winningNumber)) {
+            return MATCHED;
+        }
+        return MATCHED_ZERO;
     }
 
     public static void checkWinningNumbers(List<Integer> winningNumbers) {
@@ -72,11 +82,19 @@ public class LottoGame {
         }
     }
 
-    public static Map<LottoWinningPrice, Integer> getWinningNumberList(Lotto winningNumbers, List<Lotto> lottoList) {
+    public static void checkBonusNumber(Lotto winningNumbers, int bonusNumer) {
+        for (int winningNumber : winningNumbers.getNumbers()) {
+            if (winningNumber == bonusNumer) {
+                throw new IllegalArgumentException("중복된 번호가 있습니다.");
+            }
+        }
+    }
+
+    public static Map<LottoWinningPrice, Integer> getWinningNumberList(Lotto winningNumbers, int bonusNumber, List<Lotto> lottoList) {
         Map<LottoWinningPrice, Integer> winningNumberList = initWinningNumberList();
         for (Lotto lotto : lottoList) {
-            int matched = matchWinningNumbers(winningNumbers, lotto);
-            winningNumberList.put(LottoWinningPrice.getLottoNumberByNumber(matched), winningNumberList.get(LottoWinningPrice.getLottoNumberByNumber(matched)) + 1);
+            LottoWinningPrice winningPriceByNumber = getLottoNumberByNumber(matchWinningNumbers(winningNumbers, lotto), matchBonusNumber(bonusNumber, lotto));
+            winningNumberList.put(winningPriceByNumber, winningNumberList.get(winningPriceByNumber) + 1);
         }
 
         return winningNumberList;
@@ -84,29 +102,21 @@ public class LottoGame {
 
     private static Map<LottoWinningPrice, Integer> initWinningNumberList() {
         Map<LottoWinningPrice, Integer> list = new HashMap<>();
-        for(LottoWinningPrice lottoWinningPrice : LottoWinningPrice.values()){
+        for (LottoWinningPrice lottoWinningPrice : LottoWinningPrice.values()) {
             list.put(lottoWinningPrice, 0);
         }
 
         return list;
     }
 
-    public static int getAllReturnAmount(Lotto winningNumbers, List<Lotto> lottoList) {
+    public static int getAllReturnAmount(Map<LottoWinningPrice, Integer> winningNumberList) {
         int returnAmount = 0;
-        for (Lotto lotto : lottoList) {
-            returnAmount += getReturnAmount(matchWinningNumbers(winningNumbers, lotto));
+
+        for (LottoWinningPrice price : winningNumberList.keySet()) {
+            returnAmount += price.getWinningPrice() * winningNumberList.get(price);
         }
 
         return returnAmount;
-    }
-
-    public static int getReturnAmount(int matchedWinningNumbers) {
-        LottoWinningPrice lottoWinningPrice = getLottoNumberByNumber(matchedWinningNumbers);
-        if (lottoWinningPrice.getWinningPrice() > 0) {
-            return lottoWinningPrice.getWinningPrice();
-        }
-
-        return WINNING_PRICE_ZERO;
     }
 
     public static String getRateOfReturn(int returnAmount, int purchaseAmount) {

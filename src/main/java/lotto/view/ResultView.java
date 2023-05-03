@@ -3,6 +3,8 @@ package lotto.view;
 import lotto.data.Lotto;
 import lotto.data.LottoWinningPrice;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -29,16 +31,24 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (LottoWinningPrice lottoWinningPrice : winningNumberList.keySet()) {
-            viewWinningNumber(lottoWinningPrice.getMatchedNumber(), winningNumberList.get(lottoWinningPrice.getMatchedNumber()));
+            viewWinningNumber(lottoWinningPrice, winningNumberList.get(lottoWinningPrice));
         }
     }
 
-    private static void viewWinningNumber(int matchedWinningNumbers, int matchedWinningNumberCount) {
-        LottoWinningPrice lottoWinningPrice = getLottoNumberByNumber(matchedWinningNumbers);
+    private static void viewWinningNumber(LottoWinningPrice lottoWinningPrice, int matchedWinningNumberCount) {
         if (lottoWinningPrice.getWinningPrice() > 0) {
-            System.out.println(lottoWinningPrice.getMatchedNumber() + "개 일치 (" + lottoWinningPrice.getWinningPrice() + "원)- "
+            String bonusView = getBonusView(lottoWinningPrice.getMatchedBonusNumber());
+            System.out.println(lottoWinningPrice.getMatchedNumber() + "개 일치" + bonusView + " (" + lottoWinningPrice.getWinningPrice() + "원)- "
                     + matchedWinningNumberCount + "개");
         }
+    }
+
+    private static String getBonusView(boolean matchedBonusNumber){
+        if(matchedBonusNumber){
+            return ", 보너스 볼 일치";
+        }
+
+        return "";
     }
 
     public static void viewRateOfReturn(String rateOfReturn) {

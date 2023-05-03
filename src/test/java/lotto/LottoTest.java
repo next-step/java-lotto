@@ -38,15 +38,10 @@ public class LottoTest {
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(List.of(2, 3, 7, 8, 9, 10)));
+        int bonusNumber = 11;
 
-        assertThat(getWinningNumberList(winningNumbers, lottoList).get(LottoWinningPrice.MATCHED_2)).isEqualTo(1);
+        assertThat(getWinningNumberList(winningNumbers, bonusNumber, lottoList).get(LottoWinningPrice.MATCHED_2)).isEqualTo(1);
     }
-
-    @Test
-    void 수익() {
-        assertThat(getReturnAmount(3)).isEqualTo(5000);
-    }
-
 
     @Test
     void 수익률() {
@@ -57,7 +52,13 @@ public class LottoTest {
 
     @Test
     void enum테스트() {
-        assertThat(LottoWinningPrice.getLottoNumberByNumber(5).getWinningPrice()).isEqualTo(1500000);
+        assertThat(LottoWinningPrice.getLottoNumberByNumber(5, false).getWinningPrice()).isEqualTo(1500000);
+        assertThat(LottoWinningPrice.getLottoNumberByNumber(5, true).getWinningPrice()).isEqualTo(30000000);
+    }
+
+    @Test
+    void 보너스넘버중복() {
+        assertThatIllegalArgumentException().isThrownBy(() -> checkBonusNumber(new Lotto(List.of(1,2,3,4,5,6)), 1));
     }
 
 }
