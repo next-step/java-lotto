@@ -28,7 +28,7 @@ public enum Win {
 
     public static String calculateProfitRate(int income, double outcome) {
         DecimalFormat df = new DecimalFormat("0.00");
-        double profit = income / outcome;
+        final double profit = income / outcome;
         df.setRoundingMode(RoundingMode.FLOOR);
         return df.format(profit);
     }

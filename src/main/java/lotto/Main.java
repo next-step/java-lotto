@@ -15,11 +15,11 @@ public class Main {
         OutputView.showLotteryCount(lotteryTickets.size());
         OutputView.showLotteryTickets(lotteryTickets);
 
-        List<Integer> winNumbers = InputView.pickWinNumbers();
+        final List<Integer> winNumbers = InputView.pickWinNumbers();
         if (winNumbers.size() != 6) {
             throw new RuntimeException("잘못된 로또 번호 목록입니다.");
         }
-        Map<Win, Integer> winTotal = lotteryTickets.getWinTotal(winNumbers);
+        final Map<Win, Integer> winTotal = lotteryTickets.getWinTotal(winNumbers);
         OutputView.showResult(winTotal, money);
     }
 }

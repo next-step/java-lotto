@@ -24,7 +24,7 @@ public class OutputView {
             System.out.println(Win.values()[i].getPoints() + "개 일치 (" + Win.values()[i].getPrize() + "원)- " + winTotal.get(Win.values()[i]));
         }
 
-        int income = Win.totalMoney(winTotal);
+        final int income = Win.totalMoney(winTotal);
         System.out.println("총 수익률은 " + Win.calculateProfitRate(income, outcome) + "입니다.");
     }
 
