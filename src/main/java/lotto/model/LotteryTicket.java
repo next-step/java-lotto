@@ -20,6 +20,9 @@ public class LotteryTicket {
     }
 
     public LotteryTicket(List<LotteryNumber> numbers) {
+        if (numbers.size() < NUMBER_PER_TICKET) {
+            throw new RuntimeException("잘못된 로또 번호 목록입니다.");
+        }
         this.numbers = numbers;
     }
 

@@ -9,4 +9,9 @@ public class LotteryNumber {
     public LotteryNumber(NumberGenerator numberGenerator) {
         this.number = numberGenerator.generate();
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }
