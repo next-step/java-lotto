@@ -1,9 +1,9 @@
 package step2.vo;
 
 import step2.service.Lotto;
+import step2.service.LottoRank;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoResults {
 
@@ -17,9 +17,7 @@ public class LottoResults {
         return lottoResults;
     }
 
-    public List<Integer> countNumOfWinner(List<Integer> winNumbers) {
-        return lottoResults.stream()
-                .map(lotto -> lotto.countWinNum(winNumbers))
-                .collect(Collectors.toList());
+    public List<LottoRank> countNumOfWinner(WinnerNumber winnerNumber) {
+        return winnerNumber.countNumOfWinner(lottoResults);
     }
 }

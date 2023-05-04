@@ -30,9 +30,10 @@ public class ResultView {
         Map<LottoRank, Integer> winnerResults = countOfWinners.getWinnerResults();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + winnerResults.get(LottoRank.FOURTH) + "개");
-        System.out.println("4개 일치 (50000원)- " + winnerResults.get(LottoRank.THIRD) + "개");
-        System.out.println("5개 일치 (1500000원)- " + winnerResults.get(LottoRank.SECOND) + "개");
+        System.out.println("3개 일치 (5000원)- " + winnerResults.get(LottoRank.FIFTH) + "개");
+        System.out.println("4개 일치 (50000원)- " + winnerResults.get(LottoRank.FOURTH) + "개");
+        System.out.println("5개 일치 (1500000원)- " + winnerResults.get(LottoRank.THIRD) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + winnerResults.get(LottoRank.SECOND) + "개");
         System.out.println("6개 일치 (2000000000원)- " + winnerResults.get(LottoRank.FIRST) + "개");
     }
 
