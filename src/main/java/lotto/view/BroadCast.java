@@ -26,4 +26,8 @@ public class BroadCast {
             System.out.println(Win.values()[i].getPoints() + "개 일치 (" + Win.values()[i].getPrize() + "원)- " + winTotal.get(Win.values()[i]));
         }
     }
+
+    public static void showReturn(Map<Win, Integer> winTotal) {
+        System.out.println("총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
 }

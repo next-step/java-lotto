@@ -3,9 +3,12 @@ package lotto;
 import lotto.model.LotteryNumber;
 import lotto.model.LotteryTicket;
 import lotto.model.LotteryTickets;
+import lotto.model.Win;
 import org.junit.jupiter.api.Test;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -58,6 +61,16 @@ public class LottoTest {
         List<Integer> winNumbers = List.of(41, 1, 13, 27, 42, 43);
         int count = lotteryTicket.compare(winNumbers);
         assertThat(count).isEqualTo(3);
+    }
+
+    @Test
+    void 총_당첨_금액() {
+        Map<Win, Integer> winTotal = new EnumMap<>(Win.class);
+        winTotal.put(Win.WIN_3, 3);
+        winTotal.put(Win.WIN_4, 4);
+        winTotal.put(Win.WIN_5, 0);
+        winTotal.put(Win.WIN_6, 1);
+        assertThat(Win.totalMoney(winTotal)).isEqualTo(2000215000);
     }
 
 }
