@@ -23,13 +23,12 @@ public class BonusNumber {
     return bonusNumber >= BONUS_NUMBER_START && bonusNumber <= BONUS_NUMBER_END;
   }
 
-  public void validateDuplicate(WinningNumbers winningNumbers) {
-    if (winningNumbers.contains(bonusNumber)) {
-      throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
-    }
-  }
 
   public boolean contains(List<Integer> numbers) {
     return numbers.contains(bonusNumber);
+  }
+
+  public int getBonusNumber() {
+    return bonusNumber;
   }
 }

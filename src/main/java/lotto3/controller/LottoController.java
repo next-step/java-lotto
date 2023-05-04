@@ -19,7 +19,7 @@ public class LottoController {
 
     WinningNumbers winningNumbers = InputView.scanWinningNumbers();
     BonusNumber bonusNumber = InputView.scanBonusNumber();
-    bonusNumber.validateDuplicate(winningNumbers);
+    winningNumbers.validateHasDuplicateNumber(bonusNumber);
 
     LottoResults results = tickets.calculateLotteryResults(winningNumbers, bonusNumber);
 

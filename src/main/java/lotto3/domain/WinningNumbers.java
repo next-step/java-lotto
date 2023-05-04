@@ -42,4 +42,9 @@ public class WinningNumbers {
     return winningNumbers.contains(number);
   }
 
+  public void validateHasDuplicateNumber(BonusNumber bonusNumber) {
+    if (contains(bonusNumber.getBonusNumber())) {
+      throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+    }
+  }
 }
