@@ -15,7 +15,7 @@ public class LottoNumber {
     }
 
     private void validateNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_FIRST_NUMBER || number > LOTTO_LAST_NUMBER) {
             throw new IllegalArgumentException(
                     String.format("범위에 맞지 않는 수입니다. 입력한 수: %d", number));
         }
