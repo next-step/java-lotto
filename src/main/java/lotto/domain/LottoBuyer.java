@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Scanner;
 
 public class LottoBuyer {
     private Lottos lottos;
@@ -9,13 +8,17 @@ public class LottoBuyer {
     private Money paid;
 
     public LottoBuyer() {
-        this(0L, 0L);
+        this(0, 0);
     }
 
     public LottoBuyer(Lottos lottos) {
+        this(lottos, 0, 0);
+    }
+
+    public LottoBuyer(Lottos lottos, long earned, long paid) {
         this.lottos = lottos;
-        this.earned = new Money(0);
-        this.paid = new Money(0);
+        this.earned = new Money(earned);
+        this.paid = new Money(paid);
     }
 
     public LottoBuyer(long earned, long paid) {
@@ -23,16 +26,13 @@ public class LottoBuyer {
         this.paid = new Money(paid);
     }
 
-    public Money buy() {
-        Scanner scanner = new Scanner(System.in);
-        String buyAmount = scanner.nextLine();
-        Money moneyToPay = new Money(Long.parseLong(buyAmount));
-        paid = paid.add(moneyToPay);
-        return moneyToPay;
+    private void calculatePaid() {
+        paid = paid.add(lottos.calculateAmount());
     }
 
     public void receive(Lottos lottos) {
         this.lottos = lottos;
+        calculatePaid();
     }
 
     public Matchs checkWinning(Lotto winningLotto) {
@@ -51,8 +51,8 @@ public class LottoBuyer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoBuyer that = (LottoBuyer) o;
-        return Objects.equals(lottos, that.lottos) && Objects.equals(earned, that.earned) && Objects.equals(paid, that.paid);
+        LottoBuyer buyer = (LottoBuyer) o;
+        return Objects.equals(lottos, buyer.lottos) && Objects.equals(earned, buyer.earned) && Objects.equals(paid, buyer.paid);
     }
 
     @Override

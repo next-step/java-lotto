@@ -3,23 +3,9 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-
 import static org.assertj.core.api.Assertions.*;
 
 class LottoBuyerTest {
-
-    @Test
-    @DisplayName("10000원만큼 구매하면 소비금액은 10000원이 된다.")
-    void buy() {
-        LottoBuyer buyer = new LottoBuyer();
-        ByteArrayInputStream input = new ByteArrayInputStream("10000".getBytes());
-        System.setIn(input);
-
-        buyer.buy();
-
-        assertThat(buyer).isEqualTo(new LottoBuyer(0L, 10_000L));
-    }
 
     @Test
     void receive() {
@@ -27,7 +13,7 @@ class LottoBuyerTest {
         Lottos lottos = LottosTest.getLottos();
         buyer.receive(lottos);
 
-        assertThat(buyer).isEqualTo(new LottoBuyer(lottos));
+        assertThat(buyer).isEqualTo(new LottoBuyer(lottos, 0L, 4_000L));
     }
 
     @Test
