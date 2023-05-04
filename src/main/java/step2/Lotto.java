@@ -14,6 +14,8 @@ public class Lotto {
     public static void main(String[] args) {
 
         int purchaseAmount = InputView.purchaseAmount();
+        int manualLottoCount = InputView.manualLottoCount();
+        List<List<Integer>> manualLottoNumber = InputView.manualLottoNumber(manualLottoCount);
         LottoGame lottoGame = LottoGame.readyGame(purchaseAmount);
 
         PurchaseNumbers purchaseNumbers = PurchaseNumbers.generate(lottoGame.generateLotto());
