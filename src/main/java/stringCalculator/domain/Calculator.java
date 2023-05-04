@@ -24,8 +24,8 @@ public class Calculator {
         List<String> splitText = Arrays.asList(inputText.split(DELIMITER));
 
         for(int index = 0; index < splitText.size(); index++) {
-            addOperand(index, splitText.get(index));
-            addOperators(index, splitText.get(index));
+            createOperands(index, splitText.get(index));
+            createOperators(index, splitText.get(index));
         }
     }
 
@@ -45,13 +45,13 @@ public class Calculator {
         }
     }
 
-    private void addOperators(int index, String text) {
+    private void createOperators(int index, String text) {
         if(index % 2 == 1) {
             this.operators.add(new Operator(text));
         }
     }
 
-    private void addOperand(int index, String text) {
+    private void createOperands(int index, String text) {
         if (index % 2 == 0) {
             this.operands.add(new Operand(text));
         }
