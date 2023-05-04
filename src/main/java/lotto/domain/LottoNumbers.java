@@ -10,7 +10,7 @@ public class LottoNumbers {
 
     private ArrayList<Integer> numbers;
 
-    public LottoNumbers(ArrayList<Integer> numbers) {
+    private LottoNumbers(ArrayList<Integer> numbers) {
         validateNumber(numbers);
         validateSize(numbers);
         Collections.sort(numbers);
@@ -43,6 +43,10 @@ public class LottoNumbers {
         Collections.shuffle(fullLotteNumbers);
 
         return new LottoNumbers((ArrayList) fullLotteNumbers.subList(0, NUMBER_OF_LOTTO_NUMBERS));
+    }
+
+    public static LottoNumbers createManualLottoNumbers(ArrayList<Integer> numbers) {
+        return new LottoNumbers(numbers);
     }
 
     public int countMatchingNumbers(ArrayList<Integer> inputNumbers) {
