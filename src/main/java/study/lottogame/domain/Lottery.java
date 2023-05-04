@@ -18,11 +18,15 @@ public class Lottery {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public int matchLottoNumber(Lottery otherLottery) {
+  public int matchLottoNumbers(Lottery otherLottery) {
     Set<LottoNumber> otherLottoNumbers = otherLottery.getLottoNumbers();
     return (int) lottoNumbers.stream()
         .filter(otherLottoNumbers::contains)
         .count();
+  }
+
+  public boolean matchLottoNumber(LottoNumber lottoNumber) {
+    return this.lottoNumbers.contains(lottoNumber);
   }
 
   public Set<LottoNumber> getLottoNumbers() {

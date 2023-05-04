@@ -35,9 +35,9 @@ public class LotteryTest {
     assertThatThrownBy(()->new Lottery(Set.copyOf(lottoNumbers2))).isInstanceOf(IllegalArgumentException.class);
   }
 
-  @DisplayName("주어진 로또번호와 몇개의 번호가 동일한지 반환한다.")
+  @DisplayName("주어진 로또번호들 몇개의 번호가 동일한지 반환한다.")
   @Test
-  public void equalLottoNumberCount(){
+  public void int_matchLottoNumbers_equalLottoNumberCount(){
     List<LottoNumber> lottoNumbers = LottoNumbersGenerator
         .generate(new String[]{"1", "2", "3", "4", "5", "6"});
     Lottery lottery = new Lottery(Set.copyOf(lottoNumbers));
@@ -46,7 +46,20 @@ public class LotteryTest {
         .generate(new String[]{"3", "4", "5", "6", "7", "8"});
     Lottery otherLottery = new Lottery(Set.copyOf(otherLottoNumbers));
 
-    assertThat(lottery.matchLottoNumber(otherLottery)).isEqualTo(4);
+    assertThat(lottery.matchLottoNumbers(otherLottery)).isEqualTo(4);
+  }
+
+  @DisplayName("주어진 로또번호를 포함하고있는지 여부를 반환한다.")
+  @Test
+  public void boolean_matchLottoNumber_containsLottoNumber(){
+    List<LottoNumber> lottoNumbers = LottoNumbersGenerator
+        .generate(new String[]{"1", "2", "3", "4", "5", "6"});
+    Lottery lottery = new Lottery(Set.copyOf(lottoNumbers));
+
+    LottoNumber lottoNumber = LottoNumber.valueOf(1);
+
+    assertThat(lottery.matchLottoNumber(lottoNumber)).isTrue();
+
   }
 
 }
