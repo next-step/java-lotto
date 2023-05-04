@@ -5,9 +5,11 @@ import java.util.Objects;
 
 public class LotteryResult {
     private final List<Integer> winNumbers;
+    private final int numberOfLottery;
 
-    public LotteryResult(List<Integer> winNumbers) {
+    public LotteryResult(List<Integer> winNumbers, int numberOfLottery) {
         this.winNumbers = winNumbers;
+        this.numberOfLottery = numberOfLottery;
     }
 
     @Override
@@ -21,5 +23,13 @@ public class LotteryResult {
         if (o == null || getClass() != o.getClass()) return false;
         LotteryResult that = (LotteryResult) o;
         return Objects.equals(winNumbers, that.winNumbers);
+    }
+
+    public List<Integer> winNumbers() {
+        return winNumbers;
+    }
+
+    public int numberOfLottery() {
+        return numberOfLottery;
     }
 }

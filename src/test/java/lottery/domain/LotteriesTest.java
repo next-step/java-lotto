@@ -35,7 +35,7 @@ class LotteriesTest {
 
     @Test
     void calculateResult() {
-        LotteryResult lotteryResult = new LotteryResult(Arrays.asList(0, 0, 0, 0, 0, 0, defaultNumberOfLottery));
+        LotteryResult lotteryResult = new LotteryResult(Arrays.asList(0, 0, 0, 0, 0, 0, defaultNumberOfLottery), defaultNumberOfLottery);
         assertEquals(lotteryResult, Lotteries.calculateResult(defaultLotteries, defaultLottery));
     }
 }

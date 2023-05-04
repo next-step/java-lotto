@@ -35,7 +35,7 @@ public class Lotteries {
         for (int number : numberOfMatchNumbers) {
             winLotteryNumbers.set(number, winLotteryNumbers.get(number) + 1);
         }
-        return new LotteryResult(winLotteryNumbers);
+        return new LotteryResult(winLotteryNumbers, lotteries.size());
     }
 
     private static int calculateMatchCount(Lottery lottery, Lottery winLottery) {
