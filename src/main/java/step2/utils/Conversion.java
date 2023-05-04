@@ -18,9 +18,7 @@ public class Conversion {
     }
 
     private static int getStringToNumber(String str) {
-        int number = getNumber(str);
-        Validation.validate(number);
-        return number;
+        return getNumber(str);
     }
 
     private static int getNumber(String str) {

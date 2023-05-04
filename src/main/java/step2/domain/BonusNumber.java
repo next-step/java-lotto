@@ -7,7 +7,7 @@ public class BonusNumber {
     private final int number;
 
     public BonusNumber(int bonusNumber) {
-        Validation.validate(bonusNumber);
+        Validation.rangeOfNumber(bonusNumber);
         this.number = bonusNumber;
     }
 
