@@ -5,38 +5,31 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class InputConverterTest {
-  @Test
-  @DisplayName("입력받은 당첨번호 확인")
-  public void checkConvertNumberToList() {
+  @ParameterizedTest
+  @ValueSource(strings = {"1, 2, 4, 5, 7, 21", "1, 2, 3, 4, 5, 6", "44, 45, 21, 14, 2, 1"})
+  @DisplayName("입력받은 당첨번호 List<Integer> 형태로 전환")
+  public void checkConvertNumberToList(String str) {
     InputConverter inputConverter = new InputConverter();
-    List<Integer> result = inputConverter.convertNumberToList("1, 2, 3, 4, 5, 6");
-
-    assertThat(result.size()).isEqualTo(6);
-  }
-
-  @Test
-  @DisplayName("입력받은 당첨번호 확인 - 7예외발생")
-  public void checkConvertNumberToList2() {
-    InputConverter inputConverter = new InputConverter();
-    List<Integer> result = inputConverter.convertNumberToList("1, 2, 3, 4, 5, 6");
+    List<Integer> result = inputConverter.convertNumberToList(str);
 
     assertThat(result.size()).isEqualTo(6);
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"1, true", "0, false", "45, true", "46, false"})
-  @DisplayName("pattern 확인")
-  public void patternCheck(String strNumber, boolean expect) {
-    Pattern TARGET_NUMBER_PATTERN = Pattern.compile("^[1-9]$|^[1-4][0-5]$");
-    boolean result = TARGET_NUMBER_PATTERN.asMatchPredicate().test(strNumber);
+  @CsvSource(value = {"\"46, 2, 3, 4, 5, 6\"", "\"1, 2, 3, 4, 5, 6, 8\"", "\"0, 2, 3, 4, 5, 6\"", "\"2, 2, 3, 4, 5, 6\""})
+  @DisplayName("입력받은 당첨번호 List<Integer> 형태로 전환 -> 예외 발생")
+  public void checkConvertNumberToListThrowException(String str) {
+    InputConverter inputConverter = new InputConverter();
 
-    assertThat(result).isEqualTo(expect);
-
+    assertThatThrownBy(() -> inputConverter.convertNumberToList(str))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 }

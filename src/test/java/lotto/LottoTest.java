@@ -31,18 +31,18 @@ public class LottoTest {
         Lotto lotto2 = new Lotto();
 
         assertAll("lotto size == 6",
-                () -> assertEquals(lotto.checkedNumber().size(), 6),
-                () -> assertEquals(lotto1.checkedNumber().size(), 6),
-                () -> assertEquals(lotto2.checkedNumber().size(), 6)
+                () -> assertEquals(lotto.getCheckedNumbers().size(), 6),
+                () -> assertEquals(lotto1.getCheckedNumbers().size(), 6),
+                () -> assertEquals(lotto2.getCheckedNumbers().size(), 6)
         );
 
         assertAll("lottoNumber sort",
-                () -> assertThat(lotto.checkedNumber().get(0)).isLessThan(lotto.checkedNumber().get(1)),
-                () -> assertThat(lotto.checkedNumber().get(1)).isLessThan(lotto.checkedNumber().get(2)),
-                () -> assertThat(lotto.checkedNumber().get(2)).isLessThan(lotto.checkedNumber().get(3)),
-                () -> assertThat(lotto.checkedNumber().get(3)).isLessThan(lotto.checkedNumber().get(4)),
-                () -> assertThat(lotto.checkedNumber().get(4)).isLessThan(lotto.checkedNumber().get(5)),
-                () -> assertThat(lotto.checkedNumber().get(5)).isGreaterThan(lotto.checkedNumber().get(4))
+                () -> assertThat(lotto.getCheckedNumbers().get(0)).isLessThan(lotto.getCheckedNumbers().get(1)),
+                () -> assertThat(lotto.getCheckedNumbers().get(1)).isLessThan(lotto.getCheckedNumbers().get(2)),
+                () -> assertThat(lotto.getCheckedNumbers().get(2)).isLessThan(lotto.getCheckedNumbers().get(3)),
+                () -> assertThat(lotto.getCheckedNumbers().get(3)).isLessThan(lotto.getCheckedNumbers().get(4)),
+                () -> assertThat(lotto.getCheckedNumbers().get(4)).isLessThan(lotto.getCheckedNumbers().get(5)),
+                () -> assertThat(lotto.getCheckedNumbers().get(5)).isGreaterThan(lotto.getCheckedNumbers().get(4))
         );
     }
 
@@ -52,8 +52,9 @@ public class LottoTest {
         Lotto lotto = new Lotto();
         List<Integer> targetNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        List<Integer> lottoNumber = lotto.checkedNumber();
-        int result = lotto.checkLottoNumber(targetNumber);
+        List<Integer> lottoNumber = lotto.getCheckedNumbers();
+        lotto.matchLottoNumber(targetNumber);
+        int result = lotto.getMatchNumber();
 
         int result2 = 0;
 
