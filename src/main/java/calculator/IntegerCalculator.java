@@ -21,18 +21,12 @@ public class IntegerCalculator {
         while(expression.hasOperator()) {
             String operator = expression.nextOperator();
             Integer number = expression.nextOperand();
-            checkArithmeticOperator(operator);
 
             sum = operators.operationOf(operator)
+                    .orElseThrow(() -> new IllegalArgumentException("허용된 연산자가 아닙니다."))
                     .operate(sum, number);
         }
 
         return sum;
-    }
-
-    private void checkArithmeticOperator(String operator) {
-        if(!operators.hasOperator(operator)) {
-            throw new IllegalArgumentException("사칙 연산자가 아닙니다.");
-        }
     }
 }

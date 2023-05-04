@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class Operations {
     private final Map<String, Operation> operators;
@@ -9,8 +10,8 @@ public class Operations {
         this.operators = operators;
     }
 
-    public Operation operationOf(String operator) {
-        return operators.get(operator);
+    public Optional<Operation> operationOf(String operator) {
+        return Optional.ofNullable(operators.get(operator));
     }
 
     public void addOperator(String operator, Operation operation) {
