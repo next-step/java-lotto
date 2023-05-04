@@ -21,44 +21,46 @@ public class ResultView {
             System.out.println(lotto.getCheckedNumbers());
         }
     }
+    private int printPrice(int key, int value) {
+        int totalReward = 0;
 
-    public void showStatistic(List<Lotto> lottoBundle, int price) {
-        Map<Integer, Integer> map = new HashMap<>();
-        int input = price * lottoBundle.size();
-        int totalPrice = 0;
-
-        IntStream.range(3, 7).map(index -> map.put(index, 0));
-
-        for(Lotto lotto : lottoBundle) {
-            map.put(lotto.getMatchNumber(), map.getOrDefault(lotto.getMatchNumber(), 0)+1);
+        if(key >= RewardTable.MINIMUN_MATCH_NUMBER) {
+            totalReward = RewardTable.rewardTableInfo(key).calculateReward(value);
+            int reward = RewardTable.rewardTableInfo(key).amountOfReward();
+            System.out.printf("%d개 일치 (%d원)- %d개\n", key, reward, value);
         }
 
-//         map.putAll(result.stream()
-//                           .filter(number -> number >= 3)
-//                           .collect(Collectors.groupingBy(arg -> arg, new HashMap<Integer, Integer>(), Collectors.counting())));
-//
-//        Map<Integer, Integer> result =
-//            lottoBundle.stream().collect(Collectors.groupingBy(item -> item.getMatchNumber(), Collectors.counting()));
+        return totalReward;
+    }
+
+
+    public void showStatistic(Map<Integer, Integer> map, int lottoPrice) {
+        System.out.println("당첨 통계\n---------");
+
+        int totalPrice = 0;
+        int numberOfLotto = 0;
 
         Iterator<Integer> keys = map.keySet().iterator();
-        System.out.println(keys);
 
         while( keys.hasNext() ){
             int key = keys.next();
-            int rewardPrice = RewardTable.rewardTableInfo(key).calculateReward(Math.toIntExact(map.get(key)));
-            totalPrice += rewardPrice;
-            System.out.println("!!!"+key);
-            System.out.printf("%d개 일치 (%d원)- %d개", key, rewardPrice/map.get(key), map.get(key));
+            int value = map.get(key);
+
+            numberOfLotto += value;
+            totalPrice += printPrice(key, value);
         }
 
-        showRoi(totalPrice, input);
+        showRoi(totalPrice, lottoPrice * numberOfLotto);
     }
 
     private void showRoi(int totalPrice, int input) {
-        double result = (totalPrice - input) / input * 100;
-        if(totalPrice == 0 || input == 0){
-            result = 0;
+        double result = 1 + (totalPrice - input) / (double)input;
+        String benefit = "손해";
+
+        if(result>0) {
+            benefit = "이득이";
         }
-        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result);
+
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", result, benefit);
     }
 }
