@@ -1,8 +1,8 @@
-package mission.lotto.view;
+package lotto.view;
 
 
-import mission.lotto.KLottoRank;
-import mission.lotto.Lotto;
+import lotto.KLottoRank;
+import lotto.Lotto;
 
 import java.util.List;
 import java.util.Map;
@@ -20,8 +20,14 @@ public class OutputView {
         System.out.println("--------");
         int earnMoney = 0;
 
+
         for (KLottoRank value : KLottoRank.values()) {
             int count = lottoResult.getOrDefault(value, 0);
+            if(value.getBonus()){
+                System.out.println(value.getCount() + "개 일치, 보너스 볼 일치(" + value.getPrize() + ")-" + count + "개");
+                earnMoney += count * value.getPrize();
+                continue;
+            }
             System.out.println(value.getCount() + "개 일치 (" + value.getPrize() + ")-" + count + "개");
             earnMoney += count * value.getPrize();
         }

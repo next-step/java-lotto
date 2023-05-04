@@ -1,6 +1,6 @@
 package lotto.model;
 
-import mission.lotto.LottoGenerator;
+import lotto.LottoGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,6 @@ import java.util.List;
 
 public class TestLottoGenerator implements LottoGenerator {
 
-    private static final String name = "Test-mission.lotto.Lotto";
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int LOTTO_NUMBER_MINIMUM_RANGE = 1;
     private static final int LOTTO_NUMBER_MAXIMUM_RANGE = 6;
@@ -27,10 +26,6 @@ public class TestLottoGenerator implements LottoGenerator {
         return lottos;
     }
 
-    @Override
-    public String getName(){
-        return name;
-    }
 
     @Override
     public int getPrice() {

@@ -1,4 +1,4 @@
-package mission.lotto;
+package lotto;
 
 public class Money {
 

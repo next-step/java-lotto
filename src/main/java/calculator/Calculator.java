@@ -1,4 +1,4 @@
-package mission.calculator;
+package calculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

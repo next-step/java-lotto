@@ -1,4 +1,4 @@
-package mission.lotto;
+package lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class KLottoGenerator implements LottoGenerator {
 
-    private static final String name = "K-mission.lotto.Lotto";
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int LOTTO_NUMBER_MINIMUM_RANGE = 1;
     private static final int LOTTO_NUMBER_MAXIMUM_RANGE = 45;
@@ -26,11 +25,6 @@ public class KLottoGenerator implements LottoGenerator {
                 .sorted()
                 .collect(Collectors.toList());
         return lottos;
-    }
-
-    @Override
-    public String getName() {
-        return name;
     }
 
     @Override

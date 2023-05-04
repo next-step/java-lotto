@@ -1,4 +1,4 @@
-package mission.lotto;
+package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +22,10 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public RankLotto checkWin(List<Integer> list) {
-
-        Map<KLottoRank, Integer> winResult = lottos.stream()
-                .map(lotto -> {
-                    int count = lotto.matchCount(list);
-                    return count >= 3 ? lotto.checkRank(count) : null;
-                })
+    public Map<KLottoRank, Integer> checkWin(List<Integer> list, int bonusNumber) {
+        return lottos.stream()
+                .map(lotto -> lotto.checkRank(list, bonusNumber))
                 .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(e -> 1)));
-
-        return new RankLotto(winResult);
     }
-
 }
