@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.LottoGame;
 import lotto.LottoNumber;
 
 import java.util.Arrays;
@@ -8,7 +9,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    public static final int LOTTO_PRICE = 1000;
     private final Scanner scanner;
 
     public InputView(Scanner scanner) {
@@ -17,13 +17,11 @@ public class InputView {
 
     public int price(){
         System.out.println("구입금액을 입력해 주세요.");;
-        return buyLotto(Integer.parseInt(scanner.nextLine()));
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    private int buyLotto(int inputNumber) {
-        int lottoCount = inputNumber / LOTTO_PRICE;
-        System.out.printf("%d개를 구매했습니다.\n", lottoCount);
-        return lottoCount;
+    public void buy(LottoGame lottoGame) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoGame.quantity());
     }
 
     public List<LottoNumber> result() {
