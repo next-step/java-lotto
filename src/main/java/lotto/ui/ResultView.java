@@ -10,8 +10,8 @@ import lotto.domain.RankSituation;
 
 public class ResultView {
 
-	public static void printPurchasedCount(int purchaseCount) {
-		System.out.printf("%d개를 구매했습니다.%n", purchaseCount);
+	public static void printPurchasedCount(long manualCount, long autoCount) {
+		System.out.printf("\n수동으로 %d장, 자동으로 %d장을 구매했습니다.%n", manualCount, autoCount);
 	}
 
 	public static void printCurrentSituation(PurchasedLottos purchasedLottos) {
@@ -21,7 +21,7 @@ public class ResultView {
 	}
 
 	public static void printRankSituations(List<RankSituation> rankSituations) {
-		System.out.println("당첨 통계");
+		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 		for (RankSituation rankSituation : rankSituations) {
 			Rank rank = rankSituation.getRank();

@@ -6,8 +6,7 @@ import lotto.domain.BenefitResult;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.RankSituation;
-import lotto.domain.WinLotto;
-import lotto.domain.WinNumbers;
+import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -15,15 +14,16 @@ public class LottoMain {
 
 	public static void main(String[] args) {
 		long purchaseAmount = InputView.inputPurchaseAmount();
-		LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
-		ResultView.printPurchasedCount(lottoMachine.purchasedCount());
+		long manalCount = InputView.inputManualCount();
+		LottoMachine lottoMachine = new LottoMachine(purchaseAmount, InputView.inputManualLottos(manalCount));
+
+		ResultView.printPurchasedCount(manalCount, lottoMachine.getAutoCount());
 		ResultView.printCurrentSituation(lottoMachine.getPurchasedLottos());
 
-		WinNumbers winNumbers = new WinNumbers(InputView.inputWinNumbers());
-		LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
-
-		WinLotto winLotto = new WinLotto(winNumbers, bonusNumber);
-		winLotto.calculateScore(lottoMachine.getPurchasedLottos());
+		String inputWinNumbers = InputView.inputWinNumbers();
+		LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
+		WinningLotto winningLotto = new WinningLotto(inputWinNumbers, bonusNumber);
+		winningLotto.calculateScore(lottoMachine.getPurchasedLottos());
 
 		List<RankSituation> rankSituations = lottoMachine.makeRankSituations();
 		ResultView.printRankSituations(lottoMachine.sortInOrderScore(rankSituations));

@@ -21,11 +21,11 @@ public class PurchasedLottosTest {
 		PurchasedLottos purchasedLottos = new PurchasedLottos(lottos);
 		RankBoard rankBoard = purchasedLottos.makeRankBoard();
 
-		assertThat(rankBoard.winCount(Rank.MISS)).isEqualTo(2);
-		assertThat(rankBoard.winCount(Rank.FIFTH)).isEqualTo(2);
-		assertThat(rankBoard.winCount(Rank.FOURTH)).isEqualTo(1);
-		assertThat(rankBoard.winCount(Rank.THIRD)).isEqualTo(1);
-		assertThat(rankBoard.winCount(Rank.SECOND)).isEqualTo(0);
-		assertThat(rankBoard.winCount(Rank.FIRST)).isEqualTo(0);
+		assertThat(rankBoard.winningCount(Rank.MISS)).isEqualTo(2);
+		assertThat(rankBoard.winningCount(Rank.FIFTH)).isEqualTo(2);
+		assertThat(rankBoard.winningCount(Rank.FOURTH)).isEqualTo(1);
+		assertThat(rankBoard.winningCount(Rank.THIRD)).isEqualTo(1);
+		assertThat(rankBoard.winningCount(Rank.SECOND)).isEqualTo(0);
+		assertThat(rankBoard.winningCount(Rank.FIRST)).isEqualTo(0);
 	}
 }

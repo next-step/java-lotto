@@ -19,7 +19,7 @@ public class LottoMachineTest {
 	}
 
 	@DisplayName("구매한 만큼의 로또를 생성한다. - 예외 케이스")
-	@ValueSource(longs = {800, 1400})
+	@ValueSource(longs = {800, 900})
 	@ParameterizedTest
 	void test2(long purchaseAmount) {
 		assertThatIllegalArgumentException().isThrownBy(() -> new LottoMachine(purchaseAmount));
@@ -27,7 +27,7 @@ public class LottoMachineTest {
 
 	@DisplayName("상금 현황 목록을 작성한다.")
 	@Test
-	void test8() {
+	void test3() {
 		List<Lotto> lottos = Arrays.asList(
 			new Lotto(0), new Lotto(0),
 			new Lotto(3), new Lotto(3),
@@ -45,7 +45,7 @@ public class LottoMachineTest {
 
 	@DisplayName("상금 현황 목록을 상금순으로 오름차순 정렬한다.")
 	@Test
-	void test9() {
+	void test4() {
 		List<RankSituation> rankSituations = Arrays.asList(
 			new RankSituation(Rank.FOURTH, 0), new RankSituation(Rank.FIRST, 1),
 			new RankSituation(Rank.THIRD, 0), new RankSituation(Rank.FIFTH, 2)
@@ -56,5 +56,28 @@ public class LottoMachineTest {
 			new RankSituation(Rank.FIFTH, 2), new RankSituation(Rank.FOURTH, 0),
 			new RankSituation(Rank.THIRD, 0), new RankSituation(Rank.FIRST, 1)
 		);
+	}
+
+	@DisplayName("자동으로 생성할 로또 개수를 구한다.")
+	@Test
+	void test5() {
+		List<String> inputs = Arrays.asList(
+			"1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"
+		);
+		LottoMachine lottoMachine = new LottoMachine(14000, inputs);
+		assertThat(lottoMachine.getAutoCount()).isEqualTo(12);
+	}
+
+	@DisplayName("수동 로또를 만든다.")
+	@Test
+	void test6() {
+		List<String> inputManualLottos = Arrays.asList(
+			"1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"
+		);
+		LottoMachine lottoMachine = new LottoMachine(2000, inputManualLottos);
+		List<Lotto> manualLottos = Arrays.asList(
+			new Lotto(1, 2, 3, 4, 5, 6), new Lotto(7, 8, 9, 10, 11, 12)
+		);
+		assertThat(lottoMachine.getPurchasedLottos()).isEqualTo(new PurchasedLottos(manualLottos));
 	}
 }
