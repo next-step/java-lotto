@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -28,7 +27,19 @@ public class LottoGeneratorTest {
     }
 
     @Test
-    void generateLottos() {
+    void generateLottosByMoney() {
+        LottoGenerator generator = getGenerator();
+        Lottos lottos = generator.generate(new Money(4_000L));
+        Lottos expected = new Lottos(List.of(
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(2, 3, 4, 5, 6, 7),
+                new Lotto(3, 4, 5, 6, 7, 8),
+                new Lotto(4, 5, 6, 7, 8, 9)));
+
+        assertThat(lottos).isEqualTo(expected);
+    }
+    @Test
+    void generateLottosByCount() {
         LottoGenerator generator = getGenerator();
         Lottos lottos = generator.generate(4);
         Lottos expected = new Lottos(List.of(

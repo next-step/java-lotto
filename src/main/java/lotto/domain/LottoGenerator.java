@@ -16,10 +16,7 @@ public class LottoGenerator {
 
     public Lotto generate() {
         Collections.shuffle(LOTTO_NUMBERS_CACHE);
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < Lotto.LOTTO_NUMBERS_SIZE; i++) {
-            lottoNumbers.add(LOTTO_NUMBERS_CACHE.get(i));
-        }
+        List<LottoNumber> lottoNumbers = LOTTO_NUMBERS_CACHE.subList(0, 6);
         Collections.sort(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
@@ -39,5 +36,9 @@ public class LottoGenerator {
             lottos.add(generate());
         }
         return new Lottos(lottos);
+    }
+
+    public Lottos generate(Money receivedMoney) {
+        return generate((long) receivedMoney.divide(Lotto.LOTTO_AMOUNT));
     }
 }
