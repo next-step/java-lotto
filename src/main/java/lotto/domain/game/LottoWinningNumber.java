@@ -9,7 +9,7 @@ public class LottoWinningNumber {
   private final int bonusNumber;
 
   public LottoWinningNumber(List<Integer> numbers, int bonusNumber) {
-    this.numbers = numbers != null ? numbers : Collections.emptyList();
+    this.numbers = numbers;
     this.bonusNumber = bonusNumber;
   }
 

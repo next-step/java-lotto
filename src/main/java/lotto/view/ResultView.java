@@ -11,10 +11,10 @@ import lotto.domain.round.LottoRoundResult;
 
 public class ResultView {
 
-  public static void displayStatistics (LottoGameStatistics statistics) {
+  public void displayStatistics (LottoGameStatistics statistics) {
     Map<LottoWinType, List<LottoRoundResult>> winTypeMap = statistics.getWinTypeMap();
     System.out.println("\n당첨 통계\n---------");
-    for (LottoWinType winType : LottoWinType.values()) {
+    for (LottoWinType winType : LottoWinType.getWithPrizedWinType()) {
       List<LottoRoundResult> lottoRoundResults = winTypeMap.getOrDefault(winType, Collections.emptyList());
       System.out.printf(getDisplayMsgByWinType(winType), winType.getMatchingNumberCnt(), winType.getPrize(), lottoRoundResults.size());
     }
@@ -30,7 +30,7 @@ public class ResultView {
     return "%d개 일치 (%d원) - %d개\n";
   }
 
-  public static void showLottoRounds (List<LottoRound> lottoRounds) {
+  public void showLottoRounds (List<LottoRound> lottoRounds) {
     System.out.printf("%d개를 구매했습니다.\n", lottoRounds.size());
     System.out.println(
         lottoRounds.stream()

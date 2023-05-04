@@ -45,11 +45,7 @@ public class LottoGame {
   }
 
   private void throwIfAgainstDistinctPolicy(final LottoWinningNumber winningNumber) {
-    if (!distinctNumberOnly) {
-      return;
-    }
-
-    if (winningNumber.containsDuplicateNumber()) {
+    if (distinctNumberOnly && winningNumber.containsDuplicateNumber()) {
       throw new IllegalArgumentException("당첨번호가 중복일 수 없습니다.");
     }
   }

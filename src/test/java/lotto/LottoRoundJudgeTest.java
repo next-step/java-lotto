@@ -30,7 +30,8 @@ public class LottoRoundJudgeTest {
       Arguments.of(new LottoRoundNumbers(List.of(1, 2, 3, 4, 41, 42)), LottoWinType.RANK_4),
       Arguments.of(new LottoRoundNumbers(List.of(1, 2, 3, 4, 5, 42)), LottoWinType.RANK_3),
       Arguments.of(new LottoRoundNumbers(List.of(1, 2, 3, 4, 5, 7)), LottoWinType.RANK_2),
-      Arguments.of(new LottoRoundNumbers(List.of(1, 2, 3, 4, 5, 6)), LottoWinType.RANK_1)
+      Arguments.of(new LottoRoundNumbers(List.of(1, 2, 3, 4, 5, 6)), LottoWinType.RANK_1),
+      Arguments.of(new LottoRoundNumbers(List.of(45, 44, 43, 42, 41, 40)), LottoWinType.NONE)
     );
   }
 
@@ -48,7 +49,7 @@ public class LottoRoundJudgeTest {
         .isEqualTo(expectedWinType);
   }
 
-  @DisplayName("LottoRoundJudge | 당첨기준에 만족하지 않으면 LottoWinType은 null을 반환한다.")
+  @DisplayName("LottoRoundJudge | 당첨기준에 만족하지 않으면 LottoWinType은 NONE 을 반환한다.")
   @Test
   void 당첨조건에_맞지_않는_구매번호() {
     // given
@@ -60,6 +61,6 @@ public class LottoRoundJudgeTest {
 
     // then
     Assertions.assertThat(judge)
-        .isNull();
+        .isEqualTo(LottoWinType.NONE);
   }
 }
