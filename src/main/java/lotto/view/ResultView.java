@@ -26,8 +26,7 @@ public class ResultView {
 
         if(key >= RewardTable.MINIMUN_MATCH_NUMBER) {
             totalReward = RewardTable.rewardTableInfo(key).calculateReward(value);
-            int reward = RewardTable.rewardTableInfo(key).amountOfReward();
-            System.out.printf("%d개 일치 (%d원)- %d개\n", key, reward, value);
+            System.out.printf("%d개 일치 (%d원)- %d개\n", key, RewardTable.rewardTableInfo(key).amountOfReward(), value);
         }
 
         return totalReward;

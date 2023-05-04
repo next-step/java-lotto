@@ -28,7 +28,6 @@ public class LottoApplication {
 
         winningStatistics.compareWithTargetNumber(lottoBundle);
         resultView.showStatistic(winningStatistics.lottoResult(lottoBundle), store.PRICE);
-
     }
 
 }
