@@ -49,6 +49,6 @@ public class LottoNumbers {
 
 
   public boolean contains(BonusNumber bonusNumber) {
-    return bonusNumber.contains(numbers);
+    return numbers.contains(bonusNumber.getBonusNumber());
   }
 }

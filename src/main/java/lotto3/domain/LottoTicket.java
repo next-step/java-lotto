@@ -14,11 +14,11 @@ public class LottoTicket {
   }
 
 
-  public int matchCount(WinningNumbers winningNumbers) {
+  private int matchCount(WinningNumbers winningNumbers) {
     return numbers.countMatch(winningNumbers);
   }
 
-  public boolean contains(BonusNumber bonusNumber) {
+  private boolean contains(BonusNumber bonusNumber) {
     return numbers.contains(bonusNumber);
   }
 

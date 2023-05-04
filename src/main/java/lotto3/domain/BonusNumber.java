@@ -24,10 +24,6 @@ public class BonusNumber {
   }
 
 
-  public boolean contains(List<Integer> numbers) {
-    return numbers.contains(bonusNumber);
-  }
-
   public int getBonusNumber() {
     return bonusNumber;
   }
