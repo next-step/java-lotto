@@ -14,7 +14,7 @@ public class CalculatorTest {
 
     @DisplayName("사칙연산 더하기 문자열이 들어오면 덧셈을 진행한다.")
     @Test
-    public void CalculatorTest_더하기() {
+    public void calculatorTest_더하기() {
         Calculator calculator = new Calculator("2 + 5 + 3");
 
         assertThat(calculator.calculate()).isEqualTo(10);
@@ -22,7 +22,7 @@ public class CalculatorTest {
 
     @DisplayName("사칙연산 빼기 문자열이 들어오면 뺄샘을 진행한다.")
     @Test
-    public void CalculatorTest_빼기() {
+    public void calculatorTest_빼기() {
         Calculator calculator = new Calculator("2 - 5 - 3");
 
         assertThat(calculator.calculate()).isEqualTo(-6);
@@ -30,7 +30,7 @@ public class CalculatorTest {
 
     @DisplayName("사칙연산 곱하기 문자열이 들어오면 곱셈을 진행한다.")
     @Test
-    public void CalculatorTest_곱하기() {
+    public void calculatorTest_곱하기() {
         Calculator calculator = new Calculator("2 * 5 * 3");
 
         assertThat(calculator.calculate()).isEqualTo(30);
@@ -38,7 +38,7 @@ public class CalculatorTest {
 
     @DisplayName("사칙연산 나누기 문자열이 들어오면 나눗셈을 진행한다.")
     @Test
-    public void CalculatorTest_나누기() {
+    public void calculatorTest_나누기() {
         Calculator calculator = new Calculator("6 / 3");
 
         assertThat(calculator.calculate()).isEqualTo(2);
@@ -46,7 +46,7 @@ public class CalculatorTest {
 
     @DisplayName("다양한 사칙연산 문자열이 들어오면 사칙연산 진행한다.")
     @Test
-    public void CalculatorTest_전체사칙연산_테스트() {
+    public void calculatorTest_전체사칙연산_테스트() {
         Calculator calculator = new Calculator("2 + 5 - 3 * 5 / 10");
 
         assertThat(calculator.calculate()).isEqualTo(2);

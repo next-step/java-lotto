@@ -12,7 +12,7 @@ public class OperandTest {
     @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException이 발생한다.")
     @ParameterizedTest
     @NullAndEmptySource
-    public void OperandTest(String input) {
+    public void operandTest(String input) {
         assertThatThrownBy(() -> new Operand(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
