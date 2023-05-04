@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.model.LotteryTicket;
 import lotto.model.LotteryTickets;
 import lotto.view.BroadCast;
 import lotto.view.Cashier;

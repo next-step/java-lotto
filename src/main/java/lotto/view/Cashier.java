@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.model.LotteryTicket;
 import lotto.model.LotteryTickets;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Cashier {

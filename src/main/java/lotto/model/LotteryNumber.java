@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.util.NumberGenerator;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LotteryNumber {
 
@@ -19,5 +20,18 @@ public class LotteryNumber {
 
     public boolean isIn(List<Integer> winNumbers) {
         return winNumbers.contains(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LotteryNumber that = (LotteryNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

@@ -8,11 +8,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
     @Test
-    void 금액을_입력하면_로또리스트_생성() {
+    void 금액을_입력하면_로또티켓목록을_생성() {
         int money = 14000;
         LotteryTickets lotteryTickets = new LotteryTickets(money);
         assertThat(lotteryTickets.size()).isEqualTo(14);
@@ -26,13 +27,27 @@ public class LottoTest {
     }
 
     @Test
-    void 로또_한장에는_여섯개의_랜덤숫자() {
+    void 로또_티켓은_여섯개의_랜덤숫자를_포함() {
         LotteryTicket lotteryTicket = new LotteryTicket();
         assertThat(lotteryTicket.size()).isEqualTo(6);
     }
 
     @Test
-    void 로또_당_맞는갯수_계산() {
+    void 로또_티켓은_중복번호를_가지지않음() {
+        // TODO: 랜덤으로 생성된 로또 티켓이 중복 숫자를 갖지 않는지 확인할 방법?
+        assertThatThrownBy(() -> new LotteryTicket(List.of(
+                new LotteryNumber(() -> 8),
+                new LotteryNumber(() -> 21),
+                new LotteryNumber(() -> 21),
+                new LotteryNumber(() -> 41),
+                new LotteryNumber(() -> 42),
+                new LotteryNumber(() -> 43))))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("잘못된 로또 번호 목록입니다.");
+    }
+
+    @Test
+    void 로또티켓_맞는갯수_계산() {
         LotteryTicket lotteryTicket = new LotteryTicket(List.of(
                 new LotteryNumber(() -> 8),
                 new LotteryNumber(() -> 21),
@@ -44,4 +59,5 @@ public class LottoTest {
         int count = lotteryTicket.compare(winNumbers);
         assertThat(count).isEqualTo(3);
     }
+
 }

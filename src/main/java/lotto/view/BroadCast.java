@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.model.LotteryTickets;
 import lotto.model.Win;
 
 import java.util.Arrays;
@@ -13,7 +12,6 @@ public class BroadCast {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final String SPLIT_REGEX = ", ";
-
 
     public static List<Integer> pickNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
