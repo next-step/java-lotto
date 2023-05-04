@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.model.LotteryNumber;
 import lotto.model.LotteryTicket;
+import lotto.model.LotteryTickets;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,15 +14,15 @@ public class LottoTest {
     @Test
     void 금액을_입력하면_로또리스트_생성() {
         int money = 14000;
-        List<LotteryTicket> lotteryTickets = LotteryStore.sell(money);
-        assertThat(lotteryTickets).hasSize(14);
+        LotteryTickets lotteryTickets = new LotteryTickets(money);
+        assertThat(lotteryTickets.size()).isEqualTo(14);
     }
 
     @Test
     void 금액이_나누어떨어지지_않으면_버림() {
         int money = 14500;
-        List<LotteryTicket> lotteryTickets = LotteryStore.sell(money);
-        assertThat(lotteryTickets).hasSize(14);
+        LotteryTickets lotteryTickets = new LotteryTickets(money);
+        assertThat(lotteryTickets.size()).isEqualTo(14);
     }
 
     @Test

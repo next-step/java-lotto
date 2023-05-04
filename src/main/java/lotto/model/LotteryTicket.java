@@ -4,6 +4,7 @@ import lotto.util.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LotteryTicket {
 
@@ -20,14 +21,14 @@ public class LotteryTicket {
     }
 
     public LotteryTicket(List<LotteryNumber> numbers) {
-        if (numbers.size() < NUMBER_PER_TICKET) {
+        if (numbers.size() != NUMBER_PER_TICKET) {
             throw new RuntimeException("잘못된 로또 번호 목록입니다.");
         }
         this.numbers = numbers;
     }
 
     public int compare(List<Integer> winNumbers) {
-        return 0;
+        return (int) numbers.stream().filter(lotteryNumber -> lotteryNumber.isIn(winNumbers)).count();
     }
 
     public int size() {

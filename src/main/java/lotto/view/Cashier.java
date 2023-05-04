@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.LotteryTicket;
+import lotto.model.LotteryTickets;
 
 import java.util.List;
 import java.util.Scanner;
@@ -19,8 +20,8 @@ public class Cashier {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void showLotteryTickets(List<LotteryTicket> lotteryTickets) {
-        lotteryTickets.forEach(lotteryTicket -> System.out.println(lotteryTicket));
+    public static void showLotteryTickets(LotteryTickets lotteryTickets) {
+        lotteryTickets.getTickets().forEach(lotteryTicket -> System.out.println(lotteryTicket));
         System.out.println();
     }
 }
