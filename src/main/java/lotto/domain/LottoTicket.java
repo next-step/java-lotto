@@ -3,14 +3,14 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class LottoNumbers {
+public class LottoTicket {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private ArrayList<Integer> numbers;
 
-    private LottoNumbers(ArrayList<Integer> numbers) {
+    private LottoTicket(ArrayList<Integer> numbers) {
         validateNumber(numbers);
         validateSize(numbers);
         Collections.sort(numbers);
@@ -33,7 +33,7 @@ public class LottoNumbers {
         }
     }
 
-    public static LottoNumbers createRandomLottoNumbers() {
+    public static LottoTicket createLottoTicketByAuto() {
         ArrayList<Integer> fullLotteNumbers = new ArrayList<>();
 
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
@@ -42,15 +42,19 @@ public class LottoNumbers {
 
         Collections.shuffle(fullLotteNumbers);
 
-        return new LottoNumbers((ArrayList) fullLotteNumbers.subList(0, NUMBER_OF_LOTTO_NUMBERS));
+        return new LottoTicket(new ArrayList<>(fullLotteNumbers.subList(0, NUMBER_OF_LOTTO_NUMBERS)));
     }
 
-    public static LottoNumbers createManualLottoNumbers(ArrayList<Integer> numbers) {
-        return new LottoNumbers(numbers);
+    public static LottoTicket createLottoTicketByManual(ArrayList<Integer> numbers) {
+        return new LottoTicket(numbers);
     }
 
     public int countMatchingNumbers(ArrayList<Integer> inputNumbers) {
         return (int) numbers.stream().filter(inputNumbers::contains).count();
+    }
+
+    public String toString() {
+        return numbers.toString();
     }
 }
 
