@@ -9,7 +9,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 생성")
     void createLotto() {
-        LottoStrategy lottoStrategy = new LottoAutoStrategy();
+        LottoStrategy lottoStrategy = Fixture.lottoStrategyFake;
         Lotto lotto = new Lotto(lottoStrategy.createLotto().getLotto());
         assertThat(lotto.getLotto()).hasSize(6);
     }

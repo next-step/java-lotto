@@ -1,9 +1,8 @@
 package lotto.step2.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import lotto.step2.enums.MatchNumber;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
@@ -35,9 +34,17 @@ public class WinningNumbers {
         return Collections.max(winningNumbers) > 45 || Collections.min(winningNumbers) < 1;
     }
 
-    public Map<Integer, Long> getWinnerStat(Lottos lottos) {
-        return lottos.getLottos().stream()
+
+    public Map<MatchNumber, Long> getWinnerStat(Lottos lottos) {
+        Map<Integer, Long> stat = lottos.getLottos().stream()
                 .map(lotto -> lotto.getLotto().stream().filter(winningNumbers::contains).collect(Collectors.toList()))
                 .collect(Collectors.groupingBy(List::size, Collectors.counting()));
+
+        return stat.entrySet().stream()
+                .filter(e -> MatchNumber.isMatchedSize(e.getKey()).isPresent())
+                .collect(Collectors.toMap(
+                        e -> MatchNumber.isMatchedSize(e.getKey()).get(),
+                        Map.Entry::getValue
+                ));
     }
 }
