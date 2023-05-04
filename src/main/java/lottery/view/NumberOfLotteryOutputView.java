@@ -23,6 +23,6 @@ public class NumberOfLotteryOutputView implements OutputView<List<Lottery>> {
     }
 
     private void printLottery(Lottery lottery) {
-        System.out.printf("[%s]\n", lottery.numbers.stream().map(String::valueOf).collect(Collectors.joining(", ")));
+        System.out.printf("[%s]\n", lottery.numbers().stream().map(String::valueOf).collect(Collectors.joining(", ")));
     }
 }
