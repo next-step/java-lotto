@@ -1,7 +1,7 @@
-package StringCalculator;
+package stringcalculator;
 
-import StringCalculator.domain.StringCalculator;
-import StringCalculator.view.CalculatorView;
+import stringcalculator.domain.StringCalculator;
+import stringcalculator.view.CalculatorView;
 
 public class StringCalculatorApplication {
 

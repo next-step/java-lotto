@@ -1,6 +1,6 @@
-package StringCalculator.domain;
+package stringcalculator.domain;
 
-import StringCalculator.constant.Operator;
+import stringcalculator.constant.Operator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -17,7 +17,7 @@ public class Operators {
     }
 
     public boolean hasNext() {
-        return 0 < operators.size();
+        return !operators.isEmpty();
     }
 
     public Operator remove() {

@@ -1,4 +1,4 @@
-package StringCalculator.domain;
+package stringcalculator.domain;
 
 import java.util.Deque;
 

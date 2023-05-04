@@ -1,4 +1,4 @@
-package StringCalculator.view;
+package stringcalculator.view;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,11 +7,11 @@ import java.util.regex.Pattern;
 
 public class CalculatorView {
 
-    private final static Pattern SPACE = Pattern.compile(" ");
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Pattern SPACE = Pattern.compile(" ");
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static List<String> inputExpression() {
-        return Arrays.asList(SPACE.split(scanner.nextLine()));
+        return Arrays.asList(SPACE.split(SCANNER.nextLine()));
     }
 
     public static void outputCalculate(Integer result) {

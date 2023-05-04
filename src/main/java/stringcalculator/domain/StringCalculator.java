@@ -1,11 +1,12 @@
-package StringCalculator.domain;
+package stringcalculator.domain;
 
-import StringCalculator.constant.Operator;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.stream.Collectors;
+import stringcalculator.constant.Operator;
 
 public class StringCalculator {
 
@@ -42,13 +43,10 @@ public class StringCalculator {
     }
 
     private static Queue<Operator> convertToOperators(List<String> expression) {
-        Queue<Operator> operators = new LinkedList<>();
-        for (String elem: expression) {
-            if (OPERATORS.contains(elem)) {
-                operators.add(Operator.toOperator(elem));
-            }
-        }
-        return operators;
+        return expression.stream()
+            .filter(OPERATORS::contains)
+            .map(Operator::toOperator)
+            .collect(Collectors.toCollection(LinkedBlockingQueue::new));
     }
 
     private static boolean isNumeric(String strNum) {

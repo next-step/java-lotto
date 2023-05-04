@@ -1,6 +1,7 @@
-package StringCalculator.constant;
+package stringcalculator.constant;
 
-import java.util.function.BiFunction;
+import java.util.Arrays;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
     ADD("+", (leftOperand, rightOperand) -> leftOperand + rightOperand),
@@ -9,9 +10,9 @@ public enum Operator {
     DIVIDE("/", (leftOperand, rightOperand) -> leftOperand / rightOperand);
 
     private final String symbol;
-    private final BiFunction<Integer, Integer, Integer> expression;
+    private final BinaryOperator<Integer> expression;
 
-    Operator(String symbol, BiFunction<Integer, Integer, Integer> expression) {
+    Operator(String symbol, BinaryOperator<Integer> expression) {
         this.symbol = symbol;
         this.expression = expression;
     }
@@ -21,12 +22,10 @@ public enum Operator {
     }
 
     public static Operator toOperator(String symbol) {
-        for (Operator operator : values()) {
-            if (operator.symbol.equals(symbol)) {
-                return operator;
-            }
-        }
-        throw new IllegalArgumentException();
+        return Arrays.stream(values())
+            .filter((operator -> operator.symbol.equals(symbol)))
+            .findAny()
+            .orElseThrow(IllegalArgumentException::new);
     }
 
 }
