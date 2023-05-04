@@ -91,4 +91,25 @@ public class LottoGameTest {
     Assertions.assertThatThrownBy(() -> LottoGame.ofAutoOnly(14000, setting))
         .isInstanceOf(IllegalArgumentException.class);
   }
+
+  @Test
+  @DisplayName("LottoGame | 구입금액보다 많은 로또 게임을 살 수 없다.")
+  void 구입금액보다_많은_로또_게임_구매_불가() {
+
+    // given
+    LottoGameSetting setting = LottoGameSetting.builder()
+        .raffleGenerator(duplicateFixedRaffleGenerator)
+        .pricePerGame(1000)
+        .distinctNumberOnly(true)
+        .build();
+
+    List<List<Integer>> 수동_로또_번호_목록 = List.of(
+        List.of(1, 2, 3, 4, 5, 6),
+        List.of(1, 2, 3, 4, 5, 6)
+    );
+
+    // when && then
+    Assertions.assertThatThrownBy(() -> LottoGame.ofAutoManualMixed(수동_로또_번호_목록, 1000, setting))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
 }

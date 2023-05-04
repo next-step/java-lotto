@@ -24,6 +24,7 @@ public class LottoGame {
     this.purchasePrice = new LottoPurchasePrice(gameSetting.getPricePerGame(), purchasePrice);
     this.roundJudge = new LottoRoundJudge();
     this.lottoRounds = initAutoOnlyRounds();
+    throwIfRoundSizeNotMatch(this.purchasePrice.getGameCount(), this.lottoRounds);
   }
 
   private LottoGame (List<List<Integer>> manualRounds, int purchasePrice, LottoGameSetting gameSetting) {
@@ -32,6 +33,7 @@ public class LottoGame {
     this.purchasePrice = new LottoPurchasePrice(gameSetting.getPricePerGame(), purchasePrice);
     this.roundJudge = new LottoRoundJudge();
     this.lottoRounds = initManualIncludeLottoRounds(manualRounds);
+    throwIfRoundSizeNotMatch(this.purchasePrice.getGameCount(), this.lottoRounds);
   }
 
   public static LottoGame ofAutoOnly (int lottoPrice, LottoGameSetting gameSetting) {
@@ -69,13 +71,12 @@ public class LottoGame {
 
   private List<LottoRound> initManualIncludeLottoRounds(List<List<Integer>> manualRoundNumbers) {
     int gameCount = purchasePrice.getGameCount();
-    List<LottoRound> rounds = new ArrayList<>(gameCount);
-
     List<LottoRound> manualRounds = makeManualLottoRounds(manualRoundNumbers);
     List<LottoRound> autoRounds = IntStream.rangeClosed(manualRounds.size() + 1, gameCount)
         .mapToObj(i -> LottoRound.ofAuto(i, new LottoRoundNumbers(raffleGenerator.generateRaffleNumber()), roundJudge))
         .collect(Collectors.toList());
 
+    List<LottoRound> rounds = new ArrayList<>(gameCount);
     rounds.addAll(manualRounds);
     rounds.addAll(autoRounds);
     return rounds;
@@ -85,5 +86,11 @@ public class LottoGame {
     return IntStream.rangeClosed(1, manualRounds.size())
         .mapToObj(i -> LottoRound.ofManual(i, new LottoRoundNumbers(manualRounds.get(i - 1)), roundJudge))
         .collect(Collectors.toList());
+  }
+
+  private void throwIfRoundSizeNotMatch(int gameCount, List<LottoRound> lottoRounds) {
+    if(gameCount != lottoRounds.size()) {
+      throw new IllegalArgumentException("구입 금액과 그에 맞는 로또 게임 수가 일치하지 않습니다. 금액을 다시 확인해주세요");
+    }
   }
 }
