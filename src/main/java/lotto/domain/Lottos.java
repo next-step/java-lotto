@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -20,11 +17,16 @@ public class Lottos {
                 .collect(Collectors.groupingBy(match -> match, Collectors.counting()));
     }
 
-    @Override
-    public String toString() {
-        return lottos.stream()
-                .map(Lotto::toString)
-                .collect(Collectors.joining("\n"));
+    public long size() {
+        return lottos.size();
+    }
+
+    public Money calculateAmount() {
+        return Lotto.LOTTO_AMOUNT.multiply(size());
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     @Override
