@@ -38,7 +38,8 @@ class LottoTest {
     @ParameterizedTest(name = "입력 금액만큼 로또를 구매한다.")
     @ValueSource(ints = {10000, 1000, 12459})
     void test2(int input) throws Exception {
-        PurchasedLotto lottoList = LottoFactory.of(input);
+        int manualLottoCount = 0;
+        PurchasedLotto lottoList = LottoFactory.of(input, manualLottoCount);
 
         assertThat(lottoList.get()).hasSize(input / 1000);
     }
@@ -46,8 +47,9 @@ class LottoTest {
     @ParameterizedTest(name = "입력 금액이 1000이하일 경우 예외를 던진다.")
     @ValueSource(ints = {-1, 0, 999})
     void test5(int input) throws Exception {
+        int manualLottoCount = 0;
         assertThatThrownBy(() -> {
-            LottoFactory.of(input);
+            LottoFactory.of(input, manualLottoCount);
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("구입 금액은 1000원 이상이어야 합니다.");
