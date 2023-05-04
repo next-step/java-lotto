@@ -17,13 +17,4 @@ class BonusNumberTest {
         .hasMessage("보너스 볼은 1부터 45까지의 숫자만 가능합니다.");
   }
 
-  @Test
-  void 보너스숫자가_당첨번호랑_중복된다면_예외_던지는_검증() {
-    BonusNumber bonusNumber = new BonusNumber(1);
-    WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
-
-    assertThatThrownBy(() -> bonusNumber.validateDuplicate(winningNumbers))
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
-  }
 }

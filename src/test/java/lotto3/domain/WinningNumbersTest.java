@@ -31,4 +31,14 @@ class WinningNumbersTest {
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("지난 주 당첨 번호는 6개를 입력해 주세요.");
   }
+
+  @Test
+  void 보너스번호가_당첨번호와_중복될_경우_예외를_던진다() {
+    WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
+    BonusNumber duplicateBonusNumber = new BonusNumber(6);
+
+    assertThatThrownBy(() -> winningNumbers.validateHasDuplicateNumber(duplicateBonusNumber))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+  }
 }
