@@ -11,16 +11,21 @@ public class ManualLotto {
     private final List<Lotto> lottoList = new ArrayList<>();
 
     public ManualLotto(String numbers) {
-        String[] strings = Split.getStrings(numbers);
-        List<Integer> manualNumbers = Conversion.stringToInt(strings);
+        List<Integer> manualNumbers = getManualNumber(numbers);
         validateManualNumbers(manualNumbers);
         lottoList.add(new Lotto(manualNumbers));
     }
 
     private void validateManualNumbers(List<Integer> manualNumbers) {
+        Validation.size(manualNumbers);
         Validation.duplicate(manualNumbers);
         for (Integer manualNumber : manualNumbers) {
             Validation.rangeOfNumber(manualNumber);
         }
+    }
+
+    private List<Integer> getManualNumber(String numbers) {
+        String[] strings = Split.getStrings(numbers);
+        return Conversion.stringToInt(strings);
     }
 }

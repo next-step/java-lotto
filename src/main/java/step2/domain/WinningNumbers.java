@@ -11,8 +11,7 @@ public class WinningNumbers {
     private final List<Integer> numberList = new ArrayList<>();
 
     public WinningNumbers(String winningNumber) {
-        String[] winningNumbers = Split.getStrings(winningNumber);
-        List<Integer> numbers = Conversion.stringToInt(winningNumbers);
+        List<Integer> numbers = getWinningNumbers(winningNumber);
         validateWinningNumbers(numbers);
         this.numberList.addAll(numbers);
     }
@@ -30,9 +29,15 @@ public class WinningNumbers {
     }
 
     private void validateWinningNumbers(List<Integer> numbers) {
+        Validation.size(numbers);
         Validation.duplicate(numbers);
         for (Integer number : numbers) {
             Validation.rangeOfNumber(number);
         }
+    }
+
+    private List<Integer> getWinningNumbers(String winningNumber) {
+        String[] winningNumbers = Split.getStrings(winningNumber);
+        return Conversion.stringToInt(winningNumbers);
     }
 }
