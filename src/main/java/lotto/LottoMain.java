@@ -18,6 +18,6 @@ public class LottoMain {
         lottoTickets.addTickets(LottoTickets.of(new LottoTicketsManualCreateStrategy(request.getManualNumbers())));
         resultView.printLottoTickets(lottoTickets);
         CheckWinningRequest checkWinningRequest = inputView.checkWinning();
-        resultView.printWiningResult(lottoTickets.tallyUp(checkWinningRequest.getWinningNumbers(), checkWinningRequest.getBonusBall()));
+        resultView.printWiningResult(lottoTickets.tallyUp(checkWinningRequest.toWin()));
     }
 }

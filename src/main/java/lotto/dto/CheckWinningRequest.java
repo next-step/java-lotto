@@ -1,5 +1,7 @@
 package lotto.dto;
 
+import lotto.domain.Win;
+
 import java.util.List;
 
 public class CheckWinningRequest {
@@ -11,11 +13,9 @@ public class CheckWinningRequest {
         this.bonusBall = bonusBall;
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+
+    public Win toWin() {
+        return new Win(winningNumbers, bonusBall);
     }
 
-    public int getBonusBall() {
-        return bonusBall;
-    }
 }
