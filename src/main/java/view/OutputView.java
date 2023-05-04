@@ -33,7 +33,7 @@ public class OutputView {
     System.out.println("4개 일치 (50000원)- " + matchesStatus.getFourMatches() + "개");
     System.out.println("5개 일치 (1500000원)- " + matchesStatus.getFiveMatches() + "개");
     System.out.println("6개 일치 (2000000000원)- " + matchesStatus.getSixMatches() + "개");
-//    System.out.println("총 수익률은 " + threeMatches + "입니다.");
+    System.out.println("총 수익률은 " + matchesStatus.getRate() + "입니다.");
   }
 
 }

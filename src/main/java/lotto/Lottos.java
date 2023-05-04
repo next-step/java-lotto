@@ -1,12 +1,14 @@
 package lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Lottos {
 
   private final List<Lotto> lottos;
-  public static final int LOTTO_PRICE = 1000;
+  private static final int LOTTO_PRICE = 1000;
 
   public Lottos() {
     lottos = new LinkedList<>();
@@ -33,6 +35,7 @@ public class Lottos {
     for (Lotto lotto : lottos) {
       matchesStatus.findMatches(winningNumbers.howManyMatches(lotto));
     }
+    matchesStatus.findRateOfReturn(this);
     return matchesStatus;
   }
 
@@ -42,4 +45,8 @@ public class Lottos {
     }
   }
 
+  public BigDecimal findRateOfReturn(BigDecimal totalReturnAmount) {
+    return totalReturnAmount.divide(new BigDecimal(lottos.size() * LOTTO_PRICE), 2,
+        RoundingMode.FLOOR);
+  }
 }
