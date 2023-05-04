@@ -13,7 +13,7 @@ public class CollectionUtilTest {
   @NullAndEmptySource
   void test(List<String> given) {
     // when
-    boolean isEmptyList = CollectionUtils.isEmpty(given);
+    boolean isEmptyList = CollectionUtils.isNullOrEmpty(given);
 
     // then
     Assertions.assertThat(isEmptyList)

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.game.LottoGameStatistics;
+import lotto.domain.game.LottoGameType;
 import lotto.domain.game.LottoWinType;
 import lotto.domain.round.LottoRound;
 import lotto.domain.round.LottoRoundResult;
@@ -31,12 +32,21 @@ public class ResultView {
   }
 
   public void showLottoRounds (List<LottoRound> lottoRounds) {
-    System.out.printf("%d개를 구매했습니다.\n", lottoRounds.size());
+    Map<LottoGameType, List<LottoRound>> gameTypeRounds = lottoRounds.stream()
+        .collect(Collectors.groupingBy(LottoRound::getGameType));
+
+    System.out.printf("\n%s 를 구매했습니다.\n", getRoundCountForGameType(gameTypeRounds));
     System.out.println(
         lottoRounds.stream()
             .map(LottoRound::getRoundNumbers)
             .map(Object::toString)
             .collect(Collectors.joining("\n"))
     );
+  }
+
+  private String getRoundCountForGameType(Map<LottoGameType, List<LottoRound>> gameTypeRounds) {
+    return gameTypeRounds.entrySet().stream()
+        .map(entry -> String.format(String.format("%s으로 %d개", entry.getKey().getName(), entry.getValue().size())))
+        .collect(Collectors.joining(","));
   }
 }

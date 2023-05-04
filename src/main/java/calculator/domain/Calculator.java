@@ -17,7 +17,7 @@ public class Calculator {
 
   public int calculate(String expression) {
     ArrayDeque<String> expressionStack = expressionParser.parse(expression);
-    if (CollectionUtils.isEmpty(expressionStack)) {
+    if (CollectionUtils.isNullOrEmpty(expressionStack)) {
       throw new IllegalArgumentException();
     }
 

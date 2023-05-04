@@ -1,5 +1,6 @@
 package lotto.domain.game;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,28 +12,34 @@ import lotto.domain.round.LottoRoundResult;
 
 public class LottoGame {
 
-  private static final int PRICE_PER_GAME = 1000;
-
   private final LottoPurchasePrice purchasePrice;
   private final LottoRaffleGenerator raffleGenerator;
   private final List<LottoRound> lottoRounds;
   private final LottoRoundJudge roundJudge;
   private final boolean distinctNumberOnly;
 
-  public LottoGame (int purchasePrice, LottoRaffleGenerator raffleGenerator) {
-    this.purchasePrice = new LottoPurchasePrice(PRICE_PER_GAME, purchasePrice);
-    this.raffleGenerator = raffleGenerator;
+  private LottoGame (int purchasePrice, LottoGameSetting gameSetting) {
+    this.raffleGenerator = gameSetting.getRaffleGenerator();
+    this.distinctNumberOnly = gameSetting.isDistinctNumberOnly();
+    this.purchasePrice = new LottoPurchasePrice(gameSetting.getPricePerGame(), purchasePrice);
     this.roundJudge = new LottoRoundJudge();
-    this.distinctNumberOnly = true;
-    this.lottoRounds = initLottoRounds();
+    this.lottoRounds = initAutoOnlyRounds();
   }
 
-  public LottoGame (int purchasePrice, LottoRaffleGenerator raffleGenerator, boolean distinctNumberOnly) {
-    this.purchasePrice = new LottoPurchasePrice(PRICE_PER_GAME, purchasePrice);
-    this.raffleGenerator = raffleGenerator;
+  private LottoGame (List<List<Integer>> manualRounds, int purchasePrice, LottoGameSetting gameSetting) {
+    this.raffleGenerator = gameSetting.getRaffleGenerator();
+    this.distinctNumberOnly = gameSetting.isDistinctNumberOnly();
+    this.purchasePrice = new LottoPurchasePrice(gameSetting.getPricePerGame(), purchasePrice);
     this.roundJudge = new LottoRoundJudge();
-    this.distinctNumberOnly = distinctNumberOnly;
-    this.lottoRounds = initLottoRounds();
+    this.lottoRounds = initManualIncludeLottoRounds(manualRounds);
+  }
+
+  public static LottoGame ofAutoOnly (int lottoPrice, LottoGameSetting gameSetting) {
+    return new LottoGame(lottoPrice, gameSetting);
+  }
+
+  public static LottoGame ofAutoManualMixed (List<List<Integer>> manualRounds, int lottoPrice, LottoGameSetting gameSetting) {
+    return new LottoGame(manualRounds, lottoPrice, gameSetting);
   }
 
   public LottoGameStatistics play (final LottoWinningNumber winningNumber) {
@@ -54,9 +61,29 @@ public class LottoGame {
     return lottoRounds;
   }
 
-  private List<LottoRound> initLottoRounds () {
+  private List<LottoRound> initAutoOnlyRounds() {
     return IntStream.rangeClosed(1, this.purchasePrice.getGameCount())
-        .mapToObj(i -> new LottoRound(i, new LottoRoundNumbers(raffleGenerator.generateRaffleNumber()), roundJudge))
+        .mapToObj(i -> LottoRound.ofAuto(i, new LottoRoundNumbers(raffleGenerator.generateRaffleNumber()), roundJudge))
+        .collect(Collectors.toList());
+  }
+
+  private List<LottoRound> initManualIncludeLottoRounds(List<List<Integer>> manualRoundNumbers) {
+    int gameCount = purchasePrice.getGameCount();
+    List<LottoRound> rounds = new ArrayList<>(gameCount);
+
+    List<LottoRound> manualRounds = makeManualLottoRounds(manualRoundNumbers);
+    List<LottoRound> autoRounds = IntStream.rangeClosed(manualRounds.size() + 1, gameCount)
+        .mapToObj(i -> LottoRound.ofAuto(i, new LottoRoundNumbers(raffleGenerator.generateRaffleNumber()), roundJudge))
+        .collect(Collectors.toList());
+
+    rounds.addAll(manualRounds);
+    rounds.addAll(autoRounds);
+    return rounds;
+  }
+
+  private List<LottoRound> makeManualLottoRounds(List<List<Integer>> manualRounds) {
+    return IntStream.rangeClosed(1, manualRounds.size())
+        .mapToObj(i -> LottoRound.ofManual(i, new LottoRoundNumbers(manualRounds.get(i - 1)), roundJudge))
         .collect(Collectors.toList());
   }
 }

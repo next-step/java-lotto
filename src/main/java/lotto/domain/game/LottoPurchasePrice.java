@@ -5,9 +5,9 @@ public class LottoPurchasePrice {
   private final int purchasePrice;
   private final int gameCount;
 
-  public LottoPurchasePrice (int pricePerGame, int purchasePrice) {
+  public LottoPurchasePrice (LottoPricePerGame pricePerGame, int purchasePrice) {
     this.purchasePrice = purchasePrice;
-    this.gameCount = calculateAndSetGameCount(pricePerGame);
+    this.gameCount = calculateAndSetGameCount(pricePerGame.getPricePerGame());
   }
 
   public int getPurchasePrice() {
