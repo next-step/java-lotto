@@ -6,13 +6,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputConverter {
-  private static final Pattern TARGET_NUMBER_PATTERN = Pattern.compile("/^[1-9]$|^[1-4][0-5]$/");
+  private static final Pattern TARGET_NUMBER_PATTERN = Pattern.compile("^[1-9]$|^[1-4][0-5]$");
 
   public List<Integer> convertNumberToList(String targetNumber) {
     List<Integer> numberList = Arrays.stream(targetNumber.split(", "))
           .map(this::isThrowIllegalArgumentException)
           .collect(Collectors.toList());
-    System.out.println(numberList);
     isSizeSix(numberList);
 
     return numberList;
