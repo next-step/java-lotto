@@ -23,7 +23,6 @@ public class TotalNumbers {
 
         Collections.shuffle(numbers);
         List<Integer> lottoNumbers = numbers.subList(MIN_SIZE, MAX_SIZE);
-        Collections.sort(lottoNumbers);
 
         return lottoNumbers;
     }

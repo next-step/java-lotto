@@ -1,12 +1,14 @@
 package step2.domain;
 
+import java.util.Collections;
 import java.util.List;
 
-public class PickedNumber {
+public class PickedLottoNumber {
 
     private final List<Integer> numbers;
 
-    public PickedNumber(List<Integer> numbers) {
+    public PickedLottoNumber(List<Integer> numbers) {
+        Collections.sort(numbers);
         this.numbers = numbers;
     }
 

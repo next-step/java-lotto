@@ -4,17 +4,17 @@ import java.util.List;
 
 public class Lotto {
 
-    private final PickedNumber pickedNumbers;
+    private final PickedLottoNumber pickedLottoNumbers;
     private Ranking ranking;
 
     public Lotto(List<Integer> pickedNumbers) {
-        this.pickedNumbers = new PickedNumber(pickedNumbers);
+        this.pickedLottoNumbers = new PickedLottoNumber(pickedNumbers);
     }
 
     private Lotto() {
         TotalNumbers totalNumbers = new TotalNumbers();
         List<Integer> numbers = totalNumbers.getRandomLottoNumber();
-        this.pickedNumbers = new PickedNumber(numbers);
+        this.pickedLottoNumbers = new PickedLottoNumber(numbers);
     }
 
     public static Lotto issue() {
@@ -22,7 +22,7 @@ public class Lotto {
     }
 
     public List<Integer> getDetailNumbers() {
-        return this.pickedNumbers.get();
+        return this.pickedLottoNumbers.get();
     }
 
     public void rank(Ranking ranking) {
@@ -38,11 +38,11 @@ public class Lotto {
     }
 
     public int match(WinningNumbers winningNumbers) {
-        return this.pickedNumbers.match(winningNumbers);
+        return this.pickedLottoNumbers.match(winningNumbers);
     }
 
     public boolean contains(int number) {
-        return this.pickedNumbers.contains(number);
+        return this.pickedLottoNumbers.contains(number);
     }
 
     public boolean isSecond() {
