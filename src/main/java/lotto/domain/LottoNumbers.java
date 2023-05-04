@@ -6,17 +6,20 @@ import java.util.Collections;
 public class LottoNumbers {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private ArrayList<Integer> numbers;
 
     public LottoNumbers(ArrayList<Integer> numbers) {
         validateNumber(numbers);
         validateSize(numbers);
+        Collections.sort(numbers);
+        
         this.numbers = numbers;
     }
 
     private void validateSize(ArrayList<Integer> numbers) {
-        if (numbers.size() < 1 || numbers.size() > 6) {
+        if (numbers.size() != NUMBER_OF_LOTTO_NUMBERS) {
             throw new IllegalArgumentException("숫자의 입력값은 6개 여야 합니다.");
         }
     }
@@ -39,7 +42,11 @@ public class LottoNumbers {
 
         Collections.shuffle(fullLotteNumbers);
 
-        return new LottoNumbers((ArrayList) fullLotteNumbers.subList(0, 6));
+        return new LottoNumbers((ArrayList) fullLotteNumbers.subList(0, NUMBER_OF_LOTTO_NUMBERS));
+    }
+
+    public int countMatchingNumbers(ArrayList<Integer> inputNumbers) {
+        return (int) numbers.stream().filter(inputNumbers::contains).count();
     }
 }
 
