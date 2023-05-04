@@ -9,6 +9,8 @@ public class StringCalculator {
     private static final String DIVISION = "/";
     private static final String SUBTRACTION = "-";
 
+    private StringCalculator() {}
+
     public static int calculate(List<String> tokens) {
         int result = getInitialNumber(tokens);
         String operator = "";
