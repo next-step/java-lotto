@@ -1,13 +1,13 @@
 package lotto3.domain;
 
-import java.util.EnumMap;
+
 import java.util.Map;
 
 public class LottoResults {
 
-  private final EnumMap<Prize, Long> results;
+  private final Map<Prize, Long> results;
 
-  public LottoResults(EnumMap<Prize, Long> results) {
+  public LottoResults(Map<Prize, Long> results) {
     this.results = results;
   }
 
@@ -16,11 +16,11 @@ public class LottoResults {
   }
 
   public double calculateProfitRate(Money investMoney) {
-    long totalPrizeMoney = calculateTotalPrizeMoney(results);
+    long totalPrizeMoney = calculateTotalPrizeMoney();
     return investMoney.profitRate(totalPrizeMoney);
   }
 
-  private long calculateTotalPrizeMoney(Map<Prize, Long> lottoResults) {
+  private long calculateTotalPrizeMoney() {
     long totalPrizeMoney = 0;
     for(Prize prize : Prize.values()) {
       totalPrizeMoney += prize.getPrizeMoney() * getMatchedCount(prize);
