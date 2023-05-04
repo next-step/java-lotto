@@ -19,7 +19,7 @@ class LotteriesTest {
 
     @BeforeEach
     void setUp() {
-        defaultLotteryStrategy = new RandomLotteryStrategy();
+        defaultLotteryStrategy = new TestLotteryStrategy();
         defaultLotteryNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         defaultLottery = Lottery.createLottery(defaultLotteryNumbers);
         defaultLotteries = new ArrayList<>();
