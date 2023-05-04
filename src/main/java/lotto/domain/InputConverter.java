@@ -45,4 +45,5 @@ public class InputConverter {
       }
       return Integer.parseInt(strNumber);
   }
+
 }
