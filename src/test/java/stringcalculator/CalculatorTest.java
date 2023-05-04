@@ -1,20 +1,17 @@
 package stringcalculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
 
-    @Test
-    void null입력() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculate(null))
-                .withMessageContaining("문자열을 입력해주세요.");
-    }
-
-    @Test
-    void 빈문자열입력() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculate("          "))
+    @ParameterizedTest
+    @NullAndEmptySource
+    void nullAndEmpty(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculate(input))
                 .withMessageContaining("문자열을 입력해주세요.");
     }
 
