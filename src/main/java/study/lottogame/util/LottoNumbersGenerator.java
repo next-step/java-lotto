@@ -25,7 +25,7 @@ public class LottoNumbersGenerator {
     Collections.shuffle(numbers);
     List<LottoNumber> lottoNumbers = new ArrayList<>();
     for (int i = 0; i < Lottery.LOTTO_NUMBER_COUNT; i++) {
-      lottoNumbers.add(new LottoNumber(numbers.get(i)));
+      lottoNumbers.add(LottoNumber.valueOf(numbers.get(i)));
     }
     return lottoNumbers;
   }
@@ -38,7 +38,7 @@ public class LottoNumbersGenerator {
     List<LottoNumber> lottoNumbers = new ArrayList<>();
     for (String number : numbers) {
       StringUtils.checkNullOrBlank(number);
-      lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
+      lottoNumbers.add(LottoNumber.valueOf(Integer.parseInt(number.trim())));
     }
     return lottoNumbers;
   }

@@ -13,13 +13,13 @@ public class LottoNumberTest {
   @ParameterizedTest
   @ValueSource(ints = {0, -1, -10, 46, 100})
   public void LottoNumber_throwException_outOfBound(int input) {
-    assertThatThrownBy(() -> new LottoNumber(input)).isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> LottoNumber.valueOf(input)).isInstanceOf(IllegalArgumentException.class);
   }
 
   @DisplayName("로또번호가 같다면 동등한 객체이다.")
   @ParameterizedTest
   @ValueSource(ints = {1, 5, 10, 40, 45})
   public void equals(int input){
-    assertThat(new LottoNumber(input).equals(new LottoNumber(input)));
+    assertThat(LottoNumber.valueOf(input).equals(LottoNumber.valueOf(input)));
   }
 }
