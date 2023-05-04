@@ -3,7 +3,13 @@ package calculator;
 import java.util.Objects;
 
 public class Number {
+    private static final String numberRegExp = "^[0-9]+$";
     private int number;
+
+    public Number(String stringNum) {
+        validCheck(stringNum);
+        this.number = Integer.parseInt(stringNum);
+    }
 
     public Number(int number) {
         this.number = number;
@@ -13,16 +19,10 @@ public class Number {
         return number;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Number number1 = (Number) o;
-        return number == number1.number;
+    private void validCheck(String input) {
+        if (!input.matches(numberRegExp)) {
+            throw new IllegalArgumentException("숫자가 아닙니다.");
+        }
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
 }
