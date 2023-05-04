@@ -8,49 +8,56 @@ import java.util.Scanner;
 
 public class LottoStore {
 
-    public static final Money LOTTO_AMOUNT = new Money(1_000L);
     private final LottoGenerator lottoGenerator;
+    private final Scanner scanner;
 
     public LottoStore(LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
+        this.scanner = new Scanner(System.in);
     }
 
     public void open(LottoBuyer lottoBuyer) {
-        Scanner scanner = new Scanner(System.in);
+        sellTo(lottoBuyer);
 
-        InputView.printInputBuyAmount();
-        Money sellAmount = sellTo(lottoBuyer);
-        long countOfLotto = calculateCountOfLotto(sellAmount);
-        ResultView.printResultBuyCount(countOfLotto);
+        Money winningAmount = calculateWinningAmount(lottoBuyer);
 
+        pay(lottoBuyer, winningAmount);
+    }
 
-        Lottos lottos = lottoGenerator.generate(countOfLotto);
-        give(lottoBuyer, lottos);
-        ResultView.printLottos(lottos);
-
+    private Money calculateWinningAmount(LottoBuyer lottoBuyer) {
         InputView.printInputWinningNumbers();
+
         Lotto winningLotto = lottoGenerator.generate(scanner.nextLine());
+        Matchs matchs = checkWinning(lottoBuyer, winningLotto);
 
-        Matchs matchs = lottoBuyer.checkWinning(winningLotto);
         ResultView.printWinningMatchCount(matchs);
+        return matchs.calculateWinningAmount();
+    }
 
-        pay(lottoBuyer, matchs);
-        ResultView.printRateOfEarning(lottoBuyer.calculateRateOfEarning());
+    private Matchs checkWinning(LottoBuyer lottoBuyer, Lotto winningLotto) {
+        return lottoBuyer.checkWinning(winningLotto);
     }
 
     private void give(LottoBuyer lottoBuyer, Lottos lottos) {
         lottoBuyer.receive(lottos);
+        ResultView.printLottos(lottos);
     }
 
-    private void pay(LottoBuyer lottoBuyer, Matchs matchs) {
-        lottoBuyer.earn(matchs.calculateWinningAmount());
+    private void pay(LottoBuyer lottoBuyer, Money winningAmount) {
+        lottoBuyer.earn(winningAmount);
+        ResultView.printRateOfEarning(lottoBuyer.calculateRateOfEarning());
     }
 
-    private Money sellTo(LottoBuyer lottoBuyer) {
-        return lottoBuyer.buy();
+    private void sellTo(LottoBuyer lottoBuyer) {
+        InputView.printInputBuyAmount();
+        Money receivedMoney = receiveMoney();
+        Lottos lottos = lottoGenerator.generate(receivedMoney);
+        ResultView.printResultBuyCount(lottos.size());
+        give(lottoBuyer, lottos);
     }
 
-    private long calculateCountOfLotto(Money amount) {
-        return (long) amount.divide(LOTTO_AMOUNT);
+    private Money receiveMoney() {
+        String buyAmount = scanner.nextLine();
+        return new Money(Long.parseLong(buyAmount));
     }
 }
