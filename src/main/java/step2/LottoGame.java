@@ -18,7 +18,9 @@ public class LottoGame {
 
         int money = getMoney(scanner, inputView);
         inputView.confirmComment(money);
-        PurchasedLotto purchasedLottoList = LottoFactory.of(money);
+
+        int manualLottoCount = getManualLottoCount(scanner, inputView);
+        PurchasedLotto purchasedLottoList = LottoFactory.of(money, manualLottoCount);
 
         LottoView lottoView = new LottoView(purchasedLottoList);
         ResultView resultView = new ResultView(purchasedLottoList);
@@ -40,6 +42,11 @@ public class LottoGame {
         resultView.printProfit(money);
     }
 
+    private static int getManualLottoCount(Scanner scanner, InputView inputView) {
+        inputView.inputManualLottoCount();
+        return scanner.nextInt();
+    }
+
     private static int getBonusNumber(Scanner scanner, ResultView resultView) {
         resultView.bonusNumberComment();
         return scanner.nextInt();
@@ -51,7 +58,7 @@ public class LottoGame {
     }
 
     private static int getMoney(Scanner scanner, InputView inputView) {
-        inputView.inputComment();
+        inputView.inputMoneyComment();
         return scanner.nextInt();
     }
 }
