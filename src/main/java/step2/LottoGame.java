@@ -1,8 +1,11 @@
 package step2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import step2.domain.LotteryWin;
 import step2.domain.LottoFactory;
+import step2.domain.ManualLotto;
 import step2.domain.PurchasedLotto;
 import step2.domain.WinningNumbers;
 import step2.service.LottoService;
@@ -17,10 +20,14 @@ public class LottoGame {
         InputView inputView = new InputView();
 
         int money = getMoney(scanner, inputView);
-        inputView.confirmComment(money);
-
         int manualLottoCount = getManualLottoCount(scanner, inputView);
+
+        inputView.inputManualLottoNumber();
+        List<String> manualLottoList = getManualLottoList(scanner, manualLottoCount);
+
+        ManualLotto manualLotto = new ManualLotto(manualLottoList);
         PurchasedLotto purchasedLottoList = LottoFactory.of(money, manualLottoCount);
+        purchasedLottoList.addManualLottos(manualLotto);
 
         LottoView lottoView = new LottoView(purchasedLottoList);
         ResultView resultView = new ResultView(purchasedLottoList);
@@ -40,6 +47,14 @@ public class LottoGame {
 
         resultView.printStatics();
         resultView.printProfit(money);
+    }
+
+    private static List<String> getManualLottoList(Scanner scanner, int manualLottoCount) {
+        List<String> store = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            store.add(scanner.next());
+        }
+        return store;
     }
 
     private static int getManualLottoCount(Scanner scanner, InputView inputView) {

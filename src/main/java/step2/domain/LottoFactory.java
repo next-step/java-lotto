@@ -11,9 +11,9 @@ public class LottoFactory {
     }
 
     public static PurchasedLotto of(int money, int manualLottoCount) {
+        validateInput(money);
         int autoLottoPurchasedMoney = money - manualLottoCount * PRICE;
-        validateInput(autoLottoPurchasedMoney);
-        return getPurchasedLotto(autoLottoPurchasedMoney);
+        return toPurchasedLotto(autoLottoPurchasedMoney);
     }
 
     private static PurchasedLotto getPurchasedLotto(int money) {
@@ -31,5 +31,11 @@ public class LottoFactory {
         if (money < PRICE) {
             throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다.");
         }
+    }
+
+    private static PurchasedLotto toPurchasedLotto(int autoLottoPurchasedMoney) {
+        return autoLottoPurchasedMoney < PRICE
+            ? new PurchasedLotto()
+            : getPurchasedLotto(autoLottoPurchasedMoney);
     }
 }

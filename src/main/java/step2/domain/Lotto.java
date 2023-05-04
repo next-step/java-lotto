@@ -41,7 +41,7 @@ public class Lotto {
         return this.pickedLottoNumbers.match(winningNumbers);
     }
 
-    public boolean contains(int number) {
+    public boolean containBonusNumber(int number) {
         return this.pickedLottoNumbers.contains(number);
     }
 
