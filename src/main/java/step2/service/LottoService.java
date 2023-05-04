@@ -1,19 +1,22 @@
 package step2.service;
 
 import step2.domain.LotteryWin;
+import step2.domain.ManualLotto;
 import step2.domain.PurchasedLotto;
 
 public class LottoService {
 
-    private final LotteryWin lotteryWin;
-    public final PurchasedLotto purchasedLotto;
+    private final PurchasedLotto purchasedLottoList;
 
-    public LottoService(LotteryWin lotteryWin, PurchasedLotto purchasedLottoList) {
-        this.lotteryWin = lotteryWin;
-        this.purchasedLotto = purchasedLottoList;
+    public LottoService(PurchasedLotto purchasedLottoList) {
+        this.purchasedLottoList = purchasedLottoList;
     }
 
-    public void matchResult() {
-        lotteryWin.confirm(purchasedLotto);
+    public void purchase(ManualLotto manualLotto){
+        purchasedLottoList.addManualLottos(manualLotto);
+    }
+
+    public void matchResult(LotteryWin lotteryWin) {
+        lotteryWin.confirm(purchasedLottoList);
     }
 }

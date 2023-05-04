@@ -22,35 +22,33 @@ public class LottoGame {
         int money = getMoney(scanner, inputView);
         int manualLottoCount = getManualLottoCount(scanner, inputView);
 
+        PurchasedLotto purchasedLottoList = LottoFactory.of(money, manualLottoCount);
+
         inputView.inputManualLottoNumber();
         List<String> manualLottoList = getManualLottoList(scanner, manualLottoCount);
 
-        ManualLotto manualLotto = new ManualLotto(manualLottoList);
-        PurchasedLotto purchasedLottoList = LottoFactory.of(money, manualLottoCount);
-        purchasedLottoList.addManualLottos(manualLotto);
+        LottoService lottoService = new LottoService(purchasedLottoList);
+        lottoService.purchase(new ManualLotto(manualLottoList));
+
 
         LottoView lottoView = new LottoView(purchasedLottoList);
-        ResultView resultView = new ResultView(purchasedLottoList);
-
         lottoView.printLotto();
 
+        ResultView resultView = new ResultView(purchasedLottoList);
         String winningNumbers = getWinningNumbers(scanner, resultView);
         int bonusNumber = getBonusNumber(scanner, resultView);
 
-        LottoService lottoService =
-            new LottoService(
-                new LotteryWin(new WinningNumbers(winningNumbers), bonusNumber),
-                purchasedLottoList
-            );
-
-        lottoService.matchResult();
+        lottoService.matchResult(
+            new LotteryWin(new WinningNumbers(winningNumbers), bonusNumber)
+        );
 
         resultView.printStatics();
         resultView.printProfit(money);
     }
 
     private static List<String> getManualLottoList(Scanner scanner, int manualLottoCount) {
-        List<String> store = new ArrayList<>();
+        List<String> store = new ArrayList<>(manualLottoCount);
+
         for (int i = 0; i < manualLottoCount; i++) {
             store.add(scanner.next());
         }
