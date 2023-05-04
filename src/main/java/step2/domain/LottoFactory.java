@@ -10,9 +10,10 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static PurchasedLotto of(int money) {
-        validateInput(money);
-        return getPurchasedLotto(money);
+    public static PurchasedLotto of(int money, int manualLottoCount) {
+        int autoLottoPurchasedMoney = money - manualLottoCount * PRICE;
+        validateInput(autoLottoPurchasedMoney);
+        return getPurchasedLotto(autoLottoPurchasedMoney);
     }
 
     private static PurchasedLotto getPurchasedLotto(int money) {
