@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.raffle.LottoRaffleGenerator;
+import lotto.domain.round.LottoRound;
 import lotto.domain.round.LottoRoundJudge;
 import lotto.domain.round.LottoRoundNumbers;
 import lotto.domain.round.LottoRoundResult;
-import lotto.domain.round.LottoRound;
 
 public class LottoGame {
 

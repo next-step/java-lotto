@@ -3,7 +3,6 @@ package calculator.domain;
 import calculator.domain.operator.CalculateOperateServiceLocator;
 import calculator.domain.operator.CalculatorOperateService;
 import java.util.ArrayDeque;
-import java.util.EmptyStackException;
 import util.CollectionUtils;
 
 public class Calculator {
