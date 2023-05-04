@@ -18,15 +18,11 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto_생성_테스트")
     public void Lotto_생성_테스트() {
-
         Lotto t_lotto = new Lotto(new TestLottoGenerator());
-
         List<Integer> numbers = t_lotto.getNumbers();
-        String name = t_lotto.getName();
-
         assertThat(numbers).containsAnyOf(1, 2, 3, 4, 5, 6);
-
     }
+
     static Stream<Arguments> generateRankData() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, KLottoRank.FIRST),
