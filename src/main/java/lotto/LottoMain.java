@@ -5,7 +5,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class LottoMain {
@@ -21,6 +20,4 @@ public class LottoMain {
         lottoController.buy();
         lottoController.result();
     }
-
-
 }

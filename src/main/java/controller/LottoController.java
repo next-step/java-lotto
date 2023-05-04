@@ -1,12 +1,9 @@
 package controller;
 
 import lotto.LottoGame;
-import lotto.LottoNumber;
 import lotto.LottoScore;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoController {
     private final InputView inputView;
