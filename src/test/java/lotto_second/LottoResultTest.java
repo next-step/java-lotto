@@ -15,8 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoResultTest {
 
 
-    @DisplayName("로또 당첨결과 통계 확인")
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} ===> 로또 당첨결과 통계 확인 등수 : {0} , 인원 : {1} ")
     @CsvSource(value = {"FIRST:1", "SECOND:1", "THIRD:0", "FOURTH:0", "FIFTH:0"}, delimiter = ':')
     public void countOfMatch(Rank input, Integer expected) {
         List<LottoNumber> lottoNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(12), new LottoNumber(33), new LottoNumber(44), new LottoNumber(15), new LottoNumber(36));
@@ -27,8 +26,7 @@ public class LottoResultTest {
         String bonusNumber = "7";
 
         LottoWinner lottoWinner = new LottoWinner(winnerLottoInput, bonusNumber);
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateResult(tickets, lottoWinner);
+        LottoResult lottoResult = tickets.calculateResult(lottoWinner);
 
         assertThat(lottoResult.getCountOfMatch(input)).isEqualTo(expected);
     }
@@ -44,8 +42,8 @@ public class LottoResultTest {
         String bonusNumber = "7";
 
         LottoWinner lottoWinner = new LottoWinner(winnerLottoInput, bonusNumber);
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateResult(tickets, lottoWinner);
+        LottoResult lottoResult = tickets.calculateResult(lottoWinner);
+
         double expectedRevenueRate = (double) (1 * 2_000_000_000 + 1 * 30_000_000) / (2 * 1_000);
         assertThat(lottoResult.getRevenueRate()).isEqualTo(expectedRevenueRate);
     }

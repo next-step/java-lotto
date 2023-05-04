@@ -8,6 +8,8 @@ import lotto_second.util.LottoValidate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoService {
     private static final int LOTTO_MIN_NUMBER = 1;
@@ -36,14 +38,25 @@ public class LottoService {
         return new Lotto(lottoNumbers);
     }
 
-    public LottoTickets generateTickets(String purchaseAmount) {
-        int ticketCount = LottoValidate.ticketCount(purchaseAmount);
+    public LottoTickets generateAutoTickets(Integer autoTicketCount) {
         List<Lotto> tickets = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
+        for (int i = 0; i < autoTicketCount; i++) {
             tickets.add(generateTicket());
         }
 
         return new LottoTickets(tickets);
     }
 
+    public LottoTickets parseManualTickets(List<String> manualInputTicket) {
+        List<Lotto> lottoTickets = manualInputTicket.stream()
+                .map(this::parseManualTicket)
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
+    }
+
+    private Lotto parseManualTicket(String input) {
+        Set<LottoNumber> lottoNumbers = LottoValidate.parseLottoNumbers(input);
+        LottoValidate.validateLottoNumbers(lottoNumbers);
+        return new Lotto(new ArrayList<>(lottoNumbers));
+    }
 }
