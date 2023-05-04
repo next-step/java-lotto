@@ -28,6 +28,7 @@ public class LottoGameTest {
 
     gameSetting = LottoGameSetting.builder()
         .raffleGenerator(fixedRaffleGenerator)
+        .pricePerGame(1000)
         .distinctNumberOnly(true)
         .build();
   }
@@ -64,6 +65,7 @@ public class LottoGameTest {
     // given
     LottoGameSetting setting = LottoGameSetting.builder()
         .raffleGenerator(fixedRaffleGenerator)
+        .pricePerGame(1000)
         .distinctNumberOnly(true)
         .build();
 
@@ -81,6 +83,7 @@ public class LottoGameTest {
     // given
     LottoGameSetting setting = LottoGameSetting.builder()
         .raffleGenerator(duplicateFixedRaffleGenerator)
+        .pricePerGame(1000)
         .distinctNumberOnly(true)
         .build();
 
