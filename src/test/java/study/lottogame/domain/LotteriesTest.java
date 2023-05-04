@@ -19,9 +19,10 @@ public class LotteriesTest {
   public void calculateGameResult(String[] numbers, Rank rank) {
     Lotteries lotteries = new Lotteries(List.of(LotteryFactory.create(numbers)));
     Lottery winningLottery = LotteryFactory.create(new String[]{"1", "2", "3", "4", "5", "6"});
+    LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
 
     GameResult gameResult = lotteries
-        .calculateGameResult(winningLottery);
+        .calculateGameResult(winningLottery, bonusLottoNumber);
 
     Map<Rank, Integer> prizeStaticsMap = gameResult.getPrizeStaticsMap();
     assertThat(prizeStaticsMap.get(rank)).isEqualTo(1);
@@ -31,7 +32,10 @@ public class LotteriesTest {
   public static Stream<Arguments> createTestLottery() {
     return Stream.of(
         Arguments.of(new String[]{"1", "2", "3", "4", "5", "6"}, Rank.FIRST),
-        Arguments.of(new String[]{"4", "5", "6", "7", "8", "9"}, Rank.FOURTH),
+        Arguments.of(new String[]{"1", "2", "3", "4", "5", "7"}, Rank.SECOND),
+        Arguments.of(new String[]{"1", "2", "3", "4", "5", "8"}, Rank.THIRD),
+        Arguments.of(new String[]{"1", "2", "3", "4", "7", "8"}, Rank.FOURTH),
+        Arguments.of(new String[]{"1", "2", "3", "7", "8", "9"}, Rank.FIFTH),
         Arguments.of(new String[]{"1", "11", "12", "13", "14", "15"}, Rank.MISS)
     );
   }

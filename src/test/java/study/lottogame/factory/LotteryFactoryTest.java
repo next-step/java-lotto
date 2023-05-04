@@ -26,8 +26,8 @@ public class LotteryFactoryTest {
     Lottery lottery = LotteryFactory.create(new String[]{"1", "2", "3", "4", "5", "6"});
 
     assertThat(lottery.getLottoNumbers()).hasSize(Lottery.LOTTO_NUMBER_COUNT);
-    assertThat(lottery.getLottoNumbers()).contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+    assertThat(lottery.getLottoNumbers()).contains(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
   }
 
   @DisplayName("6자리가 아닌 로또는 생성할 수 없다.")
