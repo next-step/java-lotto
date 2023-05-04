@@ -6,9 +6,10 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final Money LOTTO_AMOUNT = new Money(1_000L);
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(long... lottoNumbers) {
+    public Lotto(int... lottoNumbers) {
         this.lottoNumbers = Arrays.stream(lottoNumbers)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
