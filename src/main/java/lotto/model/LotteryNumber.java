@@ -13,13 +13,13 @@ public class LotteryNumber {
         this.number = numberGenerator.generate();
     }
 
+    public boolean isIn(List<Integer> winNumbers) {
+        return winNumbers.contains(number);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(number);
-    }
-
-    public boolean isIn(List<Integer> winNumbers) {
-        return winNumbers.contains(number);
     }
 
     @Override

@@ -17,27 +17,35 @@ public class LotteryTickets {
     }
 
     public Map<Win, Integer> getWinTotal(List<Integer> winNumbers) {
-        Map<Win, Integer> winTotal = new EnumMap<>(Win.class);
-        winTotal.put(Win.WIN_3, 0);
-        winTotal.put(Win.WIN_4, 0);
-        winTotal.put(Win.WIN_5, 0);
-        winTotal.put(Win.WIN_6, 0);
+        Map<Win, Integer> winTotal = initialize();
         tickets.forEach(ticket -> {
             int winPoint = ticket.compare(winNumbers);
-            if (winPoint == 3) {
-                winTotal.put(Win.WIN_3, winTotal.get(Win.WIN_3) + 1);
-            }
-            if (winPoint == 4) {
-                winTotal.put(Win.WIN_4, winTotal.get(Win.WIN_4) + 1);
-            }
-            if (winPoint == 5) {
-                winTotal.put(Win.WIN_5, winTotal.get(Win.WIN_5) + 1);
-            }
-            if (winPoint == 6) {
-                winTotal.put(Win.WIN_6, winTotal.get(Win.WIN_6) + 1);
-            }
+            countWinTotal(winTotal, winPoint);
         });
         return winTotal;
+    }
+
+    private Map<Win, Integer> initialize() {
+        Map<Win, Integer> winTotal = new EnumMap<>(Win.class);
+        for (int i = 0; i < Win.values().length; i++) {
+            winTotal.put(Win.values()[i], 0);
+        }
+        return winTotal;
+    }
+
+    private static void countWinTotal(Map<Win, Integer> winTotal, int winPoint) {
+        if (winPoint == 3) {
+            winTotal.put(Win.WIN_3, winTotal.get(Win.WIN_3) + 1);
+        }
+        if (winPoint == 4) {
+            winTotal.put(Win.WIN_4, winTotal.get(Win.WIN_4) + 1);
+        }
+        if (winPoint == 5) {
+            winTotal.put(Win.WIN_5, winTotal.get(Win.WIN_5) + 1);
+        }
+        if (winPoint == 6) {
+            winTotal.put(Win.WIN_6, winTotal.get(Win.WIN_6) + 1);
+        }
     }
 
     public int size() {

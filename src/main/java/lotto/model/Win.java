@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public enum Win {
@@ -22,6 +24,13 @@ public enum Win {
             sum += Win.values()[i].getPrize() * winTotal.get(Win.values()[i]);
         }
         return sum;
+    }
+
+    public static String calculateProfitRate(int income, double outcome) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        double profit = income / outcome;
+        df.setRoundingMode(RoundingMode.FLOOR);
+        return df.format(profit);
     }
 
     public int getPoints() {
