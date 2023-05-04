@@ -16,7 +16,7 @@ import static step2.domain.MatchFactory.match;
 public class MatchRecordTest {
 
     @Test
-    void 당첨_번호와_일치하는_개수를_리스트로_반환한다() {
+    void 당첨_번호와_일치하는_개수를_맵_형태로_반환한다() {
 
         // given
         MatchRecord matchRecord = MatchRecord.createRecord();
@@ -30,7 +30,7 @@ public class MatchRecordTest {
         PurchaseNumbers purchaseNumbers = PurchaseNumbers.generate(numbers);
         List<Integer> winningNumbers = asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
-        WinningNumber lottoNumber = new WinningNumber(winningNumbers, bonusNumber);
+        WinningNumber lottoNumber = WinningNumber.generate(winningNumbers, bonusNumber);
 
         // when
         List<Match> matches = purchaseNumbers.countNumber(lottoNumber);

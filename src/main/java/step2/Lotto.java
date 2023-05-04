@@ -23,7 +23,7 @@ public class Lotto {
 
         List<Integer> winningNumber = InputView.winningNumber();
         int bonusNumber = InputView.bonusNumber();
-        WinningNumber lottoNumber = new WinningNumber(winningNumber, bonusNumber);
+        WinningNumber lottoNumber = WinningNumber.generate(winningNumber, bonusNumber);
 
         LottoResult result  = lottoGame.lottoResult(purchaseNumbers, lottoNumber);
         PrintView.lottoResult(result);

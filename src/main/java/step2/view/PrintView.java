@@ -2,6 +2,7 @@ package step2.view;
 
 import step2.domain.LottoResult;
 import step2.domain.Match;
+import step2.domain.Number;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +14,7 @@ public class PrintView {
 
     private PrintView() {}
 
-    public static void purchaseNumber(List<List<Integer>> purchaseNumber) {
+    public static void purchaseNumber(List<List<Number>> purchaseNumber) {
         System.out.println(purchaseNumber.size() + "를 구매하셨습니다.");
         purchaseNumber.forEach(list -> {
             Collections.sort(list);
