@@ -1,8 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LotteryTickets {
 
@@ -18,13 +16,28 @@ public class LotteryTickets {
         this.tickets = Collections.unmodifiableList(tickets);
     }
 
-    public int compare(List<Integer> winNumbers) {
-        int winSum = 0;
-        for (int i = 0; i < this.size(); i++) {
-            int winCount = this.tickets.get(i).compare(winNumbers);
-            winSum += winCount;
-        }
-        return winSum;
+    public Map<Win, Integer> getWinTotal(List<Integer> winNumbers) {
+        Map<Win, Integer> winTotal = new EnumMap<>(Win.class);
+        winTotal.put(Win.WIN_3, 0);
+        winTotal.put(Win.WIN_4, 0);
+        winTotal.put(Win.WIN_5, 0);
+        winTotal.put(Win.WIN_6, 0);
+        tickets.forEach(ticket -> {
+            int winPoint = ticket.compare(winNumbers);
+            if (winPoint == 3) {
+                winTotal.put(Win.WIN_3, winTotal.get(Win.WIN_3) + 1);
+            }
+            if (winPoint == 4) {
+                winTotal.put(Win.WIN_4, winTotal.get(Win.WIN_4) + 1);
+            }
+            if (winPoint == 5) {
+                winTotal.put(Win.WIN_5, winTotal.get(Win.WIN_5) + 1);
+            }
+            if (winPoint == 6) {
+                winTotal.put(Win.WIN_6, winTotal.get(Win.WIN_6) + 1);
+            }
+        });
+        return winTotal;
     }
 
     public int size() {

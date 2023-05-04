@@ -16,8 +16,6 @@ public class Main {
         if (winNumbers.size() != 6) {
             throw new RuntimeException("잘못된 로또 번호 목록입니다.");
         }
-
-        int winPoints = lotteryTickets.compare(winNumbers);
-        
+        BroadCast.showResult(lotteryTickets.getWinTotal(winNumbers));
     }
 }
