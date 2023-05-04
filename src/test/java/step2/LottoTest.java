@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.BonusNumber;
 import step2.domain.LotteryWin;
 import step2.domain.LottoFactory;
+import step2.domain.PickedLottoNumber;
 import step2.domain.PurchasedLotto;
 import step2.domain.TotalNumbers;
 import step2.domain.WinningNumbers;
@@ -30,9 +32,9 @@ class LottoTest {
     @DisplayName("로또 번호가 오름차순으로 정렬된다.")
     @Test
     void test4() throws Exception {
-        TotalNumbers totalNumbers = new TotalNumbers();
-
-        assertThat(totalNumbers.getRandomLottoNumber()).isSorted();
+        PickedLottoNumber pickedLottoNumber =
+            new PickedLottoNumber(new ArrayList<>(List.of(34, 22, 11, 43, 17, 45)));
+        assertThat(pickedLottoNumber.get()).isSorted();
     }
 
     @ParameterizedTest(name = "입력 금액만큼 로또를 구매한다.")
@@ -68,7 +70,7 @@ class LottoTest {
     @DisplayName("당첨 숫자가 45를 넘어가는 숫자가 포함될 경우 예외를 던진다.")
     @Test
     void test7() throws Exception {
-        String str = "1,3,5,6,46";
+        String str = "1,3,5,6,42,46";
 
         assertThatThrownBy(() ->
             new WinningNumbers(str)
@@ -79,7 +81,7 @@ class LottoTest {
     @DisplayName("당첨 숫자가 1이하의 숫자가 포함될 경우 예외를 던진다.")
     @Test
     void test8() throws Exception {
-        String str = "0,3,5,6,46";
+        String str = "0,3,5,6,42,46";
 
         assertThatThrownBy(() ->
             new WinningNumbers(str)
