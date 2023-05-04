@@ -12,6 +12,10 @@ public class Lottos {
     lottos = new LinkedList<>();
   }
 
+  public Lottos(List<Lotto> lottos) {
+    this.lottos = lottos;
+  }
+
   public List<Lotto> buy(int purchaseAmount) {
     valid(purchaseAmount);
     int purchaseNumber = purchaseAmount / LOTTO_PRICE;
@@ -22,6 +26,14 @@ public class Lottos {
     }
 
     return this.lottos;
+  }
+
+  public MatchesStatus findWinner(WinningNumbers winningNumbers) {
+    MatchesStatus matchesStatus = new MatchesStatus();
+    for (Lotto lotto : lottos) {
+      matchesStatus.findMatches(winningNumbers.howManyMatches(lotto));
+    }
+    return matchesStatus;
   }
 
   private void valid(int purchaseAmount) {

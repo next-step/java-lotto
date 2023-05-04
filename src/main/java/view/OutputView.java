@@ -2,6 +2,7 @@ package view;
 
 import java.util.List;
 import lotto.Lotto;
+import lotto.MatchesStatus;
 
 public class OutputView {
 
@@ -24,13 +25,14 @@ public class OutputView {
   public static void lastWeekWinningNumber() {
     System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
   }
-  public static void statistics(int threeMatches) {
+
+  public static void statistics(MatchesStatus matchesStatus) {
     System.out.println("\n당첨 통계");
     System.out.println("---------");
-//    System.out.println("3개 일치 (5000원)- " + threeMatches + "개");
-//    System.out.println("4개 일치 (50000원)- " + fourMatches + "개");
-//    System.out.println("5개 일치 (1500000원)- " + fiveMatches + "개");
-//    System.out.println("6개 일치 (2000000000원)- " + sixMatches + "개");
+    System.out.println("3개 일치 (5000원)- " + matchesStatus.getThreeMatches() + "개");
+    System.out.println("4개 일치 (50000원)- " + matchesStatus.getFourMatches() + "개");
+    System.out.println("5개 일치 (1500000원)- " + matchesStatus.getFiveMatches() + "개");
+    System.out.println("6개 일치 (2000000000원)- " + matchesStatus.getSixMatches() + "개");
 //    System.out.println("총 수익률은 " + threeMatches + "입니다.");
   }
 

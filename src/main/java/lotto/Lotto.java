@@ -21,4 +21,7 @@ public class Lotto {
     return lotto.toString();
   }
 
+  public boolean has(Integer winningNumber) {
+    return lotto.contains(winningNumber);
+  }
 }

@@ -1,4 +1,5 @@
 import lotto.Lottos;
+import lotto.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 
@@ -11,6 +12,7 @@ public class main {
     OutputView.lottos(lottos.buy(InputView.getIntValue()));
 
     OutputView.lastWeekWinningNumber();
-
-    }
+    InputView.getStringValue();
+    OutputView.statistics(lottos.findWinner(new WinningNumbers(InputView.getStringValue())));
   }
+}
