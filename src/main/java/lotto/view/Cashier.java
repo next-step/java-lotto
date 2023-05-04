@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.model.LotteryTicket;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Cashier {
@@ -12,7 +15,12 @@ public class Cashier {
         return money;
     }
 
-    public static void sayLottoCount(int count) {
+    public static void sayLotteryCount(int count) {
         System.out.println(count + "개를 구매했습니다.");
+    }
+
+    public static void showLotteryTickets(List<LotteryTicket> lotteryTickets) {
+        lotteryTickets.forEach(lotteryTicket -> System.out.println(lotteryTicket));
+        System.out.println();
     }
 }
