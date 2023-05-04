@@ -10,8 +10,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Map;
 
 public class WinningStatisticsTest {
     @ParameterizedTest
@@ -51,6 +53,54 @@ public class WinningStatisticsTest {
         }
 
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3000, 3", "4500, 4", "7000, 7"})
+    @DisplayName("로또 당첨 map 타입으로 반환")
+    public void lottoResultTest(String budget, int expect) {
+        Store store = new Store();
+        List<Lotto> lottoBundle = store.purchase(budget);
+
+        String strList = "1, 2, 3, 4, 5, 6";
+        InputConverter inputConverter = new InputConverter();
+
+        List<Integer> targetNumber = inputConverter.convertNumberToList(strList);
+
+        WinningStatistics winningStatistics = new WinningStatistics(targetNumber);
+
+        winningStatistics.compareWithTargetNumber(lottoBundle);
+        Map<Integer, Integer> result = winningStatistics.lottoResult(lottoBundle);
+
+        assertThat(result.size()).isEqualTo(7);
+
+        assertAll("key 확인",
+                () -> assertThat(result)
+                        .overridingErrorMessage("The map doesn't contain the key: %s", 1)
+                        .containsKey(1),
+
+                () -> assertThat(result)
+                        .overridingErrorMessage("The map doesn't contain the key: %s", 2)
+                        .containsKey(2),
+
+                () -> assertThat(result)
+                        .overridingErrorMessage("The map doesn't contain the key: %s", 3)
+                        .containsKey(3),
+
+                () -> assertThat(result)
+                        .overridingErrorMessage("The map doesn't contain the key: %s", 4)
+                        .containsKey(4),
+
+                () -> assertThat(result)
+                        .overridingErrorMessage("The map doesn't contain the key: %s", 5)
+                        .containsKey(5),
+
+                () -> assertThat(result)
+                        .overridingErrorMessage("The map doesn't contain the key: %s", 6)
+                        .containsKey(6)
+        );
+
+    }
+
 
 
 }

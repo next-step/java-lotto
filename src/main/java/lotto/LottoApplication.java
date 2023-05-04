@@ -27,7 +27,8 @@ public class LottoApplication {
         WinningStatistics winningStatistics = new WinningStatistics(inputConverter.convertNumberToList(strList));
 
         winningStatistics.compareWithTargetNumber(lottoBundle);
-        resultView.showStatistic(lottoBundle, store.PRICE);
+
+//        resultView.showStatistic(lottoBundle, store.PRICE);
 
     }
 
