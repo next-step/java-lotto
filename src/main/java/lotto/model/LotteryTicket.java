@@ -15,9 +15,7 @@ public class LotteryTicket {
         List<LotteryNumber> numbers = new ArrayList<>();
         while (numbers.size() < NUMBER_PER_TICKET) {
             LotteryNumber newNumber = new LotteryNumber(new RandomNumberGenerator());
-            if (!numbers.contains(newNumber)) {
-                numbers.add(newNumber);
-            }
+            addIfNotExist(numbers, newNumber);
         }
         validate(numbers);
         this.numbers = numbers;
@@ -28,9 +26,14 @@ public class LotteryTicket {
         this.numbers = numbers;
     }
 
+    private void addIfNotExist(List<LotteryNumber> numbers, LotteryNumber newNumber) {
+        if (!numbers.contains(newNumber)) {
+            numbers.add(newNumber);
+        }
+    }
+
     private void validate(List<LotteryNumber> numbers) {
-        if (numbers.size() != NUMBER_PER_TICKET ||
-                numbers.stream().distinct().count() != NUMBER_PER_TICKET) {
+        if (numbers.size() != NUMBER_PER_TICKET || numbers.stream().distinct().count() != NUMBER_PER_TICKET) {
             throw new RuntimeException("잘못된 로또 번호 목록입니다.");
         }
     }
