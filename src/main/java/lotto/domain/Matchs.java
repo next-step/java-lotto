@@ -1,13 +1,9 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
+import java.util.*;
 public class Matchs {
 
-    Map<Match, Long> matchs;
+    private final Map<Match, Long> matchs;
 
     public Matchs(Map<Match, Long> matchs) {
         this.matchs = matchs;
@@ -19,13 +15,9 @@ public class Matchs {
                 .reduce(new Money(0L), Money::add);
     }
 
-    @Override
-    public String toString() {
-        return Arrays.stream(Match.values())
-                .map(match -> match.getMessage(matchs.getOrDefault(match, 0L)))
-                .collect(Collectors.joining("\n"));
+    public Map<Match, Long> getMatchs() {
+        return Collections.unmodifiableMap(matchs);
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

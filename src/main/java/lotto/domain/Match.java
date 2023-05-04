@@ -30,7 +30,7 @@ public enum Match {
         return money;
     }
 
-    public String getMessage(long count) {
-        return String.format(message, count);
+    public String getMessage() {
+        return message;
     }
 }
