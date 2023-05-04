@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,5 +55,13 @@ class LotteryTest {
     void wrongValueOfLotteryNumbers() {
         assertThrows(IllegalArgumentException.class, () -> Lottery.createLottery(lessValueOfLotteryNumbers));
         assertThrows(IllegalArgumentException.class, () -> Lottery.createLottery(moreValueOfLotteryNumbers));
+    }
+
+    @Test
+    @DisplayName("입력받은 숫자 값이 정렬되어 있지 않더라도 정렬해서 저장한다")
+    void unorderedLotteryNumbers() {
+        List<Integer> unorderedLotteryNumbers = Arrays.asList(6, 5, 4, 3, 2, 1);
+        assertEquals(defaultLottery, Lottery.createLottery(unorderedLotteryNumbers));
+
     }
 }

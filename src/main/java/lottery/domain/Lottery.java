@@ -1,6 +1,7 @@
 package lottery.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ public class Lottery {
     private Lottery(List<Integer> numbers) {
         validate(numbers);
         this.numbers = new ArrayList<>(numbers);
+        Collections.sort(this.numbers);
     }
 
     public static Lottery createLottery(List<Integer> numbers) {
