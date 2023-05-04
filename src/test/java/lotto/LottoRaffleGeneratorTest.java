@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import java.util.Set;
 import lotto.domain.raffle.BaseKoreaLottoRaffleGenerator;
 import lotto.domain.raffle.LottoRaffleGenerator;
 import org.assertj.core.api.Assertions;
