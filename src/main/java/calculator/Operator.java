@@ -17,7 +17,7 @@ public enum Operator {
         this.expression = expression;
     }
 
-    static Operator mathes(String symbol) {
+    static Operator of(String symbol) {
         return Arrays.stream(Operator.values())
                 .filter(operator -> operator.symbol.equals(symbol))
                 .findAny()
