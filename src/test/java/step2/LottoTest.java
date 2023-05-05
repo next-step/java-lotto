@@ -13,9 +13,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.BonusNumber;
 import step2.domain.LotteryWin;
 import step2.domain.LottoFactory;
-import step2.domain.PickedLottoNumber;
+import step2.domain.LottoNumbers;
+import step2.domain.PickedLottoNumbers;
 import step2.domain.PurchasedLotto;
-import step2.domain.TotalNumbers;
 import step2.domain.WinningNumbers;
 import step2.exception.CustomNumberFormatException;
 
@@ -24,17 +24,20 @@ class LottoTest {
     @DisplayName("로또 번호 6자리를 출력한다.")
     @Test
     void test1() throws Exception {
-        TotalNumbers totalNumbers = new TotalNumbers();
+        LottoNumbers lottoNumbers = new LottoNumbers();
 
-        assertThat(totalNumbers.getRandomLottoNumber()).hasSize(6);
+        assertThat(lottoNumbers.getRandomLottoNumber()).hasSize(6);
     }
 
     @DisplayName("로또 번호가 오름차순으로 정렬된다.")
     @Test
     void test4() throws Exception {
-        PickedLottoNumber pickedLottoNumber =
-            new PickedLottoNumber(new ArrayList<>(List.of(34, 22, 11, 43, 17, 45)));
-        assertThat(pickedLottoNumber.get()).isSorted();
+        PickedLottoNumbers pickedLottoNumbers =
+            new PickedLottoNumbers(new ArrayList<>(List.of(34, 22, 11, 43, 17, 45)));
+        assertThat(pickedLottoNumbers)
+            .isEqualTo(
+                new PickedLottoNumbers(new ArrayList<>(List.of(34, 22, 11, 43, 17, 45)))
+            );
     }
 
     @ParameterizedTest(name = "입력 금액만큼 로또를 구매한다.")

@@ -35,7 +35,7 @@ public class LottoMatchTest {
         @Test
         void test6() throws Exception {
 
-            List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 11, 12, 13));
+            List<Integer> numbers = List.of(1, 2, 3, 11, 12, 13);
 
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
@@ -48,7 +48,7 @@ public class LottoMatchTest {
         @DisplayName("당첨 번호와 4개가 일치하는 경우를 나타낼 수 있다.")
         @Test
         void test7() throws Exception {
-            List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 8, 9));
+            List<Integer> numbers = List.of(1, 2, 3, 4, 8, 9);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
@@ -60,7 +60,7 @@ public class LottoMatchTest {
         @DisplayName("당첨 번호와 5개가 일치하는 경우를 나타낼 수 있다.")
         @Test
         void test8() throws Exception {
-            List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 9));
+            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 9);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
@@ -72,7 +72,7 @@ public class LottoMatchTest {
         @DisplayName("당첨 번호와 6개가 일치하는 경우를 나타낼 수 있다.")
         @Test
         void test9() throws Exception {
-            List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
+            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
@@ -84,7 +84,7 @@ public class LottoMatchTest {
         @DisplayName("3등을 나타낼 수 있다.")
         @Test
         void test11() throws Exception {
-            List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 44));
+            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 44);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
@@ -96,7 +96,7 @@ public class LottoMatchTest {
         @DisplayName("2등을 나타낼 수 있다.")
         @Test
         void test10() throws Exception {
-            List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 22));
+            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 22);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
@@ -125,7 +125,6 @@ public class LottoMatchTest {
         @Test
         void test2() throws Exception {
             lotteryWin.confirm(purchasedLotto);
-
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
             assertThat(rateOfReturn).isEqualTo("406311.00");
@@ -134,13 +133,11 @@ public class LottoMatchTest {
         @DisplayName("수동 입력을 포함한 수익률을 나타낼 수 있다(보너스 숫자 포함).")
         @Test
         void test3() throws Exception {
-            purchasedLotto.addManualLottos(
-                new ManualLotto(new ArrayList<>(List.of("1,2,3,7,8,9")))
+            purchasedLotto.addManualLotto(
+                new ManualLotto(List.of("1,2,3,7,8,9"))
             );
 
             lotteryWin.confirm(purchasedLotto);
-
-
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
             assertThat(rateOfReturn).isEqualTo("406312.00");
@@ -150,12 +147,12 @@ public class LottoMatchTest {
         private List<Lotto> getLottoList() {
             List<Lotto> lottoList = new ArrayList<>();
 
-            List<Integer> match3 = new ArrayList<>(List.of(1, 2, 3, 7, 8, 9));
-            List<Integer> match4 = new ArrayList<>(List.of(1, 2, 3, 4, 33, 44));
-            List<Integer> match5 = new ArrayList<>(List.of(1, 2, 3, 4, 5, 44));
-            List<Integer> match6 = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
-            List<Integer> match0 = new ArrayList<>(List.of(11, 12, 33, 34, 44, 45));
-            List<Integer> matchBonus = new ArrayList<>(List.of(1, 2, 3, 4, 5, 22));
+            List<Integer> match3 = List.of(1, 2, 3, 7, 8, 9);
+            List<Integer> match4 = List.of(1, 2, 3, 4, 33, 44);
+            List<Integer> match5 = List.of(1, 2, 3, 4, 5, 44);
+            List<Integer> match6 = List.of(1, 2, 3, 4, 5, 6);
+            List<Integer> match0 = List.of(11, 12, 33, 34, 44, 45);
+            List<Integer> matchBonus = List.of(1, 2, 3, 4, 5, 22);
 
             lottoList.add(new Lotto(match3));
             lottoList.add(new Lotto(match4));
