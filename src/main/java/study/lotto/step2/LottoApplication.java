@@ -10,12 +10,12 @@ import static study.lotto.step2.presentation.ConsoleInputView.*;
 public class LottoApplication {
     public static void main(String[] args) {
         Lottos lottos = lottoSeller().sell(askPurchaseAmount());
-        LottosInformationOutputView lottosInformation = new LottosInformationOutputView(lottos);
-        lottosInformation.printInformation();
+        LottosInformationOutputView lottosInformationOutputView = new LottosInformationOutputView(lottos);
+        lottosInformationOutputView.printInformation();
 
         LottoResults lottoResults = winningLotto().resultsOf(lottos);
-        LottoResultsStatisticOutputView lottoResultsStatisticOutputViewView = new LottoResultsStatisticOutputView(lottoResults);
-        lottoResultsStatisticOutputViewView.printWinningStatistic();
+        LottoResultsStatisticOutputView lottoResultsStatisticOutputView = new LottoResultsStatisticOutputView(lottoResults);
+        lottoResultsStatisticOutputView.printWinningStatistic();
     }
 
     private static WinningLotto winningLotto() {
