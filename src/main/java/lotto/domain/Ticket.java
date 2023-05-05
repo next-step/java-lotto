@@ -20,12 +20,12 @@ public class Ticket {
     }
 
     public static Ticket of (Set<Integer> integers) {
-        Ticket ticket = new Ticket(parseToLottoNumbers(integers));
+        Ticket ticket = new Ticket(toLottoNumbers(integers));
         ticket.validate();
         return ticket;
     }
 
-    private static Set<LottoNumber> parseToLottoNumbers(Set<Integer> numbers) {
+    private static Set<LottoNumber> toLottoNumbers(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer integer : numbers) {
             lottoNumbers.add(LottoNumber.of(integer));
