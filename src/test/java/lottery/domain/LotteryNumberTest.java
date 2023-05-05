@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LotteryNumberTest {
 
-    @ParameterizedTest(name = "로또 번호 범주 안에 들어가는 번호 입력시 정상 객체가 생성된다 init -> {0}")
+    @ParameterizedTest(name = "로또 번호는 1부터 45까의 수로 생성될 수 있다.  init -> {0}")
     @MethodSource("lotteryNumberProvider")
     void createObjectTest(int source) {
         assertDoesNotThrow(() -> new LotteryNumber(source));
@@ -23,7 +23,7 @@ class LotteryNumberTest {
                 MAX_LOTTERY_NUMBER);
     }
 
-    @ParameterizedTest(name = "로또 번호 범주 밖 번호 입력시 익셉션이 발생한다 init -> {0}")
+    @ParameterizedTest(name = "로또 번호 1 ~ 45 외의 번호 입력시 익셉션이 발생한다 init -> {0}")
     @ValueSource(ints = {-1,46})
     void createObjectExceptionTest(int source) {
         assertThatThrownBy(() -> new LotteryNumber(source))
