@@ -30,35 +30,11 @@ public class Game {
         GameResult result = new GameResult();
 
         for (Ticket ticket : tickets) {
-            int numberOfMatchedNumber = countMatches(ticket, winnerNumber);
-            boolean isBonus = ifMatchBonus(ticket, bonusNumber);
+            int numberOfMatchedNumber = ticket.countMatches(winnerNumber);
+            boolean isBonus = ticket.contain(bonusNumber);
             result.addCount(numberOfMatchedNumber, isBonus);
         }
 
         return result;
     }
-
-
-
-    private int countMatches(Ticket ticket, List<Integer> winnerNumber) {
-        int count = 0;
-        TicketNumber ticketNumber = ticket.numbers();
-        for (Integer number : ticketNumber.numbers()) {
-            count += addIfMatch(winnerNumber, number);
-        }
-        return count;
-    }
-
-    private int addIfMatch(List<Integer> numbers, int number) {
-        if (numbers.contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    private boolean ifMatchBonus(Ticket ticket, int bonusNumber) {
-        TicketNumber ticketNumber = ticket.numbers();
-        return ticketNumber.contain(bonusNumber);
-    }
-
 }
