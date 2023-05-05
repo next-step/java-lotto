@@ -20,7 +20,7 @@ public class Lotto {
 
         Tickets manualTickets = inputPresent.manualPurchases();
         Tickets autoTickets = Tickets.automaticIssue(totalPurchaseCount - tickets.count());
-        outputPresent.presentTickets(manualTickets,autoTickets);
+        outputPresent.presentTickets(manualTickets, autoTickets);
 
         WinnerTicket winnerTicket = new WinnerTicket(inputPresent.winningNumbers(), inputPresent.bonusNumber());
         Statics statics = new Statics(tickets, winnerTicket);

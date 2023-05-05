@@ -19,7 +19,7 @@ public class Ticket {
         this.validate();
     }
 
-    public static Ticket of (Set<Integer> integers) {
+    public static Ticket of(Set<Integer> integers) {
         Ticket ticket = new Ticket(toLottoNumbers(integers));
         ticket.validate();
         return ticket;

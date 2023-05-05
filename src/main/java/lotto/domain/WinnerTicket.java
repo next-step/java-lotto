@@ -46,6 +46,6 @@ public class WinnerTicket {
     public Prize checkLucky(Ticket thatTicket) {
         int matchCount = this.ticket.countMatchNumbers(thatTicket);
         boolean containsBonus = thatTicket.includeNumber(bonusNumber);
-        return Prize.calculatePrize(matchCount,containsBonus);
+        return Prize.calculatePrize(matchCount, containsBonus);
     }
 }

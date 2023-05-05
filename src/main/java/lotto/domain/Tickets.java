@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Tickets {
     private final List<Ticket> tickets;
@@ -20,6 +18,14 @@ public class Tickets {
         return new Tickets(new ArrayList<>());
     }
 
+    public static Tickets automaticIssue(int ticketCount) {
+        Tickets autoTickets = new Tickets();
+        for (int i = 0; i < ticketCount; i++) {
+            autoTickets.add(Ticket.auto());
+        }
+        return autoTickets;
+    }
+
     public int count() {
         return tickets.size();
     }
@@ -31,17 +37,6 @@ public class Tickets {
     public void add(Tickets tickets) {
         this.tickets.addAll(tickets.allTickets());
     }
-
-    public static Tickets automaticIssue(int ticketCount) {
-        Tickets autoTickets = new Tickets();
-        for (int i = 0; i < ticketCount; i++) {
-            autoTickets.add(Ticket.auto());
-        }
-        return autoTickets;
-    }
-
-
-
 
     public List<Ticket> allTickets() {
         return this.tickets;

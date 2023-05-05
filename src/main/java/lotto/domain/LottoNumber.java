@@ -30,7 +30,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber any() {
-        return LOTTO_NUMBER_CACHE[RANDOM.nextInt(HIGH_LIMIT-LOW_LIMIT) + LOW_LIMIT];
+        return LOTTO_NUMBER_CACHE[RANDOM.nextInt(HIGH_LIMIT - LOW_LIMIT) + LOW_LIMIT];
     }
 
     private static void rangeValidate(int lottoNumber) {
@@ -39,7 +39,6 @@ public class LottoNumber {
         }
         throw new LottoNumberOutOfRangeException();
     }
-
 
 
     public int getLottoNumber() {

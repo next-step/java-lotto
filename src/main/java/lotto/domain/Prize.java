@@ -20,22 +20,22 @@ public enum Prize {
     }
 
     public static Prize calculatePrize(int matchCount, boolean containsBonuns) {
-        if(matchCount < FIFTH.matchCount) {
+        if (matchCount < FIFTH.matchCount) {
             return BOOM;
         }
-        if(matchCount == FIFTH.matchCount) {
+        if (matchCount == FIFTH.matchCount) {
             return FIFTH;
         }
-        if(matchCount == FOURTH.matchCount) {
+        if (matchCount == FOURTH.matchCount) {
             return FOURTH;
         }
-        if((matchCount == THIRD.matchCount) && (containsBonuns == THIRD.bonusNumberMatch )){
+        if ((matchCount == THIRD.matchCount) && (containsBonuns == THIRD.bonusNumberMatch)) {
             return THIRD;
         }
-        if((matchCount == SECOND.matchCount) && (containsBonuns == SECOND.bonusNumberMatch )){
+        if ((matchCount == SECOND.matchCount) && (containsBonuns == SECOND.bonusNumberMatch)) {
             return SECOND;
         }
-        if(matchCount == FIRST.matchCount) {
+        if (matchCount == FIRST.matchCount) {
             return FIRST;
         }
         throw new RuntimeException("알수없는 계산 에러..");
