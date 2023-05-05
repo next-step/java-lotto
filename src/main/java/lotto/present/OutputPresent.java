@@ -15,11 +15,6 @@ public class OutputPresent {
     private static final String RETURN_RATE = "총 수익률은 %f2입니다";
     private static final String CONFIRM_PURCHASE = "수동으로 %s장, 자동으로 %s장 을 구매했습니다%s";
 
-
-    public OutputPresent() {
-    }
-
-
     public void presentWinners(WinnerPresentDTO winnerPresentDTO) {
         System.out.println(STATISTICS_HEAD);
         System.out.printf(PRIZE_5TH + System.lineSeparator(), winnerPresentDTO.getCountFifth());
