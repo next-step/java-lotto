@@ -42,4 +42,10 @@ public class WinnerTicket {
     private boolean matchCount(Ticket ticket, Prize prize) {
         return prize.isMatch(this.ticket.countMatchNumbers(ticket));
     }
+
+    public Prize checkLucky(Ticket thatTicket) {
+        int matchCount = this.ticket.countMatchNumbers(thatTicket);
+        boolean containsBonus = thatTicket.includeNumber(bonusNumber);
+        return Prize.calculatePrize(matchCount,containsBonus);
+    }
 }
