@@ -65,7 +65,7 @@ public class TicketTest {
         //given
         int expect = 4;
         //when
-        Ticket ticketA =  Ticket.of(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket ticketA = Ticket.of(Set.of(1, 2, 3, 4, 5, 6));
         Ticket ticketB = Ticket.of(Set.of(1, 2, 3, 4, 35, 36));
         //then
         assertAll("숫자 4개가 겹치는 두 티켓으로 검증한다",
