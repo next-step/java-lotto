@@ -17,6 +17,9 @@ public class LottoGameController {
         int money = InputView.readInt("구매금액을 입력해 주세요");
         int gameCount = lottoGames.howManyBuyGames(money);
         ResultView.printMessage(gameCount + "개를 구매했습니다.");
+        if (gameCount == 0) {
+            return;
+        }
 
         List<LottoGame> lottos = lottoGames.buyLottoGame(gameCount);
         ResultView.printList(lottos);

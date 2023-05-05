@@ -2,18 +2,12 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoGamesTest {
-
-    static final int DEFAULT_LOTTO_PRICE = 1000;
 
     LottoGames lottoGames = new LottoGames();
 
@@ -21,7 +15,7 @@ class LottoGamesTest {
     @ParameterizedTest
     @ValueSource(ints = {3000, 4000, 15000, 34000})
     public void 구매가능_게임_개수(int money) throws Exception {
-        assertThat(lottoGames.howManyBuyGames(money)).isEqualTo(money / DEFAULT_LOTTO_PRICE);
+        assertThat(lottoGames.howManyBuyGames(money)).isEqualTo(money / LottoCommonValue.DEFAULT_LOTTO_PRICE.value());
     }
 
     @DisplayName("개수만큼 로또 게임을 반환한다.")

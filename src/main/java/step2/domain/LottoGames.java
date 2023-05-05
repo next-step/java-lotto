@@ -1,20 +1,15 @@
 package step2.domain;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class LottoGames {
-    private static final int DEFAULT_NUMBER_COUNT = 6;
-    private static int DEFAULT_LOTTO_PRICE = 1000;
-    private static final int MINIMUM_MATH_COUNT = 3;
-    private static final int MAXIMUM_MATH_COUNT_EXCLUSIVE = 7;
 
     public LottoGames() {
     }
 
     public int howManyBuyGames(int money) {
         Objects.requireNonNull(money);
-        return new Integer(money / DEFAULT_LOTTO_PRICE);
+        return new Integer(money / LottoCommonValue.DEFAULT_LOTTO_PRICE.value());
     }
 
     public List<LottoGame> buyLottoGame(int gameCount) {
@@ -32,7 +27,7 @@ public class LottoGames {
     public LottoGame readWinningNumber(String stringNumber) {
         String[] numbers = splitByDelimiter(stringNumber);
         Set<Integer> integers = toSet(numbers);
-        if (integers.size() != DEFAULT_NUMBER_COUNT) {
+        if (integers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
             throw new IllegalArgumentException(stringNumber + " : 입력한 숫자를 확인해 주세요");
         }
         return new LottoGame(integers);

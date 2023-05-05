@@ -14,8 +14,8 @@ class RandomIntegersGeneratorTest {
     public void 랜덤_숫자_생성_배열크기검증() throws Exception {
         int defaultNumbersLength = 6;
         assertThat(RandomIntegersGenerator.createNumberList())
-                                    .size()
-                                    .isEqualTo(defaultNumbersLength);
+                .size()
+                .isEqualTo(defaultNumbersLength);
     }
 
     @DisplayName("랜덤 숫자 배열의 범위는 1부터 45까지이다.")

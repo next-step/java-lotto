@@ -7,8 +7,6 @@ import java.util.Set;
 
 public class LottoGame {
 
-    private static final int DEFAULT_NUMBER_COUNT = 6;
-
     private final List<Integer> lottoGame;
 
     public LottoGame(List<Integer> numbers) {
@@ -22,7 +20,7 @@ public class LottoGame {
     }
 
     private static void validInputNumber(Collection<Integer> numbers) {
-        if (numbers.size() != DEFAULT_NUMBER_COUNT) {
+        if (numbers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
             throw new IllegalArgumentException(numbers + " : 입력한 숫자를 확인해 주세요");
         }
     }

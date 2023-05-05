@@ -4,14 +4,10 @@ import java.util.stream.IntStream;
 
 public class LottoResultReport {
 
-    private static final int MINIMUM_MATH_COUNT = 3;
-    private static final int MAXIMUM_MATH_COUNT_EXCLUSIVE = 7;
-    private static final int DEFAULT_LOTTO_PRICE = 1000;
-
     private int[] lottoResultReport;
 
     public LottoResultReport() {
-        lottoResultReport = new int[MAXIMUM_MATH_COUNT_EXCLUSIVE];
+        lottoResultReport = new int[LottoCommonValue.MAXIMUM_MATH_COUNT_EXCLUSIVE.value()];
     }
 
     public LottoResultReport(int[] lottoResultReport) {
@@ -28,14 +24,15 @@ public class LottoResultReport {
 
     public double calculateProfit(int gameCount) {
         long profit = sum(lottoResultReport);
-        long cost = gameCount * DEFAULT_LOTTO_PRICE;
+        long cost = gameCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value();
         System.out.println("수익률: " + profit + "  비용: " + cost);
         return calculateProfitRate(profit, cost);
     }
 
     long sum(int[] lottoReport) {
         System.out.println();
-        return IntStream.range(MINIMUM_MATH_COUNT, MAXIMUM_MATH_COUNT_EXCLUSIVE)
+        return IntStream.range(LottoCommonValue.MINIMUM_MATH_COUNT_INCLUSIVE.value(),
+                        LottoCommonValue.MAXIMUM_MATH_COUNT_EXCLUSIVE.value())
                 .mapToLong(i -> PrizeMoney.toPrizeMoney(i) * lottoReport[i]).sum();
     }
 
