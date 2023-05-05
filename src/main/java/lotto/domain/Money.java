@@ -16,13 +16,13 @@ public class Money {
         return new Money(this.amount - amount.amount);
     }
 
-    public double division(Money money) {
-        return (double) this.amount / money.amount;
+    public boolean isGreaterThan(Money money) {
+
+        return amount >= money.amount;
     }
 
-    public boolean isGreaterThanZero() {
-        return amount > 0;
+    public long getAmount() {
+        return amount;
     }
-
 }
 
