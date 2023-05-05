@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", (x, y) -> x + y),
-    MINUS("-", (x, y) -> x - y),
-    MULTIPLY("*", (x, y) -> x * y),
-    DIVIDE("/", (x, y) -> x / y);
+    PLUS("+", Number::plus),
+    MINUS("-", Number::minus),
+    MULTIPLY("*", Number::multiply),
+    DIVIDE("/", Number::divide);
 
     private final String symbol;
-    private final BiFunction<Integer, Integer, Integer> expression;
+    private final BiFunction<Number, Number, Number> expression;
 
-    Operator(String symbol, BiFunction<Integer, Integer, Integer> expression) {
+    Operator(String symbol, BiFunction<Number, Number, Number> expression) {
         this.symbol = symbol;
         this.expression = expression;
     }
@@ -25,11 +25,9 @@ public enum Operator {
     }
 
     Number calculateTwoNumber(Number first, Number second) {
-        int firstNumber = first.getNumber();
-        int secondNumber = second.getNumber();
-        Integer apply = expression.apply(firstNumber, secondNumber);
+        Number result = expression.apply(first, second);
 
-        return new Number(apply);
+        return result;
     }
 
 }

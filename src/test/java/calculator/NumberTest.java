@@ -24,4 +24,11 @@ class NumberTest {
         assertTrue(new Number(input).getNumber() < 0);
     }
 
+    @DisplayName("양수값 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"1","2","1000"})
+    void 양수값_숫자_입력_테스트(String input) {
+        assertTrue(new Number(input).getNumber() > 0);
+    }
+
 }

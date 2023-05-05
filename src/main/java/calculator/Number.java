@@ -25,4 +25,20 @@ public class Number {
         }
     }
 
+    public Number plus(Number other) {
+        return new Number(this.number + other.getNumber());
+    }
+
+    public Number minus(Number other) {
+        return new Number(this.number - other.getNumber());
+    }
+
+    public Number multiply(Number other) {
+        return new Number(this.number * other.getNumber());
+    }
+
+    public Number divide(Number other) {
+        return new Number(this.number / other.getNumber());
+    }
+
 }
