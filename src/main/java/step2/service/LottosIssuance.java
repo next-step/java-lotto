@@ -1,36 +1,35 @@
 package step2.service;
 
 import step2.domain.entity.Lotto;
-import step2.domain.entity.LottoTicket;
-import step2.domain.entity.LottoTickets;
+import step2.domain.entity.Lottos;
 import step2.domain.vo.Money;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoTicketIssuance {
+public class LottosIssuance {
 
-    private LottoTicketIssuance() {
+    private LottosIssuance() {
     }
 
-    public static LottoTickets issues(Money buyerMoney) {
+    public static Lottos issues(Money buyerMoney) {
         var money = buyerMoney.getMoney();
         var price = Lotto.PRICE;
 
         validateLottoIssuance(money, price);
 
-        List<LottoTicket> tickets = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
 
-        while (canIssueLottoTicket(money)) {
+        while (canIssueLotto(money)) {
             money -= price;
-            tickets.add(issue());
+            lottos.add(issue());
         }
 
-        return new LottoTickets(tickets);
+        return new Lottos(lottos);
     }
 
-    private static LottoTicket issue() {
-        return new LottoTicket(LottoIssuance.issue());
+    private static Lotto issue() {
+        return LottoIssuance.issue();
     }
 
     private static void validateLottoIssuance(int money, int price) {
@@ -45,7 +44,7 @@ public class LottoTicketIssuance {
         }
     }
 
-    private static boolean canIssueLottoTicket(int money) {
+    private static boolean canIssueLotto(int money) {
         return money >= Lotto.PRICE;
     }
 

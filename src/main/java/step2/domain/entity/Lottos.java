@@ -1,26 +1,28 @@
 package step2.domain.entity;
 
+import step2.domain.vo.LottoNumber;
 import step2.domain.vo.LottoPrize;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class LottoTickets {
+public class Lottos {
 
-    private List<LottoTicket> lottoTickets;
+    private final List<Lotto> lottos;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public int size() {
-        return this.lottoTickets.size();
+        return this.lottos.size();
     }
 
-    public int getLottoRankCount(LottoPrize prize, List<LottoPrize> lottoPrizes) {
+    public static int getLottoRankCount(LottoPrize prize, List<LottoPrize> lottoPrizes) {
         return (int) lottoPrizes.stream()
                 .filter(lottoPrize -> lottoPrize.equals(prize))
                 .count();
@@ -39,5 +41,16 @@ public class LottoTickets {
 
     private int getTotalMoney() {
         return Lotto.PRICE * this.size();
+    }
+
+    public List<LottoPrize> checkLottoPrize(Lotto winner, LottoNumber bonus) {
+        List<LottoPrize> prizes = new ArrayList<>();
+
+        for (Lotto lotto : lottos) {
+            final var prize = winner.prize(lotto, bonus);
+            prizes.add(prize);
+        }
+
+        return prizes;
     }
 }

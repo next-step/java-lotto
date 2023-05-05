@@ -7,6 +7,8 @@ public class LottoNumber {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
 
+    private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1부터 45까지의 숫자만 가능합니다. 현재 숫자:";
+
     private final int number;
 
     public LottoNumber(int number) {
@@ -16,7 +18,7 @@ public class LottoNumber {
 
     private void validate(int number) {
         if (number > LOTTO_END_NUMBER || number < LOTTO_START_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자만 가능합니다. 현재 숫자: " + number);
+            throw new IllegalArgumentException(LOTTO_NUMBER_EXCEPTION_MESSAGE + " " + number);
         }
     }
 
