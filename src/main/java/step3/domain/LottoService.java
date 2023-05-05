@@ -19,8 +19,10 @@ public class LottoService {
         return lottoService;
     }
 
-    public Lottos createAutoLottos(int count) {
-        return Lottos.from(count);
+    public Lottos createAutoLottos(int count, Lottos manualLotto) {
+        Lottos from = Lottos.from(count);
+        manualLotto.combineLottos(from);
+        return manualLotto;
     }
 
     public Lottos createManualLotto(List<List<Integer>> manualLotto) {

@@ -1,5 +1,7 @@
 package step3.view;
 
+import step3.domain.model.Lotto.Lottos;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,6 +42,7 @@ public class InputView {
     public static List<List<Integer>> askManualLottoNumbers(int manualLottoCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         newLineRemove();
+        Lottos lottos = Lottos.from(manualLottoCount);
         List<List<Integer>> manualLottos = new ArrayList<>();
         for (int i = 0 ; i <manualLottoCount; i++) {
             manualLottos.add(createManualLotto());

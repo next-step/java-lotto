@@ -26,11 +26,9 @@ public class LottoController {
         int remainingMoneyAfterBuyLotto = lottoStoreService.getRemainingMoneyAfterBuyLotto(new LottoPriceStrategy(), purchaseAmount, manualLottoCount);
         // 자동 로또
         int autoLottoCount = lottoStoreService.getAutoLottoCount(new LottoPriceStrategy(), remainingMoneyAfterBuyLotto);
-        OutputView.outPut(autoLottoCount);
-        Lottos autoLottos = lottoService.createAutoLottos(autoLottoCount);
-        OutputView.outPutLottos(autoLottos);
-
-        Lottos lottos = lottoService.combineLotto(manualLotto, autoLottos);
+        OutputView.outPut(autoLottoCount);  
+        Lottos lottos = lottoService.createAutoLottos(autoLottoCount, manualLotto);
+        OutputView.outPutLottos(lottos);
 
         // 당첨 번호
         lottoService.calculatorWinning(lottos, LottoService.createWinningLotto(InputView.askLastWeekWinningNumbers()));

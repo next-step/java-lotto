@@ -2,9 +2,13 @@ package step3.domain.model.Lotto;
 
 
 import step3.domain.strategy.lotto.LottoPolicyStrategy;
+import step3.domain.strategy.lotto.PolicyStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
@@ -19,10 +23,10 @@ public class Lottos {
     }
 
     public static Lottos fromManualLottos(List<List<Integer>> manualLottos) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < manualLottos.size(); i++) {
-            lottos.add(Lotto.fromManualLotto(new LottoPolicyStrategy(), manualLottos.get(i)));
-        }
+        List<Lotto> lottos = manualLottos.stream()
+                .map(numbers -> Lotto.fromManualLotto(new LottoPolicyStrategy(), numbers))
+                .collect(Collectors.toList());
+        
         return new Lottos(lottos);
     }
 
