@@ -1,4 +1,4 @@
-package ui;
+package stringcalculator.ui;
 
 public class ResultView {
 

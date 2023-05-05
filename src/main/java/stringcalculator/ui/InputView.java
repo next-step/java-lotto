@@ -1,4 +1,4 @@
-package ui;
+package stringcalculator.ui;
 
 import java.util.Scanner;
 

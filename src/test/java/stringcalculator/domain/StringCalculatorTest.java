@@ -1,6 +1,6 @@
 package stringcalculator.domain;
 
-import domain.StringCalculator;
+import stringcalculator.domain.StringCalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

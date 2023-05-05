@@ -1,4 +1,4 @@
-package domain;
+package stringcalculator.domain;
 
 
 public class StringCalculator {
