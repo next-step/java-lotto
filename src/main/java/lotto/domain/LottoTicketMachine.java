@@ -8,29 +8,31 @@ public class LottoTicketMachine {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private static LottoTickets lottoTicketsTotal;
+    public LottoTickets lottoTicketsTotal;
 
-    private LottoTicketMachine() {
+    public LottoTicketMachine() {
     }
 
-    public static LottoTickets createAutoLottoTickets(int autoPurchaseCount) {
+    public LottoTicketMachine(LottoTickets lottoTicketsTotal) {
+        this.lottoTicketsTotal = lottoTicketsTotal;
+    }
+
+    public void createAutoLottoTickets(int autoPurchaseCount) {
         NumberCreationStrategy strategy = new RandomNumberCreation(autoPurchaseCount);
-        if (lottoTicketsTotal == null) {
-            lottoTicketsTotal = new LottoTickets(strategy);
-            return lottoTicketsTotal;
-        }
-        lottoTicketsTotal.addLottoTickets(strategy);
-        return lottoTicketsTotal;
+        setLottoTicketsTotal(strategy);
     }
 
-    public static LottoTickets createManualLottoTickets(List<List<Integer>> tickets) {
-        NumberCreationStrategy strategy = new ManualNumberCreation(tickets);
+    private void setLottoTicketsTotal(NumberCreationStrategy strategy) {
         if (lottoTicketsTotal == null) {
             lottoTicketsTotal = new LottoTickets(strategy);
-            return lottoTicketsTotal;
+            return;
         }
         lottoTicketsTotal.addLottoTickets(strategy);
-        return lottoTicketsTotal;
+    }
+
+    public void createManualLottoTickets(List<List<Integer>> tickets) {
+        NumberCreationStrategy strategy = new ManualNumberCreation(tickets);
+        setLottoTicketsTotal(strategy);
     }
 
     public LottoStatisticsDto calculateLottoStatistics(WinningTicket winningTicket) {

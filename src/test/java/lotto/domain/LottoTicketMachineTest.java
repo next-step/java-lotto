@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketMachineTest {
@@ -20,7 +19,7 @@ class LottoTicketMachineTest {
     @Test
     void calculateLottoStatistics() throws Exception {
         //given
-        LottoTicketMachine.createAutoLottoTickets(14000);
+        lottoTicketMachine.createAutoLottoTickets(14000);
         WinningTicket winningTicket = new WinningTicket(
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 LottoNumber.of(7)

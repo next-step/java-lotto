@@ -18,8 +18,8 @@ public class LottoController {
         int autoPurchaseCount = calculateAutoPurchaseCount(manualPurchaseCount, purchaseAmount);
         validateManualPurchaseCount(manualPurchaseCount, purchaseAmount);
         List<List<Integer>> tickets = InputView.inputManualPurchaseTickets(manualPurchaseCount);
-        LottoTicketMachine.createManualLottoTickets(tickets);
-        LottoTicketMachine.createAutoLottoTickets(autoPurchaseCount);
+        lottoTicketMachine.createManualLottoTickets(tickets);
+        lottoTicketMachine.createAutoLottoTickets(autoPurchaseCount);
 
         OutputView.outputManualLottoNumbers(ManualLottoTicketsDto.from(
                 lottoTicketMachine.getLottoTicketsTotal(),
