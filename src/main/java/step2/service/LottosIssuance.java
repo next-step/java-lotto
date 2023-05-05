@@ -20,7 +20,7 @@ public class LottosIssuance {
 
         List<Lotto> lottos = new ArrayList<>();
 
-        while (canIssueLottoTicket(money)) {
+        while (canIssueLotto(money)) {
             money -= price;
             lottos.add(issue());
         }
@@ -44,7 +44,7 @@ public class LottosIssuance {
         }
     }
 
-    private static boolean canIssueLottoTicket(int money) {
+    private static boolean canIssueLotto(int money) {
         return money >= Lotto.PRICE;
     }
 

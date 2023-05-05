@@ -22,10 +22,10 @@ class LottosTest {
 
     @Test
     void 로또_당첨_수익률을_계산한다() {
-        final var tickets = createTestLottos();
+        final var lottos = createTestLottos();
         final var lottoPrizes = List.of(LottoPrize.FOURTH, LottoPrize.FOURTH);
 
-        final var actual = tickets.getTotalRate(lottoPrizes);
+        final var actual = lottos.getTotalRate(lottoPrizes);
 
         assertThat(actual).isEqualTo(5.0);
     }
