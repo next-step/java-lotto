@@ -11,7 +11,12 @@ public class LottoScore {
     private int firstCount = 0;
     private int purchase;
 
-    public void updateScore(List<LottoMatcher> lottoMatchers) {
+    public LottoScore(int price, int quantity, List<LottoMatcher> lottoMatchers) {
+        this.purchase = price * quantity;
+        updateScore(lottoMatchers);
+    }
+
+    private void updateScore(List<LottoMatcher> lottoMatchers) {
         lottoMatchers.forEach(this::incrementScore);
     }
 
@@ -19,19 +24,19 @@ public class LottoScore {
         lottoMatcher.incrementScore(this);
     }
 
-    public void addFirst() {
+    protected void addFirst() {
         firstCount++;
     }
 
-    public void addSecond() {
+    protected void addSecond() {
         secondCount++;
     }
 
-    public void addThird() {
+    protected void addThird() {
         thirdCount++;
     }
 
-    public void addFourth() {
+    protected void addFourth() {
         fourthCount++;
     }
 
@@ -49,10 +54,6 @@ public class LottoScore {
 
     public int fourthCount() {
         return fourthCount;
-    }
-
-    public void purchase(int purchase) {
-        this.purchase = purchase;
     }
 
     public double rate() {

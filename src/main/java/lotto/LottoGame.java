@@ -14,6 +14,7 @@ public class LottoGame {
     }
 
     public void buyLotto(int price) {
+        checkPrice(price);
         int lottoCount = price / LOTTO_PRICE;
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(lottoNumberGenerator.lotto()));
@@ -30,12 +31,25 @@ public class LottoGame {
                 .collect(Collectors.toList());
     }
 
-    public LottoScore score(List<LottoNumber> winNumber) {
-        List<LottoMatcher> lottoMatchers = matchResult(winNumber);
-        LottoScore lottoScore = new LottoScore();
-        lottoScore.purchase(quantity() * LOTTO_PRICE);
-        lottoScore.updateScore(lottoMatchers);
-        return lottoScore;
+    private static void checkPrice(int price) {
+        if(LOTTO_PRICE > price) {
+            throw new IllegalArgumentException("로또 구매 비용이 부족합니다.");
+        }
+    }
+
+    public LottoScore score(List<LottoNumber> winNumbers) {
+        checkWinNumbers(winNumbers);
+        return new LottoScore(
+                LOTTO_PRICE,
+                quantity(),
+                matchResult(winNumbers)
+        );
+    }
+
+    private void checkWinNumbers(List<LottoNumber> winNumbers) {
+        if(winNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또 당첨번호는 6개 입니다.");
+        }
     }
 
     public int quantity() {
