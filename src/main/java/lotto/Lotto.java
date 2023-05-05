@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Auditor;
 import lotto.domain.Statics;
 import lotto.domain.Tickets;
 import lotto.domain.WinnerTicket;
@@ -15,6 +16,7 @@ public class Lotto {
 
         int totalPurchaseCount = inputPresent.purchaseCount();
         Tickets manualTickets = inputPresent.manualPurchases();
+        Auditor.manualPurchaseValidation(totalPurchaseCount, manualTickets.count());
         Tickets autoTickets = Tickets.automaticIssue(totalPurchaseCount - manualTickets.count());
         outputPresent.presentTickets(manualTickets, autoTickets);
         autoTickets.add(manualTickets);

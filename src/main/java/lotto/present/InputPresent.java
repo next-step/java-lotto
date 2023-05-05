@@ -1,5 +1,6 @@
 package lotto.present;
 
+import lotto.domain.Auditor;
 import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 import lotto.domain.Tickets;
@@ -26,15 +27,11 @@ public class InputPresent {
         System.out.println(PURCHASE_AMOUNT);
         int count = Integer.parseInt(scanner.nextLine()) / 1000;
         System.out.printf(PURCHASE_CONFIRM, count,System.lineSeparator());
-        MinimumPurchaseCountValidate(count);
+        Auditor.minimumPurchaseCountValidate(count);
         return count;
     }
 
-    private void MinimumPurchaseCountValidate(int count) {
-        if(count <= 0) {
-            throw new MinimumPurchaseShortageException();
-        }
-    }
+
 
     public Ticket winningNumbers() {
         System.out.println(WINNING_NUMBER);
@@ -56,15 +53,15 @@ public class InputPresent {
         int iter = Integer.parseInt(scanner.nextLine());
         System.out.printf("수동으로 %d 개를 구매합니다%s", iter, System.lineSeparator());
         for (int i = 0; i < iter; i++) {
-            tickets.add(manualPurchase(scanner.nextLine()));
+            tickets.add(manualPurchase());
         }
         return tickets;
     }
 
 
-    private Ticket manualPurchase(String nextLine) {
+    private Ticket manualPurchase() {
         System.out.println(MANUAL_NUMBERS);
-        Ticket ticket = new Ticket(nextLine);
+        Ticket ticket = new Ticket(scanner.nextLine());
         System.out.printf("수동 구매 내역 확인 : %s%s", ticket, System.lineSeparator());
         return ticket;
     }
