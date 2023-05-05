@@ -1,6 +1,5 @@
 package lotto.View;
 
-import java.util.HashMap;
 import java.util.List;
 
 import lotto.Model.GameResult;
@@ -9,15 +8,6 @@ import lotto.Model.Ticket;
 
 
 public class ResultView {
-    private static final int BONUS_CATEGORY = 15;
-    private static final HashMap<Integer, Integer> RESULT_TABLE = new HashMap<>() {{
-        put(1, 3);
-        put(2, 4);
-        put(3, 5);
-        put(4, 15);
-        put(5, 6);
-    }};
-
     public static void printTickets(List<Ticket> ticketList) {
         for (Ticket ticket : ticketList) {
             System.out.println(ticket.numbers().numbers());
@@ -30,35 +20,34 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        int totalAmount = printMatches(result.table());
+        int totalAmount = printMatches(result);
         double profitRate = (double) totalAmount / (countOfTicket * 1000);
 
         System.out.printf("총 수익률은 %.2f 입니다.", profitRate);
         printPerformance(profitRate);
     }
 
-    private static int printMatches(HashMap<Integer, Integer> result) {
+    private static int printMatches(GameResult result) {
         int totalAmount = 0;
 
-        for (int printIndex = 1; printIndex <= 5; printIndex++) {
-            int matchedNumber = RESULT_TABLE.get(printIndex);
-            int numberOfTickets = result.get(matchedNumber);
-
-            int profit = new Profit(matchedNumber).value();
+        for (int rank = 5; rank >= 1; rank--) {
+            int numberOfMatchedNumber = result.countOfMatchedNumberByRank(rank);
+            int numberOfTickets = result.countOfTicketByRank(rank);
+            int profit = new Profit(rank).value();
             totalAmount += numberOfTickets * profit;
-            printMatch(matchedNumber, numberOfTickets, profit);
+            printMatch(rank, numberOfMatchedNumber,numberOfTickets, profit);
         }
 
         return totalAmount;
     }
 
-    private static void printMatch(int matchedNumber, int numberOfTickets, int profit) {
-        if (BONUS_CATEGORY == matchedNumber) {
-            System.out.println("5개 일치, 보너스 볼 일치 (" + profit + "원)- " + numberOfTickets + "개");
-            return;
+    private static void printMatch(int rank, int matchedNumber, int numberOfTickets, int profit) {
+        System.out.print(matchedNumber + "개 일치");
+        if (rank == 2) {
+            System.out.print(", 보너스 볼 일치");
         }
 
-        System.out.println(matchedNumber + "개 일치 (" + profit + "원)- " + numberOfTickets + "개");
+        System.out.println(" (" + profit + "원) - " + numberOfTickets + "개");
     }
 
     private static void printPerformance(double profitRate) {

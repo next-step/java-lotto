@@ -35,11 +35,34 @@ public class GameResult {
             return;
         }
 
-        if(countMatchedNumber == CANDIDATE_BONUS_COUNT && isBonus) {
+        if (countMatchedNumber == CANDIDATE_BONUS_COUNT && isBonus) {
             countMatchedNumber = BONUS_CATEGORY;
         }
 
-        resultTable.put(countMatchedNumber, COUNT_INCREMENT);
+        resultTable.put(countMatchedNumber, resultTable.get(countMatchedNumber) + COUNT_INCREMENT);
     }
 
+    public int countOfTicketByRank(int rank) {
+        if (rank == 2) {
+            return resultTable.get(BONUS_CATEGORY);
+        }
+
+        if (rank == 1) {
+            return resultTable.get(WINNER_MATCH_COUNT_MAX);
+        }
+
+        return resultTable.get(WINNER_MATCH_COUNT_MAX - rank + 2);
+    }
+
+    public int countOfMatchedNumberByRank(int rank) {
+        if (rank == 2) {
+            return CANDIDATE_BONUS_COUNT;
+        }
+
+        if (rank == 1) {
+            return WINNER_MATCH_COUNT_MAX;
+        }
+
+        return WINNER_MATCH_COUNT_MAX - rank + 2;
+    }
 }
