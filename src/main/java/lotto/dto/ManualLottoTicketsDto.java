@@ -8,15 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AutoLottoTicketsDto {
+public class ManualLottoTicketsDto {
 
     private List<List<Integer>> lottoNumbers;
+    private int manualCount;
+    private int autoCount;
 
-    private AutoLottoTicketsDto(List<List<Integer>> lottoNumbers) {
+    private ManualLottoTicketsDto(List<List<Integer>> lottoNumbers, int manualCount, int autoCount) {
         this.lottoNumbers = lottoNumbers;
+        this.manualCount = manualCount;
+        this.autoCount = autoCount;
     }
 
-    public static AutoLottoTicketsDto of(LottoTickets lottoTickets) {
+    public static ManualLottoTicketsDto from(LottoTickets lottoTickets, int manualCount, int autoCount) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoNumbers();
         List<List<Integer>> result = new ArrayList<>();
 
@@ -27,11 +31,18 @@ public class AutoLottoTicketsDto {
                             .collect(Collectors.toList())
             );
         }
-        return new AutoLottoTicketsDto(result);
+        return new ManualLottoTicketsDto(result, manualCount, autoCount);
     }
 
     public List<List<Integer>> getLottoNumbers() {
         return lottoNumbers;
     }
 
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getAutoCount() {
+        return autoCount;
+    }
 }

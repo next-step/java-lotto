@@ -1,8 +1,9 @@
 package lotto.view;
 
 import lotto.domain.LottoRank;
-import lotto.dto.LottoNumbersDto;
+import lotto.dto.AutoLottoTicketsDto;
 import lotto.dto.LottoStatisticsDto;
+import lotto.dto.ManualLottoTicketsDto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +21,16 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void outputLottoNumbers(LottoNumbersDto dto) {
+    public static void outputAutoLottoNumbers(AutoLottoTicketsDto dto) {
+        List<List<Integer>> lottoNumbers = dto.getLottoNumbers();
+        for (List<Integer> lottoNumber : lottoNumbers) {
+            outputLottoNumber(lottoNumber);
+        }
+        System.out.println();
+    }
+
+    public static void outputManualLottoNumbers(ManualLottoTicketsDto dto) {
+        System.out.printf("%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", dto.getManualCount(), dto.getAutoCount());
         List<List<Integer>> lottoNumbers = dto.getLottoNumbers();
         for (List<Integer> lottoNumber : lottoNumbers) {
             outputLottoNumber(lottoNumber);
