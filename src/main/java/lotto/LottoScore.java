@@ -56,10 +56,10 @@ public class LottoScore {
     }
 
     public double rate() {
-        int amount = FIRST_MATCH.price() * firstCount +
-                SECOND_MATCH.price() * secondCount +
-                THIRD_MATCH.price() * thirdCount +
-                FOURTH_MATCH.price() * fourthCount;
+        int amount = FIRST_MATCH.amount(firstCount) +
+                SECOND_MATCH.amount(secondCount) +
+                THIRD_MATCH.amount(thirdCount) +
+                FOURTH_MATCH.amount(fourthCount);
         return ((double) amount / purchase);
     }
 }

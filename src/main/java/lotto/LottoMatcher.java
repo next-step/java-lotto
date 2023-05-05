@@ -59,4 +59,8 @@ public enum LottoMatcher {
     }
 
     public abstract void incrementScore(LottoScore lottoScore);
+
+    public int amount(int count) {
+        return price * count;
+    }
 }
