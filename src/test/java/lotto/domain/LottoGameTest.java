@@ -17,7 +17,7 @@ class LottoGameTest {
 
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() ->
-                        new LottoGame(new LottoGenerator().generateLottoTickets(numberOfTickets), winningNumbersString))
+                        new LottoGame(LottoGenerator.generateLottoTickets(numberOfTickets), winningNumbersString))
                 .withMessage("로또 티켓은 1장 보다 적게 생성 할 수 없습니다");
     }
 
@@ -29,16 +29,15 @@ class LottoGameTest {
 
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() ->
-                        new LottoGame(new LottoGenerator().generateLottoTickets(numberOfTickets), winningNumbersString))
+                        new LottoGame(LottoGenerator.generateLottoTickets(numberOfTickets), winningNumbersString))
                 .withMessage("로또는 6개의 번호로 이루어져야 합니다");
     }
-
 
     @DisplayName("로또 게임 객체 생성에 성공하면 더 이상 빈값이 아니다")
     @Test
     void createLottoGame() {
         int numberOfTickets = 5;
-        LottoTickets lottoTickets = new LottoGenerator().generateLottoTickets(numberOfTickets);
+        LottoTickets lottoTickets = LottoGenerator.generateLottoTickets(numberOfTickets);
         String winningNumbersString = "1, 2, 3, 4, 5, 6";
 
         LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString);
@@ -50,7 +49,7 @@ class LottoGameTest {
     @Test
     void calculateWinningStatistics() {
         int numberOfTickets = 5;
-        LottoTickets lottoTickets = new LottoGenerator().generateLottoTickets(numberOfTickets);
+        LottoTickets lottoTickets = LottoGenerator.generateLottoTickets(numberOfTickets);
         String winningNumbersString = "1, 2, 3, 4, 5, 6";
         LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString);
 
@@ -59,4 +58,19 @@ class LottoGameTest {
         assertNotNull(winningStatistics, "당첨 통계 계산 실패");
         assertTrue(winningStatistics.calculateEarningsRate(numberOfTickets) >= 0, "수익률 계산이 올바르지 않음");
     }
+
+    @DisplayName("로또 게임 객체 생성은 보너스 번호를 전달할수 있고 성공하면 통계 수익률을 얻는다")
+    @Test
+    void calculateWinningStatisticsWithBonusNumber() {
+        int numberOfTickets = 10;
+        LottoTickets lottoTickets = LottoGenerator.generateLottoTickets(numberOfTickets);
+        String winningNumbersString = "1, 2, 3, 4, 5, 6";
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString, new BonusNumber(6));
+
+        WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics();
+
+        assertNotNull(winningStatistics, "당첨 통계 계산 실패");
+        assertTrue(winningStatistics.calculateEarningsRate(numberOfTickets) >= 0, "수익률 계산이 올바르지 않음");
+    }
+    
 }

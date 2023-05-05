@@ -29,15 +29,15 @@ public class LottoTickets {
     private static List<LottoTicket> generateLottoTickets(int numberOfTickets) {
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < numberOfTickets; i++) {
-            tickets.add(new LottoGenerator().generateLottoNumbers());
+            tickets.add(LottoGenerator.generateLottoNumbers());
         }
         return tickets;
     }
 
-    public WinningStatistics calculateLottoStatistics(WinningLotto winningLotto) {
+    public WinningStatistics calculateLottoStatistics(WinningLotto winningLotto, BonusNumber bonusNumber) {
         WinningStatistics winningStatistics = new WinningStatistics();
         for (LottoTicket lottoTicket : tickets) {
-            WinningRank rank = winningLotto.match(lottoTicket);
+            WinningRank rank = winningLotto.match(lottoTicket, bonusNumber);
             winningStatistics.addMatchedTicket(rank);
         }
         return winningStatistics;

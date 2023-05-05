@@ -22,7 +22,7 @@ public class WinningStatistics {
 
     public double calculateEarningsRate(int numberOfTickets) {
         long totalPrize = rankCounts.entrySet().stream()
-                .mapToLong(entry -> (long) entry.getKey().getPrizeMoney() * entry.getValue())
+                .mapToLong(entry -> (long) entry.getKey().getMoneyOfPrize() * entry.getValue())
                 .sum();
 
         return (double) totalPrize / (numberOfTickets * PRICE_OF_LOTTO_TICKET);

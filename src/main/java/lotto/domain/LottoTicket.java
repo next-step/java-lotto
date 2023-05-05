@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int LOTTO_TICKET_SIZE = 6;
+
     private final Set<LottoNumber> numbers;
 
     public LottoTicket(Set<LottoNumber> numbers) {
@@ -41,6 +42,10 @@ public class LottoTicket {
         return (int) numbers.stream()
                 .filter(winningLottoTicket::containsLottoNumber)
                 .count();
+    }
+
+    public boolean matchesBonusNumber(BonusNumber bonusNumber) {
+        return numbers.stream().anyMatch(bonusNumber::matchesBonusNumber);
     }
 
     public Set<LottoNumber> getLottoNumbers() {

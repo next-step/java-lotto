@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,6 +8,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Set;
 import java.util.TreeSet;
+
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 티켓 테스트")
 class LottoTicketTest {
@@ -24,7 +25,7 @@ class LottoTicketTest {
         numbers.add(new LottoNumber(5));
         numbers.add(new LottoNumber(5));
 
-        Assertions.assertThatIllegalArgumentException()
+        assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoTicket(numbers))
                 .withMessage("로또는 6개의 번호로 이루어져야 합니다");
     }
@@ -41,7 +42,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = LottoTicket.from(numbers);
 
         numbers.forEach(number ->
-                Assertions.assertThat(
+                assertThat(
                         lottoTicket.getLottoNumbers()
                                 .stream()
                                 .anyMatch(lottoNumber -> lottoNumber.findLottoNumber() == number)).isTrue()
@@ -50,18 +51,25 @@ class LottoTicketTest {
 
     @ParameterizedTest(name = "로또 티켓에 포함되어 있는 번호를 전달하면 True 를 리턴한다")
     @ValueSource(ints = {2, 5, 11, 19, 37, 45})
-    void whenContainsLottoNumber_thenReturnTrue(int number){
+    void whenContainsLottoNumber_thenReturnTrue(int number) {
         LottoTicket lottoTicket = LottoTicket.from(Set.of(2, 5, 11, 19, 37, 45));
 
-        Assertions.assertThat(lottoTicket.containsLottoNumber(new LottoNumber(number))).isTrue();
+        assertThat(lottoTicket.containsLottoNumber(new LottoNumber(number))).isTrue();
     }
 
     @ParameterizedTest(name = "로또 티켓에 포함되어 없는 번호를 전달하면 False 를 리턴한다")
     @ValueSource(ints = {3, 8, 15, 28, 33, 41})
-    void whenDoseNotContainsLottoNumber_thenReturnFalse(int number){
+    void whenDoseNotContainsLottoNumber_thenReturnFalse(int number) {
         LottoTicket lottoTicket = LottoTicket.from((Set.of(2, 5, 11, 19, 37, 45)));
 
-        Assertions.assertThat(lottoTicket.containsLottoNumber(new LottoNumber(number))).isFalse();
+        assertThat(lottoTicket.containsLottoNumber(new LottoNumber(number))).isFalse();
     }
 
+    @DisplayName("로또 티켓에서 보너스 번호가 포함되어 있는지 확인 할 수 있다")
+    @Test
+    void matchesBonusNumberInLottoTicket() {
+        LottoTicket lottoTicket = LottoTicket.from((Set.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lottoTicket.matchesBonusNumber(new BonusNumber(6))).isTrue();
+        assertThat(lottoTicket.matchesBonusNumber(new BonusNumber(8))).isFalse();
+    }
 }
