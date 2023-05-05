@@ -11,13 +11,13 @@ import java.util.List;
 
 public class StoreTest {
 
-    @DisplayName("금액 단위만큼 로또를 생성할 수 있다.")
+    @DisplayName("금액 단위만큼 로또를 주문할 수 있다.")
     @Test
-    public void store_MakeLottoDependsOnMoney_MakeLotto() {
+    public void order_MakeLottoDependsOnMoney_MakeLotto() {
         Money money = new Money(4000);
         int count = money.amount() / 1000;
 
-        List<Lotto> lottoList = Store.giveLotto(money);
+        List<Lotto> lottoList = Store.order(money);
         Assertions.assertThat(lottoList.size()).isEqualTo(count);
     }
 

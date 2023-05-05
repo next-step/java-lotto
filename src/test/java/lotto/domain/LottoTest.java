@@ -12,7 +12,7 @@ public class LottoTest {
 
     @DisplayName("로또 숫자가 중복이 되면 예외가 발생한다.")
     @Test
-    public void lotto_DupllicateNumber_ThrowException() {
+    public void lotto_DuplicateNumber_ThrowException() {
         List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 5);
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(lotto));

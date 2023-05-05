@@ -10,9 +10,12 @@ public class Store {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public static List<Lotto> giveLotto(Money money) {
+    public static List<Lotto> order(Money money) {
+        return createLotto(makeFromMoney(money));
+    }
+
+    private static List<Lotto> createLotto(int count) {
         List<Lotto> lottoList = new ArrayList<>();  // todo : lottoList -> lottoGroup? 으로 변경하기
-        int count = money.amount() / LOTTO_PRICE;
         for (int i = 0; i < count; i++) {
             lottoList.add(makeLotto());
         }
@@ -28,4 +31,9 @@ public class Store {
 
         return new Lotto(lottoNumberBox.subList(0, 6));
     }
+
+    private static int makeFromMoney(Money money) {
+        return money.amount() / LOTTO_PRICE;
+    }
+
 }
