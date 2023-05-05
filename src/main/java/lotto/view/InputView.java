@@ -1,72 +1,71 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
-import lotto.domain.WinnerLotto;
+import lotto.model.LottoInformation;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class InputView {
 
     private static final Pattern NON_NUMERIC_PATTERN = Pattern.compile(".*[ㄱ-ㅎㅏ-ㅣ가-힣|a-z|A-Z]+.*");
-    public static final Integer MINIMUM_PRICE = 1000;
 
     public static final Scanner scanner = new Scanner(System.in);
-    public static final String DELIMITER = ",";
 
     public static Money inputPrice() {
         System.out.println("구입금액을 입력해 주세요 :)");
         int price = scanner.nextInt();
         validateNegativeNumberOrZero(price);
 
-        return Money.wons(scanner.nextInt());
+        return Money.wons(price);
     }
 
     private static void validateNegativeNumberOrZero(long amount) {
-        if (amount < MINIMUM_PRICE) {
+        if (amount < LottoInformation.LOTTO_UNIT_PRICE) {
             throw new IllegalArgumentException("1000원 이상 입력해주세 :)");
         }
     }
 
-    public static WinnerLotto inputWinningNumbers() {
+    public static List<String> inputWinningNumbers() {
         scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 압력해주세요 :)");
         String inputWinnerLottoNumber = scanner.nextLine();
-        validEmptyString(inputWinnerLottoNumber);
-        validNonNumeric(inputWinnerLottoNumber);
+        validateEmptyString(inputWinnerLottoNumber);
+        validateNonNumeric(inputWinnerLottoNumber);
 
-        return WinnerLotto.of(new LottoNumbers(), toIntList(inputWinnerLottoNumber));
+        return Collections.singletonList(inputWinnerLottoNumber);
     }
 
-    private static List<Integer> toIntList(String winnerLottoNumber) {
-        return Arrays.stream(winnerLottoNumber.split(DELIMITER))
-                .map(lottoNumber -> {
-                    try {
-                        return Integer.parseInt(lottoNumber);
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException("숫자만 입력 가능하세요 :(");
-                    }
-                })
-                .collect(Collectors.toUnmodifiableList());
+    public static int inputBonusNumber(List<String> winnerLottoNumbers) {
+        System.out.println("보너스 볼을 입력해주세요 :)");
+        String bonusNumber = scanner.next();
+        validateEmptyString(bonusNumber);
+        validateNonNumeric(bonusNumber);
+        validateExistSameNumber(winnerLottoNumbers,bonusNumber);
+
+        return Integer.parseInt(bonusNumber);
     }
 
-    private static void validEmptyString(String inputWinnerLottoNumber) {
+    private static void validateEmptyString(String inputWinnerLottoNumber) {
         if (inputWinnerLottoNumber == null) {
             throw new IllegalArgumentException("입력 값이 비었어요  :(");
         }
         if (inputWinnerLottoNumber.length() == 0) {
             throw new IllegalArgumentException("입력 값이 비었어요  :(");
-
         }
     }
 
-    private static void validNonNumeric(String inputWinnerLottoNumber) {
+    private static void validateNonNumeric(String inputWinnerLottoNumber) {
         if (NON_NUMERIC_PATTERN.matcher(inputWinnerLottoNumber).find()) {
             throw new IllegalArgumentException("숫자만 입력 가능하세요 :(");
+        }
+    }
+
+    private static void validateExistSameNumber(List<String> lottoNumber,String bonusNumber){
+        if(lottoNumber.contains(bonusNumber)){
+            throw new IllegalArgumentException("로또번호에 존재해요 :(");
         }
     }
 }
