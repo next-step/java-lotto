@@ -15,4 +15,8 @@ public class Money {
         }
     }
 
+    public int amount() {
+        return this.money;
+    }
+
 }

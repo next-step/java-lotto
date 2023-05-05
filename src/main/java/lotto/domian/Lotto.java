@@ -11,8 +11,8 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     private final List<Integer> lotto; // todo) Integer -> LottoNumber로 변경하기
-    private static final int LOTTO_MAXIMUM_VALUE = 45;
-    private static final int LOTTO_MINIMUM_VALUE = 1;
+    private static final int LOTTO_MAXIMUM_VALUE = 45; // todo) -> LottoNumber
+    private static final int LOTTO_MINIMUM_VALUE = 1;   // todo) -> 마찬가지
 
     public Lotto(List<Integer> lotto) {
         isRangeIn(lotto);
@@ -37,7 +37,7 @@ public class Lotto {
     }
 
     private boolean isBetweenValid(int number) {
-        return IntStream.range(LOTTO_MINIMUM_VALUE, LOTTO_MAXIMUM_VALUE)
+        return !IntStream.range(LOTTO_MINIMUM_VALUE, LOTTO_MAXIMUM_VALUE)
                         .boxed()
                         .collect(Collectors.toList())
                         .contains(number);
