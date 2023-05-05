@@ -29,11 +29,17 @@ public class Store {
 
         Collections.shuffle(lottoNumberBox);
 
-        return new Lotto(lottoNumberBox.subList(0, 6));
+        return new Lotto(makeLottoNumber(lottoNumberBox.subList(0, 6)));
     }
 
     private static int makeFromMoney(Money money) {
         return money.amount() / LOTTO_PRICE;
+    }
+
+    private static List<LottoNumber> makeLottoNumber(List<Integer> numberList) {
+        return numberList.stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
     }
 
 }
