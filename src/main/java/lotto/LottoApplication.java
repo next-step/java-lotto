@@ -21,9 +21,9 @@ public class LottoApplication {
     final int lottoPrice = inputView.getLottoPrice();
     final int manualLottoRoundCount = inputView.getManualLottoNumberCount();
 
-    final List<List<Integer>> manualLottoRounds = Collections.emptyList();
+    List<List<Integer>> manualLottoRounds = Collections.emptyList();
     if (manualLottoRoundCount > 0) {
-      inputView.generateManualLottoRound(manualLottoRoundCount);
+      manualLottoRounds = inputView.generateManualLottoRound(manualLottoRoundCount);
     }
 
     final LottoGameGenerator gameGenerator = new LottoGameGenerator(lottoPrice, manualLottoRounds, LottoGameSetting.ofKorea645LottoSetting());
