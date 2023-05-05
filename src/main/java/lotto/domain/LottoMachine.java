@@ -5,15 +5,14 @@ public class LottoMachine {
     private int numberOfLotto;
 
     public LottoMachine(int cost) {
-        this.numberOfLotto = numberOfLotto(validate(cost));
+        validate(cost);
+        this.numberOfLotto = calculateNumberOfLotto(cost);
     }
 
-    private int validate(int cost) {
+    private void validate(int cost) {
         if (cost < LOTTO_COST) {
             throw new IllegalArgumentException("구입금액이 로또 한장 가격보다 작을 수 없습니다.");
         }
-
-        return cost;
     }
 
     public Lottos create(LottoCreatingStrategy lottoCreatingStrategy) {
@@ -24,7 +23,7 @@ public class LottoMachine {
         return new Lottos(numberOfLotto, lottoCreatingStrategy);
     }
 
-    private int numberOfLotto(int cost) {
+    private int calculateNumberOfLotto(int cost) {
         return cost / LOTTO_COST;
     }
 
