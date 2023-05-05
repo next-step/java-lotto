@@ -11,37 +11,22 @@ public class Lotto {
     public static final int LOTTO_NUMBER = 6;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    private List<Integer> numbers;
+    private List<Number> numbers;
 
     public Lotto(String numbers) {
-        this.numbers = validate(split(numbers));
+        this.numbers = split1(numbers);
+        validate1(this.numbers);
     }
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = validate(numbers);
-    }
-
-    private List<Integer> validate(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER) {
+    private void validate1(List<Number> numbers1) {
+        if (numbers1.size() != LOTTO_NUMBER) {
             throw new IllegalArgumentException("개수가 6개가 아닙니다.");
         }
-
-        numbers.stream().forEach(number -> checkNumber(number));
-
-        return numbers;
     }
 
-    private void checkNumber(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException("음수는 로또 번호가 될 수 없습니다.");
-        }
-        if (number > 45) {
-            throw new IllegalArgumentException("로또 번호는 45를 넘어갈 수 없습니다.");
-        }
-    }
-    private List<Integer> split(String numbers) {
+    private List<Number> split1(String numbers) {
         String[] number = numbers.split(", ");
-        return Arrays.stream(number).map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.stream(number).map(num -> new Number(Integer.parseInt(num))).collect(Collectors.toList());
     }
 
     public int matchesNumber(Lotto lotto) {
@@ -65,10 +50,6 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-
-        Collections.sort(numbers);
-        Collections.sort(lotto.numbers);
-
         return Objects.equals(numbers, lotto.numbers);
     }
 

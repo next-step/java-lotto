@@ -16,6 +16,6 @@ public class LottoCreatingRandomStrategy implements LottoCreatingStrategy {
 
         Collections.shuffle(numbers);
 
-        return new Lotto(numbers.subList(ZERO, LOTTO_NUMBER));
+        return new Lotto(numbers.subList(ZERO, LOTTO_NUMBER).stream().map(String::valueOf).collect(Collectors.joining(", ")));
     }
 }

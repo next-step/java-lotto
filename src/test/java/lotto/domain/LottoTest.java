@@ -23,7 +23,7 @@ public class LottoTest {
         String number = "-1, 2, 3, 4, 5, 6";
         assertThatThrownBy(() -> {
             new Lotto(number);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("음수는 로또 번호가 될 수 없습니다.");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1보다 작은 값은 로또 번호가 될 수 없습니다.");
     }
     @Test
     @DisplayName("로또 번호 확인")
