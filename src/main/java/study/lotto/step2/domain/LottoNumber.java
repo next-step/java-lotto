@@ -3,7 +3,7 @@ package study.lotto.step2.domain;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private final int number;
@@ -42,6 +42,11 @@ public class LottoNumber {
 
         private LottoNumberCache() {
         }
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return number() - o.number();
     }
 
     @Override

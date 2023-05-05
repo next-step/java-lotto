@@ -26,6 +26,9 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(1, 6, 2, 5, 3, 4);
 
         // when, then
-        assertThat(lottoNumbers.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lottoNumbers.numbers()).containsExactly(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
+        );
     }
 }

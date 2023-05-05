@@ -16,9 +16,8 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<Integer> numbers() {
+    public Set<LottoNumber> numbers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::number)
                 .collect(Collectors.collectingAndThen(Collectors.toCollection(TreeSet::new), Collections::unmodifiableSet));
     }
 
@@ -28,7 +27,7 @@ public class LottoNumbers {
         }
     }
 
-    private static Set<LottoNumber> of(Integer... lottoNumbers) {
+    private static Set<LottoNumber> of(Integer...lottoNumbers) {
         return Arrays.stream(lottoNumbers)
                 .map(LottoNumber::of)
                 .collect(Collectors.toUnmodifiableSet());
