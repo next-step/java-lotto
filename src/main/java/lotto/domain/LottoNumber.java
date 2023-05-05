@@ -10,9 +10,7 @@ public class LottoNumber {
     private static final int HIGH_LIMIT = 45;
     private static final LottoNumber[] LOTTO_NUMBER_CACHE = new LottoNumber[45 + 1];
 
-
     static {
-
         for (int i = LOW_LIMIT; i <= HIGH_LIMIT; i++) {
             LOTTO_NUMBER_CACHE[i] = new LottoNumber(i);
         }
