@@ -1,4 +1,4 @@
- package study.lotto.step2.presentation;
+ package study.lotto.step2.presentation.output;
 
 import study.lotto.step2.domain.Lottos;
 
@@ -16,11 +16,11 @@ public class LottosInformation {
     }
 
     private void printNumberOfPurchase() {
-        System.out.println(lottos.numberOfPurchase() + "개를 구매했습니다.");
+        System.out.println(lottos.size() + "개를 구매했습니다.");
     }
 
     private void printSelectedNumbersOf() {
-        lottos.selectedNumbers().forEach(System.out::println);
+        lottos.getLottos().forEach(System.out::println);
     }
 
     private void consoleLineBreak() {

@@ -43,7 +43,7 @@ class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
 
         // when, then
-        assertThat(winningLotto.lottoResultOf(lotto)).isEqualTo(expectedLottoResult);
+        assertThat(winningLotto.resultOf(lotto)).isEqualTo(expectedLottoResult);
     }
 
     @DisplayName("여러 로또 결과 확인")
@@ -56,7 +56,7 @@ class WinningLottoTest {
         Lottos lottos = new Lottos(List.of(notMatchLotto, oneMatchLotto));
 
         // when
-        LottoResults lottoResults = winningLotto.lottoResultsOf(lottos);
+        LottoResults lottoResults = winningLotto.resultsOf(lottos);
 
         // then
         LottoResults expectedLottoResults = new LottoResults(LottoResult.NOT_MATCH, LottoResult.MATCH_ONE_NUMBER);

@@ -24,11 +24,11 @@ public class WinningLotto {
         this.winningLottoNumbers = winningLottoNumbers;
     }
 
-    public LottoResults lottoResultsOf(Lottos lottos) {
-        return new LottoResults(lottoResultsOf(lottos.getLottos()));
+    public LottoResults resultsOf(Lottos lottos) {
+        return new LottoResults(resultsOf(lottos.getLottos()));
     }
 
-    public LottoResult lottoResultOf(Lotto lotto) {
+    public LottoResult resultOf(Lotto lotto) {
         return LottoResult.of(numbersOfMatch(lotto));
     }
 
@@ -40,9 +40,9 @@ public class WinningLotto {
         return numbersOfMatch(lottoNumbers.getLottoNumbers());
     }
 
-    private List<LottoResult> lottoResultsOf(List<Lotto> lottos) {
+    private List<LottoResult> resultsOf(List<Lotto> lottos) {
         return lottos.stream()
-                .map(this::lottoResultOf)
+                .map(this::resultOf)
                 .collect(Collectors.toUnmodifiableList());
     }
 
