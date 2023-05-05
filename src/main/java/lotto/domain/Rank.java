@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 
@@ -13,20 +13,22 @@ public enum Rank {
     private int matchCount;
     private int money;
 
-    Rank(int matchCount, int money) {
+    Rank(final int matchCount, final int money) {
         this.matchCount = matchCount;
         this.money = money;
     }
+
+    public int matchCount() { return matchCount; }
 
     public int winnings() {
         return money;
     }
 
-    private boolean isMatch(int matchCount) {
+    private boolean isMatch(final int matchCount) {
         return this.matchCount == matchCount;
     }
 
-    public static Rank win(int matchCount) {
+    public static Rank win(final int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isMatch(matchCount))
                 .findFirst()

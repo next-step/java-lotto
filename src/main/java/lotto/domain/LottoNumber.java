@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Objects;
 
@@ -18,6 +18,10 @@ public class LottoNumber {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("로또번호가 유효하지 않습니다.");
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override

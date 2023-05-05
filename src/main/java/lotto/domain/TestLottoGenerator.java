@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ public class TestLottoGenerator implements LottoGenerator {
 
     private final List<List<Integer>> numbers;
 
-    public TestLottoGenerator(List<List<Integer>> numbers) {
+    public TestLottoGenerator(final List<List<Integer>> numbers) {
         this.numbers = numbers;
     }
 

@@ -1,11 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public static Lotto buy(final List<Integer> numbers) {
         return new Lotto(generate(numbers));
@@ -33,6 +33,10 @@ public class Lotto {
 
     public boolean hasSize(final int size) {
         return lottoNumbers.size() == size;
+    }
+
+    public List<Integer> getNumbers() {
+        return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
     }
 
 }
