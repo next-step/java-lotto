@@ -47,7 +47,7 @@ public class Calculator {
 	public void put(String expression) throws IllegalArgumentException {
 		validate(expression);
 
-		splitWithDelimiter(expression).stream()
+		splitWithDelimiter(expression)
 			.forEach(this::putMathematicalToken);
 	}
 
