@@ -41,7 +41,7 @@ public class OutputView {
         lotteryCount);
   }
 
-  private static void printRateOfReturn(Money prizeMoney, Money inputMoney) {
+  private static void printRateOfReturn(Money inputMoney, Money prizeMoney) {
     double rateOfReturn = prizeMoney.getMoneyRate(inputMoney);
     System.out.printf("총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임) \n", rateOfReturn);
   }

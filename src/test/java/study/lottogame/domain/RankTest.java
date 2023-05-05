@@ -10,12 +10,13 @@ public class RankTest {
   @DisplayName("countOfMatch에 해당하는 Rank Enum을 반환한다.")
   @Test
   public void valueOf(){
-    assertThat(Rank.valueOf(0)).isEqualTo(Rank.MISS);
-    assertThat(Rank.valueOf(1)).isEqualTo(Rank.MISS);
-    assertThat(Rank.valueOf(2)).isEqualTo(Rank.MISS);
-    assertThat(Rank.valueOf(3)).isEqualTo(Rank.FOURTH);
-    assertThat(Rank.valueOf(4)).isEqualTo(Rank.THIRD);
-    assertThat(Rank.valueOf(5)).isEqualTo(Rank.SECOND);
-    assertThat(Rank.valueOf(6)).isEqualTo(Rank.FIRST);
+    assertThat(Rank.valueOf(0, false)).isEqualTo(Rank.MISS);
+    assertThat(Rank.valueOf(1, false)).isEqualTo(Rank.MISS);
+    assertThat(Rank.valueOf(2, false)).isEqualTo(Rank.MISS);
+    assertThat(Rank.valueOf(3, true)).isEqualTo(Rank.FIFTH);
+    assertThat(Rank.valueOf(4, true)).isEqualTo(Rank.FOURTH);
+    assertThat(Rank.valueOf(5, false)).isEqualTo(Rank.THIRD);
+    assertThat(Rank.valueOf(5, true)).isEqualTo(Rank.SECOND);
+    assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
   }
 }

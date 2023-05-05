@@ -3,6 +3,7 @@ package study.lottogame;
 import study.lottogame.domain.GameResult;
 import study.lottogame.domain.Lotteries;
 import study.lottogame.domain.Lottery;
+import study.lottogame.domain.LottoNumber;
 import study.lottogame.domain.Money;
 import study.lottogame.factory.LotteriesFactory;
 import study.lottogame.ui.InputView;
@@ -16,7 +17,8 @@ public class ApplicationGame {
     OutputView.printLotteries(lotteries);
 
     Lottery prizeLottery = InputView.inputPrizeLottery();
-    GameResult gameResult = lotteries.calculateGameResult(prizeLottery);
+    LottoNumber bonusLottoNumber = InputView.inputBonusLottoNumber();
+    GameResult gameResult = lotteries.calculateGameResult(prizeLottery, bonusLottoNumber);
     OutputView.printGameResult(inputMoney, gameResult);
   }
 }
