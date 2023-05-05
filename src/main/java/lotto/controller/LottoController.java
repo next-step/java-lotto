@@ -12,8 +12,9 @@ public class LottoController {
         ResultView.printLottoTickets(lottoTickets);
 
         String winningNumbersString = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber();
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString);
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString, new BonusNumber(bonusNumber));
         WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics();
         double earningsRate = winningStatistics.calculateEarningsRate(lottoTickets.findLottoTicketCount());
 
