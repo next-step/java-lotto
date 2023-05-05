@@ -11,7 +11,7 @@ public class Auditor {
     }
 
     public static void manualPurchaseValidation(int totalPurchaseCount, int manualPurchaseCount) {
-        if(totalPurchaseCount < manualPurchaseCount) {
+        if (totalPurchaseCount < manualPurchaseCount) {
             throw new ManualPurchaseExceedException();
         }
     }

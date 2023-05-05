@@ -4,7 +4,6 @@ import lotto.domain.Auditor;
 import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 import lotto.domain.Tickets;
-import lotto.exception.MinimumPurchaseShortageException;
 
 import java.util.Scanner;
 
@@ -26,12 +25,10 @@ public class InputPresent {
     public int purchaseCount() {
         System.out.println(PURCHASE_AMOUNT);
         int count = Integer.parseInt(scanner.nextLine()) / 1000;
-        System.out.printf(PURCHASE_CONFIRM, count,System.lineSeparator());
+        System.out.printf(PURCHASE_CONFIRM, count, System.lineSeparator());
         Auditor.minimumPurchaseCountValidate(count);
         return count;
     }
-
-
 
     public Ticket winningNumbers() {
         System.out.println(WINNING_NUMBER);
@@ -57,7 +54,6 @@ public class InputPresent {
         }
         return tickets;
     }
-
 
     private Ticket manualPurchase() {
         System.out.println(MANUAL_NUMBERS);
