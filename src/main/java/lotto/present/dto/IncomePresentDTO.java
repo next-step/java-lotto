@@ -7,7 +7,7 @@ public class IncomePresentDTO {
     private final String breakEvenMessage;
 
     public IncomePresentDTO(Statics statics) {
-        this.profitRatio = statics.getProfitRatio();
+        this.profitRatio = statics.profitRatio();
         this.breakEvenMessage = statics.breakEvenMessage();
     }
 
