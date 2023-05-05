@@ -1,7 +1,9 @@
 package lotto;
 
+import java.util.Objects;
+
 public class LottoNumber {
-    private final Integer number;
+    private final int number;
 
     public LottoNumber(final int number) {
         checkNumber(number);
@@ -21,16 +23,24 @@ public class LottoNumber {
                 '}';
     }
 
-    public Integer intValue() {
+    public int intValue() {
         return number;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return number.equals(((LottoNumber) obj).number);
+    public int compareTo(LottoNumber target) {
+        return Integer.compare(number,target.number);
     }
 
-    public int compareTo(LottoNumber target) {
-        return number.compareTo(target.number);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
