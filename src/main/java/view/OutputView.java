@@ -5,6 +5,10 @@ import lotto.Lotto;
 import lotto.MatchesStatus;
 
 public class OutputView {
+  
+  private OutputView() {
+    throw new AssertionError();
+  }
 
   public static void println() {
     System.out.println();
