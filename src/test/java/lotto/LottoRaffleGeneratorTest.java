@@ -1,8 +1,8 @@
 package lotto;
 
-import java.util.List;
 import lotto.domain.raffle.BaseKoreaLottoRaffleGenerator;
 import lotto.domain.raffle.LottoRaffleGenerator;
+import lotto.domain.round.LottoRoundNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +17,12 @@ public class LottoRaffleGeneratorTest {
     LottoRaffleGenerator raffleGenerator = new BaseKoreaLottoRaffleGenerator();
 
     // when
-    List<Integer> numbers = raffleGenerator.generateRaffleNumber();
+    LottoRoundNumbers numbers = raffleGenerator.generateRaffleNumber();
 
     // then
     Assertions.assertThat(numbers)
+        .extracting("numbers")
+        .asList()
         .hasSize(6);
   }
 }

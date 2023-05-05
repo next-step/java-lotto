@@ -7,6 +7,7 @@ import lotto.domain.game.LottoGameSetting;
 import lotto.domain.game.LottoGameType;
 import lotto.domain.game.LottoGameWrapper;
 import lotto.domain.raffle.LottoRaffleGenerator;
+import lotto.domain.round.LottoRoundNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +22,7 @@ public class LottoGameGeneratorTest {
 
   @BeforeEach
   void setup() {
-    fixedRaffleGenerator = () -> List.of(1, 2, 3, 40, 41, 42);
+    fixedRaffleGenerator = () -> new LottoRoundNumbers(List.of(1, 2, 3, 40, 41, 42));
     gameSetting = LottoGameSetting.builder()
         .raffleGenerator(fixedRaffleGenerator)
         .pricePerGame(1000)
@@ -47,7 +48,9 @@ public class LottoGameGeneratorTest {
     LottoGameWrapper lottoGameWrapper = gameGenerator.generateLottoGame();
 
     // then
-    Assertions.assertThat(lottoGameWrapper.getIncludeGameTypes())
+    Assertions.assertThat(lottoGameWrapper)
+        .extracting("includeGameTypes")
+        .asList()
         .contains(LottoGameType.MANUAL)
         .contains(LottoGameType.AUTO);
   }
@@ -70,7 +73,9 @@ public class LottoGameGeneratorTest {
     LottoGameWrapper lottoGameWrapper = gameGenerator.generateLottoGame();
 
     // then
-    Assertions.assertThat(lottoGameWrapper.getIncludeGameTypes())
+    Assertions.assertThat(lottoGameWrapper)
+        .extracting("includeGameTypes")
+        .asList()
         .contains(LottoGameType.MANUAL)
         .doesNotContain(LottoGameType.AUTO);
   }
@@ -88,7 +93,9 @@ public class LottoGameGeneratorTest {
     LottoGameWrapper lottoGameWrapper = gameGenerator.generateLottoGame();
 
     // then
-    Assertions.assertThat(lottoGameWrapper.getIncludeGameTypes())
+    Assertions.assertThat(lottoGameWrapper)
+        .extracting("includeGameTypes")
+        .asList()
         .contains(LottoGameType.AUTO)
         .doesNotContain(LottoGameType.MANUAL);
   }

@@ -9,6 +9,7 @@ import lotto.domain.game.LottoGameStatistics;
 import lotto.domain.game.LottoWinType;
 import lotto.domain.game.LottoWinningNumber;
 import lotto.domain.raffle.LottoRaffleGenerator;
+import lotto.domain.round.LottoRoundNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,8 +25,8 @@ public class LottoGameTest {
 
   @BeforeEach
   void setup() {
-    fixedRaffleGenerator = () -> List.of(1, 2, 3, 40, 41, 42);
-    duplicateFixedRaffleGenerator = () -> List.of(1, 1, 2, 3, 4, 5);
+    fixedRaffleGenerator = () -> new LottoRoundNumbers(List.of(1, 2, 3, 40, 41, 42));
+    duplicateFixedRaffleGenerator = () -> new LottoRoundNumbers(List.of(1, 1, 2, 3, 4, 5));
 
     gameSetting = LottoGameSetting.builder()
         .raffleGenerator(fixedRaffleGenerator)

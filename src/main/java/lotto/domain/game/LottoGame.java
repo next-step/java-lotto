@@ -69,7 +69,7 @@ public class LottoGame {
 
   private List<LottoRound> initAutoOnlyRounds() {
     return IntStream.rangeClosed(1, this.purchasePrice.getGameCount())
-        .mapToObj(i -> new LottoRound(new LottoRoundNumbers(raffleGenerator.generateRaffleNumber()), roundJudge))
+        .mapToObj(i -> new LottoRound(raffleGenerator.generateRaffleNumber(), roundJudge))
         .collect(Collectors.toList());
   }
 
@@ -77,7 +77,7 @@ public class LottoGame {
     int gameCount = purchasePrice.getGameCount();
     List<LottoRound> manualRounds = makeManualLottoRounds(manualRoundNumbers);
     List<LottoRound> autoRounds = IntStream.rangeClosed(manualRounds.size() + 1, gameCount)
-        .mapToObj(i -> new LottoRound(new LottoRoundNumbers(raffleGenerator.generateRaffleNumber()), roundJudge))
+        .mapToObj(i -> new LottoRound(raffleGenerator.generateRaffleNumber(), roundJudge))
         .collect(Collectors.toList());
 
     List<LottoRound> rounds = new ArrayList<>(gameCount);

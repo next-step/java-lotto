@@ -1,7 +1,7 @@
 package lotto.domain.raffle;
 
-import java.util.List;
+import lotto.domain.round.LottoRoundNumbers;
 
 public interface LottoRaffleGenerator {
-  List<Integer> generateRaffleNumber();
+  LottoRoundNumbers generateRaffleNumber();
 }
