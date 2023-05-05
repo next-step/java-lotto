@@ -13,19 +13,27 @@ public class LottoException {
     return TARGET_NUMBER_PATTERN.asMatchPredicate().test(strNumber);
   }
 
-  public static int checkIllegalArgumentException(String strNumber) {
+  public static int convertNumber(String strNumber) {
     if (!isNumber(strNumber)) {
-      throw new IllegalArgumentException("45이하의 숫자, 콤마, 띄어쓰기로 입력해주세요");
+      lottoIllegalArgumentException("45이하의 숫자, 콤마, 띄어쓰기로 입력해주세요");
     }
 
     return Integer.parseInt(strNumber);
   }
 
-  public static void checkSize(List<Integer> numberList) {
+  public static boolean isRightSize(List<Integer> numberList) {
     Set<Integer> numberSet = new HashSet<>(numberList);
 
-    if (numberSet.size() != (numberList).size() || numberSet.size() != 6) {
-      throw new IllegalArgumentException("로또 번호가 중복 혹은 6개가 아닙니다.");
+    return numberSet.size() != (numberList).size() || numberSet.size() != 6;
+  }
+
+  public static void checkSize(List<Integer> numberList) {
+    if (isRightSize(numberList)) {
+      lottoIllegalArgumentException("로또 번호가 중복 혹은 6개가 아닙니다.");
     }
+  }
+
+  public static void lottoIllegalArgumentException(String message) {
+    throw new IllegalArgumentException(message);
   }
 }

@@ -11,9 +11,9 @@ public class BudgetException {
     return BUDGET_PATTERN.asMatchPredicate().test(strNumber);
   }
 
-  public static int checkIllegalArgumentException(String strNumber) {
+  public static int convertBudget(String strNumber) {
     if (!isNumber(strNumber)) {
-      throw new IllegalArgumentException("1 이상의 숫자만 입력해주세요");
+      budgetIllegalArgumentException("1 이상의 숫자만 입력해주세요");
     }
 
     return Integer.parseInt(strNumber);
@@ -21,7 +21,11 @@ public class BudgetException {
 
   public static void checkScale(int budget) {
     if (budget < Lotto.PRICE) {
-      throw new IllegalArgumentException("금액이 로또 가격보다 낮습니다.");
+      budgetIllegalArgumentException("금액이 로또 가격보다 낮습니다.");
     }
+  }
+
+  public static void budgetIllegalArgumentException(String message) {
+    throw new IllegalArgumentException(message);
   }
 }

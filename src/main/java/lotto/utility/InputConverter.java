@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class InputConverter {
 
   public static int convertBudgetToNumberOfPurchase(String strNumber) {
-    int budget = BudgetException.checkIllegalArgumentException(strNumber);
+    int budget = BudgetException.convertBudget(strNumber);
 
     BudgetException.checkScale(budget);
 
@@ -20,7 +20,7 @@ public class InputConverter {
 
   public static List<Integer> convertNumberToList(String targetNumber) {
     List<Integer> numberList = Arrays.stream(targetNumber.split(", "))
-        .map(LottoException::checkIllegalArgumentException)
+        .map(LottoException::convertNumber)
         .collect(Collectors.toList());
 
     LottoException.checkSize(numberList);

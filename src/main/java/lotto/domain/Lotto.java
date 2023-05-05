@@ -10,15 +10,13 @@ import java.util.stream.IntStream;
 public class Lotto {
   public static final List<Integer> NUMBER_UNDER_FORTY_FIVE = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
-  public static final NumberMaker NUMBER_MAKER = new NumberMaker();
-
   public static int PRICE = 1000;
 
   private final List<Integer> lottoNumber;
 
   // 번호 자동 입력
   public Lotto() {
-    this(NUMBER_MAKER.makeSixLottoNumber(NUMBER_UNDER_FORTY_FIVE));
+    this(NumberMaker.makeSixLottoNumber(NUMBER_UNDER_FORTY_FIVE));
   }
 
   // 번호 수동 입력
