@@ -24,9 +24,6 @@ public class Statics {
         return prizeIntegerMap;
     }
 
-    private double aggregateProfitRatio(int ticketCount, int income) {
-        return (double) income / (double) (ticketCount * 1000);
-    }
 
     public int getIncome() {
         return Prize.FIRST.calculatePrize(this.countPrize(Prize.FIRST)) +
@@ -41,7 +38,7 @@ public class Statics {
     }
 
     public double profitRatio() {
-        return aggregateProfitRatio(this.totalTryTicketCount, this.getIncome());
+        return (double) this.getIncome() / (double) (this.totalTryTicketCount * 1000);
     }
 
     public String breakEvenMessage() {

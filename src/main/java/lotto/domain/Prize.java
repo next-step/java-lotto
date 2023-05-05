@@ -8,7 +8,6 @@ public enum Prize {
     FIFTH(3, 5_000, false),
     BOOM(0, 0, false);
 
-
     private final int matchCount;
     private final int prizeAmount;
     private final boolean bonusNumberMatch;

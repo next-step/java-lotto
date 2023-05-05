@@ -40,7 +40,6 @@ public class LottoNumber {
         throw new LottoNumberOutOfRangeException();
     }
 
-
     public int getLottoNumber() {
         return lottoNumber;
     }
