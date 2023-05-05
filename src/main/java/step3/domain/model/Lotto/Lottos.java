@@ -14,6 +14,17 @@ public class Lottos {
             lottos.add(Lotto.from(new LottoPolicyStrategy()));
         }
     }
+    public Lottos(List<Lotto> lottos) {
+       this.lottos = lottos;
+    }
+
+    public static Lottos fromManualLottos(List<List<Integer>> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < manualLottos.size(); i++) {
+            lottos.add(Lotto.fromManualLotto(new LottoPolicyStrategy(), manualLottos.get(i)));
+        }
+        return new Lottos(lottos);
+    }
 
     public static Lottos from(int lottoCount) {
         if (lottoCount < 0) {
@@ -24,5 +35,9 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public void combineLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.getLottos());
     }
 }

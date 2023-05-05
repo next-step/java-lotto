@@ -5,6 +5,7 @@ import step3.domain.model.Lotto.LottoNumber;
 import step3.domain.model.Lotto.Lottos;
 import step3.domain.strategy.lotto.LottoPolicyStrategy;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoService {
@@ -18,8 +19,12 @@ public class LottoService {
         return lottoService;
     }
 
-    public Lottos createLottos(int count) {
+    public Lottos createAutoLottos(int count) {
         return Lottos.from(count);
+    }
+
+    public Lottos createManualLotto(List<List<Integer>> manualLotto) {
+        return Lottos.fromManualLottos(manualLotto);
     }
 
     public LottoNumber createBonusNumber(int bonusNumber) {
@@ -40,5 +45,10 @@ public class LottoService {
         for (Lotto lotto : lottos.getLottos()) {
             lotto.calculatorBonusNumber(bonusNumber);
         }
+    }
+
+    public Lottos combineLotto(Lottos autoLottos, Lottos manualLottos) {
+        autoLottos.combineLottos(manualLottos);
+        return autoLottos;
     }
 }

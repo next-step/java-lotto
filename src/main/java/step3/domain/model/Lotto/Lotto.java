@@ -21,6 +21,10 @@ public class Lotto {
         return new Lotto(strategy.createLottoNumbers());
     }
 
+    public static Lotto fromManualLotto(PolicyStrategy strategy, List<Integer> manualLotto) {
+        return new Lotto(strategy.createManualLottoNumbers(manualLotto));
+    }
+
     public static Lotto fromWinningLotto(PolicyStrategy strategy, String lastWinningNumbers) {
         return new Lotto(strategy.createWinningLottoNumber(lastWinningNumbers));
     }

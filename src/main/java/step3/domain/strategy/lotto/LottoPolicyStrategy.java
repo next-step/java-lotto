@@ -4,6 +4,7 @@ import step3.domain.model.Lotto.LottoNumber;
 import step3.domain.model.Lotto.LottoNumbers;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoPolicyStrategy implements PolicyStrategy {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -70,5 +71,22 @@ public class LottoPolicyStrategy implements PolicyStrategy {
         if (size != LOTTO_NUMBER_COUNT) {
             throw new IllegalStateException(String.format("지정된 로또의 갯수가 아닙니다. 로또의 갯수는 %d", LOTTO_NUMBER_COUNT));
         }
+    }
+
+    @Override
+    public LottoNumbers createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+        if (manualLottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalStateException("로또 갯수를 잘못 입력하였습니다.");
+        }
+
+        if(manualLottoNumbers.size() != manualLottoNumbers.stream().distinct().count()){
+            throw new IllegalArgumentException("중복 값이 있습니다.");
+        }
+
+        List<LottoNumber> numbers = manualLottoNumbers.stream()
+                .map(integer -> LottoNumber.from(integer))
+                .collect(Collectors.toList());
+
+        return LottoNumbers.from(numbers);
     }
 }
