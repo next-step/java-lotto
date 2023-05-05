@@ -33,7 +33,9 @@ public class InputView {
     }
 
     public List<Integer> toNumbers(String input) {
-        return Arrays.stream(input.split(",")).map(o -> Integer.parseInt(o.trim())).collect(Collectors.toList());
+        return Arrays.stream(input.split(","))
+                .map(o -> Integer.parseInt(o.trim()))
+                .collect(Collectors.toList());
     }
 
     public CheckWinningRequest checkWinning() {

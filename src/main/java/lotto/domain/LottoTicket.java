@@ -12,7 +12,7 @@ public class LottoTicket {
     private static int TICKET_LIMIT = 6;
     private static int TICKET_MIN_NUMBER = 1;
     private static int TICKET_MAX_NUMBER = 45;
-    Set<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
         validateTicketSize(lottoNumbers);
@@ -34,7 +34,7 @@ public class LottoTicket {
     }
 
     public Rank getRank(Win win) {
-        return win.getRank(this.lottoNumbers);
+        return win.getRank(this.getLottoNumbers());
     }
 
     public Set<Integer> getLottoNumbers() {
