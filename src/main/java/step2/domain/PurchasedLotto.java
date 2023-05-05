@@ -24,7 +24,9 @@ public class PurchasedLotto {
     }
 
     public int getCountOfRank(Ranking ranking) {
-        return (int) purchasedLottoList.stream().filter(lotto -> lotto.getRanking() == ranking).count();
+        return (int) purchasedLottoList.stream()
+            .filter(lotto -> lotto.getRanking() == ranking)
+            .count();
     }
 
     public List<Lotto> get() {
@@ -49,6 +51,11 @@ public class PurchasedLotto {
         }
     }
 
+
+    public void addManualLotto(ManualLotto manualLotto) {
+        purchasedLottoList.addAll(manualLotto.toLottoEntity());
+    }
+
     private void prizeSecondOrThird(Lotto lotto, boolean isContained) {
         if (isContained) {
             lotto.rank(SECOND);
@@ -61,11 +68,7 @@ public class PurchasedLotto {
         return lotto.match(winningNumbers);
     }
 
-    private int getSumOfWinningMoney() {
+    private long getSumOfWinningMoney() {
         return purchasedLottoList.stream().mapToInt(Lotto::getPrizedMoney).sum();
-    }
-
-    public void addManualLottos(ManualLotto manualLotto){
-        manualLotto.isAdded(purchasedLottoList);
     }
 }
