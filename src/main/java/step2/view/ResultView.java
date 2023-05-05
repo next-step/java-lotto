@@ -26,7 +26,7 @@ public class ResultView {
 
     public static void printResultReport(int[] lottoReport) {
         for (int i = MINIMUM_MATH_COUNT; i < MAXIMUM_MATH_COUNT + 1; i++) {
-            printMessage(i + "개 일치 (" + PrizeMoney.toPrizeMoney(i).getPrizeMoney() + ") - " + lottoReport[i] + "개");
+            printMessage(i + "개 일치 (" + PrizeMoney.toPrizeMoney(i) + ") - " + lottoReport[i] + "개");
         }
     }
 }

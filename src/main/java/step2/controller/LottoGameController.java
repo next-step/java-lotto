@@ -31,6 +31,8 @@ public class LottoGameController {
         }
 
         ResultView.printResultReport(lottoReport);
+        double profit = lottoGames.calculateProfit(gameCount, lottoReport);
+        ResultView.printMessage("총 수익률은 " + profit + "입니다.");
 
     }
 

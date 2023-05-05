@@ -1,10 +1,14 @@
 package step2.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGames {
     private static final int DEFAULT_NUMBER_COUNT = 6;
     private static int DEFAULT_LOTTO_PRICE = 1000;
+    private static final int MINIMUM_MATH_COUNT = 3;
+    private static final int MAXIMUM_MATH_COUNT_EXCLUSIVE = 7;
 
     public LottoGames() {
     }
@@ -42,7 +46,7 @@ public class LottoGames {
 
     private Set<Integer> toSet(String[] numbers) {
         HashSet<Integer> hashSet = new HashSet<>();
-        for(String number : numbers) {
+        for (String number : numbers) {
             hashSet.add(toInt(number));
         }
         return hashSet;
@@ -56,4 +60,21 @@ public class LottoGames {
         }
     }
 
+    public double calculateProfit(int gameCount, int[] lottoReport) {
+        long profit = sum(lottoReport);
+        double cost = gameCount * DEFAULT_LOTTO_PRICE;
+        System.out.println("수익률: " + profit + "  비용: " + cost);
+        return calculateProfitRate(profit, cost);
+    }
+
+    long sum(int[] lottoReport) {
+        System.out.println();
+        return IntStream.range(MINIMUM_MATH_COUNT, MAXIMUM_MATH_COUNT_EXCLUSIVE)
+                .mapToLong(i -> PrizeMoney.toPrizeMoney(i) * lottoReport[i]).sum();
+    }
+
+    private double calculateProfitRate(long profit, double cost) {
+        double rate = (profit - cost) / cost;
+        return Math.round(rate * 100) / 100;
+    }
 }

@@ -19,14 +19,11 @@ public enum PrizeMoney {
         this.prizeMoney = prizeMoney;
     }
 
-    public long getPrizeMoney() {
-        return prizeMoney;
-    }
-
-    public static PrizeMoney toPrizeMoney(int rightCount) {
+    public static long toPrizeMoney(int rightCount) {
         return Arrays.stream(values())
                 .filter(prizeMoney -> prizeMoney.rightCount == rightCount)
                 .findAny()
-                .orElseThrow(() -> new InvalidParameterException("유효한 연산자가 아닙니다."));
+                .map(prizeMoney -> prizeMoney.prizeMoney)
+                .orElseThrow(() -> new InvalidParameterException());
     }
 }
