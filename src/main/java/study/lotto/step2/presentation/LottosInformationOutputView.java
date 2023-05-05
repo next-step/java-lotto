@@ -2,10 +2,10 @@
 
 import study.lotto.step2.domain.Lottos;
 
-public class LottosInformation {
+public class LottosInformationOutputView {
     private final Lottos lottos;
 
-    public LottosInformation(Lottos lottos) {
+    public LottosInformationOutputView(Lottos lottos) {
         this.lottos = lottos;
     }
 

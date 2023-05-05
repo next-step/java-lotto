@@ -5,12 +5,12 @@ import study.lotto.step2.domain.LottoResults;
 
 import java.util.Arrays;
 
-public class LottoResultsStatistic {
+public class LottoResultsStatisticOutputView {
     private static final String WINNING_STATISTIC = "당첨 통계";
     private static final String HORIZONTAL_LINE = "---------";
     private final LottoResults lottoResults;
 
-    public LottoResultsStatistic(LottoResults lottoResults) {
+    public LottoResultsStatisticOutputView(LottoResults lottoResults) {
         this.lottoResults = lottoResults;
     }
 

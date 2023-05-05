@@ -1,26 +1,25 @@
 package study.lotto.step2;
 
-import study.lotto.step2.application.LottoReader;
 import study.lotto.step2.application.LottoSeller;
 import study.lotto.step2.domain.*;
-import study.lotto.step2.presentation.LottoResultsStatistic;
-import study.lotto.step2.presentation.LottosInformation;
+import study.lotto.step2.presentation.LottoResultsStatisticOutputView;
+import study.lotto.step2.presentation.LottosInformationOutputView;
 
-import static study.lotto.step2.presentation.ConsoleInputUtil.*;
+import static study.lotto.step2.presentation.ConsoleInputView.*;
 
 public class LottoApplication {
     public static void main(String[] args) {
         Lottos lottos = lottoSeller().sell(askPurchaseAmount());
-        LottosInformation lottosInformation = new LottosInformation(lottos);
+        LottosInformationOutputView lottosInformation = new LottosInformationOutputView(lottos);
         lottosInformation.printInformation();
 
-        LottoResults lottoResults = lottoReader().resultOf(lottos);
-        LottoResultsStatistic lottoResultsStatistic = new LottoResultsStatistic(lottoResults);
-        lottoResultsStatistic.printWinningStatistic();
+        LottoResults lottoResults = winningLotto().resultsOf(lottos);
+        LottoResultsStatisticOutputView lottoResultsStatisticOutputViewView = new LottoResultsStatisticOutputView(lottoResults);
+        lottoResultsStatisticOutputViewView.printWinningStatistic();
     }
 
-    private static LottoReader lottoReader() {
-        return new LottoReader(askLastWeekWinningNumbers());
+    private static WinningLotto winningLotto() {
+        return new WinningLotto(askLastWeekWinningNumbers());
     }
 
     private static LottoSeller lottoSeller() {
@@ -31,7 +30,7 @@ public class LottoApplication {
         return new LottoFactory(randomNumberSelector());
     }
 
-    private static AutoNumberSelector randomNumberSelector() {
-        return new RandomNumberSelector();
+    private static LottoNumbersFactory randomNumberSelector() {
+        return new RandomLottoNumbersFactory();
     }
 }
