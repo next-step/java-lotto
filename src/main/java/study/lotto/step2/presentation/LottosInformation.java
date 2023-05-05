@@ -1,4 +1,4 @@
- package study.lotto.step2.presentation.output;
+ package study.lotto.step2.presentation;
 
 import study.lotto.step2.domain.Lottos;
 

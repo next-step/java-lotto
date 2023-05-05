@@ -2,12 +2,12 @@ package study.lotto.step2.presentation;
 
 import java.util.Scanner;
 
-public class ConsoleInputUtil {
+public class ConsoleInputView {
     private static final String INSERT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String INSERT_LAST_WEEK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    private ConsoleInputUtil() {
+    private ConsoleInputView() {
     }
 
     public static String askPurchaseAmount() {
