@@ -11,6 +11,6 @@ public class LottoStoreTest {
     @DisplayName("입력금액만큼 로또가 생성되는지 테스트(1000원에 로또 1장)")
     void buyLottoTest() {
         int money = 5000;
-        assertThat(LottoStore.buyLotto(money)).isEqualTo(money/1000);
+        assertThat(LottoStore.buyLotto(money)).isEqualTo(money / 1000);
     }
 }

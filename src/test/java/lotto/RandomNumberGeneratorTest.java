@@ -1,2 +1,15 @@
-package lotto;public class RandomNumberGeneratorTest {
+package lotto;
+
+import lotto.utile.RandomNumberGenerator;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class RandomNumberGeneratorTest {
+    @Test
+    @DisplayName("랜덤값이 1~45 사이의 정수인지 테스트")
+    void randomNumberGeneration() {
+        assertThat(RandomNumberGenerator.getRandomNumber()).isBetween(1, 45);
+    }
 }
