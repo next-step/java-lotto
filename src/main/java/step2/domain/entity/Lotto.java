@@ -1,6 +1,7 @@
 package step2.domain.entity;
 
 import step2.domain.vo.LottoNumber;
+import step2.domain.vo.LottoPrize;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +11,7 @@ public class Lotto {
 
     public static final int PRICE = 1_000;
     private static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int SECOND_LOTTO_COUNT = 5;
 
     private List<LottoNumber> lottoNumbers;
 
@@ -55,12 +57,22 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int countSameNumber(Lotto compareLotto) {
+    public LottoPrize prize(Lotto compareLotto, LottoNumber bonus) {
+        // compare: 로또 번호, lottoNumbers: 당첨 번호
         final var compare = compareLotto.getLottoNumbers();
-
-        return (int) lottoNumbers.stream()
+        final var count = (int) lottoNumbers.stream()
                 .filter(compare::contains)
                 .count();
+
+        if (isSecondBonusLotto(bonus, compare, count)) {
+            return LottoPrize.SECOND_BONUS;
+        }
+
+        return LottoPrize.prize(count);
+    }
+
+    private static boolean isSecondBonusLotto(LottoNumber bonus, List<LottoNumber> compare, int count) {
+        return count == SECOND_LOTTO_COUNT && compare.contains(bonus);
     }
 
     @Override
