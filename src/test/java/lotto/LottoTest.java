@@ -1,6 +1,8 @@
 package lotto;
 
+import lotto.domain.LotteryTickets;
 import lotto.domain.Lotto;
+import lotto.utility.NumberMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,8 +16,7 @@ public class LottoTest {
     @Test
     @DisplayName("lotto 번호 45번까지 잘 만들어지는 지 확인")
     public void allNumberCheck() {
-        Lotto lotto = new Lotto();
-        List<Integer> result = lotto.totalNumber();
+        List<Integer> result = Lotto.NUMBER_UNDER_FORTY_FIVE;
 
         assertEquals(result.size(), 45);
         for(int number : result) {

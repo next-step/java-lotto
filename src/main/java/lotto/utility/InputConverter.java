@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.utility;
 
+import lotto.domain.Lotto;
 import lotto.exception.BudgetException;
 import lotto.exception.LottoException;
 

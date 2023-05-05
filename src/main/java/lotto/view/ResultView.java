@@ -15,10 +15,10 @@ public class ResultView {
             System.out.println(lotto.getCheckedNumbers());
         }
     }
-    private int printPrice(int key, int value) {
+    private int calcWinningPrice(int key, int value) {
         int totalReward = 0;
 
-        if(key >= RewardTable.MINIMUN_MATCH_NUMBER) {
+        if(key >= RewardTable.MINIMUM_MATCH_NUMBER) {
             totalReward = RewardTable.rewardTableInfo(key).calculateReward(value);
             System.out.printf("%d개 일치 (%d원)- %d개\n", key, RewardTable.rewardTableInfo(key).amountOfReward(), value);
         }
@@ -27,11 +27,10 @@ public class ResultView {
     }
 
 
-    public void showStatistic(Map<Integer, Integer> map, int lottoPrice) {
+    public void showStatistic(Map<Integer, Integer> map, int investment) {
         System.out.println("당첨 통계\n---------");
 
-        int totalPrice = 0;
-        int numberOfLotto = 0;
+        int totalWinningPrice = 0;
 
         Iterator<Integer> keys = map.keySet().iterator();
 
@@ -39,15 +38,14 @@ public class ResultView {
             int key = keys.next();
             int value = map.get(key);
 
-            numberOfLotto += value;
-            totalPrice += printPrice(key, value);
+            totalWinningPrice += calcWinningPrice(key, value);
         }
 
-        showRoi(totalPrice, lottoPrice * numberOfLotto);
+        showRoi(totalWinningPrice, investment);
     }
 
-    private void showRoi(int totalPrice, int input) {
-        double result = 1 + (totalPrice - input) / (double)input;
+    private void showRoi(int totalWinningPrice, int investment) {
+        double result = 1 + (totalWinningPrice - investment) / (double)investment;
         String benefit = "손해";
 
         if(result>0) {

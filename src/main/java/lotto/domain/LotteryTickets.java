@@ -1,12 +1,13 @@
 package lotto.domain;
 
-import lotto.exception.BudgetException;
+import lotto.utility.NumberMaker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LotteryTickets {
     private List<Lotto> lottoBundle;
+
     private int investment;
 
     public void purchase(int numberOfPurchase) {

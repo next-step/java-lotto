@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.InputConverter;
+import lotto.utility.InputConverter;
 import lotto.domain.Lotto;
 import lotto.domain.LotteryTickets;
 import org.junit.jupiter.api.DisplayName;

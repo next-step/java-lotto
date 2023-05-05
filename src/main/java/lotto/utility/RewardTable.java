@@ -1,9 +1,6 @@
 package lotto.utility;
 
-import calculator.utility.Operator;
-
 import java.util.Arrays;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 //
@@ -14,7 +11,7 @@ public enum RewardTable {
     firstRank(6, (times) -> times * 2000000000),
     ;
 
-    public static final int MINIMUN_MATCH_NUMBER  = 3;
+    public static final int MINIMUM_MATCH_NUMBER = 3;
     private final int matchNumber;
     private Function<Integer, Integer> times;
 

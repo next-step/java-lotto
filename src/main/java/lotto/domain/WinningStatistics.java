@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class WinningStatistics {
-    private static final Pattern NUMBER_PATTERN_COMPILE = Pattern.compile("^[0-9]+$");
-
     private final List<Integer> targetNumber;
 
     public WinningStatistics(List<Integer> targetNumber) {
@@ -28,21 +26,16 @@ public class WinningStatistics {
         Map<Integer, Integer> map = makeResultMap();
 
         for(Lotto lotto : lottoBundle) {
-            map.put(lotto.getMatchNumber(), map.getOrDefault(lotto.getMatchNumber(), 0) + 1);
+            map.put(lotto.matchLottoNumber(this.targetNumber), map.getOrDefault(lotto.matchLottoNumber(this.targetNumber), 0) + 1);
         }
 
-        // 위와 뭐가 다른 지 모르겠음...
+        // 작동이 안되는 이유가 무엇인가요?
+        // 위와 뭐가 다른 지 모르겠습니다...
 //        lottoBundle.stream()
 //                .mapToInt(lotto -> lotto.getMatchNumber())
 //                .map(key -> map.put(key, map.getOrDefault(key, 0) + 1));
 
         return map;
-    }
-
-    public void compareWithTargetNumber(List<Lotto> lottoBundle) {
-        for(Lotto lotto : lottoBundle) {
-            lotto.matchLottoNumber(this.targetNumber);
-        }
     }
 
     public List<Integer> showTargetNumber() {
