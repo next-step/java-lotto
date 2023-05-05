@@ -14,6 +14,19 @@ import static study.lotto.step2.domain.LottoResult.*;
 
 class WinningLottoTest {
     @Test
+    @DisplayName("CSV 당첨 번호로 WinningLotto 객체 생성")
+    void csv_winning_lotto_numbers() {
+        // given
+        String winningLottoNumbers = "1, 2,3,4, 5,6";
+
+        // when
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
+
+        // then
+        assertThat(winningLotto).isEqualTo(new WinningLotto(1, 2, 3, 4, 5, 6));
+    }
+
+    @Test
     @DisplayName("당첨 번호가 6개가 아닐 경우, IllegalArgumentException 예외 발생")
     void invalid_winning_lotto_size_then_throw_IllegalArgumentException() {
         Integer[] invalidWinningLottoNumbers = {1, 2, 3, 4, 5, 6, 7};

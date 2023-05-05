@@ -2,14 +2,20 @@ package study.lotto.step2.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
+    private static final String COMMA = ",";
     private static final int NUMBERS_OF_WINNING = 6;
     private final Set<LottoNumber> winningLottoNumbers;
 
-    public WinningLotto(Integer... winningLottoNumbers) {
+    public WinningLotto(String csvWinningLottoNumbers) {
+        this(of(csvWinningLottoNumbers.split(COMMA)));
+    }
+
+    public WinningLotto(Integer...winningLottoNumbers) {
         this(of(winningLottoNumbers));
     }
 
@@ -57,5 +63,25 @@ public class WinningLotto {
         return Arrays.stream(winningLottoNumbers)
                 .map(LottoNumber::of)
                 .collect(Collectors.toUnmodifiableSet());
+    }
+
+    private static Set<LottoNumber> of(String[] winningLottoNumbers) {
+        return Arrays.stream(winningLottoNumbers)
+                .map(String::trim)
+                .map(LottoNumber::of)
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WinningLotto)) return false;
+        WinningLotto that = (WinningLotto) o;
+        return Objects.equals(winningLottoNumbers, that.winningLottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningLottoNumbers);
     }
 }
