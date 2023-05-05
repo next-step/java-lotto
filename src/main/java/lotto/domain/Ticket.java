@@ -10,19 +10,18 @@ public class Ticket {
     private final Set<LottoNumber> numbers;
 
     public Ticket(String stringNumbers) {
-        this.numbers = parseToNumbers(stringNumbers);
-        this.validate();
+        Set<LottoNumber> lottoNumbers = parseToNumbers(stringNumbers);
+        this.validate(lottoNumbers);
+        this.numbers = lottoNumbers;
     }
 
     public Ticket(Set<LottoNumber> issueNumbers) {
+        this.validate(issueNumbers);
         this.numbers = issueNumbers;
-        this.validate();
     }
 
     public static Ticket of(Set<Integer> integers) {
-        Ticket ticket = new Ticket(toLottoNumbers(integers));
-        ticket.validate();
-        return ticket;
+        return new Ticket(toLottoNumbers(integers));
     }
 
     private static Set<LottoNumber> toLottoNumbers(Set<Integer> numbers) {
@@ -46,11 +45,12 @@ public class Ticket {
         for (String number : stringNumbers.split(", ")) {
             numbers.add(LottoNumber.of(Integer.parseInt(number)));
         }
+        validate(numbers);
         return numbers;
     }
 
-    private void validate() {
-        if (this.numbers.size() != 6) {
+    private void validate(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
             throw new TicketNumbersCountException();
         }
     }
