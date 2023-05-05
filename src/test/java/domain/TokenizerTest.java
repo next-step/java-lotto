@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class TokenizerTest {
 
@@ -13,5 +14,11 @@ public class TokenizerTest {
     void separateTest(String userInput, int expected) {
         assertThat(splitToken(userInput).size())
                 .isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "수식을 알맞게 분리한다.")
+    @ValueSource(strings = {"4 + 3 - 2 * 4 / 2"})
+    void tokenize(String input) {
+        assertThat(splitToken(input)).containsExactly("4", "+", "3", "-", "2", "*", "4", "/", "2");
     }
 }
