@@ -18,7 +18,7 @@ public class OutputView {
     }
 
     public static void printWinnerStatistics(LottoTickets tickets, List<LottoPrize> lottoPrizes) {
-        System.out.println("\n당첨 통계");
+        System.out.println(System.lineSeparator() + "당첨 통계");
         System.out.println("---------");
 
         printPrizeCount(tickets, lottoPrizes);
