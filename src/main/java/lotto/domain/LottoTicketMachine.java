@@ -2,35 +2,43 @@ package lotto.domain;
 
 import lotto.dto.LottoStatisticsDto;
 
+import java.util.List;
+
 public class LottoTicketMachine {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private LottoTickets lottoTickets;
-    private int lottoCount;
+    private static LottoTickets lottoTicketsTotal;
 
-    public void createLottoNumbers(int purchaseAmount) {
-        lottoCount = purchaseAmount / LOTTO_PRICE;
-        createLottoNumbers();
+    public static LottoTickets createAutoLottoTickets(int autoPurchaseCount) {
+        NumberCreationStrategy strategy = new RandomNumberCreation(autoPurchaseCount);
+        if (lottoTicketsTotal == null) {
+            lottoTicketsTotal = new LottoTickets(strategy);
+            return lottoTicketsTotal;
+        }
+        lottoTicketsTotal.addLottoTickets(strategy);
+        return lottoTicketsTotal;
     }
 
-    private void createLottoNumbers() {
-        lottoTickets = new LottoTickets(lottoCount, new RandomNumberCreation());
+    public static LottoTickets createManualLottoTickets(List<List<Integer>> tickets) {
+        NumberCreationStrategy strategy = new ManualNumberCreation(tickets);
+        if (lottoTicketsTotal == null) {
+            lottoTicketsTotal = new LottoTickets(strategy);
+            return lottoTicketsTotal;
+        }
+        lottoTicketsTotal.addLottoTickets(strategy);
+        return lottoTicketsTotal;
     }
 
     public LottoStatisticsDto calculateLottoStatistics(WinningTicket winningTicket) {
         LottoStatistics lottoStatistics = new LottoStatistics();
         return new LottoStatisticsDto(
-                lottoStatistics.calculateMatchingCounts(lottoTickets, winningTicket),
-                lottoStatistics.calculateGrossRateOfEarnings(lottoCount * LOTTO_PRICE)
+                lottoStatistics.calculateMatchingCounts(lottoTicketsTotal, winningTicket),
+                lottoStatistics.calculateGrossRateOfEarnings(lottoTicketsTotal.getSize())
         );
     }
 
-    public int getLottoCount() {
-        return lottoCount;
-    }
-
-    public LottoTickets getLottoNumbers() {
-        return lottoTickets;
+    public LottoTickets getLottoTicketsTotal() {
+        return lottoTicketsTotal;
     }
 }

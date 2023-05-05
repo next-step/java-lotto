@@ -9,10 +9,6 @@ public class LottoTicket {
 
     private List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(NumberCreationStrategy strategy) {
-        this(strategy.createNumber());
-    }
-
     public LottoTicket(List<Integer> lottoNumbers) {
         validateLottoNumberLength(lottoNumbers);
         this.lottoNumbers = to(lottoNumbers);
@@ -26,7 +22,7 @@ public class LottoTicket {
 
     private List<LottoNumber> to(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

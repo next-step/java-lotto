@@ -13,13 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketTest {
 
-    private LottoTicket lottoTicket;
-
-    @BeforeEach
-    void init() {
-        lottoTicket = new LottoTicket(new RandomNumberCreation());
-    }
-
     @Test
     void constructor_정상() throws Exception {
         //given
@@ -51,11 +44,11 @@ class LottoTicketTest {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoTicket otherLottoTicket =
                 new LottoTicket(Arrays.asList(1, 2, 3, 4, 8, 9));
-        this.lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
 
         //when
-        int count = this.lottoTicket.calculateSameNumberCount(otherLottoTicket);
+        int count = lottoTicket.calculateSameNumberCount(otherLottoTicket);
 
         //then
         assertThat(count).isEqualTo(4);
@@ -65,8 +58,8 @@ class LottoTicketTest {
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void hasNumber(int number, boolean expected) throws Exception {
         //given
-        lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = LottoNumber.of(number);
 
         //when
         boolean result = lottoTicket.hasNumber(lottoNumber);

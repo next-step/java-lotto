@@ -18,24 +18,12 @@ class LottoTicketMachineTest {
     }
 
     @Test
-    void createLottoNumbers() throws Exception {
-        //given
-        int purchaseAmount = 14000;
-
-        //when
-        lottoTicketMachine.createLottoNumbers(purchaseAmount);
-
-        //then
-        assertThat(lottoTicketMachine.getLottoCount()).isEqualTo(14);
-    }
-
-    @Test
     void calculateLottoStatistics() throws Exception {
         //given
-        lottoTicketMachine.createLottoNumbers(14000);
+        LottoTicketMachine.createAutoLottoTickets(14000);
         WinningTicket winningTicket = new WinningTicket(
                 Arrays.asList(1, 2, 3, 4, 5, 6),
-                new LottoNumber(7)
+                LottoNumber.of(7)
         );
 
         //when

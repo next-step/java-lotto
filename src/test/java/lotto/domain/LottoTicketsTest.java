@@ -17,11 +17,11 @@ class LottoTicketsTest {
 
     @BeforeEach
     void init() {
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 10, 11, 12)));
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        lottoTickets = new LottoTickets(lottoTicketList, new RandomNumberCreation());
+        List<List<Integer>> tickets = new ArrayList<>();
+        tickets.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+        tickets.add(Arrays.asList(1, 2, 3, 10, 11, 12));
+        tickets.add(Arrays.asList(1, 2, 3, 7, 8, 9));
+        lottoTickets = new LottoTickets(new ManualNumberCreation(tickets));
     }
 
     @Test
@@ -32,7 +32,7 @@ class LottoTicketsTest {
 
         //then
         assertDoesNotThrow(() -> {
-            new LottoTickets(3, new RandomNumberCreation());
+            new LottoTickets(new RandomNumberCreation(7));
         });
     }
 
@@ -40,7 +40,7 @@ class LottoTicketsTest {
     void calculateSameNumberCount() throws Exception {
         //given
         LottoTicket winningTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(9);
+        LottoNumber bonusNumber = LottoNumber.of(9);
 
         //when
         Map<LottoRank, Integer> sameNumberCounts
