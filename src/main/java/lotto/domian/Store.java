@@ -10,16 +10,16 @@ public class Store {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public static List<Lotto> order(Money money) {
+    public static LottoBundle order(Money money) {
         return createLotto(makeFromMoney(money));
     }
 
-    private static List<Lotto> createLotto(int count) {
+    private static LottoBundle createLotto(int count) {
         List<Lotto> lottoList = new ArrayList<>();  // todo : lottoList -> lottoGroup? 으로 변경하기
         for (int i = 0; i < count; i++) {
             lottoList.add(makeLotto());
         }
-        return lottoList;
+        return new LottoBundle(lottoList);
     }
 
     private static Lotto makeLotto() {

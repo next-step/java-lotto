@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import lotto.domian.Lotto;
+import lotto.domian.LottoBundle;
 import lotto.domian.Money;
 import lotto.domian.Store;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 public class StoreTest {
 
@@ -17,8 +15,8 @@ public class StoreTest {
         Money money = new Money(4000);
         int count = money.amount() / 1000;
 
-        List<Lotto> lottoList = Store.order(money);
-        Assertions.assertThat(lottoList.size()).isEqualTo(count);
+        LottoBundle bundle = Store.order(money);
+        Assertions.assertThat(bundle.unfoldLottoBundle().size()).isEqualTo(count);
     }
 
 }
