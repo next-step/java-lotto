@@ -17,4 +17,12 @@ public class LottoTest {
                 .isThrownBy(() -> new Lotto(lotto));
     }
 
+    @DisplayName("로또 숫자의 범위가 1 ~ 45가 아니면 에러가 발생한다.")
+    @Test
+    public void lotto_OutOfRange_ThrowException() {
+        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 46);
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lotto(lotto));
+    }
+
 }
