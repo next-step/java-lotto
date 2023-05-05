@@ -3,7 +3,10 @@ package lotto.domain;
 import lotto.enums.LottoPrize;
 import lotto.strategy.LottoStrategy;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,19 +30,19 @@ public class Lottos {
         return lottoList;
     }
 
-//    private void updateMatchCounts() {
-//        lottoList.forEach(this::editMatchCount);
-//    }
+    public Map<LottoPrize, Integer> getMatchCounts(Lotto winnerLotto) {
+        return lottoList.stream()
+                .map(lotto -> editMatchCount(lotto, winnerLotto))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toMap(
+                        prize -> prize,
+                        prize -> 1,
+                        Integer::sum,
+                        () -> new EnumMap<>(LottoPrize.class)
+                ));
+    }
 
-//    private void editMatchCount(final Lotto lotto) {
-//        int countOfMatch = lotto.countMatch(winnerLotto.getLottoNumbers());
-//
-//        if (countOfMatch < MIN_MATCHES || countOfMatch > MAX_MATCHES) {
-//            return;
-//        }
-//
-//        LottoPrize prize = LottoPrize.valueOf(countOfMatch);
-//        matchCounts.compute(prize, (key, value) -> value == null ? 1 : value + 1);
-//    }
-
+    public LottoPrize editMatchCount(final Lotto lotto, final Lotto winnerLotto) {
+        return LottoPrize.valueOf(lotto.countMatch(winnerLotto.getLottoNumbers()));
+    }
 }

@@ -13,10 +13,6 @@ public class LottoStatistics {
 
     private static final double PRICE_OF_LOTTO = 1000;
 
-    private static final int MIN_MATCHES = 3;
-
-    private static final int MAX_MATCHES = 6;
-
     private final Lotto winnerLotto;
 
     private final Lottos lottoList;
@@ -35,19 +31,10 @@ public class LottoStatistics {
      * matchCounts 배열에 가능한 각 당첨 수준에 대한 수를 저장
      */
     private void updateMatchCounts() {
-        lottoList.getLottoList().forEach(this::editMatchCount);
+        matchCounts.clear();
+        matchCounts.putAll(lottoList.getMatchCounts(winnerLotto));
     }
 
-    private void editMatchCount(final Lotto lotto) {
-        int countOfMatch = lotto.countMatch(winnerLotto.getLottoNumbers());
-
-        if (countOfMatch < MIN_MATCHES || countOfMatch > MAX_MATCHES) {
-            return;
-        }
-
-        LottoPrize prize = LottoPrize.valueOf(countOfMatch);
-        matchCounts.compute(prize, (key, value) -> value == null ? 1 : value + 1);
-    }
 
     /**
      * 모든 로또 티켓에 의해 생성된 총 수익을 계산`
@@ -63,7 +50,6 @@ public class LottoStatistics {
                 .mapToDouble(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
     }
-
     /**
      * 모든 로또 티켓을 구매하는 총 비용을 계산
      */
