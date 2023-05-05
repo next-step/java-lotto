@@ -19,7 +19,7 @@ public class Lottery {
 
     private static final String BLANK_REGEX = "\\s";
 
-    private static final int LOTTERY_NUMBERS_SIZE = 6;
+    protected static final int LOTTERY_NUMBERS_SIZE = 6;
 
     private static final RandomNumberGenerator RANDOM_NUMBER_GENERATOR =
             new RandomNumberGenerator();
@@ -46,13 +46,6 @@ public class Lottery {
             lotteryNumbers.add(new LotteryNumber(RANDOM_NUMBER_GENERATOR.generatedNumber()));
         }
         return new Lottery(lotteryNumbers);
-    }
-
-    public static Lottery lotteryFactory(int [] sixNumbers) {
-        Set<LotteryNumber> collect = stream(sixNumbers)
-                .mapToObj(LotteryNumber::new)
-                .collect(toSet());
-        return new Lottery(collect);
     }
 
     private static String[] separatedNumbers(String source) {
