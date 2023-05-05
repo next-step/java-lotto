@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static final String POSITIVE_INTEGER_REGEX = "^[1-9]\\d*$";
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private final int number;
@@ -16,9 +17,24 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
+    public static LottoNumber of(String number) {
+        validateNumber(number);
+        return of(Integer.parseInt(number));
+    }
+
     public static LottoNumber of(int number) {
         validateNumber(number);
         return LottoNumberCache.cache[number];
+    }
+
+    private static void validateNumber(String number) {
+        if(!isPositiveInteger(number)) {
+            throw new IllegalArgumentException("로또 번호는 양의 정수입니다: " + number);
+        }
+    }
+
+    private static boolean isPositiveInteger(String number) {
+        return number.matches(POSITIVE_INTEGER_REGEX);
     }
 
     private static void validateNumber(int number) {
