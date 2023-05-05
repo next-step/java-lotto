@@ -1,3 +1,4 @@
+import static domain.Tokenizer.splitToken;
 import static view.InputView.getInput;
 
 import domain.Formula;
@@ -10,6 +11,6 @@ public class CalculatorApplication {
     }
 
     private static void getResult(UserInput userInput) {
-        new Formula(userInput.separateInputWithBlank());
+        new Formula(splitToken(userInput.getUserInput()));
     }
 }
