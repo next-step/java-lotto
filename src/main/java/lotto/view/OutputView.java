@@ -22,28 +22,28 @@ public class OutputView {
         System.out.println(lotto);
     }
 
-    public static void printStatisticsResult(Statistics statistics) {
+    public static void printStatisticsResult() {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("===============");
-        printStatistics(statistics);
+        printStatistics();
     }
 
-    private static void printStatistics(Statistics statistics) {
+    private static void printStatistics() {
 
         List<Prize> prizeList = Prize.extractDisplayPrize();
 
         prizeList.forEach(prize -> {
             String prompt = prize.getDisplayPrompt()
                     + "-"
-                    + statistics.getWinnersMatchingCount(prize)
+                    + Statistics.getWinnersMatchingCount(prize)
                     + "개";
             System.out.println(prompt);
         });
     }
 
-    public static void printProfit(Statistics statistics) {
-        double profit = statistics.provideProfit();
+    public static void printProfit(Statistics statistics, Money money) {
+        double profit = statistics.getProfit(money);
 
         String profitFormat = String.format("%.2f", profit);
 
