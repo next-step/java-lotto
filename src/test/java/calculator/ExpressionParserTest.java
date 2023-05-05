@@ -2,7 +2,9 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,20 +15,12 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class ExpressionParserTest {
 
-    @DisplayName("입력 값이 null일 경우")
-    @Test
-    void 입력값_NULL_테스트() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> ExpressionParser.parse(null))
-                .withMessageMatching("입력 값이 null이거나 빈 공백 문자 입니다.");
-    }
-
     @DisplayName("입력 값이 공백일 경우")
-    @Test
-    @EmptySource
-    void 입력값_공백_테스트() {
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 입력값_테스트(String input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> ExpressionParser.parse(""))
+                .isThrownBy(() -> ExpressionParser.parse(input))
                 .withMessageMatching("입력 값이 null이거나 빈 공백 문자 입니다.");
     }
 
