@@ -63,7 +63,7 @@ public class LottoStatistics {
                 .mapToDouble(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
     }
-
+    rm -fr ".git/rebase-merge"
     /**
      * 모든 로또 티켓을 구매하는 총 비용을 계산
      */
