@@ -12,4 +12,5 @@ public enum Operator {
     Operator(String symbol) {
         this.symbol = symbol;
     }
+
 }
