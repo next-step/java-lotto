@@ -44,6 +44,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public boolean matchesBonusNumber(BonusNumber bonusNumber) {
+        return numbers.stream().anyMatch(bonusNumber::matchesBonusNumber);
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return new HashSet<>(numbers);
     }

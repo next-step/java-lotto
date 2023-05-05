@@ -5,25 +5,35 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨 순위 테스트")
 class WinningRankTest {
 
+    @DisplayName("당첨 번호 일치 개수에 따라 로또 등수를 반환한다")
     @Test
     void valueOf() {
-        assertSame(WinningRank.FIRST, WinningRank.valueOf(6));
-        assertSame(WinningRank.SECOND, WinningRank.valueOf(5));
-        assertSame(WinningRank.THIRD, WinningRank.valueOf(4));
-        assertSame(WinningRank.FOURTH, WinningRank.valueOf(3));
-        assertSame(WinningRank.NONE, WinningRank.valueOf(2));
-        assertSame(WinningRank.NONE, WinningRank.valueOf(1));
-        assertSame(WinningRank.NONE, WinningRank.valueOf(0));
+        assertThat(WinningRank.FIRST).isEqualTo(WinningRank.valueOf(6));
+        assertThat(WinningRank.SECOND).isEqualTo(WinningRank.valueOf(5));
+        assertThat(WinningRank.THIRD).isEqualTo(WinningRank.valueOf(4));
+        assertThat(WinningRank.FOURTH).isEqualTo(WinningRank.valueOf(3));
+        assertThat(WinningRank.NONE).isEqualTo(WinningRank.valueOf(2));
+        assertThat(WinningRank.NONE).isEqualTo(WinningRank.valueOf(1));
+        assertThat(WinningRank.NONE).isEqualTo(WinningRank.valueOf(0));
     }
 
+    @DisplayName("당첨 번호가 5개 일치할때 보너스 번호 일치여부에 따라 로또 등수가 2,3등으로 나뉜다")
+    @Test
+    void ValueOfWithBonusNumber() {
+        assertThat(WinningRank.valueOf(5, true)).isEqualTo(WinningRank.SECOND);
+        assertThat(WinningRank.valueOf(5, false)).isEqualTo(WinningRank.THIRD);
+    }
+
+    @DisplayName("당첨 등수는 5등까지 분류된다")
     @Test
     void validRanks() {
         List<WinningRank> expected = List.of(
+                WinningRank.FIFTH,
                 WinningRank.FOURTH,
                 WinningRank.THIRD,
                 WinningRank.SECOND,
@@ -32,6 +42,6 @@ class WinningRankTest {
 
         List<WinningRank> actual = WinningRank.validRanks();
 
-        assertEquals(expected, actual);
+        assertThat(expected).isEqualTo(actual);
     }
 }
