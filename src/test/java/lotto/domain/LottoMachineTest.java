@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.model.request.ReqAutoLotto;
+import lotto.service.LottoMachine;
+import lotto.service.gernerator.AutoLottoNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +13,7 @@ class LottoMachineTest {
     @Test
     @DisplayName("로또 발급 테스트")
     void issueAutoForMoney() {
-
-
-        assertThat(LottoMachine.issueAutoForMoney(Money.wons(2000))).hasSize(2);
+        Lotto lotto = LottoMachine.issueLotto(new AutoLottoNumbersGenerator(), new ReqAutoLotto(Money.wons(2000)));
+        assertThat(lotto.getLottoNumbersSize()).isEqualTo(2);
     }
 }
