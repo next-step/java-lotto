@@ -17,7 +17,7 @@ public class TicketTest {
         Set<Integer> input = Set.of(1, 2, 3, 4, 5, 6);
         String answer = "[1, 2, 3, 4, 5, 6]";
         //when
-        Ticket ticket = new Ticket(input);
+        Ticket ticket = Ticket.of(input);
         //then
         assertThat(ticket.toString()).isEqualTo(answer);
     }
@@ -30,7 +30,7 @@ public class TicketTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            Ticket ticket = new Ticket(input);
+            Ticket ticket = Ticket.of(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -42,7 +42,7 @@ public class TicketTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            Ticket ticket = new Ticket(input);
+            Ticket ticket = Ticket.of(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -50,7 +50,7 @@ public class TicketTest {
     @Test
     public void constructorByString() {
         //given
-        Ticket expect = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket expect = Ticket.of(Set.of(1, 2, 3, 4, 5, 6));
         //when
         Ticket actual = new Ticket("1, 2, 3, 4, 5, 6");
         //then
@@ -65,8 +65,8 @@ public class TicketTest {
         //given
         int expect = 4;
         //when
-        Ticket ticketA = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
-        Ticket ticketB = new Ticket(Set.of(1, 2, 3, 4, 35, 36));
+        Ticket ticketA =  Ticket.of(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket ticketB = Ticket.of(Set.of(1, 2, 3, 4, 35, 36));
         //then
         assertAll("숫자 4개가 겹치는 두 티켓으로 검증한다",
                 () -> assertThat(ticketA.countMatchNumbers(ticketB))
@@ -82,7 +82,7 @@ public class TicketTest {
     @Test
     public void winnerTest() {
         //given
-        Ticket ticket = new Ticket(Set.of(2, 4, 6, 8, 16, 32));
+        Ticket ticket = Ticket.of(Set.of(2, 4, 6, 8, 16, 32));
         //when
         WinnerTicket winnerTicket = new WinnerTicket(ticket, LottoNumber.of(1));
         //then

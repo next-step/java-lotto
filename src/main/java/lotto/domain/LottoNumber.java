@@ -2,12 +2,14 @@ package lotto.domain;
 
 import lotto.exception.LottoNumberOutOfRangeException;
 
-public class LottoNumber {
-    private final int lottoNumber;
+import java.util.Random;
 
+public class LottoNumber {
+    private static final Random RANDOM = new Random();
     private static final int LOW_LIMIT = 1;
     private static final int HIGH_LIMIT = 45;
     private static final LottoNumber[] LOTTO_NUMBER_CACHE = new LottoNumber[45 + 1];
+
 
     static {
 
@@ -15,6 +17,8 @@ public class LottoNumber {
             LOTTO_NUMBER_CACHE[i] = new LottoNumber(i);
         }
     }
+
+    private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
@@ -25,12 +29,18 @@ public class LottoNumber {
         return LOTTO_NUMBER_CACHE[lottoNumber];
     }
 
+    public static LottoNumber any() {
+        return LOTTO_NUMBER_CACHE[RANDOM.nextInt(44) + 1];
+    }
+
     private static void rangeValidate(int lottoNumber) {
         if (LOW_LIMIT <= lottoNumber && lottoNumber <= HIGH_LIMIT) {
             return;
         }
         throw new LottoNumberOutOfRangeException();
     }
+
+
 
     public int getLottoNumber() {
         return lottoNumber;

@@ -6,7 +6,6 @@ import java.util.Random;
 import java.util.Set;
 
 public class Issuer {
-    private final Random RANDOM = new Random();
     private final Tickets tickets;
 
     public Issuer() {
@@ -20,16 +19,12 @@ public class Issuer {
     }
 
 
-    private Set<Integer> issueNumbers() {
-        Set<Integer> numbers = new HashSet<>();
+    private Set<LottoNumber> issueNumbers() {
+        Set<LottoNumber> numbers = new HashSet<>();
         while (numbers.size() < 6) {
-            numbers.add(issueNumber());
+            numbers.add(LottoNumber.any());
         }
         return numbers;
-    }
-
-    private int issueNumber() {
-        return RANDOM.nextInt(44) + 1;
     }
 
     public Tickets issuedTickets() {

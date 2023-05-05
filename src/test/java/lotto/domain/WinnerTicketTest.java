@@ -17,27 +17,27 @@ public class WinnerTicketTest {
 
     @BeforeEach
     public void beforeEach() {
-        Ticket winner = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
+        Ticket winner = Ticket.of(Set.of(1, 2, 4, 8, 16, 32));
         winnerTicketFixture = new WinnerTicket(winner, (LottoNumber.of(33)));
 
-        Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
-        Ticket secondA = new Ticket(Set.of(1, 2, 4, 8, 16, 33));
-        Ticket secondB = new Ticket(Set.of(1, 2, 4, 8, 32, 33));
+        Ticket first = Ticket.of(Set.of(1, 2, 4, 8, 16, 32));
+        Ticket secondA = Ticket.of(Set.of(1, 2, 4, 8, 16, 33));
+        Ticket secondB = Ticket.of(Set.of(1, 2, 4, 8, 32, 33));
 
-        Ticket thirdA = new Ticket(Set.of(1, 2, 4, 8, 16, 40));
-        Ticket thirdB = new Ticket(Set.of(1, 2, 4, 8, 16, 41));
-        Ticket thirdC = new Ticket(Set.of(1, 2, 4, 8, 16, 42));
+        Ticket thirdA = Ticket.of(Set.of(1, 2, 4, 8, 16, 40));
+        Ticket thirdB = Ticket.of(Set.of(1, 2, 4, 8, 16, 41));
+        Ticket thirdC = Ticket.of(Set.of(1, 2, 4, 8, 16, 42));
 
-        Ticket fourthA = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthB = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthC = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthD = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthA = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthB = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthC = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthD = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
 
-        Ticket fifthA = new Ticket(Set.of(1, 2, 4, 15, 26, 37));
-        Ticket fifthB = new Ticket(Set.of(1, 2, 4, 25, 26, 17));
-        Ticket fifthC = new Ticket(Set.of(1, 2, 4, 35, 36, 37));
-        Ticket fifthD = new Ticket(Set.of(1, 2, 4, 25, 36, 27));
-        Ticket fifthE = new Ticket(Set.of(1, 2, 4, 35, 26, 17));
+        Ticket fifthA = Ticket.of(Set.of(1, 2, 4, 15, 26, 37));
+        Ticket fifthB = Ticket.of(Set.of(1, 2, 4, 25, 26, 17));
+        Ticket fifthC = Ticket.of(Set.of(1, 2, 4, 35, 36, 37));
+        Ticket fifthD = Ticket.of(Set.of(1, 2, 4, 25, 36, 27));
+        Ticket fifthE = Ticket.of(Set.of(1, 2, 4, 35, 26, 17));
         ticketsFixture = new Tickets(List.of(
                 first,
                 secondA, secondB,
@@ -51,9 +51,9 @@ public class WinnerTicketTest {
     @Test
     public void includeBonus() {
         //given
-        Ticket ticketA = new Ticket(Set.of(1, 2, 4, 8, 16, 33));
-        Ticket ticketB = new Ticket(Set.of(1, 2, 4, 8, 32, 33));
-        Ticket ticketC = new Ticket(Set.of(1, 2, 4, 8, 16, 40));
+        Ticket ticketA = Ticket.of(Set.of(1, 2, 4, 8, 16, 33));
+        Ticket ticketB = Ticket.of(Set.of(1, 2, 4, 8, 32, 33));
+        Ticket ticketC = Ticket.of(Set.of(1, 2, 4, 8, 16, 40));
         //when
         Boolean actualA = winnerTicketFixture.includeBonus(ticketA);
         Boolean actualB = winnerTicketFixture.includeBonus(ticketB);

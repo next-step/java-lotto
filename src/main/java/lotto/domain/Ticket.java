@@ -9,21 +9,28 @@ import java.util.stream.Collectors;
 public class Ticket {
     private final Set<LottoNumber> numbers;
 
-    public Ticket(Set<Integer> numbers) {
-        this.numbers = parseToLottoNumbers(numbers);
-        validate();
-    }
-
     public Ticket(String stringNumbers) {
         this.numbers = parseToLottoNumbers(parseToNumbers(stringNumbers));
         validate();
+    }
+
+    public Ticket(Set<LottoNumber> issueNumbers) {
+        this.numbers = issueNumbers;
+        validate();
+    }
+
+    public static Ticket of (Set<Integer> integers) {
+
+        Ticket ticket = new Ticket(parseToLottoNumbers(integers));
+        ticket.validate();
+        return ticket;
     }
 
     private static int overlapCount(Set<LottoNumber> copyThisNumbers) {
         return 12 - copyThisNumbers.size();
     }
 
-    private Set<LottoNumber> parseToLottoNumbers(Set<Integer> numbers) {
+    private static Set<LottoNumber> parseToLottoNumbers(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer integer : numbers) {
             lottoNumbers.add(LottoNumber.of(integer));
