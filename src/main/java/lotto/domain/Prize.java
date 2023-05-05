@@ -52,7 +52,7 @@ public enum Prize {
                 .collect(Collectors.toList());
     }
 
-    public long calculatePriceMoney(long count) {
+    public int calculatePriceMoney(int count) {
         return this.prizeMoney * count;
     }
 
