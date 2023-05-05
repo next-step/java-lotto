@@ -11,7 +11,7 @@ public class LottoRoundNumbers {
   public LottoRoundNumbers (List<Integer> numbers) {
     throwIfNumbersNotValid(numbers, true);
     this.numbers = numbers.stream()
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.toList());
   }
 

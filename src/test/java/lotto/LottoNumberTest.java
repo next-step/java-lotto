@@ -11,7 +11,7 @@ public class LottoNumberTest {
   @ValueSource(ints = {-2, -1 , 0})
   void 로또번호는_음수_일_수_없다 (int given) {
     // when & then
-    Assertions.assertThatThrownBy(() -> new LottoNumber(given))
+    Assertions.assertThatThrownBy(() -> LottoNumber.of(given))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }
