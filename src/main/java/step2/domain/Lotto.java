@@ -1,20 +1,25 @@
 package step2.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
-    private final PickedLottoNumber pickedLottoNumbers;
+    private final PickedLottoNumbers pickedLottoNumbers;
     private Ranking ranking;
 
     public Lotto(List<Integer> pickedNumbers) {
-        this.pickedLottoNumbers = new PickedLottoNumber(pickedNumbers);
+        this(new PickedLottoNumbers(pickedNumbers));
+    }
+
+    public Lotto(PickedLottoNumbers pickedLottoNumbers) {
+        this.pickedLottoNumbers = pickedLottoNumbers;
     }
 
     private Lotto() {
-        TotalNumbers totalNumbers = new TotalNumbers();
-        List<Integer> numbers = totalNumbers.getRandomLottoNumber();
-        this.pickedLottoNumbers = new PickedLottoNumber(numbers);
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        List<Integer> numbers = lottoNumbers.getRandomLottoNumber();
+        this.pickedLottoNumbers = new PickedLottoNumbers(numbers);
     }
 
     public static Lotto issue() {
@@ -47,6 +52,24 @@ public class Lotto {
 
     public boolean isSecond() {
         return this.ranking == Ranking.SECOND;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(pickedLottoNumbers, lotto.pickedLottoNumbers)
+            && ranking == lotto.ranking;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pickedLottoNumbers, ranking);
     }
 }
 

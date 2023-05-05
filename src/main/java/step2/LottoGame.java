@@ -35,11 +35,13 @@ public class LottoGame {
         lottoView.printLotto();
 
         ResultView resultView = new ResultView(purchasedLottoList);
-        String winningNumbers = getWinningNumbers(scanner, resultView);
+        String numbers = getWinningNumbers(scanner, resultView);
+        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+
         int bonusNumber = getBonusNumber(scanner, resultView);
 
         lottoService.matchResult(
-            new LotteryWin(new WinningNumbers(winningNumbers), bonusNumber)
+            new LotteryWin(winningNumbers, bonusNumber)
         );
 
         resultView.printStatics();
