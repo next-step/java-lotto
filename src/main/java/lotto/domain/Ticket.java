@@ -38,6 +38,14 @@ public class Ticket {
         return lottoNumbers;
     }
 
+    public static Ticket auto() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        while (numbers.size() < 6) {
+            numbers.add(LottoNumber.any());
+        }
+        return new Ticket(numbers);
+    }
+
     private Set<Integer> parseToNumbers(String stringNumbers) {
         Set<Integer> numbers = new HashSet<>();
         for (String number : stringNumbers.split(", ")) {

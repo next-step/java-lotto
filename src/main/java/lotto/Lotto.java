@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.Issuer;
 import lotto.domain.Statics;
 import lotto.domain.Tickets;
 import lotto.domain.WinnerTicket;
@@ -15,20 +14,16 @@ public class Lotto {
     public static void main(String[] args) {
         InputPresent inputPresent = new InputPresent();
         OutputPresent outputPresent = new OutputPresent();
-        Issuer issuer = new Issuer();
-
+        Tickets tickets = new Tickets();
         //구매수량
         int totalPurchaseCount = inputPresent.purchaseCount();
-        //수동발행
-        Tickets tickets = inputPresent.manualPurchases();
-        issuer.manualIssue(tickets);
-        issuer.automaticIssue(totalPurchaseCount - tickets.count());
 
-
-        outputPresent.presentTickets(tickets, issuer.issuedTickets());
+        Tickets manualTickets = inputPresent.manualPurchases();
+        Tickets autoTickets = Tickets.automaticIssue(totalPurchaseCount - tickets.count());
+        outputPresent.presentTickets(manualTickets,autoTickets);
 
         WinnerTicket winnerTicket = new WinnerTicket(inputPresent.winningNumbers(), inputPresent.bonusNumber());
-        Statics statics = issuer.issuedTicketStatistics(winnerTicket);
+        Statics statics = new Statics(tickets, winnerTicket);
         outputPresent.presentWinners(new WinnerPresentDTO(statics));
         outputPresent.presentIncome(new IncomePresentDTO(statics));
     }

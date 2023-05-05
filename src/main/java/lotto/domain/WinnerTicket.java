@@ -19,7 +19,7 @@ public class WinnerTicket {
 
     public int countWinner(Tickets challengeTickets, Prize prize) {
         int count = 0;
-        for (Ticket ticket : challengeTickets.getTickets()) {
+        for (Ticket ticket : challengeTickets.allTickets()) {
             count = count + (isWinner(ticket, prize) ? 1 : 0);
         }
         return count;

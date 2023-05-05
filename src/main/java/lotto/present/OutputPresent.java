@@ -36,10 +36,10 @@ public class OutputPresent {
 
     public void presentTickets(Tickets manualTickets, Tickets autoTickets) {
         System.out.printf(CONFIRM_PURCHASE, manualTickets.count(), autoTickets.count(), System.lineSeparator());
-        for (Ticket ticket : manualTickets.getTickets()) {
+        for (Ticket ticket : manualTickets.allTickets()) {
             System.out.println(ticket.toString());
         }
-        for (Ticket ticket : autoTickets.getTickets()) {
+        for (Ticket ticket : autoTickets.allTickets()) {
             System.out.println(ticket.toString());
         }
     }

@@ -17,7 +17,7 @@ public class Statics {
 
     private Map<Prize, Integer> aggregateBetter(Tickets tickets, WinnerTicket winnerTicket) {
         Map<Prize, Integer> prizeIntegerMap = new HashMap<>();
-        for( Ticket ticket : tickets.getTickets()) {
+        for( Ticket ticket : tickets.allTickets()) {
             Prize prize = winnerTicket.checkLucky(ticket);
             prizeIntegerMap.put(prize, prizeIntegerMap.getOrDefault(prize, 0) + 1);
         }

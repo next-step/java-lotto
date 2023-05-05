@@ -45,6 +45,7 @@ public class StaticsTest {
                 fourthA, fourthB, fourthC, fourthD,
                 fifthA, fifthB, fifthC, fifthD, fifthE
         ));
+
         staticsFixture = new Statics(purchaseTicketsFixture, winnerTicket);
     }
 
