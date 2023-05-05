@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.NotKindOfLottoNumberException;
 import lotto.exception.TicketNumbersCountException;
 
 import java.util.HashSet;
@@ -11,12 +12,12 @@ public class Ticket {
 
     public Ticket(String stringNumbers) {
         Set<LottoNumber> lottoNumbers = parseToNumbers(stringNumbers);
-        this.validate(lottoNumbers);
+        this.validateTicketNumberCount(lottoNumbers);
         this.numbers = lottoNumbers;
     }
 
     public Ticket(Set<LottoNumber> issueNumbers) {
-        this.validate(issueNumbers);
+        this.validateTicketNumberCount(issueNumbers);
         this.numbers = issueNumbers;
     }
 
@@ -41,15 +42,38 @@ public class Ticket {
     }
 
     private Set<LottoNumber> parseToNumbers(String stringNumbers) {
+        String[] splintedStringNumbers = stringNumbers.split(", ");
+        validateStringNumbers(splintedStringNumbers);
         Set<LottoNumber> numbers = new HashSet<>();
-        for (String number : stringNumbers.split(", ")) {
+        for (String number : splintedStringNumbers) {
             numbers.add(LottoNumber.of(Integer.parseInt(number)));
         }
-        validate(numbers);
+        validateTicketNumberCount(numbers);
         return numbers;
     }
 
-    private void validate(Set<LottoNumber> lottoNumbers) {
+    private void validateStringNumbers(String[] splintedStringNumbers) {
+        if (splintedStringNumbers.length != 6) {
+            throw new TicketNumbersCountException();
+        }
+        for (String numberCandidate : splintedStringNumbers) {
+            validateNumericString(numberCandidate);
+        }
+    }
+
+    private void validateNumericString(String numberCandidate) {
+        for (char c : numberCandidate.toCharArray()) {
+            validateNumericChar(c);
+        }
+    }
+
+    private void validateNumericChar(char c) {
+        if (!('0' <= c && c <= '9')) {
+            throw new NotKindOfLottoNumberException(c);
+        }
+    }
+
+    private void validateTicketNumberCount(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new TicketNumbersCountException();
         }
