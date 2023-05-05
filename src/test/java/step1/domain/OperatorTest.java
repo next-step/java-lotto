@@ -1,6 +1,6 @@
-package domain.step1;
+package step1.domain;
 
-import domain.step1.Operator;
+import step1.domain.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

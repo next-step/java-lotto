@@ -1,9 +1,9 @@
-package domain.step1;
+package step1.domain;
 
-import domain.step1.Numbers;
-import domain.step1.Operations;
-import domain.step1.Operator;
-import domain.step1.StringCalculator;
+import step1.domain.Numbers;
+import step1.domain.Operations;
+import step1.domain.Operator;
+import step1.domain.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
