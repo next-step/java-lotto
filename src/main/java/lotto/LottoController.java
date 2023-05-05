@@ -16,8 +16,7 @@ public class LottoController {
 
         List<Integer> winnerNumber = InputView.winnerNumber();
         int bonusNumber = InputView.bonusNumber();
-        game.winners(winnerNumber, bonusNumber);
-        HashMap<Integer, Integer> result = game.calculateResult();
+        HashMap<Integer, Integer> result = game.calculateResult(winnerNumber, bonusNumber);
         ResultView.printResult(countOfTicket, result);
     }
 }

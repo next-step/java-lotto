@@ -11,19 +11,11 @@ public class Game {
     private static final int BONUS_CATEGORY = 15;
 
     private final List<Ticket> tickets = new ArrayList<>();
-    private List<Integer> winnerNumber = new ArrayList<>();
-    ;
-    private int bonusNumber;
 
     public Game(int countOfTicket) {
         for (int i = 0; i < countOfTicket; i++) {
             addTicket(randomTicket());
         }
-    }
-
-    public void winners(List<Integer> winnerNumber, int bonusNumber) {
-        this.winnerNumber = winnerNumber;
-        this.bonusNumber = bonusNumber;
     }
 
     public void addTicket(Ticket ticket) {
@@ -39,11 +31,11 @@ public class Game {
         return tickets;
     }
 
-    public HashMap<Integer, Integer> calculateResult() {
+    public HashMap<Integer, Integer> calculateResult(List<Integer> winnerNumber, int bonusNumber) {
         HashMap<Integer, Integer> result = resultFormat();
 
         for (Ticket ticket : tickets) {
-            int count = countMatches(ticket);
+            int count = countMatches(ticket, winnerNumber, bonusNumber);
             result.put(count, result.getOrDefault(count, 0) + 1);
         }
 
@@ -64,12 +56,12 @@ public class Game {
         return result;
     }
 
-    private int countMatches(Ticket ticket) {
+    private int countMatches(Ticket ticket, List<Integer> winnerNumber, int bonusNumber) {
         int count = 0;
         TicketNumber ticketNumber = ticket.numbers();
         for (Integer number : ticketNumber.numbers()) {
             count += addIfMatch(winnerNumber, number);
-            count = ifMatchBonus(ticket, count);
+            count = ifMatchBonus(ticket, bonusNumber, count);
         }
         return count;
     }
@@ -81,7 +73,7 @@ public class Game {
         return 0;
     }
 
-    private int ifMatchBonus(Ticket ticket, int count) {
+    private int ifMatchBonus(Ticket ticket, int bonusNumber, int count) {
         if (BONUS_CANDIDATE_COUNT != count) {
             return count;
         }
