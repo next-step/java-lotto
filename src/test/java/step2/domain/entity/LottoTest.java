@@ -1,6 +1,13 @@
 package step2.domain.entity;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import step2.domain.vo.LottoNumber;
+import step2.domain.vo.LottoPrize;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,13 +30,21 @@ class LottoTest {
         );
     }
 
-    @Test
-    void 당첨번호와_로또의_일치하는_번호_갯수를_구한다() {
-        final var winner = Lotto.winner("1, 2, 3, 4, 5, 6");
-        final var compare = new Lotto(1, 2, 3, 4, 7, 8);
+    @ParameterizedTest(name = "로또번호: {0}, 보너스번호: {1}, 당첨번호: {2}, 결과: {3}")
+    @MethodSource("provideTestCase")
+    void 로또_당첨(Lotto lotto, LottoNumber bonus, Lotto winner, LottoPrize expected) {
+        final var actual = winner.prize(lotto, bonus);
 
-        final var actual = winner.countSameNumber(compare);
+        assertThat(actual).isEqualTo(expected);
+    }
 
-        assertThat(actual).isEqualTo(4);
+    private static Stream<Arguments> provideTestCase() {
+        return Stream.of(
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(45), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.FIRST),
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 45), new LottoNumber(45), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.SECOND_BONUS),
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 7), new LottoNumber(45), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.SECOND),
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 7, 8), new LottoNumber(45), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.THIRD),
+                Arguments.arguments(new Lotto(1, 2, 3, 7, 8, 9), new LottoNumber(45), new Lotto(1, 2, 3, 4, 5, 6), LottoPrize.FOURTH)
+        );
     }
 }
