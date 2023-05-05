@@ -1,5 +1,6 @@
 package lotto.domain.game;
 
+import lotto.domain.raffle.BaseKoreaLottoRaffleGenerator;
 import lotto.domain.raffle.LottoRaffleGenerator;
 
 public class LottoGameSetting {
@@ -15,6 +16,14 @@ public class LottoGameSetting {
 
   public static LottoGameSettingBuilder builder() {
     return new LottoGameSettingBuilder();
+  }
+
+  public static LottoGameSetting ofKorea645LottoSetting() {
+    return builder()
+        .raffleGenerator(new BaseKoreaLottoRaffleGenerator())
+        .distinctNumberOnly(true)
+        .pricePerGame(1000)
+        .build();
   }
 
   public LottoRaffleGenerator getRaffleGenerator() {
