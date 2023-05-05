@@ -36,11 +36,19 @@ public class ResultView {
         System.out.println("---------");
 
         for (WinningRank rank : WinningRank.validRanks()) {
-            int count = winningStatistics.getCount(rank);
-            int prize = rank.getPrizeMoney();
-            System.out.printf("%d개 일치 (%d원)- %d개%n", rank.getMatchCount(), prize, count);
+            printWinningRankInfo(winningStatistics, rank);
         }
+        printEarningsRateAndProfitLossStatus(earningsRate);
+    }
 
+    private static void printWinningRankInfo(WinningStatistics winningStatistics, WinningRank rank) {
+        int count = winningStatistics.getCount(rank);
+        int prize = rank.getMoneyOfPrize();
+        String bonusBallMessage = rank == WinningRank.SECOND ? ", 보너스 볼 일치" : "";
+        System.out.printf("%d개 일치%s (%d원)- %d개%n", rank.getCountOfMatch(), bonusBallMessage, prize, count);
+    }
+
+    private static void printEarningsRateAndProfitLossStatus(double earningsRate) {
         System.out.printf("총 수익률은 %.2f입니다.", earningsRate);
         if (earningsRate < MINIMUM_EARNINGS_RATE_FOR_PROFIT) {
             System.out.printf("(기준이%s이기 때문에 결과적으로 손해라는 의미임)", MINIMUM_EARNINGS_RATE_FOR_PROFIT);
