@@ -13,16 +13,25 @@ public class Lotto {
     private static final int INIT_COUNT = 1;
 
     private final Set<LottoNumber> numbers;
-
-    public Lotto(List<LottoNumber> numbers) {
-        this(new HashSet<>(numbers));
-    }
-
+    
     public Lotto(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new RuntimeException("로또 번호의 개수는 6개여야 합니다.");
         }
         this.numbers = numbers;
+    }
+
+    public Lotto(List<Integer> before) {
+        this(changeDataType(before));
+    }
+
+    private static Set<LottoNumber> changeDataType(List<Integer> before) {
+        Set<LottoNumber> numbers = new HashSet<>();
+
+        for (int i : before) {
+            numbers.add(new LottoNumber(i));
+        }
+        return numbers;
     }
 
     public void increaseLottoRewardCount(LottoRewards lottoRewards, WinningLotto winningLotto) {

@@ -1,7 +1,6 @@
 package lotto.utils;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,11 +13,11 @@ import static lotto.domain.LottoNumber.LOTTO_NUMBER_MIN;
 public class LottoIssuer {
 
     private static final int BEGIN_INDEX = 0;
-    private static List<LottoNumber> allNumbers = new ArrayList<>();
+    private static List<Integer> allNumbers = new ArrayList<>();
 
     static {
         for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
-            allNumbers.add(new LottoNumber(i));
+            allNumbers.add(i);
         }
     }
 
@@ -32,7 +31,7 @@ public class LottoIssuer {
 
     private static Lotto issueLotto() {
         Collections.shuffle(allNumbers);
-        List<LottoNumber> numbers = allNumbers.subList(BEGIN_INDEX, LOTTO_SIZE);
+        List<Integer> numbers = allNumbers.subList(BEGIN_INDEX, LOTTO_SIZE);
         return new Lotto(numbers);
     }
 }
