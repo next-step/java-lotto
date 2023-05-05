@@ -1,10 +1,11 @@
-package lotto;
+package lotto.domian;
 
 import com.sun.nio.sctp.IllegalReceiveException;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
@@ -36,6 +37,9 @@ public class Lotto {
     }
 
     private boolean isBetweenValid(int number) {
-        return number < LOTTO_MINIMUM_VALUE || number > LOTTO_MINIMUM_VALUE;
+        return IntStream.range(LOTTO_MINIMUM_VALUE, LOTTO_MAXIMUM_VALUE)
+                        .boxed()
+                        .collect(Collectors.toList())
+                        .contains(number);
     }
 }
