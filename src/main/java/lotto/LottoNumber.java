@@ -16,13 +16,6 @@ public class LottoNumber {
         }
     }
 
-    @Override
-    public String toString() {
-        return "LottoNumber{" +
-                "number=" + number +
-                '}';
-    }
-
     public int intValue() {
         return number;
     }
@@ -42,5 +35,12 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
     }
 }
