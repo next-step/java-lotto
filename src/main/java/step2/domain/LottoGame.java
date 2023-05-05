@@ -1,12 +1,45 @@
 package step2.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class LottoGame {
 
-    private List<Integer> lottoGame;
+    private static final int DEFAULT_NUMBER_COUNT = 6;
 
-    public LottoGame(List<Integer> lottoGame) {
-        this.lottoGame = lottoGame;
+    private final List<Integer> lottoGame;
+
+    public LottoGame(List<Integer> numbers) {
+        validInputNumber(numbers);
+        this.lottoGame = numbers;
     }
+
+    public LottoGame(Set<Integer> numbers) {
+        validInputNumber(numbers);
+        lottoGame = new ArrayList<>(numbers);
+    }
+
+    private static void validInputNumber(Collection<Integer> numbers) {
+        if (numbers.size() != DEFAULT_NUMBER_COUNT) {
+            throw new IllegalArgumentException(numbers + " : 입력한 숫자를 확인해 주세요");
+        }
+    }
+
+    public boolean isContain(Integer number) {
+        return this.lottoGame.contains(number);
+    }
+
+    public long howManyRight(LottoGame compareTarget) {
+        return lottoGame.stream()
+                .filter(i -> compareTarget.isContain(i))
+                .count();
+    }
+
+    @Override
+    public String toString() {
+        return lottoGame.toString();
+    }
+
 }

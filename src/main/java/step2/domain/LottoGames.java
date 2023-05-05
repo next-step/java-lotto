@@ -1,19 +1,20 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoGames {
-
+    private static final int DEFAULT_NUMBER_COUNT = 6;
     private static int DEFAULT_LOTTO_PRICE = 1000;
 
-    public LottoGames() {}
-
-    int howManyBuyGames(int money) {
-        return money / DEFAULT_LOTTO_PRICE;
+    public LottoGames() {
     }
 
-    List<LottoGame> buyLottoGame(int gameCount) {
+    public int howManyBuyGames(int money) {
+        Objects.requireNonNull(money);
+        return new Integer(money / DEFAULT_LOTTO_PRICE);
+    }
+
+    public List<LottoGame> buyLottoGame(int gameCount) {
         List<LottoGame> lottoGames = new ArrayList<>(gameCount);
         for (int i = 0; i < gameCount; i++) {
             lottoGames.add(createLottoGame());
@@ -25,5 +26,34 @@ public class LottoGames {
         return new LottoGame(RandomIntegersGenerator.createNumberList());
     }
 
+    public LottoGame readWinningNumber(String stringNumber) {
+        String[] numbers = splitByDelimiter(stringNumber);
+        Set<Integer> integers = toSet(numbers);
+        if (integers.size() != DEFAULT_NUMBER_COUNT) {
+            throw new IllegalArgumentException(stringNumber + " : 입력한 숫자를 확인해 주세요");
+        }
+        return new LottoGame(integers);
+    }
+
+    private String[] splitByDelimiter(String stringNumber) {
+        stringNumber = stringNumber.replaceAll(" ", "");
+        return stringNumber.split(",");
+    }
+
+    private Set<Integer> toSet(String[] numbers) {
+        HashSet<Integer> hashSet = new HashSet<>();
+        for(String number : numbers) {
+            hashSet.add(toInt(number));
+        }
+        return hashSet;
+    }
+
+    private Integer toInt(String element) {
+        try {
+            return Integer.parseInt(element);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(element + " : 유효한 정수 값이 아닙니다.");
+        }
+    }
 
 }
