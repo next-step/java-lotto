@@ -1,38 +1,31 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class WinnerLotto {
+    private static final int FIRST_INDEX = 0;
+    private final LottoNumbers lottoNumbers;
+    private final LottoNumber bonusNumber;
 
-    private final LottoNumbers winnerLottoNumbers;
-
-    public WinnerLotto(LottoNumbers lottoNumbers) {
-        this.winnerLottoNumbers = lottoNumbers;
+    public WinnerLotto(LottoNumbers lottoNumbers, LottoNumber lottoNumber) {
+        this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = lottoNumber;
     }
 
-    public static WinnerLotto of(LottoNumbers lottoNumbers, List<Integer> winnerLottoNumberList) {
-        return new WinnerLotto(lottoNumbers.initializedManualLottoNumber(winnerLottoNumberList));
-    }
+    public List<Winners> findWinnerList(Lotto lotto) {
 
-    public int winnerLottoSize() {
-        return winnerLottoNumbers.getLottoNumberGroupSize();
-    }
+        List<Integer> matchingBallList = lotto.countMatchingBall(this.lottoNumbers);
+        List<Boolean> bonusNumberMatchingList = lotto.bonusNumberMatchingList(this.bonusNumber);
 
-    public int findMatchingCount(Lotto lotto) {
-        return lotto.countMatching(this.winnerLottoNumbers);
-    }
+        return IntStream.range(FIRST_INDEX, matchingBallList.size())
+                .mapToObj(index -> {
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WinnerLotto that = (WinnerLotto) o;
-        return Objects.equals(winnerLottoNumbers, that.winnerLottoNumbers);
-    }
+                    int matchingBall = matchingBallList.get(index);
+                    boolean bonusBallMatch = bonusNumberMatchingList.get(index);
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(winnerLottoNumbers);
+                    return new Winners(matchingBall, bonusBallMatch);
+                }).collect(Collectors.toUnmodifiableList());
     }
 }

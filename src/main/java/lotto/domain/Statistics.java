@@ -1,49 +1,43 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.groupingBy;
 
 public class Statistics {
-    private final WinnerLotto winnerLotto;
-    private final List<Lotto> lottoList;
-    private final Map<Prize, Long> statisticsWinnerMap;
+    private static final int DEFAULT_VALUE = 0;
+    private static final int ADD_COUNT = 1;
 
-    public Statistics(WinnerLotto winnerLotto, List<Lotto> lottoList) {
-        this.winnerLotto = winnerLotto;
-        this.lottoList = lottoList;
-        this.statisticsWinnerMap = Collections.unmodifiableMap(doStatistic());
-    }
+    private static final Map<Prize, Integer> statisticsWinnerMap = new EnumMap<>(Prize.class);
 
-    public Map<Prize, Long> doStatistic() {
-        return lottoList.stream()
-                .map(winnerLotto::findMatchingCount)
-                .map(Prize::valueOf)
-                .filter(prize -> Prize.OUT_OF_PLACE != prize)
-                .collect(groupingBy(Function.identity(), Collectors.counting()));
-    }
+    public static Statistics doStatistic(WinnerLotto winnerLotto, Lotto lotto) {
+        List<Winners> winnersList = winnerLotto.findWinnerList(lotto);
+        winnersList.forEach(winners -> {
+            Prize prize = winners.providePrize();
+            statisticsWinnerMap.merge(prize, ADD_COUNT, Integer::sum);
+        });
 
-    public Map<Prize, Long> statisticsWinner() {
-        return statisticsWinnerMap;
+        return new Statistics();
     }
 
     public double getProfit(Money money) {
 
-        int sum = getSumProfit(statisticsWinnerMap);
+        int sum = getSumProfit();
 
-        return Money.wons(sum).division(money);
+        return (double) sum / money.getAmount();
     }
 
-    private int getSumProfit(Map<Prize, Long> winnerMap) {
-        return winnerMap.entrySet()
+    public static int getWinnersMatchingCount(Prize prize) {
+        return statisticsWinnerMap.getOrDefault(prize, DEFAULT_VALUE);
+    }
+
+    private int getSumProfit() {
+        return statisticsWinnerMap.entrySet()
                 .stream()
                 .mapToInt(prize -> {
                     Prize profitPrize = prize.getKey();
-                    return profitPrize.calculatePriceMoney(profitPrize, Math.toIntExact(prize.getValue()));
+                    int matchingCount = prize.getValue();
+                    return profitPrize.calculatePriceMoney(matchingCount);
                 })
                 .sum();
     }
