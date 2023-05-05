@@ -1,6 +1,6 @@
 package lottery.domain;
 
-import static lottery.domain.constant.LotteryNumberRule.LOTTERY_PRICE;
+import static lottery.domain.LotteryPurchasePrice.LOTTERY_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -12,12 +12,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class LotteryPurchasePriceTest {
 
-    private static final int LOWER_THAN_MIN_PURCHASABLE_PRICE = LOTTERY_PRICE.getRuleNumber() - 1;
+    private static final int LOWER_THAN_MIN_PURCHASABLE_PRICE = LOTTERY_PRICE - 1;
 
     @Test
     @DisplayName("로또 구매 금액 입력시 1000원 이상 입력할 경우 객체 정상 생성")
     void clientLotteryPurchasePriceCreate() {
-        assertDoesNotThrow(() -> new LotteryPurchasePrice(LOTTERY_PRICE.getRuleNumber()));
+        assertDoesNotThrow(() -> new LotteryPurchasePrice(LOTTERY_PRICE));
     }
 
     @Test

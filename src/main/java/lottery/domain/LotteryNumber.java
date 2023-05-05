@@ -1,12 +1,13 @@
 package lottery.domain;
 
 import static java.lang.String.valueOf;
-import static lottery.domain.constant.LotteryNumberRule.MAX_LOTTERY_NUMBER;
-import static lottery.domain.constant.LotteryNumberRule.MIN_LOTTERY_NUMBER;
 
 import java.util.Objects;
 
 public class LotteryNumber {
+    protected static final int MIN_LOTTERY_NUMBER = 1;
+
+    protected static final int MAX_LOTTERY_NUMBER = 45;
 
     private static final String OUT_OF_RANGE_NUMBER_MSG = "로또 번호는 1~45 의 정수만 입력 될 수 있습니다.";
 
@@ -20,8 +21,8 @@ public class LotteryNumber {
     }
 
     private boolean outOfRange(int lotteryNumber) {
-        return lotteryNumber < MIN_LOTTERY_NUMBER.getRuleNumber()
-                || lotteryNumber > MAX_LOTTERY_NUMBER.getRuleNumber();
+        return lotteryNumber < MIN_LOTTERY_NUMBER
+                || lotteryNumber > MAX_LOTTERY_NUMBER;
     }
 
     @Override
