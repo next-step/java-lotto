@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberDuplicatedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class WinnerTicketTest {
@@ -85,5 +87,19 @@ public class WinnerTicketTest {
                 () -> assertThat(winnerTicketFixture.checkLucky(fifthD)).as("5등 티켓을 검증한다").isEqualTo(Prize.FIFTH),
                 () -> assertThat(winnerTicketFixture.checkLucky(fifthE)).as("5등 티켓을 검증한다").isEqualTo(Prize.FIFTH)
         );
+    }
+
+
+    @DisplayName("보너스볼로 중복된 LottoNumber 입력시 예외를 발생시킨다")
+    @Test
+    public void duplicatedCheck() {
+        //given
+        Ticket ticket = ticketFixture;
+        //when
+        //then
+        assertThatThrownBy(() -> {
+            WinnerTicket winnerTicket = new WinnerTicket(ticket, LottoNumber.of(1));
+        }).isInstanceOf(LottoNumberDuplicatedException.class)
+                .hasMessageContaining("LottoNumber 중복은 허용되지 않습니다");
     }
 }
