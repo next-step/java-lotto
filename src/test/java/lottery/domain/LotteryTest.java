@@ -69,4 +69,19 @@ public class LotteryTest {
         assertThat(new Lottery(LOTTERY_NUMBERS).intersectionSize(lotterySixNumbers.getNumbers()))
                 .isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("정렬된 숫자를 리턴한다.")
+    void sortedNumbersTest() {
+        Lottery lotterySixNumbers = lotteryFactory("1,7,3,8,2,9");
+        assertThat(lotterySixNumbers.getSortedNumbers())
+                .containsExactly(
+                        new LotteryNumber(1),
+                        new LotteryNumber(2),
+                        new LotteryNumber(3),
+                        new LotteryNumber(7),
+                        new LotteryNumber(8),
+                        new LotteryNumber(9)
+                );
+    }
 }

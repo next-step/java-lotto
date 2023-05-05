@@ -6,7 +6,10 @@ import static java.util.Arrays.stream;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.stream.Collectors.toSet;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lottery.domain.numbergenerator.RandomNumberGenerator;
@@ -67,6 +70,13 @@ public class Lottery {
 
     public Set<LotteryNumber> getNumbers() {
         return unmodifiableSet(this.lotteryNumbers);
+    }
+
+    public List<LotteryNumber> getSortedNumbers() {
+        return new ArrayList<>(this.lotteryNumbers)
+                .stream()
+                .sorted(Comparator.comparingInt(LotteryNumber::hashCode))
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public int intersectionSize(Set<LotteryNumber> weeklyWinningNumbers) {
