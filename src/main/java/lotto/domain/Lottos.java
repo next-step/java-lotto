@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enums.LottoPrize;
 import lotto.strategy.LottoStrategy;
 
 import java.util.List;
@@ -25,5 +26,20 @@ public class Lottos {
     public List<Lotto> getLottoList() {
         return lottoList;
     }
+
+//    private void updateMatchCounts() {
+//        lottoList.forEach(this::editMatchCount);
+//    }
+
+//    private void editMatchCount(final Lotto lotto) {
+//        int countOfMatch = lotto.countMatch(winnerLotto.getLottoNumbers());
+//
+//        if (countOfMatch < MIN_MATCHES || countOfMatch > MAX_MATCHES) {
+//            return;
+//        }
+//
+//        LottoPrize prize = LottoPrize.valueOf(countOfMatch);
+//        matchCounts.compute(prize, (key, value) -> value == null ? 1 : value + 1);
+//    }
 
 }

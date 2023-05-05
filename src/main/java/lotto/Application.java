@@ -22,7 +22,7 @@ public class Application {
 
         Lotto winnerLotto = inputView.getLastWeekLottoNumbers();
 
-        ResultView.printLottoStatistics(lottos.getLottoList(), winnerLotto);
+        ResultView.printLottoStatistics(lottos, winnerLotto);
 
     }
 

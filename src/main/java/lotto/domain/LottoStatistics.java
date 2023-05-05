@@ -19,11 +19,11 @@ public class LottoStatistics {
 
     private final Lotto winnerLotto;
 
-    private final List<Lotto> lottoList;
+    private final Lottos lottoList;
 
     private final Map<LottoPrize, Integer> matchCounts;
 
-    public LottoStatistics(Lotto winnerLotto, List<Lotto> lottoList) {
+    public LottoStatistics(Lotto winnerLotto, Lottos lottoList) {
         this.winnerLotto = winnerLotto;
         this.lottoList = lottoList;
         this.matchCounts = new EnumMap<>(LottoPrize.class);
@@ -35,7 +35,7 @@ public class LottoStatistics {
      * matchCounts 배열에 가능한 각 당첨 수준에 대한 수를 저장
      */
     private void updateMatchCounts() {
-        lottoList.forEach(this::editMatchCount);
+        lottoList.getLottoList().forEach(this::editMatchCount);
     }
 
     private void editMatchCount(final Lotto lotto) {
@@ -50,7 +50,7 @@ public class LottoStatistics {
     }
 
     /**
-     * 모든 로또 티켓에 의해 생성된 총 수익을 계산
+     * 모든 로또 티켓에 의해 생성된 총 수익을 계산`
      */
     public double calculateYield() {
         double revenue = calculateRevenue();
@@ -63,12 +63,12 @@ public class LottoStatistics {
                 .mapToDouble(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
     }
-    rm -fr ".git/rebase-merge"
+
     /**
      * 모든 로또 티켓을 구매하는 총 비용을 계산
      */
     private double calculateCost() {
-        return lottoList.size() * PRICE_OF_LOTTO;
+        return lottoList.getLottoList().size() * PRICE_OF_LOTTO;
     }
 
     public List<Integer> getMatchCounts() {
