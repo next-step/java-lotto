@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -22,7 +22,7 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public int getLottoRankCount(LottoPrize prize, List<LottoPrize> lottoPrizes) {
+    public static int getLottoRankCount(LottoPrize prize, List<LottoPrize> lottoPrizes) {
         return (int) lottoPrizes.stream()
                 .filter(lottoPrize -> lottoPrize.equals(prize))
                 .count();
