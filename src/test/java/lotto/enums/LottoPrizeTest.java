@@ -15,7 +15,7 @@ class LottoPrizeTest {
             "SECOND, 1500000",
             "THIRD, 50000",
             "FOURTH, 5000",
-            "NONE, 0"
+            "MISS, 0"
     })
     void lotto_prize_money_test(LottoPrize lottoPrize, int expectedPrize) {
         assertEquals(expectedPrize, lottoPrize.getPrizeMoney());
@@ -31,7 +31,7 @@ class LottoPrizeTest {
 
     @ParameterizedTest
     @DisplayName("로또 당첨 순위 테스트")
-    @CsvSource({"6, FIRST", "5, SECOND", "4, THIRD", "3, FOURTH", "0, NONE"})
+    @CsvSource({"6, FIRST", "5, SECOND", "4, THIRD", "3, FOURTH", "0, MISS"})
     void lotto_prize_money_rank_test(int value, LottoPrize expected) {
         assertEquals(expected, LottoPrize.valueOf(value));
     }
