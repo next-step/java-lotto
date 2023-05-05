@@ -3,6 +3,7 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.game.LottoGame;
+import lotto.domain.game.LottoGameGenerator;
 import lotto.domain.game.LottoGameSetting;
 import lotto.domain.game.LottoGameStatistics;
 import lotto.domain.game.LottoWinType;
@@ -23,7 +24,7 @@ public class LottoGameTest {
 
   @BeforeEach
   void setup() {
-    fixedRaffleGenerator = () -> List.of(1, 2, 3, 40, 50, 60);
+    fixedRaffleGenerator = () -> List.of(1, 2, 3, 40, 41, 42);
     duplicateFixedRaffleGenerator = () -> List.of(1, 1, 2, 3, 4, 5);
 
     gameSetting = LottoGameSetting.builder()
@@ -38,8 +39,9 @@ public class LottoGameTest {
   void 로또는_추첨_후_항상_결과를_남긴다 () {
 
     // given
-    LottoGame game = LottoGame.ofAutoOnly(14000, gameSetting);
     LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+    LottoGameGenerator generator = new LottoGameGenerator(14000, gameSetting);
+    LottoGame game = generator.generateLottoGame().getGame();
 
     // when
     LottoGameStatistics statistics = game.play(당첨번호);
@@ -47,15 +49,6 @@ public class LottoGameTest {
     // then
     Assertions.assertThat(statistics.getWinTypeMap())
         .containsKey(LottoWinType.RANK_5);
-  }
-
-  @ValueSource(ints = {13333, 12001, 10001})
-  @ParameterizedTest(name = "1000으로 나눠지지 않는 값: {0}")
-  void 로또는_1000으로_나눠지지_않으면_게임을_할_수_없다 (int given) {
-
-    // when & then
-    Assertions.assertThatThrownBy(() -> LottoGame.ofAutoOnly(given, gameSetting))
-        .isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
@@ -69,7 +62,8 @@ public class LottoGameTest {
         .distinctNumberOnly(true)
         .build();
 
-    LottoGame game = LottoGame.ofAutoOnly(14000, setting);
+    LottoGameGenerator generator = new LottoGameGenerator(14000, setting);
+    LottoGame game = generator.generateLottoGame().getGame();
     LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 3);
 
     // when & then
@@ -87,8 +81,10 @@ public class LottoGameTest {
         .distinctNumberOnly(true)
         .build();
 
+    LottoGameGenerator generator = new LottoGameGenerator(14000, setting);
+
     // when && then
-    Assertions.assertThatThrownBy(() -> LottoGame.ofAutoOnly(14000, setting))
+    Assertions.assertThatThrownBy(generator::generateLottoGame)
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -108,8 +104,10 @@ public class LottoGameTest {
         List.of(1, 2, 3, 4, 5, 6)
     );
 
+    LottoGameGenerator generator = new LottoGameGenerator(1000, 수동_로또_번호_목록, setting);
+
     // when && then
-    Assertions.assertThatThrownBy(() -> LottoGame.ofAutoManualMixed(수동_로또_번호_목록, 1000, setting))
+    Assertions.assertThatThrownBy(generator::generateLottoGame)
         .isInstanceOf(IllegalArgumentException.class);
   }
 }

@@ -18,30 +18,34 @@ public class LottoGame {
   private final LottoRoundJudge roundJudge;
   private final boolean distinctNumberOnly;
 
-  private LottoGame (int purchasePrice, LottoGameSetting gameSetting) {
+  private LottoGame (LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
     this.raffleGenerator = gameSetting.getRaffleGenerator();
     this.distinctNumberOnly = gameSetting.isDistinctNumberOnly();
-    this.purchasePrice = new LottoPurchasePrice(gameSetting.getPricePerGame(), purchasePrice);
+    this.purchasePrice = purchasePrice;
     this.roundJudge = new LottoRoundJudge();
     this.lottoRounds = initAutoOnlyRounds();
     throwIfRoundSizeNotMatch(this.purchasePrice.getGameCount(), this.lottoRounds);
   }
 
-  private LottoGame (List<List<Integer>> manualRounds, int purchasePrice, LottoGameSetting gameSetting) {
+  private LottoGame (List<List<Integer>> manualRounds, LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
     this.raffleGenerator = gameSetting.getRaffleGenerator();
     this.distinctNumberOnly = gameSetting.isDistinctNumberOnly();
-    this.purchasePrice = new LottoPurchasePrice(gameSetting.getPricePerGame(), purchasePrice);
+    this.purchasePrice = purchasePrice;
     this.roundJudge = new LottoRoundJudge();
     this.lottoRounds = initManualIncludeLottoRounds(manualRounds);
     throwIfRoundSizeNotMatch(this.purchasePrice.getGameCount(), this.lottoRounds);
   }
 
-  public static LottoGame ofAutoOnly (int lottoPrice, LottoGameSetting gameSetting) {
-    return new LottoGame(lottoPrice, gameSetting);
+  public static LottoGame ofAutoOnly (LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
+    return new LottoGame(purchasePrice, gameSetting);
   }
 
-  public static LottoGame ofAutoManualMixed (List<List<Integer>> manualRounds, int lottoPrice, LottoGameSetting gameSetting) {
-    return new LottoGame(manualRounds, lottoPrice, gameSetting);
+  public static LottoGame ofAutoManualMixed (List<List<Integer>> manualRounds, LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
+    return new LottoGame(manualRounds, purchasePrice, gameSetting);
+  }
+
+  public static LottoGame ofManualOnly(List<List<Integer>> manualRounds, LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
+    return new LottoGame(manualRounds, purchasePrice, gameSetting);
   }
 
   public LottoGameStatistics play (final LottoWinningNumber winningNumber) {

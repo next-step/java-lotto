@@ -7,6 +7,7 @@ import lotto.domain.game.LottoGame;
 import lotto.domain.game.LottoGameGenerator;
 import lotto.domain.game.LottoGameSetting;
 import lotto.domain.game.LottoGameStatistics;
+import lotto.domain.game.LottoGameWrapper;
 import lotto.domain.game.LottoWinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -26,7 +27,9 @@ public class LottoApplication {
     }
 
     final LottoGameGenerator gameGenerator = new LottoGameGenerator(lottoPrice, manualLottoRounds, LottoGameSetting.ofKorea645LottoSetting());
-    final LottoGame lottoGame = gameGenerator.initLottoGame();
+    final LottoGameWrapper lottoGameWrapper = gameGenerator.generateLottoGame();
+    final LottoGame lottoGame = lottoGameWrapper.getGame();
+
     resultView.showLottoRounds(manualLottoRoundCount, lottoGame.getLottoRounds());
 
     final List<Integer> lastWeekLottoNumbers = inputView.getLastWeekLottoNumbers();
