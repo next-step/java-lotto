@@ -19,4 +19,9 @@ public class InputView {
         SCANNER.nextLine();
         return SCANNER.nextLine();
     }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요");
+        return SCANNER.nextInt();
+    }
 }
