@@ -65,6 +65,10 @@ public class Ticket {
         return 12 - copyThisNumbers.size();
     }
 
+    public Boolean includeNumber(LottoNumber bonusLottoNumber) {
+        return this.numbers.contains(bonusLottoNumber);
+    }
+
     @Override
     public String toString() {
         return this.numbers
@@ -72,9 +76,5 @@ public class Ticket {
                 .map(number -> Integer.toString(number.getLottoNumber()))
                 .sorted()
                 .collect(Collectors.joining(", ", "[", "]"));
-    }
-
-    public Boolean includeNumber(LottoNumber bonusLottoNumber) {
-        return this.numbers.contains(bonusLottoNumber);
     }
 }

@@ -24,7 +24,6 @@ public class Statics {
         return prizeIntegerMap;
     }
 
-
     public int getIncome() {
         return Prize.FIRST.calculatePrize(this.countPrize(Prize.FIRST)) +
                 Prize.SECOND.calculatePrize(this.countPrize(Prize.SECOND)) +
