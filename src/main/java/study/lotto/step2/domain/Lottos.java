@@ -3,6 +3,7 @@ package study.lotto.step2.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -12,22 +13,22 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<String> selectedNumbers() {
+    public List<Set<Integer>> numbers() {
         return lottos.stream()
-                .map(this::selectedNumberOf)
-                .collect(Collectors.toList());
+                .map(this::numbersOf)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int numberOfPurchase() {
+    public int size() {
         return lottos.size();
     }
 
-    private String selectedNumberOf(Lotto lotto) {
-        return lotto.selectedNumbers().toString();
+    private Set<Integer> numbersOf(Lotto lotto) {
+        return lotto.numbers();
     }
 
     @Override
