@@ -23,7 +23,7 @@ public class LottoController {
     }
 
     public void result() {
-        LottoScore lottoScore = lottoGame.result(inputView.result());
+        LottoScore lottoScore = lottoGame.score(inputView.result());
         resultView.result(lottoScore);
     }
 }
