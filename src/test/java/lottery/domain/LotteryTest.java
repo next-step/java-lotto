@@ -43,16 +43,6 @@ public class LotteryTest {
     }
 
     @Test
-    @DisplayName("Set Collection 객체의 크기가 6이 된 후 그 값을 반환한다.")
-    void returnFullLotteryNumbers() {
-        Set<LotteryNumber> lotteryNumbers = new HashSet<>();
-        while (lotteryNumbers.size() != LOTTERY_NUMBERS_SIZE) {
-            lotteryNumbers.add(new LotteryNumber(RANDOM_NUMBER_GENERATOR.generatedNumber()));
-        }
-        assertThat(lotteryNumbers).hasSize(LOTTERY_NUMBERS_SIZE);
-    }
-
-    @Test
     @DisplayName("로또 당첨 예상번 크기가 6인 경우 정상 객체가 생성된다")
     void objCreateSuccessTest() {
         assertDoesNotThrow(() -> new Lottery(LOTTERY_NUMBERS));
