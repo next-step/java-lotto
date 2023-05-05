@@ -35,7 +35,6 @@ public class LottoGame {
         LottoScore lottoScore = new LottoScore();
         lottoScore.purchase(quantity() * LOTTO_PRICE);
         lottoScore.updateScore(lottoMatchers);
-        lottoMatchers.forEach(lottoMatcher -> lottoMatcher.incrementScore(lottoScore));
         return lottoScore;
     }
 
