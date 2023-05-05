@@ -8,20 +8,24 @@ import step2.utils.Validation;
 
 public class ManualLotto {
 
-    private final List<Lotto> manualLottoList = new ArrayList<>();
+    private final List<PickedLottoNumbers> manualLottos = new ArrayList<>();
 
     public ManualLotto(List<String> numbers) {
         for (String number : numbers) {
             List<Integer> manualNumbers = getManualNumber(number);
             validateManualNumbers(manualNumbers);
-            manualLottoList.add(new Lotto(manualNumbers));
+            manualLottos.add(new PickedLottoNumbers(manualNumbers));
         }
     }
 
     public ManualLotto(String number) {
-            List<Integer> manualNumbers = getManualNumber(number);
-            validateManualNumbers(manualNumbers);
-            manualLottoList.add(new Lotto(manualNumbers));
+        this(new ArrayList<>(List.of(number)));
+    }
+
+    public List<Lotto> toLottoEntity() {
+        List<Lotto> lottoStore = new ArrayList<>();
+        manualLottos.forEach(manualLotto -> lottoStore.add(new Lotto(manualLotto)));
+        return lottoStore;
     }
 
     private void validateManualNumbers(List<Integer> manualNumbers) {
@@ -35,9 +39,5 @@ public class ManualLotto {
     private List<Integer> getManualNumber(String number) {
         String[] strings = Split.getStrings(number);
         return Conversion.stringToInt(strings);
-    }
-
-    public void isAdded(List<Lotto> lottoList) {
-        lottoList.addAll(manualLottoList);
     }
 }
