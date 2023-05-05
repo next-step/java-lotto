@@ -1,23 +1,38 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
 
-    List<Integer> lotto;
+    List<LottoNumber> lotto;
 
-    Lotto(List<Integer> lotto) {
+
+    public Lotto(List<Integer> numbers) {
+        List<LottoNumber> lotto = new ArrayList<>();
+        for (Integer number : numbers) {
+            lotto.add(LottoNumber.of(number));
+        }
         this.lotto = lotto;
     }
 
-    int countEqualNumbers(List<Integer> winningNumbers) {
+    int countEqualNumbers(Lotto winningNumbers) {
         int count = 0;
-        for (Integer lottoNumber : lotto) {
-            if (winningNumbers.contains(lottoNumber)) {
+        for (LottoNumber lottoNumber : lotto) {
+            if (winningNumbers.contain(lottoNumber)) {
                 count++;
             }
         }
         return count;
+    }
+
+    private boolean contain(LottoNumber otherLottoNumber) {
+        for (LottoNumber lottoNumber : lotto) {
+            if (lottoNumber.equals(otherLottoNumber)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

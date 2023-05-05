@@ -23,7 +23,7 @@ public class WinningResult {
         winningResult.put(6, 0);
     }
 
-    public void calculateWinningResult(List<Lotto> lottos, List<Integer> winningNumbers) {
+    public void calculateWinningResult(List<Lotto> lottos, Lotto winningNumbers) {
         for (int i = 0; i < lottos.size(); i++) {
             Lotto lotto = lottos.get(i);
             int equalNumberCount = lotto.countEqualNumbers(winningNumbers);
