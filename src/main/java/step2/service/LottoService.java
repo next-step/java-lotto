@@ -12,8 +12,8 @@ public class LottoService {
         this.purchasedLottoList = purchasedLottoList;
     }
 
-    public void purchase(ManualLotto manualLotto){
-        purchasedLottoList.addManualLottos(manualLotto);
+    public void purchase(ManualLotto manualLotto) {
+        purchasedLottoList.addManualLotto(manualLotto);
     }
 
     public void matchResult(LotteryWin lotteryWin) {
