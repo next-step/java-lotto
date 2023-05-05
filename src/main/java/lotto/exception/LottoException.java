@@ -24,7 +24,7 @@ public class LottoException {
   public static boolean isRightSize(List<Integer> numberList) {
     Set<Integer> numberSet = new HashSet<>(numberList);
 
-    return numberSet.size() != (numberList).size() || numberSet.size() != 6;
+    return numberSet.size() != (numberList).size() && numberSet.size() != 6;
   }
 
   public static void checkSize(List<Integer> numberList) {
