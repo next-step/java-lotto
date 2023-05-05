@@ -1,5 +1,7 @@
 package lotto;
 
+import com.sun.nio.sctp.IllegalReceiveException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,10 +27,15 @@ public class Lotto {
     }
 
     private void isRangeIn(List<Integer> lotto) {
-        IntStream.range(LOTTO_MINIMUM_VALUE, LOTTO_MAXIMUM_VALUE)
-                .findAny(number -> number < LOTTO_MINIMUM_VALUE || number > LOTTO_MAXIMUM_VALUE)
-                .ifPresent(() -> {
-                    throw new IllegalArgumentException();
+        lotto.stream()
+                .filter(number -> isBetweenValid(number))
+                .findAny()
+                .ifPresent(a -> {
+                    throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자이어야 합니다.");
                 });
+    }
+
+    private boolean isBetweenValid(int number) {
+        return number < LOTTO_MINIMUM_VALUE || number > LOTTO_MINIMUM_VALUE;
     }
 }
