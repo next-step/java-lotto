@@ -12,7 +12,7 @@ public class Lotto {
 
     public LottoMatcher match(List<LottoNumber> targetNumbers) {
         int matchedSize = lottoNumbers.stream()
-                .filter(lottoNumber -> targetNumbers.contains(lottoNumber))
+                .filter(targetNumbers::contains)
                 .collect(Collectors.toList())
                 .size();
         return LottoMatcher.of(matchedSize);
