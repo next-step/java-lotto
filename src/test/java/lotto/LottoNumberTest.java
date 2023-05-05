@@ -20,7 +20,7 @@ public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 46})
-    void 로또번호는_0이하거나_45를_초과할수없다(int input) {
+    void 로또번호는_1이하거나_45를_초과할수없다(int input) {
         assertThatThrownBy(() -> new LottoNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("유효한 숫자 범위는 1~45 입니다.");
