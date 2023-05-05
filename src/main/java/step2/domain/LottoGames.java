@@ -1,7 +1,6 @@
 package step2.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGames {
@@ -58,23 +57,5 @@ public class LottoGames {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(element + " : 유효한 정수 값이 아닙니다.");
         }
-    }
-
-    public double calculateProfit(int gameCount, int[] lottoReport) {
-        long profit = sum(lottoReport);
-        double cost = gameCount * DEFAULT_LOTTO_PRICE;
-        System.out.println("수익률: " + profit + "  비용: " + cost);
-        return calculateProfitRate(profit, cost);
-    }
-
-    long sum(int[] lottoReport) {
-        System.out.println();
-        return IntStream.range(MINIMUM_MATH_COUNT, MAXIMUM_MATH_COUNT_EXCLUSIVE)
-                .mapToLong(i -> PrizeMoney.toPrizeMoney(i) * lottoReport[i]).sum();
-    }
-
-    private double calculateProfitRate(long profit, double cost) {
-        double rate = (profit - cost) / cost;
-        return Math.round(rate * 100) / 100;
     }
 }

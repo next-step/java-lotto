@@ -1,5 +1,6 @@
 package step2.view;
 
+import step2.domain.LottoResultReport;
 import step2.domain.PrizeMoney;
 
 import java.util.List;
@@ -24,9 +25,9 @@ public class ResultView {
         printBlankLine();
     }
 
-    public static void printResultReport(int[] lottoReport) {
+    public static void printResultReport(LottoResultReport lottoResultReport) {
         for (int i = MINIMUM_MATH_COUNT; i < MAXIMUM_MATH_COUNT + 1; i++) {
-            printMessage(i + "개 일치 (" + PrizeMoney.toPrizeMoney(i) + ") - " + lottoReport[i] + "개");
+            printMessage(i + "개 일치 (" + PrizeMoney.toPrizeMoney(i) + ") - " + lottoResultReport.findReportByMatchCount(i) + "개");
         }
     }
 }

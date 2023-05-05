@@ -2,6 +2,7 @@ package step2.controller;
 
 import step2.domain.LottoGame;
 import step2.domain.LottoGames;
+import step2.domain.LottoResultReport;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -24,14 +25,14 @@ public class LottoGameController {
         ResultView.printBlankLine();
         ResultView.printMessage("당첨 통계");
 
-        int[] lottoReport = new int[7];
+        LottoResultReport lottoResultReport = new LottoResultReport();
         for (LottoGame lottoGame : lottos) {
-            int rightCount = (int) winningNumber.howManyRight(lottoGame);
-            lottoReport[rightCount]++;
+            int matchCount = (int) winningNumber.howManyRight(lottoGame);
+            lottoResultReport.recordRank(matchCount);
         }
 
-        ResultView.printResultReport(lottoReport);
-        double profit = lottoGames.calculateProfit(gameCount, lottoReport);
+        ResultView.printResultReport(lottoResultReport);
+        double profit = lottoResultReport.calculateProfit(gameCount);
         ResultView.printMessage("총 수익률은 " + profit + "입니다.");
 
     }

@@ -45,25 +45,4 @@ class LottoGamesTest {
     public void 지난주_당첨_번호_파싱_예외(String winningNumbers) throws Exception {
         assertThatIllegalArgumentException().isThrownBy(() -> lottoGames.readWinningNumber(winningNumbers));
     }
-
-    @DisplayName("당첨금에 따른 수익률을 계산한다.")
-    @ParameterizedTest
-    @MethodSource("lottoReportSample")
-    public void 수익률_연산(int[] lottoReport, int sum) throws Exception {
-        assertThat(lottoGames.sum(lottoReport)).isEqualTo(sum);
-    }
-
-    static Stream<Arguments> lottoReportSample() throws Throwable {
-        return Stream.of(
-                Arguments.of(new int[]{0, 1, 1, 0, 0, 0, 0}, 0),
-                Arguments.of(new int[]{0, 0, 0, 1, 0, 0, 0}, 5000),
-                Arguments.of(new int[]{0, 0, 0, 0, 1, 0, 0}, 50000),
-                Arguments.of(new int[]{0, 0, 0, 0, 0, 1, 0}, 1500000),
-                Arguments.of(new int[]{0, 0, 0, 0, 0, 0, 1}, 2000000000),
-                Arguments.of(new int[]{0, 0, 0, 1, 0, 1, 1}, 2001505000)
-
-
-        );
-    }
-
 }
