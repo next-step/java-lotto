@@ -49,7 +49,7 @@ public class LottoSeller {
 
     private List<Lotto> lottos(long numberOfLotto) {
         return LongStream.rangeClosed(1, numberOfLotto)
-                .mapToObj(index -> lottoFactory.lotto())
+                .mapToObj(index -> lottoFactory.create())
                 .collect(Collectors.toList());
     }
 }

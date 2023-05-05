@@ -5,12 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import study.lotto.step2.domain.AutoNumberSelector;
-import study.lotto.step2.domain.Lotto;
-import study.lotto.step2.domain.LottoFactory;
-import study.lotto.step2.domain.Lottos;
+import study.lotto.step2.domain.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -78,20 +76,24 @@ class LottoSellerTest {
     }
 
     private Lotto sequenceLotto() {
-        return new Lotto(sequenceNumber());
+        return new Lotto(sequenceLottoNumbers());
     }
 
     private LottoFactory sequenceLottoFactory() {
-        return new LottoFactory(sequenceNumberSelector());
+        return new LottoFactory(sequenceLottoNumbersFactory());
     }
 
-    private AutoNumberSelector sequenceNumberSelector() {
-        return this::sequenceNumber;
+    private LottoNumbersFactory sequenceLottoNumbersFactory() {
+        return this::sequenceLottoNumbers;
     }
 
-    private List<Integer> sequenceNumber() {
-        return IntStream.rangeClosed(START_SEQUENCE_NUMBER, END_SEQUENCE_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
+    private LottoNumbers sequenceLottoNumbers() {
+        return new LottoNumbers(sequenceLottoNumbers(START_SEQUENCE_NUMBER, END_SEQUENCE_NUMBER));
+    }
+
+    private Set<LottoNumber> sequenceLottoNumbers(int start, int end) {
+        return IntStream.rangeClosed(start, end)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toUnmodifiableSet());
     }
 }
