@@ -3,7 +3,7 @@ package calculator;
 import java.util.Objects;
 
 public class Number {
-    private static final String numberRegExp = "^[0-9]+$";
+    private static final String numberRegExp = "^[-]?[0-9]+$";
     private int number;
 
     public Number(String stringNum) {
