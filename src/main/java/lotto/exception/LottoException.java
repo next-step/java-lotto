@@ -14,7 +14,7 @@ public class LottoException {
   }
 
   public static int checkIllegalArgumentException(String strNumber) {
-    if(!isNumber(strNumber)) {
+    if (!isNumber(strNumber)) {
       throw new IllegalArgumentException("45이하의 숫자, 콤마, 띄어쓰기로 입력해주세요");
     }
 
@@ -24,7 +24,7 @@ public class LottoException {
   public static void checkSize(List<Integer> numberList) {
     Set<Integer> numberSet = new HashSet<>(numberList);
 
-    if(numberSet.size() != (numberList).size() || numberSet.size() != 6) {
+    if (numberSet.size() != (numberList).size() || numberSet.size() != 6) {
       throw new IllegalArgumentException("로또 번호가 중복 혹은 6개가 아닙니다.");
     }
   }

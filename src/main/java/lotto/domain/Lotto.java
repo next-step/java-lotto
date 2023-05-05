@@ -8,29 +8,30 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    public static final List<Integer> NUMBER_UNDER_FORTY_FIVE = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-    public static final NumberMaker NUMBER_MAKER = new NumberMaker();
+  public static final List<Integer> NUMBER_UNDER_FORTY_FIVE = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
-    public static int PRICE = 1000;
+  public static final NumberMaker NUMBER_MAKER = new NumberMaker();
 
-    private final List<Integer> lottoNumber;
+  public static int PRICE = 1000;
 
-    // 번호 자동 입력
-    public Lotto() {
-        this(NUMBER_MAKER.makeSixLottoNumber(NUMBER_UNDER_FORTY_FIVE));
-    }
+  private final List<Integer> lottoNumber;
 
-    // 번호 수동 입력
-    public Lotto(List<Integer> numberList) {
-        this.lottoNumber = new ArrayList<>(numberList);
-    }
+  // 번호 자동 입력
+  public Lotto() {
+    this(NUMBER_MAKER.makeSixLottoNumber(NUMBER_UNDER_FORTY_FIVE));
+  }
 
-    // 당첨번호 확인
-    public int matchLottoNumber(List<Integer> targetNumber) {
-        return (int) targetNumber.stream().filter(this.lottoNumber::contains).count();
-    }
+  // 번호 수동 입력
+  public Lotto(List<Integer> numberList) {
+    this.lottoNumber = new ArrayList<>(numberList);
+  }
 
-    public List<Integer> getCheckedNumbers() {
-        return new ArrayList<>(this.lottoNumber);
-    }
+  // 당첨번호 확인
+  public int matchLottoNumber(List<Integer> targetNumber) {
+    return (int) targetNumber.stream().filter(this.lottoNumber::contains).count();
+  }
+
+  public List<Integer> getCheckedNumbers() {
+    return new ArrayList<>(this.lottoNumber);
+  }
 }

@@ -11,24 +11,24 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoApplication {
-    public static void main(String[] args) {
-        LotteryTickets lotteryTickets = new LotteryTickets();
+  public static void main(String[] args) {
+    LotteryTickets lotteryTickets = new LotteryTickets();
 
-        lotteryTickets.purchase(InputConverter.convertBudgetToNumberOfPurchase(InputView.askBudget()));
-        List<Lotto> lottoBundle = lotteryTickets.getLottoBundle();
+    lotteryTickets.purchase(InputConverter.convertBudgetToNumberOfPurchase(InputView.askBudget()));
+    List<Lotto> lottoBundle = lotteryTickets.getLottoBundle();
 
-        ResultView.showMyLotto(lottoBundle);
+    ResultView.showMyLotto(lottoBundle);
 
-        WinningStatistics winningStatistics = new WinningStatistics(InputConverter.convertNumberToList(InputView.askLastLottoNumber()));
+    WinningStatistics winningStatistics = new WinningStatistics(InputConverter.convertNumberToList(InputView.askLastLottoNumber()));
 
-        Map<Integer, Integer> resultMap = winningStatistics.lottoResult(lottoBundle);
-        int totalWinningPrice = winningStatistics.sumTotalWinningPrice(resultMap);
-        double roi = winningStatistics.calcRoi(totalWinningPrice, lotteryTickets.getInvestment());
+    Map<Integer, Integer> resultMap = winningStatistics.lottoResult(lottoBundle);
+    int totalWinningPrice = winningStatistics.sumTotalWinningPrice(resultMap);
+    double roi = winningStatistics.calcRoi(totalWinningPrice, lotteryTickets.getInvestment());
 
-        ResultView.showStatistic(resultMap);
-        ResultView.showRoi(roi);
+    ResultView.showStatistic(resultMap);
+    ResultView.showRoi(roi);
 
 
-    }
+  }
 
 }

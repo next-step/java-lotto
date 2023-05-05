@@ -15,13 +15,13 @@ public class InputConverter {
 
     BudgetException.checkScale(budget);
 
-    return budget/ Lotto.PRICE;
+    return budget / Lotto.PRICE;
   }
 
   public static List<Integer> convertNumberToList(String targetNumber) {
     List<Integer> numberList = Arrays.stream(targetNumber.split(", "))
-          .map(LottoException::checkIllegalArgumentException)
-          .collect(Collectors.toList());
+        .map(LottoException::checkIllegalArgumentException)
+        .collect(Collectors.toList());
 
     LottoException.checkSize(numberList);
 

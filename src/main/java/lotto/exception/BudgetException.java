@@ -12,7 +12,7 @@ public class BudgetException {
   }
 
   public static int checkIllegalArgumentException(String strNumber) {
-    if(!isNumber(strNumber)) {
+    if (!isNumber(strNumber)) {
       throw new IllegalArgumentException("1 이상의 숫자만 입력해주세요");
     }
 
@@ -20,7 +20,7 @@ public class BudgetException {
   }
 
   public static void checkScale(int budget) {
-    if(budget < Lotto.PRICE) {
+    if (budget < Lotto.PRICE) {
       throw new IllegalArgumentException("금액이 로또 가격보다 낮습니다.");
     }
   }

@@ -6,27 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LotteryTickets {
-    private List<Lotto> lottoBundle;
+  private List<Lotto> lottoBundle;
 
-    private int investment;
+  private int investment;
 
-    public void purchase(int numberOfPurchase) {
-        List<Lotto> lottoList = new ArrayList<>();
+  public void purchase(int numberOfPurchase) {
+    List<Lotto> lottoList = new ArrayList<>();
 
-        for(int i = 0; i<numberOfPurchase; i++) {
-            lottoList.add(new Lotto());
-            this.investment += Lotto.PRICE;
-        }
-
-        this.lottoBundle = new ArrayList<>(lottoList);
+    for (int i = 0; i < numberOfPurchase; i++) {
+      lottoList.add(new Lotto());
+      this.investment += Lotto.PRICE;
     }
 
-    public List<Lotto> getLottoBundle() {
-        return new ArrayList<>(this.lottoBundle);
-    }
+    this.lottoBundle = new ArrayList<>(lottoList);
+  }
 
-    public int getInvestment() {
-        return this.investment;
-    }
+  public List<Lotto> getLottoBundle() {
+    return new ArrayList<>(this.lottoBundle);
+  }
+
+  public int getInvestment() {
+    return this.investment;
+  }
 
 }
