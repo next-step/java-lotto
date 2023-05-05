@@ -31,22 +31,14 @@ public class ResultView {
     return "%d개 일치 (%d원) - %d개\n";
   }
 
-  public void showLottoRounds (List<LottoRound> lottoRounds) {
-    Map<LottoGameType, List<LottoRound>> gameTypeRounds = lottoRounds.stream()
-        .collect(Collectors.groupingBy(LottoRound::getGameType));
-
-    System.out.printf("\n%s 를 구매했습니다.\n", getRoundCountForGameType(gameTypeRounds));
+  public void showLottoRounds (int manualLottoRoundCount, List<LottoRound> lottoRounds) {
+    System.out.printf("수동으로 %d개, ", manualLottoRoundCount);
+    System.out.printf("자동으로 %d개를 구매하였습니다.\n", lottoRounds.size() - manualLottoRoundCount);
     System.out.println(
         lottoRounds.stream()
             .map(LottoRound::getRoundNumbers)
             .map(Object::toString)
             .collect(Collectors.joining("\n"))
     );
-  }
-
-  private String getRoundCountForGameType(Map<LottoGameType, List<LottoRound>> gameTypeRounds) {
-    return gameTypeRounds.entrySet().stream()
-        .map(entry -> String.format(String.format("%s으로 %d개", entry.getKey().getName(), entry.getValue().size())))
-        .collect(Collectors.joining(","));
   }
 }
