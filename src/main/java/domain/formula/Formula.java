@@ -4,6 +4,7 @@ import static domain.formula.Numbers.getNumbersByFormula;
 import static domain.formula.Operators.getOperatorsByFormula;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Formula {
 
@@ -32,4 +33,30 @@ public class Formula {
         return formula.size() % 2 == 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Formula formula = (Formula) o;
+        return Objects.equals(numbers, formula.numbers) && Objects.equals(operators,
+                formula.operators);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers, operators);
+    }
+
+    @Override
+    public String toString() {
+        return "Formula{" +
+                "numbers=" + numbers +
+                ", operators=" + operators +
+                '}';
+    }
 }
