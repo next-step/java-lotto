@@ -1,5 +1,8 @@
-package domain;
+package domain.step1;
 
+import domain.step1.CalculatorMain;
+import domain.step1.Numbers;
+import domain.step1.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

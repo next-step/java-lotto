@@ -1,4 +1,4 @@
-package domain;
+package domain.step1;
 
 import java.security.InvalidParameterException;
 import java.util.Arrays;

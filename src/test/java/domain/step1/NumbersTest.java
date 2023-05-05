@@ -1,5 +1,6 @@
-package domain;
+package domain.step1;
 
+import domain.step1.Numbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
