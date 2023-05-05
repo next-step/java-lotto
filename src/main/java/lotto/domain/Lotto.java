@@ -1,10 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -50,10 +49,10 @@ public class Lotto {
     }
 
     int matchCount(Lotto numbers) {
-        List<LottoNumber> matchNumbers = this.numbers.stream()
-                .filter(v -> numbers.value().stream()
-                        .anyMatch(Predicate.isEqual(v))).collect(Collectors.toList());
-        return matchNumbers.size();
+        List<LottoNumber> matchLotto = new ArrayList<>(this.numbers);
+        matchLotto.retainAll(numbers.value());
+
+        return matchLotto.size();
     }
 
     private boolean isMatchWith(LottoNumber number) {

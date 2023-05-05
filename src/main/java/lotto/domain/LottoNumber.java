@@ -7,7 +7,7 @@ public class LottoNumber {
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final int LOTTO_NUMBER_MAX = 45;
 
-    private int number;
+    private final int number;
 
     public LottoNumber(int number) {
         if (isNotValidLottoNumber(number)) {
