@@ -10,7 +10,7 @@ public class Ticket {
     private final Set<LottoNumber> numbers;
 
     public Ticket(String stringNumbers) {
-        this.numbers = parseToLottoNumbers(parseToNumbers(stringNumbers));
+        this.numbers = parseToNumbers(stringNumbers);
         validate();
     }
 
@@ -20,7 +20,6 @@ public class Ticket {
     }
 
     public static Ticket of (Set<Integer> integers) {
-
         Ticket ticket = new Ticket(parseToLottoNumbers(integers));
         ticket.validate();
         return ticket;
@@ -42,10 +41,10 @@ public class Ticket {
         return new Ticket(numbers);
     }
 
-    private Set<Integer> parseToNumbers(String stringNumbers) {
-        Set<Integer> numbers = new HashSet<>();
+    private Set<LottoNumber> parseToNumbers(String stringNumbers) {
+        Set<LottoNumber> numbers = new HashSet<>();
         for (String number : stringNumbers.split(", ")) {
-            numbers.add(Integer.parseInt(number));
+            numbers.add(LottoNumber.of(Integer.parseInt(number)));
         }
         return numbers;
     }
