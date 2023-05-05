@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.NotKindOfLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -89,5 +90,18 @@ public class TicketTest {
         assertThat(winnerTicket.ticket().toString())
                 .as("당첨권의 숫자와 Ticket 인스턴스의 숫자는 일치한다")
                 .isEqualTo(ticket.toString());
+    }
+
+    @DisplayName("잘못된 문자열이 입력되어 티켓 생성시 예외를 발생시킨다")
+    @Test
+    public void notKindOfTicket() {
+        //given
+        String input = "1, 2, 3, 4+5, 6, 7";
+        //when
+        //then
+        assertThatThrownBy(() -> {
+            Ticket ticket = new Ticket(input);
+        }).isInstanceOf(NotKindOfLottoNumberException.class)
+                .hasMessageContaining("LottoNumber 로 변환할 수 없는 문자");
     }
 }
