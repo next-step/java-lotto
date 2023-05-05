@@ -8,6 +8,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -16,15 +17,18 @@ public class LottoApplication {
         lotteryTickets.purchase(InputConverter.convertBudgetToNumberOfPurchase(InputView.askBudget()));
         List<Lotto> lottoBundle = lotteryTickets.getLottoBundle();
 
-        ResultView resultView = new ResultView();
-        resultView.showMyLotto(lottoBundle);
+        ResultView.showMyLotto(lottoBundle);
 
-        String strList = InputView.askLastLottoNumber();
+        WinningStatistics winningStatistics = new WinningStatistics(InputConverter.convertNumberToList(InputView.askLastLottoNumber()));
+
+        Map<Integer, Integer> resultMap = winningStatistics.lottoResult(lottoBundle);
+        int totalWinningPrice = winningStatistics.sumTotalWinningPrice(resultMap);
+        double roi = winningStatistics.calcRoi(totalWinningPrice, lotteryTickets.getInvestment());
+
+        ResultView.showStatistic(resultMap);
+        ResultView.showRoi(roi);
 
 
-        WinningStatistics winningStatistics = new WinningStatistics(InputConverter.convertNumberToList(strList));
-
-        resultView.showStatistic(winningStatistics.lottoResult(lottoBundle), lotteryTickets.getInvestment());
     }
 
 }

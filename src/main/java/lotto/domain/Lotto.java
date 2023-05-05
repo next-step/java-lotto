@@ -17,7 +17,7 @@ public class Lotto {
 
     // 번호 자동 입력
     public Lotto() {
-        this.lottoNumber = new ArrayList<>(NUMBER_MAKER.makeSixLottoNumber(NUMBER_UNDER_FORTY_FIVE));
+        this(NUMBER_MAKER.makeSixLottoNumber(NUMBER_UNDER_FORTY_FIVE));
     }
 
     // 번호 수동 입력
