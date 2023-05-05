@@ -2,16 +2,16 @@ package ui;
 
 import lotto.WinningPrice;
 
-import java.util.Map;
+import java.util.EnumMap;
 
 public class ResultView {
-    public static void printResult(Map<Integer, Integer> winningResult) {
+    public static void printResult(EnumMap<WinningPrice, Integer> winningResult) {
         System.out.println("당첨 통계");
         System.out.println("______________");
 
-        for (int equalCount = WinningPrice.getLastEqualCount(); equalCount <= WinningPrice.getFirstEqualCount(); equalCount++) {
-            int count = winningResult.get(equalCount);
-            System.out.println(equalCount + "개 일치 (" + WinningPrice.of(equalCount).getPrice() + "원)- " + count);
+        for (WinningPrice winningPrice : WinningPrice.values()) {
+            int count = winningResult.get(winningPrice);
+            System.out.println(winningPrice.getEqualCount() + "개 일치 (" + winningPrice.getPrice() + "원)- " + count);
         }
 
     }

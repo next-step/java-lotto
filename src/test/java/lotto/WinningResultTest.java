@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,12 +25,12 @@ class WinningResultTest {
 
         // When
         winningResult.calculateWinningResult(lottos, new Lotto(winningNumbers));
-        Map<Integer, Integer> result = winningResult.getWinningResult();
+        EnumMap<WinningPrice, Integer> result = winningResult.getWinningResult();
 
         // Then
-        assertThat(1).isEqualTo(result.get(6));
-        assertThat(1).isEqualTo(result.get(5));
-        assertThat(1).isEqualTo(result.get(4));
+        assertThat(1).isEqualTo(result.get(WinningPrice.FIRST));
+        assertThat(1).isEqualTo(result.get(WinningPrice.SECOND));
+        assertThat(1).isEqualTo(result.get(WinningPrice.THIRD));
     }
 
     @Test

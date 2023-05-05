@@ -1,14 +1,13 @@
 package lotto;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public class WinningResult {
 
-    private final Map<Integer, Integer> winningResult = new HashMap<>();
+    private final EnumMap<WinningPrice, Integer> winningResult = new EnumMap<>(WinningPrice.class);
 
-    public Map<Integer, Integer> getWinningResult() {
+    public EnumMap<WinningPrice, Integer> getWinningResult() {
         return winningResult;
     }
 
@@ -17,47 +16,30 @@ public class WinningResult {
     }
 
     private void init() {
-        winningResult.put(3, 0);
-        winningResult.put(4, 0);
-        winningResult.put(5, 0);
-        winningResult.put(6, 0);
+        winningResult.put(WinningPrice.FOUR, 0);
+        winningResult.put(WinningPrice.THIRD, 0);
+        winningResult.put(WinningPrice.SECOND, 0);
+        winningResult.put(WinningPrice.FIRST, 0);
     }
 
     public void calculateWinningResult(List<Lotto> lottos, Lotto winningNumbers) {
         for (int i = 0; i < lottos.size(); i++) {
             Lotto lotto = lottos.get(i);
-            int equalNumberCount = lotto.countEqualNumbers(winningNumbers);
-            saveWinningResult(equalNumberCount);
-        }
-
-    }
-
-    private void saveWinningResult(int equalNumberCount) {
-        if (equalNumberCount >= 6) {
-            winningResult.put(6, winningResult.getOrDefault(6, 0) + 1);
-            return;
-        }
-        if (equalNumberCount >= 5) {
-            winningResult.put(5, winningResult.getOrDefault(5, 0) + 1);
-            return;
-        }
-        if (equalNumberCount >= 4) {
-            winningResult.put(4, winningResult.getOrDefault(4, 0) + 1);
-            return;
-        }
-        if (equalNumberCount >= 3) {
-            winningResult.put(3, winningResult.getOrDefault(3, 0) + 1);
-            return;
+            WinningPrice winningPrice = WinningPrice.of(lotto.countEqualNumbers(winningNumbers));
+            saveWinningResult(winningPrice);
         }
     }
 
+    private void saveWinningResult(WinningPrice winningPrice) {
+        winningResult.put(winningPrice, winningResult.getOrDefault(winningPrice, 0) + 1);
+    }
 
     public Double calculateRateOfReturn(int amount) {
         Double sum = 0.0;
         Double total = 0.0;
-        for (int i = WinningPrice.getLastEqualCount(); i <= WinningPrice.getFirstEqualCount(); i++) {
-            int count = winningResult.get(i);
-            sum += count * WinningPrice.of(i).getPrice();
+        for (WinningPrice winningPrice : WinningPrice.values()) {
+            int count = winningResult.get(winningPrice);
+            sum += count * winningPrice.getPrice();
         }
 
         total = sum / amount / 100;
