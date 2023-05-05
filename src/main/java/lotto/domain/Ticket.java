@@ -11,12 +11,12 @@ public class Ticket {
 
     public Ticket(String stringNumbers) {
         this.numbers = parseToNumbers(stringNumbers);
-        validate();
+        this.validate();
     }
 
     public Ticket(Set<LottoNumber> issueNumbers) {
         this.numbers = issueNumbers;
-        validate();
+        this.validate();
     }
 
     public static Ticket of (Set<Integer> integers) {
