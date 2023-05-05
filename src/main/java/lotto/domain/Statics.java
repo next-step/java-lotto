@@ -38,19 +38,15 @@ public class Statics {
     }
 
     public int getIncome() {
-        return Prize.FIRST.calculatePrize(prizeIntegerMap.get(Prize.FIRST)) +
-                Prize.SECOND.calculatePrize(prizeIntegerMap.get(Prize.SECOND)) +
-                Prize.THIRD.calculatePrize(prizeIntegerMap.get(Prize.THIRD)) +
-                Prize.FOURTH.calculatePrize(prizeIntegerMap.get(Prize.FOURTH)) +
-                Prize.FIFTH.calculatePrize(prizeIntegerMap.get(Prize.FIFTH));
+        return Prize.FIRST.calculatePrize(this.countPrize(Prize.FIRST)) +
+                Prize.SECOND.calculatePrize(this.countPrize(Prize.SECOND)) +
+                Prize.THIRD.calculatePrize(this.countPrize(Prize.THIRD)) +
+                Prize.FOURTH.calculatePrize(this.countPrize(Prize.FOURTH)) +
+                Prize.FIFTH.calculatePrize(this.countPrize(Prize.FIFTH));
     }
 
-//    private int aggregate(Tickets challengerTickets, WinnerTicket winnerTicket, Prize prize) {
-//        return winnerTicket.countWinner(challengerTickets, prize);
-//    }
-
     public int countPrize(Prize prize) {
-        return this.prizeIntegerMap.get(prize);
+        return this.prizeIntegerMap.getOrDefault(prize, 0);
     }
 
     public double profitRatio() {
