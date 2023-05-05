@@ -24,7 +24,6 @@ public class Validation {
         if (isDuplication(numbers, store)) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
-        store.clear();
     }
 
     public static void size(List<Integer> numbers) {
