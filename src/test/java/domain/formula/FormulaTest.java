@@ -2,6 +2,7 @@ package domain.formula;
 
 import static domain.formula.Formula.FORMULA_VALIDATION_FAILED;
 import static domain.formula.Formula.getFormulaByInput;
+import static domain.formula.Numbers.NUMBER_FORMAT_EXCEPTION;
 import static domain.formula.Numbers.getNumbersByFormula;
 import static domain.formula.Operators.getOperatorsByFormula;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,7 +29,8 @@ class FormulaTest {
     void validationCheck2() {
         List<String> formulaList = List.of(new String[]{"+", "4", "-"});
         assertThatThrownBy(() -> getFormulaByInput(formulaList))
-                .isExactlyInstanceOf(NumberFormatException.class);
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(NUMBER_FORMAT_EXCEPTION);
     }
 
 
