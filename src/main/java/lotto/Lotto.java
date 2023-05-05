@@ -7,7 +7,6 @@ public class Lotto {
 
     List<LottoNumber> lotto;
 
-
     public Lotto(List<Integer> numbers) {
         List<LottoNumber> lotto = new ArrayList<>();
         for (Integer number : numbers) {
@@ -17,22 +16,14 @@ public class Lotto {
     }
 
     int countEqualNumbers(Lotto winningNumbers) {
-        int count = 0;
-        for (LottoNumber lottoNumber : lotto) {
-            if (winningNumbers.contain(lottoNumber)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) lotto.stream()
+            .filter(winningNumbers::contain)
+            .count();
     }
 
     private boolean contain(LottoNumber otherLottoNumber) {
-        for (LottoNumber lottoNumber : lotto) {
-            if (lottoNumber.equals(otherLottoNumber)) {
-                return true;
-            }
-        }
-        return false;
+        return lotto.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(otherLottoNumber));
     }
 
 }

@@ -35,12 +35,19 @@ public class WinningResult {
     private void saveWinningResult(int equalNumberCount) {
         if (equalNumberCount >= 6) {
             winningResult.put(6, winningResult.getOrDefault(6, 0) + 1);
-        } else if (equalNumberCount >= 5) {
+            return;
+        }
+        if (equalNumberCount >= 5) {
             winningResult.put(5, winningResult.getOrDefault(5, 0) + 1);
-        } else if (equalNumberCount >= 4) {
+            return;
+        }
+        if (equalNumberCount >= 4) {
             winningResult.put(4, winningResult.getOrDefault(4, 0) + 1);
-        } else if (equalNumberCount >= 3) {
+            return;
+        }
+        if (equalNumberCount >= 3) {
             winningResult.put(3, winningResult.getOrDefault(3, 0) + 1);
+            return;
         }
     }
 
