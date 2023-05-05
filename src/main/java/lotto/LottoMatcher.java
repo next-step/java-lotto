@@ -4,11 +4,36 @@ package lotto;
 import java.util.Arrays;
 
 public enum LottoMatcher {
-    FIRST_MATCH(6, 2_000_000_000),
-    SECOND_MATCH(5, 1_500_000),
-    THIRD_MATCH(4, 50_000),
-    FOURTH_MATCH(3, 5_000),
-    NONE_MATCH(0, 0);
+    FIRST_MATCH(6, 2_000_000_000) {
+        @Override
+        public void incrementScore(LottoScore lottoScore) {
+            lottoScore.addFirst();
+        }
+    },
+    SECOND_MATCH(5, 1_500_000) {
+        @Override
+        public void incrementScore(LottoScore lottoScore) {
+            lottoScore.addSecond();
+        }
+    },
+    THIRD_MATCH(4, 50_000) {
+        @Override
+        public void incrementScore(LottoScore lottoScore) {
+            lottoScore.addThird();
+        }
+    },
+    FOURTH_MATCH(3, 5_000) {
+        @Override
+        public void incrementScore(LottoScore lottoScore) {
+            lottoScore.addFourth();
+        }
+    },
+    NONE_MATCH(0, 0) {
+        @Override
+        public void incrementScore(LottoScore lottoScore) {
+            // do nothing
+        }
+    };
 
     private final int rank;
     private int price;
@@ -32,4 +57,6 @@ public enum LottoMatcher {
     public int price() {
         return price;
     }
+
+    public abstract void incrementScore(LottoScore lottoScore);
 }

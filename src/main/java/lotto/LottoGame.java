@@ -25,46 +25,21 @@ public class LottoGame {
     }
 
     private List<LottoMatcher> matchResult(List<LottoNumber> winNumber) {
-        List<LottoMatcher> collect = lottos.stream()
+        return lottos.stream()
                 .map(lotto -> lotto.match(winNumber))
                 .collect(Collectors.toList());
-        return collect;
     }
 
-    public LottoScore result(List<LottoNumber> winNumber) {
+    public LottoScore score(List<LottoNumber> winNumber) {
         List<LottoMatcher> lottoMatchers = matchResult(winNumber);
-        return score(lottoMatchers);
-    }
-
-    public LottoScore score(List<LottoMatcher> lottoMatchers) {
         LottoScore lottoScore = new LottoScore();
-
         lottoScore.purchase(quantity() * LOTTO_PRICE);
-
-        lottoMatchers.forEach(lottoMatcher -> {
-            switch (lottoMatcher) {
-                case FIRST_MATCH:
-                    lottoScore.addFirst();
-                    break;
-                case SECOND_MATCH:
-                    lottoScore.addSecond();
-                    break;
-                case THIRD_MATCH:
-                    lottoScore.addThird();
-                    break;
-                case FOURTH_MATCH:
-                    lottoScore.addFourth();
-                    break;
-                case NONE_MATCH:
-                    // do nothing
-                    break;
-            }
-        });
-
+        lottoScore.updateScore(lottoMatchers);
+        lottoMatchers.forEach(lottoMatcher -> lottoMatcher.incrementScore(lottoScore));
         return lottoScore;
     }
 
-    public int quantity(){
+    public int quantity() {
         return lottos.size();
     }
 }

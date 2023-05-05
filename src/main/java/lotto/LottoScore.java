@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 import static lotto.LottoMatcher.*;
 
 public class LottoScore {
@@ -8,6 +10,14 @@ public class LottoScore {
     private int secondCount = 0;
     private int firstCount = 0;
     private int purchase;
+
+    public void updateScore(List<LottoMatcher> lottoMatchers) {
+        lottoMatchers.forEach(this::incrementScore);
+    }
+
+    private void incrementScore(LottoMatcher lottoMatcher) {
+        lottoMatcher.incrementScore(this);
+    }
 
     public void addFirst() {
         firstCount++;
