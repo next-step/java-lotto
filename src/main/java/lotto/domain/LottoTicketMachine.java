@@ -10,6 +10,9 @@ public class LottoTicketMachine {
 
     private static LottoTickets lottoTicketsTotal;
 
+    private LottoTicketMachine() {
+    }
+
     public static LottoTickets createAutoLottoTickets(int autoPurchaseCount) {
         NumberCreationStrategy strategy = new RandomNumberCreation(autoPurchaseCount);
         if (lottoTicketsTotal == null) {
