@@ -17,8 +17,7 @@ public class InputConverterTest {
   @ValueSource(strings = {"1, 2, 4, 5, 7, 21", "1, 2, 3, 4, 5, 6", "44, 45, 21, 14, 2, 1"})
   @DisplayName("입력받은 당첨번호 List<Integer> 형태로 전환")
   public void checkConvertNumberToList(String str) {
-    InputConverter inputConverter = new InputConverter();
-    List<Integer> result = inputConverter.convertNumberToList(str);
+    List<Integer> result = InputConverter.convertNumberToList(str);
 
     assertThat(result.size()).isEqualTo(6);
   }
@@ -27,9 +26,7 @@ public class InputConverterTest {
   @CsvSource(value = {"\"46, 2, 3, 4, 5, 6\"", "\"1, 2, 3, 4, 5, 6, 8\"", "\"0, 2, 3, 4, 5, 6\"", "\"2, 2, 3, 4, 5, 6\""})
   @DisplayName("입력받은 당첨번호 List<Integer> 형태로 전환 -> 예외 발생")
   public void checkConvertNumberToListThrowException(String str) {
-    InputConverter inputConverter = new InputConverter();
-
-    assertThatThrownBy(() -> inputConverter.convertNumberToList(str))
+    assertThatThrownBy(() -> InputConverter.convertNumberToList(str))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }

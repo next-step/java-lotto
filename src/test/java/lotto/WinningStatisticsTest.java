@@ -2,10 +2,9 @@ package lotto;
 
 import lotto.domain.InputConverter;
 import lotto.domain.Lotto;
-import lotto.domain.Store;
+import lotto.domain.LotteryTickets;
 import lotto.domain.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -36,8 +35,10 @@ public class WinningStatisticsTest {
     @CsvSource(value = {"3000, 3", "4500, 4", "7000, 7"})
     @DisplayName("모든 로또 번호 확인")
     public void compareWithLastNumber(String budget, int expect) {
-        Store store = new Store();
-        List<Lotto> lottoBundle = store.purchase(budget);
+        LotteryTickets lotteryTickets = new LotteryTickets();
+
+        lotteryTickets.purchase(InputConverter.convertBudgetToNumberOfPurchase(budget));
+        List<Lotto> lottoBundle = lotteryTickets.getLottoBundle();
 
         String strList = "1, 2, 3, 4, 5, 6";
         InputConverter inputConverter = new InputConverter();
@@ -58,8 +59,10 @@ public class WinningStatisticsTest {
     @CsvSource(value = {"3000, 3", "4500, 4", "7000, 7"})
     @DisplayName("로또 당첨 map 타입으로 반환")
     public void lottoResultTest(String budget, int expect) {
-        Store store = new Store();
-        List<Lotto> lottoBundle = store.purchase(budget);
+        LotteryTickets lotteryTickets = new LotteryTickets();
+
+        lotteryTickets.purchase(InputConverter.convertBudgetToNumberOfPurchase(budget));
+        List<Lotto> lottoBundle = lotteryTickets.getLottoBundle();
 
         String strList = "1, 2, 3, 4, 5, 6";
         InputConverter inputConverter = new InputConverter();

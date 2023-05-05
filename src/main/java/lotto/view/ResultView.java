@@ -1,17 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Store;
 import lotto.utility.RewardTable;
 
-import java.awt.*;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ResultView {
     public void showMyLotto(List<Lotto> lottoBundle) {

@@ -11,6 +11,8 @@ public class Lotto {
 
     private final List<Integer> lottoNumber;
 
+    public static int PRICE = 1000;
+
     private int matchNumber = 0;
 
     public Lotto() {
