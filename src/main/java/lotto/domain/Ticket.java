@@ -26,10 +26,6 @@ public class Ticket {
         return ticket;
     }
 
-    private static int overlapCount(Set<LottoNumber> copyThisNumbers) {
-        return 12 - copyThisNumbers.size();
-    }
-
     private static Set<LottoNumber> parseToLottoNumbers(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer integer : numbers) {
@@ -64,6 +60,10 @@ public class Ticket {
         Set<LottoNumber> copyThisNumbers = new HashSet<>(this.numbers);
         copyThisNumbers.addAll(otherTicket.numbers);
         return overlapCount(copyThisNumbers);
+    }
+
+    private int overlapCount(Set<LottoNumber> copyThisNumbers) {
+        return 12 - copyThisNumbers.size();
     }
 
     @Override
