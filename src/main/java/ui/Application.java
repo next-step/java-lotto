@@ -1,10 +1,10 @@
 package ui;
 
+import lotto.Lotto;
 import lotto.LottoFactory;
 import lotto.WinningResult;
 
 import java.util.List;
-import java.util.Map;
 
 public class Application {
     public static void main(String[] args) {
@@ -14,14 +14,14 @@ public class Application {
         inputView.saveAmount();
         inputView.saveCount();
 
-        Map<Integer, List<Integer>> lottoNumbers = LottoFactory.generateLottoNumbers(inputView.count);
+        List<Lotto> lottos = LottoFactory.generateLottoNumbers(inputView.count);
 
-        for (int i = 0; i < lottoNumbers.size(); i++) {
-            System.out.println(lottoNumbers.get(i));
+        for (int i = 0; i < lottos.size(); i++) {
+            System.out.println(lottos.get(i));
         }
 
         inputView.saveWinningNumber();
-        winningResult.calculateWinningResult(lottoNumbers, inputView.getWinningNumbers());
+        winningResult.calculateWinningResult(lottos, inputView.getWinningNumbers());
         ResultView.printResult(winningResult.getWinningResult());
 
         ResultView.printRatioOfReturn(winningResult.calculateRateOfReturn(inputView.amount));

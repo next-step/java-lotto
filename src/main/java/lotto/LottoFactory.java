@@ -1,6 +1,8 @@
 package lotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoFactory {
 
@@ -12,13 +14,13 @@ public class LottoFactory {
         }
     }
 
-    public static Map<Integer, List<Integer>> generateLottoNumbers(int count) {
-        Map<Integer, List<Integer>> lottoNumbers = new HashMap<>();
+    public static List<Lotto> generateLottoNumbers(int count) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Collections.shuffle(NUMBERS);
             List<Integer> selectedNumbers = new ArrayList<>(NUMBERS.subList(0, 6));
-            lottoNumbers.put(i, selectedNumbers);
+            lottos.add(new Lotto(selectedNumbers));
         }
-        return lottoNumbers;
+        return lottos;
     }
 }

@@ -23,10 +23,10 @@ public class WinningResult {
         winningResult.put(6, 0);
     }
 
-    public void calculateWinningResult(Map<Integer, List<Integer>> lottoNumbers, List<Integer> winningNumbers) {
-        for (int i = 1; i <= lottoNumbers.size(); i++) {
-            List<Integer> lottoNumber = lottoNumbers.get(i);
-            int equalNumberCount = countEqualNumbers(lottoNumber, winningNumbers);
+    public void calculateWinningResult(List<Lotto> lottos, List<Integer> winningNumbers) {
+        for (int i = 0; i < lottos.size(); i++) {
+            Lotto lotto = lottos.get(i);
+            int equalNumberCount = lotto.countEqualNumbers(winningNumbers);
             saveWinningResult(equalNumberCount);
         }
 
@@ -42,16 +42,6 @@ public class WinningResult {
         } else if (equalNumberCount >= 3) {
             winningResult.put(3, winningResult.getOrDefault(3, 0) + 1);
         }
-    }
-
-    private int countEqualNumbers(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
-        int count = 0;
-        for (Integer lottoNumber : lottoNumbers) {
-            if (winningNumbers.contains(lottoNumber)) {
-                count++;
-            }
-        }
-        return count;
     }
 
 
