@@ -2,10 +2,11 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.WinnerNumbers;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -16,15 +17,21 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static final LottoNumbers inputLottoNumbers() {
+    public static final WinnerNumbers inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] split = new Scanner(System.in).nextLine().split(",");
+        String[] split = SCANNER.next().split(",");
 
-        Set<LottoNumber> set = new HashSet<>();
+        List<Integer> list = new ArrayList<>();
         for (String s : split) {
-            set.add(new LottoNumber(Integer.parseInt(s)));
+            list.add(Integer.parseInt(s));
         }
+        LottoNumbers lottoNumbers = new LottoNumbers(list);
 
-        return new LottoNumbers(set);
+        System.out.println("보너스 볼을 입력해주세요.");
+        int bonusNumber = SCANNER.nextInt();
+
+        return new WinnerNumbers(lottoNumbers, LottoNumber.valueOf(bonusNumber));
     }
+
+    private InputView() {}
 }

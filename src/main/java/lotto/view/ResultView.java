@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumbers;
+import lotto.domain.WinnerNumbers;
+import lotto.domain.enums.Rank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,24 +29,26 @@ public class ResultView {
         return lottoNumbers;
     }
 
-    public static void printLottoResult(List<LottoNumbers> lottoNumbers, LottoNumbers winnerNumbers) {
+    public static void printLottoResult(List<LottoNumbers> lottoNumbers, WinnerNumbers winnerNumbers) {
         System.out.println("당첨 통계");
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Rank, Integer> map = new HashMap<>();
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            int match = lottoNumber.match(winnerNumbers);
-            map.put(match, map.getOrDefault(match, 0) + 1);
+            Rank rank = winnerNumbers.match(lottoNumber);
+            map.put(rank, map.getOrDefault(rank, 0) + 1);
         }
 
         long purchaseAmount = lottoNumbers.size() * LOTTO_AMOUNT;
         long sum = 0;
-        for (int i = 3; i <= 6; i++) {
-            int prize = LottoNumbers.getPrize(i);
-            int count = map.getOrDefault(i, 0);
-
-            System.out.println(i+"개 일치 " + "(" + prize + ")원" + "- " + count + "개");
+        List<Rank> ranks = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+        for (Rank rank : ranks) {
+            int prize = rank.getWinningMoney();
+            int count = map.getOrDefault(rank, 0);
+            System.out.println(rank + "- " + count + "개");
             sum += prize * count;
         }
 
         System.out.println("총 수익률은 " + sum / purchaseAmount + "입니다.");
     }
+
+    private ResultView() {}
 }

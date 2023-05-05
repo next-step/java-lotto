@@ -10,5 +10,7 @@
 
 ## 기능 구현
 * LottoGenerator : 로또 번호 생성
-* LottoNumber : 로또 번호에 도메인
-* LottoNumbers : 일급 컬렉션
+* LottoNumber : 로또 번호 도메인
+* LottoNumbers : 로또 번호 일급 컬렉션
+* WinnerNumbers : 당첨 로또 번호 일급 컬렉션
+* Rank : enum, 일치 개수와 보너스 일치 여부에 따른 상금, 등수를 가짐
