@@ -33,7 +33,8 @@ public class AuditorTest {
         //then
         assertThatThrownBy(() -> {
             Lotto.main(new String[]{});
-        }).isInstanceOf(MinimumPurchaseShortageException.class);
+        }).isInstanceOf(MinimumPurchaseShortageException.class)
+                .hasMessageContaining("Ticket 은 최소 1개 이상 구매해야하며, 1장은 1000원이다");
     }
 
     @DisplayName("금액보다 많은 수량을 수동으로 구매시 ManualPurchaseExceedException 이 발생한다")
@@ -56,6 +57,7 @@ public class AuditorTest {
         //then
         assertThatThrownBy(() -> {
             Lotto.main(new String[]{});
-        }).isInstanceOf(ManualPurchaseExceedException.class);
+        }).isInstanceOf(ManualPurchaseExceedException.class)
+                .hasMessageContaining("총 구매수량보다 수동 발행량이 많습니다. 수동 발행량은 총 구매수량보다 많을 수 없습니다");
     }
 }
