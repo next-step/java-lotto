@@ -1,7 +1,9 @@
 package step2.domain.entity;
 
+import step2.domain.vo.LottoNumber;
 import step2.domain.vo.LottoPrize;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
@@ -39,5 +41,16 @@ public class LottoTickets {
 
     private int getTotalMoney() {
         return Lotto.PRICE * this.size();
+    }
+
+    public List<LottoPrize> checkLottoPrize(Lotto winner, LottoNumber bonus) {
+        List<LottoPrize> prizes = new ArrayList<>();
+
+        for (LottoTicket ticket : lottoTickets) {
+            final var prize = winner.prize(ticket.getLotto(), bonus);
+            prizes.add(prize);
+        }
+
+        return prizes;
     }
 }
