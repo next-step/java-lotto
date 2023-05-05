@@ -3,8 +3,10 @@ package domain.formula;
 import static domain.Operator.validateOperatorSymbol;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 
 public class Operators {
 
@@ -13,6 +15,15 @@ public class Operators {
     public Operators(List<String> operators) {
         validateOperatorSymbol(operators);
         this.operators = operators;
+    }
+
+
+    protected Queue<String> getOperatorsQueue() {
+        Queue<String> operators = new LinkedList<>();
+        for (String operator : this.operators) {
+            operators.offer(operator);
+        }
+        return operators;
     }
 
     public static Operators getOperatorsByFormula(List<String> formula) {

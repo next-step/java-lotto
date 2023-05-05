@@ -29,4 +29,8 @@ public enum Operator {
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(IS_NOT_SYMBOL_ERROR_MESSAGE));
     }
+
+    public String getSymbol() {
+        return symbol;
+    }
 }

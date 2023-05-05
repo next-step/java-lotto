@@ -5,6 +5,7 @@ import static domain.formula.Operators.getOperatorsByFormula;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 
 public class Formula {
 
@@ -33,9 +34,17 @@ public class Formula {
         return formula.size() % 2 == 0;
     }
 
+    public Queue<Integer> numbers() {
+        return numbers.getNumbersQueue();
+    }
+
+    public Queue<String> operators() {
+        return operators.getOperatorsQueue();
+    }
+
     @Override
     public boolean equals(Object o) {
-        
+
         if (this == o) {
             return true;
         }

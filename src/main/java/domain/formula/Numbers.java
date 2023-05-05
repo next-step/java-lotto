@@ -3,8 +3,10 @@ package domain.formula;
 import static java.lang.Integer.parseInt;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 
 public class Numbers {
 
@@ -44,6 +46,14 @@ public class Numbers {
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(NUMBER_FORMAT_EXCEPTION);
         }
+    }
+
+    protected Queue<Integer> getNumbersQueue() {
+        Queue<Integer> numbers = new LinkedList<>();
+        for (int number : this.numbers) {
+            numbers.offer(number);
+        }
+        return numbers;
     }
 
     @Override
