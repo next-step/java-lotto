@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.regex.Pattern;
 
-public class StringException {
+public class StringValidator {
     public static void checkEmptyString(String formula) {
         if (formula == null || formula.isBlank()) {
             throw new IllegalArgumentException("연산식을 입력해 주시기 바랍니다.");

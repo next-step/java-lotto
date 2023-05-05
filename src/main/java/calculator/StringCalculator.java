@@ -2,15 +2,14 @@ package calculator;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class StringCalculator {
     public int calculate(String formula) {
-        StringException.checkEmptyString(formula);
+        StringValidator.checkEmptyString(formula);
 
         String[] arrFormula = splitFormula(formula);
 
-        StringException.checkNumber(arrFormula[0]);
+        StringValidator.checkNumber(arrFormula[0]);
         int result = Integer.parseInt(arrFormula[0]);
 
         for (int i = 1; i < arrFormula.length; i += 2) {
@@ -25,11 +24,11 @@ public class StringCalculator {
     }
 
     private int operate(int preNumber, String operator, int postNumber) {
-        StringException.checkOperator(operator);
+        StringValidator.checkOperator(operator);
 
-        StringException.checkNumber(Integer.toString(preNumber));
+        StringValidator.checkNumber(Integer.toString(preNumber));
 
-        StringException.checkNumber(Integer.toString(postNumber));
+        StringValidator.checkNumber(Integer.toString(postNumber));
 
         return separationOperator().get(operator).calculate(preNumber, postNumber);
     }
