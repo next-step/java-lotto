@@ -1,12 +1,13 @@
 package study.lotto.step2.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.*;
 
 
 class LottoFactoryTest {
@@ -15,24 +16,24 @@ class LottoFactoryTest {
 
     @Test
     @DisplayName("1에서 6을 선택한 Lotto 객체 생성")
-    void lotto() {
+    void create_lotto() {
         // given
-        LottoFactory lottoFactory = new LottoFactory(sequenceNumberSelector());
+        LottoFactory lottoFactory = new LottoFactory(sequenceLottoNumbersFactory());
 
         // when
-        Lotto lotto = lottoFactory.lotto();
+        Lotto lotto = lottoFactory.create();
 
         // then
-        Assertions.assertThat(lotto).isEqualTo(new Lotto(sequenceNumber()));
+        assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
     }
 
-    private AutoNumberSelector sequenceNumberSelector() {
-        return this::sequenceNumber;
+    private LottoNumbersFactory sequenceLottoNumbersFactory() {
+        return () -> new LottoNumbers(sequenceLottoNumbers());
     }
 
-    private List<Integer> sequenceNumber() {
+    private Set<LottoNumber> sequenceLottoNumbers() {
         return IntStream.rangeClosed(START_SEQUENCE_NUMBER, END_SEQUENCE_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toUnmodifiableSet());
     }
 }

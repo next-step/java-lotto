@@ -1,9 +1,6 @@
 package study.lotto.step2.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -35,5 +32,18 @@ public class LottoNumbers {
         return Arrays.stream(lottoNumbers)
                 .map(LottoNumber::of)
                 .collect(Collectors.toUnmodifiableSet());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoNumbers)) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

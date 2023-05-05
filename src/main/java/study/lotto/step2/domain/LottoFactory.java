@@ -1,19 +1,17 @@
 package study.lotto.step2.domain;
 
-import java.util.List;
-
 public class LottoFactory {
-    private final AutoNumberSelector autoNumberSelector;
+    private final LottoNumbersFactory lottoNumbersFactory;
 
-    public LottoFactory(AutoNumberSelector autoNumberSelector) {
-        this.autoNumberSelector = autoNumberSelector;
+    public LottoFactory(LottoNumbersFactory autoNumberSelector) {
+        this.lottoNumbersFactory = autoNumberSelector;
     }
 
-    public Lotto lotto() {
-        return new Lotto(selectedNumber());
+    public Lotto create() {
+        return new Lotto(lottoNumbers());
     }
 
-    private List<Integer> selectedNumber() {
-        return autoNumberSelector.selectedNumber();
+    private LottoNumbers lottoNumbers() {
+        return lottoNumbersFactory.create();
     }
 }
