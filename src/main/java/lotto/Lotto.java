@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
-    List<LottoNumber> lotto;
+    private List<LottoNumber> lotto;
 
     public Lotto(List<Integer> numbers) {
         List<LottoNumber> lotto = new ArrayList<>();
@@ -13,6 +13,10 @@ public class Lotto {
             lotto.add(LottoNumber.of(number));
         }
         this.lotto = lotto;
+    }
+
+    public List<LottoNumber> getLotto(){
+        return lotto;
     }
 
     int countEqualNumbers(Lotto winningNumbers) {
