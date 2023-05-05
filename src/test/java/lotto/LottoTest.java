@@ -2,6 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -31,11 +32,13 @@ public class LottoTest {
         lotto6, lotto7, lotto8, lotto9, lotto10, lotto11, lotto12, lotto13, lotto14));
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 44, 43, 42");
     MatchesStatus matchesStatus = lottos.findWinner(winningNumbers);
-    assertThat(matchesStatus.getThreeMatches()).isEqualTo(1); // 5000원
-    assertThat(matchesStatus.getFourMatches()).isEqualTo(0); // 50000원
-    assertThat(matchesStatus.getFiveMatches()).isEqualTo(0); // 1500000원
-    assertThat(matchesStatus.getSixMatches()).isEqualTo(0); // 2000000000원
-    assertThat(matchesStatus.findRateOfReturn(lottos)).isEqualTo(new BigDecimal("0.35"));
+    assertAll(
+        () -> assertThat(matchesStatus.getThreeMatches()).isEqualTo(1), // 5000원
+        () -> assertThat(matchesStatus.getFourMatches()).isEqualTo(0), // 50000원
+        () -> assertThat(matchesStatus.getFiveMatches()).isEqualTo(0), // 1500000원
+        () -> assertThat(matchesStatus.getSixMatches()).isEqualTo(0), // 2000000000원
+        () -> assertThat(matchesStatus.findRateOfReturn(lottos)).isEqualTo(new BigDecimal("0.35"))
+    );
   }
 
   @Test
@@ -49,11 +52,13 @@ public class LottoTest {
     Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5));
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
     MatchesStatus matchesStatus = lottos.findWinner(winningNumbers);
-    assertThat(matchesStatus.getThreeMatches()).isEqualTo(1); // 5000원
-    assertThat(matchesStatus.getFourMatches()).isEqualTo(1); // 50000원
-    assertThat(matchesStatus.getFiveMatches()).isEqualTo(0); // 1500000원
-    assertThat(matchesStatus.getSixMatches()).isEqualTo(2); // 2000000000원
-    assertThat(matchesStatus.findRateOfReturn(lottos)).isEqualTo(new BigDecimal("800011.00"));
+    assertAll(
+        () -> assertThat(matchesStatus.getThreeMatches()).isEqualTo(1), // 5000원
+        () -> assertThat(matchesStatus.getFourMatches()).isEqualTo(1), // 50000원
+        () -> assertThat(matchesStatus.getFiveMatches()).isEqualTo(0), // 1500000원
+        () -> assertThat(matchesStatus.getSixMatches()).isEqualTo(2), // 2000000000원
+        () -> assertThat(matchesStatus.findRateOfReturn(lottos)).isEqualTo(new BigDecimal("800011.00"))
+    );
   }
 
   @Test
