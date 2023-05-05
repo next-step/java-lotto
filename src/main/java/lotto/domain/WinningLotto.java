@@ -14,8 +14,8 @@ public class WinningLotto {
 
     public WinningRank match(LottoTicket lottoTicket, BonusNumber bonusNumber) {
         int matchCount = countOfMatch(lottoTicket);
-        boolean hasBonusNumber = bonusNumber != null && lottoTicket.matchesBonusNumber(bonusNumber);
-        return WinningRank.valueOf(matchCount, hasBonusNumber);
+        boolean isBonusNumberMatching  = bonusNumber != null && lottoTicket.matchesBonusNumber(bonusNumber);
+        return WinningRank.valueOf(matchCount, isBonusNumberMatching );
     }
 
     public int countOfMatch(LottoTicket lottoTicket) {

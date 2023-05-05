@@ -14,9 +14,8 @@ class WinningRankTest {
     @Test
     void valueOf() {
         assertThat(WinningRank.FIRST).isEqualTo(WinningRank.valueOf(6));
-        assertThat(WinningRank.SECOND).isEqualTo(WinningRank.valueOf(5));
-        assertThat(WinningRank.THIRD).isEqualTo(WinningRank.valueOf(4));
-        assertThat(WinningRank.FOURTH).isEqualTo(WinningRank.valueOf(3));
+        assertThat(WinningRank.FOURTH).isEqualTo(WinningRank.valueOf(4));
+        assertThat(WinningRank.FIFTH).isEqualTo(WinningRank.valueOf(3));
         assertThat(WinningRank.NONE).isEqualTo(WinningRank.valueOf(2));
         assertThat(WinningRank.NONE).isEqualTo(WinningRank.valueOf(1));
         assertThat(WinningRank.NONE).isEqualTo(WinningRank.valueOf(0));

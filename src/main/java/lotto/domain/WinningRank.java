@@ -32,12 +32,12 @@ public enum WinningRank {
     }
 
     public static WinningRank valueOf(int matchCount) {
-        return valueOf(matchCount, null);
+        return valueOf(matchCount, false);
     }
-    public static WinningRank valueOf(int matchCount, Boolean hasBonusNumber) {
+    public static WinningRank valueOf(int matchCount, Boolean isBonusNumberMatching ) {
 
         if (matchCount == SECOND.countOfMatch) {
-            return hasBonusNumber ? SECOND : THIRD;
+            return isBonusNumberMatching  ? SECOND : THIRD;
         }
 
         return Arrays.stream(values())
