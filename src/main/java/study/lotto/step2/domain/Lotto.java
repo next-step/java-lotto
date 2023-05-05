@@ -1,7 +1,6 @@
 package study.lotto.step2.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;
@@ -14,8 +13,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<Integer> numbers() {
-        return lottoNumbers.numbers();
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override

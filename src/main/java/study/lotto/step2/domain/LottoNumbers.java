@@ -16,7 +16,7 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<LottoNumber> numbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers.stream()
                 .collect(Collectors.collectingAndThen(Collectors.toCollection(TreeSet::new), Collections::unmodifiableSet));
     }

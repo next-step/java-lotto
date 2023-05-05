@@ -2,14 +2,20 @@ package study.lotto.step2.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoResults {
     private static final long LOTTO_PRICE = 1_000L;
     private static final int DIVIDE_SCALE = 2;
     private static final RoundingMode DIVIDE_ROUNDING_MODE = RoundingMode.FLOOR;
     private final List<LottoResult> lottoResults;
+
+    public LottoResults(LottoResult...lottoResults) {
+        this(of(lottoResults));
+    }
 
     public LottoResults(List<LottoResult> lottoResults) {
         this.lottoResults = lottoResults;
@@ -37,6 +43,11 @@ public class LottoResults {
 
     private BigDecimal purchaseAmount() {
         return new BigDecimal(lottoResults.size() * LOTTO_PRICE);
+    }
+
+    private static List<LottoResult> of(LottoResult...lottoResults) {
+        return Arrays.stream(lottoResults)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override
