@@ -11,7 +11,7 @@ public class BonusNumber {
         try {
             number = Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("보녀스 번호는 숫자여야 합니다.");
+            throw new IllegalArgumentException("보너스 번호는 숫자여야 합니다.");
         }
 
         if (containNotValidNumber(number)) {

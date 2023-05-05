@@ -64,9 +64,9 @@ class GameTest {
                 put(6, 1);
         }};
 
-        HashMap<Integer, Integer> actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
+        GameResult actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.table()).isEqualTo(expected);
     }
 
     @Test
@@ -98,9 +98,9 @@ class GameTest {
             put(6, 0);
         }};
 
-        HashMap<Integer, Integer> actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
+        GameResult actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.table()).isEqualTo(expected);
     }
 
     @Test
@@ -132,9 +132,9 @@ class GameTest {
             put(6, 0);
         }};
 
-        HashMap<Integer, Integer> actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
+        GameResult actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.table()).isEqualTo(expected);
     }
 
     @Test
@@ -166,9 +166,9 @@ class GameTest {
             put(6, 0);
         }};
 
-        HashMap<Integer, Integer> actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
+        GameResult actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.table()).isEqualTo(expected);
     }
 
     @Test
@@ -200,8 +200,8 @@ class GameTest {
             put(6, 0);
         }};
 
-        HashMap<Integer, Integer> actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
+        GameResult actual = game.calculateResult(inputWinningNumber, inputBonusNumber);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.table()).isEqualTo(expected);
     }
 }

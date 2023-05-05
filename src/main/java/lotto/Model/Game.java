@@ -5,11 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Game {
-    private static final int WINNER_MATCH_COUNT_MIN = 3;
-    private static final int WINNER_MATCH_COUNT_MAX = 6;
-    private static final int BONUS_CANDIDATE_COUNT = 5;
-    private static final int BONUS_CATEGORY = 15;
-
     private final List<Ticket> tickets = new ArrayList<>();
 
     public Game(int countOfTicket) {
@@ -31,37 +26,25 @@ public class Game {
         return tickets;
     }
 
-    public HashMap<Integer, Integer> calculateResult(List<Integer> winnerNumber, int bonusNumber) {
-        HashMap<Integer, Integer> result = resultFormat();
+    public GameResult calculateResult(List<Integer> winnerNumber, int bonusNumber) {
+        GameResult result = new GameResult();
 
         for (Ticket ticket : tickets) {
-            int count = countMatches(ticket, winnerNumber, bonusNumber);
-            result.put(count, result.getOrDefault(count, 0) + 1);
-        }
-
-        for (int i = 0; i < WINNER_MATCH_COUNT_MIN; i++) {
-            result.remove(i);
+            int numberOfMatchedNumber = countMatches(ticket, winnerNumber);
+            boolean isBonus = ifMatchBonus(ticket, bonusNumber);
+            result.addCount(numberOfMatchedNumber, isBonus);
         }
 
         return result;
     }
 
-    private HashMap<Integer, Integer> resultFormat() {
-        HashMap<Integer, Integer> result = new HashMap<>();
-        for (int i = WINNER_MATCH_COUNT_MIN; i <= WINNER_MATCH_COUNT_MAX; i++) {
-            result.put(i, 0);
-        }
-        result.put(BONUS_CATEGORY, 0);
 
-        return result;
-    }
 
-    private int countMatches(Ticket ticket, List<Integer> winnerNumber, int bonusNumber) {
+    private int countMatches(Ticket ticket, List<Integer> winnerNumber) {
         int count = 0;
         TicketNumber ticketNumber = ticket.numbers();
         for (Integer number : ticketNumber.numbers()) {
             count += addIfMatch(winnerNumber, number);
-            count = ifMatchBonus(ticket, bonusNumber, count);
         }
         return count;
     }
@@ -73,17 +56,9 @@ public class Game {
         return 0;
     }
 
-    private int ifMatchBonus(Ticket ticket, int bonusNumber, int count) {
-        if (BONUS_CANDIDATE_COUNT != count) {
-            return count;
-        }
-
+    private boolean ifMatchBonus(Ticket ticket, int bonusNumber) {
         TicketNumber ticketNumber = ticket.numbers();
-        if (ticketNumber.contain(bonusNumber)) {
-            return BONUS_CATEGORY;
-        }
-
-        return count;
+        return ticketNumber.contain(bonusNumber);
     }
 
 }
