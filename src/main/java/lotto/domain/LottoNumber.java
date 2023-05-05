@@ -5,16 +5,30 @@ import lotto.exception.LottoNumberOutOfRangeException;
 public class LottoNumber {
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
-        this.lottoNumber = lottoNumber;
-        validate();
+    private static final int LOW_LIMIT = 1;
+    private static final int HIGH_LIMIT = 45;
+    private static final LottoNumber[] LOTTO_NUMBER_CACHE = new LottoNumber[45 + 1];
+
+    static {
+
+        for (int i = LOW_LIMIT; i <= HIGH_LIMIT; i++) {
+            LOTTO_NUMBER_CACHE[i] = new LottoNumber(i);
+        }
     }
 
-    private void validate() {
-        if (1 <= lottoNumber && lottoNumber <= 45) {
+    private LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber of(int lottoNumber) {
+        rangeValidate(lottoNumber);
+        return LOTTO_NUMBER_CACHE[lottoNumber];
+    }
+
+    private static void rangeValidate(int lottoNumber) {
+        if (LOW_LIMIT <= lottoNumber && lottoNumber <= HIGH_LIMIT) {
             return;
         }
-        System.out.println("출력" + lottoNumber);
         throw new LottoNumberOutOfRangeException();
     }
 

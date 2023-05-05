@@ -40,7 +40,7 @@ public class InputPresent {
         System.out.println(BONUS_NUMBER);
         String s = scanner.nextLine();
         System.out.println(s);
-        return new LottoNumber(Integer.parseInt(s));
+        return LottoNumber.of(Integer.parseInt(s));
     }
 
     public Tickets manualPurchases() {

@@ -26,7 +26,7 @@ public class Ticket {
     private Set<LottoNumber> parseToLottoNumbers(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer integer : numbers) {
-            lottoNumbers.add(new LottoNumber(integer));
+            lottoNumbers.add(LottoNumber.of(integer));
         }
         return lottoNumbers;
     }

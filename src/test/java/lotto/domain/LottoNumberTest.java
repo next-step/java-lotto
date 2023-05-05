@@ -18,7 +18,7 @@ public class LottoNumberTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            new LottoNumber(input);
+            LottoNumber.of(input);
         }).isInstanceOf(LottoNumberOutOfRangeException.class)
                 .hasMessageContaining("LottoNumber 숫자는 1~45 사이만 허용된다");
     }
@@ -29,7 +29,7 @@ public class LottoNumberTest {
         //given
         int input = 45;
         //when
-        LottoNumber lottoNumber = new LottoNumber(input);
+        LottoNumber lottoNumber = LottoNumber.of(input);
         //then
         assertAll("",
                 () -> assertThat(lottoNumber).as("인스턴스 생성에 성공했다").isNotNull(),
@@ -43,8 +43,8 @@ public class LottoNumberTest {
     public void equals() {
         //given
         //when
-        LottoNumber lottoNumberA = new LottoNumber(1);
-        LottoNumber lottoNumberB = new LottoNumber(1);
+        LottoNumber lottoNumberA = LottoNumber.of(1);
+        LottoNumber lottoNumberB = LottoNumber.of(1);
         //then
         assertEquals(lottoNumberA, lottoNumberB);
     }
