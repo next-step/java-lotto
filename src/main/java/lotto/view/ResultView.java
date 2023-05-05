@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.Lotto;
+import lotto.LottoNumber;
 import lotto.LottoScore;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class ResultView {
         lottos.forEach(lotto -> {
             List<Integer> integers = lotto.lottoNumbers()
                     .stream()
-                    .map(value -> value.intValue())
+                    .map(LottoNumber::intValue)
                     .collect(Collectors.toList());
             System.out.println(integers);
         });
