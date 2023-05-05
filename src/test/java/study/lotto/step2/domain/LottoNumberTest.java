@@ -17,4 +17,11 @@ class LottoNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1 이상 45 이하의 정수입니다: " + outOfRangeNumber);
     }
+
+    @Test
+    @DisplayName("LottoNumber 객체 캐싱 확인")
+    void cache() {
+        assertThat(LottoNumber.of(1)).isSameAs(LottoNumber.of(1));
+        assertThat(LottoNumber.of(45)).isSameAs(LottoNumber.of(45));
+    }
 }
