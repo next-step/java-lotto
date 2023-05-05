@@ -13,14 +13,14 @@ public class KLottoGenerator implements LottoGenerator {
     public static final int LOTTO_PRICE = 1000;
 
     @Override
-    public List<Integer> generate() {
-        List<Integer> numbers = new ArrayList<>();
+    public List<LottoNumber> generate() {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (int number = LOTTO_NUMBER_MINIMUM_RANGE; number <= LOTTO_NUMBER_MAXIMUM_RANGE; number++) {
-            numbers.add(number);
+            numbers.add(LottoNumber.of(number));
         }
 
         Collections.shuffle(numbers);
-        List<Integer> lottos = numbers.subList(0, LOTTO_NUMBER_COUNT)
+        List<LottoNumber> lottos = numbers.subList(0, LOTTO_NUMBER_COUNT)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());

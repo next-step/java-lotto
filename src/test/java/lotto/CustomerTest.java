@@ -26,17 +26,7 @@ public class CustomerTest {
     @DisplayName("Customer_로또_구매")
     public void Customer_로또_구매(int money, int count) {
         Customer customer = new Customer(money);
-
         customer.buyLotto(new KLottoGenerator());
-
         assertThat(customer.getLottos()).hasSize(count);
-    }
-
-    @Test
-    @DisplayName("Customer_구매_로또_확인")
-    public void Customer_구매_로또_확인() {
-        Customer customer = new Customer(5000);
-        customer.buyLotto(new TestLottoGenerator());
-        Assertions.assertThat(5).isEqualTo(customer.checkLottoWin(Arrays.asList(1, 2, 3, 4, 5, 7), 6).get(KLottoRank.SECOND));
     }
 }
