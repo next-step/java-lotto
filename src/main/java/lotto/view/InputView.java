@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -16,7 +18,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = new Scanner(System.in).nextLine();
 
-        return (ArrayList<Integer>) Arrays.stream(input.replaceAll(" ", "").split(","))
+        return Arrays.stream(input.replaceAll(" ", "").split(","))
                 .map(Integer::valueOf)
                 .collect(Collectors.toCollection(ArrayList::new));
     }

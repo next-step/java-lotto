@@ -3,12 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST("1등", 6, 2_000_000_000),
-    SECOND("2등", 5, 1_500_000),
-    THIRD("3등", 4, 50_000),
-    FOURTH("4등", 3, 5_000),
+    FIRST("6개 일치", 6, 2_000_000_000),
+    SECOND("5개 일치", 5, 1_500_000),
+    THIRD("4개 일치", 4, 50_000),
+    FOURTH("3개 일치", 3, 5_000),
     NO_RANK("미당첨", 0, 0);
-
 
     private String description;
     private int matchedCount;

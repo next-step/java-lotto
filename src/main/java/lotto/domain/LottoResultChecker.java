@@ -1,18 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResultChecker {
-    Map<LottoRank, Integer> countByRank = new HashMap<>();
+    private Map<LottoRank, Integer> countByRank = new HashMap<>();
 
-    public LottoResultChecker(LottoTicket[] lottoTickets, ArrayList<Integer> winningNumbers) {
+    public LottoResultChecker(List<LottoTicket> lottoTickets, List<Integer> winningNumbers) {
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.getMatchCount(winningNumbers);
             LottoRank lottoRank = LottoRank.findByMatchedCount(matchCount);
 
-            countByRank.compute(lottoRank, (key, value) -> value == null ? 1 : value + 1);
+            countByRank.put(lottoRank, countByRank.getOrDefault(lottoRank, 0) + 1);
         }
     }
 

@@ -5,14 +5,13 @@ import lotto.domain.LottoResultChecker;
 import lotto.domain.LottoTicket;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ResultView {
-    public void viewBuyingResult(LottoTicket[] lottoTickets) {
-        System.out.println(lottoTickets.length + "개를 구매했습니다.");
+    public void viewBuyingResult(List<LottoTicket> lottoTickets) {
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
 
-        for (int i = 0; i < lottoTickets.length; i++) {
-            System.out.println(lottoTickets[i].toString());
-        }
+        lottoTickets.stream().forEach(n -> System.out.println(n.toString()));
 
         System.out.println("");
     }
