@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,11 +32,10 @@ class LottoTest {
     @Test
     void test4() throws Exception {
         PickedLottoNumbers pickedLottoNumbers =
-            new PickedLottoNumbers(new ArrayList<>(List.of(34, 22, 11, 43, 17, 45)));
+            new PickedLottoNumbers(List.of(34, 22, 11, 43, 17, 45));
+
         assertThat(pickedLottoNumbers)
-            .isEqualTo(
-                new PickedLottoNumbers(new ArrayList<>(List.of(34, 22, 11, 43, 17, 45)))
-            );
+            .isEqualTo(new PickedLottoNumbers(List.of(34, 22, 11, 43, 17, 45)));
     }
 
     @ParameterizedTest(name = "입력 금액만큼 로또를 구매한다.")
@@ -53,6 +51,7 @@ class LottoTest {
     @ValueSource(ints = {-1, 0, 999})
     void test5(int input) throws Exception {
         int manualLottoCount = 0;
+
         assertThatThrownBy(() -> {
             LottoFactory.of(input, manualLottoCount);
         })
@@ -96,8 +95,7 @@ class LottoTest {
     @ValueSource(ints = {0, 46, -1})
     void test9(int input) {
         assertThatThrownBy(() -> new BonusNumber(input)
-        )
-            .isInstanceOf(IllegalArgumentException.class)
+        ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("유효하지 않은 숫자입니다.");
     }
 
@@ -108,8 +106,7 @@ class LottoTest {
 
         assertThatThrownBy(() ->
             new LotteryWin(winningNumbers, 1)
-        )
-            .isInstanceOf(IllegalArgumentException.class)
+        ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("이미 존재하는 번호입니다.");
     }
 }
