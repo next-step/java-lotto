@@ -16,18 +16,43 @@ public class StringCalculator {
         List<String> operations = getCharacters(input, OPERATION_REGEX);
         int result = numbers.get(0);
         for (int i = 0; i < operations.size(); i++) {
-            if (operations.get(i).equals("+")) {
-                result += numbers.get(i + 1);
-            }
-            if (operations.get(i).equals("-")) {
-                result -= numbers.get(i + 1);
-            }
-            if (operations.get(i).equals("*")) {
-                result *= numbers.get(i + 1);
-            }
-            if (operations.get(i).equals("/")) {
-                result /= numbers.get(i + 1);
-            }
+            result = operate(numbers, operations, result, i);
+        }
+        return result;
+    }
+
+    private static int operate(List<Integer> numbers, List<String> operations, int result, int i) {
+        result = plus(numbers, operations, result, i);
+        result = minus(numbers, operations, result, i);
+        result = divide(numbers, operations, result, i);
+        result = multiple(numbers, operations, result, i);
+        return result;
+    }
+
+    private static int multiple(List<Integer> numbers, List<String> operations, int result, int i) {
+        if (operations.get(i).equals("/")) {
+            result /= numbers.get(i + 1);
+        }
+        return result;
+    }
+
+    private static int divide(List<Integer> numbers, List<String> operations, int result, int i) {
+        if (operations.get(i).equals("*")) {
+            result *= numbers.get(i + 1);
+        }
+        return result;
+    }
+
+    private static int minus(List<Integer> numbers, List<String> operations, int result, int i) {
+        if (operations.get(i).equals("-")) {
+            result -= numbers.get(i + 1);
+        }
+        return result;
+    }
+
+    private static int plus(List<Integer> numbers, List<String> operations, int result, int i) {
+        if (operations.get(i).equals("+")) {
+            result += numbers.get(i + 1);
         }
         return result;
     }
