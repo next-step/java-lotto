@@ -26,6 +26,12 @@ public class Tickets {
         return autoTickets;
     }
 
+    public static Tickets composite(Tickets firstTicket, Tickets lastTicket) {
+        Tickets compositeTicket = new Tickets(firstTicket.allTickets());
+        compositeTicket.add(lastTicket);
+        return compositeTicket;
+    }
+
     public int count() {
         return tickets.size();
     }
