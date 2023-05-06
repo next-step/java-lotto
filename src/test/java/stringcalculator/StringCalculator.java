@@ -23,6 +23,9 @@ public class StringCalculator {
             if (operations.get(i).equals("*")) {
                 result *= numbers.get(i + 1);
             }
+            if (operations.get(i).equals("/")) {
+                result /= numbers.get(i + 1);
+            }
         }
         return result;
     }
