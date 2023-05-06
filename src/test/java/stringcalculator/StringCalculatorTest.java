@@ -45,4 +45,17 @@ public class StringCalculatorTest {
         //assert
         assertThat(result).isEqualTo(28);
     }
+
+    @Test
+    @DisplayName("나눗셈 테스트")
+    void testDivide() {
+        //arrange
+        String input = "20 / 2 / 2";
+
+        //act
+        int result = StringCalculator.calculate(input);
+
+        //assert
+        assertThat(result).isEqualTo(5);
+    }
 }
