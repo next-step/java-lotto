@@ -8,8 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoStatics {
-    private static final int REVENUE_START = 0;
     private static final int MAP_DEFAULT = 0;
+    private static final int LOTTO_MATCH_COUNT = 1;
+    private static final int LOTTO_REWARD_LIMIT = 3;
 
     private int cost;
     private Map<Integer, Integer> statistics;
@@ -26,7 +27,9 @@ public class LottoStatics {
     private Map<Integer, Integer> createStatistics(List<Integer> result) {
         Map<Integer, Integer> statistics = initStatistics();
 
-        result.stream().filter(r -> r > 2).forEach(r -> statistics.put(r, statistics.get(r) + 1));
+        result.stream()
+                .filter(r -> r >= LOTTO_REWARD_LIMIT)
+                .forEach(r -> statistics.put(r, statistics.get(r) + LOTTO_MATCH_COUNT));
 
         return statistics;
     }
@@ -34,17 +37,14 @@ public class LottoStatics {
     private Map<Integer, Integer> initStatistics() {
         Map<Integer, Integer> statistics = new HashMap<>();
 
-        Rank.getCountList().stream().forEach(i -> statistics.put(i, 0));
+        Rank.getCountList().stream().forEach(i -> statistics.put(i, MAP_DEFAULT));
 
         return statistics;
     }
 
     public String getRate() {
-        float revenue = REVENUE_START;
-        for(int matchNumber: Rank.getCountList()) {
-            revenue += (statistics.getOrDefault(matchNumber, MAP_DEFAULT) * Rank.of(matchNumber));
-        }
+        int revenue = Rank.getCountList().stream().mapToInt(count -> statistics.get(count) * Rank.of(count)).sum();
 
-        return String.valueOf(Math.floor((revenue / (float)cost) * 100) / 100.0);
+        return String.valueOf(Math.floor(((float)revenue / (float)cost) * 100) / 100.0);
     }
 }
