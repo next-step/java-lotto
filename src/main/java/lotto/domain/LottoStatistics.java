@@ -59,7 +59,7 @@ public class LottoStatistics {
 
     public List<Integer> getMatchCounts() {
         return Arrays.stream(LottoPrize.values())
-                .filter(prize -> prize != LottoPrize.NONE)
+                .filter(prize -> prize != LottoPrize.MISS)
                 .map(prize -> matchCounts.getOrDefault(prize, 0))
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
