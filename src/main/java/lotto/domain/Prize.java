@@ -34,7 +34,7 @@ public enum Prize {
         if (isDetermineMatchCountConditionOnly(matchCount)) {
             return Prize.matchCountToPrize(matchCount);
         }
-        if( isConsiderBonusNumber(matchCount)) {
+        if (isConsiderBonusNumber(matchCount)) {
             return Prize.matchCountToPrize(matchCount, containsBonus);
         }
         throw new PrizeCalculateException();
