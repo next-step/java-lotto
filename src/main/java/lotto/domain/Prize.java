@@ -31,9 +31,16 @@ public enum Prize {
         if (matchCount < FIFTH.matchCount) {
             return BOOM;
         }
-        if (matchCountConditionOnly(matchCount)) {
+        if (isDetermineMatchCountConditionOnly(matchCount)) {
             return Prize.matchCountToPrize(matchCount);
         }
+        if( isConsiderBonusNumber(matchCount)) {
+            return Prize.matchCountToPrize(matchCount, containsBonus);
+        }
+        throw new PrizeCalculateException();
+    }
+
+    private static Prize matchCountToPrize(int matchCount, boolean containsBonus) {
         if ((matchCount == THIRD.matchCount) && (containsBonus == THIRD.bonusNumberMatch)) {
             return THIRD;
         }
@@ -43,6 +50,10 @@ public enum Prize {
         throw new PrizeCalculateException();
     }
 
+    private static boolean isConsiderBonusNumber(int matchCount) {
+        return (matchCount == THIRD.matchCount) || (matchCount == SECOND.matchCount);
+    }
+
     private static Prize matchCountToPrize(int matchCount) {
         if (!MATCH_COUNT_TO_PRIZE_MAPPER.containsKey(matchCount)) {
             throw new PrizeCalculateException();
@@ -50,7 +61,7 @@ public enum Prize {
         return MATCH_COUNT_TO_PRIZE_MAPPER.get(matchCount);
     }
 
-    private static boolean matchCountConditionOnly(int matchCount) {
+    private static boolean isDetermineMatchCountConditionOnly(int matchCount) {
         return (matchCount == FIFTH.matchCount) || (matchCount == FOURTH.matchCount) || (matchCount == FIRST.matchCount);
     }
 
