@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,6 +29,8 @@ class LottoTicketsTest {
         assertThat(ticketCount).isEqualTo(expected);
     }
 
+
+
     @DisplayName("보너스번호와 당첨로또를 전달하면 당첨통계결과를 얻을수 있다")
     @Test
     void calculateLottoStatistics() {
@@ -50,4 +53,13 @@ class LottoTicketsTest {
         assertThat(winningStatistics.getCount(WinningRank.FOURTH)).isEqualTo(1);
     }
 
+    @DisplayName("수동 로또 개수와 수동 로또 번호를 전달하면 로또 티켓을 생성한다")
+    @Test
+    void createLottoTicketsWithManualLottoNumbers() {
+        int purchaseAmount = 5000;
+        Integer manualLottoCount = 2;
+        List<String> manualLottoNumber = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7");
+        LottoTickets lottoTickets = LottoTickets.create(purchaseAmount, manualLottoCount, manualLottoNumber);
+        Assertions.assertThat(lottoTickets.findLottoTicketCount()).isEqualTo(5);
+    }
 }
