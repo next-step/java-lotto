@@ -11,4 +11,3 @@ public class BonusNumber {
         return bonusNumber.equals(number);
     }
 }
-

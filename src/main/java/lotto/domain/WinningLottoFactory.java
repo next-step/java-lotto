@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningLottoFactory {
-
     private static final String DELIMITER = ",";
 
     private WinningLottoFactory() {
@@ -37,4 +36,3 @@ public class WinningLottoFactory {
         }
     }
 }
-

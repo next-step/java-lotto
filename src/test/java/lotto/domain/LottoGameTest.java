@@ -59,4 +59,3 @@ class LottoGameTest {
         assertTrue(winningStatistics.calculateEarningsRate(numberOfTickets) >= 0, "수익률 계산이 올바르지 않음");
     }
 }
-

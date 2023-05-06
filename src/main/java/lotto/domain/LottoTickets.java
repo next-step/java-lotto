@@ -52,4 +52,3 @@ public class LottoTickets {
         return this.tickets.size();
     }
 }
-
