@@ -9,8 +9,12 @@ import static java.util.stream.Collectors.toSet;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import lottery.domain.numbergenerator.RandomNumberGenerator;
 
@@ -33,8 +37,16 @@ public class Lottery {
         if(notHasSixNumbers(lotteryNumbers)) {
             throw new IllegalArgumentException(INVALID_NUMBERS_MSG);
         }
-        this.lotteryNumbers = lotteryNumbers;
+        this.lotteryNumbers = new LinkedHashSet<>(ascSort(lotteryNumbers));
     }
+
+    private List<LotteryNumber> ascSort(Set<LotteryNumber> lotteryNumbers) {
+        return new ArrayList<>(lotteryNumbers)
+                .stream()
+                .sorted(Comparator.comparingInt(LotteryNumber::hashCode))
+                .collect(Collectors.toList());
+    }
+
 
     public static Lottery lotteryFactory(String source) {
         Set<LotteryNumber> collect = stream(separatedNumbers(source))
@@ -72,12 +84,6 @@ public class Lottery {
         return unmodifiableSet(this.lotteryNumbers);
     }
 
-    public List<LotteryNumber> getSortedNumbers() {
-        return new ArrayList<>(this.lotteryNumbers)
-                .stream()
-                .sorted(Comparator.comparingInt(LotteryNumber::hashCode))
-                .collect(Collectors.toUnmodifiableList());
-    }
 
     public int intersectionSize(Set<LotteryNumber> weeklyWinningNumbers) {
         return this.lotteryNumbers.stream()
@@ -88,5 +94,22 @@ public class Lottery {
     @Override
     public String toString() {
         return valueOf(lotteryNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lottery lottery = (Lottery) o;
+        return Objects.equals(lotteryNumbers, lottery.lotteryNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotteryNumbers);
     }
 }

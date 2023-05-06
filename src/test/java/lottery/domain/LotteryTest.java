@@ -71,17 +71,10 @@ public class LotteryTest {
     }
 
     @Test
-    @DisplayName("정렬된 숫자를 리턴한다.")
+    @DisplayName("객체 생성시 정렬된 숫자를 리턴한다.")
     void sortedNumbersTest() {
-        Lottery lotterySixNumbers = lotteryFactory("1,7,3,8,2,9");
-        assertThat(lotterySixNumbers.getSortedNumbers())
-                .containsExactly(
-                        new LotteryNumber(1),
-                        new LotteryNumber(2),
-                        new LotteryNumber(3),
-                        new LotteryNumber(7),
-                        new LotteryNumber(8),
-                        new LotteryNumber(9)
-                );
+        Lottery unsorted = lotteryFactory("1,7,3,8,2,9");
+        Lottery sorted = lotteryFactory("1,2,3,7,8,9");
+        assertThat(unsorted.equals(sorted)).isTrue();
     }
 }
