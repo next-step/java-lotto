@@ -72,16 +72,13 @@ public class ResultView {
             return "";
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(lottoPrize.getMatchingCount());
-        stringBuilder.append("개 일치");
-        stringBuilder.append(getMessageForBonus(lottoPrize));
-        stringBuilder.append(lottoPrize.getPrize());
-        stringBuilder.append("원)- ");
-        stringBuilder.append(lottoResult.getMatchingLottosCount(lottoPrize));
-        stringBuilder.append("개\n");
-
-        return stringBuilder.toString();
+        return String.format(
+                "%d개 일치%s%d원)- %d개\n",
+                lottoPrize.getMatchingCount(),
+                getMessageForBonus(lottoPrize),
+                lottoPrize.getPrize(),
+                lottoResult.getMatchingLottosCount(lottoPrize)
+        );
     }
 
     private static String getMessageForBonus(LottoPrize lottoPrize) {
