@@ -8,8 +8,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -22,20 +20,9 @@ public class LottoGameTest {
 
     @BeforeEach
     void setUp() {
-        myLotto = new Lotto(
-                Stream.of(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-                ).collect(Collectors.toSet()));
-
-        winningLottoExcludingBonus = new Lotto(
-                Stream.of(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)
-                ).collect(Collectors.toSet()));
-
+        myLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLottoExcludingBonus = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45));
         bonusLottoNumber = new LottoNumber(6);
-
         winningLotto = new WinningLotto(winningLottoExcludingBonus, bonusLottoNumber);
     }
 

@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,17 +16,8 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        myLotto = new Lotto(
-                Stream.of(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-                ).collect(Collectors.toSet()));
-
-        winningLotto = new Lotto(
-                Stream.of(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)
-                ).collect(Collectors.toSet()));
+        myLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45));
     }
 
     @Test
