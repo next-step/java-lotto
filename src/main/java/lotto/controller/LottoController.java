@@ -10,7 +10,9 @@ import java.util.List;
 public class LottoController {
     public static void main(String[] args) {
         int purchaseAmount = InputView.requestPurchaseAmount();
-        LottoTicket lottoTicket = InputView.buyAndGenerateLottoNumbers(purchaseAmount);
+        int purchaseManualGeneratedLottoCount = InputView.requestPurchaseAmountByManual();
+
+        LottoTicket lottoTicket = InputView.buyAndGenerateLottoNumbers(purchaseAmount, purchaseManualGeneratedLottoCount);
         OutputView.printLottos(lottoTicket);
 
         String inputWinningNumbers = InputView.inputAndValidateWinningNumbers();
