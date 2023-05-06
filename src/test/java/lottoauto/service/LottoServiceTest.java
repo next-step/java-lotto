@@ -1,5 +1,6 @@
-package lottoauto.domain;
+package lottoauto.service;
 
+import lottoauto.domain.LottoService;
 import lottoauto.model.Constant;
 import lottoauto.model.Lottos;
 import org.assertj.core.api.Assertions;
