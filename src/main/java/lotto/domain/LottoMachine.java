@@ -15,12 +15,12 @@ public class LottoMachine {
         }
     }
 
-    public Lottos create(LottoCreatingStrategy lottoCreatingStrategy) {
-        return createLottos(lottoCreatingStrategy);
+    public Lottos create() {
+        return createLottos();
     }
 
-    private Lottos createLottos(LottoCreatingStrategy lottoCreatingStrategy) {
-        return new Lottos(numberOfLotto, lottoCreatingStrategy);
+    private Lottos createLottos() {
+        return new Lottos(numberOfLotto);
     }
 
     private int calculateNumberOfLotto(int cost) {
@@ -30,4 +30,5 @@ public class LottoMachine {
     public int getNumberOfLotto() {
         return numberOfLotto;
     }
+
 }
