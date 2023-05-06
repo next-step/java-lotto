@@ -40,16 +40,4 @@ public class LottoStaticsTest {
 
         assertThat(statics.getRate()).isEqualTo("0.35");
     }
-
-    @Test
-    @DisplayName("보상 확인")
-    void rewardStrategy() {
-        Map<Integer, Integer> expected = new HashMap<>();
-        expected.put(1, 3000);
-        expected.put(3, 5000);
-
-        LottoStatics statics = new LottoStatics(1000, Arrays.asList(3, 4));
-
-        assertThat(statics.getReward()).isEqualTo(expected);
-    }
 }

@@ -21,19 +21,14 @@ public class LottoStatics {
         return statics;
     }
 
-    public Map<Integer, Integer> getReward() {
-        return null;
-    }
-
     private Map<Integer, Integer> createStatics(List<Integer> result) {
         return result.stream().collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
     }
 
     public String getRate() {
         float revenue = REVENUE_START;
-        Map<Integer, Integer> reward = getReward();
-        for(int matchNumber: reward.keySet()) {
-            revenue += (statics.getOrDefault(matchNumber, MAP_DEFAULT) * reward.get(matchNumber));
+        for(int matchNumber: Rank.getCountList()) {
+            revenue += (statics.getOrDefault(matchNumber, MAP_DEFAULT) * Rank.of(matchNumber));
         }
 
         return String.valueOf(Math.floor((revenue / (float)cost) * 100) / 100.0);
