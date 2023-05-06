@@ -32,8 +32,7 @@ public class LottoController {
         resultView.resultOfBuyLotto(lottoGameCount);
         resultView.resultOfLottoGameList(lottoGames);
 
-        String lottoResultNumber = inputView.setLottoResultNumber();
-
+        List<Integer> lottoResultNumbers = LottoUtils.lottoResultNumberList(inputView.setLottoResultNumber());
 
         resultView.resultGame();
     }
