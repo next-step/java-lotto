@@ -36,7 +36,7 @@ public class Ticket {
     public static Ticket auto() {
         Set<LottoNumber> numbers = new HashSet<>();
         while (numbers.size() < 6) {
-            numbers.add(LottoNumber.any());
+            numbers.add(LottoNumber.any(NumberStrategyRandom.of()));
         }
         return new Ticket(numbers);
     }
