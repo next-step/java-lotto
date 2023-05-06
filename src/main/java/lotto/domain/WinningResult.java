@@ -34,7 +34,7 @@ public class WinningResult {
         return new WinningResult(new EnumMap<>(WinningResult.DEFAULT_RANKING_COUNTS));
     }
 
-    public void matchLottos(WinningNumbers winningNumbers, Lottos lottos) {
+    private void matchLottos(WinningNumbers winningNumbers, Lottos lottos) {
         for (Lotto lotto : lottos.lottos()) {
             matchLotto(winningNumbers, lotto);
         }
