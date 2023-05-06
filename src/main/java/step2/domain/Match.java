@@ -1,24 +1,26 @@
 package step2.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Match {
 
-    private static final List<Match> matchCache = new ArrayList<>();
+    private static final List<Match> matchCache;
     private static final Match NOT_MATCH = new Match(0, false);
+    private static final Match THREE_MATCH = new Match(3, false);
+    private static final Match FOUR_MATCH = new Match(4, false);
+    private static final Match FIVE_MATCH = new Match(5, false);
+    private static final Match FIVE_MATCH_WITH_BONUS = new Match(5, true);
+    private static final Match SIX_MATCH = new Match(6, false);
 
     private final int count;
     private final boolean isBonus;
 
     static {
-        matchCache.add(new Match(0, false));
-        matchCache.add(new Match(3, false));
-        matchCache.add(new Match(4, false));
-        matchCache.add(new Match(5, false));
-        matchCache.add(new Match(5, true));
-        matchCache.add(new Match(6, false));
+        matchCache = Arrays.asList(
+                NOT_MATCH, THREE_MATCH, FOUR_MATCH, FIVE_MATCH, FIVE_MATCH_WITH_BONUS, SIX_MATCH
+        );
     }
 
     public Match(int count, boolean isBonus) {
@@ -28,7 +30,7 @@ public class Match {
 
     public static Match from(int count, boolean isBonus) {
         return matchCache.stream()
-                .filter(match -> match.equals(from(count, isBonus)))
+                .filter(match -> match.equals(new Match(count, isBonus)))
                 .findAny()
                 .orElse(NOT_MATCH);
     }
