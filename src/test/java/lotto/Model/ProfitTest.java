@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProfitTest {
     @Test
-    @DisplayName("3,4,5,6이 아닌 숫자는 profit 0원")
+    @DisplayName("3,4,5,6,15이 아닌 숫자는 profit 0원")
     public void profit_other() {
         int expected = 0;
 
@@ -61,6 +61,18 @@ class ProfitTest {
         int expected = 2_000_000_000;
 
         int input = 6;
+        Profit profit = new Profit(input);
+        int actual = profit.value();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("15개는 profit 30_000_000원")
+    public void profit_15() {
+        int expected = 30_000_000;
+
+        int input = 15;
         Profit profit = new Profit(input);
         int actual = profit.value();
 
