@@ -3,13 +3,11 @@ package step2;
 import org.junit.jupiter.api.Test;
 import step2.domain.Match;
 import step2.domain.MatchRecord;
-import step2.domain.PurchaseNumbers;
-import step2.domain.WinningNumber;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatchRecordTest {
@@ -18,21 +16,16 @@ public class MatchRecordTest {
     void 당첨_번호와_일치하는_개수를_맵_형태로_반환한다() {
 
         // given
-        MatchRecord matchRecord = MatchRecord.createRecord();
-        List<List<Integer>> numbers = asList(
-                asList(1, 2, 3, 4, 5, 6),
-                asList(2, 3 ,4, 5, 6, 7),
-                asList(4, 5, 6, 8, 11, 13),
-                asList(4, 5, 6, 8, 11, 12)
+        List<Match> matches = Arrays.asList(
+                Match.from(3, false),
+                Match.from(3, false),
+                Match.from(5, true),
+                Match.from(6, false)
         );
 
-        PurchaseNumbers purchaseNumbers = PurchaseNumbers.generate(numbers);
-        List<Integer> winningNumbers = asList(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
-        WinningNumber lottoNumber = WinningNumber.generate(winningNumbers, bonusNumber);
+        MatchRecord matchRecord = MatchRecord.createRecord();
 
         // when
-        List<Match> matches = purchaseNumbers.countNumber(lottoNumber);
         Map<Match, Integer> result = matchRecord.countMatches(matches);
 
         // then
@@ -40,6 +33,5 @@ public class MatchRecordTest {
         assertThat(result).containsEntry(Match.from(4, false), 0);
         assertThat(result).containsEntry(Match.from(5, true), 1);
         assertThat(result).containsEntry(Match.from(6, false), 1);
-
     }
 }
