@@ -16,7 +16,7 @@ public class Main {
         List<Lotto> lottos = lottoPrice.buy(InputView.askBuyPrice());
         ResultView.buyResultNotice(lottos);
 
-        WinResult winResult = lottoPrice.win(lottos, InputView.askWinLottoNumber());
+        WinResult winResult = lottoPrice.win(lottos, InputView.askWinLottoNumber(), InputView.askBonusLottoNumber());
         ResultView.winResultNotice(winResult);
     }
 }

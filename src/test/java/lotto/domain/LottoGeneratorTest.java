@@ -29,16 +29,16 @@ public class LottoGeneratorTest {
 
     @ParameterizedTest(name = "입력한 로또번호에 당첨횟수가 winCount만큼 존재해야 한다.")
     @CsvSource(value = {
-            "11,12,13,14,18,19|1|0",
-            "1,2,3,14,18,19|1|1",
-            "1,2,3,4,8,9-1,2,3,4,5,6|2|2",
-            "11,12,13,17,18,19-11,12,13,14,15,16-11,12,13,14,15,17|3|0",
+            "11,12,13,14,18,19|1|33|0",
+            "1,2,3,14,18,19|1|33|1",
+            "1,2,3,4,8,9-1,2,3,4,5,6|2|33|2",
+            "11,12,13,17,18,19-11,12,13,14,15,16-11,12,13,14,15,17|3|33|0",
     }, delimiter = '|')
-    void 로또당첨횟수검증(String buyLottos, int lottoBuyCount, int winCount) {
+    void 로또당첨횟수검증(String buyLottos, int lottoBuyCount, int bonusNumber, int winCount) {
         Assertions.assertThat(
                 new TestLottoGenerator(toLottos(buyLottos)).generate(lottoBuyCount)
                         .stream()
-                        .map(lotto -> lotto.win(Lotto.buy(WIN_LOTTO_NUMBER)))
+                        .map(lotto -> lotto.win(Lotto.buy(WIN_LOTTO_NUMBER), new LottoNumber(bonusNumber)))
                         .filter(rank -> !rank.equals(Rank.MISS))
                         .count()
         ).isEqualTo(winCount);

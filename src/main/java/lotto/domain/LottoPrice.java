@@ -17,17 +17,17 @@ public class LottoPrice {
         return lottoGenerator.generate(toBuyCount(buyPrice));
     }
 
-    public WinResult win(final List<Lotto> lottos, final List<Integer> winLottoNumbers) {
-        return new WinResult(winJudge(lottos, Lotto.buy(winLottoNumbers)));
+    public WinResult win(final List<Lotto> lottos, final List<Integer> winLottoNumbers, final int bonusNumber) {
+        return new WinResult(winJudge(lottos, Lotto.buy(winLottoNumbers), new LottoNumber(bonusNumber)));
     }
 
     private int toBuyCount(final int buyPrice) {
         return buyPrice / LOTTO_PRICE;
     }
 
-    private List<Rank> winJudge(final List<Lotto> lottos, final Lotto winLotto) {
+    private List<Rank> winJudge(final List<Lotto> lottos, final Lotto winLotto, final LottoNumber bonusNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.win(winLotto))
+                .map(lotto -> lotto.win(winLotto, bonusNumber))
                 .collect(Collectors.toList());
     }
 

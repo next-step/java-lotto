@@ -29,14 +29,14 @@ class LottoPriceTest {
 
     @ParameterizedTest(name = "입력한 로또번호에 따라 winMoney값과 당첨금액이 일치해야 한다.")
     @CsvSource(value = {
-            "11,12,13,14,18,19|1000|0",
-            "1,2,3,14,18,19|1000|5000",
-            "1,2,3,4,8,9-1,2,3,4,5,6|2000|2000050000",
-            "11,12,13,17,18,19-11,12,13,14,15,16-11,12,13,14,15,17|3000|0",
+            "11,12,13,14,18,19|1000|19|0",
+            "1,2,3,14,18,19|1000|19|5000",
+            "1,2,3,4,5,9-1,2,3,4,5,6|2000|6|2030000000",
+            "11,12,13,17,18,19-11,12,13,14,15,16-11,12,13,14,15,17|3000|33|0",
     }, delimiter = '|')
-    void 로또당첨금액검증(String buyLottos, int buyPrice, int winMoney) {
+    void 로또당첨금액검증(String buyLottos, int buyPrice, int bonusNumber, int winMoney) {
         LottoPrice lottoPrice = new LottoPrice(new TestLottoGenerator(toLottos(buyLottos)));
-        WinResult result = lottoPrice.win(lottoPrice.buy(buyPrice), WIN_LOTTO_NUMBER);
+        WinResult result = lottoPrice.win(lottoPrice.buy(buyPrice), WIN_LOTTO_NUMBER, bonusNumber);
         assertThat(result.winMoney()).isEqualTo(winMoney);
     }
 
