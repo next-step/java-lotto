@@ -13,6 +13,10 @@ public class Lotto {
         this.lotto = lotto;
     }
 
+    public List<LottoNumber> getLottoNumber() {
+        return List.copyOf(lotto);
+    }
+
     private void checkDuplicate(List<LottoNumber> lotto) {
         Set<LottoNumber> setLottoNumbers = new HashSet<>(lotto);
         if (setLottoNumbers.size() != 6) {
