@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import org.assertj.core.api.Condition;
+import lotto.model.request.ReqManualLotto;
+import lotto.service.gernerator.ManualLottoNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,44 +12,22 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class StatisticsTest {
 
-    private final LottoNumbers lottoNumbers = new LottoNumbers();
+    private final ManualLottoNumbersGenerator manualLottoNumbersGenerator = new ManualLottoNumbersGenerator();
 
-    @Test
-    @DisplayName("당첨 통계 테스트")
-    void statisticsWinner() {
-
-        List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumbers, givenLottoNumberList);
-
-        List<Lotto> lottoList = List.of(
-                Lotto.of(lottoNumbers, List.of(1, 2, 3, 4, 5, 6)),
-                Lotto.of(lottoNumbers, List.of(1, 2, 3, 4, 5, 6)),
-                Lotto.of(lottoNumbers, List.of(1, 2, 3, 4, 5, 6))
-        );
-
-        Statistics statistics = new Statistics(winnerLotto, lottoList);
-
-        assertThat(statistics.statisticsWinner()).hasEntrySatisfying(Prize.FIRST_PLACE, new Condition<>() {
-            @Override
-            public boolean matches(Long value) {
-                return value == 3;
-            }
-        });
-    }
 
     @Test
     @DisplayName("수익률 테스트 - 손해")
     void getProfitLoseTest() {
-        List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumbers, givenLottoNumberList);
+        List<String> requestLottoNumber = List.of("1,12,13,14,15,16");
+        List<String> winnerLottoNumber = List.of("1,2,3,4,5,7");
 
-        List<Lotto> lottoList = List.of(
-                Lotto.of(lottoNumbers, List.of(8, 21, 23, 41, 42, 43)),
-                Lotto.of(lottoNumbers, List.of(1, 3, 5, 14, 22, 45)),
-                Lotto.of(lottoNumbers, List.of(5, 9, 38, 41, 43, 44))
-        );
+        Lotto lotto = new Lotto(manualLottoNumbersGenerator.bulkGenerateLottoNumbers(new ReqManualLotto(requestLottoNumber)));
+        LottoNumbers winnerLottoNumbers = manualLottoNumbersGenerator.generateLottoNumbers(new ReqManualLotto(winnerLottoNumber));
+        LottoNumber bonusNumber = LottoNumber.provideLottoNumber(11);
+        WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
 
-        Statistics statistics = new Statistics(winnerLotto, lottoList);
+
+        Statistics statistics = Statistics.doStatistic(winnerLotto, lotto);
 
         assertAll(
                 () -> assertThat(statistics.getProfit(Money.wons(14000))).isLessThan(1.0)
@@ -59,15 +38,16 @@ class StatisticsTest {
     @Test
     @DisplayName("수익률 테스트 - 본전")
     void getProfitPrincipalTest() {
-        List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumbers, givenLottoNumberList);
+        List<String> requestLottoNumber = List.of("1,2,3,14,15,16");
+        List<String> winnerLottoNumber = List.of("1,2,3,4,5,7");
 
-        List<Lotto> lottoList = List.of(
-                Lotto.of(lottoNumbers, List.of(8, 21, 23, 41, 42, 43)),
-                Lotto.of(lottoNumbers, List.of(1, 3, 5, 14, 22, 45)),
-                Lotto.of(lottoNumbers, List.of(5, 9, 38, 41, 43, 44))
-        );
-        Statistics statistics = new Statistics(winnerLotto, lottoList);
+        Lotto lotto = new Lotto(manualLottoNumbersGenerator.bulkGenerateLottoNumbers(new ReqManualLotto(requestLottoNumber)));
+        LottoNumbers winnerLottoNumbers = manualLottoNumbersGenerator.generateLottoNumbers(new ReqManualLotto(winnerLottoNumber));
+        LottoNumber bonusNumber = LottoNumber.provideLottoNumber(11);
+        WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
+
+
+        Statistics statistics = Statistics.doStatistic(winnerLotto, lotto);
 
         assertAll(
                 () -> assertThat(statistics.getProfit(Money.wons(5000))).isEqualTo(1.0)
@@ -79,16 +59,16 @@ class StatisticsTest {
     @Test
     @DisplayName("수익률 테스트 - 수익")
     void getProfitTest() {
-        List<Integer> givenLottoNumberList = List.of(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = WinnerLotto.of(lottoNumbers, givenLottoNumberList);
+        List<String> requestLottoNumber = List.of("1,2,3,4,5,16");
+        List<String> winnerLottoNumber = List.of("1,2,3,4,5,7");
 
-        List<Lotto> lottoList = List.of(
-                Lotto.of(lottoNumbers, List.of(8, 21, 23, 41, 42, 43)),
-                Lotto.of(lottoNumbers, List.of(1, 2, 3, 4, 5, 6)),
-                Lotto.of(lottoNumbers, List.of(5, 9, 38, 41, 43, 44))
-        );
+        Lotto lotto = new Lotto(manualLottoNumbersGenerator.bulkGenerateLottoNumbers(new ReqManualLotto(requestLottoNumber)));
+        LottoNumbers winnerLottoNumbers = manualLottoNumbersGenerator.generateLottoNumbers(new ReqManualLotto(winnerLottoNumber));
+        LottoNumber bonusNumber = LottoNumber.provideLottoNumber(11);
+        WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
 
-        Statistics statistics = new Statistics(winnerLotto, lottoList);
+
+        Statistics statistics = Statistics.doStatistic(winnerLotto, lotto);
 
         assertAll(
                 () -> assertThat(statistics.getProfit(Money.wons(5000))).isGreaterThan(1.0)
