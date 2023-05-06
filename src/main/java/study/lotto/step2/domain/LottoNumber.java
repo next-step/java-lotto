@@ -1,5 +1,7 @@
 package study.lotto.step2.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -7,14 +9,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final String POSITIVE_INTEGER_REGEX = "^[1-9]\\d*$";
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
     private final int number;
+
+    static {
+        IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+                .forEach(lottoNumber -> lottoNumberCache.put(lottoNumber, new LottoNumber(lottoNumber)));
+    }
 
     private LottoNumber(int number) {
         this.number = number;
-    }
-
-    public int number() {
-        return number;
     }
 
     public static LottoNumber of(String number) {
@@ -24,7 +28,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of(int number) {
         validateNumber(number);
-        return LottoNumberCache.cache[number];
+        return lottoNumberCache.get(number);
+    }
+
+    private int number() {
+        return number;
     }
 
     private static void validateNumber(String number) {
@@ -46,18 +54,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static boolean isOutOfRange(int number) {
         return number < MINIMUM_LOTTO_NUMBER || MAXIMUM_LOTTO_NUMBER < number;
-    }
-
-    private static class LottoNumberCache {
-        private static final LottoNumber[] cache = new LottoNumber[MAXIMUM_LOTTO_NUMBER + 1];
-
-        static {
-            IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
-                    .forEach(number -> cache[number] = new LottoNumber(number));
-        }
-
-        private LottoNumberCache() {
-        }
     }
 
     @Override
