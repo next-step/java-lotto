@@ -21,7 +21,7 @@ public class LottoStaticsTest {
         expected.put(5, 2);
         expected.put(6, 1);
 
-        LottoStatics statics = new LottoStatics(5000, result, new LottoRewardStartAt3Strategy());
+        LottoStatics statics = new LottoStatics(5000, result);
 
         assertThat(statics.getStatics()).isEqualTo(expected);
     }
@@ -36,7 +36,7 @@ public class LottoStaticsTest {
         expected.put(5, 0);
         expected.put(6, 0);
 
-        LottoStatics statics = new LottoStatics(14000, result, new LottoRewardStartAt3Strategy());
+        LottoStatics statics = new LottoStatics(14000, result);
 
         assertThat(statics.getRate()).isEqualTo("0.35");
     }
@@ -48,16 +48,7 @@ public class LottoStaticsTest {
         expected.put(1, 3000);
         expected.put(3, 5000);
 
-        LottoStatics statics = new LottoStatics(1000, Arrays.asList(3, 4), new LottoRewardStartAt3Strategy() {
-            @Override
-            public Map<Integer, Integer> getReward() {
-                Map<Integer, Integer> reward = new HashMap<>();
-                reward.put(1, 3000);
-                reward.put(3, 5000);
-
-                return reward;
-            }
-        });
+        LottoStatics statics = new LottoStatics(1000, Arrays.asList(3, 4));
 
         assertThat(statics.getReward()).isEqualTo(expected);
     }

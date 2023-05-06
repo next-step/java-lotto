@@ -11,12 +11,10 @@ public class LottoStatics {
 
     private int cost;
     private Map<Integer, Integer> statics;
-    private LottoRewardStrategy lottoRewardStrategy;
 
-    public LottoStatics(int cost, List<Integer> result, LottoRewardStrategy lottoRewardStrategy) {
+    public LottoStatics(int cost, List<Integer> result) {
         this.cost = cost;
         this.statics = createStatics(result);
-        this.lottoRewardStrategy = lottoRewardStrategy;
     }
 
     public Map<Integer, Integer> getStatics() {
@@ -24,7 +22,7 @@ public class LottoStatics {
     }
 
     public Map<Integer, Integer> getReward() {
-        return lottoRewardStrategy.getReward();
+        return null;
     }
 
     private Map<Integer, Integer> createStatics(List<Integer> result) {
