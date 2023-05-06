@@ -1,14 +1,11 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Lotto {
     private ArrayList<Integer> lotto = new ArrayList<>();
-
     public Lotto() {
-
     }
 
     public Lotto(ArrayList<Integer> lotto) {

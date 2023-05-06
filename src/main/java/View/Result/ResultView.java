@@ -1,8 +1,9 @@
 package View.Result;
 
+import Model.Lotto;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class ResultView {
 
@@ -10,8 +11,10 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public void getLotto(ArrayList<Integer> Input) {
-        System.out.println(Input);
+    public void getLotto(ArrayList<Lotto> Input) {
+        for (Lotto lotto : Input) {
+            System.out.println(lotto.getLotto());
+        }
     }
 
     public void getEndingMessage() {
@@ -20,7 +23,7 @@ public class ResultView {
     }
 
     public void printWinnerMessage(Integer equalCount, Integer prize, Integer count) {
-        System.out.println(equalCount + "개 일치 (" + prize + "원)- " + Optional.ofNullable(count).orElse(0) + "개");
+        System.out.println(equalCount + "개 일치 (" + prize + "원)- " + count + "개");
     }
 
     public void printTotalGross(double gross) {
