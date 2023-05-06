@@ -12,7 +12,7 @@ public class Number implements Comparable<Number> {
     private final int value;
 
     static {
-        for (int i = MIN_NUMBER; i < MAX_NUMBER ; i++) {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER ; i++) {
             numberCache.put(i, new Number(i));
         }
     }
@@ -44,7 +44,7 @@ public class Number implements Comparable<Number> {
 
     @Override
     public int compareTo(Number o) {
-        return 1;
+        return this.value - o.value;
     }
 
     @Override
