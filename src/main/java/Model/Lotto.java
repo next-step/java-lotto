@@ -5,6 +5,7 @@ import java.util.Collections;
 
 public class Lotto {
     private ArrayList<Integer> lotto = new ArrayList<>();
+
     public Lotto() {
     }
 

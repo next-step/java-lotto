@@ -37,6 +37,4 @@ public class LottoRandomGenerator extends LottoGenerator {
 
         return new Lotto(lotto);
     }
-
-
 }

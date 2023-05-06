@@ -3,7 +3,6 @@ package Model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,14 +32,14 @@ class LottoTest {
         WinRule winRule = new WinRule();
 
         //when
-        WinCount winCount = new WinCount(winRule,lottos,winNum);
+        WinCount winCount = new WinCount(winRule, lottos, winNum);
 
         //then
-        assertEquals(null,winCount.getWinCount().get(3)); //3개일치
-        assertEquals(null,winCount.getWinCount().get(4)); //4개일치
-        assertEquals(1,winCount.getWinCount().get(5)); //5개일치
-        assertEquals(null,winCount.getWinCount().get(6)); //6개일치
-        
+        assertEquals(null, winCount.getWinCount().get(3)); //3개일치
+        assertEquals(null, winCount.getWinCount().get(4)); //4개일치
+        assertEquals(1, winCount.getWinCount().get(5)); //5개일치
+        assertEquals(null, winCount.getWinCount().get(6)); //6개일치
+
     }
 
     @Test
@@ -64,7 +63,7 @@ class LottoTest {
          */
         WinRule winRule = new WinRule();
 
-        WinCount winCount = new WinCount(winRule,lottos,winNum);
+        WinCount winCount = new WinCount(winRule, lottos, winNum);
 
         LotteryStatics lotteryStatics = new LotteryStatics(winRule, winCount);
         //when
@@ -72,7 +71,7 @@ class LottoTest {
         int priceSum = lotteryStatics.getSumPirze();
 
         //then
-        assertEquals(1500000,priceSum);
+        assertEquals(1500000, priceSum);
 
     }
 }

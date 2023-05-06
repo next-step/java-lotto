@@ -1,7 +1,5 @@
 package Model;
 
-import java.text.DecimalFormat;
-
 public class Price {
     private int price;
 
