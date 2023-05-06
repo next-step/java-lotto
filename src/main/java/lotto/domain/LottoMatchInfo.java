@@ -6,7 +6,7 @@ public class LottoMatchInfo {
     private final int matchCount;
     private final boolean bonusMatch;
 
-    public LottoMatchInfo(int matchCount, boolean bonusMatch) {
+    private LottoMatchInfo(int matchCount, boolean bonusMatch) {
         this.matchCount = matchCount;
         this.bonusMatch = bonusMatch;
     }
