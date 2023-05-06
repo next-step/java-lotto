@@ -27,11 +27,24 @@ public class WinningNumber {
         return numbers;
     }
 
-    public List<Number> winningNumbers() {
-        return winningNumbers;
+    public int countWithPurchaseNumber(List<Number> number) {
+        int count = 0;
+
+        for (Number winningNumber : winningNumbers) {
+            count = count(number, count, winningNumber);
+        }
+
+        return count;
     }
 
-    public Number bonusNumber() {
-        return bonusNumber;
+    private int count(List<Number> number, int count, Number winningNumber) {
+        if (number.contains(winningNumber)) {
+            count++;
+        }
+        return count;
+    }
+
+    public boolean containBonusNumber(List<Number> number) {
+        return number.contains(bonusNumber);
     }
 }

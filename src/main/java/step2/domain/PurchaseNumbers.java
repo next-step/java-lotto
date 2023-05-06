@@ -54,34 +54,13 @@ public class PurchaseNumbers {
         List<Match> matches = new ArrayList<>();
 
         for (List<Number> number : numbers) {
-            int count = countWithPurchaseNumber(number, winningNumber.winningNumbers());
-            boolean isBonus = containBonusNumber(number, winningNumber.bonusNumber());
+            int count = winningNumber.countWithPurchaseNumber(number);
+            boolean isBonus = winningNumber.containBonusNumber(number);
             Match match = notFiveMatchesBonusIsFalse(count, isBonus);
             matches.add(match);
         }
 
         return matches;
-    }
-
-    private int countWithPurchaseNumber(List<Number> number, List<Number> winningNumbers) {
-        int count = 0;
-
-        for (Number winningNumber : winningNumbers) {
-            count = count(number, count, winningNumber);
-        }
-
-        return count;
-    }
-
-    private int count(List<Number> number, int count, Number winningNumber) {
-        if (number.contains(winningNumber)) {
-            count++;
-        }
-        return count;
-    }
-
-    private boolean containBonusNumber(List<Number> number, Number bonusNumber) {
-        return number.contains(bonusNumber);
     }
 
     private Match notFiveMatchesBonusIsFalse(int count, boolean isBonus) {
