@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.PrizeCalculateException;
+
 public enum Prize {
     FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
@@ -18,7 +20,7 @@ public enum Prize {
         this.bonusNumberMatch = bonusNumberMatch;
     }
 
-    public static Prize calculatePrize(int matchCount, boolean containsBonuns) {
+    public static Prize calculatePrize(int matchCount, boolean containsBonus) {
         if (matchCount < FIFTH.matchCount) {
             return BOOM;
         }
@@ -28,16 +30,16 @@ public enum Prize {
         if (matchCount == FOURTH.matchCount) {
             return FOURTH;
         }
-        if ((matchCount == THIRD.matchCount) && (containsBonuns == THIRD.bonusNumberMatch)) {
+        if ((matchCount == THIRD.matchCount) && (containsBonus == THIRD.bonusNumberMatch)) {
             return THIRD;
         }
-        if ((matchCount == SECOND.matchCount) && (containsBonuns == SECOND.bonusNumberMatch)) {
+        if ((matchCount == SECOND.matchCount) && (containsBonus == SECOND.bonusNumberMatch)) {
             return SECOND;
         }
         if (matchCount == FIRST.matchCount) {
             return FIRST;
         }
-        throw new RuntimeException("알수없는 계산 에러..");
+        throw new PrizeCalculateException();
     }
 
     public boolean isMatch(int matchCount) {
