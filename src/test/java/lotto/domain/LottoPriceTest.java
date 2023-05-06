@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -9,9 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class ShopTest {
+class LottoPriceTest {
 
     private static final String LOTTOS_SPLIT_SEPARATOR = "-";
     private static final String LOTTO_SPLIT_SEPARATOR = ",";
@@ -25,8 +23,8 @@ class ShopTest {
             "11,12,13,17,18,19-11,12,13,14,15,16-11,12,13,14,15,17|3000|3",
     }, delimiter = '|')
     void 로또구매갯수검증(String buyLottos, int buyPrice, int lottoCount) {
-        Shop shop = new Shop(new TestLottoGenerator(toLottos(buyLottos)));
-        assertThat(shop.buy(buyPrice).size()).isEqualTo(lottoCount);
+        LottoPrice lottoPrice = new LottoPrice(new TestLottoGenerator(toLottos(buyLottos)));
+        assertThat(lottoPrice.buy(buyPrice).size()).isEqualTo(lottoCount);
     }
 
     @ParameterizedTest(name = "입력한 로또번호에 따라 winMoney값과 당첨금액이 일치해야 한다.")
@@ -37,8 +35,8 @@ class ShopTest {
             "11,12,13,17,18,19-11,12,13,14,15,16-11,12,13,14,15,17|3000|0",
     }, delimiter = '|')
     void 로또당첨금액검증(String buyLottos, int buyPrice, int winMoney) {
-        Shop shop = new Shop(new TestLottoGenerator(toLottos(buyLottos)));
-        WinResult result = shop.win(shop.buy(buyPrice), WIN_LOTTO_NUMBER);
+        LottoPrice lottoPrice = new LottoPrice(new TestLottoGenerator(toLottos(buyLottos)));
+        WinResult result = lottoPrice.win(lottoPrice.buy(buyPrice), WIN_LOTTO_NUMBER);
         assertThat(result.winMoney()).isEqualTo(winMoney);
     }
 

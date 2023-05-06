@@ -23,7 +23,7 @@ public class WinResult {
     }
 
     public int buyMoney() {
-        return ranks.size() * Shop.LOTTO_PRICE;
+        return ranks.size() * LottoPrice.LOTTO_PRICE;
     }
 
     public int winMoney() {
