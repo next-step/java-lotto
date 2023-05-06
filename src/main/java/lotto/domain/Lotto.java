@@ -21,14 +21,23 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Rank win(final Lotto lotto) {
-        return Rank.win(lotto.matchCount(lottoNumbers));
+    public Rank win(final Lotto lotto, final LottoNumber lottoNumber) {
+        return Rank.win(lotto.matchCount(lottoNumbers), lotto.matchBonusNumber(lottoNumber));
     }
 
     private int matchCount(final List<LottoNumber> lottoNumbers) {
         return (int) this.lottoNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
+    }
+
+    private boolean matchBonusNumber(final LottoNumber bonusNumber) {
+        return this.lottoNumbers
+                .stream()
+                .sorted(Comparator.reverseOrder())
+                .findFirst()
+                .map(lottoNumber -> lottoNumber.isMatch(bonusNumber))
+                .orElse(false);
     }
 
     public boolean hasSize(final int size) {

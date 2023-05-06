@@ -25,16 +25,16 @@ public class LottoTest {
         assertThat(TEST_LOTTO.hasSize(LOTTO_SIZE)).isTrue();
     }
 
-    @ParameterizedTest(name = "입력한 로또번호에 등수결과가 matchCount 등수결과와 같아야한다.")
+    @ParameterizedTest(name = "입력한 로또번호에 등수결과 검증결과와 일치해야한다.")
     @CsvSource(value = {
-            "1,2,3,7,8,9|3",
-            "1,2,3,4,8,9|4",
-            "1,2,3,4,5,9|5",
-            "1,2,3,4,5,6|6",
+            "1,2,3,7,8,9|9|3|true",
+            "1,2,3,4,8,9|9|4|true",
+            "1,2,3,4,5,9|9|5|true",
+            "1,2,3,4,5,6|9|6|false",
     }, delimiter = '|')
-    void 로또결과검증(String lottoNumbers, int matchCount) {
+    void 로또결과검증(String lottoNumbers, int bonusNumber, int matchCount, boolean bonusMatch) {
         Lotto lotto = Lotto.buy(toList(lottoNumbers));
-        assertThat(TEST_LOTTO.win(lotto)).isEqualTo(Rank.win(matchCount));
+        assertThat(TEST_LOTTO.win(lotto, new LottoNumber(bonusNumber))).isEqualTo(Rank.win(matchCount, bonusMatch));
     }
 
     private List<Integer> toList(String lottoNumbers) {

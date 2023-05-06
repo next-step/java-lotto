@@ -11,6 +11,7 @@ public class ResultView {
 
     private static final String BUY_COUNT_FORMAT = "%s개를 구매했습니다.";
     private static final String WIN_RESULT_FORMAT = "%s개 일치 (%s원) - %s개";
+    private static final String WIN_BONUS_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치 (%s원) - %s개";
     private static final String RATE_OF_RESULT_FORMAT = "총 수익률은 %.2f입니다.";
 
     private static final String RESULT_NOTICE_MENT = "당첨 통계";
@@ -22,7 +23,7 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void buyResultNotice(List<Lotto> lottos) {
+    public static void buyResultNotice(final List<Lotto> lottos) {
         System.out.println(String.format(BUY_COUNT_FORMAT, lottos.size()));
         for (Lotto lotto : lottos) {
             System.out.println(
@@ -32,10 +33,11 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void winResultNotice(WinResult winResult) {
+    public static void winResultNotice(final WinResult winResult) {
         System.out.println();
         System.out.println(RESULT_NOTICE_MENT);
         System.out.println(LINE_SEPARATOR);
+        System.out.println(rankFormat(Rank.FIFTH, winResult));
         System.out.println(rankFormat(Rank.FOURTH, winResult));
         System.out.println(rankFormat(Rank.THIRD, winResult));
         System.out.println(rankFormat(Rank.SECOND, winResult));
@@ -43,11 +45,14 @@ public class ResultView {
         System.out.println(String.format(RATE_OF_RESULT_FORMAT, winResult.rateOfResult()));
     }
 
-    private static String rankFormat(Rank rank, WinResult winResult) {
+    private static String rankFormat(final Rank rank, final WinResult winResult) {
+        if (rank == Rank.SECOND) {
+            return String.format(WIN_BONUS_RESULT_FORMAT, rank.matchCount(), rank.winnings(), winResult.winCount(rank));
+        }
         return String.format(WIN_RESULT_FORMAT, rank.matchCount(), rank.winnings(), winResult.winCount(rank));
     }
 
-    private static String lottoFormat(Lotto lotto) {
+    private static String lottoFormat(final Lotto lotto) {
         return lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(LOTTO_NUMBER_SEPARATOR));
     }
 }
