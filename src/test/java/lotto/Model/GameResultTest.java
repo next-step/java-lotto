@@ -20,8 +20,8 @@ class GameResultTest {
     }
 
     @Test
-    @DisplayName("count 2개 입력 시 미입력 확인")
-    public void gameResult_add_under_3() {
+    @DisplayName("count 3개 미만 입력 시 미입력 확인")
+    public void gameResult_dont_add_when_input_under_3() {
         int inputCount = 2;
         boolean inputIsBonus = false;
         HashMap<Integer, Integer> expected = new HashMap<>() {{
@@ -58,7 +58,7 @@ class GameResultTest {
     }
 
     @Test
-    @DisplayName("count 4개 입력 시 미입력 확인")
+    @DisplayName("count 4개 입력 시 정상 입력 확인")
     public void gameResult_add_4() {
         int inputCount = 4;
         boolean inputIsBonus = false;
@@ -77,7 +77,7 @@ class GameResultTest {
     }
 
     @Test
-    @DisplayName("count 5개 입력 시 미입력 확인")
+    @DisplayName("count 5개 입력 시 정상 입력 확인")
     public void gameResult_add_5() {
         int inputCount = 5;
         boolean inputIsBonus = false;
@@ -96,7 +96,7 @@ class GameResultTest {
     }
 
     @Test
-    @DisplayName("count 6개 입력 시 미입력 확인")
+    @DisplayName("count 6개 입력 시 정상 입력 확인")
     public void gameResult_add_6() {
         int inputCount = 6;
         boolean inputIsBonus = false;
@@ -116,7 +116,7 @@ class GameResultTest {
 
     @Test
     @DisplayName("count 5개가 아닌 숫자일 때 bonus 입력 시 bonus 계산 제외 확인")
-    public void gameResult_add_bonus_not_5() {
+    public void gameResult_dont_add_bonus_not_5() {
         int inputCount = 4;
         boolean inputIsBonus = true;
         HashMap<Integer, Integer> expected = new HashMap<>() {{
