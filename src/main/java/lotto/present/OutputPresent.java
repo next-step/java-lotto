@@ -1,10 +1,9 @@
 package lotto.present;
 
 import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 import lotto.present.dto.IncomePresentDTO;
 import lotto.present.dto.WinnerPresentDTO;
-
-import java.util.List;
 
 public class OutputPresent {
     private static final String STATISTICS_HEAD = "당첨 통계" + System.lineSeparator() + "---------";
@@ -14,10 +13,7 @@ public class OutputPresent {
     private static final String PRIZE_2ND = "5개 일치, 보너스 볼 일치(30,000,000원) - %s개";
     private static final String PRIZE_1ST = "6개 일치 (2,000,000,000원)- %s개";
     private static final String RETURN_RATE = "총 수익률은 %f2입니다";
-
-    public OutputPresent() {
-    }
-
+    private static final String CONFIRM_PURCHASE = "수동으로 %s장, 자동으로 %s장 을 구매했습니다%s";
 
     public void presentWinners(WinnerPresentDTO winnerPresentDTO) {
         System.out.println(STATISTICS_HEAD);
@@ -33,8 +29,12 @@ public class OutputPresent {
         System.out.print(incomePresentDTO.getBreakEvenMessage());
     }
 
-    public void presentTickets(List<Ticket> tickets) {
-        for (Ticket ticket : tickets) {
+    public void presentTickets(Tickets manualTickets, Tickets autoTickets) {
+        System.out.printf(CONFIRM_PURCHASE, manualTickets.count(), autoTickets.count(), System.lineSeparator());
+        for (Ticket ticket : manualTickets.allTickets()) {
+            System.out.println(ticket.toString());
+        }
+        for (Ticket ticket : autoTickets.allTickets()) {
             System.out.println(ticket.toString());
         }
     }

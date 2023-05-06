@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.NotKindOfLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class TicketTest {
         Set<Integer> input = Set.of(1, 2, 3, 4, 5, 6);
         String answer = "[1, 2, 3, 4, 5, 6]";
         //when
-        Ticket ticket = new Ticket(input);
+        Ticket ticket = Ticket.of(input);
         //then
         assertThat(ticket.toString()).isEqualTo(answer);
     }
@@ -30,7 +31,7 @@ public class TicketTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            Ticket ticket = new Ticket(input);
+            Ticket ticket = Ticket.of(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -42,7 +43,7 @@ public class TicketTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            Ticket ticket = new Ticket(input);
+            Ticket ticket = Ticket.of(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -50,7 +51,7 @@ public class TicketTest {
     @Test
     public void constructorByString() {
         //given
-        Ticket expect = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket expect = Ticket.of(Set.of(1, 2, 3, 4, 5, 6));
         //when
         Ticket actual = new Ticket("1, 2, 3, 4, 5, 6");
         //then
@@ -65,8 +66,8 @@ public class TicketTest {
         //given
         int expect = 4;
         //when
-        Ticket ticketA = new Ticket(Set.of(1, 2, 3, 4, 5, 6));
-        Ticket ticketB = new Ticket(Set.of(1, 2, 3, 4, 35, 36));
+        Ticket ticketA = Ticket.of(Set.of(1, 2, 3, 4, 5, 6));
+        Ticket ticketB = Ticket.of(Set.of(1, 2, 3, 4, 35, 36));
         //then
         assertAll("숫자 4개가 겹치는 두 티켓으로 검증한다",
                 () -> assertThat(ticketA.countMatchNumbers(ticketB))
@@ -82,18 +83,25 @@ public class TicketTest {
     @Test
     public void winnerTest() {
         //given
-        Ticket ticket = new Ticket(Set.of(2, 4, 6, 8, 16, 32));
+        Ticket ticket = Ticket.of(Set.of(2, 4, 6, 8, 16, 32));
         //when
-        WinnerTicket winnerTicket = ticket.winnerTicket(1);
+        WinnerTicket winnerTicket = new WinnerTicket(ticket, LottoNumber.of(1));
         //then
         assertThat(winnerTicket.ticket().toString())
                 .as("당첨권의 숫자와 Ticket 인스턴스의 숫자는 일치한다")
                 .isEqualTo(ticket.toString());
     }
+
+    @DisplayName("잘못된 문자열이 입력되어 티켓 생성시 예외를 발생시킨다")
+    @Test
+    public void notKindOfTicket() {
+        //given
+        String input = "1, 2, 3, 4+5, 6, 7";
+        //when
+        //then
+        assertThatThrownBy(() -> {
+            Ticket ticket = new Ticket(input);
+        }).isInstanceOf(NotKindOfLottoNumberException.class)
+                .hasMessageContaining("LottoNumber 로 변환할 수 없는 문자");
+    }
 }
-/*
-테스트하기위한 Ticket 클래스 기능 정리
-countMatchNumbers : 몇개 숫자가 일치하는지 알아내는 기능
-WinnerTicket() : 위너티켓을 생성해주는 기능
-countWinner(List<Ticket> challengeTickets, Prize prize) : 입력받은 리스트 티켓에, 입력받은 등수의 티켓이 몆장이 포함되어있는지 검증
- */

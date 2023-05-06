@@ -17,34 +17,35 @@ public class StaticsTest {
 
     @BeforeEach
     public void beforeEach() {
-        Ticket winner = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
-        WinnerTicket winnerTicket = winner.winnerTicket(33);
+        Ticket winner = Ticket.of((Set.of(1, 2, 4, 8, 16, 32)));
+        WinnerTicket winnerTicket = new WinnerTicket(winner, (LottoNumber.of(33)));
 
-        Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
-        Ticket secondA = new Ticket(Set.of(1, 2, 4, 8, 16, 33));
-        Ticket secondB = new Ticket(Set.of(1, 2, 4, 8, 32, 33));
+        Ticket first = Ticket.of(Set.of(1, 2, 4, 8, 16, 32));
+        Ticket secondA = Ticket.of(Set.of(1, 2, 4, 8, 16, 33));
+        Ticket secondB = Ticket.of(Set.of(1, 2, 4, 8, 32, 33));
 
-        Ticket thirdA = new Ticket(Set.of(1, 2, 4, 8, 16, 40));
-        Ticket thirdB = new Ticket(Set.of(1, 2, 4, 8, 16, 41));
-        Ticket thirdC = new Ticket(Set.of(1, 2, 4, 8, 16, 42));
+        Ticket thirdA = Ticket.of(Set.of(1, 2, 4, 8, 16, 40));
+        Ticket thirdB = Ticket.of(Set.of(1, 2, 4, 8, 16, 41));
+        Ticket thirdC = Ticket.of(Set.of(1, 2, 4, 8, 16, 42));
 
-        Ticket fourthA = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthB = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthC = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthD = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthA = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthB = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthC = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthD = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
 
-        Ticket fifthA = new Ticket(Set.of(1, 2, 4, 15, 26, 37));
-        Ticket fifthB = new Ticket(Set.of(1, 2, 4, 25, 26, 17));
-        Ticket fifthC = new Ticket(Set.of(1, 2, 4, 35, 36, 37));
-        Ticket fifthD = new Ticket(Set.of(1, 2, 4, 25, 36, 27));
-        Ticket fifthE = new Ticket(Set.of(1, 2, 4, 35, 26, 17));
+        Ticket fifthA = Ticket.of(Set.of(1, 2, 4, 15, 26, 37));
+        Ticket fifthB = Ticket.of(Set.of(1, 2, 4, 25, 26, 17));
+        Ticket fifthC = Ticket.of(Set.of(1, 2, 4, 35, 36, 37));
+        Ticket fifthD = Ticket.of(Set.of(1, 2, 4, 25, 36, 27));
+        Ticket fifthE = Ticket.of(Set.of(1, 2, 4, 35, 26, 17));
 
-        List<Ticket> purchaseTicketsFixture = List.of(
+        Tickets purchaseTicketsFixture = new Tickets(List.of(
                 first, secondA, secondB,
                 thirdA, thirdB, thirdC,
                 fourthA, fourthB, fourthC, fourthD,
                 fifthA, fifthB, fifthC, fifthD, fifthE
-        );
+        ));
+
         staticsFixture = new Statics(purchaseTicketsFixture, winnerTicket);
     }
 
@@ -54,7 +55,7 @@ public class StaticsTest {
         //given
         int answer = 1;
         //when
-        int countFirst = staticsFixture.getCountFirst();
+        int countFirst = staticsFixture.countPrize(Prize.FIRST);
         //then
         assertEquals(answer, countFirst);
     }
@@ -65,7 +66,7 @@ public class StaticsTest {
         //given
         int expect = 2;
         //when
-        int actual = staticsFixture.getCountSecond();
+        int actual = staticsFixture.countPrize(Prize.SECOND);
         //then
         assertEquals(expect, actual);
     }
@@ -76,7 +77,7 @@ public class StaticsTest {
         //given
         int answer = 3;
         //when
-        int countFirst = staticsFixture.getCountThird();
+        int countFirst = staticsFixture.countPrize(Prize.THIRD);
         //then
         assertEquals(answer, countFirst);
     }
@@ -87,7 +88,7 @@ public class StaticsTest {
         //given
         int answer = 4;
         //when
-        int countFirst = staticsFixture.getCountFourth();
+        int countFirst = staticsFixture.countPrize(Prize.FOURTH);
         //then
         assertEquals(answer, countFirst);
     }
@@ -98,7 +99,7 @@ public class StaticsTest {
         //given
         int answer = 5;
         //when
-        int countFirst = staticsFixture.getCountFifth();
+        int countFirst = staticsFixture.countPrize(Prize.FIFTH);
         //then
         assertEquals(answer, countFirst);
     }
@@ -112,11 +113,11 @@ public class StaticsTest {
         int actual = staticsFixture.getIncome();
         //then
         assertAll("당첨금액 = Prize.FIRST.prizeCalculate(1) + Prize.SECOND.prizeCalculate(2) + Prize.THIRD.prizeCalculate(3) + Prize.FOURTH.prizeCalculate(4) + Prize.FIFTH.prizeCalculate(5)",
-                () -> assertEquals(2_000_000_000, Prize.FIRST.calculatePrize(staticsFixture.getCountFirst())),
-                () -> assertEquals(30_000_000 * 2, Prize.SECOND.calculatePrize(staticsFixture.getCountSecond())),
-                () -> assertEquals(1_500_000 * 3, Prize.THIRD.calculatePrize(staticsFixture.getCountThird())),
-                () -> assertEquals(50_000 * 4, Prize.FOURTH.calculatePrize(staticsFixture.getCountFourth())),
-                () -> assertEquals(5_000 * 5, Prize.FIFTH.calculatePrize(staticsFixture.getCountFifth())),
+                () -> assertEquals(2_000_000_000, Prize.FIRST.calculatePrize(staticsFixture.countPrize(Prize.FIRST))),
+                () -> assertEquals(30_000_000 * 2, Prize.SECOND.calculatePrize(staticsFixture.countPrize(Prize.SECOND))),
+                () -> assertEquals(1_500_000 * 3, Prize.THIRD.calculatePrize(staticsFixture.countPrize(Prize.THIRD))),
+                () -> assertEquals(50_000 * 4, Prize.FOURTH.calculatePrize(staticsFixture.countPrize(Prize.FOURTH))),
+                () -> assertEquals(5_000 * 5, Prize.FIFTH.calculatePrize(staticsFixture.countPrize(Prize.FIFTH))),
                 () -> assertEquals(expected, actual)
         );
     }
@@ -127,7 +128,7 @@ public class StaticsTest {
         //given
         int answerX1000 = 137648333;
         //when
-        int ratioX1000 = (int) (staticsFixture.getProfitRatio() * 1000);
+        int ratioX1000 = (int) (staticsFixture.profitRatio() * 1000);
         //then
         assertThat(ratioX1000).as("double type 은 equal 평가가 곤란해서 1000을 곱한다음 int 형식으로 캐스팅하여 검증했습니다").isEqualTo(answerX1000);
         assertThat(ratioX1000).as("투자금 13게임[13000₩], 수익금[2004725000₩], 투자대비 수익비율 [154209.615385]").isEqualTo(answerX1000);

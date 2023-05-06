@@ -1,59 +1,34 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberDuplicatedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class WinnerTicketTest {
 
     private WinnerTicket winnerTicketFixture;
-    private List<Ticket> ticketsFixture;
+    private Ticket ticketFixture;
 
     @BeforeEach
     public void beforeEach() {
-        Ticket winner = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
-        winnerTicketFixture = winner.winnerTicket(33);
-
-        Ticket first = new Ticket(Set.of(1, 2, 4, 8, 16, 32));
-        Ticket secondA = new Ticket(Set.of(1, 2, 4, 8, 16, 33));
-        Ticket secondB = new Ticket(Set.of(1, 2, 4, 8, 32, 33));
-
-        Ticket thirdA = new Ticket(Set.of(1, 2, 4, 8, 16, 40));
-        Ticket thirdB = new Ticket(Set.of(1, 2, 4, 8, 16, 41));
-        Ticket thirdC = new Ticket(Set.of(1, 2, 4, 8, 16, 42));
-
-        Ticket fourthA = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthB = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthC = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-        Ticket fourthD = new Ticket(Set.of(1, 2, 33, 4, 35, 8));
-
-        Ticket fifthA = new Ticket(Set.of(1, 2, 4, 15, 26, 37));
-        Ticket fifthB = new Ticket(Set.of(1, 2, 4, 25, 26, 17));
-        Ticket fifthC = new Ticket(Set.of(1, 2, 4, 35, 36, 37));
-        Ticket fifthD = new Ticket(Set.of(1, 2, 4, 25, 36, 27));
-        Ticket fifthE = new Ticket(Set.of(1, 2, 4, 35, 26, 17));
-        ticketsFixture = List.of(
-                first,
-                secondA, secondB,
-                thirdA, thirdB, thirdC,
-                fourthA, fourthB, fourthC, fourthD,
-                fifthA, fifthB, fifthC, fifthD, fifthE
-        );
+        ticketFixture = Ticket.of(Set.of(1, 2, 4, 8, 16, 32));
+        winnerTicketFixture = new WinnerTicket(ticketFixture, (LottoNumber.of(33)));
     }
 
     @DisplayName("보너스 숫자 여부를 판별한다")
     @Test
     public void includeBonus() {
         //given
-        Ticket ticketA = new Ticket(Set.of(1, 2, 4, 8, 16, 33));
-        Ticket ticketB = new Ticket(Set.of(1, 2, 4, 8, 32, 33));
-        Ticket ticketC = new Ticket(Set.of(1, 2, 4, 8, 16, 40));
+        Ticket ticketA = Ticket.of(Set.of(1, 2, 4, 8, 16, 33));
+        Ticket ticketB = Ticket.of(Set.of(1, 2, 4, 8, 32, 33));
+        Ticket ticketC = Ticket.of(Set.of(1, 2, 4, 8, 16, 40));
         //when
         Boolean actualA = winnerTicketFixture.includeBonus(ticketA);
         Boolean actualB = winnerTicketFixture.includeBonus(ticketB);
@@ -66,23 +41,65 @@ public class WinnerTicketTest {
         );
     }
 
-    @DisplayName("당첨자의 숫자를 구하는 기능을 검증한다")
+    @DisplayName("당첨 티켓 입력시 Prize 를 반환한다")
     @Test
-    public void countWinner() {
+    public void checkLucky() {
         //given
+        Ticket first = Ticket.of(Set.of(1, 2, 4, 8, 16, 32));
+
+        Ticket secondA = Ticket.of(Set.of(1, 2, 4, 8, 16, 33));
+        Ticket secondB = Ticket.of(Set.of(1, 2, 4, 8, 32, 33));
+
+        Ticket thirdA = Ticket.of(Set.of(1, 2, 4, 8, 16, 40));
+        Ticket thirdB = Ticket.of(Set.of(1, 2, 4, 8, 16, 41));
+        Ticket thirdC = Ticket.of(Set.of(1, 2, 4, 8, 16, 42));
+
+        Ticket fourthA = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthB = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthC = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+        Ticket fourthD = Ticket.of(Set.of(1, 2, 33, 4, 35, 8));
+
+        Ticket fifthA = Ticket.of(Set.of(1, 2, 4, 15, 26, 37));
+        Ticket fifthB = Ticket.of(Set.of(1, 2, 4, 25, 26, 17));
+        Ticket fifthC = Ticket.of(Set.of(1, 2, 4, 35, 36, 37));
+        Ticket fifthD = Ticket.of(Set.of(1, 2, 4, 25, 36, 27));
+        Ticket fifthE = Ticket.of(Set.of(1, 2, 4, 35, 26, 17));
         //when
-        int actualFirst = winnerTicketFixture.countWinner(ticketsFixture, Prize.FIRST);
-        int actualSecond = winnerTicketFixture.countWinner(ticketsFixture, Prize.SECOND);
-        int actualThird = winnerTicketFixture.countWinner(ticketsFixture, Prize.THIRD);
-        int actualFourth = winnerTicketFixture.countWinner(ticketsFixture, Prize.FOURTH);
-        int actualFifth = winnerTicketFixture.countWinner(ticketsFixture, Prize.FIFTH);
         //then
-        assertAll("",
-                () -> assertThat(actualFirst).as("").isEqualTo(1),
-                () -> assertThat(actualSecond).as("").isEqualTo(2),
-                () -> assertThat(actualThird).as("").isEqualTo(3),
-                () -> assertThat(actualFourth).as("").isEqualTo(4),
-                () -> assertThat(actualFifth).as("").isEqualTo(5)
+        assertAll("당첨 티켓 입력시 Prize 를 반환해야 한다. 등수별로 해당 로직을 검증한다",
+                () -> assertThat(winnerTicketFixture.checkLucky(first)).as("1등 티켓을 검증한다").isEqualTo(Prize.FIRST),
+
+                () -> assertThat(winnerTicketFixture.checkLucky(secondA)).as("2등 티켓을 검증한다").isEqualTo(Prize.SECOND),
+                () -> assertThat(winnerTicketFixture.checkLucky(secondB)).as("2등 티켓을 검증한다").isEqualTo(Prize.SECOND),
+
+                () -> assertThat(winnerTicketFixture.checkLucky(thirdA)).as("3등 티켓을 검증한다").isEqualTo(Prize.THIRD),
+                () -> assertThat(winnerTicketFixture.checkLucky(thirdB)).as("3등 티켓을 검증한다").isEqualTo(Prize.THIRD),
+                () -> assertThat(winnerTicketFixture.checkLucky(thirdC)).as("3등 티켓을 검증한다").isEqualTo(Prize.THIRD),
+
+                () -> assertThat(winnerTicketFixture.checkLucky(fourthA)).as("4등 티켓을 검증한다").isEqualTo(Prize.FOURTH),
+                () -> assertThat(winnerTicketFixture.checkLucky(fourthB)).as("4등 티켓을 검증한다").isEqualTo(Prize.FOURTH),
+                () -> assertThat(winnerTicketFixture.checkLucky(fourthC)).as("4등 티켓을 검증한다").isEqualTo(Prize.FOURTH),
+                () -> assertThat(winnerTicketFixture.checkLucky(fourthD)).as("4등 티켓을 검증한다").isEqualTo(Prize.FOURTH),
+
+                () -> assertThat(winnerTicketFixture.checkLucky(fifthA)).as("5등 티켓을 검증한다").isEqualTo(Prize.FIFTH),
+                () -> assertThat(winnerTicketFixture.checkLucky(fifthB)).as("5등 티켓을 검증한다").isEqualTo(Prize.FIFTH),
+                () -> assertThat(winnerTicketFixture.checkLucky(fifthC)).as("5등 티켓을 검증한다").isEqualTo(Prize.FIFTH),
+                () -> assertThat(winnerTicketFixture.checkLucky(fifthD)).as("5등 티켓을 검증한다").isEqualTo(Prize.FIFTH),
+                () -> assertThat(winnerTicketFixture.checkLucky(fifthE)).as("5등 티켓을 검증한다").isEqualTo(Prize.FIFTH)
         );
+    }
+
+
+    @DisplayName("보너스볼로 중복된 LottoNumber 입력시 예외를 발생시킨다")
+    @Test
+    public void duplicatedCheck() {
+        //given
+        Ticket ticket = ticketFixture;
+        //when
+        //then
+        assertThatThrownBy(() -> {
+            WinnerTicket winnerTicket = new WinnerTicket(ticket, LottoNumber.of(1));
+        }).isInstanceOf(LottoNumberDuplicatedException.class)
+                .hasMessageContaining("LottoNumber 중복은 허용되지 않습니다");
     }
 }

@@ -1,72 +1,104 @@
 package lotto.domain;
 
+import lotto.exception.NotKindOfLottoNumberException;
 import lotto.exception.TicketNumbersCountException;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Ticket {
-    private final Set<Integer> numbers;
-
-    public Ticket(Set<Integer> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
-    }
+    private final Set<LottoNumber> numbers;
 
     public Ticket(String stringNumbers) {
-        Set<Integer> numbers = parseToNumbers(stringNumbers);
-        validate(numbers);
-        this.numbers = numbers;
+        Set<LottoNumber> lottoNumbers = parseToNumbers(stringNumbers);
+        this.validateTicketNumberCount(lottoNumbers);
+        this.numbers = lottoNumbers;
     }
 
-    private static int overlapCount(Set<Integer> copyThisNumbers) {
-        return 12 - copyThisNumbers.size();
+    public Ticket(Set<LottoNumber> issueNumbers) {
+        this.validateTicketNumberCount(issueNumbers);
+        this.numbers = issueNumbers;
     }
 
-    private Set<Integer> parseToNumbers(String stringNumbers) {
-        Set<Integer> numbers = new HashSet<>();
-        for (String number : stringNumbers.split(", ")) {
-            numbers.add(Integer.parseInt(number));
+    public static Ticket of(Set<Integer> integers) {
+        return new Ticket(toLottoNumbers(integers));
+    }
+
+    private static Set<LottoNumber> toLottoNumbers(Set<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (Integer integer : numbers) {
+            lottoNumbers.add(LottoNumber.of(integer));
         }
+        return lottoNumbers;
+    }
+
+    public static Ticket auto() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        while (numbers.size() < 6) {
+            numbers.add(LottoNumber.any(NumberStrategyRandom.of()));
+        }
+        return new Ticket(numbers);
+    }
+
+    private Set<LottoNumber> parseToNumbers(String stringNumbers) {
+        String[] splintedStringNumbers = stringNumbers.split(", ");
+        validateStringNumbers(splintedStringNumbers);
+        Set<LottoNumber> numbers = new HashSet<>();
+        for (String number : splintedStringNumbers) {
+            numbers.add(LottoNumber.of(Integer.parseInt(number)));
+        }
+        validateTicketNumberCount(numbers);
         return numbers;
     }
 
-    private void validate(Set<Integer> numbers) {
-        if (numbers.size() != 6) {
+    private void validateStringNumbers(String[] splintedStringNumbers) {
+        if (splintedStringNumbers.length != 6) {
+            throw new TicketNumbersCountException();
+        }
+        for (String numberCandidate : splintedStringNumbers) {
+            validateNumericString(numberCandidate);
+        }
+    }
+
+    private void validateNumericString(String numberCandidate) {
+        for (char c : numberCandidate.toCharArray()) {
+            validateNumericChar(c);
+        }
+    }
+
+    private void validateNumericChar(char c) {
+        if (!('0' <= c && c <= '9')) {
+            throw new NotKindOfLottoNumberException(c);
+        }
+    }
+
+    private void validateTicketNumberCount(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
             throw new TicketNumbersCountException();
         }
     }
 
     public int countMatchNumbers(Ticket otherTicket) {
-        Set<Integer> copyThisNumbers = new HashSet<>(this.numbers);
+        Set<LottoNumber> copyThisNumbers = new HashSet<>(this.numbers);
         copyThisNumbers.addAll(otherTicket.numbers);
         return overlapCount(copyThisNumbers);
     }
 
-    public WinnerTicket winnerTicket(int bonusNumber) {
-        return new WinnerTicket(new Ticket(new HashSet<>(this.numbers)), bonusNumber);
+    private int overlapCount(Set<LottoNumber> copyThisNumbers) {
+        return 12 - copyThisNumbers.size();
+    }
+
+    public Boolean includeNumber(LottoNumber bonusLottoNumber) {
+        return this.numbers.contains(bonusLottoNumber);
     }
 
     @Override
     public String toString() {
         return this.numbers
                 .stream()
-                .map(number -> Integer.toString(number))
+                .map(number -> Integer.toString(number.getLottoNumber()))
                 .sorted()
                 .collect(Collectors.joining(", ", "[", "]"));
-    }
-
-    public Boolean includeNumber(Integer bonusNumber) {
-        return this.numbers.contains(bonusNumber);
-    }
-
-    public int countWinner(List<Ticket> challengeTickets, Prize prize) {
-        int count = 0;
-        for (Ticket ticket : challengeTickets) {
-            count = count + (prize.isMatch(this.countMatchNumbers(ticket)) ? 1 : 0);
-        }
-        return count;
     }
 }

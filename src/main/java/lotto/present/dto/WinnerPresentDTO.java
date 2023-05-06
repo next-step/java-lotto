@@ -1,5 +1,6 @@
 package lotto.present.dto;
 
+import lotto.domain.Prize;
 import lotto.domain.Statics;
 
 public class WinnerPresentDTO {
@@ -11,11 +12,11 @@ public class WinnerPresentDTO {
 
 
     public WinnerPresentDTO(Statics statics) {
-        this.countFifth = statics.getCountFifth();
-        this.countFourth = statics.getCountFourth();
-        this.countThird = statics.getCountThird();
-        this.countSecond = statics.getCountSecond();
-        this.countFirst = statics.getCountFirst();
+        this.countFifth = statics.countPrize(Prize.FIFTH);
+        this.countFourth = statics.countPrize(Prize.FOURTH);
+        this.countThird = statics.countPrize(Prize.THIRD);
+        this.countSecond = statics.countPrize(Prize.SECOND);
+        this.countFirst = statics.countPrize(Prize.FIRST);
     }
 
     public int getCountFifth() {

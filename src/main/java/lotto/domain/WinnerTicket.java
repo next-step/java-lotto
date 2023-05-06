@@ -1,14 +1,21 @@
 package lotto.domain;
 
-import java.util.List;
+import lotto.exception.LottoNumberDuplicatedException;
 
 public class WinnerTicket {
     private final Ticket ticket;
-    private final Integer bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinnerTicket(Ticket ticket, Integer bonusNumber) {
+    public WinnerTicket(Ticket ticket, LottoNumber bonusNumber) {
         this.ticket = ticket;
+        validateBonus(ticket, bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateBonus(Ticket ticket, LottoNumber bonusNumber) {
+        if (ticket.includeNumber(bonusNumber)) {
+            throw new LottoNumberDuplicatedException();
+        }
     }
 
     public Ticket ticket() {
@@ -19,29 +26,9 @@ public class WinnerTicket {
         return ticket.includeNumber(this.bonusNumber);
     }
 
-    public int countWinner(List<Ticket> challengeTickets, Prize prize) {
-        int count = 0;
-        for (Ticket ticket : challengeTickets) {
-            count = count + (isWinner(ticket, prize) ? 1 : 0);
-        }
-        return count;
-    }
-
-    private boolean isWinner(Ticket challengerTicket, Prize prize) {
-        return matchCount(challengerTicket, prize) && checkBonusCondition(challengerTicket, prize);
-    }
-
-    private boolean checkBonusCondition(Ticket ticket, Prize prize) {
-        if (prize == Prize.SECOND) {
-            return this.includeBonus(ticket);
-        }
-        if (prize == Prize.THIRD) {
-            return !this.includeBonus(ticket);
-        }
-        return true;
-    }
-
-    private boolean matchCount(Ticket ticket, Prize prize) {
-        return prize.isMatch(this.ticket.countMatchNumbers(ticket));
+    public Prize checkLucky(Ticket thatTicket) {
+        int matchCount = this.ticket.countMatchNumbers(thatTicket);
+        boolean containsBonus = thatTicket.includeNumber(bonusNumber);
+        return Prize.calculatePrize(matchCount, containsBonus);
     }
 }
