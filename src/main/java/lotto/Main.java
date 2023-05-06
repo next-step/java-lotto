@@ -13,16 +13,16 @@ public class Main {
         LottoMachine lottoMachine = new LottoMachine(cost);
         ResultView.printNumbersOfLotto(lottoMachine.getNumberOfLotto());
 
-        Lottos lottos = lottoMachine.create(new LottoCreatingRandomStrategy());
+        Lottos lottos = lottoMachine.create();
         ResultView.printLottos(lottos);
 
         ResultView.printWinningNumber();
         String winningNumbers = InputView.inputWinningNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
 
-        LottoResult result = new LottoResult(lottos);
-        LottoStatics statics = new LottoStatics(cost, result.checkWinningNumbers(winningNumbers), new LottoRewardStartAt3Strategy());
+        LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(lottos));
 
-        ResultView.printStatistics(statics.getStatics(), statics.getReward());
+        ResultView.printStatistics(statics.getStatics(), Rank.getCountList());
         ResultView.printLottoRate(statics.getRate());
     }
 }

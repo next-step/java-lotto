@@ -3,8 +3,10 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatics;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 
 import javax.xml.transform.Result;
+import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -29,12 +31,12 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public static void printStatistics(Map<Integer, Integer> statics, Map<Integer, Integer> reward) {
+    public static void printStatistics(Map<Integer, Integer> statics, List<Integer> rewardCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for(int matchNumber: reward.keySet()) {
-            System.out.println(matchNumber + "개 일치 (" + reward.get(matchNumber) + "원)- " + statics.getOrDefault(matchNumber, 0) + "개");
+        for(int count: rewardCount) {
+            System.out.println(count + "개 일치 (" + Rank.of(count) + "원)- " + statics.getOrDefault(count, 0) + "개");
         }
     }
 
