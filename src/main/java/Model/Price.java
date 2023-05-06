@@ -1,5 +1,7 @@
 package Model;
 
+import java.text.DecimalFormat;
+
 public class Price {
     private int price;
 
@@ -10,4 +12,5 @@ public class Price {
     public int getCount(int amount) {
         return amount / this.price;
     }
+
 }

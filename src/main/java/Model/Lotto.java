@@ -27,7 +27,7 @@ public class Lotto {
         addLotto(numbers);
     }
 
-    private void addLotto(ArrayList<Integer> numbers) {
+    public void addLotto(ArrayList<Integer> numbers) {
         for (int i = 0; i < 6; i++) {
             lotto.add(numbers.get(i));
         }

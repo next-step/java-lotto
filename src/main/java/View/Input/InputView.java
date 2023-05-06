@@ -9,18 +9,18 @@ public class InputView {
     public int getInputBuyAmount() {
         System.out.println("구입금액을 입력해 주세요.");
 
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public ArrayList<Integer> inputWinnerLottoNum() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        String[] nums = scanner.next().split(",");
+        String[] nums = scanner.nextLine().split(",");
 
         ArrayList<Integer> numArrayList = new ArrayList<>();
 
         for (String num : nums) {
-            numArrayList.add(Integer.parseInt(num));
+            numArrayList.add(Integer.parseInt(num.trim()));
         }
 
         return numArrayList;

@@ -4,8 +4,6 @@ import Model.*;
 import View.Input.InputView;
 import View.Result.ResultView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class LottoController {
@@ -23,8 +21,7 @@ public class LottoController {
         resultView.resultBuyInputCount(count);
 
         Lotto[] lottos = new Lotto[count];
-        makeLotto(count, lottos);
-
+        makeAutoLotto(count, lottos);
         ResultBoughtLotto(resultView, lottos);
 
         //지난주 당첨번호
@@ -41,8 +38,11 @@ public class LottoController {
         resultGetEndingWinnerMessage(resultView, winnerRule.getWinnerRule(), winngCount.getMapPriceCount());
 
         //당첨된 총 금액
-        int priceSum = getPriceSum(lottos, winngNum.getWinngNum(), winnerRule);
-        resultView.printTotalGross(buyAmount, priceSum);
+        int priceSum = winngCount.sumPrize();
+
+        //수익률
+        Gross gross = new Gross(priceSum, buyAmount);
+        resultView.printTotalGross(gross.getGross());
     }
 
     private static void resultGetEndingWinnerMessage(ResultView resultView, Map<Integer, Integer> mapCountMatchingPrice, Map<Integer, Integer> mapPriceCount) {
@@ -53,18 +53,7 @@ public class LottoController {
         }
     }
 
-    private static int getPriceSum(Lotto[] lottos, ArrayList<Integer> winnerNums, WinnerRule winnerRule) {
-        int priceSum = 0;
-        for (Lotto lotto : lottos) {
-            int price = winnerRule.getWinnerPrice(lotto.getLotto(), winnerNums);
-            if (price > 0) {
-                priceSum += price;
-            }
-        }
-        return priceSum;
-    }
-
-    private static void makeLotto(int count, Lotto[] lottos) {
+    public static void makeAutoLotto(int count, Lotto[] lottos) {
         for (int i = 0; i < count; i++) {
             lottos[i] = new Lotto();
             lottos[i].makeRandomLotto();
@@ -76,4 +65,5 @@ public class LottoController {
             resultView.getLotto(lotto.getLotto());
         }
     }
+
 }
