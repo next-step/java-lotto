@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.domian.Lotto;
 import lotto.domian.LottoNumber;
-import lotto.domian.Record;
+import lotto.domian.Rank;
 import lotto.domian.WinNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class RecordTest {
+public class RankTest {
 
     private WinNumber winNumber;
 
@@ -30,7 +30,7 @@ public class RecordTest {
 
     @DisplayName("1등을 가릴 수 있다.")
     @Test
-    public void record_DependsOnCount_ChooseFirst() {
+    public void rank_DependsOnCount_ChooseFirst() {
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
                 , new LottoNumber(3)
@@ -38,14 +38,14 @@ public class RecordTest {
                 , new LottoNumber(5)
                 , new LottoNumber(6));
         Lotto lotto = new Lotto(lottoNumberList);
-        Record record = Record.find(winNumber.distinguish(lotto));
+        Rank rank = Rank.find(winNumber.distinguish(lotto));
 
-        Assertions.assertThat(Record.FIRST).isEqualTo(record);
+        Assertions.assertThat(Rank.FIRST).isEqualTo(rank);
     }
 
     @DisplayName("2등을 가릴 수 있다.")
     @Test
-    public void record_DependsOnCount_ChooseSecond() {
+    public void rank_DependsOnCount_ChooseSecond() {
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
                 , new LottoNumber(3)
@@ -53,14 +53,14 @@ public class RecordTest {
                 , new LottoNumber(5)
                 , new LottoNumber(7));
         Lotto lotto = new Lotto(lottoNumberList);
-        Record record = Record.find(winNumber.distinguish(lotto));
+        Rank rank = Rank.find(winNumber.distinguish(lotto));
 
-        Assertions.assertThat(Record.SECOND).isEqualTo(record);
+        Assertions.assertThat(Rank.SECOND).isEqualTo(rank);
     }
 
     @DisplayName("3등을 가릴 수 있다.")
     @Test
-    public void record_DependsOnCount_ChooseThird() {
+    public void rank_DependsOnCount_ChooseThird() {
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
                 , new LottoNumber(3)
@@ -68,14 +68,14 @@ public class RecordTest {
                 , new LottoNumber(7)
                 , new LottoNumber(8));
         Lotto lotto = new Lotto(lottoNumberList);
-        Record record = Record.find(winNumber.distinguish(lotto));
+        Rank rank = Rank.find(winNumber.distinguish(lotto));
 
-        Assertions.assertThat(Record.THIRD).isEqualTo(record);
+        Assertions.assertThat(Rank.THIRD).isEqualTo(rank);
     }
 
     @DisplayName("4등을 가릴 수 있다.")
     @Test
-    public void record_DependsOnCount_ChooseFourth() {
+    public void rank_DependsOnCount_ChooseFourth() {
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
                 , new LottoNumber(3)
@@ -83,14 +83,14 @@ public class RecordTest {
                 , new LottoNumber(8)
                 , new LottoNumber(9));
         Lotto lotto = new Lotto(lottoNumberList);
-        Record record = Record.find(winNumber.distinguish(lotto));
+        Rank rank = Rank.find(winNumber.distinguish(lotto));
 
-        Assertions.assertThat(Record.FOURTH).isEqualTo(record);
+        Assertions.assertThat(Rank.FOURTH).isEqualTo(rank);
     }
 
-    @DisplayName("2개 이하를 맞힐 경우 에러가 난다.")
+    @DisplayName("2개 이하를 맞힐 경우 예외가 발생한다.")
     @Test
-    public void record_DependsOnCount_ChooseNothing() {
+    public void rank_DependsOnUnderCount_ThrowException() {
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1)
                 , new LottoNumber(2)
                 , new LottoNumber(7)
@@ -98,8 +98,9 @@ public class RecordTest {
                 , new LottoNumber(9)
                 , new LottoNumber(10));
         Lotto lotto = new Lotto(lottoNumberList);
+
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> Record.find(winNumber.distinguish(lotto)));
+                .isThrownBy(() -> Rank.find(winNumber.distinguish(lotto)));
     }
 
 }

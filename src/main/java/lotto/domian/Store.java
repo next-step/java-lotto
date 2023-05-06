@@ -1,8 +1,6 @@
 package lotto.domian;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -14,6 +12,29 @@ public class Store {
 
     public static LottoBundle order(Money money) {
         return createLotto(decideCount(money));
+    }
+
+    public static Lotto pickWinNumber(String answerNumbers) {
+        String[] splitedNumbers = splitNumbers(answerNumbers);
+        List<Integer> numberList = getIntegers(splitedNumbers);
+        return new Lotto(makeLottoNumber(numberList));
+    }
+
+    public static Record extract(LottoBundle lottoBundle, WinNumber winNumber) {
+        Map<Rank, Integer> rankMap = new HashMap<>();
+        List<Lotto> lottoList = lottoBundle.unfoldLottoBundle();
+        for (Lotto lotto : lottoList) {
+            int matchingCount = winNumber.distinguish(lotto);
+            putRankMap(matchingCount, rankMap);
+        }
+        return new Record(rankMap);
+    }
+
+    private static void putRankMap(int matchingCount, Map<Rank, Integer> rankMap) {
+        if (matchingCount >= 3) {
+            Rank rank = Rank.find(matchingCount);
+            rankMap.put(rank, rankMap.getOrDefault(rank, 0) + 1);
+        }
     }
 
     private static LottoBundle createLotto(int count) {
@@ -45,12 +66,6 @@ public class Store {
         return IntStream.range(1, 45)
                 .boxed()
                 .collect(Collectors.toList());
-    }
-
-    public static Lotto pickWinNumber(String answerNumbers) {
-        String[] splitedNumbers = splitNumbers(answerNumbers);
-        List<Integer> numberList = getIntegers(splitedNumbers);
-        return new Lotto(makeLottoNumber(numberList));
     }
 
     private static List<Integer> getIntegers(String[] splitedNumbers) {

@@ -11,6 +11,7 @@ public class LottoApplicationMain {
         LottoBundle bundle = Store.order(new Money(purchaseMoney));
         OutputView.showLottoBundle(bundle);
         WinNumber winNumber = new WinNumber(Store.pickWinNumber(InputView.questionWinnerNumber()));
+        
     }
 
 }

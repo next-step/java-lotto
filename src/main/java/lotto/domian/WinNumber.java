@@ -10,9 +10,9 @@ public class WinNumber {
 
     public int distinguish(Lotto lotto) {
         return Long.valueOf(lotto.getLottoNumber()
-                .stream()
-                .filter(lottoNumber -> winnNumber.getLottoNumber().contains(lottoNumber))
-                .count())
+                        .stream()
+                        .filter(lottoNumber -> winnNumber.getLottoNumber().contains(lottoNumber))
+                        .count())
                 .intValue();
     }
 
