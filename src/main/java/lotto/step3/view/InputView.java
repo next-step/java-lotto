@@ -35,12 +35,9 @@ public class InputView {
         Set<Integer> winningNumbers = Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
-        return new WinningNumbers(winningNumbers);
-    }
-
-    public BonusNumber inputBonusNumber(WinningNumbers winningNumbers) {
         System.out.println(TEXT_BONUS_NUMBER);
         int bonusNumber = SCANNER.nextInt();
-        return new BonusNumber(bonusNumber, winningNumbers);
+
+        return new WinningNumbers(winningNumbers, bonusNumber);
     }
 }

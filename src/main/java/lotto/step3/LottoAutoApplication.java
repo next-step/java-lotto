@@ -1,7 +1,7 @@
 package lotto.step3;
 
 import lotto.step3.domain.*;
-import lotto.step3.enums.MatchNumber;
+import lotto.step3.enums.Rank;
 import lotto.step3.view.InputView;
 import lotto.step3.view.ResultView;
 
@@ -15,10 +15,8 @@ public class LottoAutoApplication {
         ResultView.printLottos(lottos);
 
         WinningNumbers winningNumbers = inputView.inputWinningNumbers();
-        BonusNumber bonusNumber = inputView.inputBonusNumber(winningNumbers);
 
-
-        Result result = new Result(winningNumbers.getWinnerStat(lottos, bonusNumber.getBonusNumber()));
-        ResultView.printWinnerStat(result, MatchNumber.getTotalReturnResult(result, lottoCount.getPrice()));
+        Result result = winningNumbers.getWinnerStat(lottos);
+        ResultView.printWinnerStat(result, Rank.getTotalReturnResult(result, lottoCount.getPrice()));
     }
 }

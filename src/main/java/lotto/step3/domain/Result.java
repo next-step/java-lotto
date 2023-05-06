@@ -1,19 +1,19 @@
 package lotto.step3.domain;
 
-import lotto.step3.enums.MatchNumber;
+import lotto.step3.enums.Rank;
 
 import java.util.Map;
 
 public class Result {
-    private Map<MatchNumber, Integer> stat;
+    private Map<Rank, Long> stat;
 
     private static final double PERCENTAGE = 100.0;
 
-    public Result(Map<MatchNumber, Integer> stat) {
+    public Result(Map<Rank, Long> stat) {
         this.stat = stat;
     }
 
-    public Map<MatchNumber, Integer> getStat() {
+    public Map<Rank, Long> getStat() {
         return stat;
     }
 
@@ -27,7 +27,7 @@ public class Result {
 
     private long sum() {
         return stat.keySet().stream()
-                .mapToInt(m -> m.getMatchPrize() * stat.get(m))
+                .mapToLong(m -> m.getPrize() * stat.get(m))
                 .sum();
     }
 }

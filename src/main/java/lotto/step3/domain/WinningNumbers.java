@@ -1,73 +1,64 @@
 package lotto.step3.domain;
 
-import lotto.step3.enums.MatchNumber;
+import lotto.step3.enums.Rank;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinningNumbers {
+public class WinningNumbers extends ValidateNumbers {
     private final Set<Integer> winningNumbers;
+    private final int bonusNumber;
     private static final int SECOND_POSITION = 5;
 
     public Set<Integer> getWinningNumbers() {
         return Set.copyOf(winningNumbers);
     }
 
-    public WinningNumbers(Set<Integer> winningNumbers) {
-        this.winningNumbers = validateWinningNumbers(winningNumbers);
+    public WinningNumbers(Set<Integer> winningNumbers, int bonusNumber) {
+        this.winningNumbers = validateNumbers(winningNumbers);
+        this.bonusNumber = validateBonusNumber(bonusNumber, winningNumbers);
     }
 
-    private Set<Integer> validateWinningNumbers(Set<Integer> winningNumbers) {
-        if (size(winningNumbers)) {
-            throw new IllegalArgumentException("당첨 번호는 6개만 가능합니다.");
-        }
-        if (isInRange(winningNumbers)) {
-            throw new IllegalArgumentException("당첨 번호는 1 ~ 45까지만 가능합니다.");
-        }
-        return winningNumbers;
-    }
 
-    private boolean size(Set<Integer> winningNumbers) {
-        return winningNumbers.size() != 6;
-    }
+    public Result getWinnerStat(Lottos lottos) {
+        Map<Integer, Long> rankMap = lottos.getLottos().stream()
+                .map(this::matchLotto)
+                .map(this::matchRank)
+                .collect(Collectors.groupingBy(i -> i, Collectors.counting()));
 
-    private boolean isInRange(Set<Integer> winningNumbers) {
-        return Collections.max(winningNumbers) > 45 || Collections.min(winningNumbers) < 1;
-    }
-
-    public Map<MatchNumber, Integer> getWinnerStat(Lottos lottos, int bonusNumber) {
-        Map<Integer, List<List<Integer>>> resultMap = lottos.getLottos().stream()
-                .filter(lotto -> lotto.getLotto().stream().anyMatch(winningNumbers::contains))
-                .map(Lotto::getLotto)
-                .collect(Collectors.groupingBy(lotto -> (int) lotto.stream().filter(winningNumbers::contains).count()));
-
-        return resultMap.entrySet().stream()
-                .filter(e -> MatchNumber.isMatchedSize(e.getKey()).isPresent())
+        Map<Rank, Long> stat = rankMap.entrySet().stream()
                 .collect(Collectors.toMap(
-                        entry -> {
-                            MatchNumber match = MatchNumber.isMatchedSize(entry.getKey()).get();
-                            return makeMatchKey(match, entry, bonusNumber);
-                        },
-                        entry -> getWinnerNumber(entry, bonusNumber)
+                        e -> Rank.of(e.getKey()).get(),
+                        Map.Entry::getValue
                 ));
+
+        return new Result(stat);
     }
 
-    private MatchNumber makeMatchKey(MatchNumber match, Map.Entry<Integer, List<List<Integer>>> entry, int bonusNumber) {
-        int matchKey = entry.getKey();
-        List<List<Integer>> lotto = entry.getValue();
-        if (matchKey == SECOND_POSITION && lotto.stream().anyMatch(l -> l.contains(bonusNumber))) {
-            return MatchNumber.SECOND;
-        }
-        return match;
+    private Map<Integer, Boolean> matchLotto(Lotto lotto) {
+        Map<Integer, Boolean> map = new HashMap<>();
+        int matchCount = (int) lotto.getLotto().stream().filter(winningNumbers::contains).count();
+        boolean matchBonus = lotto.getLotto().contains(bonusNumber);
+        map.put(matchCount, matchBonus);
+        return map;
     }
 
-    private int getWinnerNumber(Map.Entry<Integer, List<List<Integer>>> entry, int bonusNumber) {
-        int matchKey = entry.getKey();
-        List<List<Integer>> lotto = entry.getValue();
-        if (matchKey == SECOND_POSITION) {
-            int secondPositionSize = (int) lotto.stream().filter(l -> l.contains(bonusNumber)).count();
-            return secondPositionSize == lotto.size() ? lotto.size() : lotto.size() - secondPositionSize;
+    private int matchRank(Map<Integer, Boolean> matchMap) {
+        for (Map.Entry<Integer, Boolean> entry : matchMap.entrySet()) {
+            int matchCount = entry.getKey();
+            boolean matchBonus = entry.getValue();
+            if (matchCount == 6) {
+                return 1;
+            }
+            if (matchCount == 5 && matchBonus) {
+                return 2;
+            }
+            if (matchCount > 2) {
+                return 6 - matchCount + 2;
+            }
         }
-        return lotto.size();
+        return 0;
     }
 }

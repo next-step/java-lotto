@@ -13,12 +13,12 @@ public class Fixture {
     public static final int bonusNumber = 7;
 
     static class TestLotto extends Lotto {
-        public TestLotto(List<Integer> lotto) {
+        public TestLotto(Set<Integer> lotto) {
             super(lotto);
         }
 
         public static Lotto of(Integer... numbers) {
-            return new Lotto(Arrays.stream(numbers).collect(Collectors.toList()));
+            return new Lotto(Arrays.stream(numbers).collect(Collectors.toSet()));
         }
     }
 }

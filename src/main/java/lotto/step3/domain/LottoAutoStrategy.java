@@ -19,6 +19,6 @@ public class LottoAutoStrategy implements LottoStrategy {
         return new Lotto(lottoList.subList(0, LOTTO_NUMBER)
                 .stream()
                 .sorted()
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 }
