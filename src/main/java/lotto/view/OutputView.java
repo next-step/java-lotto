@@ -3,16 +3,17 @@ package lotto.view;
 import java.util.Map;
 import lotto.domain.Rank;
 import lotto.domain.WinningPercent;
+import lotto.domain.WinningResult;
 
 public class OutputView {
 
     private OutputView() {}
 
-    public static void printRanking(Map<Rank, Integer> result, int amount) {
+    public static void printRanking(WinningResult result, int amount) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        printRank(result);
-        System.out.println("총 수익률은 " + calculatedWinningPercent(result, amount) + "입니다.");
+        printRank(result.result());
+        System.out.println("총 수익률은 " + calculatedWinningPercent(result.result(), amount) + "입니다.");
     }
 
     private static void printRank(Map<Rank, Integer> result) {

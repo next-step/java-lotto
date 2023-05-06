@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Map;
 import java.util.Objects;
 
 public enum Rank {
@@ -40,14 +41,19 @@ public enum Rank {
             return Objects.hash(matchCount, bonusMatch);
         }
 
-        public static Match clone(Match match) {
-            return new Match(match.matchCount, match.bonusMatch);
-        }
     }
 
-    private Match match;
+    public static final Map<Match, Rank> RANK_BY_MATCH = Map.of(
+        FIRST_GRADE.match, FIRST_GRADE,
+        SECOND_GRADE.match, SECOND_GRADE,
+        THIRD_GRADE.match, THIRD_GRADE,
+        FOURTH_GRADE.match, FOURTH_GRADE,
+        FIFTH_GRADE.match, FIFTH_GRADE
+    );
 
-    private int amount;
+    private final Match match;
+
+    private final int amount;
 
     Rank(Match match, int amount) {
         this.match = match;
@@ -62,7 +68,7 @@ public enum Rank {
         return amount;
     }
 
-    public boolean isMatchCount(int count) {
+    public boolean isBonusMatchCount(int count) {
         return match.bonusMatch && match.matchCount == count;
     }
 
@@ -70,8 +76,12 @@ public enum Rank {
         return match.bonusMatch;
     }
 
-    public Match match() {
-        return Match.clone(match);
+    public static boolean isWinning(int winningCount, boolean isBonusMatch) {
+        return RANK_BY_MATCH.containsKey(Match.of(winningCount, isBonusMatch));
+    }
+
+    public static Rank of(int winningCount, boolean isBonusMatch) {
+        return RANK_BY_MATCH.get(Match.of(winningCount, isBonusMatch));
     }
 
 }
