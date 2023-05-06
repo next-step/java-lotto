@@ -22,7 +22,7 @@ public class WinningNumbersTest {
         List<LottoNumber> winning = List.of(new LottoNumber(1), new LottoNumber(2),
             new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         WinningNumbers winningNumbers = new WinningNumbers(winning, new LottoNumber(8));
-        Map<Rank, Integer> result = winningNumbers.winningResult(new Lottos(lottos)).result();
+        Map<Rank, Integer> result = WinningResult.of(winningNumbers, new Lottos(lottos)).result();
 
         assertAll(
             () -> assertThat(result.keySet()).containsExactlyInAnyOrder(Rank.FIFTH_GRADE, Rank.FOURTH_GRADE,
@@ -46,7 +46,7 @@ public class WinningNumbersTest {
         List<LottoNumber> winning = List.of(new LottoNumber(1), new LottoNumber(2),
             new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         WinningNumbers winningNumbers = new WinningNumbers(winning, new LottoNumber(7));
-        Map<Rank, Integer> result = winningNumbers.winningResult(new Lottos(lottos)).result();
+        Map<Rank, Integer> result = WinningResult.of(winningNumbers, new Lottos(lottos)).result();
 
         assertAll(
             () -> assertThat(result.keySet()).containsExactlyInAnyOrder(Rank.FIFTH_GRADE, Rank.FOURTH_GRADE,
@@ -108,7 +108,7 @@ public class WinningNumbersTest {
         List<LottoNumber> winning = List.of(new LottoNumber(1), new LottoNumber(2),
             new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         WinningNumbers winningNumbers = new WinningNumbers(winning, new LottoNumber(7));
-        Map<Rank, Integer> result = winningNumbers.winningResult(new Lottos(lottos)).result();
+        Map<Rank, Integer> result = WinningResult.of(winningNumbers, new Lottos(lottos)).result();
 
         assertAll(
             () -> assertThat(result.keySet()).containsExactlyInAnyOrder(Rank.FIFTH_GRADE, Rank.FOURTH_GRADE,

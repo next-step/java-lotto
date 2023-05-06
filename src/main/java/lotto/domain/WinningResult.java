@@ -24,7 +24,13 @@ public class WinningResult {
         return new WinningResult(map);
     }
 
-    public static WinningResult ofDefault() {
+    public static WinningResult of(WinningNumbers winningNumbers, Lottos lottos) {
+        WinningResult result = ofDefault();
+        result.matchLottos(winningNumbers, lottos);
+        return result;
+    }
+
+    private static WinningResult ofDefault() {
         return new WinningResult(new EnumMap<>(WinningResult.DEFAULT_RANKING_COUNTS));
     }
 

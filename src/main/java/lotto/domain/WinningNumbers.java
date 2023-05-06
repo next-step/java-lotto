@@ -68,12 +68,6 @@ public class WinningNumbers {
         return lottoNumbers;
     }
 
-    public WinningResult winningResult(Lottos lottos) {
-        WinningResult result = WinningResult.ofDefault();
-        result.matchLottos(this, lottos);
-        return result;
-    }
-
     public LottoNumber bonus() {
         return new LottoNumber(bonus.value());
     }

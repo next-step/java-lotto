@@ -30,7 +30,7 @@ public class LottoApplication {
         InputView.printPurchaseComplete(lottos);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers(), InputView.askBonusNumber());
-        WinningResult result = winningNumbers.winningResult(lottos);
+        WinningResult result = WinningResult.of(winningNumbers, lottos);
 
         OutputView.printRanking(result, amount);
     }
