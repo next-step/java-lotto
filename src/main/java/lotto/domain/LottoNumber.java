@@ -43,25 +43,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new ArrayList<>(lottoNumberRepository.keySet());
     }
 
-    public static boolean isCorrectRange(LottoNumber lottoNumber) {
-
-        LottoNumber beginOfLottoNumber = lottoNumberRepository.get(BEGIN_OF_LOTTO_NUMBER);
-
-        if (Objects.isNull(lottoNumber)) {
-            return Boolean.FALSE;
-        }
-
-        if (lottoNumber.hashCode() < beginOfLottoNumber.hashCode()) {
-            return Boolean.FALSE;
-        }
-
-        LottoNumber endOfLottoNumber = lottoNumberRepository.get(END_OF_LOTTO_NUMBER);
-
-        return lottoNumber.hashCode() <= endOfLottoNumber.hashCode();
-    }
-
     public boolean isSameLottoNumber(LottoNumber leftOperand) {
-        return leftOperand == this;
+        return this.equals(leftOperand);
     }
 
     @Override

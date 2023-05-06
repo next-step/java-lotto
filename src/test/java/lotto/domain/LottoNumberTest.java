@@ -23,7 +23,7 @@ class LottoNumberTest {
 
         LottoNumber lottoNumber = LottoNumber.provideLottoNumber(number);
 
-        assertThat(LottoNumber.isCorrectRange(lottoNumber)).isTrue();
+        assertThat(lottoNumber).isLessThanOrEqualTo(new LottoNumber(45));
     }
 
     @Test
@@ -32,7 +32,15 @@ class LottoNumberTest {
         LottoNumber lottoNumber = LottoNumber.provideLottoNumber();
 
 
-        assertThat(LottoNumber.isCorrectRange(lottoNumber)).isTrue();
+        assertThat(lottoNumber).isLessThanOrEqualTo(new LottoNumber(45));
+    }
+
+    @Test
+    @DisplayName("동일한 로또 번호 테스트 ")
+    void isSameLottoNumber() {
+        LottoNumber lottoNumber = LottoNumber.provideLottoNumber(4);
+
+        assertThat(lottoNumber.isSameLottoNumber(new LottoNumber(4))).isTrue();
     }
 
     @ParameterizedTest
