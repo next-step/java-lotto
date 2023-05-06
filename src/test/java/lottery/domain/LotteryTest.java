@@ -18,9 +18,6 @@ import org.junit.jupiter.api.Test;
 
 public class LotteryTest {
 
-    private static final RandomNumberGenerator RANDOM_NUMBER_GENERATOR =
-            new RandomNumberGenerator();
-
     private static final Set<LotteryNumber> LOTTERY_NUMBERS =
             new HashSet<>(Arrays.asList(new LotteryNumber(1),
                     new LotteryNumber(2),
