@@ -10,6 +10,9 @@ public class StringCalculator {
     private static final String NUMBER_REGEX = "\\d+";
 
     public static int calculate(String input) {
+        if (input == null || input.equals("")) {
+            throw new IllegalArgumentException("빈 값을 입력할 수 없습니다.");
+        }
         List<Integer> numbers = toInts(getCharacters(input, NUMBER_REGEX));
         List<String> operations = getCharacters(input, OPERATION_REGEX);
         int result = numbers.get(0);
