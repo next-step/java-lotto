@@ -1,8 +1,11 @@
-package lotto.domain;
+package lotto.util;
 
 import java.util.Arrays;
 
 public class StringConcatenater {
+    private StringConcatenater() {
+    }
+
     public static String concatStrings(String... strings) {
         StringBuilder stringBuilder = new StringBuilder();
         Arrays.stream(strings)
