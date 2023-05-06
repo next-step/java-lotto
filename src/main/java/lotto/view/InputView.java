@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class InputView {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final int BEGIN_INDEX = 0;
     private static final String SEPARATOR = ", ";
 
     private final Scanner scanner = new Scanner(System.in);

@@ -20,10 +20,11 @@ public class Main {
 
         ResultView.printLottos(lottos);
 
-        Lotto winningLotto = inputView.inputWinningLotto();
-        LottoNumber bonusLottoNumber = inputView.inputBonusLottoNumber(winningLotto);
+        Lotto winningLottoExcludeBonus = inputView.inputWinningLotto();
+        LottoNumber bonusLottoNumber = inputView.inputBonusLottoNumber(winningLottoExcludeBonus);
+        WinningLotto winningLotto = new WinningLotto(winningLottoExcludeBonus, bonusLottoNumber);
 
-        LottoRewards lottoRewards = LottoGame.reward(lottos, winningLotto(winningLotto, bonusLottoNumber));
+        LottoRewards lottoRewards = LottoGame.reward(lottos, winningLotto);
         double totalProfitRate = LottoGame.totalProfitRate(lottoRewards, purchasePrice);
 
         ResultView.printWinningStatics(lottoRewards, totalProfitRate);
@@ -31,7 +32,4 @@ public class Main {
         inputView.close();
     }
 
-    private static WinningLotto winningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        return new WinningLotto(winningLotto, bonusLottoNumber);
-    }
 }
