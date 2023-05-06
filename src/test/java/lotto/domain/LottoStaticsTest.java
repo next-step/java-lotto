@@ -23,7 +23,7 @@ public class LottoStaticsTest {
 
         LottoStatics statics = new LottoStatics(5000, result);
 
-        assertThat(statics.getStatics()).isEqualTo(expected);
+        assertThat(statics.getStatistics()).isEqualTo(expected);
     }
 
     @Test

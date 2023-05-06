@@ -1,11 +1,9 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoStatics;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
-import javax.xml.transform.Result;
 import java.util.List;
 import java.util.Map;
 

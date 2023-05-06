@@ -22,7 +22,7 @@ public class Main {
 
         LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(lottos));
 
-        ResultView.printStatistics(statics.getStatics(), Rank.getCountList());
+        ResultView.printStatistics(statics.getStatistics(), Rank.getCountList());
         ResultView.printLottoRate(statics.getRate());
     }
 }

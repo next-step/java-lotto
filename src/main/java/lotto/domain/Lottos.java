@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-
     private List<Lotto> lottos;
 
     public Lottos(int numberOfLotto) {
@@ -19,10 +18,7 @@ public class Lottos {
     }
 
     private List<Lotto> createLottos(int numberOfLotto) {
-        List<Lotto> lottos = new ArrayList<>();
-        IntStream.range(1, numberOfLotto).forEach(lotto -> lottos.add(create()));
-
-        return lottos;
+        return IntStream.range(1, numberOfLotto).boxed().map(lotto -> create()).collect(Collectors.toList());
     }
 
     private Lotto create() {
@@ -30,9 +26,7 @@ public class Lottos {
     }
 
     public List<Integer> matchesLottos(Lotto winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.matchesNumber(winningLotto))
-                .collect(Collectors.toList());
+        return lottos.stream().map(lotto -> lotto.matchesNumber(winningLotto)).collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {
@@ -41,9 +35,7 @@ public class Lottos {
 
     @Override
     public String toString() {
-        return lottos.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining());
+        return lottos.stream().map(String::valueOf).collect(Collectors.joining());
     }
 
     @Override

@@ -17,7 +17,7 @@ public class LottoTest {
 
     @Test
     @DisplayName("로또 번호 확인")
-    void lessThanZero() {
+    void lessThanZero_exception() {
         String number = "-1, 2, 3, 4, 5, 6";
         assertThatThrownBy(() -> {
             LottoFactory.createManualLotto(number);
@@ -25,7 +25,7 @@ public class LottoTest {
     }
     @Test
     @DisplayName("로또 번호 확인")
-    void moreThan45() {
+    void moreThan45_exception() {
         String number = "45, 47, 3, 4, 5, 6";
         assertThatThrownBy(() -> {
             LottoFactory.createManualLotto(number);

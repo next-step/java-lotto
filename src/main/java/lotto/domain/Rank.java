@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,11 +22,11 @@ public enum Rank {
         this.reward = reward;
     }
 
-    int count() {
+    public int count() {
         return count;
     }
 
-    int reward() {
+    public int reward() {
         return reward;
     }
 
