@@ -4,10 +4,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -38,11 +35,6 @@ public class OutputView {
         System.out.println("총 수익률은 " + calculateReturnRate(purchaseAmount, lottoResult) + "입니다.");
     }
 
-    private static void printMatchMessage(Rank rank, LottoResult lottoResult) {
-        String message = MATCH_MESSAGES.get(rank);
-        System.out.println(message + lottoResult.findRankCount(rank.getCountOfMatch(), rank == Rank.SECOND) + "개");
-    }
-
     public static Double calculateReturnRate(int purchaseAmount, LottoResult lottoResult) {
         double profits = 0;
 
@@ -50,6 +42,12 @@ public class OutputView {
             profits += lottoResult.findRankCount(rank.getCountOfMatch(), rank == Rank.SECOND) * rank.getWinningMoney();
         }
 
-        return profits / purchaseAmount;
+        return Math.round(profits / purchaseAmount * 100) / 100.0;
     }
+
+    private static void printMatchMessage(Rank rank, LottoResult lottoResult) {
+        String message = MATCH_MESSAGES.get(rank);
+        System.out.println(message + lottoResult.findRankCount(rank.getCountOfMatch(), rank == Rank.SECOND) + "개");
+    }
+
 }
