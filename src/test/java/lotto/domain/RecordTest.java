@@ -88,4 +88,18 @@ public class RecordTest {
         Assertions.assertThat(Record.FOURTH).isEqualTo(record);
     }
 
+    @DisplayName("2개 이하를 맞힐 경우 에러가 난다.")
+    @Test
+    public void record_DependsOnCount_ChooseNothing() {
+        List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1)
+                , new LottoNumber(2)
+                , new LottoNumber(7)
+                , new LottoNumber(8)
+                , new LottoNumber(9)
+                , new LottoNumber(10));
+        Lotto lotto = new Lotto(lottoNumberList);
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> Record.find(winNumber.distinguish(lotto)));
+    }
+
 }
