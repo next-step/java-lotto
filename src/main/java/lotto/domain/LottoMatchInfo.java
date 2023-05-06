@@ -19,16 +19,6 @@ public class LottoMatchInfo {
         return bonusMatch;
     }
 
-    public static LottoMatchInfo countMatchingNumbers(LottoNumber lottoNumber, List<Integer> winningNumbers) {
-        List<Integer> numbers = lottoNumber.getNumbers();
-
-        int count = (int) numbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
-
-        return new LottoMatchInfo(count, false);
-    }
-
     public static LottoMatchInfo countMatchingNumbers(LottoNumber lottoNumber, List<Integer> winningNumbers, int bonusNumber) {
         List<Integer> numbers = lottoNumber.getNumbers();
 
