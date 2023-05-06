@@ -53,24 +53,4 @@ class LottoNumberTest {
                 .withMessage("로또 번호 범위가 아니에요 :(");
 
     }
-
-    @Test
-    @DisplayName("로또 번호 자동 생성 테스트(번호 범위 1~45)")
-    void autoCreateLottoNumber(){
-        assertThat(LottoNumber.createLottoNumber()).isEqualTo(new LottoNumber(1));
-    }
-
-    @Test
-    @DisplayName("로또 번호 자동 생성 테스트(번호 범위 1~45)")
-    void autoCreateLottoNumber(){
-        assertThat(LottoNumber.createLottoNumber()).isEqualTo(new LottoNumber(1));
-    }
-
-    @Test
-    @DisplayName("로또 번호 자동 생성 테스트(번호 범위 1~45)")
-    void autoCreateLottoNumber(){
-        assertThat(LottoNumber.createLottoNumber()).isEqualTo(new LottoNumber(1));
-    }
-
-
 }
