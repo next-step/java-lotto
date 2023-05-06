@@ -8,7 +8,7 @@ public class LottoAmountTest {
 
     @Test
     void 로또금액생성() {
-        assertThat(new LottoAmount(1000)).isEqualTo(new LottoAmount(1000));
+        assertThat(LottoAmount.of(1000)).isEqualTo(LottoAmount.of(1000));
     }
 
 }
