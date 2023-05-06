@@ -45,6 +45,7 @@ public class PurchaseNumberTest {
     @Test
     void 당첨_번호와_일치하는_개수를_리스트로_반환한다() {
 
+        // given
         List<List<Integer>> numbers = asList(
                 asList(1, 2, 3, 4, 5, 6),
                 asList(2, 3 ,4, 5, 6, 7),
@@ -57,8 +58,10 @@ public class PurchaseNumberTest {
         int bonusNumber = 7;
         WinningNumber lottoNumber = WinningNumber.generate(winningNumbers, bonusNumber);
 
+        // when
         List<Match> result = purchaseNumbers.countNumber(lottoNumber);
 
+        // then
         assertThat(result).hasSize(4);
         assertThat(result).contains(
                 Match.from(3, false),
