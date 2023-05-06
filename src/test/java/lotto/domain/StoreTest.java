@@ -44,7 +44,7 @@ public class StoreTest {
         String winNumberString = "1, 2, 3, 4, 5, 6";
         WinNumber winNumber = new WinNumber(Store.pickWinNumber(winNumberString));
 
-        Record record = Store.extract(lottoBundle, winNumber);
+        Record record = Store.extractRecord(lottoBundle, winNumber);
         Assertions.assertThat(record.getRecord().get(Rank.FIRST)).isEqualTo(1);
         Assertions.assertThat(record.getRecord().get(Rank.SECOND)).isEqualTo(1);
     }

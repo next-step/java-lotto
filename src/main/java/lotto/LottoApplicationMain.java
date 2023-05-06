@@ -8,10 +8,10 @@ public class LottoApplicationMain {
 
     public static void main(String[] args) {
         int purchaseMoney = InputView.questionOrder();
-        LottoBundle bundle = Store.order(new Money(purchaseMoney));
-        OutputView.showLottoBundle(bundle);
+        LottoBundle lottoBundle = Store.order(new Money(purchaseMoney));
+        OutputView.showLottoBundle(lottoBundle);
         WinNumber winNumber = new WinNumber(Store.pickWinNumber(InputView.questionWinnerNumber()));
-        
+        Record record = Store.extractRecord(lottoBundle, winNumber);
+        OutputView.showRecord(record);
     }
-
 }

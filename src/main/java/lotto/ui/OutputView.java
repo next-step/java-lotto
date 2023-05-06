@@ -2,12 +2,13 @@ package lotto.ui;
 
 import lotto.domian.Lotto;
 import lotto.domian.LottoBundle;
-import lotto.domian.LottoNumber;
+import lotto.domian.Rank;
+import lotto.domian.Record;
 
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class OutputView {
 
@@ -18,6 +19,21 @@ public class OutputView {
                     showLottoNumber(lotto);
                 });
         System.out.println();
+    }
+
+    public static void showRecord(Record record) {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        printEachRank(record);
+    }
+
+    private static void printEachRank(Record record) {
+        Arrays.stream(Rank.values())
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> {
+                    System.out.println(rank.getMatchingCount() + "개 일치 (" + rank.getPrize() + ")- " + record.getRecord().getOrDefault(rank, 0) + "개");
+                });
     }
 
     private static void showLottoNumber(Lotto lotto) {

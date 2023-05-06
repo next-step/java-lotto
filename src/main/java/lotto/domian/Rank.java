@@ -11,11 +11,11 @@ public enum Rank {
     ;
 
     private int matchingCount;
-    private int money;
+    private int prize;
 
-    Rank(int matchingCount, int money) {
+    Rank(int matchingCount, int prize) {
         this.matchingCount = matchingCount;
-        this.money = money;
+        this.prize = prize;
     }
 
     public static Rank find(int matchingCount) {
@@ -27,5 +27,12 @@ public enum Rank {
                 });
     }
 
+    public int getMatchingCount() {
+        return matchingCount;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
 
 }
