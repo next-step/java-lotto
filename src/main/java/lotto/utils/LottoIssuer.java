@@ -5,6 +5,8 @@ import lotto.domain.Lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static lotto.domain.Lotto.LOTTO_SIZE;
 import static lotto.domain.LottoNumber.LOTTO_NUMBER_MAX;
@@ -13,14 +15,10 @@ import static lotto.domain.LottoNumber.LOTTO_NUMBER_MIN;
 public class LottoIssuer {
 
     private static final int BEGIN_INDEX = 0;
-    private static List<Integer> allNumbers = new ArrayList<>();
-
-    static {
-        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
-            allNumbers.add(i);
-        }
-    }
-
+    private static List<Integer> allNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
+            .boxed()
+            .collect(Collectors.toList());
+    
     public static List<Lotto> issueLottos(long lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = BEGIN_INDEX; i < lottoCount; i++) {
