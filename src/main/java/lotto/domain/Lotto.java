@@ -13,7 +13,7 @@ public class Lotto {
     private static final int INIT_COUNT = 1;
 
     private final Set<LottoNumber> numbers;
-    
+
     public Lotto(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new RuntimeException("로또 번호의 개수는 6개여야 합니다.");
@@ -64,7 +64,7 @@ public class Lotto {
         return matchLotto.size();
     }
 
-    private boolean isMatchWith(LottoNumber number) {
+    boolean isMatchWith(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
