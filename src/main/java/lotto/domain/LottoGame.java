@@ -5,8 +5,8 @@ import java.util.List;
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
-    
-    public static long reward(int matchCount) {
+
+    static long reward(int matchCount) {
         return RewardType.of(matchCount).reward();
     }
 
