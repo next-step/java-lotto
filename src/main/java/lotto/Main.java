@@ -20,8 +20,8 @@ public class Main {
 
         ResultView.printLottos(lottos);
 
-        Lotto winningLotto = LottoGame.winningLotto(inputView.inputWinningLotto());
-        LottoNumber bonusLottoNumber = LottoGame.bonusLottoNumber(inputView.inputBonusLottoNumber(winningLotto));
+        Lotto winningLotto = inputView.inputWinningLotto();
+        LottoNumber bonusLottoNumber = inputView.inputBonusLottoNumber(winningLotto);
 
         LottoRewards lottoRewards = LottoGame.reward(lottos, winningLotto(winningLotto, bonusLottoNumber));
         double totalProfitRate = LottoGame.totalProfitRate(lottoRewards, purchasePrice);

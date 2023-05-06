@@ -21,8 +21,21 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public Lotto(String[] before) {
+        this(changeDataType(before));
+    }
+
     public Lotto(List<Integer> before) {
         this(changeDataType(before));
+    }
+
+    private static Set<LottoNumber> changeDataType(String[] before) {
+        Set<LottoNumber> numbers = new HashSet<>();
+
+        for (String s : before) {
+            numbers.add(new LottoNumber(s));
+        }
+        return numbers;
     }
 
     private static Set<LottoNumber> changeDataType(List<Integer> before) {

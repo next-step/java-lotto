@@ -9,6 +9,10 @@ public class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
+    }
+
     public LottoNumber(int number) {
         if (isNotValidLottoNumber(number)) {
             throw new IllegalArgumentException("로또 번호는 1에서 45사이의 숫자여야 합니다.");
