@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.strategy.LottoTicketCreateStrategy;
+
 import lotto.enums.Rank;
 
 import java.util.Collections;
@@ -10,10 +10,9 @@ import java.util.Set;
 
 public class LottoTicket {
     private static int TICKET_LIMIT = 6;
-    private static int SECOND_PLACE_COUNT = 5;
     private static int TICKET_MIN_NUMBER = 1;
     private static int TICKET_MAX_NUMBER = 45;
-    Set<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
         validateTicketSize(lottoNumbers);
@@ -34,29 +33,11 @@ public class LottoTicket {
         }
     }
 
-    public static LottoTicket of(LottoTicketCreateStrategy strategy) {
-        return new LottoTicket(strategy.getLottoNumbers());
-    }
-
-    public int countSameNumber(List<Integer> target) {
-        return (int) target.stream()
-                .filter(this.lottoNumbers::contains)
-                .count();
-    }
-
-    public boolean isContainNumber(int number) {
-        return lottoNumbers.contains(number);
-    }
-
-    public Rank getRank(List<Integer> winningNumbers, int bonusBall) {
-        return Rank.of(countSameNumber(winningNumbers), isBonusWin(winningNumbers, bonusBall));
+    public Rank getRank(Win win) {
+        return win.getRank(this.getLottoNumbers());
     }
 
     public Set<Integer> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
-    }
-
-    public boolean isBonusWin(List<Integer> winningNumbers, int bonusBall) {
-        return countSameNumber(winningNumbers) == SECOND_PLACE_COUNT && isContainNumber(bonusBall);
     }
 }
