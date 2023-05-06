@@ -51,13 +51,9 @@ public class Lotto {
         if (isNotWinningMatchCountWith(winningLotto.numbers())) {
             return;
         }
-
         int matchCount = matchCount(winningLotto.numbers());
-        RewardType rewardType = RewardType.of(matchCount);
-
-        if (rewardType == RewardType.FIVE && isMatchWith(winningLotto.bonusNumber())) {
-            rewardType = RewardType.FIVE_AND_BONUS;
-        }
+        boolean isMatchWithBonus = isMatchWith(winningLotto.bonusNumber());
+        RewardType rewardType = RewardType.of(matchCount, isMatchWithBonus);
 
         if (lottoRewards.isNotContainRewardType(rewardType)) {
             lottoRewards.add(new LottoReward(rewardType, INIT_COUNT));

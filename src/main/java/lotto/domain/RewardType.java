@@ -25,7 +25,10 @@ public enum RewardType {
         return reward;
     }
 
-    public static RewardType of(int matchCount) {
+    public static RewardType of(int matchCount, boolean isMatchWithBonus) {
+        if (matchCount == 5 && isMatchWithBonus) {
+            return FIVE_AND_BONUS;
+        }
         return Arrays.stream(values())
                 .filter(v -> matchCount == v.matchCount)
                 .findFirst()

@@ -6,10 +6,6 @@ public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
 
-    static long reward(int matchCount) {
-        return RewardType.of(matchCount).reward();
-    }
-
     public static long lottoCount(long price) {
         return price / LOTTO_PRICE;
     }
