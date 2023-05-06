@@ -42,6 +42,7 @@ public class ManualLottoNumbersGenerator implements LottoNumbersGenerator<ReqMan
 
     private List<Integer> toNumeric(String requestNumber) {
         return Arrays.stream(requestNumber.split(SPLIT_SEPARATOR))
+                .map(String::strip)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
