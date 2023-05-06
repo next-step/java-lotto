@@ -9,13 +9,17 @@ import static study.lotto.step2.presentation.ConsoleInputView.*;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        Lottos lottos = lottoSeller().sell(askPurchaseAmount());
+        Lottos lottos = lottoSeller().sell(lottoPurchase());
         LottosInformationOutputView lottosInformationOutputView = new LottosInformationOutputView(lottos);
         lottosInformationOutputView.printInformation();
 
         LottoResults lottoResults = winningLotto().resultsOf(lottos);
         LottoResultsStatisticOutputView lottoResultsStatisticOutputView = new LottoResultsStatisticOutputView(lottoResults);
         lottoResultsStatisticOutputView.printWinningStatistic();
+    }
+
+    private static LottoPurchase lottoPurchase() {
+        return new LottoPurchase(askPurchaseAmount());
     }
 
     private static WinningLotto winningLotto() {

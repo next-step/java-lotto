@@ -15,7 +15,7 @@ public class RandomLottoNumbersFactory implements LottoNumbersFactory {
     }
 
     private static Set<LottoNumber> lottoNumbers() {
-        return ThreadLocalRandom.current().ints(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+        return ThreadLocalRandom.current().ints(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER + 1)
                 .distinct()
                 .limit(LOTTO_NUMBER_SIZE)
                 .mapToObj(LottoNumber::of)

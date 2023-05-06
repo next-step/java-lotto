@@ -42,5 +42,6 @@
 
 # 3단계 - 로또(2등)
 ## 변경 사항
-- [ ] 로또 구매 포장 클래스 신규: `LottoPurchase`
-  > 금액 검증 수행
+- [x] 로또 구매 포장 클래스 신규: `LottoPurchase`
+  > 금액 검증 수행  
+  > `LottoSeller` 객체는 `LottoPurchase` 객체를 활용해 `Lottos` 객체 생성
