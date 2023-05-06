@@ -18,7 +18,7 @@ public class InputView {
         return INPUT.nextLine();
     }
 
-    public String setLottoNumber() {
+    public String setLottoResultNumber() {
         System.out.println(LOTTO_NUMBER_OF_MESSAGE);
 
         return INPUT.nextLine();

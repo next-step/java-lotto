@@ -1,8 +1,12 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
+import lotto.util.LottoUtils;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
@@ -16,12 +20,21 @@ public class LottoController {
 
     public static void lotto() {
 
-        String lottoPriceStr = inputView.setBuyLottoPrice();
-        resultView.resultOfBuyLotto(lottoPriceStr);
+        int lottoPriceStr = Integer.parseInt(inputView.setBuyLottoPrice());
 
-        resultView.resultOfLottoList(null);
+        int lottoGameCount = LottoUtils.getLottoGameCount(lottoPriceStr);
+
+        Lotto lotto = new Lotto();
+        lotto.buyLottoGames(lottoGameCount);
+
+        List<LottoGame> lottoGames = lotto.getLottoGames();
+
+        resultView.resultOfBuyLotto(lottoGameCount);
+        resultView.resultOfLottoGameList(lottoGames);
+
+        String lottoResultNumber = inputView.setLottoResultNumber();
 
 
-        String lottoNumberStr = inputView.setLottoNumber();
+        resultView.resultGame();
     }
 }
