@@ -52,4 +52,12 @@ public class Formula {
         return string.matches("^[*/+-]+$");
     }
 
+    public List<Integer> getOperand() {
+        return operand;
+    }
+
+    public List<String> getOperator() {
+        return operator;
+    }
+
 }
