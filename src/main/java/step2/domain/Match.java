@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Match {
 
@@ -27,13 +28,22 @@ public class Match {
 
     public static Match from(int count, boolean isBonus) {
         return matchCache.stream()
-                .filter(match -> match.isEqual(count, isBonus))
+                .filter(match -> match.equals(from(count, isBonus)))
                 .findAny()
                 .orElse(NOT_MATCH);
     }
 
-    public boolean isEqual(int count, boolean isBonus) {
-        return this.count == count && this.isBonus == isBonus;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Match match = (Match) o;
+        return count == match.count && isBonus == match.isBonus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(count, isBonus);
     }
 }
 
