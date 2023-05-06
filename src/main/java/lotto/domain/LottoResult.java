@@ -6,14 +6,12 @@ import java.util.Map;
 
 public class LottoResult {
     private final Lottos lottos;
-    private final Lotto winningLotto;
-    private final LottoNumber bonusNumber;
+    private final WinningLotto winningLotto;
     private final Map<LottoPrize, Long> prizeCountMap;
 
-    public LottoResult(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
+    public LottoResult(Lottos lottos, WinningLotto winningLotto) {
         this.lottos = lottos;
         this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
         prizeCountMap = initializePrizeCountMap();
     }
 
@@ -29,19 +27,8 @@ public class LottoResult {
     private long calculateMatchingLottosCount(LottoPrize lottoPrize) {
         return lottos.getLottoList()
                 .stream()
-                .map(it -> LottoPrize.from(
-                                getMatchingLottoSameNumberCount(it),
-                                it.hasNumber(bonusNumber)
-                        )
-                )
+                .map(winningLotto::getMatchResult)
                 .filter(it -> it == lottoPrize)
-                .count();
-    }
-
-    private int getMatchingLottoSameNumberCount(Lotto lotto) {
-        return (int) lotto.getLottoNumberSet()
-                .stream()
-                .filter(winningLotto::hasNumber)
                 .count();
     }
 

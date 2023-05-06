@@ -12,7 +12,8 @@ public class Main {
 
         Lotto lastWinningLotto = Lotto.from(InputView.getLastWinningLotto());
         LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
-        LottoResult lottoResult = new LottoResult(lottos, lastWinningLotto, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(lastWinningLotto, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
         ResultView.showResult(lottoResult);
     }
 }

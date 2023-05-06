@@ -12,16 +12,17 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoResultTest {
-    private static final Lotto winningLotto = Lotto.from(Set.of(1, 2, 3, 4, 5, 6));
+    private static final Lotto lotto = Lotto.from(Set.of(1, 2, 3, 4, 5, 6));
     private static final LottoNumber bonusNumber = new LottoNumber(45);
     private static final List<Lotto> lottoList = List.of(
-            winningLotto,
+            lotto,
             Lotto.from(Set.of(1, 2, 3, 7, 8, 9)),
             Lotto.from(Set.of(1, 2, 3, 4, 7, 8)),
             Lotto.from(Set.of(1, 2, 3, 4, 6, 45))
     );
     private static final Lottos lottos = new Lottos(lottoList);
-    private static final LottoResult lottoResult = new LottoResult(lottos, winningLotto, bonusNumber);
+    private static final WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+    private static final LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
     @ParameterizedTest(name = "당첨 번호가 {0}개 일치하는 로또는 {1}개이다.")
     @MethodSource("getInputFor_당첨된_로또가_몇_장인지_확인할_수_있다")
