@@ -19,4 +19,12 @@ public class StoreTest {
         Assertions.assertThat(bundle.unfoldLottoBundle().size()).isEqualTo(count);
     }
 
+    @DisplayName("로또 당첨 번호는 숫자 형태여야 한다.")
+    @Test
+    public void pickWinNumber_NumberMustBeNumeric_IfNotThrowException() {
+        String winNumber = "1, 2, 3, 4, a, 5";
+
+        Assertions.assertThatThrownBy(() -> Store.pickWinNumber(winNumber))
+                .isInstanceOf(NumberFormatException.class);
+    }
 }

@@ -23,6 +23,6 @@ public class OutputView {
                 })
                 .collect(Collectors.toList())
                 .stream()
-                .collect(Collectors.joining(",", "[", "]")));
+                .collect(Collectors.joining(", ", "[", "]")));
     }
 }
