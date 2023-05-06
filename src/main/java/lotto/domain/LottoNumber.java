@@ -25,7 +25,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber any(NumberStrategy numberStrategy) {
-        return LottoNumber.of(numberStrategy.generate(LOW_LIMIT,HIGH_LIMIT));
+        return LottoNumber.of(numberStrategy.generate(LOW_LIMIT, HIGH_LIMIT));
     }
 
     private static void rangeValidate(int lottoNumber) {
