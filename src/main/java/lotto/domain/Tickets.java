@@ -45,6 +45,6 @@ public class Tickets {
     }
 
     public List<Ticket> allTickets() {
-        return this.tickets;
+        return new ArrayList<>(tickets);
     }
 }
