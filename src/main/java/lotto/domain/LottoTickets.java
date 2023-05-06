@@ -34,10 +34,10 @@ public class LottoTickets {
         return tickets;
     }
 
-    public WinningStatistics calculateLottoStatistics(WinningLotto winningLotto, BonusNumber bonusNumber) {
+    public WinningStatistics calculateLottoStatistics(WinningLotto winningLotto) {
         WinningStatistics winningStatistics = new WinningStatistics();
         for (LottoTicket lottoTicket : tickets) {
-            WinningRank rank = winningLotto.match(lottoTicket, bonusNumber);
+            WinningRank rank = winningLotto.match(lottoTicket);
             winningStatistics.addMatchedTicket(rank);
         }
         return winningStatistics;

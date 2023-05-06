@@ -21,7 +21,7 @@ class WinningLottoTest {
     @BeforeEach
     void setUp() {
         LottoTicket lottoTicket = LottoTicket.from(Set.of(1, 2, 3, 4, 5, 6));
-        winningLotto = new WinningLotto(lottoTicket);
+        winningLotto = new WinningLotto(lottoTicket, 45);
     }
 
     @DisplayName("당첨 로또와 일치하는 번호의 개수를 확인 할 수 있다")
@@ -31,7 +31,7 @@ class WinningLottoTest {
 
         WinningLotto winningLotto = WinningLottoFactory.create(winningNumbersString);
         LottoTicket lottoTicket = LottoTicket.from(Set.of(1, 2, 3, 4, 5, 7));
-        int countOfMatch = winningLotto.countOfMatch(lottoTicket);
+        int countOfMatch = winningLotto.countMatchingNumbers(lottoTicket);
 
         Assertions.assertThat(countOfMatch).isEqualTo(5);
     }
@@ -52,16 +52,17 @@ class WinningLottoTest {
     @DisplayName("당첨 로또와 번호가 5개가 같으면 보너스 볼 일치여부에 따라 순위가 달라진다")
     void shouldMatchRankByMatchingNumbersAndBonusNumber(Set<Integer> numbers, int bonusNumber, WinningRank expectedRank) {
         LottoTicket ticket = LottoTicket.from(numbers);
-        WinningRank rank = winningLotto.match(ticket, new BonusNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(LottoTicket.from(Set.of(1, 2, 3, 4, 5, 6)), bonusNumber);
+        WinningRank rank = winningLotto.match(ticket);
         assertEquals(rank, expectedRank);
     }
 
     static Stream<Arguments> rankCases() {
         return Stream.of(
                 Arguments.of(Set.of(1, 2, 3, 4, 5, 6), WinningRank.FIRST),
-                Arguments.of(Set.of(1, 2, 3, 4, 5, 7), WinningRank.SECOND),
-                Arguments.of(Set.of(1, 2, 3, 4, 10, 11), WinningRank.THIRD),
-                Arguments.of(Set.of(1, 2, 3, 11, 12, 13), WinningRank.FOURTH),
+                Arguments.of(Set.of(1, 2, 3, 4, 5, 7), WinningRank.THIRD),
+                Arguments.of(Set.of(1, 2, 3, 4, 10, 11), WinningRank.FOURTH),
+                Arguments.of(Set.of(1, 2, 3, 11, 12, 13), WinningRank.FIFTH),
                 Arguments.of(Set.of(1, 2, 13, 14, 15, 16), WinningRank.NONE),
                 Arguments.of(Set.of(1, 12, 13, 14, 15, 16), WinningRank.NONE),
                 Arguments.of(Set.of(11, 12, 13, 14, 15, 16), WinningRank.NONE)

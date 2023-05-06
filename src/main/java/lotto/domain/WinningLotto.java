@@ -3,22 +3,27 @@ package lotto.domain;
 public class WinningLotto {
 
     private final LottoTicket winningLottoTicket;
+    private final BonusNumber bonusNumber;
 
-    public WinningLotto(LottoTicket winningLottoTicket) {
+    public WinningLotto(LottoTicket winningLottoTicket, Integer bonusNumber) {
         this.winningLottoTicket = winningLottoTicket;
+        this.bonusNumber = createBonusNumber(bonusNumber);
+    }
+
+    private BonusNumber createBonusNumber(Integer bonusNumber) {
+        if (bonusNumber == null) {
+            return null;
+        }
+        return new BonusNumber(bonusNumber);
     }
 
     public WinningRank match(LottoTicket lottoTicket) {
-        return match(lottoTicket, null);
-    }
-
-    public WinningRank match(LottoTicket lottoTicket, BonusNumber bonusNumber) {
-        int matchCount = countOfMatch(lottoTicket);
+        int matchCount = countMatchingNumbers(lottoTicket);
         boolean isBonusNumberMatching  = bonusNumber != null && lottoTicket.matchesBonusNumber(bonusNumber);
-        return WinningRank.valueOf(matchCount, isBonusNumberMatching );
+        return WinningRank.valueOf(matchCount, isBonusNumberMatching);
     }
 
-    public int countOfMatch(LottoTicket lottoTicket) {
+    public int countMatchingNumbers(LottoTicket lottoTicket) {
         return lottoTicket.countMatchingNumbersWithWinningTicket(winningLottoTicket);
     }
 

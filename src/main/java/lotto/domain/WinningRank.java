@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 public enum WinningRank {
 
     FIRST(6, 2_000_000_000),
-
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
@@ -34,16 +33,24 @@ public enum WinningRank {
     public static WinningRank valueOf(int matchCount) {
         return valueOf(matchCount, false);
     }
-    public static WinningRank valueOf(int matchCount, Boolean isBonusNumberMatching ) {
+
+    public static WinningRank valueOf(int matchCount, boolean isBonusNumberMatching ) {
 
         if (matchCount == SECOND.countOfMatch) {
-            return isBonusNumberMatching  ? SECOND : THIRD;
+            return determineSecondOrThirdRank(isBonusNumberMatching);
         }
 
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == matchCount)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    private static WinningRank determineSecondOrThirdRank(Boolean isBonusNumberMatching) {
+        if (isBonusNumberMatching) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public static List<WinningRank> validRanks() {

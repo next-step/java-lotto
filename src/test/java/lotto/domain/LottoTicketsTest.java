@@ -40,11 +40,9 @@ class LottoTicketsTest {
 
         Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket winningLottoTicket = LottoTicket.from(winningNumbers);
-        WinningLotto winningLotto = new WinningLotto(winningLottoTicket);
+        WinningLotto winningLotto = new WinningLotto(winningLottoTicket, 7);
 
-        BonusNumber bonusNumber = new BonusNumber(7);
-
-        WinningStatistics winningStatistics = tickets.calculateLottoStatistics(winningLotto, bonusNumber);
+        WinningStatistics winningStatistics = tickets.calculateLottoStatistics(winningLotto);
 
         assertThat(winningStatistics.getCount(WinningRank.FIRST)).isEqualTo(1);
         assertThat(winningStatistics.getCount(WinningRank.SECOND)).isEqualTo(1);

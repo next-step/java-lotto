@@ -14,11 +14,10 @@ public class LottoController {
         String winningNumbersString = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString, new BonusNumber(bonusNumber));
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbersString, bonusNumber);
         WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics();
         double earningsRate = winningStatistics.calculateEarningsRate(lottoTickets.findLottoTicketCount());
 
         ResultView.printLottoResult(winningStatistics, earningsRate);
     }
 }
-
