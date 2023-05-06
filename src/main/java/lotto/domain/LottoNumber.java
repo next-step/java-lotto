@@ -21,7 +21,7 @@ public class LottoNumber {
     }
 
     private boolean isNotValidLottoNumber(int number) {
-        return number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX;
+        return LOTTO_NUMBER_MIN > number || LOTTO_NUMBER_MAX < number;
     }
 
     public int value() {

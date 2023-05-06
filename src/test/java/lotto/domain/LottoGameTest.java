@@ -31,18 +31,6 @@ public class LottoGameTest {
     }
 
     @Test
-    void 총_수익_계산() {
-        //given
-        List<Lotto> lottos = Arrays.asList(myLotto, myLotto);
-
-        //when
-        LottoRewards reward = LottoGame.reward(lottos, winningLotto);
-
-        //then
-        assertThat(reward.totalProfit()).isEqualTo(60000000L);
-    }
-
-    @Test
     void 총_수익률_계산() {
         //given
         List<Lotto> lottos = Arrays.asList(myLotto, myLotto);
@@ -64,8 +52,8 @@ public class LottoGameTest {
         LottoRewards reward = LottoGame.reward(lottos, winningLotto);
 
         //then
-        assertThat(reward.get(RewardType.FIVE_AND_BONUS)).isNotNull();
-        assertThat(reward.get(RewardType.SIX).count()).isNotNull();
+        assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
+        assertThat(reward.get(RewardType.SIX).count()).isEqualTo(1);
     }
 
     @Test
@@ -77,7 +65,7 @@ public class LottoGameTest {
         LottoRewards reward = LottoGame.reward(lottos, winningLotto);
 
         //then
-        assertThat(reward.get(RewardType.FIVE_AND_BONUS)).isNotNull();
-        assertThat(reward.get(RewardType.FIVE)).isNull();
+        assertThat(reward.get(RewardType.FIVE_AND_BONUS).count()).isEqualTo(1);
+        assertThat(reward.get(RewardType.FIVE).count()).isEqualTo(0);
     }
 }

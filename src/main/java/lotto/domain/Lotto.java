@@ -10,7 +10,6 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private static final int MATCH_COUNT_MIN = 3;
     private static final int MATCH_COUNT_MAX = 6;
-    private static final int INIT_COUNT = 1;
 
     private final Set<LottoNumber> numbers;
 
@@ -55,15 +54,11 @@ public class Lotto {
         boolean isMatchWithBonus = isMatchWith(winningLotto.bonusNumber());
         RewardType rewardType = RewardType.of(matchCount, isMatchWithBonus);
 
-        if (lottoRewards.isNotContainRewardType(rewardType)) {
-            lottoRewards.add(new LottoReward(rewardType, INIT_COUNT));
-            return;
-        }
         lottoRewards.increaseCountOf(rewardType);
     }
 
     private boolean isNotWinningMatchCountWith(Lotto numbers) {
-        return matchCount(numbers) < MATCH_COUNT_MIN || matchCount(numbers) > MATCH_COUNT_MAX;
+        return MATCH_COUNT_MIN > matchCount(numbers) || MATCH_COUNT_MAX < matchCount(numbers);
     }
 
     int matchCount(Lotto numbers) {

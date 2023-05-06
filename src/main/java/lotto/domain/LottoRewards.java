@@ -8,15 +8,19 @@ public class LottoRewards {
     private static final int INCREASE_COUNT = 1;
     private static final long TOTAL_PROFIT_INIT = 0l;
 
-    private final List<LottoReward> rewards = new ArrayList<>();
+    private final List<LottoReward> rewards;
 
-    public boolean isNotContainRewardType(RewardType rewardType) {
-        return rewards.stream()
-                .allMatch(v -> v.rewardType() != rewardType);
+    public LottoRewards() {
+        this.rewards = initLottoRewards();
     }
 
-    public void add(LottoReward lottoReward) {
-        rewards.add(lottoReward);
+    private List<LottoReward> initLottoRewards() {
+        List<LottoReward> rewards = new ArrayList<>();
+
+        for (RewardType rewardType : RewardType.values()) {
+            rewards.add(new LottoReward(rewardType));
+        }
+        return rewards;
     }
 
     public void increaseCountOf(RewardType rewardType) {
@@ -41,7 +45,6 @@ public class LottoRewards {
         for (LottoReward reward : rewards) {
             totalProfit += reward.count() * reward.rewardType().reward();
         }
-
         return totalProfit;
     }
 
