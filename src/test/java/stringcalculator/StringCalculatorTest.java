@@ -2,8 +2,11 @@ package stringcalculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class StringCalculatorTest {
 
@@ -57,5 +60,15 @@ public class StringCalculatorTest {
 
         //assert
         assertThat(result).isEqualTo(5);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("빈값 테스트")
+    void testNullAndEmpty(String input) {
+        //assert
+        assertThatThrownBy(()->StringCalculator.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("빈 값을 입력할 수 없습니다.");
     }
 }
