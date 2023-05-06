@@ -6,7 +6,7 @@ public class LottoMachine {
 
     public static final int AMOUNT_OF_LOTTO_TICKET = 1000;
 
-    public LottoTicket[] buyLottoTickets(int amount) {
+    public static LottoTicket[] buyLottoTickets(int amount) {
         int ticketCount = amount / AMOUNT_OF_LOTTO_TICKET;
 
         return IntStream.range(0, ticketCount)

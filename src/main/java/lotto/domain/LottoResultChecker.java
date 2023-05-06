@@ -17,7 +17,7 @@ public class LottoResultChecker {
     }
 
     public int getRankCount(LottoRank rank) {
-        return countByRank.get(rank);
+        return countByRank.getOrDefault(rank, 0);
     }
 
     public int getTotalPrizeMoney() {

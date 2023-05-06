@@ -10,12 +10,12 @@ public enum LottoRank {
     NO_RANK("미당첨", 0, 0);
 
 
-    private String rankName;
+    private String description;
     private int matchedCount;
     private int prizeMoney;
 
-    LottoRank(String rankName, int matchingCount, int prizeMoney) {
-        this.rankName = rankName;
+    LottoRank(String description, int matchingCount, int prizeMoney) {
+        this.description = description;
         this.matchedCount = matchingCount;
         this.prizeMoney = prizeMoney;
     }
@@ -25,6 +25,10 @@ public enum LottoRank {
                 .filter(lotteRank -> lotteRank.matchedCount == count)
                 .findAny()
                 .orElse(LottoRank.NO_RANK);
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public int getPrizeMoney() {
