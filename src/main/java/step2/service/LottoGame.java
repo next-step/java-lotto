@@ -23,13 +23,13 @@ public class LottoGame {
         return new LottoGame(purchaseAmount, manualLottoCount);
     }
 
-    public List<List<Integer>> generateLotto(List<List<Integer>> manualLottoCount) {
+    public List<List<Integer>> generateLotto(List<List<Integer>> manualLottoNumbers) {
         List<List<Integer>> generatedLottoNumber = new ArrayList<>();
         LottoFactory factory = new LottoFactory(new RandomStrategy());
+        List<List<Integer>> autoLottoNumbers = factory.generateLotto(numberOfPurchases());
 
-        generatedLottoNumber.addAll(manualLottoCount);
-        generatedLottoNumber.addAll(factory.generateLotto(numberOfPurchases()));
-
+        generatedLottoNumber.addAll(manualLottoNumbers);
+        generatedLottoNumber.addAll(autoLottoNumbers);
         return generatedLottoNumber;
     }
 
