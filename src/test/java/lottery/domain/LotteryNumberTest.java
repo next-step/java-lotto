@@ -1,7 +1,7 @@
 package lottery.domain;
 
-import static lottery.domain.LotteryNumber.MAX_LOTTERY_NUMBER;
-import static lottery.domain.LotteryNumber.MIN_LOTTERY_NUMBER;
+import static lottery.domain.LotteryNumber.MAX;
+import static lottery.domain.LotteryNumber.MIN;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -19,8 +19,8 @@ class LotteryNumberTest {
     }
 
     static Stream<Integer> lotteryNumberProvider() {
-        return Stream.of(MIN_LOTTERY_NUMBER,
-                MAX_LOTTERY_NUMBER);
+        return Stream.of(MIN,
+                MAX);
     }
 
     @ParameterizedTest(name = "로또 번호 1 ~ 45 외의 번호 입력시 익셉션이 발생한다 init -> {0}")
