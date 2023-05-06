@@ -2,7 +2,7 @@ package study.calculator;
 
 public class Calculator {
 
-  private final static String ARITHMETIC_OPERATOR = "[^\\d\\+\\-\\*/\\s]+";
+  private final static String ARITHMETIC_OPERATOR = "[\\d\\+\\-\\*/\\s]+";
   private final static String NUMBERS_OPERATOR = "\\d+";
 
 
@@ -55,7 +55,7 @@ public class Calculator {
   }
 
   private boolean isRightStr(String str) {
-    return str.matches("[\\d\\+\\-\\*/\\s]+");
+    return str.matches(ARITHMETIC_OPERATOR);
   }
 
   private boolean isNumber(String str) {
