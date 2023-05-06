@@ -32,4 +32,17 @@ public class StringCalculatorTest {
         //assert
         assertThat(result).isEqualTo(-10);
     }
+
+    @Test
+    @DisplayName("곱셈 테스트")
+    void testMultiple() {
+        //arrange
+        String input = "1 * 4 * 7";
+
+        //act
+        int result = StringCalculator.calculate(input);
+
+        //assert
+        assertThat(result).isEqualTo(28);
+    }
 }
