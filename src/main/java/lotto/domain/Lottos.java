@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(int numberOfLotto, LottoCreatingStrategy lottoCreatingStrategy) {
-        this.lottos = createLottos(numberOfLotto, lottoCreatingStrategy);
+    public Lottos(int numberOfLotto) {
+        this.lottos = createLottos(numberOfLotto);
     }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    private List<Lotto> createLottos(int numberOfLotto, LottoCreatingStrategy lottoCreatingStrategy) {
+    private List<Lotto> createLottos(int numberOfLotto) {
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i < numberOfLotto; i++ ){
-            lottos.add(create(lottoCreatingStrategy));
-        }
+        IntStream.range(1, numberOfLotto).forEach(lotto -> lottos.add(create()));
+
         return lottos;
     }
 
-    private Lotto create(LottoCreatingStrategy lottoCreatingStrategy) {
-        return lottoCreatingStrategy.create();
+    private Lotto create() {
+        return LottoFactory.create();
     }
 
     public List<Integer> matchesLottos(Lotto winningLotto) {

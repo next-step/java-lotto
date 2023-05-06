@@ -8,30 +8,14 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottosTest {
-    @Test
-    @DisplayName("로또 생성")
-    void create() {
-        Lottos lottos = new Lottos(2, new LottoCreatingRandomStrategy(){
-            @Override
-            public Lotto create() {
-                return new Lotto("1, 2, 3, 4, 5, 6");
-            }
-        });
-
-        assertThat(lottos.getLottos()).containsExactlyElementsOf(Arrays.asList(new Lotto("1, 2, 3, 4, 5, 6"), new Lotto("1, 2, 3, 4, 5, 6")));
-    }
 
     @Test
     @DisplayName("일치 숫자 비교")
     void match() {
-        Lottos lottos = new Lottos(2, new LottoCreatingRandomStrategy(){
-            @Override
-            public Lotto create() {
-                return new Lotto("1, 2, 3, 4, 5, 6");
-            }
-        });
+        Lottos lottos = new Lottos(Arrays.asList(LottoFactory.createManualLotto("1, 2, 3, 15, 20, 9"),
+                LottoFactory.createManualLotto("1, 2, 3, 10, 11, 12")));
 
-        Lotto lotto = new Lotto("1, 2, 3, 7, 8, 9");
-        assertThat(lottos.matchesLottos(lotto)).containsExactly(3, 3);
+        Lotto lotto = LottoFactory.createManualLotto("1, 2, 3, 7, 8, 9");
+        assertThat(lottos.matchesLottos(lotto)).containsExactly(4, 3);
     }
 }
