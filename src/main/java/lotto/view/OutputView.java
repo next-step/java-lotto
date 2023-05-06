@@ -1,7 +1,7 @@
 package lotto.view;
 
 import java.util.Map;
-import lotto.domain.WinningNumbers.Rank;
+import lotto.domain.Rank;
 import lotto.domain.WinningPercent;
 
 public class OutputView {

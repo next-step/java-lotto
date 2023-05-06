@@ -13,9 +13,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(int amount) {
+    public static Lottos of(LottoAmount amount) {
         List<Lotto> lottos = new ArrayList<>();
-        int count = amount / LOTTO_AMOUNT;
+        int count = amount.count();
         for (int i = 0; i < count; i++) {
             lottos.add(Lotto.purchase());
         }

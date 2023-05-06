@@ -14,7 +14,7 @@ public class LottosTest {
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "13500:13"}, delimiter = ':')
     void 발급가능수량계산(String input, String expected) {
-        Lottos actual = Lottos.of(Integer.parseInt(input));
+        Lottos actual = Lottos.of(LottoAmount.of(Integer.parseInt(input)));
         assertThat(actual.count()).isEqualTo(Integer.parseInt(expected));
     }
 

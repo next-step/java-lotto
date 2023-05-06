@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.EnumMap;
 import java.util.Map;
-import lotto.domain.WinningNumbers.Rank;
+import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 
 public class EnumTest {

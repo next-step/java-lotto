@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Map;
 import java.util.Objects;
-import lotto.domain.WinningNumbers.Rank;
 
 public class WinningPercent {
 

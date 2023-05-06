@@ -7,7 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Map;
-import lotto.domain.WinningNumbers.Rank;
+import lotto.domain.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

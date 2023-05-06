@@ -1,10 +1,10 @@
 package lotto;
 
 import java.util.Map;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoAmount;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
-import lotto.domain.WinningNumbers.Rank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -27,7 +27,7 @@ public class LottoApplication {
 
     private static void run() {
         int amount = InputView.askAmount();
-        Lottos lottos = Lottos.of(amount);
+        Lottos lottos = Lottos.of(LottoAmount.of(amount));
         InputView.printPurchaseComplete(lottos);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers(), InputView.askBonusNumber());
