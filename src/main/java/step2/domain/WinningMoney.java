@@ -2,15 +2,13 @@ package step2.domain;
 
 import java.util.Arrays;
 
-import static step2.domain.MatchFactory.match;
-
 public enum WinningMoney {
 
-    THREE_MONEY(match(3, false), 5000),
-    FOUR_MONEY(match(4, false), 50000),
-    FIVE_MONEY(match(5, false), 1500000),
-    FIVE_BONUS_MONEY(match(5, true), 30000000),
-    SIX_MONEY(match(6, false), 2000000000);
+    THREE_MONEY(Match.from(3, false), 5000),
+    FOUR_MONEY(Match.from(4, false), 50000),
+    FIVE_MONEY(Match.from(5, false), 1500000),
+    FIVE_BONUS_MONEY(Match.from(5, true), 30000000),
+    SIX_MONEY(Match.from(6, false), 2000000000);
 
     private final Match match;
     private final int money;

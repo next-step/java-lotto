@@ -10,7 +10,6 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static step2.domain.MatchFactory.match;
 
 public class PurchaseNumberTest {
 
@@ -62,9 +61,9 @@ public class PurchaseNumberTest {
 
         assertThat(result).hasSize(4);
         assertThat(result).contains(
-                match(3, false),
-                match(5, true),
-                match(6, false)
+                Match.from(3, false),
+                Match.from(5, true),
+                Match.from(6, false)
         );
     }
 }

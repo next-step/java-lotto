@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static step2.domain.MatchFactory.match;
 
 public class RateTest {
 
@@ -20,10 +19,10 @@ public class RateTest {
 
         Map<Match, Integer> numberOfMatches = new HashMap<>();
 
-        numberOfMatches.put(match(3, false), 1);
-        numberOfMatches.put(match(4, false), 0);
-        numberOfMatches.put(match(5, false), 0);
-        numberOfMatches.put(match(6, false), 0);
+        numberOfMatches.put(Match.from(3, false), 1);
+        numberOfMatches.put(Match.from(4, false), 0);
+        numberOfMatches.put(Match.from(5, false), 0);
+        numberOfMatches.put(Match.from(6, false), 0);
 
         // when
         float result = Rate.calculateRate(numberOfMatches, price);

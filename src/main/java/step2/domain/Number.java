@@ -1,20 +1,32 @@
 package step2.domain;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Number implements Comparable<Number> {
 
-    private final int MIN_NUMBER = 1;
-    private final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+    private static final Map<Integer, Number> numberCache = new HashMap<>();
     private final int value;
 
-    public Number(int value) {
+    static {
+        for (int i = MIN_NUMBER; i < MAX_NUMBER ; i++) {
+            numberCache.put(i, new Number(i));
+        }
+    }
+
+    private Number(int value) {
+        this.value = value;
+    }
+
+    public static Number of(int value) {
         if (value < MIN_NUMBER || value > MAX_NUMBER) {
             throw new IllegalArgumentException("1에서 45 사이의 수를 입력해주세요.");
         }
 
-        this.value = value;
+        return numberCache.get(value);
     }
 
     @Override
@@ -33,5 +45,10 @@ public class Number implements Comparable<Number> {
     @Override
     public int compareTo(Number o) {
         return 1;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

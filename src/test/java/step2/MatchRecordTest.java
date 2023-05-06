@@ -11,7 +11,6 @@ import java.util.Map;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static step2.domain.MatchFactory.match;
 
 public class MatchRecordTest {
 
@@ -37,10 +36,10 @@ public class MatchRecordTest {
         Map<Match, Integer> result = matchRecord.countMatches(matches);
 
         // then
-        assertThat(result).containsEntry(match(3, false), 2);
-        assertThat(result).containsEntry(match(4, false), 0);
-        assertThat(result).containsEntry(match(5, true), 1);
-        assertThat(result).containsEntry(match(6, false), 1);
+        assertThat(result).containsEntry(Match.from(3, false), 2);
+        assertThat(result).containsEntry(Match.from(4, false), 0);
+        assertThat(result).containsEntry(Match.from(5, true), 1);
+        assertThat(result).containsEntry(Match.from(6, false), 1);
 
     }
 }

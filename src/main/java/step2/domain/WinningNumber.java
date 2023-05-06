@@ -14,14 +14,14 @@ public class WinningNumber {
     }
 
     public static WinningNumber generate(List<Integer> winningNumbers, int bonusNumber) {
-        return new WinningNumber(integerToNumberList(winningNumbers), new Number(bonusNumber));
+        return new WinningNumber(integerToNumberList(winningNumbers), Number.of(bonusNumber));
     }
 
     private static List<Number> integerToNumberList(List<Integer> winningNumbers) {
         List<Number> numbers = new ArrayList<>();
 
         for (Integer integer : winningNumbers) {
-            numbers.add(new Number(integer));
+            numbers.add(Number.of(integer));
         }
 
         return numbers;

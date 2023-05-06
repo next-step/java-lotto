@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static step2.domain.MatchFactory.*;
-
 public class PurchaseNumbers {
 
     private final List<List<Number>> numbers;
@@ -32,7 +30,7 @@ public class PurchaseNumbers {
         List<Number> numbers = new ArrayList<>();
 
         for (Integer integer : number) {
-            numbers.add(new Number(integer));
+            numbers.add(Number.of(integer));
         }
 
         return numbers;
@@ -59,7 +57,6 @@ public class PurchaseNumbers {
             int count = countWithPurchaseNumber(number, winningNumber.winningNumbers());
             boolean isBonus = containBonusNumber(number, winningNumber.bonusNumber());
             Match match = notFiveMatchesBonusIsFalse(count, isBonus);
-            System.out.println(match.toString());
             matches.add(match);
         }
 
@@ -89,10 +86,10 @@ public class PurchaseNumbers {
 
     private Match notFiveMatchesBonusIsFalse(int count, boolean isBonus) {
         if (count != 5) {
-            return match(count, false);
+            return Match.from(count, false);
         }
 
-        return match(count, isBonus);
+        return Match.from(count, isBonus);
     }
 
     public List<List<Number>> purchaseNumbers() {
