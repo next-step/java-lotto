@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.NumberLimitRangeRuleViolateException;
+import lotto.exception.LimitRangeRuleViolateException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
@@ -42,7 +42,7 @@ public class NumberStrategyRandomTest {
         //then
         assertThatThrownBy(() -> {
             numberStrategy.generate(highLimit, lowLimit);
-        }).isInstanceOf(NumberLimitRangeRuleViolateException.class)
+        }).isInstanceOf(LimitRangeRuleViolateException.class)
                 .hasMessageContaining("LimitRange 가 잘못 입력되었습니다");
     }
 }

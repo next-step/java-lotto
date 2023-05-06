@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.NumberLimitRangeRuleViolateException;
+import lotto.exception.LimitRangeRuleViolateException;
 
 import java.util.Random;
 
@@ -25,7 +25,7 @@ public class NumberStrategyRandom implements NumberStrategy {
     @Override
     public void validateLimit(int lowLimit, int highLimit) {
         if (lowLimit > highLimit) {
-            throw new NumberLimitRangeRuleViolateException();
+            throw new LimitRangeRuleViolateException();
         }
     }
 }
