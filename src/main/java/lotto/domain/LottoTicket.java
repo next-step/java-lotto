@@ -49,7 +49,7 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
-    public int countMatchingNumbers(ArrayList<Integer> inputNumbers) {
+    public int getMatchCount(ArrayList<Integer> inputNumbers) {
         return (int) numbers.stream().filter(inputNumbers::contains).count();
     }
 

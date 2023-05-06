@@ -59,7 +59,7 @@ public class LottoTicketTest {
 
         LottoTicket winningLottoTicket = LottoTicket.createLottoTicketByManual(new ArrayList<Integer>(Arrays.asList(1, 5, 10, 20, 30, 45)));
 
-        Assertions.assertThat(winningLottoTicket.countMatchingNumbers(numbers)).isEqualTo(matchCount);
+        Assertions.assertThat(winningLottoTicket.getMatchCount(numbers)).isEqualTo(matchCount);
     }
 
     static Stream<Object[]> provideLottoNumbers() {
