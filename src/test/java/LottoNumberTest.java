@@ -196,7 +196,4 @@ public class LottoNumberTest {
                 .isEqualTo(autoTicketCount + manualLottoNumbers.size());
     }
 
-
-
-
 }
