@@ -71,4 +71,16 @@ public class StringCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("빈 값을 입력할 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("이상한 기호 테스트")
+    void test_이상한기호() {
+        //arrange
+        String input = "20 ^ 2 & 2";
+
+        //assert
+        assertThatThrownBy(()->StringCalculator.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("사칙연산 기호를 입력해주세요.");
+    }
 }
