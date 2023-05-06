@@ -1,9 +1,6 @@
 package lotto.ui;
 
-import lotto.domian.Lotto;
-import lotto.domian.LottoBundle;
-import lotto.domian.Rank;
-import lotto.domian.Record;
+import lotto.domian.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -26,6 +23,12 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         printEachRank(record);
+    }
+
+    public static void showProfitRate(ProfitRate profitRate) {
+        System.out.print("총 수익률은 ");
+        System.out.printf("%.2f", profitRate.value());
+        System.out.println("입니다.(기준이 1입니다. 1이하면 손해라는 의미)");
     }
 
     private static void printEachRank(Record record) {

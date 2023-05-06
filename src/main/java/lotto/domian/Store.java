@@ -90,4 +90,15 @@ public class Store {
         }
     }
 
+    public static ProfitRate calculateProfit(int purchaseMoney, Record record) {
+        double allPrize = 0;
+        for (Rank rank : record.getRecord().keySet()) {
+            int prize = rank.getPrize();
+            int matchingCount = record.getRecord().get(rank);
+//            allPrize += rank.getPrize() * rank.getMatchingCount();
+            allPrize += prize * matchingCount;
+        }
+
+        return new ProfitRate(allPrize / purchaseMoney);
+    }
 }

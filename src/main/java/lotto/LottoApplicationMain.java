@@ -13,5 +13,7 @@ public class LottoApplicationMain {
         WinNumber winNumber = new WinNumber(Store.pickWinNumber(InputView.questionWinnerNumber()));
         Record record = Store.extractRecord(lottoBundle, winNumber);
         OutputView.showRecord(record);
+        ProfitRate profitRate = Store.calculateProfit(purchaseMoney, record);
+        OutputView.showProfitRate(profitRate);
     }
 }
