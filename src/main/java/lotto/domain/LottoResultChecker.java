@@ -19,4 +19,10 @@ public class LottoResultChecker {
     public int getRankCount(LottoRank rank) {
         return countByRank.get(rank);
     }
+
+    public int getTotalPrizeMoney() {
+        return countByRank.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
+                .sum();
+    }
 }
