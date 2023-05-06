@@ -30,6 +30,7 @@ public class AutoLottoNumbersGenerator implements LottoNumbersGenerator<ReqAutoL
         return lottoNumbersList;
     }
 
+    @Override
     public LottoNumbers generateLottoNumbers(ReqAutoLotto reqAutoLotto) {
         Money requestMoney = reqAutoLotto.getMoney();
         if (!isEnoughBuyMoney(requestMoney)) {
@@ -38,7 +39,6 @@ public class AutoLottoNumbersGenerator implements LottoNumbersGenerator<ReqAutoL
 
         return generateLottoNumbers();
     }
-
 
     private LottoNumbers generateLottoNumbers() {
         Set<LottoNumber> lottoNumberList = new HashSet<>();
@@ -63,5 +63,4 @@ public class AutoLottoNumbersGenerator implements LottoNumbersGenerator<ReqAutoL
     private boolean isEnoughBuyMoney(Money money) {
         return money.isGreaterThan(LottoInformation.LOTTO_FEE);
     }
-
 }
