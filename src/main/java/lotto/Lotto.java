@@ -28,13 +28,7 @@ public class Lotto {
         return sb.toString();
     }
 
-    public int match(List<LottoNumber> winningNumbers) {
-        int result = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if(winningNumbers.contains(lottoNumber)){
-                result++;
-            }
-        }
-        return result;
+    public boolean contain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }

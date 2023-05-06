@@ -13,9 +13,8 @@ public class Client {
         resultView.lottoSizeResultView(lottos.size());
         resultView.lottoNumbersView(lottos);
 
-        List<LottoNumber> winnerNumbers = inputView.winnerNumbersView();
-        resultView.reportView(lottos,winnerNumbers);
-
-
+        WinningLotto winningLotto = new WinningLotto(inputView.winnerNumbersView());
+        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+        resultView.reportView(lottoResult);
     }
 }
