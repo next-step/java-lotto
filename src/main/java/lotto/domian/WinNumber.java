@@ -4,8 +4,8 @@ public class WinNumber {
 
     private final Lotto winnNumber;
 
-    public WinNumber(Lotto winnNumber) {
-        this.winnNumber = winnNumber;
+    public WinNumber(Lotto lotto) {
+        this.winnNumber = lotto;
     }
 
     public int distinguish(Lotto lotto) {
