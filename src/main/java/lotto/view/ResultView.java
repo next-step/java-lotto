@@ -13,8 +13,9 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.findLottoTicketCount() + "개를 구매했습니다.");
+    public static void printLottoTickets(LottoTickets lottoTickets, int manualLottoCount) {
+        System.out.println();
+        System.out.printf("수동으로%d장, 자동으로%d개를 구매했습니다.%n", manualLottoCount, lottoTickets.findLottoTicketCount());
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
         for (LottoTicket lottoTicket : lottoTicketList) {
             printLottoTicket(lottoTicket);
