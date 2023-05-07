@@ -1,6 +1,4 @@
-package lotto.util;
-
-import lotto.model.LotteryNumber;
+package lotto.model;
 
 import java.util.HashSet;
 import java.util.Set;

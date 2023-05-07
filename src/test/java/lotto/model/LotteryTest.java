@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.util.AutoLotteryNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;
@@ -35,7 +34,6 @@ public class LotteryTest {
 
     @Test
     void 로또_티켓은_중복번호를_가지지않음() {
-        // TODO: 랜덤으로 생성된 로또 티켓이 중복 숫자를 갖지 않는지 확인할 방법?
         assertThatThrownBy(() -> new LotteryTicket(Set.of(
                 LotteryNumber.of(8),
                 LotteryNumber.of(21),

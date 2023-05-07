@@ -3,7 +3,7 @@ package lotto;
 import lotto.model.LotteryTickets;
 import lotto.model.Win;
 import lotto.model.WinNumbers;
-import lotto.util.AutoLotteryNumberGenerator;
+import lotto.model.AutoLotteryNumberGenerator;
 import lotto.view.OutputView;
 import lotto.view.InputView;
 

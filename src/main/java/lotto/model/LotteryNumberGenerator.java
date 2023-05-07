@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.model;
 
 import lotto.model.LotteryNumber;
 

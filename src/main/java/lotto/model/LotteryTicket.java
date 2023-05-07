@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.util.LotteryNumberGenerator;
-
 import java.util.Set;
 
 public class LotteryTicket {
@@ -17,7 +15,9 @@ public class LotteryTicket {
     }
 
     public int compare(WinNumbers winNumbers) {
-        return (int) numbers.stream().filter(lotteryNumber -> lotteryNumber.isIn(winNumbers)).count();
+        return (int) numbers.stream()
+                .filter(lotteryNumber -> lotteryNumber.isIn(winNumbers))
+                .count();
     }
 
     public int size() {
