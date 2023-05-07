@@ -9,17 +9,17 @@ public class LottoNumber {
   private final int number;
 
   public LottoNumber(int number) {
+    validateIsBetweenOneAndFortyFive(number);
     this.number = number;
-    validateIsBetweenOneAndFortyFive();
   }
 
-  private void validateIsBetweenOneAndFortyFive() {
-    if (!isBetweenOneAndFortyFive()) {
+  private void validateIsBetweenOneAndFortyFive(int number) {
+    if (!isBetweenOneAndFortyFive(number)) {
       throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
     }
   }
 
-  private boolean isBetweenOneAndFortyFive() {
+  private boolean isBetweenOneAndFortyFive(int number) {
     return number >= LOTTO_NUMBER_START && number <= LOTTO_NUMBER_END;
   }
 
