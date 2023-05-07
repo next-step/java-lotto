@@ -3,18 +3,19 @@ package calculator.biz.enums;
 import calculator.biz.function.*;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum OperatorEnum {
 
-    PLUS("+", new PlusOperator()),
-    MINUS("-", new MinusOperator()),
-    DIVIDE("/", new DivideOperator()),
-    MULTIPLY("*", new MultipleOperator());
+    PLUS("+", (a,b) -> a+b),
+    MINUS("-", (a,b) -> a-b),
+    DIVIDE("/", (a,b) -> a/b),
+    MULTIPLY("*", (a,b) -> a*b);
 
     private String value;
-    private Operator operator;
+    private BiFunction<Integer, Integer, Integer> operator;
 
-    OperatorEnum(String value, Operator operator) {
+    OperatorEnum(String value, BiFunction<Integer, Integer, Integer> operator) {
         this.value = value;
         this.operator = operator;
     }
@@ -24,11 +25,11 @@ public enum OperatorEnum {
         return value;
     }
 
-    public Operator getOperator() {
+    public BiFunction<Integer, Integer, Integer> getOperator() {
         return operator;
     }
 
-    public static Operator findOperator(String value){
+    public static BiFunction<Integer, Integer, Integer> findOperator(String value){
         return Arrays.stream(OperatorEnum.values())
                 .filter(operator -> operator.getValue().equals(value))
                 .findAny().orElse(null).getOperator();
