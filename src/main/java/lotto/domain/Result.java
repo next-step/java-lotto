@@ -12,20 +12,20 @@ public class Result {
         this.purchase = purchase;
     }
 
-    public void update(MyLotto myLotto) {
-        if (myLotto.matchingCount() == LottoRule.MATCH_COUNT_FOR_RANK_FOURTH) {
+    public void update(int matchingCount) {
+        if (matchingCount == LottoRule.MATCH_COUNT_FOR_RANK_FOURTH) {
             rankFourthCount++;
             return;
         }
-        if (myLotto.matchingCount() == LottoRule.MATCH_COUNT_FOR_RANK_THIRD) {
+        if (matchingCount == LottoRule.MATCH_COUNT_FOR_RANK_THIRD) {
             rankThirdCount++;
             return;
         }
-        if (myLotto.matchingCount() == LottoRule.MATCH_COUNT_FOR_RANK_SECOND) {
+        if (matchingCount == LottoRule.MATCH_COUNT_FOR_RANK_SECOND) {
             rankSecondCount++;
             return;
         }
-        if (myLotto.matchingCount() == LottoRule.MATCH_COUNT_FOR_RANK_FIRST) {
+        if (matchingCount == LottoRule.MATCH_COUNT_FOR_RANK_FIRST) {
             rankFirstCount++;
         }
     }

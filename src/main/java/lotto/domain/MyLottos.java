@@ -26,8 +26,7 @@ public class MyLottos {
 
     public void checkWin(WinLotto winLotto) {
         for (MyLotto myLotto : myLottos) {
-            myLotto.checkMatchingNumbers(winLotto);
-            result.update(myLotto);
+            result.update(myLotto.checkMatchingNumbers(winLotto));
         }
         result.sumPrizeAmount();
     }

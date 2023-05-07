@@ -2,11 +2,9 @@ package lotto.domain;
 
 public class MyLotto {
     private final Numbers numbers;
-    private int matchingCount;
 
     public MyLotto(Numbers numbers) {
         this.numbers = numbers;
-        this.matchingCount = 0;
     }
 
     public static MyLotto auto() {
@@ -18,12 +16,12 @@ public class MyLotto {
         return numbers;
     }
 
-    public void checkMatchingNumbers(WinLotto winLotto) {
+    public int checkMatchingNumbers(WinLotto winLotto) {
         int result = 0;
         for (int i = 0; i < LottoRule.CHOICE_COUNT; i++) {
             result += checkMatchingNumber(winLotto.findNumber(i));
         }
-        matchingCount = result;
+       return result;
     }
 
     private int checkMatchingNumber(Integer winNumber) {
@@ -31,9 +29,5 @@ public class MyLotto {
             return 1;
         }
         return 0;
-    }
-
-    public int matchingCount() {
-        return matchingCount;
     }
 }
