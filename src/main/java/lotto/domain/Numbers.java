@@ -40,6 +40,10 @@ public class Numbers {
         return numbers.size();
     }
 
+    public List<Integer> getValues() {
+        return numbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

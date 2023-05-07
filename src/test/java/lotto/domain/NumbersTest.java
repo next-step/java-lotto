@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,23 +33,12 @@ class NumbersTest {
 
     @Test
     void 오름차순정렬확인() {
-        List<Integer> unSortedNumbers = new ArrayList<>();
-        unSortedNumbers.add(33);
-        unSortedNumbers.add(36);
-        unSortedNumbers.add(32);
-        unSortedNumbers.add(31);
-        unSortedNumbers.add(34);
-        unSortedNumbers.add(35);
-
-        Numbers numbers = new Numbers(unSortedNumbers);
-
+        List<Integer> unSortedNumbers = Arrays.asList(33, 36, 32, 31, 34, 35);
+        Numbers sortedNumbers = new Numbers(unSortedNumbers);
+        List<Integer> numbers = sortedNumbers.getValues();
         assertAll (
-                () -> assertThat(numbers.find(0)).isEqualTo(31),
-                () -> assertThat(numbers.find(1)).isEqualTo(32),
-                () -> assertThat(numbers.find(2)).isEqualTo(33),
-                () -> assertThat(numbers.find(3)).isEqualTo(34),
-                () -> assertThat(numbers.find(4)).isEqualTo(35),
-                () -> assertThat(numbers.find(5)).isEqualTo(36)
+                () -> assertThat(numbers).isEqualTo(List.of(31, 32, 33, 34, 35, 36)),
+                () -> assertThat(numbers).containsExactly(31, 32, 33, 34, 35, 36)
         );
     }
 

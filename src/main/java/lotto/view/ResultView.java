@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.stream.Collectors;
+
 public class ResultView {
     public static void showMyLottos(MyLottos myLottos) {
         for (int i = 0; i < myLottos.count(); i++) {
@@ -11,16 +13,16 @@ public class ResultView {
     }
 
     private static void printNumber(Numbers numbers) {
-        System.out.print("["+numbers.find(0));
-        for (int i = 1; i < numbers.count(); i++) {
-            System.out.print(", "+numbers.find(i));
-        }
-        System.out.println("]");
+        System.out.println(
+                numbers.getValues().stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"))
+        );
     }
 
-    public static void showWinLotto(Numbers numbers) {
+    public static void showWinLotto(WinLotto winLotto) {
         System.out.print("지난 주 당첨 번호 : ");
-        printNumber(numbers);
+        printNumber(winLotto.numbers());
         System.out.println();
     }
 
@@ -34,6 +36,6 @@ public class ResultView {
     }
 
     public static void showProfit(double profit) {
-        System.out.printf("총 수익률은 %.2f입니다.",profit);
+        System.out.printf("총 수익률은 %.2f입니다.", profit);
     }
 }

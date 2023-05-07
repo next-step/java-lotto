@@ -20,7 +20,7 @@ public class LottoApplication {
         //지난주 당첨 번호
         List<Integer> winLottoInfoNumbers = InputView.inputWinLottoNumbers();
         WinLotto winLotto = lottoService.makeWinLotto(winLottoInfoNumbers);
-        ResultView.showWinLotto(winLotto.numbers());
+        ResultView.showWinLotto(winLotto);
 
         //당첨번호 조회 및 통계
         lottoService.checkWin(myLottos, winLotto);
