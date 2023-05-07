@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.code.MatchedNumber;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,11 @@ public class ResultView {
     public static void printResult(Map<Integer, Integer> winningStatistics, int amount) {
         System.out.println(WINNING_STATISTICS_TEXT);
         System.out.println(BAR);
+        BigDecimal ror = getRateOfReturn(amount, getTotalWinningAmount(winningStatistics));
+        System.out.println(String.format(TOTAL_ROR_TEXT, ror, getTotalRorLossText(ror)));
+    }
+
+    static int getTotalWinningAmount(Map<Integer, Integer> winningStatistics) {
         int totalWinningAmount = 0;
         for (Integer matchedNumber : winningStatistics.keySet()) {
             MatchedNumber matchedNumberCode = MatchedNumber.findByNumber(matchedNumber);
@@ -35,16 +41,15 @@ public class ResultView {
             System.out.println(String.format(WINNING_COUNT_TEXT, matchedNumber, matchedNumberCode.getAmount(), winningCount));
             totalWinningAmount += matchedNumberCode.getAmount() * winningCount;
         }
-        int ror = getRateOfReturn(amount, totalWinningAmount);
-        System.out.println(String.format(TOTAL_ROR_TEXT, ror, getTotalRorLossText(ror)));
+        return totalWinningAmount;
     }
 
-    private static int getRateOfReturn(int amount, int winningAmount) {
-        return winningAmount / amount;
+    static BigDecimal getRateOfReturn(int amount, int winningAmount) {
+        return BigDecimal.valueOf(winningAmount).divide(BigDecimal.valueOf(amount));
     }
 
-    private static String getTotalRorLossText(int ror) {
-        if (ror < 1) return TOTAL_ROR_LOSS_TEXT;
+    static String getTotalRorLossText(BigDecimal ror) {
+        if (ror.intValue() < 1) return TOTAL_ROR_LOSS_TEXT;
         return EMPTY;
     }
 
