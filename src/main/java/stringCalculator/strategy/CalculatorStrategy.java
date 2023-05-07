@@ -1,6 +1,6 @@
 package stringCalculator.strategy;
 
-public interface CalculatorStrategy {
+import java.util.function.IntBinaryOperator;
 
-    int calculator(int prevOperand, int nextOperand);
+public interface CalculatorStrategy extends IntBinaryOperator {
 }

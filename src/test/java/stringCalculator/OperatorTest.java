@@ -1,4 +1,4 @@
-package stringCalculator.strategy;
+package stringCalculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +14,7 @@ public class OperatorTest {
     @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException이 발생한다.")
     @ParameterizedTest
     @NullAndEmptySource
-    public void OperatorTest(String input) {
+    public void operatorTest(String input) {
         assertThatThrownBy(() -> new Operator(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -22,7 +22,7 @@ public class OperatorTest {
     @DisplayName("입력 값이 사칙연산 기호가 아닌 경우 IllegalArgumentException이 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"%", "#", "@"})
-    public void OperatorTest_사칙연산기호가_아닌경우(String input) {
+    public void operatorTest_사칙연산기호가_아닌경우(String input) {
         assertThatThrownBy(() -> new Operator(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }

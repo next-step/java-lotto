@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 public class CalculatorController {
 
+    private static final InputView inputView = new InputView(new Scanner(System.in));
+    private static final ResultView resultView = new ResultView();
+
     public static void main(String[] args) {
         calculator();
     }
 
     public static void calculator() {
-
-        InputView inputView = new InputView(new Scanner(System.in));
-        ResultView resultView = new ResultView();
 
         String inputText = inputView.setOperateText();
 

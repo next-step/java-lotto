@@ -1,16 +1,12 @@
 package stringCalculator.domain;
 
+import stringCalculator.common.OperatorEnum;
 import stringCalculator.strategy.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class OperatorMap {
-
-    private static String PLUS = "+";
-    private static String MINUS = "-";
-    private static String MULTIPLY = "*";
-    private static String DIVIDE = "/";
 
     private Map<String, CalculatorStrategy> strategyMap;
 
@@ -21,10 +17,10 @@ public class OperatorMap {
     private void create() {
         this.strategyMap = new HashMap<>();
 
-        strategyMap.put(PLUS, new PlusStrategy());
-        strategyMap.put(MINUS, new MinusStrategy());
-        strategyMap.put(MULTIPLY, new MultiplyStrategy());
-        strategyMap.put(DIVIDE, new DivideStrategy());
+        strategyMap.put(OperatorEnum.PLUS.getCode(), new PlusStrategy());
+        strategyMap.put(OperatorEnum.MINUS.getCode(), new MinusStrategy());
+        strategyMap.put(OperatorEnum.MULTIPLY.getCode(), new MultiplyStrategy());
+        strategyMap.put(OperatorEnum.DIVIDE.getCode(), new DivideStrategy());
     }
 
     public CalculatorStrategy getStrategy(String operator) {
