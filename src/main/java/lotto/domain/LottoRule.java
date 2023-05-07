@@ -5,7 +5,6 @@ import java.util.List;
 
 public class LottoRule {
     public static final int CHOICE_COUNT = 6;
-    public static final int PRICE = 1000;
     public static final List<Integer> NUMBER_RANGE;
     public static final Integer MIN_NUMBER = 1;
     public static final Integer MAX_NUMBER = 45;

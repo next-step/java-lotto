@@ -6,8 +6,7 @@ import java.util.List;
 
 public class LottoService {
 
-    public MyLottos autoGenerate(int money) {
-        Purchase purchase = new Purchase(money);
+    public MyLottos buyAutoLottos(Purchase purchase) {
         return MyLottos.autoGenerate(purchase);
     }
 

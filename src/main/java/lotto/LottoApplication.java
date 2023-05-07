@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.MyLottos;
+import lotto.domain.Purchase;
 import lotto.domain.WinLotto;
 import lotto.service.LottoService;
 import lotto.view.InputView;
@@ -12,9 +13,13 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoService lottoService = new LottoService();
 
-        //로또 구매 & 로또 자동 생성
-        int money = InputView.buy();
-        MyLottos myLottos = lottoService.autoGenerate(money);
+        //로또 구입 금액 투입
+        int money = InputView.inputMoney();
+        Purchase purchase = new Purchase(money);
+        ResultView.showLottoCount(purchase);
+
+        //로또 자동 생성
+        MyLottos myLottos = lottoService.buyAutoLottos(purchase);
         ResultView.showMyLottos(myLottos);
 
         //지난주 당첨 번호

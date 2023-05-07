@@ -12,6 +12,10 @@ public class ResultView {
         System.out.println();
     }
 
+    public static void showLottoCount(Purchase purchase) {
+        System.out.println(purchase.count() + "개를 구매했습니다.");
+    }
+
     private static void printNumber(Numbers numbers) {
         System.out.println(
                 numbers.getValues().stream()

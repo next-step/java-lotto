@@ -9,11 +9,9 @@ import java.util.Scanner;
 public class InputView {
     public static final String SPLIT_DELIMITER = ", ";
 
-    public static int buy() {
+    public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        int money = new Scanner(System.in).nextInt();
-        System.out.println(money / LottoRule.PRICE + "개를 구매했습니다.");
-        return money;
+        return new Scanner(System.in).nextInt();
     }
 
     public static List<Integer> inputWinLottoNumbers() {
