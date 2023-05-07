@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto3.domain.LottoNumber;
+import lotto3.domain.LottoNumbers;
 import lotto3.domain.LottoTicket;
 import lotto3.domain.LottoTickets;
 import lotto3.domain.ManualLottoCount;
 import lotto3.domain.Money;
-import lotto3.domain.WinningNumbers;
 
 public class InputView {
 
@@ -39,12 +39,12 @@ public class InputView {
     return investMoney.matches("^[0-9]*$");
   }
 
-  public static WinningNumbers scanWinningNumbers() {
+  public static LottoNumbers scanWinningNumbers() {
     System.out.println();
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     String winningNumbers = SCANNER.nextLine();
     validateBlank(winningNumbers);
-    return convertWinningNumbers(winningNumbers);
+    return convertLottoNumbers(winningNumbers);
   }
 
   private static void validateBlank(String winningNumbers) {
@@ -58,10 +58,10 @@ public class InputView {
     return winningNumbers == null || winningNumbers.isBlank();
   }
 
-  private static WinningNumbers convertWinningNumbers(String winningNumbers) {
+  private static LottoNumbers convertLottoNumbers(String winningNumbers) {
     String[] splitNumbers = splitWithDelimiter(winningNumbers);
     List<Integer> numbers = convertIntegerList(splitNumbers);
-    return new WinningNumbers(numbers);
+    return new LottoNumbers(numbers);
   }
 
   private static List<Integer> convertIntegerList(String[] splitNumbers) {

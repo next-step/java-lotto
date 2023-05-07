@@ -39,14 +39,20 @@ public class LottoNumbers {
     return numbers;
   }
 
-  public int countMatch(WinningNumbers winningNumbers) {
+  public int countMatch(LottoNumbers winningNumbers) {
     return (int) numbers.stream().
-        filter(winningNumbers::contains).
-        count();
+        filter(winningNumbers::contains)
+        .count();
   }
 
 
   public boolean contains(LottoNumber bonusNumber) {
     return numbers.contains(bonusNumber);
+  }
+
+  public void validateHasDuplicateNumber(LottoNumber bonusNumber) {
+    if (contains(bonusNumber)) {
+      throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+    }
   }
 }

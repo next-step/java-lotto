@@ -23,7 +23,7 @@ public class LottoTickets {
   }
 
 
-  public LottoResults calculateLotteryResults(WinningNumbers winningNumbers,
+  public LottoResults calculateLotteryResults(LottoNumbers winningNumbers,
       LottoNumber bonusNumber) {
     Map<Prize, Long> results = tickets.stream()
         .map(ticket -> ticket.getLottoPrize(winningNumbers, bonusNumber))
