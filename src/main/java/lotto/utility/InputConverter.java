@@ -23,7 +23,7 @@ public class InputConverter {
 
   public static List<Integer> convertNumberToList(String targetNumber) {
     List<Integer> numberList = Arrays.stream(targetNumber.split(", "))
-        .map(InputConverter::convertNumber)
+        .map(InputConverter::convertLottoNumber)
         .collect(Collectors.toList());
 
     LottoException.checkSize(numberList);
@@ -31,8 +31,8 @@ public class InputConverter {
     return numberList;
   }
 
-  public static int convertNumber(String strNumber) {
-    LottoException.convertNumber(strNumber);
+  public static int convertLottoNumber(String strNumber) {
+    LottoException.checkLottoType(strNumber);
 
     return Integer.parseInt(strNumber);
   }

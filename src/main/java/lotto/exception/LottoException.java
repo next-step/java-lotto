@@ -13,7 +13,7 @@ public class LottoException {
     return TARGET_NUMBER_PATTERN.asMatchPredicate().test(strNumber);
   }
 
-  public static void convertNumber(String strNumber) {
+  public static void checkLottoType(String strNumber) {
     if (!isNumber(strNumber)) {
       lottoIllegalArgumentException("45이하의 숫자, 콤마, 띄어쓰기로 입력해주세요");
     }
