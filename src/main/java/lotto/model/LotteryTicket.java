@@ -14,7 +14,7 @@ public class LotteryTicket {
     public LotteryTicket() {
         List<LotteryNumber> numbers = new ArrayList<>();
         while (numbers.size() < NUMBER_PER_TICKET) {
-            LotteryNumber newNumber = new LotteryNumber(new RandomNumberGenerator());
+            LotteryNumber newNumber = LotteryNumber.of(new RandomNumberGenerator());
             addIfNotExist(numbers, newNumber);
         }
         validate(numbers);

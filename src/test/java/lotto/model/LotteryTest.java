@@ -1,6 +1,5 @@
-package lotto;
+package lotto.model;
 
-import lotto.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;
@@ -36,12 +35,12 @@ public class LotteryTest {
     void 로또_티켓은_중복번호를_가지지않음() {
         // TODO: 랜덤으로 생성된 로또 티켓이 중복 숫자를 갖지 않는지 확인할 방법?
         assertThatThrownBy(() -> new LotteryTicket(List.of(
-                new LotteryNumber(() -> 8),
-                new LotteryNumber(() -> 21),
-                new LotteryNumber(() -> 21),
-                new LotteryNumber(() -> 41),
-                new LotteryNumber(() -> 42),
-                new LotteryNumber(() -> 43))))
+                LotteryNumber.of(() -> 8),
+                LotteryNumber.of(() -> 21),
+                LotteryNumber.of(() -> 21),
+                LotteryNumber.of(() -> 41),
+                LotteryNumber.of(() -> 42),
+                LotteryNumber.of(() -> 43))))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("잘못된 로또 번호 목록입니다.");
     }
@@ -49,12 +48,12 @@ public class LotteryTest {
     @Test
     void 로또티켓_맞는갯수_계산() {
         LotteryTicket lotteryTicket = new LotteryTicket(List.of(
-                new LotteryNumber(() -> 8),
-                new LotteryNumber(() -> 21),
-                new LotteryNumber(() -> 23),
-                new LotteryNumber(() -> 41),
-                new LotteryNumber(() -> 42),
-                new LotteryNumber(() -> 43)));
+                LotteryNumber.of(() -> 8),
+                LotteryNumber.of(() -> 21),
+                LotteryNumber.of(() -> 23),
+                LotteryNumber.of(() -> 41),
+                LotteryNumber.of(() -> 42),
+                LotteryNumber.of(() -> 43)));
         List<Integer> winNumbers = List.of(41, 1, 13, 27, 42, 43);
         int count = lotteryTicket.compare(new WinNumbers(winNumbers));
         assertThat(count).isEqualTo(3);

@@ -2,15 +2,22 @@ package lotto.model;
 
 import lotto.util.NumberGenerator;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LotteryNumber {
 
     private final int number;
+    private static final Map<Integer, LotteryNumber> numberCache = new HashMap<>();
 
-    public LotteryNumber(NumberGenerator numberGenerator) {
-        this.number = numberGenerator.generate();
+    private LotteryNumber(int number) {
+        this.number = number;
+    }
+
+    public static LotteryNumber of(NumberGenerator numberGenerator) {
+        int number = numberGenerator.generate();
+        return numberCache.computeIfAbsent(number, k -> new LotteryNumber(number));
     }
 
     public boolean isIn(WinNumbers winNumbers) {
