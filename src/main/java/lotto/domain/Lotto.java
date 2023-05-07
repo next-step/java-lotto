@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.LottoUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,9 @@ public class Lotto {
         List<LottoGame> lottoList = new ArrayList<>();
 
         for(int i = 0; i < gameCount; i ++) {
-            lottoList.add(new LottoGame());
+            lottoList.add(new LottoGame(LottoUtils.initLottoNumbers()));
         }
+
 
         this.lottoGames = lottoList;
     }

@@ -1,8 +1,11 @@
 package lotto.view;
 
 import lotto.domain.LottoGame;
+import lotto.util.RewardTable;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -12,19 +15,38 @@ public class ResultView {
 
     public ResultView() {}
 
-    public void resultOfBuyLotto(int gameCount) {
+    public void showBuyLotto(int gameCount) {
         System.out.println(gameCount + RESULT_MESSAGE);
     }
 
-    public void resultOfLottoGameList(List<LottoGame> lottoGames) {
+    public void showMyLottoGameList(List<LottoGame> lottoGames) {
 
         for(LottoGame lotto : lottoGames) {
             System.out.println(lotto.getLottoNumber().toString());
         }
     }
 
-    public void resultGame() {
+    public void resultGame(Map<Integer, Integer> map, double rate) {
         System.out.println(RESULT_GAME);
         System.out.println(BREAK_LINE);
+
+        Iterator<Integer> keys = map.keySet().iterator();
+
+        while (keys.hasNext()) {
+            int key = keys.next();
+            System.out.printf("%d개 일치 (%d원)- %d개\n", key, RewardTable.of(key).getReward(), map.get(key));
+        }
+
+        resultRateOfReturn(rate);
+    }
+
+    private void resultRateOfReturn(double rate){
+        String benefitWord = "손해";
+
+        if (rate > 0) {
+            benefitWord = "이득이";
+        }
+
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", rate, benefitWord);
     }
 }

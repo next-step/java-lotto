@@ -5,12 +5,16 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoUtils {
 
     private static final int LOTTO_PRICE = 1000;
     private static final Pattern TARGET_NUMBER_PATTERN = Pattern.compile("[1-9]|[1-3][0-9]|4[0-5]");
     private static final int LOTTO_NUMBER_SIZE = 6;
+
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
 
     public static int getLottoGameCount(int price) {
 
@@ -56,5 +60,11 @@ public class LottoUtils {
 
     private static void lottoException(String msg) {
         throw new InputMismatchException(msg);
+    }
+
+    public static List<Integer> initLottoNumbers() {
+        return IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

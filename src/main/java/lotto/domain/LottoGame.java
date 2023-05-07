@@ -2,24 +2,17 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGame {
 
-    private final List<Integer> NUMBER_OF_LOTTO_VALUE = IntStream.rangeClosed(1, 45)
-                                                                    .boxed()
-                                                                    .collect(Collectors.toList());
-
     private List<Integer> lottoNumber;
 
-    public LottoGame() {
-        createLottoGame();
+    public LottoGame(List<Integer> lottoNumberList) {
+        createLottoGame(lottoNumberList);
     }
 
-    private void createLottoGame() {
-
-        this.lottoNumber =  sortNumber(shuffleNumber(NUMBER_OF_LOTTO_VALUE).subList(0, 6));
+    private void createLottoGame(List<Integer> lottoNumberList) {
+        this.lottoNumber =  sortNumber(shuffleNumber(lottoNumberList).subList(0, 6));
     }
 
     private List<Integer> shuffleNumber(List<Integer> numberList) {
@@ -36,5 +29,11 @@ public class LottoGame {
 
     public List<Integer> getLottoNumber() {
         return this.lottoNumber;
+    }
+
+    public int matchLottoNumberCount(List<Integer> lottoResultNumbers) {
+        return (int) lottoResultNumbers.stream()
+                .filter(this.lottoNumber::contains)
+                .count();
     }
 }
