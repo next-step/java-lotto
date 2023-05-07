@@ -10,9 +10,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoks(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printLottos(Lottos lottos) {
+        final var manualQuantity = lottos.getManualLottoQuantity();
+        final var autoQuantity = lottos.getAutoLottoQuantity();
 
+        System.out.println(System.lineSeparator() + "수동으로 " + manualQuantity + "장, 자동으로 " + autoQuantity + "개를 구매했습니다.");
         lottos.getLottos().forEach(System.out::println);
     }
 
