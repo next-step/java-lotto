@@ -20,14 +20,12 @@ public enum Prize {
 
   private static Prize valueOfMatchCount(int matchCount) {
     return Arrays.stream(values())
-        .filter(prize -> isMatched(matchCount, prize))
+        .filter(prize -> prize.matchCount == matchCount)
         .findFirst()
         .orElse(NONE);
   }
 
-  private static boolean isMatched(int matchCount, Prize prize) {
-    return prize.matchCount == matchCount;
-  }
+
 
   public static Prize valueOfMatchCountAndBonusNumber(int matchCount, boolean isMatchedBonusNumber) {
     if (isMatchedWithBonusNumber(matchCount, isMatchedBonusNumber)) {

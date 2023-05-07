@@ -1,26 +1,37 @@
 package lotto3.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
-  private static final int WINNING_NUMBERS_START = 1;
-  private static final int WINNING_NUMBERS_END = 45;
   private static final int LOTTO_NUMBERS_SIZE = 6;
 
-  private final List<Integer> winningNumbers;
+  private final List<LottoNumber> winningNumbers;
 
   public WinningNumbers(List<Integer> winningNumbers) {
-    this.winningNumbers = winningNumbers;
+    this.winningNumbers = convertToLottoNumbers(winningNumbers);
     validateHasSixNumbers();
-    validateIsBetweenOneAndFortyFive();
+    validateDuplicate();
   }
 
-  private void validateIsBetweenOneAndFortyFive() {
-    if (!isBetweenOneAndFortyFive()) {
-      throw new IllegalArgumentException("지난 주 당첨 번호는 1~45 사이의 숫자여야 합니다.");
+  private void validateDuplicate() {
+    if (hasDuplicate()) {
+      throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
     }
   }
+
+  private boolean hasDuplicate() {
+    return winningNumbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE;
+  }
+
+  private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+    return numbers.stream()
+        .map(LottoNumber::new)
+        .collect(Collectors.toList());
+  }
+
+
 
   private void validateHasSixNumbers() {
     if (!hasSixNumbers()) {
@@ -32,18 +43,15 @@ public class WinningNumbers {
     return winningNumbers.size() == LOTTO_NUMBERS_SIZE;
   }
 
-  private boolean isBetweenOneAndFortyFive() {
+
+
+  public boolean contains(LottoNumber lottoNumber) {
     return winningNumbers.stream()
-        .allMatch(number -> number >= WINNING_NUMBERS_START && number <= WINNING_NUMBERS_END);
+        .anyMatch(number -> number.equals(lottoNumber));
   }
 
-
-  public boolean contains(Integer number) {
-    return winningNumbers.contains(number);
-  }
-
-  public void validateHasDuplicateNumber(BonusNumber bonusNumber) {
-    if (contains(bonusNumber.getBonusNumber())) {
+  public void validateHasDuplicateNumber(LottoNumber bonusNumber) {
+    if (contains(bonusNumber)) {
       throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
     }
   }

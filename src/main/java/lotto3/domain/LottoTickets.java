@@ -24,7 +24,7 @@ public class LottoTickets {
 
 
   public LottoResults calculateLotteryResults(WinningNumbers winningNumbers,
-      BonusNumber bonusNumber) {
+      LottoNumber bonusNumber) {
     Map<Prize, Long> results = tickets.stream()
         .map(ticket -> ticket.getLottoPrize(winningNumbers, bonusNumber))
         .collect(Collectors.groupingBy(Function.identity(), () -> new EnumMap<>(Prize.class),

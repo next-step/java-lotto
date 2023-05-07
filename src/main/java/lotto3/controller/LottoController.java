@@ -1,6 +1,7 @@
 package lotto3.controller;
 
-import lotto3.domain.BonusNumber;
+
+import lotto3.domain.LottoNumber;
 import lotto3.domain.LottoResults;
 import lotto3.domain.LottoTickets;
 import lotto3.domain.Money;
@@ -18,7 +19,7 @@ public class LottoController {
     OutputView.printLottoTickets(tickets);
 
     WinningNumbers winningNumbers = InputView.scanWinningNumbers();
-    BonusNumber bonusNumber = InputView.scanBonusNumber();
+    LottoNumber bonusNumber = InputView.scanBonusNumber();
     winningNumbers.validateHasDuplicateNumber(bonusNumber);
 
     LottoResults results = tickets.calculateLotteryResults(winningNumbers, bonusNumber);
