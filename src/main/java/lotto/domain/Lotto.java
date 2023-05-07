@@ -25,4 +25,8 @@ public class Lotto {
             Objects::isNull);
     }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

@@ -11,6 +11,7 @@ public class LottoGenerator {
     private static final List<Integer> LOTTO_NUMBERS = IntStream.range(1, 46)
         .boxed()
         .collect(Collectors.toList());
+    public static final int LOTTO_COUNT = 6;
 
     private final Integer generateNumber;
 
@@ -22,7 +23,10 @@ public class LottoGenerator {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < generateNumber; i++) {
             Collections.shuffle(LOTTO_NUMBERS);
-            lottos.add(new Lotto(LOTTO_NUMBERS.subList(0, 6)));
+            lottos.add(new Lotto(LOTTO_NUMBERS.stream()
+                .limit(LOTTO_COUNT)
+                .sorted()
+                .collect(Collectors.toList())));
         }
         return lottos;
     }

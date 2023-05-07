@@ -29,4 +29,8 @@ public enum LottoRank {
         return winningAmount;
     }
 
+    public Integer getHitNumber() {
+        return hitNumber;
+    }
+
 }
