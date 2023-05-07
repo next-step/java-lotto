@@ -9,7 +9,12 @@ public enum Operator {
     PLUS("+", Integer::sum),
     MINUS("-", (a, b) -> a-b),
     MULTIPLY("*", (a, b) -> a*b),
-    DIVIDE("/", Integer::sum),
+    DIVIDE("/", (a, b) -> {
+        if(a%b != 0){
+            throw new IllegalArgumentException("나누어 떨어지는 값만 지원합니다");
+        }
+        return a/b;
+    }),
     ;
 
     Operator(String symbol, BiFunction<Integer, Integer, Integer> function) {

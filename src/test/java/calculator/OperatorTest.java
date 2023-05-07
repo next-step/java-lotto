@@ -53,4 +53,21 @@ class OperatorTest {
 
         Assertions.assertThat(Operator.MULTIPLY.calculate(operand1, operand2)).isEqualTo(expected);
     }
+
+    @DisplayName("/ 연산 기능")
+    @Test
+    void test6(){
+        int operand1 = 10;
+        int operand2 = 5;
+        int expected = 2;
+
+        Assertions.assertThat(Operator.DIVIDE.calculate(operand1, operand2)).isEqualTo(expected);
+    }
+
+    @DisplayName("/ 연산 나누어 떨어지지 않는 경우는 예외처리")
+    @ParameterizedTest
+    @CsvSource(value = {"7:4", "11:12"}, delimiter = ':')
+    void test7(int op1, int op2){
+        Assertions.assertThatThrownBy(() -> Operator.DIVIDE.calculate(op1, op2)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
