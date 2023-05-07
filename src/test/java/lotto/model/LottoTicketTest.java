@@ -39,4 +39,11 @@ class LottoTicketTest {
 
     }
 
+    @DisplayName("로또티켓 생성 테스트(Collections.shuffle사용)")
+    @Test
+    void 로또티켓_생성_테스트_shuffle() {
+        LottoTicket lottoTicket = LottoFactory.createAutoLottoTicket();
+        assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
+    }
+
 }

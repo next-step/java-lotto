@@ -1,6 +1,6 @@
 package lotto.model;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_MINIMUM_NUMBER = 1;
     public static final int LOTTO_MAXIMUM_NUMBER = 45;
     private final int number;
@@ -19,4 +19,10 @@ public class LottoNumber {
             throw new IllegalArgumentException("로또번호는 45보다 클 수 없습니다.");
         }
     }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(this.number, other.number);
+    }
+
 }
