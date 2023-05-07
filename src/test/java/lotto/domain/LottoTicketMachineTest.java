@@ -1,33 +1,44 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketMachineTest {
 
-    private LottoTicketMachine lottoTicketMachine;
+    @Test
+    void 생성자를_검증한다() {
+        // given
 
-    @BeforeEach
-    void init() {
-        lottoTicketMachine = new LottoTicketMachine();
+        // when
+
+        // then
+        assertDoesNotThrow(() -> {
+            new LottoTicketMachine(3, 14000);
+        });
     }
 
-    @Test
-    void calculateLottoStatistics() throws Exception {
-        //given
-        lottoTicketMachine.createAutoLottoTickets(14000);
-        WinningTicket winningTicket = new WinningTicket(
-                Arrays.asList(1, 2, 3, 4, 5, 6),
-                LottoNumber.of(7)
-        );
+    @ParameterizedTest(name = "[{index}] 수동개수: {0}, 구입금액 {1}")
+    @CsvSource(value = {"5:5000", "0:5000", "3:5000"}, delimiter = ':')
+    void 로또번호를_생성한다(int count, int amount) {
+        // given
+        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine(count, amount);
+        List<List<Integer>> tickets = new ArrayList<>();
+        tickets.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+        tickets.add(Arrays.asList(1, 2, 3, 10, 11, 12));
+        tickets.add(Arrays.asList(1, 2, 3, 7, 8, 9));
 
-        //when
+        // when
 
-        //then
-        assertDoesNotThrow(() -> lottoTicketMachine.calculateLottoStatistics(winningTicket));
+        // then
+        assertDoesNotThrow(() -> {
+            lottoTicketMachine.createLottoTickets(tickets);
+        });
     }
 }
