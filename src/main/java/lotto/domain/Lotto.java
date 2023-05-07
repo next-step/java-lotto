@@ -10,14 +10,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchesNumber(Lotto lotto) {
+    public int getMatchingNumberCount(Lotto lotto) {
         return lottoNumbers.stream()
                 .filter(number -> lotto.contains(number))
                 .collect(Collectors.toList())
                 .size();
     }
 
-    private boolean contains(LottoNumber number) {
+    public boolean contains(LottoNumber number) {
         return lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 

@@ -26,7 +26,7 @@ public class Lottos {
     }
 
     public List<Integer> matchesLottos(Lotto winningLotto) {
-        return lottos.stream().map(lotto -> lotto.matchesNumber(winningLotto)).collect(Collectors.toList());
+        return lottos.stream().map(lotto -> lotto.getMatchingNumberCount(winningLotto)).collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {
