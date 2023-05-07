@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.game.LottoGame;
-import lotto.domain.game.LottoGameGenerator;
 import lotto.domain.game.LottoGameSetting;
 import lotto.domain.game.LottoGameStatistics;
-import lotto.domain.game.LottoGameWrapper;
+import lotto.domain.game.LottoPurchasePrice;
 import lotto.domain.game.LottoWinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -26,9 +25,8 @@ public class LottoApplication {
       manualLottoRounds = inputView.generateManualLottoRound(manualLottoRoundCount);
     }
 
-    final LottoGameGenerator gameGenerator = new LottoGameGenerator(lottoPrice, manualLottoRounds, LottoGameSetting.ofKorea645LottoSetting());
-    final LottoGameWrapper lottoGameWrapper = gameGenerator.generateLottoGame();
-    final LottoGame lottoGame = lottoGameWrapper.getGame();
+    final LottoGameSetting gameSetting = LottoGameSetting.ofKorea645LottoSetting();
+    final LottoGame lottoGame = new LottoGame(manualLottoRounds, lottoPrice, gameSetting);
 
     resultView.showLottoRounds(manualLottoRoundCount, lottoGame.getLottoRounds());
 

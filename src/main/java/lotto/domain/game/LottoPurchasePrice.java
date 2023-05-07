@@ -5,9 +5,9 @@ public class LottoPurchasePrice {
   private final int purchasePrice;
   private final int gameCount;
 
-  public LottoPurchasePrice (LottoPricePerGame pricePerGame, int purchasePrice) {
+  public LottoPurchasePrice (LottoGameSetting gameSetting, int purchasePrice) {
     this.purchasePrice = purchasePrice;
-    this.gameCount = calculateAndSetGameCount(pricePerGame.getPricePerGame());
+    this.gameCount = calculateAndSetGameCount(gameSetting.getPricePerGame());
   }
 
   public int getPurchasePrice() {
@@ -18,7 +18,8 @@ public class LottoPurchasePrice {
     return gameCount;
   }
 
-  private int calculateAndSetGameCount(int pricePerGame) {
+  private int calculateAndSetGameCount(LottoPricePerGame lottoPricePerGame) {
+    int pricePerGame = lottoPricePerGame.getPricePerGame();
     if (purchasePrice % pricePerGame > 0) {
       throw new IllegalArgumentException();
     }

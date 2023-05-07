@@ -3,9 +3,9 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.game.LottoGame;
-import lotto.domain.game.LottoGameGenerator;
 import lotto.domain.game.LottoGameSetting;
 import lotto.domain.game.LottoGameStatistics;
+import lotto.domain.game.LottoPurchasePrice;
 import lotto.domain.game.LottoWinType;
 import lotto.domain.game.LottoWinningNumber;
 import lotto.domain.raffle.LottoRaffleGenerator;
@@ -14,8 +14,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoGameTest {
 
@@ -41,8 +39,7 @@ public class LottoGameTest {
 
     // given
     LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-    LottoGameGenerator generator = new LottoGameGenerator(14000, gameSetting);
-    LottoGame game = generator.generateLottoGame().getGame();
+    LottoGame game = new LottoGame(14000, gameSetting);
 
     // when
     LottoGameStatistics statistics = game.play(당첨번호);
@@ -57,15 +54,14 @@ public class LottoGameTest {
   void 중복번호_허용_불가_시_보너스번호도_중복_불가 () {
 
     // given
+    LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 3);
     LottoGameSetting setting = LottoGameSetting.builder()
         .raffleGenerator(fixedRaffleGenerator)
         .pricePerGame(1000)
         .distinctNumberOnly(true)
         .build();
 
-    LottoGameGenerator generator = new LottoGameGenerator(14000, setting);
-    LottoGame game = generator.generateLottoGame().getGame();
-    LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 3);
+    LottoGame game = new LottoGame(14000, setting);
 
     // when & then
     Assertions.assertThatThrownBy(() -> game.play(당첨번호))
@@ -76,16 +72,15 @@ public class LottoGameTest {
   void 로또번호_중복_금지() {
 
     // given
+    int purchasePrice = 14000;
     LottoGameSetting setting = LottoGameSetting.builder()
         .raffleGenerator(duplicateFixedRaffleGenerator)
         .pricePerGame(1000)
         .distinctNumberOnly(true)
         .build();
 
-    LottoGameGenerator generator = new LottoGameGenerator(14000, setting);
-
     // when && then
-    Assertions.assertThatThrownBy(generator::generateLottoGame)
+    Assertions.assertThatThrownBy(() -> new LottoGame(purchasePrice, setting))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -94,6 +89,7 @@ public class LottoGameTest {
   void 구입금액보다_많은_로또_게임_구매_불가() {
 
     // given
+    int purchasePrice = 14000;
     LottoGameSetting setting = LottoGameSetting.builder()
         .raffleGenerator(duplicateFixedRaffleGenerator)
         .pricePerGame(1000)
@@ -105,10 +101,8 @@ public class LottoGameTest {
         List.of(1, 2, 3, 4, 5, 6)
     );
 
-    LottoGameGenerator generator = new LottoGameGenerator(1000, 수동_로또_번호_목록, setting);
-
     // when && then
-    Assertions.assertThatThrownBy(generator::generateLottoGame)
+    Assertions.assertThatThrownBy(() -> new LottoGame(수동_로또_번호_목록, purchasePrice, setting))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }

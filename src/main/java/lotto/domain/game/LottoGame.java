@@ -1,51 +1,32 @@
 package lotto.domain.game;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lotto.domain.raffle.LottoRaffleGenerator;
 import lotto.domain.round.LottoRound;
-import lotto.domain.round.LottoRoundJudge;
-import lotto.domain.round.LottoRoundNumbers;
+import lotto.domain.round.LottoRoundGenerator;
 import lotto.domain.round.LottoRoundResult;
 
 public class LottoGame {
 
   private final LottoPurchasePrice purchasePrice;
-  private final LottoRaffleGenerator raffleGenerator;
+  private final LottoRoundGenerator roundGenerator;
   private final List<LottoRound> lottoRounds;
-  private final LottoRoundJudge roundJudge;
   private final boolean distinctNumberOnly;
 
-  private LottoGame (LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
-    this.raffleGenerator = gameSetting.getRaffleGenerator();
+  public LottoGame (int purchasePrice, LottoGameSetting gameSetting) {
+    this.purchasePrice = new LottoPurchasePrice(gameSetting, purchasePrice);
+    this.roundGenerator = new LottoRoundGenerator(this.purchasePrice, gameSetting);
     this.distinctNumberOnly = gameSetting.isDistinctNumberOnly();
-    this.purchasePrice = purchasePrice;
-    this.roundJudge = new LottoRoundJudge();
-    this.lottoRounds = initAutoOnlyRounds();
+    this.lottoRounds = this.roundGenerator.generateRounds();
     throwIfRoundSizeNotMatch(this.purchasePrice.getGameCount(), this.lottoRounds);
   }
 
-  private LottoGame (List<List<Integer>> manualRounds, LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
-    this.raffleGenerator = gameSetting.getRaffleGenerator();
+  public LottoGame (List<List<Integer>> manualRounds, int purchasePrice, LottoGameSetting gameSetting) {
+    this.purchasePrice = new LottoPurchasePrice(gameSetting, purchasePrice);;
+    this.roundGenerator = new LottoRoundGenerator(manualRounds,this.purchasePrice, gameSetting);
     this.distinctNumberOnly = gameSetting.isDistinctNumberOnly();
-    this.purchasePrice = purchasePrice;
-    this.roundJudge = new LottoRoundJudge();
-    this.lottoRounds = initManualIncludeLottoRounds(manualRounds);
+    this.lottoRounds = this.roundGenerator.generateRounds();
     throwIfRoundSizeNotMatch(this.purchasePrice.getGameCount(), this.lottoRounds);
-  }
-
-  public static LottoGame ofAutoOnly (LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
-    return new LottoGame(purchasePrice, gameSetting);
-  }
-
-  public static LottoGame ofAutoManualMixed (List<List<Integer>> manualRounds, LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
-    return new LottoGame(manualRounds, purchasePrice, gameSetting);
-  }
-
-  public static LottoGame ofManualOnly(List<List<Integer>> manualRounds, LottoPurchasePrice purchasePrice, LottoGameSetting gameSetting) {
-    return new LottoGame(manualRounds, purchasePrice, gameSetting);
   }
 
   public LottoGameStatistics play (final LottoWinningNumber winningNumber) {
@@ -65,31 +46,6 @@ public class LottoGame {
 
   public List<LottoRound> getLottoRounds () {
     return lottoRounds;
-  }
-
-  private List<LottoRound> initAutoOnlyRounds() {
-    return IntStream.rangeClosed(1, this.purchasePrice.getGameCount())
-        .mapToObj(i -> new LottoRound(raffleGenerator.generateRaffleNumber(), roundJudge))
-        .collect(Collectors.toList());
-  }
-
-  private List<LottoRound> initManualIncludeLottoRounds(List<List<Integer>> manualRoundNumbers) {
-    int gameCount = purchasePrice.getGameCount();
-    List<LottoRound> manualRounds = makeManualLottoRounds(manualRoundNumbers);
-    List<LottoRound> autoRounds = IntStream.rangeClosed(manualRounds.size() + 1, gameCount)
-        .mapToObj(i -> new LottoRound(raffleGenerator.generateRaffleNumber(), roundJudge))
-        .collect(Collectors.toList());
-
-    List<LottoRound> rounds = new ArrayList<>(gameCount);
-    rounds.addAll(manualRounds);
-    rounds.addAll(autoRounds);
-    return rounds;
-  }
-
-  private List<LottoRound> makeManualLottoRounds(List<List<Integer>> manualRounds) {
-    return IntStream.rangeClosed(1, manualRounds.size())
-        .mapToObj(i -> new LottoRound(new LottoRoundNumbers(manualRounds.get(i - 1)), roundJudge))
-        .collect(Collectors.toList());
   }
 
   private void throwIfRoundSizeNotMatch(int gameCount, List<LottoRound> lottoRounds) {

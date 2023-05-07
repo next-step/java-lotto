@@ -2,14 +2,17 @@ package lotto.domain.game;
 
 import lotto.domain.raffle.BaseKoreaLottoRaffleGenerator;
 import lotto.domain.raffle.LottoRaffleGenerator;
+import lotto.domain.round.LottoRoundJudge;
 
 public class LottoGameSetting {
   private final LottoRaffleGenerator raffleGenerator;
+  private final LottoRoundJudge roundJudge;
   private final boolean distinctNumberOnly;
   private final LottoPricePerGame pricePerGame;
 
-  private LottoGameSetting(LottoRaffleGenerator raffleGenerator, boolean distinctNumberOnly, LottoPricePerGame pricePerGame) {
+  private LottoGameSetting(LottoRaffleGenerator raffleGenerator, LottoRoundJudge roundJudge, boolean distinctNumberOnly, LottoPricePerGame pricePerGame) {
     this.raffleGenerator = raffleGenerator;
+    this.roundJudge = roundJudge;
     this.distinctNumberOnly = distinctNumberOnly;
     this.pricePerGame = pricePerGame;
   }
@@ -21,6 +24,7 @@ public class LottoGameSetting {
   public static LottoGameSetting ofKorea645LottoSetting() {
     return builder()
         .raffleGenerator(new BaseKoreaLottoRaffleGenerator())
+        .roundJudge(new LottoRoundJudge())
         .distinctNumberOnly(true)
         .pricePerGame(1000)
         .build();
@@ -28,6 +32,10 @@ public class LottoGameSetting {
 
   public LottoRaffleGenerator getRaffleGenerator() {
     return raffleGenerator;
+  }
+
+  public LottoRoundJudge getRoundJudge() {
+    return roundJudge;
   }
 
   public boolean isDistinctNumberOnly() {
@@ -43,6 +51,7 @@ public class LottoGameSetting {
     private LottoRaffleGenerator raffleGenerator;
     private Boolean distinctNumberOnly;
     private LottoPricePerGame pricePerGame;
+    private LottoRoundJudge roundJudge;
 
     public LottoGameSettingBuilder raffleGenerator (LottoRaffleGenerator raffleGenerator) {
       this.raffleGenerator = raffleGenerator;
@@ -59,9 +68,30 @@ public class LottoGameSetting {
       return this;
     }
 
+    public LottoGameSettingBuilder roundJudge (LottoRoundJudge lottoRoundJudge) {
+      this.roundJudge = lottoRoundJudge;
+      return this;
+    }
+
+    public boolean getOrDefaultDistinctNumberOnly() {
+      if (this.distinctNumberOnly != null) {
+        return this.distinctNumberOnly;
+      }
+      return true;
+    }
+
+    public LottoRoundJudge getOrDefaultRoundJudge() {
+      if (this.roundJudge != null) {
+        return this.roundJudge;
+      }
+      return new LottoRoundJudge();
+    }
+
     public LottoGameSetting build () {
-      boolean distinctNumberOnly = this.distinctNumberOnly != null ? this.distinctNumberOnly : true;
-      return new LottoGameSetting(this.raffleGenerator, distinctNumberOnly, this.pricePerGame);
+      boolean distinctNumberOnly = getOrDefaultDistinctNumberOnly();
+      LottoRoundJudge roundJudge = getOrDefaultRoundJudge();
+
+      return new LottoGameSetting(this.raffleGenerator, roundJudge, distinctNumberOnly, this.pricePerGame);
     }
   }
 }
