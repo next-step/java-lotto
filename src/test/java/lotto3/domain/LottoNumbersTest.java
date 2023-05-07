@@ -43,6 +43,6 @@ class LottoNumbersTest {
   void 로또번호_생성될때_숫자가_1과_45_사이가_아니면_예외_발생() {
     assertThatThrownBy(() -> new LottoNumbers(List.of(1, 2, 3, 4, 5, 46)))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("로또 번호는 1~45 사이의 숫자여야 합니다.");
+        .hasMessage("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
   }
 }

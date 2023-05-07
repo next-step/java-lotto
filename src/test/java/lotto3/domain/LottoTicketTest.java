@@ -12,7 +12,7 @@ class LottoTicketTest {
     LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,5,7));
 
     WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,8));
-    BonusNumber bonusNumber = new BonusNumber(7);
+    LottoNumber bonusNumber = new LottoNumber(7);
 
     Prize actualPrize = lottoTicket.getLottoPrize(winningNumbers, bonusNumber);
 

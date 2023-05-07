@@ -13,7 +13,7 @@ class WinningNumbersTest {
     List<Integer> numbers = List.of(0, 1, 2, 3, 4, 5);
     assertThat(catchThrowable(() -> new WinningNumbers(numbers)))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("지난 주 당첨 번호는 1~45 사이의 숫자여야 합니다.");
+        .hasMessage("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
   }
 
   @Test
@@ -21,7 +21,7 @@ class WinningNumbersTest {
     List<Integer> numbers = List.of(1, 2, 3, 4, 5, 46);
     assertThat(catchThrowable(() -> new WinningNumbers(numbers)))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("지난 주 당첨 번호는 1~45 사이의 숫자여야 합니다.");
+        .hasMessage("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
   }
 
   @Test
@@ -35,7 +35,7 @@ class WinningNumbersTest {
   @Test
   void 보너스번호가_당첨번호와_중복될_경우_예외를_던진다() {
     WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
-    BonusNumber duplicateBonusNumber = new BonusNumber(6);
+    LottoNumber duplicateBonusNumber = new LottoNumber(6);
 
     assertThatThrownBy(() -> winningNumbers.validateHasDuplicateNumber(duplicateBonusNumber))
         .isInstanceOf(IllegalArgumentException.class)
