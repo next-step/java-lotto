@@ -3,6 +3,7 @@ package lottery.domain;
 import static java.lang.String.valueOf;
 
 import java.util.Objects;
+import java.util.Set;
 
 public class LotteryNumber {
     protected static final int MIN = 1;
@@ -18,6 +19,10 @@ public class LotteryNumber {
             throw new IllegalArgumentException(OUT_OF_RANGE_NUMBER_MSG);
         }
         this.lotteryNumber = lotteryNumber;
+    }
+
+    public boolean containsNumber(Set<LotteryNumber> lotteryNumbers) {
+        return lotteryNumbers.contains(this);
     }
 
     private boolean outOfRange(int lotteryNumber) {

@@ -12,9 +12,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lottery.domain.numbergenerator.RandomNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LotteryTest {
 
@@ -73,5 +74,12 @@ public class LotteryTest {
         Lottery unsorted = lotteryFactory("1,7,3,8,2,9");
         Lottery sorted = lotteryFactory("1,2,3,7,8,9");
         assertThat(unsorted.equals(sorted)).isTrue();
+    }
+
+    @ParameterizedTest(name = "보너스 번호가 이미 로또에 포함되어있을경우 true 아닐경우 false 를 반환한다.")
+    @CsvSource(value = {"1:true","9:false"}, delimiter = ':')
+    void containsTest(int lottoNumber, boolean expected) {
+        assertThat(new Lottery(LOTTERY_NUMBERS).containsBonus(new BonusNumber(lottoNumber)))
+                .isEqualTo(expected);
     }
 }

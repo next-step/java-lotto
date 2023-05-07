@@ -10,11 +10,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 import lottery.domain.numbergenerator.RandomNumberGenerator;
 
@@ -89,6 +87,10 @@ public class Lottery {
         return this.lotteryNumbers.stream()
                 .filter(weeklyWinningNumbers::contains)
                 .collect(Collectors.toSet()).size();
+    }
+
+    public boolean containsBonus(BonusNumber bonusNumber) {
+        return bonusNumber.containsNumber(this.lotteryNumbers);
     }
 
     @Override
