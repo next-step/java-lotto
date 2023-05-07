@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.LotteryNumber;
-import lotto.model.LotteryTicket;
-import lotto.model.LotteryTickets;
-import lotto.model.Win;
+import lotto.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;
@@ -59,7 +56,7 @@ public class LotteryTest {
                 new LotteryNumber(() -> 42),
                 new LotteryNumber(() -> 43)));
         List<Integer> winNumbers = List.of(41, 1, 13, 27, 42, 43);
-        int count = lotteryTicket.compare(winNumbers);
+        int count = lotteryTicket.compare(new WinNumbers(winNumbers));
         assertThat(count).isEqualTo(3);
     }
 

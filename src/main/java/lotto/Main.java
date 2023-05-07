@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.model.LotteryTickets;
 import lotto.model.Win;
+import lotto.model.WinNumbers;
 import lotto.view.OutputView;
 import lotto.view.InputView;
 
@@ -16,10 +17,7 @@ public class Main {
         OutputView.showLotteryTickets(lotteryTickets);
 
         final List<Integer> winNumbers = InputView.pickWinNumbers();
-        if (winNumbers.size() != 6) {
-            throw new RuntimeException("잘못된 로또 번호 목록입니다.");
-        }
-        final Map<Win, Integer> winTotal = lotteryTickets.getWinTotal(winNumbers);
+        final Map<Win, Integer> winTotal = lotteryTickets.getWinTotal(new WinNumbers(winNumbers));
         OutputView.showResult(winTotal, money);
     }
 }

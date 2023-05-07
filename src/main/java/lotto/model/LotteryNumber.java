@@ -13,7 +13,7 @@ public class LotteryNumber {
         this.number = numberGenerator.generate();
     }
 
-    public boolean isIn(List<Integer> winNumbers) {
+    public boolean isIn(WinNumbers winNumbers) {
         return winNumbers.contains(number);
     }
 

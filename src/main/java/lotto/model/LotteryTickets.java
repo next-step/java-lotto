@@ -16,7 +16,7 @@ public class LotteryTickets {
         this.tickets = tickets;
     }
 
-    public Map<Win, Integer> getWinTotal(List<Integer> winNumbers) {
+    public Map<Win, Integer> getWinTotal(WinNumbers winNumbers) {
         Map<Win, Integer> winTotal = initialize();
         tickets.forEach(ticket -> {
             int winPoint = ticket.compare(winNumbers);

@@ -38,7 +38,7 @@ public class LotteryTicket {
         }
     }
 
-    public int compare(List<Integer> winNumbers) {
+    public int compare(WinNumbers winNumbers) {
         return (int) numbers.stream().filter(lotteryNumber -> lotteryNumber.isIn(winNumbers)).count();
     }
 
