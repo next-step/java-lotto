@@ -5,7 +5,6 @@ import java.util.function.Function;
 
 //
 public enum RewardTable {
-  noRewardRank(0, (times) -> 0),
   fourthRank(3, (times) -> times * 5000),
   thirdRank(4, (times) -> times * 50000),
   secondRank(5, (times) -> times * 1500000),
@@ -31,7 +30,15 @@ public enum RewardTable {
     return this.calcReward.apply(1);
   }
 
+  public String resultOfReward(int matchNumber, int matchValue) {
+    String match = matchNumber + "개 일치 (";
+    String priceAndValue = this.calcReward.apply(1) + "원)- " + matchValue +"개";
+
+    return match + priceAndValue;
+  }
+
   public static RewardTable rewardTableInfo(int matchNumber) {
+
     return Arrays.stream(values())
         .filter(rank -> rank.matchNumber == matchNumber)
         .findAny()

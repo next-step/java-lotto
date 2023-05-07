@@ -18,7 +18,7 @@ public class WinningStatistics {
   private Map<Integer, Integer> makeHashMap() {
     Map<Integer, Integer> map = new HashMap<>();
 
-    for(int i=0; i<=7; i++) {
+    for(int i=3; i<=6; i++) {
       map.put(i, 0);
     }
 
@@ -26,18 +26,12 @@ public class WinningStatistics {
   }
 
   public Map<Integer, Integer> lottoResult(List<Lotto> lottoBundle) {
-    Map<Integer, Integer> map = new HashMap<>();
+    Map<Integer, Integer> map = makeHashMap();
 
     for (Lotto lotto : lottoBundle) {
       map.compute(lotto.matchLottoNumber(this.targetNumber), (key, value) -> value == null ? 1 : value + 1);
       calcWinningPrice(lotto.matchLottoNumber(this.targetNumber));
     }
-
-    // 작동이 안되는 이유가 무엇인가요?
-    // 위와 뭐가 다른 지 모르겠습니다...
-//        lottoBundle.stream()
-//                .mapToInt(lotto -> lotto.matchLottoNumber(this.targetNumber))
-//                .map(key -> map.put(key, map.getOrDefault(key, 0) + 1));
 
     return map;
   }
