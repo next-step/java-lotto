@@ -17,7 +17,7 @@ public class LottoController {
         int purchaseAmount = InputView.askPurchaseAmount();
         // 수동 로또
         int manualLottoCount = InputView.askManualLottoCount();
-        Lottos manualLotto = lottoService.createManualLotto(InputView.askManualLottoNumbers(manualLottoCount));
+        Lottos manualLotto = lottoService.createManualLotto(InputView.askManualLotto(manualLottoCount));
         OutputView.outPutLottos(manualLotto);
 
         int remainingMoneyAfterBuyLotto = lottoStoreService.getRemainingMoneyAfterBuyLotto(new LottoPriceStrategy(), purchaseAmount, manualLottoCount);
