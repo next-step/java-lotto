@@ -1,8 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
-import static lotto.LottoMatcher.*;
+import static lotto.domain.LottoMatcher.*;
 
 public class LottoScore {
     private int firstCount = 0;
