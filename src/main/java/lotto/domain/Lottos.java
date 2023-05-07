@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.Result;
 import lotto.utils.LottoCountCalculator;
 
 import java.util.ArrayList;
@@ -24,21 +23,16 @@ public class Lottos {
         lottoList = inLottoList;
     }
 
-    public Result getWinningResult(WinningLotto winningLotto) {
-        Result result = new Result();
+    public LottoResult getWinningResult(WinningLotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
 
-        List<Rank> rankList = getRankList(winningLotto);
-        rankList.forEach(result::put);
-
-        return result;
-    }
-
-    private List<Rank> getRankList(WinningLotto winningLotto) {
-        return lottoList.stream()
+        lottoList.stream()
                 .map(lotto -> winningLotto.countMatchingWith(lotto))
                 .map(count -> Rank.rankOf(count))
                 .filter(rank -> rank != Rank.NON_RANKED)
-                .collect(Collectors.toList());
+                .forEach(rank -> lottoResult.put(rank));
+
+        return lottoResult;
     }
 
     public int count() {

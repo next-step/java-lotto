@@ -37,12 +37,12 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Lotto(ArrayList<Integer> inNumbers) {
+    public Lotto(List<Integer> inNumbers) {
         validateNumbers(inNumbers);
         numbers = sorted(inNumbers);
     }
 
-    private void validateNumbers(ArrayList<Integer> inNumbers) {
+    private void validateNumbers(List<Integer> inNumbers) {
         if (inNumbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format("Expected %d numbers, but received %d.", NUMBER_COUNT, inNumbers.size()));
         }
