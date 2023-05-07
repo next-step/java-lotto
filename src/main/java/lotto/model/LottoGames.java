@@ -4,12 +4,10 @@ import lotto.model.enums.Ranking;
 import lotto.util.RandomUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoGames {
-    public static final String COMMA = ", ";
     public static final int NUMBER_SIZE = 6;
-    public static final int NUMBER_RANGE = 46;
+    public static final int NUMBER_RANGE = 45;
 
     private List<Lotto> games;
     private List<Integer> winningNumbers;
@@ -44,16 +42,13 @@ public class LottoGames {
 
     public int getGameCount(){ return games.size(); }
 
-    public void setWinningNumbers(String winningNumbers) {
-        this.winningNumbers = Arrays.stream(winningNumbers.split(COMMA))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+    public void setWinningNumbers(List<Integer> winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
-    public void showAllTickets(){
-        games.stream().forEach(g -> System.out.println(g.toString()));
-        System.out.println("");
-    }
+    public List<Integer> getWinningNumbers(){ return winningNumbers;}
+
+    public List<Lotto> getGames(){ return games; }
 
     public void aggregate() {
         for (Lotto ticket : games) {
@@ -63,7 +58,7 @@ public class LottoGames {
 
             if(ranking != null){
                 List<Lotto> elements = aggregatedGames.getOrDefault(ranking,
-                                new ArrayList<>(Arrays.asList(ticket)));
+                                List.of(ticket));
                 aggregatedGames.put(ranking, elements);
             }
         }

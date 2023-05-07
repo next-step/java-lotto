@@ -19,6 +19,11 @@ public class ResultView {
         }
     }
 
+    public static void showAllTickets(List<Lotto> games){
+        games.forEach(g -> System.out.println(g.toString()));
+        System.out.println();
+    }
+
     public static String showStatistics(Ranking ranking, int count){
         return String.format(STATISTIC_FORMAT,
                         ranking.getCount(),

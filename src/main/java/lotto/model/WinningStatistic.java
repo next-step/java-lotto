@@ -1,17 +1,18 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningStatistic {
 
     public static int getEqualCount(List<Integer> source, List<Integer> target) {
+        int count = 0;
 
-        List<Integer> tempSource = new ArrayList<>(source);
-        List<Integer> tempTarget = new ArrayList<>(target);
+        for (Integer sourceElement : source){
+            if(target.contains(sourceElement)){
+                count++;
+            }
+        }
 
-        tempSource.removeAll(tempTarget);
-
-        return source.size() - tempSource.size();
+        return count;
     }
 }
