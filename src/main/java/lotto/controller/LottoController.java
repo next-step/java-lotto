@@ -1,8 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicketMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.WinningTicket;
+import lotto.domain.*;
+import lotto.dto.LottoStatisticsDto;
 import lotto.dto.ManualLottoTicketsDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -31,7 +30,7 @@ public class LottoController {
         LottoNumber bonusBallNumber = LottoNumber.of(InputView.inputBonusBallNumber());
         WinningTicket winningTicket
                 = new WinningTicket(winningNumbers, bonusBallNumber);
-        OutputView.outputLottoStatistics(lottoTicketMachine.calculateLottoStatistics(winningTicket));
+        OutputView.outputLottoStatistics(calculateLottoStatistics(lottoTicketMachine, winningTicket));
     }
 
     private static int calculateAutoPurchaseCount(int manualPurchaseCount, int purchaseAmount) {
@@ -43,5 +42,15 @@ public class LottoController {
         if (purchaseAmount < manualPurchaseCount * LottoTicketMachine.LOTTO_PRICE) {
             throw new IllegalArgumentException("구입할 금액을 초과합니다.");
         }
+    }
+
+    private static LottoStatisticsDto calculateLottoStatistics(LottoTicketMachine lottoTicketMachine,
+                                                        WinningTicket winningTicket) {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        LottoTickets lottoTicketsTotal = lottoTicketMachine.getLottoTicketsTotal();
+        return new LottoStatisticsDto(
+                lottoStatistics.calculateMatchingCounts(lottoTicketsTotal, winningTicket),
+                lottoStatistics.calculateGrossRateOfEarnings(lottoTicketsTotal.getSize())
+        );
     }
 }

@@ -35,14 +35,6 @@ public class LottoTicketMachine {
         setLottoTicketsTotal(strategy);
     }
 
-    public LottoStatisticsDto calculateLottoStatistics(WinningTicket winningTicket) {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        return new LottoStatisticsDto(
-                lottoStatistics.calculateMatchingCounts(lottoTicketsTotal, winningTicket),
-                lottoStatistics.calculateGrossRateOfEarnings(lottoTicketsTotal.getSize())
-        );
-    }
-
     public LottoTickets getLottoTicketsTotal() {
         return lottoTicketsTotal;
     }
