@@ -7,7 +7,7 @@ import java.util.function.BiFunction;
 public enum Operator {
 
     PLUS("+", Integer::sum),
-    MINUS("-", Integer::sum),
+    MINUS("-", (a, b) -> a-b),
     MULTIPLY("*", Integer::sum),
     DIVIDE("/", Integer::sum),
     ;
