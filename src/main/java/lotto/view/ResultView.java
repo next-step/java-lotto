@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.game.LottoGameStatistics;
-import lotto.domain.game.LottoGameType;
 import lotto.domain.game.LottoWinType;
 import lotto.domain.round.LottoRound;
 import lotto.domain.round.LottoRoundResult;

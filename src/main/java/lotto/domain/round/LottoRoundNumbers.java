@@ -29,9 +29,7 @@ public class LottoRoundNumbers {
     }
   }
 
-  public List<Integer> getNumbers () {
-    return numbers.stream()
-        .map(LottoNumber::getNumber)
-        .collect(Collectors.toList());
+  public List<LottoNumber> getNumbers () {
+    return numbers;
   }
 }

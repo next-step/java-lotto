@@ -3,6 +3,7 @@ package lotto.domain.round;
 import java.util.List;
 import lotto.domain.game.LottoWinType;
 import lotto.domain.game.LottoWinningNumber;
+import lotto.domain.number.LottoNumber;
 
 public class LottoRound {
   private final LottoRoundNumbers roundNumbers;
@@ -18,7 +19,7 @@ public class LottoRound {
     return new LottoRoundResult(winType);
   }
 
-  public List<Integer> getRoundNumbers() {
+  public List<LottoNumber> getRoundNumbers() {
     return roundNumbers.getNumbers();
   }
 }
