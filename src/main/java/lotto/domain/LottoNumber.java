@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -18,9 +19,11 @@ public class LottoNumber {
     }
 
     public List<Integer> createLottoNumber() {
-        return Stream.generate(() -> random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER)
+        List<Integer> collect = Stream.generate(() -> random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER)
                 .limit(6)
                 .collect(Collectors.toList());
+        Collections.sort(collect);
+        return collect;
     }
 
     @Override

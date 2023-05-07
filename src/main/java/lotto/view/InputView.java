@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private final Scanner scanner = new Scanner(System.in);
     private static final int LOTTO_PRICE = 1000;
 
     private int inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        int price = scanner.nextInt();
+        int price = new Scanner(System.in).nextInt();
         validPrice(price);
         return price;
     }
@@ -20,9 +19,10 @@ public class InputView {
         return count;
     }
 
-    public String inputLottoNumbers() {
+    public String[] inputWinningLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        String inputString = new Scanner(System.in).nextLine();
+        return inputString.split(", ");
     }
 
     public void validPrice(int price) {
@@ -30,4 +30,5 @@ public class InputView {
             throw new IllegalArgumentException("로또 최소 구매 금액은 1000원 입니다");
         }
     }
+
 }
