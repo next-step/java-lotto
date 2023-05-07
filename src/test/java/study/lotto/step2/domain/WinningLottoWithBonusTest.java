@@ -19,7 +19,7 @@ class WinningLottoWithBonusTest {
     void result_of_lotto(Lotto lotto, LottoResult expectedLottoResult) {
         // given
         WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
-        BonusNumber bonusNumber = new BonusNumber(winningLotto, LottoNumber.of(7));
+        BonusNumber bonusNumber = new BonusNumber(7);
         WinningLottoWithBonus winningLottoWithBonus = new WinningLottoWithBonus(winningLotto, bonusNumber);
 
         // when, then
@@ -31,7 +31,7 @@ class WinningLottoWithBonusTest {
     void result_of_lottos() {
         // given
         WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
-        BonusNumber bonusNumber = new BonusNumber(winningLotto, LottoNumber.of(7));
+        BonusNumber bonusNumber = new BonusNumber(7);
         WinningLottoWithBonus winningLottoWithBonus = new WinningLottoWithBonus(winningLotto, bonusNumber);
 
         Lotto matchFiveNumbersWithBonusLotto = new Lotto(1, 2, 3, 4, 5, 7);
@@ -44,6 +44,19 @@ class WinningLottoWithBonusTest {
         // then
         LottoResults expectedLottoResults = new LottoResults(MATCH_FIVE_NUMBERS_WITH_BONUS, MATCH_THREE_NUMBERS);
         assertThat(lottoResults).isEqualTo(expectedLottoResults);
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호에 포함되어 있을 시, IllegalArgumentException 예외 발생")
+    void bonus_number_is_included_in_the_winning_number_then_throw_IllegalArgumentException() {
+        // given
+        WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
+        BonusNumber duplicatedBonusNumber = new BonusNumber(1);
+
+        // when, then
+        assertThatThrownBy(() -> new WinningLottoWithBonus(winningLotto, duplicatedBonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("보너스 번호가 당첨 번호에 포함되어 있으면 안됩니다: " + duplicatedBonusNumber);
     }
 
     private static Stream<Arguments> lottoAndExpectedLottoResult() {

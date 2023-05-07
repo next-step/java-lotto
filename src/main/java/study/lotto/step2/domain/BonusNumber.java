@@ -3,8 +3,11 @@ package study.lotto.step2.domain;
 public class BonusNumber {
     private final LottoNumber bonusNumber;
 
-    public BonusNumber(WinningLotto winningLotto, LottoNumber bonusNumber) {
-        validateBonusLottoNumber(winningLotto, bonusNumber);
+    public BonusNumber(int bonusNumber) {
+        this(LottoNumber.of(bonusNumber));
+    }
+
+    public BonusNumber(LottoNumber bonusNumber) {
         this.bonusNumber = bonusNumber;
     }
 
@@ -12,9 +15,12 @@ public class BonusNumber {
         return lotto.getLottoNumbers().getLottoNumbers().contains(bonusNumber);
     }
 
-    private void validateBonusLottoNumber(WinningLotto winningLotto, LottoNumber bonusNumber) {
-        if(winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호가 당첨 번호에 포함되어 있으면 안됩니다: " + bonusNumber);
-        }
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+    @Override
+    public String toString() {
+        return bonusNumber.toString();
     }
 }

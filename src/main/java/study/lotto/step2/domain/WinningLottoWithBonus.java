@@ -8,6 +8,7 @@ public class WinningLottoWithBonus {
     private final BonusNumber bonusNumber;
 
     public WinningLottoWithBonus(WinningLotto winningLotto, BonusNumber bonusNumber) {
+        validateBonusLottoNumber(winningLotto, bonusNumber);
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
@@ -24,5 +25,11 @@ public class WinningLottoWithBonus {
         return lottos.stream()
                 .map(this::resultOf)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    private void validateBonusLottoNumber(WinningLotto winningLotto, BonusNumber bonusNumber) {
+        if(winningLotto.contains(bonusNumber.getBonusNumber())) {
+            throw new IllegalArgumentException("보너스 번호가 당첨 번호에 포함되어 있으면 안됩니다: " + bonusNumber);
+        }
     }
 }
