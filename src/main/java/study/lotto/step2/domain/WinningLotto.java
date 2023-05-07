@@ -1,7 +1,6 @@
 package study.lotto.step2.domain;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,26 +23,16 @@ public class WinningLotto {
         this.winningLottoNumbers = winningLottoNumbers;
     }
 
-    public LottoResults resultsOf(Lottos lottos) {
-        return new LottoResults(resultsOf(lottos.getLottos()));
+    public boolean contains(LottoNumber lottoNumber) {
+        return winningLottoNumbers.contains(lottoNumber);
     }
 
-    public LottoResult resultOf(Lotto lotto) {
-        return LottoResult.of(numbersOfMatch(lotto));
-    }
-
-    private int numbersOfMatch(Lotto lotto) {
+    public int numbersOfMatch(Lotto lotto) {
         return numbersOfMatch(lotto.getLottoNumbers());
     }
 
     private int numbersOfMatch(LottoNumbers lottoNumbers) {
         return numbersOfMatch(lottoNumbers.getLottoNumbers());
-    }
-
-    private List<LottoResult> resultsOf(List<Lotto> lottos) {
-        return lottos.stream()
-                .map(this::resultOf)
-                .collect(Collectors.toUnmodifiableList());
     }
 
     private int numbersOfMatch(Set<LottoNumber> lottoNumbers) {
