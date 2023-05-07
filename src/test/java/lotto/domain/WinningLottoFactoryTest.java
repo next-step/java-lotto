@@ -31,5 +31,13 @@ class WinningLottoFactoryTest {
         Assertions.assertThat(winningCount).isEqualTo(6);
     }
 
-
+    @DisplayName("당첨번호와 보너스 번호가 중복되면 예외가 발생한다")
+    @Test
+    void winningLotto_create_fail() {
+        String winningNumbersString = "1,2,3,4,5,6";
+        Integer bonusNumber = 6;
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> WinningLottoFactory.create(winningNumbersString, bonusNumber))
+                .withMessage("보너스 번호는 당첨 번호와 중복되지 않아야 합니다");
+    }
 }

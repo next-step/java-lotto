@@ -33,7 +33,7 @@ class WinningStatisticsTest {
         winningStatistics.addMatchedTicket(WinningRank.FOURTH);
 
         int numberOfTickets = 10;
-        double expectedEarningsRate = 5_000 / (double) (numberOfTickets * PRICE_OF_LOTTO_TICKET);
+        double expectedEarningsRate = WinningRank.FOURTH.getMoneyOfPrize() / (double) (numberOfTickets * PRICE_OF_LOTTO_TICKET);
         double actualEarningsRate = winningStatistics.calculateEarningsRate(numberOfTickets);
 
         assertEquals(expectedEarningsRate, actualEarningsRate, 0.5);

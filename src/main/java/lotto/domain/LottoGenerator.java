@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 import static lotto.domain.LottoTicket.LOTTO_TICKET_SIZE;
 
 public class LottoGenerator {
-
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_TICKET_COUNT = 1;
@@ -35,9 +34,4 @@ public class LottoGenerator {
             throw new IllegalArgumentException("로또 티켓은 " + MIN_LOTTO_TICKET_COUNT + "장 보다 적게 생성 할 수 없습니다");
         }
     }
-
-
 }
-
-
-

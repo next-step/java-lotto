@@ -47,5 +47,3 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Integer.compare(this.number, o.number);
     }
 }
-
-

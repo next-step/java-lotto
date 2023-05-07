@@ -10,5 +10,4 @@ public class BonusNumber {
     public boolean matchesBonusNumber(LottoNumber number) {
         return bonusNumber.equals(number);
     }
-
 }

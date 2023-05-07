@@ -6,7 +6,6 @@ import java.util.Map;
 import static lotto.domain.LottoTickets.PRICE_OF_LOTTO_TICKET;
 
 public class WinningStatistics {
-
     private final Map<WinningRank, Integer> rankCounts;
 
     public WinningStatistics() {
@@ -21,7 +20,8 @@ public class WinningStatistics {
     }
 
     public double calculateEarningsRate(int numberOfTickets) {
-        long totalPrize = rankCounts.entrySet().stream()
+        long totalPrize = rankCounts.entrySet()
+                .stream()
                 .mapToLong(entry -> (long) entry.getKey().getMoneyOfPrize() * entry.getValue())
                 .sum();
 

@@ -13,16 +13,15 @@ class LottoGeneratorTest {
     @DisplayName("로또 티켓은 6개의 숫자로 생성된다")
     @Test
     void lottoGenerate_basic() {
-        LottoTicket lottoTicket = new LottoGenerator().generateLottoNumbers();
+        LottoTicket lottoTicket = LottoGenerator.generateLottoNumbers();
+
         assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @ParameterizedTest(name = "로또 티켓은 원하는 수량만큼 생성할수 있다")
     @ValueSource(ints = {1, 10, 100})
     void lottoGenerate_with_count(int numberOfLottoTickets) {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-
-        LottoTickets lottoTickets = lottoGenerator.generateLottoTickets(numberOfLottoTickets);
+        LottoTickets lottoTickets = LottoGenerator.generateLottoTickets(numberOfLottoTickets);
 
         assertThat(lottoTickets.findLottoTicketCount()).isEqualTo(numberOfLottoTickets);
     }
