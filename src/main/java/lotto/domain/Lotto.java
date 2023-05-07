@@ -3,11 +3,20 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoFactory.LOTTO_NUMBER;
+
 public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public void validate(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER) {
+            throw new IllegalArgumentException("개수가 6개가 아닙니다.");
+        }
     }
 
     public int getMatchingNumberCount(Lotto lotto) {

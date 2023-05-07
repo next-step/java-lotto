@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    private static final int LOTTO_NUMBER = 6;
+    public static final int LOTTO_NUMBER = 6;
 
     private static List<LottoNumber> lottoNumbers = IntStream.range(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
             .boxed().map(number -> LottoNumber.of(number)).collect(Collectors.toList());
@@ -19,14 +19,7 @@ public class LottoFactory {
 
     public static Lotto createManualLotto(String winningLottos) {
         List<LottoNumber> numbers = split(winningLottos);
-        validate(numbers);
         return new Lotto(numbers);
-    }
-
-    private static void validate(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBER) {
-            throw new IllegalArgumentException("개수가 6개가 아닙니다.");
-        }
     }
 
     private static List<LottoNumber> split(String numbers) {
