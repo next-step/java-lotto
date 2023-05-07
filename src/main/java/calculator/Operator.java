@@ -27,4 +27,8 @@ public enum Operator {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("not support operator "+symbol));
     }
+
+    public int calculate(int a, int b){
+        return function.apply(a, b);
+    }
 }
