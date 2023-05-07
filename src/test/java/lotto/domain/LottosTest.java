@@ -16,6 +16,7 @@ public class LottosTest {
                 LottoFactory.createManualLotto("1, 2, 3, 10, 11, 12")));
 
         Lotto lotto = LottoFactory.createManualLotto("1, 2, 3, 7, 8, 9");
-        assertThat(lottos.matchesLottos(lotto)).containsExactly(4, 3);
+        LottoNumber bonusBall = LottoNumber.of(10);
+        assertThat(lottos.matchesLottos(lotto, bonusBall)).containsExactly(WinningCount.FOUR, WinningCount.THREE);
     }
 }

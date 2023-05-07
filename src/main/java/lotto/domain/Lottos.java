@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
+    private static final int LOTTO_REWARD_LIMIT = 3;
+    private static final int BONUS_BALL_CHECK = 5;
+
     private List<Lotto> lottos;
 
     public Lottos(int numberOfLotto) {
@@ -25,8 +28,20 @@ public class Lottos {
         return LottoFactory.create();
     }
 
-    public List<Integer> matchesLottos(Lotto winningLotto) {
-        return lottos.stream().map(lotto -> lotto.getMatchingNumberCount(winningLotto)).collect(Collectors.toList());
+    public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNumber bonusBall) {
+        List<WinningCount> matchLottoList = new ArrayList<>();
+        for(Lotto lotto: lottos) {
+            int count = lotto.getMatchingNumberCount(winningLotto);
+            if (count < LOTTO_REWARD_LIMIT) {
+                continue;
+            }
+            if (count == BONUS_BALL_CHECK) {
+                matchLottoList.add(WinningCount.of(count, lotto.contains(bonusBall)));
+                continue;
+            }
+            matchLottoList.add(WinningCount.of(count));
+        }
+        return matchLottoList;
     }
 
     public List<Lotto> getLottos() {

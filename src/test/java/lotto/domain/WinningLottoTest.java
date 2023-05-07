@@ -19,9 +19,9 @@ public class WinningLottoTest {
         String winningNumbers = "1, 2, 3, 45, 32, 13";
         int bonusBall = 7;
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
-        List<Integer> count = winningLotto.checkWinningNumbers(lottos);
+        List<WinningCount> count = winningLotto.checkWinningNumbers(lottos);
 
-        assertThat(count).containsExactly(3, 3);
+        assertThat(count).containsExactly(WinningCount.THREE, WinningCount.THREE);
     }
 
     @Test
@@ -32,5 +32,20 @@ public class WinningLottoTest {
         assertThatThrownBy(() -> {
             new WinningLotto(winningNumbers, bonusBall);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("보너스 볼이 로또 당첨 번호와 중복됩니다.");
+    }
+
+    @Test
+    @DisplayName("당첨 확인 - 보너스 볼")
+    void winLotto_withBonusBall() {
+        Lottos lottos = new Lottos(Arrays.asList(
+                LottoFactory.createManualLotto("1, 2, 4, 25, 35, 12"),
+                LottoFactory.createManualLotto("1, 2, 3, 45, 32, 7")));
+
+        String winningNumbers = "1, 2, 3, 45, 32, 13";
+        int bonusBall = 7;
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
+        List<WinningCount> count = winningLotto.checkWinningNumbers(lottos);
+
+        assertThat(count).containsExactly(WinningCount.FIVE_WITH_BONUS_BALL);
     }
 }

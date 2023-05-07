@@ -14,12 +14,13 @@ public class LottoStaticsTest {
     @Test
     @DisplayName("통계 표현")
     void statics() {
-        List<Integer> result = Arrays.asList(3, 4, 5, 5, 6);
-        Map<Integer, Integer> expected = new HashMap<>();
-        expected.put(3, 1);
-        expected.put(4, 1);
-        expected.put(5, 2);
-        expected.put(6, 1);
+        List<WinningCount> result = Arrays.asList(WinningCount.THREE, WinningCount.FOUR
+                , WinningCount.FIVE, WinningCount.FIVE, WinningCount.SIX);
+        Map<WinningCount, Integer> expected = new HashMap<>();
+        expected.put(WinningCount.THREE, 1);
+        expected.put(WinningCount.FOUR, 1);
+        expected.put(WinningCount.FIVE, 2);
+        expected.put(WinningCount.SIX, 1);
 
         LottoStatics statics = new LottoStatics(5000, result);
 
@@ -29,7 +30,7 @@ public class LottoStaticsTest {
     @Test
     @DisplayName("수익률")
     void rate() {
-        List<Integer> result = Arrays.asList(3);
+        List<WinningCount> result = Arrays.asList(WinningCount.THREE);
         Map<Integer, Integer> expected = new HashMap<>();
         expected.put(3, 1);
         expected.put(4, 0);

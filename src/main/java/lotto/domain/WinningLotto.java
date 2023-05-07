@@ -20,7 +20,7 @@ public class WinningLotto {
         }
     }
 
-    public List<Integer> checkWinningNumbers(Lottos lottos) {
-        return lottos.matchesLottos(winningLotto);
+    public List<WinningCount> checkWinningNumbers(Lottos lottos) {
+        return lottos.matchesLottos(winningLotto, bonusBall);
     }
 }

@@ -7,17 +7,19 @@ import static org.assertj.core.api.Assertions.*;
 
 public class RankTest {
     @Test
-    @DisplayName("보상")
+    @DisplayName("보상 - 2등 추가")
     void checkReward() {
-        assertThat(Rank.of(3)).isEqualTo(5_000);
-        assertThat(Rank.of(4)).isEqualTo(50_000);
-        assertThat(Rank.of(5)).isEqualTo(1_500_000);
-        assertThat(Rank.of(6)).isEqualTo(2_000_000_000);
+        assertThat(Rank.of(WinningCount.THREE)).isEqualTo(5_000);
+        assertThat(Rank.of(WinningCount.FOUR)).isEqualTo(50_000);
+        assertThat(Rank.of(WinningCount.FIVE)).isEqualTo(1_500_000);
+        assertThat(Rank.of(WinningCount.FIVE_WITH_BONUS_BALL)).isEqualTo(3_000_000);
+        assertThat(Rank.of(WinningCount.SIX)).isEqualTo(2_000_000_000);
     }
 
     @Test
     @DisplayName("count 목록")
     void countList() {
-        assertThat(Rank.getCountList()).containsExactly(3, 4, 5, 6);
+        assertThat(Rank.getCountList()).containsExactly(WinningCount.THREE
+                , WinningCount.FOUR, WinningCount.FIVE, WinningCount.FIVE_WITH_BONUS_BALL, WinningCount.SIX);
     }
 }
