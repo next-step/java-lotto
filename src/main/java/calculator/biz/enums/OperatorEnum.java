@@ -29,9 +29,11 @@ public enum OperatorEnum {
         return operator;
     }
 
-    public static BiFunction<Integer, Integer, Integer> findOperator(String value){
+    public static BiFunction<Integer, Integer, Integer>  findOperator(String value){
         return Arrays.stream(OperatorEnum.values())
                 .filter(operator -> operator.getValue().equals(value))
-                .findAny().orElse(null).getOperator();
+                .findAny()
+                .orElseThrow(() -> new NullPointerException("There is no operator"))
+                .getOperator();
     }
 }

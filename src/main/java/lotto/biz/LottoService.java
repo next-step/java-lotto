@@ -3,6 +3,7 @@ package lotto.biz;
 import lotto.model.Lotto;
 import lotto.model.LottoGames;
 import lotto.model.enums.Ranking;
+import lotto.util.ParseUtil;
 import lotto.view.ResultView;
 
 import java.util.Arrays;
@@ -13,7 +14,6 @@ import java.util.stream.Collectors;
 
 public class LottoService {
     public static final String COMMA = ", ";
-
     private static String SHOW_GAME_COUNT_FORMAT = "%s개를 구매했습니다.";
 
     private LottoGames games;
@@ -34,9 +34,7 @@ public class LottoService {
             throw new RuntimeException("구입 금액을 먼저 입력해주세요.");
         }
 
-        games.setWinningNumbers(Arrays.stream(winningNumbers.split(COMMA))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+        games.setWinningNumbers(ParseUtil.convertStringToIntegerList(winningNumbers, COMMA));
     }
 
     public void aggregateWinningStatistics() {
@@ -49,7 +47,7 @@ public class LottoService {
     }
 
     public int getPurchaseValue() {
-        return games.getGameCount() * 1000;
+        return games.getGameCount() * Lotto.LOTTO_PRICE;
     }
 
     public List<Integer> getWinningNumbers(){

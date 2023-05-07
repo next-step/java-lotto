@@ -5,14 +5,8 @@ import java.util.List;
 public class WinningStatistic {
 
     public static int getEqualCount(List<Integer> source, List<Integer> target) {
-        int count = 0;
-
-        for (Integer sourceElement : source){
-            if(target.contains(sourceElement)){
-                count++;
-            }
-        }
-
-        return count;
+        return (int) source.stream()
+                .filter( el -> target.contains(el))
+                .count();
     }
 }

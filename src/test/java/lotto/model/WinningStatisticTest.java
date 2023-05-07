@@ -19,8 +19,6 @@ class WinningStatisticTest {
         List<Integer> source = new ArrayList<>(Arrays.asList(1,2,3,4,5));
         List<Integer> target = new ArrayList<>(Arrays.asList(10,2,1,4,9));
 
-        source.removeAll(target);
-
-        assertThat(WinningStatistic.getEqualCount(source, target)).isEqualTo(2);
+        assertThat(WinningStatistic.getEqualCount(source, target)).isEqualTo(3);
     }
 }
