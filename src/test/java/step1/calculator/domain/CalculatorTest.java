@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class CalculatorTest {
 	private Calculator calculator;
@@ -14,15 +16,11 @@ public class CalculatorTest {
 		this.calculator = Calculator.create();
 	}
 
-	@Test
-	void 빈문자열_혹은_null_예외처리() {
-
-		assertAll(
-			() -> assertThatThrownBy(() -> calculator.put(null))
-				.isInstanceOf(IllegalArgumentException.class),
-			() -> assertThatThrownBy(() -> calculator.put(""))
-				.isInstanceOf(IllegalArgumentException.class)
-		);
+	@ParameterizedTest
+	@NullAndEmptySource
+	void 빈문자열_혹은_null_예외처리(String nullOrEmpty) {
+		assertThatThrownBy(() -> calculator.put(nullOrEmpty))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
