@@ -10,9 +10,9 @@ public class LottoService {
         return MyLottos.autoGenerate(myPurchase);
     }
 
-    public WinLotto makeWinLotto(List<Integer> winLottoInfoNumbers) {
-        Numbers numbers = new Numbers(winLottoInfoNumbers);
-        return new WinLotto(numbers);
+    public WinLotto makeWinLotto(List<Integer> winNumbers, Integer winBonusNumber) {
+        Numbers numbers = new Numbers(winNumbers);
+        return new WinLotto(numbers, winBonusNumber);
     }
 
     public void checkWin(MyLottos lottos, WinLotto winLotto) {

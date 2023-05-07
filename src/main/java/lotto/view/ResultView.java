@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class ResultView {
     public static void showMyLottos(MyLottos myLottos) {
         for (int i = 0; i < myLottos.count(); i++) {
-            printNumber(myLottos.find(i).numbers());
+            printNumbers(myLottos.find(i).numbers());
         }
         System.out.println();
     }
@@ -16,9 +16,8 @@ public class ResultView {
         System.out.println(myPurchase.count() + "개를 구매했습니다.");
     }
 
-    private static void printNumber(Numbers numbers) {
-        System.out.println(
-                numbers.getValues().stream()
+    private static void printNumbers(Numbers numbers) {
+        System.out.println(numbers.getValues().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", ", "[", "]"))
         );
@@ -26,8 +25,8 @@ public class ResultView {
 
     public static void showWinLotto(WinLotto winLotto) {
         System.out.print("지난 주 당첨 번호 : ");
-        printNumber(winLotto.numbers());
-        System.out.println();
+        printNumbers(winLotto.numbers());
+        System.out.println("보너스 번호 : [" + winLotto.bonusNumber() + "]\n");
     }
 
     public static void showLottoResult(MyResult result) {

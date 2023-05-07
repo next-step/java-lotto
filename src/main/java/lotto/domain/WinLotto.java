@@ -2,9 +2,16 @@ package lotto.domain;
 
 public class WinLotto {
     private final Numbers numbers;
+    private final Integer bonusNumber;
 
     public WinLotto(Numbers numbers) {
         this.numbers = numbers;
+        this.bonusNumber = null;
+    }
+
+    public WinLotto(Numbers numbers, Integer bonusNumber) {
+        this.numbers = numbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public Numbers numbers() {
@@ -13,5 +20,9 @@ public class WinLotto {
 
     public Integer findNumber(int i) {
         return numbers.find(i);
+    }
+
+    public Integer bonusNumber() {
+        return bonusNumber;
     }
 }

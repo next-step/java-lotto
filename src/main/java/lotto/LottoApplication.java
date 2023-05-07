@@ -14,7 +14,7 @@ public class LottoApplication {
         LottoService lottoService = new LottoService();
 
         //로또 구입 금액 투입
-        int money = InputView.inputMoney();
+        int money = InputView.money();
         MyPurchase myPurchase = new MyPurchase(money);
         ResultView.showLottoCount(myPurchase);
 
@@ -23,8 +23,9 @@ public class LottoApplication {
         ResultView.showMyLottos(myLottos);
 
         //지난주 당첨 번호
-        List<Integer> winLottoInfoNumbers = InputView.inputWinLottoNumbers();
-        WinLotto winLotto = lottoService.makeWinLotto(winLottoInfoNumbers);
+        List<Integer> winNumbers = InputView.winLottoNumbers();
+        Integer winBonusNumber = InputView.winLottoBonusNumber();
+        WinLotto winLotto = lottoService.makeWinLotto(winNumbers, winBonusNumber);
         ResultView.showWinLotto(winLotto);
 
         //당첨번호 조회 및 통계
