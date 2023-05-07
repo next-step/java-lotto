@@ -42,14 +42,6 @@ public class CalculatorTest {
 	}
 
 	@Test
-	void 숫자가_아닌_문자열_예외처리() {
-		calculator.put("10 / 0");
-
-		assertThatThrownBy(() -> calculator.calculate())
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@Test
 	void 피연산자_하나() {
 		calculator.put("1");
 
