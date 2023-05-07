@@ -18,6 +18,7 @@ public class WinningStatistics {
 
     for (Lotto lotto : lottoBundle) {
       map.compute(lotto.matchLottoNumber(this.targetNumber),  (key, value) -> value == null ? 1 : value + 1);
+      calcWinningPrice(lotto.matchLottoNumber(this.targetNumber));
     }
 
     // 작동이 안되는 이유가 무엇인가요?
@@ -29,15 +30,10 @@ public class WinningStatistics {
     return map;
   }
 
-  private int calcWinningPrice(int key, int value) {
+  private void calcWinningPrice(int key) {
     if (key >= RewardTable.MINIMUM_MATCH_NUMBER) {
-      int winningPrice = RewardTable.rewardTableInfo(key).calculateReward(value);
-      this.totalWinningPrice += winningPrice;
-
-      return winningPrice;
+      this.totalWinningPrice += RewardTable.rewardTableInfo(key).amountOfReward();
     }
-
-    return 0;
   }
 
   public double calcRoi(int totalWinningPrice, int investment) {

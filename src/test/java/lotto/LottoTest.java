@@ -17,7 +17,7 @@ public class LottoTest {
   @Test
   @DisplayName("lotto 번호 45번까지 잘 만들어지는 지 확인")
   public void allNumberCheck() {
-    List<Integer> result = LotteryTickets.NUMBER_UNDER_FORTY_FIVE;
+    List<Integer> result = NumberMaker.NUMBER_UNDER_FORTY_FIVE;
 
     assertEquals(result.size(), 45);
     for (int number : result) {
@@ -28,9 +28,9 @@ public class LottoTest {
   @Test
   @DisplayName("lotto 객체 생성 확인")
   public void numberCheck() {
-    Lotto lotto = new Lotto(NumberMaker.makeSixLottoNumber(LotteryTickets.NUMBER_UNDER_FORTY_FIVE));
-    Lotto lotto1 = new Lotto(NumberMaker.makeSixLottoNumber(LotteryTickets.NUMBER_UNDER_FORTY_FIVE));
-    Lotto lotto2 = new Lotto(NumberMaker.makeSixLottoNumber(LotteryTickets.NUMBER_UNDER_FORTY_FIVE));
+    Lotto lotto = new Lotto(NumberMaker.makeSixLottoNumber());
+    Lotto lotto1 = new Lotto(NumberMaker.makeSixLottoNumber());
+    Lotto lotto2 = new Lotto(NumberMaker.makeSixLottoNumber());
 
     assertAll("lotto size == 6",
         () -> assertEquals(lotto.getCheckedNumbers().size(), 6),
@@ -51,7 +51,7 @@ public class LottoTest {
   @Test
   @DisplayName("로또 번호 맞춘 개수 확인")
   public void checkLottoNumberTest() {
-    Lotto lotto = new Lotto(LotteryTickets.NUMBER_UNDER_FORTY_FIVE);
+    Lotto lotto = new Lotto(NumberMaker.NUMBER_UNDER_FORTY_FIVE);
     List<Integer> targetNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     List<Integer> lottoNumber = lotto.getCheckedNumbers();

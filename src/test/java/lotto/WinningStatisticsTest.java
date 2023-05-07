@@ -32,14 +32,21 @@ public class WinningStatisticsTest {
     WinningStatistics winningStatistics = new WinningStatistics(targetNumber);
 
     Map<Integer, Integer> result = winningStatistics.lottoResult(lottoBundle);
+    System.out.println(result);
 
-    int sum = 0;
-    for (int i = 0; i < result.size(); i++) {
-      sum += result.get(i);
+    Iterator<Integer> keys = result.keySet().iterator();
+    int sumValue = 0;
 
-      assertThat(result.get(i)).isLessThanOrEqualTo(expect);
+    while (keys.hasNext()) {
+      int key = keys.next();
+      int value = result.get(key);
+
+      assertThat(value).isLessThanOrEqualTo(expect);
+
+      sumValue += value;
     }
-    assertEquals(sum, expect);
+
+    assertEquals(sumValue, expect);
   }
 
   @Test
@@ -69,12 +76,14 @@ public class WinningStatisticsTest {
   public void sumTotalWinningPriceTest() {
     Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
     Lotto lotto2 = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 43, 44, 45)));
+    Lotto lotto3 = new Lotto(new ArrayList<>(Arrays.asList(40, 41, 42, 43, 44, 45)));
     List<Lotto> lottoBundle = new ArrayList<>();
 
     String strList = "1, 2, 3, 4, 5, 6";
 
     lottoBundle.add(lotto);
     lottoBundle.add(lotto2);
+    lottoBundle.add(lotto3);
 
     List<Integer> targetNumber = InputConverter.convertNumberToList(strList);
 
@@ -107,6 +116,7 @@ public class WinningStatisticsTest {
     List<Integer> targetNumber = InputConverter.convertNumberToList(strList);
 
     WinningStatistics winningStatistics = new WinningStatistics(targetNumber);
+    System.out.println(winningStatistics.showTotalWinningPrice());
 
     Map<Integer, Integer> map = winningStatistics.lottoResult(lottoBundle);
     double result = winningStatistics.calcRoi(winningStatistics.showTotalWinningPrice(), 5000);
