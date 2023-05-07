@@ -55,7 +55,7 @@ public class Calculator {
 		return List.of(input.split(DELIMITER));
 	}
 
-	private void validate(String text) throws IllegalArgumentException {
+	private void validate(String text) {
 		if (text == null || text.isBlank()) {
 			throw new IllegalArgumentException(CHECK_INPUT_MESSAGE);
 		}
