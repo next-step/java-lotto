@@ -4,21 +4,19 @@ import lotto.model.Lotto;
 import lotto.model.LottoGames;
 import lotto.model.enums.Ranking;
 import lotto.util.ParseUtil;
-import lotto.view.ResultView;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 public class LottoService {
-    public static final String COMMA = ", ";
+    public static final String COMMA = ",";
     private static String SHOW_GAME_COUNT_FORMAT = "%s개를 구매했습니다.";
 
     private LottoGames games;
 
     public LottoService() {
+        games = new LottoGames();
     }
 
     public void setPurchaseValue(int purchaseValue) {
@@ -56,5 +54,13 @@ public class LottoService {
 
     public List<Lotto> getGames(){
         return games.getGames();
+    }
+
+    public void setBonusNumber(int input) {
+        games.setBonusNumber(input);
+    }
+
+    public Integer getBonusNumber() {
+        return games.getBonusNumber();
     }
 }

@@ -9,4 +9,8 @@ public class WinningStatistic {
                 .filter( el -> target.contains(el))
                 .count();
     }
+
+    public static boolean isContains(List<Integer> source, Integer number){
+        return source.contains(number);
+    }
 }

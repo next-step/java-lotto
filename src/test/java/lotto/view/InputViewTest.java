@@ -24,4 +24,12 @@ class InputViewTest {
         assertThat(InputView.setWinningNumbers()).isEqualTo("1, 2, 3, 4, 5, 6");
     }
 
+    @Test
+    @DisplayName("보너스 번호 입력 테스트")
+    void input_bonus_numbers(){
+        InputUtil.mockInputStream("19");
+
+        assertThat(InputView.setBonusNumber()).isEqualTo(19);
+    }
+
 }

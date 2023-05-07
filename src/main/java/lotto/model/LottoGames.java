@@ -8,9 +8,9 @@ import java.util.*;
 public class LottoGames {
     public static final int NUMBER_SIZE = 6;
     public static final int NUMBER_RANGE = 45;
-
     private List<Lotto> games;
     private List<Integer> winningNumbers;
+    private Integer bonusNumber;
     private Map<Ranking, List<Lotto>> aggregatedGames = new LinkedHashMap<>();
 
     public LottoGames() {
@@ -25,6 +25,7 @@ public class LottoGames {
 
     private void initResult() {
         aggregatedGames.put(Ranking.FIRST, new ArrayList<>());
+        aggregatedGames.put(Ranking.BONUS, new ArrayList<>());
         aggregatedGames.put(Ranking.SECOND, new ArrayList<>());
         aggregatedGames.put(Ranking.THIRD, new ArrayList<>());
         aggregatedGames.put(Ranking.FOURTH, new ArrayList<>());
@@ -51,20 +52,28 @@ public class LottoGames {
     public List<Lotto> getGames(){ return games; }
 
     public void aggregate() {
-        for (Lotto ticket : games) {
+        games.forEach( ticket -> {
             int count = WinningStatistic.getEqualCount(ticket.getNumbers(), winningNumbers);
+            boolean isContained = WinningStatistic.isContains(ticket.getNumbers(), bonusNumber);
 
-            Ranking ranking = Ranking.findRanking(count);
-
+            if(isContained) count+=1;
+            Ranking ranking = Ranking.findRanking(count, isContained);
             if(ranking != null){
-                List<Lotto> elements = aggregatedGames.getOrDefault(ranking,
-                                List.of(ticket));
+                List<Lotto> elements = aggregatedGames.getOrDefault(ranking, List.of(ticket));
                 aggregatedGames.put(ranking, elements);
             }
-        }
+        });
     }
 
     public Map<Ranking, List<Lotto>> getStatistic(){
         return Collections.unmodifiableMap(aggregatedGames);
+    }
+
+    public void setBonusNumber(int input) {
+        this.bonusNumber = input;
+    }
+
+    public Integer getBonusNumber() {
+        return this.bonusNumber;
     }
 }
