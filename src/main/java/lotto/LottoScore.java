@@ -5,10 +5,11 @@ import java.util.List;
 import static lotto.LottoMatcher.*;
 
 public class LottoScore {
-    private int fourthCount = 0;
-    private int thirdCount = 0;
-    private int secondCount = 0;
     private int firstCount = 0;
+    private int secondCount = 0;
+    private int thirdCount = 0;
+    private int fourthCount = 0;
+    private int fifthCount = 0;
     private int purchase;
 
     public LottoScore(int price, int quantity, List<LottoMatcher> lottoMatchers) {
@@ -40,6 +41,10 @@ public class LottoScore {
         fourthCount++;
     }
 
+    protected void addFifth() {
+         fifthCount++;
+    }
+
     public int firstCount() {
         return firstCount;
     }
@@ -55,12 +60,16 @@ public class LottoScore {
     public int fourthCount() {
         return fourthCount;
     }
+    public int fifthCount() {
+        return fifthCount;
+    }
 
     public double rate() {
         int amount = FIRST_MATCH.amount(firstCount) +
                 SECOND_MATCH.amount(secondCount) +
                 THIRD_MATCH.amount(thirdCount) +
-                FOURTH_MATCH.amount(fourthCount);
+                FOURTH_MATCH.amount(fourthCount) +
+                FIFTH_MATCH.amount(fifthCount);
         return ((double) amount / purchase);
     }
 }
