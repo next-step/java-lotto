@@ -6,6 +6,7 @@ public class Calculator {
     private static final String MULTIPLE_OPERATOR = "*";
     private static final String DIVIDE_OPERATOR = "/";
     private static final String OPERATOR_MUST_BE_FOUR_ARITHMETIC_OPERATION = "연산자는 사칙연산만 가능합니다.";
+
     public int doCalculate(String lastNumberStr, String operator, String firstNumberStr) {
         int lastNumber = Integer.parseInt(lastNumberStr);
         int firstNumber = Integer.parseInt(firstNumberStr);
