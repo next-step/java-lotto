@@ -1,13 +1,18 @@
 package calculator.domain;
 
+import lotto.model.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static lotto.model.Addition.ADDICTION;
+import static lotto.model.Division.DIVISION;
+import static lotto.model.Multiplication.MULTIPLICATION;
+import static lotto.model.Subtraction.SUBTRACTION;
 
 public class StringCalculator {
 
-    private static final String ADDICTION = "+";
-    private static final String MULTIPLICATION = "*";
-    private static final String DIVISION = "/";
-    private static final String SUBTRACTION = "-";
 
     private StringCalculator() {}
 
@@ -38,23 +43,17 @@ public class StringCalculator {
     }
 
     private static int operate(int result, String operator, int number) {
-        switch (operator) {
-            case ADDICTION:
-                result += number;
-                break;
-            case MULTIPLICATION:
-                result *= number;
-                break;
-            case SUBTRACTION:
-                result -= number;
-                break;
-            case DIVISION:
-                result /= number;
-                break;
-            default:
-                throw new IllegalArgumentException("잘못된 입력입니다.");
+        Map<String, Operator> operations = new HashMap<>();
+        operations.put(ADDICTION, new Addition());
+        operations.put(MULTIPLICATION, new Multiplication());
+        operations.put(SUBTRACTION, new Subtraction());
+        operations.put(DIVISION, new Division());
+
+        Operator operation = operations.get(operator);
+        if (operation == null) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
-        return result;
+        return operation.operate(result, number);
     }
 
 }
