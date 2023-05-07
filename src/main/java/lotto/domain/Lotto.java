@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<LottoNumber> lotto = new ArrayList<>();
+    public static List<LottoNumber> lotto = new ArrayList<>();
 
     public Lotto() {}
 

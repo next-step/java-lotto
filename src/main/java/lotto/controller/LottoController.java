@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoController {
     public static void main(String[] args) {
@@ -11,6 +12,8 @@ public class LottoController {
 
         Lotto lotto = new Lotto();
         lotto.playLotto(lottoCount);
+
+        ResultView.printLottoNumber();
 
     }
 }
