@@ -17,6 +17,7 @@ public class LottoNumbers {
   }
 
   private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+
     return numbers.stream()
         .map(LottoNumber::new)
         .collect(Collectors.toList());
