@@ -8,16 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-  public static final List<Integer> NUMBER_UNDER_FORTY_FIVE = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-
   public static int PRICE = 1000;
 
   private final List<Integer> lottoNumber;
-
-  // 번호 자동 입력
-  public Lotto() {
-    this(NumberMaker.makeSixLottoNumber(NUMBER_UNDER_FORTY_FIVE));
-  }
 
   // 번호 수동 입력
   public Lotto(List<Integer> numberList) {
