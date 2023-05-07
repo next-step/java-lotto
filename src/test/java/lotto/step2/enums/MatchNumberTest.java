@@ -1,6 +1,7 @@
 package lotto.step2.enums;
 
 import lotto.step2.domain.Lottos;
+import lotto.step2.domain.Result;
 import lotto.step2.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,8 @@ class MatchNumberTest {
     void getTotalReturnResult() {
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber);
         Lottos lottos = new Lottos(lottosList);
-        double amount = MatchNumber.getTotalReturnResult(winningNumbers.getWinnerStat(lottos), 3000).getTotalReturn();
+        Result result = new Result(winningNumbers.getWinnerStat(lottos));
+        double amount = MatchNumber.getTotalReturnResult(result, 3000).getTotalReturn();
         assertThat(amount).isEqualTo(66670.0);
     }
 }

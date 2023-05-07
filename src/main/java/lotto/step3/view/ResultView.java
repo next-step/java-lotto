@@ -1,17 +1,13 @@
-package lotto.step2.view;
+package lotto.step3.view;
 
-import lotto.step2.domain.Lottos;
-import lotto.step2.domain.Result;
-import lotto.step2.domain.TotalReturn;
-import lotto.step2.enums.MatchNumber;
+import lotto.step3.domain.Lottos;
+import lotto.step3.domain.Result;
+import lotto.step3.domain.TotalReturn;
+import lotto.step3.enums.Rank;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static lotto.step2.enums.MatchNumber.getMatchStat;
 
 public class ResultView {
     public static final String TEXT_WIN_STAT = "당첨 통계";
@@ -24,8 +20,8 @@ public class ResultView {
     }
 
     private static List<String> getStatResult(Result statMap) {
-        return Arrays.stream(MatchNumber.values())
-                .map(m -> m.getMatchText() + statMap.getStat().getOrDefault(m, 0L) + "개")
+        return Arrays.stream(Rank.values())
+                .map(m -> m.getText() + statMap.getStat().getOrDefault(m, 0L) + "개")
                 .collect(Collectors.toList());
     }
 

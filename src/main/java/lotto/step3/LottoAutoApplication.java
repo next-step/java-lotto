@@ -1,11 +1,9 @@
-package lotto.step2;
+package lotto.step3;
 
-import lotto.step2.domain.*;
-import lotto.step2.enums.MatchNumber;
-import lotto.step2.view.InputView;
-import lotto.step2.view.ResultView;
-
-import java.util.Map;
+import lotto.step3.domain.*;
+import lotto.step3.enums.Rank;
+import lotto.step3.view.InputView;
+import lotto.step3.view.ResultView;
 
 public class LottoAutoApplication {
     public static void main(String[] args) {
@@ -14,11 +12,11 @@ public class LottoAutoApplication {
         LottoCount lottoCount = inputView.inputInitData();
         LottoStrategy lottoStrategy = new LottoAutoStrategy();
         Lottos lottos = new Lottos(lottoStrategy, lottoCount);
-
         ResultView.printLottos(lottos);
 
         WinningNumbers winningNumbers = inputView.inputWinningNumbers();
-        Result result = new Result(winningNumbers.getWinnerStat(lottos));
-        ResultView.printWinnerStat(result, MatchNumber.getTotalReturnResult(result, lottoCount.getPrice()));
+
+        Result result = winningNumbers.getWinnerStat(lottos);
+        ResultView.printWinnerStat(result, Rank.getTotalReturnResult(result, lottoCount.getPrice()));
     }
 }

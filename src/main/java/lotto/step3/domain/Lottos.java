@@ -1,8 +1,6 @@
-package lotto.step2.domain;
+package lotto.step3.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Lottos {
     private List<Lotto> lottos;
