@@ -7,7 +7,7 @@ public enum LottoResult {
     MATCH_THREE_NUMBERS(3, false, 5_000L),
     MATCH_FOUR_NUMBERS(4, false, 50_000L),
     MATCH_FIVE_NUMBERS(5, false, 1_500_000L),
-    MATCH_FIVE_NUMBERS_WITH_BONUS(5, true, 1_500_000L),
+    MATCH_FIVE_NUMBERS_WITH_BONUS(5, true, 3_000_000L),
     MATCH_SIX_NUMBERS(6, false, 2_000_000_000L);
 
     private final int numberOfMatches;
