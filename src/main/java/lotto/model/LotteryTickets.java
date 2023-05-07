@@ -1,19 +1,25 @@
 package lotto.model;
 
+import lotto.util.LotteryNumberGenerator;
+
 import java.util.*;
 
 public class LotteryTickets {
 
     private static final int LOTTERY_PRICE = 1000;
 
-    private List<LotteryTicket> tickets;
+    private final List<LotteryTicket> tickets;
 
-    public LotteryTickets(int money) {
+    private LotteryTickets(List<LotteryTicket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public static LotteryTickets of(int money, LotteryNumberGenerator lotteryNumberGenerator) {
         List<LotteryTicket> tickets = new ArrayList<>();
         for (int i = 0; i < money / LOTTERY_PRICE; i++) {
-            tickets.add(new LotteryTicket());
+            tickets.add(LotteryTicket.of(lotteryNumberGenerator));
         }
-        this.tickets = tickets;
+        return new LotteryTickets(tickets);
     }
 
     public Map<Win, Integer> getWinTotal(WinNumbers winNumbers) {

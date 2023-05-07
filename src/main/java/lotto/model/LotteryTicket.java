@@ -1,41 +1,19 @@
 package lotto.model;
 
-import lotto.util.RandomNumberGenerator;
+import lotto.util.LotteryNumberGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public class LotteryTicket {
 
-    private static final int NUMBER_PER_TICKET = 6;
+    private final Set<LotteryNumber> numbers;
 
-    private List<LotteryNumber> numbers;
-
-    public LotteryTicket() {
-        List<LotteryNumber> numbers = new ArrayList<>();
-        while (numbers.size() < NUMBER_PER_TICKET) {
-            LotteryNumber newNumber = LotteryNumber.of(new RandomNumberGenerator());
-            addIfNotExist(numbers, newNumber);
-        }
-        validate(numbers);
+    protected LotteryTicket(Set<LotteryNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public LotteryTicket(List<LotteryNumber> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
-    }
-
-    private void addIfNotExist(List<LotteryNumber> numbers, LotteryNumber newNumber) {
-        if (!numbers.contains(newNumber)) {
-            numbers.add(newNumber);
-        }
-    }
-
-    private void validate(List<LotteryNumber> numbers) {
-        if (numbers.size() != NUMBER_PER_TICKET || numbers.stream().distinct().count() != NUMBER_PER_TICKET) {
-            throw new RuntimeException("잘못된 로또 번호 목록입니다.");
-        }
+    public static LotteryTicket of(LotteryNumberGenerator numberGenerator) {
+        return new LotteryTicket(numberGenerator.generate());
     }
 
     public int compare(WinNumbers winNumbers) {

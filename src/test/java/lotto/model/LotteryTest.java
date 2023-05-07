@@ -1,10 +1,12 @@
 package lotto.model;
 
+import lotto.util.AutoLotteryNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,46 +16,46 @@ public class LotteryTest {
     @Test
     void 금액을_입력하면_로또티켓목록을_생성() {
         int money = 14000;
-        LotteryTickets lotteryTickets = new LotteryTickets(money);
+        LotteryTickets lotteryTickets = LotteryTickets.of(money, new AutoLotteryNumberGenerator());
         assertThat(lotteryTickets.size()).isEqualTo(14);
     }
 
     @Test
     void 금액이_나누어떨어지지_않으면_버림() {
         int money = 14500;
-        LotteryTickets lotteryTickets = new LotteryTickets(money);
+        LotteryTickets lotteryTickets = LotteryTickets.of(money, new AutoLotteryNumberGenerator());
         assertThat(lotteryTickets.size()).isEqualTo(14);
     }
 
     @Test
     void 로또_티켓은_여섯개의_랜덤숫자를_포함() {
-        LotteryTicket lotteryTicket = new LotteryTicket();
+        LotteryTicket lotteryTicket = LotteryTicket.of(new AutoLotteryNumberGenerator());
         assertThat(lotteryTicket.size()).isEqualTo(6);
     }
 
     @Test
     void 로또_티켓은_중복번호를_가지지않음() {
         // TODO: 랜덤으로 생성된 로또 티켓이 중복 숫자를 갖지 않는지 확인할 방법?
-        assertThatThrownBy(() -> new LotteryTicket(List.of(
-                LotteryNumber.of(() -> 8),
-                LotteryNumber.of(() -> 21),
-                LotteryNumber.of(() -> 21),
-                LotteryNumber.of(() -> 41),
-                LotteryNumber.of(() -> 42),
-                LotteryNumber.of(() -> 43))))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessage("잘못된 로또 번호 목록입니다.");
+        assertThatThrownBy(() -> new LotteryTicket(Set.of(
+                LotteryNumber.of(8),
+                LotteryNumber.of(21),
+                LotteryNumber.of(21),
+                LotteryNumber.of(41),
+                LotteryNumber.of(42),
+                LotteryNumber.of(43))))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("duplicate element: 21");
     }
 
     @Test
     void 로또티켓_맞는갯수_계산() {
-        LotteryTicket lotteryTicket = new LotteryTicket(List.of(
-                LotteryNumber.of(() -> 8),
-                LotteryNumber.of(() -> 21),
-                LotteryNumber.of(() -> 23),
-                LotteryNumber.of(() -> 41),
-                LotteryNumber.of(() -> 42),
-                LotteryNumber.of(() -> 43)));
+        LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
+                LotteryNumber.of(8),
+                LotteryNumber.of(21),
+                LotteryNumber.of(23),
+                LotteryNumber.of(41),
+                LotteryNumber.of(42),
+                LotteryNumber.of(43)));
         List<Integer> winNumbers = List.of(41, 1, 13, 27, 42, 43);
         int count = lotteryTicket.compare(new WinNumbers(winNumbers));
         assertThat(count).isEqualTo(3);

@@ -3,6 +3,7 @@ package lotto;
 import lotto.model.LotteryTickets;
 import lotto.model.Win;
 import lotto.model.WinNumbers;
+import lotto.util.AutoLotteryNumberGenerator;
 import lotto.view.OutputView;
 import lotto.view.InputView;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         int money = InputView.getMoney();
-        LotteryTickets lotteryTickets = new LotteryTickets(money);
+        LotteryTickets lotteryTickets = LotteryTickets.of(money, new AutoLotteryNumberGenerator());
         OutputView.showLotteryCount(lotteryTickets.size());
         OutputView.showLotteryTickets(lotteryTickets);
 

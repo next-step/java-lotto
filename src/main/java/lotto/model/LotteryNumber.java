@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.util.NumberGenerator;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -15,9 +13,8 @@ public class LotteryNumber {
         this.number = number;
     }
 
-    public static LotteryNumber of(NumberGenerator numberGenerator) {
-        int number = numberGenerator.generate();
-        return numberCache.computeIfAbsent(number, k -> new LotteryNumber(number));
+    public static LotteryNumber of(int number) {
+        return numberCache.computeIfAbsent(number, key -> new LotteryNumber(number));
     }
 
     public boolean isIn(WinNumbers winNumbers) {
