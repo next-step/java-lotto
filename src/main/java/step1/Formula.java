@@ -9,7 +9,7 @@ public class Formula {
 
     private final String input;
     private List<Integer> operand = new ArrayList<>();
-    private List<String> operator = new ArrayList<>();
+    private Operator operator;
 
     public Formula(String input) {
         this.input = input;
@@ -36,27 +36,15 @@ public class Formula {
         if (i % 2 == 0) {
             this.operand.add(parseInt(string[i]));
         } else { //ㅡ* 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-            this.setOperators(string[i]);
+            operator.setOperators(string[i]);
         }
-    }
-
-    private void setOperators(String s) {
-        if (!isValidOperator(s)) {
-            throw new IllegalArgumentException("사칙연산 기호만(+ - * /) 입력해주세요.");
-        }
-        this.operator.add(s);
-    }
-
-    private boolean isValidOperator(String string) {
-
-        return string.matches("^[*/+-]+$");
     }
 
     public List<Integer> getOperand() {
         return operand;
     }
 
-    public List<String> getOperator() {
+    public Operator getOperator() {
         return operator;
     }
 

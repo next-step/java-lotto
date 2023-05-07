@@ -1,25 +1,29 @@
 package step1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
 public class Calculator {
-    Formula formula;
+    Operator operator;
+    private List<Integer> operand;
+
     private int answer;
 
     public Calculator(Formula formula) {
-        this.formula = formula;
+        this.operand = formula.getOperand();
+        this.operator = formula.getOperator();
     }
 
     public void init() {
-        answer = formula.getOperand().get(0);
+        answer = operand.get(0);
     }
     
     public int execute() {
         
-        for (int i = 0; i < formula.getOperator().size(); i++) {
-            int withOperand = formula.getOperand().get(i +1);
-            calculate(formula.getOperator().get(i), withOperand);
+        for (int i = 0; i < this.operator.size(); i++) {
+            calculate(this.operator.get(i), this.operand.get(i +1));
         }
 
         return answer;
