@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import step2.domain.ProfitCalculatorService;
 import step2.domain.model.Lotto.Lottos;
+import step3.param.ManualLottoNumberParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +23,14 @@ class LottoPolicyStrategyTest {
 
     @Test
     void 로또_갯수_테스트() {
-        List<Integer> integerList = new ArrayList<>();
-        integerList.add(1);
-        integerList.add(2);
-        integerList.add(3);
-        integerList.add(4);
-        integerList.add(5);
-        integerList.add(6);
-        integerList.add(7);
+        List<ManualLottoNumberParam> integerList = new ArrayList<>();
+        integerList.add(new ManualLottoNumberParam(1));
+        integerList.add(new ManualLottoNumberParam(2));
+        integerList.add(new ManualLottoNumberParam(3));
+        integerList.add(new ManualLottoNumberParam(4));
+        integerList.add(new ManualLottoNumberParam(5));
+        integerList.add(new ManualLottoNumberParam(6));
+        integerList.add(new ManualLottoNumberParam(7));
 
         assertThatThrownBy(() -> lottoPolicyStrategy.createManualLottoNumbers(integerList))
                 .isInstanceOf(IllegalStateException.class);
@@ -37,13 +38,13 @@ class LottoPolicyStrategyTest {
 
     @Test
     void 로또_중복값_테스트() {
-        List<Integer> integerList = new ArrayList<>();
-        integerList.add(1);
-        integerList.add(1);
-        integerList.add(1);
-        integerList.add(1);
-        integerList.add(1);
-        integerList.add(1);
+        List<ManualLottoNumberParam> integerList = new ArrayList<>();
+        integerList.add(new ManualLottoNumberParam(1));
+        integerList.add(new ManualLottoNumberParam(1));
+        integerList.add(new ManualLottoNumberParam(1));
+        integerList.add(new ManualLottoNumberParam(1));
+        integerList.add(new ManualLottoNumberParam(1));
+        integerList.add(new ManualLottoNumberParam(1));
 
         assertThatThrownBy(() -> lottoPolicyStrategy.createManualLottoNumbers(integerList))
                 .isInstanceOf(IllegalArgumentException.class);

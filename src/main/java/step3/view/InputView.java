@@ -1,6 +1,8 @@
 package step3.view;
 
-import step3.domain.model.Lotto.Lottos;
+import step3.param.ManualLottoNumberParam;
+import step3.param.ManualLottoNumbersParam;
+import step3.param.ManualLottoParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,23 +41,24 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<List<Integer>> askManualLottoNumbers(int manualLottoCount) {
+    public static ManualLottoParam askManualLottoNumbers(int manualLottoCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         newLineRemove();
-        List<List<Integer>> manualLottos = new ArrayList<>();
+        List<ManualLottoNumbersParam> manualLotto = new ArrayList<>();
         for (int i = 0 ; i <manualLottoCount; i++) {
-            manualLottos.add(createManualLotto());
+            manualLotto.add(createManualLottoNumbers());
         }
-        return manualLottos;
+        return ManualLottoParam.from(manualLotto);
     }
 
-    private static List<Integer> createManualLotto() {
-        List<Integer> lottoNumbers = new ArrayList<>();
+    private static ManualLottoNumbersParam createManualLottoNumbers() {
+        List<ManualLottoNumberParam> lottoNumbers = new ArrayList<>();
         String numbers = SCANNER.nextLine();
         String[] stringNumbers = numbers.split(DELIMITER);
         for (String number : stringNumbers) {
-            lottoNumbers.add(Integer.parseInt(number.trim()));
+            lottoNumbers.add(ManualLottoNumberParam.from(Integer.parseInt(number.trim())));
         }
-        return lottoNumbers;
+
+        return ManualLottoNumbersParam.from(lottoNumbers);
     }
 }

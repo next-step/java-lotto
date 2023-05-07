@@ -8,8 +8,6 @@ import step3.domain.strategy.price.LottoPriceStrategy;
 import step3.view.InputView;
 import step3.view.OutputView;
 
-import java.util.List;
-
 public class LottoController {
     public static void main(String[] args) {
         LottoStoreService lottoStoreService = LottoStoreService.createLottoStoreService();
@@ -19,14 +17,13 @@ public class LottoController {
         int purchaseAmount = InputView.askPurchaseAmount();
         // 수동 로또
         int manualLottoCount = InputView.askManualLottoCount();
-        List<List<Integer>> lists = InputView.askManualLottoNumbers(manualLottoCount);
-        Lottos manualLotto = lottoService.createManualLotto(lists);
+        Lottos manualLotto = lottoService.createManualLotto(InputView.askManualLottoNumbers(manualLottoCount));
         OutputView.outPutLottos(manualLotto);
 
         int remainingMoneyAfterBuyLotto = lottoStoreService.getRemainingMoneyAfterBuyLotto(new LottoPriceStrategy(), purchaseAmount, manualLottoCount);
         // 자동 로또
         int autoLottoCount = lottoStoreService.getAutoLottoCount(new LottoPriceStrategy(), remainingMoneyAfterBuyLotto);
-        OutputView.outPut(autoLottoCount);  
+        OutputView.outPut(autoLottoCount);
         Lottos lottos = lottoService.createAutoLottos(autoLottoCount, manualLotto);
         OutputView.outPutLottos(lottos);
 

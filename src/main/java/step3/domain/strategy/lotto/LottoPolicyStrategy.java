@@ -2,6 +2,7 @@ package step3.domain.strategy.lotto;
 
 import step3.domain.model.Lotto.LottoNumber;
 import step3.domain.model.Lotto.LottoNumbers;
+import step3.param.ManualLottoNumberParam;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -74,17 +75,19 @@ public class LottoPolicyStrategy implements PolicyStrategy {
     }
 
     @Override
-    public LottoNumbers createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+    public LottoNumbers createManualLottoNumbers(List<ManualLottoNumberParam> manualLottoNumbers) {
         if (manualLottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalStateException("로또 갯수를 잘못 입력하였습니다.");
         }
 
-        if(manualLottoNumbers.size() != manualLottoNumbers.stream().distinct().count()){
+        if(manualLottoNumbers.size() != manualLottoNumbers.stream()
+                .distinct()
+                .count()){
             throw new IllegalArgumentException("중복 값이 있습니다.");
         }
 
         List<LottoNumber> numbers = manualLottoNumbers.stream()
-                .map(integer -> LottoNumber.from(integer))
+                .map(manualLottoNumberParam -> LottoNumber.from(manualLottoNumberParam.getLottoNumber()))
                 .collect(Collectors.toList());
 
         return LottoNumbers.from(numbers);

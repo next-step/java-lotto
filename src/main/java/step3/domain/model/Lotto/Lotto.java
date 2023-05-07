@@ -2,6 +2,7 @@ package step3.domain.model.Lotto;
 
 import step3.domain.model.WinningAmountByRank;
 import step3.domain.strategy.lotto.PolicyStrategy;
+import step3.param.ManualLottoNumberParam;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class Lotto {
         return new Lotto(strategy.createLottoNumbers());
     }
 
-    public static Lotto fromManualLotto(PolicyStrategy strategy, List<Integer> manualLotto) {
+    public static Lotto fromManualLotto(PolicyStrategy strategy, List<ManualLottoNumberParam> manualLotto) {
         return new Lotto(strategy.createManualLottoNumbers(manualLotto));
     }
 
