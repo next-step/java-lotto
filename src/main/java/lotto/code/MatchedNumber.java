@@ -31,7 +31,7 @@ public enum MatchedNumber {
                 .stream()
                 .filter(matchedNumber -> number == matchedNumber.getNumber())
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("없는 일치 횟수 입니다."));
+                .orElseThrow(() -> new IllegalArgumentException("없는 일치 번호 입니다."));
     }
 
 }
