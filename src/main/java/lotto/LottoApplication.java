@@ -6,7 +6,6 @@ import java.util.List;
 import lotto.domain.game.LottoGame;
 import lotto.domain.game.LottoGameSetting;
 import lotto.domain.game.LottoGameStatistics;
-import lotto.domain.game.LottoPurchasePrice;
 import lotto.domain.game.LottoWinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;

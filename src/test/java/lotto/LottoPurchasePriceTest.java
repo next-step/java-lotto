@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.game.LottoGameSetting;
-import lotto.domain.game.LottoPricePerGame;
 import lotto.domain.game.LottoPurchasePrice;
 import lotto.domain.raffle.LottoRaffleGenerator;
 import lotto.domain.round.LottoRoundNumbers;
