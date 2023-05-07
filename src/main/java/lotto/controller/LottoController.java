@@ -11,19 +11,17 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
         int purchaseAmount = InputView.inputPurchaseAmount();
         int manualPurchaseCount = InputView.inputManualPurchaseCount();
-        int autoPurchaseCount = calculateAutoPurchaseCount(manualPurchaseCount, purchaseAmount);
-        validateManualPurchaseCount(manualPurchaseCount, purchaseAmount);
         List<List<Integer>> tickets = InputView.inputManualPurchaseTickets(manualPurchaseCount);
-        lottoTicketMachine.createManualLottoTickets(tickets);
-        lottoTicketMachine.createAutoLottoTickets(autoPurchaseCount);
+        LottoTicketMachine lottoTicketMachine
+                = new LottoTicketMachine(manualPurchaseCount, purchaseAmount);
+        lottoTicketMachine.createLottoTickets(tickets);
 
         OutputView.outputManualLottoNumbers(ManualLottoTicketsDto.from(
                 lottoTicketMachine.getLottoTicketsTotal(),
                 manualPurchaseCount,
-                autoPurchaseCount
+                lottoTicketMachine.getAutoPurchaseCount()
         ));
 
         List<Integer> winningNumbers = InputView.inputLastWinningNumber();
@@ -31,17 +29,6 @@ public class LottoController {
         WinningTicket winningTicket
                 = new WinningTicket(winningNumbers, bonusBallNumber);
         OutputView.outputLottoStatistics(calculateLottoStatistics(lottoTicketMachine, winningTicket));
-    }
-
-    private static int calculateAutoPurchaseCount(int manualPurchaseCount, int purchaseAmount) {
-        return (purchaseAmount - LottoTicketMachine.LOTTO_PRICE * manualPurchaseCount)
-                / LottoTicketMachine.LOTTO_PRICE;
-    }
-
-    private static void validateManualPurchaseCount(int manualPurchaseCount, int purchaseAmount) {
-        if (purchaseAmount < manualPurchaseCount * LottoTicketMachine.LOTTO_PRICE) {
-            throw new IllegalArgumentException("구입할 금액을 초과합니다.");
-        }
     }
 
     private static LottoStatisticsDto calculateLottoStatistics(LottoTicketMachine lottoTicketMachine,
