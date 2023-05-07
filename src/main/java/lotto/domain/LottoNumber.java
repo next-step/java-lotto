@@ -4,10 +4,14 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final int LOTTO_NUMBER_MIN = 1;
-    private static final int LOTTO_NUMBER_MAX = 45;
+    public static final int LOTTO_NUMBER_MIN = 1;
+    public static final int LOTTO_NUMBER_MAX = 45;
 
     private final int number;
+
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
+    }
 
     public LottoNumber(int number) {
         if (isNotValidLottoNumber(number)) {
@@ -17,7 +21,7 @@ public class LottoNumber {
     }
 
     private boolean isNotValidLottoNumber(int number) {
-        return number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX;
+        return LOTTO_NUMBER_MIN > number || LOTTO_NUMBER_MAX < number;
     }
 
     public int value() {

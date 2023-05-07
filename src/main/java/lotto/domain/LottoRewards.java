@@ -5,67 +5,46 @@ import java.util.List;
 
 public class LottoRewards {
 
-    private static final int BEGIN_INDEX = 0;
     private static final int INCREASE_COUNT = 1;
-    private final List<LottoReward> rewards = new ArrayList<>();
+    private static final long TOTAL_PROFIT_INIT = 0l;
 
-    public boolean isNotContainRewardType(RewardType rewardType) {
-        return !isContainRewardType(rewardType);
+    private final List<LottoReward> rewards;
+
+    public LottoRewards() {
+        this.rewards = initLottoRewards();
     }
 
-    private boolean isContainRewardType(RewardType rewardType) {
-        for (LottoReward reward : rewards) {
-            if (isSameRewardType(rewardType, reward)) {
-                return true;
-            }
+    private List<LottoReward> initLottoRewards() {
+        List<LottoReward> rewards = new ArrayList<>();
+
+        for (RewardType rewardType : RewardType.values()) {
+            rewards.add(new LottoReward(rewardType));
         }
-        return false;
-    }
-
-    private boolean isSameRewardType(RewardType rewardType, LottoReward reward) {
-        return reward.rewardType() == rewardType;
-    }
-
-    public void add(LottoReward lottoReward) {
-        rewards.add(lottoReward);
+        return rewards;
     }
 
     public void increaseCountOf(RewardType rewardType) {
-        for (int i = BEGIN_INDEX; i < rewards.size(); i++) {
-            if (isSameRewardType(rewardType, i)) {
-                increaseCountRewardOf(i);
-                break;
-            }
-        }
-    }
-
-    private void increaseCountRewardOf(int i) {
-        rewards.set(i, new LottoReward(
-                rewards.get(i).rewardType(),
-                rewards.get(i).count() + INCREASE_COUNT)
-        );
-    }
-
-    private boolean isSameRewardType(RewardType rewardType, int i) {
-        return rewards.get(i).rewardType() == rewardType;
+        rewards.stream()
+                .filter(v -> v.rewardType() == rewardType)
+                .forEach(v -> rewards.set(rewards.indexOf(v),
+                                new LottoReward(v.rewardType(), v.count() + INCREASE_COUNT)
+                        )
+                );
     }
 
     public LottoReward get(RewardType rewardType) {
-        for (LottoReward reward : rewards) {
-            if (isSameRewardType(rewardType, reward)) {
-                return reward;
-            }
-        }
-        return null;
+        return rewards.stream()
+                .filter(v -> v.rewardType() == rewardType)
+                .findAny()
+                .orElse(null);
     }
 
     public long totalProfit() {
-        long totalProfit = 0l;
+        long totalProfit = TOTAL_PROFIT_INIT;
 
         for (LottoReward reward : rewards) {
             totalProfit += reward.count() * reward.rewardType().reward();
         }
-
         return totalProfit;
     }
 

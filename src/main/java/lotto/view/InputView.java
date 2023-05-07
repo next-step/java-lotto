@@ -1,10 +1,15 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+
 import java.util.Scanner;
 
 public class InputView {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final String SEPARATOR = ", ";
+
     private final Scanner scanner = new Scanner(System.in);
 
     public Long inputPurchasePrice() {
@@ -21,10 +26,22 @@ public class InputView {
         return purchasePrice % LOTTO_PRICE != 0;
     }
 
-    public String inputWinningLottoNumbers() {
-        ResultView.printWinningLottoNumberInputCommand();
+    public Lotto inputWinningLotto() {
+        ResultView.printWinningLottoInputCommand();
 
-        return nextLine();
+        String[] before = nextLine().split(SEPARATOR);
+        return new Lotto(before);
+    }
+
+    public LottoNumber inputBonusLottoNumber(Lotto winningLotto) {
+        ResultView.printBonusLottoNumberInputCommand();
+
+        int bonusLottoNumber = Integer.parseInt(nextLine());
+
+        if (winningLotto.value().stream().anyMatch(v -> v.value() == bonusLottoNumber)) {
+            throw new IllegalArgumentException("당첨 번호와 보너스 볼은 일치할 수 없습니다.");
+        }
+        return new LottoNumber(bonusLottoNumber);
     }
 
     private String nextLine() {
