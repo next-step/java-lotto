@@ -21,18 +21,6 @@ public enum WinningCount {
         this.isMatchBonusBall = isMatchBonusBall;
     }
 
-    public int count() {
-        return count;
-    }
-
-    public boolean isMatchBonusBall() {
-        return isMatchBonusBall;
-    }
-
-    public static WinningCount of(int count) {
-        return of(count, false);
-    }
-
     public static WinningCount of(int count, boolean isMatchBonusBall) {
         return winningCountList.stream().filter(winningCount -> winningCount.equals(count, isMatchBonusBall)).findAny().get();
     }
