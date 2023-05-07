@@ -6,8 +6,8 @@ import java.util.List;
 
 public class LottoService {
 
-    public MyLottos buyAutoLottos(MyPurchase myPurchase) {
-        return MyLottos.autoGenerate(myPurchase);
+    public MyLottoGame buyAutoLottos(MyPurchase myPurchase) {
+        return MyLottoGame.autoGenerate(myPurchase);
     }
 
     public WinLotto makeWinLotto(List<Integer> winNumbers, Integer winBonusNumber) {
@@ -15,8 +15,8 @@ public class LottoService {
         return new WinLotto(numbers, winBonusNumber);
     }
 
-    public void checkWin(MyLottos lottos, WinLotto winLotto) {
-        lottos.checkWin(winLotto);
+    public MyResult checkWin(MyLottoGame myLottoGame, WinLotto winLotto) {
+        return myLottoGame.checkWin(winLotto);
     }
 
 }

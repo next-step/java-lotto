@@ -5,9 +5,9 @@ import lotto.domain.*;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void showMyLottos(MyLottos myLottos) {
-        for (int i = 0; i < myLottos.count(); i++) {
-            printNumbers(myLottos.find(i).numbers());
+    public static void showMyLottos(MyLottoGame myLottoGame) {
+        for (int i = 0; i < myLottoGame.count(); i++) {
+            printNumbers(myLottoGame.find(i).numbers());
         }
         System.out.println();
     }
@@ -38,7 +38,7 @@ public class ResultView {
         System.out.printf("6개 일치 (%d원) - %d개\n", LottoRule.RANK_FIRST_PRIZE, result.rankFirstCount());
     }
 
-    public static void showProfit(double profit) {
-        System.out.printf("총 수익률은 %.2f입니다.", profit);
+    public static void showProfit(MyResult myResult) {
+        System.out.printf("총 수익률은 %.2f입니다.", myResult.profit());
     }
 }

@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MyLotto {
+public class Lotto {
     private final Numbers numbers;
 
-    public MyLotto(Numbers numbers) {
+    public Lotto(Numbers numbers) {
         this.numbers = numbers;
     }
 
-    public static MyLotto autoGenerate() {
+    public static Lotto autoGenerate() {
         List<Integer> autoNumbers = new ArrayList<>(LottoRule.NUMBER_RANGE);
         Collections.shuffle(autoNumbers);
         autoNumbers = autoNumbers.subList(0, LottoRule.CHOICE_COUNT);
         Collections.sort(autoNumbers);
-        return new MyLotto(new Numbers(autoNumbers));
+        return new Lotto(new Numbers(autoNumbers));
     }
 
     public Numbers numbers() {

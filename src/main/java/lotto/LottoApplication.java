@@ -1,7 +1,8 @@
 package lotto;
 
-import lotto.domain.MyLottos;
+import lotto.domain.MyLottoGame;
 import lotto.domain.MyPurchase;
+import lotto.domain.MyResult;
 import lotto.domain.WinLotto;
 import lotto.service.LottoService;
 import lotto.view.InputView;
@@ -19,8 +20,8 @@ public class LottoApplication {
         ResultView.showLottoCount(myPurchase);
 
         //로또 자동 생성
-        MyLottos myLottos = lottoService.buyAutoLottos(myPurchase);
-        ResultView.showMyLottos(myLottos);
+        MyLottoGame myLottoGame = lottoService.buyAutoLottos(myPurchase);
+        ResultView.showMyLottos(myLottoGame);
 
         //지난주 당첨 번호
         List<Integer> winNumbers = InputView.winLottoNumbers();
@@ -29,10 +30,10 @@ public class LottoApplication {
         ResultView.showWinLotto(winLotto);
 
         //당첨번호 조회 및 통계
-        lottoService.checkWin(myLottos, winLotto);
-        ResultView.showLottoResult(myLottos.result());
+        MyResult myResult = lottoService.checkWin(myLottoGame, winLotto);
+        ResultView.showLottoResult(myResult);
 
         //수익률
-        ResultView.showProfit(myLottos.profit());
+        ResultView.showProfit(myResult);
     }
 }
