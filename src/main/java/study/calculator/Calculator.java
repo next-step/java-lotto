@@ -24,14 +24,19 @@ public class Calculator {
   }
 
   private int evaluateExpression(int num1, String operator, String num2) {
-    if ("*".equals(operator)) {
-      return num1 * Integer.parseInt(num2);
-    } else if ("/".equals(operator)) {
-      return num1 / Integer.parseInt(num2);
-    } else if ("+".equals(operator)) {
-      return num1 + Integer.parseInt(num2);
+    int num2Int = Integer.parseInt(num2);
+    switch(operator) {
+      case "*":
+        return num1 * num2Int;
+      case "/":
+        return num1 / num2Int;
+      case "+":
+        return num1 + num2Int;
+      case "-":
+        return num1 - num2Int;
     }
-    return num1 - Integer.parseInt(num2);
+
+    throw new IllegalArgumentException("유효하지 않은 operator 입니다.");
   }
 
   private void validate(String str) {
