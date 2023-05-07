@@ -55,18 +55,4 @@ class NumbersTest {
         Numbers numbers = new Numbers(originNumbers);
         assertThat(numbers.contains(number)).isFalse();
     }
-
-    @Test
-    void 자동생성테스트() {
-        Numbers numbers = Numbers.auto();
-        assertAll(
-                () -> assertThat(numbers.count()).isEqualTo(LottoRule.CHOICE_COUNT),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(numbers.find(0))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(numbers.find(1))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(numbers.find(2))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(numbers.find(3))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(numbers.find(4))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(numbers.find(5))).isTrue()
-                );
-    }
 }

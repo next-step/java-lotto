@@ -20,24 +20,12 @@ public class Numbers {
         }
     }
 
-    public static Numbers auto() {
-        List<Integer> autoNumbers = new ArrayList<>(LottoRule.NUMBER_RANGE);
-        Collections.shuffle(autoNumbers);
-        autoNumbers = autoNumbers.subList(0, LottoRule.CHOICE_COUNT);
-        Collections.sort(autoNumbers);
-        return new Numbers(autoNumbers);
-    }
-
     public Integer find(int index) {
         return numbers.get(index);
     }
 
     public boolean contains(Integer number) {
         return numbers.contains(number);
-    }
-
-    public int count() {
-        return numbers.size();
     }
 
     public List<Integer> getValues() {

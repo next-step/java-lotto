@@ -6,16 +6,22 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class MyLottoTest {
 
     @Test
     void 로또자동발급확인() {
-        MyLotto myLotto = MyLotto.auto();
-        assertThat(myLotto.numbers().count()).isEqualTo(6);
-        for (int i = 0; i < myLotto.numbers().count(); i++) {
-            assertThat(LottoRule.NUMBER_RANGE.contains(myLotto.numbers().find(i))).isTrue();
-        }
+        MyLotto myLotto = MyLotto.autoGenerate();
+        assertThat(myLotto.numbers().getValues().size()).isEqualTo(6);
+        assertAll(
+                () -> assertThat(LottoRule.NUMBER_RANGE.contains(myLotto.numbers().find(0))).isTrue(),
+                () -> assertThat(LottoRule.NUMBER_RANGE.contains(myLotto.numbers().find(1))).isTrue(),
+                () -> assertThat(LottoRule.NUMBER_RANGE.contains(myLotto.numbers().find(2))).isTrue(),
+                () -> assertThat(LottoRule.NUMBER_RANGE.contains(myLotto.numbers().find(3))).isTrue(),
+                () -> assertThat(LottoRule.NUMBER_RANGE.contains(myLotto.numbers().find(4))).isTrue(),
+                () -> assertThat(LottoRule.NUMBER_RANGE.contains(myLotto.numbers().find(5))).isTrue()
+        );
     }
 
     @Test
@@ -26,8 +32,8 @@ class MyLottoTest {
         String winInput = "1, 2, 7, 11, 40, 44";
         WinLotto winLotto = new WinLotto(getNumbersForTest(winInput));
 
-        myLotto.checkMatchingNumbers(winLotto);
-        assertThat(myLotto.matchingCount()).isEqualTo(2);
+        int matchingCount = myLotto.checkMatchingNumbers(winLotto);
+        assertThat(matchingCount).isEqualTo(2);
     }
 
     private static Numbers getNumbersForTest(String input) {

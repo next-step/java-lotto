@@ -21,7 +21,7 @@ public class MyLottos {
     }
 
     private static MyLotto autoGenerateOne() {
-        return MyLotto.auto();
+        return MyLotto.autoGenerate();
     }
 
     public void checkWin(WinLotto winLotto) {

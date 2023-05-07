@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class MyLotto {
     private final Numbers numbers;
 
@@ -7,9 +11,12 @@ public class MyLotto {
         this.numbers = numbers;
     }
 
-    public static MyLotto auto() {
-        Numbers autoNumbers = Numbers.auto();
-        return new MyLotto(autoNumbers);
+    public static MyLotto autoGenerate() {
+        List<Integer> autoNumbers = new ArrayList<>(LottoRule.NUMBER_RANGE);
+        Collections.shuffle(autoNumbers);
+        autoNumbers = autoNumbers.subList(0, LottoRule.CHOICE_COUNT);
+        Collections.sort(autoNumbers);
+        return new MyLotto(new Numbers(autoNumbers));
     }
 
     public Numbers numbers() {
