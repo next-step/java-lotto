@@ -9,7 +9,7 @@ public class Lotto {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    private List<Integer> numbers;
+    protected List<Integer> numbers;
 
     public Lotto(ArrayList<Integer> inNumbers) {
         validateNumbers(inNumbers);
@@ -30,5 +30,9 @@ public class Lotto {
 
     public boolean equals(ArrayList<Integer> inNumbers) {
         return numbers.equals(inNumbers);
+    }
+
+    public boolean contains(Integer number) {
+        return numbers.contains(number);
     }
 }
