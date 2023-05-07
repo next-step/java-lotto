@@ -33,15 +33,13 @@ public class WinningStatisticsTest {
 
     Map<Integer, Integer> result = winningStatistics.lottoResult(lottoBundle);
 
-    assertThat(result.size()).isEqualTo(7);
-
-    for (int i = 0; i < 7; i++) {
-      assertThat(result)
-          .overridingErrorMessage("The map doesn't contain the key: %s", i)
-          .containsKey(i);
+    int sum = 0;
+    for (int i = 0; i < result.size(); i++) {
+      sum += result.get(i);
 
       assertThat(result.get(i)).isLessThanOrEqualTo(expect);
     }
+    assertEquals(sum, expect);
   }
 
   @Test
@@ -83,7 +81,7 @@ public class WinningStatisticsTest {
     WinningStatistics winningStatistics = new WinningStatistics(targetNumber);
 
     Map<Integer, Integer> map = winningStatistics.lottoResult(lottoBundle);
-    int result = winningStatistics.sumTotalWinningPrice(map);
+    int result = winningStatistics.showTotalWinningPrice();
 
     assertEquals(result, 2000005000);
   }
@@ -111,7 +109,7 @@ public class WinningStatisticsTest {
     WinningStatistics winningStatistics = new WinningStatistics(targetNumber);
 
     Map<Integer, Integer> map = winningStatistics.lottoResult(lottoBundle);
-    double result = winningStatistics.calcRoi(winningStatistics.sumTotalWinningPrice(map), 5000);
+    double result = winningStatistics.calcRoi(winningStatistics.showTotalWinningPrice(), 5000);
 
     assertEquals(result, 1.0);
   }

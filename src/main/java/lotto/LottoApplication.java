@@ -24,7 +24,7 @@ public class LottoApplication {
     WinningStatistics winningStatistics = new WinningStatistics(InputConverter.convertNumberToList(InputView.askLastLottoNumber()));
 
     Map<Integer, Integer> resultMap = winningStatistics.lottoResult(lottoBundle);
-    int totalWinningPrice = winningStatistics.sumTotalWinningPrice(resultMap);
+    int totalWinningPrice = winningStatistics.showTotalWinningPrice();
     double roi = winningStatistics.calcRoi(totalWinningPrice, lottoBundle.size()*Lotto.PRICE);
 
     ResultView.showStatistic(resultMap);

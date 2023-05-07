@@ -7,25 +7,17 @@ import java.util.*;
 public class WinningStatistics {
   public final List<Integer> targetNumber;
 
+  private int totalWinningPrice;
+
   public WinningStatistics(List<Integer> targetNumber) {
     this.targetNumber = targetNumber;
   }
 
-  private Map<Integer, Integer> makeResultMap() {
+  public Map<Integer, Integer> lottoResult(List<Lotto> lottoBundle) {
     Map<Integer, Integer> map = new HashMap<>();
 
-    for (int i = 0; i <= 6; i++) {
-      map.put(i, 0);
-    }
-
-    return map;
-  }
-
-  public Map<Integer, Integer> lottoResult(List<Lotto> lottoBundle) {
-    Map<Integer, Integer> map = makeResultMap();
-
     for (Lotto lotto : lottoBundle) {
-      map.put(lotto.matchLottoNumber(this.targetNumber), map.getOrDefault(lotto.matchLottoNumber(this.targetNumber), 0) + 1);
+      map.compute(lotto.matchLottoNumber(this.targetNumber),  (key, value) -> value == null ? 1 : value + 1);
     }
 
     // 작동이 안되는 이유가 무엇인가요?
@@ -39,8 +31,10 @@ public class WinningStatistics {
 
   private int calcWinningPrice(int key, int value) {
     if (key >= RewardTable.MINIMUM_MATCH_NUMBER) {
+      int winningPrice = RewardTable.rewardTableInfo(key).calculateReward(value);
+      this.totalWinningPrice += winningPrice;
 
-      return RewardTable.rewardTableInfo(key).calculateReward(value);
+      return winningPrice;
     }
 
     return 0;
@@ -52,19 +46,8 @@ public class WinningStatistics {
     return result;
   }
 
-  public int sumTotalWinningPrice(Map<Integer, Integer> map) {
-    int totalWinningPrice = 0;
-
-    Iterator<Integer> keys = map.keySet().iterator();
-
-    while (keys.hasNext()) {
-      int key = keys.next();
-      int value = map.get(key);
-
-      totalWinningPrice += calcWinningPrice(key, value);
-    }
-
-    return totalWinningPrice;
+  public int showTotalWinningPrice() {
+    return this.totalWinningPrice;
   }
 
   public List<Integer> showTargetNumber() {
