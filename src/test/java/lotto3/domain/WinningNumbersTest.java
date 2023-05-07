@@ -41,4 +41,13 @@ class WinningNumbersTest {
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
   }
+
+  @Test
+  void 당첨번호는_중복번호가_있으면_안된다() {
+    List<Integer> numbers = List.of(1, 2, 3, 4, 5, 5);
+    assertThat(catchThrowable(() -> new WinningNumbers(numbers)))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("당첨 번호는 중복될 수 없습니다.");
+
+  }
 }
