@@ -10,14 +10,14 @@ public class WeeklyWinningNumbers {
 
     private final Lottery values;
 
-    private final BonusNumber bonusNumber;
+    private final LotteryNumber bonusNumber;
 
     public WeeklyWinningNumbers(String numberChunk, int bonusNumber) {
-        this(lotteryFactory(numberChunk), new BonusNumber(bonusNumber));
+        this(lotteryFactory(numberChunk), new LotteryNumber(bonusNumber));
     }
 
-    public WeeklyWinningNumbers(Lottery values, BonusNumber bonusNumber) {
-        if(values.containsBonus(bonusNumber)) {
+    public WeeklyWinningNumbers(Lottery values, LotteryNumber bonusNumber) {
+        if(values.containsNumber(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_MSG);
         }
         this.values = values;
@@ -30,6 +30,10 @@ public class WeeklyWinningNumbers {
 
     public Set<LotteryNumber> getNumbers() {
         return values.getNumbers();
+    }
+
+    public boolean hasBonusNumber(Lottery lottery) {
+        return lottery.containsNumber(this.bonusNumber);
     }
 
 }

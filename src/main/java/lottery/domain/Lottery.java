@@ -89,8 +89,8 @@ public class Lottery {
                 .collect(Collectors.toSet()).size();
     }
 
-    public boolean containsBonus(BonusNumber bonusNumber) {
-        return bonusNumber.containsNumber(this.lotteryNumbers);
+    public boolean containsNumber(LotteryNumber bonusNumber) {
+        return this.lotteryNumbers.contains(bonusNumber);
     }
 
     @Override

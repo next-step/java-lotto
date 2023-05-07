@@ -79,7 +79,7 @@ public class LotteryTest {
     @ParameterizedTest(name = "보너스 번호가 이미 로또에 포함되어있을경우 true 아닐경우 false 를 반환한다.")
     @CsvSource(value = {"1:true","9:false"}, delimiter = ':')
     void containsTest(int lottoNumber, boolean expected) {
-        assertThat(new Lottery(LOTTERY_NUMBERS).containsBonus(new BonusNumber(lottoNumber)))
+        assertThat(new Lottery(LOTTERY_NUMBERS).containsNumber(new LotteryNumber(lottoNumber)))
                 .isEqualTo(expected);
     }
 }
