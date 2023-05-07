@@ -1,10 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.EnumMap;
 import java.util.Map;
-import lotto.WinningNumbers.Rank;
 import org.junit.jupiter.api.Test;
 
 public class WinningPercentTest {
@@ -18,9 +17,10 @@ public class WinningPercentTest {
     void 수익률계산() {
         Map<Rank, Integer> result = new EnumMap<>(Rank.class){{
             put(Rank.FIRST_GRADE, 1);
-            put(Rank.SECOND_GRADE, 1);
             put(Rank.THIRD_GRADE, 1);
             put(Rank.FOURTH_GRADE, 1);
+            put(Rank.FIFTH_GRADE, 1);
+            put(Rank.SECOND_GRADE, 1);
         }};
         int amount = 5000;
         double winningPercent = 0.0d;
@@ -29,7 +29,7 @@ public class WinningPercentTest {
         }
         winningPercent /= amount;
 
-        assertThat(WinningPercent.winningPercent(result, amount)).isEqualTo(new WinningPercent(winningPercent));
+        assertThat(WinningPercent.of(result, amount)).isEqualTo(new WinningPercent(winningPercent));
     }
 
     @Test

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -11,6 +11,9 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +26,16 @@ public class InputViewTest {
     void 초기화() {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
+    }
+
+    @Test
+    void 보너스번호입력() {
+        inputStream = new ByteArrayInputStream("7".getBytes(StandardCharsets.UTF_8));
+        System.setIn(inputStream);
+        assertAll(
+            () -> assertThat(InputView.askBonusNumber()).isEqualTo(new LottoNumber(7)),
+            () -> assertThat(outputStream.toString()).containsPattern("보너스 볼을 입력해 주세요.")
+        );
     }
 
     @Test

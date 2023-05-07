@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +13,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static List<Lotto> lottoList(int count) {
+    public static Lottos of(LottoAmount amount) {
         List<Lotto> lottos = new ArrayList<>();
+        int count = amount.count();
         for (int i = 0; i < count; i++) {
             lottos.add(Lotto.purchase());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public int count() {

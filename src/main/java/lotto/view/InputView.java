@@ -1,14 +1,17 @@
-package lotto;
+package lotto.view;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 public class InputView {
 
     public static int askAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        int amount = new Scanner(System.in).nextInt();
+        int amount = inputInt();
         if (amount < Lottos.LOTTO_AMOUNT) {
             throw new IllegalArgumentException("로또 금액보다 적은 금액이 입력됐습니다. : " + amount + " < " + Lottos.LOTTO_AMOUNT);
         }
@@ -34,6 +37,19 @@ public class InputView {
             result += "\n";
         }
         System.out.println(result);
+    }
+
+    public static LottoNumber askBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return bonusNumber(inputInt());
+    }
+
+    private static LottoNumber bonusNumber(int number) {
+        return new LottoNumber(number);
+    }
+
+    private static int inputInt() {
+        return new Scanner(System.in).nextInt();
     }
 
 }

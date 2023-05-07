@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +32,7 @@ public class Lotto {
         return ret;
     }
 
-    public static Lotto nextRandom(List<LottoNumber> lottoNumbers) {
+    public static Lotto newInstance(List<LottoNumber> lottoNumbers) {
         return new Lotto(sorted(subList(shuffled(lottoNumbers))));
     }
 
@@ -51,7 +51,7 @@ public class Lotto {
     }
 
     public static Lotto purchase() {
-        return nextRandom(LOTTO_LOTTO_NUMBER_LIST);
+        return newInstance(LOTTO_LOTTO_NUMBER_LIST);
     }
 
     private List<LottoNumber> validList(List<LottoNumber> lottoNumbers) {
@@ -81,6 +81,10 @@ public class Lotto {
 
     public List<LottoNumber> numbers() {
         return new ArrayList<>(lottoNumbers);
+    }
+
+    public boolean isContains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
 }
