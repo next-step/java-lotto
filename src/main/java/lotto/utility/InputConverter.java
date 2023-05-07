@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class InputConverter {
 
-  public static int convertBudgetToNumberOfPurchase(String strNumber) {
+  public static int convertBudgetToInt(String strNumber) {
     int budget = BudgetException.convertBudget(strNumber);
 
     BudgetException.checkScale(budget);

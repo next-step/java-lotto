@@ -10,7 +10,13 @@ public class LotteryTickets {
 
   private int investment;
 
-  public void purchase(int numberOfPurchase) {
+  private int budgetToNumberOfPurchase(int budget) {
+    return budget/Lotto.PRICE;
+  }
+
+  public void purchase(int budget) {
+    int numberOfPurchase = budgetToNumberOfPurchase(budget);
+
     List<Lotto> lottoList = new ArrayList<>();
 
     for (int i = 0; i < numberOfPurchase; i++) {

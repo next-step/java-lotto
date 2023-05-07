@@ -13,8 +13,10 @@ import java.util.Map;
 public class LottoApplication {
   public static void main(String[] args) {
     LotteryTickets lotteryTickets = new LotteryTickets();
+    String strBudget = InputView.askBudget();
+    int budget = InputConverter.convertBudgetToInt(strBudget);
 
-    lotteryTickets.purchase(InputConverter.convertBudgetToNumberOfPurchase(InputView.askBudget()));
+    lotteryTickets.purchase(budget);
     List<Lotto> lottoBundle = lotteryTickets.getLottoBundle();
 
     ResultView.showMyLotto(lottoBundle);
