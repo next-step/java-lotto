@@ -10,18 +10,22 @@ import step3.view.OutputView;
 
 public class LottoController {
     public static void main(String[] args) {
-        int purchaseAmount = InputView.askPurchaseAmount();
-        int lottoCount = LottoStoreService.createLottoStoreService()
-                .getLottoCount(new LottoPriceStrategy(), purchaseAmount);
-
-        OutputView.outPut(lottoCount);
-        // 로또 서비스 생성
+        LottoStoreService lottoStoreService = LottoStoreService.createLottoStoreService();
         LottoService lottoService = LottoService.createLottoService();
-        // 로또 생성
-        Lottos lottos = lottoService.createLottos(lottoCount);
-        OutputView.outPutLottos(lottos);
 
-        InputView.newLineRemove();
+        // 금액
+        int purchaseAmount = InputView.askPurchaseAmount();
+        // 수동 로또
+        int manualLottoCount = InputView.askManualLottoCount();
+        Lottos manualLotto = lottoService.createManualLotto(InputView.askManualLotto(manualLottoCount));
+        OutputView.outPutLottos(manualLotto);
+
+        int remainingMoneyAfterBuyLotto = lottoStoreService.getRemainingMoneyAfterBuyLotto(new LottoPriceStrategy(), purchaseAmount, manualLottoCount);
+        // 자동 로또
+        int autoLottoCount = lottoStoreService.getAutoLottoCount(new LottoPriceStrategy(), remainingMoneyAfterBuyLotto);
+        OutputView.outPut(autoLottoCount);
+        Lottos lottos = lottoService.createAutoLottos(autoLottoCount, manualLotto);
+        OutputView.outPutLottos(lottos);
 
         // 당첨 번호
         lottoService.calculatorWinning(lottos, LottoService.createWinningLotto(InputView.askLastWeekWinningNumbers()));

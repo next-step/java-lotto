@@ -4,6 +4,7 @@ import step3.domain.model.Lotto.Lotto;
 import step3.domain.model.Lotto.LottoNumber;
 import step3.domain.model.Lotto.Lottos;
 import step3.domain.strategy.lotto.LottoPolicyStrategy;
+import step3.param.ManualLottoParam;
 
 import java.util.Objects;
 
@@ -18,8 +19,14 @@ public class LottoService {
         return lottoService;
     }
 
-    public Lottos createLottos(int count) {
-        return Lottos.from(count);
+    public Lottos createAutoLottos(int count, Lottos manualLotto) {
+        Lottos from = Lottos.from(count);
+        manualLotto.combineLottos(from);
+        return manualLotto;
+    }
+
+    public Lottos createManualLotto(ManualLottoParam manualLotto) {
+        return Lottos.fromManualLottos(manualLotto);
     }
 
     public LottoNumber createBonusNumber(int bonusNumber) {

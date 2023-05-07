@@ -15,7 +15,11 @@ public class LottoStoreService {
         return lottoStoreService;
     }
 
-    public int getLottoCount(PriceStrategy strategy, int purchaseAmount) {
+    public int getAutoLottoCount(PriceStrategy strategy, int purchaseAmount) {
         return strategy.buyLotto(purchaseAmount);
+    }
+
+    public int getRemainingMoneyAfterBuyLotto(PriceStrategy strategy, int purchaseAmount, int manualLottoCount) {
+        return strategy.buyManualLotto(purchaseAmount, manualLottoCount);
     }
 }

@@ -8,6 +8,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber from(int number) {
+        if (number < 0) {
+            throw new IllegalStateException("음수는 로또 번호가 아닙니다.");
+        }
         return new LottoNumber(number);
     }
 
