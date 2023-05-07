@@ -32,4 +32,10 @@ public class InputView {
                 .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList());
     }
+
+    public LottoNumber bonus() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String input = scanner.nextLine();
+        return new LottoNumber(Integer.parseInt(input));
+    }
 }
