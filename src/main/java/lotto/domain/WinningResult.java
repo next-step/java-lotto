@@ -42,14 +42,26 @@ public class WinningResult {
     private void matchLotto(WinningNumbers winningNumbers, Lotto lotto) {
         int winningCount = winningNumbers.winningCountOf(lotto);
         boolean isBonusMatch = winningNumbers.isBonusMatch(winningCount, lotto);
-        updateRanking(winningCount, isBonusMatch);
+        updateRank(winningCount, isBonusMatch);
     }
 
-    private void updateRanking(int winningCount, boolean isBonusMatch) {
-        if (Rank.isWinning(winningCount, isBonusMatch)) {
-            Rank rank = Rank.of(winningCount, isBonusMatch);
-            winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
+    private void updateRank(int winningCount, boolean isBonusMatch) {
+        if (isNotWinningCondition(winningCount, isBonusMatch)) {
+            return;
         }
+        updateRankCount(rank(winningCount, isBonusMatch));
+    }
+
+    private Rank rank(int winningCount, boolean isBonusMatch) {
+        return Rank.of(winningCount, isBonusMatch);
+    }
+
+    private void updateRankCount(Rank rank) {
+        winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
+    }
+
+    private boolean isNotWinningCondition(int winningCount, boolean isBonusMatch) {
+        return Rank.isNotWinning(winningCount, isBonusMatch);
     }
 
     public Map<Rank, Integer> result() {

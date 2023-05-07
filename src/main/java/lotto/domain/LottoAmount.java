@@ -12,6 +12,10 @@ public class LottoAmount {
         this.amount = amount;
     }
 
+    public int value() {
+        return amount;
+    }
+
     public static LottoAmount of(int amount) {
         return new LottoAmount(amount);
     }

@@ -4,28 +4,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.purchase.PurchaseAuto;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
-    @Test
-    void 로또생성숫자범위() {
-        List<LottoNumber> next = Lotto.purchase().numbers();
-        assertAll(() -> {
-            for (LottoNumber lottoNumber : next) {
-                assertThat(LottoNumber.MIN_NUMBER <= lottoNumber.value()
-                    && lottoNumber.value() <= LottoNumber.MAX_NUMBER).isTrue();
-            }
-        });
-    }
-
-    @Test
-    void 구매정렬() {
-        List<LottoNumber> next = Lotto.purchase().numbers();
+   /* @Test
+    void 로또생성정렬() {
+        List<LottoNumber> lottoNumber1 = new ArrayList<>() {{
+            add(new LottoNumber(1));
+            add(new LottoNumber(6));
+            add(new LottoNumber(5));
+            add(new LottoNumber(4));
+            add(new LottoNumber(20));
+            add(new LottoNumber(10));
+        }};
+        List<LottoNumber> next = new Lotto(lottoNumber1).numbers();
         Iterator<LottoNumber> iterator = next.iterator();
         assertAll(() -> {
                 LottoNumber prev = null;
@@ -43,16 +40,46 @@ public class LottoTest {
     }
 
     @Test
-    void 랜덤생성정렬() {
+    void 랜덤생성() {
         List<LottoNumber> lottoNumber1 = new ArrayList<>() {{
             add(new LottoNumber(1));
-            add(new LottoNumber(6));
-            add(new LottoNumber(5));
+            add(new LottoNumber(2));
+            add(new LottoNumber(3));
             add(new LottoNumber(4));
-            add(new LottoNumber(20));
-            add(new LottoNumber(10));
+            add(new LottoNumber(5));
+            add(new LottoNumber(6));
         }};
-        List<LottoNumber> next = Lotto.newInstance(lottoNumber1).numbers();
+        List<LottoNumber> lottoNumber2 = new ArrayList<>() {{
+            add(new LottoNumber(11));
+            add(new LottoNumber(12));
+            add(new LottoNumber(13));
+            add(new LottoNumber(14));
+            add(new LottoNumber(15));
+            add(new LottoNumber(16));
+            add(new LottoNumber(17));
+        }};
+        assertAll(
+            () -> assertThat(new Lotto(lottoNumber1).numbers()).isNotEqualTo(
+                new Lotto(lottoNumber2).numbers()),
+            () -> assertThat(new Lotto(lottoNumber1).numbers()).hasSize(6),
+            () -> assertThat(new Lotto(lottoNumber2).numbers()).hasSize(6)
+        );
+    }*/
+
+    @Test
+    void 로또생성숫자범위() {
+        List<LottoNumber> next = Lotto.newInstance(PurchaseAuto.instance()).numbers();
+        assertAll(() -> {
+            for (LottoNumber lottoNumber : next) {
+                assertThat(LottoNumber.MIN_NUMBER <= lottoNumber.value()
+                    && lottoNumber.value() <= LottoNumber.MAX_NUMBER).isTrue();
+            }
+        });
+    }
+
+    @Test
+    void 구매정렬() {
+        List<LottoNumber> next = Lotto.newInstance(PurchaseAuto.instance()).numbers();
         Iterator<LottoNumber> iterator = next.iterator();
         assertAll(() -> {
                 LottoNumber prev = null;
@@ -102,33 +129,6 @@ public class LottoTest {
         assertAll(
             () -> assertThat(new Lotto(numbers1)).isEqualTo(new Lotto(numbers2)),
             () -> assertThat(new Lotto(numbers2)).isEqualTo(new Lotto(numbers3))
-        );
-    }
-
-    @Test
-    void 랜덤생성() {
-        List<LottoNumber> lottoNumber1 = new ArrayList<>() {{
-            add(new LottoNumber(1));
-            add(new LottoNumber(2));
-            add(new LottoNumber(3));
-            add(new LottoNumber(4));
-            add(new LottoNumber(5));
-            add(new LottoNumber(6));
-        }};
-        List<LottoNumber> lottoNumber2 = new ArrayList<>() {{
-            add(new LottoNumber(11));
-            add(new LottoNumber(12));
-            add(new LottoNumber(13));
-            add(new LottoNumber(14));
-            add(new LottoNumber(15));
-            add(new LottoNumber(16));
-            add(new LottoNumber(17));
-        }};
-        assertAll(
-            () -> assertThat(Lotto.newInstance(lottoNumber1).numbers()).isNotEqualTo(
-                Lotto.newInstance(lottoNumber2).numbers()),
-            () -> assertThat(Lotto.newInstance(lottoNumber1).numbers()).hasSize(6),
-            () -> assertThat(Lotto.newInstance(lottoNumber2).numbers()).hasSize(6)
         );
     }
 

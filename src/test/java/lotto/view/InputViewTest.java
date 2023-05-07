@@ -29,6 +29,28 @@ public class InputViewTest {
     }
 
     @Test
+    void 수동번호입력() {
+        inputStream = new ByteArrayInputStream("2, 6, 3, 4, 5, 1".getBytes(StandardCharsets.UTF_8));
+        System.setIn(inputStream);
+        assertAll(
+            () -> assertThat(InputView.askManualNumbers(1))
+                .containsExactly(new Lotto(List.of(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3)
+                    ,new LottoNumber(4),new LottoNumber(5),new LottoNumber(6)))),
+            () -> assertThat(outputStream.toString()).containsPattern("수동으로 구매할 번호를 입력해 주세요.")
+        );
+    }
+
+    @Test
+    void 수동구매개수입력() {
+        inputStream = new ByteArrayInputStream("3".getBytes(StandardCharsets.UTF_8));
+        System.setIn(inputStream);
+        assertAll(
+            () -> assertThat(InputView.askManualPurchaseCount()).isEqualTo(3),
+            () -> assertThat(outputStream.toString()).containsPattern("수동으로 구매할 개수를 입력해 주세요.")
+        );
+    }
+
+    @Test
     void 보너스번호입력() {
         inputStream = new ByteArrayInputStream("7".getBytes(StandardCharsets.UTF_8));
         System.setIn(inputStream);
@@ -45,7 +67,7 @@ public class InputViewTest {
         for (int i=0; i<14; i++) {
             lottos.add(new Lotto(lottoNumbers));
         }
-        InputView.printPurchaseComplete(new Lottos(lottos));
+        InputView.printPurchaseComplete(new Lottos(lottos, 0, 14));
         assertThat(outputStream.toString()).containsPattern("(\\[[\\d]{1,2}(, [\\d]{1,2}){5}\\]\n){14}");
     }
 
@@ -56,8 +78,8 @@ public class InputViewTest {
         for (int i=0; i<14; i++) {
             lottos.add(new Lotto(lottoNumbers));
         }
-        InputView.printPurchaseComplete(new Lottos(lottos));
-        assertThat(outputStream.toString()).containsPattern("14개를 구매했습니다.");
+        InputView.printPurchaseComplete(new Lottos(lottos, 3, 14));
+        assertThat(outputStream.toString()).containsPattern("수동으로 3개, 자동으로 14개를 구매했습니다.");
     }
 
     @Test

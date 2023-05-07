@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Map;
+import lotto.domain.LottoAmount;
 import lotto.domain.Rank;
 import lotto.domain.WinningResult;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,7 @@ public class OutputViewTest {
             Rank.FIFTH_GRADE, 0,
             Rank.SECOND_GRADE, 1
         );
-        OutputView.printRanking(WinningResult.of(map), 14000);
+        OutputView.printRanking(WinningResult.of(map), LottoAmount.of(14_000));
         assertAll(
             () -> assertThat(outputStream.toString()).containsPattern("당첨 통계"),
             () -> assertThat(outputStream.toString()).containsPattern("--------"),
