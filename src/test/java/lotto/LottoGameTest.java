@@ -34,7 +34,7 @@ public class LottoGameTest {
                 new LottoNumber(3)
         );
 
-        assertThatThrownBy(() -> lottoGame.score(lottoNumbers))
+        assertThatThrownBy(() -> lottoGame.score(lottoNumbers, new LottoNumber(4)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 당첨번호는 6개 입니다.");
     }

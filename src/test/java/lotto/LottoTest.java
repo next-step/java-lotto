@@ -11,31 +11,40 @@ public class LottoTest {
     @Test
     void 로또결과_3개일치() {
         Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
-        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 7, 8, 9));
+        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 7, 8, 9), new LottoNumber(45));
 
-        assertThat(result).isEqualTo(LottoMatcher.FOURTH_MATCH);
+        assertThat(result).isEqualTo(LottoMatcher.FIFTH_MATCH);
     }
 
     @Test
     void 로또결과_4개일치() {
         Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
-        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 4, 8, 9));
+        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 4, 8, 9), new LottoNumber(45));
 
-        assertThat(result).isEqualTo(LottoMatcher.THIRD_MATCH);
+        assertThat(result).isEqualTo(LottoMatcher.FOURTH_MATCH);
     }
 
     @Test
     void 로또결과_5개일치() {
         Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
-        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 4, 5, 9));
+        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 4, 5, 9), new LottoNumber(45));
+
+        assertThat(result).isEqualTo(LottoMatcher.THIRD_MATCH);
+    }
+
+    @Test
+    void 로또결과_5개일치_보너스일치() {
+        Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
+        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 4, 5, 9), new LottoNumber(6));
 
         assertThat(result).isEqualTo(LottoMatcher.SECOND_MATCH);
     }
 
+
     @Test
     void 로또결과_6개일치() {
         Lotto lotto = new Lotto(createLottoNumber(1, 2, 3, 4, 5, 6));
-        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 4, 5, 6));
+        LottoMatcher result = lotto.match(createLottoNumber(1, 2, 3, 4, 5, 6), new LottoNumber(45));
 
         assertThat(result).isEqualTo(LottoMatcher.FIRST_MATCH);
     }
@@ -46,10 +55,11 @@ public class LottoTest {
         Lotto lottoMatchedOne = new Lotto(createLottoNumber(1, 14, 10, 11, 12, 13));
         Lotto lottoMatchedZero = new Lotto(createLottoNumber(15, 14, 10, 11, 12, 13));
         List<LottoNumber> lottoNumber = createLottoNumber(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(45);
 
-        LottoMatcher resultMatchedTwo = lottoMatchedTwo.match(lottoNumber);
-        LottoMatcher resultMatchedOne = lottoMatchedOne.match(lottoNumber);
-        LottoMatcher resultMatchedZero = lottoMatchedZero.match(lottoNumber);
+        LottoMatcher resultMatchedTwo = lottoMatchedTwo.match(lottoNumber, bonusNumber);
+        LottoMatcher resultMatchedOne = lottoMatchedOne.match(lottoNumber, bonusNumber);
+        LottoMatcher resultMatchedZero = lottoMatchedZero.match(lottoNumber, bonusNumber);
 
         assertThat(resultMatchedTwo).isEqualTo(LottoMatcher.NONE_MATCH);
         assertThat(resultMatchedOne).isEqualTo(LottoMatcher.NONE_MATCH);
