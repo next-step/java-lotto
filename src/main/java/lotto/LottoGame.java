@@ -25,9 +25,9 @@ public class LottoGame {
         return lottos;
     }
 
-    private List<LottoMatcher> matchResult(List<LottoNumber> winNumber) {
+    private List<LottoMatcher> matchResult(List<LottoNumber> winNumber, LottoNumber bonusNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.match(winNumber))
+                .map(lotto -> lotto.match(winNumber, bonusNumber))
                 .collect(Collectors.toList());
     }
 
@@ -37,12 +37,12 @@ public class LottoGame {
         }
     }
 
-    public LottoScore score(List<LottoNumber> winNumbers) {
+    public LottoScore score(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
         checkWinNumbers(winNumbers);
         return new LottoScore(
                 LOTTO_PRICE,
                 quantity(),
-                matchResult(winNumbers)
+                matchResult(winNumbers, bonusNumber)
         );
     }
 
