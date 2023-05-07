@@ -8,7 +8,7 @@ public enum Operator {
 
     PLUS("+", Integer::sum),
     MINUS("-", (a, b) -> a-b),
-    MULTIPLY("*", Integer::sum),
+    MULTIPLY("*", (a, b) -> a*b),
     DIVIDE("/", Integer::sum),
     ;
 

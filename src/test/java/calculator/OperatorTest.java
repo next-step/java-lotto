@@ -43,4 +43,14 @@ class OperatorTest {
 
         Assertions.assertThat(Operator.MINUS.calculate(operand1, operand2)).isEqualTo(expected);
     }
+
+    @DisplayName("* 연산 기능")
+    @Test
+    void test5(){
+        int operand1 = 5;
+        int operand2 = 10;
+        int expected = 50;
+
+        Assertions.assertThat(Operator.MULTIPLY.calculate(operand1, operand2)).isEqualTo(expected);
+    }
 }
