@@ -40,18 +40,21 @@ public class Lotteries {
         Map<Rank, Integer> statisticsByRank = new HashMap<>();
         for (Lottery lottery : this.values) {
 
-            countUpByRank(statisticsByRank,
+            countUpByRank(
+                    statisticsByRank,
                     lottery.intersectionSize(weeklyWinningNumbers.getNumbers()),
-                    isSecondPlace(lottery.intersectionSize(weeklyWinningNumbers.getNumbers()),
-                            lottery, weeklyWinningNumbers));
+                    isSecondPlace(
+                            lottery.intersectionSize(weeklyWinningNumbers.getNumbers()),
+                            weeklyWinningNumbers,
+                            lottery));
         }
 
         return statisticsByRank;
     }
 
     private boolean isSecondPlace(int intersectionSize,
-            Lottery lottery,
-            WeeklyWinningNumbers weeklyWinningNumbers) {
+            WeeklyWinningNumbers weeklyWinningNumbers,
+            Lottery lottery) {
         if (intersectionSize != 5) {
             return false;
         }

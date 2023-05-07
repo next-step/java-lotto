@@ -53,6 +53,10 @@ public enum Rank {
                 .collect(Collectors.toList());
     }
 
+    public static boolean isSecond(Rank rank) {
+        return rank == SECOND;
+    }
+
     public static Rank getRankByCountOfMatch(int countOfMatch, boolean isWinningBonus) {
         if(isWinningBonus) {
             return SECOND;
