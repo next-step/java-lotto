@@ -45,19 +45,24 @@ public class Operator {
 		int left = leftOperand.getOperand();
 		int right = rightOperand.getOperand();
 
-		switch (operator) {
-			case PLUS:
-				return Operand.from(left + right);
-			case MINUS:
-				return Operand.from(left - right);
-			case MULTIPLY:
-				return Operand.from(left * right);
-			case DIVIDE:
-				validateDivisor(right);
-				return Operand.from(left / right);
-			default:
-				throw new IllegalArgumentException(INVALID_OPERATOR_MESSAGE);
+		if (operator.equals(PLUS)) {
+			return Operand.from(left + right);
 		}
+
+		if (operator.equals(MINUS)) {
+			return Operand.from(left - right);
+		}
+
+		if (operator.equals(MULTIPLY)) {
+			return Operand.from(left * right);
+		}
+
+		if (operator.equals(DIVIDE)) {
+			validateDivisor(right);
+			return Operand.from(left / right);
+		}
+
+		throw new IllegalArgumentException(INVALID_OPERATOR_MESSAGE);
 	}
 
 	private void validateDivisor(int right) {
