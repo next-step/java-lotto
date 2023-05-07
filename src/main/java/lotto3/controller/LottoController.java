@@ -23,13 +23,15 @@ public class LottoController {
 
     LottoTickets autoTickets = LottoFactory.createLottoTickets(leftMoney);
 
-    LottoTickets totalTickets = OutputView.printLottoTickets(autoTickets, manualLottoTickets);
+    OutputView.printLottoTickets(autoTickets, manualLottoTickets);
+
+    LottoTickets totalLottoTickets = manualLottoTickets.addAll(autoTickets);
 
     LottoNumbers winningNumbers = InputView.scanWinningNumbers();
     LottoNumber bonusNumber = InputView.scanBonusNumber();
     winningNumbers.validateHasDuplicateNumber(bonusNumber);
 
-    LottoResults results = totalTickets.calculateLotteryResults(winningNumbers, bonusNumber);
+    LottoResults results = totalLottoTickets.calculateLotteryResults(winningNumbers, bonusNumber);
 
     OutputView.printLottoResults(results);
     OutputView.printProfitRate(results.calculateProfitRate(investMoney));

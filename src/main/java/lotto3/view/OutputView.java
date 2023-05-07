@@ -7,23 +7,18 @@ import lotto3.domain.Prize;
 
 public class OutputView {
 
-  public static LottoTickets printLottoTickets(LottoTickets autoLottoTickets, LottoTickets manualLottoTickets) {
+  public static void printLottoTickets(LottoTickets autoLottoTickets, LottoTickets manualLottoTickets) {
     System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoTickets.size(),
         autoLottoTickets.size());
 
-    LottoTickets totalLottoTickets = addAllLottoTickets(manualLottoTickets, autoLottoTickets);
-
-    for (LottoTicket ticket : totalLottoTickets.tickets()) {
+    for (LottoTicket ticket : manualLottoTickets.tickets()) {
       printLottoTicket(ticket);
     }
-
-    return totalLottoTickets;
+    for (LottoTicket ticket : autoLottoTickets.tickets()) {
+      printLottoTicket(ticket);
+    }
   }
 
-  private static LottoTickets addAllLottoTickets(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
-    manualLottoTickets.addAll(autoLottoTickets);
-    return manualLottoTickets;
-  }
 
   private static void printLottoTicket(LottoTicket ticket) {
     System.out.println(String.join(", ", ticket.getNumbers().toString()));
