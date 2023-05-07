@@ -1,4 +1,4 @@
-package lotto.model;
+package calculator.domain.operator;
 
 public class Subtraction implements Operator {
 

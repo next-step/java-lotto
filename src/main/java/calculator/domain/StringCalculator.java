@@ -1,18 +1,17 @@
 package calculator.domain;
 
-import lotto.model.*;
+import calculator.domain.operator.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.model.Addition.ADDICTION;
-import static lotto.model.Division.DIVISION;
-import static lotto.model.Multiplication.MULTIPLICATION;
-import static lotto.model.Subtraction.SUBTRACTION;
+import static calculator.domain.operator.Addition.ADDICTION;
+import static calculator.domain.operator.Division.DIVISION;
+import static calculator.domain.operator.Multiplication.MULTIPLICATION;
+import static calculator.domain.operator.Subtraction.SUBTRACTION;
 
 public class StringCalculator {
-
 
     private StringCalculator() {}
 
