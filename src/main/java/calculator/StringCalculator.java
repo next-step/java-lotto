@@ -1,4 +1,6 @@
-import biz.OperatorFactory;
+package calculator;
+
+import calculator.biz.enums.OperatorEnum;
 
 import java.util.regex.Pattern;
 
@@ -11,17 +13,18 @@ public class StringCalculator {
     public final Pattern FOUR_FUNDAMENTAL_VALIDATE_REGEXR = Pattern.compile(FOUR_FUNDAMENTAL);
 
     public int calculate(String input) {
-        validateData(input);
+        return getResult(inputSplitByDelimiter(validateData(input), EMPTY_DELIMITER));
+    }
 
-        String[] chars = inputSplitByDelimiter(input, EMPTY_DELIMITER);
-
-        int result = Integer.parseInt(chars[0]);
-        for (int i = 1; i < chars.length; i+=2) {
-            result = OperatorFactory
-                    .getOperator(chars[i])
-                    .getResult(result, Integer.parseInt(chars[i+1]));
+    private int getResult(String[] chars) {
+        int result = parseToInt(chars[0]);
+        for (int i = 1; i < chars.length; i += 2) {
+//            result = OperatorFactory
+//                    .getOperator(chars[i])
+//                    .getResult(result, parseToInt(chars[i+1]));
+            result = OperatorEnum.findOperator(chars[i])
+                                 .getResult(result, parseToInt(chars[i + 1]));
         }
-
         return result;
     }
 
@@ -30,11 +33,17 @@ public class StringCalculator {
     }
 
 
-    private void validateData(String input) {
-        if(input == null || input.isEmpty())
+    private String validateData(String input) {
+        if (input == null || input.isEmpty())
             throw new IllegalArgumentException("입력값은 null 또는 빈공백 값이 될수 없습니다. 확인해주세요.");
 
-        if(VALIDATE_REGEXR.matcher(input).find())
+        if (VALIDATE_REGEXR.matcher(input).find())
             throw new IllegalArgumentException("숫자, 공백, 사측연산 기호 외의 문자가 포함되어있습니다.");
+
+        return input;
+    }
+
+    public int parseToInt(String value) {
+        return Integer.parseInt(value);
     }
 }
