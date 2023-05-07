@@ -45,4 +45,12 @@ class LottoNumbersTest {
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
   }
+
+  @Test
+  void 로또번호가_가지는_contains_동작_검증() {
+    LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+
+    assertThat(lottoNumbers.contains(new LottoNumber(1))).isTrue();
+    assertThat(lottoNumbers.contains(new LottoNumber(7))).isFalse();
+  }
 }
