@@ -5,12 +5,10 @@ import java.util.List;
 
 public class MyLottos {
     private final List<MyLotto> myLottos;
-    private final Purchase purchase;
     private final Result result;
 
     public MyLottos(List<MyLotto> myLottos, Purchase purchase) {
         this.myLottos = myLottos;
-        this.purchase = purchase;
         this.result = new Result(purchase);
     }
 
