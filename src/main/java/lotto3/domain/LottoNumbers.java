@@ -11,9 +11,9 @@ public class LottoNumbers {
 
 
   public LottoNumbers(List<Integer> numbers) {
+    validateHasSixNumbers(numbers);
+    validateHasNoDuplicate(numbers);
     this.numbers = convertToLottoNumbers(numbers);
-    validateHasSixNumbers();
-    validateHasNoDuplicate();
   }
 
   private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
@@ -22,14 +22,14 @@ public class LottoNumbers {
         .collect(Collectors.toList());
   }
 
-  private void validateHasNoDuplicate() {
+  private void validateHasNoDuplicate(List<Integer> numbers) {
     if (numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
       throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
     }
   }
 
 
-  private void validateHasSixNumbers() {
+  private void validateHasSixNumbers(List<Integer> numbers) {
     if (numbers.size() != LOTTO_NUMBERS_SIZE) {
       throw new IllegalArgumentException("로또 번호는 6개만 가질 수 있습니다.");
     }
