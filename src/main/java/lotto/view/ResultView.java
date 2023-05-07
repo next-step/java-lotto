@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
+import lotto.domain.WinningCount;
 
 import java.util.List;
 import java.util.Map;
@@ -29,12 +30,12 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public static void printStatistics(Map<Integer, Integer> statics, List<Integer> rewardCount) {
+    public static void printStatistics(Map<WinningCount, Integer> statics, List<WinningCount> rewardCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for(int count: rewardCount) {
-            System.out.println(count + "개 일치 (" + Rank.of(count) + "원)- " + statics.getOrDefault(count, 0) + "개");
+        for(WinningCount count: rewardCount) {
+            System.out.println(count +"(" + Rank.of(count) +") - "+ statics.getOrDefault(count, 0) + "개");
         }
     }
 
