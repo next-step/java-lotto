@@ -3,22 +3,20 @@ package study.lotto.step2.domain;
 import java.util.Arrays;
 
 public enum LottoResult {
-
-    NOT_MATCH(0, false, 0L),
-    MATCH_ONE_NUMBER(1, false, 0L),
-    MATCH_TWO_NUMBERS(2, false, 0L),
-    MATCH_THREE_NUMBERS(3, true, 5_000L),
-    MATCH_FOUR_NUMBERS(4, true, 50_000L),
-    MATCH_FIVE_NUMBERS(5, true, 1_500_000L),
-    MATCH_SIX_NUMBERS(6, true, 2_000_000_000L);
+    NOT_WIN(0, false, 0L),
+    MATCH_THREE_NUMBERS(3, false, 5_000L),
+    MATCH_FOUR_NUMBERS(4, false, 50_000L),
+    MATCH_FIVE_NUMBERS(5, false, 1_500_000L),
+    MATCH_FIVE_NUMBERS_WITH_BONUS(5, true, 1_500_000L),
+    MATCH_SIX_NUMBERS(6, false, 2_000_000_000L);
 
     private final int numberOfMatches;
-    private final boolean isWinning;
+    private final boolean isBonusMatch;
     private final long payout;
 
-    LottoResult(int numberOfMatches, boolean isWinning, long payout) {
+    LottoResult(int numberOfMatches, boolean isBonusMatch, long payout) {
         this.numberOfMatches = numberOfMatches;
-        this.isWinning = isWinning;
+        this.isBonusMatch = isBonusMatch;
         this.payout = payout;
     }
 
@@ -30,14 +28,10 @@ public enum LottoResult {
         return numberOfMatches;
     }
 
-    public boolean isWinning() {
-        return isWinning;
-    }
-
-    public static LottoResult of(int numberOfMatches) {
+    public static LottoResult of(int numberOfMatches, boolean isBonusMatch) {
         return Arrays.stream(LottoResult.values())
-                .filter(lottoResult -> lottoResult.numberOfMatches == numberOfMatches)
+                .filter(lottoResult -> lottoResult.numberOfMatches == numberOfMatches && lottoResult.isBonusMatch == isBonusMatch)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("로또 당첨 번호 갯수는 0 이상 6 이하의 정수: " + numberOfMatches));
+                .orElse(NOT_WIN);
     }
 }

@@ -5,41 +5,41 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import study.lotto.step2.domain.LottoResult;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
 class LottoResultTest {
+    @ParameterizedTest(name = "[{index}/6] {displayName}")
+    @MethodSource("numbersOfMatchAndIsBonusMatchAndLottoResult")
+    @DisplayName("당첨 번호 갯수와 보너스 번호 일치 여부를 확인하여 LottoResult enum 반환")
+    void lotto_result(int numbersOfMatch, boolean isBonusMatch, LottoResult expectedLottoResult) {
+        assertThat(LottoResult.of(numbersOfMatch, isBonusMatch)).isEqualTo(expectedLottoResult);
+    }
+
     @Test
-    @DisplayName("로또 당첨 번호 갯수가 1 이상 6 이하가 아닐 경우, IllegalArgumentException 예외 발생")
-    void invalid_numbers_of_match() {
+    @DisplayName("매칭되는 결과가 없을 경우, `NOT_WIN` 반환")
+    void not_win() {
         // given
-        int invalidNumbersOfMatch = 7;
+        int numberOfMatch = 2;
+        boolean isBonusMatch = true;
 
-        // when, then
-        assertThatThrownBy(() -> LottoResult.of(invalidNumbersOfMatch))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 당첨 번호 갯수는 0 이상 6 이하의 정수: " + invalidNumbersOfMatch);
+        // then
+        LottoResult lottoResult = LottoResult.of(numberOfMatch, isBonusMatch);
+
+        // then
+        assertThat(lottoResult).isEqualTo(LottoResult.NOT_WIN);
     }
 
-    @ParameterizedTest(name = "[{index}/7] {displayName}")
-    @MethodSource("numbersOfMatchAndLottoResult")
-    @DisplayName("당첨 번호 갯수로 부터 LottoResult enum 반환")
-    void lotto_result(int numbersOfMatch, LottoResult expectedLottoResult) {
-        assertThat(LottoResult.of(numbersOfMatch)).isEqualTo(expectedLottoResult);
-    }
-
-    private static Stream<Arguments> numbersOfMatchAndLottoResult() {
+    private static Stream<Arguments> numbersOfMatchAndIsBonusMatchAndLottoResult() {
         return Stream.of(
-                Arguments.of(0, LottoResult.NOT_MATCH),
-                Arguments.of(1, LottoResult.MATCH_ONE_NUMBER),
-                Arguments.of(2, LottoResult.MATCH_TWO_NUMBERS),
-                Arguments.of(3, LottoResult.MATCH_THREE_NUMBERS),
-                Arguments.of(4, LottoResult.MATCH_FOUR_NUMBERS),
-                Arguments.of(5, LottoResult.MATCH_FIVE_NUMBERS),
-                Arguments.of(6, LottoResult.MATCH_SIX_NUMBERS)
+                Arguments.of(0, false, LottoResult.NOT_WIN),
+                Arguments.of(3, false, LottoResult.MATCH_THREE_NUMBERS),
+                Arguments.of(4, false, LottoResult.MATCH_FOUR_NUMBERS),
+                Arguments.of(5, false, LottoResult.MATCH_FIVE_NUMBERS),
+                Arguments.of(5, true, LottoResult.MATCH_FIVE_NUMBERS_WITH_BONUS),
+                Arguments.of(6, false, LottoResult.MATCH_SIX_NUMBERS)
         );
     }
 }

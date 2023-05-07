@@ -45,4 +45,11 @@
 - [x] 로또 구매 포장 클래스 신규: `LottoPurchase`
   > 금액 검증 수행  
   > `LottoSeller` 객체는 `LottoPurchase` 객체를 활용해 `Lottos` 객체 생성
-- [x] LottoNumber 캐싱 방식 변경: `inner class` -> `Map`
+- [x] LottoNumber 캐싱 방식 변경: `inner class` → `Map`
+- [x] 로또 결과 확인 시, 상금이 없는 경우는 `NOT_WIN`로 일원화
+  > `MATCH_ONE_NUMBER`, `MATCH_TWO_NUMBER` 삭제
+
+## 기능 목록
+- [ ] 보너스 볼 추가
+  > 5개 일치 + 보너스 볼 일치 시, 당첨 금액은 30,000,000원  
+  > 보너스 번호가 당첨 번호에 있을 시, 예외 발생
