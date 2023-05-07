@@ -57,12 +57,12 @@ public enum Rank {
         return rank == SECOND;
     }
 
-    public static Rank getRankByCountOfMatch(int countOfMatch, boolean isWinningBonus) {
-        if(isWinningBonus) {
+    public static Rank getRankByCountOfMatch(int countOfMatch, boolean winningBonus) {
+        if(winningBonus && isSecondOrThird(countOfMatch)) {
             return SECOND;
         }
 
-        if(isThird(countOfMatch)) {
+        if(!winningBonus && isSecondOrThird(countOfMatch)) {
             return THIRD;
         }
 
@@ -72,7 +72,7 @@ public enum Rank {
         return MISS;
     }
 
-    private static boolean isThird(int countOfMatch) {
+    public static boolean isSecondOrThird(int countOfMatch) {
         return countOfMatch == 5;
     }
 }
