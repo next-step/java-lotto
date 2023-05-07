@@ -10,18 +10,18 @@ public class WinningNumbers {
   private final List<LottoNumber> winningNumbers;
 
   public WinningNumbers(List<Integer> winningNumbers) {
+    validateHasSixNumbers(winningNumbers);
+    validateDuplicate(winningNumbers);
     this.winningNumbers = convertToLottoNumbers(winningNumbers);
-    validateHasSixNumbers();
-    validateDuplicate();
   }
 
-  private void validateDuplicate() {
-    if (hasDuplicate()) {
+  private void validateDuplicate(List<Integer> winningNumbers) {
+    if (hasDuplicate(winningNumbers)) {
       throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
     }
   }
 
-  private boolean hasDuplicate() {
+  private boolean hasDuplicate(List<Integer> winningNumbers) {
     return winningNumbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE;
   }
 
@@ -33,13 +33,13 @@ public class WinningNumbers {
 
 
 
-  private void validateHasSixNumbers() {
-    if (!hasSixNumbers()) {
+  private void validateHasSixNumbers(List<Integer> winningNumbers) {
+    if (!hasSixNumbers(winningNumbers)) {
       throw new IllegalArgumentException("지난 주 당첨 번호는 6개를 입력해 주세요.");
     }
   }
 
-  private boolean hasSixNumbers() {
+  private boolean hasSixNumbers(List<Integer> winningNumbers) {
     return winningNumbers.size() == LOTTO_NUMBERS_SIZE;
   }
 
