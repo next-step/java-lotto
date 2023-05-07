@@ -21,7 +21,9 @@ public class LottoApplication {
 
     ResultView.showMyLotto(lottoBundle);
 
-    WinningStatistics winningStatistics = new WinningStatistics(InputConverter.convertNumberToList(InputView.askLastLottoNumber()));
+    List<Integer> targetNumber = InputConverter.convertNumberToList(InputView.askLastLottoNumber());
+    int bonusNumber = InputConverter.convertBonusNumber(targetNumber, InputView.askBonusNumber());
+    WinningStatistics winningStatistics = new WinningStatistics(targetNumber, bonusNumber);
 
     Map<Integer, Integer> resultMap = winningStatistics.lottoResult(lottoBundle);
     int totalWinningPrice = winningStatistics.showTotalWinningPrice();

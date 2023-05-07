@@ -20,8 +20,10 @@ public class ResultView {
     System.out.println("당첨 통계\n---------");
 
     Iterator<Integer> keys = map.keySet().iterator();
+    System.out.println(map);
 
     while (keys.hasNext()) {
+      System.out.println("while" + keys.next());
       System.out.printf("%d개 일치 (%d원)- %d개\n", keys.next(), RewardTable.rewardTableInfo(keys.next()).amountOfReward(), map.get(keys.next()));
     }
   }

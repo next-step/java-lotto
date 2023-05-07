@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 //
 public enum RewardTable {
+  noRewardRank(0, (times) -> 0),
   fourthRank(3, (times) -> times * 5000),
   thirdRank(4, (times) -> times * 50000),
   secondRank(5, (times) -> times * 1500000),
@@ -12,20 +13,22 @@ public enum RewardTable {
   ;
 
   public static final int MINIMUM_MATCH_NUMBER = 3;
-  private final int matchNumber;
-  private Function<Integer, Integer> times;
 
-  RewardTable(int matchNumber, Function<Integer, Integer> times) {
+  private final int matchNumber;
+
+  private Function<Integer, Integer> calcReward;
+
+  RewardTable(int matchNumber, Function<Integer, Integer> rankCondition) {
     this.matchNumber = matchNumber;
-    this.times = times;
+    this.calcReward = rankCondition;
   }
 
   public int calculateReward(int times) {
-    return this.times.apply(times);
+    return this.calcReward.apply(times);
   }
 
   public int amountOfReward() {
-    return this.times.apply(1);
+    return this.calcReward.apply(1);
   }
 
   public static RewardTable rewardTableInfo(int matchNumber) {

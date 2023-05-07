@@ -1,5 +1,8 @@
 package lotto.exception;
 
+import lotto.domain.Lotto;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,15 +22,35 @@ public class LottoException {
     }
   }
 
-  public static boolean isRightSize(List<Integer> numberList) {
+  public static boolean isNotDuplicate(List<Integer> numberList) {
     Set<Integer> numberSet = new HashSet<>(numberList);
 
-    return numberSet.size() != (numberList).size() && numberSet.size() != 6;
+    return numberSet.size() != (numberList).size();
+  }
+
+  public static void checkDuplicate(List<Integer> numberList) {
+    if (isNotDuplicate(numberList)) {
+      lottoIllegalArgumentException("로또 번호가 중복입니다.");
+    }
+  }
+
+  public static void checkDuplicateBonus(List<Integer> numberList, int bonusNumber) {
+    List<Integer> newNumberList = new ArrayList<>();
+
+    newNumberList.addAll(numberList);
+    newNumberList.add(bonusNumber);
+
+    LottoException.checkDuplicate(newNumberList);
+  }
+
+  public static boolean isRightSize(List<Integer> numberList) {
+
+    return numberList.size() != Lotto.LENGTH;
   }
 
   public static void checkSize(List<Integer> numberList) {
     if (isRightSize(numberList)) {
-      lottoIllegalArgumentException("로또 번호가 중복 혹은 6개가 아닙니다.");
+      lottoIllegalArgumentException("로또 번호가 " + Lotto.LENGTH + "개가 아닙니다.");
     }
   }
 

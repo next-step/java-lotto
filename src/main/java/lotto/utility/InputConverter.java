@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.exception.BudgetException;
 import lotto.exception.LottoException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class InputConverter {
         .collect(Collectors.toList());
 
     LottoException.checkSize(numberList);
+    LottoException.checkDuplicate(numberList);
 
     return numberList;
   }
@@ -35,5 +37,13 @@ public class InputConverter {
     LottoException.checkLottoType(strNumber);
 
     return Integer.parseInt(strNumber);
+  }
+
+  public static int convertBonusNumber(List<Integer> targetNumber, String strNumber) {
+    int bonusNumber = convertLottoNumber(strNumber);
+
+    LottoException.checkDuplicateBonus(targetNumber, bonusNumber);
+
+    return bonusNumber;
   }
 }

@@ -5,19 +5,31 @@ import lotto.utility.RewardTable;
 import java.util.*;
 
 public class WinningStatistics {
-  public final List<Integer> targetNumber;
+  private final List<Integer> targetNumber;
+  private final int bonusNumber;
 
   private int totalWinningPrice;
 
-  public WinningStatistics(List<Integer> targetNumber) {
+  public WinningStatistics(List<Integer> targetNumber, int bonusNumber) {
+    this.bonusNumber = bonusNumber;
     this.targetNumber = targetNumber;
+  }
+
+  private Map<Integer, Integer> makeHashMap() {
+    Map<Integer, Integer> map = new HashMap<>();
+
+    for(int i=0; i<=7; i++) {
+      map.put(i, 0);
+    }
+
+    return map;
   }
 
   public Map<Integer, Integer> lottoResult(List<Lotto> lottoBundle) {
     Map<Integer, Integer> map = new HashMap<>();
 
     for (Lotto lotto : lottoBundle) {
-      map.compute(lotto.matchLottoNumber(this.targetNumber),  (key, value) -> value == null ? 1 : value + 1);
+      map.compute(lotto.matchLottoNumber(this.targetNumber), (key, value) -> value == null ? 1 : value + 1);
       calcWinningPrice(lotto.matchLottoNumber(this.targetNumber));
     }
 
