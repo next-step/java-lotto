@@ -1,17 +1,19 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoRandomGenerator extends LottoGenerator {
-    private static int MIN_NUM = 1;
-    private static int MAX_NUM = 45;
-    static ArrayList<Lotto> lottos = new ArrayList<>();
+    private static final int MIN_NUM = 1;
+    private static final int MAX_NUM = 45;
+    private static List<Lotto> lottos = new ArrayList<>();
 
     public LottoRandomGenerator() {
     }
 
-    public ArrayList<Lotto> getLottos() {
+    public List<Lotto> getLottos() {
         return this.lottos;
     }
 
@@ -23,18 +25,17 @@ public class LottoRandomGenerator extends LottoGenerator {
     }
 
     public Lotto makeAutoLotto() {
-        ArrayList<Integer> numbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         for (int i = MIN_NUM; i <= MAX_NUM; i++) {
             numbers.add(i);
         }
 
         Collections.shuffle(numbers);
 
-        ArrayList<Integer> lotto = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            lotto.add(numbers.get(i));
-        }
+        List<Integer> lottoNumbers = numbers.stream()
+                .limit(6)
+                .collect(Collectors.toList());
 
-        return new Lotto(lotto);
+        return new Lotto(lottoNumbers);
     }
 }

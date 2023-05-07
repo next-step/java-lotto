@@ -1,36 +1,39 @@
-package Model;
+package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class LotteryStatics {
-    private ArrayList<int[]> lotteryStatics = new ArrayList<>();
+    private Map<Rank, Integer> lotteryStatics = new HashMap<>();
 
-    public LotteryStatics(WinRule winRule, WinCount winCount) {
-
-        for (Map.Entry<Integer, Integer> entry : winRule.getWinRule().entrySet()) {
-            int[] result = new int[3];
-            Integer equalCount = entry.getKey();
-            Integer prize = entry.getValue();
-            Integer count = winCount.getWinCount().get(equalCount);
-            result[0] = equalCount;
-            result[1] = prize;
-            result[2] = Optional.ofNullable(count).orElse(0);
-            lotteryStatics.add(result);
+    public LotteryStatics(WinRule winRule, List<Lotto> lottos, List<Integer> winNum) {
+        for (Lotto lotto : lottos) {
+            int countOfMatch = getEqualCount(lotto.getLotto(), winNum);
+            this.lotteryStatics.merge(Rank.valueOf(countOfMatch), 1, Integer::sum);
         }
     }
 
-    public ArrayList<int[]> getLotteryStatics() {
+    public Map<Rank, Integer> getLotteryStatics() {
         return this.lotteryStatics;
     }
 
-    public int getSumPirze() {
+    public int getTotalPrice() {
         int sum = 0;
-        for (int i = 0; i < this.lotteryStatics.size(); i++) {
-            sum += lotteryStatics.get(i)[1] * lotteryStatics.get(i)[2];
+        for (Map.Entry<Rank, Integer> entry : this.lotteryStatics.entrySet()) {
+            Rank rank = entry.getKey();
+            int count = entry.getValue();
+            sum += rank.getWinningMoney() * count;
         }
-
         return sum;
     }
+
+    private int getEqualCount(List<Integer> inputNums, List<Integer> winLotto) {
+        inputNums.retainAll(winLotto);
+
+        int equalNum = inputNums.size();
+
+        return equalNum;
+    }
+
 }
