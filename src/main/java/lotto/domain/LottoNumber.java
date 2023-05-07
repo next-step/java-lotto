@@ -3,18 +3,18 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoNumber {
-    private final List<Integer> numbers;
+    private final List<LottoAvailableNumber> lottoNumbers;
 
     public LottoNumber(GenerateLottoNumberStrategy generateLottoNumberStrategy) {
-        this.numbers = generateLottoNumberStrategy.generate();
+        this.lottoNumbers = generateLottoNumberStrategy.generate();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<LottoAvailableNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers.toString();
     }
 }

@@ -19,11 +19,14 @@ public class LottoMatchInfo {
         return bonusMatch;
     }
 
-    public static LottoMatchInfo countMatchingNumbers(LottoNumber lottoNumber, List<Integer> winningNumbers, int bonusNumber) {
-        List<Integer> numbers = lottoNumber.getNumbers();
+    public static LottoMatchInfo countMatchingNumbers(LottoNumber lottoNumber,
+                                                      List<LottoAvailableNumber> winningNumbers,
+                                                      LottoAvailableNumber bonusNumber) {
+        List<LottoAvailableNumber> numbers = lottoNumber.getLottoNumbers();
 
         int count = (int) numbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(number -> winningNumbers.stream()
+                        .anyMatch(winningNumber -> winningNumber.getNumber() == number.getNumber()))
                 .count();
 
         boolean bonusMatch = numbers.contains(bonusNumber);
