@@ -53,7 +53,7 @@ public class WinningResult {
     }
 
     private Rank rank(int winningCount, boolean isBonusMatch) {
-        return Rank.of(winningCount, isBonusMatch);
+        return Rank.of(winningCount, isBonusMatch).orElseThrow();
     }
 
     private void updateRankCount(Rank rank) {

@@ -28,6 +28,7 @@ public class LottoApplication {
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -36,19 +37,19 @@ public class LottoApplication {
         LottoAmount amount = LottoAmount.of(askAmount());
         int manualPurchaseCount = askManualPurchaseCount();
 
-        Lottos lottos = Lottos.of(purchaseManualLottoList(manualPurchaseCount), purchaseAutoAmount(amount, manualPurchaseCount));
+        Lottos lottos = Lottos.of(manualPurchaseLottoList(manualPurchaseCount), amountOfAutoPurchase(amount, manualPurchaseCount));
 
         printPurchaseComplete(lottos);
 
         printRanking(WinningResult.of(new WinningNumbers(askWinningNumbers(), askBonusNumber()), lottos), amount);
     }
 
-    private static List<Lotto> purchaseManualLottoList(int manualPurchaseCount) {
+    private static List<Lotto> manualPurchaseLottoList(int manualPurchaseCount) {
         return askManualNumbers(manualPurchaseCount);
     }
 
-    private static LottoAmount purchaseAutoAmount(LottoAmount amount, int manualPurchaseCount) {
-        return LottoAmount.of(amount.value() - (manualPurchaseCount * Lottos.LOTTO_AMOUNT));
+    private static LottoAmount amountOfAutoPurchase(LottoAmount amount, int manualPurchaseCount) {
+        return LottoAmount.of(amount.remainderAfterManualPurchase(manualPurchaseCount));
     }
 
 }

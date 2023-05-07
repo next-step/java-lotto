@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.Lotto;
+import lotto.domain.LottoAmount;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.purchase.PurchaseManual;
@@ -13,9 +14,9 @@ public class InputView {
     public static int askAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         int amount = inputInt();
-        if (amount < Lottos.LOTTO_AMOUNT) {
+        if (amount < LottoAmount.LOTTO_AMOUNT) {
             throw new IllegalArgumentException(
-                "로또 금액보다 적은 금액이 입력됐습니다. : " + amount + " < " + Lottos.LOTTO_AMOUNT);
+                "로또 금액보다 적은 금액이 입력됐습니다. : " + amount + " < " + LottoAmount.LOTTO_AMOUNT);
         }
         return amount;
     }
@@ -60,8 +61,12 @@ public class InputView {
     }
 
     public static List<Lotto> askManualNumbers(int count) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> result = new ArrayList<>();
+        if (count == 0) {
+            return result;
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < count; i++) {
             result.add(Lotto.newInstance(PurchaseManual.instance()));
         }

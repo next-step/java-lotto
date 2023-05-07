@@ -1,7 +1,6 @@
 package lotto.domain.purchase;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.Lotto;
@@ -19,13 +18,35 @@ public class PurchaseManual implements PurchaseStrategy {
 
     @Override
     public Lotto purchase() {
-        String[] inputs = new Scanner(System.in).nextLine().split(",");
+        return manualLotto(parsedNumbers(scanNumbers()));
+    }
+
+    private Lotto manualLotto(List<LottoNumber> numbers) {
+        return new Lotto(numbers);
+    }
+
+    private List<LottoNumber> parsedNumbers(String[] inputs) {
         List<LottoNumber> numbers = new ArrayList<>();
         for (String input : inputs) {
-            numbers.add(new LottoNumber(Integer.parseInt(input.trim())));
+            numbers.add(lottoNumber(parseInt(trim(input))));
         }
-        Collections.sort(numbers, LottoNumber::compare);
-        return new Lotto(numbers);
+        return numbers;
+    }
+
+    private LottoNumber lottoNumber(int input) {
+        return new LottoNumber(input);
+    }
+
+    private int parseInt(String input) {
+        return Integer.parseInt(input);
+    }
+
+    private String trim(String input) {
+        return input.trim();
+    }
+
+    private String[] scanNumbers() {
+        return new Scanner(System.in).nextLine().split(",");
     }
 
 }

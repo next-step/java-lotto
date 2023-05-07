@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public enum Rank {
     FIFTH_GRADE(Match.of(3, false), 5_000),
@@ -70,14 +71,13 @@ public enum Rank {
     }
 
     public static boolean isNotWinning(int winningCount, boolean isBonusMatch) {
-        return of(winningCount, isBonusMatch) == null;
+        return of(winningCount, isBonusMatch).isEmpty();
     }
 
-    public static Rank of(int winningCount, boolean isBonusMatch) {
+    public static Optional<Rank> of(int winningCount, boolean isBonusMatch) {
         return Arrays.stream(values())
             .filter(rank -> rank.match.equals(Match.of(winningCount, isBonusMatch)))
-            .findFirst()
-            .get();
+            .findFirst();
     }
 
 }

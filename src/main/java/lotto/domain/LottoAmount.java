@@ -41,4 +41,16 @@ public class LottoAmount {
         return amount / LOTTO_AMOUNT;
     }
 
+    public int remainderAfterManualPurchase(int manualPurchaseCount) {
+        return amount - amountOfManualPurchase(manualPurchaseCount);
+    }
+
+    private int amountOfManualPurchase(int manualPurchaseCount) {
+        int manualPurchaseAmount = manualPurchaseCount * LOTTO_AMOUNT;
+        if (amount < manualPurchaseAmount) {
+            throw new IllegalArgumentException("수동 구매에 필요한 금액이 부족합니다 : " + manualPurchaseAmount + "원/" + manualPurchaseCount + "장");
+        }
+        return manualPurchaseCount * LOTTO_AMOUNT;
+    }
+
 }

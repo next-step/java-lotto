@@ -12,60 +12,6 @@ import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
-   /* @Test
-    void 로또생성정렬() {
-        List<LottoNumber> lottoNumber1 = new ArrayList<>() {{
-            add(new LottoNumber(1));
-            add(new LottoNumber(6));
-            add(new LottoNumber(5));
-            add(new LottoNumber(4));
-            add(new LottoNumber(20));
-            add(new LottoNumber(10));
-        }};
-        List<LottoNumber> next = new Lotto(lottoNumber1).numbers();
-        Iterator<LottoNumber> iterator = next.iterator();
-        assertAll(() -> {
-                LottoNumber prev = null;
-                while (iterator.hasNext()) {
-                    LottoNumber current = iterator.next();
-                    if (prev == null) {
-                        prev = current;
-                        continue;
-                    }
-                    assertThat(prev.value() < current.value()).isTrue();
-                    prev = current;
-                }
-            }
-        );
-    }
-
-    @Test
-    void 랜덤생성() {
-        List<LottoNumber> lottoNumber1 = new ArrayList<>() {{
-            add(new LottoNumber(1));
-            add(new LottoNumber(2));
-            add(new LottoNumber(3));
-            add(new LottoNumber(4));
-            add(new LottoNumber(5));
-            add(new LottoNumber(6));
-        }};
-        List<LottoNumber> lottoNumber2 = new ArrayList<>() {{
-            add(new LottoNumber(11));
-            add(new LottoNumber(12));
-            add(new LottoNumber(13));
-            add(new LottoNumber(14));
-            add(new LottoNumber(15));
-            add(new LottoNumber(16));
-            add(new LottoNumber(17));
-        }};
-        assertAll(
-            () -> assertThat(new Lotto(lottoNumber1).numbers()).isNotEqualTo(
-                new Lotto(lottoNumber2).numbers()),
-            () -> assertThat(new Lotto(lottoNumber1).numbers()).hasSize(6),
-            () -> assertThat(new Lotto(lottoNumber2).numbers()).hasSize(6)
-        );
-    }*/
-
     @Test
     void 로또생성숫자범위() {
         List<LottoNumber> next = Lotto.newInstance(PurchaseAuto.instance()).numbers();

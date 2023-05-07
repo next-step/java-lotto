@@ -31,7 +31,11 @@ public class PurchaseAuto implements PurchaseStrategy {
     }
 
     protected Lotto newInstance(List<LottoNumber> lottoNumbers) {
-        return new Lotto(sorted(subList(shuffled(lottoNumbers))));
+        return autoLotto(subList(shuffled(lottoNumbers)));
+    }
+
+    private Lotto autoLotto(List<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
     private List<LottoNumber> subList(List<LottoNumber> lottoNumbers) {
@@ -41,11 +45,6 @@ public class PurchaseAuto implements PurchaseStrategy {
     private List<LottoNumber> shuffled(List<LottoNumber> lottoNumbers) {
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
-    }
-
-    private List<LottoNumber> sorted(List<LottoNumber> result) {
-        Collections.sort(result, LottoNumber::compare);
-        return result;
     }
 
 }
