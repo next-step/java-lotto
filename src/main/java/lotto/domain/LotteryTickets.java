@@ -8,8 +8,6 @@ import java.util.List;
 public class LotteryTickets {
   private List<Lotto> lottoBundle;
 
-  private int investment;
-
   private int budgetToNumberOfPurchase(int budget) {
     return budget/Lotto.PRICE;
   }
@@ -21,7 +19,6 @@ public class LotteryTickets {
 
     for (int i = 0; i < numberOfPurchase; i++) {
       lottoList.add(new Lotto());
-      this.investment += Lotto.PRICE;
     }
 
     this.lottoBundle = new ArrayList<>(lottoList);
@@ -29,10 +26,6 @@ public class LotteryTickets {
 
   public List<Lotto> getLottoBundle() {
     return new ArrayList<>(this.lottoBundle);
-  }
-
-  public int getInvestment() {
-    return this.investment;
   }
 
 }
