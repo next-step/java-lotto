@@ -24,12 +24,12 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<List<Integer>> inputManualPurchaseTickets(int PurchaseCount) {
+    public static List<List<Integer>> inputManualPurchaseTickets(int purchaseCount) {
         SCANNER.nextLine();
         System.out.printf("%n수동으로 구매할 번호를 입력해 주세요.%n");
 
         List<List<Integer>> tickets = new ArrayList<>();
-        while (PurchaseCount-- > 0) {
+        while (purchaseCount-- > 0) {
             tickets.add(
                     StringParser.parseIntList(
                         StringSplitter.split(
