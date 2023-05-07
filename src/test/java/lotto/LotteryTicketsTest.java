@@ -18,7 +18,7 @@ public class LotteryTicketsTest {
   public void purchaseTest(String budget, int expect) {
     LotteryTickets lotteryTickets = new LotteryTickets();
 
-    lotteryTickets.purchase(InputConverter.convertBudgetToNumberOfPurchase(budget));
+    lotteryTickets.purchase(InputConverter.convertBudgetToInt(budget));
 
     List<Lotto> result = lotteryTickets.getLottoBundle();
 

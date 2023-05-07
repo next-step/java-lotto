@@ -21,7 +21,7 @@ public class WinningStatisticsTest {
   public void lottoResultTest_Key(String budget, int expect) {
     LotteryTickets lotteryTickets = new LotteryTickets();
 
-    lotteryTickets.purchase(InputConverter.convertBudgetToNumberOfPurchase(budget));
+    lotteryTickets.purchase(InputConverter.convertBudgetToInt(budget));
     List<Lotto> lottoBundle = lotteryTickets.getLottoBundle();
 
     String strList = "1, 2, 3, 4, 5, 6";

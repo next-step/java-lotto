@@ -11,12 +11,10 @@ public class BudgetException {
     return BUDGET_PATTERN.asMatchPredicate().test(strNumber);
   }
 
-  public static int convertBudget(String strNumber) {
+  public static void checkIntType(String strNumber) {
     if (!isNumber(strNumber)) {
       budgetIllegalArgumentException("1 이상의 숫자만 입력해주세요");
     }
-
-    return Integer.parseInt(strNumber);
   }
 
   public static void checkScale(int budget) {

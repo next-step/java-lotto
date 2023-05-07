@@ -11,20 +11,29 @@ import java.util.stream.Collectors;
 public class InputConverter {
 
   public static int convertBudgetToInt(String strNumber) {
-    int budget = BudgetException.convertBudget(strNumber);
+
+    BudgetException.checkIntType(strNumber);
+
+    int budget = Integer.parseInt(strNumber);
 
     BudgetException.checkScale(budget);
 
-    return budget / Lotto.PRICE;
+    return budget;
   }
 
   public static List<Integer> convertNumberToList(String targetNumber) {
     List<Integer> numberList = Arrays.stream(targetNumber.split(", "))
-        .map(LottoException::convertNumber)
+        .map(InputConverter::convertNumber)
         .collect(Collectors.toList());
 
     LottoException.checkSize(numberList);
 
     return numberList;
+  }
+
+  public static int convertNumber(String strNumber) {
+    LottoException.convertNumber(strNumber);
+
+    return Integer.parseInt(strNumber);
   }
 }
