@@ -10,7 +10,7 @@ public enum Rank {
     FIFTH(WinningCount.THREE, 5_000),
     FOURTH(WinningCount.FOUR, 50_000),
     THIRD(WinningCount.FIVE, 1_500_000),
-    SECOND(WinningCount.FIVE_WITH_BONUS_BALL, 1_500_000),
+    SECOND(WinningCount.FIVE_WITH_BONUS_BALL, 3_000_000),
     FIRST(WinningCount.SIX, 2_000_000_000);
 
     private WinningCount winningCount;
@@ -35,7 +35,7 @@ public enum Rank {
         return rank.get(winningCount);
     }
 
-    public static List<WinningCount> getCountList() {
+    public static List<WinningCount> getWinningCountList() {
         return Stream.of(values()).map(Rank::winningCount).collect(Collectors.toList());
     }
 }

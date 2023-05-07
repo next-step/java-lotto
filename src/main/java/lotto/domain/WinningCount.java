@@ -41,10 +41,6 @@ public enum WinningCount {
         return this.count == count && this.isMatchBonusBall == isMatchBonusBall;
     }
 
-    public boolean isCountMoreThan(int count) {
-        return this.count >= count;
-    }
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

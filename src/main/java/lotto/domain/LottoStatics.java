@@ -23,7 +23,8 @@ public class LottoStatics {
     private Map<WinningCount, Integer> createStatistics(List<WinningCount> result) {
         Map<WinningCount, Integer> statistics = initStatistics();
 
-        result.stream().forEach(r -> statistics.put(r, statistics.get(r) + LOTTO_MATCH_COUNT));
+        result.stream()
+                .forEach(winningCount -> statistics.put(winningCount, statistics.get(winningCount) + LOTTO_MATCH_COUNT));
 
         return statistics;
     }
@@ -31,13 +32,15 @@ public class LottoStatics {
     private Map<WinningCount, Integer> initStatistics() {
         Map<WinningCount, Integer> statistics = new HashMap<>();
 
-        Rank.getCountList().stream().forEach(i -> statistics.put(i, MAP_DEFAULT));
+        Rank.getWinningCountList().stream().forEach(winningCount -> statistics.put(winningCount, MAP_DEFAULT));
 
         return statistics;
     }
 
     public String getRate() {
-        int revenue = Rank.getCountList().stream().mapToInt(count -> statistics.get(count) * Rank.of(count)).sum();
+        int revenue = Rank.getWinningCountList().stream()
+                .mapToInt(winningCount -> statistics.get(winningCount) * Rank.of(winningCount))
+                .sum();
 
         return String.valueOf(Math.floor(((float)revenue / (float)cost) * 100) / 100.0);
     }

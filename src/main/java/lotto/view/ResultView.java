@@ -30,13 +30,15 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public static void printStatistics(Map<WinningCount, Integer> statics, List<WinningCount> rewardCount) {
+    public static void printStatistics(Map<WinningCount, Integer> statistics, List<WinningCount> rewardCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for(WinningCount count: rewardCount) {
-            System.out.println(count +"(" + Rank.of(count) +") - "+ statics.getOrDefault(count, 0) + "개");
-        }
+        rewardCount.stream().forEach(count -> printWinningCountAndReward(statistics, count));
+    }
+
+    public static void printWinningCountAndReward(Map<WinningCount, Integer> statistics, WinningCount count) {
+        System.out.println(count + "(" + Rank.of(count) +"원) - " + statistics.getOrDefault(count, 0) + "개");
     }
 
     public static void printLottoRate(String rate) {

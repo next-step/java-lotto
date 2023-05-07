@@ -18,6 +18,7 @@ public class Main {
 
         ResultView.printWinningNumber();
         String winningNumbers = InputView.inputWinningNumber();
+
         ResultView.printBonusBall();
         int bonusBallNumber = InputView.inputBonusBallNumber();
 
@@ -25,7 +26,7 @@ public class Main {
 
         LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(lottos));
 
-        ResultView.printStatistics(statics.getStatistics(), Rank.getCountList());
+        ResultView.printStatistics(statics.getStatistics(), Rank.getWinningCountList());
         ResultView.printLottoRate(statics.getRate());
     }
 }
