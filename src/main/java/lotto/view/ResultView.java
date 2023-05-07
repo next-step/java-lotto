@@ -46,3 +46,4 @@ public class ResultView {
         return String.format(RESULT_MENT, rank.getWinningCount(), rank.getWinnings(), lottoResult.findWinningCount(rank));
     }
 }
+

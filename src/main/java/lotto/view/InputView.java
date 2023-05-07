@@ -22,3 +22,4 @@ public class InputView {
         return Arrays.stream(SCANNER.nextLine().split(SPLITTER)).map(Integer::parseInt).collect(Collectors.toList());
     }
 }
+
