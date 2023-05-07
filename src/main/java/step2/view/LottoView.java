@@ -11,6 +11,7 @@ public class LottoView {
     }
 
     public void printLotto() {
+        System.out.println();
         purchasedLotto.get().forEach(lotto -> System.out.println(lotto.getDetailNumbers()));
         System.out.println();
     }

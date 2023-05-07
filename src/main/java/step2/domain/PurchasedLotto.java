@@ -3,15 +3,20 @@ package step2.domain;
 import static step2.domain.Ranking.SECOND;
 import static step2.domain.Ranking.THIRD;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PurchasedLotto {
 
-    private final List<Lotto> lottoList;
+    private final List<Lotto> purchasedLottoList;
 
-    public PurchasedLotto(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public PurchasedLotto(List<Lotto> purchasedLottoList) {
+        this.purchasedLottoList = purchasedLottoList;
+    }
+
+    public PurchasedLotto() {
+        purchasedLottoList = new ArrayList<>();
     }
 
     public String getRateOfReturn(int money) {
@@ -19,15 +24,17 @@ public class PurchasedLotto {
     }
 
     public int getCountOfRank(Ranking ranking) {
-        return (int) lottoList.stream().filter(lotto -> lotto.getRanking() == ranking).count();
+        return (int) purchasedLottoList.stream()
+            .filter(lotto -> lotto.getRanking() == ranking)
+            .count();
     }
 
     public List<Lotto> get() {
-        return this.lottoList;
+        return this.purchasedLottoList;
     }
 
     public void applyRanking(WinningNumbers winningNumbers) {
-        for (Lotto lotto : this.lottoList) {
+        for (Lotto lotto : this.purchasedLottoList) {
             int matchedCount = getMatchedCount(winningNumbers, lotto);
             Ranking ranking = Ranking.match(matchedCount);
             lotto.rank(ranking);
@@ -36,12 +43,17 @@ public class PurchasedLotto {
 
     public void matchSecondOrThird(BonusNumber bonusNumber) {
         List<Lotto> secondCandidate =
-            lottoList.stream().filter(Lotto::isSecond).collect(Collectors.toList());
+            purchasedLottoList.stream().filter(Lotto::isSecond).collect(Collectors.toList());
 
         for (Lotto lotto : secondCandidate) {
             boolean isContained = bonusNumber.isContained(lotto);
             prizeSecondOrThird(lotto, isContained);
         }
+    }
+
+
+    public void addManualLotto(ManualLotto manualLotto) {
+        purchasedLottoList.addAll(manualLotto.toLottoEntity());
     }
 
     private void prizeSecondOrThird(Lotto lotto, boolean isContained) {
@@ -56,7 +68,7 @@ public class PurchasedLotto {
         return lotto.match(winningNumbers);
     }
 
-    private int getSumOfWinningMoney() {
-        return lottoList.stream().mapToInt(Lotto::getPrizedMoney).sum();
+    private long getSumOfWinningMoney() {
+        return purchasedLottoList.stream().mapToInt(Lotto::getPrizedMoney).sum();
     }
 }

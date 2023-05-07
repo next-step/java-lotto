@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import step2.domain.LotteryWin;
 import step2.domain.Lotto;
+import step2.domain.ManualLotto;
 import step2.domain.PurchasedLotto;
 import step2.domain.Ranking;
 import step2.domain.WinningNumbers;
@@ -120,16 +121,28 @@ public class LottoMatchTest {
         }
 
 
-
         @DisplayName("수익률을 나타낼 수 있다(보너스 숫자 포함).")
         @Test
         void test2() throws Exception {
             lotteryWin.confirm(purchasedLotto);
-
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
             assertThat(rateOfReturn).isEqualTo("406311.00");
         }
+
+        @DisplayName("수동 입력을 포함한 수익률을 나타낼 수 있다(보너스 숫자 포함).")
+        @Test
+        void test3() throws Exception {
+            purchasedLotto.addManualLotto(
+                new ManualLotto(List.of("1,2,3,7,8,9"))
+            );
+
+            lotteryWin.confirm(purchasedLotto);
+            String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
+
+            assertThat(rateOfReturn).isEqualTo("406312.00");
+        }
+
 
         private List<Lotto> getLottoList() {
             List<Lotto> lottoList = new ArrayList<>();

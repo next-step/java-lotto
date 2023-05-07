@@ -12,8 +12,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.BonusNumber;
 import step2.domain.LotteryWin;
 import step2.domain.LottoFactory;
+import step2.domain.LottoNumbers;
+import step2.domain.PickedLottoNumbers;
 import step2.domain.PurchasedLotto;
-import step2.domain.TotalNumbers;
 import step2.domain.WinningNumbers;
 import step2.exception.CustomNumberFormatException;
 
@@ -22,23 +23,26 @@ class LottoTest {
     @DisplayName("로또 번호 6자리를 출력한다.")
     @Test
     void test1() throws Exception {
-        TotalNumbers totalNumbers = new TotalNumbers();
+        LottoNumbers lottoNumbers = new LottoNumbers();
 
-        assertThat(totalNumbers.getRandomLottoNumber()).hasSize(6);
+        assertThat(lottoNumbers.getRandomLottoNumber()).hasSize(6);
     }
 
     @DisplayName("로또 번호가 오름차순으로 정렬된다.")
     @Test
     void test4() throws Exception {
-        TotalNumbers totalNumbers = new TotalNumbers();
+        PickedLottoNumbers pickedLottoNumbers =
+            new PickedLottoNumbers(List.of(34, 22, 11, 43, 17, 45));
 
-        assertThat(totalNumbers.getRandomLottoNumber()).isSorted();
+        assertThat(pickedLottoNumbers)
+            .isEqualTo(new PickedLottoNumbers(List.of(34, 22, 11, 43, 17, 45)));
     }
 
     @ParameterizedTest(name = "입력 금액만큼 로또를 구매한다.")
     @ValueSource(ints = {10000, 1000, 12459})
     void test2(int input) throws Exception {
-        PurchasedLotto lottoList = LottoFactory.of(input);
+        int manualLottoCount = 0;
+        PurchasedLotto lottoList = LottoFactory.of(input, manualLottoCount);
 
         assertThat(lottoList.get()).hasSize(input / 1000);
     }
@@ -46,8 +50,10 @@ class LottoTest {
     @ParameterizedTest(name = "입력 금액이 1000이하일 경우 예외를 던진다.")
     @ValueSource(ints = {-1, 0, 999})
     void test5(int input) throws Exception {
+        int manualLottoCount = 0;
+
         assertThatThrownBy(() -> {
-            LottoFactory.of(input);
+            LottoFactory.of(input, manualLottoCount);
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("구입 금액은 1000원 이상이어야 합니다.");
@@ -66,7 +72,7 @@ class LottoTest {
     @DisplayName("당첨 숫자가 45를 넘어가는 숫자가 포함될 경우 예외를 던진다.")
     @Test
     void test7() throws Exception {
-        String str = "1,3,5,6,46";
+        String str = "1,3,5,6,42,46";
 
         assertThatThrownBy(() ->
             new WinningNumbers(str)
@@ -77,7 +83,7 @@ class LottoTest {
     @DisplayName("당첨 숫자가 1이하의 숫자가 포함될 경우 예외를 던진다.")
     @Test
     void test8() throws Exception {
-        String str = "0,3,5,6,46";
+        String str = "0,3,5,6,42,46";
 
         assertThatThrownBy(() ->
             new WinningNumbers(str)
@@ -89,8 +95,7 @@ class LottoTest {
     @ValueSource(ints = {0, 46, -1})
     void test9(int input) {
         assertThatThrownBy(() -> new BonusNumber(input)
-        )
-            .isInstanceOf(IllegalArgumentException.class)
+        ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("유효하지 않은 숫자입니다.");
     }
 
@@ -101,8 +106,7 @@ class LottoTest {
 
         assertThatThrownBy(() ->
             new LotteryWin(winningNumbers, 1)
-        )
-            .isInstanceOf(IllegalArgumentException.class)
+        ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("이미 존재하는 번호입니다.");
     }
 }
