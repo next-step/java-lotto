@@ -1,11 +1,15 @@
 package lotto3.view;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto3.domain.LottoNumber;
+import lotto3.domain.LottoTicket;
+import lotto3.domain.LottoTickets;
+import lotto3.domain.ManualLottoCount;
 import lotto3.domain.Money;
 import lotto3.domain.WinningNumbers;
 
@@ -85,4 +89,65 @@ public class InputView {
   }
 
 
+  public static ManualLottoCount scanManualCount() {
+    System.out.println();
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    String manualCount = SCANNER.nextLine();
+    validateManualCountBlank(manualCount);
+    validateManualCountIsNumber(manualCount);
+    return new ManualLottoCount(Integer.parseInt(manualCount));
+  }
+
+  private static void validateManualCountIsNumber(String manualCount) {
+    if (!isNumber(manualCount)) {
+      throw new IllegalArgumentException("수동으로 구매할 로또 수는 숫자만 입력 가능합니다.");
+    }
+  }
+
+  private static void validateManualCountBlank(String manualCount) {
+    if (isBlank(manualCount)) {
+      throw new IllegalArgumentException("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+  }
+
+  public static LottoTickets scanManualLottoNumbers(ManualLottoCount manualLottoCount) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+    int count = manualLottoCount.getCount();
+
+    List<LottoTicket> lottoTickets = new ArrayList<>();
+    for(int i = 0; i < count; i++) {
+      String manualLottoNumbers = SCANNER.nextLine();
+      validateManualLottoNumbersIsBlank(manualLottoNumbers);
+      LottoTicket lottoTicket = convertToLottoTicket(manualLottoNumbers);
+      lottoTickets.add(lottoTicket);
+    }
+
+    return new LottoTickets(lottoTickets);
+  }
+
+  private static LottoTicket convertToLottoTicket(String manualLottoNumbers) {
+    String[] splitManualLottoNumbers = splitWithDelimiter(manualLottoNumbers);
+    validateManualLottoNumbersIsNumber(splitManualLottoNumbers);
+    List<Integer> manualNumbers = convertIntegerList(splitManualLottoNumbers);
+    return new LottoTicket(manualNumbers);
+  }
+
+  private static void validateManualLottoNumbersIsNumber(String[] manualLottoNumbers) {
+    for (String manualLottoNumber : manualLottoNumbers) {
+      validateManualLottoNumberIsNumber(manualLottoNumber);
+    }
+  }
+
+  private static void validateManualLottoNumberIsNumber(String manualLottoNumber) {
+    if (!isNumber(manualLottoNumber)) {
+      throw new IllegalArgumentException("수동으로 구매할 번호는 숫자만 입력 가능합니다.");
+    }
+  }
+
+  private static void validateManualLottoNumbersIsBlank(String manualLottoNumbers) {
+    if (isBlank(manualLottoNumbers)) {
+      throw new IllegalArgumentException("수동으로 구매할 번호를 입력해 주세요.");
+    }
+  }
 }

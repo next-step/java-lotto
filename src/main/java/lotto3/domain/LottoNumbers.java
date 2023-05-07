@@ -47,7 +47,6 @@ public class LottoNumbers {
 
 
   public boolean contains(LottoNumber bonusNumber) {
-    return numbers.stream()
-        .anyMatch(number -> number.equals(bonusNumber));
+    return numbers.contains(bonusNumber);
   }
 }

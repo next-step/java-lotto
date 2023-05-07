@@ -32,4 +32,8 @@ public class LottoTickets {
 
     return new LottoResults(results);
   }
+
+  public void addAll(LottoTickets autoLottoTickets) {
+    tickets.addAll(autoLottoTickets.tickets());
+  }
 }
