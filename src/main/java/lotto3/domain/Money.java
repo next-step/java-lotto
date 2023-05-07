@@ -6,9 +6,9 @@ public class Money {
   private final int money;
 
   public Money(int money) {
+    validateIsPositive(money);
+    validateThousands(money);
     this.money = money;
-    validateThousands(this.money);
-    validateIsPositive(this.money);
   }
 
   private void validateIsPositive(int money) {
