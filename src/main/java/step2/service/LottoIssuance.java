@@ -1,6 +1,7 @@
 package step2.service;
 
 import step2.domain.entity.Lotto;
+import step2.domain.entity.LottoFactory;
 import step2.domain.vo.LottoNumber;
 
 import java.util.ArrayList;
@@ -36,6 +37,6 @@ public class LottoIssuance {
         final var lotto = lottoNumbers.subList(LOTTO_INDEX_FROM, LOTTO_INDEX_TO);
         lotto.sort(Comparator.comparingInt(LottoNumber::getNumber));
 
-        return new Lotto(new ArrayList<>(lotto));
+        return LottoFactory.createAutoLotto(new ArrayList<>(lotto));
     }
 }
