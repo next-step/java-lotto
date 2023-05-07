@@ -11,7 +11,7 @@ public class LotteryDummyData {
     private final Lotteries lotteries;
 
     protected LotteryDummyData() {
-        this.weeklyWinningNumbers = new WeeklyWinningNumbers("1,2,3,41,42,43");
+        this.weeklyWinningNumbers = new WeeklyWinningNumbers("1,2,3,41,42,43",7);
         Lottery firstPlace = lotteryFactory("1, 2, 3, 41, 42, 43");
         Lottery secondPlace = lotteryFactory("1, 2, 3, 41, 42, 45");
         Lottery thirdPlace = lotteryFactory("1, 2, 3, 7, 42, 45");
