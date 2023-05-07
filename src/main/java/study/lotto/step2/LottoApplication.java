@@ -13,13 +13,21 @@ public class LottoApplication {
         LottosInformationOutputView lottosInformationOutputView = new LottosInformationOutputView(lottos);
         lottosInformationOutputView.printInformation();
 
-        LottoResults lottoResults = winningLotto().resultsOf(lottos);
+        LottoResults lottoResults = winningLottoWithBonus().resultsOf(lottos);
         LottoResultsStatisticOutputView lottoResultsStatisticOutputView = new LottoResultsStatisticOutputView(lottoResults);
         lottoResultsStatisticOutputView.printWinningStatistic();
     }
 
     private static LottoPurchase lottoPurchase() {
         return new LottoPurchase(askPurchaseAmount());
+    }
+
+    private static WinningLottoWithBonus winningLottoWithBonus() {
+        return new WinningLottoWithBonus(winningLotto(), bonusNumber());
+    }
+
+    private static BonusNumber bonusNumber() {
+        return new BonusNumber(askBonusBall());
     }
 
     private static WinningLotto winningLotto() {
