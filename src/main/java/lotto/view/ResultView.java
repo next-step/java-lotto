@@ -19,8 +19,8 @@ public class ResultView {
     public void viewWinningResult(LottoResultChecker lottoResultChecker) {
         Arrays.stream(LottoRank.values())
                 .filter(rank -> !rank.equals(LottoRank.NO_RANK))
-                .forEach(rank -> System.out.println(rank.getDescription()
-                        + " (" + rank.getPrizeMoney() + "원)- "
+                .forEach(rank -> System.out.println(rank.getMatchedCount() + "개 일치 "
+                        + "(" + rank.getPrizeMoney() + "원)- "
                         + lottoResultChecker.getRankCount(rank) + "개"));
 
     }

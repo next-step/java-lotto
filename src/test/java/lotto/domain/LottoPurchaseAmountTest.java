@@ -15,11 +15,11 @@ class LottoPurchaseAmountTest {
 
     @DisplayName("금액유효테스트")
     @ParameterizedTest(name = "{displayName} [{index}] {arguments}")
-    @ValueSource(ints = {100, 1001, 3200, 10})
+    @ValueSource(ints = {100, 1001, 3200, 10, -1000})
     void 금액유효테스트(int amount) {
         assertThatThrownBy(() -> {
             LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(amount);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("금액은 1000원 단위로 입력해야 합니다.");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("구매금액은 1000원 이상 및 1000원 단위로 입력해야 합니다.");
     }
 
     @DisplayName("구매티켓확인")

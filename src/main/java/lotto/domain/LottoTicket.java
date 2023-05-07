@@ -10,8 +10,15 @@ public class LottoTicket {
 
     private LottoTicket(List<LottoNumber> numbers) {
         validateSize(numbers);
+        validateDuplication(numbers);
 
         this.numbers = numbers;
+    }
+
+    private void validateDuplication(List<LottoNumber> numbers) {
+        if (numbers.size() > numbers.stream().distinct().count()) {
+            throw new IllegalArgumentException("입력 숫자에 중복이 존재합니다.");
+        }
     }
 
     private void validateSize(List<LottoNumber> numbers) {

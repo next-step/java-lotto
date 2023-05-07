@@ -12,8 +12,8 @@ public class LottoPurchaseAmount {
     }
 
     private void validate(int amount) {
-        if (amount % AMOUNT_OF_LOTTO_TICKET != 0) {
-            throw new IllegalArgumentException("금액은 1000원 단위로 입력해야 합니다.");
+        if (amount < AMOUNT_OF_LOTTO_TICKET || amount % AMOUNT_OF_LOTTO_TICKET != 0) {
+            throw new IllegalArgumentException("구매금액은 1000원 이상 및 1000원 단위로 입력해야 합니다.");
         }
     }
 

@@ -6,9 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoNumberTest {
     @Test
@@ -20,11 +21,11 @@ public class LottoNumberTest {
 
     @Test
     void of다건테스트() {
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 5, 6, 25, 30, 35, 45));
+        List<Integer> numbers = Arrays.asList(1, 5, 6,  30, 35, 45);
 
         List<LottoNumber> lottoNumber = LottoNumber.of(numbers);
 
-        Assertions.assertThat(lottoNumber.toString()).isEqualTo("[1, 5, 6, 25, 30, 35, 45]");
+        Assertions.assertThat(lottoNumber.toString()).isEqualTo("[1, 5, 6, 30, 35, 45]");
     }
 
     @DisplayName("로또값가져오기")

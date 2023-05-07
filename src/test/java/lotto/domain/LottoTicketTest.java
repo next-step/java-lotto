@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -16,7 +17,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또숫자최소범위체크")
     void 로또숫자최소범위체크() {
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(0, 1, 5, 6, 40, 45));
+        List<Integer> numbers = Arrays.asList(0, 1, 5, 6, 40, 45);
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = LottoTicket.createLottoTicketByManual(numbers);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1~45 이외의 숫자가 포함되어 있습니다.");
@@ -25,7 +26,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또숫자최대범위체크")
     void 로또숫자최대범위체크() {
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 5, 6, 40, 45, 46));
+        List<Integer> numbers = Arrays.asList(1, 5, 6, 40, 45, 46);
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = LottoTicket.createLottoTicketByManual(numbers);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1~45 이외의 숫자가 포함되어 있습니다.");
@@ -34,7 +35,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또숫자6개미만체크")
     void 로또숫자6개미만체크() {
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 5, 6, 25, 30));
+        List<Integer> numbers = Arrays.asList(1, 5, 6, 25, 30);
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = LottoTicket.createLottoTicketByManual(numbers);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("숫자의 입력값은 6개 여야 합니다.");
@@ -43,10 +44,18 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또숫자6개초과체크")
     void 로또숫자6개초과체크() {
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 5, 6, 25, 30, 35, 45));
+        List<Integer> numbers = Arrays.asList(1, 5, 6, 25, 30, 35, 45);
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = LottoTicket.createLottoTicketByManual(numbers);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("숫자의 입력값은 6개 여야 합니다.");
+    }
+
+    @Test
+    void 입력값중복검증() {
+        List<Integer> numbers = Arrays.asList(1, 5, 5, 30, 35, 45);
+        assertThatThrownBy(()-> {
+            LottoTicket lottoTicket = LottoTicket.createLottoTicketByManual(numbers);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력 숫자에 중복이 존재합니다.");
     }
 
     @ParameterizedTest
