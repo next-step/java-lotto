@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lotto.domain.constant.LottoRank;
 
 public class LottoRanks {
@@ -13,7 +16,12 @@ public class LottoRanks {
         this.lottoRanks = lottoRanks;
     }
 
-    public double rate() {
+    public Map<LottoRank, Long> createStatistics() {
+        return lottoRanks.stream()
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    public double createRate() {
         return lottoRanks.stream()
             .mapToInt(LottoRank::getWinningAmount)
             .map(winningAmount -> winningAmount / LOTTO_PRICE)
