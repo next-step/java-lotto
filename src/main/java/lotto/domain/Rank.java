@@ -38,4 +38,12 @@ public enum Rank {
     public int getPrize() {
         return prize;
     }
+
+    public int getMatchingCount() {
+        return matchingCount;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
 }
