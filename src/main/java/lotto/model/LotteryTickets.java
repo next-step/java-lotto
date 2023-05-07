@@ -13,7 +13,7 @@ public class LotteryTickets {
         for (int i = 0; i < money / LOTTERY_PRICE; i++) {
             tickets.add(new LotteryTicket());
         }
-        this.tickets = Collections.unmodifiableList(tickets);
+        this.tickets = tickets;
     }
 
     public Map<Win, Integer> getWinTotal(List<Integer> winNumbers) {
@@ -53,6 +53,6 @@ public class LotteryTickets {
     }
 
     public List<LotteryTicket> getTickets() {
-        return tickets;
+        return List.copyOf(tickets);
     }
 }

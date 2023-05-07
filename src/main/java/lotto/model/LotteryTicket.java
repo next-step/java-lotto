@@ -50,4 +50,5 @@ public class LotteryTicket {
     public String toString() {
         return numbers.toString();
     }
+
 }
