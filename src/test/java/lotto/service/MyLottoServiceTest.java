@@ -17,8 +17,8 @@ class MyLottoServiceTest {
     @CsvSource(value = {"0:0", "1000:1", "15000:15", "21000:21"}, delimiter = ':')
     void 로또생성횟수(int inputMoney, int expectedCount) {
         LottoService lottoService = new LottoService();
-        Purchase purchase = new Purchase(inputMoney);
-        MyLottos myLottos = lottoService.buyAutoLottos(purchase);
+        MyPurchase myPurchase = new MyPurchase(inputMoney);
+        MyLottos myLottos = lottoService.buyAutoLottos(myPurchase);
         assertThat(myLottos.count()).isEqualTo(expectedCount);
     }
 
@@ -37,8 +37,8 @@ class MyLottoServiceTest {
         lottos.add(new MyLotto(matched4Numbers));
         lottos.add(new MyLotto(matched4Numbers));
 
-        Purchase purchase = new Purchase(5000);
-        MyLottos myLottos = new MyLottos(lottos, purchase);
+        MyPurchase myPurchase = new MyPurchase(5000);
+        MyLottos myLottos = new MyLottos(lottos, myPurchase);
 
         WinLotto winLotto = new WinLotto(winNumbers);
 

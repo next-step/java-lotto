@@ -12,8 +12,8 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void showLottoCount(Purchase purchase) {
-        System.out.println(purchase.count() + "개를 구매했습니다.");
+    public static void showLottoCount(MyPurchase myPurchase) {
+        System.out.println(myPurchase.count() + "개를 구매했습니다.");
     }
 
     private static void printNumber(Numbers numbers) {
@@ -30,7 +30,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void showLottoResult(Result result) {
+    public static void showLottoResult(MyResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.printf("3개 일치 (%d원) - %d개\n", LottoRule.RANK_FOURTH_PRIZE, result.rankFourthCount());

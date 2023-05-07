@@ -1,15 +1,15 @@
 package lotto.domain;
 
-public class Result {
-    private Purchase purchase;
+public class MyResult {
+    private final MyPurchase myPurchase;
     private int rankFirstCount;
     private int rankSecondCount;
     private int rankThirdCount;
     private int rankFourthCount;
     private int prizeAmount;
 
-    public Result(Purchase purchase) {
-        this.purchase = purchase;
+    public MyResult(MyPurchase myPurchase) {
+        this.myPurchase = myPurchase;
     }
 
     public void update(int matchingCount) {
@@ -54,6 +54,6 @@ public class Result {
     }
 
     public double profit() {
-        return (prizeAmount + 0.0) / (purchase.money());
+        return (prizeAmount + 0.0) / (myPurchase.money());
     }
 }

@@ -5,19 +5,19 @@ import java.util.List;
 
 public class MyLottos {
     private final List<MyLotto> myLottos;
-    private final Result result;
+    private final MyResult result;
 
-    public MyLottos(List<MyLotto> myLottos, Purchase purchase) {
+    public MyLottos(List<MyLotto> myLottos, MyPurchase myPurchase) {
         this.myLottos = myLottos;
-        this.result = new Result(purchase);
+        this.result = new MyResult(myPurchase);
     }
 
-    public static MyLottos autoGenerate(Purchase purchase) {
+    public static MyLottos autoGenerate(MyPurchase myPurchase) {
         List<MyLotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchase.count(); i++) {
+        for (int i = 0; i < myPurchase.count(); i++) {
             lottos.add(autoGenerateOne());
         }
-        return new MyLottos(lottos, purchase);
+        return new MyLottos(lottos, myPurchase);
     }
 
     private static MyLotto autoGenerateOne() {
@@ -39,7 +39,7 @@ public class MyLottos {
         return myLottos.get(index);
     }
 
-    public Result result() {
+    public MyResult result() {
         return result;
     }
     public double profit() {
