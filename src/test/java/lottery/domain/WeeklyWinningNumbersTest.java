@@ -1,8 +1,12 @@
 package lottery.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -30,11 +34,24 @@ public class WeeklyWinningNumbersTest {
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
-    @ParameterizedTest(name = "당첨번호에 보너스 번호가 추가 되었을 경우 예외를 발생한다.")
+    @ParameterizedTest(name = "당첨번호에 보너스 번호가 중복 되었을 경우 예외를 발생한다.")
     @ValueSource(strings = {"1,2,3,4,5,6"})
     void invalidBonusTest(String source) {
         assertThatThrownBy(() -> new WeeklyWinningNumbers(source,6))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스 번호가 로또 번호에 포함되어 있습니다.");
+    }
+
+    @ParameterizedTest(name = "로또 번호에 보너스 번호가 존재할경우 true 없을 경우 false 를 리턴한다.")
+    @ValueSource(strings = {"1,2,3,4,5,6"})
+    void bonusContainsTest(String source) {
+        Lottery lottery = Lottery.lotteryFactory("1,2,3,4,5,45");
+        assertAll(
+                () -> assertThat(new WeeklyWinningNumbers(source,45)
+                        .hasBonusNumber(lottery)).isTrue(),
+                () -> assertThat(new WeeklyWinningNumbers(source,23)
+                        .hasBonusNumber(lottery)).isFalse()
+        );
+
     }
 }
