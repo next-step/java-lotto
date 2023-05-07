@@ -7,30 +7,29 @@ public class LottoGames {
     public LottoGames() {
     }
 
-    public int howManyBuyGames(int money) {
-        Objects.requireNonNull(money);
+    public int calculateBuyingTicketCount(int money) {
         return new Integer(money / LottoCommonValue.DEFAULT_LOTTO_PRICE.value());
     }
 
-    public List<LottoGame> buyLottoGame(int gameCount) {
-        List<LottoGame> lottoGames = new ArrayList<>(gameCount);
+    public List<LottoTicket> buyLottoGame(int gameCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>(gameCount);
         for (int i = 0; i < gameCount; i++) {
-            lottoGames.add(createLottoGame());
+            lottoTickets.add(createLottoGame());
         }
-        return lottoGames;
+        return lottoTickets;
     }
 
-    private LottoGame createLottoGame() {
-        return new LottoGame(RandomIntegersGenerator.createNumberList());
+    private LottoTicket createLottoGame() {
+        return new LottoTicket(RandomIntegersGenerator.createNumberList());
     }
 
-    public LottoGame readWinningNumber(String stringNumber) {
+    public LottoTicket readWinningNumber(String stringNumber) {
         String[] numbers = splitByDelimiter(stringNumber);
         Set<Integer> integers = toSet(numbers);
         if (integers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
             throw new IllegalArgumentException(stringNumber + " : 입력한 숫자를 확인해 주세요");
         }
-        return new LottoGame(integers);
+        return new LottoTicket(integers);
     }
 
     private String[] splitByDelimiter(String stringNumber) {

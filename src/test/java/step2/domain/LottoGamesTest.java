@@ -15,7 +15,7 @@ class LottoGamesTest {
     @ParameterizedTest
     @ValueSource(ints = {3000, 4000, 15000, 34000})
     public void 구매가능_게임_개수(int money) throws Exception {
-        assertThat(lottoGames.howManyBuyGames(money)).isEqualTo(money / LottoCommonValue.DEFAULT_LOTTO_PRICE.value());
+        assertThat(lottoGames.calculateBuyingTicketCount(money)).isEqualTo(money / LottoCommonValue.DEFAULT_LOTTO_PRICE.value());
     }
 
     @DisplayName("개수만큼 로또 게임을 반환한다.")

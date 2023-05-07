@@ -1,6 +1,6 @@
 package step2.controller;
 
-import step2.domain.LottoGame;
+import step2.domain.LottoTicket;
 import step2.domain.LottoGames;
 import step2.domain.LottoResultReport;
 import step2.view.InputView;
@@ -10,27 +10,27 @@ import java.util.List;
 
 public class LottoGameController {
 
-    LottoGames lottoGames = new LottoGames();
+    private LottoGames lottoGames = new LottoGames();
 
-    public void run() {
+    public void playLottoGame() {
 
-        int money = InputView.readInt("구매금액을 입력해 주세요");
-        int gameCount = lottoGames.howManyBuyGames(money);
+        int money = InputView.readAmountOfPurchase();
+        int gameCount = lottoGames.calculateBuyingTicketCount(money);
         ResultView.printMessage(gameCount + "개를 구매했습니다.");
         if (gameCount == 0) {
             return;
         }
 
-        List<LottoGame> lottos = lottoGames.buyLottoGame(gameCount);
+        List<LottoTicket> lottos = lottoGames.buyLottoGame(gameCount);
         ResultView.printList(lottos);
-        LottoGame winningNumber = lottoGames.readWinningNumber(InputView.readString("지난 주 당첨 번호를 입력해 주세요"));
+        LottoTicket winningNumber = lottoGames.readWinningNumber(InputView.readWinningNumbers());
 
         ResultView.printBlankLine();
         ResultView.printMessage("당첨 통계");
 
         LottoResultReport lottoResultReport = new LottoResultReport();
-        for (LottoGame lottoGame : lottos) {
-            int matchCount = (int) winningNumber.howManyRight(lottoGame);
+        for (LottoTicket lottoTicket : lottos) {
+            int matchCount = (int) winningNumber.countMatchingNumbers(lottoTicket);
             lottoResultReport.recordRank(matchCount);
         }
 

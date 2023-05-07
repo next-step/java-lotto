@@ -5,18 +5,18 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class LottoGame {
+public class LottoTicket {
 
-    private final List<Integer> lottoGame;
+    private final List<Integer> lottoTicket;
 
-    public LottoGame(List<Integer> numbers) {
-        validInputNumber(numbers);
-        this.lottoGame = numbers;
+    public LottoTicket(List<Integer> lottoTicket) {
+        validInputNumber(lottoTicket);
+        this.lottoTicket = lottoTicket;
     }
 
-    public LottoGame(Set<Integer> numbers) {
+    public LottoTicket(Set<Integer> numbers) {
         validInputNumber(numbers);
-        lottoGame = new ArrayList<>(numbers);
+        lottoTicket = new ArrayList<>(numbers);
     }
 
     private static void validInputNumber(Collection<Integer> numbers) {
@@ -26,18 +26,18 @@ public class LottoGame {
     }
 
     public boolean isContain(Integer number) {
-        return this.lottoGame.contains(number);
+        return this.lottoTicket.contains(number);
     }
 
-    public long howManyRight(LottoGame compareTarget) {
-        return lottoGame.stream()
+    public long countMatchingNumbers(LottoTicket compareTarget) {
+        return lottoTicket.stream()
                 .filter(i -> compareTarget.isContain(i))
                 .count();
     }
 
     @Override
     public String toString() {
-        return lottoGame.toString();
+        return lottoTicket.toString();
     }
 
 }
