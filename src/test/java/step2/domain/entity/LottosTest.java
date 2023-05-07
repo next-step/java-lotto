@@ -31,8 +31,8 @@ class LottosTest {
     }
 
     private Lottos createTestLottos() {
-        final var lotto1 = Lotto.winner("1, 2, 3, 4, 5, 6");
-        final var lotto2 = Lotto.winner("1, 2, 3, 4, 5, 6");
+        final var lotto1 = LottoFactory.createAutoLotto(1, 2, 3, 4, 5, 6);
+        final var lotto2 = LottoFactory.createAutoLotto(1, 2, 3, 4, 5, 6);
 
         return new Lottos(List.of(lotto1, lotto2));
     }
