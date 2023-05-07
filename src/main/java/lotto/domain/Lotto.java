@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,11 +12,34 @@ public class Lotto {
 
     protected List<Integer> numbers;
 
-    public Lotto(ArrayList<Integer> inNumbers) {
-        validateNumbers(inNumbers);
-        numbers = inNumbers.stream()
+    public Lotto() {
+        List<Integer> randomNumbers = getRandomNumbers();
+        numbers = sorted(randomNumbers);
+
+    }
+
+    private List<Integer> getRandomNumbers() {
+        List<Integer> availableNumbers = new ArrayList<>();
+
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            availableNumbers.add(i);
+        }
+
+        Collections.shuffle(availableNumbers);
+        return availableNumbers.stream()
+                .limit(6)
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> sorted(List<Integer> randomNumbers) {
+        return randomNumbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    public Lotto(ArrayList<Integer> inNumbers) {
+        validateNumbers(inNumbers);
+        numbers = sorted(inNumbers);
     }
 
     private void validateNumbers(ArrayList<Integer> inNumbers) {
@@ -34,5 +58,12 @@ public class Lotto {
 
     public boolean contains(Integer number) {
         return numbers.contains(number);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream()
+                .map(num -> num.toString())
+                .collect(Collectors.joining(", ","[","]"));
     }
 }
