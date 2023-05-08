@@ -16,7 +16,7 @@ class CalculatorTest {
         String lastNumberStr = "2";
         String firstNumberStr = "3";
 
-        int result = calculator.doCalculate(lastNumberStr, operator, firstNumberStr);
+        int result = calculator.calculate(firstNumberStr, operator, lastNumberStr);
 
         assertEquals(result, excepted);
     }
@@ -29,6 +29,6 @@ class CalculatorTest {
         String firstNumberStr = "3";
         String operator = "!";
 
-        assertThrows(IllegalArgumentException.class, () -> calculator.doCalculate(lastNumberStr, operator, firstNumberStr));
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate(lastNumberStr, operator, firstNumberStr));
     }
 }

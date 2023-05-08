@@ -1,19 +1,21 @@
-import java.util.Stack;
 
 public class StringCalculator {
     private static final String BLANK = " ";
     public static final String GIVEN_STRING_MUST_NOT_BE_NULL = "입력값은 null 일 수 없습니다.";
     public static final String GIVEN_STRING_MUST_NOT_BE_BLANK = "입력값은 공백 일 수 없습니다.";
 
-    public static int calculateByGivenString(String givenValue) {
+    public static int calculate(String givenValue) {
         checkIsNullOrBlank(givenValue);
-        Stack<String> stack = new Stack<>();
         String[] strings = givenValue.split(BLANK);
-        for (String string : strings) {
-            stack.add(string);
-            calculateIsAbleToCalculate(stack);
+        Calculator calculator = new Calculator();
+
+        for (int operatorIndex = 1; operatorIndex < strings.length; operatorIndex += 2) {
+            int result = calculator
+                    .calculate(strings[operatorIndex - 1], strings[operatorIndex], strings[operatorIndex + 1]);
+            strings[operatorIndex + 1] = String.valueOf(result);
         }
-        return Integer.parseInt(stack.pop());
+
+        return Integer.parseInt(strings[strings.length - 1]);
     }
 
     private static void checkIsNullOrBlank(String givenValue) {
@@ -22,13 +24,6 @@ public class StringCalculator {
         }
         if (givenValue.isBlank()) {
             throw new IllegalArgumentException(GIVEN_STRING_MUST_NOT_BE_BLANK);
-        }
-    }
-
-    private static void calculateIsAbleToCalculate(Stack<String> stack) {
-        if (stack.size() == 3) {
-            Calculator calculator = new Calculator();
-            stack.add(String.valueOf(calculator.doCalculate(stack.pop(), stack.pop(), stack.pop())));
         }
     }
 
