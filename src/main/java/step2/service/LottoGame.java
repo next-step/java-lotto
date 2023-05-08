@@ -3,7 +3,7 @@ package step2.service;
 import step2.domain.*;
 import step2.domain.WinningNumber;
 import step2.infrastructure.ManualStrategy;
-import step2.infrastructure.RandomStrategy;
+import step2.infrastructure.AutoStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class LottoGame {
 
     public PurchaseNumbers generateLotto(List<String> manualLottoNumbers) {
         List<List<Integer>> generatedLottoNumber = new ArrayList<>();
-        LottoGenerateStrategy randomStrategy = new RandomStrategy(numberOfPurchases());
+        LottoGenerateStrategy randomStrategy = new AutoStrategy(numberOfPurchases());
         LottoGenerateStrategy manualStrategy = new ManualStrategy(manualLottoNumbers);
 
         List<List<Integer>> autoNumbers = LottoFactory.generateLotto(randomStrategy);

@@ -5,11 +5,11 @@ import step2.domain.LottoGenerateStrategy;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class RandomStrategy implements LottoGenerateStrategy {
+public class AutoStrategy implements LottoGenerateStrategy {
     private final List<Integer> numberList = new ArrayList<>();
     private final int amount;
 
-    public RandomStrategy(int amount) {
+    public AutoStrategy(int amount) {
         IntStream.rangeClosed(1, 45)
                 .forEach(numberList::add);
 

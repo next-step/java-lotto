@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import step2.domain.LottoFactory;
 import step2.domain.LottoGenerateStrategy;
 import step2.infrastructure.ManualStrategy;
-import step2.infrastructure.RandomStrategy;
+import step2.infrastructure.AutoStrategy;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -39,7 +39,7 @@ public class NumberGenerateTest {
     void 자동_생성_번호는_amount만큼_생성된다() {
 
         // given
-        LottoGenerateStrategy strategy = new RandomStrategy(5);
+        LottoGenerateStrategy strategy = new AutoStrategy(5);
 
         // when
         List<List<Integer>> result = LottoFactory.generateLotto(strategy);
