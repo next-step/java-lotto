@@ -49,7 +49,7 @@ class MoneyTest {
 
         Money moneyOne = Money.wons(2000);
         Money moneyTwo = Money.wons(1000);
-        
+
         moneyTwo = moneyTwo.minus(moneyOne);
 
         Money finalMoneyTwo = moneyTwo;
