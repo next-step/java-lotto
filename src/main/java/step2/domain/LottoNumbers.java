@@ -20,10 +20,8 @@ public class LottoNumbers {
     }
 
     public List<Integer> getRandomLottoNumber() {
-        List<Integer> numbers = new ArrayList<>(totalNumbers);
+        Collections.shuffle(totalNumbers);
 
-        Collections.shuffle(numbers);
-
-        return numbers.subList(START, MAX_SIZE);
+        return totalNumbers.subList(START, MAX_SIZE);
     }
 }

@@ -30,7 +30,6 @@ public class LottoGame {
         LottoService lottoService = new LottoService(purchasedLottoList);
         lottoService.purchase(new ManualLotto(manualLottoList));
 
-
         LottoView lottoView = new LottoView(purchasedLottoList);
         lottoView.printLotto();
 
