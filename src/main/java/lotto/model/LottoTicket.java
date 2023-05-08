@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -16,9 +17,17 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
+    public int matchLottoNumberCount(List<LottoNumber> numbers) {
+        return (int) lottoNumbers.stream()
+                .filter(number -> number.hasMatchNumbers(numbers))
+                .count();
+    }
+
     private void validate(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT_LIMIT) {
             throw new IllegalArgumentException("로또 번호는 6개 입니다.");
         }
     }
+
+
 }
