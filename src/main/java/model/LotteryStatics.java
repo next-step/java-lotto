@@ -1,8 +1,6 @@
 package model;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LotteryStatics {
     private Map<Rank, Integer> lotteryStatics = new HashMap<>();
@@ -29,9 +27,11 @@ public class LotteryStatics {
     }
 
     private int getEqualCount(List<Integer> inputNums, List<Integer> winLotto) {
-        inputNums.retainAll(winLotto);
+        List<Integer> copyList = new ArrayList<>(inputNums);
 
-        int equalNum = inputNums.size();
+        int equalNum = (int) copyList.stream()
+                .filter(winLotto::contains)
+                .count();
 
         return equalNum;
     }
