@@ -26,11 +26,10 @@ public class LottoController {
 
         LotteryStatics lotteryStatics = new LotteryStatics(winRule, lottoGenerator.getLottos(), winNum.getLotto());
 
-        ResultView.printWinnerMessage(lotteryStatics.getLotteryStatics());
+        Gross gross = new Gross(lotteryStatics.getTotalPrice(), buyAmount);
 
-        int totalPriceMoney = lotteryStatics.getTotalPrice();
+        MyLottoInfoFacade myLottoInfoFacade = new MyLottoInfoFacade(lotteryStatics.getLotteryStatics(), gross.getGross());
+        myLottoInfoFacade.view();
 
-        Gross gross = new Gross(totalPriceMoney, buyAmount);
-        ResultView.printTotalGross(gross.getGross());
     }
 }
