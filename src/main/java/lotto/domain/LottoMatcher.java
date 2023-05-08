@@ -2,51 +2,24 @@ package lotto.domain;
 
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 public enum LottoMatcher {
-    FIRST_MATCH(6, 2_000_000_000) {
-        @Override
-        public void incrementScore(LottoScore lottoScore) {
-            lottoScore.addFirst();
-        }
-    },
-    SECOND_MATCH(5, 30_000_000) {
-        @Override
-        public void incrementScore(LottoScore lottoScore) {
-            lottoScore.addSecond();
-        }
-    },
-    THIRD_MATCH(5, 1_500_000) {
-        @Override
-        public void incrementScore(LottoScore lottoScore) {
-            lottoScore.addThird();
-        }
-    },
-    FOURTH_MATCH(4, 50_000) {
-        @Override
-        public void incrementScore(LottoScore lottoScore) {
-            lottoScore.addFourth();
-        }
-    },
-    FIFTH_MATCH(3, 5_000) {
-        @Override
-        public void incrementScore(LottoScore lottoScore) {
-            lottoScore.addFifth();
-        }
-    },
-    NONE_MATCH(0, 0) {
-        @Override
-        public void incrementScore(LottoScore lottoScore) {
-            // do nothing
-        }
-    };
+    FIRST_MATCH(6, 2_000_000_000, LottoScore::addFirst),
+    SECOND_MATCH(5, 30_000_000, LottoScore::addSecond),
+    THIRD_MATCH(5, 1_500_000, LottoScore::addThird),
+    FOURTH_MATCH(4, 50_000, LottoScore::addFourth),
+    FIFTH_MATCH(3, 5_000, LottoScore::addFifth) ,
+    NONE_MATCH(0, 0, lottoScore -> {});
 
     private final int matchOfCount;
     private int price;
+    private final Consumer<LottoScore> lottoScoreConsumer;
 
-    LottoMatcher(int matchOfCount, int price) {
+    LottoMatcher(int matchOfCount, int price, Consumer<LottoScore> lottoScoreConsumer) {
         this.matchOfCount = matchOfCount;
         this.price = price;
+        this.lottoScoreConsumer = lottoScoreConsumer;
     }
 
     private boolean is(int matchOfCount) {
@@ -68,7 +41,9 @@ public enum LottoMatcher {
         return price;
     }
 
-    public abstract void incrementScore(LottoScore lottoScore);
+    public void incrementScore(LottoScore lottoScore){
+        lottoScoreConsumer.accept(lottoScore);
+    }
 
     public int amount(int count) {
         return price * count;
