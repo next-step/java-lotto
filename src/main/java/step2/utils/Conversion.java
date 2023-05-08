@@ -1,6 +1,7 @@
 package step2.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import step2.exception.CustomNumberFormatException;
 
@@ -11,9 +12,7 @@ public class Conversion {
 
     public static List<Integer> stringToInt(String[] strings) {
         List<Integer> numbers = new ArrayList<>();
-        for (String string : strings) {
-            numbers.add(getStringToNumber(string));
-        }
+        Arrays.stream(strings).forEach(str -> numbers.add(getStringToNumber(str)));
         return numbers;
     }
 

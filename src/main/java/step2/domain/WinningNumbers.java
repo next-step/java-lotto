@@ -31,9 +31,7 @@ public class WinningNumbers {
     private void validateWinningNumbers(List<Integer> numbers) {
         Validation.size(numbers);
         Validation.duplicate(numbers);
-        for (Integer number : numbers) {
-            Validation.rangeOfNumber(number);
-        }
+        numbers.forEach(Validation::rangeOfNumber);
     }
 
     private List<Integer> getWinningNumbers(String winningNumber) {
