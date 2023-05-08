@@ -19,7 +19,8 @@ class ManualLottoTest {
         int money = 10000;
         int manalLottoCount = 3;
 
-        PurchasedLotto lottoList = LottoFactory.of(money, manalLottoCount);
+        PurchaseInfomationDto dto = new PurchaseInfomationDto(money, manalLottoCount);
+        PurchasedLotto lottoList = LottoFactory.of(dto, List.of());
 
         assertThat(lottoList.get()).hasSize(7);
     }
@@ -57,11 +58,11 @@ class ManualLottoTest {
     @Test
     void test5() throws Exception {
 
-        PurchasedLotto purchasedLotto = LottoFactory.of(5000, 2);
-
-        List<String> store = List.of("1,2,3,4,5,6", "7,8,9,10,11,12");
-        ManualLotto manualLotto = new ManualLotto(store);
-        purchasedLotto.addManualLotto(manualLotto);
+        PurchasedLotto purchasedLotto =
+            LottoFactory.of(
+                new PurchaseInfomationDto(5000, 2),
+                List.of("1,2,3,4,5,6", "7,8,9,10,11,12")
+            );
 
         assertThat(purchasedLotto.get()).hasSize(5);
         assertThat(purchasedLotto.get()).contains(new Lotto(List.of(1, 2, 3, 4, 5, 6)));

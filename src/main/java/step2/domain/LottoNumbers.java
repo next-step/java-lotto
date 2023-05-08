@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoNumbers {
 
-    private static final List<Integer> totalNumbers = new ArrayList<>();
+    private static final List<Integer> totalNumbers = new ArrayList<>(45);
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -19,11 +19,9 @@ public class LottoNumbers {
         }
     }
 
-    public List<Integer> getRandomLottoNumber() {
-        List<Integer> numbers = new ArrayList<>(totalNumbers);
+    public static List<Integer> getRandomLottoNumber() {
+        Collections.shuffle(totalNumbers);
 
-        Collections.shuffle(numbers);
-
-        return numbers.subList(START, MAX_SIZE);
+        return totalNumbers.subList(START, MAX_SIZE);
     }
 }

@@ -13,9 +13,8 @@ public class LotteryWin {
         this.bonusNumber = new BonusNumber(bonusNumber);
     }
 
-    public void confirm(PurchasedLotto purchasedLotto) {
-        purchasedLotto.applyRanking(this.winningNumbers);
-        purchasedLotto.matchSecondOrThird(this.bonusNumber);
+    public PurchasedLotto confirm(PurchasedLotto purchasedLotto) {
+        return purchasedLotto.applyRanking(this.winningNumbers, this.bonusNumber);
     }
 
     private void validateDuplication(List<Integer> winningNumbers, int bonusNumber) {

@@ -3,6 +3,7 @@ package step2.utils;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Validation {
 
@@ -19,16 +20,14 @@ public class Validation {
         }
     }
 
-    public static void duplicate(List<Integer> numbers) {
+    public static void validComponent(List<Integer> numbers) {
+        if (isValidSize(numbers)) {
+            throw new IllegalArgumentException("입력한 로또 번호의 개수가 올바르지 않습니다.");
+        }
+
         Set<Integer> store = new HashSet<>(numbers);
         if (isDuplication(numbers, store)) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
-    }
-
-    public static void size(List<Integer> numbers) {
-        if (isValidSize(numbers)) {
-            throw new IllegalArgumentException("입력한 로또 번호의 개수가 올바르지 않습니다.");
         }
     }
 

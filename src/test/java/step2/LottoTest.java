@@ -23,9 +23,7 @@ class LottoTest {
     @DisplayName("로또 번호 6자리를 출력한다.")
     @Test
     void test1() throws Exception {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-
-        assertThat(lottoNumbers.getRandomLottoNumber()).hasSize(6);
+        assertThat(LottoNumbers.getRandomLottoNumber()).hasSize(6);
     }
 
     @DisplayName("로또 번호가 오름차순으로 정렬된다.")
@@ -42,7 +40,8 @@ class LottoTest {
     @ValueSource(ints = {10000, 1000, 12459})
     void test2(int input) throws Exception {
         int manualLottoCount = 0;
-        PurchasedLotto lottoList = LottoFactory.of(input, manualLottoCount);
+        PurchaseInfomationDto dto = new PurchaseInfomationDto(input, manualLottoCount);
+        PurchasedLotto lottoList = LottoFactory.of(dto, List.of());
 
         assertThat(lottoList.get()).hasSize(input / 1000);
     }
@@ -51,9 +50,10 @@ class LottoTest {
     @ValueSource(ints = {-1, 0, 999})
     void test5(int input) throws Exception {
         int manualLottoCount = 0;
+        PurchaseInfomationDto dto = new PurchaseInfomationDto(input, manualLottoCount);
 
         assertThatThrownBy(() -> {
-            LottoFactory.of(input, manualLottoCount);
+            LottoFactory.of(dto, List.of());
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("구입 금액은 1000원 이상이어야 합니다.");
@@ -110,3 +110,4 @@ class LottoTest {
             .hasMessageContaining("이미 존재하는 번호입니다.");
     }
 }
+

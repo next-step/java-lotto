@@ -5,12 +5,6 @@ import step2.domain.Ranking;
 
 public class ResultView {
 
-    private final PurchasedLotto purchasedLotto;
-
-    public ResultView(PurchasedLotto purchasedLottoList) {
-        this.purchasedLotto = purchasedLottoList;
-    }
-
     public void winningNumberComment() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
@@ -19,7 +13,7 @@ public class ResultView {
         System.out.println("보너스 번호를 입력해주세요.");
     }
 
-    public void printStatics() {
+    public void printStatics(PurchasedLotto purchasedLotto) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("-------");
@@ -41,7 +35,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public void printProfit(int money) {
+    public void printProfit(int money, PurchasedLotto purchasedLotto) {
         System.out.printf("총 수익률은 %s 입니다.", purchasedLotto.getRateOfReturn(money)).println();
     }
 }

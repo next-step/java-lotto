@@ -1,6 +1,5 @@
 package step2.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import step2.utils.Conversion;
 import step2.utils.Split;
@@ -8,16 +7,16 @@ import step2.utils.Validation;
 
 public class WinningNumbers {
 
-    private final List<Integer> numberList = new ArrayList<>();
+    private final List<Integer> numberList;
 
     public WinningNumbers(String winningNumber) {
         List<Integer> numbers = getWinningNumbers(winningNumber);
         validateWinningNumbers(numbers);
-        this.numberList.addAll(numbers);
+        this.numberList = numbers;
     }
 
     public WinningNumbers(List<Integer> winningNumbers) {
-        this.numberList.addAll(winningNumbers);
+        this.numberList = winningNumbers;
     }
 
     public List<Integer> get() {
@@ -29,11 +28,8 @@ public class WinningNumbers {
     }
 
     private void validateWinningNumbers(List<Integer> numbers) {
-        Validation.size(numbers);
-        Validation.duplicate(numbers);
-        for (Integer number : numbers) {
-            Validation.rangeOfNumber(number);
-        }
+        Validation.validComponent(numbers);
+        numbers.forEach(Validation::rangeOfNumber);
     }
 
     private List<Integer> getWinningNumbers(String winningNumber) {

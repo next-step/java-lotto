@@ -3,23 +3,32 @@ package step2.domain;
 import java.util.List;
 import java.util.Objects;
 
-public class Lotto {
+public final class Lotto {
 
     private final PickedLottoNumbers pickedLottoNumbers;
-    private Ranking ranking;
+    private final Ranking ranking;
+
+    private Lotto() {
+        List<Integer> numbers = LottoNumbers.getRandomLottoNumber();
+        this.pickedLottoNumbers = new PickedLottoNumbers(numbers);
+        this.ranking = Ranking.MISSING;
+    }
 
     public Lotto(List<Integer> pickedNumbers) {
-        this(new PickedLottoNumbers(pickedNumbers));
+        this(new PickedLottoNumbers(pickedNumbers), Ranking.MISSING);
     }
 
     public Lotto(PickedLottoNumbers pickedLottoNumbers) {
-        this.pickedLottoNumbers = pickedLottoNumbers;
+        this(pickedLottoNumbers, Ranking.MISSING);
     }
 
-    private Lotto() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        List<Integer> numbers = lottoNumbers.getRandomLottoNumber();
-        this.pickedLottoNumbers = new PickedLottoNumbers(numbers);
+    public Lotto(List<Integer> numbers, Ranking ranking) {
+        this(new PickedLottoNumbers(numbers), ranking);
+    }
+
+    public Lotto(PickedLottoNumbers pickedLottoNumbers, Ranking ranking) {
+        this.pickedLottoNumbers = pickedLottoNumbers;
+        this.ranking = ranking;
     }
 
     public static Lotto issue() {
@@ -28,10 +37,6 @@ public class Lotto {
 
     public List<Integer> getDetailNumbers() {
         return this.pickedLottoNumbers.get();
-    }
-
-    public void rank(Ranking ranking) {
-        this.ranking = ranking;
     }
 
     public int getPrizedMoney() {
@@ -48,10 +53,6 @@ public class Lotto {
 
     public boolean containBonusNumber(int number) {
         return this.pickedLottoNumbers.contains(number);
-    }
-
-    public boolean isSecond() {
-        return this.ranking == Ranking.SECOND;
     }
 
     @Override

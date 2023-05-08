@@ -15,7 +15,28 @@ import step2.domain.PurchasedLotto;
 import step2.domain.Ranking;
 import step2.domain.WinningNumbers;
 
-public class LottoMatchTest {
+class LottoMatchTest {
+
+    @DisplayName("매칭 번호가 2개 이하인 경우 MISSING이 출력된다.")
+    @Test
+    void test1() throws Exception {
+        Ranking ranking = Ranking.match2(2, false);
+        assertThat(ranking).isEqualTo(Ranking.MISSING);
+    }
+
+    @DisplayName("3등을 나타낼 수 있다.")
+    @Test
+    void test2() throws Exception {
+        Ranking ranking = Ranking.match2(5, false);
+        assertThat(ranking).isEqualTo(Ranking.THIRD);
+    }
+
+    @DisplayName("2등을 나타낼 수 있다.")
+    @Test
+    void test3() throws Exception {
+        Ranking ranking = Ranking.match2(5, true);
+        assertThat(ranking).isEqualTo(Ranking.SECOND);
+    }
 
     @Nested
     @DisplayName("로또 한 장을 구매했을 경우")
@@ -31,78 +52,39 @@ public class LottoMatchTest {
             lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers), 22);
         }
 
-        @DisplayName("당첨 번호와 3개가 일치하는 경우를 나타낼 수 있다.")
+        @DisplayName("매칭 번호가 2개 이하일 경우 당첨금은 0이다.")
         @Test
-        void test6() throws Exception {
-
-            List<Integer> numbers = List.of(1, 2, 3, 11, 12, 13);
-
+        void test3() throws Exception {
+            List<Integer> numbers = List.of(1, 2, 7, 8, 9, 10);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FIFTH.getWinningMoney());
+            assertThat(purchasedLotto.get()).containsOnly(new Lotto(numbers, Ranking.MISSING));
         }
 
-        @DisplayName("당첨 번호와 4개가 일치하는 경우를 나타낼 수 있다.")
-        @Test
-        void test7() throws Exception {
-            List<Integer> numbers = List.of(1, 2, 3, 4, 8, 9);
-            Lotto lotto = new Lotto(numbers);
-            this.lottoList.add(lotto);
-
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
-
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FOURTH.getWinningMoney());
-        }
-
-        @DisplayName("당첨 번호와 5개가 일치하는 경우를 나타낼 수 있다.")
-        @Test
-        void test8() throws Exception {
-            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 9);
-            Lotto lotto = new Lotto(numbers);
-            this.lottoList.add(lotto);
-
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
-
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
-        }
-
-        @DisplayName("당첨 번호와 6개가 일치하는 경우를 나타낼 수 있다.")
-        @Test
-        void test9() throws Exception {
-            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-            Lotto lotto = new Lotto(numbers);
-            this.lottoList.add(lotto);
-
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
-
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FIRST.getWinningMoney());
-        }
-
-        @DisplayName("3등을 나타낼 수 있다.")
+        @DisplayName("보너스 번호를 제외한 등수을 나타낼 수 있다(3등).")
         @Test
         void test11() throws Exception {
             List<Integer> numbers = List.of(1, 2, 3, 4, 5, 44);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
+            assertThat(purchasedLotto.get()).containsOnly(new Lotto(numbers, Ranking.THIRD));
         }
 
-        @DisplayName("2등을 나타낼 수 있다.")
+        @DisplayName("보너스 번호를 포함하는 등수 나타낼 수 있다(2등).")
         @Test
         void test10() throws Exception {
             List<Integer> numbers = List.of(1, 2, 3, 4, 5, 22);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
-
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.SECOND.getWinningMoney());
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(new PurchasedLotto(this.lottoList));
+            assertThat(purchasedLotto.get()).containsOnly(new Lotto(numbers, Ranking.SECOND));
         }
     }
 
@@ -110,34 +92,36 @@ public class LottoMatchTest {
     @DisplayName("로또를 여러 장 구입하는 경우")
     class Lotto_Many {
 
-        private PurchasedLotto purchasedLotto;
+        private PurchasedLotto unrankedPurchasedLotto;
         private LotteryWin lotteryWin;
 
         @BeforeEach
         void setUpEach() {
-            purchasedLotto = new PurchasedLotto(getLottoList());
             List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
             lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers), 22);
         }
 
 
-        @DisplayName("수익률을 나타낼 수 있다(보너스 숫자 포함).")
+        @DisplayName("수동 입력을 하지 않았을 경우의 수익률을 나타낼 수 있다.")
         @Test
         void test2() throws Exception {
-            lotteryWin.confirm(purchasedLotto);
+            this.unrankedPurchasedLotto = new PurchasedLotto(getLottoList());
+
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(unrankedPurchasedLotto);
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
             assertThat(rateOfReturn).isEqualTo("406311.00");
         }
 
-        @DisplayName("수동 입력을 포함한 수익률을 나타낼 수 있다(보너스 숫자 포함).")
+        @DisplayName("수동 입력을 포함한 수익률을 나타낼 수 있다(보너스 숫자 고려).")
         @Test
         void test3() throws Exception {
-            purchasedLotto.addManualLotto(
-                new ManualLotto(List.of("1,2,3,7,8,9"))
-            );
+            List<Lotto> manualLottos = new ManualLotto(List.of("1,2,3,7,8,9")).toLottoEntity();
+            List<Lotto> lottoList = getLottoList();
+            lottoList.addAll(manualLottos);
+            this.unrankedPurchasedLotto = new PurchasedLotto(lottoList);
 
-            lotteryWin.confirm(purchasedLotto);
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(unrankedPurchasedLotto);
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
             assertThat(rateOfReturn).isEqualTo("406312.00");

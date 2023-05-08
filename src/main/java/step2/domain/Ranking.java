@@ -24,10 +24,38 @@ public enum Ranking {
         Ranking[] values = Ranking.values();
 
         Optional<Ranking> ranking = Arrays.stream(values)
-            .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+            .filter(rank -> isMatching(countOfMatch, rank))
             .findFirst();
 
         return ranking.orElse(MISSING);
+    }
+
+    public static Ranking match2(int countOfMatch, boolean isContained) {
+        Ranking[] values = Ranking.values();
+
+        Optional<Ranking> ranking = Arrays.stream(values)
+            .filter(rank -> isMatching(countOfMatch, rank))
+            .findFirst();
+
+        return ranking.isPresent()
+            ? applyRank(isContained, ranking.get())
+            : MISSING;
+    }
+
+    private static Ranking applyRank(boolean isContained, Ranking rank) {
+        if (rank == SECOND && isContained) {
+            return SECOND;
+        }
+
+        if (rank == SECOND) {
+            return THIRD;
+        }
+
+        return rank;
+    }
+
+    private static boolean isMatching(int countOfMatch, Ranking rank) {
+        return rank.getCountOfMatch() == countOfMatch;
     }
 
     public int getCountOfMatch() {
