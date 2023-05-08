@@ -16,7 +16,6 @@ public class LottosStatiscsFcade {
     }
 
     public void view() {
-
         WinRule winRule = new WinRule();
 
         LotteryStatics lotteryStatics = new LotteryStatics(winRule, this.lottos, this.winNum.getLotto());
