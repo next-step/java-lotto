@@ -9,7 +9,7 @@ public class WinNumbers {
         this.lotto = new Lotto(numbers);
     }
 
-    public boolean contain(int number) {
+    public boolean contains(int number) {
         return lotto.contains(number);
     }
 }

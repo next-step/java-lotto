@@ -46,5 +46,6 @@ public class LottosTest {
         WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 4, 5, 6));
         assertThat(lottos.getEarningRate(winNumbers)).isEqualTo(388.75);
         assertThat(lottos.isGain(winNumbers)).isTrue();
+        assertThat(lottos.isLoss(winNumbers)).isFalse();
     }
 }

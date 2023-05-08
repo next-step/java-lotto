@@ -15,7 +15,7 @@ public class Lotto {
     private final Set<Integer> numbers;
 
     public Lotto() {
-        this.numbers = randomLottoNumbers();
+        this(randomLottoNumbers());
     }
 
     public Lotto(Set<Integer> numbers) {
@@ -28,7 +28,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private TreeSet<Integer> randomLottoNumbers() {
+    private static TreeSet<Integer> randomLottoNumbers() {
         List<Integer> AllNumbers = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
@@ -51,7 +51,7 @@ public class Lotto {
 
     public long getMatchCount(WinNumbers winNumbers) {
         return numbers.stream()
-                .filter(winNumbers::contain)
+                .filter(winNumbers::contains)
                 .count();
     }
 

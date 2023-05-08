@@ -9,6 +9,14 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
+    public Lottos(int money) {
+        this(money, new ArrayList<>());
+    }
+
+    public Lottos(List<Lotto> manualLottos) {
+        this(LOTTO_PRICE * manualLottos.size(), manualLottos);
+    }
+
     public Lottos(int money, List<Lotto> manualLottos) {
         if (isInvalidMoney(money)) {
             throw new IllegalArgumentException("구입 금액은 1000의 배수인 양수여야 합니다.");
@@ -19,14 +27,6 @@ public class Lottos {
             lottos.add(new Lotto());
         }
         this.lottos = lottos;
-    }
-
-    public Lottos(int money) {
-        this(money, new ArrayList<>());
-    }
-
-    public Lottos(List<Lotto> manualLottos) {
-        this(LOTTO_PRICE * manualLottos.size(), manualLottos);
     }
 
     private boolean isInvalidMoney(int money) {
