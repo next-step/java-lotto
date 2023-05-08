@@ -18,7 +18,7 @@ public class LottoUtils {
     public static int getLottoGameCount(int price) {
 
         if(isMinLottoPrice(price)){
-            lottoException("로또 최소 구매 금액은 1000원 입니다.");
+            throw new InputMismatchException("로또 최소 구매 금액은 1000원 입니다. 입력값 : " + price);
         }
 
         return price / LOTTO_PRICE;
@@ -35,7 +35,7 @@ public class LottoUtils {
                 .collect(Collectors.toList());
 
         if(!isLottoResultNumberSize(numberList)){
-            lottoException("로또 번호는 숫자 6개만 입력됩니다.");
+            throw new IndexOutOfBoundsException("로또 번호는 숫자 6개만 입력됩니다. 입력값 : " + numberList);
         }
 
         return numberList;
@@ -43,7 +43,7 @@ public class LottoUtils {
 
     private static int convertNumber(String number) {
         if(!isRangeOfNumber(Integer.parseInt(number))) {
-            lottoException("로또 번호는 1~45 사이 입니다.");
+            throw new InputMismatchException("로또 번호는 1~45 사이 입니다. 입력값 : " + number);
         }
 
         return Integer.parseInt(number);
@@ -55,10 +55,6 @@ public class LottoUtils {
 
     private static boolean isLottoResultNumberSize(List<Integer> numberList) {
         return numberList.size() == LOTTO_NUMBER_SIZE;
-    }
-
-    private static void lottoException(String msg) {
-        throw new InputMismatchException(msg);
     }
 
     public static List<Integer> initLottoNumbers() {
