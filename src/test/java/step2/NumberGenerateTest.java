@@ -1,38 +1,68 @@
 package step2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoFactory;
 import step2.domain.LottoGenerateStrategy;
+import step2.infrastructure.ManualStrategy;
 import step2.infrastructure.RandomStrategy;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NumberGenerateTest {
 
-    @Test
-    void 로또_번호는_6개가_생성된다() {
+    List<Integer> numberList;
 
-        // given
-        LottoGenerateStrategy strategy = new RandomStrategy();
-
-        // when
-        List<Integer> result = strategy.generate();
-
-        // then
-        assertThat(result).hasSize(6);
+    @BeforeEach
+    void init() {
+        numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @Test
-    void 로또_번호는_1에서_45_사이의_수다() {
+    void 구매_번호_리스트는_외부_전략대로_생성된다() {
 
         // given
-        LottoGenerateStrategy strategy = new RandomStrategy();
+        LottoGenerateStrategy strategy = () -> Collections.singletonList(numberList);
 
         // when
-        List<Integer> result = strategy.generate();
+        List<List<Integer>> result = LottoFactory.generateLotto(strategy);
 
         // then
-        assertThat(result).allSatisfy(number -> assertThat(number).isBetween(1, 45));
+        assertThat(result).contains(numberList);
+    }
+
+    @Test
+    void 자동_생성_번호는_amount만큼_생성된다() {
+
+        // given
+        LottoGenerateStrategy strategy = new RandomStrategy(5);
+
+        // when
+        List<List<Integer>> result = LottoFactory.generateLotto(strategy);
+
+        // then
+        assertThat(result).hasSize(5);
+    }
+
+    @Test
+    void 수동_생성_번호는_문자열이_숫자로_변환돼서_생성된다() {
+
+        // given
+        List<String> numbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7");
+        List<Integer> firstList = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> secondList = Arrays.asList(2, 3, 4, 5, 6, 7);
+        LottoGenerateStrategy strategy = new ManualStrategy(numbers);
+
+        // when
+        List<List<Integer>> result = LottoFactory.generateLotto(strategy);
+
+        // then
+        assertThat(result).hasSize(2);
+        assertThat(result).contains(firstList);
+        assertThat(result).contains(secondList);
     }
 }

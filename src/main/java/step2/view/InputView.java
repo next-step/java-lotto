@@ -35,18 +35,14 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<List<Integer>> manualLottoNumber(int manualLottoCount) {
+    public static List<String> manualLottoNumber(int manualLottoCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<List<Integer>> lottoNumber = new ArrayList<>();
+        List<String> lottoNumber = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             String purchaseNumber = SCANNER.next();
-            String[] splitedNumber = purchaseNumber.split(",");
-
-            List<Integer> splitedNumberList = toList(splitedNumber);
-            lottoNumber.add(new ArrayList<>(splitedNumberList));
+            lottoNumber.add(purchaseNumber);
         }
-
         return lottoNumber;
     }
 
