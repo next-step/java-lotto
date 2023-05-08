@@ -19,7 +19,7 @@ public class LottoNumbers {
         }
     }
 
-    public List<Integer> getRandomLottoNumber() {
+    public static List<Integer> getRandomLottoNumber() {
         Collections.shuffle(totalNumbers);
 
         return totalNumbers.subList(START, MAX_SIZE);

@@ -1,11 +1,7 @@
 package step2.domain;
 
-import static step2.domain.Ranking.SECOND;
-import static step2.domain.Ranking.THIRD;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PurchasedLotto {
 
@@ -33,39 +29,15 @@ public class PurchasedLotto {
         return this.purchasedLottoList;
     }
 
-    public void applyRanking(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        for (Lotto lotto : this.purchasedLottoList) {
-            int matchedCount = getMatchedCount(winningNumbers, lotto);
-            Ranking ranking = Ranking.match(matchedCount);
-            lotto.rank(ranking);
-        }
-
-        List<Lotto> secondCandidate =
-            purchasedLottoList.stream().filter(Lotto::isSecond).collect(Collectors.toList());
-
-        for (Lotto lotto : secondCandidate) {
-            boolean isContained = bonusNumber.isContained(lotto);
-            prizeSecondOrThird(lotto, isContained);
-        }
-    }
-
     public void addManualLotto(ManualLotto manualLotto) {
         purchasedLottoList.addAll(manualLotto.toLottoEntity());
-    }
-
-    private void prizeSecondOrThird(Lotto lotto, boolean isContained) {
-        if (isContained) {
-            lotto.rank(SECOND);
-            return;
-        }
-        lotto.rank(THIRD);
     }
 
     public void addManualLotto2(ManualLotto manualLotto) {
         purchasedLottoList.addAll(manualLotto.toLottoEntity());
     }
 
-    public PurchasedLotto applyRanking2(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public PurchasedLotto applyRanking(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         List<Lotto> rankedLottos = new ArrayList<>();
 
         for (Lotto lotto : this.purchasedLottoList) {
