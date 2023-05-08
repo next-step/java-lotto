@@ -24,7 +24,7 @@ class WinningResultTest {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         // When
-        winningResult.calculateWinningResult(lottos, new Lotto(winningNumbers),new BonusNumber(7));
+        winningResult.calculateWinningResult(lottos, new WinningLotto(new Lotto(winningNumbers), new BonusNumber(7)));
         EnumMap<WinningPrice, Integer> result = winningResult.getWinningResult();
 
         // Then
@@ -42,7 +42,7 @@ class WinningResultTest {
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9)));
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
-        winningResult.calculateWinningResult(lottos, new Lotto(winningNumbers), new BonusNumber(10));
+        winningResult.calculateWinningResult(lottos, new WinningLotto(new Lotto(winningNumbers), new BonusNumber(14)));
         int amount = 3000;
 
         // When

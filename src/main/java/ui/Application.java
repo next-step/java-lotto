@@ -2,6 +2,7 @@ package ui;
 
 import lotto.Lotto;
 import lotto.LottoFactory;
+import lotto.WinningLotto;
 import lotto.WinningResult;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class Application {
 
         inputView.saveWinningNumber();
         inputView.saveBonusNumber();
-        winningResult.calculateWinningResult(lottos, inputView.getWinningNumbers(), inputView.getBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(inputView.getWinningNumbers(), inputView.getBonusNumber());
+        winningResult.calculateWinningResult(lottos, winningLotto);
         ResultView.printResult(winningResult.getWinningResult());
 
         ResultView.printRatioOfReturn(winningResult.calculateRateOfReturn(inputView.amount));

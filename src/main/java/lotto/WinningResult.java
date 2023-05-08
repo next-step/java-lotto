@@ -23,10 +23,10 @@ public class WinningResult {
         winningResult.put(WinningPrice.FIRST, 0);
     }
 
-    public void calculateWinningResult(List<Lotto> lottos, Lotto winningNumbers, BonusNumber bonusNumber) {
+    public void calculateWinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
         for (int i = 0; i < lottos.size(); i++) {
             Lotto lotto = lottos.get(i);
-            WinningPrice winningPrice = WinningPrice.of(lotto.countEqualNumbers(winningNumbers), lotto.countEqualBonusNumber(bonusNumber));
+            WinningPrice winningPrice = winningLotto.calculateWinningPrice(lotto);
             saveWinningResult(winningPrice);
         }
     }
