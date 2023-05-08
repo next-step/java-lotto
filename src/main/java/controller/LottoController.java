@@ -1,10 +1,9 @@
 package controller;
 
-import model.*;
+import model.Lotto;
+import model.LottosInfoFcade;
+import model.LottosStatiscsFcade;
 import view.input.InputView;
-import view.result.ResultView;
-
-import java.util.List;
 
 public class LottoController {
 
@@ -12,24 +11,13 @@ public class LottoController {
 
         int buyAmount = InputView.inputBuyAmount();
 
-        LottoStore lottoStore = new LottoStore(buyAmount);
-
-        LottoRandomGenerator lottoGenerator = new LottoRandomGenerator();
-        lottoGenerator.generatorLotto(lottoStore.getCount());
-        List<Lotto> lottos = lottoGenerator.getLottos();
-
-        ResultView.printLottoInfo(lottos, lottoStore.getCount());
+        LottosInfoFcade lottosInfoFcade = new LottosInfoFcade(buyAmount);
+        lottosInfoFcade.view();
 
         Lotto winNum = new Lotto(InputView.inputWinnerLottoNum());
 
-        WinRule winRule = new WinRule();
-
-        LotteryStatics lotteryStatics = new LotteryStatics(winRule, lottoGenerator.getLottos(), winNum.getLotto());
-
-        Gross gross = new Gross(lotteryStatics.getTotalPrice(), buyAmount);
-
-        MyLottoInfoFacade myLottoInfoFacade = new MyLottoInfoFacade(lotteryStatics.getLotteryStatics(), gross.getGross());
-        myLottoInfoFacade.view();
+        LottosStatiscsFcade lottosStatiscsFcade = new LottosStatiscsFcade(lottosInfoFcade.getLottos(), winNum, buyAmount);
+        lottosStatiscsFcade.view();
 
     }
 }
