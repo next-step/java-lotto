@@ -17,6 +17,6 @@ public class LottoService {
     }
 
     public PurchasedLotto matchResult(LotteryWin lotteryWin) {
-        return lotteryWin.confirm2(purchasedLottoList);
+        return lotteryWin.confirm(purchasedLottoList);
     }
 }
