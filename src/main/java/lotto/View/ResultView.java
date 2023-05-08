@@ -3,11 +3,12 @@ package lotto.View;
 import java.util.List;
 
 import lotto.Model.GameResult;
-import lotto.Model.Profit;
+import lotto.Model.Rank;
 import lotto.Model.Ticket;
 
 
 public class ResultView {
+    private static final int DEFAULT_PROFIT_RATE = 1;
     public static void printTickets(List<Ticket> ticketList) {
         for (Ticket ticket : ticketList) {
             System.out.println(ticket.numbers().numbers());
@@ -30,10 +31,12 @@ public class ResultView {
     private static int printMatches(GameResult result) {
         int totalAmount = 0;
 
-        for (int rank = 5; rank >= 1; rank--) {
-            int numberOfMatchedNumber = result.countOfMatchedNumberByRank(rank);
-            int numberOfTickets = result.countOfTicketByRank(rank);
-            int profit = new Profit(rank).value();
+        for (int rankIndex = 5; rankIndex >= 1; rankIndex--) {
+            int numberOfTickets = result.countOfTicketByRank(rankIndex);
+
+            Rank rank = Rank.values()[rankIndex-1];
+            int numberOfMatchedNumber = rank.matches();
+            int profit = rank.profit();
             totalAmount += numberOfTickets * profit;
             printMatch(rank, numberOfMatchedNumber,numberOfTickets, profit);
         }
@@ -41,9 +44,9 @@ public class ResultView {
         return totalAmount;
     }
 
-    private static void printMatch(int rank, int matchedNumber, int numberOfTickets, int profit) {
+    private static void printMatch(Rank rank, int matchedNumber, int numberOfTickets, int profit) {
         System.out.print(matchedNumber + "개 일치");
-        if (rank == 2) {
+        if (rank == Rank.SECOND) {
             System.out.print(", 보너스 볼 일치");
         }
 
@@ -51,12 +54,12 @@ public class ResultView {
     }
 
     private static void printPerformance(double profitRate) {
-        if (profitRate < 1) {
+        if (profitRate < DEFAULT_PROFIT_RATE) {
             printFinal("손해");
             return;
         }
 
-        if (profitRate > 1) {
+        if (profitRate > DEFAULT_PROFIT_RATE) {
             printFinal("이익");
             return;
         }

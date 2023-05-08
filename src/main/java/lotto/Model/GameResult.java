@@ -53,16 +53,4 @@ public class GameResult {
 
         return resultTable.get(WINNER_MATCH_COUNT_MAX - rank + 2);
     }
-
-    public int countOfMatchedNumberByRank(int rank) {
-        if (rank == 2) {
-            return CANDIDATE_BONUS_COUNT;
-        }
-
-        if (rank == 1) {
-            return WINNER_MATCH_COUNT_MAX;
-        }
-
-        return WINNER_MATCH_COUNT_MAX - rank + 2;
-    }
 }
