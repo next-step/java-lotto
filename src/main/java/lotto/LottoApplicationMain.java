@@ -10,10 +10,12 @@ public class LottoApplicationMain {
         int purchaseMoney = InputView.questionOrder();
         LottoBundle lottoBundle = Store.order(new Money(purchaseMoney));
         OutputView.showLottoBundle(lottoBundle);
-        WinNumber winNumber = new WinNumber(Store.pickWinNumber(InputView.questionWinnerNumber()));
-        Record record = Store.extractRecord(lottoBundle, winNumber);
+
+        WinNumber winNumber = LottoCompany.announce(InputView.questionWinnerNumber());
+        Record record = Record.extractRecord(lottoBundle, winNumber);
         OutputView.showRecord(record);
-        ProfitRate profitRate = Store.calculateProfit(purchaseMoney, record);
+
+        ProfitRate profitRate = Record.calculateProfit(purchaseMoney, record);
         OutputView.showProfitRate(profitRate);
     }
 }

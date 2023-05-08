@@ -54,7 +54,7 @@ public class OutputView {
     }
 
     private static List<Integer> sort(Lotto lotto) {
-        return lotto.getLottoNumber()
+        return lotto.getLottoNumbers()
                 .stream()
                 .map(lottoNumber -> lottoNumber.getNumber())
                 .sorted()
