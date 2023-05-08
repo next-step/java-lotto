@@ -67,4 +67,9 @@ public class LottoUtils {
                 .boxed()
                 .collect(Collectors.toList());
     }
+
+    public static double calRateOfReturn(int totalWinningPrice, int buyPrice) {
+
+        return 1 + (totalWinningPrice - buyPrice) / (double) buyPrice;
+    }
 }
