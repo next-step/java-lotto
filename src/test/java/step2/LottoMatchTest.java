@@ -31,57 +31,19 @@ public class LottoMatchTest {
             lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers), 22);
         }
 
-        @DisplayName("당첨 번호와 3개가 일치하는 경우를 나타낼 수 있다.")
+        @DisplayName("매칭 번호가 2개 이하일 경우 당첨금은 0이다.")
         @Test
-        void test6() throws Exception {
-
-            List<Integer> numbers = List.of(1, 2, 3, 11, 12, 13);
-
+        void test3() throws Exception {
+            List<Integer> numbers = List.of(1, 2, 7, 8, 9, 10);
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
             lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FIFTH.getWinningMoney());
+            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.MISSING.getWinningMoney());
         }
 
-        @DisplayName("당첨 번호와 4개가 일치하는 경우를 나타낼 수 있다.")
-        @Test
-        void test7() throws Exception {
-            List<Integer> numbers = List.of(1, 2, 3, 4, 8, 9);
-            Lotto lotto = new Lotto(numbers);
-            this.lottoList.add(lotto);
-
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
-
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FOURTH.getWinningMoney());
-        }
-
-        @DisplayName("당첨 번호와 5개가 일치하는 경우를 나타낼 수 있다.")
-        @Test
-        void test8() throws Exception {
-            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 9);
-            Lotto lotto = new Lotto(numbers);
-            this.lottoList.add(lotto);
-
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
-
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
-        }
-
-        @DisplayName("당첨 번호와 6개가 일치하는 경우를 나타낼 수 있다.")
-        @Test
-        void test9() throws Exception {
-            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-            Lotto lotto = new Lotto(numbers);
-            this.lottoList.add(lotto);
-
-            lotteryWin.confirm(new PurchasedLotto(this.lottoList));
-
-            assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.FIRST.getWinningMoney());
-        }
-
-        @DisplayName("3등을 나타낼 수 있다.")
+        @DisplayName("보너스 번호를 제외한 등수을 나타낼 수 있다.")
         @Test
         void test11() throws Exception {
             List<Integer> numbers = List.of(1, 2, 3, 4, 5, 44);
@@ -93,7 +55,7 @@ public class LottoMatchTest {
             assertThat(lotto.getPrizedMoney()).isEqualTo(Ranking.THIRD.getWinningMoney());
         }
 
-        @DisplayName("2등을 나타낼 수 있다.")
+        @DisplayName("보너스 번호를 포함하는 등수ㅂ 나타낼 수 있다(2등).")
         @Test
         void test10() throws Exception {
             List<Integer> numbers = List.of(1, 2, 3, 4, 5, 22);
