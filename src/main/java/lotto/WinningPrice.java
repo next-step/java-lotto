@@ -40,13 +40,5 @@ public enum WinningPrice {
         ).findFirst().orElse(null);
     }
 
-    public static int getFirstEqualCount() {
-        return FIRST.equalCount;
-    }
-
-    public static int getLastEqualCount() {
-        return FOUR.equalCount;
-    }
-
 
 }
