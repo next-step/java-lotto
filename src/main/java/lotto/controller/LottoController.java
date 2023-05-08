@@ -18,7 +18,7 @@ public class LottoController {
 
     public void buy() {
         lottoGame.buyLotto(inputView.price());
-        inputView.buy(lottoGame);
+        inputView.buy(lottoGame.quantity());
         resultView.view(lottoGame.lottos());
     }
 
