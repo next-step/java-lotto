@@ -1,23 +1,27 @@
 package lotto.domain;
 
+import lotto.domain.generator.AutoLottoGenerator;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGames {
 
     private final List<Lotto> lottoGameList = new ArrayList<>();
-    private final int[] lottoResult = new int[Lotto.LOTTO_SIZE + 1];
-
-    public LottoGames(List<String> lottoNumberList) {
-        lottoNumberList.forEach(number -> lottoGameList.add(new Lotto(number)));
-    }
+    private final List<Integer> lottoResult = Arrays.stream(new int[LottoConstant.LOTTO_SIZE + 1]).boxed().collect(Collectors.toList());
 
     public LottoGames(int gameCount) {
-        gameCount /= Lotto.LOTTO_PRICE;
+        gameCount /= LottoConstant.LOTTO_PRICE;
         for (int i = 0; i < gameCount; i++) {
-            lottoGameList.add(new Lotto(LottoNumberGenerator.generateNumbers()));
+            lottoGameList.add(new Lotto(new AutoLottoGenerator()));
         }
+    }
+
+    public LottoGames(List<Lotto> lottoGameList) {
+        this.lottoGameList.addAll(lottoGameList);
     }
 
     protected int size() {
@@ -25,20 +29,25 @@ public class LottoGames {
     }
 
     private int sum() {
-        return IntStream.range(3, Lotto.LOTTO_SIZE + 1)
-                .map(index -> LottoPrize.findPrize(index) * lottoResult[index])
+        return IntStream.rangeClosed(LottoConstant.MIN_WINNING_NUM, LottoConstant.LOTTO_SIZE)
+                .map(index -> LottoPrize.findPrize(index) * lottoResult.get(index))
                 .sum();
     }
 
     public double calculateReturn() {
-        return sum() / (double)(Lotto.LOTTO_PRICE * lottoGameList.size());
+        return sum() / (double) (LottoConstant.LOTTO_PRICE * lottoGameList.size());
     }
 
-    public void calculatePrizeCount(Lotto firstLotto) {
-        lottoGameList.forEach(lotto -> lottoResult[lotto.findMatchCount(firstLotto)]++);
+    public void calculatePrizeCount(WinningLotto winningLotto) {
+        lottoGameList.forEach(lotto -> {
+            int matchCount = lotto.findMatchCount(winningLotto);
+            int winningCount = lottoResult.get(matchCount);
+            winningCount++;
+            lottoResult.set(matchCount, winningCount);
+        });
     }
 
-    public int[] getLottoResult() {
+    public List<Integer> getLottoResult() {
         return lottoResult;
     }
 }

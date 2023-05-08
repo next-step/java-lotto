@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoConstant;
 import lotto.util.Util;
 
 import java.util.Scanner;
@@ -21,7 +21,7 @@ public class InputView {
         System.out.println(PURCHASE_AMOUNT);
         String purchaseAmount = scanner.nextLine();
         validateInput(purchaseAmount);
-        System.out.printf(PURCHASE_MESSAGE, Integer.parseInt(purchaseAmount) / Lotto.LOTTO_PRICE);
+        System.out.printf(PURCHASE_MESSAGE, Integer.parseInt(purchaseAmount) / LottoConstant.LOTTO_PRICE);
         return purchaseAmount;
     }
 

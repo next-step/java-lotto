@@ -1,7 +1,8 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoGames;
+import lotto.domain.WinningLotto;
+import lotto.util.Util;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,9 +13,9 @@ public class LottoMain {
 
     public static void main(String[] args) {
         String purchaseAmount = inputView.inputPurchaseAmount();
-        LottoGames lottoGames = new LottoGames(Integer.parseInt(purchaseAmount));
+        LottoGames lottoGames = new LottoGames(Util.convertInt(purchaseAmount));
         String firstLottoNumber = inputView.inputFirstLottoNumber();
-        Lotto firstLotto = new Lotto(firstLottoNumber);
+        WinningLotto firstLotto = new WinningLotto(firstLottoNumber);
         lottoGames.calculatePrizeCount(firstLotto);
         resultView.printLottoResult(lottoGames);
     }

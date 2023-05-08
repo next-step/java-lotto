@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.domain.LottoConstant;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoPrize;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class ResultView {
@@ -16,9 +18,9 @@ public class ResultView {
     }
 
     private void printMatchedCount(LottoGames lottoGames) {
-        int[] lottoResult = lottoGames.getLottoResult();
-        IntStream.range(3, lottoResult.length)
-                .forEach(index -> System.out.printf("%d개일치 (%d원) - %d\n", index, LottoPrize.findPrize(index), lottoResult[index]));
+        List<Integer> lottoResult = lottoGames.getLottoResult();
+        IntStream.range(LottoConstant.MIN_WINNING_NUM, lottoResult.size())
+                .forEach(index -> System.out.printf("%d개일치 (%d원) - %d\n", index, LottoPrize.findPrize(index), lottoResult.get(index)));
     }
 
     private void printReturnRate(LottoGames lottoGames) {
