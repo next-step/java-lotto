@@ -2,6 +2,7 @@ package step1;
 
 public class Expression {
     private static final String BLANK = " ";
+
     private final String expression;
 
     public Expression(String expression) {

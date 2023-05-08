@@ -10,7 +10,11 @@ public class Main {
         final LottoGame lottoGame = new LottoGame(money);
         resultView.previewLottoGames(lottoGame);
 
-        final YourLottoTicket yourLottoTicket = new YourLottoTicket(inputView.requestYourNumber());
+        final CommaParser commaParser = new CommaParser();
+        final YourLottoTicket yourLottoTicket = new YourLottoTicket(
+                inputView.requestWinningNumbers(),
+                commaParser
+        );
         lottoGame.findWinningResult(yourLottoTicket);
 
         resultView.printResult(lottoGame);

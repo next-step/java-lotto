@@ -3,6 +3,7 @@ package step2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AutoLottoTicket extends LottoTicket {
     public AutoLottoTicket() {
@@ -14,6 +15,8 @@ public class AutoLottoTicket extends LottoTicket {
 
     @Override
     public String toString() {
-        return sixNumbers.toString();
+        return sixNumbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

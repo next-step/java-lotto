@@ -1,27 +1,23 @@
 package step2;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGame {
     private static final int PRICE = 1_000;
+
     private final int ticketCount;
     private final List<LottoTicket> lottoTickets;
     private final Map<MatchCount, Long> results;
 
     public LottoGame(Money money) {
-        results = initializeResults();
+        results = MatchCount.initializeResults();
         ticketCount = money.getAffordableTicketCount(PRICE);
         lottoTickets = generateAutoLottoTickets(ticketCount);
-    }
-
-    private Map<MatchCount, Long> initializeResults() {
-        final Map<MatchCount, Long> results = new LinkedHashMap<>();
-        Arrays.stream(MatchCount.values())
-                .sorted(Comparator.comparing(MatchCount::getMatchCount))
-                .forEach(matchCount -> results.putIfAbsent(matchCount, 0L));
-        return results;
     }
 
     private List<LottoTicket> generateAutoLottoTickets(int ticketCount) {
