@@ -13,7 +13,7 @@ public enum LottoMatcher {
     NONE_MATCH(0, 0, lottoScore -> {});
 
     private final int matchOfCount;
-    private int price;
+    private final int price;
     private final Consumer<LottoScore> lottoScoreConsumer;
 
     LottoMatcher(int matchOfCount, int price, Consumer<LottoScore> lottoScoreConsumer) {
