@@ -1,36 +1,40 @@
 package lotto.domain;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Statistics {
     private static final long DEFAULT_VALUE = 0;
 
     private final Map<Prize, Long> statisticsWinnerMap;
+    private final double profit;
 
-    public Statistics(WinnerLotto winnerLotto, Lotto lotto) {
+    public Statistics(WinnerLotto winnerLotto, Lotto lotto, Money money) {
         this.statisticsWinnerMap = statisticsWinnerMap(winnerLotto, lotto);
+        this.profit = calculateProfit(money);
     }
 
     private Map<Prize, Long> statisticsWinnerMap(WinnerLotto winnerLotto, Lotto lotto) {
         List<Winners> winnersList = winnerLotto.findWinnerList(lotto);
 
-       return winnersList.stream()
+        return winnersList.stream()
                 .collect(Collectors.groupingBy(Winners::providePrize, Collectors.counting()));
-     }
+    }
 
-    public double getProfit(Money money) {
+    public double provideProfit() {
+        return profit;
 
-        long sum = getSumProfit();
-
-        return (double) sum / money.getAmount();
     }
 
     public long getWinnersMatchingCount(Prize prize) {
         return statisticsWinnerMap.getOrDefault(prize, DEFAULT_VALUE);
+    }
+
+    private double calculateProfit(Money money) {
+        long sum = getSumProfit();
+
+        return (double) sum / money.getAmount();
     }
 
     private long getSumProfit() {

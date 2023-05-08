@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Money;
 import lotto.domain.Prize;
 import lotto.domain.Statistics;
 
@@ -39,8 +38,8 @@ public class OutputView {
         });
     }
 
-    public static void printProfit(Statistics statistics, Money money) {
-        double profit = statistics.getProfit(money);
+    public static void printProfit(Statistics statistics) {
+        double profit = statistics.provideProfit();
 
         String profitFormat = String.format("%.2f", profit);
 
