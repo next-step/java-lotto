@@ -1,9 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicketMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.WinningTicket;
-import lotto.dto.LottoNumbersDto;
+import lotto.domain.*;
+import lotto.dto.LottoStatisticsDto;
+import lotto.dto.ManualLottoTicketsDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,16 +11,33 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
         int purchaseAmount = InputView.inputPurchaseAmount();
-        lottoTicketMachine.createLottoNumbers(purchaseAmount);
-        OutputView.outputLottoCount(lottoTicketMachine.getLottoCount());
-        OutputView.outputLottoNumbers(LottoNumbersDto.of(lottoTicketMachine.getLottoNumbers()));
+        int manualPurchaseCount = InputView.inputManualPurchaseCount();
+        List<List<Integer>> tickets = InputView.inputManualPurchaseTickets(manualPurchaseCount);
+        LottoTicketMachine lottoTicketMachine
+                = new LottoTicketMachine(manualPurchaseCount, purchaseAmount);
+        lottoTicketMachine.createLottoTickets(tickets);
+
+        OutputView.outputManualLottoNumbers(ManualLottoTicketsDto.from(
+                lottoTicketMachine.getLottoTicketsTotal(),
+                manualPurchaseCount,
+                lottoTicketMachine.getAutoPurchaseCount()
+        ));
 
         List<Integer> winningNumbers = InputView.inputLastWinningNumber();
-        LottoNumber bonusBallNumber = new LottoNumber(InputView.inputBonusBallNumber());
+        LottoNumber bonusBallNumber = LottoNumber.of(InputView.inputBonusBallNumber());
         WinningTicket winningTicket
                 = new WinningTicket(winningNumbers, bonusBallNumber);
-        OutputView.outputLottoStatistics(lottoTicketMachine.calculateLottoStatistics(winningTicket));
+        OutputView.outputLottoStatistics(calculateLottoStatistics(lottoTicketMachine, winningTicket));
+    }
+
+    private static LottoStatisticsDto calculateLottoStatistics(LottoTicketMachine lottoTicketMachine,
+                                                        WinningTicket winningTicket) {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        LottoTickets lottoTicketsTotal = lottoTicketMachine.getLottoTicketsTotal();
+        return new LottoStatisticsDto(
+                lottoStatistics.calculateMatchingCounts(lottoTicketsTotal, winningTicket),
+                lottoStatistics.calculateGrossRateOfEarnings(lottoTicketsTotal.getSize())
+        );
     }
 }
