@@ -32,10 +32,11 @@ public class ResultView {
     public static void showLottoResult(MyResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (%d원) - %d개\n", LottoRule.RANK_FOURTH_PRIZE, result.rankFourthCount());
-        System.out.printf("4개 일치 (%d원) - %d개\n", LottoRule.RANK_THIRD_PRIZE, result.rankThirdCount());
-        System.out.printf("5개 일치 (%d원) - %d개\n", LottoRule.RANK_SECOND_PRIZE, result.rankSecondCount());
-        System.out.printf("6개 일치 (%d원) - %d개\n", LottoRule.RANK_FIRST_PRIZE, result.rankFirstCount());
+        System.out.printf("3개 일치 (%d원) - %d개\n", Rank.FIFTH.getPrize(), result.countRank(Rank.FIFTH));
+        System.out.printf("4개 일치 (%d원) - %d개\n", Rank.FOURTH.getPrize(), result.countRank(Rank.FOURTH));
+        System.out.printf("5개 일치 (%d원) - %d개\n", Rank.THIRD.getPrize(), result.countRank(Rank.THIRD));
+        System.out.printf("5개 일치, 보너스 볼 일치(%d원) - %d개\n", Rank.SECOND.getPrize(), result.countRank(Rank.SECOND));
+        System.out.printf("6개 일치 (%d원) - %d개\n", Rank.FIRST.getPrize(), result.countRank(Rank.FIRST));
     }
 
     public static void showProfit(MyResult myResult) {

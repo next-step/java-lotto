@@ -47,10 +47,11 @@ class LottoServiceTest {
         lottoService.checkWin(myLottoGame, winLotto);
 
         assertAll(
-                () -> assertThat(myLottoGame.result().rankFourthCount()).isEqualTo(2),
-                () -> assertThat(myLottoGame.result().rankThirdCount()).isEqualTo(3),
-                () -> assertThat(myLottoGame.result().rankSecondCount()).isEqualTo(0),
-                () -> assertThat(myLottoGame.result().rankFirstCount()).isEqualTo(0)
+                () -> assertThat(myLottoGame.countRank(Rank.FIFTH)).isEqualTo(2),
+                () -> assertThat(myLottoGame.countRank(Rank.FOURTH)).isEqualTo(3),
+                () -> assertThat(myLottoGame.countRank(Rank.THIRD)).isEqualTo(0),
+                () -> assertThat(myLottoGame.countRank(Rank.SECOND)).isEqualTo(0),
+                () -> assertThat(myLottoGame.countRank(Rank.FIRST)).isEqualTo(0)
         );
     }
 }

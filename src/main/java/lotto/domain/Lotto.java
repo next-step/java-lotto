@@ -23,12 +23,13 @@ public class Lotto {
         return numbers;
     }
 
-    public int checkMatchingNumbers(WinLotto winLotto) {
-        int result = 0;
+    public Rank checkMatchingNumbers(WinLotto winLotto) {
+        int matchCount = 0;
         for (int i = 0; i < LottoRule.CHOICE_COUNT; i++) {
-            result += checkMatchingNumber(winLotto.findNumber(i));
+            matchCount += checkMatchingNumber(winLotto.findNumber(i));
         }
-       return result;
+        boolean matchBounus = (1 == checkMatchingNumber(winLotto.bonusNumber()));
+        return Rank.of(matchCount, matchBounus);
     }
 
     private int checkMatchingNumber(Integer winNumber) {

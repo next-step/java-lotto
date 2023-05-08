@@ -28,7 +28,6 @@ public class MyLottoGame {
         for (Lotto lotto : lottos) {
             result.update(lotto.checkMatchingNumbers(winLotto));
         }
-        result.sumPrizeAmount();
         return result;
     }
 
@@ -43,8 +42,8 @@ public class MyLottoGame {
     public MyResult result() {
         return result;
     }
-    public double profit() {
-        return result.profit();
-    }
 
+    public int countRank(Rank rank) {
+        return result().countRank(rank);
+    }
 }

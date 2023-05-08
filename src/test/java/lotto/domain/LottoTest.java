@@ -25,20 +25,21 @@ class LottoTest {
     }
 
     @Test
-    void 당첨확인() {
-        String input = "7, 14, 21, 22, 44, 45";
-        Lotto lotto = new Lotto(getNumbersForTest(input));
-
-        String winInput = "1, 2, 7, 11, 40, 44";
-        WinLotto winLotto = new WinLotto(getNumbersForTest(winInput));
-
-        int matchingCount = lotto.checkMatchingNumbers(winLotto);
-        assertThat(matchingCount).isEqualTo(2);
+    void 당첨() {
+        WinLotto winLotto = new WinLotto(new Numbers(InputView.makeNumbers("31, 32, 33, 34, 35, 36")));
+        Rank rank1 = new Lotto(new Numbers(InputView.makeNumbers("31, 32, 33, 34, 35, 36"))).checkMatchingNumbers(winLotto);
+        Rank rank2 = new Lotto(new Numbers(InputView.makeNumbers("11, 32, 33, 34, 35, 36"))).checkMatchingNumbers(winLotto);
+        assertAll(
+                () -> assertThat(rank1).isEqualTo(Rank.FIRST),
+                () -> assertThat(rank2).isEqualTo(Rank.THIRD)
+        );
     }
 
-    private static Numbers getNumbersForTest(String input) {
-        List<Integer> inputNumbers = InputView.makeNumbers(input);
-        Numbers numbers = new Numbers(inputNumbers);
-        return numbers;
+    @Test
+    void 미당첨() {
+        WinLotto winLotto = new WinLotto(new Numbers(InputView.makeNumbers("31, 32, 33, 34, 35, 36")));
+        Lotto lotto = new Lotto(new Numbers(InputView.makeNumbers("11, 12, 13, 14, 35, 36")));
+        Rank rank = lotto.checkMatchingNumbers(winLotto);
+        assertThat(rank).isEqualTo(Rank.NONE);
     }
 }

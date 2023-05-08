@@ -5,8 +5,7 @@ public class WinLotto {
     private final Integer bonusNumber;
 
     public WinLotto(Numbers numbers) {
-        this.numbers = numbers;
-        this.bonusNumber = null;
+        this(numbers, null);
     }
 
     public WinLotto(Numbers numbers, Integer bonusNumber) {
