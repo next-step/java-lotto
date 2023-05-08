@@ -1,19 +1,16 @@
 package lotto.domain;
 
+import lotto.utile.LottoValidator;
+import lotto.utile.StringUtile;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
     public static int buyLotto(int money) {
-        validateMoney(money);
+        LottoValidator.validateMoney(money);
 
         return money / 1000;
-    }
-
-    private static void validateMoney(int money) {
-        if (money < 1000 || money % 1000 != 0) {
-            throw new IllegalArgumentException("금액은 1000 단위로 입력해 주시기 바랍니다.");
-        }
     }
 
     public static List<Lotto> pickUpLottos(int lotOfLotto) {
@@ -24,4 +21,16 @@ public class LottoStore {
         }
         return lottoList;
     }
+
+    public static int[] lottoResult(List<Lotto> lottoList, String winnerNumber) {
+        int[] WinnerResult = new int[7];
+        int[] winnerNumbers = StringUtile.convertStringToInt(winnerNumber);
+
+        for (int i = 0; i < lottoList.size(); i++) {
+            int numberOfMatches = lottoList.get(i).getNumberOfMatchesInLotto(winnerNumbers);
+            WinnerResult[numberOfMatches] += 1;
+        }
+        return WinnerResult;
+    }
+
 }
