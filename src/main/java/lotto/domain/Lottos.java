@@ -30,7 +30,6 @@ public class Lottos {
     }
 
     private boolean isInvalidMoney(int money) {
-        System.out.println(money % 1000);
         return money <= 0 || money % 1000 != 0;
     }
 
@@ -44,7 +43,7 @@ public class Lottos {
         return Collectors.toMap(
                 rank -> rank,
                 rank -> lottos.stream()
-                        .filter(lotto -> lotto.getRank(winNumbers).equals(rank))
+                        .filter(lotto -> Rank.of(lotto, winNumbers).equals(rank))
                         .count()
         );
     }
@@ -59,7 +58,7 @@ public class Lottos {
 
     private double getTotalPrize(WinNumbers winNumbers) {
         return lottos.stream()
-                .map(lotto -> lotto.getRank(winNumbers))
+                .map(lotto -> Rank.of(lotto, winNumbers))
                 .map(Rank::getPrize)
                 .reduce(0L, Long::sum);
     }

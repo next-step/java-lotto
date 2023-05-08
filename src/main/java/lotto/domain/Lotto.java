@@ -45,15 +45,11 @@ public class Lotto {
         return numbers.size() != SIZE;
     }
 
-    public Rank getRank(WinNumbers winNumbers) {
-        return Rank.fromMatchCount(getMatchCount(winNumbers));
-    }
-
     public Set<Integer> getNumbers() {
         return numbers;
     }
 
-    private long getMatchCount(WinNumbers winNumbers) {
+    public long getMatchCount(WinNumbers winNumbers) {
         return numbers.stream()
                 .filter(winNumbers::contain)
                 .count();

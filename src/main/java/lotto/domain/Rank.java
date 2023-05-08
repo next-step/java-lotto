@@ -17,27 +17,11 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank fromMatchCount(long matchCount) {
+    public static Rank of(Lotto lotto, WinNumbers winNumbers) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> rank.matchCount == lotto.getMatchCount(winNumbers))
                 .findFirst()
                 .orElse(Rank.LOSE);
-    }
-
-    public boolean isFirstRank() {
-        return this.matchCount == 6;
-    }
-
-    public boolean isSecondRank() {
-        return this.matchCount == 5;
-    }
-
-    public boolean isThirdRank() {
-        return this.matchCount == 4;
-    }
-
-    public boolean isFourthRank() {
-        return this.matchCount == 3;
     }
 
     public long getPrize() {
