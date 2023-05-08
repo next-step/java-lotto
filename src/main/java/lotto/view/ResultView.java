@@ -37,8 +37,18 @@ public class ResultView {
         rewardCount.stream().forEach(count -> printWinningCountAndReward(statistics, count));
     }
 
-    public static void printWinningCountAndReward(Map<WinningCount, Integer> statistics, WinningCount count) {
-        System.out.println(count + "(" + Rank.of(count) +"원) - " + statistics.getOrDefault(count, 0) + "개");
+    public static void printWinningCountAndReward(Map<WinningCount, Integer> statistics, WinningCount winningCount) {
+        printWinningCount(winningCount);
+        System.out.println(" (" + Rank.of(winningCount) +"원) - " + statistics.getOrDefault(winningCount, 0) + "개");
+    }
+
+    public static void printWinningCount(WinningCount winningCount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(winningCount.getCount() + "개 일치");
+        if (winningCount.getIsMatchBonusBall()) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        System.out.print(stringBuilder);
     }
 
     public static void printLottoRate(String rate) {

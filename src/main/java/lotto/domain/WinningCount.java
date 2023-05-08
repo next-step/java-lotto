@@ -29,13 +29,10 @@ public enum WinningCount {
         return this.count == count && this.isMatchBonusBall == isMatchBonusBall;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(count + "개 일치");
-        if (isMatchBonusBall) {
-            stringBuilder.append(", 보너스 볼 일치");
-        }
-        return stringBuilder.toString();
+    public int getCount() {
+        return count;
+    }
+    public boolean getIsMatchBonusBall() {
+        return isMatchBonusBall;
     }
 }
