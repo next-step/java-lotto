@@ -33,11 +33,6 @@ public enum WinningPrice {
         return equalCount;
     }
 
-    public static WinningPrice of(int equalCount) {
-        return Arrays.stream(values()).filter(
-                s -> Objects.equals(s.equalCount, equalCount)
-        ).findFirst().get();
-    }
 
     public static WinningPrice of(int equalCount,int bonusEqualCount) {
         return Arrays.stream(values()).filter(
