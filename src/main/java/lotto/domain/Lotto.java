@@ -6,33 +6,33 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoFactory.LOTTO_NUMBER;
 
 public class Lotto {
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNo> lottoNos;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<LottoNo> lottoNos) {
+        validate(lottoNos);
+        this.lottoNos = lottoNos;
     }
 
-    public void validate(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER) {
+    public void validate(List<LottoNo> lottoNos) {
+        if (lottoNos.size() != LOTTO_NUMBER) {
             throw new IllegalArgumentException("개수가 6개가 아닙니다.");
         }
     }
 
     public int getMatchingNumberCount(Lotto lotto) {
-        return lottoNumbers.stream()
+        return lottoNos.stream()
                 .filter(number -> lotto.contains(number))
                 .collect(Collectors.toList())
                 .size();
     }
 
-    public boolean contains(LottoNumber number) {
-        return lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(number));
+    public boolean contains(LottoNo number) {
+        return lottoNos.stream().anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.stream()
+        return lottoNos.stream()
                 .map(Objects::toString)
                 .collect(Collectors.joining(", ", "[","]"));
     }
@@ -42,11 +42,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+        return Objects.equals(lottoNos, lotto.lottoNos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lottoNos);
     }
 }

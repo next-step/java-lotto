@@ -9,21 +9,21 @@ import java.util.stream.IntStream;
 public class LottoFactory {
     public static final int LOTTO_NUMBER = 6;
 
-    private static List<LottoNumber> lottoNumbers = IntStream.range(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
-            .boxed().map(number -> LottoNumber.of(number)).collect(Collectors.toList());
+    private static List<LottoNo> lottoNos = IntStream.range(LottoNo.MIN_LOTTO_NUMBER, LottoNo.MAX_LOTTO_NUMBER)
+            .boxed().map(number -> LottoNo.of(number)).collect(Collectors.toList());
 
     public static Lotto create() {
-        Collections.shuffle(lottoNumbers);
-        return new Lotto(lottoNumbers.stream().limit(LOTTO_NUMBER).collect(Collectors.toList()));
+        Collections.shuffle(lottoNos);
+        return new Lotto(lottoNos.stream().limit(LOTTO_NUMBER).collect(Collectors.toList()));
     }
 
     public static Lotto createManualLotto(String winningLottos) {
-        List<LottoNumber> numbers = split(winningLottos);
+        List<LottoNo> numbers = split(winningLottos);
         return new Lotto(numbers);
     }
 
-    private static List<LottoNumber> split(String numbers) {
+    private static List<LottoNo> split(String numbers) {
         String[] number = numbers.split(", ");
-        return Arrays.stream(number).map(num -> LottoNumber.of(Integer.parseInt(num))).collect(Collectors.toList());
+        return Arrays.stream(number).map(num -> LottoNo.of(Integer.parseInt(num))).collect(Collectors.toList());
     }
 }

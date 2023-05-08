@@ -5,26 +5,26 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNo {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    private static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+    private static Map<Integer, LottoNo> lottoNumberCache = new HashMap<>();
 
     static {
         IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> lottoNumberCache.put(number, new LottoNumber(number)));
+                .forEach(number -> lottoNumberCache.put(number, new LottoNo(number)));
     }
 
     private final int number;
 
-    private LottoNumber(int number) {
+    private LottoNo(int number) {
         validate(number);
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNo of(int number) {
         if (!lottoNumberCache.containsKey(number)) {
-            lottoNumberCache.put(number, new LottoNumber(number));
+            lottoNumberCache.put(number, new LottoNo(number));
         }
         return lottoNumberCache.get(number);
     }
@@ -47,8 +47,8 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber lottoNumber1 = (LottoNumber) o;
-        return number == lottoNumber1.number;
+        LottoNo lottoNo1 = (LottoNo) o;
+        return number == lottoNo1.number;
     }
 
     @Override

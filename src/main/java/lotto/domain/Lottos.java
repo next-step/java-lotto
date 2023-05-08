@@ -29,7 +29,7 @@ public class Lottos {
         return LottoFactory.create();
     }
 
-    public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNumber bonusBall) {
+    public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNo bonusBall) {
         return lottos.stream()
                 .filter(lotto -> lotto.getMatchingNumberCount(winningLotto) >= LOTTO_REWARD_LIMIT)
                 .map(lotto -> WinningCount.of(lotto.getMatchingNumberCount(winningLotto)
@@ -37,7 +37,7 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    private boolean checkBonusBall(Lotto lotto, LottoNumber bonusBall, int count) {
+    private boolean checkBonusBall(Lotto lotto, LottoNo bonusBall, int count) {
         if (count != BONUS_BALL_CHECK) {
             return false;
         }

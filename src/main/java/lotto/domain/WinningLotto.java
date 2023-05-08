@@ -6,15 +6,15 @@ public class WinningLotto {
 
     private Lotto winningLotto;
 
-    private LottoNumber bonusBall;
+    private LottoNo bonusBall;
 
     public WinningLotto(String winningNumbers, int bonusBall) {
         this.winningLotto = LottoFactory.createManualLotto(winningNumbers);
-        this.bonusBall = LottoNumber.of(bonusBall);
+        this.bonusBall = LottoNo.of(bonusBall);
         validate(this.winningLotto, this.bonusBall);
     }
 
-    private void validate(Lotto winningLotto, LottoNumber bonusBall) {
+    private void validate(Lotto winningLotto, LottoNo bonusBall) {
         if (winningLotto.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스 볼이 로또 당첨 번호와 중복됩니다.");
         }
