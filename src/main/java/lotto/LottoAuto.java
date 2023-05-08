@@ -8,11 +8,23 @@ import java.util.*;
 public class LottoAuto {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    private static final int MINIMUM_MATCHED_NUMBER = 3;
+    private static final int MAXIMUM_MATCHED_NUMBER = 6;
     private static final List<List<Integer>> lottoList = new ArrayList<>();
     private static final Map<Integer, Integer> winningStatisticsMap = new HashMap<>();
     private static List<Integer> lastWeekWinningNumber;
     private static int totalLottoCount;
     private static int amount;
+
+    public static void main(String[] args) {
+        inputBuyAmount();
+        buyAuto(amount);
+        addLotto(totalLottoCount);
+        inputLastWeekWinningNumber();
+        winningStatistics();
+    }
 
     public static void inputBuyAmount() {
         amount = InputView.inputBuyAmount();
@@ -44,7 +56,7 @@ public class LottoAuto {
 
     static List<Integer> createLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
             numbers.add(i);
         }
         Collections.shuffle(numbers);
@@ -52,21 +64,21 @@ public class LottoAuto {
     }
 
     private static int getMatchedCount(List<Integer> lotto, List<Integer> lastWeekWinningNumber) {
-        int mathcedCount = 0;
+        int matchedCount = 0;
         for (Integer number : lotto) {
-            mathcedCount += lastWeekWinningNumber.contains(number) ? 1 : 0;
+            matchedCount += lastWeekWinningNumber.contains(number) ? 1 : 0;
         }
-        return mathcedCount;
+        return matchedCount;
     }
 
     private static void addWinningStatistics(int matchedCount) {
-        if (matchedCount >= 3) {
+        if (matchedCount >= MINIMUM_MATCHED_NUMBER) {
             winningStatisticsMap.put(matchedCount, winningStatisticsMap.get(matchedCount) + 1);
         }
     }
 
     private static void setUpWinningStatisticsMap() {
-        for (int number = 3; number <= 6; number++) {
+        for (int number = MINIMUM_MATCHED_NUMBER; number <= MAXIMUM_MATCHED_NUMBER; number++) {
             winningStatisticsMap.put(number, 0);
         }
     }
