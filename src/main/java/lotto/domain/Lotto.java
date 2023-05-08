@@ -9,6 +9,7 @@ public class Lotto {
     private static final int NUMBER_COUNT = 6;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    private static final List<Integer> AVAILABLE_NUMBERS = getAvailableNumbers();
 
     protected List<Integer> numbers;
 
@@ -18,16 +19,21 @@ public class Lotto {
 
     }
 
-    private List<Integer> getRandomNumbers() {
+    private static List<Integer> getAvailableNumbers() {
         List<Integer> availableNumbers = new ArrayList<>();
 
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             availableNumbers.add(i);
         }
 
-        Collections.shuffle(availableNumbers);
-        return availableNumbers.stream()
-                .limit(6)
+        return availableNumbers;
+    }
+
+    private List<Integer> getRandomNumbers() {
+        List<Integer> shuffleNumbers = new ArrayList<>(AVAILABLE_NUMBERS);
+        Collections.shuffle(shuffleNumbers);
+        return shuffleNumbers.stream()
+                .limit(NUMBER_COUNT)
                 .collect(Collectors.toList());
     }
 

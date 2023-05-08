@@ -8,14 +8,8 @@ public class WinningLotto extends Lotto{
     }
 
     public int countMatchingWith(Lotto inLotto) {
-        int count = 0;
-        for (Integer number: numbers) {
-            count += boolToInt(inLotto.contains(number));
-        }
-        return count;
-    }
-
-    private int boolToInt(boolean bool) {
-        return bool ? 1 : 0;
+        return (int) numbers.stream()
+                .filter(inLotto::contains)
+                .count();
     }
 }

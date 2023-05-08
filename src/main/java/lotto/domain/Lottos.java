@@ -14,12 +14,12 @@ public class Lottos {
     public Lottos(int amount) {
         lottoList = new ArrayList();
 
-        for (int i=0; i< LottoCountCalculator.calculateQuantity(amount); i++){
+        for (int i = 0; i < LottoCountCalculator.calculateQuantity(amount); i++) {
             lottoList.add(new Lotto());
         }
     }
 
-    public Lottos(List<Lotto> inLottoList){
+    public Lottos(List<Lotto> inLottoList) {
         lottoList = inLottoList;
     }
 
