@@ -8,7 +8,6 @@ import view.input.InputView;
 public class LottoController {
 
     public static void LottoAutoStart() {
-
         int buyAmount = InputView.inputBuyAmount();
 
         LottosInfoFcade lottosInfoFcade = new LottosInfoFcade(buyAmount);
