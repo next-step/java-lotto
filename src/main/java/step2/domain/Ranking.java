@@ -37,11 +37,9 @@ public enum Ranking {
             .filter(rank -> isMatching(countOfMatch, rank))
             .findFirst();
 
-        if (ranking.isPresent()) {
-            return isSecond(isContained, ranking.get());
-        }
-
-        return MISSING;
+        return ranking.isPresent()
+            ? applyRank(isContained, ranking.get())
+            : MISSING;
     }
 
     private static Ranking applyRank(boolean isContained, Ranking rank) {
