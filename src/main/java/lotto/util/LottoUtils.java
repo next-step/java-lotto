@@ -35,7 +35,7 @@ public class LottoUtils {
                 .collect(Collectors.toList());
 
         if(!isLottoResultNumberSize(numberList)){
-            throw new IndexOutOfBoundsException("로또 번호는 숫자 6개만 입력됩니다. 입력값 : " + numberList);
+            throw new IllegalArgumentException("로또 번호는 숫자 6개만 입력됩니다. 입력값 : " + numberList);
         }
 
         return numberList;

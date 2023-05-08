@@ -42,9 +42,4 @@ public class WinningStatistics {
             this.resultGameStatistics.remove(key);
         }
     }
-
-    public double calRateOfReturn(int totalWinningPrice, int buyPrice) {
-
-        return 1 + (totalWinningPrice - buyPrice) / (double) buyPrice;
-    }
 }
