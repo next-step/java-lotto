@@ -32,6 +32,10 @@ public class LottoResult {
         return winCount.getNumberOfWin();
     }
 
+    public int getTotalPrice() {
+        return rank.getReward() * winCount.getNumberOfWin();
+    }
+
     @Override
     public String toString() {
         return "LottoResult{" +

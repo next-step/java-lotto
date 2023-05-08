@@ -26,7 +26,7 @@ public class LottoController {
 
         LottoResults lottoResults = lotto.getLottoResult(WinningNumber.winningNumber);
         resultView.printLottoStatistic(lottoResults);
+        resultView.printWinningProfit(lottoResults, lottoCount);
 
-//1, 2, 3, 4, 5, 6
     }
 }

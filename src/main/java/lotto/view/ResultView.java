@@ -9,6 +9,7 @@ public class ResultView {
 
     private static final String RESULT_GAME = "당첨 통계\n---------";
     private static final String STATISTICS_STATUS = "%d개 일치 (%d원) - %d개";
+    private static final String STATISTICS_INFO = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public void printLottoNumber() {
         for (LottoNumber lottoNumber : LottoShop.lottos) {
@@ -32,4 +33,19 @@ public class ResultView {
         }
         return stringBuilder;
     }
+
+    public static void printWinningProfit(LottoResults lottoResults, int lottoCount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int totalPrice = 0;
+        for (LottoResult lottoResult : lottoResults.getLottoResults()) {
+            if(lottoResult.getTotalPrice() != 0) {
+                int totalPrice1 = lottoResult.getTotalPrice();
+                totalPrice += totalPrice1;
+            }
+        }
+        stringBuilder.append(String.format(STATISTICS_INFO ,(lottoCount * 1000.0) / totalPrice));
+        System.out.println(stringBuilder);
+
+    }
+
 }
