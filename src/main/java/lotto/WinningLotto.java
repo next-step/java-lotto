@@ -3,8 +3,8 @@ package lotto;
 import java.security.InvalidParameterException;
 
 public class WinningLotto {
-    Lotto winningLotto;
-    BonusNumber bonusNumber;
+    private final Lotto winningLotto;
+    private final BonusNumber bonusNumber;
 
     public WinningLotto(Lotto lotto, BonusNumber bonusNumber) {
         checkInput(lotto, bonusNumber);
@@ -19,6 +19,6 @@ public class WinningLotto {
 
     private void checkInput(Lotto lotto, BonusNumber bonusNumber) {
         if (lotto.countEqualBonusNumber(bonusNumber) > 0)
-            throw new InvalidParameterException("bounsNumber와 winingLotto숫자는 중복될 수 없습니다.");
+            throw new InvalidParameterException("bonusNumber와 winningLotto 숫자는 중복될 수 없습니다.");
     }
 }
