@@ -38,14 +38,13 @@ public class ResultView {
         StringBuilder stringBuilder = new StringBuilder();
         int totalPrice = 0;
         for (LottoResult lottoResult : lottoResults.getLottoResults()) {
-            if(lottoResult.getTotalPrice() != 0) {
+            if (lottoResult.getTotalPrice() != 0) {
                 int totalPrice1 = lottoResult.getTotalPrice();
                 totalPrice += totalPrice1;
             }
         }
         stringBuilder.append(String.format(STATISTICS_INFO ,(lottoCount * 1000.0) / totalPrice));
         System.out.println(stringBuilder);
-
     }
 
 }

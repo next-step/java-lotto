@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 public class LottoNumber {
 
-    private final Random random = new Random();
     private final int MAX_LOTTO_NUMBER = 45;
     private final int MIN_LOTTO_NUMBER = 1;
 

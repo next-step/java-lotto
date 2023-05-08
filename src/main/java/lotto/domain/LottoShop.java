@@ -16,6 +16,7 @@ public class LottoShop {
             lottos.add(new LottoNumber());
         }
     }
+
     public LottoResults getLottoResult(List<Integer> winningNumber) {
         LottoResults lottoResults = LottoResults.of();
         for (LottoNumber lottoNumber : lottos) {

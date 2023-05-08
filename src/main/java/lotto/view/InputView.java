@@ -29,7 +29,7 @@ public class InputView {
     }
 
     public void validPrice(int price) {
-        if(price < LOTTO_PRICE) {
+        if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException("로또 최소 구매 금액은 1000원 입니다");
         }
     }
