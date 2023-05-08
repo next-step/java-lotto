@@ -57,4 +57,14 @@ public class LottoGameTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이미 존재하는 번호입니다.");
     }
+
+    @Test
+    void 중복된_로또번호_입력() {
+        List<Integer> lottoNumbers = List.of(1, 1, 3, 4, 5, 6);
+
+        assertThatThrownBy(() -> lottoGame.score(lottoNumbers, 7))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("중복된 번호가 입력되었습니다.");
+    }
+
 }
