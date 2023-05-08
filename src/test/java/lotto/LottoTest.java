@@ -16,9 +16,9 @@ public class LottoTest {
     Lottos lottos = new Lottos(
         Arrays.asList(
             new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            makeLotto_1(), makeLotto_1(), makeLotto_1(), makeLotto_1(), makeLotto_1(),
-            makeLotto_1(), makeLotto_1(), makeLotto_1(), makeLotto_1(), makeLotto_1(),
-            makeLotto_1(), makeLotto_1(), makeLotto_1()));
+            makeLotto1(), makeLotto1(), makeLotto1(), makeLotto1(), makeLotto1(),
+            makeLotto1(), makeLotto1(), makeLotto1(), makeLotto1(), makeLotto1(),
+            makeLotto1(), makeLotto1(), makeLotto1()));
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 44, 43, 42");
     MatchesStatus matchesStatus = lottos.findWinner(winningNumbers);
     assertAll(
@@ -30,7 +30,7 @@ public class LottoTest {
     );
   }
 
-  private Lotto makeLotto_1() {
+  private Lotto makeLotto1() {
     return new Lotto(Arrays.asList(11, 12, 13, 15, 18, 19));
   }
 
@@ -59,7 +59,7 @@ public class LottoTest {
     Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 44, 33, 22");
-    assertThat(winningNumbers.howManyMatches(lotto1)).isEqualTo(3);
+    assertThat(winningNumbers.findHowManyMatches(lotto1)).isEqualTo(3);
   }
 
   @Test

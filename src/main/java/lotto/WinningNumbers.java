@@ -8,7 +8,7 @@ public class WinningNumbers {
     this.winningNumbers = toIntegers(split(input));
   }
 
-  public int howManyMatches(Lotto lotto) {
+  public int findHowManyMatches(Lotto lotto) {
     int matchesNumber = 0;
     for (Integer winningNumber : winningNumbers) {
       if (lotto.has(winningNumber)) {

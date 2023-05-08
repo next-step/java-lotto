@@ -33,7 +33,7 @@ public class Lottos {
   public MatchesStatus findWinner(WinningNumbers winningNumbers) {
     MatchesStatus matchesStatus = new MatchesStatus();
     for (Lotto lotto : lottos) {
-      matchesStatus.saveMatches(winningNumbers.howManyMatches(lotto));
+      matchesStatus.saveMatches(winningNumbers.findHowManyMatches(lotto));
     }
     matchesStatus.findRateOfReturn(this);
     return matchesStatus;
