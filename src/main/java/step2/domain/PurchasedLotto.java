@@ -33,15 +33,13 @@ public class PurchasedLotto {
         return this.purchasedLottoList;
     }
 
-    public void applyRanking(WinningNumbers winningNumbers) {
+    public void applyRanking(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         for (Lotto lotto : this.purchasedLottoList) {
             int matchedCount = getMatchedCount(winningNumbers, lotto);
             Ranking ranking = Ranking.match(matchedCount);
             lotto.rank(ranking);
         }
-    }
 
-    public void matchSecondOrThird(BonusNumber bonusNumber) {
         List<Lotto> secondCandidate =
             purchasedLottoList.stream().filter(Lotto::isSecond).collect(Collectors.toList());
 
@@ -50,7 +48,6 @@ public class PurchasedLotto {
             prizeSecondOrThird(lotto, isContained);
         }
     }
-
 
     public void addManualLotto(ManualLotto manualLotto) {
         purchasedLottoList.addAll(manualLotto.toLottoEntity());
