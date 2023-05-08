@@ -1,39 +1,45 @@
 package step2.domain;
 
-import java.util.stream.IntStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class LottoResultReport {
 
-    private int[] lottoResultReport;
+    static final int ZERO = 0;
+
+    private Map<PrizeMoney, Integer> lottoResultReport;
 
     public LottoResultReport() {
-        lottoResultReport = new int[LottoCommonValue.MAXIMUM_MATH_COUNT_EXCLUSIVE.value()];
+        lottoResultReport = new HashMap<>();
     }
 
-    public LottoResultReport(int[] lottoResultReport) {
-        this.lottoResultReport = lottoResultReport;
+    public int recordRank(PrizeMoney prizeMoney) {
+        if (lottoResultReport.containsKey(prizeMoney)) {
+            Integer cnt = lottoResultReport.get(prizeMoney);
+            lottoResultReport.put(prizeMoney, cnt + 1);
+            return cnt;
+        }
+        lottoResultReport.put(prizeMoney, 1);
+        return 1;
     }
 
-    public int recordRank(int index) {
-        return lottoResultReport[index] += 1;
-    }
-
-    public int findReportByMatchCount(int matchCount) {
-        return lottoResultReport[matchCount];
+    public int findReportByMatchCount(PrizeMoney prizeMoney) {
+        if (lottoResultReport.containsKey(prizeMoney)) {
+            return lottoResultReport.get(prizeMoney);
+        }
+        return ZERO;
     }
 
     public double calculateProfit(int gameCount) {
-        long profit = sum(lottoResultReport);
+        long profit = sum();
         long cost = gameCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value();
-        System.out.println("수익률: " + profit + "  비용: " + cost);
         return calculateProfitRate(profit, cost);
     }
 
-    long sum(int[] lottoReport) {
-        System.out.println();
-        return IntStream.range(LottoCommonValue.MINIMUM_MATH_COUNT_INCLUSIVE.value(),
-                        LottoCommonValue.MAXIMUM_MATH_COUNT_EXCLUSIVE.value())
-                .mapToLong(i -> PrizeMoney.toPrizeMoney(i) * lottoReport[i]).sum();
+    long sum() {
+        Set<Map.Entry<PrizeMoney, Integer>> entries = lottoResultReport.entrySet();
+        return entries.stream().mapToLong(e -> e.getKey().prizeMoney() * e.getValue()).sum();
     }
 
     double calculateProfitRate(long profit, long cost) {

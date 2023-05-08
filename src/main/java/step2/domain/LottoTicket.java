@@ -29,14 +29,14 @@ public class LottoTicket {
         return this.lottoTicket.contains(number);
     }
 
-    public long countMatchingNumbers(LottoTicket compareTarget) {
-        return lottoTicket.stream()
+    public PrizeMoney countMatchingNumbers(LottoTicket compareTarget) {
+        int count = (int) lottoTicket.stream()
                 .filter(i -> compareTarget.isContain(i))
                 .count();
+        return PrizeMoney.toPrizeMoney(count);
     }
 
-    @Override
-    public String toString() {
+    public String printTicket() {
         return lottoTicket.toString();
     }
 

@@ -16,9 +16,9 @@ class LottoTicketTest {
     @DisplayName("당첨 번호로부터 일치하는 갯수를 카운트한다.")
     @ParameterizedTest
     @MethodSource("winningNumbersSample")
-    public void 로또_숫자_일치_개수_비교(List<Integer> winningNumbers, int rightCount) throws Exception {
+    public void 로또_숫자_일치_개수_비교(List<Integer> winningNumbers, int matchCount) throws Exception {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 12, 22, 23, 34, 44));
-        assertThat(lottoTicket.countMatchingNumbers(new LottoTicket(winningNumbers))).isEqualTo(rightCount);
+        assertThat(lottoTicket.countMatchingNumbers(new LottoTicket(winningNumbers))).isEqualTo(PrizeMoney.toPrizeMoney(matchCount));
     }
 
     static Stream<Arguments> winningNumbersSample() throws Throwable {

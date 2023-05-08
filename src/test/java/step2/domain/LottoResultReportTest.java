@@ -21,20 +21,24 @@ class LottoResultReportTest {
 
         List<Integer> matchCountList = Arrays.asList(3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6);
         for (Integer count : matchCountList) {
-            lottoResultReport.recordRank(count);
+            lottoResultReport.recordRank(PrizeMoney.toPrizeMoney(count));
         }
 
         for (int i = 3; i < 7; i++) {
-            assertThat(lottoResultReport.findReportByMatchCount(i)).isEqualTo(i);
+            assertThat(lottoResultReport.findReportByMatchCount(PrizeMoney.toPrizeMoney(i))).isEqualTo(i);
         }
     }
 
     @DisplayName("당첨금에 따른 수익률을 계산한다.")
     @ParameterizedTest
     @MethodSource("lottoReportSample")
-    public void 수익률_연산(int[] lottoReport, int sum) throws Exception {
+    public void 수익률_연산(int[] matchCounts, int expected) throws Exception {
         LottoResultReport lottoResultReport = new LottoResultReport();
-        assertThat(lottoResultReport.sum(lottoReport)).isEqualTo(sum);
+        for (int i = 1; i <= 6; i++) {
+            if (matchCounts[i] == 0) continue;
+            lottoResultReport.recordRank(PrizeMoney.toPrizeMoney(i));
+        }
+        assertThat(lottoResultReport.sum()).isEqualTo(expected);
     }
 
     static Stream<Arguments> lottoReportSample() throws Throwable {
@@ -47,22 +51,4 @@ class LottoResultReportTest {
                 Arguments.of(new int[]{0, 0, 0, 1, 0, 1, 1}, 2001505000)
         );
     }
-
-    @DisplayName("당첨금에 따른 수익률을 계산한다.")
-    @ParameterizedTest
-    @MethodSource("lottoReportSample2")
-    public void 수익률_연산(LottoResultReport lottoResultReport, int matchCount, int result) throws Exception {
-        assertThat(lottoResultReport.findReportByMatchCount(matchCount)).isEqualTo(result);
-    }
-
-    static Stream<Arguments> lottoReportSample2() throws Throwable {
-        return Stream.of(
-                Arguments.of(new LottoResultReport(new int[]{0, 1, 1, 0, 0, 0, 0}), 3, 0),
-                Arguments.of(new LottoResultReport(new int[]{0, 0, 0, 1, 0, 0, 0}), 3, 1),
-                Arguments.of(new LottoResultReport(new int[]{0, 0, 57, 0, 12, 0, 0}), 4, 12),
-                Arguments.of(new LottoResultReport(new int[]{0, 0, 5, 0, 0, 42, 0}), 5, 42),
-                Arguments.of(new LottoResultReport(new int[]{0, 0, 6, 0, 12, 1, 8}), 6, 8)
-        );
-    }
-
 }

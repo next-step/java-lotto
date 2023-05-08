@@ -21,17 +21,16 @@ public class LottoGameController {
             return;
         }
 
-        List<LottoTicket> lottos = lottoGames.buyLottoGame(gameCount);
-        ResultView.printList(lottos);
+        List<LottoTicket> lottoTickets = lottoGames.buyLottoGame(gameCount);
+        ResultView.printLottoTicket(lottoTickets);
         LottoTicket winningNumber = lottoGames.readWinningNumber(InputView.readWinningNumbers());
 
         ResultView.printBlankLine();
         ResultView.printMessage("당첨 통계");
 
         LottoResultReport lottoResultReport = new LottoResultReport();
-        for (LottoTicket lottoTicket : lottos) {
-            int matchCount = (int) winningNumber.countMatchingNumbers(lottoTicket);
-            lottoResultReport.recordRank(matchCount);
+        for (LottoTicket lottoTicket : lottoTickets) {
+            lottoResultReport.recordRank(winningNumber.countMatchingNumbers(lottoTicket));
         }
 
         ResultView.printResultReport(lottoResultReport);

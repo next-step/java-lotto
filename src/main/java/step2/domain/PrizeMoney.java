@@ -4,6 +4,7 @@ import java.security.InvalidParameterException;
 import java.util.Arrays;
 
 public enum PrizeMoney {
+    ZERO(0, 0),
     ONE(1, 0),
     TWO(2, 0),
     THREE(3, 5000),
@@ -11,19 +12,26 @@ public enum PrizeMoney {
     FIVE(5, 1500000),
     SIX(6, 2000000000);
 
-    private int rightCount;
+    private int matchCount;
     private long prizeMoney;
 
-    PrizeMoney(int rightCount, long prizeMoney) {
-        this.rightCount = rightCount;
+    PrizeMoney(int matchCount, long prizeMoney) {
+        this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
 
-    public static long toPrizeMoney(int rightCount) {
+    public static PrizeMoney toPrizeMoney(int matchCount) {
         return Arrays.stream(values())
-                .filter(prizeMoney -> prizeMoney.rightCount == rightCount)
+                .filter(prizeMoney -> prizeMoney.matchCount == matchCount)
                 .findAny()
-                .map(prizeMoney -> prizeMoney.prizeMoney)
                 .orElseThrow(() -> new InvalidParameterException());
+    }
+
+    public int matchCount() {
+        return matchCount;
+    }
+
+    public long prizeMoney() {
+        return prizeMoney;
     }
 }
