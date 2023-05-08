@@ -1,16 +1,17 @@
 package controller;
 
-import domain.Lotto;
+import domain.*;
 import util.LottoSeller;
-import domain.Money;
-import domain.LottoResult;
 import view.LottoInputView;
 import view.LottoOutputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
+
+    private final String separator = ",";
 
     public void run() {
         final Money money = new Money(LottoInputView.inputPurchaseAmount());
@@ -19,12 +20,24 @@ public class LottoController {
         LottoOutputView.printLottoCount(lottoList.size());
         LottoOutputView.printLottoList(lottoList);
 
-        Lotto winningLotto = new Lotto(LottoInputView.inputWinningLotto());
+        WinningLotto winningLotto = inputWinningLotto();
 
         List<LottoResult> results = lottoList.stream()
-                .map(lotto -> LottoResult.findBy(winningLotto, lotto))
+                .map(winningLotto::getResult)
                 .collect(Collectors.toList());
 
-        LottoOutputView.printLottoResult(results);
+        LottoOutputView.printLottoResult(new LottoStatistics(results));
+    }
+
+    private WinningLotto inputWinningLotto() {
+        final List<LottoNumber> winningNumbers = Stream.of(LottoInputView.inputWinningLotto().split(separator))
+            .map(String::trim)
+            .map(LottoNumber::new)
+            .distinct()
+            .collect(Collectors.toList());
+
+        final LottoNumber bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
+
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }

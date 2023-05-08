@@ -37,7 +37,7 @@ class LottoManagerTest {
         int sumOfLottoResult = LottoManager.sumOfLottoResult(List.of(lottoResult1, lottoResult2));
 
         // then
-        assertThat(sumOfLottoResult).isEqualTo(10000);
+        assertThat(sumOfLottoResult).isEqualTo(100000);
     }
 
     @Test

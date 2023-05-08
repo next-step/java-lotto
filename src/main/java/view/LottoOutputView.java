@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoStatistics;
 import util.LottoSeller;
 import domain.LottoResult;
 import util.LottoManager;
@@ -18,19 +19,7 @@ public class LottoOutputView {
         lottoList.forEach(System.out::println);
     }
 
-    public static void printLottoResult(List<LottoResult> results) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-
-        Arrays.stream(LottoResult.values())
-                .filter(lottoResultType -> lottoResultType != LottoResult.NONE)
-                .sorted(Comparator.comparingInt(LottoResult::matchCount))
-                .forEach(lottoResultType -> {
-                    System.out.println(lottoResultType.matchCount() + "개 일치 (" + lottoResultType.winningMoney() + "원) - " + results.stream()
-                            .filter(result -> result == lottoResultType)
-                            .count() + "개");
-                });
-
-        System.out.printf("총 수익률은 %.2f입니다.%n", LottoManager.calculateProfitRate(LottoSeller.LOTTO_PRICE * results.size(), LottoManager.sumOfLottoResult(results)));
+    public static void printLottoResult(LottoStatistics statistics) {
+        System.out.println(statistics.serializeStatistics());
     }
 }
