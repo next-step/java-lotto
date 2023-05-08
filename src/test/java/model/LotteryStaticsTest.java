@@ -8,8 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-class LottoTest {
+class LotteryStaticsTest {
 
     @Test
     @DisplayName("당첨 횟수 테스트")
@@ -36,9 +37,9 @@ class LottoTest {
 
         //then
         assertEquals(1, lotteryStatics.getLotteryStatics().get(Rank.FOURTH));
-        assertEquals(null, lotteryStatics.getLotteryStatics().get(Rank.THRID));
+        assertNull(lotteryStatics.getLotteryStatics().get(Rank.THRID));
         assertEquals(1, lotteryStatics.getLotteryStatics().get(Rank.SECOND));
-        assertEquals(null, lotteryStatics.getLotteryStatics().get(Rank.FIRST));
+        assertNull(lotteryStatics.getLotteryStatics().get(Rank.FIRST));
 
     }
 
