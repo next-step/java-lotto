@@ -1,67 +1,73 @@
 package lotto;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class MatchesStatus {
 
-  private Integer three = 0;
-  private Integer four = 0;
-  private Integer five = 0;
-  private Integer six = 0;
+  private Integer threeMatchesCount = 0;
+  private Integer fourMatchesCount = 0;
+  private Integer fiveMatchesCount = 0;
+  private Integer sixMatchesCount = 0;
   private BigDecimal rate;
 
   public BigDecimal findRateOfReturn(Lottos lottos) {
-    BigDecimal totalReturnAmount = new BigDecimal("0");
-    totalReturnAmount = totalReturnAmount.add(BigDecimal.valueOf(three * 5000L));
-    totalReturnAmount = totalReturnAmount.add(BigDecimal.valueOf(four * 50000L));
-    totalReturnAmount = totalReturnAmount.add(BigDecimal.valueOf(five * 1500000L));
-    totalReturnAmount = totalReturnAmount.add(BigDecimal.valueOf(six * 2000000000L));
-    this.rate = lottos.findRateOfReturn(totalReturnAmount);
-    return lottos.findRateOfReturn(totalReturnAmount);
+    return this.rate = lottos.findRateOfReturn(sumSixAmount(sumFiveAmount(sumFourAmount(sumThreeAmount(new BigDecimal("0"))))));
   }
 
-  public void findMatches(Integer matchesNumber) {
-    if (matchesNumber == 3) {
-      findThreeMatches();
-    } else if (matchesNumber == 4) {
-      findFourMatches();
-    } else if (matchesNumber == 5) {
-      findFiveMatches();
-    } else if (matchesNumber == 6) {
-      findSixMatches();
+  private BigDecimal sumSixAmount(BigDecimal totalReturnAmount) {
+    return totalReturnAmount.add(BigDecimal.valueOf(sixMatchesCount * Matches.MATCH_SIX.getWinningAmount()));
+  }
+
+  private BigDecimal sumFiveAmount(BigDecimal totalReturnAmount) {
+    return totalReturnAmount.add(BigDecimal.valueOf(fiveMatchesCount * Matches.MATCH_FIVE.getWinningAmount()));
+  }
+
+  private BigDecimal sumFourAmount(BigDecimal totalReturnAmount) {
+    return totalReturnAmount.add(BigDecimal.valueOf(fourMatchesCount * Matches.MATCH_FOUR.getWinningAmount()));
+  }
+
+  private BigDecimal sumThreeAmount(BigDecimal totalReturnAmount) {
+    return totalReturnAmount.add(BigDecimal.valueOf(threeMatchesCount * Matches.MATCH_THREE.getWinningAmount()));
+  }
+
+  public void saveMatches(Integer matchesNumber) {
+    try {
+      Objects.requireNonNull(Matches.getMatches(matchesNumber)).addCount(this);
+    } catch (NullPointerException ignored) {
     }
   }
 
-  private void findThreeMatches() {
-    three++;
+  void addOneAtThreeMatches() {
+    threeMatchesCount++;
   }
 
-  private void findFourMatches() {
-    four++;
+  void addOneAtFourMatches() {
+    fourMatchesCount++;
   }
 
-  private void findFiveMatches() {
-    five++;
+  void addOneAtFiveMatches() {
+    fiveMatchesCount++;
   }
 
-  private void findSixMatches() {
-    six++;
+  void addOneAtSixMatches() {
+    sixMatchesCount++;
   }
 
   public Integer getThreeMatches() {
-    return three;
+    return threeMatchesCount;
   }
 
   public Integer getFourMatches() {
-    return four;
+    return fourMatchesCount;
   }
 
   public Integer getFiveMatches() {
-    return five;
+    return fiveMatchesCount;
   }
 
   public Integer getSixMatches() {
-    return six;
+    return sixMatchesCount;
   }
 
   public BigDecimal getRate() {

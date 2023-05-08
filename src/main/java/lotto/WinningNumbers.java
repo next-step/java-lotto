@@ -2,7 +2,7 @@ package lotto;
 
 public class WinningNumbers {
 
-  private Integer[] winningNumbers;
+  private final Integer[] winningNumbers;
 
   public WinningNumbers(String input) {
     this.winningNumbers = toIntegers(split(input));

@@ -2,6 +2,7 @@ package view;
 
 import java.util.List;
 import lotto.Lotto;
+import lotto.Matches;
 import lotto.MatchesStatus;
 
 public class OutputView {
@@ -32,11 +33,14 @@ public class OutputView {
   public static void statistics(MatchesStatus matchesStatus) {
     System.out.println("\n당첨 통계");
     System.out.println("---------");
-    System.out.println("3개 일치 (5000원)- " + matchesStatus.getThreeMatches() + "개");
-    System.out.println("4개 일치 (50000원)- " + matchesStatus.getFourMatches() + "개");
-    System.out.println("5개 일치 (1500000원)- " + matchesStatus.getFiveMatches() + "개");
-    System.out.println("6개 일치 (2000000000원)- " + matchesStatus.getSixMatches() + "개");
-    System.out.println("총 수익률은 " + matchesStatus.getRate() + "입니다.");
+    StringBuilder stringBuilder = new StringBuilder();
+    for (Matches matches : Matches.values()) {
+      stringBuilder.append(matches.getNumberOfMatches())
+          .append("개 일치 (").append(matches.getWinningAmount()).append("원)- ")
+          .append(matches.getCount(matchesStatus)).append("개\n");
+    }
+    stringBuilder.append("총 수익률은 ").append(matchesStatus.getRate()).append("입니다.");
+    System.out.println(stringBuilder);
   }
 
 }
