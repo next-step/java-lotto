@@ -14,4 +14,10 @@ public class InputView {
         String winningNumber = scanner.nextLine();
         return winningNumber;
     }
+
+    public static int inputBonusBallNumber() {
+        Scanner scanner = new Scanner(System.in);
+        int bonusBallNumber = scanner.nextInt();
+        return bonusBallNumber;
+    }
 }

@@ -38,6 +38,6 @@ public class LottoTest {
         Lotto lotto1 = LottoFactory.createManualLotto("1, 2, 3, 4, 5, 6");
         Lotto lotto2 = LottoFactory.createManualLotto("22, 43, 15, 8, 9, 19");
 
-        assertThat(lotto1.matchesNumber(lotto2)).isEqualTo(0);
+        assertThat(lotto1.getMatchingNumberCount(lotto2)).isEqualTo(0);
     }
 }

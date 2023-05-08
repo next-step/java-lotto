@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
+import lotto.domain.WinningCount;
 
 import java.util.List;
 import java.util.Map;
@@ -29,17 +30,23 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public static void printStatistics(Map<Integer, Integer> statics, List<Integer> rewardCount) {
+    public static void printStatistics(Map<WinningCount, Integer> statistics, List<WinningCount> rewardCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for(int count: rewardCount) {
-            System.out.println(count + "개 일치 (" + Rank.of(count) + "원)- " + statics.getOrDefault(count, 0) + "개");
-        }
+        rewardCount.stream().forEach(count -> printWinningCountAndReward(statistics, count));
+    }
+
+    public static void printWinningCountAndReward(Map<WinningCount, Integer> statistics, WinningCount count) {
+        System.out.println(count + "(" + Rank.of(count) +"원) - " + statistics.getOrDefault(count, 0) + "개");
     }
 
     public static void printLottoRate(String rate) {
         System.out.println("총 수익률은 " + rate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
+
+    public static void printBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
 }

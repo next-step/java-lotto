@@ -18,11 +18,15 @@ public class Main {
 
         ResultView.printWinningNumber();
         String winningNumbers = InputView.inputWinningNumber();
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+
+        ResultView.printBonusBall();
+        int bonusBallNumber = InputView.inputBonusBallNumber();
+
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBallNumber);
 
         LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(lottos));
 
-        ResultView.printStatistics(statics.getStatistics(), Rank.getCountList());
+        ResultView.printStatistics(statics.getStatistics(), Rank.getWinningCountList());
         ResultView.printLottoRate(statics.getRate());
     }
 }
