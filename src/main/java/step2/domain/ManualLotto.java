@@ -8,7 +8,7 @@ import step2.utils.Validation;
 
 public class ManualLotto {
 
-    private final List<PickedLottoNumbers> manualLottos = new ArrayList<>();
+    private final List<PickedLottoNumbers> manualLottos = new ArrayList<>(6);
 
     public ManualLotto(List<String> numbers) {
         for (String number : numbers) {

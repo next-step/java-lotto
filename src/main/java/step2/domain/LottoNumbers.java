@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoNumbers {
 
-    private static final List<Integer> totalNumbers = new ArrayList<>();
+    private static final List<Integer> totalNumbers = new ArrayList<>(45);
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
