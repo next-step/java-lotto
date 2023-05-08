@@ -32,13 +32,13 @@ public class LottoStatics {
     private Map<WinningCount, Integer> initStatistics() {
         Map<WinningCount, Integer> statistics = new HashMap<>();
 
-        Rank.getWinningCountList().stream().forEach(winningCount -> statistics.put(winningCount, MAP_DEFAULT));
+        Rank.getWinningCounts().stream().forEach(winningCount -> statistics.put(winningCount, MAP_DEFAULT));
 
         return statistics;
     }
 
     public String getRate() {
-        int revenue = Rank.getWinningCountList().stream()
+        int revenue = Rank.getWinningCounts().stream()
                 .mapToInt(winningCount -> statistics.get(winningCount) * Rank.of(winningCount))
                 .sum();
 

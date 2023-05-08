@@ -26,7 +26,7 @@ public class Main {
 
         LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(lottos));
 
-        ResultView.printStatistics(statics.getStatistics(), Rank.getWinningCountList());
+        ResultView.printStatistics(statics.getStatistics(), Rank.getWinningCounts());
         ResultView.printLottoRate(statics.getRate());
     }
 }

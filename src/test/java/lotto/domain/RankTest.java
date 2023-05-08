@@ -19,7 +19,7 @@ public class RankTest {
     @Test
     @DisplayName("WinningCount 목록")
     void countList() {
-        assertThat(Rank.getWinningCountList()).containsExactly(WinningCount.THREE
+        assertThat(Rank.getWinningCounts()).containsExactly(WinningCount.THREE
                 , WinningCount.FOUR, WinningCount.FIVE, WinningCount.FIVE_WITH_BONUS_BALL, WinningCount.SIX);
     }
 }

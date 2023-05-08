@@ -35,7 +35,7 @@ public enum Rank {
         return rank.get(winningCount);
     }
 
-    public static List<WinningCount> getWinningCountList() {
+    public static List<WinningCount> getWinningCounts() {
         return Stream.of(values()).map(Rank::winningCount).collect(Collectors.toList());
     }
 }
