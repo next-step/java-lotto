@@ -42,4 +42,11 @@ class LottoTest {
         Rank rank = lotto.checkMatchingNumbers(winLotto);
         assertThat(rank).isEqualTo(Rank.NONE);
     }
+
+    @Test
+    void 당첨_2등() {
+        WinLotto winLotto = new WinLotto(new Numbers(InputView.makeNumbers("31, 32, 33, 34, 35, 36")), 11);
+        Rank rank = new Lotto(new Numbers(InputView.makeNumbers("11, 32, 33, 34, 35, 36"))).checkMatchingNumbers(winLotto);
+        assertThat(rank).isEqualTo(Rank.SECOND);
+    }
 }

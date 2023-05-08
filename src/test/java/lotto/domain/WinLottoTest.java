@@ -13,7 +13,7 @@ class WinLottoTest {
 
     @Test
     void 지난주당첨번호() {
-        WinLotto winLotto = new WinLotto(getNumbersForTest("1, 8, 11, 31, 41, 42"));
+        WinLotto winLotto = new WinLotto(new Numbers(InputView.makeNumbers("1, 8, 11, 31, 41, 42")));
 
         List<Integer> expectedNumbers = new ArrayList<>();
         expectedNumbers.add(1);
@@ -28,9 +28,23 @@ class WinLottoTest {
         assertThat(winLotto.numbers()).isEqualTo(numbers);
     }
 
-    private static Numbers getNumbersForTest(String input) {
-        List<Integer> inputNumbers = InputView.makeNumbers(input);
-        Numbers numbers = new Numbers(inputNumbers);
-        return numbers;
+    @Test
+    void 지난주당첨번호with보너스번호() {
+        WinLotto winLotto = new WinLotto(new Numbers(InputView.makeNumbers("1, 3, 11, 13, 21, 23")), 31);
+
+        List<Integer> expectedNumbers = new ArrayList<>();
+        expectedNumbers.add(1);
+        expectedNumbers.add(3);
+        expectedNumbers.add(11);
+        expectedNumbers.add(13);
+        expectedNumbers.add(21);
+        expectedNumbers.add(23);
+
+        Numbers numbers = new Numbers(expectedNumbers);
+
+        assertAll(
+                () -> assertThat(winLotto.numbers()).isEqualTo(numbers),
+                () -> assertThat(winLotto.bonusNumber()).isEqualTo(31)
+        );
     }
 }
