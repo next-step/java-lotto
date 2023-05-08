@@ -42,7 +42,7 @@ public class Lotto {
     }
 
     private static boolean isInvalidSize(Set<Integer> numbers) {
-        return numbers.size() != 6;
+        return numbers.size() != SIZE;
     }
 
     public Rank getRank(WinNumbers winNumbers) {
