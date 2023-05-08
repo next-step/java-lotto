@@ -6,6 +6,7 @@ import lotto.domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -24,13 +25,13 @@ public class InputView {
         System.out.printf("%d개를 구매했습니다.\n", lottoGame.quantity());
     }
 
-    public List<LottoNumber> result() {
+    public Set<LottoNumber> result() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         List<String> list = Arrays.asList(input.split(",\\s*"));
         return list.stream()
                 .map(s -> new LottoNumber(Integer.parseInt(s)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public LottoNumber bonus() {
