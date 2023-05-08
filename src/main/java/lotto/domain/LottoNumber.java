@@ -1,30 +1,20 @@
 package lotto.domain;
 
-import lotto.util.RandomLottoNumberGenerator;
-
-import java.util.Collections;
 import java.util.List;
 
 public class LottoNumber {
-    private final List<Integer> numbers;
+    private final List<LottoAvailableNumber> lottoNumbers;
 
-    public LottoNumber() {
-        this.numbers = generateRandomSortedNumbers();
+    public LottoNumber(GenerateLottoNumberStrategy generateLottoNumberStrategy) {
+        this.lottoNumbers = generateLottoNumberStrategy.generate();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    private List<Integer> generateRandomSortedNumbers() {
-        List<Integer> numbers = RandomLottoNumberGenerator.generate();
-        Collections.sort(numbers);
-
-        return numbers;
+    public List<LottoAvailableNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers.toString();
     }
 }
