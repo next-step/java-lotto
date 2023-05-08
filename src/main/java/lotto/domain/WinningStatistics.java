@@ -15,22 +15,16 @@ public class WinningStatistics {
     this.targetNumber = targetNumber;
   }
 
-  private Map<Integer, Integer> makeHashMap() {
+  public Map<Integer, Integer> lottoResult(List<Lotto> lottoBundle) {
     Map<Integer, Integer> map = new HashMap<>();
 
-    for(int i=3; i<=6; i++) {
-      map.put(i, 0);
-    }
-
-    return map;
-  }
-
-  public Map<Integer, Integer> lottoResult(List<Lotto> lottoBundle) {
-    Map<Integer, Integer> map = makeHashMap();
+    int matchNumberKey = 0;
 
     for (Lotto lotto : lottoBundle) {
-      map.compute(lotto.matchLottoNumber(this.targetNumber), (key, value) -> value == null ? 1 : value + 1);
-      calcWinningPrice(lotto.matchLottoNumber(this.targetNumber));
+      matchNumberKey = RewardTable.bonusRankSeparator(lotto.isMatchBonusNumber(bonusNumber), lotto.matchLottoNumber(this.targetNumber));
+      map.compute(matchNumberKey, (key, value) -> value == null ? 1 : value + 1);
+
+      calcWinningPrice(matchNumberKey);
     }
 
     return map;

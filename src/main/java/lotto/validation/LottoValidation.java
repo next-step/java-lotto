@@ -1,4 +1,4 @@
-package lotto.exception;
+package lotto.validation;
 
 import lotto.domain.Lotto;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public class LottoException {
+public class LottoValidation {
 
   private static final Pattern TARGET_NUMBER_PATTERN = Pattern.compile("[1-9]|[1-3][0-9]|4[0-5]");
 
@@ -40,7 +40,7 @@ public class LottoException {
     newNumberList.addAll(numberList);
     newNumberList.add(bonusNumber);
 
-    LottoException.checkDuplicate(newNumberList);
+    LottoValidation.checkDuplicate(newNumberList);
   }
 
   public static boolean isRightSize(List<Integer> numberList) {

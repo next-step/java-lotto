@@ -1,10 +1,10 @@
-package lotto.exception;
+package lotto.validation;
 
 import lotto.domain.Lotto;
 
 import java.util.regex.Pattern;
 
-public class BudgetException {
+public class BudgetValidation {
   private static final Pattern BUDGET_PATTERN = Pattern.compile("^[1-9][0-9]+$");
 
   public static boolean isNumber(String strNumber) {

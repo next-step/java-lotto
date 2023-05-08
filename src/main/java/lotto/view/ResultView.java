@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.utility.RewardTable;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,19 +18,9 @@ public class ResultView {
   public static void showStatistic(Map<Integer, Integer> map) {
     System.out.println("당첨 통계\n---------");
 
-    for(int key : map.keySet()) {
-      if (key < RewardTable.MINIMUM_MATCH_NUMBER) {
-        continue;
-      }
-
-      System.out.println(RewardTable.rewardTableInfo(key).resultOfReward(key, map.get(key)));
+    for(RewardTable rank : RewardTable.values()) {
+      System.out.printf("%s(%d원)- %d개\n", rank.getMatchInfo(), rank.amountOfReward(), map.getOrDefault(rank.getMatchNumber(), 0));
     }
-//    Iterator<Integer> keys = map.keySet().iterator();
-//    System.out.println(map);
-//
-//    while (keys.hasNext()) {
-//      System.out.printf("%d개 일치 (%d원)- %d개\n", keys.next(), RewardTable.rewardTableInfo(keys.next()).amountOfReward(), map.get(keys.next()));
-//    }
   }
 
   public static void showRoi(double result) {
