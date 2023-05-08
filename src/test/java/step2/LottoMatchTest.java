@@ -97,28 +97,29 @@ class LottoMatchTest {
 
         @BeforeEach
         void setUpEach() {
-            unrankedPurchasedLotto = new PurchasedLotto(getLottoList());
             List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
             lotteryWin = new LotteryWin(new WinningNumbers(winningNumbers), 22);
         }
 
 
-        @DisplayName("수익률을 나타낼 수 있다(보너스 숫자 포함).")
+        @DisplayName("수동 입력을 하지 않았을 경우의 수익률을 나타낼 수 있다.")
         @Test
         void test2() throws Exception {
-            PurchasedLotto purchasedLotto = lotteryWin.confirm(unrankedPurchasedLotto);
+            this.unrankedPurchasedLotto = new PurchasedLotto(getLottoList());
 
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(unrankedPurchasedLotto);
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
             assertThat(rateOfReturn).isEqualTo("406311.00");
         }
 
-        @DisplayName("수동 입력을 포함한 수익률을 나타낼 수 있다(보너스 숫자 포함).")
+        @DisplayName("수동 입력을 포함한 수익률을 나타낼 수 있다(보너스 숫자 고려).")
         @Test
         void test3() throws Exception {
-            unrankedPurchasedLotto.addManualLotto(
-                new ManualLotto(List.of("1,2,3,7,8,9"))
-            );
+            List<Lotto> manualLottos = new ManualLotto(List.of("1,2,3,7,8,9")).toLottoEntity();
+            List<Lotto> lottoList = getLottoList();
+            lottoList.addAll(manualLottos);
+            this.unrankedPurchasedLotto = new PurchasedLotto(lottoList);
 
             PurchasedLotto purchasedLotto = lotteryWin.confirm(unrankedPurchasedLotto);
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
