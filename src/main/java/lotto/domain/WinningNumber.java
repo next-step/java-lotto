@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class WinningNumber {
     private static final int WINNING_NUMBER = 6;
-    public static List<Integer> winningNumber = new ArrayList<>();
+    public static List<Integer> winningNumber;
 
     public WinningNumber(List<Integer> winningNumberList) {
         validNumber(winningNumberList);
@@ -28,6 +28,6 @@ public class WinningNumber {
 
     @Override
     public String toString() {
-        return "" +winningNumber;
+        return "" + winningNumber;
     }
 }

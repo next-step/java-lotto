@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static final int LOTTO_PRICE = 1000;
+    private final int LOTTO_PRICE = 1000;
+
+    public InputView(Scanner scanner) {
+    }
 
     private int inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
