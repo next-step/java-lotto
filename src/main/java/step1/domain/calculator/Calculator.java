@@ -11,9 +11,14 @@ public class Calculator {
         result = new Num(0);
     }
 
+    public Calculator(Num result) {
+        this.result = result;
+    }
+
     public void calculate(Num secondNum, Expression expression) {
         this.result = expression.result(this.result, secondNum);
     }
+
     public void calculate(Nums nums, Expression expression) {
         this.result = expression.result(nums.firstNum(), nums.secondNum());
     }

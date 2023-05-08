@@ -6,9 +6,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step1.domain.calculator.Calculator;
 import step1.domain.expression.Expression;
 import step1.domain.expression.ExpressionFactory;
+import step1.domain.extractor.ExpressionExtractor;
 import step1.domain.num.Num;
 import step1.domain.num.Nums;
 import step1.domain.operator.Operator;
+
+import java.util.Iterator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,14 +24,19 @@ public class CalculatorTest {
         calculator = new Calculator();
     }
 
-    @ParameterizedTest(name = "연산")
+    @ParameterizedTest(name = "여러 사칙연산")
     @ValueSource(strings = {"2 + 3 * 4 / 2"})
     void calculate_multiExpression(String input) {
         String[] strings = input.split(" ");
 
-        calculator.calculate(new Nums(new Num(strings[0]), new Num(strings[2])), ExpressionFactory.of(new Operator(strings[1])));
-        calculator.calculate(new Num(strings[4]), ExpressionFactory.of(new Operator(strings[3])));
-        calculator.calculate(new Num(strings[6]), ExpressionFactory.of(new Operator(strings[5])));
+        ExpressionExtractor expressionExtractor = new ExpressionExtractor(strings);
+        Iterator<Operator> operatorIterator = expressionExtractor.getOperatorIterator();
+        Iterator<Num> numIterator = expressionExtractor.getNumIterator();
+
+        Calculator calculator = new Calculator(numIterator.next());
+        while (operatorIterator.hasNext()) {
+            calculator.calculate(numIterator.next(), ExpressionFactory.of(operatorIterator.next()));
+        }
 
         assertThat(calculator.result()).isEqualTo(new Num(10));
     }
