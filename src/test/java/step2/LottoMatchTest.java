@@ -59,7 +59,7 @@ class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            PurchasedLotto purchasedLotto = lotteryWin.confirm2(new PurchasedLotto(this.lottoList));
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
             assertThat(purchasedLotto.get()).containsOnly(new Lotto(numbers, Ranking.MISSING));
         }
@@ -71,7 +71,7 @@ class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            PurchasedLotto purchasedLotto = lotteryWin.confirm2(new PurchasedLotto(this.lottoList));
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(new PurchasedLotto(this.lottoList));
 
             assertThat(purchasedLotto.get()).containsOnly(new Lotto(numbers, Ranking.THIRD));
         }
@@ -83,7 +83,7 @@ class LottoMatchTest {
             Lotto lotto = new Lotto(numbers);
             this.lottoList.add(lotto);
 
-            PurchasedLotto purchasedLotto = lotteryWin.confirm2(new PurchasedLotto(this.lottoList));
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(new PurchasedLotto(this.lottoList));
             assertThat(purchasedLotto.get()).containsOnly(new Lotto(numbers, Ranking.SECOND));
         }
     }
@@ -106,7 +106,7 @@ class LottoMatchTest {
         @DisplayName("수익률을 나타낼 수 있다(보너스 숫자 포함).")
         @Test
         void test2() throws Exception {
-            PurchasedLotto purchasedLotto = lotteryWin.confirm2(unrankedPurchasedLotto);
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(unrankedPurchasedLotto);
 
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
@@ -120,7 +120,7 @@ class LottoMatchTest {
                 new ManualLotto(List.of("1,2,3,7,8,9"))
             );
 
-            PurchasedLotto purchasedLotto = lotteryWin.confirm2(unrankedPurchasedLotto);
+            PurchasedLotto purchasedLotto = lotteryWin.confirm(unrankedPurchasedLotto);
             String rateOfReturn = purchasedLotto.getRateOfReturn(5000);
 
             assertThat(rateOfReturn).isEqualTo("406312.00");
