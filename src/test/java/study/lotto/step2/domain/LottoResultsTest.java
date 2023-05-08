@@ -68,4 +68,15 @@ class LottoResultsTest {
                 Arguments.of(MATCH_SIX_NUMBERS, 0)
         );
     }
+
+    @Test
+    @DisplayName("로또 번호 포함 여부 확인")
+    void contains() {
+        // given
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+
+        // when, then
+        assertThat(lotto.contains(LottoNumber.of(1))).isTrue();
+        assertThat(lotto.contains(LottoNumber.of(7))).isFalse();
+    }
 }

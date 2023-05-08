@@ -16,6 +16,10 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers.stream()
                 .collect(Collectors.collectingAndThen(Collectors.toCollection(TreeSet::new), Collections::unmodifiableSet));

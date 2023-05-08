@@ -31,4 +31,15 @@ class LottoNumbersTest {
                 LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
         );
     }
+
+    @Test
+    @DisplayName("로또 번호 포함 여부 확인")
+    void contains() {
+        // given
+        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+
+        // when, then
+        assertThat(lottoNumbers.contains(LottoNumber.of(1))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.of(7))).isFalse();
+    }
 }

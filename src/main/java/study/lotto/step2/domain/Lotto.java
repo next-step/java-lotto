@@ -17,6 +17,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.getLottoNumbers().toString();
