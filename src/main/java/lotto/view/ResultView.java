@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    private static final String BUY_COUNT_FORMAT = "%s개를 구매했습니다.";
+    private static final String BUY_COUNT_FORMAT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final String WIN_RESULT_FORMAT = "%s개 일치 (%s원) - %s개";
     private static final String WIN_BONUS_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치 (%s원) - %s개";
     private static final String RATE_OF_RESULT_FORMAT = "총 수익률은 %.2f입니다.";
@@ -23,8 +23,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void buyResultNotice(final List<Lotto> lottos) {
-        System.out.println(String.format(BUY_COUNT_FORMAT, lottos.size()));
+    public static void buyResultNotice(final List<Lotto> lottos, final int manuallyBuyCount, final int automaticallyBuycount) {
+        System.out.println(String.format(BUY_COUNT_FORMAT, manuallyBuyCount, automaticallyBuycount));
         for (Lotto lotto : lottos) {
             System.out.println(
                     LOTTO_NUMBER_START_SEPARATOR + lottoFormat(lotto) + LOTTO_NUMBER_END_SEPARATOR

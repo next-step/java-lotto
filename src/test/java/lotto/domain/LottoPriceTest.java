@@ -23,8 +23,7 @@ class LottoPriceTest {
             "11,12,13,17,18,19-11,12,13,14,15,16-11,12,13,14,15,17|3000|3",
     }, delimiter = '|')
     void 로또구매갯수검증(String buyLottos, int buyPrice, int lottoCount) {
-        LottoPrice lottoPrice = new LottoPrice(new TestLottoGenerator(toLottos(buyLottos)));
-        assertThat(lottoPrice.buy(buyPrice).size()).isEqualTo(lottoCount);
+        assertThat(LottoPrice.buy(new TestLottoGenerator(toLottos(buyLottos)), buyPrice).size()).isEqualTo(lottoCount);
     }
 
     @ParameterizedTest(name = "입력한 로또번호에 따라 winMoney값과 당첨금액이 일치해야 한다.")
@@ -35,8 +34,7 @@ class LottoPriceTest {
             "11,12,13,17,18,19-11,12,13,14,15,16-11,12,13,14,15,17|3000|33|0",
     }, delimiter = '|')
     void 로또당첨금액검증(String buyLottos, int buyPrice, int bonusNumber, int winMoney) {
-        LottoPrice lottoPrice = new LottoPrice(new TestLottoGenerator(toLottos(buyLottos)));
-        WinResult result = lottoPrice.win(lottoPrice.buy(buyPrice), WIN_LOTTO_NUMBER, bonusNumber);
+        WinResult result = LottoPrice.win(LottoPrice.buy(new TestLottoGenerator(toLottos(buyLottos)), buyPrice), WIN_LOTTO_NUMBER, bonusNumber);
         assertThat(result.winMoney()).isEqualTo(winMoney);
     }
 

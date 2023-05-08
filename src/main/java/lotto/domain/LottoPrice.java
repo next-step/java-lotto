@@ -7,25 +7,22 @@ public class LottoPrice {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private final LottoGenerator lottoGenerator;
-
-    public LottoPrice(final LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+    private LottoPrice() {
     }
 
-    public List<Lotto> buy(final int buyPrice) {
+    public static List<Lotto> buy(final LottoGenerator lottoGenerator, final int buyPrice) {
         return lottoGenerator.generate(toBuyCount(buyPrice));
     }
 
-    public WinResult win(final List<Lotto> lottos, final List<Integer> winLottoNumbers, final int bonusNumber) {
+    public static WinResult win(final List<Lotto> lottos, final List<Integer> winLottoNumbers, final int bonusNumber) {
         return new WinResult(winJudge(lottos, Lotto.buy(winLottoNumbers), new LottoNumber(bonusNumber)));
     }
 
-    private int toBuyCount(final int buyPrice) {
+    private static int toBuyCount(final int buyPrice) {
         return buyPrice / LOTTO_PRICE;
     }
 
-    private List<Rank> winJudge(final List<Lotto> lottos, final Lotto winLotto, final LottoNumber bonusNumber) {
+    private static List<Rank> winJudge(final List<Lotto> lottos, final Lotto winLotto, final LottoNumber bonusNumber) {
         return lottos.stream()
                 .map(lotto -> lotto.win(winLotto, bonusNumber))
                 .collect(Collectors.toList());
