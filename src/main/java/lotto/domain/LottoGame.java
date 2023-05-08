@@ -4,8 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.constant.Constants.LOTTO_PRICE;
+
 public class LottoGame {
-    private static final int LOTTO_PRICE = 1000;
     private final LottoNumberGenerator lottoNumberGenerator;
     private final List<Lotto> lottos;
 
@@ -40,10 +41,7 @@ public class LottoGame {
 
     public LottoScore score(List<Integer> winNumbers, Integer bonusNumber) {
         checkNumbers(winNumbers, bonusNumber);
-        return new LottoScore(
-                LOTTO_PRICE,
-                quantity(),
-                matchResult(toLottoNumbers(winNumbers), toLottoNumber(bonusNumber))
+        return new LottoScore(matchResult(toLottoNumbers(winNumbers), toLottoNumber(bonusNumber))
         );
     }
 
