@@ -28,6 +28,9 @@ public class ResultView {
         System.out.printf("5개 일치 (%d원)- %d개\n", THIRD_MATCH.price(), lottoScore.thirdCount());
         System.out.printf("5개 일치, 보너스 볼 일치 (%d원)- %d개\n", SECOND_MATCH.price(), lottoScore.secondCount());
         System.out.printf("6개 일치 (%d원)- %d개\n", FIRST_MATCH.price(), lottoScore.firstCount());
-        System.out.printf("총 수익률은 %f입니다.\n", lottoScore.rate());
+    }
+
+    public void rate(double rate){
+        System.out.printf("총 수익률은 %f입니다.\n", rate);
     }
 }

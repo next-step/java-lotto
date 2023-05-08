@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoCalculator;
 import lotto.domain.LottoMatcher;
 import lotto.domain.LottoScore;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class LottoScoreTest {
                 LottoMatcher.FIRST_MATCH
         );
 
-        LottoScore lottoScore = new LottoScore(1000, 8, lottoMatchers);
+        LottoScore lottoScore = new LottoScore(lottoMatchers);
 
         assertThat(lottoScore.fourthCount()).isEqualTo(2);
         assertThat(lottoScore.thirdCount()).isEqualTo(2);
@@ -37,8 +38,11 @@ public class LottoScoreTest {
                 LottoMatcher.FOURTH_MATCH
         );
 
-        LottoScore lottoScore = new LottoScore(1000, 1, lottoMatchers);
-
-        assertThat(lottoScore.rate()).isEqualTo(5);
+        LottoScore lottoScore = new LottoScore(lottoMatchers);
+        double rate = LottoCalculator.rate(
+                lottoScore.amount(),
+                lottoMatchers.size()
+        );
+        assertThat(rate).isEqualTo(50);
     }
 }

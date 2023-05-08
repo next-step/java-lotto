@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LottoCalculator;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoScore;
 import lotto.view.InputView;
@@ -25,5 +26,9 @@ public class LottoController {
     public void result() {
         LottoScore lottoScore = lottoGame.score(inputView.result(), inputView.bonus());
         resultView.result(lottoScore);
+        resultView.rate(LottoCalculator.rate(
+                lottoScore.amount(),
+                lottoGame.quantity()
+        ));
     }
 }
