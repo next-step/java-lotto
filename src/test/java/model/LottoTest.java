@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,14 +16,13 @@ class LottoTest {
     void countLotto() {
         //given
         int count = 4;
-        ArrayList<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(new ArrayList<>(Arrays.asList(8, 21, 23, 41, 42, 43)))); //1개일치
-        lottos.add(new Lotto(new ArrayList<>(Arrays.asList(3, 5, 11, 16, 32, 38)))); //1개일치
-        lottos.add(new Lotto(new ArrayList<>(Arrays.asList(7, 11, 16, 35, 36, 44)))); //1개일치
-        lottos.add(new Lotto(new ArrayList<>(Arrays.asList(1, 8, 11, 31, 41, 42)))); //5개일치
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(Arrays.asList(1, 8, 23, 41, 42, 43))); //3개일치
+        lottos.add(new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38))); //1개일치
+        lottos.add(new Lotto(Arrays.asList(7, 11, 16, 35, 36, 44))); //1개일치
+        lottos.add(new Lotto(Arrays.asList(1, 8, 11, 31, 41, 42))); //5개일치
 
-        WinNum winNum = new WinNum(new ArrayList<>(Arrays.asList(1, 8, 11, 31, 41, 44)));
-
+        Lotto winNum = new Lotto(Arrays.asList(1, 8, 11, 31, 41, 44));
         /*winRule
          *3개 일치 (5000원)
          *4개 일치 (50000원)
@@ -32,13 +32,13 @@ class LottoTest {
         WinRule winRule = new WinRule();
 
         //when
-        LotteryStatics lotteryStatics = new LotteryStatics(winRule, lottos, winNum);
+        LotteryStatics lotteryStatics = new LotteryStatics(winRule, lottos, winNum.getLotto());
 
         //then
-        assertEquals(null, lotteryStatics.getWinCount().get(3)); //3개일치
-        assertEquals(null, lotteryStatics.getWinCount().get(4)); //4개일치
-        assertEquals(1, lotteryStatics.getWinCount().get(5)); //5개일치
-        assertEquals(null, lotteryStatics.getWinCount().get(6)); //6개일치
+        assertEquals(1, lotteryStatics.getLotteryStatics().get(Rank.FOURTH));
+        assertEquals(null, lotteryStatics.getLotteryStatics().get(Rank.THRID));
+        assertEquals(1, lotteryStatics.getLotteryStatics().get(Rank.SECOND));
+        assertEquals(null, lotteryStatics.getLotteryStatics().get(Rank.FIRST));
 
     }
 
@@ -47,13 +47,13 @@ class LottoTest {
     void sumLotto() {
         //given
         int count = 4;
-        ArrayList<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(new ArrayList<>(Arrays.asList(8, 21, 23, 41, 42, 43)))); //1개일치
-        lottos.add(new Lotto(new ArrayList<>(Arrays.asList(3, 5, 11, 16, 32, 38)))); //1개일치
-        lottos.add(new Lotto(new ArrayList<>(Arrays.asList(7, 11, 16, 35, 36, 44)))); //1개일치
-        lottos.add(new Lotto(new ArrayList<>(Arrays.asList(1, 8, 11, 31, 41, 42)))); //5개일치
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(Arrays.asList(1, 8, 23, 41, 42, 43))); //3개일치
+        lottos.add(new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38))); //1개일치
+        lottos.add(new Lotto(Arrays.asList(7, 11, 16, 35, 36, 44))); //1개일치
+        lottos.add(new Lotto(Arrays.asList(1, 8, 11, 31, 41, 42))); //5개일치
 
-        WinNum winNum = new WinNum(new ArrayList<>(Arrays.asList(1, 8, 11, 31, 41, 44)));
+        Lotto winNum = new Lotto(Arrays.asList(1, 8, 11, 31, 41, 44));
 
         /*winRule
          *3개 일치 (5000원)
@@ -63,15 +63,12 @@ class LottoTest {
          */
         WinRule winRule = new WinRule();
 
-        LotteryStatics winCount = new LotteryStatics(winRule, lottos, winNum);
-
-        LotteryStatics lotteryStatics = new LotteryStatics(winRule, winCount);
         //when
-
-        int priceSum = lotteryStatics.getSumPirze();
+        LotteryStatics lotteryStatics = new LotteryStatics(winRule, lottos, winNum.getLotto());
+        int priceSum = lotteryStatics.getTotalPrice();
 
         //then
-        assertEquals(1500000, priceSum);
+        assertEquals(5000 + 1500000, priceSum);
 
     }
 }
