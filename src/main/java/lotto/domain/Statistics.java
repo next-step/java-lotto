@@ -3,40 +3,42 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Statistics {
-    private static final int DEFAULT_VALUE = 0;
-    private static final int ADD_COUNT = 1;
+    private static final long DEFAULT_VALUE = 0;
 
-    private static final Map<Prize, Integer> statisticsWinnerMap = new EnumMap<>(Prize.class);
+    private final Map<Prize, Long> statisticsWinnerMap;
 
-    public static Statistics doStatistic(WinnerLotto winnerLotto, Lotto lotto) {
-        List<Winners> winnersList = winnerLotto.findWinnerList(lotto);
-        winnersList.forEach(winners -> {
-            Prize prize = winners.providePrize();
-            statisticsWinnerMap.merge(prize, ADD_COUNT, Integer::sum);
-        });
-
-        return new Statistics();
+    public Statistics(WinnerLotto winnerLotto, Lotto lotto) {
+        this.statisticsWinnerMap = statisticsWinnerMap(winnerLotto, lotto);
     }
+
+    private Map<Prize, Long> statisticsWinnerMap(WinnerLotto winnerLotto, Lotto lotto) {
+        List<Winners> winnersList = winnerLotto.findWinnerList(lotto);
+
+       return winnersList.stream()
+                .collect(Collectors.groupingBy(Winners::providePrize, Collectors.counting()));
+     }
 
     public double getProfit(Money money) {
 
-        int sum = getSumProfit();
+        long sum = getSumProfit();
 
         return (double) sum / money.getAmount();
     }
 
-    public static int getWinnersMatchingCount(Prize prize) {
+    public long getWinnersMatchingCount(Prize prize) {
         return statisticsWinnerMap.getOrDefault(prize, DEFAULT_VALUE);
     }
 
-    private int getSumProfit() {
+    private long getSumProfit() {
         return statisticsWinnerMap.entrySet()
                 .stream()
-                .mapToInt(prize -> {
+                .mapToLong(prize -> {
                     Prize profitPrize = prize.getKey();
-                    int matchingCount = prize.getValue();
+                    long matchingCount = prize.getValue();
                     return profitPrize.calculatePriceMoney(matchingCount);
                 })
                 .sum();

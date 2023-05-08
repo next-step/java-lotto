@@ -25,9 +25,9 @@ public class LottoMain {
         int bonusNumber = InputView.inputBonusNumber(winnerLottoNumber);
         WinnerLotto winnerLotto = LottoMachine.issueWinnerLotto(new ManualLottoNumbersGenerator(), new ReqManualLotto(winnerLottoNumber), bonusNumber);
 
-        Statistics statistics = Statistics.doStatistic(winnerLotto, lotto);
+        Statistics statistics = new Statistics(winnerLotto, lotto);
 
-        OutputView.printStatisticsResult();
+        OutputView.printStatisticsResult(statistics);
         OutputView.printProfit(statistics, money);
     }
 }

@@ -27,7 +27,7 @@ class StatisticsTest {
         WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
 
 
-        Statistics statistics = Statistics.doStatistic(winnerLotto, lotto);
+        Statistics statistics = new Statistics(winnerLotto, lotto);
 
         assertAll(
                 () -> assertThat(statistics.getProfit(Money.wons(14000))).isLessThan(1.0)
@@ -47,7 +47,7 @@ class StatisticsTest {
         WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
 
 
-        Statistics statistics = Statistics.doStatistic(winnerLotto, lotto);
+        Statistics statistics = new Statistics(winnerLotto, lotto);
 
         assertAll(
                 () -> assertThat(statistics.getProfit(Money.wons(5000))).isEqualTo(1.0)
@@ -68,7 +68,7 @@ class StatisticsTest {
         WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
 
 
-        Statistics statistics = Statistics.doStatistic(winnerLotto, lotto);
+        Statistics statistics = new Statistics(winnerLotto, lotto);
 
         assertAll(
                 () -> assertThat(statistics.getProfit(Money.wons(5000))).isGreaterThan(1.0)
