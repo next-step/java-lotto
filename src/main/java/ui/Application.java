@@ -21,7 +21,8 @@ public class Application {
         }
 
         inputView.saveWinningNumber();
-        winningResult.calculateWinningResult(lottos, inputView.getWinningNumbers());
+        inputView.saveBonusNumber();
+        winningResult.calculateWinningResult(lottos, inputView.getWinningNumbers(), inputView.getBonusNumber());
         ResultView.printResult(winningResult.getWinningResult());
 
         ResultView.printRatioOfReturn(winningResult.calculateRateOfReturn(inputView.amount));

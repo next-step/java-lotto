@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -25,9 +26,21 @@ public class Lotto {
             .count();
     }
 
+    int countEqualBonusNumber(BonusNumber bonusNumber){
+        return (int) lotto.stream()
+                .filter(bonusNumber::contain)
+                .count();
+    }
+
     private boolean contain(LottoNumber otherLottoNumber) {
         return lotto.stream()
                 .anyMatch(lottoNumber -> lottoNumber.equals(otherLottoNumber));
     }
 
+    @Override
+    public String toString() {
+        return lotto.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", "));
+    }
 }
