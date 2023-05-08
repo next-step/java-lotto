@@ -10,10 +10,8 @@ public class LottoScore {
     private int thirdCount = 0;
     private int fourthCount = 0;
     private int fifthCount = 0;
-    private int purchase;
 
-    public LottoScore(int price, int quantity, List<LottoMatcher> lottoMatchers) {
-        this.purchase = price * quantity;
+    public LottoScore(List<LottoMatcher> lottoMatchers) {
         updateScore(lottoMatchers);
     }
 
@@ -64,12 +62,11 @@ public class LottoScore {
         return fifthCount;
     }
 
-    public double rate() {
-        int amount = FIRST_MATCH.amount(firstCount) +
+    public int amount() {
+        return FIRST_MATCH.amount(firstCount) +
                 SECOND_MATCH.amount(secondCount) +
                 THIRD_MATCH.amount(thirdCount) +
                 FOURTH_MATCH.amount(fourthCount) +
                 FIFTH_MATCH.amount(fifthCount);
-        return ((double) amount / purchase);
     }
 }
