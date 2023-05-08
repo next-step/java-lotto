@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 import step2.domain.LotteryWin;
 import step2.domain.LottoFactory;
-import step2.domain.ManualLotto;
 import step2.domain.PurchasedLotto;
 import step2.domain.WinningNumbers;
 import step2.service.LottoService;
@@ -22,13 +21,14 @@ public class LottoGame {
         int money = getMoney(scanner, inputView);
         int manualLottoCount = getManualLottoCount(scanner, inputView);
 
-        PurchasedLotto unrankedPurchasedLottoList = LottoFactory.of(money, manualLottoCount);
+        PurchaseInfomationDto dto = new PurchaseInfomationDto(money, manualLottoCount);
 
         inputView.inputManualLottoNumber();
         List<String> manualLottoList = getManualLottoList(scanner, manualLottoCount);
 
+        PurchasedLotto unrankedPurchasedLottoList = LottoFactory.of(dto, manualLottoList);
+
         LottoService lottoService = new LottoService(unrankedPurchasedLottoList);
-        lottoService.purchase(new ManualLotto(manualLottoList));
 
         LottoView lottoView = new LottoView(unrankedPurchasedLottoList);
         lottoView.printLotto();

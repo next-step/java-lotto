@@ -3,16 +3,12 @@ package step2.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasedLotto {
+public final class PurchasedLotto {
 
     private final List<Lotto> purchasedLottoList;
 
     public PurchasedLotto(List<Lotto> purchasedLottoList) {
         this.purchasedLottoList = purchasedLottoList;
-    }
-
-    public PurchasedLotto() {
-        purchasedLottoList = new ArrayList<>();
     }
 
     public String getRateOfReturn(int money) {
@@ -27,14 +23,6 @@ public class PurchasedLotto {
 
     public List<Lotto> get() {
         return this.purchasedLottoList;
-    }
-
-    public void addManualLotto(ManualLotto manualLotto) {
-        purchasedLottoList.addAll(manualLotto.toLottoEntity());
-    }
-
-    public void addManualLotto2(ManualLotto manualLotto) {
-        purchasedLottoList.addAll(manualLotto.toLottoEntity());
     }
 
     public PurchasedLotto applyRanking(WinningNumbers winningNumbers, BonusNumber bonusNumber) {

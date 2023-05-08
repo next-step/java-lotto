@@ -12,10 +12,6 @@ public class LottoService {
         this.purchasedLottoList = purchasedLottoList;
     }
 
-    public void purchase(ManualLotto manualLotto) {
-        purchasedLottoList.addManualLotto(manualLotto);
-    }
-
     public PurchasedLotto matchResult(LotteryWin lotteryWin) {
         return lotteryWin.confirm(purchasedLottoList);
     }
