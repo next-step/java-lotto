@@ -29,8 +29,7 @@ public class ManualLotto {
     }
 
     private void validateManualNumbers(List<Integer> manualNumbers) {
-        Validation.size(manualNumbers);
-        Validation.duplicate(manualNumbers);
+        Validation.validComponent(manualNumbers);
         for (Integer manualNumber : manualNumbers) {
             Validation.rangeOfNumber(manualNumber);
         }

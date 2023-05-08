@@ -29,8 +29,7 @@ public class WinningNumbers {
     }
 
     private void validateWinningNumbers(List<Integer> numbers) {
-        Validation.size(numbers);
-        Validation.duplicate(numbers);
+        Validation.validComponent(numbers);
         numbers.forEach(Validation::rangeOfNumber);
     }
 
