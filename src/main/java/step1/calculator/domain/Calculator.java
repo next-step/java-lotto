@@ -3,6 +3,7 @@ package step1.calculator.domain;
 import java.util.List;
 
 import step1.calculator.CalculatorUI;
+import step1.calculator.domain.operator.OperatorFactory;
 
 public class Calculator {
 	public static final String DELIMITER = " ";
@@ -62,8 +63,8 @@ public class Calculator {
 	}
 
 	private void putMathematicalToken(String token) {
-		if (Operator.isOperator(token)) {
-			operators.add(Operator.from(token));
+		if (OperatorFactory.isOperator(token)) {
+			operators.add(OperatorFactory.create(token));
 		}
 
 		if (Operand.isOperand(token)) {

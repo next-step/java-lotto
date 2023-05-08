@@ -6,6 +6,9 @@ import java.util.ArrayDeque;
 
 import java.util.stream.Collectors;
 
+import step1.calculator.domain.operator.Operator;
+import step1.calculator.domain.operator.OperatorFactory;
+
 public class Operators {
 	private final Deque<Operator> operators;
 
@@ -17,7 +20,7 @@ public class Operators {
 		return operators;
 	}
 
-	public static Operators from(String ...strOperators) throws IllegalArgumentException {
+	public static Operators from(String ...strOperators) {
 		Deque<Operator> operators = toOperators(strOperators);
 
 		return new Operators(operators);
@@ -25,7 +28,7 @@ public class Operators {
 
 	private static Deque<Operator> toOperators(String[] strOperators) {
 		Deque<Operator> operators = Arrays.stream(strOperators)
-			.map(Operator::from)
+			.map(OperatorFactory::create)
 			.collect(Collectors.toCollection(ArrayDeque::new));
 
 		return operators;
