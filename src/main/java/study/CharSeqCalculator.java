@@ -7,6 +7,9 @@ public class CharSeqCalculator {
 
         String input = ConsoleScanner.input();
         List<String> values = StringUtils.split(input);
+        ExpressionContainer expressionContainer = new ExpressionContainer(values);
+
+        System.out.println(expressionContainer.calculate());
 
     }
 }

@@ -2,7 +2,6 @@ package study;
 
 public class OperationLinker {
 
-
     public static int link(int a, int b, String operator) {
 
         if (operator.equals("+")) {
