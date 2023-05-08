@@ -17,24 +17,26 @@ public class LottoFactory {
         return toPurchasedLotto(autoLottoPurchasedMoney, manualLottoList);
     }
 
-    private static PurchasedLotto getPurchasedLotto2(int money, List<String> manualLottoList) {
+    private static PurchasedLotto getPurchasedLotto(int money, List<String> manualLottoList) {
         if (manualLottoList.isEmpty()) {
-             return new PurchasedLotto(makeAutoLottoList(money));
+            List<Lotto> lottoList = new ArrayList<>();
+            return new PurchasedLotto(makeAutoLottoList(money, lottoList));
         }
 
-        List<Lotto> lottoList = makeAutoLottoList(money);
-        lottoList.addAll(new ManualLotto(manualLottoList).toLottoEntity());
+        List<Lotto> lottoList =
+            makeAutoLottoList(money, new ManualLotto(manualLottoList).toLottoEntity());
+
         return new PurchasedLotto(lottoList);
     }
 
-    private static List<Lotto> makeAutoLottoList(int money) {
-        List<Lotto> lottoStore = new ArrayList<>();
+    private static List<Lotto> makeAutoLottoList(int money, List<Lotto> lottoStore) {
         int totalCount = money / PRICE;
 
         for (int i = 0; i < totalCount; i++) {
             Lotto lotto = Lotto.issue();
             lottoStore.add(lotto);
         }
+
         return lottoStore;
     }
 
@@ -44,7 +46,7 @@ public class LottoFactory {
     ) {
         return autoLottoPurchasedMoney < PRICE
             ? new PurchasedLotto(new ManualLotto(manualLottoList).toLottoEntity())
-            : getPurchasedLotto2(autoLottoPurchasedMoney, manualLottoList);
+            : getPurchasedLotto(autoLottoPurchasedMoney, manualLottoList);
     }
 
     private static void validateInput(int money) {
