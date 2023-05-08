@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final int LOTTO_MINIMUM_NUMBER = 1;
-    private static final int LOTTO_MAXIMUM_NUMBER = 45;
-    private static final int LOTTO_SIZE = 6;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final int SIZE = 6;
 
     private final Set<Integer> numbers;
 
@@ -29,16 +29,16 @@ public class Lotto {
     }
 
     private TreeSet<Integer> randomLottoNumbers() {
-        List<Integer> AllNumbers = IntStream.rangeClosed(LOTTO_MINIMUM_NUMBER, LOTTO_MAXIMUM_NUMBER)
+        List<Integer> AllNumbers = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(AllNumbers);
-        return new TreeSet<>(AllNumbers.subList(0, LOTTO_SIZE));
+        return new TreeSet<>(AllNumbers.subList(0, SIZE));
     }
 
     private static boolean isInvalidNumber(Set<Integer> numbers) {
         return numbers.stream()
-                .anyMatch(num -> num < LOTTO_MINIMUM_NUMBER || num > LOTTO_MAXIMUM_NUMBER);
+                .anyMatch(num -> num < MINIMUM_NUMBER || num > MAXIMUM_NUMBER);
     }
 
     private static boolean isInvalidSize(Set<Integer> numbers) {
