@@ -33,7 +33,6 @@ public class WinningStatisticsTest {
         List<LottoGame> lottoGames = new LottoGameOnlyMake().init();
 
         WinningStatistics winningStatistics = new WinningStatistics(testNumberList);
-        winningStatistics.makeResultMap();;
 
         Map<Integer, Integer> resultLottoGame = winningStatistics.resultLottoGame(lottoGames);
 

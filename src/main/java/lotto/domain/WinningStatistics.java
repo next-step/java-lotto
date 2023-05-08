@@ -11,6 +11,8 @@ public class WinningStatistics {
     private Map<Integer, Integer> resultGameStatistics;
 
     public WinningStatistics(List<Integer> lottoResultNumbers) {
+        makeResultMap();
+
         this.lottoResultNumbers = lottoResultNumbers;
     }
 
@@ -26,7 +28,7 @@ public class WinningStatistics {
         return this.resultGameStatistics;
     }
 
-    public void makeResultMap() {
+    private void makeResultMap() {
         Map<Integer, Integer> map = new HashMap<>();
 
         for (int i = 0; i <= 6; i++) {

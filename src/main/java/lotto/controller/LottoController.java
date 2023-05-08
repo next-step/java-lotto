@@ -36,7 +36,6 @@ public class LottoController {
         resultView.showMyLottoGameList(lottoGames);
 
         WinningStatistics winningStatistics = new WinningStatistics(LottoUtils.lottoResultNumberList(inputView.setLottoResultNumber()));
-        winningStatistics.makeResultMap();
 
         Map<Integer, Integer> resultGameStatistics = winningStatistics.resultLottoGame(lottoGames);
 
