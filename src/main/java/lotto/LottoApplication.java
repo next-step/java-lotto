@@ -21,7 +21,7 @@ public class LottoApplication {
 
         //로또 자동 생성
         MyLottoGame myLottoGame = lottoService.buyAutoLottos(myPurchase);
-        ResultView.showMyLottos(myLottoGame);
+        ResultView.showMyLottos(myLottoGame.getLottos());
 
         //지난주 당첨 번호
         List<Integer> winNumbers = InputView.winLottoNumbers();

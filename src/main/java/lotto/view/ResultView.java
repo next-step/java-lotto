@@ -5,9 +5,9 @@ import lotto.domain.*;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void showMyLottos(MyLottoGame myLottoGame) {
-        for (int i = 0; i < myLottoGame.count(); i++) {
-            printNumbers(myLottoGame.find(i).numbers());
+    public static void showMyLottos(Lottos lottos) {
+        for (int i = 0; i < lottos.count(); i++) {
+            printNumbers(lottos.find(i).numbers());
         }
         System.out.println();
     }

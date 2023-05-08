@@ -19,7 +19,7 @@ class LottoServiceTest {
         LottoService lottoService = new LottoService();
         MyPurchase myPurchase = new MyPurchase(inputMoney);
         MyLottoGame myLottoGame = lottoService.buyAutoLottos(myPurchase);
-        assertThat(myLottoGame.count()).isEqualTo(expectedCount);
+        assertThat(myLottoGame.getLottos().count()).isEqualTo(expectedCount);
     }
 
     @Test
@@ -38,7 +38,7 @@ class LottoServiceTest {
         lottos.add(new Lotto(matched4Numbers));
 
         MyPurchase myPurchase = new MyPurchase(5000);
-        MyLottoGame myLottoGame = new MyLottoGame(lottos, myPurchase);
+        MyLottoGame myLottoGame = new MyLottoGame(new Lottos(lottos), myPurchase);
 
         WinLotto winLotto = new WinLotto(winNumbers);
 
