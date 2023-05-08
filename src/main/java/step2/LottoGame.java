@@ -22,29 +22,29 @@ public class LottoGame {
         int money = getMoney(scanner, inputView);
         int manualLottoCount = getManualLottoCount(scanner, inputView);
 
-        PurchasedLotto purchasedLottoList = LottoFactory.of(money, manualLottoCount);
+        PurchasedLotto unrankedPurchasedLottoList = LottoFactory.of(money, manualLottoCount);
 
         inputView.inputManualLottoNumber();
         List<String> manualLottoList = getManualLottoList(scanner, manualLottoCount);
 
-        LottoService lottoService = new LottoService(purchasedLottoList);
+        LottoService lottoService = new LottoService(unrankedPurchasedLottoList);
         lottoService.purchase(new ManualLotto(manualLottoList));
 
-        LottoView lottoView = new LottoView(purchasedLottoList);
+        LottoView lottoView = new LottoView(unrankedPurchasedLottoList);
         lottoView.printLotto();
 
-        ResultView resultView = new ResultView(purchasedLottoList);
+        ResultView resultView = new ResultView();
         String numbers = getWinningNumbers(scanner, resultView);
         WinningNumbers winningNumbers = new WinningNumbers(numbers);
 
         int bonusNumber = getBonusNumber(scanner, resultView);
 
-        lottoService.matchResult(
+        PurchasedLotto rankedLottoList = lottoService.matchResult(
             new LotteryWin(winningNumbers, bonusNumber)
         );
 
-        resultView.printStatics();
-        resultView.printProfit(money);
+        resultView.printStatics(rankedLottoList);
+        resultView.printProfit(money, rankedLottoList);
     }
 
     private static List<String> getManualLottoList(Scanner scanner, int manualLottoCount) {

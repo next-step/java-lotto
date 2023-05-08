@@ -16,7 +16,7 @@ public class LottoService {
         purchasedLottoList.addManualLotto(manualLotto);
     }
 
-    public void matchResult(LotteryWin lotteryWin) {
-        lotteryWin.confirm(purchasedLottoList);
+    public PurchasedLotto matchResult(LotteryWin lotteryWin) {
+        return lotteryWin.confirm2(purchasedLottoList);
     }
 }

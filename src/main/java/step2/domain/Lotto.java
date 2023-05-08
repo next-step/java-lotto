@@ -8,6 +8,12 @@ public class Lotto {
     private final PickedLottoNumbers pickedLottoNumbers;
     private Ranking ranking;
 
+    private Lotto() {
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        List<Integer> numbers = lottoNumbers.getRandomLottoNumber();
+        this.pickedLottoNumbers = new PickedLottoNumbers(numbers);
+    }
+
     public Lotto(List<Integer> pickedNumbers) {
         this(new PickedLottoNumbers(pickedNumbers));
     }
@@ -16,10 +22,9 @@ public class Lotto {
         this.pickedLottoNumbers = pickedLottoNumbers;
     }
 
-    private Lotto() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        List<Integer> numbers = lottoNumbers.getRandomLottoNumber();
-        this.pickedLottoNumbers = new PickedLottoNumbers(numbers);
+    public Lotto(List<Integer> numbers, Ranking ranking) {
+        this(new PickedLottoNumbers(numbers));
+        this.ranking = ranking;
     }
 
     public static Lotto issue() {

@@ -17,6 +17,10 @@ public class LotteryWin {
         purchasedLotto.applyRanking(this.winningNumbers, this.bonusNumber);
     }
 
+    public PurchasedLotto confirm2(PurchasedLotto purchasedLotto) {
+        return purchasedLotto.applyRanking2(this.winningNumbers, this.bonusNumber);
+    }
+
     private void validateDuplication(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("이미 존재하는 번호입니다.");

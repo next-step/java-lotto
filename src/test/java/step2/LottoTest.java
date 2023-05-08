@@ -110,3 +110,4 @@ class LottoTest {
             .hasMessageContaining("이미 존재하는 번호입니다.");
     }
 }
+
