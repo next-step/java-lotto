@@ -3,7 +3,7 @@ package step2.domain;
 import java.util.List;
 import java.util.Objects;
 
-public class Lotto {
+public final class Lotto {
 
     private final PickedLottoNumbers pickedLottoNumbers;
     private final Ranking ranking;
@@ -53,10 +53,6 @@ public class Lotto {
 
     public boolean containBonusNumber(int number) {
         return this.pickedLottoNumbers.contains(number);
-    }
-
-    public boolean isSecond() {
-        return this.ranking == Ranking.SECOND;
     }
 
     @Override
