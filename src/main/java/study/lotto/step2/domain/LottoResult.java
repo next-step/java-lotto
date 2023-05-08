@@ -1,22 +1,21 @@
 package study.lotto.step2.domain;
 
+
 import java.util.Arrays;
 
 public enum LottoResult {
-    NOT_WIN(0, false, 0L),
-    MATCH_THREE_NUMBERS(3, false, 5_000L),
-    MATCH_FOUR_NUMBERS(4, false, 50_000L),
-    MATCH_FIVE_NUMBERS(5, false, 1_500_000L),
-    MATCH_FIVE_NUMBERS_WITH_BONUS(5, true, 3_000_000L),
-    MATCH_SIX_NUMBERS(6, false, 2_000_000_000L);
+    NOT_WIN(0, 0L),
+    MATCH_THREE_NUMBERS(3, 5_000L),
+    MATCH_FOUR_NUMBERS(4, 50_000L),
+    MATCH_FIVE_NUMBERS(5, 1_500_000L),
+    MATCH_FIVE_NUMBERS_WITH_BONUS(5, 3_000_000L),
+    MATCH_SIX_NUMBERS(6, 2_000_000_000L);
 
     private final int numberOfMatches;
-    private final boolean isBonusMatch;
     private final long payout;
 
-    LottoResult(int numberOfMatches, boolean isBonusMatch, long payout) {
+    LottoResult(int numberOfMatches, long payout) {
         this.numberOfMatches = numberOfMatches;
-        this.isBonusMatch = isBonusMatch;
         this.payout = payout;
     }
 
@@ -29,9 +28,25 @@ public enum LottoResult {
     }
 
     public static LottoResult of(int numberOfMatches, boolean isBonusMatch) {
-        return Arrays.stream(LottoResult.values())
-                .filter(lottoResult -> lottoResult.numberOfMatches == numberOfMatches && lottoResult.isBonusMatch == isBonusMatch)
+        if(numberOfMatches == MATCH_FIVE_NUMBERS.numberOfMatches()) {
+            return ofMatchFiveNumbers(isBonusMatch);
+        }
+
+        return ofExceptMatchFiveNumbers(numberOfMatches);
+    }
+
+    private static LottoResult ofExceptMatchFiveNumbers(int numberOfMatches) {
+        return Arrays.stream(values())
+                .filter(lottoResult -> lottoResult.numberOfMatches == numberOfMatches)
                 .findAny()
                 .orElse(NOT_WIN);
+    }
+
+    private static LottoResult ofMatchFiveNumbers(boolean isBonusMatch) {
+        if(isBonusMatch) {
+            return MATCH_FIVE_NUMBERS_WITH_BONUS;
+        }
+
+        return MATCH_FIVE_NUMBERS;
     }
 }

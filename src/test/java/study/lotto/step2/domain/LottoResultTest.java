@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoResultTest {
-    @ParameterizedTest(name = "[{index}/6] {displayName}")
+    @ParameterizedTest(name = "[{index}/8] {displayName}")
     @MethodSource("numbersOfMatchAndIsBonusMatchAndLottoResult")
     @DisplayName("당첨 번호 갯수와 보너스 번호 일치 여부를 확인하여 LottoResult enum 반환")
     void lotto_result(int numbersOfMatch, boolean isBonusMatch, LottoResult expectedLottoResult) {
@@ -36,7 +36,9 @@ class LottoResultTest {
         return Stream.of(
                 Arguments.of(0, false, LottoResult.NOT_WIN),
                 Arguments.of(3, false, LottoResult.MATCH_THREE_NUMBERS),
+                Arguments.of(3, true, LottoResult.MATCH_THREE_NUMBERS),
                 Arguments.of(4, false, LottoResult.MATCH_FOUR_NUMBERS),
+                Arguments.of(4, true, LottoResult.MATCH_FOUR_NUMBERS),
                 Arguments.of(5, false, LottoResult.MATCH_FIVE_NUMBERS),
                 Arguments.of(5, true, LottoResult.MATCH_FIVE_NUMBERS_WITH_BONUS),
                 Arguments.of(6, false, LottoResult.MATCH_SIX_NUMBERS)
