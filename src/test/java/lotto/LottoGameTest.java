@@ -3,25 +3,33 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.game.LottoGame;
+import lotto.domain.game.LottoGameSetting;
 import lotto.domain.game.LottoGameStatistics;
 import lotto.domain.game.LottoWinType;
 import lotto.domain.game.LottoWinningNumber;
 import lotto.domain.raffle.LottoRaffleGenerator;
+import lotto.domain.round.LottoRoundNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoGameTest {
 
   private LottoRaffleGenerator fixedRaffleGenerator;
   private LottoRaffleGenerator duplicateFixedRaffleGenerator;
+  private LottoGameSetting gameSetting;
+
   @BeforeEach
   void setup() {
-    fixedRaffleGenerator = () -> List.of(1, 2, 3, 40, 50, 60);
-    duplicateFixedRaffleGenerator = () -> List.of(1, 1, 2, 3, 4, 5);
+    fixedRaffleGenerator = () -> new LottoRoundNumbers(List.of(1, 2, 3, 40, 41, 42));
+    duplicateFixedRaffleGenerator = () -> new LottoRoundNumbers(List.of(1, 1, 2, 3, 4, 5));
+
+    gameSetting = LottoGameSetting.builder()
+        .raffleGenerator(fixedRaffleGenerator)
+        .pricePerGame(1000)
+        .distinctNumberOnly(true)
+        .build();
   }
 
   @Test
@@ -29,8 +37,8 @@ public class LottoGameTest {
   void 로또는_추첨_후_항상_결과를_남긴다 () {
 
     // given
-    LottoGame game = new LottoGame(14000, fixedRaffleGenerator);
     LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+    LottoGame game = new LottoGame(14000, gameSetting);
 
     // when
     LottoGameStatistics statistics = game.play(당첨번호);
@@ -45,32 +53,55 @@ public class LottoGameTest {
   void 중복번호_허용_불가_시_보너스번호도_중복_불가 () {
 
     // given
-    boolean 중복번호_허용_불가 = true;
-    LottoGame game = new LottoGame(14000, fixedRaffleGenerator, 중복번호_허용_불가);
     LottoWinningNumber 당첨번호 = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 3);
+    LottoGameSetting setting = LottoGameSetting.builder()
+        .raffleGenerator(fixedRaffleGenerator)
+        .pricePerGame(1000)
+        .distinctNumberOnly(true)
+        .build();
+
+    LottoGame game = new LottoGame(14000, setting);
 
     // when & then
     Assertions.assertThatThrownBy(() -> game.play(당첨번호))
         .isInstanceOf(IllegalArgumentException.class);
   }
+  @Test
+  @DisplayName("LottoGame | 중복여부가 금지된 경우에는 로또번호에 중복이 존재 할 수 없다.")
+  void 로또번호_중복_금지() {
 
-  @ValueSource(ints = {13333, 12001, 10001})
-  @ParameterizedTest(name = "1000으로 나눠지지 않는 값: {0}")
-  void 로또는_1000으로_나눠지지_않으면_게임을_할_수_없다 (int given) {
+    // given
+    int purchasePrice = 14000;
+    LottoGameSetting setting = LottoGameSetting.builder()
+        .raffleGenerator(duplicateFixedRaffleGenerator)
+        .pricePerGame(1000)
+        .distinctNumberOnly(true)
+        .build();
 
-    // when & then
-    Assertions.assertThatThrownBy(() -> new LottoGame(given, fixedRaffleGenerator))
+    // when && then
+    Assertions.assertThatThrownBy(() -> new LottoGame(purchasePrice, setting))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  @DisplayName("LottoGame | 중복여부가 금지된 경우에는 로또번호에 중복이 존재 할 수 없다.")
-  void 로또번호_중복_금지() {
+  @DisplayName("LottoGame | 구입금액보다 많은 로또 게임을 살 수 없다.")
+  void 구입금액보다_많은_로또_게임_구매_불가() {
+
     // given
-    boolean 중복번호_금지_여부 = true;
+    int purchasePrice = 14000;
+    LottoGameSetting setting = LottoGameSetting.builder()
+        .raffleGenerator(duplicateFixedRaffleGenerator)
+        .pricePerGame(1000)
+        .distinctNumberOnly(true)
+        .build();
+
+    List<List<Integer>> 수동_로또_번호_목록 = List.of(
+        List.of(1, 2, 3, 4, 5, 6),
+        List.of(1, 2, 3, 4, 5, 6)
+    );
 
     // when && then
-    Assertions.assertThatThrownBy(() -> new LottoGame(14000, duplicateFixedRaffleGenerator, 중복번호_금지_여부))
+    Assertions.assertThatThrownBy(() -> new LottoGame(수동_로또_번호_목록, purchasePrice, setting))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }

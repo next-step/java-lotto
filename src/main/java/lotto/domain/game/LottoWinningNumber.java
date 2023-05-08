@@ -1,29 +1,32 @@
 package lotto.domain.game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.number.LottoNumber;
 
 public class LottoWinningNumber {
-  private final List<Integer> numbers;
-  private final int bonusNumber;
+  private final List<LottoNumber> numbers;
+  private final LottoNumber bonusNumber;
 
   public LottoWinningNumber(List<Integer> numbers, int bonusNumber) {
-    this.numbers = numbers != null ? numbers : Collections.emptyList();
-    this.bonusNumber = bonusNumber;
+    this.bonusNumber = new LottoNumber(bonusNumber);
+    this.numbers = numbers.stream()
+        .map(LottoNumber::new)
+        .collect(Collectors.toList());
   }
 
-  public boolean containsWinningNumbers(int number) {
-    return this.numbers.contains(number);
+  public boolean containsWinningNumbers(LottoNumber lottoNumber) {
+    return this.numbers.contains(lottoNumber);
   }
 
-  public int getBonusNumber() {
+  public LottoNumber getBonusNumber() {
     return bonusNumber;
   }
 
   public boolean containsDuplicateNumber() {
     final int allNumberCnt = numbers.size() + 1;
-    final List<Integer> allNumbers = new ArrayList<>(allNumberCnt);
+    final List<LottoNumber> allNumbers = new ArrayList<>(allNumberCnt);
     allNumbers.addAll(numbers);
     allNumbers.add(bonusNumber);
 

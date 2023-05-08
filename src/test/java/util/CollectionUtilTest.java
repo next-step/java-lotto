@@ -3,10 +3,8 @@ package util;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class CollectionUtilTest {
 
@@ -15,7 +13,7 @@ public class CollectionUtilTest {
   @NullAndEmptySource
   void test(List<String> given) {
     // when
-    boolean isEmptyList = CollectionUtils.isEmpty(given);
+    boolean isEmptyList = CollectionUtils.isNullOrEmpty(given);
 
     // then
     Assertions.assertThat(isEmptyList)

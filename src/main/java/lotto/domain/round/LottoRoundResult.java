@@ -4,11 +4,9 @@ import lotto.domain.game.LottoWinType;
 
 public class LottoRoundResult {
 
-  private final int roundNo;
   private final LottoWinType winType;
 
-  public LottoRoundResult (int roundNo, LottoWinType winType) {
-    this.roundNo = roundNo;
+  public LottoRoundResult (LottoWinType winType) {
     this.winType = winType;
   }
 

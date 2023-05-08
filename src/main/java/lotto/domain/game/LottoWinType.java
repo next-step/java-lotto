@@ -8,7 +8,10 @@ public enum LottoWinType {
   RANK_4(4, 50_000),
   RANK_3(5, 1_500_000, false),
   RANK_2(5, 3_000_000, true),
-  RANK_1(6, 2_000_000_000);
+  RANK_1(6, 2_000_000_000),
+
+  NONE (0, 0),
+  ;
 
   private final int matchingNumberCnt;
   private final boolean isBonusNumberRequired;
@@ -38,7 +41,13 @@ public enum LottoWinType {
     return Arrays.stream(values())
         .filter(winType -> winType.isMatchCondition(matchingNumberCnt, isBonusNumberRequired))
         .findFirst()
-        .orElse(null);
+        .orElse(NONE);
+  }
+
+  public static LottoWinType[] getWithPrizedWinType() {
+    return Arrays.stream(values())
+        .filter(lottoWinType -> lottoWinType.prize > 0)
+        .toArray(LottoWinType[]::new);
   }
 
   public boolean isBonusNumberRequired() {

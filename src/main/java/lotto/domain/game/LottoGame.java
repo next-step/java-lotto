@@ -2,37 +2,31 @@ package lotto.domain.game;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lotto.domain.raffle.LottoRaffleGenerator;
-import lotto.domain.round.LottoRoundJudge;
-import lotto.domain.round.LottoRoundNumbers;
-import lotto.domain.round.LottoRoundResult;
 import lotto.domain.round.LottoRound;
+import lotto.domain.round.LottoRoundGenerator;
+import lotto.domain.round.LottoRoundResult;
 
 public class LottoGame {
 
-  private static final int PRICE_PER_GAME = 1000;
-
   private final LottoPurchasePrice purchasePrice;
-  private final LottoRaffleGenerator raffleGenerator;
+  private final LottoRoundGenerator roundGenerator;
   private final List<LottoRound> lottoRounds;
-  private final LottoRoundJudge roundJudge;
   private final boolean distinctNumberOnly;
 
-  public LottoGame (int purchasePrice, LottoRaffleGenerator raffleGenerator) {
-    this.purchasePrice = new LottoPurchasePrice(PRICE_PER_GAME, purchasePrice);
-    this.raffleGenerator = raffleGenerator;
-    this.roundJudge = new LottoRoundJudge();
-    this.distinctNumberOnly = true;
-    this.lottoRounds = initLottoRounds();
+  public LottoGame (int purchasePrice, LottoGameSetting gameSetting) {
+    this.purchasePrice = new LottoPurchasePrice(gameSetting, purchasePrice);
+    this.roundGenerator = new LottoRoundGenerator(this.purchasePrice, gameSetting);
+    this.distinctNumberOnly = gameSetting.isDistinctNumberOnly();
+    this.lottoRounds = this.roundGenerator.generateRounds();
+    throwIfRoundSizeNotMatch(this.purchasePrice.getGameCount(), this.lottoRounds);
   }
 
-  public LottoGame (int purchasePrice, LottoRaffleGenerator raffleGenerator, boolean distinctNumberOnly) {
-    this.purchasePrice = new LottoPurchasePrice(PRICE_PER_GAME, purchasePrice);
-    this.raffleGenerator = raffleGenerator;
-    this.roundJudge = new LottoRoundJudge();
-    this.distinctNumberOnly = distinctNumberOnly;
-    this.lottoRounds = initLottoRounds();
+  public LottoGame (List<List<Integer>> manualRounds, int purchasePrice, LottoGameSetting gameSetting) {
+    this.purchasePrice = new LottoPurchasePrice(gameSetting, purchasePrice);;
+    this.roundGenerator = new LottoRoundGenerator(manualRounds,this.purchasePrice, gameSetting);
+    this.distinctNumberOnly = gameSetting.isDistinctNumberOnly();
+    this.lottoRounds = this.roundGenerator.generateRounds();
+    throwIfRoundSizeNotMatch(this.purchasePrice.getGameCount(), this.lottoRounds);
   }
 
   public LottoGameStatistics play (final LottoWinningNumber winningNumber) {
@@ -45,11 +39,7 @@ public class LottoGame {
   }
 
   private void throwIfAgainstDistinctPolicy(final LottoWinningNumber winningNumber) {
-    if (!distinctNumberOnly) {
-      return;
-    }
-
-    if (winningNumber.containsDuplicateNumber()) {
+    if (distinctNumberOnly && winningNumber.containsDuplicateNumber()) {
       throw new IllegalArgumentException("당첨번호가 중복일 수 없습니다.");
     }
   }
@@ -58,9 +48,9 @@ public class LottoGame {
     return lottoRounds;
   }
 
-  private List<LottoRound> initLottoRounds () {
-    return IntStream.rangeClosed(1, this.purchasePrice.getGameCount())
-        .mapToObj(i -> new LottoRound(i, new LottoRoundNumbers(raffleGenerator.generateRaffleNumber()), roundJudge))
-        .collect(Collectors.toList());
+  private void throwIfRoundSizeNotMatch(int gameCount, List<LottoRound> lottoRounds) {
+    if(gameCount != lottoRounds.size()) {
+      throw new IllegalArgumentException("구입 금액과 그에 맞는 로또 게임 수가 일치하지 않습니다. 금액을 다시 확인해주세요");
+    }
   }
 }

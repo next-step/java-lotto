@@ -1,19 +1,18 @@
 package lotto.domain.round;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.number.LottoNumber;
 
 public class LottoRoundNumbers {
 
-  private final List<Integer> numbers;
-
-  public LottoRoundNumbers (List<Integer> numbers, boolean distinctNumberOnly) {
-    throwIfNumbersNotValid(numbers, distinctNumberOnly);
-    this.numbers = numbers;
-  }
+  private final List<LottoNumber> numbers;
 
   public LottoRoundNumbers (List<Integer> numbers) {
     throwIfNumbersNotValid(numbers, true);
-    this.numbers = numbers;
+    this.numbers = numbers.stream()
+        .map(LottoNumber::of)
+        .collect(Collectors.toList());
   }
 
   private void throwIfNumbersNotValid(List<Integer> numbers, boolean distinctNumberOnly) {
@@ -30,7 +29,7 @@ public class LottoRoundNumbers {
     }
   }
 
-  public List<Integer> getNumbers() {
+  public List<LottoNumber> getNumbers () {
     return numbers;
   }
 }
