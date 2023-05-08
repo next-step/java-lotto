@@ -28,16 +28,20 @@ public enum LottoResult {
     }
 
     public static LottoResult of(int numberOfMatches, boolean isBonusMatch) {
-        if(numberOfMatches == MATCH_FIVE_NUMBERS.numberOfMatches()) {
+        if(isMatchFiveNumbers(numberOfMatches)) {
             return ofMatchFiveNumbers(isBonusMatch);
         }
 
         return ofExceptMatchFiveNumbers(numberOfMatches);
     }
 
+    private static boolean isMatchFiveNumbers(int numberOfMatches) {
+        return numberOfMatches == MATCH_FIVE_NUMBERS.numberOfMatches();
+    }
+
     private static LottoResult ofExceptMatchFiveNumbers(int numberOfMatches) {
         return Arrays.stream(values())
-                .filter(lottoResult -> lottoResult.numberOfMatches == numberOfMatches)
+                .filter(lottoResult -> numberOfMatches == lottoResult.numberOfMatches && !isMatchFiveNumbers(numberOfMatches))
                 .findAny()
                 .orElse(NOT_WIN);
     }
