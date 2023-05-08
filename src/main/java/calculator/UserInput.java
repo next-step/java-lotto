@@ -1,6 +1,8 @@
 package calculator;
 import java.util.Arrays;
 
+import static calculator.TokenUtils.isInteger;
+
 public class UserInput {
     private String input;
 
@@ -24,14 +26,5 @@ public class UserInput {
 
     private boolean isNullOrEmpty(String input) {
         return input == null || input.isBlank();
-    }
-
-    public static boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }

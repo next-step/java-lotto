@@ -2,9 +2,13 @@ package calculator;
 
 import java.util.*;
 
+import static calculator.Operator.*;
+import static calculator.TokenUtils.isInteger;
+import static calculator.TokenUtils.isOperator;
+
 public class StringCalculator {
     static Queue<Integer> numbers = new LinkedList<>();
-    static Queue<String> operators = new LinkedList<>();
+    static Queue<Operator> operators = new LinkedList<>();
 
     public static int calculate(String input) {
         String[] tokens = Tokenizer.tokenize(input);
@@ -20,18 +24,18 @@ public class StringCalculator {
         return result;
     }
 
-    private static int processOperator(int result, String operator) {
-        if (isAdder(operator)) {
-            result = add(result, numbers.poll());
+    private static int processOperator(int result, Operator operator) {
+        if (operator == PLUS) {
+            result = PLUS.apply(result, numbers.poll());
         }
-        if (isSubtractor(operator)) {
-            result = subtract(result, numbers.poll());
+        if (operator == MINUS) {
+            result = MINUS.apply(result, numbers.poll());
         }
-        if (isMultiplyer(operator)) {
-            result = multiply(result, numbers.poll());
+        if (operator == MULTIPLY) {
+            result = MULTIPLY.apply(result, numbers.poll());
         }
-        if (isDivider(operator)) {
-            result = divide(result, numbers.poll());
+        if (operator == DIVIDE) {
+            result = DIVIDE.apply(result, numbers.poll());
         }
         return result;
     }
@@ -45,52 +49,7 @@ public class StringCalculator {
             numbers.add(Integer.parseInt(token));
         }
         if (isOperator(token)) {
-            operators.add(token);
+            operators.add(Operator.findOperatorByToken(token));
         }
-    }
-
-    public static int add(int a, int b) {
-        return a + b;
-    }
-
-    public static int subtract(int a, int b) {
-        return a - b;
-    }
-
-    public static int multiply(int a, int b) {
-        return a * b;
-    }
-
-    public static int divide(int a, int b) {
-        return a / b;
-    }
-
-    private static boolean isAdder(String token) {
-        return token.equals("+");
-    }
-
-    private static boolean isSubtractor(String token) {
-        return token.equals("-");
-    }
-
-    private static boolean isMultiplyer(String token) {
-        return token.equals("*");
-    }
-
-    private static boolean isDivider(String token) {
-        return token.equals("/");
-    }
-
-    public static boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public static boolean isOperator(String input) {
-        return "+".equals(input) || "-".equals(input) || "*".equals(input) || "/".equals(input);
     }
 }
