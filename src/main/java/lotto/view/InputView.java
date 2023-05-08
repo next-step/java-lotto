@@ -20,6 +20,11 @@ public class InputView {
         return toInteger(splitByComma(SCANNER.next()));
     }
 
+    public static int readBonusNumber() {
+        System.out.println("\n보너스 볼을 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
     private static List<Integer> toInteger(List<String> inList) {
         return inList.stream()
                 .map(s -> Integer.parseInt(s))

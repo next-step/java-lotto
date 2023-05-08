@@ -27,8 +27,7 @@ public class Lottos {
         LottoResult lottoResult = new LottoResult();
 
         lottoList.stream()
-                .map(lotto -> winningLotto.countMatchingWith(lotto))
-                .map(count -> Rank.rankOf(count))
+                .map(lotto -> Rank.rankOf(winningLotto.countMatchingWith(lotto), winningLotto.containsBonus(lotto)))
                 .filter(rank -> rank != Rank.NON_RANKED)
                 .forEach(rank -> lottoResult.put(rank));
 
