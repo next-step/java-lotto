@@ -44,7 +44,7 @@ public enum Ranking {
         return MISSING;
     }
 
-    private static Ranking isSecond(boolean isContained, Ranking rank) {
+    private static Ranking applyRank(boolean isContained, Ranking rank) {
         if (rank == SECOND && isContained) {
             return SECOND;
         }
