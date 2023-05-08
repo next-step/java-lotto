@@ -10,7 +10,6 @@ import java.util.stream.IntStream;
 public class LottoUtils {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final Pattern TARGET_NUMBER_PATTERN = Pattern.compile("[1-9]|[1-3][0-9]|4[0-5]");
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     private static final int LOTTO_MIN_NUMBER = 1;
@@ -43,15 +42,15 @@ public class LottoUtils {
     }
 
     private static int convertNumber(String number) {
-        if(!isRangeOfNumber(number)) {
+        if(!isRangeOfNumber(Integer.parseInt(number))) {
             lottoException("로또 번호는 1~45 사이 입니다.");
         }
 
         return Integer.parseInt(number);
     }
 
-    private static boolean isRangeOfNumber(String number) {
-        return TARGET_NUMBER_PATTERN.asMatchPredicate().test(number);
+    private static boolean isRangeOfNumber(int number) {
+        return (LOTTO_MIN_NUMBER <= number && number <= LOTTO_MAX_NUMBER);
     }
 
     private static boolean isLottoResultNumberSize(List<Integer> numberList) {
