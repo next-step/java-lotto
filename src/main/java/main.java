@@ -12,7 +12,7 @@ public class main {
     OutputView.lottos(lottos.buy(InputView.getIntValue()));
 
     OutputView.lastWeekWinningNumber();
-    InputView.getStringValue();
+    InputView.getStringValue(); // Scanner에 enter가 남아있어 enter를 먹어 없애기 위한 코드
     OutputView.statistics(lottos.findWinner(new WinningNumbers(InputView.getStringValue())));
   }
 }

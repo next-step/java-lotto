@@ -63,6 +63,13 @@ public class LottoTest {
   }
 
   @Test
+  void 당첨번호는중복된숫자를입력하지말아야한다() {
+    assertThatIllegalArgumentException().isThrownBy(() -> {
+      new WinningNumbers("1, 2, 2, 4, 5, 6");
+    });
+  }
+
+  @Test
   void 당첨번호는6개를입력해야한다() {
     assertThatIllegalArgumentException().isThrownBy(() -> {
       new WinningNumbers("1, 2, 3, 4, 5");
