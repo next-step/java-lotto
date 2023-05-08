@@ -23,29 +23,16 @@ public class Match {
         );
     }
 
-    public Match(int count, boolean isBonus) {
+    private Match(int count, boolean isBonus) {
         this.count = count;
         this.isBonus = isBonus;
     }
 
     public static Match from(int count, boolean isBonus) {
         return matchCache.stream()
-                .filter(match -> match.equals(new Match(count, isBonus)))
+                .filter(match -> match.count == count && match.isBonus == isBonus)
                 .findAny()
                 .orElse(NOT_MATCH);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Match match = (Match) o;
-        return count == match.count && isBonus == match.isBonus;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(count, isBonus);
     }
 }
 
