@@ -13,6 +13,10 @@ public class LottoNumber {
         this.number = validRange(number);
     }
 
+    public static LottoNumber of(int number) {
+        return new LottoNumber(number);
+    }
+
     private int validRange(int number) {
         if (isInvalidRange(number)) {
             throw new IllegalArgumentException("숫자 범위를 벗어났습니다 : " + number);

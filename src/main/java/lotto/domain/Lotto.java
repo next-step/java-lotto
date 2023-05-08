@@ -5,22 +5,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import lotto.domain.purchase.PurchaseStrategy;
 
 public class Lotto {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final List<LottoNumber> LOTTO_LOTTO_NUMBER_LIST = IntStream.rangeClosed(
-            LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-        .boxed()
-        .map(LottoNumber::new)
-        .collect(Collectors.toList());
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = sorted(validList(unDuplicate(lottoNumbers)));
+    }
+
+    private List<LottoNumber> sorted(List<LottoNumber> result) {
+        Collections.sort(result, LottoNumber::compare);
+        return result;
     }
 
     private List<LottoNumber> unDuplicate(List<LottoNumber> lottoNumbers) {
@@ -32,26 +31,8 @@ public class Lotto {
         return ret;
     }
 
-    public static Lotto newInstance(List<LottoNumber> lottoNumbers) {
-        return new Lotto(sorted(subList(shuffled(lottoNumbers))));
-    }
-
-    private static List<LottoNumber> subList(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.subList(0, LOTTO_NUMBER_COUNT);
-    }
-
-    private static List<LottoNumber> shuffled(List<LottoNumber> lottoNumbers) {
-        Collections.shuffle(lottoNumbers);
-        return lottoNumbers;
-    }
-
-    private static List<LottoNumber> sorted(List<LottoNumber> result) {
-        Collections.sort(result, LottoNumber::compare);
-        return result;
-    }
-
-    public static Lotto purchase() {
-        return newInstance(LOTTO_LOTTO_NUMBER_LIST);
+    public static Lotto newInstance(PurchaseStrategy purchaseStrategy) {
+        return purchaseStrategy.purchase();
     }
 
     private List<LottoNumber> validList(List<LottoNumber> lottoNumbers) {
