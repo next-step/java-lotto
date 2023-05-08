@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.winning.Rank;
+import lotto.domain.winning.WinningCount;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

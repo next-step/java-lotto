@@ -2,8 +2,8 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinningCount;
+import lotto.domain.winning.Rank;
+import lotto.domain.winning.WinningCount;
 
 import java.util.List;
 import java.util.Map;

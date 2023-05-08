@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.domain.*;
 
+import lotto.domain.winning.Rank;
+import lotto.domain.winning.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
