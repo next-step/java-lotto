@@ -28,8 +28,8 @@ public class LottoGame {
         return money.getCount();
     }
 
-    public WinningStatistics calculateWinningStatistics(List<Integer> lastWeekLottoWinningNumbers) {
-        this.winningStatistics = new WinningStatistics(lastWeekLottoWinningNumbers);
+    public WinningStatistics calculateWinningStatistics(List<Integer> winningNumbers) {
+        this.winningStatistics = new WinningStatistics(winningNumbers);
         lottoResults.calculateWinningStatistics(winningStatistics);
         return winningStatistics;
     }
