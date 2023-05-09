@@ -35,7 +35,11 @@ public class LottoShop {
         return Lottos.concat(manualLottos, LottosFactory.createAuto(getAutoLottoQuantity()));
     }
 
-    private int getAutoLottoQuantity() {
+    public int getAutoLottoQuantity() {
         return money / LOTTO_PRICE - manualLottos.getLottoQuantity();
+    }
+
+    public int getManualLottoQuantity() {
+        return manualLottos.getLottoQuantity();
     }
 }

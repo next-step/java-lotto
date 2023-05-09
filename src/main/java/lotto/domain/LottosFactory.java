@@ -28,4 +28,10 @@ public class LottosFactory {
 
         return new Lotto(Set.copyOf(numbers.subList(0, Lotto.LOTTO_NUMBER_SIZE)));
     }
+
+    public static Lottos createManualByStringList(List<String> lottoStringList) {
+        return new Lottos(lottoStringList.stream()
+                .map(Lotto::from)
+                .collect(Collectors.toList()));
+    }
 }

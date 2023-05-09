@@ -9,15 +9,16 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void showLottos(Lottos lottos) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(lottos.getLottoQuantity());
-        stringBuilder.append("개를 구매했습니다.");
-
-        System.out.println(stringBuilder);
+    public static void showManualAndAutoLottos(Lottos lottos, int manual, int auto) {
+        System.out.printf(
+                "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                manual,
+                auto
+        );
 
         lottos.getLottoList()
                 .forEach(ResultView::showLotto);
+
         System.out.println();
     }
 
