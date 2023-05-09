@@ -1,8 +1,4 @@
-package lotto;
-
-import lotto.domain.ForceLottoCreationStrategy;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +17,6 @@ public class LottoCreationStrategyTest {
     @Test
     @DisplayName("[요구사항 1] shuffle하지 않고 PURCHASE_COUNT만큼 복권을 만들면 winningLotto가 PURCHASE_COUNT만큼 생성되어야 한다.")
     void 요구사항_1() {
-
         // given: shuffle하지 않고 PURCHASE_COUNT만큼 복권 만드는 전략 생성
         ForceLottoCreationStrategy forceLottoCreationStrategy = new ForceLottoCreationStrategy();
 

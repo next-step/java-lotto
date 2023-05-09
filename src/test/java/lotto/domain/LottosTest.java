@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,6 @@ public class LottosTest {
     @Test
     @DisplayName("[요구사항 1] 당첨 여부에 따라 올바른 당첨 개수가 산출되고 당첨금이 지급된다.")
     void 요구사항_1() {
-
         // given: shuffle하지 않고 PURCHASE_COUNT만큼 복권 만드는 전략 생성
         ForceLottoCreationStrategy forceLottoCreationStrategy = new ForceLottoCreationStrategy();
 
