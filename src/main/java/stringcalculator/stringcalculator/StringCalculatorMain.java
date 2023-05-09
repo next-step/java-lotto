@@ -1,9 +1,9 @@
-package stringcalculator;
+package stringcalculator.stringcalculator;
 
-import domain.Number;
-import domain.StringCalculator;
-import ui.InputView;
-import ui.ResultView;
+import stringcalculator.domain.Number;
+import stringcalculator.domain.StringCalculator;
+import stringcalculator.ui.InputView;
+import stringcalculator.ui.ResultView;
 
 public class StringCalculatorMain {
     public static void main(String[] args) {
