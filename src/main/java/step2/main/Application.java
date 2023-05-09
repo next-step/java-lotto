@@ -20,6 +20,6 @@ public class Application {
         final var winner = LottoFactory.createWinnerLotto(bonusNumber, lastLottoNumbers);
         final var lottoPrizes = lottos.checkLottoPrize(winner);
 
-        OutputView.printWinnerStatistics(lottos, lottoPrizes.getLottoPrizes());
+        OutputView.printWinnerStatistics(lottos, lottoPrizes);
     }
 }
