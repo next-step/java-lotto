@@ -5,9 +5,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    private static final int LOTTO_NUMBER_LENGTH = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validateLottoNumberEmpty(lottoNumbers);
+        validateLottoNumberLength(lottoNumbers);
+
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -28,6 +32,24 @@ public class LottoNumbers {
     public boolean isMatchingLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber::isSameLottoNumber);
+    }
+
+    public void validateLottoNumberLength(List<LottoNumber> lottoNumbers) {
+
+        if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
+            throw new IllegalArgumentException("로또번호는 6개 여야합니다 :(");
+        }
+    }
+
+    public void validateLottoNumberEmpty(List<LottoNumber> lottoNumbers) {
+
+        if (Objects.isNull(lottoNumbers)) {
+            throw new IllegalArgumentException("로또번호가 입력되지 않았어요 :(");
+        }
+
+        if (lottoNumbers.isEmpty()) {
+            throw new IllegalArgumentException("로또번호가 입력되지 않았어요 :(");
+        }
     }
 
     @Override
