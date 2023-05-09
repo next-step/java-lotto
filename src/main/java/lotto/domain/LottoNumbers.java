@@ -52,6 +52,24 @@ public class LottoNumbers {
         }
     }
 
+    public void validateLottoNumberLength(List<LottoNumber> lottoNumbers) {
+
+        if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
+            throw new IllegalArgumentException("로또번호는 6개 여야합니다 :(");
+        }
+    }
+
+    public void validateLottoNumberEmpty(List<LottoNumber> lottoNumbers) {
+
+        if (Objects.isNull(lottoNumbers)) {
+            throw new IllegalArgumentException("로또번호가 입력되지 않았어요 :(");
+        }
+
+        if (lottoNumbers.isEmpty()) {
+            throw new IllegalArgumentException("로또번호가 입력되지 않았어요 :(");
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
