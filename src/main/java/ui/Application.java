@@ -23,6 +23,8 @@ public class Application {
             System.out.println(lottos.get(i));
         }
 
+        lottos.addAll(inputView.manualLottos);
+
         inputView.saveWinningNumber();
         inputView.saveBonusNumber();
         WinningLotto winningLotto = new WinningLotto(inputView.getWinningNumbers(), inputView.getBonusNumber());
