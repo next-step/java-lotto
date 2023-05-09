@@ -12,6 +12,16 @@ public class Game {
         }
     }
 
+    public Game(int countOfTicket, List<Ticket> manualTickets) {
+        for (Ticket manualTicket : manualTickets) {
+            addTicket(manualTicket);
+        }
+
+        for (int i = 0; i < countOfTicket - manualTickets.size(); i++) {
+            addTicket(randomTicket());
+        }
+    }
+
     public void addTicket(Ticket ticket) {
         tickets.add(ticket);
     }
