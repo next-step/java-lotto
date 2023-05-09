@@ -15,5 +15,4 @@ public class LottoMachine {
         wholeLottoNumberList.addAll(manualLottoNumberList);
         return new Lotto(wholeLottoNumberList);
     }
-
 }
