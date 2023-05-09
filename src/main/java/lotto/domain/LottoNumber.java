@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
     private int lottoNumber;
@@ -12,6 +12,10 @@ public class LottoNumber implements Comparable<LottoNumber>{
             throw new IllegalArgumentException("1 ~ 45 까지만 허용됩니다.");
         }
         this.lottoNumber = lottoNumber;
+    }
+
+    public int toInt() {
+        return lottoNumber;
     }
 
     @Override

@@ -14,12 +14,15 @@ public class LottoGame {
 
     public void start() {
         Money buyAmount = InputView.inputBuyAmount();
+
         Lottos lottos = lottoBuyer.buyLottos(buyAmount);
         ResultView.printLottos(lottos);
 
         String winningNumbers = InputView.inputWinningNumbers();
+        LottoNumber bonus = InputView.inputBonusNumber();
+
         Lotto winningLotto = LottoGenerator.generate(winningNumbers);
-        Matchs matchs = lottoBuyer.checkWinning(winningLotto);
-        ResultView.printWinningMatchCount(matchs, buyAmount);
+        RankResult rankResult = lottoBuyer.checkWinning(winningLotto, bonus);
+        ResultView.printWinningMatchCount(rankResult, buyAmount);
     }
 }
