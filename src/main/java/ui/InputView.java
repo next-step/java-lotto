@@ -13,8 +13,11 @@ public class InputView {
     private final Scanner scanner = new Scanner(System.in);
     int amount = INITIAL_VALUE;
     int count = INITIAL_VALUE;
+    int manualCount = INITIAL_VALUE;
 
     private Lotto winningNumbers = null;
+    public List<Lotto> manualLottos = null;
+
     private BonusNumber bonusNumber = null;
 
     public Lotto getWinningNumbers() {
@@ -29,6 +32,22 @@ public class InputView {
         System.out.println("구입 금액을 입력해 주세요");
         amount = scanner.nextInt();
         clearScannerBuffer();
+    }
+
+    public void saveManualCount(){
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요");
+        manualCount = scanner.nextInt();
+        clearScannerBuffer();
+    }
+
+    public void saveManualLottos(){
+        System.out.println("수동으로 구매할 번호를 입력해주세요");
+        for(int i=0; i<manualCount; i++) {
+            String str = scanner.nextLine();
+            manualLottos.add(new Lotto(toInts(split(str))));
+            clearScannerBuffer();
+        }
+
     }
 
     public void saveCount() {
