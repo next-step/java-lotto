@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.LottoDto;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,12 +26,6 @@ public class Lotto {
         return lottoNumbers.toString();
     }
 
-    public Match countMatching(Lotto winningLotto) {
-        return Match.of(winningLotto.lottoNumbers.stream()
-                .filter(lottoNumbers::contains)
-                .count());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,5 +37,21 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    public Rank countMatching(Lotto winningLotto, LottoNumber bonus) {
+        return Rank.of(winningLotto.lottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
+                .count(), hasBonus(bonus));
+    }
+
+    private boolean hasBonus(LottoNumber bonus) {
+        return lottoNumbers.contains(bonus);
+    }
+
+    public LottoDto toDto() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::toInt)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoDto::new));
     }
 }
