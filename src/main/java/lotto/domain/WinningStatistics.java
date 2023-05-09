@@ -1,50 +1,52 @@
 package lotto.domain;
 
+import lotto.util.RewardTable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class WinningStatistics {
     private static final int MINIMUM_MATCH_COUNT = 3;
+    private static final int BASIC_REWARD_SET_ZERO = 0;
 
     private List<Integer> lottoResultNumbers;
-    private Map<Integer, Integer> resultGameStatistics;
+    private Map<RewardTable, Integer> resultGameStatistics;
+    private int lottoBonusNumber;
 
-    public WinningStatistics(List<Integer> lottoResultNumbers) {
+    public WinningStatistics(List<Integer> lottoResultNumbers, int lottoBonusNumber) {
+        makeResultMap();
+
         this.lottoResultNumbers = lottoResultNumbers;
+        this.lottoBonusNumber = lottoBonusNumber;
     }
 
-    public Map<Integer, Integer> resultLottoGame(List<LottoGame> lottoGames) {
+    public Map<RewardTable, Integer> resultLottoGame(List<LottoGame> lottoGames) {
 
         for(LottoGame lottoGame : lottoGames) {
-            this.resultGameStatistics.put(lottoGame.matchLottoNumberCount(this.lottoResultNumbers)
-                    , this.resultGameStatistics.getOrDefault(lottoGame.matchLottoNumberCount(this.lottoResultNumbers), 0) + 1);
+            int matchCount = lottoGame.matchLottoNumberCount(this.lottoResultNumbers);
+            addWinningStatistics(matchCount, lottoGame.isBonusBall(matchCount, this.lottoBonusNumber));
         }
-
-        removeMinMatchCount();
 
         return this.resultGameStatistics;
     }
 
-    public void makeResultMap() {
-        Map<Integer, Integer> map = new HashMap<>();
+    private void addWinningStatistics(int matchCount, Boolean isBouns) {
+        if (matchCount >= MINIMUM_MATCH_COUNT) {
+            this.resultGameStatistics.put(RewardTable.of(matchCount, isBouns)
+                    , this.resultGameStatistics.getOrDefault(RewardTable.of(matchCount, isBouns), 0) + 1);
+        }
+    }
 
-        for (int i = 0; i <= 6; i++) {
-            map.put(i, 0);
+    private void makeResultMap() {
+        Map<RewardTable, Integer> map = new HashMap<>();
+
+        RewardTable[] rewardTables = RewardTable.values();
+
+        for (RewardTable rewardTable : rewardTables) {
+            map.put(rewardTable, BASIC_REWARD_SET_ZERO);
         }
 
         this.resultGameStatistics = map;
-    }
-
-    private void removeMinMatchCount() {
-
-        for(int key = 0 ; key < MINIMUM_MATCH_COUNT; key++) {
-            this.resultGameStatistics.remove(key);
-        }
-    }
-
-    public double calRateOfReturn(int totalWinningPrice, int buyPrice) {
-
-        return 1 + (totalWinningPrice - buyPrice) / (double) buyPrice;
     }
 }

@@ -10,15 +10,14 @@ public class Reward {
     private int totalRewardPrice;
 
     public Reward() {
+        this.totalRewardPrice = 0;
     }
 
-    public int sumTotalMatchPrice(Map<Integer, Integer> map) {
-        this.totalRewardPrice = 0;
-
-        Iterator<Integer> keys = map.keySet().iterator();
+    public int sumTotalMatchPrice(Map<RewardTable, Integer> map) {
+        Iterator<RewardTable> keys = map.keySet().iterator();
 
         while (keys.hasNext()) {
-            int key = keys.next();
+            RewardTable key = keys.next();
             int value = map.get(key);
 
             this.totalRewardPrice += sumMatchPrice(key, value);
@@ -27,7 +26,7 @@ public class Reward {
         return this.totalRewardPrice;
     }
 
-    private int sumMatchPrice(int key, int value) {
-        return RewardTable.of(key).matchReward(value);
+    private int sumMatchPrice(RewardTable key, int value) {
+        return key.matchReward(value);
     }
 }

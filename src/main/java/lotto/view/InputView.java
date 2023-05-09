@@ -6,6 +6,7 @@ public class InputView {
 
     private static final String BUY_LOTTO_OF_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String LOTTO_NUMBER_OF_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String LOTTO_BONUS_NUMBER_OF_MESSAGE = "보너스 볼을 입력해 주세요.";
     private Scanner INPUT;
 
     public InputView(Scanner scanner) {
@@ -22,5 +23,11 @@ public class InputView {
         System.out.println(LOTTO_NUMBER_OF_MESSAGE);
 
         return INPUT.nextLine();
+    }
+
+    public int setLottoBonusNumber() {
+        System.out.println(LOTTO_BONUS_NUMBER_OF_MESSAGE);
+
+        return INPUT.nextInt();
     }
 }
