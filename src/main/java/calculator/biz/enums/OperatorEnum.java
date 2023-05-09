@@ -33,7 +33,7 @@ public enum OperatorEnum {
         return Arrays.stream(OperatorEnum.values())
                 .filter(operator -> operator.getValue().equals(value))
                 .findAny()
-                .orElseThrow(() -> new NullPointerException("There is no operator"))
+                .orElseThrow(() -> new IllegalArgumentException("There is no operator"))
                 .getOperator();
     }
 }

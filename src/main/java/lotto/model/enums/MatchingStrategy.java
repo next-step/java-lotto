@@ -2,29 +2,29 @@ package lotto.model.enums;
 
 import java.util.Arrays;
 
-public enum Ranking {
-    FIRST(6, false,2000000000),
-    BONUS(5, true,30000000),
-    SECOND(5, false,1500000),
-    THIRD(4, false,50000),
-    FOURTH(3, false,5000);
+public enum MatchingStrategy {
+    SIX(6, false,2000000000),
+    FIVE_WITH_BONUS(5, true,30000000),
+    FIVE(5, false,1500000),
+    FOUR(4, false,50000),
+    THREE(3, false,5000);
 
     private int count;
 
     private boolean matchBonus;
     private int reword;
 
-    Ranking(int count, boolean matchBonus,  int reword) {
+    MatchingStrategy(int count, boolean matchBonus, int reword) {
 
         this.count = count;
         this.matchBonus = matchBonus;
         this.reword = reword;
     }
 
-    public static Ranking findRanking (int count, boolean matchBonus) {
+    public static MatchingStrategy find(int count, boolean matchBonus) {
         try {
-            return Arrays.stream(Ranking.values())
-                    .filter(r -> r.getCount() == count && r.getMatchBonus() == matchBonus)
+            return Arrays.stream(MatchingStrategy.values())
+                    .filter(ranking -> ranking.getCount() == count && ranking.getMatchBonus() == matchBonus)
                     .findFirst().orElse(null);
         } catch (IllegalArgumentException iae) {
             return null;

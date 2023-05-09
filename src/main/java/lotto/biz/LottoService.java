@@ -2,11 +2,12 @@ package lotto.biz;
 
 import lotto.model.Lotto;
 import lotto.model.LottoGames;
-import lotto.model.enums.Ranking;
+import lotto.model.enums.MatchingStrategy;
 import lotto.util.ParseUtil;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class LottoService {
@@ -40,7 +41,7 @@ public class LottoService {
     }
 
 
-    public Map<Ranking, List<Lotto>> getStatistic(){
+    public Map<MatchingStrategy, List<Lotto>> getStatistic(){
         return games.getStatistic();
     }
 
@@ -48,7 +49,7 @@ public class LottoService {
         return games.getGameCount() * Lotto.LOTTO_PRICE;
     }
 
-    public List<Integer> getWinningNumbers(){
+    public Set<Integer> getWinningNumbers(){
         return games.getWinningNumbers();
     }
 
