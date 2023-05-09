@@ -8,16 +8,16 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoGameTest {
+public class LottoGeneratorTest {
 
     @Test
     public void 로또_구입금액을_입력하면_구입금액에_해당하는_로또를_발행한다() {
         //given
         int money = 14000;
-        LottoGame lottoGame = new LottoGame();
+        LottoGenerator lottoGenerator = new LottoGenerator();
         //when
-        lottoGame.generateLottoResultsFromMoney(money);
-        List<int[]> lottoResults = lottoGame.getLottoResults();
+        lottoGenerator.generateLottoResultsFromMoney(money);
+        List<int[]> lottoResults = lottoGenerator.getLottoResults();
         //then
         assertThat(lottoResults).hasSize(14);
         for (int[] lottoNum : lottoResults) {
@@ -44,7 +44,7 @@ public class LottoGameTest {
         lottoResults.add(sixthRound);
         lottoResults.add(seventhRound);
         LottoResults results = new LottoResults(lottoResults);
-        LottoGame lottoGame = new LottoGame(results);
+        LottoGenerator lottoGenerator = new LottoGenerator(results);
 
         List<Integer> lastWeekLottoWinningNumbers = new ArrayList<>();
         lastWeekLottoWinningNumbers.add(1);
@@ -54,7 +54,7 @@ public class LottoGameTest {
         lastWeekLottoWinningNumbers.add(29);
         lastWeekLottoWinningNumbers.add(31);
         //when
-        WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(lastWeekLottoWinningNumbers);
+        WinningStatistics winningStatistics = lottoGenerator.calculateWinningStatistics(lastWeekLottoWinningNumbers);
         int[] result = winningStatistics.getWinningResults();
         //then
         assertThat(result[0]).isEqualTo(1);

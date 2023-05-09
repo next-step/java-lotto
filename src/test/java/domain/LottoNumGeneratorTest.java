@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoGameNumGeneratorTest {
+public class LottoNumGeneratorTest {
     @Test
     public void 로또_숫자_범위는_1부터_45까지다() {
         //when
