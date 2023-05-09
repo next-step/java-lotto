@@ -3,9 +3,7 @@ package lotto.view;
 import lotto.domain.LottoGame;
 import lotto.util.RewardTable;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ResultView {
 
@@ -26,15 +24,15 @@ public class ResultView {
         }
     }
 
-    public void resultGame(Map<Integer, Integer> map, double rate) {
+    public void resultGame(Map<RewardTable, Integer> map, double rate) {
         System.out.println(RESULT_GAME);
         System.out.println(BREAK_LINE);
 
-        Iterator<Integer> keys = map.keySet().iterator();
+        List<RewardTable> keySet = new ArrayList<>(map.keySet());
+        Collections.sort(keySet);
 
-        while (keys.hasNext()) {
-            int key = keys.next();
-            System.out.printf("%d개 일치 (%d원)- %d개\n", key, RewardTable.of(key).getReward(), map.get(key));
+        for (RewardTable key : keySet) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", key.getMatchRank(), key.getReward(), map.get(key));
         }
 
         resultRateOfReturn(rate);

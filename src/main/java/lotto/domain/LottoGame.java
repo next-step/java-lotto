@@ -7,6 +7,7 @@ import java.util.List;
 public class LottoGame {
 
     private static final int LOTTO_BASIC_MAX_SIZE = 6;
+    private static final int BONUS_BALL_CHECK = 5;
 
     private List<Integer> lottoNumber;
 
@@ -15,14 +16,10 @@ public class LottoGame {
     }
 
     private void createLottoGame(List<Integer> lottoNumberList) {
-        validateNumberList(lottoNumberList);
+        isListSizeOfSix(lottoNumberList);
+        isListInSameNumber(lottoNumberList);
 
         this.lottoNumber =  sortNumber(shuffleNumber(lottoNumberList).subList(0, 6));
-    }
-
-    private void validateNumberList(List<Integer> numberList) {
-        isListSizeOfSix(numberList);
-        isListInSameNumber(numberList);
     }
 
     private void isListSizeOfSix(List<Integer> numberList) {
@@ -57,5 +54,13 @@ public class LottoGame {
         return (int) lottoResultNumbers.stream()
                 .filter(this.lottoNumber::contains)
                 .count();
+    }
+
+    public Boolean isBonusBall(int matchCount, int bonusNum) {
+        if(matchCount != BONUS_BALL_CHECK) {
+            return null;
+        }
+
+        return this.lottoNumber.contains(bonusNum);
     }
 }

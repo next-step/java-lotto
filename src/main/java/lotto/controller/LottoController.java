@@ -1,10 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.Reward;
-import lotto.domain.WinningStatistics;
+import lotto.domain.*;
 import lotto.util.LottoUtils;
+import lotto.util.RewardTable;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -24,20 +22,26 @@ public class LottoController {
     public static void lotto() {
 
         int lottoBuyPrice = Integer.parseInt(inputView.setBuyLottoPrice());
-
         int lottoGameCount = LottoUtils.getLottoGameCount(lottoBuyPrice);
 
         Lotto lotto = new Lotto();
         lotto.buyLottoGames(lottoGameCount);
 
-        List<LottoGame> lottoGames = lotto.getLottoGames();
+        Lottos lottos = new Lottos(lotto.getLottoGames());
 
         resultView.showBuyLotto(lottoGameCount);
-        resultView.showMyLottoGameList(lottoGames);
+        resultView.showMyLottoGameList(lottos.getLottos());
 
-        WinningStatistics winningStatistics = new WinningStatistics(LottoUtils.lottoResultNumberList(inputView.setLottoResultNumber()));
+        List<Integer> lottoResultNumbers = LottoUtils.lottoResultNumberList(inputView.setLottoResultNumber());
 
-        Map<Integer, Integer> resultGameStatistics = winningStatistics.resultLottoGame(lottoGames);
+        int lottoBonusNumber = inputView.setLottoBonusNumber();
+        while(LottoUtils.isResultNumContainBonusNum(lottoResultNumbers, lottoBonusNumber)){
+            lottoBonusNumber = inputView.setLottoBonusNumber();
+        }
+
+        WinningStatistics winningStatistics = new WinningStatistics(lottoResultNumbers, lottoBonusNumber);
+
+        Map<RewardTable, Integer> resultGameStatistics = winningStatistics.resultLottoGame(lottos.getLottos());
 
         Reward reward = new Reward();
         int totalMatchPrice = reward.sumTotalMatchPrice(resultGameStatistics);
