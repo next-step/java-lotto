@@ -15,11 +15,7 @@ public class BonusNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean matchBonus(Lotto lotto) {
-        return lotto.contains(bonusNumber);
-    }
-
-    public LottoNumber getBonusNumber() {
+    public LottoNumber lottoNumber() {
         return bonusNumber;
     }
 }

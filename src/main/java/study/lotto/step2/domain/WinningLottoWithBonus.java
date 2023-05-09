@@ -18,7 +18,7 @@ public class WinningLottoWithBonus {
     }
 
     public LottoResult resultOf(Lotto lotto) {
-        return LottoResult.of(winningLotto.numbersOfMatch(lotto), bonusNumber.matchBonus(lotto));
+        return LottoResult.of(winningLotto.numbersOfMatch(lotto), lotto.matchBonus(bonusNumber));
     }
 
     private List<LottoResult> resultsOf(List<Lotto> lottos) {
@@ -28,7 +28,7 @@ public class WinningLottoWithBonus {
     }
 
     private void validateBonusLottoNumber(WinningLotto winningLotto, BonusNumber bonusNumber) {
-        if(winningLotto.contains(bonusNumber.getBonusNumber())) {
+        if(winningLotto.contains(bonusNumber.lottoNumber())) {
             throw new IllegalArgumentException("보너스 번호가 당첨 번호에 포함되어 있으면 안됩니다: " + bonusNumber);
         }
     }
