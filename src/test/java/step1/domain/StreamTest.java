@@ -1,5 +1,6 @@
-package domain;
+package step1.domain;
 
+import step1.domain.Operator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

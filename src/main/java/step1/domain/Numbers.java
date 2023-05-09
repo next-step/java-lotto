@@ -1,4 +1,4 @@
-package domain;
+package step1.domain;
 
 import java.util.ArrayList;
 import java.util.Deque;

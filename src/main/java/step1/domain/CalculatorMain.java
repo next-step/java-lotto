@@ -1,6 +1,6 @@
-package domain;
+package step1.domain;
 
-import view.InputView;
+import step1.view.InputView;
 
 public class CalculatorMain {
     public static void main(String[] args) {
