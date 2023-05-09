@@ -43,10 +43,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new ArrayList<>(lottoNumberRepository.keySet());
     }
 
-    public boolean isSameLottoNumber(LottoNumber leftOperand) {
-        return this.equals(leftOperand);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
