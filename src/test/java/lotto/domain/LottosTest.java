@@ -15,27 +15,21 @@ class LottosTest {
         Lottos lottos = getLottos();
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        Map<Match, Long> matchs = lottos.countMatching(winningLotto);
-        assertThat(matchs).containsValues(1L, 1L, 1L, 1L);
-    }
-
-    @Test
-    void calculateAmount() {
-        Lottos lottos = getLottos();
-
-        assertThat(lottos.calculateAmount()).isEqualTo(new Money(4_000L));
+        Map<Rank, Long> rankResult = lottos.countMatching(winningLotto, new LottoNumber(7));
+        assertThat(rankResult).containsValues(1L, 1L, 1L, 1L, 1L);
     }
 
     @Test
     void size() {
         Lottos lottos = getLottos();
-        assertThat(lottos.size()).isEqualTo(4);
+        assertThat(lottos.size()).isEqualTo(5);
     }
 
     public static Lottos getLottos() {
         return new Lottos(List.of(
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(2, 3, 4, 5, 6, 7),
+                new Lotto(2, 3, 4, 5, 6, 9),
                 new Lotto(3, 4, 5, 6, 7, 8),
                 new Lotto(4, 5, 6, 7, 8, 9)));
     }
