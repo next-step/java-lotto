@@ -9,11 +9,11 @@ public class LottoNumber {
   private final int number;
 
   public LottoNumber(int number) {
-    validateIsBetweenOneAndFortyFive(number);
+    validateInRange(number);
     this.number = number;
   }
 
-  private void validateIsBetweenOneAndFortyFive(int number) {
+  private void validateInRange(int number) {
     if (!isBetweenOneAndFortyFive(number)) {
       throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
     }
