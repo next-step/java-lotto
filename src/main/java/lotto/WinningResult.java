@@ -32,7 +32,7 @@ public class WinningResult {
     }
 
     private void saveWinningResult(WinningPrice winningPrice) {
-        if(winningPrice == null)
+        if (winningPrice.isInValidValue())
             return;
         winningResult.put(winningPrice, winningResult.getOrDefault(winningPrice, 0) + 1);
     }
@@ -41,6 +41,8 @@ public class WinningResult {
         Double sum = 0.0;
         Double total = 0.0;
         for (WinningPrice winningPrice : WinningPrice.values()) {
+            if (winningPrice.isInValidValue())
+                continue;
             int count = winningResult.get(winningPrice);
             sum += count * winningPrice.getPrice();
         }

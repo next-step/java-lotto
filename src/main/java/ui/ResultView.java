@@ -10,6 +10,8 @@ public class ResultView {
         System.out.println("______________");
 
         for (WinningPrice winningPrice : WinningPrice.values()) {
+            if (winningPrice.isInValidValue())
+                continue;
             int count = winningResult.get(winningPrice);
             System.out.println(winningPrice.getEqualCount() + "개 일치 (" + winningPrice.getPrice() + "원)- " + count);
         }
