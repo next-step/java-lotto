@@ -18,6 +18,14 @@ class MatchsTest {
         assertThat(winningAmount).isEqualTo(new Money(2_001_555_000L));
     }
 
+    @Test
+    void calculateRateOfEarning() {
+        Matchs matchs = getMatchs();
+
+        double rateOfEarning = matchs.calculateRateOfEarning(new Money(2_001_555_000L));
+        assertThat(rateOfEarning).isEqualTo(1);
+    }
+
     public static Matchs getMatchs() {
         Map<Match, Long> map = new LinkedHashMap<>();
         map.put(Match.THREE, 1L);

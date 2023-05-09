@@ -30,4 +30,8 @@ public class Matchs {
     public int hashCode() {
         return Objects.hash(matchs);
     }
+
+    public double calculateRateOfEarning(Money buyAmount) {
+        return calculateWinningAmount().divide(buyAmount);
+    }
 }
