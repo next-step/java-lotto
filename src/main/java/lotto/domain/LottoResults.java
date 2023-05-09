@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
@@ -26,5 +27,14 @@ public class LottoResults {
 
     private int ranksTotalReward(Rank rank) {
         return winningStats.get(rank) * rank.reward();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(Rank.values()).forEach(rank ->
+                sb.append(rank).append(String.format("- %d개\n", winningStats.getOrDefault(rank, 0)))
+        );
+        return sb.toString();
     }
 }
