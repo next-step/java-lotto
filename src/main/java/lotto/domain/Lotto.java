@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,12 +10,13 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoMatcher match(List<LottoNumber> targetNumbers) {
+    public LottoMatcher match(List<LottoNumber> targetNumbers, LottoNumber bonusNumber) {
         int matchedSize = lottoNumbers.stream()
-                .filter(lottoNumber -> targetNumbers.contains(lottoNumber))
+                .filter(targetNumbers::contains)
                 .collect(Collectors.toList())
                 .size();
-        return LottoMatcher.of(matchedSize);
+        boolean matchBonus = lottoNumbers.contains(bonusNumber);
+        return LottoMatcher.of(matchedSize, matchBonus);
     }
 
     public List<LottoNumber> lottoNumbers() {

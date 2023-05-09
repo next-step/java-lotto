@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,12 +21,20 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1, 46})
-    void 로또번호는_0이하거나_45를_초과할수없다(int input) {
+    @ValueSource(ints = {0, 46})
+    void 로또번호는_0이하거나_46이상일수없다(int input) {
         assertThatThrownBy(() -> new LottoNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("유효한 숫자 범위는 1~45 입니다.");
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    void 로또번호는_1이상_45이하이다(int input) {
+        assertThatCode(() -> new LottoNumber(input))
+                .doesNotThrowAnyException();
+    }
+
 
     @Test
     void 로또번호_6개_생성한다() {
