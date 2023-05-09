@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
@@ -24,14 +25,26 @@ public class ResultView {
     }
 
     public void showResults(LottoResult lottoResult) {
+        showIntroBeforeResults();
+        showMatchResults(lottoResult);
+        showRateOfReturn(lottoResult);
+    }
+
+    private void showRateOfReturn(LottoResult lottoResult) {
+        System.out.printf(formatRateOfReturnMent(lottoResult));
+    }
+
+    private void showIntroBeforeResults() {
         System.out.println();
         System.out.println(WINNING_STATISTICS);
         System.out.println(NINE_DASH);
-        System.out.println(formatResultMent(Rank.FOURTH_PLACE, lottoResult));
-        System.out.println(formatResultMent(Rank.THIRD_PLACE, lottoResult));
-        System.out.println(formatResultMent(Rank.SECOND_PLACE, lottoResult));
-        System.out.println(formatResultMent(Rank.FIRST_PLACE, lottoResult));
-        System.out.printf(formatRateOfReturnMent(lottoResult));
+    }
+
+    private void showMatchResults(LottoResult lottoResult) {
+        Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equals(Rank.LOST))
+                .map(rank -> formatResultMent(rank, lottoResult))
+                .forEach(System.out::println);
     }
 
     private String formatShowPurchaseCountResult(int purchaseCount) {
