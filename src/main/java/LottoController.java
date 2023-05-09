@@ -1,55 +1,38 @@
 import java.util.List;
 
-import domain.Lotto;
+import domain.LottoGame;
 import domain.WinningStatistics;
-import view.LottoRequest;
-import view.LottoResponse;
+import view.LottoInputView;
+import view.LottoOutputView;
 
 public class LottoController {
-    private Lotto lotto;
+    private LottoGame lottoGame;
 
     public void playLottoGames(int money) {
-        this.lotto = new Lotto();
-        lotto.generateLottoResultsFromMoney(money);
+        this.lottoGame = new LottoGame();
+        lottoGame.generateLottoResultsFromMoney(money);
     }
 
     public void getLottoCount() {
-        LottoResponse.printGameCount(lotto.getCount());
+        LottoOutputView.printGameCount(lottoGame.getCount());
     }
 
     public void getLottoResults() {
-            LottoResponse.printLottoResults(lotto.getLottoResults());
+            LottoOutputView.printLottoResults(lottoGame.getLottoResults());
     }
 
     public void getWinningStatistics() {
-        List<Integer> lastWeekLottoWinningNumbers = LottoRequest.getLastWeekLottoWinningNumbers();
-        WinningStatistics winningStatistics = lotto.calculateWinningStatistics(lastWeekLottoWinningNumbers);
-        LottoResponse.printBeforeWinnings();
+        List<Integer> lastWeekLottoWinningNumbers = LottoInputView.getLastWeekLottoWinningNumbers();
+        WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(lastWeekLottoWinningNumbers);
+        LottoOutputView.printBeforeWinnings();
         for (int i = 0; i < winningStatistics.getWinningResults().length; i++) {
-            printMatchCount(i);
-            printPrize(i);
-            printWinningCount(winningStatistics, i);
+            LottoOutputView.printMatchCounts(i, WinningStatistics.OFFSET);
+            LottoOutputView.printPrizes(WinningStatistics.WINNING_PRIZES[i]);
+            LottoOutputView.printWinningCount(winningStatistics.getWinningResults()[i]);
         }
     }
 
-    private void printWinningCount(WinningStatistics winningStatistics, int i) {
-        LottoResponse.printCount(winningStatistics.getWinningResults()[i]);
-        LottoResponse.printSpace();
-        LottoResponse.printLine();
-    }
-
-    private void printPrize(int i) {
-        LottoResponse.printPrize(WinningStatistics.WINNING_PRIZES[i]);
-        LottoResponse.printDash(1);
-        LottoResponse.printSpace();
-    }
-
-    private void printMatchCount(int i) {
-        LottoResponse.printMatchCount(i + WinningStatistics.OFFSET);
-        LottoResponse.printSpace();
-    }
-
     public void getReturnOnInvestment() {
-        LottoResponse.printReturnOnInvestment(lotto.getReturnOnInvestment());
+        LottoOutputView.printReturnOnInvestment(lottoGame.getReturnOnInvestment());
     }
 }

@@ -2,7 +2,9 @@ package view;
 
 import java.util.List;
 
-public class LottoResponse {
+import domain.WinningStatistics;
+
+public class LottoOutputView {
 
     public static void printBeforeWinnings() {
         printStatistics();
@@ -12,6 +14,23 @@ public class LottoResponse {
 
     public static void printMatchCount(int match) {
         System.out.print(match + "개 일치");
+    }
+
+    public static void printMatchCounts(int i, int offset) {
+        LottoOutputView.printMatchCount(i + offset);
+        LottoOutputView.printSpace();
+    }
+
+    public static void printPrizes(int prize) {
+        LottoOutputView.printPrize(prize);
+        LottoOutputView.printDash(1);
+        LottoOutputView.printSpace();
+    }
+
+    public static void printWinningCount(int count) {
+        LottoOutputView.printCount(count);
+        LottoOutputView.printSpace();
+        LottoOutputView.printLine();
     }
 
     public static void printSpace() {

@@ -8,16 +8,16 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoTest {
+public class LottoGameTest {
 
     @Test
     public void 로또_구입금액을_입력하면_구입금액에_해당하는_로또를_발행한다() {
         //given
         int money = 14000;
-        Lotto lotto = new Lotto();
+        LottoGame lottoGame = new LottoGame();
         //when
-        lotto.generateLottoResultsFromMoney(money);
-        List<int[]> lottoResults = lotto.getLottoResults();
+        lottoGame.generateLottoResultsFromMoney(money);
+        List<int[]> lottoResults = lottoGame.getLottoResults();
         //then
         assertThat(lottoResults).hasSize(14);
         for (int[] lottoNum : lottoResults) {
@@ -44,7 +44,7 @@ public class LottoTest {
         lottoResults.add(sixthRound);
         lottoResults.add(seventhRound);
         LottoResults results = new LottoResults(lottoResults);
-        Lotto lotto = new Lotto(results);
+        LottoGame lottoGame = new LottoGame(results);
 
         List<Integer> lastWeekLottoWinningNumbers = new ArrayList<>();
         lastWeekLottoWinningNumbers.add(1);
@@ -54,7 +54,7 @@ public class LottoTest {
         lastWeekLottoWinningNumbers.add(29);
         lastWeekLottoWinningNumbers.add(31);
         //when
-        WinningStatistics winningStatistics = lotto.calculateWinningStatistics(lastWeekLottoWinningNumbers);
+        WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(lastWeekLottoWinningNumbers);
         int[] result = winningStatistics.getWinningResults();
         //then
         assertThat(result[0]).isEqualTo(1);

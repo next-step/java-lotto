@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LottoRequest {
+public class LottoInputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String DELIMITER = ", ";
 

@@ -2,18 +2,18 @@ package domain;
 
 import java.util.List;
 
-public class Lotto {
+public class LottoGame {
     private LottoResults lottoResults;
 
     private Money money;
 
     private WinningStatistics winningStatistics;
 
-    public Lotto(LottoResults lottoResults) {
+    public LottoGame(LottoResults lottoResults) {
         this.lottoResults = lottoResults;
     }
 
-    public Lotto() {
+    public LottoGame() {
         this.lottoResults = new LottoResults();
     }
 
