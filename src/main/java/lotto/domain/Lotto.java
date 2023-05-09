@@ -15,8 +15,8 @@ public class Lotto {
         return (int) purchaseAmount / LOTTO_PRICE;
     }
 
-    public int getMatchNumbers(List<Integer> winningNumbers, Lotto lotto) {
-        return (int) lotto.getLottoNumbers().stream()
+    public int getMatchNumbers(List<Integer> winningNumbers) {
+        return (int) this.getLottoNumbers().stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
