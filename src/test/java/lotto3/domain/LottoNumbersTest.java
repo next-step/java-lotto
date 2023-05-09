@@ -47,10 +47,16 @@ class LottoNumbersTest {
   }
 
   @Test
-  void 로또번호가_가지는_contains_동작_검증() {
+  void 로또번호를_가지면_contains_true_검증() {
     LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
     assertThat(lottoNumbers.contains(new LottoNumber(1))).isTrue();
+  }
+
+  @Test
+  void 로또번호를_가지지_않으면_contains_false_검증() {
+    LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+
     assertThat(lottoNumbers.contains(new LottoNumber(7))).isFalse();
   }
 }
