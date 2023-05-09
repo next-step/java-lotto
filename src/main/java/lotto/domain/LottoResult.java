@@ -14,26 +14,25 @@ public class LottoResult {
                 .forEach(rank -> rankCounts.put(rank, 0));
     }
 
-    public void put(Rank rank){
+    public void put(Rank rank) {
         rankCounts.merge(rank, 1, Integer::sum);
     }
 
-    public double calculateProfitRate(int amount){
+    public double calculateProfitRate(int amount) {
         return (double) calculateTotalPrize() / (double) amount;
     }
 
-    private int calculateTotalPrize(){
-        return (int) getKeySet().stream()
+    private int calculateTotalPrize() {
+        return getRanks().stream()
                 .map(rank -> rank.getPrize() * getRankCount(rank))
                 .reduce(0, Integer::sum);
     }
 
-    public Set<Rank> getKeySet() {
+    public Set<Rank> getRanks() {
         return rankCounts.keySet();
     }
 
     public Integer getRankCount(Rank rank) {
         return rankCounts.get(rank);
     }
-
 }

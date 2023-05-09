@@ -14,12 +14,12 @@ public class Lottos {
     public Lottos(int amount) {
         lottoList = new ArrayList();
 
-        for (int i=0; i< LottoCountCalculator.calculateQuantity(amount); i++){
+        for (int i = 0; i < LottoCountCalculator.calculateQuantity(amount); i++) {
             lottoList.add(new Lotto());
         }
     }
 
-    public Lottos(List<Lotto> inLottoList){
+    public Lottos(List<Lotto> inLottoList) {
         lottoList = inLottoList;
     }
 
@@ -27,8 +27,7 @@ public class Lottos {
         LottoResult lottoResult = new LottoResult();
 
         lottoList.stream()
-                .map(lotto -> winningLotto.countMatchingWith(lotto))
-                .map(count -> Rank.rankOf(count))
+                .map(lotto -> Rank.rankOf(winningLotto.countMatchingWith(lotto), winningLotto.containsBonus(lotto)))
                 .filter(rank -> rank != Rank.NON_RANKED)
                 .forEach(rank -> lottoResult.put(rank));
 

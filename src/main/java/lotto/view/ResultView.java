@@ -16,7 +16,7 @@ public class ResultView {
         printTotalProfitRate(lottoResult, amount);
     }
     private static void printMatchingCounts(LottoResult lottoResult) {
-        lottoResult.getKeySet().stream()
+        lottoResult.getRanks().stream()
                 .forEach(rank -> printMatchingCount(rank, lottoResult.getRankCount(rank)));
     }
 

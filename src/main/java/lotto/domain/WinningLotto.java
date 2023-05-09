@@ -3,19 +3,20 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLotto extends Lotto{
-    public WinningLotto(List<Integer> inNumbers) {
+    private Integer bonusNumber;
+
+    public WinningLotto(List<Integer> inNumbers, Integer inBonusNumber) {
         super(inNumbers);
+        bonusNumber = inBonusNumber;
     }
 
     public int countMatchingWith(Lotto inLotto) {
-        int count = 0;
-        for (Integer number: numbers) {
-            count += boolToInt(inLotto.contains(number));
-        }
-        return count;
+        return (int) numbers.stream()
+                .filter(inLotto::contains)
+                .count();
     }
 
-    private int boolToInt(boolean bool) {
-        return bool ? 1 : 0;
+    public boolean containsBonus(Lotto inLotto) {
+        return inLotto.contains(bonusNumber);
     }
 }
