@@ -13,12 +13,9 @@ public class LottoController {
         lottoGame.generateLottoResultsFromMoney(money);
     }
 
-    public void getLottoCount() {
-        LottoOutputView.printGameCount(lottoGame.getCount());
-    }
-
     public void getLottoResults() {
-            LottoOutputView.printLottoResults(lottoGame.getLottoResults());
+        LottoOutputView.printGameCount(lottoGame.getCount());
+        LottoOutputView.printLottoResults(lottoGame.getLottoResults());
     }
 
     public void getWinningStatistics() {
@@ -30,9 +27,6 @@ public class LottoController {
             LottoOutputView.printPrizes(WinningStatistics.WINNING_PRIZES[i]);
             LottoOutputView.printWinningCount(winningStatistics.getWinningResults()[i]);
         }
-    }
-
-    public void getReturnOnInvestment() {
         LottoOutputView.printReturnOnInvestment(lottoGame.getReturnOnInvestment());
     }
 }

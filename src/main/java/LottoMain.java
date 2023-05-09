@@ -6,9 +6,7 @@ public class LottoMain {
         int money = LottoInputView.getMoney();
         LottoController lottoController = new LottoController();
         lottoController.playLottoGames(money);
-        lottoController.getLottoCount();
         lottoController.getLottoResults();
         lottoController.getWinningStatistics();
-        lottoController.getReturnOnInvestment();
     }
 }
