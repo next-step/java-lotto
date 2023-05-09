@@ -31,7 +31,7 @@ public class LottoNumbers {
 
     public boolean isMatchingLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.stream()
-                .anyMatch(lottoNumber::isSameLottoNumber);
+                .anyMatch(lottoNumber::equals);
     }
 
     public void validateLottoNumberLength(List<LottoNumber> lottoNumbers) {
