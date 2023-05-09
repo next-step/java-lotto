@@ -14,13 +14,13 @@ public class LottoNumber {
   }
 
   private void validateInRange(int number) {
-    if (!isBetweenOneAndFortyFive(number)) {
+    if (isNotBetweenInRange(number)) {
       throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
     }
   }
 
-  private boolean isBetweenOneAndFortyFive(int number) {
-    return number >= LOTTO_NUMBER_START && number <= LOTTO_NUMBER_END;
+  private boolean isNotBetweenInRange(int number) {
+    return !(number >= LOTTO_NUMBER_START && number <= LOTTO_NUMBER_END);
   }
 
   public int getNumber() {

@@ -29,14 +29,14 @@ public class InputView {
     if (isBlank(investMoney)) {
       throw new IllegalArgumentException("구입금액을 입력해 주세요.");
     }
-    if (!isNumber(investMoney)) {
+    if (isNotNumber(investMoney)) {
       throw new IllegalArgumentException("구입금액은 숫자만 입력 가능합니다.");
     }
   }
 
 
-  private static boolean isNumber(String investMoney) {
-    return investMoney.matches("^[0-9]*$");
+  private static boolean isNotNumber(String investMoney) {
+    return !investMoney.matches("^[0-9]*$");
   }
 
   public static LottoNumbers scanWinningNumbers() {
@@ -83,7 +83,7 @@ public class InputView {
   }
 
   private static void validateIsNumber(String bonusNumber) {
-    if (!isNumber(bonusNumber)) {
+    if (!isNotNumber(bonusNumber)) {
       throw new IllegalArgumentException("보너스 볼은 숫자만 입력 가능합니다.");
     }
   }
@@ -99,7 +99,7 @@ public class InputView {
   }
 
   private static void validateManualCountIsNumber(String manualCount) {
-    if (!isNumber(manualCount)) {
+    if (!isNotNumber(manualCount)) {
       throw new IllegalArgumentException("수동으로 구매할 로또 수는 숫자만 입력 가능합니다.");
     }
   }
@@ -140,7 +140,7 @@ public class InputView {
   }
 
   private static void validateManualLottoNumberIsNumber(String manualLottoNumber) {
-    if (!isNumber(manualLottoNumber)) {
+    if (!isNotNumber(manualLottoNumber)) {
       throw new IllegalArgumentException("수동으로 구매할 번호는 숫자만 입력 가능합니다.");
     }
   }

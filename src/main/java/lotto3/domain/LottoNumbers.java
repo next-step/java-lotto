@@ -31,9 +31,13 @@ public class LottoNumbers {
 
 
   private void validateHasSixNumbers(List<Integer> numbers) {
-    if (numbers.size() != LOTTO_NUMBERS_SIZE) {
+    if (hasOverNumbers(numbers)) {
       throw new IllegalArgumentException("로또 번호는 6개만 가질 수 있습니다.");
     }
+  }
+
+  private static boolean hasOverNumbers(List<Integer> numbers) {
+    return numbers.size() != LOTTO_NUMBERS_SIZE;
   }
 
   public List<LottoNumber> getLottoNumbers() {
