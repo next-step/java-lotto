@@ -2,13 +2,17 @@ package lottery;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LotteryTest {
     @Test
-    public void hasNonOverlapping6Numbers() {
-        Lottery lottery = Lottery.fromRandom();
-        var numbers = lottery.getNumbers();
-        assertThat(numbers).hasSize(6);
+    public void hasNonOverlappingSixNumbers() {
+        var row = LotteryRow.fromRandom();
+
+        var lottery = new Lottery(row);
+
+        assertThat(new HashSet<>(lottery.getNumbers())).hasSize(6);
     }
 }

@@ -1,22 +1,16 @@
 package lottery;
 
-import java.util.HashSet;
-
 public class LotteryController {
     private final LotteryStand lotteryStand = new LotteryStand();
-    private final LotteryStandView lotteryStandView = new LotteryStandConsoleView();
-    private final LotteryCalculator lotteryCalculator = new LotteryCalculator();
-    private final LotteryCalculatorView lotteryCalculatorView = new LotteryCalculatorConsoleView();
+    private final LotteryView lotteryView = new LotteryView();
 
     public void runLotterySequence() {
-        var amount = lotteryStandView.getBuyAmount();
+        var amount = lotteryView.getBuyAmount();
         var lotteries = lotteryStand.buyLotteriesOfAmount(amount);
-        lotteryStandView.showBuyResult(lotteries);
-        var numbersToCompare = new HashSet<>(lotteryCalculatorView.getNumbersToCompare());
-        var lotteryCountForNumMatches = lotteryCalculator.getLotteryCountForNumMatches(lotteries, numbersToCompare);
-        var pnLResult = lotteryCalculator.getPnLResultFromLotteryCountForNumMatches(lotteryCountForNumMatches, amount);
-        lotteryCalculatorView.showResultTitle();
-        lotteryCalculatorView.showLotteryCountForNumMatches(lotteryCountForNumMatches);
-        lotteryCalculatorView.showPnL(pnLResult);
+        lotteryView.showBuyResult(lotteries);
+
+        var winningNumbers = LotteryRow.fromCommaSpliced(lotteryView.getWinningNumbers());
+        var statistics = new LotteryStatistics(lotteries, winningNumbers, LotteryStand.PRICE);
+        lotteryView.showStatistics(statistics);
     }
 }
