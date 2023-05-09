@@ -35,4 +35,13 @@ class LottoNumbersTest {
         );
     }
 
+    @Test
+    @DisplayName("로또넘버간 매칭된 숫자 찾는 테스트")
+    void countMatchingLottoNumber() {
+        LottoNumbers lottoNumbers = manualLottoNumbersGenerator.generateLottoNumbers(new ReqManualLotto(List.of("1, 7, 8, 9, 10, 11")));
+        LottoNumbers targetLottoNumbers = manualLottoNumbersGenerator.generateLottoNumbers(new ReqManualLotto(List.of("1, 2, 3, 4, 5, 6")));
+
+        assertThat(lottoNumbers.countMatchingLottoNumber(targetLottoNumbers)).isEqualTo(1);
+    }
+
 }
