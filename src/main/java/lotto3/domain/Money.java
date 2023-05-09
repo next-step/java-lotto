@@ -33,8 +33,8 @@ public class Money {
 
 
 
-  public Money buyManualLotto(ManualLottoCount manualLottoCount) {
-    int manualLottoPrice = TICKET_PRICE * manualLottoCount.getCount();
+  public Money decreaseMoney(ManualLottoCount lottoCount) {
+    int manualLottoPrice = TICKET_PRICE * lottoCount.getCount();
     validateEnoughMoneyToBuy(manualLottoPrice);
     return new Money(this.money - manualLottoPrice);
   }
