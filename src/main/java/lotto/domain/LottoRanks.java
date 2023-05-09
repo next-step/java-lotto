@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.domain.constant.LottoRank;
@@ -29,7 +30,21 @@ public class LottoRanks {
             .orElseThrow(IllegalArgumentException::new);
     }
 
-    public List<LottoRank> getLottoRanks() {
-        return lottoRanks;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoRanks that = (LottoRanks) o;
+        return Objects.equals(lottoRanks, that.lottoRanks);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoRanks);
+    }
+
 }

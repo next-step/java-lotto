@@ -10,8 +10,8 @@ public enum LottoRank {
     FOURTH(3, 5_000),
     MISS(0, 0);
 
-    private final Integer hitNumber;
-    private final Integer winningAmount;
+    private final int hitNumber;
+    private final int winningAmount;
 
     LottoRank(Integer hitNumber, Integer winningAmount) {
         this.hitNumber = hitNumber;
@@ -20,16 +20,16 @@ public enum LottoRank {
 
     public static LottoRank toWinLotto(Integer hitNumber) {
         return Arrays.stream(values())
-            .filter((winLotto) -> winLotto.hitNumber.equals(hitNumber))
+            .filter((winLotto) -> winLotto.hitNumber == hitNumber)
             .findAny()
             .orElse(MISS);
     }
 
-    public Integer getWinningAmount() {
+    public int getWinningAmount() {
         return winningAmount;
     }
 
-    public Integer getHitNumber() {
+    public int getHitNumber() {
         return hitNumber;
     }
 
