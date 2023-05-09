@@ -17,15 +17,14 @@ public class LottoController {
     Money investMoney = InputView.scanMoney();
     ManualLottoCount lottoCount = InputView.scanManualCount();
 
-    Money leftMoney = investMoney.decreaseMoney(lottoCount);
-
     LottoTickets manualLottoTickets = InputView.scanManualLottoNumbers(lottoCount);
 
+    Money leftMoney = investMoney.decreaseMoney(lottoCount);
     LottoTickets autoTickets = LottoFactory.createLottoTickets(leftMoney);
 
     OutputView.printLottoTickets(autoTickets, manualLottoTickets);
 
-    LottoTickets totalLottoTickets = manualLottoTickets.addAll(autoTickets);
+    LottoTickets totalLottoTickets = LottoTickets.merge(manualLottoTickets, autoTickets);
 
     LottoNumbers winningNumbers = InputView.scanWinningNumbers();
     LottoNumber bonusNumber = InputView.scanBonusNumber();
