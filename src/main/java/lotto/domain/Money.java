@@ -14,4 +14,8 @@ public class Money {
     public int buyCount(int price) {
         return this.amount / price;
     }
+
+    public double ratio(int value) {
+        return (double) value / amount;
+    }
 }

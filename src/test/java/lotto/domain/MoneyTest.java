@@ -29,4 +29,11 @@ public class MoneyTest {
         int actual = money.buyCount(LOTTO_PRICE);
         assertThat(actual).isEqualTo(expect);
     }
+
+    @Test
+    void 현재_금액_대비_비율() {
+        Money money = new Money(20000);
+        double ratio = money.ratio(1000);
+        assertThat(ratio).isEqualTo(0.05);
+    }
 }
