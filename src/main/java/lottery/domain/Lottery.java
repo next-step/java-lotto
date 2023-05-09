@@ -6,34 +6,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lottery {
-    private final List<Integer> numbers;
+    private final List<LotteryNumber> numbers;
 
-    private Lottery(List<Integer> numbers) {
+    private Lottery(List<LotteryNumber> numbers) {
         validate(numbers);
         this.numbers = new ArrayList<>(numbers);
         Collections.sort(this.numbers);
     }
 
-    public static Lottery createLottery(List<Integer> numbers) {
-        List<Integer> copyOfNumbers = new ArrayList<>(numbers);
+    public static Lottery createLottery(List<LotteryNumber> numbers) {
+        List<LotteryNumber> copyOfNumbers = new ArrayList<>(numbers);
         return new Lottery(copyOfNumbers);
     }
 
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != Lotteries.LOTTERY_LENGTH || checkIfNotInRange(numbers)) {
+    private void validate(List<LotteryNumber> numbers) {
+        if (numbers.size() != Lotteries.LOTTERY_LENGTH) {
             throw new IllegalArgumentException(String.format("%s is not valid ", numbers));
         }
     }
 
-    private static boolean checkIfNotInRange(List<Integer> numbers) {
-        boolean isValid = true;
-        for (Integer number : numbers) {
-            isValid = isValid && number >= Lotteries.MIN_LOTTERY_NUMBER && number <= Lotteries.MAX_LOTTERY_NUMBER;
-        }
-        return !isValid;
-    }
-
-    public List<Integer> numbers() {
+    public List<LotteryNumber> numbers() {
         return new ArrayList<>(numbers);
     }
 

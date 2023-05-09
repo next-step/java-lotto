@@ -13,9 +13,9 @@ public class RandomLotteryStrategy implements LotteryStrategy {
 
     @Override
     public Lottery generate() {
-        List<Integer> lotteryNumbers = new ArrayList<>();
+        List<LotteryNumber> lotteryNumbers = new ArrayList<>();
         for(int i = 0; i < Lotteries.LOTTERY_LENGTH; i++) {
-            lotteryNumbers.add(Lotteries.MIN_LOTTERY_NUMBER + random.nextInt(Lotteries.MAX_LOTTERY_NUMBER - Lotteries.MIN_LOTTERY_NUMBER));
+            lotteryNumbers.add(new LotteryNumber(LotteryNumber.MIN_LOTTERY_NUMBER + random.nextInt(LotteryNumber.MAX_LOTTERY_NUMBER - LotteryNumber.MIN_LOTTERY_NUMBER)));
         }
         Collections.sort(lotteryNumbers);
         return Lottery.createLottery(lotteryNumbers);

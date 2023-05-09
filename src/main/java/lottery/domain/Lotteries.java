@@ -1,13 +1,10 @@
 package lottery.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotteries {
-    public static final int MAX_LOTTERY_NUMBER = 45;
-    public static final int MIN_LOTTERY_NUMBER = 1;
     public static final int LOTTERY_PRICE = 1000;
     public static final int LOTTERY_LENGTH = 6;
     private static final int MATCHED = 1;
@@ -40,17 +37,17 @@ public class Lotteries {
 
     private static int calculateMatchCount(Lottery lottery, Lottery winLottery) {
         int count = 0;
-        List<Integer> lotteryNumbers = lottery.numbers();
-        List<Integer> winLotteryNumbers = winLottery.numbers();
+        List<LotteryNumber> lotteryNumbers = lottery.numbers();
+        List<LotteryNumber> winLotteryNumbers = winLottery.numbers();
 
-        for (int lotteryNumber : lotteryNumbers) {
+        for (LotteryNumber lotteryNumber : lotteryNumbers) {
             count += calculateMatchCount(winLotteryNumbers, lotteryNumber);
         }
 
         return count;
     }
 
-    private static int calculateMatchCount(List<Integer> winLotteryNumbers, int lotteryNumber) {
+    private static int calculateMatchCount(List<LotteryNumber> winLotteryNumbers, LotteryNumber lotteryNumber) {
         if (winLotteryNumbers.contains(lotteryNumber)) {
             return MATCHED;
         }

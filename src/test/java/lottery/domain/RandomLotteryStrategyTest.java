@@ -17,11 +17,11 @@ class RandomLotteryStrategyTest {
 
     @Test
     void generate() {
-        List<Integer> numbers = randomLotteryStrategy.generate().numbers();
+        List<LotteryNumber> numbers = randomLotteryStrategy.generate().numbers();
         assertThat(numbers).hasSize(Lotteries.LOTTERY_LENGTH);
 
-        for(Integer number : numbers) {
-            assertThat(number).isBetween(Lotteries.MIN_LOTTERY_NUMBER, Lotteries.MAX_LOTTERY_NUMBER);
+        for(LotteryNumber number : numbers) {
+            assertThat(number.value()).isBetween(LotteryNumber.MIN_LOTTERY_NUMBER, LotteryNumber.MAX_LOTTERY_NUMBER);
         }
     }
 }
