@@ -15,7 +15,7 @@ class StatisticsTest {
                 new Lotto("1,2,3,7,8,9")
                 , new Lotto("1,2,3,7,8,9")));
 
-        assertThat(statistics.generator(lottos, inputLottoNumber).get(PrizeType.THREE)).isEqualTo(2);
+        assertThat(statistics.generate(lottos, inputLottoNumber).get(PrizeType.THREE)).isEqualTo(2);
     }
 
     @Test
@@ -26,7 +26,7 @@ class StatisticsTest {
                 new Lotto("1,2,10,7,8,9")
                 , new Lotto("1,2,11,7,8,9")));
 
-        assertThat(statistics.generator(lottos, inputLottoNumber).get(PrizeType.THREE)).isEqualTo(0);
+        assertThat(statistics.generate(lottos, inputLottoNumber).get(PrizeType.THREE)).isEqualTo(0);
     }
 
     @Test
@@ -36,7 +36,7 @@ class StatisticsTest {
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto("1,2,3,7,8,9")));
 
-        statistics.generator(lottos, inputLottoNumber);
+        statistics.generate(lottos, inputLottoNumber);
 
         assertThat(statistics.getRateOfReturn(14000)).isEqualTo(0.35);
     }

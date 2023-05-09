@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final String LOTTO_NUMBERS_SEPARATOR = ",";
+    private static final String LOTTO_NUMBERS_SEPARATOR = ",";
     private final List<Number> lotto;
 
     Lotto() {
@@ -34,8 +34,7 @@ public class Lotto {
         return getNumbers(allLottoNumbers.subList(0, 6));
     }
 
-    @NotNull
-    private static List<Number> getNumbers(List<Integer> allLottoNumbers) {
+    private List<Number> getNumbers(List<Integer> allLottoNumbers) {
         List<Number> resultRottoNumbers = new ArrayList<>();
 
         for (int resultRottoNumber : allLottoNumbers) {
@@ -45,16 +44,16 @@ public class Lotto {
         return resultRottoNumbers;
     }
 
-    public int numberOfMatch(Lotto winnerLotto) {
+    public int getNumberOfMatch(Lotto winnerLotto) {
         int count = 0;
         
         for (Number winnerNumber : winnerLotto.getLotto()) {
-            count = numberOfMatch(count, winnerNumber);
+            count = getNumberOfMatch(count, winnerNumber);
         }
         return count;
     }
 
-    private int numberOfMatch(int count, Number winnerNumber) {
+    private int getNumberOfMatch(int count, Number winnerNumber) {
         for (Number number : lotto) {
             if (number.compareTo(winnerNumber) == 0) {
                 count++;
@@ -67,7 +66,7 @@ public class Lotto {
         return lotto;
     }
 
-    public String lottoToString() {
+    public String getLottoToString() {
         return lotto.stream().map(number -> String.valueOf(number.getNumber()))
                 .collect(Collectors.joining(","));
     }

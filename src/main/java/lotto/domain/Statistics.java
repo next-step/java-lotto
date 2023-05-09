@@ -12,16 +12,18 @@ public class Statistics {
         statisticsMap.put(PrizeType.SIX, 0);
     }
 
-    public Map<PrizeType, Integer> generator(Lottos lottos, String winLottoNumber) {
+    public Map<PrizeType, Integer> generate(Lottos lottos, String winLottoNumber) {
         for (Lotto lotto: lottos.getLottos()) {
-            PrizeType prizeType = PrizeType.findPrizeType(lotto.numberOfMatch(new Lotto(winLottoNumber)));
-
-            if (prizeType != null) {
-                int lottoCount = statisticsMap.get(prizeType);
-                statisticsMap.put(prizeType, ++lottoCount);
-            }
+            setStatisticsMap(PrizeType.findPrizeType(lotto.getNumberOfMatch(new Lotto(winLottoNumber))));
         }
         return statisticsMap;
+    }
+
+    private void setStatisticsMap(PrizeType prizeType) {
+        if (prizeType != null) {
+            int lottoCount = statisticsMap.get(prizeType);
+            statisticsMap.put(prizeType, ++lottoCount);
+        }
     }
 
     public double getRateOfReturn(int money) {

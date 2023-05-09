@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    public static final int LOTTO_AMOUNT_OF_MONEY = 1000;
+    private static final int LOTTO_AMOUNT_OF_MONEY = 1000;
     private final List<Lotto> lottos;
 
     public Lottos(int amount) {
-        this.lottos = generatorLottos(amount);
+        this.lottos = generateLottos(amount);
     }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    private List<Lotto> generatorLottos(int amount) {
+    private List<Lotto> generateLottos(int amount) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < amount / LOTTO_AMOUNT_OF_MONEY; i++) {

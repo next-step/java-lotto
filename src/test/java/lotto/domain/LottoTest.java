@@ -9,7 +9,7 @@ class LottoTest {
     @Test
     void 지난주당첨번호_String_to_Lotto() {
         String inputLottoNumber = "1, 2, 3, 4, 5, 6";
-        assertThat(new Lotto(inputLottoNumber).lottoToString())
+        assertThat(new Lotto(inputLottoNumber).getLottoToString())
                 .isEqualTo("1,2,3,4,5,6");
     }
 
@@ -18,6 +18,6 @@ class LottoTest {
         Lotto winLotto = new Lotto("1,2,3,4,5,6");
         Lotto lotto = new Lotto("1,2,3,7,8,9");
 
-        assertThat(lotto.numberOfMatch(winLotto)).isEqualTo(3);
+        assertThat(lotto.getNumberOfMatch(winLotto)).isEqualTo(3);
     }
 }

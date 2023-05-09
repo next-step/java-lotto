@@ -3,7 +3,6 @@ package lotto.domain;
 import org.jetbrains.annotations.NotNull;
 
 public class Number implements Comparable<Number> {
-
     private final int number;
 
     public Number(int number) {
@@ -16,12 +15,6 @@ public class Number implements Comparable<Number> {
 
     @Override
     public int compareTo(@NotNull Number o) {
-        if (this.number > o.number) {
-            return 1;
-        }
-        if (this.number < o.number) {
-            return -1;
-        }
-        return 0;
+        return Integer.compare(this.number, o.number);
     }
 }
