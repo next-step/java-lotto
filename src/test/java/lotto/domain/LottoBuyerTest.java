@@ -9,19 +9,20 @@ class LottoBuyerTest {
     @Test
     void buyLottos() {
         LottoBuyer buyer = new LottoBuyer(new StubStore());
-        Lottos lottos = buyer.buyLottos(new Money(4_000));
+        Lottos lottos = buyer.buyLottos(new Money(5_000));
 
-        assertThat(lottos.size()).isEqualTo(4);
+        assertThat(lottos.size()).isEqualTo(5);
     }
 
     @Test
     void checkWinning() {
         LottoBuyer buyer = new LottoBuyer(new StubStore());
-        Lottos lottos = buyer.buyLottos(new Money(4_000L));
+        Lottos lottos = buyer.buyLottos(new Money(5_000L));
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Matchs matchs = buyer.checkWinning(winningLotto);
 
-        assertThat(matchs).isEqualTo(MatchsTest.getMatchs());
+        RankResult rankResult = buyer.checkWinning(winningLotto, new LottoNumber(7));
+
+        assertThat(rankResult).isEqualTo(RankResultTest.getRankResult());
     }
 
     private static class StubStore implements Store {

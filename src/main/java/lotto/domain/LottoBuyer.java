@@ -11,10 +11,6 @@ public class LottoBuyer {
         this.store = lottoStore;
     }
 
-    public Matchs checkWinning(Lotto winningLotto) {
-        return new Matchs(lottos.countMatching(winningLotto));
-    }
-
     public Lottos buyLottos(Money buyAmount) {
         this.lottos = store.sell(buyAmount);
         return lottos;
@@ -31,5 +27,9 @@ public class LottoBuyer {
     @Override
     public int hashCode() {
         return Objects.hash(lottos, store);
+    }
+
+    public RankResult checkWinning(Lotto winningLotto, LottoNumber bonus) {
+        return new RankResult(lottos.countMatching(winningLotto, bonus));
     }
 }
