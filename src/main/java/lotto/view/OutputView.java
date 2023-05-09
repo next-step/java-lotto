@@ -1,6 +1,7 @@
 package lotto.view;
 
 
+import lotto.Customer;
 import lotto.KLottoRank;
 import lotto.Lotto;
 
@@ -15,7 +16,7 @@ public class OutputView {
                 .forEach(System.out::println);
     }
 
-    public static void LottoResult(Map<KLottoRank, Integer> lottoResult, int money) {
+    public static void LottoResult(Map<KLottoRank, Integer> lottoResult, Customer customer) {
         System.out.println("당첨 통계");
         System.out.println("--------");
         int earnMoney = 0;
@@ -32,7 +33,7 @@ public class OutputView {
             earnMoney += count * value.getPrize();
         }
 
-        double rateOfReturn = (double) earnMoney / money;
+        double rateOfReturn = (double) earnMoney / customer.getLottoMoney();
 
         System.out.println("총 수익률은 " + rateOfReturn + "입니다." + (rateOfReturn < 1.0 ? "기준이 1이기 때문에 결과적으로 손해라는 의미임" : ""));
     }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Customer {
     private Money money;
+    private Money lottoMoney;
     private Lottos lottos;
     private Map<KLottoRank, Integer> rank;
 
@@ -21,15 +22,26 @@ public class Customer {
         return this.lottos.getLottos();
     }
 
-    public void buyLotto(LottoGenerator lottoGenerator) {
-        int lottoCount = money.getMoney() / lottoGenerator.getPrice();
+    public void buyLotto() {
+
+        if (money.getMoney() < Lotto.LOTTO_PRICE) {
+            throw new IllegalStateException("로또 살 돈이 부족합니다.");
+        }
+
+        int lottoCount = money.getMoney() / Lotto.LOTTO_PRICE;
+        lottoMoney = new Money(lottoCount * Lotto.LOTTO_PRICE);
+        money = money.spend(lottoCount * Lotto.LOTTO_PRICE);
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(lottoGenerator));
+            lottos.add(new Lotto());
         }
     }
 
-    public Map<KLottoRank, Integer> checkLottoWin(List<Integer> list, int bonusNumber) {
-        rank = lottos.checkWin(list, bonusNumber);
+    public Map<KLottoRank, Integer> checkLottoWin(WinNumber winNumber) {
+        rank = lottos.checkWin(winNumber);
         return rank;
+    }
+
+    public int getLottoMoney() {
+        return this.lottoMoney.getMoney();
     }
 }

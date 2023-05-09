@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.model.TestLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +17,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto_생성_테스트")
     public void Lotto_생성_테스트() {
-        Lotto t_lotto = new Lotto(new TestLottoGenerator());
+        Lotto t_lotto = new Lotto();
         List<LottoNumber> numbers = t_lotto.getNumbers();
 //        assertThat(numbers).containsAnyOf(1, 2, 3, 4, 5, 6);
     }
@@ -35,8 +34,8 @@ public class LottoTest {
     @MethodSource("generateRankData")
     @DisplayName("Lotto_n등_테스트")
     public void Lotto_1등_테스트(List<Integer> winNumbers, int bonusNumber, KLottoRank expectedRank) {
-        Lotto t_lotto = new Lotto(new TestLottoGenerator());
-        KLottoRank rank = t_lotto.checkRank(winNumbers, bonusNumber);
+        Lotto t_lotto = new Lotto(1,2,3,4,5,6);
+        KLottoRank rank = t_lotto.checkRank(new WinNumber(winNumbers, bonusNumber));
         assertThat(rank).isEqualTo(expectedRank);
     }
 }

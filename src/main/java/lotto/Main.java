@@ -13,12 +13,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in).useDelimiter(",\\s*|\r?\n");
         int money = InputView.inputPay(scanner);
         Customer customer = new Customer(money);
-        customer.buyLotto(new KLottoGenerator());
+        customer.buyLotto();
+
         OutputView.showLottos(customer.getLottos());
         List<Integer> lastNumbers = InputView.lastWinNumbers(scanner);
         int bonusNumber = InputView.inputBonusNumber(scanner);
-        Map<KLottoRank, Integer> lottoResult = customer.checkLottoWin(lastNumbers, bonusNumber);
-        OutputView.LottoResult(lottoResult, money);
+        WinNumber winNumber = new WinNumber(lastNumbers, bonusNumber);
+
+        Map<KLottoRank, Integer> lottoResult = customer.checkLottoWin(winNumber);
+        OutputView.LottoResult(lottoResult, customer);
         scanner.close();
     }
 }

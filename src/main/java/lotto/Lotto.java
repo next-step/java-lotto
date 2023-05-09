@@ -1,41 +1,42 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<LottoNumber> numbers;
+    private List<LottoNumber> numbers = new ArrayList<>();
+    public static final int LOTTO_PRICE = 1000;
 
-    public Lotto(LottoGenerator lottoGenerator) {
-        this.numbers = lottoGenerator.generate();
+    public Lotto() {
+        this.numbers = LottoNumber.generate();
+    }
+
+    public Lotto(int... lottoNumbers) {
+        for (int lottoNumber : lottoNumbers) {
+            this.numbers.add(LottoNumber.of(lottoNumber));
+        }
     }
 
     public List<LottoNumber> getNumbers() {
         return this.numbers;
     }
 
-    private int matchCount(List<Integer> winNumbers) {
-//        int count = 0;
-        List<LottoNumber> winLottoNumber = winNumbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-
+    private int matchCount(List<LottoNumber> winNumbers) {
         Set<LottoNumber> set = new HashSet<>(numbers);
-
-        return (int) winLottoNumber.stream()
+        return (int) winNumbers.stream()
                 .filter(set::contains)
                 .count();
     }
 
-    private boolean hasBonus(int bonusNumber) {
+    private boolean hasNumber(int bonusNumber) {
         return numbers.contains(LottoNumber.of(bonusNumber));
     }
 
-    public KLottoRank checkRank(List<Integer> winNumbers, int bonus) {
-        return KLottoRank.find(matchCount(winNumbers), hasBonus(bonus));
+    public KLottoRank checkRank(WinNumber winNumbers) {
+        return KLottoRank.find(matchCount(winNumbers.getWinNumbers()), hasNumber(winNumbers.getBonusNumber()));
     }
 
     @Override

@@ -9,6 +9,10 @@ public class Money {
         this.money = money;
     }
 
+    public Money spend(int money) {
+        return new Money(this.money - money);
+    }
+
     private void validateMoney(int money) {
         if (money < 0) {
             throw new IllegalArgumentException("돈 액수는 0원 이상이어야 합니다.");

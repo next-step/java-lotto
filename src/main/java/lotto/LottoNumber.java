@@ -1,16 +1,21 @@
 package lotto;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
-    private final static Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
+    private static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final int LOTTO_NUMBER_MINIMUM_RANGE = 1;
+    private static final int LOTTO_NUMBER_MAXIMUM_RANGE = 45;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     static {
-        for (int i = 1; i <= 45; i++) {
-            LOTTO_NUMBER_CACHE.put(i, new LottoNumber(i));
+        for (int number = LOTTO_NUMBER_MINIMUM_RANGE; number <= LOTTO_NUMBER_MAXIMUM_RANGE; number++) {
+            lottoNumberCache.put(number, new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.of(number));
         }
     }
 
@@ -22,22 +27,32 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(final int number) {
-        if (LOTTO_NUMBER_CACHE.get(number) == null) {
-            LOTTO_NUMBER_CACHE.put(number, new LottoNumber(number));
+        if (lottoNumberCache.get(number) == null) {
+            lottoNumberCache.put(number, new LottoNumber(number));
         }
-        return LOTTO_NUMBER_CACHE.get(number);
+        return lottoNumberCache.get(number);
+    }
+
+    public static List<LottoNumber> of(final List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
     private int getNumber() {
         return number;
     }
 
-    public boolean hasNumber(int number) {
-        return this.number == number;
-    }
-
     private boolean validateNumber(int number) {
         return number < 1 || number > 45;
+    }
+
+    public static List<LottoNumber> generate() {
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.subList(0, LOTTO_NUMBER_COUNT)
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     @Override

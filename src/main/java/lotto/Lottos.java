@@ -22,9 +22,9 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public Map<KLottoRank, Integer> checkWin(List<Integer> list, int bonusNumber) {
+    public Map<KLottoRank, Integer> checkWin(WinNumber winNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.checkRank(list, bonusNumber))
+                .map(lotto -> lotto.checkRank(winNumber))
                 .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(e -> 1)));
     }
