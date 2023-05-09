@@ -21,28 +21,7 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public static int getLottoRankCount(LottoPrize prize, List<LottoPrize> lottoPrizes) {
-        return (int) lottoPrizes.stream()
-                .filter(lottoPrize -> lottoPrize.equals(prize))
-                .count();
-    }
-
-    public double getTotalRate(List<LottoPrize> lottoPrizes) {
-        double rate = (double) getTotalAmount(lottoPrizes) / getTotalMoney();
-        return Math.floor(rate * 100.0) / 100.0;
-    }
-
-    private long getTotalAmount(List<LottoPrize> lottoPrizes) {
-        return lottoPrizes.stream()
-                .mapToLong(LottoPrize::getPrize)
-                .sum();
-    }
-
-    private int getTotalMoney() {
-        return Lotto.PRICE * this.size();
-    }
-
-    public WinnerType checkLottoPrize(WinnerLotto winnerLotto) {
+    public LottoRank checkLottoPrize(WinnerLotto winnerLotto) {
         List<LottoPrize> prizes = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
@@ -50,7 +29,7 @@ public class Lottos {
             prizes.add(prize);
         }
 
-        return new WinnerType(prizes);
+        return new LottoRank(prizes);
     }
 
     public int getManualLottoQuantity() {
