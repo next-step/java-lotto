@@ -22,9 +22,4 @@ public class BonusNumber {
     public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
-
-    @Override
-    public String toString() {
-        return bonusNumber.toString();
-    }
 }
