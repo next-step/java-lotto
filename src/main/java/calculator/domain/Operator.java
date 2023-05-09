@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", (x, y) -> x + y),
-    MINUS("-", (x, y) -> x - y),
-    MULTIPLY("*", (x, y) -> x * y),
-    DIVIDE("/", (x, y) -> x / y);
+    PLUS("+", (num1, num2) -> num1 + num2),
+    MINUS("-", (num1, num2) -> num1 - num2),
+    MULTIPLY("*", (num1, num2) -> num1 * num2),
+    DIVIDE("/", (num1, num2) -> num1 / num2);
 
     private final String value;
     private final BiFunction<Integer, Integer, Integer> expression;
@@ -25,6 +25,9 @@ public enum Operator {
     }
 
     public int calculate(int num1, int num2) {
+        if (this == DIVIDE && num2 == 0) {
+            throw new IllegalArgumentException("0 으로 나눌 수 없습니다.");
+        }
         return expression.apply(num1, num2);
     }
 }

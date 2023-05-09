@@ -7,10 +7,16 @@ public class LottoMachine {
 
     private static final int TICKET_PRICE = 1000;
 
-    public static LottoTicket buyTicket(int price) {
+    private final LottoGenerator lottoGenerator;
+
+    public LottoMachine(LottoGenerator lottoGenerator) {
+        this.lottoGenerator = lottoGenerator;
+    }
+
+    public LottoTicket buyTicket(int price) {
         int amount = price / TICKET_PRICE;
         return LottoTicket.of(IntStream.range(0, amount)
-                .mapToObj(x -> LottoGenerator.generate())
+                .mapToObj(x -> lottoGenerator.generate())
                 .collect(Collectors.toList()));
     }
 }

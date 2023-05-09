@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OperatorTest {
 
@@ -38,5 +39,12 @@ class OperatorTest {
         Operator operator = Operator.of("/");
         assertThat(operator.calculate(op1, op2))
                 .isEqualTo(res);
+    }
+
+    @Test
+    void divideByZeroTest() {
+        Operator operator = Operator.DIVIDE;
+        assertThatThrownBy(() -> operator.calculate(3, 0))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
