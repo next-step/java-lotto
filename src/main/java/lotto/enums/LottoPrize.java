@@ -46,11 +46,8 @@ public enum LottoPrize {
         return prizeMoney;
     }
 
-    public boolean getHasBonusNumber() {
-        return hasBonusNumber;
-    }
-
     public int getMatchCount() {
         return matchCount;
     }
+
 }

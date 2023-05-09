@@ -2,12 +2,8 @@ package lotto.domain;
 
 import lotto.enums.LottoPrize;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
@@ -37,7 +33,7 @@ public class LottoStatistics {
 
 
     /**
-     * 모든 로또 티켓에 의해 생성된 총 수익을 계산`
+     * 모든 로또 티켓에 의해 생성된 총 수익을 계산
      */
     public double calculateYield() {
         double revenue = calculateRevenue();
