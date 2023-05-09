@@ -23,6 +23,10 @@ public class Lotto {
                 .sorted().collect(Collectors.toUnmodifiableList());
     }
 
+    public boolean hasNumber(LottoNumber number) {
+        return this.numbers.contains(number);
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
