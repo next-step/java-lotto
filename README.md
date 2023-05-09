@@ -42,12 +42,13 @@
 
 # 3단계 - 로또(2등)
 ## 변경 사항
-- [x] 로또 구매 포장 클래스 신규: `LottoPurchase`
+- 로또 구매 포장 클래스 신규: `LottoPurchase`
   > 금액 검증 수행  
   > `LottoSeller` 객체는 `LottoPurchase` 객체를 활용해 `Lottos` 객체 생성
-- [x] LottoNumber 캐싱 방식 변경: `inner class` → `Map`
-- [x] 로또 결과 확인 시, 상금이 없는 경우는 `NOT_WIN`로 일원화
+- LottoNumber 캐싱 방식 변경: `inner class` → `Map`
+- 로또 결과 확인 시, 상금이 없는 경우는 `NOT_WIN`로 일원화
   > `MATCH_ONE_NUMBER`, `MATCH_TWO_NUMBER` 삭제
+- `RandomLottoNumbersFactory` 내 매직넘버 삭제 
 
 ## 기능 목록
 - [x] 보너스 번호 추가
