@@ -36,4 +36,18 @@ public class Lotto {
         return matchCount;
     }
 
+    public int countMatchNumbers(WinnerLotto winnerLotto) {
+        return Math.toIntExact(
+                getLottoNumbers()
+                        .stream()
+                        .filter(winnerLotto::hasMatchNumber)
+                        .count()
+        );
+    }
+
+    public boolean hasBonusNumber(int bonusNumber) {
+        return getLottoNumbers()
+                .contains(bonusNumber);
+    }
+
 }

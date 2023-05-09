@@ -13,13 +13,13 @@ public class LottoStatistics {
 
     private static final double PRICE_OF_LOTTO = 1000;
 
-    private final Lotto winnerLotto;
+    private final WinnerLotto winnerLotto;
 
     private final Lottos lottoList;
 
     private final Map<LottoPrize, Integer> matchCounts;
 
-    public LottoStatistics(Lotto winnerLotto, Lottos lottoList) {
+    public LottoStatistics(WinnerLotto winnerLotto, Lottos lottoList) {
         this.winnerLotto = winnerLotto;
         this.lottoList = lottoList;
         this.matchCounts = new EnumMap<>(LottoPrize.class);
@@ -57,11 +57,8 @@ public class LottoStatistics {
         return lottoList.getLottoList().size() * PRICE_OF_LOTTO;
     }
 
-    public List<Integer> getMatchCounts() {
-        return Arrays.stream(LottoPrize.values())
-                .filter(prize -> prize != LottoPrize.MISS)
-                .map(prize -> matchCounts.getOrDefault(prize, 0))
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
+    public Map<LottoPrize, Integer> getMatchCountsMap() {
+        return matchCounts;
     }
+
 }

@@ -17,6 +17,8 @@ public class InputView {
 
     private static final String DELIMITER = ",";
 
+    private static final String BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
+
     private final BufferedReader reader;
 
     public InputView() {
@@ -44,4 +46,12 @@ public class InputView {
     public void tearDown() throws IOException {
         reader.close();
     }
+
+    public int getBonusNumber() throws IOException {
+        System.out.println(BONUS_NUMBER_MESSAGE);
+        String input = reader.readLine();
+
+        return Integer.parseInt(input);
+    }
+
 }

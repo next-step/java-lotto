@@ -7,6 +7,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,19 +31,22 @@ public class Lottos {
         return lottoList;
     }
 
-    public Map<LottoPrize, Integer> getMatchCounts(Lotto winnerLotto) {
+    public Map<LottoPrize, Integer> getMatchCounts(WinnerLotto winnerLotto) {
         return lottoList.stream()
                 .map(lotto -> editMatchCount(lotto, winnerLotto))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(
-                        prize -> prize,
+                        Function.identity(),
                         prize -> 1,
                         Integer::sum,
                         () -> new EnumMap<>(LottoPrize.class)
                 ));
     }
 
-    public LottoPrize editMatchCount(final Lotto lotto, final Lotto winnerLotto) {
-        return LottoPrize.valueOf(lotto.countMatch(winnerLotto.getLottoNumbers()));
+    private LottoPrize editMatchCount(Lotto lotto, WinnerLotto winnerLotto) {
+        boolean bonusNumberMatch = lotto.hasBonusNumber(winnerLotto.getBonusNumber());
+        int count = lotto.countMatchNumbers(winnerLotto);
+        return LottoPrize.valueOf(count, bonusNumberMatch);
     }
+
 }
