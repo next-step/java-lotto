@@ -1,42 +1,50 @@
 package lotto.domain;
 
+import lotto.util.RewardTable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class WinningStatistics {
     private static final int MINIMUM_MATCH_COUNT = 3;
-    private static final int MAXIMUM_MATCH_COUNT = 6;
+    private static final int BASIC_REWARD_SET_ZERO = 0;
 
     private List<Integer> lottoResultNumbers;
-    private Map<Integer, Integer> resultGameStatistics;
+    private Map<RewardTable, Integer> resultGameStatistics;
+    private int lottoBonusNumber;
 
-    public WinningStatistics(List<Integer> lottoResultNumbers) {
+    public WinningStatistics(List<Integer> lottoResultNumbers, int lottoBonusNumber) {
         makeResultMap();
 
         this.lottoResultNumbers = lottoResultNumbers;
+        this.lottoBonusNumber = lottoBonusNumber;
     }
 
-    public Map<Integer, Integer> resultLottoGame(List<LottoGame> lottoGames) {
+    public Map<RewardTable, Integer> resultLottoGame(List<LottoGame> lottoGames) {
 
         for(LottoGame lottoGame : lottoGames) {
-            addWinningStatistics(lottoGame.matchLottoNumberCount(this.lottoResultNumbers));
+            int matchCount = lottoGame.matchLottoNumberCount(this.lottoResultNumbers);
+            addWinningStatistics(matchCount, lottoGame.isBonusBall(matchCount, this.lottoBonusNumber));
         }
 
         return this.resultGameStatistics;
     }
 
-    private void addWinningStatistics(int matchCount) {
+    private void addWinningStatistics(int matchCount, Boolean isBouns) {
         if (matchCount >= MINIMUM_MATCH_COUNT) {
-            this.resultGameStatistics.put(matchCount, this.resultGameStatistics.getOrDefault(matchCount, 0) + 1);
+            this.resultGameStatistics.put(RewardTable.of(matchCount, isBouns)
+                    , this.resultGameStatistics.getOrDefault(RewardTable.of(matchCount, isBouns), 0) + 1);
         }
     }
 
     private void makeResultMap() {
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<RewardTable, Integer> map = new HashMap<>();
 
-        for (int i = MINIMUM_MATCH_COUNT; i <= MAXIMUM_MATCH_COUNT; i++) {
-            map.put(i, 0);
+        RewardTable[] rewardTables = RewardTable.values();
+
+        for (RewardTable rewardTable : rewardTables) {
+            map.put(rewardTable, BASIC_REWARD_SET_ZERO);
         }
 
         this.resultGameStatistics = map;
