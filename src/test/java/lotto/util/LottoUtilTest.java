@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.InputMismatchException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -53,7 +54,16 @@ public class LottoUtilTest {
     @DisplayName("로또 당첨 금액과 구입 금액을 전달하여 수익률을 응답한다.")
     @ParameterizedTest
     @CsvSource(value = {"0:5000:0", "5000:5000:1", "15000:30000:0.5"}, delimiterString = ":")
-    public void winningStatisticsTest_정답_게임_수익률_테스트(int totalPrice, int buyPrice, double rate) {
+    public void lottoUtil_정답_게임_수익률_테스트(int totalPrice, int buyPrice, double rate) {
         assertThat(LottoUtils.calRateOfReturn(totalPrice, buyPrice)).isEqualTo(rate);
+    }
+
+    @DisplayName("보너스 번호 전달 시 기존 로또번호와 중복인지 확인한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"13:true", "45:false"}, delimiterString = ":")
+    public void lottoUtil_보너스번호_기존로또번호_중복_테스트(int bonusNum, boolean isBonusMatch) {
+        List<Integer> numberList = LottoUtils.lottoResultNumberList("1, 3, 13, 15, 26, 33");
+
+        assertThat(LottoUtils.isResultNumContainBonusNum(numberList, bonusNum)).isEqualTo(isBonusMatch);
     }
 }

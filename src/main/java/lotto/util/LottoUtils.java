@@ -67,4 +67,9 @@ public class LottoUtils {
 
         return 1 + (totalWinningPrice - buyPrice) / (double) buyPrice;
     }
+
+    public static boolean isResultNumContainBonusNum(List<Integer> numbers, int bonusNum) {
+
+        return numbers.contains(bonusNum);
+    }
 }
