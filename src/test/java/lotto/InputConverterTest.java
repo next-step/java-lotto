@@ -1,62 +1,48 @@
 package lotto;
 
-import lotto.domain.InputConverter;
+import lotto.utility.InputConverter;
+import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
-
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class InputConverterTest {
+  @ParameterizedTest
+  @ValueSource(strings = {"1, 2, 4, 5, 7, 21", "1, 2, 3, 4, 5, 6", "44, 45, 21, 14, 2, 1"})
+  @DisplayName("입력받은 당첨번호 List<Integer> 형태로 전환")
+  public void checkConvertNumberToList(String str) {
+    List<Integer> result = InputConverter.convertNumberToList(str);
 
-    @Test
-    @DisplayName("입력받은 문자열 앞뒤 공백 제거 후 빈 공백으로 split 리스트 반환")
-    public void formulaToStrListTest() {
-        String testInput = " 44 + 55 - 2 / 5 ";
+    assertThat(result.size()).isEqualTo(6);
+  }
 
-        InputConverter inputConverter = new InputConverter();
+  @ParameterizedTest
+  @CsvSource(value = {"\"46, 2, 3, 4, 5, 6\"", "\"1, 2, 3, 4, 5, 6, 8\"", "\"0, 2, 3, 4, 5, 6\"", "\"2, 2, 3, 4, 5, 6\""})
+  @DisplayName("입력받은 당첨번호 List<Integer> 형태로 전환 -> 예외 발생")
+  public void checkConvertNumberToListThrowException(String str) {
+    assertThatThrownBy(() -> InputConverter.convertNumberToList(str))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
 
-        List<String> result = inputConverter.formulaToStrList(testInput);
+  @ParameterizedTest
+  @CsvSource({"1, 1", "45, 45"})
+  @DisplayName("입력받은 Bonus번호 1에서 45 숫자만 int 반환 확인")
+  public void checkConvertNumber(String str, int expect) {
+    int result = InputConverter.convertLottoNumber(str);
 
-        assertThat(result.size()).isEqualTo(7);
+    assertThat(result).isEqualTo(expect);
+  }
 
-        assertAll("even index is number",
-            () -> assertEquals(result.get(0), "44"),
-            () -> assertEquals(result.get(2), "55"),
-            () -> assertEquals(result.get(4), "2"),
-            () -> assertEquals(result.get(6), "5")
-        );
-
-        assertAll("odd index is operator",
-            () -> assertEquals(result.get(1), "+"),
-            () -> assertEquals(result.get(3), "-"),
-            () -> assertEquals(result.get(5), "/")
-        );
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"", "  "})
-    @DisplayName("입력받은 문자열이 빈 공백일 때 IllegalArgumentException 예외발생")
-    public void formulaToStrListTest2(String test) {
-        InputConverter inputConverter = new InputConverter();
-
-        assertThatThrownBy(() -> inputConverter.formulaToStrList(test))
-            .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"5 - 5 -", "5 - 5 -5", "5 - 5 tt"})
-    @DisplayName("입력받은 문자열의 마지막이 숫자가 아닐 경우 IllegalArgumentException 예외발생")
-    public void formulaToStrListTest3(String test) {
-        InputConverter inputConverter = new InputConverter();
-
-        assertThatThrownBy(() -> inputConverter.formulaToStrList(test))
-            .isInstanceOf(IllegalArgumentException.class);
-    }
+  @ParameterizedTest
+  @ValueSource(strings = {"0", "46"})
+  @DisplayName("입력받은 Bonus번호 1에서 45 아닌 숫자 예외발생")
+  public void checkConvertNumber2(String str) {
+    assertThatThrownBy(() -> InputConverter.convertLottoNumber(str))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
 }

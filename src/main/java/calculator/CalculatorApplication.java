@@ -1,10 +1,10 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Calculator;
-import lotto.domain.NumberGroup;
-import lotto.domain.OperatorGroup;
-import lotto.domain.InputConverter;
-import lotto.view.InputView;
+import calculator.domain.Calculator;
+import calculator.domain.NumberGroup;
+import calculator.domain.OperatorGroup;
+import calculator.domain.InputConverter;
+import calculator.view.InputView;
 
 import java.util.List;
 

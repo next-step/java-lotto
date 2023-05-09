@@ -1,23 +1,22 @@
-package lotto;
+package calculator;
 
-import lotto.utility.Operation;
+import calculator.utility.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.text.NumberFormat;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OperationTest {
+public class OperatorTest {
   @ParameterizedTest
   @CsvSource(value = {"+,PLUS", "-,MINUS", "*,MULTIPLY", "/, DIVIDE"})
   @DisplayName("enum 사칙 연산자로 원하는 메서드 가져오기")
-  public void  valueOfOperatorTest(String operator,Operation.BasicOperation expect ) {
-    Operation result = Operation.BasicOperation.valueOfOperator(operator);
+  public void  valueOfOperatorTest(String operator, Operator expect ) {
+    Operator result = Operator.from(operator);
 
     assertThat(result).isEqualTo(expect);
 
@@ -31,7 +30,7 @@ public class OperationTest {
     Double doubleNumber2 = Double.parseDouble("5");
     numberFormat.setGroupingUsed(false);
 
-    Double result = Operation.BasicOperation.valueOfOperator("+").compute(doubleNumber1,doubleNumber2);
+    Double result = Operator.from("+").compute(doubleNumber1,doubleNumber2);
 
     assertThat(result).isEqualTo(9.0);
 

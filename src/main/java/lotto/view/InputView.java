@@ -3,11 +3,23 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
-    private final Scanner scanner = new Scanner(System.in);
+  private static final Scanner scanner = new Scanner(System.in);
 
-    public String askFormula() {
-        System.out.println("수식을 입력해주세요(입력한 문자열인 숫자와 사칙 연산자 사이에는 빈 문자열이 입력되어야 합니다.)");
+  public static String askBudget() {
+    System.out.println("구입금액을 입력해 주세요.");
 
-        return scanner.nextLine().trim();
-    }
+    return scanner.nextLine();
+  }
+
+  public static String askLastLottoNumber() {
+    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
+    return scanner.nextLine().trim();
+  }
+
+  public static String askBonusNumber() {
+    System.out.println("보너스 볼을 입력해 주세요.");
+
+    return scanner.nextLine();
+  }
 }
