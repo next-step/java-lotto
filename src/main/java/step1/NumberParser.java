@@ -4,21 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NumberParser {
-    public List<Integer> parse(String input) {
+    public Numbers parse(Expression expression) {
         List<Integer> numbers = new ArrayList<>();
-        final char[] chars = input.toCharArray();
+        final char[] chars = expression.getCharArray();
         for (char ch : chars) {
             addNumbers(numbers, ch);
         }
-
-        validate(numbers);
-        return numbers;
-    }
-
-    private void validate(List<Integer> numbers) {
-        if (numbers.isEmpty()) {
-            throw new IllegalArgumentException("숫자가 없습니다.");
-        }
+        return Numbers.of(numbers);
     }
 
     private void addNumbers(List<Integer> numbers, char ch) {
