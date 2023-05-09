@@ -30,6 +30,6 @@ public class LottoCreationStrategyTest {
         List<Lotto> createdLottos = lottos.getCreatedLottos();
 
         // then: [1, 2, 3, 4, 5, 6]짜리 복권이 3개 만들어져야 함. 즉, 각 로또가 winningLotto와 숫자 6개가 모두 일치해야 한다.
-        createdLottos.forEach(createdLotto -> assertThat(createdLotto.getMatchNumbers(winningLotto, createdLotto)).isEqualTo(EXPECTED_WINNING_COUNT));
+        createdLottos.forEach(createdLotto -> assertThat(createdLotto.getMatchNumbers(winningLotto)).isEqualTo(EXPECTED_WINNING_COUNT));
     }
 }
