@@ -29,7 +29,7 @@ public class Calculator {
     }
 
     private static void validate(String input) {
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(String.format("String \"%s\" is empty", input));
         }
     }

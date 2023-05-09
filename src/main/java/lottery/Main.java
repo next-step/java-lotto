@@ -6,13 +6,18 @@ import lottery.view.*;
 import java.util.List;
 
 public class Main {
+    private static final PriceInputView priceInputView = new PriceInputView();
+    private static final NumberOfLotteryOutputView numberOfLotteryOutputView = new NumberOfLotteryOutputView();
+    private static final WinLotteryInputView winLotteryInputView = new WinLotteryInputView();
+    private static final LotteryResultOutputView lotteryResultOutputView = new LotteryResultOutputView();
+
     public static void main(String[] args) {
-        Integer price = new PriceInputView().receive();
+        Integer price = priceInputView.receive();
         LotteryStrategy lotteryStrategy = new RandomLotteryStrategy();
         List<Lottery> lotteries = Lotteries.buy(price, lotteryStrategy);
-        new NumberOfLotteryOutputView().print(lotteries);
-        Lottery winLottery = new WinLotteryInputView().receive();
+        numberOfLotteryOutputView.print(lotteries);
+        Lottery winLottery = winLotteryInputView.receive();
         LotteryResult lotteryResult = Lotteries.calculateResult(lotteries, winLottery);
-        new LotteryResultOutputView().print(lotteryResult);
+        lotteryResultOutputView.print(lotteryResult);
     }
 }
