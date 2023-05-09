@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoShop;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResults;
 
@@ -12,7 +12,7 @@ public class ResultView {
     private static final String STATISTICS_INFO = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public void printLottoNumber() {
-        for (LottoNumber lottoNumber : LottoShop.lottos) {
+        for (LottoNumbers lottoNumber : LottoShop.lottos) {
             System.out.println(lottoNumber);
         }
     }

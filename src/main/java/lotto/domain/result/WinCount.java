@@ -8,7 +8,7 @@ public class WinCount {
         this.numberOfWin = numberOfWin;
     }
 
-    public void plus() {
+    public void plusOne() {
         numberOfWin++;
     }
 

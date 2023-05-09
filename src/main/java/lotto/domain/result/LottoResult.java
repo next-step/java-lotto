@@ -17,7 +17,7 @@ public class LottoResult {
         if (rank != Rank.valueOf(hitCount)) {
             return;
         }
-        winCount.plus();
+        winCount.plusOne();
     }
 
     public int getHit() {
