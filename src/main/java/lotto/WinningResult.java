@@ -16,21 +16,24 @@ public class WinningResult {
     }
 
     private void init() {
+        winningResult.put(WinningPrice.FIVE, 0);
         winningResult.put(WinningPrice.FOUR, 0);
         winningResult.put(WinningPrice.THIRD, 0);
         winningResult.put(WinningPrice.SECOND, 0);
         winningResult.put(WinningPrice.FIRST, 0);
     }
 
-    public void calculateWinningResult(List<Lotto> lottos, Lotto winningNumbers) {
+    public void calculateWinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
         for (int i = 0; i < lottos.size(); i++) {
             Lotto lotto = lottos.get(i);
-            WinningPrice winningPrice = WinningPrice.of(lotto.countEqualNumbers(winningNumbers));
+            WinningPrice winningPrice = winningLotto.calculateWinningPrice(lotto);
             saveWinningResult(winningPrice);
         }
     }
 
     private void saveWinningResult(WinningPrice winningPrice) {
+        if(winningPrice == null)
+            return;
         winningResult.put(winningPrice, winningResult.getOrDefault(winningPrice, 0) + 1);
     }
 
