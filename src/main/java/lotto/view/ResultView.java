@@ -1,11 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Match;
-import lotto.domain.Matchs;
+import lotto.domain.*;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class ResultView {
@@ -14,12 +10,13 @@ public class ResultView {
     }
 
     public static void printLottos(Lottos lottos) {
+        printResultBuyCount(lottos.size());
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto);
         }
     }
 
-    public static void printWinningMatchCount(Matchs matchs) {
+    public static void printWinningMatchCount(Matchs matchs, Money buyAmount) {
         Map<Match, Long> entry = matchs.getMatchs();
         System.out.println("당첨 통계");
         System.out.println("-----------");
@@ -30,6 +27,7 @@ public class ResultView {
             System.out.printf(message, count);
             System.out.println();
         }
+        printRateOfEarning(matchs.calculateRateOfEarning(buyAmount));
     }
 
     public static void printRateOfEarning(double rateOfEarning) {
