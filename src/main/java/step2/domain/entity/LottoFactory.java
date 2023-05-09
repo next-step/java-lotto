@@ -37,7 +37,9 @@ public class LottoFactory {
     }
 
     private static List<LottoNumber> toLottoNumbers(int... numbers) {
-        return Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toList());
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private static String[] split(String number) {
