@@ -1,5 +1,6 @@
-package lotto.dto;
+package lotto.domain;
 
+import lotto.domain.LottoResult;
 import lotto.domain.Match;
 import lotto.domain.Matches;
 import org.junit.jupiter.api.DisplayName;
@@ -14,18 +15,18 @@ class LottoResultTest {
     @DisplayName("로또 결과 생성 테스트")
     @Test
     void generateLottoResult() {
-        Matches matches = Matches.of(List.of(Match.THREE, Match.FOUR, Match.FIVE, Match.SIX));
+        Matches matches = Matches.of(List.of(Match.THREE, Match.FOUR, Match.FIVE, Match.SIX, Match.SIX));
         LottoResult result = LottoResult.from(5000, matches);
 
-        assertThat(result.getLottoPrizeCount(LottoPrize.FIRST))
+        assertThat(result.getMatchCount(Match.THREE))
                 .isEqualTo(1);
-        assertThat(result.getLottoPrizeCount(LottoPrize.SECOND))
+        assertThat(result.getMatchCount(Match.FOUR))
                 .isEqualTo(1);
-        assertThat(result.getLottoPrizeCount(LottoPrize.THIRD))
+        assertThat(result.getMatchCount(Match.FIVE))
                 .isEqualTo(1);
-        assertThat(result.getLottoPrizeCount(LottoPrize.FOURTH))
-                .isEqualTo(1);
+        assertThat(result.getMatchCount(Match.SIX))
+                .isEqualTo(2);
         assertThat(result.getReturnRate())
-                .isEqualTo(400311.0);
+                .isEqualTo(800311.0);
     }
 }
