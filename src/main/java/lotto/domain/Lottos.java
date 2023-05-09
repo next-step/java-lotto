@@ -19,7 +19,7 @@ public class Lottos {
 
     private List<Rank> getJudgeRankResult(List<Lotto> lottos, List<Integer> winningNumbers) {
         return lottos.stream()
-                .map(lotto -> Rank.findRank(lotto.getMatchNumbers(winningNumbers, lotto)))
+                .map(lotto -> Rank.findRank(lotto.getMatchNumbers(winningNumbers)))
                 .collect(Collectors.toList());
     }
 
