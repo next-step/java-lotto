@@ -14,14 +14,14 @@ public class LottoGenerator {
         }
     }
 
-    public Lotto generate() {
+    public static Lotto generate() {
         Collections.shuffle(LOTTO_NUMBERS_CACHE);
         List<LottoNumber> lottoNumbers = LOTTO_NUMBERS_CACHE.subList(0, 6);
         Collections.sort(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
-    public Lotto generate(String numbers) {
+    public static Lotto generate(String numbers) {
         String[] splitNumbers = numbers.split(", ");
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String number : splitNumbers) {
@@ -30,7 +30,7 @@ public class LottoGenerator {
         return new Lotto(lottoNumbers);
     }
 
-    public Lottos generate(long count) {
+    public static Lottos generate(long count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(generate());
@@ -38,7 +38,7 @@ public class LottoGenerator {
         return new Lottos(lottos);
     }
 
-    public Lottos generate(Money receivedMoney) {
+    public static Lottos generate(Money receivedMoney) {
         return generate((long) receivedMoney.divide(Lotto.LOTTO_AMOUNT));
     }
 }

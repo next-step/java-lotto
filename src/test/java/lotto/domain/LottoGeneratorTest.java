@@ -10,8 +10,7 @@ public class LottoGeneratorTest {
 
     @Test
     void generate() {
-        LottoGenerator generator = getGenerator();
-        Lotto lotto = generator.generate();
+        Lotto lotto = LottoGenerator.generate();
         Lotto expected = new Lotto(1, 2, 3, 4, 5, 6);
 
         assertThat(lotto).isEqualTo(expected);
@@ -19,8 +18,7 @@ public class LottoGeneratorTest {
 
     @Test
     void generateWithParameter() {
-        LottoGenerator generator = getGenerator();
-        Lotto lotto = generator.generate("1, 2, 3, 4, 5, 6");
+        Lotto lotto = LottoGenerator.generate("1, 2, 3, 4, 5, 6");
         Lotto expected = new Lotto(1, 2, 3, 4, 5, 6);
 
         assertThat(lotto).isEqualTo(expected);
@@ -28,8 +26,7 @@ public class LottoGeneratorTest {
 
     @Test
     void generateLottosByMoney() {
-        LottoGenerator generator = getGenerator();
-        Lottos lottos = generator.generate(new Money(4_000L));
+        Lottos lottos = LottoGenerator.generate(new Money(4_000L));
         Lottos expected = new Lottos(List.of(
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(2, 3, 4, 5, 6, 7),
@@ -38,10 +35,10 @@ public class LottoGeneratorTest {
 
         assertThat(lottos).isEqualTo(expected);
     }
+
     @Test
     void generateLottosByCount() {
-        LottoGenerator generator = getGenerator();
-        Lottos lottos = generator.generate(4);
+        Lottos lottos = LottoGenerator.generate(4);
         Lottos expected = new Lottos(List.of(
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(2, 3, 4, 5, 6, 7),
@@ -51,23 +48,26 @@ public class LottoGeneratorTest {
         assertThat(lottos).isEqualTo(expected);
     }
 
-    private LottoGenerator getGenerator() {
-        return new LottoGenerator() {
-            public Lotto generate() {
-                return new Lotto(1, 2, 3, 4, 5, 6);
-            }
 
-            public Lotto generate(String numbers) {
-                return new Lotto(1, 2, 3, 4, 5, 6);
-            }
+    private static class LottoGenerator {
+        public static Lotto generate() {
+            return new Lotto(1, 2, 3, 4, 5, 6);
+        }
 
-            public Lottos generate(long count) {
-                return new Lottos(List.of(
-                        new Lotto(1, 2, 3, 4, 5, 6),
-                        new Lotto(2, 3, 4, 5, 6, 7),
-                        new Lotto(3, 4, 5, 6, 7, 8),
-                        new Lotto(4, 5, 6, 7, 8, 9)));
-            }
-        };
+        public static Lotto generate(String numbers) {
+            return new Lotto(1, 2, 3, 4, 5, 6);
+        }
+
+        public static Lottos generate(long count) {
+            return new Lottos(List.of(
+                    new Lotto(1, 2, 3, 4, 5, 6),
+                    new Lotto(2, 3, 4, 5, 6, 7),
+                    new Lotto(3, 4, 5, 6, 7, 8),
+                    new Lotto(4, 5, 6, 7, 8, 9)));
+        }
+
+        public static Lottos generate(Money buyAmount) {
+            return generate((long) buyAmount.divide(Lotto.LOTTO_AMOUNT));
+        }
     }
 }
