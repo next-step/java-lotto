@@ -8,9 +8,10 @@ import java.util.List;
 public class LottoController {
     public void start() {
         int countOfTicket = InputView.payment();
-        System.out.println(countOfTicket + "개를 구매했습니다.");
+        List<Ticket> manualTickets = InputView.manualBuy(countOfTicket);
+        System.out.println("수동으로 " + manualTickets.size() + "장, 자동으로 " + (countOfTicket - manualTickets.size()) + "개를 구매했습니다.");
 
-        Game game = new Game(countOfTicket);
+        Game game = new Game(countOfTicket, manualTickets);
         ResultView.printTickets(game.allTickets());
 
         List<Integer> winnerNumber = InputView.winnerNumber();
