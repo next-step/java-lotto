@@ -17,13 +17,47 @@ class MoneyTest {
                 .isInstanceOf(Money.class);
     }
 
-
     @ParameterizedTest
-    @ValueSource(ints = {0, -1, 999})
-    @DisplayName("1000보다 작은 값을 보낼 때 에러를 던진다")
-    void nullOrEmptyTest(int input) {
+    @ValueSource(longs = {-2, -1, -5})
+    @DisplayName("Money에 0원 이하가 들어올 경우 예외를 던진다")
+    void validateUnderZero(long amount) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Money.wons(input))
-                .withMessage("1000원 이상 입력해주세 :)");
+                .isThrownBy(() -> Money.wons(amount))
+                .withMessage("금액을 확인해주세요 :(");
     }
+
+    @Test
+    @DisplayName("Money에 0원 이하를 뺄 경우 예외를 던진다 ")
+    void validateMinusUnderZero() {
+
+        Money moneyOne = Money.wons(1000);
+        Money moneyTwo = Money.wons(2000);
+
+
+        moneyOne = moneyOne.minus(moneyTwo);
+
+        Money finalMoneyOne = moneyOne;
+        assertThatIllegalArgumentException()
+                .isThrownBy(() ->  finalMoneyOne.minus(moneyTwo))
+                .withMessage("0원 이하를 뺼수 없어요 :(");
+
+    }
+
+    @Test
+    @DisplayName("Money에 0원 이하를 뺄 경우 예외를 던진다 - 피연산 대상")
+    void validateMinusUnderZero_() {
+
+        Money moneyOne = Money.wons(2000);
+        Money moneyTwo = Money.wons(1000);
+
+        moneyTwo = moneyTwo.minus(moneyOne);
+
+        Money finalMoneyTwo = moneyTwo;
+        assertThatIllegalArgumentException()
+                .isThrownBy(() ->  moneyOne.minus(finalMoneyTwo))
+                .withMessage("0원 이하를 뺼수 없어요 :(");
+
+    }
+
+
 }

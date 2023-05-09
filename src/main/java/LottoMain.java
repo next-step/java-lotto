@@ -1,4 +1,12 @@
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.Money;
+import lotto.domain.Statistics;
+import lotto.domain.WinnerLotto;
+import lotto.model.request.ReqAutoLotto;
+import lotto.model.request.ReqManualLotto;
+import lotto.service.LottoMachine;
+import lotto.service.gernerator.AutoLottoNumbersGenerator;
+import lotto.service.gernerator.ManualLottoNumbersGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -8,15 +16,18 @@ public class LottoMain {
 
     public static void main(String[] args) {
         Money money = InputView.inputPrice();
-        OutputView.printLottoQuantity(money, Lotto.getLottoFee());
 
-        List<Lotto> lottoList = LottoMachine.issueAutoForMoney(money);
-        OutputView.printLottoList(lottoList);
+        Lotto lotto = LottoMachine.issueLotto(new AutoLottoNumbersGenerator(), new ReqAutoLotto(money));
+        OutputView.printLottoQuantity(lotto);
+        OutputView.printLottoList(lotto);
 
-        WinnerLotto winnerLotto = InputView.inputWinningNumbers();
-        Statistics statistics = new Statistics(winnerLotto, lottoList);
+        List<String> winnerLottoNumber = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber(winnerLottoNumber);
+        WinnerLotto winnerLotto = LottoMachine.issueWinnerLotto(new ManualLottoNumbersGenerator(), new ReqManualLotto(winnerLottoNumber), bonusNumber);
 
-        OutputView.printStatisticsResult(statistics, lottoList);
-        OutputView.printProfit(statistics, lottoList, money);
+        Statistics statistics = new Statistics(winnerLotto, lotto, money);
+
+        OutputView.printStatisticsResult(statistics);
+        OutputView.printProfit(statistics);
     }
 }

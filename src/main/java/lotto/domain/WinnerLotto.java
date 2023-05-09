@@ -1,38 +1,40 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class WinnerLotto {
+    private static final int FIRST_INDEX = 0;
+    private final LottoNumbers lottoNumbers;
+    private final LottoNumber bonusNumber;
 
-    private final LottoNumberGroup winnerLottoNumberGroup;
-
-    public WinnerLotto(LottoNumberGroup lottoNumberGroup) {
-        this.winnerLottoNumberGroup = lottoNumberGroup;
+    public WinnerLotto(LottoNumbers lottoNumbers, LottoNumber lottoNumber) {
+        validateSameNumber(lottoNumbers, lottoNumber);
+        this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = lottoNumber;
     }
 
-    public static WinnerLotto of(LottoNumberGroup lottoNumberGroup, List<Integer> winnerLottoNumberList) {
-        return new WinnerLotto(lottoNumberGroup.initializedManualLottoNumber(winnerLottoNumberList));
+    public List<Winners> findWinnerList(Lotto lotto) {
+
+        List<Integer> matchingBallList = lotto.countMatchingBall(this.lottoNumbers);
+        List<Boolean> bonusNumberMatchingList = lotto.bonusNumberMatchingList(this.bonusNumber);
+
+        return IntStream.range(FIRST_INDEX, matchingBallList.size())
+                .mapToObj(index -> {
+
+                    int matchingBall = matchingBallList.get(index);
+                    boolean bonusBallMatch = bonusNumberMatchingList.get(index);
+
+                    return new Winners(matchingBall, bonusBallMatch);
+                }).collect(Collectors.toUnmodifiableList());
     }
 
-    public int winnerLottoSize() {
-        return winnerLottoNumberGroup.getLottoNumberGroupSize();
-    }
+    private void validateSameNumber(LottoNumbers lottoNumbers, LottoNumber lottoNumber) {
 
-    public int findMatchingCount(Lotto lotto) {
-        return lotto.countMatching(this.winnerLottoNumberGroup);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WinnerLotto that = (WinnerLotto) o;
-        return Objects.equals(winnerLottoNumberGroup, that.winnerLottoNumberGroup);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(winnerLottoNumberGroup);
+        boolean isSame = lottoNumbers.isMatchingLottoNumber(lottoNumber);
+        if (isSame) {
+            throw new IllegalArgumentException("보너스볼 번호가 당첨 로또에 이미 있는 번호입니다 :(");
+        }
     }
 }

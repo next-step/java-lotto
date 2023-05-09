@@ -1,38 +1,45 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Money;
 import lotto.domain.Prize;
 import lotto.domain.Statistics;
 
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
 
     private static final double PROFIT_PRINCIPAL_CONDITION = 1.0;
 
-    public static void printLottoQuantity(Money money, Money lottoFee) {
-        System.out.println((int) money.division(lottoFee) + "개를 구매했습니다.");
+    public static void printLottoQuantity(Lotto lotto) {
+        System.out.println(lotto.getLottoNumbersSize() + "개를 구매했습니다.");
     }
 
-    public static void printLottoList(List<Lotto> lottoList) {
-        lottoList.forEach(System.out::println);
+    public static void printLottoList(Lotto lotto) {
+        lotto.showLottoNumbers();
     }
 
-    public static void printStatisticsResult(Statistics statistics, List<Lotto> lottoList) {
+    public static void printStatisticsResult(Statistics statistics) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("===============");
-        printStatistics(statistics.statisticsWinner());
+        printStatistics(statistics);
     }
 
-    private static void printStatistics(Map<Prize, Long> statisticsMap) {
-        statisticsMap.forEach((prize, result) -> System.out.println(prize.getMatchingCount() + "개 일치 (" + prize.getPrizeMoney() + "원)- " + result + "개"));
+    private static void printStatistics(Statistics statistics) {
+
+        List<Prize> prizeList = Prize.extractDisplayPrize();
+
+        prizeList.forEach(prize -> {
+            String prompt = prize.getDisplayPrompt()
+                    + "-"
+                    + statistics.getWinnersMatchingCount(prize)
+                    + "개";
+            System.out.println(prompt);
+        });
     }
 
-    public static void printProfit(Statistics statistics, List<Lotto> lottoList, Money money) {
-        double profit = statistics.getProfit(money);
+    public static void printProfit(Statistics statistics) {
+        double profit = statistics.provideProfit();
 
         String profitFormat = String.format("%.2f", profit);
 
