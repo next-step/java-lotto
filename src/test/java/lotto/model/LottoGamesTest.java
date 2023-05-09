@@ -72,7 +72,7 @@ class LottoGamesTest {
         games.addLotto(new Lotto(Set.of(19, 29, 30, 1, 41, 32)));
         games.addLotto(new Lotto(Set.of(19, 36, 7, 5, 23, 4)));
         games.addLotto(new Lotto(Set.of(19, 28, 30, 12, 2, 45)));
-        games.setBonusNumber(7);
+        games.setBonusNumber(7) ;
         return games;
     }
 
