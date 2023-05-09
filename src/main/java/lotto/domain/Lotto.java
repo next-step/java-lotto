@@ -9,6 +9,10 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
+    Lotto(String lottoNumbers) {
+        this(LottoNumbersParser.parseToSet(lottoNumbers));
+    }
+
     public Lotto(Set<LottoNumber> lottoNumbers) {
         LottoValidator.validLottoNumbers(lottoNumbers);
         this.numbers = setToSortedList(lottoNumbers);
