@@ -10,6 +10,7 @@ public class WinnerLotto {
     private final LottoNumber bonusNumber;
 
     public WinnerLotto(LottoNumbers lottoNumbers, LottoNumber lottoNumber) {
+        validateSameNumber(lottoNumbers, lottoNumber);
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = lottoNumber;
     }
@@ -27,5 +28,13 @@ public class WinnerLotto {
 
                     return new Winners(matchingBall, bonusBallMatch);
                 }).collect(Collectors.toUnmodifiableList());
+    }
+
+    private void validateSameNumber(LottoNumbers lottoNumbers, LottoNumber lottoNumber) {
+
+        boolean isSame = lottoNumbers.isMatchingLottoNumber(lottoNumber);
+        if (isSame) {
+            throw new IllegalArgumentException("보너스볼 번호가 당첨 로또에 이미 있는 번호입니다 :(");
+        }
     }
 }

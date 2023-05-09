@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class WinnerLottoTest {
 
@@ -41,5 +42,16 @@ class WinnerLottoTest {
         WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
 
         assertThat(winnerLotto.findWinnerList(lotto).get(0).providePrize()).isEqualTo(Prize.SECOND_PLACE);
+    }
+
+    @Test
+    @DisplayName("보너스볼이 담청번호에 존재한다면 예외를 던진다.")
+    void throwExceptionExistBonusBallIntoWinnerNumber() {
+        List<String> winnerLottoNumber = List.of("1,2,3,4,5,10");
+        LottoNumbers winnerLottoNumbers = manualLottoNumbersGenerator.generateLottoNumbers(new ReqManualLotto(winnerLottoNumber));
+        LottoNumber bonusNumber = LottoNumber.provideLottoNumber(10);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinnerLotto(winnerLottoNumbers,bonusNumber))
+                .withMessage("보너스볼 번호가 당첨 로또에 이미 있는 번호입니다 :(");
     }
 }

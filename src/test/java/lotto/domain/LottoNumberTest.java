@@ -40,7 +40,7 @@ class LottoNumberTest {
     void isSameLottoNumber() {
         LottoNumber lottoNumber = LottoNumber.provideLottoNumber(4);
 
-        assertThat(lottoNumber.isSameLottoNumber(new LottoNumber(4))).isTrue();
+        assertThat(lottoNumber.equals(new LottoNumber(4))).isTrue();
     }
 
     @ParameterizedTest
