@@ -8,9 +8,6 @@ public class OutputView {
     public OutputView(double number) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         this.result = decimalFormat.format(number);
-    }
-
-    public void print() {
         System.out.println(result);
     }
 

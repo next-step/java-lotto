@@ -5,46 +5,30 @@ public class Calculator {
     private final Operator operator;
     private final Operand operand2;
 
-    public Calculator() {
-        this(0.0, "+",0.0);
-    }
-
     public Calculator(Double operand1, String operator, Double operand2) {
-        this.operand1 = new Operand(operand1);
-        this.operator = new Operator(operator);
-        this.operand2 = new Operand(operand2);
+        this(new Operand(operand1), new Operator(operator), new Operand(operand2));
     }
 
-    public Double calculate() {
+    public Calculator(Operand operand1, Operator operator, Operand operand2) {
+        this.operand1 = operand1;
+        this.operator = operator;
+        this.operand2 = operand2;
+    }
+
+    public static Operand calculate(Operand operand1, Operator operator, Operand operand2) {
+        Double result = 0.0;
         if ("+".equals(operator.getOperator())) {
-            return add();
+            result = OperatorType.PLUS.execute(operand1, operand2);
         }
         if ("-".equals(operator.getOperator())) {
-            return subtract();
+            result = OperatorType.MINUS.execute(operand1, operand2);
         }
         if ("*".equals(operator.getOperator())) {
-            return multiple();
+            result = OperatorType.MULTIPLE.execute(operand1, operand2);
         }
         if ("/".equals(operator.getOperator())) {
-            return divide();
+            result = OperatorType.DIVIDE.execute(operand1, operand2);
         }
-        return 0.0;
+        return new Operand(result);
     }
-
-    private Double add() {
-        return operand1.getOperand() + operand2.getOperand();
-    }
-
-    private Double subtract() {
-        return operand1.getOperand() - operand2.getOperand();
-    }
-
-    private Double multiple() {
-        return operand1.getOperand() * operand2.getOperand();
-    }
-
-    private Double divide() {
-        return operand1.getOperand() / operand2.getOperand();
-    }
-
 }

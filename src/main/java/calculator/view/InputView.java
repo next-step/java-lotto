@@ -3,46 +3,53 @@ package calculator.view;
 import calculator.domain.Operand;
 import calculator.domain.Operator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private final static String SEPARATOR = " ";
-    private final String formula;
-    private final List<Operand> operands = new ArrayList<>();
-    private final List<Operator> operators = new ArrayList<>();
+    private String formula;
+
+    public InputView() {
+        Scanner scanner = new Scanner(System.in);
+        this.formula = scanner.nextLine();
+    }
 
     public InputView(String formula) {
+        this.formula = formula;
+    }
+
+    public List<Operand> getOperands() {
         if (formula == null || formula.isBlank()) {
             throw new IllegalArgumentException("null 또는 빈 공백 문자를 전달할 수 없습니다.");
         }
 
-        Arrays.stream(formula.split(SEPARATOR))
-                .forEach(s -> {
-                    if (isOperand(s)) {
-                        operands.add(new Operand(Double.valueOf(s)));
-                    } else {
-                        operators.add(new Operator(s));
-                    }
-                });
-        this.formula = formula;
+        return getOperands(formula.split(SEPARATOR));
     }
 
-    private boolean isOperand(String operand) {
-        try {
-            Double.valueOf(operand);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public List<Operand> getOperands() {
-        return operands;
+    public List<Operand> getOperands(String[] splited) {
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(splited.length)
+                .filter(i -> i % 2 == 0)
+                .mapToObj(i -> new Operand(splited[i]))
+                .collect(Collectors.toList());
     }
 
     public List<Operator> getOperators() {
-        return operators;
+        if (formula == null || formula.isBlank()) {
+            throw new IllegalArgumentException("null 또는 빈 공백 문자를 전달할 수 없습니다.");
+        }
+
+        return getOperators(formula.split(SEPARATOR));
+    }
+
+    public List<Operator> getOperators(String[] splited) {
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(splited.length)
+                .filter(i -> i % 2 == 1)
+                .mapToObj(i -> new Operator(splited[i]))
+                .collect(Collectors.toList());
     }
 }

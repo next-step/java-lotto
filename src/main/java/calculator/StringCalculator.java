@@ -10,26 +10,26 @@ import java.util.List;
 
 public class StringCalculator {
     public static void main(String[] args) {
-        InputView inputView = new InputView("2 + 3 * 4 / 2");
+        InputView inputView = new InputView();
         List<Operand> operands = inputView.getOperands();
         List<Operator> operators = inputView.getOperators();
 
         Double result = calculate(operands, operators);
 
         OutputView outputView = new OutputView(result);
-        outputView.print();
     }
 
     public static Double calculate(List<Operand> operands, List<Operator> operators) {
-        Double result;
+        Operand result;
 
-
-        result = operands.get(0).getOperand();
-        for (int i = 1; i < operands.size(); i++){
-            Calculator calculator = new Calculator(result, operators.get(i-1).getOperator(), operands.get(i).getOperand());
-            result = calculator.calculate();
+        result = operands.get(0);
+        for (int i = 1; i < operands.size(); i++) {
+            result = Calculator.calculate(
+                    result,
+                    operators.get(i - 1),
+                    operands.get(i)
+            );
         }
-
-        return result;
+        return result.getOperand();
     }
 }

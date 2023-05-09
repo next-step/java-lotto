@@ -12,8 +12,35 @@ public class Operand {
         this.operand = operand;
     }
 
+    public Operand(String operand) {
+        this(parse(operand));
+    }
+    private static Double parse(String operand) {
+        try {
+            return Double.valueOf(operand);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("operand에 숫자 포맷이 아닌 값이 입력되었습니다. input : " + operand);
+        }
+    }
+
     public Double getOperand() {
         return operand;
+    }
+
+    public Double plus (Operand value) {
+        return operand + value.operand;
+    }
+
+    public Double minus (Operand value) {
+        return operand - value.operand;
+    }
+
+    public Double multiple (Operand value) {
+        return operand * value.operand;
+    }
+
+    public Double divide (Operand value) {
+        return operand / value.operand;
     }
 
     @Override
