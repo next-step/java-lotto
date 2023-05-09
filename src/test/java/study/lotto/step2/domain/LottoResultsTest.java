@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.SoftAssertions.*;
 import static study.lotto.step2.domain.LottoResult.*;
 
 
@@ -76,7 +77,9 @@ class LottoResultsTest {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 
         // when, then
-        assertThat(lotto.contains(LottoNumber.of(1))).isTrue();
-        assertThat(lotto.contains(LottoNumber.of(7))).isFalse();
+        assertSoftly(softly -> {
+            softly.assertThat(lotto.contains(LottoNumber.of(1))).isTrue();
+            softly.assertThat(lotto.contains(LottoNumber.of(7))).isFalse();
+        });
     }
 }

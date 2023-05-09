@@ -48,7 +48,9 @@
 - LottoNumber 캐싱 방식 변경: `inner class` → `Map`
 - 로또 결과 확인 시, 상금이 없는 경우는 `NOT_WIN`로 일원화
   > `MATCH_ONE_NUMBER`, `MATCH_TWO_NUMBER` 삭제
-- `RandomLottoNumbersFactory` 내 매직넘버 삭제 
+- `RandomLottoNumbersFactory` 내 매직넘버 삭제
+- 하나의 단위 테스트 내 여러 `assert` 메소드가 있는 경우, `assertSoftly` 적용
+  > `LottoResultsTest`
 
 ## 기능 목록
 - [x] 보너스 번호 추가
