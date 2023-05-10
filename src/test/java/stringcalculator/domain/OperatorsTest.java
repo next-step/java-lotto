@@ -1,8 +1,8 @@
-package StringCalculator.domain;
+package stringcalculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import StringCalculator.constant.Operator;
+import stringcalculator.constant.Operator;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
