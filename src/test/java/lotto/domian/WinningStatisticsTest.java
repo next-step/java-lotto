@@ -1,6 +1,6 @@
 package lotto.domian;
 
-import lotto.domain.LottoGame;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningStatistics;
 import lotto.util.RewardTable;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,11 +31,11 @@ public class WinningStatisticsTest {
     @DisplayName("로또 정답 게임 통계를 응답한다.")
     @Test
     public void winningStatisticsTest_정답_게임수_통계_테스트() {
-        List<LottoGame> lottoGames = new LottoGameOnlyMake().init();
+        List<LottoTicket> lottoTickets = new LottoGameOnlyMake().init();
 
         WinningStatistics winningStatistics = new WinningStatistics(testNumberList, 7);
 
-        Map<RewardTable, Integer> resultLottoGame = winningStatistics.resultLottoGame(lottoGames);
+        Map<RewardTable, Integer> resultLottoGame = winningStatistics.resultLottoGame(lottoTickets);
 
         assertThat(resultLottoGame.get(RewardTable.FIFTH_RANK).equals(0));
         assertThat(resultLottoGame.get(RewardTable.FOURTH_RANK).equals(2));

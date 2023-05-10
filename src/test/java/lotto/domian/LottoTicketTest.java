@@ -1,6 +1,6 @@
 package lotto.domian;
 
-import lotto.domain.LottoGame;
+import lotto.domain.LottoTicket;
 import lotto.util.LottoUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoGameTest {
+public class LottoTicketTest {
 
     private List<Integer> testNumberList;
 
@@ -32,9 +32,9 @@ public class LottoGameTest {
     @DisplayName("LottoGame 객체 정상 생성 테스트")
     @Test
     public void lottoGame_객체_생성_테스트() {
-        LottoGame lotto = new LottoGame(LottoUtils.initLottoNumbers());
-        LottoGame lotto1 = new LottoGame(LottoUtils.initLottoNumbers());
-        LottoGame lotto2 = new LottoGame(LottoUtils.initLottoNumbers());
+        LottoTicket lotto = new LottoTicket(LottoUtils.initLottoNumbers());
+        LottoTicket lotto1 = new LottoTicket(LottoUtils.initLottoNumbers());
+        LottoTicket lotto2 = new LottoTicket(LottoUtils.initLottoNumbers());
 
         assertAll("LottoGame size == 6",
                 () -> assertEquals(lotto.getLottoNumber().size(), 6),
@@ -48,7 +48,7 @@ public class LottoGameTest {
     @CsvSource(value = {"3, 15, 17, 24, 25, 27:3", "3, 15, 17, 24, 25, 26:4", "3, 15, 17, 24, 31, 26:5", "3, 15, 17, 41, 31, 26:6"}, delimiterString = ":")
     public void lottoGame_정답_테스트(String resultNumList, String matchCount) {
 
-        LottoGame lotto = new LottoGame(testNumberList);
+        LottoTicket lotto = new LottoTicket(testNumberList);
 
         List<Integer> resultNumberList = LottoUtils.lottoResultNumberList(resultNumList);
 

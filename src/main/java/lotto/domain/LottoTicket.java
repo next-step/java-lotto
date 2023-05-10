@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGame {
+public class LottoTicket {
 
     private static final int LIST_MAX_SIZE = 6;
     private static final int BONUS_BALL_CHECK = 5;
 
     private List<Integer> lottoNumber;
 
-    public LottoGame(List<Integer> lottoNumberList) {
+    public LottoTicket(List<Integer> lottoNumberList) {
         createLottoGame(new ArrayList<>(lottoNumberList));
     }
 

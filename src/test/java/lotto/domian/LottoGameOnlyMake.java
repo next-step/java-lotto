@@ -1,13 +1,13 @@
 package lotto.domian;
 
-import lotto.domain.LottoGame;
+import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGameOnlyMake {
 
-    public List<LottoGame> init() {
+    public List<LottoTicket> init() {
 
         List<Integer> lottoNumList1 = new ArrayList<>();
         lottoNumList1.add(1);
@@ -17,7 +17,7 @@ public class LottoGameOnlyMake {
         lottoNumList1.add(45);
         lottoNumList1.add(6);
 
-        LottoGame lotto1 = new LottoGame(lottoNumList1);
+        LottoTicket lotto1 = new LottoTicket(lottoNumList1);
 
         List<Integer> lottoNumList2 = new ArrayList<>();
         lottoNumList2.add(1);
@@ -26,7 +26,7 @@ public class LottoGameOnlyMake {
         lottoNumList2.add(34);
         lottoNumList2.add(45);
         lottoNumList2.add(7);
-        LottoGame lotto2 = new LottoGame(lottoNumList2);
+        LottoTicket lotto2 = new LottoTicket(lottoNumList2);
 
         List<Integer> lottoNumList3 = new ArrayList<>();
         lottoNumList3.add(1);
@@ -35,7 +35,7 @@ public class LottoGameOnlyMake {
         lottoNumList3.add(34);
         lottoNumList3.add(41);
         lottoNumList3.add(7);
-        LottoGame lotto3 = new LottoGame(lottoNumList3);
+        LottoTicket lotto3 = new LottoTicket(lottoNumList3);
 
         List<Integer> lottoNumList4 = new ArrayList<>();
         lottoNumList4.add(1);
@@ -44,14 +44,14 @@ public class LottoGameOnlyMake {
         lottoNumList4.add(34);
         lottoNumList4.add(41);
         lottoNumList4.add(7);
-        LottoGame lotto4 = new LottoGame(lottoNumList4);
+        LottoTicket lotto4 = new LottoTicket(lottoNumList4);
 
-        List<LottoGame> lottoGames = new ArrayList<>();
-        lottoGames.add(lotto1);
-        lottoGames.add(lotto2);
-        lottoGames.add(lotto3);
-        lottoGames.add(lotto4);
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.add(lotto1);
+        lottoTickets.add(lotto2);
+        lottoTickets.add(lotto3);
+        lottoTickets.add(lotto4);
 
-        return lottoGames;
+        return lottoTickets;
     }
 }

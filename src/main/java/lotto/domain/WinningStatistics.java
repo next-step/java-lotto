@@ -21,11 +21,11 @@ public class WinningStatistics {
         this.lottoBonusNumber = lottoBonusNumber;
     }
 
-    public Map<RewardTable, Integer> resultLottoGame(List<LottoGame> lottoGames) {
+    public Map<RewardTable, Integer> resultLottoGame(List<LottoTicket> lottoTickets) {
 
-        for(LottoGame lottoGame : lottoGames) {
-            int matchCount = lottoGame.matchLottoNumberCount(this.lottoResultNumbers);
-            addWinningStatistics(matchCount, lottoGame.isBonusBall(matchCount, this.lottoBonusNumber));
+        for(LottoTicket lottoTicket : lottoTickets) {
+            int matchCount = lottoTicket.matchLottoNumberCount(this.lottoResultNumbers);
+            addWinningStatistics(matchCount, lottoTicket.isBonusBall(matchCount, this.lottoBonusNumber));
         }
 
         return this.resultGameStatistics;

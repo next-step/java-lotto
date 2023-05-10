@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoGame;
+import lotto.domain.LottoTicket;
 import lotto.util.RewardTable;
 
 import java.util.*;
@@ -17,9 +17,9 @@ public class ResultView {
         System.out.println(gameCount + RESULT_MESSAGE);
     }
 
-    public void showMyLottoGameList(List<LottoGame> lottoGames) {
+    public void showMyLottoGameList(List<LottoTicket> lottoTickets) {
 
-        for(LottoGame lotto : lottoGames) {
+        for(LottoTicket lotto : lottoTickets) {
             System.out.println(lotto.getLottoNumber().toString());
         }
     }

@@ -7,20 +7,20 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<LottoGame> lottoGames;
+    private List<LottoTicket> lottoTickets;
 
     public void buyLottoGames(int gameCount) {
-        List<LottoGame> lottoList = new ArrayList<>();
+        List<LottoTicket> lottoList = new ArrayList<>();
 
         for(int i = 0; i < gameCount; i ++) {
-            lottoList.add(new LottoGame(LottoUtils.initLottoNumbers()));
+            lottoList.add(new LottoTicket(LottoUtils.initLottoNumbers()));
         }
 
 
-        this.lottoGames = lottoList;
+        this.lottoTickets = lottoList;
     }
 
-    public List<LottoGame> getLottoGames() {
-        return this.lottoGames;
+    public List<LottoTicket> getLottoGames() {
+        return this.lottoTickets;
     }
 }
