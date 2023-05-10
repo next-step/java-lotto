@@ -15,7 +15,7 @@ public class WinnerLotto {
         this.bonusNumber = lottoNumber;
     }
 
-    public List<Winners> findWinnerList(Lotto lotto) {
+    public List<Prize> getPrizeList(Lotto lotto) {
 
         List<Integer> matchingBallList = lotto.countMatchingBall(this.lottoNumbers);
         List<Boolean> bonusNumberMatchingList = lotto.bonusNumberMatchingList(this.bonusNumber);
@@ -26,9 +26,10 @@ public class WinnerLotto {
                     int matchingBall = matchingBallList.get(index);
                     boolean bonusBallMatch = bonusNumberMatchingList.get(index);
 
-                    return new Winners(matchingBall, bonusBallMatch);
+                    return Prize.valueOf(matchingBall, bonusBallMatch);
                 }).collect(Collectors.toUnmodifiableList());
     }
+
 
     private void validateSameNumber(LottoNumbers lottoNumbers, LottoNumber lottoNumber) {
 
