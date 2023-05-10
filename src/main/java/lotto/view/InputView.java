@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -19,5 +21,21 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         int bonusBallNumber = scanner.nextInt();
         return bonusBallNumber;
+    }
+
+    public static int inputNumberOfManualLottos() {
+        Scanner scanner = new Scanner(System.in);
+        int numberOfManualLottos = scanner.nextInt();
+        return numberOfManualLottos;
+    }
+
+    public static List<String> inputManualLottos(int numberOfManualLottos) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> manualLottos = new ArrayList<>();
+        for(int i = 0; i < numberOfManualLottos; i++ ){
+            String manualLotto = scanner.nextLine();
+            manualLottos.add(manualLotto);
+        }
+        return manualLottos;
     }
 }

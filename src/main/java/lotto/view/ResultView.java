@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.lottocreator.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningCount;
@@ -13,8 +13,8 @@ public class ResultView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printNumbersOfLotto(int numberOfLotto) {
-        System.out.println(numberOfLotto + "개를 구매했습니다.");
+    public static void printNumbersOfLotto(int manualLottos, int autoLottos) {
+        System.out.println("수동으로 " + manualLottos + "개, 자동으로 " + autoLottos + "개를 구매했습니다.");
     }
 
     public static void printWinningNumber() {
@@ -57,6 +57,14 @@ public class ResultView {
 
     public static void printBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
+    public static void printNumberOfManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printManualLottosNumber() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
 }
