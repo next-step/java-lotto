@@ -26,7 +26,6 @@ public enum RewardTable {
                 .filter(rank -> rank.getRank(matchCount, matchBonus))
                 .findAny()
                 .orElse(RewardTable.MISS)
-                //.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 등수입니다"))
                 ;
     }
 
