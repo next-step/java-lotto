@@ -21,9 +21,9 @@ public class WinningStatisticsTest {
     @BeforeEach
     void setUp() {
         lotteriesByRank.put(Rank.FIRST, 0);
-        lotteriesByRank.put(Rank.SECOND, 1);
-        lotteriesByRank.put(Rank.THIRD, 2);
-        lotteriesByRank.put(Rank.FOURTH, 5);
+        lotteriesByRank.put(Rank.SECOND, 0);
+        lotteriesByRank.put(Rank.THIRD, 1);
+        lotteriesByRank.put(Rank.FOURTH, 3);
     }
 
     @Test
@@ -38,9 +38,9 @@ public class WinningStatisticsTest {
         WinningStatistics winningStatistics = new WinningStatistics(lotteriesByRank);
         assertAll(
                 () -> assertEquals(winningStatistics.getWinningNumbers(Rank.FIRST), 0, "1등"),
-                () -> assertEquals(winningStatistics.getWinningNumbers(Rank.SECOND), 1, "2등"),
-                () -> assertEquals(winningStatistics.getWinningNumbers(Rank.THIRD), 2, "3등"),
-                () -> assertEquals(winningStatistics.getWinningNumbers(Rank.FOURTH), 5, "4등")
+                () -> assertEquals(winningStatistics.getWinningNumbers(Rank.SECOND), 0, "2등"),
+                () -> assertEquals(winningStatistics.getWinningNumbers(Rank.THIRD), 1, "3등"),
+                () -> assertEquals(winningStatistics.getWinningNumbers(Rank.FOURTH), 3, "4등")
         );
     }
 
@@ -48,11 +48,11 @@ public class WinningStatisticsTest {
     @DisplayName("최종 로또 당첨 수령 금액을 반환한다.")
     void totalWinningPriceTest() {
         assertThat(new WinningStatistics(lotteriesByRank).getTotalWinningPrice())
-                .isEqualTo(1_625_000);
+                .isEqualTo(1_650_000);
     }
 
     @ParameterizedTest(name = "로또 구매 금액 대비 수령금액 을 1을 기준으로 반환한다.")
-    @CsvSource(value = {"1625:1.0"},delimiter = ':')
+    @CsvSource(value = {"1650:1.0"},delimiter = ':')
     void returnOnInvestmentTest(int lotteries, double expectedReturn) {
         assertThat(new WinningStatistics(lotteriesByRank).returnOnInvestment(lotteries))
                 .isEqualTo(expectedReturn);
