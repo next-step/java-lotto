@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +13,10 @@ public class LottoGenerator {
         Lottos lottos = new Lottos();
 
         for (int i = 0; i < size; i++) {
-            lottos.add(generateAutoLotto());
+            Lotto lotto = generateAutoLotto();
+            lotto.printNumbers();
+
+            lottos.add(lotto);
         }
 
         return lottos;
@@ -20,6 +24,6 @@ public class LottoGenerator {
 
     public static Lotto generateAutoLotto() {
         Collections.shuffle(NUMBERS);
-        return new Lotto(NUMBERS.subList(0, 6));
+        return new Lotto(new ArrayList<>(NUMBERS.subList(0, 6)));
     }
 }

@@ -11,12 +11,22 @@ public class LottoStatistics {
     private List<Integer> winningNumbers;
     private Map<Winnings, Integer> statistics = new HashMap<>();
 
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+
+
     public LottoStatistics(Lottos lottos, List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
 
         for (Lotto lotto : lottos.getLottos()) {
             Winnings winnings = Winnings.fromMatchCount(lotto.checkLotto(winningNumbers));
-            statistics.put(winnings, statistics.getOrDefault(winnings, 0) + 1);
+            statistics.put(winnings, statistics.getOrDefault(winnings, ZERO) + ONE);
+        }
+    }
+
+    public void printStatistics() {
+        for (Winnings value : Winnings.values()) {
+            System.out.println(value.matchCount + "개 일치 (" + value.prize + "원) - " + statistics.getOrDefault(value, ZERO));
         }
     }
 

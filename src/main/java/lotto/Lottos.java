@@ -13,11 +13,18 @@ public class Lottos {
         return lottos;
     }
 
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
+    }
+
     public long getLottoCount() {
         return lottos.size();
     }
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public void printLottos() {
+        lottos.forEach(
+                Lotto::printNumbers
+        );
     }
+
 }

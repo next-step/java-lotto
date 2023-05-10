@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Lotto {
     public static final BigDecimal PRICE = BigDecimal.valueOf(1000);
+    public static final int SIZE = 6;
 
     private List<Integer> numbers;
 
@@ -29,5 +30,9 @@ public class Lotto {
     private int getMatchCount(List<Integer> winningNumbers, int matchCount, int num) {
         if (winningNumbers.contains(num)) matchCount++;
         return matchCount;
+    }
+
+    public void printNumbers() {
+        System.out.println(numbers);
     }
 }
