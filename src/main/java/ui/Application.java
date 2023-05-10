@@ -13,13 +13,17 @@ public class Application {
         WinningResult winningResult = new WinningResult();
 
         inputView.saveAmount();
-        inputView.saveCount();
+        inputView.saveManualCount();
+        inputView.saveManualLottos();
+        inputView.saveAutoCount();
 
-        List<Lotto> lottos = LottoFactory.generateLottoNumbers(inputView.count);
+        List<Lotto> lottos = LottoFactory.generateLottoNumbers(inputView.autoCount);
 
         for (int i = 0; i < lottos.size(); i++) {
             System.out.println(lottos.get(i));
         }
+
+        lottos.addAll(inputView.manualLottos);
 
         inputView.saveWinningNumber();
         inputView.saveBonusNumber();
