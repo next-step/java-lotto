@@ -29,7 +29,7 @@ public class LotteryApplication {
         printBlank();
 
         WinningStatistics winningStatistics =
-                new WinningStatistics(lotteries.statisticsByRank(winningNumbers().getNumbers()));
+                new WinningStatistics(lotteries.statisticsByRank(winningNumbers()));
 
         printStatisticsResultBanner();
 

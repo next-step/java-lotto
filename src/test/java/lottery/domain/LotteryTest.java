@@ -12,14 +12,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lottery.domain.numbergenerator.RandomNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LotteryTest {
-
-    private static final RandomNumberGenerator RANDOM_NUMBER_GENERATOR =
-            new RandomNumberGenerator();
 
     private static final Set<LotteryNumber> LOTTERY_NUMBERS =
             new HashSet<>(Arrays.asList(new LotteryNumber(1),
@@ -71,17 +69,17 @@ public class LotteryTest {
     }
 
     @Test
-    @DisplayName("정렬된 숫자를 리턴한다.")
+    @DisplayName("객체 생성시 정렬된 숫자를 리턴한다.")
     void sortedNumbersTest() {
-        Lottery lotterySixNumbers = lotteryFactory("1,7,3,8,2,9");
-        assertThat(lotterySixNumbers.getSortedNumbers())
-                .containsExactly(
-                        new LotteryNumber(1),
-                        new LotteryNumber(2),
-                        new LotteryNumber(3),
-                        new LotteryNumber(7),
-                        new LotteryNumber(8),
-                        new LotteryNumber(9)
-                );
+        Lottery unsorted = lotteryFactory("1,7,3,8,2,9");
+        Lottery sorted = lotteryFactory("1,2,3,7,8,9");
+        assertThat(unsorted.equals(sorted)).isTrue();
+    }
+
+    @ParameterizedTest(name = "보너스 번호가 이미 로또에 포함되어있을경우 true 아닐경우 false 를 반환한다.")
+    @CsvSource(value = {"1:true","9:false"}, delimiter = ':')
+    void containsTest(int lottoNumber, boolean expected) {
+        assertThat(new Lottery(LOTTERY_NUMBERS).containsNumber(new LotteryNumber(lottoNumber)))
+                .isEqualTo(expected);
     }
 }

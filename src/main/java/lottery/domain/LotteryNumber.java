@@ -3,11 +3,12 @@ package lottery.domain;
 import static java.lang.String.valueOf;
 
 import java.util.Objects;
+import java.util.Set;
 
 public class LotteryNumber {
-    protected static final int MIN_LOTTERY_NUMBER = 1;
+    protected static final int MIN = 1;
 
-    protected static final int MAX_LOTTERY_NUMBER = 45;
+    protected static final int MAX = 45;
 
     private static final String OUT_OF_RANGE_NUMBER_MSG = "로또 번호는 1~45 의 정수만 입력 될 수 있습니다.";
 
@@ -20,9 +21,13 @@ public class LotteryNumber {
         this.lotteryNumber = lotteryNumber;
     }
 
+    public boolean containsNumber(Set<LotteryNumber> lotteryNumbers) {
+        return lotteryNumbers.contains(this);
+    }
+
     private boolean outOfRange(int lotteryNumber) {
-        return lotteryNumber < MIN_LOTTERY_NUMBER
-                || lotteryNumber > MAX_LOTTERY_NUMBER;
+        return lotteryNumber < MIN
+                || lotteryNumber > MAX;
     }
 
     @Override
