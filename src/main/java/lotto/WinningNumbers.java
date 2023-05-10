@@ -21,9 +21,7 @@ public class WinningNumbers {
   public int findHowManyMatches(Lotto lotto) {
     int matchesNumber = 0;
     for (Integer winningNumber : winningNumbers) {
-      if (lotto.has(winningNumber)) {
-        matchesNumber++;
-      }
+      matchesNumber = lotto.has(winningNumber) ? matchesNumber + 1 : matchesNumber;
     }
     return matchesNumber;
   }

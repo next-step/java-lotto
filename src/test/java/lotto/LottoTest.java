@@ -15,10 +15,13 @@ public class LottoTest {
   void 수익률을구하고_일치하는갯수를찾는다1() {
     Lottos lottos = new Lottos(
         Arrays.asList(
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            makeLotto1(), makeLotto1(), makeLotto1(), makeLotto1(), makeLotto1(),
-            makeLotto1(), makeLotto1(), makeLotto1(), makeLotto1(), makeLotto1(),
-            makeLotto1(), makeLotto1(), makeLotto1()));
+            makeLotto(1, 2, 3, 4, 5, 6), makeLotto_11_12_13_15_18_19(),
+            makeLotto_11_12_13_15_18_19(), makeLotto_11_12_13_15_18_19(),
+            makeLotto_11_12_13_15_18_19(), makeLotto_11_12_13_15_18_19(),
+            makeLotto_11_12_13_15_18_19(), makeLotto_11_12_13_15_18_19(),
+            makeLotto_11_12_13_15_18_19(), makeLotto_11_12_13_15_18_19(),
+            makeLotto_11_12_13_15_18_19(), makeLotto_11_12_13_15_18_19(),
+            makeLotto_11_12_13_15_18_19(), makeLotto_11_12_13_15_18_19()));
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 44, 43, 42");
     MatchesStatus matchesStatus = lottos.findWinner(winningNumbers);
     assertAll(
@@ -30,18 +33,14 @@ public class LottoTest {
     );
   }
 
-  private Lotto makeLotto1() {
-    return new Lotto(Arrays.asList(11, 12, 13, 15, 18, 19));
-  }
-
   @Test
   void 수익률을구하고_일치하는갯수를찾는다2() {
     Lottos lottos = new Lottos(Arrays.asList(
-        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-        new Lotto(Arrays.asList(1, 2, 3, 5, 8, 9)),
-        new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
-        new Lotto(Arrays.asList(1, 2, 15, 16, 11, 12)),
-        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
+        makeLotto(1, 2, 3, 4, 5, 6),
+        makeLotto(1, 2, 3, 5, 8, 9),
+        makeLotto(1, 2, 3, 10, 11, 12),
+        makeLotto(1, 2, 15, 16, 11, 12),
+        makeLotto(1, 2, 3, 4, 5, 6)
     ));
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
     MatchesStatus matchesStatus = lottos.findWinner(winningNumbers);
@@ -54,9 +53,17 @@ public class LottoTest {
     );
   }
 
+  private Lotto makeLotto_11_12_13_15_18_19() {
+    return makeLotto(11, 12, 13, 15, 18, 19);
+  }
+
+  private Lotto makeLotto(int value1, int value2, int value3, int value4, int value5, int value6) {
+    return new Lotto(Arrays.asList(value1, value2, value3, value4, value5, value6));
+  }
+
   @Test
   void 당첨번호를입력하면일치하는갯수를찾는다() {
-    Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto lotto1 = makeLotto(1, 2, 3, 4, 5, 6);
 
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 44, 33, 22");
     assertThat(winningNumbers.findHowManyMatches(lotto1)).isEqualTo(3);
@@ -88,8 +95,10 @@ public class LottoTest {
 
     Lotto lottoNumber = new Lotto(lottoNumberGenerator.create());
 
-    assertThat(lottoNumber.getLotto()).hasSize(6);
-    assertThat(lottoNumber.getLotto()).allMatch(number -> number < 46 && number > 0);
+    assertAll(
+        () -> assertThat(lottoNumber.getLotto()).hasSize(6),
+        () -> assertThat(lottoNumber.getLotto()).allMatch(number -> number < 46 && number > 0)
+    );
   }
 
   @Test

@@ -19,7 +19,7 @@ public class Lottos {
   }
 
   public List<Lotto> buy(int purchaseAmount) {
-    valid(purchaseAmount);
+    validMinAmount(purchaseAmount);
     int purchaseNumber = purchaseAmount / LOTTO_PRICE;
 
     LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
@@ -39,7 +39,7 @@ public class Lottos {
     return matchesStatus;
   }
 
-  private void valid(int purchaseAmount) {
+  private void validMinAmount(int purchaseAmount) {
     if (purchaseAmount < 1000) {
       throw new IllegalArgumentException();
     }

@@ -72,7 +72,7 @@ public enum Matches {
 
   public static Matches getMatches(int numberOfMatches) {
     for (Matches matches: Matches.values()) {
-      if(matches.isMatches(numberOfMatches)) {
+      if (matches.isMatches(numberOfMatches)) {
         return matches;
       }
     }
