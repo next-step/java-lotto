@@ -26,7 +26,7 @@ class WinnerLottoTest {
         LottoNumber bonusNumber = LottoNumber.provideLottoNumber(11);
         WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
 
-        assertThat(winnerLotto.findWinnerList(lotto).get(0).providePrize()).isEqualTo(Prize.THIRD_PLACE);
+        assertThat(winnerLotto.getPrizeList(lotto).get(0)).isEqualTo(Prize.THIRD_PLACE);
     }
 
     @Test
@@ -41,7 +41,7 @@ class WinnerLottoTest {
         LottoNumber bonusNumber = LottoNumber.provideLottoNumber(10);
         WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumbers, bonusNumber);
 
-        assertThat(winnerLotto.findWinnerList(lotto).get(0).providePrize()).isEqualTo(Prize.SECOND_PLACE);
+        assertThat(winnerLotto.getPrizeList(lotto).get(0)).isEqualTo(Prize.SECOND_PLACE);
     }
 
     @Test
@@ -51,7 +51,7 @@ class WinnerLottoTest {
         LottoNumbers winnerLottoNumbers = manualLottoNumbersGenerator.generateLottoNumbers(new ReqManualLotto(winnerLottoNumber));
         LottoNumber bonusNumber = LottoNumber.provideLottoNumber(10);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new WinnerLotto(winnerLottoNumbers,bonusNumber))
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinnerLotto(winnerLottoNumbers, bonusNumber))
                 .withMessage("보너스볼 번호가 당첨 로또에 이미 있는 번호입니다 :(");
     }
 }
