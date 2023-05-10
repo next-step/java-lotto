@@ -35,7 +35,7 @@ public class LottoController {
         List<Integer> lottoResultNumbers = LottoUtils.lottoResultNumberList(inputView.setLottoResultNumber());
 
         int lottoBonusNumber = inputView.setLottoBonusNumber();
-        while(LottoUtils.isResultNumContainBonusNum(lottoResultNumbers, lottoBonusNumber)){
+        while(lottoResultNumbers.contains(lottoBonusNumber)){
             lottoBonusNumber = inputView.setLottoBonusNumber();
         }
 

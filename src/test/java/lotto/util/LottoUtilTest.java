@@ -58,12 +58,4 @@ public class LottoUtilTest {
         assertThat(LottoUtils.calRateOfReturn(totalPrice, buyPrice)).isEqualTo(rate);
     }
 
-    @DisplayName("보너스 번호 전달 시 기존 로또번호와 중복인지 확인한다.")
-    @ParameterizedTest
-    @CsvSource(value = {"13:true", "45:false"}, delimiterString = ":")
-    public void lottoUtil_보너스번호_기존로또번호_중복_테스트(int bonusNum, boolean isBonusMatch) {
-        List<Integer> numberList = LottoUtils.lottoResultNumberList("1, 3, 13, 15, 26, 33");
-
-        assertThat(LottoUtils.isResultNumContainBonusNum(numberList, bonusNum)).isEqualTo(isBonusMatch);
-    }
 }
