@@ -1,7 +1,7 @@
 package lottery.domain;
 
 import static java.util.Arrays.stream;
-import static lottery.domain.LotteryPurchasePrice.LOTTERY_PRICE;
+import static lottery.domain.LotteryPurchasedPrice.LOTTERY_PRICE;
 
 import java.util.Map;
 import lottery.domain.constant.Rank;

@@ -1,7 +1,7 @@
 package lottery.view;
 
 import java.util.Scanner;
-import lottery.domain.LotteryPurchasePrice;
+import lottery.domain.PurchasedLottery;
 
 public class PriceInputView {
 
@@ -9,12 +9,12 @@ public class PriceInputView {
 
     private static final String LOTTERIES_NUMBER_GUID = "개를 구매했습니다.";
 
-    public static LotteryPurchasePrice buyLotteries() {
+    public static PurchasedLottery buyLotteries() {
         printSource(PRICE_INPUT_MSG);
-        LotteryPurchasePrice lotteryPurchasePrice
-                = new LotteryPurchasePrice(new Scanner(System.in).nextInt());
-        printSource(lotteryPurchasePrice.numberOfPlays()+LOTTERIES_NUMBER_GUID);
-        return lotteryPurchasePrice;
+        PurchasedLottery purchasedLottery
+                = new PurchasedLottery(new Scanner(System.in).nextInt());
+        printSource(purchasedLottery.numberOfPlays()+LOTTERIES_NUMBER_GUID);
+        return purchasedLottery;
     }
 
     private static void printSource(String source) {
