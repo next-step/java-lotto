@@ -2,6 +2,7 @@ package lotto.domian;
 
 import lotto.domain.LottoGame;
 import lotto.domain.WinningStatistics;
+import lotto.util.RewardTable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,13 +33,14 @@ public class WinningStatisticsTest {
     public void winningStatisticsTest_정답_게임수_통계_테스트() {
         List<LottoGame> lottoGames = new LottoGameOnlyMake().init();
 
-//        WinningStatistics winningStatistics = new WinningStatistics(testNumberList);
-//
-//        Map<Integer, Integer> resultLottoGame = winningStatistics.resultLottoGame(lottoGames);
-//
-//        assertThat(resultLottoGame.get(3).equals(0));
-//        assertThat(resultLottoGame.get(4).equals(2));
-//        assertThat(resultLottoGame.get(5).equals(1));
-//        assertThat(resultLottoGame.get(6).equals(1));
+        WinningStatistics winningStatistics = new WinningStatistics(testNumberList, 7);
+
+        Map<RewardTable, Integer> resultLottoGame = winningStatistics.resultLottoGame(lottoGames);
+
+        assertThat(resultLottoGame.get(RewardTable.FIFTH_RANK).equals(0));
+        assertThat(resultLottoGame.get(RewardTable.FOURTH_RANK).equals(2));
+        assertThat(resultLottoGame.get(RewardTable.THIRD_RANK).equals(0));
+        assertThat(resultLottoGame.get(RewardTable.SECOND_RANK).equals(1));
+        assertThat(resultLottoGame.get(RewardTable.FIRST_RANK).equals(1));
     }
 }
