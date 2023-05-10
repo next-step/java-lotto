@@ -1,22 +1,26 @@
 package controller;
 
+import model.LotteryStatics;
 import model.Lotto;
-import model.LottosInfoFcade;
-import model.LottosStatiscsFcade;
+import model.LottoStore;
 import view.input.InputView;
+import view.result.ResultView;
+
+import java.util.List;
 
 public class LottoController {
 
     public static void LottoAutoStart() {
         int buyAmount = InputView.inputBuyAmount();
 
-        LottosInfoFcade lottosInfoFcade = new LottosInfoFcade(buyAmount);
-        lottosInfoFcade.view();
+        LottoStore lottoStore = new LottoStore();
+        List<Lotto> lottos = lottoStore.Buy(buyAmount);
+        ResultView.printLottoInfo(lottos, lottoStore.getCount());
 
         Lotto winNum = new Lotto(InputView.inputWinnerLottoNum());
 
-        LottosStatiscsFcade lottosStatiscsFcade = new LottosStatiscsFcade(lottosInfoFcade.getLottos(), winNum, buyAmount);
-        lottosStatiscsFcade.view();
+        LotteryStatics lotteryStatics = new LotteryStatics(lottos, winNum.getLotto());
+        ResultView.printStatics(lotteryStatics);
 
     }
 }

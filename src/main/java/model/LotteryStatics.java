@@ -1,15 +1,21 @@
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LotteryStatics {
     private Map<Rank, Integer> lotteryStatics = new HashMap<>();
+    double gross;
 
-    public LotteryStatics(WinRule winRule, List<Lotto> lottos, List<Integer> winNum) {
+    public LotteryStatics(List<Lotto> lottos, List<Integer> winNum) {
         for (Lotto lotto : lottos) {
             int countOfMatch = getEqualCount(lotto.getLotto(), winNum);
             this.lotteryStatics.merge(Rank.valueOf(countOfMatch), 1, Integer::sum);
         }
+
+        this.gross = Math.round((double) getTotalPrice() / lottos.size() * 100.0) / 100.0;
     }
 
     public Map<Rank, Integer> getLotteryStatics() {
@@ -24,6 +30,10 @@ public class LotteryStatics {
             sum += rank.getWinningMoney() * count;
         }
         return sum;
+    }
+
+    public double getGross() {
+        return this.gross;
     }
 
     private int getEqualCount(List<Integer> inputNums, List<Integer> winLotto) {

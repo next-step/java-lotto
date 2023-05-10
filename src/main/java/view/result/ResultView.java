@@ -1,5 +1,6 @@
 package view.result;
 
+import model.LotteryStatics;
 import model.Lotto;
 import model.Rank;
 
@@ -29,7 +30,12 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    public static void printWinnerMessage(Map<Rank, Integer> winCount) {
+    public static void printStatics(LotteryStatics lotteryStatics) {
+        printWinnerMessage(lotteryStatics.getLotteryStatics());
+        printTotalGross(lotteryStatics.getGross());
+    }
+
+    private static void printWinnerMessage(Map<Rank, Integer> winCount) {
         Rank[] ranks = Rank.values();
         Arrays.sort(ranks, Collections.reverseOrder()); // 역순으로 정렬
 
@@ -47,7 +53,7 @@ public class ResultView {
     }
 
 
-    public static void printTotalGross(double gross) {
+    private static void printTotalGross(double gross) {
         DecimalFormat df = new DecimalFormat("#.##");
         String message = "총 수익률은 " + df.format(gross) + "입니다. (기준이 1이기 때문에 결과적으로 ";
 

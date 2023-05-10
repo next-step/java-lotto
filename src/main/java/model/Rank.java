@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
@@ -24,11 +26,9 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        for (Rank rank : values()) {
-            if (rank.getCountOfMatch() == countOfMatch) {
-                return rank;
-            }
-        }
-        return Rank.MISS;
+        return Arrays.stream(values())
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+                .findFirst()
+                .orElse(Rank.MISS);
     }
 }

@@ -1,11 +1,12 @@
 package view.input;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
-    static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static int inputBuyAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -17,15 +18,9 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String[] nums = scanner.nextLine().split(",");
-
-        List<Integer> numArrayList = new ArrayList<>();
-
-        for (String num : nums) {
-            numArrayList.add(Integer.parseInt(num.trim()));
-        }
-
-        return numArrayList;
-
+        return Stream.of(nums)
+                .map(number -> Integer.parseInt(number.trim()))
+                .collect(Collectors.toList());
     }
 
     public static int inputBonusBall() {
