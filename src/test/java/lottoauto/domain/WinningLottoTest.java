@@ -13,10 +13,10 @@ public class WinningLottoTest {
     @Test
     void 당첨번호_구매번호_비교_테스트() {
         Lottos lottos = LottoFixture.lottosFixture(3, 4, 6, 11, 22, 44);
-        List<Integer> winningNumber = LottoFixture.intListFixture(1, 2, 3, 4, 6, 12);
+        List<Integer> winningNumber = LottoFixture.intListFixture();
 
-        WinningLotto winningLotto = WinningLotto.of(lottos, winningNumber);
-        LottoResult lottoResult = winningLotto.compareWinningLottoNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumber);
+        LottoResult lottoResult = winningLotto.compareWinningLottoNumber(lottos);
 
         Assertions.assertThat(lottoResult.getMatchCount().get(0)).isEqualTo(3);
     }

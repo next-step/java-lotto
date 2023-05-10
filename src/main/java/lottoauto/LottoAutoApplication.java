@@ -23,11 +23,10 @@ public class LottoAutoApplication {
 
         List<Integer> winningNumbers = inputView.inputLastWinningNumber();
 
-        WinningLotto winningLotto = WinningLotto.of(lottos, winningNumbers);
-        LottoResult lottoResult = winningLotto.compareWinningLottoNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+        LottoResult lottoResult = winningLotto.compareWinningLottoNumber(lottos);
 
         resultView.printStatistics(lottoResult);
-        resultView.printRate(lottoResult.getRate(amount));
 
     }
 }

@@ -11,8 +11,7 @@ public class WinningRewardTest {
         int match = 3;
         WinningReward rewardByMatches = WinningReward.findRewardByMatches(match);
 
-        Assertions.assertThat(rewardByMatches.getReward()).isEqualTo(WinningReward.MATCH_3.getReward());
-        Assertions.assertThat(rewardByMatches.getMatch()).isEqualTo(WinningReward.MATCH_3.getMatch());
+        Assertions.assertThat(rewardByMatches).isEqualTo(WinningReward.MATCH_3);
     }
 
 }

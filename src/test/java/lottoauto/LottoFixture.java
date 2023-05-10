@@ -21,7 +21,7 @@ public class LottoFixture {
         return new Lottos(new ArrayList<>(Arrays.asList(lottoFixture(numbers))));
     }
 
-    public static List<Integer> intListFixture(int... numbers) {
-        return Arrays.stream(numbers).boxed().collect(Collectors.toList());
+    public static List<Integer> intListFixture() {
+        return List.of(1, 2, 3, 4, 5);
     }
 }

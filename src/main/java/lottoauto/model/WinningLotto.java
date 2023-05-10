@@ -3,24 +3,19 @@ package lottoauto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lottoauto.model.Constant.LottoMatch;
 
 public class WinningLotto {
 
-    private final Lottos lottos;
-
     private final List<Integer> winningLotto;
 
-    public WinningLotto(Lottos lottos, List<Integer> winningLotto) {
+    public WinningLotto(List<Integer> winningLotto) {
         winningNumberValidation(winningLotto);
-        this.lottos = lottos;
         this.winningLotto = winningLotto;
     }
 
-    public static WinningLotto of(Lottos lottos, List<Integer> winningNumbers) {
-        return new WinningLotto(lottos, winningNumbers);
-    }
 
-    public LottoResult compareWinningLottoNumber() {
+    public LottoResult compareWinningLottoNumber(Lottos lottos) {
         List<Integer> matchCount = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
             List<Integer> numbers = lotto.getNumbers();
@@ -30,8 +25,8 @@ public class WinningLotto {
 
         return new LottoResult(
                 matchCount.stream()
-                        .filter(x -> x > 2 && x < 7)
-                        .collect(Collectors.toList())
+                        .filter(x -> x >= LottoMatch.MINIMUM_MATCH_COUNT && x <= LottoMatch.MAXIMUM_MATCH_COUNT)
+                        .collect(Collectors.toList()), (lottos.getSize() * Constant.ONE_LOTTO_AMOUNT)
         );
     }
 
