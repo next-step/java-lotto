@@ -22,9 +22,12 @@ public class LottoController {
     public static void lotto() {
 
         int lottoBuyPrice = Integer.parseInt(inputView.setBuyLottoPrice());
+        int noAutoLottoCount = inputView.setNoAutoBuyLottoCount();
+        List<String> noAutoLottoNumbers = inputView.setNoAutoLottoNumbers(noAutoLottoCount);
+
         int lottoGameCount = LottoUtils.getLottoGameCount(lottoBuyPrice);
 
-        Lottos lottos = new Lottos(lottoGameCount);
+        Lottos lottos = new Lottos(lottoGameCount - noAutoLottoCount);
 
         resultView.showBuyLotto(lottoGameCount);
         resultView.showMyLottoGameList(lottos.getTickets());
