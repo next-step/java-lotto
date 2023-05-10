@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.lottocreator;
+
+import lotto.domain.LottoNo;
 
 import java.util.Arrays;
 import java.util.Collections;

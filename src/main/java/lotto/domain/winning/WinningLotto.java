@@ -1,7 +1,7 @@
 package lotto.domain.winning;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
+import lotto.domain.lottocreator.Lotto;
+import lotto.domain.lottocreator.LottoFactory;
 import lotto.domain.LottoNo;
 import lotto.domain.Lottos;
 

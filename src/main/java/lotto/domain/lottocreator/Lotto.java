@@ -1,9 +1,11 @@
-package lotto.domain;
+package lotto.domain.lottocreator;
+
+import lotto.domain.LottoNo;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoFactory.LOTTO_NUMBER;
+import static lotto.domain.lottocreator.LottoFactory.LOTTO_NUMBER;
 
 public class Lotto {
     private List<LottoNo> lottoNos;
