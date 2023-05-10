@@ -1,6 +1,5 @@
 package step2.domain.entity;
 
-import step2.domain.vo.LottoNumber;
 import step2.domain.vo.LottoPrize;
 
 import java.util.ArrayList;
@@ -22,35 +21,23 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public static int getLottoRankCount(LottoPrize prize, List<LottoPrize> lottoPrizes) {
-        return (int) lottoPrizes.stream()
-                .filter(lottoPrize -> lottoPrize.equals(prize))
-                .count();
-    }
-
-    public double getTotalRate(List<LottoPrize> lottoPrizes) {
-        double rate = (double) getTotalAmount(lottoPrizes) / getTotalMoney();
-        return Math.floor(rate * 100.0) / 100.0;
-    }
-
-    private long getTotalAmount(List<LottoPrize> lottoPrizes) {
-        return lottoPrizes.stream()
-                .mapToLong(LottoPrize::getPrize)
-                .sum();
-    }
-
-    private int getTotalMoney() {
-        return Lotto.PRICE * this.size();
-    }
-
-    public List<LottoPrize> checkLottoPrize(Lotto winner, LottoNumber bonus) {
+    public LottoRank checkLottoPrize(WinnerLotto winnerLotto) {
         List<LottoPrize> prizes = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
-            final var prize = winner.prize(lotto, bonus);
+            final var prize = winnerLotto.prize(lotto);
             prizes.add(prize);
         }
 
-        return prizes;
+        return new LottoRank(prizes);
     }
+
+    public int getManualLottoQuantity() {
+        return (int) this.lottos.stream().filter(Lotto::isManualLotto).count();
+    }
+
+    public int getAutoLottoQuantity() {
+        return (int) this.lottos.stream().filter(Lotto::isAutoLotto).count();
+    }
+
 }

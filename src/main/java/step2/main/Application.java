@@ -1,24 +1,24 @@
 package step2.main;
 
-import step2.domain.vo.LottoPrize;
-import step2.domain.vo.Money;
+import step2.domain.entity.LottoFactory;
 import step2.service.LottosIssuance;
 import step2.view.InputView;
 import step2.view.OutputView;
-
-import java.util.List;
 
 public class Application {
 
     public static void main(String[] args) {
         final var money = InputView.inputMoney();
-        final var lottos = LottosIssuance.issues(new Money(money));
+        final var manualQuantity = InputView.inputManualLottoQuantity(money);
+        final var manualLotto = InputView.inputManualLotto(manualQuantity);
+        final var lottos = LottosIssuance.issues(manualLotto, money);
 
-        OutputView.printLottoks(lottos);
+        OutputView.printLottos(lottos);
 
         final var lastLottoNumbers = InputView.inputLastLottoNumbers();
-        final var bonusBall = InputView.inputBonusLottoNumber();
-        List<LottoPrize> lottoPrizes = lottos.checkLottoPrize(lastLottoNumbers, bonusBall);
+        final var bonusNumber = InputView.inputBonusLottoNumber();
+        final var winner = LottoFactory.createWinnerLotto(bonusNumber, lastLottoNumbers);
+        final var lottoPrizes = lottos.checkLottoPrize(winner);
 
         OutputView.printWinnerStatistics(lottos, lottoPrizes);
     }
