@@ -120,7 +120,7 @@
 - [X] Prize enum에 보너스볼 매칭 여부 추가 및 Winners 클래스 제거 
 - [X] Prize matchingCount 잘못 작성한거 수정(4등)
 - [x] Lotto 출력 로직 제거
-- [ ] LottoNumbers 공통 계수 retainAll로 구현 
+- [x] LottoNumbers 공통 계수 retainAll로 구현 
 - [ ] 수동 로또 구현하는 구현체 제거
 - [ ] 두가지 일을 하는 인터페이스 분리
 ### 구현 목록
