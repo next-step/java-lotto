@@ -64,7 +64,7 @@ public class LotteryTest {
     @DisplayName("자동 발생한 숫자가 매주 당첨 번호와 최종 몇개가 일치하는지의 값을 반환한다.")
     void intersectionSizeTest() {
         Lottery lotterySixNumbers = lotteryFactory("1,2,3,7,8,9");
-        assertThat(new Lottery(LOTTERY_NUMBERS).intersectionSize(lotterySixNumbers.getNumbers()))
+        assertThat(new Lottery(LOTTERY_NUMBERS).matchCount(lotterySixNumbers.getNumbers()))
                 .isEqualTo(3);
     }
 

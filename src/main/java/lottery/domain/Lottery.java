@@ -83,7 +83,7 @@ public class Lottery {
     }
 
 
-    public int intersectionSize(Set<LotteryNumber> weeklyWinningNumbers) {
+    public int matchCount(Set<LotteryNumber> weeklyWinningNumbers) {
         return this.lotteryNumbers.stream()
                 .filter(weeklyWinningNumbers::contains)
                 .collect(Collectors.toSet()).size();

@@ -34,5 +34,5 @@ class LotteryNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1~45 의 정수만 입력 될 수 있습니다.");
     }
-    
+
 }
