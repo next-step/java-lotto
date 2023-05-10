@@ -10,7 +10,7 @@ import static lotto.domain.lottocreator.LottoFactory.LOTTO_NUMBER;
 public class Lotto {
     private List<LottoNo> lottoNos;
 
-    public Lotto(List<LottoNo> lottoNos) {
+    Lotto(List<LottoNo> lottoNos) {
         validate(lottoNos);
         this.lottoNos = lottoNos;
     }
