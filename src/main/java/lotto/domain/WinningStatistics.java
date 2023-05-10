@@ -25,7 +25,7 @@ public class WinningStatistics {
 
         for(LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.matchLottoNumberCount(this.lottoResultNumbers);
-            addWinningStatistics(matchCount, lottoTicket.isBonusBall(matchCount, this.lottoBonusNumber));
+            addWinningStatistics(matchCount, lottoTicket.hasBonusBall(this.lottoBonusNumber));
         }
 
         return this.resultGameStatistics;

@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottosTicketTest {
+public class LottoTicketTest {
 
     private List<Integer> testNumberList;
 
@@ -30,29 +30,39 @@ public class LottosTicketTest {
         testNumberList.add(41);
     }
 
-    @DisplayName("LottoGame 객체 정상 생성 테스트")
+    @DisplayName("LottoTicket 객체 정상 생성 테스트")
     @Test
-    public void lottoGame_객체_생성_테스트() {
+    public void lottoTicket_객체_생성_테스트() {
         LottoTicket lotto = new LottoTicket(LottoGenerate.initLottoNumbers());
         LottoTicket lotto1 = new LottoTicket(LottoGenerate.initLottoNumbers());
         LottoTicket lotto2 = new LottoTicket(LottoGenerate.initLottoNumbers());
 
-        assertAll("LottoGame size == 6",
+        assertAll("LottoTicket size == 6",
                 () -> assertEquals(lotto.getLottoNumber().size(), 6),
                 () -> assertEquals(lotto1.getLottoNumber().size(), 6),
                 () -> assertEquals(lotto2.getLottoNumber().size(), 6)
         );
     }
 
-    @DisplayName("LottoGame 정답 테스트, 로또와 정답 매치 카운트를 응답한다.")
+    @DisplayName("LottoTicket 정답 테스트, 로또와 정답 매치 카운트를 응답한다.")
     @ParameterizedTest
     @CsvSource(value = {"3, 15, 17, 24, 25, 27:3", "3, 15, 17, 24, 25, 26:4", "3, 15, 17, 24, 31, 26:5", "3, 15, 17, 41, 31, 26:6"}, delimiterString = ":")
-    public void lottoGame_정답_테스트(String resultNumList, String matchCount) {
+    public void lottoTicket_정답_테스트(String resultNumList, String matchCount) {
 
         LottoTicket lotto = new LottoTicket(testNumberList);
 
         List<Integer> resultNumberList = LottoUtils.lottoResultNumberList(resultNumList);
 
         assertEquals(lotto.matchLottoNumberCount(resultNumberList), Integer.parseInt(matchCount));
+    }
+
+    @DisplayName("LottoTicket 보너스볼 소유 여부를 응답한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"3:true", "4:false", "41:true"}, delimiterString = ":")
+    public void lottoTicket_보너스볼_소유_테스트(int bonusNum, Boolean hasBonus) {
+
+        LottoTicket lottoTicket = new LottoTicket(testNumberList);
+
+        assertEquals(lottoTicket.hasBonusBall(bonusNum), hasBonus);
     }
 }

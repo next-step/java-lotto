@@ -7,7 +7,6 @@ import java.util.List;
 public class LottoTicket {
 
     private static final int LIST_MAX_SIZE = 6;
-    private static final int BONUS_BALL_CHECK = 5;
 
     private List<Integer> lottoNumber;
 
@@ -39,11 +38,7 @@ public class LottoTicket {
                 .count();
     }
 
-    public Boolean isBonusBall(int matchCount, int bonusNum) {
-        if(matchCount != BONUS_BALL_CHECK) {
-            return null;
-        }
-
+    public Boolean hasBonusBall(int bonusNum) {
         return this.lottoNumber.contains(bonusNum);
     }
 }
