@@ -1,5 +1,6 @@
 package lotto3.domain;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,12 @@ public class LottoTickets {
     this.tickets = tickets;
   }
 
+  public static LottoTickets merge(LottoTickets manualLottoTickets, LottoTickets autoTickets) {
+    List<LottoTicket> combinedTickets = new ArrayList<>(manualLottoTickets.tickets());
+    combinedTickets.addAll(autoTickets.tickets());
+    return new LottoTickets(combinedTickets);
+  }
+
   public int size() {
     return tickets.size();
   }
@@ -23,7 +30,7 @@ public class LottoTickets {
   }
 
 
-  public LottoResults calculateLotteryResults(WinningNumbers winningNumbers,
+  public LottoResults calculateLotteryResults(LottoNumbers winningNumbers,
       LottoNumber bonusNumber) {
     Map<Prize, Long> results = tickets.stream()
         .map(ticket -> ticket.getLottoPrize(winningNumbers, bonusNumber))
@@ -32,4 +39,5 @@ public class LottoTickets {
 
     return new LottoResults(results);
   }
+
 }

@@ -31,7 +31,7 @@ public class LottoTicket {
   }
 
 
-  private int matchCount(WinningNumbers winningNumbers) {
+  private int matchCount(LottoNumbers winningNumbers) {
     return numbers.countMatch(winningNumbers);
   }
 
@@ -39,7 +39,7 @@ public class LottoTicket {
     return numbers.contains(bonusNumber);
   }
 
-  public Prize getLottoPrize(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+  public Prize getLottoPrize(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
     int matchCount = matchCount(winningNumbers);
     boolean containsBonusNumber = contains(bonusNumber);
     return Prize.valueOfMatchCountAndBonusNumber(matchCount, containsBonusNumber);

@@ -1,13 +1,17 @@
 package lotto3.view;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto3.domain.LottoNumber;
+import lotto3.domain.LottoNumbers;
+import lotto3.domain.LottoTicket;
+import lotto3.domain.LottoTickets;
+import lotto3.domain.ManualLottoCount;
 import lotto3.domain.Money;
-import lotto3.domain.WinningNumbers;
 
 public class InputView {
 
@@ -25,22 +29,22 @@ public class InputView {
     if (isBlank(investMoney)) {
       throw new IllegalArgumentException("구입금액을 입력해 주세요.");
     }
-    if (!isNumber(investMoney)) {
+    if (isNotNumber(investMoney)) {
       throw new IllegalArgumentException("구입금액은 숫자만 입력 가능합니다.");
     }
   }
 
 
-  private static boolean isNumber(String investMoney) {
-    return investMoney.matches("^[0-9]*$");
+  private static boolean isNotNumber(String investMoney) {
+    return !investMoney.matches("^[0-9]*$");
   }
 
-  public static WinningNumbers scanWinningNumbers() {
+  public static LottoNumbers scanWinningNumbers() {
     System.out.println();
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     String winningNumbers = SCANNER.nextLine();
     validateBlank(winningNumbers);
-    return convertWinningNumbers(winningNumbers);
+    return convertLottoNumbers(winningNumbers);
   }
 
   private static void validateBlank(String winningNumbers) {
@@ -54,10 +58,10 @@ public class InputView {
     return winningNumbers == null || winningNumbers.isBlank();
   }
 
-  private static WinningNumbers convertWinningNumbers(String winningNumbers) {
+  private static LottoNumbers convertLottoNumbers(String winningNumbers) {
     String[] splitNumbers = splitWithDelimiter(winningNumbers);
     List<Integer> numbers = convertIntegerList(splitNumbers);
-    return new WinningNumbers(numbers);
+    return new LottoNumbers(numbers);
   }
 
   private static List<Integer> convertIntegerList(String[] splitNumbers) {
@@ -79,10 +83,71 @@ public class InputView {
   }
 
   private static void validateIsNumber(String bonusNumber) {
-    if (!isNumber(bonusNumber)) {
+    if (!isNotNumber(bonusNumber)) {
       throw new IllegalArgumentException("보너스 볼은 숫자만 입력 가능합니다.");
     }
   }
 
 
+  public static ManualLottoCount scanManualCount() {
+    System.out.println();
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    String manualCount = SCANNER.nextLine();
+    validateManualCountBlank(manualCount);
+    validateManualCountIsNumber(manualCount);
+    return new ManualLottoCount(Integer.parseInt(manualCount));
+  }
+
+  private static void validateManualCountIsNumber(String manualCount) {
+    if (!isNotNumber(manualCount)) {
+      throw new IllegalArgumentException("수동으로 구매할 로또 수는 숫자만 입력 가능합니다.");
+    }
+  }
+
+  private static void validateManualCountBlank(String manualCount) {
+    if (isBlank(manualCount)) {
+      throw new IllegalArgumentException("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+  }
+
+  public static LottoTickets scanManualLottoNumbers(ManualLottoCount manualLottoCount) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+    int count = manualLottoCount.getCount();
+
+    List<LottoTicket> lottoTickets = new ArrayList<>();
+    for(int i = 0; i < count; i++) {
+      String manualLottoNumbers = SCANNER.nextLine();
+      validateManualLottoNumbersIsBlank(manualLottoNumbers);
+      LottoTicket lottoTicket = convertToLottoTicket(manualLottoNumbers);
+      lottoTickets.add(lottoTicket);
+    }
+
+    return new LottoTickets(lottoTickets);
+  }
+
+  private static LottoTicket convertToLottoTicket(String manualLottoNumbers) {
+    String[] splitManualLottoNumbers = splitWithDelimiter(manualLottoNumbers);
+    validateManualLottoNumbersIsNumber(splitManualLottoNumbers);
+    List<Integer> manualNumbers = convertIntegerList(splitManualLottoNumbers);
+    return new LottoTicket(manualNumbers);
+  }
+
+  private static void validateManualLottoNumbersIsNumber(String[] manualLottoNumbers) {
+    for (String manualLottoNumber : manualLottoNumbers) {
+      validateManualLottoNumberIsNumber(manualLottoNumber);
+    }
+  }
+
+  private static void validateManualLottoNumberIsNumber(String manualLottoNumber) {
+    if (!isNotNumber(manualLottoNumber)) {
+      throw new IllegalArgumentException("수동으로 구매할 번호는 숫자만 입력 가능합니다.");
+    }
+  }
+
+  private static void validateManualLottoNumbersIsBlank(String manualLottoNumbers) {
+    if (isBlank(manualLottoNumbers)) {
+      throw new IllegalArgumentException("수동으로 구매할 번호를 입력해 주세요.");
+    }
+  }
 }
