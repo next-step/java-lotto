@@ -35,7 +35,7 @@ public class WinningStatisticsTest {
 
         WinningStatistics winningStatistics = new WinningStatistics(testNumberList, 7);
 
-        Map<RewardTable, Integer> resultLottoGame = winningStatistics.resultLottoGame(lottoTickets);
+        Map<RewardTable, Long> resultLottoGame = winningStatistics.resultLottoGame(lottoTickets);
 
         assertThat(resultLottoGame.get(RewardTable.FIFTH_RANK).equals(0));
         assertThat(resultLottoGame.get(RewardTable.FOURTH_RANK).equals(2));

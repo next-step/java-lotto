@@ -24,7 +24,7 @@ public class ResultView {
         }
     }
 
-    public void resultGame(Map<RewardTable, Integer> map, double rate) {
+    public void resultGame(Map<RewardTable, Long> map, double rate) {
         System.out.println(RESULT_GAME);
         System.out.println(BREAK_LINE);
 
@@ -32,7 +32,7 @@ public class ResultView {
         Collections.sort(keySet);
 
         for (RewardTable key : keySet) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", key.getMatchRank(), key.getReward(), map.get(key));
+            System.out.printf("%d개 일치 (%d원)- %d개\n", key.getMatchCount(), key.getReward(), map.get(key));
         }
 
         resultRateOfReturn(rate);

@@ -4,50 +4,50 @@ import java.util.Arrays;
 
 public enum RewardTable {
 
-    FIFTH_RANK(3, null, 5_000),
-    FOURTH_RANK(4, null, 50_000),
-    THIRD_RANK(5, false, 1_500_000),
-    SECOND_RANK(5, true, 30_000_000),
-    FIRST_RANK(6, null, 2_000_000_000);
+    FIFTH_RANK(3, false, 5_000L),
+    FOURTH_RANK(4, false, 50_000L),
+    THIRD_RANK(5, false, 1_500_000L),
+    SECOND_RANK(5, true, 30_000_000L),
+    FIRST_RANK(6, false, 2_000_000_000L);
 
-    private int matchRank;
+    private int matchCount;
     private Boolean matchBonus;
-    private int reward;
+    private Long reward;
 
-    RewardTable(int matchRank, Boolean matchBonus, int reward) {
-        this.matchRank = matchRank;
+    RewardTable(int matchCount, Boolean matchBonus, Long reward) {
+        this.matchCount = matchCount;
         this.matchBonus = matchBonus;
         this.reward = reward;
     }
 
-    public static RewardTable of(int matchNumber, Boolean matchBonus) {
+    public static RewardTable of(int matchCount, Boolean matchBonus) {
         return Arrays.stream(RewardTable.values())
-                .filter(rank -> rank.getRank(matchNumber, matchBonus))
+                .filter(rank -> rank.getRank(matchCount, matchBonus))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 등수입니다"))
                 ;
     }
 
     private boolean getRank(int matchCount, Boolean matchBonus) {
-        if(matchBonus != null) {
+        if(matchCount == SECOND_RANK.matchCount) {
             return isBonusMatch(matchCount, matchBonus);
         }
-        return this.matchRank == matchCount;
+        return this.matchCount == matchCount;
     }
 
     private boolean isBonusMatch(int matchCount, Boolean matchBonus) {
-        return this.matchRank == matchCount && this.matchBonus == matchBonus;
+        return this.matchCount == matchCount && this.matchBonus == matchBonus;
     }
 
-    public int matchReward(int times) {
+    public Long matchReward(Long times) {
         return this.reward * times;
     }
 
-    public int getReward() {
+    public Long getReward() {
         return this.reward;
     }
 
-    public int getMatchRank() {
-        return this.matchRank;
+    public int getMatchCount() {
+        return this.matchCount;
     }
 }

@@ -12,7 +12,7 @@ public class RewardTableTest {
 
     @DisplayName("로또 게임 맞춘 갯수와 보너스를 전달하면 등수를 응답한다.")
     @ParameterizedTest
-    @CsvSource(value = {"3:FIFTH_RANK:", "4:FOURTH_RANK:","5:THIRD_RANK:false", "5:SECOND_RANK:true", "6:FIRST_RANK:"}, delimiterString = ":")
+    @CsvSource(value = {"3:FIFTH_RANK:false", "4:FOURTH_RANK:false","5:THIRD_RANK:false", "5:SECOND_RANK:true", "6:FIRST_RANK:false"}, delimiterString = ":")
     public void rewardTableTest_등수_확인_테스트(int matchRank, RewardTable rewardTableEnum, Boolean isBonus) {
 
         assertThat(RewardTable.of(matchRank, isBonus)).isEqualTo(rewardTableEnum);
@@ -28,8 +28,8 @@ public class RewardTableTest {
 
     @DisplayName("로또 게임 맞춘 갯수와 게임 수를 전달하면 당첨 금액을 응답한다.")
     @ParameterizedTest
-    @CsvSource(value = {"3:5:25000:", "4:2:100000:", "5:1:1500000:false", "5:1:30000000:true", "6:1:2000000000:"}, delimiterString = ":")
-    public void rewardTableTest_당첨금액_확인_테스트(int matchRank, int matchGameNum, int rewardNum, Boolean isBonus) {
+    @CsvSource(value = {"3:5:25000:false", "4:2:100000:false", "5:1:1500000:false", "5:1:30000000:true", "6:1:2000000000:false"}, delimiterString = ":")
+    public void rewardTableTest_당첨금액_확인_테스트(int matchRank, Long matchGameNum, int rewardNum, Boolean isBonus) {
         assertThat(RewardTable.of(matchRank, isBonus).matchReward(matchGameNum)).isEqualTo(rewardNum);
     }
 }

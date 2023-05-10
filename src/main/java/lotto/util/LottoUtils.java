@@ -57,7 +57,7 @@ public class LottoUtils {
         return numberList.size() == LOTTO_NUMBER_SIZE;
     }
 
-    public static double calRateOfReturn(int totalWinningPrice, int buyPrice) {
+    public static double calRateOfReturn(Long totalWinningPrice, int buyPrice) {
 
         return 1 + (totalWinningPrice - buyPrice) / (double) buyPrice;
     }
