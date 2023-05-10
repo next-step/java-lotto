@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoStoreTest {
@@ -13,12 +15,13 @@ public class LottoStoreTest {
         int buyAmount = 14000;
 
         // when
-        LottoStore lottoStore = new LottoStore(buyAmount);
+        LottoStore lottoStore = new LottoStore();
+        List<Lotto> lottoList = lottoStore.Buy(buyAmount);
 
         //then
         int expected = 14;
 
-        assertEquals(expected, lottoStore.getCount());
+        assertEquals(expected, lottoList.size());
 
     }
 }
