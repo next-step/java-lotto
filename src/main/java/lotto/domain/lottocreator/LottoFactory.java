@@ -14,14 +14,18 @@ public class LottoFactory {
     private static List<LottoNo> lottoNos = IntStream.range(LottoNo.MIN_LOTTO_NUMBER, LottoNo.MAX_LOTTO_NUMBER)
             .boxed().map(number -> LottoNo.of(number)).collect(Collectors.toList());
 
-    public static Lotto create() {
+    public static Lotto createAutoLotto() {
         Collections.shuffle(lottoNos);
         return new Lotto(lottoNos.stream().limit(LOTTO_NUMBER).collect(Collectors.toList()));
     }
 
-    public static Lotto createManualLotto(String winningLottos) {
-        List<LottoNo> numbers = split(winningLottos);
+    public static Lotto createManualLotto(String manualNumbers) {
+        List<LottoNo> numbers = split(manualNumbers);
         return new Lotto(numbers);
+    }
+
+    public static Lotto createWinningLotto(String winningNumbers) {
+        return createManualLotto(winningNumbers);
     }
 
     private static List<LottoNo> split(String numbers) {

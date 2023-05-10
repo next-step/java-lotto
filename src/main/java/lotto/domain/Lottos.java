@@ -30,7 +30,7 @@ public class Lottos {
     }
 
     private Lotto create() {
-        return LottoFactory.create();
+        return LottoFactory.createAutoLotto();
     }
 
     public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNo bonusBall) {

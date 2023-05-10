@@ -14,7 +14,7 @@ public class WinningLotto {
     private LottoNo bonusBall;
 
     public WinningLotto(String winningNumbers, int bonusBall) {
-        this.winningLotto = LottoFactory.createManualLotto(winningNumbers);
+        this.winningLotto = LottoFactory.createWinningLotto(winningNumbers);
         this.bonusBall = LottoNo.of(bonusBall);
         validate(this.winningLotto, this.bonusBall);
     }
