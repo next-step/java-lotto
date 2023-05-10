@@ -1,10 +1,10 @@
-package step1.calculator;
+package calculator;
 
-import step1.calculator.domain.UserInput;
-import step1.calculator.domain.Expression;
-import step1.calculator.util.ExpressionParser;
-import step1.calculator.view.InputView;
-import step1.calculator.view.ResultView;
+import calculator.domain.UserInput;
+import calculator.domain.Expression;
+import calculator.util.ExpressionParser;
+import calculator.view.InputView;
+import calculator.view.ResultView;
 
 public class StringArithmeticCalculatorApplication {
 

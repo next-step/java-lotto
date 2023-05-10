@@ -1,7 +1,6 @@
-package step1.calculator.domain;
+package calculator.domain;
 
 import org.junit.jupiter.api.Test;
-import step1.calculator.domain.Expression;
 
 import java.util.List;
 
