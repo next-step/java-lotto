@@ -8,6 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -43,9 +45,8 @@ public class LotteriesTest {
     @Test
     @DisplayName("자동입력된 로또와 수동으로 입력된 로또를 반환한다.")
     void lotteriesByPlaysAndManualTest() {
-        Lotteries manualAndAuto = lotteriesByPlaysAndManual(1, new Lotteries(
-                List.of(lotteryFactory("1,2,3,4,5,6"))
-        ));
+        Lotteries manualAndAuto = lotteriesByPlaysAndManual(1,
+                new ArrayList<>(List.of(lotteryFactory("1,2,3,4,5,6"))));
         assertThat(manualAndAuto.size()).isEqualTo(2);
     }
 

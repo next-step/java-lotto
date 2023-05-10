@@ -12,4 +12,11 @@ public class ManualQuantity {
         return this.value > totalQuantities;
     }
 
+    public int autoPlays(int totalQuantities) {
+        return totalQuantities - value;
+    }
+
+    public int manualPlays() {
+        return this.value;
+    }
 }

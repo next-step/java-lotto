@@ -28,9 +28,15 @@ public class PurchasedLottery {
         this.manualQuantity = manualQuantity;
     }
 
-    public int numberOfPlays() {
+    public int totalPlays() {
         return lotteryPurchasedPrice.numberOfPlays();
     }
 
+    public int autoPlays() {
+        return manualQuantity.autoPlays(lotteryPurchasedPrice.numberOfPlays());
+    }
 
+    public int manualPlays() {
+        return manualQuantity.manualPlays();
+    }
 }
