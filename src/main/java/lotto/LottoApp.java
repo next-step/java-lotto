@@ -13,6 +13,7 @@ public class LottoApp {
         ResultView.showAllTickets(service.getGames());
 
         service.setWinningNumbers(InputView.setWinningNumbers());
+        service.setBonusNumber(InputView.setBonusNumber());
         service.aggregateWinningStatistics();
 
         ResultView.showWinningStatistics(service.getStatistic());

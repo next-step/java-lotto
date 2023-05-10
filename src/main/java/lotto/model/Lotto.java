@@ -1,20 +1,20 @@
 package lotto.model;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_PRICE = 1000;
 
-    private List<Integer> numbers;
+    private Set<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(this.numbers);
+    public Set<Integer> getNumbers() {
+        return Collections.unmodifiableSet(this.numbers);
     }
 
     @Override

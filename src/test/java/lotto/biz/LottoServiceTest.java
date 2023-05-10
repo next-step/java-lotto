@@ -16,6 +16,7 @@ class LottoServiceTest {
     }
 
     @Test
+    @DisplayName("담청 번호 입력이 가능하다")
     void setWinningNumbers() {
         LottoService service = new LottoService();
         service.setPurchaseValue(14000);
@@ -25,6 +26,15 @@ class LottoServiceTest {
                 .contains(13)
                 .contains(2)
                 .contains(38);
+    }
+
+    @Test
+    @DisplayName("2등을 위해 추가 번호를 하나 더 입력")
+    void setBonusNumber(){
+        LottoService service = new LottoService();
+        service.setBonusNumber(19);
+
+        assertThat(service.getBonusNumber()).isEqualTo(19);
     }
 
 }

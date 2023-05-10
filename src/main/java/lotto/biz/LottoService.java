@@ -2,23 +2,22 @@ package lotto.biz;
 
 import lotto.model.Lotto;
 import lotto.model.LottoGames;
-import lotto.model.enums.Ranking;
-import lotto.view.ResultView;
+import lotto.model.enums.MatchingStrategy;
+import lotto.util.ParseUtil;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 
 public class LottoService {
-    public static final String COMMA = ", ";
-
+    public static final String COMMA = ",";
     private static String SHOW_GAME_COUNT_FORMAT = "%s개를 구매했습니다.";
 
     private LottoGames games;
 
     public LottoService() {
+        games = new LottoGames();
     }
 
     public void setPurchaseValue(int purchaseValue) {
@@ -34,9 +33,7 @@ public class LottoService {
             throw new RuntimeException("구입 금액을 먼저 입력해주세요.");
         }
 
-        games.setWinningNumbers(Arrays.stream(winningNumbers.split(COMMA))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+        games.setWinningNumbers(ParseUtil.convertStringToIntegerList(winningNumbers, COMMA));
     }
 
     public void aggregateWinningStatistics() {
@@ -44,19 +41,27 @@ public class LottoService {
     }
 
 
-    public Map<Ranking, List<Lotto>> getStatistic(){
+    public Map<MatchingStrategy, List<Lotto>> getStatistic(){
         return games.getStatistic();
     }
 
     public int getPurchaseValue() {
-        return games.getGameCount() * 1000;
+        return games.getGameCount() * Lotto.LOTTO_PRICE;
     }
 
-    public List<Integer> getWinningNumbers(){
+    public Set<Integer> getWinningNumbers(){
         return games.getWinningNumbers();
     }
 
     public List<Lotto> getGames(){
         return games.getGames();
+    }
+
+    public void setBonusNumber(int input) {
+        games.setBonusNumber(input);
+    }
+
+    public Integer getBonusNumber() {
+        return games.getBonusNumber();
     }
 }

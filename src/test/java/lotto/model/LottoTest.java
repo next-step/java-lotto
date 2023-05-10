@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +15,7 @@ class LottoTest {
     @Test
     @DisplayName("6자리 숫자 생성 테스트")
     void when_lotto_object_created_with_six_numbers(){
-        List<Integer> numbers = makeTestNumbers();
+        Set<Integer> numbers = makeTestNumbers();
 
         Lotto lotto = new Lotto(numbers);
         assertThat(lotto.getNumbers()).isEqualTo(numbers);
@@ -33,8 +35,8 @@ class LottoTest {
         assertThat(Lotto.LOTTO_PRICE).isEqualTo(1000);
     }
 
-    private List<Integer> makeTestNumbers() {
-        List<Integer> numbers = new ArrayList<Integer>();
+    private Set<Integer> makeTestNumbers() {
+        Set<Integer> numbers = new HashSet<>();
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);

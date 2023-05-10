@@ -19,11 +19,8 @@ public class StringCalculator {
     private int getResult(String[] chars) {
         int result = parseToInt(chars[0]);
         for (int i = 1; i < chars.length; i += 2) {
-//            result = OperatorFactory
-//                    .getOperator(chars[i])
-//                    .getResult(result, parseToInt(chars[i+1]));
             result = OperatorEnum.findOperator(chars[i])
-                                 .getResult(result, parseToInt(chars[i + 1]));
+                                 .apply(result, parseToInt(chars[i + 1]));
         }
         return result;
     }
