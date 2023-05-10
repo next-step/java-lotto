@@ -15,7 +15,7 @@ public class LottoApplicationMain {
         Record record = Record.extractRecord(lottoBundle, winNumber);
         OutputView.showRecord(record);
 
-        ProfitRate profitRate = Record.calculateProfit(purchaseMoney, record);
+        ProfitRate profitRate = record.calculateProfit(purchaseMoney);
         OutputView.showProfitRate(profitRate);
     }
 }
