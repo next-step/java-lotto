@@ -26,7 +26,7 @@ public class LottoAutoTest {
 
     @Test
     void createLottoNumbers() {
-        assertThat(LottoAuto.createLottoNumbers()).hasSize(6);
+        assertThat(LottoAuto.createLottoNumbers().getNumbers()).hasSize(6);
     }
 
 }

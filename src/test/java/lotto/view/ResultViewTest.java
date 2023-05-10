@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.code.MatchedNumber;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -13,14 +14,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ResultViewTest {
 
-    Map<Integer, Integer> winningStatistics = new HashMap<>();
+    Map<MatchedNumber, Integer> winningStatistics = new HashMap<>();
 
     @BeforeAll
     void setUp() {
-        winningStatistics.put(3, 1);
-        winningStatistics.put(4, 1);
-        winningStatistics.put(5, 0);
-        winningStatistics.put(6, 0);
+        winningStatistics.put(MatchedNumber.THREE, 1);
+        winningStatistics.put(MatchedNumber.FOUR, 1);
+        winningStatistics.put(MatchedNumber.FIVE, 0);
+        winningStatistics.put(MatchedNumber.FIVE_AND_BONUS, 0);
+        winningStatistics.put(MatchedNumber.SIX, 0);
     }
 
     @Test
