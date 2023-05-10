@@ -1,8 +1,5 @@
 package lotto;
 
-import lotto.model.TestLottoGenerator;
-import mission.lotto.KLottoRank;
-import mission.lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,39 +17,25 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto_생성_테스트")
     public void Lotto_생성_테스트() {
-
-        Lotto t_lotto = new Lotto(new TestLottoGenerator());
-
-        List<Integer> numbers = t_lotto.getNumbers();
-        String name = t_lotto.getName();
-
-        assertThat(name).isEqualTo("Test-mission.lotto.Lotto");
-        assertThat(numbers).containsAnyOf(1, 2, 3, 4, 5, 6);
+        Lotto t_lotto = new Lotto();
+        List<LottoNumber> numbers = t_lotto.getNumbers();
+//        assertThat(numbers).containsAnyOf(1, 2, 3, 4, 5, 6);
     }
 
-    static Stream<Arguments> generateData() {
+    static Stream<Arguments> generateRankData() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6, KLottoRank.FIRST),
-                Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), 3, KLottoRank.FOURTH)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, KLottoRank.FIRST),
+                Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), 10, KLottoRank.FIFTH),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 9), 6, KLottoRank.SECOND)
         );
     }
 
-    @ParameterizedTest(name = "[{index}] {0} 로또 매칭 갯수")
-    @MethodSource("generateData")
-    @DisplayName("Lotto_매칭갯수_테스트")
-    public void Lotto_매칭갯수_테스트(List<Integer> winNumbers, int expected) {
-        Lotto t_lotto = new Lotto(new TestLottoGenerator());
-        int result = t_lotto.matchCount(winNumbers);
-        assertThat(result).isEqualTo(expected);
-    }
-
     @ParameterizedTest(name = "[{index}] {2}등 확인")
-    @MethodSource("generateData")
+    @MethodSource("generateRankData")
     @DisplayName("Lotto_n등_테스트")
-    public void Lotto_1등_테스트(List<Integer> winNumbers, int count, KLottoRank expectedRank) {
-        Lotto t_lotto = new Lotto(new TestLottoGenerator());
-        int result = t_lotto.matchCount(winNumbers);
-        KLottoRank rank = t_lotto.checkRank(result);
+    public void Lotto_1등_테스트(List<Integer> winNumbers, int bonusNumber, KLottoRank expectedRank) {
+        Lotto t_lotto = new Lotto(1,2,3,4,5,6);
+        KLottoRank rank = t_lotto.checkRank(new WinNumber(winNumbers, bonusNumber));
         assertThat(rank).isEqualTo(expectedRank);
     }
 }

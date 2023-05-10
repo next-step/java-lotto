@@ -1,4 +1,4 @@
-package mission.lotto;
+package lotto;
 
 public class Money {
 
@@ -7,6 +7,10 @@ public class Money {
     public Money(int money) {
         validateMoney(money);
         this.money = money;
+    }
+
+    public Money spend(int money) {
+        return new Money(this.money - money);
     }
 
     private void validateMoney(int money) {
