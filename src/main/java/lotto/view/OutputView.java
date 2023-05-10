@@ -15,7 +15,7 @@ public class OutputView {
     }
 
     public static void printLottoList(Lotto lotto) {
-        lotto.showLottoNumbers();
+        System.out.println(lotto);
     }
 
     public static void printStatisticsResult(Statistics statistics) {
