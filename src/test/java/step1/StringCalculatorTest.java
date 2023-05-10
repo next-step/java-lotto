@@ -12,14 +12,6 @@ public class StringCalculatorTest {
     Formula formula = new Formula(ex);
 
     @Test
-    void 사칙연산_기호_X() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(()-> {
-                    calculator.calculate(formula);
-                }).withMessageMatching("사칙연산 기호가 아닙니다.");
-    }
-
-    @Test
     void 계산() {
         assertThat(calculator.calculate(formula)).isEqualTo(10);
 

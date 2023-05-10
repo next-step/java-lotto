@@ -4,7 +4,8 @@ import step1.CalculateStratety.CalculateStrategy;
 
 public class StringCalculator {
 
-    public static final String SIGN_REGEX = "[+*-/]";
+
+
     Strategies strategies = new Strategies();
     int result = 0;
 
@@ -13,7 +14,7 @@ public class StringCalculator {
         result = formula.pollNumber();
         while (formula.peek() != null){
             String sign = formula.poll();
-            signValidationCheck(sign);
+            strategies.signValidationCheck(sign);
             CalculateStrategy strategy = strategies.getStrategy(sign);
             result = strategy.go(result, formula.pollNumber());
         }
@@ -21,10 +22,5 @@ public class StringCalculator {
         return result;
     }
 
-    private void signValidationCheck(String sign) {
-        if(!sign.matches(SIGN_REGEX)){
-            throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
-        }
-    }
 
 }

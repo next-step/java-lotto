@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class Formula {
 
-    public static final String SEPERATOR = " ";
+    public static final String SEPARATOR = " ";
     private Queue<String> formula;
 
     public Formula(String ex) {
@@ -20,7 +20,7 @@ public class Formula {
     }
 
     private static Queue<String> textToQueue(String ex) {
-        String[] split = ex.split(SEPERATOR);
+        String[] split = ex.split(SEPARATOR);
 
         Queue<String> queue = new LinkedList<>();
         for (String s : split) {
