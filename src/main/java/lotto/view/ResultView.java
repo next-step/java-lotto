@@ -37,9 +37,6 @@ public class ResultView {
         System.out.printf("5개 일치 (%d원) - %d개\n", Rank.THIRD.getPrize(), result.countRank(Rank.THIRD));
         System.out.printf("5개 일치, 보너스 볼 일치(%d원) - %d개\n", Rank.SECOND.getPrize(), result.countRank(Rank.SECOND));
         System.out.printf("6개 일치 (%d원) - %d개\n", Rank.FIRST.getPrize(), result.countRank(Rank.FIRST));
-    }
-
-    public static void showProfit(MyResult myResult) {
-        System.out.printf("총 수익률은 %.2f입니다.", myResult.profit());
+        System.out.printf("총 수익률은 %.2f입니다.", result.profit());
     }
 }

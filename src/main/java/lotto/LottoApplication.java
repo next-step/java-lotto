@@ -29,11 +29,8 @@ public class LottoApplication {
         WinLotto winLotto = lottoService.makeWinLotto(winNumbers, winBonusNumber);
         ResultView.showWinLotto(winLotto);
 
-        //당첨번호 조회 및 통계
+        //당첨번호 조회 및 통계, 수익률
         MyResult myResult = lottoService.checkWin(myLottoGame, winLotto);
         ResultView.showLottoResult(myResult);
-
-        //수익률
-        ResultView.showProfit(myResult);
     }
 }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoRule;
+import lotto.domain.Numbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class InputView {
             throw new IllegalArgumentException("숫자로만 구성되어 있지 않은 값이 있습니다.");
         }
 
-        if (number < LottoRule.MIN_NUMBER || number > LottoRule.MAX_NUMBER) {
+        if (number < Numbers.MIN_NUMBER || number > Numbers.MAX_NUMBER) {
             throw new IllegalArgumentException("입력된 숫자 범위가 올바르지 않습니다.");
         }
 

@@ -15,12 +15,12 @@ class LottoTest {
         Lotto lotto = Lotto.autoGenerate();
         assertThat(lotto.numbers().getValues().size()).isEqualTo(6);
         assertAll(
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(lotto.numbers().find(0))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(lotto.numbers().find(1))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(lotto.numbers().find(2))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(lotto.numbers().find(3))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(lotto.numbers().find(4))).isTrue(),
-                () -> assertThat(LottoRule.NUMBER_RANGE.contains(lotto.numbers().find(5))).isTrue()
+                () -> assertThat(Numbers.NUMBER_RANGE.contains(lotto.numbers().find(0))).isTrue(),
+                () -> assertThat(Numbers.NUMBER_RANGE.contains(lotto.numbers().find(1))).isTrue(),
+                () -> assertThat(Numbers.NUMBER_RANGE.contains(lotto.numbers().find(2))).isTrue(),
+                () -> assertThat(Numbers.NUMBER_RANGE.contains(lotto.numbers().find(3))).isTrue(),
+                () -> assertThat(Numbers.NUMBER_RANGE.contains(lotto.numbers().find(4))).isTrue(),
+                () -> assertThat(Numbers.NUMBER_RANGE.contains(lotto.numbers().find(5))).isTrue()
         );
     }
 
