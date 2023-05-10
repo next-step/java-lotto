@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_LENGTH = 6;
@@ -16,17 +17,10 @@ public class LottoNumbers {
     }
 
     public int countMatchingLottoNumber(LottoNumbers lottoNumbers) {
-        return findMatchingLottoNumber(lottoNumbers).size();
-    }
+        Set<LottoNumber> aggregateOfLottoNumber = new HashSet<>(this.lottoNumbers);
+        aggregateOfLottoNumber.retainAll(lottoNumbers.lottoNumbers);
 
-    private List<LottoNumber> filterMatchingLottoNumber(List<LottoNumber> lottoNumberList) {
-        return lottoNumberList.stream()
-                .filter(this::isMatchingLottoNumber)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    private List<LottoNumber> findMatchingLottoNumber(LottoNumbers targetLottoNumbers) {
-        return targetLottoNumbers.filterMatchingLottoNumber(this.lottoNumbers);
+        return aggregateOfLottoNumber.size();
     }
 
     public boolean isMatchingLottoNumber(LottoNumber lottoNumber) {
