@@ -18,12 +18,8 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public int count() {
-        return lottos.size();
-    }
-
-    public Lotto find(int index) {
-        return lottos.get(index);
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public void checkWin(MyResult myResult, WinLotto winLotto) {

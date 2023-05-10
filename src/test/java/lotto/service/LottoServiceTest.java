@@ -19,7 +19,7 @@ class LottoServiceTest {
         LottoService lottoService = new LottoService();
         MyPurchase myPurchase = new MyPurchase(inputMoney);
         MyLottoGame myLottoGame = lottoService.buyAutoLottos(myPurchase);
-        assertThat(myLottoGame.getLottos().count()).isEqualTo(expectedCount);
+        assertThat(myLottoGame.getLottos().size()).isEqualTo(expectedCount);
     }
 
     @Test

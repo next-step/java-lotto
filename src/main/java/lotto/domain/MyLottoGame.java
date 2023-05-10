@@ -30,7 +30,7 @@ public class MyLottoGame {
         return result().countRank(rank);
     }
 
-    public Lottos getLottos() {
-        return lottos;
+    public List<Lotto> getLottos() {
+        return lottos.getLottos();
     }
 }

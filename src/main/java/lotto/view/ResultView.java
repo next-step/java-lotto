@@ -2,12 +2,13 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void showMyLottos(Lottos lottos) {
-        for (int i = 0; i < lottos.count(); i++) {
-            printNumbers(lottos.find(i).numbers());
+    public static void showMyLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            printNumbers(lotto.numbers());
         }
         System.out.println();
     }
