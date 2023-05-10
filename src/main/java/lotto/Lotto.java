@@ -1,8 +1,11 @@
 package lotto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Lotto {
+    public static final BigDecimal PRICE = BigDecimal.valueOf(1000);
+
     private List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
