@@ -10,8 +10,8 @@ import java.util.*;
 public class ResultView {
 
 
-    public static void printLottoInfo(List<Lotto> Input, int count) {
-        resultBuyInputCount(count);
+    public static void printLottoInfo(List<Lotto> Input) {
+        resultBuyInputCount(Input.size());
         getLotto(Input);
     }
 

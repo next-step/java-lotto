@@ -15,11 +15,11 @@ public class LottoController {
 
         LottoStore lottoStore = new LottoStore();
         List<Lotto> lottos = lottoStore.Buy(buyAmount);
-        ResultView.printLottoInfo(lottos, lottoStore.getCount());
+        ResultView.printLottoInfo(lottos);
 
         Lotto winNum = new Lotto(InputView.inputWinnerLottoNum());
 
-        LotteryStatics lotteryStatics = new LotteryStatics(lottos, winNum.getLotto());
+        LotteryStatics lotteryStatics = new LotteryStatics(buyAmount, lottos, winNum.getLotto());
         ResultView.printStatics(lotteryStatics);
 
     }
