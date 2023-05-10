@@ -28,6 +28,8 @@ public class ResultView {
         System.out.println(RESULT_GAME);
         System.out.println(BREAK_LINE);
 
+        map.remove(RewardTable.MISS);
+
         List<RewardTable> keySet = new ArrayList<>(map.keySet());
         Collections.sort(keySet);
 

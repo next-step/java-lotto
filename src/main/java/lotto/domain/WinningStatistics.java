@@ -32,10 +32,12 @@ public class WinningStatistics {
     }
 
     private void addWinningStatistics(int matchCount, Boolean isBouns) {
-        if (matchCount >= MINIMUM_MATCH_COUNT) {
-            this.resultGameStatistics.put(RewardTable.of(matchCount, isBouns)
-                    , this.resultGameStatistics.getOrDefault(RewardTable.of(matchCount, isBouns), 0L) + 1);
-        }
+        this.resultGameStatistics.put(RewardTable.of(matchCount, isBouns)
+                , this.resultGameStatistics.getOrDefault(RewardTable.of(matchCount, isBouns), 0L) + 1);
+//        if (matchCount >= MINIMUM_MATCH_COUNT) {
+//            this.resultGameStatistics.put(RewardTable.of(matchCount, isBouns)
+//                    , this.resultGameStatistics.getOrDefault(RewardTable.of(matchCount, isBouns), 0L) + 1);
+//        }
     }
 
     private void makeResultMap() {

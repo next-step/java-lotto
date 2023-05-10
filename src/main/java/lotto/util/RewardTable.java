@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public enum RewardTable {
 
+    MISS(0, false, 0L),
     FIFTH_RANK(3, false, 5_000L),
     FOURTH_RANK(4, false, 50_000L),
     THIRD_RANK(5, false, 1_500_000L),
@@ -24,7 +25,8 @@ public enum RewardTable {
         return Arrays.stream(RewardTable.values())
                 .filter(rank -> rank.getRank(matchCount, matchBonus))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 등수입니다"))
+                .orElse(RewardTable.MISS)
+                //.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 등수입니다"))
                 ;
     }
 

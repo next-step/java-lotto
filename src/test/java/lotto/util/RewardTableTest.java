@@ -18,12 +18,12 @@ public class RewardTableTest {
         assertThat(RewardTable.of(matchRank, isBonus)).isEqualTo(rewardTableEnum);
     }
 
-    @DisplayName("로또 게임 맞춘 갯수가 등수에 없다면 에러를 응답한다.")
+    @DisplayName("로또 게임 맞춘 갯수가 등수에 없다면 꼴등(Miss)를 응답한다.")
     @ParameterizedTest
-    @ValueSource(ints = {1, 2})
+    @ValueSource(ints = {0, 1, 2})
     public void rewardTableTest_없는_등수_테스트(int matchRank) {
-        assertThatThrownBy(() -> RewardTable.of(matchRank, null))
-                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThat(RewardTable.of(matchRank, false)).isEqualTo(RewardTable.MISS);
     }
 
     @DisplayName("로또 게임 맞춘 갯수와 게임 수를 전달하면 당첨 금액을 응답한다.")
