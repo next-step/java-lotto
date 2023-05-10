@@ -1,6 +1,7 @@
 package lotto.domian;
 
 import lotto.domain.LottoTicket;
+import lotto.util.LottoGenerate;
 import lotto.util.LottoUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoTicketTest {
+public class LottosTicketTest {
 
     private List<Integer> testNumberList;
 
@@ -32,9 +33,9 @@ public class LottoTicketTest {
     @DisplayName("LottoGame 객체 정상 생성 테스트")
     @Test
     public void lottoGame_객체_생성_테스트() {
-        LottoTicket lotto = new LottoTicket(LottoUtils.initLottoNumbers());
-        LottoTicket lotto1 = new LottoTicket(LottoUtils.initLottoNumbers());
-        LottoTicket lotto2 = new LottoTicket(LottoUtils.initLottoNumbers());
+        LottoTicket lotto = new LottoTicket(LottoGenerate.initLottoNumbers());
+        LottoTicket lotto1 = new LottoTicket(LottoGenerate.initLottoNumbers());
+        LottoTicket lotto2 = new LottoTicket(LottoGenerate.initLottoNumbers());
 
         assertAll("LottoGame size == 6",
                 () -> assertEquals(lotto.getLottoNumber().size(), 6),

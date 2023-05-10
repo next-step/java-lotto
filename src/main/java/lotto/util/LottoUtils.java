@@ -57,12 +57,6 @@ public class LottoUtils {
         return numberList.size() == LOTTO_NUMBER_SIZE;
     }
 
-    public static List<Integer> initLottoNumbers() {
-        return IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
     public static double calRateOfReturn(int totalWinningPrice, int buyPrice) {
 
         return 1 + (totalWinningPrice - buyPrice) / (double) buyPrice;

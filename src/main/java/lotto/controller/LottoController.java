@@ -24,13 +24,10 @@ public class LottoController {
         int lottoBuyPrice = Integer.parseInt(inputView.setBuyLottoPrice());
         int lottoGameCount = LottoUtils.getLottoGameCount(lottoBuyPrice);
 
-        Lotto lotto = new Lotto();
-        lotto.buyLottoGames(lottoGameCount);
-
-        Lottos lottos = new Lottos(lotto.getLottoGames());
+        Lottos lottos = new Lottos(lottoGameCount);
 
         resultView.showBuyLotto(lottoGameCount);
-        resultView.showMyLottoGameList(lottos.getLottos());
+        resultView.showMyLottoGameList(lottos.getTickets());
 
         List<Integer> lottoResultNumbers = LottoUtils.lottoResultNumberList(inputView.setLottoResultNumber());
 
@@ -41,7 +38,7 @@ public class LottoController {
 
         WinningStatistics winningStatistics = new WinningStatistics(lottoResultNumbers, lottoBonusNumber);
 
-        Map<RewardTable, Integer> resultGameStatistics = winningStatistics.resultLottoGame(lottos.getLottos());
+        Map<RewardTable, Integer> resultGameStatistics = winningStatistics.resultLottoGame(lottos.getTickets());
 
         Reward reward = new Reward();
         int totalMatchPrice = reward.sumTotalMatchPrice(resultGameStatistics);

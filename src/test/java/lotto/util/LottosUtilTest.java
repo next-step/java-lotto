@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoUtilTest {
+public class LottosUtilTest {
 
     @DisplayName("Lotto 가격을 전달하면 구매 횟수를 응답한다.")
     @ParameterizedTest
