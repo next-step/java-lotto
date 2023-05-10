@@ -24,8 +24,7 @@ public class LottoNumbers {
     }
 
     public boolean isMatchingLottoNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber::equals);
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public void validateLottoNumberLength(List<LottoNumber> lottoNumbers) {
