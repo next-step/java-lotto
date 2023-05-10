@@ -30,10 +30,19 @@ public class Lotto {
         if (numbers == null || numbers.size() != DRAW_NUMBER) {
             throw new IllegalArgumentException("In Lotto entered not supported argument");
         }
+        if (isDuplicate(numbers)) {
+            throw new IllegalArgumentException("In Lotto do not allow duplicate number");
+        }
     }
 
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    private boolean isDuplicate(List<Integer> numbers) {
+        return numbers.stream()
+            .distinct()
+            .count() != numbers.size();
     }
 }

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,6 +27,13 @@ class LottoTest {
     void scoreHitTest(Lotto winningNumber, Integer expected) {
         assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6)).scoreHit(winningNumber)).isEqualTo(
             expected);
+    }
+
+    @Test
+    void duplicateExceptionTest() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 1, 2, 3, 4, 5)))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("In Lotto do not allow duplicate number");
     }
 
     static Stream<Arguments> initException() {
