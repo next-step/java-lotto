@@ -1,10 +1,10 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.model.LottoInformation;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -28,24 +28,22 @@ public class InputView {
         }
     }
 
-    public static List<String> inputWinningNumbers() {
+    public static LottoNumbers inputWinningNumbers() {
         scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 압력해주세요 :)");
         String inputWinnerLottoNumber = scanner.nextLine();
         validateEmptyString(inputWinnerLottoNumber);
         validateNonNumeric(inputWinnerLottoNumber);
 
-        return Collections.singletonList(inputWinnerLottoNumber);
+        return LottoNumbers.of(inputWinnerLottoNumber);
     }
 
-    public static int inputBonusNumber(List<String> winnerLottoNumbers) {
+    public static LottoNumber inputBonusNumber(LottoNumbers winnerLottoNumbers) {
         System.out.println("보너스 볼을 입력해주세요 :)");
-        String bonusNumber = scanner.next();
-        validateEmptyString(bonusNumber);
-        validateNonNumeric(bonusNumber);
-        validateExistSameNumber(winnerLottoNumbers,bonusNumber);
+        LottoNumber bonusNumber = LottoNumber.provideLottoNumber(scanner.nextInt());
+        validateExistSameNumber(winnerLottoNumbers, bonusNumber);
 
-        return Integer.parseInt(bonusNumber);
+        return bonusNumber;
     }
 
     private static void validateEmptyString(String inputWinnerLottoNumber) {
@@ -63,8 +61,8 @@ public class InputView {
         }
     }
 
-    private static void validateExistSameNumber(List<String> lottoNumber,String bonusNumber){
-        if(lottoNumber.contains(bonusNumber)){
+    private static void validateExistSameNumber(LottoNumbers lottoNumber, LottoNumber bonusNumber) {
+        if (lottoNumber.isMatchingLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("로또번호에 존재해요 :(");
         }
     }
