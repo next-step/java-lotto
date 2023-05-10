@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoGame {
 
-    private static final int LOTTO_BASIC_MAX_SIZE = 6;
+    private static final int LIST_MAX_SIZE = 6;
     private static final int BONUS_BALL_CHECK = 5;
 
     private List<Integer> lottoNumber;
@@ -16,19 +16,19 @@ public class LottoGame {
     }
 
     private void createLottoGame(List<Integer> lottoNumberList) {
-        isListSizeOfSix(lottoNumberList);
-        isListInSameNumber(lottoNumberList);
+        checkListSizeOfMax(lottoNumberList);
+        checkListInSameNumber(lottoNumberList);
 
         this.lottoNumber =  sortNumber(shuffleNumber(lottoNumberList).subList(0, 6));
     }
 
-    private void isListSizeOfSix(List<Integer> numberList) {
-        if(numberList.size() < LOTTO_BASIC_MAX_SIZE) {
+    private void checkListSizeOfMax(List<Integer> numberList) {
+        if(numberList.size() < LIST_MAX_SIZE) {
             throw new IllegalArgumentException("번호 리스트 크기가 올바르지 않습니다. 입력값 : " + numberList);
         }
     }
 
-    private void isListInSameNumber(List<Integer> numberList) {
+    private void checkListInSameNumber(List<Integer> numberList) {
         if(numberList.size() != numberList.stream().distinct().count()) {
             throw new IllegalArgumentException("번호 리스트 중 중복된 값이 있습니다. 입력값 : " + numberList);
         }
