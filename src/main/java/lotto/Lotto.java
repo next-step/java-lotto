@@ -12,4 +12,18 @@ public class Lotto {
 
         this.numbers = numbers;
     }
+
+
+    public int checkLotto(List<Integer> winningNumbers) {
+        int matchCount = 0;
+        for (int num : numbers) {
+            matchCount = getMatchCount(winningNumbers, matchCount, num);
+        }
+        return matchCount;
+    }
+
+    private int getMatchCount(List<Integer> winningNumbers, int matchCount, int num) {
+        if (winningNumbers.contains(num)) matchCount++;
+        return matchCount;
+    }
 }
