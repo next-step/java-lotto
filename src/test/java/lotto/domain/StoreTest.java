@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 public class StoreTest {
 
-
     @DisplayName("금액 단위만큼 로또를 주문할 수 있다.")
     @Test
     public void order_MakeLottoDependsOnMoney_MakeLotto() {

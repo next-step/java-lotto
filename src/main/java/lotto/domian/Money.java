@@ -10,7 +10,7 @@ public class Money {
     }
 
     private void checkUnit(int money) {
-        if (money % LottoCompany.PURCHASE_UNIT != 0) {
+        if (money % Lotto.PURCHASE_UNIT != 0) {
             throw new IllegalArgumentException("돈은 1000원 단위여야 합니다.");
         }
     }

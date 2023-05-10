@@ -2,10 +2,10 @@ package lotto.domian;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.LongToIntFunction;
 
 public class Lotto {
 
+    public static final int PURCHASE_UNIT = 1000;
     private final Set<LottoNumber> lottoTicket;
 
     public Lotto(Set<LottoNumber> lottoTicket) {
@@ -15,29 +15,29 @@ public class Lotto {
 
     public static Lotto of(Integer... numbers) {
         Set<LottoNumber> lottoTicket = new HashSet<>();
-        for (Integer number : numbers) {
+        for (int number : numbers) {
             lottoTicket.add(new LottoNumber(number));
         }
         return new Lotto(lottoTicket);
     }
 
-    public int match(Lotto target) {
+    public int match(Lotto winNumber) {
         int count = 0;
         for (LottoNumber lottoNumber : lottoTicket) {
-            count += target.increment(lottoNumber);
+            count += winNumber.countIfHave(lottoNumber);
         }
         return count;
     }
 
-    private int increment(LottoNumber lottoNumber) {
+    private int countIfHave(LottoNumber lottoNumber) {
         if (isHaveWinNumber(lottoNumber)) {
             return 1;
         }
         return 0;
     }
 
-    private boolean isHaveWinNumber(LottoNumber lottoNumber) {
-        return lottoTicket.contains(lottoNumber);
+    private boolean isHaveWinNumber(LottoNumber winLottoNumber) {
+        return lottoTicket.contains(winLottoNumber);
     }
 
     public Set<LottoNumber> getLottoNumbers() {
