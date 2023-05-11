@@ -19,6 +19,9 @@ public class StringCalculator implements Calculator<String> {
         while (!operators.isEmpty() && !numbers.isEmpty()) {
             result = Operator.getOperator(operators.poll()).apply(result, numbers.poll());
         }
+        if (!operators.isEmpty() || !numbers.isEmpty()) {
+            throw new IllegalArgumentException("잘못된 수식입니다.");
+        }
         return result;
     }
 
