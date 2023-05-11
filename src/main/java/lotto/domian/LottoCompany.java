@@ -8,10 +8,10 @@ public class LottoCompany {
 
     private static final String SPLIT_DELIMITER = ",";
 
-    public static WinNumber announce(String answerNumbers) {
+    public static WinNumber announce(String answerNumbers, String bonusWinNumber) {
         String[] splitedNumbers = splitNumbers(answerNumbers);
         Set<LottoNumber> lottoNumbers = makeLottoNumber(splitedNumbers);
-        return new WinNumber(new Lotto(lottoNumbers));
+        return new WinNumber(new Lotto(lottoNumbers), new LottoNumber(bonusWinNumber));
     }
 
     private static String[] splitNumbers(String winnerNumbers) {

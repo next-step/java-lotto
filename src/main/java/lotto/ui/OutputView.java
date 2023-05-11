@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     private static final String RECORD_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
+    private static final String RECORD_RESULT_MESSAGE_IF_SECOND = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
 
     public static void showLottoBundle(LottoBundle bundle) {
         bundle.unfoldLottoBundle()
@@ -38,6 +39,11 @@ public class OutputView {
                 .filter(rank -> rank.getMatchingCount() >= 3)
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> {
+                    if (rank == Rank.SECOND) {
+                        System.out.printf(RECORD_RESULT_MESSAGE_IF_SECOND, rank.getMatchingCount(), rank.getPrize(), record.getRecord().getOrDefault(rank, 0));
+                        System.out.println();
+                        return;
+                    }
                     System.out.printf(RECORD_RESULT_MESSAGE, rank.getMatchingCount(), rank.getPrize(), record.getRecord().getOrDefault(rank, 0));
                     System.out.println();
                 });

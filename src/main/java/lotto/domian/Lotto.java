@@ -36,6 +36,9 @@ public class Lotto {
         return 0;
     }
 
+    public boolean haveBonus(LottoNumber bonusNumber) {
+        return lottoTicket.contains(bonusNumber);
+    }
     private boolean isHaveWinNumber(LottoNumber winLottoNumber) {
         return lottoTicket.contains(winLottoNumber);
     }

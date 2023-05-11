@@ -21,7 +21,8 @@ public class Record {
         List<Lotto> lottoList = lottoBundle.unfoldLottoBundle();
         for (Lotto lotto : lottoList) {
             int matchingCount = winNumber.distinguish(lotto);
-            putRankMap(matchingCount, rankMap);
+            boolean haveBonus = winNumber.haveBonus(lotto);
+            putRankMap(matchingCount, rankMap, haveBonus);
         }
 
         return new Record(rankMap);
@@ -38,9 +39,9 @@ public class Record {
         return new ProfitRate(allPrize / purchaseMoney);
     }
 
-    private static void putRankMap(int matchingCount, Map<Rank, Integer> rankMap) {
+    private static void putRankMap(int matchingCount, Map<Rank, Integer> rankMap, boolean haveBonus) {
         if (matchingCount >= 3) {
-            Rank rank = Rank.find(matchingCount);
+            Rank rank = Rank.find(matchingCount, haveBonus);
             rankMap.merge(rank, 1, Integer::sum);
         }
     }

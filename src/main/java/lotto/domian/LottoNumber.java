@@ -12,6 +12,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(String number) {
+        number = number.trim();
         isNumeric(number);
         this.number = Integer.parseInt(number);
     }

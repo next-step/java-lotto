@@ -11,7 +11,10 @@ public class LottoApplicationMain {
         LottoBundle lottoBundle = Store.order(new Money(purchaseMoney));
         OutputView.showLottoBundle(lottoBundle);
 
-        WinNumber winNumber = LottoCompany.announce(InputView.questionWinnerNumber());
+        String answerNumbers = InputView.questionWinnerNumber();
+        String bonusWinNumber = InputView.questionBonusNumber();
+
+        WinNumber winNumber = LottoCompany.announce(answerNumbers, bonusWinNumber);
         Record record = Record.extractRecord(lottoBundle, winNumber);
         OutputView.showRecord(record);
 
