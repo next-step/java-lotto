@@ -9,7 +9,7 @@ public class WinningLotto {
     private static final String LOTTO_SIZE_ERROR = "로또 숫자의 입력값은 6개로 이루어져야 합니다.";
 
     private static final String SPLIT_REGEX = ", ";
-    HashSet<LottoNumber> winningLotto = new HashSet<>();
+    private final HashSet<LottoNumber> winningLotto = new HashSet<>();
 
     public WinningLotto(String input) {
         String[] numbers = input.split(SPLIT_REGEX);
@@ -25,4 +25,7 @@ public class WinningLotto {
         }
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.winningLotto.contains(lottoNumber);
+    }
 }
