@@ -50,16 +50,6 @@ public class LottoTest {
         assertThat(autoLotto.calculateLottoCnt(13000)).isEqualTo(13);
     }
 
-     /*
-     // 이거 구현해야됨
-    @Test
-    @DisplayName("장 수에 맞게 로또 자동생성")
-    public void makeLotto(){
-        // random 함수를 쓰는데 어떻게 test를 하지?
-        assertThat(autoLotto.makeLottos(6))
-    }
-     */
-
     @Test
     @DisplayName("자동생성한 로또 정렬")
     public void testSortAutoLotto(){
@@ -73,14 +63,6 @@ public class LottoTest {
         assertThat(autoLotto.validateWinningNumbers("1,2,3,4,5,6")).isEqualTo(true);
         assertThat(autoLotto.validateWinningNumbers("1,2,3,5")).isEqualTo(false);
     }
-
-    @Test
-    @DisplayName("")
-    public void testMakeLottos(){
-
-    }
-
-    private 
 
     @Test
     @DisplayName("로또 1장 당 특정 숫자가 있는지 확인")
