@@ -3,12 +3,10 @@ package lotto;
 import lotto.domain.*;
 
 import lotto.domain.winning.Rank;
-import lotto.domain.winning.WinningCount;
 import lotto.domain.winning.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {

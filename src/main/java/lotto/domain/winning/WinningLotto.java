@@ -10,7 +10,6 @@ import java.util.List;
 public class WinningLotto {
 
     private Lotto winningLotto;
-
     private LottoNo bonusBall;
 
     public WinningLotto(String winningNumbers, int bonusBall) {

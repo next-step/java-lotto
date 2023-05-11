@@ -12,10 +12,10 @@ public enum WinningCount {
     THREE(3, false),
     NONE(0, false);
 
+    private static final List<WinningCount> winningCountList = Stream.of(values()).collect(Collectors.toList());
+
     private final int count;
     private final boolean isMatchBonusBall;
-
-    private static final List<WinningCount> winningCountList = Stream.of(values()).collect(Collectors.toList());
 
     WinningCount(int count, boolean isMatchBonusBall) {
         this.count = count;

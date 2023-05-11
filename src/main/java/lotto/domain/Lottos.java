@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private static final int LOTTO_REWARD_LIMIT = 3;
     private static final int BONUS_BALL_CHECK = 5;
     private static final int MIN_NUM_OF_LOTTO = 1;
 
