@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.common.code.MatchedNumber;
+import lotto.common.code.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -8,21 +10,20 @@ import java.util.*;
 public class LottoAuto {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final int MINIMUM_MATCHED_NUMBER = 3;
-    private static final int MAXIMUM_MATCHED_NUMBER = 6;
-    private static final List<List<Integer>> lottoList = new ArrayList<>();
-    private static final Map<Integer, Integer> winningStatisticsMap = new HashMap<>();
+    private static final List<Lotto> lottoList = new ArrayList<>();
+    private static final Map<MatchedNumber, Integer> winningStatisticsMap = new LinkedHashMap<>();
     private static List<Integer> lastWeekWinningNumber;
     private static int totalLottoCount;
     private static int amount;
+    private static int bonusBallNumber;
 
     public static void main(String[] args) {
         inputBuyAmount();
         buyAuto(amount);
         addLotto(totalLottoCount);
         inputLastWeekWinningNumber();
+        inputBonusBallNumber();
         winningStatistics();
     }
 
@@ -46,41 +47,50 @@ public class LottoAuto {
         lastWeekWinningNumber = InputView.inputLastWeekWinningNumber();
     }
 
+    public static void inputBonusBallNumber() {
+        bonusBallNumber = InputView.inputBonusBallNumber(lastWeekWinningNumber);
+    }
+
     public static void winningStatistics() {
         setUpWinningStatisticsMap();
-        for (List<Integer> lotto : lottoList) {
-            addWinningStatistics(getMatchedCount(lotto, lastWeekWinningNumber));
+        for (Lotto lotto : lottoList) {
+            addWinningStatistics(getMatchedCount(lotto.getNumbers(), lastWeekWinningNumber), isMatchedBonusNumber(lotto.getNumbers()));
         }
         ResultView.printResult(winningStatisticsMap, amount);
     }
 
-    static List<Integer> createLottoNumbers() {
+    static boolean isMatchedBonusNumber(List<Integer> lottoNumbers) {
+        List<Integer> copyLottoNumbers = new ArrayList<>(lottoNumbers);
+        copyLottoNumbers.removeAll(lastWeekWinningNumber);
+        return copyLottoNumbers.contains(bonusBallNumber);
+    }
+
+    static Lotto createLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
+        for (int i = LottoNumber.MINIMUM_LOTTO_NUMBER.getNumber(); i <= LottoNumber.MAXIMUM_LOTTO_NUMBER.getNumber(); i++) {
             numbers.add(i);
         }
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
+        return new Lotto(numbers.subList(0, 6));
     }
 
-    private static int getMatchedCount(List<Integer> lotto, List<Integer> lastWeekWinningNumber) {
+    private static int getMatchedCount(List<Integer> lottoNumbers, List<Integer> lastWeekWinningNumber) {
         int matchedCount = 0;
-        for (Integer number : lotto) {
+        for (Integer number : lottoNumbers) {
             matchedCount += lastWeekWinningNumber.contains(number) ? 1 : 0;
         }
         return matchedCount;
     }
 
-    private static void addWinningStatistics(int matchedCount) {
+    private static void addWinningStatistics(int matchedCount, boolean isMatchedBonusNumber) {
         if (matchedCount >= MINIMUM_MATCHED_NUMBER) {
-            winningStatisticsMap.put(matchedCount, winningStatisticsMap.get(matchedCount) + 1);
+            MatchedNumber matchedNumber = MatchedNumber.findByNumberWithMatchedBonus(matchedCount, isMatchedBonusNumber);
+            winningStatisticsMap.put(matchedNumber, winningStatisticsMap.get(matchedNumber) + 1);
         }
     }
 
     private static void setUpWinningStatisticsMap() {
-        for (int number = MINIMUM_MATCHED_NUMBER; number <= MAXIMUM_MATCHED_NUMBER; number++) {
-            winningStatisticsMap.put(number, 0);
-        }
+        EnumSet.allOf(MatchedNumber.class).forEach(matchedNumber -> winningStatisticsMap.put(matchedNumber, 0));
     }
 
 }
