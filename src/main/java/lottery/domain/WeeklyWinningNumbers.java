@@ -16,11 +16,11 @@ public class WeeklyWinningNumbers {
         this(lotteryFactory(numberChunk), new LotteryNumber(bonusNumber));
     }
 
-    private WeeklyWinningNumbers(Lottery values, LotteryNumber bonusNumber) {
-        if(values.containsNumber(bonusNumber)) {
+    private WeeklyWinningNumbers(Lottery winningNumbers, LotteryNumber bonusNumber) {
+        if(winningNumbers.containsNumber(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_MSG);
         }
-        this.values = values;
+        this.values = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
