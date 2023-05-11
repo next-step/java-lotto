@@ -32,7 +32,7 @@ public class ResultViewTest {
 
     @Test
     void getRateOfReturn() {
-        assertThat(ResultView.getRateOfReturn(100000, 5000)).isEqualTo(0.05);
+        assertThat(ResultView.getRateOfReturn(100000, 5000)).isEqualTo(BigDecimal.valueOf(0.05));
     }
 
     @Test
