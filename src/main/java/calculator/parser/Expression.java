@@ -21,17 +21,33 @@ public class Expression {
 
     public String nextOperator() {
         checkSize();
+        checkExpressionRuleOfOperator();
         return operators.poll();
     }
 
     public Integer nextOperand() {
         checkSize();
+        checkExpressionRuleOfOperand();
         return operands.poll();
     }
 
     private void checkSize() {
-        if(hasSize(0)) {
+        if (hasSize(0)) {
             throw new IllegalArgumentException("남아있는 피연산자와 연산자가 없습니다");
         }
     }
+
+    private void checkExpressionRuleOfOperand() {
+        if (operands.size() != (operators.size() + 1)) {
+            throw new UnsupportedOperationException("연산자를 먼저 뽑아주세요");
+        }
+    }
+
+    private void checkExpressionRuleOfOperator() {
+        if (operators.size() != operands.size()) {
+            throw new UnsupportedOperationException("피연산자 를 먼저 뽑아주세요");
+        }
+    }
+
+
 }
