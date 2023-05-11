@@ -35,10 +35,10 @@ public class InputView {
         return INPUT.nextInt();
     }
 
-    public int setNoAutoBuyLottoCount() {
+    public String setNoAutoBuyLottoCount() {
         System.out.println(BUY_NO_AUTO_LOTTO_OF_MESSAGE);
 
-        return INPUT.nextInt();
+        return INPUT.nextLine();
     }
 
     public List<String> setNoAutoLottoNumbers(int count) {

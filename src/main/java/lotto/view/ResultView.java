@@ -7,14 +7,14 @@ import java.util.*;
 
 public class ResultView {
 
-    private static String RESULT_MESSAGE = "개를 구매했습니다.";
+    private static String RESULT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static String RESULT_GAME = "당첨 통계";
     private static String BREAK_LINE = "------";
 
     public ResultView() {}
 
-    public void showBuyLotto(int gameCount) {
-        System.out.println(gameCount + RESULT_MESSAGE);
+    public void showBuyLotto(int noAutoCount, int autoCount) {
+        System.out.printf(RESULT_MESSAGE, noAutoCount, autoCount);
     }
 
     public void showMyLottoGameList(List<LottoTicket> lottoTickets) {

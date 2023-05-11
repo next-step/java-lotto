@@ -10,17 +10,20 @@ public class Lottos {
     private List<LottoTicket> lottoTickets;
 
     public Lottos(int gameCount) {
-        this.lottoTickets = buyLottoTicket(gameCount);
+        this.lottoTickets = new ArrayList<>();
+        buyLottoTicket(gameCount);
     }
 
-    private List<LottoTicket> buyLottoTicket(int gameCount) {
-        List<LottoTicket> lottoList = new ArrayList<>();
+    public Lottos(List<LottoTicket> lottoTickets, int gameCount) {
+        this.lottoTickets = lottoTickets;
+        buyLottoTicket(gameCount);
+    }
+
+    private void buyLottoTicket(int gameCount) {
 
         for(int i = 0; i < gameCount; i ++) {
-            lottoList.add(new LottoTicket(LottoGenerate.initLottoNumbers()));
+            this.lottoTickets.add(new LottoTicket(LottoGenerate.initLottoNumbers()));
         }
-
-        return lottoList;
     }
 
     public List<LottoTicket> getTickets() {
