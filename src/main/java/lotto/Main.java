@@ -7,6 +7,7 @@ import lotto.domain.winning.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 public class Main {
@@ -21,10 +22,12 @@ public class Main {
         List<String> manualLottosNumber = InputView.inputManualLottos(numberOfManualLottos);
 
         LottoMachine lottoMachine = new LottoMachine(cost);
-        ResultView.printNumbersOfLotto(numberOfManualLottos, lottoMachine.getNumberOfLotto());
+        ResultView.printNumbersOfLotto(lottoMachine.getNumberOfManualLottos(), lottoMachine.getNumberOfAutoLottos());
 
-        Lottos lottos = lottoMachine.create();
-        ResultView.printLottos(lottos);
+        Lottos manualLottos = lottoMachine.generateManualLotto(manualLottosNumber);
+        Lottos autoLottos = lottoMachine.generateAutoLotto();
+        ResultView.printLottos(manualLottos);
+        ResultView.printLottos(autoLottos);
 
         ResultView.printWinningNumber();
         String winningNumbers = InputView.inputWinningNumber();
@@ -34,7 +37,7 @@ public class Main {
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBallNumber);
 
-        LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(lottos));
+        LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(autoLottos));
 
         ResultView.printStatistics(statics.getStatistics(), Rank.getWinningCounts());
         ResultView.printLottoRate(statics.getRate());

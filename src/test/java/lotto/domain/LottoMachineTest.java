@@ -3,19 +3,21 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoMachineTest {
     @Test
-    @DisplayName("구입금액으로 로또 장수 파악")
-    void numberOfLotto() {
+    @DisplayName("구입금액, 수동 로또 장수로 자동 로또 장수 파악")
+    void numberOfAutoLotto() {
         int cost = 14000;
-        int expected = 14;
+        int numberOfManualLottos = 2;
 
-        LottoMachine machine = new LottoMachine(cost);
-        machine.create();
+        LottoMachine machine = new LottoMachine(cost, numberOfManualLottos);
 
-        assertThat(machine.getNumberOfLotto()).isEqualTo(expected);
+        assertThat(machine.getNumberOfAutoLottos()).isEqualTo(12);
+        assertThat(machine.getNumberOfManualLottos()).isEqualTo(2);
     }
 
     @Test
@@ -26,4 +28,40 @@ public class LottoMachineTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구입금액이 로또 한장 가격보다 작을 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("수동 로또 생성")
+    void createManualLottos() {
+        int cost = 14000;
+        int numberOfMaualLottos = 2;
+
+        LottoMachine machine = new LottoMachine(cost, numberOfMaualLottos);
+        Lottos manualLottos = machine.generateManualLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
+
+        assertThat(new Lottos(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"))).isEqualTo(manualLottos);
+    }
+
+    @Test
+    @DisplayName("수동 로또 생성 - 입력한 수동 로또 장수보다 번호가 부족할 경우")
+    void createManualLottos_exception() {
+        int cost = 14000;
+        int numberOfManualLottos = 3;
+
+        assertThatThrownBy(() -> {
+            LottoMachine machine = new LottoMachine(cost, numberOfManualLottos);
+            machine.generateManualLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력한 수동 로또 장수와 수동 로또 번호가 일치하지 않습니다.");
+    }
+
+    @Test
+    @DisplayName("금액보다 수동 로또를 많이 입력받은 경우")
+    void input_exception() {
+        int cost = 14000;
+        int numberOfManualLottos = 15;
+
+        assertThatThrownBy(() -> {
+            new LottoMachine(cost, numberOfManualLottos);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("구입한 로또보다 수동 로또 장수가 많을 수 없습니다.");
+    }
+
 }

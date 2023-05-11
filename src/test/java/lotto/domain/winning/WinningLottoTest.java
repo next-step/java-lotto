@@ -14,9 +14,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 확인")
     void winLotto() {
-        Lottos lottos = new Lottos(Arrays.asList(
-                LottoFactory.createManualLotto("1, 2, 3, 25, 35, 12"),
-                LottoFactory.createManualLotto("1, 2, 3, 27, 36, 14")));
+        Lottos lottos = new Lottos(Arrays.asList("1, 2, 3, 25, 35, 12", "1, 2, 3, 27, 36, 14"));
 
         String winningNumbers = "1, 2, 3, 45, 32, 13";
         int bonusBall = 7;
@@ -39,9 +37,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 확인 - 보너스 볼")
     void winLotto_withBonusBall() {
-        Lottos lottos = new Lottos(Arrays.asList(
-                LottoFactory.createManualLotto("1, 2, 4, 25, 35, 12"),
-                LottoFactory.createManualLotto("1, 2, 3, 45, 32, 7")));
+        Lottos lottos = new Lottos(Arrays.asList("1, 2, 4, 25, 35, 12", "1, 2, 3, 45, 32, 7"));
 
         String winningNumbers = "1, 2, 3, 45, 32, 13";
         int bonusBall = 7;

@@ -12,25 +12,32 @@ import java.util.stream.IntStream;
 public class Lottos {
     private static final int LOTTO_REWARD_LIMIT = 3;
     private static final int BONUS_BALL_CHECK = 5;
-
     private static final int MIN_NUM_OF_LOTTO = 1;
 
     private List<Lotto> lottos;
 
     public Lottos(int numberOfLotto) {
-        this.lottos = createLottos(numberOfLotto);
+        this.lottos = createAutoLottos(numberOfLotto);
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(List<String> manualLottosNumbers) {
+        this.lottos = createManualLottos(manualLottosNumbers);
     }
 
-    private List<Lotto> createLottos(int numberOfLotto) {
-        return IntStream.range(MIN_NUM_OF_LOTTO, numberOfLotto).boxed().map(lotto -> create()).collect(Collectors.toList());
+    private List<Lotto> createAutoLottos(int numberOfLotto) {
+        return IntStream.range(MIN_NUM_OF_LOTTO, numberOfLotto).boxed().map(lotto -> createAutoLotto()).collect(Collectors.toList());
     }
 
-    private Lotto create() {
+    private List<Lotto> createManualLottos(List<String> manualLottosNumbers) {
+        return manualLottosNumbers.stream().map(numbers -> createManualLotto(numbers)).collect(Collectors.toList());
+    }
+
+    private Lotto createAutoLotto() {
         return LottoFactory.createAutoLotto();
+    }
+
+    private Lotto createManualLotto(String numbers) {
+        return LottoFactory.createManualLotto(numbers);
     }
 
     public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNo bonusBall) {
