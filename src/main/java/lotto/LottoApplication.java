@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.MyLottos;
-import lotto.domain.WinLotto;
-import lotto.service.LottoService;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -10,23 +8,23 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoService lottoService = new LottoService();
+        //로또 구입 금액 투입
+        int money = InputView.money();
+        MyPurchase myPurchase = new MyPurchase(money);
+        ResultView.showLottoCount(myPurchase);
 
-        //로또 구매 & 로또 자동 생성
-        int money = InputView.buy();
-        MyLottos myLottos = lottoService.autoGenerate(money);
-        ResultView.showMyLottos(myLottos);
+        //로또 자동 생성
+        MyLottoGame myLottoGame = MyLottoGame.autoGenerate(myPurchase);
+        ResultView.showMyLottos(myLottoGame.getLottos());
 
         //지난주 당첨 번호
-        List<Integer> winLottoInfoNumbers = InputView.inputWinLottoNumbers();
-        WinLotto winLotto = lottoService.makeWinLotto(winLottoInfoNumbers);
-        ResultView.showWinLotto(winLotto.numbers());
+        List<Integer> winNumbers = InputView.winLottoNumbers();
+        Integer winBonusNumber = InputView.winLottoBonusNumber();
+        WinLotto winLotto = new WinLotto(winNumbers, winBonusNumber);
+        ResultView.showWinLotto(winLotto);
 
-        //당첨번호 조회 및 통계
-        lottoService.checkWin(myLottos, winLotto);
-        ResultView.showLottoResult(myLottos.result());
-
-        //수익률
-        ResultView.showProfit(myLottos.profit());
+        //당첨번호 조회 및 통계, 수익률
+        MyResult myResult = myLottoGame.checkWin(winLotto);
+        ResultView.showLottoResult(myResult);
     }
 }

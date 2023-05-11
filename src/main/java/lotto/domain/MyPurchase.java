@@ -1,13 +1,14 @@
 package lotto.domain;
 
-public class Purchase {
+public class MyPurchase {
+    private static final int PRICE = 1000;
     private final int money;
     private final int count;
 
-    public Purchase(int inputMoney) {
+    public MyPurchase(int inputMoney) {
         validateMoney(inputMoney);
         this.money = inputMoney;
-        this.count = inputMoney / LottoRule.PRICE;
+        this.count = inputMoney / PRICE;
     }
 
     private void validateMoney(int inputMoney) {
