@@ -3,11 +3,12 @@ package lotto;
 import lotto.domain.*;
 
 import lotto.domain.winning.Rank;
+import lotto.domain.winning.WinningCount;
 import lotto.domain.winning.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import javax.xml.transform.Result;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -21,7 +22,7 @@ public class Main {
         ResultView.printManualLottosNumber();
         List<String> manualLottosNumber = InputView.inputManualLottos(numberOfManualLottos);
 
-        LottoMachine lottoMachine = new LottoMachine(cost);
+        LottoMachine lottoMachine = new LottoMachine(cost, numberOfManualLottos);
         ResultView.printNumbersOfLotto(lottoMachine.getNumberOfManualLottos(), lottoMachine.getNumberOfAutoLottos());
 
         Lottos manualLottos = lottoMachine.generateManualLotto(manualLottosNumber);
@@ -37,9 +38,11 @@ public class Main {
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBallNumber);
 
-        LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(autoLottos));
+        LottoStatistics statistics = new LottoStatistics(cost);
+        statistics.registerManualLottoResult(winningLotto.checkWinningNumbers(manualLottos));
+        statistics.registerAutoLottoResult(winningLotto.checkWinningNumbers(autoLottos));
 
-        ResultView.printStatistics(statics.getStatistics(), Rank.getWinningCounts());
-        ResultView.printLottoRate(statics.getRate());
+        ResultView.printStatistics(statistics.getStatistics(), Rank.getWinningCounts());
+        ResultView.printLottoRate(statistics.getRate());
     }
 }

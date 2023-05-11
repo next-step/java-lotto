@@ -31,6 +31,7 @@ public class ResultView {
     }
 
     public static void printStatistics(Map<WinningCount, Integer> statistics, List<WinningCount> rewardCount) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
