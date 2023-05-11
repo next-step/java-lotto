@@ -11,9 +11,9 @@ public class LottoController {
         return lottos;
     }
 
-    public static Statistics generateStatistics(Lottos lottos, String winnerNumber) {
+    public static Statistics generateStatistics(Lottos lottos, String winnerNumber, int bonusNumber) {
         Statistics statistics = new Statistics();
-        ResultView.printStatistics(statistics.generate(lottos, winnerNumber));
+        ResultView.printStatistics(statistics.generate(lottos, winnerNumber, bonusNumber));
         return statistics;
     }
 

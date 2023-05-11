@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import org.jetbrains.annotations.NotNull;
-
 public class Number implements Comparable<Number> {
     private final int number;
 
@@ -14,7 +12,7 @@ public class Number implements Comparable<Number> {
     }
 
     @Override
-    public int compareTo(@NotNull Number o) {
+    public int compareTo(Number o) {
         return Integer.compare(this.number, o.number);
     }
 }

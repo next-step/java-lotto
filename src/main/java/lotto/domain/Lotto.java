@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,21 +43,13 @@ public class Lotto {
     }
 
     public int getNumberOfMatch(Lotto winnerLotto) {
-        int count = 0;
-        
-        for (Number winnerNumber : winnerLotto.getLotto()) {
-            count = getNumberOfMatch(count, winnerNumber);
-        }
-        return count;
+        return (int) winnerLotto.getLotto().stream()
+                .filter(winnerNumber -> isMatchNumber(winnerNumber))
+                .count();
     }
 
-    private int getNumberOfMatch(int count, Number winnerNumber) {
-        for (Number number : lotto) {
-            if (number.compareTo(winnerNumber) == 0) {
-                count++;
-            }
-        }
-        return count;
+    public boolean isMatchNumber(Number winnerNumber) {
+        return lotto.stream().anyMatch(number -> number.compareTo(winnerNumber) == 0);
     }
 
     private List<Number> getLotto() {

@@ -3,26 +3,30 @@ package lotto.domain;
 import java.util.*;
 
 public class Statistics {
-    private Map<PrizeType, Integer> statisticsMap = new HashMap<>();
+    private Map<RankType, Integer> statisticsMap = new HashMap<>();
 
     public Statistics() {
-        statisticsMap.put(PrizeType.THREE, 0);
-        statisticsMap.put(PrizeType.FOUR, 0);
-        statisticsMap.put(PrizeType.FIVE, 0);
-        statisticsMap.put(PrizeType.SIX, 0);
+        statisticsMap.put(RankType.FIRST, 0);
+        statisticsMap.put(RankType.SECOND, 0);
+        statisticsMap.put(RankType.THIRD, 0);
+        statisticsMap.put(RankType.FOURTH, 0);
+        statisticsMap.put(RankType.FIFTH, 0);
     }
 
-    public Map<PrizeType, Integer> generate(Lottos lottos, String winLottoNumber) {
+    public Map<RankType, Integer> generate(Lottos lottos, String winLottoNumber, int bonusNumber) {
         for (Lotto lotto: lottos.getLottos()) {
-            setStatisticsMap(PrizeType.findPrizeType(lotto.getNumberOfMatch(new Lotto(winLottoNumber))));
+            int numberOfMatch = lotto.getNumberOfMatch(new Lotto(winLottoNumber));
+
+            RankType rankType = RankType.findRankType(numberOfMatch, lotto.isMatchNumber(new Number(bonusNumber)));
+            setStatisticsMap(rankType);
         }
         return statisticsMap;
     }
 
-    private void setStatisticsMap(PrizeType prizeType) {
-        if (prizeType != null) {
-            int lottoCount = statisticsMap.get(prizeType);
-            statisticsMap.put(prizeType, ++lottoCount);
+    private void setStatisticsMap(RankType rankType) {
+        if (rankType != RankType.MISS) {
+            int lottoCount = statisticsMap.get(rankType);
+            statisticsMap.put(rankType, ++lottoCount);
         }
     }
 

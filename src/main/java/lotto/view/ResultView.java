@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.PrizeType;
+import lotto.domain.RankType;
 
 import java.util.Map;
 
@@ -16,7 +16,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printStatistics(Map<PrizeType, Integer> statisticsMap) {
+    public static void printStatistics(Map<RankType, Integer> statisticsMap) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
