@@ -40,8 +40,10 @@ class LottoRanksTest {
     static Stream<Arguments> initRate() {
         return Stream.of(
             Arguments.of(new LottoRanks(List.of(LottoRank.FIRST)), 2_000_000d),
-            Arguments.of(new LottoRanks(List.of(LottoRank.FIRST, LottoRank.SECOND)), 1_000_750d),
-            Arguments.of(new LottoRanks(List.of(LottoRank.FOURTH, LottoRank.MISS)), 2.5d),
+            Arguments.of(new LottoRanks(List.of(LottoRank.FIRST, LottoRank.SECOND)), 1_015_000d),
+            Arguments.of(new LottoRanks(List.of(LottoRank.FIRST, LottoRank.THIRD)), 1_000_750d),
+            Arguments.of(new LottoRanks(List.of(LottoRank.FOURTH, LottoRank.MISS)), 25d),
+            Arguments.of(new LottoRanks(List.of(LottoRank.FIFTH, LottoRank.MISS)), 2.5d),
             Arguments.of(new LottoRanks(List.of(LottoRank.MISS)), 0d)
         );
     }

@@ -25,6 +25,11 @@ public class LottoNumber {
     }
 
     @Override
+    public String toString() {
+        return number.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -34,11 +39,6 @@ public class LottoNumber {
         }
         LottoNumber that = (LottoNumber) o;
         return Objects.equals(number, that.number);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
     }
 
 }

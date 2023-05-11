@@ -12,10 +12,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public LottoRanks drawLots(Lotto winningNumber) {
+    public LottoRanks drawLots(List<Integer> winningNumbers, int bonusNumber) {
         return new LottoRanks(lottos.stream()
-            .map(lotto -> lotto.scoreHit(winningNumber))
-            .map(LottoRank::toWinLotto)
+            .map(lotto -> LottoRank.valueOf(lotto.scoreHit(new Lotto(winningNumbers)),
+                lotto.contains(new LottoNumber(bonusNumber))))
             .collect(Collectors.toList()));
     }
 
