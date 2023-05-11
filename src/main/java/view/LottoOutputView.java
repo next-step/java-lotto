@@ -2,9 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.LottoStatistics;
-import util.LottoSeller;
 import domain.LottoResult;
-import util.LottoManager;
 
 import java.util.*;
 

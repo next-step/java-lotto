@@ -1,6 +1,5 @@
 package domain;
 
-import util.LottoManager;
 import util.LottoSeller;
 
 import java.util.Collection;
