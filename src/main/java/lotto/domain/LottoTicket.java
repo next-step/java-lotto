@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
   private final List<LottoNumber> numbers;
@@ -11,8 +10,8 @@ public class LottoTicket {
     this.numbers = numbers;
   }
 
-  public static LottoTicket bySize(int size) {
-    LottoTicket ticket = new LottoTicket(LottoNumbers.collectBySize(size));
+  public static LottoTicket bySize(int size, LottoNumbersSelector selector) {
+    LottoTicket ticket = new LottoTicket(selector.selectBy(size));
     Collections.sort(ticket.numbers);
 
     return ticket;

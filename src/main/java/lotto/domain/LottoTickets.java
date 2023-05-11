@@ -15,7 +15,9 @@ public class LottoTickets {
   public static LottoTickets issue(int number) {
     List<LottoTicket> tickets = new ArrayList<>();
     for (int i = 0; i < number; i++) {
-      tickets.add(LottoTicket.bySize(LottoNumbers.LOTTO_NUMBER_COUNT_OUTBOUND));
+      tickets.add(LottoTicket.bySize(
+          LottoNumbers.LOTTO_NUMBER_COUNT_OUTBOUND,
+          new LottoNumbersRandomSelector()));
     }
 
     return new LottoTickets(tickets);
