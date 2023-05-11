@@ -1,6 +1,7 @@
 package lotto;
 
-import lotto.code.MatchedNumber;
+import lotto.common.code.MatchedNumber;
+import lotto.common.code.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -9,8 +10,6 @@ import java.util.*;
 public class LottoAuto {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final int MINIMUM_MATCHED_NUMBER = 3;
     private static final List<Lotto> lottoList = new ArrayList<>();
     private static final Map<MatchedNumber, Integer> winningStatisticsMap = new LinkedHashMap<>();
@@ -49,7 +48,7 @@ public class LottoAuto {
     }
 
     public static void inputBonusBallNumber() {
-        bonusBallNumber = InputView.inputBonusBallNumber();
+        bonusBallNumber = InputView.inputBonusBallNumber(lastWeekWinningNumber);
     }
 
     public static void winningStatistics() {
@@ -68,7 +67,7 @@ public class LottoAuto {
 
     static Lotto createLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
+        for (int i = LottoNumber.MINIMUM_LOTTO_NUMBER.getNumber(); i <= LottoNumber.MAXIMUM_LOTTO_NUMBER.getNumber(); i++) {
             numbers.add(i);
         }
         Collections.shuffle(numbers);

@@ -1,4 +1,4 @@
-package lotto.code;
+package lotto.common.code;
 
 import java.util.EnumSet;
 
@@ -28,7 +28,7 @@ public enum MatchedNumber {
     }
 
     public static MatchedNumber findByNumberWithMatchedBonus(int number, boolean isMatchedBonus) {
-        if (number == 5 && isMatchedBonus) return FIVE_AND_BONUS;
+        if (number == FIVE.getNumber() && isMatchedBonus) return FIVE_AND_BONUS;
         return EnumSet.allOf(MatchedNumber.class)
                 .stream()
                 .filter(matchedNumber -> number == matchedNumber.getNumber())

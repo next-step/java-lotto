@@ -1,5 +1,6 @@
 package lotto.code;
 
+import lotto.common.code.MatchedNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

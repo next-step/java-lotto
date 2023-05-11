@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.Lotto;
-import lotto.code.MatchedNumber;
+import lotto.common.code.MatchedNumber;
 
 import java.math.BigDecimal;
 import java.util.List;
