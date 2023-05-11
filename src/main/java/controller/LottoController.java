@@ -1,9 +1,7 @@
 package controller;
 
-import domain.Lotto;
+import domain.*;
 import util.LottoSeller;
-import domain.Money;
-import domain.LottoResult;
 import view.LottoInputView;
 import view.LottoOutputView;
 
@@ -14,17 +12,29 @@ public class LottoController {
 
     public void run() {
         final Money money = new Money(LottoInputView.inputPurchaseAmount());
-        List<Lotto> lottoList = LottoSeller.buyLotto(money);
+        List<Lotto> lottos = LottoSeller.buyLotto(money);
 
-        LottoOutputView.printLottoCount(lottoList.size());
-        LottoOutputView.printLottoList(lottoList);
+        LottoOutputView.printLottoCount(lottos.size());
+        LottoOutputView.printLottoList(lottos);
 
-        Lotto winningLotto = new Lotto(LottoInputView.inputWinningLotto());
+        WinningLotto winningLotto = inputWinningLotto();
 
-        List<LottoResult> results = lottoList.stream()
-                .map(lotto -> LottoResult.findBy(winningLotto, lotto))
+        List<LottoResult> results = lottos.stream()
+                .map(winningLotto::getResult)
                 .collect(Collectors.toList());
 
-        LottoOutputView.printLottoResult(results);
+        LottoOutputView.printLottoResult(new LottoStatistics(results));
+    }
+
+    private WinningLotto inputWinningLotto() {
+        final List<LottoNumber> winningNumbers = LottoInputView.inputWinningLotto().stream()
+            .map(String::trim)
+            .map(LottoNumber::new)
+            .distinct()
+            .collect(Collectors.toList());
+
+        final LottoNumber bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
+
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }

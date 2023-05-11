@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
-    private final static String separator = ",";
     public static final Number needLottoNumberCount = new Number(6);
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -18,13 +17,6 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Lotto(String lottoNumbers) {
-        this(List.of(lottoNumbers.split(separator)).stream()
-                .map(String::trim)
-                .map(LottoNumber::new)
-                .distinct()
-                .collect(Collectors.toList()));
-    }
 
     private boolean isValidLottoNumbers(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.size() == needLottoNumberCount.value();

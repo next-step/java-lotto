@@ -1,13 +1,10 @@
 package view;
 
 import domain.Lotto;
-import util.LottoSeller;
+import domain.LottoStatistics;
 import domain.LottoResult;
-import util.LottoManager;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class LottoOutputView {
     public static void printLottoCount(int lottoCount) {
@@ -18,19 +15,26 @@ public class LottoOutputView {
         lottoList.forEach(System.out::println);
     }
 
-    public static void printLottoResult(List<LottoResult> results) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+    public static void printLottoResult(LottoStatistics statistics) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("당첨 통계\n");
+        builder.append("---------\n");
 
-        Arrays.stream(LottoResult.values())
-                .filter(lottoResultType -> lottoResultType != LottoResult.NONE)
-                .sorted(Comparator.comparingInt(LottoResult::matchCount))
-                .forEach(lottoResultType -> {
-                    System.out.println(lottoResultType.matchCount() + "개 일치 (" + lottoResultType.winningMoney() + "원) - " + results.stream()
-                            .filter(result -> result == lottoResultType)
-                            .count() + "개");
-                });
+        final Map<LottoResult, Long> lottoResultMap = statistics.groupAndCounting();
 
-        System.out.printf("총 수익률은 %.2f입니다.%n", LottoManager.calculateProfitRate(LottoSeller.LOTTO_PRICE * results.size(), LottoManager.sumOfLottoResult(results)));
+        LottoResult.findByWinning()
+                .forEach(e -> builder.append(createLottoResult(e, Optional.ofNullable(lottoResultMap.get(e)).orElse(0L))));
+
+        builder.append(String.format("총 수익률은 %.2f입니다.\n", statistics.getProfitRate()));
+
+        System.out.println(builder);
+    }
+
+    private static String createLottoResult(LottoResult resultType, long count) {
+        if (resultType == LottoResult.SECOND) {
+            return String.format(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개\n", resultType.matchCount(), resultType.winningMoney(), count));
+        }
+
+        return String.format("%d개 일치 (%d원) - %d개\n", resultType.matchCount(), resultType.winningMoney(), count);
     }
 }

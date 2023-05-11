@@ -1,10 +1,10 @@
 package domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static util.LottoTestHelper.parse;
 
 class LottoResultTest {
 
@@ -12,14 +12,14 @@ class LottoResultTest {
     @DisplayName("미당첨 로또 결과 생성, 0개 매치")
     void create7() {
         // given
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto("42, 41, 40, 10, 20, 30");
+        final WinningLotto winningLotto = new WinningLotto(parse("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+        Lotto lotto = new Lotto(parse("42, 41, 40, 10, 20, 30"));
 
         // when
-        LottoResult lottoResult = LottoResult.findBy(winningLotto, lotto);
+        final LottoResult result = winningLotto.getResult(lotto);
 
         // then
-        assertThat(lottoResult).isNotNull()
+        assertThat(result).isNotNull()
                 .isEqualTo(LottoResult.NONE);
     }
 
@@ -27,90 +27,90 @@ class LottoResultTest {
     @DisplayName("미당첨 로또 결과 생성, 1개 매치")
     void create6() {
         // given
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto("1, 41, 40, 10, 20, 30");
+        final WinningLotto winningLotto = new WinningLotto(parse("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+        Lotto lotto = new Lotto(parse("1, 41, 40, 10, 20, 30"));
 
         // when
-        LottoResult lottoResult = LottoResult.findBy(winningLotto, lotto);
+        final LottoResult result = winningLotto.getResult(lotto);
 
         // then
-        assertThat(lottoResult).isNotNull()
-                .isEqualTo(LottoResult.NONE);
+        assertThat(result).isNotNull()
+            .isEqualTo(LottoResult.NONE);
     }
 
     @Test
     @DisplayName("미당첨 로또 결과 생성, 2개 매치")
     void create5() {
         // given
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto("1, 2, 40, 10, 20, 30");
+        final WinningLotto winningLotto = new WinningLotto(parse("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+        Lotto lotto = new Lotto(parse("1, 2, 40, 10, 20, 30"));
 
         // when
-        LottoResult lottoResult = LottoResult.findBy(winningLotto, lotto);
+        final LottoResult result = winningLotto.getResult(lotto);
 
         // then
-        assertThat(lottoResult).isNotNull()
-                .isEqualTo(LottoResult.NONE);
+        assertThat(result).isNotNull()
+            .isEqualTo(LottoResult.NONE);
     }
 
     @Test
-    @DisplayName("4등 로또 결과 생성, 3개 매치")
+    @DisplayName("5등 로또 결과 생성, 3개 매치")
     void create4() {
         // given
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto("1, 2, 3, 10, 20, 30");
+        final WinningLotto winningLotto = new WinningLotto(parse("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+        Lotto lotto = new Lotto(parse("1, 2, 3, 10, 20, 30"));
 
         // when
-        LottoResult lottoResult = LottoResult.findBy(winningLotto, lotto);
+        final LottoResult result = winningLotto.getResult(lotto);
 
         // then
-        assertThat(lottoResult).isNotNull()
-                .isEqualTo(LottoResult.FORTH);
+        assertThat(result).isNotNull()
+            .isEqualTo(LottoResult.FIFTH);
     }
 
     @Test
-    @DisplayName("3등 로또 결과 생성, 4개 매치")
+    @DisplayName("4등 로또 결과 생성, 4개 매치")
     void create3() {
         // given
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto("1, 2, 3, 4, 20, 30");
+        final WinningLotto winningLotto = new WinningLotto(parse("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+        Lotto lotto = new Lotto(parse("1, 2, 3, 4, 20, 30"));
 
         // when
-        LottoResult lottoResult = LottoResult.findBy(winningLotto, lotto);
+        final LottoResult result = winningLotto.getResult(lotto);
 
         // then
-        assertThat(lottoResult).isNotNull()
-                .isEqualTo(LottoResult.THIRD);
+        assertThat(result).isNotNull()
+            .isEqualTo(LottoResult.FORTH);
     }
 
     @Test
-    @DisplayName("2등 로또 결과 생성, 5개 매치")
+    @DisplayName("3등 로또 결과 생성, 5개 매치")
     void create2() {
         // given
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 30");
+        final WinningLotto winningLotto = new WinningLotto(parse("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+        Lotto lotto = new Lotto(parse("1, 2, 3, 4, 5, 30"));
 
         // when
-        LottoResult lottoResult = LottoResult.findBy(winningLotto, lotto);
+        final LottoResult result = winningLotto.getResult(lotto);
 
         // then
-        assertThat(lottoResult).isNotNull()
-                .isEqualTo(LottoResult.SECOND);
+        assertThat(result).isNotNull()
+            .isEqualTo(LottoResult.THIRD);
     }
 
     @Test
-    @DisplayName("1등 로또 결과 생성, 6개 매치")
+    @DisplayName("2등 로또 결과 생성, 5개 매치, 보너스번호 일치")
     void create1() {
         // given
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        final WinningLotto winningLotto = new WinningLotto(parse("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+        Lotto lotto = new Lotto(parse("1, 2, 3, 4, 5, 7"));
 
         // when
-        LottoResult lottoResult = LottoResult.findBy(winningLotto, lotto);
+        final LottoResult result = winningLotto.getResult(lotto);
 
         // then
-        assertThat(lottoResult).isNotNull()
-                .isEqualTo(LottoResult.FIRST);
+        assertThat(result).isNotNull()
+            .isEqualTo(LottoResult.SECOND);
     }
 
     @Test
