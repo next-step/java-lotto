@@ -9,15 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   @Override
   public int compareTo(LottoNumber lottoNumber) {
-    if (this.value > lottoNumber.value) {
-      return 1;
-    }
-
-    if (this.value < lottoNumber.value) {
-      return -1;
-    }
-
-    return 0;
+    return Integer.compare(value, lottoNumber.value);
   }
 
   public int value() {
