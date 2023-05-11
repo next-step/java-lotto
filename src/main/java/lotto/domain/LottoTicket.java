@@ -26,4 +26,8 @@ public class LottoTicket {
         .filter(lastWeekNumbers::contains)
         .count();
   }
+
+  public boolean notContains(LottoNumber lottoNumber) {
+    return !numbers.contains(lottoNumber);
+  }
 }

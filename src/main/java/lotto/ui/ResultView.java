@@ -36,8 +36,8 @@ public class ResultView {
     Printer.print("당첨 통계\n---------");
 
     for (Winning winning : Winning.values()) {
-      Printer.print(String.format("%d개 일치 (%d원)- %d개",
-          winning.sameCount(), winning.reward(), winnings.get(winning)));
+      Printer.print(String.format("%d개 일치%s (%d원)- %d개",
+          winning.sameCount(), bonusNumberMessageOrEmpty(winning), winning.reward(), winnings.get(winning)));
     }
 
     String suffix = EMPTY;
@@ -47,5 +47,13 @@ public class ResultView {
     }
 
     Printer.print(String.format("총 수익률은 %.2f입니다.%s", profit, suffix));
+  }
+
+  private String bonusNumberMessageOrEmpty(Winning winning) {
+    if (winning.equals(Winning.SECOND)) {
+      return ", 보너스 볼 일치";
+    }
+
+    return EMPTY;
   }
 }

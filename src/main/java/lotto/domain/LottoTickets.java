@@ -12,12 +12,12 @@ public class LottoTickets {
     this.tickets = new ArrayList<>(tickets);
   }
 
-  public static LottoTickets issue(int number) {
+  public static LottoTickets issue(int number, LottoNumbersSelector selector) {
     List<LottoTicket> tickets = new ArrayList<>();
     for (int i = 0; i < number; i++) {
       tickets.add(LottoTicket.bySize(
           LottoNumbers.LOTTO_NUMBER_COUNT_OUTBOUND,
-          new LottoNumbersRandomSelector()));
+          selector));
     }
 
     return new LottoTickets(tickets);
@@ -31,5 +31,9 @@ public class LottoTickets {
     return this.tickets.stream()
         .map(ticket -> ticket.sameCount(lastWeekNumbers))
         .collect(Collectors.toList());
+  }
+
+  public LottoTicket findByIndex(int index) {
+    return tickets.get(index);
   }
 }

@@ -7,9 +7,10 @@ import java.util.Map;
 
 public enum Winning {
   FIRST(6, 2000000000),
-  SECOND(5, 1500000),
-  THIRD(4, 50000),
-  FOURTH(3, 5000),
+  SECOND(5, 30000000),
+  THIRD(5, 1500000),
+  FOURTH(4, 50000),
+  FIVE(3, 5000),
   NONE(0, 0);
 
   private int sameCount;
@@ -20,7 +21,8 @@ public enum Winning {
     this.reward = reward;
   }
 
-  public static Map<Winning, Integer> score(LottoTickets lottoTickets, List<LottoNumber> lastWeekNumbers) {
+  public static Map<Winning, Integer> score(LottoTickets lottoTickets,
+      List<LottoNumber> lastWeekNumbers, LottoNumber bonusNumber) {
     List<Integer> sameCounts = lottoTickets.sameCounts(lastWeekNumbers);
 
     Map<Winning, Integer> scores = new HashMap();
@@ -28,11 +30,14 @@ public enum Winning {
     Arrays.stream(Winning.values())
         .forEach(winning -> scores.put(winning, 0));
 
-    for (int sameCount : sameCounts) {
+    for (int i = 0; i < sameCounts.size(); i++) {
+      int curCount = sameCounts.get(i);
       Winning winning = Arrays.stream(Winning.values())
-          .filter(win -> win.sameCount == sameCount)
+          .filter(win -> win.sameCount == curCount)
           .findFirst()
           .orElse(NONE);
+
+      winning = switchWinning(winning, lottoTickets.findByIndex(i), bonusNumber);
 
       scores.put(winning, scores.get(winning) + 1);
     }
@@ -48,6 +53,18 @@ public enum Winning {
     }
 
     return lottoPurchasablePrice.profit(new Money(totalPrice));
+  }
+
+  private static Winning switchWinning(Winning winning, LottoTicket lottoTicket, LottoNumber bonusNumber) {
+    if (winning != SECOND) {
+      return winning;
+    }
+
+    if (lottoTicket.notContains(bonusNumber)) {
+      return THIRD;
+    }
+
+    return SECOND;
   }
 
   public int sameCount() {
