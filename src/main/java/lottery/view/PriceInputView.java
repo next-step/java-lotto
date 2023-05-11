@@ -3,7 +3,7 @@ package lottery.view;
 import static lottery.view.BlankPrintView.printBlank;
 
 import java.util.Scanner;
-import lottery.domain.LotteryPurchasedPrice;
+import lottery.domain.LotteryPrice;
 import lottery.domain.ManualQuantity;
 import lottery.domain.PurchasedLottery;
 
@@ -18,7 +18,7 @@ public class PriceInputView {
     public static PurchasedLottery buyLotteries() {
         printSource(PRICE_INPUT_MSG);
 
-        final LotteryPurchasedPrice lotteryPurchasedPrice = new LotteryPurchasedPrice(
+        final LotteryPrice lotteryPrice = new LotteryPrice(
                 SCANNER.nextInt());
 
         printBlank();
@@ -29,7 +29,7 @@ public class PriceInputView {
 
         printBlank();
 
-        return new PurchasedLottery(lotteryPurchasedPrice, manualQuantity);
+        return new PurchasedLottery(lotteryPrice, manualQuantity);
     }
 
     private static void printSource(String source) {

@@ -7,33 +7,33 @@ public class PurchasedLottery {
 
     private static final String EXCEED_AMOUNT_MSG = "로또 구매금액을 초과 하였습니다.";
 
-    private final LotteryPurchasedPrice lotteryPurchasedPrice;
+    private final LotteryPrice lotteryPrice;
 
     private final ManualQuantity manualQuantity;
 
     public PurchasedLottery(int purchasedPrice, int manualQuantity) {
-        this(new LotteryPurchasedPrice(purchasedPrice), new ManualQuantity(manualQuantity));
+        this(new LotteryPrice(purchasedPrice), new ManualQuantity(manualQuantity));
     }
 
     public PurchasedLottery(int purchasedPrice) {
-        this(new LotteryPurchasedPrice(purchasedPrice), new ManualQuantity(NO_MANUAL));
+        this(new LotteryPrice(purchasedPrice), new ManualQuantity(NO_MANUAL));
     }
 
-    public PurchasedLottery(LotteryPurchasedPrice lotteryPurchasedPrice,
+    public PurchasedLottery(LotteryPrice lotteryPrice,
             ManualQuantity manualQuantity) {
-        if(manualQuantity.beyondTheAmount(lotteryPurchasedPrice.numberOfPlays())) {
+        if(manualQuantity.beyondTheAmount(lotteryPrice.numberOfPlays())) {
             throw new IllegalArgumentException(EXCEED_AMOUNT_MSG);
         }
-        this.lotteryPurchasedPrice = lotteryPurchasedPrice;
+        this.lotteryPrice = lotteryPrice;
         this.manualQuantity = manualQuantity;
     }
 
     public int totalPlays() {
-        return lotteryPurchasedPrice.numberOfPlays();
+        return lotteryPrice.numberOfPlays();
     }
 
     public int autoPlays() {
-        return manualQuantity.autoPlays(lotteryPurchasedPrice.numberOfPlays());
+        return manualQuantity.autoPlays(lotteryPrice.numberOfPlays());
     }
 
     public int manualPlays() {

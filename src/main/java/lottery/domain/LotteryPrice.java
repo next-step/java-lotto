@@ -1,6 +1,6 @@
 package lottery.domain;
 
-public class LotteryPurchasedPrice {
+public class LotteryPrice {
 
     protected static final int LOTTERY_PRICE = 1000;
 
@@ -9,7 +9,7 @@ public class LotteryPurchasedPrice {
 
     private final int value;
 
-    public LotteryPurchasedPrice(int value) {
+    public LotteryPrice(int value) {
         if (invalidPrice(value)) {
             throw new IllegalArgumentException(INVALID_PRICE_MSG);
         }
