@@ -23,8 +23,10 @@ public class Lottos {
     }
 
     public void checkWin(MyResult myResult, WinLotto winLotto) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            myResult.update(lotto.checkMatchingNumbers(winLotto));
+            ranks.add(lotto.checkMatchingNumbers(winLotto));
         }
+        myResult.update(ranks);
     }
 }

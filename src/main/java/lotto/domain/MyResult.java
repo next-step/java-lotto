@@ -1,21 +1,35 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MyResult {
     private final MyPurchase myPurchase;
-    private final Map<Rank, Integer> rankCountMap;
+    private Map<Rank, Integer> rankCountMap;
     private int prizeAmount;
 
     public MyResult(MyPurchase myPurchase) {
         this.myPurchase = myPurchase;
-        this.rankCountMap = new HashMap<>();
     }
 
-    public void update(Rank rank) {
-        prizeAmount += rank.getPrize();
-        rankCountMap.put(rank, rankCountMap.getOrDefault(rank, 0) + 1);
+    public void update(List<Rank> ranks) {
+        prizeAmount = updatePrizeAmount(ranks);
+        rankCountMap = updateRanksCount(ranks);
+    }
+
+    private int updatePrizeAmount(List<Rank> ranks) {
+        return ranks.stream()
+                .mapToInt(Rank::getPrize)
+                .sum();
+    }
+
+    private Map<Rank, Integer> updateRanksCount(List<Rank> ranks) {
+        Map<Rank,Integer> updatedRanksCount = new HashMap<>();
+        for(Rank rank : ranks){
+            updatedRanksCount.put(rank, updatedRanksCount.getOrDefault(rank, 0) + 1);
+        }
+        return updatedRanksCount;
     }
 
     public double profit() {
