@@ -1,7 +1,6 @@
 package study.lottogame.domain;
 
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -15,20 +14,12 @@ public class Lotteries {
     this.lotteries = lotteries;
   }
 
-  public GameResult calculateGameResult(Lottery prizeLottery, LottoNumber bonusLottoNumber) {
+  public GameResult calculateGameResult(WinningLottery winningLottery) {
     Map<Rank, Integer> prizeStaticsMap = lotteries.stream()
-        .map(lottery -> getRank(prizeLottery, bonusLottoNumber, lottery))
-        .collect(Collectors.toMap(
-            Function.identity(), r -> 1, Integer::sum, () -> new EnumMap<>(Rank.class))
-        );
+        .map(lottery -> winningLottery.getRank(lottery))
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(value -> 1)));
 
     return new GameResult(prizeStaticsMap);
-  }
-
-  private Rank getRank(Lottery prizeLottery, LottoNumber bonusLottoNumber, Lottery lottery) {
-    int countOfMatch = lottery.matchLottoNumbers(prizeLottery);
-    boolean matchBonus = lottery.matchLottoNumber(bonusLottoNumber);
-    return Rank.valueOf(countOfMatch, matchBonus);
   }
 
   public List<Lottery> getLotteries() {

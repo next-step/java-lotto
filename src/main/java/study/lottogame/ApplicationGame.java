@@ -5,6 +5,7 @@ import study.lottogame.domain.Lotteries;
 import study.lottogame.domain.Lottery;
 import study.lottogame.domain.LottoNumber;
 import study.lottogame.domain.Money;
+import study.lottogame.domain.WinningLottery;
 import study.lottogame.factory.LotteriesFactory;
 import study.lottogame.ui.InputView;
 import study.lottogame.ui.OutputView;
@@ -18,7 +19,9 @@ public class ApplicationGame {
 
     Lottery prizeLottery = InputView.inputPrizeLottery();
     LottoNumber bonusLottoNumber = InputView.inputBonusLottoNumber();
-    GameResult gameResult = lotteries.calculateGameResult(prizeLottery, bonusLottoNumber);
+    WinningLottery winningLottery = new WinningLottery(prizeLottery, bonusLottoNumber);
+
+    GameResult gameResult = lotteries.calculateGameResult(winningLottery);
     OutputView.printGameResult(inputMoney, gameResult);
   }
 }

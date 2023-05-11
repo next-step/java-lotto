@@ -18,11 +18,11 @@ public class LotteriesTest {
   @MethodSource("createTestLottery")
   public void calculateGameResult(String[] numbers, Rank rank) {
     Lotteries lotteries = new Lotteries(List.of(LotteryFactory.create(numbers)));
-    Lottery winningLottery = LotteryFactory.create(new String[]{"1", "2", "3", "4", "5", "6"});
+    Lottery prizeLottery = LotteryFactory.create(new String[]{"1", "2", "3", "4", "5", "6"});
     LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
 
     GameResult gameResult = lotteries
-        .calculateGameResult(winningLottery, bonusLottoNumber);
+        .calculateGameResult(new WinningLottery(prizeLottery, bonusLottoNumber));
 
     Map<Rank, Integer> prizeStaticsMap = gameResult.getPrizeStaticsMap();
     assertThat(prizeStaticsMap.get(rank)).isEqualTo(1);
