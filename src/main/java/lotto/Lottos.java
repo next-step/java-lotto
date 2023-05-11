@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -21,10 +23,13 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void printLottos() {
-        lottos.forEach(
-                Lotto::printNumbers
-        );
+    public List<String> getLottosString() {
+        List<String> strs = new ArrayList<>();
+
+        for (Lotto lotto : lottos) {
+            strs.add(lotto.getNumbersString());
+        }
+        return strs;
     }
 
 }

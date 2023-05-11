@@ -32,7 +32,7 @@ public class Lotto {
         return matchCount;
     }
 
-    public void printNumbers() {
-        System.out.println(numbers);
+    public String getNumbersString() {
+        return numbers.toString();
     }
 }

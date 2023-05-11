@@ -24,10 +24,8 @@ public class LottoStatistics {
         }
     }
 
-    public void printStatistics() {
-        for (Winnings value : Winnings.values()) {
-            System.out.println(value.matchCount + "개 일치 (" + value.prize + "원) - " + statistics.getOrDefault(value, ZERO));
-        }
+    public Integer getWinningsCount(Winnings winnings) {
+        return statistics.getOrDefault(winnings, ZERO);
     }
 
     public BigDecimal rateOfReturn(BigDecimal payment) {
@@ -46,12 +44,14 @@ public class LottoStatistics {
         return totalReturns;
     }
 
-    enum Winnings {
+    public enum Winnings {
         FIRST(BigDecimal.valueOf(2000000000), 6),
         SECOND(BigDecimal.valueOf(1500000), 5),
         THIRD(BigDecimal.valueOf(50000), 4),
         FOURTH(BigDecimal.valueOf(5000), 3),
         NOTWIN(BigDecimal.ZERO, 0);
+
+
 
         private BigDecimal prize;
         private int matchCount;
@@ -67,5 +67,14 @@ public class LottoStatistics {
             }
             return NOTWIN;
         }
+
+        public BigDecimal getPrize() {
+            return prize;
+        }
+
+        public int getMatchCount() {
+            return matchCount;
+        }
+
     }
 }

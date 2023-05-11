@@ -10,7 +10,9 @@ public class InputView {
 
     public static void purchaseResultView(Lottos lottos) {
         System.out.println(lottos.getLottoCount() + "개를 구매했습니다.");
-        lottos.printLottos();
+        lottos.getLottosString().forEach(
+                System.out::println
+        );
     }
 
     public static void winningInputView() {

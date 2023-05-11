@@ -14,8 +14,6 @@ public class LottoGenerator {
 
         for (int i = 0; i < size; i++) {
             Lotto lotto = generateAutoLotto();
-            lotto.printNumbers();
-
             lottos.add(lotto);
         }
 
