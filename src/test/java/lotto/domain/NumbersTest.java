@@ -11,7 +11,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class NumbersTest {
 
@@ -36,10 +35,7 @@ class NumbersTest {
         List<Integer> unSortedNumbers = Arrays.asList(33, 36, 32, 31, 34, 35);
         Numbers sortedNumbers = new Numbers(unSortedNumbers);
         List<Integer> numbers = sortedNumbers.getValues();
-        assertAll (
-                () -> assertThat(numbers).isEqualTo(List.of(31, 32, 33, 34, 35, 36)),
-                () -> assertThat(numbers).containsExactly(31, 32, 33, 34, 35, 36)
-        );
+        assertThat(numbers).isEqualTo(List.of(31, 32, 33, 34, 35, 36));
     }
 
     @ParameterizedTest(name = "{0}은 선택한 숫자가 맞음")

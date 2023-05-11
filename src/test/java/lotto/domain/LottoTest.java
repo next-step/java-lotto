@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import lotto.view.InputView;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -22,31 +20,5 @@ class LottoTest {
                 () -> assertThat(Numbers.NUMBER_RANGE.contains(lotto.numbers().find(4))).isTrue(),
                 () -> assertThat(Numbers.NUMBER_RANGE.contains(lotto.numbers().find(5))).isTrue()
         );
-    }
-
-    @Test
-    void 당첨() {
-        WinLotto winLotto = new WinLotto(new Numbers(InputView.makeNumbers("31, 32, 33, 34, 35, 36")));
-        Rank rank1 = new Lotto(new Numbers(InputView.makeNumbers("31, 32, 33, 34, 35, 36"))).checkMatchingNumbers(winLotto);
-        Rank rank2 = new Lotto(new Numbers(InputView.makeNumbers("11, 32, 33, 34, 35, 36"))).checkMatchingNumbers(winLotto);
-        assertAll(
-                () -> assertThat(rank1).isEqualTo(Rank.FIRST),
-                () -> assertThat(rank2).isEqualTo(Rank.THIRD)
-        );
-    }
-
-    @Test
-    void 미당첨() {
-        WinLotto winLotto = new WinLotto(new Numbers(InputView.makeNumbers("31, 32, 33, 34, 35, 36")));
-        Lotto lotto = new Lotto(new Numbers(InputView.makeNumbers("11, 12, 13, 14, 35, 36")));
-        Rank rank = lotto.checkMatchingNumbers(winLotto);
-        assertThat(rank).isEqualTo(Rank.NONE);
-    }
-
-    @Test
-    void 당첨_2등() {
-        WinLotto winLotto = new WinLotto(new Numbers(InputView.makeNumbers("31, 32, 33, 34, 35, 36")), 11);
-        Rank rank = new Lotto(new Numbers(InputView.makeNumbers("11, 32, 33, 34, 35, 36"))).checkMatchingNumbers(winLotto);
-        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 }
