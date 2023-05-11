@@ -6,14 +6,24 @@ import java.util.stream.IntStream;
 
 public class LottoTickets {
     List<Ticket> tickets = new ArrayList<>();
-    int[] counter = new int[7];
 
-    public LottoTickets(List<Ticket> tickets) {
+    private LottoTickets(List<Ticket> tickets) {
         this.tickets = tickets;
     }
 
+    public static LottoTickets from(List<Ticket> tickets) {
+        return new LottoTickets(tickets);
+    }
+
     public LottoTickets(String price) {
-        int numberOfTickets = Integer.parseInt(price) / 1000;
+        generateTickets(Integer.parseInt(price) / 1000);
+    }
+
+    public static LottoTickets from(String price) {
+        return new LottoTickets(price);
+    }
+
+    private void generateTickets(int numberOfTickets) {
         List<Integer> candidateNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
         IntStream.range(0, numberOfTickets)
                 .forEach(i -> {
@@ -26,15 +36,17 @@ public class LottoTickets {
         return tickets.size();
     }
 
+    public int totalPrice() {
+        return tickets.size() * 1000;
+    }
+
     public boolean checkValidTickets() {
         return tickets.stream().allMatch(Ticket::checkValidTickets);
     }
 
-    public void countMatchingTickets(List<Integer> winningNumber) {
+    public int[] counterOfMatchingTickets(List<Integer> winningNumber) {
+        int[] counter = new int[7];
         tickets.stream().forEach(t -> counter[t.numberOfMatching(winningNumber)]++);
-    }
-
-    public int getCountOfMatchingNumber(int number) {
-        return counter[number];
+        return counter;
     }
 }

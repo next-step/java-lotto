@@ -1,6 +1,7 @@
 package lotto;
 
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +10,11 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoGameTest {
-    @Test
-    @DisplayName("전체 티켓 중 3개, 4개, 5개, 6개 일치한 티켓이 몇개인지")
-    public void numberOfMatchingNumber() {
+public class LottoGameServiceTest {
+    LottoGameService lottoGameService;
+
+    @BeforeEach
+    void init() {
         List<Ticket> tickets = new ArrayList<>();
         tickets.add(Ticket.from(List.of(8, 21, 23, 41, 42, 43)));
         tickets.add(Ticket.from(List.of(3, 5, 11, 16, 32, 38)));
@@ -28,14 +30,25 @@ public class LottoGameTest {
         tickets.add(Ticket.from(List.of(13, 14, 18, 21, 23, 35)));
         tickets.add(Ticket.from(List.of(17, 21, 29, 37, 42, 45)));
         tickets.add(Ticket.from(List.of(3, 8, 27, 30, 35, 44)));
-        LottoTickets lottoTickets = new LottoTickets(tickets);
+        LottoTickets lottoTickets = LottoTickets.from(tickets);
 
         List<Integer> winningNumber = List.of(1, 2, 3, 4, 5, 6);
+        lottoGameService = LottoGameService.of(lottoTickets, winningNumber);
+        lottoGameService.countMatchingTickets();
+    }
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumber);
-        assertThat(lottoGame.getCountOfMatchingNumber(3)).isEqualTo(1);
-        assertThat(lottoGame.getCountOfMatchingNumber(4)).isEqualTo(0);
-        assertThat(lottoGame.getCountOfMatchingNumber(5)).isEqualTo(0);
-        assertThat(lottoGame.getCountOfMatchingNumber(6)).isEqualTo(0);
+    @Test
+    @DisplayName("전체 티켓 중 당첨번호와 3개, 4개, 5개, 6개 일치한 티켓이 몇개인지 통계")
+    public void countOfMatchingNumber() {
+        assertThat(lottoGameService.getCountOfMatchingNumber(3)).isEqualTo(1);
+        assertThat(lottoGameService.getCountOfMatchingNumber(4)).isEqualTo(0);
+        assertThat(lottoGameService.getCountOfMatchingNumber(5)).isEqualTo(0);
+        assertThat(lottoGameService.getCountOfMatchingNumber(6)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("수익률 계산기능 테스트")
+    public void rateOfReturn() {
+        assertThat(lottoGameService.returnRate()).isEqualTo(0.35);
     }
 }
