@@ -40,17 +40,21 @@
 ### LottoStore
 * 로또를 판매한다
 
-### Match
+### Rank
 * 로또가 몇개를 맞았는지 나타내는 enum
 * 일치 개수별 금액과 메세지를 가지고있다
 
-### Matchs
-* 맞은 갯수별 맞은 로또의 수
+### RankResult
+* Rank 의 수
 * 총 당첨금을 계산한다.
 
 ### LottoBuyer
 * 로또를 구매한다.
 * 당첨을 확인한다.
 
-### LottoGame
+### ~~LottoGame~~
 * 게임을 시작한다.
+
+### WinningLotto
+* 로또번호와 보너스 번호를 가지고 있다.
+* 등수를 찾는다.
