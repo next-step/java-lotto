@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumberGenerator;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,32 +38,33 @@ public class LottoGameTest {
     void _1000원_이상시_로또를_구매할수있음(int input) {
         assertThatCode(() -> lottoGame.buyLotto(input))
                 .doesNotThrowAnyException();
-        ;
     }
 
     @Test
     void 로또당첨번호_6개아님_숫자3개입력() {
-        List<Integer> lottoNumbers = List.of(1, 2, 3);
-
-        assertThatThrownBy(() -> lottoGame.score(lottoNumbers, 4))
+        assertThatThrownBy(() -> new WinningNumbers(
+                List.of(1, 2, 3),
+                4
+        ))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 당첨번호는 6개 입니다.");
     }
 
     @Test
     void 이미존재하는_보너스번호_입력() {
-        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
-
-        assertThatThrownBy(() -> lottoGame.score(lottoNumbers, 1))
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new WinningNumbers(
+                List.of(1, 2, 3, 4, 5, 6),
+                1
+        )).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이미 존재하는 번호입니다.");
     }
 
     @Test
     void 중복된_로또번호_입력() {
-        List<Integer> lottoNumbers = List.of(1, 1, 3, 4, 5, 6);
-
-        assertThatThrownBy(() -> lottoGame.score(lottoNumbers, 7))
+        assertThatThrownBy(() -> new WinningNumbers(
+                List.of(1, 1, 3, 4, 5, 6),
+                7
+        ))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 번호가 입력되었습니다.");
     }

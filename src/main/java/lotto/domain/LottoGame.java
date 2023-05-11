@@ -27,9 +27,9 @@ public class LottoGame {
         return lottos;
     }
 
-    private List<LottoMatcher> matchResult(List<LottoNumber> winNumber, LottoNumber bonusNumber) {
+    private List<LottoMatcher> matchResult(WinningNumbers winningNumbers) {
         return lottos.stream()
-                .map(lotto -> lotto.match(winNumber, bonusNumber))
+                .map(lotto -> winningNumbers.match(lotto))
                 .collect(Collectors.toList());
     }
 
@@ -39,44 +39,8 @@ public class LottoGame {
         }
     }
 
-    public LottoScore score(List<Integer> winNumbers, Integer bonusNumber) {
-        checkNumbers(winNumbers, bonusNumber);
-        return new LottoScore(matchResult(toLottoNumbers(winNumbers), toLottoNumber(bonusNumber))
-        );
-    }
-
-    private LottoNumber toLottoNumber(Integer bonusNumber) {
-        return new LottoNumber(bonusNumber);
-    }
-
-    private List<LottoNumber> toLottoNumbers(List<Integer> winNumbers) {
-        return winNumbers.stream()
-                .map(number -> new LottoNumber(number))
-                .collect(Collectors.toList());
-    }
-
-    private void checkNumbers(List<Integer> winNumbers, Integer bonusNumber) {
-        if (isDuplicateNumber(winNumbers)) {
-            throw new IllegalArgumentException("중복된 번호가 입력되었습니다.");
-        }
-        if (existNumber(winNumbers, bonusNumber)) {
-            throw new IllegalArgumentException("이미 존재하는 번호입니다.");
-        }
-        if (checkNumberOfCount(winNumbers)) {
-            throw new IllegalArgumentException("로또 당첨번호는 6개 입니다.");
-        }
-    }
-
-    private static boolean checkNumberOfCount(List<Integer> winNumbers) {
-        return winNumbers.size() != 6;
-    }
-
-    private static boolean existNumber(List<Integer> winNumbers, Integer bonusNumber) {
-        return winNumbers.contains(bonusNumber);
-    }
-
-    private static boolean isDuplicateNumber(List<Integer> winNumbers) {
-        return winNumbers.size() != new HashSet<>(winNumbers).size();
+    public LottoScore score(WinningNumbers winningNumbers) {
+        return new LottoScore(matchResult(winningNumbers));
     }
 
     public int quantity() {

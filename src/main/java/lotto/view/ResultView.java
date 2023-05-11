@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoMatcher.*;
-import static lotto.domain.LottoMatcher.FIRST_MATCH;
 
 public class ResultView {
     public void view(List<Lotto> lottos) {

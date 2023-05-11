@@ -1,17 +1,20 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static lotto.domain.LottoMatcher.*;
+import static lotto.domain.LottoMatcher.values;
 
 public class LottoScore {
-    private int firstCount = 0;
-    private int secondCount = 0;
-    private int thirdCount = 0;
-    private int fourthCount = 0;
-    private int fifthCount = 0;
+    private Map<String, Integer> map;
 
     public LottoScore(List<LottoMatcher> lottoMatchers) {
+        this.map = Stream.of("first", "second", "third", "fourth", "fifth")
+                .collect(Collectors.toMap(Function.identity(), v -> 0));
         updateScore(lottoMatchers);
     }
 
@@ -20,53 +23,34 @@ public class LottoScore {
     }
 
     private void incrementScore(LottoMatcher lottoMatcher) {
-        lottoMatcher.incrementScore(this);
-    }
-
-    protected void addFirst() {
-        firstCount++;
-    }
-
-    protected void addSecond() {
-        secondCount++;
-    }
-
-    protected void addThird() {
-        thirdCount++;
-    }
-
-    protected void addFourth() {
-        fourthCount++;
-    }
-
-    protected void addFifth() {
-         fifthCount++;
-    }
-
-    public int firstCount() {
-        return firstCount;
-    }
-
-    public int secondCount() {
-        return secondCount;
-    }
-
-    public int thirdCount() {
-        return thirdCount;
-    }
-
-    public int fourthCount() {
-        return fourthCount;
-    }
-    public int fifthCount() {
-        return fifthCount;
+        lottoMatcher.incrementScore(map);
     }
 
     public int amount() {
-        return FIRST_MATCH.amount(firstCount) +
-                SECOND_MATCH.amount(secondCount) +
-                THIRD_MATCH.amount(thirdCount) +
-                FOURTH_MATCH.amount(fourthCount) +
-                FIFTH_MATCH.amount(fifthCount);
+        return Arrays.stream(values())
+                .filter(LottoMatcher::isMatching)
+                .mapToInt(match -> match.amount(map.get(match.key())))
+                .sum();
+
+    }
+
+    public int fifthCount() {
+        return map.getOrDefault("fifth", 0);
+    }
+
+    public int fourthCount() {
+        return map.getOrDefault("fourth", 0);
+    }
+
+    public int thirdCount() {
+        return map.getOrDefault("third", 0);
+    }
+
+    public int secondCount() {
+        return map.getOrDefault("second", 0);
+    }
+
+    public int firstCount() {
+        return map.getOrDefault("first", 0);
     }
 }
