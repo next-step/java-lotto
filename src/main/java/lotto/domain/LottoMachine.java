@@ -4,11 +4,12 @@ import java.util.List;
 
 public class LottoMachine {
     private static final int LOTTO_COST = 1000;
+    private static final int NO_MANUAL_LOTTO = 0;
     private Positive autoPositive;
     private Positive manualPositive;
 
     public LottoMachine(int cost) {
-        this(cost, 0);
+        this(cost, NO_MANUAL_LOTTO);
     }
 
     public LottoMachine(int cost, int numberOfManualLottos) {
