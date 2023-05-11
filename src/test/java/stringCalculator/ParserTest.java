@@ -14,7 +14,7 @@ class ParserTest {
   void sequenceTest() {
     assertThatThrownBy(() -> Parser.parse("1 + 2 * 3 / 2 +"))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("연산자는 항상 피연산자 사이에 들어가야 합니다");
+        .hasMessageContaining("마지막은 항상 피연산자로 끝나야 합니다. 마지막에 입력된 값");
   }
 
   @Test
