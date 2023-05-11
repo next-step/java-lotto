@@ -11,18 +11,16 @@ import java.util.stream.Stream;
 
 public class LottoController {
 
-    private final String separator = ",";
-
     public void run() {
         final Money money = new Money(LottoInputView.inputPurchaseAmount());
-        List<Lotto> lottoList = LottoSeller.buyLotto(money);
+        List<Lotto> lottos = LottoSeller.buyLotto(money);
 
-        LottoOutputView.printLottoCount(lottoList.size());
-        LottoOutputView.printLottoList(lottoList);
+        LottoOutputView.printLottoCount(lottos.size());
+        LottoOutputView.printLottoList(lottos);
 
         WinningLotto winningLotto = inputWinningLotto();
 
-        List<LottoResult> results = lottoList.stream()
+        List<LottoResult> results = lottos.stream()
                 .map(winningLotto::getResult)
                 .collect(Collectors.toList());
 
@@ -30,7 +28,7 @@ public class LottoController {
     }
 
     private WinningLotto inputWinningLotto() {
-        final List<LottoNumber> winningNumbers = Stream.of(LottoInputView.inputWinningLotto().split(separator))
+        final List<LottoNumber> winningNumbers = LottoInputView.inputWinningLotto().stream()
             .map(String::trim)
             .map(LottoNumber::new)
             .distinct()

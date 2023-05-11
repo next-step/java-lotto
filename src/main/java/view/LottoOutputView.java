@@ -6,9 +6,7 @@ import util.LottoSeller;
 import domain.LottoResult;
 import util.LottoManager;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class LottoOutputView {
     public static void printLottoCount(int lottoCount) {
@@ -20,6 +18,25 @@ public class LottoOutputView {
     }
 
     public static void printLottoResult(LottoStatistics statistics) {
-        System.out.println(statistics.serializeStatistics());
+        StringBuilder builder = new StringBuilder();
+        builder.append("당첨 통계\n");
+        builder.append("---------\n");
+
+        final Map<LottoResult, Long> lottoResultMap = statistics.groupAndCounting();
+
+        LottoResult.findByWinning()
+                .forEach(e -> builder.append(createLottoResult(e, Optional.ofNullable(lottoResultMap.get(e)).orElse(0L))));
+
+        builder.append(String.format("총 수익률은 %.2f입니다.\n", statistics.getProfitRate()));
+
+        System.out.println(builder);
+    }
+
+    private static String createLottoResult(LottoResult resultType, long count) {
+        if (resultType == LottoResult.SECOND) {
+            return String.format(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개\n", resultType.matchCount(), resultType.winningMoney(), count));
+        }
+
+        return String.format("%d개 일치 (%d원) - %d개\n", resultType.matchCount(), resultType.winningMoney(), count);
     }
 }

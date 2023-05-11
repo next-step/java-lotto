@@ -21,6 +21,6 @@ public class LottoSeller {
 
         return IntStream.range(0, lottoCount)
                 .mapToObj(i -> createLotto())
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
     }
 }

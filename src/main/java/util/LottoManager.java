@@ -15,16 +15,6 @@ public class LottoManager {
         throw new IllegalStateException("Utility class");
     }
 
-    public static float calculateProfitRate(int purchaseAmount, int winningMoney) {
-        return (float) winningMoney / purchaseAmount;
-    }
-
-    public static int sumOfLottoResult(Collection<LottoResult> lottoResults) {
-        return lottoResults.stream()
-                .mapToInt(LottoResult::winningMoney)
-                .sum();
-    }
-
     public static Lotto createLotto() {
         final List<LottoNumber> allLottoNumbers = LottoNumber.allLottoNumbers();
         Collections.shuffle(allLottoNumbers);
