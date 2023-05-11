@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
   private final List<LottoNumber> numbers;
@@ -22,11 +23,8 @@ public class LottoTicket {
   }
 
   public int sameCount(List<LottoNumber> lastWeekNumbers) {
-    int count = 0;
-    for (LottoNumber lastWeekNumber : lastWeekNumbers) {
-      count = numbers.contains(lastWeekNumber) ? count + 1 : count;
-    }
-
-    return count;
+    return (int) numbers.stream()
+        .filter(lastWeekNumbers::contains)
+        .count();
   }
 }
