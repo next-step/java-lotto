@@ -26,12 +26,12 @@ public class ExpressionParser {
 
         String[] parts = expression.split(delimiter);
 
-        for (int idx = 0; idx < parts.length; idx++) {
-            if (idx % 2 == 0) {
-                operands.addLast(stringToIntegerConverter.convert(parts[idx]));
-            } else {
-                operators.addLast(parts[idx]);
-            }
+        for (int evenIdx = 0; evenIdx < parts.length; evenIdx += 2) {
+            operands.addLast(stringToIntegerConverter.convert(parts[evenIdx]));
+        }
+
+        for (int oddIdx = 1; oddIdx < parts.length; oddIdx += 2) {
+            operators.addLast(parts[oddIdx]);
         }
 
         return new Expression(operands, operators);

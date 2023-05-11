@@ -65,4 +65,11 @@ public class ExpressionParserTest {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> parser.parse(invalidExpression));
     }
+
+    @Test
+    void 연산자와_피연산자를_분리해_각각을_원소로하는_Expression_객체를_생성한다() {
+        Expression expression = parser.parse("1 + 2 * 3 / 4");
+
+        Assertions.assertThat(expression.hasSize(7)).isTrue();
+    }
 }
