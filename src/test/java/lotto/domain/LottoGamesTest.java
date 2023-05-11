@@ -21,6 +21,23 @@ public class LottoGamesTest {
     }
 
     @Test
+    @DisplayName("로또 총상금 계산")
+    public void sum() {
+        //given
+        Lotto lotto = new Lotto(manualLottoGenerator);
+        List<Lotto> lottoList = List.of(lotto);
+        LottoGames lottoGames = new LottoGames(lottoList);
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
+
+        //when
+        lottoGames.calculatePrizeCount(winningLotto);
+        int totalPrize = lottoGames.sum();
+
+        //then
+        assertThat(totalPrize).isEqualTo(5000);
+    }
+
+    @Test
     @DisplayName("로또 수익률 계산")
     public void returnRate() {
         Lotto lotto = new Lotto(manualLottoGenerator);

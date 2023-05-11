@@ -27,7 +27,7 @@ public class LottoGames {
         return this.lottoGameList.size();
     }
 
-    private int sum() {
+    protected int sum() {
         return lottoResult.keySet().stream()
                 .map(rank -> (lottoResult.get(rank) * rank.getPrize()))
                 .reduce(0, Integer::sum);
