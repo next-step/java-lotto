@@ -19,7 +19,7 @@ public class PositiveTest {
     void equals() {
         Positive positive = new Positive(1);
 
-        assertThat(positive.equals(1)).isTrue();
-        assertThat(positive.equals(2)).isFalse();
+        assertThat(positive.isEqual(1)).isTrue();
+        assertThat(positive.isEqual(2)).isFalse();
     }
 }

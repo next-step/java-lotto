@@ -44,6 +44,6 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
         List<WinningCount> count = winningLotto.checkWinningNumbers(lottos);
 
-        assertThat(count).containsExactly(WinningCount.FIVE_WITH_BONUS_BALL);
+        assertThat(count).containsExactly(WinningCount.NONE, WinningCount.FIVE_WITH_BONUS_BALL);
     }
 }

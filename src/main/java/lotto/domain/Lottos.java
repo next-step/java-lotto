@@ -42,7 +42,6 @@ public class Lottos {
 
     public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNo bonusBall) {
         return lottos.stream()
-                .filter(lotto -> lotto.getMatchingNumberCount(winningLotto) >= LOTTO_REWARD_LIMIT)
                 .map(lotto -> WinningCount.of(lotto.getMatchingNumberCount(winningLotto)
                         , checkBonusBall(lotto, bonusBall, lotto.getMatchingNumberCount(winningLotto))))
                 .collect(Collectors.toList());

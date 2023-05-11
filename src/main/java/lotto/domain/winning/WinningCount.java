@@ -9,7 +9,8 @@ public enum WinningCount {
     FIVE_WITH_BONUS_BALL(5, true),
     FIVE(5, false),
     FOUR(4, false),
-    THREE(3, false);
+    THREE(3, false),
+    NONE(0, false);
 
     private final int count;
     private final boolean isMatchBonusBall;
@@ -22,7 +23,11 @@ public enum WinningCount {
     }
 
     public static WinningCount of(int count, boolean isMatchBonusBall) {
-        return winningCountList.stream().filter(winningCount -> winningCount.equals(count, isMatchBonusBall)).findAny().get();
+        return winningCountList.stream().filter(winningCount -> winningCount.equals(count, isMatchBonusBall)).findAny().orElse(WinningCount.NONE);
+    }
+
+    public static boolean isRewardWinningCount(WinningCount winningCount) {
+        return winningCount != WinningCount.NONE;
     }
 
     public boolean equals(int count, boolean isMatchBonusBall) {
