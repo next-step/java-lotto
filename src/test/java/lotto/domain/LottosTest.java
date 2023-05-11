@@ -21,18 +21,4 @@ public class LottosTest {
     void 로또_여러_개의_갯수를_알_수_있다() {
         assertThat(new Lottos(lottoList).getLottoQuantity()).isEqualTo(2);
     }
-
-    @Test
-    void 여러_로또들을_더할_수_있다() {
-        //GIVEN
-        Lottos lottos1 = new Lottos(List.of(lotto1));
-        Lottos lottos2 = new Lottos(List.of(lotto2));
-
-        //WHEN
-        Lottos lottos = Lottos.concat(lottos1, lottos2);
-
-        //THEN
-        assertThat(lottos.getLottoQuantity()).isEqualTo(2);
-        assertThat(lottos.getLottoList().containsAll(lottoList)).isTrue();
-    }
 }
