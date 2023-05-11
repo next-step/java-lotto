@@ -1,6 +1,5 @@
-package lotto.service;
+package lotto.domain;
 
-import lotto.domain.*;
 import lotto.view.InputView;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,13 +11,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class LottoServiceTest {
+class MyLottoGameTest {
     @ParameterizedTest(name = "{0}원 구입 => {1}회 로또 생성 ")
     @CsvSource(value = {"0:0", "1000:1", "15000:15", "21000:21"}, delimiter = ':')
     void 로또생성횟수(int inputMoney, int expectedCount) {
-        LottoService lottoService = new LottoService();
         MyPurchase myPurchase = new MyPurchase(inputMoney);
-        MyLottoGame myLottoGame = lottoService.buyAutoLottos(myPurchase);
+        MyLottoGame myLottoGame = MyLottoGame.autoGenerate(myPurchase);
         assertThat(myLottoGame.getLottos().size()).isEqualTo(expectedCount);
     }
 
@@ -42,9 +40,7 @@ class LottoServiceTest {
 
         WinLotto winLotto = new WinLotto(winNumbers);
 
-        LottoService lottoService = new LottoService();
-
-        lottoService.checkWin(myLottoGame, winLotto);
+        myLottoGame.checkWin(winLotto);
 
         assertAll(
                 () -> assertThat(myLottoGame.countRank(Rank.FIFTH)).isEqualTo(2),
