@@ -33,4 +33,19 @@ public enum Operator {
     }
 
     public abstract int apply(int x, int y);
+
+    public static Operator getOperator(String operator) {
+        switch (operator) {
+            case "+":
+                return PLUS;
+            case "-":
+                return MINUS;
+            case "*":
+                return MULTIPLY;
+            case "/":
+                return DIVIDE;
+            default:
+                throw new IllegalArgumentException("사용할 수 없는 기호입니다.");
+        }
+    }
 }

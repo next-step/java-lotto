@@ -17,7 +17,7 @@ public class StringCalculator implements Calculator<String> {
         }
         int result = numbers.poll();
         while (!operators.isEmpty() && !numbers.isEmpty()) {
-            result = Operator.valueOf(operators.poll()).apply(result, numbers.poll());
+            result = Operator.getOperator(operators.poll()).apply(result, numbers.poll());
         }
         return result;
     }
