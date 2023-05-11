@@ -22,6 +22,6 @@ public class LottoFixture {
     }
 
     public static List<Integer> intListFixture() {
-        return List.of(1, 2, 3, 4, 5);
+        return new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }

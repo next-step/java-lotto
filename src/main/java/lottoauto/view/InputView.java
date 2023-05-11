@@ -21,7 +21,14 @@ public class InputView {
         return Arrays.stream(scanner.nextLine()
                 .split(","))
                 .map(Integer::parseInt)
+                .sorted()
                 .collect(Collectors.toList());
+    }
+
+    public int inputBonus() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(Input.INPUT_BONUS);
+        return scanner.nextInt();
     }
 
 }

@@ -5,6 +5,7 @@ import lottoauto.LottoFixture;
 import lottoauto.model.LottoResult;
 import lottoauto.model.Lottos;
 import lottoauto.model.WinningLotto;
+import lottoauto.model.WinningReward;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +14,12 @@ public class WinningLottoTest {
     @Test
     void 당첨번호_구매번호_비교_테스트() {
         Lottos lottos = LottoFixture.lottosFixture(3, 4, 6, 11, 22, 44);
+        int bonusNumber = 33;
         List<Integer> winningNumber = LottoFixture.intListFixture();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
         LottoResult lottoResult = winningLotto.compareWinningLottoNumber(lottos);
 
-        Assertions.assertThat(lottoResult.getMatchCount().get(0)).isEqualTo(3);
+        Assertions.assertThat(lottoResult.getMatchCount().get(0)).isEqualTo(WinningReward.MATCH_3);
     }
 }

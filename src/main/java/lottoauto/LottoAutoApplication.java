@@ -22,8 +22,9 @@ public class LottoAutoApplication {
         resultView.printLottos(lottos);
 
         List<Integer> winningNumbers = inputView.inputLastWinningNumber();
+        int bonusNumber = inputView.inputBonus();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         LottoResult lottoResult = winningLotto.compareWinningLottoNumber(lottos);
 
         resultView.printStatistics(lottoResult);

@@ -27,13 +27,10 @@ public class ResultView {
     public void printStatistics(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        
-        lottoResult.getMatchFrequency().forEach((match, count) -> {
-            WinningReward rewardByMatches = WinningReward.findRewardByMatches(match);
-            System.out.printf("%d개 일치 (%d원) - %d개\n", match, rewardByMatches.getReward(), count);
-        });
 
-        System.out.printf("총 수익률은 %f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임.)", lottoResult.calculateRate());
+        lottoResult.getMatchFrequency().forEach((match, count) -> System.out.printf("%s - %d개\n", match.getPrintString(), count));
+
+        System.out.printf("총 수익률은 %f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임.)", lottoResult.getRate());
 
     }
 
