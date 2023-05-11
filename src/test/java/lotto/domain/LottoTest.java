@@ -11,6 +11,6 @@ public class LottoTest {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
         Lotto match3 = new Lotto(1, 2, 3, 40, 41, 42);
 
-        assertThat(lotto.countMatching(match3, new LottoNumber(7))).isEqualTo(Rank.FIFTH);
+        assertThat(lotto.countMatching(match3)).isEqualTo(3L);
     }
 }

@@ -15,7 +15,7 @@ class LottosTest {
         Lottos lottos = getLottos();
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        Map<Rank, Long> rankResult = lottos.countMatching(winningLotto, new LottoNumber(7));
+        Map<Rank, Long> rankResult = lottos.countMatching(new WinningLotto(winningLotto, new LottoNumber(7)));
         assertThat(rankResult).containsValues(1L, 1L, 1L, 1L, 1L);
     }
 

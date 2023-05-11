@@ -39,19 +39,18 @@ public class Lotto {
         return Objects.hash(lottoNumbers);
     }
 
-    public Rank countMatching(Lotto winningLotto, LottoNumber bonus) {
-        return Rank.of(winningLotto.lottoNumbers.stream()
-                .filter(this.lottoNumbers::contains)
-                .count(), hasBonus(bonus));
+    public long countMatching(Lotto winningLotto) {
+        return lottoNumbers.stream()
+                .filter(winningLotto::contains)
+                .count();
     }
-
-    private boolean hasBonus(LottoNumber bonus) {
-        return lottoNumbers.contains(bonus);
-    }
-
     public LottoDto toDto() {
         return lottoNumbers.stream()
                 .map(LottoNumber::toInt)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoDto::new));
+    }
+
+    public boolean contains(LottoNumber bonus) {
+        return lottoNumbers.contains(bonus);
     }
 }
