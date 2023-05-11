@@ -35,13 +35,4 @@ class LotteryNumberTest {
                 .hasMessage("로또 번호는 1~45 의 정수만 입력 될 수 있습니다.");
     }
 
-    @ParameterizedTest(name = "로또번호 객체가 배열 안에 포함되어 있을경우 true 를 아닌경우 false 를 리턴한다.")
-    @CsvSource(value = {"45:true","1:false"}, delimiter = ':')
-    void containsTest(int number, boolean expected) {
-        Set<LotteryNumber> lotteryNumbers = new HashSet<>();
-        lotteryNumbers.add(new LotteryNumber(MAX));
-
-        assertThat(new LotteryNumber(number).containsNumber(lotteryNumbers))
-                .isEqualTo(expected);
-    }
 }

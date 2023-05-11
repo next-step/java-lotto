@@ -64,16 +64,22 @@ public class LotteryTest {
     @DisplayName("자동 발생한 숫자가 매주 당첨 번호와 최종 몇개가 일치하는지의 값을 반환한다.")
     void intersectionSizeTest() {
         Lottery lotterySixNumbers = lotteryFactory("1,2,3,7,8,9");
-        assertThat(new Lottery(LOTTERY_NUMBERS).intersectionSize(lotterySixNumbers.getNumbers()))
+        assertThat(new Lottery(LOTTERY_NUMBERS).matchCount(lotterySixNumbers.getNumbers()))
                 .isEqualTo(3);
     }
 
     @Test
     @DisplayName("객체 생성시 정렬된 숫자를 리턴한다.")
     void sortedNumbersTest() {
-        Lottery unsorted = lotteryFactory("1,7,3,8,2,9");
-        Lottery sorted = lotteryFactory("1,2,3,7,8,9");
-        assertThat(unsorted.equals(sorted)).isTrue();
+        Lottery sorted = lotteryFactory("9,8,7,3,2,1");
+        assertThat(sorted.getNumbers()).containsExactly(
+                new LotteryNumber(1),
+                new LotteryNumber(2),
+                new LotteryNumber(3),
+                new LotteryNumber(7),
+                new LotteryNumber(8),
+                new LotteryNumber(9)
+        );
     }
 
     @ParameterizedTest(name = "보너스 번호가 이미 로또에 포함되어있을경우 true 아닐경우 false 를 반환한다.")

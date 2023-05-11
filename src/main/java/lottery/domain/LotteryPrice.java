@@ -1,19 +1,19 @@
 package lottery.domain;
 
-public class LotteryPurchasePrice {
+public class LotteryPrice {
 
     protected static final int LOTTERY_PRICE = 1000;
 
     private static final String INVALID_PRICE_MSG = String.format("로또 최소 구매 금액은 %d원 이상입니다.",
             LOTTERY_PRICE);
 
-    private final int purchasedPrice;
+    private final int value;
 
-    public LotteryPurchasePrice(int purchasedPrice) {
-        if (invalidPrice(purchasedPrice)) {
+    public LotteryPrice(int value) {
+        if (invalidPrice(value)) {
             throw new IllegalArgumentException(INVALID_PRICE_MSG);
         }
-        this.purchasedPrice = purchasedPrice;
+        this.value = value;
     }
 
     private boolean invalidPrice(int purchasePrice) {
@@ -21,8 +21,6 @@ public class LotteryPurchasePrice {
     }
 
     public int numberOfPlays() {
-        return this.purchasedPrice / LOTTERY_PRICE;
+        return this.value / LOTTERY_PRICE;
     }
-
-
 }

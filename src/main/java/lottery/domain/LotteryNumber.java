@@ -21,9 +21,6 @@ public class LotteryNumber {
         this.lotteryNumber = lotteryNumber;
     }
 
-    public boolean containsNumber(Set<LotteryNumber> lotteryNumbers) {
-        return lotteryNumbers.contains(this);
-    }
 
     private boolean outOfRange(int lotteryNumber) {
         return lotteryNumber < MIN
