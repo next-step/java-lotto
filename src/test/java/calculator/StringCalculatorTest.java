@@ -2,24 +2,25 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 
+import static calculator.Operator.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class StringCalculatorTest {
     @Test
     void add() {
-        assertThat(StringCalculator.add(3, 4)).isEqualTo(7);
+        assertThat(PLUS.apply(3, 4)).isEqualTo(7);
     }
     @Test
     void subtract() {
-        assertThat(StringCalculator.subtract(3, 4)).isEqualTo(-1);
+        assertThat(MINUS.apply(3, 4)).isEqualTo(-1);
     }
     @Test
     void multiply() {
-        assertThat(StringCalculator.multiply(3, 4)).isEqualTo(12);
+        assertThat(MULTIPLY.apply(3, 4)).isEqualTo(12);
     }
     @Test
     void divide() {
-        assertThat(StringCalculator.divide(3, 4)).isEqualTo(0);
+        assertThat(DIVIDE.apply(3, 4)).isEqualTo(0);
     }
     @Test
     void calculate() {
