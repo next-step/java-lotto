@@ -7,8 +7,6 @@ public class LottoGenerator {
 
     private Money money;
 
-    private WinningStatistics winningStatistics;
-
     public LottoGenerator(LottoResults lottoResults) {
         this.lottoResults = lottoResults;
     }
@@ -28,19 +26,8 @@ public class LottoGenerator {
         return money.getCount();
     }
 
-    public WinningStatistics calculateWinningStatistics(List<Integer> winningNumbers) {
-        this.winningStatistics = new WinningStatistics(winningNumbers);
-        lottoResults.calculateWinningStatistics(winningStatistics);
-        return winningStatistics;
-    }
-
-    public List<int[]> getLottoResults() {
-        return lottoResults.getLottoResults();
-    }
-
-    public float getReturnOnInvestment() {
-        float totalWinning = winningStatistics.getTotalWinnings();
-        return totalWinning / money.getMoney();
+    public LottoResults getLottoResults() {
+        return lottoResults;
     }
 }
 

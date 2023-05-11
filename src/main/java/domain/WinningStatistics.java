@@ -17,10 +17,10 @@ public class WinningStatistics {
     public static final int OFFSET = 3;
     private int[] winningStatistics = new int[4];
 
-    private List<Integer> lastWeekWinningResults;
+    private List<Integer> winningNumbers;
 
-    public WinningStatistics(List<Integer> lastWeekWinningResults) {
-        this.lastWeekWinningResults = lastWeekWinningResults;
+    public WinningStatistics(List<Integer> winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
     public int[] getWinningResults() {
@@ -38,7 +38,7 @@ public class WinningStatistics {
     }
 
     private int addCountIfContains(int count, int num) {
-        if (lastWeekWinningResults.contains(num)) {count++;}
+        if (winningNumbers.contains(num)) {count++;}
         return count;
     }
 

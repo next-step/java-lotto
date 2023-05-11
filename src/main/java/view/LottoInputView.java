@@ -14,7 +14,7 @@ public class LottoInputView {
         return money;
     }
 
-    public static List<Integer> getLastWeekLottoWinningNumbers() {
+    public static List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         scanner.nextLine();
         List<Integer> lastWeekWinningNumbers = new ArrayList<>();
