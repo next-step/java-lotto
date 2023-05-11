@@ -1,5 +1,7 @@
 package lotto.domain.result;
 
+import java.util.Objects;
+
 public class WinCount {
 
     private int numberOfWin;
@@ -21,5 +23,18 @@ public class WinCount {
         return "WinCount{" +
                 "numberOfWin=" + numberOfWin +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinCount winCount = (WinCount) o;
+        return numberOfWin == winCount.numberOfWin;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numberOfWin);
     }
 }

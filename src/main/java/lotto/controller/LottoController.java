@@ -1,32 +1,33 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
+import lotto.domain.Lottos;
 import lotto.domain.result.LottoResults;
-import lotto.domain.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import javax.xml.transform.Result;
 import java.util.Scanner;
+
+import static lotto.domain.Lotto.stringToNumber;
 
 public class LottoController {
 
-    private static final InputView inputView = new InputView(new Scanner(System.in));
-    private static final ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
 
-        int lottoCount = inputView.getLottoCount();
+        int payment = InputView.enterAmount();
 
-        LottoShop lotto = new LottoShop();
-        lotto.playLotto(lottoCount);
+        Lottos lottos = LottoShop.buyLotto(payment);
+        ResultView.printLottoCount(lottos.getLottoCount());
+        ResultView.printLottoNumber(lottos);
 
-        resultView.printLottoNumber();
+        Lotto winningLotto = stringToNumber(InputView.enterWinningNumber());
 
-        WinningNumber.stringToNumber(inputView.inputWinningLottoNumbers());
-
-        LottoResults lottoResults = lotto.getLottoResult(WinningNumber.winningNumber);
-        resultView.printLottoStatistic(lottoResults);
-        resultView.printWinningProfit(lottoResults, lottoCount);
+        LottoResults lottoResults = lottos.getLottoResult(winningLotto);
+        ResultView.printLottoStatistic(lottoResults);
+        ResultView.printWinningProfit(lottoResults, payment);
 
     }
 }

@@ -1,28 +1,21 @@
 package lotto.domain;
 
-import lotto.domain.result.LottoResults;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoShop {
 
-    public static List<LottoNumbers> lottos = new ArrayList<>();
+    public static final int THOUSAND = 1000;
 
-    public LottoShop() {}
+    private LottoShop() {}
 
-    public void playLotto(int count) {
-        for (int i = 0; i < count; i++) {
-            lottos.add(new LottoNumbers());
-        }
-    }
-
-    public LottoResults getLottoResult(List<Integer> winningNumber) {
-        LottoResults lottoResults = LottoResults.of();
-        for (LottoNumbers lottoNumbers : lottos) {
-            int hitCount = lottoNumbers.getHitCount(winningNumber);
-            lottoResults.win(hitCount);
-        }
-        return lottoResults;
+    public static Lottos buyLotto(int payment) {
+        ExceptionHandler.validPrice(payment);
+        return Stream.generate(Lotto::createLottoNumber)
+                .limit(payment / THOUSAND)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::of));
     }
 }
+
+
+

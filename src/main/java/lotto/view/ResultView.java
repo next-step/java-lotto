@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoShop;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lottos;
+import lotto.domain.Lotto;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResults;
 
@@ -11,13 +11,17 @@ public class ResultView {
     private static final String STATISTICS_STATUS = "%d개 일치 (%d원) - %d개";
     private static final String STATISTICS_INFO = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public void printLottoNumber() {
-        for (LottoNumbers lottoNumber : LottoShop.lottos) {
+    public static void printLottoNumber(Lottos lottos) {
+        for (Lotto lottoNumber : lottos.getLottos()) {
             System.out.println(lottoNumber);
         }
     }
 
-    public void printLottoStatistic(LottoResults lottoResults) {
+    public static void printLottoCount(int count) {
+        System.out.println(count + "개를 구매했습니다.");
+    }
+
+    public static void printLottoStatistic(LottoResults lottoResults) {
         System.out.println(RESULT_GAME);
         System.out.println(printLottoPrizes(lottoResults));
     }
@@ -34,16 +38,11 @@ public class ResultView {
         return stringBuilder;
     }
 
-    public static void printWinningProfit(LottoResults lottoResults, int lottoCount) {
+    public static void printWinningProfit(LottoResults lottoResults, int price) {
         StringBuilder stringBuilder = new StringBuilder();
-        int totalPrice = 0;
-        for (LottoResult lottoResult : lottoResults.getLottoResults()) {
-            if (lottoResult.getTotalPrice() != 0) {
-                int totalPrice1 = lottoResult.getTotalPrice();
-                totalPrice += totalPrice1;
-            }
-        }
-        stringBuilder.append(String.format(STATISTICS_INFO ,(lottoCount * 1000.0) / totalPrice));
+        String format = String.format(STATISTICS_INFO
+                , (double) price / LottoResults.getTotalPrice(lottoResults));
+        stringBuilder.append(format);
         System.out.println(stringBuilder);
     }
 
