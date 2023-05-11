@@ -11,7 +11,7 @@ public class LottoTicket {
   }
 
   public static LottoTicket bySize(int size) {
-    LottoTicket ticket = new LottoTicket(LottoNumbers.pickBySize(size));
+    LottoTicket ticket = new LottoTicket(LottoNumbers.collectBySize(size));
     Collections.sort(ticket.numbers);
 
     return ticket;
