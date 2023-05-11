@@ -14,13 +14,14 @@ public class Lotto {
 
     public int findMatchCount(WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> winningLotto.winningLotto.contains(lottoNumber))
+                .filter(winningLotto::contains)
                 .count();
     }
 
     public boolean hasBonusLottoNumber(LottoNumber bonusLottoNumber) {
         return lottoNumbers.contains(bonusLottoNumber);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
