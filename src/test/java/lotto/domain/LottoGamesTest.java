@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import lotto.domain.generator.ManualLottoGenerator;
+import lotto.domain.number.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -39,12 +41,40 @@ public class LottoGamesTest {
     @Test
     @DisplayName("상금별 당첨이 몇개가 있는지 확인")
     public void calculatePrizeCountTest() {
+        //given
         Lotto lotto = new Lotto(manualLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
+        HashMap<Rank, Integer> result = new HashMap<>(){{
+            put(Rank.FIFTH, 1);
+        }};
+
+        //when
         lottoGames.calculatePrizeCount(winningLotto);
-        assertThat(lottoGames.getLottoResult()).isEqualTo(List.of(0, 0, 0, 1, 0, 0, 0));
+
+        //then
+        assertThat(lottoGames.getLottoResult().entrySet()).isEqualTo(result.entrySet());
+    }
+
+    @Test
+    @DisplayName("보너스 번호 일치")
+    public void bonusCheck() {
+        //given
+        Lotto lotto = new Lotto(manualLottoGenerator);
+        List<Lotto> lottoList = List.of(lotto);
+        LottoGames lottoGames = new LottoGames(lottoList);
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 41, 42, 6");
+        LottoNumber bonusNumber = new LottoNumber(43);
+        HashMap<Rank, Integer> result = new HashMap<>(){{
+            put(Rank.SECOND, 1);
+        }};
+
+        //when
+        lottoGames.calculatePrizeCount(winningLotto, bonusNumber);
+
+        //then
+        assertThat(lottoGames.getLottoResult().entrySet()).isEqualTo(result.entrySet());
     }
 
 
