@@ -17,6 +17,14 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean matchBonus(BonusNumber bonusNumber) {
+        return contains(bonusNumber.lottoNumber());
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.getLottoNumbers().toString();

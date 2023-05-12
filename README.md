@@ -37,3 +37,26 @@
   > 6개 일치: 2,000,000,000원
 - [x] 구입 금액 대비 당첨 금액에 대한 수익률 계산
   > ex) 14,000원치 로또 구입 후 5,000원 당첨이면, 수익률은 0.35(5,000/14,000)
+
+---
+
+# 3단계 - 로또(2등)
+## 변경 사항
+- 로또 구매 포장 클래스 신규: `LottoPurchase`
+  > 금액 검증 수행  
+  > `LottoSeller` 객체는 `LottoPurchase` 객체를 활용해 `Lottos` 객체 생성
+- LottoNumber 캐싱 방식 변경: `inner class` → `Map`
+- 로또 결과 확인 시, 상금이 없는 경우는 `NOT_WIN`로 일원화
+  > `MATCH_ONE_NUMBER`, `MATCH_TWO_NUMBER` 삭제
+- `RandomLottoNumbersFactory` 내 매직넘버 삭제
+- 하나의 단위 테스트 내 여러 `assert` 메소드가 있는 경우, `assertSoftly` 적용
+  > `LottoResultsTest`
+
+## 기능 목록
+- [x] 보너스 번호 추가
+  > 5개 일치 + 보너스 볼 일치(2등) 시, 당첨 금액은 30,000,000원  
+  > 로또 결과를 확인의 책임 변경: `WinningLotto` → `WinningLottoWithBonus`
+  > 보너스 번호 일치 여부 확인 책임: `Lotto`
+- [x] 지난 주 당첨 번호 입력 후 보너스 볼 입력
+  > 보너스 번호가 당첨 번호에 있을 시, 예외 발생
+- [x] 당첨 통계에 2등도 추가
