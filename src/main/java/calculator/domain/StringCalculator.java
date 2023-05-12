@@ -6,11 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static calculator.domain.operator.Addition.ADDICTION;
-import static calculator.domain.operator.Division.DIVISION;
-import static calculator.domain.operator.Multiplication.MULTIPLICATION;
-import static calculator.domain.operator.Subtraction.SUBTRACTION;
-
 public class StringCalculator {
 
     private StringCalculator() {}
@@ -43,10 +38,10 @@ public class StringCalculator {
 
     private static int operate(int result, String operator, int number) {
         Map<String, Operator> operations = new HashMap<>();
-        operations.put(ADDICTION, new Addition());
-        operations.put(MULTIPLICATION, new Multiplication());
-        operations.put(SUBTRACTION, new Subtraction());
-        operations.put(DIVISION, new Division());
+        operations.put(new Addition().symbol(), new Addition());
+        operations.put(new Multiplication().symbol(), new Multiplication());
+        operations.put(new Subtraction().symbol(), new Subtraction());
+        operations.put(new Division().symbol(), new Division());
 
         Operator operation = operations.get(operator);
         if (operation == null) {

@@ -14,6 +14,9 @@ public class LotteryTickets {
     }
 
     public static LotteryTickets of(int money, LotteryNumberGenerator lotteryNumberGenerator) {
+        if (money < 0) {
+            throw new IllegalArgumentException("지불한 돈은 음수일 수 없습니다");
+        }
         List<LotteryTicket> tickets = new ArrayList<>();
         for (int i = 0; i < money / LOTTERY_PRICE; i++) {
             tickets.add(LotteryTicket.of(lotteryNumberGenerator));

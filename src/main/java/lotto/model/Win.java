@@ -6,7 +6,6 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public enum Win {
-
     WIN_3(3, 5000),
     WIN_4(4, 50_000),
     WIN_5(5, 1_500_000),
@@ -41,7 +40,7 @@ public enum Win {
     }
 
     public static boolean isValidWinPoints(int points) {
-        return points >= 3 && points <= 6;
+        return points >= WIN_3.points && points <= WIN_6.points;
     }
 
     public static int totalMoney(Map<Win, Integer> winTotal) {
