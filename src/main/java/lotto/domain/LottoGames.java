@@ -9,11 +9,12 @@ import java.util.List;
 
 public class LottoGames {
 
+    private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> lottoGameList = new ArrayList<>();
     private final HashMap<Rank, Integer> lottoResult = new HashMap<>();
 
     public LottoGames(int gameCount) {
-        gameCount /= LottoConstant.LOTTO_PRICE;
+        gameCount /= LOTTO_PRICE;
         for (int i = 0; i < gameCount; i++) {
             lottoGameList.add(new Lotto(new AutoLottoGenerator()));
         }
@@ -34,7 +35,7 @@ public class LottoGames {
     }
 
     public double calculateReturn() {
-        return sum() / (double) (LottoConstant.LOTTO_PRICE * lottoGameList.size());
+        return sum() / (double) (LOTTO_PRICE * lottoGameList.size());
     }
 
     public void calculatePrizeCount(WinningLotto winningLotto) {
