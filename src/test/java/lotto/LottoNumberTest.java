@@ -23,4 +23,10 @@ public class LottoNumberTest {
     public void equals() {
         assertThat(new LottoNumber(3)).isEqualTo(new LottoNumber(3));
     }
+
+    @Test
+    @DisplayName("캐시를 이용한다")
+    public void cache() {
+        assertThat(LottoNumber.of(3) == LottoNumber.of(3)).isTrue();
+    }
 }

@@ -1,14 +1,19 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
+    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+
+    static {
+        for (int i = 1; i <= MAXIMUM_NUMBER; i++) {
+            lottoNumberCache.put(i, new LottoNumber(i));
+        }
+    }
 
     private final int number;
 
@@ -17,6 +22,14 @@ public class LottoNumber {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하여야 합니다.");
         }
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoNumberCache.get(number);
+        if (lottoNumber == null) {
+            return new LottoNumber(number);
+        }
+        return lottoNumber;
     }
 
     private static boolean isInvalidNumber(int number) {

@@ -8,7 +8,7 @@ public class WinNumbers {
 
     public WinNumbers(Set<Integer> numbers, int bonus) {
         this.winNumbers = new Lotto(numbers);
-        this.bonus = new LottoNumber(bonus);
+        this.bonus = LottoNumber.of(bonus);
     }
 
     public long getMatchCount(Lotto lotto) {
