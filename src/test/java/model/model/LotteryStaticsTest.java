@@ -1,5 +1,8 @@
-package model;
+package model.model;
 
+import model.LotteryStatics;
+import model.Lotto;
+import model.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +47,6 @@ class LotteryStaticsTest {
         //given
         int buyCount = 4000;
         int bonus = 7;
-      
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.asList(1, 8, 23, 41, 42, 43))); //3개일치
         lottos.add(new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38))); //1개일치
@@ -69,7 +71,6 @@ class LotteryStaticsTest {
         //given
         int buyCount = 4000;
         int bonus = 7;
-
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.asList(1, 8, 23, 41, 42, 43))); //3개일치
         lottos.add(new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38))); //1개일치
@@ -77,11 +78,13 @@ class LotteryStaticsTest {
         lottos.add(new Lotto(Arrays.asList(1, 8, 11, 31, 41, 7))); //5개일치, 보너스볼 일치
 
         Lotto winNum = new Lotto(Arrays.asList(1, 8, 11, 31, 41, 44), bonus);
+
         //when
         LotteryStatics lotteryStatics = new LotteryStatics(buyCount, lottos, winNum.getLotto());
 
         //then
         double expected = (double) (30_000_000 + 5_000) / buyCount;
+
 
         assertEquals(expected, lotteryStatics.getGross());
     }

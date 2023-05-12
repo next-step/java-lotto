@@ -3,14 +3,14 @@ package model;
 import java.util.List;
 
 public class LottoStore {
-    private static int LOTT_PRICE = 1000;
+    private static int LOTTO_PRICE = 1000;
+    private LottoRandomGenerator lottoGenerator;
 
     public LottoStore() {
+        lottoGenerator = new LottoRandomGenerator();
     }
 
-    public List<Lotto> Buy(int buyAmount) {
-        LottoRandomGenerator lottoGenerator = new LottoRandomGenerator();
-        lottoGenerator.generatorLotto(buyAmount/LOTT_PRICE);
-        return lottoGenerator.getLottos();
+    public List<Lotto> buy(int buyAmount) {
+        return lottoGenerator.generatorLotto(buyAmount / LOTTO_PRICE);
     }
 }

@@ -7,15 +7,16 @@ import java.util.Map;
 
 public class LotteryStatics {
     private Map<Rank, Integer> lotteryStatics = new HashMap<>();
-    double gross;
+    private double gross;
 
     public LotteryStatics(int buyAmount, List<Lotto> lottos, List<Integer> winNum) {
         for (Lotto lotto : lottos) {
-            int countOfMatch = getEqualCount(lotto.getLotto(), winNum);
-            this.lotteryStatics.merge(Rank.valueOf(countOfMatch), 1, Integer::sum);
+            int countOfMatch = lotto.matchCount(winNum);
+            boolean matchBonus = lotto.matchBonus();
+            this.lotteryStatics.merge(Rank.valueOf(countOfMatch, matchBonus), 1, Integer::sum);
         }
 
-        this.gross = Math.round((double) getTotalPrice() / buyAmount *100) / 100.0;
+        this.gross = Math.round((double) getTotalPrice() / buyAmount * 100) / 100.0;
     }
 
     public Map<Rank, Integer> getLotteryStatics() {

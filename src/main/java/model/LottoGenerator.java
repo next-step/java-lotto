@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public abstract class LottoGenerator {
-    public abstract void generatorLotto(int count);
+    public abstract List<Lotto> generatorLotto(int count);
 }
