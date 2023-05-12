@@ -13,13 +13,14 @@ class OperatorTest {
 
     @Test
     void minus() {
-        assertThat(Operator.of("+")).isEqualTo(Operator.MINUS);
+        assertThat(Operator.of("-")).isEqualTo(Operator.MINUS);
     }
 
     @Test
     void multiply() {
         assertThat(Operator.of("*")).isEqualTo(Operator.MULTIPLY);
     }
+
     @Test
     void divide() {
         assertThat(Operator.of("/")).isEqualTo(Operator.DIVIDE);
