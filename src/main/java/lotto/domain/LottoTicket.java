@@ -10,8 +10,8 @@ public class LottoTicket {
     this.numbers = numbers;
   }
 
-  public static LottoTicket bySize(int size) {
-    LottoTicket ticket = new LottoTicket(LottoNumbers.pickBySize(size));
+  public static LottoTicket bySize(int size, LottoNumbersSelector selector) {
+    LottoTicket ticket = new LottoTicket(selector.selectBy(size));
     Collections.sort(ticket.numbers);
 
     return ticket;
@@ -22,11 +22,12 @@ public class LottoTicket {
   }
 
   public int sameCount(List<LottoNumber> lastWeekNumbers) {
-    int count = 0;
-    for (LottoNumber lastWeekNumber : lastWeekNumbers) {
-      count = numbers.contains(lastWeekNumber) ? count + 1 : count;
-    }
+    return (int) numbers.stream()
+        .filter(lastWeekNumbers::contains)
+        .count();
+  }
 
-    return count;
+  public boolean notContains(LottoNumber lottoNumber) {
+    return !numbers.contains(lottoNumber);
   }
 }

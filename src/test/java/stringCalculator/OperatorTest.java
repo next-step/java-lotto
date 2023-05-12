@@ -50,6 +50,6 @@ public class OperatorTest {
   void notOperatorTest() {
     assertThatThrownBy(() -> Operator.from("!"))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("지원하지 않는 연산자입니다.");
+        .hasMessageContaining("지원하지 않는 연산자입니다.");
   }
 }

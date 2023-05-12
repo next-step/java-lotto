@@ -16,7 +16,7 @@ class LottoNumbersTest {
   @Test
   @DisplayName("입력한 수 만큼 LottoNumber를 가져온다")
   void lottoNumberCountTest() {
-    List<LottoNumber> pick = LottoNumbers.pickBySize(TEST_NUMBER);
+    List<LottoNumber> pick = LottoNumbers.collectBySize(TEST_NUMBER);
 
     assertThat(pick).hasSize(TEST_NUMBER);
   }
