@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,16 @@ public class LotteryStatics {
 
     public double getGross() {
         return this.gross;
+    }
+
+    private int getEqualCount(List<Integer> inputNums, List<Integer> winLotto) {
+        List<Integer> copyList = new ArrayList<>(inputNums);
+
+        int equalNum = (int) copyList.stream()
+                .filter(winLotto::contains)
+                .count();
+
+        return equalNum;
     }
 
 }

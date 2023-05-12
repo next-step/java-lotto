@@ -22,7 +22,7 @@ public class Lotto {
     public List<Integer> getLotto() {
         return this.lotto;
     }
-
+  
     public boolean matchBonus() {
         if (this.lotto.contains(this.bonus))
             return true;

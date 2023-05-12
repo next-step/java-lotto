@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoRandomGenerator extends LottoGenerator {
+
     private static final int LOTTO_NUMS = 6;
     private static final int MIN_NUM = 1;
     private static final int MAX_NUM = 45;
@@ -22,6 +23,7 @@ public class LottoRandomGenerator extends LottoGenerator {
             lottos.add(makeAutoLotto());
         }
         return lottos;
+
     }
 
     public Lotto makeAutoLotto() {

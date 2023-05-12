@@ -10,7 +10,6 @@ import java.util.*;
 public class ResultView {
 
     private ResultView() {
-
     }
 
     public static void printLottoInfo(List<Lotto> Input) {
@@ -47,8 +46,6 @@ public class ResultView {
             if (rank != rank.MISS)
                 System.out.println(printLottoResult(rank, count));
 
-        }
-    }
 
     private static String printLottoResult(Rank rank, int count) {
 

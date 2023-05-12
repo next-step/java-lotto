@@ -30,7 +30,6 @@ public enum Rank {
         if (matchBonus && countOfMatch == 5) {
             return Rank.SECOND;
         }
-
         return Arrays.stream(values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findFirst()
