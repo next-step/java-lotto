@@ -1,10 +1,9 @@
 .DS_Store
-HELP.md
 .gradle
-build/
+/build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**
-!**/src/test/**
+/out/
+/target/
 
 ### STS ###
 .apt_generated
@@ -13,21 +12,10 @@ build/
 .project
 .settings
 .springBeans
-.sts4-cache
+bin/
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-out/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
-.vscode/
