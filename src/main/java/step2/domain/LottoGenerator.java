@@ -5,23 +5,29 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_NUMBER_COUNT = 6;
+
     private LottoGenerator() {
     }
 
-    // 로또 발급하기
-    public static List<List<Integer>> generateTotalLotto(int countOfLotto) {
+    public static List<LottoNumber> generateTotalLotto(int countOfLotto) {
         return IntStream.range(0, countOfLotto)
-                .mapToObj(i -> LottoGenerator.generateLotto())
+                .mapToObj(i -> generateLotto())
                 .collect(Collectors.toList());
     }
 
-    // 로또 번호 생성하기
-    private static List<Integer> generateLotto() {
-        List<Integer> lotto = IntStream.rangeClosed(1, 45)
+    private static LottoNumber generateLotto() {
+        List<Integer> numbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                 .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
+        java.util.Collections.shuffle(numbers);
+
+        List<Integer> lottoNumbers = numbers.stream()
+                .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList());
 
-        Collections.shuffle(lotto);
-        return lotto.subList(0, 6);
+        return new LottoNumber(lottoNumbers);
     }
 }

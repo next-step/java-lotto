@@ -14,7 +14,7 @@ public class LottoGeneratorTests {
         int countOfLotto = 5;
 
         // When
-        List<List<Integer>> result = LottoGenerator.generateTotalLotto(countOfLotto);
+        List<LottoNumber> result = LottoGenerator.generateTotalLotto(countOfLotto);
 
         // Then
         Assertions.assertThat(result).isNotNull()

@@ -3,7 +3,7 @@ package step2.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -13,13 +13,14 @@ public class LottoParserTest {
     @DisplayName("당첨 로또 번호 파싱 확인")
     void parseWinningNumbers() {
         // Given
-        String input = "5, 2, 4, 1, 3, 6";
+        String input = "10, 20, 30, 40, 45, 7";
+        LottoNumber expectedLottoNumber = new LottoNumber(Arrays.asList(7, 10, 20, 30, 40, 45));
 
         // When
-        List<Integer> result = LottoParser.parseWinningNumbers(input);
+        LottoNumber lottoNumber = LottoParser.parseWinningNumbers(input);
 
         // Then
-        assertThat(result).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lottoNumber.getNumbers()).isEqualTo(expectedLottoNumber.getNumbers());
     }
 
     @Test

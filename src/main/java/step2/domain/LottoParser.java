@@ -9,12 +9,13 @@ public class LottoParser {
     }
 
     // 지난 주 당첨 번호 입력받기
-    public static List<Integer> parseWinningNumbers(String winningNumbersInput) {
+    public static LottoNumber parseWinningNumbers(String winningNumbersInput) {
         LottoInputValidator.validateInputString(winningNumbersInput);
-        return Arrays.stream(winningNumbersInput.split(LottoInputValidator.WINNING_NUMBERS_DELIMITER))
+        List<Integer> lottoNumbers = Arrays.stream(winningNumbersInput.split(LottoInputValidator.WINNING_NUMBERS_DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .sorted()
                 .collect(Collectors.toList());
+        return new LottoNumber(lottoNumbers);
     }
 }
