@@ -13,8 +13,8 @@ public class RankResult {
     }
 
     public Money calculateWinningAmount() {
-        return rankResult.entrySet().stream()
-                .map(entry -> entry.getKey().getMoney().multiply(entry.getValue()))
+        return Arrays.stream(Rank.values())
+                .map(rank -> rank.getMoney().multiply(rankResult.getOrDefault(rank, 0L)))
                 .reduce(new Money(0L), Money::add);
     }
 

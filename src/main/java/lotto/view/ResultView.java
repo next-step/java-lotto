@@ -1,22 +1,59 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.Rank;
+import lotto.dto.LottoDto;
+import lotto.dto.LottosDto;
+import lotto.dto.RankResultDto;
+import stringcalculator.Calculator;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     public static void printResultBuyCount(long purchaseCount) {
         System.out.printf("%d개를 구매했습니다.\n", purchaseCount);
     }
 
-    public static void printLottos(Lottos lottos) {
+    public static void printLottos(LottosDto lottoDtos) {
+        List<LottoDto> lottos = lottoDtos.getLottos();
         printResultBuyCount(lottos.size());
-        System.out.println(lottos.toDto());
+        lottos.forEach(ResultView::printLotto);
+    }
+    private static void printLotto(LottoDto lotto) {
+        System.out.println(lotto.getLotto());
     }
 
-    public static void printWinningMatchCount(RankResult rankResult, Money buyAmount) {
+    public static void printWinningMatchCount(RankResultDto rankResultDto) {
+        Map<Rank, Long> rankResult = rankResultDto.getRankResult();
         System.out.println("당첨 통계");
         System.out.println("-----------");
-        System.out.println(rankResult.toDto());
-        printRateOfEarning(rankResult.calculateRateOfEarning(buyAmount));
+        Arrays.stream(Rank.values())
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> printRankResult(rank, rankResult.getOrDefault(rank, 0L)));
+    }
+
+    private static void printRankResult(Rank rank, Long count) {
+        if (rank == Rank.MISS) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(rank.getCount());
+        sb.append("개 일치");
+        if (rank == Rank.SECOND) {
+            sb.append(",");
+        }
+        sb.append(" ");
+        if (rank == Rank.SECOND) {
+            sb.append("보너스 볼 일치");
+        }
+        sb.append("(");
+        sb.append(rank.getMoney().toLong());
+        sb.append("원)- ");
+        sb.append(count);
+        sb.append("개");
+        System.out.println(sb);
     }
 
     public static void printRateOfEarning(double rateOfEarning) {

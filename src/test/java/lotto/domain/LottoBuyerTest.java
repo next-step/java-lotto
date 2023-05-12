@@ -20,7 +20,7 @@ class LottoBuyerTest {
         Lottos lottos = buyer.buyLottos(new Money(5_000L));
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        RankResult rankResult = buyer.checkWinning(winningLotto, new LottoNumber(7));
+        RankResult rankResult = buyer.checkWinning(new WinningLotto(winningLotto, new LottoNumber(7)));
 
         assertThat(rankResult).isEqualTo(RankResultTest.getRankResult());
     }

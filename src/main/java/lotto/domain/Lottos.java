@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import lotto.dto.LottoDtos;
+import lotto.dto.LottoDto;
+import lotto.dto.LottosDto;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,16 +18,16 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Rank, Long> countMatching(Lotto winningLotto, LottoNumber bonus) {
+    public Map<Rank, Long> countMatching(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.countMatching(winningLotto, bonus))
+                .map(winningLotto::findRank)
                 .collect(Collectors.groupingBy(match -> match, Collectors.counting()));
     }
 
-    public LottoDtos toDto() {
+    public LottosDto toDto() {
         return lottos.stream()
                 .map(Lotto::toDto)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoDtos::new));
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottosDto::new));
     }
 
     @Override

@@ -29,7 +29,7 @@ public class LottoBuyer {
         return Objects.hash(lottos, store);
     }
 
-    public RankResult checkWinning(Lotto winningLotto, LottoNumber bonus) {
-        return new RankResult(lottos.countMatching(winningLotto, bonus));
+    public RankResult checkWinning(WinningLotto winningLotto) {
+        return new RankResult(lottos.countMatching(winningLotto));
     }
 }
