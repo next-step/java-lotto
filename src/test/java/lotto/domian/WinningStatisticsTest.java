@@ -1,5 +1,6 @@
 package lotto.domian;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningStatistics;
 import lotto.util.RewardTable;
@@ -15,17 +16,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningStatisticsTest {
 
-    private List<Integer> testNumberList;
+    private List<LottoNumber> testNumberList;
 
     @BeforeEach
     void setUp() {
         testNumberList = new ArrayList<>();
-        testNumberList.add(1);
-        testNumberList.add(12);
-        testNumberList.add(23);
-        testNumberList.add(34);
-        testNumberList.add(45);
-        testNumberList.add(6);
+        testNumberList.add(new LottoNumber(1));
+        testNumberList.add(new LottoNumber(12));
+        testNumberList.add(new LottoNumber(23));
+        testNumberList.add(new LottoNumber(34));
+        testNumberList.add(new LottoNumber(45));
+        testNumberList.add(new LottoNumber(6));
     }
 
     @DisplayName("로또 정답 게임 통계를 응답한다.")
@@ -33,7 +34,7 @@ public class WinningStatisticsTest {
     public void winningStatisticsTest_정답_게임수_통계_테스트() {
         List<LottoTicket> lottoTickets = new LottoGameOnlyMake().init();
 
-        WinningStatistics winningStatistics = new WinningStatistics(testNumberList, 7);
+        WinningStatistics winningStatistics = new WinningStatistics(testNumberList, new LottoNumber(7));
 
         Map<RewardTable, Long> resultLottoGame = winningStatistics.resultLottoGame(lottoTickets);
 

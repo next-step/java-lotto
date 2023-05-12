@@ -1,8 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.util.LottoUtils;
-import lotto.util.RewardTable;
+import lotto.util.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -23,29 +22,32 @@ public class LottoController {
     public static void lotto() {
 
         int lottoBuyPrice = Integer.parseInt(inputView.setBuyLottoPrice());
-        int noAutoLottoCount = Integer.parseInt(inputView.setNoAutoBuyLottoCount());
-        List<String> noAutoLottoNumbers = inputView.setNoAutoLottoNumbers(noAutoLottoCount);
+        int manualLottoCount = Integer.parseInt(inputView.setNoAutoBuyLottoCount());
+
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        if(manualLottoCount != LottoConstants.ZERO) {
+            List<String> manualLottoNumbers = inputView.setNoAutoLottoNumbers(manualLottoCount);
+
+            for (String numbers : manualLottoNumbers) {
+                manualTickets.add(new LottoTicket(LottoGenerate.initLottoNumbers(numbers)));
+            }
+        }
 
         int lottoGameCount = LottoUtils.getLottoGameCount(lottoBuyPrice);
 
-        List<LottoTicket> noAutoLottoTickets = new ArrayList<>();
-        for(String numbers : noAutoLottoNumbers) {
-            noAutoLottoTickets.add(new LottoTicket(LottoUtils.lottoResultNumberList(numbers)));
-        }
+        Lottos lottos = new Lottos(LottoShop.sell(manualTickets, lottoGameCount - manualLottoCount));
 
-        Lottos lottos = new Lottos(noAutoLottoTickets,lottoGameCount - noAutoLottoCount);
-
-        resultView.showBuyLotto(noAutoLottoCount, lottoGameCount - noAutoLottoCount);
+        resultView.showBuyLotto(manualLottoCount, lottoGameCount - manualLottoCount);
         resultView.showMyLottoGameList(lottos.getTickets());
 
-        List<Integer> lottoResultNumbers = LottoUtils.lottoResultNumberList(inputView.setLottoResultNumber());
+        List<LottoNumber> lottoResultNumbers = LottoGenerate.initLottoNumbers(inputView.setLottoResultNumber());
 
         int lottoBonusNumber = inputView.setLottoBonusNumber();
         while(lottoResultNumbers.contains(lottoBonusNumber)){
             lottoBonusNumber = inputView.setLottoBonusNumber();
         }
 
-        WinningStatistics winningStatistics = new WinningStatistics(lottoResultNumbers, lottoBonusNumber);
+        WinningStatistics winningStatistics = new WinningStatistics(lottoResultNumbers, new LottoNumber(lottoBonusNumber));
 
         Map<RewardTable, Long> resultGameStatistics = winningStatistics.resultLottoGame(lottos.getTickets());
 

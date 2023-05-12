@@ -20,7 +20,7 @@ public class ResultView {
     public void showMyLottoGameList(List<LottoTicket> lottoTickets) {
 
         for(LottoTicket lotto : lottoTickets) {
-            System.out.println(lotto.getLottoNumber().toString());
+            System.out.println(lotto.getLottoNumbers().toString());
         }
     }
 

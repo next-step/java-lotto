@@ -1,33 +1,45 @@
 package lotto.util;
 
-import java.util.Collections;
-import java.util.List;
+import lotto.domain.LottoNumber;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerate {
-    private static final int ZERO = 0;
-    private static final int LOTTO_MAX_SIZE = 6;
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
 
-    public static List<Integer> initLottoNumbers() {
-        List<Integer> numbers =  IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .boxed()
+    public static List<LottoNumber> initAutoLottoNumbers() {
+        List<LottoNumber> numbers =  IntStream.rangeClosed(LottoConstants.LOTTO_MIN_NUMBER, LottoConstants.LOTTO_MAX_NUMBER)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        return sortNumber(shuffleNumber(numbers).subList(ZERO, LOTTO_MAX_SIZE));
+        Collections.shuffle(numbers);
+
+        return sortLottoNumber(numbers.subList(LottoConstants.ZERO, LottoConstants.LOTTO_MAX_SIZE));
     }
 
-    private static List<Integer> shuffleNumber(List<Integer> numberList) {
-        Collections.shuffle(numberList);
+    public static List<LottoNumber> initLottoNumbers(String lottoNumber) {
+        List<LottoNumber> numberList = Arrays.stream(lottoNumber.split(", "))
+                .mapToInt(LottoGenerate::convertNumber)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
 
-        return numberList;
+        if(!isLottoResultNumberSize(numberList)){
+            throw new IllegalArgumentException("로또 번호는 숫자 6개만 입력됩니다. 입력값 : " + numberList);
+        }
+
+        return sortLottoNumber(numberList);
     }
 
-    private static List<Integer> sortNumber(List<Integer> numberList) {
-        Collections.sort(numberList);
+    private static List<LottoNumber> sortLottoNumber(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream().sorted(Comparator.comparing(LottoNumber::getNumber)).collect(Collectors.toList());
+    }
 
-        return numberList;
+    private static int convertNumber(String number) {
+        return Integer.parseInt(number);
+    }
+
+    private static boolean isLottoResultNumberSize(List<LottoNumber> numberList) {
+        return numberList.size() == LottoConstants.LOTTO_MAX_SIZE;
     }
 }

@@ -9,11 +9,11 @@ import java.util.Map;
 public class WinningStatistics {
     private static final Long BASIC_REWARD_SET_ZERO = 0L;
 
-    private List<Integer> lottoResultNumbers;
+    private List<LottoNumber> lottoResultNumbers;
     private Map<RewardTable, Long> resultGameStatistics;
-    private int lottoBonusNumber;
+    private LottoNumber lottoBonusNumber;
 
-    public WinningStatistics(List<Integer> lottoResultNumbers, int lottoBonusNumber) {
+    public WinningStatistics(List<LottoNumber> lottoResultNumbers, LottoNumber lottoBonusNumber) {
         initRewardMap();
 
         this.lottoResultNumbers = lottoResultNumbers;

@@ -14,9 +14,9 @@ public class LottoGenerateTest {
     public void lottoGenerateTest_정상_리스트_사이즈_테스트() {
 
         assertAll("Lotto size == 6",
-                () -> assertEquals(LottoGenerate.initLottoNumbers().size(), 6),
-                () -> assertEquals(LottoGenerate.initLottoNumbers().size(), 6),
-                () -> assertEquals(LottoGenerate.initLottoNumbers().size(), 6)
+                () -> assertEquals(LottoGenerate.initAutoLottoNumbers().size(), 6),
+                () -> assertEquals(LottoGenerate.initAutoLottoNumbers().size(), 6),
+                () -> assertEquals(LottoGenerate.initAutoLottoNumbers().size(), 6)
         );
     }
 
@@ -24,8 +24,10 @@ public class LottoGenerateTest {
     @Test
     public void lottoGenerateTest_생성_숫자_범위_테스트() {
 
-        assertThat(LottoGenerate.initLottoNumbers().stream()
-                .allMatch(num -> num >=1 && num <= 45))
-                .isTrue();
+        assertThat(LottoGenerate.initAutoLottoNumbers().stream()
+                .allMatch(lottoNumber ->
+                        lottoNumber.getNumber() >= LottoConstants.LOTTO_MIN_NUMBER
+                                && lottoNumber.getNumber() <= LottoConstants.LOTTO_MAX_NUMBER)
+        ).isTrue();
     }
 }
