@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class WinNumbersTest {
     @Test
@@ -32,5 +33,13 @@ public class WinNumbersTest {
         Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 11, 12, 13), 14);
         assertThat(winNumbers.isBonusIncludedIn(lotto)).isFalse();
+    }
+
+    @Test
+    @DisplayName("보너스 번호는 당첨번호와 일치할 수 없다")
+    public void invalidBonus() {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> new WinNumbers(Set.of(1, 2, 3, 11, 12, 13), 13)
+        );
     }
 }
