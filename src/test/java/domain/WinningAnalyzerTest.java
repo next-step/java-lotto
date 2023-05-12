@@ -4,9 +4,14 @@ import static domain.WinningStatistics.WINNING_PRIZES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinningAnalyzerTest {
 
@@ -48,40 +53,36 @@ public class WinningAnalyzerTest {
         assertThat(result[3]).isEqualTo(1);
     }
 
-    @Test
-    void 수익률을_반환한다() {
+    @MethodSource("provideLottoList")
+    @ParameterizedTest
+    void 수익률을_반환한다(List<int[]> lottoList, List<Integer> winningNumbers) {
         //given
-        List<int[]> lottoList = new ArrayList<>();
-        int[] firstRound = { 2, 4, 6, 7, 10, 12 };
-        int[] secondRound = { 1, 4, 6, 7, 10, 12 };
-        int[] thirdRound = { 1, 2, 3, 4, 5, 6 };
-        int[] fourthRound = { 1, 4, 5, 6, 15, 17 };
-        int[] fifthRound = { 1, 3, 15, 17, 18, 19 };
-        int[] sixthRound = { 1, 3, 15, 17, 29, 30 };
-        int[] seventhRound = { 1, 3, 15, 17, 29, 31 };
-        lottoList.add(firstRound);
-        lottoList.add(secondRound);
-        lottoList.add(thirdRound);
-        lottoList.add(fourthRound);
-        lottoList.add(fifthRound);
-        lottoList.add(sixthRound);
-        lottoList.add(seventhRound);
         LottoResults lottoResults = new LottoResults(lottoList);
-
-        List<Integer> winningNumbers = new ArrayList<>();
-        winningNumbers.add(1);
-        winningNumbers.add(3);
-        winningNumbers.add(15);
-        winningNumbers.add(17);
-        winningNumbers.add(29);
-        winningNumbers.add(31);
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers);
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
+
         //when
         float roi = winningAnalyzer.getReturnOnInvestment(7000);
         float expectedResult = WINNING_PRIZES.stream().mapToInt(prize -> prize.getPrizeMoney()).sum() / 7000;
+
         //then
         assertThat(areFloatsEqual(roi, expectedResult)).isTrue();
+    }
+    private static Stream<Arguments> provideLottoList() {
+        return Stream.of(
+            Arguments.of(
+                Arrays.asList(
+                    new int[]{ 2, 4, 6, 7, 10, 12 },
+                    new int[]{ 1, 4, 6, 7, 10, 12 },
+                    new int[]{ 1, 2, 3, 4, 5, 6 },
+                    new int[]{ 1, 4, 5, 6, 15, 17 },
+                    new int[]{ 1, 3, 15, 17, 18, 19 },
+                    new int[]{ 1, 3, 15, 17, 29, 30 },
+                    new int[]{ 1, 3, 15, 17, 29, 31 }
+                ),
+                Arrays.asList(1, 3, 15, 17, 29, 31)
+            )
+        );
     }
 
     private static boolean areFloatsEqual(float a, float b) {
