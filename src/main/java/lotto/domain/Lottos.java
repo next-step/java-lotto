@@ -67,7 +67,7 @@ public class Lottos {
         return this.lottos.size() * LOTTO_PRICE;
     }
 
-    public List<Set<Integer>> getNumbers() {
+    public List<Set<LottoNumber>> getNumbers() {
         return this.lottos.stream()
                 .map(Lotto::getNumbers)
                 .collect(Collectors.toList());

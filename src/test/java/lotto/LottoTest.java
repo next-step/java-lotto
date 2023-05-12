@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.WinNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,15 +10,6 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
-    @Test
-    @DisplayName("로또 번호는 1이상 45미만이어야 한다")
-    public void invalidNumbers() {
-        assertAll(
-                () -> assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Set.of(1, 2, 3, 4, 5, 46))),
-                () -> assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Set.of(0, 1, 2, 3, 4, 5)))
-        );
-    }
-
     @Test
     @DisplayName("당첨 번호는 6개여야 한다")
     public void invalidWinNumbersSize() {
