@@ -3,4 +3,4 @@
 * 번호 생성 기능
 * 당첨 통계 기능
 * 수익률 계산 기능
-* InputView, OutputView 개발
+* InputView, ResultView 개발
