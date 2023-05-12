@@ -32,7 +32,7 @@ public class LottoGameServiceTest {
         tickets.add(Ticket.from(List.of(3, 8, 27, 30, 35, 44)));
         LottoTickets lottoTickets = LottoTickets.from(tickets);
 
-        List<Integer> winningNumber = List.of(1, 2, 3, 4, 5, 6);
+        WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6));
         lottoGameService = LottoGameService.of(lottoTickets, winningNumber);
         lottoGameService.countMatchingTickets();
     }
