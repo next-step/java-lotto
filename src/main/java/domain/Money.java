@@ -1,9 +1,9 @@
 package domain;
 
 public class Money {
-    private int money;
 
     private static final int MINIMUM_MONEY = 1000;
+    private int money;
 
     public Money(int money) {
         isValidMoney(money);
