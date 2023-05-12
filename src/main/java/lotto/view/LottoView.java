@@ -5,15 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.constant.LottoRank;
 
 public class LottoView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final List<LottoRank> LOTTO_RANKS = List.of(LottoRank.FOURTH, LottoRank.THIRD,
-        LottoRank.SECOND, LottoRank.FIRST);
+    private static final List<LottoRank> LOTTO_RANKS = List.of(LottoRank.FIFTH, LottoRank.FOURTH,
+        LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
     private static final String COMMA_DELIMITER = ",";
 
     private LottoView() {
@@ -34,20 +33,27 @@ public class LottoView {
         System.out.println();
     }
 
-    public static Lotto enterWinningNumber() {
+    public static List<Integer> enterWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
-        return new Lotto(Arrays.stream(SCANNER.nextLine().split(COMMA_DELIMITER))
+        return Arrays.stream(SCANNER.nextLine().split(COMMA_DELIMITER))
             .map(String::trim)
             .mapToInt(Integer::valueOf)
             .boxed()
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
+    }
+
+    public static int enterBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static void outputLottoStatistics(Map<LottoRank, Long> lottoStatistics) {
+        System.out.printf("%n당첨 통계%n");
+        System.out.println("---------");
         LOTTO_RANKS.forEach(
-            lottoRank -> System.out.printf("%d개 일치 (%d원)- %d개%n",
-                lottoRank.getHitNumber(), lottoRank.getWinningAmount(),
+            lottoRank -> System.out.printf("%d개 일치%s(%d원)- %d개%n",
+                lottoRank.getHitNumber(), lottoRank.equals(LottoRank.SECOND) ? ", 보너스 볼 일치" : " ",
+                lottoRank.getWinningAmount(),
                 lottoStatistics.getOrDefault(lottoRank, 0L))
         );
     }

@@ -17,9 +17,9 @@ public class LottoGenerator {
         .collect(Collectors.toList());
     public static final int LOTTO_COUNT = 6;
 
-    private final Integer generateNumber;
+    private final int generateNumber;
 
-    public LottoGenerator(Integer money) {
+    public LottoGenerator(int money) {
         this.generateNumber = money / LOTTO_PRICE;
     }
 

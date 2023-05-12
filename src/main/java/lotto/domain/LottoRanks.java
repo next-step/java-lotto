@@ -42,9 +42,4 @@ public class LottoRanks {
         return Objects.equals(lottoRanks, that.lottoRanks);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoRanks);
-    }
-
 }

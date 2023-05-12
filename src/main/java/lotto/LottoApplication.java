@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.view.LottoView.enterBonusNumber;
+
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoRanks;
 import lotto.domain.Lottos;
@@ -13,7 +15,7 @@ public class LottoApplication {
         LottoView.outputPurchaseNumber(lottos.size());
         LottoView.outputLottos(lottos);
 
-        LottoRanks lottoRanks = lottos.drawLots(LottoView.enterWinningNumber());
+        LottoRanks lottoRanks = lottos.drawLots(LottoView.enterWinningNumber(), enterBonusNumber());
         LottoView.outputLottoStatistics(lottoRanks.createStatistics());
         LottoView.outputRate(lottoRanks.createRate());
     }
