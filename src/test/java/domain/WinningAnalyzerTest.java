@@ -1,9 +1,9 @@
 package domain;
 
+import static domain.WinningStatistics.WINNING_PRIZES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -79,10 +79,8 @@ public class WinningAnalyzerTest {
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
         //when
         float roi = winningAnalyzer.getReturnOnInvestment(7000);
-        float expectedResult = Arrays.stream(WinningStatistics.WINNING_PRIZES).sum() / 7000;
+        float expectedResult = WINNING_PRIZES.stream().mapToInt(prize -> prize.getPrizeMoney()).sum() / 7000;
         //then
-        System.out.println("expectedResult = " + expectedResult);
-        System.out.println("roi = " + roi);
         assertThat(areFloatsEqual(roi, expectedResult)).isTrue();
     }
 

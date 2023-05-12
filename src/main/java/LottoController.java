@@ -1,5 +1,3 @@
-import java.util.List;
-
 import domain.LottoGenerator;
 import domain.LottoResults;
 import domain.WinningAnalyzer;
@@ -29,10 +27,10 @@ public class LottoController {
         LottoOutputView.printBeforeWinnings();
         for (int i = 0; i < winningStatistics.getWinningResults().length; i++) {
             LottoOutputView.printMatchCounts(i, WinningStatistics.OFFSET);
-            LottoOutputView.printPrizes(WinningStatistics.WINNING_PRIZES[i]);
+            LottoOutputView.printPrizes(WinningStatistics.WINNING_PRIZES.get(i).getPrizeMoney());
             LottoOutputView.printWinningCount(winningStatistics.getWinningResults()[i]);
         }
-        int money = lottoGenerator.getCount();
+        int money = lottoGenerator.getMoney();
         LottoOutputView.printReturnOnInvestment(winningAnalyzer.getReturnOnInvestment(money));
     }
 }

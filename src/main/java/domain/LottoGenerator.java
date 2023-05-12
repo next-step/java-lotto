@@ -26,6 +26,10 @@ public class LottoGenerator {
         return money.getCount();
     }
 
+    public int getMoney() {
+        return money.getMoney();
+    }
+
     public LottoResults getLottoResults() {
         return lottoResults;
     }

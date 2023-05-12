@@ -4,15 +4,7 @@ import java.util.List;
 
 public class WinningStatistics {
 
-    private static final int FOURTH_PRIZE = 5000;
-
-    private static final int THIRD_PRIZE = 50000;
-
-    private static final int SECOND_PRIZE = 1500000;
-
-    private static final int FIRST_PRIZE = 2000000000;
-
-    public static final int[] WINNING_PRIZES = { FOURTH_PRIZE, THIRD_PRIZE, SECOND_PRIZE, FIRST_PRIZE };
+    public static final List<WinningPrizes> WINNING_PRIZES = List.of(WinningPrizes.FOURTH_PRIZE, WinningPrizes.THIRD_PRIZE, WinningPrizes.SECOND_PRIZE, WinningPrizes.FIRST_PRIZE);
 
     public static final int OFFSET = 3;
     private int[] winningStatistics = new int[4];
@@ -45,7 +37,7 @@ public class WinningStatistics {
     public int getTotalWinnings() {
         int winnings = 0;
         for (int i = 0; i < winningStatistics.length; i++) {
-            winnings += winningStatistics[i] * WINNING_PRIZES[i];
+            winnings += WINNING_PRIZES.get(i).calculatePrizeMoney(winningStatistics[i]);
         }
         return winnings;
     }
