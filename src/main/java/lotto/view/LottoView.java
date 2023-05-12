@@ -50,12 +50,23 @@ public class LottoView {
     public static void outputLottoStatistics(Map<LottoRank, Long> lottoStatistics) {
         System.out.printf("%n당첨 통계%n");
         System.out.println("---------");
-        LOTTO_RANKS.forEach(
-            lottoRank -> System.out.printf("%d개 일치%s(%d원)- %d개%n",
-                lottoRank.getHitNumber(), lottoRank.equals(LottoRank.SECOND) ? ", 보너스 볼 일치" : " ",
-                lottoRank.getWinningAmount(),
-                lottoStatistics.getOrDefault(lottoRank, 0L))
-        );
+        LOTTO_RANKS.forEach(lottoRank -> outputLottoStatisticsForRank(lottoStatistics, lottoRank));
+    }
+
+    private static void outputLottoStatisticsForRank(Map<LottoRank, Long> lottoStatistics,
+        LottoRank lottoRank) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(lottoRank.getHitNumber());
+        sb.append("개 일치");
+        if (lottoRank.equals(LottoRank.SECOND)) {
+            sb.append(", 보너스 볼 일치");
+        }
+        sb.append(" (");
+        sb.append(lottoRank.getWinningAmount());
+        sb.append("원) - ");
+        sb.append(lottoStatistics.getOrDefault(lottoRank, 0L));
+        sb.append("개");
+        System.out.println(sb);
     }
 
     public static void outputRate(double rate) {

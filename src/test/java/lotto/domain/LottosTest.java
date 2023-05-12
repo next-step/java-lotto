@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import lotto.domain.constant.LottoRank;
@@ -27,6 +28,19 @@ class LottosTest {
             LottoRank.MISS));
 
         assertThat(lottos.drawLots(winningNumber, bonusNumber)).isEqualTo(expected);
+    }
+
+    @Test
+    void drawLotsExceptionTest() {
+        Lottos lottos = new Lottos(List.of(
+            new Lotto(List.of(1, 2, 3, 4, 5, 6))
+        ));
+        List<Integer> winningNumber = List.of(1, 2, 3, 4, 5, 6);
+        int duplicateBonusNumber = 1;
+
+        assertThatThrownBy(() -> lottos.drawLots(winningNumber, duplicateBonusNumber)).isInstanceOf(
+            IllegalArgumentException.class)
+            .hasMessage("There exists duplicate between winningNumber and bonusNumber");
     }
 
 }

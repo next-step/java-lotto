@@ -41,4 +41,8 @@ public class LottoNumber {
         return Objects.equals(number, that.number);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
 }
