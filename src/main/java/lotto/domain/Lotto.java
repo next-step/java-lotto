@@ -49,13 +49,13 @@ public class Lotto {
         return numbers;
     }
 
-    public long getMatchCount(WinNumbers winNumbers) {
+    public long getMatchCount(Lotto lotto) {
         return numbers.stream()
-                .filter(winNumbers::contains)
+                .filter(lotto::contains)
                 .count();
     }
 
-    public boolean contains(int number) {
+    private boolean contains(int number) {
         return numbers.contains(number);
     }
 }

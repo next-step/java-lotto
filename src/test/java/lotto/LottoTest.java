@@ -30,20 +30,10 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 몇 개 일치하였는지 계산한다")
+    @DisplayName("몇 개 일치하였는지 계산한다")
     public void matchCount() {
         Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 11, 12, 13));
-        assertThat(lotto.getMatchCount(winNumbers)).isEqualTo(3);
-    }
-
-    @Test
-    @DisplayName("당첨 번호와 몇 개 일치하였는지 계산한다")
-    public void contains() {
-        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        assertAll(
-                () -> assertThat(lotto.contains(6)).isTrue(),
-                () -> assertThat(lotto.contains(7)).isFalse()
-        );
+        Lotto lotto2 = new Lotto(Set.of(1, 2, 3, 11, 12, 13));
+        assertThat(lotto.getMatchCount(lotto2)).isEqualTo(3);
     }
 }

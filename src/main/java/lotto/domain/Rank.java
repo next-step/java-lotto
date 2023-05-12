@@ -19,7 +19,7 @@ public enum Rank {
 
     public static Rank of(Lotto lotto, WinNumbers winNumbers) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchCount == lotto.getMatchCount(winNumbers))
+                .filter(rank -> rank.matchCount == winNumbers.getMatchCount(lotto))
                 .findFirst()
                 .orElse(Rank.LOSE);
     }
