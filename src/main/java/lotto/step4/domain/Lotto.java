@@ -14,5 +14,9 @@ public class Lotto extends ValidateNumbers {
         return new TreeSet<>(Set.copyOf(lotto));
     }
 
+    public int matchCount(Set<Integer> winningNumbers) {
+        return (int) lotto.stream().filter(winningNumbers::contains).count();
+    }
+
 
 }

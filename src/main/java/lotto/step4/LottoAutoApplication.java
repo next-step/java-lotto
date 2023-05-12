@@ -9,10 +9,10 @@ public class LottoAutoApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
 
-        LottoCount lottoCount = inputView.inputInitData();
+        LottoCount lottoCount = inputView.inputPrice();
+        ManualLotto manualLotto = inputView.inputManualLotto();
         LottoStrategy lottoStrategy = new LottoAutoStrategy();
-
-        Lottos lottos = new Lottos(lottoStrategy, lottoCount);
+        Lottos lottos = new Lottos(lottoStrategy, lottoCount, manualLotto);
         ResultView.printLottos(lottos);
 
         WinningNumbers winningNumbers = inputView.inputWinningNumbers();
@@ -21,4 +21,3 @@ public class LottoAutoApplication {
         ResultView.printWinnerStat(result, Rank.getTotalReturnResult(result, lottoCount.getPrice()));
     }
 }
-

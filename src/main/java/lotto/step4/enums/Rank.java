@@ -5,14 +5,15 @@ import lotto.step4.domain.TotalReturn;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public enum Rank {
-    MISS(0, 0, "낙첨(0원)- "),
-    FIFTH(5, 5_000, "3개 일치 (5,000원)- "),
+    FIRST(6, 200_000_000, "6개 일치 (2,000,000,000원)- "),
+    SECOND(5, 30_000_000, "5개 일치, 보너스 볼 일치(30,000,000원)- "),
+    THIRD(5, 1_500_000, "5개 일치 (1,500,000원)- "),
     FOURTH(4, 50_000, "4개 일치 (50,000원)- "),
-    THIRD(3, 1_500_000, "5개 일치 (1,500,000원)- "),
-    SECOND(2, 30_000_000, "5개 일치, 보너스 볼 일치(30,000,000원)- "),
-    FIRST(1, 200_000_000, "6개 일치 (2,000,000,000원)- ");
+    FIFTH(3, 5_000, "3개 일치 (5,000원)- "),
+    MISS(0, 0, "낙첨(0원)- ");
 
     private final int rank;
     private final int prize;
@@ -24,10 +25,12 @@ public enum Rank {
         this.text = text;
     }
 
-    public static Optional<Rank> of(int rank) {
+    public static Rank of(int rank, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(r -> r.rank == rank)
-                .findFirst();
+                .filter(r -> !r.equals(SECOND) || matchBonus)
+                .findFirst()
+                .orElse(MISS);
     }
 
     public int getRank() {
@@ -51,5 +54,7 @@ public enum Rank {
                 .filter(m -> m.getRank() == size)
                 .findFirst();
     }
+
+
 }
 

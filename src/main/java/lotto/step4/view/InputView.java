@@ -1,7 +1,7 @@
 package lotto.step4.view;
 
-import lotto.step4.domain.Lotto;
 import lotto.step4.domain.LottoCount;
+import lotto.step4.domain.ManualLotto;
 import lotto.step4.domain.WinningNumbers;
 
 import java.util.*;
@@ -16,15 +16,18 @@ public class InputView {
     public static final String TEXT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String TEXT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.(숫자 6개 쉼표로 구분 후 개행, 입력을 다하셨으면 enter를 한 번 더 입력해주세요.)";
     public static List<Set<Integer>> manualLottos = new ArrayList<>();
-
-
     public LottoCount lottoCount;
 
-    public LottoCount inputInitData() {
+    public LottoCount inputPrice() {
         System.out.println(INPUT_TEXT_BUY);
         int price = SCANNER.nextInt();
+        lottoCount = new LottoCount(price);
+        return lottoCount;
+    }
+
+    public ManualLotto inputManualLotto() {
         System.out.println(TEXT_MANUAL_LOTTO_COUNT);
-        int manualLottoCount = SCANNER.nextInt();
+        int count = SCANNER.nextInt();
         SCANNER.nextLine();
         System.out.println(TEXT_MANUAL_LOTTO_NUMBERS);
         while (SCANNER.hasNextLine()) {
@@ -37,10 +40,10 @@ public class InputView {
                     .collect(Collectors.toSet());
             manualLottos.add(lotto);
         }
-        lottoCount = new LottoCount(price, manualLottoCount, manualLottos);
-        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + lottoCount.getLottoCount() + "개를 구매했습니다.");
 
-        return lottoCount;
+        int manualCount = manualLottos.size();
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + (lottoCount.getLottoCount() - manualCount) + "개를 구매했습니다.");
+        return new ManualLotto(count, manualLottos);
     }
 
     public WinningNumbers inputWinningNumbers() {

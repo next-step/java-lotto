@@ -17,12 +17,15 @@ class LottoCountTest {
         // GIVEN
         int price = 2_000;
         int manualLottoCount = 1;
-        List<Set<Integer>> manualLotto = List.of(Set.of(3, 4, 5, 6, 7, 8));
+        List<Set<Integer>> manualLottoList = List.of(Set.of(3, 4, 5, 6, 7, 8));
+        ManualLotto manualLotto = new ManualLotto(manualLottoCount, manualLottoList);
 
-        LottoCount lottoCount = new LottoCount(price, manualLottoCount, manualLotto);
-        Lottos lottos = new Lottos(lottoStrategyFake, lottoCount);
+        LottoCount lottoCount = new LottoCount(price);
+        Lottos lottos = new Lottos(lottoStrategyFake, lottoCount, manualLotto);
         int 보너스번호 = 6;
         Set<Integer> 당첨번호 = Set.of(1, 2, 3, 4, 5, 7);
+
+        lottos.getLottos().forEach(s -> System.out.println(s.getLotto()));
 
         // WHEN
         WinningNumbers winningNumbers = new WinningNumbers(당첨번호, 보너스번호);

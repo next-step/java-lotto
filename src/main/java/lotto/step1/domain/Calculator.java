@@ -1,46 +1,29 @@
 package lotto.step1.domain;
 
-import java.util.*;
+import lotto.step1.enums.Operator;
+
+import java.util.Optional;
 
 public class Calculator {
-    private final List<String> calcList;
-    private final Deque<Integer> numberQueue = new ArrayDeque<>();
-    private final Deque<String> mathOperationQueue = new ArrayDeque<>();
+    private final Input calcList;
+    private final NumberQueue numberQueue;
+    private final MathOpQueue mathOperationQueue;
 
 
-    public Calculator(List<String> calcList) {
-        checkValidation(calcList);
+    public Calculator(Input calcList, NumberQueue numberQueue, MathOpQueue mathOperationQueue) {
         this.calcList = calcList;
-    }
-
-    private void checkValidation(List<String> calcList) {
-        if (calcList.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 없습니다.");
-        }
-        calcList.forEach(s -> {
-            if (s.isBlank()) {
-                throw new IllegalArgumentException("입력값은 공백일 수 없습니다.");
-            }
-        });
-    }
-
-    private void checkValidation(Deque<Integer> numberQueue, Deque<String> mathOperationQueue) {
-        int numberQueueSize = numberQueue.size() - 1;
-        int mathQueueSize = mathOperationQueue.size();
-
-        if (numberQueueSize != mathQueueSize) {
-            throw new IllegalArgumentException("피연산자 -1 은 연산자 개수와 같아야합니다.(피연산자-1: " + numberQueueSize + ", 연산자: " + mathQueueSize);
-        }
+        this.numberQueue = numberQueue;
+        this.mathOperationQueue = mathOperationQueue;
     }
 
     public int getResult() {
-        analyzeNumberAndOperation();
+        setNumberAndOperation();
 
         while (!mathOperationQueue.isEmpty()) {
             int a = Optional.ofNullable(numberQueue.poll()).orElse(0);
             int b = Optional.ofNullable(numberQueue.poll()).orElse(0);
-            String operation = mathOperationQueue.poll();
-            MathOperation mathOperation = getMathOperation(operation);
+            String symbol = mathOperationQueue.poll();
+            MathOperation mathOperation = getMathOperation(symbol);
 
             numberQueue.addFirst(mathOperation.calc(a, b));
         }
@@ -48,34 +31,24 @@ public class Calculator {
         return Optional.ofNullable(numberQueue.poll()).orElse(0);
     }
 
-    private MathOperation getMathOperation(String operation) {
-        switch (operation) {
-            case "+":
-                return new Addition();
-            case "-":
-                return new Subtraction();
-            case "*":
-                return new Multiplication();
-            case "/":
-                return new Division();
-            default:
-                throw new IllegalArgumentException("유효하지 않은 연산자 '" + operation + "'를 사용하셨습니다.");
+    private void setNumberAndOperation() {
+        numberQueue.analyzeNumber(calcList);
+        mathOperationQueue.analyzeOperation(calcList);
+        checkValidation();
+    }
+
+    public void checkValidation() {
+        int numberQueueSize = numberQueue.getSize() - 1;
+        int mathQueueSize = mathOperationQueue.getSize();
+
+        if (numberQueueSize != mathQueueSize) {
+            throw new IllegalArgumentException("피연산자 -1 은 연산자 개수와 같아야합니다.(피연산자-1: " + numberQueueSize + ", 연산자: " + mathQueueSize);
         }
     }
 
-    private void analyzeNumberAndOperation() {
-        calcList.forEach(e -> {
-            if (isDigit(e)) {
-                numberQueue.add(Integer.parseInt(e));
-            }
-            if (!isDigit(e)) {
-                mathOperationQueue.add(e);
-            }
-        });
-        checkValidation(numberQueue, mathOperationQueue);
+    private MathOperation getMathOperation(String symbol) {
+        return Operator.execute(symbol);
     }
 
-    private boolean isDigit(String e) {
-        return Character.isDigit(e.charAt(0));
-    }
+
 }

@@ -1,4 +1,4 @@
-# 4단계 - 로또(수동)
+# 3단계 - 로또(2등)
 
 ## 기능 요구사항
 
@@ -7,7 +7,6 @@
 - 로또 미션부터는 모든 원시값과 문자열을 포장한다.
 - 일급 콜렉션을 사용한다.
 - 2등을 위해 추가 번호를 하나 더 추첨한다.
-- 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
 
 ## 기능 목록
 
@@ -18,7 +17,6 @@
                 - Collections.shuffle, Collections.sort 사용
         - LottoStrategy
             - [x] 자동생성을 위한 인터페이스(LottoAutoStrategy)
-            - [x] 수동입력을 위한 인터페이스(LottoManualStrategy)
         - LottoCount
             - [x] 구매금액을 입력 받아 몇개의 로또를 구매해야하는지 상태 저장(원시값 포장)
                 - 1000원 미만 금액은 구매 못하도록 예외 throw
@@ -44,4 +42,4 @@
             - [x] 구입한 로또 목록을 보여준다.
             - [x] 당첨 통계 데이터를 보여준다.
 - 테스트 케이스
-    - src/test/java/lotto/step4
+    - src/test/java/lotto/step3

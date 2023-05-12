@@ -1,8 +1,8 @@
 package lotto.step4.domain;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,6 +13,6 @@ public class LottoAutoStrategy implements LottoStrategy {
                 .collect(Collectors.toList());
         Collections.shuffle(lottoList);
 
-        return new Lotto(new HashSet<>(lottoList.subList(0, LOTTO_NUMBER)));
+        return new Lotto(new TreeSet<>(lottoList.subList(0, LOTTO_NUMBER)));
     }
 }

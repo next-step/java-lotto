@@ -7,6 +7,6 @@ public class Application {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         Calculator calculator = inputView.inputData();
-        System.out.println("연산 결과: "+calculator.getResult());
+        System.out.println("연산 결과: " + calculator.getResult());
     }
 }

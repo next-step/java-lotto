@@ -1,7 +1,11 @@
 package lotto.step1.view;
 
 import lotto.step1.domain.Calculator;
+import lotto.step1.domain.Input;
+import lotto.step1.domain.MathOpQueue;
+import lotto.step1.domain.NumberQueue;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -14,7 +18,10 @@ public class InputView {
     public Calculator inputData() {
         System.out.println(INPUT_TEXT1);
         System.out.println(INPUT_TEXT2);
-        String[] input = SCANNER.nextLine().split(INPUT_DELIMITER);
-        return new Calculator(Arrays.asList(input));
+        String[] inputElement = SCANNER.nextLine().split(INPUT_DELIMITER);
+        Input input = new Input(Arrays.asList(inputElement));
+        NumberQueue numberQueue = new NumberQueue(new ArrayDeque<>());
+        MathOpQueue mathOperationQueue = new MathOpQueue(new ArrayDeque<>());
+        return new Calculator(input, numberQueue, mathOperationQueue);
     }
 }
