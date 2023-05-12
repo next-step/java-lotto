@@ -45,7 +45,8 @@ public class ResultView {
             int count = Optional.ofNullable(winCount.get(rank)).orElse(0);
             if (rank != rank.MISS)
                 System.out.println(printLottoResult(rank, count));
-
+        }
+    }
 
     private static String printLottoResult(Rank rank, int count) {
 
@@ -67,7 +68,6 @@ public class ResultView {
         return rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원) - " + count + "개";
 
     }
-
 
     private static void printTotalGross(double gross) {
         DecimalFormat df = new DecimalFormat("#.##");

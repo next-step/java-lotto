@@ -13,8 +13,7 @@ public class LottoRandomGeneratorTest {
     void grossTest() {
         //give // when
         LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
-        lottoRandomGenerator.generatorLotto(1);
-        List<Lotto> lotto = lottoRandomGenerator.getLottos();
+        List<Lotto> lotto = lottoRandomGenerator.generatorLotto(1);
 
         //then
         boolean expected = false;
@@ -27,13 +26,12 @@ public class LottoRandomGeneratorTest {
     void lottoCount() {
         //given //when
         LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
-        lottoRandomGenerator.generatorLotto(3);
-        List<Lotto> lottos = lottoRandomGenerator.getLottos();
+        List<Lotto> lottos = lottoRandomGenerator.generatorLotto(3);
 
         //then
         int expected = 3;
 
-        assertEquals(expected, lottos.size() - 1);
+        assertEquals(expected, lottos.size());
 
     }
 }

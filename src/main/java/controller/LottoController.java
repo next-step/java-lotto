@@ -18,4 +18,7 @@ public class LottoController {
 
         Lotto winNum = new Lotto(InputView.inputWinnerLottoNum(), InputView.inputBonusBall());
 
+        LotteryStatics lotteryStatics = new LotteryStatics(buyAmount, lottos, winNum.getLotto());
+        ResultView.printStatics(lotteryStatics);
+    }
 }
