@@ -30,7 +30,7 @@ public class Lottos {
     }
 
     private boolean isInvalidMoney(int money) {
-        return money <= 0 || money % 1000 != 0;
+        return money <= 0 || money % LOTTO_PRICE != 0;
     }
 
     public Map<Rank, Long> getRankCount(WinNumbers winNumbers) {
@@ -67,7 +67,7 @@ public class Lottos {
         return this.lottos.size() * LOTTO_PRICE;
     }
 
-    public List<Set<Integer>> getNumbers() {
+    public List<Set<LottoNumber>> getNumbers() {
         return this.lottos.stream()
                 .map(Lotto::getNumbers)
                 .collect(Collectors.toList());

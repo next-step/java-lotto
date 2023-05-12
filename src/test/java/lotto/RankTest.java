@@ -15,7 +15,7 @@ public class RankTest {
     @DisplayName("몇 등인지 계산한다")
     public void rank() {
         Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 4, 5, 7));
+        WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 4, 5, 7), 8);
         assertThat(Rank.of(lotto, winNumbers).getPrize()).isEqualTo(1500000);
     }
 }

@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class Input {
     private static final String QUESTION_FOR_MONEY = "구입금액을 입력해 주세요.";
     private static final String QUESTION_FOR_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String QUESTION_FOR_BONUS = "보너스 볼을 입력해 주세요.";
 
     public Lottos setLottos() {
         Scanner scanner = new Scanner(System.in);
@@ -26,9 +27,11 @@ public class Input {
 
         System.out.println(QUESTION_FOR_WIN_NUMBERS);
         String winNumbersString = scanner.nextLine();
+        System.out.println(QUESTION_FOR_BONUS);
+        int bonus = scanner.nextInt();
         System.out.println();
 
-        return new WinNumbers(split(winNumbersString));
+        return new WinNumbers(split(winNumbersString), bonus);
     }
 
     private static Set<Integer> split(String WinNumbersString) {

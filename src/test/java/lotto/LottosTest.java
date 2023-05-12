@@ -12,6 +12,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottosTest {
     @Test
@@ -28,11 +29,14 @@ public class LottosTest {
         Lotto lotto3 = new Lotto(Set.of(1, 2, 3, 4, 7, 8));
         Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 5, 7));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
-        WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 4, 5, 6));
-        assertThat(lottos.getRankCount(winNumbers).get(Rank.FIRST)).isZero();
-        assertThat(lottos.getRankCount(winNumbers).get(Rank.SECOND)).isOne();
-        assertThat(lottos.getRankCount(winNumbers).get(Rank.THIRD)).isOne();
-        assertThat(lottos.getRankCount(winNumbers).get(Rank.FOURTH)).isOne();
+        WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
+        assertAll(
+                () -> assertThat(lottos.getRankCount(winNumbers).get(Rank.FIRST)).isZero(),
+                () -> assertThat(lottos.getRankCount(winNumbers).get(Rank.SECOND)).isOne(),
+                () -> assertThat(lottos.getRankCount(winNumbers).get(Rank.THIRD)).isZero(),
+                () -> assertThat(lottos.getRankCount(winNumbers).get(Rank.FOURTH)).isOne(),
+                () -> assertThat(lottos.getRankCount(winNumbers).get(Rank.FIFTH)).isOne()
+        );
     }
 
     @Test
@@ -41,11 +45,13 @@ public class LottosTest {
         Lotto lotto1 = new Lotto(Set.of(1, 3, 5, 14, 22, 45));
         Lotto lotto2 = new Lotto(Set.of(3, 5, 11, 16, 32, 38));
         Lotto lotto3 = new Lotto(Set.of(1, 2, 3, 4, 7, 8));
-        Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 5, 7));
+        Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 5, 8));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
-        WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 4, 5, 6));
-        assertThat(lottos.getEarningRate(winNumbers)).isEqualTo(388.75);
-        assertThat(lottos.isGain(winNumbers)).isTrue();
-        assertThat(lottos.isLoss(winNumbers)).isFalse();
+        WinNumbers winNumbers = new WinNumbers(Set.of(1, 2, 3, 4, 5, 6), 7);
+        assertAll(
+                () -> assertThat(lottos.getEarningRate(winNumbers)).isEqualTo(388.75),
+                () -> assertThat(lottos.isGain(winNumbers)).isTrue(),
+                () -> assertThat(lottos.isLoss(winNumbers)).isFalse()
+        );
     }
 }
