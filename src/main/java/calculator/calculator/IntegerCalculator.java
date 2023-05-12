@@ -1,16 +1,13 @@
-package calculator;
+package calculator.calculator;
 
 import calculator.parser.Expression;
 import calculator.parser.ExpressionParser;
 
 public class IntegerCalculator {
     private final ExpressionParser parser;
-    private final Operations operators;
 
-    public IntegerCalculator(ExpressionParser parser,
-                             Operations operations) {
+    public IntegerCalculator(ExpressionParser parser) {
         this.parser = parser;
-        this.operators = operations;
     }
 
     public int calculate(String expressionString) {
@@ -18,12 +15,11 @@ public class IntegerCalculator {
 
         Integer sum = expression.nextOperand();
 
-        while(expression.hasOperator()) {
+        while (expression.hasOperator()) {
             String operator = expression.nextOperator();
             Integer number = expression.nextOperand();
 
-            sum = operators.operationOf(operator)
-                    .orElseThrow(() -> new IllegalArgumentException("허용된 연산자가 아닙니다."))
+            sum = IntegerOperation.valueOfOperator(operator)
                     .operate(sum, number);
         }
 
