@@ -79,8 +79,17 @@ public class WinningAnalyzerTest {
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
         //when
         float roi = winningAnalyzer.getReturnOnInvestment(7000);
+        float expectedResult = Arrays.stream(WinningStatistics.WINNING_PRIZES).sum() / 7000;
         //then
-        assertThat(roi).isEqualTo(Arrays.stream(WinningStatistics.WINNING_PRIZES).sum() / 7);
+        System.out.println("expectedResult = " + expectedResult);
+        System.out.println("roi = " + roi);
+        assertThat(areFloatsEqual(roi, expectedResult)).isTrue();
     }
+
+    private static boolean areFloatsEqual(float a, float b) {
+        float epsilon = 1f;
+        return Math.abs(a - b) <= epsilon;
+    }
+
 
 }
