@@ -21,7 +21,7 @@ public class Lottos {
         lottoList = createLotto(lottoStrategy, count);
     }
 
-    private List<Lotto> createLotto(LottoStrategy lottoStrategy, int count) {
+    public List<Lotto> createLotto(LottoStrategy lottoStrategy, int count) {
         return IntStream.range(ZERO, count)
                 .mapToObj(i -> new Lotto(lottoStrategy.generateNumbers()))
                 .collect(Collectors.toList());
@@ -33,7 +33,7 @@ public class Lottos {
 
     public Map<LottoPrize, Integer> getMatchCounts(WinnerLotto winnerLotto) {
         return lottoList.stream()
-                .map(lotto -> editMatchCount(lotto, winnerLotto))
+                .map(lotto -> matchCount(lotto, winnerLotto))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(
                         Function.identity(),
@@ -43,10 +43,18 @@ public class Lottos {
                 ));
     }
 
-    private LottoPrize editMatchCount(Lotto lotto, WinnerLotto winnerLotto) {
+    private LottoPrize matchCount(Lotto lotto, WinnerLotto winnerLotto) {
         boolean bonusNumberMatch = lotto.hasBonusNumber(winnerLotto.getBonusNumber());
         int count = lotto.countMatchNumbers(winnerLotto);
         return LottoPrize.valueOf(count, bonusNumberMatch);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottoList=" + lottoList +
+                '}';
     }
 
 }

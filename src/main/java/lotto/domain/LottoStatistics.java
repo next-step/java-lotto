@@ -31,7 +31,6 @@ public class LottoStatistics {
         matchCounts.putAll(lottoList.getMatchCounts(winnerLotto));
     }
 
-
     /**
      * 모든 로또 티켓에 의해 생성된 총 수익을 계산
      */

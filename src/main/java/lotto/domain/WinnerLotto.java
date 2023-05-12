@@ -1,20 +1,16 @@
 package lotto.domain;
 
-import java.util.LinkedHashSet;
+import java.util.TreeSet;
 
 public class WinnerLotto {
 
-    private Lotto lotto;
+    private final TreeSet<Integer> winningNumbers;
 
-    private int bonusNumber;
+    private final int bonusNumber;
 
-    public WinnerLotto(final Lotto lotto, final int bonusNumber) {
-        this.lotto = lotto;
+    public WinnerLotto(final TreeSet<Integer> numbers, final int bonusNumber) {
+        this.winningNumbers = numbers;
         this.bonusNumber = bonusNumber;
-    }
-
-    public LinkedHashSet<Integer> getLottoNumbers() {
-        return lotto.getLottoNumbers();
     }
 
     public int getBonusNumber() {
@@ -22,7 +18,7 @@ public class WinnerLotto {
     }
 
     public boolean hasMatchNumber(int number) {
-        return lotto.getLottoNumbers().contains(number);
+        return winningNumbers.contains(number);
     }
 
 }

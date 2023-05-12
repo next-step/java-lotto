@@ -37,7 +37,7 @@ public enum LottoPrize {
         }
 
         return Arrays.stream(values())
-                .filter(prize -> prize.matchCount == matchCount && prize.hasBonusNumber == hasBonusNumber)
+                .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
                 .orElse(MISS);
     }

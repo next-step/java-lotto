@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.Numbers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,15 +32,14 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public Lotto getLastWeekLottoNumbers() throws IOException {
+    public Numbers getLastWeekLottoNumbers() throws IOException {
         System.out.println(WINNING_NUMBER_MESSAGE);
         String input = reader.readLine().trim();
 
-        final List<Integer> winnerLottoNumber = Arrays.stream(input.split(DELIMITER))
+        final List<Integer> collect = Arrays.stream(input.split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-
-        return new Lotto(winnerLottoNumber);
+        return new Numbers(collect);
     }
 
     public void tearDown() throws IOException {
