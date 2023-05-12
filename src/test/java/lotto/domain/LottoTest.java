@@ -48,4 +48,11 @@ public class LottoTest {
         assertThatThrownBy(() -> Lotto.from("1, 2, 3, 4, 5, 5"))
                 .isInstanceOf(InvalidLottoSizeException.class);
     }
+
+    @Test
+    void 갖고_있는_수가_동일하면_동일한_로또_객체이다() {
+        Lotto lotto1 = Lotto.from("1, 2, 3, 4, 5, 6");
+        Lotto lotto2 = Lotto.from("1, 2, 3, 4, 5, 6");
+        assertThat(lotto1).isEqualTo(lotto2);
+    }
 }

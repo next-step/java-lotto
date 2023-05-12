@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.exception.InvalidLottoSizeException;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,5 +47,18 @@ public class Lotto {
                 .map(it -> LottoNumber.from(it.trim()))
                 .collect(Collectors.toSet())
         );
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumberSet, lotto.lottoNumberSet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumberSet);
     }
 }
