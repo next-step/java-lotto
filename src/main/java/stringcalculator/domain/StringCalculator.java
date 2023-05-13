@@ -34,8 +34,8 @@ public class StringCalculator {
 
     private static Deque<Integer> convertToNumbers(List<String> expression) {
         Deque<Integer> operands = new ArrayDeque<>();
-        for (String elem: expression) {
-            if (isNumeric(elem)){
+        for (String elem : expression) {
+            if (isNumeric(elem)) {
                 operands.add(Integer.valueOf(elem));
             }
         }

@@ -16,7 +16,7 @@ public class Lottos {
         Lotto winningLotto = new Lotto(winningNumbers);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        if (winningLotto.contains(bonusLottoNumber)){
+        if (winningLotto.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException(
                 "There exists duplicate between winningNumber and bonusNumber");
         }
