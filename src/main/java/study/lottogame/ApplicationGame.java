@@ -15,7 +15,10 @@ public class ApplicationGame {
   public static void main(String[] args) {
     Money inputMoney = InputView.inputPurchaseMoney();
     Lotteries lotteries = LotteriesFactory.create(inputMoney);
-    OutputView.printLotteries(lotteries);
+
+    int inputCount = InputView.inputManualLotteryCount();
+    InputView.inputManualLotteries(inputCount, lotteries);
+    OutputView.printLotteries(inputCount, lotteries);
 
     Lottery prizeLottery = InputView.inputPrizeLottery();
     LottoNumber bonusLottoNumber = InputView.inputBonusLottoNumber();

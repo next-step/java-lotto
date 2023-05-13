@@ -1,6 +1,7 @@
 package study.lottogame.ui;
 
 import java.util.Scanner;
+import study.lottogame.domain.Lotteries;
 import study.lottogame.domain.Lottery;
 import study.lottogame.domain.LottoNumber;
 import study.lottogame.domain.Money;
@@ -17,8 +18,26 @@ public class InputView {
     return new Money(money);
   }
 
+  public static int inputManualLotteryCount() {
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    int count = Integer.parseInt(getInput().trim());
+    return count;
+  }
+
+  public static void inputManualLotteries(int count, Lotteries lotteries) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    for (int i = 0; i < count; i++) {
+      Lottery lottery = InputAndCreateLottery();
+      lotteries.addLottery(lottery);
+    }
+  }
+
   public static Lottery inputPrizeLottery() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    return InputAndCreateLottery();
+  }
+
+  private static Lottery InputAndCreateLottery() {
     String[] numbers = getInput().split(",");
     return LotteryFactory.create(numbers);
   }
