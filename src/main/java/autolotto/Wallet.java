@@ -24,4 +24,10 @@ public class Wallet {
         return this.lottoList.size();
     }
 
+    public int totalWinningsOfWinningNumber(List<Integer> winninNumbers) {
+        return this.lottoList.stream()
+                .map(lotto -> lotto.matchCount(winninNumbers))
+                .mapToInt(matchCount -> Winning.winningOf(matchCount).winningMoney())
+                .sum();
+    }
 }

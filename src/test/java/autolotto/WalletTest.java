@@ -3,6 +3,9 @@ package autolotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 class WalletTest {
     private final LottoGenerator lottoGenerator = new LottoGenerator(new OriginalOrderShuffler());
 
@@ -24,5 +27,22 @@ class WalletTest {
                 lottoGenerator.generateLottos(threeLottoMoney));
 
         Assertions.assertThat(wallet.lottoSize()).isEqualTo(3);
+    }
+
+    @Test
+    void 지갑_내_로또들에_대한_총_당첨금액을_알려준다() {
+        Wallet wallet = new Wallet(3000,
+                Arrays.asList(
+                        new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13)),
+                        new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13)),
+                        new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13))
+                ));
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 22, 23, 24);
+        int expectedTotalWinnings = Winning.THREE.winningMoney() * 3;
+
+
+        int totalWinnings = wallet.totalWinningsOfWinningNumber(winningNumber);
+
+        Assertions.assertThat(totalWinnings).isEqualTo(expectedTotalWinnings);
     }
 }
