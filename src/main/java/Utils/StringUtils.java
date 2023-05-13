@@ -1,3 +1,5 @@
+package Utils;
+
 public class StringUtils {
 
     public static boolean isBlank(String text) {
