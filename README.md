@@ -9,9 +9,10 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 요구사항
+### LottoNumber
+- [ ] 1부터 45 사이의 숫자 중 하나를 가진다.
 ### Lotto
-- [X] 6개의 정렬된 숫자 쌍을 가진다.
-- [X] 각 숫자는 1부터 45 사이의 숫자만 가진다.
+- [X] 6개의 정렬된 LottoNumber 쌍을 가진다.
 ### WinningLotto
 - [X] Lotto의 모든 기능을 가진다.
 - [X] 6개의 정렬된 숫자 쌍과 보너스볼 번호를 가진다.
@@ -20,6 +21,7 @@
 ### Lottos
 - [X] Lotto 리스트를 가진다.
 - [X] 주어진 금액만큼 구매 가능한 개수의 Lotto를 생성하여 리스트에 추가한다.
+- [ ] 입력받은 수동 생성 번호로 Lotto를 생성한 후, 나머지 개수만큼 Lotto를 자동 생성하여 저장한다.
 - [X] Lotto 리스트의 요소 개수를 알려준다.
 - [X] Lotto 리스트의 요소들과 WinningLotto를 비교하여 등수 별 개수를 알려준다.
 ### LottoPurchaseAmount
