@@ -19,13 +19,19 @@ public class ResultView {
     public void viewWinningResult(LottoResultChecker lottoResultChecker) {
         Arrays.stream(LottoRank.values())
                 .filter(rank -> !rank.equals(LottoRank.NO_RANK))
-                .forEach(rank -> System.out.println(rank.getMatchedCount() + "개 일치 "
-                        + "(" + rank.getPrizeMoney() + "원)- "
-                        + lottoResultChecker.getRankCount(rank) + "개"));
+                .forEach(rank -> {
+                    System.out.print(rank.getMatchedCount() + "개 일치 ");
+                    if (rank.equals(LottoRank.SECOND)) {
+                        System.out.print(", 보너스 볼 일치");
+
+                    }
+                    System.out.println("(" + rank.getPrizeMoney() + "원)- "
+                            + lottoResultChecker.getRankCount(rank) + "개");
+                });
 
     }
 
-    public void viewRateOfInvestment(int investmentAmount, int investmentReturn) {
+    public void viewRateOfInvestment(int investmentAmount, long investmentReturn) {
         double roi = (double) investmentReturn / investmentAmount;
 
         System.out.println("총 수익률은 " + roi + "입니다. (기준이 1이기 때문에 결과적으로는 손해라는 의미임)");

@@ -11,15 +11,16 @@ public class LottoRankTest {
 
     @Test
     void 생성자테스트 () {
-        Assertions.assertThat(LottoRank.FOURTH.getPrizeMoney()).isEqualTo(5000);
-        Assertions.assertThat(LottoRank.FOURTH.getMatchedCount()).isEqualTo(3);
+        Assertions.assertThat(LottoRank.FIFTH.getPrizeMoney()).isEqualTo(5000);
+        Assertions.assertThat(LottoRank.FIFTH.getMatchedCount()).isEqualTo(3);
     }
 
     @DisplayName("당첨등수찾기")
     @ParameterizedTest(name = "{displayName} [{index}] {arguments}")
-    @CsvSource(value = {"1,false,0", "2,false,0", "3,false,5000", "4,false,50000", "5,false,1500000", "6,true,30000000", "6,false,2000000000"})
+    @CsvSource(value = {"1,false,0", "2,false,0", "3,false,5000", "4,false,50000", "5,false,1500000", "5,true,30000000", "6,false,2000000000"})
     void 당첨등수찾기(String matchedCount, String bonusMatched, String prizeMoney) {
-        Assertions.assertThat(LottoRank.findByMatchedCount(Integer.parseInt(matchedCount), Boolean.valueOf(bonusMatched)).getPrizeMoney())
+        Assertions.assertThat(LottoRank.findByMatchedCount(Integer.parseInt(matchedCount),
+                        Boolean.valueOf(bonusMatched)).getPrizeMoney())
                 .isEqualTo(Integer.parseInt(prizeMoney));
     }
 
