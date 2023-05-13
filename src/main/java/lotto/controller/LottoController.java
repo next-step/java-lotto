@@ -1,10 +1,12 @@
 package lotto.controller;
 
+import lotto.domain.LottoPurchaseAmount;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import javax.swing.*;
 import java.util.List;
 
 public class LottoController {
@@ -17,7 +19,7 @@ public class LottoController {
     }
 
     public void play() {
-        int amount = inputView.readAmount();
+        LottoPurchaseAmount amount = LottoPurchaseAmount.of(inputView.readAmount());
         Lottos lottos = new Lottos(amount);
         resultView.printLottos(lottos);
 

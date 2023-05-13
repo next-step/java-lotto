@@ -18,8 +18,8 @@ public class LottoResult {
         rankCounts.merge(rank, 1, Integer::sum);
     }
 
-    public double calculateProfitRate(int amount) {
-        return (double) calculateTotalPrize() / (double) amount;
+    public double calculateProfitRate(LottoPurchaseAmount amount) {
+        return amount.calculateProfitRate(calculateTotalPrize());
     }
 
     private int calculateTotalPrize() {

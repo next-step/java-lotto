@@ -23,6 +23,6 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult();
         lottoResult.put(Rank.FIRST);
 
-        assertThat(lottoResult.calculateProfitRate(1000)).isEqualTo(2000000000/1000);
+        assertThat(lottoResult.calculateProfitRate(LottoPurchaseAmount.of(1000))).isEqualTo(2000000000/1000);
     }
 }

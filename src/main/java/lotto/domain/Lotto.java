@@ -53,7 +53,12 @@ public class Lotto {
             throw new IllegalArgumentException(String.format("Expected %d numbers, but received %d.", NUMBER_COUNT, inNumbers.size()));
         }
 
-        if (inNumbers.stream().anyMatch(num -> num < MIN_NUMBER || num > MAX_NUMBER)) {
+        inNumbers.stream()
+                .forEach(num -> validateNumberRange(num));
+    }
+
+    protected void validateNumberRange(Integer inNumber) {
+        if (inNumber < MIN_NUMBER || inNumber > MAX_NUMBER) {
             throw new IllegalArgumentException(String.format("Number must be between %d and %d.", MIN_NUMBER, MAX_NUMBER));
         }
     }

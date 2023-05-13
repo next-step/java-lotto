@@ -7,6 +7,7 @@ public class WinningLotto extends Lotto{
 
     public WinningLotto(List<Integer> inNumbers, Integer inBonusNumber) {
         super(inNumbers);
+        validateNumberRange(bonusNumber);
         bonusNumber = inBonusNumber;
     }
 

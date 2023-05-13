@@ -11,10 +11,10 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
-    public Lottos(int amount) {
+    public Lottos(LottoPurchaseAmount amount) {
         lottoList = new ArrayList();
 
-        for (int i = 0; i < LottoCountCalculator.calculateQuantity(amount); i++) {
+        for (int i = 0; i < amount.calculateQuantity(); i++) {
             lottoList.add(new Lotto());
         }
     }

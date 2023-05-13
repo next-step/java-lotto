@@ -20,7 +20,7 @@ public enum Rank {
     }
 
     public static Rank rankOf(int matchingCount, boolean containsBonus){
-        if (matchingCount == 5 && containsBonus == true) {
+        if (matchingCount == THIRD.matchingCount && containsBonus) {
             return SECOND;
         }
 
@@ -29,14 +29,6 @@ public enum Rank {
                 .findFirst()
                 .orElse(NON_RANKED);
 
-    }
-
-    public int getMatchingCount() {
-        return matchingCount;
-    }
-
-    public int getPrize() {
-        return prize;
     }
 
     public int getMatchingCount() {
