@@ -7,67 +7,46 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int NUMBER_COUNT = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    private static final List<Integer> AVAILABLE_NUMBERS = getAvailableNumbers();
+    private static final List<LottoNumber> AVAILABLE_NUMBERS = LottoNumber.getAvailableLottoNumbers();
 
-    protected List<Integer> numbers;
+    protected List<LottoNumber> numbers;
 
     public Lotto() {
-        List<Integer> randomNumbers = getRandomNumbers();
+        List<LottoNumber> randomNumbers = getRandomNumbers();
         numbers = sorted(randomNumbers);
-
     }
 
-    private static List<Integer> getAvailableNumbers() {
-        List<Integer> availableNumbers = new ArrayList<>();
-
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            availableNumbers.add(i);
-        }
-
-        return availableNumbers;
-    }
-
-    private List<Integer> getRandomNumbers() {
-        List<Integer> shuffleNumbers = new ArrayList<>(AVAILABLE_NUMBERS);
+    private List<LottoNumber> getRandomNumbers() {
+        List<LottoNumber> shuffleNumbers = new ArrayList<>(AVAILABLE_NUMBERS);
         Collections.shuffle(shuffleNumbers);
         return shuffleNumbers.stream()
                 .limit(NUMBER_COUNT)
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> sorted(List<Integer> randomNumbers) {
+    private List<LottoNumber> sorted(List<LottoNumber> randomNumbers) {
         return randomNumbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
 
-    public Lotto(List<Integer> inNumbers) {
+    public Lotto(List<LottoNumber> inNumbers) {
         validateNumbers(inNumbers);
         numbers = sorted(inNumbers);
     }
 
-    private void validateNumbers(List<Integer> inNumbers) {
+    private void validateNumbers(List<LottoNumber> inNumbers) {
         if (inNumbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format("Expected %d numbers, but received %d.", NUMBER_COUNT, inNumbers.size()));
         }
-
-        inNumbers.stream()
-                .forEach(num -> validateNumberRange(num));
     }
 
-    protected void validateNumberRange(Integer inNumber) {
-        if (inNumber < MIN_NUMBER || inNumber > MAX_NUMBER) {
-            throw new IllegalArgumentException(String.format("Number must be between %d and %d.", MIN_NUMBER, MAX_NUMBER));
-        }
+    @Override
+    public boolean equals(Object o) {
+        return numbers.equals(o);
     }
 
-    public boolean equals(ArrayList<Integer> inNumbers) {
-        return numbers.equals(inNumbers);
-    }
-
-    public boolean contains(Integer number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 

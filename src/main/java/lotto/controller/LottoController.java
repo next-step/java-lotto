@@ -1,12 +1,12 @@
 package lotto.controller;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchaseAmount;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import javax.swing.*;
 import java.util.List;
 
 public class LottoController {
@@ -23,8 +23,8 @@ public class LottoController {
         Lottos lottos = new Lottos(amount);
         resultView.printLottos(lottos);
 
-        List<Integer> winningNumbers = inputView.readWinningNumbers();
-        int bonusNumber = inputView.readBonusNumber();
+        List<LottoNumber> winningNumbers = inputView.readWinningNumbers();
+        LottoNumber bonusNumber = new LottoNumber(inputView.readBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         resultView.printResults(lottos.getWinningResult(winningLotto), amount);
     }

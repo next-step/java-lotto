@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,9 +17,9 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<Integer> readWinningNumbers() {
+    public static List<LottoNumber> readWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요쉼표(,)를 기준으로 구분).");
-        return toInteger(splitByComma(SCANNER.next()));
+        return toLottoNumber(splitByComma(SCANNER.next()));
     }
 
     public static int readBonusNumber() {
@@ -25,9 +27,9 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    private static List<Integer> toInteger(List<String> inList) {
+    private static List<LottoNumber> toLottoNumber(List<String> inList) {
         return inList.stream()
-                .map(s -> Integer.parseInt(s))
+                .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList());
     }
 

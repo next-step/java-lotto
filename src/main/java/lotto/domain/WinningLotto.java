@@ -3,11 +3,10 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLotto extends Lotto{
-    private Integer bonusNumber;
+    private LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> inNumbers, Integer inBonusNumber) {
+    public WinningLotto(List<LottoNumber> inNumbers, LottoNumber inBonusNumber) {
         super(inNumbers);
-        validateNumberRange(bonusNumber);
         bonusNumber = inBonusNumber;
     }
 
