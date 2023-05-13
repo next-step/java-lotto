@@ -1,6 +1,10 @@
-package lotto;
+package lotto.domain;
 
 
+import lotto.domain.LottoGameService;
+import lotto.domain.LottoTickets;
+import lotto.domain.Ticket;
+import lotto.domain.WinningNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameServiceTest {
     LottoGameService lottoGameService;
+    WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6));
 
     @BeforeEach
     void init() {
@@ -32,18 +37,17 @@ public class LottoGameServiceTest {
         tickets.add(Ticket.from(List.of(3, 8, 27, 30, 35, 44)));
         LottoTickets lottoTickets = LottoTickets.from(tickets);
 
-        WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6));
         lottoGameService = LottoGameService.of(lottoTickets, winningNumber);
-        lottoGameService.countMatchingTickets();
     }
 
     @Test
     @DisplayName("전체 티켓 중 당첨번호와 3개, 4개, 5개, 6개 일치한 티켓이 몇개인지 통계")
     public void countOfMatchingNumber() {
-        assertThat(lottoGameService.getCountOfMatchingNumber(3)).isEqualTo(1);
-        assertThat(lottoGameService.getCountOfMatchingNumber(4)).isEqualTo(0);
-        assertThat(lottoGameService.getCountOfMatchingNumber(5)).isEqualTo(0);
-        assertThat(lottoGameService.getCountOfMatchingNumber(6)).isEqualTo(0);
+        int[] counter = lottoGameService.countMatchingTickets();
+        assertThat(counter[3]).isEqualTo(1);
+        assertThat(counter[4]).isEqualTo(0);
+        assertThat(counter[5]).isEqualTo(0);
+        assertThat(counter[4]).isEqualTo(0);
     }
 
     @Test

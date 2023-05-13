@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lombok.Getter;
 
@@ -6,7 +6,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.Ticket.MAX_LOTTO_NUMBER;
+import static lotto.domain.Ticket.MIN_LOTTO_NUMBER;
+
 public class LottoTickets {
+    public static final int LOTTO_PRICE = 1000;
+
     @Getter
     private List<Ticket> tickets = new ArrayList<>();
 
@@ -15,7 +20,7 @@ public class LottoTickets {
     }
 
     private LottoTickets(int price) {
-        generateTickets(price / 1000);
+        generateTickets(price / LOTTO_PRICE);
     }
 
     public static LottoTickets from(List<Ticket> tickets) {
@@ -28,7 +33,7 @@ public class LottoTickets {
 
     private void generateTickets(int numberOfTickets) {
         for(int i = 0; i < numberOfTickets; i++) {
-            List<Integer> candidateNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+            List<Integer> candidateNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
             Collections.shuffle(candidateNumbers);
             Ticket newTicket = Ticket.from(candidateNumbers.subList(0, 6));
             tickets.add(newTicket);

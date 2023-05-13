@@ -1,11 +1,13 @@
-package lotto;
+package lotto.domain;
+
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoGameService {
     private InputView inputView = new InputView();
     private ResultView resultView = new ResultView();
     private LottoTickets lottoTickets;
     private WinningNumber winningNumbers;
-    private int[] matchingResult = new int[7];
     private int money;
 
     public LottoGameService() {
@@ -24,25 +26,14 @@ public class LottoGameService {
         return new LottoGameService();
     }
 
-    public void countMatchingTickets() {
-        matchingResult = lottoTickets.counterOfMatchingTickets(winningNumbers);
-    }
-
-    public int getCountOfMatchingNumber(int number) {
-        return matchingResult[number];
+    public int[] countMatchingTickets() {
+        return lottoTickets.counterOfMatchingTickets(winningNumbers);
     }
 
     public double returnRate() {
-        double result = (double) sumOfPrize() / lottoTickets.totalPrice();
+        Prize prize = Prize.from(countMatchingTickets());
+        double result = (double) prize.sumOfPrize() / lottoTickets.totalPrice();
         return Math.floor(result * 100) / 100;
-    }
-
-    public long sumOfPrize() {
-        long sumOfFirstPrize = 2000000000 * getCountOfMatchingNumber(6);
-        long sumOfSecondPrize = 1500000 * getCountOfMatchingNumber(5);
-        long sumOfThirdPrize = 50000 * getCountOfMatchingNumber(4);
-        long sumOfFourthPrize = 5000 * getCountOfMatchingNumber(3);
-        return sumOfFirstPrize + sumOfSecondPrize + sumOfThirdPrize + sumOfFourthPrize;
     }
 
     public void generateTickets(int price) {
@@ -60,7 +51,6 @@ public class LottoGameService {
     }
 
     public void lottoResult() {
-        countMatchingTickets();
-        resultView.printResult(matchingResult, returnRate());
+        resultView.printResult(countMatchingTickets(), returnRate());
     }
 }

@@ -1,11 +1,15 @@
-package lotto;
+package lotto.view;
+
+import lotto.domain.LottoTickets;
+import lotto.domain.Ticket;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public void printTickets(LottoTickets lottoTickets) {
         List<Ticket> tickets = lottoTickets.getTickets();
-        tickets.stream().forEach(t -> System.out.println(t.numbersToString()));
+        tickets.stream().forEach(t -> System.out.println(numbersToString(t.getNumbers())));
     }
 
     public void printResult(int[] matchingResult, double returnRate) {
@@ -20,5 +24,12 @@ public class ResultView {
 
     public int getMatchingResult(int[] matchingResult, int number) {
         return matchingResult[number];
+    }
+
+    public String numbersToString(List<Integer> numbers) {
+        return "[" + numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "))
+                + "]";
     }
 }
