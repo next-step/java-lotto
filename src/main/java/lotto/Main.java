@@ -32,9 +32,9 @@ public class Main {
         String winningNumbers = InputView.inputWinningNumber();
 
         ResultView.printBonusBall();
-        int bonusBallNumber = InputView.inputBonusBallNumber();
+        int bonusNumber = InputView.inputBonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBallNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         LottoStatistics statistics = new LottoStatistics(cost);
         statistics.registerManualLottoResult(winningLotto.checkWinningNumbers(manualLottos));

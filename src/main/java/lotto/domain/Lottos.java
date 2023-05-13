@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private static final int BONUS_BALL_CHECK = 5;
+    private static final int BONUS_NO_CHECK = 5;
     private static final int MIN_NUM_OF_LOTTO = 1;
 
     private List<Lotto> lottos;
@@ -39,18 +39,18 @@ public class Lottos {
         return LottoFactory.createManualLotto(numbers);
     }
 
-    public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNo bonusBall) {
+    public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNo bonusNo) {
         return lottos.stream()
                 .map(lotto -> WinningCount.of(lotto.getMatchingNumberCount(winningLotto)
-                        , checkBonusBall(lotto, bonusBall, lotto.getMatchingNumberCount(winningLotto))))
+                        , checkBonusBall(lotto, bonusNo, lotto.getMatchingNumberCount(winningLotto))))
                 .collect(Collectors.toList());
     }
 
-    private boolean checkBonusBall(Lotto lotto, LottoNo bonusBall, int count) {
-        if (count != BONUS_BALL_CHECK) {
+    private boolean checkBonusBall(Lotto lotto, LottoNo bonusNo, int count) {
+        if (count != BONUS_NO_CHECK) {
             return false;
         }
-        return lotto.contains(bonusBall);
+        return lotto.contains(bonusNo);
     }
 
     public List<Lotto> getLottos() {

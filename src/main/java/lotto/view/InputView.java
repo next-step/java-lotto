@@ -17,10 +17,10 @@ public class InputView {
         return winningNumber;
     }
 
-    public static int inputBonusBallNumber() {
+    public static int inputBonusNumber() {
         Scanner scanner = new Scanner(System.in);
-        int bonusBallNumber = scanner.nextInt();
-        return bonusBallNumber;
+        int bonusNumber = scanner.nextInt();
+        return bonusNumber;
     }
 
     public static int inputNumberOfManualLottos() {

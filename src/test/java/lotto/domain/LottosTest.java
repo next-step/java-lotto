@@ -18,7 +18,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList("1, 2, 3, 15, 20, 9","1, 2, 3, 10, 11, 12"));
 
         Lotto lotto = LottoFactory.createWinningLotto("1, 2, 3, 7, 8, 9");
-        LottoNo bonusBall = LottoNo.of(10);
-        assertThat(lottos.matchesLottos(lotto, bonusBall)).containsExactly(WinningCount.FOUR, WinningCount.THREE);
+        LottoNo bonusNo = LottoNo.of(10);
+        assertThat(lottos.matchesLottos(lotto, bonusNo)).containsExactly(WinningCount.FOUR, WinningCount.THREE);
     }
 }
