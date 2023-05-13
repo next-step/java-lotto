@@ -3,11 +3,9 @@ package lotto.ui;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
-import stringCalculator.Number;
 
 public class InputView {
 
@@ -24,8 +22,8 @@ public class InputView {
         .collect(Collectors.toList());
   }
 
-  public BonusNumber bonusNumber() {
+  public LottoNumber bonusNumber() {
     Printer.print("보너스 볼을 입력해 주세요.");
-    return new BonusNumber(LottoNumbers.pick(Reader.read()));
+    return LottoNumbers.pick(Reader.read());
   }
 }

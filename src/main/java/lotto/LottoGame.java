@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.List;
 import java.util.Map;
-import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbersRandomSelector;
 import lotto.domain.LottoTickets;
@@ -25,11 +24,17 @@ public class LottoGame {
     resultView.showTicketsInfo(tickets);
 
     List<LottoNumber> lastWeekNumbers = inputView.lastWeekNumbers();
-    BonusNumber bonusNumber = inputView.bonusNumber();
-    bonusNumber.validate(lastWeekNumbers);
+    LottoNumber bonusNumber = inputView.bonusNumber();
+    validateLastWeekNumbersHasBonusNumber(lastWeekNumbers, bonusNumber);
 
-    Map<Winning, Integer> winnings = Winning.score(tickets, lastWeekNumbers, bonusNumber.lottoNumber());
+    Map<Winning, Integer> winnings = Winning.score(tickets, lastWeekNumbers, bonusNumber);
     double profit = Winning.profit(winnings, lottoPurchasablePrice);
     resultView.printResult(winnings, profit);
+  }
+
+  private void validateLastWeekNumbersHasBonusNumber(List<LottoNumber> lastWeekNumbers, LottoNumber bonusNumber) {
+    if (lastWeekNumbers.contains(bonusNumber)) {
+      throw new IllegalArgumentException("보너스 숫자는 이전 주 당첨 번호와 중복될 수 없습니다.");
+    }
   }
 }
