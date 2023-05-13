@@ -13,9 +13,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in).useDelimiter(",\\s*|\r?\n");
         int money = InputView.inputPay(scanner);
         Customer customer = new Customer(money);
-        customer.buyLotto();
+        int manualCount = InputView.inputCount(scanner);
+        List<List<Integer>> manualNumbers = InputView.inputManualNumbers(manualCount, scanner);
 
-        OutputView.showLottos(customer.getLottos());
+        customer.buyManualLotto(manualCount, manualNumbers);
+        customer.buyAutoLotto();
+
+        OutputView.showLottos(customer.getManualLottos(), customer.getAutoLottos());
         List<Integer> lastNumbers = InputView.lastWinNumbers(scanner);
         int bonusNumber = InputView.inputBonusNumber(scanner);
         WinNumber winNumber = new WinNumber(lastNumbers, bonusNumber);

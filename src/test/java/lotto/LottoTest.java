@@ -34,7 +34,7 @@ public class LottoTest {
     @MethodSource("generateRankData")
     @DisplayName("Lotto_n등_테스트")
     public void Lotto_1등_테스트(List<Integer> winNumbers, int bonusNumber, KLottoRank expectedRank) {
-        Lotto t_lotto = new Lotto(1,2,3,4,5,6);
+        Lotto t_lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         KLottoRank rank = t_lotto.checkRank(new WinNumber(winNumbers, bonusNumber));
         assertThat(rank).isEqualTo(expectedRank);
     }

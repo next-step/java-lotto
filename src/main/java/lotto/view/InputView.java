@@ -14,8 +14,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         List<Integer> numbers = new ArrayList<>();
-        int count = 0;
-        inputLastNumbers(numbers, count, scanner);
+        inputLastNumbers(numbers, 0, scanner);
         return numbers;
     }
 
@@ -30,5 +29,27 @@ public class InputView {
             numbers.add(number);
             count++;
         }
+    }
+
+    public static int inputCount(Scanner scanner) {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
+    public static List<List<Integer>> inputManualNumbers(int manualCount, Scanner scanner) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> numberList = new ArrayList<>();
+        for(int i=0; i<manualCount; i++){
+            int count = 0;
+            List<Integer> lottoNumbers = new ArrayList<>();
+            while(count < 6 && scanner.hasNextInt()){
+                int number = scanner.nextInt();
+                lottoNumbers.add(number);
+                count++;
+            }
+            numberList.add(lottoNumbers);
+        }
+
+        return numberList;
     }
 }

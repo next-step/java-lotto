@@ -1,10 +1,13 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.*;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class CustomerTest {
 
@@ -21,7 +24,58 @@ public class CustomerTest {
     @DisplayName("Customer_로또_구매")
     public void Customer_로또_구매(int money, int count) {
         Customer customer = new Customer(money);
-        customer.buyLotto();
-        assertThat(customer.getLottos()).hasSize(count);
+        customer.buyAutoLotto();
+        assertThat(customer.getAutoLottos()).hasSize(count);
+    }
+
+    @Test
+    @DisplayName("Buy_Lotto_Manullay")
+    public void Buy_Lotto_Manullay(){
+        //given
+        Customer customer = new Customer(3000);
+
+        List<List<Integer>> numberList = new ArrayList<>();
+        numberList.add(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
+        numberList.add(new ArrayList<>(Arrays.asList(10,11,12,13,14,15)));
+
+        customer.buyManualLotto(2, numberList);
+        //when
+        assertThat(customer.getManualLottos()).hasSize(2);
+        //then
+    }
+
+    @Test
+    @DisplayName("validate_buy_lotto_manually")
+    public void validate_buy_lotto_manually(){
+        Customer customer = new Customer(500);
+        List<List<Integer>> numberList = new ArrayList<>();
+        numberList.add(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
+        assertThatIllegalStateException().isThrownBy(()->{
+            customer.buyManualLotto(1, numberList);
+        });
+
+        assertThatIllegalArgumentException().isThrownBy(()->{
+            customer.buyManualLotto(2, numberList);
+        });
+    }
+
+    @Test
+    @DisplayName("validate_buy_lotto_manually2")
+    public void validate_buy_lotto_manually2(){
+        Customer customer = new Customer(3000);
+        List<List<Integer>> numberList = new ArrayList<>();
+        numberList.add(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
+        assertThatIllegalArgumentException().isThrownBy(()->{
+            customer.buyManualLotto(2, numberList);
+        });
+    }
+
+    @Test
+    @DisplayName("validate_lotto_money_auto")
+    public void validate_lotto_money(){
+        Customer customer = new Customer(500);
+        assertThatIllegalStateException().isThrownBy(()->{
+            customer.buyAutoLotto();
+        });
     }
 }

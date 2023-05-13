@@ -14,7 +14,7 @@ public class Lotto {
         this.numbers = LottoNumber.generate();
     }
 
-    public Lotto(int... lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers) {
         for (int lottoNumber : lottoNumbers) {
             this.numbers.add(LottoNumber.of(lottoNumber));
         }
