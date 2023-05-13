@@ -26,7 +26,7 @@ public class LottoStatistics {
      * Lotto 객체에서 일치하는 숫자의 수를 세고,
      * matchCounts 배열에 가능한 각 당첨 수준에 대한 수를 저장
      */
-    private void updateMatchCounts() {
+    public void updateMatchCounts() {
         matchCounts.clear();
         matchCounts.putAll(lottoList.getMatchCounts(winnerLotto));
     }
