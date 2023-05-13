@@ -10,12 +10,12 @@ import java.util.List;
 public class WinningLotto {
 
     private Lotto winningLotto;
-    private LottoNo bonusBall;
+    private LottoNo bonusNo;
 
-    public WinningLotto(String winningNumbers, int bonusBall) {
+    public WinningLotto(String winningNumbers, int bonusNo) {
         this.winningLotto = LottoFactory.createWinningLotto(winningNumbers);
-        this.bonusBall = LottoNo.of(bonusBall);
-        validate(this.winningLotto, this.bonusBall);
+        this.bonusNo = LottoNo.of(bonusNo);
+        validate(this.winningLotto, this.bonusNo);
     }
 
     private void validate(Lotto winningLotto, LottoNo bonusBall) {
@@ -25,6 +25,6 @@ public class WinningLotto {
     }
 
     public List<WinningCount> checkWinningNumbers(Lottos lottos) {
-        return lottos.matchesLottos(winningLotto, bonusBall);
+        return lottos.matchesLottos(winningLotto, bonusNo);
     }
 }

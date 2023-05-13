@@ -15,11 +15,11 @@ public enum WinningCount {
     private static final List<WinningCount> winningCountList = Stream.of(values()).collect(Collectors.toList());
 
     private final int count;
-    private final boolean isMatchBonusBall;
+    private final boolean isMatchBonusNo;
 
     WinningCount(int count, boolean isMatchBonusBall) {
         this.count = count;
-        this.isMatchBonusBall = isMatchBonusBall;
+        this.isMatchBonusNo = isMatchBonusBall;
     }
 
     public static WinningCount of(int count, boolean isMatchBonusBall) {
@@ -30,14 +30,14 @@ public enum WinningCount {
         return winningCount != WinningCount.NONE;
     }
 
-    public boolean equals(int count, boolean isMatchBonusBall) {
-        return this.count == count && this.isMatchBonusBall == isMatchBonusBall;
+    public boolean equals(int count, boolean isMatchBonusNo) {
+        return this.count == count && this.isMatchBonusNo == isMatchBonusNo;
     }
 
     public int getCount() {
         return count;
     }
-    public boolean getIsMatchBonusBall() {
-        return isMatchBonusBall;
+    public boolean getIsMatchBonusNo() {
+        return isMatchBonusNo;
     }
 }

@@ -46,7 +46,7 @@ public class ResultView {
     public static void printWinningCount(WinningCount winningCount) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(winningCount.getCount() + "개 일치");
-        if (winningCount.getIsMatchBonusBall()) {
+        if (winningCount.getIsMatchBonusNo()) {
             stringBuilder.append(", 보너스 볼 일치");
         }
         System.out.print(stringBuilder);
