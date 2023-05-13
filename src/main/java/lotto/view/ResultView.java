@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.LottoGames;
 import lotto.domain.Rank;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class ResultView {
 
@@ -16,7 +16,7 @@ public class ResultView {
     }
 
     private void printMatchedCount(LottoGames lottoGames) {
-        HashMap<Rank, Integer> lottoResult = lottoGames.getLottoResult();
+        Map<Rank, Integer> lottoResult = lottoGames.getLottoResult();
         lottoResult.forEach((rank, winningCount) -> {
             String bonusInfo = rank == Rank.SECOND ? ", 보너스 볼 일치" : "";
             System.out.printf("%d개일치 %s(%d원) - %d\n", rank.getMatchCount(), bonusInfo, rank.getPrize(), winningCount);

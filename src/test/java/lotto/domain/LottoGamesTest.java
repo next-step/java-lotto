@@ -31,7 +31,7 @@ public class LottoGamesTest {
 
         //when
         lottoGames.calculatePrizeCount(winningLotto);
-        int totalPrize = lottoGames.sum();
+        int totalPrize = lottoGames.calculateTotalPrize();
 
         //then
         assertThat(totalPrize).isEqualTo(5000);

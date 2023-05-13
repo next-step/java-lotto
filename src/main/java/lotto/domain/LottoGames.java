@@ -6,12 +6,14 @@ import lotto.domain.number.LottoNumber;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGames {
 
+    private static final String WRONG_RESULT_SIZE = "로또 결과값이 0 입니다.";
     private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> lottoGameList = new ArrayList<>();
-    private final HashMap<Rank, Integer> lottoResult = new HashMap<>();
+    private final Map<Rank, Integer> lottoResult = new HashMap<>();
 
     public LottoGames(int gameCount) {
         gameCount /= LOTTO_PRICE;
@@ -28,14 +30,15 @@ public class LottoGames {
         return this.lottoGameList.size();
     }
 
-    protected int sum() {
+    protected int calculateTotalPrize() {
         return lottoResult.keySet().stream()
                 .map(rank -> (lottoResult.get(rank) * rank.getPrize()))
                 .reduce(0, Integer::sum);
     }
 
     public double calculateReturn() {
-        return sum() / (double) (LOTTO_PRICE * lottoGameList.size());
+        if (lottoResult.size() == 0) throw new IllegalStateException(WRONG_RESULT_SIZE);
+        return calculateTotalPrize() / (double) (LOTTO_PRICE * lottoGameList.size());
     }
 
     public void calculatePrizeCount(WinningLotto winningLotto) {
@@ -54,7 +57,7 @@ public class LottoGames {
         });
     }
 
-    public HashMap<Rank, Integer> getLottoResult() {
+    public Map<Rank, Integer> getLottoResult() {
         return lottoResult;
     }
 }
