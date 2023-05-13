@@ -20,7 +20,9 @@ public class LottoController {
 
     public void play() {
         LottoPurchaseAmount amount = LottoPurchaseAmount.of(inputView.readAmount());
-        Lottos lottos = new Lottos(amount);
+        List<List<LottoNumber>> selectedLottoNumbers = inputView.readSelectedLottoNumbers(inputView.readSelectedLottoCount());
+
+        Lottos lottos = new Lottos(amount, selectedLottoNumbers);
         resultView.printLottos(lottos);
 
         List<LottoNumber> winningNumbers = inputView.readWinningNumbers();

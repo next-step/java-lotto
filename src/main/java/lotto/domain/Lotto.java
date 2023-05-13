@@ -10,10 +10,12 @@ public class Lotto {
     private static final List<LottoNumber> AVAILABLE_NUMBERS = LottoNumber.getAvailableLottoNumbers();
 
     protected List<LottoNumber> numbers;
+    private boolean isRandom;
 
     public Lotto() {
         List<LottoNumber> randomNumbers = getRandomNumbers();
         numbers = sorted(randomNumbers);
+        isRandom = true;
     }
 
     private List<LottoNumber> getRandomNumbers() {
@@ -33,12 +35,17 @@ public class Lotto {
     public Lotto(List<LottoNumber> inNumbers) {
         validateNumbers(inNumbers);
         numbers = sorted(inNumbers);
+        isRandom = false;
     }
 
     private void validateNumbers(List<LottoNumber> inNumbers) {
         if (inNumbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format("Expected %d numbers, but received %d.", NUMBER_COUNT, inNumbers.size()));
         }
+    }
+
+    public boolean isRandom() {
+        return isRandom;
     }
 
     @Override

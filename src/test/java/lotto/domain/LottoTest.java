@@ -36,6 +36,16 @@ public class LottoTest {
         });
     }
 
+    @Test
+    @DisplayName("생성된 로또가 자동생성인지 여부를 알려준다.")
+    void 랜덤여부() {
+        Lotto randomLotto = new Lotto();
+        Lotto selectedLotto = new Lotto(convertToNumberList(new ArrayList<>(Arrays.asList(20,40,30,10,5,25))));
+
+        assertThat(randomLotto.isRandom()).isTrue();
+        assertThat(selectedLotto.isRandom()).isFalse();
+    }
+
     List<LottoNumber> convertToNumberList(List<Integer> inNumbers) {
         return inNumbers.stream()
                 .map(num -> new LottoNumber(num))
