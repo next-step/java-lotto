@@ -24,6 +24,10 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
+    public Lotto generateLotto() {
+        return new Lotto(generateLottoRangeNumbers());
+    }
+
     private List<Integer> generateOriginalLottoRangeNumbers() {
         return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1)
                 .boxed()
