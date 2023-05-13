@@ -48,11 +48,19 @@ public class Calculator {
         Matcher numberMatcher = numberPattern.matcher(input);
         Matcher operatorMatcher = operatorPattern.matcher(input);
 
-        if (numberMatcher.find()) {
-            numberQueue.add(input);
-        }
+        addNumber(input, numberMatcher);
+        addOperator(input, operatorMatcher);
+    }
+
+    private void addOperator(String input, Matcher operatorMatcher) {
         if (operatorMatcher.find()) {
             operatorQueue.add(input);
+        }
+    }
+
+    private void addNumber(String input, Matcher numberMatcher) {
+        if (numberMatcher.find()) {
+            numberQueue.add(input);
         }
     }
 
