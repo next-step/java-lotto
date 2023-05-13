@@ -40,6 +40,14 @@ public class Numbers {
         return numbers.contains(number);
     }
 
+    public int countContains(Numbers otherNumbers) {
+        int matchCount = 0;
+        for(Integer number : otherNumbers.numbers){
+            matchCount += contains(number) ? 1 : 0;
+        }
+        return matchCount;
+    }
+
     public List<Integer> getValues() {
         return numbers;
     }

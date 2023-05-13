@@ -51,8 +51,8 @@ class WinLottoTest {
     @Test
     void 당첨() {
         WinLotto winLotto = winLottoFixuture("31, 32, 33, 34, 35, 36");
-        Rank rank1 = lottoFixuture("31, 32, 33, 34, 35, 36").checkMatchingNumbers(winLotto);
-        Rank rank2 = lottoFixuture("11, 32, 33, 34, 35, 36").checkMatchingNumbers(winLotto);
+        Rank rank1 = winLotto.checkRank(lottoFixuture("31, 32, 33, 34, 35, 36"));
+        Rank rank2 = winLotto.checkRank(lottoFixuture("11, 32, 33, 34, 35, 36"));
         assertAll(
                 () -> assertThat(rank1).isEqualTo(Rank.FIRST),
                 () -> assertThat(rank2).isEqualTo(Rank.THIRD)
@@ -62,15 +62,14 @@ class WinLottoTest {
     @Test
     void 미당첨() {
         WinLotto winLotto = winLottoFixuture("31, 32, 33, 34, 35, 36");
-        Lotto lotto = new Lotto(new Numbers(InputView.makeNumbers("11, 12, 13, 14, 35, 36")));
-        Rank rank = lotto.checkMatchingNumbers(winLotto);
+        Rank rank = winLotto.checkRank(lottoFixuture("11, 12, 13, 14, 35, 36"));
         assertThat(rank).isEqualTo(Rank.NONE);
     }
 
     @Test
     void 당첨_2등() {
         WinLotto winLotto = winLottoWithBonusFixuture("31, 32, 33, 34, 35, 36", 11);
-        Rank rank = new Lotto(new Numbers(InputView.makeNumbers("11, 32, 33, 34, 35, 36"))).checkMatchingNumbers(winLotto);
+        Rank rank = winLotto.checkRank(lottoFixuture("11, 32, 33, 34, 35, 36"));
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 

@@ -23,11 +23,13 @@ public class WinLotto {
         return numbers;
     }
 
-    public Integer findNumber(int i) {
-        return numbers.find(i);
-    }
-
     public Integer bonusNumber() {
         return bonusNumber;
+    }
+
+    public Rank checkRank(Lotto lotto) {
+        int matchCount = this.numbers.countContains(lotto.numbers());
+        boolean matchBounus = lotto.numbers().contains(this.bonusNumber);
+        return Rank.of(matchCount, matchBounus);
     }
 }

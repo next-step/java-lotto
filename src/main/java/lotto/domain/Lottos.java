@@ -25,7 +25,7 @@ public class Lottos {
     public void checkWin(MyResult myResult, WinLotto winLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            ranks.add(lotto.checkMatchingNumbers(winLotto));
+            ranks.add(winLotto.checkRank(lotto));
         }
         myResult.update(ranks);
     }
