@@ -23,4 +23,9 @@ public class InputView {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public Integer promptBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.valueOf(new Scanner(System.in).nextLine());
+    }
+
 }

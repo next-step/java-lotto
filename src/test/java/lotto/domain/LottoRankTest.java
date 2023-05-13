@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.LottoRank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,9 +17,9 @@ public class LottoRankTest {
 
     @DisplayName("당첨등수찾기")
     @ParameterizedTest(name = "{displayName} [{index}] {arguments}")
-    @CsvSource(value = {"1,0", "2,0", "3,5000", "4,50000", "5,1500000", "6,2000000000"})
-    void 당첨등수찾기(String matchedCount, String prizeMoney) {
-        Assertions.assertThat(LottoRank.findByMatchedCount(Integer.parseInt(matchedCount)).getPrizeMoney())
+    @CsvSource(value = {"1,false,0", "2,false,0", "3,false,5000", "4,false,50000", "5,false,1500000", "6,true,30000000", "6,false,2000000000"})
+    void 당첨등수찾기(String matchedCount, String bonusMatched, String prizeMoney) {
+        Assertions.assertThat(LottoRank.findByMatchedCount(Integer.parseInt(matchedCount), Boolean.valueOf(bonusMatched)).getPrizeMoney())
                 .isEqualTo(Integer.parseInt(prizeMoney));
     }
 

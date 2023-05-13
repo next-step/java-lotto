@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoRank;
+import lotto.domain.enums.LottoRank;
 import lotto.domain.LottoResultChecker;
 import lotto.domain.LottoTicket;
 

@@ -6,13 +6,18 @@ public class LottoTicket {
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private List<LottoNumber> numbers;
+    private LottoNumber bonusNumber;
 
-
-    private LottoTicket(List<LottoNumber> numbers) {
+    private LottoTicket(List<LottoNumber> numbers, LottoNumber bonusNumber) {
         validateSize(numbers);
         validateDuplication(numbers);
 
         this.numbers = numbers;
+        this.bonusNumber = bonusNumber;
+    }
+
+    private LottoTicket(List<LottoNumber> numbers) {
+        this(numbers, null);
     }
 
     private void validateDuplication(List<LottoNumber> numbers) {
@@ -35,9 +40,16 @@ public class LottoTicket {
         return new LottoTicket(LottoNumber.of(numbers));
     }
 
-    public int getMatchCount(List<Integer> inputNumbers) {
-        List<LottoNumber> lottoNumbers = LottoNumber.of(inputNumbers);
-        return (int) numbers.stream().filter(lottoNumbers::contains).count();
+    public static LottoTicket createWinningTicket(List<Integer> numbers, Integer bonusNumber) {
+        return new LottoTicket(LottoNumber.of(numbers), LottoNumber.of(bonusNumber));
+    }
+
+    public int getMatchCount(LottoTicket inputTicket) {
+        return (int) numbers.stream().filter(inputTicket.numbers::contains).count();
+    }
+
+    public boolean isBonusMatched(LottoTicket winningTicket) {
+        return numbers.stream().anyMatch(n -> n == winningTicket.bonusNumber);
     }
 
     public String toString() {

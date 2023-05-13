@@ -22,7 +22,9 @@ public class LottoController {
         resultView.viewBuyingResult(lottoTickets);
 
         ArrayList<Integer> winningNumbers = inputView.promptWinningNumbers();
-        LottoResultChecker lottoResultChecker = new LottoResultChecker(lottoTickets, winningNumbers);
+        Integer bonusNumber = inputView.promptBonusNumber();
+        LottoTicket winnnigTicket = LottoTicket.createWinningTicket(winningNumbers, bonusNumber);
+        LottoResultChecker lottoResultChecker = new LottoResultChecker(lottoTickets, winnnigTicket);
 
         resultView.viewWinningResult(lottoResultChecker);
         resultView.viewRateOfInvestment(amount, lottoResultChecker.getTotalPrizeMoney());

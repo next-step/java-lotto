@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.LottoRank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,12 +23,14 @@ public class LottoResultCheckerTest {
 
         List<LottoTicket> lottoTickets = Arrays.asList(t1, t2, t3, t4, t5, t6, t7);
         List<Integer> winningNumbers = Arrays.asList(1, 10, 20, 25, 30, 45);
-        LottoResultChecker lottoResultChecker = new LottoResultChecker(lottoTickets, winningNumbers);
+        Integer bonusNumber = 2;
+        LottoTicket winningTicket = LottoTicket.createWinningTicket(winningNumbers, bonusNumber);
+        LottoResultChecker lottoResultChecker = new LottoResultChecker(lottoTickets, winningTicket);
 
         Assertions.assertThat(lottoResultChecker.getRankCount(LottoRank.FIRST)).isEqualTo(1);
-        Assertions.assertThat(lottoResultChecker.getRankCount(LottoRank.SECOND)).isEqualTo(2);
         Assertions.assertThat(lottoResultChecker.getRankCount(LottoRank.THIRD)).isEqualTo(2);
-        Assertions.assertThat(lottoResultChecker.getRankCount(LottoRank.FOURTH)).isEqualTo(1);
+        Assertions.assertThat(lottoResultChecker.getRankCount(LottoRank.FOURTH)).isEqualTo(2);
+        Assertions.assertThat(lottoResultChecker.getRankCount(LottoRank.FIFTH)).isEqualTo(1);
 
         Assertions.assertThat(lottoResultChecker.getTotalPrizeMoney()).isEqualTo(2_003_105_000);
     }
