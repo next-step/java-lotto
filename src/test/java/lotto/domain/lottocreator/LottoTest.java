@@ -40,4 +40,12 @@ public class LottoTest {
 
         assertThat(lotto1.getMatchingNumberCount(lotto2)).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("중복 숫자")
+    void duplicate_exception() {
+        assertThatThrownBy(() -> {
+            LottoFactory.createManualLotto("1, 1, 2, 3, 4, 5");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("수동 로또 생성 시 중복 숫자 불가합니다.");
+    }
 }
