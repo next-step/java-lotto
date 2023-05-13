@@ -21,7 +21,7 @@ public class LottoGame {
     resultView.printChange(userMoney.subtraction(lottoPurchasablePrice));
     resultView.printPurchaseAmount(lottoPurchasablePrice.ticketPurchasableNumber());
 
-    LottoTickets tickets = LottoTickets.issue(lottoPurchasablePrice.ticketPurchasableNumber(), new LottoNumbersRandomSelector());
+    LottoTickets tickets = LottoTickets.issue(lottoPurchasablePrice.ticketPurchasableNumber(), LottoNumbersRandomSelector.getInstance());
     resultView.showTicketsInfo(tickets);
 
     List<LottoNumber> lastWeekNumbers = inputView.lastWeekNumbers();
