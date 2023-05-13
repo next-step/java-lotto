@@ -37,7 +37,7 @@ public class ResultView {
 
     for (Winning winning : Winning.values()) {
       Printer.print(String.format("%d개 일치%s (%d원)- %d개",
-          winning.sameCount(), bonusNumberMessageOrEmpty(winning), winning.reward(), winnings.get(winning)));
+          winning.sameCount(), bonusNumberMessageOrEmpty(winning), winning.reward(), zeroIfNull(winnings.get(winning))));
     }
 
     String suffix = EMPTY;
@@ -55,5 +55,9 @@ public class ResultView {
     }
 
     return EMPTY;
+  }
+
+  private Integer zeroIfNull(Integer input) {
+    return input == null ? 0 : input;
   }
 }

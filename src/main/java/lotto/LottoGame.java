@@ -27,7 +27,7 @@ public class LottoGame {
     LottoNumber bonusNumber = inputView.bonusNumber();
     validateLastWeekNumbersHasBonusNumber(lastWeekNumbers, bonusNumber);
 
-    Map<Winning, Integer> winnings = Winning.score(tickets, lastWeekNumbers, bonusNumber);
+    Map<Winning, Integer> winnings = tickets.score(lastWeekNumbers, bonusNumber);
     double profit = Winning.profit(winnings, lottoPurchasablePrice);
     resultView.printResult(winnings, profit);
   }

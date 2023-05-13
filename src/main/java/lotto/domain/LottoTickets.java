@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
@@ -27,10 +28,14 @@ public class LottoTickets {
     return this.tickets;
   }
 
-  public List<Integer> sameCounts(List<LottoNumber> lastWeekNumbers) {
+  public Map<Winning, Integer> score(List<LottoNumber> lastWeekNumbers, LottoNumber bonusNumber) {
     return this.tickets.stream()
-        .map(ticket -> ticket.sameCount(lastWeekNumbers))
-        .collect(Collectors.toList());
+        .map(ticket -> ticket.score(lastWeekNumbers, bonusNumber))
+        .collect(Collectors.toMap(
+            win -> win,
+            win -> 1,
+            (oldValue, newValue) -> oldValue + 1
+        ));
   }
 
   public LottoTicket findByIndex(int index) {

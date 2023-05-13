@@ -21,30 +21,6 @@ public enum Winning {
     this.reward = reward;
   }
 
-  public static Map<Winning, Integer> score(LottoTickets lottoTickets,
-      List<LottoNumber> lastWeekNumbers, LottoNumber bonusNumber) {
-    List<Integer> sameCounts = lottoTickets.sameCounts(lastWeekNumbers);
-
-    Map<Winning, Integer> scores = new HashMap();
-
-    Arrays.stream(Winning.values())
-        .forEach(winning -> scores.put(winning, 0));
-
-    for (int i = 0; i < sameCounts.size(); i++) {
-      int curCount = sameCounts.get(i);
-      Winning winning = Arrays.stream(Winning.values())
-          .filter(win -> win.sameCount == curCount)
-          .findFirst()
-          .orElse(NONE);
-
-      winning = switchWinning(winning, lottoTickets.findByIndex(i), bonusNumber);
-
-      scores.put(winning, scores.get(winning) + 1);
-    }
-
-    return scores;
-  }
-
   public static double profit(Map<Winning, Integer> winnings, Money lottoPurchasablePrice) {
     int totalPrice = 0;
 
@@ -55,16 +31,18 @@ public enum Winning {
     return lottoPurchasablePrice.profit(new Money(totalPrice));
   }
 
-  private static Winning switchWinning(Winning winning, LottoTicket lottoTicket, LottoNumber bonusNumber) {
-    if (winning != SECOND) {
-      return winning;
-    }
+  public static Winning of(int sameCount, boolean isIncludesBonusNumber) {
 
-    if (lottoTicket.notContains(bonusNumber)) {
+    Winning winning = Arrays.stream(Winning.values())
+        .filter(win -> win.sameCount == sameCount)
+        .findFirst()
+        .orElse(NONE);
+
+    if (winning == SECOND && !isIncludesBonusNumber) {
       return THIRD;
     }
 
-    return SECOND;
+    return winning;
   }
 
   public int sameCount() {
