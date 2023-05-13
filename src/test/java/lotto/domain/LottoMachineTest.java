@@ -36,7 +36,7 @@ public class LottoMachineTest {
         int numberOfMaualLottos = 2;
 
         LottoMachine machine = new LottoMachine(cost, numberOfMaualLottos);
-        Lottos manualLottos = machine.generateManualLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
+        Lottos manualLottos = machine.generateLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
 
         assertThat(new Lottos(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"))).isEqualTo(manualLottos);
     }
@@ -49,7 +49,7 @@ public class LottoMachineTest {
 
         assertThatThrownBy(() -> {
             LottoMachine machine = new LottoMachine(cost, numberOfManualLottos);
-            machine.generateManualLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
+            machine.generateLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력한 수동 로또 장수와 수동 로또 번호가 일치하지 않습니다.");
     }
 

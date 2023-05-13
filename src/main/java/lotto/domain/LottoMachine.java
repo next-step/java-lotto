@@ -5,8 +5,8 @@ import java.util.List;
 public class LottoMachine {
     private static final int LOTTO_COST = 1000;
     private static final int NO_MANUAL_LOTTO = 0;
-    private Positive autoPositive;
-    private Positive manualPositive;
+    private Positive numberOfAutoLotto;
+    private Positive numberOfManualLotto;
 
     public LottoMachine(int cost) {
         this(cost, NO_MANUAL_LOTTO);
@@ -16,8 +16,8 @@ public class LottoMachine {
         validate(cost);
         validateManualLottos(cost, numberOfManualLottos);
 
-        this.autoPositive = new Positive(calculateNumberOfAutoLotto(cost, numberOfManualLottos));
-        this.manualPositive = new Positive(numberOfManualLottos);
+        this.numberOfAutoLotto = new Positive(calculateNumberOfAutoLotto(cost, numberOfManualLottos));
+        this.numberOfManualLotto = new Positive(numberOfManualLottos);
     }
 
     private void validate(int cost) {
@@ -34,22 +34,22 @@ public class LottoMachine {
         }
     }
 
-    public Lottos generateAutoLotto() {
-        return createAutoLottos();
+    public Lottos generateLotto() {
+        return createLottos();
     }
 
-    public Lottos generateManualLotto(List<String> manualNumbers) {
-        if (!manualPositive.isEqual(manualNumbers.size())) {
+    public Lottos generateLotto(List<String> manualNumbers) {
+        if (!numberOfManualLotto.isEqual(manualNumbers.size())) {
             throw new IllegalArgumentException("입력한 수동 로또 장수와 수동 로또 번호가 일치하지 않습니다.");
         }
-        return createManualLottos(manualNumbers);
+        return createLottos(manualNumbers);
     }
 
-    private Lottos createAutoLottos() {
-        return new Lottos(autoPositive.getNumber());
+    private Lottos createLottos() {
+        return new Lottos(numberOfAutoLotto.getNumber());
     }
 
-    private Lottos createManualLottos(List<String> manualNumbers) {
+    private Lottos createLottos(List<String> manualNumbers) {
         return new Lottos(manualNumbers);
     }
 
@@ -60,10 +60,10 @@ public class LottoMachine {
     }
 
     public int getNumberOfAutoLottos() {
-        return autoPositive.getNumber();
+        return numberOfAutoLotto.getNumber();
     }
 
     public int getNumberOfManualLottos() {
-        return manualPositive.getNumber();
+        return numberOfManualLotto.getNumber();
     }
 }

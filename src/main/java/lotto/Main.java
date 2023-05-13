@@ -23,8 +23,8 @@ public class Main {
         LottoMachine lottoMachine = new LottoMachine(cost, numberOfManualLottos);
         ResultView.printNumbersOfLotto(lottoMachine.getNumberOfManualLottos(), lottoMachine.getNumberOfAutoLottos());
 
-        Lottos manualLottos = lottoMachine.generateManualLotto(manualLottosNumber);
-        Lottos autoLottos = lottoMachine.generateAutoLotto();
+        Lottos manualLottos = lottoMachine.generateLotto(manualLottosNumber);
+        Lottos autoLottos = lottoMachine.generateLotto();
         ResultView.printLottos(manualLottos);
         ResultView.printLottos(autoLottos);
 
