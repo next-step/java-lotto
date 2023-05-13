@@ -1,7 +1,7 @@
 package lotto.model;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_MINIMUM_NUMBER = 1;
@@ -23,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public boolean hasMatchNumbers(List<LottoNumber> numbers) {
+    public boolean hasMatchNumbers(Set<LottoNumber> numbers) {
         return numbers.contains(this);
     }
 

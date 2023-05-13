@@ -12,13 +12,21 @@ public class LottoTickets {
     }
 
     private List<LottoTicket> createAuto(int number) {
-        return IntStream.rangeClosed(1,number)
+        return IntStream.rangeClosed(1, number)
                 .boxed()
-                .map(lottoTicket->LottoFactory.createAutoLottoTicket())
+                .map(lottoTicket -> LottoFactory.createAutoLottoTicket())
                 .collect(Collectors.toList());
     }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
+    public List<Integer> matchLottoTickets(LottoTicket lottoTicket) {
+        return lottoTickets.stream()
+                .map(ticket -> ticket.matchLottoNumberCount(lottoTicket.getLottoNumbers()))
+                .collect(Collectors.toList());
+    }
+
+
 }

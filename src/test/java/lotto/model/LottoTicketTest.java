@@ -56,9 +56,9 @@ class LottoTicketTest {
                 .collect(Collectors.toSet());
 
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
-        int count = lottoTicket.matchLottoNumberCount(Arrays.asList(
+        Set<LottoNumber> set = new HashSet<>(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)));
+        int count = lottoTicket.matchLottoNumberCount(set);
 
         assertThat(count).isEqualTo(2);
     }

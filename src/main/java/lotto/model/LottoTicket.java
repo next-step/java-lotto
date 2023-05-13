@@ -1,7 +1,5 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
@@ -17,7 +15,7 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public int matchLottoNumberCount(List<LottoNumber> numbers) {
+    public int matchLottoNumberCount(Set<LottoNumber> numbers) {
         return (int) lottoNumbers.stream()
                 .filter(number -> number.hasMatchNumbers(numbers))
                 .count();
