@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class MyPurchaseTest {
 
@@ -27,5 +28,16 @@ class MyPurchaseTest {
     void 로또구매개수(int inputMoney, int expectedCount) {
         MyPurchase myPurchase = new MyPurchase(inputMoney);
         assertThat(myPurchase.count()).isEqualTo(expectedCount);
+    }
+
+    @ParameterizedTest(name = "구입 금액 {0}원 / 수동 로또 {1}장 구매 => 총 {2}개 구매 (자동 {3} / 수동 {1})")
+    @CsvSource(value = {"0:0:0:0", "1000:0:1:1", "15000:5:15:10"}, delimiter = ':')
+    void 로또수동구매포함(int inputMoney, int manualCount, int allCount, int autoCount) {
+        MyPurchase myPurchase = new MyPurchase(inputMoney, manualCount);
+        assertAll(
+                () -> assertThat(myPurchase.count()).isEqualTo(allCount),
+                () -> assertThat(myPurchase.autoCount()).isEqualTo(autoCount),
+                () -> assertThat(myPurchase.manualCount()).isEqualTo(manualCount)
+        );
     }
 }

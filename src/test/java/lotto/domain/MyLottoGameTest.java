@@ -16,7 +16,7 @@ class MyLottoGameTest {
     @CsvSource(value = {"0:0", "1000:1", "15000:15", "21000:21"}, delimiter = ':')
     void 로또생성횟수(int inputMoney, int expectedCount) {
         MyPurchase myPurchase = new MyPurchase(inputMoney);
-        MyLottoGame myLottoGame = MyLottoGame.autoGenerate(myPurchase);
+        MyLottoGame myLottoGame = MyLottoGame.generate(myPurchase, null);
         assertThat(myLottoGame.getLottos().size()).isEqualTo(expectedCount);
     }
 

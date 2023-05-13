@@ -50,4 +50,22 @@ public class InputView {
         return number;
     }
 
+    public static int manualCount() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요");
+        return new Scanner(System.in).nextInt();
+    }
+
+    public static List<Numbers> manualNumbers(int manualCount) {
+        if(manualCount == 0){
+            return null;
+        }
+        List<Numbers> manualNumbers = new ArrayList<>();
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < manualCount; i++) {
+            String input = new Scanner(System.in).nextLine();
+            Numbers numbers = new Numbers(makeNumbers(input));
+            manualNumbers.add(numbers);
+        }
+        return manualNumbers;
+    }
 }

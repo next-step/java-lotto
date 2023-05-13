@@ -14,7 +14,7 @@ public class ResultView {
     }
 
     public static void showLottoCount(MyPurchase myPurchase) {
-        System.out.println(myPurchase.count() + "개를 구매했습니다.");
+        System.out.printf("\n수동으로 %d장, 자동으로 %d장 구매했습니다.\n", myPurchase.manualCount(), myPurchase.autoCount());
     }
 
     private static void printNumbers(Numbers numbers) {

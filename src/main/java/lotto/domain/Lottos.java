@@ -6,13 +6,16 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos){
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public static Lottos create(MyPurchase myPurchase) {
+    public static Lottos create(MyPurchase myPurchase, List<Numbers> manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < myPurchase.count(); i++) {
+        for (int i = 0; i < myPurchase.manualCount(); i++) {
+            lottos.add(Lotto.manualGenerate(manualLottos.get(i)));
+        }
+        for (int i = 0; i < myPurchase.autoCount(); i++) {
             lottos.add(Lotto.autoGenerate());
         }
         return new Lottos(lottos);

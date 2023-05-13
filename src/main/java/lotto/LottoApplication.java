@@ -8,13 +8,15 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        //로또 구입 금액 투입
+        //로또 구입 금액 / 수동 구매 로또 수
         int money = InputView.money();
-        MyPurchase myPurchase = new MyPurchase(money);
+        int manualCount = InputView.manualCount();
+        MyPurchase myPurchase = new MyPurchase(money, manualCount);
+        List<Numbers> manualLottos = InputView.manualNumbers(manualCount);
         ResultView.showLottoCount(myPurchase);
 
-        //로또 자동 생성
-        MyLottoGame myLottoGame = MyLottoGame.autoGenerate(myPurchase);
+        //로또 생성
+        MyLottoGame myLottoGame = MyLottoGame.generate(myPurchase, manualLottos);
         ResultView.showMyLottos(myLottoGame.getLottos());
 
         //지난주 당첨 번호
