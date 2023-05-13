@@ -1,6 +1,6 @@
-package Calculator;
+package calculator;
 
-import Utils.StringUtils;
+import utils.StringUtils;
 
 import java.util.Deque;
 import java.util.LinkedList;

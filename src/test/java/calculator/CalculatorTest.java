@@ -1,6 +1,5 @@
-package Calculator;
+package calculator;
 
-import Calculator.Calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
