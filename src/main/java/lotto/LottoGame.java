@@ -26,7 +26,7 @@ public class LottoGame {
 
     List<LottoNumber> lastWeekNumbers = inputView.lastWeekNumbers();
     BonusNumber bonusNumber = inputView.bonusNumber();
-    bonusNumber.validateLastWeekDuplicate(lastWeekNumbers);
+    bonusNumber.validate(lastWeekNumbers);
 
     Map<Winning, Integer> winnings = Winning.score(tickets, lastWeekNumbers, bonusNumber.lottoNumber());
     double profit = Winning.profit(winnings, lottoPurchasablePrice);

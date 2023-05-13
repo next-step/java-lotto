@@ -15,7 +15,7 @@ class BonusNumberTest {
   @Test
   @DisplayName("지난주 당첨 번호에 BonusNumber가 포함된다면 예외가 발생한다")
   void bonusNumberDuplicateTest() {
-    assertThatThrownBy(() -> new BonusNumber(pick("1")).validateLastWeekDuplicate(lastWeekNumbers))
+    assertThatThrownBy(() -> new BonusNumber(pick("1")).validate(lastWeekNumbers))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }

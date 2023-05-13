@@ -10,7 +10,7 @@ public class BonusNumber {
     this.number = number;
   }
 
-  public void validateLastWeekDuplicate(List<LottoNumber> numbers) {
+  public void validate(List<LottoNumber> numbers) {
       if (numbers.contains(number)) {
         throw new IllegalArgumentException("보너스 숫자는 이전 주 당첨 번호와 중복될 수 없습니다.");
       }
