@@ -50,10 +50,4 @@ public class Lotto {
                 .contains(bonusNumber);
     }
 
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
-    }
 }

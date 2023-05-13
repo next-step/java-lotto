@@ -37,10 +37,4 @@ public class Numbers {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Numbers{" +
-                "numbers=" + numbers +
-                '}';
-    }
 }

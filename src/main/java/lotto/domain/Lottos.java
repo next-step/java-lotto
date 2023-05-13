@@ -49,12 +49,4 @@ public class Lottos {
         return LottoPrize.valueOf(count, bonusNumberMatch);
     }
 
-
-    @Override
-    public String toString() {
-        return "Lottos{" +
-                "lottoList=" + lottoList +
-                '}';
-    }
-
 }
