@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoGames {
 
@@ -60,4 +61,10 @@ public class LottoGames {
     public Map<Rank, Integer> getLottoResult() {
         return lottoResult;
     }
+
+    @Override
+    public String toString() {
+        return lottoGameList.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
+    }
+
 }

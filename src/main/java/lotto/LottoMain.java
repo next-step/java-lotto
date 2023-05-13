@@ -14,6 +14,7 @@ public class LottoMain {
 
     public static void main(String[] args) {
         LottoGames lottoGames = new LottoGames(Util.convertInt(inputView.inputPurchaseAmount()));
+        resultView.printLottoNumbers(lottoGames);
         WinningLotto firstLotto = new WinningLotto(inputView.inputFirstLottoNumber());
         LottoNumber bonusLottoNumber = new LottoNumber(Util.convertInt(inputView.inputBonusLottoNumber()));
         lottoGames.calculatePrizeCount(firstLotto, bonusLottoNumber);

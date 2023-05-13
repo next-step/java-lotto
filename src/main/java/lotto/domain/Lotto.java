@@ -4,6 +4,7 @@ import lotto.domain.generator.LottoGenerator;
 import lotto.domain.number.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final HashSet<LottoNumber> lottoNumbers = new HashSet<>();
@@ -32,5 +33,10 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", ", "[", "]"));
     }
 }

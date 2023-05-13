@@ -32,7 +32,7 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(item -> item.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(IllegalStateException::new);
+                .orElse(MISS);
     }
 
     public static Rank findRank(int matchCount, boolean hasBonusNumber) {

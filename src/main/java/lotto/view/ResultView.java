@@ -9,6 +9,7 @@ public class ResultView {
 
     private static final String LOTTO_STATISTICS = "\n당첨 통계\n—————————";
     private static final String RETURN_RATE = "총 수익률은 %.2f입니다.";
+
     public void printLottoResult(LottoGames lottoGames) {
         System.out.println(LOTTO_STATISTICS);
         printMatchedCount(lottoGames);
@@ -25,5 +26,9 @@ public class ResultView {
 
     private void printReturnRate(LottoGames lottoGames) {
         System.out.printf(RETURN_RATE, lottoGames.calculateReturn());
+    }
+
+    public void printLottoNumbers(LottoGames lottoGames) {
+        System.out.println(lottoGames.toString());
     }
 }
