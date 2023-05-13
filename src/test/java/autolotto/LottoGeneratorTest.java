@@ -3,7 +3,6 @@ package autolotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -31,11 +30,12 @@ class LottoGeneratorTest {
         Assertions.assertThat(numbers).doesNotHaveDuplicates();
     }
 
-    private static class OriginalOrderShuffler implements Shuffler {
+    @Test
+    void 금액_3000_원이_주어지면_3개의_로또를_생성한다() {
+        int money = 3000;
 
-        @Override
-        public List<Integer> shuffle(List<Integer> originals) {
-            return new ArrayList<>(originals);
-        }
+        List<Lotto> lottos = lottoGenerator.generateLottos(money);
+
+        Assertions.assertThat(lottos).hasSize(3);
     }
 }
