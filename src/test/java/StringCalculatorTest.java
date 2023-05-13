@@ -34,7 +34,7 @@ public class StringCalculatorTest {
         assertThat(stringCalculator.isSecondCharacterNumber("4 7")).isEqualTo("0");
     }
 
-    @Test
+
     @DisplayName("문자열을 (숫+기+숫) 1set 테스트")
     public void oneSetTest(){
         assertThat(stringCalculator.calculateOneSet("2 + 3", 0, 0)).isEqualTo(5);

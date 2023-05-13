@@ -2,6 +2,10 @@ public class StringCalculator {
 
     private String symbol = null;
 
+public class StringCalculator {
+
+    private String symbol = null;
+
     private String isOnlyOne(String value){
         String[] strList = value.split(" ");
         if(strList.length == 1){
