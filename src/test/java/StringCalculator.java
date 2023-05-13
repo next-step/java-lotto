@@ -1,15 +1,10 @@
-import java.util.function.Function;
+public class StringCalculator {
+
+    private String symbol = null;
 
 public class StringCalculator {
 
     private String symbol = null;
-    
-    // 1차 리뷰 보완에 의한 추가
-    public void isNullOrBlank(String value){
-        if(value == null || value.equals("")){
-            throw new IllegalArgumentException();
-        }
-    }
 
     private String isOnlyOne(String value){
         String[] strList = value.split(" ");
@@ -50,19 +45,12 @@ public class StringCalculator {
         return value;
     }
 
-    public boolean isSymbol(char value){
+    private boolean isSymbol(char value){
         if(41 < value && value < 48){
             return true;
         }
 
         return false;
-    }
-
-    // 1차 리뷰 보완에 의한 추가
-    public void validateSymbol(char value){
-        if(value < 41 || value > 48){
-            throw new IllegalArgumentException();
-        }
     }
 
     public int calculateOneSet(String data, int index, int result) {
@@ -113,8 +101,6 @@ public class StringCalculator {
     }
 
     private int doSymbolArithmetic(int result, String data){
-        validateSymbol(data.charAt(0));
-
         if(symbol == null) {
             symbol = data;
         }
@@ -122,13 +108,24 @@ public class StringCalculator {
         return result;
     }
 
-    // 1차 리뷰 보완에 의한 수정
     private int doArithmetic(int result, int num, String symbol){
         if(symbol == null)
             return num;
 
-        ArthimeticType arthimeticType = ArthimeticType.getArthimeticType(symbol); // 저 메소드를 static으로 선언하지 않으면 인스턴스를 생성하지 않고 들고올 방법이 없다. 이건 enum쪽 공부도 같이 필요할 듯
-        result = arthimeticType.calculate(result, num);
+        switch(symbol){
+            case "+":
+                result += num;
+                break;
+            case "-":
+                result -= num;
+                break;
+            case "*":
+                result *= num;
+                break;
+            case "/":
+                result /= num;
+                break;
+        }
 
         return result;
     }

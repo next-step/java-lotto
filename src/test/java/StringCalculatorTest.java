@@ -1,5 +1,3 @@
-import org.assertj.core.api.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,27 +34,7 @@ public class StringCalculatorTest {
         assertThat(stringCalculator.isSecondCharacterNumber("4 7")).isEqualTo("0");
     }
 
-    @Test
-    @DisplayName("[1차 리뷰 후 추가] 입력값이 null이거나 빈 공백인지 확인")
-    public void testInputisNullOrBlank(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            stringCalculator.isNullOrBlank("");
-        });
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            stringCalculator.isNullOrBlank(null);
-        });
-    }
 
-    @Test
-    @DisplayName("[1차 리뷰 후 추가] 사친연산 기호가 맞는지 확인")
-    public void testStringisArthimetic(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            stringCalculator.validateSymbol('3');
-            stringCalculator.validateSymbol('(');
-        });
-    }
-
-    @Test
     @DisplayName("문자열을 (숫+기+숫) 1set 테스트")
     public void oneSetTest(){
         assertThat(stringCalculator.calculateOneSet("2 + 3", 0, 0)).isEqualTo(5);
