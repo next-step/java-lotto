@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoGenerator {
 
@@ -23,16 +24,20 @@ public class LottoGenerator {
         this.generateNumber = money / LOTTO_PRICE;
     }
 
-    public Lottos generate() {
+    public Lottos generate(Lottos manualLottos) {
+        if (manualLottos == null || generateNumber < manualLottos.size()) {
+            throw new IllegalArgumentException("Illegal Arguments In LottoGenerator generate()");
+        }
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < generateNumber; i++) {
+        for (int i = 0; i < generateNumber - manualLottos.size(); i++) {
             Collections.shuffle(LOTTO_NUMBERS);
             lottos.add(new Lotto(LOTTO_NUMBERS.stream()
                 .limit(LOTTO_COUNT)
                 .sorted()
                 .collect(Collectors.toList())));
         }
-        return new Lottos(lottos);
+        return new Lottos(Stream.concat(manualLottos.getLottos().stream(), lottos.stream())
+            .collect(Collectors.toList()));
     }
 
 }

@@ -11,7 +11,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         LottoGenerator lottoGenerator = new LottoGenerator(LottoView.enterPurchaseAmount());
-        Lottos lottos = lottoGenerator.generate();
+        Lottos lottos = lottoGenerator.generate(LottoView.enterManualLotto());
         LottoView.outputPurchaseNumber(lottos.size());
         LottoView.outputLottos(lottos);
 
