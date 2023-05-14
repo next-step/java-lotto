@@ -8,11 +8,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 class WalletTest {
     private final LottoGenerator lottoGenerator = new LottoGenerator(new FixedNumberShuffler());
-    private final List<Integer> fixedWinningNumbers = Arrays.asList(1, 2, 3, 22, 23, 24);
+    private final WinningNumbers fixedWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 22, 23, 24));
 
     @Test
     void 지갑에_로또를_하나_추가할_수_있다() {

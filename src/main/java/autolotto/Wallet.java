@@ -24,14 +24,14 @@ public class Wallet {
         return this.lottoList.size();
     }
 
-    public int totalWinningMoneyOf(List<Integer> winningNumbers) {
+    public int totalWinningMoneyOf(WinningNumbers winningNumbers) {
         return this.lottoList.stream()
                 .map(lotto -> lotto.matchCount(winningNumbers))
                 .mapToInt(matchCount -> Winning.winningOf(matchCount).winningMoney())
                 .sum();
     }
 
-    public int countOfLottoMatchingWith(List<Integer> winningNumber, int matchCount) {
+    public int countOfLottoMatchingWith(WinningNumbers winningNumber, int matchCount) {
         return (int) this.lottoList.stream()
                 .filter(lotto -> lotto.matchCount(winningNumber) == matchCount)
                 .count();

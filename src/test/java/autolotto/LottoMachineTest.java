@@ -28,7 +28,7 @@ public class LottoMachineTest {
     void 당첨번호가_주어지면_수익률을_소수점_둘째_자리까지_반올림한_값으로_알려준다() {
         LottoMachine lottoMachine = new LottoMachine(new LottoGenerator(new FixedNumberShuffler()), 3000);
         BigDecimal expectedProfitRate = BigDecimal.valueOf((double) Winning.THREE.winningMoney() * 3 / 3000).setScale(2);
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 21, 22, 23);
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 21, 22, 23));
 
         BigDecimal profitRate = lottoMachine.profitRate(winningNumbers);
 

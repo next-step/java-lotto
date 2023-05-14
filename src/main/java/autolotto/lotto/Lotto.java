@@ -1,5 +1,7 @@
 package autolotto.lotto;
 
+import autolotto.WinningNumbers;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,10 +13,11 @@ public class Lotto {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public int matchCount(List<Integer> comparisonTarget) {
-        Collections.sort(comparisonTarget);
+    public int matchCount(WinningNumbers comparisonTarget) {
+        ArrayList<Integer> winningNumbers = new ArrayList<>(comparisonTarget.winningNumbers());
+        Collections.sort(winningNumbers);
 
-        return (int) comparisonTarget.stream()
+        return (int) winningNumbers.stream()
                 .filter(this.numbers::contains)
                 .count();
     }
