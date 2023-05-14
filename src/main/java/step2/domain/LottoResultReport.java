@@ -6,9 +6,6 @@ import java.util.Set;
 
 public class LottoResultReport {
 
-    static final int EMPTY_COUNT = 0;
-    static final int ONE = 1;
-
     private Map<Rank, Integer> lottoResultReport;
 
     public LottoResultReport() {
@@ -16,20 +13,13 @@ public class LottoResultReport {
     }
 
     public int recordRank(Rank rank) {
-        if (lottoResultReport.containsKey(rank)) {
-            Integer cnt = lottoResultReport.get(rank);
-            lottoResultReport.put(rank, cnt + 1);
-            return cnt;
-        }
-        lottoResultReport.put(rank, 1);
-        return ONE;
+        Integer value = lottoResultReport.getOrDefault(rank, 0);
+        lottoResultReport.put(rank, value + 1);
+        return lottoResultReport.get(rank);
     }
 
     public int findReportByMatchCount(Rank rank) {
-        if (lottoResultReport.containsKey(rank)) {
-            return lottoResultReport.get(rank);
-        }
-        return EMPTY_COUNT;
+        return lottoResultReport.getOrDefault(rank, 0);
     }
 
     public double calculateProfit(int gameCount) {
