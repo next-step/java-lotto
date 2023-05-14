@@ -37,4 +37,10 @@ public class Wallet {
         int totalWinnings = totalWinningsOfWinningNumber(winningNumbers);
         return BigDecimal.valueOf(totalWinnings).divide(BigDecimal.valueOf(money), 2, RoundingMode.HALF_UP);
     }
+
+    public int countOfLottoMatchingWith(List<Integer> winningNumber, int matchCount) {
+        return (int) this.lottoList.stream()
+                .filter(lotto -> lotto.matchCount(winningNumber) == matchCount)
+                .count();
+    }
 }

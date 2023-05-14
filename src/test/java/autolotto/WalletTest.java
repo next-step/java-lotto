@@ -1,6 +1,8 @@
 package autolotto;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -65,4 +67,40 @@ class WalletTest {
 
         Assertions.assertThat(profitRate).isEqualTo(expectedProfitRate);
     }
+
+    @Nested
+    class 지갑_내_로또들_중_로또의_개수 {
+        private Wallet wallet;
+        private List<Integer> winningNumber;
+
+        @BeforeEach
+        void setUp() {
+            wallet = new Wallet(3000,
+                    Arrays.asList(
+                            new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13)),
+                            new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13)),
+                            new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13))
+                    ));
+            winningNumber = Arrays.asList(1, 2, 3, 22, 23, 24);
+        }
+
+        @Test
+        void 당첨번호와_정확히_3개_일치하는_로또의_개수를_알려준다() {
+            int countOfMatchingNumber = 3;
+            int countOfLotto = wallet.countOfLottoMatchingWith(winningNumber, countOfMatchingNumber);
+
+            Assertions.assertThat(countOfLotto).isEqualTo(3);
+
+        }
+
+        @Test
+        void 당첨번호와_정확히_2개_일치하는_로또의_개수를_알려준다() {
+            int countOfMatchingNumber = 2;
+            int countOfLotto = wallet.countOfLottoMatchingWith(winningNumber, countOfMatchingNumber);
+
+            Assertions.assertThat(countOfLotto).isEqualTo(0);
+
+        }
+    }
+
 }
