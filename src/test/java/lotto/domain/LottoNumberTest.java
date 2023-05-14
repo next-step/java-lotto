@@ -17,7 +17,7 @@ class LottoNumberTest {
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(ints = {0,46})
+    @ValueSource(ints = {0, 46})
     void LottoNumberConstructorExceptionTest(Integer number) {
         assertThatThrownBy(() -> new LottoNumber((number))).isInstanceOf(
                 IllegalArgumentException.class)

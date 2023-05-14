@@ -13,9 +13,17 @@ public class Lottos {
     }
 
     public LottoRanks drawLots(List<Integer> winningNumbers, int bonusNumber) {
+        Lotto winningLotto = new Lotto(winningNumbers);
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+
+        if (winningLotto.contains(bonusLottoNumber)) {
+            throw new IllegalArgumentException(
+                "There exists duplicate between winningNumber and bonusNumber");
+        }
+
         return new LottoRanks(lottos.stream()
-            .map(lotto -> LottoRank.valueOf(lotto.scoreHit(new Lotto(winningNumbers)),
-                lotto.contains(new LottoNumber(bonusNumber))))
+            .map(lotto -> LottoRank.valueOf(lotto.scoreHit(winningLotto),
+                lotto.contains(bonusLottoNumber)))
             .collect(Collectors.toList()));
     }
 

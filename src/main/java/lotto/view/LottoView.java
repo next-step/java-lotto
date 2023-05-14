@@ -1,10 +1,12 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.constant.LottoRank;
 
@@ -21,6 +23,28 @@ public class LottoView {
     public static int enterPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static Lottos enterManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualLottoNumber = Integer.parseInt(SCANNER.nextLine());
+
+        if (manualLottoNumber < 0) {
+            return null;
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoNumber; i++) {
+            lottos.add(new Lotto(Arrays.stream(SCANNER.nextLine().split(COMMA_DELIMITER))
+                .map(String::trim)
+                .mapToInt(Integer::valueOf)
+                .boxed()
+                .collect(Collectors.toList())));
+        }
+
+        return new Lottos(lottos);
     }
 
     public static void outputPurchaseNumber(Integer number) {
@@ -50,15 +74,27 @@ public class LottoView {
     public static void outputLottoStatistics(Map<LottoRank, Long> lottoStatistics) {
         System.out.printf("%n당첨 통계%n");
         System.out.println("---------");
-        LOTTO_RANKS.forEach(
-            lottoRank -> System.out.printf("%d개 일치%s(%d원)- %d개%n",
-                lottoRank.getHitNumber(), lottoRank.equals(LottoRank.SECOND) ? ", 보너스 볼 일치" : " ",
-                lottoRank.getWinningAmount(),
-                lottoStatistics.getOrDefault(lottoRank, 0L))
-        );
+        LOTTO_RANKS.forEach(lottoRank -> outputLottoStatisticsForRank(lottoStatistics, lottoRank));
     }
 
     public static void outputRate(double rate) {
         System.out.printf("총 수익률은 %.2f입니다.%n", rate);
     }
+
+    private static void outputLottoStatisticsForRank(Map<LottoRank, Long> lottoStatistics,
+        LottoRank lottoRank) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(lottoRank.getHitNumber());
+        sb.append("개 일치");
+        if (lottoRank.equals(LottoRank.SECOND)) {
+            sb.append(", 보너스 볼 일치");
+        }
+        sb.append(" (");
+        sb.append(lottoRank.getWinningAmount());
+        sb.append("원) - ");
+        sb.append(lottoStatistics.getOrDefault(lottoRank, 0L));
+        sb.append("개");
+        System.out.println(sb);
+    }
+
 }
