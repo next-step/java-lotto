@@ -1,8 +1,6 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputView {
     public static int inputPay(Scanner scanner) {
@@ -10,11 +8,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> lastWinNumbers(Scanner scanner) {
+    public static Set<Integer> lastWinNumbers(Scanner scanner) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        List<Integer> numbers = new ArrayList<>();
-        inputLastNumbers(numbers, 0, scanner);
+        Set<Integer> numbers = new HashSet<>();
+        inputLastNumbers(numbers, scanner);
         return numbers;
     }
 
@@ -23,7 +21,8 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    private static void inputLastNumbers(List<Integer> numbers, int count, Scanner scanner) {
+    private static void inputLastNumbers(Set<Integer> numbers, Scanner scanner) {
+        int count = 0;
         while (count < 6 && scanner.hasNextInt()) {
             int number = scanner.nextInt();
             numbers.add(number);
@@ -36,20 +35,25 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<List<Integer>> inputManualNumbers(int manualCount, Scanner scanner) {
+    public static List<Set<Integer>> inputManualNumbers(int manualCount, Scanner scanner) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> numberList = new ArrayList<>();
-        for(int i=0; i<manualCount; i++){
+        List<Set<Integer>> numberList = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
             int count = 0;
-            List<Integer> lottoNumbers = new ArrayList<>();
-            while(count < 6 && scanner.hasNextInt()){
-                int number = scanner.nextInt();
-                lottoNumbers.add(number);
-                count++;
-            }
+            Set<Integer> lottoNumbers = inputLottoNumbers(scanner, count);
             numberList.add(lottoNumbers);
         }
 
         return numberList;
+    }
+
+    private static Set<Integer> inputLottoNumbers(Scanner scanner, int count) {
+        Set<Integer> lottoNumbers = new HashSet<>();
+        while (count < 6 && scanner.hasNextInt()) {
+            int number = scanner.nextInt();
+            lottoNumbers.add(number);
+            count++;
+        }
+        return lottoNumbers;
     }
 }

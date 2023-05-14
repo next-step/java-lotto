@@ -18,6 +18,10 @@ public class Lottos {
         return this.lottos;
     }
 
+    public int count(){
+        return this.lottos.size();
+    }
+
     public void add(Lotto lotto) {
         lottos.add(lotto);
     }

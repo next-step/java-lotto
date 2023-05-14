@@ -34,7 +34,7 @@ public class OutputView {
             earnMoney += count * value.getPrize();
         }
 
-        double rateOfReturn = (double) earnMoney / customer.getLottoMoney();
+        double rateOfReturn = (double) earnMoney / customer.spendMoneyToLotto();
 
         System.out.println("총 수익률은 " + rateOfReturn + "입니다." + (rateOfReturn < 1.0 ? "기준이 1이기 때문에 결과적으로 손해라는 의미임" : ""));
     }

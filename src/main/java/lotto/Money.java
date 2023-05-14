@@ -13,8 +13,8 @@ public class Money {
         return new Money(this.money - money);
     }
 
-    public Money buyLotto(int money){
-        return new Money(this.money + money);
+    public boolean isBigger(int totalLottoPrice){
+        return this.money < totalLottoPrice;
     }
 
     private void validateMoney(int money) {

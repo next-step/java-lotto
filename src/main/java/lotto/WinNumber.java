@@ -1,22 +1,24 @@
 package lotto;
 
 import java.util.List;
+import java.util.Set;
+import java.util.function.LongToDoubleFunction;
 
 public class WinNumber {
 
-    private final List<LottoNumber> winNumbers;
-    private final int bonusNumber;
+    private final Lotto winNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinNumber(List<Integer> winNumbers, int bonusNumber) {
-        this.winNumbers = LottoNumber.of(winNumbers);
-        this.bonusNumber = bonusNumber;
+    public WinNumber(Set<Integer> winNumbers, int bonusNumber) {
+        this.winNumbers = new Lotto(winNumbers);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return this.bonusNumber;
     }
 
     public List<LottoNumber> getWinNumbers() {
-        return this.winNumbers;
+        return this.winNumbers.getNumbers();
     }
 }

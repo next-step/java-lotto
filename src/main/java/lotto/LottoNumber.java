@@ -10,7 +10,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
     private static final int LOTTO_NUMBER_MINIMUM_RANGE = 1;
     private static final int LOTTO_NUMBER_MAXIMUM_RANGE = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
 
     static {
         for (int number = LOTTO_NUMBER_MINIMUM_RANGE; number <= LOTTO_NUMBER_MAXIMUM_RANGE; number++) {
@@ -33,7 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumberCache.get(number);
     }
 
-    public static List<LottoNumber> of(final List<Integer> numbers) {
+    public static List<LottoNumber> of(final Set<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
@@ -49,7 +48,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static List<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, LOTTO_NUMBER_COUNT)
+        return lottoNumbers.subList(0, Lotto.LOTTO_NUMBER_COUNT)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());

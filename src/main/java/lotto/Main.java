@@ -6,6 +6,7 @@ import lotto.view.OutputView;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -14,13 +15,12 @@ public class Main {
         int money = InputView.inputPay(scanner);
         Customer customer = new Customer(money);
         int manualCount = InputView.inputCount(scanner);
-        List<List<Integer>> manualNumbers = InputView.inputManualNumbers(manualCount, scanner);
+        List<Set<Integer>> manualNumbers = InputView.inputManualNumbers(manualCount, scanner);
 
-        customer.buyManualLotto(manualCount, manualNumbers);
-        customer.buyAutoLotto();
+        customer.buyLotto(manualCount, manualNumbers);
 
-        OutputView.showLottos(customer.getManualLottos(), customer.getAutoLottos());
-        List<Integer> lastNumbers = InputView.lastWinNumbers(scanner);
+        OutputView.showLottos(customer.getManualLotto(), customer.getAutoLotto());
+        Set<Integer> lastNumbers = InputView.lastWinNumbers(scanner);
         int bonusNumber = InputView.inputBonusNumber(scanner);
         WinNumber winNumber = new WinNumber(lastNumbers, bonusNumber);
 
