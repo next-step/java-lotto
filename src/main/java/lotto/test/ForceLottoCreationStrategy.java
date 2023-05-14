@@ -1,14 +1,26 @@
-package lotto.domain;
+package lotto.test;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoCreationStrategy;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static lotto.domain.LottoNumbersGenerator.getLottoNumbers;
+import java.util.stream.IntStream;
 
 public class ForceLottoCreationStrategy implements LottoCreationStrategy {
 
     private static final int LOTTO_LENGTH_UPPER_BOUND = 6;
+    private static final int START_NUMBER = 1;
+    private static final int LIMIT_NUMBER = 45;
+    private static final List<LottoNumber> LOTTO_NUMBERS = generateLottoNumbers();
+
+    private static List<LottoNumber> generateLottoNumbers() {
+        return IntStream.rangeClosed(START_NUMBER, LIMIT_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public List<Lotto> createLottos(int purchaseCount) {
@@ -24,7 +36,7 @@ public class ForceLottoCreationStrategy implements LottoCreationStrategy {
     }
 
     private List<Integer> findSixLengthAndSortedLotto() {
-        return getLottoNumbers().stream()
+        return LOTTO_NUMBERS.stream()
                 .map(LottoNumber::getNumber)
                 .limit(LOTTO_LENGTH_UPPER_BOUND)
                 .sorted()
