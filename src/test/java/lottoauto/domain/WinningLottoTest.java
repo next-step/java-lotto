@@ -18,8 +18,7 @@ public class WinningLottoTest {
         List<Integer> winningNumber = LottoFixture.intsFixture();
 
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
-        LottoService lottoService = new LottoService();
-        LottoResult lottoResult = lottoService.compareWinningLottoNumber(lottos, winningLotto);
+        LottoResult lottoResult = winningLotto.result(lottos);
 
         Assertions.assertThat(lottoResult.getMatchCount().get(0)).isEqualTo(WinningReward.MATCH_3);
     }

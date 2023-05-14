@@ -27,13 +27,13 @@ public class LottoResult {
 
     }
 
-    public double getRate(int amount) {
+    public double getRate(int price) {
         double summary = 0;
         for (WinningReward reward : matchCount) {
             summary += reward.getReward() * matchFrequencyMap.getOrDefault(reward, 0);
         }
 
-        return Math.round(summary / amount);
+        return Math.round(summary / price);
     }
 
     public List<WinningReward> getMatchCount() {

@@ -2,16 +2,13 @@ package lottoauto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import lottoauto.model.*;
-import lottoauto.utils.ValidationUtils;
+import lottoauto.model.Lotto;
+import lottoauto.model.Lottos;
 
 public class LottoService {
 
-    public Lottos generateLottoNumber(int amount) {
-        int quantity = ValidationUtils.amountValidateForQuantity(amount);
-        List<Lotto> lotto = generateLotto(quantity);
-        return new Lottos(lotto);
+    public Lottos generateLottoNumber(int quantity) {
+        return new Lottos(generateLotto(quantity));
     }
 
     private List<Lotto> generateLotto(int quantity) {
@@ -20,15 +17,6 @@ public class LottoService {
             lotto.add(new Lotto());
         }
         return lotto;
-    }
-
-    public LottoResult compareWinningLottoNumber(Lottos lottos, WinningLotto winningLotto) {
-        List<WinningReward> matchCount = new ArrayList<>();
-        for (Lotto lotto : lottos.getLottos()) {
-            matchCount.add(winningLotto.compare(lotto));
-        }
-
-        return new LottoResult(matchCount);
     }
 
 }
