@@ -28,17 +28,6 @@ public class Record {
         return new Record(rankMap);
     }
 
-    public ProfitRate calculateProfit(int purchaseMoney) {
-        double allPrize = 0;
-        for (Rank rank : this.rankMap.keySet()) {
-            int prize = rank.getPrize();
-            int matchingCount = this.rankMap.get(rank);
-            allPrize += prize * matchingCount;
-        }
-
-        return new ProfitRate(allPrize / purchaseMoney);
-    }
-
     private static void putRankMap(int matchingCount, Map<Rank, Integer> rankMap, boolean haveBonus) {
         if (matchingCount >= 3) {
             Rank rank = Rank.find(matchingCount, haveBonus);

@@ -13,16 +13,17 @@ public class LottoNumber {
 
     public LottoNumber(String number) {
         number = number.trim();
-        isNumeric(number);
-        this.number = Integer.parseInt(number);
+        this.number = convertToNumber(number);
     }
 
-    private void isNumeric(String number) {
+    private int convertToNumber(String number) {
+        int result = 0;
         try {
-            Integer.parseInt(number);
+            result = Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("로또 번호는 숫자형태만 가능합니다. " + number + "는 숫자 형태가 아닙니다.");
         }
+        return result;
     }
 
     private void checkNumberRange(int number) {

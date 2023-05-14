@@ -16,7 +16,7 @@ public class WinNumber {
     }
 
     public boolean haveBonus(Lotto lotto) {
-        return lotto.haveBonus(bonusWinNumber);
+        return lotto.haveNumber(bonusWinNumber);
     }
 
     private void validDuplicate() {

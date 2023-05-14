@@ -1,7 +1,9 @@
 package lotto.domian;
 
+import java.io.ObjectOutput;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lotto {
 
@@ -22,25 +24,27 @@ public class Lotto {
     }
 
     public int match(Lotto winNumber) {
-        int count = 0;
-        for (LottoNumber lottoNumber : lottoTicket) {
-            count += winNumber.countIfHave(lottoNumber);
+        AtomicInteger count = new AtomicInteger(0);
+        if (winNumber == null) {
+            return count.intValue();
         }
-        return count;
+        lottoTicket.stream()
+                .forEach(lottoNumber ->
+                            count.addAndGet(winNumber.countIfHave(lottoNumber)));
+
+        return count.intValue();
     }
 
     private int countIfHave(LottoNumber lottoNumber) {
-        if (isHaveWinNumber(lottoNumber)) {
+        if (haveNumber(lottoNumber)) {
             return 1;
         }
         return 0;
     }
 
-    public boolean haveBonus(LottoNumber bonusNumber) {
+
+    public boolean haveNumber(LottoNumber bonusNumber) {
         return lottoTicket.contains(bonusNumber);
-    }
-    private boolean isHaveWinNumber(LottoNumber winLottoNumber) {
-        return lottoTicket.contains(winLottoNumber);
     }
 
     public Set<LottoNumber> getLottoNumbers() {
