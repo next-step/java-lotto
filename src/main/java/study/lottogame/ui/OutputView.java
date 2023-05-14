@@ -14,6 +14,9 @@ import study.lottogame.domain.Rank;
 
 public class OutputView {
 
+  private OutputView() {
+  }
+
   public static void printLotteries(int manualLotteryCount, Lotteries lotteries) {
     System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLotteryCount,
         lotteries.getLotteries().size() - manualLotteryCount);

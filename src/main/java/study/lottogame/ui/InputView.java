@@ -10,6 +10,9 @@ import study.lottogame.util.StringUtils;
 
 public class InputView {
 
+  private InputView() {
+  }
+
   private static final String LOTTO_DELIMITER = ",";
   private static final Scanner sc = new Scanner(System.in);
 
