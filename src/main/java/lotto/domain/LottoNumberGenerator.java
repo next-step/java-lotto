@@ -8,19 +8,19 @@ import java.util.stream.IntStream;
 public class LottoNumberGenerator {
     public static final int START_LOTTO_NUMBER = 1;
     public static final int END_LOTTO_NUMBER = 45;
-    private final List<LottoNumber> lottoNumbers;
+    private final List<Integer> lottoNumbers;
 
     public LottoNumberGenerator() {
         lottoNumbers = IntStream.range(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
-                .mapToObj(value -> new LottoNumber(value))
+                .mapToObj(Integer::new)
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> lotto() {
+    public List<Integer> lotto() {
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.subList(0,6)
                 .stream()
-                .sorted(LottoNumber::compareTo)
+                .sorted(Integer::compareTo)
                 .collect(Collectors.toList());
     }
 }

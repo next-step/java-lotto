@@ -39,7 +39,7 @@ public class LottoNumberTest {
     @Test
     void 로또번호_6개_생성한다() {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.lotto();
+        List<Integer> lottoNumbers = lottoNumberGenerator.lotto();
         assertThat(lottoNumbers).hasSize(6);
     }
 
