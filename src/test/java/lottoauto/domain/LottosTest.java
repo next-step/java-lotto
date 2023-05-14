@@ -38,9 +38,9 @@ public class LottosTest {
         List<WinningReward> result = List.of(winningReward);
 
         int count = Collections.frequency(result, winningReward);
-        LottoResult lottoResult = new LottoResult(result, buyPrice);
+        LottoResult lottoResult = new LottoResult(result);
 
         Assertions.assertThat(lottoResult.getMatchCount().get(0)).isEqualTo(result.get(0));
-        Assertions.assertThat(lottoResult.calculateRate()).isEqualTo(Math.round(count * (double) winningReward.getReward() / buyPrice));
+        Assertions.assertThat(lottoResult.getRate(buyPrice)).isEqualTo(Math.round(count * (double) winningReward.getReward() / buyPrice));
     }
 }

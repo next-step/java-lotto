@@ -15,10 +15,11 @@ public class WinningLottoTest {
     void 당첨번호_구매번호_비교_테스트() {
         Lottos lottos = LottoFixture.lottosFixture(3, 4, 6, 11, 22, 44);
         int bonusNumber = 33;
-        List<Integer> winningNumber = LottoFixture.intListFixture();
+        List<Integer> winningNumber = LottoFixture.intsFixture();
 
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
-        LottoResult lottoResult = winningLotto.compareWinningLottoNumber(lottos);
+        LottoService lottoService = new LottoService();
+        LottoResult lottoResult = lottoService.compareWinningLottoNumber(lottos, winningLotto);
 
         Assertions.assertThat(lottoResult.getMatchCount().get(0)).isEqualTo(WinningReward.MATCH_3);
     }

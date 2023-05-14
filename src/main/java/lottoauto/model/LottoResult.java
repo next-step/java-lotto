@@ -2,33 +2,38 @@ package lottoauto.model;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import lottoauto.model.Constant.LottoMatch;
 
 public class LottoResult {
 
+    public static final int MINIMUM_MATCH_COUNT = 3;
     private final List<WinningReward> matchCount;
-    private final int buyPrice;
-    private final LinkedHashMap<WinningReward, Integer> matchFrequencyMap = Arrays.stream(WinningReward.values())
-            .filter(x -> x.getMatch() >= LottoMatch.MINIMUM_MATCH_COUNT)
-            .collect(Collectors.toMap(e -> e, e -> 0, (a, b) -> a, LinkedHashMap::new));
-    private final double rate;
+    private final LinkedHashMap<WinningReward, Integer> matchFrequencyMap;
 
-    public LottoResult(List<WinningReward> matchCount, int buyPrice) {
+    public LottoResult(List<WinningReward> matchCount) {
         this.matchCount = matchCount;
-        this.buyPrice = buyPrice;
-        this.rate = calculateRate();
+        this.matchFrequencyMap = Arrays.stream(WinningReward.values())
+                .filter(x -> x.getMatchCount() >= MINIMUM_MATCH_COUNT)
+                .collect(Collectors.toMap(e -> e, e -> 0, (a, b) -> a, LinkedHashMap::new));
+        initFrequencyMap();
     }
 
-    public double calculateRate() {
+    private void initFrequencyMap() {
+        matchCount.stream()
+                .filter(winningReward -> winningReward.getMatchCount() >= MINIMUM_MATCH_COUNT)
+                .forEach(winningReward -> {
+                    int count = Collections.frequency(matchCount, winningReward);
+                    matchFrequencyMap.put(winningReward, count);
+                });
+
+    }
+
+    public double getRate(int amount) {
         double summary = 0;
         for (WinningReward reward : matchCount) {
-            int count = Collections.frequency(matchCount, reward);
-            matchFrequencyMap.put(reward, count);
-            summary += reward.getReward() * count;
+            summary += reward.getReward() * matchFrequencyMap.getOrDefault(reward, 0);
         }
 
-        return Math.round(summary / buyPrice);
-
+        return Math.round(summary / amount);
     }
 
     public List<WinningReward> getMatchCount() {
@@ -39,7 +44,4 @@ public class LottoResult {
         return this.matchFrequencyMap;
     }
 
-    public double getRate() {
-        return this.rate;
-    }
 }

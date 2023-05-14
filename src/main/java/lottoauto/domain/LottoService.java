@@ -2,15 +2,14 @@ package lottoauto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lottoauto.model.Constant;
-import lottoauto.model.Lotto;
-import lottoauto.model.Lottos;
+import java.util.stream.Collectors;
+import lottoauto.model.*;
+import lottoauto.utils.ValidationUtils;
 
 public class LottoService {
 
     public Lottos generateLottoNumber(int amount) {
-        int quantity = getQuantity(amount);
-        amountValidation(amount);
+        int quantity = ValidationUtils.amountValidateForQuantity(amount);
         List<Lotto> lotto = generateLotto(quantity);
         return new Lottos(lotto);
     }
@@ -23,14 +22,13 @@ public class LottoService {
         return lotto;
     }
 
-    private void amountValidation(int amount) {
-        if (amount < Constant.ONE_LOTTO_AMOUNT) {
-            throw new IllegalArgumentException("로또 한개의 금액은 1000원 입니다.");
+    public LottoResult compareWinningLottoNumber(Lottos lottos, WinningLotto winningLotto) {
+        List<WinningReward> matchCount = new ArrayList<>();
+        for (Lotto lotto : lottos.getLottos()) {
+            matchCount.add(winningLotto.compare(lotto));
         }
-    }
 
-    public int getQuantity(int amount) {
-        return amount / Constant.ONE_LOTTO_AMOUNT;
+        return new LottoResult(matchCount);
     }
 
 }
