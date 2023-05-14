@@ -18,8 +18,8 @@ public class LottoService {
         games = new LottoGames();
     }
 
-    public void setPurchaseValue(String purchaseValue) {
-        games.setPurchaseValue(Integer.parseInt(purchaseValue));
+    public void setPurchaseValue(int purchaseValue) {
+        games.setPurchaseValue(purchaseValue);
     }
 
     public void setWinningNumbers(String winningNumbers) {
@@ -67,11 +67,11 @@ public class LottoService {
         return games.getManualLottoCount();
     }
 
-    public void setManualLottoNumbers(String input) {
-        games.addLotto(new Lotto(ParseUtil.convertStringToIntegerList(input, COMMA)));
+    public void addManualLottoNumbers(Set<Integer> input) {
+        games.addLotto(new Lotto(input));
     }
 
-    public void setAutoLottoNumbers() {
+    public void addAutoLottoNumbers() {
         games.initGames(games.getAutoLottoCount());
     }
 
