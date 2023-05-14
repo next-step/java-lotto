@@ -2,13 +2,13 @@ package autolotto.lotto.fixture;
 
 import autolotto.lotto.Shuffler;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class OriginalOrderShuffler implements Shuffler {
+public class FixedNumberShuffler implements Shuffler {
 
     @Override
     public List<Integer> shuffle(List<Integer> originals) {
-        return new ArrayList<>(originals);
+        return Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 }

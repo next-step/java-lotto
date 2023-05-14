@@ -1,6 +1,6 @@
 package autolotto.lotto;
 
-import autolotto.lotto.fixture.OriginalOrderShuffler;
+import autolotto.lotto.fixture.FixedNumberShuffler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 class LottoGeneratorTest {
 
     private final Predicate<Integer> isNumberOfLottoRange = number -> number >= 1 && number <= 45;
-    private final LottoGenerator lottoGenerator = new LottoGenerator(new OriginalOrderShuffler());
+    private final LottoGenerator lottoGenerator = new LottoGenerator(new FixedNumberShuffler());
 
     @Test
     void 로또생성기는_1에서_45_사이의_수로_이루어진_6개의_번호를_생성한다() {
