@@ -10,6 +10,7 @@ import study.lottogame.util.StringUtils;
 
 public class InputView {
 
+  private static final String LOTTO_DELIMITER = ",";
   private static final Scanner sc = new Scanner(System.in);
 
   public static Money inputPurchaseMoney() {
@@ -38,7 +39,7 @@ public class InputView {
   }
 
   private static Lottery InputAndCreateLottery() {
-    String[] numbers = getInput().split(",");
+    String[] numbers = getInput().split(LOTTO_DELIMITER);
     return LotteryFactory.create(numbers);
   }
 
