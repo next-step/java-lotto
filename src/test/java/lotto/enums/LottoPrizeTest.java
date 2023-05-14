@@ -32,7 +32,7 @@ class LottoPrizeTest {
     }
 
     @Test
-    @DisplayName("로또 당첨 순위 테스트")
+    @DisplayName("로또 2등 당첨 순위 테스트")
     void lotto_prize_money_rank_second() {
         assertEquals(LottoPrize.SECOND, LottoPrize.valueOf(5, true));
     }

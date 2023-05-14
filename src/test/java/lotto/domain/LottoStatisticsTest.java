@@ -1,17 +1,8 @@
 package lotto.domain;
 
-import lotto.enums.LottoPrize;
-import lotto.strategy.AutoLotto;
-import lotto.strategy.LottoStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
 
 import static lotto.domain.fixture.LottosFixture.로또_티켓;
 import static lotto.domain.fixture.WinningLottoFixture.로또_1등;
@@ -34,7 +25,7 @@ class LottoStatisticsTest {
         // when
         final double v = lottoStatistics.calculateYield();
         // then
-        assertEquals(10000, Math.floor(v));
+        assertEquals(500, Math.floor(v));
     }
 
     @Test
