@@ -5,6 +5,7 @@ import java.util.Map;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbersRandomSelector;
 import lotto.domain.LottoTickets;
+import lotto.domain.ManualPurchaseNumber;
 import lotto.domain.Money;
 import lotto.domain.Winning;
 import lotto.ui.InputView;
@@ -18,9 +19,16 @@ public class LottoGame {
     Money userMoney = inputView.buy();
     Money lottoPurchasablePrice = Money.toLottoPurchasablePrice(userMoney);
     resultView.printChange(userMoney.subtraction(lottoPurchasablePrice));
-    resultView.printPurchaseAmount(lottoPurchasablePrice.ticketPurchasableNumber());
 
-    LottoTickets tickets = LottoTickets.issue(lottoPurchasablePrice.ticketPurchasableNumber(), LottoNumbersRandomSelector.getInstance());
+    int ticketPurchasableNumber = lottoPurchasablePrice.ticketPurchasableNumber();
+    ManualPurchaseNumber manualPurchaseNumber = inputView.manualPurchaseNumber(ticketPurchasableNumber);
+    LottoTickets manualLottoTickets = inputView.manualLottoTickets(manualPurchaseNumber);
+
+    int autoPurchasableNumber = ticketPurchasableNumber - manualPurchaseNumber.value();
+    resultView.printPurchaseAmount(manualPurchaseNumber.value(), autoPurchasableNumber);
+
+    LottoTickets autoTickets = LottoTickets.issue(autoPurchasableNumber, LottoNumbersRandomSelector.getInstance());
+    LottoTickets tickets = autoTickets.append(manualLottoTickets);
     resultView.showTicketsInfo(tickets);
 
     List<LottoNumber> lastWeekNumbers = inputView.lastWeekNumbers();

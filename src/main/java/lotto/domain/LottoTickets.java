@@ -24,6 +24,16 @@ public class LottoTickets {
     return new LottoTickets(tickets);
   }
 
+  public LottoTickets append(LottoTickets lottoTickets) {
+    this.tickets.addAll(lottoTickets.tickets());
+    return new LottoTickets(this.tickets());
+  }
+
+  public LottoTickets append(LottoTicket lottoTicket) {
+    this.tickets.add(lottoTicket);
+    return new LottoTickets(this.tickets());
+  }
+
   public List<LottoTicket> tickets() {
     return this.tickets;
   }
@@ -36,9 +46,5 @@ public class LottoTickets {
             win -> 1,
             (oldValue, newValue) -> oldValue + 1
         ));
-  }
-
-  public LottoTicket findByIndex(int index) {
-    return tickets.get(index);
   }
 }

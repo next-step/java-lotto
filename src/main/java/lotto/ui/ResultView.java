@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.ManualPurchaseNumber;
 import lotto.domain.Money;
 import lotto.domain.Winning;
 
@@ -28,8 +29,8 @@ public class ResultView {
     }
   }
 
-  public void printPurchaseAmount(int ticketPurchasableNumber) {
-    Printer.print(ticketPurchasableNumber + "개를 구매했습니다.");
+  public void printPurchaseAmount(int manualPurchaseNumber, int autoPurchasableNumber) {
+    Printer.print(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", autoPurchasableNumber, manualPurchaseNumber));
   }
 
   public void printResult(Map<Winning, Integer> winnings, double profit) {

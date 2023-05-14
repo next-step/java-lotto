@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import lotto.factory.LottoNumbersSelectorFactory;
@@ -11,13 +12,13 @@ class LottoTicketTest {
 
   @Test
   @DisplayName("로또 티켓을 생성에 성공한다")
-  public void lottoTicketCreateTest() {
+  void lottoTicketCreateTest() {
     LottoTicket.bySize(6, LottoNumbersRandomSelector.getInstance());
   }
 
   @Test
   @DisplayName("1등에 대해 성공적으로 계산한다")
-  public void firstPlaceScoreTest() {
+  void firstPlaceScoreTest() {
     LottoTicket ticket = LottoTicket.bySize(6, LottoNumbersSelectorFactory.oneToSix());
 
     List<LottoNumber> sameSix = LottoNumbersSelectorFactory.oneToSix().selectBy(6);
@@ -28,7 +29,7 @@ class LottoTicketTest {
 
   @Test
   @DisplayName("2등에 대해 성공적으로 계산한다")
-  public void secondPlaceScoreTest() {
+  void secondPlaceScoreTest() {
     LottoTicket ticket = LottoTicket.bySize(6, LottoNumbersSelectorFactory.oneToSix());
 
     List<LottoNumber> firstPlace = LottoNumbersSelectorFactory.oneToFiveAndSeven().selectBy(6);
@@ -39,7 +40,7 @@ class LottoTicketTest {
 
   @Test
   @DisplayName("3등에 대해 성공적으로 계산한다")
-  public void thirdPlaceScoreTest() {
+  void thirdPlaceScoreTest() {
     LottoTicket ticket = LottoTicket.bySize(6, LottoNumbersSelectorFactory.oneToSix());
 
     List<LottoNumber> firstPlace = LottoNumbersSelectorFactory.oneToFiveAndSeven().selectBy(6);
@@ -48,5 +49,10 @@ class LottoTicketTest {
     assertThat(ticket.score(firstPlace, bonusNumber)).isEqualTo(Winning.THIRD);
   }
 
-
+  @Test
+  @DisplayName("로또 번호에 중복된 숫자가 있다면 예외를 발생시킨다")
+  void duplicatedNumberExceptionTest() {
+    assertThatThrownBy(() -> LottoTicket.bySize(6, LottoNumbersSelectorFactory.duplicatedNumber()))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
 }
