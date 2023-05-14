@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static java.util.function.Predicate.*;
+
 public enum Rank {
     FIRST(6, new Money(2_000_000_000L)),
     SECOND(5, new Money(30_000_000L)),
@@ -12,18 +14,11 @@ public enum Rank {
     FIFTH(3, new Money(5_000L)),
     MISS(0, new Money(0L));
 
-    private final int count;
+    private final long count;
     private final Money money;
-    private static final Map<Long, Rank> RANK_CACHE;
-
-    static {
-        RANK_CACHE = new HashMap<>();
-        RANK_CACHE.put(6L, Rank.FIRST);
-        RANK_CACHE.put(5L, Rank.THIRD);
-        RANK_CACHE.put(4L, Rank.FOURTH);
-        RANK_CACHE.put(3L, Rank.FIFTH);
-        RANK_CACHE.put(0L, Rank.MISS);
-    }
+    private static final Map<Long, Rank> RANK_CACHE = Arrays.stream(values())
+            .filter(not(isEqual(Rank.SECOND)))
+            .collect(Collectors.toMap(Rank::getCount, Function.identity()));
 
     Rank(int count, Money money) {
         this.count = count;
@@ -34,14 +29,14 @@ public enum Rank {
         if (count == SECOND.count && hasBonus) {
             return SECOND;
         }
-        return Optional.ofNullable(RANK_CACHE.get(count)).orElse(Rank.MISS);
+        return RANK_CACHE.getOrDefault(count, MISS);
     }
 
     public Money getMoney() {
         return money;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 }

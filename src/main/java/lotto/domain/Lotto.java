@@ -12,13 +12,21 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(int... lottoNumbers) {
-        this.lottoNumbers = Arrays.stream(lottoNumbers)
+        this(Arrays.stream(lottoNumbers)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        validateNoDuplication(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    private void validateNoDuplication(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> lottos = new HashSet<>(lottoNumbers);
+        if (lottos.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(String.format("중복된 숫자는 입력할 수 없습니다. values=%s",lottoNumbers));
+        }
     }
 
     @Override
