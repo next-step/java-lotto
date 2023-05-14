@@ -24,6 +24,6 @@ public class LottoGame {
     }
 
     public void buyLotto(int price) {
-        lottos.buyLotto(price);
+        lottos.buyLotto(new LottoPrice(price));
     }
 }
