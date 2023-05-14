@@ -9,10 +9,9 @@ public class WinningRewardTest {
     @Test
     void 값으로_enum_출력_테스트() {
         int match = 3;
-        WinningReward rewardByMatches = WinningReward.findRewardByMatches(match);
+        WinningReward rewardByMatches = WinningReward.findRewardByMatchCount(match);
 
-        Assertions.assertThat(rewardByMatches.getReward()).isEqualTo(WinningReward.MATCH_3.getReward());
-        Assertions.assertThat(rewardByMatches.getMatch()).isEqualTo(WinningReward.MATCH_3.getMatch());
+        Assertions.assertThat(rewardByMatches).isEqualTo(WinningReward.MATCH_3);
     }
 
 }

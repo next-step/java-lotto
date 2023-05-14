@@ -5,29 +5,28 @@ import lottoauto.domain.LottoService;
 import lottoauto.model.LottoResult;
 import lottoauto.model.Lottos;
 import lottoauto.model.WinningLotto;
+import lottoauto.model.request.LottoRequest;
 import lottoauto.view.InputView;
-import lottoauto.view.ResultView;
+import lottoauto.view.OutputView;
 
 public class LottoAutoApplication {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        int amount = inputView.inputAmount();
 
-        ResultView resultView = new ResultView();
+        int price = InputView.price();
+
         LottoService lottoService = new LottoService();
+        LottoRequest lottoRequest = new LottoRequest(price);
+        Lottos lottos = lottoService.generateLottoNumber(lottoRequest.getLottoQuantity());
 
-        Lottos lottos = lottoService.generateLottoNumber(amount);
+        OutputView.lottos(lottos);
+        List<Integer> winningNumbers = InputView.winningNumber();
+        int bonusNumber = InputView.bonus();
 
-        resultView.printLottos(lottos);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        LottoResult lottoResult = winningLotto.result(lottos);
 
-        List<Integer> winningNumbers = inputView.inputLastWinningNumber();
-
-        WinningLotto winningLotto = WinningLotto.of(lottos, winningNumbers);
-        LottoResult lottoResult = winningLotto.compareWinningLottoNumber();
-
-        resultView.printStatistics(lottoResult);
-        resultView.printRate(lottoResult.getRate(amount));
+        OutputView.statistics(lottoResult, price);
 
     }
 }

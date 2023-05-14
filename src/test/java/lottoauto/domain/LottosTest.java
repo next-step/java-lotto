@@ -1,6 +1,5 @@
 package lottoauto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lottoauto.LottoFixture;
@@ -35,14 +34,13 @@ public class LottosTest {
     @Test
     void lottoResult_수익률_테스트() {
         int buyPrice = 10000;
-        int matchCount = 3;
-        List<Integer> result = LottoFixture.intListFixture(matchCount);
+        WinningReward winningReward = WinningReward.MATCH_3;
+        List<WinningReward> result = List.of(winningReward);
 
-        int count = Collections.frequency(result, matchCount);
-        double reward = WinningReward.findRewardByMatches(matchCount).getReward();
+        int count = Collections.frequency(result, winningReward);
         LottoResult lottoResult = new LottoResult(result);
 
         Assertions.assertThat(lottoResult.getMatchCount().get(0)).isEqualTo(result.get(0));
-        Assertions.assertThat(lottoResult.getRate(buyPrice)).isEqualTo(Math.round(count * reward / buyPrice));
+        Assertions.assertThat(lottoResult.getRate(buyPrice)).isEqualTo(Math.round(count * (double) winningReward.getReward() / buyPrice));
     }
 }
