@@ -2,10 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.RankType;
 import lotto.domain.Statistics;
-
-import java.util.Map;
 
 public class ResultView {
 
@@ -16,15 +13,6 @@ public class ResultView {
             System.out.println("[" + lotto.getLottoToString() + "]");
         }
         System.out.println();
-    }
-
-    public static void printStatistics(Map<RankType, Integer> statisticsMap) {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-
-        statisticsMap.entrySet().stream().sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> System.out.println(entry.getKey() + "-" + entry.getValue() + "개"));
     }
 
     public static void printStatistics(Statistics statistics) {
