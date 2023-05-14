@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.test.ForceLottoCreationStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ public class LottoCreationStrategyTest {
 
     private static final int PURCHASE_COUNT = 3;
     private static final int EXPECTED_WINNING_COUNT = 6;
-    private static final List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private static final WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 9);
 
     @Test
     @DisplayName("[요구사항 1] shuffle하지 않고 PURCHASE_COUNT만큼 복권을 만들면 winningLotto가 PURCHASE_COUNT만큼 생성되어야 한다.")
@@ -25,6 +26,6 @@ public class LottoCreationStrategyTest {
         List<Lotto> createdLottos = lottos.getCreatedLottos();
 
         // then: [1, 2, 3, 4, 5, 6]짜리 복권이 3개 만들어져야 함. 즉, 각 로또가 winningLotto와 숫자 6개가 모두 일치해야 한다.
-        createdLottos.forEach(createdLotto -> assertThat(createdLotto.getMatchNumbers(winningLotto)).isEqualTo(EXPECTED_WINNING_COUNT));
+        createdLottos.forEach(createdLotto -> assertThat(winningLotto.getMatchNumbers(createdLotto)).isEqualTo(EXPECTED_WINNING_COUNT));
     }
 }
