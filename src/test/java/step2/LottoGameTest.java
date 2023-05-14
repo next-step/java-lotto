@@ -2,6 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import step1.Formula;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoGameTest {
 
@@ -33,6 +35,14 @@ public class LottoGameTest {
         * 5개 당첨 : 0개
         * 6개 당첨 : 0개
         * */
+    }
+
+    @Test
+    void 로또_한장값_이하로_입력() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(()-> {
+                    lottoGame.makeTickets(100);
+                }).withMessageMatching("1000원 이하로 입력.");
     }
 
     @Test

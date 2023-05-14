@@ -9,6 +9,7 @@ public class LottoGame {
     public static final int DECIMAL_POINT = 2;
 
     public List<Ticket> makeTickets(int money) {
+        moneyCheck(money);
         List<Ticket> tickets = new ArrayList<>();
 
         int ticketCount = money / TICKET_PRICE;
@@ -17,6 +18,12 @@ public class LottoGame {
         }
 
         return tickets;
+    }
+
+    private static void moneyCheck(int money) {
+        if(money < TICKET_PRICE){
+            throw new IllegalArgumentException("1000원 이하로 입력.");
+        }
     }
 
     public double resultRate(int money, Map<Integer, Integer> winnerMap){
