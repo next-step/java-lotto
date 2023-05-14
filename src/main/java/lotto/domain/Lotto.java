@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.result.Rank;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,11 +39,11 @@ public class Lotto {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::of));
     }
 
-    public int getHitCount(Lotto winningLotto) {
-        return winningLotto.lotto.stream()
+    public Rank getRank (Lotto winningLotto) {
+        return Rank.valueOf(winningLotto.lotto.stream()
                 .filter(lotto::contains)
                 .map(e -> 1)
-                .reduce(0, Integer::sum);
+                .reduce(0, Integer::sum));
     }
 
     @Override

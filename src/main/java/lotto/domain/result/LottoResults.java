@@ -18,9 +18,9 @@ public class LottoResults {
                 .collect(Collectors.toList()));
     }
 
-    public void win(int hitCount) {
+    public void win(Rank rank) {
         for (LottoResult lottoResult : lottoResults) {
-            lottoResult.win(hitCount);
+            lottoResult.win(rank);
         }
     }
 

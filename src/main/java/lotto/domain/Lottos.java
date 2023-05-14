@@ -25,9 +25,8 @@ public class Lottos {
 
     public LottoResults getLottoResult(Lotto winningNumber) {
         LottoResults lottoResults = LottoResults.of();
-        for (Lotto lottoNumbers : lottos) {
-            int hitCount = lottoNumbers.getHitCount(winningNumber);
-            lottoResults.win(hitCount);
+        for (Lotto lotto : lottos) {
+            lottoResults.win(lotto.getRank(winningNumber));
         }
         return lottoResults;
     }
