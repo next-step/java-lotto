@@ -3,10 +3,11 @@ package lotto;
 import lotto.controller.LottoController;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumberGenerator;
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class LottoMain {
@@ -15,8 +16,10 @@ public class LottoMain {
                 new InputView(new Scanner(System.in)),
                 new ResultView(),
                 new LottoGame(
-                        new LottoNumberGenerator(),
-                        new ArrayList<>())
+                        new Lottos(
+                                Collections.emptyList(),
+                                new LottoNumberGenerator())
+                )
         );
 
         lottoController.buy();

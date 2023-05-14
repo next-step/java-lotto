@@ -1,49 +1,29 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static lotto.constant.Constants.LOTTO_PRICE;
 
 public class LottoGame {
-    private final LottoNumberGenerator lottoNumberGenerator;
-    private final List<Lotto> lottos;
 
-    public LottoGame(LottoNumberGenerator lottoNumberGenerator, List<Lotto> lottos) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    private final Lottos lottos;
+
+    public LottoGame(Lottos lottos) {
         this.lottos = lottos;
     }
 
-    public void buyLotto(int price) {
-        checkPrice(price);
-        int lottoCount = price / LOTTO_PRICE;
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(lottoNumberGenerator.lotto()));
-        }
-    }
-
-    public List<Lotto> lottos() {
-        return lottos;
-    }
-
-    private List<LottoMatcher> matchResult(WinningNumbers winningNumbers) {
-        return lottos.stream()
-                .map(lotto -> winningNumbers.match(lotto))
-                .collect(Collectors.toList());
-    }
-
-    private static void checkPrice(int price) {
-        if (LOTTO_PRICE > price) {
-            throw new IllegalArgumentException("로또 구매 비용이 부족합니다.");
-        }
+    public List<List<Integer>> lottos() {
+        return lottos.result();
     }
 
     public LottoScore score(WinningNumbers winningNumbers) {
-        return new LottoScore(matchResult(winningNumbers));
+        List<LottoMatcher> lottoMatchers = lottos.matchResult(winningNumbers);
+        return new LottoScore(lottoMatchers);
     }
 
     public int quantity() {
-        return lottos.size();
+        return lottos.quantity();
+    }
+
+    public void buyLotto(int price) {
+        lottos.buyLotto(price);
     }
 }
