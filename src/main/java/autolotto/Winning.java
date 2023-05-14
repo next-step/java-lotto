@@ -2,9 +2,11 @@ package autolotto;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public enum Winning {
+    ZERO(0, 0),
+    ONE(1, 0),
+    TWO(2, 0),
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
@@ -27,8 +29,7 @@ public enum Winning {
     }
 
     public static Winning winningOf(int matchCount) {
-        return Optional.ofNullable(winningsMap.get(matchCount))
-                .orElseThrow(() -> new IllegalArgumentException("2개 이하는 당첨금을 받을 수 없습니다"));
+        return winningsMap.get(matchCount);
     }
 
     public int winningMoney() {

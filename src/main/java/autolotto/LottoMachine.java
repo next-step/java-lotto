@@ -5,7 +5,9 @@ import autolotto.lotto.LottoGenerator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoMachine {
     private final static int LOTTO_PRICE = 1000;
@@ -42,5 +44,25 @@ public class LottoMachine {
         int totalWinnings = this.wallet.totalWinningMoneyOf(winningNumbers);
         return BigDecimal.valueOf(totalWinnings)
                 .divide(BigDecimal.valueOf(this.inputMoney), 2, RoundingMode.HALF_UP);
+    }
+
+    public Map<Integer, Integer> winningState(WinningNumbers winningNumbers) {
+        Map<Integer, Integer> lottoCountPerEachMatchingCount = setZeroToAllMatchingCount();
+
+        for (Lotto lotto : this.wallet.allLotteries()) {
+            int matchingCount = lotto.matchCount(winningNumbers);
+            Integer count = lottoCountPerEachMatchingCount.getOrDefault(matchingCount, 0);
+            lottoCountPerEachMatchingCount.put(matchingCount, count + 1);
+        }
+
+        return lottoCountPerEachMatchingCount;
+    }
+
+    private Map<Integer, Integer> setZeroToAllMatchingCount() {
+        HashMap<Integer, Integer> lottoCountPerEachMatchingCount = new HashMap<>();
+        for (int i = 0; i < 6; i++) {
+            lottoCountPerEachMatchingCount.put(i, 0);
+        }
+        return lottoCountPerEachMatchingCount;
     }
 }

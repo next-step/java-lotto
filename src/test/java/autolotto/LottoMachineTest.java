@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class LottoMachineTest {
 
@@ -33,5 +34,16 @@ public class LottoMachineTest {
         BigDecimal profitRate = lottoMachine.profitRate(winningNumbers);
 
         Assertions.assertThat(profitRate).isEqualTo(expectedProfitRate);
+    }
+
+    @Test
+    void 당첨번호가_주어지면_일치_개수별_로또_개수를_알려준다() {
+        LottoMachine lottoMachine = new LottoMachine(new LottoGenerator(new FixedNumberShuffler()), 3000);
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 21, 22, 23));
+
+        Map<Integer, Integer> numberOfEachMatchingCount = lottoMachine.winningState(winningNumbers);
+
+        Assertions.assertThat(numberOfEachMatchingCount.get(0)).isEqualTo(0);
+        Assertions.assertThat(numberOfEachMatchingCount.get(3)).isEqualTo(3);
     }
 }
