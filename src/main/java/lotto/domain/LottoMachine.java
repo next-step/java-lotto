@@ -35,22 +35,14 @@ public class LottoMachine {
     }
 
     public Lottos generateLotto() {
-        return createLottos();
+        return LottosGenerator.generate(numberOfAutoLotto);
     }
 
     public Lottos generateLotto(List<String> manualNumbers) {
         if (!numberOfManualLotto.isEqual(manualNumbers.size())) {
             throw new IllegalArgumentException("입력한 수동 로또 장수와 수동 로또 번호가 일치하지 않습니다.");
         }
-        return createLottos(manualNumbers);
-    }
-
-    private Lottos createLottos() {
-        return new Lottos(numberOfAutoLotto.getNumber());
-    }
-
-    private Lottos createLottos(List<String> manualNumbers) {
-        return new Lottos(manualNumbers);
+        return LottosGenerator.generate(manualNumbers);
     }
 
     private int calculateNumberOfAutoLotto(int cost, int numberOfManualLottos) {

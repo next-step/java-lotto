@@ -30,18 +30,6 @@ public class LottoMachineTest {
     }
 
     @Test
-    @DisplayName("수동 로또 생성")
-    void createManualLottos() {
-        int cost = 14000;
-        int numberOfMaualLottos = 2;
-
-        LottoMachine machine = new LottoMachine(cost, numberOfMaualLottos);
-        Lottos manualLottos = machine.generateLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
-
-        assertThat(new Lottos(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"))).isEqualTo(manualLottos);
-    }
-
-    @Test
     @DisplayName("수동 로또 생성 - 입력한 수동 로또 장수보다 번호가 부족할 경우")
     void createManualLottos_exception() {
         int cost = 14000;

@@ -15,7 +15,7 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(int numberOfLotto) {
+    public Lottos(Positive numberOfLotto) {
         this.lottos = createAutoLottos(numberOfLotto);
     }
 
@@ -23,8 +23,8 @@ public class Lottos {
         this.lottos = createManualLottos(manualLottosNumbers);
     }
 
-    private List<Lotto> createAutoLottos(int numberOfLotto) {
-        return IntStream.range(MIN_NUM_OF_LOTTO, numberOfLotto).boxed().map(lotto -> createAutoLotto()).collect(Collectors.toList());
+    private List<Lotto> createAutoLottos(Positive numberOfLotto) {
+        return IntStream.range(MIN_NUM_OF_LOTTO, numberOfLotto.getNumber()).boxed().map(lotto -> createAutoLotto()).collect(Collectors.toList());
     }
 
     private List<Lotto> createManualLottos(List<String> manualLottosNumbers) {
