@@ -25,16 +25,17 @@ class LottoPrizeTest {
 
 
     @ParameterizedTest
-    @DisplayName("로또 당첨 순위 테스트")
+    @DisplayName("로또 당첨 순위 테스트 (보너스 번호 미포함)")
     @CsvSource({"6, FIRST", "5, THIRD", "4, FOURTH", "3, FIFTH", "0, MISS"})
     void lotto_prize_money_rank_test(int value, LottoPrize expected) {
         assertEquals(expected, LottoPrize.valueOf(value, false));
     }
 
-    @Test
-    @DisplayName("로또 2등 당첨 순위 테스트")
-    void lotto_prize_money_rank_second() {
-        assertEquals(LottoPrize.SECOND, LottoPrize.valueOf(5, true));
+    @ParameterizedTest
+    @DisplayName("로또 당첨 순위 테스트 (보너스 번호 포함)")
+    @CsvSource({"6, FIRST", "5, SECOND", "4, FOURTH", "3, FIFTH", "0, MISS"})
+    void lotto_prize_money_rank_test_hasBonusNumber(int value, LottoPrize expected) {
+        assertEquals(expected, LottoPrize.valueOf(value, true));
     }
 
 }

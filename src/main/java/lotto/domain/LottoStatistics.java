@@ -49,7 +49,11 @@ public class LottoStatistics {
      * 모든 로또 티켓을 구매하는 총 비용을 계산
      */
     private double calculateCost() {
-        return lottoList.getLottoList().size() * PRICE_OF_LOTTO;
+        final int ticketCount = lottoList
+                .getLottoList()
+                .size();
+
+        return ticketCount * PRICE_OF_LOTTO;
     }
 
     public Map<LottoPrize, Integer> getMatchCountsMap() {

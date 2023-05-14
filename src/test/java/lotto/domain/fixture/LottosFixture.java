@@ -18,18 +18,19 @@ public class LottosFixture {
 
     static Lotto 로또_자동_2 = new Lotto(Arrays.asList(1, 11, 13, 24, 5, 6));
 
-    static Lotto 로또_자동_3 = new Lotto(Arrays.asList(1, 12, 13, 24, 35, 6));
+    static Lotto 로또_자동_3 = new Lotto(Arrays.asList(1, 2, 13, 14, 34, 35));
+
     public static Lottos 로또_티켓;
 
-    private static List<Lotto> lottoList = new ArrayList<>(Arrays.asList(로또_자동_1, 로또_자동_2, 로또_자동_3));
+    public static List<Lotto> 로또_티켓별_번호 = new ArrayList<>(Arrays.asList(로또_자동_1, 로또_자동_2, 로또_자동_3));
 
-    private static final LottoStrategy 자동 = new AutoLotto();
+    public static final LottoStrategy 자동_로또 = new AutoLotto();
 
     static {
-        로또_티켓 = new Lottos(자동, 3) {
+        로또_티켓 = new Lottos(자동_로또, 3) {
             @Override
             public List<Lotto> createLotto(LottoStrategy lottoStrategy, int count) {
-                return lottoList;
+                return 로또_티켓별_번호;
             }
 
             @Override
@@ -37,5 +38,7 @@ public class LottosFixture {
                 return super.getMatchCounts(winnerLotto);
             }
         };
+
     }
+
 }
