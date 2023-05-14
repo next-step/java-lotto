@@ -21,17 +21,9 @@ public class InputViewTest {
     @Test
     void right_price_input_test() {
         InputView inputView = new InputView(14000);
-        assertThat(inputView.getPrice()).isEqualTo(14);
+        assertThat(inputView.getPrice()).isEqualTo(14000);
     }
 
-    @DisplayName("거스름돈이 남는 금액을 입력했는 경우 실패 테스트")
-    @Test
-    void wrong_price_input_test() {
-        assertThatThrownBy(() -> {
-            InputView inputView = new InputView(14500);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또의 1장당 가격은 1,000원입니다. 원하는 장수 만큼의 금액을 입력해주세요.");
-    }
 
     @DisplayName("6개의 당첨 번호를 입력했을 경우 성공 테스트")
     @ParameterizedTest

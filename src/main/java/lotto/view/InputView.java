@@ -1,17 +1,18 @@
 package lotto.view;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
-    private static final int UNIT_PRICE = 1000;
     private int price;
-    private HashSet<Integer> wonNumbers = new HashSet<>();
+    private Set<Integer> wonNumbers = new HashSet<>();
 
     public InputView(Question question) {
         Scanner scanner = new Scanner(System.in);
         if (question.equals(Question.PRICE_QUESTION)) {
             System.out.println(Question.PRICE_QUESTION.getQuestionValue());
-            price = amonut(scanner.nextInt());
+            price = scanner.nextInt();
         }
         if (question.equals(Question.WON_NUMBER_QUESTION)) {
             System.out.println(Question.WON_NUMBER_QUESTION.getQuestionValue());
@@ -20,7 +21,7 @@ public class InputView {
     }
 
     public InputView(int price) {
-        this.price = amonut(price);
+        this.price = price;
     }
 
     public InputView(String wonNumbers) {
@@ -31,15 +32,8 @@ public class InputView {
         return price;
     }
 
-    public HashSet<Integer> getWonNumbers() {
+    public Set<Integer> getWonNumbers() {
         return wonNumbers;
-    }
-
-    public int amonut(int price) {
-        if (price % UNIT_PRICE != 0) {
-            throw new IllegalArgumentException("로또의 1장당 가격은 1,000원입니다. 원하는 장수 만큼의 금액을 입력해주세요.");
-        }
-        return price / UNIT_PRICE;
     }
 
     private HashSet<Integer> getWonNumbers(String answer) {
