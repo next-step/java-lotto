@@ -5,14 +5,14 @@ import autolotto.lotto.Lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Wallet {
+public class LottoWallet {
     private final List<Lotto> lottoList;
 
-    public Wallet() {
+    public LottoWallet() {
         this.lottoList = new ArrayList<>();
     }
 
-    public Wallet(List<Lotto> lottoList) {
+    public LottoWallet(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 

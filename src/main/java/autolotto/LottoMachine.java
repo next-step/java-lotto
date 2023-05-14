@@ -11,19 +11,19 @@ public class LottoMachine {
     private final static int LOTTO_PRICE = 1000;
 
     private final int inputMoney;
-    private final Wallet wallet;
+    private final LottoWallet wallet;
 
     public LottoMachine(LottoGenerator lottoGenerator, int inputMoney) {
         this(inputMoney, initWallet(lottoGenerator, inputMoney));
     }
 
-    public LottoMachine(int inputMoney, Wallet wallet) {
+    public LottoMachine(int inputMoney, LottoWallet wallet) {
         this.inputMoney = inputMoney;
         this.wallet = wallet;
     }
 
-    private static Wallet initWallet(LottoGenerator lottoGenerator, int inputMoney) {
-        Wallet wallet = new Wallet();
+    private static LottoWallet initWallet(LottoGenerator lottoGenerator, int inputMoney) {
+        LottoWallet wallet = new LottoWallet();
         for (int i = 0; i < calculateLottoCount(inputMoney); i++) {
             wallet.addLotto(lottoGenerator.generateLotto());
         }

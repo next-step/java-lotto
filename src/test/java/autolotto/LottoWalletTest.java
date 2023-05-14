@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-class WalletTest {
+class LottoWalletTest {
     private final LottoGenerator lottoGenerator = new LottoGenerator(new FixedNumberShuffler());
     private final WinningNumbers fixedWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 22, 23, 24));
 
     @Test
     void 지갑에_로또를_하나_추가할_수_있다() {
-        Wallet wallet = new Wallet();
+        LottoWallet wallet = new LottoWallet();
 
         wallet.addLotto(lottoGenerator.generateLotto());
 
@@ -26,14 +26,14 @@ class WalletTest {
     void 지갑을_생성하며_한번에_로또_여러개를_추가_할_수_있다() {
         int three = 3;
 
-        Wallet wallet = new Wallet(lottoGenerator.generateMultipleLotto(three));
+        LottoWallet wallet = new LottoWallet(lottoGenerator.generateMultipleLotto(three));
 
         Assertions.assertThat(wallet.lottoSize()).isEqualTo(3);
     }
 
     @Test
     void 지갑_내_로또들에_대한_총_당첨금액을_알려준다() {
-        Wallet wallet = new Wallet(lottoGenerator.generateMultipleLotto(3));
+        LottoWallet wallet = new LottoWallet(lottoGenerator.generateMultipleLotto(3));
         int expectedTotalWinnings = Winning.THREE.winningMoney() * 3;
 
         int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers);
@@ -43,11 +43,11 @@ class WalletTest {
 
     @Nested
     class 지갑_내_로또들_중_로또의_개수 {
-        private Wallet wallet;
+        private LottoWallet wallet;
 
         @BeforeEach
         void setUp() {
-            wallet = new Wallet(lottoGenerator.generateMultipleLotto(3));
+            wallet = new LottoWallet(lottoGenerator.generateMultipleLotto(3));
         }
 
         @Test
