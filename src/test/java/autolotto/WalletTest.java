@@ -1,5 +1,8 @@
 package autolotto;
 
+import autolotto.lotto.Lotto;
+import autolotto.lotto.LottoGenerator;
+import autolotto.lotto.fixture.OriginalOrderShuffler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;

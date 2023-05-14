@@ -1,5 +1,6 @@
-package autolotto;
+package autolotto.lotto;
 
+import autolotto.lotto.fixture.OriginalOrderShuffler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

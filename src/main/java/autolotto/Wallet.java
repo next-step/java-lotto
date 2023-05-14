@@ -1,5 +1,7 @@
 package autolotto;
 
+import autolotto.lotto.Lotto;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;

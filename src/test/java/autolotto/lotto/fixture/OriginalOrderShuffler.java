@@ -1,4 +1,6 @@
-package autolotto;
+package autolotto.lotto.fixture;
+
+import autolotto.lotto.Shuffler;
 
 import java.util.ArrayList;
 import java.util.List;

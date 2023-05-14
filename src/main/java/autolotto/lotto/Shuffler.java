@@ -1,4 +1,4 @@
-package autolotto;
+package autolotto.lotto;
 
 import java.util.List;
 
