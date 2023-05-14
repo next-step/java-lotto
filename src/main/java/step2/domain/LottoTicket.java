@@ -29,12 +29,12 @@ public class LottoTicket {
         return this.lottoTicket.contains(number);
     }
 
-    public Rank checkLottoTicket(LottoTicket compareTarget, int bonusNumber) {
+    public Rank checkLottoTicket(LottoTicket winningTicket, int bonusNumber) {
         int count = (int) lottoTicket.stream()
-                .filter(i -> compareTarget.isContain(i))
+                .filter(i -> winningTicket.isContain(i))
                 .count();
 
-       if(count == 5 && compareTarget.isContain(bonusNumber)) {
+       if(count == 5 && isContain(bonusNumber)) {
            return Rank.SECOND;
        }
 

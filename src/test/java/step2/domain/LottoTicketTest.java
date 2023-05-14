@@ -37,7 +37,7 @@ class LottoTicketTest {
     @MethodSource("secondRankSample")
     public void 로또_2등_당첨(List<Integer> numbers, List<Integer> winningNumbers, int bonusNumber) throws Exception {
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
-        assertThat(winningTicket.checkLottoTicket(new LottoTicket(numbers), bonusNumber)).isEqualTo(Rank.SECOND);
+        assertThat(new LottoTicket(numbers).checkLottoTicket(winningTicket, bonusNumber)).isEqualTo(Rank.SECOND);
     }
 
     static Stream<Arguments> secondRankSample() throws Throwable {

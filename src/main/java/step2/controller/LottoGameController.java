@@ -23,7 +23,7 @@ public class LottoGameController {
 
         List<LottoTicket> lottoTickets = lottoGames.buyLottoGame(gameCount);
         ResultView.printLottoTicket(lottoTickets);
-        LottoTicket winningNumber = lottoGames.readWinningNumber(InputView.readWinningNumbers());
+        LottoTicket winningTicket = lottoGames.readWinningNumber(InputView.readWinningNumbers());
         int bonusNumber = InputView.readBonusNumber();
 
         ResultView.printBlankLine();
@@ -31,7 +31,7 @@ public class LottoGameController {
 
         LottoResultReport lottoResultReport = new LottoResultReport();
         for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResultReport.recordRank(winningNumber.checkLottoTicket(lottoTicket, bonusNumber));
+            lottoResultReport.recordRank(lottoTicket.checkLottoTicket(winningTicket, bonusNumber));
         }
 
         ResultView.printResultReport(lottoResultReport);
