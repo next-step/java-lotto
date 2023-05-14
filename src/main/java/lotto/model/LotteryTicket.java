@@ -14,8 +14,8 @@ public class LotteryTicket {
         return new LotteryTicket(numberGenerator.generate());
     }
 
-    public int compare(WinNumbers winNumbers) {
-        return winNumbers.compare(this.numbers);
+    public int matchCount(WinNumbers winNumbers) {
+        return winNumbers.matchCount(this.numbers);
     }
 
     public int size() {

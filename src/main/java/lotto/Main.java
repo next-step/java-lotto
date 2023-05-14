@@ -7,7 +7,6 @@ import lotto.model.AutoLotteryNumberGenerator;
 import lotto.view.OutputView;
 import lotto.view.InputView;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,7 +18,7 @@ public class Main {
         OutputView.showLotteryTickets(lotteryTickets);
 
         final Set<Integer> winNumbers = InputView.pickWinNumbers();
-        final Map<Win, Integer> winTotal = lotteryTickets.getWinTotal(new WinNumbers(winNumbers));
-        OutputView.showResult(winTotal, money);
+        final Map<Win, Integer> totalWin = lotteryTickets.getTotalWin(new WinNumbers(winNumbers));
+        OutputView.showResults(totalWin, money);
     }
 }

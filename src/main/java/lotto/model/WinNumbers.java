@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,7 @@ public class WinNumbers {
         this.numbers = numbers.stream().map(LotteryNumber::of).collect(Collectors.toSet());
     }
 
-    public int compare(Set<LotteryNumber> others) {
+    public int matchCount(Set<LotteryNumber> others) {
         Set<LotteryNumber> intersection = new HashSet<>(numbers);
         intersection.retainAll(others);
         return intersection.size();

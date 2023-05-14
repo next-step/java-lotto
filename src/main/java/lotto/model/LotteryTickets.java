@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LotteryTickets {
@@ -24,15 +25,12 @@ public class LotteryTickets {
         return new LotteryTickets(tickets);
     }
 
-    public Map<Win, Integer> getWinTotal(WinNumbers winNumbers) {
-        Map<Integer, Integer> groupedCount = getWinCountGroupMap(winNumbers);
-        return Win.convertToWinMap(groupedCount);
-    }
-
-    private Map<Integer, Integer> getWinCountGroupMap(WinNumbers winNumbers) {
+    public Map<Win, Integer> getTotalWin(WinNumbers winNumbers) {
         return tickets.stream()
+                .map(ticket -> ticket.matchCount(winNumbers))
+                .map(Win::from)
                 .collect(Collectors.groupingBy(
-                        ticket -> ticket.compare(winNumbers), Collectors.summingInt(ticket -> 1))
+                        Function.identity(), Collectors.summingInt(win -> 1))
                 );
     }
 
@@ -43,4 +41,5 @@ public class LotteryTickets {
     public List<LotteryTicket> getTickets() {
         return List.copyOf(tickets);
     }
+
 }

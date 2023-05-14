@@ -2,41 +2,32 @@ package lotto.model;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.EnumMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum Win {
+    DEFAULT(0, 0),
     WIN_3(3, 5000),
     WIN_4(4, 50_000),
     WIN_5(5, 1_500_000),
     WIN_6(6, 2_000_000_000);
 
-    private int points;
-    private int prize;
+    private final int points;
+    private final int prize;
+    private static final Map<Integer, Win> VALUE_MAP = Arrays.stream(Win.values()).collect(Collectors.toMap(Win::getPoints, Function.identity()));
 
     Win(int points, int prize) {
         this.points = points;
         this.prize = prize;
     }
 
-    public static Map<Win, Integer> convertToWinMap(Map<Integer, Integer> map) {
-        Map<Win, Integer> winTotal = mapOf();
-        map.forEach((key, value) -> putIfValid(winTotal, key, value));
-        return winTotal;
-    }
-
-    private static void putIfValid(Map<Win, Integer> winTotal, Integer key, Integer value) {
-        if (Win.isValidWinPoints(key)) {
-            winTotal.put(Win.valueOf("WIN_" + key), value);
+    public static Win from(Integer winCount) {
+        if (isValidWinPoints(winCount)) {
+            return VALUE_MAP.get(winCount);
         }
-    }
-
-    private static Map<Win, Integer> mapOf() {
-        Map<Win, Integer> winTotal = new EnumMap<>(Win.class);
-        for (int i = 0; i < Win.values().length; i++) {
-            winTotal.put(Win.values()[i], 0);
-        }
-        return winTotal;
+        return Win.DEFAULT;
     }
 
     public static boolean isValidWinPoints(int points) {
@@ -46,7 +37,7 @@ public enum Win {
     public static int totalMoney(Map<Win, Integer> winTotal) {
         int sum = 0;
         for (int i = 0; i < Win.values().length; i++) {
-            sum += Win.values()[i].getPrize() * winTotal.get(Win.values()[i]);
+            sum += Win.values()[i].getPrize() * winTotal.getOrDefault(Win.values()[i], 0);
         }
         return sum;
     }
