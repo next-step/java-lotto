@@ -12,7 +12,7 @@ public class LottoTest {
     Lotto lotto;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         lotto = new Lotto();
     }
 
@@ -27,7 +27,7 @@ public class LottoTest {
     }
 
     @Test
-    public void equalsCountTest(){
+    public void equalsCountTest() {
         List<Number> list = List.of(Number.createNumber(1), Number.createNumber(2), Number.createNumber(3), Number.createNumber(4), Number.createNumber(5), Number.createNumber(6));
         lotto = Lotto.createLotto(list);
 
@@ -40,7 +40,7 @@ public class LottoTest {
     }
 
     @Test
-    public void lottoSortTest(){
+    public void lottoSortTest() {
         List<Number> list = new java.util.ArrayList<>(List.of(Number.createNumber(33), Number.createNumber(22), Number.createNumber(3), Number.createNumber(41), Number.createNumber(5), Number.createNumber(10)));
         Lotto actualLotto = Lotto.createLotto(list);
 
