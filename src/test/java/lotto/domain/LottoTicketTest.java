@@ -32,14 +32,14 @@ class LottoTicketTest {
     LottoTicket ticket = LottoTicket.bySize(6, LottoNumbersSelectorFactory.oneToSix());
 
     List<LottoNumber> firstPlace = LottoNumbersSelectorFactory.oneToFiveAndSeven().selectBy(6);
-    LottoNumber bonusNumber = LottoNumbers.pick("7");
+    LottoNumber bonusNumber = LottoNumbers.pick("6");
 
     assertThat(ticket.score(firstPlace, bonusNumber)).isEqualTo(Winning.SECOND);
   }
 
   @Test
   @DisplayName("3등에 대해 성공적으로 계산한다")
-  public void thridPlaceScoreTest() {
+  public void thirdPlaceScoreTest() {
     LottoTicket ticket = LottoTicket.bySize(6, LottoNumbersSelectorFactory.oneToSix());
 
     List<LottoNumber> firstPlace = LottoNumbersSelectorFactory.oneToFiveAndSeven().selectBy(6);
