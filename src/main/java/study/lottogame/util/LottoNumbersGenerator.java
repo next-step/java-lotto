@@ -17,6 +17,9 @@ public class LottoNumbersGenerator {
     }
   }
 
+  private LottoNumbersGenerator() {
+  }
+
   public static List<LottoNumber> generate() {
     return getAutoLottoNumbers();
   }

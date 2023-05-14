@@ -20,7 +20,7 @@ public class ExpressionTest {
         .isInstanceOf(IllegalArgumentException.class);
   }
 
-  @DisplayName("숫자가 와야할 순서에 숫자가 아닌 문자를 만나면 IllegalArgumentException을 던진다.")
+  @DisplayName("숫자가 와야할 순서에 숫자가 아닌 문자를 만나면 Exception을 던진다.")
   @ParameterizedTest
   @ValueSource(strings = {"1 + +", "+ 1 +", "+ + 1"})
   public void calculate_throwException_outOfOrderNumber(String input) {
@@ -30,7 +30,7 @@ public class ExpressionTest {
         .isInstanceOf(IllegalArgumentException.class);
   }
 
-  @DisplayName("사칙연산이 와야할 순서에 사칙연산이 아닌 문자를 만나면 IllegalArgumentException을 던진다")
+  @DisplayName("사칙연산이 와야할 순서에 사칙연산이 아닌 문자를 만나면 Exception을 던진다")
   @ParameterizedTest
   @ValueSource(strings = {"1 1 1", "1 ? 1", "1 ^ 1"})
   public void calculate_throwException_outOfOrderOperator(String input) {

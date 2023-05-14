@@ -1,5 +1,7 @@
 package study.lottogame.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -9,12 +11,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   private static class LottoNumberCache {
 
-    static final LottoNumber[] cache = new LottoNumber[MAX_LOTTO_NUMBER - MIN_LOTTO_NUMBER + 1];
+    static final Map<Integer, LottoNumber> cacheMap = new HashMap<>();
 
     static {
-      int value = MIN_LOTTO_NUMBER;
-      for (int i = 0; i < cache.length; i++) {
-        cache[i] = new LottoNumber(value++);
+      for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+        cacheMap.put(i, new LottoNumber(i));
       }
     }
 
@@ -30,10 +31,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   public static LottoNumber valueOf(final int lottoNumber) {
     if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
-      throw new IllegalArgumentException("유효한 입력이 아닙니다.");
+      throw new IllegalArgumentException(
+          "로또번호는 " + MIN_LOTTO_NUMBER + "~" + MAX_LOTTO_NUMBER + "범위로 입력 가능합니다.");
     }
 
-    return LottoNumberCache.cache[lottoNumber - MIN_LOTTO_NUMBER];
+    return LottoNumberCache.cacheMap.get(lottoNumber);
   }
 
   @Override

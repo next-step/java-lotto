@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputValueTest {
 
-  @DisplayName("입력값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException을 던진다.")
+  @DisplayName("입력값이 null이거나 빈 공백 문자일 경우 Exception을 던진다.")
   @Test
   public void input_throwsException_nullOrEmptyInput() {
     assertThatThrownBy(() -> new InputValue(null)).isInstanceOf(IllegalArgumentException.class);
@@ -27,7 +27,7 @@ public class InputValueTest {
     assertThat("hi").isIn(retInputArr);
   }
 
-  @DisplayName("split() 메서드를 이용해 분리된 문자열배열 중 공백이 있는 경우 IllegalArgumentException을 던진다.")
+  @DisplayName("split() 메서드를 이용해 분리된 문자열배열 중 공백이 있는 경우 Exception을 던진다.")
   @Test
   public void inputSplit_throwsException_emptyValue() {
     InputValue input = new InputValue("hi  hi  hi");

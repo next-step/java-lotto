@@ -3,7 +3,6 @@ package study.lottogame.domain;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -15,20 +14,21 @@ public class Lotteries {
     this.lotteries = lotteries;
   }
 
-  public GameResult calculateGameResult(Lottery prizeLottery, LottoNumber bonusLottoNumber) {
-    Map<Rank, Integer> prizeStaticsMap = lotteries.stream()
-        .map(lottery -> getRank(prizeLottery, bonusLottoNumber, lottery))
-        .collect(Collectors.toMap(
-            Function.identity(), r -> 1, Integer::sum, () -> new EnumMap<>(Rank.class))
-        );
+  public GameResult calculateGameResult(WinningLottery winningLottery) {
+    if(winningLottery == null){
+      throw new IllegalArgumentException("당첨 로또번호와 보너스 로또번호는 필수 값입니다.");
+    }
+
+    EnumMap<Rank, Integer> prizeStaticsMap = lotteries.stream()
+        .map(lottery -> winningLottery.getRank(lottery))
+        .collect(Collectors.groupingBy(Function.identity(), () -> new EnumMap<>(Rank.class),
+            Collectors.summingInt(value -> 1)));
 
     return new GameResult(prizeStaticsMap);
   }
 
-  private Rank getRank(Lottery prizeLottery, LottoNumber bonusLottoNumber, Lottery lottery) {
-    int countOfMatch = lottery.matchLottoNumbers(prizeLottery);
-    boolean matchBonus = lottery.matchLottoNumber(bonusLottoNumber);
-    return Rank.valueOf(countOfMatch, matchBonus);
+  public void addLottery(Lottery lottery) {
+    lotteries.add(lottery);
   }
 
   public List<Lottery> getLotteries() {

@@ -12,7 +12,7 @@ public class Lottery {
 
   public Lottery(final Set<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-      throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+      throw new IllegalArgumentException("로또는 중복되지 않는 " + LOTTO_NUMBER_COUNT + "개의 번호를 입력해야합니다.");
     }
 
     this.lottoNumbers = lottoNumbers;
