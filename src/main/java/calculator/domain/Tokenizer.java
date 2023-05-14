@@ -8,6 +8,8 @@ public class Tokenizer {
 
     private static final String WHITESPACE = " ";
 
+    private Tokenizer() {}
+
     public static List<String> devide(String input) {
         return Arrays.stream(input.trim().split(WHITESPACE)).collect(Collectors.toList());
     }
