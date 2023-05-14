@@ -6,7 +6,7 @@ public enum Question {
 
     private final String questionValue;
 
-    Question(String questionValue){
+    Question(String questionValue) {
         this.questionValue = questionValue;
     }
 

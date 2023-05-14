@@ -1,26 +1,27 @@
 package lotto.view;
 
 public enum Prize {
-    FIRST(1, 2000000000),
-    SECOND(2, 1500000),
-    THIRD(3, 50000),
-    FOURTH(4, 5000);
+    FIRST(6, 2000000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FOURTH(3, 5000),
+    NONE(0, 0);
 
-    private final int ranking;
+    private final int matchCount;
     private final int prize;
 
-    Prize(int ranking, int prize) {
-        this.ranking = ranking;
+    Prize(int matchCount, int prize) {
+        this.matchCount = matchCount;
         this.prize = prize;
     }
 
-    public static int getPrizeByRanking(int ranking) {
+    public static int calculatePrize(int matchCount) {
         for (Prize prize : Prize.values()) {
-            if (prize.ranking == ranking) {
+            if (prize.matchCount == matchCount) {
                 return prize.prize;
             }
         }
-        throw new IllegalArgumentException("Invalid ranking value: " + ranking);
+        return NONE.prize;
     }
 
 }

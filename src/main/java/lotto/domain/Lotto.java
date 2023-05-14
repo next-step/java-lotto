@@ -1,15 +1,21 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     private List<Integer> numbers = new ArrayList<>();
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+    public Lotto() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            numbers.add(i);
+        }
+        Collections.shuffle(numbers);
+        this.numbers = numbers.subList(0, 6);
     }
 
     public List<Integer> getNumbers() {
@@ -20,5 +26,10 @@ public class Lotto {
         Set<Integer> lotto = new HashSet<>(numbers);
         lotto.retainAll(wonNumbers);
         return lotto.size();
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
