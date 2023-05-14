@@ -3,14 +3,24 @@ package stringCalculator.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringCalculator.domain.Calculator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class CalculatorTest {
+
+    static Stream<Arguments> arithmetic(){
+        return Stream.of(
+                Arguments.arguments(new Calculator("3 + 3"), 6),
+                Arguments.arguments(new Calculator("3 - 3"), 0),
+                Arguments.arguments(new Calculator("3 * 3"), 9),
+                Arguments.arguments(new Calculator("3 / 3"), 1),
+                Arguments.arguments(new Calculator("1 + 3 - 1 * 4 / 2"), 6)
+        );
+    }
 
     @Test
     @DisplayName("입력 공식 분리")
@@ -51,38 +61,11 @@ public class CalculatorTest {
         assertThat(calculator.numbers.toString()).isEqualTo("[1, 2, 3]");
     }
 
-    @Test
-    @DisplayName("더하기")
-    public void test6(){
-        Calculator calculator = new Calculator("3 + 3");
-        assertThat(calculator.calculateResult()).isEqualTo(3);
+    @ParameterizedTest(name = "연산 : {0}, 결과 : {1}")
+    @MethodSource("arithmetic")
+    @DisplayName("사칙연산 테스트")
+    public void test6(Calculator cal, int result){
+        assertThat(cal.calculateResult()).isEqualTo(result);
     }
 
-    @Test
-    @DisplayName("빼기")
-    public void test7(){
-        Calculator calculator = new Calculator("3 - 3");
-        assertThat(calculator.calculateResult()).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("곱하기")
-    public void test8(){
-        Calculator calculator = new Calculator("3 * 3");
-        assertThat(calculator.calculateResult()).isEqualTo(9);
-    }
-
-    @Test
-    @DisplayName("나누기")
-    public void test9(){
-        Calculator calculator = new Calculator("3 / 3");
-        assertThat(calculator.calculateResult()).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("사칙연산 계산")
-    public void test10(){
-        Calculator calculator = new Calculator("1 + 3 - 1 * 4 / 2");
-        assertThat(calculator.calculateResult()).isEqualTo(6);
-    }
 }

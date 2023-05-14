@@ -9,31 +9,29 @@ import java.util.function.BiFunction;
 public class Calculator {
 
     String[] arguments;
-    Map<String, BiFunction<Integer, Integer, Integer>> calculateStrategy = new HashMap<>();
+    static Map<String, Arithmetic> calculateStrategy = new HashMap<>();
     List<String> operators = new ArrayList<>();
     List<Integer> numbers = new ArrayList<>();
     int result;
 
+    static{
+        calculateStrategy.put("+", Arithmetic.PLUS);
+        calculateStrategy.put("-", Arithmetic.SUBTRACT);
+        calculateStrategy.put("*", Arithmetic.MULTIPLY);
+        calculateStrategy.put("/", Arithmetic.DIVIDE);
+    }
+
     public Calculator(){
-        setCalculateStrategy();
     }
     public Calculator(String formula){
-        setCalculateStrategy();
+
         this.arguments = stringEmptySeparation(formula);
         numberOperatorSeparation(arguments);
         initResult(numbers.get(0));
-        calculation();
     }
 
     private void initResult(int firstArgument){
         this.result = firstArgument;
-    }
-
-    private void setCalculateStrategy(){
-        calculateStrategy.put("+", (num1, num2) -> num1 + num2);
-        calculateStrategy.put("-", (num1, num2) -> num1 - num2);
-        calculateStrategy.put("*", (num1, num2) -> num1 * num2);
-        calculateStrategy.put("/", (num1, num2) -> num1 / num2);
     }
 
     String[] stringEmptySeparation(String input){
@@ -43,7 +41,7 @@ public class Calculator {
     Boolean checkOperator(String argument){
         return argument.equals("+") || argument.equals("-") || argument.equals("*") || argument.equals("/");
     }
-    
+
     void numberOperatorSeparation(String[] arguments){
         for(String argument : arguments){
             addNumbers(argument);
@@ -64,19 +62,18 @@ public class Calculator {
     }
 
     public int calculateResult(){
+        calculation();
         return result;
     }
 
     void calculation(){
         for (int i = 0; i < operators.size(); i++) {
-            result = arithmeticCalculation(operators.get(i), numbers.get(i+1));
+            result = arithmeticCalculation(operators.get(i), result, numbers.get(i+1));
         }
     }
 
-    int arithmeticCalculation(String operator, int argument2){
-         return calculateStrategy.get(operator).apply(result, argument2);
+    int arithmeticCalculation(String operator, int argument1, int argument2){
+          return calculateStrategy.get(operator).calculate(argument1, argument2);
+
     }
-
-
-
 }
