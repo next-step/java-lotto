@@ -13,13 +13,13 @@ public class Lottos {
         this.lottoCreationStrategy = lottoCreationStrategy;
     }
 
-    public LottoResult judge(List<Lotto> lottos, List<Integer> winningNumbers) {
-        return new LottoResult(getJudgeRankResult(lottos, winningNumbers));
+    public LottoResult judge(List<Lotto> lottos, WinningLotto winningLotto) { // lotts 인자 전달 필수, 안 그러면 getCreatedLottos()에서 달라짐.
+        return new LottoResult(getJudgeRankResult(lottos, winningLotto));
     }
 
-    private List<Rank> getJudgeRankResult(List<Lotto> lottos, List<Integer> winningNumbers) {
+    private List<Rank> getJudgeRankResult(List<Lotto> lottos, WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> Rank.findRank(lotto.getMatchNumbers(winningNumbers)))
+                .map(winningLotto::calculateRank)
                 .collect(Collectors.toList());
     }
 
