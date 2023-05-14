@@ -1,11 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static lotto.domain.PrizeType.*;
 
 public class Prize {
 
@@ -20,7 +19,7 @@ public class Prize {
 
     public static List<PrizeType> listOfPrize(LottoTickets lottoTickets, WinningNumber winningNumber) {
         return lottoTickets.getTickets().stream()
-                .map(t -> t.typeOfMatching(winningNumber))
+                .map(ticket -> ticket.checkLotteryWinningStatus(winningNumber))
                 .collect(Collectors.toList());
     }
 
@@ -29,19 +28,21 @@ public class Prize {
         return Math.floor(result * 100) / 100;
     }
 
-    public static int prizeCount(List<PrizeType> prizeTypes, PrizeType prizeType) {
+    public static WinningStatus winningStatus(LottoTickets lottoTickets, WinningNumber winningNumber) {
+        List<PrizeType> prizeTypes = Prize.listOfPrize(lottoTickets, winningNumber);
+        return makeWinningStatus(prizeTypes);
+    }
+
+    private static WinningStatus makeWinningStatus(List<PrizeType> prizeTypes) {
+        Map<PrizeType, Integer> winningStatus = new HashMap<>();
+        Arrays.stream(PrizeType.values())
+                .forEach(prizeType -> winningStatus.put(prizeType, sumOfPrize(prizeTypes, prizeType)));
+        return WinningStatus.from(winningStatus);
+    }
+
+    public static int sumOfPrize(List<PrizeType> prizeTypes, PrizeType prizeType) {
         return (int) prizeTypes.stream()
                 .filter(t -> t == prizeType)
                 .count();
-    }
-
-    public static Map<PrizeType, Integer> winningStatus(LottoTickets lottoTickets, WinningNumber winningNumber) {
-        Map<PrizeType, Integer> winningStatus = new HashMap<>();
-        List<PrizeType> prizeTypes = Prize.listOfPrize(lottoTickets, winningNumber);
-        winningStatus.put(FIRST_PRIZE, Prize.prizeCount(prizeTypes, FIRST_PRIZE));
-        winningStatus.put(SECOND_PRIZE, Prize.prizeCount(prizeTypes, SECOND_PRIZE));
-        winningStatus.put(THIRD_PRIZE, Prize.prizeCount(prizeTypes, THIRD_PRIZE));
-        winningStatus.put(FOURTH_PRIZE, Prize.prizeCount(prizeTypes, PrizeType.FOURTH_PRIZE));
-        return winningStatus;
     }
 }

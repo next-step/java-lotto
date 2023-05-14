@@ -14,9 +14,9 @@ public class TicketTest {
         Ticket ticket = Ticket.from(List.of(1, 2, 3, 44, 55, 66));
 
         WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(ticket.numberOfMatching(winningNumber)).isEqualTo(3);
+        assertThat(ticket.checkLotteryWinningStatus(winningNumber).getNumberOfMatching()).isEqualTo(3);
 
         winningNumber = WinningNumber.from(List.of(1, 2, 3, 44, 55, 66));
-        assertThat(ticket.numberOfMatching(winningNumber)).isEqualTo(6);
+        assertThat(ticket.checkLotteryWinningStatus(winningNumber).getNumberOfMatching()).isEqualTo(6);
     }
 }

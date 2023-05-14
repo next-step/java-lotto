@@ -13,6 +13,7 @@ public class LottoGameServiceTest {
     LottoGameService lottoGameService;
     WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6));
     LottoTickets lottoTickets;
+    WinningStatus winningStatus;
 
     @BeforeEach
     void init() {
@@ -33,15 +34,16 @@ public class LottoGameServiceTest {
         tickets.add(Ticket.from(List.of(3, 8, 27, 30, 35, 44)));
         lottoTickets = LottoTickets.from(tickets);
         lottoGameService = LottoGameService.of(lottoTickets, winningNumber);
+        winningStatus = Prize.winningStatus(lottoTickets, winningNumber);
     }
 
     @Test
     @DisplayName("전체 티켓 중 당첨번호와 3개, 4개, 5개, 6개 일치한 티켓이 몇개인지 통계")
     public void countOfMatchingNumber() {
-        assertThat(Prize.winningStatus(lottoTickets, winningNumber).get(PrizeType.FOURTH_PRIZE)).isEqualTo(1);
-        assertThat(Prize.winningStatus(lottoTickets, winningNumber).get(PrizeType.SECOND_PRIZE)).isEqualTo(0);
-        assertThat(Prize.winningStatus(lottoTickets, winningNumber).get(PrizeType.THIRD_PRIZE)).isEqualTo(0);
-        assertThat(Prize.winningStatus(lottoTickets, winningNumber).get(PrizeType.FIRST_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.getCountOfPrize(PrizeType.FOURTH_PRIZE)).isEqualTo(1);
+        assertThat(winningStatus.getCountOfPrize(PrizeType.SECOND_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.getCountOfPrize(PrizeType.THIRD_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.getCountOfPrize(PrizeType.FIRST_PRIZE)).isEqualTo(0);
     }
 
     @Test

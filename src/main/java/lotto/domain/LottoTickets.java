@@ -6,7 +6,7 @@ import java.util.*;
 
 public class LottoTickets {
     @Getter
-    private List<Ticket> tickets;
+    private final List<Ticket> tickets;
 
     private LottoTickets(List<Ticket> tickets) {
         this.tickets = tickets;
@@ -16,7 +16,7 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
-    public int getNumberOfTickets() {
+    public int numberOfTickets() {
         return tickets.size();
     }
 
