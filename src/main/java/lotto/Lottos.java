@@ -8,6 +8,7 @@ import java.util.List;
 public class Lottos {
 
   private final List<Lotto> lottos;
+  private static final int PURCHASE_MIN_AMOUNT = 1000;
   private static final int LOTTO_PRICE = 1000;
 
   public Lottos() {
@@ -30,17 +31,29 @@ public class Lottos {
     return this.lottos;
   }
 
-  public MatchesStatus findWinner(WinningNumbers winningNumbers) {
+  public MatchesStatus findWinner(WinningNumbers winningNumbers, BonusBall bonusBall) {
     MatchesStatus matchesStatus = new MatchesStatus();
     for (Lotto lotto : lottos) {
-      matchesStatus.saveMatches(winningNumbers.findHowManyMatches(lotto));
+      matchesStatus.addMatchesCount(findMatches(lotto, winningNumbers, bonusBall));
     }
     matchesStatus.findRateOfReturn(this);
     return matchesStatus;
   }
 
+  private Matches findMatches(Lotto lotto, WinningNumbers winningNumbers, BonusBall bonusBall) {
+    int matchesNumber = lotto.countMatchesNumber(winningNumbers);
+    if (isFiveMatches(matchesNumber) && lotto.has(bonusBall)) {
+      return Matches.MATCH_FIVE_AND_BONUS;
+    }
+    return Matches.getMatches(matchesNumber);
+  }
+
+  private boolean isFiveMatches(int matchesNumber) {
+    return matchesNumber == 5;
+  }
+
   private void validMinAmount(int purchaseAmount) {
-    if (purchaseAmount < 1000) {
+    if (purchaseAmount < PURCHASE_MIN_AMOUNT) {
       throw new IllegalArgumentException();
     }
   }

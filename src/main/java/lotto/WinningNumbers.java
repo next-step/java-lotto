@@ -18,14 +18,6 @@ public class WinningNumbers {
     }
   }
 
-  public int findHowManyMatches(Lotto lotto) {
-    int matchesNumber = 0;
-    for (Integer winningNumber : winningNumbers) {
-      matchesNumber = lotto.has(winningNumber) ? matchesNumber + 1 : matchesNumber;
-    }
-    return matchesNumber;
-  }
-
   public boolean has(Integer number) {
     return winningNumbers.contains(number);
   }

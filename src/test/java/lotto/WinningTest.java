@@ -11,6 +11,24 @@ import org.junit.jupiter.api.Test;
 public class WinningTest {
 
   @Test
+  void 보너스볼당첨갯수와수익률을구한다() {
+    Lottos lottos = new Lottos(Arrays.asList(
+        makeLotto(1, 2, 3, 4, 5, 6)
+    ));
+    WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 7");
+    BonusBall bonusBall = new BonusBall(winningNumbers, 6);
+    MatchesStatus matchesStatus = lottos.findWinner(winningNumbers, bonusBall);
+    assertAll(
+        () -> assertThat(matchesStatus.getThreeMatches()).isEqualTo(0), // 5000원
+        () -> assertThat(matchesStatus.getFourMatches()).isEqualTo(0), // 50000원
+        () -> assertThat(matchesStatus.getFiveMatches()).isEqualTo(0), // 1500000원
+        () -> assertThat(matchesStatus.getFiveAndBonusMatches()).isEqualTo(1), // 30000000원
+        () -> assertThat(matchesStatus.getSixMatches()).isEqualTo(0), // 2000000000원
+        () -> assertThat(matchesStatus.findRateOfReturn(lottos)).isEqualTo(new BigDecimal("30000.00"))
+    );
+  }
+
+  @Test
   void 중복된보너스볼을입력한다() {
     assertThatIllegalArgumentException().isThrownBy(() -> {
       new BonusBall(new WinningNumbers("1,2,3,4,5,6"), 3);
@@ -35,7 +53,7 @@ public class WinningTest {
             makeLotto_11_12_13_15_18_19(), makeLotto_11_12_13_15_18_19(),
             makeLotto_11_12_13_15_18_19(), makeLotto_11_12_13_15_18_19()));
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 44, 43, 42");
-    MatchesStatus matchesStatus = lottos.findWinner(winningNumbers);
+    MatchesStatus matchesStatus = lottos.findWinner(winningNumbers, new BonusBall(winningNumbers, 22));
     assertAll(
         () -> assertThat(matchesStatus.getThreeMatches()).isEqualTo(1), // 5000원
         () -> assertThat(matchesStatus.getFourMatches()).isEqualTo(0), // 50000원
@@ -55,7 +73,7 @@ public class WinningTest {
         makeLotto(1, 2, 3, 4, 5, 6)
     ));
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
-    MatchesStatus matchesStatus = lottos.findWinner(winningNumbers);
+    MatchesStatus matchesStatus = lottos.findWinner(winningNumbers, new BonusBall(winningNumbers, 22));
     assertAll(
         () -> assertThat(matchesStatus.getThreeMatches()).isEqualTo(1), // 5000원
         () -> assertThat(matchesStatus.getFourMatches()).isEqualTo(1), // 50000원
@@ -78,7 +96,8 @@ public class WinningTest {
     Lotto lotto1 = makeLotto(1, 2, 3, 4, 5, 6);
 
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 44, 33, 22");
-    assertThat(winningNumbers.findHowManyMatches(lotto1)).isEqualTo(3);
+
+    assertThat(lotto1.countMatchesNumber(winningNumbers)).isEqualTo(3);
   }
 
   @Test

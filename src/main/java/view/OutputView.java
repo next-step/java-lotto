@@ -35,12 +35,21 @@ public class OutputView {
     System.out.println("---------");
     StringBuilder stringBuilder = new StringBuilder();
     for (Matches matches : Matches.values()) {
-      stringBuilder.append(matches.getNumberOfMatches())
-          .append("개 일치 (").append(matches.getWinningAmount()).append("원)- ")
-          .append(matches.getCount(matchesStatus)).append("개\n");
+      stringBuilder.append(matches.getNumberOfMatches()).append("개 일치 ");
+      isBonusBall(stringBuilder, matches).append("(")
+          .append(matches.getWinningAmount()).append("원)- ")
+          .append(matches.getCount(matchesStatus))
+          .append("개\n");
     }
     stringBuilder.append("총 수익률은 ").append(matchesStatus.getRate()).append("입니다.");
     System.out.println(stringBuilder);
+  }
+
+  private static StringBuilder isBonusBall(StringBuilder stringBuilder, Matches matches) {
+    if (matches == Matches.MATCH_FIVE_AND_BONUS) {
+      stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length()).append(", 보너스 볼 일치");
+    }
+    return stringBuilder;
   }
 
   public static void bonusBall() {
