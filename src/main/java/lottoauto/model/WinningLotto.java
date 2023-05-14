@@ -48,6 +48,11 @@ public class WinningLotto {
         if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 숫자가 당첨 숫자에 포함되어 있습니다.");
         }
+
+
+        if (!Lotto.LOTTO_NUMBER_RANGE.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 숫자는 1~45까지의 숫자를 입력해야 합니다.");
+        }
     }
 
 }
