@@ -1,31 +1,24 @@
 package lotto.model;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AutoLotteryNumberGenerator implements LotteryNumberGenerator {
 
+    private static final Integer RANDOM_MIN = 1;
     private static final Integer RANDOM_MAX = 43;
     private static final int NUMBER_PER_TICKET = 6;
-    private static final ThreadLocalRandom random = ThreadLocalRandom.current();
+    private static final List<LotteryNumber> numbers = IntStream.rangeClosed(RANDOM_MIN, RANDOM_MAX)
+            .boxed().map(LotteryNumber::of).collect(Collectors.toList());
 
     @Override
     public Set<LotteryNumber> generate() {
-        Set<LotteryNumber> numbers = new HashSet<>();
-        while (numbers.size() < NUMBER_PER_TICKET) {
-            numbers.add(LotteryNumber.of(generateOne()));
-        }
-        validate(numbers);
-        return numbers;
-    }
-
-    private static int generateOne() {
-        int randomNumber = random.nextInt(RANDOM_MAX) + 1;
-        if (randomNumber > RANDOM_MAX) {
-            throw new RuntimeException("랜덤값 경계를 벗어났습니다.");
-        }
-        return randomNumber;
+        List<LotteryNumber> newNumbers = new ArrayList<>(numbers);
+        Collections.shuffle(newNumbers);
+        Set<LotteryNumber> result = new HashSet<>(newNumbers.subList(0, NUMBER_PER_TICKET));
+        validate(result);
+        return result;
     }
 
     private void validate(Set<LotteryNumber> numbers) {
