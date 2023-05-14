@@ -3,6 +3,7 @@ package autolotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,5 +45,24 @@ class WalletTest {
         int totalWinnings = wallet.totalWinningsOfWinningNumber(winningNumber);
 
         Assertions.assertThat(totalWinnings).isEqualTo(expectedTotalWinnings);
+    }
+
+    @Test
+    void 로또구매금액_대비_당첨금액의_수익률을_소수점_둘째_자리까지_반올림한_값으로_알려준다() {
+        int initialMoney = 3000;
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 22, 23, 24);
+        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 11, 12, 13);
+
+        BigDecimal expectedProfitRate = new BigDecimal("5.00");
+        Wallet wallet =
+                new Wallet(initialMoney,
+                        Arrays.asList(
+                                new Lotto(lottoNumber),
+                                new Lotto(lottoNumber),
+                                new Lotto(lottoNumber)));
+
+        BigDecimal profitRate = wallet.profitRate(winningNumber);
+
+        Assertions.assertThat(profitRate).isEqualTo(expectedProfitRate);
     }
 }

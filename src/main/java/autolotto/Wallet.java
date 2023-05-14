@@ -1,5 +1,7 @@
 package autolotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +26,15 @@ public class Wallet {
         return this.lottoList.size();
     }
 
-    public int totalWinningsOfWinningNumber(List<Integer> winninNumbers) {
+    public int totalWinningsOfWinningNumber(List<Integer> winningNumbers) {
         return this.lottoList.stream()
-                .map(lotto -> lotto.matchCount(winninNumbers))
+                .map(lotto -> lotto.matchCount(winningNumbers))
                 .mapToInt(matchCount -> Winning.winningOf(matchCount).winningMoney())
                 .sum();
+    }
+
+    public BigDecimal profitRate(List<Integer> winningNumbers) {
+        int totalWinnings = totalWinningsOfWinningNumber(winningNumbers);
+        return BigDecimal.valueOf(totalWinnings).divide(BigDecimal.valueOf(money), 2, RoundingMode.HALF_UP);
     }
 }
