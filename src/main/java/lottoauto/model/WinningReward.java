@@ -31,13 +31,13 @@ public enum WinningReward {
         return reward;
     }
 
-    public boolean getBonus() {
+    public boolean hasBonus() {
         return bonus;
     }
 
-    public static WinningReward findRewardByMatches(int match) {
+    public static WinningReward findRewardByMatchCount(int matchCount) {
         return Arrays.stream(WinningReward.values())
-                .filter(x -> x.matchCount == match)
+                .filter(reward -> reward.matchCount == matchCount)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("일치하는 수가 없습니다."));
     }
