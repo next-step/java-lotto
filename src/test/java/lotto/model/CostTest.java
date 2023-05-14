@@ -1,8 +1,11 @@
 package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,6 +25,13 @@ public class CostTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Cost(input))
                 .withMessageMatching("구입 금액은 음수일 수 없습니다.");
+    }
+
+    @DisplayName("구입 금액에 따른 로또 티켓 개수")
+    @ParameterizedTest
+    @ValueSource(ints = {1000,1001})
+    void 구입_금액에_따른_로또_티켓_개수(int input) {
+        assertThat(new Cost(input).getLottoTicketCount()).isEqualTo(1);
     }
 
 }

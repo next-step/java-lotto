@@ -1,6 +1,8 @@
 package lotto.model;
 
 public class Cost {
+
+    public static final int ONE_LOTTO_TICKET_PRICE = 1_000;
     private int money;
 
     public Cost(int money) {
@@ -10,6 +12,10 @@ public class Cost {
 
     public int getMoney() {
         return money;
+    }
+
+    public int getLottoTicketCount() {
+        return this.money / ONE_LOTTO_TICKET_PRICE;
     }
 
     private void validate(int money) {
