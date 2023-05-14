@@ -21,6 +21,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public Rank getRanking(Set<LottoNumber> numbers) {
+        return Rank.of(matchLottoNumberCount(numbers));
+    }
+
     private void validate(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT_LIMIT) {
             throw new IllegalArgumentException("로또 번호는 6개 입니다.");

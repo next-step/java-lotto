@@ -31,12 +31,15 @@ public enum Rank {
     }
 
     public static Rank of(int count) {
+        if (!lotto_rank.containsKey(count)) {
+            return Rank.NONE;
+        }
         return lotto_rank.get(count);
     }
 
     public static Map<Rank, Integer> initLottoResult() {
         return Arrays.stream(values())
-                .filter(rank -> rank != NONE)
+                .filter(rank -> rank.count >= 0)
                 .collect(Collectors.toMap(Function.identity(), o -> 0));
     }
 
