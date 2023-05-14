@@ -21,10 +21,14 @@ public class LottoBalls {
     }
 
     public LottoBalls(List<Number> list) {
-        numberList = list;
+        numberList = new ArrayList<>(list);
     }
 
     public static List<Number> getLottoNumbers(){
         return Collections.unmodifiableList(numberList);
+    }
+
+    public void shuffleLottoNumber(){
+        Collections.shuffle(numberList);
     }
 }

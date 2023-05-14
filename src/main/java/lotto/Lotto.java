@@ -3,7 +3,6 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -22,7 +21,6 @@ public class Lotto {
         if (list.size() > SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개 까지 입니다.");
         }
-
         return new Lotto(list);
     }
 
@@ -32,8 +30,8 @@ public class Lotto {
     }
 
     public void shuffleLottoNumber(LottoBalls lottoBalls) {
+        lottoBalls.shuffleLottoNumber();
         var numberList = new ArrayList<>(LottoBalls.getLottoNumbers());
-        Collections.shuffle(numberList);
         lottoNumbers = new ArrayList<>(numberList.subList(0, SIZE));
     }
 
@@ -47,11 +45,7 @@ public class Lotto {
         Collections.sort(lottoNumbers);
     }
 
-    @Override
-    public String toString() {
-        sortLotto();
-        return "[" + lottoNumbers.stream()
-                .map(Number::getNumberToString)
-                .collect(Collectors.joining(", ")) + "]" ;
+    public List<Number> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }
