@@ -10,10 +10,16 @@ public class LottoFactory {
     private static List<LottoNumber> lottoNumbers = IntStream.range(LottoNumber.LOTTO_MINIMUM_NUMBER, LottoNumber.LOTTO_MAXIMUM_NUMBER)
             .boxed().map(number -> new LottoNumber(number)).collect(Collectors.toList());
 
+    public static LottoTickets createAutoLottoTickets(int ticketCount) {
+        List<LottoTicket> lottoTickets = IntStream.range(0, ticketCount)
+                .mapToObj(i -> createAutoLottoTicket())
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
+    }
+
     public static LottoTicket createAutoLottoTicket() {
         Collections.shuffle(lottoNumbers);
         return new LottoTicket(lottoNumbers.stream()
-                .sorted()
                 .limit(LOTTO_NUMBER_COUNT_LIMIT)
                 .collect(Collectors.toSet()));
     }
