@@ -22,7 +22,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("주어진 문자열을 split하여 lotto객체 생성")
+    @DisplayName("로또 생성 테스트")
     public void lottoGeneratorTest() {
         Lotto lotto = new Lotto(manualLottoGenerator);
         HashSet<LottoNumber> set = new HashSet<>(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(41), new LottoNumber(42), new LottoNumber(43)));

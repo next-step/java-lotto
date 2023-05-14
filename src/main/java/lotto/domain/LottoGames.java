@@ -1,20 +1,23 @@
 package lotto.domain;
 
 import lotto.domain.generator.AutoLottoGenerator;
+import lotto.domain.number.LottoNumber;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGames {
 
+    private static final String WRONG_RESULT_SIZE = "로또 결과값이 0 입니다.";
+    private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> lottoGameList = new ArrayList<>();
-    private final List<Integer> lottoResult = Arrays.stream(new int[LottoConstant.LOTTO_SIZE + 1]).boxed().collect(Collectors.toList());
+    private final Map<Rank, Integer> lottoResult = new HashMap<>();
 
     public LottoGames(int gameCount) {
-        gameCount /= LottoConstant.LOTTO_PRICE;
+        gameCount /= LOTTO_PRICE;
         for (int i = 0; i < gameCount; i++) {
             lottoGameList.add(new Lotto(new AutoLottoGenerator()));
         }
@@ -28,26 +31,40 @@ public class LottoGames {
         return this.lottoGameList.size();
     }
 
-    private int sum() {
-        return IntStream.rangeClosed(LottoConstant.MIN_WINNING_NUM, LottoConstant.LOTTO_SIZE)
-                .map(index -> LottoPrize.findPrize(index) * lottoResult.get(index))
-                .sum();
+    protected int calculateTotalPrize() {
+        return lottoResult.keySet().stream()
+                .map(rank -> (lottoResult.get(rank) * rank.getPrize()))
+                .reduce(0, Integer::sum);
     }
 
     public double calculateReturn() {
-        return sum() / (double) (LottoConstant.LOTTO_PRICE * lottoGameList.size());
+        if (lottoResult.size() == 0) throw new IllegalStateException(WRONG_RESULT_SIZE);
+        return calculateTotalPrize() / (double) (LOTTO_PRICE * lottoGameList.size());
     }
 
     public void calculatePrizeCount(WinningLotto winningLotto) {
         lottoGameList.forEach(lotto -> {
-            int matchCount = lotto.findMatchCount(winningLotto);
-            int winningCount = lottoResult.get(matchCount);
-            winningCount++;
-            lottoResult.set(matchCount, winningCount);
+            Rank rank = Rank.findRank(lotto.findMatchCount(winningLotto));
+            int winningCount = lottoResult.getOrDefault(rank, 0);
+            lottoResult.put(rank, ++winningCount);
         });
     }
 
-    public List<Integer> getLottoResult() {
+    public void calculatePrizeCount(WinningLotto winningLotto, LottoNumber bonusLottoNumber) {
+        lottoGameList.forEach(lotto -> {
+            Rank rank = Rank.findRank(lotto.findMatchCount(winningLotto), lotto.hasBonusLottoNumber(bonusLottoNumber));
+            int winningCount = lottoResult.getOrDefault(rank, 0);
+            lottoResult.put(rank, ++winningCount);
+        });
+    }
+
+    public Map<Rank, Integer> getLottoResult() {
         return lottoResult;
     }
+
+    @Override
+    public String toString() {
+        return lottoGameList.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
+    }
+
 }

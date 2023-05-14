@@ -2,9 +2,9 @@ package lotto.domain.generator;
 
 import lotto.domain.number.LottoNumber;
 
-import java.util.HashSet;
+import java.util.Set;
 
 public interface LottoGenerator {
 
-    HashSet<LottoNumber> generate();
+    Set<LottoNumber> generate();
 }

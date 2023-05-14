@@ -4,12 +4,14 @@ import lotto.domain.number.LottoNumber;
 import lotto.util.Util;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class WinningLotto {
-    private static final String LOTTO_SIZE_ERROR = "로또 숫자의 입력값은 6개로 이루어져야 합니다.";
 
+    private static final int LOTTO_SIZE = 6;
+    private static final String LOTTO_SIZE_ERROR = "로또 숫자의 입력값은 6개로 이루어져야 합니다.";
     private static final String SPLIT_REGEX = ", ";
-    HashSet<LottoNumber> winningLotto = new HashSet<>();
+    private final Set<LottoNumber> winningLotto = new HashSet<>();
 
     public WinningLotto(String input) {
         String[] numbers = input.split(SPLIT_REGEX);
@@ -19,10 +21,13 @@ public class WinningLotto {
         lottoSizeCheck(winningLotto);
     }
 
-    private void lottoSizeCheck(HashSet<LottoNumber> numbers) {
-        if (numbers.size() != LottoConstant.LOTTO_SIZE) {
+    private void lottoSizeCheck(Set<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalStateException(LOTTO_SIZE_ERROR);
         }
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.winningLotto.contains(lottoNumber);
+    }
 }
