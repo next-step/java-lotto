@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumberTest {
+public class LottoNumberValidationUtilsTest {
 
     @Test
     @DisplayName("[요구사항 1] 로또 번호가 1 ~ 45 사이의 숫자가 아닐 경우, IllegalArgumentException을 던진다.")
