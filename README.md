@@ -32,3 +32,24 @@
    1. 1부터 45까지의 로또 번호를 보장하는 클래스 추가 (LottoNumber, LottoNumbersGenerator)
    2. Rank의 추가에 따라 UI Layer가 영향을 받는 구조 개선
    3. 정의한 도메인 클래스에 대한 단위 테스트 추가
+
+## [3단계 - 로또(2등)]
+1. 2단계 피드백 반영 사항
+   1. ForceLottoCreationStrategy를 test package로 이동
+   2. Lotto class 내부 유효성 검사 실시
+      - 다만, WinningLotto에서 실시하는 유효성 검사와 같아 LottoValidationUtils 생성
+   3. LottoNumbersGenerator 삭제
+      - LottoCreationStrategy에 1~45 숫자 배열 생성 로직 추가
+      - 로또 생성 시마다 매번 배열을 생성하는 로직 변경
+   4. WinningLotto 정의
+   5. LottoNumber 생성 시 유효성 검증 로직(1~45 숫자 보장)
+
+2. 3단계 기능 요구 사항
+   1. 추가 번호 하나 더 추첨
+   2. 당첨 통계에 2등 추가
+
+3. 기능 구현 사항
+   1. Rank enum에 2등(5개 일치, 보너스 숫자 일치) 추가
+   2. WinningLotto 내 findRank 로직 수정
+   3. ResultView에서의 멘트 변경
+   4. LottoNumber에서의 유효성 검증 로직도 보너스 번호 때 사용되어서 LottoNumberValidationUtilsTest로 뺌
