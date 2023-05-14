@@ -14,7 +14,7 @@ class LottoGeneratorTest {
 
     @Test
     void 로또생성기는_1에서_45_사이의_수로_이루어진_6개의_번호를_생성한다() {
-        List<Integer> numbers = lottoGenerator.generateLottoRangeNumbers();
+        List<Integer> numbers = lottoGenerator.generateLotto().lottoNumbers();
 
         int createdNumbersSize = numbers.size();
 
@@ -26,7 +26,7 @@ class LottoGeneratorTest {
 
     @Test
     void 로또생성기는_중복되지_않은_수_6개를_생성한다() {
-        List<Integer> numbers = lottoGenerator.generateLottoRangeNumbers();
+        List<Integer> numbers = lottoGenerator.generateLotto().lottoNumbers();
 
         Assertions.assertThat(numbers).doesNotHaveDuplicates();
     }
