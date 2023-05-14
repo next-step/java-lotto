@@ -31,7 +31,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   public static LottoNumber valueOf(final int lottoNumber) {
     if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
-      throw new IllegalArgumentException("유효한 입력이 아닙니다.");
+      throw new IllegalArgumentException(
+          "로또번호는 " + MIN_LOTTO_NUMBER + "~" + MAX_LOTTO_NUMBER + "범위로 입력 가능합니다.");
     }
 
     return LottoNumberCache.cacheMap.get(lottoNumber);

@@ -16,7 +16,7 @@ public class Lotteries {
 
   public GameResult calculateGameResult(WinningLottery winningLottery) {
     if(winningLottery == null){
-      throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+      throw new IllegalArgumentException("당첨 로또번호와 보너스 로또번호는 필수 값입니다.");
     }
 
     EnumMap<Rank, Integer> prizeStaticsMap = lotteries.stream()

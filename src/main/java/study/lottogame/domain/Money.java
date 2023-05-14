@@ -8,7 +8,7 @@ public class Money {
 
   public Money(final int money) {
     if (money < 0) {
-      throw new IllegalArgumentException("유효하지 않은 입력입니다");
+      throw new IllegalArgumentException("Money는 음수가 될 수 없습니다.");
     }
 
     this.money = money;
