@@ -18,6 +18,6 @@ public class IntegrateTest {
     void integrateTest() {
         lottoGameService.buyTickets();
         lottoGameService.inputWinningNumber();
-        lottoGameService.lottoResult();
+        lottoGameService.makeLotteryResult();
     }
 }

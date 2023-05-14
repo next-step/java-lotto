@@ -1,7 +1,5 @@
 package lotto.domain;
 
-
-import lotto.domain.Ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +13,10 @@ public class TicketTest {
     public void numberOfMatchingNumber() {
         Ticket ticket = Ticket.from(List.of(1, 2, 3, 44, 55, 66));
 
-        List<Integer> winningNumber = List.of(1, 2, 3, 4, 5, 6);
+        WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6));
         assertThat(ticket.numberOfMatching(winningNumber)).isEqualTo(3);
 
-        winningNumber = List.of(1, 2, 3, 44, 55, 66);
+        winningNumber = WinningNumber.from(List.of(1, 2, 3, 44, 55, 66));
         assertThat(ticket.numberOfMatching(winningNumber)).isEqualTo(6);
     }
 }

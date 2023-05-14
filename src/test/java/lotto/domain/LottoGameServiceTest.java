@@ -1,10 +1,5 @@
 package lotto.domain;
 
-
-import lotto.domain.LottoGameService;
-import lotto.domain.LottoTickets;
-import lotto.domain.Ticket;
-import lotto.domain.WinningNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoGameServiceTest {
     LottoGameService lottoGameService;
     WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6));
+    LottoTickets lottoTickets;
 
     @BeforeEach
     void init() {
@@ -35,24 +31,22 @@ public class LottoGameServiceTest {
         tickets.add(Ticket.from(List.of(13, 14, 18, 21, 23, 35)));
         tickets.add(Ticket.from(List.of(17, 21, 29, 37, 42, 45)));
         tickets.add(Ticket.from(List.of(3, 8, 27, 30, 35, 44)));
-        LottoTickets lottoTickets = LottoTickets.from(tickets);
-
+        lottoTickets = LottoTickets.from(tickets);
         lottoGameService = LottoGameService.of(lottoTickets, winningNumber);
     }
 
     @Test
     @DisplayName("전체 티켓 중 당첨번호와 3개, 4개, 5개, 6개 일치한 티켓이 몇개인지 통계")
     public void countOfMatchingNumber() {
-        int[] counter = lottoGameService.countMatchingTickets();
-        assertThat(counter[3]).isEqualTo(1);
-        assertThat(counter[4]).isEqualTo(0);
-        assertThat(counter[5]).isEqualTo(0);
-        assertThat(counter[4]).isEqualTo(0);
+        assertThat(Prize.winningStatus(lottoTickets, winningNumber).get(PrizeType.FOURTH_PRIZE)).isEqualTo(1);
+        assertThat(Prize.winningStatus(lottoTickets, winningNumber).get(PrizeType.SECOND_PRIZE)).isEqualTo(0);
+        assertThat(Prize.winningStatus(lottoTickets, winningNumber).get(PrizeType.THIRD_PRIZE)).isEqualTo(0);
+        assertThat(Prize.winningStatus(lottoTickets, winningNumber).get(PrizeType.FIRST_PRIZE)).isEqualTo(0);
     }
 
     @Test
     @DisplayName("수익률 계산기능 테스트")
     public void rateOfReturn() {
-        assertThat(lottoGameService.returnRate()).isEqualTo(0.35);
+        assertThat(Prize.returnRate(lottoTickets, winningNumber)).isEqualTo(0.35);
     }
 }

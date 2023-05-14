@@ -4,11 +4,8 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoGameService {
-    private InputView inputView = new InputView();
-    private ResultView resultView = new ResultView();
     private LottoTickets lottoTickets;
     private WinningNumber winningNumbers;
-    private int money;
 
     public LottoGameService() {
     }
@@ -26,31 +23,18 @@ public class LottoGameService {
         return new LottoGameService();
     }
 
-    public int[] countMatchingTickets() {
-        return lottoTickets.counterOfMatchingTickets(winningNumbers);
-    }
-
-    public double returnRate() {
-        Prize prize = Prize.from(countMatchingTickets());
-        double result = (double) prize.sumOfPrize() / lottoTickets.totalPrice();
-        return Math.floor(result * 100) / 100;
-    }
-
-    public void generateTickets(int price) {
-        lottoTickets = LottoTickets.from(price);
-    }
-
     public void buyTickets() {
-        money = inputView.inputMoney();
-        generateTickets(money);
-        resultView.printTickets(lottoTickets);
+        int money = InputView.inputMoney();
+        lottoTickets = lottoTickets.buyTickets(money);
+        ResultView.printTickets(lottoTickets);
     }
 
     public void inputWinningNumber() {
-        winningNumbers = inputView.inputWinningNumber();
+        winningNumbers = InputView.inputWinningNumber();
     }
 
-    public void lottoResult() {
-        resultView.printResult(countMatchingTickets(), returnRate());
+    public void makeLotteryResult() {
+        ResultView.printWinningStatus(Prize.winningStatus(lottoTickets, winningNumbers));
+        ResultView.printReturnRate(Prize.returnRate(lottoTickets, winningNumbers));
     }
 }
