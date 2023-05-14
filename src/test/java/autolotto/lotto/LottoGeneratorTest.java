@@ -32,11 +32,11 @@ class LottoGeneratorTest {
     }
 
     @Test
-    void 금액_3000_원이_주어지면_3개의_로또를_생성한다() {
-        int money = 3000;
+    void 주어진_개수만큼의_로또를_생성한다() {
+        int lottoCount = 3;
 
-        List<Lotto> multipleLotto = lottoGenerator.generateMultipleLotto(money);
+        List<Lotto> lotteries = lottoGenerator.generateMultipleLotto(lottoCount);
 
-        Assertions.assertThat(multipleLotto).hasSize(3);
+        Assertions.assertThat(lotteries).hasSize(lottoCount);
     }
 }

@@ -11,7 +11,6 @@ public class LottoGenerator {
     private static final Integer LOTTO_MIN_NUMBER = 1;
     private static final Integer LOTTO_MAX_NUMBER = 45;
     private static final Integer LOTTO_NUMBERS_SIZE = 6;
-    private static final Integer LOTTO_PRICE = 1000;
 
     public LottoGenerator(Shuffler shuffler) {
         this.shuffler = shuffler;
@@ -36,8 +35,7 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> generateMultipleLotto(int money) {
-        int lottoCount = money / LOTTO_PRICE;
+    public List<Lotto> generateMultipleLotto(int lottoCount) {
         List<Lotto> lottoCollection = new ArrayList<>();
 
         for (int count = 0; count < lottoCount; count++) {
