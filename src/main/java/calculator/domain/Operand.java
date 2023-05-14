@@ -15,6 +15,7 @@ public class Operand {
     public Operand(String operand) {
         this(parse(operand));
     }
+
     private static Double parse(String operand) {
         try {
             return Double.valueOf(operand);
@@ -27,19 +28,19 @@ public class Operand {
         return operand;
     }
 
-    public Double plus (Operand value) {
+    public Double plus(Operand value) {
         return operand + value.operand;
     }
 
-    public Double minus (Operand value) {
+    public Double minus(Operand value) {
         return operand - value.operand;
     }
 
-    public Double multiple (Operand value) {
+    public Double multiple(Operand value) {
         return operand * value.operand;
     }
 
-    public Double divide (Operand value) {
+    public Double divide(Operand value) {
         return operand / value.operand;
     }
 
