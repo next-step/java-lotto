@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.BuyInfo;
 import lotto.Lotto;
 import lotto.common.code.MatchedNumber;
 
@@ -21,19 +22,19 @@ public class ResultView {
     private static final String SPACE = " ";
 
     public static void printBuyCompleted(int totalLottoCount, int manuallyLottoCount) {
-        System.out.println(String.format(BUY_COMPLETED_TEXT, manuallyLottoCount, totalLottoCount - manuallyLottoCount));
+        System.out.println(String.format(BUY_COMPLETED_TEXT, manuallyLottoCount, totalLottoCount));
     }
 
     public static void printLottoList(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            System.out.println(lotto.getNumbers());
+            System.out.println(lotto.getNumbers().getList());
         }
     }
 
-    public static void printResult(Map<MatchedNumber, Integer> winningStatistics, int amount) {
+    public static void printResult(Map<MatchedNumber, Integer> winningStatistics, BuyInfo buyInfo) {
         System.out.println(WINNING_STATISTICS_TEXT);
         System.out.println(BAR);
-        BigDecimal ror = getRateOfReturn(amount, getTotalWinningAmount(winningStatistics));
+        BigDecimal ror = buyInfo.getRateOfReturn(getTotalWinningAmount(winningStatistics));
         System.out.println(String.format(TOTAL_ROR_TEXT, ror, getTotalRorLossText(ror)));
     }
 
@@ -45,11 +46,6 @@ public class ResultView {
             totalWinningAmount += matchedNumber.getAmount() * winningCount;
         }
         return totalWinningAmount;
-    }
-
-    static BigDecimal getRateOfReturn(int amount, int winningAmount) {
-        if (winningAmount == 0) return new BigDecimal(0);
-        return BigDecimal.valueOf(winningAmount).divide(BigDecimal.valueOf(amount), 2, RoundingMode.CEILING);
     }
 
     static String getTotalRorLossText(BigDecimal ror) {

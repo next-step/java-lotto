@@ -31,11 +31,6 @@ public class ResultViewTest {
     }
 
     @Test
-    void getRateOfReturn() {
-        assertThat(ResultView.getRateOfReturn(100000, 5000)).isEqualTo(BigDecimal.valueOf(0.05));
-    }
-
-    @Test
     void getTotalRorLossText() {
         assertThat(ResultView.getTotalRorLossText(new BigDecimal(0.5))).isEqualTo("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         assertThat(ResultView.getTotalRorLossText(new BigDecimal(1))).isEqualTo("");

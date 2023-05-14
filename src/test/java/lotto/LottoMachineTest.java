@@ -33,7 +33,7 @@ public class LottoMachineTest {
 
     @Test
     void createLotto() {
-        assertThat(LottoMachine.createLotto(Arrays.asList(1,2,3,4,5,6)).getNumbers()).hasSize(6);
+        assertThat(LottoMachine.createLotto(new LottoNumber(Arrays.asList(1,2,3,4,5,6))).getNumbers().getList()).hasSize(6);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class LottoMachineTest {
 
     @Test
     void createLottoNumbers() {
-        assertThat(LottoMachine.createLottoNumbers().getNumbers()).hasSize(6);
+        assertThat(LottoMachine.createLottoNumbers().getNumbers().getList()).hasSize(6);
     }
 
     @Test
