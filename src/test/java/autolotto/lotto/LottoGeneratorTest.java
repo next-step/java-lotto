@@ -35,8 +35,8 @@ class LottoGeneratorTest {
     void 금액_3000_원이_주어지면_3개의_로또를_생성한다() {
         int money = 3000;
 
-        List<Lotto> lottos = lottoGenerator.generateLottos(money);
+        List<Lotto> multipleLotto = lottoGenerator.generateMultipleLotto(money);
 
-        Assertions.assertThat(lottos).hasSize(3);
+        Assertions.assertThat(multipleLotto).hasSize(3);
     }
 }

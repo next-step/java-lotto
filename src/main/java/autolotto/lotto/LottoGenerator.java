@@ -18,7 +18,7 @@ public class LottoGenerator {
     }
 
     public List<Integer> generateLottoRangeNumbers() {
-        List<Integer> shuffled = shuffler.shuffle(generateOriginalLottoRangeNumbers());
+        List<Integer> shuffled = shuffler.shuffle(lottoRangeNumbers());
 
         return shuffled.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
@@ -26,24 +26,24 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public Lotto generateLotto() {
-        return new Lotto(generateLottoRangeNumbers());
-    }
-
-    private List<Integer> generateOriginalLottoRangeNumbers() {
+    private List<Integer> lottoRangeNumbers() {
         return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1)
                 .boxed()
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> generateLottos(int money) {
+    public Lotto generateLotto() {
+        return new Lotto(generateLottoRangeNumbers());
+    }
+
+    public List<Lotto> generateMultipleLotto(int money) {
         int lottoCount = money / LOTTO_PRICE;
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottoCollection = new ArrayList<>();
 
         for (int count = 0; count < lottoCount; count++) {
-            lottos.add(generateLotto());
+            lottoCollection.add(generateLotto());
         }
 
-        return lottos;
+        return lottoCollection;
     }
 }

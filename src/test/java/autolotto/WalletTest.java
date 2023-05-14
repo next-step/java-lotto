@@ -29,14 +29,14 @@ class WalletTest {
     void 지갑을_생성하며_한번에_로또_여러개를_추가_할_수_있다() {
         int threeLottoMoney = 3000;
 
-        Wallet wallet = new Wallet(threeLottoMoney, lottoGenerator.generateLottos(threeLottoMoney));
+        Wallet wallet = new Wallet(threeLottoMoney, lottoGenerator.generateMultipleLotto(threeLottoMoney));
 
         Assertions.assertThat(wallet.lottoSize()).isEqualTo(3);
     }
 
     @Test
     void 지갑_내_로또들에_대한_총_당첨금액을_알려준다() {
-        Wallet wallet = new Wallet(3000, lottoGenerator.generateLottos(3000));
+        Wallet wallet = new Wallet(3000, lottoGenerator.generateMultipleLotto(3000));
         int expectedTotalWinnings = Winning.THREE.winningMoney() * 3;
 
 
@@ -50,7 +50,7 @@ class WalletTest {
         int initialMoney = 3000;
 
         BigDecimal expectedProfitRate = new BigDecimal("5.00");
-        Wallet wallet = new Wallet(initialMoney, lottoGenerator.generateLottos(initialMoney));
+        Wallet wallet = new Wallet(initialMoney, lottoGenerator.generateMultipleLotto(initialMoney));
 
         BigDecimal profitRate = wallet.profitRate(fixedWinningNumbers);
 
@@ -63,7 +63,7 @@ class WalletTest {
 
         @BeforeEach
         void setUp() {
-            wallet = new Wallet(3000, lottoGenerator.generateLottos(3000));
+            wallet = new Wallet(3000, lottoGenerator.generateMultipleLotto(3000));
         }
 
         @Test
