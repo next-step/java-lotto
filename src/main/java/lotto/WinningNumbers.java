@@ -26,6 +26,10 @@ public class WinningNumbers {
     return matchesNumber;
   }
 
+  public boolean has(Integer number) {
+    return winningNumbers.contains(number);
+  }
+
   private Integer[] toIntegers(String[] tokens) {
     if (isLottoNumberCountEqualTo(tokens.length)) {
       throw new IllegalArgumentException("당첨 번호는 " + LOTTO_NUMBER_COUNT + "개여야합니다.");
@@ -42,8 +46,8 @@ public class WinningNumbers {
     return length != LOTTO_NUMBER_COUNT;
   }
 
-  private String[] split(String carsName) {
-    return carsName.replace(" ", "").split(",");
+  private String[] split(String winningNumbers) {
+    return winningNumbers.replace(" ", "").split(",");
   }
 
 }

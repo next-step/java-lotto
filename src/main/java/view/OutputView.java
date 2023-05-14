@@ -43,4 +43,7 @@ public class OutputView {
     System.out.println(stringBuilder);
   }
 
+  public static void bonusBall() {
+    System.out.println("보너스 볼을 입력해주세요");
+  }
 }
