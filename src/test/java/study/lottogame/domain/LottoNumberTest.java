@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
 
-  @DisplayName("로또번호는 1~45 범위를 넘으면 IllegalArgumentException을 던진다.")
+  @DisplayName("로또번호는 1~45 범위를 넘으면 Exception을 던진다.")
   @ParameterizedTest
   @ValueSource(ints = {0, -1, -10, 46, 100})
   public void LottoNumber_throwException_outOfBound(int input) {

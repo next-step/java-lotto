@@ -13,7 +13,7 @@ import study.lottogame.factory.LotteryFactory;
 
 public class WinningLotteryTest {
 
-  @DisplayName("bonus 로또넘버는 당첨로또의 로또넘버들과 중복되면 IllegalArgumentException을 던진다.")
+  @DisplayName("bonus 로또넘버는 당첨로또의 로또넘버들과 중복되면 Exception을 던진다.")
   @Test
   public void WinningLottery_throwsException_duplicatedNumber() {
     Lottery prizeLottery = LotteryFactory.create(new String[]{"1", "2", "3", "4", "5", "6"});
