@@ -2,24 +2,21 @@ package lotto.controller;
 
 import lotto.domain.Lottos;
 import lotto.domain.Statistics;
-import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
-    public static Lottos generateLotto(String money) {
-        Lottos lottos = new Lottos(Integer.parseInt(money));
-        ResultView.printLottos(lottos);
-        return lottos;
+    public static Lottos generateLotto(String money, List<String> manualLottoNumbers) {
+        return new Lottos(Integer.parseInt(money), manualLottoNumbers);
     }
 
     public static Statistics generateStatistics(Lottos lottos, String winnerNumber, int bonusNumber) {
         Statistics statistics = new Statistics();
-        ResultView.printStatistics(statistics.generate(lottos, winnerNumber, bonusNumber));
+        statistics.generate(lottos, winnerNumber, bonusNumber);
         return statistics;
     }
 
-    public static void findRateOfReturn(String money, Statistics statistics) {
-        ResultView.printRateOfReturn(statistics.getRateOfReturn(Integer.parseInt(money)));
+    public static double findRateOfReturn(String money, Statistics statistics) {
+        return statistics.getRateOfReturn(Integer.parseInt(money));
     }
-
-
 }

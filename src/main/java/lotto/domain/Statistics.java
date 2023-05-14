@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Statistics {
     private Map<RankType, Integer> statisticsMap = new HashMap<>();
@@ -36,5 +37,11 @@ public class Statistics {
                 .reduce(Integer::sum).get();
 
         return Math.floor((double) totalPrizeMoney / money * 100) / 100.0;
+    }
+
+    public String toStringtStatisticsMap() {
+        return statisticsMap.entrySet().stream().sorted(Map.Entry.comparingByKey())
+                .map(entry -> entry.getKey() + "-" + entry.getValue() + "개\n")
+                .collect(Collectors.joining());
     }
 }

@@ -11,35 +11,25 @@ public class Lotto {
     private final List<Number> lotto;
 
     Lotto() {
-        this.lotto = generateLotto();
+        this.lotto = generateAutoLotto();
     }
 
     Lotto(String lottoNumber) {
-        List<Integer> lottoNumbers = Arrays.stream(lottoNumber.split(LOTTO_NUMBERS_SEPARATOR))
-                .map(number -> Integer.parseInt(number.trim()))
+        this.lotto = Arrays.stream(lottoNumber.split(LOTTO_NUMBERS_SEPARATOR))
+                .map(number -> new Number(number.trim())).sorted()
                 .collect(Collectors.toList());
-
-        this.lotto = getNumbers(lottoNumbers);
     }
 
-    private List<Number> generateLotto() {
-        List<Integer> allLottoNumbers = new ArrayList<>();
+    private List<Number> generateAutoLotto() {
+        List<Number> allLottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            allLottoNumbers.add(i);
+            allLottoNumbers.add(new Number(i));
         }
         Collections.shuffle(allLottoNumbers);
 
-        return getNumbers(allLottoNumbers.subList(0, 6));
-    }
-
-    private List<Number> getNumbers(List<Integer> allLottoNumbers) {
-        List<Number> resultRottoNumbers = new ArrayList<>();
-
-        for (int resultRottoNumber : allLottoNumbers) {
-            resultRottoNumbers.add(new Number(resultRottoNumber));
-        }
-        Collections.sort(resultRottoNumbers);
-        return resultRottoNumbers;
+        List<Number> autoNumbers = allLottoNumbers.subList(0, 6);
+        Collections.sort(autoNumbers);
+        return autoNumbers;
     }
 
     public int getNumberOfMatch(Lotto winnerLotto) {
