@@ -1,7 +1,4 @@
-package step2.view;
-
-import step2.LottoMatch;
-import step2.Ticket;
+package step2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +9,7 @@ import static step2.LottoMatch.*;
 
 public class Winner {
 
+    private int matchCount;
     private static Map<Integer, Integer> winnerMap = new HashMap<>();
     static{
         winnerMap.put(FOURTH.getMatchCount(), 0);
@@ -19,7 +17,6 @@ public class Winner {
         winnerMap.put(SECOND.getMatchCount(), 0);
         winnerMap.put(FIRST.getMatchCount(), 0);
     }
-    int matchCount;
 
     public Map<Integer, Integer> findWinner(List<Ticket> tickets, String winnerString) {
         List<Integer> winnerTicket = winnerTicket(winnerString);
@@ -33,6 +30,7 @@ public class Winner {
 
     private void oneTicketCheck(Ticket ticket, List<Integer> winnerTicket) {
         matchCount = 0;
+
         List<Integer> oneTicket = ticket.getTicket();
         for (Integer num : winnerTicket) {
             isTicketContainsNumber(oneTicket, num);

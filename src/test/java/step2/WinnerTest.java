@@ -1,16 +1,7 @@
 package step2;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import step1.CalculateStratety.Divide;
-import step1.CalculateStratety.Minus;
-import step1.CalculateStratety.Multi;
-import step1.CalculateStratety.Plus;
-import step2.view.Winner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,10 +37,6 @@ public class WinnerTest {
         assertThat(winnerMap.get(6)).isEqualTo(0);
     }
 
-    @Test
-    void name() {
-    }
-    
     /*@ParameterizedTest(name = "{0} 개 당첨된 사람 : {1}명")
     @MethodSource("parameter")
     void 당첨_개수(int matchCount, int winnerCount) {

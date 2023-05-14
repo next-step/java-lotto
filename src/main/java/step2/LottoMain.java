@@ -1,6 +1,5 @@
 package step2;
 
-import step2.view.Winner;
 import step2.view.inputView.InputView;
 import step2.view.outputView.OutputView;
 
@@ -19,5 +18,7 @@ public class LottoMain {
 
         String winningNumber = InputView.inputString("지난 주 당첨 번호를 입력해 주세요.");
         Map<Integer, Integer> winnerMap = winner.findWinner(tickets, winningNumber);
+
+        OutputView.printResult(winnerMap, lottoGame.resultRate(money, winnerMap));
     }
 }
