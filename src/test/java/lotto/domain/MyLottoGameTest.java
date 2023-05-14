@@ -22,23 +22,23 @@ class MyLottoGameTest {
 
     @Test
     void 당첨번호확인() {
-        Numbers winNumbers = new Numbers(InputView.makeNumbers("1, 2, 3, 31, 32, 33"));
-        Numbers matched3Numbers = new Numbers(InputView.makeNumbers("1, 2, 3, 41, 42, 43"));
-        Numbers matched4Numbers = new Numbers(InputView.makeNumbers("1, 2, 3, 31, 44, 45"));
+        LottoNumbers winLottoNumbers = new LottoNumbers(InputView.makeNumbers("1, 2, 3, 31, 32, 33"));
+        LottoNumbers matched3LottoNumbers = new LottoNumbers(InputView.makeNumbers("1, 2, 3, 41, 42, 43"));
+        LottoNumbers matched4LottoNumbers = new LottoNumbers(InputView.makeNumbers("1, 2, 3, 31, 44, 45"));
 
         List<Lotto> lottos = new ArrayList<>();
         //번호가 3개 일치하는 로또 개수 : 2개
-        lottos.add(new Lotto(matched3Numbers));
-        lottos.add(new Lotto(matched3Numbers));
+        lottos.add(new Lotto(matched3LottoNumbers));
+        lottos.add(new Lotto(matched3LottoNumbers));
         //번호가 4개 일치하는 로또 개수 : 3개
-        lottos.add(new Lotto(matched4Numbers));
-        lottos.add(new Lotto(matched4Numbers));
-        lottos.add(new Lotto(matched4Numbers));
+        lottos.add(new Lotto(matched4LottoNumbers));
+        lottos.add(new Lotto(matched4LottoNumbers));
+        lottos.add(new Lotto(matched4LottoNumbers));
 
         MyPurchase myPurchase = new MyPurchase(5000);
         MyLottoGame myLottoGame = new MyLottoGame(new Lottos(lottos), myPurchase);
 
-        WinLotto winLotto = new WinLotto(winNumbers);
+        WinLotto winLotto = new WinLotto(winLottoNumbers);
 
         myLottoGame.checkWin(winLotto);
 

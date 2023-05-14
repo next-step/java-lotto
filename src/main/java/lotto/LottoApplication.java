@@ -12,7 +12,7 @@ public class LottoApplication {
         int money = InputView.money();
         int manualCount = InputView.manualCount();
         MyPurchase myPurchase = new MyPurchase(money, manualCount);
-        List<Numbers> manualLottos = InputView.manualNumbers(manualCount);
+        List<LottoNumbers> manualLottos = InputView.manualNumbers(manualCount);
         ResultView.showLottoCount(myPurchase);
 
         //로또 생성
@@ -20,8 +20,8 @@ public class LottoApplication {
         ResultView.showMyLottos(myLottoGame.getLottos());
 
         //지난주 당첨 번호
-        List<Integer> winNumbers = InputView.winLottoNumbers();
-        Integer winBonusNumber = InputView.winLottoBonusNumber();
+        List<LottoNo> winNumbers = InputView.winLottoNumbers();
+        LottoNo winBonusNumber = InputView.winLottoBonusNumber();
         WinLotto winLotto = new WinLotto(winNumbers, winBonusNumber);
         ResultView.showWinLotto(winLotto);
 

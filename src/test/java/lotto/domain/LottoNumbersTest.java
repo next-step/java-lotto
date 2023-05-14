@@ -12,43 +12,35 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class NumbersTest {
+class LottoNumbersTest {
 
-    private List<Integer> originNumbers;
+    private List<LottoNo> originNumbers;
 
     @BeforeEach
     void makeNumbers(){
         originNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            originNumbers.add(i);
+            originNumbers.add(LottoNo.of(i));
         }
     }
 
     @Test
     void 입력숫자6개초과시_예외처리() {
-        originNumbers.add(7);
-        assertThatThrownBy(() -> new Numbers(originNumbers)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void 오름차순정렬확인() {
-        List<Integer> unSortedNumbers = Arrays.asList(33, 36, 32, 31, 34, 35);
-        Numbers sortedNumbers = new Numbers(unSortedNumbers);
-        List<Integer> numbers = sortedNumbers.getValues();
-        assertThat(numbers).isEqualTo(List.of(31, 32, 33, 34, 35, 36));
+        originNumbers.add(LottoNo.of(7));
+        assertThatThrownBy(() -> new LottoNumbers(originNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest(name = "{0}은 선택한 숫자가 맞음")
     @ValueSource(ints = {1,2,3,4,5,6})
     void 숫자포함테스트(int number) {
-        Numbers numbers = new Numbers(originNumbers);
-        assertThat(numbers.contains(number)).isTrue();
+        LottoNumbers lottoNumbers = new LottoNumbers(originNumbers);
+        assertThat(lottoNumbers.contains(LottoNo.of(number))).isTrue();
     }
 
     @ParameterizedTest(name = "{0}은 선택한 숫자가 아님")
     @ValueSource(ints = {41,42,43,44,45})
     void 숫자불포함테스트(int number) {
-        Numbers numbers = new Numbers(originNumbers);
-        assertThat(numbers.contains(number)).isFalse();
+        LottoNumbers lottoNumbers = new LottoNumbers(originNumbers);
+        assertThat(lottoNumbers.contains(LottoNo.of(number))).isFalse();
     }
 }

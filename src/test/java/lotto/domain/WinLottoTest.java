@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.view.InputView;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,22 +15,19 @@ class WinLottoTest {
     void 지난주당첨번호() {
         WinLotto winLotto = winLottoFixture("1, 8, 11, 31, 41, 42");
 
-        List<Integer> expectedNumbers = Arrays.asList(1,8,11,31,41,42);
-        Numbers numbers = new Numbers(expectedNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(1, 8, 11, 31, 41, 42);
 
-        assertThat(winLotto.numbers()).isEqualTo(numbers);
+        assertThat(winLotto.numbers()).isEqualTo(lottoNumbers);
     }
 
     @Test
     void 지난주당첨번호with보너스번호() {
-        WinLotto winLotto = winLottoWithBonusFixture("1, 3, 11, 13, 21, 23", 31);
-
-        List<Integer> expectedNumbers = Arrays.asList(1,3,11,13,21,23);
-        Numbers numbers = new Numbers(expectedNumbers);
+        WinLotto winLotto = winLottoWithBonusFixture("1, 3, 11, 13, 21, 23", LottoNo.of(31));
+        LottoNumbers lottoNumbers = new LottoNumbers(1, 3, 11, 13, 21, 23);
 
         assertAll(
-                () -> assertThat(winLotto.numbers()).isEqualTo(numbers),
-                () -> assertThat(winLotto.bonusNumber()).isEqualTo(31)
+                () -> assertThat(winLotto.numbers()).isEqualTo(lottoNumbers),
+                () -> assertThat(winLotto.bonusNumber()).isEqualTo(LottoNo.of(31))
         );
     }
 
@@ -55,20 +51,20 @@ class WinLottoTest {
 
     @Test
     void 당첨_2등() {
-        WinLotto winLotto = winLottoWithBonusFixture("31, 32, 33, 34, 35, 36", 11);
+        WinLotto winLotto = winLottoWithBonusFixture("31, 32, 33, 34, 35, 36", LottoNo.of(11));
         Rank rank = winLotto.checkRank(lottoFixture("11, 32, 33, 34, 35, 36"));
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
     private Lotto lottoFixture(String input) {
-        return new Lotto(new Numbers(InputView.makeNumbers(input)));
+        return new Lotto(new LottoNumbers(InputView.makeNumbers(input)));
     }
 
     private WinLotto winLottoFixture(String input) {
-        return new WinLotto(new Numbers(InputView.makeNumbers(input)));
+        return new WinLotto(new LottoNumbers(InputView.makeNumbers(input)));
     }
 
-    private WinLotto winLottoWithBonusFixture(String input, int bonusNumber) {
-        return new WinLotto(new Numbers(InputView.makeNumbers(input)), bonusNumber);
+    private WinLotto winLottoWithBonusFixture(String input, LottoNo bonusNumber) {
+        return new WinLotto(new LottoNumbers(InputView.makeNumbers(input)), bonusNumber);
     }
 }

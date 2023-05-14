@@ -11,7 +11,7 @@ public class MyLottoGame {
         this.result = new MyResult(myPurchase);
     }
 
-    public static MyLottoGame generate(MyPurchase myPurchase, List<Numbers> manualLottos) {
+    public static MyLottoGame generate(MyPurchase myPurchase, List<LottoNumbers> manualLottos) {
         Lottos lottos = Lottos.create(myPurchase, manualLottos);
         return new MyLottoGame(lottos, myPurchase);
     }

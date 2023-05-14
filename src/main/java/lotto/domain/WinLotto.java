@@ -3,32 +3,32 @@ package lotto.domain;
 import java.util.List;
 
 public class WinLotto {
-    private final Numbers numbers;
-    private final Integer bonusNumber;
+    private final LottoNumbers lottoNumbers;
+    private final LottoNo bonusNumber;
 
-    public WinLotto(Numbers numbers) {
-        this(numbers, null);
+    public WinLotto(LottoNumbers lottoNumbers) {
+        this(lottoNumbers, null);
     }
 
-    public WinLotto(Numbers numbers, Integer bonusNumber) {
-        this.numbers = numbers;
+    public WinLotto(LottoNumbers lottoNumbers, LottoNo bonusNumber) {
+        this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public WinLotto(List<Integer> numbers, Integer bonusNumber) {
-        this(new Numbers(numbers), bonusNumber);
+    public WinLotto(List<LottoNo> numbers, LottoNo bonusNumber) {
+        this(new LottoNumbers(numbers), bonusNumber);
     }
 
-    public Numbers numbers() {
-        return numbers;
+    public LottoNumbers numbers() {
+        return lottoNumbers;
     }
 
-    public Integer bonusNumber() {
+    public LottoNo bonusNumber() {
         return bonusNumber;
     }
 
     public Rank checkRank(Lotto lotto) {
-        int matchCount = this.numbers.countContains(lotto.numbers());
+        int matchCount = this.lottoNumbers.countContains(lotto.numbers());
         boolean matchBounus = lotto.numbers().contains(this.bonusNumber);
         return Rank.of(matchCount, matchBounus);
     }

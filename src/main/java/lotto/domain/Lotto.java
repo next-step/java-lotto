@@ -6,28 +6,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final Numbers numbers;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(Numbers numbers) {
-        this.numbers = numbers;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto autoGenerate() {
-        List<Integer> autoNumbers = new ArrayList<>(Numbers.NUMBER_RANGE);
+        List<LottoNo> autoNumbers = new ArrayList<>(LottoNumbers.ALL_NUMBERS);
         Collections.shuffle(autoNumbers);
-        autoNumbers = autoNumbers.subList(0, Numbers.CHOICE_COUNT);
-        Collections.sort(autoNumbers);
-        return new Lotto(new Numbers(autoNumbers));
+        autoNumbers = autoNumbers.subList(0, LottoNumbers.CHOICE_COUNT);
+        return new Lotto(new LottoNumbers(autoNumbers));
     }
 
-    public static Lotto manualGenerate(Numbers numbers) {
-        List<Integer> manualNumbers = numbers.getValues();
-        Collections.sort(manualNumbers);
-        return new Lotto(new Numbers(manualNumbers));
+    public static Lotto manualGenerate(LottoNumbers lottoNumbers) {
+        List<LottoNo> manualNumbers = lottoNumbers.getValues();
+        return new Lotto(new LottoNumbers(manualNumbers));
     }
 
-    public Numbers numbers() {
-        return numbers;
+    public LottoNumbers numbers() {
+        return lottoNumbers;
     }
 
     @Override
@@ -35,11 +33,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 }

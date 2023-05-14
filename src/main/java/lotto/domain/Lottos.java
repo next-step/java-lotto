@@ -10,7 +10,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos create(MyPurchase myPurchase, List<Numbers> manualLottos) {
+    public static Lottos create(MyPurchase myPurchase, List<LottoNumbers> manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < myPurchase.manualCount(); i++) {
             lottos.add(Lotto.manualGenerate(manualLottos.get(i)));

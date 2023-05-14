@@ -23,7 +23,7 @@ class LottosTest {
     @Test
     void 전체수동발급() {
         MyPurchase myPurchase = new MyPurchase(3000,3);
-        List<Numbers> manualNumbers = new ArrayList<>();
+        List<LottoNumbers> manualNumbers = new ArrayList<>();
 
         manualNumbers.add(numbersFixture("1, 2, 3, 4, 5, 6"));
         manualNumbers.add(numbersFixture("11, 12, 13, 14, 15, 16"));
@@ -40,7 +40,7 @@ class LottosTest {
     @Test
     void 자동수동함께발급() {
         MyPurchase myPurchase = new MyPurchase(5000,3);
-        List<Numbers> manualNumbers = new ArrayList<>();
+        List<LottoNumbers> manualNumbers = new ArrayList<>();
 
         manualNumbers.add(numbersFixture("1, 2, 3, 4, 5, 6"));
         manualNumbers.add(numbersFixture("11, 12, 13, 14, 15, 16"));
@@ -54,8 +54,8 @@ class LottosTest {
         );
     }
 
-    private static Numbers numbersFixture(String manualInput) {
-        return new Numbers(InputView.makeNumbers(manualInput));
+    private static LottoNumbers numbersFixture(String manualInput) {
+        return new LottoNumbers(InputView.makeNumbers(manualInput));
     }
     private static Lotto lottoFixture(String manualInput) {
         return new Lotto(numbersFixture(manualInput));

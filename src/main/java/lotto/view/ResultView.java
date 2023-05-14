@@ -17,8 +17,9 @@ public class ResultView {
         System.out.printf("\n수동으로 %d장, 자동으로 %d장 구매했습니다.\n", myPurchase.manualCount(), myPurchase.autoCount());
     }
 
-    private static void printNumbers(Numbers numbers) {
-        System.out.println(numbers.getValues().stream()
+    private static void printNumbers(LottoNumbers lottoNumbers) {
+        System.out.println(lottoNumbers.getValues().stream()
+                .map(LottoNo::getValue)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", ", "[", "]"))
         );
@@ -27,7 +28,7 @@ public class ResultView {
     public static void showWinLotto(WinLotto winLotto) {
         System.out.print("지난 주 당첨 번호 : ");
         printNumbers(winLotto.numbers());
-        System.out.println("보너스 번호 : [" + winLotto.bonusNumber() + "]\n");
+        System.out.println("보너스 번호 : [" + winLotto.bonusNumber().getValue() + "]\n");
     }
 
     public static void showLottoResult(MyResult result) {
