@@ -9,6 +9,7 @@ import lotto.view.InputView;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class Main {
         OutputView.showLotteryCount(lotteryTickets.size());
         OutputView.showLotteryTickets(lotteryTickets);
 
-        final List<Integer> winNumbers = InputView.pickWinNumbers();
+        final Set<Integer> winNumbers = InputView.pickWinNumbers();
         final Map<Win, Integer> winTotal = lotteryTickets.getWinTotal(new WinNumbers(winNumbers));
         OutputView.showResult(winTotal, money);
     }

@@ -17,10 +17,6 @@ public class LotteryNumber {
         return numberCache.computeIfAbsent(number, key -> new LotteryNumber(number));
     }
 
-    public boolean isIn(WinNumbers winNumbers) {
-        return winNumbers.contains(number);
-    }
-
     @Override
     public String toString() {
         return String.valueOf(number);

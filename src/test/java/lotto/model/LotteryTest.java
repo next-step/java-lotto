@@ -54,7 +54,7 @@ public class LotteryTest {
                 LotteryNumber.of(41),
                 LotteryNumber.of(42),
                 LotteryNumber.of(43)));
-        List<Integer> winNumbers = List.of(41, 1, 13, 27, 42, 43);
+        Set<Integer> winNumbers = Set.of(41, 1, 13, 27, 42, 43);
         int count = lotteryTicket.compare(new WinNumbers(winNumbers));
         assertThat(count).isEqualTo(3);
     }

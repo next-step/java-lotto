@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.model.LotteryNumber;
 
 import java.util.Set;
 
