@@ -3,24 +3,44 @@ package autolotto;
 import autolotto.lotto.Lotto;
 import autolotto.lotto.LottoGenerator;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class LottoMachine {
     private final static int LOTTO_PRICE = 1000;
 
-    private final LottoGenerator lottoGenerator;
     private final int inputMoney;
+    private final Wallet wallet;
 
     public LottoMachine(LottoGenerator lottoGenerator, int inputMoney) {
-        this.lottoGenerator = lottoGenerator;
+        this(inputMoney, initWallet(lottoGenerator, inputMoney));
+    }
+
+    public LottoMachine(int inputMoney, Wallet wallet) {
         this.inputMoney = inputMoney;
+        this.wallet = wallet;
+    }
+
+    private static Wallet initWallet(LottoGenerator lottoGenerator, int inputMoney) {
+        Wallet wallet = new Wallet();
+        for (int i = 0; i < calculateLottoCount(inputMoney); i++) {
+            wallet.addLotto(lottoGenerator.generateLotto());
+        }
+        return wallet;
+    }
+
+    private static int calculateLottoCount(int inputMoney) {
+        return inputMoney / LOTTO_PRICE;
     }
 
     public List<Lotto> lotteries() {
-        return lottoGenerator.generateMultipleLotto(calculateLottoCount());
+        return this.wallet.allLotteries();
     }
 
-    private int calculateLottoCount() {
-        return inputMoney / LOTTO_PRICE;
+    public BigDecimal profitRate(List<Integer> winningNumbers) {
+        int totalWinnings = this.wallet.totalWinningMoneyOf(winningNumbers);
+        return BigDecimal.valueOf(totalWinnings)
+                .divide(BigDecimal.valueOf(this.inputMoney), 2, RoundingMode.HALF_UP);
     }
 }

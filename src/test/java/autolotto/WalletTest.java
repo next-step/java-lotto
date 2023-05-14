@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,9 +16,8 @@ class WalletTest {
 
     @Test
     void 지갑에_로또를_하나_추가할_수_있다() {
-        int money = 1000;
+        Wallet wallet = new Wallet();
 
-        Wallet wallet = new Wallet(money);
         wallet.addLotto(lottoGenerator.generateLotto());
 
         Assertions.assertThat(wallet.lottoSize()).isEqualTo(1);
@@ -27,34 +25,21 @@ class WalletTest {
 
     @Test
     void 지갑을_생성하며_한번에_로또_여러개를_추가_할_수_있다() {
-        int threeLottoMoney = 3000;
+        int three = 3;
 
-        Wallet wallet = new Wallet(threeLottoMoney, lottoGenerator.generateMultipleLotto(threeLottoMoney));
+        Wallet wallet = new Wallet(lottoGenerator.generateMultipleLotto(three));
 
         Assertions.assertThat(wallet.lottoSize()).isEqualTo(3);
     }
 
     @Test
     void 지갑_내_로또들에_대한_총_당첨금액을_알려준다() {
-        Wallet wallet = new Wallet(3000, lottoGenerator.generateMultipleLotto(3000));
+        Wallet wallet = new Wallet(lottoGenerator.generateMultipleLotto(3));
         int expectedTotalWinnings = Winning.THREE.winningMoney() * 3;
 
-
-        int totalWinnings = wallet.totalWinningsOfWinningNumber(fixedWinningNumbers);
+        int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers);
 
         Assertions.assertThat(totalWinnings).isEqualTo(expectedTotalWinnings);
-    }
-
-    @Test
-    void 로또구매금액_대비_당첨금액의_수익률을_소수점_둘째_자리까지_반올림한_값으로_알려준다() {
-        int initialMoney = 3000;
-
-        BigDecimal expectedProfitRate = new BigDecimal("5.00");
-        Wallet wallet = new Wallet(initialMoney, lottoGenerator.generateMultipleLotto(initialMoney));
-
-        BigDecimal profitRate = wallet.profitRate(fixedWinningNumbers);
-
-        Assertions.assertThat(profitRate).isEqualTo(expectedProfitRate);
     }
 
     @Nested
@@ -63,7 +48,7 @@ class WalletTest {
 
         @BeforeEach
         void setUp() {
-            wallet = new Wallet(3000, lottoGenerator.generateMultipleLotto(3000));
+            wallet = new Wallet(lottoGenerator.generateMultipleLotto(3));
         }
 
         @Test
@@ -81,7 +66,6 @@ class WalletTest {
             int countOfLotto = wallet.countOfLottoMatchingWith(fixedWinningNumbers, countOfMatchingNumber);
 
             Assertions.assertThat(countOfLotto).isEqualTo(0);
-
         }
     }
 
