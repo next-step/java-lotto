@@ -1,9 +1,11 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
+import step2.view.Winner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,11 +18,8 @@ public class LottoTest {
     @Test
     void 로또_n장() {
 
-        List<Ticket> tickets = lottoGame.makeTickets(3000);
-        for (Ticket ticket : tickets) {
-            System.out.println("ticket.getTicket() = " + ticket.getTicket() + " / " + ticket);
-        }
-        assertThat(tickets).hasSize(3);
-
+        List<Ticket> tickets = lottoGame.makeTickets(7000);
+        assertThat(tickets).hasSize(7);
     }
+
 }

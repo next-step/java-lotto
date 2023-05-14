@@ -12,20 +12,22 @@ public class Ticket {
 
     public Ticket() {
         createTicket();
-        System.out.println("ticket = " + ticket);
+    }
+    public Ticket(List<Integer> numbers){
+        ticket = numbers;
     }
 
     public List<Integer> getTicket() {
-        return this.ticket;
+        return ticket;
     }
 
     public List<Integer> createTicket() {
 
-        Collections.shuffle(Lotto.lottoNumber);
-        this.ticket = Lotto.lottoNumber.subList(0,6);
+        Collections.shuffle(lottoNumber);
+        ticket = new ArrayList<>(lottoNumber.subList(0,6));
         Collections.sort(ticket);
 
-        return this.ticket;
+        return ticket;
     }
 
 }

@@ -2,9 +2,10 @@ package step2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
-    public static final int TICKET_PRICE = 1000;
+    private static final int TICKET_PRICE = 1000;
 
     public List<Ticket> makeTickets(int money) {
         List<Ticket> tickets = new ArrayList<>();
@@ -16,4 +17,5 @@ public class LottoGame {
 
         return tickets;
     }
+
 }

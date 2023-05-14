@@ -1,6 +1,6 @@
 package step2;
 
-public enum Win {
+public enum LottoMatch {
     FIRST(6, 2000000000)
     ,SECOND(5, 1500000)
     ,THIRD(4, 50000)
@@ -9,7 +9,7 @@ public enum Win {
     private int matchCount;
     private int reward;
 
-    Win(int matchCount, int reward) {
+    LottoMatch(int matchCount, int reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
