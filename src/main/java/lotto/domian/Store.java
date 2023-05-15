@@ -27,7 +27,7 @@ public class Store {
     }
 
     private static int decideCount(Money money) {
-        return money.amount() / LottoCompany.PURCHASE_UNIT;
+        return money.amount() / Lotto.PURCHASE_UNIT;
     }
 
     private static Set<LottoNumber> makeLottoNumber(List<Integer> numberList) {

@@ -24,4 +24,12 @@ public class LottoNumberTest {
                 .isThrownBy(() -> new LottoNumber(number));
     }
 
+    @DisplayName("숫자형태의 로또번호가 아니라면 예외를 던진다.")
+    @Test
+    public void lottoNubmer_NotNumericFormat_ThrowException() {
+        String number = "a";
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumber(number));
+    }
+
 }

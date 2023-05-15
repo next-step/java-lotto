@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RecordTest {
@@ -16,8 +17,8 @@ public class RecordTest {
 
     @BeforeEach
     public void setUp() {
-        lottoList.add(Lotto.of(1,2,3,4,5,6));
-        lottoList.add(Lotto.of(1,2,3,4,6,7));
+        lottoList.add(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
+        lottoList.add(Lotto.of(Arrays.asList(1,2,3,4,6,7)));
         lottoBundle = new LottoBundle(lottoList);
     }
 
@@ -25,7 +26,8 @@ public class RecordTest {
     @Test
     public void pickRank_AmongLottoBundle_pickRanks() {
         String winNumberString = "1, 2, 3, 4, 5, 6";
-        WinNumber winNumber = LottoCompany.announce(winNumberString);
+        String bonusWinNumber = "7";
+        WinNumber winNumber = LottoCompany.announce(winNumberString, bonusWinNumber);
 
         Record record = Record.extractRecord(lottoBundle, winNumber);
 

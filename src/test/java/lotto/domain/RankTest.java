@@ -1,70 +1,50 @@
 package lotto.domain;
 
-import lotto.domian.Lotto;
+import lotto.domian.MatchCount;
 import lotto.domian.Rank;
-import lotto.domian.WinNumber;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class RankTest {
 
-    private WinNumber winNumber;
-
-    @BeforeEach
-    public void setUp() {
-        winNumber = new WinNumber(Lotto.of(1,2,3,4,5,6));
-    }
-
     @DisplayName("1등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseFirst() {
-        Lotto lotto = Lotto.of(1,2,3,4,5,6);
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto));
-
-        Assertions.assertThat(Rank.FIRST).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(new MatchCount(6), false)).isEqualTo(Rank.FIRST);
     }
 
     @DisplayName("2등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseSecond() {
-        Lotto lotto = Lotto.of(1,2,3,4,5,7);
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto));
-
-        Assertions.assertThat(Rank.SECOND).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(new MatchCount(5), true)).isEqualTo(Rank.SECOND);
     }
 
     @DisplayName("3등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseThird() {
-        Lotto lotto = Lotto.of(1,2,3,4,7,8);
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto));
-
-        Assertions.assertThat(Rank.THIRD).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(new MatchCount(5), false)).isEqualTo(Rank.THIRD);
     }
 
     @DisplayName("4등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseFourth() {
-        Lotto lotto = Lotto.of(1,2,3,7,8,9);
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto));
-
-        Assertions.assertThat(Rank.FOURTH).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(new MatchCount(4), false)).isEqualTo(Rank.FOURTH);
+        Assertions.assertThat(Rank.find(new MatchCount(4), true)).isEqualTo(Rank.FOURTH);
     }
 
-    @DisplayName("2개 이하를 맞힐 경우 예외가 발생한다.")
+    @DisplayName("5등을 가릴 수 있다.")
+    @Test
+    public void rank_DependsOnCount_ChooseFIFTH() {
+        Assertions.assertThat(Rank.find(new MatchCount(3), false)).isEqualTo(Rank.FIFTH);
+        Assertions.assertThat(Rank.find(new MatchCount(3), true)).isEqualTo(Rank.FIFTH);
+    }
+
+    @DisplayName("2개 이하를 맞혔을 경우 꽝이다.")
     @Test
     public void rank_DependsOnUnderCount_ThrowException() {
-        Lotto lotto = Lotto.of(1,2,7,8,9,10);
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto));
-
-        Assertions.assertThat(Rank.MISS).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(new MatchCount(2), false)).isEqualTo(Rank.MISS);
+        Assertions.assertThat(Rank.find(new MatchCount(2), true)).isEqualTo(Rank.MISS);
     }
 
 }

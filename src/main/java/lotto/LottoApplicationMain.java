@@ -11,11 +11,14 @@ public class LottoApplicationMain {
         LottoBundle lottoBundle = Store.order(new Money(purchaseMoney));
         OutputView.showLottoBundle(lottoBundle);
 
-        WinNumber winNumber = LottoCompany.announce(InputView.questionWinnerNumber());
+        String answerNumbers = InputView.questionWinnerNumber();
+        String bonusWinNumber = InputView.questionBonusNumber();
+
+        WinNumber winNumber = LottoCompany.announce(answerNumbers, bonusWinNumber);
         Record record = Record.extractRecord(lottoBundle, winNumber);
         OutputView.showRecord(record);
 
-        ProfitRate profitRate = Record.calculateProfit(purchaseMoney, record);
-        OutputView.showProfitRate(profitRate);
+        ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyStrategy());
+        OutputView.showProfitRate(profitCalculator.calculate(record.getRecord(), purchaseMoney));
     }
 }
