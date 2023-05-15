@@ -13,15 +13,11 @@ public class Lotto {
     private static final int LOTTO_LIMIT_SIZE = 6;
     private final List<Integer> numbers;
 
-    public Lotto() {
-        List<Integer> lottoNumbers = new ArrayList<>(LOTTO_NUMBER_RANGE);
-        Collections.shuffle(lottoNumbers);
-        lottoNumbers = lottoNumbers.subList(0, 6);
-        lottoValidation(lottoNumbers);
-        Collections.sort(lottoNumbers);
-
-        this.numbers = lottoNumbers;
+    public Lotto(List<Integer> numbers) {
+        lottoValidation(numbers);
+        this.numbers = numbers;
     }
+
     private void lottoValidation(List<Integer> lottoNumber) {
         if (lottoNumber.size() != LOTTO_LIMIT_SIZE) {
             throw new IllegalStateException("로또의 숫자가 6개가 아닙니다.");
@@ -33,16 +29,21 @@ public class Lotto {
         }
     }
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
     public List<Integer> getNumbers() {
         return this.numbers;
     }
 
     public boolean contains(int bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public static Lotto auto() {
+        List<Integer> lottoNumbers = new ArrayList<>(LOTTO_NUMBER_RANGE);
+        Collections.shuffle(lottoNumbers);
+        lottoNumbers = lottoNumbers.subList(0, 6);
+        Collections.sort(lottoNumbers);
+
+        return new Lotto(lottoNumbers);
     }
 
 }

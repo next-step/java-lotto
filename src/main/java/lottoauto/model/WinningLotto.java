@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
 
-    private final int LOTTO_MATCH_COUNT_5 = 5;
     private final List<Integer> winningLotto;
     private final int bonusNumber;
 
@@ -19,7 +18,6 @@ public class WinningLotto {
     }
 
     public WinningReward compare(Lotto lotto) {
-
         boolean existBonus = lotto.contains(bonusNumber);
         List<Integer> matchNumbers = lotto.getNumbers().stream()
                 .filter(number -> winningLotto.stream()

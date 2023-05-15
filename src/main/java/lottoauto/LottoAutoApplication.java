@@ -17,7 +17,7 @@ public class LottoAutoApplication {
 
         LottoService lottoService = new LottoService();
         LottoRequest lottoRequest = new LottoRequest(price);
-        Lottos lottos = lottoService.generateLottoNumber(lottoRequest.getLottoQuantity());
+        Lottos lottos = lottoService.generateLottoNumber(lottoRequest);
 
         OutputView.lottos(lottos);
         List<Integer> winningNumbers = InputView.winningNumber();

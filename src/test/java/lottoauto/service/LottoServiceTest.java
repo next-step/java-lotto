@@ -3,6 +3,7 @@ package lottoauto.service;
 import lottoauto.LottoFixture;
 import lottoauto.domain.LottoService;
 import lottoauto.model.Lottos;
+import lottoauto.model.request.LottoRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,9 @@ class LottoServiceTest {
     void generateLottoNumberTest(int price) {
         int quantity = price / ONE_LOTTO_PRICE;
         LottoService lottoService = new LottoService();
+        LottoRequest request = new LottoRequest(price);
 
-        Lottos lottos = lottoService.generateLottoNumber(price);
+        Lottos lottos = lottoService.generateLottoNumber(request);
         Assertions.assertThat(quantity).isEqualTo(lottos.getSize());
     }
 
@@ -27,7 +29,8 @@ class LottoServiceTest {
     void inputUnderOneThousand() {
         int price = 900;
         LottoService lottoService = new LottoService();
-        Assertions.assertThatThrownBy(() -> lottoService.generateLottoNumber(price))
+        LottoRequest request = new LottoRequest(price);
+        Assertions.assertThatThrownBy(() -> lottoService.generateLottoNumber(request))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 한개의 금액은 1000원 입니다.");
     }
