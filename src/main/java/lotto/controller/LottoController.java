@@ -25,7 +25,7 @@ public class LottoController {
         int manualLottoCount = Integer.parseInt(inputView.setNoAutoBuyLottoCount());
 
         List<LottoTicket> manualTickets = new ArrayList<>();
-        if(manualLottoCount != LottoConstants.ZERO) {
+        if(manualLottoCount != 0) {
             List<String> manualLottoNumbers = inputView.setNoAutoLottoNumbers(manualLottoCount);
 
             for (String numbers : manualLottoNumbers) {
