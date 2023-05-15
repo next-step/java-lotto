@@ -1,30 +1,16 @@
 package lotto.domain;
 
-import lotto.domian.Lotto;
-import lotto.domian.LottoNumber;
 import lotto.domian.Rank;
-import lotto.domian.WinNumber;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class RankTest {
-
-    private WinNumber winNumber;
-
-    @BeforeEach
-    public void setUp() {
-        winNumber = new WinNumber(Lotto.of(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(45));
-    }
 
     @DisplayName("1등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseFirst() {
         Assertions.assertThat(Rank.find(6, false)).isEqualTo(Rank.FIRST);
-        // todo
     }
 
     @DisplayName("2등을 가릴 수 있다.")
