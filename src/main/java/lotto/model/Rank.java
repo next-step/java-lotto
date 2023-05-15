@@ -14,13 +14,8 @@ public enum Rank {
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
     NONE(0, 0);
-    private static final Map<Integer, Rank> lotto_rank = new HashMap<>();
-
-    static {
-        for (Rank rank : values()) {
-            lotto_rank.put(rank.count, rank);
-        }
-    }
+    private static final Map<Integer, Rank> lotto_rank = Arrays.stream(values())
+            .collect(Collectors.toMap(Rank::count, Function.identity()));
 
     private final int count;
     private final int reward;
