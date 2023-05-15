@@ -29,10 +29,6 @@ public class Money {
         this.money = money;
     }
 
-    public int divideByUnit(int unit) {
-        return money % unit;
-    }
-
     public int getMoney() {
         return money;
     }
