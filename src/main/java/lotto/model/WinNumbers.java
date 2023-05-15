@@ -8,7 +8,9 @@ import static lotto.constant.LotteryConstant.*;
 
 public class WinNumbers {
 
-    private Set<LotteryNumber> numbers;
+    private static final double BONUS_COUNT = 0.5;
+
+    private final Set<LotteryNumber> numbers;
     private Integer bonusNumber;
 
     public WinNumbers(Set<Integer> numbers) {
@@ -37,7 +39,7 @@ public class WinNumbers {
 
         double count = intersection.size();
         if (bonusNumber != null && others.contains(LotteryNumber.of(bonusNumber))) {
-            return count + 0.5;
+            return count + BONUS_COUNT;
         }
         return count;
     }
