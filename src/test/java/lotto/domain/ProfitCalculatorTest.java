@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProfitCalculatorTest {
@@ -19,10 +20,10 @@ public class ProfitCalculatorTest {
     public void calculate_ByMultiplyStrategy_CreateProfitRate() {
 
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(Lotto.of(1,2,3,10,11,12));
-        lottoList.add(Lotto.of(1,2,3,21,22,23));
+        lottoList.add(Lotto.of(Arrays.asList(1,2,3,10,11,12)));
+        lottoList.add(Lotto.of(Arrays.asList(1,2,3,21,22,23)));
         LottoBundle lottoBundle = new LottoBundle(lottoList);
-        WinNumber winNumber = new WinNumber(Lotto.of(1, 2, 3, 41, 42, 43), new LottoNumber(30));
+        WinNumber winNumber = new WinNumber(Lotto.of(Arrays.asList(1, 2, 3, 41, 42, 43)), new LottoNumber(30));
         Record record = Record.extractRecord(lottoBundle, winNumber);
 
         ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyStrategy());

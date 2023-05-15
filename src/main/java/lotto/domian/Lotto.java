@@ -2,6 +2,7 @@ package lotto.domian;
 
 import java.io.ObjectOutput;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -15,7 +16,7 @@ public class Lotto {
         this.lottoTicket = lottoTicket;
     }
 
-    public static Lotto of(Integer... numbers) {
+    public static Lotto of(List<Integer> numbers) {
         Set<LottoNumber> lottoTicket = new HashSet<>();
         for (int number : numbers) {
             lottoTicket.add(new LottoNumber(number));
