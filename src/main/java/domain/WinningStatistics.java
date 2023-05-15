@@ -9,10 +9,10 @@ public class WinningStatistics {
     public static final int OFFSET = 3;
     private int[] winningStatistics = new int[4];
 
-    private List<Integer> winningNumbers;
+    private WinningNumbers winningNumbers;
 
     public WinningStatistics(List<Integer> winningNumbers) {
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new WinningNumbers(winningNumbers);
     }
 
     public int[] getWinningResults() {

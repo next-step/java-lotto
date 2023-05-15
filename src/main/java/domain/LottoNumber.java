@@ -37,7 +37,7 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    public int addCountIfContain(int count, List<Integer> winningNumbers) {
+    public int addCountIfContain(int count, WinningNumbers winningNumbers) {
         if (winningNumbers.contains(lottoNumber)) {
             count++;
         }
