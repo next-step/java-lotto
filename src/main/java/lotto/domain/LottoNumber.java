@@ -36,7 +36,7 @@ public class LottoNumber {
         return number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER;
     }
 
-    public static List<Integer> getRandomLottoNumberList() {
+    public static List<Integer> generateRandomLottoNumbers() {
         List<Integer> AllNumbers = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());

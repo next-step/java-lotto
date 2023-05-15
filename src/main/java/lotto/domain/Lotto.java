@@ -24,7 +24,7 @@ public class Lotto {
     }
 
     private static TreeSet<Integer> randomLottoNumbers() {
-        List<Integer> AllNumbers = LottoNumber.getRandomLottoNumberList();
+        List<Integer> AllNumbers = LottoNumber.generateRandomLottoNumbers();
         return new TreeSet<>(AllNumbers.subList(0, SIZE));
     }
 
