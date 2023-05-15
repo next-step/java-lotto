@@ -1,8 +1,4 @@
-package step1.domain;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+package stringcalculator.domain;
 
 public class StringCalculator {
 

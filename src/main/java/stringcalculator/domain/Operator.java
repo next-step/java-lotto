@@ -1,4 +1,4 @@
-package step1.domain;
+package stringcalculator.domain;
 
 import java.util.Arrays;
 
