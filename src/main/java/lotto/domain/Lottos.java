@@ -8,6 +8,7 @@ public class Lottos {
     private static final int LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottos;
+    private final int autoLottoCount;
 
     public Lottos(int money) {
         this(money, new ArrayList<>());
@@ -21,9 +22,12 @@ public class Lottos {
         if (isInvalidMoney(money)) {
             throw new IllegalArgumentException("구입 금액은 1000의 배수인 양수여야 합니다.");
         }
+
+        int autoLottoCount = money / LOTTO_PRICE - manualLottos.size();
+        this.autoLottoCount = autoLottoCount;
+
         List<Lotto> lottos = new ArrayList<>(manualLottos);
-        int AutoLottoCount = money / LOTTO_PRICE - manualLottos.size();
-        for (int i = 0; i < AutoLottoCount; i++) {
+        for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(new Lotto());
         }
         this.lottos = lottos;
@@ -48,8 +52,12 @@ public class Lottos {
         );
     }
 
-    public int getLottoCount() {
-        return this.lottos.size();
+    public int getManualLottoCount() {
+        return this.lottos.size() - this.autoLottoCount;
+    }
+
+    public int getAutoLottoCount() {
+        return this.autoLottoCount;
     }
 
     public double getEarningRate(WinNumbers winNumbers) {
