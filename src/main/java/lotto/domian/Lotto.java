@@ -1,6 +1,5 @@
 package lotto.domian;
 
-import java.io.ObjectOutput;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Lotto {
 
     public static final int PURCHASE_UNIT = 1000;
+    private static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lottoTicket;
 
     public Lotto(Set<LottoNumber> lottoTicket) {
@@ -53,7 +53,7 @@ public class Lotto {
     }
 
     private void checkDuplicate(Set<LottoNumber> lottoTicket) {
-        if (lottoTicket.size() != 6) {
+        if (lottoTicket.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않은 숫자 6개여야 합니다.");
         }
     }
