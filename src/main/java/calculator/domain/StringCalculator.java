@@ -1,6 +1,11 @@
 package calculator.domain;
 
-import calculator.domain.operator.*;
+
+import calculator.domain.operator.Addition;
+import calculator.domain.operator.Division;
+import calculator.domain.operator.Multiplication;
+import calculator.domain.operator.Operator;
+import calculator.domain.operator.Subtraction;
 
 import java.util.HashMap;
 import java.util.List;

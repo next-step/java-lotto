@@ -1,6 +1,10 @@
 package lotto.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,11 +17,16 @@ public class AutoLotteryNumberGenerator implements LotteryNumberGenerator {
 
     @Override
     public Set<LotteryNumber> generate() {
-        List<LotteryNumber> newNumbers = new ArrayList<>(numbers);
-        Collections.shuffle(newNumbers);
+        List<LotteryNumber> newNumbers = initializeRandomNumberList();
         Set<LotteryNumber> result = new HashSet<>(newNumbers.subList(0, NUMBER_PER_TICKET));
         validate(result);
         return result;
+    }
+
+    private List<LotteryNumber> initializeRandomNumberList() {
+        List<LotteryNumber> newNumbers = new ArrayList<>(numbers);
+        Collections.shuffle(newNumbers);
+        return newNumbers;
     }
 
     private void validate(Set<LotteryNumber> numbers) {
