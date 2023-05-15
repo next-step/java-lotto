@@ -1,6 +1,7 @@
-package autolotto;
+package autolotto.machine.lotto;
 
-import autolotto.lotto.Lotto;
+import autolotto.machine.winning.Winning;
+import autolotto.machine.winning.WinningNumbers;
 
 import java.util.ArrayList;
 import java.util.List;

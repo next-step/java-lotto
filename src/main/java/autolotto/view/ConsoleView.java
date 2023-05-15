@@ -1,5 +1,6 @@
-package autolotto;
+package autolotto.view;
 
+import autolotto.machine.winning.Winning;
 import autolotto.dto.LottoDTO;
 import autolotto.dto.Statistics;
 

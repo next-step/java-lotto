@@ -1,6 +1,6 @@
-package autolotto.lotto;
+package autolotto.machine.lotto;
 
-import autolotto.lotto.fixture.FixedNumberShuffler;
+import autolotto.machine.lotto.fixture.FixedNumberShuffler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

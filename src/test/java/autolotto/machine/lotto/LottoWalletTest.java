@@ -1,7 +1,8 @@
-package autolotto;
+package autolotto.machine.lotto;
 
-import autolotto.lotto.LottoGenerator;
-import autolotto.lotto.fixture.FixedNumberShuffler;
+import autolotto.machine.lotto.fixture.FixedNumberShuffler;
+import autolotto.machine.winning.Winning;
+import autolotto.machine.winning.WinningNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -42,7 +43,7 @@ class LottoWalletTest {
     }
 
     @Nested
-    class 지갑_내_로또들_중_로또의_개수 {
+    class countOfLottoMatchingWithTest {
         private LottoWallet wallet;
 
         @BeforeEach

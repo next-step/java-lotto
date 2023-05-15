@@ -1,8 +1,10 @@
-package autolotto;
+package autolotto.machine;
 
-import autolotto.lotto.Lotto;
-import autolotto.lotto.LottoGenerator;
-import autolotto.lotto.fixture.FixedNumberShuffler;
+import autolotto.machine.lotto.Lotto;
+import autolotto.machine.lotto.LottoGenerator;
+import autolotto.machine.lotto.fixture.FixedNumberShuffler;
+import autolotto.machine.winning.Winning;
+import autolotto.machine.winning.WinningNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

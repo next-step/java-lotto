@@ -1,7 +1,9 @@
-package autolotto;
+package autolotto.machine;
 
-import autolotto.lotto.Lotto;
-import autolotto.lotto.LottoGenerator;
+import autolotto.machine.lotto.LottoWallet;
+import autolotto.machine.winning.WinningNumbers;
+import autolotto.machine.lotto.Lotto;
+import autolotto.machine.lotto.LottoGenerator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

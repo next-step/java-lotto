@@ -1,6 +1,6 @@
 package autolotto.dto;
 
-import autolotto.lotto.Lotto;
+import autolotto.machine.lotto.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;

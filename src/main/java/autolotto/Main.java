@@ -2,8 +2,11 @@ package autolotto;
 
 import autolotto.dto.LottoDTO;
 import autolotto.dto.Statistics;
-import autolotto.lotto.LottoGenerator;
-import autolotto.lotto.RandomShuffler;
+import autolotto.machine.LottoMachine;
+import autolotto.machine.lotto.LottoGenerator;
+import autolotto.machine.lotto.RandomShuffler;
+import autolotto.machine.winning.WinningNumbers;
+import autolotto.view.ConsoleView;
 import calculator.parser.converter.IntegerStringConverter;
 
 import java.util.stream.Collectors;

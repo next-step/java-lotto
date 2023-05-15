@@ -1,6 +1,6 @@
-package autolotto.lotto;
+package autolotto.machine.lotto;
 
-import autolotto.WinningNumbers;
+import autolotto.machine.winning.WinningNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

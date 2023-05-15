@@ -1,4 +1,4 @@
-package autolotto;
+package autolotto.machine.winning;
 
 import java.util.HashMap;
 import java.util.Map;
