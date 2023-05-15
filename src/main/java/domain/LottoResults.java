@@ -17,10 +17,6 @@ public class LottoResults {
         }
     }
 
-    public static LottoResults fromLottoNumbers(List<LottoNumber[]> lottoNumbers) {
-        return new LottoResults(lottoNumbers);
-    }
-
     public static LottoResults fromIntegers(List<int[]> lottoResultList) {
         List<LottoNumber[]> lottoResults = new ArrayList<>();
         for (int[] lottoResult : lottoResultList) {
