@@ -12,7 +12,7 @@ public class Output {
     }
 
     public void printNumbers() {
-        System.out.println(this.lottos.getLottoCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + this.lottos.getManualLottoCount() + "장, 자동으로 " + this.lottos.getAutoLottoCount() + "개를 구매했습니다.");
         lottos.getNumbers().forEach(System.out::println);
         System.out.println();
     }

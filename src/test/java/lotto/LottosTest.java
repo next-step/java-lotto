@@ -22,6 +22,17 @@ public class LottosTest {
     }
 
     @Test
+    @DisplayName("수동으로 입력받은 번호를 이용한다")
+    public void manualLotto() {
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        Lottos lottos = new Lottos(3000, List.of(lotto));
+        assertAll(
+                () -> assertThat(lottos.getManualLottoCount()).isEqualTo(1),
+                () -> assertThat(lottos.getAutoLottoCount()).isEqualTo(2)
+        );
+    }
+
+    @Test
     @DisplayName("해당 당첨 등수의 로또가 몇 장인지 계산한다")
     public void rankCount() {
         Lotto lotto1 = new Lotto(Set.of(1, 3, 5, 14, 22, 45));
