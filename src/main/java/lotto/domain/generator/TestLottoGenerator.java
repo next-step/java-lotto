@@ -5,7 +5,7 @@ import lotto.domain.number.LottoNumber;
 import java.util.HashSet;
 import java.util.List;
 
-public class ManualLottoGenerator implements LottoGenerator {
+public class TestLottoGenerator implements LottoGenerator {
 
     @Override
     public HashSet<LottoNumber> generate() {

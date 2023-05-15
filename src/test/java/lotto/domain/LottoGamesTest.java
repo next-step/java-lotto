@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.generator.ManualLottoGenerator;
+import lotto.domain.generator.TestLottoGenerator;
 import lotto.domain.number.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,18 +13,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGamesTest {
 
-    private ManualLottoGenerator manualLottoGenerator;
+    private TestLottoGenerator testLottoGenerator;
 
     @BeforeEach
     public void beforeEach() {
-        manualLottoGenerator = new ManualLottoGenerator();
+        testLottoGenerator = new TestLottoGenerator();
     }
 
     @Test
     @DisplayName("로또 총상금 계산")
     public void sum() {
         //given
-        Lotto lotto = new Lotto(manualLottoGenerator);
+        Lotto lotto = new Lotto(testLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
@@ -40,7 +40,7 @@ public class LottoGamesTest {
     @Test
     @DisplayName("로또 수익률 계산")
     public void returnRate() {
-        Lotto lotto = new Lotto(manualLottoGenerator);
+        Lotto lotto = new Lotto(testLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
@@ -60,7 +60,7 @@ public class LottoGamesTest {
     @DisplayName("상금별 당첨이 몇개가 있는지 확인")
     public void calculatePrizeCountTest() {
         //given
-        Lotto lotto = new Lotto(manualLottoGenerator);
+        Lotto lotto = new Lotto(testLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
@@ -79,7 +79,7 @@ public class LottoGamesTest {
     @DisplayName("보너스 번호 일치")
     public void bonusCheck() {
         //given
-        Lotto lotto = new Lotto(manualLottoGenerator);
+        Lotto lotto = new Lotto(testLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 41, 42, 6");
