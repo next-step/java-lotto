@@ -9,7 +9,10 @@ import lottoauto.model.request.LottoRequest;
 public class LottoService {
 
     public Lottos generateLottoNumber(LottoRequest request) {
-        return new Lottos(generateLottoAuto(request.getLottoQuantity()));
+        List<Lotto> lottoManuals = request.getManualLotteryNumbers();
+        List<Lotto> lottoAutos = generateLottoAuto(request.availableAutoLotteryCount());
+        lottoManuals.addAll(lottoAutos);
+        return new Lottos(lottoManuals);
     }
 
     private List<Lotto> generateLottoAuto(int quantity) {

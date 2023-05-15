@@ -1,5 +1,6 @@
 package lottoauto.view;
 
+import java.text.MessageFormat;
 import java.util.stream.Collectors;
 import lottoauto.model.Lotto;
 import lottoauto.model.LottoResult;
@@ -9,10 +10,11 @@ public class OutputView {
 
     public static final String OPEN_SQUARE_BRACKET = "[";
     public static final String CLOSE_SQUARE_BRACKET = "]";
-    public static final String DELEGATOR = ",";
+    public static final String DELIMITER = ",";
 
-    public static void lottos(Lottos lottos) {
-        System.out.println(lottos.getSize() + "개를 구매했습니다.");
+    public static void lottos(Lottos lottos, int manualCount) {
+        String message = MessageFormat.format("수동으로 {0}장, 자동으로 {1}장을 구매했습니다.", manualCount, lottos.getSize() - manualCount);
+        System.out.println(message);
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(winningNumber(lotto));
         }
@@ -21,7 +23,7 @@ public class OutputView {
     private static String winningNumber(Lotto lotto) {
         return lotto.getNumbers().stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(DELEGATOR, OPEN_SQUARE_BRACKET, CLOSE_SQUARE_BRACKET));
+                .collect(Collectors.joining(DELIMITER, OPEN_SQUARE_BRACKET, CLOSE_SQUARE_BRACKET));
     }
 
     public static void statistics(LottoResult lottoResult, int price) {
