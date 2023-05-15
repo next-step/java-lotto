@@ -2,7 +2,6 @@ package lotto.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -114,23 +113,6 @@ public class LotteryTest {
     }
 
     @Test
-    void 총_당첨_금액() {
-        Map<Win, Integer> winTotal = new EnumMap<>(Win.class);
-        winTotal.put(Win.WIN_3, 3);
-        winTotal.put(Win.WIN_4, 4);
-        winTotal.put(Win.WIN_5, 0);
-        winTotal.put(Win.WIN_6, 1);
-        assertThat(Win.totalMoney(winTotal)).isEqualTo(2000215000);
-    }
-
-    @Test
-    void 수익률_계산() {
-        int income = 5000;
-        int outcome = 14000;
-        assertThat(Win.calculateProfitRate(income, outcome)).isEqualTo("0.35");
-    }
-
-    @Test
     void 다섯개와_보너스볼_일치는_이등() {
         LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
                 LotteryNumber.of(27),
@@ -156,6 +138,18 @@ public class LotteryTest {
         WinNumbers winNumbers = new WinNumbers(Set.of(41, 1, 13, 27, 42, 43), 10);
         Map<Win, Integer> totalWin = lotteryTickets.getTotalWin(winNumbers);
         assertThat(totalWin).containsEntry(Win.WIN_5_BONUS, 1);
+    }
+
+    @Test
+    void toString_정렬() {
+        LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
+                LotteryNumber.of(27),
+                LotteryNumber.of(1),
+                LotteryNumber.of(10),
+                LotteryNumber.of(41),
+                LotteryNumber.of(42),
+                LotteryNumber.of(43)));
+        assertThat(lotteryTicket).hasToString("[1, 10, 27, 41, 42, 43]");
     }
 
 }

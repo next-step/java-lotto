@@ -11,7 +11,7 @@ public class WinNumbers {
     private static final double BONUS_COUNT = 0.5;
 
     private final Set<LotteryNumber> numbers;
-    private Integer bonusNumber;
+    private LotteryNumber bonusNumber;
 
     public WinNumbers(Set<Integer> numbers) {
         validate(numbers, null);
@@ -21,7 +21,7 @@ public class WinNumbers {
     public WinNumbers(Set<Integer> numbers, int bonusNumber) {
         validate(numbers, bonusNumber);
         this.numbers = numbers.stream().map(LotteryNumber::of).collect(Collectors.toSet());
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LotteryNumber.of(bonusNumber);
     }
 
     private void validate(Set<Integer> numbers, Integer bonusNumber) {
@@ -29,7 +29,7 @@ public class WinNumbers {
                 (bonusNumber != null && bonusNumber > LOTTERY_MAX) ||
                 (bonusNumber != null && bonusNumber <  LOTTERY_MIN)
         ) {
-            throw new RuntimeException("잘못된 로또 번호 목록입니다. : " + numbers);
+            throw new IllegalArgumentException("잘못된 로또 번호 목록입니다. : " + numbers);
         }
     }
 
@@ -38,7 +38,7 @@ public class WinNumbers {
         intersection.retainAll(others);
 
         double count = intersection.size();
-        if (bonusNumber != null && others.contains(LotteryNumber.of(bonusNumber))) {
+        if (bonusNumber != null && others.contains(bonusNumber)) {
             return count + BONUS_COUNT;
         }
         return count;

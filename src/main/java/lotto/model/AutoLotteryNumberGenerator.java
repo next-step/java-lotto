@@ -31,7 +31,7 @@ public class AutoLotteryNumberGenerator implements LotteryNumberGenerator {
 
     private void validate(Set<LotteryNumber> numbers) {
         if (numbers.size() != NUMBER_PER_TICKET || numbers.stream().distinct().count() != NUMBER_PER_TICKET) {
-            throw new RuntimeException("잘못된 로또 번호 목록입니다. : " + numbers);
+            throw new IllegalArgumentException("잘못된 로또 번호 목록입니다. : " + numbers);
         }
     }
 
