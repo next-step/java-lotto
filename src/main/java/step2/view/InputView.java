@@ -10,6 +10,10 @@ public class InputView {
         return readInt("구매 금액을 입력해 주세요");
     }
 
+    public static int readBonusNumber() {
+        return readInt("보너스 볼을 입력해 주세요.");
+    }
+
     private static int readInt(String message) {
         System.out.println(message);
         return toInt(scanner.nextLine());

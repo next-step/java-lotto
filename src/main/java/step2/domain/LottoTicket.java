@@ -29,11 +29,16 @@ public class LottoTicket {
         return this.lottoTicket.contains(number);
     }
 
-    public PrizeMoney countMatchingNumbers(LottoTicket compareTarget) {
+    public Rank checkLottoTicket(LottoTicket winningTicket, int bonusNumber) {
         int count = (int) lottoTicket.stream()
-                .filter(i -> compareTarget.isContain(i))
+                .filter(i -> winningTicket.isContain(i))
                 .count();
-        return PrizeMoney.toPrizeMoney(count);
+
+       if(count == 5 && isContain(bonusNumber)) {
+           return Rank.SECOND;
+       }
+
+       return Rank.toPrizeMoney(count);
     }
 
     public String printTicket() {

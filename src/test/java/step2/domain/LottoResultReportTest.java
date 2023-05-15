@@ -21,11 +21,11 @@ class LottoResultReportTest {
 
         List<Integer> matchCountList = Arrays.asList(3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6);
         for (Integer count : matchCountList) {
-            lottoResultReport.recordRank(PrizeMoney.toPrizeMoney(count));
+            lottoResultReport.recordRank(Rank.toPrizeMoney(count));
         }
 
         for (int i = 3; i < 7; i++) {
-            assertThat(lottoResultReport.findReportByMatchCount(PrizeMoney.toPrizeMoney(i))).isEqualTo(i);
+            assertThat(lottoResultReport.findReportByMatchCount(Rank.toPrizeMoney(i))).isEqualTo(i);
         }
     }
 
@@ -36,7 +36,7 @@ class LottoResultReportTest {
         LottoResultReport lottoResultReport = new LottoResultReport();
         for (int i = 1; i <= 6; i++) {
             if (matchCounts[i] == 0) continue;
-            lottoResultReport.recordRank(PrizeMoney.toPrizeMoney(i));
+            lottoResultReport.recordRank(Rank.toPrizeMoney(i));
         }
         assertThat(lottoResultReport.sum()).isEqualTo(expected);
     }

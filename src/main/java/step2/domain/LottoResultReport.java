@@ -6,29 +6,20 @@ import java.util.Set;
 
 public class LottoResultReport {
 
-    static final int ZERO = 0;
-
-    private Map<PrizeMoney, Integer> lottoResultReport;
+    private Map<Rank, Integer> lottoResultReport;
 
     public LottoResultReport() {
         lottoResultReport = new HashMap<>();
     }
 
-    public int recordRank(PrizeMoney prizeMoney) {
-        if (lottoResultReport.containsKey(prizeMoney)) {
-            Integer cnt = lottoResultReport.get(prizeMoney);
-            lottoResultReport.put(prizeMoney, cnt + 1);
-            return cnt;
-        }
-        lottoResultReport.put(prizeMoney, 1);
-        return 1;
+    public int recordRank(Rank rank) {
+        Integer value = lottoResultReport.getOrDefault(rank, 0);
+        lottoResultReport.put(rank, value + 1);
+        return lottoResultReport.get(rank);
     }
 
-    public int findReportByMatchCount(PrizeMoney prizeMoney) {
-        if (lottoResultReport.containsKey(prizeMoney)) {
-            return lottoResultReport.get(prizeMoney);
-        }
-        return ZERO;
+    public int findReportByMatchCount(Rank rank) {
+        return lottoResultReport.getOrDefault(rank, 0);
     }
 
     public double calculateProfit(int gameCount) {
@@ -38,7 +29,7 @@ public class LottoResultReport {
     }
 
     long sum() {
-        Set<Map.Entry<PrizeMoney, Integer>> entries = lottoResultReport.entrySet();
+        Set<Map.Entry<Rank, Integer>> entries = lottoResultReport.entrySet();
         return entries.stream().mapToLong(e -> e.getKey().prizeMoney() * e.getValue()).sum();
     }
 

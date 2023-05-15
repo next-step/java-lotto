@@ -23,20 +23,19 @@ public class LottoGameController {
 
         List<LottoTicket> lottoTickets = lottoGames.buyLottoGame(gameCount);
         ResultView.printLottoTicket(lottoTickets);
-        LottoTicket winningNumber = lottoGames.readWinningNumber(InputView.readWinningNumbers());
+        LottoTicket winningTicket = lottoGames.readWinningNumber(InputView.readWinningNumbers());
+        int bonusNumber = InputView.readBonusNumber();
 
         ResultView.printBlankLine();
         ResultView.printMessage("당첨 통계");
 
         LottoResultReport lottoResultReport = new LottoResultReport();
         for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResultReport.recordRank(winningNumber.countMatchingNumbers(lottoTicket));
+            lottoResultReport.recordRank(lottoTicket.checkLottoTicket(winningTicket, bonusNumber));
         }
 
         ResultView.printResultReport(lottoResultReport);
         double profit = lottoResultReport.calculateProfit(gameCount);
         ResultView.printMessage("총 수익률은 " + profit + "입니다.");
-
     }
-
 }
