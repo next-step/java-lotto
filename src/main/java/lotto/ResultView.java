@@ -1,7 +1,6 @@
 package lotto;
 
-import java.text.DecimalFormat;
-import java.util.*;
+import java.util.List;
 
 public class ResultView {
 
@@ -16,10 +15,11 @@ public class ResultView {
     }
 
     public void reportView(LottoResult lottoResult) {
-        statisticsView(lottoResult.matchCount(3),
-                lottoResult.matchCount(4),
-                lottoResult.matchCount(5),
-                lottoResult.matchCount(6));
+        statisticsView(lottoResult.matchRank(Rank.FIFTH),
+                lottoResult.matchRank(Rank.FOURTH),
+                lottoResult.matchRank(Rank.THIRD),
+                lottoResult.matchRank(Rank.SECOND),
+                lottoResult.matchRank(Rank.FIRST));
         rateOfReturnView(lottoResult.calculateRateOfReturn());
     }
 
@@ -28,13 +28,14 @@ public class ResultView {
         System.out.println("총 수익률은 " + rateOfReturn +"입니다.");
     }
 
-    private void statisticsView(int match3,int match4, int match5, int match6) {
+    private void statisticsView(long fifth, long fourth,long third, long second, long first) {
         String sb = String.format("당첨 통계\n" +
                 "---------\n" +
                 "3개 일치 (5000원)- %d개\n" +
                 "4개 일치 (50000원)- %d개\n" +
                 "5개 일치 (1500000원)- %d개\n" +
-                "6개 일치 (2000000000원)- %d개\n", match3, match4, match5, match6);
+                "5개 일치, 보너스 볼 일치(30000000원)- %d개\n" +
+                "6개 일치 (2000000000원)- %d개\n", fifth, fourth, third, second, first);
         System.out.println(sb);
     }
 
