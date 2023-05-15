@@ -3,7 +3,7 @@ package lotto.model;
 public class Cost {
 
     public static final int ONE_LOTTO_TICKET_PRICE = 1_000;
-    private int money;
+    private final int money;
 
     public Cost(int money) {
         validate(money);

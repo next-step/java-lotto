@@ -7,8 +7,10 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
     public static final int LOTTO_NUMBER_COUNT_LIMIT = 6;
-    private static List<LottoNumber> lottoNumbers = IntStream.range(LottoNumber.LOTTO_MINIMUM_NUMBER, LottoNumber.LOTTO_MAXIMUM_NUMBER)
-            .boxed().map(number -> new LottoNumber(number)).collect(Collectors.toList());
+    private static final List<LottoNumber> lottoNumbers = IntStream.range(LottoNumber.LOTTO_MINIMUM_NUMBER, LottoNumber.LOTTO_MAXIMUM_NUMBER)
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
 
     public static LottoTickets createAutoLottoTickets(int ticketCount) {
         List<LottoTicket> lottoTickets = IntStream.range(0, ticketCount)
