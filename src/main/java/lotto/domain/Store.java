@@ -36,12 +36,17 @@ public class Store {
         return lotteries.calculateResult(lastWeekWinningNumbers);
     }
 
-    public double getRateOfReturn(List<Integer> lotteryResult) {
+    public double getRateOfReturn(List<Integer> lotteryResult, List<Integer> bonusResult) {
         int totalPrice = lotteries.size() * LOTTERY_PRICE;
         int winningPrice = Collections.frequency(lotteryResult, 3) * 5_000 +
                 Collections.frequency(lotteryResult, 4) * 50_000 +
                 Collections.frequency(lotteryResult, 5) * 1_500_000 +
-                Collections.frequency(lotteryResult, 6) * 2_000_000_000;
+                Collections.frequency(lotteryResult, 6) * 2_000_000_000 +
+                bonusResult.size() * 30_000_000;
         return (double) winningPrice / totalPrice;
+    }
+
+    public List<Integer> getBonusResult(List<Integer> lastWeekWinningNumbers,int bonusNum) {
+        return lotteries.calculateBonusNum(lastWeekWinningNumbers,bonusNum);
     }
 }

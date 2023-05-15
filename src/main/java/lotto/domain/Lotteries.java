@@ -27,7 +27,7 @@ public class Lotteries {
 
     private void generateLottery(int lotteryCount) {
         for (int i = 0; i < lotteryCount; i++) {
-            lotteries.add(new Lottery());
+            lotteries.add(Lottery.createAutoLottery());
         }
     }
 
@@ -44,5 +44,16 @@ public class Lotteries {
 
     public List<Lottery> getLotteries() {
         return Collections.unmodifiableList(lotteries);
+    }
+
+    public List<Integer> calculateBonusNum(List<Integer> winningNumbers, int bonusNum) {
+        if (winningNumbers.contains( bonusNum)){
+            throw new IllegalArgumentException("당첨 번호와 중복된 보너스 볼을 입력하셨습니다.");
+        }
+        return lotteries.stream()
+                .filter(lottery -> lottery.matchWithBonusBall(bonusNum))
+                .map(lottery -> lottery.matchedCount(winningNumbers))
+                .filter(matchedCount -> matchedCount == 5)
+                .collect(Collectors.toList());
     }
 }

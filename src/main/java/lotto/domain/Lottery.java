@@ -20,13 +20,12 @@ public class Lottery {
         this.lotteryNumber = List.copyOf(lotteryNumber);
     }
 
-    public Lottery() {
+    public static Lottery createAutoLottery() {
         Collections.shuffle(numbers);
-        this.lotteryNumber = numbers.stream()
+        return new Lottery(numbers.stream()
                 .limit(LOTTERY_SIZE)
                 .sorted()
-                .collect(Collectors.toList());
-
+                .collect(Collectors.toList()));
     }
 
     public int matchedCount(List<Integer> winningNumbers) {
@@ -37,5 +36,9 @@ public class Lottery {
     @Override
     public String toString() {
         return lotteryNumber.toString();
+    }
+
+    public boolean matchWithBonusBall(int bonusNumber) {
+        return this.lotteryNumber.contains(bonusNumber);
     }
 }
