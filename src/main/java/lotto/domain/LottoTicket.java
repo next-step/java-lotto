@@ -21,9 +21,9 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Matches getMatches(Lotto winningLotto) {
+    public Matches getMatches(Lotto winningLotto, LottoNumber bonusNumber) {
         return Matches.of(lottos.stream()
-                .map(lotto -> lotto.getMatch(winningLotto))
+                .map(lotto -> lotto.getMatch(winningLotto, bonusNumber))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
     }

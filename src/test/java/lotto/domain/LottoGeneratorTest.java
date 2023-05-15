@@ -21,7 +21,7 @@ public class LottoGeneratorTest {
 
         Lotto expected = Lotto.from("2, 3, 4, 5, 6, 7");
         Lotto lotto = lottoGenerator.generate();
-        Match match = lotto.getMatch(expected);
+        Match match = lotto.getMatch(expected, LottoNumber.of(1));
 
         assertThat(match).isEqualTo(Match.SIX);
     }
