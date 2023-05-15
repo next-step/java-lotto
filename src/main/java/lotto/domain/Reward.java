@@ -7,23 +7,21 @@ import java.util.Map;
 
 public class Reward {
 
-    private Long totalRewardPrice;
-
-    public Reward() {
-        this.totalRewardPrice = 0L;
-    }
+    public Reward() {}
 
     public Long sumTotalMatchPrice(Map<RewardTable, Long> map) {
+        Long totalRewardPrice = 0L;
+
         Iterator<RewardTable> keys = map.keySet().iterator();
 
         while (keys.hasNext()) {
             RewardTable key = keys.next();
             Long value = map.get(key);
 
-            this.totalRewardPrice += sumMatchPrice(key, value);
+            totalRewardPrice += sumMatchPrice(key, value);
         }
 
-        return this.totalRewardPrice;
+        return totalRewardPrice;
     }
 
     private Long sumMatchPrice(RewardTable key, Long value) {
