@@ -25,7 +25,7 @@ public class WinningNumberTest {
                 List.of(1, 2, 3, 4, 5, 6),
                 1
         )).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("이미 존재하는 당첨 번호입니다.");
+                .hasMessage("중복되는 당첨 번호입니다.");
     }
 
     @Test

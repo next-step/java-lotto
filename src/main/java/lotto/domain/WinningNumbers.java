@@ -23,7 +23,7 @@ public class WinningNumbers {
 
     private void existNumber(List<Integer> winNumbers, Integer bonusNumber) {
         if (winNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("이미 존재하는 당첨 번호입니다.");
+            throw new IllegalArgumentException("중복되는 당첨 번호입니다.");
         }
     }
 }
