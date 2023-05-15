@@ -23,51 +23,38 @@ public class RankTest {
     @DisplayName("1등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseFirst() {
-        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto), winNumber.haveBonus(lotto));
-
-        Assertions.assertThat(Rank.FIRST).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(6, false)).isEqualTo(Rank.FIRST);
+        // todo
     }
 
     @DisplayName("2등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseSecond() {
-        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,45));
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto), winNumber.haveBonus(lotto));
-
-        Assertions.assertThat(Rank.SECOND).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(5, true)).isEqualTo(Rank.SECOND);
     }
 
     @DisplayName("3등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseThird() {
-        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,8));
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto), winNumber.haveBonus(lotto));
-
-        Assertions.assertThat(Rank.THIRD).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(5, false)).isEqualTo(Rank.THIRD);
     }
 
     @DisplayName("4등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseFourth() {
-        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,8,9));
+        Assertions.assertThat(Rank.find(4, false)).isEqualTo(Rank.FOURTH);
+    }
 
-        Rank rank = Rank.find(winNumber.distinguish(lotto), winNumber.haveBonus(lotto));
-
-        Assertions.assertThat(Rank.FOURTH).isEqualTo(rank);
+    @DisplayName("5등을 가릴 수 있다.")
+    @Test
+    public void rank_DependsOnCount_ChooseFIFTH() {
+        Assertions.assertThat(Rank.find(3, false)).isEqualTo(Rank.FIFTH);
     }
 
     @DisplayName("2개 이하를 맞혔을 경우 꽝이다.")
     @Test
     public void rank_DependsOnUnderCount_ThrowException() {
-        Lotto lotto = Lotto.of(Arrays.asList(1,2,7,8,9,10));
-
-        Rank rank = Rank.find(winNumber.distinguish(lotto), winNumber.haveBonus(lotto));
-
-        Assertions.assertThat(Rank.MISS).isEqualTo(rank);
+        Assertions.assertThat(Rank.find(2, false)).isEqualTo(Rank.MISS);
     }
 
 }
