@@ -12,25 +12,26 @@ public enum Win {
     WIN_3(3, 5000),
     WIN_4(4, 50_000),
     WIN_5(5, 1_500_000),
+    WIN_5_BONUS(5.5, 1_500_000),
     WIN_6(6, 2_000_000_000);
 
-    private final int points;
+    private final double points;
     private final int prize;
-    private static final Map<Integer, Win> VALUE_MAP = Arrays.stream(Win.values()).collect(Collectors.toMap(Win::getPoints, Function.identity()));
+    private static final Map<Double, Win> VALUE_MAP = Arrays.stream(Win.values()).collect(Collectors.toMap(Win::getPoints, Function.identity()));
 
-    Win(int points, int prize) {
+    Win(double points, int prize) {
         this.points = points;
         this.prize = prize;
     }
 
-    public static Win from(Integer winCount) {
+    public static Win from(double winCount) {
         if (isValidWinPoints(winCount)) {
             return VALUE_MAP.get(winCount);
         }
         return Win.DEFAULT;
     }
 
-    public static boolean isValidWinPoints(int points) {
+    public static boolean isValidWinPoints(double points) {
         return points >= WIN_3.points && points <= WIN_6.points;
     }
 
@@ -49,11 +50,12 @@ public enum Win {
         return df.format(profit);
     }
 
-    public int getPoints() {
+    public double getPoints() {
         return points;
     }
 
     public int getPrize() {
         return prize;
     }
+
 }

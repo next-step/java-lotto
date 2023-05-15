@@ -18,7 +18,8 @@ public class Main {
         OutputView.showLotteryTickets(lotteryTickets);
 
         final Set<Integer> winNumbers = InputView.pickWinNumbers();
-        final Map<Win, Integer> totalWin = lotteryTickets.getTotalWin(new WinNumbers(winNumbers));
+        final int bonusNumber = InputView.pickBonusNumber();
+        final Map<Win, Integer> totalWin = lotteryTickets.getTotalWin(new WinNumbers(winNumbers, bonusNumber));
         OutputView.showResults(totalWin, money);
     }
 }

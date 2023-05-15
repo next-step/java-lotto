@@ -1,5 +1,8 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 public class LotteryTicket {
@@ -14,7 +17,7 @@ public class LotteryTicket {
         return new LotteryTicket(numberGenerator.generate());
     }
 
-    public int matchCount(WinNumbers winNumbers) {
+    public double matchCount(WinNumbers winNumbers) {
         return winNumbers.matchCount(this.numbers);
     }
 
@@ -24,7 +27,9 @@ public class LotteryTicket {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        List<LotteryNumber> numberList = new ArrayList<>(numbers);
+        numberList.sort(Comparator.comparing(LotteryNumber::value));
+        return numberList.toString();
     }
 
 }

@@ -17,6 +17,10 @@ public class LotteryNumber {
         return numberCache.computeIfAbsent(number, key -> new LotteryNumber(number));
     }
 
+    public int value() {
+        return number;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(number);

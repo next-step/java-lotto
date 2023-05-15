@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,6 +20,11 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winNumberString = scanner.nextLine();
         return Arrays.stream(winNumberString.split(SPLIT_REGEX)).map(Integer::parseInt).collect(Collectors.toSet());
+    }
+
+    public static int pickBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 
 }
