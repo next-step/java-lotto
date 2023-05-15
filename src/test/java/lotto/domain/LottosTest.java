@@ -21,4 +21,13 @@ public class LottosTest {
         LottoNo bonusNo = LottoNo.of(10);
         assertThat(lottos.matchesLottos(lotto, bonusNo)).containsExactly(WinningCount.FOUR, WinningCount.THREE);
     }
+
+    @Test
+    @DisplayName("combine 테스트")
+    void combine() {
+        Lottos lottos = new Lottos(Arrays.asList("1, 2, 3, 15, 20, 9", "1, 2, 3, 10, 11, 12"));
+        lottos.combineLottos(new Lottos(Arrays.asList("1, 2, 3, 7, 8, 9")));
+
+        assertThat(new Lottos(Arrays.asList("1, 2, 3, 15, 20, 9","1, 2, 3, 10, 11, 12", "1, 2, 3, 7, 8, 9"))).isEqualTo(lottos);
+    }
 }
