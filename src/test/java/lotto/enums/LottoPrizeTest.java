@@ -11,29 +11,30 @@ class LottoPrizeTest {
     @ParameterizedTest
     @DisplayName("로또 등수와 상금 테스트")
     @CsvSource({
-            "FIRST, 2000000000",
-            "SECOND, 1500000",
-            "THIRD, 50000",
-            "FOURTH, 5000",
-            "NONE, 0"
+            "FIRST, 2_000_000_000",
+            "SECOND, 30_000_000",
+            "THIRD, 1_500_000",
+            "FOURTH, 50_000",
+            "FIFTH, 5_000",
+            "MISS, 0"
     })
     void lotto_prize_money_test(LottoPrize lottoPrize, int expectedPrize) {
         assertEquals(expectedPrize, lottoPrize.getPrizeMoney());
     }
 
+
     @ParameterizedTest
-    @DisplayName("로또 당첨 금액 포맷 테스트")
-    @CsvSource(value = {"2,000,000,000: 6", "1,500,000: 5", "50,000: 4", "5,000: 3", "0: 0"}, delimiter = ':')
-    void lotto_prize_money_format_test(String value, int number) {
-        // When & Then
-        assertEquals(value, LottoPrize.valueOf(number).getPrizeMoneyFormat());
+    @DisplayName("로또 당첨 순위 테스트 (보너스 번호 미포함)")
+    @CsvSource({"6, FIRST", "5, THIRD", "4, FOURTH", "3, FIFTH", "0, MISS"})
+    void lotto_prize_money_rank_test(int value, LottoPrize expected) {
+        assertEquals(expected, LottoPrize.valueOf(value, false));
     }
 
     @ParameterizedTest
-    @DisplayName("로또 당첨 순위 테스트")
-    @CsvSource({"6, FIRST", "5, SECOND", "4, THIRD", "3, FOURTH", "0, NONE"})
-    void lotto_prize_money_rank_test(int value, LottoPrize expected) {
-        assertEquals(expected, LottoPrize.valueOf(value));
+    @DisplayName("로또 당첨 순위 테스트 (보너스 번호 포함)")
+    @CsvSource({"6, FIRST", "5, SECOND", "4, FOURTH", "3, FIFTH", "0, MISS"})
+    void lotto_prize_money_rank_test_hasBonusNumber(int value, LottoPrize expected) {
+        assertEquals(expected, LottoPrize.valueOf(value, true));
     }
 
 }

@@ -2,28 +2,20 @@ package lotto.domain;
 
 import lotto.enums.LottoPrize;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
     private static final double PRICE_OF_LOTTO = 1000;
 
-    private static final int MIN_MATCHES = 3;
+    private final WinnerLotto winnerLotto;
 
-    private static final int MAX_MATCHES = 6;
-
-    private final Lotto winnerLotto;
-
-    private final List<Lotto> lottoList;
+    private final Lottos lottoList;
 
     private final Map<LottoPrize, Integer> matchCounts;
 
-    public LottoStatistics(Lotto winnerLotto, List<Lotto> lottoList) {
+    public LottoStatistics(WinnerLotto winnerLotto, Lottos lottoList) {
         this.winnerLotto = winnerLotto;
         this.lottoList = lottoList;
         this.matchCounts = new EnumMap<>(LottoPrize.class);
@@ -34,19 +26,9 @@ public class LottoStatistics {
      * Lotto 객체에서 일치하는 숫자의 수를 세고,
      * matchCounts 배열에 가능한 각 당첨 수준에 대한 수를 저장
      */
-    private void updateMatchCounts() {
-        lottoList.forEach(this::editMatchCount);
-    }
-
-    private void editMatchCount(final Lotto lotto) {
-        int countOfMatch = lotto.countMatch(winnerLotto.getLottoNumbers());
-
-        if (countOfMatch < MIN_MATCHES || countOfMatch > MAX_MATCHES) {
-            return;
-        }
-
-        LottoPrize prize = LottoPrize.valueOf(countOfMatch);
-        matchCounts.compute(prize, (key, value) -> value == null ? 1 : value + 1);
+    public void updateMatchCounts() {
+        matchCounts.clear();
+        matchCounts.putAll(lottoList.getMatchCounts(winnerLotto));
     }
 
     /**
@@ -63,19 +45,19 @@ public class LottoStatistics {
                 .mapToDouble(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
     }
-
     /**
      * 모든 로또 티켓을 구매하는 총 비용을 계산
      */
     private double calculateCost() {
-        return lottoList.size() * PRICE_OF_LOTTO;
+        final int ticketCount = lottoList
+                .getLottoList()
+                .size();
+
+        return ticketCount * PRICE_OF_LOTTO;
     }
 
-    public List<Integer> getMatchCounts() {
-        return Arrays.stream(LottoPrize.values())
-                .filter(prize -> prize != LottoPrize.NONE)
-                .map(prize -> matchCounts.getOrDefault(prize, 0))
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
+    public Map<LottoPrize, Integer> getMatchCountsMap() {
+        return matchCounts;
     }
+
 }

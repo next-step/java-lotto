@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.LinkedHashSet;
+import java.util.TreeSet;
 import java.util.List;
 import java.util.Set;
 
@@ -10,14 +10,14 @@ import static lotto.constants.Constants.REQUIRED_LOTTO_NUMBERS;
 
 public class Numbers {
 
-    private LinkedHashSet<Integer> numbers;
+    private TreeSet<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {
-        this.numbers = new LinkedHashSet<>(numbers);
+        this.numbers = new TreeSet<>(numbers);
         validateLottoNumbers(this.numbers);
     }
 
-    public LinkedHashSet<Integer>  getLottoNumbers() {
+    public TreeSet<Integer>  getLottoNumbers() {
         return numbers;
     }
 

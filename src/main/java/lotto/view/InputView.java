@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.Numbers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +17,8 @@ public class InputView {
 
     private static final String DELIMITER = ",";
 
+    private static final String BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
+
     private final BufferedReader reader;
 
     public InputView() {
@@ -30,18 +32,25 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public Lotto getLastWeekLottoNumbers() throws IOException {
+    public Numbers getLastWeekLottoNumbers() throws IOException {
         System.out.println(WINNING_NUMBER_MESSAGE);
         String input = reader.readLine().trim();
 
-        final List<Integer> winnerLottoNumber = Arrays.stream(input.split(DELIMITER))
+        final List<Integer> collect = Arrays.stream(input.split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-
-        return new Lotto(winnerLottoNumber);
+        return new Numbers(collect);
     }
 
     public void tearDown() throws IOException {
         reader.close();
     }
+
+    public int getBonusNumber() throws IOException {
+        System.out.println(BONUS_NUMBER_MESSAGE);
+        String input = reader.readLine();
+
+        return Integer.parseInt(input);
+    }
+
 }

@@ -36,4 +36,11 @@ class LottoTest {
         assertEquals(5, lotto.countMatch(winningLotto.getLottoNumbers()));
     }
 
+    @Test
+    @DisplayName("보너스 번호 테스트")
+    void bonus_number_test() {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        assertTrue(lotto.hasBonusNumber(6));
+    }
+
 }

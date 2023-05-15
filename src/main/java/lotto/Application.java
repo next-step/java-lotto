@@ -3,6 +3,8 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Lottos;
+import lotto.domain.Numbers;
+import lotto.domain.WinnerLotto;
 import lotto.strategy.AutoLotto;
 import lotto.strategy.LottoStrategy;
 import lotto.view.InputView;
@@ -19,15 +21,16 @@ public class Application {
         Lottos lottos = autoLottoGameResult(lottoGame);
 
         ResultView.autoLottoPrint(lottos.getLottoList());
+        Numbers lastWeekLottoNumbers = inputView.getLastWeekLottoNumbers();
+        WinnerLotto winnerLotto = new WinnerLotto(lastWeekLottoNumbers.getLottoNumbers(), inputView.getBonusNumber());
 
-        Lotto winnerLotto = inputView.getLastWeekLottoNumbers();
-
-        ResultView.printLottoStatistics(lottos.getLottoList(), winnerLotto);
+        ResultView.printLottoStatistics(winnerLotto, lottos);
 
     }
 
     private static Lottos autoLottoGameResult(final LottoGame lottoGame) {
         LottoStrategy strategy = new AutoLotto();
+
         return lottoGame.automaticLottoDraw(strategy);
     }
 
