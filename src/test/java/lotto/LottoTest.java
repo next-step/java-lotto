@@ -24,6 +24,15 @@ public class LottoTest {
         assertThat(matchNumber).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @MethodSource("getLottoNumber")
+    void checkLottoBonus(List<Integer> lottoNums, int bonus, boolean expected) {
+        Lotto lotto = new Lotto(lottoNums);
+        boolean hasBonus = lotto.hasBonus(bonus);
+
+        assertThat(hasBonus).isEqualTo(expected);
+    }
+
     private static Stream<Arguments> getWinningNumber() {
         List<Integer> all = List.of(1, 2, 3, 4, 5, 6);
         List<Integer> none = List.of(11, 12, 13, 14, 15, 16);
@@ -32,6 +41,16 @@ public class LottoTest {
                 Arguments.of(all, 6),
                 Arguments.of(none, 0),
                 Arguments.of(half, 3)
+        );
+    }
+
+    private static Stream<Arguments> getLottoNumber() {
+        List<Integer> has = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> not = List.of(11, 12, 13, 14, 15, 16);
+        int bonus = 1;
+        return Stream.of(
+                Arguments.of(has, bonus, true),
+                Arguments.of(not, bonus, false)
         );
     }
 }

@@ -35,4 +35,8 @@ public class Lotto {
     public String getNumbersString() {
         return numbers.toString();
     }
+
+    public boolean hasBonus(int bonus) {
+        return numbers.contains(bonus);
+    }
 }

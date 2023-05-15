@@ -45,13 +45,12 @@ public class LottoStatistics {
     }
 
     public enum Winnings {
-        FIRST(BigDecimal.valueOf(2000000000), 6),
-        SECOND(BigDecimal.valueOf(1500000), 5),
-        THIRD(BigDecimal.valueOf(50000), 4),
-        FOURTH(BigDecimal.valueOf(5000), 3),
+        FIRST(BigDecimal.valueOf(2_000_000_000), 6),
+        SECOND(BigDecimal.valueOf(30_000_000), 5),
+        THIRD(BigDecimal.valueOf(1_500_000), 5),
+        FOURTH(BigDecimal.valueOf(50_000), 4),
+        FIFTH(BigDecimal.valueOf(5_000), 3),
         NOTWIN(BigDecimal.ZERO, 0);
-
-
 
         private BigDecimal prize;
         private int matchCount;
