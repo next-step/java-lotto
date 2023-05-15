@@ -21,11 +21,14 @@ public enum Rank {
     }
 
     public static Rank find(int matchingCount, boolean isBonusBall) {
-        if (SECOND.matchingCount == matchingCount) {
+        countValid(matchingCount);
+
+        if (SECOND.isMatchCount(matchingCount)) {
             return rankSecondAndThird(isBonusBall);
         }
+
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchingCount == matchingCount)
+                .filter(rank -> rank.isMatchCount(matchingCount))
                 .findFirst()
                 .orElse(Rank.MISS);
     }
@@ -35,6 +38,16 @@ public enum Rank {
             return SECOND;
         }
         return THIRD;
+    }
+
+    private boolean isMatchCount(int matchingCount) {
+        return this.matchingCount == matchingCount;
+    }
+
+    private static void countValid(int matchingCount) {
+        if (matchingCount > FIRST.matchingCount || matchingCount < MISS.matchingCount) {
+            throw new IllegalArgumentException("유효하지 않은 당첨번호 갯수입니다.");
+        }
     }
 
     public int getMatchingCount() {

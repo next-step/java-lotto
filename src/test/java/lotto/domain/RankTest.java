@@ -7,6 +7,13 @@ import org.junit.jupiter.api.Test;
 
 public class RankTest {
 
+    @DisplayName("유효하지 않은 숫자일 경우 예외를 던진다.")
+    @Test
+    public void rank_InvalidNumber_ThrowException() {
+        Assertions.assertThatThrownBy(() -> Rank.find(7, true))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("1등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseFirst() {
