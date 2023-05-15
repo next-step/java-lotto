@@ -31,8 +31,16 @@ public class OutputView {
     private static void showResult(Map<Win, Integer> winTotal, int i) {
         Win win = Win.values()[i];
         if (!Win.DEFAULT.equals(win)) {
-            System.out.println(win.getPoints() + "개 일치 (" + win.getPrize() + "원)- " + winTotal.getOrDefault(win, 0));
+            String matchString = getMatchString(win);
+            System.out.println(matchString + " (" + win.getPrize() + "원)- " + winTotal.getOrDefault(win, 0));
         }
+    }
+
+    private static String getMatchString(Win win) {
+        if (Win.WIN_5_BONUS.equals(win)) {
+            return (int) win.getPoints() + "개 일치, 보너스 볼 일치";
+        }
+        return (int) win.getPoints() + "개 일치";
     }
 
 }

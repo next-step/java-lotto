@@ -31,10 +31,15 @@ public class WinNumbers {
         }
     }
 
-    public int matchCount(Set<LotteryNumber> others) {
+    public double matchCount(Set<LotteryNumber> others) {
         Set<LotteryNumber> intersection = new HashSet<>(numbers);
         intersection.retainAll(others);
-        return intersection.size();
+
+        double count = intersection.size();
+        if (bonusNumber != null && others.contains(LotteryNumber.of(bonusNumber))) {
+            return count + 0.5;
+        }
+        return count;
     }
 
 }

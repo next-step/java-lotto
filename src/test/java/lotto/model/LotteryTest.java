@@ -55,55 +55,55 @@ public class LotteryTest {
                 LotteryNumber.of(42),
                 LotteryNumber.of(43)));
         Set<Integer> winNumbers = Set.of(41, 1, 13, 27, 42, 43);
-        int count = lotteryTicket.matchCount(new WinNumbers(winNumbers));
+        double count = lotteryTicket.matchCount(new WinNumbers(winNumbers));
         assertThat(count).isEqualTo(3);
     }
 
     @Test
     void 우승_통계_계산() {
-        LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
+        LotteryTicket win3 = new LotteryTicket(Set.of(
                 LotteryNumber.of(8),
                 LotteryNumber.of(21),
                 LotteryNumber.of(23),
                 LotteryNumber.of(41),
                 LotteryNumber.of(42),
                 LotteryNumber.of(43)));
-        LotteryTicket lotteryTicket2 = new LotteryTicket(Set.of(
+        LotteryTicket win4 = new LotteryTicket(Set.of(
                 LotteryNumber.of(1),
                 LotteryNumber.of(13),
                 LotteryNumber.of(42),
                 LotteryNumber.of(43),
                 LotteryNumber.of(2),
                 LotteryNumber.of(9)));
-        LotteryTicket lotteryTicket3 = new LotteryTicket(Set.of(
+        LotteryTicket win5 = new LotteryTicket(Set.of(
                 LotteryNumber.of(41),
                 LotteryNumber.of(1),
                 LotteryNumber.of(13),
                 LotteryNumber.of(2),
                 LotteryNumber.of(43),
                 LotteryNumber.of(27)));
-        LotteryTicket lotteryTicket4 = new LotteryTicket(Set.of(
+        LotteryTicket win6 = new LotteryTicket(Set.of(
                 LotteryNumber.of(41),
                 LotteryNumber.of(1),
                 LotteryNumber.of(13),
                 LotteryNumber.of(42),
                 LotteryNumber.of(43),
                 LotteryNumber.of(27)));
-        LotteryTicket lotteryTicket5 = new LotteryTicket(Set.of(
+        LotteryTicket win6_2 = new LotteryTicket(Set.of(
                 LotteryNumber.of(41),
                 LotteryNumber.of(1),
                 LotteryNumber.of(13),
                 LotteryNumber.of(42),
                 LotteryNumber.of(43),
                 LotteryNumber.of(27)));
-        LotteryTicket lotteryTicket6 = new LotteryTicket(Set.of(
+        LotteryTicket miss = new LotteryTicket(Set.of(
                 LotteryNumber.of(41),
                 LotteryNumber.of(1),
                 LotteryNumber.of(2),
                 LotteryNumber.of(3),
                 LotteryNumber.of(4),
                 LotteryNumber.of(5)));
-        LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket, lotteryTicket2, lotteryTicket3, lotteryTicket4, lotteryTicket5, lotteryTicket6));
+        LotteryTickets lotteryTickets = new LotteryTickets(List.of(win3, win4, win5, win6, win6_2, miss));
         WinNumbers winNumbers = new WinNumbers(Set.of(41, 1, 13, 27, 42, 43));
         Map<Win, Integer> totalWin = lotteryTickets.getTotalWin(winNumbers);
         assertThat(totalWin).containsEntry(Win.WIN_3, 1)
@@ -128,6 +128,34 @@ public class LotteryTest {
         int income = 5000;
         int outcome = 14000;
         assertThat(Win.calculateProfitRate(income, outcome)).isEqualTo("0.35");
+    }
+
+    @Test
+    void 다섯개와_보너스볼_일치는_이등() {
+        LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
+                LotteryNumber.of(27),
+                LotteryNumber.of(1),
+                LotteryNumber.of(10),
+                LotteryNumber.of(41),
+                LotteryNumber.of(42),
+                LotteryNumber.of(43)));
+        WinNumbers winNumbers = new WinNumbers(Set.of(41, 1, 13, 27, 42, 43), 10);
+        assertThat(lotteryTicket.matchCount(winNumbers)).isEqualTo(5.5);
+    }
+
+    @Test
+    void 이등_통계_계산() {
+        LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
+                LotteryNumber.of(27),
+                LotteryNumber.of(1),
+                LotteryNumber.of(10),
+                LotteryNumber.of(41),
+                LotteryNumber.of(42),
+                LotteryNumber.of(43)));
+        LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket));
+        WinNumbers winNumbers = new WinNumbers(Set.of(41, 1, 13, 27, 42, 43), 10);
+        Map<Win, Integer> totalWin = lotteryTickets.getTotalWin(winNumbers);
+        assertThat(totalWin).containsEntry(Win.WIN_5_BONUS, 1);
     }
 
 }
