@@ -68,4 +68,12 @@ public class InputView {
             throw new IllegalArgumentException("로또 당첨 번호는 1 ~ 45 사이의 수입니다.");
         }
     }
+
+    public static int getInputOfBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+
+        validateEachNumber(bonusNumber);
+        return bonusNumber;
+    }
 }

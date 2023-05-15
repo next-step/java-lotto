@@ -24,10 +24,10 @@ public class Lottos {
         return lottoList.size();
     }
 
-    public LottosTotalResult getResult(List<Integer> winningNumbers) {
+    public LottosTotalResult getResult(List<Integer> winningNumbers, int bonusNumber) {
         LottosTotalResult lottosTotalResult = new LottosTotalResult();
         for (Lotto lotto : lottoList) {
-            lottosTotalResult.plusOne(lotto.countMatched(winningNumbers));
+            lottosTotalResult.plusOne(lotto.countMatched(winningNumbers), lotto.bonusMatched(bonusNumber));
         }
         return lottosTotalResult;
     }

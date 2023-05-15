@@ -12,8 +12,8 @@ public class LottoGame {
         this.lottos = new Lottos(purchaseAmount);
     }
 
-    public LottosTotalResult getTotalResult(List<Integer> winningNumbers) {
-        return lottos.getResult(winningNumbers);
+    public LottosTotalResult getTotalResult(List<Integer> winningNumbers, int bonusNumber) {
+        return lottos.getResult(winningNumbers, bonusNumber);
     }
 
     public Lottos getLottos() {

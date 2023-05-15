@@ -1,7 +1,12 @@
 package step3.view;
 
-import step3.domain.LottoResult;
+import step3.domain.Rank;
 import step3.domain.LottosTotalResult;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printStartOfResult() {
@@ -12,14 +17,33 @@ public class ResultView {
 
     public static void printTotalResult(LottosTotalResult lottosResult, int purchasePrice) {
         printStartOfResult();
-        for (LottoResult result : LottoResult.values()) {
-            printEachResult(result, lottosResult.get(result.numbersToBeMatched));
+        List<Rank> results = Arrays.stream(Rank.values())
+                .sorted(Comparator.comparing(result -> result.winningPrice))
+                .collect(Collectors.toList());
+        for (Rank result : results) {
+            printEachResult(result, lottosResult.get(result));
         }
         printRateOfReturn(lottosResult.getRateOfReturn(purchasePrice));
     }
 
-    public static void printEachResult(LottoResult result, int numberOfMatched) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n", result.numbersToBeMatched, result.winningPrice, numberOfMatched);
+    public static void printEachResult(Rank result, int numberOfMatched) {
+        if (result.equals(Rank.MISS)) {
+            return;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(result.numbersToBeMatched);
+        stringBuilder.append("개 일치");
+        if (result.equals(Rank.SECOND)) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        stringBuilder.append("(");
+        stringBuilder.append(result.winningPrice);
+        stringBuilder.append(")");
+        stringBuilder.append(" - ");
+        stringBuilder.append(numberOfMatched);
+        stringBuilder.append("개");
+        String view = stringBuilder.toString();
+        System.out.println(view);
     }
 
     public static void printRateOfReturn(double rateOfReturn) {

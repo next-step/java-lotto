@@ -12,13 +12,13 @@ public class SimpleNumberGeneratorTest {
     @Test
     @DisplayName("생성된 숫자는 6개이다.")
     public void generateNumberTest() {
-        assertThat(new step3.domain.SimpleNumberGenerator().generateNumbers()).hasSize(6);
+        assertThat(new SimpleNumberGenerator().generateNumbers()).hasSize(6);
     }
 
     @Test
     @DisplayName("생성된 숫자는 0보다 크고 45보다 같거나 작다.")
     public void numberRangeTest() {
-        new step3.domain.SimpleNumberGenerator().generateNumbers().forEach(
+        new SimpleNumberGenerator().generateNumbers().forEach(
                 number -> assertThat(number > 0 && number <= 45).isTrue()
         );
     }

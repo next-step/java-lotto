@@ -16,10 +16,14 @@ public class Lotto {
 
     public int countMatched(List<Integer> winningNumbers) {
         int numberOfMatched = 0;
-        for (Integer winninNumber : winningNumbers) {
-            numberOfMatched += lottoNumbers.contains(new LottoNumber(winninNumber)) ? 1 : 0;
+        for (Integer winningNumber : winningNumbers) {
+            numberOfMatched += lottoNumbers.contains(new LottoNumber(winningNumber)) ? 1 : 0;
         }
         return numberOfMatched;
+    }
+
+    public boolean bonusMatched(int bonusNumber) {
+        return lottoNumbers.contains(new LottoNumber(bonusNumber));
     }
 
     public List<LottoNumber> getLottoNumbers() {

@@ -8,12 +8,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTotalResultTest {
 
     @ParameterizedTest
-    @EnumSource(step3.domain.LottoResult.class)
-    public void getReturnTest(LottoResult lottoResult) {
+    @EnumSource(Rank.class)
+    public void getReturnTest(Rank rank) {
         int purchasePrice = 10000;
-        step3.domain.LottosTotalResult lottosTotalResult = new LottosTotalResult();
-        lottosTotalResult.plusOne(lottoResult.numbersToBeMatched);
-        assertThat(lottosTotalResult.getRateOfReturn(purchasePrice)).isEqualTo((double) lottoResult.winningPrice / purchasePrice);
+        LottosTotalResult lottosTotalResult = new LottosTotalResult();
+        int numberOfMatched = rank.equals(Rank.SECOND) ? rank.numbersToBeMatched - 1 : rank.numbersToBeMatched;
+        lottosTotalResult.plusOne(numberOfMatched, rank.equals(Rank.SECOND));
+        assertThat(lottosTotalResult.getRateOfReturn(purchasePrice)).isEqualTo((double) rank.winningPrice / purchasePrice);
     }
 
 }

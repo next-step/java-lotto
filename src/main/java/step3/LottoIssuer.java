@@ -5,6 +5,8 @@ import step3.view.InputView;
 import step3.view.LottosView;
 import step3.view.ResultView;
 
+import java.util.List;
+
 public class LottoIssuer {
     public static void main(String[] args) {
 
@@ -14,7 +16,9 @@ public class LottoIssuer {
         LottoGame lottoGame = new LottoGame(purchaseAmount);
         LottosView.printLottos(lottoGame.getLottos());
 
-        LottosTotalResult totalResult = lottoGame.getTotalResult(InputView.getInputOfWinningNumbers());
+        List<Integer> winningNumbers = InputView.getInputOfWinningNumbers();
+        int bonusNumber = InputView.getInputOfBonusNumber();
+        LottosTotalResult totalResult = lottoGame.getTotalResult(winningNumbers, bonusNumber);
 
         ResultView.printTotalResult(totalResult, purchasePrice);
     }
