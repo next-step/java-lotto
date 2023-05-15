@@ -15,7 +15,7 @@ public class LottoMain {
         InputView inputPrice = new InputView(Question.PRICE_QUESTION);
         OutputView outputView = new OutputView();
 
-        int amonut = LottoGenerator.amonut(inputPrice.getPrice());
+        int amonut = LottoGenerator.getAmount(inputPrice.getPrice());
         outputView.lottoAmountPrint(amonut);
         List<Lotto> lottos = LottoGenerator.generate(amonut);
         lottos.forEach(System.out::println);
