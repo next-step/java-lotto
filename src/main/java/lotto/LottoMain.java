@@ -8,7 +8,6 @@ import lotto.view.OutputView;
 import lotto.view.Question;
 
 import java.util.List;
-import java.util.Set;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -17,11 +16,11 @@ public class LottoMain {
 
         int amonut = LottoGenerator.getAmount(inputPrice.getPrice());
         outputView.lottoAmountPrint(amonut);
-        List<Lotto> lottos = LottoGenerator.generate(amonut);
+        List<Lotto> lottos = LottoGenerator.generate(inputPrice.getPrice());
         lottos.forEach(System.out::println);
 
         InputView inputView = new InputView(Question.WON_NUMBER_QUESTION);
-        Set<Integer> wonNumbers = inputView.getWonNumbers();
+        Lotto wonNumbers = inputView.getWonNumbers();
         List<Integer> hitNumber = LottoDrawer.hitNumber(lottos, wonNumbers);
         double profit = LottoDrawer.calProfit(inputPrice.getPrice(), hitNumber);
 

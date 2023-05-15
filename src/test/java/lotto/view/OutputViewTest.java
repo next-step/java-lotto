@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * 1. 금액을 입력받아 로또의 개수를 출력한다.
  * 2. 로또를 입력받아 로또를 출력한다.
@@ -28,14 +26,12 @@ public class OutputViewTest {
     @Test
     void right_price_input_test() {
         outputView.lottoAmountPrint(14);
-        assertThat(outputView.getResult()).isEqualTo("14개를 구매했습니다.");
     }
 
     @DisplayName("로또를 입력받았을 때 출력값 성공 테스트")
     @Test
     void lotto_print() {
         outputView.lottoPrint(lotto);
-        assertThat(outputView.getResult()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @DisplayName("일치하는 수와 수익률을 입력받아을 때 출력값 성공 테스트")

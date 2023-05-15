@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,16 +23,16 @@ public class InputViewTest {
     @Test
     void right_price_input_test() {
         InputView inputView = new InputView(14000);
-        assertThat(inputView.getPrice()).isEqualTo(14000);
+        assertThat(inputView.getPrice()).isEqualTo(new Money(14000));
     }
 
 
     @DisplayName("6개의 당첨 번호를 입력했을 경우 성공 테스트")
     @ParameterizedTest
     @MethodSource("provideIntListForCorrectValue")
-    void right_won_numbers_input_test(String input, int expected) {
+    void right_won_numbers_input_test(String input, String expected) {
         InputView inputView = new InputView(input);
-        assertThat(inputView.getWonNumbers().size()).isEqualTo(expected);
+        assertThat(inputView.getWonNumbers()).isEqualTo(new Lotto(expected));
     }
 
     @DisplayName("잘못된 6개의 당첨 번호를 입력했을 경우 성공 테스트")
@@ -44,9 +46,9 @@ public class InputViewTest {
 
     private static Stream<Arguments> provideIntListForCorrectValue() {
         return Stream.of(
-                Arguments.of("1, 2, 3, 4, 5, 6", 6),
-                Arguments.of("11, 12, 13, 14, 15, 16", 6),
-                Arguments.of("45, 44, 43, 42, 41, 40", 6)
+                Arguments.of("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6"),
+                Arguments.of("11, 12, 13, 14, 15, 16", "11, 12, 13, 14, 15, 16"),
+                Arguments.of("45, 44, 43, 42, 41, 40", "45, 44, 43, 42, 41, 40")
         );
     }
 

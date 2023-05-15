@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private List<Integer> numbers = new ArrayList<>();
@@ -12,6 +13,12 @@ public class Lotto {
         }
         Collections.shuffle(numbers);
         this.numbers = numbers.subList(0, 6);
+    }
+
+    public Lotto(String numbers) {
+        this(Arrays.stream(numbers.replace(" ", "").split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     public Lotto(List<Integer> numbers) {
@@ -26,6 +33,7 @@ public class Lotto {
         if (set.size() != 6) {
             throw new IllegalArgumentException("중복되지 않는 6개의 숫자를 입력해주세요.");
         }
+
         this.numbers = new ArrayList<>(set);
     }
 
@@ -33,9 +41,9 @@ public class Lotto {
         return numbers;
     }
 
-    public int matchedNumber(Set<Integer> wonNumbers) {
+    public int matchedNumber(Lotto wonNumbers) {
         Set<Integer> lotto = new HashSet<>(numbers);
-        lotto.retainAll(wonNumbers);
+        lotto.retainAll(wonNumbers.numbers);
         return lotto.size();
     }
 

@@ -29,6 +29,14 @@ public class Money {
         this.money = money;
     }
 
+    public int divideByUnit(int unit) {
+        return money % unit;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

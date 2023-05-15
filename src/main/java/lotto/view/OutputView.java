@@ -6,19 +6,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class OutputView {
-    private String result;
-
-    public String getResult() {
-        return result;
-    }
-
 
     public void lottoAmountPrint(int lottoAmount) {
-        this.result = lottoAmount + "개를 구매했습니다.";
+        System.out.println(lottoAmount + "개를 구매했습니다.");
     }
 
     public void lottoPrint(Lotto lotto) {
-        this.result = lotto.getNumbers().toString();
+        System.out.println(lotto.getNumbers().toString());
     }
 
     public void winningPrint(List<Integer> hitNumber, double profit) {

@@ -8,10 +8,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 /**
@@ -51,7 +50,7 @@ public class LottoTest {
     @Test
     void matchedNumber_count() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int result = lotto.matchedNumber(Set.of(1, 2, 3, 4, 5, 7));
+        int result = lotto.matchedNumber(new Lotto("1, 2, 3, 4, 5, 7"));
         assertThat(result).isEqualTo(5);
     }
 
@@ -62,6 +61,7 @@ public class LottoTest {
                 Arguments.of(Arrays.asList(46, 47, 48, 49, 50, 60))
         );
     }
+
     private static Stream<Arguments> 중복값_알맞지_않는_개수_리스트_값() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
