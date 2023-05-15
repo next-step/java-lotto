@@ -16,10 +16,11 @@
 * 예를 들어 2 + 3 * 4 / 2와 같은 문자열을 입력할 경우 2 + 3 * 4 / 2 실행 결과인 10을 출력해야 한다.
 
 ### 구현할 기능
+* [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+* [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
 * [ ] 덧셈
 * [ ] 뺄셈
 * [ ] 곱셈
 * [ ] 나눗셈
-* [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
-* [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
 * [ ] 사칙 연산을 모두 포함하는 기능 구현
+
