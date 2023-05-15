@@ -51,7 +51,8 @@ public class LottoGamesTest {
     @Test
     @DisplayName("인풋만큼 로또 게임 생성")
     public void gameMakeTest() {
-        LottoGames lottoGames = new LottoGames(14000);
+        LottoPurchase lottoPurchase = new LottoPurchase("14000");
+        LottoGames lottoGames = new LottoGames(lottoPurchase);
         assertThat(lottoGames.size()).isEqualTo(14);
     }
 

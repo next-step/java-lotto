@@ -16,11 +16,8 @@ public class LottoGames {
     private final List<Lotto> lottoGameList = new ArrayList<>();
     private final Map<Rank, Integer> lottoResult = new HashMap<>();
 
-    public LottoGames(int gameCount) {
-        gameCount /= LOTTO_PRICE;
-        for (int i = 0; i < gameCount; i++) {
-            lottoGameList.add(new Lotto(new AutoLottoGenerator()));
-        }
+    public LottoGames(LottoPurchase lottoPurchase) {
+        lottoPurchase.autoStream().forEach(i -> lottoGameList.add(new Lotto(new AutoLottoGenerator())));
     }
 
     public LottoGames(List<Lotto> lottoGameList) {
