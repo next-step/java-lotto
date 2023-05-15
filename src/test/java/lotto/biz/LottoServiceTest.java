@@ -32,9 +32,29 @@ class LottoServiceTest {
     @DisplayName("2등을 위해 추가 번호를 하나 더 입력")
     void setBonusNumber(){
         LottoService service = new LottoService();
-        service.setBonusNumber(19);
+        service.setBonusNumber("19");
 
         assertThat(service.getBonusNumber()).isEqualTo(19);
+    }
+
+    @Test
+    @DisplayName("수동 구매 로또 수 입력 테스트")
+    void input_manual_lotto_count_test(){
+        LottoService service = new LottoService();
+        service.setManualLottoCount(5);
+
+        assertThat(service.getManualLottoCount()).isEqualTo(5);
+    }
+
+
+    @Test
+    @DisplayName("수동 구매 로또 수 0이상일 경우 번호 수동 입력테스트")
+    void when_manual_lotto_count_over_one_test(){
+        LottoService service = new LottoService();
+        service.setPurchaseValue(14000);
+        service.setManualLottoCount(3);
+
+        assertThat(service.getManualLottoCount()).isEqualTo(5);
     }
 
 }

@@ -13,9 +13,12 @@ class LottoGamesTest {
     @Test
     @DisplayName("구입한 갯수 만큼 Lotto 갯수를 생성한다.")
     void check_lotto_game_count() {
-        LottoGames games = new LottoGames(5);
+        LottoGames games = new LottoGames();
+        games.initGames(5);
         assertThat(games.getGameCount()).isEqualTo(5);
     }
+
+
 
 
     @Test
@@ -65,6 +68,16 @@ class LottoGamesTest {
 
         assertThat(games.getStatistic().get(MatchingStrategy.FOUR).size()).isEqualTo(1);
     }
+
+
+    @Test
+    @DisplayName("구입한 갯수 만큼 Lotto 갯수를 생성한다.")
+    void check_lotto_manual_count() {
+        LottoGames games = new LottoGames();
+        games.initGames(5);
+        assertThat(games.getGameCount()).isEqualTo(5);
+    }
+
 
     private LottoGames getLottoGames() {
         LottoGames games = new LottoGames();
