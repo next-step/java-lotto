@@ -6,8 +6,8 @@ public enum LottoMatch {
     ,SECOND(5, 1500000)
     ,FIRST(6, 2000000000);
 
-    private int matchCount;
-    private int reward;
+    private final int matchCount;
+    private final int reward;
 
     LottoMatch(int matchCount, int reward) {
         this.matchCount = matchCount;

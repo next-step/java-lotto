@@ -9,16 +9,11 @@ import static step2.LottoMatch.*;
 
 public class Winner {
 
-    private int matchCount;
     private static Map<Integer, Integer> winnerMap = new HashMap<>();
-    static{
-        winnerMap.put(FOURTH.getMatchCount(), 0);
-        winnerMap.put(THIRD.getMatchCount(), 0);
-        winnerMap.put(SECOND.getMatchCount(), 0);
-        winnerMap.put(FIRST.getMatchCount(), 0);
-    }
 
     public Map<Integer, Integer> findWinner(List<Ticket> tickets, String winnerString) {
+        winnerMapInit();
+
         List<Integer> winnerTicket = winnerTicket(winnerString);
 
         for (Ticket ticket : tickets) {
@@ -28,26 +23,34 @@ public class Winner {
         return winnerMap;
     }
 
-    private void oneTicketCheck(Ticket ticket, List<Integer> winnerTicket) {
-        matchCount = 0;
-
-        List<Integer> oneTicket = ticket.getTicket();
-        for (Integer num : winnerTicket) {
-            isTicketContainsNumber(oneTicket, num);
-        }
-        plusWinnerMapCount();
+    private static void winnerMapInit() {
+        winnerMap.put(FOURTH.getMatchCount(), 0);
+        winnerMap.put(THIRD.getMatchCount(), 0);
+        winnerMap.put(SECOND.getMatchCount(), 0);
+        winnerMap.put(FIRST.getMatchCount(), 0);
     }
 
-    private void plusWinnerMapCount() {
+    private void oneTicketCheck(Ticket ticket, List<Integer> winnerTicket) {
+        int matchCount = 0;
+
+        List<Integer> oneTicket = ticket.getNumbers();
+        for (Integer num : winnerTicket) {
+            matchCount += isTicketContainsNumber(oneTicket, num);
+        }
+        plusWinnerMapCount(matchCount);
+    }
+
+    private void plusWinnerMapCount(int matchCount) {
         if(matchCount >= 3){
             winnerMap.put(matchCount, winnerMap.get(matchCount)+1);
         }
     }
 
-    private void isTicketContainsNumber(List<Integer> oneTicket, Integer num) {
+    private int isTicketContainsNumber(List<Integer> oneTicket, Integer num) {
         if(oneTicket.contains(num)){
-           matchCount++;
+            return 1;
         }
+        return 0;
     }
 
     private List<Integer> winnerTicket(String winnerString) {

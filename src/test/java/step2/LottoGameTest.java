@@ -2,7 +2,6 @@ package step2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step1.Formula;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,8 +56,4 @@ public class LottoGameTest {
         assertThat(lottoGame.resultRate(9000, winnerMap)).isEqualTo(6.66);
     }
 
-    @Test
-    void pow() {
-        System.out.println(Math.pow(10, 2));
-    }
 }

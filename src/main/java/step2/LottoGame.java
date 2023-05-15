@@ -34,10 +34,10 @@ public class LottoGame {
         }
 
         double rate = (double)winningAmounts / (double)money;
-        return getaDouble(rate);
+        return getDecimalPlace(rate);
     }
 
-    private static double getaDouble(double rate) {
+    private double getDecimalPlace(double rate) {
         return Math.floor(rate * (Math.pow(10, DECIMAL_POINT))) / (Math.pow(10, DECIMAL_POINT));
     }
 

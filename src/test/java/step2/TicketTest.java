@@ -1,21 +1,19 @@
 package step2;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class TicketTest {
 
-    LottoGame lottoGame = new LottoGame();
-
     @Test
     void 숫자_6개() {
-        List<Ticket> tickets = lottoGame.makeTickets(7000);
-        assertThat(tickets.get(0).getTicket()).hasSize(6);
+        assertThatIllegalArgumentException()
+                .isThrownBy(()-> {
+                    new Ticket(Arrays.asList(1,2,3,4,5,6,7));
+                }).withMessageMatching("로또는 6개의 숫자여야합니다.");
     }
 
 }

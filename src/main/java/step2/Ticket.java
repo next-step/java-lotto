@@ -8,26 +8,34 @@ import static step2.Lotto.*;
 
 public class Ticket {
 
-    private List<Integer> ticket;
+    public static final int NUMBER_LIMIT = 6;
+    private List<Integer> numbers;
 
     public Ticket() {
         createTicket();
     }
-    public Ticket(List<Integer> numbers){
-        ticket = numbers;
-    }
 
-    public List<Integer> getTicket() {
-        return ticket;
-    }
-
-    public List<Integer> createTicket() {
+    private List<Integer> createTicket() {
 
         Collections.shuffle(lottoNumber);
-        ticket = new ArrayList<>(lottoNumber.subList(0,6));
-        Collections.sort(ticket);
+        numbers = new ArrayList<>(lottoNumber.subList(0,6));
+        Collections.sort(numbers);
 
-        return ticket;
+        return numbers;
     }
 
+    public Ticket(List<Integer> numbers){
+        numbersCheck(numbers);
+        this.numbers = numbers;
+    }
+
+    private static void numbersCheck(List<Integer> numbers) {
+        if(numbers.size() != NUMBER_LIMIT){
+            throw new IllegalArgumentException("로또는 6개의 숫자여야합니다.");
+        }
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

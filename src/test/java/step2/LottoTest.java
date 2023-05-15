@@ -21,6 +21,7 @@ public class LottoTest {
         assertFalse(Lotto.lottoNumber.contains(num));
     }
 
+    @DisplayName("만들어진 로또에는 1~45이외의 숫자는 포함되지 않는다.")
     @Test
     void 숫자_범위2() {
         List<Ticket> tickets = lottoGame.makeTickets(7000);

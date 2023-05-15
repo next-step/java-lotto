@@ -37,20 +37,4 @@ public class WinnerTest {
         assertThat(winnerMap.get(6)).isEqualTo(0);
     }
 
-    /*@ParameterizedTest(name = "{0} 개 당첨된 사람 : {1}명")
-    @MethodSource("parameter")
-    void 당첨_개수(int matchCount, int winnerCount) {
-        Winner winner = new Winner();
-        Map<Integer, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6");
-        assertThat(winnerMap.get(matchCount)).isEqualTo(winnerCount);
-    }
-
-    static Stream<Arguments> parameter(){
-        return Stream.of(
-                arguments(3,2)
-                ,arguments(4,1)
-                ,arguments(5,0)
-                ,arguments(6,0)
-        );
-    }*/
 }

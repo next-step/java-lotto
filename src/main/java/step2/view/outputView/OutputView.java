@@ -22,7 +22,7 @@ public class OutputView {
     public static void printTickets(List<Ticket> tickets){
         printTicketCount(tickets.size());
         for (Ticket ticket : tickets) {
-            System.out.println(ticket.getTicket());
+            System.out.println(ticket.getNumbers());
         }
     }
 
