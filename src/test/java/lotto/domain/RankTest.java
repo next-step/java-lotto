@@ -29,18 +29,21 @@ public class RankTest {
     @Test
     public void rank_DependsOnCount_ChooseFourth() {
         Assertions.assertThat(Rank.find(4, false)).isEqualTo(Rank.FOURTH);
+        Assertions.assertThat(Rank.find(4, true)).isEqualTo(Rank.FOURTH);
     }
 
     @DisplayName("5등을 가릴 수 있다.")
     @Test
     public void rank_DependsOnCount_ChooseFIFTH() {
         Assertions.assertThat(Rank.find(3, false)).isEqualTo(Rank.FIFTH);
+        Assertions.assertThat(Rank.find(3, true)).isEqualTo(Rank.FIFTH);
     }
 
     @DisplayName("2개 이하를 맞혔을 경우 꽝이다.")
     @Test
     public void rank_DependsOnUnderCount_ThrowException() {
         Assertions.assertThat(Rank.find(2, false)).isEqualTo(Rank.MISS);
+        Assertions.assertThat(Rank.find(2, true)).isEqualTo(Rank.MISS);
     }
 
 }
