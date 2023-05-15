@@ -30,18 +30,6 @@ public class LottoMachineTest {
     }
 
     @Test
-    @DisplayName("수동 로또 생성 - 입력한 수동 로또 장수보다 번호가 부족할 경우")
-    void createManualLottos_exception() {
-        int cost = 14000;
-        int numberOfManualLottos = 3;
-
-        assertThatThrownBy(() -> {
-            LottoMachine machine = new LottoMachine(cost, numberOfManualLottos);
-            machine.generateLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력한 수동 로또 장수와 수동 로또 번호가 일치하지 않습니다.");
-    }
-
-    @Test
     @DisplayName("금액보다 수동 로또를 많이 입력받은 경우")
     void input_exception() {
         int cost = 14000;

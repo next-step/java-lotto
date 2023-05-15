@@ -19,6 +19,12 @@ public class LottoStatistics {
         this.statistics = initStatistics();
     }
 
+    public LottoStatistics(int cost, List<WinningCount> result) {
+        this.cost = cost;
+
+        this.statistics = registerStatistics(result);
+    }
+
     public Map<WinningCount, Integer> getStatistics() {
         return statistics;
     }
@@ -32,6 +38,7 @@ public class LottoStatistics {
     }
 
     private Map<WinningCount, Integer> registerStatistics(List<WinningCount> result) {
+        Map<WinningCount, Integer> statistics = initStatistics();
         result.stream()
                 .filter(WinningCount::isRewardWinningCount)
                 .forEach(winningCount -> statistics.put(winningCount, statistics.get(winningCount) + LOTTO_MATCH_COUNT));

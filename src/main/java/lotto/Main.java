@@ -23,10 +23,9 @@ public class Main {
         LottoMachine lottoMachine = new LottoMachine(cost, numberOfManualLottos);
         ResultView.printNumbersOfLotto(lottoMachine.getNumberOfManualLottos(), lottoMachine.getNumberOfAutoLottos());
 
-        Lottos manualLottos = lottoMachine.generateLotto(manualLottosNumber);
-        Lottos autoLottos = lottoMachine.generateLotto();
-        ResultView.printLottos(manualLottos);
-        ResultView.printLottos(autoLottos);
+        Lottos lottos = lottoMachine.generate(manualLottosNumber);
+
+        ResultView.printLottos(lottos);
 
         ResultView.printWinningNumber();
         String winningNumbers = InputView.inputWinningNumber();
@@ -36,9 +35,7 @@ public class Main {
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        LottoStatistics statistics = new LottoStatistics(cost);
-        statistics.registerManualLottoResult(winningLotto.checkWinningNumbers(manualLottos));
-        statistics.registerAutoLottoResult(winningLotto.checkWinningNumbers(autoLottos));
+        LottoStatistics statistics = new LottoStatistics(cost, winningLotto.checkWinningNumbers(lottos));
 
         ResultView.printStatistics(statistics.getStatistics(), Rank.getWinningCounts());
         ResultView.printLottoRate(statistics.getRate());

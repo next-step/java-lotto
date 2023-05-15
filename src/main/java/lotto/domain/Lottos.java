@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class Lottos {
     private static final int BONUS_NO_CHECK = 5;
-    private static final int MIN_NUM_OF_LOTTO = 1;
+    private static final int MIN_NUM_OF_LOTTO = 0;
 
     private List<Lotto> lottos;
 
@@ -55,6 +55,10 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public void combineLottos(Lottos otherLottos) {
+        lottos.addAll(otherLottos.lottos);
     }
 
     @Override
