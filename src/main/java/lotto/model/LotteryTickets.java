@@ -4,9 +4,9 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LotteryTickets {
+import static lotto.constant.LotteryConstant.LOTTERY_PRICE;
 
-    private static final int LOTTERY_PRICE = 1000;
+public class LotteryTickets {
 
     private final List<LotteryTicket> tickets;
 

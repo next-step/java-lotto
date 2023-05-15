@@ -4,12 +4,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.constant.LotteryConstant.*;
+
 public class AutoLotteryNumberGenerator implements LotteryNumberGenerator {
 
-    private static final Integer RANDOM_MIN = 1;
-    private static final Integer RANDOM_MAX = 43;
-    private static final int NUMBER_PER_TICKET = 6;
-    private static final List<LotteryNumber> numbers = IntStream.rangeClosed(RANDOM_MIN, RANDOM_MAX)
+    private static final List<LotteryNumber> numbers = IntStream.rangeClosed(LOTTERY_MIN, LOTTERY_MAX)
             .boxed().map(LotteryNumber::of).collect(Collectors.toList());
 
     @Override
