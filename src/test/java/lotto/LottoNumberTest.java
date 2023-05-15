@@ -11,12 +11,12 @@ public class LottoNumberTest {
     @Test
     void create() {
         assertThat(new LottoNumber(1).getNumber()).isEqualTo(1);
-        assertThat(new LottoNumber(45).getNumber()).isEqualTo(45);
+        assertThat(new LottoNumber(44).getNumber()).isEqualTo(44);
     }
 
     @Test
     void 범위벗어날경우_체크() {
         assertThatThrownBy(() -> new LottoNumber(0)).isInstanceOf(InvalidParameterException.class);
-        assertThatThrownBy(() -> new LottoNumber(46)).isInstanceOf(InvalidParameterException.class);
+        assertThatThrownBy(() -> new LottoNumber(45)).isInstanceOf(InvalidParameterException.class);
     }
 }
