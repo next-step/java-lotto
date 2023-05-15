@@ -9,6 +9,12 @@ public class Equation {
 
     private final List<String> equation;
 
+    public static Equation of(String rawEquation){
+        return new Equation(Arrays.stream(rawEquation.split(" "))
+            .map(String::trim)
+            .collect(Collectors.toList()));
+    }
+
     public Equation(List<String> equation) {
         checkValidation(equation);
         this.equation = equation;
@@ -16,19 +22,35 @@ public class Equation {
 
     public Number calculate() {
         Number result = new Number(0);
+        Number targetNumber;
         Operator operator = Operator.PLUS;
         for (String target : equation) {
-            if (operator == null) {
-                operator = Operator.symbolOf(target);
-                continue;
-            }
-            result = result.operate(operator, Number.of(target));
+            operator = transferOperator(target);
+            targetNumber = transferNumber(target);
+            result = result.operate(operator, targetNumber);
             operator = null;
         }
         if (operator != null) {
             throw new IllegalArgumentException();
         }
         return result;
+    }
+
+    private Number transferNumber(String target) {
+        try {
+            return Number.of(target);
+        } catch (IllegalArgumentException e) {
+            return new Number(0);
+        }
+    }
+
+    private Operator transferOperator(String target) {
+        try {
+            return Operator.symbolOf(target);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+
     }
 
 

@@ -28,7 +28,7 @@ public enum Operator {
             return first / second;
         }
     };
-    final private String symbol;
+    private final String symbol;
     abstract long calculate(long first, long second);
 
     Operator(String symbol) {
@@ -39,7 +39,7 @@ public enum Operator {
         return Arrays.stream(Operator.values())
                 .filter(operator -> operator.symbol.equals(symbol))
                 .findAny()
-                .get();
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public static void checkOperator(String operatorSymbol) {

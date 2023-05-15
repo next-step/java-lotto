@@ -13,10 +13,7 @@ public class StringCalculator {
     }
 
     public static StringCalculator of(String rawEquation) {
-        List<String> equation = Arrays.stream(rawEquation.split(" "))
-                .map(String::trim)
-                .collect(Collectors.toList());
-        return new StringCalculator(new Equation(equation));
+        return new StringCalculator(Equation.of(rawEquation));
     }
 
     public Number calculate() {
