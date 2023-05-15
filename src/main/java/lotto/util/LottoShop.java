@@ -7,26 +7,24 @@ import java.util.List;
 
 public class LottoShop {
 
-    private static List<LottoTicket> lottoTickets;
-
     public static List<LottoTicket> sell(int gameCount) {
-        lottoTickets = new ArrayList<>();
-        buyAutoLottoTicket(gameCount);
+        return buyAutoLottoTicket(gameCount, new ArrayList<>());
+    }
+
+    public static List<LottoTicket> sell(int gameCount, List<LottoTicket> manualLottoTickets) {
+        List<LottoTicket> lottoTickets = manualLottoTickets;
+        buyAutoLottoTicket(gameCount, manualLottoTickets);
 
         return lottoTickets;
     }
 
-    public static List<LottoTicket> sell(List<LottoTicket> manualLottoTickets, int gameCount) {
-        lottoTickets = manualLottoTickets;
-        buyAutoLottoTicket(gameCount);
-
-        return lottoTickets;
-    }
-
-    private static void buyAutoLottoTicket(int gameCount) {
+    private static List<LottoTicket> buyAutoLottoTicket(int gameCount, List<LottoTicket> buyLottoTickets) {
+        List<LottoTicket> lottoTickets = buyLottoTickets;
 
         for(int i = 0; i < gameCount; i ++) {
             lottoTickets.add(new LottoTicket(LottoGenerate.initAutoLottoNumbers()));
         }
+
+        return lottoTickets;
     }
 }

@@ -35,7 +35,7 @@ public class LottoController {
 
         int lottoGameCount = LottoUtils.getLottoGameCount(lottoBuyPrice);
 
-        Lottos lottos = new Lottos(LottoShop.sell(manualTickets, lottoGameCount - manualLottoCount));
+        Lottos lottos = new Lottos(LottoShop.sell((lottoGameCount - manualLottoCount), manualTickets));
 
         resultView.showBuyLotto(manualLottoCount, lottoGameCount - manualLottoCount);
         resultView.showMyLottoGameList(lottos.getTickets());
