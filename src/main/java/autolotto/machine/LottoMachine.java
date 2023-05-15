@@ -1,9 +1,9 @@
 package autolotto.machine;
 
-import autolotto.machine.lotto.LottoWallet;
-import autolotto.machine.winning.WinningNumbers;
 import autolotto.machine.lotto.Lotto;
 import autolotto.machine.lotto.LottoGenerator;
+import autolotto.machine.lotto.LottoWallet;
+import autolotto.machine.winning.WinningNumbers;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -61,7 +61,7 @@ public class LottoMachine {
     }
 
     private Map<Integer, Integer> setZeroToAllMatchingCount() {
-        HashMap<Integer, Integer> lottoCountPerEachMatchingCount = new HashMap<>();
+        Map<Integer, Integer> lottoCountPerEachMatchingCount = new HashMap<>();
         for (int i = 0; i < 6; i++) {
             lottoCountPerEachMatchingCount.put(i, 0);
         }
