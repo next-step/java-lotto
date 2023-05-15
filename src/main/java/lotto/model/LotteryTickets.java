@@ -10,7 +10,7 @@ public class LotteryTickets {
 
     private final List<LotteryTicket> tickets;
 
-    private LotteryTickets(List<LotteryTicket> tickets) {
+    protected LotteryTickets(List<LotteryTicket> tickets) {
         this.tickets = tickets;
     }
 

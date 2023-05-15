@@ -9,10 +9,10 @@ import static lotto.constant.LotteryConstant.*;
 public class WinNumbers {
 
     private Set<LotteryNumber> numbers;
-    private int bonusNumber;
+    private Integer bonusNumber;
 
     public WinNumbers(Set<Integer> numbers) {
-        validate(numbers, bonusNumber);
+        validate(numbers, null);
         this.numbers = numbers.stream().map(LotteryNumber::of).collect(Collectors.toSet());
     }
 
@@ -22,8 +22,11 @@ public class WinNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(Set<Integer> numbers, int bonusNumber) {
-        if (numbers.size() != NUMBER_PER_TICKET || bonusNumber > LOTTERY_MAX || bonusNumber <  LOTTERY_MIN) {
+    private void validate(Set<Integer> numbers, Integer bonusNumber) {
+        if (numbers.size() != NUMBER_PER_TICKET ||
+                (bonusNumber != null && bonusNumber > LOTTERY_MAX) ||
+                (bonusNumber != null && bonusNumber <  LOTTERY_MIN)
+        ) {
             throw new RuntimeException("잘못된 로또 번호 목록입니다. : " + numbers);
         }
     }
