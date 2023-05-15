@@ -45,7 +45,7 @@ public enum Rank {
         return this.count;
     }
 
-    public Money prize() {
-        return this.prize;
+    public int prize() {
+        return this.prize.getMoney();
     }
 }

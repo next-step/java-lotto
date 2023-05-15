@@ -22,7 +22,7 @@ class LottoResultTest {
         LottoResult result = new LottoResult(List.of(Rank.FOURTH));
         int ticketCount = 10;
         double rate = result.getRateResult(ticketCount);
-        assertThat(rate).isEqualTo((double) Rank.FOURTH.prize().getMoney() / (1_000 * ticketCount));
+        assertThat(rate).isEqualTo((double) Rank.FOURTH.prize() / (1_000 * ticketCount));
     }
 
     @DisplayName("로또 등수마다 당첨개수 결과를 계산할 수 있다.")
