@@ -1,15 +1,17 @@
 package lotto.view;
 
+import lotto.BuyInfo;
 import lotto.Lotto;
 import lotto.common.code.MatchedNumber;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
 
-    private static final String BUY_COMPLETED_TEXT = "%s개를 구매했습니다.";
+    private static final String BUY_COMPLETED_TEXT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final String WINNING_STATISTICS_TEXT = "당첨 통계";
     private static final String BAR = "---------";
     private static final String WINNING_COUNT_TEXT = "%s개 일치%s(%s원)- %s개";
@@ -19,20 +21,20 @@ public class ResultView {
     private static final String EMPTY = "";
     private static final String SPACE = " ";
 
-    public static void printBuyCompleted(String count) {
-        System.out.println(String.format(BUY_COMPLETED_TEXT, count));
+    public static void printBuyCompleted(int totalLottoCount, int manuallyLottoCount) {
+        System.out.println(String.format(BUY_COMPLETED_TEXT, manuallyLottoCount, totalLottoCount));
     }
 
     public static void printLottoList(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            System.out.println(lotto.getNumbers());
+            System.out.println(lotto.getNumbers().getList());
         }
     }
 
-    public static void printResult(Map<MatchedNumber, Integer> winningStatistics, int amount) {
+    public static void printResult(Map<MatchedNumber, Integer> winningStatistics, BuyInfo buyInfo) {
         System.out.println(WINNING_STATISTICS_TEXT);
         System.out.println(BAR);
-        BigDecimal ror = getRateOfReturn(amount, getTotalWinningAmount(winningStatistics));
+        BigDecimal ror = buyInfo.getRateOfReturn(getTotalWinningAmount(winningStatistics));
         System.out.println(String.format(TOTAL_ROR_TEXT, ror, getTotalRorLossText(ror)));
     }
 
@@ -44,10 +46,6 @@ public class ResultView {
             totalWinningAmount += matchedNumber.getAmount() * winningCount;
         }
         return totalWinningAmount;
-    }
-
-    static BigDecimal getRateOfReturn(int amount, int winningAmount) {
-        return BigDecimal.valueOf(winningAmount).divide(BigDecimal.valueOf(amount));
     }
 
     static String getTotalRorLossText(BigDecimal ror) {
