@@ -15,11 +15,11 @@ public class LottoStatistics {
     private static final int ONE = 1;
 
 
-    public LottoStatistics(Lottos lottos, List<Integer> winningNumbers) {
+    public LottoStatistics(Lottos lottos, List<Integer> winningNumbers, int bonus) {
         this.winningNumbers = winningNumbers;
 
         for (Lotto lotto : lottos.getLottos()) {
-            Winnings winnings = Winnings.fromMatchCount(lotto.checkLotto(winningNumbers));
+            Winnings winnings = Winnings.fromMatchCount(lotto.checkLotto(winningNumbers, bonus), lotto.hasBonus(bonus));
             statistics.put(winnings, statistics.getOrDefault(winnings, ZERO) + ONE);
         }
     }
@@ -46,7 +46,7 @@ public class LottoStatistics {
 
     public enum Winnings {
         FIRST(BigDecimal.valueOf(2_000_000_000), 6),
-        SECOND(BigDecimal.valueOf(30_000_000), 5),
+        SECOND(BigDecimal.valueOf(30_000_000), 6),
         THIRD(BigDecimal.valueOf(1_500_000), 5),
         FOURTH(BigDecimal.valueOf(50_000), 4),
         FIFTH(BigDecimal.valueOf(5_000), 3),
@@ -60,8 +60,9 @@ public class LottoStatistics {
             this.matchCount = matchCount;
         }
 
-        public static Winnings fromMatchCount(int matchCount) {
+        public static Winnings fromMatchCount(int matchCount, boolean matchBonus) {
             for (Winnings value : Winnings.values()) {
+                if (matchCount == 6 && matchBonus) return SECOND;
                 if (value.matchCount == matchCount) return value;
             }
             return NOTWIN;

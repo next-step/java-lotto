@@ -18,8 +18,9 @@ public class Lotto {
     }
 
 
-    public int checkLotto(List<Integer> winningNumbers) {
+    public int checkLotto(List<Integer> winningNumbers, int bonus) {
         int matchCount = 0;
+        winningNumbers.add(bonus);
         for (int num : numbers) {
             matchCount = getMatchCount(winningNumbers, matchCount, num);
         }

@@ -3,7 +3,6 @@ package lotto.input;
 import lotto.Lotto;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,6 +13,11 @@ public class ConsoleWriter {
     public static BigDecimal inputBigDecimal() {
         String s = sc.nextLine();
         return BigDecimal.valueOf(Long.valueOf(s));
+    }
+
+    public static Integer inputInt() {
+        String s = sc.nextLine();
+        return Integer.valueOf(s);
     }
 
     public static List<Integer> inputIntegerList() {
