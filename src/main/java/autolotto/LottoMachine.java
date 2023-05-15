@@ -65,4 +65,8 @@ public class LottoMachine {
         }
         return lottoCountPerEachMatchingCount;
     }
+
+    public int lottoCount() {
+        return this.wallet.lottoSize();
+    }
 }

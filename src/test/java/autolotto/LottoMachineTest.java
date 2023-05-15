@@ -26,6 +26,16 @@ public class LottoMachineTest {
     }
 
     @Test
+    void 머신이_생성한_로또의_개수를_알려준다() {
+        int inputMoney = 2000;
+
+        LottoMachine lottoMachine =
+                new LottoMachine(new LottoGenerator(new FixedNumberShuffler()), inputMoney);
+
+        Assertions.assertThat(lottoMachine.lottoCount()).isEqualTo(inputMoney / 1000);
+    }
+
+    @Test
     void 당첨번호가_주어지면_수익률을_소수점_둘째_자리까지_반올림한_값으로_알려준다() {
         LottoMachine lottoMachine = new LottoMachine(new LottoGenerator(new FixedNumberShuffler()), 3000);
         BigDecimal expectedProfitRate = BigDecimal.valueOf((double) Winning.THREE.winningMoney() * 3 / 3000).setScale(2);
