@@ -7,6 +7,8 @@ import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
@@ -20,6 +22,9 @@ public class LottoController {
 
     public void buy() {
         lottoGame.buyLotto(inputView.price());
+        List<List<Integer>> lists = inputView.manualBuy();
+
+        lottoGame.buyManualLotto(lists);
         inputView.buy(lottoGame.quantity());
         resultView.view(lottoGame.lottos());
     }

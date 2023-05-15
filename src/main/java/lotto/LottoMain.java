@@ -7,7 +7,7 @@ import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LottoMain {
@@ -17,7 +17,7 @@ public class LottoMain {
                 new ResultView(),
                 new LottoGame(
                         new Lottos(
-                                Collections.emptyList(),
+                                new ArrayList<>(),
                                 new LottoNumberGenerator())
                 )
         );

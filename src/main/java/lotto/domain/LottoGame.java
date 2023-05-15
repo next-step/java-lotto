@@ -23,7 +23,14 @@ public class LottoGame {
         return lottos.quantity();
     }
 
-    public void buyLotto(int price) {
+    public void buyAutoLotto(int price) {
+        lottos.buyLotto(new LottoPrice(price));
+    }
+
+    public void buyManualLotto(List<List<Integer>> lists) {
+        // 리스트 길이가 입금 금액보다 큰가?
+
+
         lottos.buyLotto(new LottoPrice(price));
     }
 }
