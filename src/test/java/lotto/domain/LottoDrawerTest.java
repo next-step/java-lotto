@@ -43,8 +43,7 @@ public class LottoDrawerTest {
 
         Lotto 지난주_당첨번호 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        LottoDrawer 로또추첨기 = new LottoDrawer();
-        List<Integer> 일치한_당첨번호_개수 = 로또추첨기.hitNumber(Arrays.asList(첫번째_로또, 두번째_로또, 세번쨰_로또), 지난주_당첨번호);
+        List<Integer> 일치한_당첨번호_개수 = LottoDrawer.hitNumber(Arrays.asList(첫번째_로또, 두번째_로또, 세번쨰_로또), 지난주_당첨번호);
         assertEquals(Collections.frequency(일치한_당첨번호_개수, 6), 1);
         assertEquals(Collections.frequency(일치한_당첨번호_개수, 3), 1);
         assertEquals(Collections.frequency(일치한_당첨번호_개수, 0), 1);
@@ -56,8 +55,7 @@ public class LottoDrawerTest {
         Lotto 두번쨰_로또 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         Lotto 지난주_당첨번호 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoDrawer 로또추첨기 = new LottoDrawer();
-        List<Integer> 일치한_당첨번호_개수 = 로또추첨기.hitNumber(Arrays.asList(첫번째_로또, 두번쨰_로또), 지난주_당첨번호);
+        List<Integer> 일치한_당첨번호_개수 = LottoDrawer.hitNumber(Arrays.asList(첫번째_로또, 두번쨰_로또), 지난주_당첨번호);
         assertEquals(Collections.frequency(일치한_당첨번호_개수, 6), 2);
 
     }

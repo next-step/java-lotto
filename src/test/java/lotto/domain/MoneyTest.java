@@ -21,7 +21,7 @@ public class MoneyTest {
     @DisplayName("유효하지 않은 숫자를 가지는 돈 생성 실패 테스트")
     @ParameterizedTest
     @CsvSource({"0, 음수 또는 0이 아닌 숫자를 입력해주세요.",
-            "ad, 잘몬된 값을 입력하였습니다."})
+            "ad, 구매 금액(숫자)을 입력해주세요."})
     void 음수_또는_0을_가지는_돈(String value, String expected) {
         assertThatThrownBy(() -> {
             new Money(value);
