@@ -1,21 +1,21 @@
 package lotto;
 import java.security.InvalidParameterException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoFactory {
 
     public static final int LOTTO_SIZE = 6;
 
     public static List<LottoNumber> createRandom(){
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        while (lottoNumbers.size() != LOTTO_SIZE) {
-            LottoNumber lottoNumber = new LottoNumber();
-            if (!lottoNumbers.contains(lottoNumber)) {
-                lottoNumbers.add(lottoNumber);
-            }
-        }
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        List<LottoNumber> lottoNumbersList = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+        Collections.shuffle(lottoNumbersList);
+        List<LottoNumber> result = lottoNumbersList.subList(0, LOTTO_SIZE);
+        Collections.sort(result);
+        return result;
     }
 
     public static List<LottoNumber> createManual(String numbers) {
