@@ -22,7 +22,7 @@ public class ResultView {
                 .forEach(entry -> {
                     Rank rank = entry.getKey();
                     int count = entry.getValue();
-                    System.out.printf("%d개 일치 (%d원) - %d개\n", rank.count(), rank.reward(), count);
+                    System.out.printf("%d개 일치 (%d원) - %d개\n", rank.count(), rank.prize(), count);
                 });
     }
 

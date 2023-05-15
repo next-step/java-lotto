@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,12 +25,6 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
-    }
-
-    public List<Integer> matchLottoTickets(LottoTicket lottoTicket) {
-        return lottoTickets.stream()
-                .map(ticket -> ticket.matchLottoNumberCount(lottoTicket.getLottoNumbers()))
-                .collect(Collectors.toList());
     }
 
     public List<Rank> getRankings(LottoTicket winTicket) {

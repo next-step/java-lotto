@@ -1,11 +1,9 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum Rank {
 
@@ -18,18 +16,23 @@ public enum Rank {
             .collect(Collectors.toMap(Rank::count, Function.identity()));
 
     private final int count;
-    private final int reward;
+    private final int prize;
 
-    Rank(int count, int reward) {
+    Rank(int count, int prize) {
         this.count = count;
-        this.reward = reward;
+        this.prize = prize;
+    }
+
+    public static Rank of(int count, boolean isWin) {
+        if (isWin) {
+            return lotto_rank.getOrDefault(count, NONE);
+        }
+
+        return NONE;
     }
 
     public static Rank of(int count) {
-        if (!lotto_rank.containsKey(count)) {
-            return Rank.NONE;
-        }
-        return lotto_rank.get(count);
+        return lotto_rank.getOrDefault(count, NONE);
     }
 
     public static Map<Rank, Integer> initLottoResult() {
@@ -42,7 +45,7 @@ public enum Rank {
         return this.count;
     }
 
-    public int reward() {
-        return this.reward;
+    public int prize() {
+        return this.prize;
     }
 }
