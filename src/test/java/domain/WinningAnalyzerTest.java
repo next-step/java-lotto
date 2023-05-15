@@ -18,7 +18,7 @@ public class WinningAnalyzerTest {
     @ParameterizedTest
     public void 지난주_당첨번호를_입력하면_당첨통계를_제공한다(List<int[]> lottoList, List<Integer> winningNumbers) throws Exception {
         //given
-        LottoResults lottoResults = new LottoResults(lottoList);
+        LottoResults lottoResults = LottoResults.fromIntegers(lottoList);
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers);
         //when
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
@@ -34,7 +34,7 @@ public class WinningAnalyzerTest {
     @ParameterizedTest
     void 수익률을_반환한다(List<int[]> lottoList, List<Integer> winningNumbers) {
         //given
-        LottoResults lottoResults = new LottoResults(lottoList);
+        LottoResults lottoResults = LottoResults.fromIntegers(lottoList);
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers);
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
 

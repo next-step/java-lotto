@@ -1,17 +1,11 @@
 package domain;
 
-import java.util.List;
-
-public class LottoGenerator {
+public class LottoGame {
     private LottoResults lottoResults;
 
     private Money money;
 
-    public LottoGenerator(LottoResults lottoResults) {
-        this.lottoResults = lottoResults;
-    }
-
-    public LottoGenerator() {
+    public LottoGame() {
         this.lottoResults = new LottoResults();
     }
 

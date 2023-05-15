@@ -19,19 +19,14 @@ public class WinningStatistics {
         return winningStatistics;
     }
 
-    public void matchCount(int[] lottoResult) {
+    public void matchCount(LottoNumber[] lottoNumbers) {
         int count = 0;
-        for (int num : lottoResult) {
-            count = addCountIfContains(count, num);
+        for (LottoNumber num : lottoNumbers) {
+            count = num.addCountIfContain(count, winningNumbers);
         }
         if (count >= OFFSET) {
             winningStatistics[count - OFFSET]++;
         }
-    }
-
-    private int addCountIfContains(int count, int num) {
-        if (winningNumbers.contains(num)) {count++;}
-        return count;
     }
 
     public int getTotalWinnings() {

@@ -1,4 +1,6 @@
-import domain.LottoGenerator;
+import java.util.List;
+
+import domain.LottoGame;
 import domain.LottoResults;
 import domain.WinningAnalyzer;
 import domain.WinningStatistics;
@@ -6,18 +8,19 @@ import view.LottoInputView;
 import view.LottoOutputView;
 
 public class LottoController {
-    private LottoGenerator lottoGenerator;
+    private LottoGame lottoGenerator;
     private WinningAnalyzer winningAnalyzer;
 
     public void playLottoGames(int money) {
-        this.lottoGenerator = new LottoGenerator();
+        this.lottoGenerator = new LottoGame();
         lottoGenerator.generateLottoResultsFromMoney(money);
     }
 
     public void getLottoResults() {
         LottoResults lottoResults = lottoGenerator.getLottoResults();
         LottoOutputView.printGameCount(lottoGenerator.getCount());
-        LottoOutputView.printLottoResults(lottoResults.getLottoResults());
+        List<int[]> results = lottoResults.lottoResults();
+        LottoOutputView.printLottoResults(results);
     }
 
     public void getWinningStatistics() {

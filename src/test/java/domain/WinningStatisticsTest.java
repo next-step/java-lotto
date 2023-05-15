@@ -26,11 +26,16 @@ public class WinningStatisticsTest {
         int[] secondPrize = { 1, 3, 15, 17, 9, 21 };
         int[] firstPrize = { 1, 3, 15, 17, 21, 35 };
 
+        LottoNumber[] fourthPrizes = LottoNumber.fromIntegers(fourthPrize);
+        LottoNumber[] thirdPrizes = LottoNumber.fromIntegers(thirdPrize);
+        LottoNumber[] secondPrizes = LottoNumber.fromIntegers(secondPrize);
+        LottoNumber[] firstPrizes = LottoNumber.fromIntegers(firstPrize);
+
         //when
-        winningStatistics.matchCount(fourthPrize);
-        winningStatistics.matchCount(thirdPrize);
-        winningStatistics.matchCount(secondPrize);
-        winningStatistics.matchCount(firstPrize);
+        winningStatistics.matchCount(fourthPrizes);
+        winningStatistics.matchCount(thirdPrizes);
+        winningStatistics.matchCount(secondPrizes);
+        winningStatistics.matchCount(firstPrizes);
 
         //then
         assertThat(winningStatistics.getWinningResults()[0]).isEqualTo(1);
