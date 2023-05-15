@@ -17,7 +17,7 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         if (isInvalidNumber(number)) {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하여야 합니다.");
         }
