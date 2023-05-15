@@ -8,6 +8,6 @@ public class LottoPurchaseTest {
     @Test
     public void manualAmount() {
         LottoPurchase lottoPurchase = new LottoPurchase("14000");
-        assertThat(lottoPurchase.autoStream().count()).isEqualTo(10);
+        assertThat(lottoPurchase.autoStream().count()).isEqualTo(14);
     }
 }

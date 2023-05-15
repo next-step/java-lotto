@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final HashSet<LottoNumber> lottoNumbers = new HashSet<>();
+    private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public Lotto(LottoGenerator lottoGenerator) {
         this.lottoNumbers.addAll(lottoGenerator.generate());

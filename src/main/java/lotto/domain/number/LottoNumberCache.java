@@ -16,4 +16,8 @@ public class LottoNumberCache {
         IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(number -> LOTTO_NUMBER_CACHE.add(new LottoNumber(number)));
     }
+
+    public static LottoNumber valueOf(int number) {
+        return LOTTO_NUMBER_CACHE.get(number - 1);
+    }
 }
