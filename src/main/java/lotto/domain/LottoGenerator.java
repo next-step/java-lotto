@@ -8,7 +8,7 @@ public class LottoGenerator {
     }
 
     public static List<Lotto> generate(Money price) {
-        int amount = getAmount(price);
+        int amount = getAmount(new LottoPrice(price));
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
             lottos.add(new Lotto());
