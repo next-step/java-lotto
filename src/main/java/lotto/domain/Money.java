@@ -18,7 +18,7 @@ public class Money {
         try {
             return Integer.parseInt(money);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘몬된 값을 입력하였습니다.");
+            throw new IllegalArgumentException("구매 금액(숫자)을 입력해주세요.");
         }
     }
 
@@ -27,10 +27,6 @@ public class Money {
             throw new IllegalArgumentException("음수 또는 0이 아닌 숫자를 입력해주세요.");
         }
         this.money = money;
-    }
-
-    public int divideByUnit(int unit) {
-        return money % unit;
     }
 
     public int getMoney() {

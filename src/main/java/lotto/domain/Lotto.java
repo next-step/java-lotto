@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final int LOTTO_LENGTH = 6;
+    private static final int LOTTO_MAX_VALUE = 45;
     private List<Integer> numbers = new ArrayList<>();
 
     public Lotto() {
@@ -23,14 +25,14 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         numbers.stream()
-                .filter(i -> i < 1 || i > 45)
+                .filter(i -> i < 1 || i > LOTTO_MAX_VALUE)
                 .findAny()
                 .ifPresent(i -> {
                     throw new IllegalArgumentException("1부터 45까지의 숫자만 가질 수 있습니다.");
                 });
 
         HashSet<Integer> set = new HashSet<>(numbers);
-        if (set.size() != 6) {
+        if (set.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException("중복되지 않는 6개의 숫자를 입력해주세요.");
         }
 

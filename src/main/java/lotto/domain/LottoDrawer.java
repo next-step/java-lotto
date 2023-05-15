@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoDrawer {
+    private LottoDrawer() {
+    }
+
     public static double calProfit(Money price, List<Integer> hitNumber) {
         BigDecimal totalPrize = BigDecimal.ZERO;
         for (Integer i : hitNumber) {
