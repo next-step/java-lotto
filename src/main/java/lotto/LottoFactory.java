@@ -20,12 +20,11 @@ public class LottoFactory {
 
     public static List<LottoNumber> createManual(String numbers) {
         String[] splits = split(numbers);
-        List<LottoNumber> result = new ArrayList<>();
-        for (String s : splits) {
-            result.add(new LottoNumber(Integer.parseInt(s)));
-        }
-        Collections.sort(result);
-        return result;
+        return Arrays.stream(splits)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.toList());
     }
 
     public static String[] split(String numbers){
