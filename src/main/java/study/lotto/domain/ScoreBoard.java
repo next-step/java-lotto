@@ -20,10 +20,10 @@ public class ScoreBoard {
     public Map<ScoreType, Integer> initScoreMap() {
         Map<ScoreType, Integer> scoreMap = new HashMap<>();
         for (int score = 0; score <= MAX_SCORE; score++) {
-            scoreMap.put(of(score, false), 0);
+            scoreMap.put(of(score), 0);
         }
         //보너스 볼이 추가!
-        scoreMap.put(BONUS, 0);
+        scoreMap.put(ofBonus(), 0);
         return scoreMap;
     }
 

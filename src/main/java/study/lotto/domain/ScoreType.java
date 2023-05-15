@@ -29,16 +29,16 @@ public enum ScoreType {
         this.bonus = bonus;
     }
 
-    public static ScoreType of(Integer score, boolean isBonus) {
-        if (isBonus) {
-            return BONUS;
-        }
-
+    public static ScoreType of(Integer score) {
         return Arrays.stream(values())
                 .filter(type -> type.score == score)
                 .filter(type -> !type.bonus)
                 .findFirst()
                 .orElseThrow(() -> new EnumConstantNotPresentException(ScoreType.class, score.toString()));
+    }
+
+    public static ScoreType ofBonus() {
+        return ScoreType.BONUS;
     }
 
     public boolean canDisplay() {
