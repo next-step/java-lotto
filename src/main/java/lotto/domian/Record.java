@@ -30,7 +30,7 @@ public class Record {
 
     private static void putRankMap(int matchingCount, Map<Rank, Integer> rankMap, boolean haveBonus) {
         if (matchingCount >= 3) {
-            Rank rank = Rank.find(matchingCount, haveBonus);
+            Rank rank = Rank.find(new MatchCount(matchingCount), haveBonus);
             rankMap.merge(rank, 1, Integer::sum);
         }
     }

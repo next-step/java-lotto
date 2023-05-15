@@ -20,15 +20,13 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank find(int matchingCount, boolean isBonusBall) {
-        countValid(matchingCount);
-
-        if (SECOND.isMatchCount(matchingCount)) {
+    public static Rank find(MatchCount matchCount, boolean isBonusBall) {
+        if (SECOND.isMatchCount(matchCount)) {
             return rankSecondAndThird(isBonusBall);
         }
 
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.isMatchCount(matchingCount))
+                .filter(rank -> rank.isMatchCount(matchCount))
                 .findFirst()
                 .orElse(Rank.MISS);
     }
@@ -40,14 +38,8 @@ public enum Rank {
         return THIRD;
     }
 
-    private boolean isMatchCount(int matchingCount) {
-        return this.matchingCount == matchingCount;
-    }
-
-    private static void countValid(int matchingCount) {
-        if (matchingCount > FIRST.matchingCount || matchingCount < MISS.matchingCount) {
-            throw new IllegalArgumentException("유효하지 않은 당첨번호 갯수입니다.");
-        }
+    private boolean isMatchCount(MatchCount matchCount) {
+        return this.matchingCount == matchCount.value();
     }
 
     public int getMatchingCount() {
