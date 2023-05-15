@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoPurchase;
 import lotto.domain.WinningLotto;
@@ -8,6 +9,8 @@ import lotto.util.Util;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoMain {
 
     private static final InputView inputView = new InputView();
@@ -15,10 +18,12 @@ public class LottoMain {
 
     public static void main(String[] args) {
         String purchaseAmount = inputView.inputPurchaseAmount();
-        LottoPurchase lottoPurchase = new LottoPurchase(purchaseAmount);
+        String manualAmount = inputView.inputManualAmount();
+        LottoPurchase lottoPurchase = new LottoPurchase(purchaseAmount, manualAmount);
+        List<Lotto> manualLotto = inputView.inputManualLottoNumber(lottoPurchase);
         resultView.printLottoPurchaseCount(lottoPurchase);
 
-        LottoGames lottoGames = new LottoGames(lottoPurchase);
+        LottoGames lottoGames = new LottoGames(lottoPurchase, manualLotto);
         resultView.printLottoNumbers(lottoGames);
 
         WinningLotto firstLotto = new WinningLotto(inputView.inputFirstLottoNumber());

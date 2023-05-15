@@ -2,7 +2,6 @@ package lotto.domain.generator;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumberCache;
-import lotto.util.Util;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -21,7 +20,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     public Set<LottoNumber> generate() {
         String input = scanner.nextLine();
         String[] lottoNumbers = input.split(SPLIT_REGEX);
-        Arrays.stream(lottoNumbers).forEach(lottoNumber -> this.lottoNumbers.add(LottoNumberCache.valueOf(Util.convertInt(lottoNumber))));
+        Arrays.stream(lottoNumbers).forEach(lottoNumber -> this.lottoNumbers.add(LottoNumberCache.valueOf(lottoNumber)));
         lottoSizeCheck();
         return this.lottoNumbers;
     }

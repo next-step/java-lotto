@@ -1,5 +1,7 @@
 package lotto.domain.number;
 
+import lotto.util.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -17,7 +19,7 @@ public class LottoNumberCache {
                 .forEach(number -> LOTTO_NUMBER_CACHE.add(new LottoNumber(number)));
     }
 
-    public static LottoNumber valueOf(int number) {
-        return LOTTO_NUMBER_CACHE.get(number - 1);
+    public static LottoNumber valueOf(String number) {
+        return LOTTO_NUMBER_CACHE.get(Util.convertInt(number) - 1);
     }
 }

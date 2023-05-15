@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumberCache;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,6 +12,10 @@ public class Lotto {
 
     public Lotto(LottoGenerator lottoGenerator) {
         this.lottoNumbers.addAll(lottoGenerator.generate());
+    }
+
+    public Lotto(String[] lottoNumbers) {
+        this.lottoNumbers.addAll(List.of(LottoNumberCache.valueOf(lottoNumbers[0]), LottoNumberCache.valueOf(lottoNumbers[1]), LottoNumberCache.valueOf(lottoNumbers[2]), LottoNumberCache.valueOf(lottoNumbers[3]), LottoNumberCache.valueOf(lottoNumbers[4]), LottoNumberCache.valueOf(lottoNumbers[5])));
     }
 
     public int findMatchCount(WinningLotto winningLotto) {

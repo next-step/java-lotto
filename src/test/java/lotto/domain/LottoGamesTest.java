@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,8 +52,8 @@ public class LottoGamesTest {
     @Test
     @DisplayName("인풋만큼 로또 게임 생성")
     public void gameMakeTest() {
-        LottoPurchase lottoPurchase = new LottoPurchase("14000");
-        LottoGames lottoGames = new LottoGames(lottoPurchase);
+        LottoPurchase lottoPurchase = new LottoPurchase("14000", "0");
+        LottoGames lottoGames = new LottoGames(lottoPurchase, new ArrayList<>());
         assertThat(lottoGames.size()).isEqualTo(14);
     }
 

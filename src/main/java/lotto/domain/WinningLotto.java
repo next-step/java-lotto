@@ -18,11 +18,11 @@ public class WinningLotto {
         for (String num : numbers) {
             winningLotto.add(new LottoNumber(Util.convertInt(num)));
         }
-        lottoSizeCheck(winningLotto);
+        lottoSizeCheck();
     }
 
-    private void lottoSizeCheck(Set<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
+    private void lottoSizeCheck() {
+        if (winningLotto.size() != LOTTO_SIZE) {
             throw new IllegalStateException(LOTTO_SIZE_ERROR);
         }
     }

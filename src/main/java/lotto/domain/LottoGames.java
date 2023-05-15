@@ -16,8 +16,9 @@ public class LottoGames {
     private final List<Lotto> lottoGameList = new ArrayList<>();
     private final Map<Rank, Integer> lottoResult = new HashMap<>();
 
-    public LottoGames(LottoPurchase lottoPurchase) {
+    public LottoGames(LottoPurchase lottoPurchase, List<Lotto> manualLotto) {
         lottoPurchase.autoStream().forEach(i -> lottoGameList.add(new Lotto(new AutoLottoGenerator())));
+        lottoGameList.addAll(manualLotto);
     }
 
     public LottoGames(List<Lotto> lottoGameList) {
