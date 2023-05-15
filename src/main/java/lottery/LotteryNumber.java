@@ -3,7 +3,7 @@ package lottery;
 import java.util.Objects;
 import java.util.Random;
 
-public class LotteryNumber {
+public class LotteryNumber implements Comparable<LotteryNumber> {
     private static final Integer MAX_NUM = 45;
     private static final Integer MIN_NUM = 1;
 
@@ -53,5 +53,10 @@ public class LotteryNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(LotteryNumber other) {
+        return Integer.compare(number, other.number);
     }
 }

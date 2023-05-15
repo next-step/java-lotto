@@ -5,46 +5,52 @@ import java.util.List;
 import java.util.Map;
 
 public class LotteryStatistics {
-    private static final Map<Integer, Integer> rewardForMatchCnt = Map.of(
-            0, 0,
-            1, 0,
-            2, 0,
-            3, 5000,
-            4, 50000,
-            5, 150000,
-            6, 2000000000
-    );
 
-    private final Map<Integer, Integer> lotteryCntForMatchCnt;
-    private final Float ror;
-    private final PnLType pnLType;
+    private final Map<LotteryPlace, Integer> lotteryCntForPlace;
+    private final Integer investment;
+    private final Integer revenue;
 
-    public LotteryStatistics(List<Lottery> lotteries, LotteryRow winningRow, Integer lotteryPrice) {
-        var revenue = 0;
-        lotteryCntForMatchCnt = new HashMap<>();
+    public LotteryStatistics(List<Lottery> lotteries, DrawResult drawResult) {
+        lotteryCntForPlace = new HashMap<>();
+        setUpLotteryCountForPlace(lotteries, drawResult);
+        investment = getTotalInvestment(lotteries);
+        revenue = getTotalRevenue();
+    }
+
+    private void setUpLotteryCountForPlace(List<Lottery> lotteries, DrawResult drawResult) {
         for (var lottery : lotteries) {
-            var matchCnt = LotteryRow.fromGiven(lottery.getNumbers()).getMatchCount(winningRow);
-            lotteryCntForMatchCnt.put(matchCnt, lotteryCntForMatchCnt.getOrDefault(matchCnt, 0) + 1);
-            revenue += rewardForMatchCnt.get(matchCnt);
+            var matchCnt = lottery.getRow().getMatchCount(drawResult.winningRow);
+            var bonusHit = lottery.getRow().isBonusHit(drawResult.bonus);
+            var place = LotteryPlace.fromMatchCnt(matchCnt, bonusHit);
+            incrementLotteryCntForPlace(place);
         }
-        var investment = lotteryPrice * lotteries.size();
-        ror = revenue / (float) investment;
-        pnLType = PnLType.fromRevenueAndInvestment(revenue, investment);
     }
 
-    public static Integer getRewardForMatchCnt(Integer matchCnt) {
-        return rewardForMatchCnt.getOrDefault(matchCnt, 0);
+    private void incrementLotteryCntForPlace(LotteryPlace place) {
+        lotteryCntForPlace.put(place, lotteryCntForPlace.getOrDefault(place, 0) + 1);
     }
 
-    public Integer getLotteryCntForMatchCnt(Integer matchCnt) {
-        return lotteryCntForMatchCnt.getOrDefault(matchCnt, 0);
+    private Integer getTotalRevenue() {
+        int revenue = 0;
+        for (var place : lotteryCntForPlace.keySet()) {
+            revenue += place.getReward() * getLotteryCntForPlace(place);
+        }
+        return revenue;
+    }
+
+    private Integer getTotalInvestment(List<Lottery> lotteries) {
+        return Lottery.PRICE * lotteries.size();
+    }
+
+    public Integer getLotteryCntForPlace(LotteryPlace place) {
+        return lotteryCntForPlace.getOrDefault(place, 0);
     }
 
     public Float getRor() {
-        return ror;
+        return revenue / (float) investment;
     }
 
     public PnLType getPnLType() {
-        return pnLType;
+        return PnLType.fromRevenueAndInvestment(revenue, investment);
     }
 }

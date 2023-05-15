@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LotteryStand {
-    public static final Integer PRICE = 1000;
     public List<Lottery> buyLotteriesOfAmount(Integer amount) {
-        var quantity = amount / PRICE;
+        var quantity = amount / Lottery.PRICE;
         return issueLotteries(quantity);
     }
 
