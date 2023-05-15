@@ -16,7 +16,7 @@ public class WinningNumberTest {
                 4
         ))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 당첨번호는 6개 입니다.");
+                .hasMessage("로또 번호는 6개 입니다.");
     }
 
     @Test
@@ -25,7 +25,7 @@ public class WinningNumberTest {
                 List.of(1, 2, 3, 4, 5, 6),
                 1
         )).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("이미 존재하는 번호입니다.");
+                .hasMessage("이미 존재하는 당첨 번호입니다.");
     }
 
     @Test

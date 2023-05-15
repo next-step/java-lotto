@@ -34,4 +34,8 @@ public class Lotto {
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
