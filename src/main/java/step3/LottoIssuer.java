@@ -7,12 +7,11 @@ import step3.view.ResultView;
 
 public class LottoIssuer {
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame();
 
         int purchasePrice = InputView.getInputOfPurchasePrice();
         int purchaseAmount = InputView.printPurchaseAmount(purchasePrice);
 
-        lottoGame.generateLottos(purchaseAmount);
+        LottoGame lottoGame = new LottoGame(purchaseAmount);
         LottosView.printLottos(lottoGame.getLottos());
 
         LottosTotalResult totalResult = lottoGame.getTotalResult(InputView.getInputOfWinningNumbers());

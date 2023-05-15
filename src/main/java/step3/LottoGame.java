@@ -6,10 +6,10 @@ import step3.domain.LottosTotalResult;
 import java.util.List;
 
 public class LottoGame {
-    private Lottos lottos;
+    private final Lottos lottos;
 
-    public void generateLottos(int purchaseAmount) {
-        lottos = new Lottos(purchaseAmount);
+    public LottoGame(int purchaseAmount) {
+        this.lottos = new Lottos(purchaseAmount);
     }
 
     public LottosTotalResult getTotalResult(List<Integer> winningNumbers) {
