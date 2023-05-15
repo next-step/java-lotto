@@ -20,7 +20,7 @@ public enum Rank {
     }
 
     public static Rank rankOf(int matchingCount, boolean containsBonus){
-        if (matchingCount == 5 && containsBonus == true) {
+        if (matchingCount == THIRD.matchingCount && containsBonus) {
             return SECOND;
         }
 

@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchaseAmount;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -17,12 +19,14 @@ public class LottoController {
     }
 
     public void play() {
-        int amount = inputView.readAmount();
-        Lottos lottos = new Lottos(amount);
+        LottoPurchaseAmount amount = LottoPurchaseAmount.of(inputView.readAmount());
+        List<List<LottoNumber>> selectedLottoNumbers = inputView.readSelectedLottoNumbers(inputView.readSelectedLottoCount());
+
+        Lottos lottos = new Lottos(amount, selectedLottoNumbers);
         resultView.printLottos(lottos);
 
-        List<Integer> winningNumbers = inputView.readWinningNumbers();
-        int bonusNumber = inputView.readBonusNumber();
+        List<LottoNumber> winningNumbers = inputView.readWinningNumbers();
+        LottoNumber bonusNumber = new LottoNumber(inputView.readBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         resultView.printResults(lottos.getWinningResult(winningLotto), amount);
     }

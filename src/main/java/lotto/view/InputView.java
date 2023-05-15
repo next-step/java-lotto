@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,9 +17,29 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<Integer> readWinningNumbers() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요쉼표(,)를 기준으로 구분).");
-        return toInteger(splitByComma(SCANNER.next()));
+    public static int readSelectedLottoCount(){
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
+    public static List<List<LottoNumber>> readSelectedLottoNumbers(int selectedLottoCount){
+        List<List<LottoNumber>> selectedLottoNumbers = new ArrayList<>();
+
+        if (selectedLottoCount == 0) {
+            return selectedLottoNumbers;
+        }
+
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요 (쉼표(,)를 기준으로 구분).");
+        for (int i=0; i<selectedLottoCount; i++) {
+            selectedLottoNumbers.add(toLottoNumber(splitByComma(SCANNER.next())));
+        }
+
+        return selectedLottoNumbers;
+    }
+
+    public static List<LottoNumber> readWinningNumbers() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요 (쉼표(,)를 기준으로 구분).");
+        return toLottoNumber(splitByComma(SCANNER.next()));
     }
 
     public static int readBonusNumber() {
@@ -25,9 +47,9 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    private static List<Integer> toInteger(List<String> inList) {
+    private static List<LottoNumber> toLottoNumber(List<String> inList) {
         return inList.stream()
-                .map(s -> Integer.parseInt(s))
+                .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList());
     }
 
