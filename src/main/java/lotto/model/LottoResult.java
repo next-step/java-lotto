@@ -28,7 +28,7 @@ public class LottoResult {
         return lottoResult.entrySet()
                 .stream()
                 .filter(o -> o.getValue() > 0)
-                .mapToLong(o -> (long) o.getKey().prize() * o.getValue())
+                .mapToLong(o -> (long) o.getKey().prize().getMoney() * o.getValue())
                 .sum();
     }
 

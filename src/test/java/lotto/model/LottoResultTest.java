@@ -1,17 +1,10 @@
 package lotto.model;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
 import java.util.List;
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoResultTest {
 
@@ -20,7 +13,7 @@ class LottoResultTest {
     void 로또_총_당첨금_계산() {
         LottoResult result = new LottoResult(List.of(Rank.THIRD, Rank.FOURTH));
         long totalReward = result.getTotalReward();
-        assertThat(totalReward).isEqualTo(55_000);
+        assertThat(totalReward).isEqualTo(1_505_000);
     }
 
     @DisplayName("로또 수익률을 계산할 수 있다.")
@@ -29,7 +22,7 @@ class LottoResultTest {
         LottoResult result = new LottoResult(List.of(Rank.FOURTH));
         int ticketCount = 10;
         double rate = result.getRateResult(ticketCount);
-        assertThat(rate).isEqualTo((double) Rank.FOURTH.prize() / (1_000 * ticketCount));
+        assertThat(rate).isEqualTo((double) Rank.FOURTH.prize().getMoney() / (1_000 * ticketCount));
     }
 
     @DisplayName("로또 등수마다 당첨개수 결과를 계산할 수 있다.")
