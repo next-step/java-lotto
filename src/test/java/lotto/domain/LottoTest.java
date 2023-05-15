@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
@@ -14,4 +14,11 @@ public class LottoTest {
         assertThat(lotto.integerValidation("14,0000")).isFalse();
     }
 
+    @Test
+    @DisplayName("로또 구매 수량")
+    public void test2(){
+        Lotto lotto = new Lotto();
+        assertThat(lotto.lottoQuantity("14000")).isEqualTo(14);
+
+    }
 }
