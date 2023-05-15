@@ -1,3 +1,4 @@
+import lotto.BonusBall;
 import lotto.Lottos;
 import lotto.WinningNumbers;
 import view.InputView;
@@ -13,6 +14,10 @@ public class main {
 
     OutputView.lastWeekWinningNumber();
     InputView.getStringValue(); // Scanner에 enter가 남아있어 enter를 먹어 없애기 위한 코드
-    OutputView.statistics(lottos.findWinner(new WinningNumbers(InputView.getStringValue())));
+
+    WinningNumbers winningNumbers = new WinningNumbers(InputView.getStringValue());
+
+    OutputView.bonusBall();
+    OutputView.statistics(lottos.findWinner(winningNumbers, new BonusBall(winningNumbers, InputView.getIntValue())));
   }
 }

@@ -1,18 +1,18 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class MatchesStatus {
 
   private Integer threeMatchesCount = 0;
   private Integer fourMatchesCount = 0;
   private Integer fiveMatchesCount = 0;
+  private Integer fiveAndBonusMatchesCount = 0;
   private Integer sixMatchesCount = 0;
   private BigDecimal rate;
 
   public BigDecimal findRateOfReturn(Lottos lottos) {
-    return this.rate = lottos.findRateOfReturn(sumSixAmount(sumFiveAmount(sumFourAmount(sumThreeAmount(new BigDecimal("0"))))));
+    return this.rate = lottos.findRateOfReturn(sumSixAmount(sumFiveAndBonusAmount(sumFiveAmount(sumFourAmount(sumThreeAmount(new BigDecimal("0")))))));
   }
 
   private BigDecimal sumSixAmount(BigDecimal totalReturnAmount) {
@@ -23,6 +23,10 @@ public class MatchesStatus {
     return totalReturnAmount.add(BigDecimal.valueOf(fiveMatchesCount * Matches.MATCH_FIVE.getWinningAmount()));
   }
 
+  private BigDecimal sumFiveAndBonusAmount(BigDecimal totalReturnAmount) {
+    return totalReturnAmount.add(BigDecimal.valueOf(fiveAndBonusMatchesCount * Matches.MATCH_FIVE_AND_BONUS.getWinningAmount()));
+  }
+
   private BigDecimal sumFourAmount(BigDecimal totalReturnAmount) {
     return totalReturnAmount.add(BigDecimal.valueOf(fourMatchesCount * Matches.MATCH_FOUR.getWinningAmount()));
   }
@@ -31,11 +35,10 @@ public class MatchesStatus {
     return totalReturnAmount.add(BigDecimal.valueOf(threeMatchesCount * Matches.MATCH_THREE.getWinningAmount()));
   }
 
-  public void saveMatches(Integer matchesNumber) {
-    try {
-      Objects.requireNonNull(Matches.getMatches(matchesNumber)).addCount(this);
-    } catch (NullPointerException ignored) {
-    }
+  public void addMatchesCount(Matches matches) {
+    try{
+      matches.addCount(this);
+    } catch (NullPointerException ignored) { }
   }
 
   void addOneAtThreeMatches() {
@@ -50,23 +53,31 @@ public class MatchesStatus {
     fiveMatchesCount++;
   }
 
+  void addOneAtFiveAndBonusMatches() {
+    fiveAndBonusMatchesCount++;
+  }
+
   void addOneAtSixMatches() {
     sixMatchesCount++;
   }
 
-  public Integer getThreeMatches() {
+  Integer getThreeMatches() {
     return threeMatchesCount;
   }
 
-  public Integer getFourMatches() {
+  Integer getFourMatches() {
     return fourMatchesCount;
   }
 
-  public Integer getFiveMatches() {
+  Integer getFiveMatches() {
     return fiveMatchesCount;
   }
 
-  public Integer getSixMatches() {
+  Integer getFiveAndBonusMatches() {
+    return fiveAndBonusMatchesCount;
+  }
+
+  Integer getSixMatches() {
     return sixMatchesCount;
   }
 

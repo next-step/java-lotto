@@ -4,7 +4,7 @@ public enum Matches {
 
   MATCH_THREE(3, 5000L) {
     @Override
-    void addCount(MatchesStatus matchesStatus) {
+    protected void addCount(MatchesStatus matchesStatus) {
       matchesStatus.addOneAtThreeMatches();
     }
 
@@ -15,7 +15,7 @@ public enum Matches {
   },
   MATCH_FOUR(4, 50000L) {
     @Override
-    void addCount(MatchesStatus matchesStatus) {
+    protected void addCount(MatchesStatus matchesStatus) {
       matchesStatus.addOneAtFourMatches();
     }
 
@@ -26,7 +26,7 @@ public enum Matches {
   },
   MATCH_FIVE(5, 1500000L) {
     @Override
-    void addCount(MatchesStatus matchesStatus) {
+    protected void addCount(MatchesStatus matchesStatus) {
       matchesStatus.addOneAtFiveMatches();
     }
 
@@ -35,9 +35,20 @@ public enum Matches {
       return matchesStatus.getFiveMatches();
     }
   },
+  MATCH_FIVE_AND_BONUS(5, 30000000L) {
+    @Override
+    protected void addCount(MatchesStatus matchesStatus) {
+      matchesStatus.addOneAtFiveAndBonusMatches();
+    }
+
+    @Override
+    public int getCount(MatchesStatus matchesStatus) {
+      return matchesStatus.getFiveAndBonusMatches();
+    }
+  },
   MATCH_SIX(6, 2000000000L) {
     @Override
-    void addCount(MatchesStatus matchesStatus) {
+    protected void addCount(MatchesStatus matchesStatus) {
       matchesStatus.addOneAtSixMatches();
     }
 
@@ -50,7 +61,8 @@ public enum Matches {
   private final int numberOfMatches;
   private final long winningAmount;
 
-  abstract void addCount(MatchesStatus matchesStatus);
+  abstract protected void addCount(MatchesStatus matchesStatus);
+
   abstract public int getCount(MatchesStatus matchesStatus);
 
   Matches(int numberOfMatches, long winningAmount) {
@@ -71,12 +83,11 @@ public enum Matches {
   }
 
   public static Matches getMatches(int numberOfMatches) {
-    for (Matches matches: Matches.values()) {
-      if(matches.isMatches(numberOfMatches)) {
-        return matches;
-      }
+    Matches findMatches = null;
+    for (Matches matches : Matches.values()) {
+      findMatches = matches.isMatches(numberOfMatches) ? matches : findMatches;
     }
-    return null;
+    return findMatches;
   }
 
 }

@@ -21,7 +21,19 @@ public class Lotto {
     return lotto.toString();
   }
 
-  public boolean has(Integer winningNumber) {
-    return lotto.contains(winningNumber);
+  public boolean has(BonusBall bonusBall) {
+    boolean has = false;
+    for (Integer number: lotto) {
+      has = bonusBall.equals(number) || has;
+    }
+    return has;
+  }
+
+  public int countMatchesNumber(WinningNumbers winningNumbers) {
+    int count = 0;
+    for (Integer number: lotto) {
+      count += winningNumbers.has(number) ? 1 : 0;
+    }
+    return count;
   }
 }

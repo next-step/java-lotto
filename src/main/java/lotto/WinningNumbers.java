@@ -18,14 +18,8 @@ public class WinningNumbers {
     }
   }
 
-  public int findHowManyMatches(Lotto lotto) {
-    int matchesNumber = 0;
-    for (Integer winningNumber : winningNumbers) {
-      if (lotto.has(winningNumber)) {
-        matchesNumber++;
-      }
-    }
-    return matchesNumber;
+  public boolean has(Integer number) {
+    return winningNumbers.contains(number);
   }
 
   private Integer[] toIntegers(String[] tokens) {
@@ -44,8 +38,8 @@ public class WinningNumbers {
     return length != LOTTO_NUMBER_COUNT;
   }
 
-  private String[] split(String carsName) {
-    return carsName.replace(" ", "").split(",");
+  private String[] split(String winningNumbers) {
+    return winningNumbers.replace(" ", "").split(",");
   }
 
 }
