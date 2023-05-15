@@ -34,9 +34,9 @@ public class LottoTickets {
                 .collect(Collectors.toList());
     }
 
-    public List<Rank> getRankings(Set<LottoNumber> lottoNumbers) {
+    public List<Rank> getRankings(LottoTicket winTicket) {
         return lottoTickets.stream()
-                .map(ticket -> ticket.getRanking(lottoNumbers))
+                .map(ticket -> ticket.getRanking(winTicket.getLottoNumbers()))
                 .collect(Collectors.toList());
     }
 

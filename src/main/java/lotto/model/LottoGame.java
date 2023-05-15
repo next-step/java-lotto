@@ -5,15 +5,15 @@ import java.util.Set;
 
 public class LottoGame {
     private LottoTickets lottoTickets;
-    private Set<LottoNumber> winLottoNumbers;
+    private LottoTicket winTicket;
 
-    public LottoGame(LottoTickets lottoTickets, Set<LottoNumber> lottoNumbers) {
+    public LottoGame(LottoTickets lottoTickets, LottoTicket winTicket) {
         this.lottoTickets = lottoTickets;
-        this.winLottoNumbers = lottoNumbers;
+        this.winTicket = winTicket;
     }
 
     public LottoResult playLotto() {
-        List<Rank> rankList = lottoTickets.getRankings(winLottoNumbers);
+        List<Rank> rankList = lottoTickets.getRankings(winTicket);
         return new LottoResult(rankList);
     }
 }

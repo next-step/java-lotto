@@ -15,11 +15,11 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static Set<LottoNumber> inputWinNumber() {
+    public static List<LottoNumber> inputWinNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return Arrays.stream(scanner.nextLine().split(REGEX))
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

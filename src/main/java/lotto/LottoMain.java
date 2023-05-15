@@ -3,6 +3,8 @@ package lotto;
 import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 import java.util.Set;
 
 
@@ -12,9 +14,9 @@ public class LottoMain {
         LottoTickets lottoTickets = createLottoTickets();
         ResultView.printLottoTickets(lottoTickets);
 
-        Set<LottoNumber> winLottoNumbers = InputView.inputWinNumber();
+        List<LottoNumber> winLottoNumbers = InputView.inputWinNumber();
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, winLottoNumbers);
+        LottoGame lottoGame = new LottoGame(lottoTickets, new LottoTicket(winLottoNumbers));
         LottoResult lottoResult = lottoGame.playLotto();
 
         ResultView.printWinResult(lottoResult);
@@ -23,9 +25,9 @@ public class LottoMain {
 
     private static LottoTickets createLottoTickets() {
         String strLottoCost = InputView.inputLottoCost();
-        Cost amoumt = new Cost(Integer.parseInt(strLottoCost));
+        Cost amount = new Cost(Integer.parseInt(strLottoCost));
 
-        int ticketCount = amoumt.getLottoTicketCount();
+        int ticketCount = amount.getLottoTicketCount();
         return LottoFactory.createAutoLottoTickets(ticketCount);
     }
 }

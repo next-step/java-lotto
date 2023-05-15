@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public boolean hasMatchNumbers(Set<LottoNumber> numbers) {
+    public boolean hasMatchNumbers(List<LottoNumber> numbers) {
         return numbers.contains(this);
     }
 
