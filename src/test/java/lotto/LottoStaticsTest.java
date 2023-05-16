@@ -23,13 +23,12 @@ public class LottoStaticsTest {
 
     @Test
     void getProfitRatio() {
-        List<Number> winningList = List.of(Number.createNumber(1), Number.createNumber(2), Number.createNumber(3), Number.createNumber(4), Number.createNumber(5), Number.createNumber(6));
-        List<Number> balls = List.of(Number.createNumber(1), Number.createNumber(2), Number.createNumber(3), Number.createNumber(4), Number.createNumber(11), Number.createNumber(10));
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6));
+        List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
-        lottos = new Lottos(LOTTO_COUNT);
-        lottos.shuffleLottos(new LottoBalls(balls));
+        lottos = new Lottos(LOTTO_COUNT, new LottoBallPolicy(balls));
 
-        var actual = lottoStatics.getProfitRatio(winningList, lottos.getLottoList());
+        var actual = lottoStatics.getProfitRatio(Lotto.createLotto(winningList), lottos.getLottoList());
         var expect = "50.0" ;
 
         assertThat(actual).isEqualTo(expect);
@@ -37,12 +36,12 @@ public class LottoStaticsTest {
 
     @Test
     void getNumberCount() {
-        List<Number> winningList = List.of(Number.createNumber(1), Number.createNumber(2), Number.createNumber(3), Number.createNumber(4), Number.createNumber(5), Number.createNumber(6));
-        List<Number> balls = List.of(Number.createNumber(1), Number.createNumber(2), Number.createNumber(3), Number.createNumber(4), Number.createNumber(11), Number.createNumber(10));
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6));
+        List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
-        lottos = new Lottos(LOTTO_COUNT);
-        lottos.shuffleLottos(new LottoBalls(balls));
-        lottoStatics.calculateProfitStatistics(winningList, lottos.getLottoList());
+        LottoBallPolicy lottoBallPolicy = new LottoBallPolicy(balls);
+        lottos = new Lottos(LOTTO_COUNT, lottoBallPolicy);
+        lottoStatics.calculateProfitStatistics(Lotto.createLotto(winningList), lottos.getLottoList());
 
         var actual = lottoStatics.getNumberCount(Number.createNumber(4));
         var expect = 10;

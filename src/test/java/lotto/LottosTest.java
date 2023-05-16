@@ -11,16 +11,14 @@ public class LottosTest {
 
     @BeforeEach
     public void init() {
-        lottos = new Lottos(14);
+        lottos = new Lottos(10, new LottoBallPolicy());
     }
 
     @Test
     void makeLottos() {
-        lottos = new Lottos(10);
-
-        var actualSize = lottos.getLottoList().size();
+        var actualList = lottos.getLottoList();
         var expectSize = 10;
 
-        assertThat(actualSize).isEqualTo(expectSize);
+        assertThat(actualList).hasSize(expectSize);
     }
 }
