@@ -10,14 +10,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class Main {
-
-    private static final int LOTTO_PRICE = 1000;
-
+    
     public static void main(String[] args) {
-        // 로또 생성 횟수 추출
         int amount = LottoInputView.askBuyAmount();
         Money money = new Money(amount);
-        int buyCount = money.buyCount(LOTTO_PRICE);
+        int buyCount = money.buyCount(Lotto.PRICE);
         LottoOutputView.printBuyCount(buyCount);
 
         // 로또 생성

@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public static final int PRICE = 1000;
+
     private final List<LottoNumber> numbers;
 
     Lotto(String lottoNumbers) {
