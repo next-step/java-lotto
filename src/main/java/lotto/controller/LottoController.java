@@ -52,7 +52,7 @@ public class LottoController {
         Map<RewardTable, Long> resultGameStatistics = winningStatistics.resultLottoGame(lottos.getTickets());
 
         Reward reward = new Reward();
-        Long totalMatchPrice = reward.sumTotalMatchPrice(resultGameStatistics);
+        long totalMatchPrice = reward.sumTotalMatchPrice(resultGameStatistics);
         double rateOfReturn = LottoUtils.calRateOfReturn(totalMatchPrice, lottoBuyPrice);
 
         resultView.resultGame(resultGameStatistics, rateOfReturn);

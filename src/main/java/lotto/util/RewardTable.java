@@ -13,9 +13,9 @@ public enum RewardTable {
 
     private int matchCount;
     private Boolean matchBonus;
-    private Long reward;
+    private long reward;
 
-    RewardTable(int matchCount, Boolean matchBonus, Long reward) {
+    RewardTable(int matchCount, Boolean matchBonus, long reward) {
         this.matchCount = matchCount;
         this.matchBonus = matchBonus;
         this.reward = reward;
@@ -40,11 +40,11 @@ public enum RewardTable {
         return this.matchCount == matchCount && this.matchBonus == matchBonus;
     }
 
-    public Long matchReward(Long times) {
+    public long matchReward(long times) {
         return this.reward * times;
     }
 
-    public Long getReward() {
+    public long getReward() {
         return this.reward;
     }
 

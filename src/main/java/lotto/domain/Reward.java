@@ -9,8 +9,8 @@ public class Reward {
 
     public Reward() {}
 
-    public Long sumTotalMatchPrice(Map<RewardTable, Long> map) {
-        Long totalRewardPrice = 0L;
+    public long sumTotalMatchPrice(Map<RewardTable, Long> map) {
+        long totalRewardPrice = 0L;
 
         Iterator<RewardTable> keys = map.keySet().iterator();
 
