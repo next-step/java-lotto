@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import java.beans.Expression;
-
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 
@@ -23,7 +21,6 @@ public class InputStringTest {
     @DisplayName("입력값이 올바르지 않으면 예외처리")
     void inputStringNotValidationTest() {
         String inputString = "2 + 3 * 4 / 2 % 2";
-
         assertThatIllegalArgumentException().isThrownBy(() -> new InputString(inputString));
     }
 
@@ -31,9 +28,7 @@ public class InputStringTest {
     @Test
     @DisplayName("입력값이 올바른 형태인지 체크")
     void inputStringValidationTest() {
-
         String inputString = "2 + 3 * 4 / 2";
-
         assertThatNoException().isThrownBy(() -> new InputString(inputString));
     }
 
