@@ -4,13 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Winning {
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    THREE(3, 5_000),
+    FOUR(4, 50_000),
+    FIVE(5, 1_500_000),
+    SIX(6, 2_000_000_000);
 
     static private final Map<Integer, Winning> winningsMap = new HashMap<>();
 
