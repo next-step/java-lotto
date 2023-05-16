@@ -16,8 +16,11 @@ public class LottoOutputView {
         lottos.forEach(System.out::println);
     }
 
-    public static void printLottoResults(LottoResults lottoResults) {
-        System.out.printf("당첨 통계\n---------%s", lottoResults);
-        System.out.printf("총 수익률은 %s입니다.", new DecimalFormat("#.##").format(lottoResults.winningRatio()));
+    public static void printWinningStats(LottoResults lottoResults) {
+        System.out.printf("당첨 통계\n---------\n%s", lottoResults);
+    }
+
+    public static void printWinningRatio(double winningRatio) {
+        System.out.printf("총 수익률은 %s입니다.", new DecimalFormat("#.##").format(winningRatio));
     }
 }
