@@ -6,14 +6,9 @@ import java.util.Random;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final int MAX = 44;
+    public static final int MAX = 45;
     public static final int MIN = 1;
     private final int number;
-
-    public LottoNumber() {
-        Random random = new Random();
-        this.number = random.nextInt(MAX) + 1;
-    }
 
     public LottoNumber(int number) {
         if(number > MAX || number < MIN){

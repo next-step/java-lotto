@@ -6,11 +6,6 @@ import static lotto.LottoStore.LOTTO_PRICE;
 
 public class LottoResult {
 
-    private final int PRICE_1 = 2000000000;
-    private final int PRICE_2 = 1500000;
-    private final int PRICE_3 = 50000;
-    private final int PRICE_4 = 5000;
-
     private final List<Lotto> lottos;
     private final WinningLotto winnerNumbers;
 
@@ -29,15 +24,14 @@ public class LottoResult {
         return lottos.size() * LOTTO_PRICE;
     }
 
-    private int calculateIncome() {
-        return winnerNumbers.matchCount(lottos, 3) * PRICE_4
-                + winnerNumbers.matchCount(lottos, 4) * PRICE_3
-                + winnerNumbers.matchCount(lottos, 5) * PRICE_2
-                + winnerNumbers.matchCount(lottos, 6) * PRICE_1;
+    private long calculateIncome() {
+        return Arrays.stream(Rank.values())
+                .mapToLong(rank -> winnerNumbers.matchRank(lottos, rank) * rank.getWinningMoney())
+                .sum();
     }
 
-    public int matchCount(int count){
-        return winnerNumbers.matchCount(lottos, count);
+    public long matchRank(Rank rank){
+        return winnerNumbers.matchRank(lottos, rank);
     }
 
 }

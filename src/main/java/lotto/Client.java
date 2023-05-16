@@ -13,7 +13,7 @@ public class Client {
         resultView.lottoSizeResultView(lottos.size());
         resultView.lottoNumbersView(lottos);
 
-        WinningLotto winningLotto = new WinningLotto(inputView.winnerNumbersView());
+        WinningLotto winningLotto = new WinningLotto(inputView.winnerNumbersView(),inputView.bonusNumbersView());
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
         resultView.reportView(lottoResult);
     }

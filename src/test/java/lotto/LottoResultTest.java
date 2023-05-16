@@ -12,7 +12,7 @@ public class LottoResultTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(lotto);
 
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6");
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6",7);
 
         LottoResult lottoResult = new LottoResult(lottos,winningLotto);
 
