@@ -23,10 +23,6 @@ public class LottoNumbers {
         this.lottoNos = lottoNos;
     }
 
-    public LottoNumbers(int num1, int num2, int num3, int num4, int num5, int num6) {
-        this(Arrays.asList(LottoNo.of(num1), LottoNo.of(num2), LottoNo.of(num3), LottoNo.of(num4), LottoNo.of(num5), LottoNo.of(num6)));
-    }
-
     private void validateCount(List<LottoNo> lottoNos) {
         if (lottoNos.size() != CHOICE_COUNT) {
             throw new IllegalArgumentException("입력된 숫자 개수가 올바르지 않습니다.");

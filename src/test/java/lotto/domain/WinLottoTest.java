@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,7 @@ class WinLottoTest {
     void 지난주당첨번호() {
         WinLotto winLotto = winLottoFixture("1, 8, 11, 31, 41, 42");
 
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 8, 11, 31, 41, 42);
+        LottoNumbers lottoNumbers = lottoNumbersFixture(new int[]{1, 8, 11, 31, 41, 42});
 
         assertThat(winLotto.numbers()).isEqualTo(lottoNumbers);
     }
@@ -23,7 +24,7 @@ class WinLottoTest {
     @Test
     void 지난주당첨번호with보너스번호() {
         WinLotto winLotto = winLottoWithBonusFixture("1, 3, 11, 13, 21, 23", LottoNo.of(31));
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 3, 11, 13, 21, 23);
+        LottoNumbers lottoNumbers = lottoNumbersFixture(new int[]{1, 3, 11, 13, 21, 23});
 
         assertAll(
                 () -> assertThat(winLotto.numbers()).isEqualTo(lottoNumbers),
@@ -66,5 +67,12 @@ class WinLottoTest {
 
     private WinLotto winLottoWithBonusFixture(String input, LottoNo bonusNumber) {
         return new WinLotto(new LottoNumbers(InputView.makeNumbers(input)), bonusNumber);
+    }
+
+    private LottoNumbers lottoNumbersFixture(int[] numbers) {
+        List<LottoNo> lottoNos = Arrays.stream(numbers)
+                .mapToObj(LottoNo::of)
+                .collect(Collectors.toList());
+        return new LottoNumbers(lottoNos);
     }
 }
