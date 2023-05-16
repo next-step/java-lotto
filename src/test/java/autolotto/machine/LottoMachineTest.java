@@ -50,12 +50,11 @@ public class LottoMachineTest {
 
     @Test
     void 당첨번호가_주어지면_일치_개수별_로또_개수를_알려준다() {
-        LottoMachine lottoMachine = new LottoMachine(new LottoGenerator(new FixedNumberShuffler()), 3000);
+        LottoMachine lottoMachineWithSameThreeLotto = new LottoMachine(new LottoGenerator(new FixedNumberShuffler()), 3000);
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 21, 22, 23));
 
-        Map<Integer, Integer> numberOfEachMatchingCount = lottoMachine.winningState(winningNumbers);
+        Map<Winning, Integer> numberOfEachMatchingCount = lottoMachineWithSameThreeLotto.winningState(winningNumbers);
 
-        Assertions.assertThat(numberOfEachMatchingCount.get(0)).isEqualTo(0);
-        Assertions.assertThat(numberOfEachMatchingCount.get(3)).isEqualTo(3);
+        Assertions.assertThat(numberOfEachMatchingCount.get(Winning.THREE)).isEqualTo(3);
     }
 }

@@ -4,9 +4,9 @@ import java.util.Map;
 
 public class Statistics {
     private final String profitRate;
-    private final Map<Integer, Integer> countOfEachMatchingNumber;
+    private final Map<WinningAmount, Integer> countOfEachMatchingNumber;
 
-    public Statistics(String profitRate, Map<Integer, Integer> countOfEachMatchingNumber) {
+    public Statistics(String profitRate, Map<WinningAmount, Integer> countOfEachMatchingNumber) {
         this.profitRate = profitRate;
         this.countOfEachMatchingNumber = countOfEachMatchingNumber;
     }
@@ -15,7 +15,7 @@ public class Statistics {
         return this.profitRate;
     }
 
-    public Map<Integer, Integer> countOfEachMatchingNumber() {
+    public Map<WinningAmount, Integer> countOfEachMatchingNumber() {
         return this.countOfEachMatchingNumber;
     }
 }

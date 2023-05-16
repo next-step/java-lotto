@@ -1,8 +1,8 @@
 package autolotto.view;
 
-import autolotto.machine.winning.Winning;
 import autolotto.dto.LottoDTO;
 import autolotto.dto.Statistics;
+import autolotto.dto.WinningAmount;
 
 import java.util.List;
 import java.util.Map;
@@ -48,8 +48,8 @@ public class ConsoleView {
     }
 
     private void printEachCountOfMatchingNumber(Statistics statistics) {
-        for (Map.Entry<Integer, Integer> entry : statistics.countOfEachMatchingNumber().entrySet()) {
-            System.out.println(entry.getKey() + "개 일치 (" + Winning.winningOf(entry.getKey()).winningMoney() + "원) - " + entry.getValue() + "개");
+        for (Map.Entry<WinningAmount, Integer> entry : statistics.countOfEachMatchingNumber().entrySet()) {
+            System.out.println(entry.getKey().matchCount() + "개 일치 (" + entry.getKey().winningAmount() + "원) - " + entry.getValue() + "개");
         }
     }
 }

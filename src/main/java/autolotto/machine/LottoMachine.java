@@ -50,23 +50,22 @@ public class LottoMachine {
                 .divide(BigDecimal.valueOf(this.inputMoney), 2, RoundingMode.HALF_UP);
     }
 
-    public Map<Integer, Integer> winningState(WinningNumbers winningNumbers) {
-        Map<Integer, Integer> lottoCountPerEachMatchingCount = setZeroToAllMatchingCount();
+    public Map<Winning, Integer> winningState(WinningNumbers winningNumbers) {
+        Map<Winning, Integer> lottoCountPerEachMatchingCount = setZeroToAllMatchingCount();
 
-        for (Integer matchCount : lottoCountPerEachMatchingCount.keySet()) {
-            int lottoCount = wallet.countOfLottoMatchingWith(winningNumbers, matchCount);
-            lottoCountPerEachMatchingCount.put(matchCount, lottoCount);
+        for (Winning winning : lottoCountPerEachMatchingCount.keySet()) {
+            int lottoCount = wallet.countOfLottoMatchingWith(winningNumbers, winning.matchNumber());
+            lottoCountPerEachMatchingCount.put(winning, lottoCount);
         }
 
         return lottoCountPerEachMatchingCount;
     }
 
-    private Map<Integer, Integer> setZeroToAllMatchingCount() {
-        Map<Integer, Integer> lottoCountPerEachMatchingCount = new HashMap<>();
+    private Map<Winning, Integer> setZeroToAllMatchingCount() {
+        Map<Winning, Integer> lottoCountPerEachMatchingCount = new HashMap<>();
 
         Arrays.stream(Winning.values())
-                .map(Winning::matchNumber)
-                .forEach(matchingCount -> lottoCountPerEachMatchingCount.put(matchingCount, 0));
+                .forEach(winning -> lottoCountPerEachMatchingCount.put(winning, 0));
 
         return lottoCountPerEachMatchingCount;
     }
