@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    public static final String SPLIT_DELIMITER = ", ";
+    private static final String SPLIT_DELIMITER = ", ";
 
     public static int money() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -19,16 +19,6 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = new Scanner(System.in).nextLine();
         return makeNumbers(input);
-    }
-
-    public static List<LottoNo> makeNumbers(String input) {
-        List<LottoNo> numbers = new ArrayList<>();
-        String[] strNumbers = input.split(SPLIT_DELIMITER);
-        for (String strNumber : strNumbers) {
-            Integer number = validateNumber(strNumber);
-            numbers.add(LottoNo.of(number));
-        }
-        return numbers;
     }
 
     public static LottoNo winLottoBonusNumber() {
@@ -57,7 +47,7 @@ public class InputView {
     }
 
     public static List<LottoNumbers> manualNumbers(int manualCount) {
-        if(manualCount == 0){
+        if (manualCount == 0) {
             return null;
         }
         List<LottoNumbers> manualNumbers = new ArrayList<>();
@@ -68,5 +58,15 @@ public class InputView {
             manualNumbers.add(lottoNumbers);
         }
         return manualNumbers;
+    }
+
+    private static List<LottoNo> makeNumbers(String input) {
+        List<LottoNo> numbers = new ArrayList<>();
+        String[] strNumbers = input.split(SPLIT_DELIMITER);
+        for (String strNumber : strNumbers) {
+            Integer number = validateNumber(strNumber);
+            numbers.add(LottoNo.of(number));
+        }
+        return numbers;
     }
 }

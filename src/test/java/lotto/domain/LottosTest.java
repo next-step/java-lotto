@@ -1,11 +1,12 @@
 package lotto.domain;
 
-import lotto.view.InputView;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.LottoFixture.lottoFixture;
+import static lotto.domain.LottoFixture.lottoNumbersFixture;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -25,9 +26,9 @@ class LottosTest {
         MyPurchase myPurchase = new MyPurchase(3000,3);
         List<LottoNumbers> manualNumbers = new ArrayList<>();
 
-        manualNumbers.add(numbersFixture("1, 2, 3, 4, 5, 6"));
-        manualNumbers.add(numbersFixture("11, 12, 13, 14, 15, 16"));
-        manualNumbers.add(numbersFixture("21, 22, 23, 24, 25, 26"));
+        manualNumbers.add(lottoNumbersFixture("1, 2, 3, 4, 5, 6"));
+        manualNumbers.add(lottoNumbersFixture("11, 12, 13, 14, 15, 16"));
+        manualNumbers.add(lottoNumbersFixture("21, 22, 23, 24, 25, 26"));
 
         Lottos lottos = Lottos.create(myPurchase, manualNumbers);
         assertAll(
@@ -42,9 +43,9 @@ class LottosTest {
         MyPurchase myPurchase = new MyPurchase(5000,3);
         List<LottoNumbers> manualNumbers = new ArrayList<>();
 
-        manualNumbers.add(numbersFixture("1, 2, 3, 4, 5, 6"));
-        manualNumbers.add(numbersFixture("11, 12, 13, 14, 15, 16"));
-        manualNumbers.add(numbersFixture("21, 22, 23, 24, 25, 26"));
+        manualNumbers.add(lottoNumbersFixture("1, 2, 3, 4, 5, 6"));
+        manualNumbers.add(lottoNumbersFixture("11, 12, 13, 14, 15, 16"));
+        manualNumbers.add(lottoNumbersFixture("21, 22, 23, 24, 25, 26"));
 
         Lottos lottos = Lottos.create(myPurchase, manualNumbers);
 
@@ -54,10 +55,5 @@ class LottosTest {
         );
     }
 
-    private static LottoNumbers numbersFixture(String manualInput) {
-        return new LottoNumbers(InputView.makeNumbers(manualInput));
-    }
-    private static Lotto lottoFixture(String manualInput) {
-        return new Lotto(numbersFixture(manualInput));
-    }
+
 }

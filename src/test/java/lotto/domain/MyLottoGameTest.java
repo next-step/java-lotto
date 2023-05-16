@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.view.InputView;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.LottoFixture.lottoNumbersFixture;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -22,9 +22,9 @@ class MyLottoGameTest {
 
     @Test
     void 당첨번호확인() {
-        LottoNumbers winLottoNumbers = new LottoNumbers(InputView.makeNumbers("1, 2, 3, 31, 32, 33"));
-        LottoNumbers matched3LottoNumbers = new LottoNumbers(InputView.makeNumbers("1, 2, 3, 41, 42, 43"));
-        LottoNumbers matched4LottoNumbers = new LottoNumbers(InputView.makeNumbers("1, 2, 3, 31, 44, 45"));
+        LottoNumbers winLottoNumbers = lottoNumbersFixture("1, 2, 3, 31, 32, 33");
+        LottoNumbers matched3LottoNumbers = lottoNumbersFixture("1, 2, 3, 41, 42, 43");
+        LottoNumbers matched4LottoNumbers = lottoNumbersFixture("1, 2, 3, 31, 44, 45");
 
         List<Lotto> lottos = new ArrayList<>();
         //번호가 3개 일치하는 로또 개수 : 2개
