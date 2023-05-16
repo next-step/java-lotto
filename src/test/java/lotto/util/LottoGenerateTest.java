@@ -26,8 +26,8 @@ public class LottoGenerateTest {
 
         assertThat(LottoGenerate.initAutoLottoNumbers().stream()
                 .allMatch(lottoNumber ->
-                        lottoNumber.getNumber() >= LottoConstants.LOTTO_MIN_NUMBER
-                                && lottoNumber.getNumber() <= LottoConstants.LOTTO_MAX_NUMBER)
+                        lottoNumber.getNumber() >= LottoConstants.getLottoMinNumber()
+                                && lottoNumber.getNumber() <= LottoConstants.getLottoMaxNumber())
         ).isTrue();
     }
 }

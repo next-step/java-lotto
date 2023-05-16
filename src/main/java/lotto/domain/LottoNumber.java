@@ -13,7 +13,7 @@ public class LottoNumber {
     }
 
     private void validateBetweenMinAndMax(int number) {
-        if(LottoConstants.LOTTO_MIN_NUMBER > number || LottoConstants.LOTTO_MAX_NUMBER < number) {
+        if(LottoConstants.getLottoMinNumber() > number || LottoConstants.getLottoMaxNumber() < number) {
             throw new IllegalArgumentException("로또 번호는 1~45 입니다. 입력값 : " + number);
         }
     }

@@ -17,7 +17,7 @@ public class LottoTicket {
     }
 
     private void validateListSize(List<LottoNumber> numberList) {
-        if(numberList.size() > LottoConstants.LOTTO_MAX_SIZE) {
+        if(numberList.size() > LottoConstants.getLottoMaxSize()) {
             throw new IllegalArgumentException("번호 리스트 크기가 올바르지 않습니다. 입력값 : " + numberList);
         }
     }

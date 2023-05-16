@@ -11,13 +11,13 @@ public class LottoGenerate {
     private static int LOTTO_LIST_FROM_INDEX = 0;
 
     public static List<LottoNumber> initAutoLottoNumbers() {
-        List<LottoNumber> numbers =  IntStream.rangeClosed(LottoConstants.LOTTO_MIN_NUMBER, LottoConstants.LOTTO_MAX_NUMBER)
+        List<LottoNumber> numbers =  IntStream.rangeClosed(LottoConstants.getLottoMinNumber(), LottoConstants.getLottoMaxNumber())
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
         Collections.shuffle(numbers);
 
-        return sortLottoNumber(numbers.subList(LOTTO_LIST_FROM_INDEX, LottoConstants.LOTTO_MAX_SIZE));
+        return sortLottoNumber(numbers.subList(LOTTO_LIST_FROM_INDEX, LottoConstants.getLottoMaxSize()));
     }
 
     public static List<LottoNumber> initLottoNumbers(String lottoNumber) {
@@ -42,6 +42,6 @@ public class LottoGenerate {
     }
 
     private static boolean isLottoResultNumberSize(List<LottoNumber> numberList) {
-        return numberList.size() == LottoConstants.LOTTO_MAX_SIZE;
+        return numberList.size() == LottoConstants.getLottoMaxSize();
     }
 }
