@@ -18,6 +18,10 @@ public class Lottos {
         }
     }
 
+    public void buyLotto(List<Integer> numbers) {
+        lottos.add(new Lotto(numbers));
+    }
+
     public List<LottoMatcher> matchResult(WinningNumbers winningNumbers) {
         return lottos.stream()
                 .map(winningNumbers::match)

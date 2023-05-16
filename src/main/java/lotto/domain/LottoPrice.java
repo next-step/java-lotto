@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 import static lotto.constant.Constants.LOTTO_PRICE;
 
 public class LottoPrice {
@@ -21,5 +23,13 @@ public class LottoPrice {
 
     public int lottoCount(){
         return price / LOTTO_PRICE;
+    }
+
+    public boolean greaterThanPrice(List<List<Integer>> lists) {
+        return lottoCount() < lists.size();
+    }
+
+    public LottoPrice pay() {
+        return new LottoPrice(price - LOTTO_PRICE);
     }
 }

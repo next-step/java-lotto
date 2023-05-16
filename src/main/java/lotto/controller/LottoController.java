@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoCalculator;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoScore;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,11 +18,13 @@ public class LottoController {
     }
 
     public void buy() {
-        lottoGame.buyLotto(inputView.price());
-        List<List<Integer>> lists = inputView.manualBuy();
+        int price = inputView.price();
+        int manualLottoCount = inputView.manualPurchaseCount();
+        List<List<Integer>> lists = inputView.manualNumbers(manualLottoCount);
+        LottoPrice lottoPrice = lottoGame.buyManualLotto(price, lists);
+        lottoGame.buyAutoLotto(lottoPrice);
 
-        lottoGame.buyManualLotto(lists);
-        inputView.buy(lottoGame.quantity());
+        inputView.buy(lists.size(), lottoGame.quantity()-lists.size());
         resultView.view(lottoGame.lottos());
     }
 

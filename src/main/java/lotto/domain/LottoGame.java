@@ -23,14 +23,22 @@ public class LottoGame {
         return lottos.quantity();
     }
 
-    public void buyAutoLotto(int price) {
-        lottos.buyLotto(new LottoPrice(price));
+    public void buyAutoLotto(LottoPrice lottoPrice) {
+        lottos.buyLotto(lottoPrice);
     }
 
-    public void buyManualLotto(List<List<Integer>> lists) {
-        // 리스트 길이가 입금 금액보다 큰가?
+    public LottoPrice buyManualLotto(int price, List<List<Integer>> listOfNumbers) {
+        LottoPrice lottoPrice = new LottoPrice(price);
 
+        if (lottoPrice.greaterThanPrice(listOfNumbers)) {
+            throw new RuntimeException("금액이 부족합니다.");
+        }
 
-        lottos.buyLotto(new LottoPrice(price));
+        for (List<Integer> numbers : listOfNumbers) {
+            lottos.buyLotto(numbers);
+            lottoPrice = lottoPrice.pay();
+        }
+
+        return lottoPrice;
     }
 }
