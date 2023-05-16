@@ -40,7 +40,7 @@ public enum RewardTable {
         return this.matchCount == matchCount && this.matchBonus == matchBonus;
     }
 
-    public long matchReward(long times) {
+    public long getRewardByTimes(long times) {
         return this.reward * times;
     }
 

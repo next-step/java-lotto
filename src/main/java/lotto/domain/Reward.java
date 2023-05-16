@@ -25,6 +25,6 @@ public class Reward {
     }
 
     private Long sumMatchPrice(RewardTable key, Long value) {
-        return key.matchReward(value);
+        return key.getRewardByTimes(value);
     }
 }

@@ -29,6 +29,6 @@ public class RewardTableTest {
     @ParameterizedTest
     @CsvSource(value = {"3:5:25000:false", "4:2:100000:false", "5:1:1500000:false", "5:1:30000000:true", "6:1:2000000000:false"}, delimiterString = ":")
     public void rewardTableTest_당첨금액_확인_테스트(int matchRank, Long matchGameNum, int rewardNum, Boolean isBonus) {
-        assertThat(RewardTable.of(matchRank, isBonus).matchReward(matchGameNum)).isEqualTo(rewardNum);
+        assertThat(RewardTable.of(matchRank, isBonus).getRewardByTimes(matchGameNum)).isEqualTo(rewardNum);
     }
 }
