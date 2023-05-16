@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class LottoResult {
 
-    public static final int ONE_LOTTO_TICKET_PRICE = 1_000;
     private final Map<Rank, Integer> lottoResult = Rank.initLottoResult();
 
     public LottoResult(List<Rank> rank) {
@@ -21,7 +20,7 @@ public class LottoResult {
     public double getRateResult(int ticketCount) {
         long totalReward = getTotalReward();
 
-        return (double) totalReward / (ticketCount * ONE_LOTTO_TICKET_PRICE);
+        return (double) totalReward / (ticketCount * Money.ONE_LOTTO_TICKET_PRICE);
     }
 
     public long getTotalReward() {

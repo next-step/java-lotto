@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.Objects;
 
 public class Money {
-    private static final int ONE_LOTTO_TICKET_PRICE = 1_000;
+    public static final int ONE_LOTTO_TICKET_PRICE = 1_000;
     private final int money;
 
     public Money(int money) {
