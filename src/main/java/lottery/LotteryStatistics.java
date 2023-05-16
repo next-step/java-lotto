@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class LotteryStatistics {
 
-    private final Map<LotteryPlace, Integer> lotteryCntForPlace;
-    private final Integer investment;
-    private final Integer revenue;
+    private final Map<LotteryPlace, Natural> lotteryCntForPlace;
+    private final Natural investment;
+    private final Natural revenue;
 
     public LotteryStatistics(List<Lottery> lotteries, DrawResult drawResult) {
         lotteryCntForPlace = new HashMap<>();
@@ -27,27 +27,28 @@ public class LotteryStatistics {
     }
 
     private void incrementLotteryCntForPlace(LotteryPlace place) {
-        lotteryCntForPlace.put(place, lotteryCntForPlace.getOrDefault(place, 0) + 1);
+        var oldValue = lotteryCntForPlace.getOrDefault(place, new Natural(0)).value();
+        lotteryCntForPlace.put(place, new Natural(oldValue + 1));
     }
 
-    private Integer getTotalRevenue() {
+    private Natural getTotalRevenue() {
         int revenue = 0;
         for (var place : lotteryCntForPlace.keySet()) {
-            revenue += place.getReward() * getLotteryCntForPlace(place);
+            revenue += place.getReward().value() * getLotteryCntForPlace(place).value();
         }
-        return revenue;
+        return new Natural(revenue);
     }
 
-    private Integer getTotalInvestment(List<Lottery> lotteries) {
-        return Lottery.PRICE * lotteries.size();
+    private Natural getTotalInvestment(List<Lottery> lotteries) {
+        return new Natural(Lottery.PRICE * lotteries.size());
     }
 
-    public Integer getLotteryCntForPlace(LotteryPlace place) {
-        return lotteryCntForPlace.getOrDefault(place, 0);
+    public Natural getLotteryCntForPlace(LotteryPlace place) {
+        return lotteryCntForPlace.getOrDefault(place, new Natural(0));
     }
 
     public Float getRor() {
-        return revenue / (float) investment;
+        return revenue.value() / (float) investment.value();
     }
 
     public PnLType getPnLType() {

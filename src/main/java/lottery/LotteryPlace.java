@@ -11,24 +11,24 @@ public enum LotteryPlace {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private final Integer matchCnt;
-    private final int reward;
+    private final Natural matchCnt;
+    private final Natural reward;
 
-    LotteryPlace(Integer matchCnt, Integer reward) {
-        this.matchCnt = matchCnt;
-        this.reward = reward;
+    LotteryPlace(int matchCnt, int reward) {
+        this.matchCnt = new Natural(matchCnt);
+        this.reward = new Natural(reward);
     }
 
-    public Integer getMatchCnt() {
+    public Natural getMatchCnt() {
         return matchCnt;
     }
 
-    public Integer getReward() {
+    public Natural getReward() {
         return reward;
     }
 
-    public static LotteryPlace fromMatchCnt(Integer matchCnt, Boolean bonusHit) {
-        if (matchCnt == 5) {
+    public static LotteryPlace fromMatchCnt(Natural matchCnt, Boolean bonusHit) {
+        if (matchCnt.value() == 5) {
             return getPlaceIf5MatchesBasedOnBonusHit(bonusHit);
         }
         return getPlaceIfNot5Matches(matchCnt);
@@ -39,9 +39,9 @@ public enum LotteryPlace {
         return THIRD;
     }
 
-    private static LotteryPlace getPlaceIfNot5Matches(Integer matchCnt) {
+    private static LotteryPlace getPlaceIfNot5Matches(Natural matchCnt) {
         var matchCntToPlaceMap = Arrays.stream(values())
-                .filter(place -> place.getMatchCnt() != 5)
+                .filter(place -> place.getMatchCnt().value() != 5)
                 .collect(Collectors.toMap(LotteryPlace::getMatchCnt, place -> place));
         return matchCntToPlaceMap.getOrDefault(matchCnt, MISS);
     }

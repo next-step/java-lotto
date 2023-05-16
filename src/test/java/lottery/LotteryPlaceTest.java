@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class LotteryPlaceTest {
     @Test
     void matchCountToLotteryPlaceNoBonusHit() {
-        var matchCnt = 5;
+        var matchCnt = new Natural(5);
         var bonusHit = false;
 
         var place = LotteryPlace.fromMatchCnt(matchCnt, bonusHit);
@@ -17,7 +17,7 @@ public class LotteryPlaceTest {
 
     @Test
     void matchCountToLotteryPlaceBonusHit() {
-        var matchCnt = 5;
+        var matchCnt = new Natural(5);
         var bonusHit = true;
 
         var place = LotteryPlace.fromMatchCnt(matchCnt, bonusHit);
@@ -27,7 +27,7 @@ public class LotteryPlaceTest {
 
     @Test
     void matchCountToLotteryPlaceMiss() {
-        var matchCnt = 2;
+        var matchCnt = new Natural(2);
         var bonusHit = true;
 
         var place = LotteryPlace.fromMatchCnt(matchCnt, bonusHit);
