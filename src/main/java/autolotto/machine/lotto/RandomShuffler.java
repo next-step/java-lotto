@@ -9,7 +9,7 @@ public class RandomShuffler implements Shuffler {
     @Override
     public List<Integer> shuffle(List<Integer> originals) {
 
-        ArrayList<Integer> copy = new ArrayList<>(originals);
+        List<Integer> copy = new ArrayList<>(originals);
         Collections.shuffle(copy);
 
         return copy;
