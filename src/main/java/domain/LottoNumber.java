@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoNumber {
@@ -27,7 +26,7 @@ public class LottoNumber {
 
     public static LottoNumber[] fromIntegers(int[] lottoIntegers) {
         LottoNumber[] lottoNumbers = new LottoNumber[lottoIntegers.length];
-        for (int i=0; i < lottoIntegers.length; i++) {
+        for (int i = 0; i < lottoIntegers.length; i++) {
             lottoNumbers[i] = LOTTO_NUMBER_MAP.get(lottoIntegers[i]);
         }
         return lottoNumbers;
@@ -42,5 +41,9 @@ public class LottoNumber {
             count++;
         }
         return count;
+    }
+
+    public boolean isSameNumber(int number) {
+        return lottoNumber == number;
     }
 }

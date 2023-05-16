@@ -6,9 +6,9 @@ public class WinningAnalyzer {
     private LottoResults lottoResults;
     private WinningStatistics winningStatistics;
 
-    public WinningAnalyzer(LottoResults lottoResults, List<Integer> winningNumbers) {
+    public WinningAnalyzer(LottoResults lottoResults, List<Integer> winningNumbers, int bonusNumber) {
         this.lottoResults = lottoResults;
-        this.winningStatistics = new WinningStatistics(winningNumbers);
+        this.winningStatistics = new WinningStatistics(winningNumbers, bonusNumber);
     }
 
     public WinningStatistics calculateWinningStatistics() {

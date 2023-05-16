@@ -1,8 +1,9 @@
 package view;
 
+import java.util.Arrays;
 import java.util.List;
 
-import domain.WinningStatistics;
+import domain.LottoNumber;
 
 public class LottoOutputView {
 
@@ -16,13 +17,24 @@ public class LottoOutputView {
         System.out.print(match + "개 일치");
     }
 
-    public static void printMatchCounts(int i, int offset) {
-        LottoOutputView.printMatchCount(i + offset);
+    public static void printBonus() {
+        System.out.print(", 보너스 볼 일치");
+    }
+
+    public static void printMatchRank(int rank) {
+        LottoOutputView.printMatchCount(rank);
         LottoOutputView.printSpace();
     }
 
     public static void printPrizes(int prize) {
         LottoOutputView.printPrize(prize);
+        LottoOutputView.printDash(1);
+        LottoOutputView.printSpace();
+    }
+
+    public static void printSecondPrizes(int prize) {
+        LottoOutputView.printPrize(prize);
+        LottoOutputView.printBonus();
         LottoOutputView.printDash(1);
         LottoOutputView.printSpace();
     }
@@ -65,6 +77,7 @@ public class LottoOutputView {
 
     public static void printLottoResults(List<int[]> lottoResults) {
         for (int[] lottoResult : lottoResults) {
+            Arrays.stream(lottoResult).sorted();
             System.out.print("[");
             printEachLottoResult(lottoResult);
             System.out.println("]");

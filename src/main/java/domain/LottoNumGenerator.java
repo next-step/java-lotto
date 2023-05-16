@@ -2,7 +2,9 @@ package domain;
 
 import static domain.LottoNumber.LOTTO_NUM_LIMIT;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoNumGenerator {
 
