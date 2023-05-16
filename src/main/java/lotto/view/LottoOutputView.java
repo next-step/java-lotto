@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResults;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class LottoOutputView {
 
@@ -11,8 +12,8 @@ public class LottoOutputView {
         System.out.printf("%d개를 구매했습니다.%n", buyCount);
     }
 
-    public static void printLotto(Lotto lotto) {
-        System.out.println(lotto);
+    public static void printLottos(List<Lotto> lottos) {
+        lottos.forEach(System.out::println);
     }
 
     public static void printLottoResults(LottoResults lottoResults) {
