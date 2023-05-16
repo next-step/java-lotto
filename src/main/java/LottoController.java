@@ -9,28 +9,28 @@ import view.LottoInputView;
 import view.LottoOutputView;
 
 public class LottoController {
-    private LottoGame lottoGenerator;
+    private LottoGame lottoGame;
     private WinningAnalyzer winningAnalyzer;
 
     public void playLottoGames(int money) {
-        this.lottoGenerator = new LottoGame();
-        lottoGenerator.generateLottoResultsFromMoney(money);
+        this.lottoGame = new LottoGame();
+        lottoGame.generateLottoResultsFromMoney(money);
     }
 
     public void getLottoResults() {
-        LottoResults lottoResults = lottoGenerator.getLottoResults();
-        LottoOutputView.printGameCount(lottoGenerator.getCount());
+        LottoResults lottoResults = lottoGame.getLottoResults();
+        LottoOutputView.printGameCount(lottoGame.getCount());
         List<int[]> results = lottoResults.lottoResults();
         LottoOutputView.printLottoResults(results);
     }
 
     public void getWinningStatistics() {
-        LottoResults lottoResults = lottoGenerator.getLottoResults();
+        LottoResults lottoResults = lottoGame.getLottoResults();
         this.winningAnalyzer = new WinningAnalyzer(lottoResults, LottoInputView.getWinningNumbers(), LottoInputView.getBonusNumber());
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
         LottoOutputView.printBeforeWinnings();
         printWinnings(winningStatistics);
-        int money = lottoGenerator.getMoney();
+        int money = lottoGame.getMoney();
         LottoOutputView.printReturnOnInvestment(winningAnalyzer.getReturnOnInvestment(money));
     }
 
