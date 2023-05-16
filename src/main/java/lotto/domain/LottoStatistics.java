@@ -29,14 +29,6 @@ public class LottoStatistics {
         return statistics;
     }
 
-    public void registerAutoLottoResult(List<WinningCount> result) {
-        registerStatistics(result);
-    }
-
-    public void registerManualLottoResult(List<WinningCount> result) {
-        registerStatistics(result);
-    }
-
     private Map<WinningCount, Integer> registerStatistics(List<WinningCount> result) {
         Map<WinningCount, Integer> statistics = initStatistics();
         result.stream()
