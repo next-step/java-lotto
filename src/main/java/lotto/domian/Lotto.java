@@ -2,6 +2,7 @@ package lotto.domian;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -43,7 +44,6 @@ public class Lotto {
         return 0;
     }
 
-
     public boolean haveNumber(LottoNumber bonusNumber) {
         return lottoTicket.contains(bonusNumber);
     }
@@ -58,4 +58,22 @@ public class Lotto {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Lotto lotto = (Lotto) o;
+
+        return Objects.equals(lottoTicket, lotto.lottoTicket);
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoTicket != null ? lottoTicket.hashCode() : 0;
+    }
 }
