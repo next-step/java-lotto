@@ -4,6 +4,10 @@ import lotto.domain.Lottos;
 import lotto.domain.Lotto;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResults;
+import lotto.domain.result.Rank;
+
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ResultView {
 
@@ -27,21 +31,33 @@ public class ResultView {
     }
 
     private static StringBuilder printLottoPrizes(LottoResults lottoResults) {
+        Map<Rank, Integer> data = lottoResults.groupingByLottoResult();
         StringBuilder stringBuilder = new StringBuilder();
-        for (LottoResult lottoResult : lottoResults.getLottoResults()) {
+
+        data.entrySet().stream().forEach(e -> {
             stringBuilder.append(String.format(STATISTICS_STATUS
-                    ,lottoResult.getHit()
-                    ,lottoResult.getReward()
-                    ,lottoResult.getNumberOfWin()));
+                    , e.getKey().getHit()
+                    , e.getKey().getReward()
+                    , e.getValue()));
             stringBuilder.append("\n");
-        }
+        });
         return stringBuilder;
     }
 
-    public static void printWinningProfit(LottoResults lottoResults, int price) {
+    public static void printWinningProfit(LottoResults lottoResults, int payment) {
+        Map<Rank, Integer> data = lottoResults.groupingByLottoResult();
         StringBuilder stringBuilder = new StringBuilder();
+        AtomicInteger totalPrice = new AtomicInteger();
+
+        data.entrySet().stream().forEach(e -> {
+            int totalPriceData = e.getKey().getReward() * e.getValue();
+            if (totalPriceData != 0) {
+                totalPrice.addAndGet(totalPriceData);
+            }
+        });
+
         String format = String.format(STATISTICS_INFO
-                , (double) price / LottoResults.getTotalPrice(lottoResults));
+                , (double) payment / totalPrice.get());
         stringBuilder.append(format);
         System.out.println(stringBuilder);
     }

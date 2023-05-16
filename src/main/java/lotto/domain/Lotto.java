@@ -39,7 +39,7 @@ public class Lotto {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::of));
     }
 
-    public Rank getRank (Lotto winningLotto) {
+    public Rank getRank(Lotto winningLotto) {
         return Rank.valueOf(winningLotto.lotto.stream()
                 .filter(lotto::contains)
                 .map(e -> 1)

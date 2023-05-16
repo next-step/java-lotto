@@ -18,7 +18,7 @@ public class ExceptionHandler {
                 .filter(number -> number > Lotto.MAX_LOTTO_NUMBER || number < Lotto.MIN_LOTTO_NUMBER)
                 .findAny();
 
-        if(overNumber.isPresent()) {
+        if (overNumber.isPresent()) {
             throw new IllegalArgumentException("로또 번호는 1이상 45 이하여야 합니다");
         }
     }

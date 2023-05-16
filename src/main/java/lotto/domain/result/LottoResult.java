@@ -1,46 +1,45 @@
 package lotto.domain.result;
 
-public class LottoResult {
-    private final Rank rank;
-    private final WinCount winCount;
+import java.util.HashMap;
+import java.util.Map;
 
-    public LottoResult(Rank rank, WinCount winCount) {
-        this.rank = rank;
-        this.winCount = winCount;
+public class LottoResult {
+    private Map<Rank, Integer> result;
+
+    public LottoResult(Map<Rank, Integer> result) {
+        this.result = result;
     }
 
     public static LottoResult of(Rank rank) {
-        return new LottoResult(rank, new WinCount(0));
+        Map<Rank, Integer> map = new HashMap<>();
+        map.put(rank, 0);
+        return new LottoResult(map);
     }
 
     public void win(Rank rank) {
-        if (rank != this.rank) {
-            return;
+        for (Rank rank1 : result.keySet()) {
+            if (rank != rank1) {
+                return;
+            }
         }
-        winCount.plusOne();
+
+        Integer integer = result.get(rank);
+        integer++;
+        result.put(rank, integer);
     }
 
-    public int getHit() {
-        return rank.getHit();
+    public Rank getKey() {
+        return result.entrySet().stream().findFirst().get().getKey();
     }
 
-    public int getReward() {
-        return rank.getReward();
-    }
-
-    public int getNumberOfWin() {
-        return winCount.getNumberOfWin();
-    }
-
-    public int getTotalPrice() {
-        return rank.getReward() * winCount.getNumberOfWin();
+    public Integer getValue() {
+        return result.entrySet().stream().findFirst().get().getValue();
     }
 
     @Override
     public String toString() {
         return "LottoResult{" +
-                "rank=" + rank +
-                ", winCount=" + winCount +
-                '}';
+                "result=" + result +
+                '}' + "\n";
     }
 }

@@ -7,9 +7,6 @@ import lotto.domain.result.LottoResults;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import javax.xml.transform.Result;
-import java.util.Scanner;
-
 import static lotto.domain.Lotto.stringToNumber;
 
 public class LottoController {

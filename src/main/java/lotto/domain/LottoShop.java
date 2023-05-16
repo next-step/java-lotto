@@ -7,7 +7,8 @@ public class LottoShop {
 
     public static final int THOUSAND = 1000;
 
-    private LottoShop() {}
+    private LottoShop() {
+    }
 
     public static Lottos buyLotto(int payment) {
         ExceptionHandler.validPrice(payment);
