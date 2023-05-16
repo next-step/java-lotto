@@ -28,6 +28,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean hasNumber(LottoNo bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

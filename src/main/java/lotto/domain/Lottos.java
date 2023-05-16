@@ -12,9 +12,7 @@ public class Lottos {
 
     public static Lottos create(MyPurchase myPurchase, List<LottoNumbers> manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < myPurchase.manualCount(); i++) {
-            lottos.add(Lotto.manualGenerate(manualLottos.get(i)));
-        }
+        manualLottos.forEach(lottoNumbers -> lottos.add(Lotto.manualGenerate(lottoNumbers)));
         for (int i = 0; i < myPurchase.autoCount(); i++) {
             lottos.add(Lotto.autoGenerate());
         }

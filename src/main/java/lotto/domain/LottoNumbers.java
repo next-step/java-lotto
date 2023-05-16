@@ -37,12 +37,20 @@ public class LottoNumbers {
         return lottoNos.contains(number);
     }
 
-    public int countContains(LottoNumbers otherLottoNumbers) {
+    public int countContains(Lotto otherLotto) {
+        LottoNumbers otherLottoNumbers = otherLotto.numbers();
         int matchCount = 0;
         for (LottoNo number : otherLottoNumbers.lottoNos) {
-            matchCount += contains(number) ? 1 : 0;
+            matchCount += checkMatch(number);
         }
         return matchCount;
+    }
+
+    private int checkMatch(LottoNo number) {
+        if(contains(number)){
+            return 1;
+        }
+        return 0;
     }
 
     public List<LottoNo> getValues() {

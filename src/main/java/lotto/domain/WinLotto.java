@@ -10,14 +10,15 @@ public class WinLotto {
         this(lottoNumbers, null);
     }
 
+    public WinLotto(List<LottoNo> numbers, LottoNo bonusNumber) {
+        this(new LottoNumbers(numbers), bonusNumber);
+    }
+
     public WinLotto(LottoNumbers lottoNumbers, LottoNo bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public WinLotto(List<LottoNo> numbers, LottoNo bonusNumber) {
-        this(new LottoNumbers(numbers), bonusNumber);
-    }
 
     public LottoNumbers numbers() {
         return lottoNumbers;
@@ -28,8 +29,8 @@ public class WinLotto {
     }
 
     public Rank checkRank(Lotto lotto) {
-        int matchCount = this.lottoNumbers.countContains(lotto.numbers());
-        boolean matchBounus = lotto.numbers().contains(this.bonusNumber);
+        int matchCount = this.lottoNumbers.countContains(lotto);
+        boolean matchBounus = lotto.hasNumber(this.bonusNumber);
         return Rank.of(matchCount, matchBounus);
     }
 }
