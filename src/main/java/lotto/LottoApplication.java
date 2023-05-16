@@ -20,7 +20,10 @@ public class LottoApplication {
         InputView.winningInputView();
         List<Integer> winningNumbers = ConsoleWriter.inputIntegerList();
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winningNumbers);
+        InputView.printInputBonus();
+        Integer bonus = ConsoleWriter.inputInt();
+
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, new WinLotto(winningNumbers, bonus));
         ResultView.statisticsResult(lottoStatistics, payment);
 
 

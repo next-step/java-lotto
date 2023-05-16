@@ -18,21 +18,25 @@ public class Lotto {
     }
 
 
-    public int checkLotto(List<Integer> winningNumbers) {
+    public int getMatchCount(List<Integer> numbers) {
         int matchCount = 0;
         for (int num : numbers) {
-            matchCount = getMatchCount(winningNumbers, matchCount, num);
+            matchCount = plusMatchCount(matchCount, num);
         }
         return matchCount;
     }
 
 
-    private int getMatchCount(List<Integer> winningNumbers, int matchCount, int num) {
-        if (winningNumbers.contains(num)) matchCount++;
+    private int plusMatchCount(int matchCount, int num) {
+        if (hasNumber(num)) matchCount++;
         return matchCount;
     }
 
     public String getNumbersString() {
         return numbers.toString();
+    }
+
+    public boolean hasNumber(int num) {
+        return numbers.contains(num);
     }
 }
