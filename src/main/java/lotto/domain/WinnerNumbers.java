@@ -7,7 +7,7 @@ public class WinnerNumbers {
 
     private final Set<LottoNumber> numbers;
 
-    WinnerNumbers(String lottoNumbers) {
+    public WinnerNumbers(String lottoNumbers) {
         this(LottoNumbersParser.parseToSet(lottoNumbers));
     }
 
