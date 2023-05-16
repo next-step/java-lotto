@@ -16,14 +16,14 @@ public class LottoRandomGenerator extends LottoGenerator {
     }
 
     @Override
-    public List<Lotto> generatorLotto(int count) {
-        List<Lotto> lottos = new ArrayList<>();
+    public Lottos generatorLotto(int count) {
+        List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottos.add(makeAutoLotto());
+            lottoList.add(makeAutoLotto());
         }
-        return lottos;
 
+        return new Lottos(lottoList);
     }
 
     public Lotto makeAutoLotto() {
