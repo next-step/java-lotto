@@ -1,6 +1,7 @@
 package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -26,4 +27,21 @@ class MoneyTest {
                 .withMessageMatching("금액은 음수일 수 없습니다.");
     }
 
+    @DisplayName("금액 더하기(plus method 사용)")
+    @Test
+    void 금액_더하기() {
+        Money money = new Money(10_000);
+        Money other = new Money(1_000);
+
+        assertThat(money.plus(other)).isEqualTo(11_000);
+    }
+
+    @DisplayName("금액 나누기(divide method 사용)")
+    @Test
+    void 금액_나누기() {
+        Money money = new Money(10_000);
+        Money other = new Money(1_000);
+
+        assertThat(money.divide(other)).isEqualTo(10);
+    }
 }
