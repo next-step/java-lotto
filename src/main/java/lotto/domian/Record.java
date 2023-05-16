@@ -20,17 +20,15 @@ public class Record {
         Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
         List<Lotto> lottoList = lottoBundle.unfoldLottoBundle();
         for (Lotto lotto : lottoList) {
-            int matchingCount = winNumber.distinguish(lotto);
-            boolean haveBonus = winNumber.haveBonus(lotto);
-            putRankMap(matchingCount, rankMap, haveBonus);
+            Rank rank = winNumber.match(lotto);
+            putRankMap(rank, rankMap);
         }
 
         return new Record(rankMap);
     }
 
-    private static void putRankMap(int matchingCount, Map<Rank, Integer> rankMap, boolean haveBonus) {
-        if (matchingCount >= 3) {
-            Rank rank = Rank.find(new MatchCount(matchingCount), haveBonus);
+    private static void putRankMap(Rank rank, Map<Rank, Integer> rankMap) {
+        if (rank.getMatchingCount() >= 3) {
             rankMap.merge(rank, 1, Integer::sum);
         }
     }

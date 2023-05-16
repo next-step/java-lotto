@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domian.Lotto;
 import lotto.domian.LottoNumber;
+import lotto.domian.Rank;
 import lotto.domian.WinNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,13 +24,6 @@ public class WinNumberTest {
     @Test
     public void distinguish_CountNumber_Correct() {
         Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
-        Assertions.assertThat(winNumber.distinguish(lotto)).isEqualTo(6);
-    }
-
-    @DisplayName("보너스 번호가 있는지 가릴 수 있다.")
-    @Test
-    public void haveBonus_CountBonus_Correct() {
-        Lotto lotto = Lotto.of(Arrays.asList(11,12,13,14,15,45));
-        Assertions.assertThat(winNumber.haveBonus(lotto)).isTrue();
+        Assertions.assertThat(winNumber.match(lotto)).isEqualTo(Rank.FIRST);
     }
 }
