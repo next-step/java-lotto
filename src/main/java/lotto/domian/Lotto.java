@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lotto {
 
@@ -26,22 +25,9 @@ public class Lotto {
     }
 
     public int match(Lotto winNumber) {
-        AtomicInteger count = new AtomicInteger(0);
-        if (winNumber == null) {
-            return count.intValue();
-        }
-        lottoTicket.stream()
-                .forEach(lottoNumber ->
-                            count.addAndGet(winNumber.countIfHave(lottoNumber)));
-
-        return count.intValue();
-    }
-
-    private int countIfHave(LottoNumber lottoNumber) {
-        if (haveNumber(lottoNumber)) {
-            return 1;
-        }
-        return 0;
+        return (int)lottoTicket.stream()
+                .filter(winNumber::haveNumber)
+                .count();
     }
 
     public boolean haveNumber(LottoNumber bonusNumber) {

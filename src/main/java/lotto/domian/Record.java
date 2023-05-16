@@ -3,6 +3,7 @@ package lotto.domian;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Record {
 
@@ -17,20 +18,14 @@ public class Record {
     }
 
     public static Record extractRecord(LottoBundle lottoBundle, WinNumber winNumber) {
-        Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
         List<Lotto> lottoList = lottoBundle.unfoldLottoBundle();
-        for (Lotto lotto : lottoList) {
-            Rank rank = winNumber.match(lotto);
-            putRankMap(rank, rankMap);
-        }
 
-        return new Record(rankMap);
-    }
+        EnumMap<Rank, Integer> recordMap = lottoList.stream()
+                .map(winNumber::matchRank)
+                .filter(rank -> rank.getMatchingCount() >= 3)
+                .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum, () -> new EnumMap<>(Rank.class)));
 
-    private static void putRankMap(Rank rank, Map<Rank, Integer> rankMap) {
-        if (rank.getMatchingCount() >= 3) {
-            rankMap.merge(rank, 1, Integer::sum);
-        }
+        return new Record(recordMap);
     }
 
 }

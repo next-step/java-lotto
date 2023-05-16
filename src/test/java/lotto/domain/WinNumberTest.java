@@ -24,6 +24,6 @@ public class WinNumberTest {
     @Test
     public void distinguish_CountNumber_Correct() {
         Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
-        Assertions.assertThat(winNumber.match(lotto)).isEqualTo(Rank.FIRST);
+        Assertions.assertThat(winNumber.matchRank(lotto)).isEqualTo(Rank.FIRST);
     }
 }

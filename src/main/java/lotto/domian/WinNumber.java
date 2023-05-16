@@ -11,7 +11,7 @@ public class WinNumber {
         validDuplicate();
     }
 
-    public Rank match(Lotto lotto) {
+    public Rank matchRank(Lotto lotto) {
         int matchingCount = distinguish(lotto);
         boolean haveBonus = haveBonus(lotto);
         return Rank.find(new MatchCount(matchingCount), haveBonus);
