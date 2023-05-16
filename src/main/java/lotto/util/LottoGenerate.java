@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 
 public class LottoGenerate {
 
+    private static int LOTTO_LIST_FROM_INDEX = 0;
+
     public static List<LottoNumber> initAutoLottoNumbers() {
         List<LottoNumber> numbers =  IntStream.rangeClosed(LottoConstants.LOTTO_MIN_NUMBER, LottoConstants.LOTTO_MAX_NUMBER)
                 .mapToObj(LottoNumber::new)
@@ -15,7 +17,7 @@ public class LottoGenerate {
 
         Collections.shuffle(numbers);
 
-        return sortLottoNumber(numbers.subList(LottoConstants.ZERO, LottoConstants.LOTTO_MAX_SIZE));
+        return sortLottoNumber(numbers.subList(LOTTO_LIST_FROM_INDEX, LottoConstants.LOTTO_MAX_SIZE));
     }
 
     public static List<LottoNumber> initLottoNumbers(String lottoNumber) {
