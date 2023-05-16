@@ -23,13 +23,13 @@ public enum RewardTable {
 
     public static RewardTable of(int matchCount, Boolean matchBonus) {
         return Arrays.stream(RewardTable.values())
-                .filter(rank -> rank.getRank(matchCount, matchBonus))
+                .filter(rank -> rank.hasRank(matchCount, matchBonus))
                 .findAny()
                 .orElse(RewardTable.MISS)
                 ;
     }
 
-    private boolean getRank(int matchCount, Boolean matchBonus) {
+    private boolean hasRank(int matchCount, Boolean matchBonus) {
         if(matchCount == SECOND_RANK.matchCount) {
             return isBonusMatch(matchCount, matchBonus);
         }
