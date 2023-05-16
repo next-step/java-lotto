@@ -25,9 +25,9 @@ public class LottoMain {
 
     private static LottoTickets createLottoTickets() {
         String strLottoCost = InputView.inputLottoCost();
-        Money amount = new Money(Integer.parseInt(strLottoCost));
+        Cost cost = new Cost(new Money(Integer.parseInt(strLottoCost)));
 
-        int ticketCount = amount.getLottoTicketCount();
+        int ticketCount = cost.getLottoTicketCount();
         return LottoFactory.createAutoLottoTickets(ticketCount);
     }
 }

@@ -14,7 +14,7 @@ class RankTest {
     @MethodSource("lottoRank")
     void 로또_당첨_테스트(int count, Money money, boolean isWin) {
         Rank rank = Rank.of(count, isWin);
-        Assertions.assertThat(rank.prize()).isEqualTo(money);
+        Assertions.assertThat(rank.prize()).isEqualTo(money.amount());
     }
 
     private static Stream<Arguments> lottoRank() {
