@@ -11,7 +11,7 @@ public class LottoRankTest {
 
     @Test
     void 생성자테스트 () {
-        Assertions.assertThat(LottoRank.FIFTH.getPrizeMoney()).isEqualTo(5000);
+        Assertions.assertThat(LottoRank.FIFTH.getPrizeMoney()).isEqualTo(new Money(5000));
         Assertions.assertThat(LottoRank.FIFTH.getMatchedCount()).isEqualTo(3);
     }
 
@@ -21,7 +21,7 @@ public class LottoRankTest {
     void 당첨등수찾기(String matchedCount, String bonusMatched, String prizeMoney) {
         Assertions.assertThat(LottoRank.findByMatchedCount(Integer.parseInt(matchedCount),
                         Boolean.valueOf(bonusMatched)).getPrizeMoney())
-                .isEqualTo(Integer.parseInt(prizeMoney));
+                .isEqualTo(new Money(Integer.parseInt(prizeMoney)));
     }
 
 }

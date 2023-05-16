@@ -1,23 +1,25 @@
 package lotto.domain.enums;
 
+import lotto.domain.Money;
+
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(6, false, 2_000_000_000),
-    SECOND(5, true, 30_000_000),
-    THIRD(5, false, 1_500_000),
-    FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000),
+    FIRST(6, false, 2_000_000_000L),
+    SECOND(5, true, 30_000_000L),
+    THIRD(5, false, 1_500_000L),
+    FOURTH(4, false, 50_000L),
+    FIFTH(3, false, 5_000L),
     NO_RANK(0, false, 0);
 
     private int matchedCount;
     private boolean bonusMatched;
-    private int prizeMoney;
+    private Money prizeMoney;
 
-    LottoRank(int matchingCount, boolean bonusMatched, int prizeMoney) {
+    LottoRank(int matchingCount, boolean bonusMatched, long prizeMoney) {
         this.matchedCount = matchingCount;
         this.bonusMatched = bonusMatched;
-        this.prizeMoney = prizeMoney;
+        this.prizeMoney = new Money(prizeMoney);
     }
 
     public static LottoRank findByMatchedCount(int count, boolean bonusMatched) {
@@ -32,8 +34,12 @@ public enum LottoRank {
         return matchedCount;
     }
 
-    public int getPrizeMoney() {
+    public Money getPrizeMoney() {
         return prizeMoney;
+    }
+
+    public Money getPrizeMoney(int count) {
+        return prizeMoney.multiply(count);
     }
 
     public boolean isBonusMatched() {

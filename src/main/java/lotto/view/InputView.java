@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.Money;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    public int promptPurchaseAmount() {
+    public Money promptPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new Scanner(System.in).nextInt();
+        return new Money(new Scanner(System.in).nextInt());
     }
 
     public ArrayList<Integer> promptWinningNumbers() {

@@ -36,6 +36,6 @@ public class LottoResultCheckerTest {
         Assertions.assertThat(lottoResultChecker.getRankCount(LottoRank.FOURTH)).isEqualTo(2);
         Assertions.assertThat(lottoResultChecker.getRankCount(LottoRank.FIFTH)).isEqualTo(1);
 
-        Assertions.assertThat(lottoResultChecker.getTotalPrizeMoney()).isEqualTo(2_033_105_000L);
+        Assertions.assertThat(lottoResultChecker.getTotalPrizeMoney()).isEqualTo(new Money(2_033_105_000L));
     }
 }

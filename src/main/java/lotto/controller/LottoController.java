@@ -13,7 +13,7 @@ public class LottoController {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        int amount = inputView.promptPurchaseAmount();
+        Money amount = inputView.promptPurchaseAmount();
 
         List<LottoTicket> lottoTickets = LottoMachine.buyLottoTickets(amount);
         resultView.viewBuyingResult(lottoTickets);

@@ -23,9 +23,9 @@ public class LottoResultChecker {
         return countByRank.getOrDefault(rank, 0);
     }
 
-    public long getTotalPrizeMoney() {
-        return countByRank.entrySet().stream()
-                .mapToLong(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
-                .sum();
+    public Money getTotalPrizeMoney() {
+        return new Money(countByRank.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().getPrizeMoney(entry.getValue()).getLong())
+                .sum());
     }
 }
