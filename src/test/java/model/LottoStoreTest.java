@@ -3,9 +3,8 @@ package model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 
 public class LottoStoreTest {
     @Test
@@ -16,12 +15,10 @@ public class LottoStoreTest {
 
         // when
         LottoStore lottoStore = new LottoStore();
-        List<Lotto> lottoList = lottoStore.buy(buyAmount);
+        Lottos lottos = lottoStore.buy(buyAmount);
 
         //then
-        int expected = 14;
-
-        assertEquals(expected, lottoList.size());
+        assertThat(lottos.getLottos(), hasSize(14));
 
     }
 }
