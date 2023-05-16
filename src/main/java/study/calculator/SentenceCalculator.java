@@ -4,16 +4,11 @@ import study.enums.Operation;
 
 public class SentenceCalculator {
 
-    int opreationResult = 0;
-
-    String inputSentence = null;
-
     String separation = " ";
-    String plus = "+";
-    String minus = "-";
-    String multiply = "*";
-    String division = "/";
 
+    int opreationResult = 0;
+    String inputSentence = null;
+    
 
     public SentenceCalculator(String sentence) {
         isValidSentence(sentence);
