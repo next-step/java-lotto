@@ -6,6 +6,7 @@ public class InputView {
 
     private Scanner scanner = new Scanner(System.in);
     private int amount;
+    private int bounus;
     private String winningNumbers;
 
     public int askAmount() {
@@ -22,6 +23,17 @@ public class InputView {
         System.out.println(LottoMessage.WINNING_NUMBERS_QUESTION);
         winningNumbers = scanner.nextLine();
         return winningNumbers;
+    }
+
+    public int askBonus() {
+        System.out.println(LottoMessage.BONUS_MESSAGE_QUESTION);
+        bounus = Integer.parseInt(scanner.nextLine());
+        return bounus;
+    }
+
+
+    public int getBonus() {
+        return bounus;
     }
 
 }

@@ -6,11 +6,13 @@ public class LottoTicket {
     private final List<Integer> numbers;
     private int sameNumberCount;
     private int prizeResult;
+    private boolean hasBonusNum;
 
     public LottoTicket(List<Integer> numbers) {
         this.numbers = numbers;
         this.sameNumberCount = 0;
         this.prizeResult = 0;
+        this.hasBonusNum = false;
     }
 
     public List<Integer> getNumbers() {
@@ -26,11 +28,13 @@ public class LottoTicket {
     }
 
 
-    public void checkWinningTicket(List<Integer> officialWinningNumbers) {
+    public void checkWinningTicket(List<Integer> officialWinningNumbers, int bonusNumber) {
         sameNumberCount = getSameNumberCnt(officialWinningNumbers);
-        prizeResult = LottoPrizeEnum.getPrizeBySameNumCnt(sameNumberCount);
-        if (sameNumberCount < 3)
-            sameNumberCount = 0;
+
+        if (checkBonusNumber(bonusNumber)) sameNumberCount++;
+        prizeResult = LottoPrizeEnum.getPrizeBySameNumCnt(sameNumberCount, hasBonusNum);
+
+        if (sameNumberCount < 3) sameNumberCount = 0;
     }
 
     private int getSameNumberCnt(List<Integer> officialWinningNumbers) {
@@ -41,4 +45,8 @@ public class LottoTicket {
         return numbers.contains(winningNumber);
     }
 
+    private boolean checkBonusNumber(int bonusNumber) {
+        if (numbers.contains(bonusNumber)) hasBonusNum = true;
+        return hasBonusNum;
+    }
 }

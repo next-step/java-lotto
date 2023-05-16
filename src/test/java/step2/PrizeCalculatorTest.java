@@ -15,7 +15,7 @@ class PrizeCalculatorTest {
     private PrizeCalculator prizeCalculator;
     private List<LottoTicket> tickets;
     private List<Integer> officialWinningNumbers = new ArrayList<>();
-    ;
+    private int bonusNumber;
 
     @BeforeEach
     public void init() {
@@ -27,7 +27,8 @@ class PrizeCalculatorTest {
             officialWinningNumbers.add(i);
         }
         lottoTicket = new LottoTicket(numbers);
-        lottoTicket.checkWinningTicket(officialWinningNumbers);
+        bonusNumber = 8;
+        lottoTicket.checkWinningTicket(officialWinningNumbers, bonusNumber);
         tickets = new ArrayList<>();
         tickets.add(lottoTicket);
     }

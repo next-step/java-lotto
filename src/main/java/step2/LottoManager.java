@@ -15,10 +15,11 @@ public class LottoManager {
 
 
     public LottoManager() {
-        winningTicketsMap.put(3, new ArrayList<>());
-        winningTicketsMap.put(4, new ArrayList<>());
-        winningTicketsMap.put(5, new ArrayList<>());
-        winningTicketsMap.put(6, new ArrayList<>());
+        winningTicketsMap.put(5000, new ArrayList<>());
+        winningTicketsMap.put(50000, new ArrayList<>());
+        winningTicketsMap.put(1500000, new ArrayList<>());
+        winningTicketsMap.put(30000000, new ArrayList<>());
+        winningTicketsMap.put(2000000000, new ArrayList<>());
     }
 
     public void start() {
@@ -36,7 +37,7 @@ public class LottoManager {
 
 
     public void getLottoResult() {
-        WinningTicketSelector winningTicketSelector = new WinningTicketSelector(inputView.askWinNumbers());
+        WinningTicketSelector winningTicketSelector = new WinningTicketSelector(inputView.askWinNumbers(), inputView.askBonus());
         resultView.startStatistics();
         resultView.showStatistics(winningTicketSelector.countWinningTicket(winningTicketsMap, winningTicketSelector.findWinningTicket(tickets)));
 
