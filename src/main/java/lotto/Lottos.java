@@ -8,21 +8,24 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
-    public Lottos(int count) {
+    public Lottos(int count, LottoBallPolicy lottoBallPolicy) {
         lottoList = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottoList.add(new Lotto());
+            lottoBallPolicy.shuffleLottoNumber();
+            lottoList.add(createLottoByPolicy(lottoBallPolicy));
         }
     }
 
-    public void shuffleLottos(LottoBalls lottoBalls) {
-        for (Lotto lotto : lottoList) {
-            lotto.shuffleLottoNumber(lottoBalls);
-        }
+    public Lotto createLottoByPolicy(LottoBallPolicy lottoBallPolicy) {
+        return Lotto.createLotto(lottoBallPolicy.getLottoNumber(Lotto.getMaxSize()));
     }
 
     public List<Lotto> getLottoList() {
         return Collections.unmodifiableList(lottoList);
+    }
+
+    public int getLottoListSize(){
+        return lottoList.size();
     }
 }

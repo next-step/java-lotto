@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,17 +23,6 @@ public class Lotto {
         return new Lotto(list);
     }
 
-
-    public List<Number> createLotto() {
-        return lottoNumbers;
-    }
-
-    public void shuffleLottoNumber(LottoBalls lottoBalls) {
-        lottoBalls.shuffleLottoNumber();
-        var numberList = new ArrayList<>(LottoBalls.getLottoNumbers());
-        lottoNumbers = new ArrayList<>(numberList.subList(0, SIZE));
-    }
-
     public int equalsCount(List<Number> list) {
         return (int) lottoNumbers.stream()
                 .filter(list::contains)
@@ -47,5 +35,13 @@ public class Lotto {
 
     public List<Number> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public int getSize() {
+        return lottoNumbers.size();
+    }
+
+    public static int getMaxSize() {
+        return SIZE;
     }
 }

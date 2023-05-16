@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoBalls {
+public class LottoBallPolicy {
     private static List<Number> numberList;
     private static final int MAX_NUMBER = 45;
 
@@ -16,11 +16,11 @@ public class LottoBalls {
         numberList = list;
     }
 
-    public LottoBalls() {
+    public LottoBallPolicy() {
         init();
     }
 
-    public LottoBalls(List<Number> list) {
+    public LottoBallPolicy(List<Number> list) {
         numberList = new ArrayList<>(list);
     }
 
@@ -30,5 +30,9 @@ public class LottoBalls {
 
     public void shuffleLottoNumber(){
         Collections.shuffle(numberList);
+    }
+
+    public ArrayList<Number> getLottoNumber(int size) {
+        return new ArrayList<>(numberList.subList(0, size));
     }
 }

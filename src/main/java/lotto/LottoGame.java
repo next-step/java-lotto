@@ -16,11 +16,10 @@ public class LottoGame {
         InputView.printLottoInput();
         var priceInput = InputView.intInput();
 
-        Lottos lottos = new Lottos(priceInput);
-        lottos.shuffleLottos(new LottoBalls());
+        Lottos lottos = new Lottos(calculateLottoSize(priceInput), new LottoBallPolicy());
 
         // 로또 출력
-        ResultView.printLottosCount(lottos.getLottoList().size());
+        ResultView.printLottosCount(lottos.getLottoListSize());
         ResultView.printLottos(lottos);
 
         // 당첨 로또 입력
@@ -30,10 +29,10 @@ public class LottoGame {
 
         // 통계
         LottoStatics lottoStatics = new LottoStatics(priceInput, LOTTO_PRICE);
-        lottoStatics.calculateProfitStatistics(winningNumberList, lottos.getLottoList());
+        lottoStatics.calculateProfitStatistics(Lotto.createLotto(winningNumberList), lottos.getLottoList());
         ResultView.printStatics(lottoStatics);
 
-        var ratio = lottoStatics.getProfitRatio(winningNumberList, lottos.getLottoList());
+        var ratio = lottoStatics.getProfitRatio(Lotto.createLotto(winningNumberList), lottos.getLottoList());
         ResultView.printLottosProfit(ratio);
     }
 
@@ -43,5 +42,9 @@ public class LottoGame {
             list.add(Number.createNumber(string.trim()));
         }
         return list;
+    }
+
+    public static int calculateLottoSize(int inputPrice) {
+        return inputPrice / LOTTO_PRICE;
     }
 }

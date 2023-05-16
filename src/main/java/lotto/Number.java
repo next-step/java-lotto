@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Number implements Comparable<Number> {
     private int number;
@@ -12,14 +14,21 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    public static Number createNumber(int number){
+    public static Number createNumber(int number) {
         return new Number(number);
     }
 
-    public static Number createNumber(String numberString){
+    public static Number createNumber(String numberString) {
         int numberInt = Integer.parseInt(numberString);
         return new Number(numberInt);
     }
+
+    public static List<Number> createNumberList(List<Integer> integerList) {
+        return integerList.stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
+    }
+
 
     public String getNumberToString() {
         return String.valueOf(number);
