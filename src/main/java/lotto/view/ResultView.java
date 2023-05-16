@@ -8,6 +8,7 @@ import lotto.domain.result.Rank;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class ResultView {
 
@@ -31,7 +32,7 @@ public class ResultView {
     }
 
     private static StringBuilder printLottoPrizes(LottoResults lottoResults) {
-        Map<Rank, Integer> data = lottoResults.groupingByLottoResult();
+        Map<Rank, Long> data = lottoResults.groupingByLottoResult();
         StringBuilder stringBuilder = new StringBuilder();
 
         data.entrySet().stream().forEach(e -> {
@@ -45,12 +46,12 @@ public class ResultView {
     }
 
     public static void printWinningProfit(LottoResults lottoResults, int payment) {
-        Map<Rank, Integer> data = lottoResults.groupingByLottoResult();
+        Map<Rank, Long> data = lottoResults.groupingByLottoResult();
         StringBuilder stringBuilder = new StringBuilder();
-        AtomicInteger totalPrice = new AtomicInteger();
+        AtomicLong totalPrice = new AtomicLong();
 
         data.entrySet().stream().forEach(e -> {
-            int totalPriceData = e.getKey().getReward() * e.getValue();
+            Long totalPriceData = e.getKey().getReward() * e.getValue();
             if (totalPriceData != 0) {
                 totalPrice.addAndGet(totalPriceData);
             }

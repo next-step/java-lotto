@@ -15,7 +15,7 @@ class LottoResultTest {
     @Test
     @DisplayName(value = "로또 결과 초기 생성 검사")
     void test1() {
-        Map<Rank, Integer> result = Map.of(Rank.FOURTH, 0);
+        Map<Rank, Long> result = Map.of(Rank.FOURTH, 0L);
         assertThat(LottoResult.of(Rank.FOURTH)).isEqualTo(new LottoResult(result));
     }
 

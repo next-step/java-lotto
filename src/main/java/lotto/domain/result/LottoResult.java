@@ -5,15 +5,15 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResult {
-    private Map<Rank, Integer> result;
+    private Map<Rank, Long> result;
 
-    public LottoResult(Map<Rank, Integer> result) {
+    public LottoResult(Map<Rank, Long> result) {
         this.result = result;
     }
 
     public static LottoResult of(Rank rank) {
-        Map<Rank, Integer> map = new HashMap<>();
-        map.put(rank, 0);
+        Map<Rank, Long> map = new HashMap<>();
+        map.put(rank, 0L);
         return new LottoResult(map);
     }
 
@@ -24,16 +24,16 @@ public class LottoResult {
             }
         }
 
-        Integer integer = result.get(rank);
-        integer++;
-        result.put(rank, integer);
+        Long winOfCount = result.get(rank);
+        winOfCount++;
+        result.put(rank, winOfCount);
     }
 
     public Rank getKey() {
         return result.entrySet().stream().findFirst().get().getKey();
     }
 
-    public Integer getValue() {
+    public Long getValue() {
         return result.entrySet().stream().findFirst().get().getValue();
     }
 
