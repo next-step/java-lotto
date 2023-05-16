@@ -3,10 +3,12 @@ package autolotto.machine;
 import autolotto.machine.lotto.Lotto;
 import autolotto.machine.lotto.LottoGenerator;
 import autolotto.machine.lotto.LottoWallet;
+import autolotto.machine.winning.Winning;
 import autolotto.machine.winning.WinningNumbers;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,10 +53,9 @@ public class LottoMachine {
     public Map<Integer, Integer> winningState(WinningNumbers winningNumbers) {
         Map<Integer, Integer> lottoCountPerEachMatchingCount = setZeroToAllMatchingCount();
 
-        for (Lotto lotto : this.wallet.allLotteries()) {
-            int matchingCount = lotto.matchCount(winningNumbers);
-            Integer count = lottoCountPerEachMatchingCount.getOrDefault(matchingCount, 0);
-            lottoCountPerEachMatchingCount.put(matchingCount, count + 1);
+        for (Integer matchCount : lottoCountPerEachMatchingCount.keySet()) {
+            int lottoCount = wallet.countOfLottoMatchingWith(winningNumbers, matchCount);
+            lottoCountPerEachMatchingCount.put(matchCount, lottoCount);
         }
 
         return lottoCountPerEachMatchingCount;
@@ -62,9 +63,11 @@ public class LottoMachine {
 
     private Map<Integer, Integer> setZeroToAllMatchingCount() {
         Map<Integer, Integer> lottoCountPerEachMatchingCount = new HashMap<>();
-        for (int i = 0; i < 6; i++) {
-            lottoCountPerEachMatchingCount.put(i, 0);
-        }
+
+        Arrays.stream(Winning.values())
+                .map(Winning::matchNumber)
+                .forEach(matchingCount -> lottoCountPerEachMatchingCount.put(matchingCount, 0));
+
         return lottoCountPerEachMatchingCount;
     }
 

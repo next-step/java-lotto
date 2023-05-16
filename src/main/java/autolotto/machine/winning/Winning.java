@@ -32,4 +32,8 @@ public enum Winning {
     public int winningMoney() {
         return this.winningMoney;
     }
+
+    public int matchNumber() {
+        return this.matchNumber;
+    }
 }
