@@ -23,7 +23,7 @@ public class LottoApplication {
         InputView.printInputBonus();
         Integer bonus = ConsoleWriter.inputInt();
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winningNumbers, bonus);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, new WinLotto(winningNumbers, bonus));
         ResultView.statisticsResult(lottoStatistics, payment);
 
 

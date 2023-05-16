@@ -1,10 +1,7 @@
 package lotto;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
@@ -19,7 +16,7 @@ public class LottoTest {
     void checkLotto(List<Integer> winningNumber, int expected) {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        int matchNumber = lotto.checkLotto(winningNumber);
+        int matchNumber = lotto.getMatchCount(winningNumber);
 
         assertThat(matchNumber).isEqualTo(expected);
     }
@@ -28,7 +25,7 @@ public class LottoTest {
     @MethodSource("getLottoNumber")
     void checkLottoBonus(List<Integer> lottoNums, int bonus, boolean expected) {
         Lotto lotto = new Lotto(lottoNums);
-        boolean hasBonus = lotto.hasBonus(bonus);
+        boolean hasBonus = lotto.hasNumber(bonus);
 
         assertThat(hasBonus).isEqualTo(expected);
     }

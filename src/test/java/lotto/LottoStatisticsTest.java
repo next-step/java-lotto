@@ -26,7 +26,8 @@ class LottoStatisticsTest {
             lottos.add(new Lotto(List.of(11, 12, 13, 24, 25, 26)));
         }
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, List.of(1, 2, 3, 14, 15, 16), 10);
+        WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 14, 15, 16), 10);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos,winLotto);
         BigDecimal result = lottoStatistics.rateOfReturn(investment);
 
         assertThat(result).isEqualTo(BigDecimal.valueOf(0.35));

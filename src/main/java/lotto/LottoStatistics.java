@@ -15,11 +15,11 @@ public class LottoStatistics {
     private static final int ONE = 1;
 
 
-    public LottoStatistics(Lottos lottos, List<Integer> winningNumbers, int bonus) {
+    public LottoStatistics(Lottos lottos, WinLotto winLotto) {
         this.winningNumbers = winningNumbers;
 
         for (Lotto lotto : lottos.getLottos()) {
-            Winnings winnings = Winnings.fromMatchCount(lotto.checkLotto(winningNumbers, bonus), lotto.hasBonus(bonus));
+            Winnings winnings = Winnings.fromMatchCount(winLotto.checkLotto(lotto), winLotto.hasBonus(lotto));
             statistics.put(winnings, statistics.getOrDefault(winnings, ZERO) + ONE);
         }
     }
