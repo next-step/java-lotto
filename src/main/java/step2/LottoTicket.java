@@ -34,12 +34,7 @@ public class LottoTicket {
     }
 
     private int getSameNumberCnt(List<Integer> officialWinningNumbers) {
-        int sameNumberCount = 0;
-        for (int winningNumber : officialWinningNumbers) {
-            if (hasWinningNumber(winningNumber))
-                sameNumberCount++;
-        }
-        return sameNumberCount;
+        return (int) officialWinningNumbers.stream().filter(this::hasWinningNumber).count();
     }
 
     private boolean hasWinningNumber(int winningNumber) {

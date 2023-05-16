@@ -11,7 +11,7 @@ public class LottoManager {
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
     private List<LottoTicket> tickets;
-    private final Map<Integer, List<LottoTicket>> winningTicketsMap = new LinkedHashMap<>();
+    private Map<Integer, List<LottoTicket>> winningTicketsMap = new LinkedHashMap<>();
 
 
     public LottoManager() {
@@ -21,24 +21,24 @@ public class LottoManager {
         winningTicketsMap.put(6, new ArrayList<>());
     }
 
+    public void start() {
+        buyLotto();
+        getLottoResult();
+        calculateLottoResult();
+    }
+
     public void buyLotto() {
         LottoMaker lottoMaker = new LottoMaker();
-        inputView.askAmount();
-        int ticketCount = lottoMaker.getLottoTicketCount(inputView.getAmount());
+        int ticketCount = lottoMaker.getLottoTicketCount(inputView.askAmount());
         tickets = lottoMaker.buyLottoTickets(ticketCount);
         resultView.showLottoTickets(tickets);
     }
 
-    public void showWinningLotto() {
-        inputView.askWinNumbers();
-    }
 
     public void getLottoResult() {
-        WinningTicketSelector winningTicketSelector = new WinningTicketSelector(inputView.getWinNumbers());
+        WinningTicketSelector winningTicketSelector = new WinningTicketSelector(inputView.askWinNumbers());
         resultView.startStatistics();
-        winningTicketSelector.findWinningTicket(tickets);
-        winningTicketSelector.countWinningTicket(winningTicketsMap, tickets);
-        resultView.showStatistics(winningTicketsMap);
+        resultView.showStatistics(winningTicketSelector.countWinningTicket(winningTicketsMap, winningTicketSelector.findWinningTicket(tickets)));
 
     }
 
@@ -46,5 +46,4 @@ public class LottoManager {
         PrizeCalculator prizeCalculator = new PrizeCalculator();
         resultView.showProfit(prizeCalculator.calculateProfitRatio(tickets, inputView.getAmount()));
     }
-
 }

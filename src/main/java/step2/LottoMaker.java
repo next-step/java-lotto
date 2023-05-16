@@ -26,12 +26,8 @@ public class LottoMaker {
     }
 
     public LottoTicket buySingleLottoTicket() {
-        List<Integer> numbers = new ArrayList<>();
-
         Collections.shuffle(lottoNumbers);
-        for (int i = 0; i < LOTTO_PICK_COUNT; i++) {
-            numbers.add(lottoNumbers.get(i));
-        }
+        List<Integer> numbers = new ArrayList<>(lottoNumbers.subList(0, LOTTO_PICK_COUNT));
         Collections.sort(numbers);
 
         return new LottoTicket(numbers);

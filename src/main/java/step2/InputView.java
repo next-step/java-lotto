@@ -8,9 +8,10 @@ public class InputView {
     private int amount;
     private String winningNumbers;
 
-    public void askAmount() {
+    public int askAmount() {
         System.out.println(LottoMessage.AMOUNT_MESSAGE_QUESTION);
         amount = Integer.parseInt(scanner.nextLine());
+        return amount;
     }
 
     public int getAmount() {
@@ -23,7 +24,4 @@ public class InputView {
         return winningNumbers;
     }
 
-    public String getWinNumbers() {
-        return winningNumbers;
-    }
 }
