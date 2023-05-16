@@ -9,8 +9,10 @@ public class LotteryController {
         var lotteries = lotteryStand.buyLotteriesOfAmount(amount);
         lotteryView.showBuyResult(lotteries);
 
-        var winningNumbers = LotteryRow.fromCommaSpliced(lotteryView.getWinningNumbers());
-        var statistics = new LotteryStatistics(lotteries, winningNumbers, LotteryStand.PRICE);
+        var winningNumbers = lotteryView.getWinningNumbers();
+        var bonusNumber = lotteryView.getBonusNumber();
+        var drawResult = DrawResult.fromWinningNumbersAndBonus(winningNumbers, bonusNumber);
+        var statistics = new LotteryStatistics(lotteries, drawResult);
         lotteryView.showStatistics(statistics);
     }
 }

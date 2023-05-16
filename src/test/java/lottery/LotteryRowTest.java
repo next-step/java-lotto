@@ -36,10 +36,10 @@ public class LotteryRowTest {
     }
 
     @Test
-    public void parseInputFromString() {
-        var input = "1, 2, 3, 4, 5, 6";
+    public void numbersAreOrdered() {
+        var numbers = Set.of(6, 5, 4, 3, 2, 1);
 
-        var row = LotteryRow.fromCommaSpliced(input);
+        var row = LotteryRow.fromGiven(numbers);
 
         assertThat(row.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }

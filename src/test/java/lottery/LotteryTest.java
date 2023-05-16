@@ -13,6 +13,6 @@ public class LotteryTest {
 
         var lottery = new Lottery(row);
 
-        assertThat(new HashSet<>(lottery.getNumbers())).hasSize(6);
+        assertThat(new HashSet<>(lottery.getRow().getNumbers())).hasSize(6);
     }
 }
