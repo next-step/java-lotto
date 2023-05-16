@@ -56,5 +56,4 @@ public class LottoResults {
             winningStatistics.matchCount(lottoResult);
         }
     }
-
 }

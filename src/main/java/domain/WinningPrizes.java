@@ -53,5 +53,4 @@ public enum WinningPrizes {
     private static WinningPrizes decideSecondOrThirdPrizes(int countOfMatch, boolean matchBonus) {
             return matchBonus ? WinningPrizes.SECOND_PRIZE : WinningPrizes.THIRD_PRIZE;
     }
-
 }
