@@ -10,33 +10,30 @@ import java.util.Map;
 import java.util.Set;
 
 public class Main {
-    
+
     public static void main(String[] args) {
         int amount = LottoInputView.askBuyAmount();
         Money money = new Money(amount);
         int buyCount = money.buyCount(Lotto.PRICE);
         LottoOutputView.printBuyCount(buyCount);
 
-        // 로또 생성
-        List<Lotto> lottoList = buyManyOfLotto(buyCount);
+        List<Lotto> lottos = buyLottos(buyCount);
 
-        // 지난주 당첨 번호 생성
         String stringNumbers = LottoInputView.askLastWinnerNumbers();
         WinnerNumbers winnerNumbers = makeWinnerNumbers(stringNumbers);
 
-        // 로또 당첨 결과 확인
-        LottoResults lottoResults = makeLottoResults(winnerNumbers, lottoList, money);
+        LottoResults lottoResults = makeLottoResults(winnerNumbers, lottos, money);
         LottoOutputView.printLottoResults(lottoResults);
     }
 
-    private static List<Lotto> buyManyOfLotto(int buyCount) {
-        List<Lotto> lottoList = new ArrayList<>();
+    private static List<Lotto> buyLottos(int buyCount) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < buyCount; i++) {
             Lotto lotto = LottoGenerator.generate();
-            lottoList.add(lotto);
+            lottos.add(lotto);
             LottoOutputView.printLotto(lotto);
         }
-        return lottoList;
+        return lottos;
     }
 
     private static WinnerNumbers makeWinnerNumbers(String stringNumbers) {
