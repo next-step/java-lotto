@@ -43,15 +43,18 @@ public class ResultView {
 
         for (Rank rank : ranks) {
             int count = Optional.ofNullable(winCount.get(rank)).orElse(0);
-            if (rank != rank.MISS)
+            if (rank != rank.MISS) {
                 System.out.println(printLottoResult(rank, count));
+            }
+
         }
     }
 
     private static String printLottoResult(Rank rank, int count) {
 
-        if (rank == rank.SECOND)
+        if (rank == rank.SECOND) {
             return getSecondMessage(rank, count);
+        }
 
         return getMessage(rank, count);
 
