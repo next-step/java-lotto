@@ -13,7 +13,7 @@ public class Money {
         return new Money(this.money - money);
     }
 
-    public boolean isBigger(int totalLottoPrice){
+    public boolean isLess(int totalLottoPrice){
         return this.money < totalLottoPrice;
     }
 

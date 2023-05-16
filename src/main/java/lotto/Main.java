@@ -3,10 +3,7 @@ package lotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
 
@@ -15,7 +12,10 @@ public class Main {
         int money = InputView.inputPay(scanner);
         Customer customer = new Customer(money);
         int manualCount = InputView.inputCount(scanner);
-        List<Set<Integer>> manualNumbers = InputView.inputManualNumbers(manualCount, scanner);
+        List<Set<Integer>> manualNumbers = new ArrayList<>();
+        if (manualCount > 0) {
+            manualNumbers = InputView.inputManualNumbers(manualCount, scanner);
+        }
 
         customer.buyLotto(manualCount, manualNumbers);
 

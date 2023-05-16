@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputView {
     public static int inputPay(Scanner scanner) {
@@ -28,6 +29,9 @@ public class InputView {
             numbers.add(number);
             count++;
         }
+        if (count == 6 && scanner.hasNext()) {
+            System.out.println("입력값이 6개를 초과하여 추가 입력은 무시됩니다.");
+        }
     }
 
     public static int inputCount(Scanner scanner) {
@@ -39,20 +43,23 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Set<Integer>> numberList = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
-            int count = 0;
-            Set<Integer> lottoNumbers = inputLottoNumbers(scanner, count);
+            Set<Integer> lottoNumbers = inputLottoNumbers(scanner);
             numberList.add(lottoNumbers);
         }
 
         return numberList;
     }
 
-    private static Set<Integer> inputLottoNumbers(Scanner scanner, int count) {
+    private static Set<Integer> inputLottoNumbers(Scanner scanner) {
         Set<Integer> lottoNumbers = new HashSet<>();
+        int count = 0;
         while (count < 6 && scanner.hasNextInt()) {
             int number = scanner.nextInt();
             lottoNumbers.add(number);
             count++;
+        }
+        if (count == 6 && scanner.hasNext()) {
+            System.out.println("입력값이 6개를 초과하여 추가 입력은 무시됩니다.");
         }
         return lottoNumbers;
     }

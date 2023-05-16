@@ -11,7 +11,7 @@ import java.util.Map;
 public class OutputView {
 
     public static void showLottos(List<Lotto> manualLottos, List<Lotto> lottos) {
-        System.out.println("수동으로 " + manualLottos.size() + "장 자동으로 " + lottos.size() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + manualLottos.size() + "장 자동으로 " + lottos.size() + "장를 구매했습니다.");
         manualLottos.stream()
                 .forEach(System.out::println);
         lottos.stream()

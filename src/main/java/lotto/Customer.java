@@ -26,7 +26,7 @@ public class Customer {
 
     private void buyAutoLotto() {
 
-        if (money.getMoney() < Lotto.LOTTO_PRICE) {
+        if(money.isLess(Lotto.LOTTO_PRICE)){
             throw new IllegalStateException("로또 살 돈이 부족합니다.");
         }
 
@@ -47,7 +47,7 @@ public class Customer {
     }
 
     private void validateManualLotto(int count, List<Set<Integer>> manualLottoNumbers) {
-        if (money.isBigger(Lotto.LOTTO_PRICE * count)) {
+        if (money.isLess(Lotto.LOTTO_PRICE * count)) {
             throw new IllegalStateException("로또 살 돈이 부족합니다.");
         }
 
