@@ -34,9 +34,11 @@ public class Lotto {
     }
 
     public static Lotto stringToNumber(String winningLotto) {
-        return Arrays.stream(winningLotto.split(", "))
+        List<Integer> IntegerList = Arrays.stream(winningLotto.split(", "))
                 .map(Integer::parseInt)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::of));
+                .collect((Collectors.toList()));
+        ExceptionHandler.validDuplicatedLottoNumbers(IntegerList);
+        return IntegerList.stream().collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::of));
     }
 
     public Rank getRank(Lotto winningLotto) {
@@ -51,4 +53,16 @@ public class Lotto {
         return "" + lotto;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
+    }
 }

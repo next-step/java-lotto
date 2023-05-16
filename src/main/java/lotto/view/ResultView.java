@@ -2,12 +2,10 @@ package lotto.view;
 
 import lotto.domain.Lottos;
 import lotto.domain.Lotto;
-import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResults;
 import lotto.domain.result.Rank;
 
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ResultView {
@@ -17,7 +15,7 @@ public class ResultView {
     private static final String STATISTICS_INFO = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printLottoNumber(Lottos lottos) {
-        for (Lotto lottoNumber : lottos.getLottos()) {
+        for (Lotto lottoNumber : lottos.lottos) {
             System.out.println(lottoNumber);
         }
     }

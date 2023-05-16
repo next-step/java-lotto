@@ -28,4 +28,13 @@ public class ExceptionHandler {
             throw new IllegalArgumentException("로또 최소 구매 금액은 1000원 입니다");
         }
     }
+
+    public static void validDuplicatedLottoNumbers(List<Integer> lottoNumbers) {
+        boolean duplicated = lottoNumbers.stream()
+                .distinct()
+                .count() != lottoNumbers.size();
+        if (duplicated) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
+    }
 }

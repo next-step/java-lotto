@@ -11,7 +11,9 @@ public class LottoResults {
     }
 
     public static LottoResults of() {
-        return new LottoResults(Arrays.stream(Rank.values()).map(LottoResult::of).collect(Collectors.toList()));
+        return new LottoResults(Arrays.stream(Rank.values())
+                .map(LottoResult::of)
+                .collect(Collectors.toList()));
     }
 
     public void win(Rank rank) {
