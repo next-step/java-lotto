@@ -1,31 +1,38 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Lotto implements Comparable<Lotto>{
+public class Lotto { // 로또 1장
 
-    private int value;
+    private final ArrayList<LottoNumber> lottoNumberNumbers;
 
-    public Lotto (int number) {
-        this.value = number;
-    }
+    public Lotto(List<Integer> input) {
 
-    public int getNumber() {
-        return this.value;
-    }
+        this.lottoNumberNumbers = new ArrayList<>();
 
-    @Override
-    public int compareTo(Lotto lotto) {
-        if (lotto.value < value) {
-            return 1;
-        } else if (lotto.value > value) {
-            return -1;
+        // HashSet 사용 하여 숫자 중복 체크 하기
+
+        for (Integer integer : input) {
+            lottoNumberNumbers.add(new LottoNumber(integer));
         }
-        return 0;
+        // stream
     }
 
-    public boolean isEqual(Lotto lotto) {
-        if (this.value == lotto.getNumber()) return true;
-        return false;
+    public ArrayList<LottoNumber> getLottoNumbers() {
+        return this.lottoNumberNumbers;
     }
+
+    public int compareLottoNumbers(List<LottoNumber> winnerLotto) {
+
+        int matchCount = 0;
+
+        for(int i = 0; i < 6; i++) {
+            if (this.lottoNumberNumbers.contains(winnerLotto.get(i))) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+
 }
