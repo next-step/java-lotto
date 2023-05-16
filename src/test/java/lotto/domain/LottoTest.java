@@ -34,7 +34,6 @@ public class LottoTest {
                 .isThrownBy(() -> Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 5)));
     }
 
-    // 강의 19분부터 다시 보기 (정적 팩토리 메서드로 생성자 역할?) // todo
     @DisplayName("정적 메서드를 통해 로또 객체를 만들 수 있다.")
     @Test
     public void lotto_StaticMethod_CreateLotto() {
