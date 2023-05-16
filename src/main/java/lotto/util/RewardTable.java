@@ -4,40 +4,34 @@ import java.util.Arrays;
 
 public enum RewardTable {
 
-    MISS(0, false, 0L),
-    FIFTH_RANK(3, false, 5_000L),
-    FOURTH_RANK(4, false, 50_000L),
-    THIRD_RANK(5, false, 1_500_000L),
-    SECOND_RANK(5, true, 30_000_000L),
-    FIRST_RANK(6, false, 2_000_000_000L);
+    MISS(0,  0L),
+    FIFTH_RANK(3,  5_000L),
+    FOURTH_RANK(4,  50_000L),
+    THIRD_RANK(5,  1_500_000L),
+    SECOND_RANK(5,  30_000_000L),
+    FIRST_RANK(6,  2_000_000_000L);
 
     private int matchCount;
-    private Boolean matchBonus;
     private long reward;
 
-    RewardTable(int matchCount, Boolean matchBonus, long reward) {
+    RewardTable(int matchCount, long reward) {
         this.matchCount = matchCount;
-        this.matchBonus = matchBonus;
         this.reward = reward;
     }
 
     public static RewardTable of(int matchCount, Boolean matchBonus) {
+        if(matchCount == 5 && matchBonus) {
+            return SECOND_RANK;
+        }
+
         return Arrays.stream(RewardTable.values())
-                .filter(rank -> rank.hasRank(matchCount, matchBonus))
-                .findAny()
+                .filter(rank -> {
+                    if(matchCount == 5) return rank == THIRD_RANK;
+                    return rank.matchCount == matchCount;
+                })
+                .findFirst()
                 .orElse(RewardTable.MISS)
                 ;
-    }
-
-    private boolean hasRank(int matchCount, Boolean matchBonus) {
-        if(matchCount == SECOND_RANK.matchCount) {
-            return isBonusMatch(matchCount, matchBonus);
-        }
-        return this.matchCount == matchCount;
-    }
-
-    private boolean isBonusMatch(int matchCount, Boolean matchBonus) {
-        return this.matchCount == matchCount && this.matchBonus == matchBonus;
     }
 
     public long getRewardByTimes(long times) {
