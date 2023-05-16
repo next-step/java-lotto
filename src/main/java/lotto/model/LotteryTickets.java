@@ -1,10 +1,12 @@
 package lotto.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static lotto.constant.LotteryConstant.LOTTERY_PRICE;
+import static lotto.model.LotteryEnum.LOTTERY_PRICE;
 
 public class LotteryTickets {
 
@@ -19,7 +21,7 @@ public class LotteryTickets {
             throw new IllegalArgumentException("지불한 돈은 음수일 수 없습니다");
         }
         List<LotteryTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < money / LOTTERY_PRICE; i++) {
+        for (int i = 0; i < money / LOTTERY_PRICE.value(); i++) {
             tickets.add(LotteryTicket.of(lotteryNumberGenerator));
         }
         return new LotteryTickets(tickets);

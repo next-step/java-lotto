@@ -37,10 +37,11 @@ public class OutputView {
     }
 
     private static String getMatchString(Win win) {
+        int points = (int) win.getPoints();
         if (Win.WIN_5_BONUS.equals(win)) {
-            return (int) win.getPoints() + "개 일치, 보너스 볼 일치";
+            return points + "개 일치, 보너스 볼 일치";
         }
-        return (int) win.getPoints() + "개 일치";
+        return points + "개 일치";
     }
 
 }

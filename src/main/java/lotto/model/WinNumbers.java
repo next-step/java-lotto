@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.constant.LotteryConstant.*;
+import static lotto.model.LotteryEnum.NUMBER_PER_TICKET;
 
 public class WinNumbers {
 
@@ -14,21 +14,18 @@ public class WinNumbers {
     private LotteryNumber bonusNumber;
 
     public WinNumbers(Set<Integer> numbers) {
-        validate(numbers, null);
+        validate(numbers);
         this.numbers = numbers.stream().map(LotteryNumber::of).collect(Collectors.toSet());
     }
 
     public WinNumbers(Set<Integer> numbers, int bonusNumber) {
-        validate(numbers, bonusNumber);
+        validate(numbers);
         this.numbers = numbers.stream().map(LotteryNumber::of).collect(Collectors.toSet());
         this.bonusNumber = LotteryNumber.of(bonusNumber);
     }
 
-    private void validate(Set<Integer> numbers, Integer bonusNumber) {
-        if (numbers.size() != NUMBER_PER_TICKET ||
-                (bonusNumber != null && bonusNumber > LOTTERY_MAX) ||
-                (bonusNumber != null && bonusNumber <  LOTTERY_MIN)
-        ) {
+    private void validate(Set<Integer> numbers) {
+        if (numbers.size() != NUMBER_PER_TICKET.value()) {
             throw new IllegalArgumentException("잘못된 로또 번호 목록입니다. : " + numbers);
         }
     }
