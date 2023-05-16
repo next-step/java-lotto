@@ -14,7 +14,7 @@ class LottoBundleTest {
             "3580, 3"
     })
     void 금액별_로또개수_테스트(int money, int trial) {
-        LottoBundle lottoBundle = LottoBundle.createLottoBundle(money);
+        LottoBundle lottoBundle = LottoBundle.createByMoney(money);
         Assertions.assertThat(lottoBundle.getLottos().size()).isEqualTo(trial);
     }
 }

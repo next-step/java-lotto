@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoBundle {
+    public static final int PRICE_PER_SHEET = 1000;
 
     private List<Lotto> lottos;
 
-    public static LottoBundle createLottoBundle(Integer money) {
-        LottoBundle lottoBundle = new LottoBundle();
-        int trial = money / 1000;
+    public LottoBundle(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    public static LottoBundle createByMoney(Integer money) {
+        int trial = money / PRICE_PER_SHEET;
 
         List<Lotto> lottos = new ArrayList<>();
 
@@ -18,15 +26,6 @@ public class LottoBundle {
             lottos.add(lotto);
         }
 
-        lottoBundle.setLottos(lottos);
-        return lottoBundle;
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    public void setLottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        return new LottoBundle(lottos);
     }
 }
