@@ -33,13 +33,25 @@ class LottoWalletTest {
     }
 
     @Test
-    void 지갑_내_로또들에_대한_총_당첨금액을_알려준다() {
+    void 지갑_내_로또들이_모두_당첨_로또인_경우에_대한_총_당첨금액을_알려준다() {
         LottoWallet wallet = new LottoWallet(lottoGenerator.generateMultipleLotto(3));
         int expectedTotalWinnings = Winning.THREE.winningMoney() * 3;
 
         int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers);
 
         Assertions.assertThat(totalWinnings).isEqualTo(expectedTotalWinnings);
+    }
+
+    @Test
+    void 지갑_내_당첨로또와_당첨이아닌_로또가_섞여있는_경우_총_당첨금액을_알려준다() {
+        LottoWallet wallet = new LottoWallet(Arrays.asList(new Lotto(Arrays.asList(1, 22, 32, 24, 25, 26)),
+                new Lotto(Arrays.asList(1, 2, 23, 24, 25, 27)),
+                new Lotto(Arrays.asList(1, 2, 3, 24, 25, 28))));
+        int expectedTotalWinnings = Winning.THREE.winningMoney() * 1;
+
+        int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers);
+
+        Assertions.assertThat(totalWinnings).isEqualTo(totalWinnings);
     }
 
     @Nested

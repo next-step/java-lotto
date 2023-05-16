@@ -21,4 +21,11 @@ class WinningTest {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> Winning.winningOf(matchCount));
     }
+
+    @Test
+    void 최소_당첨금을_받을_수_있는_matchCount_를_알려준다() {
+        int minimumMatchCount = Winning.minWinningMatchCount();
+
+        Assertions.assertThat(minimumMatchCount).isEqualTo(3);
+    }
 }

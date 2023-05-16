@@ -28,6 +28,7 @@ public class LottoWallet {
     public int totalWinningMoneyOf(WinningNumbers winningNumbers) {
         return this.lottoList.stream()
                 .map(lotto -> lotto.matchCount(winningNumbers))
+                .filter(matchCount -> Winning.minWinningMatchCount() <= matchCount)
                 .mapToInt(matchCount -> Winning.winningOf(matchCount).winningMoney())
                 .sum();
     }

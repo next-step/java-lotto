@@ -2,6 +2,7 @@ package autolotto.machine.winning;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public enum Winning {
     THREE(3, 5_000),
@@ -26,7 +27,12 @@ public enum Winning {
     }
 
     public static Winning winningOf(int matchCount) {
-        return winningsMap.get(matchCount);
+        return Optional.ofNullable(winningsMap.get(matchCount))
+                .orElseThrow(() -> new IllegalArgumentException("3개 이상 매칭 될 경우 당첨금이 존재합니다."));
+    }
+
+    public static int minWinningMatchCount() {
+        return Winning.THREE.matchNumber;
     }
 
     public int winningMoney() {
