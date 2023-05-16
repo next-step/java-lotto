@@ -23,13 +23,11 @@ public class LotteryController {
 
     private List<Lottery> buyLotteries(LotteryCredit credit) {
         var manualQuantity = lotteryView.getManualQuantity();
-        var manualRows = lotteryView.getManualNumbers(manualQuantity);
-        var lotteries = concatTwoLists(
-                buyManualOfRows(manualRows),
-                buyAutoWithRemainingCredits(credit)
-        );
-        lotteryView.showBuyResult(lotteries, manualQuantity);
-        return lotteries;
+        var manualLotteries = credit.buyLotteries(lotteryView.getManualNumbers(manualQuantity));
+        var autoLotteries = buyAutoWithRemainingCredits(credit);
+        var allLotteries = concatTwoLists(manualLotteries, autoLotteries);
+        lotteryView.showBuyResult(allLotteries, new Natural(manualLotteries.size()));
+        return allLotteries;
     }
 
     private LotteryCredit chargeLotteryCredit() {
@@ -41,12 +39,6 @@ public class LotteryController {
 
     private List<Lottery> buyAutoWithRemainingCredits(LotteryCredit credit) {
         return credit.buyLotteriesAuto(credit.getBalance());
-    }
-
-    private List<Lottery> buyManualOfRows(List<LotteryRow> rows) {
-        return rows.stream()
-                .map(Lottery::new)
-                .collect(Collectors.toList());
     }
 
     private <T> List<T> concatTwoLists(List<T> list1, List<T> list2) {

@@ -35,7 +35,9 @@ public enum LotteryPlace {
     }
 
     private static LotteryPlace getPlaceIf5MatchesBasedOnBonusHit(Boolean bonusHit) {
-        if (bonusHit) return SECOND;
+        if (bonusHit) {
+            return SECOND;
+        }
         return THIRD;
     }
 

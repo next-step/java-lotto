@@ -48,6 +48,9 @@ public class LotteryStatistics {
     }
 
     public Float getRor() {
+        if (investment.value() == 0) {
+            return 0f;
+        }
         return revenue.value() / (float) investment.value();
     }
 
