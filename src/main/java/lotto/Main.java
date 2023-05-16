@@ -5,7 +5,6 @@ import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
 import java.util.List;
-import java.util.Map;
 
 public class Main {
 
@@ -20,12 +19,8 @@ public class Main {
         String stringNumbers = LottoInputView.askLastWinnerNumbers();
         WinnerNumbers winnerNumbers = new WinnerNumbers(stringNumbers);
 
-        LottoResults lottoResults = makeLottoResults(winnerNumbers, lottos, money);
-        LottoOutputView.printLottoResults(lottoResults);
-    }
-
-    private static LottoResults makeLottoResults(WinnerNumbers winnerNumbers, List<Lotto> lottoList, Money money) {
-        Map<Rank, Integer> winningStats = LottoMatcher.match(winnerNumbers, lottoList);
-        return new LottoResults(money, winningStats);
+        LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
+        LottoOutputView.printWinningStats(lottoResults);
+        LottoOutputView.printWinningRatio(lottoResults.winningRatio(Lotto.PRICE));
     }
 }

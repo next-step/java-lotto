@@ -6,27 +6,42 @@ import java.util.Map;
 
 public class LottoResults {
 
-    private final Money spentMoney;
     private final Map<Rank, Integer> winningStats;
 
-    public LottoResults(Money spentMoney, Map<Rank, Integer> winningStats) {
-        this.spentMoney = spentMoney;
+    public LottoResults(Map<Rank, Integer> winningStats) {
         this.winningStats = Collections.unmodifiableMap(winningStats);
     }
 
-    public double winningRatio() {
-        int totalReward = summingRewards();
-        return spentMoney.ratio(totalReward);
+    public double winningRatio(Money lottoPrice) {
+        Money rewards = summingRewards();
+        Money spentMoney = spentMoney(lottoPrice);
+        return rewards.divide(spentMoney);
     }
 
-    private int summingRewards() {
-        return winningStats.keySet().stream()
+    private Money summingRewards() {
+        int totalReward = winningStats.keySet().stream()
                 .mapToInt(this::ranksTotalReward)
                 .sum();
+        return new Money(totalReward);
     }
 
     private int ranksTotalReward(Rank rank) {
-        return winningStats.get(rank) * rank.reward();
+        return ranksTotalCount(rank) * rank.reward();
+    }
+
+    private int ranksTotalCount(Rank rank) {
+        return winningStats.get(rank);
+    }
+
+    private Money spentMoney(Money lottoPrice) {
+        int totalCount = totalCount();
+        return lottoPrice.multiply(totalCount);
+    }
+
+    private int totalCount() {
+        return winningStats.keySet().stream()
+                .mapToInt(this::ranksTotalCount)
+                .sum();
     }
 
     @Override

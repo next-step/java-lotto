@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
+    SEVENTH(0, 0),
+    SIXTH(1, 0),
+    FIFTH(2, 0),
     FOURTH(3, 5000),
     THIRD(4, 50000),
     SECOND(5, 1500000),
