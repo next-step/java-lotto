@@ -1,14 +1,9 @@
+package stringCalculator.controller;
+
 import stringCalculator.domain.StringCalculation;
-import stringCalculator.domain.Numbers;
-import stringCalculator.domain.Operators;
 import stringCalculator.view.InputView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class Main {
+public class StringCalculatorController {
     public static void main(String[] args) {
 
         // 입력 및 계산
@@ -23,6 +18,5 @@ public class Main {
         System.out.println(calculation.toString());
 
     }
-
 
 }
