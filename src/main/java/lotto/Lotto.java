@@ -22,18 +22,10 @@ public class Lotto {
   }
 
   public boolean has(BonusBall bonusBall) {
-    boolean has = false;
-    for (Integer number: lotto) {
-      has = bonusBall.equals(number) || has;
-    }
-    return has;
+    return lotto.stream().anyMatch(bonusBall::equals);
   }
 
   public int countMatchesNumber(WinningNumbers winningNumbers) {
-    int count = 0;
-    for (Integer number: lotto) {
-      count += winningNumbers.has(number) ? 1 : 0;
-    }
-    return count;
+    return (int) lotto.stream().filter(winningNumbers::has).count();
   }
 }

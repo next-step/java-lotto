@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Matches {
 
   MATCH_THREE(3, 5000L) {
@@ -83,11 +85,10 @@ public enum Matches {
   }
 
   public static Matches getMatches(int numberOfMatches) {
-    Matches findMatches = null;
-    for (Matches matches : Matches.values()) {
-      findMatches = matches.isMatches(numberOfMatches) ? matches : findMatches;
-    }
-    return findMatches;
+    return Arrays.stream(Matches.values())
+        .filter(matches -> matches.isMatches(numberOfMatches))
+        .findFirst()
+        .orElse(null);
   }
 
 }
