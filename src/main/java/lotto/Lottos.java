@@ -54,7 +54,7 @@ public class Lottos {
 
   private void validMinAmount(int purchaseAmount) {
     if (purchaseAmount < PURCHASE_MIN_AMOUNT) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("로또 구매 금액은 1000원 이상이어야 합니다.");
     }
   }
 
