@@ -16,6 +16,7 @@ public class InputView {
     private static final String BOUNS_LOTTO_NUMBER = "\n보너스 볼을 입력해 주세요.";
     private static final String MANUAL_LOTTO_AMOUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_LOTTO_NUMBER = "\n수동으로 구매할 번호를 입력해 주세요.";
+    private static final String SPLIT_REGEX = ", ";
     private final Scanner scanner;
 
     public InputView() {
@@ -29,11 +30,9 @@ public class InputView {
         return purchaseAmount;
     }
 
-    public String inputFirstLottoNumber() {
+    public Lotto inputWinningLottoNumber() {
         System.out.println(FIRST_LOTTO_NUMBER);
-        String lottoNumber =  scanner.nextLine();
-        validateInput(lottoNumber);
-        return lottoNumber;
+        return createLotto();
     }
 
     public String inputBonusLottoNumber() {
@@ -59,12 +58,14 @@ public class InputView {
     public List<Lotto> inputManualLottoNumber(LottoPurchase lottoPurchase) {
         System.out.println(MANUAL_LOTTO_NUMBER);
         List<Lotto> manualLotto = new ArrayList<>();
-
-        lottoPurchase.manualStream().forEach(i -> {
-            String input = scanner.nextLine();
-            String[] lottoNumbers = input.split(", ");
-            manualLotto.add(new Lotto(lottoNumbers));
-        });
+        lottoPurchase.manualStream().forEach(i -> manualLotto.add(createLotto()));
         return manualLotto;
+    }
+
+    private Lotto createLotto() {
+        String input = scanner.nextLine();
+        validateInput(input);
+        String[] lottoNumbers = input.split(SPLIT_REGEX);
+        return new Lotto(lottoNumbers);
     }
 }

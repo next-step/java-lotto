@@ -3,7 +3,6 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoPurchase;
-import lotto.domain.WinningLotto;
 import lotto.domain.number.LottoNumber;
 import lotto.util.Util;
 import lotto.view.InputView;
@@ -26,7 +25,7 @@ public class LottoMain {
         LottoGames lottoGames = new LottoGames(lottoPurchase, manualLotto);
         resultView.printLottoNumbers(lottoGames);
 
-        WinningLotto firstLotto = new WinningLotto(inputView.inputFirstLottoNumber());
+        Lotto firstLotto = inputView.inputWinningLottoNumber();
         LottoNumber bonusLottoNumber = new LottoNumber(Util.convertInt(inputView.inputBonusLottoNumber()));
 
         lottoGames.calculatePrizeCount(firstLotto, bonusLottoNumber);

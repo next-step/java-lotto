@@ -40,7 +40,7 @@ public class LottoGames {
         return calculateTotalPrize() / (double) (LOTTO_PRICE * lottoGameList.size());
     }
 
-    public void calculatePrizeCount(WinningLotto winningLotto) {
+    public void calculatePrizeCount(Lotto winningLotto) {
         lottoGameList.forEach(lotto -> {
             Rank rank = Rank.findRank(lotto.findMatchCount(winningLotto));
             int winningCount = lottoResult.getOrDefault(rank, 0);
@@ -48,7 +48,7 @@ public class LottoGames {
         });
     }
 
-    public void calculatePrizeCount(WinningLotto winningLotto, LottoNumber bonusLottoNumber) {
+    public void calculatePrizeCount(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         lottoGameList.forEach(lotto -> {
             Rank rank = Rank.findRank(lotto.findMatchCount(winningLotto), lotto.hasBonusLottoNumber(bonusLottoNumber));
             int winningCount = lottoResult.getOrDefault(rank, 0);
