@@ -9,7 +9,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LotteryStaticsTest {
 
@@ -66,7 +65,7 @@ class LotteryStaticsTest {
         int priceSum = lotteryStatics.getTotalPrice();
 
         //then
-        assertEquals(5_000 + 30_000_000, priceSum);
+        assertThat(priceSum).isEqualTo(5_000 + 30_000_000);
 
     }
 
@@ -93,6 +92,6 @@ class LotteryStaticsTest {
         //then
         double expected = (double) (30_000_000 + 5_000) / buyCount;
 
-        assertEquals(expected, lotteryStatics.getGross());
+        assertThat(lotteryStatics.getGross()).isEqualTo(expected);
     }
 }
