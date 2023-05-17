@@ -9,7 +9,7 @@ public class OutputView {
 
     public static void showLotteryCount(int manualCount, int autoCount) {
         System.out.println();
-        System.out.println("수동으로" + manualCount + "개, 자동으로 " + autoCount + "개를 구매했습니다.");
+        System.out.println("수동으로 " + manualCount + "개, 자동으로 " + autoCount + "개를 구매했습니다.");
     }
 
     public static void showLotteryTickets(LotteryTickets manual, LotteryTickets auto) {

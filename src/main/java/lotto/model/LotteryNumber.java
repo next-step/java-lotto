@@ -14,7 +14,16 @@ public class LotteryNumber {
     }
 
     public static LotteryNumber of(int number) {
-        return numberCache.computeIfAbsent(number, key -> new LotteryNumber(number));
+        return numberCache.computeIfAbsent(number, key -> {
+            validate(number);
+            return new LotteryNumber(number);
+        });
+    }
+
+    private static void validate(int number) {
+        if (number < LotteryEnum.LOTTERY_MIN.value() || number > LotteryEnum.LOTTERY_MAX.value()) {
+            throw new IllegalArgumentException("잘못된 로또 번호입니다.");
+        }
     }
 
     public int value() {

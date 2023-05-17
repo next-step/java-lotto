@@ -32,6 +32,13 @@ public class LotteryTest {
     }
 
     @Test
+    void 로또_숫자_범위를_벗어나면_에러() {
+        assertThatThrownBy(() -> LotteryNumber.of(44))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 로또 번호입니다.");
+    }
+
+    @Test
     void 로또_티켓은_중복번호를_가지지않음() {
         assertThatThrownBy(() -> new LotteryTicket(Set.of(
                 LotteryNumber.of(8),
