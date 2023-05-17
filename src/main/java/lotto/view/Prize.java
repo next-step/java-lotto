@@ -15,7 +15,7 @@ public enum Prize {
     private static final Map<Integer, Integer> PRIZE_MAP = new HashMap<>();
 
     static {
-        PRIZE_MAP.put(6, 2000000000);
+        PRIZE_MAP.put(FIRST.matchCount, FIRST.prize);
         PRIZE_MAP.put(5, 1500000);
         PRIZE_MAP.put(4, 50000);
         PRIZE_MAP.put(3, 5000);
