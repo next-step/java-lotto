@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
@@ -31,6 +32,12 @@ public class Money {
 
     public int getMoney() {
         return money;
+    }
+
+    public BigDecimal profit(BigDecimal totalPrize) {
+        BigDecimal decimalPrice = BigDecimal.valueOf(this.money);
+        BigDecimal profit = BigDecimal.ONE.add(totalPrize.subtract(decimalPrice).divide(decimalPrice, 2, BigDecimal.ROUND_FLOOR));
+        return profit;
     }
 
     @Override
