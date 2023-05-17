@@ -1,20 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoGenerator {
 
-    private static final List<LottoNumber> LOTTO_NUMBERS;
+    private static final Set<LottoNumber> LOTTO_NUMBERS;
 
     static {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int i = 1; i <= 45; i++) {
             LottoNumber lottoNumber = new LottoNumber(i);
             lottoNumbers.add(lottoNumber);
         }
-        LOTTO_NUMBERS = Collections.unmodifiableList(lottoNumbers);
+        LOTTO_NUMBERS = Collections.unmodifiableSet(lottoNumbers);
     }
 
     public static List<Lotto> generateLottos(int count) {
