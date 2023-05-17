@@ -29,7 +29,8 @@ public class LottoWallet {
         return this.lottoList.stream()
                 .map(lotto -> lotto.matchCount(winningNumbers))
                 .filter(matchCount -> Winning.minWinningMatchCount() <= matchCount)
-                .mapToInt(matchCount -> Winning.winningOf(matchCount).winningMoney())
+                // TODO : Winning.winnigOf(matchCount, true) 는 보너스볼을 받도록 인자 변경시 로직을 변경한다
+                .mapToInt(matchCount -> Winning.winningOf(matchCount, true).winningMoney())
                 .sum();
     }
 
