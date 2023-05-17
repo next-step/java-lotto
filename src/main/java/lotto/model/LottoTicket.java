@@ -24,8 +24,12 @@ public class LottoTicket {
                 .count();
     }
 
-    public Rank getRanking(List<LottoNumber> numbers) {
-        return Rank.of(matchLottoNumberCount(numbers));
+    public boolean contains(LottoNumber lottoNumber) {
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            return true;
+        }
+
+        return false;
     }
 
     private void validateCount(List<LottoNumber> lottoNumbers) {
