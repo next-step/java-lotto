@@ -7,7 +7,7 @@ public class PurchaseAmount {
     private final int manuallyPurchaseAmount;
     private final int automaticallyPurchaseAmount;
 
-    public PurchaseAmount(int manuallyPurchaseAmount, int automaticallyPurchaseAmount) {
+    private PurchaseAmount(int manuallyPurchaseAmount, int automaticallyPurchaseAmount) {
         this.manuallyPurchaseAmount = manuallyPurchaseAmount;
         this.automaticallyPurchaseAmount = automaticallyPurchaseAmount;
     }
