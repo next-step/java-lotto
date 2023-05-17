@@ -9,7 +9,7 @@ import static step1.Sign.*;
 
 public class Strategies {
 
-    public static final String SIGN_REGEX = "[+*-/]";
+    public static final String SIGN_REGEX = Sign.signRegexString();
 
     private static Map<String, CalculateStrategy> strategyMap = new HashMap<>();
     static {
@@ -20,10 +20,12 @@ public class Strategies {
     }
 
     public CalculateStrategy getStrategy(String sign) {
+        signValidationCheck(sign);
         return strategyMap.get(sign);
     }
 
     public void signValidationCheck(String sign) {
+        System.out.println("SIGN_REGEX = " + SIGN_REGEX);
         if(!sign.matches(SIGN_REGEX)){
             throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
         }

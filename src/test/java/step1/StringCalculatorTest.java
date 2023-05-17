@@ -14,7 +14,6 @@ public class StringCalculatorTest {
     @Test
     void 계산() {
         assertThat(calculator.calculate(formula)).isEqualTo(10);
-
     }
     @Test
     void 더하기() {

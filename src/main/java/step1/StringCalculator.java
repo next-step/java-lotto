@@ -4,8 +4,6 @@ import step1.CalculateStratety.CalculateStrategy;
 
 public class StringCalculator {
 
-
-
     Strategies strategies = new Strategies();
     int result = 0;
 
@@ -13,9 +11,7 @@ public class StringCalculator {
 
         result = formula.pollNumber();
         while (formula.peek() != null){
-            String sign = formula.poll();
-            strategies.signValidationCheck(sign);
-            CalculateStrategy strategy = strategies.getStrategy(sign);
+            CalculateStrategy strategy = strategies.getStrategy(formula.poll());
             result = strategy.go(result, formula.pollNumber());
         }
 
