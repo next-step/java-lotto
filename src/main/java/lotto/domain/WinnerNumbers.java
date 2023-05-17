@@ -16,10 +16,19 @@ public class WinnerNumbers {
     }
 
     public LottoResults matchLottos(List<Lotto> lottos) {
-        Map<Rank, Integer> winningStats = new HashMap<>();
-        Arrays.stream(Rank.values()).forEach(rank -> winningStats.put(rank, 0));
-        lottos.forEach(lotto -> this.markResult(winningStats, lotto));
-        return new LottoResults(winningStats);
+        Map<Rank, Integer> matchStats = new HashMap<>();
+        initializeMatchStats(matchStats);
+        markResults(matchStats, lottos);
+        return new LottoResults(matchStats);
+    }
+
+    private void initializeMatchStats(Map<Rank, Integer> matchingStats) {
+        Arrays.stream(Rank.values())
+                .forEach(rank -> matchingStats.put(rank, 0));
+    }
+
+    private void markResults(Map<Rank, Integer> matchStats, List<Lotto> lottos) {
+        lottos.forEach(lotto -> this.markResult(matchStats, lotto));
     }
 
     private void markResult(Map<Rank, Integer> winningStats, Lotto lotto) {
