@@ -12,7 +12,8 @@ public class Main {
         int amount = LottoInputView.askBuyAmount();
         Money money = new Money(amount);
 
-        List<Lotto> lottos = LottoShop.buyLottos(money);
+        int buyCount = money.buyCount(Lotto.PRICE);
+        List<Lotto> lottos = LottoGenerator.generateLottos(buyCount);
         LottoOutputView.printLottos(lottos);
 
         String stringNumbers = LottoInputView.askLastWinnerNumbers();

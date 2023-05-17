@@ -1,18 +1,35 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoGenerator {
 
-    public static Lotto generate() {
-        Random random = new Random();
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        while (lottoNumbers.size() < 6) {
-            int number = random.nextInt(45) + 1;
-            lottoNumbers.add(new LottoNumber(number));
+    private static final List<LottoNumber> LOTTO_NUMBERS_POOL;
+
+    static {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            LottoNumber lottoNumber = new LottoNumber(i);
+            lottoNumbers.add(lottoNumber);
         }
-        return new Lotto(lottoNumbers);
+        LOTTO_NUMBERS_POOL = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public static List<Lotto> generateLottos(int buyCount) {
+        List<LottoNumber> poolCopy = new ArrayList<>(LOTTO_NUMBERS_POOL);
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < buyCount; i++) {
+            Lotto lotto = generateLotto(poolCopy);
+            lottos.add(lotto);
+        }
+        return lottos;
+    }
+
+    private static Lotto generateLotto(List<LottoNumber> lottoNumbersPool) {
+        Collections.shuffle(lottoNumbersPool);
+        List<LottoNumber> lotto = lottoNumbersPool.subList(0, 6);
+        return new Lotto(lotto);
     }
 }

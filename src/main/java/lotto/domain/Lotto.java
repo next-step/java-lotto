@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class Lotto {
 
+    public static final Money PRICE = new Money(1000);
+
     private final Set<LottoNumber> numbers;
 
     Lotto(String lottoNumbers) {
