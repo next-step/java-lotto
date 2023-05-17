@@ -1,6 +1,7 @@
 package step2;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class LottoGameTest {
         * */
     }
 
+    @DisplayName("로또 한장값(1000) 이하로 입력시 예외 발생")
     @Test
     void 로또_한장값_이하로_입력() {
         assertThatIllegalArgumentException()
@@ -44,12 +46,14 @@ public class LottoGameTest {
                 }).withMessageMatching("1000원 이하로 입력.");
     }
 
+    @DisplayName("입력한 가격만큼 로또 n개 생성")
     @Test
     void 로또_n장() {
         List<Ticket> tickets = lottoGame.makeTickets(7000);
         assertThat(tickets).hasSize(7);
     }
 
+    @DisplayName("입력한 금액 대비 얻은 수익률 구하기")
     @Test
     void 수익률() {
         Map<Integer, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6");

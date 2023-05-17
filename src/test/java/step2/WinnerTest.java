@@ -1,6 +1,7 @@
 package step2;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class WinnerTest {
         tickets.add(new Ticket(Arrays.asList(3, 5, 6, 33, 35, 43)));
         tickets.add(new Ticket(Arrays.asList(2, 4, 5, 6, 31, 41)));
     }
-    
+
+    @DisplayName("로또 한장당 숫자 n개 당첨 개수")
     @Test
     void 당첨_개수() {
         Map<Integer, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6");

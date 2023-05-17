@@ -18,7 +18,7 @@ public class Ticket {
     private List<Integer> createTicket() {
 
         Collections.shuffle(lottoNumber);
-        numbers = new ArrayList<>(lottoNumber.subList(0,6));
+        numbers = new ArrayList<>(lottoNumber.subList(0,NUMBER_LIMIT));
         Collections.sort(numbers);
 
         return numbers;
