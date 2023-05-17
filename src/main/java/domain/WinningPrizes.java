@@ -5,11 +5,11 @@ import java.util.Map;
 
 public enum WinningPrizes {
     MISS(0, 0),
-    FIFTH_PRIZE(3, 5000),
-    FOURTH_PRIZE(4, 50000),
-    THIRD_PRIZE(5, 1500000),
-    SECOND_PRIZE(5, 3000000),
-    FIRST_PRIZE(6, 2000000000);
+    FIFTH_PRIZE(3, 5_000),
+    FOURTH_PRIZE(4, 50_000),
+    THIRD_PRIZE(5, 1_500_000),
+    SECOND_PRIZE(5, 3_000_000),
+    FIRST_PRIZE(6, 2_000_000_000);
 
     public static final int OFFSET = 3;
 
