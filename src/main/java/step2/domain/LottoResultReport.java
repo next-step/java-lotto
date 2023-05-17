@@ -13,9 +13,7 @@ public class LottoResultReport {
     }
 
     public int recordRank(Rank rank) {
-        Integer value = lottoResultReport.getOrDefault(rank, 0);
-        lottoResultReport.put(rank, value + 1);
-        return lottoResultReport.get(rank);
+        return lottoResultReport.compute(rank, (key, value) -> value == null ? 1 : value + 1);
     }
 
     public int findReportByMatchCount(Rank rank) {

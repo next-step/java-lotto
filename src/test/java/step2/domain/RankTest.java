@@ -12,7 +12,7 @@ class RankTest {
     @ParameterizedTest
     @CsvSource(value = {"6:2000000000", "5:1500000", "4:50000", "3:5000", "2:0", "1:0"}, delimiter = ':')
     public void 당첨금_확인(int rank, long prizeMoney) throws Exception {
-        assertThat(Rank.toPrizeMoney(rank).prizeMoney()).isEqualTo(prizeMoney);
+        assertThat(Rank.toPrizeMoney(rank, false).prizeMoney()).isEqualTo(prizeMoney);
     }
 
 }

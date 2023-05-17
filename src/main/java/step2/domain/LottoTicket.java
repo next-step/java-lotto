@@ -34,11 +34,7 @@ public class LottoTicket {
                 .filter(i -> winningTicket.isContain(i))
                 .count();
 
-       if(count == 5 && isContain(bonusNumber)) {
-           return Rank.SECOND;
-       }
-
-       return Rank.toPrizeMoney(count);
+        return Rank.toPrizeMoney(count, isContain(bonusNumber));
     }
 
     public String printTicket() {
