@@ -85,29 +85,29 @@ public class WinningTest {
     );
   }
 
-  private Lotto makeLotto_11_12_13_15_18_19() {
+  private AutoLotto makeLotto_11_12_13_15_18_19() {
     return makeLotto(11, 12, 13, 15, 18, 19);
   }
 
-  private Lotto makeLotto(int value1, int value2, int value3, int value4, int value5, int value6) {
+  private AutoLotto makeLotto(int value1, int value2, int value3, int value4, int value5, int value6) {
     return makeLotto(Arrays.asList(value1, value2, value3, value4, value5, value6));
   }
 
-  private Lotto makeLotto(List<Integer> inputLotto) {
+  private AutoLotto makeLotto(List<Integer> inputLotto) {
     List<LottoNo> lotto = new LinkedList<>();
     for (Integer number : inputLotto) {
       lotto.add(LottoNo.of(number));
     }
-    return new Lotto(lotto);
+    return new AutoLotto(lotto);
   }
 
   @Test
   void 당첨번호를입력하면일치하는갯수를찾는다() {
-    Lotto lotto1 = makeLotto(1, 2, 3, 4, 5, 6);
+    AutoLotto lotto = makeLotto(1, 2, 3, 4, 5, 6);
 
     WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 44, 33, 22");
 
-    assertThat(lotto1.countMatchesNumber(winningNumbers)).isEqualTo(3);
+    assertThat(lotto.countMatchesNumber(winningNumbers)).isEqualTo(3);
   }
 
   @Test

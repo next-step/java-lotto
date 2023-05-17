@@ -29,14 +29,6 @@ public class LottoNo implements Comparable<LottoNo>{
     return 1 <= lottoNumber && lottoNumber <= 45;
   }
 
-  public boolean has(BonusBall bonusBall) {
-    return bonusBall.equals(lottoNumber);
-  }
-
-  public boolean has(WinningNumbers winningNumbers) {
-    return winningNumbers.has(this);
-  }
-
   @Override
   public String toString() {
     return String.valueOf(lottoNumber);

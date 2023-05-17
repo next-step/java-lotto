@@ -1,7 +1,8 @@
 package view;
 
-import java.util.List;
-import lotto.Lotto;
+import lotto.AutoLotto;
+import lotto.Lottos;
+import lotto.ManualLotto;
 import lotto.Matches;
 import lotto.MatchesStatus;
 
@@ -11,17 +12,25 @@ public class OutputView {
     throw new AssertionError();
   }
 
-  public static void println() {
-    System.out.println();
-  }
-
   public static void purchasePrice() {
     System.out.println("구입금액을 입력해 주세요.");
   }
 
-  public static void lottos(List<Lotto> lottos) {
-    System.out.println(lottos.size() + "개를 구매했습니다.");
-    for (Lotto lotto : lottos) {
+  public static void manualPurchaseCount() {
+    System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+  }
+
+  public static void manualPurchaseLottoNumbers() {
+    System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+  }
+
+  public static void lottos(Lottos lottos) {
+    System.out.println("\n수동으로 " + lottos.getManualLottos().size() + "장,"
+        + "자동으로" + lottos.getAutoLottos().size()+ "개를 구매했습니다.");
+    for (ManualLotto manualLotto : lottos.getManualLottos()) {
+      System.out.println(manualLotto.toString());
+    }
+    for (AutoLotto lotto : lottos.getAutoLottos()) {
       System.out.println(lotto.toString());
     }
   }

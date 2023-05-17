@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.Objects;
-
 public class BonusBall {
 
   private final LottoNo bonusNumber;
@@ -17,7 +15,7 @@ public class BonusBall {
     return bonusNumber;
   }
 
-  public boolean equals(Integer number) {
-    return Objects.equals(bonusNumber, LottoNo.of(number));
+  public boolean equals(LottoNo lottoNo) {
+    return bonusNumber.equals(lottoNo);
   }
 }

@@ -7,40 +7,42 @@ import java.util.List;
 
 public class Lottos {
 
-  private final List<Lotto> lottos;
+  private final List<AutoLotto> autoLottos;
+  private List<ManualLotto> manualLottos;
+
   private static final int PURCHASE_MIN_AMOUNT = 1000;
   private static final int LOTTO_PRICE = 1000;
 
   public Lottos() {
-    lottos = new LinkedList<>();
+    autoLottos = new LinkedList<>();
+    manualLottos = new LinkedList<>();
   }
 
-  public Lottos(List<Lotto> lottos) {
-    this.lottos = lottos;
+  public Lottos(List<AutoLotto> lottos) {
+    this.autoLottos = lottos;
   }
 
-  public List<Lotto> buy(int purchaseAmount) {
+  public void buyAutoLotto(int purchaseAmount, int manualPurchaseAmount) {
     validMinAmount(purchaseAmount);
-    int purchaseNumber = purchaseAmount / LOTTO_PRICE;
+    validManualAmount(purchaseAmount, manualPurchaseAmount * LOTTO_PRICE);
+    int purchaseNumber = (purchaseAmount / LOTTO_PRICE) - manualPurchaseAmount;
 
     LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
     for (int i = 0; i < purchaseNumber; i++) {
-      lottos.add(new Lotto(lottoNumberGenerator.create()));
+      autoLottos.add(new AutoLotto(lottoNumberGenerator.create()));
     }
-
-    return this.lottos;
   }
 
   public MatchesStatus findWinner(WinningNumbers winningNumbers, BonusBall bonusBall) {
     MatchesStatus matchesStatus = new MatchesStatus();
-    for (Lotto lotto : lottos) {
+    for (AutoLotto lotto : autoLottos) {
       matchesStatus.addMatchesCount(findMatches(lotto, winningNumbers, bonusBall));
     }
     matchesStatus.findRateOfReturn(this);
     return matchesStatus;
   }
 
-  private Matches findMatches(Lotto lotto, WinningNumbers winningNumbers, BonusBall bonusBall) {
+  private Matches findMatches(AutoLotto lotto, WinningNumbers winningNumbers, BonusBall bonusBall) {
     int matchesNumber = lotto.countMatchesNumber(winningNumbers);
     if (isFiveMatches(matchesNumber) && lotto.has(bonusBall)) {
       return Matches.MATCH_FIVE_AND_BONUS;
@@ -58,8 +60,26 @@ public class Lottos {
     }
   }
 
+  private void validManualAmount(int purchaseAmount, int manualPurchaseAmount) {
+    if (manualPurchaseAmount > purchaseAmount) {
+      throw new IllegalArgumentException("수동 구매는 로또 구매 개수보다 클 수 없습니다.");
+    }
+  }
+
   public BigDecimal findRateOfReturn(BigDecimal totalReturnAmount) {
-    return totalReturnAmount.divide(new BigDecimal(lottos.size() * LOTTO_PRICE), 2,
+    return totalReturnAmount.divide(new BigDecimal(autoLottos.size() * LOTTO_PRICE), 2,
         RoundingMode.FLOOR);
+  }
+
+  public void addManualLotto(ManualLotto manualLotto) {
+    manualLottos.add(manualLotto);
+  }
+
+  public List<AutoLotto> getAutoLottos() {
+    return autoLottos;
+  }
+
+  public List<ManualLotto> getManualLottos() {
+    return manualLottos;
   }
 }
