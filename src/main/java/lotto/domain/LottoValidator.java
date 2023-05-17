@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public class LottoValidator {
 
-    public static void validLottoNumbers(Collection<LottoNumber> lottoNumbers) {
+    static void validLottoNumbers(Collection<LottoNumber> lottoNumbers) {
         if (lottoNumbers == null) {
             throw new IllegalArgumentException("null은 사용할 수 없습니다.");
         }

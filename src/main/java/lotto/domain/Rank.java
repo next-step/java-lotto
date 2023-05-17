@@ -19,14 +19,14 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public static Rank findByMatchCount(int matchCount) {
+    static Rank findByMatchCount(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("해당 매치 카운트와 일치하는 등수가 없습니다."));
     }
 
-    public int totalReward(int count) {
+    int totalReward(int count) {
         return this.reward * count;
     }
 

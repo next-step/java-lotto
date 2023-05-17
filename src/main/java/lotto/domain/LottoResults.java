@@ -8,7 +8,7 @@ public class LottoResults {
 
     private final Map<Rank, Integer> matchingStats;
 
-    public LottoResults(Map<Rank, Integer> matchingStats) {
+    LottoResults(Map<Rank, Integer> matchingStats) {
         this.matchingStats = Collections.unmodifiableMap(matchingStats);
     }
 

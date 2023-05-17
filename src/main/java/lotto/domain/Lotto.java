@@ -17,7 +17,7 @@ public class Lotto {
         this(new HashSet<>(lottoNumbers));
     }
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
+    private Lotto(Set<LottoNumber> lottoNumbers) {
         LottoValidator.validLottoNumbers(lottoNumbers);
         this.numbers = Collections.unmodifiableSet(lottoNumbers);
     }
@@ -28,7 +28,7 @@ public class Lotto {
                 .collect(Collectors.toSet());
     }
 
-    public int matchCount(Lotto lotto) {
+    int matchCount(Lotto lotto) {
         return (int) this.numbers.stream()
                 .filter(lotto::hasNumber)
                 .count();

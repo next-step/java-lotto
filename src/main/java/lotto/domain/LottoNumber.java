@@ -6,7 +6,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    LottoNumber(int number) {
         if (number < 1 || 45 < number) {
             throw new IllegalArgumentException("1부터 45의 숫자만 생성 가능합니다.");
         }
