@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lottery {
+    public static final int LENGTH = 6;
+
     private final List<LotteryNumber> numbers;
 
     private Lottery(List<LotteryNumber> numbers) {
@@ -20,7 +22,7 @@ public class Lottery {
     }
 
     private void validate(List<LotteryNumber> numbers) {
-        if (numbers.size() != Lotteries.LOTTERY_LENGTH) {
+        if (numbers.size() != Lottery.LENGTH) {
             throw new IllegalArgumentException(String.format("%s is not valid ", numbers));
         }
     }

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LotteriesTest {
     int defaultNumberOfLottery = 3;
-    int defaultPrice = defaultNumberOfLottery * Lotteries.LOTTERY_PRICE;
+    int defaultPrice = defaultNumberOfLottery * LotteryPrice.VALUE;
     LotteryStrategy defaultLotteryStrategy;
     List<LotteryNumber> defaultLotteryNumbers;
     Lottery defaultLottery;

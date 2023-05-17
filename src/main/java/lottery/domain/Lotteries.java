@@ -5,11 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotteries {
-    public static final int LOTTERY_PRICE = 1000;
-    public static final int LOTTERY_LENGTH = 6;
-    private static final int MATCHED = 1;
-    private static final int NOT_MATCHED = 0;
-
     public static List<Lottery> buy(Integer price, LotteryStrategy lotteryStrategy) {
         int number = calculateNumberOfLottery(price);
         List<Lottery> lotteries = new ArrayList<>();
@@ -20,13 +15,13 @@ public class Lotteries {
     }
 
     private static int calculateNumberOfLottery(Integer price) {
-        return price / LOTTERY_PRICE;
+        return price / LotteryPrice.VALUE;
     }
 
     public static LotteryResult calculateResult(List<Lottery> lotteries, Lottery winLottery) {
         List<Integer> numberOfMatchNumbers = lotteries.stream().map((lottery) -> calculateMatchCount(lottery, winLottery)).collect(Collectors.toList());
         List<Integer> winLotteryNumbers = new ArrayList<>();
-        for (int i = 0; i <= Lotteries.LOTTERY_LENGTH; i++) {
+        for (int i = 0; i <= Lottery.LENGTH; i++) {
             winLotteryNumbers.add(0);
         }
         for (int number : numberOfMatchNumbers) {
@@ -36,21 +31,11 @@ public class Lotteries {
     }
 
     private static int calculateMatchCount(Lottery lottery, Lottery winLottery) {
-        int count = 0;
         List<LotteryNumber> lotteryNumbers = lottery.numbers();
         List<LotteryNumber> winLotteryNumbers = winLottery.numbers();
 
-        for (LotteryNumber lotteryNumber : lotteryNumbers) {
-            count += calculateMatchCount(winLotteryNumbers, lotteryNumber);
-        }
-
-        return count;
-    }
-
-    private static int calculateMatchCount(List<LotteryNumber> winLotteryNumbers, LotteryNumber lotteryNumber) {
-        if (winLotteryNumbers.contains(lotteryNumber)) {
-            return MATCHED;
-        }
-        return NOT_MATCHED;
+        return (int) lotteryNumbers.stream()
+                .filter(winLotteryNumbers::contains)
+                .count();
     }
 }

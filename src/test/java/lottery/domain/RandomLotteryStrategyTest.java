@@ -18,10 +18,10 @@ class RandomLotteryStrategyTest {
     @Test
     void generate() {
         List<LotteryNumber> numbers = randomLotteryStrategy.generate().numbers();
-        assertThat(numbers).hasSize(Lotteries.LOTTERY_LENGTH);
+        assertThat(numbers).hasSize(Lottery.LENGTH);
 
         for(LotteryNumber number : numbers) {
-            assertThat(number.value()).isBetween(LotteryNumber.MIN_LOTTERY_NUMBER, LotteryNumber.MAX_LOTTERY_NUMBER);
+            assertThat(number.value()).isBetween(LotteryNumber.MIN, LotteryNumber.MAX);
         }
     }
 }

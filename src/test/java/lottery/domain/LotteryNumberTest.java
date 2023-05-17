@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LotteryNumberTest {
     int defaultValue = 3;
-    int underValue = LotteryNumber.MIN_LOTTERY_NUMBER - 1;
-    int overValue = LotteryNumber.MAX_LOTTERY_NUMBER + 1;
+    int underValue = LotteryNumber.MIN - 1;
+    int overValue = LotteryNumber.MAX + 1;
     LotteryNumber defaultLotteryNumber;
 
     @BeforeEach

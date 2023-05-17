@@ -1,8 +1,8 @@
 package lottery.domain;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {
-    public static final int MAX_LOTTERY_NUMBER = 45;
-    public static final int MIN_LOTTERY_NUMBER = 1;
+    public static final int MAX = 45;
+    public static final int MIN = 1;
 
     private final int value;
 
@@ -12,7 +12,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     }
 
     private void validate(int value) {
-        if (value < LotteryNumber.MIN_LOTTERY_NUMBER || value > LotteryNumber.MAX_LOTTERY_NUMBER) {
+        if (value < LotteryNumber.MIN || value > LotteryNumber.MAX) {
             throw new IllegalArgumentException(String.format("%s is not valid ", value));
         }
     }
