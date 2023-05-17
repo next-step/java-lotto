@@ -22,7 +22,7 @@ public enum WinningPrizes {
     }
 
     private int rank;
-    private int prizeMoney;
+    private final int prizeMoney;
 
     WinningPrizes(int rank, int prizeMoney) {
         this.rank = rank;
