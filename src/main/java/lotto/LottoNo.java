@@ -1,10 +1,24 @@
 package lotto;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LottoNo implements Comparable<LottoNo>{
 
   private final Integer lottoNumber;
+  private static final Map<Integer, LottoNo> lottoNumberMap = new HashMap<>();
 
-  public LottoNo(Integer lottoNumber) {
+  static {
+    for (int i = 1; i <= 45; i++) {
+      lottoNumberMap.put(i, new LottoNo(i));
+    }
+  }
+
+  public static LottoNo of(Integer lottoNumber) {
+    return lottoNumberMap.get(lottoNumber);
+  }
+
+  private LottoNo(Integer lottoNumber) {
     if (!valid(lottoNumber)) {
       throw new IllegalArgumentException("로또 번호는 1부터 45사이의 숫자여야합니다.");
     }
@@ -20,7 +34,7 @@ public class LottoNo implements Comparable<LottoNo>{
   }
 
   public boolean has(WinningNumbers winningNumbers) {
-    return winningNumbers.has(lottoNumber);
+    return winningNumbers.has(this);
   }
 
   @Override

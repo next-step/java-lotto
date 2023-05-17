@@ -11,7 +11,7 @@ public class LottoNumberGenerator {
 
   public LottoNumberGenerator() {
     for (int i = 1; i <= 45; i++) {
-      lottoNumber.add(new LottoNo(i));
+      lottoNumber.add(LottoNo.of(i));
     }
   }
 

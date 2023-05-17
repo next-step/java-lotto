@@ -25,9 +25,11 @@ public class LottoTest {
   }
 
   @Test
-  void 로또번호는1부터45사이의숫자여야한다() {
-    new LottoNo(4);
-    assertThatIllegalArgumentException().isThrownBy(() -> new LottoNo(47));
+  void 로또번호는1부터45사이의숫자여야한다_정적팩토리메소드테스트() {
+    assertAll(
+      () -> assertThat(LottoNo.of(5)).isEqualTo(LottoNo.of(5)),
+      () -> assertThat(LottoNo.of(46)).isNull()
+    );
   }
 
   @Test

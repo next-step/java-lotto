@@ -40,7 +40,7 @@ public class WinningTest {
   @Test
   void 보너스볼을입력한다() {
     BonusBall bonusBall = new BonusBall(new WinningNumbers("1,2,3,4,5,6"), 7);
-    assertThat(bonusBall.getBonusNumber()).isEqualTo(7);
+    assertThat(bonusBall.getBonusNumber()).isEqualTo(LottoNo.of(7));
   }
 
   @Test
@@ -96,7 +96,7 @@ public class WinningTest {
   private Lotto makeLotto(List<Integer> inputLotto) {
     List<LottoNo> lotto = new LinkedList<>();
     for (Integer number : inputLotto) {
-      lotto.add(new LottoNo(number));
+      lotto.add(LottoNo.of(number));
     }
     return new Lotto(lotto);
   }
