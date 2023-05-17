@@ -20,7 +20,15 @@ public class Money {
     public double ratio(Money other) {
         return (double) this.amount / other.amount;
     }
-    
+
+    public int amount() {
+        return this.amount;
+    }
+
+    public boolean isMultiple(int amount) {
+        return amount % this.amount == 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
