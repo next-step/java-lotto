@@ -16,15 +16,18 @@ public class LottoTest {
   }
 
   @Test
-  void 로또번호는1부터45사이의숫자여야한다_로또는1장당6개의번호를랜덤으로생성한다() {
+  void 로또는1장당6개의번호를랜덤으로생성한다() {
     LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
     Lotto lottoNumber = new Lotto(lottoNumberGenerator.create());
 
-    assertAll(
-        () -> assertThat(lottoNumber.getLotto()).hasSize(6),
-        () -> assertThat(lottoNumber.getLotto()).allMatch(number -> number < 46 && number > 0)
-    );
+    assertThat(lottoNumber.getLotto()).hasSize(6);
+  }
+
+  @Test
+  void 로또번호는1부터45사이의숫자여야한다() {
+    new LottoNo(4);
+    assertThatIllegalArgumentException().isThrownBy(() -> new LottoNo(47));
   }
 
   @Test

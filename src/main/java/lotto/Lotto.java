@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Lotto {
 
-  private final List<Integer> lotto;
+  private final List<LottoNo> lotto;
 
-  public Lotto(List<Integer> lotto) {
+  public Lotto(List<LottoNo> lotto) {
     this.lotto = lotto;
     Collections.sort(this.lotto);
   }
 
-  public List<Integer> getLotto() {
+  public List<LottoNo> getLotto() {
     return lotto;
   }
 
@@ -22,10 +22,10 @@ public class Lotto {
   }
 
   public boolean has(BonusBall bonusBall) {
-    return lotto.stream().anyMatch(bonusBall::equals);
+    return lotto.stream().anyMatch(lottoNo -> lottoNo.has(bonusBall));
   }
 
   public int countMatchesNumber(WinningNumbers winningNumbers) {
-    return (int) lotto.stream().filter(winningNumbers::has).count();
+    return (int) lotto.stream().filter(lottoNo -> lottoNo.has(winningNumbers)).count();
   }
 }

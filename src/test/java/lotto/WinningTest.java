@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class WinningTest {
@@ -88,7 +90,15 @@ public class WinningTest {
   }
 
   private Lotto makeLotto(int value1, int value2, int value3, int value4, int value5, int value6) {
-    return new Lotto(Arrays.asList(value1, value2, value3, value4, value5, value6));
+    return makeLotto(Arrays.asList(value1, value2, value3, value4, value5, value6));
+  }
+
+  private Lotto makeLotto(List<Integer> inputLotto) {
+    List<LottoNo> lotto = new LinkedList<>();
+    for (Integer number : inputLotto) {
+      lotto.add(new LottoNo(number));
+    }
+    return new Lotto(lotto);
   }
 
   @Test
