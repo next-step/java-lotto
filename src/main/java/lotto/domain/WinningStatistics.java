@@ -7,39 +7,36 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningStatistics {
-    private static final int MINIMUM_MATCH_COUNT = 3;
-    private static final int BASIC_REWARD_SET_ZERO = 0;
+    private static final Long BASIC_REWARD_SET_ZERO = 0L;
 
-    private List<Integer> lottoResultNumbers;
-    private Map<RewardTable, Integer> resultGameStatistics;
-    private int lottoBonusNumber;
+    private List<LottoNumber> lottoResultNumbers;
+    private Map<RewardTable, Long> resultGameStatistics;
+    private LottoNumber lottoBonusNumber;
 
-    public WinningStatistics(List<Integer> lottoResultNumbers, int lottoBonusNumber) {
-        makeResultMap();
+    public WinningStatistics(List<LottoNumber> lottoResultNumbers, LottoNumber lottoBonusNumber) {
+        initRewardMap();
 
         this.lottoResultNumbers = lottoResultNumbers;
         this.lottoBonusNumber = lottoBonusNumber;
     }
 
-    public Map<RewardTable, Integer> resultLottoGame(List<LottoGame> lottoGames) {
+    public Map<RewardTable, Long> resultLottoGame(List<LottoTicket> lottoTickets) {
 
-        for(LottoGame lottoGame : lottoGames) {
-            int matchCount = lottoGame.matchLottoNumberCount(this.lottoResultNumbers);
-            addWinningStatistics(matchCount, lottoGame.isBonusBall(matchCount, this.lottoBonusNumber));
+        for(LottoTicket lottoTicket : lottoTickets) {
+            int matchCount = lottoTicket.matchLottoNumberCount(this.lottoResultNumbers);
+            addWinningStatistics(matchCount, lottoTicket.hasBonusBall(this.lottoBonusNumber));
         }
 
         return this.resultGameStatistics;
     }
 
     private void addWinningStatistics(int matchCount, Boolean isBouns) {
-        if (matchCount >= MINIMUM_MATCH_COUNT) {
-            this.resultGameStatistics.put(RewardTable.of(matchCount, isBouns)
-                    , this.resultGameStatistics.getOrDefault(RewardTable.of(matchCount, isBouns), 0) + 1);
-        }
+        this.resultGameStatistics.put(RewardTable.of(matchCount, isBouns)
+                , this.resultGameStatistics.getOrDefault(RewardTable.of(matchCount, isBouns), 0L) + 1);
     }
 
-    private void makeResultMap() {
-        Map<RewardTable, Integer> map = new HashMap<>();
+    private void initRewardMap() {
+        Map<RewardTable, Long> map = new HashMap<>();
 
         RewardTable[] rewardTables = RewardTable.values();
 

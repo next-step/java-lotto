@@ -1,11 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.util.LottoUtils;
-import lotto.util.RewardTable;
+import lotto.util.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -22,29 +22,37 @@ public class LottoController {
     public static void lotto() {
 
         int lottoBuyPrice = Integer.parseInt(inputView.setBuyLottoPrice());
+        int manualLottoCount = Integer.parseInt(inputView.setNoAutoBuyLottoCount());
+
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        if(manualLottoCount != 0) {
+            List<String> manualLottoNumbers = inputView.setNoAutoLottoNumbers(manualLottoCount);
+
+            for (String numbers : manualLottoNumbers) {
+                manualTickets.add(new LottoTicket(LottoGenerate.initLottoNumbers(numbers)));
+            }
+        }
+
         int lottoGameCount = LottoUtils.getLottoGameCount(lottoBuyPrice);
 
-        Lotto lotto = new Lotto();
-        lotto.buyLottoGames(lottoGameCount);
+        Lottos lottos = new Lottos(LottoShop.sell((lottoGameCount - manualLottoCount), manualTickets));
 
-        Lottos lottos = new Lottos(lotto.getLottoGames());
+        resultView.showBuyLotto(manualLottoCount, lottoGameCount - manualLottoCount);
+        resultView.showMyLottoGameList(lottos.getTickets());
 
-        resultView.showBuyLotto(lottoGameCount);
-        resultView.showMyLottoGameList(lottos.getLottos());
-
-        List<Integer> lottoResultNumbers = LottoUtils.lottoResultNumberList(inputView.setLottoResultNumber());
+        List<LottoNumber> lottoResultNumbers = LottoGenerate.initLottoNumbers(inputView.setLottoResultNumber());
 
         int lottoBonusNumber = inputView.setLottoBonusNumber();
-        while(LottoUtils.isResultNumContainBonusNum(lottoResultNumbers, lottoBonusNumber)){
+        while(lottoResultNumbers.contains(lottoBonusNumber)){
             lottoBonusNumber = inputView.setLottoBonusNumber();
         }
 
-        WinningStatistics winningStatistics = new WinningStatistics(lottoResultNumbers, lottoBonusNumber);
+        WinningStatistics winningStatistics = new WinningStatistics(lottoResultNumbers, new LottoNumber(lottoBonusNumber));
 
-        Map<RewardTable, Integer> resultGameStatistics = winningStatistics.resultLottoGame(lottos.getLottos());
+        Map<RewardTable, Long> resultGameStatistics = winningStatistics.resultLottoGame(lottos.getTickets());
 
         Reward reward = new Reward();
-        int totalMatchPrice = reward.sumTotalMatchPrice(resultGameStatistics);
+        long totalMatchPrice = reward.sumTotalMatchPrice(resultGameStatistics);
         double rateOfReturn = LottoUtils.calRateOfReturn(totalMatchPrice, lottoBuyPrice);
 
         resultView.resultGame(resultGameStatistics, rateOfReturn);

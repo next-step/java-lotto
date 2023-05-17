@@ -15,11 +15,11 @@ public class RewardTest {
     @DisplayName("로또 게임 맞춘 전체 금액을 응답한다.")
     @Test
     public void rewardTest_게임_정답_전체금액_테스트() {
-        Map<RewardTable, Integer> resultGameMap = new HashMap<>();
-        resultGameMap.put(RewardTable.of(3, null), 2);    //  10_000
-        resultGameMap.put(RewardTable.of(4, null), 2);    //  100_000
-        resultGameMap.put(RewardTable.of(5, false), 1);   //  1_500_000
-        resultGameMap.put(RewardTable.of(6, null), 1);    //  2_000_000_000
+        Map<RewardTable, Long> resultGameMap = new HashMap<>();
+        resultGameMap.put(RewardTable.of(3, null), 2L);    //  10_000
+        resultGameMap.put(RewardTable.of(4, null), 2L);    //  100_000
+        resultGameMap.put(RewardTable.of(5, false), 1L);   //  1_500_000
+        resultGameMap.put(RewardTable.of(6, null), 1L);    //  2_000_000_000
 
         assertThat(new Reward().sumTotalMatchPrice(resultGameMap)).isEqualTo(2_001_610_000);
     }
