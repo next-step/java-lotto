@@ -27,4 +27,9 @@ public class LottoTicket {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
     }
+
+    public LottoTicket plus(LottoTicket other) {
+        this.lottos.addAll(other.lottos);
+        return this;
+    }
 }

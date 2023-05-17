@@ -2,21 +2,23 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.Match;
+import lotto.domain.PurchaseAmount;
 import lotto.dto.LottoInfo;
 import lotto.dto.LottoTicketInfo;
 
 import java.util.List;
-import java.util.Set;
 
 public class ResultView {
 
     private static final String NORMAL_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String BONUS_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
+    private static final String PURCHASE_RESULT_FORMAT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    public static void printLottoTicketInfo(LottoTicketInfo ticketInfo) {
+    public static void printLottoTicketInfo(PurchaseAmount purchaseAmount, LottoTicketInfo ticketInfo) {
         List<LottoInfo> tickets = ticketInfo.getTicketInfo();
-        int size = tickets.size();
-        System.out.println(size + " 개를 구매했습니다.");
+        String purchasedInfo = String.format(PURCHASE_RESULT_FORMAT, purchaseAmount.getManuallyPurchaseAmount(),
+                purchaseAmount.getAutomaticallyPurchaseAmount());
+        System.out.println(purchasedInfo);
         tickets.forEach(ticket -> System.out.println("[" + String.join(", ", ticket.getLottoInfo()) + "]"));
     }
 

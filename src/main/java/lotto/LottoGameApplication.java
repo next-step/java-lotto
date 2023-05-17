@@ -6,19 +6,26 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.Collections;
+import java.util.List;
 
 public class LottoGameApplication {
 
     public static void main(String[] args) {
         int price = InputView.getPriceFromUser();
+        int manuallyPurchaseAmount = InputView.getManualPurchaseAmountFromUser();
+        PurchaseAmount purchaseAmount = PurchaseAmount.of(price, manuallyPurchaseAmount);
+        List<String> manuallyWrittenNumbers =
+                InputView.getManualPurchaseLottoNumberFromUser(purchaseAmount.getManuallyPurchaseAmount());
+
         LottoGenerator lottoGenerator = new LottoGenerator(Collections::shuffle);
         LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
+        Clerk clerk = new Clerk(lottoMachine);
 
-        LottoTicket ticket = lottoMachine.buyTicket(price);
-        ResultView.printLottoTicketInfo(LottoTicketInfo.from(ticket));
+        LottoTicket ticket = clerk.buyTicket(purchaseAmount, manuallyWrittenNumbers);
+        ResultView.printLottoTicketInfo(purchaseAmount, LottoTicketInfo.from(ticket));
 
         String winNumbers = InputView.getWinNumberFromUser();
-        int bonusNumber = Integer.parseInt(InputView.getBonusNumberFromUser());
+        int bonusNumber = InputView.getBonusNumberFromUser();
 
         WinningLotto winningLotto = WinningLotto.from(winNumbers, bonusNumber);
 
