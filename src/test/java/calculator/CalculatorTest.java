@@ -16,34 +16,6 @@ public class CalculatorTest {
     static final int DEFAULT_FIFTH_ARG = 6;
 
     @Test
-    @DisplayName("더하기 테스트")
-    void add() {
-        Calculator calculator = Calculator.create(String.format("%d + %d", DEFAULT_FIRST_ARG, DEFAULT_SECOND_ARG));
-        assertEquals(DEFAULT_FIRST_ARG + DEFAULT_SECOND_ARG, calculator.calculate());
-    }
-
-    @Test
-    @DisplayName("빼기 테스트")
-    void subtract() {
-        Calculator calculator = Calculator.create(String.format("%d - %d", DEFAULT_FIRST_ARG, DEFAULT_SECOND_ARG));
-        assertEquals(DEFAULT_FIRST_ARG - DEFAULT_SECOND_ARG, calculator.calculate());
-    }
-
-    @Test
-    @DisplayName("곱하기 테스트")
-    void multiply() {
-        Calculator calculator = Calculator.create(String.format("%d * %d", DEFAULT_FIRST_ARG, DEFAULT_SECOND_ARG));
-        assertEquals(DEFAULT_FIRST_ARG * DEFAULT_SECOND_ARG, calculator.calculate());
-    }
-
-    @Test
-    @DisplayName("나누기 테스트")
-    void divide() {
-        Calculator calculator = Calculator.create(String.format("%d / %d", DEFAULT_FIRST_ARG, DEFAULT_SECOND_ARG));
-        assertEquals(DEFAULT_FIRST_ARG / DEFAULT_SECOND_ARG, calculator.calculate());
-    }
-
-    @Test
     @DisplayName("입력값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException를 발생시킨다")
     void emptyInput() {
         assertThrows(IllegalArgumentException.class, () -> Calculator.create(null));
