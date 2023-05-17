@@ -6,20 +6,30 @@ import java.util.List;
 public class StringCalculator {
     public static Integer calculate(String s) {
 
-        String[] aa = s.split(" ");
+        String[] tokens = s.split(" ");
 
-        List<Integer> numbers = new ArrayList<>();
+        String operator = "";
+        int result = 0;
 
-        for(String a : aa) {
-            if("+".equals(a)) {
+        for(String token : tokens) {
+            // 연산자 처리
+            if("+".equals(token) || "-".equals(token)) {
+                operator = token;
                 continue;
             }
-            numbers.add(Integer.parseInt(a));
-        }
 
-        int result = 0;
-        for(Integer number : numbers) {
-            result += number;
+            // 숫자 처리
+            int num = Integer.parseInt(token);
+
+            if("".equals(operator)) {
+                result = num;
+            }
+            if("+".equals(operator)) {
+                result += Integer.parseInt(token);
+            }
+            if("-".equals(operator)) {
+                result -= Integer.parseInt(token);
+            }
         }
 
         return result;

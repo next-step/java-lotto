@@ -19,4 +19,16 @@ public class StringCalculatorTest {
 
         Assertions.assertThat(result2).isEqualTo(10);
     }
+
+    @Test
+    void 뺄셈() {
+        Integer result1 = StringCalculator.calculate("2 - 3");
+
+        Assertions.assertThat(result1).isEqualTo(-1);
+
+
+        Integer result2 = StringCalculator.calculate("4 + 3 - 2 - 1");
+
+        Assertions.assertThat(result2).isEqualTo(4);
+    }
 }
