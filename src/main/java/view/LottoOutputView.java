@@ -7,8 +7,8 @@ import domain.LottoResult;
 import java.util.*;
 
 public class LottoOutputView {
-    public static void printLottoCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoCount(int autoLottoCount, int manualLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.%n", manualLottoCount, autoLottoCount);
     }
 
     public static void printLottoList(List<Lotto> lottoList) {
@@ -36,5 +36,9 @@ public class LottoOutputView {
         }
 
         return String.format("%d개 일치 (%d원) - %d개\n", resultType.matchCount(), resultType.winningMoney(), count);
+    }
+
+    public static void printInputManualLottoCount() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 }

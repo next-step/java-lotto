@@ -2,6 +2,7 @@ package domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -21,5 +22,37 @@ class MoneyTest {
         Assertions.assertThatThrownBy(() -> new Money(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Invalid");
+    }
+
+    @Test
+    @DisplayName("금액을 더할 수 있다")
+    void add() {
+        Money money = new Money("1000");
+        Money other = new Money("2000");
+
+        Assertions.assertThat(money.add(other).value()).isEqualTo(3000);
+    }
+
+    @Test
+    @DisplayName("금액을 뺄 수 있다")
+    void subtract() {
+        Money money = new Money("3000");
+        Money other = new Money("2000");
+
+        Assertions.assertThat(money.subtract(other).value()).isEqualTo(1000);
+    }
+
+    @Test
+    @DisplayName("금액은 0원 이상이다")
+    void isPositive() {
+        Money money = new Money("1000");
+        Assertions.assertThat(money.value()).isNotNegative();
+    }
+
+    @Test
+    @DisplayName("금액이 0원 미만이면 예외가 발생한다")
+    void isNegative() {
+        Assertions.assertThatThrownBy(() -> new Money("-1000"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
