@@ -6,7 +6,7 @@ import lottoauto.model.Lotto;
 
 public class LottoRequest {
 
-     private static final int ONE_LOTTO_PRICE = 1000;
+    private static final int ONE_LOTTO_PRICE = 1000;
 
     private final int buyLottoPrice;
 

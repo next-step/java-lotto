@@ -44,10 +44,7 @@ public class InputView {
         List<Lotto> manualLottery = new ArrayList<>();
         System.out.println(LOTTO_MANUAL_NUMBER);
         for (int i = 0; i < count; i++) {
-            Lotto lotto = new Lotto(Arrays.stream(scanner.nextLine().split(OutputView.DELIMITER))
-                    .map(Integer::parseInt)
-                    .sorted()
-                    .collect(Collectors.toList()));
+            Lotto lotto = Lotto.manual(scanner.nextLine());
 
             manualLottery.add(lotto);
         }

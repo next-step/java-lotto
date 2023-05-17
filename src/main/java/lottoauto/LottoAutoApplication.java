@@ -1,7 +1,6 @@
 package lottoauto;
 
 import java.util.List;
-import lottoauto.domain.LottoService;
 import lottoauto.model.Lotto;
 import lottoauto.model.LottoResult;
 import lottoauto.model.Lottos;
@@ -16,9 +15,9 @@ public class LottoAutoApplication {
         int price = InputView.price();
         int manualCount = InputView.lotteryManual();
         List<Lotto> manualLottos = InputView.inputManualNumber(manualCount);
-        LottoService lottoService = new LottoService();
+
         LottoRequest lottoRequest = new LottoRequest(price, manualLottos);
-        Lottos lottos = lottoService.generateLottoNumber(lottoRequest);
+        Lottos lottos = Lottos.from(lottoRequest);
 
         OutputView.lottos(lottos, manualCount);
         List<Integer> winningNumbers = InputView.winningNumber();

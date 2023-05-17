@@ -1,32 +1,19 @@
 package lottoauto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lottoauto.view.OutputView;
 
 public class Lotto {
 
     public static final List<Integer> LOTTO_NUMBER_RANGE = IntStream.range(1, 45).boxed().collect(Collectors.toList());
-    private static final int LOTTO_LIMIT_SIZE = 6;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        lottoValidation(numbers);
+        LottoNumberValidation.checkLotto(numbers);
         this.numbers = numbers;
-    }
-
-    private void lottoValidation(List<Integer> lottoNumber) {
-        if (lottoNumber.size() != LOTTO_LIMIT_SIZE) {
-            throw new IllegalStateException("로또의 숫자가 6개가 아닙니다.");
-        }
-
-        HashSet<Integer> distinctNumbers = new HashSet<>(lottoNumber);
-        if (distinctNumbers.size() != LOTTO_LIMIT_SIZE) {
-            throw new IllegalStateException("중복되는 숫자가 있습니다.");
-        }
     }
 
     public List<Integer> getNumbers() {
@@ -44,6 +31,13 @@ public class Lotto {
         Collections.sort(lottoNumbers);
 
         return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto manual(String numbers) {
+        return new Lotto(Arrays.stream(numbers.split(OutputView.DELIMITER))
+                .map(Integer::parseInt)
+                .sorted()
+                .collect(Collectors.toList()));
     }
 
 }
