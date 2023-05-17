@@ -5,6 +5,7 @@ import study.lotto.view.InputView;
 import study.lotto.view.OutputView;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class LottoApplication {

@@ -24,7 +24,9 @@ public class InputView {
     public static Integer inputMoney() {
         out.println(ASKING_MONEY);
         int money = scanner.nextInt();
+
         out.println(money / PRICE_PER_SHEET + "개를 구매했습니다.");
+
         return money;
     }
 
