@@ -11,9 +11,12 @@ public class StringCalculator {
         String operator = "";
         int result = 0;
 
-        for(String token : tokens) {
+        for (String token : tokens) {
             // 연산자 처리
-            if("+".equals(token) || "-".equals(token)) {
+            if ("+".equals(token)
+                    || "-".equals(token)
+                    || "*".equals(token)
+                    || "/".equals(token)) {
                 operator = token;
                 continue;
             }
@@ -21,14 +24,20 @@ public class StringCalculator {
             // 숫자 처리
             int num = Integer.parseInt(token);
 
-            if("".equals(operator)) {
+            if ("".equals(operator)) {
                 result = num;
             }
-            if("+".equals(operator)) {
-                result += Integer.parseInt(token);
+            if ("+".equals(operator)) {
+                result += num;
             }
-            if("-".equals(operator)) {
-                result -= Integer.parseInt(token);
+            if ("-".equals(operator)) {
+                result -= num;
+            }
+            if ("*".equals(operator)) {
+                result *= num;
+            }
+            if ("/".equals(operator)) {
+                result /= num;
             }
         }
 
