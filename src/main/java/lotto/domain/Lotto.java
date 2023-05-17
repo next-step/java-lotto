@@ -38,8 +38,7 @@ public class Lotto {
         return this.numbers.contains(number);
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
+    public Set<LottoNumber> numbers() {
+        return new HashSet<>(numbers);
     }
 }

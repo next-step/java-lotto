@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResults {
@@ -28,12 +28,7 @@ public class LottoResults {
         return matchingStats.get(rank);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Arrays.stream(Rank.values()).forEach(rank ->
-                sb.append(rank).append(String.format("- %d개\n", matchingStats.getOrDefault(rank, 0)))
-        );
-        return sb.toString();
+    public Map<Rank, Integer> matchingStats() {
+        return new HashMap<>(matchingStats);
     }
 }

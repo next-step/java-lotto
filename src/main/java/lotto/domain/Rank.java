@@ -30,6 +30,14 @@ public enum Rank {
         return this.reward * count;
     }
 
+    public boolean isWin() {
+        return this.reward != 0;
+    }
+
+    public int matchCount() {
+        return this.matchCount;
+    }
+
     public int reward() {
         return this.reward;
     }

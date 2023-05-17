@@ -20,7 +20,7 @@ public class Main {
         WinnerNumbers winnerNumbers = new WinnerNumbers(stringNumbers);
 
         LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
-        LottoOutputView.printWinningStats(lottoResults);
+        LottoOutputView.printLottoResults(lottoResults);
 
         Money reward = lottoResults.totalReward();
         double winningRatio = reward.ratio(money);
