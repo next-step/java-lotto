@@ -14,7 +14,7 @@ public class LottoNumGenerator {
 
     static {
         for (int i = 1; i <= LOTTO_NUM_LIMIT; i++) {
-            LOTTO_BALLS.add(LottoNumber.of(i));
+            LOTTO_BALLS.add(LottoNumber.from(i));
         }
     }
 

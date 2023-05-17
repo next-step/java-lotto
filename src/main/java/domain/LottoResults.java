@@ -13,7 +13,7 @@ public class LottoResults {
 
     private static void mapIntToNumber(int[] lottoResult, LottoNumber[] lottoNumbers) {
         for (int i = 0; i < lottoResult.length; i++) {
-            lottoNumbers[i] = LottoNumber.of(lottoResult[i]);
+            lottoNumbers[i] = LottoNumber.from(lottoResult[i]);
         }
     }
 

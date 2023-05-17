@@ -20,7 +20,7 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber of(int lottoNumber) {
+    public static LottoNumber from(int lottoNumber) {
         return LOTTO_NUMBER_MAP.get(lottoNumber);
     }
 
