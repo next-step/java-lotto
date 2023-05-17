@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class LottoPrice {
 
-    private static final int UNIT_PRICE = 1000;
+    private static final int UNIT_PRICE = 1_000;
 
     private final Money price;
     private final int amount;
