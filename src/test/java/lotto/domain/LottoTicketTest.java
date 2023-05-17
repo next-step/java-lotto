@@ -20,7 +20,7 @@ class LottoTicketTest {
                 Lotto.from("4, 5, 6, 7, 8, 9")
         );
         LottoTicket ticket = LottoTicket.of(lottos);
-        Matches matches = ticket.getMatches(Lotto.from("1, 2, 3, 4, 5, 6"), LottoNumber.of(7));
+        Matches matches = ticket.getMatches(WinningLotto.from("1, 2, 3, 4, 5, 6", 7));
 
         assertThat(matches.getMatches())
                 .containsExactlyInAnyOrder(Match.THREE, Match.FOUR, Match.FIVE, Match.FIVE_BONUS, Match.SIX);

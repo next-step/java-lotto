@@ -19,9 +19,9 @@ public class LottoGeneratorTest {
             }
         });
 
-        Lotto expected = Lotto.from("2, 3, 4, 5, 6, 7");
+        WinningLotto winningLotto = WinningLotto.from("2, 3, 4, 5, 6, 7", 1);
         Lotto lotto = lottoGenerator.generate();
-        Match match = lotto.getMatch(expected, LottoNumber.of(1));
+        Match match = winningLotto.getMatch(lotto);
 
         assertThat(match).isEqualTo(Match.SIX);
     }

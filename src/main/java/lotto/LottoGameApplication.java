@@ -17,12 +17,12 @@ public class LottoGameApplication {
         LottoTicket ticket = lottoMachine.buyTicket(price);
         ResultView.printLottoTicketInfo(LottoTicketInfo.from(ticket));
 
-        String winNumber = InputView.getWinNumberFromUser();
-        Lotto winningLotto = Lotto.from(winNumber);
+        String winNumbers = InputView.getWinNumberFromUser();
+        int bonusNumber = Integer.parseInt(InputView.getBonusNumberFromUser());
 
-        LottoNumber bonusNumber = LottoNumber.of(Integer.parseInt(InputView.getBonusNumberFromUser()));
+        WinningLotto winningLotto = WinningLotto.from(winNumbers, bonusNumber);
 
-        Matches matches = ticket.getMatches(winningLotto, bonusNumber);
+        Matches matches = ticket.getMatches(winningLotto);
         LottoResult result = LottoResult.from(price, matches);
 
         ResultView.printLottoResult(result);
