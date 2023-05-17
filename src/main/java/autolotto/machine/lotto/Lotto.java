@@ -1,6 +1,5 @@
 package autolotto.machine.lotto;
 
-import autolotto.machine.BonusNumber;
 import autolotto.machine.winning.WinningNumbers;
 
 import java.util.ArrayList;
@@ -33,12 +32,5 @@ public class Lotto {
 
     public boolean contains(int number) {
         return numbers.contains(number);
-    }
-
-    public LottoMatchState matchState(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        int matchCount = matchCount(winningNumbers);
-        boolean hasBonusBall = contains(bonusNumber.value());
-
-        return new LottoMatchState(matchCount, hasBonusBall);
     }
 }

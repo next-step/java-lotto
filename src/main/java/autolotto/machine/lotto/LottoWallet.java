@@ -28,10 +28,9 @@ public class LottoWallet {
 
     public int totalWinningMoneyOf(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         return this.lottoList.stream()
-                .map(lotto -> lotto.matchState(winningNumbers, bonusNumber))
-                .filter(matchState -> Winning.minWinningMatchCount() <= matchState.matchCount())
-                .mapToInt(matchState ->
-                        Winning.winningOf(matchState.matchCount(), matchState.hasBonusBall())
+                .filter(lotto -> lotto.matchCount(winningNumbers) >= Winning.minWinningMatchCount())
+                .mapToInt(lotto ->
+                        Winning.winningOf(lotto.matchCount(winningNumbers), lotto.contains(bonusNumber.value()))
                                 .winningMoney())
                 .sum();
     }
