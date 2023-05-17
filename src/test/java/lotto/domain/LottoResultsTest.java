@@ -9,14 +9,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoResultsTest {
 
     @Test
-    void 사융금액_대비_당첨금_비율계산() {
+    void 당첨금_총합_조회() {
         Map<Rank, Integer> winningStats = new HashMap<>();
-        winningStats.put(Rank.FIFTH, 97);
+        winningStats.put(Rank.FIFTH, 100);
         winningStats.put(Rank.THIRD, 1);
-        winningStats.put(Rank.FOURTH, 2);
+        winningStats.put(Rank.FOURTH, 1);
         LottoResults lottoResults = new LottoResults(winningStats);
 
-        Double actual = lottoResults.winningRatio(Lotto.PRICE);
-        assertThat(actual).isEqualTo(0.6);
+        Money reward = lottoResults.totalReward();
+        int expect = Rank.THIRD.reward() + Rank.FOURTH.reward();
+        assertThat(reward).isEqualTo(new Money(expect));
     }
 }

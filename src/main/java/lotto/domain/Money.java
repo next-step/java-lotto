@@ -17,15 +17,10 @@ public class Money {
         return this.amount / price.amount;
     }
 
-    public double divide(Money other) {
+    public double ratio(Money other) {
         return (double) this.amount / other.amount;
     }
-
-    public Money multiply(int count) {
-        int amount = this.amount * count;
-        return new Money(amount);
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

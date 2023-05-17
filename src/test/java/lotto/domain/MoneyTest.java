@@ -24,22 +24,15 @@ public class MoneyTest {
     @CsvSource({"0,0", "9999,9", "10000,10", "10001,10"})
     void 구매가능_횟수_조회(int amount, int expect) {
         Money money = new Money(amount);
-        int actual = money.buyCount(Lotto.PRICE);
+        int actual = money.buyCount(new Money(1000));
         assertThat(actual).isEqualTo(expect);
     }
 
     @Test
-    void 현재_금액_나누기() {
+    void 금액_비율_조회() {
         Money money = new Money(1000);
         Money other = new Money(20000);
-        double ratio = money.divide(other);
+        double ratio = money.ratio(other);
         assertThat(ratio).isEqualTo(0.05);
-    }
-
-    @Test
-    void 현재_금액_곱하기() {
-        Money money = new Money(1000);
-        Money result = money.multiply(10);
-        assertThat(result).isEqualTo(new Money(10000));
     }
 }

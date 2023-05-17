@@ -13,7 +13,6 @@ public class Main {
         Money money = new Money(amount);
 
         List<Lotto> lottos = LottoShop.buyLottos(money);
-        LottoOutputView.printBuyCount(lottos.size());
         LottoOutputView.printLottos(lottos);
 
         String stringNumbers = LottoInputView.askLastWinnerNumbers();
@@ -21,6 +20,9 @@ public class Main {
 
         LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
         LottoOutputView.printWinningStats(lottoResults);
-        LottoOutputView.printWinningRatio(lottoResults.winningRatio(Lotto.PRICE));
+
+        Money reward = lottoResults.totalReward();
+        double winningRatio = reward.ratio(money);
+        LottoOutputView.printWinningRatio(winningRatio);
     }
 }

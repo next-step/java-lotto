@@ -8,11 +8,8 @@ import java.util.List;
 
 public class LottoOutputView {
 
-    public static void printBuyCount(int buyCount) {
-        System.out.printf("%d개를 구매했습니다.%n", buyCount);
-    }
-
     public static void printLottos(List<Lotto> lottos) {
+        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
         lottos.forEach(System.out::println);
     }
 
