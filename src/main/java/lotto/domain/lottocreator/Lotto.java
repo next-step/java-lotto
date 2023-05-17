@@ -11,9 +11,22 @@ public class Lotto {
     private List<LottoNo> lottoNos;
 
     Lotto(List<LottoNo> lottoNos) {
+        validateManualLotto(lottoNos);
+        validateNumbers(lottoNos);
         this.lottoNos = lottoNos;
     }
 
+    private void validateManualLotto(List<LottoNo> numbers) {
+        if (numbers.size() != numbers.stream().distinct().count()) {
+            throw new IllegalArgumentException("수동 로또 생성 시 중복 숫자 불가합니다.");
+        }
+    }
+
+    private void validateNumbers(List<LottoNo> lottoNos) {
+        if (lottoNos.size() != LOTTO_NUMBER) {
+            throw new IllegalArgumentException("개수가 6개가 아닙니다.");
+        }
+    }
     public int getMatchingNumberCount(Lotto lotto) {
         return lottoNos.stream()
                 .filter(number -> lotto.contains(number))
