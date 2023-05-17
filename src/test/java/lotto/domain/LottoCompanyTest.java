@@ -1,9 +1,14 @@
 package lotto.domain;
 
 import lotto.domian.LottoCompany;
+import lotto.domian.ManualLottoBundle;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LottoCompanyTest {
 
@@ -25,6 +30,16 @@ public class LottoCompanyTest {
 
         Assertions.assertThatThrownBy(() -> LottoCompany.announce(winNumber, bonusWinNumber))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("수동번호를 입력받아 갯수만큼 수동로또를 생성한다.")
+    @Test
+    public void makeManualBundle_InputManualNumbers_MakeSuccess() {
+        List<String> answerStrings = Arrays.asList("1, 2, 3, 4, 5, 6"
+                                                    , "2, 3, 4, 5, 6, 7"
+                                                    , "3, 4, 5, 6, 7, 8");
+        Assertions.assertThat(LottoCompany.makeManualBundle(answerStrings)
+                .unfoldLottoBundle().size()).isEqualTo(3);
     }
 
 }
