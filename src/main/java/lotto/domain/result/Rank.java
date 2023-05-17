@@ -32,6 +32,9 @@ public enum Rank {
         return reward;
     }
 
+    public Long initialRank() {
+        return 0L;
+    }
 
     @Override
     public String toString() {

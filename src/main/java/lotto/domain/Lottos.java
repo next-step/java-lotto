@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.result.LottoResults;
+import lotto.domain.result.LottoResult;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,12 +21,12 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResults getLottoResult(Lotto winningNumber) {
-        LottoResults lottoResults = LottoResults.of();
+    public LottoResult getLottoResult(Lotto winningNumber) {
+        LottoResult lottoResult = LottoResult.of();
         for (Lotto lotto : lottos) {
-            lottoResults.win(lotto.getRank(winningNumber));
+            lottoResult.win(lotto.getRank(winningNumber));
         }
-        return lottoResults;
+        return lottoResult;
     }
 
     @Override
