@@ -1,14 +1,11 @@
-package calculator;
+package calculator.calculator;
 
-import calculator.parser.converter.IntegerStringConverter;
 import calculator.parser.ArithmeticExpressionExpressionValidator;
 import calculator.parser.ExpressionParser;
+import calculator.parser.converter.IntegerStringConverter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class IntegerCalculatorTest {
 
@@ -17,15 +14,11 @@ public class IntegerCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        Map<String, Operation> operatorMap = new HashMap<>();
-        operatorMap.put("+", new Operation(Integer::sum));
-        operatorMap.put("-", new Operation((a, b) -> a - b));
-        operatorMap.put("*", new Operation((a, b) -> a * b));
-        operatorMap.put("/", new Operation((a, b) -> a / b));
-
-        calculator = new IntegerCalculator(
-                new ExpressionParser(new IntegerStringConverter(), new ArithmeticExpressionExpressionValidator(delimiter), delimiter),
-                new Operations(operatorMap));
+        calculator =
+                new IntegerCalculator(
+                        new ExpressionParser(
+                                new IntegerStringConverter(),
+                                new ArithmeticExpressionExpressionValidator(delimiter), delimiter));
     }
 
     @Test
