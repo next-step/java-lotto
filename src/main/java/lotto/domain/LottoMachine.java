@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lottocreator.Lotto;
+
 import java.util.List;
 
 public class LottoMachine {
@@ -35,7 +37,10 @@ public class LottoMachine {
     }
 
     public Lottos generate(List<String> manualNumbers) {
-        return LottosGenerator.generate(numberOfAutoLotto, manualNumbers);
+        Lottos lottos = Lottos.auto(numberOfAutoLotto);
+        lottos.combine(Lottos.manual(manualNumbers));
+
+        return lottos;
     }
 
     private int calculateNumberOfAutoLotto(int cost, int numberOfManualLottos) {

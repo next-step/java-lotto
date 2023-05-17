@@ -15,12 +15,16 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(Positive numberOfLotto) {
+    private Lottos(Positive numberOfLotto) {
         this.lottos = createAutoLottos(numberOfLotto);
     }
 
-    public Lottos(List<String> manualLottosNumbers) {
+    private Lottos(List<String> manualLottosNumbers) {
         this.lottos = createManualLottos(manualLottosNumbers);
+    }
+
+    public static Lottos auto(Positive numberOfLotto) {
+        return new Lottos(numberOfLotto);
     }
 
     public static Lottos manual(List<String> manualLottosNumbers) {
@@ -57,12 +61,12 @@ public class Lottos {
         return lotto.contains(bonusNo);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public void combine(Lottos otherLottos) {
+        lottos.addAll(otherLottos.lottos);
     }
 
-    public void combineLottos(Lottos otherLottos) {
-        lottos.addAll(otherLottos.lottos);
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     @Override
