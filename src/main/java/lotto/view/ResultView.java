@@ -1,6 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoRank;
+import lotto.domain.Money;
+import lotto.domain.enums.LottoRank;
 import lotto.domain.LottoResultChecker;
 import lotto.domain.LottoTicket;
 
@@ -19,15 +20,32 @@ public class ResultView {
     public void viewWinningResult(LottoResultChecker lottoResultChecker) {
         Arrays.stream(LottoRank.values())
                 .filter(rank -> !rank.equals(LottoRank.NO_RANK))
-                .forEach(rank -> System.out.println(rank.getMatchedCount() + "개 일치 "
-                        + "(" + rank.getPrizeMoney() + "원)- "
-                        + lottoResultChecker.getRankCount(rank) + "개"));
+                .forEach(rank -> {
+                    System.out.println(buildResultMessage(lottoResultChecker, rank));
+                });
 
     }
 
-    public void viewRateOfInvestment(int investmentAmount, int investmentReturn) {
-        double roi = (double) investmentReturn / investmentAmount;
+    private String buildResultMessage(LottoResultChecker lottoResultChecker, LottoRank rank) {
+        String result = rank.getMatchedCount() + "개 일치";
 
-        System.out.println("총 수익률은 " + roi + "입니다. (기준이 1이기 때문에 결과적으로는 손해라는 의미임)");
+        if (rank.equals(rank.isBonusMatched())) {
+            result += ", 보너스 볼 일치";
+
+        }
+        result += "(" + rank.getPrizeMoney().getLong() + "원)- "
+                + lottoResultChecker.getRankCount(rank) + "개";
+
+        return result;
+    }
+
+    public void viewRateOfInvestment(Money investmentAmount, Money investmentReturn) {
+        double roi = investmentReturn.divide(investmentAmount);
+
+        System.out.print("총 수익률은 " + roi + "입니다. ");
+        if (roi < 1) {
+            System.out.print("(기준이 1이기 때문에 결과적으로는 손해라는 의미임)");
+        }
+        System.out.println();
     }
 }

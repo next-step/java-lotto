@@ -7,7 +7,6 @@ public class LottoTicket {
 
     private List<LottoNumber> numbers;
 
-
     private LottoTicket(List<LottoNumber> numbers) {
         validateSize(numbers);
         validateDuplication(numbers);
@@ -35,10 +34,14 @@ public class LottoTicket {
         return new LottoTicket(LottoNumber.of(numbers));
     }
 
-    public int getMatchCount(List<Integer> inputNumbers) {
-        List<LottoNumber> lottoNumbers = LottoNumber.of(inputNumbers);
-        return (int) numbers.stream().filter(lottoNumbers::contains).count();
+    public int getMatchCount(LottoTicket inputTicket) {
+        return (int) numbers.stream().filter(inputTicket.numbers::contains).count();
     }
+
+    public boolean isMatched(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
 
     public String toString() {
         return numbers.toString();

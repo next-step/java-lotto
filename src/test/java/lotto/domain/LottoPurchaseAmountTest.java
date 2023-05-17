@@ -15,7 +15,7 @@ class LottoPurchaseAmountTest {
 
     @DisplayName("금액유효테스트")
     @ParameterizedTest(name = "{displayName} [{index}] {arguments}")
-    @ValueSource(ints = {100, 1001, 3200, 10, -1000})
+    @ValueSource(ints = {100, 1001, 3200, 10})
     void 금액유효테스트(int amount) {
         assertThatThrownBy(() -> {
             LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(amount);

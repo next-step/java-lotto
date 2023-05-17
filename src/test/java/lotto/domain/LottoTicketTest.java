@@ -66,9 +66,10 @@ public class LottoTicketTest {
 
         Arrays.stream(inputNumbers).forEach(i -> numbers.add(i));
 
+        LottoTicket lottoTicket = LottoTicket.createLottoTicketByManual(numbers);
         LottoTicket winningLottoTicket = LottoTicket.createLottoTicketByManual(new ArrayList<Integer>(Arrays.asList(1, 5, 10, 20, 30, 45)));
 
-        Assertions.assertThat(winningLottoTicket.getMatchCount(numbers)).isEqualTo(matchCount);
+        Assertions.assertThat(winningLottoTicket.getMatchCount(lottoTicket)).isEqualTo(matchCount);
     }
 
     static Stream<Object[]> provideLottoNumbers() {
