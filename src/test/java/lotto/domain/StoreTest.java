@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import lotto.domian.LottoBundle;
-import lotto.domian.Money;
-import lotto.domian.Store;
+import lotto.domian.*;
+import lotto.ui.InputView;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,18 +46,19 @@ public class StoreTest {
         Assertions.assertThat(store.orderManual(new Money(5000), 3)).isEqualTo(new Money(2000));
     }
 
-    @DisplayName("수동으로 구매할 번호를 받아서 수동로또를 생성할 수 있다.")
+    @DisplayName("구입금액에서 수동로또 갯수만큼 차감한 수만큼 자동로또를 생성한다.")
     @Test
-    public void makeManual_ReturnManualLottoList_Success() {
+    public void order_Calculate_CountSame() {
+        int purchaseMoney = 14000;
+        int manualOrderCount = 3;
+        int autoLottoSize = (14000 - 3 * Lotto.PURCHASE_UNIT) / Lotto.PURCHASE_UNIT;
+
         Store store = new Store();
-        List<String> manualLottoList = new ArrayList<>();
-        manualLottoList.add("1, 2, 3, 4, 5, 6");
-        manualLottoList.add("11, 22, 33, 44, 55, 66");
-        manualLottoList.add("21, 22, 23, 24, 25, 26");
+        Money change = store.orderManual(new Money(purchaseMoney), manualOrderCount);
+        LottoBundle autoLottoBundle = store.order(change);
 
-//        LottoBundle lottoBundle = store.makeManual(manualLottoList);
+        Assertions.assertThat(autoLottoBundle.unfoldLottoBundle().size()).isEqualTo(autoLottoSize);
 
-//        Assertions.assertThat(lottoBundle.unfoldLottoBundle().size()).isEqualTo(3);
     }
 
 }

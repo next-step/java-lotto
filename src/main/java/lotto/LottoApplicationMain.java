@@ -15,10 +15,11 @@ public class LottoApplicationMain {
         Store store = new Store();
         Money change = store.orderManual(new Money(purchaseMoney), manualOrderCount);
         List<String> manualLottos = InputView.questionLottoNumbers(manualOrderCount);
+
         ManualLottoBundle manualLottoBundle = LottoCompany.makeManualBundle(manualLottos);
         LottoBundle autoLottoBundle = store.order(change);
-
         LottoGroup lottoGroup = new LottoGroup(manualLottoBundle, autoLottoBundle);
+
         OutputView.showLottoGroup(lottoGroup);
 
         String answerNumbers = InputView.questionWinnerNumber();
