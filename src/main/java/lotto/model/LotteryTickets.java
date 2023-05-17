@@ -12,20 +12,31 @@ public class LotteryTickets {
 
     private final List<LotteryTicket> tickets;
 
-    public LotteryTickets(List<LotteryTicket> tickets) {
+    protected LotteryTickets(List<LotteryTicket> tickets) {
         this.tickets = tickets;
     }
 
-    public static LotteryTickets of(int money, int manualLotteryTicketCount, LotteryNumberGenerator lotteryNumberGenerator) {
-        return LotteryTickets.of(calculateChange(money, manualLotteryTicketCount), lotteryNumberGenerator);
+    public static LotteryTickets fromMoney(int money, int manualLotteryTicketCount, LotteryNumberGenerator lotteryNumberGenerator) {
+        return LotteryTickets.fromMoney(calculateChange(money, manualLotteryTicketCount), lotteryNumberGenerator);
     }
 
-    public static LotteryTickets of(int money, LotteryNumberGenerator lotteryNumberGenerator) {
+    public static LotteryTickets fromMoney(int money, LotteryNumberGenerator lotteryNumberGenerator) {
         if (money < 0) {
             throw new IllegalArgumentException("지불한 돈은 음수일 수 없습니다");
         }
+        return getLotteryTickets(calculateTicketCount(money), lotteryNumberGenerator);
+    }
+
+    public static LotteryTickets fromCount(int count, LotteryNumberGenerator lotteryNumberGenerator) {
+        if (count < 0) {
+            throw new IllegalArgumentException("갯수는 음수일 수 없습니다");
+        }
+        return getLotteryTickets(count, lotteryNumberGenerator);
+    }
+
+    private static LotteryTickets getLotteryTickets(int count, LotteryNumberGenerator lotteryNumberGenerator) {
         List<LotteryTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < calculateTicketCount(money); i++) {
+        for (int i = 0; i < count; i++) {
             tickets.add(LotteryTicket.of(lotteryNumberGenerator));
         }
         return new LotteryTickets(tickets);

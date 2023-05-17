@@ -14,14 +14,14 @@ public class LotteryTest {
     @Test
     void 금액을_입력하면_로또티켓목록을_생성() {
         int money = 14000;
-        LotteryTickets lotteryTickets = LotteryTickets.of(money, new AutoLotteryNumberGenerator());
+        LotteryTickets lotteryTickets = LotteryTickets.fromMoney(money, new AutoLotteryNumberGenerator());
         assertThat(lotteryTickets.size()).isEqualTo(14);
     }
 
     @Test
     void 금액이_나누어떨어지지_않으면_버림() {
         int money = 14500;
-        LotteryTickets lotteryTickets = LotteryTickets.of(money, new AutoLotteryNumberGenerator());
+        LotteryTickets lotteryTickets = LotteryTickets.fromMoney(money, new AutoLotteryNumberGenerator());
         assertThat(lotteryTickets.size()).isEqualTo(14);
     }
 
@@ -157,7 +157,7 @@ public class LotteryTest {
         int manualLotteryTicketCount = 3;
         int money = 1500;
 
-        assertThatThrownBy(() -> LotteryTickets.of(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator()))
+        assertThatThrownBy(() -> LotteryTickets.fromMoney(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("지불한 돈 이상으로 구매할 수 없습니다.");
     }
@@ -167,7 +167,7 @@ public class LotteryTest {
         int manualLotteryTicketCount = 3;
         int money = 14000;
 
-        LotteryTickets autoLotteryTickets = LotteryTickets.of(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
+        LotteryTickets autoLotteryTickets = LotteryTickets.fromMoney(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
         assertThat(autoLotteryTickets.size()).isEqualTo(11);
     }
 
@@ -176,7 +176,7 @@ public class LotteryTest {
         int manualLotteryTicketCount = 3;
         int money = 14300;
 
-        LotteryTickets autoLotteryTickets = LotteryTickets.of(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
+        LotteryTickets autoLotteryTickets = LotteryTickets.fromMoney(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
         assertThat(autoLotteryTickets.size()).isEqualTo(11);
     }
 
