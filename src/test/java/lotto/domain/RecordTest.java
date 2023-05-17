@@ -27,7 +27,7 @@ public class RecordTest {
     public void pickRank_AmongLottoBundle_pickRanks() {
         String winNumberString = "1, 2, 3, 4, 5, 6";
         String bonusWinNumber = "7";
-        WinNumber winNumber = LottoCompany.announce(winNumberString, bonusWinNumber);
+        WinNumber winNumber = LottoCompany.getInstance().announce(winNumberString, bonusWinNumber);
 
         Record record = Record.extractRecord(lottoBundle, winNumber);
 

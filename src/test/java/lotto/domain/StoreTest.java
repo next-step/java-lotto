@@ -1,13 +1,12 @@
 package lotto.domain;
 
-import lotto.domian.*;
-import lotto.ui.InputView;
+import lotto.domian.Lotto;
+import lotto.domian.LottoBundle;
+import lotto.domian.Money;
+import lotto.domian.Store;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StoreTest {
 

@@ -16,7 +16,8 @@ public class LottoApplicationMain {
         Money change = store.orderManual(new Money(purchaseMoney), manualOrderCount);
         List<String> manualLottos = InputView.questionLottoNumbers(manualOrderCount);
 
-        ManualLottoBundle manualLottoBundle = LottoCompany.makeManualBundle(manualLottos);
+        LottoCompany lottoCompany = LottoCompany.getInstance();
+        ManualLottoBundle manualLottoBundle = lottoCompany.makeManualBundle(manualLottos);
         LottoBundle autoLottoBundle = store.order(change);
         LottoGroup lottoGroup = new LottoGroup(manualLottoBundle, autoLottoBundle);
 
@@ -25,7 +26,7 @@ public class LottoApplicationMain {
         String answerNumbers = InputView.questionWinnerNumber();
         String bonusWinNumber = InputView.questionBonusNumber();
 
-        WinNumber winNumber = LottoCompany.announce(answerNumbers, bonusWinNumber);
+        WinNumber winNumber = lottoCompany.announce(answerNumbers, bonusWinNumber);
         Record record = Record.extractRecord(lottoGroup.getGroupBundle(), winNumber);
         OutputView.showRecord(record);
 

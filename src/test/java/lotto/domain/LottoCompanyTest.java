@@ -1,12 +1,10 @@
 package lotto.domain;
 
 import lotto.domian.LottoCompany;
-import lotto.domian.ManualLottoBundle;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class LottoCompanyTest {
         String winNumber = "1, 2, 3, 4, a, 5";
         String bonusWinNumber = "7";
 
-        Assertions.assertThatThrownBy(() -> LottoCompany.announce(winNumber, bonusWinNumber))
+        Assertions.assertThatThrownBy(() -> LottoCompany.getInstance().announce(winNumber, bonusWinNumber))
                 .isInstanceOf(NumberFormatException.class);
     }
 
@@ -28,7 +26,7 @@ public class LottoCompanyTest {
         String winNumber = "1, 2, 3, 4, 5, 6";
         String bonusWinNumber = "1";
 
-        Assertions.assertThatThrownBy(() -> LottoCompany.announce(winNumber, bonusWinNumber))
+        Assertions.assertThatThrownBy(() -> LottoCompany.getInstance().announce(winNumber, bonusWinNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -38,7 +36,8 @@ public class LottoCompanyTest {
         List<String> answerStrings = Arrays.asList("1, 2, 3, 4, 5, 6"
                                                     , "2, 3, 4, 5, 6, 7"
                                                     , "3, 4, 5, 6, 7, 8");
-        Assertions.assertThat(LottoCompany.makeManualBundle(answerStrings)
+
+        Assertions.assertThat(LottoCompany.getInstance().makeManualBundle(answerStrings)
                 .unfoldLottoBundle().size()).isEqualTo(3);
     }
 
