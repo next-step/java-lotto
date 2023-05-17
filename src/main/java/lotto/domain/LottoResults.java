@@ -20,9 +20,8 @@ public class LottoResults {
     }
 
     private int rankTotalReward(Rank rank) {
-        int reward = rank.reward();
         int count = rankTotalCount(rank);
-        return reward * count;
+        return rank.totalReward(count);
     }
 
     private int rankTotalCount(Rank rank) {

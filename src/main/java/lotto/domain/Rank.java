@@ -30,6 +30,10 @@ public enum Rank {
         return this.reward;
     }
 
+    public int totalReward(int count) {
+        return this.reward * count;
+    }
+
     @Override
     public String toString() {
         return String.format("%d개 일치 (%d원)", matchCount, reward);
