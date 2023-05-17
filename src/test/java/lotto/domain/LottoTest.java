@@ -28,7 +28,7 @@ public class LottoTest {
                 Arguments.of(
                         Arrays.asList("1", "2", "3", "5", "31", "17"),
                         Arrays.asList("1", "2", "3", "5", "31", "17"),
-                        7
+                        6
                 ),
                 Arguments.of(
                         Arrays.asList("11", "12", "13", "15", "32", "27"),

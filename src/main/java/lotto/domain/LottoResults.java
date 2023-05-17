@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LottoResults {
 
@@ -20,5 +21,17 @@ public class LottoResults {
 
     public void addRank(LottoRank lottoRank) {
         ranks.put(lottoRank, ranks.get(lottoRank) + 1);
+    }
+
+    public int countTotalLotto() {
+        return ranks.values().stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public long totalPrizeMoney() {
+        long totalMoney = 0;
+        for (Map.Entry<LottoRank, Integer> entry : ranks.entrySet()) {
+            totalMoney += entry.getValue() * entry.getKey().getPrizeMoney();
+        }
+        return totalMoney;
     }
 }

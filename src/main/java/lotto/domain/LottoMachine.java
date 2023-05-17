@@ -20,8 +20,17 @@ public class LottoMachine {
         Collections.shuffle(lottoDefaultNumbers);
         return new Lotto(
                 lottoDefaultNumbers.stream()
-                        .limit(7)
+                        .limit(6)
                         .collect(Collectors.toList())
         );
+    }
+
+    public Lottos purchaseLotto(int purchaseNumber) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseNumber; i++) {
+            lottos.add(generateLotto());
+        }
+        return new Lottos(lottos);
+
     }
 }
