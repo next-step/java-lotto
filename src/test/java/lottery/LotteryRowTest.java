@@ -32,7 +32,7 @@ public class LotteryRowTest {
 
         var result = row1.getMatchCount(row2);
 
-        assertThat(result).isEqualTo(3);
+        assertThat(result.value()).isEqualTo(3);
     }
 
     @Test

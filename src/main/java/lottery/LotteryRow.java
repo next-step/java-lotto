@@ -35,10 +35,10 @@ public class LotteryRow {
         return row.stream().map(LotteryNumber::value).collect(Collectors.toCollection(TreeSet::new));
     }
 
-    public Integer getMatchCount(LotteryRow otherRow) {
+    public Natural getMatchCount(LotteryRow otherRow) {
         var myRow = new HashSet<>(row);
         myRow.retainAll(otherRow.row);
-        return myRow.size();
+        return new Natural(myRow.size());
     }
 
     public Boolean isBonusHit(LotteryNumber bonus) {

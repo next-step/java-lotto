@@ -5,8 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LotteryView {
     static final Map<PnLType, String> pnLMessage = Map.of(
@@ -17,6 +17,8 @@ public class LotteryView {
 
     static final List<LotteryPlace> placesToShow = getPlacesToShow();
 
+    final LotteryInputView lotteryInputView = new LotteryInputView();
+
     private static List<LotteryPlace> getPlacesToShow() {
         return Arrays.stream(LotteryPlace.values())
                 .filter(place -> place != LotteryPlace.MISS)
@@ -24,31 +26,38 @@ public class LotteryView {
                 .collect(Collectors.toList());
     }
 
-    public Integer getBuyAmount() {
+    public Natural getBuyAmount() {
         System.out.println("구매금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return lotteryInputView.toNatural(getInputFromConsole());
     }
 
-    public void showBuyResult(List<Lottery> lotteries) {
-        System.out.printf("%d개를 구매했습니다.\n", lotteries.size());
+    public Natural getManualQuantity() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return lotteryInputView.toNatural(getInputFromConsole());
+    }
+
+    public List<LotteryRow> getManualNumbers(Natural amount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return getMultipleInputsFromConsole(amount).stream()
+                .map(lotteryInputView::toLotteryRow)
+                .collect(Collectors.toList());
+    }
+
+    public void showBuyResult(List<Lottery> lotteries, Natural manualQuantity) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualQuantity.value(), lotteries.size() - manualQuantity.value());
         for (var lottery : lotteries) {
             System.out.println(lottery.getRow().getNumbers());
         }
     }
 
-    public Set<Integer> getWinningNumbers() {
+    public LotteryRow getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        var stringInput = scanner.nextLine();
-        var lotteryRowInput = new LotteryRowInputView(stringInput);
-        return lotteryRowInput.getNumbers();
+        return lotteryInputView.toLotteryRow(getInputFromConsole());
     }
 
-    public Integer getBonusNumber() {
+    public LotteryNumber getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return lotteryInputView.toLotteryNumber(getInputFromConsole());
     }
 
     public void showStatistics(LotteryStatistics statistics) {
@@ -65,7 +74,7 @@ public class LotteryView {
     private void showLotteryCntForPlaces(LotteryStatistics lotteryStatistics) {
         for (var place : placesToShow) {
             var count = lotteryStatistics.getLotteryCntForPlace(place);
-            System.out.printf(getMsgFormatForPlace(place), place.getMatchCnt(), place.getReward(), count);
+            System.out.printf(getMsgFormatForPlace(place), place.getMatchCnt().value(), place.getReward().value(), count.value());
         }
     }
 
@@ -78,5 +87,17 @@ public class LotteryView {
 
     private void showPnL(LotteryStatistics lotteryStatistics) {
         System.out.printf("총 수익률은 %.2f입니다.(%s)", lotteryStatistics.getRor(), pnLMessage.get(lotteryStatistics.getPnLType()));
+    }
+
+    private String getInputFromConsole() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    private List<String> getMultipleInputsFromConsole(Natural amount) {
+        Scanner scanner = new Scanner(System.in);
+        return IntStream.range(0, amount.value())
+                .mapToObj(i -> scanner.nextLine())
+                .collect(Collectors.toList());
     }
 }

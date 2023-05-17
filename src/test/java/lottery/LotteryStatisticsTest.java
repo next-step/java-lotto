@@ -3,6 +3,7 @@ package lottery;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,17 +20,28 @@ public class LotteryStatisticsTest {
                 new Lottery(LotteryRow.fromGiven(Set.of(1, 2, 3, 30, 31, 32))),
                 new Lottery(LotteryRow.fromGiven(Set.of(31, 32, 33, 34, 35, 36)))
         );
-        var drawResult = DrawResult.fromWinningNumbersAndBonus(Set.of(1, 2, 3, 4, 5, 6), 7);
+        var drawResult = new DrawResult(LotteryRow.fromGiven(Set.of(1, 2, 3, 4, 5, 6)), LotteryNumber.fromGiven(7));
 
         var lotteryStatistics = new LotteryStatistics(lotteries, drawResult);
 
-        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.FIRST)).isEqualTo(1);
-        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.SECOND)).isEqualTo(1);
-        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.THIRD)).isEqualTo(1);
-        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.FOURTH)).isEqualTo(1);
-        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.FIFTH)).isEqualTo(1);
-        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.MISS)).isEqualTo(1);
+        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.FIRST).value()).isEqualTo(1);
+        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.SECOND).value()).isEqualTo(1);
+        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.THIRD).value()).isEqualTo(1);
+        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.FOURTH).value()).isEqualTo(1);
+        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.FIFTH).value()).isEqualTo(1);
+        assertThat(lotteryStatistics.getLotteryCntForPlace(LotteryPlace.MISS).value()).isEqualTo(1);
         assertThat(lotteryStatistics.getPnLType()).isEqualTo(PnLType.PROFIT);
         assertThat(lotteryStatistics.getRor()).isCloseTo(338592.5f, Percentage.withPercentage(1d));
+    }
+
+    @Test
+    public void RorIsZeroWhenInvestmentIsZero() {
+        var lotteries = new ArrayList<Lottery>();
+        var drawResult = new DrawResult(LotteryRow.fromGiven(Set.of(1, 2, 3, 4, 5, 6)), LotteryNumber.fromGiven(7));
+
+        var lotteryStatistics = new LotteryStatistics(lotteries, drawResult);
+
+        assertThat(lotteryStatistics.getPnLType()).isEqualTo(PnLType.EVEN);
+        assertThat(lotteryStatistics.getRor()).isCloseTo(0, Percentage.withPercentage(1d));
     }
 }

@@ -1,17 +1,18 @@
 package lottery;
 
-import java.util.Set;
-
 public class DrawResult {
     public final LotteryRow winningRow;
     public final LotteryNumber bonus;
 
-    private DrawResult(LotteryRow winningRow, LotteryNumber bonus) {
+    public DrawResult(LotteryRow winningRow, LotteryNumber bonus) {
+        checkNoBonusInWinningRow(winningRow, bonus);
         this.winningRow = winningRow;
         this.bonus = bonus;
     }
 
-    public static DrawResult fromWinningNumbersAndBonus(Set<Integer> winningNumbers, Integer bonus) {
-        return new DrawResult(LotteryRow.fromGiven(winningNumbers), LotteryNumber.fromGiven(bonus));
+    private void checkNoBonusInWinningRow(LotteryRow winningRow, LotteryNumber bonus) {
+        if (winningRow.isBonusHit(bonus)) {
+            throw new IllegalArgumentException("Winning row contains bonus");
+        }
     }
 }
